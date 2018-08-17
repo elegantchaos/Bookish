@@ -1,0 +1,3 @@
+
+BOOKISH_ENTITLEMENTS_PATH = Sources/Bookish.entitlements
+BOOKISH_INFO_PATH = Sources/Info.plist
