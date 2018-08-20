@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import BookishModel
 
 class MasterViewController: UITableViewController, NSFetchedResultsControllerDelegate {
 

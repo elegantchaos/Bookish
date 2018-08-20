@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import BookishModel
 
 class DetailViewController: UIViewController {
 

@@ -7,12 +7,22 @@
 //
 
 import Cocoa
+import BookishModel
 
 class Document: NSPersistentDocument {
-
+    let container: BookishPersistentContainer
+    
     override init() {
+        self.container = BookishPersistentContainer(name: "Document")
         super.init()
-        // Add your subclass-specific initialization here.
+        
+        container.loadPersistentStores { (description, err) in
+            if let err = err {
+//                os_log("error loading store \(description): \(err)")
+                return
+            }
+        }
+//        os_log("ok")
     }
 
     override class var autosavesInPlace: Bool {
