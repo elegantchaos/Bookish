@@ -13,12 +13,6 @@
         <attribute name="summary" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="volume" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Volume" inverseName="edition" inverseEntity="Volume" syncable="YES"/>
     </entity>
-    <entity name="Event" representedClassName=".Event" codeGenerationType="category">
-        <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO">
-            <userInfo/>
-        </attribute>
-        <userInfo/>
-    </entity>
     <entity name="Series" representedClassName=".Series" syncable="YES" codeGenerationType="category">
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="volumes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Volume" inverseName="series" inverseEntity="Volume" syncable="YES"/>
@@ -35,6 +29,5 @@
         <element name="Edition" positionX="0" positionY="45" width="128" height="90"/>
         <element name="Series" positionX="-54" positionY="-9" width="128" height="75"/>
         <element name="Volume" positionX="-63" positionY="-18" width="128" height="105"/>
-        <element name="Event" positionX="-27" positionY="45" width="128" height="60"/>
     </elements>
 </model>

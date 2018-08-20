@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import Bookish_iOS
+@testable import BookishMobile
 
 class Bookish_iOSTests: XCTestCase {
 

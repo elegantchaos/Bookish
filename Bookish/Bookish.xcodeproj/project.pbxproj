@@ -27,8 +27,6 @@
 		224293D2212AE1E700E70510 /* BookishModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224293D1212AE1E700E70510 /* BookishModel.swift */; };
 		224293D3212AE1E700E70510 /* BookishModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224293D1212AE1E700E70510 /* BookishModel.swift */; };
 		224293D4212AE83C00E70510 /* BookishModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224293C2212AE16300E70510 /* BookishModelTests.swift */; };
-		224293DA212AEEEF00E70510 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224293D8212AEEDD00E70510 /* Event.swift */; };
-		224293DB212AEEF000E70510 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224293D8212AEEDD00E70510 /* Event.swift */; };
 		224293DC212AF00400E70510 /* Document.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 22DD424D2126D6DA0070C85A /* Document.xcdatamodeld */; };
 		224293DD212AF00500E70510 /* Document.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 22DD424D2126D6DA0070C85A /* Document.xcdatamodeld */; };
 		224293E1212AF07C00E70510 /* AuthorGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224293E0212AF07C00E70510 /* AuthorGroup.swift */; };
@@ -41,6 +39,8 @@
 		224293EA212AF0D300E70510 /* Volume.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224293E8212AF0D300E70510 /* Volume.swift */; };
 		224293EC212AF0E300E70510 /* Series.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224293EB212AF0E300E70510 /* Series.swift */; };
 		224293ED212AF0E300E70510 /* Series.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224293EB212AF0E300E70510 /* Series.swift */; };
+		224293EF212AFAFB00E70510 /* PersistentContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224293EE212AFAFB00E70510 /* PersistentContainer.swift */; };
+		224293F0212AFAFB00E70510 /* PersistentContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224293EE212AFAFB00E70510 /* PersistentContainer.swift */; };
 		22DD42482126D6DA0070C85A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DD42472126D6DA0070C85A /* AppDelegate.swift */; };
 		22DD424A2126D6DA0070C85A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DD42492126D6DA0070C85A /* ViewController.swift */; };
 		22DD424C2126D6DA0070C85A /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DD424B2126D6DA0070C85A /* Document.swift */; };
@@ -143,28 +143,28 @@
 		2242931F212ADC4400E70510 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		22429322212ADC4400E70510 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		22429324212ADC4400E70510 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		22429329212ADC4500E70510 /* Bookish iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Bookish iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		22429329212ADC4500E70510 /* BookishTestsMobile.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BookishTestsMobile.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2242932D212ADC4500E70510 /* Bookish_iOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bookish_iOSTests.swift; sourceTree = "<group>"; };
 		2242932F212ADC4500E70510 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		22429334212ADC4500E70510 /* Bookish iOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Bookish iOSUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		22429334212ADC4500E70510 /* BookishUITestsMobile.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BookishUITestsMobile.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		22429338212ADC4500E70510 /* Bookish_iOSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bookish_iOSUITests.swift; sourceTree = "<group>"; };
 		2242933A212ADC4500E70510 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		22429345212ADD6000E70510 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		22429391212AE0F300E70510 /* BookishModel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BookishModel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		22429399212AE0F400E70510 /* BookishModelMacTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BookishModelMacTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		22429399212AE0F400E70510 /* BookishModelTestsMac.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BookishModelTestsMac.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		224293B3212AE16200E70510 /* BookishModel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BookishModel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		224293B5212AE16200E70510 /* BookishModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BookishModel.h; sourceTree = "<group>"; };
 		224293B6212AE16200E70510 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		224293BB212AE16300E70510 /* BookishModelMobileTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BookishModelMobileTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		224293BB212AE16300E70510 /* BookishModelTestsMobile.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BookishModelTestsMobile.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		224293C2212AE16300E70510 /* BookishModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookishModelTests.swift; sourceTree = "<group>"; };
 		224293C4212AE16300E70510 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		224293D1212AE1E700E70510 /* BookishModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookishModel.swift; sourceTree = "<group>"; };
-		224293D8212AEEDD00E70510 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		224293DE212AF05800E70510 /* Author.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Author.swift; sourceTree = "<group>"; };
 		224293E0212AF07C00E70510 /* AuthorGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorGroup.swift; sourceTree = "<group>"; };
 		224293E5212AF0B700E70510 /* Edition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Edition.swift; sourceTree = "<group>"; };
 		224293E8212AF0D300E70510 /* Volume.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Volume.swift; sourceTree = "<group>"; };
 		224293EB212AF0E300E70510 /* Series.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Series.swift; sourceTree = "<group>"; };
+		224293EE212AFAFB00E70510 /* PersistentContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentContainer.swift; sourceTree = "<group>"; };
 		22DD42442126D6DA0070C85A /* BookishMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BookishMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22DD42472126D6DA0070C85A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		22DD42492126D6DA0070C85A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -174,10 +174,10 @@
 		22DD42532126D6DB0070C85A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		22DD42552126D6DB0070C85A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		22DD42562126D6DB0070C85A /* Bookish.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Bookish.entitlements; sourceTree = "<group>"; };
-		22DD425B2126D6DB0070C85A /* BookishTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BookishTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		22DD425B2126D6DB0070C85A /* BookishTestsMac.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BookishTestsMac.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		22DD425F2126D6DB0070C85A /* BookishTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookishTests.swift; sourceTree = "<group>"; };
 		22DD42612126D6DB0070C85A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		22DD42662126D6DB0070C85A /* BookishUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BookishUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		22DD42662126D6DB0070C85A /* BookishUITestsMac.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BookishUITestsMac.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		22DD426A2126D6DB0070C85A /* BookishUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookishUITests.swift; sourceTree = "<group>"; };
 		22DD426C2126D6DB0070C85A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		22DD42792126DDA80070C85A /* Bookish.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Bookish.xcconfig; path = ../Bookish.xcconfig; sourceTree = "<group>"; };
@@ -276,22 +276,22 @@
 			path = BookishMobile;
 			sourceTree = "<group>";
 		};
-		2242932C212ADC4500E70510 /* Bookish iOSTests */ = {
+		2242932C212ADC4500E70510 /* BookishTestsMobile */ = {
 			isa = PBXGroup;
 			children = (
 				2242932D212ADC4500E70510 /* Bookish_iOSTests.swift */,
 				2242932F212ADC4500E70510 /* Info.plist */,
 			);
-			path = "Bookish iOSTests";
+			path = BookishTestsMobile;
 			sourceTree = "<group>";
 		};
-		22429337212ADC4500E70510 /* Bookish iOSUITests */ = {
+		22429337212ADC4500E70510 /* BookishUITestsMobile */ = {
 			isa = PBXGroup;
 			children = (
 				22429338212ADC4500E70510 /* Bookish_iOSUITests.swift */,
 				2242933A212ADC4500E70510 /* Info.plist */,
 			);
-			path = "Bookish iOSUITests";
+			path = BookishUITestsMobile;
 			sourceTree = "<group>";
 		};
 		22429344212ADC8B00E70510 /* BookishMac */ = {
@@ -314,7 +314,7 @@
 				224293B5212AE16200E70510 /* BookishModel.h */,
 				224293B6212AE16200E70510 /* Info.plist */,
 				224293D1212AE1E700E70510 /* BookishModel.swift */,
-				224293D8212AEEDD00E70510 /* Event.swift */,
+				224293EE212AFAFB00E70510 /* PersistentContainer.swift */,
 				224293DE212AF05800E70510 /* Author.swift */,
 				224293EB212AF0E300E70510 /* Series.swift */,
 				224293E8212AF0D300E70510 /* Volume.swift */,
@@ -348,15 +348,15 @@
 			isa = PBXGroup;
 			children = (
 				22DD42442126D6DA0070C85A /* BookishMac.app */,
-				22DD425B2126D6DB0070C85A /* BookishTests.xctest */,
-				22DD42662126D6DB0070C85A /* BookishUITests.xctest */,
+				22DD425B2126D6DB0070C85A /* BookishTestsMac.xctest */,
+				22DD42662126D6DB0070C85A /* BookishUITestsMac.xctest */,
 				22429311212ADC4300E70510 /* BookishMobile.app */,
-				22429329212ADC4500E70510 /* Bookish iOSTests.xctest */,
-				22429334212ADC4500E70510 /* Bookish iOSUITests.xctest */,
+				22429329212ADC4500E70510 /* BookishTestsMobile.xctest */,
+				22429334212ADC4500E70510 /* BookishUITestsMobile.xctest */,
 				22429391212AE0F300E70510 /* BookishModel.framework */,
-				22429399212AE0F400E70510 /* BookishModelMacTests.xctest */,
+				22429399212AE0F400E70510 /* BookishModelTestsMac.xctest */,
 				224293B3212AE16200E70510 /* BookishModel.framework */,
-				224293BB212AE16300E70510 /* BookishModelMobileTests.xctest */,
+				224293BB212AE16300E70510 /* BookishModelTestsMobile.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -371,32 +371,32 @@
 			path = Sources;
 			sourceTree = "<group>";
 		};
-		22DD425E2126D6DB0070C85A /* UnitTests */ = {
+		22DD425E2126D6DB0070C85A /* BookishTestsMac */ = {
 			isa = PBXGroup;
 			children = (
 				22DD425F2126D6DB0070C85A /* BookishTests.swift */,
 				22DD42612126D6DB0070C85A /* Info.plist */,
 			);
-			path = UnitTests;
+			path = BookishTestsMac;
 			sourceTree = "<group>";
 		};
-		22DD42692126D6DB0070C85A /* UITests */ = {
+		22DD42692126D6DB0070C85A /* BookishUITestsMac */ = {
 			isa = PBXGroup;
 			children = (
 				22DD426A2126D6DB0070C85A /* BookishUITests.swift */,
 				22DD426C2126D6DB0070C85A /* Info.plist */,
 			);
-			path = UITests;
+			path = BookishUITestsMac;
 			sourceTree = "<group>";
 		};
 		22DD42782126DD3A0070C85A /* Tests */ = {
 			isa = PBXGroup;
 			children = (
 				224293C1212AE16300E70510 /* BookishModelTests */,
-				22429337212ADC4500E70510 /* Bookish iOSUITests */,
-				2242932C212ADC4500E70510 /* Bookish iOSTests */,
-				22DD425E2126D6DB0070C85A /* UnitTests */,
-				22DD42692126D6DB0070C85A /* UITests */,
+				22429337212ADC4500E70510 /* BookishUITestsMobile */,
+				2242932C212ADC4500E70510 /* BookishTestsMobile */,
+				22DD425E2126D6DB0070C85A /* BookishTestsMac */,
+				22DD42692126D6DB0070C85A /* BookishUITestsMac */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -441,9 +441,9 @@
 			productReference = 22429311212ADC4300E70510 /* BookishMobile.app */;
 			productType = "com.apple.product-type.application";
 		};
-		22429328212ADC4500E70510 /* Bookish iOSTests */ = {
+		22429328212ADC4500E70510 /* BookishTestsMobile */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2242933E212ADC4500E70510 /* Build configuration list for PBXNativeTarget "Bookish iOSTests" */;
+			buildConfigurationList = 2242933E212ADC4500E70510 /* Build configuration list for PBXNativeTarget "BookishTestsMobile" */;
 			buildPhases = (
 				22429325212ADC4500E70510 /* Sources */,
 				22429326212ADC4500E70510 /* Frameworks */,
@@ -454,14 +454,14 @@
 			dependencies = (
 				2242932B212ADC4500E70510 /* PBXTargetDependency */,
 			);
-			name = "Bookish iOSTests";
+			name = BookishTestsMobile;
 			productName = "Bookish iOSTests";
-			productReference = 22429329212ADC4500E70510 /* Bookish iOSTests.xctest */;
+			productReference = 22429329212ADC4500E70510 /* BookishTestsMobile.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		22429333212ADC4500E70510 /* Bookish iOSUITests */ = {
+		22429333212ADC4500E70510 /* BookishUITestsMobile */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 22429341212ADC4500E70510 /* Build configuration list for PBXNativeTarget "Bookish iOSUITests" */;
+			buildConfigurationList = 22429341212ADC4500E70510 /* Build configuration list for PBXNativeTarget "BookishUITestsMobile" */;
 			buildPhases = (
 				22429330212ADC4500E70510 /* Sources */,
 				22429331212ADC4500E70510 /* Frameworks */,
@@ -472,9 +472,9 @@
 			dependencies = (
 				22429336212ADC4500E70510 /* PBXTargetDependency */,
 			);
-			name = "Bookish iOSUITests";
+			name = BookishUITestsMobile;
 			productName = "Bookish iOSUITests";
-			productReference = 22429334212ADC4500E70510 /* Bookish iOSUITests.xctest */;
+			productReference = 22429334212ADC4500E70510 /* BookishUITestsMobile.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 		22429390212AE0F300E70510 /* BookishModelMac */ = {
@@ -495,9 +495,9 @@
 			productReference = 22429391212AE0F300E70510 /* BookishModel.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		22429398212AE0F400E70510 /* BookishModelMacTests */ = {
+		22429398212AE0F400E70510 /* BookishModelTestsMac */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 224293AB212AE0F400E70510 /* Build configuration list for PBXNativeTarget "BookishModelMacTests" */;
+			buildConfigurationList = 224293AB212AE0F400E70510 /* Build configuration list for PBXNativeTarget "BookishModelTestsMac" */;
 			buildPhases = (
 				22429395212AE0F400E70510 /* Sources */,
 				22429396212AE0F400E70510 /* Frameworks */,
@@ -508,9 +508,9 @@
 			dependencies = (
 				2242939C212AE0F400E70510 /* PBXTargetDependency */,
 			);
-			name = BookishModelMacTests;
+			name = BookishModelTestsMac;
 			productName = BookishModelMacTests;
-			productReference = 22429399212AE0F400E70510 /* BookishModelMacTests.xctest */;
+			productReference = 22429399212AE0F400E70510 /* BookishModelTestsMac.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		224293B2212AE16200E70510 /* BookishModelMobile */ = {
@@ -531,9 +531,9 @@
 			productReference = 224293B3212AE16200E70510 /* BookishModel.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		224293BA212AE16300E70510 /* BookishModelMobileTests */ = {
+		224293BA212AE16300E70510 /* BookishModelTestsMobile */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 224293CE212AE16300E70510 /* Build configuration list for PBXNativeTarget "BookishModelMobileTests" */;
+			buildConfigurationList = 224293CE212AE16300E70510 /* Build configuration list for PBXNativeTarget "BookishModelTestsMobile" */;
 			buildPhases = (
 				224293B7212AE16300E70510 /* Sources */,
 				224293B8212AE16300E70510 /* Frameworks */,
@@ -544,9 +544,9 @@
 			dependencies = (
 				224293BE212AE16300E70510 /* PBXTargetDependency */,
 			);
-			name = BookishModelMobileTests;
+			name = BookishModelTestsMobile;
 			productName = BookishModelMobileTests;
-			productReference = 224293BB212AE16300E70510 /* BookishModelMobileTests.xctest */;
+			productReference = 224293BB212AE16300E70510 /* BookishModelTestsMobile.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		22DD42432126D6DA0070C85A /* BookishMac */ = {
@@ -568,9 +568,9 @@
 			productReference = 22DD42442126D6DA0070C85A /* BookishMac.app */;
 			productType = "com.apple.product-type.application";
 		};
-		22DD425A2126D6DB0070C85A /* BookishTests */ = {
+		22DD425A2126D6DB0070C85A /* BookishTestsMac */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 22DD42722126D6DB0070C85A /* Build configuration list for PBXNativeTarget "BookishTests" */;
+			buildConfigurationList = 22DD42722126D6DB0070C85A /* Build configuration list for PBXNativeTarget "BookishTestsMac" */;
 			buildPhases = (
 				22DD42572126D6DB0070C85A /* Sources */,
 				22DD42582126D6DB0070C85A /* Frameworks */,
@@ -581,14 +581,14 @@
 			dependencies = (
 				22DD425D2126D6DB0070C85A /* PBXTargetDependency */,
 			);
-			name = BookishTests;
+			name = BookishTestsMac;
 			productName = BookishTests;
-			productReference = 22DD425B2126D6DB0070C85A /* BookishTests.xctest */;
+			productReference = 22DD425B2126D6DB0070C85A /* BookishTestsMac.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		22DD42652126D6DB0070C85A /* BookishUITests */ = {
+		22DD42652126D6DB0070C85A /* BookishUITestsMac */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 22DD42752126D6DB0070C85A /* Build configuration list for PBXNativeTarget "BookishUITests" */;
+			buildConfigurationList = 22DD42752126D6DB0070C85A /* Build configuration list for PBXNativeTarget "BookishUITestsMac" */;
 			buildPhases = (
 				22DD42622126D6DB0070C85A /* Sources */,
 				22DD42632126D6DB0070C85A /* Frameworks */,
@@ -599,9 +599,9 @@
 			dependencies = (
 				22DD42682126D6DB0070C85A /* PBXTargetDependency */,
 			);
-			name = BookishUITests;
+			name = BookishUITestsMac;
 			productName = BookishUITests;
-			productReference = 22DD42662126D6DB0070C85A /* BookishUITests.xctest */;
+			productReference = 22DD42662126D6DB0070C85A /* BookishUITestsMac.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -668,15 +668,15 @@
 			projectRoot = "";
 			targets = (
 				22DD42432126D6DA0070C85A /* BookishMac */,
-				22DD425A2126D6DB0070C85A /* BookishTests */,
-				22DD42652126D6DB0070C85A /* BookishUITests */,
 				22429310212ADC4300E70510 /* BookishMobile */,
-				22429328212ADC4500E70510 /* Bookish iOSTests */,
-				22429333212ADC4500E70510 /* Bookish iOSUITests */,
 				22429390212AE0F300E70510 /* BookishModelMac */,
-				22429398212AE0F400E70510 /* BookishModelMacTests */,
 				224293B2212AE16200E70510 /* BookishModelMobile */,
-				224293BA212AE16300E70510 /* BookishModelMobileTests */,
+				22DD425A2126D6DB0070C85A /* BookishTestsMac */,
+				22429328212ADC4500E70510 /* BookishTestsMobile */,
+				22DD42652126D6DB0070C85A /* BookishUITestsMac */,
+				22429333212ADC4500E70510 /* BookishUITestsMobile */,
+				22429398212AE0F400E70510 /* BookishModelTestsMac */,
+				224293BA212AE16300E70510 /* BookishModelTestsMobile */,
 			);
 		};
 /* End PBXProject section */
@@ -791,11 +791,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				224293EF212AFAFB00E70510 /* PersistentContainer.swift in Sources */,
 				224293E1212AF07C00E70510 /* AuthorGroup.swift in Sources */,
 				224293DC212AF00400E70510 /* Document.xcdatamodeld in Sources */,
 				224293EC212AF0E300E70510 /* Series.swift in Sources */,
 				224293E6212AF0B700E70510 /* Edition.swift in Sources */,
-				224293DA212AEEEF00E70510 /* Event.swift in Sources */,
 				224293D2212AE1E700E70510 /* BookishModel.swift in Sources */,
 				224293E9212AF0D300E70510 /* Volume.swift in Sources */,
 				224293E3212AF09D00E70510 /* Author.swift in Sources */,
@@ -814,11 +814,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				224293F0212AFAFB00E70510 /* PersistentContainer.swift in Sources */,
 				224293E2212AF07C00E70510 /* AuthorGroup.swift in Sources */,
 				224293DD212AF00500E70510 /* Document.xcdatamodeld in Sources */,
 				224293ED212AF0E300E70510 /* Series.swift in Sources */,
 				224293E7212AF0B700E70510 /* Edition.swift in Sources */,
-				224293DB212AEEF000E70510 /* Event.swift in Sources */,
 				224293D3212AE1E700E70510 /* BookishModel.swift in Sources */,
 				224293EA212AF0D300E70510 /* Volume.swift in Sources */,
 				224293E4212AF09E00E70510 /* Author.swift in Sources */,
@@ -985,7 +985,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2H48644JM2;
-				INFOPLIST_FILE = "Bookish iOSTests/Info.plist";
+				INFOPLIST_FILE = "${BOOKISH_TEST_INFO_PATH}";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -997,7 +997,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Bookish iOS.app/Bookish iOS";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/${BOOKISH_MOBILE_NAME}.app/${BOOKISH_MOBILE_NAME}";
 			};
 			name = Debug;
 		};
@@ -1009,7 +1009,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2H48644JM2;
-				INFOPLIST_FILE = "Bookish iOSTests/Info.plist";
+				INFOPLIST_FILE = "${BOOKISH_TEST_INFO_PATH}";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1021,7 +1021,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Bookish iOS.app/Bookish iOS";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/${BOOKISH_MOBILE_NAME}.app/${BOOKISH_MOBILE_NAME}";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -1033,7 +1033,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2H48644JM2;
-				INFOPLIST_FILE = "Bookish iOSUITests/Info.plist";
+				INFOPLIST_FILE = "${BOOKISH_TEST_INFO_PATH}";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1045,7 +1045,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "Bookish iOS";
+				TEST_TARGET_NAME = "${BOOKISH_MOBILE_NAME}";
 			};
 			name = Debug;
 		};
@@ -1056,7 +1056,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2H48644JM2;
-				INFOPLIST_FILE = "Bookish iOSUITests/Info.plist";
+				INFOPLIST_FILE = "${BOOKISH_TEST_INFO_PATH}";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1068,7 +1068,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "Bookish iOS";
+				TEST_TARGET_NAME = "${BOOKISH_MOBILE_NAME}";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -1532,7 +1532,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2242933E212ADC4500E70510 /* Build configuration list for PBXNativeTarget "Bookish iOSTests" */ = {
+		2242933E212ADC4500E70510 /* Build configuration list for PBXNativeTarget "BookishTestsMobile" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2242933F212ADC4500E70510 /* Debug */,
@@ -1541,7 +1541,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		22429341212ADC4500E70510 /* Build configuration list for PBXNativeTarget "Bookish iOSUITests" */ = {
+		22429341212ADC4500E70510 /* Build configuration list for PBXNativeTarget "BookishUITestsMobile" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				22429342212ADC4500E70510 /* Debug */,
@@ -1559,7 +1559,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		224293AB212AE0F400E70510 /* Build configuration list for PBXNativeTarget "BookishModelMacTests" */ = {
+		224293AB212AE0F400E70510 /* Build configuration list for PBXNativeTarget "BookishModelTestsMac" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				224293AC212AE0F400E70510 /* Debug */,
@@ -1577,7 +1577,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		224293CE212AE16300E70510 /* Build configuration list for PBXNativeTarget "BookishModelMobileTests" */ = {
+		224293CE212AE16300E70510 /* Build configuration list for PBXNativeTarget "BookishModelTestsMobile" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				224293CF212AE16300E70510 /* Debug */,
@@ -1604,7 +1604,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		22DD42722126D6DB0070C85A /* Build configuration list for PBXNativeTarget "BookishTests" */ = {
+		22DD42722126D6DB0070C85A /* Build configuration list for PBXNativeTarget "BookishTestsMac" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				22DD42732126D6DB0070C85A /* Debug */,
@@ -1613,7 +1613,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		22DD42752126D6DB0070C85A /* Build configuration list for PBXNativeTarget "BookishUITests" */ = {
+		22DD42752126D6DB0070C85A /* Build configuration list for PBXNativeTarget "BookishUITestsMac" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				22DD42762126D6DB0070C85A /* Debug */,

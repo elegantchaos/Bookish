@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "22429310212ADC4300E70510"
-               BuildableName = "BookishMobile.app"
-               BlueprintName = "BookishMobile"
+               BlueprintIdentifier = "22DD42432126D6DA0070C85A"
+               BuildableName = "BookishMac.app"
+               BlueprintName = "BookishMac"
                ReferencedContainer = "container:Bookish.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -32,9 +32,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "22429328212ADC4500E70510"
-               BuildableName = "Bookish iOSTests.xctest"
-               BlueprintName = "Bookish iOSTests"
+               BlueprintIdentifier = "22DD425A2126D6DB0070C85A"
+               BuildableName = "BookishTestsMac.xctest"
+               BlueprintName = "BookishTestsMac"
                ReferencedContainer = "container:Bookish.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -42,9 +42,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "22429333212ADC4500E70510"
-               BuildableName = "Bookish iOSUITests.xctest"
-               BlueprintName = "Bookish iOSUITests"
+               BlueprintIdentifier = "22DD42652126D6DB0070C85A"
+               BuildableName = "BookishUITestsMac.xctest"
+               BlueprintName = "BookishUITestsMac"
                ReferencedContainer = "container:Bookish.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -52,9 +52,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "224293BA212AE16300E70510"
-               BuildableName = "BookishModelMobileTests.xctest"
-               BlueprintName = "BookishModelMobileTests"
+               BlueprintIdentifier = "22429398212AE0F400E70510"
+               BuildableName = "BookishModelTestsMac.xctest"
+               BlueprintName = "BookishModelTestsMac"
                ReferencedContainer = "container:Bookish.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -62,9 +62,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "22429310212ADC4300E70510"
-            BuildableName = "BookishMobile.app"
-            BlueprintName = "BookishMobile"
+            BlueprintIdentifier = "22DD42432126D6DA0070C85A"
+            BuildableName = "BookishMac.app"
+            BlueprintName = "BookishMac"
             ReferencedContainer = "container:Bookish.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -85,9 +85,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "22429310212ADC4300E70510"
-            BuildableName = "BookishMobile.app"
-            BlueprintName = "BookishMobile"
+            BlueprintIdentifier = "22DD42432126D6DA0070C85A"
+            BuildableName = "BookishMac.app"
+            BlueprintName = "BookishMac"
             ReferencedContainer = "container:Bookish.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -104,9 +104,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "22429310212ADC4300E70510"
-            BuildableName = "BookishMobile.app"
-            BlueprintName = "BookishMobile"
+            BlueprintIdentifier = "22DD42432126D6DA0070C85A"
+            BuildableName = "BookishMac.app"
+            BlueprintName = "BookishMac"
             ReferencedContainer = "container:Bookish.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

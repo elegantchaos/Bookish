@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "224293B2212AE16200E70510"
-               BuildableName = "BookishModelMobile.framework"
+               BuildableName = "BookishModel.framework"
                BlueprintName = "BookishModelMobile"
                ReferencedContainer = "container:Bookish.xcodeproj">
             </BuildableReference>
@@ -47,8 +47,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "224293BA212AE16300E70510"
-               BuildableName = "BookishModelMobileTests.xctest"
-               BlueprintName = "BookishModelMobileTests"
+               BuildableName = "BookishModelTestsMobile.xctest"
+               BlueprintName = "BookishModelTestsMobile"
                ReferencedContainer = "container:Bookish.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -57,8 +57,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "22429398212AE0F400E70510"
-               BuildableName = "BookishModelMacTests.xctest"
-               BlueprintName = "BookishModelMacTests"
+               BuildableName = "BookishModelTestsMac.xctest"
+               BlueprintName = "BookishModelTestsMac"
                ReferencedContainer = "container:Bookish.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -67,7 +67,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "224293B2212AE16200E70510"
-            BuildableName = "BookishModelMobile.framework"
+            BuildableName = "BookishModel.framework"
             BlueprintName = "BookishModelMobile"
             ReferencedContainer = "container:Bookish.xcodeproj">
          </BuildableReference>
@@ -89,7 +89,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "224293B2212AE16200E70510"
-            BuildableName = "BookishModelMobile.framework"
+            BuildableName = "BookishModel.framework"
             BlueprintName = "BookishModelMobile"
             ReferencedContainer = "container:Bookish.xcodeproj">
          </BuildableReference>
@@ -107,7 +107,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "224293B2212AE16200E70510"
-            BuildableName = "BookishModelMobile.framework"
+            BuildableName = "BookishModel.framework"
             BlueprintName = "BookishModelMobile"
             ReferencedContainer = "container:Bookish.xcodeproj">
          </BuildableReference>

@@ -9,9 +9,7 @@
 import Foundation
 import CoreData
 
-public class BookishPersistentContainer : NSPersistentContainer {
-    
-}
+
 
 class BookishModel {
     public func test() -> String {
