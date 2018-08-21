@@ -27,7 +27,7 @@ class Document: PersistentDocument {
         super.save(sender)
     }
     override func makeWindowControllers() {
-        let application = NSApp.delegate as! AppDelegate
+        let application = NSApp.delegate as! Application
         application.documentBeingCreated = self
         let storyboard = NSStoryboard(name: NSStoryboard.Name("Main"), bundle: nil)
         let windowController = storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier("Document Window Controller")) as! WindowController

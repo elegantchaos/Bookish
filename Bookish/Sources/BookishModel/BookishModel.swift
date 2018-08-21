@@ -7,12 +7,7 @@
 //
 
 import Foundation
-import CoreData
 
-
-
-class BookishModel {
-    public func test() -> String {
-        return "blah"
-    }
+public struct BookishModel {
+    static let version = "1.0.0"
 }

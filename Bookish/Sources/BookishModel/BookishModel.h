@@ -15,9 +15,3 @@
 @import UIKit;
 
 #endif
-
-//! Project version number for BookishModelMac.
-FOUNDATION_EXPORT double BookishModelVersionNumber;
-
-//! Project version string for BookishModelMac.
-FOUNDATION_EXPORT const unsigned char BookishModelVersionString[];

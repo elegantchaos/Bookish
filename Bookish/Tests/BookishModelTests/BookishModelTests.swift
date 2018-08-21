@@ -12,19 +12,6 @@ import CoreData
 
 class BookishModelTests: XCTestCase {
 
-    override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() {
-        let test = BookishModel()
-        XCTAssertEqual(test.test(), "blah")
-    }
-
     func testContainer() {
         let container = PersistentContainer(name: "Document")
         container.persistentStoreDescriptions[0].url = URL(fileURLWithPath: "/dev/null")
@@ -46,7 +33,5 @@ class BookishModelTests: XCTestCase {
             let nserror = error as NSError
             fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
         }
-        
-//        let fetch = NSFetch
     }
 }

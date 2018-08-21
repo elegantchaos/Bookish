@@ -9,7 +9,7 @@
 import Cocoa
 
 @NSApplicationMain
-class AppDelegate: NSObject, NSApplicationDelegate {
+class Application: NSObject, NSApplicationDelegate {
     var documentBeingCreated: Document?
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {

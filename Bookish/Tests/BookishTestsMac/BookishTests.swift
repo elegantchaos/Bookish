@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import Bookish
+@testable import BookishMac
 
 class BookishTests: XCTestCase {
 

@@ -9,21 +9,8 @@
 import AppKit
 
 extension NSViewController {
-    var application: AppDelegate {
-        return NSApp.delegate as! AppDelegate
-    }
-    
-    @objc var safeDocument: Document? {
-        get {
-            print("safeDocument \(self)")
-            if let document = self.view.window?.windowController?.document as? Document {
-                return document
-            } else if let document = application.documentBeingCreated {
-                return document
-            } else {
-                return nil
-            }
-        }
+    var application: Application {
+        return NSApp.delegate as! Application
     }
     
     @objc var document: Document {
