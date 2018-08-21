@@ -864,7 +864,6 @@
                     </view>
                     <connections>
                         <outlet property="indexArray" destination="gjv-NN-VkV" id="8aY-jB-Ac8"/>
-                        <outlet property="tableView" destination="jZN-rJ-ulS" id="Mkb-5A-cj7"/>
                     </connections>
                 </viewController>
                 <customObject id="Jsc-1E-0Rn" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

@@ -9,10 +9,33 @@
 import AppKit
 
 extension NSViewController {
-    var document: Document {
-        if let document = self.view.window?.windowController?.document as? Document {
-            return document
+    var application: AppDelegate {
+        return NSApp.delegate as! AppDelegate
+    }
+    
+    @objc var safeDocument: Document? {
+        get {
+            print("safeDocument \(self)")
+            if let document = self.view.window?.windowController?.document as? Document {
+                return document
+            } else if let document = application.documentBeingCreated {
+                return document
+            } else {
+                return nil
+            }
         }
-        fatalError("View has no associated document.")
+    }
+    
+    @objc var document: Document {
+        get {
+            if let document = self.view.window?.windowController?.document as? Document {
+                return document
+            } else if let document = application.documentBeingCreated {
+                return document
+            }
+            
+            fatalError("View has no associated document.")
+        }
+        
     }
 }

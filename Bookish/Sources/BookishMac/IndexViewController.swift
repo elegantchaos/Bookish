@@ -10,25 +10,22 @@ import Cocoa
 import BookishModel
 
 class IndexViewController: NSViewController {
-    @IBOutlet weak var tableView: NSTableView!
+    @IBOutlet weak var indexArray: NSArrayController!
     
-    @IBOutlet var indexArray: NSArrayController!
+    override func viewWillDisappear() {
+        indexArray.managedObjectContext = nil
+        super.viewWillDisappear()
+    }
     
     override func viewWillAppear() {
-        super.viewWillAppear()
-        
+        // we really should be able to bind the array to the object context in IB, but
+        // the document value is set relatively late, so it's safer to do it here
         if let context = document.managedObjectContext {
-            let example = Edition(context: context)
-            example.name = "Test"
-
-            let example2 = Edition(context: context)
-            example2.name = "Test2"
-
             indexArray.managedObjectContext = context
             indexArray.fetch(self)
         }
-        
-//        tableView.reloadData()
+
+        super.viewWillAppear()
     }
     
 }
