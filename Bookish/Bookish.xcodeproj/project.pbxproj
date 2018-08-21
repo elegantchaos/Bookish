@@ -41,6 +41,10 @@
 		224293ED212AF0E300E70510 /* Series.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224293EB212AF0E300E70510 /* Series.swift */; };
 		224293EF212AFAFB00E70510 /* PersistentContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224293EE212AFAFB00E70510 /* PersistentContainer.swift */; };
 		224293F0212AFAFB00E70510 /* PersistentContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224293EE212AFAFB00E70510 /* PersistentContainer.swift */; };
+		224293F4212B01B100E70510 /* PersistentDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224293F1212B019100E70510 /* PersistentDocument.swift */; };
+		224293FB212C1D7500E70510 /* IndexViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224293F9212C1D7500E70510 /* IndexViewController.swift */; };
+		22429401212C32BF00E70510 /* WindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22429400212C32BF00E70510 /* WindowController.swift */; };
+		22429403212C3C7400E70510 /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22429402212C3C7400E70510 /* ViewExtensions.swift */; };
 		22DD42482126D6DA0070C85A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DD42472126D6DA0070C85A /* AppDelegate.swift */; };
 		22DD424A2126D6DA0070C85A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DD42492126D6DA0070C85A /* ViewController.swift */; };
 		22DD424C2126D6DA0070C85A /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DD424B2126D6DA0070C85A /* Document.swift */; };
@@ -165,6 +169,10 @@
 		224293E8212AF0D300E70510 /* Volume.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Volume.swift; sourceTree = "<group>"; };
 		224293EB212AF0E300E70510 /* Series.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Series.swift; sourceTree = "<group>"; };
 		224293EE212AFAFB00E70510 /* PersistentContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentContainer.swift; sourceTree = "<group>"; };
+		224293F1212B019100E70510 /* PersistentDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentDocument.swift; sourceTree = "<group>"; };
+		224293F9212C1D7500E70510 /* IndexViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexViewController.swift; sourceTree = "<group>"; };
+		22429400212C32BF00E70510 /* WindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowController.swift; sourceTree = "<group>"; };
+		22429402212C3C7400E70510 /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
 		22DD42442126D6DA0070C85A /* BookishMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BookishMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22DD42472126D6DA0070C85A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		22DD42492126D6DA0070C85A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -298,7 +306,10 @@
 			isa = PBXGroup;
 			children = (
 				22DD42472126D6DA0070C85A /* AppDelegate.swift */,
+				22429402212C3C7400E70510 /* ViewExtensions.swift */,
 				22DD42492126D6DA0070C85A /* ViewController.swift */,
+				22429400212C32BF00E70510 /* WindowController.swift */,
+				224293F9212C1D7500E70510 /* IndexViewController.swift */,
 				22DD424B2126D6DA0070C85A /* Document.swift */,
 				22DD42502126D6DB0070C85A /* Assets.xcassets */,
 				22DD42522126D6DB0070C85A /* Main.storyboard */,
@@ -315,6 +326,7 @@
 				224293B6212AE16200E70510 /* Info.plist */,
 				224293D1212AE1E700E70510 /* BookishModel.swift */,
 				224293EE212AFAFB00E70510 /* PersistentContainer.swift */,
+				224293F1212B019100E70510 /* PersistentDocument.swift */,
 				224293DE212AF05800E70510 /* Author.swift */,
 				224293EB212AF0E300E70510 /* Series.swift */,
 				224293E8212AF0D300E70510 /* Volume.swift */,
@@ -334,6 +346,13 @@
 			path = BookishModelTests;
 			sourceTree = "<group>";
 		};
+		224293F6212B12CA00E70510 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		22DD423B2126D6DA0070C85A = {
 			isa = PBXGroup;
 			children = (
@@ -341,6 +360,7 @@
 				22DD42462126D6DA0070C85A /* Sources */,
 				22DD42782126DD3A0070C85A /* Tests */,
 				22DD42452126D6DA0070C85A /* Products */,
+				224293F6212B12CA00E70510 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -797,6 +817,7 @@
 				224293EC212AF0E300E70510 /* Series.swift in Sources */,
 				224293E6212AF0B700E70510 /* Edition.swift in Sources */,
 				224293D2212AE1E700E70510 /* BookishModel.swift in Sources */,
+				224293F4212B01B100E70510 /* PersistentDocument.swift in Sources */,
 				224293E9212AF0D300E70510 /* Volume.swift in Sources */,
 				224293E3212AF09D00E70510 /* Author.swift in Sources */,
 			);
@@ -838,8 +859,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				22DD424A2126D6DA0070C85A /* ViewController.swift in Sources */,
+				22429401212C32BF00E70510 /* WindowController.swift in Sources */,
 				22DD42482126D6DA0070C85A /* AppDelegate.swift in Sources */,
 				22DD424C2126D6DA0070C85A /* Document.swift in Sources */,
+				22429403212C3C7400E70510 /* ViewExtensions.swift in Sources */,
+				224293FB212C1D7500E70510 /* IndexViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

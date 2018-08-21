@@ -10,14 +10,17 @@ import Cocoa
 
 class ViewController: NSViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+    override func viewWillAppear() {
+        super.viewWillAppear()
+        print("root vc document is \(document)")
     }
-
+    
+    override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
+    }
+    
     override var representedObject: Any? {
         didSet {
+            NSLog("blah")
         // Update the view, if already loaded.
         }
     }

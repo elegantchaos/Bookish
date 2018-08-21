@@ -9,20 +9,9 @@
 import Cocoa
 import BookishModel
 
-class Document: NSPersistentDocument {
-    let container: BookishPersistentContainer
-    
+class Document: PersistentDocument {
     override init() {
-        self.container = BookishPersistentContainer(name: "Document")
         super.init()
-        
-        container.loadPersistentStores { (description, err) in
-            if let err = err {
-//                os_log("error loading store \(description): \(err)")
-                return
-            }
-        }
-//        os_log("ok")
     }
 
     override class var autosavesInPlace: Bool {
@@ -32,7 +21,8 @@ class Document: NSPersistentDocument {
     override func makeWindowControllers() {
         // Returns the Storyboard that contains your Document window.
         let storyboard = NSStoryboard(name: NSStoryboard.Name("Main"), bundle: nil)
-        let windowController = storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier("Document Window Controller")) as! NSWindowController
+        let windowController = storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier("Document Window Controller")) as! WindowController
+//        windowController.document = self
         self.addWindowController(windowController)
     }
 
