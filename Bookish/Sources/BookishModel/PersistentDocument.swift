@@ -9,5 +9,13 @@
 import AppKit
 
 open class PersistentDocument: NSPersistentDocument {
-    
+    override open var managedObjectModel: NSManagedObjectModel { get {
+        if let url = Bundle(for: PersistentDocument.self).url(forResource: "Document", withExtension: "momd") {
+            if let model = NSManagedObjectModel(contentsOf: url) {
+                return model
+            }
+        }
+        fatalError("boom")
+        }
+    }
 }
