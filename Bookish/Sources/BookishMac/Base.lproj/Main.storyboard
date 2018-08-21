@@ -809,6 +809,9 @@
                                                                         <font key="font" metaFont="system"/>
                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                                        <connections>
+                                                                            <binding destination="hzh-6t-Z3h" name="value" keyPath="objectValue.name" id="had-WF-3fw"/>
+                                                                        </connections>
                                                                     </textFieldCell>
                                                                 </textField>
                                                             </subviews>
@@ -819,6 +822,10 @@
                                                     </prototypeCellViews>
                                                 </tableColumn>
                                             </tableColumns>
+                                            <connections>
+                                                <binding destination="gjv-NN-VkV" name="content" keyPath="arrangedObjects" id="Cep-CD-sFl"/>
+                                                <binding destination="gjv-NN-VkV" name="selectionIndexes" keyPath="selectionIndexes" previousBinding="Cep-CD-sFl" id="BKU-5j-n5q"/>
+                                            </connections>
                                         </tableView>
                                     </subviews>
                                 </clipView>
@@ -836,13 +843,13 @@
                                 </tableHeaderView>
                             </scrollView>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eng-CI-blK">
-                                <rect key="frame" x="361" y="13" width="75" height="32"/>
-                                <buttonCell key="cell" type="push" title="Insert" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="yIG-Bn-O2v">
+                                <rect key="frame" x="369" y="13" width="67" height="32"/>
+                                <buttonCell key="cell" type="push" title="New" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="yIG-Bn-O2v">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
-                                    <action selector="insertEdition:" target="cSd-7W-hzi" id="8cT-rV-lSA"/>
+                                    <action selector="add:" target="gjv-NN-VkV" id="A7j-EV-oDP"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -856,10 +863,13 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="indexArray" destination="gjv-NN-VkV" id="8aY-jB-Ac8"/>
                         <outlet property="tableView" destination="jZN-rJ-ulS" id="Mkb-5A-cj7"/>
                     </connections>
                 </viewController>
                 <customObject id="Jsc-1E-0Rn" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <arrayController mode="entity" entityName="Edition" id="gjv-NN-VkV"/>
+                <userDefaultsController representsSharedInstance="YES" id="jCg-PH-QWY"/>
             </objects>
             <point key="canvasLocation" x="301" y="1147"/>
         </scene>

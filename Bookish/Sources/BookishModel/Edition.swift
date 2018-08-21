@@ -10,5 +10,11 @@ import Foundation
 import CoreData
 
 public class Edition: NSManagedObject {
+    static var untitledCount = 0
     
+    override public init(entity: NSEntityDescription, insertInto context: NSManagedObjectContext?) {
+        super.init(entity: entity, insertInto:context)
+        self.name = "Untitled \(Edition.untitledCount)"
+        Edition.untitledCount += 1
+    }
 }
