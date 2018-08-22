@@ -869,7 +869,7 @@
                 <customObject id="Jsc-1E-0Rn" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <arrayController mode="entity" entityName="Edition" alwaysUsesMultipleValuesMarker="YES" id="gjv-NN-VkV">
                     <connections>
-                        <binding destination="cSd-7W-hzi" name="selectionIndexes" keyPath="self.detailView.representedObject" id="Eh0-Rj-9ig"/>
+                        <binding destination="cSd-7W-hzi" name="selectionIndexes" keyPath="self.selectedIndexes" id="M0x-t9-gVy"/>
                     </connections>
                 </arrayController>
                 <userDefaultsController representsSharedInstance="YES" id="jCg-PH-QWY"/>
@@ -884,13 +884,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" preferredMaxLayoutWidth="246" translatesAutoresizingMaskIntoConstraints="NO" id="TyV-c9-G0C">
-                                <rect key="frame" x="30" y="139" width="248" height="22"/>
+                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" misplaced="YES" preferredMaxLayoutWidth="246" translatesAutoresizingMaskIntoConstraints="NO" id="TyV-c9-G0C">
+                                <rect key="frame" x="18" y="249" width="248" height="22"/>
                                 <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Your document contents here" id="Cc7-nU-5Mv">
                                     <font key="font" metaFont="system" size="18"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
+                                <connections>
+                                    <binding destination="TBH-Sa-Ff0" name="value" keyPath="self.name" id="9tm-mN-tX5"/>
+                                </connections>
                             </textField>
                         </subviews>
                         <constraints>
@@ -900,6 +903,7 @@
                     </view>
                 </viewController>
                 <customObject id="dg1-Od-cPv" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <userDefaultsController id="kze-Jt-jOz"/>
             </objects>
             <point key="canvasLocation" x="780" y="1126"/>
         </scene>

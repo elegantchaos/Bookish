@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import BookishModel
 
 class CollectionDetailViewController: NSViewController {
     weak var indexView: CollectionIndexViewController!
@@ -19,10 +20,25 @@ class CollectionDetailViewController: NSViewController {
         }
     }
     
+    @objc static func keyPathsForValuesAffectingName() -> NSSet {
+        return ["representedObject"]
+    }
+    
     @objc override var representedObject: Any? {
         didSet {
             print("rep obj changed to \(representedObject)")
         }
     }
     
+    @objc var name: String {
+        if let objects = representedObject as? [Edition] {
+            if objects.count == 1 {
+                return objects[0].name ?? ""
+            } else {
+                return "<multiple>"
+            }
+        } else {
+            return ""
+        }
+    }
 }

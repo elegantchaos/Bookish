@@ -33,4 +33,10 @@ class CollectionIndexViewController: NSViewController {
         super.viewWillAppear()
     }
     
+    @objc var selectedIndexes: Any?
+        {
+        didSet {
+            detailView.representedObject = indexArray.selectedObjects
+        }
+    }
 }
