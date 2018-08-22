@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class WindowController: NSWindowController {
+class CollectionWindowController: NSWindowController {
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
         NSLog("blah")
     }

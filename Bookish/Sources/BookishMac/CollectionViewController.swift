@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class ViewController: NSViewController {
+class CollectionViewController: NSViewController {
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
         print("preparing")
     }

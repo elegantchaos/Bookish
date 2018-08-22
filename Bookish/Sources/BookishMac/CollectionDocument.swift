@@ -9,7 +9,7 @@
 import Cocoa
 import BookishModel
 
-class Document: PersistentDocument {
+class CollectionDocument: PersistentDocument {
     var count: Int = 0
     
     override init() {
@@ -30,7 +30,7 @@ class Document: PersistentDocument {
         let application = NSApp.delegate as! Application
         application.documentBeingCreated = self
         let storyboard = NSStoryboard(name: NSStoryboard.Name("Main"), bundle: nil)
-        let windowController = storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier("Document Window Controller")) as! WindowController
+        let windowController = storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier("Document Window Controller")) as! CollectionWindowController
         self.addWindowController(windowController)
         application.documentBeingCreated = nil
     }

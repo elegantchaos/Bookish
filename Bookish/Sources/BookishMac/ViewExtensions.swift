@@ -13,9 +13,9 @@ extension NSViewController {
         return NSApp.delegate as! Application
     }
     
-    @objc var document: Document {
+    @objc var document: CollectionDocument {
         get {
-            if let document = self.view.window?.windowController?.document as? Document {
+            if let document = self.view.window?.windowController?.document as? CollectionDocument {
                 return document
             } else if let document = application.documentBeingCreated {
                 return document

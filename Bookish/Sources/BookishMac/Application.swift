@@ -10,7 +10,7 @@ import Cocoa
 
 @NSApplicationMain
 class Application: NSObject, NSApplicationDelegate {
-    var documentBeingCreated: Document?
+    var documentBeingCreated: CollectionDocument?
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application

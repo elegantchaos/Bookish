@@ -9,12 +9,17 @@
 import Cocoa
 import BookishModel
 
-class IndexViewController: NSViewController {
+class CollectionIndexViewController: NSViewController {
+    @objc weak var detailView: CollectionDetailViewController!
     @IBOutlet weak var indexArray: NSArrayController!
     
-    override func viewWillDisappear() {
-        indexArray.managedObjectContext = nil
-        super.viewWillDisappear()
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        // TODO: this is a bit naff as it makes assumptions about the containment hierarchy
+        if let parent = self.parent as? NSSplitViewController {
+            detailView = parent.splitViewItems[1].viewController as? CollectionDetailViewController
+        }
     }
     
     override func viewWillAppear() {
