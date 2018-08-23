@@ -884,26 +884,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" misplaced="YES" preferredMaxLayoutWidth="246" translatesAutoresizingMaskIntoConstraints="NO" id="TyV-c9-G0C">
-                                <rect key="frame" x="18" y="201" width="248" height="22"/>
-                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Your document contents here" usesSingleLineMode="YES" id="Cc7-nU-5Mv">
-                                    <font key="font" metaFont="system" size="18"/>
-                                    <color key="textColor" name="alternateSelectedControlColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                                <connections>
-                                    <binding destination="TBH-Sa-Ff0" name="value" keyPath="self.name" id="9tm-mN-tX5"/>
-                                </connections>
-                            </textField>
                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" preferredMaxLayoutWidth="246" translatesAutoresizingMaskIntoConstraints="NO" id="IdQ-lt-hxd">
-                                <rect key="frame" x="18" y="153" width="248" height="22"/>
+                                <rect key="frame" x="18" y="258" width="248" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Your document contents here" usesSingleLineMode="YES" id="XOj-Zo-9Ww">
                                     <font key="font" metaFont="system" size="18"/>
-                                    <color key="textColor" name="systemPinkColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
+                                    <binding destination="v2c-Ux-afh" name="editable" keyPath="selection" id="vzm-8s-CBB">
+                                        <dictionary key="options">
+                                            <string key="NSValueTransformerName">NSIsNotNil</string>
+                                        </dictionary>
+                                    </binding>
                                     <binding destination="v2c-Ux-afh" name="value" keyPath="selection.name" id="hbw-5N-Pcp">
                                         <dictionary key="options">
                                             <string key="NSMultipleValuesPlaceholder">multi</string>
@@ -915,10 +909,6 @@
                                 </connections>
                             </textField>
                         </subviews>
-                        <constraints>
-                            <constraint firstAttribute="centerX" secondItem="TyV-c9-G0C" secondAttribute="centerX" constant="71" id="s0G-yf-3MO"/>
-                            <constraint firstAttribute="centerY" secondItem="TyV-c9-G0C" secondAttribute="centerY" id="y8G-hD-kEX"/>
-                        </constraints>
                     </view>
                     <connections>
                         <outlet property="indexArray" destination="v2c-Ux-afh" id="AOk-Gi-0VP"/>

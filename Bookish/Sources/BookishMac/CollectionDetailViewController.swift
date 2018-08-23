@@ -24,7 +24,7 @@ class CollectionDetailViewController: NSViewController {
     override func viewWillAppear() {
         // we really should be able to bind the array to the object context in IB, but
         // the document value is set relatively late, so it's safer to do it here
-        if let context = document.managedObjectContext {
+        if let context = document?.managedObjectContext {
             indexArray.managedObjectContext = context
             indexArray.fetch(self)
         }

@@ -14,7 +14,10 @@ public class Edition: NSManagedObject {
     
     override public init(entity: NSEntityDescription, insertInto context: NSManagedObjectContext?) {
         super.init(entity: entity, insertInto:context)
-        self.name = "Untitled \(Edition.untitledCount)"
+    }
+    
+    public override func awakeFromInsert() {
+        name = "Untitled \(Edition.untitledCount)"
         Edition.untitledCount += 1
     }
 }
