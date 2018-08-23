@@ -29,9 +29,11 @@ class CollectionDocument: PersistentDocument {
     }
     override func makeWindowControllers() {
         let application = NSApp.delegate as! Application
-        application.documentBeingCreated = self
+        let cvm = CollectionDocumentViewModel(document: self)
+        application.documentBeingCreated = cvm
         let storyboard = NSStoryboard(name: NSStoryboard.Name("Main"), bundle: nil)
         let windowController = storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier("Document Window Controller")) as! CollectionWindowController
+        windowController.viewModel = cvm
         self.addWindowController(windowController)
         application.documentBeingCreated = nil
     }

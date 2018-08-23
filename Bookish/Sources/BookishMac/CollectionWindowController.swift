@@ -9,6 +9,8 @@
 import Cocoa
 
 class CollectionWindowController: NSWindowController {
+    var viewModel: CollectionDocumentViewModel?
+    
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
         NSLog("blah")
     }

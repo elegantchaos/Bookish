@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		22143FCD212EE79100B689DF /* CollectionDocumentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22143FCC212EE79100B689DF /* CollectionDocumentViewModel.swift */; };
 		22429314212ADC4300E70510 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22429313212ADC4300E70510 /* AppDelegate.swift */; };
 		22429319212ADC4300E70510 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22429318212ADC4300E70510 /* MasterViewController.swift */; };
 		2242931B212ADC4300E70510 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2242931A212ADC4300E70510 /* DetailViewController.swift */; };
@@ -141,6 +142,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		22143FCC212EE79100B689DF /* CollectionDocumentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionDocumentViewModel.swift; sourceTree = "<group>"; };
 		22429311212ADC4300E70510 /* BookishMobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BookishMobile.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22429313212ADC4300E70510 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		22429318212ADC4300E70510 /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
@@ -318,6 +320,7 @@
 				22429407212D958400E70510 /* CollectionSplitViewController.swift */,
 				22429405212D945C00E70510 /* CollectionDetailViewController.swift */,
 				22DD424B2126D6DA0070C85A /* CollectionDocument.swift */,
+				22143FCC212EE79100B689DF /* CollectionDocumentViewModel.swift */,
 				22DD42502126D6DB0070C85A /* Assets.xcassets */,
 				22DD42522126D6DB0070C85A /* Main.storyboard */,
 				22DD42552126D6DB0070C85A /* Info.plist */,
@@ -876,6 +879,7 @@
 				22DD42482126D6DA0070C85A /* Application.swift in Sources */,
 				22429406212D945C00E70510 /* CollectionDetailViewController.swift in Sources */,
 				22DD424C2126D6DA0070C85A /* CollectionDocument.swift in Sources */,
+				22143FCD212EE79100B689DF /* CollectionDocumentViewModel.swift in Sources */,
 				22429408212D958400E70510 /* CollectionSplitViewController.swift in Sources */,
 				22429403212C3C7400E70510 /* ViewExtensions.swift in Sources */,
 				224293FB212C1D7500E70510 /* CollectionIndexViewController.swift in Sources */,
