@@ -19,5 +19,9 @@ public class Edition: NSManagedObject {
     public override func awakeFromInsert() {
         name = "Untitled \(Edition.untitledCount)"
         Edition.untitledCount += 1
+        
+        if let context = managedObjectContext {
+            volume = Volume(context: context)
+        }
     }
 }
