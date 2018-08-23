@@ -12,8 +12,15 @@ class CollectionViewController: NSViewController {
     @objc let cvm: CollectionDocumentViewModel
     
     required init?(coder: NSCoder) {
-        self.cvm = Application.sharedInstance.documentBeingCreated as! CollectionDocumentViewModel
+        self.cvm = Application.sharedInstance.connectViewModel()
         super.init(coder: coder)
     }
+    
+    @objc var document: CollectionDocument? {
+        get {
+            return cvm.document
+        }
+    }
+
 }
 

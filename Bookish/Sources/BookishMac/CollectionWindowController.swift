@@ -8,10 +8,16 @@
 
 import Cocoa
 
-class CollectionWindowController: NSWindowController {
+protocol DocumentWindowController {
+    associatedtype ViewModel: DocumentViewModel
+    var viewModel: ViewModel? { get set }
+}
+
+protocol DocumentViewModel {
+    associatedtype WindowController: DocumentWindowController
+}
+
+class CollectionWindowController: NSWindowController, DocumentWindowController {
     var viewModel: CollectionDocumentViewModel?
-    
-    override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
-        NSLog("blah")
-    }
+    typealias ViewModel = CollectionDocumentViewModel
 }

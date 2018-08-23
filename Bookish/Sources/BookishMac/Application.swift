@@ -8,12 +8,9 @@
 
 import Cocoa
 
-protocol DocumentViewModel {
-}
-
 @NSApplicationMain
 class Application: NSObject, NSApplicationDelegate {
-    var documentBeingCreated: DocumentViewModel?
+    private var documentBeingCreated: Any?
 
     static var sharedInstance: Application {
         return NSApp.delegate as! Application
@@ -27,14 +24,18 @@ class Application: NSObject, NSApplicationDelegate {
         // Insert code here to tear down your application
     }
 
-    func createDocumentWindowController(with viewModel: DocumentViewModel, storyboard: String = "Main", identifier: String = "Document Window Controller") -> CollectionWindowController {
+    func createDocumentWindowController<VM: DocumentViewModel>(with viewModel: VM, storyboard: String = "Main", identifier: String = "Document Window Controller") -> VM.WindowController where VM.WindowController.ViewModel == VM {
         assert(documentBeingCreated == nil)
         documentBeingCreated = viewModel
         let storyboard = NSStoryboard(name: NSStoryboard.Name(storyboard), bundle: nil)
-        let windowController = storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(identifier)) as! CollectionWindowController
-        windowController.viewModel = (viewModel as! CollectionDocumentViewModel)
+        var windowController = storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(identifier)) as! VM.WindowController
+        windowController.viewModel = viewModel
         documentBeingCreated = nil
         return windowController
+    }
+    
+    func connectViewModel<VM: DocumentViewModel>() -> VM {
+        return documentBeingCreated as! VM
     }
 }
 

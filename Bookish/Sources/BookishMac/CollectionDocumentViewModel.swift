@@ -9,6 +9,8 @@
 import CoreData
 
 @objc class CollectionDocumentViewModel: NSObject, DocumentViewModel {
+    typealias  WindowController = CollectionWindowController
+
     @objc let document: CollectionDocument
     @objc let managedObjectContext: NSManagedObjectContext
     @objc var selectedIndexes: Any?
