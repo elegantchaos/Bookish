@@ -9,16 +9,10 @@
 import Cocoa
 import BookishModel
 
-class CollectionDetailViewController: NSViewController {
-    @objc let cvm: CollectionDocumentViewModel
+class CollectionDetailViewController: CollectionViewController {
     @IBOutlet weak var indexView: CollectionIndexViewController!
     @IBOutlet weak var indexArray: NSArrayController!
     
-    required init?(coder: NSCoder) {
-        self.cvm = NSApplication.application().documentBeingCreated!
-        super.init(coder: coder)
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         // TODO: this is a bit naff as it makes assumptions about the containment hierarchy
@@ -38,38 +32,4 @@ class CollectionDetailViewController: NSViewController {
         super.viewWillAppear()
     }
     
-    @objc static func keyPathsForValuesAffectingName() -> NSSet {
-        return ["representedObject"]
-    }
-    
-    @objc override var representedObject: Any? {
-        didSet {
-            print("rep obj changed to \(representedObject)")
-        }
-    }
-    
-    @objc var name: String? {
-        get {
-            if let objects = representedObject as? [Edition] {
-                switch objects.count {
-                case 0:
-                    break
-                case 1:
-                    return objects[0].name
-                default:
-                    return "<multiple>"
-                }
-            }
-            
-            return nil
-        }
-        
-        set(newName) {
-            if let objects = representedObject as? [Edition] {
-                objects.forEach {
-                    $0.name = newName
-                }
-            }
-        }
-    }
 }

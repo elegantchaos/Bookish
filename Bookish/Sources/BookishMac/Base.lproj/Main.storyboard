@@ -741,8 +741,8 @@
                                     <segue destination="9dY-ZT-f0K" kind="embed" id="CIX-OZ-tND"/>
                                 </connections>
                             </containerView>
-                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" preferredMaxLayoutWidth="246" translatesAutoresizingMaskIntoConstraints="NO" id="xkV-t6-a82">
-                                <rect key="frame" x="388" y="258" width="44" height="22"/>
+                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="xkV-t6-a82">
+                                <rect key="frame" x="367" y="258" width="65" height="22"/>
                                 <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Blah" id="j45-5c-LsJ">
                                     <font key="font" metaFont="system" size="18"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -753,6 +753,7 @@
                         <constraints>
                             <constraint firstItem="3tE-Et-baJ" firstAttribute="top" secondItem="Nuf-33-Q1V" secondAttribute="top" id="1Po-kp-KDn"/>
                             <constraint firstItem="xkV-t6-a82" firstAttribute="top" secondItem="Nuf-33-Q1V" secondAttribute="top" constant="20" id="7X5-8C-JZH"/>
+                            <constraint firstItem="xkV-t6-a82" firstAttribute="leading" relation="lessThanOrEqual" secondItem="Nuf-33-Q1V" secondAttribute="leading" constant="369" id="AUH-qx-Wnv"/>
                             <constraint firstAttribute="trailing" secondItem="3tE-Et-baJ" secondAttribute="trailing" id="YoW-xg-DtT"/>
                             <constraint firstItem="3tE-Et-baJ" firstAttribute="leading" secondItem="Nuf-33-Q1V" secondAttribute="leading" id="Zj5-zy-QWt"/>
                             <constraint firstAttribute="trailing" secondItem="xkV-t6-a82" secondAttribute="trailing" constant="20" id="ejq-sj-VBd"/>
@@ -802,9 +803,8 @@
                                                             <rect key="frame" x="1" y="1" width="194" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
-                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sYK-UP-Ryg">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="194" height="17"/>
-                                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="sYK-UP-Ryg">
+                                                                    <rect key="frame" x="-2" y="0.0" width="198" height="17"/>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="kiv-p0-HhD">
                                                                         <font key="font" metaFont="system"/>
                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -815,6 +815,12 @@
                                                                     </textFieldCell>
                                                                 </textField>
                                                             </subviews>
+                                                            <constraints>
+                                                                <constraint firstItem="sYK-UP-Ryg" firstAttribute="top" secondItem="hzh-6t-Z3h" secondAttribute="top" id="OCY-33-dlv"/>
+                                                                <constraint firstItem="sYK-UP-Ryg" firstAttribute="leading" secondItem="hzh-6t-Z3h" secondAttribute="leading" id="Squ-1V-H9i"/>
+                                                                <constraint firstAttribute="bottom" secondItem="sYK-UP-Ryg" secondAttribute="bottom" id="egs-2S-LAW"/>
+                                                                <constraint firstAttribute="trailing" secondItem="sYK-UP-Ryg" secondAttribute="trailing" id="rUW-ly-roh"/>
+                                                            </constraints>
                                                             <connections>
                                                                 <outlet property="textField" destination="sYK-UP-Ryg" id="rl9-C1-aqw"/>
                                                             </connections>
@@ -855,6 +861,7 @@
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="eng-CI-blK" secondAttribute="trailing" constant="20" id="ItX-4N-53j"/>
+                            <constraint firstItem="eng-CI-blK" firstAttribute="leading" relation="lessThanOrEqual" secondItem="JCM-bJ-k8z" secondAttribute="leading" constant="124" id="NVs-Ou-2pO"/>
                             <constraint firstAttribute="bottom" secondItem="eng-CI-blK" secondAttribute="bottom" constant="20" symbolic="YES" id="Txe-v6-Tol"/>
                             <constraint firstAttribute="trailing" secondItem="dnp-IN-cGx" secondAttribute="trailing" id="gWF-qi-XZz"/>
                             <constraint firstItem="eng-CI-blK" firstAttribute="top" secondItem="dnp-IN-cGx" secondAttribute="bottom" constant="20" symbolic="YES" id="k1G-9X-qbG"/>
@@ -884,9 +891,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" preferredMaxLayoutWidth="246" translatesAutoresizingMaskIntoConstraints="NO" id="IdQ-lt-hxd">
-                                <rect key="frame" x="18" y="258" width="248" height="22"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" preferredMaxLayoutWidth="246" translatesAutoresizingMaskIntoConstraints="NO" id="IdQ-lt-hxd">
+                                <rect key="frame" x="18" y="258" width="414" height="22"/>
                                 <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Your document contents here" usesSingleLineMode="YES" id="XOj-Zo-9Ww">
                                     <font key="font" metaFont="system" size="18"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -909,6 +915,11 @@
                                 </connections>
                             </textField>
                         </subviews>
+                        <constraints>
+                            <constraint firstItem="IdQ-lt-hxd" firstAttribute="leading" secondItem="BXj-Jh-9Ye" secondAttribute="leading" constant="20" id="GBc-4C-WlB"/>
+                            <constraint firstAttribute="trailing" secondItem="IdQ-lt-hxd" secondAttribute="trailing" constant="20" id="Lij-TD-iyw"/>
+                            <constraint firstItem="IdQ-lt-hxd" firstAttribute="top" secondItem="BXj-Jh-9Ye" secondAttribute="top" constant="20" id="Taq-WQ-tyw"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="indexArray" destination="v2c-Ux-afh" id="AOk-Gi-0VP"/>

@@ -8,7 +8,7 @@
 
 import CoreData
 
-@objc class CollectionDocumentViewModel: NSObject {
+@objc class CollectionDocumentViewModel: NSObject, DocumentViewModel {
     @objc let document: CollectionDocument
     @objc let managedObjectContext: NSManagedObjectContext
     @objc var selectedIndexes: Any?

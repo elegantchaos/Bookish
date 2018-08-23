@@ -8,16 +8,6 @@
 
 import AppKit
 
-class DocumentViewModel {
-    
-}
-
-extension NSApplication {
-    static func application() -> Application {
-        return NSApp.delegate as! Application
-    }
-}
-
 extension NSViewController {
     
     /**
@@ -32,7 +22,7 @@ extension NSViewController {
         get {
             if let document = self.view.window?.windowController?.document as? CollectionDocument {
                 return document
-            } else if let document = application.documentBeingCreated?.document {
+            } else if let document = (application.documentBeingCreated as? CollectionDocumentViewModel)?.document {
                 return document
             } else {
                 return nil

@@ -9,8 +9,11 @@
 import Cocoa
 
 class CollectionViewController: NSViewController {
-    override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
-        print("preparing")
+    @objc let cvm: CollectionDocumentViewModel
+    
+    required init?(coder: NSCoder) {
+        self.cvm = Application.sharedInstance.documentBeingCreated as! CollectionDocumentViewModel
+        super.init(coder: coder)
     }
 }
 

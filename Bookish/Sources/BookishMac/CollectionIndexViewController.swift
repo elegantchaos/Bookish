@@ -9,15 +9,9 @@
 import Cocoa
 import BookishModel
 
-class CollectionIndexViewController: NSViewController {
-    @objc let cvm: CollectionDocumentViewModel
+class CollectionIndexViewController: CollectionViewController {
     @objc weak var detailView: CollectionDetailViewController!
     @IBOutlet weak var indexArray: NSArrayController!
-    
-    required init?(coder: NSCoder) {
-        self.cvm = NSApplication.application().documentBeingCreated!
-        super.init(coder: coder)
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
