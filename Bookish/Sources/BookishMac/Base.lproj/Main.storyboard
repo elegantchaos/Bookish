@@ -869,7 +869,7 @@
                 <customObject id="Jsc-1E-0Rn" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <arrayController mode="entity" entityName="Edition" alwaysUsesMultipleValuesMarker="YES" id="gjv-NN-VkV">
                     <connections>
-                        <binding destination="cSd-7W-hzi" name="selectionIndexes" keyPath="self.selectedIndexes" id="M0x-t9-gVy"/>
+                        <binding destination="cSd-7W-hzi" name="selectionIndexes" keyPath="self.document.selectedIndexes" id="UK4-bq-w42"/>
                     </connections>
                 </arrayController>
                 <userDefaultsController representsSharedInstance="YES" id="jCg-PH-QWY"/>
@@ -885,14 +885,33 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" misplaced="YES" preferredMaxLayoutWidth="246" translatesAutoresizingMaskIntoConstraints="NO" id="TyV-c9-G0C">
-                                <rect key="frame" x="18" y="249" width="248" height="22"/>
-                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Your document contents here" id="Cc7-nU-5Mv">
+                                <rect key="frame" x="18" y="201" width="248" height="22"/>
+                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Your document contents here" usesSingleLineMode="YES" id="Cc7-nU-5Mv">
                                     <font key="font" metaFont="system" size="18"/>
-                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="textColor" name="alternateSelectedControlColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
                                     <binding destination="TBH-Sa-Ff0" name="value" keyPath="self.name" id="9tm-mN-tX5"/>
+                                </connections>
+                            </textField>
+                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" preferredMaxLayoutWidth="246" translatesAutoresizingMaskIntoConstraints="NO" id="IdQ-lt-hxd">
+                                <rect key="frame" x="18" y="153" width="248" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Your document contents here" usesSingleLineMode="YES" id="XOj-Zo-9Ww">
+                                    <font key="font" metaFont="system" size="18"/>
+                                    <color key="textColor" name="systemPinkColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                                <connections>
+                                    <binding destination="v2c-Ux-afh" name="value" keyPath="selection.name" id="hbw-5N-Pcp">
+                                        <dictionary key="options">
+                                            <string key="NSMultipleValuesPlaceholder">multi</string>
+                                            <string key="NSNoSelectionPlaceholder">none</string>
+                                            <string key="NSNotApplicablePlaceholder">na</string>
+                                            <string key="NSNullPlaceholder">null</string>
+                                        </dictionary>
+                                    </binding>
                                 </connections>
                             </textField>
                         </subviews>
@@ -901,9 +920,16 @@
                             <constraint firstAttribute="centerY" secondItem="TyV-c9-G0C" secondAttribute="centerY" id="y8G-hD-kEX"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="indexArray" destination="v2c-Ux-afh" id="AOk-Gi-0VP"/>
+                    </connections>
                 </viewController>
                 <customObject id="dg1-Od-cPv" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-                <userDefaultsController id="kze-Jt-jOz"/>
+                <arrayController mode="entity" entityName="Edition" id="v2c-Ux-afh">
+                    <connections>
+                        <binding destination="TBH-Sa-Ff0" name="selectionIndexes" keyPath="self.document.selectedIndexes" id="jDg-Xy-Vhx"/>
+                    </connections>
+                </arrayController>
             </objects>
             <point key="canvasLocation" x="780" y="1126"/>
         </scene>

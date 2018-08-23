@@ -11,7 +11,8 @@ import BookishModel
 
 class CollectionDocument: PersistentDocument {
     var count: Int = 0
-    
+    @objc var selectedIndexes: Any?
+
     override init() {
         super.init()
     }
