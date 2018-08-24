@@ -1,10 +1,7 @@
-//
-//  CollectionDetailViewController.swift
-//  BookishMac
-//
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 //  Created by Sam Deane on 22/08/2018.
-//  Copyright © 2018 Elegant Chaos Limited. All rights reserved.
-//
+//  All code (c) 2018 - present day, Elegant Chaos Limited.
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 import Cocoa
 import BookishModel

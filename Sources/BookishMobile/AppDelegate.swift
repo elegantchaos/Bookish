@@ -1,10 +1,7 @@
-//
-//  AppDelegate.swift
-//  Bookish iOS
-//
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 //  Created by Sam Deane on 20/08/2018.
-//  Copyright © 2018 Elegant Chaos Limited. All rights reserved.
-//
+//  All code (c) 2018 - present day, Elegant Chaos Limited.
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 import UIKit
 import CoreData
