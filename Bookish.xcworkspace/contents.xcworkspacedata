@@ -2,6 +2,12 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:Bookish/Bookish.xcodeproj">
+      location = "group:README.md">
+   </FileRef>
+   <FileRef
+      location = "group:Bookish.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:Dependencies/Logger/Logger.xcodeproj">
    </FileRef>
 </Workspace>
