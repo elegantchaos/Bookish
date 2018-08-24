@@ -9,14 +9,10 @@
 import Cocoa
 import BookishModel
 
-class AuthorsTransformer: ValueTransformer {
+class AuthorsTransformer: ValueTransformer, CoreDataTransformer {
     static let name = NSValueTransformerName(rawValue: "AuthorsToString")
 
     var managedObjectContext: NSManagedObjectContext?
-    
-    override init() {
-        print("init")
-    }
     
     override class func transformedValueClass() -> AnyClass {
         return NSString.self
