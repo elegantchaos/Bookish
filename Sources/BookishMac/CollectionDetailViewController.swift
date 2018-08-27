@@ -6,11 +6,20 @@
 import Cocoa
 import BookishModel
 
+struct RowSpecification {
+    let binding: String
+    let label: String
+}
+
 class CollectionDetailViewController: CollectionViewController, NSTableViewDataSource, NSTableViewDelegate {
     @IBOutlet weak var indexView: CollectionIndexViewController!
     @IBOutlet weak var indexArray: NSArrayController!
     
-    let headings = ["name", "summary"]
+    let rows = [
+        RowSpecification(binding: "name", label: "name"),
+        RowSpecification(binding: "summary", label: "summary"),
+        RowSpecification(binding: "volume.author.name", label: "author")
+    ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,24 +37,24 @@ class CollectionDetailViewController: CollectionViewController, NSTableViewDataS
     }
  
     func numberOfRows(in tableView: NSTableView) -> Int {
-        return headings.count
+        return rows.count
     }
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         var view: NSView? = nil
-        if row < headings.count, let id = tableColumn?.identifier, let nib = tableView.registeredNibsByIdentifier?[id] {
-            let heading = headings[row]
+        if row < rows.count, let id = tableColumn?.identifier, let nib = tableView.registeredNibsByIdentifier?[id] {
+            let rowSpec = rows[row]
             var objects: NSArray? = nil
             if nib.instantiate(withOwner: tableView, topLevelObjects: &objects) {
                 if let objects = objects?.compactMap({ $0 as? NSView}), objects.count > 0 {
                     view = objects[0]
                     let column = tableColumn?.identifier.rawValue
                     if column == "heading", let field = view as? NSTextField {
-                        field.stringValue = heading
+                        field.stringValue = rowSpec.label
                     }
                         
                     else if column == "value" {
-                        view?.bind(NSBindingName(rawValue: "value"), to:indexArray, withKeyPath:"selection.\(heading)", options: [:])
+                        view?.bind(NSBindingName(rawValue: "value"), to:indexArray, withKeyPath:"selection.\(rowSpec.binding)", options: [:])
                     }
                 }
             }

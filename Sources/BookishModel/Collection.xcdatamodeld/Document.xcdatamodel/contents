@@ -7,7 +7,7 @@
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="summary" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="books" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Book" inverseName="edition" inverseEntity="Book" syncable="YES"/>
-        <relationship name="volumes" maxCount="1" deletionRule="Nullify" destinationEntity="Volume" inverseName="editions" inverseEntity="Volume" syncable="YES"/>
+        <relationship name="volume" maxCount="1" deletionRule="Nullify" destinationEntity="Volume" inverseName="editions" inverseEntity="Volume" syncable="YES"/>
     </entity>
     <entity name="Group" representedClassName=".Group" parentEntity="Person" syncable="YES" codeGenerationType="category">
         <relationship name="members" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Person" inverseName="groups" inverseEntity="Person" syncable="YES"/>
@@ -26,7 +26,7 @@
     <entity name="Volume" representedClassName=".Volume" syncable="YES" codeGenerationType="category">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="author" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Person" inverseName="authored" inverseEntity="Person" syncable="YES"/>
-        <relationship name="editions" toMany="YES" minCount="1" deletionRule="Nullify" destinationEntity="Edition" inverseName="volumes" inverseEntity="Edition" syncable="YES"/>
+        <relationship name="editions" toMany="YES" minCount="1" deletionRule="Nullify" destinationEntity="Edition" inverseName="volume" inverseEntity="Edition" syncable="YES"/>
         <relationship name="editor" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Person" inverseName="edited" inverseEntity="Person" syncable="YES"/>
         <relationship name="series" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Series" inverseName="volumes" inverseEntity="Series" syncable="YES"/>
     </entity>

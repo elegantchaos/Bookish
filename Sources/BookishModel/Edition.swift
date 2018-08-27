@@ -17,7 +17,7 @@ public class Edition: NSManagedObject {
         Edition.untitledCount += 1
         
         if let context = managedObjectContext {
-            volumes = Volume(context: context)
+            volume = Volume(context: context)
         }
     }
 }
