@@ -20,7 +20,7 @@ class AuthorsTransformer: ValueTransformer, CoreDataTransformer {
     }
     
     override func transformedValue(_ value: Any?) -> Any? {
-        guard let authors = value as? Set<Author> else {
+        guard let authors = value as? Set<Person> else {
             return ""
         }
         
@@ -29,12 +29,12 @@ class AuthorsTransformer: ValueTransformer, CoreDataTransformer {
     }
     
     override func reverseTransformedValue(_ value: Any?) -> Any? {
-        var result: [Author] = []
+        var result: [Person] = []
         if let text = value as? String, let context = managedObjectContext {
             let names = text.split(separator: ",")
             print(names)
             for name in names {
-                let author = Author(context: context)
+                let author = Person(context: context)
                 author.name = String(name)
                 result.append(author)
             }

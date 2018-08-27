@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14315.12.1" systemVersion="17G2208" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Book" representedClassName="Book" syncable="YES" codeGenerationType="category">
+        <relationship name="edition" maxCount="1" deletionRule="Nullify" destinationEntity="Edition" inverseName="books" inverseEntity="Edition" syncable="YES"/>
+    </entity>
+    <entity name="Edition" representedClassName=".Edition" syncable="YES" codeGenerationType="category">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="summary" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="books" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Book" inverseName="edition" inverseEntity="Book" syncable="YES"/>
+        <relationship name="volumes" maxCount="1" deletionRule="Nullify" destinationEntity="Volume" inverseName="editions" inverseEntity="Volume" syncable="YES"/>
+    </entity>
+    <entity name="Group" representedClassName=".Group" parentEntity="Person" syncable="YES" codeGenerationType="category">
+        <relationship name="members" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Person" inverseName="groups" inverseEntity="Person" syncable="YES"/>
+    </entity>
+    <entity name="Person" representedClassName=".Person" syncable="YES" codeGenerationType="category">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="notes" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="authored" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Volume" inverseName="author" inverseEntity="Volume" syncable="YES"/>
+        <relationship name="edited" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Volume" inverseName="editor" inverseEntity="Volume" syncable="YES"/>
+        <relationship name="groups" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Group" inverseName="members" inverseEntity="Group" syncable="YES"/>
+    </entity>
+    <entity name="Series" representedClassName=".Series" syncable="YES" codeGenerationType="category">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="volumes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Volume" inverseName="series" inverseEntity="Volume" syncable="YES"/>
+    </entity>
+    <entity name="Volume" representedClassName=".Volume" syncable="YES" codeGenerationType="category">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="author" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Person" inverseName="authored" inverseEntity="Person" syncable="YES"/>
+        <relationship name="editions" toMany="YES" minCount="1" deletionRule="Nullify" destinationEntity="Edition" inverseName="volumes" inverseEntity="Edition" syncable="YES"/>
+        <relationship name="editor" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Person" inverseName="edited" inverseEntity="Person" syncable="YES"/>
+        <relationship name="series" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Series" inverseName="volumes" inverseEntity="Series" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Person" positionX="-341.4375" positionY="286.09375" width="128" height="120"/>
+        <element name="Group" positionX="-334.8046875" positionY="457.80859375" width="128" height="60"/>
+        <element name="Edition" positionX="-645.12109375" positionY="194.921875" width="128" height="105"/>
+        <element name="Series" positionX="-645.55859375" positionY="438.640625" width="128" height="75"/>
+        <element name="Volume" positionX="-800.7265625" positionY="295.78515625" width="128" height="120"/>
+        <element name="Book" positionX="-889.52734375" positionY="79.94140625" width="128" height="60"/>
+    </elements>
+</model>
