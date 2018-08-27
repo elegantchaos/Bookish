@@ -42,21 +42,16 @@ class CollectionDetailViewController: CollectionViewController, NSTableViewDataS
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         var view: NSView? = nil
-        if row < rows.count, let id = tableColumn?.identifier, let nib = tableView.registeredNibsByIdentifier?[id] {
+        if row < rows.count, let columnID = tableColumn?.identifier {
+            let columnName = columnID.rawValue
             let rowSpec = rows[row]
-            var objects: NSArray? = nil
-            if nib.instantiate(withOwner: tableView, topLevelObjects: &objects) {
-                if let objects = objects?.compactMap({ $0 as? NSView}), objects.count > 0 {
-                    view = objects[0]
-                    let column = tableColumn?.identifier.rawValue
-                    if column == "heading", let field = view as? NSTextField {
-                        field.stringValue = rowSpec.label
-                    }
-                        
-                    else if column == "value" {
-                        view?.bind(NSBindingName(rawValue: "value"), to:indexArray, withKeyPath:"selection.\(rowSpec.binding)", options: [:])
-                    }
-                }
+            view = tableView.makeView(withIdentifier: columnID, owner: self)
+            if columnName == "heading", let field = view as? NSTextField {
+                field.stringValue = rowSpec.label
+            }
+                
+            else if columnName == "value" {
+                view?.bind(NSBindingName(rawValue: "objectValue"), to:indexArray, withKeyPath:"selection.\(rowSpec.binding)", options: [:])
             }
         }
         
