@@ -10,7 +10,7 @@ class CollectionDetailViewController: CollectionViewController, NSTableViewDataS
     @IBOutlet weak var indexView: CollectionIndexViewController!
     @IBOutlet weak var indexArray: NSArrayController!
     
-    let headings = ["Name", "Summary"]
+    let headings = ["name", "summary"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,41 +21,36 @@ class CollectionDetailViewController: CollectionViewController, NSTableViewDataS
     }
     
     override func viewWillAppear() {
-        // we really should be able to bind the array to the object context in IB, but
-        // the document value is set relatively late, so it's safer to do it here
-//        if let context = document?.managedObjectContext {
-//            indexArray.managedObjectContext = context
-            indexArray.fetch(self)
-//        }
-
         super.viewWillAppear()
+
+        // ensure that the table is populated
+        indexArray.fetch(self)
     }
  
     func numberOfRows(in tableView: NSTableView) -> Int {
         return headings.count
     }
     
-    @objc func blah() -> String {
-        return "blah"
-    }
-    
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        if row < headings.count {
+        var view: NSView? = nil
+        if row < headings.count, let id = tableColumn?.identifier, let nib = tableView.registeredNibsByIdentifier?[id] {
             let heading = headings[row]
-            let column = tableColumn?.identifier.rawValue
-            if column == "heading" {
-                let view = NSTextField(frame: NSZeroRect)
-                view.stringValue = heading
-                return view
-            }
-            
-            else if column == "value" {
-                let view = NSTextField(frame: NSZeroRect)
-                view.bind(NSBindingName(rawValue: "value"), to:indexArray, withKeyPath:"selection.\(heading.lowercased())", options: [:])
-                return view
+            var objects: NSArray? = nil
+            if nib.instantiate(withOwner: tableView, topLevelObjects: &objects) {
+                if let objects = objects?.compactMap({ $0 as? NSView}), objects.count > 0 {
+                    view = objects[0]
+                    let column = tableColumn?.identifier.rawValue
+                    if column == "heading", let field = view as? NSTextField {
+                        field.stringValue = heading
+                    }
+                        
+                    else if column == "value" {
+                        view?.bind(NSBindingName(rawValue: "value"), to:indexArray, withKeyPath:"selection.\(heading)", options: [:])
+                    }
+                }
             }
         }
         
-        return nil
+        return view
     }
 }
