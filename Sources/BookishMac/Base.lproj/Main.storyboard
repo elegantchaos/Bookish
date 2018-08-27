@@ -781,19 +781,19 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dnp-IN-cGx">
-                                <rect key="frame" x="4" y="22" width="195" height="320"/>
+                                <rect key="frame" x="0.0" y="22" width="199" height="320"/>
                                 <clipView key="contentView" id="MeP-Ej-IYa">
-                                    <rect key="frame" x="0.0" y="0.0" width="195" height="320"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="199" height="320"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" autosaveColumns="NO" rowSizeStyle="automatic" headerView="0cg-lw-pkC" viewBased="YES" id="jZN-rJ-ulS">
-                                            <rect key="frame" x="0.0" y="0.0" width="195" height="297"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="199" height="297"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
-                                                <tableColumn width="192" minWidth="40" maxWidth="1000" id="Jbk-o7-OJL">
+                                                <tableColumn width="196" minWidth="40" maxWidth="1000" id="Jbk-o7-OJL">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Books">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -807,11 +807,11 @@
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView id="hzh-6t-Z3h">
-                                                            <rect key="frame" x="1" y="1" width="192" height="17"/>
+                                                            <rect key="frame" x="1" y="1" width="196" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="sYK-UP-Ryg">
-                                                                    <rect key="frame" x="-2" y="0.0" width="196" height="17"/>
+                                                                    <rect key="frame" x="2" y="0.0" width="196" height="17"/>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="kiv-p0-HhD">
                                                                         <font key="font" metaFont="system"/>
                                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -824,7 +824,7 @@
                                                             </subviews>
                                                             <constraints>
                                                                 <constraint firstItem="sYK-UP-Ryg" firstAttribute="top" secondItem="hzh-6t-Z3h" secondAttribute="top" id="OCY-33-dlv"/>
-                                                                <constraint firstItem="sYK-UP-Ryg" firstAttribute="leading" secondItem="hzh-6t-Z3h" secondAttribute="leading" id="Squ-1V-H9i"/>
+                                                                <constraint firstItem="sYK-UP-Ryg" firstAttribute="leading" secondItem="hzh-6t-Z3h" secondAttribute="leading" constant="4" id="Squ-1V-H9i"/>
                                                                 <constraint firstAttribute="bottom" secondItem="sYK-UP-Ryg" secondAttribute="bottom" id="egs-2S-LAW"/>
                                                                 <constraint firstAttribute="trailing" secondItem="sYK-UP-Ryg" secondAttribute="trailing" id="rUW-ly-roh"/>
                                                             </constraints>
@@ -851,7 +851,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <tableHeaderView key="headerView" id="0cg-lw-pkC">
-                                    <rect key="frame" x="0.0" y="0.0" width="195" height="23"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="199" height="23"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableHeaderView>
                             </scrollView>
@@ -889,7 +889,7 @@
                             <constraint firstItem="yM9-Be-eOr" firstAttribute="top" secondItem="dnp-IN-cGx" secondAttribute="bottom" id="Lu9-xw-96q"/>
                             <constraint firstAttribute="bottom" secondItem="1gF-aY-ShN" secondAttribute="bottom" id="gEU-Ta-j1d"/>
                             <constraint firstAttribute="trailing" secondItem="dnp-IN-cGx" secondAttribute="trailing" id="gWF-qi-XZz"/>
-                            <constraint firstItem="dnp-IN-cGx" firstAttribute="leading" secondItem="JCM-bJ-k8z" secondAttribute="leading" constant="4" id="kOn-Qv-7Jo"/>
+                            <constraint firstItem="dnp-IN-cGx" firstAttribute="leading" secondItem="JCM-bJ-k8z" secondAttribute="leading" id="kOn-Qv-7Jo"/>
                             <constraint firstItem="dnp-IN-cGx" firstAttribute="top" secondItem="JCM-bJ-k8z" secondAttribute="top" id="srD-PA-rop"/>
                             <constraint firstItem="yM9-Be-eOr" firstAttribute="leading" secondItem="JCM-bJ-k8z" secondAttribute="leading" id="uGO-Yp-zTw"/>
                             <constraint firstItem="1gF-aY-ShN" firstAttribute="leading" secondItem="yM9-Be-eOr" secondAttribute="trailing" id="uhe-lZ-E9p"/>

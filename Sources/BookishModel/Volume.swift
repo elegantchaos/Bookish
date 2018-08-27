@@ -7,4 +7,13 @@ import CoreData
 
 public class Volume: NSManagedObject {
     
+    public override func awakeFromInsert() {
+        name = "Untitled \(Edition.untitledCount)"
+        Edition.untitledCount += 1
+        
+        if let context = managedObjectContext {
+            author = Person(context: context)
+        }
+    }
+
 }
