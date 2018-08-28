@@ -53,7 +53,9 @@ class CollectionDetailViewController: CollectionViewController, NSTableViewDataS
             }
                 
             else if columnName == "value" {
-                view?.bind(NSBindingName(rawValue: "objectValue"), to:indexArray, withKeyPath:"selection.\(rowSpec.binding)", options: [:])
+                if let subview = view?.subviews.first as? NSTextField {
+                    subview.bind(NSBindingName(rawValue: "value"), to:indexArray, withKeyPath:"selection.\(rowSpec.binding)", options: [:])
+                }
             }
         }
         
