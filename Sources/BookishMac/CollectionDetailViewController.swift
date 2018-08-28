@@ -17,8 +17,10 @@ class CollectionDetailViewController: CollectionViewController, NSTableViewDataS
     
     let rows = [
         RowSpecification(binding: "name", label: "name"),
-        RowSpecification(binding: "summary", label: "summary"),
-        RowSpecification(binding: "volume.author.name", label: "author")
+        RowSpecification(binding: "notes", label: "notes"),
+        RowSpecification(binding: "subtitle", label: "subtitle"),
+        RowSpecification(binding: "format", label: "format"),
+        RowSpecification(binding: "isbn", label: "isbn"),
     ]
     
     override func viewDidLoad() {

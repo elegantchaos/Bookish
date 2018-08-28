@@ -12,6 +12,7 @@ class CollectionDocument: PersistentDocument {
     }
 
     override func makeWindowControllers() {
+        let book = Book(context: managedObjectContext!)
         let viewModel = CollectionDocumentViewModel(document: self)
         let windowController = Application.sharedInstance.documentWindowControllerFactory.instantiateController(for: viewModel)
         self.addWindowController(windowController)

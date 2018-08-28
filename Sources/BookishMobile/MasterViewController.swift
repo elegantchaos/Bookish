@@ -34,7 +34,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     @objc
     func insertNewObject(_ sender: Any) {
         let context = self.fetchedResultsController.managedObjectContext
-        let newEvent = Edition(context: context)
+        let newEvent = Book(context: context)
              
         // If appropriate, configure the new managed object.
         let date = Date()
@@ -78,8 +78,8 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        let edition = fetchedResultsController.object(at: indexPath)
-        configureCell(cell, withEdition: edition)
+        let book = fetchedResultsController.object(at: indexPath)
+        configureCell(cell, withBook: book)
         return cell
     }
 
@@ -104,18 +104,18 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         }
     }
 
-    func configureCell(_ cell: UITableViewCell, withEdition edition: Edition) {
-        cell.textLabel!.text = edition.name
+    func configureCell(_ cell: UITableViewCell, withBook book: Book) {
+        cell.textLabel!.text = book.name
     }
 
     // MARK: - Fetched results controller
 
-    var fetchedResultsController: NSFetchedResultsController<Edition> {
+    var fetchedResultsController: NSFetchedResultsController<Book> {
         if _fetchedResultsController != nil {
             return _fetchedResultsController!
         }
         
-        let fetchRequest: NSFetchRequest<Edition> = Edition.fetchRequest()
+        let fetchRequest: NSFetchRequest<Book> = Book.fetchRequest()
         
         // Set the batch size to a suitable number.
         fetchRequest.fetchBatchSize = 20
@@ -142,7 +142,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         
         return _fetchedResultsController!
     }    
-    var _fetchedResultsController: NSFetchedResultsController<Edition>? = nil
+    var _fetchedResultsController: NSFetchedResultsController<Book>? = nil
 
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.beginUpdates()
@@ -166,9 +166,9 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
             case .delete:
                 tableView.deleteRows(at: [indexPath!], with: .fade)
             case .update:
-                configureCell(tableView.cellForRow(at: indexPath!)!, withEdition: anObject as! Edition)
+                configureCell(tableView.cellForRow(at: indexPath!)!, withBook: anObject as! Book)
             case .move:
-                configureCell(tableView.cellForRow(at: indexPath!)!, withEdition: anObject as! Edition)
+                configureCell(tableView.cellForRow(at: indexPath!)!, withBook: anObject as! Book)
                 tableView.moveRow(at: indexPath!, to: newIndexPath!)
         }
     }

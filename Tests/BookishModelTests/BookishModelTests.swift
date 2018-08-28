@@ -17,10 +17,10 @@ class BookishModelTests: XCTestCase {
         }
         
         let context = container.viewContext
-        let edition = Edition(context: context)
-        edition.name = "Test"
-        edition.summary = "Test"
-        context.insert(edition)
+        let book = Book(context: context)
+        book.name = "Test"
+        book.summary = "Test"
+        context.insert(book)
         
         do {
             try context.save()

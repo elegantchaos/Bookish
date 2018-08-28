@@ -900,7 +900,7 @@
                     </connections>
                 </viewController>
                 <customObject id="Jsc-1E-0Rn" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-                <arrayController mode="entity" entityName="Edition" alwaysUsesMultipleValuesMarker="YES" id="gjv-NN-VkV">
+                <arrayController mode="entity" entityName="Book" alwaysUsesMultipleValuesMarker="YES" id="gjv-NN-VkV">
                     <connections>
                         <binding destination="cSd-7W-hzi" name="managedObjectContext" keyPath="self.cvm.managedObjectContext" id="O9C-yN-jLQ"/>
                         <binding destination="cSd-7W-hzi" name="selectionIndexes" keyPath="self.cvm.selectedIndexes" id="iTu-h5-N0J"/>
@@ -1025,7 +1025,7 @@
                     </connections>
                 </viewController>
                 <customObject id="dg1-Od-cPv" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-                <arrayController mode="entity" entityName="Edition" id="v2c-Ux-afh">
+                <arrayController mode="entity" entityName="Book" id="v2c-Ux-afh">
                     <connections>
                         <binding destination="TBH-Sa-Ff0" name="managedObjectContext" keyPath="self.cvm.managedObjectContext" id="MG5-4b-RV1"/>
                         <binding destination="TBH-Sa-Ff0" name="selectionIndexes" keyPath="self.cvm.selectedIndexes" id="gAG-9w-eit"/>
