@@ -295,6 +295,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		221F27272136EC0500DC2DC7 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				22143FCE212EF9CC00B689DF /* DocumentWindowController.swift */,
+				22143FD421300F9300B689DF /* CoreDataTransformers.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
 		22429312212ADC4300E70510 /* BookishMobile */ = {
 			isa = PBXGroup;
 			children = (
@@ -333,8 +342,6 @@
 			children = (
 				22DD42472126D6DA0070C85A /* Application.swift */,
 				22143FD2212F0F2500B689DF /* AuthorsTransformer.swift */,
-				22143FCE212EF9CC00B689DF /* DocumentWindowController.swift */,
-				22143FD421300F9300B689DF /* CoreDataTransformers.swift */,
 				22429402212C3C7400E70510 /* ViewExtensions.swift */,
 				22143FD0212F076000B689DF /* CollectionRootViewController.swift */,
 				22DD42492126D6DA0070C85A /* CollectionViewController.swift */,
@@ -344,6 +351,7 @@
 				22429405212D945C00E70510 /* CollectionDetailViewController.swift */,
 				22DD424B2126D6DA0070C85A /* CollectionDocument.swift */,
 				22143FCC212EE79100B689DF /* CollectionDocumentViewModel.swift */,
+				221F27272136EC0500DC2DC7 /* Utilities */,
 				22DD42502126D6DB0070C85A /* Assets.xcassets */,
 				22DD42522126D6DB0070C85A /* Main.storyboard */,
 				22DD42552126D6DB0070C85A /* Info.plist */,

@@ -115,4 +115,8 @@ class CollectionDetailViewController: CollectionViewController, NSTableViewDataS
         
         return view
     }
+    
+    @IBAction func insertPerson(_ sender: Any) {
+        indexView.insertPerson(sender)
+    }
 }

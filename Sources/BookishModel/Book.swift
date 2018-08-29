@@ -15,21 +15,8 @@ public class Book: NSManagedObject {
         Book.untitledCount += 1
         
         if let context = managedObjectContext {
-            
-            let request: NSFetchRequest<Role> = Role.fetchRequest()
-            request.predicate = NSPredicate(format: "name = \"author\"")
-            
-            var role: Role?
-            if let results = try? context.fetch(request), results.count > 0 {
-                role = results[0]
-            } else {
-                let newRole = Role(context: context)
-                newRole.name = "author"
-                role = newRole
-            }
-            
+            let role = Role.role(named: "author", context: context)
             let authorEntry = PersonEntry(context: context)
-            authorEntry.addToBooks(self)
             authorEntry.person = Person(context: context)
             authorEntry.role = role
             self.addToPeople(authorEntry)

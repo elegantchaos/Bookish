@@ -14,7 +14,7 @@ import AppKit
 
 protocol DocumentWindowController {
     associatedtype ViewModel: DocumentViewModel
-    var viewModel: ViewModel? { get set }
+    var viewModel: ViewModel? { get set }    
 }
 
 /**

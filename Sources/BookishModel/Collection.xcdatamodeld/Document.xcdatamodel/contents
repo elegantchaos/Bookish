@@ -29,9 +29,9 @@
         <relationship name="roles" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PersonEntry" inverseName="person" inverseEntity="PersonEntry" syncable="YES"/>
     </entity>
     <entity name="PersonEntry" representedClassName=".PersonEntry" syncable="YES" codeGenerationType="category">
-        <relationship name="books" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Book" inverseName="people" inverseEntity="Book" syncable="YES"/>
-        <relationship name="person" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Person" inverseName="roles" inverseEntity="Person" syncable="YES"/>
-        <relationship name="role" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Role" inverseName="people" inverseEntity="Role" syncable="YES"/>
+        <relationship name="books" toMany="YES" minCount="1" deletionRule="Nullify" destinationEntity="Book" inverseName="people" inverseEntity="Book" syncable="YES"/>
+        <relationship name="person" maxCount="1" deletionRule="Nullify" destinationEntity="Person" inverseName="roles" inverseEntity="Person" syncable="YES"/>
+        <relationship name="role" maxCount="1" deletionRule="Nullify" destinationEntity="Role" inverseName="people" inverseEntity="Role" syncable="YES"/>
     </entity>
     <entity name="Publisher" representedClassName=".Publisher" syncable="YES" codeGenerationType="category">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
