@@ -342,20 +342,17 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Insert" id="KpK-bQ-eVd">
                                     <items>
-                                        <menuItem title="Author" identifier="author" id="0wK-5S-QbN">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                        <menuItem title="Author" keyEquivalent="A" identifier="author" id="0wK-5S-QbN">
                                             <connections>
                                                 <action selector="insertPerson:" target="Ady-hI-5gd" id="FYD-Pa-SPs"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Editor" identifier="editor" id="2uE-bf-oad">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                        <menuItem title="Editor" keyEquivalent="E" identifier="editor" id="2uE-bf-oad">
                                             <connections>
                                                 <action selector="insertPerson:" target="Ady-hI-5gd" id="lAS-OQ-3Rx"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Illustrator" identifier="illustrator" id="zfG-qk-QZw">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                        <menuItem title="Illustrator" keyEquivalent="I" identifier="illustrator" id="zfG-qk-QZw">
                                             <connections>
                                                 <action selector="insertPerson:" target="Ady-hI-5gd" id="OKh-Dg-NzN"/>
                                             </connections>

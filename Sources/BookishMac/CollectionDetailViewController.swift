@@ -115,8 +115,23 @@ class CollectionDetailViewController: CollectionViewController, NSTableViewDataS
         
         return view
     }
-    
+
     @IBAction func insertPerson(_ sender: Any) {
-        indexView.insertPerson(sender)
+        if let item = sender as? NSMenuItem  {
+            if let type = item.identifier?.rawValue {
+                if let selection = indexArray.selectedObjects as? [Book] {
+                    let context = cvm.managedObjectContext
+                    let role = Role.role(named: type, context: context)
+                    let entry = PersonEntry(context: context)
+                    entry.person = Person(context: context)
+                    entry.role = role
+                    for book in selection {
+                        book.addToPeople(entry)
+                    }
+                }
+            }
+            updatePeople()
+        }
     }
+
 }

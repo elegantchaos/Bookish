@@ -31,20 +31,6 @@ class CollectionIndexViewController: CollectionViewController {
     }
     
     @IBAction func insertPerson(_ sender: Any) {
-        if let item = sender as? NSMenuItem  {
-            if let type = item.identifier?.rawValue {
-                if let selection = indexArray.selectedObjects as? [Book] {
-                    for book in selection {
-                        let context = cvm.managedObjectContext
-                        let role = Role.role(named: type, context: context)
-                        let entry = PersonEntry(context: context)
-                        entry.person = Person(context: context)
-                        entry.role = role
-                        book.addToPeople(entry)
-                    }
-                }
-            }
-        }
+        detailView.insertPerson(sender)
     }
-
 }
