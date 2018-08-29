@@ -15,7 +15,7 @@
         <attribute name="released" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="subtitle" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="width" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
-        <relationship name="people" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PersonEntry" inverseName="book" inverseEntity="PersonEntry" syncable="YES"/>
+        <relationship name="people" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PersonEntry" inverseName="books" inverseEntity="PersonEntry" syncable="YES"/>
         <relationship name="publisher" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Publisher" inverseName="books" inverseEntity="Publisher" syncable="YES"/>
         <relationship name="series" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Series" inverseName="books" inverseEntity="Series" syncable="YES"/>
     </entity>
@@ -29,7 +29,7 @@
         <relationship name="roles" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PersonEntry" inverseName="person" inverseEntity="PersonEntry" syncable="YES"/>
     </entity>
     <entity name="PersonEntry" representedClassName=".PersonEntry" syncable="YES" codeGenerationType="category">
-        <relationship name="book" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Book" inverseName="people" inverseEntity="Book" syncable="YES"/>
+        <relationship name="books" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Book" inverseName="people" inverseEntity="Book" syncable="YES"/>
         <relationship name="person" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Person" inverseName="roles" inverseEntity="Person" syncable="YES"/>
         <relationship name="role" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Role" inverseName="people" inverseEntity="Role" syncable="YES"/>
     </entity>

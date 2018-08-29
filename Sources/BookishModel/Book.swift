@@ -29,9 +29,10 @@ public class Book: NSManagedObject {
             }
             
             let authorEntry = PersonEntry(context: context)
-            authorEntry.book = self
+            authorEntry.addToBooks(self)
             authorEntry.person = Person(context: context)
             authorEntry.role = role
+            self.addToPeople(authorEntry)
         }
     }
     

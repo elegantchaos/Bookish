@@ -7,4 +7,8 @@ import CoreData
 
 public class Person: NSManagedObject {
     
+    public override func awakeFromInsert() {
+        super.awakeFromInsert()
+        name = "Untitled Person"
+    }
 }
