@@ -9,6 +9,7 @@ class DateTransformer: ValueTransformer {
     static let name = NSValueTransformerName(rawValue: "DateToString")
     
     let formatter: DateFormatter
+    let detector: NSDataDetector?
     
     override init() {
         let f = DateFormatter()
@@ -17,6 +18,8 @@ class DateTransformer: ValueTransformer {
         f.locale = Locale.current
         f.doesRelativeDateFormatting = true
         self.formatter = f
+        
+        self.detector = try? NSDataDetector(types: NSTextCheckingResult.CheckingType.date.rawValue)
     }
     
     override class func allowsReverseTransformation() -> Bool {
@@ -36,12 +39,17 @@ class DateTransformer: ValueTransformer {
             return value
         }
         
-        
-        guard let date = formatter.date(from: string) else {
-            return value
+        if let date = formatter.date(from: string) {
+            return date
         }
         
-        return date
+        if let matches = detector?.matches(in: string, options: NSRegularExpression.MatchingOptions(), range: NSRange(location: 0, length: string.count)) {
+            if let date = matches.first?.date {
+                return date
+            }
+        }
+        
+        return value
     }
     
 }

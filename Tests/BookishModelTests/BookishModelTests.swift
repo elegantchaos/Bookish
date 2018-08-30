@@ -10,7 +10,7 @@ import CoreData
 class BookishModelTests: XCTestCase {
 
     func testContainer() {
-        let container = PersistentContainer(name: "Document")
+        let container = PersistentContainer(name: "Collection")
         container.persistentStoreDescriptions[0].url = URL(fileURLWithPath: "/dev/null")
         container.loadPersistentStores { (description, error) in
             XCTAssertNil(error)
@@ -19,7 +19,7 @@ class BookishModelTests: XCTestCase {
         let context = container.viewContext
         let book = Book(context: context)
         book.name = "Test"
-        book.summary = "Test"
+        book.notes = "Test"
         context.insert(book)
         
         do {

@@ -18,6 +18,7 @@
 		221F272221359DA200DC2DC7 /* Publisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221F272121359DA200DC2DC7 /* Publisher.swift */; };
 		221F272321359DA200DC2DC7 /* Publisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221F272121359DA200DC2DC7 /* Publisher.swift */; };
 		221F272921382C8E00DC2DC7 /* DateTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221F272821382C8E00DC2DC7 /* DateTransformer.swift */; };
+		221F272A2138425C00DC2DC7 /* Logger.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22143FE8213048B200B689DF /* Logger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		223280C121304BDB00E6E763 /* Logger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22143FE8213048B200B689DF /* Logger.framework */; };
 		22429314212ADC4300E70510 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22429313212ADC4300E70510 /* AppDelegate.swift */; };
 		22429319212ADC4300E70510 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22429318212ADC4300E70510 /* MasterViewController.swift */; };
@@ -134,6 +135,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				221F272A2138425C00DC2DC7 /* Logger.framework in Embed Frameworks */,
 				224293A7212AE0F400E70510 /* BookishModel.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
