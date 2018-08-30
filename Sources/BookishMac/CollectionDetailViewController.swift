@@ -6,9 +6,21 @@
 import Cocoa
 import BookishModel
 
+enum RowType {
+    case text
+    case date
+}
+
 struct RowSpecification {
     let binding: String
     let label: String
+    let type: RowType
+    
+    init(binding: String, label: String? = nil, type: RowType = .text) {
+        self.binding = binding
+        self.label = label ?? binding
+        self.type = type
+    }
 }
 
 class CollectionDetailViewController: CollectionViewController, NSTableViewDataSource, NSTableViewDelegate {
@@ -18,13 +30,15 @@ class CollectionDetailViewController: CollectionViewController, NSTableViewDataS
     
     var people = [PersonEntry]()
     var indexObserver: NSKeyValueObservation?
+    var dateViewID = NSUserInterfaceItemIdentifier(rawValue: "")
     
     let rows = [
-        RowSpecification(binding: "name", label: "name"),
-        RowSpecification(binding: "notes", label: "notes"),
-        RowSpecification(binding: "subtitle", label: "subtitle"),
-        RowSpecification(binding: "format", label: "format"),
-        RowSpecification(binding: "isbn", label: "isbn"),
+        RowSpecification(binding: "format"),
+        RowSpecification(binding: "isbn"),
+        RowSpecification(binding: "notes"),
+        RowSpecification(binding: "published", type: .date),
+        RowSpecification(binding: "added", type: .date),
+        RowSpecification(binding: "modified", type: .date)
     ]
     
     override func viewDidLoad() {
@@ -83,17 +97,21 @@ class CollectionDetailViewController: CollectionViewController, NSTableViewDataS
         var view: NSView? = nil
         if row < (rows.count + people.count), let columnID = tableColumn?.identifier {
             let columnName = columnID.rawValue
-            view = tableView.makeView(withIdentifier: columnID, owner: self)
+            var viewID = columnID
             let isPersonRow = row < people.count
             let index = isPersonRow ? row : row - people.count
+            if !isPersonRow && (columnName == "value") && rows[index].type == .date {
+                viewID = NSUserInterfaceItemIdentifier(rawValue: "date")
+            }
+            view = tableView.makeView(withIdentifier: viewID, owner: self)
             
-            if columnName == "heading", let field = view as? NSTextField {
+            if columnName == "heading", let field = view?.subviews.first as? NSTextField {
                 if isPersonRow {
                     field.stringValue = people[index].role?.name ?? "<unknown role>"
                 } else {
                     field.stringValue = rows[index].label
                 }
-            } else if columnName == "value", let subview = view?.subviews.first as? NSTextField {
+            } else if columnName == "value", let subview = view?.subviews.first {
                 let bound: Any = isPersonRow ? people[index] : indexArray
                 let path = isPersonRow ? "person.name" : "selection.\(rows[index].binding)"
                 subview.bind(NSBindingName(rawValue: "value"), to:bound, withKeyPath:path, options: [:])
