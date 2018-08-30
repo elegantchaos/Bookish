@@ -198,7 +198,6 @@
 		224293F9212C1D7500E70510 /* CollectionIndexViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionIndexViewController.swift; sourceTree = "<group>"; };
 		22429400212C32BF00E70510 /* CollectionWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionWindowController.swift; sourceTree = "<group>"; };
 		22429402212C3C7400E70510 /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
-		22429404212C534700E70510 /* BookishMac.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BookishMac.entitlements; sourceTree = "<group>"; };
 		22429405212D945C00E70510 /* CollectionDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionDetailViewController.swift; sourceTree = "<group>"; };
 		22429407212D958400E70510 /* CollectionSplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionSplitViewController.swift; sourceTree = "<group>"; };
 		22DD42442126D6DA0070C85A /* BookishMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BookishMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -405,7 +404,6 @@
 		22DD423B2126D6DA0070C85A = {
 			isa = PBXGroup;
 			children = (
-				22429404212C534700E70510 /* BookishMac.entitlements */,
 				22DD42792126DDA80070C85A /* Bookish.xcconfig */,
 				22DD42462126D6DA0070C85A /* Sources */,
 				22DD42782126DD3A0070C85A /* Tests */,
@@ -1496,7 +1494,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = BookishMac.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "$(BOOKISH_ENTITLEMENTS_PATH)";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 2H48644JM2;
@@ -1516,7 +1514,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = BookishMac.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "$(BOOKISH_ENTITLEMENTS_PATH)";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 2H48644JM2;

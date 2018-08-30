@@ -15,17 +15,48 @@ class BookishUITests: XCTestCase {
 
         // UI tests must launch the application that they test. Doing this in setup will make sure it happens for each test method.
         XCUIApplication().launch()
-
-        // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
+        XCUIElement.perform(withKeyModifiers: .option) {
+            XCUIApplication().menuBars/*@START_MENU_TOKEN@*/.menuBarItems["File"].menuItems["Close All"]/*[[".menuBarItems[\"File\"]",".menus.menuItems[\"Close All\"]",".menuItems[\"Close All\"]"],[[[-1,2],[-1,1],[-1,0,1]],[[-1,2],[-1,1]]],[2,0]]@END_MENU_TOKEN@*/.click()
+        }
+        XCTAssertEqual(XCUIApplication().windows.count, 0)
     }
 
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testExample() {
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testNewDocument() {
+        // shouldn't have an untitled document at this point
+        let window = XCUIApplication().windows["Untitled"]
+        XCTAssertFalse(window.exists)
+
+        // make a new document
+        let menuBarsQuery = XCUIApplication().menuBars
+        let newMenuItem = menuBarsQuery/*@START_MENU_TOKEN@*/.menuItems["New"]/*[[".menuBarItems[\"File\"]",".menus.menuItems[\"New\"]",".menuItems[\"New\"]"],[[[-1,2],[-1,1],[-1,0,1]],[[-1,2],[-1,1]]],[0]]@END_MENU_TOKEN@*/
+        newMenuItem.click()
+
+        // should now have an untitled document
+        XCTAssertTrue(window.exists)
+        XCTAssertEqual(XCUIApplication().windows.count, 1)
+//
+//        let untitledWindow = XCUIApplication().windows["Untitled"]
+//        untitledWindow.click()
+//
+//        let automatictablecolumnidentifier0Table = untitledWindow/*@START_MENU_TOKEN@*/.tables.containing(.tableColumn, identifier:"AutomaticTableColumnIdentifier.0").element/*[[".splitGroups",".scrollViews.tables.containing(.tableColumn, identifier:\"AutomaticTableColumnIdentifier.0\").element",".tables.containing(.tableColumn, identifier:\"AutomaticTableColumnIdentifier.0\").element"],[[[-1,2],[-1,1],[-1,0,1]],[[-1,2],[-1,1]]],[0]]@END_MENU_TOKEN@*/
+//        automatictablecolumnidentifier0Table.click()
+//        untitledWindow.click()
+//
+//        let splitGroupsQuery = untitledWindow.splitGroups
+//        splitGroupsQuery.children(matching: .textField)["No Selection"].click()
+//
+//        let cell = untitledWindow/*@START_MENU_TOKEN@*/.tables.containing(.tableColumn, identifier:"AutomaticTableColumnIdentifier.0")/*[[".splitGroups",".scrollViews.tables.containing(.tableColumn, identifier:\"AutomaticTableColumnIdentifier.0\")",".tables.containing(.tableColumn, identifier:\"AutomaticTableColumnIdentifier.0\")"],[[[-1,2],[-1,1],[-1,0,1]],[[-1,2],[-1,1]]],[0]]@END_MENU_TOKEN@*/.tableRows.children(matching: .cell).element
+//        cell.typeText("NewBook")
+//        splitGroupsQuery.children(matching: .textField).element(boundBy: 1).click()
+//        cell.typeText("New Subtitle")
+//        automatictablecolumnidentifier0Table.click()
+
     }
+    
+    
 
 }
