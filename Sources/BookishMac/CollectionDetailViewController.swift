@@ -15,7 +15,6 @@ class CollectionDetailViewController: CollectionViewController, NSTableViewDataS
     @IBOutlet weak var indexView: CollectionIndexViewController!
     @IBOutlet weak var indexArray: NSArrayController!
     @IBOutlet weak var detailsView: NSTableView!
-    @IBOutlet weak var peopleView: NSTableView!
     
     var people = [PersonEntry]()
     var indexObserver: NSKeyValueObservation?
@@ -30,15 +29,6 @@ class CollectionDetailViewController: CollectionViewController, NSTableViewDataS
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        if let scrollview = detailsView.enclosingScrollView {
-            for c in scrollview.constraints {
-                print(c)
-            }
-            let constraint = NSLayoutConstraint(item: detailsView, attribute: .height, relatedBy: .equal, toItem: scrollview, attribute: .height, multiplier: 1.0, constant: 0.0)
-            scrollview.addConstraint(constraint)
-        }
-        
         
         // TODO: this is a bit naff as it makes assumptions about the containment hierarchy
         if let parent = self.parent as? NSSplitViewController {
@@ -61,7 +51,7 @@ class CollectionDetailViewController: CollectionViewController, NSTableViewDataS
         super.viewWillDisappear()
     }
     
-    func updatePeople() {
+    func peopleInSelection() -> (Set<PersonEntry>, Set<PersonEntry>) {
         var all = Set<PersonEntry>()
         var common = Set<PersonEntry>()
         if let selection = indexArray.selectedObjects as? [Book] {
@@ -75,67 +65,38 @@ class CollectionDetailViewController: CollectionViewController, NSTableViewDataS
                     all.formUnion(people)
                 }
             }
-            self.people = common.sorted(by: { ($0.person?.name ?? "") < ($1.person?.name ?? "") })
         }
-        
-        self.peopleView.reloadData()
-        self.detailsView.reloadData()
+        return (all, common)
+    }
+    
+    func updatePeople() {
+        let (_, common) = peopleInSelection()
+        people = common.sorted(by: { ($0.person?.name ?? "") < ($1.person?.name ?? "") })
+        detailsView.reloadData()
     }
     
     func numberOfRows(in tableView: NSTableView) -> Int {
-        if tableView == detailsView {
-            return rows.count + people.count
-        } else {
-            return people.count
-        }
+        return rows.count + people.count
     }
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         var view: NSView? = nil
-        if tableView == detailsView {
-            if row < (rows.count + people.count), let columnID = tableColumn?.identifier {
-                let columnName = columnID.rawValue
-                if row < people.count {
-                    let columnName = columnID.rawValue
-                    let entry = people[row]
-                    view = tableView.makeView(withIdentifier: columnID, owner: self)
-                    if columnName == "heading", let field = view as? NSTextField {
-                        field.stringValue = entry.role?.name ?? "<unknown role>"
-                    }
-                        
-                    else if columnName == "value" {
-                        if let subview = view?.subviews.first as? NSTextField {
-                            subview.bind(NSBindingName(rawValue: "value"), to:entry, withKeyPath:"person.name", options: [:])
-                        }
-                    }
+        if row < (rows.count + people.count), let columnID = tableColumn?.identifier {
+            let columnName = columnID.rawValue
+            view = tableView.makeView(withIdentifier: columnID, owner: self)
+            let isPersonRow = row < people.count
+            let index = isPersonRow ? row : row - people.count
+            
+            if columnName == "heading", let field = view as? NSTextField {
+                if isPersonRow {
+                    field.stringValue = people[index].role?.name ?? "<unknown role>"
                 } else {
-                    let rowSpec = rows[row - people.count]
-                    view = tableView.makeView(withIdentifier: columnID, owner: self)
-                    if columnName == "heading", let field = view as? NSTextField {
-                        field.stringValue = rowSpec.label
-                    }
-                        
-                    else if columnName == "value" {
-                        if let subview = view?.subviews.first as? NSTextField {
-                            subview.bind(NSBindingName(rawValue: "value"), to:indexArray, withKeyPath:"selection.\(rowSpec.binding)", options: [:])
-                        }
-                    }
+                    field.stringValue = rows[index].label
                 }
-            }
-        } else {
-            if row < people.count, let columnID = tableColumn?.identifier {
-                let columnName = columnID.rawValue
-                let entry = people[row]
-                view = tableView.makeView(withIdentifier: columnID, owner: self)
-                if columnName == "role", let field = view as? NSTableCellView {
-                    field.objectValue = entry.role?.name ?? "<unknown role>"
-                }
-                    
-                else if columnName == "name" {
-                    if let subview = view?.subviews.first as? NSTextField {
-                        subview.bind(NSBindingName(rawValue: "value"), to:entry, withKeyPath:"person.name", options: [:])
-                    }
-                }
+            } else if columnName == "value", let subview = view?.subviews.first as? NSTextField {
+                let bound: Any = isPersonRow ? people[index] : indexArray
+                let path = isPersonRow ? "person.name" : "selection.\(rows[index].binding)"
+                subview.bind(NSBindingName(rawValue: "value"), to:bound, withKeyPath:path, options: [:])
             }
         }
         
