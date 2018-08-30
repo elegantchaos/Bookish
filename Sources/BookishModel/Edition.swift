@@ -3,7 +3,6 @@
 //  All code (c) 2018 - present day, Elegant Chaos Limited.
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
-import Foundation
 import CoreData
 
 public class Edition: NSManagedObject {
@@ -18,7 +17,7 @@ public class Edition: NSManagedObject {
         Edition.untitledCount += 1
         
         if let context = managedObjectContext {
-            volume = Volume(context: context)
+            volumes = Volume(context: context)
         }
     }
 }

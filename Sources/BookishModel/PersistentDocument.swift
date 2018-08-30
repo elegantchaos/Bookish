@@ -11,9 +11,9 @@ open class PersistentDocument: NSPersistentDocument {
     let modelChannel = Logger("Model")
     override open var managedObjectModel: NSManagedObjectModel {
         get {
-            if let url = Bundle(for: PersistentDocument.self).url(forResource: "Document", withExtension: "momd") {
+            if let url = Bundle(for: PersistentDocument.self).url(forResource: "Collection", withExtension: "momd") {
                 if let model = NSManagedObjectModel(contentsOf: url) {
-                    modelChannel.debug("Loaded model")
+                    modelChannel.debug("loaded collection model")
                     return model
                 }
             }
