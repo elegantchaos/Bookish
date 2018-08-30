@@ -30,6 +30,16 @@ class CollectionDetailViewController: CollectionViewController, NSTableViewDataS
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let scrollview = detailsView.enclosingScrollView {
+            for c in scrollview.constraints {
+                print(c)
+            }
+            let constraint = NSLayoutConstraint(item: detailsView, attribute: .height, relatedBy: .equal, toItem: scrollview, attribute: .height, multiplier: 1.0, constant: 0.0)
+            scrollview.addConstraint(constraint)
+        }
+        
+        
         // TODO: this is a bit naff as it makes assumptions about the containment hierarchy
         if let parent = self.parent as? NSSplitViewController {
             indexView = parent.splitViewItems[0].viewController as? CollectionIndexViewController
@@ -69,11 +79,12 @@ class CollectionDetailViewController: CollectionViewController, NSTableViewDataS
         }
         
         self.peopleView.reloadData()
+        self.detailsView.reloadData()
     }
     
     func numberOfRows(in tableView: NSTableView) -> Int {
         if tableView == detailsView {
-            return rows.count
+            return rows.count + people.count
         } else {
             return people.count
         }
@@ -82,17 +93,32 @@ class CollectionDetailViewController: CollectionViewController, NSTableViewDataS
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         var view: NSView? = nil
         if tableView == detailsView {
-            if row < rows.count, let columnID = tableColumn?.identifier {
+            if row < (rows.count + people.count), let columnID = tableColumn?.identifier {
                 let columnName = columnID.rawValue
-                let rowSpec = rows[row]
-                view = tableView.makeView(withIdentifier: columnID, owner: self)
-                if columnName == "heading", let field = view as? NSTextField {
-                    field.stringValue = rowSpec.label
-                }
-                    
-                else if columnName == "value" {
-                    if let subview = view?.subviews.first as? NSTextField {
-                        subview.bind(NSBindingName(rawValue: "value"), to:indexArray, withKeyPath:"selection.\(rowSpec.binding)", options: [:])
+                if row < people.count {
+                    let columnName = columnID.rawValue
+                    let entry = people[row]
+                    view = tableView.makeView(withIdentifier: columnID, owner: self)
+                    if columnName == "heading", let field = view as? NSTextField {
+                        field.stringValue = entry.role?.name ?? "<unknown role>"
+                    }
+                        
+                    else if columnName == "value" {
+                        if let subview = view?.subviews.first as? NSTextField {
+                            subview.bind(NSBindingName(rawValue: "value"), to:entry, withKeyPath:"person.name", options: [:])
+                        }
+                    }
+                } else {
+                    let rowSpec = rows[row - people.count]
+                    view = tableView.makeView(withIdentifier: columnID, owner: self)
+                    if columnName == "heading", let field = view as? NSTextField {
+                        field.stringValue = rowSpec.label
+                    }
+                        
+                    else if columnName == "value" {
+                        if let subview = view?.subviews.first as? NSTextField {
+                            subview.bind(NSBindingName(rawValue: "value"), to:indexArray, withKeyPath:"selection.\(rowSpec.binding)", options: [:])
+                        }
                     }
                 }
             }
