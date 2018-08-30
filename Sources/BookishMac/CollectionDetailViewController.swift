@@ -9,6 +9,7 @@ import BookishModel
 enum RowType {
     case text
     case date
+    case dateReadOnly
 }
 
 struct RowSpecification {
@@ -37,7 +38,7 @@ class CollectionDetailViewController: CollectionViewController, NSTableViewDataS
         RowSpecification(binding: "isbn"),
         RowSpecification(binding: "notes"),
         RowSpecification(binding: "published", type: .date),
-        RowSpecification(binding: "added", type: .date),
+        RowSpecification(binding: "added", type: .dateReadOnly),
         RowSpecification(binding: "modified", type: .date)
     ]
     
@@ -112,9 +113,13 @@ class CollectionDetailViewController: CollectionViewController, NSTableViewDataS
                     field.stringValue = rows[index].label
                 }
             } else if columnName == "value", let subview = view?.subviews.first {
+                var options = [NSBindingOption:Any]()
+                if !isPersonRow && (rows[index].type == .dateReadOnly) {
+                    options[NSBindingOption(rawValue: "NSValueTransformer")] = ValueTransformer(forName: NSValueTransformerName(rawValue: "DateToString"))
+                }
                 let bound: Any = isPersonRow ? people[index] : indexArray
                 let path = isPersonRow ? "person.name" : "selection.\(rows[index].binding)"
-                subview.bind(NSBindingName(rawValue: "value"), to:bound, withKeyPath:path, options: [:])
+                subview.bind(NSBindingName(rawValue: "value"), to:bound, withKeyPath:path, options: options)
             }
         }
         

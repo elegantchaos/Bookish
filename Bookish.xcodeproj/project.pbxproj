@@ -17,6 +17,7 @@
 		221F272021306C1300DC2DC7 /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221F271E21306C1300DC2DC7 /* Book.swift */; };
 		221F272221359DA200DC2DC7 /* Publisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221F272121359DA200DC2DC7 /* Publisher.swift */; };
 		221F272321359DA200DC2DC7 /* Publisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221F272121359DA200DC2DC7 /* Publisher.swift */; };
+		221F272921382C8E00DC2DC7 /* DateTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221F272821382C8E00DC2DC7 /* DateTransformer.swift */; };
 		223280C121304BDB00E6E763 /* Logger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22143FE8213048B200B689DF /* Logger.framework */; };
 		22429314212ADC4300E70510 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22429313212ADC4300E70510 /* AppDelegate.swift */; };
 		22429319212ADC4300E70510 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22429318212ADC4300E70510 /* MasterViewController.swift */; };
@@ -160,6 +161,7 @@
 		22143FE8213048B200B689DF /* Logger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Logger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		221F271E21306C1300DC2DC7 /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
 		221F272121359DA200DC2DC7 /* Publisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Publisher.swift; sourceTree = "<group>"; };
+		221F272821382C8E00DC2DC7 /* DateTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTransformer.swift; sourceTree = "<group>"; };
 		22429311212ADC4300E70510 /* BookishMobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BookishMobile.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22429313212ADC4300E70510 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		22429318212ADC4300E70510 /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
@@ -343,6 +345,7 @@
 			children = (
 				22DD42472126D6DA0070C85A /* Application.swift */,
 				22143FD2212F0F2500B689DF /* AuthorsTransformer.swift */,
+				221F272821382C8E00DC2DC7 /* DateTransformer.swift */,
 				22143FD0212F076000B689DF /* CollectionRootViewController.swift */,
 				22DD42492126D6DA0070C85A /* CollectionViewController.swift */,
 				22429400212C32BF00E70510 /* CollectionWindowController.swift */,
@@ -921,6 +924,7 @@
 				22DD424C2126D6DA0070C85A /* CollectionDocument.swift in Sources */,
 				22143FCD212EE79100B689DF /* CollectionDocumentViewModel.swift in Sources */,
 				22429408212D958400E70510 /* CollectionSplitViewController.swift in Sources */,
+				221F272921382C8E00DC2DC7 /* DateTransformer.swift in Sources */,
 				22143FD521300F9300B689DF /* CoreDataTransformers.swift in Sources */,
 				22143FD1212F076000B689DF /* CollectionRootViewController.swift in Sources */,
 				22429403212C3C7400E70510 /* ViewExtensions.swift in Sources */,

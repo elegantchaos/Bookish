@@ -15,6 +15,7 @@ class Application: NSObject, NSApplicationDelegate {
     
     func applicationWillFinishLaunching(_ notification: Notification) {
         ValueTransformer.setValueTransformer(AuthorsTransformer(), forName: AuthorsTransformer.name)
+        ValueTransformer.setValueTransformer(DateTransformer(), forName: DateTransformer.name)
     }
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {

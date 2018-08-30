@@ -14,6 +14,9 @@ public class Book: NSManagedObject {
         name = "Untitled \(Book.untitledCount)"
         Book.untitledCount += 1
         
+        added = Date()
+        modified = Date()
+        
         if let context = managedObjectContext {
             let role = Role.role(named: "author", context: context)
             let authorEntry = PersonEntry(context: context)
