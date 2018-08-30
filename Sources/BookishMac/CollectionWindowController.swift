@@ -3,9 +3,11 @@
 //  All code (c) 2018 - present day, Elegant Chaos Limited.
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
-import Cocoa
+import AppKit
+import BookishModel
 
 class CollectionWindowController: NSWindowController, DocumentWindowController {
     var viewModel: CollectionDocumentViewModel?
     typealias ViewModel = CollectionDocumentViewModel
+
 }

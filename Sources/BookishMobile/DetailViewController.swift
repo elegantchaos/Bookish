@@ -26,7 +26,7 @@ class DetailViewController: UIViewController {
         configureView()
     }
 
-    var detailItem: Edition? {
+    var detailItem: Book? {
         didSet {
             // Update the view.
             configureView()
