@@ -8,7 +8,7 @@ import Cocoa
 @NSApplicationMain
 class Application: NSObject, NSApplicationDelegate {
     let documentWindowControllerFactory = DocumentWindowControllerFactory()
-    let uiTesting = CommandLine.arguments.contains("--ui-tests")
+    let uiTesting = CommandLine.arguments.contains("--ui-testing")
     
     override func awakeFromNib() {
         super.awakeFromNib()

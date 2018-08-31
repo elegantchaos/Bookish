@@ -12,7 +12,7 @@ class BookishUITests: XCTestCase {
         continueAfterFailure = false
 
         // launch with the --reset flag to ensure that we start in a known state
-        application.launchArguments = ["-NSTreatUnknownArgumentsAsOpen", "NO", "-ApplePersistenceIgnoreState", "YES"]
+        application.launchArguments = ["-NSTreatUnknownArgumentsAsOpen", "NO", "-ApplePersistenceIgnoreState", "YES", "--ui-testing"]
         application.launch()
         XCTAssertEqual(application.windows.count, 1)
     }
@@ -57,6 +57,12 @@ class BookishUITests: XCTestCase {
         let item = index.staticTexts.element(boundBy: 0)
         XCTAssertEqual(item.value as! String, "Untitled 0")
         item.click()
+        let field = window.textFields["title"]
+        field.click()
+        field.typeKey("a", modifierFlags: .command)
+        field.typeText("Book Title")
+        item.click()
+        XCTAssertEqual(item.value as! String, "Book Title")
     }
     
     
