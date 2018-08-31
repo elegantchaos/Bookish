@@ -8,12 +8,26 @@ import Cocoa
 @NSApplicationMain
 class Application: NSObject, NSApplicationDelegate {
     let documentWindowControllerFactory = DocumentWindowControllerFactory()
+    let uiTesting = CommandLine.arguments.contains("--ui-tests")
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        if uiTesting {
+            resetState()
+        }
+    }
+
     static var sharedInstance: Application {
         return NSApp.delegate as! Application
     }
     
+    func resetState() {
+        let defaultsName = Bundle.main.bundleIdentifier!
+        UserDefaults.standard.removePersistentDomain(forName: defaultsName)
+    }
+    
     func applicationWillFinishLaunching(_ notification: Notification) {
+        
         ValueTransformer.setValueTransformer(AuthorsTransformer(), forName: AuthorsTransformer.name)
         ValueTransformer.setValueTransformer(DateTransformer(), forName: DateTransformer.name)
     }

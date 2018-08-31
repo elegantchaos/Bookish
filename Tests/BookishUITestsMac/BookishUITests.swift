@@ -6,55 +6,57 @@
 import XCTest
 
 class BookishUITests: XCTestCase {
-
+    let application = XCUIApplication()
+    
     override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-
-        // In UI tests it is usually best to stop immediately when a failure occurs.
         continueAfterFailure = false
 
-        // UI tests must launch the application that they test. Doing this in setup will make sure it happens for each test method.
-        XCUIApplication().launch()
-        XCUIElement.perform(withKeyModifiers: .option) {
-            XCUIApplication().menuBars/*@START_MENU_TOKEN@*/.menuBarItems["File"].menuItems["Close All"]/*[[".menuBarItems[\"File\"]",".menus.menuItems[\"Close All\"]",".menuItems[\"Close All\"]"],[[[-1,2],[-1,1],[-1,0,1]],[[-1,2],[-1,1]]],[2,0]]@END_MENU_TOKEN@*/.click()
-        }
-        XCTAssertEqual(XCUIApplication().windows.count, 0)
+        // launch with the --reset flag to ensure that we start in a known state
+        application.launchArguments = ["-NSTreatUnknownArgumentsAsOpen", "NO", "-ApplePersistenceIgnoreState", "YES"]
+        application.launch()
+        XCTAssertEqual(application.windows.count, 1)
     }
 
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
-
-    func testNewDocument() {
-        // shouldn't have an untitled document at this point
-        let window = XCUIApplication().windows["Untitled"]
-        XCTAssertFalse(window.exists)
-
+    
+    func makeEmptyDocument() -> XCUIElement {
+        let count = application.windows.count
+        
         // make a new document
         let menuBarsQuery = XCUIApplication().menuBars
         let newMenuItem = menuBarsQuery/*@START_MENU_TOKEN@*/.menuItems["New"]/*[[".menuBarItems[\"File\"]",".menus.menuItems[\"New\"]",".menuItems[\"New\"]"],[[[-1,2],[-1,1],[-1,0,1]],[[-1,2],[-1,1]]],[0]]@END_MENU_TOKEN@*/
         newMenuItem.click()
-
+        
         // should now have an untitled document
-        XCTAssertTrue(window.exists)
-        XCTAssertEqual(XCUIApplication().windows.count, 1)
-//
-//        let untitledWindow = XCUIApplication().windows["Untitled"]
-//        untitledWindow.click()
-//
-//        let automatictablecolumnidentifier0Table = untitledWindow/*@START_MENU_TOKEN@*/.tables.containing(.tableColumn, identifier:"AutomaticTableColumnIdentifier.0").element/*[[".splitGroups",".scrollViews.tables.containing(.tableColumn, identifier:\"AutomaticTableColumnIdentifier.0\").element",".tables.containing(.tableColumn, identifier:\"AutomaticTableColumnIdentifier.0\").element"],[[[-1,2],[-1,1],[-1,0,1]],[[-1,2],[-1,1]]],[0]]@END_MENU_TOKEN@*/
-//        automatictablecolumnidentifier0Table.click()
-//        untitledWindow.click()
-//
-//        let splitGroupsQuery = untitledWindow.splitGroups
-//        splitGroupsQuery.children(matching: .textField)["No Selection"].click()
-//
-//        let cell = untitledWindow/*@START_MENU_TOKEN@*/.tables.containing(.tableColumn, identifier:"AutomaticTableColumnIdentifier.0")/*[[".splitGroups",".scrollViews.tables.containing(.tableColumn, identifier:\"AutomaticTableColumnIdentifier.0\")",".tables.containing(.tableColumn, identifier:\"AutomaticTableColumnIdentifier.0\")"],[[[-1,2],[-1,1],[-1,0,1]],[[-1,2],[-1,1]]],[0]]@END_MENU_TOKEN@*/.tableRows.children(matching: .cell).element
-//        cell.typeText("NewBook")
-//        splitGroupsQuery.children(matching: .textField).element(boundBy: 1).click()
-//        cell.typeText("New Subtitle")
-//        automatictablecolumnidentifier0Table.click()
-
+        XCTAssertEqual(XCUIApplication().windows.count, count + 1)
+        
+        return application.windows.allElementsBoundByIndex.last!
+    }
+    
+    func closeFrontDocument() {
+        application.menuBars.menuBarItems["File"].menuItems["Close"].click()
+    }
+    
+    func testNewDocument() {
+        XCTAssertEqual(application.windows.count, 1)
+        let _ = makeEmptyDocument()
+        XCTAssertEqual(application.windows.count, 2)
+    }
+    
+    func testCloseDocument() {
+        closeFrontDocument()
+        XCTAssertEqual(application.windows.count, 0)
+    }
+    
+    func testAddBookButton() {
+        let window = application.windows["Untitled"]
+        window.buttons["add-book"].click()
+        let index = window.tables["books"]
+        let item = index.staticTexts.element(boundBy: 0)
+        XCTAssertEqual(item.value as! String, "Untitled 0")
+        item.click()
     }
     
     
