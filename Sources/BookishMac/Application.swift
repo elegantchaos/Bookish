@@ -8,13 +8,30 @@ import Cocoa
 @NSApplicationMain
 class Application: NSObject, NSApplicationDelegate {
     let documentWindowControllerFactory = DocumentWindowControllerFactory()
+    let uiTesting = CommandLine.arguments.contains("--ui-testing")
+    var testDocument = CommandLine.arguments.contains("--test-document")
+    let noBlankDocument = CommandLine.arguments.contains("--no-blank-document")
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        if uiTesting {
+            resetState()
+        }
+    }
+
     static var sharedInstance: Application {
         return NSApp.delegate as! Application
     }
     
+    func resetState() {
+        let defaultsName = Bundle.main.bundleIdentifier!
+        UserDefaults.standard.removePersistentDomain(forName: defaultsName)
+    }
+    
     func applicationWillFinishLaunching(_ notification: Notification) {
+        
         ValueTransformer.setValueTransformer(AuthorsTransformer(), forName: AuthorsTransformer.name)
+        ValueTransformer.setValueTransformer(DateTransformer(), forName: DateTransformer.name)
     }
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
@@ -22,5 +39,9 @@ class Application: NSObject, NSApplicationDelegate {
 
     func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
+    }
+    
+    func applicationShouldOpenUntitledFile(_ sender: NSApplication) -> Bool {
+        return !noBlankDocument
     }
 }

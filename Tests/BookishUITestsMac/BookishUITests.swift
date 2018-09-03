@@ -6,26 +6,97 @@
 import XCTest
 
 class BookishUITests: XCTestCase {
-
+    let application = XCUIApplication()
+    
     override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-
-        // In UI tests it is usually best to stop immediately when a failure occurs.
         continueAfterFailure = false
 
-        // UI tests must launch the application that they test. Doing this in setup will make sure it happens for each test method.
-        XCUIApplication().launch()
-
-        // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
     }
 
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
-
-    func testExample() {
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    
+    func launch(arguments: [String] = []) {
+        // launch with the --reset flag to ensure that we start in a known state
+        application.launchArguments = ["-NSTreatUnknownArgumentsAsOpen", "NO", "-ApplePersistenceIgnoreState", "YES", "--ui-testing"]
+        application.launchArguments.append(contentsOf: arguments)
+        application.launch()
     }
+    
+    func makeEmptyDocument() -> XCUIElement {
+        let count = application.windows.count
+        
+        // make a new document
+        let menuBarsQuery = XCUIApplication().menuBars
+        let newMenuItem = menuBarsQuery/*@START_MENU_TOKEN@*/.menuItems["New"]/*[[".menuBarItems[\"File\"]",".menus.menuItems[\"New\"]",".menuItems[\"New\"]"],[[[-1,2],[-1,1],[-1,0,1]],[[-1,2],[-1,1]]],[0]]@END_MENU_TOKEN@*/
+        newMenuItem.click()
+        
+        // should now have an untitled document
+        XCTAssertEqual(XCUIApplication().windows.count, count + 1)
+        
+        return application.windows.allElementsBoundByIndex.last!
+    }
+    
+    func closeFrontDocument() {
+        application.menuBars.menuBarItems["File"].menuItems["Close"].click()
+    }
+    
+    func testNewDocument() {
+        launch(arguments: ["--no-blank-document"])
+        let _ = makeEmptyDocument()
+    }
+    
+    func testCloseDocument() {
+        launch()
+        closeFrontDocument()
+        XCTAssertEqual(application.windows.count, 0)
+    }
+
+    func firstIndexItem(window: XCUIElement) -> XCUIElement {
+        let index = window.tables["books"]
+        let item = index.staticTexts.element(boundBy: 0)
+        return item
+    }
+    
+    func testAddBookButton() {
+        launch()
+        let window = application.windows["Untitled"]
+        window.buttons["add-book"].click()
+        let item = firstIndexItem(window: window)
+        XCTAssertEqual(item.value as! String, "Untitled 0")
+        item.click()
+        let field = window.textFields["title"]
+        field.click()
+        field.typeKey("a", modifierFlags: .command)
+        field.typeText("Book Title")
+        item.click()
+        XCTAssertEqual(item.value as! String, "Book Title")
+    }
+
+    func testRemoveBookButton() {
+        launch()
+        let window = application.windows["Untitled"]
+        window.buttons["add-book"].click()
+        let item = firstIndexItem(window: window)
+        XCTAssertTrue(item.exists)
+        item.click()
+        window.buttons["remove-book"].click()
+        XCTAssertFalse(item.exists)
+    }
+
+    func testRenamingChangesIndex() {
+        launch(arguments:["--test-document"])
+        let window = application.windows["Untitled"]
+        let item = firstIndexItem(window: window)
+        item.click()
+        let field = window.textFields["title"]
+        field.click()
+        field.typeKey("a", modifierFlags: .command)
+        field.typeText("Book Title")
+        item.click()
+        XCTAssertEqual(item.value as! String, "Book Title")
+    }
+    
 
 }

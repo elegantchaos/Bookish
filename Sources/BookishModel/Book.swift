@@ -14,13 +14,40 @@ public class Book: NSManagedObject {
         name = "Untitled \(Book.untitledCount)"
         Book.untitledCount += 1
         
+        added = Date()
+        modified = Date()
+        
         if let context = managedObjectContext {
-            let role = Role.role(named: "author", context: context)
-            let authorEntry = PersonEntry(context: context)
-            authorEntry.person = Person(context: context)
-            authorEntry.role = role
-            self.addToPeople(authorEntry)
+            let author = Person(context: context)
+            let entry = author.role(as: "author")
+            entry.addToBooks(self)
         }
     }
     
+    public var roles: Set<Role> {
+        var result = Set<Role>()
+        if let people = self.personRoles as? Set<PersonRole> {
+            for entry in people {
+                if let role = entry.role {
+                    result.insert(role)
+                }
+            }
+        }
+        
+        return result
+    }
+
+    public var people: Set<Person> {
+        var result = Set<Person>()
+        if let people = self.personRoles as? Set<PersonRole> {
+            for entry in people {
+                if let person = entry.person {
+                    result.insert(person)
+                }
+            }
+        }
+        
+        return result
+    }
+
 }
