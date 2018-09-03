@@ -11,14 +11,17 @@ class BookishUITests: XCTestCase {
     override func setUp() {
         continueAfterFailure = false
 
-        // launch with the --reset flag to ensure that we start in a known state
-        application.launchArguments = ["-NSTreatUnknownArgumentsAsOpen", "NO", "-ApplePersistenceIgnoreState", "YES", "--ui-testing"]
-        application.launch()
-        XCTAssertEqual(application.windows.count, 1)
     }
 
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
+    }
+    
+    func launch(arguments: [String] = []) {
+        // launch with the --reset flag to ensure that we start in a known state
+        application.launchArguments = ["-NSTreatUnknownArgumentsAsOpen", "NO", "-ApplePersistenceIgnoreState", "YES", "--ui-testing"]
+        application.launchArguments.append(contentsOf: arguments)
+        application.launch()
     }
     
     func makeEmptyDocument() -> XCUIElement {
@@ -40,21 +43,27 @@ class BookishUITests: XCTestCase {
     }
     
     func testNewDocument() {
-        XCTAssertEqual(application.windows.count, 1)
+        launch(arguments: ["--no-blank-document"])
         let _ = makeEmptyDocument()
-        XCTAssertEqual(application.windows.count, 2)
     }
     
     func testCloseDocument() {
+        launch()
         closeFrontDocument()
         XCTAssertEqual(application.windows.count, 0)
     }
-    
-    func testAddBookButton() {
-        let window = application.windows["Untitled"]
-        window.buttons["add-book"].click()
+
+    func firstIndexItem(window: XCUIElement) -> XCUIElement {
         let index = window.tables["books"]
         let item = index.staticTexts.element(boundBy: 0)
+        return item
+    }
+    
+    func testAddBookButton() {
+        launch()
+        let window = application.windows["Untitled"]
+        window.buttons["add-book"].click()
+        let item = firstIndexItem(window: window)
         XCTAssertEqual(item.value as! String, "Untitled 0")
         item.click()
         let field = window.textFields["title"]
@@ -64,7 +73,18 @@ class BookishUITests: XCTestCase {
         item.click()
         XCTAssertEqual(item.value as! String, "Book Title")
     }
-    
+
+    func testRemoveBookButton() {
+        launch()
+        let window = application.windows["Untitled"]
+        window.buttons["add-book"].click()
+        let item = firstIndexItem(window: window)
+        XCTAssertTrue(item.exists)
+        item.click()
+        window.buttons["remove-book"].click()
+        XCTAssertFalse(item.exists)
+    }
+
     
 
 }

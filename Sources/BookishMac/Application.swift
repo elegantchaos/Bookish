@@ -9,6 +9,8 @@ import Cocoa
 class Application: NSObject, NSApplicationDelegate {
     let documentWindowControllerFactory = DocumentWindowControllerFactory()
     let uiTesting = CommandLine.arguments.contains("--ui-testing")
+    let testDocument = CommandLine.arguments.contains("--test-document")
+    let noBlankDocument = CommandLine.arguments.contains("--no-blank-document")
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -37,5 +39,9 @@ class Application: NSObject, NSApplicationDelegate {
 
     func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
+    }
+    
+    func applicationShouldOpenUntitledFile(_ sender: NSApplication) -> Bool {
+        return !noBlankDocument
     }
 }
