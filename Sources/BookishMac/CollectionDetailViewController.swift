@@ -26,8 +26,10 @@ struct RowSpecification {
 
 class CollectionDetailViewController: CollectionViewController, NSTableViewDataSource, NSTableViewDelegate {
     @IBOutlet weak var indexView: CollectionIndexViewController!
-    @IBOutlet weak var indexArray: NSArrayController!
     @IBOutlet weak var detailsView: NSTableView!
+    @IBOutlet weak var imageView: NSImageView!
+    @IBOutlet weak var titleView: NSTextField!
+    @IBOutlet weak var subtitleView: NSTextField!
     
     var people = [PersonRole]()
     var indexObserver: NSKeyValueObservation?
@@ -49,16 +51,23 @@ class CollectionDetailViewController: CollectionViewController, NSTableViewDataS
         if let parent = self.parent as? NSSplitViewController {
             indexView = parent.splitViewItems[0].viewController as? CollectionIndexViewController
         }
-        
     }
     
     override func viewWillAppear() {
         super.viewWillAppear()
 
-        indexArray.fetch(self)
-        indexObserver = indexArray.observe(\NSArrayController.selection, changeHandler: { (index, change) in
-            self.updatePeople()
-        })
+        if let window = view.window?.windowController as? CollectionWindowController {
+            window.bookDetailController = self
+        }
+        
+        if let indexArray = indexView.indexArray {
+            titleView.bind(NSBindingName(rawValue: "value"), to:indexArray, withKeyPath:"selection.name", options: [:])
+            subtitleView.bind(NSBindingName(rawValue: "value"), to:indexArray, withKeyPath:"selection.subtitle", options: [:])
+            imageView.bind(NSBindingName(rawValue: "value"), to:indexArray, withKeyPath:"selection.image", options: [:])
+            indexObserver = indexArray.observe(\NSArrayController.selection, changeHandler: { (index, change) in
+                self.updatePeople()
+            })
+        }
     }
  
     override func viewWillDisappear() {
@@ -69,7 +78,7 @@ class CollectionDetailViewController: CollectionViewController, NSTableViewDataS
     func peopleInSelection() -> (Set<PersonRole>, Set<PersonRole>) {
         var all = Set<PersonRole>()
         var common = Set<PersonRole>()
-        if let selection = indexArray.selectedObjects as? [Book] {
+        if let selection = indexView.indexArray.selectedObjects as? [Book] {
             for book in selection {
                 if let people = book.personRoles as? Set<PersonRole> {
                     if all.count == 0 {
@@ -117,7 +126,7 @@ class CollectionDetailViewController: CollectionViewController, NSTableViewDataS
                 if !isPersonRow && (rows[index].type == .dateReadOnly) {
                     options[NSBindingOption(rawValue: "NSValueTransformer")] = ValueTransformer(forName: NSValueTransformerName(rawValue: "DateToString"))
                 }
-                let bound: Any = isPersonRow ? people[index] : indexArray
+                let bound: Any = isPersonRow ? people[index] : indexView.indexArray
                 let path = isPersonRow ? "person.name" : "selection.\(rows[index].binding)"
                 subview.bind(NSBindingName(rawValue: "value"), to:bound, withKeyPath:path, options: options)
             }
@@ -125,11 +134,11 @@ class CollectionDetailViewController: CollectionViewController, NSTableViewDataS
         
         return view
     }
-
+   
     @IBAction func insertPerson(_ sender: Any) {
         if let item = sender as? NSMenuItem  {
             if let roleName = item.identifier?.rawValue {
-                if let selection = indexArray.selectedObjects as? [Book] {
+                if let selection = indexView.indexArray.selectedObjects as? [Book] {
                     let context = cvm.managedObjectContext
                     let person = Person(context: context)
                     let role = person.role(as: roleName)
@@ -142,4 +151,5 @@ class CollectionDetailViewController: CollectionViewController, NSTableViewDataS
         }
     }
 
+    
 }

@@ -3,6 +3,7 @@
 //  All code (c) 2018 - present day, Elegant Chaos Limited.
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
+import AppKit
 import CoreData
 
 @objc class CollectionDocumentViewModel: NSObject, DocumentViewModel {
@@ -10,7 +11,8 @@ import CoreData
 
     @objc let document: CollectionDocument
     @objc let managedObjectContext: NSManagedObjectContext
-    @objc var selectedIndexes: Any?
+    @objc var bookIndex: NSArrayController?
+    @objc var selectedIndexes: NSMutableIndexSet?
     
     init(document: CollectionDocument) {
         self.document = document

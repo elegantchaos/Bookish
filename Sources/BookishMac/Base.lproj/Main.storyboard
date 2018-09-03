@@ -347,6 +347,11 @@
                                                 <action selector="insertPerson:" target="Ady-hI-5gd" id="FYD-Pa-SPs"/>
                                             </connections>
                                         </menuItem>
+                                        <menuItem title="Book" keyEquivalent="B" identifier="book" id="LP4-Dk-Bka">
+                                            <connections>
+                                                <action selector="insertBook:" target="Ady-hI-5gd" id="eDP-zz-ybf"/>
+                                            </connections>
+                                        </menuItem>
                                         <menuItem title="Editor" keyEquivalent="E" identifier="editor" id="2uE-bf-oad">
                                             <connections>
                                                 <action selector="insertPerson:" target="Ady-hI-5gd" id="lAS-OQ-3Rx"/>
@@ -659,7 +664,7 @@
                     </connections>
                 </viewController>
                 <customObject id="Jsc-1E-0Rn" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-                <arrayController mode="entity" entityName="Book" alwaysUsesMultipleValuesMarker="YES" id="gjv-NN-VkV">
+                <arrayController mode="entity" entityName="Book" preservesSelection="NO" id="gjv-NN-VkV">
                     <connections>
                         <binding destination="cSd-7W-hzi" name="managedObjectContext" keyPath="self.cvm.managedObjectContext" id="O9C-yN-jLQ"/>
                         <binding destination="cSd-7W-hzi" name="selectionIndexes" keyPath="self.cvm.selectedIndexes" id="iTu-h5-N0J"/>
@@ -702,8 +707,8 @@
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
-                                                        <tableCellView id="fjE-5B-Fct">
-                                                            <rect key="frame" x="1" y="1" width="71" height="18"/>
+                                                        <tableCellView misplaced="YES" id="fjE-5B-Fct">
+                                                            <rect key="frame" x="1" y="1" width="0.0" height="18"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <datePicker verticalHuggingPriority="751" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="rHS-KW-HhR">
@@ -824,9 +829,6 @@
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
-                                <connections>
-                                    <binding destination="v2c-Ux-afh" name="value" keyPath="selection.name" id="Phq-aF-Z3f"/>
-                                </connections>
                             </textField>
                             <textField identifier="subtitle" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="H8A-04-75V" userLabel="Subtitle">
                                 <rect key="frame" x="68" y="340" width="330" height="13"/>
@@ -835,9 +837,6 @@
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
-                                <connections>
-                                    <binding destination="v2c-Ux-afh" name="value" keyPath="selection.subtitle" id="YF3-KR-bfR"/>
-                                </connections>
                             </textField>
                             <imageView identifier="cover" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nPv-jB-4iC" userLabel="Cover">
                                 <rect key="frame" x="20" y="338" width="42" height="42"/>
@@ -846,13 +845,6 @@
                                     <constraint firstAttribute="width" constant="42" id="FCF-as-z1Y"/>
                                 </constraints>
                                 <imageCell key="cell" selectable="YES" editable="YES" alignment="left" animates="YES" imageScaling="proportionallyDown" id="a7U-eh-BHK"/>
-                                <connections>
-                                    <binding destination="v2c-Ux-afh" name="value" keyPath="selection.image" id="eet-vc-dHN">
-                                        <dictionary key="options">
-                                            <string key="NSValueTransformerName">NSKeyedUnarchiveFromData</string>
-                                        </dictionary>
-                                    </binding>
-                                </connections>
                             </imageView>
                         </subviews>
                         <constraints>
@@ -872,16 +864,13 @@
                     </view>
                     <connections>
                         <outlet property="detailsView" destination="vV5-vW-Afl" id="vNS-T3-T7d"/>
-                        <outlet property="indexArray" destination="v2c-Ux-afh" id="AOk-Gi-0VP"/>
+                        <outlet property="imageView" destination="nPv-jB-4iC" id="a6c-Sp-1gz"/>
+                        <outlet property="subtitleView" destination="H8A-04-75V" id="JB7-lH-3xQ"/>
+                        <outlet property="titleView" destination="7rh-Dc-PS1" id="nz8-qo-cf2"/>
                     </connections>
                 </viewController>
                 <customObject id="dg1-Od-cPv" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-                <arrayController mode="entity" entityName="Book" id="v2c-Ux-afh">
-                    <connections>
-                        <binding destination="TBH-Sa-Ff0" name="managedObjectContext" keyPath="self.cvm.managedObjectContext" id="MG5-4b-RV1"/>
-                        <binding destination="TBH-Sa-Ff0" name="selectionIndexes" keyPath="self.cvm.selectedIndexes" id="gAG-9w-eit"/>
-                    </connections>
-                </arrayController>
+                <userDefaultsController representsSharedInstance="YES" id="CPG-9C-fnr"/>
             </objects>
             <point key="canvasLocation" x="512" y="1162"/>
         </scene>
