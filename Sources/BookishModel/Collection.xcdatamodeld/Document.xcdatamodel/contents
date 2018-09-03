@@ -39,7 +39,7 @@
         <relationship name="books" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Book" inverseName="publisher" inverseEntity="Book" syncable="YES"/>
     </entity>
     <entity name="Role" representedClassName=".Role" syncable="YES" codeGenerationType="category">
-        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" attributeType="String" syncable="YES"/>
         <relationship name="people" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PersonEntry" inverseName="role" inverseEntity="PersonEntry" syncable="YES"/>
     </entity>
     <entity name="Series" representedClassName=".Series" syncable="YES" codeGenerationType="category">

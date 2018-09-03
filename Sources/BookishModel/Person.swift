@@ -11,4 +11,32 @@ public class Person: NSManagedObject {
         super.awakeFromInsert()
         name = "Untitled Person"
     }
+    
+    /**
+            If there's already an entry for a given role for this person, return it.
+            If not, create it.
+     */
+    
+    public func entry(role roleName: String) -> PersonEntry {
+        guard let context = self.managedObjectContext else {
+            fatalError("context not set")
+        }
+        
+        let role = Role.role(named: roleName, context: context)
+        
+        let request: NSFetchRequest<PersonEntry> = PersonEntry.fetchRequest()
+        request.predicate = NSPredicate(format: "(person = %@) and (role = %@)", self, role)
+        
+        var entry: PersonEntry
+        if let results = try? context.fetch(request), results.count > 0 {
+            entry = results[0]
+        } else {
+            entry = PersonEntry(context: context)
+            entry.person = self
+            entry.role = role
+        }
+        
+        return entry
+    }
+
 }

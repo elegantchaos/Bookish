@@ -8,14 +8,18 @@ import CoreData
 @testable import BookishModel
 
 class BookishModelTests: XCTestCase {
-
-    func testContainer() {
+    
+    func makeTestContainer() -> PersistentContainer {
         let container = PersistentContainer(name: "Collection")
         container.persistentStoreDescriptions[0].url = URL(fileURLWithPath: "/dev/null")
         container.loadPersistentStores { (description, error) in
             XCTAssertNil(error)
         }
-        
+        return container
+    }
+    
+    func testContainer() {
+        let container = makeTestContainer()
         let context = container.viewContext
         let book = Book(context: context)
         book.name = "Test"
@@ -30,5 +34,25 @@ class BookishModelTests: XCTestCase {
             let nserror = error as NSError
             fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
         }
+    }
+    
+    func testUniqueRoles() {
+        let container = makeTestContainer()
+        let context = container.viewContext
+        let role1 = Role.role(named: "author", context: context)
+        XCTAssertEqual(role1.name, "author")
+        let role2 = Role.role(named: "author", context: context)
+        XCTAssertTrue(role1 === role2)
+    }
+    
+    func testUniquePersonRoles() {
+        let container = makeTestContainer()
+        let context = container.viewContext
+        let person = Person(context: context)
+        let entry1 = person.entry(role: "editor")
+        XCTAssertEqual(entry1.person, person)
+        XCTAssertEqual(entry1.role?.name, "editor")
+        let entry2 = person.entry(role: "editor")
+        XCTAssertTrue(entry1 === entry2)
     }
 }

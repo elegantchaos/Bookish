@@ -9,7 +9,7 @@ import Cocoa
 class Application: NSObject, NSApplicationDelegate {
     let documentWindowControllerFactory = DocumentWindowControllerFactory()
     let uiTesting = CommandLine.arguments.contains("--ui-testing")
-    let testDocument = CommandLine.arguments.contains("--test-document")
+    var testDocument = CommandLine.arguments.contains("--test-document")
     let noBlankDocument = CommandLine.arguments.contains("--no-blank-document")
     
     override func awakeFromNib() {

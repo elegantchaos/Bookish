@@ -85,6 +85,18 @@ class BookishUITests: XCTestCase {
         XCTAssertFalse(item.exists)
     }
 
+    func testRenamingChangesIndex() {
+        launch(arguments:["--test-document"])
+        let window = application.windows["Untitled"]
+        let item = firstIndexItem(window: window)
+        item.click()
+        let field = window.textFields["title"]
+        field.click()
+        field.typeKey("a", modifierFlags: .command)
+        field.typeText("Book Title")
+        item.click()
+        XCTAssertEqual(item.value as! String, "Book Title")
+    }
     
 
 }
