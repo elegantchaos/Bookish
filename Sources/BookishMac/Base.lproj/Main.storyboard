@@ -847,6 +847,9 @@
                                     <constraint firstAttribute="width" constant="42" id="FCF-as-z1Y"/>
                                 </constraints>
                                 <imageCell key="cell" selectable="YES" editable="YES" alignment="left" animates="YES" imageScaling="proportionallyDown" id="a7U-eh-BHK"/>
+                                <connections>
+                                    <binding destination="v2c-Ux-afh" name="data" keyPath="selection.image" id="MjR-3X-VXU"/>
+                                </connections>
                             </imageView>
                         </subviews>
                         <constraints>
