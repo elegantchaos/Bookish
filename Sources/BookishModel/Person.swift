@@ -17,26 +17,25 @@ public class Person: NSManagedObject {
             If not, create it.
      */
     
-    public func entry(role roleName: String) -> PersonEntry {
+    public func role(as roleName: String) -> PersonRole {
         guard let context = self.managedObjectContext else {
             fatalError("context not set")
         }
         
         let role = Role.role(named: roleName, context: context)
         
-        let request: NSFetchRequest<PersonEntry> = PersonEntry.fetchRequest()
+        let request: NSFetchRequest<PersonRole> = PersonRole.fetchRequest()
         request.predicate = NSPredicate(format: "(person = %@) and (role = %@)", self, role)
         
-        var entry: PersonEntry
+        var entry: PersonRole
         if let results = try? context.fetch(request), results.count > 0 {
             entry = results[0]
         } else {
-            entry = PersonEntry(context: context)
+            entry = PersonRole(context: context)
             entry.person = self
             entry.role = role
         }
         
         return entry
     }
-
 }

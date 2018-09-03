@@ -22,7 +22,7 @@ class CollectionDocument: PersistentDocument {
                 book2.name = "Book 2"
                 book2.notes = "Some\nmulti\nline\nnotes."
                 let sharedEditor = Person(context: context)
-                let entry = sharedEditor.entry(role: "editor")
+                let entry = sharedEditor.role(as: "editor")
                 entry.addToBooks(book1)
                 entry.addToBooks(book2)
             }

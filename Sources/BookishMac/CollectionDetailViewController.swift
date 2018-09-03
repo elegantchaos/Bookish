@@ -29,7 +29,7 @@ class CollectionDetailViewController: CollectionViewController, NSTableViewDataS
     @IBOutlet weak var indexArray: NSArrayController!
     @IBOutlet weak var detailsView: NSTableView!
     
-    var people = [PersonEntry]()
+    var people = [PersonRole]()
     var indexObserver: NSKeyValueObservation?
     var dateViewID = NSUserInterfaceItemIdentifier(rawValue: "")
     
@@ -66,12 +66,12 @@ class CollectionDetailViewController: CollectionViewController, NSTableViewDataS
         super.viewWillDisappear()
     }
     
-    func peopleInSelection() -> (Set<PersonEntry>, Set<PersonEntry>) {
-        var all = Set<PersonEntry>()
-        var common = Set<PersonEntry>()
+    func peopleInSelection() -> (Set<PersonRole>, Set<PersonRole>) {
+        var all = Set<PersonRole>()
+        var common = Set<PersonRole>()
         if let selection = indexArray.selectedObjects as? [Book] {
             for book in selection {
-                if let people = book.people as? Set<PersonEntry> {
+                if let people = book.personRoles as? Set<PersonRole> {
                     if all.count == 0 {
                         common.formUnion(people)
                     } else {
@@ -128,15 +128,13 @@ class CollectionDetailViewController: CollectionViewController, NSTableViewDataS
 
     @IBAction func insertPerson(_ sender: Any) {
         if let item = sender as? NSMenuItem  {
-            if let type = item.identifier?.rawValue {
+            if let roleName = item.identifier?.rawValue {
                 if let selection = indexArray.selectedObjects as? [Book] {
                     let context = cvm.managedObjectContext
-                    let role = Role.role(named: type, context: context)
-                    let entry = PersonEntry(context: context)
-                    entry.person = Person(context: context)
-                    entry.role = role
+                    let person = Person(context: context)
+                    let role = person.role(as: roleName)
                     for book in selection {
-                        book.addToPeople(entry)
+                        book.addToPersonRoles(role)
                     }
                 }
             }

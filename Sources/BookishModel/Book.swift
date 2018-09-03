@@ -19,9 +19,35 @@ public class Book: NSManagedObject {
         
         if let context = managedObjectContext {
             let author = Person(context: context)
-            let entry = author.entry(role: "author")
+            let entry = author.role(as: "author")
             entry.addToBooks(self)
         }
     }
     
+    public var roles: Set<Role> {
+        var result = Set<Role>()
+        if let people = self.personRoles as? Set<PersonRole> {
+            for entry in people {
+                if let role = entry.role {
+                    result.insert(role)
+                }
+            }
+        }
+        
+        return result
+    }
+
+    public var people: Set<Person> {
+        var result = Set<Person>()
+        if let people = self.personRoles as? Set<PersonRole> {
+            for entry in people {
+                if let person = entry.person {
+                    result.insert(person)
+                }
+            }
+        }
+        
+        return result
+    }
+
 }

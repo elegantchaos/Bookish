@@ -49,10 +49,53 @@ class BookishModelTests: XCTestCase {
         let container = makeTestContainer()
         let context = container.viewContext
         let person = Person(context: context)
-        let entry1 = person.entry(role: "editor")
+        let entry1 = person.role(as: "editor")
         XCTAssertEqual(entry1.person, person)
         XCTAssertEqual(entry1.role?.name, "editor")
-        let entry2 = person.entry(role: "editor")
+        let entry2 = person.role(as: "editor")
         XCTAssertTrue(entry1 === entry2)
+    }
+    
+    func testBookPersonLinkages() {
+        let container = makeTestContainer()
+        let context = container.viewContext
+        let book = Book(context: context)
+        let person1 = Person(context: context)
+        let person2 = Person(context: context)
+        let person3 = Person(context: context)
+        
+        let entry1 = person1.role(as: "editor")
+        entry1.addToBooks(book)
+        let entry2 = person1.role(as: "author")
+        entry2.addToBooks(book)
+        let entry3 = person2.role(as: "editor")
+        entry3.addToBooks(book)
+
+        if let people = book.personRoles {
+            XCTAssertTrue(people.contains(entry1))
+            XCTAssertTrue(people.contains(entry2))
+            XCTAssertTrue(people.contains(entry3))
+        } else {
+            XCTFail("book has no people")
+        }
+        
+        XCTAssertTrue(person1.personRoles!.contains(entry1))
+        XCTAssertTrue(person1.personRoles!.contains(entry2))
+        XCTAssertTrue(person2.personRoles!.contains(entry3))
+        
+        let allRoles = book.roles
+        let authorRole = Role.role(named: "author", context: context)
+        let editorRole = Role.role(named: "editor", context: context)
+        let illustratorRole = Role.role(named: "illustrator", context: context)
+        XCTAssertTrue(allRoles.contains(authorRole))
+        XCTAssertTrue(allRoles.contains(editorRole))
+        XCTAssertFalse(allRoles.contains(illustratorRole))
+
+        let allPeople = book.people
+        
+        XCTAssertTrue(allPeople.contains(person1))
+        XCTAssertTrue(allPeople.contains(person2))
+        XCTAssertFalse(allPeople.contains(person3))
+
     }
 }

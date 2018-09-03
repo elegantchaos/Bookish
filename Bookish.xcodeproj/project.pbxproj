@@ -46,8 +46,8 @@
 		224293E2212AF07C00E70510 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224293E0212AF07C00E70510 /* Group.swift */; };
 		224293E3212AF09D00E70510 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224293DE212AF05800E70510 /* Person.swift */; };
 		224293E4212AF09E00E70510 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224293DE212AF05800E70510 /* Person.swift */; };
-		224293E6212AF0B700E70510 /* PersonEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224293E5212AF0B700E70510 /* PersonEntry.swift */; };
-		224293E7212AF0B700E70510 /* PersonEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224293E5212AF0B700E70510 /* PersonEntry.swift */; };
+		224293E6212AF0B700E70510 /* PersonRole.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224293E5212AF0B700E70510 /* PersonRole.swift */; };
+		224293E7212AF0B700E70510 /* PersonRole.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224293E5212AF0B700E70510 /* PersonRole.swift */; };
 		224293E9212AF0D300E70510 /* Role.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224293E8212AF0D300E70510 /* Role.swift */; };
 		224293EA212AF0D300E70510 /* Role.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224293E8212AF0D300E70510 /* Role.swift */; };
 		224293EC212AF0E300E70510 /* Series.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224293EB212AF0E300E70510 /* Series.swift */; };
@@ -190,7 +190,7 @@
 		224293D1212AE1E700E70510 /* BookishModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookishModel.swift; sourceTree = "<group>"; };
 		224293DE212AF05800E70510 /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		224293E0212AF07C00E70510 /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
-		224293E5212AF0B700E70510 /* PersonEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonEntry.swift; sourceTree = "<group>"; };
+		224293E5212AF0B700E70510 /* PersonRole.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonRole.swift; sourceTree = "<group>"; };
 		224293E8212AF0D300E70510 /* Role.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Role.swift; sourceTree = "<group>"; };
 		224293EB212AF0E300E70510 /* Series.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Series.swift; sourceTree = "<group>"; };
 		224293EE212AFAFB00E70510 /* PersistentContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentContainer.swift; sourceTree = "<group>"; };
@@ -377,7 +377,7 @@
 				224293EB212AF0E300E70510 /* Series.swift */,
 				224293E8212AF0D300E70510 /* Role.swift */,
 				221F271E21306C1300DC2DC7 /* Book.swift */,
-				224293E5212AF0B700E70510 /* PersonEntry.swift */,
+				224293E5212AF0B700E70510 /* PersonRole.swift */,
 				224293E0212AF07C00E70510 /* Group.swift */,
 				22DD424D2126D6DA0070C85A /* Collection.xcdatamodeld */,
 			);
@@ -868,7 +868,7 @@
 				224293E1212AF07C00E70510 /* Group.swift in Sources */,
 				224293DC212AF00400E70510 /* Collection.xcdatamodeld in Sources */,
 				224293EC212AF0E300E70510 /* Series.swift in Sources */,
-				224293E6212AF0B700E70510 /* PersonEntry.swift in Sources */,
+				224293E6212AF0B700E70510 /* PersonRole.swift in Sources */,
 				224293D2212AE1E700E70510 /* BookishModel.swift in Sources */,
 				224293F4212B01B100E70510 /* PersistentDocument.swift in Sources */,
 				224293E9212AF0D300E70510 /* Role.swift in Sources */,
@@ -895,7 +895,7 @@
 				224293DD212AF00500E70510 /* Collection.xcdatamodeld in Sources */,
 				224293ED212AF0E300E70510 /* Series.swift in Sources */,
 				221F272321359DA200DC2DC7 /* Publisher.swift in Sources */,
-				224293E7212AF0B700E70510 /* PersonEntry.swift in Sources */,
+				224293E7212AF0B700E70510 /* PersonRole.swift in Sources */,
 				221F272021306C1300DC2DC7 /* Book.swift in Sources */,
 				224293D3212AE1E700E70510 /* BookishModel.swift in Sources */,
 				224293EA212AF0D300E70510 /* Role.swift in Sources */,
