@@ -444,7 +444,7 @@
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="56" y="-266"/>
+            <point key="canvasLocation" x="267" y="-518"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
@@ -453,7 +453,7 @@
                     <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="CollectionWindow" animationBehavior="default" id="Ckk-yw-fiv">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-                        <rect key="contentRect" x="196" y="240" width="480" height="270"/>
+                        <rect key="contentRect" x="196" y="240" width="800" height="600"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
                         <toolbar key="toolbar" implicitIdentifier="77DEAC6B-FAB4-4044-A5AA-0B8765A74231" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="WdN-bQ-LAx">
                             <allowedToolbarItems>
@@ -483,7 +483,7 @@
                 </windowController>
                 <customObject id="6f7-a7-6o1" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-322" y="81"/>
+            <point key="canvasLocation" x="-350" y="9"/>
         </scene>
         <!--Collection Split View Controller-->
         <scene sceneID="o8M-XO-7fb">
@@ -671,7 +671,7 @@
                     </connections>
                 </arrayController>
             </objects>
-            <point key="canvasLocation" x="141.5" y="1126"/>
+            <point key="canvasLocation" x="232" y="1278"/>
         </scene>
         <!--Collection Detail View Controller-->
         <scene sceneID="qGP-fN-0GX">
@@ -955,7 +955,7 @@
                     </items>
                 </menu>
             </objects>
-            <point key="canvasLocation" x="512" y="1162"/>
+            <point key="canvasLocation" x="619" y="1307"/>
         </scene>
     </scenes>
     <resources>
