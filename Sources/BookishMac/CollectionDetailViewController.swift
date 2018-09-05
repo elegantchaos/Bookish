@@ -25,11 +25,15 @@ struct RowSpecification {
 }
 
 class CollectionDetailViewController: CollectionViewController, NSTableViewDataSource, NSTableViewDelegate {
+    let PersonColumnID = NSUserInterfaceItemIdentifier(rawValue: "person")
+    let DateColumnID = NSUserInterfaceItemIdentifier(rawValue: "date")
+    
     @IBOutlet weak var indexView: CollectionIndexViewController!
     @IBOutlet weak var detailsView: NSTableView!
     @IBOutlet weak var imageView: NSImageView!
     @IBOutlet weak var titleView: NSTextField!
     @IBOutlet weak var subtitleView: NSTextField!
+    @IBOutlet var addPersonMenu: NSMenu!
     
     var people = [PersonRole]()
     var indexObserver: NSKeyValueObservation?
@@ -51,6 +55,9 @@ class CollectionDetailViewController: CollectionViewController, NSTableViewDataS
         if let parent = self.parent as? NSSplitViewController {
             indexView = parent.splitViewItems[0].viewController as? CollectionIndexViewController
         }
+        
+        detailsView.tableColumn(withIdentifier: PersonColumnID)?.isHidden = true
+        detailsView.tableColumn(withIdentifier: DateColumnID)?.isHidden = true
     }
     
     override func viewWillAppear() {
@@ -110,6 +117,14 @@ class CollectionDetailViewController: CollectionViewController, NSTableViewDataS
             var viewID = columnID
             let isPersonRow = row < people.count
             let index = isPersonRow ? row : row - people.count
+            if columnName == "value" {
+                if isPersonRow {
+                    viewID = PersonColumnID
+                } else if rows[index].type == .date {
+                    viewID = DateColumnID
+                }
+            }
+
             if !isPersonRow && (columnName == "value") && rows[index].type == .date {
                 viewID = NSUserInterfaceItemIdentifier(rawValue: "date")
             }
@@ -151,5 +166,19 @@ class CollectionDetailViewController: CollectionViewController, NSTableViewDataS
         }
     }
 
+    @IBAction func removePerson(_ sender: NSButton) {
+        if let event = NSApplication.shared.currentEvent
+        {
+            NSMenu.popUpContextMenu(addPersonMenu, with: event, for: sender)
+        }
+    }
     
+    @IBAction func showAddPerson(_ sender: NSButton) {
+        if let event = NSApplication.shared.currentEvent
+        {
+            NSMenu.popUpContextMenu(addPersonMenu, with: event, for: sender)
+        }
+    }
+    
+
 }
