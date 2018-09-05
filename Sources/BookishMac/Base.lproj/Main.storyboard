@@ -871,6 +871,7 @@
                                             </connections>
                                         </tableView>
                                     </subviews>
+                                    <color key="backgroundColor" name="windowBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </clipView>
                                 <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="1Kf-VT-TKi">
                                     <rect key="frame" x="0.0" y="314" width="380" height="16"/>
