@@ -6,10 +6,11 @@
         <attribute name="ean" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="format" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="height" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="image" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="isbn" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="length" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="modified" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" defaultValueString="Untitled Book" syncable="YES"/>
         <attribute name="notes" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="pages" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
         <attribute name="published" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
@@ -23,7 +24,7 @@
         <relationship name="members" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Person" inverseName="groups" inverseEntity="Person" syncable="YES"/>
     </entity>
     <entity name="Person" representedClassName=".Person" syncable="YES" codeGenerationType="category">
-        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" attributeType="String" defaultValueString="Untitled Person" syncable="YES"/>
         <attribute name="notes" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="groups" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Group" inverseName="members" inverseEntity="Group" syncable="YES"/>
         <relationship name="personRoles" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PersonRole" inverseName="person" inverseEntity="PersonRole" syncable="YES"/>
@@ -34,25 +35,20 @@
         <relationship name="role" maxCount="1" deletionRule="Nullify" destinationEntity="Role" inverseName="people" inverseEntity="Role" syncable="YES"/>
     </entity>
     <entity name="Publisher" representedClassName=".Publisher" syncable="YES" codeGenerationType="category">
-        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" defaultValueString="Untitled Publisher" syncable="YES"/>
         <attribute name="notes" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="books" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Book" inverseName="publisher" inverseEntity="Book" syncable="YES"/>
     </entity>
     <entity name="Role" representedClassName=".Role" syncable="YES" codeGenerationType="category">
-        <attribute name="name" attributeType="String" syncable="YES"/>
+        <attribute name="name" attributeType="String" defaultValueString="Untitled Role" syncable="YES"/>
         <relationship name="people" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PersonRole" inverseName="role" inverseEntity="PersonRole" syncable="YES"/>
-        <uniquenessConstraints>
-            <uniquenessConstraint>
-                <constraint value="name"/>
-            </uniquenessConstraint>
-        </uniquenessConstraints>
     </entity>
     <entity name="Series" representedClassName=".Series" syncable="YES" codeGenerationType="category">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="books" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Book" inverseName="series" inverseEntity="Book" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Book" positionX="-889.52734375" positionY="79.94140625" width="128" height="300"/>
+        <element name="Book" positionX="-889.52734375" positionY="79.94140625" width="128" height="315"/>
         <element name="Group" positionX="-334.8046875" positionY="457.80859375" width="128" height="60"/>
         <element name="Person" positionX="-341.4375" positionY="286.09375" width="128" height="105"/>
         <element name="PersonRole" positionX="-657" positionY="261" width="128" height="90"/>

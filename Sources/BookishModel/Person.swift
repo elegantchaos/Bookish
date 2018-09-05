@@ -15,7 +15,7 @@ public class Person: NSManagedObject {
     /**
             If there's already an entry for a given role for this person, return it.
             If not, create it.
-     */
+        */
     
     public func role(as roleName: String) -> PersonRole {
         guard let context = self.managedObjectContext else {

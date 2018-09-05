@@ -11,6 +11,10 @@ class CollectionDocument: PersistentDocument {
         return true
     }
 
+    override init() {
+        super.init()
+    }
+    
     init(type typeName: String) throws {
         super.init()
         if Application.sharedInstance.testDocument {
