@@ -545,18 +545,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="199" height="342"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dnp-IN-cGx">
-                                <rect key="frame" x="0.0" y="22" width="199" height="320"/>
+                            <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dnp-IN-cGx" userLabel="Index">
+                                <rect key="frame" x="0.0" y="23" width="199" height="319"/>
                                 <clipView key="contentView" id="MeP-Ej-IYa">
-                                    <rect key="frame" x="0.0" y="0.0" width="199" height="320"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="199" height="319"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <tableView identifier="books" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" autosaveColumns="NO" rowSizeStyle="automatic" headerView="0cg-lw-pkC" viewBased="YES" id="jZN-rJ-ulS">
-                                            <rect key="frame" x="0.0" y="0.0" width="199" height="297"/>
+                                        <tableView identifier="books" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnSelection="YES" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" id="jZN-rJ-ulS">
+                                            <rect key="frame" x="0.0" y="0.0" width="199" height="319"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
-                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="gridColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
                                                 <tableColumn identifier="titles" width="196" minWidth="40" maxWidth="1000" id="Jbk-o7-OJL">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Books">
@@ -611,15 +611,14 @@
                                     <rect key="frame" x="0.0" y="304" width="195" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
-                                <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="UUq-Sr-IzS">
+                                <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="UUq-Sr-IzS">
                                     <rect key="frame" x="224" y="17" width="15" height="102"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
-                                <tableHeaderView key="headerView" id="0cg-lw-pkC">
-                                    <rect key="frame" x="0.0" y="0.0" width="199" height="23"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableHeaderView>
                             </scrollView>
+                            <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="zH4-UB-LMd">
+                                <rect key="frame" x="0.0" y="20" width="199" height="5"/>
+                            </box>
                             <button identifier="add-book" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yM9-Be-eOr" userLabel="Add Button">
                                 <rect key="frame" x="4" y="0.0" width="11" height="22"/>
                                 <constraints>
@@ -648,12 +647,15 @@
                             </button>
                         </subviews>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="zH4-UB-LMd" secondAttribute="trailing" id="AV3-FJ-DPX"/>
                             <constraint firstAttribute="bottom" secondItem="yM9-Be-eOr" secondAttribute="bottom" id="CxQ-Jv-Dda"/>
-                            <constraint firstItem="yM9-Be-eOr" firstAttribute="top" secondItem="dnp-IN-cGx" secondAttribute="bottom" id="Lu9-xw-96q"/>
+                            <constraint firstItem="yM9-Be-eOr" firstAttribute="top" secondItem="zH4-UB-LMd" secondAttribute="bottom" id="R7t-go-lBg"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="1gF-aY-ShN" secondAttribute="trailing" constant="20" symbolic="YES" id="ZHp-N8-7SZ"/>
                             <constraint firstAttribute="bottom" secondItem="1gF-aY-ShN" secondAttribute="bottom" id="gEU-Ta-j1d"/>
                             <constraint firstAttribute="trailing" secondItem="dnp-IN-cGx" secondAttribute="trailing" id="gWF-qi-XZz"/>
+                            <constraint firstItem="zH4-UB-LMd" firstAttribute="top" secondItem="dnp-IN-cGx" secondAttribute="bottom" id="iot-5h-0Bf"/>
                             <constraint firstItem="dnp-IN-cGx" firstAttribute="leading" secondItem="JCM-bJ-k8z" secondAttribute="leading" id="kOn-Qv-7Jo"/>
+                            <constraint firstItem="zH4-UB-LMd" firstAttribute="leading" secondItem="JCM-bJ-k8z" secondAttribute="leading" id="r6K-Y1-Pmh"/>
                             <constraint firstItem="dnp-IN-cGx" firstAttribute="top" secondItem="JCM-bJ-k8z" secondAttribute="top" id="srD-PA-rop"/>
                             <constraint firstItem="yM9-Be-eOr" firstAttribute="leading" secondItem="JCM-bJ-k8z" secondAttribute="leading" constant="4" id="uGO-Yp-zTw"/>
                             <constraint firstItem="1gF-aY-ShN" firstAttribute="leading" secondItem="yM9-Be-eOr" secondAttribute="trailing" constant="4" id="uhe-lZ-E9p"/>
