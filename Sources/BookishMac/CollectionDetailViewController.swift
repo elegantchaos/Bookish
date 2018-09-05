@@ -51,8 +51,6 @@ class CollectionDetailViewController: CollectionViewController {
         if let parent = self.parent as? NSSplitViewController {
             indexView = parent.splitViewItems[0].viewController as? CollectionIndexViewController
         }
-        
-        hideUnusedColumns()
     }
     
     override func viewWillAppear() {
@@ -168,12 +166,7 @@ extension CollectionDetailViewController: NSTableViewDataSource, NSTableViewDele
     static let ValueColumnID = NSUserInterfaceItemIdentifier(rawValue: "value")
     static let PersonColumnID = NSUserInterfaceItemIdentifier(rawValue: "person")
     static let DateColumnID = NSUserInterfaceItemIdentifier(rawValue: "date")
-    
-    func hideUnusedColumns() {
-        detailsView.tableColumn(withIdentifier: CollectionDetailViewController.PersonColumnID)?.isHidden = true
-        detailsView.tableColumn(withIdentifier: CollectionDetailViewController.DateColumnID)?.isHidden = true
-    }
-    
+        
     func rowInfo(for tableView: NSTableView, columnID: NSUserInterfaceItemIdentifier, row: Int) -> (NSView?, Bool, Bool, Int) {
         var viewID = columnID
         let isPerson = row < people.count
@@ -221,4 +214,7 @@ extension CollectionDetailViewController: NSTableViewDataSource, NSTableViewDele
         return view
     }
     
+    func tableViewSelectionDidChange(_ notification: Notification) {
+        print(notification)
+    }
 }
