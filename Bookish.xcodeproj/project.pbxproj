@@ -60,6 +60,8 @@
 		22429403212C3C7400E70510 /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22429402212C3C7400E70510 /* ViewExtensions.swift */; };
 		22429406212D945C00E70510 /* CollectionDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22429405212D945C00E70510 /* CollectionDetailViewController.swift */; };
 		22429408212D958400E70510 /* CollectionSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22429407212D958400E70510 /* CollectionSplitViewController.swift */; };
+		22960328214025E80020B3EB /* PersonTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22960327214025E80020B3EB /* PersonTableCellView.swift */; };
+		2296032A214032520020B3EB /* PersonTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22960329214032520020B3EB /* PersonTextField.swift */; };
 		22DD42482126D6DA0070C85A /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DD42472126D6DA0070C85A /* Application.swift */; };
 		22DD424A2126D6DA0070C85A /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DD42492126D6DA0070C85A /* CollectionViewController.swift */; };
 		22DD424C2126D6DA0070C85A /* CollectionDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DD424B2126D6DA0070C85A /* CollectionDocument.swift */; };
@@ -200,6 +202,8 @@
 		22429402212C3C7400E70510 /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
 		22429405212D945C00E70510 /* CollectionDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionDetailViewController.swift; sourceTree = "<group>"; };
 		22429407212D958400E70510 /* CollectionSplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionSplitViewController.swift; sourceTree = "<group>"; };
+		22960327214025E80020B3EB /* PersonTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonTableCellView.swift; sourceTree = "<group>"; };
+		22960329214032520020B3EB /* PersonTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonTextField.swift; sourceTree = "<group>"; };
 		22DD42442126D6DA0070C85A /* BookishMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BookishMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22DD42472126D6DA0070C85A /* Application.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
 		22DD42492126D6DA0070C85A /* CollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
@@ -354,6 +358,8 @@
 				22429407212D958400E70510 /* CollectionSplitViewController.swift */,
 				22429405212D945C00E70510 /* CollectionDetailViewController.swift */,
 				22DD424B2126D6DA0070C85A /* CollectionDocument.swift */,
+				22960327214025E80020B3EB /* PersonTableCellView.swift */,
+				22960329214032520020B3EB /* PersonTextField.swift */,
 				22143FCC212EE79100B689DF /* CollectionDocumentViewModel.swift */,
 				221F27272136EC0500DC2DC7 /* Utilities */,
 				22DD42502126D6DB0070C85A /* Assets.xcassets */,
@@ -915,6 +921,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2296032A214032520020B3EB /* PersonTextField.swift in Sources */,
 				22DD424A2126D6DA0070C85A /* CollectionViewController.swift in Sources */,
 				22429401212C32BF00E70510 /* CollectionWindowController.swift in Sources */,
 				22DD42482126D6DA0070C85A /* Application.swift in Sources */,
@@ -923,6 +930,7 @@
 				22143FCF212EF9CC00B689DF /* DocumentWindowController.swift in Sources */,
 				22DD424C2126D6DA0070C85A /* CollectionDocument.swift in Sources */,
 				22143FCD212EE79100B689DF /* CollectionDocumentViewModel.swift in Sources */,
+				22960328214025E80020B3EB /* PersonTableCellView.swift in Sources */,
 				22429408212D958400E70510 /* CollectionSplitViewController.swift in Sources */,
 				221F272921382C8E00DC2DC7 /* DateTransformer.swift in Sources */,
 				22143FD521300F9300B689DF /* CoreDataTransformers.swift in Sources */,

@@ -741,7 +741,7 @@
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
-                                                        <tableCellView id="CTI-AS-fZR">
+                                                        <tableCellView id="CTI-AS-fZR" userLabel="value cell">
                                                             <rect key="frame" x="84" y="1" width="211" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
@@ -764,17 +764,21 @@
                                                                 <outlet property="textField" destination="u47-FK-V32" id="4Tf-cZ-vMJ"/>
                                                             </connections>
                                                         </tableCellView>
-                                                        <tableCellView identifier="person" id="BkD-e8-vo5">
+                                                        <tableCellView identifier="person" id="BkD-e8-vo5" userLabel="person cell" customClass="PersonTableCellView" customModule="BookishMac" customModuleProvider="target">
                                                             <rect key="frame" x="84" y="20" width="211" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
-                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="62Q-09-BL4">
+                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="62Q-09-BL4" customClass="PersonTextField" customModule="BookishMac" customModuleProvider="target">
                                                                     <rect key="frame" x="0.0" y="2" width="147" height="13"/>
-                                                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" alignment="left" placeholderString="value" id="mQk-Co-D5V">
+                                                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" continuous="YES" alignment="left" placeholderString="value" usesSingleLineMode="YES" id="mQk-Co-D5V">
                                                                         <font key="font" metaFont="systemBold" size="10"/>
                                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
+                                                                    <connections>
+                                                                        <action selector="startEditing:" target="BkD-e8-vo5" id="lUe-44-qCQ"/>
+                                                                        <outlet property="delegate" destination="BkD-e8-vo5" id="JMu-lh-3IF"/>
+                                                                    </connections>
                                                                 </textField>
                                                                 <button identifier="add-person" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RsI-9f-qrv" userLabel="Add">
                                                                     <rect key="frame" x="153" y="0.0" width="15" height="16"/>
@@ -808,10 +812,12 @@
                                                                 <constraint firstAttribute="trailing" secondItem="7vP-8A-rYs" secondAttribute="trailing" constant="20" symbolic="YES" id="kcO-qf-dLm"/>
                                                             </constraints>
                                                             <connections>
+                                                                <outlet property="addButton" destination="RsI-9f-qrv" id="F8B-9Y-hAX"/>
+                                                                <outlet property="removeButton" destination="7vP-8A-rYs" id="Bfn-a9-JL2"/>
                                                                 <outlet property="textField" destination="62Q-09-BL4" id="bqN-SD-KTe"/>
                                                             </connections>
                                                         </tableCellView>
-                                                        <tableCellView identifier="date" id="fjE-5B-Fct">
+                                                        <tableCellView identifier="date" id="fjE-5B-Fct" userLabel="date cell">
                                                             <rect key="frame" x="84" y="39" width="211" height="18"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
