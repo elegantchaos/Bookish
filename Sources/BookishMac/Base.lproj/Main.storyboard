@@ -765,7 +765,7 @@
                                                                         <action selector="showAddPerson:" target="TBH-Sa-Ff0" id="RSv-zt-dCg"/>
                                                                     </connections>
                                                                 </button>
-                                                                <button identifier="add-person" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7vP-8A-rYs" userLabel="Remove">
+                                                                <button identifier="remove-person" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7vP-8A-rYs" userLabel="Remove">
                                                                     <rect key="frame" x="45" y="0.0" width="15" height="16"/>
                                                                     <buttonCell key="cell" type="inline" bezelStyle="inline" image="NSRemoveTemplate" imagePosition="only" alignment="center" controlSize="mini" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="HJk-Ws-ykn">
                                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -933,19 +933,19 @@
                 <userDefaultsController representsSharedInstance="YES" id="CPG-9C-fnr"/>
                 <menu id="al3-YH-cB4">
                     <items>
-                        <menuItem title="Author" id="3B0-4b-61T">
+                        <menuItem title="Author" identifier="author" id="3B0-4b-61T">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
                                 <action selector="insertPerson:" target="dg1-Od-cPv" id="FqS-Mx-XqL"/>
                             </connections>
                         </menuItem>
-                        <menuItem title="Editor" id="NQ6-Df-LV8">
+                        <menuItem title="Editor" identifier="editor" id="NQ6-Df-LV8">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
                                 <action selector="insertPerson:" target="dg1-Od-cPv" id="PHk-lf-ChI"/>
                             </connections>
                         </menuItem>
-                        <menuItem title="Illustrator" id="lQJ-xx-laI">
+                        <menuItem title="Illustrator" identifier="illustrator" id="lQJ-xx-laI">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
                                 <action selector="insertPerson:" target="dg1-Od-cPv" id="zZ6-No-bLU"/>

@@ -24,10 +24,7 @@ struct RowSpecification {
     }
 }
 
-class CollectionDetailViewController: CollectionViewController, NSTableViewDataSource, NSTableViewDelegate {
-    let PersonColumnID = NSUserInterfaceItemIdentifier(rawValue: "person")
-    let DateColumnID = NSUserInterfaceItemIdentifier(rawValue: "date")
-    
+class CollectionDetailViewController: CollectionViewController {
     @IBOutlet weak var indexView: CollectionIndexViewController!
     @IBOutlet weak var detailsView: NSTableView!
     @IBOutlet weak var imageView: NSImageView!
@@ -37,7 +34,6 @@ class CollectionDetailViewController: CollectionViewController, NSTableViewDataS
     
     var people = [PersonRole]()
     var indexObserver: NSKeyValueObservation?
-    var dateViewID = NSUserInterfaceItemIdentifier(rawValue: "")
     
     let rows = [
         RowSpecification(binding: "format"),
@@ -56,8 +52,7 @@ class CollectionDetailViewController: CollectionViewController, NSTableViewDataS
             indexView = parent.splitViewItems[0].viewController as? CollectionIndexViewController
         }
         
-        detailsView.tableColumn(withIdentifier: PersonColumnID)?.isHidden = true
-        detailsView.tableColumn(withIdentifier: DateColumnID)?.isHidden = true
+        hideUnusedColumns()
     }
     
     override func viewWillAppear() {
@@ -72,8 +67,9 @@ class CollectionDetailViewController: CollectionViewController, NSTableViewDataS
             subtitleView.bind(NSBindingName(rawValue: "value"), to:indexArray, withKeyPath:"selection.subtitle", options: [:])
             imageView.bind(NSBindingName(rawValue: "value"), to:indexArray, withKeyPath:"selection.image", options: [:])
             indexObserver = indexArray.observe(\NSArrayController.selection, changeHandler: { (index, change) in
-                self.updatePeople()
+                self.selectionChanged()
             })
+            selectionChanged()
         }
     }
  
@@ -100,76 +96,58 @@ class CollectionDetailViewController: CollectionViewController, NSTableViewDataS
         return (all, common)
     }
     
+    func selectionChanged() {
+        let selectedCount = indexView.indexArray.selectedObjects?.count ?? 0
+        let showDetail = selectedCount > 0
+        detailsView.isHidden = !showDetail
+        if showDetail {
+            updatePeople()
+        }
+    }
+    
     func updatePeople() {
         let (_, common) = peopleInSelection()
         people = common.sorted(by: { ($0.person?.name ?? "") < ($1.person?.name ?? "") })
         detailsView.reloadData()
     }
-    
-    func numberOfRows(in tableView: NSTableView) -> Int {
-        return rows.count + people.count
-    }
-    
-    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        var view: NSView? = nil
-        if row < (rows.count + people.count), let columnID = tableColumn?.identifier {
-            let columnName = columnID.rawValue
-            var viewID = columnID
-            let isPersonRow = row < people.count
-            let index = isPersonRow ? row : row - people.count
-            if columnName == "value" {
-                if isPersonRow {
-                    viewID = PersonColumnID
-                } else if rows[index].type == .date {
-                    viewID = DateColumnID
-                }
-            }
+}
 
-            if !isPersonRow && (columnName == "value") && rows[index].type == .date {
-                viewID = NSUserInterfaceItemIdentifier(rawValue: "date")
-            }
-            view = tableView.makeView(withIdentifier: viewID, owner: self)
-            
-            if columnName == "heading", let field = view?.subviews.first as? NSTextField {
-                if isPersonRow {
-                    field.stringValue = people[index].role?.name ?? "<unknown role>"
-                } else {
-                    field.stringValue = rows[index].label
-                }
-            } else if columnName == "value", let subview = view?.subviews.first {
-                var options = [NSBindingOption:Any]()
-                if !isPersonRow && (rows[index].type == .dateReadOnly) {
-                    options[NSBindingOption(rawValue: "NSValueTransformer")] = ValueTransformer(forName: NSValueTransformerName(rawValue: "DateToString"))
-                }
-                let bound: Any = isPersonRow ? people[index] : indexView.indexArray
-                let path = isPersonRow ? "person.name" : "selection.\(rows[index].binding)"
-                subview.bind(NSBindingName(rawValue: "value"), to:bound, withKeyPath:path, options: options)
-            }
-        }
-        
-        return view
-    }
-   
+// MARK: Actions
+
+extension CollectionDetailViewController {
+
     @IBAction func insertPerson(_ sender: Any) {
         if let item = sender as? NSMenuItem  {
             if let roleName = item.identifier?.rawValue {
                 if let selection = indexView.indexArray.selectedObjects as? [Book] {
+                    // update model
                     let context = cvm.managedObjectContext
                     let person = Person(context: context)
                     let role = person.role(as: roleName)
                     for book in selection {
                         book.addToPersonRoles(role)
                     }
+                    
+                    // update table
+                    let count = people.count
+                    people.append(role)
+                    detailsView.insertRows(at: IndexSet(integer: count), withAnimation: .slideDown)
                 }
             }
-            updatePeople()
         }
     }
 
     @IBAction func removePerson(_ sender: NSButton) {
-        if let event = NSApplication.shared.currentEvent
-        {
-            NSMenu.popUpContextMenu(addPersonMenu, with: event, for: sender)
+        if let selection = indexView.indexArray.selectedObjects as? [Book] {
+            // update model
+            let row = detailsView.row(for: sender)
+            let personRole = people[row]
+            for book in selection {
+                book.removeFromPersonRoles(personRole)
+            }
+            
+            // update table
+            detailsView.removeRows(at: IndexSet(integer: row), withAnimation: .slideUp)
         }
     }
     
@@ -181,4 +159,66 @@ class CollectionDetailViewController: CollectionViewController, NSTableViewDataS
     }
     
 
+}
+
+// MARK: Table Support
+
+extension CollectionDetailViewController: NSTableViewDataSource, NSTableViewDelegate {
+    static let HeadingColumnID = NSUserInterfaceItemIdentifier(rawValue: "heading")
+    static let ValueColumnID = NSUserInterfaceItemIdentifier(rawValue: "value")
+    static let PersonColumnID = NSUserInterfaceItemIdentifier(rawValue: "person")
+    static let DateColumnID = NSUserInterfaceItemIdentifier(rawValue: "date")
+    
+    func hideUnusedColumns() {
+        detailsView.tableColumn(withIdentifier: CollectionDetailViewController.PersonColumnID)?.isHidden = true
+        detailsView.tableColumn(withIdentifier: CollectionDetailViewController.DateColumnID)?.isHidden = true
+    }
+    
+    func rowInfo(for tableView: NSTableView, columnID: NSUserInterfaceItemIdentifier, row: Int) -> (NSView?, Bool, Bool, Int) {
+        var viewID = columnID
+        let isPerson = row < people.count
+        let isValue = columnID == CollectionDetailViewController.ValueColumnID
+        let index = isPerson ? row : row - people.count
+        if isValue {
+            if isPerson {
+                viewID = CollectionDetailViewController.PersonColumnID
+            } else if rows[index].type == .date {
+                viewID = CollectionDetailViewController.DateColumnID
+            }
+        }
+        
+        let view = tableView.makeView(withIdentifier: viewID, owner: self)
+        return (view, isPerson, isValue, index)
+    }
+    
+    func numberOfRows(in tableView: NSTableView) -> Int {
+        return rows.count + people.count
+    }
+
+    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
+        guard row < (rows.count + people.count), let columnID = tableColumn?.identifier else {
+            return nil
+        }
+        
+        let (view, isPerson, isValue, index) = rowInfo(for: tableView, columnID: columnID, row: row)
+        
+        if !isValue, let field = view?.subviews.first as? NSTextField {
+            if isPerson {
+                field.stringValue = people[index].role?.name ?? "<unknown role>"
+            } else {
+                field.stringValue = rows[index].label
+            }
+        } else if isValue, let subview = view?.subviews.first {
+            var options = [NSBindingOption:Any]()
+            if !isPerson && (rows[index].type == .dateReadOnly) {
+                options[NSBindingOption(rawValue: "NSValueTransformer")] = ValueTransformer(forName: NSValueTransformerName(rawValue: "DateToString"))
+            }
+            let bound: Any = isPerson ? people[index] : indexView.indexArray
+            let path = isPerson ? "person.name" : "selection.\(rows[index].binding)"
+            subview.bind(NSBindingName(rawValue: "value"), to:bound, withKeyPath:path, options: options)
+        }
+        
+        return view
+    }
+    
 }
