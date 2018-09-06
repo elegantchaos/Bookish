@@ -342,27 +342,27 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Insert" id="KpK-bQ-eVd">
                                     <items>
-                                        <menuItem title="Author" keyEquivalent="A" identifier="author" id="0wK-5S-QbN">
+                                        <menuItem title="Author" keyEquivalent="A" identifier="InsertPerson.author" id="0wK-5S-QbN">
                                             <connections>
-                                                <action selector="insertPerson:" target="Ady-hI-5gd" id="FYD-Pa-SPs"/>
+                                                <action selector="performAction:" target="Ady-hI-5gd" id="mMp-Ae-tXh"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Book" keyEquivalent="B" identifier="book" id="LP4-Dk-Bka">
+                                        <menuItem title="Book" keyEquivalent="B" identifier="InsertBook" id="LP4-Dk-Bka">
                                             <connections>
-                                                <action selector="insertBook:" target="Ady-hI-5gd" id="eDP-zz-ybf"/>
+                                                <action selector="performAction:" target="Ady-hI-5gd" id="8VJ-L9-tgw"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Editor" keyEquivalent="E" identifier="editor" id="2uE-bf-oad">
+                                        <menuItem title="Editor" keyEquivalent="E" identifier="InsertPerson.editor" id="2uE-bf-oad">
                                             <connections>
-                                                <action selector="insertPerson:" target="Ady-hI-5gd" id="lAS-OQ-3Rx"/>
+                                                <action selector="performAction:" target="Ady-hI-5gd" id="liE-dM-rlP"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Illustrator" keyEquivalent="I" identifier="illustrator" id="zfG-qk-QZw">
+                                        <menuItem title="Illustrator" keyEquivalent="I" identifier="InsertPerson.illustrator" id="zfG-qk-QZw">
                                             <connections>
-                                                <action selector="insertPerson:" target="Ady-hI-5gd" id="OKh-Dg-NzN"/>
+                                                <action selector="performAction:" target="Ady-hI-5gd" id="Hft-h8-UKZ"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Test" keyEquivalent="t" identifier="illustrator" id="SCO-Qe-KWS">
+                                        <menuItem title="Test" keyEquivalent="t" identifier="TestAction" id="SCO-Qe-KWS">
                                             <connections>
                                                 <action selector="performAction:" target="Ady-hI-5gd" id="giN-we-PkF"/>
                                             </connections>
@@ -783,7 +783,6 @@
                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
                                                                     <connections>
-                                                                        <action selector="startEditing:" target="BkD-e8-vo5" id="lUe-44-qCQ"/>
                                                                         <outlet property="delegate" destination="BkD-e8-vo5" id="JMu-lh-3IF"/>
                                                                     </connections>
                                                                 </textField>

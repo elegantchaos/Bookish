@@ -6,7 +6,7 @@
 import Cocoa
 
 @NSApplicationMain
-class Application: NSObject, NSApplicationDelegate {
+class Application: NSObject, NSApplicationDelegate, ActionContextProvider {
     let documentWindowControllerFactory = DocumentWindowControllerFactory()
     let actionManager = ActionManager()
     let uiTesting = CommandLine.arguments.contains("--ui-testing")
@@ -31,6 +31,8 @@ class Application: NSObject, NSApplicationDelegate {
     }
     
     func applicationWillFinishLaunching(_ notification: Notification) {
+        actionManager.register(action: TestAction(identifier: "TestAction"))
+        actionManager.register(action: InsertPersonAction(identifier: "InsertPerson"))
         
         ValueTransformer.setValueTransformer(AuthorsTransformer(), forName: AuthorsTransformer.name)
         ValueTransformer.setValueTransformer(DateTransformer(), forName: DateTransformer.name)
@@ -48,6 +50,14 @@ class Application: NSObject, NSApplicationDelegate {
     }
     
     @IBAction func performAction(_ sender: Any) {
-        print("blah")
+        if let keyResponder = NSApplication.shared.keyWindow?.firstResponder, let actionID = (sender as? NSUserInterfaceItemIdentification)?.identifier?.rawValue {
+            let context = ActionContext(target: keyResponder, sender: sender)
+            actionManager.perform(action: actionID, context: context)
+        }
+    }
+    
+    func provide(context: ActionContext) {
+        print("gathering context")
+        context.info["Test"] = "Blah"
     }
 }

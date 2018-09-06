@@ -6,7 +6,7 @@
 import AppKit
 import BookishModel
 
-class CollectionWindowController: NSWindowController, DocumentWindowController {
+class CollectionWindowController: NSWindowController, DocumentWindowController, ActionContextProvider {
     var viewModel: CollectionDocumentViewModel?
     typealias ViewModel = CollectionDocumentViewModel
     
@@ -22,4 +22,8 @@ class CollectionWindowController: NSWindowController, DocumentWindowController {
 //        }
     }
     
+    func provide(context: ActionContext) {
+        print("window gathering context")
+        context.info["MOC"] = viewModel?.managedObjectContext
+    }
 }
