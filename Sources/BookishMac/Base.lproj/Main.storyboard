@@ -918,19 +918,19 @@
                 <userDefaultsController representsSharedInstance="YES" id="CPG-9C-fnr"/>
                 <menu id="al3-YH-cB4">
                     <items>
-                        <menuItem title="Author" identifier="InsertPerson.author" id="3B0-4b-61T">
+                        <menuItem title="Author" identifier="button.InsertPerson.author" id="3B0-4b-61T">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
                                 <action selector="performAction:" target="dg1-Od-cPv" id="KoQ-8R-xTL"/>
                             </connections>
                         </menuItem>
-                        <menuItem title="Editor" identifier="InsertPerson.editor" id="NQ6-Df-LV8">
+                        <menuItem title="Editor" identifier="button.InsertPerson.editor" id="NQ6-Df-LV8">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
                                 <action selector="performAction:" target="dg1-Od-cPv" id="Wdx-RB-k83"/>
                             </connections>
                         </menuItem>
-                        <menuItem title="Illustrator" identifier="InsertPerson.illustrator" id="lQJ-xx-laI">
+                        <menuItem title="Illustrator" identifier="button.InsertPerson.illustrator" id="lQJ-xx-laI">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
                                 <action selector="performAction:" target="dg1-Od-cPv" id="qnc-gB-jcQ"/>

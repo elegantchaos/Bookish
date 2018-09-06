@@ -5,6 +5,9 @@
 
 import AppKit
 import BookishModel
+import Logger
+
+let ActionChannel = Logger("Actions")
 
 class Action {
     let identifier: String
@@ -82,16 +85,23 @@ protocol ActionContextProvider {
     }
 
     @IBAction func performAction(_ sender: Any) {
-        if let identifier = (sender as? NSUserInterfaceItemIdentification)?.identifier?.rawValue {
-            let components = identifier.split(separator: ".")
-            let actionID = String(components[0])
-            let parameters = components.dropFirst().map { String($0) }
+        guard let identifier = (sender as? NSUserInterfaceItemIdentification)?.identifier?.rawValue else {
+            ActionChannel.log("couldn't identify action")
+            return
+        }
+        
+        var components = ArraySlice(identifier.split(separator: ".").map { String($0) })
+        while let actionID = components.popFirst() {
             if let action = actions[actionID] {
-                let context = ActionContext(sender: sender, parameters: parameters)
+                ActionChannel.log("performing \(action)")
+                let context = ActionContext(sender: sender, parameters: Array(components))
                 gather(context: context)
                 action.perform(context: context)
+                return
             }
         }
+        
+        ActionChannel.log("no registered actions for: \(identifier)")
     }
     
 }
