@@ -62,6 +62,7 @@
 		22429408212D958400E70510 /* CollectionSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22429407212D958400E70510 /* CollectionSplitViewController.swift */; };
 		22960328214025E80020B3EB /* PersonTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22960327214025E80020B3EB /* PersonTableCellView.swift */; };
 		2296032A214032520020B3EB /* PersonTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22960329214032520020B3EB /* PersonTextField.swift */; };
+		2296032D21413B3C0020B3EB /* ActionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2296032C21413B3C0020B3EB /* ActionManager.swift */; };
 		22DD42482126D6DA0070C85A /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DD42472126D6DA0070C85A /* Application.swift */; };
 		22DD424A2126D6DA0070C85A /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DD42492126D6DA0070C85A /* CollectionViewController.swift */; };
 		22DD424C2126D6DA0070C85A /* CollectionDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DD424B2126D6DA0070C85A /* CollectionDocument.swift */; };
@@ -205,6 +206,7 @@
 		22960327214025E80020B3EB /* PersonTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonTableCellView.swift; sourceTree = "<group>"; };
 		22960329214032520020B3EB /* PersonTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonTextField.swift; sourceTree = "<group>"; };
 		2296032B214132840020B3EB /* Bookish.sketch */ = {isa = PBXFileReference; lastKnownFileType = file; path = Bookish.sketch; sourceTree = "<group>"; };
+		2296032C21413B3C0020B3EB /* ActionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionManager.swift; sourceTree = "<group>"; };
 		22DD42442126D6DA0070C85A /* BookishMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BookishMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22DD42472126D6DA0070C85A /* Application.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
 		22DD42492126D6DA0070C85A /* CollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
@@ -350,6 +352,7 @@
 			isa = PBXGroup;
 			children = (
 				22DD42472126D6DA0070C85A /* Application.swift */,
+				2296032C21413B3C0020B3EB /* ActionManager.swift */,
 				22143FD2212F0F2500B689DF /* AuthorsTransformer.swift */,
 				221F272821382C8E00DC2DC7 /* DateTransformer.swift */,
 				22143FD0212F076000B689DF /* CollectionRootViewController.swift */,
@@ -924,6 +927,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2296032A214032520020B3EB /* PersonTextField.swift in Sources */,
+				2296032D21413B3C0020B3EB /* ActionManager.swift in Sources */,
 				22DD424A2126D6DA0070C85A /* CollectionViewController.swift in Sources */,
 				22429401212C32BF00E70510 /* CollectionWindowController.swift in Sources */,
 				22DD42482126D6DA0070C85A /* Application.swift in Sources */,

@@ -362,6 +362,11 @@
                                                 <action selector="insertPerson:" target="Ady-hI-5gd" id="OKh-Dg-NzN"/>
                                             </connections>
                                         </menuItem>
+                                        <menuItem title="Test" keyEquivalent="t" identifier="illustrator" id="SCO-Qe-KWS">
+                                            <connections>
+                                                <action selector="performAction:" target="Ady-hI-5gd" id="giN-we-PkF"/>
+                                            </connections>
+                                        </menuItem>
                                     </items>
                                 </menu>
                             </menuItem>
@@ -771,7 +776,7 @@
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="62Q-09-BL4" customClass="PersonTextField" customModule="BookishMac" customModuleProvider="target">
-                                                                    <rect key="frame" x="0.0" y="2" width="4" height="13"/>
+                                                                    <rect key="frame" x="0.0" y="2" width="275" height="13"/>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" continuous="YES" alignment="left" placeholderString="value" usesSingleLineMode="YES" id="mQk-Co-D5V">
                                                                         <font key="font" metaFont="systemBold" size="10"/>
                                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -783,8 +788,8 @@
                                                                     </connections>
                                                                 </textField>
                                                                 <button identifier="add-person" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RsI-9f-qrv" userLabel="Add">
-                                                                    <rect key="frame" x="10" y="-122" width="260" height="261"/>
-                                                                    <buttonCell key="cell" type="inline" bezelStyle="inline" image="Plus" imagePosition="only" alignment="center" controlSize="mini" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="eIs-R7-djF">
+                                                                    <rect key="frame" x="281" y="1" width="15" height="16"/>
+                                                                    <buttonCell key="cell" type="inline" bezelStyle="inline" image="Plus" imagePosition="only" alignment="center" controlSize="mini" lineBreakMode="truncatingTail" state="on" inset="2" id="eIs-R7-djF">
                                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                         <font key="font" metaFont="smallSystemBold"/>
                                                                     </buttonCell>
@@ -793,8 +798,8 @@
                                                                     </connections>
                                                                 </button>
                                                                 <button identifier="remove-person" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7vP-8A-rYs" userLabel="Remove">
-                                                                    <rect key="frame" x="278" y="0.0" width="15" height="16"/>
-                                                                    <buttonCell key="cell" type="inline" bezelStyle="inline" image="NSRemoveTemplate" imagePosition="only" alignment="center" controlSize="mini" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="HJk-Ws-ykn">
+                                                                    <rect key="frame" x="296" y="1" width="15" height="16"/>
+                                                                    <buttonCell key="cell" type="inline" bezelStyle="inline" image="Minus" imagePosition="only" alignment="center" controlSize="mini" lineBreakMode="truncatingTail" state="on" inset="2" id="HJk-Ws-ykn">
                                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                         <font key="font" metaFont="smallSystemBold"/>
                                                                     </buttonCell>
@@ -806,12 +811,12 @@
                                                             <constraints>
                                                                 <constraint firstItem="7vP-8A-rYs" firstAttribute="centerY" secondItem="62Q-09-BL4" secondAttribute="centerY" id="BLH-0i-FO4"/>
                                                                 <constraint firstItem="RsI-9f-qrv" firstAttribute="leading" secondItem="62Q-09-BL4" secondAttribute="trailing" constant="8" symbolic="YES" id="L8f-aw-fkx"/>
-                                                                <constraint firstItem="7vP-8A-rYs" firstAttribute="leading" secondItem="RsI-9f-qrv" secondAttribute="trailing" constant="8" symbolic="YES" id="TMC-DU-K4g"/>
+                                                                <constraint firstItem="7vP-8A-rYs" firstAttribute="leading" secondItem="RsI-9f-qrv" secondAttribute="trailing" id="TMC-DU-K4g"/>
                                                                 <constraint firstItem="62Q-09-BL4" firstAttribute="top" secondItem="BkD-e8-vo5" secondAttribute="top" constant="2" id="c8n-96-gLk"/>
                                                                 <constraint firstItem="RsI-9f-qrv" firstAttribute="centerY" secondItem="62Q-09-BL4" secondAttribute="centerY" id="fCg-0m-XkC"/>
                                                                 <constraint firstItem="62Q-09-BL4" firstAttribute="leading" secondItem="BkD-e8-vo5" secondAttribute="leading" constant="2" id="gvF-Bo-6Cl"/>
                                                                 <constraint firstAttribute="bottom" secondItem="62Q-09-BL4" secondAttribute="bottom" constant="2" id="iaA-td-3Tx"/>
-                                                                <constraint firstAttribute="trailing" secondItem="7vP-8A-rYs" secondAttribute="trailing" constant="20" symbolic="YES" id="kcO-qf-dLm"/>
+                                                                <constraint firstAttribute="trailing" secondItem="7vP-8A-rYs" secondAttribute="trailing" constant="2" id="kcO-qf-dLm"/>
                                                             </constraints>
                                                             <connections>
                                                                 <outlet property="addButton" destination="RsI-9f-qrv" id="F8B-9Y-hAX"/>
@@ -939,8 +944,9 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Minus" width="12" height="12"/>
         <image name="NSAddTemplate" width="11" height="11"/>
         <image name="NSRemoveTemplate" width="11" height="11"/>
-        <image name="Plus" width="256" height="256"/>
+        <image name="Plus" width="12" height="12"/>
     </resources>
 </document>

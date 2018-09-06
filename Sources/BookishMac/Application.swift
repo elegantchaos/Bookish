@@ -8,11 +8,13 @@ import Cocoa
 @NSApplicationMain
 class Application: NSObject, NSApplicationDelegate {
     let documentWindowControllerFactory = DocumentWindowControllerFactory()
+    let actionManager = ActionManager()
     let uiTesting = CommandLine.arguments.contains("--ui-testing")
     var testDocument = CommandLine.arguments.contains("--test-document")
     let noBlankDocument = CommandLine.arguments.contains("--no-blank-document")
     
     override func awakeFromNib() {
+        print(CommandLine.arguments)
         super.awakeFromNib()
         if uiTesting {
             resetState()
@@ -43,5 +45,9 @@ class Application: NSObject, NSApplicationDelegate {
     
     func applicationShouldOpenUntitledFile(_ sender: NSApplication) -> Bool {
         return !noBlankDocument
+    }
+    
+    @IBAction func performAction(_ sender: Any) {
+        print("blah")
     }
 }
