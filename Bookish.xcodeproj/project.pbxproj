@@ -204,6 +204,7 @@
 		22429407212D958400E70510 /* CollectionSplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionSplitViewController.swift; sourceTree = "<group>"; };
 		22960327214025E80020B3EB /* PersonTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonTableCellView.swift; sourceTree = "<group>"; };
 		22960329214032520020B3EB /* PersonTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonTextField.swift; sourceTree = "<group>"; };
+		2296032B214132840020B3EB /* Bookish.sketch */ = {isa = PBXFileReference; lastKnownFileType = file; path = Bookish.sketch; sourceTree = "<group>"; };
 		22DD42442126D6DA0070C85A /* BookishMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BookishMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22DD42472126D6DA0070C85A /* Application.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
 		22DD42492126D6DA0070C85A /* CollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
@@ -411,6 +412,7 @@
 			isa = PBXGroup;
 			children = (
 				22DD42792126DDA80070C85A /* Bookish.xcconfig */,
+				2296032B214132840020B3EB /* Bookish.sketch */,
 				22DD42462126D6DA0070C85A /* Sources */,
 				22DD42782126DD3A0070C85A /* Tests */,
 				22DD42452126D6DA0070C85A /* Products */,
