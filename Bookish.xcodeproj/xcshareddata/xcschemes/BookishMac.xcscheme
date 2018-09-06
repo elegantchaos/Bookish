@@ -90,7 +90,7 @@
       enableThreadSanitizer = "YES"
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
-      ignoresPersistentStateOnLaunch = "YES"
+      ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       stopOnEveryThreadSanitizerIssue = "YES"
       debugServiceExtension = "internal"
@@ -108,6 +108,18 @@
       <CommandLineArguments>
          <CommandLineArgument
             argument = "-logs Model"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "-ApplePersistenceIgnoreState YES"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "-NSTreatUnknownArgumentsAsOpen NO"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "--test-document"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>
