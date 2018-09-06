@@ -4,6 +4,7 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 import Cocoa
+import BookishCore
 
 @NSApplicationMain
 class Application: NSObject, NSApplicationDelegate, ActionContextProvider {
@@ -31,6 +32,8 @@ class Application: NSObject, NSApplicationDelegate, ActionContextProvider {
     }
     
     func applicationWillFinishLaunching(_ notification: Notification) {
+        BookishCore().test()
+        
         actionManager.register(action: InsertPersonAction(identifier: "InsertPerson"))
         actionManager.register(action: RemovePersonAction(identifier: "RemovePerson"))
 

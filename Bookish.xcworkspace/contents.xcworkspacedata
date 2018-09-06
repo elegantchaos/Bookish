@@ -8,6 +8,6 @@
       location = "group:Bookish.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:Dependencies/Logger/Logger.xcodeproj">
+      location = "group:.build/xcode/BookishCore.xcodeproj">
    </FileRef>
 </Workspace>
