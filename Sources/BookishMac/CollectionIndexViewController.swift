@@ -32,10 +32,6 @@ class CollectionIndexViewController: CollectionViewController {
 //
         super.viewWillAppear()
     }
-    
-    @IBAction func insertPerson(_ sender: Any) {
-        detailView.insertPerson(sender)
-    }
 }
 
 extension CollectionIndexViewController: ActionContextProvider {

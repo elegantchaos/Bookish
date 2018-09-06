@@ -31,9 +31,9 @@ class Application: NSObject, NSApplicationDelegate, ActionContextProvider {
     }
     
     func applicationWillFinishLaunching(_ notification: Notification) {
-        actionManager.register(action: TestAction(identifier: "TestAction"))
         actionManager.register(action: InsertPersonAction(identifier: "InsertPerson"))
-        
+        actionManager.register(action: RemovePersonAction(identifier: "RemovePerson"))
+
         actionManager.nextResponder = NSApp.nextResponder
         NSApp.nextResponder = actionManager
         

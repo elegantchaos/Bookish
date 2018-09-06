@@ -115,18 +115,25 @@ extension CollectionDetailViewController: ActionContextProvider, PersonChangeObs
         if let selection = indexView.indexArray.selectedObjects as? [Book] {
             context.info[ActionContext.SelectionKey] = selection
             context.info[PersonAction.ObserverKey] = self
+            if let view = context.sender as? NSView {
+                let row = detailsView.row(for: view)
+                if row < people.count {
+                    context.info[PersonAction.RoleKey] = people[row]
+                }
+            }
         }
     }
     
     func added(role: PersonRole) {
-        // update table
         let count = people.count
         people.append(role)
         detailsView.insertRows(at: IndexSet(integer: count), withAnimation: .slideDown)
     }
     
-    func removed(role: PersonRole) {
-    
+    func removing(role: PersonRole) {
+        if let row = people.firstIndex(of: role) {
+            detailsView.removeRows(at: IndexSet(integer: row), withAnimation: .slideUp)
+        }
     }
 }
 
@@ -134,20 +141,6 @@ extension CollectionDetailViewController: ActionContextProvider, PersonChangeObs
 
 extension CollectionDetailViewController {
 
-    @IBAction func removePerson(_ sender: NSButton) {
-        if let selection = indexView.indexArray.selectedObjects as? [Book] {
-            // update model
-            let row = detailsView.row(for: sender)
-            let personRole = people[row]
-            for book in selection {
-                book.removeFromPersonRoles(personRole)
-            }
-            
-            // update table
-            detailsView.removeRows(at: IndexSet(integer: row), withAnimation: .slideUp)
-        }
-    }
-    
     @IBAction func showAddPerson(_ sender: NSButton) {
         if let event = NSApplication.shared.currentEvent
         {

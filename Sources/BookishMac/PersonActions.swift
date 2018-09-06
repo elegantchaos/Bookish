@@ -8,11 +8,12 @@ import CoreData
 
 protocol PersonChangeObserver {
     func added(role: PersonRole)
-    func removed(role: PersonRole)
+    func removing(role: PersonRole)
 }
 
 class PersonAction: Action {
     static let ObserverKey = "personObserver"
+    static let RoleKey = "personRole"
 }
 
 class InsertPersonAction: PersonAction {
@@ -22,8 +23,6 @@ class InsertPersonAction: PersonAction {
             if
                 let selection = context.info[ActionContext.SelectionKey] as? [Book],
                 let moc = context.info[ActionContext.ModelObjectContextKey] as? NSManagedObjectContext {
-                // update model
-                
                 let person = Person(context: moc)
                 let role = person.role(as: roleName)
                 for book in selection {
@@ -35,5 +34,22 @@ class InsertPersonAction: PersonAction {
                 }
             }
         }
+    }
+}
+
+class RemovePersonAction: PersonAction {
+    override func perform(context: ActionContext) {
+        if
+            let selection = context.info[ActionContext.SelectionKey] as? [Book],
+            let role = context.info[PersonAction.RoleKey] as? PersonRole {
+            for book in selection {
+                book.removeFromPersonRoles(role)
+            }
+
+            if let observer = context.info[PersonAction.ObserverKey] as? PersonChangeObserver {
+                observer.removing(role: role)
+            }
+        }
+
     }
 }
