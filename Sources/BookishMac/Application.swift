@@ -34,6 +34,9 @@ class Application: NSObject, NSApplicationDelegate, ActionContextProvider {
         actionManager.register(action: TestAction(identifier: "TestAction"))
         actionManager.register(action: InsertPersonAction(identifier: "InsertPerson"))
         
+        actionManager.nextResponder = NSApp.nextResponder
+        NSApp.nextResponder = actionManager
+        
         ValueTransformer.setValueTransformer(AuthorsTransformer(), forName: AuthorsTransformer.name)
         ValueTransformer.setValueTransformer(DateTransformer(), forName: DateTransformer.name)
     }
@@ -49,13 +52,7 @@ class Application: NSObject, NSApplicationDelegate, ActionContextProvider {
         return !noBlankDocument
     }
     
-    @IBAction func performAction(_ sender: Any) {
-        if let keyResponder = NSApplication.shared.keyWindow?.firstResponder, let actionID = (sender as? NSUserInterfaceItemIdentification)?.identifier?.rawValue {
-            let context = ActionContext(target: keyResponder, sender: sender)
-            actionManager.perform(action: actionID, context: context)
-        }
-    }
-    
+
     func provide(context: ActionContext) {
         print("gathering context")
         context.info["Test"] = "Blah"

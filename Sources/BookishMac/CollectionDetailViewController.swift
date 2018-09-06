@@ -110,30 +110,29 @@ class CollectionDetailViewController: CollectionViewController {
     }
 }
 
+extension CollectionDetailViewController: ActionContextProvider, PersonChangeObserver {
+    func provide(context: ActionContext) {
+        if let selection = indexView.indexArray.selectedObjects as? [Book] {
+            context.info[ActionContext.SelectionKey] = selection
+            context.info[PersonAction.ObserverKey] = self
+        }
+    }
+    
+    func added(role: PersonRole) {
+        // update table
+        let count = people.count
+        people.append(role)
+        detailsView.insertRows(at: IndexSet(integer: count), withAnimation: .slideDown)
+    }
+    
+    func removed(role: PersonRole) {
+    
+    }
+}
+
 // MARK: Actions
 
 extension CollectionDetailViewController {
-
-    @IBAction func insertPerson(_ sender: Any) {
-        if let item = sender as? NSMenuItem  {
-            if let roleName = item.identifier?.rawValue {
-                if let selection = indexView.indexArray.selectedObjects as? [Book] {
-                    // update model
-                    let context = cvm.managedObjectContext
-                    let person = Person(context: context)
-                    let role = person.role(as: roleName)
-                    for book in selection {
-                        book.addToPersonRoles(role)
-                    }
-                    
-                    // update table
-                    let count = people.count
-                    people.append(role)
-                    detailsView.insertRows(at: IndexSet(integer: count), withAnimation: .slideDown)
-                }
-            }
-        }
-    }
 
     @IBAction func removePerson(_ sender: NSButton) {
         if let selection = indexView.indexArray.selectedObjects as? [Book] {

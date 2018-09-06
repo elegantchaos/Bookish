@@ -37,3 +37,9 @@ class CollectionIndexViewController: CollectionViewController {
         detailView.insertPerson(sender)
     }
 }
+
+extension CollectionIndexViewController: ActionContextProvider {
+    func provide(context: ActionContext) {
+        detailView.provide(context: context)
+    }
+}

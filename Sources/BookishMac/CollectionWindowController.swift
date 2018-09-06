@@ -23,7 +23,6 @@ class CollectionWindowController: NSWindowController, DocumentWindowController, 
     }
     
     func provide(context: ActionContext) {
-        print("window gathering context")
-        context.info["MOC"] = viewModel?.managedObjectContext
+        context.info[ActionContext.ModelObjectContextKey] = viewModel?.managedObjectContext
     }
 }

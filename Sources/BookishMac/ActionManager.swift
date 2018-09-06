@@ -24,39 +24,23 @@ class TestAction: Action {
     }
 }
 
-class InsertPersonAction: Action {
-    override func perform(context: ActionContext) {
-        if context.components.count > 1 {
-            let roleName = context.components[1]
-            //        if let selection = context.info["Selection"] as? [Book] {
-            //            // update model
-            //            let context = context.info["MOC"] as? NSManagedObjectContext
-            //            let person = Person(context: context)
-            //            let role = person.role(as: roleName)
-            //            for book in selection {
-            //                book.addToPersonRoles(role)
-            //            }
-            //
-            //            // update table
-            //            let count = people.count
-            //            people.append(role)
-            //            detailsView.insertRows(at: IndexSet(integer: count), withAnimation: .slideDown)
-            //        }
-        }
-    }
-}
 
-@objc class ActionContext: NSObject {
-    typealias ActionComponents = [String]
-    
-    let target: NSResponder
+
+class ActionContext: NSObject {
+    static let SelectionKey = "selection"
+    static let TargetKey = "target"
+    static let SenderKey = "sender"
+    static let ModelObjectContextKey = "moc"
+    static let ActionKey = "action"
+    static let ActionComponentsKey = "components"
+
     let sender: Any
-    var components = ActionComponents()
+    var parameters: [String]
     var info = [String:Any]()
-    
-    init(target: NSResponder, sender: Any) {
-        self.target = target
+
+    init(sender: Any, parameters: [String]) {
         self.sender = sender
+        self.parameters = parameters
     }
 }
 
@@ -64,12 +48,8 @@ protocol ActionContextProvider {
     func provide(context: ActionContext)
 }
 
-class ActionManager {
+@objc class ActionManager: NSResponder {
     var actions = [String:Action]()
-    
-    init() {
-        
-    }
     
     func register(action: Action) {
         actions[action.identifier] = action
@@ -98,13 +78,19 @@ class ActionManager {
         }
     }
 
-    func perform(action: String, context: ActionContext) {
-        let components = action.split(separator: ".").map { String($0) }
-        let actionID = components[0]
-        if let action = actions[actionID] {
-            context.components = components
-            gather(context: context)
-            action.perform(context: context)
+    func perform(_ sender: Any) {
+    }
+
+    @IBAction func performAction(_ sender: Any) {
+        if let identifier = (sender as? NSUserInterfaceItemIdentification)?.identifier?.rawValue {
+            let components = identifier.split(separator: ".")
+            let actionID = String(components[0])
+            let parameters = components.dropFirst().map { String($0) }
+            if let action = actions[actionID] {
+                let context = ActionContext(sender: sender, parameters: parameters)
+                gather(context: context)
+                action.perform(context: context)
+            }
         }
     }
     
