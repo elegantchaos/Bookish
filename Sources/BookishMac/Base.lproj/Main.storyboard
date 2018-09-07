@@ -477,15 +477,17 @@
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
                         <toolbar key="toolbar" implicitIdentifier="77DEAC6B-FAB4-4044-A5AA-0B8765A74231" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="WdN-bQ-LAx">
                             <allowedToolbarItems>
-                                <toolbarItem implicitItemIdentifier="NSToolbarShowColorsItem" id="yNB-Ih-h6h"/>
-                                <toolbarItem implicitItemIdentifier="NSToolbarShowFontsItem" id="WNV-4w-Za1"/>
+                                <toolbarItem implicitItemIdentifier="1CED54FA-DB54-4668-A669-6A9B23CE24FE" explicitItemIdentifier="toolbar.InsertBook" label="New" paletteLabel="New Book" tag="-1" image="NSAddTemplate" id="KUG-hg-iHG">
+                                    <connections>
+                                        <action selector="performAction:" target="6f7-a7-6o1" id="bL7-E9-AfQ"/>
+                                    </connections>
+                                </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="NSToolbarPrintItem" id="dHp-ii-LfM"/>
                                 <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="TAF-Mz-qpr"/>
                                 <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="dlb-Xe-WiO"/>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
-                                <toolbarItem reference="yNB-Ih-h6h"/>
-                                <toolbarItem reference="WNV-4w-Za1"/>
+                                <toolbarItem reference="KUG-hg-iHG"/>
                                 <toolbarItem reference="dlb-Xe-WiO"/>
                                 <toolbarItem reference="dHp-ii-LfM"/>
                             </defaultToolbarItems>

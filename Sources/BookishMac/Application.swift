@@ -8,7 +8,7 @@ import BookishCore
 import Actions
 
 @NSApplicationMain
-class Application: NSObject, NSApplicationDelegate, ActionContextProvider {
+class Application: NSObject, NSApplicationDelegate {
     let documentWindowControllerFactory = DocumentWindowControllerFactory()
     let actionManager = ActionManager()
     let uiTesting = CommandLine.arguments.contains("--ui-testing")
@@ -58,11 +58,5 @@ class Application: NSObject, NSApplicationDelegate, ActionContextProvider {
     
     func applicationShouldOpenUntitledFile(_ sender: NSApplication) -> Bool {
         return !noBlankDocument
-    }
-    
-
-    func provide(context: ActionContext) {
-        print("gathering context")
-        context.info["Test"] = "Blah"
     }
 }

@@ -19,11 +19,11 @@ class PersonAction: Action {
     static let MenuKey = "personMenu"
 
     override func validate(context: ActionContext) -> Bool {
-        guard let _ = context.info[ActionContext.SelectionKey] as? [Book] else {
+        guard let _ = context.info[ActionContext.selectionKey] as? [Book] else {
             return false
         }
         
-        guard let _ = context.info[ActionContext.ModelKey] as? CollectionDocumentViewModel else {
+        guard let _ = context.info[ActionContext.modelKey] as? CollectionDocumentViewModel else {
             return false
         }
         
@@ -40,8 +40,8 @@ class InsertPersonAction: PersonAction {
         if context.parameters.count > 0 {
             let roleName = context.parameters[0]
             if
-                let selection = context.info[ActionContext.SelectionKey] as? [Book],
-                let viewModel = context.info[ActionContext.ModelKey] as? CollectionDocumentViewModel {
+                let selection = context.info[ActionContext.selectionKey] as? [Book],
+                let viewModel = context.info[ActionContext.modelKey] as? CollectionDocumentViewModel {
                 let person = Person(context: viewModel.managedObjectContext)
                 let role = person.role(as: roleName)
                 for book in selection {
@@ -63,7 +63,7 @@ class RemovePersonAction: PersonAction {
     
     override func perform(context: ActionContext) {
         if
-            let selection = context.info[ActionContext.SelectionKey] as? [Book],
+            let selection = context.info[ActionContext.selectionKey] as? [Book],
             let role = context.info[PersonAction.RoleKey] as? PersonRole {
             for book in selection {
                 book.removeFromPersonRoles(role)
@@ -81,7 +81,7 @@ class ShowAddPersonAction: PersonAction {
     override func perform(context: ActionContext) {
         if
             let event = NSApplication.shared.currentEvent,
-            let viewModel = context.info[ActionContext.ModelKey] as? CollectionDocumentViewModel,
+            let viewModel = context.info[ActionContext.modelKey] as? CollectionDocumentViewModel,
             let view = context.sender as? NSView {
             NSMenu.popUpContextMenu(viewModel.addPersonMenu, with: event, for: view)
         }

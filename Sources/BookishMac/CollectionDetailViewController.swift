@@ -116,7 +116,7 @@ class CollectionDetailViewController: CollectionViewController {
 extension CollectionDetailViewController: ActionContextProvider, PersonChangeObserver {
     func provide(context: ActionContext) {
         if let selection = indexView.indexArray.selectedObjects as? [Book] {
-            context.info[ActionContext.SelectionKey] = selection
+            context.info[ActionContext.selectionKey] = selection
             context.append(key: PersonAction.ObserverKey, value: self)
             if let view = view.window?.firstResponder as? NSView {
                 let row = detailsView.row(for: view)
