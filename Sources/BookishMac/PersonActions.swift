@@ -79,11 +79,15 @@ class RemovePersonAction: PersonAction {
 
 class ShowAddPersonAction: PersonAction {
     override func perform(context: ActionContext) {
-        if
-            let event = NSApplication.shared.currentEvent,
-            let viewModel = context.info[ActionContext.modelKey] as? CollectionDocumentViewModel,
-            let view = context.sender as? NSView {
-            NSMenu.popUpContextMenu(viewModel.addPersonMenu, with: event, for: view)
+        if let event = NSApplication.shared.currentEvent, let viewModel = context.info[ActionContext.modelKey] as? CollectionDocumentViewModel {
+            var view = context.sender as? NSView
+            if view == nil {
+                view = (context.sender as? NSToolbarItem)?.view
+            }
+            
+            if let view = view {
+                NSMenu.popUpContextMenu(viewModel.addPersonMenu, with: event, for: view)
+            }
         }
     }
 }

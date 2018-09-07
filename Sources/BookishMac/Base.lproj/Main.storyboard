@@ -482,14 +482,42 @@
                                         <action selector="performAction:" target="6f7-a7-6o1" id="bL7-E9-AfQ"/>
                                     </connections>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="NSToolbarPrintItem" id="dHp-ii-LfM"/>
                                 <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="TAF-Mz-qpr"/>
                                 <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="dlb-Xe-WiO"/>
+                                <toolbarItem implicitItemIdentifier="42A4917E-FFCE-440D-90B8-1331166CC46A" explicitItemIdentifier="toolbar.ShowAddPerson" label="Add" paletteLabel="Add Person" image="NSTouchBarUserAddTemplate" sizingBehavior="auto" id="reg-Dx-A2Q" userLabel="Add Person">
+                                    <nil key="toolTip"/>
+                                    <button key="view" identifier="toolbar.button.ShowAddPerson" verticalHuggingPriority="750" id="uup-kx-3kb">
+                                        <rect key="frame" x="0.0" y="14" width="106" height="43"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="NSTouchBarUserAddTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="frN-4k-1rM">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="performAction:" target="6f7-a7-6o1" id="omz-Wu-Mk2"/>
+                                        </connections>
+                                    </button>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="551D39AE-40C4-4D12-BEB0-1B8440DCD640" explicitItemIdentifier="toolbar.RemovePerson" label="Remove" paletteLabel="Remove Person" image="NSTouchBarUserTemplate" sizingBehavior="auto" id="2Iz-4y-jpV">
+                                    <nil key="toolTip"/>
+                                    <button key="view" identifier="toolbar.button.RemovePerson" verticalHuggingPriority="750" id="PpS-3K-9lR">
+                                        <rect key="frame" x="0.0" y="14" width="106" height="43"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="NSTouchBarUserTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="aPU-Zr-BG1">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="performAction:" target="6f7-a7-6o1" id="b1x-xA-41L"/>
+                                        </connections>
+                                    </button>
+                                </toolbarItem>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
                                 <toolbarItem reference="KUG-hg-iHG"/>
                                 <toolbarItem reference="dlb-Xe-WiO"/>
-                                <toolbarItem reference="dHp-ii-LfM"/>
+                                <toolbarItem reference="reg-Dx-A2Q"/>
+                                <toolbarItem reference="2Iz-4y-jpV"/>
                             </defaultToolbarItems>
                             <connections>
                                 <outlet property="delegate" destination="jGA-0Y-lOj" id="dQw-9g-PvR"/>
@@ -940,6 +968,8 @@
         <image name="Minus" width="12" height="12"/>
         <image name="NSAddTemplate" width="11" height="11"/>
         <image name="NSRemoveTemplate" width="11" height="11"/>
+        <image name="NSTouchBarUserAddTemplate" width="21" height="30"/>
+        <image name="NSTouchBarUserTemplate" width="17" height="30"/>
         <image name="Plus" width="12" height="12"/>
     </resources>
 </document>
