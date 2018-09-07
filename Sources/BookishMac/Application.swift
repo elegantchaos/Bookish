@@ -5,6 +5,7 @@
 
 import Cocoa
 import BookishCore
+import Actions
 
 @NSApplicationMain
 class Application: NSObject, NSApplicationDelegate, ActionContextProvider {
@@ -32,13 +33,16 @@ class Application: NSObject, NSApplicationDelegate, ActionContextProvider {
     }
     
     func applicationWillFinishLaunching(_ notification: Notification) {
-        BookishCore().test()
+        actionManager.register([
+            InsertPersonAction(identifier: "InsertPerson"),
+            RemovePersonAction(identifier: "RemovePerson"),
+            ShowAddPersonAction(identifier: "ShowAddPerson")
+            ])
         
-        actionManager.register(action: InsertPersonAction(identifier: "InsertPerson"))
-        actionManager.register(action: RemovePersonAction(identifier: "RemovePerson"))
-
         actionManager.nextResponder = NSApp.nextResponder
         NSApp.nextResponder = actionManager
+
+        BookishCore().test()
         
         ValueTransformer.setValueTransformer(AuthorsTransformer(), forName: AuthorsTransformer.name)
         ValueTransformer.setValueTransformer(DateTransformer(), forName: DateTransformer.name)

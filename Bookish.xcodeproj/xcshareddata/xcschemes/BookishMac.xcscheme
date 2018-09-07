@@ -23,6 +23,20 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
+               BlueprintIdentifier = "BookishCore::BookishCore"
+               BuildableName = "BookishCore.framework"
+               BlueprintName = "BookishCore"
+               ReferencedContainer = "container:.build/xcode/BookishCore.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
                BlueprintIdentifier = "22DD42432126D6DA0070C85A"
                BuildableName = "BookishMac.app"
                BlueprintName = "BookishMac"

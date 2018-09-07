@@ -5,6 +5,7 @@
 
 import Cocoa
 import BookishModel
+import Actions
 
 class CollectionIndexViewController: CollectionViewController {
     @objc weak var detailView: CollectionDetailViewController!

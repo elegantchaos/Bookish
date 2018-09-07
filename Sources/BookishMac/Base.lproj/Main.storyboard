@@ -772,11 +772,11 @@
                                                             </connections>
                                                         </tableCellView>
                                                         <tableCellView identifier="person" id="BkD-e8-vo5" userLabel="person cell" customClass="PersonTableCellView" customModule="BookishMac" customModuleProvider="target">
-                                                            <rect key="frame" x="84" y="20" width="313" height="17"/>
+                                                            <rect key="frame" x="84" y="20" width="211" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="62Q-09-BL4" customClass="PersonTextField" customModule="BookishMac" customModuleProvider="target">
-                                                                    <rect key="frame" x="0.0" y="2" width="275" height="13"/>
+                                                                    <rect key="frame" x="0.0" y="2" width="173" height="13"/>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" continuous="YES" alignment="left" placeholderString="value" usesSingleLineMode="YES" id="mQk-Co-D5V">
                                                                         <font key="font" metaFont="systemBold" size="10"/>
                                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -786,18 +786,18 @@
                                                                         <outlet property="delegate" destination="BkD-e8-vo5" id="JMu-lh-3IF"/>
                                                                     </connections>
                                                                 </textField>
-                                                                <button identifier="add-person" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RsI-9f-qrv" userLabel="Add">
-                                                                    <rect key="frame" x="281" y="1" width="15" height="16"/>
+                                                                <button identifier="button.ShowAddPerson" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RsI-9f-qrv" userLabel="Add">
+                                                                    <rect key="frame" x="179" y="1" width="15" height="16"/>
                                                                     <buttonCell key="cell" type="inline" bezelStyle="inline" image="Plus" imagePosition="only" alignment="center" controlSize="mini" lineBreakMode="truncatingTail" state="on" inset="2" id="eIs-R7-djF">
                                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                         <font key="font" metaFont="smallSystemBold"/>
                                                                     </buttonCell>
                                                                     <connections>
-                                                                        <action selector="showAddPerson:" target="TBH-Sa-Ff0" id="RSv-zt-dCg"/>
+                                                                        <action selector="performAction:" target="dg1-Od-cPv" id="gT6-Ji-XI8"/>
                                                                     </connections>
                                                                 </button>
                                                                 <button identifier="RemovePerson" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7vP-8A-rYs" userLabel="Remove">
-                                                                    <rect key="frame" x="296" y="1" width="15" height="16"/>
+                                                                    <rect key="frame" x="194" y="1" width="15" height="16"/>
                                                                     <buttonCell key="cell" type="inline" bezelStyle="inline" image="Minus" imagePosition="only" alignment="center" controlSize="mini" lineBreakMode="truncatingTail" state="on" inset="2" id="HJk-Ws-ykn">
                                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                         <font key="font" metaFont="smallSystemBold"/>
@@ -907,7 +907,6 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="addPersonMenu" destination="al3-YH-cB4" id="fv7-g3-9fp"/>
                         <outlet property="detailsView" destination="vV5-vW-Afl" id="vNS-T3-T7d"/>
                         <outlet property="imageView" destination="nPv-jB-4iC" id="a6c-Sp-1gz"/>
                         <outlet property="subtitleView" destination="H8A-04-75V" id="JB7-lH-3xQ"/>
@@ -916,28 +915,6 @@
                 </viewController>
                 <customObject id="dg1-Od-cPv" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <userDefaultsController representsSharedInstance="YES" id="CPG-9C-fnr"/>
-                <menu id="al3-YH-cB4">
-                    <items>
-                        <menuItem title="Author" identifier="button.InsertPerson.author" id="3B0-4b-61T">
-                            <modifierMask key="keyEquivalentModifierMask"/>
-                            <connections>
-                                <action selector="performAction:" target="dg1-Od-cPv" id="KoQ-8R-xTL"/>
-                            </connections>
-                        </menuItem>
-                        <menuItem title="Editor" identifier="button.InsertPerson.editor" id="NQ6-Df-LV8">
-                            <modifierMask key="keyEquivalentModifierMask"/>
-                            <connections>
-                                <action selector="performAction:" target="dg1-Od-cPv" id="Wdx-RB-k83"/>
-                            </connections>
-                        </menuItem>
-                        <menuItem title="Illustrator" identifier="button.InsertPerson.illustrator" id="lQJ-xx-laI">
-                            <modifierMask key="keyEquivalentModifierMask"/>
-                            <connections>
-                                <action selector="performAction:" target="dg1-Od-cPv" id="qnc-gB-jcQ"/>
-                            </connections>
-                        </menuItem>
-                    </items>
-                </menu>
             </objects>
             <point key="canvasLocation" x="619" y="1307"/>
         </scene>

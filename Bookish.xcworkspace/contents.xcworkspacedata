@@ -7,7 +7,14 @@
    <FileRef
       location = "group:Bookish.xcodeproj">
    </FileRef>
-   <FileRef
-      location = "group:.build/xcode/BookishCore.xcodeproj">
-   </FileRef>
+   <Group
+      location = "container:"
+      name = "SPM Dependencies">
+      <FileRef
+         location = "group:Packages">
+      </FileRef>
+      <FileRef
+         location = "group:.build/xcode/BookishCore.xcodeproj">
+      </FileRef>
+   </Group>
 </Workspace>

@@ -4,6 +4,8 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 import AppKit
+import Actions
+import BookishCore
 import BookishModel
 
 class CollectionWindowController: NSWindowController, DocumentWindowController, ActionContextProvider {
@@ -23,6 +25,8 @@ class CollectionWindowController: NSWindowController, DocumentWindowController, 
     }
     
     func provide(context: ActionContext) {
-        context.info[ActionContext.ModelObjectContextKey] = viewModel?.managedObjectContext
+        if let model = viewModel {
+            context.info[ActionContext.ModelKey] = model
+        }
     }
 }

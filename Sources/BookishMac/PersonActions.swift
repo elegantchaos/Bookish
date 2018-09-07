@@ -5,15 +5,18 @@
 
 import BookishModel
 import CoreData
+import Actions
+import AppKit
 
 protocol PersonChangeObserver {
     func added(role: PersonRole)
-    func removing(role: PersonRole)
+    func removed(role: PersonRole)
 }
 
 class PersonAction: Action {
     static let ObserverKey = "personObserver"
     static let RoleKey = "personRole"
+    static let MenuKey = "personMenu"
 }
 
 class InsertPersonAction: PersonAction {
@@ -22,14 +25,14 @@ class InsertPersonAction: PersonAction {
             let roleName = context.parameters[0]
             if
                 let selection = context.info[ActionContext.SelectionKey] as? [Book],
-                let moc = context.info[ActionContext.ModelObjectContextKey] as? NSManagedObjectContext {
-                let person = Person(context: moc)
+                let viewModel = context.info[ActionContext.ModelKey] as? CollectionDocumentViewModel {
+                let person = Person(context: viewModel.managedObjectContext)
                 let role = person.role(as: roleName)
                 for book in selection {
                     book.addToPersonRoles(role)
                 }
-
-                if let observer = context.info[PersonAction.ObserverKey] as? PersonChangeObserver {
+                
+                context.forEach(key: PersonAction.ObserverKey) { (observer: PersonChangeObserver) in
                     observer.added(role: role)
                 }
             }
@@ -45,11 +48,23 @@ class RemovePersonAction: PersonAction {
             for book in selection {
                 book.removeFromPersonRoles(role)
             }
-
-            if let observer = context.info[PersonAction.ObserverKey] as? PersonChangeObserver {
-                observer.removing(role: role)
+            
+            context.forEach(key: PersonAction.ObserverKey) { (observer: PersonChangeObserver) in
+                observer.removed(role: role)
             }
         }
-
+        
     }
 }
+
+class ShowAddPersonAction: PersonAction {
+    override func perform(context: ActionContext) {
+        if
+            let event = NSApplication.shared.currentEvent,
+            let viewModel = context.info[ActionContext.ModelKey] as? CollectionDocumentViewModel,
+            let view = context.sender as? NSView {
+            NSMenu.popUpContextMenu(viewModel.addPersonMenu, with: event, for: view)
+        }
+    }
+}
+
