@@ -117,11 +117,11 @@ extension CollectionDetailViewController: ActionContextProvider, PersonChangeObs
     func provide(context: ActionContext) {
         if let selection = indexView.indexArray.selectedObjects as? [Book] {
             context.info[ActionContext.selectionKey] = selection
-            context.append(key: PersonAction.ObserverKey, value: self)
+            context.append(key: PersonAction.observerKey, value: self)
             if let view = view.window?.firstResponder as? NSView {
                 let row = detailsView.row(for: view)
                 if (row >= 0) && (row < people.count) {
-                    context.info[PersonAction.RoleKey] = people[row]
+                    context.info[PersonAction.roleKey] = people[row]
                 }
             }
         }

@@ -14,9 +14,8 @@ protocol PersonChangeObserver {
 }
 
 class PersonAction: Action {
-    static let ObserverKey = "personObserver"
-    static let RoleKey = "personRole"
-    static let MenuKey = "personMenu"
+    static let observerKey = "personObserver"
+    static let roleKey = "personRole"
 
     override func validate(context: ActionContext) -> Bool {
         guard let selection = context.info[ActionContext.selectionKey] as? [Book] else {
@@ -48,7 +47,7 @@ class InsertPersonAction: PersonAction {
                     book.addToPersonRoles(role)
                 }
                 
-                context.forEach(key: PersonAction.ObserverKey) { (observer: PersonChangeObserver) in
+                context.forEach(key: PersonAction.observerKey) { (observer: PersonChangeObserver) in
                     observer.added(role: role)
                 }
             }
@@ -58,19 +57,23 @@ class InsertPersonAction: PersonAction {
 
 class RemovePersonAction: PersonAction {
     override func validate(context: ActionContext) -> Bool {
-        return (context.info[PersonAction.RoleKey] as? PersonRole != nil) && super.validate(context: context)
+        return (context.info[PersonAction.roleKey] as? PersonRole != nil) && super.validate(context: context)
     }
     
     override func perform(context: ActionContext) {
         if
             let selection = context.info[ActionContext.selectionKey] as? [Book],
-            let role = context.info[PersonAction.RoleKey] as? PersonRole {
+            let role = context.info[PersonAction.roleKey] as? PersonRole {
             for book in selection {
                 book.removeFromPersonRoles(role)
             }
             
-            context.forEach(key: PersonAction.ObserverKey) { (observer: PersonChangeObserver) in
+            context.forEach(key: PersonAction.observerKey) { (observer: PersonChangeObserver) in
                 observer.removed(role: role)
+            }
+            
+            if (role.books?.count ?? 0) == 0 {
+                role.managedObjectContext?.delete(role)
             }
         }
         
