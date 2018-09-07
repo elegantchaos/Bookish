@@ -118,9 +118,9 @@ extension CollectionDetailViewController: ActionContextProvider, PersonChangeObs
         if let selection = indexView.indexArray.selectedObjects as? [Book] {
             context.info[ActionContext.SelectionKey] = selection
             context.append(key: PersonAction.ObserverKey, value: self)
-            if let view = context.sender as? NSView {
+            if let view = view.window?.firstResponder as? NSView {
                 let row = detailsView.row(for: view)
-                if row < people.count {
+                if (row >= 0) && (row < people.count) {
                     context.info[PersonAction.RoleKey] = people[row]
                 }
             }

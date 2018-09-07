@@ -36,7 +36,8 @@ class Application: NSObject, NSApplicationDelegate, ActionContextProvider {
         actionManager.register([
             InsertPersonAction(identifier: "InsertPerson"),
             RemovePersonAction(identifier: "RemovePerson"),
-            ShowAddPersonAction(identifier: "ShowAddPerson")
+            ShowAddPersonAction(identifier: "ShowAddPerson"),
+            InsertBookAction(identifier: "InsertBook")
             ])
         
         actionManager.nextResponder = NSApp.nextResponder

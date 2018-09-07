@@ -57,6 +57,10 @@ class InsertPersonAction: PersonAction {
 }
 
 class RemovePersonAction: PersonAction {
+    override func validate(context: ActionContext) -> Bool {
+        return (context.info[PersonAction.RoleKey] as? PersonRole != nil) && super.validate(context: context)
+    }
+    
     override func perform(context: ActionContext) {
         if
             let selection = context.info[ActionContext.SelectionKey] as? [Book],

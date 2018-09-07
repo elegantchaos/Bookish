@@ -67,6 +67,7 @@
 		2296038321418C280020B3EB /* Actions.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22960373214189550020B3EB /* Actions.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		2296038421418C310020B3EB /* BookishCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2296034121417E500020B3EB /* BookishCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		2296038521418C390020B3EB /* Logger.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2296035B214182860020B3EB /* Logger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		22D39E4F2142BCD000282467 /* InsertBookAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D39E4E2142BCD000282467 /* InsertBookAction.swift */; };
 		22DD42482126D6DA0070C85A /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DD42472126D6DA0070C85A /* Application.swift */; };
 		22DD424A2126D6DA0070C85A /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DD42492126D6DA0070C85A /* CollectionViewController.swift */; };
 		22DD424C2126D6DA0070C85A /* CollectionDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DD424B2126D6DA0070C85A /* CollectionDocument.swift */; };
@@ -217,6 +218,7 @@
 		2296035B214182860020B3EB /* Logger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Logger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2296036A214187570020B3EB /* Update.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = Update.sh; sourceTree = "<group>"; };
 		22960373214189550020B3EB /* Actions.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Actions.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		22D39E4E2142BCD000282467 /* InsertBookAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsertBookAction.swift; sourceTree = "<group>"; };
 		22DD42442126D6DA0070C85A /* BookishMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BookishMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22DD42472126D6DA0070C85A /* Application.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
 		22DD42492126D6DA0070C85A /* CollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
@@ -370,6 +372,7 @@
 				22DD42492126D6DA0070C85A /* CollectionViewController.swift */,
 				22429400212C32BF00E70510 /* CollectionWindowController.swift */,
 				2296032E2141563A0020B3EB /* PersonActions.swift */,
+				22D39E4E2142BCD000282467 /* InsertBookAction.swift */,
 				224293F9212C1D7500E70510 /* CollectionIndexViewController.swift */,
 				22429407212D958400E70510 /* CollectionSplitViewController.swift */,
 				22429405212D945C00E70510 /* CollectionDetailViewController.swift */,
@@ -978,6 +981,7 @@
 				22429408212D958400E70510 /* CollectionSplitViewController.swift in Sources */,
 				2296032F2141563A0020B3EB /* PersonActions.swift in Sources */,
 				221F272921382C8E00DC2DC7 /* DateTransformer.swift in Sources */,
+				22D39E4F2142BCD000282467 /* InsertBookAction.swift in Sources */,
 				22143FD521300F9300B689DF /* CoreDataTransformers.swift in Sources */,
 				22143FD1212F076000B689DF /* CollectionRootViewController.swift in Sources */,
 				22429403212C3C7400E70510 /* ViewExtensions.swift in Sources */,
