@@ -4,6 +4,7 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 import Cocoa
+import Actions
 import BookishModel
 
 enum RowType {
@@ -30,7 +31,6 @@ class CollectionDetailViewController: CollectionViewController {
     @IBOutlet weak var imageView: NSImageView!
     @IBOutlet weak var titleView: NSTextField!
     @IBOutlet weak var subtitleView: NSTextField!
-    @IBOutlet var addPersonMenu: NSMenu!
     
     var people = [PersonRole]()
     var indexObserver: NSKeyValueObservation?
@@ -51,8 +51,6 @@ class CollectionDetailViewController: CollectionViewController {
         if let parent = self.parent as? NSSplitViewController {
             indexView = parent.splitViewItems[0].viewController as? CollectionIndexViewController
         }
-        
-        hideUnusedColumns()
     }
     
     override func viewWillAppear() {
@@ -112,54 +110,37 @@ class CollectionDetailViewController: CollectionViewController {
     }
 }
 
+
 // MARK: Actions
 
-extension CollectionDetailViewController {
-
-    @IBAction func insertPerson(_ sender: Any) {
-        if let item = sender as? NSMenuItem  {
-            if let roleName = item.identifier?.rawValue {
-                if let selection = indexView.indexArray.selectedObjects as? [Book] {
-                    // update model
-                    let context = cvm.managedObjectContext
-                    let person = Person(context: context)
-                    let role = person.role(as: roleName)
-                    for book in selection {
-                        book.addToPersonRoles(role)
-                    }
-                    
-                    // update table
-                    let count = people.count
-                    people.append(role)
-                    detailsView.insertRows(at: IndexSet(integer: count), withAnimation: .slideDown)
+extension CollectionDetailViewController: ActionContextProvider, PersonChangeObserver {
+    func provide(context: ActionContext) {
+        if let selection = indexView.indexArray.selectedObjects as? [Book] {
+            context.info[ActionContext.SelectionKey] = selection
+            context.append(key: PersonAction.ObserverKey, value: self)
+            if let view = context.sender as? NSView {
+                let row = detailsView.row(for: view)
+                if row < people.count {
+                    context.info[PersonAction.RoleKey] = people[row]
                 }
             }
         }
     }
-
-    @IBAction func removePerson(_ sender: NSButton) {
-        if let selection = indexView.indexArray.selectedObjects as? [Book] {
-            // update model
-            let row = detailsView.row(for: sender)
-            let personRole = people[row]
-            for book in selection {
-                book.removeFromPersonRoles(personRole)
-            }
-            
-            // update table
+    
+    func added(role: PersonRole) {
+        let count = people.count
+        people.append(role)
+        detailsView.insertRows(at: IndexSet(integer: count), withAnimation: .slideDown)
+    }
+    
+    func removed(role: PersonRole) {
+        if let row = people.firstIndex(of: role) {
+            people.remove(at: row)
             detailsView.removeRows(at: IndexSet(integer: row), withAnimation: .slideUp)
         }
     }
-    
-    @IBAction func showAddPerson(_ sender: NSButton) {
-        if let event = NSApplication.shared.currentEvent
-        {
-            NSMenu.popUpContextMenu(addPersonMenu, with: event, for: sender)
-        }
-    }
-    
-
 }
+
 
 // MARK: Table Support
 
@@ -168,12 +149,7 @@ extension CollectionDetailViewController: NSTableViewDataSource, NSTableViewDele
     static let ValueColumnID = NSUserInterfaceItemIdentifier(rawValue: "value")
     static let PersonColumnID = NSUserInterfaceItemIdentifier(rawValue: "person")
     static let DateColumnID = NSUserInterfaceItemIdentifier(rawValue: "date")
-    
-    func hideUnusedColumns() {
-        detailsView.tableColumn(withIdentifier: CollectionDetailViewController.PersonColumnID)?.isHidden = true
-        detailsView.tableColumn(withIdentifier: CollectionDetailViewController.DateColumnID)?.isHidden = true
-    }
-    
+        
     func rowInfo(for tableView: NSTableView, columnID: NSUserInterfaceItemIdentifier, row: Int) -> (NSView?, Bool, Bool, Int) {
         var viewID = columnID
         let isPerson = row < people.count
@@ -221,4 +197,7 @@ extension CollectionDetailViewController: NSTableViewDataSource, NSTableViewDele
         return view
     }
     
+    func tableViewSelectionDidChange(_ notification: Notification) {
+        print(notification)
+    }
 }

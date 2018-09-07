@@ -5,6 +5,7 @@
 
 import Cocoa
 import BookishModel
+import Actions
 
 class CollectionIndexViewController: CollectionViewController {
     @objc weak var detailView: CollectionDetailViewController!
@@ -32,8 +33,10 @@ class CollectionIndexViewController: CollectionViewController {
 //
         super.viewWillAppear()
     }
-    
-    @IBAction func insertPerson(_ sender: Any) {
-        detailView.insertPerson(sender)
+}
+
+extension CollectionIndexViewController: ActionContextProvider {
+    func provide(context: ActionContext) {
+        detailView.provide(context: context)
     }
 }

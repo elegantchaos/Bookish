@@ -4,15 +4,19 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 import Cocoa
+import BookishCore
+import Actions
 
 @NSApplicationMain
-class Application: NSObject, NSApplicationDelegate {
+class Application: NSObject, NSApplicationDelegate, ActionContextProvider {
     let documentWindowControllerFactory = DocumentWindowControllerFactory()
+    let actionManager = ActionManager()
     let uiTesting = CommandLine.arguments.contains("--ui-testing")
     var testDocument = CommandLine.arguments.contains("--test-document")
     let noBlankDocument = CommandLine.arguments.contains("--no-blank-document")
     
     override func awakeFromNib() {
+        print(CommandLine.arguments)
         super.awakeFromNib()
         if uiTesting {
             resetState()
@@ -29,6 +33,16 @@ class Application: NSObject, NSApplicationDelegate {
     }
     
     func applicationWillFinishLaunching(_ notification: Notification) {
+        actionManager.register([
+            InsertPersonAction(identifier: "InsertPerson"),
+            RemovePersonAction(identifier: "RemovePerson"),
+            ShowAddPersonAction(identifier: "ShowAddPerson")
+            ])
+        
+        actionManager.nextResponder = NSApp.nextResponder
+        NSApp.nextResponder = actionManager
+
+        BookishCore().test()
         
         ValueTransformer.setValueTransformer(AuthorsTransformer(), forName: AuthorsTransformer.name)
         ValueTransformer.setValueTransformer(DateTransformer(), forName: DateTransformer.name)
@@ -43,5 +57,11 @@ class Application: NSObject, NSApplicationDelegate {
     
     func applicationShouldOpenUntitledFile(_ sender: NSApplication) -> Bool {
         return !noBlankDocument
+    }
+    
+
+    func provide(context: ActionContext) {
+        print("gathering context")
+        context.info["Test"] = "Blah"
     }
 }
