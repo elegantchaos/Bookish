@@ -19,7 +19,7 @@ class PersonAction: Action {
     static let MenuKey = "personMenu"
 
     override func validate(context: ActionContext) -> Bool {
-        guard let _ = context.info[ActionContext.selectionKey] as? [Book] else {
+        guard let selection = context.info[ActionContext.selectionKey] as? [Book] else {
             return false
         }
         
@@ -27,7 +27,7 @@ class PersonAction: Action {
             return false
         }
         
-        return true
+        return selection.count > 0
     }
 }
 

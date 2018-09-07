@@ -484,7 +484,7 @@
                                 </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="TAF-Mz-qpr"/>
                                 <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="dlb-Xe-WiO"/>
-                                <toolbarItem implicitItemIdentifier="42A4917E-FFCE-440D-90B8-1331166CC46A" explicitItemIdentifier="toolbar.ShowAddPerson" label="Add" paletteLabel="Add Person" image="NSTouchBarUserAddTemplate" sizingBehavior="auto" id="reg-Dx-A2Q" userLabel="Add Person">
+                                <toolbarItem implicitItemIdentifier="42A4917E-FFCE-440D-90B8-1331166CC46A" explicitItemIdentifier="toolbar.ShowAddPerson" label="Add" paletteLabel="Add Person" image="NSTouchBarUserAddTemplate" sizingBehavior="auto" id="reg-Dx-A2Q" userLabel="Add Person" customClass="ViewBasedToolbarItem" customModule="BookishMac" customModuleProvider="target">
                                     <nil key="toolTip"/>
                                     <button key="view" identifier="toolbar.button.ShowAddPerson" verticalHuggingPriority="750" id="uup-kx-3kb">
                                         <rect key="frame" x="0.0" y="14" width="106" height="43"/>
@@ -498,7 +498,7 @@
                                         </connections>
                                     </button>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="551D39AE-40C4-4D12-BEB0-1B8440DCD640" explicitItemIdentifier="toolbar.RemovePerson" label="Remove" paletteLabel="Remove Person" image="NSTouchBarUserTemplate" sizingBehavior="auto" id="2Iz-4y-jpV">
+                                <toolbarItem implicitItemIdentifier="551D39AE-40C4-4D12-BEB0-1B8440DCD640" explicitItemIdentifier="toolbar.RemovePerson" label="Remove" paletteLabel="Remove Person" image="NSTouchBarUserTemplate" sizingBehavior="auto" id="2Iz-4y-jpV" customClass="ViewBasedToolbarItem" customModule="BookishMac" customModuleProvider="target">
                                     <nil key="toolTip"/>
                                     <button key="view" identifier="toolbar.button.RemovePerson" verticalHuggingPriority="750" id="PpS-3K-9lR">
                                         <rect key="frame" x="0.0" y="14" width="106" height="43"/>
@@ -515,9 +515,10 @@
                             </allowedToolbarItems>
                             <defaultToolbarItems>
                                 <toolbarItem reference="KUG-hg-iHG"/>
-                                <toolbarItem reference="dlb-Xe-WiO"/>
+                                <toolbarItem reference="TAF-Mz-qpr"/>
                                 <toolbarItem reference="reg-Dx-A2Q"/>
                                 <toolbarItem reference="2Iz-4y-jpV"/>
+                                <toolbarItem reference="dlb-Xe-WiO"/>
                             </defaultToolbarItems>
                             <connections>
                                 <outlet property="delegate" destination="jGA-0Y-lOj" id="dQw-9g-PvR"/>
@@ -533,7 +534,7 @@
                 </windowController>
                 <customObject id="6f7-a7-6o1" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-350" y="9"/>
+            <point key="canvasLocation" x="-205" y="-15"/>
         </scene>
         <!--Collection Split View Controller-->
         <scene sceneID="o8M-XO-7fb">
