@@ -17,9 +17,25 @@ class PersonAction: Action {
     static let ObserverKey = "personObserver"
     static let RoleKey = "personRole"
     static let MenuKey = "personMenu"
+
+    override func validate(context: ActionContext) -> Bool {
+        guard let _ = context.info[ActionContext.SelectionKey] as? [Book] else {
+            return false
+        }
+        
+        guard let _ = context.info[ActionContext.ModelKey] as? CollectionDocumentViewModel else {
+            return false
+        }
+        
+        return true
+    }
 }
 
 class InsertPersonAction: PersonAction {
+    override func validate(context: ActionContext) -> Bool {
+        return (context.parameters.count > 0) && super.validate(context: context)
+    }
+    
     override func perform(context: ActionContext) {
         if context.parameters.count > 0 {
             let roleName = context.parameters[0]
