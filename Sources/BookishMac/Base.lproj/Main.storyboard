@@ -983,10 +983,10 @@
             </objects>
             <point key="canvasLocation" x="619" y="1307"/>
         </scene>
-        <!--Date Picker Content Controller-->
+        <!--Date Picker Popover Controller-->
         <scene sceneID="K1V-fB-Brr">
             <objects>
-                <viewController storyboardIdentifier="Date Picker Controller" id="9nQ-zm-vgj" customClass="DatePickerContentController" customModule="BookishMac" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Date Picker Controller" id="9nQ-zm-vgj" customClass="DatePickerPopoverController" customModule="BookishMac" customModuleProvider="target" sceneMemberID="viewController">
                     <datePicker key="view" verticalHuggingPriority="750" id="875-gL-np3">
                         <rect key="frame" x="0.0" y="0.0" width="139" height="148"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
