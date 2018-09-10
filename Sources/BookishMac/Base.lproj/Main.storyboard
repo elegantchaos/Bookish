@@ -822,7 +822,7 @@
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="62Q-09-BL4" customClass="AnnotatedTextField" customModule="BookishMac" customModuleProvider="target">
-                                                                    <rect key="frame" x="0.0" y="2" width="173" height="13"/>
+                                                                    <rect key="frame" x="0.0" y="2" width="175" height="13"/>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" continuous="YES" alignment="left" placeholderString="value" usesSingleLineMode="YES" id="mQk-Co-D5V">
                                                                         <font key="font" metaFont="systemBold" size="10"/>
                                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -833,7 +833,7 @@
                                                                     </connections>
                                                                 </textField>
                                                                 <button identifier="button.ShowAddPerson" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RsI-9f-qrv" userLabel="Add">
-                                                                    <rect key="frame" x="179" y="1" width="15" height="16"/>
+                                                                    <rect key="frame" x="181" y="1" width="15" height="16"/>
                                                                     <buttonCell key="cell" type="inline" bezelStyle="inline" image="Plus" imagePosition="only" alignment="center" controlSize="mini" lineBreakMode="truncatingTail" state="on" inset="2" id="eIs-R7-djF">
                                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                         <font key="font" metaFont="smallSystemBold"/>
@@ -843,7 +843,7 @@
                                                                     </connections>
                                                                 </button>
                                                                 <button identifier="button.RemovePerson" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7vP-8A-rYs" userLabel="Remove">
-                                                                    <rect key="frame" x="194" y="1" width="15" height="16"/>
+                                                                    <rect key="frame" x="196" y="1" width="15" height="16"/>
                                                                     <buttonCell key="cell" type="inline" bezelStyle="inline" image="Minus" imagePosition="only" alignment="center" controlSize="mini" lineBreakMode="truncatingTail" state="on" inset="2" id="HJk-Ws-ykn">
                                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                         <font key="font" metaFont="smallSystemBold"/>
@@ -861,7 +861,7 @@
                                                                 <constraint firstItem="RsI-9f-qrv" firstAttribute="centerY" secondItem="62Q-09-BL4" secondAttribute="centerY" id="fCg-0m-XkC"/>
                                                                 <constraint firstItem="62Q-09-BL4" firstAttribute="leading" secondItem="BkD-e8-vo5" secondAttribute="leading" constant="2" id="gvF-Bo-6Cl"/>
                                                                 <constraint firstAttribute="bottom" secondItem="62Q-09-BL4" secondAttribute="bottom" constant="2" id="iaA-td-3Tx"/>
-                                                                <constraint firstAttribute="trailing" secondItem="7vP-8A-rYs" secondAttribute="trailing" constant="2" id="kcO-qf-dLm"/>
+                                                                <constraint firstAttribute="trailing" secondItem="7vP-8A-rYs" secondAttribute="trailing" id="kcO-qf-dLm"/>
                                                             </constraints>
                                                             <connections>
                                                                 <outlet property="addButton" destination="RsI-9f-qrv" id="F8B-9Y-hAX"/>
@@ -884,12 +884,15 @@
                                                                         <outlet property="delegate" destination="DyG-Q7-Wwd" id="Jyn-At-89b"/>
                                                                     </connections>
                                                                 </textField>
-                                                                <button identifier="button.ShowSelectDate" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="usZ-Dh-bht" userLabel="Select">
+                                                                <button identifier="button.ShowDatePicker" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="usZ-Dh-bht" userLabel="Select">
                                                                     <rect key="frame" x="196" y="1" width="15" height="16"/>
                                                                     <buttonCell key="cell" type="inline" bezelStyle="inline" image="ChooseDateSmall" imagePosition="only" alignment="center" controlSize="mini" lineBreakMode="truncatingTail" state="on" inset="2" id="xZa-2Z-znr">
                                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                         <font key="font" metaFont="smallSystemBold"/>
                                                                     </buttonCell>
+                                                                    <connections>
+                                                                        <action selector="performAction:" target="dg1-Od-cPv" id="Ln0-Z0-dbU"/>
+                                                                    </connections>
                                                                 </button>
                                                             </subviews>
                                                             <constraints>
@@ -979,6 +982,34 @@
                 <userDefaultsController representsSharedInstance="YES" id="CPG-9C-fnr"/>
             </objects>
             <point key="canvasLocation" x="619" y="1307"/>
+        </scene>
+        <!--Date Picker Content Controller-->
+        <scene sceneID="K1V-fB-Brr">
+            <objects>
+                <viewController storyboardIdentifier="Date Picker Controller" id="9nQ-zm-vgj" customClass="DatePickerContentController" customModule="BookishMac" customModuleProvider="target" sceneMemberID="viewController">
+                    <datePicker key="view" verticalHuggingPriority="750" id="875-gL-np3">
+                        <rect key="frame" x="0.0" y="0.0" width="139" height="148"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <datePickerCell key="cell" continuous="YES" state="on" borderStyle="bezel" alignment="left" datePickerStyle="clockAndCalendar" id="F8g-qB-mu7">
+                            <font key="font" metaFont="system"/>
+                            <date key="date" timeIntervalSinceReferenceDate="-596188800">
+                                <!--1982-02-09 16:00:00 +0000-->
+                            </date>
+                            <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <connections>
+                                <action selector="dateChanged:" target="9nQ-zm-vgj" id="psF-fi-lky"/>
+                            </connections>
+                        </datePickerCell>
+                    </datePicker>
+                    <connections>
+                        <outlet property="datePicker" destination="875-gL-np3" id="mGf-dx-weg"/>
+                    </connections>
+                </viewController>
+                <customObject id="EIn-fq-6pC" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <userDefaultsController id="Y0f-97-Wet"/>
+            </objects>
+            <point key="canvasLocation" x="1159" y="889"/>
         </scene>
     </scenes>
     <resources>

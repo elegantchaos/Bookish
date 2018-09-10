@@ -37,7 +37,9 @@ class Application: NSObject, NSApplicationDelegate {
             InsertPersonAction(identifier: "InsertPerson"),
             RemovePersonAction(identifier: "RemovePerson"),
             ShowAddPersonAction(identifier: "ShowAddPerson"),
-            InsertBookAction(identifier: "InsertBook")
+            InsertBookAction(identifier: "InsertBook"),
+            RemoveBookAction(identifier: "RemoveBook"),
+            ShowDatePickerAction(identifier: "ShowDatePicker")
             ])
         
         actionManager.nextResponder = NSApp.nextResponder

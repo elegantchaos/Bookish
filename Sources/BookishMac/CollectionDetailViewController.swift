@@ -124,8 +124,17 @@ extension CollectionDetailViewController: ActionContextProvider, PersonChangeObs
             context.append(key: PersonAction.observerKey, value: self)
             if let view = view.window?.firstResponder as? NSView {
                 let row = detailsView.row(for: view)
-                if (row >= 0) && (row < people.count) {
-                    context.info[PersonAction.roleKey] = people[row]
+                if row >= 0 {
+                    if (row < people.count) {
+                        context.info[PersonAction.roleKey] = people[row]
+                    } else {
+                        if let valueView = detailsView.view(atColumn: 1, row: row, makeIfNecessary: false) as? BindableCellView {
+                            let rowInfo = rows[row - people.count]
+                            let valueObject = valueView.objectValue
+                            context.info["object"] = valueObject
+                            context.info["binding"] = rowInfo.binding
+                        }
+                    }
                 }
             }
         }
@@ -150,6 +159,7 @@ extension CollectionDetailViewController: ActionContextProvider, PersonChangeObs
 
 protocol BindableCellView {
     func viewToBind() -> NSView?
+    var objectValue: Any? { get set }
 }
 
 extension NSTableCellView: BindableCellView {
@@ -199,7 +209,7 @@ extension CollectionDetailViewController: NSTableViewDataSource, NSTableViewDele
             } else {
                 field.stringValue = rows[index].label
             }
-        } else if isValue, let subview = (view as? BindableCellView)?.viewToBind() {
+        } else if isValue, var bindable = view as? BindableCellView, let subview = bindable.viewToBind() {
             var options = [NSBindingOption:Any]()
             if !isPerson && (rows[index].type == .date) {
                 options[.valueTransformer] = ValueTransformer(forName: NSValueTransformerName(rawValue: "DateToString"))
@@ -213,6 +223,9 @@ extension CollectionDetailViewController: NSTableViewDataSource, NSTableViewDele
             let bound: Any = isPerson ? people[index] : indexView.indexArray
             let path = isPerson ? "person.name" : "selection.\(rows[index].binding)"
             subview.bind(NSBindingName(rawValue: "value"), to:bound, withKeyPath:path, options: options)
+            if !isPerson {
+                bindable.objectValue = indexView.indexArray.selection as? NSObject
+            }
         }
         
         return view
