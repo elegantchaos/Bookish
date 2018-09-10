@@ -5,12 +5,12 @@
 
 import AppKit
 
-class PersonTextField: NSTextField {
+class AnnotatedTextField: NSTextField {
     
     override func becomeFirstResponder() -> Bool {
         let result = super.becomeFirstResponder()
         if result {
-            if let cellView = delegate as? PersonTableCellView {
+            if let cellView = delegate as? AnnotatedTableCellView {
                 cellView.showButtons()
             }
         }

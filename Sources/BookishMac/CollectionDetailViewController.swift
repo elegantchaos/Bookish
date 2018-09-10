@@ -173,10 +173,9 @@ extension CollectionDetailViewController: NSTableViewDataSource, NSTableViewDele
         if isValue {
             if isPerson {
                 viewID = CollectionDetailViewController.PersonColumnID
+            } else if rows[index].type == .date {
+                viewID = CollectionDetailViewController.DateColumnID
             }
-//            else if rows[index].type == .date {
-//                viewID = CollectionDetailViewController.DateColumnID
-//            }
         }
         
         let view = tableView.makeView(withIdentifier: viewID, owner: self)

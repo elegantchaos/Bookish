@@ -484,12 +484,12 @@
                                 </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="TAF-Mz-qpr"/>
                                 <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="dlb-Xe-WiO"/>
-                                <toolbarItem implicitItemIdentifier="42A4917E-FFCE-440D-90B8-1331166CC46A" explicitItemIdentifier="toolbar.ShowAddPerson" label="Add" paletteLabel="Add Person" image="NSTouchBarUserAddTemplate" sizingBehavior="auto" id="reg-Dx-A2Q" userLabel="Add Person" customClass="ViewBasedToolbarItem" customModule="BookishMac" customModuleProvider="target">
+                                <toolbarItem implicitItemIdentifier="42A4917E-FFCE-440D-90B8-1331166CC46A" explicitItemIdentifier="toolbar.ShowAddPerson" label="Add" paletteLabel="Add Person" image="AddPerson" sizingBehavior="auto" id="reg-Dx-A2Q" userLabel="Add Person" customClass="ViewBasedToolbarItem" customModule="BookishMac" customModuleProvider="target">
                                     <nil key="toolTip"/>
                                     <button key="view" identifier="toolbar.button.ShowAddPerson" verticalHuggingPriority="750" id="uup-kx-3kb">
                                         <rect key="frame" x="0.0" y="14" width="106" height="43"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="NSTouchBarUserAddTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="frN-4k-1rM">
+                                        <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="AddPerson" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="frN-4k-1rM">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
@@ -498,12 +498,12 @@
                                         </connections>
                                     </button>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="551D39AE-40C4-4D12-BEB0-1B8440DCD640" explicitItemIdentifier="toolbar.RemovePerson" label="Remove" paletteLabel="Remove Person" image="NSTouchBarUserTemplate" sizingBehavior="auto" id="2Iz-4y-jpV" customClass="ViewBasedToolbarItem" customModule="BookishMac" customModuleProvider="target">
+                                <toolbarItem implicitItemIdentifier="551D39AE-40C4-4D12-BEB0-1B8440DCD640" explicitItemIdentifier="toolbar.RemovePerson" label="Remove" paletteLabel="Remove Person" image="RemovePerson" sizingBehavior="auto" id="2Iz-4y-jpV" customClass="ViewBasedToolbarItem" customModule="BookishMac" customModuleProvider="target">
                                     <nil key="toolTip"/>
                                     <button key="view" identifier="toolbar.button.RemovePerson" verticalHuggingPriority="750" id="PpS-3K-9lR">
                                         <rect key="frame" x="0.0" y="14" width="106" height="43"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="NSTouchBarUserTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="aPU-Zr-BG1">
+                                        <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="RemovePerson" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="aPU-Zr-BG1">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
@@ -821,7 +821,7 @@
                                                             <rect key="frame" x="84" y="20" width="211" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
-                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="62Q-09-BL4" customClass="PersonTextField" customModule="BookishMac" customModuleProvider="target">
+                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="62Q-09-BL4" customClass="AnnotatedTextField" customModule="BookishMac" customModuleProvider="target">
                                                                     <rect key="frame" x="0.0" y="2" width="173" height="13"/>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" continuous="YES" alignment="left" placeholderString="value" usesSingleLineMode="YES" id="mQk-Co-D5V">
                                                                         <font key="font" metaFont="systemBold" size="10"/>
@@ -869,28 +869,41 @@
                                                                 <outlet property="textField" destination="62Q-09-BL4" id="bqN-SD-KTe"/>
                                                             </connections>
                                                         </tableCellView>
-                                                        <tableCellView identifier="date" id="fjE-5B-Fct" userLabel="date cell">
-                                                            <rect key="frame" x="84" y="39" width="211" height="18"/>
+                                                        <tableCellView identifier="date" id="DyG-Q7-Wwd" userLabel="date cell" customClass="DateTableCellView" customModule="BookishMac" customModuleProvider="target">
+                                                            <rect key="frame" x="84" y="39" width="211" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
-                                                                <datePicker verticalHuggingPriority="751" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="rHS-KW-HhR">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="209" height="18"/>
-                                                                    <datePickerCell key="cell" controlSize="small" alignment="left" drawsBackground="NO" datePickerStyle="textField" id="8k2-wi-d1h">
+                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="ZVF-Ib-kQh" customClass="AnnotatedTextField" customModule="BookishMac" customModuleProvider="target">
+                                                                    <rect key="frame" x="0.0" y="2" width="190" height="13"/>
+                                                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" continuous="YES" alignment="left" placeholderString="value" usesSingleLineMode="YES" id="j79-sX-bKh">
                                                                         <font key="font" metaFont="systemBold" size="10"/>
-                                                                        <date key="date" timeIntervalSinceReferenceDate="-595929600">
-                                                                            <!--1982-02-12 16:00:00 +0000-->
-                                                                        </date>
-                                                                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                                    </datePickerCell>
-                                                                </datePicker>
+                                                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                                    </textFieldCell>
+                                                                    <connections>
+                                                                        <outlet property="delegate" destination="DyG-Q7-Wwd" id="Jyn-At-89b"/>
+                                                                    </connections>
+                                                                </textField>
+                                                                <button identifier="button.ShowSelectDate" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="usZ-Dh-bht" userLabel="Select">
+                                                                    <rect key="frame" x="196" y="1" width="15" height="16"/>
+                                                                    <buttonCell key="cell" type="inline" bezelStyle="inline" image="ChooseDateSmall" imagePosition="only" alignment="center" controlSize="mini" lineBreakMode="truncatingTail" state="on" inset="2" id="xZa-2Z-znr">
+                                                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                        <font key="font" metaFont="smallSystemBold"/>
+                                                                    </buttonCell>
+                                                                </button>
                                                             </subviews>
                                                             <constraints>
-                                                                <constraint firstAttribute="bottom" secondItem="rHS-KW-HhR" secondAttribute="bottom" id="4DT-4a-knH"/>
-                                                                <constraint firstItem="rHS-KW-HhR" firstAttribute="top" secondItem="fjE-5B-Fct" secondAttribute="top" id="dy0-b9-cQe"/>
-                                                                <constraint firstAttribute="trailing" secondItem="rHS-KW-HhR" secondAttribute="trailing" constant="2" id="mzB-dj-kDY"/>
-                                                                <constraint firstItem="rHS-KW-HhR" firstAttribute="leading" secondItem="fjE-5B-Fct" secondAttribute="leading" id="xTQ-o0-Cir"/>
+                                                                <constraint firstItem="usZ-Dh-bht" firstAttribute="leading" secondItem="ZVF-Ib-kQh" secondAttribute="trailing" constant="8" symbolic="YES" id="Fqi-vz-gir"/>
+                                                                <constraint firstItem="ZVF-Ib-kQh" firstAttribute="leading" secondItem="DyG-Q7-Wwd" secondAttribute="leading" constant="2" id="INm-Vw-3iR"/>
+                                                                <constraint firstAttribute="trailing" secondItem="usZ-Dh-bht" secondAttribute="trailing" id="K0v-RZ-bcK"/>
+                                                                <constraint firstItem="ZVF-Ib-kQh" firstAttribute="top" secondItem="DyG-Q7-Wwd" secondAttribute="top" constant="2" id="Sga-vj-YRp"/>
+                                                                <constraint firstItem="usZ-Dh-bht" firstAttribute="centerY" secondItem="ZVF-Ib-kQh" secondAttribute="centerY" id="YtR-p0-PgM"/>
+                                                                <constraint firstAttribute="bottom" secondItem="ZVF-Ib-kQh" secondAttribute="bottom" constant="2" id="wYj-Oa-5Js"/>
                                                             </constraints>
+                                                            <connections>
+                                                                <outlet property="infoButton" destination="usZ-Dh-bht" id="9xb-cd-WcE"/>
+                                                                <outlet property="textField" destination="ZVF-Ib-kQh" id="buw-hh-9zp"/>
+                                                            </connections>
                                                         </tableCellView>
                                                     </prototypeCellViews>
                                                 </tableColumn>
@@ -969,11 +982,12 @@
         </scene>
     </scenes>
     <resources>
+        <image name="AddPerson" width="32" height="32"/>
+        <image name="ChooseDateSmall" width="12" height="12"/>
         <image name="Minus" width="12" height="12"/>
         <image name="NSAddTemplate" width="11" height="11"/>
         <image name="NSRemoveTemplate" width="11" height="11"/>
-        <image name="NSTouchBarUserAddTemplate" width="21" height="30"/>
-        <image name="NSTouchBarUserTemplate" width="17" height="30"/>
         <image name="Plus" width="12" height="12"/>
+        <image name="RemovePerson" width="32" height="32"/>
     </resources>
 </document>

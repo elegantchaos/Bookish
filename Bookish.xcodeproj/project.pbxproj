@@ -58,7 +58,7 @@
 		22429406212D945C00E70510 /* CollectionDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22429405212D945C00E70510 /* CollectionDetailViewController.swift */; };
 		22429408212D958400E70510 /* CollectionSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22429407212D958400E70510 /* CollectionSplitViewController.swift */; };
 		22960328214025E80020B3EB /* PersonTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22960327214025E80020B3EB /* PersonTableCellView.swift */; };
-		2296032A214032520020B3EB /* PersonTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22960329214032520020B3EB /* PersonTextField.swift */; };
+		2296032A214032520020B3EB /* AnnotatedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22960329214032520020B3EB /* AnnotatedTextField.swift */; };
 		2296032F2141563A0020B3EB /* PersonActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2296032E2141563A0020B3EB /* PersonActions.swift */; };
 		2296034221417E500020B3EB /* BookishCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2296034121417E500020B3EB /* BookishCore.framework */; };
 		2296035C214182860020B3EB /* Logger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2296035B214182860020B3EB /* Logger.framework */; };
@@ -69,6 +69,8 @@
 		2296038521418C390020B3EB /* Logger.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2296035B214182860020B3EB /* Logger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		22D39E4F2142BCD000282467 /* InsertBookAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D39E4E2142BCD000282467 /* InsertBookAction.swift */; };
 		22D39E512142DB2700282467 /* ViewBasedToolbarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D39E502142DB2700282467 /* ViewBasedToolbarItem.swift */; };
+		22D39E532146A84500282467 /* AnnotatedTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D39E522146A84500282467 /* AnnotatedTableCellView.swift */; };
+		22D39E552146A84E00282467 /* DateTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D39E542146A84E00282467 /* DateTableCellView.swift */; };
 		22DD42482126D6DA0070C85A /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DD42472126D6DA0070C85A /* Application.swift */; };
 		22DD424A2126D6DA0070C85A /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DD42492126D6DA0070C85A /* CollectionViewController.swift */; };
 		22DD424C2126D6DA0070C85A /* CollectionDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DD424B2126D6DA0070C85A /* CollectionDocument.swift */; };
@@ -211,7 +213,7 @@
 		22429405212D945C00E70510 /* CollectionDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionDetailViewController.swift; sourceTree = "<group>"; };
 		22429407212D958400E70510 /* CollectionSplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionSplitViewController.swift; sourceTree = "<group>"; };
 		22960327214025E80020B3EB /* PersonTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonTableCellView.swift; sourceTree = "<group>"; };
-		22960329214032520020B3EB /* PersonTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonTextField.swift; sourceTree = "<group>"; };
+		22960329214032520020B3EB /* AnnotatedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotatedTextField.swift; sourceTree = "<group>"; };
 		2296032B214132840020B3EB /* Bookish.sketch */ = {isa = PBXFileReference; lastKnownFileType = file; path = Bookish.sketch; sourceTree = "<group>"; };
 		2296032E2141563A0020B3EB /* PersonActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonActions.swift; sourceTree = "<group>"; };
 		2296033021416F960020B3EB /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
@@ -221,6 +223,8 @@
 		22960373214189550020B3EB /* Actions.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Actions.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		22D39E4E2142BCD000282467 /* InsertBookAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsertBookAction.swift; sourceTree = "<group>"; };
 		22D39E502142DB2700282467 /* ViewBasedToolbarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewBasedToolbarItem.swift; sourceTree = "<group>"; };
+		22D39E522146A84500282467 /* AnnotatedTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotatedTableCellView.swift; sourceTree = "<group>"; };
+		22D39E542146A84E00282467 /* DateTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTableCellView.swift; sourceTree = "<group>"; };
 		22DD42442126D6DA0070C85A /* BookishMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BookishMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22DD42472126D6DA0070C85A /* Application.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
 		22DD42492126D6DA0070C85A /* CollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
@@ -381,7 +385,9 @@
 				22429405212D945C00E70510 /* CollectionDetailViewController.swift */,
 				22DD424B2126D6DA0070C85A /* CollectionDocument.swift */,
 				22960327214025E80020B3EB /* PersonTableCellView.swift */,
-				22960329214032520020B3EB /* PersonTextField.swift */,
+				22D39E522146A84500282467 /* AnnotatedTableCellView.swift */,
+				22D39E542146A84E00282467 /* DateTableCellView.swift */,
+				22960329214032520020B3EB /* AnnotatedTextField.swift */,
 				22143FCC212EE79100B689DF /* CollectionDocumentViewModel.swift */,
 				221F27272136EC0500DC2DC7 /* Utilities */,
 				22DD42502126D6DB0070C85A /* Assets.xcassets */,
@@ -971,7 +977,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2296032A214032520020B3EB /* PersonTextField.swift in Sources */,
+				2296032A214032520020B3EB /* AnnotatedTextField.swift in Sources */,
 				22DD424A2126D6DA0070C85A /* CollectionViewController.swift in Sources */,
 				22429401212C32BF00E70510 /* CollectionWindowController.swift in Sources */,
 				22DD42482126D6DA0070C85A /* Application.swift in Sources */,
@@ -983,9 +989,11 @@
 				22960328214025E80020B3EB /* PersonTableCellView.swift in Sources */,
 				22429408212D958400E70510 /* CollectionSplitViewController.swift in Sources */,
 				2296032F2141563A0020B3EB /* PersonActions.swift in Sources */,
+				22D39E532146A84500282467 /* AnnotatedTableCellView.swift in Sources */,
 				221F272921382C8E00DC2DC7 /* DateTransformer.swift in Sources */,
 				22D39E4F2142BCD000282467 /* InsertBookAction.swift in Sources */,
 				22143FD521300F9300B689DF /* CoreDataTransformers.swift in Sources */,
+				22D39E552146A84E00282467 /* DateTableCellView.swift in Sources */,
 				22143FD1212F076000B689DF /* CollectionRootViewController.swift in Sources */,
 				22429403212C3C7400E70510 /* ViewExtensions.swift in Sources */,
 				224293FB212C1D7500E70510 /* CollectionIndexViewController.swift in Sources */,
