@@ -6,6 +6,7 @@
 import Cocoa
 import Actions
 import BookishModel
+import Dispatch
 
 enum RowType {
     case text
@@ -34,6 +35,8 @@ class CollectionDetailViewController: CollectionViewController {
     
     var people = [PersonRole]()
     var indexObserver: NSKeyValueObservation?
+    var availableRows = IndexSet()
+    var keyViewTimer: Timer? = nil
     
     let rows = [
         RowSpecification(binding: "format"),
@@ -145,6 +148,7 @@ extension CollectionDetailViewController: ActionContextProvider, PersonChangeObs
 // MARK: Table Support
 
 extension CollectionDetailViewController: NSTableViewDataSource, NSTableViewDelegate {
+    
     static let HeadingColumnID = NSUserInterfaceItemIdentifier(rawValue: "heading")
     static let ValueColumnID = NSUserInterfaceItemIdentifier(rawValue: "value")
     static let PersonColumnID = NSUserInterfaceItemIdentifier(rawValue: "person")
@@ -199,5 +203,38 @@ extension CollectionDetailViewController: NSTableViewDataSource, NSTableViewDele
     
     func tableViewSelectionDidChange(_ notification: Notification) {
         print(notification)
+    }
+    
+    func tableView(_ tableView: NSTableView, didAdd rowView: NSTableRowView, forRow row: Int) {
+        availableRows.insert(row)
+        scheduleRecalculateKeyViews()
+    }
+    
+    func tableView(_ tableView: NSTableView, didRemove rowView: NSTableRowView, forRow row: Int) {
+        availableRows.remove(row)
+        scheduleRecalculateKeyViews()
+    }
+    
+    func scheduleRecalculateKeyViews() {
+        if let timer = keyViewTimer {
+            timer.invalidate()
+        }
+        
+        keyViewTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { _ in
+            self.recalculateKeyViews()
+        }
+    }
+    
+    func recalculateKeyViews() {
+        let rows = availableRows.sorted()
+        var view: NSView = subtitleView
+        for row in rows {
+            if let rowView = detailsView.view(atColumn: 1, row: row, makeIfNecessary: false)?.subviews.first {
+                view.nextKeyView = rowView
+                view = rowView
+            }
+        }
+        view.nextKeyView = titleView
+        keyViewTimer = nil
     }
 }

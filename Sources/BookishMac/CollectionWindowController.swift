@@ -15,13 +15,9 @@ class CollectionWindowController: NSWindowController, DocumentWindowController, 
     var bookIndexController: CollectionIndexViewController?
     var bookDetailController: CollectionDetailViewController?
     
-    @IBAction func insertBook(_ sender: Any) {
-        bookIndexController?.indexArray.add(sender)
-//        if let context = viewModel?.managedObjectContext {
-//            let request: NSFetchRequest<Book> = Book.fetchRequest()
-//            let book = Book(context: context)
-//            viewModel?.bookIndex?.setSelectedObjects([book])
-//        }
+    override func windowDidLoad() {
+        super.windowDidLoad()
+        window?.autorecalculatesKeyViewLoop = false
     }
     
     func provide(context: ActionContext) {
