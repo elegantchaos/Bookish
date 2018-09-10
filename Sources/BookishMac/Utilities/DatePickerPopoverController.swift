@@ -15,7 +15,9 @@ class DatePickerPopoverController: NSViewController, NSPopoverDelegate {
             contentController.representedObject = object
             contentController.valueKey = key
             let popover = NSPopover()
+            popover.delegate = contentController
             popover.contentViewController = contentController
+            popover.behavior = .semitransient
             popover.show(relativeTo: view.bounds, of: view, preferredEdge: NSRectEdge.maxX)
         }
     }

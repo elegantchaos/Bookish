@@ -999,6 +999,7 @@
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <connections>
                                 <action selector="dateChanged:" target="9nQ-zm-vgj" id="psF-fi-lky"/>
+                                <outlet property="delegate" destination="9nQ-zm-vgj" id="Qdx-2E-5tG"/>
                             </connections>
                         </datePickerCell>
                     </datePicker>
