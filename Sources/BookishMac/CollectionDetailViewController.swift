@@ -105,6 +105,7 @@ class CollectionDetailViewController: CollectionViewController {
         if showDetail {
             updatePeople()
         }
+        indexView.validateButtons()
     }
     
     func updatePeople() {

@@ -354,9 +354,9 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Book" id="KpK-bQ-eVd">
                                     <items>
-                                        <menuItem title="Add" id="S1Y-5k-gmo">
+                                        <menuItem title="Add Person" id="S1Y-5k-gmo">
                                             <modifierMask key="keyEquivalentModifierMask"/>
-                                            <menu key="submenu" title="Add" id="yUT-5y-39U">
+                                            <menu key="submenu" title="Add Person" id="yUT-5y-39U">
                                                 <items>
                                                     <menuItem title="Author" keyEquivalent="A" identifier="InsertPerson.author" id="8p4-Le-QDr">
                                                         <connections>
@@ -380,6 +380,13 @@
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="performAction:" target="Ady-hI-5gd" id="KWo-3k-lfO"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="ceK-9f-B2v"/>
+                                        <menuItem title="Delete Book" identifier="menu.RemoveBook" id="60m-wd-nbQ">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="performAction:" target="Ady-hI-5gd" id="Ghm-YB-CNA"/>
                                             </connections>
                                         </menuItem>
                                     </items>
@@ -670,7 +677,7 @@
                             <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="zH4-UB-LMd">
                                 <rect key="frame" x="0.0" y="20" width="199" height="5"/>
                             </box>
-                            <button identifier="add-book" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yM9-Be-eOr" userLabel="Add Button">
+                            <button identifier="add-book" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yM9-Be-eOr" userLabel="Add Button" customClass="ValidatingButton" customModule="BookishMac" customModuleProvider="target">
                                 <rect key="frame" x="4" y="0.0" width="11" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="22" id="LBu-Ii-CIk"/>
@@ -683,7 +690,7 @@
                                     <action selector="add:" target="gjv-NN-VkV" id="gSC-BL-pea"/>
                                 </connections>
                             </button>
-                            <button identifier="remove-book" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1gF-aY-ShN" userLabel="Remove Button">
+                            <button identifier="button.RemoveBook" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1gF-aY-ShN" userLabel="Remove Button" customClass="ValidatingButton" customModule="BookishMac" customModuleProvider="target">
                                 <rect key="frame" x="19" y="0.0" width="11" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="22" id="lWI-KT-vqF"/>
@@ -693,7 +700,7 @@
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
-                                    <action selector="remove:" target="gjv-NN-VkV" id="fjX-oC-DeD"/>
+                                    <action selector="performAction:" target="Jsc-1E-0Rn" id="NUK-PF-Man"/>
                                 </connections>
                             </button>
                         </subviews>
