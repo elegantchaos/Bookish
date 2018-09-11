@@ -65,45 +65,49 @@ class BookishUITests: XCTestCase {
         return index.staticTexts.count
     }
     
-    func testAddBookButton() {
+    func testAddingBook() {
         launch()
-        let window = application.windows["Untitled"]
-        window.buttons["button.InsertBook"].click()
-        let item = firstIndexItem(window: window)
-        XCTAssertEqual(item.value as! String, "Untitled 0")
-    }
-
-    func testAddBookToolbarButton() {
-        launch()
-        let window = application.windows["Untitled"]
-        let toolbar = window.toolbars.element(boundBy: 0)
-        let button = toolbar.buttons["New"]
-        button.click()
-        let item = firstIndexItem(window: window)
-        XCTAssertEqual(item.value as! String, "Untitled 0")
-    }
-
-    func testRemoveBookButton() {
-        launch(arguments:["--test-document"])
         let window = application.windows["Untitled"]
         let count = indexCount(window: window)
+        
+        // button
+        window.buttons["button.InsertBook"].click()
+        XCTAssertEqual(count + 1, indexCount(window: window))
+
+        // toolbar button
+        let toolbar = window.toolbars.element(boundBy: 0)
+        toolbar.buttons["New"].click()
+        XCTAssertEqual(count + 2, indexCount(window: window))
+
+        // menu item
+        application.menuBars.menuItems["New"].menuItems["Book"].click()
+        XCTAssertEqual(count + 3, indexCount(window: window))
+    }
+
+    func testRemovingBook() {
+        launch(arguments:["--test-document"])
+        let window = application.windows["Untitled"]
+        let toolbar = window.toolbars.element(boundBy: 0)
+        let count = indexCount(window: window)
         let item = firstIndexItem(window: window)
+        
+        // button
         item.click()
         window.buttons["button.RemoveBook"].click()
         XCTAssertEqual(count - 1, indexCount(window: window))
-    }
 
-    func testRemoveBookToolbarButton() {
-        launch(arguments:["--test-document"])
-        let window = application.windows["Untitled"]
-        let count = indexCount(window: window)
-        let item = firstIndexItem(window: window)
+        // toolbar button
         item.click()
-        let toolbar = window.toolbars.element(boundBy: 0)
         let button = toolbar.children(matching: .button).matching(identifier: "Remove").element(boundBy: 0)
         button.click()
-        XCTAssertEqual(count - 1, indexCount(window: window))
+        XCTAssertEqual(count - 2, indexCount(window: window))
+
+        // menu item
+        item.click()
+        application.menuBars.menuItems["Delete Book"].click()
+        XCTAssertEqual(count - 3, indexCount(window: window))
     }
+
 
     func testRenamingChangesIndex() {
         launch(arguments:["--test-document"])
