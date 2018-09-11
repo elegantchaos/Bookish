@@ -8,7 +8,7 @@ import BookishCore
 import Actions
 
 @NSApplicationMain
-class Application: NSObject, NSApplicationDelegate, ActionContextProvider {
+class Application: NSObject, NSApplicationDelegate {
     let documentWindowControllerFactory = DocumentWindowControllerFactory()
     let actionManager = ActionManager()
     let uiTesting = CommandLine.arguments.contains("--ui-testing")
@@ -36,7 +36,11 @@ class Application: NSObject, NSApplicationDelegate, ActionContextProvider {
         actionManager.register([
             InsertPersonAction(identifier: "InsertPerson"),
             RemovePersonAction(identifier: "RemovePerson"),
-            ShowAddPersonAction(identifier: "ShowAddPerson")
+            ShowAddPersonAction(identifier: "ShowAddPerson"),
+            InsertBookAction(identifier: "InsertBook"),
+            RemoveBookAction(identifier: "RemoveBook"),
+            ShowDatePickerAction(identifier: "ShowDatePicker"),
+            TestAction(identifier: "ToolbarTest")
             ])
         
         actionManager.nextResponder = NSApp.nextResponder
@@ -46,6 +50,7 @@ class Application: NSObject, NSApplicationDelegate, ActionContextProvider {
         
         ValueTransformer.setValueTransformer(AuthorsTransformer(), forName: AuthorsTransformer.name)
         ValueTransformer.setValueTransformer(DateTransformer(), forName: DateTransformer.name)
+        ValueTransformer.setValueTransformer(CoverImageTransformer(), forName: CoverImageTransformer.name)
     }
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
@@ -57,11 +62,5 @@ class Application: NSObject, NSApplicationDelegate, ActionContextProvider {
     
     func applicationShouldOpenUntitledFile(_ sender: NSApplication) -> Bool {
         return !noBlankDocument
-    }
-    
-
-    func provide(context: ActionContext) {
-        print("gathering context")
-        context.info["Test"] = "Blah"
     }
 }

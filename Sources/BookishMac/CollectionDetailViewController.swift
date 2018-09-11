@@ -6,22 +6,24 @@
 import Cocoa
 import Actions
 import BookishModel
+import Dispatch
 
 enum RowType {
     case text
     case date
-    case dateReadOnly
 }
 
 struct RowSpecification {
     let binding: String
     let label: String
     let type: RowType
+    let editable: Bool
     
-    init(binding: String, label: String? = nil, type: RowType = .text) {
+    init(binding: String, label: String? = nil, type: RowType = .text, editable: Bool = true) {
         self.binding = binding
         self.label = label ?? binding
         self.type = type
+        self.editable = editable
     }
 }
 
@@ -34,14 +36,16 @@ class CollectionDetailViewController: CollectionViewController {
     
     var people = [PersonRole]()
     var indexObserver: NSKeyValueObservation?
+    var availableRows = IndexSet()
+    var keyViewTimer: Timer? = nil
     
     let rows = [
         RowSpecification(binding: "format"),
         RowSpecification(binding: "isbn"),
         RowSpecification(binding: "notes"),
         RowSpecification(binding: "published", type: .date),
-        RowSpecification(binding: "added", type: .dateReadOnly),
-        RowSpecification(binding: "modified", type: .date)
+        RowSpecification(binding: "added", type: .date, editable: false),
+        RowSpecification(binding: "modified", type: .date, editable: false)
     ]
     
     override func viewDidLoad() {
@@ -63,7 +67,7 @@ class CollectionDetailViewController: CollectionViewController {
         if let indexArray = indexView.indexArray {
             titleView.bind(NSBindingName(rawValue: "value"), to:indexArray, withKeyPath:"selection.name", options: [:])
             subtitleView.bind(NSBindingName(rawValue: "value"), to:indexArray, withKeyPath:"selection.subtitle", options: [:])
-            imageView.bind(NSBindingName(rawValue: "value"), to:indexArray, withKeyPath:"selection.image", options: [:])
+            imageView.bind(NSBindingName(rawValue: "value"), to:indexArray, withKeyPath:"selection.image", options: [NSBindingOption.valueTransformerName:"CoverImage"])
             indexObserver = indexArray.observe(\NSArrayController.selection, changeHandler: { (index, change) in
                 self.selectionChanged()
             })
@@ -101,6 +105,7 @@ class CollectionDetailViewController: CollectionViewController {
         if showDetail {
             updatePeople()
         }
+        indexView.validateButtons()
     }
     
     func updatePeople() {
@@ -116,12 +121,21 @@ class CollectionDetailViewController: CollectionViewController {
 extension CollectionDetailViewController: ActionContextProvider, PersonChangeObserver {
     func provide(context: ActionContext) {
         if let selection = indexView.indexArray.selectedObjects as? [Book] {
-            context.info[ActionContext.SelectionKey] = selection
-            context.append(key: PersonAction.ObserverKey, value: self)
-            if let view = context.sender as? NSView {
+            context.info[ActionContext.selectionKey] = selection
+            context.append(key: PersonAction.observerKey, value: self)
+            if let view = view.window?.firstResponder as? NSView {
                 let row = detailsView.row(for: view)
-                if row < people.count {
-                    context.info[PersonAction.RoleKey] = people[row]
+                if row >= 0 {
+                    if (row < people.count) {
+                        context.info[PersonAction.roleKey] = people[row]
+                    } else {
+                        if let valueView = detailsView.view(atColumn: 1, row: row, makeIfNecessary: false) as? BindableCellView {
+                            let rowInfo = rows[row - people.count]
+                            let valueObject = valueView.objectValue
+                            context.info["object"] = valueObject
+                            context.info["binding"] = rowInfo.binding
+                        }
+                    }
                 }
             }
         }
@@ -144,7 +158,19 @@ extension CollectionDetailViewController: ActionContextProvider, PersonChangeObs
 
 // MARK: Table Support
 
+protocol BindableCellView {
+    func viewToBind() -> NSView?
+    var objectValue: Any? { get set }
+}
+
+extension NSTableCellView: BindableCellView {
+    func viewToBind() -> NSView? {
+        return textField
+    }
+}
+
 extension CollectionDetailViewController: NSTableViewDataSource, NSTableViewDelegate {
+    
     static let HeadingColumnID = NSUserInterfaceItemIdentifier(rawValue: "heading")
     static let ValueColumnID = NSUserInterfaceItemIdentifier(rawValue: "value")
     static let PersonColumnID = NSUserInterfaceItemIdentifier(rawValue: "person")
@@ -184,14 +210,23 @@ extension CollectionDetailViewController: NSTableViewDataSource, NSTableViewDele
             } else {
                 field.stringValue = rows[index].label
             }
-        } else if isValue, let subview = view?.subviews.first {
+        } else if isValue, var bindable = view as? BindableCellView, let subview = bindable.viewToBind() {
             var options = [NSBindingOption:Any]()
-            if !isPerson && (rows[index].type == .dateReadOnly) {
-                options[NSBindingOption(rawValue: "NSValueTransformer")] = ValueTransformer(forName: NSValueTransformerName(rawValue: "DateToString"))
+            if !isPerson && (rows[index].type == .date) {
+                options[.valueTransformer] = ValueTransformer(forName: NSValueTransformerName(rawValue: "DateToString"))
+                if let textView = subview as? NSTextField {
+                    let unlocked = rows[index].editable
+                    options[.conditionallySetsEditable] = unlocked
+                    textView.isSelectable = unlocked
+                    textView.isEditable = unlocked
+                }
             }
             let bound: Any = isPerson ? people[index] : indexView.indexArray
             let path = isPerson ? "person.name" : "selection.\(rows[index].binding)"
             subview.bind(NSBindingName(rawValue: "value"), to:bound, withKeyPath:path, options: options)
+            if !isPerson {
+                bindable.objectValue = indexView.indexArray.selection as? NSObject
+            }
         }
         
         return view
@@ -199,5 +234,38 @@ extension CollectionDetailViewController: NSTableViewDataSource, NSTableViewDele
     
     func tableViewSelectionDidChange(_ notification: Notification) {
         print(notification)
+    }
+    
+    func tableView(_ tableView: NSTableView, didAdd rowView: NSTableRowView, forRow row: Int) {
+        availableRows.insert(row)
+        scheduleRecalculateKeyViews()
+    }
+    
+    func tableView(_ tableView: NSTableView, didRemove rowView: NSTableRowView, forRow row: Int) {
+        availableRows.remove(row)
+        scheduleRecalculateKeyViews()
+    }
+    
+    func scheduleRecalculateKeyViews() {
+        if let timer = keyViewTimer {
+            timer.invalidate()
+        }
+        
+        keyViewTimer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { _ in
+            self.recalculateKeyViews()
+        }
+    }
+    
+    func recalculateKeyViews() {
+        let rows = availableRows.sorted()
+        var view: NSView = subtitleView
+        for row in rows {
+            if let rowView = (detailsView.view(atColumn: 1, row: row, makeIfNecessary: false) as? BindableCellView)?.viewToBind() {
+                view.nextKeyView = rowView
+                view = rowView
+            }
+        }
+        view.nextKeyView = titleView
+        keyViewTimer = nil
     }
 }

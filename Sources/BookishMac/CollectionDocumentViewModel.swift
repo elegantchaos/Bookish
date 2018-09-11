@@ -21,7 +21,7 @@ import Actions
     }
     
     func insertPersonItem(kind: String, shortcut: String) -> NSMenuItem {
-        let item = NSMenuItem(title: kind, action: ActionManager.performActionSelector(), keyEquivalent: shortcut)
+        let item = NSMenuItem(title: kind, action: ActionManager.performActionSelector, keyEquivalent: shortcut)
         item.identifier = NSUserInterfaceItemIdentifier(rawValue: "menu.InsertPerson.\(kind.lowercased())")
         item.keyEquivalentModifierMask = [.command, .option]
         return item

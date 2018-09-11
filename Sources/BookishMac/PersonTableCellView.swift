@@ -5,26 +5,11 @@
 
 import AppKit
 
-class PersonTableCellView: NSTableCellView, NSTextFieldDelegate {
+class PersonTableCellView: AnnotatedTableCellView {
     @IBOutlet weak var addButton: NSButton!
     @IBOutlet weak var removeButton: NSButton!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        hideButtons()
-    }
-    
-    private func hideButtons() {
-        addButton.isHidden = true
-        removeButton.isHidden = true
-    }
-    
-    func showButtons() {
-        addButton.isHidden = false
-        removeButton.isHidden = false
-    }
-
-    func controlTextDidEndEditing(_ obj: Notification) {
-        hideButtons()
+    override var annotationButtons: [NSButton] {
+        return [addButton, removeButton]
     }
 }

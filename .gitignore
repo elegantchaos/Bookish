@@ -27,10 +27,12 @@ dsa_priv.pem
 # Generated files
 VersionX-revision.h
 
+# Swift Package Manager
+Packages/
+.build
 
 # build products
 build/
-.build/
 *.o
 
 # Other source repository archive directories (protects when importing)
