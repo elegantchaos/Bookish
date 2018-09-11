@@ -224,7 +224,10 @@ extension BookDetailViewController: NSTableViewDataSource, NSTableViewDelegate {
             let bound: Any = isPerson ? people[index] : indexView.indexArray
             let path = isPerson ? "person.name" : "selection.\(rows[index].binding)"
             subview.bind(NSBindingName(rawValue: "value"), to:bound, withKeyPath:path, options: options)
-            if !isPerson {
+            if isPerson {
+                subview.identifier = NSUserInterfaceItemIdentifier(rawValue: "person-\(row)")
+            } else {
+                subview.identifier = NSUserInterfaceItemIdentifier(rawValue: "detail-\(rows[index].binding)")
                 bindable.objectValue = indexView.indexArray.selection as? NSObject
             }
         }

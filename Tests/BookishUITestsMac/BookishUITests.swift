@@ -5,8 +5,7 @@
 
 import XCTest
 
-class BookishUITests: XCTestCase {
-    let application = XCUIApplication()
+class BookishUITests: UITests {
     
     override func setUp() {
         continueAfterFailure = false
@@ -17,21 +16,11 @@ class BookishUITests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
     
-    func launch(arguments: [String] = []) {
-        // launch with the --reset flag to ensure that we start in a known state
-        application.launchArguments = ["-NSTreatUnknownArgumentsAsOpen", "NO", "-ApplePersistenceIgnoreState", "YES", "--ui-testing"]
-        application.launchArguments.append(contentsOf: arguments)
-        application.launch()
-    }
-    
     func makeEmptyDocument() -> XCUIElement {
         let count = application.windows.count
         
         // make a new document
-        let menuBarsQuery = XCUIApplication().menuBars
-        let newMenuItem = menuBarsQuery/*@START_MENU_TOKEN@*/.menuItems["New"]/*[[".menuBarItems[\"File\"]",".menus.menuItems[\"New\"]",".menuItems[\"New\"]"],[[[-1,2],[-1,1],[-1,0,1]],[[-1,2],[-1,1]]],[0]]@END_MENU_TOKEN@*/
-        let newCollectionItem = newMenuItem.menuItems["Collection"]
-        newCollectionItem.click()
+        menuItem(at: ["New", "Collection"]).click()
         
         // should now have an untitled document
         XCTAssertEqual(XCUIApplication().windows.count, count + 1)
@@ -40,7 +29,7 @@ class BookishUITests: XCTestCase {
     }
     
     func closeFrontDocument() {
-        application.menuBars.menuBarItems["File"].menuItems["Close"].click()
+        menuItem(at: ["File", "Close"]).click()
     }
     
     func testNewDocument() {
@@ -71,40 +60,37 @@ class BookishUITests: XCTestCase {
         let count = indexCount(window: window)
         
         // button
-        window.buttons["button.InsertBook"].click()
+        button("button.InsertBook").click()
         XCTAssertEqual(count + 1, indexCount(window: window))
 
         // toolbar button
-        let toolbar = window.toolbars.element(boundBy: 0)
-        toolbar.buttons["New"].click()
+        toolbarButton("New").click()
         XCTAssertEqual(count + 2, indexCount(window: window))
 
         // menu item
-        application.menuBars.menuItems["New"].menuItems["Book"].click()
+        menuItem("New").menuItems["Book"].click()
         XCTAssertEqual(count + 3, indexCount(window: window))
     }
 
     func testRemovingBook() {
         launch(arguments:["--test-document"])
         let window = application.windows["Untitled"]
-        let toolbar = window.toolbars.element(boundBy: 0)
         let count = indexCount(window: window)
         let item = firstIndexItem(window: window)
         
         // button
         item.click()
-        window.buttons["button.RemoveBook"].click()
+        button("button.RemoveBook").click()
         XCTAssertEqual(count - 1, indexCount(window: window))
 
         // toolbar button
         item.click()
-        let button = toolbar.children(matching: .button).matching(identifier: "Remove").element(boundBy: 0)
-        button.click()
+        toolbarButton("Remove").click()
         XCTAssertEqual(count - 2, indexCount(window: window))
 
         // menu item
         item.click()
-        application.menuBars.menuItems["Delete Book"].click()
+        menuItem("Delete Book").click()
         XCTAssertEqual(count - 3, indexCount(window: window))
     }
 
@@ -122,16 +108,28 @@ class BookishUITests: XCTestCase {
         XCTAssertEqual(item.value as! String, "Book Title")
     }
     
-    func testTest() {
+    func testAddingPerson() {
         launch(arguments:["--test-document"])
-        
-        let untitledWindow = XCUIApplication().windows["Untitled"]
-        let toolbarsQuery = untitledWindow.toolbars
-        toolbarsQuery.buttons["New"].click()
-        untitledWindow/*@START_MENU_TOKEN@*/.tables["books"].staticTexts["Untitled 2"]/*[[".splitGroups",".scrollViews.tables[\"books\"]",".tableRows",".cells.staticTexts[\"Untitled 2\"]",".staticTexts[\"Untitled 2\"]",".tables[\"books\"]"],[[[-1,5,2],[-1,1,2],[-1,0,1]],[[-1,5,2],[-1,1,2]],[[-1,4],[-1,3],[-1,2,3]],[[-1,4],[-1,3]]],[0,0]]@END_MENU_TOKEN@*/.click()
-        untitledWindow/*@START_MENU_TOKEN@*/.tables.textFields["value"]/*[[".splitGroups",".scrollViews.tables",".tableRows",".cells.textFields[\"value\"]",".textFields[\"value\"]",".tables"],[[[-1,5,2],[-1,1,2],[-1,0,1]],[[-1,5,2],[-1,1,2]],[[-1,4],[-1,3],[-1,2,3]],[[-1,4],[-1,3]]],[0,0]]@END_MENU_TOKEN@*/.click()
-        toolbarsQuery.children(matching: .button).matching(identifier: "Remove").element(boundBy: 1).click()
-        toolbarsQuery.buttons["Add"].click()
-        toolbarsQuery/*@START_MENU_TOKEN@*/.menuItems["Author"]/*[[".buttons[\"Add\"]",".menus.menuItems[\"Author\"]",".menuItems[\"Author\"]"],[[[-1,2],[-1,1],[-1,0,1]],[[-1,2],[-1,1]]],[0]]@END_MENU_TOKEN@*/.click()
+        let window = application.windows["Untitled"]
+        let toolbar = window.toolbars.element(boundBy: 0)
+        let count = indexCount(window: window)
+        let item = firstIndexItem(window: window)
+        let details = window.tables["details"]
+        let person = details.textFields["person-0"]
+        person.click()
+        menuItem(at: ["Add Person", "Author"]).click()
     }
+//
+//    func testTest() {
+//        launch(arguments:["--test-document"])
+//
+//        let untitledWindow = XCUIApplication().windows["Untitled"]
+//        let toolbarsQuery = untitledWindow.toolbars
+//        toolbarsQuery.buttons["New"].click()
+//        untitledWindow/*@START_MENU_TOKEN@*/.tables["books"].staticTexts["Untitled 2"]/*[[".splitGroups",".scrollViews.tables[\"books\"]",".tableRows",".cells.staticTexts[\"Untitled 2\"]",".staticTexts[\"Untitled 2\"]",".tables[\"books\"]"],[[[-1,5,2],[-1,1,2],[-1,0,1]],[[-1,5,2],[-1,1,2]],[[-1,4],[-1,3],[-1,2,3]],[[-1,4],[-1,3]]],[0,0]]@END_MENU_TOKEN@*/.click()
+//        untitledWindow/*@START_MENU_TOKEN@*/.tables.textFields["value"]/*[[".splitGroups",".scrollViews.tables",".tableRows",".cells.textFields[\"value\"]",".textFields[\"value\"]",".tables"],[[[-1,5,2],[-1,1,2],[-1,0,1]],[[-1,5,2],[-1,1,2]],[[-1,4],[-1,3],[-1,2,3]],[[-1,4],[-1,3]]],[0,0]]@END_MENU_TOKEN@*/.click()
+//        toolbarsQuery.children(matching: .button).matching(identifier: "Remove").element(boundBy: 1).click()
+//        toolbarsQuery.buttons["Add"].click()
+//        toolbarsQuery/*@START_MENU_TOKEN@*/.menuItems["Author"]/*[[".buttons[\"Add\"]",".menus.menuItems[\"Author\"]",".menuItems[\"Author\"]"],[[[-1,2],[-1,1],[-1,0,1]],[[-1,2],[-1,1]]],[0]]@END_MENU_TOKEN@*/.click()
+//    }
 }
