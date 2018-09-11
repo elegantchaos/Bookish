@@ -482,7 +482,7 @@
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="196" y="240" width="800" height="600"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
-                        <toolbar key="toolbar" implicitIdentifier="77DEAC6B-FAB4-4044-A5AA-0B8765A74231" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="WdN-bQ-LAx">
+                        <toolbar key="toolbar" implicitIdentifier="77DEAC6B-FAB4-4044-A5AA-0B8765A74231" explicitIdentifier="toolbar" displayMode="iconAndLabel" sizeMode="small" id="WdN-bQ-LAx">
                             <allowedToolbarItems>
                                 <toolbarItem implicitItemIdentifier="1CED54FA-DB54-4668-A669-6A9B23CE24FE" explicitItemIdentifier="toolbar.InsertBook" label="New" paletteLabel="New Book" tag="-1" image="AddBook" id="KUG-hg-iHG" userLabel="Add Book">
                                     <connections>
@@ -682,7 +682,7 @@
                             <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="zH4-UB-LMd">
                                 <rect key="frame" x="0.0" y="20" width="199" height="5"/>
                             </box>
-                            <button identifier="add-book" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yM9-Be-eOr" userLabel="Add Button" customClass="ValidatingButton" customModule="BookishMac" customModuleProvider="target">
+                            <button identifier="button.InsertBook" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yM9-Be-eOr" userLabel="Add Button" customClass="ValidatingButton" customModule="BookishMac" customModuleProvider="target">
                                 <rect key="frame" x="4" y="0.0" width="11" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="22" id="LBu-Ii-CIk"/>
@@ -692,7 +692,7 @@
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
-                                    <action selector="add:" target="gjv-NN-VkV" id="gSC-BL-pea"/>
+                                    <action selector="performAction:" target="Jsc-1E-0Rn" id="zQi-2u-i1m"/>
                                 </connections>
                             </button>
                             <button identifier="button.RemoveBook" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1gF-aY-ShN" userLabel="Remove Button" customClass="ValidatingButton" customModule="BookishMac" customModuleProvider="target">
