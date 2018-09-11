@@ -21,18 +21,23 @@ class CollectionDocument: PersistentDocument {
             if let context = self.managedObjectContext {
                 let formatter = DateFormatter()
                 formatter.setLocalizedDateFormatFromTemplate("dd/MM/yy")
-
-                let book1 = Book(context: context)
-                book1.name = "Book 1"
-                book1.notes = "This is an example book."
-                book1.published = formatter.date(from: "12/11/69")
-                let book2 = Book(context: context)
-                book2.name = "Book 2"
-                book2.notes = "Some\nmulti\nline\nnotes."
+                
                 let sharedEditor = Person(context: context)
                 let entry = sharedEditor.role(as: "editor")
-                entry.addToBooks(book1)
-                entry.addToBooks(book2)
+
+                let book = Book(context: context)
+                book.name = "A Book"
+                book.notes = "Some\nmulti\nline\nnotes."
+                entry.addToBooks(book)
+
+                for n in 1...3 {
+                    let book = Book(context: context)
+                    book.name = "Book \(n)"
+                    book.notes = "This is an example book."
+                    book.published = formatter.date(from: "12/11/69")
+                    entry.addToBooks(book)
+                }
+                
             }
             Application.sharedInstance.testDocument = false
         }
