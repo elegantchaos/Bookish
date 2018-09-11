@@ -12,8 +12,8 @@ class CollectionWindowController: NSWindowController, DocumentWindowController, 
     var viewModel: CollectionDocumentViewModel?
     typealias ViewModel = CollectionDocumentViewModel
     
-    var bookIndexController: CollectionIndexViewController?
-    var bookDetailController: CollectionDetailViewController?
+    var bookIndexController: BookIndexViewController?
+    var bookDetailController: BookDetailViewController?
     
     override func windowDidLoad() {
         super.windowDidLoad()

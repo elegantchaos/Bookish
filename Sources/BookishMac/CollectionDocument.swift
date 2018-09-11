@@ -19,9 +19,13 @@ class CollectionDocument: PersistentDocument {
         super.init()
         if Application.sharedInstance.testDocument {
             if let context = self.managedObjectContext {
+                let formatter = DateFormatter()
+                formatter.setLocalizedDateFormatFromTemplate("dd/MM/yy")
+
                 let book1 = Book(context: context)
                 book1.name = "Book 1"
                 book1.notes = "This is an example book."
+                book1.published = formatter.date(from: "12/11/69")
                 let book2 = Book(context: context)
                 book2.name = "Book 2"
                 book2.notes = "Some\nmulti\nline\nnotes."

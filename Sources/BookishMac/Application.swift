@@ -16,7 +16,6 @@ class Application: NSObject, NSApplicationDelegate {
     let noBlankDocument = CommandLine.arguments.contains("--no-blank-document")
     
     override func awakeFromNib() {
-        print(CommandLine.arguments)
         super.awakeFromNib()
         if uiTesting {
             resetState()

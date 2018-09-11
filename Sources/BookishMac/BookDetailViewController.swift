@@ -27,8 +27,8 @@ struct RowSpecification {
     }
 }
 
-class CollectionDetailViewController: CollectionViewController {
-    @IBOutlet weak var indexView: CollectionIndexViewController!
+class BookDetailViewController: CollectionViewController {
+    @IBOutlet weak var indexView: BookIndexViewController!
     @IBOutlet weak var detailsView: NSTableView!
     @IBOutlet weak var imageView: NSImageView!
     @IBOutlet weak var titleView: NSTextField!
@@ -53,7 +53,7 @@ class CollectionDetailViewController: CollectionViewController {
         
         // TODO: this is a bit naff as it makes assumptions about the containment hierarchy
         if let parent = self.parent as? NSSplitViewController {
-            indexView = parent.splitViewItems[0].viewController as? CollectionIndexViewController
+            indexView = parent.splitViewItems[0].viewController as? BookIndexViewController
         }
     }
     
@@ -118,7 +118,7 @@ class CollectionDetailViewController: CollectionViewController {
 
 // MARK: Actions
 
-extension CollectionDetailViewController: ActionContextProvider, PersonChangeObserver {
+extension BookDetailViewController: ActionContextProvider, PersonChangeObserver {
     func provide(context: ActionContext) {
         if let selection = indexView.indexArray.selectedObjects as? [Book] {
             context.info[ActionContext.selectionKey] = selection
@@ -169,7 +169,7 @@ extension NSTableCellView: BindableCellView {
     }
 }
 
-extension CollectionDetailViewController: NSTableViewDataSource, NSTableViewDelegate {
+extension BookDetailViewController: NSTableViewDataSource, NSTableViewDelegate {
     
     static let HeadingColumnID = NSUserInterfaceItemIdentifier(rawValue: "heading")
     static let ValueColumnID = NSUserInterfaceItemIdentifier(rawValue: "value")
@@ -179,13 +179,13 @@ extension CollectionDetailViewController: NSTableViewDataSource, NSTableViewDele
     func rowInfo(for tableView: NSTableView, columnID: NSUserInterfaceItemIdentifier, row: Int) -> (NSView?, Bool, Bool, Int) {
         var viewID = columnID
         let isPerson = row < people.count
-        let isValue = columnID == CollectionDetailViewController.ValueColumnID
+        let isValue = columnID == BookDetailViewController.ValueColumnID
         let index = isPerson ? row : row - people.count
         if isValue {
             if isPerson {
-                viewID = CollectionDetailViewController.PersonColumnID
+                viewID = BookDetailViewController.PersonColumnID
             } else if rows[index].type == .date {
-                viewID = CollectionDetailViewController.DateColumnID
+                viewID = BookDetailViewController.DateColumnID
             }
         }
         
@@ -230,10 +230,6 @@ extension CollectionDetailViewController: NSTableViewDataSource, NSTableViewDele
         }
         
         return view
-    }
-    
-    func tableViewSelectionDidChange(_ notification: Notification) {
-        print(notification)
     }
     
     func tableView(_ tableView: NSTableView, didAdd rowView: NSTableRowView, forRow row: Int) {

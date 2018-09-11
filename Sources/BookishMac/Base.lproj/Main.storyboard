@@ -600,10 +600,10 @@
             </objects>
             <point key="canvasLocation" x="75" y="642"/>
         </scene>
-        <!--Collection Index View Controller-->
+        <!--Book Index View Controller-->
         <scene sceneID="LbK-bz-Udp">
             <objects>
-                <viewController id="cSd-7W-hzi" customClass="CollectionIndexViewController" customModule="BookishMac" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="cSd-7W-hzi" customClass="BookIndexViewController" customModule="BookishMac" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="JCM-bJ-k8z">
                         <rect key="frame" x="0.0" y="0.0" width="199" height="342"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -738,10 +738,10 @@
             </objects>
             <point key="canvasLocation" x="232" y="1278"/>
         </scene>
-        <!--Collection Detail View Controller-->
+        <!--Book Detail View Controller-->
         <scene sceneID="qGP-fN-0GX">
             <objects>
-                <viewController id="TBH-Sa-Ff0" customClass="CollectionDetailViewController" customModule="BookishMac" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="TBH-Sa-Ff0" customClass="BookDetailViewController" customModule="BookishMac" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="BXj-Jh-9Ye">
                         <rect key="frame" x="0.0" y="0.0" width="400" height="400"/>
                         <autoresizingMask key="autoresizingMask"/>

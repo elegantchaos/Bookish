@@ -32,7 +32,6 @@ class AuthorsTransformer: ValueTransformer, CoreDataTransformer {
         var result: [Person] = []
         if let text = value as? String, let context = managedObjectContext {
             let names = text.split(separator: ",")
-            print(names)
             for name in names {
                 let author = Person(context: context)
                 author.name = String(name)

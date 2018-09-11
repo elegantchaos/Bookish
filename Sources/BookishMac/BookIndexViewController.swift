@@ -7,8 +7,8 @@ import AppKit
 import BookishModel
 import Actions
 
-class CollectionIndexViewController: CollectionViewController {
-    @objc weak var detailView: CollectionDetailViewController!
+class BookIndexViewController: CollectionViewController {
+    @objc weak var detailView: BookDetailViewController!
     @IBOutlet weak var indexArray: NSArrayController!
     
     override func viewDidLoad() {
@@ -16,7 +16,7 @@ class CollectionIndexViewController: CollectionViewController {
         
         // TODO: this is a bit naff as it makes assumptions about the containment hierarchy
         if let parent = self.parent as? NSSplitViewController {
-            detailView = parent.splitViewItems[1].viewController as? CollectionDetailViewController
+            detailView = parent.splitViewItems[1].viewController as? BookDetailViewController
         }
     }
     
@@ -60,7 +60,7 @@ class CollectionIndexViewController: CollectionViewController {
     }
 }
 
-extension CollectionIndexViewController: ActionContextProvider {
+extension BookIndexViewController: ActionContextProvider {
     func provide(context: ActionContext) {
         detailView.provide(context: context)
     }

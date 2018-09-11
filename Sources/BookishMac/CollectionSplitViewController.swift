@@ -12,8 +12,4 @@ class CollectionSplitViewController: NSSplitViewController {
         // Do view setup here.
     }
     
-    override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
-        print("split preparing")
-    }
-
 }
