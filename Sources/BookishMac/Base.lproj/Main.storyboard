@@ -484,17 +484,18 @@
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
                         <toolbar key="toolbar" implicitIdentifier="77DEAC6B-FAB4-4044-A5AA-0B8765A74231" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="WdN-bQ-LAx">
                             <allowedToolbarItems>
-                                <toolbarItem implicitItemIdentifier="1CED54FA-DB54-4668-A669-6A9B23CE24FE" explicitItemIdentifier="toolbar.InsertBook" label="New" paletteLabel="New Book" tag="-1" image="NSAddTemplate" id="KUG-hg-iHG">
+                                <toolbarItem implicitItemIdentifier="1CED54FA-DB54-4668-A669-6A9B23CE24FE" explicitItemIdentifier="toolbar.InsertBook" label="New" paletteLabel="New Book" tag="-1" image="AddBook" id="KUG-hg-iHG" userLabel="Add Book">
                                     <connections>
                                         <action selector="performAction:" target="6f7-a7-6o1" id="bL7-E9-AfQ"/>
                                     </connections>
                                 </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="186690BC-4D85-4E1F-AF2E-8BA2B7576BCE" explicitItemIdentifier="toolbar.RemoveBook" label="Delete" paletteLabel="Delete Book" tag="-1" image="RemoveBook" id="4MA-D6-uiQ" userLabel="Remove Book"/>
                                 <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="TAF-Mz-qpr"/>
                                 <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="dlb-Xe-WiO"/>
                                 <toolbarItem implicitItemIdentifier="42A4917E-FFCE-440D-90B8-1331166CC46A" explicitItemIdentifier="toolbar.ShowAddPerson" label="Add" paletteLabel="Add Person" image="AddPerson" sizingBehavior="auto" id="reg-Dx-A2Q" userLabel="Add Person" customClass="ViewBasedToolbarItem" customModule="BookishMac" customModuleProvider="target">
                                     <nil key="toolTip"/>
                                     <button key="view" identifier="toolbar.button.ShowAddPerson" verticalHuggingPriority="750" id="uup-kx-3kb">
-                                        <rect key="frame" x="0.0" y="14" width="106" height="43"/>
+                                        <rect key="frame" x="18" y="14" width="32" height="32"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="AddPerson" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="frN-4k-1rM">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -508,7 +509,7 @@
                                 <toolbarItem implicitItemIdentifier="551D39AE-40C4-4D12-BEB0-1B8440DCD640" explicitItemIdentifier="toolbar.RemovePerson" label="Remove" paletteLabel="Remove Person" image="RemovePerson" sizingBehavior="auto" id="2Iz-4y-jpV" customClass="ViewBasedToolbarItem" customModule="BookishMac" customModuleProvider="target">
                                     <nil key="toolTip"/>
                                     <button key="view" identifier="toolbar.button.RemovePerson" verticalHuggingPriority="750" id="PpS-3K-9lR">
-                                        <rect key="frame" x="0.0" y="14" width="106" height="43"/>
+                                        <rect key="frame" x="29" y="14" width="32" height="32"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="RemovePerson" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="aPU-Zr-BG1">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -522,10 +523,10 @@
                             </allowedToolbarItems>
                             <defaultToolbarItems>
                                 <toolbarItem reference="KUG-hg-iHG"/>
-                                <toolbarItem reference="TAF-Mz-qpr"/>
+                                <toolbarItem reference="4MA-D6-uiQ"/>
+                                <toolbarItem reference="dlb-Xe-WiO"/>
                                 <toolbarItem reference="reg-Dx-A2Q"/>
                                 <toolbarItem reference="2Iz-4y-jpV"/>
-                                <toolbarItem reference="dlb-Xe-WiO"/>
                             </defaultToolbarItems>
                             <connections>
                                 <outlet property="delegate" destination="jGA-0Y-lOj" id="dQw-9g-PvR"/>
@@ -1021,12 +1022,14 @@
         </scene>
     </scenes>
     <resources>
+        <image name="AddBook" width="32" height="32"/>
         <image name="AddPerson" width="32" height="32"/>
         <image name="ChooseDateSmall" width="12" height="12"/>
         <image name="Minus" width="12" height="12"/>
         <image name="NSAddTemplate" width="11" height="11"/>
         <image name="NSRemoveTemplate" width="11" height="11"/>
         <image name="Plus" width="12" height="12"/>
+        <image name="RemoveBook" width="32" height="32"/>
         <image name="RemovePerson" width="32" height="32"/>
     </resources>
 </document>
