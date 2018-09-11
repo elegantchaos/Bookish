@@ -965,7 +965,7 @@
                                     <constraint firstAttribute="height" constant="42" id="E11-fK-gOJ"/>
                                     <constraint firstAttribute="width" constant="42" id="FCF-as-z1Y"/>
                                 </constraints>
-                                <imageCell key="cell" selectable="YES" editable="YES" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="proportionallyDown" id="a7U-eh-BHK"/>
+                                <imageCell key="cell" selectable="YES" editable="YES" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="proportionallyDown" image="CoverPlaceholder" id="a7U-eh-BHK"/>
                             </imageView>
                         </subviews>
                         <constraints>
@@ -1029,6 +1029,7 @@
         <image name="AddBook" width="32" height="32"/>
         <image name="AddPerson" width="32" height="32"/>
         <image name="ChooseDateSmall" width="12" height="12"/>
+        <image name="CoverPlaceholder" width="512" height="512"/>
         <image name="Minus" width="12" height="12"/>
         <image name="NSAddTemplate" width="11" height="11"/>
         <image name="NSRemoveTemplate" width="11" height="11"/>

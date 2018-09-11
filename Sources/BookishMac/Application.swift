@@ -50,6 +50,7 @@ class Application: NSObject, NSApplicationDelegate {
         
         ValueTransformer.setValueTransformer(AuthorsTransformer(), forName: AuthorsTransformer.name)
         ValueTransformer.setValueTransformer(DateTransformer(), forName: DateTransformer.name)
+        ValueTransformer.setValueTransformer(CoverImageTransformer(), forName: CoverImageTransformer.name)
     }
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
