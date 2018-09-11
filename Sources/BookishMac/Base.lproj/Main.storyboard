@@ -489,7 +489,11 @@
                                         <action selector="performAction:" target="6f7-a7-6o1" id="bL7-E9-AfQ"/>
                                     </connections>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="186690BC-4D85-4E1F-AF2E-8BA2B7576BCE" explicitItemIdentifier="toolbar.RemoveBook" label="Delete" paletteLabel="Delete Book" tag="-1" image="RemoveBook" id="4MA-D6-uiQ" userLabel="Remove Book"/>
+                                <toolbarItem implicitItemIdentifier="8FCDAD68-C7DB-48C2-801B-AA00D899B5F1" explicitItemIdentifier="toolbar.RemoveBook" label="Remove" paletteLabel="Remove Book" tag="-1" image="RemoveBook" id="vSg-qE-3uS">
+                                    <connections>
+                                        <action selector="performAction:" target="6f7-a7-6o1" id="zNr-Nl-MOv"/>
+                                    </connections>
+                                </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="TAF-Mz-qpr"/>
                                 <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="dlb-Xe-WiO"/>
                                 <toolbarItem implicitItemIdentifier="42A4917E-FFCE-440D-90B8-1331166CC46A" explicitItemIdentifier="toolbar.ShowAddPerson" label="Add" paletteLabel="Add Person" image="AddPerson" sizingBehavior="auto" id="reg-Dx-A2Q" userLabel="Add Person" customClass="ViewBasedToolbarItem" customModule="BookishMac" customModuleProvider="target">
@@ -523,7 +527,7 @@
                             </allowedToolbarItems>
                             <defaultToolbarItems>
                                 <toolbarItem reference="KUG-hg-iHG"/>
-                                <toolbarItem reference="4MA-D6-uiQ"/>
+                                <toolbarItem reference="vSg-qE-3uS"/>
                                 <toolbarItem reference="dlb-Xe-WiO"/>
                                 <toolbarItem reference="reg-Dx-A2Q"/>
                                 <toolbarItem reference="2Iz-4y-jpV"/>

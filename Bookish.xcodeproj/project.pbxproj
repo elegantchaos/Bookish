@@ -75,6 +75,7 @@
 		22D39E592146BA9C00282467 /* ShowDatePickerAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D39E582146BA9C00282467 /* ShowDatePickerAction.swift */; };
 		22D39E5B2146BE4900282467 /* DatePickerPopoverController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D39E5A2146BE4900282467 /* DatePickerPopoverController.swift */; };
 		22D39E5E2146D9F100282467 /* ValidatingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D39E5D2146D9F100282467 /* ValidatingButton.swift */; };
+		22D39E602147D4A100282467 /* TestAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D39E5F2147D4A100282467 /* TestAction.swift */; };
 		22DD42482126D6DA0070C85A /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DD42472126D6DA0070C85A /* Application.swift */; };
 		22DD424A2126D6DA0070C85A /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DD42492126D6DA0070C85A /* CollectionViewController.swift */; };
 		22DD424C2126D6DA0070C85A /* CollectionDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DD424B2126D6DA0070C85A /* CollectionDocument.swift */; };
@@ -233,6 +234,7 @@
 		22D39E582146BA9C00282467 /* ShowDatePickerAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowDatePickerAction.swift; sourceTree = "<group>"; };
 		22D39E5A2146BE4900282467 /* DatePickerPopoverController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerPopoverController.swift; sourceTree = "<group>"; };
 		22D39E5D2146D9F100282467 /* ValidatingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatingButton.swift; sourceTree = "<group>"; };
+		22D39E5F2147D4A100282467 /* TestAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestAction.swift; sourceTree = "<group>"; };
 		22DD42442126D6DA0070C85A /* BookishMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BookishMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22DD42472126D6DA0070C85A /* Application.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
 		22DD42492126D6DA0070C85A /* CollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
@@ -336,6 +338,7 @@
 		221F27272136EC0500DC2DC7 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				22D39E5F2147D4A100282467 /* TestAction.swift */,
 				22D39E522146A84500282467 /* AnnotatedTableCellView.swift */,
 				22D39E5D2146D9F100282467 /* ValidatingButton.swift */,
 				22960329214032520020B3EB /* AnnotatedTextField.swift */,
@@ -1012,6 +1015,7 @@
 				2296032F2141563A0020B3EB /* PersonActions.swift in Sources */,
 				22D39E5B2146BE4900282467 /* DatePickerPopoverController.swift in Sources */,
 				22D39E532146A84500282467 /* AnnotatedTableCellView.swift in Sources */,
+				22D39E602147D4A100282467 /* TestAction.swift in Sources */,
 				221F272921382C8E00DC2DC7 /* DateTransformer.swift in Sources */,
 				22D39E4F2142BCD000282467 /* InsertBookAction.swift in Sources */,
 				22143FD521300F9300B689DF /* CoreDataTransformers.swift in Sources */,

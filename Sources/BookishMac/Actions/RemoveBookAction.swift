@@ -9,9 +9,11 @@ import BookishModel
 class RemoveBookAction: Action {
     override func validate(context: ActionContext) -> Bool {
         guard let selection = context.info[ActionContext.selectionKey] as? [Book] else {
+            print("no selection")
             return false
         }
         
+        print(selection.count)
         return selection.count > 0
     }
     

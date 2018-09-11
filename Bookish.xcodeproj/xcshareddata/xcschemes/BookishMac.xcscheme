@@ -121,7 +121,7 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "-logs Model,Actions"
+            argument = "-logs Model"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
