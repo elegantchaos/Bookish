@@ -20,7 +20,7 @@ class BookishUITests: UITests {
         let count = application.windows.count
         
         // make a new document
-        menuItem(at: ["New", "Collection"]).click()
+        clickMenuItem(at: ["New", "Collection"])
         
         // should now have an untitled document
         XCTAssertEqual(XCUIApplication().windows.count, count + 1)
@@ -29,7 +29,7 @@ class BookishUITests: UITests {
     }
     
     func closeFrontDocument() {
-        menuItem(at: ["File", "Close"]).click()
+        clickMenuItem(at: ["File", "Close"])
     }
     
     func testNewDocument() {
@@ -43,93 +43,64 @@ class BookishUITests: UITests {
         XCTAssertEqual(application.windows.count, 0)
     }
 
-    func firstIndexItem(window: XCUIElement) -> XCUIElement {
-        let index = window.tables["books"]
-        let item = index.staticTexts.element(boundBy: 0)
-        return item
-    }
-    
-    func indexCount(window: XCUIElement) -> Int {
-        let index = window.tables["books"]
-        return index.staticTexts.count
-    }
-    
     func testAddingBook() {
         launch()
-        let window = application.windows["Untitled"]
-        let count = indexCount(window: window)
+        let count = tableRowCount("books")
         
         // button
-        button("button.InsertBook").click()
-        XCTAssertEqual(count + 1, indexCount(window: window))
+        clickButton("button.InsertBook")
+        XCTAssertEqual(count + 1, tableRowCount("books"))
 
         // toolbar button
-        toolbarButton("New").click()
-        XCTAssertEqual(count + 2, indexCount(window: window))
+        clickToolbarButton("New")
+        XCTAssertEqual(count + 2, tableRowCount("books"))
 
         // menu item
-        menuItem("New").menuItems["Book"].click()
-        XCTAssertEqual(count + 3, indexCount(window: window))
+        clickMenuItem(at: ["New", "Book"])
+        XCTAssertEqual(count + 3, tableRowCount("books"))
     }
 
     func testRemovingBook() {
         launch(arguments:["--test-document"])
-        let window = application.windows["Untitled"]
-        let count = indexCount(window: window)
-        let item = firstIndexItem(window: window)
+        let count = tableRowCount("books")
         
         // button
-        item.click()
-        button("button.RemoveBook").click()
-        XCTAssertEqual(count - 1, indexCount(window: window))
+        clickTableRow(0, table: "books")
+        clickButton("button.RemoveBook")
+        XCTAssertEqual(count - 1, tableRowCount("books"))
 
         // toolbar button
-        item.click()
-        toolbarButton("Remove").click()
-        XCTAssertEqual(count - 2, indexCount(window: window))
+        clickTableRow(0, table: "books")
+        clickToolbarButton("Remove")
+        XCTAssertEqual(count - 2, tableRowCount("books"))
 
         // menu item
-        item.click()
-        menuItem("Delete Book").click()
-        XCTAssertEqual(count - 3, indexCount(window: window))
+        clickTableRow(0, table: "books")
+        clickMenuItem("Delete Book")
+        XCTAssertEqual(count - 3, tableRowCount("books"))
     }
 
 
     func testRenamingChangesIndex() {
         launch(arguments:["--test-document"])
         let window = application.windows["Untitled"]
-        let item = firstIndexItem(window: window)
-        item.click()
+        clickTableRow(0, table: "books")
         let field = window.textFields["title"]
         field.click()
         field.typeKey("a", modifierFlags: .command)
         field.typeText("Book Title")
-        item.click()
-        XCTAssertEqual(item.value as! String, "Book Title")
+        clickTableRow(0, table: "books")
+        XCTAssertEqual(tableRowValue(0, table: "books"), "Book Title")
     }
     
     func testAddingPerson() {
         launch(arguments:["--test-document"])
-        let window = application.windows["Untitled"]
-        let toolbar = window.toolbars.element(boundBy: 0)
-        let count = indexCount(window: window)
-        let item = firstIndexItem(window: window)
-        let details = window.tables["details"]
-        let person = details.textFields["person-0"]
-        person.click()
-        menuItem(at: ["Add Person", "Author"]).click()
+        let count = tableRowCount("details")
+        with(scope: table("details")) {
+            clickField("person-0")
+        }
+        clickMenuItem(at: ["Add Person", "Author"])
+        XCTAssertEqual(count + 1, tableRowCount("details"))
     }
-//
-//    func testTest() {
-//        launch(arguments:["--test-document"])
-//
-//        let untitledWindow = XCUIApplication().windows["Untitled"]
-//        let toolbarsQuery = untitledWindow.toolbars
-//        toolbarsQuery.buttons["New"].click()
-//        untitledWindow/*@START_MENU_TOKEN@*/.tables["books"].staticTexts["Untitled 2"]/*[[".splitGroups",".scrollViews.tables[\"books\"]",".tableRows",".cells.staticTexts[\"Untitled 2\"]",".staticTexts[\"Untitled 2\"]",".tables[\"books\"]"],[[[-1,5,2],[-1,1,2],[-1,0,1]],[[-1,5,2],[-1,1,2]],[[-1,4],[-1,3],[-1,2,3]],[[-1,4],[-1,3]]],[0,0]]@END_MENU_TOKEN@*/.click()
-//        untitledWindow/*@START_MENU_TOKEN@*/.tables.textFields["value"]/*[[".splitGroups",".scrollViews.tables",".tableRows",".cells.textFields[\"value\"]",".textFields[\"value\"]",".tables"],[[[-1,5,2],[-1,1,2],[-1,0,1]],[[-1,5,2],[-1,1,2]],[[-1,4],[-1,3],[-1,2,3]],[[-1,4],[-1,3]]],[0,0]]@END_MENU_TOKEN@*/.click()
-//        toolbarsQuery.children(matching: .button).matching(identifier: "Remove").element(boundBy: 1).click()
-//        toolbarsQuery.buttons["Add"].click()
-//        toolbarsQuery/*@START_MENU_TOKEN@*/.menuItems["Author"]/*[[".buttons[\"Add\"]",".menus.menuItems[\"Author\"]",".menuItems[\"Author\"]"],[[[-1,2],[-1,1],[-1,0,1]],[[-1,2],[-1,1]]],[0]]@END_MENU_TOKEN@*/.click()
-//    }
+
 }
