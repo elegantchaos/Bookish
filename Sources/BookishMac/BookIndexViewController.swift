@@ -13,11 +13,7 @@ class BookIndexViewController: CollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // TODO: this is a bit naff as it makes assumptions about the containment hierarchy
-        if let parent = self.parent as? NSSplitViewController {
-            detailView = parent.splitViewItems[1].viewController as? BookDetailViewController
-        }
+        detailView = nearestSibling()
     }
     
     override func viewWillAppear() {
@@ -26,11 +22,7 @@ class BookIndexViewController: CollectionViewController {
         }
         // we really should be able to bind the array to the object context in IB, but
         // the document value is set relatively late, so it's safer to do it here
-//        if let context = document?.managedObjectContext {
-//            indexArray.managedObjectContext = context
-            indexArray.fetch(self)
-//        }
-//
+        indexArray.fetch(self)
         super.viewWillAppear()
     }
     

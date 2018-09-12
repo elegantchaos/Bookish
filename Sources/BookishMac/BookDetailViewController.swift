@@ -3,7 +3,7 @@
 //  All code (c) 2018 - present day, Elegant Chaos Limited.
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
-import Cocoa
+import AppKit
 import Actions
 import BookishModel
 import Dispatch
@@ -26,7 +26,6 @@ struct RowSpecification {
         self.editable = editable
     }
 }
-
 class BookDetailViewController: CollectionViewController {
     @IBOutlet weak var indexView: BookIndexViewController!
     @IBOutlet weak var detailsView: NSTableView!
@@ -50,11 +49,7 @@ class BookDetailViewController: CollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // TODO: this is a bit naff as it makes assumptions about the containment hierarchy
-        if let parent = self.parent as? NSSplitViewController {
-            indexView = parent.splitViewItems[0].viewController as? BookIndexViewController
-        }
+        indexView = nearestSibling()
     }
     
     override func viewWillAppear() {
