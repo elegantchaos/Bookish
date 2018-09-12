@@ -352,7 +352,7 @@
                             </menuItem>
                             <menuItem title="Book" id="EkW-3w-kBG">
                                 <modifierMask key="keyEquivalentModifierMask"/>
-                                <menu key="submenu" title="Book" id="KpK-bQ-eVd">
+                                <menu key="submenu" title="Book" identifier="menu.book" id="KpK-bQ-eVd">
                                     <items>
                                         <menuItem title="Add Person" id="S1Y-5k-gmo">
                                             <modifierMask key="keyEquivalentModifierMask"/>

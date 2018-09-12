@@ -134,4 +134,53 @@ class BookishUITests: UITests {
         clickMenuItem("Remove Person")
         XCTAssertEqual(count - 3, tableRowCount("details"))
     }
+    
+    func testRemoveBookState() {
+        launch(arguments: ["--test-document"])
+        clickTableRow(0, table: "books")
+        XCTAssertTrue(button("button.RemoveBook").isEnabled)
+        XCTAssertTrue(toolbarButton("Remove").isEnabled)
+        XCTAssertTrue(menuItem("Delete Book").isEnabled)
+        table("books").click()
+        XCTAssertFalse(button("button.RemoveBook").isEnabled)
+        XCTAssertFalse(toolbarButton("Remove").isEnabled)
+        clickMenuItem("Book")
+        XCTAssertFalse(menuItem("Delete Book").isEnabled)
+    }
+
+    func testAddPersonState() {
+        launch(arguments: ["--test-document"])
+        clickTableRow(0, table: "books")
+        XCTAssertTrue(menuItem(at: ["Add Person", "Author"]).isEnabled)
+        XCTAssertTrue(toolbarButton("Add").isEnabled)
+        with(scope: table("details")) {
+            clickField("person-0")
+        }
+        XCTAssertTrue(button("button.ShowAddPerson").isEnabled)
+        table("books").click()
+        clickMenuItem("Add Person")
+        XCTAssertFalse(menuItem(at: ["Add Person", "Author"]).isEnabled)
+        XCTAssertFalse(toolbarButton("Add").isEnabled)
+    }
+
+    func testRemovePersonState() {
+        launch(arguments: ["--test-document"])
+        clickTableRow(0, table: "books")
+        XCTAssertFalse(menuItem("Remove Person").isEnabled)
+        XCTAssertFalse(toolbarButton("Remove", count: 1).isEnabled)
+        with(scope: table("details")) {
+            clickField("person-0")
+        }
+        clickMenuItem("Book")
+        XCTAssertTrue(menuItem("Remove Person").isEnabled)
+        XCTAssertTrue(toolbarButton("Remove", count: 1).isEnabled)
+        XCTAssertTrue(button("button.RemovePerson").isEnabled)
+        
+        clickTableRow(1, table: "books")
+        table("books").click()
+        clickMenuItem("Book")
+        XCTAssertFalse(menuItem("Remove Person").isEnabled)
+        XCTAssertFalse(toolbarButton("Remove", count: 1).isEnabled)
+    }
+
 }

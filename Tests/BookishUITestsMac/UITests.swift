@@ -24,10 +24,13 @@ class UITests: XCTestCase {
     func menuItem(_ name: String) -> XCUIElement {
         var result = scope.toolbars.menuItems[name]
         if !result.exists {
-            result = scope.menuItems[name]
+            result = menubar.menuBarItems[name]
         }
         if !result.exists {
             result = menubar.menuItems[name]
+        }
+        if !result.exists {
+            result = scope.menuItems[name]
         }
         return result
     }
