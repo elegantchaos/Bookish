@@ -6,7 +6,13 @@
 import CoreData
 
 public class Role: NSManagedObject {
-    public static func role(named: String, context: NSManagedObjectContext) -> Role {
+    public struct Default {
+        public static let authorName = "Author"
+        public static let editorName = "Editor"
+        public static let illustratorName = "Illustrator"
+    }
+    
+    public class func role(named: String, context: NSManagedObjectContext) -> Role {
         let request: NSFetchRequest<Role> = Role.fetchRequest()
         request.predicate = NSPredicate(format: "name = \"\(named)\"")
 

@@ -6,6 +6,7 @@
 import AppKit
 import CoreData
 import Actions
+import BookishModel
 
 @objc class CollectionDocumentViewModel: NSObject, DocumentViewModel {
     typealias  WindowController = CollectionWindowController
@@ -22,19 +23,24 @@ import Actions
     
     func addPersonItem(kind: String, shortcut: String) -> NSMenuItem {
         let item = NSMenuItem(title: kind, action: ActionManager.performActionSelector, keyEquivalent: shortcut)
-        item.identifier = NSUserInterfaceItemIdentifier(rawValue: "menu.AddPerson.\(kind.lowercased())")
+        item.identifier = NSUserInterfaceItemIdentifier(rawValue: "menu.AddPerson.\(kind)")
         item.keyEquivalentModifierMask = [.command, .option]
         return item
     }
     
     var addPersonMenu: NSMenu {
         get {
+            var shortcuts = ["4","3","2","1"]
             let menu = NSMenu()
-            menu.addItem(addPersonItem(kind: "Author", shortcut: "A"))
-            menu.addItem(addPersonItem(kind: "Editor", shortcut: "E"))
-            menu.addItem(addPersonItem(kind: "Illustrator", shortcut: "I"))
-            menu.title = "AddPersonPopup"
-            menu.identifier = NSUserInterfaceItemIdentifier(rawValue: "AddPersonPopup")
+            let request: NSFetchRequest<Role> = Role.fetchRequest()
+            if let results = try? managedObjectContext.fetch(request) {
+                for role in results {
+                    if let name = role.name {
+                        let shortcut = shortcuts.popLast() ?? ""
+                        menu.addItem(addPersonItem(kind: name, shortcut: shortcut))
+                    }
+                }
+            }
             return menu
         }
     }

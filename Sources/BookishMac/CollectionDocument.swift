@@ -23,7 +23,7 @@ class CollectionDocument: PersistentDocument {
                 formatter.setLocalizedDateFormatFromTemplate("dd/MM/yy")
                 
                 let sharedEditor = Person(context: context)
-                let entry = sharedEditor.role(as: "editor")
+                let entry = sharedEditor.role(as: Role.Default.editorName)
 
                 let book = Book(context: context)
                 book.name = "A Book"
@@ -37,7 +37,7 @@ class CollectionDocument: PersistentDocument {
                     book.published = formatter.date(from: "12/11/69")
                     entry.addToBooks(book)
                     let illustrator = Person(context: context)
-                    let entry2 = illustrator.role(as: "illustrator")
+                    let entry2 = illustrator.role(as: Role.Default.illustratorName)
                     entry2.addToBooks(book)
                 }
                 

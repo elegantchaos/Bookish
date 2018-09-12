@@ -19,7 +19,7 @@ public class Book: NSManagedObject {
         
         if let context = managedObjectContext {
             let author = Person(context: context)
-            let entry = author.role(as: "author")
+            let entry = author.role(as: Role.Default.authorName)
             entry.addToBooks(self)
         }
     }
