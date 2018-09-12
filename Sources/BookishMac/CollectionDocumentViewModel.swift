@@ -20,9 +20,9 @@ import Actions
         self.managedObjectContext = document.managedObjectContext!
     }
     
-    func insertPersonItem(kind: String, shortcut: String) -> NSMenuItem {
+    func addPersonItem(kind: String, shortcut: String) -> NSMenuItem {
         let item = NSMenuItem(title: kind, action: ActionManager.performActionSelector, keyEquivalent: shortcut)
-        item.identifier = NSUserInterfaceItemIdentifier(rawValue: "menu.InsertPerson.\(kind.lowercased())")
+        item.identifier = NSUserInterfaceItemIdentifier(rawValue: "menu.AddPerson.\(kind.lowercased())")
         item.keyEquivalentModifierMask = [.command, .option]
         return item
     }
@@ -30,9 +30,9 @@ import Actions
     var addPersonMenu: NSMenu {
         get {
             let menu = NSMenu()
-            menu.addItem(insertPersonItem(kind: "Author", shortcut: "A"))
-            menu.addItem(insertPersonItem(kind: "Editor", shortcut: "E"))
-            menu.addItem(insertPersonItem(kind: "Illustrator", shortcut: "I"))
+            menu.addItem(addPersonItem(kind: "Author", shortcut: "A"))
+            menu.addItem(addPersonItem(kind: "Editor", shortcut: "E"))
+            menu.addItem(addPersonItem(kind: "Illustrator", shortcut: "I"))
             menu.title = "AddPersonPopup"
             menu.identifier = NSUserInterfaceItemIdentifier(rawValue: "AddPersonPopup")
             return menu

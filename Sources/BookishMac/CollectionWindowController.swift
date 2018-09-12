@@ -8,7 +8,7 @@ import Actions
 import BookishCore
 import BookishModel
 
-class CollectionWindowController: NSWindowController, DocumentWindowController, ActionContextProvider {
+class CollectionWindowController: NSWindowController, DocumentWindowController, ActionContextProvider, NSUserInterfaceValidations {
     var viewModel: CollectionDocumentViewModel?
     typealias ViewModel = CollectionDocumentViewModel
     
@@ -24,5 +24,14 @@ class CollectionWindowController: NSWindowController, DocumentWindowController, 
         if let model = viewModel {
             context.info[ActionContext.modelKey] = model
         }
+    }
+    
+    func validateUserInterfaceItem(_ item: NSValidatedUserInterfaceItem) -> Bool {
+        if let menu = item as? NSMenuItem {
+            if menu.title == "Add Person" {
+                print("nlah")
+            }
+        }
+        return true
     }
 }

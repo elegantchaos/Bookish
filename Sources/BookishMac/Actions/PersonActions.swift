@@ -30,7 +30,7 @@ class PersonAction: Action {
     }
 }
 
-class InsertPersonAction: PersonAction {
+class AddPersonAction: PersonAction {
     override func validate(context: ActionContext) -> Bool {
         return (context.parameters.count > 0) && super.validate(context: context)
     }
@@ -80,7 +80,22 @@ class RemovePersonAction: PersonAction {
     }
 }
 
-class ShowAddPersonAction: PersonAction {
+class FillPersonMenuAction: PersonAction {
+    override func validate(context: ActionContext) -> Bool {
+        guard super.validate(context: context) else {
+            return false
+        }
+
+        if let item = context.sender as? NSMenuItem, let viewModel = context.info[ActionContext.modelKey] as? CollectionDocumentViewModel {
+            item.submenu = viewModel.addPersonMenu
+            return true
+        }
+        
+        return false
+    }
+}
+
+class PopupPersonMenuAction: PersonAction {
     override func perform(context: ActionContext) {
         if let event = NSApplication.shared.currentEvent, let viewModel = context.info[ActionContext.modelKey] as? CollectionDocumentViewModel {
             var view = context.sender as? NSView

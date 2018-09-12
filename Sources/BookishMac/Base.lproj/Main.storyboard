@@ -354,27 +354,11 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Book" identifier="menu.book" id="KpK-bQ-eVd">
                                     <items>
-                                        <menuItem title="Add Person" id="S1Y-5k-gmo">
+                                        <menuItem title="Add Person" identifier="menu.FillPersonMenu" id="S1Y-5k-gmo">
                                             <modifierMask key="keyEquivalentModifierMask"/>
-                                            <menu key="submenu" title="Add Person" id="yUT-5y-39U">
-                                                <items>
-                                                    <menuItem title="Author" keyEquivalent="A" identifier="InsertPerson.author" id="8p4-Le-QDr">
-                                                        <connections>
-                                                            <action selector="performAction:" target="Ady-hI-5gd" id="eAa-nd-Jub"/>
-                                                        </connections>
-                                                    </menuItem>
-                                                    <menuItem title="Editor" keyEquivalent="E" identifier="InsertPerson.editor" id="Egn-Xt-Pho">
-                                                        <connections>
-                                                            <action selector="performAction:" target="Ady-hI-5gd" id="oKW-rk-nh5"/>
-                                                        </connections>
-                                                    </menuItem>
-                                                    <menuItem title="Illustrator" keyEquivalent="I" identifier="InsertPerson.illustrator" id="BPc-lW-GGi">
-                                                        <connections>
-                                                            <action selector="performAction:" target="Ady-hI-5gd" id="gPB-l1-GtE"/>
-                                                        </connections>
-                                                    </menuItem>
-                                                </items>
-                                            </menu>
+                                            <connections>
+                                                <action selector="performAction:" target="Ady-hI-5gd" id="7NE-A6-iSj"/>
+                                            </connections>
                                         </menuItem>
                                         <menuItem title="Remove Person" identifier="menu.RemovePerson" id="b2J-PJ-ZCr">
                                             <modifierMask key="keyEquivalentModifierMask"/>
@@ -496,9 +480,9 @@
                                 </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="TAF-Mz-qpr"/>
                                 <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="dlb-Xe-WiO"/>
-                                <toolbarItem implicitItemIdentifier="42A4917E-FFCE-440D-90B8-1331166CC46A" explicitItemIdentifier="toolbar.ShowAddPerson" label="Add" paletteLabel="Add Person" image="AddPerson" sizingBehavior="auto" id="reg-Dx-A2Q" userLabel="Add Person" customClass="ViewBasedToolbarItem" customModule="BookishMac" customModuleProvider="target">
+                                <toolbarItem implicitItemIdentifier="42A4917E-FFCE-440D-90B8-1331166CC46A" explicitItemIdentifier="toolbar.PopupPersonMenu" label="Add" paletteLabel="Add Person" image="AddPerson" sizingBehavior="auto" id="reg-Dx-A2Q" userLabel="Add Person" customClass="ViewBasedToolbarItem" customModule="BookishMac" customModuleProvider="target">
                                     <nil key="toolTip"/>
-                                    <button key="view" identifier="toolbar.button.ShowAddPerson" verticalHuggingPriority="750" id="uup-kx-3kb">
+                                    <button key="view" identifier="toolbar.button.PopupPersonMenu" verticalHuggingPriority="750" id="uup-kx-3kb">
                                         <rect key="frame" x="18" y="14" width="32" height="32"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="AddPerson" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="frN-4k-1rM">
@@ -844,7 +828,7 @@
                                                                         <outlet property="delegate" destination="BkD-e8-vo5" id="JMu-lh-3IF"/>
                                                                     </connections>
                                                                 </textField>
-                                                                <button identifier="button.ShowAddPerson" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RsI-9f-qrv" userLabel="Add">
+                                                                <button identifier="button.PopupPersonMenu" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RsI-9f-qrv" userLabel="Add">
                                                                     <rect key="frame" x="181" y="1" width="15" height="16"/>
                                                                     <buttonCell key="cell" type="inline" bezelStyle="inline" image="Plus" imagePosition="only" alignment="center" controlSize="mini" lineBreakMode="truncatingTail" state="on" inset="2" id="eIs-R7-djF">
                                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
