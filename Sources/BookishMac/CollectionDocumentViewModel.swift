@@ -33,6 +33,7 @@ import BookishModel
             var shortcuts = ["4","3","2","1"]
             let menu = NSMenu()
             let request: NSFetchRequest<Role> = Role.fetchRequest()
+            request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
             if let results = try? managedObjectContext.fetch(request) {
                 for role in results {
                     if let name = role.name {
