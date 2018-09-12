@@ -10,6 +10,8 @@ public class Role: NSManagedObject {
         public static let authorName = "Author"
         public static let editorName = "Editor"
         public static let illustratorName = "Illustrator"
+        
+        public static var names: [String] { get { return [authorName, editorName, illustratorName] } }
     }
     
     public class func role(named: String, context: NSManagedObjectContext) -> Role {
