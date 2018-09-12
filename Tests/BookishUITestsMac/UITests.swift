@@ -22,7 +22,13 @@ class UITests: XCTestCase {
     }
 
     func menuItem(_ name: String) -> XCUIElement {
-        let result = menubar.menuItems[name]
+        var result = scope.toolbars.menuItems[name]
+        if !result.exists {
+            result = scope.menuItems[name]
+        }
+        if !result.exists {
+            result = menubar.menuItems[name]
+        }
         return result
     }
     
@@ -50,6 +56,12 @@ class UITests: XCTestCase {
         item.click()
     }
 
+    func poppedUpMenu() -> XCUIElement {
+        let menuCount = application.menus.count
+        let menu = application.menus.element(boundBy: menuCount - 1)
+        return menu
+    }
+    
     func toolbarButton(_ name: String, count: Int = 0) -> XCUIElement {
         let toolbar = scope.toolbars.element(boundBy: 0)
         let result = toolbar.children(matching: .button).matching(identifier: name).element(boundBy: count)

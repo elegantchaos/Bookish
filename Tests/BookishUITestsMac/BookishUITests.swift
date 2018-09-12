@@ -99,8 +99,20 @@ class BookishUITests: UITests {
         with(scope: table("details")) {
             clickField("person-0")
         }
-        clickMenuItem(at: ["Add Person", "Author"])
+
+        // button
+        clickButton("button.ShowAddPerson")
+        clickMenuItem("Editor")
         XCTAssertEqual(count + 1, tableRowCount("details"))
+
+        // toolbar
+        clickToolbarButton("Add")
+        clickMenuItem("Author")
+        XCTAssertEqual(count + 2, tableRowCount("details"))
+        
+        // menu
+        clickMenuItem(at: ["Add Person", "Author"])
+        XCTAssertEqual(count + 3, tableRowCount("details"))
     }
 
 }

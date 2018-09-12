@@ -33,6 +33,8 @@ import Actions
             menu.addItem(insertPersonItem(kind: "Author", shortcut: "A"))
             menu.addItem(insertPersonItem(kind: "Editor", shortcut: "E"))
             menu.addItem(insertPersonItem(kind: "Illustrator", shortcut: "I"))
+            menu.title = "AddPersonPopup"
+            menu.identifier = NSUserInterfaceItemIdentifier(rawValue: "AddPersonPopup")
             return menu
         }
     }
