@@ -36,6 +36,9 @@ class CollectionDocument: PersistentDocument {
                     book.notes = "This is an example book."
                     book.published = formatter.date(from: "12/11/69")
                     entry.addToBooks(book)
+                    let illustrator = Person(context: context)
+                    let entry2 = illustrator.role(as: "illustrator")
+                    entry2.addToBooks(book)
                 }
                 
             }

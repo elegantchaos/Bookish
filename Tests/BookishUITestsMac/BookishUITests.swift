@@ -115,4 +115,23 @@ class BookishUITests: UITests {
         XCTAssertEqual(count + 3, tableRowCount("details"))
     }
 
+    func testRemovingPerson() {
+        launch(arguments:["--test-document"])
+        let count = tableRowCount("details")
+        
+        // button
+        with(scope: table("details")) { clickField("person-2") }
+        clickButton("button.RemovePerson")
+        XCTAssertEqual(count - 1, tableRowCount("details"))
+        
+        // toolbar
+        with(scope: table("details")) { clickField("person-1") }
+        clickToolbarButton("Remove", count: 1)
+        XCTAssertEqual(count - 2, tableRowCount("details"))
+        
+        // menu
+        with(scope: table("details")) { clickField("person-0") }
+        clickMenuItem("Remove Person")
+        XCTAssertEqual(count - 3, tableRowCount("details"))
+    }
 }

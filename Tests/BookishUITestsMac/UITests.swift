@@ -55,12 +55,6 @@ class UITests: XCTestCase {
         let item = menuItem(at: path)
         item.click()
     }
-
-    func poppedUpMenu() -> XCUIElement {
-        let menuCount = application.menus.count
-        let menu = application.menus.element(boundBy: menuCount - 1)
-        return menu
-    }
     
     func toolbarButton(_ name: String, count: Int = 0) -> XCUIElement {
         let toolbar = scope.toolbars.element(boundBy: 0)
