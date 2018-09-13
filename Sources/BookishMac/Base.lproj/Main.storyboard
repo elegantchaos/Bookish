@@ -455,7 +455,7 @@
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="267" y="-518"/>
+            <point key="canvasLocation" x="331" y="-569"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
@@ -464,8 +464,9 @@
                     <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="CollectionWindow" animationBehavior="default" id="Ckk-yw-fiv">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-                        <rect key="contentRect" x="196" y="240" width="800" height="600"/>
+                        <rect key="contentRect" x="128" y="128" width="1024" height="768"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
+                        <value key="minSize" type="size" width="800" height="600"/>
                         <toolbar key="toolbar" implicitIdentifier="77DEAC6B-FAB4-4044-A5AA-0B8765A74231" explicitIdentifier="toolbar" displayMode="iconAndLabel" sizeMode="small" id="WdN-bQ-LAx">
                             <allowedToolbarItems>
                                 <toolbarItem implicitItemIdentifier="1CED54FA-DB54-4668-A669-6A9B23CE24FE" explicitItemIdentifier="toolbar.InsertBook" label="New" paletteLabel="New Book" tag="-1" image="AddBook" id="KUG-hg-iHG" userLabel="Add Book">
@@ -530,7 +531,7 @@
                 </windowController>
                 <customObject id="6f7-a7-6o1" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-205" y="-15"/>
+            <point key="canvasLocation" x="-205" y="-34"/>
         </scene>
         <!--Collection Split View Controller-->
         <scene sceneID="o8M-XO-7fb">
@@ -541,7 +542,7 @@
                         <splitViewItem id="T0r-20-Qmq"/>
                     </splitViewItems>
                     <splitView key="splitView" dividerStyle="thin" vertical="YES" id="Z9o-S4-ubf">
-                        <rect key="frame" x="0.0" y="0.0" width="800" height="300"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <connections>
                             <outlet property="delegate" destination="9dY-ZT-f0K" id="cW0-FO-pQb"/>
@@ -555,18 +556,18 @@
                 </splitViewController>
                 <customObject id="g3G-9b-aKL" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="765" y="642"/>
+            <point key="canvasLocation" x="990" y="816"/>
         </scene>
         <!--Collection Root View Controller-->
         <scene sceneID="Uch-bh-vgR">
             <objects>
                 <viewController id="iuc-9t-fNj" customClass="CollectionRootViewController" customModule="BookishMac" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="Nuf-33-Q1V">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <containerView translatesAutoresizingMaskIntoConstraints="NO" id="3tE-Et-baJ">
-                                <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                                <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                                 <connections>
                                     <segue destination="9dY-ZT-f0K" kind="embed" id="CIX-OZ-tND"/>
                                 </connections>
@@ -582,7 +583,7 @@
                 </viewController>
                 <customObject id="Ubq-pe-EpL" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="642"/>
+            <point key="canvasLocation" x="990" y="-110"/>
         </scene>
         <!--Tab View Controller-->
         <scene sceneID="cxs-Lx-xWA">
@@ -592,8 +593,8 @@
                         <tabViewItem label="Books" id="6YM-gx-Rzs"/>
                         <tabViewItem label="People" identifier="" id="T2N-QE-AUD"/>
                     </tabViewItems>
-                    <tabView key="tabView" drawsBackground="NO" controlSize="small" type="bottomTabsBezelBorder" id="xYK-vg-VcG">
-                        <rect key="frame" x="0.0" y="0.0" width="200" height="300"/>
+                    <tabView key="tabView" drawsBackground="NO" controlSize="small" type="leftTabsBezelBorder" id="xYK-vg-VcG">
+                        <rect key="frame" x="0.0" y="0.0" width="200" height="768"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <connections>
                             <outlet property="delegate" destination="cvB-oN-q7M" id="x9P-QO-RHD"/>
@@ -607,37 +608,156 @@
                 </tabViewController>
                 <customObject id="NQu-ho-FxW" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="106" y="1161"/>
+            <point key="canvasLocation" x="642" y="1787"/>
         </scene>
-        <!--View Controller-->
+        <!--Person Index View Controller-->
         <scene sceneID="NtS-yL-Zz7">
             <objects>
-                <viewController id="pkB-w0-Ho6" sceneMemberID="viewController">
-                    <view key="view" id="H5N-OB-CQC">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                <viewController id="pkB-w0-Ho6" customClass="PersonIndexViewController" customModule="BookishMac" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="WIJ-ub-d5r">
+                        <rect key="frame" x="0.0" y="0.0" width="200" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cB6-3r-Peo" userLabel="Index">
+                                <rect key="frame" x="0.0" y="23" width="200" height="277"/>
+                                <clipView key="contentView" id="25y-2t-AU1">
+                                    <rect key="frame" x="0.0" y="0.0" width="200" height="277"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <tableView identifier="books" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnSelection="YES" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" id="T2o-3X-3Tj">
+                                            <rect key="frame" x="0.0" y="0.0" width="200" height="277"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <size key="intercellSpacing" width="3" height="2"/>
+                                            <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="gridColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            <tableColumns>
+                                                <tableColumn identifier="names" width="197" minWidth="40" maxWidth="1000" id="JsM-nP-Icn">
+                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="People">
+                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
+                                                    </tableHeaderCell>
+                                                    <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" title="Text Cell" id="eLX-o5-S2z">
+                                                        <font key="font" metaFont="system"/>
+                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                    <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                    <prototypeCellViews>
+                                                        <tableCellView id="GB9-VC-r3l">
+                                                            <rect key="frame" x="1" y="1" width="197" height="17"/>
+                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                            <subviews>
+                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="xZK-yZ-wz8">
+                                                                    <rect key="frame" x="2" y="0.0" width="197" height="17"/>
+                                                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="faw-0D-vlM">
+                                                                        <font key="font" metaFont="system"/>
+                                                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                                        <connections>
+                                                                            <binding destination="GB9-VC-r3l" name="value" keyPath="objectValue.name" id="zGv-4I-q0q"/>
+                                                                        </connections>
+                                                                    </textFieldCell>
+                                                                </textField>
+                                                            </subviews>
+                                                            <constraints>
+                                                                <constraint firstAttribute="bottom" secondItem="xZK-yZ-wz8" secondAttribute="bottom" id="2dj-FP-CGT"/>
+                                                                <constraint firstItem="xZK-yZ-wz8" firstAttribute="top" secondItem="GB9-VC-r3l" secondAttribute="top" id="CGQ-Vx-Cgq"/>
+                                                                <constraint firstAttribute="trailing" secondItem="xZK-yZ-wz8" secondAttribute="trailing" id="Vv4-qc-ezC"/>
+                                                                <constraint firstItem="xZK-yZ-wz8" firstAttribute="leading" secondItem="GB9-VC-r3l" secondAttribute="leading" constant="4" id="myd-OC-fHE"/>
+                                                            </constraints>
+                                                            <connections>
+                                                                <outlet property="textField" destination="xZK-yZ-wz8" id="3Ck-Xu-6I4"/>
+                                                            </connections>
+                                                        </tableCellView>
+                                                    </prototypeCellViews>
+                                                </tableColumn>
+                                            </tableColumns>
+                                            <connections>
+                                                <binding destination="2aD-Rb-QIq" name="content" keyPath="arrangedObjects" id="jKx-QM-7tO"/>
+                                                <binding destination="2aD-Rb-QIq" name="selectionIndexes" keyPath="selectionIndexes" previousBinding="jKx-QM-7tO" id="jHx-05-5D1"/>
+                                            </connections>
+                                        </tableView>
+                                    </subviews>
+                                </clipView>
+                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="NxL-ln-vku">
+                                    <rect key="frame" x="0.0" y="261" width="200" height="16"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                                <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="rbv-fT-DZ1">
+                                    <rect key="frame" x="224" y="17" width="15" height="102"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                            </scrollView>
+                            <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="fGR-5g-tZY">
+                                <rect key="frame" x="0.0" y="20" width="200" height="5"/>
+                            </box>
+                            <button identifier="button.InsertBook" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UZJ-GM-Yrz" userLabel="Add Button" customClass="ValidatingButton" customModule="BookishMac" customModuleProvider="target">
+                                <rect key="frame" x="4" y="0.0" width="11" height="22"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="22" id="Vcw-kM-uKo"/>
+                                </constraints>
+                                <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSAddTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" imageScaling="proportionallyDown" inset="2" id="3tH-zT-aTc">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
+                            <button identifier="button.RemoveBook" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ha3-gD-gAO" userLabel="Remove Button" customClass="ValidatingButton" customModule="BookishMac" customModuleProvider="target">
+                                <rect key="frame" x="19" y="0.0" width="11" height="22"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="22" id="b6Q-Et-c1L"/>
+                                </constraints>
+                                <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSRemoveTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" imageScaling="proportionallyDown" inset="2" id="dsM-J7-ZcS">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="cB6-3r-Peo" firstAttribute="leading" secondItem="WIJ-ub-d5r" secondAttribute="leading" id="1Bg-8j-swr"/>
+                            <constraint firstItem="ha3-gD-gAO" firstAttribute="leading" secondItem="UZJ-GM-Yrz" secondAttribute="trailing" constant="4" id="8eb-FK-sB9"/>
+                            <constraint firstAttribute="bottom" secondItem="ha3-gD-gAO" secondAttribute="bottom" id="C2p-vN-SUw"/>
+                            <constraint firstAttribute="trailing" secondItem="fGR-5g-tZY" secondAttribute="trailing" id="DGl-Yg-Q5Y"/>
+                            <constraint firstItem="fGR-5g-tZY" firstAttribute="top" secondItem="cB6-3r-Peo" secondAttribute="bottom" id="IhS-FC-oy5"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="ha3-gD-gAO" secondAttribute="trailing" constant="20" symbolic="YES" id="OwE-TX-SO6"/>
+                            <constraint firstAttribute="bottom" secondItem="UZJ-GM-Yrz" secondAttribute="bottom" id="jQu-Ya-kBw"/>
+                            <constraint firstItem="fGR-5g-tZY" firstAttribute="leading" secondItem="WIJ-ub-d5r" secondAttribute="leading" id="lRi-gd-y7S"/>
+                            <constraint firstItem="cB6-3r-Peo" firstAttribute="top" secondItem="WIJ-ub-d5r" secondAttribute="top" id="ln8-Np-hn4"/>
+                            <constraint firstAttribute="trailing" secondItem="cB6-3r-Peo" secondAttribute="trailing" id="mCX-P4-wx2"/>
+                            <constraint firstItem="UZJ-GM-Yrz" firstAttribute="top" secondItem="fGR-5g-tZY" secondAttribute="bottom" id="vhg-UB-axy"/>
+                            <constraint firstItem="UZJ-GM-Yrz" firstAttribute="leading" secondItem="WIJ-ub-d5r" secondAttribute="leading" constant="4" id="wuA-jg-pPL"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="indexArray" destination="2aD-Rb-QIq" id="kCR-8o-GdD"/>
+                    </connections>
                 </viewController>
                 <customObject id="dKH-w6-QnP" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <arrayController mode="entity" entityName="Person" preservesSelection="NO" id="2aD-Rb-QIq">
+                    <connections>
+                        <binding destination="pkB-w0-Ho6" name="managedObjectContext" keyPath="self.cvm.managedObjectContext" id="xlf-yF-oNv"/>
+                        <binding destination="pkB-w0-Ho6" name="selectionIndexes" keyPath="self.cvm.selectedPeople" id="QGa-fI-C4B"/>
+                    </connections>
+                </arrayController>
             </objects>
-            <point key="canvasLocation" x="375" y="1764"/>
+            <point key="canvasLocation" x="586" y="2121"/>
         </scene>
         <!--Book Index View Controller-->
         <scene sceneID="LbK-bz-Udp">
             <objects>
                 <viewController id="cSd-7W-hzi" customClass="BookIndexViewController" customModule="BookishMac" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="JCM-bJ-k8z">
-                        <rect key="frame" x="0.0" y="0.0" width="200" height="342"/>
+                        <rect key="frame" x="0.0" y="0.0" width="200" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dnp-IN-cGx" userLabel="Index">
-                                <rect key="frame" x="0.0" y="23" width="200" height="319"/>
+                                <rect key="frame" x="0.0" y="23" width="200" height="277"/>
                                 <clipView key="contentView" id="MeP-Ej-IYa">
-                                    <rect key="frame" x="0.0" y="0.0" width="200" height="319"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="200" height="277"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView identifier="books" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnSelection="YES" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" id="jZN-rJ-ulS">
-                                            <rect key="frame" x="0.0" y="0.0" width="200" height="319"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="200" height="277"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -758,24 +878,24 @@
                     </connections>
                 </arrayController>
             </objects>
-            <point key="canvasLocation" x="9" y="1785"/>
+            <point key="canvasLocation" x="330" y="2121"/>
         </scene>
         <!--Book Detail View Controller-->
         <scene sceneID="qGP-fN-0GX">
             <objects>
                 <viewController id="TBH-Sa-Ff0" customClass="BookDetailViewController" customModule="BookishMac" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="BXj-Jh-9Ye">
-                        <rect key="frame" x="0.0" y="0.0" width="400" height="400"/>
+                        <rect key="frame" x="0.0" y="0.0" width="824" height="768"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EIm-c8-9OE" userLabel="Details">
-                                <rect key="frame" x="0.0" y="0.0" width="380" height="330"/>
+                                <rect key="frame" x="0.0" y="0.0" width="804" height="698"/>
                                 <clipView key="contentView" id="5CS-Yo-P4n">
-                                    <rect key="frame" x="0.0" y="0.0" width="380" height="330"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="804" height="698"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView identifier="details" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="none" columnReordering="NO" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" rowSizeStyle="automatic" usesAutomaticRowHeights="YES" viewBased="YES" id="vV5-vW-Afl">
-                                            <rect key="frame" x="0.0" y="0.0" width="380" height="330"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="804" height="698"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="windowBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -963,7 +1083,7 @@
                                 </scroller>
                             </scrollView>
                             <textField identifier="title" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7rh-Dc-PS1" userLabel="Title">
-                                <rect key="frame" x="68" y="363" width="314" height="17"/>
+                                <rect key="frame" x="68" y="731" width="738" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" placeholderString="Title" id="o3V-KV-G1K">
                                     <font key="font" usesAppearanceFont="YES"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -971,7 +1091,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField identifier="subtitle" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="H8A-04-75V" userLabel="Subtitle">
-                                <rect key="frame" x="68" y="340" width="314" height="13"/>
+                                <rect key="frame" x="68" y="708" width="738" height="13"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" id="tax-bb-RGs">
                                     <font key="font" metaFont="label"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -982,7 +1102,7 @@
                                 </connections>
                             </textField>
                             <imageView identifier="cover" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nPv-jB-4iC" userLabel="Cover">
-                                <rect key="frame" x="20" y="338" width="42" height="42"/>
+                                <rect key="frame" x="20" y="706" width="42" height="42"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="42" id="E11-fK-gOJ"/>
                                     <constraint firstAttribute="width" constant="42" id="FCF-as-z1Y"/>
@@ -1015,7 +1135,7 @@
                 <customObject id="dg1-Od-cPv" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <userDefaultsController representsSharedInstance="YES" id="CPG-9C-fnr"/>
             </objects>
-            <point key="canvasLocation" x="608" y="1211"/>
+            <point key="canvasLocation" x="1237" y="1787"/>
         </scene>
         <!--Date Picker Popover Controller-->
         <scene sceneID="K1V-fB-Brr">
