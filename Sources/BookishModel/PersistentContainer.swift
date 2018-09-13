@@ -13,11 +13,5 @@ public class PersistentContainer: NSPersistentContainer {
     
     public override init(name: String, managedObjectModel model: NSManagedObjectModel) {
         super.init(name: name, managedObjectModel: model)
-        
-//        let description = NSPersistentStoreDescription(url: PersistentContainer.defaultDirectoryURL())
-//        description.shouldAddStoreAsynchronously = true
-//        self.persistentStoreDescriptions = [description]
-        
-//        self.persistentStoreDescriptions[0].shouldAddStoreAsynchronously = true
     }
 }
