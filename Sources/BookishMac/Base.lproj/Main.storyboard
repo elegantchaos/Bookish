@@ -537,11 +537,11 @@
             <objects>
                 <splitViewController id="9dY-ZT-f0K" customClass="CollectionSplitViewController" customModule="BookishMac" customModuleProvider="target" sceneMemberID="viewController">
                     <splitViewItems>
-                        <splitViewItem id="Wva-ku-jib"/>
-                        <splitViewItem id="MEf-2j-MCG"/>
+                        <splitViewItem id="9x3-Ff-joU"/>
+                        <splitViewItem id="T0r-20-Qmq"/>
                     </splitViewItems>
                     <splitView key="splitView" dividerStyle="thin" vertical="YES" id="Z9o-S4-ubf">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <rect key="frame" x="0.0" y="0.0" width="800" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <connections>
                             <outlet property="delegate" destination="9dY-ZT-f0K" id="cW0-FO-pQb"/>
@@ -549,13 +549,13 @@
                     </splitView>
                     <connections>
                         <outlet property="splitView" destination="Z9o-S4-ubf" id="Tqp-yl-mGN"/>
-                        <segue destination="cSd-7W-hzi" kind="relationship" relationship="splitItems" id="Gqm-nz-tzE"/>
-                        <segue destination="TBH-Sa-Ff0" kind="relationship" relationship="splitItems" id="hdO-iS-0VA"/>
+                        <segue destination="cvB-oN-q7M" kind="relationship" relationship="splitItems" id="FOa-1R-R6C"/>
+                        <segue destination="TBH-Sa-Ff0" kind="relationship" relationship="splitItems" id="Din-Dh-5Tb"/>
                     </connections>
                 </splitViewController>
                 <customObject id="g3G-9b-aKL" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="594" y="642"/>
+            <point key="canvasLocation" x="765" y="642"/>
         </scene>
         <!--Collection Root View Controller-->
         <scene sceneID="Uch-bh-vgR">
@@ -584,28 +584,66 @@
             </objects>
             <point key="canvasLocation" x="75" y="642"/>
         </scene>
+        <!--Tab View Controller-->
+        <scene sceneID="cxs-Lx-xWA">
+            <objects>
+                <tabViewController selectedTabViewItemIndex="0" tabStyle="bottom" id="cvB-oN-q7M" sceneMemberID="viewController">
+                    <tabViewItems>
+                        <tabViewItem label="Books" id="6YM-gx-Rzs"/>
+                        <tabViewItem label="People" identifier="" id="T2N-QE-AUD"/>
+                    </tabViewItems>
+                    <tabView key="tabView" drawsBackground="NO" controlSize="small" type="bottomTabsBezelBorder" id="xYK-vg-VcG">
+                        <rect key="frame" x="0.0" y="0.0" width="200" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <connections>
+                            <outlet property="delegate" destination="cvB-oN-q7M" id="x9P-QO-RHD"/>
+                        </connections>
+                    </tabView>
+                    <connections>
+                        <outlet property="tabView" destination="xYK-vg-VcG" id="scu-2W-rWu"/>
+                        <segue destination="cSd-7W-hzi" kind="relationship" relationship="tabItems" id="Hxc-gx-ytK"/>
+                        <segue destination="pkB-w0-Ho6" kind="relationship" relationship="tabItems" id="WJl-9Y-TCT"/>
+                    </connections>
+                </tabViewController>
+                <customObject id="NQu-ho-FxW" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="106" y="1161"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="NtS-yL-Zz7">
+            <objects>
+                <viewController id="pkB-w0-Ho6" sceneMemberID="viewController">
+                    <view key="view" id="H5N-OB-CQC">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </view>
+                </viewController>
+                <customObject id="dKH-w6-QnP" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="375" y="1764"/>
+        </scene>
         <!--Book Index View Controller-->
         <scene sceneID="LbK-bz-Udp">
             <objects>
                 <viewController id="cSd-7W-hzi" customClass="BookIndexViewController" customModule="BookishMac" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="JCM-bJ-k8z">
-                        <rect key="frame" x="0.0" y="0.0" width="199" height="342"/>
+                        <rect key="frame" x="0.0" y="0.0" width="200" height="342"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dnp-IN-cGx" userLabel="Index">
-                                <rect key="frame" x="0.0" y="23" width="199" height="319"/>
+                                <rect key="frame" x="0.0" y="23" width="200" height="319"/>
                                 <clipView key="contentView" id="MeP-Ej-IYa">
-                                    <rect key="frame" x="0.0" y="0.0" width="199" height="319"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="200" height="319"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView identifier="books" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnSelection="YES" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" id="jZN-rJ-ulS">
-                                            <rect key="frame" x="0.0" y="0.0" width="199" height="319"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="200" height="319"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <color key="gridColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
-                                                <tableColumn identifier="titles" width="196" minWidth="40" maxWidth="1000" id="Jbk-o7-OJL">
+                                                <tableColumn identifier="titles" width="197" minWidth="40" maxWidth="1000" id="Jbk-o7-OJL">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Books">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -619,11 +657,11 @@
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView id="hzh-6t-Z3h">
-                                                            <rect key="frame" x="1" y="1" width="196" height="17"/>
+                                                            <rect key="frame" x="1" y="1" width="197" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="sYK-UP-Ryg">
-                                                                    <rect key="frame" x="2" y="0.0" width="196" height="17"/>
+                                                                    <rect key="frame" x="2" y="0.0" width="197" height="17"/>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="kiv-p0-HhD">
                                                                         <font key="font" metaFont="system"/>
                                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -664,7 +702,7 @@
                                 </scroller>
                             </scrollView>
                             <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="zH4-UB-LMd">
-                                <rect key="frame" x="0.0" y="20" width="199" height="5"/>
+                                <rect key="frame" x="0.0" y="20" width="200" height="5"/>
                             </box>
                             <button identifier="button.InsertBook" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yM9-Be-eOr" userLabel="Add Button" customClass="ValidatingButton" customModule="BookishMac" customModuleProvider="target">
                                 <rect key="frame" x="4" y="0.0" width="11" height="22"/>
@@ -720,7 +758,7 @@
                     </connections>
                 </arrayController>
             </objects>
-            <point key="canvasLocation" x="232" y="1278"/>
+            <point key="canvasLocation" x="9" y="1785"/>
         </scene>
         <!--Book Detail View Controller-->
         <scene sceneID="qGP-fN-0GX">
@@ -977,7 +1015,7 @@
                 <customObject id="dg1-Od-cPv" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <userDefaultsController representsSharedInstance="YES" id="CPG-9C-fnr"/>
             </objects>
-            <point key="canvasLocation" x="619" y="1307"/>
+            <point key="canvasLocation" x="608" y="1211"/>
         </scene>
         <!--Date Picker Popover Controller-->
         <scene sceneID="K1V-fB-Brr">
