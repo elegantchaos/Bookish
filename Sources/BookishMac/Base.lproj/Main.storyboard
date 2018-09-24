@@ -567,17 +567,42 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <containerView translatesAutoresizingMaskIntoConstraints="NO" id="3tE-Et-baJ">
-                                <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                                <rect key="frame" x="0.0" y="23" width="1024" height="745"/>
                                 <connections>
                                     <segue destination="9dY-ZT-f0K" kind="embed" id="CIX-OZ-tND"/>
                                 </connections>
                             </containerView>
+                            <button identifier="button.InsertItem" verticalHuggingPriority="750" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="myo-cR-IH0" userLabel="Add Button">
+                                <rect key="frame" x="4" y="4" width="11" height="15"/>
+                                <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSAddTemplate" imagePosition="overlaps" alignment="center" imageScaling="proportionallyDown" inset="2" id="yE3-G3-i0V">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="performAction:" target="Ubq-pe-EpL" id="w02-pB-gKI"/>
+                                </connections>
+                            </button>
+                            <button identifier="button.RemoveItem" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5Hu-w2-Z1k" userLabel="Remove Button">
+                                <rect key="frame" x="19" y="4" width="11" height="15"/>
+                                <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSRemoveTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="Xut-yr-0fw">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="performAction:" target="Ubq-pe-EpL" id="vt6-Q1-h9E"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="3tE-Et-baJ" firstAttribute="top" secondItem="Nuf-33-Q1V" secondAttribute="top" id="1Po-kp-KDn"/>
+                            <constraint firstAttribute="bottom" secondItem="myo-cR-IH0" secondAttribute="bottom" constant="4" id="LZe-5p-cbR"/>
+                            <constraint firstItem="myo-cR-IH0" firstAttribute="top" secondItem="3tE-Et-baJ" secondAttribute="bottom" constant="4" id="UHI-zV-2Wp"/>
+                            <constraint firstItem="myo-cR-IH0" firstAttribute="leading" secondItem="Nuf-33-Q1V" secondAttribute="leading" constant="4" id="YDg-kg-WJj"/>
                             <constraint firstAttribute="trailing" secondItem="3tE-Et-baJ" secondAttribute="trailing" id="YoW-xg-DtT"/>
                             <constraint firstItem="3tE-Et-baJ" firstAttribute="leading" secondItem="Nuf-33-Q1V" secondAttribute="leading" id="Zj5-zy-QWt"/>
-                            <constraint firstAttribute="bottom" secondItem="3tE-Et-baJ" secondAttribute="bottom" id="rRa-fM-a1n"/>
+                            <constraint firstItem="5Hu-w2-Z1k" firstAttribute="centerY" secondItem="myo-cR-IH0" secondAttribute="centerY" id="a3S-qc-ejN"/>
+                            <constraint firstItem="5Hu-w2-Z1k" firstAttribute="leading" secondItem="myo-cR-IH0" secondAttribute="trailing" constant="4" id="ita-S8-5nF"/>
+                            <constraint firstAttribute="bottom" secondItem="5Hu-w2-Z1k" secondAttribute="bottom" constant="4" id="xGH-zL-cY5"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -1165,12 +1190,12 @@
                 <customObject id="EIn-fq-6pC" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <userDefaultsController id="Y0f-97-Wet"/>
             </objects>
-            <point key="canvasLocation" x="1159" y="889"/>
+            <point key="canvasLocation" x="1632" y="-9"/>
         </scene>
         <!--Collection Detail View Controller-->
         <scene sceneID="VxI-A7-PK2">
             <objects>
-                <tabViewController selectedTabViewItemIndex="1" tabStyle="unspecified" id="hhy-7W-Ia3" customClass="CollectionDetailViewController" customModule="BookishMac" customModuleProvider="target" sceneMemberID="viewController">
+                <tabViewController selectedTabViewItemIndex="0" tabStyle="unspecified" id="hhy-7W-Ia3" customClass="CollectionDetailViewController" customModule="BookishMac" customModuleProvider="target" sceneMemberID="viewController">
                     <tabViewItems>
                         <tabViewItem label="Books" id="CF4-lk-MH4"/>
                         <tabViewItem label="People" id="0N0-Rr-1qn"/>

@@ -61,6 +61,7 @@
 		22429408212D958400E70510 /* CollectionSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22429407212D958400E70510 /* CollectionSplitViewController.swift */; };
 		22462E932158ED5000A4C56C /* CollectionIndexViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22462E922158ED5000A4C56C /* CollectionIndexViewController.swift */; };
 		22462E952158EDEA00A4C56C /* CollectionDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22462E942158EDEA00A4C56C /* CollectionDetailViewController.swift */; };
+		22462E972158F65200A4C56C /* CollectionViewActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22462E962158F65200A4C56C /* CollectionViewActions.swift */; };
 		22960328214025E80020B3EB /* PersonTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22960327214025E80020B3EB /* PersonTableCellView.swift */; };
 		2296032A214032520020B3EB /* AnnotatedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22960329214032520020B3EB /* AnnotatedTextField.swift */; };
 		2296032F2141563A0020B3EB /* PersonActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2296032E2141563A0020B3EB /* PersonActions.swift */; };
@@ -227,6 +228,7 @@
 		22429407212D958400E70510 /* CollectionSplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionSplitViewController.swift; sourceTree = "<group>"; };
 		22462E922158ED5000A4C56C /* CollectionIndexViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionIndexViewController.swift; sourceTree = "<group>"; };
 		22462E942158EDEA00A4C56C /* CollectionDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionDetailViewController.swift; sourceTree = "<group>"; };
+		22462E962158F65200A4C56C /* CollectionViewActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewActions.swift; sourceTree = "<group>"; };
 		22960327214025E80020B3EB /* PersonTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonTableCellView.swift; sourceTree = "<group>"; };
 		22960329214032520020B3EB /* AnnotatedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotatedTextField.swift; sourceTree = "<group>"; };
 		2296032B214132840020B3EB /* Bookish.sketch */ = {isa = PBXFileReference; lastKnownFileType = file; path = Bookish.sketch; sourceTree = "<group>"; };
@@ -469,6 +471,7 @@
 			children = (
 				2296032E2141563A0020B3EB /* PersonActions.swift */,
 				22D39E4E2142BCD000282467 /* InsertBookAction.swift */,
+				22462E962158F65200A4C56C /* CollectionViewActions.swift */,
 				22D39E562146BA8200282467 /* RemoveBookAction.swift */,
 				22D39E582146BA9C00282467 /* ShowDatePickerAction.swift */,
 			);
@@ -1040,6 +1043,7 @@
 				22960328214025E80020B3EB /* PersonTableCellView.swift in Sources */,
 				22D39E622147E0C100282467 /* CoverImageTransformer.swift in Sources */,
 				22429408212D958400E70510 /* CollectionSplitViewController.swift in Sources */,
+				22462E972158F65200A4C56C /* CollectionViewActions.swift in Sources */,
 				2296032F2141563A0020B3EB /* PersonActions.swift in Sources */,
 				22D39E5B2146BE4900282467 /* DatePickerPopoverController.swift in Sources */,
 				22D39E532146A84500282467 /* AnnotatedTableCellView.swift in Sources */,

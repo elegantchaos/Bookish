@@ -40,7 +40,8 @@ class Application: NSObject, NSApplicationDelegate {
             InsertBookAction(identifier: "InsertBook"),
             RemoveBookAction(identifier: "RemoveBook"),
             ShowDatePickerAction(identifier: "ShowDatePicker"),
-            TestAction(identifier: "ToolbarTest")
+            InsertItemAction(identifier: "InsertItem"),
+            RemoveItemAction(identifier: "RemoveItem")
             ])
         
         actionManager.nextResponder = NSApp.nextResponder

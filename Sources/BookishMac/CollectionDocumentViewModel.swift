@@ -9,6 +9,11 @@ import Actions
 import BookishModel
 
 @objc class CollectionDocumentViewModel: NSObject, DocumentViewModel {
+    enum Mode {
+        case books
+        case people
+    }
+    
     typealias  WindowController = CollectionWindowController
     
     @objc let document: CollectionDocument
@@ -16,7 +21,9 @@ import BookishModel
     @objc var bookIndex: NSArrayController?
     @objc var selectedIndexes: NSMutableIndexSet?
     @objc var selectedPeople: NSMutableIndexSet?
-
+    
+    let mode: Mode = .books
+    
     init(document: CollectionDocument) {
         self.document = document
         self.managedObjectContext = document.managedObjectContext!
