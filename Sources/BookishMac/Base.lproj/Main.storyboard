@@ -539,7 +539,7 @@
                 <splitViewController id="9dY-ZT-f0K" customClass="CollectionSplitViewController" customModule="BookishMac" customModuleProvider="target" sceneMemberID="viewController">
                     <splitViewItems>
                         <splitViewItem id="9x3-Ff-joU"/>
-                        <splitViewItem id="T0r-20-Qmq"/>
+                        <splitViewItem id="eOL-40-wev"/>
                     </splitViewItems>
                     <splitView key="splitView" dividerStyle="thin" vertical="YES" id="Z9o-S4-ubf">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
@@ -551,7 +551,7 @@
                     <connections>
                         <outlet property="splitView" destination="Z9o-S4-ubf" id="Tqp-yl-mGN"/>
                         <segue destination="cvB-oN-q7M" kind="relationship" relationship="splitItems" id="FOa-1R-R6C"/>
-                        <segue destination="TBH-Sa-Ff0" kind="relationship" relationship="splitItems" id="Din-Dh-5Tb"/>
+                        <segue destination="hhy-7W-Ia3" kind="relationship" relationship="splitItems" id="MnP-QH-Cqm"/>
                     </connections>
                 </splitViewController>
                 <customObject id="g3G-9b-aKL" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -585,10 +585,10 @@
             </objects>
             <point key="canvasLocation" x="990" y="-110"/>
         </scene>
-        <!--Tab View Controller-->
+        <!--Collection Index View Controller-->
         <scene sceneID="cxs-Lx-xWA">
             <objects>
-                <tabViewController selectedTabViewItemIndex="0" tabStyle="bottom" id="cvB-oN-q7M" sceneMemberID="viewController">
+                <tabViewController selectedTabViewItemIndex="0" tabStyle="bottom" id="cvB-oN-q7M" customClass="CollectionIndexViewController" customModule="BookishMac" customModuleProvider="target" sceneMemberID="viewController">
                     <tabViewItems>
                         <tabViewItem label="Books" identifier="tab.books" image="Book" id="6YM-gx-Rzs"/>
                         <tabViewItem label="People" identifier="tab.people" image="Person" id="T2N-QE-AUD"/>
@@ -609,7 +609,7 @@
                 </tabViewController>
                 <customObject id="NQu-ho-FxW" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="642" y="1787"/>
+            <point key="canvasLocation" x="605" y="1793"/>
         </scene>
         <!--Person Index View Controller-->
         <scene sceneID="NtS-yL-Zz7">
@@ -741,7 +741,7 @@
                     </connections>
                 </arrayController>
             </objects>
-            <point key="canvasLocation" x="794" y="2531"/>
+            <point key="canvasLocation" x="727" y="2531"/>
         </scene>
         <!--Book Index View Controller-->
         <scene sceneID="LbK-bz-Udp">
@@ -879,7 +879,7 @@
                     </connections>
                 </arrayController>
             </objects>
-            <point key="canvasLocation" x="547" y="2531"/>
+            <point key="canvasLocation" x="460" y="2531"/>
         </scene>
         <!--Book Detail View Controller-->
         <scene sceneID="qGP-fN-0GX">
@@ -1136,7 +1136,7 @@
                 <customObject id="dg1-Od-cPv" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <userDefaultsController representsSharedInstance="YES" id="CPG-9C-fnr"/>
             </objects>
-            <point key="canvasLocation" x="1237" y="1787"/>
+            <point key="canvasLocation" x="1324" y="2765"/>
         </scene>
         <!--Date Picker Popover Controller-->
         <scene sceneID="K1V-fB-Brr">
@@ -1166,6 +1166,45 @@
                 <userDefaultsController id="Y0f-97-Wet"/>
             </objects>
             <point key="canvasLocation" x="1159" y="889"/>
+        </scene>
+        <!--Collection Detail View Controller-->
+        <scene sceneID="VxI-A7-PK2">
+            <objects>
+                <tabViewController selectedTabViewItemIndex="1" tabStyle="unspecified" id="hhy-7W-Ia3" customClass="CollectionDetailViewController" customModule="BookishMac" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabViewItems>
+                        <tabViewItem label="Books" id="CF4-lk-MH4"/>
+                        <tabViewItem label="People" id="0N0-Rr-1qn"/>
+                    </tabViewItems>
+                    <tabView key="tabView" type="noTabsNoBorder" id="7Xn-vq-0BQ">
+                        <rect key="frame" x="0.0" y="0.0" width="824" height="768"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <font key="font" metaFont="message"/>
+                        <connections>
+                            <outlet property="delegate" destination="hhy-7W-Ia3" id="kqP-V8-tTq"/>
+                        </connections>
+                    </tabView>
+                    <connections>
+                        <outlet property="tabView" destination="7Xn-vq-0BQ" id="1e6-U7-WdO"/>
+                        <segue destination="TBH-Sa-Ff0" kind="relationship" relationship="tabItems" id="dc3-v7-7LN"/>
+                        <segue destination="YQJ-9e-4qw" kind="relationship" relationship="tabItems" id="lPi-w1-nv0"/>
+                    </connections>
+                </tabViewController>
+                <customObject id="EIm-WY-fNg" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1324" y="1793"/>
+        </scene>
+        <!--Person Detail View Controller-->
+        <scene sceneID="xv8-hT-z0j">
+            <objects>
+                <viewController id="YQJ-9e-4qw" customClass="PersonDetailViewController" customModule="BookishMac" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="QrP-6D-yZd">
+                        <rect key="frame" x="0.0" y="0.0" width="824" height="768"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </view>
+                </viewController>
+                <customObject id="9ol-mz-Bsh" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2181" y="2765"/>
         </scene>
     </scenes>
     <resources>
