@@ -645,13 +645,13 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cB6-3r-Peo" userLabel="Index">
-                                <rect key="frame" x="0.0" y="23" width="200" height="277"/>
+                                <rect key="frame" x="0.0" y="0.0" width="200" height="300"/>
                                 <clipView key="contentView" id="25y-2t-AU1">
-                                    <rect key="frame" x="0.0" y="0.0" width="200" height="277"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="200" height="300"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView identifier="people" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnSelection="YES" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" id="T2o-3X-3Tj">
-                                            <rect key="frame" x="0.0" y="0.0" width="200" height="277"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="200" height="300"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -715,43 +715,12 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
-                            <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="fGR-5g-tZY">
-                                <rect key="frame" x="0.0" y="20" width="200" height="5"/>
-                            </box>
-                            <button identifier="button.NewPerson" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UZJ-GM-Yrz" userLabel="Add Button" customClass="ValidatingButton" customModule="BookishMac" customModuleProvider="target">
-                                <rect key="frame" x="4" y="0.0" width="11" height="22"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="22" id="Vcw-kM-uKo"/>
-                                </constraints>
-                                <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSAddTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" imageScaling="proportionallyDown" inset="2" id="3tH-zT-aTc">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                            </button>
-                            <button identifier="button.DeletePerson" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ha3-gD-gAO" userLabel="Remove Button" customClass="ValidatingButton" customModule="BookishMac" customModuleProvider="target">
-                                <rect key="frame" x="19" y="0.0" width="11" height="22"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="22" id="b6Q-Et-c1L"/>
-                                </constraints>
-                                <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSRemoveTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" imageScaling="proportionallyDown" inset="2" id="dsM-J7-ZcS">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="cB6-3r-Peo" firstAttribute="leading" secondItem="WIJ-ub-d5r" secondAttribute="leading" id="1Bg-8j-swr"/>
-                            <constraint firstItem="ha3-gD-gAO" firstAttribute="leading" secondItem="UZJ-GM-Yrz" secondAttribute="trailing" constant="4" id="8eb-FK-sB9"/>
-                            <constraint firstAttribute="bottom" secondItem="ha3-gD-gAO" secondAttribute="bottom" id="C2p-vN-SUw"/>
-                            <constraint firstAttribute="trailing" secondItem="fGR-5g-tZY" secondAttribute="trailing" id="DGl-Yg-Q5Y"/>
-                            <constraint firstItem="fGR-5g-tZY" firstAttribute="top" secondItem="cB6-3r-Peo" secondAttribute="bottom" id="IhS-FC-oy5"/>
-                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="ha3-gD-gAO" secondAttribute="trailing" constant="20" symbolic="YES" id="OwE-TX-SO6"/>
-                            <constraint firstAttribute="bottom" secondItem="UZJ-GM-Yrz" secondAttribute="bottom" id="jQu-Ya-kBw"/>
-                            <constraint firstItem="fGR-5g-tZY" firstAttribute="leading" secondItem="WIJ-ub-d5r" secondAttribute="leading" id="lRi-gd-y7S"/>
+                            <constraint firstAttribute="bottom" secondItem="cB6-3r-Peo" secondAttribute="bottom" id="JA1-ax-uMQ"/>
                             <constraint firstItem="cB6-3r-Peo" firstAttribute="top" secondItem="WIJ-ub-d5r" secondAttribute="top" id="ln8-Np-hn4"/>
                             <constraint firstAttribute="trailing" secondItem="cB6-3r-Peo" secondAttribute="trailing" id="mCX-P4-wx2"/>
-                            <constraint firstItem="UZJ-GM-Yrz" firstAttribute="top" secondItem="fGR-5g-tZY" secondAttribute="bottom" id="vhg-UB-axy"/>
-                            <constraint firstItem="UZJ-GM-Yrz" firstAttribute="leading" secondItem="WIJ-ub-d5r" secondAttribute="leading" constant="4" id="wuA-jg-pPL"/>
                         </constraints>
                     </view>
                     <connections>
@@ -777,13 +746,13 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dnp-IN-cGx" userLabel="Index">
-                                <rect key="frame" x="0.0" y="23" width="200" height="277"/>
+                                <rect key="frame" x="0.0" y="0.0" width="200" height="300"/>
                                 <clipView key="contentView" id="MeP-Ej-IYa">
-                                    <rect key="frame" x="0.0" y="0.0" width="200" height="277"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="200" height="300"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView identifier="books" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnSelection="YES" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" id="jZN-rJ-ulS">
-                                            <rect key="frame" x="0.0" y="0.0" width="200" height="277"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="200" height="300"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -847,49 +816,12 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
-                            <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="zH4-UB-LMd">
-                                <rect key="frame" x="0.0" y="20" width="200" height="5"/>
-                            </box>
-                            <button identifier="button.InsertBook" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yM9-Be-eOr" userLabel="Add Button" customClass="ValidatingButton" customModule="BookishMac" customModuleProvider="target">
-                                <rect key="frame" x="4" y="0.0" width="11" height="22"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="22" id="LBu-Ii-CIk"/>
-                                </constraints>
-                                <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSAddTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" imageScaling="proportionallyDown" inset="2" id="IjT-zM-G4O">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="performAction:" target="Jsc-1E-0Rn" id="zQi-2u-i1m"/>
-                                </connections>
-                            </button>
-                            <button identifier="button.RemoveBook" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1gF-aY-ShN" userLabel="Remove Button" customClass="ValidatingButton" customModule="BookishMac" customModuleProvider="target">
-                                <rect key="frame" x="19" y="0.0" width="11" height="22"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="22" id="lWI-KT-vqF"/>
-                                </constraints>
-                                <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSRemoveTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" imageScaling="proportionallyDown" inset="2" id="ans-sf-ABh">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="performAction:" target="Jsc-1E-0Rn" id="NUK-PF-Man"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="zH4-UB-LMd" secondAttribute="trailing" id="AV3-FJ-DPX"/>
-                            <constraint firstAttribute="bottom" secondItem="yM9-Be-eOr" secondAttribute="bottom" id="CxQ-Jv-Dda"/>
-                            <constraint firstItem="yM9-Be-eOr" firstAttribute="top" secondItem="zH4-UB-LMd" secondAttribute="bottom" id="R7t-go-lBg"/>
-                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="1gF-aY-ShN" secondAttribute="trailing" constant="20" symbolic="YES" id="ZHp-N8-7SZ"/>
-                            <constraint firstAttribute="bottom" secondItem="1gF-aY-ShN" secondAttribute="bottom" id="gEU-Ta-j1d"/>
+                            <constraint firstAttribute="bottom" secondItem="dnp-IN-cGx" secondAttribute="bottom" id="g9U-NY-fNl"/>
                             <constraint firstAttribute="trailing" secondItem="dnp-IN-cGx" secondAttribute="trailing" id="gWF-qi-XZz"/>
-                            <constraint firstItem="zH4-UB-LMd" firstAttribute="top" secondItem="dnp-IN-cGx" secondAttribute="bottom" id="iot-5h-0Bf"/>
                             <constraint firstItem="dnp-IN-cGx" firstAttribute="leading" secondItem="JCM-bJ-k8z" secondAttribute="leading" id="kOn-Qv-7Jo"/>
-                            <constraint firstItem="zH4-UB-LMd" firstAttribute="leading" secondItem="JCM-bJ-k8z" secondAttribute="leading" id="r6K-Y1-Pmh"/>
                             <constraint firstItem="dnp-IN-cGx" firstAttribute="top" secondItem="JCM-bJ-k8z" secondAttribute="top" id="srD-PA-rop"/>
-                            <constraint firstItem="yM9-Be-eOr" firstAttribute="leading" secondItem="JCM-bJ-k8z" secondAttribute="leading" constant="4" id="uGO-Yp-zTw"/>
-                            <constraint firstItem="1gF-aY-ShN" firstAttribute="leading" secondItem="yM9-Be-eOr" secondAttribute="trailing" constant="4" id="uhe-lZ-E9p"/>
                         </constraints>
                     </view>
                     <connections>
