@@ -19,14 +19,14 @@ class CollectionIndexViewController: NSTabViewController {
         detailView = nearestSibling()
     }
     
-    override func tabView(_ tabView: NSTabView, didSelect tabViewItem: NSTabViewItem?) {
-        super.tabView(tabView, didSelect: tabViewItem)
-        if let detailView = self.detailView, let item = tabViewItem {
-            let detailTabs = detailView.tabView
-            let index = tabView.indexOfTabViewItem(item)
-            let tab = detailTabs.tabViewItem(at: index)
-            detailView.tabView.selectTabViewItem(tab)
-            cvm.mode = index == 0 ? .books : .people
-        }
-    }
+//    override func tabView(_ tabView: NSTabView, didSelect tabViewItem: NSTabViewItem?) {
+//        super.tabView(tabView, didSelect: tabViewItem)
+//        if let detailView = self.detailView, let item = tabViewItem {
+//            let detailTabs = detailView.tabView
+//            let index = tabView.indexOfTabViewItem(item)
+//            let tab = detailTabs.tabViewItem(at: index)
+//            detailView.tabView.selectTabViewItem(tab)
+//            cvm.modeIndex = index
+//        }
+//    }
 }

@@ -567,13 +567,13 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <containerView translatesAutoresizingMaskIntoConstraints="NO" id="3tE-Et-baJ">
-                                <rect key="frame" x="0.0" y="23" width="1024" height="745"/>
+                                <rect key="frame" x="0.0" y="29" width="1024" height="739"/>
                                 <connections>
                                     <segue destination="9dY-ZT-f0K" kind="embed" id="CIX-OZ-tND"/>
                                 </connections>
                             </containerView>
                             <button identifier="button.InsertItem" verticalHuggingPriority="750" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="myo-cR-IH0" userLabel="Add Button">
-                                <rect key="frame" x="4" y="4" width="11" height="15"/>
+                                <rect key="frame" x="4" y="7" width="11" height="15"/>
                                 <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSAddTemplate" imagePosition="overlaps" alignment="center" imageScaling="proportionallyDown" inset="2" id="yE3-G3-i0V">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -583,7 +583,7 @@
                                 </connections>
                             </button>
                             <button identifier="button.RemoveItem" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5Hu-w2-Z1k" userLabel="Remove Button">
-                                <rect key="frame" x="19" y="4" width="11" height="15"/>
+                                <rect key="frame" x="19" y="4" width="11" height="21"/>
                                 <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSRemoveTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="Xut-yr-0fw">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -592,28 +592,45 @@
                                     <action selector="performAction:" target="Ubq-pe-EpL" id="vt6-Q1-h9E"/>
                                 </connections>
                             </button>
+                            <segmentedControl verticalHuggingPriority="750" verticalCompressionResistancePriority="751" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0Ax-R3-oxb">
+                                <rect key="frame" x="878" y="2" width="142" height="24"/>
+                                <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="cHJ-gA-KAk">
+                                    <font key="font" metaFont="system"/>
+                                    <segments>
+                                        <segment label="Books" width="68"/>
+                                        <segment label="People" width="68" selected="YES" tag="1"/>
+                                    </segments>
+                                </segmentedCell>
+                                <connections>
+                                    <binding destination="iuc-9t-fNj" name="selectedIndex" keyPath="self.cvm.modeIndex" id="WtH-jM-chE"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <constraints>
+                            <constraint firstAttribute="bottom" secondItem="0Ax-R3-oxb" secondAttribute="bottom" constant="4" id="1B2-dL-Obp"/>
                             <constraint firstItem="3tE-Et-baJ" firstAttribute="top" secondItem="Nuf-33-Q1V" secondAttribute="top" id="1Po-kp-KDn"/>
-                            <constraint firstAttribute="bottom" secondItem="myo-cR-IH0" secondAttribute="bottom" constant="4" id="LZe-5p-cbR"/>
-                            <constraint firstItem="myo-cR-IH0" firstAttribute="top" secondItem="3tE-Et-baJ" secondAttribute="bottom" constant="4" id="UHI-zV-2Wp"/>
+                            <constraint firstItem="0Ax-R3-oxb" firstAttribute="centerY" secondItem="myo-cR-IH0" secondAttribute="centerY" id="7mG-Pw-JAV"/>
+                            <constraint firstItem="5Hu-w2-Z1k" firstAttribute="centerY" secondItem="myo-cR-IH0" secondAttribute="centerY" id="Gh1-kB-gjQ"/>
+                            <constraint firstItem="0Ax-R3-oxb" firstAttribute="top" secondItem="3tE-Et-baJ" secondAttribute="bottom" constant="4" id="Q4V-ZP-QBB"/>
                             <constraint firstItem="myo-cR-IH0" firstAttribute="leading" secondItem="Nuf-33-Q1V" secondAttribute="leading" constant="4" id="YDg-kg-WJj"/>
                             <constraint firstAttribute="trailing" secondItem="3tE-Et-baJ" secondAttribute="trailing" id="YoW-xg-DtT"/>
                             <constraint firstItem="3tE-Et-baJ" firstAttribute="leading" secondItem="Nuf-33-Q1V" secondAttribute="leading" id="Zj5-zy-QWt"/>
-                            <constraint firstItem="5Hu-w2-Z1k" firstAttribute="centerY" secondItem="myo-cR-IH0" secondAttribute="centerY" id="a3S-qc-ejN"/>
+                            <constraint firstAttribute="trailing" secondItem="0Ax-R3-oxb" secondAttribute="trailing" constant="4" id="bse-Da-Y4J"/>
+                            <constraint firstItem="0Ax-R3-oxb" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="5Hu-w2-Z1k" secondAttribute="trailing" constant="8" symbolic="YES" id="die-0A-LTB"/>
                             <constraint firstItem="5Hu-w2-Z1k" firstAttribute="leading" secondItem="myo-cR-IH0" secondAttribute="trailing" constant="4" id="ita-S8-5nF"/>
                             <constraint firstAttribute="bottom" secondItem="5Hu-w2-Z1k" secondAttribute="bottom" constant="4" id="xGH-zL-cY5"/>
                         </constraints>
                     </view>
                 </viewController>
                 <customObject id="Ubq-pe-EpL" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <userDefaultsController id="gfZ-c7-Mjj"/>
             </objects>
             <point key="canvasLocation" x="990" y="-110"/>
         </scene>
         <!--Collection Index View Controller-->
         <scene sceneID="cxs-Lx-xWA">
             <objects>
-                <tabViewController selectedTabViewItemIndex="0" tabStyle="bottom" id="cvB-oN-q7M" customClass="CollectionIndexViewController" customModule="BookishMac" customModuleProvider="target" sceneMemberID="viewController">
+                <tabViewController selectedTabViewItemIndex="0" tabStyle="unspecified" id="cvB-oN-q7M" customClass="CollectionIndexViewController" customModule="BookishMac" customModuleProvider="target" sceneMemberID="viewController">
                     <tabViewItems>
                         <tabViewItem label="Books" identifier="tab.books" image="Book" id="6YM-gx-Rzs"/>
                         <tabViewItem label="People" identifier="tab.people" image="Person" id="T2N-QE-AUD"/>
@@ -623,6 +640,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <font key="font" metaFont="system"/>
                         <connections>
+                            <binding destination="cvB-oN-q7M" name="selectedIndex" keyPath="self.cvm.modeIndex" id="yrk-GL-vaZ"/>
                             <outlet property="delegate" destination="cvB-oN-q7M" id="x9P-QO-RHD"/>
                         </connections>
                     </tabView>
@@ -1137,6 +1155,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <font key="font" metaFont="message"/>
                         <connections>
+                            <binding destination="hhy-7W-Ia3" name="selectedIndex" keyPath="self.cvm.modeIndex" id="OQf-zv-QFn"/>
                             <outlet property="delegate" destination="hhy-7W-Ia3" id="kqP-V8-tTq"/>
                         </connections>
                     </tabView>

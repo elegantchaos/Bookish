@@ -9,9 +9,9 @@ import Actions
 import BookishModel
 
 @objc class CollectionDocumentViewModel: NSObject, DocumentViewModel {
-    enum Mode {
-        case books
-        case people
+    enum Mode: Int {
+        case books = 0
+        case people = 1
     }
     
     typealias  WindowController = CollectionWindowController
@@ -23,6 +23,10 @@ import BookishModel
     @objc var selectedPeople: NSMutableIndexSet?
     
     var mode: Mode = .books
+    @objc var modeIndex: Int {
+        get { return mode.rawValue }
+        set (value) { mode = Mode(rawValue: value)! }
+    }
     
     init(document: CollectionDocument) {
         self.document = document
