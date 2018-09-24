@@ -7,6 +7,12 @@ import AppKit
 
 class CollectionIndexViewController: NSTabViewController {
     @IBOutlet weak var detailView: CollectionDetailViewController?
+    @objc let cvm: CollectionDocumentViewModel
+    
+    required init?(coder: NSCoder) {
+        self.cvm = Application.sharedInstance.documentWindowControllerFactory.connectViewModel()
+        super.init(coder: coder)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,6 +26,7 @@ class CollectionIndexViewController: NSTabViewController {
             let index = tabView.indexOfTabViewItem(item)
             let tab = detailTabs.tabViewItem(at: index)
             detailView.tabView.selectTabViewItem(tab)
+            cvm.mode = index == 0 ? .books : .people
         }
     }
 }

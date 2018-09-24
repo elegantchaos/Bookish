@@ -13,6 +13,11 @@ protocol PersonChangeObserver {
     func removed(role: PersonRole)
 }
 
+protocol PersonConstructionObserver {
+    func created(person: Person)
+    func deleted(person: Person)
+}
+
 class PersonAction: Action {
     static let observerKey = "personObserver"
     static let roleKey = "personRole"
@@ -109,4 +114,34 @@ class PopupPersonMenuAction: PersonAction {
         }
     }
 }
+
+class NewPersonAction: Action {
+    override func perform(context: ActionContext) {
+        if let model = context.info[ActionContext.modelKey] as? CollectionDocumentViewModel {
+            let person = Person(context: model.managedObjectContext)
+
+            context.forEach(key: PersonAction.observerKey) { (observer: PersonConstructionObserver) in
+                observer.created(person: person)
+            }
+        }
+    }
+}
+
+class DeletePersonAction: Action {
+    override func perform(context: ActionContext) {
+        if let selection = context.info[ActionContext.selectionKey] as? [Person],
+            let model = context.info[ActionContext.modelKey] as? CollectionDocumentViewModel {
+
+            for person in selection {
+                context.forEach(key: PersonAction.observerKey) { (observer: PersonConstructionObserver) in
+                    observer.deleted(person: person)
+                }
+                
+                model.managedObjectContext.delete(person)
+            }
+            
+        }
+    }
+}
+
 

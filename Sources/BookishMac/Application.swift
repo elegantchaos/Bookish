@@ -33,8 +33,10 @@ class Application: NSObject, NSApplicationDelegate {
     
     func applicationWillFinishLaunching(_ notification: Notification) {
         actionManager.register([
+            NewPersonAction(identifier: "NewPerson"),
             AddPersonAction(identifier: "AddPerson"),
             RemovePersonAction(identifier: "RemovePerson"),
+            DeletePersonAction(identifier: "DeletePerson"),
             FillPersonMenuAction(identifier: "FillPersonMenu"),
             PopupPersonMenuAction(identifier: "PopupPersonMenu"),
             InsertBookAction(identifier: "InsertBook"),

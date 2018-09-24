@@ -22,7 +22,7 @@ import BookishModel
     @objc var selectedIndexes: NSMutableIndexSet?
     @objc var selectedPeople: NSMutableIndexSet?
     
-    let mode: Mode = .books
+    var mode: Mode = .books
     
     init(document: CollectionDocument) {
         self.document = document

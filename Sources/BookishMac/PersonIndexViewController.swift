@@ -52,8 +52,20 @@ class PersonIndexViewController: CollectionViewController {
     }
 }
 
-extension PersonIndexViewController: ActionContextProvider {
+// MARK: Actions
+
+extension PersonIndexViewController: ActionContextProvider, PersonConstructionObserver {
     func provide(context: ActionContext) {
-//        detailView.provide(context: context)
+        if let selection = indexArray.selectedObjects as? [Person] {
+            context.info[ActionContext.selectionKey] = selection
+            context.append(key: PersonAction.observerKey, value: self)
+        }
+    }
+    
+    func created(person: Person) {
+        indexArray.setSelectedObjects([person])
+    }
+    
+    func deleted(person: Person) {
     }
 }
