@@ -107,15 +107,18 @@ class BookishUITests: UITests {
         clickButton("button.PopupPersonMenu")
         clickMenuItem("Editor")
         XCTAssertEqual(count + 1, tableRowCount("details"))
+        print("tested button")
 
         // toolbar
         clickToolbarButton("Add")
         clickMenuItem("Author")
         XCTAssertEqual(count + 2, tableRowCount("details"))
-        
+        print("tested toolbar")
+
         // menu
-        clickMenuItem(at: ["Add Person", "Author"])
+        clickMenuItem(at: ["Book", "Author"])
         XCTAssertEqual(count + 3, tableRowCount("details"))
+        print("tested menu")
     }
 
     func testRemovingPerson() {
