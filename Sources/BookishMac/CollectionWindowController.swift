@@ -26,12 +26,29 @@ class CollectionWindowController: NSWindowController, DocumentWindowController, 
         }
     }
     
-    func validateUserInterfaceItem(_ item: NSValidatedUserInterfaceItem) -> Bool {
-        if let menu = item as? NSMenuItem {
-            if menu.title == "Add Person" {
-                print("nlah")
+    func validatableItems(for view: NSView) -> [NSControl] {
+        var items = [NSControl]()
+        if let viewItem = view as? NSControl {
+            items.append(viewItem)
+        }
+        for subview in view.subviews {
+            if !subview.isHidden {
+                items.append(contentsOf: validatableItems(for: subview))
             }
         }
-        return true
+        
+        return items
+    }
+    
+    func validateButtons() {
+        let actionManager = Application.sharedInstance.actionManager
+        if let view = window?.contentView {
+            let items = validatableItems(for: view)
+            for item in items {
+                if let button = item as? NSButton, let identifier = item.identifier?.rawValue {
+                    button.isEnabled = actionManager.validate(identifier: identifier, item: button)
+                }
+            }
+        }
     }
 }

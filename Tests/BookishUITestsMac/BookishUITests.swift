@@ -30,6 +30,9 @@ class BookishUITests: UITests {
     
     func closeFrontDocument() {
         clickMenuItem(at: ["File", "Close"])
+        if button("Delete").exists {
+            clickButton("Delete")
+        }
     }
     
     func testNewDocument() {
@@ -48,7 +51,7 @@ class BookishUITests: UITests {
         let count = tableRowCount("books")
         
         // button
-        clickButton("button.InsertBook")
+        clickButton("button.InsertItem")
         XCTAssertEqual(count + 1, tableRowCount("books"))
 
         // toolbar button
@@ -66,7 +69,7 @@ class BookishUITests: UITests {
         
         // button
         clickTableRow(0, table: "books")
-        clickButton("button.RemoveBook")
+        clickButton("button.RemoveItem")
         XCTAssertEqual(count - 1, tableRowCount("books"))
 
         // toolbar button
@@ -138,11 +141,11 @@ class BookishUITests: UITests {
     func testRemoveBookState() {
         launch(arguments: ["--test-document"])
         clickTableRow(0, table: "books")
-        XCTAssertTrue(button("button.RemoveBook").isEnabled)
+        XCTAssertTrue(button("button.RemoveItem").isEnabled)
         XCTAssertTrue(toolbarButton("Remove").isEnabled)
         XCTAssertTrue(menuItem("Delete Book").isEnabled)
         table("books").click()
-        XCTAssertFalse(button("button.RemoveBook").isEnabled)
+        XCTAssertFalse(button("button.RemoveItem").isEnabled)
         XCTAssertFalse(toolbarButton("Remove").isEnabled)
         clickMenuItem("Book")
         XCTAssertFalse(menuItem("Delete Book").isEnabled)

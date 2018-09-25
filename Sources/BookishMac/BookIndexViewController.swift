@@ -25,31 +25,6 @@ class BookIndexViewController: CollectionViewController {
         indexArray.fetch(self)
         super.viewWillAppear()
     }
-    
-    func validatableItems(for view: NSView) -> [NSValidatedUserInterfaceItem] {
-        var items = [NSValidatedUserInterfaceItem]()
-        if let viewItem = view as? NSValidatedUserInterfaceItem {
-            items.append(viewItem)
-        }
-        for subview in view.subviews {
-            if let subviewItem = subview as? NSValidatedUserInterfaceItem {
-                items.append(subviewItem)
-            }
-        }
-        
-        return items
-    }
-    
-    func validateButtons() {
-        let items = validatableItems(for: view)
-        for item in items {
-            if let button = item as? NSButton, let action = button.action {
-                if let validator = NSApp.target(forAction: action, to: nil, from: item) as? NSUserInterfaceValidations {
-                    button.isEnabled = validator.validateUserInterfaceItem(item)
-                }
-            }
-        }
-    }
 }
 
 extension BookIndexViewController: ActionContextProvider {

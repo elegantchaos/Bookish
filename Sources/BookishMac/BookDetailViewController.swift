@@ -100,7 +100,9 @@ class BookDetailViewController: CollectionViewController {
         if showDetail {
             updatePeople()
         }
-        indexView.validateButtons()
+        if let wc = view.window?.windowController as? CollectionWindowController {
+            wc.validateButtons()
+        }
     }
     
     func updatePeople() {
