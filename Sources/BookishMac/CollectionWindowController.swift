@@ -8,7 +8,7 @@ import Actions
 import BookishCore
 import BookishModel
 
-class CollectionWindowController: NSWindowController, DocumentWindowController, ActionContextProvider, NSUserInterfaceValidations {
+class CollectionWindowController: NSWindowController, DocumentWindowController, ActionContextProvider {
     var viewModel: CollectionDocumentViewModel?
     typealias ViewModel = CollectionDocumentViewModel
     
