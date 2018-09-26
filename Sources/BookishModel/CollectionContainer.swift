@@ -5,7 +5,7 @@
 
 import CoreData
 
-public class PersistentContainer: NSPersistentContainer {
+public class CollectionContainer: NSPersistentContainer {
 
     public override class func defaultDirectoryURL() -> URL {
         return super.defaultDirectoryURL().appendingPathComponent("BookishModel")

@@ -3,10 +3,17 @@
 //  All code (c) 2018 - present day, Elegant Chaos Limited.
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
-import Cocoa
+import CoreData
+import AppKit
 import BookishModel
 
-class CollectionDocument: PersistentDocument {
+class CollectionDocument: NSPersistentDocument {
+    override open var managedObjectModel: NSManagedObjectModel {
+        get {
+            return BookishModel.loadModel()
+        }
+    }
+    
     override class var autosavesInPlace: Bool {
         return true
     }

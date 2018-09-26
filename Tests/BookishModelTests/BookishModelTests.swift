@@ -9,13 +9,18 @@ import CoreData
 
 class BookishModelTests: XCTestCase {
     
-    func makeTestContainer() -> PersistentContainer {
-        let container = PersistentContainer(name: "Collection")
+    func makeTestContainer() -> CollectionContainer {
+        let container = CollectionContainer(name: "Collection")
         container.persistentStoreDescriptions[0].url = URL(fileURLWithPath: "/dev/null")
         container.loadPersistentStores { (description, error) in
             XCTAssertNil(error)
         }
         return container
+    }
+    
+    func testLoadingModel() {
+        let model = BookishModel.loadModel()
+        XCTAssertNotNil(model)
     }
     
     func testContainer() {
