@@ -15,7 +15,7 @@ class PersonDetailViewController: CollectionViewController {
     @IBOutlet weak var detailsView: NSTableView!
 
     var indexObserver: NSKeyValueObservation?
-    var roles = [PersonRole]()
+    var rows = [NSManagedObject]()
     var availableRows = IndexSet()
     var keyViewTimer: Timer? = nil
 
@@ -47,22 +47,43 @@ class PersonDetailViewController: CollectionViewController {
         super.viewWillDisappear()
     }
 
-    func rolesInSelection() -> (Set<PersonRole>, Set<PersonRole>) {
-        var all = Set<PersonRole>()
-        var common = Set<PersonRole>()
+    func selectedPersonRoles() -> [PersonRole] {
+        var result = [PersonRole]()
         if let selection = indexView.indexArray.selectedObjects as? [Person] {
             for person in selection {
                 if let roles = person.personRoles as? Set<PersonRole> {
-                    if all.count == 0 {
-                        common.formUnion(roles)
-                    } else {
-                        common.formIntersection(roles)
-                    }
-                    all.formUnion(roles)
+                    result.append(contentsOf: roles)
                 }
             }
         }
-        return (all, common)
+        return result
+    }
+    
+    func rowsForSelection() -> [NSManagedObject] {
+        var booksByRole = [Role:Set<Book>]()
+        let selected = selectedPersonRoles()
+        for personRole in selected {
+            if let role = personRole.role, let prb = personRole.books as? Set<Book> {
+                var books = booksByRole[role]
+                if books == nil {
+                    books = Set<Book>()
+                    books?.formUnion(prb)
+                    booksByRole[role] = books
+                } else {
+                    books?.formIntersection(prb)
+                }
+            }
+        }
+        
+        var rows: [NSManagedObject] = []
+        for role in Role.allRoles(context: cvm.managedObjectContext) {
+            if let books = booksByRole[role] {
+                rows.append(role)
+                rows.append(contentsOf: books)
+            }
+        }
+        
+        return rows
     }
     
     func selectionChanged() {
@@ -78,8 +99,7 @@ class PersonDetailViewController: CollectionViewController {
     }
     
     func updateRoles() {
-        let (_, common) = rolesInSelection()
-        roles = common.sorted(by: { ($0.person?.name ?? "") < ($1.person?.name ?? "") })
+        rows = rowsForSelection()
         detailsView.reloadData()
 
     }
@@ -95,20 +115,24 @@ extension PersonDetailViewController: NSTableViewDataSource, NSTableViewDelegate
     static let DateColumnID = NSUserInterfaceItemIdentifier(rawValue: "date")
     
     func numberOfRows(in tableView: NSTableView) -> Int {
-        return roles.count
+        return rows.count
     }
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        guard row < roles.count, let columnID = tableColumn?.identifier else {
+        guard row < rows.count, let columnID = tableColumn?.identifier else {
             return nil
         }
         
         let view = tableView.makeView(withIdentifier: columnID, owner: self)
         if let field = view?.subviews.first as? NSTextField {
-            let role = roles[row]
-            if let name = role.role?.name {
-                field.stringValue = name
+            var label = ""
+            let item = rows[row]
+            if let role = item as? Role, let name = role.name {
+                label = name
+            } else if let book = item as? Book, let name = book.name {
+                label = name
             }
+            field.stringValue = label
         }
         
         return view

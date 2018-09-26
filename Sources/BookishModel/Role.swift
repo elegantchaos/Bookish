@@ -29,4 +29,14 @@ public class Role: NSManagedObject {
         
         return role
     }
+    
+    public class func allRoles(context: NSManagedObjectContext) -> [Role] {
+        let request: NSFetchRequest<Role> = Role.fetchRequest()
+        request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+        guard let results = try? context.fetch(request) else {
+            return []
+        }
+        
+        return results
+    }
 }
