@@ -19,22 +19,15 @@ class PersonDetailViewController: CollectionViewController {
     var availableRows = IndexSet()
     var keyViewTimer: Timer? = nil
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func awakeFromNib() {
+        super.awakeFromNib()
         indexView = nearestSibling()
     }
-    
+
     override func viewWillAppear() {
         super.viewWillAppear()
         
-//        if let window = view.window?.windowController as? CollectionWindowController {
-//            window.bookDetailController = self
-//        }
-        
         if let indexArray = indexView.indexArray {
-            nameView.bind(NSBindingName(rawValue: "value"), to:indexArray, withKeyPath:"selection.name", options: [:])
-            notesView.bind(NSBindingName(rawValue: "value"), to:indexArray, withKeyPath:"selection.notes", options: [:])
-//            imageView.bind(NSBindingName(rawValue: "value"), to:indexArray, withKeyPath:"selection.image", options: [NSBindingOption.valueTransformerName:"CoverImage"])
             indexObserver = indexArray.observe(\NSArrayController.selection, changeHandler: { (index, change) in
                 self.selectionChanged()
             })
