@@ -109,29 +109,35 @@ class PersonDetailViewController: CollectionViewController {
 
 extension PersonDetailViewController: NSTableViewDataSource, NSTableViewDelegate {
     
-    static let HeadingColumnID = NSUserInterfaceItemIdentifier(rawValue: "heading")
-    static let ValueColumnID = NSUserInterfaceItemIdentifier(rawValue: "value")
-    static let PersonColumnID = NSUserInterfaceItemIdentifier(rawValue: "person")
-    static let DateColumnID = NSUserInterfaceItemIdentifier(rawValue: "date")
-    
+    static let bookViewID = NSUserInterfaceItemIdentifier(rawValue: "book")
+    static let roleViewID = NSUserInterfaceItemIdentifier(rawValue: "role")
+    static let unknownViewID = NSUserInterfaceItemIdentifier(rawValue: "unknown")
+
     func numberOfRows(in tableView: NSTableView) -> Int {
         return rows.count
     }
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        guard row < rows.count, let columnID = tableColumn?.identifier else {
+        guard row < rows.count else {
             return nil
         }
-        
-        let view = tableView.makeView(withIdentifier: columnID, owner: self)
+
+        let label: String
+        let viewID: NSUserInterfaceItemIdentifier
+        let item = rows[row]
+        if let role = item as? Role, let name = role.name {
+            label = name
+            viewID = PersonDetailViewController.roleViewID
+        } else if let book = item as? Book, let name = book.name {
+            label = name
+            viewID = PersonDetailViewController.bookViewID
+       } else {
+            label = ""
+            viewID = PersonDetailViewController.unknownViewID
+        }
+
+        let view = tableView.makeView(withIdentifier: viewID, owner: self)
         if let field = view?.subviews.first as? NSTextField {
-            var label = ""
-            let item = rows[row]
-            if let role = item as? Role, let name = role.name {
-                label = name
-            } else if let book = item as? Book, let name = book.name {
-                label = name
-            }
             field.stringValue = label
         }
         

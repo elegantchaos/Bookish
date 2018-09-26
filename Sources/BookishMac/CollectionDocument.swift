@@ -9,9 +9,7 @@ import BookishModel
 
 class CollectionDocument: NSPersistentDocument {
     override open var managedObjectModel: NSManagedObjectModel {
-        get {
-            return BookishModel.loadModel()
-        }
+        return BookishModel.loadModel()
     }
     
     override class var autosavesInPlace: Bool {
@@ -54,6 +52,7 @@ class CollectionDocument: NSPersistentDocument {
         
         let sharedEditor = Person(context: context)
         sharedEditor.name = "Ms Editor"
+        sharedEditor.notes = "This person is the editor of a number of books."
         let entry = sharedEditor.role(as: Role.Default.editorName)
         
         let book = Book(context: context)
@@ -69,6 +68,7 @@ class CollectionDocument: NSPersistentDocument {
             entry.addToBooks(book)
             let illustrator = Person(context: context)
             illustrator.name = "Mr Illustrator \(n)"
+            illustrator.notes = "Another example person."
             let entry2 = illustrator.role(as: Role.Default.illustratorName)
             entry2.addToBooks(book)
         }
