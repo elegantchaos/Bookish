@@ -168,7 +168,7 @@ extension PersonDetailViewController: NSTableViewDataSource, NSTableViewDelegate
         let rows = availableRows.sorted()
         var view: NSView = notesView
         for row in rows {
-            if let rowView = (detailsView.view(atColumn: 1, row: row, makeIfNecessary: false) as? BindableCellView)?.viewToBind() {
+            if let rowView = (detailsView.view(atColumn: 0, row: row, makeIfNecessary: false) as? BindableCellView)?.viewToBind() {
                 view.nextKeyView = rowView
                 view = rowView
             }

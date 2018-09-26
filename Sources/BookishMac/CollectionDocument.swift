@@ -60,6 +60,9 @@ class CollectionDocument: NSPersistentDocument {
         book.notes = "Some\nmulti\nline\nnotes."
         entry.addToBooks(book)
         
+        sharedEditor.role(as: Role.Default.authorName).addToBooks(book)
+        sharedEditor.role(as: Role.Default.illustratorName).addToBooks(book)
+
         for n in 1...3 {
             let book = Book(context: context)
             book.name = "Book \(n)"
