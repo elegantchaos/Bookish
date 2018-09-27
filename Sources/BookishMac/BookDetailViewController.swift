@@ -47,8 +47,8 @@ class BookDetailViewController: CollectionViewController {
         RowSpecification(binding: "modified", type: .date, editable: false)
     ]
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func awakeFromNib() {
+        super.awakeFromNib()
         indexView = nearestSibling()
     }
     
@@ -60,9 +60,6 @@ class BookDetailViewController: CollectionViewController {
         }
         
         if let indexArray = indexView.indexArray {
-            titleView.bind(NSBindingName(rawValue: "value"), to:indexArray, withKeyPath:"selection.name", options: [:])
-            subtitleView.bind(NSBindingName(rawValue: "value"), to:indexArray, withKeyPath:"selection.subtitle", options: [:])
-            imageView.bind(NSBindingName(rawValue: "value"), to:indexArray, withKeyPath:"selection.image", options: [NSBindingOption.valueTransformerName:"CoverImage"])
             indexObserver = indexArray.observe(\NSArrayController.selection, changeHandler: { (index, change) in
                 self.selectionChanged()
             })

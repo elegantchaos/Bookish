@@ -1065,6 +1065,9 @@
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
+                                <connections>
+                                    <binding destination="TBH-Sa-Ff0" name="value" keyPath="self.indexView.indexArray.selection.name" id="NKi-Gt-6WZ"/>
+                                </connections>
                             </textField>
                             <textField identifier="subtitle" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="H8A-04-75V" userLabel="Subtitle">
                                 <rect key="frame" x="68" y="708" width="738" height="13"/>
@@ -1074,6 +1077,7 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
+                                    <binding destination="TBH-Sa-Ff0" name="value" keyPath="self.indexView.indexArray.selection.subtitle" id="9y0-7l-E6b"/>
                                     <outlet property="nextKeyView" destination="vV5-vW-Afl" id="THN-M0-CdW"/>
                                 </connections>
                             </textField>
@@ -1084,6 +1088,13 @@
                                     <constraint firstAttribute="width" constant="42" id="FCF-as-z1Y"/>
                                 </constraints>
                                 <imageCell key="cell" selectable="YES" editable="YES" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="proportionallyDown" image="CoverPlaceholder" id="a7U-eh-BHK"/>
+                                <connections>
+                                    <binding destination="TBH-Sa-Ff0" name="value" keyPath="self.indexView.indexArray.selection.image" id="VqN-LV-sj2">
+                                        <dictionary key="options">
+                                            <string key="NSValueTransformerName">CoverImage</string>
+                                        </dictionary>
+                                    </binding>
+                                </connections>
                             </imageView>
                         </subviews>
                         <constraints>
