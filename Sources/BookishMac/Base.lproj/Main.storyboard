@@ -538,10 +538,10 @@
             <objects>
                 <splitViewController id="9dY-ZT-f0K" customClass="CollectionSplitViewController" customModule="BookishMac" customModuleProvider="target" sceneMemberID="viewController">
                     <splitViewItems>
-                        <splitViewItem id="9x3-Ff-joU"/>
+                        <splitViewItem canCollapse="YES" holdingPriority="255" behavior="contentList" id="9x3-Ff-joU"/>
                         <splitViewItem id="eOL-40-wev"/>
                     </splitViewItems>
-                    <splitView key="splitView" dividerStyle="thin" vertical="YES" id="Z9o-S4-ubf">
+                    <splitView key="splitView" identifier="collection-split-view" autosaveName="collection-split-view" dividerStyle="thin" vertical="YES" id="Z9o-S4-ubf">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <connections>
@@ -583,7 +583,7 @@
                                 </connections>
                             </button>
                             <button identifier="button.RemoveItem" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5Hu-w2-Z1k" userLabel="Remove Button">
-                                <rect key="frame" x="19" y="4" width="11" height="21"/>
+                                <rect key="frame" x="19" y="4" width="11" height="20"/>
                                 <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSRemoveTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="Xut-yr-0fw">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -592,9 +592,9 @@
                                     <action selector="performAction:" target="Ubq-pe-EpL" id="vt6-Q1-h9E"/>
                                 </connections>
                             </button>
-                            <segmentedControl verticalHuggingPriority="750" verticalCompressionResistancePriority="751" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0Ax-R3-oxb">
-                                <rect key="frame" x="878" y="2" width="142" height="24"/>
-                                <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="cHJ-gA-KAk">
+                            <segmentedControl verticalHuggingPriority="750" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="0Ax-R3-oxb">
+                                <rect key="frame" x="70" y="3" width="138" height="23"/>
+                                <segmentedCell key="cell" borderStyle="border" alignment="left" style="smallSquare" trackingMode="selectOne" id="cHJ-gA-KAk">
                                     <font key="font" metaFont="system"/>
                                     <segments>
                                         <segment label="Books" width="68"/>
@@ -615,8 +615,8 @@
                             <constraint firstItem="myo-cR-IH0" firstAttribute="leading" secondItem="Nuf-33-Q1V" secondAttribute="leading" constant="4" id="YDg-kg-WJj"/>
                             <constraint firstAttribute="trailing" secondItem="3tE-Et-baJ" secondAttribute="trailing" id="YoW-xg-DtT"/>
                             <constraint firstItem="3tE-Et-baJ" firstAttribute="leading" secondItem="Nuf-33-Q1V" secondAttribute="leading" id="Zj5-zy-QWt"/>
-                            <constraint firstAttribute="trailing" secondItem="0Ax-R3-oxb" secondAttribute="trailing" constant="4" id="bse-Da-Y4J"/>
-                            <constraint firstItem="0Ax-R3-oxb" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="5Hu-w2-Z1k" secondAttribute="trailing" constant="8" symbolic="YES" id="die-0A-LTB"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="0Ax-R3-oxb" secondAttribute="trailing" constant="4" id="bse-Da-Y4J"/>
+                            <constraint firstItem="0Ax-R3-oxb" firstAttribute="leading" secondItem="5Hu-w2-Z1k" secondAttribute="trailing" constant="40" id="die-0A-LTB"/>
                             <constraint firstItem="5Hu-w2-Z1k" firstAttribute="leading" secondItem="myo-cR-IH0" secondAttribute="trailing" constant="4" id="ita-S8-5nF"/>
                             <constraint firstAttribute="bottom" secondItem="5Hu-w2-Z1k" secondAttribute="bottom" constant="4" id="xGH-zL-cY5"/>
                         </constraints>
@@ -662,7 +662,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="200" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cB6-3r-Peo" userLabel="Index">
+                            <scrollView horizontalCompressionResistancePriority="749" borderType="none" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cB6-3r-Peo" userLabel="Index">
                                 <rect key="frame" x="0.0" y="0.0" width="200" height="300"/>
                                 <clipView key="contentView" id="25y-2t-AU1">
                                     <rect key="frame" x="0.0" y="0.0" width="200" height="300"/>
@@ -763,7 +763,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="200" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dnp-IN-cGx" userLabel="Index">
+                            <scrollView horizontalCompressionResistancePriority="749" borderType="none" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dnp-IN-cGx" userLabel="Index">
                                 <rect key="frame" x="0.0" y="0.0" width="200" height="300"/>
                                 <clipView key="contentView" id="MeP-Ej-IYa">
                                     <rect key="frame" x="0.0" y="0.0" width="200" height="300"/>
@@ -870,7 +870,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="804" height="698"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <tableView identifier="details" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="none" columnReordering="NO" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" rowSizeStyle="automatic" usesAutomaticRowHeights="YES" viewBased="YES" id="vV5-vW-Afl">
+                                        <tableView identifier="book-details" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="none" columnReordering="NO" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" rowSizeStyle="automatic" usesAutomaticRowHeights="YES" viewBased="YES" id="vV5-vW-Afl">
                                             <rect key="frame" x="0.0" y="0.0" width="804" height="698"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
@@ -1219,7 +1219,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="734" height="595"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <tableView identifier="details" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="none" columnReordering="NO" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="24" rowSizeStyle="automatic" usesAutomaticRowHeights="YES" viewBased="YES" id="jHn-8w-0MB">
+                                        <tableView identifier="person-details" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="none" columnReordering="NO" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="24" rowSizeStyle="automatic" usesAutomaticRowHeights="YES" viewBased="YES" id="jHn-8w-0MB">
                                             <rect key="frame" x="0.0" y="0.0" width="734" height="595"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
@@ -1308,7 +1308,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
-                            <imageView identifier="cover" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="HXp-Nq-8Tg" userLabel="Cover">
+                            <imageView identifier="portrait" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="HXp-Nq-8Tg" userLabel="Portrait">
                                 <rect key="frame" x="20" y="706" width="42" height="42"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="42" id="AT2-Qe-cjg"/>

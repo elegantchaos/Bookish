@@ -98,47 +98,47 @@ class BookishUITests: UITests {
     
     func testAddingPerson() {
         launch(arguments:["--test-document"])
-        let count = tableRowCount("details")
-        with(scope: table("details")) {
+        let count = tableRowCount("book-details")
+        with(scope: table("book-details")) {
             clickField("person-0")
         }
 
         // button
         clickButton("button.PopupPersonMenu")
         clickMenuItem("Editor")
-        XCTAssertEqual(count + 1, tableRowCount("details"))
+        XCTAssertEqual(count + 1, tableRowCount("book-details"))
         print("tested button")
 
         // toolbar
         clickToolbarButton("Add")
         clickMenuItem("Author")
-        XCTAssertEqual(count + 2, tableRowCount("details"))
+        XCTAssertEqual(count + 2, tableRowCount("book-details"))
         print("tested toolbar")
 
         // menu
         clickMenuItem(at: ["Book", "Author"])
-        XCTAssertEqual(count + 3, tableRowCount("details"))
+        XCTAssertEqual(count + 3, tableRowCount("book-details"))
         print("tested menu")
     }
 
     func testRemovingPerson() {
         launch(arguments:["--test-document"])
-        let count = tableRowCount("details")
+        let count = tableRowCount("book-details")
         
         // button
-        with(scope: table("details")) { clickField("person-2") }
+        with(scope: table("book-details")) { clickField("person-2") }
         clickButton("button.RemovePerson")
-        XCTAssertEqual(count - 1, tableRowCount("details"))
+        XCTAssertEqual(count - 1, tableRowCount("book-details"))
         
         // toolbar
-        with(scope: table("details")) { clickField("person-1") }
+        with(scope: table("book-details")) { clickField("person-1") }
         clickToolbarButton("Remove", count: 1)
-        XCTAssertEqual(count - 2, tableRowCount("details"))
+        XCTAssertEqual(count - 2, tableRowCount("book-details"))
         
         // menu
-        with(scope: table("details")) { clickField("person-0") }
+        with(scope: table("book-details")) { clickField("person-0") }
         clickMenuItem("Remove Person")
-        XCTAssertEqual(count - 3, tableRowCount("details"))
+        XCTAssertEqual(count - 3, tableRowCount("book-details"))
     }
     
     func testRemoveBookState() {
@@ -159,7 +159,7 @@ class BookishUITests: UITests {
         clickTableRow(0, table: "books")
         XCTAssertTrue(menuItem(at: ["Add Person", "Author"]).isEnabled)
         XCTAssertTrue(toolbarButton("Add").isEnabled)
-        with(scope: table("details")) {
+        with(scope: table("book-details")) {
             clickField("person-0")
         }
         XCTAssertTrue(button("button.PopupPersonMenu").isEnabled)
@@ -174,7 +174,7 @@ class BookishUITests: UITests {
         clickTableRow(0, table: "books")
         XCTAssertFalse(menuItem("Remove Person").isEnabled)
         XCTAssertFalse(toolbarButton("Remove", count: 1).isEnabled)
-        with(scope: table("details")) {
+        with(scope: table("book-details")) {
             clickField("person-0")
         }
         clickMenuItem("Book")

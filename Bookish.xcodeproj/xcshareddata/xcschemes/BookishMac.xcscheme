@@ -135,7 +135,7 @@
          </CommandLineArgument>
          <CommandLineArgument
             argument = "-ApplePersistenceIgnoreState YES"
-            isEnabled = "YES">
+            isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "-NSTreatUnknownArgumentsAsOpen NO"
