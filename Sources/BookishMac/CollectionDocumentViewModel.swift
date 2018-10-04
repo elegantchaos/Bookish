@@ -22,10 +22,11 @@ import BookishModel
     @objc var selectedIndexes: NSMutableIndexSet?
     @objc var selectedPeople: NSMutableIndexSet?
     
-    var mode: Mode = .books
-    @objc var modeIndex: Int {
-        get { return mode.rawValue }
-        set (value) { mode = Mode(rawValue: value)! }
+    @objc dynamic var modeIndex: Int = 0
+    
+    var mode: Mode {
+        get { return Mode(rawValue: modeIndex)! }
+        set (value) { modeIndex = value.rawValue }
     }
     
     init(document: CollectionDocument) {

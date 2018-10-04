@@ -53,11 +53,15 @@ class CollectionWindowController: NSWindowController, DocumentWindowController, 
         }
     }
     
-    func reveal(person: Person) {
-        print("reveal person")
+    @objc func reveal(person: Person) {
+        if let model = viewModel {
+            model.mode = .people
+        }
     }
     
-    func reveal(book: Book) {
-        print("reveal book")
+    @objc func reveal(book: Book) {
+        if let model = viewModel {
+            model.mode = .books
+        }
     }
 }
