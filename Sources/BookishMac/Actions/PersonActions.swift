@@ -33,6 +33,18 @@ class PersonAction: Action {
         
         return selection.count > 0
     }
+    
+    class func standardActions() -> [Action] {
+        return [
+            NewPersonAction(identifier: "NewPerson"),
+            AddPersonAction(identifier: "AddPerson"),
+            RemovePersonAction(identifier: "RemovePerson"),
+            DeletePersonAction(identifier: "DeletePerson"),
+            FillPersonMenuAction(identifier: "FillPersonMenu"),
+            PopupPersonMenuAction(identifier: "PopupPersonMenu"),
+            RevealPersonAction(identifier: "RevealPerson"),
+        ]
+    }
 }
 
 class AddPersonAction: PersonAction {
@@ -140,6 +152,19 @@ class DeletePersonAction: Action {
                 model.managedObjectContext.delete(person)
             }
             
+        }
+    }
+}
+
+class RevealPersonAction: Action {
+    override func validate(context: ActionContext) -> Bool {
+        return (context.info[PersonAction.roleKey] as? PersonRole != nil) && super.validate(context: context)
+    }
+    
+    override func perform(context: ActionContext) {
+        if let role = context.info[PersonAction.roleKey] as? PersonRole, let person = role.person,
+            let window = context.info[ActionContext.windowKey] as? CollectionWindowController {
+            window.reveal(person: person)
         }
     }
 }

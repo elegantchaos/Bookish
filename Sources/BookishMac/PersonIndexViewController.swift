@@ -31,11 +31,13 @@ class PersonIndexViewController: CollectionViewController {
 // MARK: Actions
 
 extension PersonIndexViewController: ActionContextProvider, PersonConstructionObserver {
+    func provideIndexInfo(context: ActionContext) {
+        context.append(key: PersonAction.observerKey, value: self)
+    }
+
     func provide(context: ActionContext) {
-        if let selection = indexArray.selectedObjects as? [Person] {
-            context.info[ActionContext.selectionKey] = selection
-            context.append(key: PersonAction.observerKey, value: self)
-        }
+        provideIndexInfo(context: context)
+        detailView.provideDetailInfo(context: context)
     }
     
     func created(person: Person) {

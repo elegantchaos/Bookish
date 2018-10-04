@@ -23,6 +23,7 @@ class CollectionWindowController: NSWindowController, DocumentWindowController, 
     func provide(context: ActionContext) {
         if let model = viewModel {
             context.info[ActionContext.modelKey] = model
+            context.info[ActionContext.windowKey] = self
         }
     }
     
@@ -50,5 +51,13 @@ class CollectionWindowController: NSWindowController, DocumentWindowController, 
                 }
             }
         }
+    }
+    
+    func reveal(person: Person) {
+        print("reveal person")
+    }
+    
+    func reveal(book: Book) {
+        print("reveal book")
     }
 }

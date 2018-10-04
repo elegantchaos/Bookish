@@ -6,6 +6,9 @@
 import Cocoa
 import BookishCore
 import Actions
+import Logger
+
+let applicationChannel = Logger("Application")
 
 @NSApplicationMain
 class Application: NSObject, NSApplicationDelegate {
@@ -32,15 +35,9 @@ class Application: NSObject, NSApplicationDelegate {
     }
     
     func applicationWillFinishLaunching(_ notification: Notification) {
+        actionManager.register(PersonAction.standardActions())
+        actionManager.register(BookAction.standardActions())
         actionManager.register([
-            NewPersonAction(identifier: "NewPerson"),
-            AddPersonAction(identifier: "AddPerson"),
-            RemovePersonAction(identifier: "RemovePerson"),
-            DeletePersonAction(identifier: "DeletePerson"),
-            FillPersonMenuAction(identifier: "FillPersonMenu"),
-            PopupPersonMenuAction(identifier: "PopupPersonMenu"),
-            InsertBookAction(identifier: "InsertBook"),
-            RemoveBookAction(identifier: "RemoveBook"),
             ShowDatePickerAction(identifier: "ShowDatePicker"),
             InsertItemAction(identifier: "InsertItem"),
             RemoveItemAction(identifier: "RemoveItem")
@@ -57,10 +54,11 @@ class Application: NSObject, NSApplicationDelegate {
     }
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        applicationChannel.log("finished launching")
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
-        // Insert code here to tear down your application
+        applicationChannel.debug("will terminate")
     }
     
     func applicationShouldOpenUntitledFile(_ sender: NSApplication) -> Bool {

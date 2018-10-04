@@ -71,11 +71,10 @@
 		2296038321418C280020B3EB /* Actions.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22960373214189550020B3EB /* Actions.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		2296038421418C310020B3EB /* BookishCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2296034121417E500020B3EB /* BookishCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		2296038521418C390020B3EB /* Logger.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2296035B214182860020B3EB /* Logger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		22D39E4F2142BCD000282467 /* InsertBookAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D39E4E2142BCD000282467 /* InsertBookAction.swift */; };
+		22D39E4F2142BCD000282467 /* BookActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D39E4E2142BCD000282467 /* BookActions.swift */; };
 		22D39E512142DB2700282467 /* ViewBasedToolbarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D39E502142DB2700282467 /* ViewBasedToolbarItem.swift */; };
 		22D39E532146A84500282467 /* AnnotatedTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D39E522146A84500282467 /* AnnotatedTableCellView.swift */; };
 		22D39E552146A84E00282467 /* DateTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D39E542146A84E00282467 /* DateTableCellView.swift */; };
-		22D39E572146BA8200282467 /* RemoveBookAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D39E562146BA8200282467 /* RemoveBookAction.swift */; };
 		22D39E592146BA9C00282467 /* ShowDatePickerAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D39E582146BA9C00282467 /* ShowDatePickerAction.swift */; };
 		22D39E5B2146BE4900282467 /* DatePickerPopoverController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D39E5A2146BE4900282467 /* DatePickerPopoverController.swift */; };
 		22D39E5E2146D9F100282467 /* ValidatingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D39E5D2146D9F100282467 /* ValidatingButton.swift */; };
@@ -236,11 +235,10 @@
 		2296035B214182860020B3EB /* Logger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Logger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2296036A214187570020B3EB /* Update.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = Update.sh; sourceTree = "<group>"; };
 		22960373214189550020B3EB /* Actions.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Actions.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		22D39E4E2142BCD000282467 /* InsertBookAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsertBookAction.swift; sourceTree = "<group>"; };
+		22D39E4E2142BCD000282467 /* BookActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookActions.swift; sourceTree = "<group>"; };
 		22D39E502142DB2700282467 /* ViewBasedToolbarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewBasedToolbarItem.swift; sourceTree = "<group>"; };
 		22D39E522146A84500282467 /* AnnotatedTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotatedTableCellView.swift; sourceTree = "<group>"; };
 		22D39E542146A84E00282467 /* DateTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTableCellView.swift; sourceTree = "<group>"; };
-		22D39E562146BA8200282467 /* RemoveBookAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoveBookAction.swift; sourceTree = "<group>"; };
 		22D39E582146BA9C00282467 /* ShowDatePickerAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowDatePickerAction.swift; sourceTree = "<group>"; };
 		22D39E5A2146BE4900282467 /* DatePickerPopoverController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerPopoverController.swift; sourceTree = "<group>"; };
 		22D39E5D2146D9F100282467 /* ValidatingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatingButton.swift; sourceTree = "<group>"; };
@@ -467,9 +465,8 @@
 			isa = PBXGroup;
 			children = (
 				2296032E2141563A0020B3EB /* PersonActions.swift */,
-				22D39E4E2142BCD000282467 /* InsertBookAction.swift */,
+				22D39E4E2142BCD000282467 /* BookActions.swift */,
 				22462E962158F65200A4C56C /* CollectionViewActions.swift */,
-				22D39E562146BA8200282467 /* RemoveBookAction.swift */,
 				22D39E582146BA9C00282467 /* ShowDatePickerAction.swift */,
 			);
 			path = Actions;
@@ -1029,7 +1026,6 @@
 				22DD424A2126D6DA0070C85A /* CollectionViewController.swift in Sources */,
 				22429401212C32BF00E70510 /* CollectionWindowController.swift in Sources */,
 				22DD42482126D6DA0070C85A /* Application.swift in Sources */,
-				22D39E572146BA8200282467 /* RemoveBookAction.swift in Sources */,
 				22429406212D945C00E70510 /* BookDetailViewController.swift in Sources */,
 				22143FD3212F0F2500B689DF /* AuthorsTransformer.swift in Sources */,
 				22143FCF212EF9CC00B689DF /* DocumentWindowController.swift in Sources */,
@@ -1046,7 +1042,7 @@
 				22D39E602147D4A100282467 /* TestAction.swift in Sources */,
 				22462E932158ED5000A4C56C /* CollectionIndexViewController.swift in Sources */,
 				221F272921382C8E00DC2DC7 /* DateTransformer.swift in Sources */,
-				22D39E4F2142BCD000282467 /* InsertBookAction.swift in Sources */,
+				22D39E4F2142BCD000282467 /* BookActions.swift in Sources */,
 				22143FD521300F9300B689DF /* CoreDataTransformers.swift in Sources */,
 				220CDA9F214A86A80064CC91 /* PersonIndexViewController.swift in Sources */,
 				22D39E552146A84E00282467 /* DateTableCellView.swift in Sources */,
