@@ -11,12 +11,6 @@
       location = "container:"
       name = "SPM Dependencies">
       <FileRef
-         location = "group:BookishCoreMac.xcconfig">
-      </FileRef>
-      <FileRef
-         location = "group:BookishCoreMobile.xcconfig">
-      </FileRef>
-      <FileRef
          location = "group:Packages">
       </FileRef>
       <FileRef

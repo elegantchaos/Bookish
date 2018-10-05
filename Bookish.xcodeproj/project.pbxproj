@@ -187,6 +187,8 @@
 		22143FD421300F9300B689DF /* CoreDataTransformers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataTransformers.swift; sourceTree = "<group>"; };
 		221ED4E9216785BB00594714 /* BookishMac.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = BookishMac.xcconfig; sourceTree = "<group>"; };
 		221ED4EA216785BB00594714 /* BookishMobile.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = BookishMobile.xcconfig; sourceTree = "<group>"; };
+		221ED4EB21678BA400594714 /* BookishCoreMobile.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = BookishCoreMobile.xcconfig; sourceTree = "<group>"; };
+		221ED4EC21678BA400594714 /* BookishCoreMac.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = BookishCoreMac.xcconfig; sourceTree = "<group>"; };
 		221F271E21306C1300DC2DC7 /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
 		221F272121359DA200DC2DC7 /* Publisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Publisher.swift; sourceTree = "<group>"; };
 		221F272821382C8E00DC2DC7 /* DateTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTransformer.swift; sourceTree = "<group>"; };
@@ -347,6 +349,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		221ED4EE21678BF200594714 /* Configs */ = {
+			isa = PBXGroup;
+			children = (
+				22DD42792126DDA80070C85A /* Bookish.xcconfig */,
+				221ED4E9216785BB00594714 /* BookishMac.xcconfig */,
+				221ED4EA216785BB00594714 /* BookishMobile.xcconfig */,
+				221ED4EC21678BA400594714 /* BookishCoreMac.xcconfig */,
+				221ED4EB21678BA400594714 /* BookishCoreMobile.xcconfig */,
+			);
+			path = Configs;
+			sourceTree = "<group>";
+		};
 		221F27272136EC0500DC2DC7 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
@@ -487,9 +501,7 @@
 		22DD423B2126D6DA0070C85A = {
 			isa = PBXGroup;
 			children = (
-				22DD42792126DDA80070C85A /* Bookish.xcconfig */,
-				221ED4E9216785BB00594714 /* BookishMac.xcconfig */,
-				221ED4EA216785BB00594714 /* BookishMobile.xcconfig */,
+				221ED4EE21678BF200594714 /* Configs */,
 				2296032B214132840020B3EB /* Bookish.sketch */,
 				2296033021416F960020B3EB /* Package.swift */,
 				2296036A214187570020B3EB /* Update.sh */,
