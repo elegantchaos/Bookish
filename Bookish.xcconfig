@@ -1,4 +1,3 @@
-
 BOOKISH_ENTITLEMENTS_PATH = Sources/${TARGET_NAME}/Bookish.entitlements
 BOOKISH_INFO_PATH = Sources/${TARGET_NAME}/Info.plist
 BOOKISH_TEST_INFO_PATH = Tests/${TARGET_NAME}/Info.plist

@@ -185,6 +185,8 @@
 		22143FD0212F076000B689DF /* CollectionRootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionRootViewController.swift; sourceTree = "<group>"; };
 		22143FD2212F0F2500B689DF /* AuthorsTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorsTransformer.swift; sourceTree = "<group>"; };
 		22143FD421300F9300B689DF /* CoreDataTransformers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataTransformers.swift; sourceTree = "<group>"; };
+		221ED4E9216785BB00594714 /* BookishMac.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = BookishMac.xcconfig; sourceTree = "<group>"; };
+		221ED4EA216785BB00594714 /* BookishMobile.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = BookishMobile.xcconfig; sourceTree = "<group>"; };
 		221F271E21306C1300DC2DC7 /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
 		221F272121359DA200DC2DC7 /* Publisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Publisher.swift; sourceTree = "<group>"; };
 		221F272821382C8E00DC2DC7 /* DateTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTransformer.swift; sourceTree = "<group>"; };
@@ -486,6 +488,8 @@
 			isa = PBXGroup;
 			children = (
 				22DD42792126DDA80070C85A /* Bookish.xcconfig */,
+				221ED4E9216785BB00594714 /* BookishMac.xcconfig */,
+				221ED4EA216785BB00594714 /* BookishMobile.xcconfig */,
 				2296032B214132840020B3EB /* Bookish.sketch */,
 				2296033021416F960020B3EB /* Package.swift */,
 				2296036A214187570020B3EB /* Update.sh */,
@@ -1148,6 +1152,7 @@
 /* Begin XCBuildConfiguration section */
 		2242933C212ADC4500E70510 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 221ED4EA216785BB00594714 /* BookishMobile.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1170,6 +1175,7 @@
 		};
 		2242933D212ADC4500E70510 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 221ED4EA216785BB00594714 /* BookishMobile.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1193,6 +1199,7 @@
 		};
 		2242933F212ADC4500E70510 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 221ED4EA216785BB00594714 /* BookishMobile.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1217,6 +1224,7 @@
 		};
 		22429340212ADC4500E70510 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 221ED4EA216785BB00594714 /* BookishMobile.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1242,6 +1250,7 @@
 		};
 		22429342212ADC4500E70510 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 221ED4EA216785BB00594714 /* BookishMobile.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1265,6 +1274,7 @@
 		};
 		22429343212ADC4500E70510 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 221ED4EA216785BB00594714 /* BookishMobile.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1289,6 +1299,7 @@
 		};
 		224293A9212AE0F400E70510 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 221ED4E9216785BB00594714 /* BookishMac.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -1321,6 +1332,7 @@
 		};
 		224293AA212AE0F400E70510 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 221ED4E9216785BB00594714 /* BookishMac.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -1352,6 +1364,7 @@
 		};
 		224293AC212AE0F400E70510 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 221ED4E9216785BB00594714 /* BookishMac.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -1371,6 +1384,7 @@
 		};
 		224293AD212AE0F400E70510 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 221ED4E9216785BB00594714 /* BookishMac.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -1390,6 +1404,7 @@
 		};
 		224293CB212AE16300E70510 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 221ED4EA216785BB00594714 /* BookishMobile.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1422,6 +1437,7 @@
 		};
 		224293CC212AE16300E70510 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 221ED4EA216785BB00594714 /* BookishMobile.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1454,6 +1470,7 @@
 		};
 		224293CF212AE16300E70510 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 221ED4EA216785BB00594714 /* BookishMobile.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1476,6 +1493,7 @@
 		};
 		224293D0212AE16300E70510 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 221ED4EA216785BB00594714 /* BookishMobile.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1499,7 +1517,6 @@
 		};
 		22DD426D2126D6DB0070C85A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 22DD42792126DDA80070C85A /* Bookish.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1553,7 +1570,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = macosx;
+				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG debug";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -1561,7 +1578,6 @@
 		};
 		22DD426E2126D6DB0070C85A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 22DD42792126DDA80070C85A /* Bookish.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1608,7 +1624,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				SDKROOT = macosx;
+				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 			};
@@ -1616,6 +1632,7 @@
 		};
 		22DD42702126D6DB0070C85A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 221ED4E9216785BB00594714 /* BookishMac.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1636,6 +1653,7 @@
 		};
 		22DD42712126D6DB0070C85A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 221ED4E9216785BB00594714 /* BookishMac.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1656,6 +1674,7 @@
 		};
 		22DD42732126D6DB0070C85A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 221ED4E9216785BB00594714 /* BookishMac.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1677,6 +1696,7 @@
 		};
 		22DD42742126D6DB0070C85A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 221ED4E9216785BB00594714 /* BookishMac.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1698,6 +1718,7 @@
 		};
 		22DD42762126D6DB0070C85A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 221ED4E9216785BB00594714 /* BookishMac.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -1718,6 +1739,7 @@
 		};
 		22DD42772126D6DB0070C85A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 221ED4E9216785BB00594714 /* BookishMac.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
