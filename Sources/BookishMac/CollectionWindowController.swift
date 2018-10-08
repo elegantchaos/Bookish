@@ -22,7 +22,8 @@ class CollectionWindowController: NSWindowController, DocumentWindowController, 
     
     func provide(context: ActionContext) {
         if let model = viewModel {
-            context.info[ActionContext.modelKey] = model
+            context.info[ActionContext.modelKey] = model.managedObjectContext
+            context.info[ActionContext.viewModelKey] = model
             context.info[ActionContext.windowKey] = self
         }
     }

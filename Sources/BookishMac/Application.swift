@@ -5,6 +5,7 @@
 
 import Cocoa
 import BookishCore
+import BookishModel
 import Actions
 import Logger
 
@@ -36,6 +37,7 @@ class Application: NSObject, NSApplicationDelegate {
     
     func applicationWillFinishLaunching(_ notification: Notification) {
         actionManager.register(PersonAction.standardActions())
+        actionManager.register(PersonUIAction.standardActions())
         actionManager.register(BookAction.standardActions())
         actionManager.register([
             ShowDatePickerAction(identifier: "ShowDatePicker"),
