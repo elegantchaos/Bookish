@@ -18,15 +18,14 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCell(withIdentifier: "name")
+        var cell = tableView.dequeueReusableCell(withIdentifier: "detail") as? DetailRow
         if cell == nil {
-            cell = UITableViewCell(style: .default, reuseIdentifier: "name")
+            cell = DetailRow(style: .default, reuseIdentifier: "detail")
         }
 
-        if let label = cell?.textLabel {
-            label.text = rows[indexPath.row].label
-        }
-        
+        let rowInfo = rows[indexPath.row]
+        cell?.label.text = rowInfo.label
+        cell?.detail.text = detailItem?.value(forKey: rowInfo.binding) as? String
         return cell!
     }
     

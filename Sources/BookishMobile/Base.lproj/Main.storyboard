@@ -41,24 +41,44 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="SVb-EU-R8f">
-                                <rect key="frame" x="4" y="92.5" width="367" height="570.5"/>
+                                <rect key="frame" x="0.0" y="92.5" width="375" height="574.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="E4T-eO-oRA">
-                                        <rect key="frame" x="0.0" y="28" width="367" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="detail" id="E4T-eO-oRA" customClass="DetailRow" customModule="BookishMobile" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="E4T-eO-oRA" id="EK5-8u-ive">
-                                            <rect key="frame" x="0.0" y="0.0" width="367" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CPf-9R-UcZ">
+                                                    <rect key="frame" x="15" y="15" width="37.5" height="14"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="751" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="E4Y-DD-iUg">
+                                                    <rect key="frame" x="56.5" y="4" width="314.5" height="35.5"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                </textView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="E4Y-DD-iUg" firstAttribute="leading" secondItem="CPf-9R-UcZ" secondAttribute="trailing" constant="4" id="9xb-Qk-6cd"/>
+                                                <constraint firstAttribute="trailing" secondItem="E4Y-DD-iUg" secondAttribute="trailing" constant="4" id="C9t-h1-GHe"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="CPf-9R-UcZ" secondAttribute="bottom" constant="4" id="F41-dU-v4i"/>
+                                                <constraint firstAttribute="bottom" secondItem="E4Y-DD-iUg" secondAttribute="bottom" constant="4" id="XwG-rm-5XW"/>
+                                                <constraint firstItem="CPf-9R-UcZ" firstAttribute="leading" secondItem="EK5-8u-ive" secondAttribute="leadingMargin" id="a1F-ao-Ib3"/>
+                                                <constraint firstItem="CPf-9R-UcZ" firstAttribute="top" secondItem="EK5-8u-ive" secondAttribute="topMargin" constant="4" id="efL-Vg-MJE"/>
+                                                <constraint firstItem="E4Y-DD-iUg" firstAttribute="top" secondItem="EK5-8u-ive" secondAttribute="top" constant="4" id="puw-TX-SGp"/>
+                                            </constraints>
                                         </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="2AF-JO-8a1">
-                                        <rect key="frame" x="0.0" y="72" width="367" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="2AF-JO-8a1" id="Vjo-qx-rUA">
-                                            <rect key="frame" x="0.0" y="0.0" width="367" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="detail" destination="E4Y-DD-iUg" id="04g-a8-GTy"/>
+                                            <outlet property="label" destination="CPf-9R-UcZ" id="nwu-aS-a1c"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -69,15 +89,13 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="VUw-jc-0yf" firstAttribute="trailing" secondItem="SVb-EU-R8f" secondAttribute="trailing" constant="4" id="29Y-gV-uWg"/>
+                            <constraint firstItem="VUw-jc-0yf" firstAttribute="trailing" secondItem="SVb-EU-R8f" secondAttribute="trailing" id="29Y-gV-uWg"/>
                             <constraint firstItem="0XM-y9-sOw" firstAttribute="leading" secondItem="VUw-jc-0yf" secondAttribute="leading" constant="4" id="3cW-Kq-imt"/>
                             <constraint firstItem="VUw-jc-0yf" firstAttribute="trailing" secondItem="0XM-y9-sOw" secondAttribute="trailing" constant="4" id="7Jb-ZO-1qi"/>
                             <constraint firstItem="0XM-y9-sOw" firstAttribute="top" secondItem="VUw-jc-0yf" secondAttribute="top" constant="4" id="Vqf-sH-s0F"/>
                             <constraint firstItem="SVb-EU-R8f" firstAttribute="top" secondItem="0XM-y9-sOw" secondAttribute="bottom" constant="4" id="XQh-pk-XFy"/>
-                            <constraint firstItem="SVb-EU-R8f" firstAttribute="top" secondItem="0XM-y9-sOw" secondAttribute="bottom" constant="4" id="YiJ-oY-KjW"/>
-                            <constraint firstItem="SVb-EU-R8f" firstAttribute="leading" secondItem="VUw-jc-0yf" secondAttribute="leading" constant="4" id="jZv-6a-XY6"/>
-                            <constraint firstItem="VUw-jc-0yf" firstAttribute="bottom" secondItem="SVb-EU-R8f" secondAttribute="bottom" constant="4" id="plp-zZ-fGh"/>
-                            <constraint firstItem="SVb-EU-R8f" firstAttribute="top" secondItem="svH-Pt-448" secondAttribute="topMargin" constant="4" id="yMx-Ip-cVG"/>
+                            <constraint firstItem="SVb-EU-R8f" firstAttribute="leading" secondItem="VUw-jc-0yf" secondAttribute="leading" id="jZv-6a-XY6"/>
+                            <constraint firstItem="VUw-jc-0yf" firstAttribute="bottom" secondItem="SVb-EU-R8f" secondAttribute="bottom" id="plp-zZ-fGh"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="VUw-jc-0yf"/>
                     </view>

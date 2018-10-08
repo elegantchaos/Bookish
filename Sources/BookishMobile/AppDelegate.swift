@@ -97,6 +97,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
         })
+        Collection.setupTestDocument(context: container.viewContext)
         return container
     }()
 
