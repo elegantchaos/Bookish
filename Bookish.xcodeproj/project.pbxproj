@@ -14,6 +14,8 @@
 		22143FD1212F076000B689DF /* CollectionRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22143FD0212F076000B689DF /* CollectionRootViewController.swift */; };
 		22143FD3212F0F2500B689DF /* AuthorsTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22143FD2212F0F2500B689DF /* AuthorsTransformer.swift */; };
 		22143FD521300F9300B689DF /* CoreDataTransformers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22143FD421300F9300B689DF /* CoreDataTransformers.swift */; };
+		221ED50C216B79F100594714 /* DetailSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221ED50B216B79F100594714 /* DetailSpec.swift */; };
+		221ED50D216B79F100594714 /* DetailSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221ED50B216B79F100594714 /* DetailSpec.swift */; };
 		221F271F21306C1300DC2DC7 /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221F271E21306C1300DC2DC7 /* Book.swift */; };
 		221F272021306C1300DC2DC7 /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221F271E21306C1300DC2DC7 /* Book.swift */; };
 		221F272221359DA200DC2DC7 /* Publisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221F272121359DA200DC2DC7 /* Publisher.swift */; };
@@ -189,6 +191,7 @@
 		221ED4EA216785BB00594714 /* BookishMobile.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = BookishMobile.xcconfig; sourceTree = "<group>"; };
 		221ED4EB21678BA400594714 /* BookishCoreMobile.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = BookishCoreMobile.xcconfig; sourceTree = "<group>"; };
 		221ED4EC21678BA400594714 /* BookishCoreMac.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = BookishCoreMac.xcconfig; sourceTree = "<group>"; };
+		221ED50B216B79F100594714 /* DetailSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailSpec.swift; sourceTree = "<group>"; };
 		221F271E21306C1300DC2DC7 /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
 		221F272121359DA200DC2DC7 /* Publisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Publisher.swift; sourceTree = "<group>"; };
 		221F272821382C8E00DC2DC7 /* DateTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTransformer.swift; sourceTree = "<group>"; };
@@ -449,6 +452,7 @@
 				224293DE212AF05800E70510 /* Person.swift */,
 				221F272121359DA200DC2DC7 /* Publisher.swift */,
 				224293EB212AF0E300E70510 /* Series.swift */,
+				221ED50B216B79F100594714 /* DetailSpec.swift */,
 				224293E8212AF0D300E70510 /* Role.swift */,
 				221F271E21306C1300DC2DC7 /* Book.swift */,
 				224293E5212AF0B700E70510 /* PersonRole.swift */,
@@ -989,6 +993,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				224293EF212AFAFB00E70510 /* CollectionContainer.swift in Sources */,
+				221ED50C216B79F100594714 /* DetailSpec.swift in Sources */,
 				224293E1212AF07C00E70510 /* Group.swift in Sources */,
 				224293DC212AF00400E70510 /* Collection.xcdatamodeld in Sources */,
 				224293EC212AF0E300E70510 /* Series.swift in Sources */,
@@ -1014,6 +1019,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				224293F0212AFAFB00E70510 /* CollectionContainer.swift in Sources */,
+				221ED50D216B79F100594714 /* DetailSpec.swift in Sources */,
 				224293E2212AF07C00E70510 /* Group.swift in Sources */,
 				224293DD212AF00500E70510 /* Collection.xcdatamodeld in Sources */,
 				224293ED212AF0E300E70510 /* Series.swift in Sources */,
