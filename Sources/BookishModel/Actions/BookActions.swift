@@ -4,34 +4,33 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 import Actions
-import BookishModel
+import CoreData
 
-class BookAction: Action {
+public class BookAction: Action {
     static let bookKey = "book"
 
-    class func standardActions() -> [Action] {
+    public class func standardActions() -> [Action] {
         return [
             InsertBookAction(identifier: "InsertBook"),
             RemoveBookAction(identifier: "RemoveBook"),
-            RevealBookAction(identifier: "RevealBook")
         ]
     }
 }
 
-class InsertBookAction: BookAction {
-    override func validate(context: ActionContext) -> Bool {
-        return (context.info[ActionContext.modelKey] as? CollectionDocumentViewModel) != nil
+public class InsertBookAction: BookAction {
+    public override func validate(context: ActionContext) -> Bool {
+        return (context.info[ActionContext.modelKey] as? NSManagedObjectContext) != nil
     }
     
-    override func perform(context: ActionContext) {
-        if let viewModel = context.info[ActionContext.modelKey] as? CollectionDocumentViewModel {
-            let _ = Book(context: viewModel.managedObjectContext)
+    public override func perform(context: ActionContext) {
+        if let model = context.info[ActionContext.modelKey] as? NSManagedObjectContext {
+            let _ = Book(context: model)
         }
     }
 }
 
-class RemoveBookAction: BookAction {
-    override func validate(context: ActionContext) -> Bool {
+public class RemoveBookAction: BookAction {
+    public override func validate(context: ActionContext) -> Bool {
         guard let selection = context.info[ActionContext.selectionKey] as? [Book] else {
             return false
         }
@@ -39,7 +38,7 @@ class RemoveBookAction: BookAction {
         return selection.count > 0
     }
     
-    override func perform(context: ActionContext) {
+    public override func perform(context: ActionContext) {
         if let selection = context.info[ActionContext.selectionKey] as? [Book] {
             for book in selection {
                 book.managedObjectContext?.delete(book)
@@ -48,19 +47,5 @@ class RemoveBookAction: BookAction {
     }
     
 }
-
-class RevealBookAction: BookAction {
-    override func validate(context: ActionContext) -> Bool {
-        return (context.info[BookAction.bookKey] as? Book != nil) && super.validate(context: context)
-    }
-    
-    override func perform(context: ActionContext) {
-        if let book = context.info[BookAction.bookKey] as? Book,
-            let window = context.info[ActionContext.windowKey] as? CollectionWindowController {
-            window.reveal(book: book)
-        }
-    }
-}
-
 
 

@@ -14,7 +14,6 @@
 		22143FD1212F076000B689DF /* CollectionRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22143FD0212F076000B689DF /* CollectionRootViewController.swift */; };
 		22143FD3212F0F2500B689DF /* AuthorsTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22143FD2212F0F2500B689DF /* AuthorsTransformer.swift */; };
 		22143FD521300F9300B689DF /* CoreDataTransformers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22143FD421300F9300B689DF /* CoreDataTransformers.swift */; };
-		221C4B24216BA50C0086D56F /* BookActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221C4B23216BA50C0086D56F /* BookActions.swift */; };
 		221C4B28216BA7050086D56F /* Actions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 221C4B26216BA7050086D56F /* Actions.framework */; };
 		221C4B2D216BA8220086D56F /* PersonActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221C4B2C216BA8220086D56F /* PersonActions.swift */; };
 		221C4B2E216BA8220086D56F /* PersonActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221C4B2C216BA8220086D56F /* PersonActions.swift */; };
@@ -92,6 +91,9 @@
 		22DD42542126D6DB0070C85A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22DD42522126D6DB0070C85A /* Main.storyboard */; };
 		22DD42602126D6DB0070C85A /* BookishTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DD425F2126D6DB0070C85A /* BookishTests.swift */; };
 		22DD426B2126D6DB0070C85A /* BookishUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DD426A2126D6DB0070C85A /* BookishUITests.swift */; };
+		22E47CC6216E31B700E43DBF /* BookActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221C4B23216BA50C0086D56F /* BookActions.swift */; };
+		22E47CC7216E31BA00E43DBF /* BookActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221C4B23216BA50C0086D56F /* BookActions.swift */; };
+		22E47CC9216E322300E43DBF /* BookUIActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E47CC8216E322300E43DBF /* BookUIActions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -273,6 +275,7 @@
 		22DD426A2126D6DB0070C85A /* BookishUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookishUITests.swift; sourceTree = "<group>"; };
 		22DD426C2126D6DB0070C85A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		22DD42792126DDA80070C85A /* Bookish.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Bookish.xcconfig; sourceTree = "<group>"; };
+		22E47CC8216E322300E43DBF /* BookUIActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookUIActions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -504,6 +507,7 @@
 			children = (
 				22462E962158F65200A4C56C /* CollectionViewActions.swift */,
 				221C4B2F216BA96C0086D56F /* PersonUIActions.swift */,
+				22E47CC8216E322300E43DBF /* BookUIActions.swift */,
 				22D39E582146BA9C00282467 /* ShowDatePickerAction.swift */,
 			);
 			path = Actions;
@@ -1022,6 +1026,7 @@
 				224293E9212AF0D300E70510 /* Role.swift in Sources */,
 				221F271F21306C1300DC2DC7 /* Book.swift in Sources */,
 				221F272221359DA200DC2DC7 /* Publisher.swift in Sources */,
+				22E47CC6216E31B700E43DBF /* BookActions.swift in Sources */,
 				224293E3212AF09D00E70510 /* Person.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1050,6 +1055,7 @@
 				221F272021306C1300DC2DC7 /* Book.swift in Sources */,
 				224293D3212AE1E700E70510 /* BookishModel.swift in Sources */,
 				224293EA212AF0D300E70510 /* Role.swift in Sources */,
+				22E47CC7216E31BA00E43DBF /* BookActions.swift in Sources */,
 				224293E4212AF09E00E70510 /* Person.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1083,7 +1089,6 @@
 				22462E972158F65200A4C56C /* CollectionViewActions.swift in Sources */,
 				22D39E5B2146BE4900282467 /* DatePickerPopoverController.swift in Sources */,
 				22D39E532146A84500282467 /* AnnotatedTableCellView.swift in Sources */,
-				221C4B24216BA50C0086D56F /* BookActions.swift in Sources */,
 				22D39E602147D4A100282467 /* TestAction.swift in Sources */,
 				22462E932158ED5000A4C56C /* CollectionIndexViewController.swift in Sources */,
 				221F272921382C8E00DC2DC7 /* DateTransformer.swift in Sources */,
@@ -1096,6 +1101,7 @@
 				22429403212C3C7400E70510 /* ViewExtensions.swift in Sources */,
 				224293FB212C1D7500E70510 /* BookIndexViewController.swift in Sources */,
 				22D39E592146BA9C00282467 /* ShowDatePickerAction.swift in Sources */,
+				22E47CC9216E322300E43DBF /* BookUIActions.swift in Sources */,
 				22D39E512142DB2700282467 /* ViewBasedToolbarItem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

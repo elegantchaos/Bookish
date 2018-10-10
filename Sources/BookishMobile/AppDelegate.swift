@@ -12,7 +12,7 @@ import Actions
 let applicationChannel = Logger("Application")
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDelegate, ActionContextProvider {
 
     var window: UIWindow?
     let actionManager = ActionManagerMobile()
@@ -20,18 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         actionManager.register(PersonAction.standardActions())
+        actionManager.register(BookAction.standardActions())
         actionManager.install()
-//        actionManager.register(PersonUIAction.standardActions())
-//        actionManager.register(BookAction.standardActions())
-//        actionManager.register([
-//            ShowDatePickerAction(identifier: "ShowDatePicker"),
-//            InsertItemAction(identifier: "InsertItem"),
-//            RemoveItemAction(identifier: "RemoveItem")
-//            ])
-//        
-//        
-//        actionManager.nextResponder = window?.next
-//        window?.next = actionManager
 
         let splitViewController = self.window!.rootViewController as! UISplitViewController
         let navigationController = splitViewController.viewControllers[splitViewController.viewControllers.count-1] as! UINavigationController
@@ -136,5 +126,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         }
     }
 
+    func provide(context: ActionContext) {
+        context.info[ActionContext.modelKey] = persistentContainer.viewContext
+    }
 }
 

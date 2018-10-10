@@ -169,7 +169,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rux-fX-hf1" sceneMemberID="firstResponder"/>
                 <barButtonItem title="Item" id="FOG-E4-5VL">
                     <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="string" keyPath="actionID" value="AddPerson"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="actionID" value="InsertBook"/>
                     </userDefinedRuntimeAttributes>
                     <connections>
                         <action selector="performAction:" destination="Rux-fX-hf1" id="FKh-Bs-kMt"/>
