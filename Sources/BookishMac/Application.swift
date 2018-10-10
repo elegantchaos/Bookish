@@ -14,7 +14,7 @@ let applicationChannel = Logger("Application")
 @NSApplicationMain
 class Application: NSObject, NSApplicationDelegate {
     let documentWindowControllerFactory = DocumentWindowControllerFactory()
-    let actionManager = ActionManager()
+    let actionManager = ActionManagerMac()
     let uiTesting = CommandLine.arguments.contains("--ui-testing")
     var testDocument = CommandLine.arguments.contains("--test-document")
     let noBlankDocument = CommandLine.arguments.contains("--no-blank-document")
@@ -45,8 +45,7 @@ class Application: NSObject, NSApplicationDelegate {
             RemoveItemAction(identifier: "RemoveItem")
             ])
         
-        actionManager.nextResponder = NSApp.nextResponder
-        NSApp.nextResponder = actionManager
+        actionManager.install()
 
         BookishCore().test()
         

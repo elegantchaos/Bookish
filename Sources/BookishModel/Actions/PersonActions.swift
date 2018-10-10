@@ -5,7 +5,6 @@
 
 import CoreData
 import Actions
-import AppKit
 
 public protocol PersonChangeObserver {
     func added(role: PersonRole)

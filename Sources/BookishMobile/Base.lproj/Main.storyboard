@@ -162,8 +162,19 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Master" id="Zdf-7t-Un8"/>
+                    <connections>
+                        <outlet property="addButton" destination="FOG-E4-5VL" id="jrI-Pv-PeP"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rux-fX-hf1" sceneMemberID="firstResponder"/>
+                <barButtonItem title="Item" id="FOG-E4-5VL">
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="actionID" value="AddPerson"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="performAction:" destination="Rux-fX-hf1" id="FKh-Bs-kMt"/>
+                    </connections>
+                </barButtonItem>
             </objects>
             <point key="canvasLocation" x="709" y="-630"/>
         </scene>

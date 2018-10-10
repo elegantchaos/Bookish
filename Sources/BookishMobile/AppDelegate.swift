@@ -7,6 +7,7 @@ import UIKit
 import CoreData
 import BookishModel
 import Logger
+import Actions
 
 let applicationChannel = Logger("Application")
 
@@ -14,10 +15,24 @@ let applicationChannel = Logger("Application")
 class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDelegate {
 
     var window: UIWindow?
+    let actionManager = ActionManagerMobile()
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        actionManager.register(PersonAction.standardActions())
+        actionManager.install()
+//        actionManager.register(PersonUIAction.standardActions())
+//        actionManager.register(BookAction.standardActions())
+//        actionManager.register([
+//            ShowDatePickerAction(identifier: "ShowDatePicker"),
+//            InsertItemAction(identifier: "InsertItem"),
+//            RemoveItemAction(identifier: "RemoveItem")
+//            ])
+//        
+//        
+//        actionManager.nextResponder = window?.next
+//        window?.next = actionManager
+
         let splitViewController = self.window!.rootViewController as! UISplitViewController
         let navigationController = splitViewController.viewControllers[splitViewController.viewControllers.count-1] as! UINavigationController
         navigationController.topViewController!.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem
@@ -31,6 +46,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         return true
     }
 
+    override var next: UIResponder? {
+        return actionManager.adapter
+    }
+    
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.

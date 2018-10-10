@@ -16,8 +16,5 @@
       <FileRef
          location = "group:.build/xcode/mac/BookishCore.xcodeproj">
       </FileRef>
-      <FileRef
-         location = "group:.build/xcode/mobile/BookishCore.xcodeproj">
-      </FileRef>
    </Group>
 </Workspace>
