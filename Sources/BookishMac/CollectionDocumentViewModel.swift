@@ -35,7 +35,7 @@ import BookishModel
     }
     
     func addPersonItem(kind: String, shortcut: String) -> NSMenuItem {
-        let item = NSMenuItem(title: kind, action: ActionManagerMac.ActionManagerAdapter.performActionSelector, keyEquivalent: shortcut)
+        let item = NSMenuItem(title: kind, action: ActionManagerMac.Responder.performActionSelector, keyEquivalent: shortcut)
         item.identifier = NSUserInterfaceItemIdentifier(rawValue: "menu.AddPerson.\(kind)")
         item.keyEquivalentModifierMask = [.command, .option]
         return item

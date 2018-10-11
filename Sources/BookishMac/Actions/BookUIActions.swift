@@ -3,11 +3,12 @@
 //  All code (c) 2018 - present day, Elegant Chaos Limited.
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
-import Foundation
+import BookishModel
+import Actions
 
 class BookUIAction: BookAction {
 
-    class func standardActions() -> [Action] {
+    override class func standardActions() -> [Action] {
         return [
             RevealBookAction(identifier: "RevealBook")
         ]

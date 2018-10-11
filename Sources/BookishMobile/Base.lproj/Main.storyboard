@@ -33,15 +33,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="Detail view content goes here" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="0XM-y9-sOw">
-                                <rect key="frame" x="4" y="68" width="367" height="20.5"/>
+                            <label clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" ambiguous="YES" text="Detail view content goes here" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="0XM-y9-sOw">
+                                <rect key="frame" x="4" y="68" width="226.5" height="30"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="SVb-EU-R8f">
-                                <rect key="frame" x="0.0" y="92.5" width="375" height="574.5"/>
+                                <rect key="frame" x="0.0" y="102" width="375" height="565"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="detail" id="E4T-eO-oRA" customClass="DetailRow" customModule="BookishMobile" customModuleProvider="target">
@@ -86,16 +86,37 @@
                                     <outlet property="delegate" destination="JEX-9P-axG" id="sbA-jp-mls"/>
                                 </connections>
                             </tableView>
+                            <textField opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="1Tt-nC-n6c">
+                                <rect key="frame" x="234.5" y="68" width="25" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b7Y-qy-voN">
+                                <rect key="frame" x="283" y="68" width="46" height="30"/>
+                                <state key="normal" title="Button"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="actionID" value="InsertBook"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="performAction:" destination="FJe-Yq-33r" eventType="primaryActionTriggered" id="UYD-xa-Wg4"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="b7Y-qy-voN" firstAttribute="top" secondItem="VUw-jc-0yf" secondAttribute="top" constant="4" id="0uk-kj-LiQ"/>
                             <constraint firstItem="VUw-jc-0yf" firstAttribute="trailing" secondItem="SVb-EU-R8f" secondAttribute="trailing" id="29Y-gV-uWg"/>
                             <constraint firstItem="0XM-y9-sOw" firstAttribute="leading" secondItem="VUw-jc-0yf" secondAttribute="leading" constant="4" id="3cW-Kq-imt"/>
-                            <constraint firstItem="VUw-jc-0yf" firstAttribute="trailing" secondItem="0XM-y9-sOw" secondAttribute="trailing" constant="4" id="7Jb-ZO-1qi"/>
+                            <constraint firstItem="VUw-jc-0yf" firstAttribute="trailing" secondItem="b7Y-qy-voN" secondAttribute="trailing" constant="4" id="5Iq-Ao-4xm"/>
+                            <constraint firstItem="SVb-EU-R8f" firstAttribute="top" secondItem="1Tt-nC-n6c" secondAttribute="bottom" constant="4" id="DPf-Z2-dg6"/>
+                            <constraint firstItem="b7Y-qy-voN" firstAttribute="leading" secondItem="1Tt-nC-n6c" secondAttribute="trailing" constant="4" id="UfN-gW-icz"/>
                             <constraint firstItem="0XM-y9-sOw" firstAttribute="top" secondItem="VUw-jc-0yf" secondAttribute="top" constant="4" id="Vqf-sH-s0F"/>
-                            <constraint firstItem="SVb-EU-R8f" firstAttribute="top" secondItem="0XM-y9-sOw" secondAttribute="bottom" constant="4" id="XQh-pk-XFy"/>
+                            <constraint firstItem="b7Y-qy-voN" firstAttribute="centerY" secondItem="0XM-y9-sOw" secondAttribute="centerY" id="ieX-Xh-tH3"/>
                             <constraint firstItem="SVb-EU-R8f" firstAttribute="leading" secondItem="VUw-jc-0yf" secondAttribute="leading" id="jZv-6a-XY6"/>
+                            <constraint firstItem="1Tt-nC-n6c" firstAttribute="top" secondItem="VUw-jc-0yf" secondAttribute="top" constant="4" id="p1Y-1Y-Rvu"/>
                             <constraint firstItem="VUw-jc-0yf" firstAttribute="bottom" secondItem="SVb-EU-R8f" secondAttribute="bottom" id="plp-zZ-fGh"/>
+                            <constraint firstItem="1Tt-nC-n6c" firstAttribute="leading" secondItem="0XM-y9-sOw" secondAttribute="trailing" constant="4" id="qvw-6W-ZhJ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="VUw-jc-0yf"/>
                     </view>
@@ -113,7 +134,7 @@
         <!--Split View Controller-->
         <scene sceneID="Nki-YV-4Qg">
             <objects>
-                <splitViewController id="H1p-Uh-vWS" sceneMemberID="viewController">
+                <splitViewController preferredPrimaryColumnWidthFraction="0.25" id="H1p-Uh-vWS" sceneMemberID="viewController">
                     <toolbarItems/>
                     <connections>
                         <segue destination="RMx-3f-FxP" kind="relationship" relationship="masterViewController" id="BlO-5A-QYV"/>
@@ -196,6 +217,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="6S0-TO-JiA"/>
+        <segue reference="Tll-UG-LXB"/>
     </inferredMetricsTieBreakers>
 </document>

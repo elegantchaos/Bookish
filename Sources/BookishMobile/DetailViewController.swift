@@ -5,8 +5,13 @@
 
 import UIKit
 import BookishModel
+import Actions
 
-class DetailViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class DetailViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, ActionContextProvider {
+    func provide(context: ActionContext) {
+        print("detail")
+    }
+    
    let rows = DetailSpec.standardDetails
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -54,7 +59,6 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
             configureView()
         }
     }
-
 
 }
 

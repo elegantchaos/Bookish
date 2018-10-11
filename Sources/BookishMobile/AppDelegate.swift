@@ -8,6 +8,7 @@ import CoreData
 import BookishModel
 import Logger
 import Actions
+import ActionsKit
 
 let applicationChannel = Logger("Application")
 
@@ -21,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         actionManager.register(PersonAction.standardActions())
         actionManager.register(BookAction.standardActions())
-        actionManager.install()
+        actionManager.installResponder()
 
         let splitViewController = self.window!.rootViewController as! UISplitViewController
         let navigationController = splitViewController.viewControllers[splitViewController.viewControllers.count-1] as! UINavigationController
@@ -37,7 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
     }
 
     override var next: UIResponder? {
-        return actionManager.adapter
+        return actionManager.responder
     }
     
     func applicationWillResignActive(_ application: UIApplication) {

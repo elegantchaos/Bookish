@@ -6,10 +6,10 @@
 import Actions
 import CoreData
 
-public class BookAction: Action {
-    static let bookKey = "book"
+open class BookAction: Action {
+    public static let bookKey = "book"
 
-    public class func standardActions() -> [Action] {
+    open class func standardActions() -> [Action] {
         return [
             InsertBookAction(identifier: "InsertBook"),
             RemoveBookAction(identifier: "RemoveBook"),
