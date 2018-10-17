@@ -720,11 +720,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 224293CA212AE16300E70510 /* Build configuration list for PBXNativeTarget "BookishModelMobile" */;
 			buildPhases = (
+				226EF31621776B2B0012A405 /* Export Assets From Sketch */,
 				224293AE212AE16200E70510 /* Headers */,
 				224293AF212AE16200E70510 /* Sources */,
 				224293B0212AE16200E70510 /* Frameworks */,
 				224293B1212AE16200E70510 /* Resources */,
-				226EF31621776B2B0012A405 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -970,7 +970,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		226EF31621776B2B0012A405 /* ShellScript */ = {
+		226EF31621776B2B0012A405 /* Export Assets From Sketch */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -980,14 +980,16 @@
 			inputPaths = (
 				"$(SRCROOT)/Bookish.sketch",
 			);
+			name = "Export Assets From Sketch";
 			outputFileListPaths = (
-				"$(DERIVED_FILE_DIR)/assetOutput.xcfilelist",
+				"$(SRCROOT)/Sources/BookishMobile/Assets.xcfilelist",
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nTOOL=../.build/debug/sketchx\n\nif [[ ! -e \"$TOOL\" ]]\nthen\n    swift build\nfi\n\n\"$TOOL\" Bookish.sketch Example/\n\nfind Sources/BookishMac/Assets.xcassets/ > \"$(DERIVED_FILE_DIR)/assetOutput.xcfilelist\"\n";
+			shellScript = "# build & run sketchx to export the assets\nswift run sketchx Bookish.sketch Mobile=Assets Sources/BookishMobile \n\n# update list of all assets\nfind Sources/BookishMobile/Assets.xcassets/ > Sources/BookishMobile/Assets.xcfilelist\n";
+			showEnvVarsInLog = 0;
 		};
 		22960334214172360020B3EB /* Build SPM Dependencies */ = {
 			isa = PBXShellScriptBuildPhase;
