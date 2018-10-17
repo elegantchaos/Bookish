@@ -14,7 +14,7 @@
          location = "group:Packages">
       </FileRef>
       <FileRef
-         location = "group:.build/xcode/BookishCore.xcodeproj">
+         location = "group:.build/xcode/mac/BookishCore.xcodeproj">
       </FileRef>
    </Group>
 </Workspace>

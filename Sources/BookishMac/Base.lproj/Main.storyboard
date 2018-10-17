@@ -538,7 +538,7 @@
             <objects>
                 <splitViewController id="9dY-ZT-f0K" customClass="CollectionSplitViewController" customModule="BookishMac" customModuleProvider="target" sceneMemberID="viewController">
                     <splitViewItems>
-                        <splitViewItem canCollapse="YES" holdingPriority="255" behavior="contentList" id="9x3-Ff-joU"/>
+                        <splitViewItem holdingPriority="255" behavior="contentList" id="9x3-Ff-joU"/>
                         <splitViewItem id="eOL-40-wev"/>
                     </splitViewItems>
                     <splitView key="splitView" identifier="collection-split-view" autosaveName="collection-split-view" dividerStyle="thin" vertical="YES" id="Z9o-S4-ubf">
@@ -583,7 +583,7 @@
                                 </connections>
                             </button>
                             <button identifier="button.RemoveItem" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5Hu-w2-Z1k" userLabel="Remove Button">
-                                <rect key="frame" x="19" y="4" width="11" height="20"/>
+                                <rect key="frame" x="19" y="4" width="11" height="21"/>
                                 <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSRemoveTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="Xut-yr-0fw">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -593,7 +593,7 @@
                                 </connections>
                             </button>
                             <segmentedControl verticalHuggingPriority="750" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="0Ax-R3-oxb">
-                                <rect key="frame" x="70" y="3" width="138" height="23"/>
+                                <rect key="frame" x="70" y="3" width="139" height="23"/>
                                 <segmentedCell key="cell" borderStyle="border" alignment="left" style="smallSquare" trackingMode="selectOne" id="cHJ-gA-KAk">
                                     <font key="font" metaFont="system"/>
                                     <segments>
@@ -724,11 +724,11 @@
                                         </tableView>
                                     </subviews>
                                 </clipView>
-                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="NxL-ln-vku">
+                                <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="NxL-ln-vku">
                                     <rect key="frame" x="0.0" y="261" width="200" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
-                                <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="rbv-fT-DZ1">
+                                <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="rbv-fT-DZ1">
                                     <rect key="frame" x="224" y="17" width="15" height="102"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
@@ -825,11 +825,11 @@
                                         </tableView>
                                     </subviews>
                                 </clipView>
-                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="TMc-0k-zmc">
+                                <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="TMc-0k-zmc">
                                     <rect key="frame" x="0.0" y="304" width="195" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
-                                <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="UUq-Sr-IzS">
+                                <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="UUq-Sr-IzS">
                                     <rect key="frame" x="224" y="17" width="15" height="102"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
@@ -947,12 +947,12 @@
                                                                 <outlet property="textField" destination="u47-FK-V32" id="4Tf-cZ-vMJ"/>
                                                             </connections>
                                                         </tableCellView>
-                                                        <tableCellView identifier="person" id="BkD-e8-vo5" userLabel="person cell" customClass="PersonTableCellView" customModule="BookishMac" customModuleProvider="target">
+                                                        <tableCellView identifier="person" misplaced="YES" id="BkD-e8-vo5" userLabel="person cell" customClass="PersonTableCellView" customModule="BookishMac" customModuleProvider="target">
                                                             <rect key="frame" x="84" y="20" width="211" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="62Q-09-BL4" customClass="AnnotatedTextField" customModule="BookishMac" customModuleProvider="target">
-                                                                    <rect key="frame" x="0.0" y="2" width="175" height="13"/>
+                                                                    <rect key="frame" x="0.0" y="2" width="4" height="13"/>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" continuous="YES" alignment="left" placeholderString="value" usesSingleLineMode="YES" id="mQk-Co-D5V">
                                                                         <font key="font" metaFont="systemBold" size="10"/>
                                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -963,7 +963,7 @@
                                                                     </connections>
                                                                 </textField>
                                                                 <button identifier="button.PopupPersonMenu" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RsI-9f-qrv" userLabel="Add">
-                                                                    <rect key="frame" x="181" y="1" width="15" height="16"/>
+                                                                    <rect key="frame" x="10" y="-57" width="131" height="132"/>
                                                                     <buttonCell key="cell" type="inline" bezelStyle="inline" image="Plus" imagePosition="only" alignment="center" controlSize="mini" lineBreakMode="truncatingTail" state="on" inset="2" id="eIs-R7-djF">
                                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                         <font key="font" metaFont="smallSystemBold"/>
@@ -973,7 +973,7 @@
                                                                     </connections>
                                                                 </button>
                                                                 <button identifier="button.RemovePerson" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7vP-8A-rYs" userLabel="Remove">
-                                                                    <rect key="frame" x="196" y="1" width="15" height="16"/>
+                                                                    <rect key="frame" x="141" y="-57" width="131" height="132"/>
                                                                     <buttonCell key="cell" type="inline" bezelStyle="inline" image="Minus" imagePosition="only" alignment="center" controlSize="mini" lineBreakMode="truncatingTail" state="on" inset="2" id="HJk-Ws-ykn">
                                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                         <font key="font" metaFont="smallSystemBold"/>
@@ -982,16 +982,28 @@
                                                                         <action selector="performAction:" target="dg1-Od-cPv" id="Wz6-fs-wKr"/>
                                                                     </connections>
                                                                 </button>
+                                                                <button identifier="button.RevealPerson" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="TJV-Lt-SZS" userLabel="Reveal">
+                                                                    <rect key="frame" x="276" y="0.0" width="17" height="18"/>
+                                                                    <buttonCell key="cell" type="inline" bezelStyle="inline" image="NSFollowLinkFreestandingTemplate" imagePosition="only" alignment="center" controlSize="mini" lineBreakMode="truncatingTail" state="on" inset="2" id="mff-9C-MBs">
+                                                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                        <font key="font" metaFont="smallSystemBold"/>
+                                                                    </buttonCell>
+                                                                    <connections>
+                                                                        <action selector="performAction:" target="dg1-Od-cPv" id="yUa-Dm-yFb"/>
+                                                                    </connections>
+                                                                </button>
                                                             </subviews>
                                                             <constraints>
+                                                                <constraint firstItem="TJV-Lt-SZS" firstAttribute="leading" secondItem="7vP-8A-rYs" secondAttribute="trailing" constant="4" id="BBV-Kv-ge4"/>
                                                                 <constraint firstItem="7vP-8A-rYs" firstAttribute="centerY" secondItem="62Q-09-BL4" secondAttribute="centerY" id="BLH-0i-FO4"/>
                                                                 <constraint firstItem="RsI-9f-qrv" firstAttribute="leading" secondItem="62Q-09-BL4" secondAttribute="trailing" constant="8" symbolic="YES" id="L8f-aw-fkx"/>
                                                                 <constraint firstItem="7vP-8A-rYs" firstAttribute="leading" secondItem="RsI-9f-qrv" secondAttribute="trailing" id="TMC-DU-K4g"/>
+                                                                <constraint firstItem="TJV-Lt-SZS" firstAttribute="centerY" secondItem="62Q-09-BL4" secondAttribute="centerY" id="aeJ-g4-EJE"/>
                                                                 <constraint firstItem="62Q-09-BL4" firstAttribute="top" secondItem="BkD-e8-vo5" secondAttribute="top" constant="2" id="c8n-96-gLk"/>
                                                                 <constraint firstItem="RsI-9f-qrv" firstAttribute="centerY" secondItem="62Q-09-BL4" secondAttribute="centerY" id="fCg-0m-XkC"/>
                                                                 <constraint firstItem="62Q-09-BL4" firstAttribute="leading" secondItem="BkD-e8-vo5" secondAttribute="leading" constant="2" id="gvF-Bo-6Cl"/>
                                                                 <constraint firstAttribute="bottom" secondItem="62Q-09-BL4" secondAttribute="bottom" constant="2" id="iaA-td-3Tx"/>
-                                                                <constraint firstAttribute="trailing" secondItem="7vP-8A-rYs" secondAttribute="trailing" id="kcO-qf-dLm"/>
+                                                                <constraint firstAttribute="trailing" secondItem="TJV-Lt-SZS" secondAttribute="trailing" constant="4" id="pME-Mj-jMc"/>
                                                             </constraints>
                                                             <connections>
                                                                 <outlet property="addButton" destination="RsI-9f-qrv" id="F8B-9Y-hAX"/>
@@ -1049,11 +1061,11 @@
                                     </subviews>
                                     <color key="backgroundColor" name="windowBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </clipView>
-                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="1Kf-VT-TKi">
+                                <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="1Kf-VT-TKi">
                                     <rect key="frame" x="0.0" y="314" width="380" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
-                                <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="ouR-eG-FUC">
+                                <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="ouR-eG-FUC">
                                     <rect key="frame" x="224" y="17" width="15" height="102"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
@@ -1244,18 +1256,30 @@
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="oeA-lN-ssU">
-                                                                    <rect key="frame" x="0.0" y="2" width="592" height="13"/>
+                                                                    <rect key="frame" x="0.0" y="2" width="32" height="13"/>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" sendsActionOnEndEditing="YES" alignment="left" placeholderString="value" id="iIg-m1-08h">
                                                                         <font key="font" metaFont="systemBold" size="10"/>
                                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
                                                                 </textField>
+                                                                <button identifier="button.RevealBook" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jQ1-F6-YDa" userLabel="Reveal">
+                                                                    <rect key="frame" x="583" y="0.0" width="17" height="18"/>
+                                                                    <buttonCell key="cell" type="inline" bezelStyle="inline" image="NSFollowLinkFreestandingTemplate" imagePosition="only" alignment="center" controlSize="mini" lineBreakMode="truncatingTail" state="on" inset="2" id="lJA-tD-X4w">
+                                                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                        <font key="font" metaFont="smallSystemBold"/>
+                                                                    </buttonCell>
+                                                                    <connections>
+                                                                        <action selector="performAction:" target="9ol-mz-Bsh" id="OG3-1e-ojJ"/>
+                                                                    </connections>
+                                                                </button>
                                                             </subviews>
                                                             <constraints>
+                                                                <constraint firstItem="jQ1-F6-YDa" firstAttribute="centerY" secondItem="oeA-lN-ssU" secondAttribute="centerY" id="Bdt-r0-b8y"/>
                                                                 <constraint firstItem="oeA-lN-ssU" firstAttribute="top" secondItem="kOa-mX-ie0" secondAttribute="top" constant="2" id="Gdi-Er-qXb"/>
-                                                                <constraint firstAttribute="trailing" secondItem="oeA-lN-ssU" secondAttribute="trailing" constant="10" id="Vs6-eb-dKG"/>
+                                                                <constraint firstAttribute="trailing" secondItem="jQ1-F6-YDa" secondAttribute="trailing" id="Vvl-UM-q7Z"/>
                                                                 <constraint firstItem="oeA-lN-ssU" firstAttribute="leading" secondItem="kOa-mX-ie0" secondAttribute="leading" constant="2" id="mfl-a3-P8n"/>
+                                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="oeA-lN-ssU" secondAttribute="trailing" id="nXh-Dq-fe2"/>
                                                                 <constraint firstAttribute="bottom" secondItem="oeA-lN-ssU" secondAttribute="bottom" constant="2" id="nd9-ud-ZKB"/>
                                                             </constraints>
                                                             <connections>
@@ -1299,11 +1323,11 @@
                                     </subviews>
                                     <color key="backgroundColor" name="windowBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </clipView>
-                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="ZJd-3J-eEP">
+                                <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="ZJd-3J-eEP">
                                     <rect key="frame" x="0.0" y="579" width="784" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
-                                <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="p1F-YV-V6G">
+                                <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="p1F-YV-V6G">
                                     <rect key="frame" x="224" y="17" width="15" height="102"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
@@ -1352,6 +1376,7 @@
         <image name="CoverPlaceholder" width="512" height="512"/>
         <image name="Minus" width="12" height="12"/>
         <image name="NSAddTemplate" width="11" height="11"/>
+        <image name="NSFollowLinkFreestandingTemplate" width="14" height="14"/>
         <image name="NSRemoveTemplate" width="11" height="11"/>
         <image name="Person" width="16" height="16"/>
         <image name="Plus" width="12" height="12"/>

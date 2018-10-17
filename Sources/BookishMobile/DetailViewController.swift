@@ -5,11 +5,38 @@
 
 import UIKit
 import BookishModel
+import Actions
 
-class DetailViewController: UIViewController {
+class DetailViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, ActionContextProvider {
+    func provide(context: ActionContext) {
+        print("detail")
+    }
+    
+   let rows = DetailSpec.standardDetails
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return rows.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        var cell = tableView.dequeueReusableCell(withIdentifier: "detail") as? DetailRow
+        if cell == nil {
+            cell = DetailRow(style: .default, reuseIdentifier: "detail")
+        }
+
+        let rowInfo = rows[indexPath.row]
+        cell?.label.text = rowInfo.label
+        cell?.detail.text = detailItem?.value(forKey: rowInfo.binding) as? String
+        return cell!
+    }
+    
 
     @IBOutlet weak var detailDescriptionLabel: UILabel!
-
+    @IBOutlet weak var detailView: UITableView!
 
     func configureView() {
         // Update the user interface for the detail item.
@@ -32,7 +59,6 @@ class DetailViewController: UIViewController {
             configureView()
         }
     }
-
 
 }
 

@@ -3,50 +3,57 @@
 //  All code (c) 2018 - present day, Elegant Chaos Limited.
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
-import BookishModel
 import CoreData
 import Actions
-import AppKit
 
-protocol PersonChangeObserver {
+public protocol PersonChangeObserver {
     func added(role: PersonRole)
     func removed(role: PersonRole)
 }
 
-protocol PersonConstructionObserver {
+public protocol PersonConstructionObserver {
     func created(person: Person)
     func deleted(person: Person)
 }
 
-class PersonAction: Action {
-    static let observerKey = "personObserver"
-    static let roleKey = "personRole"
+open class PersonAction: Action {
+    public static let observerKey = "personObserver"
+    public static let roleKey = "personRole"
 
-    override func validate(context: ActionContext) -> Bool {
+    open override func validate(context: ActionContext) -> Bool {
         guard let selection = context.info[ActionContext.selectionKey] as? [Book] else {
             return false
         }
         
-        guard let _ = context.info[ActionContext.modelKey] as? CollectionDocumentViewModel else {
+        guard let _ = context.info[ActionContext.modelKey] as? NSManagedObjectContext else {
             return false
         }
         
         return selection.count > 0
     }
+    
+    open class func standardActions() -> [Action] {
+        return [
+            NewPersonAction(identifier: "NewPerson"),
+            AddPersonAction(identifier: "AddPerson"),
+            RemovePersonAction(identifier: "RemovePerson"),
+            DeletePersonAction(identifier: "DeletePerson"),
+        ]
+    }
 }
 
 class AddPersonAction: PersonAction {
-    override func validate(context: ActionContext) -> Bool {
+    public override func validate(context: ActionContext) -> Bool {
         return (context.parameters.count > 0) && super.validate(context: context)
     }
     
-    override func perform(context: ActionContext) {
+    public override func perform(context: ActionContext) {
         if context.parameters.count > 0 {
             let roleName = context.parameters[0]
             if
                 let selection = context.info[ActionContext.selectionKey] as? [Book],
-                let viewModel = context.info[ActionContext.modelKey] as? CollectionDocumentViewModel {
-                let person = Person(context: viewModel.managedObjectContext)
+                let moc = context.info[ActionContext.modelKey] as? NSManagedObjectContext {
+                let person = Person(context: moc)
                 let role = person.role(as: roleName)
                 for book in selection {
                     book.addToPersonRoles(role)
@@ -61,11 +68,11 @@ class AddPersonAction: PersonAction {
 }
 
 class RemovePersonAction: PersonAction {
-    override func validate(context: ActionContext) -> Bool {
+    public override func validate(context: ActionContext) -> Bool {
         return (context.info[PersonAction.roleKey] as? PersonRole != nil) && super.validate(context: context)
     }
     
-    override func perform(context: ActionContext) {
+    public override func perform(context: ActionContext) {
         if
             let selection = context.info[ActionContext.selectionKey] as? [Book],
             let role = context.info[PersonAction.roleKey] as? PersonRole {
@@ -85,40 +92,10 @@ class RemovePersonAction: PersonAction {
     }
 }
 
-class FillPersonMenuAction: PersonAction {
-    override func validate(context: ActionContext) -> Bool {
-        guard super.validate(context: context) else {
-            return false
-        }
-
-        if let item = context.sender as? NSMenuItem, let viewModel = context.info[ActionContext.modelKey] as? CollectionDocumentViewModel {
-            item.submenu = viewModel.addPersonMenu
-            return true
-        }
-        
-        return false
-    }
-}
-
-class PopupPersonMenuAction: PersonAction {
-    override func perform(context: ActionContext) {
-        if let event = NSApplication.shared.currentEvent, let viewModel = context.info[ActionContext.modelKey] as? CollectionDocumentViewModel {
-            var view = context.sender as? NSView
-            if view == nil {
-                view = (context.sender as? NSToolbarItem)?.view
-            }
-            
-            if let view = view {
-                NSMenu.popUpContextMenu(viewModel.addPersonMenu, with: event, for: view)
-            }
-        }
-    }
-}
-
 class NewPersonAction: Action {
-    override func perform(context: ActionContext) {
-        if let model = context.info[ActionContext.modelKey] as? CollectionDocumentViewModel {
-            let person = Person(context: model.managedObjectContext)
+    public override func perform(context: ActionContext) {
+        if let moc = context.info[ActionContext.modelKey] as? NSManagedObjectContext {
+            let person = Person(context: moc)
 
             context.forEach(key: PersonAction.observerKey) { (observer: PersonConstructionObserver) in
                 observer.created(person: person)
@@ -128,20 +105,20 @@ class NewPersonAction: Action {
 }
 
 class DeletePersonAction: Action {
-    override func perform(context: ActionContext) {
+    public override func perform(context: ActionContext) {
         if let selection = context.info[ActionContext.selectionKey] as? [Person],
-            let model = context.info[ActionContext.modelKey] as? CollectionDocumentViewModel {
-
+            let moc = context.info[ActionContext.modelKey] as? NSManagedObjectContext {
             for person in selection {
                 context.forEach(key: PersonAction.observerKey) { (observer: PersonConstructionObserver) in
                     observer.deleted(person: person)
                 }
                 
-                model.managedObjectContext.delete(person)
+                moc.delete(person)
             }
             
         }
     }
 }
+
 
 

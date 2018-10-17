@@ -170,3 +170,24 @@ extension PersonDetailViewController: NSTableViewDataSource, NSTableViewDelegate
         keyViewTimer = nil
     }
 }
+
+// MARK: Actions
+
+extension PersonDetailViewController: ActionContextProvider {
+    func provideDetailInfo(context: ActionContext) {
+        if let selection = indexView.indexArray.selectedObjects as? [Person] {
+            context.info[ActionContext.selectionKey] = selection
+            if let view = context.sender as? NSView {
+                let row = detailsView.row(for: view)
+                if row >= 0 {
+                    context.info[BookAction.bookKey] = rows[row] as? Book
+                }
+            }
+        }
+    }
+    
+    func provide(context: ActionContext) {
+        indexView.provideIndexInfo(context: context)
+        provideDetailInfo(context: context)
+    }
+}

@@ -26,7 +26,7 @@
                BlueprintIdentifier = "BookishCore::BookishCore"
                BuildableName = "BookishCore.framework"
                BlueprintName = "BookishCore"
-               ReferencedContainer = "container:.build/xcode/BookishCore.xcodeproj">
+               ReferencedContainer = "container:.build/xcode/mobile/BookishCore.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -130,7 +130,7 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "-logs Model"
+            argument = "-logs Model,Application"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument

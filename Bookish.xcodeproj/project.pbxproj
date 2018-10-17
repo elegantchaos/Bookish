@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -14,6 +14,15 @@
 		22143FD1212F076000B689DF /* CollectionRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22143FD0212F076000B689DF /* CollectionRootViewController.swift */; };
 		22143FD3212F0F2500B689DF /* AuthorsTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22143FD2212F0F2500B689DF /* AuthorsTransformer.swift */; };
 		22143FD521300F9300B689DF /* CoreDataTransformers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22143FD421300F9300B689DF /* CoreDataTransformers.swift */; };
+		221C4B28216BA7050086D56F /* Actions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 221C4B26216BA7050086D56F /* Actions.framework */; };
+		221C4B2D216BA8220086D56F /* PersonActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221C4B2C216BA8220086D56F /* PersonActions.swift */; };
+		221C4B2E216BA8220086D56F /* PersonActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221C4B2C216BA8220086D56F /* PersonActions.swift */; };
+		221C4B35216BAAAC0086D56F /* PersonUIActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221C4B2F216BA96C0086D56F /* PersonUIActions.swift */; };
+		221ED50C216B79F100594714 /* DetailSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221ED50B216B79F100594714 /* DetailSpec.swift */; };
+		221ED50D216B79F100594714 /* DetailSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221ED50B216B79F100594714 /* DetailSpec.swift */; };
+		221ED50F216B87D900594714 /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221ED50E216B87D900594714 /* Collection.swift */; };
+		221ED510216B87D900594714 /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221ED50E216B87D900594714 /* Collection.swift */; };
+		221ED512216B8EAB00594714 /* DetailRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221ED511216B8EAB00594714 /* DetailRow.swift */; };
 		221F271F21306C1300DC2DC7 /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221F271E21306C1300DC2DC7 /* Book.swift */; };
 		221F272021306C1300DC2DC7 /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221F271E21306C1300DC2DC7 /* Book.swift */; };
 		221F272221359DA200DC2DC7 /* Publisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221F272121359DA200DC2DC7 /* Publisher.swift */; };
@@ -27,7 +36,6 @@
 		22429323212ADC4400E70510 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22429321212ADC4400E70510 /* LaunchScreen.storyboard */; };
 		2242932E212ADC4500E70510 /* Bookish_iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2242932D212ADC4500E70510 /* Bookish_iOSTests.swift */; };
 		22429339212ADC4500E70510 /* Bookish_iOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22429338212ADC4500E70510 /* Bookish_iOSUITests.swift */; };
-		22429346212ADD6000E70510 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 22429345212ADD6000E70510 /* Default-568h@2x.png */; };
 		2242939A212AE0F400E70510 /* BookishModel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22429391212AE0F300E70510 /* BookishModel.framework */; };
 		224293A6212AE0F400E70510 /* BookishModel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22429391212AE0F300E70510 /* BookishModel.framework */; };
 		224293A7212AE0F400E70510 /* BookishModel.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22429391212AE0F300E70510 /* BookishModel.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -63,19 +71,12 @@
 		22462E972158F65200A4C56C /* CollectionViewActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22462E962158F65200A4C56C /* CollectionViewActions.swift */; };
 		22960328214025E80020B3EB /* PersonTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22960327214025E80020B3EB /* PersonTableCellView.swift */; };
 		2296032A214032520020B3EB /* AnnotatedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22960329214032520020B3EB /* AnnotatedTextField.swift */; };
-		2296032F2141563A0020B3EB /* PersonActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2296032E2141563A0020B3EB /* PersonActions.swift */; };
 		2296034221417E500020B3EB /* BookishCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2296034121417E500020B3EB /* BookishCore.framework */; };
-		2296035C214182860020B3EB /* Logger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2296035B214182860020B3EB /* Logger.framework */; };
 		2296035D214182C30020B3EB /* Logger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2296035B214182860020B3EB /* Logger.framework */; };
-		22960374214189550020B3EB /* Actions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22960373214189550020B3EB /* Actions.framework */; };
-		2296038321418C280020B3EB /* Actions.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22960373214189550020B3EB /* Actions.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		2296038421418C310020B3EB /* BookishCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2296034121417E500020B3EB /* BookishCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		2296038521418C390020B3EB /* Logger.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2296035B214182860020B3EB /* Logger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		22D39E4F2142BCD000282467 /* InsertBookAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D39E4E2142BCD000282467 /* InsertBookAction.swift */; };
 		22D39E512142DB2700282467 /* ViewBasedToolbarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D39E502142DB2700282467 /* ViewBasedToolbarItem.swift */; };
 		22D39E532146A84500282467 /* AnnotatedTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D39E522146A84500282467 /* AnnotatedTableCellView.swift */; };
 		22D39E552146A84E00282467 /* DateTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D39E542146A84E00282467 /* DateTableCellView.swift */; };
-		22D39E572146BA8200282467 /* RemoveBookAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D39E562146BA8200282467 /* RemoveBookAction.swift */; };
 		22D39E592146BA9C00282467 /* ShowDatePickerAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D39E582146BA9C00282467 /* ShowDatePickerAction.swift */; };
 		22D39E5B2146BE4900282467 /* DatePickerPopoverController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D39E5A2146BE4900282467 /* DatePickerPopoverController.swift */; };
 		22D39E5E2146D9F100282467 /* ValidatingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D39E5D2146D9F100282467 /* ValidatingButton.swift */; };
@@ -85,10 +86,17 @@
 		22DD42482126D6DA0070C85A /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DD42472126D6DA0070C85A /* Application.swift */; };
 		22DD424A2126D6DA0070C85A /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DD42492126D6DA0070C85A /* CollectionViewController.swift */; };
 		22DD424C2126D6DA0070C85A /* CollectionDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DD424B2126D6DA0070C85A /* CollectionDocument.swift */; };
-		22DD42512126D6DB0070C85A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22DD42502126D6DB0070C85A /* Assets.xcassets */; };
 		22DD42542126D6DB0070C85A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22DD42522126D6DB0070C85A /* Main.storyboard */; };
 		22DD42602126D6DB0070C85A /* BookishTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DD425F2126D6DB0070C85A /* BookishTests.swift */; };
 		22DD426B2126D6DB0070C85A /* BookishUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DD426A2126D6DB0070C85A /* BookishUITests.swift */; };
+		22E47CC6216E31B700E43DBF /* BookActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221C4B23216BA50C0086D56F /* BookActions.swift */; };
+		22E47CC7216E31BA00E43DBF /* BookActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221C4B23216BA50C0086D56F /* BookActions.swift */; };
+		22E47CC9216E322300E43DBF /* BookUIActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E47CC8216E322300E43DBF /* BookUIActions.swift */; };
+		22E47CE0216E5EB200E43DBF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22DD42502126D6DB0070C85A /* Assets.xcassets */; };
+		22F35487216FAC0100443C0B /* Actions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F35486216FAC0100443C0B /* Actions.framework */; };
+		22F35489216FAC0100443C0B /* ActionsKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F35488216FAC0100443C0B /* ActionsKit.framework */; };
+		22F3548B216FAC0100443C0B /* BookishCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F3548A216FAC0100443C0B /* BookishCore.framework */; };
+		22F3548D216FAC0100443C0B /* Logger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F3548C216FAC0100443C0B /* Logger.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -157,9 +165,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				2296038521418C390020B3EB /* Logger.framework in Embed Frameworks */,
 				2296038421418C310020B3EB /* BookishCore.framework in Embed Frameworks */,
-				2296038321418C280020B3EB /* Actions.framework in Embed Frameworks */,
 				224293A7212AE0F400E70510 /* BookishModel.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -186,6 +192,17 @@
 		22143FD0212F076000B689DF /* CollectionRootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionRootViewController.swift; sourceTree = "<group>"; };
 		22143FD2212F0F2500B689DF /* AuthorsTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorsTransformer.swift; sourceTree = "<group>"; };
 		22143FD421300F9300B689DF /* CoreDataTransformers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataTransformers.swift; sourceTree = "<group>"; };
+		221C4B23216BA50C0086D56F /* BookActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookActions.swift; sourceTree = "<group>"; };
+		221C4B26216BA7050086D56F /* Actions.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Actions.framework; path = "../../Library/Developer/Xcode/DerivedData/Bookish-azxjmoessbfkjjalxbqvnjmhexiy/Build/Products/mac/Debug/Actions.framework"; sourceTree = "<group>"; };
+		221C4B2C216BA8220086D56F /* PersonActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonActions.swift; sourceTree = "<group>"; };
+		221C4B2F216BA96C0086D56F /* PersonUIActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonUIActions.swift; sourceTree = "<group>"; };
+		221ED4E9216785BB00594714 /* BookishMac.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = BookishMac.xcconfig; sourceTree = "<group>"; };
+		221ED4EA216785BB00594714 /* BookishMobile.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = BookishMobile.xcconfig; sourceTree = "<group>"; };
+		221ED4EB21678BA400594714 /* BookishCoreMobile.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = BookishCoreMobile.xcconfig; sourceTree = "<group>"; };
+		221ED4EC21678BA400594714 /* BookishCoreMac.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = BookishCoreMac.xcconfig; sourceTree = "<group>"; };
+		221ED50B216B79F100594714 /* DetailSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailSpec.swift; sourceTree = "<group>"; };
+		221ED50E216B87D900594714 /* Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
+		221ED511216B8EAB00594714 /* DetailRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRow.swift; sourceTree = "<group>"; };
 		221F271E21306C1300DC2DC7 /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
 		221F272121359DA200DC2DC7 /* Publisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Publisher.swift; sourceTree = "<group>"; };
 		221F272821382C8E00DC2DC7 /* DateTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTransformer.swift; sourceTree = "<group>"; };
@@ -203,7 +220,6 @@
 		22429334212ADC4500E70510 /* BookishUITestsMobile.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BookishUITestsMobile.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		22429338212ADC4500E70510 /* Bookish_iOSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bookish_iOSUITests.swift; sourceTree = "<group>"; };
 		2242933A212ADC4500E70510 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		22429345212ADD6000E70510 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		22429391212AE0F300E70510 /* BookishModel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BookishModel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		22429399212AE0F400E70510 /* BookishModelTestsMac.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BookishModelTestsMac.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		224293B3212AE16200E70510 /* BookishModel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BookishModel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -230,17 +246,13 @@
 		22960327214025E80020B3EB /* PersonTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonTableCellView.swift; sourceTree = "<group>"; };
 		22960329214032520020B3EB /* AnnotatedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotatedTextField.swift; sourceTree = "<group>"; };
 		2296032B214132840020B3EB /* Bookish.sketch */ = {isa = PBXFileReference; lastKnownFileType = file; path = Bookish.sketch; sourceTree = "<group>"; };
-		2296032E2141563A0020B3EB /* PersonActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonActions.swift; sourceTree = "<group>"; };
 		2296033021416F960020B3EB /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		2296034121417E500020B3EB /* BookishCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BookishCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2296035B214182860020B3EB /* Logger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Logger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2296036A214187570020B3EB /* Update.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = Update.sh; sourceTree = "<group>"; };
-		22960373214189550020B3EB /* Actions.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Actions.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		22D39E4E2142BCD000282467 /* InsertBookAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsertBookAction.swift; sourceTree = "<group>"; };
 		22D39E502142DB2700282467 /* ViewBasedToolbarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewBasedToolbarItem.swift; sourceTree = "<group>"; };
 		22D39E522146A84500282467 /* AnnotatedTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotatedTableCellView.swift; sourceTree = "<group>"; };
 		22D39E542146A84E00282467 /* DateTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTableCellView.swift; sourceTree = "<group>"; };
-		22D39E562146BA8200282467 /* RemoveBookAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoveBookAction.swift; sourceTree = "<group>"; };
 		22D39E582146BA9C00282467 /* ShowDatePickerAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowDatePickerAction.swift; sourceTree = "<group>"; };
 		22D39E5A2146BE4900282467 /* DatePickerPopoverController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerPopoverController.swift; sourceTree = "<group>"; };
 		22D39E5D2146D9F100282467 /* ValidatingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatingButton.swift; sourceTree = "<group>"; };
@@ -263,6 +275,11 @@
 		22DD426A2126D6DB0070C85A /* BookishUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookishUITests.swift; sourceTree = "<group>"; };
 		22DD426C2126D6DB0070C85A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		22DD42792126DDA80070C85A /* Bookish.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Bookish.xcconfig; sourceTree = "<group>"; };
+		22E47CC8216E322300E43DBF /* BookUIActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookUIActions.swift; sourceTree = "<group>"; };
+		22F35486216FAC0100443C0B /* Actions.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Actions.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		22F35488216FAC0100443C0B /* ActionsKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ActionsKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		22F3548A216FAC0100443C0B /* BookishCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BookishCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		22F3548C216FAC0100443C0B /* Logger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Logger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -270,6 +287,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22F35487216FAC0100443C0B /* Actions.framework in Frameworks */,
+				22F35489216FAC0100443C0B /* ActionsKit.framework in Frameworks */,
+				22F3548B216FAC0100443C0B /* BookishCore.framework in Frameworks */,
+				22F3548D216FAC0100443C0B /* Logger.framework in Frameworks */,
 				224293C8212AE16300E70510 /* BookishModel.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -323,8 +344,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				22960374214189550020B3EB /* Actions.framework in Frameworks */,
-				2296035C214182860020B3EB /* Logger.framework in Frameworks */,
+				221C4B28216BA7050086D56F /* Actions.framework in Frameworks */,
 				2296034221417E500020B3EB /* BookishCore.framework in Frameworks */,
 				224293A6212AE0F400E70510 /* BookishModel.framework in Frameworks */,
 			);
@@ -347,6 +367,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		221C4B36216BABE40086D56F /* Actions */ = {
+			isa = PBXGroup;
+			children = (
+				221C4B23216BA50C0086D56F /* BookActions.swift */,
+				221C4B2C216BA8220086D56F /* PersonActions.swift */,
+			);
+			path = Actions;
+			sourceTree = "<group>";
+		};
+		221ED4EE21678BF200594714 /* Configs */ = {
+			isa = PBXGroup;
+			children = (
+				22DD42792126DDA80070C85A /* Bookish.xcconfig */,
+				221ED4E9216785BB00594714 /* BookishMac.xcconfig */,
+				221ED4EA216785BB00594714 /* BookishMobile.xcconfig */,
+				221ED4EC21678BA400594714 /* BookishCoreMac.xcconfig */,
+				221ED4EB21678BA400594714 /* BookishCoreMobile.xcconfig */,
+			);
+			path = Configs;
+			sourceTree = "<group>";
+		};
 		221F27272136EC0500DC2DC7 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
@@ -366,10 +407,10 @@
 		22429312212ADC4300E70510 /* BookishMobile */ = {
 			isa = PBXGroup;
 			children = (
-				22429345212ADD6000E70510 /* Default-568h@2x.png */,
 				22429313212ADC4300E70510 /* AppDelegate.swift */,
 				22429318212ADC4300E70510 /* MasterViewController.swift */,
 				2242931A212ADC4300E70510 /* DetailViewController.swift */,
+				221ED511216B8EAB00594714 /* DetailRow.swift */,
 				2242931C212ADC4300E70510 /* Main.storyboard */,
 				2242931F212ADC4400E70510 /* Assets.xcassets */,
 				22429321212ADC4400E70510 /* LaunchScreen.storyboard */,
@@ -428,13 +469,16 @@
 		224293B4212AE16200E70510 /* BookishModel */ = {
 			isa = PBXGroup;
 			children = (
+				221C4B36216BABE40086D56F /* Actions */,
 				224293B5212AE16200E70510 /* BookishModel.h */,
 				224293B6212AE16200E70510 /* Info.plist */,
 				224293D1212AE1E700E70510 /* BookishModel.swift */,
 				224293EE212AFAFB00E70510 /* CollectionContainer.swift */,
+				221ED50E216B87D900594714 /* Collection.swift */,
 				224293DE212AF05800E70510 /* Person.swift */,
 				221F272121359DA200DC2DC7 /* Publisher.swift */,
 				224293EB212AF0E300E70510 /* Series.swift */,
+				221ED50B216B79F100594714 /* DetailSpec.swift */,
 				224293E8212AF0D300E70510 /* Role.swift */,
 				221F271E21306C1300DC2DC7 /* Book.swift */,
 				224293E5212AF0B700E70510 /* PersonRole.swift */,
@@ -456,7 +500,11 @@
 		224293F6212B12CA00E70510 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				22960373214189550020B3EB /* Actions.framework */,
+				22F35486216FAC0100443C0B /* Actions.framework */,
+				22F35488216FAC0100443C0B /* ActionsKit.framework */,
+				22F3548A216FAC0100443C0B /* BookishCore.framework */,
+				22F3548C216FAC0100443C0B /* Logger.framework */,
+				221C4B26216BA7050086D56F /* Actions.framework */,
 				2296035B214182860020B3EB /* Logger.framework */,
 				2296034121417E500020B3EB /* BookishCore.framework */,
 			);
@@ -466,10 +514,9 @@
 		22D39E5C2146CC4400282467 /* Actions */ = {
 			isa = PBXGroup;
 			children = (
-				2296032E2141563A0020B3EB /* PersonActions.swift */,
-				22D39E4E2142BCD000282467 /* InsertBookAction.swift */,
 				22462E962158F65200A4C56C /* CollectionViewActions.swift */,
-				22D39E562146BA8200282467 /* RemoveBookAction.swift */,
+				221C4B2F216BA96C0086D56F /* PersonUIActions.swift */,
+				22E47CC8216E322300E43DBF /* BookUIActions.swift */,
 				22D39E582146BA9C00282467 /* ShowDatePickerAction.swift */,
 			);
 			path = Actions;
@@ -488,7 +535,7 @@
 		22DD423B2126D6DA0070C85A = {
 			isa = PBXGroup;
 			children = (
-				22DD42792126DDA80070C85A /* Bookish.xcconfig */,
+				221ED4EE21678BF200594714 /* Configs */,
 				2296032B214132840020B3EB /* Bookish.sketch */,
 				2296033021416F960020B3EB /* Package.swift */,
 				2296036A214187570020B3EB /* Update.sh */,
@@ -582,6 +629,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2242933B212ADC4500E70510 /* Build configuration list for PBXNativeTarget "BookishMobile" */;
 			buildPhases = (
+				226EF319217793740012A405 /* Export From Sketch */,
 				2242930D212ADC4300E70510 /* Sources */,
 				2242930E212ADC4300E70510 /* Frameworks */,
 				2242930F212ADC4300E70510 /* Resources */,
@@ -710,6 +758,7 @@
 			buildConfigurationList = 22DD426F2126D6DB0070C85A /* Build configuration list for PBXNativeTarget "BookishMac" */;
 			buildPhases = (
 				22960334214172360020B3EB /* Build SPM Dependencies */,
+				226EF3182177935B0012A405 /* Export From Sketch */,
 				22DD42402126D6DA0070C85A /* Sources */,
 				22DD42412126D6DA0070C85A /* Frameworks */,
 				22DD42422126D6DA0070C85A /* Resources */,
@@ -817,7 +866,7 @@
 				};
 			};
 			buildConfigurationList = 22DD423F2126D6DA0070C85A /* Build configuration list for PBXProject "Bookish" */;
-			compatibilityVersion = "Xcode 9.3";
+			compatibilityVersion = "Xcode 10.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -849,7 +898,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				22429323212ADC4400E70510 /* LaunchScreen.storyboard in Resources */,
-				22429346212ADD6000E70510 /* Default-568h@2x.png in Resources */,
 				22429320212ADC4400E70510 /* Assets.xcassets in Resources */,
 				2242931E212ADC4300E70510 /* Main.storyboard in Resources */,
 			);
@@ -901,7 +949,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				22DD42512126D6DB0070C85A /* Assets.xcassets in Resources */,
+				22E47CE0216E5EB200E43DBF /* Assets.xcassets in Resources */,
 				22DD42542126D6DB0070C85A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -923,6 +971,48 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		226EF3182177935B0012A405 /* Export From Sketch */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Bookish.sketch",
+			);
+			name = "Export From Sketch";
+			outputFileListPaths = (
+				"$(SRCROOT)/Sources/BookishMac/Assets.xcfilelist",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# build & run sketchx to export the assets\nswift run sketchx Bookish.sketch Mac=Assets Sources/BookishMac \n\n# update list of all assets\nfind Sources/BookishMac/Assets.xcassets/ > Sources/BookishMac/Assets.xcfilelist\n";
+			showEnvVarsInLog = 0;
+		};
+		226EF319217793740012A405 /* Export From Sketch */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Bookish.sketch",
+			);
+			name = "Export From Sketch";
+			outputFileListPaths = (
+				"$(SRCROOT)/Sources/BookishMobile/Assets.xcfilelist",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# build & run sketchx to export the assets\nswift run sketchx Bookish.sketch Mobile=Assets Sources/BookishMobile \n\n# update list of all assets\nfind Sources/BookishMobile/Assets.xcassets/ > Sources/BookishMobile/Assets.xcfilelist\n";
+			showEnvVarsInLog = 0;
+		};
 		22960334214172360020B3EB /* Build SPM Dependencies */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -939,7 +1029,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [[ ! -e \".build/xcode\" ]]\nthen\n    swift package generate-xcodeproj --output \".build/xcode/BookishCore.xcproj\"\nfi\n";
+			shellScript = "if [[ ! -e \".build/xcode\" ]]\nthen\n    ./Update.sh\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -950,6 +1040,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				22429314212ADC4300E70510 /* AppDelegate.swift in Sources */,
+				221ED512216B8EAB00594714 /* DetailRow.swift in Sources */,
 				22429319212ADC4300E70510 /* MasterViewController.swift in Sources */,
 				2242931B212ADC4300E70510 /* DetailViewController.swift in Sources */,
 			);
@@ -976,14 +1067,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				224293EF212AFAFB00E70510 /* CollectionContainer.swift in Sources */,
+				221ED50C216B79F100594714 /* DetailSpec.swift in Sources */,
 				224293E1212AF07C00E70510 /* Group.swift in Sources */,
+				221ED50F216B87D900594714 /* Collection.swift in Sources */,
 				224293DC212AF00400E70510 /* Collection.xcdatamodeld in Sources */,
 				224293EC212AF0E300E70510 /* Series.swift in Sources */,
 				224293E6212AF0B700E70510 /* PersonRole.swift in Sources */,
 				224293D2212AE1E700E70510 /* BookishModel.swift in Sources */,
+				221C4B2D216BA8220086D56F /* PersonActions.swift in Sources */,
 				224293E9212AF0D300E70510 /* Role.swift in Sources */,
 				221F271F21306C1300DC2DC7 /* Book.swift in Sources */,
 				221F272221359DA200DC2DC7 /* Publisher.swift in Sources */,
+				22E47CC6216E31B700E43DBF /* BookActions.swift in Sources */,
 				224293E3212AF09D00E70510 /* Person.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1001,14 +1096,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				224293F0212AFAFB00E70510 /* CollectionContainer.swift in Sources */,
+				221ED50D216B79F100594714 /* DetailSpec.swift in Sources */,
 				224293E2212AF07C00E70510 /* Group.swift in Sources */,
+				221ED510216B87D900594714 /* Collection.swift in Sources */,
 				224293DD212AF00500E70510 /* Collection.xcdatamodeld in Sources */,
 				224293ED212AF0E300E70510 /* Series.swift in Sources */,
 				221F272321359DA200DC2DC7 /* Publisher.swift in Sources */,
 				224293E7212AF0B700E70510 /* PersonRole.swift in Sources */,
+				221C4B2E216BA8220086D56F /* PersonActions.swift in Sources */,
 				221F272021306C1300DC2DC7 /* Book.swift in Sources */,
 				224293D3212AE1E700E70510 /* BookishModel.swift in Sources */,
 				224293EA212AF0D300E70510 /* Role.swift in Sources */,
+				22E47CC7216E31BA00E43DBF /* BookActions.swift in Sources */,
 				224293E4212AF09E00E70510 /* Person.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1029,24 +1128,22 @@
 				22DD424A2126D6DA0070C85A /* CollectionViewController.swift in Sources */,
 				22429401212C32BF00E70510 /* CollectionWindowController.swift in Sources */,
 				22DD42482126D6DA0070C85A /* Application.swift in Sources */,
-				22D39E572146BA8200282467 /* RemoveBookAction.swift in Sources */,
 				22429406212D945C00E70510 /* BookDetailViewController.swift in Sources */,
 				22143FD3212F0F2500B689DF /* AuthorsTransformer.swift in Sources */,
 				22143FCF212EF9CC00B689DF /* DocumentWindowController.swift in Sources */,
 				22462E952158EDEA00A4C56C /* CollectionDetailViewController.swift in Sources */,
+				221C4B35216BAAAC0086D56F /* PersonUIActions.swift in Sources */,
 				22DD424C2126D6DA0070C85A /* CollectionDocument.swift in Sources */,
 				22143FCD212EE79100B689DF /* CollectionDocumentViewModel.swift in Sources */,
 				22960328214025E80020B3EB /* PersonTableCellView.swift in Sources */,
 				22D39E622147E0C100282467 /* CoverImageTransformer.swift in Sources */,
 				22429408212D958400E70510 /* CollectionSplitViewController.swift in Sources */,
 				22462E972158F65200A4C56C /* CollectionViewActions.swift in Sources */,
-				2296032F2141563A0020B3EB /* PersonActions.swift in Sources */,
 				22D39E5B2146BE4900282467 /* DatePickerPopoverController.swift in Sources */,
 				22D39E532146A84500282467 /* AnnotatedTableCellView.swift in Sources */,
 				22D39E602147D4A100282467 /* TestAction.swift in Sources */,
 				22462E932158ED5000A4C56C /* CollectionIndexViewController.swift in Sources */,
 				221F272921382C8E00DC2DC7 /* DateTransformer.swift in Sources */,
-				22D39E4F2142BCD000282467 /* InsertBookAction.swift in Sources */,
 				22143FD521300F9300B689DF /* CoreDataTransformers.swift in Sources */,
 				220CDA9F214A86A80064CC91 /* PersonIndexViewController.swift in Sources */,
 				22D39E552146A84E00282467 /* DateTableCellView.swift in Sources */,
@@ -1056,6 +1153,7 @@
 				22429403212C3C7400E70510 /* ViewExtensions.swift in Sources */,
 				224293FB212C1D7500E70510 /* BookIndexViewController.swift in Sources */,
 				22D39E592146BA9C00282467 /* ShowDatePickerAction.swift in Sources */,
+				22E47CC9216E322300E43DBF /* BookUIActions.swift in Sources */,
 				22D39E512142DB2700282467 /* ViewBasedToolbarItem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1152,9 +1250,11 @@
 /* Begin XCBuildConfiguration section */
 		2242933C212ADC4500E70510 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 221ED4EA216785BB00594714 /* BookishMobile.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2H48644JM2;
@@ -1174,9 +1274,11 @@
 		};
 		2242933D212ADC4500E70510 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 221ED4EA216785BB00594714 /* BookishMobile.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2H48644JM2;
@@ -1197,6 +1299,7 @@
 		};
 		2242933F212ADC4500E70510 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 221ED4EA216785BB00594714 /* BookishMobile.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1221,6 +1324,7 @@
 		};
 		22429340212ADC4500E70510 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 221ED4EA216785BB00594714 /* BookishMobile.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1246,6 +1350,7 @@
 		};
 		22429342212ADC4500E70510 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 221ED4EA216785BB00594714 /* BookishMobile.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1269,6 +1374,7 @@
 		};
 		22429343212ADC4500E70510 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 221ED4EA216785BB00594714 /* BookishMobile.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1293,6 +1399,7 @@
 		};
 		224293A9212AE0F400E70510 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 221ED4E9216785BB00594714 /* BookishMac.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -1325,6 +1432,7 @@
 		};
 		224293AA212AE0F400E70510 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 221ED4E9216785BB00594714 /* BookishMac.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -1356,6 +1464,7 @@
 		};
 		224293AC212AE0F400E70510 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 221ED4E9216785BB00594714 /* BookishMac.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -1375,6 +1484,7 @@
 		};
 		224293AD212AE0F400E70510 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 221ED4E9216785BB00594714 /* BookishMac.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -1394,6 +1504,7 @@
 		};
 		224293CB212AE16300E70510 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 221ED4EA216785BB00594714 /* BookishMobile.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1426,6 +1537,7 @@
 		};
 		224293CC212AE16300E70510 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 221ED4EA216785BB00594714 /* BookishMobile.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1458,6 +1570,7 @@
 		};
 		224293CF212AE16300E70510 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 221ED4EA216785BB00594714 /* BookishMobile.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1480,6 +1593,7 @@
 		};
 		224293D0212AE16300E70510 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 221ED4EA216785BB00594714 /* BookishMobile.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1503,7 +1617,6 @@
 		};
 		22DD426D2126D6DB0070C85A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 22DD42792126DDA80070C85A /* Bookish.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1557,7 +1670,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = macosx;
+				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG debug";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -1565,7 +1678,6 @@
 		};
 		22DD426E2126D6DB0070C85A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 22DD42792126DDA80070C85A /* Bookish.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1612,7 +1724,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				SDKROOT = macosx;
+				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 			};
@@ -1620,6 +1732,7 @@
 		};
 		22DD42702126D6DB0070C85A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 221ED4E9216785BB00594714 /* BookishMac.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1640,6 +1753,7 @@
 		};
 		22DD42712126D6DB0070C85A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 221ED4E9216785BB00594714 /* BookishMac.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1660,6 +1774,7 @@
 		};
 		22DD42732126D6DB0070C85A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 221ED4E9216785BB00594714 /* BookishMac.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1681,6 +1796,7 @@
 		};
 		22DD42742126D6DB0070C85A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 221ED4E9216785BB00594714 /* BookishMac.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1702,6 +1818,7 @@
 		};
 		22DD42762126D6DB0070C85A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 221ED4E9216785BB00594714 /* BookishMac.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -1722,6 +1839,7 @@
 		};
 		22DD42772126D6DB0070C85A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 221ED4E9216785BB00594714 /* BookishMac.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;

@@ -18,3 +18,8 @@ public class BookishCore {
     }
 }
 
+public class AnotherTestAction: Action {
+    public override func validate(context: ActionContext) -> Bool {
+        return true
+    }
+}

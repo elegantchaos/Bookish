@@ -22,7 +22,9 @@ class CollectionWindowController: NSWindowController, DocumentWindowController, 
     
     func provide(context: ActionContext) {
         if let model = viewModel {
-            context.info[ActionContext.modelKey] = model
+            context.info[ActionContext.modelKey] = model.managedObjectContext
+            context.info[ActionContext.viewModelKey] = model
+            context.info[ActionContext.windowKey] = self
         }
     }
     
@@ -49,6 +51,18 @@ class CollectionWindowController: NSWindowController, DocumentWindowController, 
                     button.isEnabled = actionManager.validate(identifier: identifier, item: button)
                 }
             }
+        }
+    }
+    
+    @objc func reveal(person: Person) {
+        if let model = viewModel {
+            model.mode = .people
+        }
+    }
+    
+    @objc func reveal(book: Book) {
+        if let model = viewModel {
+            model.mode = .books
         }
     }
 }

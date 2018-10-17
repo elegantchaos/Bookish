@@ -113,22 +113,33 @@ class BookDetailViewController: CollectionViewController {
 // MARK: Actions
 
 extension BookDetailViewController: ActionContextProvider, PersonChangeObserver {
+    func detailRow(for context: ActionContext) -> Int {
+        var row = -1
+        if let view = context.sender as? NSView {
+            row = detailsView.row(for: view)
+        }
+
+        if row < 0, let view = view.window?.firstResponder as? NSView {
+            row = detailsView.row(for: view)
+        }
+
+        return row
+    }
+    
     func provide(context: ActionContext) {
         if let selection = indexView.indexArray.selectedObjects as? [Book] {
             context.info[ActionContext.selectionKey] = selection
             context.append(key: PersonAction.observerKey, value: self)
-            if let view = view.window?.firstResponder as? NSView {
-                let row = detailsView.row(for: view)
-                if row >= 0 {
-                    if (row < people.count) {
-                        context.info[PersonAction.roleKey] = people[row]
-                    } else {
-                        if let valueView = detailsView.view(atColumn: 1, row: row, makeIfNecessary: false) as? BindableCellView {
-                            let rowInfo = rows[row - people.count]
-                            let valueObject = valueView.objectValue
-                            context.info["object"] = valueObject
-                            context.info["binding"] = rowInfo.binding
-                        }
+            let row = detailRow(for: context)
+            if row >= 0 {
+                if (row < people.count) {
+                    context.info[PersonAction.roleKey] = people[row]
+                } else {
+                    if let valueView = detailsView.view(atColumn: 1, row: row, makeIfNecessary: false) as? BindableCellView {
+                        let rowInfo = rows[row - people.count]
+                        let valueObject = valueView.objectValue
+                        context.info["object"] = valueObject
+                        context.info["binding"] = rowInfo.binding
                     }
                 }
             }

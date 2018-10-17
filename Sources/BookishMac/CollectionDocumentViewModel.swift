@@ -5,7 +5,7 @@
 
 import AppKit
 import CoreData
-import Actions
+import ActionsKit
 import BookishModel
 
 @objc class CollectionDocumentViewModel: NSObject, DocumentViewModel {
@@ -22,10 +22,11 @@ import BookishModel
     @objc var selectedIndexes: NSMutableIndexSet?
     @objc var selectedPeople: NSMutableIndexSet?
     
-    var mode: Mode = .books
-    @objc var modeIndex: Int {
-        get { return mode.rawValue }
-        set (value) { mode = Mode(rawValue: value)! }
+    @objc dynamic var modeIndex: Int = 0
+    
+    var mode: Mode {
+        get { return Mode(rawValue: modeIndex)! }
+        set (value) { modeIndex = value.rawValue }
     }
     
     init(document: CollectionDocument) {
@@ -34,7 +35,7 @@ import BookishModel
     }
     
     func addPersonItem(kind: String, shortcut: String) -> NSMenuItem {
-        let item = NSMenuItem(title: kind, action: ActionManager.performActionSelector, keyEquivalent: shortcut)
+        let item = NSMenuItem(title: kind, action: ActionManagerMac.Responder.performActionSelector, keyEquivalent: shortcut)
         item.identifier = NSUserInterfaceItemIdentifier(rawValue: "menu.AddPerson.\(kind)")
         item.keyEquivalentModifierMask = [.command, .option]
         return item
