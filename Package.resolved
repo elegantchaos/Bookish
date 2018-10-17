@@ -1,7 +1,24 @@
 {
   "object": {
     "pins": [
-
+      {
+        "package": "Runner",
+        "repositoryURL": "https://github.com/elegantchaos/Runner",
+        "state": {
+          "branch": null,
+          "revision": "1a257b260150b7a7a9771f636a6a373682ad54e5",
+          "version": "1.0.1"
+        }
+      },
+      {
+        "package": "SketchX",
+        "repositoryURL": "git@github.com:elegantchaos/SketchX",
+        "state": {
+          "branch": null,
+          "revision": "ba2f0b999ca6089cd5f725339a6ed799e0fbb410",
+          "version": "1.0.1"
+        }
+      }
     ]
   },
   "version": 1
