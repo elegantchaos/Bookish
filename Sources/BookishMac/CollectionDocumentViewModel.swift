@@ -5,7 +5,7 @@
 
 import AppKit
 import CoreData
-import Actions
+import ActionsKit
 import BookishModel
 
 @objc class CollectionDocumentViewModel: NSObject, DocumentViewModel {

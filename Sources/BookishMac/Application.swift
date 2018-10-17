@@ -6,7 +6,7 @@
 import Cocoa
 import BookishCore
 import BookishModel
-import Actions
+import ActionsKit
 import Logger
 
 let applicationChannel = Logger("Application")
@@ -45,7 +45,7 @@ class Application: NSObject, NSApplicationDelegate {
             RemoveItemAction(identifier: "RemoveItem")
             ])
         
-        actionManager.install()
+        actionManager.installResponder()
 
         BookishCore().test()
         
