@@ -629,6 +629,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2242933B212ADC4500E70510 /* Build configuration list for PBXNativeTarget "BookishMobile" */;
 			buildPhases = (
+				226EF319217793740012A405 /* Export From Sketch */,
 				2242930D212ADC4300E70510 /* Sources */,
 				2242930E212ADC4300E70510 /* Frameworks */,
 				2242930F212ADC4300E70510 /* Resources */,
@@ -720,7 +721,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 224293CA212AE16300E70510 /* Build configuration list for PBXNativeTarget "BookishModelMobile" */;
 			buildPhases = (
-				226EF31621776B2B0012A405 /* Export Assets From Sketch */,
 				224293AE212AE16200E70510 /* Headers */,
 				224293AF212AE16200E70510 /* Sources */,
 				224293B0212AE16200E70510 /* Frameworks */,
@@ -758,6 +758,7 @@
 			buildConfigurationList = 22DD426F2126D6DB0070C85A /* Build configuration list for PBXNativeTarget "BookishMac" */;
 			buildPhases = (
 				22960334214172360020B3EB /* Build SPM Dependencies */,
+				226EF3182177935B0012A405 /* Export From Sketch */,
 				22DD42402126D6DA0070C85A /* Sources */,
 				22DD42412126D6DA0070C85A /* Frameworks */,
 				22DD42422126D6DA0070C85A /* Resources */,
@@ -970,7 +971,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		226EF31621776B2B0012A405 /* Export Assets From Sketch */ = {
+		226EF3182177935B0012A405 /* Export From Sketch */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -980,7 +981,28 @@
 			inputPaths = (
 				"$(SRCROOT)/Bookish.sketch",
 			);
-			name = "Export Assets From Sketch";
+			name = "Export From Sketch";
+			outputFileListPaths = (
+				"$(SRCROOT)/Sources/BookishMac/Assets.xcfilelist",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# build & run sketchx to export the assets\nswift run sketchx Bookish.sketch Mac=Assets Sources/BookishMac \n\n# update list of all assets\nfind Sources/BookishMac/Assets.xcassets/ > Sources/BookishMac/Assets.xcfilelist\n";
+			showEnvVarsInLog = 0;
+		};
+		226EF319217793740012A405 /* Export From Sketch */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Bookish.sketch",
+			);
+			name = "Export From Sketch";
 			outputFileListPaths = (
 				"$(SRCROOT)/Sources/BookishMobile/Assets.xcfilelist",
 			);
@@ -1007,7 +1029,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [[ ! -e \".build/xcode\" ]]\nthen\n    swift package generate-xcodeproj --output \".build/xcode/BookishCore.xcproj\"\nfi\n";
+			shellScript = "if [[ ! -e \".build/xcode\" ]]\nthen\n    ./Update.sh\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
