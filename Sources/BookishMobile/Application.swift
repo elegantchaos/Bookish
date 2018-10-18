@@ -13,7 +13,7 @@ import ActionsKit
 let applicationChannel = Logger("Application")
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDelegate, ActionContextProvider {
+class Application: UIResponder, UIApplicationDelegate, UISplitViewControllerDelegate, ActionContextProvider {
 
     var window: UIWindow?
     let actionManager = ActionManagerMobile()
