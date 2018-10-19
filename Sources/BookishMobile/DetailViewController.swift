@@ -7,10 +7,36 @@ import UIKit
 import BookishModel
 import Actions
 
+class DetailDataSource {
+    let details = DetailSpec.standardDetails
+    var people = [PersonRole]()
+    
+    var rows: Int {
+        return details.count + people.count
+    }
+    
+    func identifier(for row: Int) -> String {
+        if row < people.count {
+            return "person"
+        } else {
+            return "detail"
+        }
+    }
+    
+    func details(for row: Int) -> DetailSpec {
+        return details[row - people.count]
+    }
+    
+    func person(for row: Int) -> PersonRole {
+        return people[row]
+    }
+    
+}
 class DetailViewController: UIViewController {
     
-   let rows = DetailSpec.standardDetails
-
+    let source = DetailDataSource()
+    let sorting = [NSSortDescriptor(key: "role.name", ascending: true)]
+    
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var subtitleLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
@@ -26,6 +52,9 @@ class DetailViewController: UIViewController {
                 imageView.image = UIImage(named: "CoverPlaceholder") // TODO: cache this
             }
             self.title = book.name
+            if let roles = book.personRoles, let sorted = roles.sortedArray(using: sorting) as? [PersonRole] {
+                source.people = sorted
+            }
         }
     }
 
@@ -50,18 +79,30 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return rows.count
+        return source.rows
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCell(withIdentifier: "detail") as? DetailRow
-        if cell == nil {
-            cell = DetailRow(style: .default, reuseIdentifier: "detail")
-        }
+        let identifier = source.identifier(for: indexPath.row)
+        var cell = tableView.dequeueReusableCell(withIdentifier: identifier) as? DetailRow
         
-        let rowInfo = rows[indexPath.row]
-        cell?.label.text = rowInfo.label
-        cell?.detail.text = representedObject?.value(forKey: rowInfo.binding) as? String
+        if identifier == "detail" {
+            if cell == nil {
+                cell = DetailRow(style: .default, reuseIdentifier: identifier)
+            }
+            
+            let rowInfo = source.details(for: indexPath.row)
+            cell?.label.text = rowInfo.label
+            cell?.detail.text = representedObject?.value(forKey: rowInfo.binding) as? String
+        } else {
+            if cell == nil {
+                cell = DetailRow(style: .default, reuseIdentifier: identifier)
+            }
+            
+            let personRole = source.person(for: indexPath.row)
+            cell?.label.text = personRole.role?.name
+            cell?.detail.text = personRole.person?.name
+        }
         return cell!
     }
 }
