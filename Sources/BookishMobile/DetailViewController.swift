@@ -7,13 +7,44 @@ import UIKit
 import BookishModel
 import Actions
 
-class DetailViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, ActionContextProvider {
-    func provide(context: ActionContext) {
-        print("detail")
-    }
+class DetailViewController: UIViewController {
     
    let rows = DetailSpec.standardDetails
-    
+
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var subtitleLabel: UILabel!
+    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var detailView: UITableView!
+
+    func configureView() {
+        if let book = representedObject, titleLabel != nil {
+            titleLabel.text = book.name
+            subtitleLabel.text = book.subtitle
+            if let imageData = book.image {
+                imageView.image = UIImage(data: imageData)
+            } else {
+                imageView.image = UIImage(named: "CoverPlaceholder") // TODO: cache this
+            }
+            self.title = book.name
+        }
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        configureView()
+    }
+
+    var representedObject: Book? {
+        didSet {
+            configureView()
+        }
+    }
+
+}
+
+// MARK: Table Support
+
+extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -27,39 +58,18 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         if cell == nil {
             cell = DetailRow(style: .default, reuseIdentifier: "detail")
         }
-
+        
         let rowInfo = rows[indexPath.row]
         cell?.label.text = rowInfo.label
-        cell?.detail.text = detailItem?.value(forKey: rowInfo.binding) as? String
+        cell?.detail.text = representedObject?.value(forKey: rowInfo.binding) as? String
         return cell!
     }
-    
-
-    @IBOutlet weak var detailDescriptionLabel: UILabel!
-    @IBOutlet weak var detailView: UITableView!
-
-    func configureView() {
-        // Update the user interface for the detail item.
-        if let detail = detailItem {
-            if let label = detailDescriptionLabel {
-                label.text = detail.name
-            }
-            self.title = detail.name
-        }
-    }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        configureView()
-    }
-
-    var detailItem: Book? {
-        didSet {
-            // Update the view.
-            configureView()
-        }
-    }
-
 }
 
+// MARK: Action Support
+
+extension DetailViewController: ActionContextProvider {
+    func provide(context: ActionContext) {
+        print("detail")
+    }
+}

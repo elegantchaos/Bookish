@@ -25,9 +25,9 @@ public final class DetailSpec {
     
     public class var standardDetails: [DetailSpec] {
         return [
+            DetailSpec(binding: "notes"),
             DetailSpec(binding: "format"),
             DetailSpec(binding: "isbn"),
-            DetailSpec(binding: "notes"),
             DetailSpec(binding: "published", kind: .date),
             DetailSpec(binding: "added", kind: .date, editable: false),
             DetailSpec(binding: "modified", kind: .date, editable: false)

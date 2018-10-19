@@ -30,6 +30,7 @@ public class Collection {
         for n in 1...3 {
             let book = Book(context: context)
             book.name = "Book \(n)"
+            book.subtitle = "Slightly longer subtitle \(n)"
             book.notes = "This is an example book."
             book.published = formatter.date(from: "12/11/69")
             entry.addToBooks(book)
