@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14315.12.1" systemVersion="17G2208" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14315.18" systemVersion="18A391" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Book" representedClassName=".Book" syncable="YES" codeGenerationType="category">
         <attribute name="added" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="dewey" optional="YES" attributeType="String" syncable="YES"/>
@@ -24,6 +24,7 @@
         <relationship name="members" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Person" inverseName="groups" inverseEntity="Person" syncable="YES"/>
     </entity>
     <entity name="Person" representedClassName=".Person" syncable="YES" codeGenerationType="category">
+        <attribute name="image" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="name" attributeType="String" defaultValueString="Untitled Person" syncable="YES"/>
         <attribute name="notes" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="groups" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Group" inverseName="members" inverseEntity="Group" syncable="YES"/>
@@ -50,7 +51,7 @@
     <elements>
         <element name="Book" positionX="-889.52734375" positionY="79.94140625" width="128" height="315"/>
         <element name="Group" positionX="-334.8046875" positionY="457.80859375" width="128" height="60"/>
-        <element name="Person" positionX="-341.4375" positionY="286.09375" width="128" height="105"/>
+        <element name="Person" positionX="-341.4375" positionY="286.09375" width="128" height="120"/>
         <element name="PersonRole" positionX="-657" positionY="261" width="128" height="90"/>
         <element name="Publisher" positionX="-675" positionY="243" width="128" height="90"/>
         <element name="Role" positionX="-666" positionY="252" width="128" height="75"/>
