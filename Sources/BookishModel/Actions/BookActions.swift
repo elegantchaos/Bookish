@@ -6,6 +6,11 @@
 import Actions
 import CoreData
 
+public protocol BookChangeObserver: ActionObserver {
+    func added(books: [Book])
+    func removed(books: [Book])
+}
+
 open class BookAction: Action {
     public static let bookKey = "book"
 
@@ -24,7 +29,10 @@ public class InsertBookAction: BookAction {
     
     public override func perform(context: ActionContext) {
         if let model = context.info[ActionContext.modelKey] as? NSManagedObjectContext {
-            let _ = Book(context: model)
+            let book = Book(context: model)
+            context.forObservers { (observer: BookChangeObserver) in
+                observer.added(books: [book])
+            }
         }
     }
 }
@@ -42,6 +50,9 @@ public class RemoveBookAction: BookAction {
         if let selection = context.info[ActionContext.selectionKey] as? [Book] {
             for book in selection {
                 book.managedObjectContext?.delete(book)
+            }
+            context.forObservers { (observer: BookChangeObserver) in
+                observer.removed(books: selection)
             }
         }
     }

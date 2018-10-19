@@ -44,6 +44,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
             if let label = detailDescriptionLabel {
                 label.text = detail.name
             }
+            self.title = detail.name
         }
     }
 

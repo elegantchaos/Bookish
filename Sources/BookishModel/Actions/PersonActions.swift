@@ -6,18 +6,17 @@
 import CoreData
 import Actions
 
-public protocol PersonChangeObserver {
+public protocol PersonChangeObserver: ActionObserver {
     func added(role: PersonRole)
     func removed(role: PersonRole)
 }
 
-public protocol PersonConstructionObserver {
+public protocol PersonConstructionObserver: ActionObserver {
     func created(person: Person)
     func deleted(person: Person)
 }
 
 open class PersonAction: Action {
-    public static let observerKey = "personObserver"
     public static let roleKey = "personRole"
 
     open override func validate(context: ActionContext) -> Bool {
@@ -59,7 +58,7 @@ class AddPersonAction: PersonAction {
                     book.addToPersonRoles(role)
                 }
                 
-                context.forEach(key: PersonAction.observerKey) { (observer: PersonChangeObserver) in
+                context.forObservers { (observer: PersonChangeObserver) in
                     observer.added(role: role)
                 }
             }
@@ -80,7 +79,7 @@ class RemovePersonAction: PersonAction {
                 book.removeFromPersonRoles(role)
             }
             
-            context.forEach(key: PersonAction.observerKey) { (observer: PersonChangeObserver) in
+            context.forObservers { (observer: PersonChangeObserver) in
                 observer.removed(role: role)
             }
             
@@ -97,7 +96,7 @@ class NewPersonAction: Action {
         if let moc = context.info[ActionContext.modelKey] as? NSManagedObjectContext {
             let person = Person(context: moc)
 
-            context.forEach(key: PersonAction.observerKey) { (observer: PersonConstructionObserver) in
+            context.forObservers { (observer: PersonConstructionObserver) in
                 observer.created(person: person)
             }
         }
@@ -109,7 +108,7 @@ class DeletePersonAction: Action {
         if let selection = context.info[ActionContext.selectionKey] as? [Person],
             let moc = context.info[ActionContext.modelKey] as? NSManagedObjectContext {
             for person in selection {
-                context.forEach(key: PersonAction.observerKey) { (observer: PersonConstructionObserver) in
+                context.forObservers { (observer: PersonConstructionObserver) in
                     observer.deleted(person: person)
                 }
                 
