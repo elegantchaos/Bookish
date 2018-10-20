@@ -32,7 +32,7 @@ class PersonIndexViewController: CollectionViewController {
 
 extension PersonIndexViewController: ActionContextProvider, PersonConstructionObserver {
     func provideIndexInfo(context: ActionContext) {
-        context.append(key: PersonAction.observerKey, value: self)
+        context.addObserver(self)
     }
 
     func provide(context: ActionContext) {

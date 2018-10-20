@@ -7,35 +7,12 @@ import UIKit
 import BookishModel
 import Actions
 
-class DetailDataSource {
-    let details = DetailSpec.standardDetails
-    var people = [PersonRole]()
-    
-    var rows: Int {
-        return details.count + people.count
-    }
-    
-    func identifier(for row: Int) -> String {
-        if row < people.count {
-            return "person"
-        } else {
-            return "detail"
-        }
-    }
-    
-    func details(for row: Int) -> DetailSpec {
-        return details[row - people.count]
-    }
-    
-    func person(for row: Int) -> PersonRole {
-        return people[row]
-    }
-    
-}
+
 class DetailViewController: UIViewController {
     
     let source = DetailDataSource()
     let sorting = [NSSortDescriptor(key: "role.name", ascending: true)]
+    lazy var coverPlaceholder = UIImage(named: "CoverPlaceholder")
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var subtitleLabel: UILabel!
@@ -49,7 +26,7 @@ class DetailViewController: UIViewController {
             if let imageData = book.image {
                 imageView.image = UIImage(data: imageData)
             } else {
-                imageView.image = UIImage(named: "CoverPlaceholder") // TODO: cache this
+                imageView.image = coverPlaceholder
             }
             self.title = book.name
             if let roles = book.personRoles, let sorted = roles.sortedArray(using: sorting) as? [PersonRole] {

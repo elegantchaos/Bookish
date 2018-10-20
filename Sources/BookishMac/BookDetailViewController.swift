@@ -129,7 +129,7 @@ extension BookDetailViewController: ActionContextProvider, PersonChangeObserver 
     func provide(context: ActionContext) {
         if let selection = indexView.indexArray.selectedObjects as? [Book] {
             context.info[ActionContext.selectionKey] = selection
-            context.append(key: PersonAction.observerKey, value: self)
+            context.addObserver(self)
             let row = detailRow(for: context)
             if row >= 0 {
                 if (row < people.count) {

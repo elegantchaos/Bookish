@@ -26,7 +26,7 @@
                BlueprintIdentifier = "BookishCore::BookishCore"
                BuildableName = "BookishCore.framework"
                BlueprintName = "BookishCore"
-               ReferencedContainer = "container:.build/xcode/mobile/BookishCore.xcodeproj">
+               ReferencedContainer = "container:.build/xcode/mac/BookishCore.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
