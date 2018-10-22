@@ -8,24 +8,6 @@ import Actions
 import BookishModel
 import Dispatch
 
-enum RowType {
-    case text
-    case date
-}
-
-struct RowSpecification {
-    let binding: String
-    let label: String
-    let type: RowType
-    let editable: Bool
-    
-    init(binding: String, label: String? = nil, type: RowType = .text, editable: Bool = true) {
-        self.binding = binding
-        self.label = label ?? binding
-        self.type = type
-        self.editable = editable
-    }
-}
 class BookDetailViewController: CollectionViewController {
     @IBOutlet weak var indexView: BookIndexViewController!
     @IBOutlet weak var detailsView: NSTableView!
@@ -33,19 +15,10 @@ class BookDetailViewController: CollectionViewController {
     @IBOutlet weak var titleView: NSTextField!
     @IBOutlet weak var subtitleView: NSTextField!
     
-    var people = [PersonRole]()
+    var source = DetailDataSource()
     var indexObserver: NSKeyValueObservation?
     var availableRows = IndexSet()
     var keyViewTimer: Timer? = nil
-    
-    let rows = [
-        RowSpecification(binding: "format"),
-        RowSpecification(binding: "isbn"),
-        RowSpecification(binding: "notes"),
-        RowSpecification(binding: "published", type: .date),
-        RowSpecification(binding: "added", type: .date, editable: false),
-        RowSpecification(binding: "modified", type: .date, editable: false)
-    ]
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -104,7 +77,7 @@ class BookDetailViewController: CollectionViewController {
     
     func updatePeople() {
         let (_, common) = peopleInSelection()
-        people = common.sorted(by: { ($0.person?.name ?? "") < ($1.person?.name ?? "") })
+        source.people = common.sorted(by: { ($0.person?.name ?? "") < ($1.person?.name ?? "") })
         detailsView.reloadData()
     }
 }
@@ -132,14 +105,15 @@ extension BookDetailViewController: ActionContextProvider, PersonChangeObserver 
             context.addObserver(self)
             let row = detailRow(for: context)
             if row >= 0 {
-                if (row < people.count) {
-                    context.info[PersonAction.roleKey] = people[row]
+                let info = source.info(for: row)
+                if (info.isPerson) {
+                    context.info[PersonAction.roleKey] = source.person(for: row)
                 } else {
                     if let valueView = detailsView.view(atColumn: 1, row: row, makeIfNecessary: false) as? BindableCellView {
-                        let rowInfo = rows[row - people.count]
+                        let detail = source.details(for: row)
                         let valueObject = valueView.objectValue
                         context.info["object"] = valueObject
-                        context.info["binding"] = rowInfo.binding
+                        context.info["binding"] = detail.binding
                     }
                 }
             }
@@ -147,14 +121,12 @@ extension BookDetailViewController: ActionContextProvider, PersonChangeObserver 
     }
     
     func added(role: PersonRole) {
-        let count = people.count
-        people.append(role)
-        detailsView.insertRows(at: IndexSet(integer: count), withAnimation: .slideDown)
+        let index = source.insert(personRole: role)
+        detailsView.insertRows(at: IndexSet(integer: index), withAnimation: .slideDown)
     }
     
     func removed(role: PersonRole) {
-        if let row = people.firstIndex(of: role) {
-            people.remove(at: row)
+        if let row = source.remove(personRole: role) {
             detailsView.removeRows(at: IndexSet(integer: row), withAnimation: .slideUp)
         }
     }
@@ -177,64 +149,55 @@ extension NSTableCellView: BindableCellView {
 extension BookDetailViewController: NSTableViewDataSource, NSTableViewDelegate {
     
     static let HeadingColumnID = NSUserInterfaceItemIdentifier(rawValue: "heading")
-    static let ValueColumnID = NSUserInterfaceItemIdentifier(rawValue: "value")
-    static let PersonColumnID = NSUserInterfaceItemIdentifier(rawValue: "person")
-    static let DateColumnID = NSUserInterfaceItemIdentifier(rawValue: "date")
-        
-    func rowInfo(for tableView: NSTableView, columnID: NSUserInterfaceItemIdentifier, row: Int) -> (NSView?, Bool, Bool, Int) {
-        var viewID = columnID
-        let isPerson = row < people.count
-        let isValue = columnID == BookDetailViewController.ValueColumnID
-        let index = isPerson ? row : row - people.count
-        if isValue {
-            if isPerson {
-                viewID = BookDetailViewController.PersonColumnID
-            } else if rows[index].type == .date {
-                viewID = BookDetailViewController.DateColumnID
-            }
-        }
-        
-        let view = tableView.makeView(withIdentifier: viewID, owner: self)
-        return (view, isPerson, isValue, index)
-    }
     
     func numberOfRows(in tableView: NSTableView) -> Int {
-        return rows.count + people.count
+        return source.rows
     }
 
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        guard row < (rows.count + people.count), let columnID = tableColumn?.identifier else {
+        guard let columnID = tableColumn?.identifier else {
             return nil
         }
         
-        let (view, isPerson, isValue, index) = rowInfo(for: tableView, columnID: columnID, row: row)
-        
-        if !isValue, let field = view?.subviews.first as? NSTextField {
-            if isPerson {
-                field.stringValue = people[index].role?.name ?? "<unknown role>"
+        let info = source.info(for: row)
+        let isHeading = columnID == BookDetailViewController.HeadingColumnID
+        let viewID = isHeading ? BookDetailViewController.HeadingColumnID : NSUserInterfaceItemIdentifier(rawValue: info.identifier)
+        let view = tableView.makeView(withIdentifier: viewID, owner: self)
+
+        if isHeading, let field = view?.subviews.first as? NSTextField {
+            if info.isPerson {
+                field.stringValue = source.person(for: row).role?.name ?? "<unknown role>"
             } else {
-                field.stringValue = rows[index].label
+                field.stringValue = source.details(for: row).label
             }
-        } else if isValue, var bindable = view as? BindableCellView, let subview = bindable.viewToBind() {
+        } else if !isHeading, var bindable = view as? BindableCellView, let subview = bindable.viewToBind() {
             var options = [NSBindingOption:Any]()
-            if !isPerson && (rows[index].type == .date) {
-                options[.valueTransformer] = ValueTransformer(forName: NSValueTransformerName(rawValue: "DateToString"))
-                if let textView = subview as? NSTextField {
-                    let unlocked = rows[index].editable
-                    options[.conditionallySetsEditable] = unlocked
-                    textView.isSelectable = unlocked
-                    textView.isEditable = unlocked
-                }
-            }
-            let bound: Any = isPerson ? people[index] : indexView.indexArray
-            let path = isPerson ? "person.name" : "selection.\(rows[index].binding)"
-            subview.bind(NSBindingName(rawValue: "value"), to:bound, withKeyPath:path, options: options)
-            if isPerson {
-                subview.identifier = NSUserInterfaceItemIdentifier(rawValue: "person-\(row)")
+            let bound: Any
+            let path: String
+            let subviewID: NSUserInterfaceItemIdentifier
+            if info.isPerson {
+                bound = source.person(for: row)
+                path = "person.name"
+                subviewID = NSUserInterfaceItemIdentifier(rawValue: "person-\(row)")
             } else {
-                subview.identifier = NSUserInterfaceItemIdentifier(rawValue: "detail-\(rows[index].binding)")
+                let detail = source.details(for: row)
+                bound = indexView.indexArray
+                path = "selection.\(detail.binding)"
+                if detail.kind == .date {
+                    options[.valueTransformer] = ValueTransformer(forName: NSValueTransformerName(rawValue: "DateToString"))
+                    if let textView = subview as? NSTextField {
+                        let unlocked = detail.editable
+                        options[.conditionallySetsEditable] = unlocked
+                        textView.isSelectable = unlocked
+                        textView.isEditable = unlocked
+                    }
+                }
+                subviewID = NSUserInterfaceItemIdentifier(rawValue: "detail-\(detail.binding)")
                 bindable.objectValue = indexView.indexArray.selection as? NSObject
             }
+            
+            subview.bind(NSBindingName(rawValue: "value"), to:bound, withKeyPath:path, options: options)
+            subview.identifier = subviewID
         }
         
         return view
