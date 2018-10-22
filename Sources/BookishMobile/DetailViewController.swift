@@ -9,18 +9,19 @@ import Actions
 
 
 class DetailViewController: UIViewController {
-    
     let source = DetailDataSource()
     let sorting = [NSSortDescriptor(key: "role.name", ascending: true)]
     lazy var coverPlaceholder = UIImage(named: "CoverPlaceholder")
+    var bindings = [Any]()
     
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var subtitleLabel: UILabel!
+    @IBOutlet weak var titleLabel: UITextField!
+    @IBOutlet weak var subtitleLabel: UITextField!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var detailView: UITableView!
 
     func configureView() {
         if let book = representedObject, titleLabel != nil {
+            bindings.append(TextBinding(for: titleLabel, to: book, path: "name"))
             titleLabel.text = book.name
             subtitleLabel.text = book.subtitle
             if let imageData = book.image {

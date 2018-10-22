@@ -76,6 +76,7 @@
 		22B1DB412178D8A50067E795 /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B1DB402178D8A50067E795 /* ViewExtensions.swift */; };
 		22D1B22F217E0A3F0062F2CB /* PersonRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D1B22E217E0A3F0062F2CB /* PersonRow.swift */; };
 		22D1B231217E0D780062F2CB /* DateRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D1B230217E0D780062F2CB /* DateRow.swift */; };
+		22D1B233217E42950062F2CB /* TextBinding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D1B232217E42950062F2CB /* TextBinding.swift */; };
 		22D39E512142DB2700282467 /* ViewBasedToolbarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D39E502142DB2700282467 /* ViewBasedToolbarItem.swift */; };
 		22D39E532146A84500282467 /* AnnotatedTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D39E522146A84500282467 /* AnnotatedTableCellView.swift */; };
 		22D39E552146A84E00282467 /* DateTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D39E542146A84E00282467 /* DateTableCellView.swift */; };
@@ -259,6 +260,7 @@
 		22B1DB402178D8A50067E795 /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
 		22D1B22E217E0A3F0062F2CB /* PersonRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonRow.swift; sourceTree = "<group>"; };
 		22D1B230217E0D780062F2CB /* DateRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateRow.swift; sourceTree = "<group>"; };
+		22D1B232217E42950062F2CB /* TextBinding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextBinding.swift; sourceTree = "<group>"; };
 		22D39E502142DB2700282467 /* ViewBasedToolbarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewBasedToolbarItem.swift; sourceTree = "<group>"; };
 		22D39E522146A84500282467 /* AnnotatedTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotatedTableCellView.swift; sourceTree = "<group>"; };
 		22D39E542146A84E00282467 /* DateTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTableCellView.swift; sourceTree = "<group>"; };
@@ -423,6 +425,7 @@
 				22429313212ADC4300E70510 /* Application.swift */,
 				22429318212ADC4300E70510 /* MasterViewController.swift */,
 				2242931A212ADC4300E70510 /* DetailViewController.swift */,
+				22D1B232217E42950062F2CB /* TextBinding.swift */,
 				22B1DB402178D8A50067E795 /* ViewExtensions.swift */,
 				221ED511216B8EAB00594714 /* DetailRow.swift */,
 				22D1B230217E0D780062F2CB /* DateRow.swift */,
@@ -1062,6 +1065,7 @@
 				22D1B22F217E0A3F0062F2CB /* PersonRow.swift in Sources */,
 				221ED512216B8EAB00594714 /* DetailRow.swift in Sources */,
 				22429319212ADC4300E70510 /* MasterViewController.swift in Sources */,
+				22D1B233217E42950062F2CB /* TextBinding.swift in Sources */,
 				22B1DB412178D8A50067E795 /* ViewExtensions.swift in Sources */,
 				22D1B231217E0D780062F2CB /* DateRow.swift in Sources */,
 				2242931B212ADC4300E70510 /* DetailViewController.swift in Sources */,
