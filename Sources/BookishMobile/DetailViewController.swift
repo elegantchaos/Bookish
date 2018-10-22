@@ -60,27 +60,12 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let identifier = source.identifier(for: indexPath.row)
-        var cell = tableView.dequeueReusableCell(withIdentifier: identifier) as? DetailRow
-        
-        if identifier == "detail" {
-            if cell == nil {
-                cell = DetailRow(style: .default, reuseIdentifier: identifier)
-            }
-            
-            let rowInfo = source.details(for: indexPath.row)
-            cell?.label.text = rowInfo.label
-            cell?.detail.text = representedObject?.value(forKey: rowInfo.binding) as? String
-        } else {
-            if cell == nil {
-                cell = DetailRow(style: .default, reuseIdentifier: identifier)
-            }
-            
-            let personRole = source.person(for: indexPath.row)
-            cell?.label.text = personRole.role?.name
-            cell?.detail.text = personRole.person?.name
-        }
-        return cell!
+        guard let book = representedObject else { fatalError("should have book set") }
+        let info = source.info(for: indexPath.row)
+        let identifier = info.identifier
+        let cell = tableView.dequeueReusableCell(withIdentifier: identifier) as! DetailRow // if we fail here, it's a coding error as all possible view types should have been registered
+        cell.setup(row: indexPath.row, book: book, source: source)
+        return cell
     }
 }
 
