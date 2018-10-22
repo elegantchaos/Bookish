@@ -17,9 +17,6 @@ class PersonIndexViewController: CollectionViewController {
     }
     
     override func viewWillAppear() {
-//        if let window = view.window?.windowController as? CollectionWindowController {
-//            window.bookIndexController = self
-//        }
         // we really should be able to bind the array to the object context in IB, but
         // the document value is set relatively late, so it's safer to do it here
         indexArray.fetch(self)

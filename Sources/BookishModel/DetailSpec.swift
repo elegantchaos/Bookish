@@ -25,12 +25,12 @@ public final class DetailSpec {
     
     public class var standardDetails: [DetailSpec] {
         return [
-            DetailSpec(binding: "notes"),
-            DetailSpec(binding: "format"),
-            DetailSpec(binding: "isbn"),
-            DetailSpec(binding: "published", kind: .date),
-            DetailSpec(binding: "added", kind: .date, editable: false),
-            DetailSpec(binding: "modified", kind: .date, editable: false)
+            DetailSpec(binding: "notes", label: "Notes"),
+            DetailSpec(binding: "format", label: "Format"),
+            DetailSpec(binding: "isbn", label: "ISBN"),
+            DetailSpec(binding: "published", label:  "Published", kind: .date),
+            DetailSpec(binding: "added", label: "Added", kind: .date, editable: false),
+            DetailSpec(binding: "modified", label: "Modified", kind: .date, editable: false)
         ]
     }
 }

@@ -6,14 +6,18 @@
 import Foundation
 
 public class DetailDataSource {
-    let details = DetailSpec.standardDetails
-    var people = [PersonRole]()
+    public let details = DetailSpec.standardDetails
+    public var people = [PersonRole]()
     
-    var rows: Int {
+    public init() {
+        
+    }
+    
+    public var rows: Int {
         return details.count + people.count
     }
     
-    func identifier(for row: Int) -> String {
+    public func identifier(for row: Int) -> String {
         if row < people.count {
             return "person"
         } else {
@@ -21,11 +25,11 @@ public class DetailDataSource {
         }
     }
     
-    func details(for row: Int) -> DetailSpec {
+    public func details(for row: Int) -> DetailSpec {
         return details[row - people.count]
     }
     
-    func person(for row: Int) -> PersonRole {
+    public func person(for row: Int) -> PersonRole {
         return people[row]
     }
     
