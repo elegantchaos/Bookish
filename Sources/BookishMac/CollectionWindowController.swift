@@ -7,6 +7,9 @@ import AppKit
 import Actions
 import BookishCore
 import BookishModel
+import Logger
+
+let validationChannel = Logger("Validation")
 
 class CollectionWindowController: NSWindowController, DocumentWindowController, ActionContextProvider {
     var viewModel: CollectionDocumentViewModel?
@@ -28,29 +31,9 @@ class CollectionWindowController: NSWindowController, DocumentWindowController, 
         }
     }
     
-    func validatableItems(for view: NSView) -> [NSControl] {
-        var items = [NSControl]()
-        if let viewItem = view as? NSControl {
-            items.append(viewItem)
-        }
-        for subview in view.subviews {
-            if !subview.isHidden {
-                items.append(contentsOf: validatableItems(for: subview))
-            }
-        }
-        
-        return items
-    }
-    
     func validateButtons() {
-        let actionManager = Application.sharedInstance.actionManager
         if let view = window?.contentView {
-            let items = validatableItems(for: view)
-            for item in items {
-                if let button = item as? NSButton, let identifier = item.identifier?.rawValue {
-                    button.isEnabled = actionManager.validate(identifier: identifier, item: button)
-                }
-            }
+            view.validateButtons()
         }
     }
     

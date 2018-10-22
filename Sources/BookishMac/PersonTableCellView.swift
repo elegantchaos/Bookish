@@ -12,4 +12,12 @@ class PersonTableCellView: AnnotatedTableCellView {
     override var annotationButtons: [NSButton] {
         return [addButton, removeButton]
     }
+    
+    override func viewDidUnhide() {
+        print("did unhide")
+    }
+    
+    override func viewDidMoveToSuperview() {
+        print("moved")
+    }
 }

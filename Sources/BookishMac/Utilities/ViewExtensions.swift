@@ -49,3 +49,34 @@ extension NSViewController {
     }
 }
 
+
+extension NSView {
+    func appendValidatableItems(to items: inout [NSControl]) {
+        if !isHidden {
+            if let viewItem = self as? NSControl, let identifier = viewItem.identifier?.rawValue {
+                validationChannel.log("\(identifier)")
+                items.append(viewItem)
+            }
+            for subview in subviews {
+                subview.appendValidatableItems(to: &items)
+            }
+        }
+    }
+    
+    func validateButtons() {
+        let actionManager = Application.sharedInstance.actionManager
+        var items = [NSControl]()
+        appendValidatableItems(to: &items)
+        for item in items {
+            if let button = item as? NSButton, let identifier = item.identifier?.rawValue {
+                button.isEnabled = actionManager.validate(identifier: identifier, item: button)
+            }
+        }
+    }
+    
+    func scheduleForValidation() {
+        OperationQueue.main.addOperation {
+            self.validateButtons()
+        }
+    }
+}

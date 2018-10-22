@@ -16,7 +16,8 @@ class BookUIAction: BookAction {
 
     class RevealBookAction: BookUIAction {
         override func validate(context: ActionContext) -> Bool {
-            return (context.info[BookAction.bookKey] as? Book != nil) && super.validate(context: context)
+            let book = context.info[BookAction.bookKey] as? Book
+            return (book != nil) && super.validate(context: context)
         }
         
         override func perform(context: ActionContext) {

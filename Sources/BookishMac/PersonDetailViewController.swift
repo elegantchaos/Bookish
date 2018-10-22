@@ -134,6 +134,7 @@ extension PersonDetailViewController: NSTableViewDataSource, NSTableViewDelegate
             field.stringValue = label
         }
         
+        view?.validateButtons()
         return view
     }
     

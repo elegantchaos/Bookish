@@ -155,14 +155,13 @@ extension BookDetailViewController: NSTableViewDataSource, NSTableViewDelegate {
     }
 
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        guard let columnID = tableColumn?.identifier else {
-            return nil
-        }
+        guard let columnID = tableColumn?.identifier else { return nil }
         
         let info = source.info(for: row)
         let isHeading = columnID == BookDetailViewController.HeadingColumnID
         let viewID = isHeading ? BookDetailViewController.HeadingColumnID : NSUserInterfaceItemIdentifier(rawValue: info.identifier)
-        let view = tableView.makeView(withIdentifier: viewID, owner: self)
+        
+        guard let view = tableView.makeView(withIdentifier: viewID, owner: self) else { return nil }
 
         if isHeading {
             setupHeading(view: view, row: row, info: info)
@@ -170,8 +169,11 @@ extension BookDetailViewController: NSTableViewDataSource, NSTableViewDelegate {
             setupValue(view: view, row: row, info: info)
         }
         
+        view.scheduleForValidation()
+        
         return view
     }
+
     
     func tableView(_ tableView: NSTableView, didAdd rowView: NSTableRowView, forRow row: Int) {
         availableRows.insert(row)
@@ -183,8 +185,8 @@ extension BookDetailViewController: NSTableViewDataSource, NSTableViewDelegate {
         scheduleRecalculateKeyViews()
     }
     
-    fileprivate func setupHeading(view: NSView?, row: Int, info: DetailDataSource.RowInfo) {
-        if let field = view?.subviews.first as? NSTextField {
+    fileprivate func setupHeading(view: NSView, row: Int, info: DetailDataSource.RowInfo) {
+        if let field = view.subviews.first as? NSTextField {
             if info.isPerson {
                 field.stringValue = source.person(for: row).role?.name ?? "<unknown role>"
             } else {
@@ -193,7 +195,7 @@ extension BookDetailViewController: NSTableViewDataSource, NSTableViewDelegate {
         }
     }
     
-    fileprivate func setupValue(view: NSView?, row: Int, info: DetailDataSource.RowInfo) {
+    fileprivate func setupValue(view: NSView, row: Int, info: DetailDataSource.RowInfo) {
         if var bindable = view as? BindableCellView, let subview = bindable.viewToBind() {
             var options = [NSBindingOption:Any]()
             let bound: Any

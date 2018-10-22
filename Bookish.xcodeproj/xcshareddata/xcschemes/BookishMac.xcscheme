@@ -130,7 +130,7 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "-logs Model,Application"
+            argument = "-logs Model,Application,Validation"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
