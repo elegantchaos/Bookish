@@ -164,13 +164,37 @@ extension BookDetailViewController: NSTableViewDataSource, NSTableViewDelegate {
         let viewID = isHeading ? BookDetailViewController.HeadingColumnID : NSUserInterfaceItemIdentifier(rawValue: info.identifier)
         let view = tableView.makeView(withIdentifier: viewID, owner: self)
 
-        if isHeading, let field = view?.subviews.first as? NSTextField {
+        if isHeading {
+            setupHeading(view: view, row: row, info: info)
+        } else if !isHeading {
+            setupValue(view: view, row: row, info: info)
+        }
+        
+        return view
+    }
+    
+    func tableView(_ tableView: NSTableView, didAdd rowView: NSTableRowView, forRow row: Int) {
+        availableRows.insert(row)
+        scheduleRecalculateKeyViews()
+    }
+    
+    func tableView(_ tableView: NSTableView, didRemove rowView: NSTableRowView, forRow row: Int) {
+        availableRows.remove(row)
+        scheduleRecalculateKeyViews()
+    }
+    
+    fileprivate func setupHeading(view: NSView?, row: Int, info: DetailDataSource.RowInfo) {
+        if let field = view?.subviews.first as? NSTextField {
             if info.isPerson {
                 field.stringValue = source.person(for: row).role?.name ?? "<unknown role>"
             } else {
                 field.stringValue = source.details(for: row).label
             }
-        } else if !isHeading, var bindable = view as? BindableCellView, let subview = bindable.viewToBind() {
+        }
+    }
+    
+    fileprivate func setupValue(view: NSView?, row: Int, info: DetailDataSource.RowInfo) {
+        if var bindable = view as? BindableCellView, let subview = bindable.viewToBind() {
             var options = [NSBindingOption:Any]()
             let bound: Any
             let path: String
@@ -199,21 +223,9 @@ extension BookDetailViewController: NSTableViewDataSource, NSTableViewDelegate {
             subview.bind(NSBindingName(rawValue: "value"), to:bound, withKeyPath:path, options: options)
             subview.identifier = subviewID
         }
-        
-        return view
     }
     
-    func tableView(_ tableView: NSTableView, didAdd rowView: NSTableRowView, forRow row: Int) {
-        availableRows.insert(row)
-        scheduleRecalculateKeyViews()
-    }
-    
-    func tableView(_ tableView: NSTableView, didRemove rowView: NSTableRowView, forRow row: Int) {
-        availableRows.remove(row)
-        scheduleRecalculateKeyViews()
-    }
-    
-    func scheduleRecalculateKeyViews() {
+    fileprivate func scheduleRecalculateKeyViews() {
         if let timer = keyViewTimer {
             timer.invalidate()
         }
@@ -223,7 +235,7 @@ extension BookDetailViewController: NSTableViewDataSource, NSTableViewDelegate {
         }
     }
     
-    func recalculateKeyViews() {
+    fileprivate func recalculateKeyViews() {
         let rows = availableRows.sorted()
         var view: NSView = subtitleView
         for row in rows {
