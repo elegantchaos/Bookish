@@ -18,22 +18,21 @@ class Application: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
     var window: UIWindow?
     let actionManager = ActionManagerMobile()
 
-
+    
+    func setup(splitView: UISplitViewController) {
+        let navigationController = splitView.viewControllers[splitView.viewControllers.count-1] as! UINavigationController
+        navigationController.topViewController!.navigationItem.leftBarButtonItem = splitView.displayModeButtonItem
+        splitView.delegate = self
+    }
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         actionManager.register(PersonAction.standardActions())
         actionManager.register(BookAction.standardActions())
         actionManager.installResponder()
 
         let topVC = self.window!.rootViewController as! UITabBarController
-        
-        let splitViewController = topVC.viewControllers!.first as! UISplitViewController
-        let navigationController = splitViewController.viewControllers[splitViewController.viewControllers.count-1] as! UINavigationController
-        navigationController.topViewController!.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem
-        splitViewController.delegate = self
-
-        let masterNavigationController = splitViewController.viewControllers[0] as! UINavigationController
-        let controller = masterNavigationController.topViewController as! MasterViewController
-        controller.managedObjectContext = self.persistentContainer.viewContext
+        setup(splitView: topVC.viewControllers![0] as! UISplitViewController)
+        setup(splitView: topVC.viewControllers![1] as! UISplitViewController)
 
         applicationChannel.log("did finish launching")
         return true
@@ -76,11 +75,21 @@ class Application: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 
     func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController:UIViewController, onto primaryViewController:UIViewController) -> Bool {
         guard let secondaryAsNavController = secondaryViewController as? UINavigationController else { return false }
-        guard let topAsDetailController = secondaryAsNavController.topViewController as? DetailViewController else { return false }
-        if topAsDetailController.representedObject == nil {
-            // Return true to indicate that we have handled the collapse by doing nothing; the secondary controller will be discarded.
-            return true
+        
+        if let topAsDetailController = secondaryAsNavController.topViewController as? BookDetailController {
+            if topAsDetailController.representedObject == nil {
+                // Return true to indicate that we have handled the collapse by doing nothing; the secondary controller will be discarded.
+                return true
+            }
         }
+
+        if let topAsDetailController = secondaryAsNavController.topViewController as? PersonDetailController {
+            if topAsDetailController.representedObject == nil {
+                // Return true to indicate that we have handled the collapse by doing nothing; the secondary controller will be discarded.
+                return true
+            }
+        }
+
         return false
     }
     // MARK: - Core Data stack

@@ -29,8 +29,8 @@
 		221F272321359DA200DC2DC7 /* Publisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221F272121359DA200DC2DC7 /* Publisher.swift */; };
 		221F272921382C8E00DC2DC7 /* DateTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221F272821382C8E00DC2DC7 /* DateTransformer.swift */; };
 		22429314212ADC4300E70510 /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22429313212ADC4300E70510 /* Application.swift */; };
-		22429319212ADC4300E70510 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22429318212ADC4300E70510 /* MasterViewController.swift */; };
-		2242931B212ADC4300E70510 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2242931A212ADC4300E70510 /* DetailViewController.swift */; };
+		22429319212ADC4300E70510 /* BookIndexController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22429318212ADC4300E70510 /* BookIndexController.swift */; };
+		2242931B212ADC4300E70510 /* BookDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2242931A212ADC4300E70510 /* BookDetailController.swift */; };
 		2242931E212ADC4300E70510 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2242931C212ADC4300E70510 /* Main.storyboard */; };
 		22429320212ADC4400E70510 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2242931F212ADC4400E70510 /* Assets.xcassets */; };
 		22429323212ADC4400E70510 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22429321212ADC4400E70510 /* LaunchScreen.storyboard */; };
@@ -77,6 +77,8 @@
 		22D1B22F217E0A3F0062F2CB /* PersonRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D1B22E217E0A3F0062F2CB /* PersonRow.swift */; };
 		22D1B231217E0D780062F2CB /* DateRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D1B230217E0D780062F2CB /* DateRow.swift */; };
 		22D1B233217E42950062F2CB /* TextBinding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D1B232217E42950062F2CB /* TextBinding.swift */; };
+		22D1B235217F7ED40062F2CB /* PersonIndexController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D1B234217F7ED40062F2CB /* PersonIndexController.swift */; };
+		22D1B237217F7EF30062F2CB /* PersonDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D1B236217F7EF30062F2CB /* PersonDetailController.swift */; };
 		22D39E512142DB2700282467 /* ViewBasedToolbarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D39E502142DB2700282467 /* ViewBasedToolbarItem.swift */; };
 		22D39E532146A84500282467 /* AnnotatedTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D39E522146A84500282467 /* AnnotatedTableCellView.swift */; };
 		22D39E552146A84E00282467 /* DateTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D39E542146A84E00282467 /* DateTableCellView.swift */; };
@@ -215,8 +217,8 @@
 		221F272821382C8E00DC2DC7 /* DateTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTransformer.swift; sourceTree = "<group>"; };
 		22429311212ADC4300E70510 /* BookishMobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BookishMobile.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22429313212ADC4300E70510 /* Application.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
-		22429318212ADC4300E70510 /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
-		2242931A212ADC4300E70510 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		22429318212ADC4300E70510 /* BookIndexController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookIndexController.swift; sourceTree = "<group>"; };
+		2242931A212ADC4300E70510 /* BookDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailController.swift; sourceTree = "<group>"; };
 		2242931D212ADC4300E70510 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2242931F212ADC4400E70510 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		22429322212ADC4400E70510 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -261,6 +263,8 @@
 		22D1B22E217E0A3F0062F2CB /* PersonRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonRow.swift; sourceTree = "<group>"; };
 		22D1B230217E0D780062F2CB /* DateRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateRow.swift; sourceTree = "<group>"; };
 		22D1B232217E42950062F2CB /* TextBinding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextBinding.swift; sourceTree = "<group>"; };
+		22D1B234217F7ED40062F2CB /* PersonIndexController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonIndexController.swift; sourceTree = "<group>"; };
+		22D1B236217F7EF30062F2CB /* PersonDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonDetailController.swift; sourceTree = "<group>"; };
 		22D39E502142DB2700282467 /* ViewBasedToolbarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewBasedToolbarItem.swift; sourceTree = "<group>"; };
 		22D39E522146A84500282467 /* AnnotatedTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotatedTableCellView.swift; sourceTree = "<group>"; };
 		22D39E542146A84E00282467 /* DateTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTableCellView.swift; sourceTree = "<group>"; };
@@ -423,8 +427,10 @@
 			isa = PBXGroup;
 			children = (
 				22429313212ADC4300E70510 /* Application.swift */,
-				22429318212ADC4300E70510 /* MasterViewController.swift */,
-				2242931A212ADC4300E70510 /* DetailViewController.swift */,
+				22429318212ADC4300E70510 /* BookIndexController.swift */,
+				2242931A212ADC4300E70510 /* BookDetailController.swift */,
+				22D1B234217F7ED40062F2CB /* PersonIndexController.swift */,
+				22D1B236217F7EF30062F2CB /* PersonDetailController.swift */,
 				22D1B232217E42950062F2CB /* TextBinding.swift */,
 				22B1DB402178D8A50067E795 /* ViewExtensions.swift */,
 				221ED511216B8EAB00594714 /* DetailRow.swift */,
@@ -1064,11 +1070,13 @@
 				22429314212ADC4300E70510 /* Application.swift in Sources */,
 				22D1B22F217E0A3F0062F2CB /* PersonRow.swift in Sources */,
 				221ED512216B8EAB00594714 /* DetailRow.swift in Sources */,
-				22429319212ADC4300E70510 /* MasterViewController.swift in Sources */,
+				22D1B237217F7EF30062F2CB /* PersonDetailController.swift in Sources */,
+				22429319212ADC4300E70510 /* BookIndexController.swift in Sources */,
 				22D1B233217E42950062F2CB /* TextBinding.swift in Sources */,
 				22B1DB412178D8A50067E795 /* ViewExtensions.swift in Sources */,
 				22D1B231217E0D780062F2CB /* DateRow.swift in Sources */,
-				2242931B212ADC4300E70510 /* DetailViewController.swift in Sources */,
+				2242931B212ADC4300E70510 /* BookDetailController.swift in Sources */,
+				22D1B235217F7ED40062F2CB /* PersonIndexController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

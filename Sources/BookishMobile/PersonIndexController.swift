@@ -1,5 +1,5 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-//  Created by Sam Deane on 20/08/2018.
+//  Created by Sam Deane on 23/10/2018.
 //  All code (c) 2018 - present day, Elegant Chaos Limited.
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
@@ -8,7 +8,7 @@ import CoreData
 import BookishModel
 import Actions
 
-class MasterViewController: UITableViewController, NSFetchedResultsControllerDelegate, ActionContextProvider, BookChangeObserver {
+class PersonIndexController: UITableViewController, NSFetchedResultsControllerDelegate, ActionContextProvider, BookChangeObserver {
     
     func added(books: [Book]) {
         print("added")
@@ -20,21 +20,24 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     
     func provide(context: ActionContext) {
         context.addObserver(self)
-    }    
+    }
     
-    var detailViewController: DetailViewController? = nil
+    var detailViewController: PersonDetailController? = nil
     var managedObjectContext: NSManagedObjectContext? = nil
     @IBOutlet var addButton: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+
+
+        managedObjectContext = application.persistentContainer.viewContext
+
         navigationItem.leftBarButtonItem = editButtonItem
         navigationItem.rightBarButtonItem = addButton
         
         if let split = splitViewController {
             let controllers = split.viewControllers
-            detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
+            detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? PersonDetailController
         }
     }
     
@@ -49,7 +52,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         if segue.identifier == "showDetail" {
             if let indexPath = tableView.indexPathForSelectedRow {
                 let object = fetchedResultsController.object(at: indexPath)
-                let controller = (segue.destination as! UINavigationController).topViewController as! DetailViewController
+                let controller = (segue.destination as! UINavigationController).topViewController as! PersonDetailController
                 controller.representedObject = object
                 controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
                 controller.navigationItem.leftItemsSupplementBackButton = true
@@ -124,7 +127,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         }
         
         return _fetchedResultsController!
-    }    
+    }
     var _fetchedResultsController: NSFetchedResultsController<Book>? = nil
     
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {

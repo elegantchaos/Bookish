@@ -8,7 +8,7 @@ import BookishModel
 import Actions
 
 
-class DetailViewController: UIViewController {
+class BookDetailController: UIViewController {
     let source = DetailDataSource()
     let sorting = [NSSortDescriptor(key: "role.name", ascending: true)]
     lazy var coverPlaceholder = UIImage(named: "CoverPlaceholder")
@@ -50,7 +50,7 @@ class DetailViewController: UIViewController {
 
 // MARK: Table Support
 
-extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
+extension BookDetailController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -71,7 +71,7 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
 
 // MARK: Action Support
 
-extension DetailViewController: ActionContextProvider {
+extension BookDetailController: ActionContextProvider {
     func provide(context: ActionContext) {
         print("detail")
     }
