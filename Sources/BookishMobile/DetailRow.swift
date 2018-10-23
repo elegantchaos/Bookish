@@ -18,8 +18,4 @@ class DetailRow: UITableViewCell {
         label.text = rowInfo.label
         binding = TextViewBinding(for: detail, to: book, path: rowInfo.binding, setIfNull: true)
     }
-    
-    override func prepareForReuse() {
-        binding = nil
-    }
 }
