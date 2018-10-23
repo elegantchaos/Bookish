@@ -11,18 +11,21 @@ class TextBinding<T>: NSObject {
     var target: T
     weak var source: NSObject?
     let path: String
+    let setIfNull: Bool
     
-    init(for target: T, to source: NSObject, path: String) {
+    init(for target: T, to source: NSObject, path: String, setIfNull: Bool = false) {
         self.target = target
         self.source = source
         self.path = path
+        self.setIfNull = setIfNull
         super.init()
         
         if let value = source.value(forKey: path) as? String {
             boundText = value
+        } else if setIfNull {
+            boundText = ""
         }
         
-        connectDelegate()
         source.addObserver(self, forKeyPath: path, options: [], context: &textBindingContext)
         
     }
@@ -42,33 +45,40 @@ class TextBinding<T>: NSObject {
         set { }
     }
     
-    func connectDelegate() {
-    }
-    
 }
 
 class TextViewBinding: TextBinding<UITextView>, UITextViewDelegate {
-    func textViewDidChange(_ textView: UITextView) {
-        source?.setValue(target.text, forKey:path)
+    override init(for target: UITextView, to source: NSObject, path: String, setIfNull: Bool = false) {
+        super.init(for: target, to: source, path: path, setIfNull: setIfNull)
+        target.delegate = self
     }
     
-    override func connectDelegate() {
-        target.delegate = self
+    deinit {
+        target.delegate = nil
     }
     
     override var boundText: String {
         get { return target.text }
         set(value) { target.text = value }
     }
+
+    func textViewDidChange(_ textView: UITextView) {
+        source?.setValue(target.text, forKey:path)
+    }
 }
 
 class TextFieldBinding: TextBinding<UITextField>, UITextFieldDelegate {
-    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
-        source?.setValue(target.text, forKey:path)
+    override init(for target: UITextField, to source: NSObject, path: String, setIfNull: Bool = false) {
+        super.init(for: target, to: source, path: path, setIfNull: setIfNull)
+        target.delegate = self
     }
 
-    override func connectDelegate() {
-        target.delegate = self
+    deinit {
+        target.delegate = nil
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
+        source?.setValue(target.text, forKey:path)
     }
     
     override var boundText: String {
@@ -79,9 +89,9 @@ class TextFieldBinding: TextBinding<UITextField>, UITextFieldDelegate {
 
 class StringBinding: TextBinding<NSObject> {
     let property: String
-    init(for target: NSObject, property: String, to source: NSObject, path: String) {
+    init(for target: NSObject, property: String, to source: NSObject, path: String, setIfNull: Bool = false) {
         self.property = property
-        super.init(for: target, to: source, path: path)
+        super.init(for: target, to: source, path: path, setIfNull: setIfNull)
     }
     
     override var boundText: String {

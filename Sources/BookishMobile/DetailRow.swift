@@ -16,6 +16,10 @@ class DetailRow: UITableViewCell {
         assert(!source.info(for: row).isPerson)
         let rowInfo = source.details(for: row)
         label.text = rowInfo.label
-        binding = TextViewBinding(for: detail, to: book, path: rowInfo.binding)
+        binding = TextViewBinding(for: detail, to: book, path: rowInfo.binding, setIfNull: true)
+    }
+    
+    override func prepareForReuse() {
+        binding = nil
     }
 }
