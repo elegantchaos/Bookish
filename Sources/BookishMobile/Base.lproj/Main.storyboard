@@ -68,7 +68,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="751" scrollEnabled="NO" keyboardDismissMode="interactive" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="E4Y-DD-iUg">
-                                                    <rect key="frame" x="56.5" y="4" width="314.5" height="35.5"/>
+                                                    <rect key="frame" x="56.5" y="4" width="259.5" height="35.5"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -104,7 +104,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="751" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="iAN-yA-mgv">
-                                                    <rect key="frame" x="56.5" y="4" width="314.5" height="35.5"/>
+                                                    <rect key="frame" x="56.5" y="4" width="259.5" height="35.5"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -140,7 +140,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="751" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="MbN-Xp-CBW">
-                                                    <rect key="frame" x="56.5" y="4" width="314.5" height="35.5"/>
+                                                    <rect key="frame" x="56.5" y="4" width="259.5" height="35.5"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -216,37 +216,37 @@
             </objects>
             <point key="canvasLocation" x="1394" y="1137"/>
         </scene>
-        <!--Item 2-->
+        <!--People-->
         <scene sceneID="lxG-hY-1ti">
             <objects>
-                <viewController id="tc2-Lz-cS8" sceneMemberID="viewController">
+                <viewController title="People" id="tc2-Lz-cS8" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="p1W-OC-AVH">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="xcj-XN-EfZ"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 2" id="b9q-ZO-n1y"/>
+                    <tabBarItem key="tabBarItem" title="People" image="Person" id="b9q-ZO-n1y"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vDM-rU-gwK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1697" y="759"/>
         </scene>
-        <!--Item 1-->
+        <!--Books-->
         <scene sceneID="CfG-Pl-U5P">
             <objects>
-                <viewController id="WzE-F1-Iat" sceneMemberID="viewController">
+                <viewController title="Books" id="WzE-F1-Iat" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="YrT-jZ-Avn">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="M6n-P8-q4Y"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 1" id="B5E-0H-BQa"/>
+                    <tabBarItem key="tabBarItem" title="Settings" image="Settings" id="B5E-0H-BQa"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2k3-Sp-2fA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2775" y="709"/>
+            <point key="canvasLocation" x="-2740" y="759"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Fh3-Be-TZL">
@@ -265,13 +265,13 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D3E-I1-ljv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1698" y="-275"/>
+            <point key="canvasLocation" x="-1698" y="-225"/>
         </scene>
-        <!--Item-->
+        <!--Settings-->
         <scene sceneID="Nki-YV-4Qg">
             <objects>
-                <splitViewController preferredPrimaryColumnWidthFraction="0.25" id="H1p-Uh-vWS" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="v8j-Vy-EMP"/>
+                <splitViewController title="Settings" preferredPrimaryColumnWidthFraction="0.25" id="H1p-Uh-vWS" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Books" image="Book" id="v8j-Vy-EMP"/>
                     <toolbarItems/>
                     <connections>
                         <segue destination="RMx-3f-FxP" kind="relationship" relationship="masterViewController" id="BlO-5A-QYV"/>
@@ -341,7 +341,7 @@
             <objects>
                 <navigationController id="vC3-pB-5Vb" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="DjV-YW-jjY">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -353,7 +353,12 @@
             <point key="canvasLocation" x="639" y="1137"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Book" width="32" height="32"/>
+        <image name="Person" width="16" height="16"/>
+        <image name="Settings" width="32" height="32"/>
+    </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="6S0-TO-JiA"/>
+        <segue reference="Tll-UG-LXB"/>
     </inferredMetricsTieBreakers>
 </document>

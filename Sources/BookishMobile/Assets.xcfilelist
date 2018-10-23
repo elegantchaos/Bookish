@@ -1,5 +1,10 @@
 Sources/BookishMobile/Assets.xcassets/
 Sources/BookishMobile/Assets.xcassets//.DS_Store
+Sources/BookishMobile/Assets.xcassets//Person.imageset
+Sources/BookishMobile/Assets.xcassets//Person.imageset/Person.png
+Sources/BookishMobile/Assets.xcassets//Person.imageset/Contents.json
+Sources/BookishMobile/Assets.xcassets//Person.imageset/Person@3x.png
+Sources/BookishMobile/Assets.xcassets//Person.imageset/Person@2x.png
 Sources/BookishMobile/Assets.xcassets//AppIcon.appiconset
 Sources/BookishMobile/Assets.xcassets//AppIcon.appiconset/Icon167.png
 Sources/BookishMobile/Assets.xcassets//AppIcon.appiconset/Icon29.png
@@ -22,5 +27,15 @@ Sources/BookishMobile/Assets.xcassets//CoverPlaceholder.imageset/CoverPlaceholde
 Sources/BookishMobile/Assets.xcassets//CoverPlaceholder.imageset/CoverPlaceholder@3x.png
 Sources/BookishMobile/Assets.xcassets//CoverPlaceholder.imageset/Contents.json
 Sources/BookishMobile/Assets.xcassets//CoverPlaceholder.imageset/CoverPlaceholder@2x.png
+Sources/BookishMobile/Assets.xcassets//Settings.imageset
+Sources/BookishMobile/Assets.xcassets//Settings.imageset/Settings.png
+Sources/BookishMobile/Assets.xcassets//Settings.imageset/Contents.json
+Sources/BookishMobile/Assets.xcassets//Settings.imageset/Settings@2x.png
+Sources/BookishMobile/Assets.xcassets//Settings.imageset/Settings@3x.png
 Sources/BookishMobile/Assets.xcassets//LaunchImage.launchimage
 Sources/BookishMobile/Assets.xcassets//LaunchImage.launchimage/Contents.json
+Sources/BookishMobile/Assets.xcassets//Book.imageset
+Sources/BookishMobile/Assets.xcassets//Book.imageset/Book@3x.png
+Sources/BookishMobile/Assets.xcassets//Book.imageset/Book.png
+Sources/BookishMobile/Assets.xcassets//Book.imageset/Book@2x.png
+Sources/BookishMobile/Assets.xcassets//Book.imageset/Contents.json
