@@ -7,12 +7,7 @@ import UIKit
 
 fileprivate var textBindingContext: Int = 0
 
-protocol TextBindable {
-    var boundText: String? { get set }
-    func connectDelegate(binding: Any)
-}
-
-class TextBinding<T>: NSObject, UITextViewDelegate, UITextFieldDelegate where T: TextBindable {
+class TextBinding<T>: NSObject {
     var target: T
     let source: NSObject
     let path: String
@@ -24,52 +19,70 @@ class TextBinding<T>: NSObject, UITextViewDelegate, UITextFieldDelegate where T:
         super.init()
         
         if let value = source.value(forKey: path) as? String {
-            self.target.boundText = value
+            boundText = value
         }
         
-        self.target.connectDelegate(binding: self)
-//        self.target.delegate = self
+        connectDelegate()
         source.addObserver(self, forKeyPath: path, options: [], context: &textBindingContext)
         
     }
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if let string = source.value(forKey: path) as? String {
-            target.boundText = string
+            boundText = string
         }
     }
     
+    var boundText: String {
+        get { return "" }
+        set { }
+    }
+    
+    func connectDelegate() {
+    }
+    
+}
+
+class TextViewBinding: TextBinding<UITextView>, UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
-        source.setValue(target.boundText, forKey:path)
+        source.setValue(target.text, forKey:path)
     }
     
+    override func connectDelegate() {
+        target.delegate = self
+    }
+    
+    override var boundText: String {
+        get { return target.text }
+        set(value) { target.text = value }
+    }
+}
+
+class TextFieldBinding: TextBinding<UITextField>, UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
-        source.setValue(target.boundText, forKey:path)
+        source.setValue(target.text, forKey:path)
+    }
+
+    override func connectDelegate() {
+        target.delegate = self
+    }
+    
+    override var boundText: String {
+        get { return target.text ?? "" }
+        set(value) { target.text = value }
     }
 }
 
-extension UITextView: TextBindable {
-    var boundText: String? {
-        get { return self.text }
-        set(value) { self.text = value }
+class StringBinding: TextBinding<NSObject> {
+    let property: String
+    init(for target: NSObject, property: String, to source: NSObject, path: String) {
+        self.property = property
+        super.init(for: target, to: source, path: path)
     }
     
-    func connectDelegate(binding: Any) {
-        if let delegate = binding as? UITextViewDelegate {
-            self.delegate = delegate
-        }
+    override var boundText: String {
+        get { return target.value(forKey: property) as? String ?? "" }
+        set(value) { target.setValue(value, forKey: property) }
     }
 }
 
-extension UITextField: TextBindable {
-    var boundText: String? {
-        get { return self.text }
-        set(value) { self.text = value }
-    }
-    
-    func connectDelegate(binding: Any) {
-        if let delegate = binding as? UITextFieldDelegate {
-            self.delegate = delegate
-        }
-    }
-}

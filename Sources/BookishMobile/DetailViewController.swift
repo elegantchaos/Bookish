@@ -21,15 +21,14 @@ class DetailViewController: UIViewController {
 
     func configureView() {
         if let book = representedObject, titleLabel != nil {
-            bindings.append(TextBinding(for: titleLabel, to: book, path: "name"))
-            titleLabel.text = book.name
-            subtitleLabel.text = book.subtitle
+            bindings.append(TextFieldBinding(for: titleLabel, to: book, path: "name"))
+            bindings.append(TextFieldBinding(for: subtitleLabel, to: book, path: "subtitle"))
             if let imageData = book.image {
                 imageView.image = UIImage(data: imageData)
             } else {
                 imageView.image = coverPlaceholder
             }
-            self.title = book.name
+            bindings.append(StringBinding(for: self, property: "title", to: book, path: "name"))
             if let roles = book.personRoles, let sorted = roles.sortedArray(using: sorting) as? [PersonRole] {
                 source.people = sorted
             }
