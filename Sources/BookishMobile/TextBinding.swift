@@ -9,7 +9,7 @@ fileprivate var textBindingContext: Int = 0
 
 class TextBinding<T>: NSObject {
     var target: T
-    let source: NSObject
+    weak var source: NSObject?
     let path: String
     
     init(for target: T, to source: NSObject, path: String) {
@@ -27,8 +27,12 @@ class TextBinding<T>: NSObject {
         
     }
     
+    deinit {
+        source?.removeObserver(self, forKeyPath: path, context: &textBindingContext)
+    }
+    
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if let string = source.value(forKey: path) as? String {
+        if let string = source?.value(forKey: path) as? String {
             boundText = string
         }
     }
@@ -45,7 +49,7 @@ class TextBinding<T>: NSObject {
 
 class TextViewBinding: TextBinding<UITextView>, UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
-        source.setValue(target.text, forKey:path)
+        source?.setValue(target.text, forKey:path)
     }
     
     override func connectDelegate() {
@@ -60,7 +64,7 @@ class TextViewBinding: TextBinding<UITextView>, UITextViewDelegate {
 
 class TextFieldBinding: TextBinding<UITextField>, UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
-        source.setValue(target.text, forKey:path)
+        source?.setValue(target.text, forKey:path)
     }
 
     override func connectDelegate() {

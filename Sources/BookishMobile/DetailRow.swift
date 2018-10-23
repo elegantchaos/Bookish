@@ -10,12 +10,12 @@ class DetailRow: UITableViewCell {
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var detail: UITextView!
     
-    var binding: TextBinding<UITextView>?
+    var binding: TextViewBinding?
     
     func setup(row: Int, book: Book, source: DetailDataSource) {
         assert(!source.info(for: row).isPerson)
         let rowInfo = source.details(for: row)
         label.text = rowInfo.label
-        binding = TextBinding(for: detail, to: book, path: rowInfo.binding)
+        binding = TextViewBinding(for: detail, to: book, path: rowInfo.binding)
     }
 }
