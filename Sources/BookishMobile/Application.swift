@@ -24,7 +24,9 @@ class Application: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         actionManager.register(BookAction.standardActions())
         actionManager.installResponder()
 
-        let splitViewController = self.window!.rootViewController as! UISplitViewController
+        let topVC = self.window!.rootViewController as! UITabBarController
+        
+        let splitViewController = topVC.viewControllers!.first as! UISplitViewController
         let navigationController = splitViewController.viewControllers[splitViewController.viewControllers.count-1] as! UINavigationController
         navigationController.topViewController!.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem
         splitViewController.delegate = self
