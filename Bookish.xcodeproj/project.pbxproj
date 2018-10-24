@@ -84,8 +84,6 @@
 		22D1B2402180BF6D0062F2CB /* ActionsKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22DAF397217B52E6003CE28B /* ActionsKit.framework */; };
 		22D1B2412180BF720062F2CB /* BookishCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F3548A216FAC0100443C0B /* BookishCore.framework */; };
 		22D1B2432180CA9E0062F2CB /* PersonBookCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D1B2422180CA9E0062F2CB /* PersonBookCell.swift */; };
-		22D1B2452180CCA00062F2CB /* RepresentativeCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D1B2442180CCA00062F2CB /* RepresentativeCellView.swift */; };
-		22D1B2472180CEE40062F2CB /* Representative.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D1B2462180CEE40062F2CB /* Representative.swift */; };
 		22D1B2492180D7B60062F2CB /* BookDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D1B2482180D7B60062F2CB /* BookDetailCell.swift */; };
 		22D1B24B2180E9060062F2CB /* PersonRoleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D1B24A2180E9060062F2CB /* PersonRoleCell.swift */; };
 		22D39E512142DB2700282467 /* ViewBasedToolbarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D39E502142DB2700282467 /* ViewBasedToolbarItem.swift */; };
@@ -271,8 +269,6 @@
 		22D1B23A21807D230062F2CB /* PersonBookRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonBookRow.swift; sourceTree = "<group>"; };
 		22D1B23C21807F7B0062F2CB /* CollectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionController.swift; sourceTree = "<group>"; };
 		22D1B2422180CA9E0062F2CB /* PersonBookCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonBookCell.swift; sourceTree = "<group>"; };
-		22D1B2442180CCA00062F2CB /* RepresentativeCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepresentativeCellView.swift; sourceTree = "<group>"; };
-		22D1B2462180CEE40062F2CB /* Representative.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Representative.swift; sourceTree = "<group>"; };
 		22D1B2482180D7B60062F2CB /* BookDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailCell.swift; sourceTree = "<group>"; };
 		22D1B24A2180E9060062F2CB /* PersonRoleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonRoleCell.swift; sourceTree = "<group>"; };
 		22D39E502142DB2700282467 /* ViewBasedToolbarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewBasedToolbarItem.swift; sourceTree = "<group>"; };
@@ -419,8 +415,6 @@
 			children = (
 				22D39E5F2147D4A100282467 /* TestAction.swift */,
 				22D39E522146A84500282467 /* AnnotatedTableCellView.swift */,
-				22D1B2442180CCA00062F2CB /* RepresentativeCellView.swift */,
-				22D1B2462180CEE40062F2CB /* Representative.swift */,
 				22D39E5D2146D9F100282467 /* ValidatingButton.swift */,
 				22960329214032520020B3EB /* AnnotatedTextField.swift */,
 				22143FD421300F9300B689DF /* CoreDataTransformers.swift */,
@@ -1026,7 +1020,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# build & run sketchx to export the assets\nswift run sketchx Bookish.sketch Mac=Assets Sources/BookishMac \n\n# update list of all assets\nfind Sources/BookishMac/Assets.xcassets/ > Sources/BookishMac/Assets.xcfilelist\n";
+			shellScript = "# build & run sketchx to export the assets\nswift run sketchx Bookish.sketch Mac=Assets Sources/BookishMac \n\n# update list of all assets\nfind Sources/BookishMac/Assets.xcassets > Sources/BookishMac/Assets.xcfilelist\n";
 			showEnvVarsInLog = 0;
 		};
 		226EF319217793740012A405 /* Export From Sketch */ = {
@@ -1175,7 +1169,6 @@
 				2296032A214032520020B3EB /* AnnotatedTextField.swift in Sources */,
 				22D1B2492180D7B60062F2CB /* BookDetailCell.swift in Sources */,
 				22DD424A2126D6DA0070C85A /* CollectionViewController.swift in Sources */,
-				22D1B2452180CCA00062F2CB /* RepresentativeCellView.swift in Sources */,
 				22429401212C32BF00E70510 /* CollectionWindowController.swift in Sources */,
 				22DD42482126D6DA0070C85A /* Application.swift in Sources */,
 				22429406212D945C00E70510 /* BookDetailViewController.swift in Sources */,
@@ -1203,7 +1196,6 @@
 				22D39E5E2146D9F100282467 /* ValidatingButton.swift in Sources */,
 				22D1B2432180CA9E0062F2CB /* PersonBookCell.swift in Sources */,
 				22429403212C3C7400E70510 /* ViewExtensions.swift in Sources */,
-				22D1B2472180CEE40062F2CB /* Representative.swift in Sources */,
 				224293FB212C1D7500E70510 /* BookIndexViewController.swift in Sources */,
 				22D39E592146BA9C00282467 /* ShowDatePickerAction.swift in Sources */,
 				22D39E512142DB2700282467 /* ViewBasedToolbarItem.swift in Sources */,
