@@ -135,10 +135,6 @@ extension PersonDetailViewController: NSTableViewDataSource, NSTableViewDelegate
         }
         
         view?.objectValue = item
-//        if let view = view as? Representative {
-//            view.representedObject = item
-//        }
-        
         view?.validateButtons()
         
         return view

@@ -103,20 +103,6 @@ extension BookDetailViewController: ActionContextProvider, PersonChangeObserver 
         if let selection = indexView.indexArray.selectedObjects as? [Book] {
             context.info[ActionContext.selectionKey] = selection
             context.addObserver(self)
-            let row = detailRow(for: context)
-            if row >= 0 {
-                let info = source.info(for: row)
-                if (info.isPerson) {
-                    context.info[PersonAction.roleKey] = source.person(for: row)
-                } else {
-                    if let valueView = detailsView.view(atColumn: 1, row: row, makeIfNecessary: false) as? BindableCellView {
-                        let detail = source.details(for: row)
-                        let valueObject = valueView.objectValue
-                        context.info["object"] = valueObject
-                        context.info["binding"] = detail.binding
-                    }
-                }
-            }
         }
     }
     
@@ -161,7 +147,7 @@ extension BookDetailViewController: NSTableViewDataSource, NSTableViewDelegate {
         let isHeading = columnID == BookDetailViewController.HeadingColumnID
         let viewID = isHeading ? BookDetailViewController.HeadingColumnID : NSUserInterfaceItemIdentifier(rawValue: info.identifier)
         
-        guard let view = tableView.makeView(withIdentifier: viewID, owner: self) else { return nil }
+        guard let view = tableView.makeView(withIdentifier: viewID, owner: self) as? NSTableCellView else { return nil }
 
         if isHeading {
             setupHeading(view: view, row: row, info: info)
@@ -195,8 +181,8 @@ extension BookDetailViewController: NSTableViewDataSource, NSTableViewDelegate {
         }
     }
     
-    fileprivate func setupValue(view: NSView, row: Int, info: DetailDataSource.RowInfo) {
-        if var bindable = view as? BindableCellView, let subview = bindable.viewToBind() {
+    fileprivate func setupValue(view: NSTableCellView, row: Int, info: DetailDataSource.RowInfo) {
+        if let subview = view.viewToBind() {
             var options = [NSBindingOption:Any]()
             let bound: Any
             let path: String
@@ -205,11 +191,15 @@ extension BookDetailViewController: NSTableViewDataSource, NSTableViewDelegate {
                 bound = source.person(for: row)
                 path = "person.name"
                 subviewID = NSUserInterfaceItemIdentifier(rawValue: "person-\(row)")
+                view.objectValue = bound
             } else {
                 let detail = source.details(for: row)
                 bound = indexView.indexArray
                 path = "selection.\(detail.binding)"
                 if detail.kind == .date {
+                    if let view = view as? DateTableCellView {
+                        view.binding = detail.binding
+                    }
                     options[.valueTransformer] = ValueTransformer(forName: NSValueTransformerName(rawValue: "DateToString"))
                     if let textView = subview as? NSTextField {
                         let unlocked = detail.editable
@@ -219,7 +209,7 @@ extension BookDetailViewController: NSTableViewDataSource, NSTableViewDelegate {
                     }
                 }
                 subviewID = NSUserInterfaceItemIdentifier(rawValue: "detail-\(detail.binding)")
-                bindable.objectValue = indexView.indexArray.selection as? NSObject
+                view.objectValue = indexView.indexArray.selection as? NSObject
             }
             
             subview.bind(NSBindingName(rawValue: "value"), to:bound, withKeyPath:path, options: options)

@@ -4,6 +4,8 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 import AppKit
+import Actions
+import BookishModel
 
 class PersonTableCellView: AnnotatedTableCellView {
     @IBOutlet weak var addButton: NSButton!
@@ -12,12 +14,11 @@ class PersonTableCellView: AnnotatedTableCellView {
     override var annotationButtons: [NSButton] {
         return [addButton, removeButton]
     }
-    
-    override func viewDidUnhide() {
-        print("did unhide")
+}
+
+extension PersonTableCellView: ActionContextProvider {
+    func provide(context: ActionContext) {
+        context.info[PersonAction.roleKey] = objectValue as? PersonRole
     }
-    
-    override func viewDidMoveToSuperview() {
-        print("moved")
-    }
+
 }

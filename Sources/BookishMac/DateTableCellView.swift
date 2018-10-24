@@ -4,11 +4,20 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 import AppKit
+import Actions
+import BookishModel
 
-class DateTableCellView: AnnotatedTableCellView {
+class DateTableCellView: AnnotatedTableCellView, ActionContextProvider {
     @IBOutlet weak var infoButton: NSButton!
+    var binding: String = ""
     
     override var annotationButtons: [NSButton] {
         return [infoButton]
     }
+    
+    func provide(context: ActionContext) {
+        context.info["object"] = objectValue
+        context.info["binding"] = binding
+    }
+
 }
