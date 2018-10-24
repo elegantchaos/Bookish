@@ -346,6 +346,9 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <segue destination="Fr8-pH-NMh" kind="showDetail" id="fZr-yF-Vad"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -354,9 +357,6 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="People" id="Vvd-Ix-n0U"/>
-                    <connections>
-                        <segue destination="Fr8-pH-NMh" kind="showDetail" identifier="showDetail" id="cHs-Ai-zXD"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gcs-KY-m0l" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -616,12 +616,12 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Book" width="16" height="16"/>
+        <image name="Book" width="32" height="32"/>
         <image name="Person" width="32" height="32"/>
         <image name="Settings" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="6S0-TO-JiA"/>
-        <segue reference="cHs-Ai-zXD"/>
+        <segue reference="fZr-yF-Vad"/>
     </inferredMetricsTieBreakers>
 </document>

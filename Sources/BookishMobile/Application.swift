@@ -17,7 +17,7 @@ class Application: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 
     var window: UIWindow?
     let actionManager = ActionManagerMobile()
-
+    let viewModel = CollectionViewModel()
     
     func setup(splitView: UISplitViewController) {
         let navigationController = splitView.viewControllers[splitView.viewControllers.count-1] as! UINavigationController

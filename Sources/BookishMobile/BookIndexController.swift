@@ -102,14 +102,8 @@ class BookIndexController: UITableViewController, NSFetchedResultsControllerDele
         }
         
         let fetchRequest: NSFetchRequest<Book> = Book.fetchRequest()
-        
-        // Set the batch size to a suitable number.
         fetchRequest.fetchBatchSize = 20
-        
-        // Edit the sort key as appropriate.
-        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
-        
-        fetchRequest.sortDescriptors = [sortDescriptor]
+        fetchRequest.sortDescriptors = application.viewModel.bookIndexSorting
         
         // Edit the section name key path and cache name if appropriate.
         // nil for section name key path means "no sections".

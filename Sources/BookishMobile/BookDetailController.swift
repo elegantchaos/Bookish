@@ -10,7 +10,6 @@ import Actions
 
 class BookDetailController: UIViewController {
     let source = DetailDataSource()
-    let sorting = [NSSortDescriptor(key: "role.name", ascending: true)]
     lazy var coverPlaceholder = UIImage(named: "CoverPlaceholder")
     var bindings = [Any]()
     
@@ -29,7 +28,7 @@ class BookDetailController: UIViewController {
                 imageView.image = coverPlaceholder
             }
             bindings.append(StringBinding(for: self, property: "title", to: book, path: "name"))
-            if let roles = book.personRoles, let sorted = roles.sortedArray(using: sorting) as? [PersonRole] {
+            if let roles = book.personRoles, let sorted = roles.sortedArray(using: application.viewModel.personRoleSorting) as? [PersonRole] {
                 source.people = sorted
             }
         }
