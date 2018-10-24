@@ -39,7 +39,6 @@ class Application: NSObject, NSApplicationDelegate {
         actionManager.register(PersonAction.standardActions())
         actionManager.register(PersonUIAction.standardActions())
         actionManager.register(BookAction.standardActions())
-        actionManager.register(BookUIAction.standardActions())
         actionManager.register([
             ShowDatePickerAction(identifier: "ShowDatePicker"),
             InsertItemAction(identifier: "InsertItem"),

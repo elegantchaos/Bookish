@@ -23,7 +23,6 @@ class Application: UIResponder, UIApplicationDelegate, ActionContextProvider {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         actionManager.register(PersonAction.standardActions())
         actionManager.register(BookAction.standardActions())
-        actionManager.register([RevealBookAction(identifier: "RevealBook")])
         actionManager.installResponder()
 
         applicationChannel.log("did finish launching")

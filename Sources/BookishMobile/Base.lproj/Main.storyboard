@@ -176,7 +176,7 @@
                                 <rect key="frame" x="325" y="584" width="46" height="30"/>
                                 <state key="normal" title="Button"/>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="actionID" value="InsertBook"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="actionID" value="NewBook"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="performAction:" destination="FJe-Yq-33r" eventType="primaryActionTriggered" id="UYD-xa-Wg4"/>
@@ -309,7 +309,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rux-fX-hf1" sceneMemberID="firstResponder"/>
                 <barButtonItem title="Add" id="FOG-E4-5VL">
                     <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="string" keyPath="actionID" value="InsertBook"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="actionID" value="NewBook"/>
                     </userDefinedRuntimeAttributes>
                     <connections>
                         <action selector="performAction:" destination="Rux-fX-hf1" id="FKh-Bs-kMt"/>
@@ -372,7 +372,7 @@
                                 <rect key="frame" x="325" y="584" width="46" height="30"/>
                                 <state key="normal" title="Button"/>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="actionID" value="InsertBook"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="actionID" value="NewBook"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="performAction:" destination="GnF-Hd-MLi" eventType="primaryActionTriggered" id="aA5-H3-j3d"/>
@@ -405,7 +405,7 @@
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="t0e-H5-MOw">
                                 <rect key="frame" x="4" y="136" width="367" height="183.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <mutableString key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</mutableString>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
