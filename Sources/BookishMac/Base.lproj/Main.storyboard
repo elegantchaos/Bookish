@@ -1251,7 +1251,7 @@
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
-                                                        <tableCellView identifier="book" id="kOa-mX-ie0" userLabel="book cell">
+                                                        <tableCellView identifier="book" id="kOa-mX-ie0" userLabel="book cell" customClass="BookTableCellView" customModule="BookishMac" customModuleProvider="target">
                                                             <rect key="frame" x="1" y="1" width="600" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>

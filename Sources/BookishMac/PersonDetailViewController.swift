@@ -129,12 +129,18 @@ extension PersonDetailViewController: NSTableViewDataSource, NSTableViewDelegate
             viewID = PersonDetailViewController.unknownViewID
         }
 
-        let view = tableView.makeView(withIdentifier: viewID, owner: self)
+        let view = tableView.makeView(withIdentifier: viewID, owner: self) as? NSTableCellView
         if let field = view?.subviews.first as? NSTextField {
             field.stringValue = label
         }
         
+        view?.objectValue = item
+//        if let view = view as? Representative {
+//            view.representedObject = item
+//        }
+        
         view?.validateButtons()
+        
         return view
     }
     
@@ -178,12 +184,12 @@ extension PersonDetailViewController: ActionContextProvider {
     func provideDetailInfo(context: ActionContext) {
         if let selection = indexView.indexArray.selectedObjects as? [Person] {
             context.info[ActionContext.selectionKey] = selection
-            if let view = context.sender as? NSView {
-                let row = detailsView.row(for: view)
-                if row >= 0 {
-                    context.info[BookAction.bookKey] = rows[row] as? Book
-                }
-            }
+//            if let view = context.sender as? NSView {
+//                let row = detailsView.row(for: view)
+//                if row >= 0 {
+//                    context.info[BookAction.bookKey] = rows[row] as? Book
+//                }
+//            }
         }
     }
     

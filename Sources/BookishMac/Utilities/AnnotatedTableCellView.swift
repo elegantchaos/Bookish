@@ -5,7 +5,7 @@
 
 import AppKit
 
-class AnnotatedTableCellView: NSTableCellView, NSTextFieldDelegate {
+class AnnotatedTableCellView: RepresentativeCellView, NSTextFieldDelegate {
     override func awakeFromNib() {
         super.awakeFromNib()
         hideButtons()
