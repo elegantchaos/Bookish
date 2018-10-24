@@ -100,6 +100,11 @@ class PersonDetailViewController: CollectionViewController {
 
 // MARK: Table Support
 
+protocol PersonDetailTableCell {
+    func setup(for view: PersonDetailViewController, row: Int, item: NSManagedObject)
+    func keyView() -> NSView?
+}
+
 extension PersonDetailViewController: NSTableViewDataSource, NSTableViewDelegate {
     
     static let bookViewID = NSUserInterfaceItemIdentifier(rawValue: "book")
@@ -115,28 +120,22 @@ extension PersonDetailViewController: NSTableViewDataSource, NSTableViewDelegate
             return nil
         }
 
-        let label: String
         let viewID: NSUserInterfaceItemIdentifier
         let item = rows[row]
-        if let role = item as? Role, let name = role.name {
-            label = name
+        switch item {
+        case is Role:
             viewID = PersonDetailViewController.roleViewID
-        } else if let book = item as? Book, let name = book.name {
-            label = name
+        case is Book:
             viewID = PersonDetailViewController.bookViewID
-       } else {
-            label = ""
+        default:
             viewID = PersonDetailViewController.unknownViewID
         }
-
-        let view = tableView.makeView(withIdentifier: viewID, owner: self) as? NSTableCellView
-        if let field = view?.subviews.first as? NSTextField {
-            field.stringValue = label
+    
+        let view = tableView.makeView(withIdentifier: viewID, owner: self)
+        if let cell = view as? PersonDetailTableCell {
+            cell.setup(for: self, row: row, item: item)
         }
-        
-        view?.objectValue = item
-        view?.validateButtons()
-        
+
         return view
     }
     
@@ -161,16 +160,16 @@ extension PersonDetailViewController: NSTableViewDataSource, NSTableViewDelegate
     }
     
     func recalculateKeyViews() {
-//        let rows = availableRows.sorted()
-//        var view: NSView = notesView
-//        for row in rows {
-//            if let rowView = (detailsView.view(atColumn: 0, row: row, makeIfNecessary: false) as? BindableCellView)?.viewToBind() {
-//                view.nextKeyView = rowView
-//                view = rowView
-//            }
-//        }
-//        view.nextKeyView = nameView
-//        keyViewTimer = nil
+        let rows = availableRows.sorted()
+        var view: NSView = notesView
+        for row in rows {
+            if let rowView = (detailsView.view(atColumn: 0, row: row, makeIfNecessary: false) as? PersonDetailTableCell)?.keyView() {
+                view.nextKeyView = rowView
+                view = rowView
+            }
+        }
+        view.nextKeyView = nameView
+        keyViewTimer = nil
     }
 }
 
@@ -180,12 +179,6 @@ extension PersonDetailViewController: ActionContextProvider {
     func provideDetailInfo(context: ActionContext) {
         if let selection = indexView.indexArray.selectedObjects as? [Person] {
             context.info[ActionContext.selectionKey] = selection
-//            if let view = context.sender as? NSView {
-//                let row = detailsView.row(for: view)
-//                if row >= 0 {
-//                    context.info[BookAction.bookKey] = rows[row] as? Book
-//                }
-//            }
         }
     }
     

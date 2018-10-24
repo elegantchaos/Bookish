@@ -4,20 +4,15 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 import AppKit
-import Actions
 import BookishModel
 
-class PersonBookCell: NSTableCellView, ActionContextProvider, PersonDetailTableCell {
+class PersonRoleCell: NSTableCellView, PersonDetailTableCell {
     func setup(for view: PersonDetailViewController, row: Int, item: NSManagedObject) {
-        if let book = item as? Book, let name = book.name {
+                      if let role = item as? Role, let name = role.name {
             objectValue = item
             textField?.stringValue = name
             validateButtons()
         }
-    }
-    
-    func provide(context: ActionContext) {
-        context.info[BookAction.bookKey] = objectValue as? Book
     }
     
     func keyView() -> NSView? {

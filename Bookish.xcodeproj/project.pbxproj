@@ -87,6 +87,7 @@
 		22D1B2452180CCA00062F2CB /* RepresentativeCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D1B2442180CCA00062F2CB /* RepresentativeCellView.swift */; };
 		22D1B2472180CEE40062F2CB /* Representative.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D1B2462180CEE40062F2CB /* Representative.swift */; };
 		22D1B2492180D7B60062F2CB /* BookDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D1B2482180D7B60062F2CB /* BookDetailCell.swift */; };
+		22D1B24B2180E9060062F2CB /* PersonRoleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D1B24A2180E9060062F2CB /* PersonRoleCell.swift */; };
 		22D39E512142DB2700282467 /* ViewBasedToolbarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D39E502142DB2700282467 /* ViewBasedToolbarItem.swift */; };
 		22D39E532146A84500282467 /* AnnotatedTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D39E522146A84500282467 /* AnnotatedTableCellView.swift */; };
 		22D39E552146A84E00282467 /* BookDateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D39E542146A84E00282467 /* BookDateCell.swift */; };
@@ -273,6 +274,7 @@
 		22D1B2442180CCA00062F2CB /* RepresentativeCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepresentativeCellView.swift; sourceTree = "<group>"; };
 		22D1B2462180CEE40062F2CB /* Representative.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Representative.swift; sourceTree = "<group>"; };
 		22D1B2482180D7B60062F2CB /* BookDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailCell.swift; sourceTree = "<group>"; };
+		22D1B24A2180E9060062F2CB /* PersonRoleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonRoleCell.swift; sourceTree = "<group>"; };
 		22D39E502142DB2700282467 /* ViewBasedToolbarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewBasedToolbarItem.swift; sourceTree = "<group>"; };
 		22D39E522146A84500282467 /* AnnotatedTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotatedTableCellView.swift; sourceTree = "<group>"; };
 		22D39E542146A84E00282467 /* BookDateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDateCell.swift; sourceTree = "<group>"; };
@@ -492,6 +494,7 @@
 				22D1B2482180D7B60062F2CB /* BookDetailCell.swift */,
 				22D39E542146A84E00282467 /* BookDateCell.swift */,
 				22D1B2422180CA9E0062F2CB /* PersonBookCell.swift */,
+				22D1B24A2180E9060062F2CB /* PersonRoleCell.swift */,
 				22D39E5C2146CC4400282467 /* Actions */,
 				22D39E632147E9BA00282467 /* Transformers */,
 				221F27272136EC0500DC2DC7 /* Utilities */,
@@ -1176,6 +1179,7 @@
 				22429401212C32BF00E70510 /* CollectionWindowController.swift in Sources */,
 				22DD42482126D6DA0070C85A /* Application.swift in Sources */,
 				22429406212D945C00E70510 /* BookDetailViewController.swift in Sources */,
+				22D1B24B2180E9060062F2CB /* PersonRoleCell.swift in Sources */,
 				22143FD3212F0F2500B689DF /* AuthorsTransformer.swift in Sources */,
 				22143FCF212EF9CC00B689DF /* DocumentWindowController.swift in Sources */,
 				22462E952158EDEA00A4C56C /* CollectionDetailViewController.swift in Sources */,
