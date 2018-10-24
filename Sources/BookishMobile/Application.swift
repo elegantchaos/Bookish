@@ -13,26 +13,17 @@ import ActionsKit
 let applicationChannel = Logger("Application")
 
 @UIApplicationMain
-class Application: UIResponder, UIApplicationDelegate, UISplitViewControllerDelegate, ActionContextProvider {
+class Application: UIResponder, UIApplicationDelegate, ActionContextProvider {
 
     var window: UIWindow?
     let actionManager = ActionManagerMobile()
-    let viewModel = CollectionViewModel()
-    
-    func setup(splitView: UISplitViewController) {
-        let navigationController = splitView.viewControllers[splitView.viewControllers.count-1] as! UINavigationController
-        navigationController.topViewController!.navigationItem.leftBarButtonItem = splitView.displayModeButtonItem
-        splitView.delegate = self
-    }
+    @objc dynamic let viewModel = CollectionViewModel()
+    var collectionController: CollectionController!
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         actionManager.register(PersonAction.standardActions())
         actionManager.register(BookAction.standardActions())
         actionManager.installResponder()
-
-        let topVC = self.window!.rootViewController as! UITabBarController
-        setup(splitView: topVC.viewControllers![0] as! UISplitViewController)
-        setup(splitView: topVC.viewControllers![1] as! UISplitViewController)
 
         applicationChannel.log("did finish launching")
         return true
@@ -70,29 +61,6 @@ class Application: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         applicationChannel.log("will terminate")
         self.saveContext()
     }
-
-    // MARK: - Split view
-
-    func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController:UIViewController, onto primaryViewController:UIViewController) -> Bool {
-        guard let secondaryAsNavController = secondaryViewController as? UINavigationController else { return false }
-        
-        if let topAsDetailController = secondaryAsNavController.topViewController as? BookDetailController {
-            if topAsDetailController.representedObject == nil {
-                // Return true to indicate that we have handled the collapse by doing nothing; the secondary controller will be discarded.
-                return true
-            }
-        }
-
-        if let topAsDetailController = secondaryAsNavController.topViewController as? PersonDetailController {
-            if topAsDetailController.representedObject == nil {
-                // Return true to indicate that we have handled the collapse by doing nothing; the secondary controller will be discarded.
-                return true
-            }
-        }
-
-        return false
-    }
-    // MARK: - Core Data stack
 
     lazy var persistentContainer: CollectionContainer = {
         /*
@@ -141,5 +109,14 @@ class Application: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
     func provide(context: ActionContext) {
         context.info[ActionContext.modelKey] = persistentContainer.viewContext
     }
+    
+    @objc func reveal(person: Person) {
+        viewModel.mode = .people
+    }
+    
+    @objc func reveal(book: Book) {
+        viewModel.mode = .books
+    }
+
 }
 

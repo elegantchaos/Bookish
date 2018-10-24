@@ -29,6 +29,7 @@ class BookIndexController: UITableViewController, NSFetchedResultsControllerDele
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        application.collectionController.bookIndexController = self
         managedObjectContext = application.persistentContainer.viewContext
 
         // Do any additional setup after loading the view, typically from a nib.

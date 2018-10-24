@@ -29,7 +29,7 @@ class PersonIndexController: UITableViewController, NSFetchedResultsControllerDe
     override func viewDidLoad() {
         super.viewDidLoad()
 
-
+        application.collectionController.personIndexController = self
         managedObjectContext = application.persistentContainer.viewContext
 
         navigationItem.leftBarButtonItem = editButtonItem

@@ -232,16 +232,17 @@
             </objects>
             <point key="canvasLocation" x="-788" y="3162"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Collection Controller-->
         <scene sceneID="Fh3-Be-TZL">
             <objects>
-                <tabBarController id="alz-nN-8lG" sceneMemberID="viewController">
+                <tabBarController id="alz-nN-8lG" customClass="CollectionController" customModule="BookishMobile" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="nJi-qq-iJt">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
+                        <outlet property="tabBar" destination="nJi-qq-iJt" id="SEw-cl-lTB"/>
                         <segue destination="H1p-Uh-vWS" kind="relationship" relationship="viewControllers" id="9HB-jN-3xG"/>
                         <segue destination="1F8-aT-uwI" kind="relationship" relationship="viewControllers" id="Yjo-YT-gqA"/>
                         <segue destination="WzE-F1-Iat" kind="relationship" relationship="viewControllers" id="QEu-8n-A3J"/>
@@ -616,7 +617,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Book" width="32" height="32"/>
+        <image name="Book" width="16" height="16"/>
         <image name="Person" width="32" height="32"/>
         <image name="Settings" width="32" height="32"/>
     </resources>
