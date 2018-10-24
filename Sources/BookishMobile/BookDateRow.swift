@@ -4,6 +4,6 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 
-class DateRow: DetailRow {
+class BookDateRow: BookDetailRow {
     
 }

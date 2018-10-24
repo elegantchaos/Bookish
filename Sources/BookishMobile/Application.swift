@@ -23,6 +23,7 @@ class Application: UIResponder, UIApplicationDelegate, ActionContextProvider {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         actionManager.register(PersonAction.standardActions())
         actionManager.register(BookAction.standardActions())
+        actionManager.register([RevealBookAction(identifier: "RevealBook")])
         actionManager.installResponder()
 
         applicationChannel.log("did finish launching")
@@ -108,15 +109,11 @@ class Application: UIResponder, UIApplicationDelegate, ActionContextProvider {
 
     func provide(context: ActionContext) {
         context.info[ActionContext.modelKey] = persistentContainer.viewContext
+        context.info[ActionContext.rootKey] = collectionController
     }
-    
-    @objc func reveal(person: Person) {
-        viewModel.mode = .people
-    }
-    
-    @objc func reveal(book: Book) {
-        viewModel.mode = .books
-    }
-
 }
 
+@objc class ActionPerformer: NSObject {
+    @IBAction func performAction(_ sender: Any) {
+    }
+}

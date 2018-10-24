@@ -8,28 +8,32 @@ import BookishModel
 import Actions
 
 class PersonDetailController: UIViewController {
+    struct SortedRole {
+        let role: Role
+        let books: [Book]
+    }
+    
 //        let source = DetailDataSource()
         lazy var coverPlaceholder = UIImage(named: "CoverPlaceholder")
         var bindings = [Any]()
-        
-        @IBOutlet weak var titleLabel: UITextField!
-        @IBOutlet weak var subtitleLabel: UITextField!
+        var sortedRoles = [SortedRole]()
+    
+        @IBOutlet weak var nameLabel: UITextField!
+        @IBOutlet weak var notesView: UITextView!
         @IBOutlet weak var imageView: UIImageView!
         @IBOutlet weak var detailView: UITableView!
         
         func configureView() {
-            if let person = representedObject, titleLabel != nil {
-                bindings.append(TextFieldBinding(for: titleLabel, to: person, path: "name"))
-//                bindings.append(TextFieldBinding(for: subtitleLabel, to: book, path: "subtitle"))
-//                if let imageData = book.image {
-//                    imageView.image = UIImage(data: imageData)
-//                } else {
-//                    imageView.image = coverPlaceholder
-//                }
-//                bindings.append(StringBinding(for: self, property: "title", to: book, path: "name"))
-//                if let roles = book.personRoles, let sorted = roles.sortedArray(using: sorting) as? [PersonRole] {
-//                    source.people = sorted
-//                }
+            if let person = representedObject, nameLabel != nil {
+                bindings.append(TextFieldBinding(for: nameLabel, to: person, path: "name"))
+                bindings.append(TextViewBinding(for: notesView, to: person, path: "notes"))
+                sortedRoles.removeAll()
+                for personRole in person.personRoles?.sortedArray(using: application.viewModel.personRoleSorting) as! [PersonRole] {
+                    if let role = personRole.role,
+                        let books = personRole.books?.sortedArray(using: application.viewModel.bookIndexSorting) as? [Book] {
+                        sortedRoles.append(SortedRole(role: role, books: books))
+                    }
+                }
             }
         }
         
@@ -50,19 +54,22 @@ class PersonDetailController: UIViewController {
     
     extension PersonDetailController: UITableViewDataSource, UITableViewDelegate {
         func numberOfSections(in tableView: UITableView) -> Int {
-            return 1
+            return sortedRoles.count
         }
         
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return 1 // source.rows
+            return sortedRoles[section].books.count
+        }
+        
+        func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+            return sortedRoles[section].role.name
         }
         
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            guard let person = representedObject else { fatalError("should have book set") }
-//            let info = source.info(for: indexPath.row)
-//            let identifier = info.identifier
-            let cell = tableView.dequeueReusableCell(withIdentifier: "book") as! BookDetailRow // if we fail here, it's a coding error as all possible view types should have been registered
-//            cell.setup(row: indexPath.row, book: book, source: source)
+            let role = sortedRoles[indexPath.section]
+            let book = role.books[indexPath.row]
+            let cell = tableView.dequeueReusableCell(withIdentifier: "book") as! PersonBookRow // if we fail here, it's a coding error as all possible view types should have been registered
+            cell.setup(row: indexPath.row, book: book, role:role.role)
             return cell
         }
     }

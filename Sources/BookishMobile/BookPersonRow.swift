@@ -5,7 +5,7 @@
 
 import BookishModel
 
-class PersonRow: DetailRow {
+class BookPersonRow: BookDetailRow {
     override func setup(row: Int, book: Book, source: DetailDataSource) {
         assert(source.info(for: row).isPerson)
         let personRole = source.person(for: row)

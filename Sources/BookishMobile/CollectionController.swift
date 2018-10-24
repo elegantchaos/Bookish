@@ -4,8 +4,29 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 import UIKit
+import BookishModel
+import Actions
 
-class CollectionController: UITabBarController {
+protocol RootUIProvider {
+    func reveal(book: Book)
+    func reveal(person: Person)
+}
+
+class RevealBookAction: Action {
+    override func validate(context: ActionContext) -> Bool {
+        let book = context.info[BookAction.bookKey] as? Book
+        return (book != nil) && super.validate(context: context)
+    }
+    
+    override func perform(context: ActionContext) {
+        if let book = context.info[BookAction.bookKey] as? Book,
+            let root = context.info[ActionContext.rootKey] as? RootUIProvider {
+            root.reveal(book: book)
+        }
+    }
+}
+
+class CollectionController: UITabBarController, RootUIProvider {
     var observers = [NSKeyValueObservation]()
     var personIndexController: PersonIndexController!
     var bookIndexController: BookIndexController!
@@ -34,7 +55,15 @@ class CollectionController: UITabBarController {
             application.viewModel.modeIndex = index
         }
     }
+
+    @objc func reveal(person: Person) {
+        application.viewModel.mode = .people
+    }
     
+    @objc func reveal(book: Book) {
+        application.viewModel.mode = .books
+    }
+
 }
 
 extension CollectionController: UISplitViewControllerDelegate {
