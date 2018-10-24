@@ -7,7 +7,7 @@ import AppKit
 import Actions
 import BookishModel
 
-class DateTableCellView: AnnotatedTableCellView, ActionContextProvider {
+class BookDateCell: AnnotatedTableCellView, ActionContextProvider {
     @IBOutlet weak var infoButton: NSButton!
     var binding: String = ""
     
@@ -22,7 +22,7 @@ class DateTableCellView: AnnotatedTableCellView, ActionContextProvider {
 
 }
 
-extension DateTableCellView: BindableCellView {
+extension BookDateCell: BookDetailTableCell {
     func setup(for view: BookDetailViewController, row: Int, info: DetailDataSource.RowInfo) {
         assert(!info.isPerson)
         if let subview = textField,
@@ -43,5 +43,9 @@ extension DateTableCellView: BindableCellView {
             objectValue = index.selection as? NSObject
             binding = detail.binding
         }
+    }
+    
+    func keyView() -> NSView? {
+        return textField
     }
 }

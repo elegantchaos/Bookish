@@ -6,11 +6,11 @@
 import AppKit
 import BookishModel
 
-class BookDetailTableCellView: NSTableCellView {
+class BookDetailCell: NSTableCellView {
     
 }
 
-extension BookDetailTableCellView: BindableCellView {
+extension BookDetailCell: BookDetailTableCell {
     func setup(for view: BookDetailViewController, row: Int, info: DetailDataSource.RowInfo) {
         assert(!info.isPerson)
         if let subview = textField, let index = view.indexView.indexArray {
@@ -20,5 +20,9 @@ extension BookDetailTableCellView: BindableCellView {
 
             objectValue = index.selection as? NSObject
         }
+    }
+
+    func keyView() -> NSView? {
+        return textField
     }
 }

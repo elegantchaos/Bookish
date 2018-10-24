@@ -7,7 +7,7 @@ import AppKit
 import Actions
 import BookishModel
 
-class PersonTableCellView: AnnotatedTableCellView {
+class BookPersonCell: AnnotatedTableCellView {
     @IBOutlet weak var addButton: NSButton!
     @IBOutlet weak var removeButton: NSButton!
     
@@ -16,7 +16,7 @@ class PersonTableCellView: AnnotatedTableCellView {
     }
 }
 
-extension PersonTableCellView: BindableCellView {
+extension BookPersonCell: BookDetailTableCell {
     func setup(for view: BookDetailViewController, row: Int, info: DetailDataSource.RowInfo) {
         assert(info.isPerson)
         if let subview = textField {
@@ -26,11 +26,14 @@ extension PersonTableCellView: BindableCellView {
             subview.bind(NSBindingName(rawValue: "value"), to:personRole, withKeyPath:"person.name", options: [:])
             subview.identifier = NSUserInterfaceItemIdentifier(rawValue: "person-\(row)")
         }
-        
+    }
+
+    func keyView() -> NSView? {
+        return textField
     }
 }
 
-extension PersonTableCellView: ActionContextProvider {
+extension BookPersonCell: ActionContextProvider {
     func provide(context: ActionContext) {
         context.info[PersonAction.roleKey] = objectValue as? PersonRole
     }

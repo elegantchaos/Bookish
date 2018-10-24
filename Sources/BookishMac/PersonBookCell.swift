@@ -7,7 +7,7 @@ import AppKit
 import Actions
 import BookishModel
 
-class BookTableCellView: NSTableCellView, ActionContextProvider {
+class PersonBookCell: NSTableCellView, ActionContextProvider {
     func provide(context: ActionContext) {
         context.info[BookAction.bookKey] = objectValue as? Book
     }

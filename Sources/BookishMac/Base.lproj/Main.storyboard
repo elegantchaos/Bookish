@@ -924,7 +924,7 @@
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
-                                                        <tableCellView id="CTI-AS-fZR" userLabel="detail cell" customClass="BookDetailTableCellView" customModule="BookishMac" customModuleProvider="target">
+                                                        <tableCellView id="CTI-AS-fZR" userLabel="detail cell" customClass="BookDetailCell" customModule="BookishMac" customModuleProvider="target">
                                                             <rect key="frame" x="84" y="1" width="211" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
@@ -947,7 +947,7 @@
                                                                 <outlet property="textField" destination="u47-FK-V32" id="4Tf-cZ-vMJ"/>
                                                             </connections>
                                                         </tableCellView>
-                                                        <tableCellView identifier="person" id="BkD-e8-vo5" userLabel="person cell" customClass="PersonTableCellView" customModule="BookishMac" customModuleProvider="target">
+                                                        <tableCellView identifier="person" id="BkD-e8-vo5" userLabel="person cell" customClass="BookPersonCell" customModule="BookishMac" customModuleProvider="target">
                                                             <rect key="frame" x="84" y="20" width="211" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
@@ -1011,7 +1011,7 @@
                                                                 <outlet property="textField" destination="62Q-09-BL4" id="bqN-SD-KTe"/>
                                                             </connections>
                                                         </tableCellView>
-                                                        <tableCellView identifier="date" id="DyG-Q7-Wwd" userLabel="date cell" customClass="DateTableCellView" customModule="BookishMac" customModuleProvider="target">
+                                                        <tableCellView identifier="date" id="DyG-Q7-Wwd" userLabel="date cell" customClass="BookDateCell" customModule="BookishMac" customModuleProvider="target">
                                                             <rect key="frame" x="84" y="39" width="211" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
@@ -1251,7 +1251,7 @@
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
-                                                        <tableCellView identifier="book" id="kOa-mX-ie0" userLabel="book cell" customClass="BookTableCellView" customModule="BookishMac" customModuleProvider="target">
+                                                        <tableCellView identifier="book" id="kOa-mX-ie0" userLabel="book cell" customClass="PersonBookCell" customModule="BookishMac" customModuleProvider="target">
                                                             <rect key="frame" x="1" y="1" width="600" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
