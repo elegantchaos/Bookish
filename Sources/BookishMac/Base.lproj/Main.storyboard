@@ -924,7 +924,7 @@
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
-                                                        <tableCellView id="CTI-AS-fZR" userLabel="detail cell">
+                                                        <tableCellView id="CTI-AS-fZR" userLabel="detail cell" customClass="BookDetailTableCellView" customModule="BookishMac" customModuleProvider="target">
                                                             <rect key="frame" x="84" y="1" width="211" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>

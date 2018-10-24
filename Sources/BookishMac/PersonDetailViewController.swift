@@ -161,16 +161,16 @@ extension PersonDetailViewController: NSTableViewDataSource, NSTableViewDelegate
     }
     
     func recalculateKeyViews() {
-        let rows = availableRows.sorted()
-        var view: NSView = notesView
-        for row in rows {
-            if let rowView = (detailsView.view(atColumn: 0, row: row, makeIfNecessary: false) as? BindableCellView)?.viewToBind() {
-                view.nextKeyView = rowView
-                view = rowView
-            }
-        }
-        view.nextKeyView = nameView
-        keyViewTimer = nil
+//        let rows = availableRows.sorted()
+//        var view: NSView = notesView
+//        for row in rows {
+//            if let rowView = (detailsView.view(atColumn: 0, row: row, makeIfNecessary: false) as? BindableCellView)?.viewToBind() {
+//                view.nextKeyView = rowView
+//                view = rowView
+//            }
+//        }
+//        view.nextKeyView = nameView
+//        keyViewTimer = nil
     }
 }
 

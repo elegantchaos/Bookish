@@ -16,6 +16,20 @@ class PersonTableCellView: AnnotatedTableCellView {
     }
 }
 
+extension PersonTableCellView: BindableCellView {
+    func setup(for view: BookDetailViewController, row: Int, info: DetailDataSource.RowInfo) {
+        assert(info.isPerson)
+        if let subview = textField {
+            let source = view.source
+            let personRole = source.person(for: row)
+            objectValue = personRole
+            subview.bind(NSBindingName(rawValue: "value"), to:personRole, withKeyPath:"person.name", options: [:])
+            subview.identifier = NSUserInterfaceItemIdentifier(rawValue: "person-\(row)")
+        }
+        
+    }
+}
+
 extension PersonTableCellView: ActionContextProvider {
     func provide(context: ActionContext) {
         context.info[PersonAction.roleKey] = objectValue as? PersonRole

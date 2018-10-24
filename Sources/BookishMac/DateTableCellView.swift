@@ -21,3 +21,27 @@ class DateTableCellView: AnnotatedTableCellView, ActionContextProvider {
     }
 
 }
+
+extension DateTableCellView: BindableCellView {
+    func setup(for view: BookDetailViewController, row: Int, info: DetailDataSource.RowInfo) {
+        assert(!info.isPerson)
+        if let subview = textField,
+            let index = view.indexView.indexArray,
+            let transformer = ValueTransformer(forName: NSValueTransformerName(rawValue: "DateToString")) {
+            let detail = view.source.details(for: row)
+            let unlocked = detail.editable
+            let options: [NSBindingOption:Any] = [
+                .valueTransformer: transformer,
+                .conditionallySetsEditable: unlocked
+            ]
+            
+            subview.isSelectable = unlocked
+            subview.isEditable = unlocked
+            subview.identifier = NSUserInterfaceItemIdentifier(rawValue: "date-detail-\(detail.binding)")
+            subview.bind(NSBindingName(rawValue: "value"), to:index, withKeyPath:"selection.\(detail.binding)", options: options)
+
+            objectValue = index.selection as? NSObject
+            binding = detail.binding
+        }
+    }
+}

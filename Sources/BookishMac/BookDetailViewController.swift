@@ -122,14 +122,7 @@ extension BookDetailViewController: ActionContextProvider, PersonChangeObserver 
 // MARK: Table Support
 
 protocol BindableCellView {
-    func viewToBind() -> NSView?
-    var objectValue: Any? { get set }
-}
-
-extension NSTableCellView: BindableCellView {
-    func viewToBind() -> NSView? {
-        return textField
-    }
+    func setup(for: BookDetailViewController, row: Int, info: DetailDataSource.RowInfo)
 }
 
 extension BookDetailViewController: NSTableViewDataSource, NSTableViewDelegate {
@@ -182,39 +175,42 @@ extension BookDetailViewController: NSTableViewDataSource, NSTableViewDelegate {
     }
     
     fileprivate func setupValue(view: NSTableCellView, row: Int, info: DetailDataSource.RowInfo) {
-        if let subview = view.viewToBind() {
-            var options = [NSBindingOption:Any]()
-            let bound: Any
-            let path: String
-            let subviewID: NSUserInterfaceItemIdentifier
-            if info.isPerson {
-                bound = source.person(for: row)
-                path = "person.name"
-                subviewID = NSUserInterfaceItemIdentifier(rawValue: "person-\(row)")
-                view.objectValue = bound
-            } else {
-                let detail = source.details(for: row)
-                bound = indexView.indexArray
-                path = "selection.\(detail.binding)"
-                if detail.kind == .date {
-                    if let view = view as? DateTableCellView {
-                        view.binding = detail.binding
-                    }
-                    options[.valueTransformer] = ValueTransformer(forName: NSValueTransformerName(rawValue: "DateToString"))
-                    if let textView = subview as? NSTextField {
-                        let unlocked = detail.editable
-                        options[.conditionallySetsEditable] = unlocked
-                        textView.isSelectable = unlocked
-                        textView.isEditable = unlocked
-                    }
-                }
-                subviewID = NSUserInterfaceItemIdentifier(rawValue: "detail-\(detail.binding)")
-                view.objectValue = indexView.indexArray.selection as? NSObject
-            }
-            
-            subview.bind(NSBindingName(rawValue: "value"), to:bound, withKeyPath:path, options: options)
-            subview.identifier = subviewID
+        if let bindable = view as? BindableCellView {
+            bindable.setup(for: self, row: row, info: info)
         }
+//        if let subview = view.viewToBind() {
+//            var options = [NSBindingOption:Any]()
+//            let bound: Any
+//            let path: String
+//            let subviewID: NSUserInterfaceItemIdentifier
+//            if info.isPerson {
+//                bound = source.person(for: row)
+//                path = "person.name"
+//                subviewID = NSUserInterfaceItemIdentifier(rawValue: "person-\(row)")
+//                view.objectValue = bound
+//            } else {
+//                let detail = source.details(for: row)
+//                bound = indexView.indexArray
+//                path = "selection.\(detail.binding)"
+//                if detail.kind == .date {
+//                    if let view = view as? DateTableCellView {
+//                        view.binding = detail.binding
+//                    }
+//                    options[.valueTransformer] = ValueTransformer(forName: NSValueTransformerName(rawValue: "DateToString"))
+//                    if let textView = subview as? NSTextField {
+//                        let unlocked = detail.editable
+//                        options[.conditionallySetsEditable] = unlocked
+//                        textView.isSelectable = unlocked
+//                        textView.isEditable = unlocked
+//                    }
+//                }
+//                subviewID = NSUserInterfaceItemIdentifier(rawValue: "detail-\(detail.binding)")
+//                view.objectValue = indexView.indexArray.selection as? NSObject
+//            }
+//
+//            subview.bind(NSBindingName(rawValue: "value"), to:bound, withKeyPath:path, options: options)
+//            subview.identifier = subviewID
+//        }
     }
     
     fileprivate func scheduleRecalculateKeyViews() {
@@ -228,15 +224,15 @@ extension BookDetailViewController: NSTableViewDataSource, NSTableViewDelegate {
     }
     
     fileprivate func recalculateKeyViews() {
-        let rows = availableRows.sorted()
-        var view: NSView = subtitleView
-        for row in rows {
-            if let rowView = (detailsView.view(atColumn: 1, row: row, makeIfNecessary: false) as? BindableCellView)?.viewToBind() {
-                view.nextKeyView = rowView
-                view = rowView
-            }
-        }
-        view.nextKeyView = titleView
-        keyViewTimer = nil
+//        let rows = availableRows.sorted()
+//        var view: NSView = subtitleView
+//        for row in rows {
+//            if let rowView = (detailsView.view(atColumn: 1, row: row, makeIfNecessary: false) as? BindableCellView)?.viewToBind() {
+//                view.nextKeyView = rowView
+//                view = rowView
+//            }
+//        }
+//        view.nextKeyView = titleView
+//        keyViewTimer = nil
     }
 }
