@@ -4,6 +4,9 @@ Sources/BookishMac/Assets.xcassets/AddBook.imageset/AddBook.png
 Sources/BookishMac/Assets.xcassets/AddBook.imageset/Contents.json
 Sources/BookishMac/Assets.xcassets/AddBook.imageset/AddBook@3x.png
 Sources/BookishMac/Assets.xcassets/AddBook.imageset/AddBook@2x.png
+Sources/BookishMac/Assets.xcassets/Sidebar.colorset
+Sources/BookishMac/Assets.xcassets/Bookish Index.colorset
+Sources/BookishMac/Assets.xcassets/Bookish Index.colorset/Contents.json
 Sources/BookishMac/Assets.xcassets/RemoveBook.imageset
 Sources/BookishMac/Assets.xcassets/RemoveBook.imageset/RemoveBook.png
 Sources/BookishMac/Assets.xcassets/RemoveBook.imageset/Contents.json
@@ -24,6 +27,8 @@ Sources/BookishMac/Assets.xcassets/Person.imageset/Person.png
 Sources/BookishMac/Assets.xcassets/Person.imageset/Contents.json
 Sources/BookishMac/Assets.xcassets/Person.imageset/Person@3x.png
 Sources/BookishMac/Assets.xcassets/Person.imageset/Person@2x.png
+Sources/BookishMac/Assets.xcassets/Bookish Text.colorset
+Sources/BookishMac/Assets.xcassets/Bookish Text.colorset/Contents.json
 Sources/BookishMac/Assets.xcassets/AppIcon.appiconset
 Sources/BookishMac/Assets.xcassets/AppIcon.appiconset/Icon16.png
 Sources/BookishMac/Assets.xcassets/AppIcon.appiconset/Icon1024.png
@@ -34,6 +39,8 @@ Sources/BookishMac/Assets.xcassets/AppIcon.appiconset/Icon64.png
 Sources/BookishMac/Assets.xcassets/AppIcon.appiconset/Contents.json
 Sources/BookishMac/Assets.xcassets/AppIcon.appiconset/Icon256.png
 Sources/BookishMac/Assets.xcassets/AppIcon.appiconset/Icon32.png
+Sources/BookishMac/Assets.xcassets/Bookish Detail.colorset
+Sources/BookishMac/Assets.xcassets/Bookish Detail.colorset/Contents.json
 Sources/BookishMac/Assets.xcassets/RemovePerson.imageset
 Sources/BookishMac/Assets.xcassets/RemovePerson.imageset/RemovePerson@3x.png
 Sources/BookishMac/Assets.xcassets/RemovePerson.imageset/RemovePerson@2x.png
@@ -41,6 +48,7 @@ Sources/BookishMac/Assets.xcassets/RemovePerson.imageset/RemovePerson.png
 Sources/BookishMac/Assets.xcassets/RemovePerson.imageset/Contents.json
 Sources/BookishMac/Assets.xcassets/Reveal.imageset
 Sources/BookishMac/Assets.xcassets/Reveal.imageset/Reveal@3x.png
+Sources/BookishMac/Assets.xcassets/Reveal.imageset/Contents.json
 Sources/BookishMac/Assets.xcassets/Reveal.imageset/Reveal@2x.png
 Sources/BookishMac/Assets.xcassets/Reveal.imageset/Reveal.png
 Sources/BookishMac/Assets.xcassets/ChooseDate.imageset
@@ -53,12 +61,15 @@ Sources/BookishMac/Assets.xcassets/ChooseDateSmall.imageset/ChooseDateSmall.png
 Sources/BookishMac/Assets.xcassets/ChooseDateSmall.imageset/ChooseDateSmall@3x.png
 Sources/BookishMac/Assets.xcassets/ChooseDateSmall.imageset/ChooseDateSmall@2x.png
 Sources/BookishMac/Assets.xcassets/ChooseDateSmall.imageset/Contents.json
+Sources/BookishMac/Assets.xcassets/Index.colorset
 Sources/BookishMac/Assets.xcassets/Contents.json
 Sources/BookishMac/Assets.xcassets/CoverPlaceholder.imageset
 Sources/BookishMac/Assets.xcassets/CoverPlaceholder.imageset/CoverPlaceholder.png
 Sources/BookishMac/Assets.xcassets/CoverPlaceholder.imageset/CoverPlaceholder@3x.png
 Sources/BookishMac/Assets.xcassets/CoverPlaceholder.imageset/Contents.json
 Sources/BookishMac/Assets.xcassets/CoverPlaceholder.imageset/CoverPlaceholder@2x.png
+Sources/BookishMac/Assets.xcassets/Bookish Sidebar.colorset
+Sources/BookishMac/Assets.xcassets/Bookish Sidebar.colorset/Contents.json
 Sources/BookishMac/Assets.xcassets/Settings.imageset
 Sources/BookishMac/Assets.xcassets/Settings.imageset/Settings.png
 Sources/BookishMac/Assets.xcassets/Settings.imageset/Contents.json
@@ -69,6 +80,7 @@ Sources/BookishMac/Assets.xcassets/SettingsSmall.imageset/SettingsSmall@3x.png
 Sources/BookishMac/Assets.xcassets/SettingsSmall.imageset/Contents.json
 Sources/BookishMac/Assets.xcassets/SettingsSmall.imageset/SettingsSmall@2x.png
 Sources/BookishMac/Assets.xcassets/SettingsSmall.imageset/SettingsSmall.png
+Sources/BookishMac/Assets.xcassets/Text.colorset
 Sources/BookishMac/Assets.xcassets/Book.imageset
 Sources/BookishMac/Assets.xcassets/Book.imageset/Book@3x.png
 Sources/BookishMac/Assets.xcassets/Book.imageset/Book.png
