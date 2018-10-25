@@ -6,7 +6,7 @@
 import UIKit
 import BookishModel
 
-class DetailRow: UITableViewCell {
+class BookDetailRow: UITableViewCell {
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var detail: UITextView!
     

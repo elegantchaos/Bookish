@@ -8,10 +8,9 @@ import BookishModel
 import Actions
 
 
-class DetailViewController: UIViewController {
+class BookDetailController: UIViewController {
     let source = DetailDataSource()
-    let sorting = [NSSortDescriptor(key: "role.name", ascending: true)]
-    lazy var coverPlaceholder = UIImage(named: "CoverPlaceholder")
+    lazy var placeholderImage = UIImage(named: "CoverPlaceholder")
     var bindings = [Any]()
     
     @IBOutlet weak var titleLabel: UITextField!
@@ -26,10 +25,10 @@ class DetailViewController: UIViewController {
             if let imageData = book.image {
                 imageView.image = UIImage(data: imageData)
             } else {
-                imageView.image = coverPlaceholder
+                imageView.image = placeholderImage
             }
             bindings.append(StringBinding(for: self, property: "title", to: book, path: "name"))
-            if let roles = book.personRoles, let sorted = roles.sortedArray(using: sorting) as? [PersonRole] {
+            if let roles = book.personRoles, let sorted = roles.sortedArray(using: application.viewModel.personRoleSorting) as? [PersonRole] {
                 source.people = sorted
             }
         }
@@ -50,7 +49,7 @@ class DetailViewController: UIViewController {
 
 // MARK: Table Support
 
-extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
+extension BookDetailController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -63,16 +62,8 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
         guard let book = representedObject else { fatalError("should have book set") }
         let info = source.info(for: indexPath.row)
         let identifier = info.identifier
-        let cell = tableView.dequeueReusableCell(withIdentifier: identifier) as! DetailRow // if we fail here, it's a coding error as all possible view types should have been registered
+        let cell = tableView.dequeueReusableCell(withIdentifier: identifier) as! BookDetailRow // if we fail here, it's a coding error as all possible view types should have been registered
         cell.setup(row: indexPath.row, book: book, source: source)
         return cell
-    }
-}
-
-// MARK: Action Support
-
-extension DetailViewController: ActionContextProvider {
-    func provide(context: ActionContext) {
-        print("detail")
     }
 }

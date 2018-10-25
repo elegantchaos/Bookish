@@ -64,7 +64,7 @@
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <menu key="submenu" title="New" id="mBB-Wz-5Af">
                                                 <items>
-                                                    <menuItem title="Book" keyEquivalent="N" identifier="menu.InsertBook" id="9pa-hN-WM7">
+                                                    <menuItem title="Book" keyEquivalent="N" identifier="menu.NewBook" id="9pa-hN-WM7">
                                                         <connections>
                                                             <action selector="performAction:" target="Ady-hI-5gd" id="Qvf-xa-tYe"/>
                                                         </connections>
@@ -367,7 +367,7 @@
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="ceK-9f-B2v"/>
-                                        <menuItem title="Delete Book" identifier="menu.RemoveBook" id="60m-wd-nbQ">
+                                        <menuItem title="Delete Book" identifier="menu.DeleteBook" id="60m-wd-nbQ">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="performAction:" target="Ady-hI-5gd" id="Ghm-YB-CNA"/>
@@ -469,12 +469,12 @@
                         <value key="minSize" type="size" width="800" height="600"/>
                         <toolbar key="toolbar" implicitIdentifier="77DEAC6B-FAB4-4044-A5AA-0B8765A74231" explicitIdentifier="toolbar" displayMode="iconAndLabel" sizeMode="small" id="WdN-bQ-LAx">
                             <allowedToolbarItems>
-                                <toolbarItem implicitItemIdentifier="1CED54FA-DB54-4668-A669-6A9B23CE24FE" explicitItemIdentifier="toolbar.InsertBook" label="New" paletteLabel="New Book" tag="-1" image="AddBook" id="KUG-hg-iHG" userLabel="Add Book">
+                                <toolbarItem implicitItemIdentifier="1CED54FA-DB54-4668-A669-6A9B23CE24FE" explicitItemIdentifier="toolbar.NewBook" label="New" paletteLabel="New Book" tag="-1" image="AddBook" id="KUG-hg-iHG" userLabel="Add Book">
                                     <connections>
                                         <action selector="performAction:" target="6f7-a7-6o1" id="bL7-E9-AfQ"/>
                                     </connections>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="8FCDAD68-C7DB-48C2-801B-AA00D899B5F1" explicitItemIdentifier="toolbar.RemoveBook" label="Remove" paletteLabel="Remove Book" tag="-1" image="RemoveBook" id="vSg-qE-3uS">
+                                <toolbarItem implicitItemIdentifier="8FCDAD68-C7DB-48C2-801B-AA00D899B5F1" explicitItemIdentifier="toolbar.DeleteBook" label="Remove" paletteLabel="Remove Book" tag="-1" image="RemoveBook" id="vSg-qE-3uS">
                                     <connections>
                                         <action selector="performAction:" target="6f7-a7-6o1" id="zNr-Nl-MOv"/>
                                     </connections>
@@ -924,7 +924,7 @@
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
-                                                        <tableCellView id="CTI-AS-fZR" userLabel="detail cell">
+                                                        <tableCellView id="CTI-AS-fZR" userLabel="detail cell" customClass="BookDetailCell" customModule="BookishMac" customModuleProvider="target">
                                                             <rect key="frame" x="84" y="1" width="211" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
@@ -947,7 +947,7 @@
                                                                 <outlet property="textField" destination="u47-FK-V32" id="4Tf-cZ-vMJ"/>
                                                             </connections>
                                                         </tableCellView>
-                                                        <tableCellView identifier="person" id="BkD-e8-vo5" userLabel="person cell" customClass="PersonTableCellView" customModule="BookishMac" customModuleProvider="target">
+                                                        <tableCellView identifier="person" id="BkD-e8-vo5" userLabel="person cell" customClass="BookPersonCell" customModule="BookishMac" customModuleProvider="target">
                                                             <rect key="frame" x="84" y="20" width="211" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
@@ -1011,7 +1011,7 @@
                                                                 <outlet property="textField" destination="62Q-09-BL4" id="bqN-SD-KTe"/>
                                                             </connections>
                                                         </tableCellView>
-                                                        <tableCellView identifier="date" id="DyG-Q7-Wwd" userLabel="date cell" customClass="DateTableCellView" customModule="BookishMac" customModuleProvider="target">
+                                                        <tableCellView identifier="date" id="DyG-Q7-Wwd" userLabel="date cell" customClass="BookDateCell" customModule="BookishMac" customModuleProvider="target">
                                                             <rect key="frame" x="84" y="39" width="211" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
@@ -1251,7 +1251,7 @@
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
-                                                        <tableCellView identifier="book" id="kOa-mX-ie0" userLabel="book cell">
+                                                        <tableCellView identifier="book" id="kOa-mX-ie0" userLabel="book cell" customClass="PersonBookCell" customModule="BookishMac" customModuleProvider="target">
                                                             <rect key="frame" x="1" y="1" width="600" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
@@ -1286,7 +1286,7 @@
                                                                 <outlet property="textField" destination="oeA-lN-ssU" id="GKy-je-ajI"/>
                                                             </connections>
                                                         </tableCellView>
-                                                        <tableCellView identifier="role" id="BUh-17-nIV" userLabel="role cell">
+                                                        <tableCellView identifier="role" id="BUh-17-nIV" userLabel="role cell" customClass="PersonRoleCell" customModule="BookishMac" customModuleProvider="target">
                                                             <rect key="frame" x="1" y="20" width="600" height="24"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
@@ -1371,7 +1371,7 @@
     <resources>
         <image name="AddBook" width="32" height="32"/>
         <image name="AddPerson" width="32" height="32"/>
-        <image name="Book" width="16" height="16"/>
+        <image name="Book" width="32" height="32"/>
         <image name="ChooseDateSmall" width="12" height="12"/>
         <image name="CoverPlaceholder" width="512" height="512"/>
         <image name="Minus" width="12" height="12"/>

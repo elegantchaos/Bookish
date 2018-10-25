@@ -12,7 +12,6 @@ class PersonUIAction: PersonAction {
         return [
             FillPersonMenuAction(identifier: "FillPersonMenu"),
             PopupPersonMenuAction(identifier: "PopupPersonMenu"),
-            RevealPersonAction(identifier: "RevealPerson"),
         ]
     }
 }
@@ -32,18 +31,7 @@ class FillPersonMenuAction: PersonUIAction {
     }
 }
 
-class RevealPersonAction: PersonUIAction {
-    override func validate(context: ActionContext) -> Bool {
-        return (context.info[PersonAction.roleKey] as? PersonRole != nil) && super.validate(context: context)
-    }
-    
-    override func perform(context: ActionContext) {
-        if let role = context.info[PersonAction.roleKey] as? PersonRole, let person = role.person,
-            let window = context.info[ActionContext.windowKey] as? CollectionWindowController {
-            window.reveal(person: person)
-        }
-    }
-}
+
 
 class PopupPersonMenuAction: PersonUIAction {
     override func perform(context: ActionContext) {

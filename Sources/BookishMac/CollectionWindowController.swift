@@ -28,6 +28,7 @@ class CollectionWindowController: NSWindowController, DocumentWindowController, 
             context.info[ActionContext.modelKey] = model.managedObjectContext
             context.info[ActionContext.viewModelKey] = model
             context.info[ActionContext.windowKey] = self
+            context.info[ActionContext.rootKey] = self
         }
     }
     
@@ -37,15 +38,20 @@ class CollectionWindowController: NSWindowController, DocumentWindowController, 
         }
     }
     
-    @objc func reveal(person: Person) {
-        if let model = viewModel {
-            model.mode = .people
-        }
-    }
-    
+}
+
+extension CollectionWindowController: BookViewer {
     @objc func reveal(book: Book) {
         if let model = viewModel {
             model.mode = .books
+        }
+    }
+}
+
+extension CollectionWindowController: PersonViewer {
+    @objc func reveal(person: Person) {
+        if let model = viewModel {
+            model.mode = .people
         }
     }
 }

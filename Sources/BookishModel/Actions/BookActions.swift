@@ -6,23 +6,47 @@
 import Actions
 import CoreData
 
+/**
+ Protocol providing user interface actions.
+ These aren't implemented in the model, but the protocol is defined
+ here so that we can implement actions using it.
+ */
+
+public protocol BookViewer {
+    func reveal(book: Book)
+}
+
+/**
+ Objects that want to observe changes to books should
+ implement this protocol.
+ */
+
 public protocol BookChangeObserver: ActionObserver {
     func added(books: [Book])
     func removed(books: [Book])
 }
+
+/**
+ Common functionality for all book-related actions.
+ */
 
 open class BookAction: Action {
     public static let bookKey = "book"
 
     open class func standardActions() -> [Action] {
         return [
-            InsertBookAction(identifier: "InsertBook"),
-            RemoveBookAction(identifier: "RemoveBook"),
+            NewBookAction(identifier: "NewBook"),
+            DeleteBookAction(identifier: "DeleteBook"),
+            RevealBookAction(identifier: "RevealBook")
         ]
     }
 }
 
-public class InsertBookAction: BookAction {
+/**
+ Action to inserts a new book.
+ */
+
+public class NewBookAction: BookAction {
     public override func validate(context: ActionContext) -> Bool {
         return (context.info[ActionContext.modelKey] as? NSManagedObjectContext) != nil
     }
@@ -37,7 +61,11 @@ public class InsertBookAction: BookAction {
     }
 }
 
-public class RemoveBookAction: BookAction {
+/**
+ Action that deletes a book.
+ */
+
+public class DeleteBookAction: BookAction {
     public override func validate(context: ActionContext) -> Bool {
         guard let selection = context.info[ActionContext.selectionKey] as? [Book] else {
             return false
@@ -59,4 +87,20 @@ public class RemoveBookAction: BookAction {
     
 }
 
+/**
+ Action that shows a book in the user interface.
+ */
 
+class RevealBookAction: BookAction {
+    override func validate(context: ActionContext) -> Bool {
+        let book = context.info[BookAction.bookKey] as? Book
+        return (book != nil) && super.validate(context: context)
+    }
+    
+    override func perform(context: ActionContext) {
+        if let book = context.info[BookAction.bookKey] as? Book,
+            let viewer = context.info[ActionContext.rootKey] as? BookViewer {
+            viewer.reveal(book: book)
+        }
+    }
+}

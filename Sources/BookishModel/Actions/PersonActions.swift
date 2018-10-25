@@ -6,15 +6,39 @@
 import CoreData
 import Actions
 
+/**
+ Protocol providing user interface actions.
+ These aren't implemented in the model, but the protocol is defined
+ here so that we can implement actions using it.
+ */
+
+public protocol PersonViewer {
+    func reveal(person: Person)
+}
+
+/**
+ Objects that want to observe changes to people
+ should implement this protocol.
+ */
+
 public protocol PersonChangeObserver: ActionObserver {
     func added(role: PersonRole)
     func removed(role: PersonRole)
 }
 
+/**
+ Objects that want to observe construction/destruction
+ of people should implement this protocol.
+ */
+
 public protocol PersonConstructionObserver: ActionObserver {
     func created(person: Person)
     func deleted(person: Person)
 }
+
+/**
+ Common functionality for all person-related actions.
+ */
 
 open class PersonAction: Action {
     public static let roleKey = "personRole"
@@ -37,9 +61,14 @@ open class PersonAction: Action {
             AddPersonAction(identifier: "AddPerson"),
             RemovePersonAction(identifier: "RemovePerson"),
             DeletePersonAction(identifier: "DeletePerson"),
+            RevealPersonAction(identifier: "RevealPerson")
         ]
     }
 }
+
+/**
+ Action that adds a person to a book.
+ */
 
 class AddPersonAction: PersonAction {
     public override func validate(context: ActionContext) -> Bool {
@@ -66,6 +95,10 @@ class AddPersonAction: PersonAction {
     }
 }
 
+/**
+ Action that removes a person from a book.
+ */
+
 class RemovePersonAction: PersonAction {
     public override func validate(context: ActionContext) -> Bool {
         return (context.info[PersonAction.roleKey] as? PersonRole != nil) && super.validate(context: context)
@@ -91,6 +124,10 @@ class RemovePersonAction: PersonAction {
     }
 }
 
+/**
+ Action that creates a new person.
+ */
+
 class NewPersonAction: Action {
     public override func perform(context: ActionContext) {
         if let moc = context.info[ActionContext.modelKey] as? NSManagedObjectContext {
@@ -102,6 +139,10 @@ class NewPersonAction: Action {
         }
     }
 }
+
+/**
+ Action that deletes a person.
+ */
 
 class DeletePersonAction: Action {
     public override func perform(context: ActionContext) {
@@ -115,6 +156,23 @@ class DeletePersonAction: Action {
                 moc.delete(person)
             }
             
+        }
+    }
+}
+
+/**
+ Action that reveals a person in the UI.
+ */
+
+class RevealPersonAction: PersonAction {
+    override func validate(context: ActionContext) -> Bool {
+        return (context.info[PersonAction.roleKey] as? PersonRole != nil) && super.validate(context: context)
+    }
+    
+    override func perform(context: ActionContext) {
+        if let role = context.info[PersonAction.roleKey] as? PersonRole, let person = role.person,
+            let viewer = context.info[ActionContext.rootKey] as? PersonViewer {
+            viewer.reveal(person: person)
         }
     }
 }

@@ -1,5 +1,5 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-//  Created by Sam Deane on 20/08/2018.
+//  Created by Sam Deane on 23/10/2018.
 //  All code (c) 2018 - present day, Elegant Chaos Limited.
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
@@ -8,7 +8,7 @@ import CoreData
 import BookishModel
 import Actions
 
-class MasterViewController: UITableViewController, NSFetchedResultsControllerDelegate, ActionContextProvider, BookChangeObserver {
+class PersonIndexController: UITableViewController, NSFetchedResultsControllerDelegate, ActionContextProvider, BookChangeObserver {
     
     func added(books: [Book]) {
         print("added")
@@ -20,21 +20,25 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     
     func provide(context: ActionContext) {
         context.addObserver(self)
-    }    
+    }
     
-    var detailViewController: DetailViewController? = nil
+    @IBOutlet var indexTable: UITableView!
+    var detailViewController: PersonDetailController? = nil
     var managedObjectContext: NSManagedObjectContext? = nil
     @IBOutlet var addButton: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+
+        application.collectionController.personIndexController = self
+        managedObjectContext = application.persistentContainer.viewContext
+
         navigationItem.leftBarButtonItem = editButtonItem
         navigationItem.rightBarButtonItem = addButton
         
         if let split = splitViewController {
             let controllers = split.viewControllers
-            detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
+            detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? PersonDetailController
         }
     }
     
@@ -49,7 +53,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         if segue.identifier == "showDetail" {
             if let indexPath = tableView.indexPathForSelectedRow {
                 let object = fetchedResultsController.object(at: indexPath)
-                let controller = (segue.destination as! UINavigationController).topViewController as! DetailViewController
+                let controller = (segue.destination as! UINavigationController).topViewController as! PersonDetailController
                 controller.representedObject = object
                 controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
                 controller.navigationItem.leftItemsSupplementBackButton = true
@@ -70,8 +74,8 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        let book = fetchedResultsController.object(at: indexPath)
-        configureCell(cell, withBook: book)
+        let person = fetchedResultsController.object(at: indexPath)
+        configureCell(cell, withPerson: person)
         return cell
     }
     
@@ -83,39 +87,28 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let book = fetchedResultsController.object(at: indexPath)
-            application.actionManager.perform(identifier: "RemoveBook", sender: tableView, info: [ActionContext.selectionKey: [book]])
+            application.actionManager.perform(identifier: "DeletePerson", sender: tableView, info: [ActionContext.selectionKey: [book]])
         }
     }
     
-    func configureCell(_ cell: UITableViewCell, withBook book: Book) {
-        cell.textLabel!.text = book.name
+    func configureCell(_ cell: UITableViewCell, withPerson person: Person) {
+        cell.textLabel!.text = person.name
     }
     
     // MARK: - Fetched results controller
     
-    var fetchedResultsController: NSFetchedResultsController<Book> {
-        if _fetchedResultsController != nil {
-            return _fetchedResultsController!
-        }
-        
-        let fetchRequest: NSFetchRequest<Book> = Book.fetchRequest()
-        
-        // Set the batch size to a suitable number.
+    lazy var fetchedResultsController: NSFetchedResultsController<Person> = {
+        let fetchRequest: NSFetchRequest<Person> = Person.fetchRequest()
         fetchRequest.fetchBatchSize = 20
-        
-        // Edit the sort key as appropriate.
-        let sortDescriptor = NSSortDescriptor(key: "name", ascending: false)
-        
-        fetchRequest.sortDescriptors = [sortDescriptor]
+        fetchRequest.sortDescriptors = application.viewModel.personIndexSorting
         
         // Edit the section name key path and cache name if appropriate.
         // nil for section name key path means "no sections".
-        let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext!, sectionNameKeyPath: nil, cacheName: "Master")
-        aFetchedResultsController.delegate = self
-        _fetchedResultsController = aFetchedResultsController
+        let results = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext!, sectionNameKeyPath: nil, cacheName: "Master")
+        results.delegate = self
         
         do {
-            try _fetchedResultsController!.performFetch()
+            try results.performFetch()
         } catch {
             // Replace this implementation with code to handle the error appropriately.
             // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
@@ -123,9 +116,8 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
             fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
         }
         
-        return _fetchedResultsController!
-    }    
-    var _fetchedResultsController: NSFetchedResultsController<Book>? = nil
+        return results
+    }()
     
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.beginUpdates()
@@ -149,9 +141,9 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         case .delete:
             tableView.deleteRows(at: [indexPath!], with: .fade)
         case .update:
-            configureCell(tableView.cellForRow(at: indexPath!)!, withBook: anObject as! Book)
+            configureCell(tableView.cellForRow(at: indexPath!)!, withPerson: anObject as! Person)
         case .move:
-            configureCell(tableView.cellForRow(at: indexPath!)!, withBook: anObject as! Book)
+            configureCell(tableView.cellForRow(at: indexPath!)!, withPerson: anObject as! Person)
             tableView.moveRow(at: indexPath!, to: newIndexPath!)
         }
     }

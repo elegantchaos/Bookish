@@ -32,7 +32,7 @@ class RemoveItemAction: ConditionalAction {
     init(identifier: String) {
         super.init(identifier: identifier) { (context) -> String in
             if let model = context.info[ActionContext.modelKey] as? CollectionDocumentViewModel {
-                let identifier = model.mode == .books ? "RemoveBook" : "DeletePerson"
+                let identifier = model.mode == .books ? "DeleteBook" : "DeletePerson"
                 return identifier
             }
             
@@ -45,7 +45,7 @@ class InsertItemAction: ConditionalAction {
     init(identifier: String) {
         super.init(identifier: identifier) { (context) -> String in
             if let model = context.info[ActionContext.modelKey] as? CollectionDocumentViewModel {
-                let identifier = model.mode == .books ? "InsertBook" : "NewPerson"
+                let identifier = model.mode == .books ? "NewBook" : "NewPerson"
                 return identifier
             }
             
