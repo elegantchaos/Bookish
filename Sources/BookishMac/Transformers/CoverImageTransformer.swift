@@ -5,10 +5,16 @@
 
 import AppKit
 
-class CoverImageTransformer: ValueTransformer {
-    static let name = NSValueTransformerName(rawValue: "CoverImage")
+class ImageTransformer: ValueTransformer {
+    let placeholderName: String
     
-    var placeholder: NSImage?
+    init(placeholder: String) {
+        self.placeholderName = placeholder
+    }
+    
+    lazy var placeholder: NSImage? = {
+        return NSImage(named: placeholderName)
+    }()
     
     override class func allowsReverseTransformation() -> Bool {
         return true
@@ -18,10 +24,6 @@ class CoverImageTransformer: ValueTransformer {
         if let data = value as? Data, let image = NSImage(data: data) {
             return image
         } else {
-            if placeholder == nil {
-                placeholder = NSImage(named: "CoverPlaceholder")
-            }
-            
             return placeholder
         }
     }

@@ -51,7 +51,8 @@ class Application: NSObject, NSApplicationDelegate {
         
         ValueTransformer.setValueTransformer(AuthorsTransformer(), forName: AuthorsTransformer.name)
         ValueTransformer.setValueTransformer(DateTransformer(), forName: DateTransformer.name)
-        ValueTransformer.setValueTransformer(CoverImageTransformer(), forName: CoverImageTransformer.name)
+        ValueTransformer.setValueTransformer(ImageTransformer(placeholder: "CoverPlaceholder"), forName: NSValueTransformerName("CoverImage"))
+        ValueTransformer.setValueTransformer(ImageTransformer(placeholder: "PersonPlaceholder"), forName: NSValueTransformerName("PersonImage"))
     }
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {

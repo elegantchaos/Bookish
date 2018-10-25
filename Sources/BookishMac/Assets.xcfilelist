@@ -62,6 +62,11 @@ Sources/BookishMac/Assets.xcassets/ChooseDateSmall.imageset/ChooseDateSmall@3x.p
 Sources/BookishMac/Assets.xcassets/ChooseDateSmall.imageset/ChooseDateSmall@2x.png
 Sources/BookishMac/Assets.xcassets/ChooseDateSmall.imageset/Contents.json
 Sources/BookishMac/Assets.xcassets/Index.colorset
+Sources/BookishMac/Assets.xcassets/PersonPlaceholder.imageset
+Sources/BookishMac/Assets.xcassets/PersonPlaceholder.imageset/PersonPlaceholder.png
+Sources/BookishMac/Assets.xcassets/PersonPlaceholder.imageset/Contents.json
+Sources/BookishMac/Assets.xcassets/PersonPlaceholder.imageset/PersonPlaceholder@3x.png
+Sources/BookishMac/Assets.xcassets/PersonPlaceholder.imageset/PersonPlaceholder@2x.png
 Sources/BookishMac/Assets.xcassets/Contents.json
 Sources/BookishMac/Assets.xcassets/CoverPlaceholder.imageset
 Sources/BookishMac/Assets.xcassets/CoverPlaceholder.imageset/CoverPlaceholder.png
