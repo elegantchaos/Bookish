@@ -47,8 +47,10 @@ extension CollectionController: BookViewer {
     @objc func reveal(book: Book) {
         application.viewModel.mode = .books
         bookIndexController.navigationController?.popToRootViewController(animated: true)
-        let index = bookIndexController.fetchedResultsController.indexPath(forObject: book)
-        bookIndexController.indexTable.selectRow(at: index, animated: true, scrollPosition: .bottom)
+        if let index = bookIndexController.fetchedResultsController.indexPath(forObject: book) {
+            bookIndexController.indexTable.selectRow(at: index, animated: true, scrollPosition: .bottom)
+            bookIndexController.performSegue(withIdentifier: "showDetail", sender: self)
+        }
     }
 }
 

@@ -119,8 +119,6 @@ class PersonIndexController: UITableViewController, NSFetchedResultsControllerDe
         return results
     }()
     
-    var _fetchedResultsController: NSFetchedResultsController<Book>? = nil
-    
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.beginUpdates()
     }
