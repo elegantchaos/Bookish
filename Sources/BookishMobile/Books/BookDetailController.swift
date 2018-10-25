@@ -10,7 +10,7 @@ import Actions
 
 class BookDetailController: UIViewController {
     let source = DetailDataSource()
-    lazy var coverPlaceholder = UIImage(named: "CoverPlaceholder")
+    lazy var placeholderImage = UIImage(named: "CoverPlaceholder")
     var bindings = [Any]()
     
     @IBOutlet weak var titleLabel: UITextField!
@@ -25,7 +25,7 @@ class BookDetailController: UIViewController {
             if let imageData = book.image {
                 imageView.image = UIImage(data: imageData)
             } else {
-                imageView.image = coverPlaceholder
+                imageView.image = placeholderImage
             }
             bindings.append(StringBinding(for: self, property: "title", to: book, path: "name"))
             if let roles = book.personRoles, let sorted = roles.sortedArray(using: application.viewModel.personRoleSorting) as? [PersonRole] {
@@ -65,13 +65,5 @@ extension BookDetailController: UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier) as! BookDetailRow // if we fail here, it's a coding error as all possible view types should have been registered
         cell.setup(row: indexPath.row, book: book, source: source)
         return cell
-    }
-}
-
-// MARK: Action Support
-
-extension BookDetailController: ActionContextProvider {
-    func provide(context: ActionContext) {
-        print("detail")
     }
 }

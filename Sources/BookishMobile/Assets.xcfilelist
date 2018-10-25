@@ -21,6 +21,11 @@ Sources/BookishMobile/Assets.xcassets//AppIcon.appiconset/Icon120.png
 Sources/BookishMobile/Assets.xcassets//AppIcon.appiconset/Icon152.png
 Sources/BookishMobile/Assets.xcassets//AppIcon.appiconset/Icon20.png
 Sources/BookishMobile/Assets.xcassets//AppIcon.appiconset/Icon180.png
+Sources/BookishMobile/Assets.xcassets//PersonPlaceholder.imageset
+Sources/BookishMobile/Assets.xcassets//PersonPlaceholder.imageset/PersonPlaceholder.png
+Sources/BookishMobile/Assets.xcassets//PersonPlaceholder.imageset/Contents.json
+Sources/BookishMobile/Assets.xcassets//PersonPlaceholder.imageset/PersonPlaceholder@3x.png
+Sources/BookishMobile/Assets.xcassets//PersonPlaceholder.imageset/PersonPlaceholder@2x.png
 Sources/BookishMobile/Assets.xcassets//Contents.json
 Sources/BookishMobile/Assets.xcassets//CoverPlaceholder.imageset
 Sources/BookishMobile/Assets.xcassets//CoverPlaceholder.imageset/CoverPlaceholder.png

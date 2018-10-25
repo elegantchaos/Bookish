@@ -432,7 +432,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N4D-eK-irC">
-                                                    <rect key="frame" x="4" y="4" width="367" height="35.5"/>
+                                                    <rect key="frame" x="16" y="4" width="355" height="35.5"/>
                                                     <state key="normal" title="Button">
                                                         <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     </state>
@@ -448,7 +448,7 @@
                                                 <constraint firstItem="N4D-eK-irC" firstAttribute="top" secondItem="qVS-WH-aCU" secondAttribute="top" constant="4" id="bSi-up-EW6"/>
                                                 <constraint firstAttribute="trailing" secondItem="N4D-eK-irC" secondAttribute="trailing" constant="4" id="o0r-xu-x3P"/>
                                                 <constraint firstAttribute="bottom" secondItem="N4D-eK-irC" secondAttribute="bottom" constant="4" id="qGt-HV-lTM"/>
-                                                <constraint firstItem="N4D-eK-irC" firstAttribute="leading" secondItem="qVS-WH-aCU" secondAttribute="leading" constant="4" id="vXf-cJ-KV1"/>
+                                                <constraint firstItem="N4D-eK-irC" firstAttribute="leading" secondItem="qVS-WH-aCU" secondAttribute="leading" constant="16" id="vXf-cJ-KV1"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -564,6 +564,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Tll-UG-LXB"/>
-        <segue reference="Nu6-en-RsV"/>
+        <segue reference="fZr-yF-Vad"/>
     </inferredMetricsTieBreakers>
 </document>

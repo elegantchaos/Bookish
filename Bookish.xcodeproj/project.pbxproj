@@ -430,18 +430,11 @@
 			isa = PBXGroup;
 			children = (
 				22429313212ADC4300E70510 /* Application.swift */,
-				22429318212ADC4300E70510 /* BookIndexController.swift */,
-				2242931A212ADC4300E70510 /* BookDetailController.swift */,
 				22D1B23C21807F7B0062F2CB /* CollectionController.swift */,
-				22D1B234217F7ED40062F2CB /* PersonIndexController.swift */,
-				22D1B236217F7EF30062F2CB /* PersonDetailController.swift */,
-				22D1B232217E42950062F2CB /* TextBinding.swift */,
 				22D1B238218079C60062F2CB /* CollectionViewModel.swift */,
-				22B1DB402178D8A50067E795 /* ViewExtensions.swift */,
-				221ED511216B8EAB00594714 /* BookDetailRow.swift */,
-				22D1B230217E0D780062F2CB /* BookDateRow.swift */,
-				22D1B22E217E0A3F0062F2CB /* BookPersonRow.swift */,
-				22D1B23A21807D230062F2CB /* PersonBookRow.swift */,
+				227F450E2181EDF3000D8B8D /* Books */,
+				227F450D2181EDE1000D8B8D /* People */,
+				227F450F2181EE08000D8B8D /* Utilities */,
 				2242931C212ADC4300E70510 /* Main.storyboard */,
 				2242931F212ADC4400E70510 /* Assets.xcassets */,
 				22429321212ADC4400E70510 /* LaunchScreen.storyboard */,
@@ -541,6 +534,37 @@
 				22F3548A216FAC0100443C0B /* BookishCore.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		227F450D2181EDE1000D8B8D /* People */ = {
+			isa = PBXGroup;
+			children = (
+				22D1B234217F7ED40062F2CB /* PersonIndexController.swift */,
+				22D1B236217F7EF30062F2CB /* PersonDetailController.swift */,
+				22D1B23A21807D230062F2CB /* PersonBookRow.swift */,
+			);
+			path = People;
+			sourceTree = "<group>";
+		};
+		227F450E2181EDF3000D8B8D /* Books */ = {
+			isa = PBXGroup;
+			children = (
+				22429318212ADC4300E70510 /* BookIndexController.swift */,
+				2242931A212ADC4300E70510 /* BookDetailController.swift */,
+				221ED511216B8EAB00594714 /* BookDetailRow.swift */,
+				22D1B230217E0D780062F2CB /* BookDateRow.swift */,
+				22D1B22E217E0A3F0062F2CB /* BookPersonRow.swift */,
+			);
+			path = Books;
+			sourceTree = "<group>";
+		};
+		227F450F2181EE08000D8B8D /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				22D1B232217E42950062F2CB /* TextBinding.swift */,
+				22B1DB402178D8A50067E795 /* ViewExtensions.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 		22D39E5C2146CC4400282467 /* Actions */ = {
