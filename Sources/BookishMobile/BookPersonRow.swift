@@ -4,12 +4,22 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 import BookishModel
+import Actions
 
 class BookPersonRow: BookDetailRow {
+    @IBOutlet var personButton: UIButton!
+    var role: PersonRole!
+    
     override func setup(row: Int, book: Book, source: DetailDataSource) {
         assert(source.info(for: row).isPerson)
-        let personRole = source.person(for: row)
-        label.text = personRole.role?.name
-        detail.text = personRole.person?.name
+        role = source.person(for: row)
+        label.text = role.role?.name
+        personButton.setTitle(role.person?.name, for: .normal)
+    }
+}
+
+extension BookPersonRow: ActionContextProvider {
+    func provide(context: ActionContext) {
+        context.info[PersonAction.roleKey] = role
     }
 }

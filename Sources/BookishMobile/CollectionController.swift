@@ -38,15 +38,11 @@ class CollectionController: UITabBarController {
         }
     }
 
-
-    
-
 }
 
 extension CollectionController: BookViewer {
     @objc func reveal(book: Book) {
         application.viewModel.mode = .books
-        bookIndexController.navigationController?.popToRootViewController(animated: true)
         if let index = bookIndexController.fetchedResultsController.indexPath(forObject: book) {
             bookIndexController.indexTable.selectRow(at: index, animated: true, scrollPosition: .bottom)
             bookIndexController.performSegue(withIdentifier: "showDetail", sender: self)
@@ -57,11 +53,13 @@ extension CollectionController: BookViewer {
 extension CollectionController: PersonViewer {
     @objc func reveal(person: Person) {
         application.viewModel.mode = .people
-        personIndexController.navigationController?.popToRootViewController(animated: true)
-        let index = personIndexController.fetchedResultsController.indexPath(forObject: person)
-        personIndexController.indexTable.selectRow(at: index, animated: true, scrollPosition: .bottom)
+        if let index = personIndexController.fetchedResultsController.indexPath(forObject: person) {
+            personIndexController.indexTable.selectRow(at: index, animated: true, scrollPosition: .bottom)
+            personIndexController.performSegue(withIdentifier: "showDetail", sender: self)
+        }
     }
 }
+
 extension CollectionController: UISplitViewControllerDelegate {
     func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController:UIViewController, onto primaryViewController:UIViewController) -> Bool {
         guard let secondaryAsNavController = secondaryViewController as? UINavigationController else { return false }

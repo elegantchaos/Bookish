@@ -102,26 +102,33 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="751" editable="NO" text="person link" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="iAN-yA-mgv">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AL0-Sg-mlg">
                                                     <rect key="frame" x="56.5" y="4" width="314.5" height="35.5"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                                </textView>
+                                                    <state key="normal" title="person link">
+                                                        <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    </state>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="actionID" value="RevealPerson"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="performAction:" destination="FJe-Yq-33r" eventType="primaryActionTriggered" id="F3D-Ap-v75"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="AL0-Sg-mlg" secondAttribute="bottom" constant="4" id="Kdh-q7-Kg7"/>
                                                 <constraint firstItem="Ddk-je-YTY" firstAttribute="top" secondItem="FDA-BF-Pmn" secondAttribute="topMargin" constant="4" id="LCv-8h-pFs"/>
-                                                <constraint firstAttribute="bottom" secondItem="iAN-yA-mgv" secondAttribute="bottom" constant="4" id="O5T-vH-2eK"/>
-                                                <constraint firstItem="iAN-yA-mgv" firstAttribute="leading" secondItem="Ddk-je-YTY" secondAttribute="trailing" constant="4" id="Yon-J1-A1f"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="Ddk-je-YTY" secondAttribute="bottom" constant="4" id="aFn-it-d3Y"/>
-                                                <constraint firstItem="iAN-yA-mgv" firstAttribute="top" secondItem="FDA-BF-Pmn" secondAttribute="top" constant="4" id="wKR-Dq-UeB"/>
-                                                <constraint firstAttribute="trailing" secondItem="iAN-yA-mgv" secondAttribute="trailing" constant="4" id="wfR-cR-sHr"/>
+                                                <constraint firstItem="AL0-Sg-mlg" firstAttribute="top" secondItem="FDA-BF-Pmn" secondAttribute="top" constant="4" id="hAC-kx-Mg3"/>
+                                                <constraint firstItem="AL0-Sg-mlg" firstAttribute="leading" secondItem="Ddk-je-YTY" secondAttribute="trailing" constant="4" id="iWZ-d4-ChI"/>
+                                                <constraint firstAttribute="trailing" secondItem="AL0-Sg-mlg" secondAttribute="trailing" constant="4" id="rjM-m5-GmK"/>
                                                 <constraint firstItem="Ddk-je-YTY" firstAttribute="leading" secondItem="FDA-BF-Pmn" secondAttribute="leadingMargin" id="x9k-hq-ge0"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="detail" destination="iAN-yA-mgv" id="24L-8p-sVo"/>
                                             <outlet property="label" destination="Ddk-je-YTY" id="5UA-n5-KyP"/>
+                                            <outlet property="personButton" destination="AL0-Sg-mlg" id="Z74-z0-ceM"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="date" id="0i1-E9-RNz" customClass="BookDateRow" customModule="BookishMobile" customModuleProvider="target">
