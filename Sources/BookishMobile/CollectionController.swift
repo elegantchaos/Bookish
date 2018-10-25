@@ -25,7 +25,6 @@ class CollectionController: UITabBarController {
         setup(splitView: viewControllers![0] as! UISplitViewController)
         setup(splitView: viewControllers![1] as! UISplitViewController)
         
-        let tabBar = self.tabBar
         let viewModel = application.viewModel
         let modeObserver = application.observe(\Application.viewModel.modeIndex) { (app, change) in
             self.selectedIndex = viewModel.modeIndex
