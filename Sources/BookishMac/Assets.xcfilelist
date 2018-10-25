@@ -39,6 +39,10 @@ Sources/BookishMac/Assets.xcassets/RemovePerson.imageset/RemovePerson@3x.png
 Sources/BookishMac/Assets.xcassets/RemovePerson.imageset/RemovePerson@2x.png
 Sources/BookishMac/Assets.xcassets/RemovePerson.imageset/RemovePerson.png
 Sources/BookishMac/Assets.xcassets/RemovePerson.imageset/Contents.json
+Sources/BookishMac/Assets.xcassets/Reveal.imageset
+Sources/BookishMac/Assets.xcassets/Reveal.imageset/Reveal@3x.png
+Sources/BookishMac/Assets.xcassets/Reveal.imageset/Reveal@2x.png
+Sources/BookishMac/Assets.xcassets/Reveal.imageset/Reveal.png
 Sources/BookishMac/Assets.xcassets/ChooseDate.imageset
 Sources/BookishMac/Assets.xcassets/ChooseDate.imageset/ChooseDate@2x.png
 Sources/BookishMac/Assets.xcassets/ChooseDate.imageset/ChooseDate.png
