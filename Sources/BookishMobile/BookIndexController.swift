@@ -24,6 +24,8 @@ class BookIndexController: UITableViewController, NSFetchedResultsControllerDele
     
     var detailViewController: BookDetailController? = nil
     var managedObjectContext: NSManagedObjectContext? = nil
+    
+    @IBOutlet var indexTable: UITableView!
     @IBOutlet var addButton: UIBarButtonItem!
     
     override func viewDidLoad() {

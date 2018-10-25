@@ -25,8 +25,10 @@ class CollectionController: UITabBarController {
         setup(splitView: viewControllers![0] as! UISplitViewController)
         setup(splitView: viewControllers![1] as! UISplitViewController)
         
+        let tabBar = self.tabBar
+        let viewModel = application.viewModel
         let modeObserver = application.observe(\Application.viewModel.modeIndex) { (app, change) in
-            print("mode changed")
+            self.selectedIndex = viewModel.modeIndex
         }
         observers.append(modeObserver)
     }
@@ -37,9 +39,7 @@ class CollectionController: UITabBarController {
         }
     }
 
-    @objc func reveal(person: Person) {
-        application.viewModel.mode = .people
-    }
+
     
 
 }
@@ -47,9 +47,20 @@ class CollectionController: UITabBarController {
 extension CollectionController: BookViewer {
     @objc func reveal(book: Book) {
         application.viewModel.mode = .books
+        bookIndexController.navigationController?.popToRootViewController(animated: true)
+        let index = bookIndexController.fetchedResultsController.indexPath(forObject: book)
+        bookIndexController.indexTable.selectRow(at: index, animated: true, scrollPosition: .bottom)
     }
 }
 
+extension CollectionController: PersonViewer {
+    @objc func reveal(person: Person) {
+        application.viewModel.mode = .people
+        personIndexController.navigationController?.popToRootViewController(animated: true)
+        let index = personIndexController.fetchedResultsController.indexPath(forObject: person)
+        personIndexController.indexTable.selectRow(at: index, animated: true, scrollPosition: .bottom)
+    }
+}
 extension CollectionController: UISplitViewControllerDelegate {
     func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController:UIViewController, onto primaryViewController:UIViewController) -> Bool {
         guard let secondaryAsNavController = secondaryViewController as? UINavigationController else { return false }

@@ -22,6 +22,7 @@ class PersonIndexController: UITableViewController, NSFetchedResultsControllerDe
         context.addObserver(self)
     }
     
+    @IBOutlet var indexTable: UITableView!
     var detailViewController: PersonDetailController? = nil
     var managedObjectContext: NSManagedObjectContext? = nil
     @IBOutlet var addButton: UIBarButtonItem!
