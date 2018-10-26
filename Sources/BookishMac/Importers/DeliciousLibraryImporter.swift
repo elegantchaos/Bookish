@@ -11,6 +11,13 @@ class DeliciousLibraryImporter: Importer {
     }
     
     override var canImportFromDefaultLocation: Bool {
+        // ~/Library/Containers/Data/Library/Application\ Support/Delicious\ Library\ 3/
+
+        for library in FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask) {
+            let containers = library.appendingPathComponent("containers")
+            let delicious = containers.appendingPathComponent("com.delicious-monster.library3")
+            let data = delicious.appendingPathComponent("Data").appendingPathComponent("Application Support").appendingPathComponent("Delicious Library 3")
+        }
         return true
     }
     
