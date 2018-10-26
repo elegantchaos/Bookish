@@ -24,11 +24,13 @@ class CollectionRootViewController: CollectionViewController {
         }
         
         observer = cvm.observe(\CollectionDocumentViewModel.modeIndex) { (cvm, change) in
-            self.setMarker(index: cvm.modeIndex)
+            self.setMarker(to: cvm.modeIndex)
         }
+        
+        setMarker(to: cvm.modeIndex)
     }
     
-    func setMarker(index: Int) {
+    func setMarker(to index: Int) {
         if index < buttons.count {
             let button = buttons[index]
             let offset = (selectedMarkerButton.frame.height - button.frame.height) / 2.0
@@ -46,7 +48,7 @@ class CollectionRootViewController: CollectionViewController {
             sender.state = .on
             if let index = buttons.firstIndex(of: sender) {
                 cvm.modeIndex = index
-                setMarker(index: index)
+                setMarker(to: index)
             }
         }
     }
