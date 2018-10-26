@@ -6,29 +6,7 @@
 import Actions
 import BookishModel
 
-class ConditionalAction: Action {
-    typealias ConditionalIdentifier = (ActionContext) -> String
-    let conditionalIdentifier: ConditionalIdentifier
-    
-    init(identifier: String, condition: @escaping ConditionalIdentifier) {
-        self.conditionalIdentifier = condition
-        super.init(identifier: identifier)
-    }
-
-    override func validate(context: ActionContext) -> Bool {
-        let manager = context.manager
-        let identifier = conditionalIdentifier(context)
-        return manager.validate(identifier: identifier, item: context.sender)
-    }
-
-    override func perform(context: ActionContext) {
-        let manager = context.manager
-        let identifier = conditionalIdentifier(context)
-        manager.perform(identifier: identifier, sender: context.sender)
-    }
-}
-
-class RemoveItemAction: ConditionalAction {
+class RemoveItemAction: DelegatedAction {
     init(identifier: String) {
         super.init(identifier: identifier) { (context) -> String in
             if let model = context.info[ActionContext.modelKey] as? CollectionDocumentViewModel {
@@ -41,7 +19,7 @@ class RemoveItemAction: ConditionalAction {
     }
 }
 
-class InsertItemAction: ConditionalAction {
+class InsertItemAction: DelegatedAction {
     init(identifier: String) {
         super.init(identifier: identifier) { (context) -> String in
             if let model = context.info[ActionContext.modelKey] as? CollectionDocumentViewModel {

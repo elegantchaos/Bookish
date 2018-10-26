@@ -12,9 +12,10 @@ import Logger
 let applicationChannel = Logger("Application")
 
 @NSApplicationMain
-class Application: NSObject, NSApplicationDelegate {
+class Application: NSObject {
     let documentWindowControllerFactory = DocumentWindowControllerFactory()
     let actionManager = ActionManagerMac()
+    let importManager = ImportManager()
     let uiTesting = CommandLine.arguments.contains("--ui-testing")
     var testDocument = CommandLine.arguments.contains("--test-document")
     let noBlankDocument = CommandLine.arguments.contains("--no-blank-document")
@@ -35,10 +36,11 @@ class Application: NSObject, NSApplicationDelegate {
         UserDefaults.standard.removePersistentDomain(forName: defaultsName)
     }
     
-    func applicationWillFinishLaunching(_ notification: Notification) {
+    fileprivate func setupActions() {
         actionManager.register(PersonAction.standardActions())
         actionManager.register(PersonUIAction.standardActions())
         actionManager.register(BookAction.standardActions())
+        actionManager.register(ImporterAction.standardActions())
         actionManager.register([
             ShowDatePickerAction(identifier: "ShowDatePicker"),
             InsertItemAction(identifier: "InsertItem"),
@@ -46,13 +48,22 @@ class Application: NSObject, NSApplicationDelegate {
             ])
         
         actionManager.installResponder()
-
-        BookishCore().test()
-        
+    }
+    
+    fileprivate func setupTransformers() {
         ValueTransformer.setValueTransformer(AuthorsTransformer(), forName: AuthorsTransformer.name)
         ValueTransformer.setValueTransformer(DateTransformer(), forName: DateTransformer.name)
         ValueTransformer.setValueTransformer(ImageTransformer(placeholder: "CoverPlaceholder"), forName: NSValueTransformerName("CoverImage"))
         ValueTransformer.setValueTransformer(ImageTransformer(placeholder: "PersonPlaceholder"), forName: NSValueTransformerName("PersonImage"))
+    }
+}
+
+extension Application: NSApplicationDelegate {
+    func applicationWillFinishLaunching(_ notification: Notification) {
+        BookishCore().test()
+
+        setupActions()
+        setupTransformers()
     }
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {

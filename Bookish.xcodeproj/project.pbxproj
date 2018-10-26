@@ -68,6 +68,10 @@
 		22462E932158ED5000A4C56C /* CollectionIndexViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22462E922158ED5000A4C56C /* CollectionIndexViewController.swift */; };
 		22462E952158EDEA00A4C56C /* CollectionDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22462E942158EDEA00A4C56C /* CollectionDetailViewController.swift */; };
 		22462E972158F65200A4C56C /* CollectionViewActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22462E962158F65200A4C56C /* CollectionViewActions.swift */; };
+		227F4514218352A0000D8B8D /* ImporterActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227F4513218352A0000D8B8D /* ImporterActions.swift */; };
+		227F451621835801000D8B8D /* ImportManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227F451521835801000D8B8D /* ImportManager.swift */; };
+		227F451821835814000D8B8D /* Importer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227F451721835814000D8B8D /* Importer.swift */; };
+		227F451A218358EE000D8B8D /* DeliciousLibraryImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227F4519218358EE000D8B8D /* DeliciousLibraryImporter.swift */; };
 		22960328214025E80020B3EB /* BookPersonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22960327214025E80020B3EB /* BookPersonCell.swift */; };
 		2296032A214032520020B3EB /* AnnotatedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22960329214032520020B3EB /* AnnotatedTextField.swift */; };
 		22B1DB412178D8A50067E795 /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B1DB402178D8A50067E795 /* ViewExtensions.swift */; };
@@ -254,6 +258,10 @@
 		22462E922158ED5000A4C56C /* CollectionIndexViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionIndexViewController.swift; sourceTree = "<group>"; };
 		22462E942158EDEA00A4C56C /* CollectionDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionDetailViewController.swift; sourceTree = "<group>"; };
 		22462E962158F65200A4C56C /* CollectionViewActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewActions.swift; sourceTree = "<group>"; };
+		227F4513218352A0000D8B8D /* ImporterActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImporterActions.swift; sourceTree = "<group>"; };
+		227F451521835801000D8B8D /* ImportManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportManager.swift; sourceTree = "<group>"; };
+		227F451721835814000D8B8D /* Importer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Importer.swift; sourceTree = "<group>"; };
+		227F4519218358EE000D8B8D /* DeliciousLibraryImporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliciousLibraryImporter.swift; sourceTree = "<group>"; };
 		22960327214025E80020B3EB /* BookPersonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookPersonCell.swift; sourceTree = "<group>"; };
 		22960329214032520020B3EB /* AnnotatedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotatedTextField.swift; sourceTree = "<group>"; };
 		2296032B214132840020B3EB /* Bookish.sketch */ = {isa = PBXFileReference; lastKnownFileType = file; path = Bookish.sketch; sourceTree = "<group>"; };
@@ -469,6 +477,7 @@
 				227F451021821B7F000D8B8D /* Books */,
 				227F451121821B90000D8B8D /* People */,
 				22D39E5C2146CC4400282467 /* Actions */,
+				227F451B21835EF4000D8B8D /* Importers */,
 				22D39E632147E9BA00282467 /* Transformers */,
 				221F27272136EC0500DC2DC7 /* Utilities */,
 				22DD42502126D6DB0070C85A /* Assets.xcassets */,
@@ -589,6 +598,17 @@
 				22143FCC212EE79100B689DF /* CollectionDocumentViewModel.swift */,
 			);
 			path = Collection;
+			sourceTree = "<group>";
+		};
+		227F451B21835EF4000D8B8D /* Importers */ = {
+			isa = PBXGroup;
+			children = (
+				227F451521835801000D8B8D /* ImportManager.swift */,
+				227F451721835814000D8B8D /* Importer.swift */,
+				227F4513218352A0000D8B8D /* ImporterActions.swift */,
+				227F4519218358EE000D8B8D /* DeliciousLibraryImporter.swift */,
+			);
+			path = Importers;
 			sourceTree = "<group>";
 		};
 		22D39E5C2146CC4400282467 /* Actions */ = {
@@ -1217,13 +1237,16 @@
 				2296032A214032520020B3EB /* AnnotatedTextField.swift in Sources */,
 				22D1B2492180D7B60062F2CB /* BookDetailCell.swift in Sources */,
 				22DD424A2126D6DA0070C85A /* CollectionViewController.swift in Sources */,
+				227F451A218358EE000D8B8D /* DeliciousLibraryImporter.swift in Sources */,
 				22429401212C32BF00E70510 /* CollectionWindowController.swift in Sources */,
 				22DD42482126D6DA0070C85A /* Application.swift in Sources */,
 				22429406212D945C00E70510 /* BookDetailViewController.swift in Sources */,
 				22D1B24B2180E9060062F2CB /* PersonRoleCell.swift in Sources */,
+				227F4514218352A0000D8B8D /* ImporterActions.swift in Sources */,
 				22143FD3212F0F2500B689DF /* AuthorsTransformer.swift in Sources */,
 				22143FCF212EF9CC00B689DF /* DocumentWindowController.swift in Sources */,
 				22462E952158EDEA00A4C56C /* CollectionDetailViewController.swift in Sources */,
+				227F451821835814000D8B8D /* Importer.swift in Sources */,
 				221C4B35216BAAAC0086D56F /* PersonUIActions.swift in Sources */,
 				22DD424C2126D6DA0070C85A /* CollectionDocument.swift in Sources */,
 				22143FCD212EE79100B689DF /* CollectionDocumentViewModel.swift in Sources */,
@@ -1231,6 +1254,7 @@
 				22D39E622147E0C100282467 /* CoverImageTransformer.swift in Sources */,
 				22429408212D958400E70510 /* CollectionSplitViewController.swift in Sources */,
 				22462E972158F65200A4C56C /* CollectionViewActions.swift in Sources */,
+				227F451621835801000D8B8D /* ImportManager.swift in Sources */,
 				22D39E5B2146BE4900282467 /* DatePickerPopoverController.swift in Sources */,
 				22D39E532146A84500282467 /* AnnotatedTableCellView.swift in Sources */,
 				22D39E602147D4A100282467 /* TestAction.swift in Sources */,

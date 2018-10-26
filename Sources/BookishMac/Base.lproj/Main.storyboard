@@ -96,6 +96,12 @@
                                                 </items>
                                             </menu>
                                         </menuItem>
+                                        <menuItem title="Import" identifier="menu.FillImportMenu" id="Kyh-nf-fs3" userLabel="Import">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="performAction:" target="Ady-hI-5gd" id="MY0-Js-L6B"/>
+                                            </connections>
+                                        </menuItem>
                                         <menuItem isSeparatorItem="YES" id="m54-Is-iLE"/>
                                         <menuItem title="Close" keyEquivalent="w" id="DVo-aG-piG">
                                             <connections>
@@ -594,7 +600,7 @@
                                             </connections>
                                         </button>
                                         <button translatesAutoresizingMaskIntoConstraints="NO" id="fIv-Pl-PNw">
-                                            <rect key="frame" x="14" y="622" width="40" height="41"/>
+                                            <rect key="frame" x="14" y="642" width="40" height="41"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="36" id="aoT-LG-Qg2"/>
                                                 <constraint firstAttribute="width" constant="36" id="pyP-xV-h8M"/>
@@ -621,7 +627,7 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="xns-n8-kkA" firstAttribute="leading" secondItem="QaT-Ad-8ce" secondAttribute="leading" id="CDn-hy-mBH"/>
-                                        <constraint firstItem="fIv-Pl-PNw" firstAttribute="top" secondItem="pTf-uQ-crF" secondAttribute="bottom" constant="36" id="HKU-jm-1iN"/>
+                                        <constraint firstItem="fIv-Pl-PNw" firstAttribute="top" secondItem="pTf-uQ-crF" secondAttribute="bottom" constant="16" id="HKU-jm-1iN"/>
                                         <constraint firstAttribute="bottom" secondItem="xns-n8-kkA" secondAttribute="bottom" constant="697" id="TPL-Lo-G8g"/>
                                         <constraint firstItem="pTf-uQ-crF" firstAttribute="top" secondItem="QaT-Ad-8ce" secondAttribute="top" constant="35" id="VCj-8O-ZgE"/>
                                         <constraint firstItem="pTf-uQ-crF" firstAttribute="leading" secondItem="QaT-Ad-8ce" secondAttribute="leading" constant="16" id="cGf-xo-GGE"/>

@@ -63,4 +63,18 @@ import BookishModel
             return menu
         }
     }
+    
+    var importMenu: NSMenu {
+        get {
+            let menu = NSMenu()
+            let importManager = Application.sharedInstance.importManager
+            for importer in importManager.sortedImporters {
+                let item = NSMenuItem(title: importer.name, action: ActionManagerMac.Responder.performActionSelector, keyEquivalent: "")
+                item.identifier = NSUserInterfaceItemIdentifier(rawValue: "menu.Import.\(importer.name)")
+                menu.addItem(item)
+            }
+            return menu
+        }
+    }
+
 }
