@@ -24,6 +24,11 @@ import BookishModel
     
     @objc dynamic var modeIndex: Int = 0
     
+    @objc let detailFont = NSFont.systemFont(ofSize: 14, weight: NSFont.Weight.regular)
+    @objc let labelFont = NSFont.systemFont(ofSize: 14, weight: NSFont.Weight.regular)
+    @objc let titleFont = NSFont.systemFont(ofSize: 18, weight: NSFont.Weight.regular)
+    @objc let indexFont = NSFont.systemFont(ofSize: 14, weight: NSFont.Weight.regular)
+
     var mode: Mode {
         get { return Mode(rawValue: modeIndex)! }
         set (value) { modeIndex = value.rawValue }

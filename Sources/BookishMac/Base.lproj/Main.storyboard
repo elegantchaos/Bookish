@@ -766,12 +766,15 @@
                                                                                 <rect key="frame" x="18" y="2" width="181" height="19"/>
                                                                                 <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="faw-0D-vlM">
                                                                                     <font key="font" metaFont="system" size="16"/>
-                                                                                    <color key="textColor" red="0.54139870410000002" green="0.55656915900000004" blue="0.57255220409999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                                    <color key="textColor" name="Bookish Index Text"/>
                                                                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                                     <connections>
                                                                                         <binding destination="GB9-VC-r3l" name="value" keyPath="objectValue.name" id="zGv-4I-q0q"/>
                                                                                     </connections>
                                                                                 </textFieldCell>
+                                                                                <connections>
+                                                                                    <binding destination="pkB-w0-Ho6" name="font" keyPath="self.cvm.indexFont" id="ywt-tZ-1Pm"/>
+                                                                                </connections>
                                                                             </textField>
                                                                         </subviews>
                                                                         <constraints>
@@ -808,7 +811,7 @@
                                             <rect key="frame" x="6" y="273" width="192" height="19"/>
                                             <textFieldCell key="cell" lineBreakMode="clipping" title="People" id="laj-5J-vdz">
                                                 <font key="font" metaFont="system" size="16"/>
-                                                <color key="textColor" red="0.54139870410000002" green="0.55656915900000004" blue="0.57255220409999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <color key="textColor" name="Bookish Index Text"/>
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                         </textField>
@@ -866,7 +869,7 @@
                                             <rect key="frame" x="6" y="273" width="192" height="19"/>
                                             <textFieldCell key="cell" lineBreakMode="clipping" title="Books" id="zbT-Mn-fQ1">
                                                 <font key="font" metaFont="system" size="16"/>
-                                                <color key="textColor" red="0.54139870405197144" green="0.55656915903091431" blue="0.57255220413208008" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <color key="textColor" name="Bookish Index Text"/>
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                         </textField>
@@ -904,12 +907,15 @@
                                                                                 <rect key="frame" x="18" y="2" width="181" height="19"/>
                                                                                 <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="kiv-p0-HhD">
                                                                                     <font key="font" metaFont="system" size="16"/>
-                                                                                    <color key="textColor" red="0.54139870410000002" green="0.55656915900000004" blue="0.57255220409999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                                    <color key="textColor" name="Bookish Index Text"/>
                                                                                     <color key="backgroundColor" red="0.97261387109999997" green="0.97239154579999998" blue="0.9803945422" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                                     <connections>
                                                                                         <binding destination="hzh-6t-Z3h" name="value" keyPath="objectValue.name" id="had-WF-3fw"/>
                                                                                     </connections>
                                                                                 </textFieldCell>
+                                                                                <connections>
+                                                                                    <binding destination="cSd-7W-hzi" name="font" keyPath="self.cvm.indexFont" id="WtX-Yu-koA"/>
+                                                                                </connections>
                                                                             </textField>
                                                                         </subviews>
                                                                         <constraints>
@@ -1018,6 +1024,7 @@
                                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
                                                     <connections>
+                                                        <binding destination="TBH-Sa-Ff0" name="font" keyPath="self.cvm.titleFont" id="qVG-GY-wXj"/>
                                                         <binding destination="TBH-Sa-Ff0" name="value" keyPath="self.indexView.indexArray.selection.name" id="NKi-Gt-6WZ"/>
                                                     </connections>
                                                 </textField>
@@ -1029,6 +1036,7 @@
                                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
                                                     <connections>
+                                                        <binding destination="TBH-Sa-Ff0" name="font" keyPath="self.cvm.detailFont" id="XRT-vt-RdK"/>
                                                         <binding destination="TBH-Sa-Ff0" name="value" keyPath="self.indexView.indexArray.selection.subtitle" id="9y0-7l-E6b"/>
                                                         <outlet property="nextKeyView" destination="vV5-vW-Afl" id="THN-M0-CdW"/>
                                                     </connections>
@@ -1053,7 +1061,7 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="816" height="698"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <size key="intercellSpacing" width="3" height="2"/>
-                                                        <color key="backgroundColor" name="windowBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="Bookish Detail"/>
                                                         <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                                         <tableColumns>
                                                             <tableColumn identifier="heading" width="86" minWidth="40" maxWidth="1000" id="08J-1b-j8g">
@@ -1076,9 +1084,12 @@
                                                                                 <rect key="frame" x="0.0" y="2" width="86" height="18"/>
                                                                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" alignment="right" placeholderString="heading" usesSingleLineMode="YES" id="FiZ-dp-w3t">
                                                                                     <font key="font" size="14" name=".AppleSystemUIFont"/>
-                                                                                    <color key="textColor" name="Bookish Text"/>
+                                                                                    <color key="textColor" name="Bookish Label Text"/>
                                                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                                 </textFieldCell>
+                                                                                <connections>
+                                                                                    <binding destination="TBH-Sa-Ff0" name="font" keyPath="self.cvm.labelFont" id="Do8-iC-oXM"/>
+                                                                                </connections>
                                                                             </textField>
                                                                         </subviews>
                                                                         <constraints>
@@ -1111,9 +1122,12 @@
                                                                                 <rect key="frame" x="0.0" y="2" width="712" height="18"/>
                                                                                 <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" alignment="left" placeholderString="value" id="33t-e1-VWE">
                                                                                     <font key="font" metaFont="systemBold" size="14"/>
-                                                                                    <color key="textColor" name="Bookish Text"/>
+                                                                                    <color key="textColor" name="Bookish Detail Text"/>
                                                                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                                 </textFieldCell>
+                                                                                <connections>
+                                                                                    <binding destination="TBH-Sa-Ff0" name="font" keyPath="self.cvm.detailFont" id="eiu-Lu-d9l"/>
+                                                                                </connections>
                                                                             </textField>
                                                                         </subviews>
                                                                         <constraints>
@@ -1134,10 +1148,11 @@
                                                                                 <rect key="frame" x="0.0" y="2" width="665" height="18"/>
                                                                                 <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" continuous="YES" alignment="left" placeholderString="value" usesSingleLineMode="YES" id="mQk-Co-D5V">
                                                                                     <font key="font" metaFont="systemBold" size="14"/>
-                                                                                    <color key="textColor" name="Bookish Text"/>
+                                                                                    <color key="textColor" name="Bookish Detail Text"/>
                                                                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                                 </textFieldCell>
                                                                                 <connections>
+                                                                                    <binding destination="TBH-Sa-Ff0" name="font" keyPath="self.cvm.detailFont" id="I4c-7h-rtB"/>
                                                                                     <outlet property="delegate" destination="BkD-e8-vo5" id="JMu-lh-3IF"/>
                                                                                 </connections>
                                                                             </textField>
@@ -1198,10 +1213,11 @@
                                                                                 <rect key="frame" x="0.0" y="2" width="699" height="18"/>
                                                                                 <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" continuous="YES" alignment="left" placeholderString="value" usesSingleLineMode="YES" id="j79-sX-bKh">
                                                                                     <font key="font" metaFont="systemBold" size="14"/>
-                                                                                    <color key="textColor" name="Bookish Text"/>
+                                                                                    <color key="textColor" name="Bookish Detail Text"/>
                                                                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                                 </textFieldCell>
                                                                                 <connections>
+                                                                                    <binding destination="TBH-Sa-Ff0" name="font" keyPath="self.cvm.detailFont" id="ZGS-yF-S0b"/>
                                                                                     <outlet property="delegate" destination="DyG-Q7-Wwd" id="Jyn-At-89b"/>
                                                                                 </connections>
                                                                             </textField>
@@ -1262,7 +1278,7 @@
                                         <constraint firstItem="HhJ-5d-CNv" firstAttribute="centerY" secondItem="nPv-jB-4iC" secondAttribute="centerY" id="tfl-TS-ooi"/>
                                     </constraints>
                                 </view>
-                                <color key="fillColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                <color key="fillColor" name="Bookish Detail"/>
                                 <font key="titleFont" metaFont="smallSystem"/>
                             </box>
                         </subviews>
@@ -1378,6 +1394,7 @@
                                                 <color key="backgroundColor" name="Bookish Detail"/>
                                             </textFieldCell>
                                             <connections>
+                                                <binding destination="YQJ-9e-4qw" name="font" keyPath="self.cvm.titleFont" id="Err-ZP-CnK"/>
                                                 <binding destination="YQJ-9e-4qw" name="value" keyPath="self.indexView.indexArray.selection.name" id="HqE-hI-ZUN"/>
                                             </connections>
                                         </textField>
@@ -1392,6 +1409,7 @@
                                                 <color key="backgroundColor" name="Bookish Detail"/>
                                             </textFieldCell>
                                             <connections>
+                                                <binding destination="YQJ-9e-4qw" name="font" keyPath="self.cvm.detailFont" id="zYU-YS-eAe"/>
                                                 <binding destination="YQJ-9e-4qw" name="value" keyPath="self.indexView.indexArray.selection.notes" id="fNb-Xt-Htu"/>
                                             </connections>
                                         </textField>
@@ -1405,7 +1423,7 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="724" height="608"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <size key="intercellSpacing" width="3" height="2"/>
-                                                        <color key="backgroundColor" name="windowBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="Bookish Detail"/>
                                                         <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                                         <tableColumns>
                                                             <tableColumn identifier="value" width="600" minWidth="40" maxWidth="1000" id="VOt-V0-Tp4">
@@ -1426,12 +1444,15 @@
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="oeA-lN-ssU">
-                                                                                <rect key="frame" x="0.0" y="2" width="38" height="18"/>
+                                                                                <rect key="frame" x="8" y="2" width="38" height="18"/>
                                                                                 <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" sendsActionOnEndEditing="YES" alignment="left" placeholderString="value" id="iIg-m1-08h">
                                                                                     <font key="font" size="14" name=".AppleSystemUIFont"/>
-                                                                                    <color key="textColor" name="Bookish Text"/>
+                                                                                    <color key="textColor" name="Bookish Detail Text"/>
                                                                                     <color key="backgroundColor" name="Bookish Detail"/>
                                                                                 </textFieldCell>
+                                                                                <connections>
+                                                                                    <binding destination="YQJ-9e-4qw" name="font" keyPath="self.cvm.detailFont" id="KoU-91-8T3"/>
+                                                                                </connections>
                                                                             </textField>
                                                                             <button identifier="button.RevealBook" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jQ1-F6-YDa" userLabel="Reveal">
                                                                                 <rect key="frame" x="585" y="3" width="15" height="16"/>
@@ -1448,7 +1469,7 @@
                                                                             <constraint firstItem="jQ1-F6-YDa" firstAttribute="centerY" secondItem="oeA-lN-ssU" secondAttribute="centerY" id="Bdt-r0-b8y"/>
                                                                             <constraint firstItem="oeA-lN-ssU" firstAttribute="top" secondItem="kOa-mX-ie0" secondAttribute="top" constant="2" id="Gdi-Er-qXb"/>
                                                                             <constraint firstAttribute="trailing" secondItem="jQ1-F6-YDa" secondAttribute="trailing" id="Vvl-UM-q7Z"/>
-                                                                            <constraint firstItem="oeA-lN-ssU" firstAttribute="leading" secondItem="kOa-mX-ie0" secondAttribute="leading" constant="2" id="mfl-a3-P8n"/>
+                                                                            <constraint firstItem="oeA-lN-ssU" firstAttribute="leading" secondItem="kOa-mX-ie0" secondAttribute="leading" constant="10" id="mfl-a3-P8n"/>
                                                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="oeA-lN-ssU" secondAttribute="trailing" id="nXh-Dq-fe2"/>
                                                                             <constraint firstAttribute="bottom" secondItem="oeA-lN-ssU" secondAttribute="bottom" constant="2" id="nd9-ud-ZKB"/>
                                                                         </constraints>
@@ -1467,9 +1488,12 @@
                                                                                 </constraints>
                                                                                 <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" continuous="YES" alignment="left" placeholderString="value" drawsBackground="YES" usesSingleLineMode="YES" id="xHD-pi-WuK">
                                                                                     <font key="font" size="14" name=".AppleSystemUIFont"/>
-                                                                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                                                                    <color key="backgroundColor" name="selectedTextBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                                    <color key="textColor" name="Bookish Label Text"/>
+                                                                                    <color key="backgroundColor" name="Bookish Detail"/>
                                                                                 </textFieldCell>
+                                                                                <connections>
+                                                                                    <binding destination="YQJ-9e-4qw" name="font" keyPath="self.cvm.detailFont" id="KdM-1L-E94"/>
+                                                                                </connections>
                                                                             </textField>
                                                                         </subviews>
                                                                         <constraints>
@@ -1518,7 +1542,7 @@
                                         <constraint firstAttribute="bottom" secondItem="sUr-5g-BKU" secondAttribute="bottom" constant="4" id="sVl-H0-ojL"/>
                                     </constraints>
                                 </view>
-                                <color key="fillColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                <color key="fillColor" name="Bookish Detail"/>
                                 <font key="titleFont" metaFont="smallSystem"/>
                             </box>
                         </subviews>
@@ -1545,7 +1569,7 @@
     <resources>
         <image name="AddBook" width="32" height="32"/>
         <image name="AddPerson" width="32" height="32"/>
-        <image name="Book" width="32" height="32"/>
+        <image name="Book" width="16" height="16"/>
         <image name="Books" width="32" height="32"/>
         <image name="ChooseDateSmall" width="12" height="12"/>
         <image name="CoverPlaceholder" width="64" height="64"/>
@@ -1563,11 +1587,20 @@
         <namedColor name="Bookish Detail">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <namedColor name="Bookish Detail Text">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="Bookish Index">
             <color red="0.97254901960784312" green="0.97254901960784312" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="Bookish Text">
+        <namedColor name="Bookish Index Text">
+            <color red="0.41568627450980394" green="0.43137254901960786" blue="0.44705882352941179" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Bookish Label Text">
             <color red="0.54117647058823526" green="0.55686274509803924" blue="0.5725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Bookish Text">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>
