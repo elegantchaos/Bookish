@@ -4,6 +4,7 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 import AppKit
+import ActionsKit
 
 extension NSViewController {
     
@@ -52,10 +53,13 @@ extension NSViewController {
 
 extension NSView {
     func appendValidatableItems(to items: inout [NSControl]) {
+        let selector = ActionManagerMac.Responder.performActionSelector
         if !isHidden {
             if let viewItem = self as? NSControl, let identifier = viewItem.identifier?.rawValue {
                 validationChannel.log("\(identifier)")
-                items.append(viewItem)
+                if viewItem.action == selector {
+                    items.append(viewItem)
+                }
             }
             for subview in subviews {
                 subview.appendValidatableItems(to: &items)

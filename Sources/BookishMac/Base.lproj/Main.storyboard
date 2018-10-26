@@ -580,33 +580,52 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <button translatesAutoresizingMaskIntoConstraints="NO" id="pTf-uQ-crF">
-                                            <rect key="frame" x="12" y="697" width="36" height="36"/>
+                                            <rect key="frame" x="14" y="694" width="40" height="41"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="36" id="EmN-TV-lN9"/>
                                                 <constraint firstAttribute="width" constant="36" id="eXA-M2-dTV"/>
                                             </constraints>
-                                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="CoverPlaceholder" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="Fx9-wb-nvC">
+                                            <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" image="Books" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="Fx9-wb-nvC">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
+                                            <connections>
+                                                <action selector="selectRadio:" target="iuc-9t-fNj" id="5mL-91-eW5"/>
+                                            </connections>
                                         </button>
                                         <button translatesAutoresizingMaskIntoConstraints="NO" id="fIv-Pl-PNw">
-                                            <rect key="frame" x="12" y="604" width="36" height="36"/>
+                                            <rect key="frame" x="14" y="622" width="40" height="41"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="36" id="aoT-LG-Qg2"/>
                                                 <constraint firstAttribute="width" constant="36" id="pyP-xV-h8M"/>
                                             </constraints>
-                                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="PersonPlaceholder" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="gzT-JZ-NZE">
+                                            <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" image="People" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="gzT-JZ-NZE">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="selectRadio:" target="iuc-9t-fNj" id="oeG-Ss-Lrq"/>
+                                            </connections>
+                                        </button>
+                                        <button translatesAutoresizingMaskIntoConstraints="NO" id="xns-n8-kkA">
+                                            <rect key="frame" x="0.0" y="697" width="4" height="36"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="36" id="7Wc-q9-WMq"/>
+                                                <constraint firstAttribute="width" constant="4" id="wRf-0t-Rqf"/>
+                                            </constraints>
+                                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="HilightMarker" imagePosition="only" alignment="center" inset="2" id="ZGt-Xz-foU">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
                                         </button>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="xns-n8-kkA" firstAttribute="leading" secondItem="QaT-Ad-8ce" secondAttribute="leading" id="CDn-hy-mBH"/>
+                                        <constraint firstItem="fIv-Pl-PNw" firstAttribute="top" secondItem="pTf-uQ-crF" secondAttribute="bottom" constant="36" id="HKU-jm-1iN"/>
+                                        <constraint firstAttribute="bottom" secondItem="xns-n8-kkA" secondAttribute="bottom" constant="697" id="TPL-Lo-G8g"/>
                                         <constraint firstItem="pTf-uQ-crF" firstAttribute="top" secondItem="QaT-Ad-8ce" secondAttribute="top" constant="35" id="VCj-8O-ZgE"/>
-                                        <constraint firstItem="fIv-Pl-PNw" firstAttribute="top" secondItem="QaT-Ad-8ce" secondAttribute="top" constant="128" id="aoT-IS-zaP"/>
-                                        <constraint firstItem="pTf-uQ-crF" firstAttribute="leading" secondItem="QaT-Ad-8ce" secondAttribute="leading" constant="12" id="cGf-xo-GGE"/>
-                                        <constraint firstItem="fIv-Pl-PNw" firstAttribute="leading" secondItem="QaT-Ad-8ce" secondAttribute="leading" constant="12" id="kEN-xq-mdZ"/>
+                                        <constraint firstItem="pTf-uQ-crF" firstAttribute="leading" secondItem="QaT-Ad-8ce" secondAttribute="leading" constant="16" id="cGf-xo-GGE"/>
+                                        <constraint firstItem="fIv-Pl-PNw" firstAttribute="leading" secondItem="QaT-Ad-8ce" secondAttribute="leading" constant="16" id="kEN-xq-mdZ"/>
                                     </constraints>
                                 </view>
                                 <constraints>
@@ -667,6 +686,11 @@
                             <constraint firstAttribute="bottom" secondItem="5Hu-w2-Z1k" secondAttribute="bottom" constant="4" id="xGH-zL-cY5"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="buttonContainer" destination="QaT-Ad-8ce" id="TNA-t4-vlj"/>
+                        <outlet property="selectedMarkerButton" destination="xns-n8-kkA" id="wDm-ji-Vls"/>
+                        <outlet property="selectedMarkerConstraint" destination="TPL-Lo-G8g" id="kzA-w3-pKX"/>
+                    </connections>
                 </viewController>
                 <customObject id="Ubq-pe-EpL" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <userDefaultsController id="gfZ-c7-Mjj"/>
@@ -1527,13 +1551,16 @@
     <resources>
         <image name="AddBook" width="32" height="32"/>
         <image name="AddPerson" width="32" height="32"/>
-        <image name="Book" width="16" height="16"/>
+        <image name="Book" width="32" height="32"/>
+        <image name="Books" width="32" height="32"/>
         <image name="ChooseDateSmall" width="12" height="12"/>
         <image name="CoverPlaceholder" width="64" height="64"/>
+        <image name="HilightMarker" width="4" height="36"/>
         <image name="Minus" width="12" height="12"/>
         <image name="NSAddTemplate" width="11" height="11"/>
         <image name="NSFollowLinkFreestandingTemplate" width="14" height="14"/>
         <image name="NSRemoveTemplate" width="11" height="11"/>
+        <image name="People" width="32" height="32"/>
         <image name="Person" width="16" height="16"/>
         <image name="PersonPlaceholder" width="64" height="64"/>
         <image name="Plus" width="12" height="12"/>

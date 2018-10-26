@@ -56,6 +56,11 @@ Sources/BookishMac/Assets.xcassets/ChooseDate.imageset/ChooseDate@2x.png
 Sources/BookishMac/Assets.xcassets/ChooseDate.imageset/ChooseDate.png
 Sources/BookishMac/Assets.xcassets/ChooseDate.imageset/Contents.json
 Sources/BookishMac/Assets.xcassets/ChooseDate.imageset/ChooseDate@3x.png
+Sources/BookishMac/Assets.xcassets/People.imageset
+Sources/BookishMac/Assets.xcassets/People.imageset/People@3x.png
+Sources/BookishMac/Assets.xcassets/People.imageset/People@2x.png
+Sources/BookishMac/Assets.xcassets/People.imageset/Contents.json
+Sources/BookishMac/Assets.xcassets/People.imageset/People.png
 Sources/BookishMac/Assets.xcassets/ChooseDateSmall.imageset
 Sources/BookishMac/Assets.xcassets/ChooseDateSmall.imageset/ChooseDateSmall.png
 Sources/BookishMac/Assets.xcassets/ChooseDateSmall.imageset/ChooseDateSmall@3x.png
@@ -68,6 +73,11 @@ Sources/BookishMac/Assets.xcassets/PersonPlaceholder.imageset/Contents.json
 Sources/BookishMac/Assets.xcassets/PersonPlaceholder.imageset/PersonPlaceholder@3x.png
 Sources/BookishMac/Assets.xcassets/PersonPlaceholder.imageset/PersonPlaceholder@2x.png
 Sources/BookishMac/Assets.xcassets/Contents.json
+Sources/BookishMac/Assets.xcassets/Books.imageset
+Sources/BookishMac/Assets.xcassets/Books.imageset/Books.png
+Sources/BookishMac/Assets.xcassets/Books.imageset/Books@3x.png
+Sources/BookishMac/Assets.xcassets/Books.imageset/Books@2x.png
+Sources/BookishMac/Assets.xcassets/Books.imageset/Contents.json
 Sources/BookishMac/Assets.xcassets/CoverPlaceholder.imageset
 Sources/BookishMac/Assets.xcassets/CoverPlaceholder.imageset/CoverPlaceholder.png
 Sources/BookishMac/Assets.xcassets/CoverPlaceholder.imageset/CoverPlaceholder@3x.png
@@ -91,6 +101,11 @@ Sources/BookishMac/Assets.xcassets/Book.imageset/Book@3x.png
 Sources/BookishMac/Assets.xcassets/Book.imageset/Book.png
 Sources/BookishMac/Assets.xcassets/Book.imageset/Book@2x.png
 Sources/BookishMac/Assets.xcassets/Book.imageset/Contents.json
+Sources/BookishMac/Assets.xcassets/HilightMarker.imageset
+Sources/BookishMac/Assets.xcassets/HilightMarker.imageset/HilightMarker.png
+Sources/BookishMac/Assets.xcassets/HilightMarker.imageset/Contents.json
+Sources/BookishMac/Assets.xcassets/HilightMarker.imageset/HilightMarker@3x.png
+Sources/BookishMac/Assets.xcassets/HilightMarker.imageset/HilightMarker@2x.png
 Sources/BookishMac/Assets.xcassets/Minus.imageset
 Sources/BookishMac/Assets.xcassets/Minus.imageset/Minus@3x.png
 Sources/BookishMac/Assets.xcassets/Minus.imageset/Minus@2x.png

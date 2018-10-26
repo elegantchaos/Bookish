@@ -6,10 +6,48 @@
 import Cocoa
 
 class CollectionRootViewController: CollectionViewController {
+    @IBOutlet weak var selectedMarkerConstraint: NSLayoutConstraint!
+    @IBOutlet weak var selectedMarkerButton: NSButton!
+    @IBOutlet weak var buttonContainer: NSView!
+    var buttons: [NSButton] = []
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do view setup here.
+    var observer: NSKeyValueObservation?
+    
+    override func viewWillAppear() {
+        super.viewWillAppear()
+        
+        let subviews = buttonContainer.subviews
+        for view in subviews {
+            if let button = view as? NSButton, button != selectedMarkerButton {
+                buttons.append(button)
+            }
+        }
+        
+        observer = cvm.observe(\CollectionDocumentViewModel.modeIndex) { (cvm, change) in
+            self.setMarker(index: cvm.modeIndex)
+        }
     }
     
+    func setMarker(index: Int) {
+        if index < buttons.count {
+            let button = buttons[index]
+            let offset = (selectedMarkerButton.frame.height - button.frame.height) / 2.0
+            selectedMarkerConstraint.constant = button.frame.origin.y - offset
+        }
+    }
+    
+    @IBAction func selectRadio(_ sender: NSButton) {
+        if let siblings = sender.superview?.subviews {
+            for child in siblings {
+                if let button = child as? NSButton {
+                    button.state = .off
+                }
+            }
+            sender.state = .on
+            if let index = buttons.firstIndex(of: sender) {
+                cvm.modeIndex = index
+                setMarker(index: index)
+            }
+        }
+    }
 }

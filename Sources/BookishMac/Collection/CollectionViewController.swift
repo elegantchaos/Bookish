@@ -23,5 +23,7 @@ class CollectionViewController: NSViewController {
         super.viewWillAppear()
         CoreDataTransformers.updateCoreDataBindings(for: self.view, context: cvm.managedObjectContext)
     }
+    
+  
 }
 
