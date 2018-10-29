@@ -10,7 +10,10 @@ import Actions
 class PersonIndexViewController: CollectionViewController {
     @objc weak var detailView: PersonDetailViewController!
     @IBOutlet weak var indexArray: NSArrayController!
+    @IBOutlet weak var indexTable: NSTableView!
     
+    @objc let sorting = [NSSortDescriptor(key: "name", ascending: true)]
+
     override func viewDidLoad() {
         super.viewDidLoad()
         detailView = nearestSibling()
@@ -29,6 +32,14 @@ class PersonIndexViewController: CollectionViewController {
         super.viewWillAppear()
     }
     
+    func select(people: [Person]) {
+        indexArray.setSelectedObjects(people)
+        let index = indexTable.selectedRow
+        if index != -1 {
+            indexTable.scrollRowToVisible(index)
+        }
+    }
+
 }
 
 // MARK: Actions

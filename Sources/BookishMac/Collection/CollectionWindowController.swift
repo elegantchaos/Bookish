@@ -46,7 +46,7 @@ class CollectionWindowController: NSWindowController, DocumentWindowController, 
 extension CollectionWindowController: BookViewer {
     @objc func reveal(book: Book) {
         if let model = viewModel {
-            bookIndexController?.indexArray.setSelectedObjects([book])
+            bookIndexController?.select(books: [book])
             model.mode = .books
         }
     }
@@ -55,12 +55,7 @@ extension CollectionWindowController: BookViewer {
 extension CollectionWindowController: PersonViewer {
     @objc func reveal(person: Person) {
         if let model = viewModel {
-//            if let objects = personIndexController?.indexArray.arrangedObjects as? [Person] {
-//                if let index = objects.firstIndex(of: person) {
-//                    model.selectedPeople = NSMutableIndexSet(index: index)
-//                }
-//            }
-            personIndexController?.indexArray.setSelectedObjects([person])
+            personIndexController?.select(people: [person])
             model.mode = .people
         }
     }

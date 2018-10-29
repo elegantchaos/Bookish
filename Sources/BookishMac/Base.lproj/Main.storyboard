@@ -849,6 +849,7 @@
                     </view>
                     <connections>
                         <outlet property="indexArray" destination="2aD-Rb-QIq" id="kCR-8o-GdD"/>
+                        <outlet property="indexTable" destination="T2o-3X-3Tj" id="uyT-B4-TY3"/>
                     </connections>
                 </viewController>
                 <customObject id="dKH-w6-QnP" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -856,6 +857,7 @@
                     <connections>
                         <binding destination="pkB-w0-Ho6" name="managedObjectContext" keyPath="self.cvm.managedObjectContext" id="xlf-yF-oNv"/>
                         <binding destination="pkB-w0-Ho6" name="selectionIndexes" keyPath="self.cvm.selectedPeople" id="QGa-fI-C4B"/>
+                        <binding destination="pkB-w0-Ho6" name="sortDescriptors" keyPath="self.sorting" previousBinding="QGa-fI-C4B" id="8rN-fC-cPe"/>
                     </connections>
                 </arrayController>
             </objects>
@@ -981,6 +983,7 @@
                     </view>
                     <connections>
                         <outlet property="indexArray" destination="gjv-NN-VkV" id="8aY-jB-Ac8"/>
+                        <outlet property="indexTable" destination="jZN-rJ-ulS" id="tCe-oe-hE9"/>
                     </connections>
                 </viewController>
                 <customObject id="Jsc-1E-0Rn" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -988,6 +991,7 @@
                     <connections>
                         <binding destination="cSd-7W-hzi" name="managedObjectContext" keyPath="self.cvm.managedObjectContext" id="O9C-yN-jLQ"/>
                         <binding destination="cSd-7W-hzi" name="selectionIndexes" keyPath="self.cvm.selectedIndexes" id="iTu-h5-N0J"/>
+                        <binding destination="cSd-7W-hzi" name="sortDescriptors" keyPath="self.sorting" previousBinding="iTu-h5-N0J" id="GSF-3H-cKe"/>
                     </connections>
                 </arrayController>
             </objects>
