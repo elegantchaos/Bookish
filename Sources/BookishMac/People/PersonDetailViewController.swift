@@ -27,6 +27,10 @@ class PersonDetailViewController: CollectionViewController {
     override func viewWillAppear() {
         super.viewWillAppear()
         
+        if let window = view.window?.windowController as? CollectionWindowController {
+            window.personDetailController = self
+        }
+
         if let indexArray = indexView.indexArray {
             indexObserver = indexArray.observe(\NSArrayController.selection, changeHandler: { (index, change) in
                 self.selectionChanged()

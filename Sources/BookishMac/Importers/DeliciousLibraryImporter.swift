@@ -22,7 +22,7 @@ class DeliciousLibraryImportSession: ImportSession {
     typealias Record = [String:Any]
     typealias RecordList = [Record]
 
-    let people: Set<Person> = []
+    var people: [String:Person] = [:]
     
     override func run() {
         
@@ -46,9 +46,15 @@ class DeliciousLibraryImportSession: ImportSession {
             book.ean = record["ean"] as? String
             book.asin = record["asin"] as? String
             
-            
-            let author = Person(context: context)
-            author.name = creators
+            let author: Person
+            if let cached = people[creators] {
+                author = cached
+            } else {
+                author = Person(context: context)
+                author.name = creators
+                people[creators] = author
+            }
+
             let role = author.role(as: Role.Default.authorName)
             role.addToBooks(book)
         }

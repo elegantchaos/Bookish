@@ -17,9 +17,15 @@ class PersonIndexViewController: CollectionViewController {
     }
     
     override func viewWillAppear() {
-        // we really should be able to bind the array to the object context in IB, but
-        // the document value is set relatively late, so it's safer to do it here
-        indexArray.fetch(self)
+        if let window = parent?.view.window?.windowController as? CollectionWindowController {
+            window.personIndexController = self
+        }
+
+        if (indexArray.content as? [Person])?.count == 0 {
+            // we really should be able to bind the array to the object context in IB, but
+            // the document value is set relatively late, so it's safer to do it here
+            indexArray.fetch(self)
+        }
         super.viewWillAppear()
     }
     

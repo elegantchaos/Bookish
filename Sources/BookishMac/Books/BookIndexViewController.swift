@@ -20,9 +20,13 @@ class BookIndexViewController: CollectionViewController {
         if let window = view.window?.windowController as? CollectionWindowController {
             window.bookIndexController = self
         }
-        // we really should be able to bind the array to the object context in IB, but
-        // the document value is set relatively late, so it's safer to do it here
-        indexArray.fetch(self)
+
+        if (indexArray.content as? [Person])?.count == 0 {
+            // we really should be able to bind the array to the object context in IB, but
+            // the document value is set relatively late, so it's safer to do it here
+            indexArray.fetch(self)
+        }
+        
         super.viewWillAppear()
     }
 }

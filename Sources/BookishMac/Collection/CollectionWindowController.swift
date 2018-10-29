@@ -18,6 +18,9 @@ class CollectionWindowController: NSWindowController, DocumentWindowController, 
     var bookIndexController: BookIndexViewController?
     var bookDetailController: BookDetailViewController?
     
+    var personIndexController: PersonIndexViewController?
+    var personDetailController: PersonDetailViewController?
+    
     override func windowDidLoad() {
         super.windowDidLoad()
         window?.autorecalculatesKeyViewLoop = false
@@ -43,6 +46,7 @@ class CollectionWindowController: NSWindowController, DocumentWindowController, 
 extension CollectionWindowController: BookViewer {
     @objc func reveal(book: Book) {
         if let model = viewModel {
+            bookIndexController?.indexArray.setSelectedObjects([book])
             model.mode = .books
         }
     }
@@ -51,6 +55,12 @@ extension CollectionWindowController: BookViewer {
 extension CollectionWindowController: PersonViewer {
     @objc func reveal(person: Person) {
         if let model = viewModel {
+//            if let objects = personIndexController?.indexArray.arrangedObjects as? [Person] {
+//                if let index = objects.firstIndex(of: person) {
+//                    model.selectedPeople = NSMutableIndexSet(index: index)
+//                }
+//            }
+            personIndexController?.indexArray.setSelectedObjects([person])
             model.mode = .people
         }
     }
