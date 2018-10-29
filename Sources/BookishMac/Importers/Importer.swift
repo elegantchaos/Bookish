@@ -4,6 +4,7 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 import Foundation
+import CoreData
 
 class Importer {
     enum Source {
@@ -40,20 +41,22 @@ class Importer {
     }
     
     func run(for document: CollectionDocument) {
-        let completion = { (url: URL) in
-            self.run(with: url)
-        }
-        
-        if source == .knownLocation {
-            if let url = defaultImportLocation {
-                completion(url)
+        if let context = document.managedObjectContext {
+            let completion = { (url: URL) in
+                self.run(with: url, for: context)
             }
-        } else {
-            manager.selectFile(for: self, document: document, completion: completion)
+            
+            if source == .knownLocation {
+                if let url = defaultImportLocation {
+                    completion(url)
+                }
+            } else {
+                manager.selectFile(for: self, document: document, completion: completion)
+            }
         }
     }
     
-    func run(with url: URL) {
+    func run(with url: URL, for collection: NSManagedObjectContext) {
         fatalError("subclass should have overridden the run method")
     }
 }

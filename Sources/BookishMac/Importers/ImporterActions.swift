@@ -16,7 +16,7 @@ class ImporterAction: Action {
     }
 }
 
-class ImportAction: ImporterAction {
+class ImportMergedAction: ImporterAction {
     func importer(for context: ActionContext) -> Importer? {
         let importManager = Application.sharedInstance.importManager // TODO: read from context?
         return importManager.importer(named: context.parameters[0])
@@ -28,6 +28,24 @@ class ImportAction: ImporterAction {
     override func perform(context: ActionContext) {
         if let viewModel = context.info[ActionContext.viewModelKey] as? CollectionDocumentViewModel {
             let document = viewModel.document
+            if let importer = importer(for: context) {
+                importer.run(for: document)
+            }
+        }
+    }
+}
+
+class ImportAction: ImporterAction {
+    func importer(for context: ActionContext) -> Importer? {
+        let importManager = Application.sharedInstance.importManager // TODO: read from context?
+        return importManager.importer(named: context.parameters[0])
+    }
+    override func validate(context: ActionContext) -> Bool {
+        return importer(for: context)?.canImport ?? false
+    }
+    
+    override func perform(context: ActionContext) {
+        if let document = (try? NSDocumentController.shared.openUntitledDocumentAndDisplay(false)) as? CollectionDocument {
             if let importer = importer(for: context) {
                 importer.run(for: document)
             }

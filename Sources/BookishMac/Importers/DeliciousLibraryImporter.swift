@@ -4,6 +4,8 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 import Foundation
+import BookishModel
+import CoreData
 
 class DeliciousLibraryImporter: Importer {
     typealias Record = [String:Any]
@@ -24,21 +26,35 @@ class DeliciousLibraryImporter: Importer {
 //        return true
 //    }
     
-    override func run(with url: URL) {
-        print("importing from delicious library")
+    override func run(with url: URL, for collection: NSManagedObjectContext) {
+        
+        // temporarily we always wipe out the original collection
+
         if let data = try? Data(contentsOf: url) {
             if let list = (try? PropertyListSerialization.propertyList(from: data, options: [], format: nil)) as? RecordList {
                 for record in list {
-                    process(record: record)
+                    process(record: record, context: collection)
                 }
             }
         }
     }
     
-    func process(record: Record) {
-        if let title = record["title"] as? String, let creators = record["creatorsCompositeString"] {
-            print(title)
-            print(creators)
+    func process(record: Record, context: NSManagedObjectContext) {
+        if let title = record["title"] as? String, let creators = record["creatorsCompositeString"] as? String {
+            let book = Book(context: context)
+            book.name = title
+            
+            book.importDate = Date()
+            book.importUUID = record["uuid"] as? UUID
+            book.isbn = record["isbn"] as? String
+            book.ean = record["ean"] as? String
+            book.asin = record["asin"] as? String
+            
+            
+            let author = Person(context: context)
+            author.name = creators
+            let role = author.role(as: Role.Default.authorName)
+            role.addToBooks(book)
         }
     }
 }

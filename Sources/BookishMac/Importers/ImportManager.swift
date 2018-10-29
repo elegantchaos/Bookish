@@ -41,6 +41,8 @@ class ImportManager {
             panel.runModal()
             if let url = panel.url {
                 completion(url)
+                document.makeWindowControllers()
+                document.showWindows()
             }
         }
     }

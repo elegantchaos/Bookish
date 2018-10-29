@@ -16,12 +16,6 @@ public class Book: NSManagedObject {
         
         added = Date()
         modified = Date()
-        
-        if let context = managedObjectContext {
-            let author = Person(context: context)
-            let entry = author.role(as: Role.Default.authorName)
-            entry.addToBooks(self)
-        }
     }
     
     public var roles: Set<Role> {
