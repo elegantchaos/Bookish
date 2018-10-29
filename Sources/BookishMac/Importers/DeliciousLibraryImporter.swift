@@ -24,6 +24,8 @@ class DeliciousLibraryImportSession: ImportSession {
 
     var people: [String:Person] = [:]
     
+    let formatsToSkip = ["Audio CD", "Audio CD Enhanced", "Audio CD Import", "Video Game"]
+    
     override func run() {
         
         if let data = try? Data(contentsOf: url) {
@@ -36,27 +38,41 @@ class DeliciousLibraryImportSession: ImportSession {
     }
     
     func process(record: Record, context: NSManagedObjectContext) {
-        if let title = record["title"] as? String, let creators = record["creatorsCompositeString"] as? String {
-            let book = Book(context: context)
-            book.name = title
-            
-            book.importDate = Date()
-            book.importUUID = record["uuid"] as? UUID
-            book.isbn = record["isbn"] as? String
-            book.ean = record["ean"] as? String
-            book.asin = record["asin"] as? String
-            
-            let author: Person
-            if let cached = people[creators] {
-                author = cached
-            } else {
-                author = Person(context: context)
-                author.name = creators
-                people[creators] = author
+        let format = record["formatSingularString"] as? String
+        if (format == nil || !formatsToSkip.contains(format!)) {
+            if let title = record["title"] as? String, let creators = record["creatorsCompositeString"] as? String {
+                let book = Book(context: context)
+                book.name = title
+                book.subtitle = record["subtitle"] as? String
+                book.importDate = Date()
+                book.importUUID = record["uuid"] as? UUID
+                book.isbn = record["isbn"] as? String
+                book.ean = record["ean"] as? String
+                book.asin = record["asin"] as? String
+                
+                book.added = record["creationDate"] as? Date
+                book.modified = record["lastModificationDate"] as? Date
+                book.published = record["publishDate"] as? Date
+                
+                book.notes = record.description
+                book.format = format
+                
+                if let url = (record["coverImageLargeURLString"] as? String) ?? (record["coverImageSmallURLString"] as? String) {
+                    book.imageURL = url
+                }
+                
+                let author: Person
+                if creators != "", let cached = people[creators] {
+                    author = cached
+                } else {
+                    author = Person(context: context)
+                    author.name = creators
+                    people[creators] = author
+                }
+                
+                let role = author.role(as: Role.Default.authorName)
+                role.addToBooks(book)
             }
-
-            let role = author.role(as: Role.Default.authorName)
-            role.addToBooks(book)
         }
     }
 }
