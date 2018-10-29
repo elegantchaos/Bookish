@@ -65,20 +65,25 @@ import BookishModel
     }
     
     var importMenu: NSMenu {
-        get {
-            let menu = NSMenu()
-            let importManager = Application.sharedInstance.importManager
-            for importer in importManager.sortedImporters {
-                var title = importer.name
-                if importer.source == .userSpecifiedFile {
-                    title.append("…")
-                }
-                let item = NSMenuItem(title: title, action: ActionManagerMac.Responder.performActionSelector, keyEquivalent: "")
-                item.identifier = NSUserInterfaceItemIdentifier(rawValue: "menu.Import.\(importer.name)")
-                menu.addItem(item)
-            }
-            return menu
-        }
+        get { return makeImportMenu(action: "ImportNew") }
     }
 
+    var mergeMenu: NSMenu {
+        get { return makeImportMenu(action: "ImportMerged") }
+    }
+    
+    func makeImportMenu(action: String) -> NSMenu {
+        let menu = NSMenu()
+        let importManager = Application.sharedInstance.importManager
+        for importer in importManager.sortedImporters {
+            var title = importer.name
+            if importer.source == .userSpecifiedFile {
+                title.append("…")
+            }
+            let item = NSMenuItem(title: title, action: ActionManagerMac.Responder.performActionSelector, keyEquivalent: "")
+            item.identifier = NSUserInterfaceItemIdentifier(rawValue: "menu.\(action).\(importer.name)")
+            menu.addItem(item)
+        }
+        return menu
+    }
 }

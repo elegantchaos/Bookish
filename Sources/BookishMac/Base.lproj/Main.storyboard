@@ -108,6 +108,12 @@
                                                 <action selector="performClose:" target="Ady-hI-5gd" id="HmO-Ls-i7Q"/>
                                             </connections>
                                         </menuItem>
+                                        <menuItem title="Merge" identifier="menu.FillMergeMenu" id="mLL-Y0-DW2" userLabel="Import">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="performAction:" target="Ady-hI-5gd" id="bg7-zX-emB"/>
+                                            </connections>
+                                        </menuItem>
                                         <menuItem title="Save…" keyEquivalent="s" id="pxx-59-PXV">
                                             <connections>
                                                 <action selector="saveDocument:" target="Ady-hI-5gd" id="teZ-XB-qJY"/>
@@ -638,7 +644,6 @@
                                     <constraint firstAttribute="width" constant="68" id="yJb-Xd-Ul9"/>
                                 </constraints>
                                 <color key="fillColor" red="0.86299508810043335" green="0.86210739612579346" blue="0.8980451226234436" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <font key="titleFont" metaFont="smallSystem"/>
                             </box>
                             <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="7" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QF4-CS-GTr">
                                 <rect key="frame" x="20" y="20" width="29" height="15"/>
@@ -833,7 +838,6 @@
                                     </constraints>
                                 </view>
                                 <color key="fillColor" name="Bookish Index"/>
-                                <font key="titleFont" metaFont="smallSystem"/>
                             </box>
                         </subviews>
                         <constraints>
@@ -966,7 +970,6 @@
                                     </constraints>
                                 </view>
                                 <color key="fillColor" name="Bookish Index"/>
-                                <font key="titleFont" metaFont="smallSystem"/>
                             </box>
                         </subviews>
                         <constraints>
@@ -1285,7 +1288,6 @@
                                     </constraints>
                                 </view>
                                 <color key="fillColor" name="Bookish Detail"/>
-                                <font key="titleFont" metaFont="smallSystem"/>
                             </box>
                         </subviews>
                         <constraints>
@@ -1549,7 +1551,6 @@
                                     </constraints>
                                 </view>
                                 <color key="fillColor" name="Bookish Detail"/>
-                                <font key="titleFont" metaFont="smallSystem"/>
                             </box>
                         </subviews>
                         <constraints>
@@ -1575,7 +1576,7 @@
     <resources>
         <image name="AddBook" width="32" height="32"/>
         <image name="AddPerson" width="32" height="32"/>
-        <image name="Book" width="16" height="16"/>
+        <image name="Book" width="32" height="32"/>
         <image name="Books" width="32" height="32"/>
         <image name="ChooseDateSmall" width="12" height="12"/>
         <image name="CoverPlaceholder" width="64" height="64"/>

@@ -8,6 +8,7 @@ import Actions
 
 class ImportManager {
     private var importers: [String:Importer] = [:]
+    private var sessions: [ImportSession] = []
     
     var sortedImporters: [Importer] {
         return importers.sorted(by: { return $0.key < $1.key }).map({ $0.value })
@@ -24,6 +25,12 @@ class ImportManager {
     
     func importer(named: String) -> Importer? {
         return importers[named]
+    }
+    
+    func run(importer: Importer, for context: NSManagedObjectContext, url: URL, completion: @escaping ImportSession.Completion) {
+        let session = importer.makeSession(for: context, url: url, completion: completion)
+        sessions.append(session)
+        session.run()
     }
     
     func selectFile(for importer: Importer, document: CollectionDocument, completion: @escaping (URL) -> Void) {

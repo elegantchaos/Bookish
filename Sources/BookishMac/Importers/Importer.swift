@@ -40,6 +40,11 @@ class Importer {
         return nil
     }
     
+    func makeSession(for context: NSManagedObjectContext, url: URL, completion: @escaping ImportSession.Completion) -> ImportSession {
+        let session = ImportSession(importer: self, context: context, url: url, completion: completion)
+        return session
+    }
+    
     func run(for document: CollectionDocument) {
         if let context = document.managedObjectContext {
             let completion = { (url: URL) in
