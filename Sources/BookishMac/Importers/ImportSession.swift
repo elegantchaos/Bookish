@@ -25,9 +25,10 @@ class ImportSession: Equatable {
     }
     
     func performImport() {
+        importer.manager.sessionWillBegin(self)
         run()
         completion()
-        importer.manager.sessionFinished(self)
+        importer.manager.sessionDidFinish(self)
     }
 
     internal func run() {

@@ -27,36 +27,13 @@ class ImportManager {
         return importers[named]
     }
     
-    func run(importer: Importer, for context: NSManagedObjectContext, url: URL, completion: @escaping ImportSession.Completion) {
-        let session = importer.makeSession(for: context, url: url, completion: completion)
+    func sessionWillBegin(_ session: ImportSession) {
         sessions.append(session)
-        session.performImport()
     }
     
-    func sessionFinished(_ session: ImportSession) {
+    func sessionDidFinish(_ session: ImportSession) {
         if let index = sessions.firstIndex(of: session) {
             sessions.remove(at: index)
-        }
-    }
-
-    func selectFile(for importer: Importer, document: CollectionDocument, completion: @escaping (URL) -> Void) {
-        let panel = NSOpenPanel()
-        panel.canChooseDirectories = false
-        panel.allowsMultipleSelection = false
-        
-        if let window = document.windowControllers.first?.window {
-            panel.beginSheetModal(for: window) { (response) in
-                if let url = panel.url {
-                    completion(url)
-                }
-            }
-        } else {
-            panel.runModal()
-            if let url = panel.url {
-                completion(url)
-                document.makeWindowControllers()
-                document.showWindows()
-            }
         }
     }
 

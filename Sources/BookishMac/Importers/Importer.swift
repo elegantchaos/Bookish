@@ -40,28 +40,13 @@ class Importer {
         return nil
     }
     
-    func makeSession(for context: NSManagedObjectContext, url: URL, completion: @escaping ImportSession.Completion) -> ImportSession {
+    internal func makeSession(importing url: URL, into context: NSManagedObjectContext, completion: @escaping ImportSession.Completion) -> ImportSession {
         let session = ImportSession(importer: self, context: context, url: url, completion: completion)
         return session
     }
     
-    func run(for document: CollectionDocument) {
-        if let context = document.managedObjectContext {
-            let completion = { (url: URL) in
-                self.run(with: url, for: context)
-            }
-            
-            if source == .knownLocation {
-                if let url = defaultImportLocation {
-                    completion(url)
-                }
-            } else {
-                manager.selectFile(for: self, document: document, completion: completion)
-            }
-        }
-    }
-    
-    func run(with url: URL, for collection: NSManagedObjectContext) {
-        fatalError("subclass should have overridden the run method")
+    func run(importing url: URL, into context: NSManagedObjectContext, completion: @escaping ImportSession.Completion) {
+        let session = makeSession(importing: url, into: context, completion: completion)
+        session.performImport()
     }
 }

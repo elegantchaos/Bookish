@@ -13,7 +13,7 @@ class DeliciousLibraryImporter: Importer {
         super.init(name: "Delicious Library", source: .userSpecifiedFile, manager: manager)
     }
     
-    override func makeSession(for context: NSManagedObjectContext, url: URL, completion: @escaping ImportSession.Completion) -> ImportSession {
+    override func makeSession(importing url: URL, into context: NSManagedObjectContext, completion: @escaping ImportSession.Completion) -> ImportSession {
         return DeliciousLibraryImportSession(importer: self, context: context, url: url, completion: completion)
     }
 }

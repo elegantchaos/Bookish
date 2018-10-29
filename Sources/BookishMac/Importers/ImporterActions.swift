@@ -4,6 +4,7 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 import Actions
+import ActionsKit
 import BookishModel
 import AppKit
 
@@ -54,7 +55,7 @@ class ImportRequest {
     
     func run(for url: URL) {
         if let managedObjectContext = document.managedObjectContext {
-            importer.manager.run(importer: importer, for: managedObjectContext, url: url) {
+            importer.run(importing: url, into: managedObjectContext) {
                 self.complete()
             }
         }
@@ -140,6 +141,21 @@ class ImporterAction: Action {
             FillMergeMenuAction(identifier: "FillMergeMenu")
         ]
     }
+    
+    class func makeImportMenu(action: String) -> NSMenu {
+        let menu = NSMenu()
+        let importManager = Application.sharedInstance.importManager
+        for importer in importManager.sortedImporters {
+            var title = importer.name
+            if importer.source == .userSpecifiedFile {
+                title.append("…")
+            }
+            let item = NSMenuItem(title: title, action: ActionManagerMac.Responder.performActionSelector, keyEquivalent: "")
+            item.identifier = NSUserInterfaceItemIdentifier(rawValue: "menu.\(action).\(importer.name)")
+            menu.addItem(item)
+        }
+        return menu
+    }
 }
 
 /**
@@ -203,8 +219,8 @@ class FillImportMenuAction: ImporterAction {
             return false
         }
         
-        if let item = context.sender as? NSMenuItem, let viewModel = context.info[ActionContext.viewModelKey] as? CollectionDocumentViewModel {
-            item.submenu = viewModel.importMenu
+        if let item = context.sender as? NSMenuItem {
+            item.submenu = ImporterAction.makeImportMenu(action: "ImportNew")
             return true
         }
         
@@ -224,8 +240,8 @@ class FillMergeMenuAction: ImporterAction {
             return false
         }
         
-        if let item = context.sender as? NSMenuItem, let viewModel = context.info[ActionContext.viewModelKey] as? CollectionDocumentViewModel {
-            item.submenu = viewModel.mergeMenu
+        if let item = context.sender as? NSMenuItem, let _ = context.info[ActionContext.viewModelKey] as? CollectionDocumentViewModel {
+            item.submenu = ImporterAction.makeImportMenu(action: "ImportMerged")
             return true
         }
         
