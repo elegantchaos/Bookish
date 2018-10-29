@@ -24,7 +24,7 @@ class DeliciousLibraryImportSession: ImportSession {
 
     var people: [String:Person] = [:]
     
-    let formatsToSkip = ["Audio CD", "Audio CD Enhanced", "Audio CD Import", "Video Game"]
+    let formatsToSkip = ["Audio CD", "Audio CD Enhanced", "Audio CD Import", "Video Game", "VHS Tape"]
     
     override func run() {
         
