@@ -22,6 +22,8 @@ class DeliciousLibraryImportSession: ImportSession {
     typealias Record = [String:Any]
     typealias RecordList = [Record]
 
+    let people: Set<Person> = []
+    
     override func run() {
         
         if let data = try? Data(contentsOf: url) {

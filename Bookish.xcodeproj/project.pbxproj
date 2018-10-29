@@ -309,6 +309,7 @@
 		22DD426C2126D6DB0070C85A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		22DD42792126DDA80070C85A /* Bookish.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Bookish.xcconfig; sourceTree = "<group>"; };
 		22DE6AE221875F410078D489 /* ImportSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportSession.swift; sourceTree = "<group>"; };
+		22DE6AE421877E740078D489 /* Assets.xcfilelist */ = {isa = PBXFileReference; lastKnownFileType = text.xcfilelist; path = Assets.xcfilelist; sourceTree = "<group>"; };
 		22F35486216FAC0100443C0B /* Actions.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Actions.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		22F3548A216FAC0100443C0B /* BookishCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BookishCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -483,6 +484,7 @@
 				22D39E632147E9BA00282467 /* Transformers */,
 				221F27272136EC0500DC2DC7 /* Utilities */,
 				22DD42502126D6DB0070C85A /* Assets.xcassets */,
+				22DE6AE421877E740078D489 /* Assets.xcfilelist */,
 				22DD42522126D6DB0070C85A /* Main.storyboard */,
 				22DD42552126D6DB0070C85A /* Info.plist */,
 				22DD42562126D6DB0070C85A /* Bookish.entitlements */,
@@ -1081,7 +1083,7 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"$(SRCROOT)/Bookish.sketch",
+				"$(SRCROOT)/Extras/Bookish.sketch",
 			);
 			name = "Export From Sketch";
 			outputFileListPaths = (
@@ -1091,7 +1093,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# build & run sketchx to export the assets\nswift run sketchx Extras/Bookish.sketch Mac=Assets Sources/BookishMac \n\n# update list of all assets\nfind Sources/BookishMac/Assets.xcassets > Sources/BookishMac/Assets.xcfilelist\n";
+			shellScript = "# build & run sketchx to export the assets\nswift run sketchx Extras/Bookish.sketch Mac=Assets Sources/BookishMac \n\n# update list of all assets\nfind Sources/BookishMac/Assets.xcassets -type f > Sources/BookishMac/Assets.xcfilelist\n";
 			showEnvVarsInLog = 0;
 		};
 		226EF319217793740012A405 /* Export From Sketch */ = {
