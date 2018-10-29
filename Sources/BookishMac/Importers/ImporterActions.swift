@@ -134,10 +134,10 @@ class NewImportRequest: ImportRequest {
 class ImporterAction: Action {
     class func standardActions() -> [Action] {
         return [
-            FillImportMenuAction(identifier: "FillImportMenu"),
             ImportNewAction(identifier: "ImportNew"),
             ImportMergedAction(identifier: "ImportMerged"),
-            FillMergeMenuAction(identifier: "FillMergeMenuAction")
+            FillImportMenuAction(identifier: "FillImportMenu"),
+            FillMergeMenuAction(identifier: "FillMergeMenu")
         ]
     }
 }

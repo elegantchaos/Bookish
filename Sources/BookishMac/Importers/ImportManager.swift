@@ -30,9 +30,15 @@ class ImportManager {
     func run(importer: Importer, for context: NSManagedObjectContext, url: URL, completion: @escaping ImportSession.Completion) {
         let session = importer.makeSession(for: context, url: url, completion: completion)
         sessions.append(session)
-        session.run()
+        session.performImport()
     }
     
+    func sessionFinished(_ session: ImportSession) {
+        if let index = sessions.firstIndex(of: session) {
+            sessions.remove(at: index)
+        }
+    }
+
     func selectFile(for importer: Importer, document: CollectionDocument, completion: @escaping (URL) -> Void) {
         let panel = NSOpenPanel()
         panel.canChooseDirectories = false

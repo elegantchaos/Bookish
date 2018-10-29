@@ -5,7 +5,11 @@
 
 import CoreData
 
-class ImportSession {
+class ImportSession: Equatable {
+    static func == (lhs: ImportSession, rhs: ImportSession) -> Bool {
+        return lhs === rhs
+    }
+    
     typealias Completion = () -> Void
     
     let url: URL
@@ -20,7 +24,12 @@ class ImportSession {
         self.completion = completion
     }
     
-    func run() {
+    func performImport() {
+        run()
         completion()
+        importer.manager.sessionFinished(self)
+    }
+
+    internal func run() {
     }
 }
