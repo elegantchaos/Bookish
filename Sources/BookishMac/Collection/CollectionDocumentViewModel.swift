@@ -69,7 +69,11 @@ import BookishModel
             let menu = NSMenu()
             let importManager = Application.sharedInstance.importManager
             for importer in importManager.sortedImporters {
-                let item = NSMenuItem(title: importer.name, action: ActionManagerMac.Responder.performActionSelector, keyEquivalent: "")
+                var title = importer.name
+                if importer.source == .userSpecifiedFile {
+                    title.append("…")
+                }
+                let item = NSMenuItem(title: title, action: ActionManagerMac.Responder.performActionSelector, keyEquivalent: "")
                 item.identifier = NSUserInterfaceItemIdentifier(rawValue: "menu.Import.\(importer.name)")
                 menu.addItem(item)
             }

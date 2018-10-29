@@ -22,12 +22,15 @@ class ImportAction: ImporterAction {
         return importManager.importer(named: context.parameters[0])
     }
     override func validate(context: ActionContext) -> Bool {
-        return importer(for: context)?.canImportFromDefaultLocation ?? false
+        return importer(for: context)?.canImport ?? false
     }
     
     override func perform(context: ActionContext) {
-        if let importer = importer(for: context) {
-            importer.run()
+        if let viewModel = context.info[ActionContext.viewModelKey] as? CollectionDocumentViewModel {
+            let document = viewModel.document
+            if let importer = importer(for: context) {
+                importer.run(for: document)
+            }
         }
     }
 }

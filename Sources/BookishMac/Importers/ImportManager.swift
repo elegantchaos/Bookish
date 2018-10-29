@@ -15,8 +15,7 @@ class ImportManager {
     
     init() {
         // TODO: build this dynamically
-        register(importer: Importer(name: "test"))
-        register(importer: DeliciousLibraryImporter())
+        register(importer: DeliciousLibraryImporter(manager: self))
     }
     
     func register(importer: Importer) {
@@ -27,5 +26,23 @@ class ImportManager {
         return importers[named]
     }
     
+    func selectFile(for importer: Importer, document: CollectionDocument, completion: @escaping (URL) -> Void) {
+        let panel = NSOpenPanel()
+        panel.canChooseDirectories = false
+        panel.allowsMultipleSelection = false
+        
+        if let window = document.windowControllers.first?.window {
+            panel.beginSheetModal(for: window) { (response) in
+                if let url = panel.url {
+                    completion(url)
+                }
+            }
+        } else {
+            panel.runModal()
+            if let url = panel.url {
+                completion(url)
+            }
+        }
+    }
 
 }
