@@ -11,7 +11,8 @@
         <attribute name="imageURL" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="importDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="importUUID" optional="YES" attributeType="UUID" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="isbn" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isbn10" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isbn13" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="length" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="modified" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="name" attributeType="String" defaultValueString="Untitled Book" syncable="YES"/>
@@ -54,7 +55,7 @@
         <relationship name="books" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Book" inverseName="series" inverseEntity="Book" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Book" positionX="-889.52734375" positionY="79.94140625" width="128" height="375"/>
+        <element name="Book" positionX="-889.52734375" positionY="79.94140625" width="128" height="390"/>
         <element name="Group" positionX="-334.8046875" positionY="457.80859375" width="128" height="60"/>
         <element name="Person" positionX="-341.4375" positionY="286.09375" width="128" height="135"/>
         <element name="PersonRole" positionX="-657" positionY="261" width="128" height="90"/>

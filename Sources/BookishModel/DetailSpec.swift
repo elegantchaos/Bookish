@@ -27,10 +27,19 @@ public final class DetailSpec {
         return [
             DetailSpec(binding: "notes", label: "Notes"),
             DetailSpec(binding: "format", label: "Format"),
-            DetailSpec(binding: "isbn", label: "ISBN"),
+            DetailSpec(binding: "isbn10", label: "ISBN"),
+            DetailSpec(binding: "isbn13", label: "ISBN"),
+            DetailSpec(binding: "asin", label: "ASIN"),
+            DetailSpec(binding: "ean", label: "EAN"),
+            DetailSpec(binding: "dewey", label: "Dewey"),
             DetailSpec(binding: "published", label:  "Published", kind: .date),
             DetailSpec(binding: "added", label: "Added", kind: .date, editable: false),
-            DetailSpec(binding: "modified", label: "Modified", kind: .date, editable: false)
+            DetailSpec(binding: "modified", label: "Modified", kind: .date, editable: false),
+            DetailSpec(binding: "importDate", label:  "Imported", kind: .date),
+            DetailSpec(binding: "width", label: "size (w)"),
+            DetailSpec(binding: "length", label: "size (l)"),
+            DetailSpec(binding: "height", label: "size (h)"),
+            DetailSpec(binding: "pages", label: "Pages"),
         ]
     }
 }

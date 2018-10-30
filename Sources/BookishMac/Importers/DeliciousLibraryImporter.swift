@@ -46,10 +46,19 @@ class DeliciousLibraryImportSession: ImportSession {
                 book.subtitle = record["subtitle"] as? String
                 book.importDate = Date()
                 book.importUUID = record["uuid"] as? UUID
-                book.isbn = record["isbn"] as? String
+                if let isbn = record["isbn"] as? String {
+                    let trimmed = isbn.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+                    if trimmed.count > 10 {
+                        book.isbn13 = trimmed
+                    } else {
+                        book.isbn10 = trimmed
+                    }
+                }
+                
                 book.ean = record["ean"] as? String
                 book.asin = record["asin"] as? String
-                
+                book.dewey = record["dewey"] as? String
+
                 book.added = record["creationDate"] as? Date
                 book.modified = record["lastModificationDate"] as? Date
                 book.published = record["publishDate"] as? Date
