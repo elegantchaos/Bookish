@@ -743,14 +743,14 @@
                                     <rect key="frame" x="0.0" y="0.0" width="200" height="300"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <scrollView horizontalCompressionResistancePriority="749" borderType="none" autohidesScrollers="YES" horizontalLineScroll="23" horizontalPageScroll="10" verticalLineScroll="23" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cB6-3r-Peo" userLabel="Index">
-                                            <rect key="frame" x="0.0" y="0.0" width="200" height="269"/>
+                                        <scrollView horizontalCompressionResistancePriority="749" misplaced="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="23" horizontalPageScroll="10" verticalLineScroll="23" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cB6-3r-Peo" userLabel="Index">
+                                            <rect key="frame" x="0.0" y="44" width="200" height="225"/>
                                             <clipView key="contentView" drawsBackground="NO" id="25y-2t-AU1">
-                                                <rect key="frame" x="0.0" y="0.0" width="200" height="269"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="200" height="225"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <tableView identifier="people" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnSelection="YES" autosaveColumns="NO" rowHeight="21" rowSizeStyle="automatic" usesAutomaticRowHeights="YES" viewBased="YES" id="T2o-3X-3Tj">
-                                                        <rect key="frame" x="0.0" y="0.0" width="200" height="269"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="200" height="225"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <size key="intercellSpacing" width="3" height="2"/>
                                                         <color key="backgroundColor" name="Bookish Index"/>
@@ -826,13 +826,32 @@
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                         </textField>
+                                        <searchField wantsLayer="YES" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="adO-nY-SYC">
+                                            <rect key="frame" x="4" y="4" width="192" height="19"/>
+                                            <searchFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" recentsAutosaveName="people-filter" id="UT2-Fk-Sjl">
+                                                <font key="font" metaFont="smallSystem"/>
+                                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="Bookish Index"/>
+                                            </searchFieldCell>
+                                            <connections>
+                                                <binding destination="2aD-Rb-QIq" name="predicate" keyPath="filterPredicate" id="9O7-Xh-85O">
+                                                    <dictionary key="options">
+                                                        <string key="NSDisplayName">predicate</string>
+                                                        <string key="NSPredicateFormat">name contains $value</string>
+                                                    </dictionary>
+                                                </binding>
+                                            </connections>
+                                        </searchField>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="cB6-3r-Peo" firstAttribute="top" secondItem="Luv-oJ-vO9" secondAttribute="bottom" constant="4" id="6L9-b8-XSC"/>
+                                        <constraint firstItem="adO-nY-SYC" firstAttribute="top" secondItem="cB6-3r-Peo" secondAttribute="bottom" constant="4" id="Efx-ab-7g3"/>
+                                        <constraint firstAttribute="bottom" secondItem="adO-nY-SYC" secondAttribute="bottom" constant="4" id="FOc-xp-tXC"/>
                                         <constraint firstAttribute="trailing" secondItem="Luv-oJ-vO9" secondAttribute="trailing" constant="4" id="KDY-Cn-pyg"/>
-                                        <constraint firstAttribute="bottom" secondItem="cB6-3r-Peo" secondAttribute="bottom" id="ORb-54-1dc"/>
+                                        <constraint firstAttribute="trailing" secondItem="adO-nY-SYC" secondAttribute="trailing" constant="4" id="Naf-t6-qnz"/>
                                         <constraint firstItem="Luv-oJ-vO9" firstAttribute="leading" secondItem="Ok8-kN-ge9" secondAttribute="leading" constant="8" id="RHQ-dr-tAt"/>
                                         <constraint firstAttribute="trailing" secondItem="cB6-3r-Peo" secondAttribute="trailing" id="UGZ-KG-YvU"/>
+                                        <constraint firstItem="adO-nY-SYC" firstAttribute="leading" secondItem="Ok8-kN-ge9" secondAttribute="leading" constant="4" id="Zd1-4t-n8u"/>
                                         <constraint firstItem="Luv-oJ-vO9" firstAttribute="top" secondItem="Ok8-kN-ge9" secondAttribute="top" constant="8" id="mwM-0o-CKL"/>
                                         <constraint firstItem="cB6-3r-Peo" firstAttribute="leading" secondItem="Ok8-kN-ge9" secondAttribute="leading" id="x2a-CU-iCX"/>
                                     </constraints>
@@ -885,14 +904,14 @@
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                         </textField>
-                                        <scrollView horizontalCompressionResistancePriority="749" borderType="none" autohidesScrollers="YES" horizontalLineScroll="23" horizontalPageScroll="10" verticalLineScroll="23" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dnp-IN-cGx" userLabel="Index">
-                                            <rect key="frame" x="0.0" y="0.0" width="200" height="269"/>
+                                        <scrollView horizontalCompressionResistancePriority="749" borderType="none" autohidesScrollers="YES" horizontalLineScroll="24" horizontalPageScroll="10" verticalLineScroll="24" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dnp-IN-cGx" userLabel="Index">
+                                            <rect key="frame" x="0.0" y="27" width="200" height="242"/>
                                             <clipView key="contentView" drawsBackground="NO" id="MeP-Ej-IYa">
-                                                <rect key="frame" x="0.0" y="0.0" width="200" height="269"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="200" height="242"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
-                                                    <tableView identifier="books" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnSelection="YES" autosaveColumns="NO" rowHeight="21" rowSizeStyle="automatic" usesAutomaticRowHeights="YES" viewBased="YES" id="jZN-rJ-ulS">
-                                                        <rect key="frame" x="0.0" y="0.0" width="200" height="269"/>
+                                                    <tableView identifier="books" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnSelection="YES" autosaveColumns="NO" rowHeight="22" rowSizeStyle="automatic" usesAutomaticRowHeights="YES" viewBased="YES" id="jZN-rJ-ulS">
+                                                        <rect key="frame" x="0.0" y="0.0" width="200" height="242"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <size key="intercellSpacing" width="3" height="2"/>
                                                         <color key="backgroundColor" name="Bookish Index"/>
@@ -960,15 +979,34 @@
                                                 <autoresizingMask key="autoresizingMask"/>
                                             </scroller>
                                         </scrollView>
+                                        <searchField wantsLayer="YES" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iIe-EJ-jul">
+                                            <rect key="frame" x="4" y="4" width="192" height="19"/>
+                                            <searchFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" recentsAutosaveName="books-filter" id="2Sv-YG-ym6">
+                                                <font key="font" metaFont="smallSystem"/>
+                                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="Bookish Index"/>
+                                            </searchFieldCell>
+                                            <connections>
+                                                <binding destination="gjv-NN-VkV" name="predicate" keyPath="filterPredicate" id="B3s-2Z-Vu7">
+                                                    <dictionary key="options">
+                                                        <string key="NSDisplayName">predicate</string>
+                                                        <string key="NSPredicateFormat">name contains $value</string>
+                                                    </dictionary>
+                                                </binding>
+                                            </connections>
+                                        </searchField>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="bottom" secondItem="dnp-IN-cGx" secondAttribute="bottom" id="8MI-Je-QjR"/>
+                                        <constraint firstItem="iIe-EJ-jul" firstAttribute="top" secondItem="dnp-IN-cGx" secondAttribute="bottom" constant="4" id="3pP-DL-Ft8"/>
+                                        <constraint firstItem="iIe-EJ-jul" firstAttribute="leading" secondItem="7O7-Td-dIP" secondAttribute="leading" constant="4" id="5hs-CY-QBt"/>
                                         <constraint firstAttribute="trailing" secondItem="LYq-xW-q2s" secondAttribute="trailing" constant="4" id="I1O-N7-rpk"/>
                                         <constraint firstItem="dnp-IN-cGx" firstAttribute="leading" secondItem="7O7-Td-dIP" secondAttribute="leading" id="Q0k-c7-bqM"/>
                                         <constraint firstItem="dnp-IN-cGx" firstAttribute="top" secondItem="LYq-xW-q2s" secondAttribute="bottom" constant="4" id="QJq-8d-tNV"/>
+                                        <constraint firstAttribute="trailing" secondItem="iIe-EJ-jul" secondAttribute="trailing" constant="4" id="Sjq-hU-UIQ"/>
                                         <constraint firstItem="LYq-xW-q2s" firstAttribute="top" secondItem="7O7-Td-dIP" secondAttribute="top" constant="8" id="cN3-Bo-CuX"/>
                                         <constraint firstItem="LYq-xW-q2s" firstAttribute="leading" secondItem="7O7-Td-dIP" secondAttribute="leading" constant="8" id="cqv-6c-QPD"/>
                                         <constraint firstAttribute="trailing" secondItem="dnp-IN-cGx" secondAttribute="trailing" id="f0c-mK-nhK"/>
+                                        <constraint firstAttribute="bottom" secondItem="iIe-EJ-jul" secondAttribute="bottom" constant="4" id="gbR-X6-wg7"/>
                                     </constraints>
                                 </view>
                                 <color key="fillColor" name="Bookish Index"/>
@@ -1580,7 +1618,7 @@
     <resources>
         <image name="AddBook" width="32" height="32"/>
         <image name="AddPerson" width="32" height="32"/>
-        <image name="Book" width="32" height="32"/>
+        <image name="Book" width="16" height="16"/>
         <image name="Books" width="32" height="32"/>
         <image name="ChooseDateSmall" width="12" height="12"/>
         <image name="CoverPlaceholder" width="64" height="64"/>
