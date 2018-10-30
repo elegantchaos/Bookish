@@ -551,8 +551,8 @@
             <objects>
                 <splitViewController id="9dY-ZT-f0K" customClass="CollectionSplitViewController" customModule="BookishMac" customModuleProvider="target" sceneMemberID="viewController">
                     <splitViewItems>
-                        <splitViewItem canCollapse="YES" holdingPriority="260" behavior="sidebar" id="9x3-Ff-joU"/>
-                        <splitViewItem id="eOL-40-wev"/>
+                        <splitViewItem canCollapse="YES" behavior="sidebar" id="9x3-Ff-joU"/>
+                        <splitViewItem holdingPriority="240" id="eOL-40-wev"/>
                     </splitViewItems>
                     <splitView key="splitView" identifier="collection-split-view" autosaveName="collection-split-view" dividerStyle="thin" vertical="YES" id="Z9o-S4-ubf">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
@@ -737,20 +737,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="200" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <box autoresizesSubviews="NO" boxType="custom" borderType="none" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="EaV-GE-ehN" userLabel="Background">
+                            <box autoresizesSubviews="NO" horizontalCompressionResistancePriority="760" boxType="custom" borderType="none" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="EaV-GE-ehN" userLabel="Background">
                                 <rect key="frame" x="0.0" y="0.0" width="200" height="300"/>
                                 <view key="contentView" id="Ok8-kN-ge9">
                                     <rect key="frame" x="0.0" y="0.0" width="200" height="300"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <scrollView horizontalCompressionResistancePriority="749" misplaced="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="23" horizontalPageScroll="10" verticalLineScroll="23" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cB6-3r-Peo" userLabel="Index">
-                                            <rect key="frame" x="0.0" y="44" width="200" height="225"/>
+                                        <scrollView horizontalCompressionResistancePriority="760" borderType="none" autohidesScrollers="YES" horizontalLineScroll="23" horizontalPageScroll="10" verticalLineScroll="23" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cB6-3r-Peo" userLabel="Index">
+                                            <rect key="frame" x="0.0" y="27" width="200" height="242"/>
                                             <clipView key="contentView" drawsBackground="NO" id="25y-2t-AU1">
-                                                <rect key="frame" x="0.0" y="0.0" width="200" height="225"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="200" height="242"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <tableView identifier="people" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnSelection="YES" autosaveColumns="NO" rowHeight="21" rowSizeStyle="automatic" usesAutomaticRowHeights="YES" viewBased="YES" id="T2o-3X-3Tj">
-                                                        <rect key="frame" x="0.0" y="0.0" width="200" height="225"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="200" height="242"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <size key="intercellSpacing" width="3" height="2"/>
                                                         <color key="backgroundColor" name="Bookish Index"/>
@@ -890,7 +890,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="200" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <box autoresizesSubviews="NO" boxType="custom" borderType="none" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="BHo-v2-qHc" userLabel="Background">
+                            <box autoresizesSubviews="NO" horizontalHuggingPriority="260" horizontalCompressionResistancePriority="740" boxType="custom" borderType="none" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="BHo-v2-qHc" userLabel="Background">
                                 <rect key="frame" x="0.0" y="0.0" width="200" height="300"/>
                                 <view key="contentView" id="7O7-Td-dIP">
                                     <rect key="frame" x="0.0" y="0.0" width="200" height="300"/>
@@ -904,7 +904,7 @@
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                         </textField>
-                                        <scrollView horizontalCompressionResistancePriority="749" borderType="none" autohidesScrollers="YES" horizontalLineScroll="24" horizontalPageScroll="10" verticalLineScroll="24" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dnp-IN-cGx" userLabel="Index">
+                                        <scrollView horizontalHuggingPriority="260" horizontalCompressionResistancePriority="740" borderType="none" autohidesScrollers="YES" horizontalLineScroll="24" horizontalPageScroll="10" verticalLineScroll="24" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dnp-IN-cGx" userLabel="Index">
                                             <rect key="frame" x="0.0" y="27" width="200" height="242"/>
                                             <clipView key="contentView" drawsBackground="NO" id="MeP-Ej-IYa">
                                                 <rect key="frame" x="0.0" y="0.0" width="200" height="242"/>
@@ -1621,7 +1621,7 @@
         <image name="Book" width="16" height="16"/>
         <image name="Books" width="32" height="32"/>
         <image name="ChooseDateSmall" width="12" height="12"/>
-        <image name="CoverPlaceholder" width="64" height="64"/>
+        <image name="CoverPlaceholder" width="512" height="512"/>
         <image name="HilightMarker" width="4" height="36"/>
         <image name="Minus" width="12" height="12"/>
         <image name="NSAddTemplate" width="11" height="11"/>
