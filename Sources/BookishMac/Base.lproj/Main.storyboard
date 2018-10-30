@@ -711,7 +711,7 @@
                         <tabViewItem label="People" identifier="tab.people" image="Person" id="T2N-QE-AUD"/>
                     </tabViewItems>
                     <tabView key="tabView" drawsBackground="NO" type="noTabsNoBorder" id="xYK-vg-VcG">
-                        <rect key="frame" x="0.0" y="0.0" width="200" height="768"/>
+                        <rect key="frame" x="0.0" y="0.0" width="256" height="768"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <font key="font" metaFont="system"/>
                         <connections>
@@ -744,13 +744,13 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <scrollView horizontalCompressionResistancePriority="760" borderType="none" autohidesScrollers="YES" horizontalLineScroll="23" horizontalPageScroll="10" verticalLineScroll="23" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cB6-3r-Peo" userLabel="Index">
-                                            <rect key="frame" x="0.0" y="27" width="200" height="242"/>
+                                            <rect key="frame" x="0.0" y="29" width="200" height="240"/>
                                             <clipView key="contentView" drawsBackground="NO" id="25y-2t-AU1">
-                                                <rect key="frame" x="0.0" y="0.0" width="200" height="242"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="200" height="240"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <tableView identifier="people" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnSelection="YES" autosaveColumns="NO" rowHeight="21" rowSizeStyle="automatic" usesAutomaticRowHeights="YES" viewBased="YES" id="T2o-3X-3Tj">
-                                                        <rect key="frame" x="0.0" y="0.0" width="200" height="242"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="200" height="240"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <size key="intercellSpacing" width="3" height="2"/>
                                                         <color key="backgroundColor" name="Bookish Index"/>
@@ -827,9 +827,9 @@
                                             </textFieldCell>
                                         </textField>
                                         <searchField wantsLayer="YES" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="adO-nY-SYC">
-                                            <rect key="frame" x="4" y="4" width="192" height="19"/>
-                                            <searchFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" recentsAutosaveName="people-filter" id="UT2-Fk-Sjl">
-                                                <font key="font" metaFont="smallSystem"/>
+                                            <rect key="frame" x="4" y="4" width="192" height="21"/>
+                                            <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="border" drawsBackground="YES" usesSingleLineMode="YES" recentsAutosaveName="people-filter" id="UT2-Fk-Sjl">
+                                                <font key="font" metaFont="system"/>
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="Bookish Index"/>
                                             </searchFieldCell>
@@ -905,13 +905,13 @@
                                             </textFieldCell>
                                         </textField>
                                         <scrollView horizontalHuggingPriority="260" horizontalCompressionResistancePriority="740" borderType="none" autohidesScrollers="YES" horizontalLineScroll="24" horizontalPageScroll="10" verticalLineScroll="24" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dnp-IN-cGx" userLabel="Index">
-                                            <rect key="frame" x="0.0" y="27" width="200" height="242"/>
+                                            <rect key="frame" x="0.0" y="29" width="200" height="240"/>
                                             <clipView key="contentView" drawsBackground="NO" id="MeP-Ej-IYa">
-                                                <rect key="frame" x="0.0" y="0.0" width="200" height="242"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="200" height="240"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <tableView identifier="books" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnSelection="YES" autosaveColumns="NO" rowHeight="22" rowSizeStyle="automatic" usesAutomaticRowHeights="YES" viewBased="YES" id="jZN-rJ-ulS">
-                                                        <rect key="frame" x="0.0" y="0.0" width="200" height="242"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="200" height="240"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <size key="intercellSpacing" width="3" height="2"/>
                                                         <color key="backgroundColor" name="Bookish Index"/>
@@ -980,11 +980,11 @@
                                             </scroller>
                                         </scrollView>
                                         <searchField wantsLayer="YES" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iIe-EJ-jul">
-                                            <rect key="frame" x="4" y="4" width="192" height="19"/>
-                                            <searchFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" recentsAutosaveName="books-filter" id="2Sv-YG-ym6">
-                                                <font key="font" metaFont="smallSystem"/>
+                                            <rect key="frame" x="4" y="4" width="192" height="21"/>
+                                            <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="border" drawsBackground="YES" usesSingleLineMode="YES" recentsAutosaveName="books-filter" id="2Sv-YG-ym6">
+                                                <font key="font" metaFont="system"/>
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                <color key="backgroundColor" name="Bookish Index"/>
+                                                <color key="backgroundColor" name="Bookish Detail"/>
                                             </searchFieldCell>
                                             <connections>
                                                 <binding destination="gjv-NN-VkV" name="predicate" keyPath="filterPredicate" id="B3s-2Z-Vu7">
@@ -1021,6 +1021,7 @@
                     </view>
                     <connections>
                         <outlet property="indexArray" destination="gjv-NN-VkV" id="8aY-jB-Ac8"/>
+                        <outlet property="indexSearchField" destination="iIe-EJ-jul" id="NQ9-lu-ltC"/>
                         <outlet property="indexTable" destination="jZN-rJ-ulS" id="tCe-oe-hE9"/>
                     </connections>
                 </viewController>

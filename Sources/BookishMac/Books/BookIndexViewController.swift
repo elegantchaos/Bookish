@@ -11,12 +11,14 @@ class BookIndexViewController: CollectionViewController {
     @objc weak var detailView: BookDetailViewController!
     @IBOutlet weak var indexArray: NSArrayController!
     @IBOutlet weak var indexTable: NSTableView!
+    @IBOutlet weak var indexSearchField: NSSearchField!
     
     @objc let sorting = [NSSortDescriptor(key: "name", ascending: true)]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         detailView = nearestSibling()
+//        (indexSearchField.cell as! NSSearchFieldCell).backgroundColor = NSColor.red
     }
     
     override func viewWillAppear() {

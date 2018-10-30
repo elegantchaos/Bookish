@@ -40,6 +40,7 @@ public final class DetailSpec {
             DetailSpec(binding: "length", label: "size (l)"),
             DetailSpec(binding: "height", label: "size (h)"),
             DetailSpec(binding: "pages", label: "Pages"),
+            DetailSpec(binding: "importRaw", label: "Raw Import Data (Debug)"),
         ]
     }
 }

@@ -57,16 +57,17 @@ class DeliciousLibraryImportSession: ImportSession {
                 
                 book.ean = record["ean"] as? String
                 book.asin = record["asin"] as? String
-                book.dewey = record["dewey"] as? String
+                book.dewey = record["deweyDecimal"] as? String
 
                 book.added = record["creationDate"] as? Date
                 book.modified = record["lastModificationDate"] as? Date
                 book.published = record["publishDate"] as? Date
                 
-                book.notes = record.description
+                book.importRaw = record.description
+                
                 book.format = format
                 
-                if let url = (record["coverImageLargeURLString"] as? String) ?? (record["coverImageSmallURLString"] as? String) {
+                if let url = (record["coverImageLargeURLString"] as? String) ?? (record["coverImageMediumURLString"] as? String) ?? (record["coverImageSmallURLString"] as? String) {
                     book.imageURL = url
                 }
                 
