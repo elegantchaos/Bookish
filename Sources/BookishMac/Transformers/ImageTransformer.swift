@@ -7,9 +7,13 @@ import AppKit
 
 class ImageTransformer: ValueTransformer {
     let placeholderName: String
+    let imageKey: String
+    let urlKey: String
     
-    init(placeholder: String) {
+    init(placeholder: String, imageKey: String = "image", urlKey: String = "imageURL") {
         self.placeholderName = placeholder
+        self.imageKey = imageKey
+        self.urlKey = urlKey
     }
     
     lazy var placeholder: NSImage? = {
@@ -21,11 +25,17 @@ class ImageTransformer: ValueTransformer {
     }
     
     override func transformedValue(_ value: Any?) -> Any? {
-        if let data = value as? Data, let image = NSImage(data: data) {
-            return image
-        } else {
-            return placeholder
+        if let obj = value as? NSObject {
+            if let data = obj.value(forKey: imageKey) as? Data, let image = NSImage(data: data) {
+                return image
+            } else if let urlString = obj.value(forKey: urlKey) as? String, var url = URL(string: urlString) {
+                if let image = NSImage(contentsOf: url) {
+                    return image
+                }
+            }
         }
+
+        return placeholder
     }
     
     override func reverseTransformedValue(_ value: Any?) -> Any? {

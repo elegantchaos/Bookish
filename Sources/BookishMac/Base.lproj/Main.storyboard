@@ -551,7 +551,7 @@
             <objects>
                 <splitViewController id="9dY-ZT-f0K" customClass="CollectionSplitViewController" customModule="BookishMac" customModuleProvider="target" sceneMemberID="viewController">
                     <splitViewItems>
-                        <splitViewItem canCollapse="YES" behavior="sidebar" id="9x3-Ff-joU"/>
+                        <splitViewItem canCollapse="YES" holdingPriority="260" behavior="sidebar" id="9x3-Ff-joU"/>
                         <splitViewItem holdingPriority="240" id="eOL-40-wev"/>
                     </splitViewItems>
                     <splitView key="splitView" identifier="collection-split-view" autosaveName="collection-split-view" dividerStyle="thin" vertical="YES" id="Z9o-S4-ubf">
@@ -904,13 +904,13 @@
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                         </textField>
-                                        <scrollView horizontalHuggingPriority="260" horizontalCompressionResistancePriority="740" borderType="none" autohidesScrollers="YES" horizontalLineScroll="24" horizontalPageScroll="10" verticalLineScroll="24" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dnp-IN-cGx" userLabel="Index">
+                                        <scrollView horizontalHuggingPriority="260" horizontalCompressionResistancePriority="740" borderType="none" autohidesScrollers="YES" horizontalLineScroll="23" horizontalPageScroll="10" verticalLineScroll="23" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dnp-IN-cGx" userLabel="Index">
                                             <rect key="frame" x="0.0" y="29" width="200" height="240"/>
                                             <clipView key="contentView" drawsBackground="NO" id="MeP-Ej-IYa">
                                                 <rect key="frame" x="0.0" y="0.0" width="200" height="240"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
-                                                    <tableView identifier="books" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnSelection="YES" autosaveColumns="NO" rowHeight="22" rowSizeStyle="automatic" usesAutomaticRowHeights="YES" viewBased="YES" id="jZN-rJ-ulS">
+                                                    <tableView identifier="books" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnSelection="YES" autosaveColumns="NO" rowHeight="21" rowSizeStyle="automatic" usesAutomaticRowHeights="YES" viewBased="YES" id="jZN-rJ-ulS">
                                                         <rect key="frame" x="0.0" y="0.0" width="200" height="240"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <size key="intercellSpacing" width="3" height="2"/>
@@ -1058,7 +1058,7 @@
                                             </constraints>
                                             <imageCell key="cell" selectable="YES" editable="YES" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="proportionallyDown" image="CoverPlaceholder" id="a7U-eh-BHK"/>
                                             <connections>
-                                                <binding destination="TBH-Sa-Ff0" name="value" keyPath="self.indexView.indexArray.selection.image" id="VqN-LV-sj2">
+                                                <binding destination="TBH-Sa-Ff0" name="value" keyPath="self.indexView.indexArray.selection" id="9b0-Ri-5vO">
                                                     <dictionary key="options">
                                                         <string key="NSValueTransformerName">CoverImage</string>
                                                     </dictionary>
@@ -1628,7 +1628,7 @@
         <image name="NSAddTemplate" width="11" height="11"/>
         <image name="NSRemoveTemplate" width="11" height="11"/>
         <image name="People" width="32" height="32"/>
-        <image name="Person" width="16" height="16"/>
+        <image name="Person" width="32" height="32"/>
         <image name="PersonPlaceholder" width="64" height="64"/>
         <image name="Plus" width="12" height="12"/>
         <image name="RemoveBook" width="32" height="32"/>
