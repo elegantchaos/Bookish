@@ -16,6 +16,8 @@ class Application: NSObject {
     let documentWindowControllerFactory = DocumentWindowControllerFactory()
     let actionManager = ActionManagerMac()
     let importManager = ImportManager()
+    let imageCache = ImageCache()
+    
     let uiTesting = CommandLine.arguments.contains("--ui-testing")
     var testDocument = CommandLine.arguments.contains("--test-document")
     let noBlankDocument = CommandLine.arguments.contains("--no-blank-document")
@@ -53,8 +55,8 @@ class Application: NSObject {
     fileprivate func setupTransformers() {
         ValueTransformer.setValueTransformer(AuthorsTransformer(), forName: AuthorsTransformer.name)
         ValueTransformer.setValueTransformer(DateTransformer(), forName: DateTransformer.name)
-        ValueTransformer.setValueTransformer(ImageTransformer(placeholder: "CoverPlaceholder"), forName: NSValueTransformerName("CoverImage"))
-        ValueTransformer.setValueTransformer(ImageTransformer(placeholder: "PersonPlaceholder"), forName: NSValueTransformerName("PersonImage"))
+        ValueTransformer.setValueTransformer(ImageTransformer(placeholder: "CoverPlaceholder", cache: imageCache), forName: NSValueTransformerName("CoverImage"))
+        ValueTransformer.setValueTransformer(ImageTransformer(placeholder: "PersonPlaceholder", cache: imageCache), forName: NSValueTransformerName("PersonImage"))
     }
 }
 

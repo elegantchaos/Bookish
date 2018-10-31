@@ -9,11 +9,13 @@ class ImageTransformer: ValueTransformer {
     let placeholderName: String
     let imageKey: String
     let urlKey: String
+    let cache: ImageCache
     
-    init(placeholder: String, imageKey: String = "image", urlKey: String = "imageURL") {
+    init(placeholder: String, imageKey: String = "image", urlKey: String = "imageURL", cache: ImageCache) {
         self.placeholderName = placeholder
         self.imageKey = imageKey
         self.urlKey = urlKey
+        self.cache = cache
     }
     
     lazy var placeholder: NSImage? = {
@@ -28,10 +30,10 @@ class ImageTransformer: ValueTransformer {
         if let obj = value as? NSObject {
             if let data = obj.value(forKey: imageKey) as? Data, let image = NSImage(data: data) {
                 return image
-            } else if let urlString = obj.value(forKey: urlKey) as? String, var url = URL(string: urlString) {
-                if let image = NSImage(contentsOf: url) {
+            } else if let urlString = obj.value(forKey: urlKey) as? String, let url = URL(string: urlString) {
+                cache.image(for: url, callback: { (image) in
                     return image
-                }
+                })
             }
         }
 

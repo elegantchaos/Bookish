@@ -15,10 +15,15 @@ class BookDetailViewController: CollectionViewController {
     @IBOutlet weak var titleView: NSTextField!
     @IBOutlet weak var subtitleView: NSTextField!
     
+    @IBAction func changeImage(_ sender: Any){
+        print("change image")
+    }
+    
     var source = DetailDataSource()
     var indexObserver: NSKeyValueObservation?
     var availableRows = IndexSet()
     var keyViewTimer: Timer? = nil
+    var bookImage: NSImage?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -72,6 +77,21 @@ class BookDetailViewController: CollectionViewController {
         }
         if let wc = view.window?.windowController as? CollectionWindowController {
             wc.validateButtons()
+        }
+        
+        if selectedCount == 1 {
+            if let book = indexView.indexArray.selectedObjects[0] as? Book {
+                if let data = book.image, let image = NSImage(data: data) {
+                    imageView.image = image
+                } else {
+                    imageView.image = NSImage(named: "CoverPlaceholder")
+                    if let urlString = book.imageURL, let url = URL(string: urlString) {
+                        application.imageCache.image(for: url) { (image) in
+                            self.imageView.image = image
+                        }
+                    }
+                }
+            }
         }
     }
     
