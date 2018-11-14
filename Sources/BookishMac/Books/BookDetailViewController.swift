@@ -20,6 +20,8 @@ class BookDetailViewController: CollectionViewController {
     }
     
     var source = DetailDataSource()
+    let personMenu = NSMenu(title: "People")
+    var personList: [Person] = []
     var indexObserver: NSKeyValueObservation?
     var availableRows = IndexSet()
     var keyViewTimer: Timer? = nil
@@ -35,6 +37,17 @@ class BookDetailViewController: CollectionViewController {
 
         if let window = view.window?.windowController as? CollectionWindowController {
             window.bookDetailController = self
+        }
+        
+        let request: NSFetchRequest<Person> = Person.fetchRequest()
+        request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+        if let results = try? cvm.managedObjectContext.fetch(request) {
+            personList = results
+            personMenu.removeAllItems()
+            for person in results {
+                let item = NSMenuItem(title: person.name ?? "unknown", action: nil, keyEquivalent: "")
+                personMenu.addItem(item)
+            }
         }
         
         if let indexArray = indexView.indexArray {

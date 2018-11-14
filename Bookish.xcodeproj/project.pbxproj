@@ -72,6 +72,13 @@
 		227F451621835801000D8B8D /* ImportManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227F451521835801000D8B8D /* ImportManager.swift */; };
 		227F451821835814000D8B8D /* Importer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227F451721835814000D8B8D /* Importer.swift */; };
 		227F451A218358EE000D8B8D /* DeliciousLibraryImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227F4519218358EE000D8B8D /* DeliciousLibraryImporter.swift */; };
+		228968362191DA3800B80A93 /* Ensembles.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 228968352191DA3800B80A93 /* Ensembles.framework */; };
+		228968382191DA4500B80A93 /* Ensembles.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 228968372191DA4500B80A93 /* Ensembles.framework */; };
+		228968392191DA7500B80A93 /* Ensembles.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 228968352191DA3800B80A93 /* Ensembles.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		2289683A2191DA7C00B80A93 /* Ensembles.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 228968372191DA4500B80A93 /* Ensembles.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		228968412191DD9000B80A93 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 228968402191DD9000B80A93 /* CloudKit.framework */; };
+		228968442191DDC200B80A93 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 228968432191DDC200B80A93 /* CloudKit.framework */; };
+		228968472191F48400B80A93 /* AuthorSelectionTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228968452191EFA900B80A93 /* AuthorSelectionTransformer.swift */; };
 		22960328214025E80020B3EB /* BookPersonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22960327214025E80020B3EB /* BookPersonCell.swift */; };
 		2296032A214032520020B3EB /* AnnotatedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22960329214032520020B3EB /* AnnotatedTextField.swift */; };
 		22B1DB412178D8A50067E795 /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B1DB402178D8A50067E795 /* ViewExtensions.swift */; };
@@ -186,6 +193,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				224293A7212AE0F400E70510 /* BookishModel.framework in Embed Frameworks */,
+				228968392191DA7500B80A93 /* Ensembles.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -197,6 +205,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				224293C9212AE16300E70510 /* BookishModel.framework in Embed Frameworks */,
+				2289683A2191DA7C00B80A93 /* Ensembles.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -265,6 +274,12 @@
 		227F451521835801000D8B8D /* ImportManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportManager.swift; sourceTree = "<group>"; };
 		227F451721835814000D8B8D /* Importer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Importer.swift; sourceTree = "<group>"; };
 		227F4519218358EE000D8B8D /* DeliciousLibraryImporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliciousLibraryImporter.swift; sourceTree = "<group>"; };
+		228968352191DA3800B80A93 /* Ensembles.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Ensembles.framework; path = Dependencies/Ensembles/Binaries/macOS/Ensembles.framework; sourceTree = "<group>"; };
+		228968372191DA4500B80A93 /* Ensembles.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Ensembles.framework; path = Dependencies/Ensembles/Binaries/iOS/Ensembles.framework; sourceTree = "<group>"; };
+		228968402191DD9000B80A93 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/System/Library/Frameworks/CloudKit.framework; sourceTree = DEVELOPER_DIR; };
+		228968422191DDBF00B80A93 /* BookishMobile.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BookishMobile.entitlements; sourceTree = "<group>"; };
+		228968432191DDC200B80A93 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		228968452191EFA900B80A93 /* AuthorSelectionTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorSelectionTransformer.swift; sourceTree = "<group>"; };
 		22960327214025E80020B3EB /* BookPersonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookPersonCell.swift; sourceTree = "<group>"; };
 		22960329214032520020B3EB /* AnnotatedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotatedTextField.swift; sourceTree = "<group>"; };
 		2296032B214132840020B3EB /* Bookish.sketch */ = {isa = PBXFileReference; lastKnownFileType = file; name = Bookish.sketch; path = Extras/Bookish.sketch; sourceTree = "<group>"; };
@@ -324,9 +339,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				228968442191DDC200B80A93 /* CloudKit.framework in Frameworks */,
 				22D1B23F2180BF5D0062F2CB /* Logger.framework in Frameworks */,
 				22F35487216FAC0100443C0B /* Actions.framework in Frameworks */,
 				22F3548B216FAC0100443C0B /* BookishCore.framework in Frameworks */,
+				228968382191DA4500B80A93 /* Ensembles.framework in Frameworks */,
 				224293C8212AE16300E70510 /* BookishModel.framework in Frameworks */,
 				22D1B2402180BF6D0062F2CB /* ActionsKit.framework in Frameworks */,
 			);
@@ -380,9 +397,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				228968412191DD9000B80A93 /* CloudKit.framework in Frameworks */,
 				22D1B23E2180BF550062F2CB /* Actions.framework in Frameworks */,
 				22DAF39A217B5305003CE28B /* Logger.framework in Frameworks */,
 				22DAF398217B52E6003CE28B /* ActionsKit.framework in Frameworks */,
+				228968362191DA3800B80A93 /* Ensembles.framework in Frameworks */,
 				224293A6212AE0F400E70510 /* BookishModel.framework in Frameworks */,
 				22D1B2412180BF720062F2CB /* BookishCore.framework in Frameworks */,
 			);
@@ -535,6 +554,10 @@
 		224293F6212B12CA00E70510 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				228968432191DDC200B80A93 /* CloudKit.framework */,
+				228968402191DD9000B80A93 /* CloudKit.framework */,
+				228968352191DA3800B80A93 /* Ensembles.framework */,
+				228968372191DA4500B80A93 /* Ensembles.framework */,
 				22DAF399217B5305003CE28B /* Logger.framework */,
 				22DAF397217B52E6003CE28B /* ActionsKit.framework */,
 				22F35486216FAC0100443C0B /* Actions.framework */,
@@ -638,6 +661,7 @@
 			isa = PBXGroup;
 			children = (
 				22143FD2212F0F2500B689DF /* AuthorsTransformer.swift */,
+				228968452191EFA900B80A93 /* AuthorSelectionTransformer.swift */,
 				22D39E612147E0C100282467 /* ImageTransformer.swift */,
 				221F272821382C8E00DC2DC7 /* DateTransformer.swift */,
 			);
@@ -647,6 +671,7 @@
 		22DD423B2126D6DA0070C85A = {
 			isa = PBXGroup;
 			children = (
+				228968422191DDBF00B80A93 /* BookishMobile.entitlements */,
 				221ED4EE21678BF200594714 /* Configs */,
 				2296032B214132840020B3EB /* Bookish.sketch */,
 				2296033021416F960020B3EB /* Package.swift */,
@@ -934,6 +959,14 @@
 				TargetAttributes = {
 					22429310212ADC4300E70510 = {
 						CreatedOnToolsVersion = 10.0;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
 					};
 					22429328212ADC4500E70510 = {
 						CreatedOnToolsVersion = 10.0;
@@ -962,7 +995,13 @@
 					22DD42432126D6DA0070C85A = {
 						CreatedOnToolsVersion = 10.0;
 						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
 							com.apple.Sandbox = {
+								enabled = 1;
+							};
+							com.apple.iCloud = {
 								enabled = 1;
 							};
 						};
@@ -1257,6 +1296,7 @@
 				22DE6AE321875F410078D489 /* ImportSession.swift in Sources */,
 				22D1B24B2180E9060062F2CB /* PersonRoleCell.swift in Sources */,
 				227F4514218352A0000D8B8D /* ImporterActions.swift in Sources */,
+				228968472191F48400B80A93 /* AuthorSelectionTransformer.swift in Sources */,
 				22DE6AE92189FE070078D489 /* ImageCache.swift in Sources */,
 				22DE6AE72188A8DC0078D489 /* WhiteSearchFieldCell.swift in Sources */,
 				22143FD3212F0F2500B689DF /* AuthorsTransformer.swift in Sources */,
@@ -1387,9 +1427,14 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = BookishMobile.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2H48644JM2;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Dependencies/Ensembles/Binaries/iOS",
+				);
 				INFOPLIST_FILE = "${BOOKISH_INFO_PATH}";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1411,9 +1456,14 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = BookishMobile.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2H48644JM2;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Dependencies/Ensembles/Binaries/iOS",
+				);
 				INFOPLIST_FILE = "${BOOKISH_INFO_PATH}";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1872,6 +1922,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 2H48644JM2;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Dependencies/Ensembles/Binaries/macOS",
+				);
 				INFOPLIST_FILE = $BOOKISH_INFO_PATH;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1893,6 +1947,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 2H48644JM2;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Dependencies/Ensembles/Binaries/macOS",
+				);
 				INFOPLIST_FILE = $BOOKISH_INFO_PATH;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

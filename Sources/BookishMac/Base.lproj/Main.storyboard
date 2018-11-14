@@ -1193,7 +1193,7 @@
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="62Q-09-BL4" customClass="AnnotatedTextField" customModule="BookishMac" customModuleProvider="target">
-                                                                                <rect key="frame" x="0.0" y="2" width="665" height="18"/>
+                                                                                <rect key="frame" x="0.0" y="2" width="536" height="18"/>
                                                                                 <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" continuous="YES" alignment="left" placeholderString="value" usesSingleLineMode="YES" id="mQk-Co-D5V">
                                                                                     <font key="font" metaFont="systemBold" size="14"/>
                                                                                     <color key="textColor" name="Bookish Detail Text"/>
@@ -1234,21 +1234,56 @@
                                                                                     <action selector="performAction:" target="dg1-Od-cPv" id="yUa-Dm-yFb"/>
                                                                                 </connections>
                                                                             </button>
+                                                                            <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="iB8-zl-y43">
+                                                                                <rect key="frame" x="632" y="-2" width="38" height="25"/>
+                                                                                <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="SKD-ub-0pE">
+                                                                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                                                                    <font key="font" metaFont="menu"/>
+                                                                                    <menu key="menu" id="ufI-yJ-Bcs"/>
+                                                                                </popUpButtonCell>
+                                                                            </popUpButton>
+                                                                            <comboBox verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="h95-F0-cRw">
+                                                                                <rect key="frame" x="536" y="-3" width="99" height="26"/>
+                                                                                <constraints>
+                                                                                    <constraint firstAttribute="width" constant="96" id="DwQ-I8-5HA"/>
+                                                                                </constraints>
+                                                                                <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="BZT-5h-Anq">
+                                                                                    <font key="font" metaFont="system"/>
+                                                                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                                    <objectValues>
+                                                                                        <string>Item 1</string>
+                                                                                        <string>Item 2</string>
+                                                                                        <string>Item 3</string>
+                                                                                    </objectValues>
+                                                                                </comboBoxCell>
+                                                                                <connections>
+                                                                                    <binding destination="NUZ-ew-ZHD" name="content" keyPath="arrangedObjects.name" id="fag-wy-AEu"/>
+                                                                                    <outlet property="delegate" destination="BkD-e8-vo5" id="vnb-vS-jFe"/>
+                                                                                </connections>
+                                                                            </comboBox>
                                                                         </subviews>
                                                                         <constraints>
+                                                                            <constraint firstItem="RsI-9f-qrv" firstAttribute="leading" secondItem="iB8-zl-y43" secondAttribute="trailing" constant="4" id="9Fk-Dq-v5H"/>
                                                                             <constraint firstItem="TJV-Lt-SZS" firstAttribute="leading" secondItem="7vP-8A-rYs" secondAttribute="trailing" id="BBV-Kv-ge4"/>
                                                                             <constraint firstItem="7vP-8A-rYs" firstAttribute="centerY" secondItem="62Q-09-BL4" secondAttribute="centerY" id="BLH-0i-FO4"/>
-                                                                            <constraint firstItem="RsI-9f-qrv" firstAttribute="leading" secondItem="62Q-09-BL4" secondAttribute="trailing" constant="8" symbolic="YES" id="L8f-aw-fkx"/>
                                                                             <constraint firstItem="7vP-8A-rYs" firstAttribute="leading" secondItem="RsI-9f-qrv" secondAttribute="trailing" id="TMC-DU-K4g"/>
+                                                                            <constraint firstItem="62Q-09-BL4" firstAttribute="leading" secondItem="BkD-e8-vo5" secondAttribute="leading" constant="2" id="VO4-FH-jQh"/>
                                                                             <constraint firstItem="TJV-Lt-SZS" firstAttribute="centerY" secondItem="62Q-09-BL4" secondAttribute="centerY" id="aeJ-g4-EJE"/>
                                                                             <constraint firstItem="62Q-09-BL4" firstAttribute="top" secondItem="BkD-e8-vo5" secondAttribute="top" constant="2" id="c8n-96-gLk"/>
+                                                                            <constraint firstItem="h95-F0-cRw" firstAttribute="leading" secondItem="62Q-09-BL4" secondAttribute="trailing" constant="2" id="eyb-3g-VcV"/>
                                                                             <constraint firstItem="RsI-9f-qrv" firstAttribute="centerY" secondItem="62Q-09-BL4" secondAttribute="centerY" id="fCg-0m-XkC"/>
                                                                             <constraint firstItem="62Q-09-BL4" firstAttribute="leading" secondItem="BkD-e8-vo5" secondAttribute="leading" constant="2" id="gvF-Bo-6Cl"/>
+                                                                            <constraint firstItem="iB8-zl-y43" firstAttribute="centerY" secondItem="62Q-09-BL4" secondAttribute="centerY" id="i6D-Xw-G8t"/>
                                                                             <constraint firstAttribute="bottom" secondItem="62Q-09-BL4" secondAttribute="bottom" constant="2" id="iaA-td-3Tx"/>
+                                                                            <constraint firstItem="iB8-zl-y43" firstAttribute="leading" secondItem="h95-F0-cRw" secondAttribute="trailing" constant="2" id="ktY-o5-JGx"/>
+                                                                            <constraint firstItem="h95-F0-cRw" firstAttribute="centerY" secondItem="62Q-09-BL4" secondAttribute="centerY" id="oJo-PC-Lmg"/>
                                                                             <constraint firstAttribute="trailing" secondItem="TJV-Lt-SZS" secondAttribute="trailing" constant="4" id="pME-Mj-jMc"/>
                                                                         </constraints>
                                                                         <connections>
                                                                             <outlet property="addButton" destination="RsI-9f-qrv" id="F8B-9Y-hAX"/>
+                                                                            <outlet property="personCombo" destination="BZT-5h-Anq" id="v6w-6B-aOl"/>
+                                                                            <outlet property="personPopup" destination="iB8-zl-y43" id="K2j-uN-Fel"/>
                                                                             <outlet property="removeButton" destination="7vP-8A-rYs" id="Bfn-a9-JL2"/>
                                                                             <outlet property="textField" destination="62Q-09-BL4" id="bqN-SD-KTe"/>
                                                                         </connections>
@@ -1344,6 +1379,11 @@
                     </connections>
                 </viewController>
                 <customObject id="dg1-Od-cPv" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <arrayController mode="entity" entityName="Person" automaticallyPreparesContent="YES" id="NUZ-ew-ZHD">
+                    <connections>
+                        <binding destination="TBH-Sa-Ff0" name="managedObjectContext" keyPath="self.cvm.managedObjectContext" id="2s8-tE-W3U"/>
+                    </connections>
+                </arrayController>
                 <userDefaultsController representsSharedInstance="YES" id="CPG-9C-fnr"/>
             </objects>
             <point key="canvasLocation" x="1324" y="2765"/>
@@ -1618,7 +1658,7 @@
         <image name="Book" width="16" height="16"/>
         <image name="Books" width="32" height="32"/>
         <image name="ChooseDateSmall" width="12" height="12"/>
-        <image name="CoverPlaceholder" width="64" height="64"/>
+        <image name="CoverPlaceholder" width="512" height="512"/>
         <image name="HilightMarker" width="4" height="36"/>
         <image name="Minus" width="12" height="12"/>
         <image name="NSAddTemplate" width="11" height="11"/>
