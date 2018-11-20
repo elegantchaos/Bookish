@@ -10,8 +10,10 @@ import BookishModel
 class BookPersonCell: AnnotatedTableCellView {
     @IBOutlet weak var addButton: NSButton!
     @IBOutlet weak var removeButton: NSButton!
-    @IBOutlet weak var personPopup: NSPopUpButton!
     @IBOutlet weak var personCombo: NSComboBoxCell!
+    
+    var selectedPerson: Person?
+    var detailView: BookDetailViewController?
     
     override var annotationButtons: [NSButton] {
         return [addButton, removeButton]
@@ -21,23 +23,13 @@ class BookPersonCell: AnnotatedTableCellView {
 extension BookPersonCell: BookDetailTableCell {
     func setup(for view: BookDetailViewController, row: Int, info: DetailDataSource.RowInfo) {
         assert(info.isPerson)
-        if let subview = textField, let transformer = ValueTransformer(forName: AuthorSelectionTransformer.name) {
-            let source = view.source
-            let personRole = source.person(for: row)
-            objectValue = personRole
-            let options: [NSBindingOption:Any] = [
-                .valueTransformer: transformer,
-                ]
-            subview.bind(NSBindingName(rawValue: "value"), to:personRole, withKeyPath:"self", options: options)
-            subview.identifier = NSUserInterfaceItemIdentifier(rawValue: "person-\(row)")
-            
-            if let person = personRole.person, let name = person.name, let index = view.personList.firstIndex(of: person) {
-                personPopup.menu = view.personMenu
-                personPopup.selectItem(at: index)
-                
-                personCombo.stringValue = name
-            }
-            
+        let source = view.source
+        detailView = view
+        let personRole = source.person(for: row)
+        objectValue = personRole
+        if let person = personRole.person, let name = person.name {
+            selectedPerson = person
+            personCombo.stringValue = name
         }
     }
 
@@ -55,14 +47,36 @@ extension BookPersonCell: ActionContextProvider {
 
 extension BookPersonCell: NSComboBoxDelegate {
     func comboBoxSelectionDidChange(_ notification: Notification) {
-        print("did change \(notification)")
+        if let people = detailView?.personList?.arrangedObjects as? [Person] {
+            let newPerson = people[personCombo.indexOfSelectedItem]
+            changePerson(to: newPerson)
+        }
     }
     
-    func comboBoxSelectionIsChanging(_ notification: Notification) {
-        print("is changing \(notification)")
+    override func controlTextDidEndEditing(_ obj: Notification) {
+        super.controlTextDidEndEditing(obj)
+        if let context = detailView?.cvm.managedObjectContext {
+            let newName = personCombo.stringValue
+            if let newPerson = Person.person(named: newName, context: context) {
+                changePerson(to: newPerson)
+            } else {
+                changePerson(creating: newName)
+            }
+        }
     }
-    
-    func controlTextDidChange(_ obj: Notification) {
-        print(obj)
+
+    func changePerson(to newPerson: Person) {
+        if let personRole = objectValue as? PersonRole, newPerson != personRole.person {
+            let actionManager = application.actionManager
+            actionManager.perform(identifier: "ChangeRolePerson", sender: self, info: [PersonAction.roleKey:personRole, PersonAction.personKey:newPerson])
+        }
     }
+
+    func changePerson(creating newPersonName: String) {
+        if let personRole = objectValue as? PersonRole {
+            let actionManager = application.actionManager
+            actionManager.perform(identifier: "ChangeRolePerson", sender: self, info: [PersonAction.roleKey:personRole, PersonAction.newPersonKey:newPersonName])
+        }
+    }
+
 }

@@ -42,7 +42,9 @@ public protocol PersonConstructionObserver: ActionObserver {
 
 open class PersonAction: Action {
     public static let roleKey = "personRole"
-
+    public static let personKey = "person"
+    public static let newPersonKey = "newPerson"
+    
     open override func validate(context: ActionContext) -> Bool {
         guard let selection = context.info[ActionContext.selectionKey] as? [Book] else {
             return false
@@ -61,7 +63,8 @@ open class PersonAction: Action {
             AddPersonAction(identifier: "AddPerson"),
             RemovePersonAction(identifier: "RemovePerson"),
             DeletePersonAction(identifier: "DeletePerson"),
-            RevealPersonAction(identifier: "RevealPerson")
+            RevealPersonAction(identifier: "RevealPerson"),
+            ChangeRolePersonAction(identifier: "ChangeRolePerson")
         ]
     }
 }
@@ -177,5 +180,42 @@ class RevealPersonAction: PersonAction {
     }
 }
 
+/**
+ Action that updates an existing role by changing the person that
+ it applies to.
+ */
+
+class ChangeRolePersonAction: PersonAction {
+    override func validate(context: ActionContext) -> Bool {
+        return (context.info[PersonAction.roleKey] as? PersonRole != nil) && super.validate(context: context)
+    }
+    
+    override func perform(context: ActionContext) {
+        
+        if
+            let selection = context.info[ActionContext.selectionKey] as? [Book],
+            let role = context.info[PersonAction.roleKey] as? PersonRole,
+            let managedObjectContext = role.managedObjectContext,
+            let roleName = role.role?.name {
+            
+            var newPerson = context.info[PersonAction.personKey] as? Person
+            if newPerson == nil, let newPersonName = context.info[PersonAction.newPersonKey] as? String {
+                print("Made new person \(newPersonName)")
+                newPerson = Person(context: managedObjectContext)
+                newPerson?.name = newPersonName
+            }
+            
+            if let newPerson = newPerson {
+                let newRole = newPerson.role(as: roleName)
+                for book in selection {
+                    book.removeFromPersonRoles(role)
+                    book.addToPersonRoles(newRole)
+                }
+                
+                print("\(roleName) changed from \(role.person!.name!) to \(newPerson.name!)")
+            }
+        }
+    }
+}
 
 

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14460.30.1" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.18"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.30.1"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -1189,23 +1189,11 @@
                                                                         </connections>
                                                                     </tableCellView>
                                                                     <tableCellView identifier="person" id="BkD-e8-vo5" userLabel="person cell" customClass="BookPersonCell" customModule="BookishMac" customModuleProvider="target">
-                                                                        <rect key="frame" x="90" y="25" width="720" height="22"/>
+                                                                        <rect key="frame" x="90" y="25" width="720" height="24"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
-                                                                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="62Q-09-BL4" customClass="AnnotatedTextField" customModule="BookishMac" customModuleProvider="target">
-                                                                                <rect key="frame" x="0.0" y="2" width="536" height="18"/>
-                                                                                <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" continuous="YES" alignment="left" placeholderString="value" usesSingleLineMode="YES" id="mQk-Co-D5V">
-                                                                                    <font key="font" metaFont="systemBold" size="14"/>
-                                                                                    <color key="textColor" name="Bookish Detail Text"/>
-                                                                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                                                                </textFieldCell>
-                                                                                <connections>
-                                                                                    <binding destination="TBH-Sa-Ff0" name="font" keyPath="self.cvm.detailFont" id="I4c-7h-rtB"/>
-                                                                                    <outlet property="delegate" destination="BkD-e8-vo5" id="JMu-lh-3IF"/>
-                                                                                </connections>
-                                                                            </textField>
                                                                             <button identifier="button.PopupPersonMenu" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RsI-9f-qrv" userLabel="Add">
-                                                                                <rect key="frame" x="671" y="3" width="15" height="16"/>
+                                                                                <rect key="frame" x="671" y="4" width="15" height="16"/>
                                                                                 <buttonCell key="cell" type="inline" bezelStyle="inline" image="Plus" imagePosition="only" alignment="center" controlSize="mini" lineBreakMode="truncatingTail" state="on" inset="2" id="eIs-R7-djF">
                                                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                                     <font key="font" metaFont="smallSystemBold"/>
@@ -1215,7 +1203,7 @@
                                                                                 </connections>
                                                                             </button>
                                                                             <button identifier="button.RemovePerson" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7vP-8A-rYs" userLabel="Remove">
-                                                                                <rect key="frame" x="686" y="3" width="15" height="16"/>
+                                                                                <rect key="frame" x="686" y="4" width="15" height="16"/>
                                                                                 <buttonCell key="cell" type="inline" bezelStyle="inline" image="Minus" imagePosition="overlaps" alignment="center" controlSize="mini" lineBreakMode="truncatingTail" state="on" inset="2" id="HJk-Ws-ykn">
                                                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                                     <font key="font" metaFont="smallSystemBold"/>
@@ -1225,7 +1213,7 @@
                                                                                 </connections>
                                                                             </button>
                                                                             <button identifier="button.RevealPerson" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="TJV-Lt-SZS" userLabel="Reveal">
-                                                                                <rect key="frame" x="701" y="3" width="15" height="16"/>
+                                                                                <rect key="frame" x="701" y="4" width="15" height="16"/>
                                                                                 <buttonCell key="cell" type="inline" bezelStyle="inline" image="Reveal" imagePosition="only" alignment="center" controlSize="mini" lineBreakMode="truncatingTail" state="on" inset="2" id="mff-9C-MBs">
                                                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                                     <font key="font" metaFont="smallSystemBold"/>
@@ -1234,20 +1222,9 @@
                                                                                     <action selector="performAction:" target="dg1-Od-cPv" id="yUa-Dm-yFb"/>
                                                                                 </connections>
                                                                             </button>
-                                                                            <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="iB8-zl-y43">
-                                                                                <rect key="frame" x="632" y="-2" width="38" height="25"/>
-                                                                                <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="SKD-ub-0pE">
-                                                                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                                                    <font key="font" metaFont="menu"/>
-                                                                                    <menu key="menu" id="ufI-yJ-Bcs"/>
-                                                                                </popUpButtonCell>
-                                                                            </popUpButton>
                                                                             <comboBox verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="h95-F0-cRw">
-                                                                                <rect key="frame" x="536" y="-3" width="99" height="26"/>
-                                                                                <constraints>
-                                                                                    <constraint firstAttribute="width" constant="96" id="DwQ-I8-5HA"/>
-                                                                                </constraints>
-                                                                                <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="BZT-5h-Anq">
+                                                                                <rect key="frame" x="0.0" y="-2" width="672" height="26"/>
+                                                                                <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" numberOfVisibleItems="5" id="BZT-5h-Anq">
                                                                                     <font key="font" metaFont="system"/>
                                                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1264,32 +1241,25 @@
                                                                             </comboBox>
                                                                         </subviews>
                                                                         <constraints>
-                                                                            <constraint firstItem="RsI-9f-qrv" firstAttribute="leading" secondItem="iB8-zl-y43" secondAttribute="trailing" constant="4" id="9Fk-Dq-v5H"/>
+                                                                            <constraint firstItem="h95-F0-cRw" firstAttribute="leading" secondItem="BkD-e8-vo5" secondAttribute="leading" id="3Oy-j7-17b"/>
+                                                                            <constraint firstItem="RsI-9f-qrv" firstAttribute="centerY" secondItem="h95-F0-cRw" secondAttribute="centerY" id="8qW-rK-6sC"/>
                                                                             <constraint firstItem="TJV-Lt-SZS" firstAttribute="leading" secondItem="7vP-8A-rYs" secondAttribute="trailing" id="BBV-Kv-ge4"/>
-                                                                            <constraint firstItem="7vP-8A-rYs" firstAttribute="centerY" secondItem="62Q-09-BL4" secondAttribute="centerY" id="BLH-0i-FO4"/>
+                                                                            <constraint firstItem="RsI-9f-qrv" firstAttribute="leading" secondItem="h95-F0-cRw" secondAttribute="trailing" constant="2" id="JBC-mm-4vz"/>
+                                                                            <constraint firstAttribute="bottom" secondItem="h95-F0-cRw" secondAttribute="bottom" constant="2" id="Jzx-pt-QOd"/>
                                                                             <constraint firstItem="7vP-8A-rYs" firstAttribute="leading" secondItem="RsI-9f-qrv" secondAttribute="trailing" id="TMC-DU-K4g"/>
-                                                                            <constraint firstItem="62Q-09-BL4" firstAttribute="leading" secondItem="BkD-e8-vo5" secondAttribute="leading" constant="2" id="VO4-FH-jQh"/>
-                                                                            <constraint firstItem="TJV-Lt-SZS" firstAttribute="centerY" secondItem="62Q-09-BL4" secondAttribute="centerY" id="aeJ-g4-EJE"/>
-                                                                            <constraint firstItem="62Q-09-BL4" firstAttribute="top" secondItem="BkD-e8-vo5" secondAttribute="top" constant="2" id="c8n-96-gLk"/>
-                                                                            <constraint firstItem="h95-F0-cRw" firstAttribute="leading" secondItem="62Q-09-BL4" secondAttribute="trailing" constant="2" id="eyb-3g-VcV"/>
-                                                                            <constraint firstItem="RsI-9f-qrv" firstAttribute="centerY" secondItem="62Q-09-BL4" secondAttribute="centerY" id="fCg-0m-XkC"/>
-                                                                            <constraint firstItem="62Q-09-BL4" firstAttribute="leading" secondItem="BkD-e8-vo5" secondAttribute="leading" constant="2" id="gvF-Bo-6Cl"/>
-                                                                            <constraint firstItem="iB8-zl-y43" firstAttribute="centerY" secondItem="62Q-09-BL4" secondAttribute="centerY" id="i6D-Xw-G8t"/>
-                                                                            <constraint firstAttribute="bottom" secondItem="62Q-09-BL4" secondAttribute="bottom" constant="2" id="iaA-td-3Tx"/>
-                                                                            <constraint firstItem="iB8-zl-y43" firstAttribute="leading" secondItem="h95-F0-cRw" secondAttribute="trailing" constant="2" id="ktY-o5-JGx"/>
-                                                                            <constraint firstItem="h95-F0-cRw" firstAttribute="centerY" secondItem="62Q-09-BL4" secondAttribute="centerY" id="oJo-PC-Lmg"/>
+                                                                            <constraint firstItem="7vP-8A-rYs" firstAttribute="centerY" secondItem="h95-F0-cRw" secondAttribute="centerY" id="YIU-6o-zMD"/>
+                                                                            <constraint firstItem="TJV-Lt-SZS" firstAttribute="centerY" secondItem="h95-F0-cRw" secondAttribute="centerY" id="ZfD-0P-Zio"/>
+                                                                            <constraint firstItem="h95-F0-cRw" firstAttribute="top" secondItem="BkD-e8-vo5" secondAttribute="top" constant="2" id="air-br-qf5"/>
                                                                             <constraint firstAttribute="trailing" secondItem="TJV-Lt-SZS" secondAttribute="trailing" constant="4" id="pME-Mj-jMc"/>
                                                                         </constraints>
                                                                         <connections>
                                                                             <outlet property="addButton" destination="RsI-9f-qrv" id="F8B-9Y-hAX"/>
                                                                             <outlet property="personCombo" destination="BZT-5h-Anq" id="v6w-6B-aOl"/>
-                                                                            <outlet property="personPopup" destination="iB8-zl-y43" id="K2j-uN-Fel"/>
                                                                             <outlet property="removeButton" destination="7vP-8A-rYs" id="Bfn-a9-JL2"/>
-                                                                            <outlet property="textField" destination="62Q-09-BL4" id="bqN-SD-KTe"/>
                                                                         </connections>
                                                                     </tableCellView>
                                                                     <tableCellView identifier="date" id="DyG-Q7-Wwd" userLabel="date cell" customClass="BookDateCell" customModule="BookishMac" customModuleProvider="target">
-                                                                        <rect key="frame" x="90" y="49" width="720" height="22"/>
+                                                                        <rect key="frame" x="90" y="51" width="720" height="22"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="ZVF-Ib-kQh" customClass="AnnotatedTextField" customModule="BookishMac" customModuleProvider="target">
@@ -1374,6 +1344,7 @@
                     <connections>
                         <outlet property="detailsView" destination="vV5-vW-Afl" id="vNS-T3-T7d"/>
                         <outlet property="imageView" destination="nPv-jB-4iC" id="a6c-Sp-1gz"/>
+                        <outlet property="personList" destination="NUZ-ew-ZHD" id="SVP-2s-l5b"/>
                         <outlet property="subtitleView" destination="H8A-04-75V" id="JB7-lH-3xQ"/>
                         <outlet property="titleView" destination="7rh-Dc-PS1" id="nz8-qo-cf2"/>
                     </connections>
@@ -1655,7 +1626,7 @@
     <resources>
         <image name="AddBook" width="32" height="32"/>
         <image name="AddPerson" width="32" height="32"/>
-        <image name="Book" width="16" height="16"/>
+        <image name="Book" width="32" height="32"/>
         <image name="Books" width="32" height="32"/>
         <image name="ChooseDateSmall" width="12" height="12"/>
         <image name="CoverPlaceholder" width="512" height="512"/>

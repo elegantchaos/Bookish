@@ -12,6 +12,16 @@ public class Person: NSManagedObject {
         name = "Untitled Person"
     }
     
+    public class func person(named: String, context: NSManagedObjectContext) -> Person? {
+        let request: NSFetchRequest<Person> = Person.fetchRequest()
+        request.predicate = NSPredicate(format: "name = \"\(named)\"")
+        if let results = try? context.fetch(request), results.count > 0 {
+            return results[0]
+        }
+        
+        return nil
+    }
+    
     /**
             If there's already an entry for a given role for this person, return it.
             If not, create it.

@@ -15,13 +15,12 @@ class BookDetailViewController: CollectionViewController {
     @IBOutlet weak var titleView: NSTextField!
     @IBOutlet weak var subtitleView: NSTextField!
     
+    @IBOutlet var personList: NSArrayController!
     @IBAction func changeImage(_ sender: Any){
         print("change image")
     }
     
     var source = DetailDataSource()
-    let personMenu = NSMenu(title: "People")
-    var personList: [Person] = []
     var indexObserver: NSKeyValueObservation?
     var availableRows = IndexSet()
     var keyViewTimer: Timer? = nil
@@ -39,16 +38,7 @@ class BookDetailViewController: CollectionViewController {
             window.bookDetailController = self
         }
         
-        let request: NSFetchRequest<Person> = Person.fetchRequest()
-        request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
-        if let results = try? cvm.managedObjectContext.fetch(request) {
-            personList = results
-            personMenu.removeAllItems()
-            for person in results {
-                let item = NSMenuItem(title: person.name ?? "unknown", action: nil, keyEquivalent: "")
-                personMenu.addItem(item)
-            }
-        }
+        personList.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
         
         if let indexArray = indexView.indexArray {
             indexObserver = indexArray.observe(\NSArrayController.selection, changeHandler: { (index, change) in

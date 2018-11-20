@@ -6,6 +6,17 @@
 import AppKit
 import ActionsKit
 
+extension NSView {
+    
+    /**
+     Convenience to return the application delegate singleton.
+     */
+    
+    var application: Application {
+        return NSApp.delegate as! Application
+    }
+}
+
 extension NSViewController {
     
     /**
