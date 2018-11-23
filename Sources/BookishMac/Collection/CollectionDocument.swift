@@ -18,18 +18,32 @@ class CollectionDocument: NSPersistentDocument {
 
     override init() {
         super.init()
+        let _ = replaceContext()
     }
     
     init(type typeName: String) throws {
         super.init()
-        if let context = self.managedObjectContext {
-            makeDefaultRoles(context: context)
-            
-            if Application.sharedInstance.testDocument {
-                Collection.setupTestDocument(context: context)
-            }
-            Application.sharedInstance.testDocument = false
+        
+        let context = replaceContext()
+        makeDefaultRoles(context: context)
+        
+        if Application.sharedInstance.testDocument {
+            Collection.setupTestDocument(context: context)
         }
+        Application.sharedInstance.testDocument = false
+    }
+    
+    func replaceContext() -> NSManagedObjectContext {
+        guard let defaultContext = managedObjectContext else {
+            fatalError("no context")
+        }
+        
+        // replace the context with our own
+        let context = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+        context.persistentStoreCoordinator = defaultContext.persistentStoreCoordinator
+        context.mergePolicy = defaultContext.mergePolicy
+        self.managedObjectContext = context
+        return context
     }
     
     /**
