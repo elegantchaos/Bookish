@@ -1,2 +1,2 @@
-#include "BookishCoreMobile.xcconfig"
+#include "../Dependencies/BookishModel/Configs/BookishModelMobile.xcconfig"
 #include "Bookish.xcconfig"

@@ -1,2 +1,2 @@
-#include "BookishCoreMac.xcconfig"
+#include "../Dependencies/BookishModel/Configs/BookishModelMac.xcconfig"
 #include "Bookish.xcconfig"

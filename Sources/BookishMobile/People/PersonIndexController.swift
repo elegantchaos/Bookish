@@ -19,7 +19,7 @@ class PersonIndexController: UITableViewController, NSFetchedResultsControllerDe
     }
     
     func provide(context: ActionContext) {
-        context.addObserver(self)
+        context.info.addObserver(self)
     }
     
     @IBOutlet var indexTable: UITableView!
@@ -87,7 +87,9 @@ class PersonIndexController: UITableViewController, NSFetchedResultsControllerDe
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let book = fetchedResultsController.object(at: indexPath)
-            application.actionManager.perform(identifier: "DeletePerson", sender: tableView, info: [ActionContext.selectionKey: [book]])
+            let info = ActionInfo(sender: tableView)
+            info[ActionContext.selectionKey] = [book]
+            application.actionManager.perform(identifier: "DeletePerson", info: info)
         }
     }
     

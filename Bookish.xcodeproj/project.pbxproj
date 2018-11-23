@@ -83,7 +83,6 @@
 		22DE6AE92189FE070078D489 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DE6AE82189FE070078D489 /* ImageCache.swift */; };
 		22E47CE0216E5EB200E43DBF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22DD42502126D6DB0070C85A /* Assets.xcassets */; };
 		22F35487216FAC0100443C0B /* Actions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F35486216FAC0100443C0B /* Actions.framework */; };
-		22F3548B216FAC0100443C0B /* BookishCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F3548A216FAC0100443C0B /* BookishCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -153,8 +152,6 @@
 		221C4B2F216BA96C0086D56F /* PersonUIActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonUIActions.swift; sourceTree = "<group>"; };
 		221ED4E9216785BB00594714 /* BookishMac.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = BookishMac.xcconfig; sourceTree = "<group>"; };
 		221ED4EA216785BB00594714 /* BookishMobile.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = BookishMobile.xcconfig; sourceTree = "<group>"; };
-		221ED4EB21678BA400594714 /* BookishCoreMobile.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = BookishCoreMobile.xcconfig; sourceTree = "<group>"; };
-		221ED4EC21678BA400594714 /* BookishCoreMac.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = BookishCoreMac.xcconfig; sourceTree = "<group>"; };
 		221ED511216B8EAB00594714 /* BookDetailRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailRow.swift; sourceTree = "<group>"; };
 		221F272821382C8E00DC2DC7 /* DateTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTransformer.swift; sourceTree = "<group>"; };
 		22429311212ADC4300E70510 /* BookishMobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BookishMobile.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -249,7 +246,6 @@
 				228968442191DDC200B80A93 /* CloudKit.framework in Frameworks */,
 				22D1B23F2180BF5D0062F2CB /* Logger.framework in Frameworks */,
 				22F35487216FAC0100443C0B /* Actions.framework in Frameworks */,
-				22F3548B216FAC0100443C0B /* BookishCore.framework in Frameworks */,
 				228968382191DA4500B80A93 /* Ensembles.framework in Frameworks */,
 				22D1B2402180BF6D0062F2CB /* ActionsKit.framework in Frameworks */,
 			);
@@ -304,8 +300,6 @@
 				22DD42792126DDA80070C85A /* Bookish.xcconfig */,
 				221ED4E9216785BB00594714 /* BookishMac.xcconfig */,
 				221ED4EA216785BB00594714 /* BookishMobile.xcconfig */,
-				221ED4EC21678BA400594714 /* BookishCoreMac.xcconfig */,
-				221ED4EB21678BA400594714 /* BookishCoreMobile.xcconfig */,
 			);
 			path = Configs;
 			sourceTree = "<group>";

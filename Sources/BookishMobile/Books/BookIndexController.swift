@@ -19,7 +19,7 @@ class BookIndexController: UITableViewController, NSFetchedResultsControllerDele
     }
     
     func provide(context: ActionContext) {
-        context.addObserver(self)
+        context.info.addObserver(self)
     }    
     
     var detailViewController: BookDetailController? = nil
@@ -89,7 +89,9 @@ class BookIndexController: UITableViewController, NSFetchedResultsControllerDele
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let book = fetchedResultsController.object(at: indexPath)
-            application.actionManager.perform(identifier: "DeleteBook", sender: tableView, info: [ActionContext.selectionKey: [book]])
+            let info = ActionInfo(sender: tableView)
+            info[ActionContext.selectionKey] = [book]
+            application.actionManager.perform(identifier: "DeleteBook", info: info)
         }
     }
     
