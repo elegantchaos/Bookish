@@ -4,7 +4,6 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 import Cocoa
-import BookishCore
 import BookishModel
 import ActionsKit
 import Logger
@@ -63,8 +62,6 @@ class Application: NSObject {
 
 extension Application: NSApplicationDelegate {
     func applicationWillFinishLaunching(_ notification: Notification) {
-        BookishCore().test()
-
         setupActions()
         setupTransformers()
     }

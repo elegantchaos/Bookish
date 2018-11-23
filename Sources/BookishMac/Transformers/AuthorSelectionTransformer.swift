@@ -9,10 +9,10 @@ import BookishModel
 class AuthorSelectionTransformer: ValueTransformer {
     static let name = NSValueTransformerName(rawValue: "PersonSelection")
 
-    var originalRole: PersonRole?
+    var originalRole: Relationship?
 
     override func transformedValue(_ value: Any?) -> Any? {
-        guard let role = value as? PersonRole else {
+        guard let role = value as? Relationship else {
             return ""
         }
         

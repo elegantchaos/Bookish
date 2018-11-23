@@ -5,7 +5,6 @@
 
 import AppKit
 import Actions
-import BookishCore
 import BookishModel
 import Logger
 

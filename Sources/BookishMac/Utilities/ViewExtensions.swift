@@ -4,6 +4,7 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 import AppKit
+import Actions
 import ActionsKit
 
 extension NSView {
@@ -84,7 +85,7 @@ extension NSView {
         appendValidatableItems(to: &items)
         for item in items {
             if let button = item as? NSButton, let identifier = item.identifier?.rawValue {
-                button.isEnabled = actionManager.validate(identifier: identifier, item: button)
+                button.isEnabled = actionManager.validate(identifier: identifier, info: ActionInfo(sender: button))
             }
         }
     }

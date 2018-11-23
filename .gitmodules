@@ -1,0 +1,3 @@
+[submodule "Dependencies/BookishModel"]
+	path = Dependencies/BookishModel
+	url = https://github.com/elegantchaos/BookishModel.git

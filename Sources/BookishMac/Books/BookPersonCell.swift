@@ -25,9 +25,9 @@ extension BookPersonCell: BookDetailTableCell {
         assert(info.isPerson)
         let source = view.source
         detailView = view
-        let personRole = source.person(for: row)
-        objectValue = personRole
-        if let person = personRole.person, let name = person.name {
+        let relationship = source.person(for: row)
+        objectValue = relationship
+        if let person = relationship.person, let name = person.name {
             selectedPerson = person
             personCombo.stringValue = name
         }
@@ -40,7 +40,7 @@ extension BookPersonCell: BookDetailTableCell {
 
 extension BookPersonCell: ActionContextProvider {
     func provide(context: ActionContext) {
-        context.info[PersonAction.roleKey] = objectValue as? PersonRole
+        context.info[PersonAction.roleKey] = objectValue as? Relationship
     }
 
 }
@@ -66,16 +66,22 @@ extension BookPersonCell: NSComboBoxDelegate {
     }
 
     func changePerson(to newPerson: Person) {
-        if let personRole = objectValue as? PersonRole, newPerson != personRole.person {
+        if let relationship = objectValue as? Relationship, newPerson != relationship.person {
             let actionManager = application.actionManager
-            actionManager.perform(identifier: "ChangeRolePerson", sender: self, info: [PersonAction.roleKey:personRole, PersonAction.personKey:newPerson])
+            let info = ActionInfo(sender: self)
+            info[PersonAction.roleKey] = relationship
+            info[PersonAction.personKey] = newPerson
+            actionManager.perform(identifier: "ChangeRolePerson", info: info)
         }
     }
 
     func changePerson(creating newPersonName: String) {
-        if let personRole = objectValue as? PersonRole {
+        if let relationship = objectValue as? Relationship {
             let actionManager = application.actionManager
-            actionManager.perform(identifier: "ChangeRolePerson", sender: self, info: [PersonAction.roleKey:personRole, PersonAction.newPersonKey:newPersonName])
+            let info = ActionInfo(sender: self)
+            info[PersonAction.roleKey] = relationship
+            info[PersonAction.newPersonKey] = newPersonName
+            actionManager.perform(identifier: "ChangeRolePerson", info: info)
         }
     }
 

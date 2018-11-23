@@ -53,12 +53,12 @@ class BookDetailViewController: CollectionViewController {
         super.viewWillDisappear()
     }
     
-    func peopleInSelection() -> (Set<PersonRole>, Set<PersonRole>) {
-        var all = Set<PersonRole>()
-        var common = Set<PersonRole>()
+    func peopleInSelection() -> (Set<Relationship>, Set<Relationship>) {
+        var all = Set<Relationship>()
+        var common = Set<Relationship>()
         if let selection = indexView.indexArray.selectedObjects as? [Book] {
             for book in selection {
-                if let people = book.personRoles as? Set<PersonRole> {
+                if let people = book.relationships as? Set<Relationship> {
                     if all.count == 0 {
                         common.formUnion(people)
                     } else {
@@ -125,17 +125,17 @@ extension BookDetailViewController: ActionContextProvider, PersonChangeObserver 
     func provide(context: ActionContext) {
         if let selection = indexView.indexArray.selectedObjects as? [Book] {
             context.info[ActionContext.selectionKey] = selection
-            context.addObserver(self)
+            context.info.addObserver(self)
         }
     }
     
-    func added(role: PersonRole) {
-        let index = source.insert(personRole: role)
+    func added(role: Relationship) {
+        let index = source.insert(relationship: role)
         detailsView.insertRows(at: IndexSet(integer: index), withAnimation: .slideDown)
     }
     
-    func removed(role: PersonRole) {
-        if let row = source.remove(personRole: role) {
+    func removed(role: Relationship) {
+        if let row = source.remove(relationship: role) {
             detailsView.removeRows(at: IndexSet(integer: row), withAnimation: .slideUp)
         }
     }

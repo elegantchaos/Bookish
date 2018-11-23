@@ -44,11 +44,11 @@ class PersonDetailViewController: CollectionViewController {
         super.viewWillDisappear()
     }
 
-    func selectedPersonRoles() -> [PersonRole] {
-        var result = [PersonRole]()
+    func selectedRelationships() -> [Relationship] {
+        var result = [Relationship]()
         if let selection = indexView.indexArray.selectedObjects as? [Person] {
             for person in selection {
-                if let roles = person.personRoles as? Set<PersonRole> {
+                if let roles = person.relationships as? Set<Relationship> {
                     result.append(contentsOf: roles)
                 }
             }
@@ -58,9 +58,9 @@ class PersonDetailViewController: CollectionViewController {
     
     func rowsForSelection() -> [NSManagedObject] {
         var booksByRole = [Role:Set<Book>]()
-        let selected = selectedPersonRoles()
-        for personRole in selected {
-            if let role = personRole.role, let prb = personRole.books as? Set<Book> {
+        let selected = selectedRelationships()
+        for relationship in selected {
+            if let role = relationship.role, let prb = relationship.books as? Set<Book> {
                 var books = booksByRole[role]
                 if books == nil {
                     books = Set<Book>()

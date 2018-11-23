@@ -6,7 +6,7 @@
 import AppKit
 import BookishModel
 
-class PersonRoleCell: NSTableCellView, PersonDetailTableCell {
+class RelationshipCell: NSTableCellView, PersonDetailTableCell {
     func setup(for view: PersonDetailViewController, row: Int, item: NSManagedObject) {
                       if let role = item as? Role, let name = role.name {
             objectValue = item

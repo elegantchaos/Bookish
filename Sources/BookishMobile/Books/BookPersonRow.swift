@@ -8,7 +8,7 @@ import Actions
 
 class BookPersonRow: BookDetailRow {
     @IBOutlet var personButton: UIButton!
-    var role: PersonRole!
+    var role: Relationship!
     
     override func setup(row: Int, book: Book, source: DetailDataSource) {
         assert(source.info(for: row).isPerson)

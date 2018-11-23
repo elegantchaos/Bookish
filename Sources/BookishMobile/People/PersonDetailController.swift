@@ -32,9 +32,9 @@ class PersonDetailController: UIViewController {
                 imageView.image = placeholderImage
             }
             sortedRoles.removeAll()
-            for personRole in person.personRoles?.sortedArray(using: application.viewModel.personRoleSorting) as! [PersonRole] {
-                if let role = personRole.role,
-                    let books = personRole.books?.sortedArray(using: application.viewModel.bookIndexSorting) as? [Book] {
+            for relationship in person.relationships?.sortedArray(using: application.viewModel.relationshipSorting) as! [Relationship] {
+                if let role = relationship.role,
+                    let books = relationship.books?.sortedArray(using: application.viewModel.bookIndexSorting) as? [Book] {
                     sortedRoles.append(SortedRole(role: role, books: books))
                 }
             }

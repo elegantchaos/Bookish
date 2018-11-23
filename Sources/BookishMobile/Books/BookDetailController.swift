@@ -28,7 +28,7 @@ class BookDetailController: UIViewController {
                 imageView.image = placeholderImage
             }
             bindings.append(StringBinding(for: self, property: "title", to: book, path: "name"))
-            if let roles = book.personRoles, let sorted = roles.sortedArray(using: application.viewModel.personRoleSorting) as? [PersonRole] {
+            if let roles = book.relationships, let sorted = roles.sortedArray(using: application.viewModel.relationshipSorting) as? [Relationship] {
                 source.people = sorted
             }
         }

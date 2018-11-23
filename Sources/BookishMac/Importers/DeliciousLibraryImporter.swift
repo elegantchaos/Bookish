@@ -80,8 +80,8 @@ class DeliciousLibraryImportSession: ImportSession {
                     people[creators] = author
                 }
                 
-                let role = author.role(as: Role.Default.authorName)
-                role.addToBooks(book)
+                let relationship = author.relationship(as: Role.Default.authorName)
+                relationship.addToBooks(book)
             }
         }
     }

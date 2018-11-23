@@ -21,5 +21,5 @@ import Foundation
 
     let bookIndexSorting = [NSSortDescriptor(key: "name", ascending: true)]
     let personIndexSorting = [NSSortDescriptor(key: "name", ascending: true)]
-    let personRoleSorting = [NSSortDescriptor(key: "role.name", ascending: true)]
+    let relationshipSorting = [NSSortDescriptor(key: "role.name", ascending: true)]
 }
