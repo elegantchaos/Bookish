@@ -624,7 +624,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 22DD426F2126D6DB0070C85A /* Build configuration list for PBXNativeTarget "BookishMac" */;
 			buildPhases = (
-				22960334214172360020B3EB /* Build SPM Dependencies */,
 				226EF3182177935B0012A405 /* Export From Sketch */,
 				22DD42402126D6DA0070C85A /* Sources */,
 				22DD42412126D6DA0070C85A /* Frameworks */,
@@ -843,25 +842,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# build & run sketchx to export the assets\nswift run sketchx Extras/Bookish.sketch Mobile=Assets Sources/BookishMobile \n\n# update list of all assets\nfind Sources/BookishMobile/Assets.xcassets -type f > Sources/BookishMobile/Assets.xcfilelist\n";
-			showEnvVarsInLog = 0;
-		};
-		22960334214172360020B3EB /* Build SPM Dependencies */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Build SPM Dependencies";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if [[ ! -e \".build/xcode\" ]]\nthen\n    ./Update.sh\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
