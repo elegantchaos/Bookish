@@ -17,18 +17,6 @@ class BookDetailViewController: CollectionViewController {
     
     @IBOutlet weak var editButton: NSButton!
     @IBOutlet var personList: NSArrayController!
-    @IBAction func changeImage(_ sender: Any){
-        print("change image")
-    }
-    
-    @IBAction func toggleEditing(_ sender: Any) {
-        editing = !editing
-        editButton.title = editing ? "Done" : "Edit…"
-        selectionChanged()
-        if editing {
-            titleView.becomeFirstResponder()
-        }
-    }
     
     var source = DetailDataSource()
     var indexObserver: NSKeyValueObservation?
@@ -64,24 +52,6 @@ class BookDetailViewController: CollectionViewController {
         super.viewWillDisappear()
     }
     
-    func peopleInSelection() -> (Set<Relationship>, Set<Relationship>) {
-        var all = Set<Relationship>()
-        var common = Set<Relationship>()
-        if let selection = indexView.indexArray.selectedObjects as? [Book] {
-            for book in selection {
-                if let people = book.relationships as? Set<Relationship> {
-                    if all.count == 0 {
-                        common.formUnion(people)
-                    } else {
-                        common.formIntersection(people)
-                    }
-                    all.formUnion(people)
-                }
-            }
-        }
-        return (all, common)
-    }
-    
     func selectionChanged() {
         let selectedCount = indexView.indexArray.selectedObjects?.count ?? 0
         let showDetail = selectedCount > 0
@@ -110,16 +80,35 @@ class BookDetailViewController: CollectionViewController {
     }
     
     func updatePeople() {
-        let (_, common) = peopleInSelection()
-        source.people = common.sorted(by: { ($0.person?.name ?? "") < ($1.person?.name ?? "") })
-        let selection = (indexView.indexArray.selectedObjects as? [NSObject]) ?? []
-        source.filterDetail(for: selection)
+        let selection = (indexView.indexArray.selectedObjects as? [Book]) ?? []
+        source.filter(for: selection, editing: editing)
         detailsView.reloadData()
     }
 }
 
 
-// MARK: Actions
+// MARK: Local IBActions
+
+extension BookDetailViewController {
+    @IBAction func toggleEditing(_ sender: Any) {
+        editing = !editing
+        editButton.title = editing ? "Done" : "Edit…"
+        selectionChanged()
+        if editing {
+            titleView.becomeFirstResponder()
+        } else {
+            view.window?.makeFirstResponder(nil)
+        }
+    }
+    
+    @IBAction func changeImage(_ sender: Any){
+        print("change image")
+    }
+    
+}
+
+
+// MARK: Action Support
 
 extension BookDetailViewController: ActionContextProvider, PersonChangeObserver {
     func detailRow(for context: ActionContext) -> Int {
@@ -199,16 +188,6 @@ extension BookDetailViewController: NSTableViewDataSource, NSTableViewDelegate {
         AnnotatedTableCellView.updateSelection(tableView: tableView, row: row)
         return true
     }
-    
-//    func tableView(_ tableView: NSTableView, didAdd rowView: NSTableRowView, forRow row: Int) {
-//        availableRows.insert(row)
-//        scheduleRecalculateKeyViews()
-//    }
-    
-//    func tableView(_ tableView: NSTableView, didRemove rowView: NSTableRowView, forRow row: Int) {
-//        availableRows.remove(row)
-//        scheduleRecalculateKeyViews()
-//    }
     
     fileprivate func setupHeading(view: NSView, row: Int, info: DetailDataSource.RowInfo) {
         if let field = view.subviews.first as? NSTextField {
