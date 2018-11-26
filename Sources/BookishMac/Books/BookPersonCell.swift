@@ -48,8 +48,11 @@ extension BookPersonCell: ActionContextProvider {
 extension BookPersonCell: NSComboBoxDelegate {
     func comboBoxSelectionDidChange(_ notification: Notification) {
         if let people = detailView?.personList?.arrangedObjects as? [Person] {
-            let newPerson = people[personCombo.indexOfSelectedItem]
-            changePerson(to: newPerson)
+            let index = personCombo.indexOfSelectedItem
+            if index != -1 {
+                let newPerson = people[personCombo.indexOfSelectedItem]
+                changePerson(to: newPerson)
+            }
         }
     }
     

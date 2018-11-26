@@ -101,6 +101,8 @@ class BookDetailViewController: CollectionViewController {
     func updatePeople() {
         let (_, common) = peopleInSelection()
         source.people = common.sorted(by: { ($0.person?.name ?? "") < ($1.person?.name ?? "") })
+        let selection = (indexView.indexArray.selectedObjects as? [NSObject]) ?? []
+        source.filterDetail(for: selection)
         detailsView.reloadData()
     }
 }
