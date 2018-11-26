@@ -1041,13 +1041,13 @@
             <objects>
                 <viewController id="TBH-Sa-Ff0" customClass="BookDetailViewController" customModule="BookishMac" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="BXj-Jh-9Ye">
-                        <rect key="frame" x="0.0" y="0.0" width="824" height="768"/>
+                        <rect key="frame" x="0.0" y="0.0" width="723" height="768"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <box autoresizesSubviews="NO" boxType="custom" borderType="none" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="YAJ-7k-gyD">
-                                <rect key="frame" x="0.0" y="0.0" width="824" height="768"/>
+                                <rect key="frame" x="0.0" y="0.0" width="723" height="768"/>
                                 <view key="contentView" id="maZ-NJ-kB0">
-                                    <rect key="frame" x="0.0" y="0.0" width="824" height="768"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="723" height="768"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <imageView identifier="cover" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nPv-jB-4iC" userLabel="Cover">
@@ -1062,10 +1062,10 @@
                                             </connections>
                                         </imageView>
                                         <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="10" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HhJ-5d-CNv">
-                                            <rect key="frame" x="96" y="706" width="724" height="50"/>
+                                            <rect key="frame" x="96" y="706" width="623" height="50"/>
                                             <subviews>
                                                 <textField identifier="title" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7rh-Dc-PS1" userLabel="Title">
-                                                    <rect key="frame" x="-2" y="28" width="692" height="22"/>
+                                                    <rect key="frame" x="-2" y="28" width="627" height="22"/>
                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" title="Title" id="o3V-KV-G1K">
                                                         <font key="font" size="18" name=".AppleSystemUIFont"/>
                                                         <color key="textColor" name="Bookish Text"/>
@@ -1077,7 +1077,7 @@
                                                     </connections>
                                                 </textField>
                                                 <textField identifier="subtitle" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="H8A-04-75V" userLabel="Subtitle">
-                                                    <rect key="frame" x="-2" y="0.0" width="692" height="18"/>
+                                                    <rect key="frame" x="-2" y="0.0" width="627" height="18"/>
                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" title="Subtitle" id="tax-bb-RGs">
                                                         <font key="font" size="14" name=".AppleSystemUIFont"/>
                                                         <color key="textColor" name="Bookish Text"/>
@@ -1100,13 +1100,13 @@
                                             </customSpacing>
                                         </stackView>
                                         <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="26" horizontalPageScroll="10" verticalLineScroll="26" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EIm-c8-9OE" userLabel="Details Table">
-                                            <rect key="frame" x="4" y="29" width="816" height="673"/>
+                                            <rect key="frame" x="4" y="29" width="715" height="673"/>
                                             <clipView key="contentView" drawsBackground="NO" id="5CS-Yo-P4n">
-                                                <rect key="frame" x="0.0" y="0.0" width="816" height="673"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="715" height="673"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <tableView identifier="book-details" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="none" columnReordering="NO" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="24" rowSizeStyle="automatic" usesAutomaticRowHeights="YES" viewBased="YES" id="vV5-vW-Afl" userLabel="Table">
-                                                        <rect key="frame" x="0.0" y="0.0" width="816" height="673"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="715" height="673"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <size key="intercellSpacing" width="3" height="2"/>
                                                         <color key="backgroundColor" name="Bookish Detail"/>
@@ -1149,7 +1149,7 @@
                                                                     </tableCellView>
                                                                 </prototypeCellViews>
                                                             </tableColumn>
-                                                            <tableColumn identifier="detail" width="720" minWidth="40" maxWidth="1000" id="sqb-ib-qtW">
+                                                            <tableColumn identifier="detail" width="623" minWidth="40" maxWidth="1000" id="sqb-ib-qtW">
                                                                 <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="justified" title="value">
                                                                     <font key="font" metaFont="smallSystem"/>
                                                                     <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1162,12 +1162,12 @@
                                                                 </textFieldCell>
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES"/>
                                                                 <prototypeCellViews>
-                                                                    <tableCellView identifier="text" id="CTI-AS-fZR" userLabel="detail cell" customClass="BookDetailCell" customModule="BookishMac" customModuleProvider="target">
-                                                                        <rect key="frame" x="90" y="1" width="720" height="24"/>
+                                                                    <tableCellView identifier="text" id="CTI-AS-fZR" userLabel="text" customClass="BookDetailCell" customModule="BookishMac" customModuleProvider="target">
+                                                                        <rect key="frame" x="90" y="1" width="623" height="24"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="u47-FK-V32">
-                                                                                <rect key="frame" x="2" y="2" width="710" height="18"/>
+                                                                                <rect key="frame" x="2" y="2" width="613" height="18"/>
                                                                                 <textFieldCell key="cell" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" alignment="left" placeholderString="value" id="33t-e1-VWE">
                                                                                     <font key="font" metaFont="systemBold" size="14"/>
                                                                                     <color key="textColor" name="Bookish Detail Text"/>
@@ -1175,6 +1175,7 @@
                                                                                 </textFieldCell>
                                                                                 <connections>
                                                                                     <binding destination="TBH-Sa-Ff0" name="font" keyPath="self.cvm.detailFont" id="eiu-Lu-d9l"/>
+                                                                                    <outlet property="delegate" destination="CTI-AS-fZR" id="f1d-5p-PL0"/>
                                                                                 </connections>
                                                                             </textField>
                                                                         </subviews>
@@ -1188,12 +1189,12 @@
                                                                             <outlet property="textField" destination="u47-FK-V32" id="4Tf-cZ-vMJ"/>
                                                                         </connections>
                                                                     </tableCellView>
-                                                                    <tableCellView identifier="person" id="BkD-e8-vo5" userLabel="person cell" customClass="BookPersonCell" customModule="BookishMac" customModuleProvider="target">
-                                                                        <rect key="frame" x="90" y="27" width="720" height="23"/>
+                                                                    <tableCellView identifier="person" id="BkD-e8-vo5" userLabel="person" customClass="BookPersonCell" customModule="BookishMac" customModuleProvider="target">
+                                                                        <rect key="frame" x="90" y="27" width="623" height="23"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <button identifier="button.RevealPerson" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="TJV-Lt-SZS" userLabel="Reveal">
-                                                                                <rect key="frame" x="701" y="3" width="15" height="16"/>
+                                                                                <rect key="frame" x="604" y="3" width="15" height="16"/>
                                                                                 <buttonCell key="cell" type="inline" bezelStyle="inline" image="Reveal" imagePosition="only" alignment="center" controlSize="mini" lineBreakMode="truncatingTail" state="on" inset="2" id="mff-9C-MBs">
                                                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                                     <font key="font" metaFont="smallSystemBold"/>
@@ -1203,7 +1204,7 @@
                                                                                 </connections>
                                                                             </button>
                                                                             <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="Mqx-x5-EGd">
-                                                                                <rect key="frame" x="2" y="2" width="699" height="18"/>
+                                                                                <rect key="frame" x="2" y="2" width="602" height="18"/>
                                                                                 <textFieldCell key="cell" selectable="YES" sendsActionOnEndEditing="YES" alignment="left" placeholderString="value" id="3kp-KF-Qk6">
                                                                                     <font key="font" metaFont="systemBold" size="14"/>
                                                                                     <color key="textColor" name="Bookish Detail Text"/>
@@ -1225,33 +1226,33 @@
                                                                             <outlet property="personField" destination="Mqx-x5-EGd" id="cG7-Q6-lGG"/>
                                                                         </connections>
                                                                     </tableCellView>
-                                                                    <tableCellView identifier="editablePerson" id="Xqd-Mi-EGo" userLabel="person cell" customClass="BookEditablePersonCell" customModule="BookishMac" customModuleProvider="target">
-                                                                        <rect key="frame" x="90" y="52" width="720" height="23"/>
+                                                                    <tableCellView identifier="editablePerson" id="Xqd-Mi-EGo" userLabel="person editable" customClass="BookEditablePersonCell" customModule="BookishMac" customModuleProvider="target">
+                                                                        <rect key="frame" x="90" y="52" width="623" height="23"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <button identifier="button.PopupPersonMenu" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dao-6l-TBt" userLabel="Add">
-                                                                                <rect key="frame" x="671" y="3" width="15" height="16"/>
+                                                                                <rect key="frame" x="574" y="3" width="15" height="16"/>
                                                                                 <buttonCell key="cell" type="inline" bezelStyle="inline" image="Plus" imagePosition="only" alignment="center" controlSize="mini" lineBreakMode="truncatingTail" state="on" inset="2" id="Xtg-GN-bZk">
                                                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                                     <font key="font" metaFont="smallSystemBold"/>
                                                                                 </buttonCell>
                                                                             </button>
                                                                             <button identifier="button.RemoveRelationship" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="uZJ-ZI-bfH" userLabel="Remove">
-                                                                                <rect key="frame" x="686" y="3" width="15" height="16"/>
+                                                                                <rect key="frame" x="589" y="3" width="15" height="16"/>
                                                                                 <buttonCell key="cell" type="inline" bezelStyle="inline" image="Minus" imagePosition="overlaps" alignment="center" controlSize="mini" lineBreakMode="truncatingTail" state="on" inset="2" id="bbo-qY-Htk">
                                                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                                     <font key="font" metaFont="smallSystemBold"/>
                                                                                 </buttonCell>
                                                                             </button>
                                                                             <button identifier="button.RevealPerson" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="c8p-wA-ae7" userLabel="Reveal">
-                                                                                <rect key="frame" x="701" y="3" width="15" height="16"/>
+                                                                                <rect key="frame" x="604" y="3" width="15" height="16"/>
                                                                                 <buttonCell key="cell" type="inline" bezelStyle="inline" image="Reveal" imagePosition="only" alignment="center" controlSize="mini" lineBreakMode="truncatingTail" state="on" inset="2" id="cA9-6Q-h8r">
                                                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                                     <font key="font" metaFont="smallSystemBold"/>
                                                                                 </buttonCell>
                                                                             </button>
                                                                             <comboBox verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="up0-NK-LzO" customClass="AnnotatedComboBox" customModule="BookishMac" customModuleProvider="target">
-                                                                                <rect key="frame" x="2" y="-2" width="670" height="23"/>
+                                                                                <rect key="frame" x="2" y="-2" width="573" height="23"/>
                                                                                 <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" title="Person" numberOfVisibleItems="5" id="x93-id-LgP">
                                                                                     <font key="font" metaFont="system" size="14"/>
                                                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -1287,12 +1288,12 @@
                                                                             <outlet property="removeButton" destination="uZJ-ZI-bfH" id="cHS-aQ-oaH"/>
                                                                         </connections>
                                                                     </tableCellView>
-                                                                    <tableCellView identifier="date" id="DyG-Q7-Wwd" userLabel="date cell" customClass="BookDateCell" customModule="BookishMac" customModuleProvider="target">
-                                                                        <rect key="frame" x="90" y="77" width="720" height="24"/>
+                                                                    <tableCellView identifier="date" id="DyG-Q7-Wwd" userLabel="date" customClass="BookDateCell" customModule="BookishMac" customModuleProvider="target">
+                                                                        <rect key="frame" x="90" y="77" width="623" height="24"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="ZVF-Ib-kQh">
-                                                                                <rect key="frame" x="2" y="2" width="716" height="18"/>
+                                                                                <rect key="frame" x="2" y="2" width="619" height="18"/>
                                                                                 <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" continuous="YES" alignment="left" placeholderString="value" usesSingleLineMode="YES" id="j79-sX-bKh">
                                                                                     <font key="font" metaFont="systemBold" size="14"/>
                                                                                     <color key="textColor" name="Bookish Detail Text"/>
@@ -1314,12 +1315,12 @@
                                                                             <outlet property="textField" destination="ZVF-Ib-kQh" id="buw-hh-9zp"/>
                                                                         </connections>
                                                                     </tableCellView>
-                                                                    <tableCellView identifier="editableDate" id="7Lf-1O-gT0" userLabel="date cell" customClass="BookEditableDateCell" customModule="BookishMac" customModuleProvider="target">
-                                                                        <rect key="frame" x="90" y="103" width="720" height="24"/>
+                                                                    <tableCellView identifier="editableDate" id="7Lf-1O-gT0" userLabel="date editable" customClass="BookEditableDateCell" customModule="BookishMac" customModuleProvider="target">
+                                                                        <rect key="frame" x="90" y="103" width="623" height="24"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="lhg-Qc-OrU" customClass="AnnotatedTextField" customModule="BookishMac" customModuleProvider="target">
-                                                                                <rect key="frame" x="2" y="2" width="697" height="18"/>
+                                                                                <rect key="frame" x="2" y="2" width="600" height="18"/>
                                                                                 <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" continuous="YES" alignment="left" placeholderString="value" usesSingleLineMode="YES" id="wUa-s6-Ue7">
                                                                                     <font key="font" metaFont="systemBold" size="14"/>
                                                                                     <color key="textColor" name="Bookish Detail Text"/>
@@ -1331,7 +1332,7 @@
                                                                                 </connections>
                                                                             </textField>
                                                                             <button identifier="button.ShowDatePicker" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="M8z-vs-vox" userLabel="Select">
-                                                                                <rect key="frame" x="705" y="3" width="15" height="16"/>
+                                                                                <rect key="frame" x="608" y="3" width="15" height="16"/>
                                                                                 <buttonCell key="cell" type="inline" bezelStyle="inline" image="ChooseDateSmall" imagePosition="only" alignment="center" controlSize="mini" lineBreakMode="truncatingTail" state="on" inset="2" id="thl-sr-2sm">
                                                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                                     <font key="font" metaFont="smallSystemBold"/>
@@ -1351,6 +1352,114 @@
                                                                             <outlet property="textField" destination="lhg-Qc-OrU" id="9Wf-gl-Qiw"/>
                                                                         </connections>
                                                                     </tableCellView>
+                                                                    <tableCellView identifier="editableDimensions" id="GRN-RI-c8z" userLabel="dimensions" customClass="BookDimensionsCell" customModule="BookishMac" customModuleProvider="target">
+                                                                        <rect key="frame" x="90" y="129" width="623" height="24"/>
+                                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                        <subviews>
+                                                                            <stackView distribution="fillEqually" orientation="horizontal" alignment="top" spacing="10" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dpj-i7-uGg">
+                                                                                <rect key="frame" x="2" y="2" width="619" height="18"/>
+                                                                                <subviews>
+                                                                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Rxq-ce-IdX">
+                                                                                        <rect key="frame" x="-2" y="1" width="99" height="17"/>
+                                                                                        <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="width" id="B5c-Dg-g1y">
+                                                                                            <font key="font" metaFont="system"/>
+                                                                                            <color key="textColor" name="Bookish Label Text"/>
+                                                                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                                        </textFieldCell>
+                                                                                        <connections>
+                                                                                            <binding destination="TBH-Sa-Ff0" name="font" keyPath="self.cvm.detailFont" id="CNt-lW-Bat"/>
+                                                                                        </connections>
+                                                                                    </textField>
+                                                                                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="3v3-p9-bdK">
+                                                                                        <rect key="frame" x="103" y="0.0" width="99" height="18"/>
+                                                                                        <textFieldCell key="cell" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" alignment="left" placeholderString="width" id="0fH-mt-rvQ">
+                                                                                            <font key="font" metaFont="systemBold" size="14"/>
+                                                                                            <color key="textColor" name="Bookish Detail Text"/>
+                                                                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                                                        </textFieldCell>
+                                                                                        <connections>
+                                                                                            <binding destination="TBH-Sa-Ff0" name="font" keyPath="self.cvm.detailFont" id="WHk-ra-pAO"/>
+                                                                                            <outlet property="delegate" destination="GRN-RI-c8z" id="XeI-hk-XCA"/>
+                                                                                        </connections>
+                                                                                    </textField>
+                                                                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ugw-ui-F4a">
+                                                                                        <rect key="frame" x="208" y="1" width="99" height="17"/>
+                                                                                        <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="height" id="2nR-8g-gaj">
+                                                                                            <font key="font" metaFont="system"/>
+                                                                                            <color key="textColor" name="Bookish Label Text"/>
+                                                                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                                        </textFieldCell>
+                                                                                        <connections>
+                                                                                            <binding destination="TBH-Sa-Ff0" name="font" keyPath="self.cvm.detailFont" id="EeX-ao-qZk"/>
+                                                                                        </connections>
+                                                                                    </textField>
+                                                                                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="PWE-5c-T00">
+                                                                                        <rect key="frame" x="313" y="0.0" width="98" height="18"/>
+                                                                                        <textFieldCell key="cell" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" alignment="left" placeholderString="height" id="McL-UM-Fxu">
+                                                                                            <font key="font" metaFont="systemBold" size="14"/>
+                                                                                            <color key="textColor" name="Bookish Detail Text"/>
+                                                                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                                                        </textFieldCell>
+                                                                                        <connections>
+                                                                                            <binding destination="TBH-Sa-Ff0" name="font" keyPath="self.cvm.detailFont" id="lbd-3h-l5K"/>
+                                                                                            <outlet property="delegate" destination="GRN-RI-c8z" id="2rj-2v-gWQ"/>
+                                                                                        </connections>
+                                                                                    </textField>
+                                                                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zEK-la-tRl">
+                                                                                        <rect key="frame" x="417" y="1" width="99" height="17"/>
+                                                                                        <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="depth" id="2ll-11-5hb">
+                                                                                            <font key="font" metaFont="system"/>
+                                                                                            <color key="textColor" name="Bookish Label Text"/>
+                                                                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                                        </textFieldCell>
+                                                                                        <connections>
+                                                                                            <binding destination="TBH-Sa-Ff0" name="font" keyPath="self.cvm.detailFont" id="aCT-gf-X0X"/>
+                                                                                        </connections>
+                                                                                    </textField>
+                                                                                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="oV8-6N-g7m">
+                                                                                        <rect key="frame" x="522" y="0.0" width="99" height="18"/>
+                                                                                        <textFieldCell key="cell" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" alignment="left" placeholderString="depth" id="yMd-Rq-oTb">
+                                                                                            <font key="font" metaFont="systemBold" size="14"/>
+                                                                                            <color key="textColor" name="Bookish Detail Text"/>
+                                                                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                                                        </textFieldCell>
+                                                                                        <connections>
+                                                                                            <binding destination="TBH-Sa-Ff0" name="font" keyPath="self.cvm.detailFont" id="mo0-eH-Z5y"/>
+                                                                                            <outlet property="delegate" destination="GRN-RI-c8z" id="NRg-yL-pP1"/>
+                                                                                        </connections>
+                                                                                    </textField>
+                                                                                </subviews>
+                                                                                <visibilityPriorities>
+                                                                                    <integer value="1000"/>
+                                                                                    <integer value="1000"/>
+                                                                                    <integer value="1000"/>
+                                                                                    <integer value="1000"/>
+                                                                                    <integer value="1000"/>
+                                                                                    <integer value="1000"/>
+                                                                                </visibilityPriorities>
+                                                                                <customSpacing>
+                                                                                    <real value="3.4028234663852886e+38"/>
+                                                                                    <real value="3.4028234663852886e+38"/>
+                                                                                    <real value="3.4028234663852886e+38"/>
+                                                                                    <real value="3.4028234663852886e+38"/>
+                                                                                    <real value="3.4028234663852886e+38"/>
+                                                                                    <real value="3.4028234663852886e+38"/>
+                                                                                </customSpacing>
+                                                                            </stackView>
+                                                                        </subviews>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="bottom" secondItem="Dpj-i7-uGg" secondAttribute="bottom" constant="2" id="HO1-Io-au8"/>
+                                                                            <constraint firstItem="Dpj-i7-uGg" firstAttribute="leading" secondItem="GRN-RI-c8z" secondAttribute="leading" constant="2" id="ZGO-pZ-RDj"/>
+                                                                            <constraint firstItem="Dpj-i7-uGg" firstAttribute="top" secondItem="GRN-RI-c8z" secondAttribute="top" constant="4" id="bvy-rW-M59"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="Dpj-i7-uGg" secondAttribute="trailing" constant="2" id="nyQ-Bc-K8Q"/>
+                                                                        </constraints>
+                                                                        <connections>
+                                                                            <outlet property="heightField" destination="PWE-5c-T00" id="qr7-hr-abi"/>
+                                                                            <outlet property="lengthField" destination="oV8-6N-g7m" id="ivC-sk-oyk"/>
+                                                                            <outlet property="textField" destination="3v3-p9-bdK" id="fOO-eK-gtv"/>
+                                                                            <outlet property="widthField" destination="3v3-p9-bdK" id="3Jl-ne-ENN"/>
+                                                                        </connections>
+                                                                    </tableCellView>
                                                                 </prototypeCellViews>
                                                             </tableColumn>
                                                         </tableColumns>
@@ -1363,7 +1472,7 @@
                                                 <nil key="backgroundColor"/>
                                             </clipView>
                                             <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="1Kf-VT-TKi">
-                                                <rect key="frame" x="0.0" y="682" width="816" height="16"/>
+                                                <rect key="frame" x="0.0" y="657" width="715" height="16"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                             </scroller>
                                             <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="ouR-eG-FUC">
@@ -1372,8 +1481,8 @@
                                             </scroller>
                                         </scrollView>
                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bB5-JR-2gl">
-                                            <rect key="frame" x="752" y="-3" width="74" height="32"/>
-                                            <buttonCell key="cell" type="push" title="Edit…" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="nfm-QF-mrY">
+                                            <rect key="frame" x="661" y="-3" width="64" height="32"/>
+                                            <buttonCell key="cell" type="push" title="Edit" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="nfm-QF-mrY">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
@@ -1424,7 +1533,7 @@
                 </arrayController>
                 <userDefaultsController representsSharedInstance="YES" id="CPG-9C-fnr"/>
             </objects>
-            <point key="canvasLocation" x="1324" y="2765"/>
+            <point key="canvasLocation" x="1374.5" y="2765"/>
         </scene>
         <!--Date Picker Popover Controller-->
         <scene sceneID="K1V-fB-Brr">

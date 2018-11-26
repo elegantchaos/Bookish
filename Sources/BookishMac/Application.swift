@@ -38,9 +38,8 @@ class Application: NSObject {
     }
     
     fileprivate func setupActions() {
-        actionManager.register(PersonAction.standardActions())
+        actionManager.register(ModelAction.standardActions())
         actionManager.register(PersonUIAction.standardActions())
-        actionManager.register(BookAction.standardActions())
         actionManager.register(ImporterAction.standardActions())
         actionManager.register([
             ShowDatePickerAction(identifier: "ShowDatePicker"),

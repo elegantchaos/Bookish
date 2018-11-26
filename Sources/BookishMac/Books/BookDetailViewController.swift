@@ -92,13 +92,13 @@ class BookDetailViewController: CollectionViewController {
 extension BookDetailViewController {
     @IBAction func toggleEditing(_ sender: Any) {
         editing = !editing
-        editButton.title = editing ? "Done" : "Edit…"
-        selectionChanged()
+        editButton.title = editing ? "Done" : "Edit"
         if editing {
             titleView.becomeFirstResponder()
         } else {
             view.window?.makeFirstResponder(nil)
         }
+        selectionChanged()
     }
     
     @IBAction func changeImage(_ sender: Any){

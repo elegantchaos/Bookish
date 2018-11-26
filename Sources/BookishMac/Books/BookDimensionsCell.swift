@@ -1,0 +1,79 @@
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+//  Created by Sam Deane on 26/11/2018.
+//  All code (c) 2018 - present day, Elegant Chaos Limited.
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+import AppKit
+import BookishModel
+import Actions
+
+fileprivate var detailBindingContext: Int = 0
+
+class BookDimensionsCell: NSTableCellView, BookDetailTableCell {
+    var index: NSArrayController?
+    
+    @IBOutlet weak var widthField: NSTextField!
+    @IBOutlet weak var heightField: NSTextField!
+    @IBOutlet weak var lengthField: NSTextField!
+    
+    func setup(for view: BookDetailViewController, row: Int, isPerson: Bool) {
+        assert(!isPerson)
+        
+        index = view.indexView.indexArray
+        setupValue(field: widthField, property: "width")
+        setupValue(field: heightField, property: "height")
+        setupValue(field: lengthField, property: "length")
+    }
+    
+    func setupValue(field: NSTextField, property: String) {
+        if let index = index {
+            index.addObserver(self, forKeyPath: "selection.\(property)", options: [.initial], context: &detailBindingContext)
+        }
+    }
+    
+    func updateValue(field: NSTextField, property: String) {
+        if let selection = index?.selection as? NSObject {
+            let selection = selection.value(forKey: property) as? NSObject
+            if selection === NSMultipleValuesMarker {
+                field.placeholderString = "Multiple Values"
+            } else {
+                field.objectValue = selection
+            }
+        }
+    }
+    
+    func cleanupValue(field: NSTextField, property: String) {
+        index?.removeObserver(self, forKeyPath: "selection.\(property)", context: &detailBindingContext)
+    }
+
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if context == &detailBindingContext {
+            updateValue(field: widthField, property: "width")
+            updateValue(field: heightField, property: "height")
+            updateValue(field: lengthField, property: "length")
+        }
+    }
+    
+    func keyView() -> NSView? {
+        return textField
+    }
+    
+    override func prepareForReuse() {
+        cleanupValue(field: widthField, property: "width")
+        cleanupValue(field: heightField, property: "height")
+        cleanupValue(field: lengthField, property: "length")
+    }
+}
+
+extension BookDimensionsCell: NSControlTextEditingDelegate {
+//    func controlTextDidEndEditing(_ obj: Notification) {
+//        if let subview = textField, let detail = objectValue as? DetailSpec {
+//            let actionManager = application.actionManager
+//            let info = ActionInfo(sender: self)
+//            info[ChangeValueAction.propertyKey] = detail.binding
+//            let value: Any = asNumber ? subview.doubleValue : subview.stringValue
+//            info[ChangeValueAction.valueKey] = value
+//            actionManager.perform(identifier: "ChangeValue", info: info)
+//        }
+//    }
+}
