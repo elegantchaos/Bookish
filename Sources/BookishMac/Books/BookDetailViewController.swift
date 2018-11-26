@@ -151,7 +151,7 @@ extension BookDetailViewController: ActionContextProvider, PersonChangeObserver 
 // MARK: Table Support
 
 protocol BookDetailTableCell {
-    func setup(for: BookDetailViewController, row: Int, info: DetailDataSource.RowInfo)
+    func setup(for: BookDetailViewController, row: Int, isPerson: Bool)
     func keyView() -> NSView?
 }
 
@@ -167,18 +167,15 @@ extension BookDetailViewController: NSTableViewDataSource, NSTableViewDelegate {
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         guard let columnID = tableColumn?.identifier else { return nil }
         
-        let info = source.info(for: row)
-        let isHeading = columnID == BookDetailViewController.HeadingColumnID
-        let viewID = isHeading ? BookDetailViewController.HeadingColumnID : NSUserInterfaceItemIdentifier(rawValue: info.identifier)
+        let (kind, isPerson) = source.info(for: row, editing: editing)
+        let headingID = BookDetailViewController.HeadingColumnID
+        let isHeading = columnID == headingID
+        let viewID = isHeading ? headingID : NSUserInterfaceItemIdentifier(rawValue: kind.rawValue)
         
-        guard let view = tableView.makeView(withIdentifier: viewID, owner: self) as? NSTableCellView else { return nil }
-
-        if isHeading {
-            setupHeading(view: view, row: row, info: info)
-        } else if !isHeading {
-            setupValue(view: view, row: row, info: info)
+        guard let view = tableView.makeView(withIdentifier: viewID, owner: self) else { return nil }
+        if let cell = view as? BookDetailTableCell {
+            cell.setup(for: self, row: row, isPerson: isPerson)
         }
-        
         view.scheduleForValidation()
         
         return view
@@ -187,22 +184,6 @@ extension BookDetailViewController: NSTableViewDataSource, NSTableViewDelegate {
     func tableView(_ tableView: NSTableView, shouldSelectRow row: Int) -> Bool {
         AnnotatedTableCellView.updateSelection(tableView: tableView, row: row)
         return true
-    }
-    
-    fileprivate func setupHeading(view: NSView, row: Int, info: DetailDataSource.RowInfo) {
-        if let field = view.subviews.first as? NSTextField {
-            if info.isPerson {
-                field.stringValue = source.person(for: row).role?.name ?? "<unknown role>"
-            } else {
-                field.stringValue = source.details(for: row).label
-            }
-        }
-    }
-    
-    fileprivate func setupValue(view: NSTableCellView, row: Int, info: DetailDataSource.RowInfo) {
-        if let bindable = view as? BookDetailTableCell {
-            bindable.setup(for: self, row: row, info: info)
-        }
     }
     
     fileprivate func scheduleRecalculateKeyViews() {
