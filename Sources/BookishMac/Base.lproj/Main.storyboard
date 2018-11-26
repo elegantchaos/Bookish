@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
+        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -372,7 +373,7 @@
                                                 <action selector="performAction:" target="Ady-hI-5gd" id="7NE-A6-iSj"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Remove Person" identifier="menu.RemovePerson" id="b2J-PJ-ZCr">
+                                        <menuItem title="Remove Person" identifier="menu.RemoveRelationship" id="b2J-PJ-ZCr">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="performAction:" target="Ady-hI-5gd" id="KWo-3k-lfO"/>
@@ -493,12 +494,12 @@
                                 </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="TAF-Mz-qpr"/>
                                 <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="dlb-Xe-WiO"/>
-                                <toolbarItem implicitItemIdentifier="42A4917E-FFCE-440D-90B8-1331166CC46A" explicitItemIdentifier="toolbar.PopupPersonMenu" label="Add" paletteLabel="Add Person" image="AddPerson" sizingBehavior="auto" id="reg-Dx-A2Q" userLabel="Add Person" customClass="ViewBasedToolbarItem" customModule="BookishMac" customModuleProvider="target">
+                                <toolbarItem implicitItemIdentifier="42A4917E-FFCE-440D-90B8-1331166CC46A" explicitItemIdentifier="toolbar.PopupPersonMenu" label="Add" paletteLabel="Add Person" image="AddRelationship" sizingBehavior="auto" id="reg-Dx-A2Q" userLabel="Add Person" customClass="ViewBasedToolbarItem" customModule="BookishMac" customModuleProvider="target">
                                     <nil key="toolTip"/>
                                     <button key="view" identifier="toolbar.button.PopupPersonMenu" verticalHuggingPriority="750" id="uup-kx-3kb">
                                         <rect key="frame" x="18" y="14" width="32" height="32"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="AddPerson" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="frN-4k-1rM">
+                                        <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="AddRelationship" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="frN-4k-1rM">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
@@ -507,12 +508,12 @@
                                         </connections>
                                     </button>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="551D39AE-40C4-4D12-BEB0-1B8440DCD640" explicitItemIdentifier="toolbar.RemovePerson" label="Remove" paletteLabel="Remove Person" image="RemovePerson" sizingBehavior="auto" id="2Iz-4y-jpV" customClass="ViewBasedToolbarItem" customModule="BookishMac" customModuleProvider="target">
+                                <toolbarItem implicitItemIdentifier="551D39AE-40C4-4D12-BEB0-1B8440DCD640" explicitItemIdentifier="toolbar.RemoveRelationship" label="Remove" paletteLabel="Remove Person" image="RemoveRelationship" sizingBehavior="auto" id="2Iz-4y-jpV" customClass="ViewBasedToolbarItem" customModule="BookishMac" customModuleProvider="target">
                                     <nil key="toolTip"/>
-                                    <button key="view" identifier="toolbar.button.RemovePerson" verticalHuggingPriority="750" id="PpS-3K-9lR">
+                                    <button key="view" identifier="toolbar.button.RemoveRelationship" verticalHuggingPriority="750" id="PpS-3K-9lR">
                                         <rect key="frame" x="29" y="14" width="32" height="32"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="RemovePerson" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="aPU-Zr-BG1">
+                                        <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="RemoveRelationship" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="aPU-Zr-BG1">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
@@ -746,7 +747,7 @@
                                             <rect key="frame" x="0.0" y="29" width="200" height="240"/>
                                             <clipView key="contentView" drawsBackground="NO" id="25y-2t-AU1">
                                                 <rect key="frame" x="0.0" y="0.0" width="200" height="240"/>
-                                                <autoresizingMask key="autoresizingMask"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <tableView identifier="people" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnSelection="YES" autosaveColumns="NO" rowHeight="21" rowSizeStyle="automatic" usesAutomaticRowHeights="YES" viewBased="YES" id="T2o-3X-3Tj">
                                                         <rect key="frame" x="0.0" y="0.0" width="200" height="240"/>
@@ -907,7 +908,7 @@
                                             <rect key="frame" x="0.0" y="29" width="200" height="240"/>
                                             <clipView key="contentView" drawsBackground="NO" id="MeP-Ej-IYa">
                                                 <rect key="frame" x="0.0" y="0.0" width="200" height="240"/>
-                                                <autoresizingMask key="autoresizingMask"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <tableView identifier="books" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnSelection="YES" autosaveColumns="NO" rowHeight="21" rowSizeStyle="automatic" usesAutomaticRowHeights="YES" viewBased="YES" id="jZN-rJ-ulS">
                                                         <rect key="frame" x="0.0" y="0.0" width="200" height="240"/>
@@ -1102,7 +1103,7 @@
                                             <rect key="frame" x="4" y="4" width="816" height="698"/>
                                             <clipView key="contentView" drawsBackground="NO" id="5CS-Yo-P4n">
                                                 <rect key="frame" x="0.0" y="0.0" width="816" height="698"/>
-                                                <autoresizingMask key="autoresizingMask"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <tableView identifier="book-details" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="none" columnReordering="NO" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="22" rowSizeStyle="automatic" usesAutomaticRowHeights="YES" viewBased="YES" id="vV5-vW-Afl" userLabel="Table">
                                                         <rect key="frame" x="0.0" y="0.0" width="816" height="698"/>
@@ -1201,7 +1202,7 @@
                                                                                     <action selector="performAction:" target="dg1-Od-cPv" id="gT6-Ji-XI8"/>
                                                                                 </connections>
                                                                             </button>
-                                                                            <button identifier="button.RemovePerson" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7vP-8A-rYs" userLabel="Remove">
+                                                                            <button identifier="button.RemoveRelationship" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7vP-8A-rYs" userLabel="Remove">
                                                                                 <rect key="frame" x="686" y="4" width="15" height="16"/>
                                                                                 <buttonCell key="cell" type="inline" bezelStyle="inline" image="Minus" imagePosition="overlaps" alignment="center" controlSize="mini" lineBreakMode="truncatingTail" state="on" inset="2" id="HJk-Ws-ykn">
                                                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -1221,7 +1222,7 @@
                                                                                     <action selector="performAction:" target="dg1-Od-cPv" id="yUa-Dm-yFb"/>
                                                                                 </connections>
                                                                             </button>
-                                                                            <comboBox verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="h95-F0-cRw">
+                                                                            <comboBox verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="h95-F0-cRw" customClass="AnnotatedComboBox" customModule="BookishMac" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="-2" width="672" height="26"/>
                                                                                 <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" numberOfVisibleItems="5" id="BZT-5h-Anq">
                                                                                     <font key="font" metaFont="system"/>
@@ -1474,7 +1475,7 @@
                                             <rect key="frame" x="96" y="4" width="724" height="608"/>
                                             <clipView key="contentView" drawsBackground="NO" id="qJ4-6Y-fkk">
                                                 <rect key="frame" x="0.0" y="0.0" width="724" height="608"/>
-                                                <autoresizingMask key="autoresizingMask"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <tableView identifier="person-details" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="none" columnReordering="NO" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="24" rowSizeStyle="automatic" usesAutomaticRowHeights="YES" viewBased="YES" id="jHn-8w-0MB">
                                                         <rect key="frame" x="0.0" y="0.0" width="724" height="608"/>
@@ -1624,7 +1625,7 @@
     </scenes>
     <resources>
         <image name="AddBook" width="32" height="32"/>
-        <image name="AddPerson" width="32" height="32"/>
+        <image name="AddRelationship" width="128" height="128"/>
         <image name="Book" width="32" height="32"/>
         <image name="Books" width="32" height="32"/>
         <image name="ChooseDateSmall" width="12" height="12"/>
@@ -1634,11 +1635,11 @@
         <image name="NSAddTemplate" width="11" height="11"/>
         <image name="NSRemoveTemplate" width="11" height="11"/>
         <image name="People" width="32" height="32"/>
-        <image name="Person" width="16" height="16"/>
+        <image name="Person" width="32" height="32"/>
         <image name="PersonPlaceholder" width="64" height="64"/>
         <image name="Plus" width="12" height="12"/>
         <image name="RemoveBook" width="32" height="32"/>
-        <image name="RemovePerson" width="32" height="32"/>
+        <image name="RemoveRelationship" width="128" height="128"/>
         <image name="Reveal" width="12" height="12"/>
         <namedColor name="Bookish Detail">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

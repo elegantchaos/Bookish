@@ -127,7 +127,7 @@ class BookishUITests: UITests {
         
         // button
         with(scope: table("book-details")) { clickField("person-2") }
-        clickButton("button.RemovePerson")
+        clickButton("button.RemoveRelationship")
         XCTAssertEqual(count - 1, tableRowCount("book-details"))
         
         // toolbar
@@ -154,7 +154,7 @@ class BookishUITests: UITests {
         XCTAssertFalse(menuItem("Delete Book").isEnabled)
     }
 
-    func testAddPersonState() {
+    func testAddRelationshipState() {
         launch(arguments: ["--test-document"])
         clickTableRow(0, table: "books")
         XCTAssertTrue(menuItem(at: ["Add Person", "Author"]).isEnabled)
@@ -169,7 +169,7 @@ class BookishUITests: UITests {
         XCTAssertFalse(toolbarButton("Add").isEnabled)
     }
 
-    func testRemovePersonState() {
+    func testRemoveRelationshipState() {
         launch(arguments: ["--test-document"])
         clickTableRow(0, table: "books")
         XCTAssertFalse(menuItem("Remove Person").isEnabled)
@@ -180,7 +180,7 @@ class BookishUITests: UITests {
         clickMenuItem("Book")
         XCTAssertTrue(menuItem("Remove Person").isEnabled)
         XCTAssertTrue(toolbarButton("Remove", count: 1).isEnabled)
-        XCTAssertTrue(button("button.RemovePerson").isEnabled)
+        XCTAssertTrue(button("button.RemoveRelationship").isEnabled)
         
         clickTableRow(1, table: "books")
         table("books").click()

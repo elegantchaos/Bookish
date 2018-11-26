@@ -132,11 +132,15 @@ extension BookDetailViewController: ActionContextProvider, PersonChangeObserver 
     func added(role: Relationship) {
         let index = source.insert(relationship: role)
         detailsView.insertRows(at: IndexSet(integer: index), withAnimation: .slideDown)
+        availableRows.insert(index)
+        scheduleRecalculateKeyViews()
     }
     
     func removed(role: Relationship) {
         if let row = source.remove(relationship: role) {
             detailsView.removeRows(at: IndexSet(integer: row), withAnimation: .slideUp)
+            availableRows.remove(row)
+            scheduleRecalculateKeyViews()
         }
     }
 }
@@ -157,6 +161,7 @@ extension BookDetailViewController: NSTableViewDataSource, NSTableViewDelegate {
         return source.rows
     }
 
+        
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         guard let columnID = tableColumn?.identifier else { return nil }
         
@@ -177,16 +182,20 @@ extension BookDetailViewController: NSTableViewDataSource, NSTableViewDelegate {
         return view
     }
 
-    
-    func tableView(_ tableView: NSTableView, didAdd rowView: NSTableRowView, forRow row: Int) {
-        availableRows.insert(row)
-        scheduleRecalculateKeyViews()
+    func tableView(_ tableView: NSTableView, shouldSelectRow row: Int) -> Bool {
+        AnnotatedTableCellView.updateSelection(tableView: tableView, row: row)
+        return true
     }
     
-    func tableView(_ tableView: NSTableView, didRemove rowView: NSTableRowView, forRow row: Int) {
-        availableRows.remove(row)
-        scheduleRecalculateKeyViews()
-    }
+//    func tableView(_ tableView: NSTableView, didAdd rowView: NSTableRowView, forRow row: Int) {
+//        availableRows.insert(row)
+//        scheduleRecalculateKeyViews()
+//    }
+    
+//    func tableView(_ tableView: NSTableView, didRemove rowView: NSTableRowView, forRow row: Int) {
+//        availableRows.remove(row)
+//        scheduleRecalculateKeyViews()
+//    }
     
     fileprivate func setupHeading(view: NSView, row: Int, info: DetailDataSource.RowInfo) {
         if let field = view.subviews.first as? NSTextField {

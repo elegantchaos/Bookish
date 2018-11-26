@@ -40,7 +40,7 @@ extension BookPersonCell: BookDetailTableCell {
 
 extension BookPersonCell: ActionContextProvider {
     func provide(context: ActionContext) {
-        context.info[PersonAction.roleKey] = objectValue as? Relationship
+        context.info[PersonAction.relationshipKey] = objectValue as? Relationship
     }
 
 }
@@ -69,9 +69,9 @@ extension BookPersonCell: NSComboBoxDelegate {
         if let relationship = objectValue as? Relationship, newPerson != relationship.person {
             let actionManager = application.actionManager
             let info = ActionInfo(sender: self)
-            info[PersonAction.roleKey] = relationship
+            info[PersonAction.relationshipKey] = relationship
             info[PersonAction.personKey] = newPerson
-            actionManager.perform(identifier: "ChangeRolePerson", info: info)
+            actionManager.perform(identifier: "ChangeRelationship", info: info)
         }
     }
 
@@ -79,9 +79,9 @@ extension BookPersonCell: NSComboBoxDelegate {
         if let relationship = objectValue as? Relationship {
             let actionManager = application.actionManager
             let info = ActionInfo(sender: self)
-            info[PersonAction.roleKey] = relationship
+            info[PersonAction.relationshipKey] = relationship
             info[PersonAction.newPersonKey] = newPersonName
-            actionManager.perform(identifier: "ChangeRolePerson", info: info)
+            actionManager.perform(identifier: "ChangeRelationship", info: info)
         }
     }
 

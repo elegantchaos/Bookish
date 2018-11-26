@@ -17,18 +17,29 @@ class AnnotatedTableCellView: NSTableCellView, NSTextFieldDelegate {
         }
     }
 
-    private func hideButtons() {
+    public func hideButtons() {
         for button in annotationButtons {
             button.isHidden = true
         }
     }
     
-    func showButtons() {
+    public func showButtons() {
         for button in annotationButtons {
             button.isHidden = false
         }
     }
     
+    static public func updateSelection(tableView: NSTableView, row: Int) {
+        let oldRow = tableView.selectedRow
+        if oldRow != -1, let oldSelection = tableView.view(atColumn: 1, row: oldRow, makeIfNecessary: false) as? AnnotatedTableCellView {
+            oldSelection.hideButtons()
+        }
+        
+        if row != -1, let newSelection = tableView.view(atColumn: 1, row: row, makeIfNecessary: false) as? AnnotatedTableCellView {
+            newSelection.showButtons()
+        }
+    }
+
     dynamic func controlTextDidEndEditing(_ obj: Notification) {
         hideButtons()
     }

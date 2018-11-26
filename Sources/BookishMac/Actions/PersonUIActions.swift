@@ -34,7 +34,7 @@ class FillPersonMenuAction: PersonUIAction {
 
 
 class PopupPersonMenuAction: PersonUIAction {
-    override func perform(context: ActionContext) {
+    open override func perform(context: ActionContext, completed: @escaping Completion) {
         if let event = NSApplication.shared.currentEvent, let viewModel = context.info[ActionContext.viewModelKey] as? CollectionDocumentViewModel {
             var view = context.sender as? NSView
             if view == nil {
@@ -45,6 +45,7 @@ class PopupPersonMenuAction: PersonUIAction {
                 NSMenu.popUpContextMenu(viewModel.addPersonMenu, with: event, for: view)
             }
         }
+        completed()
     }
 }
 

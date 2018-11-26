@@ -33,6 +33,7 @@
 		22462E932158ED5000A4C56C /* CollectionIndexViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22462E922158ED5000A4C56C /* CollectionIndexViewController.swift */; };
 		22462E952158EDEA00A4C56C /* CollectionDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22462E942158EDEA00A4C56C /* CollectionDetailViewController.swift */; };
 		22462E972158F65200A4C56C /* CollectionViewActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22462E962158F65200A4C56C /* CollectionViewActions.swift */; };
+		226E8E6B21AC0918001F191F /* AnnotatedComboBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226E8E6A21AC0918001F191F /* AnnotatedComboBox.swift */; };
 		227F4514218352A0000D8B8D /* ImporterActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227F4513218352A0000D8B8D /* ImporterActions.swift */; };
 		227F451621835801000D8B8D /* ImportManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227F451521835801000D8B8D /* ImportManager.swift */; };
 		227F451821835814000D8B8D /* Importer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227F451721835814000D8B8D /* Importer.swift */; };
@@ -176,6 +177,7 @@
 		22462E922158ED5000A4C56C /* CollectionIndexViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionIndexViewController.swift; sourceTree = "<group>"; };
 		22462E942158EDEA00A4C56C /* CollectionDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionDetailViewController.swift; sourceTree = "<group>"; };
 		22462E962158F65200A4C56C /* CollectionViewActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewActions.swift; sourceTree = "<group>"; };
+		226E8E6A21AC0918001F191F /* AnnotatedComboBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotatedComboBox.swift; sourceTree = "<group>"; };
 		227F4513218352A0000D8B8D /* ImporterActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImporterActions.swift; sourceTree = "<group>"; };
 		227F451521835801000D8B8D /* ImportManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportManager.swift; sourceTree = "<group>"; };
 		227F451721835814000D8B8D /* Importer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Importer.swift; sourceTree = "<group>"; };
@@ -313,6 +315,7 @@
 				22D39E522146A84500282467 /* AnnotatedTableCellView.swift */,
 				22D39E5D2146D9F100282467 /* ValidatingButton.swift */,
 				22960329214032520020B3EB /* AnnotatedTextField.swift */,
+				226E8E6A21AC0918001F191F /* AnnotatedComboBox.swift */,
 				22143FD421300F9300B689DF /* CoreDataTransformers.swift */,
 				22D39E5A2146BE4900282467 /* DatePickerPopoverController.swift */,
 				22143FCE212EF9CC00B689DF /* DocumentWindowController.swift */,
@@ -820,7 +823,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# build & run sketchx to export the assets\nswift run sketchx Extras/Bookish.sketch Mac=Assets Sources/BookishMac \n\n# update list of all assets\nfind Sources/BookishMac/Assets.xcassets -type f > Sources/BookishMac/Assets.xcfilelist\n";
+			shellScript = "# build & run sketchx to export the assets\n#swift run sketchx Extras/Bookish.sketch Mac=Assets Sources/BookishMac \n\n# update list of all assets\n#find Sources/BookishMac/Assets.xcassets -type f > Sources/BookishMac/Assets.xcfilelist\n";
 			showEnvVarsInLog = 0;
 		};
 		226EF319217793740012A405 /* Export From Sketch */ = {
@@ -928,6 +931,7 @@
 				224293FB212C1D7500E70510 /* BookIndexViewController.swift in Sources */,
 				22D39E592146BA9C00282467 /* ShowDatePickerAction.swift in Sources */,
 				22D39E512142DB2700282467 /* ViewBasedToolbarItem.swift in Sources */,
+				226E8E6B21AC0918001F191F /* AnnotatedComboBox.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

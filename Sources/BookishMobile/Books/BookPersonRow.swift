@@ -8,18 +8,18 @@ import Actions
 
 class BookPersonRow: BookDetailRow {
     @IBOutlet var personButton: UIButton!
-    var role: Relationship!
+    var relationship: Relationship!
     
     override func setup(row: Int, book: Book, source: DetailDataSource) {
         assert(source.info(for: row).isPerson)
-        role = source.person(for: row)
-        label.text = role.role?.name
-        personButton.setTitle(role.person?.name, for: .normal)
+        relationship = source.person(for: row)
+        label.text = relationship.role?.name
+        personButton.setTitle(relationship.person?.name, for: .normal)
     }
 }
 
 extension BookPersonRow: ActionContextProvider {
     func provide(context: ActionContext) {
-        context.info[PersonAction.roleKey] = role
+        context.info[PersonAction.relationshipKey] = relationship
     }
 }

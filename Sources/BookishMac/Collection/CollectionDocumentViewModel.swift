@@ -41,7 +41,7 @@ import BookishModel
     
     func addPersonItem(kind: String, shortcut: String) -> NSMenuItem {
         let item = NSMenuItem(title: kind, action: ActionManagerMac.Responder.performActionSelector, keyEquivalent: shortcut)
-        item.identifier = NSUserInterfaceItemIdentifier(rawValue: "menu.AddPerson.\(kind)")
+        item.identifier = NSUserInterfaceItemIdentifier(rawValue: "menu.AddRelationship(\"role\": \"\(kind)\")")
         item.keyEquivalentModifierMask = [.command, .option]
         return item
     }
