@@ -15,9 +15,19 @@ class BookDetailViewController: CollectionViewController {
     @IBOutlet weak var titleView: NSTextField!
     @IBOutlet weak var subtitleView: NSTextField!
     
+    @IBOutlet weak var editButton: NSButton!
     @IBOutlet var personList: NSArrayController!
     @IBAction func changeImage(_ sender: Any){
         print("change image")
+    }
+    
+    @IBAction func toggleEditing(_ sender: Any) {
+        editing = !editing
+        editButton.title = editing ? "Done" : "Edit…"
+        selectionChanged()
+        if editing {
+            titleView.becomeFirstResponder()
+        }
     }
     
     var source = DetailDataSource()
@@ -25,6 +35,7 @@ class BookDetailViewController: CollectionViewController {
     var availableRows = IndexSet()
     var keyViewTimer: Timer? = nil
     var bookImage: NSImage?
+    var editing = false
     
     override func awakeFromNib() {
         super.awakeFromNib()

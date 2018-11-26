@@ -1100,13 +1100,13 @@
                                             </customSpacing>
                                         </stackView>
                                         <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="26" horizontalPageScroll="10" verticalLineScroll="26" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EIm-c8-9OE" userLabel="Details Table">
-                                            <rect key="frame" x="4" y="4" width="816" height="698"/>
+                                            <rect key="frame" x="4" y="29" width="816" height="673"/>
                                             <clipView key="contentView" drawsBackground="NO" id="5CS-Yo-P4n">
-                                                <rect key="frame" x="0.0" y="0.0" width="816" height="698"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="816" height="673"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <tableView identifier="book-details" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="none" columnReordering="NO" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="24" rowSizeStyle="automatic" usesAutomaticRowHeights="YES" viewBased="YES" id="vV5-vW-Afl" userLabel="Table">
-                                                        <rect key="frame" x="0.0" y="0.0" width="816" height="698"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="816" height="673"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <size key="intercellSpacing" width="3" height="2"/>
                                                         <color key="backgroundColor" name="Bookish Detail"/>
@@ -1319,15 +1319,27 @@
                                                 <autoresizingMask key="autoresizingMask"/>
                                             </scroller>
                                         </scrollView>
+                                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bB5-JR-2gl">
+                                            <rect key="frame" x="752" y="-3" width="74" height="32"/>
+                                            <buttonCell key="cell" type="push" title="Edit…" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="nfm-QF-mrY">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="toggleEditing:" target="TBH-Sa-Ff0" id="hNp-SN-alz"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="bottom" secondItem="EIm-c8-9OE" secondAttribute="bottom" constant="4" id="3gO-EV-sB7"/>
                                         <constraint firstItem="EIm-c8-9OE" firstAttribute="leading" secondItem="maZ-NJ-kB0" secondAttribute="leading" constant="4" id="GPe-5o-Osf"/>
                                         <constraint firstItem="HhJ-5d-CNv" firstAttribute="leading" secondItem="nPv-jB-4iC" secondAttribute="trailing" constant="4" id="Pgb-fr-Tkx"/>
                                         <constraint firstItem="nPv-jB-4iC" firstAttribute="leading" secondItem="maZ-NJ-kB0" secondAttribute="leading" constant="50" id="S2Q-ms-Nk0"/>
+                                        <constraint firstAttribute="bottom" secondItem="bB5-JR-2gl" secondAttribute="bottom" constant="4" id="Sfs-lt-upO"/>
                                         <constraint firstAttribute="trailing" secondItem="HhJ-5d-CNv" secondAttribute="trailing" constant="4" id="YVz-aI-MEL"/>
                                         <constraint firstAttribute="trailing" secondItem="EIm-c8-9OE" secondAttribute="trailing" constant="4" id="Ywz-aN-v4F"/>
+                                        <constraint firstItem="bB5-JR-2gl" firstAttribute="top" secondItem="EIm-c8-9OE" secondAttribute="bottom" constant="4" id="hxR-1z-AB3"/>
                                         <constraint firstItem="EIm-c8-9OE" firstAttribute="top" secondItem="HhJ-5d-CNv" secondAttribute="bottom" constant="4" id="jWi-L0-5hm"/>
+                                        <constraint firstAttribute="trailing" secondItem="bB5-JR-2gl" secondAttribute="trailing" constant="4" id="mOe-00-VBH"/>
                                         <constraint firstItem="nPv-jB-4iC" firstAttribute="top" secondItem="maZ-NJ-kB0" secondAttribute="top" constant="16" id="pcO-4H-KeH"/>
                                         <constraint firstItem="HhJ-5d-CNv" firstAttribute="centerY" secondItem="nPv-jB-4iC" secondAttribute="centerY" id="tfl-TS-ooi"/>
                                     </constraints>
@@ -1344,6 +1356,7 @@
                     </view>
                     <connections>
                         <outlet property="detailsView" destination="vV5-vW-Afl" id="vNS-T3-T7d"/>
+                        <outlet property="editButton" destination="bB5-JR-2gl" id="ria-eG-4HB"/>
                         <outlet property="imageView" destination="nPv-jB-4iC" id="a6c-Sp-1gz"/>
                         <outlet property="personList" destination="NUZ-ew-ZHD" id="SVP-2s-l5b"/>
                         <outlet property="subtitleView" destination="H8A-04-75V" id="JB7-lH-3xQ"/>
@@ -1636,7 +1649,7 @@
         <image name="NSAddTemplate" width="11" height="11"/>
         <image name="NSRemoveTemplate" width="11" height="11"/>
         <image name="People" width="32" height="32"/>
-        <image name="Person" width="16" height="16"/>
+        <image name="Person" width="32" height="32"/>
         <image name="PersonPlaceholder" width="64" height="64"/>
         <image name="Plus" width="12" height="12"/>
         <image name="RemoveBook" width="32" height="32"/>
