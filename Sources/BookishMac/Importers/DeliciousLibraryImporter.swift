@@ -68,16 +68,18 @@ class DeliciousLibraryImportSession: ImportSession {
                 }
                 
                 let author: Person
-                if creators != "", let cached = people[creators] {
-                    author = cached
-                } else {
-                    author = Person(context: context)
-                    author.name = creators
-                    people[creators] = author
-                }
-                
-                let relationship = author.relationship(as: Role.Default.authorName)
-                relationship.addToBooks(book)
+                let trimmedCreators = creators.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+                if trimmedCreators != "" {
+                    if let cached = people[trimmedCreators] {
+                        author = cached
+                    } else {
+                        author = Person(context: context)
+                        author.name = trimmedCreators
+                        people[trimmedCreators] = author
+                    }
+                    let relationship = author.relationship(as: Role.Default.authorName)
+                    relationship.addToBooks(book)
+                }                
             }
         }
     }
