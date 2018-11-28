@@ -59,10 +59,7 @@ class DeliciousLibraryImportSession: ImportSession {
                 book.modified = record["lastModificationDate"] as? Date
                 book.published = record["publishDate"] as? Date
                 
-                if let rawData = try? PropertyListSerialization.data(fromPropertyList: record, format: .xml, options: 0) {
-//                if let rawData = try? JSONSerialization.data(withJSONObject: record, options: JSONSerialization.WritingOptions.prettyPrinted) {
-                    book.importRaw = String(data: rawData, encoding: .utf8)
-                }
+                book.importRaw = record.jsonDump()
                 
                 book.format = format
                 
