@@ -44,7 +44,8 @@ class Application: NSObject {
         actionManager.register([
             ShowDatePickerAction(identifier: "ShowDatePicker"),
             InsertItemAction(identifier: "InsertItem"),
-            RemoveItemAction(identifier: "RemoveItem")
+            RemoveItemAction(identifier: "RemoveItem"),
+            ToggleEditingAction(identifier: "ToggleEditing")
             ])
         
         actionManager.installResponder()

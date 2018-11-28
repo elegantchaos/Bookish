@@ -192,6 +192,12 @@
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="uyl-h8-XO2"/>
+                                        <menuItem title="Edit Book" keyEquivalent="e" identifier="menu.ToggleEditing" id="2nc-k6-Zb7">
+                                            <connections>
+                                                <action selector="performAction:" target="Ady-hI-5gd" id="enT-Op-kT6"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="oAg-Xw-rzY"/>
                                         <menuItem title="Find" id="4EN-yA-p0u">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <menu key="submenu" title="Find" id="1b7-l0-nxx">
@@ -468,7 +474,7 @@
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="331" y="-569"/>
+            <point key="canvasLocation" x="164" y="-794"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
@@ -1480,14 +1486,14 @@
                                                 <autoresizingMask key="autoresizingMask"/>
                                             </scroller>
                                         </scrollView>
-                                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bB5-JR-2gl">
+                                        <button identifier="button.ToggleEditing" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bB5-JR-2gl">
                                             <rect key="frame" x="661" y="-3" width="64" height="32"/>
                                             <buttonCell key="cell" type="push" title="Edit" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="nfm-QF-mrY">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
                                             <connections>
-                                                <action selector="toggleEditing:" target="TBH-Sa-Ff0" id="hNp-SN-alz"/>
+                                                <action selector="performAction:" target="dg1-Od-cPv" id="Svd-1f-jcS"/>
                                             </connections>
                                         </button>
                                     </subviews>
@@ -1802,7 +1808,7 @@
     <resources>
         <image name="AddBook" width="32" height="32"/>
         <image name="AddRelationship" width="32" height="32"/>
-        <image name="Book" width="32" height="32"/>
+        <image name="Book" width="16" height="16"/>
         <image name="Books" width="32" height="32"/>
         <image name="ChooseDateSmall" width="12" height="12"/>
         <image name="CoverPlaceholder" width="64" height="64"/>
@@ -1811,7 +1817,7 @@
         <image name="NSAddTemplate" width="11" height="11"/>
         <image name="NSRemoveTemplate" width="11" height="11"/>
         <image name="People" width="32" height="32"/>
-        <image name="Person" width="32" height="32"/>
+        <image name="Person" width="16" height="16"/>
         <image name="PersonPlaceholder" width="64" height="64"/>
         <image name="Plus" width="12" height="12"/>
         <image name="RemoveBook" width="32" height="32"/>

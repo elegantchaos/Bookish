@@ -6,6 +6,7 @@
 import Foundation
 import BookishModel
 import CoreData
+import JSONDump
 
 class DeliciousLibraryImporter: Importer {
     

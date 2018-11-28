@@ -86,20 +86,22 @@ class BookDetailViewController: CollectionViewController {
     }
 }
 
+// MARK: EditableView Support
+
+extension BookDetailViewController: EditableView {
+    func toggleEditing() {
+        editing = !editing
+        editButton.title = editing ? "Done" : "Edit"
+        let newResponder: NSResponder = editing ? titleView : indexView
+        view.window?.makeFirstResponder(newResponder)
+        selectionChanged()
+    }
+
+}
 
 // MARK: Local IBActions
 
 extension BookDetailViewController {
-    @IBAction func toggleEditing(_ sender: Any) {
-        editing = !editing
-        editButton.title = editing ? "Done" : "Edit"
-        if editing {
-            titleView.becomeFirstResponder()
-        } else {
-            view.window?.makeFirstResponder(nil)
-        }
-        selectionChanged()
-    }
     
     @IBAction func changeImage(_ sender: Any){
         print("change image")
@@ -128,6 +130,7 @@ extension BookDetailViewController: ActionContextProvider, PersonChangeObserver 
         if let selection = indexView.indexArray.selectedObjects as? [Book] {
             context.info[ActionContext.selectionKey] = selection
             context.info.addObserver(self)
+            context.info[ToggleEditingAction.editableKey] = self
         }
     }
     
