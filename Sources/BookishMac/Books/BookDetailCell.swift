@@ -10,7 +10,7 @@ import Actions
 fileprivate var detailBindingContext: Int = 0
 
 class BookDetailCell: NSTableCellView, BookDetailTableCell {
-    var detailView: BookDetailViewController?
+    var detailView: BookDetailViewController!
     var observer: NSKeyValueObservation?
     var asNumber = false
     
@@ -56,7 +56,7 @@ class BookDetailCell: NSTableCellView, BookDetailTableCell {
 
 extension BookDetailCell: NSControlTextEditingDelegate {
     func controlTextDidEndEditing(_ obj: Notification) {
-        if let subview = textField, let detail = objectValue as? DetailSpec {
+        if detailView.editing, let subview = textField, let detail = objectValue as? DetailSpec {
             let actionManager = application.actionManager
             let info = ActionInfo(sender: self)
             info[ChangeValueAction.propertyKey] = detail.binding
