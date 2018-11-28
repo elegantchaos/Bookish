@@ -59,7 +59,10 @@ class DeliciousLibraryImportSession: ImportSession {
                 book.modified = record["lastModificationDate"] as? Date
                 book.published = record["publishDate"] as? Date
                 
-                book.importRaw = record.description
+                if let rawData = try? PropertyListSerialization.data(fromPropertyList: record, format: .xml, options: 0) {
+//                if let rawData = try? JSONSerialization.data(withJSONObject: record, options: JSONSerialization.WritingOptions.prettyPrinted) {
+                    book.importRaw = String(data: rawData, encoding: .utf8)
+                }
                 
                 book.format = format
                 
@@ -67,19 +70,21 @@ class DeliciousLibraryImportSession: ImportSession {
                     book.imageURL = url
                 }
                 
-                let author: Person
-                let trimmedCreators = creators.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-                if trimmedCreators != "" {
-                    if let cached = people[trimmedCreators] {
-                        author = cached
-                    } else {
-                        author = Person(context: context)
-                        author.name = trimmedCreators
-                        people[trimmedCreators] = author
+                for creator in creators.split(separator: "\n") {
+                    let trimmed = creator.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+                    if trimmed != "" {
+                        let author: Person
+                        if let cached = people[trimmed] {
+                            author = cached
+                        } else {
+                            author = Person(context: context)
+                            author.name = trimmed
+                            people[trimmed] = author
+                        }
+                        let relationship = author.relationship(as: Role.Default.authorName)
+                        relationship.addToBooks(book)
                     }
-                    let relationship = author.relationship(as: Role.Default.authorName)
-                    relationship.addToBooks(book)
-                }                
+                }
             }
         }
     }
