@@ -85,7 +85,12 @@ extension NSView {
         appendValidatableItems(to: &items)
         for item in items {
             if let button = item as? NSButton, let identifier = item.identifier?.rawValue {
-                button.isEnabled = actionManager.validate(identifier: identifier, info: ActionInfo(sender: button))
+                let validation = actionManager.validate(identifier: identifier, info: ActionInfo(sender: button))
+                button.isEnabled = validation.enabled
+                button.isHidden = !validation.visible
+                if let name = validation.name {
+                    button.title = name
+                }
             }
         }
     }

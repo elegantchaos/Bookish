@@ -6,14 +6,19 @@
 import Actions
 
 protocol EditableView {
+    var editing: Bool { get }
     func toggleEditing()
 }
 
 class ToggleEditingAction: Action {
     static let editableKey = "editable"
     
-    override func validate(context: ActionContext) -> Bool {
-        return (context[ToggleEditingAction.editableKey] as? EditableView) != nil
+    override func validate(context: ActionContext) -> Validation {
+        if let _ = context[ToggleEditingAction.editableKey] as? EditableView {
+            return Action.Validation()
+        }
+        
+        return Validation(visible: false)
     }
     
     override func perform(context: ActionContext) {
