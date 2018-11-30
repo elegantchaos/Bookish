@@ -16,8 +16,8 @@ class BookPersonCell: NSTableCellView {
 }
 
 extension BookPersonCell: BookDetailTableCell {
-    func setup(for view: BookDetailViewController, row: Int, isPerson: Bool) {
-        assert(isPerson)
+    func setup(for view: BookDetailViewController, row: DetailDataSource.RowInfo) {
+        assert(row.category == .person)
         let source = view.source
         detailView = view
         let relationship = source.person(for: row)

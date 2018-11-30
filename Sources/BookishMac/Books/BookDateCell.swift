@@ -12,8 +12,8 @@ class BookDateCell: NSTableCellView {
 }
 
 extension BookDateCell: BookDetailTableCell {
-    func setup(for view: BookDetailViewController, row: Int, isPerson: Bool) {
-        assert(!isPerson)
+    func setup(for view: BookDetailViewController, row: DetailDataSource.RowInfo) {
+        assert(row.category == .detail)
         if let subview = textField,
             let index = view.indexView.indexArray,
             let transformer = ValueTransformer(forName: NSValueTransformerName(rawValue: "DateToString")) {

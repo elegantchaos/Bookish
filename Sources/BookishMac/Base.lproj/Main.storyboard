@@ -1294,8 +1294,42 @@
                                                                             <outlet property="removeButton" destination="uZJ-ZI-bfH" id="cHS-aQ-oaH"/>
                                                                         </connections>
                                                                     </tableCellView>
+                                                                    <tableCellView identifier="publisher" id="efO-r1-NRc" userLabel="publisher" customClass="BookPublisherCell" customModule="BookishMac" customModuleProvider="target">
+                                                                        <rect key="frame" x="90" y="77" width="623" height="23"/>
+                                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                        <subviews>
+                                                                            <button identifier="button.RevealPerson" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cYg-KH-1LT" userLabel="Reveal">
+                                                                                <rect key="frame" x="604" y="3" width="15" height="16"/>
+                                                                                <buttonCell key="cell" type="inline" bezelStyle="inline" image="Reveal" imagePosition="only" alignment="center" controlSize="mini" lineBreakMode="truncatingTail" state="on" inset="2" id="WX4-oJ-Dnd">
+                                                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                                    <font key="font" metaFont="smallSystemBold"/>
+                                                                                </buttonCell>
+                                                                            </button>
+                                                                            <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="ykz-Tv-Hz6">
+                                                                                <rect key="frame" x="2" y="2" width="602" height="18"/>
+                                                                                <textFieldCell key="cell" selectable="YES" sendsActionOnEndEditing="YES" alignment="left" placeholderString="value" id="Y9d-m4-U5Q">
+                                                                                    <font key="font" metaFont="systemBold" size="14"/>
+                                                                                    <color key="textColor" name="Bookish Detail Text"/>
+                                                                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                                                </textFieldCell>
+                                                                                <connections>
+                                                                                    <binding destination="TBH-Sa-Ff0" name="font" keyPath="self.cvm.detailFont" id="kW3-Pt-N3A"/>
+                                                                                </connections>
+                                                                            </textField>
+                                                                        </subviews>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="bottom" secondItem="ykz-Tv-Hz6" secondAttribute="bottom" constant="2" id="JcN-6g-dPS"/>
+                                                                            <constraint firstItem="cYg-KH-1LT" firstAttribute="centerY" secondItem="ykz-Tv-Hz6" secondAttribute="centerY" id="Oi9-Gk-xft"/>
+                                                                            <constraint firstItem="cYg-KH-1LT" firstAttribute="leading" secondItem="ykz-Tv-Hz6" secondAttribute="trailing" constant="2" id="elR-w6-MjD"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="cYg-KH-1LT" secondAttribute="trailing" constant="4" id="iTS-DC-oHV"/>
+                                                                            <constraint firstItem="ykz-Tv-Hz6" firstAttribute="leading" secondItem="efO-r1-NRc" secondAttribute="leading" constant="4" id="vrH-lR-JKd"/>
+                                                                        </constraints>
+                                                                        <connections>
+                                                                            <outlet property="publisherField" destination="ykz-Tv-Hz6" id="MxR-Gn-pNX"/>
+                                                                        </connections>
+                                                                    </tableCellView>
                                                                     <tableCellView identifier="date" id="DyG-Q7-Wwd" userLabel="date" customClass="BookDateCell" customModule="BookishMac" customModuleProvider="target">
-                                                                        <rect key="frame" x="90" y="77" width="623" height="24"/>
+                                                                        <rect key="frame" x="90" y="102" width="623" height="24"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="ZVF-Ib-kQh">
@@ -1322,7 +1356,7 @@
                                                                         </connections>
                                                                     </tableCellView>
                                                                     <tableCellView identifier="editableDate" id="7Lf-1O-gT0" userLabel="date editable" customClass="BookEditableDateCell" customModule="BookishMac" customModuleProvider="target">
-                                                                        <rect key="frame" x="90" y="103" width="623" height="24"/>
+                                                                        <rect key="frame" x="90" y="128" width="623" height="24"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="lhg-Qc-OrU" customClass="AnnotatedTextField" customModule="BookishMac" customModuleProvider="target">
@@ -1359,7 +1393,7 @@
                                                                         </connections>
                                                                     </tableCellView>
                                                                     <tableCellView identifier="editableDimensions" id="GRN-RI-c8z" userLabel="dimensions" customClass="BookDimensionsCell" customModule="BookishMac" customModuleProvider="target">
-                                                                        <rect key="frame" x="90" y="129" width="623" height="24"/>
+                                                                        <rect key="frame" x="90" y="154" width="623" height="24"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <stackView distribution="fillEqually" orientation="horizontal" alignment="top" spacing="10" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dpj-i7-uGg">
@@ -1811,13 +1845,13 @@
         <image name="Book" width="16" height="16"/>
         <image name="Books" width="32" height="32"/>
         <image name="ChooseDateSmall" width="12" height="12"/>
-        <image name="CoverPlaceholder" width="64" height="64"/>
+        <image name="CoverPlaceholder" width="512" height="512"/>
         <image name="HilightMarker" width="4" height="36"/>
         <image name="Minus" width="12" height="12"/>
         <image name="NSAddTemplate" width="11" height="11"/>
         <image name="NSRemoveTemplate" width="11" height="11"/>
         <image name="People" width="32" height="32"/>
-        <image name="Person" width="16" height="16"/>
+        <image name="Person" width="32" height="32"/>
         <image name="PersonPlaceholder" width="64" height="64"/>
         <image name="Plus" width="12" height="12"/>
         <image name="RemoveBook" width="32" height="32"/>

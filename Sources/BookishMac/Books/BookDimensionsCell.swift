@@ -16,8 +16,8 @@ class BookDimensionsCell: NSTableCellView, BookDetailTableCell {
     @IBOutlet weak var heightField: NSTextField!
     @IBOutlet weak var lengthField: NSTextField!
     
-    func setup(for view: BookDetailViewController, row: Int, isPerson: Bool) {
-        assert(!isPerson)
+    func setup(for view: BookDetailViewController, row: DetailDataSource.RowInfo) {
+        assert(row.category == .detail)
         
         index = view.indexView.indexArray
         setupValue(field: widthField, property: "width")
