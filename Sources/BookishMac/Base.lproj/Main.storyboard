@@ -1298,12 +1298,15 @@
                                                                         <rect key="frame" x="90" y="77" width="623" height="23"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
-                                                                            <button identifier="button.RevealPerson" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cYg-KH-1LT" userLabel="Reveal">
+                                                                            <button identifier="button.RevealPublisher" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cYg-KH-1LT" userLabel="Reveal">
                                                                                 <rect key="frame" x="604" y="3" width="15" height="16"/>
                                                                                 <buttonCell key="cell" type="inline" bezelStyle="inline" image="Reveal" imagePosition="only" alignment="center" controlSize="mini" lineBreakMode="truncatingTail" state="on" inset="2" id="WX4-oJ-Dnd">
                                                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                                     <font key="font" metaFont="smallSystemBold"/>
                                                                                 </buttonCell>
+                                                                                <connections>
+                                                                                    <action selector="performAction:" target="dg1-Od-cPv" id="r6G-Ud-WyH"/>
+                                                                                </connections>
                                                                             </button>
                                                                             <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="ykz-Tv-Hz6">
                                                                                 <rect key="frame" x="2" y="2" width="602" height="18"/>

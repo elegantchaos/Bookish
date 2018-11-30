@@ -31,7 +31,7 @@ extension BookPublisherCell: BookDetailTableCell {
 
 extension BookPublisherCell: ActionContextProvider {
     func provide(context: ActionContext) {
-//        context.info[PersonAction.publ] = objectValue as? Relationship
+        context.info[PublisherAction.publisherKey] = objectValue as? Publisher
     }
     
 }
