@@ -15,16 +15,9 @@ class CollectionWindowController: NSWindowController, DocumentWindowController, 
     typealias ViewModel = CollectionDocumentViewModel
     
     var bookIndexController: BookIndexViewController?
-    var bookDetailController: BookDetailViewController?
-    
     var personIndexController: PersonIndexViewController?
-    var personDetailController: PersonDetailViewController?
-
     var publisherIndexController: PublisherIndexViewController?
-//    var personDetailController: PersonDetailViewController?
-
     var seriesIndexController: SeriesIndexViewController?
-    //    var personDetailController: PersonDetailViewController?
 
     override func windowDidLoad() {
         super.windowDidLoad()
@@ -62,6 +55,24 @@ extension CollectionWindowController: PersonViewer {
         if let model = viewModel {
             personIndexController?.select(people: [person])
             model.mode = .people
+        }
+    }
+}
+
+extension CollectionWindowController: PublisherViewer {
+    func reveal(publisher: Publisher) {
+        if let model = viewModel {
+            publisherIndexController?.select(publishers: [publisher])
+            model.mode = .publishers
+        }
+    }
+}
+
+extension CollectionWindowController: SeriesViewer {
+    func reveal(series: Series) {
+        if let model = viewModel {
+            seriesIndexController?.select(series: [series])
+            model.mode = .series
         }
     }
 }

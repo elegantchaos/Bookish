@@ -32,10 +32,6 @@ class BookDetailViewController: CollectionViewController {
     
     override func viewWillAppear() {
         super.viewWillAppear()
-
-        if let window = view.window?.windowController as? CollectionWindowController {
-            window.bookDetailController = self
-        }
         
         personList.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
         

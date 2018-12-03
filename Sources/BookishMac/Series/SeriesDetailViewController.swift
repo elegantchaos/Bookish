@@ -1,5 +1,5 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-//  Created by Sam Deane on 13/09/2018.
+//  Created by Sam Deane on 03/12/2018.
 //  All code (c) 2018 - present day, Elegant Chaos Limited.
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
@@ -8,25 +8,25 @@ import Actions
 import BookishModel
 import Dispatch
 
-class PersonDetailViewController: CollectionViewController {
+class SeriesDetailViewController: CollectionViewController {
     @IBOutlet weak var nameView: NSTextField!
     @IBOutlet weak var notesView: NSTextField!
-    @IBOutlet weak var indexView: PersonIndexViewController!
+    @IBOutlet weak var indexView: SeriesIndexViewController!
     @IBOutlet weak var detailsView: NSTableView!
-
+    
     var indexObserver: NSKeyValueObservation?
     var rows = [NSManagedObject]()
     var availableRows = IndexSet()
     var keyViewTimer: Timer? = nil
-
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         indexView = nearestSibling()
     }
-
+    
     override func viewWillAppear() {
         super.viewWillAppear()
-
+        
         if let indexArray = indexView.indexArray {
             indexObserver = indexArray.observe(\NSArrayController.selection, changeHandler: { (index, change) in
                 self.selectionChanged()
@@ -39,7 +39,7 @@ class PersonDetailViewController: CollectionViewController {
         indexObserver = nil
         super.viewWillDisappear()
     }
-
+    
     func selectedRelationships() -> [Relationship] {
         var result = [Relationship]()
         if let selection = indexView.indexArray.selectedObjects as? [Person] {
@@ -94,23 +94,23 @@ class PersonDetailViewController: CollectionViewController {
     func updateRoles() {
         rows = rowsForSelection()
         detailsView.reloadData()
-
+        
     }
 }
 
 // MARK: Table Support
 
-protocol PersonDetailTableCell {
-    func setup(for view: PersonDetailViewController, row: Int, item: NSManagedObject)
+protocol SeriesDetailTableCell {
+    func setup(for view: SeriesDetailViewController, row: Int, item: NSManagedObject)
     func keyView() -> NSView?
 }
 
-extension PersonDetailViewController: NSTableViewDataSource, NSTableViewDelegate {
+extension SeriesDetailViewController: NSTableViewDataSource, NSTableViewDelegate {
     
     static let bookViewID = NSUserInterfaceItemIdentifier(rawValue: "book")
     static let roleViewID = NSUserInterfaceItemIdentifier(rawValue: "role")
     static let unknownViewID = NSUserInterfaceItemIdentifier(rawValue: "unknown")
-
+    
     func numberOfRows(in tableView: NSTableView) -> Int {
         return rows.count
     }
@@ -119,23 +119,23 @@ extension PersonDetailViewController: NSTableViewDataSource, NSTableViewDelegate
         guard row < rows.count else {
             return nil
         }
-
+        
         let viewID: NSUserInterfaceItemIdentifier
         let item = rows[row]
         switch item {
         case is Role:
-            viewID = PersonDetailViewController.roleViewID
+            viewID = SeriesDetailViewController.roleViewID
         case is Book:
-            viewID = PersonDetailViewController.bookViewID
+            viewID = SeriesDetailViewController.bookViewID
         default:
-            viewID = PersonDetailViewController.unknownViewID
+            viewID = SeriesDetailViewController.unknownViewID
         }
-    
+        
         let view = tableView.makeView(withIdentifier: viewID, owner: self)
-        if let cell = view as? PersonDetailTableCell {
+        if let cell = view as? SeriesDetailTableCell {
             cell.setup(for: self, row: row, item: item)
         }
-
+        
         return view
     }
     
@@ -175,7 +175,7 @@ extension PersonDetailViewController: NSTableViewDataSource, NSTableViewDelegate
 
 // MARK: Actions
 
-extension PersonDetailViewController: ActionContextProvider {
+extension SeriesDetailViewController: ActionContextProvider {
     func provideDetailInfo(context: ActionContext) {
         if let selection = indexView.indexArray.selectedObjects as? [Person] {
             context.info[ActionContext.selectionKey] = selection
