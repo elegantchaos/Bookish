@@ -1551,6 +1551,64 @@
                                                                             <outlet property="widthField" destination="3v3-p9-bdK" id="3Jl-ne-ENN"/>
                                                                         </connections>
                                                                     </tableCellView>
+                                                                    <tableCellView identifier="series" id="Biy-Ug-fg1" userLabel="series" customClass="BookSeriesCell" customModule="BookishMac" customModuleProvider="target">
+                                                                        <rect key="frame" x="90" y="180" width="500" height="24"/>
+                                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                        <subviews>
+                                                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="g9e-mB-bmk" userLabel="Series">
+                                                                                <rect key="frame" x="2" y="2" width="41" height="18"/>
+                                                                                <textFieldCell key="cell" selectable="YES" sendsActionOnEndEditing="YES" alignment="left" placeholderString="value" id="DeX-RK-agD">
+                                                                                    <font key="font" metaFont="systemBold" size="14"/>
+                                                                                    <color key="textColor" name="Bookish Detail Text"/>
+                                                                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                                                </textFieldCell>
+                                                                                <connections>
+                                                                                    <binding destination="TBH-Sa-Ff0" name="font" keyPath="self.cvm.detailFont" id="YRX-WW-Jj3"/>
+                                                                                    <outlet property="delegate" destination="Biy-Ug-fg1" id="vak-MH-7yP"/>
+                                                                                </connections>
+                                                                            </textField>
+                                                                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="KGH-sB-tNk" userLabel="Index">
+                                                                                <rect key="frame" x="43" y="2" width="436" height="18"/>
+                                                                                <constraints>
+                                                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="64" id="6oM-1t-69r"/>
+                                                                                </constraints>
+                                                                                <textFieldCell key="cell" selectable="YES" sendsActionOnEndEditing="YES" alignment="left" placeholderString="value" id="VXG-lr-d2q">
+                                                                                    <font key="font" metaFont="systemBold" size="14"/>
+                                                                                    <color key="textColor" name="Bookish Detail Text"/>
+                                                                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                                                </textFieldCell>
+                                                                                <connections>
+                                                                                    <binding destination="TBH-Sa-Ff0" name="font" keyPath="self.cvm.detailFont" id="FHS-Zj-n2W"/>
+                                                                                    <outlet property="delegate" destination="Biy-Ug-fg1" id="jH4-kS-7eN"/>
+                                                                                </connections>
+                                                                            </textField>
+                                                                            <button identifier="button.RevealSeries" horizontalHuggingPriority="260" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="PJr-xJ-30U" userLabel="Reveal">
+                                                                                <rect key="frame" x="481" y="3" width="15" height="16"/>
+                                                                                <buttonCell key="cell" type="inline" bezelStyle="inline" image="Reveal" imagePosition="only" alignment="center" controlSize="mini" lineBreakMode="truncatingTail" state="on" inset="2" id="nd4-B6-Nxt">
+                                                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                                    <font key="font" metaFont="smallSystemBold"/>
+                                                                                    <connections>
+                                                                                        <action selector="performAction:" target="dg1-Od-cPv" id="F0K-kX-rXT"/>
+                                                                                    </connections>
+                                                                                </buttonCell>
+                                                                            </button>
+                                                                        </subviews>
+                                                                        <constraints>
+                                                                            <constraint firstItem="KGH-sB-tNk" firstAttribute="leading" secondItem="g9e-mB-bmk" secondAttribute="trailing" constant="4" id="9MH-wV-Zis"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="PJr-xJ-30U" secondAttribute="trailing" constant="4" id="Dba-52-3WQ"/>
+                                                                            <constraint firstAttribute="bottom" secondItem="g9e-mB-bmk" secondAttribute="bottom" constant="2" id="IdU-g1-YMz"/>
+                                                                            <constraint firstItem="PJr-xJ-30U" firstAttribute="centerY" secondItem="g9e-mB-bmk" secondAttribute="centerY" id="Jxp-4t-zEo"/>
+                                                                            <constraint firstItem="g9e-mB-bmk" firstAttribute="leading" secondItem="Biy-Ug-fg1" secondAttribute="leading" constant="4" id="OOU-Lr-Y0H"/>
+                                                                            <constraint firstItem="KGH-sB-tNk" firstAttribute="centerY" secondItem="g9e-mB-bmk" secondAttribute="centerY" id="pe2-ye-aaH"/>
+                                                                            <constraint firstItem="PJr-xJ-30U" firstAttribute="leading" secondItem="KGH-sB-tNk" secondAttribute="trailing" constant="4" id="wn0-aB-jHx"/>
+                                                                            <constraint firstItem="g9e-mB-bmk" firstAttribute="top" secondItem="Biy-Ug-fg1" secondAttribute="top" constant="4" id="yb8-Y3-uPA"/>
+                                                                        </constraints>
+                                                                        <connections>
+                                                                            <outlet property="indexField" destination="KGH-sB-tNk" id="WKH-PR-QUe"/>
+                                                                            <outlet property="seriesField" destination="g9e-mB-bmk" id="NkF-0k-Ef7"/>
+                                                                            <outlet property="textField" destination="g9e-mB-bmk" id="WFd-GM-yZ0"/>
+                                                                        </connections>
+                                                                    </tableCellView>
                                                                 </prototypeCellViews>
                                                             </tableColumn>
                                                         </tableColumns>
@@ -1624,7 +1682,7 @@
                 </arrayController>
                 <userDefaultsController representsSharedInstance="YES" id="CPG-9C-fnr"/>
             </objects>
-            <point key="canvasLocation" x="1374.5" y="2765"/>
+            <point key="canvasLocation" x="1374" y="2765"/>
         </scene>
         <!--Date Picker Popover Controller-->
         <scene sceneID="K1V-fB-Brr">
