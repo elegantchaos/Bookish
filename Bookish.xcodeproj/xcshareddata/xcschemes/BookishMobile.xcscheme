@@ -35,7 +35,7 @@
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
-            buildForTesting = "YES"
+            buildForTesting = "NO"
             buildForRunning = "YES"
             buildForProfiling = "YES"
             buildForArchiving = "YES"
@@ -45,6 +45,20 @@
                BlueprintIdentifier = "22429310212ADC4300E70510"
                BuildableName = "BookishMobile.app"
                BlueprintName = "BookishMobile"
+               ReferencedContainer = "container:Bookish.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "NO"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "22429333212ADC4500E70510"
+               BuildableName = "BookishUITestsMobile.xctest"
+               BlueprintName = "BookishUITestsMobile"
                ReferencedContainer = "container:Bookish.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -60,40 +74,10 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "22429328212ADC4500E70510"
-               BuildableName = "BookishTestsMobile.xctest"
-               BlueprintName = "BookishTestsMobile"
-               ReferencedContainer = "container:Bookish.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "22429333212ADC4500E70510"
-               BuildableName = "BookishUITestsMobile.xctest"
-               BlueprintName = "BookishUITestsMobile"
-               ReferencedContainer = "container:Bookish.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
                BlueprintIdentifier = "224293BA212AE16300E70510"
                BuildableName = "BookishModelTestsMobile.xctest"
                BlueprintName = "BookishModelTestsMobile"
-               ReferencedContainer = "container:Bookish.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "BookishCore::BookishCoreTests"
-               BuildableName = "BookishCoreTests.xctest"
-               BlueprintName = "BookishCoreTests"
-               ReferencedContainer = "container:.build/xcode/mobile/BookishCore.xcodeproj">
+               ReferencedContainer = "container:Dependencies/BookishModel/BookishModel.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>

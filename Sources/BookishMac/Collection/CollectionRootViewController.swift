@@ -34,7 +34,8 @@ class CollectionRootViewController: CollectionViewController {
         if index < buttons.count {
             let button = buttons[index]
             let offset = (selectedMarkerButton.frame.height - button.frame.height) / 2.0
-            selectedMarkerConstraint.constant = button.frame.origin.y - offset
+            let adjusted = buttonContainer.convert(button.frame, to: selectedMarkerButton.superview!)
+            selectedMarkerConstraint.constant = adjusted.origin.y - offset
         }
     }
     

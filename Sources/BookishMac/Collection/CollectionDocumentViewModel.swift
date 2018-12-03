@@ -12,6 +12,8 @@ import BookishModel
     enum Mode: Int {
         case books = 0
         case people = 1
+        case publishers = 2
+        case series = 3
     }
     
     typealias  WindowController = CollectionWindowController

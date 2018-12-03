@@ -71,7 +71,7 @@
       shouldUseLaunchSchemeArgsEnv = "NO">
       <Testables>
          <TestableReference
-            skipped = "NO"
+            skipped = "YES"
             testExecutionOrdering = "random">
             <BuildableReference
                BuildableIdentifier = "primary"
@@ -82,7 +82,7 @@
             </BuildableReference>
          </TestableReference>
          <TestableReference
-            skipped = "NO"
+            skipped = "YES"
             testExecutionOrdering = "random">
             <BuildableReference
                BuildableIdentifier = "primary"
@@ -93,14 +93,13 @@
             </BuildableReference>
          </TestableReference>
          <TestableReference
-            skipped = "NO"
-            testExecutionOrdering = "random">
+            skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "22429398212AE0F400E70510"
                BuildableName = "BookishModelTestsMac.xctest"
                BlueprintName = "BookishModelTestsMac"
-               ReferencedContainer = "container:Bookish.xcodeproj">
+               ReferencedContainer = "container:Dependencies/BookishModel/BookishModel.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>

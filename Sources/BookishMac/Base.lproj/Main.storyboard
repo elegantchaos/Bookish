@@ -597,34 +597,79 @@
                                     <rect key="frame" x="0.0" y="0.0" width="68" height="768"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <button translatesAutoresizingMaskIntoConstraints="NO" id="pTf-uQ-crF">
-                                            <rect key="frame" x="14" y="694" width="40" height="41"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="36" id="EmN-TV-lN9"/>
-                                                <constraint firstAttribute="width" constant="36" id="eXA-M2-dTV"/>
-                                            </constraints>
-                                            <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" image="Books" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="Fx9-wb-nvC">
-                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                <font key="font" metaFont="system"/>
-                                            </buttonCell>
-                                            <connections>
-                                                <action selector="selectRadio:" target="iuc-9t-fNj" id="5mL-91-eW5"/>
-                                            </connections>
-                                        </button>
-                                        <button translatesAutoresizingMaskIntoConstraints="NO" id="fIv-Pl-PNw">
-                                            <rect key="frame" x="14" y="642" width="40" height="41"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="36" id="aoT-LG-Qg2"/>
-                                                <constraint firstAttribute="width" constant="36" id="pyP-xV-h8M"/>
-                                            </constraints>
-                                            <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" image="People" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="gzT-JZ-NZE">
-                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                <font key="font" metaFont="system"/>
-                                            </buttonCell>
-                                            <connections>
-                                                <action selector="selectRadio:" target="iuc-9t-fNj" id="oeG-Ss-Lrq"/>
-                                            </connections>
-                                        </button>
+                                        <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="16" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="G7s-O5-blY">
+                                            <rect key="frame" x="16" y="541" width="36" height="192"/>
+                                            <subviews>
+                                                <button translatesAutoresizingMaskIntoConstraints="NO" id="pTf-uQ-crF">
+                                                    <rect key="frame" x="-2" y="153" width="40" height="41"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="36" id="EmN-TV-lN9"/>
+                                                        <constraint firstAttribute="width" constant="36" id="eXA-M2-dTV"/>
+                                                    </constraints>
+                                                    <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" image="Books" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="Fx9-wb-nvC">
+                                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                        <font key="font" metaFont="system"/>
+                                                    </buttonCell>
+                                                    <connections>
+                                                        <action selector="selectRadio:" target="iuc-9t-fNj" id="5mL-91-eW5"/>
+                                                    </connections>
+                                                </button>
+                                                <button translatesAutoresizingMaskIntoConstraints="NO" id="fIv-Pl-PNw">
+                                                    <rect key="frame" x="-2" y="101" width="40" height="41"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="36" id="aoT-LG-Qg2"/>
+                                                        <constraint firstAttribute="width" constant="36" id="pyP-xV-h8M"/>
+                                                    </constraints>
+                                                    <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" image="People" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="gzT-JZ-NZE">
+                                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                        <font key="font" metaFont="system"/>
+                                                    </buttonCell>
+                                                    <connections>
+                                                        <action selector="selectRadio:" target="iuc-9t-fNj" id="oeG-Ss-Lrq"/>
+                                                    </connections>
+                                                </button>
+                                                <button translatesAutoresizingMaskIntoConstraints="NO" id="3gT-z5-UYY">
+                                                    <rect key="frame" x="-2" y="49" width="40" height="41"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="36" id="E5Q-1J-Lhg"/>
+                                                        <constraint firstAttribute="width" constant="36" id="Zvd-K5-Pbf"/>
+                                                    </constraints>
+                                                    <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" image="Publishers" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="pZg-dr-vCN">
+                                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                        <font key="font" metaFont="system"/>
+                                                    </buttonCell>
+                                                    <connections>
+                                                        <action selector="selectRadio:" target="iuc-9t-fNj" id="2Td-BW-uJN"/>
+                                                    </connections>
+                                                </button>
+                                                <button translatesAutoresizingMaskIntoConstraints="NO" id="5F3-j3-4IV">
+                                                    <rect key="frame" x="-2" y="-3" width="40" height="41"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="36" id="YXf-sL-kMg"/>
+                                                        <constraint firstAttribute="height" constant="36" id="fHw-Dt-2Zk"/>
+                                                    </constraints>
+                                                    <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" image="Series" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="OTD-aQ-4W6">
+                                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                        <font key="font" metaFont="system"/>
+                                                    </buttonCell>
+                                                    <connections>
+                                                        <action selector="selectRadio:" target="iuc-9t-fNj" id="GYR-q2-pcX"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <visibilityPriorities>
+                                                <integer value="1000"/>
+                                                <integer value="1000"/>
+                                                <integer value="1000"/>
+                                                <integer value="1000"/>
+                                            </visibilityPriorities>
+                                            <customSpacing>
+                                                <real value="3.4028234663852886e+38"/>
+                                                <real value="3.4028234663852886e+38"/>
+                                                <real value="3.4028234663852886e+38"/>
+                                                <real value="3.4028234663852886e+38"/>
+                                            </customSpacing>
+                                        </stackView>
                                         <button translatesAutoresizingMaskIntoConstraints="NO" id="xns-n8-kkA">
                                             <rect key="frame" x="0.0" y="697" width="4" height="36"/>
                                             <constraints>
@@ -638,12 +683,10 @@
                                         </button>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="G7s-O5-blY" firstAttribute="top" secondItem="QaT-Ad-8ce" secondAttribute="top" constant="35" id="3BP-ed-5G9"/>
                                         <constraint firstItem="xns-n8-kkA" firstAttribute="leading" secondItem="QaT-Ad-8ce" secondAttribute="leading" id="CDn-hy-mBH"/>
-                                        <constraint firstItem="fIv-Pl-PNw" firstAttribute="top" secondItem="pTf-uQ-crF" secondAttribute="bottom" constant="16" id="HKU-jm-1iN"/>
                                         <constraint firstAttribute="bottom" secondItem="xns-n8-kkA" secondAttribute="bottom" constant="697" id="TPL-Lo-G8g"/>
-                                        <constraint firstItem="pTf-uQ-crF" firstAttribute="top" secondItem="QaT-Ad-8ce" secondAttribute="top" constant="35" id="VCj-8O-ZgE"/>
-                                        <constraint firstItem="pTf-uQ-crF" firstAttribute="leading" secondItem="QaT-Ad-8ce" secondAttribute="leading" constant="16" id="cGf-xo-GGE"/>
-                                        <constraint firstItem="fIv-Pl-PNw" firstAttribute="leading" secondItem="QaT-Ad-8ce" secondAttribute="leading" constant="16" id="kEN-xq-mdZ"/>
+                                        <constraint firstItem="G7s-O5-blY" firstAttribute="leading" secondItem="xns-n8-kkA" secondAttribute="trailing" constant="12" id="WuR-9M-lGV"/>
                                     </constraints>
                                 </view>
                                 <constraints>
@@ -652,10 +695,10 @@
                                 <color key="fillColor" red="0.86299508810043335" green="0.86210739612579346" blue="0.8980451226234436" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </box>
                             <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="7" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QF4-CS-GTr">
-                                <rect key="frame" x="20" y="20" width="29" height="15"/>
+                                <rect key="frame" x="20" y="20" width="28" height="15"/>
                                 <subviews>
                                     <button identifier="button.InsertItem" verticalHuggingPriority="750" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="myo-cR-IH0" userLabel="Add Button">
-                                        <rect key="frame" x="0.0" y="0.0" width="11" height="15"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="10" height="15"/>
                                         <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSAddTemplate" imagePosition="overlaps" alignment="center" imageScaling="proportionallyDown" inset="2" id="yE3-G3-i0V">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -664,8 +707,8 @@
                                             <action selector="performAction:" target="Ubq-pe-EpL" id="w02-pB-gKI"/>
                                         </connections>
                                     </button>
-                                    <button identifier="button.RemoveItem" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5Hu-w2-Z1k" userLabel="Remove Button">
-                                        <rect key="frame" x="18" y="2" width="11" height="11"/>
+                                    <button identifier="button.RemoveItem" verticalHuggingPriority="750" horizontalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="5Hu-w2-Z1k" userLabel="Remove Button">
+                                        <rect key="frame" x="17" y="2" width="11" height="11"/>
                                         <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSRemoveTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="Xut-yr-0fw">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -689,16 +732,17 @@
                             <constraint firstItem="3tE-Et-baJ" firstAttribute="top" secondItem="Nuf-33-Q1V" secondAttribute="top" id="1Po-kp-KDn"/>
                             <constraint firstAttribute="bottom" secondItem="bwo-VV-nQS" secondAttribute="bottom" id="8OQ-Ql-2Zo"/>
                             <constraint firstItem="3tE-Et-baJ" firstAttribute="leading" secondItem="bwo-VV-nQS" secondAttribute="trailing" id="LVx-Kk-Fiy"/>
-                            <constraint firstItem="QF4-CS-GTr" firstAttribute="centerX" secondItem="fIv-Pl-PNw" secondAttribute="centerX" id="Mpy-Aq-UE1"/>
+                            <constraint firstItem="QF4-CS-GTr" firstAttribute="leading" secondItem="Nuf-33-Q1V" secondAttribute="leading" constant="20" symbolic="YES" id="M6D-4C-OJJ"/>
                             <constraint firstItem="bwo-VV-nQS" firstAttribute="leading" secondItem="Nuf-33-Q1V" secondAttribute="leading" id="Nwm-HR-JK8"/>
                             <constraint firstAttribute="bottom" secondItem="3tE-Et-baJ" secondAttribute="bottom" id="QJZ-V6-0Bn"/>
                             <constraint firstAttribute="trailing" secondItem="3tE-Et-baJ" secondAttribute="trailing" id="YoW-xg-DtT"/>
                             <constraint firstAttribute="bottom" secondItem="QF4-CS-GTr" secondAttribute="bottom" constant="20" id="cOc-d9-4ee"/>
+                            <constraint firstItem="QF4-CS-GTr" firstAttribute="centerX" secondItem="bwo-VV-nQS" secondAttribute="centerX" id="kOK-yc-nHz"/>
                             <constraint firstItem="bwo-VV-nQS" firstAttribute="top" secondItem="Nuf-33-Q1V" secondAttribute="top" id="lJa-0q-bjs"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="buttonContainer" destination="QaT-Ad-8ce" id="TNA-t4-vlj"/>
+                        <outlet property="buttonContainer" destination="G7s-O5-blY" id="xcj-UE-jx8"/>
                         <outlet property="selectedMarkerButton" destination="xns-n8-kkA" id="wDm-ji-Vls"/>
                         <outlet property="selectedMarkerConstraint" destination="TPL-Lo-G8g" id="kzA-w3-pKX"/>
                     </connections>
@@ -1857,9 +1901,11 @@
         <image name="Person" width="32" height="32"/>
         <image name="PersonPlaceholder" width="64" height="64"/>
         <image name="Plus" width="12" height="12"/>
+        <image name="Publishers" width="32" height="32"/>
         <image name="RemoveBook" width="32" height="32"/>
         <image name="RemoveRelationship" width="32" height="32"/>
         <image name="Reveal" width="12" height="12"/>
+        <image name="Series" width="32" height="32"/>
         <namedColor name="Bookish Detail">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
