@@ -23,7 +23,8 @@ class DeliciousLibraryImportSession: ImportSession {
     typealias Record = [String:Any]
     typealias RecordList = [Record]
 
-    var people: [String:Person] = [:]
+    var cachedPeople: [String:Person] = [:]
+    var cachedPublishers: [String:Publisher] = [:]
     
     let formatsToSkip = ["Audio CD", "Audio CD Enhanced", "Audio CD Import", "Video Game", "VHS Tape", "VideoGame"]
     
@@ -36,6 +37,42 @@ class DeliciousLibraryImportSession: ImportSession {
                 }
             }
         }
+    }
+    
+    fileprivate func process(creators: String, for book: Book, context: NSManagedObjectContext) {
+        for creator in creators.split(separator: "\n") {
+            let trimmed = creator.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+            if trimmed != "" {
+                let author: Person
+                if let cached = cachedPeople[trimmed] {
+                    author = cached
+                } else {
+                    author = Person(context: context)
+                    author.name = trimmed
+                    cachedPeople[trimmed] = author
+                }
+                let relationship = author.relationship(as: Role.Default.authorName)
+                relationship.addToBooks(book)
+            }
+        }
+    }
+    
+    fileprivate func process(publishers: String, for book: Book, context: NSManagedObjectContext) {
+        for publisher in publishers.split(separator: "\n") {
+            let trimmed = publisher.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+            if trimmed != "" {
+                let publisher: Publisher
+                if let cached = cachedPublishers[trimmed] {
+                    publisher = cached
+                } else {
+                    publisher = Publisher(context: context)
+                    publisher.name = trimmed
+                    cachedPublishers[trimmed] = publisher
+                }
+                publisher.addToBooks(book)
+            }
+        }
+
     }
     
     func process(record: Record, context: NSManagedObjectContext) {
@@ -68,20 +105,10 @@ class DeliciousLibraryImportSession: ImportSession {
                     book.imageURL = url
                 }
                 
-                for creator in creators.split(separator: "\n") {
-                    let trimmed = creator.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-                    if trimmed != "" {
-                        let author: Person
-                        if let cached = people[trimmed] {
-                            author = cached
-                        } else {
-                            author = Person(context: context)
-                            author.name = trimmed
-                            people[trimmed] = author
-                        }
-                        let relationship = author.relationship(as: Role.Default.authorName)
-                        relationship.addToBooks(book)
-                    }
+                process(creators: creators, for: book, context: context)
+                
+                if let publishers = record["publishersCompositeString"] as? String {
+                    process(publishers: publishers, for: book, context: context)
                 }
             }
         }
