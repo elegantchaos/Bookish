@@ -490,6 +490,7 @@
 				226E8E6C21AC38D5001F191F /* BookHeadingCell.swift */,
 				22D1B2482180D7B60062F2CB /* BookDetailCell.swift */,
 				22D39E542146A84E00282467 /* BookDateCell.swift */,
+				22D1B2422180CA9E0062F2CB /* BookCell.swift */,
 			);
 			path = Books;
 			sourceTree = "<group>";
@@ -499,7 +500,6 @@
 			children = (
 				220CDA9E214A86A80064CC91 /* PersonIndexViewController.swift */,
 				220CDAA0214A8D510064CC91 /* PersonDetailViewController.swift */,
-				22D1B2422180CA9E0062F2CB /* BookCell.swift */,
 				22D1B24A2180E9060062F2CB /* PersonRoleCell.swift */,
 			);
 			path = People;

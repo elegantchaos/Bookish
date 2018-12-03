@@ -1708,7 +1708,7 @@
                                             </constraints>
                                             <imageCell key="cell" selectable="YES" editable="YES" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="proportionallyDown" image="PersonPlaceholder" id="unM-9l-ls3"/>
                                             <connections>
-                                                <binding destination="YQJ-9e-4qw" name="value" keyPath="self.indexView.indexArray.selection.image" id="MA7-JB-jPa">
+                                                <binding destination="YQJ-9e-4qw" name="value" keyPath="self.index.selection.image" id="XY7-wg-yWU">
                                                     <dictionary key="options">
                                                         <string key="NSValueTransformerName">PersonImage</string>
                                                     </dictionary>
@@ -2219,7 +2219,7 @@
                                             </constraints>
                                             <imageCell key="cell" selectable="YES" editable="YES" alignment="left" animates="YES" imageScaling="proportionallyDown" image="PersonPlaceholder" id="l6B-dD-xui"/>
                                             <connections>
-                                                <binding destination="YQJ-9e-4qw" name="value" keyPath="self.indexView.indexArray.selection.image" id="QGm-XR-xAH">
+                                                <binding destination="n3q-DF-N5R" name="value" keyPath="self.index.selection.image" id="BbC-9O-bkc">
                                                     <dictionary key="options">
                                                         <string key="NSValueTransformerName">PersonImage</string>
                                                     </dictionary>
@@ -2235,6 +2235,7 @@
                                             </textFieldCell>
                                             <connections>
                                                 <binding destination="YQJ-9e-4qw" name="font" keyPath="self.cvm.titleFont" id="XZd-Lu-dD3"/>
+                                                <binding destination="n3q-DF-N5R" name="value" keyPath="self.index.selection.name" id="0L3-4z-qfk"/>
                                             </connections>
                                         </textField>
                                         <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ykj-uj-ehm">
@@ -2249,6 +2250,7 @@
                                             </textFieldCell>
                                             <connections>
                                                 <binding destination="YQJ-9e-4qw" name="font" keyPath="self.cvm.detailFont" id="6LL-vf-Frm"/>
+                                                <binding destination="n3q-DF-N5R" name="value" keyPath="self.index.selection.notes" id="QK3-jc-yq1"/>
                                             </connections>
                                         </textField>
                                         <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="26" horizontalPageScroll="10" verticalLineScroll="26" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R2H-ks-yZc" userLabel="Details">
@@ -2422,7 +2424,7 @@
                                             </constraints>
                                             <imageCell key="cell" selectable="YES" editable="YES" alignment="left" animates="YES" imageScaling="proportionallyDown" image="PersonPlaceholder" id="CP5-zk-Goa"/>
                                             <connections>
-                                                <binding destination="YQJ-9e-4qw" name="value" keyPath="self.indexView.indexArray.selection.image" id="Vgj-dc-8gC">
+                                                <binding destination="U2M-2A-7Qb" name="value" keyPath="self.index.selection.image" id="D6O-jk-w8D">
                                                     <dictionary key="options">
                                                         <string key="NSValueTransformerName">PersonImage</string>
                                                     </dictionary>
