@@ -27,8 +27,13 @@ class DeliciousLibraryImportSession: ImportSession {
     var cachedPublishers: [String:Publisher] = [:]
     var cachedSeries: [String:Series] = [:]
     
-    let formatsToSkip = ["Audio CD", "Audio CD Enhanced", "Audio CD Import", "Video Game", "VHS Tape", "VideoGame"]
+    let formatsToSkip = ["Audio CD", "Audio CD Enhanced", "Audio CD Import", "Video Game", "VHS Tape", "VideoGame", "DVD"]
     
+    let seriesSPattern = try! NSRegularExpression(pattern: "(.*)\\((.*)S[.]{0,1}\\)")
+    let seriesPattern = try! NSRegularExpression(pattern: "(.*)\\((.*)\\)$")
+    let bookIndexPattern = try! NSRegularExpression(pattern: "(.*)\\:{0,1} Bk\\. *(\\d+)")
+
+        
     override func run() {
         if let data = try? Data(contentsOf: url) {
             if let list = (try? PropertyListSerialization.propertyList(from: data, options: [], format: nil)) as? RecordList {
@@ -75,8 +80,20 @@ class DeliciousLibraryImportSession: ImportSession {
                     process(publishers: publishers, for: book)
                 }
                 
-                if let series = record["seriesSingularString"] as? String {
-                    process(series: series, for: book)
+                if let series = inferSeries(in: record, for: book) {
+                    var index = 0
+                    let (series, seriesIndex) = extractIndex(from: series)
+                    if seriesIndex != 0 {
+                        index = seriesIndex
+                    } else if let name = book.name {
+                        let (name, nameIndex) = extractIndex(from: name)
+                        if nameIndex != 0 {
+                            book.name = name
+                            index = nameIndex
+                        }
+                    }
+                    
+                    process(series: series, index: index, for: book)
                 }
             }
         }
@@ -117,24 +134,71 @@ class DeliciousLibraryImportSession: ImportSession {
         }
     }
     
-    private func process(series allSeries: String, for book: Book) {
-        for series in allSeries.split(separator: "\n") {
-            let trimmed = series.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-            if series != "" {
-                let series: Series
-                if let cached = cachedSeries[trimmed] {
-                    series = cached
-                } else {
-                    series = Series(context: context)
-                    series.name = trimmed
-                    cachedSeries[trimmed] = series
+    private func inferSeries(in record: Record, for book: Book) -> String? {
+        if let series = record["seriesSingularString"] as? String, !series.isEmpty {
+            return series
+        }
+        
+        if let name = book.name {
+            for match in seriesSPattern.matches(in: name, options: [], range: NSRange(location: 0, length: name.count)) {
+                if let nameRange = Range(match.range(at: 1), in: name), let seriesRange = Range(match.range(at: 2), in: name) {
+                    let adjustedName = String(name[nameRange])
+                    let series = String(name[seriesRange])
+                    book.name = adjustedName
+                    if book.subtitle == series {
+                        book.subtitle = nil
+                    }
+                    return series
                 }
-                let entry = Entry(context: context)
-                entry.book = book
-                entry.series = series
+            }
+            
+            for match in seriesPattern.matches(in: name, options: [], range: NSRange(location: 0, length: name.count)) {
+                if let nameRange = Range(match.range(at: 1), in: name), let seriesRange = Range(match.range(at: 2), in: name) {
+                    let adjustedName = String(name[nameRange])
+                    let series = String(name[seriesRange])
+                    if series == book.subtitle {
+                        book.name = adjustedName
+                        book.subtitle = nil
+                        return series
+                    }
+                }
             }
         }
 
+        return nil
+    }
+    
+    private func extractIndex(from series: String) -> (String, Int) {
+        for match in bookIndexPattern.matches(in: series, options: [], range: NSRange(location: 0, length: series.count)) {
+            if let seriesRange = Range(match.range(at: 1), in: series), let indexRange = Range(match.range(at: 2), in: series) {
+                let adjustedSeries = String(series[seriesRange])
+                let index = (String(series[indexRange]) as NSString).integerValue
+                return (adjustedSeries, index)
+            }
+        }
+
+        return (series, 0)
+    }
+    
+    private func process(series: String, index: Int, for book: Book) {
+        let trimmed = series.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        if trimmed != "" {
+            let (name, index) = extractIndex(from: trimmed)
+            let series: Series
+            if let cached = cachedSeries[name] {
+                series = cached
+            } else {
+                series = Series(context: context)
+                series.name = name
+                cachedSeries[name] = series
+            }
+            let entry = Entry(context: context)
+            entry.book = book
+            entry.series = series
+            if index != 0 {
+                entry.index = Int16(index)
+            }
+        }
     }
 
 }
