@@ -38,7 +38,6 @@
 		2250C70021B54D0900E899E2 /* SeriesIndexViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2250C6FF21B54D0900E899E2 /* SeriesIndexViewController.swift */; };
 		2250C70821B55B9C00E899E2 /* PublisherDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2250C70721B55B9C00E899E2 /* PublisherDetailViewController.swift */; };
 		2250C70A21B55BA700E899E2 /* SeriesDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2250C70921B55BA700E899E2 /* SeriesDetailViewController.swift */; };
-		2250C70C21B56D4D00E899E2 /* PublisherBookCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2250C70B21B56D4D00E899E2 /* PublisherBookCell.swift */; };
 		2250C70E21B571C200E899E2 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2250C70D21B571C200E899E2 /* DetailViewController.swift */; };
 		2250C71021B57CBA00E899E2 /* ManagedObjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2250C70F21B57CBA00E899E2 /* ManagedObjectViewController.swift */; };
 		2250C71221B57F7800E899E2 /* SeriesEntryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2250C71121B57F7800E899E2 /* SeriesEntryCell.swift */; };
@@ -74,7 +73,7 @@
 		22D1B23E2180BF550062F2CB /* Actions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F35486216FAC0100443C0B /* Actions.framework */; };
 		22D1B23F2180BF5D0062F2CB /* Logger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22DAF399217B5305003CE28B /* Logger.framework */; };
 		22D1B2402180BF6D0062F2CB /* ActionsKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22DAF397217B52E6003CE28B /* ActionsKit.framework */; };
-		22D1B2432180CA9E0062F2CB /* PersonBookCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D1B2422180CA9E0062F2CB /* PersonBookCell.swift */; };
+		22D1B2432180CA9E0062F2CB /* BookCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D1B2422180CA9E0062F2CB /* BookCell.swift */; };
 		22D1B2492180D7B60062F2CB /* BookDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D1B2482180D7B60062F2CB /* BookDetailCell.swift */; };
 		22D1B24B2180E9060062F2CB /* PersonRoleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D1B24A2180E9060062F2CB /* PersonRoleCell.swift */; };
 		22D39E512142DB2700282467 /* ViewBasedToolbarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D39E502142DB2700282467 /* ViewBasedToolbarItem.swift */; };
@@ -197,7 +196,6 @@
 		2250C6FF21B54D0900E899E2 /* SeriesIndexViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeriesIndexViewController.swift; sourceTree = "<group>"; };
 		2250C70721B55B9C00E899E2 /* PublisherDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublisherDetailViewController.swift; sourceTree = "<group>"; };
 		2250C70921B55BA700E899E2 /* SeriesDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeriesDetailViewController.swift; sourceTree = "<group>"; };
-		2250C70B21B56D4D00E899E2 /* PublisherBookCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublisherBookCell.swift; sourceTree = "<group>"; };
 		2250C70D21B571C200E899E2 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		2250C70F21B57CBA00E899E2 /* ManagedObjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedObjectViewController.swift; sourceTree = "<group>"; };
 		2250C71121B57F7800E899E2 /* SeriesEntryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeriesEntryCell.swift; sourceTree = "<group>"; };
@@ -231,7 +229,7 @@
 		22D1B238218079C60062F2CB /* CollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewModel.swift; sourceTree = "<group>"; };
 		22D1B23A21807D230062F2CB /* PersonBookRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonBookRow.swift; sourceTree = "<group>"; };
 		22D1B23C21807F7B0062F2CB /* CollectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionController.swift; sourceTree = "<group>"; };
-		22D1B2422180CA9E0062F2CB /* PersonBookCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonBookCell.swift; sourceTree = "<group>"; };
+		22D1B2422180CA9E0062F2CB /* BookCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCell.swift; sourceTree = "<group>"; };
 		22D1B2482180D7B60062F2CB /* BookDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailCell.swift; sourceTree = "<group>"; };
 		22D1B24A2180E9060062F2CB /* PersonRoleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonRoleCell.swift; sourceTree = "<group>"; };
 		22D39E502142DB2700282467 /* ViewBasedToolbarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewBasedToolbarItem.swift; sourceTree = "<group>"; };
@@ -434,7 +432,6 @@
 			children = (
 				2250C6FB21B541B400E899E2 /* PublisherIndexViewController.swift */,
 				2250C70721B55B9C00E899E2 /* PublisherDetailViewController.swift */,
-				2250C70B21B56D4D00E899E2 /* PublisherBookCell.swift */,
 			);
 			path = Publisher;
 			sourceTree = "<group>";
@@ -502,7 +499,7 @@
 			children = (
 				220CDA9E214A86A80064CC91 /* PersonIndexViewController.swift */,
 				220CDAA0214A8D510064CC91 /* PersonDetailViewController.swift */,
-				22D1B2422180CA9E0062F2CB /* PersonBookCell.swift */,
+				22D1B2422180CA9E0062F2CB /* BookCell.swift */,
 				22D1B24A2180E9060062F2CB /* PersonRoleCell.swift */,
 			);
 			path = People;
@@ -998,9 +995,8 @@
 				2250C70021B54D0900E899E2 /* SeriesIndexViewController.swift in Sources */,
 				220CDAA1214A8D510064CC91 /* PersonDetailViewController.swift in Sources */,
 				22D39E5E2146D9F100282467 /* ValidatingButton.swift in Sources */,
-				22D1B2432180CA9E0062F2CB /* PersonBookCell.swift in Sources */,
+				22D1B2432180CA9E0062F2CB /* BookCell.swift in Sources */,
 				22429403212C3C7400E70510 /* ViewExtensions.swift in Sources */,
-				2250C70C21B56D4D00E899E2 /* PublisherBookCell.swift in Sources */,
 				224293FB212C1D7500E70510 /* BookIndexViewController.swift in Sources */,
 				22D39E592146BA9C00282467 /* ShowDatePickerAction.swift in Sources */,
 				226E8E6D21AC38D5001F191F /* BookHeadingCell.swift in Sources */,

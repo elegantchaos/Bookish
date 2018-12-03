@@ -68,7 +68,7 @@ class ManagedObjectViewController: CollectionViewController, NSTableViewDelegate
         let rows = availableRows.sorted()
         var view: NSView = notesView
         for row in rows {
-            if let rowView = (detailsTable.view(atColumn: 0, row: row, makeIfNecessary: false) as? PersonDetailTableCell)?.keyView() {
+            if let rowView = (detailsTable.view(atColumn: 0, row: row, makeIfNecessary: false) as? ManagedObjectTableCell)?.keyView() {
                 view.nextKeyView = rowView
                 view = rowView
             }

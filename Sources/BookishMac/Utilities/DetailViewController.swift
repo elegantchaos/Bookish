@@ -15,6 +15,10 @@ class DetailViewController<IndexViewController: IndexOwner, Item>: ManagedObject
     weak var indexView: IndexViewController!
     var indexObserver: NSKeyValueObservation?
     
+    @objc var index: NSArrayController? {
+        return (indexView as? IndexViewController)?.indexArray
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         indexView = nearestSibling()
@@ -23,8 +27,8 @@ class DetailViewController<IndexViewController: IndexOwner, Item>: ManagedObject
     override func viewWillAppear() {
         super.viewWillAppear()
         
-        if let indexArray = indexView.indexArray {
-            indexObserver = indexArray.observe(\NSArrayController.selection, changeHandler: { (index, change) in
+        if let index = index {
+            indexObserver = index.observe(\NSArrayController.selection, changeHandler: { (index, change) in
                 self.selectionChanged()
             })
             selectionChanged()
@@ -41,7 +45,7 @@ class DetailViewController<IndexViewController: IndexOwner, Item>: ManagedObject
     }
     
     func selectionChanged() {
-        let selectedCount = indexView.indexArray.selectedObjects?.count ?? 0
+        let selectedCount = index?.selectedObjects?.count ?? 0
         let showDetail = selectedCount > 0
         detailsTable.isHidden = !showDetail
         if showDetail {
@@ -59,7 +63,7 @@ class DetailViewController<IndexViewController: IndexOwner, Item>: ManagedObject
     }
     
     func selectedItems() -> [Item] {
-        if let selection = indexView.indexArray.selectedObjects as? [Item] {
+        if let selection = index?.selectedObjects as? [Item] {
             return selection
         }
         
@@ -91,7 +95,9 @@ extension DetailViewController: ActionContextProvider {
     }
     
     func provide(context: ActionContext) {
-        indexView.provideIndexInfo(context: context)
+        if let indexView = indexView as? IndexViewController {
+            indexView.provideIndexInfo(context: context)
+        }
         provideDetailInfo(context: context)
     }
 }

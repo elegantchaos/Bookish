@@ -7,8 +7,8 @@ import AppKit
 import BookishModel
 import Actions
 
-class PersonIndexViewController: CollectionViewController {
-    @objc weak var detailView: PersonDetailViewController!
+class PersonIndexViewController: CollectionViewController, IndexOwner {
+    weak var detailView: PersonDetailViewController!
     @IBOutlet weak var indexArray: NSArrayController!
     @IBOutlet weak var indexTable: NSTableView!
     

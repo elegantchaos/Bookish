@@ -9,7 +9,7 @@ import Actions
 
 
 class SeriesIndexViewController: CollectionViewController, IndexOwner {
-    @objc weak var detailView: PersonDetailViewController!
+    weak var detailView: SeriesDetailViewController!
     @IBOutlet weak var indexArray: NSArrayController!
     @IBOutlet weak var indexTable: NSTableView!
     

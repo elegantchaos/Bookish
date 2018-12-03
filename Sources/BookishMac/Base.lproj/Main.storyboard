@@ -1724,7 +1724,7 @@
                                             </textFieldCell>
                                             <connections>
                                                 <binding destination="YQJ-9e-4qw" name="font" keyPath="self.cvm.titleFont" id="Err-ZP-CnK"/>
-                                                <binding destination="YQJ-9e-4qw" name="value" keyPath="self.indexView.indexArray.selection.name" id="HqE-hI-ZUN"/>
+                                                <binding destination="YQJ-9e-4qw" name="value" keyPath="self.index.selection.name" id="UBF-RG-4py"/>
                                             </connections>
                                         </textField>
                                         <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Suv-V7-thw">
@@ -1739,7 +1739,7 @@
                                             </textFieldCell>
                                             <connections>
                                                 <binding destination="YQJ-9e-4qw" name="font" keyPath="self.cvm.detailFont" id="zYU-YS-eAe"/>
-                                                <binding destination="YQJ-9e-4qw" name="value" keyPath="self.indexView.indexArray.selection.notes" id="fNb-Xt-Htu"/>
+                                                <binding destination="YQJ-9e-4qw" name="value" keyPath="self.index.selection.notes" id="Kb2-Bs-6sM"/>
                                             </connections>
                                         </textField>
                                         <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="26" horizontalPageScroll="10" verticalLineScroll="26" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sUr-5g-BKU" userLabel="Details">
@@ -1768,7 +1768,7 @@
                                                                 </textFieldCell>
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <prototypeCellViews>
-                                                                    <tableCellView identifier="book" id="kOa-mX-ie0" userLabel="book cell" customClass="PersonBookCell" customModule="BookishMac" customModuleProvider="target">
+                                                                    <tableCellView identifier="book" id="kOa-mX-ie0" userLabel="book cell" customClass="BookCell" customModule="BookishMac" customModuleProvider="target">
                                                                         <rect key="frame" x="1" y="1" width="497" height="22"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
@@ -1882,7 +1882,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="detailsView" destination="jHn-8w-0MB" id="Zdn-Zk-Yk5"/>
+                        <outlet property="detailsTable" destination="jHn-8w-0MB" id="WIl-t7-M0u"/>
                         <outlet property="nameView" destination="Wvi-TN-fxn" id="asu-16-zN9"/>
                         <outlet property="notesView" destination="Suv-V7-thw" id="qxM-wu-SgU"/>
                     </connections>
@@ -2235,7 +2235,6 @@
                                             </textFieldCell>
                                             <connections>
                                                 <binding destination="YQJ-9e-4qw" name="font" keyPath="self.cvm.titleFont" id="XZd-Lu-dD3"/>
-                                                <binding destination="YQJ-9e-4qw" name="value" keyPath="self.indexView.indexArray.selection.name" id="uJh-bW-xWK"/>
                                             </connections>
                                         </textField>
                                         <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ykj-uj-ehm">
@@ -2250,7 +2249,6 @@
                                             </textFieldCell>
                                             <connections>
                                                 <binding destination="YQJ-9e-4qw" name="font" keyPath="self.cvm.detailFont" id="6LL-vf-Frm"/>
-                                                <binding destination="YQJ-9e-4qw" name="value" keyPath="self.indexView.indexArray.selection.notes" id="eeu-a8-tDE"/>
                                             </connections>
                                         </textField>
                                         <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="26" horizontalPageScroll="10" verticalLineScroll="26" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R2H-ks-yZc" userLabel="Details">
@@ -2440,7 +2438,7 @@
                                             </textFieldCell>
                                             <connections>
                                                 <binding destination="YQJ-9e-4qw" name="font" keyPath="self.cvm.titleFont" id="OBi-rS-kM1"/>
-                                                <binding destination="YQJ-9e-4qw" name="value" keyPath="self.indexView.indexArray.selection.name" id="x2w-qy-rwE"/>
+                                                <binding destination="U2M-2A-7Qb" name="value" keyPath="self.index.selection.name" id="0Qx-Rv-QSx"/>
                                             </connections>
                                         </textField>
                                         <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ETF-xM-x22">
@@ -2455,7 +2453,7 @@
                                             </textFieldCell>
                                             <connections>
                                                 <binding destination="YQJ-9e-4qw" name="font" keyPath="self.cvm.detailFont" id="ncy-0U-bA5"/>
-                                                <binding destination="YQJ-9e-4qw" name="value" keyPath="self.indexView.indexArray.selection.notes" id="hAg-gq-gFQ"/>
+                                                <binding destination="U2M-2A-7Qb" name="value" keyPath="self.index.selection.notes" id="Xll-Uc-EIS"/>
                                             </connections>
                                         </textField>
                                         <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="26" horizontalPageScroll="10" verticalLineScroll="26" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dZn-hY-ta0" userLabel="Details">
@@ -2484,7 +2482,7 @@
                                                                 </textFieldCell>
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <prototypeCellViews>
-                                                                    <tableCellView identifier="book" id="0ea-vW-ozU" userLabel="book cell" customClass="PublisherBookCell" customModule="BookishMac" customModuleProvider="target">
+                                                                    <tableCellView identifier="book" id="0ea-vW-ozU" userLabel="book cell" customClass="BookCell" customModule="BookishMac" customModuleProvider="target">
                                                                         <rect key="frame" x="1" y="1" width="347" height="22"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>

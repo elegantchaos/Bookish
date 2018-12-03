@@ -7,8 +7,8 @@ import AppKit
 import Actions
 import BookishModel
 
-class PersonBookCell: NSTableCellView, ActionContextProvider, PersonDetailTableCell {
-    func setup(for view: PersonDetailViewController, row: Int, item: NSManagedObject) {
+class BookCell: NSTableCellView, ActionContextProvider, ManagedObjectTableCell {
+    func setup(for view: ManagedObjectViewController, row: Int, item: NSManagedObject) {
         if let book = item as? Book, let name = book.name {
             objectValue = item
             textField?.stringValue = name
