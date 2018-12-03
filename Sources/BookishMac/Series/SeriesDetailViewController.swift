@@ -3,187 +3,28 @@
 //  All code (c) 2018 - present day, Elegant Chaos Limited.
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
+
 import AppKit
-import Actions
 import BookishModel
-import Dispatch
 
-class SeriesDetailViewController: CollectionViewController {
-    @IBOutlet weak var nameView: NSTextField!
-    @IBOutlet weak var notesView: NSTextField!
-    @IBOutlet weak var indexView: SeriesIndexViewController!
-    @IBOutlet weak var detailsView: NSTableView!
+class SeriesDetailViewController: DetailViewController<SeriesIndexViewController, Series> {
+    static let entryViewID = NSUserInterfaceItemIdentifier(rawValue: "entry")
     
-    var indexObserver: NSKeyValueObservation?
-    var rows = [NSManagedObject]()
-    var availableRows = IndexSet()
-    var keyViewTimer: Timer? = nil
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        indexView = nearestSibling()
-    }
-    
-    override func viewWillAppear() {
-        super.viewWillAppear()
-        
-        if let indexArray = indexView.indexArray {
-            indexObserver = indexArray.observe(\NSArrayController.selection, changeHandler: { (index, change) in
-                self.selectionChanged()
-            })
-            selectionChanged()
-        }
-    }
-    
-    override func viewWillDisappear() {
-        indexObserver = nil
-        super.viewWillDisappear()
-    }
-    
-    func selectedRelationships() -> [Relationship] {
-        var result = [Relationship]()
-        if let selection = indexView.indexArray.selectedObjects as? [Person] {
-            for person in selection {
-                if let roles = person.relationships as? Set<Relationship> {
-                    result.append(contentsOf: roles)
-                }
-            }
-        }
-        return result
-    }
-    
-    func rowsForSelection() -> [NSManagedObject] {
-        var booksByRole = [Role:Set<Book>]()
-        let selected = selectedRelationships()
-        for relationship in selected {
-            if let role = relationship.role, let prb = relationship.books as? Set<Book> {
-                var books = booksByRole[role]
-                if books == nil {
-                    books = Set<Book>()
-                    books?.formUnion(prb)
-                    booksByRole[role] = books
-                } else {
-                    books?.formIntersection(prb)
-                }
-            }
+    override func rowsForSelection() -> [NSManagedObject] {
+        let selected: [Series] = selectedItems()
+        if selected.count == 1, let entries = selected[0].entries as? Set<Entry> {
+            return entries.sorted(by: { $0.index < $1.index })
         }
         
-        var rows: [NSManagedObject] = []
-        for role in Role.allRoles(context: cvm.managedObjectContext) {
-            if let books = booksByRole[role] {
-                rows.append(role)
-                rows.append(contentsOf: books)
-            }
-        }
-        
-        return rows
+        return []
     }
     
-    func selectionChanged() {
-        let selectedCount = indexView.indexArray.selectedObjects?.count ?? 0
-        let showDetail = selectedCount > 0
-        detailsView.isHidden = !showDetail
-        if showDetail {
-            updateRoles()
-        }
-        if let wc = view.window?.windowController as? CollectionWindowController {
-            wc.validateButtons()
-        }
-    }
-    
-    func updateRoles() {
-        rows = rowsForSelection()
-        detailsView.reloadData()
-        
-    }
-}
-
-// MARK: Table Support
-
-protocol SeriesDetailTableCell {
-    func setup(for view: SeriesDetailViewController, row: Int, item: NSManagedObject)
-    func keyView() -> NSView?
-}
-
-extension SeriesDetailViewController: NSTableViewDataSource, NSTableViewDelegate {
-    
-    static let bookViewID = NSUserInterfaceItemIdentifier(rawValue: "book")
-    static let roleViewID = NSUserInterfaceItemIdentifier(rawValue: "role")
-    static let unknownViewID = NSUserInterfaceItemIdentifier(rawValue: "unknown")
-    
-    func numberOfRows(in tableView: NSTableView) -> Int {
-        return rows.count
-    }
-    
-    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        guard row < rows.count else {
-            return nil
-        }
-        
-        let viewID: NSUserInterfaceItemIdentifier
-        let item = rows[row]
+    override func identifier(for item: NSManagedObject) -> NSUserInterfaceItemIdentifier {
         switch item {
-        case is Role:
-            viewID = SeriesDetailViewController.roleViewID
-        case is Book:
-            viewID = SeriesDetailViewController.bookViewID
+        case is Entry:
+            return SeriesDetailViewController.entryViewID
         default:
-            viewID = SeriesDetailViewController.unknownViewID
+            return super.identifier(for: item)
         }
-        
-        let view = tableView.makeView(withIdentifier: viewID, owner: self)
-        if let cell = view as? SeriesDetailTableCell {
-            cell.setup(for: self, row: row, item: item)
-        }
-        
-        return view
-    }
-    
-    func tableView(_ tableView: NSTableView, didAdd rowView: NSTableRowView, forRow row: Int) {
-        availableRows.insert(row)
-        scheduleRecalculateKeyViews()
-    }
-    
-    func tableView(_ tableView: NSTableView, didRemove rowView: NSTableRowView, forRow row: Int) {
-        availableRows.remove(row)
-        scheduleRecalculateKeyViews()
-    }
-    
-    func scheduleRecalculateKeyViews() {
-        if let timer = keyViewTimer {
-            timer.invalidate()
-        }
-        
-        keyViewTimer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { _ in
-            self.recalculateKeyViews()
-        }
-    }
-    
-    func recalculateKeyViews() {
-        let rows = availableRows.sorted()
-        var view: NSView = notesView
-        for row in rows {
-            if let rowView = (detailsView.view(atColumn: 0, row: row, makeIfNecessary: false) as? PersonDetailTableCell)?.keyView() {
-                view.nextKeyView = rowView
-                view = rowView
-            }
-        }
-        view.nextKeyView = nameView
-        keyViewTimer = nil
-    }
-}
-
-// MARK: Actions
-
-extension SeriesDetailViewController: ActionContextProvider {
-    func provideDetailInfo(context: ActionContext) {
-        if let selection = indexView.indexArray.selectedObjects as? [Person] {
-            context.info[ActionContext.selectionKey] = selection
-        }
-    }
-    
-    func provide(context: ActionContext) {
-        indexView.provideIndexInfo(context: context)
-        provideDetailInfo(context: context)
     }
 }

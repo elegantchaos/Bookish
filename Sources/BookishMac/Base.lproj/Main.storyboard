@@ -1700,7 +1700,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="768"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <imageView identifier="portrait" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="HXp-Nq-8Tg" userLabel="Portrait">
+                                        <imageView identifier="person.portrait" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="HXp-Nq-8Tg" userLabel="Portrait">
                                             <rect key="frame" x="50" y="710" width="42" height="42"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="42" id="AT2-Qe-cjg"/>
@@ -2211,7 +2211,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <imageView identifier="portrait" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cMe-q7-A3I" userLabel="Portrait">
+                                        <imageView identifier="series.image" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cMe-q7-A3I" userLabel="Portrait">
                                             <rect key="frame" x="50" y="242" width="42" height="42"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="42" id="3ud-kK-wtb"/>
@@ -2259,7 +2259,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="350" height="140"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
-                                                    <tableView identifier="person-details" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="none" columnReordering="NO" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="24" rowSizeStyle="automatic" usesAutomaticRowHeights="YES" viewBased="YES" id="h0t-Bl-8yA">
+                                                    <tableView identifier="series-details" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="none" columnReordering="NO" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="24" rowSizeStyle="automatic" usesAutomaticRowHeights="YES" viewBased="YES" id="h0t-Bl-8yA">
                                                         <rect key="frame" x="0.0" y="0.0" width="350" height="140"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <size key="intercellSpacing" width="3" height="2"/>
@@ -2279,7 +2279,7 @@
                                                                 </textFieldCell>
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <prototypeCellViews>
-                                                                    <tableCellView identifier="book" id="qwi-jb-bi5" userLabel="book cell" customClass="PersonBookCell" customModule="BookishMac" customModuleProvider="target">
+                                                                    <tableCellView identifier="entry" id="qwi-jb-bi5" userLabel="book cell" customClass="SeriesEntryCell" customModule="BookishMac" customModuleProvider="target">
                                                                         <rect key="frame" x="1" y="1" width="347" height="22"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
@@ -2393,7 +2393,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="detailsView" destination="h0t-Bl-8yA" id="evX-QH-VCG"/>
+                        <outlet property="detailsTable" destination="h0t-Bl-8yA" id="wDH-f7-cWr"/>
                         <outlet property="nameView" destination="1hS-zV-NKy" id="F82-ER-sTN"/>
                         <outlet property="notesView" destination="Ykj-uj-ehm" id="Gcf-yK-cDJ"/>
                     </connections>
@@ -2416,7 +2416,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <imageView identifier="portrait" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pwF-tx-Ohf" userLabel="Portrait">
+                                        <imageView identifier="publisher.image" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pwF-tx-Ohf" userLabel="Portrait">
                                             <rect key="frame" x="50" y="242" width="42" height="42"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="42" id="EQw-L9-1eS"/>
@@ -2464,7 +2464,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="350" height="140"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
-                                                    <tableView identifier="person-details" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="none" columnReordering="NO" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="24" rowSizeStyle="automatic" usesAutomaticRowHeights="YES" viewBased="YES" id="mC6-Zf-gpF">
+                                                    <tableView identifier="publisher-details" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="none" columnReordering="NO" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="24" rowSizeStyle="automatic" usesAutomaticRowHeights="YES" viewBased="YES" id="mC6-Zf-gpF">
                                                         <rect key="frame" x="0.0" y="0.0" width="350" height="140"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <size key="intercellSpacing" width="3" height="2"/>
@@ -2598,7 +2598,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="detailsView" destination="mC6-Zf-gpF" id="56I-06-pzG"/>
+                        <outlet property="detailsTable" destination="mC6-Zf-gpF" id="uSN-Jm-VW5"/>
                         <outlet property="nameView" destination="GTp-HP-MDW" id="XnH-I5-s1f"/>
                         <outlet property="notesView" destination="ETF-xM-x22" id="UVF-hc-shb"/>
                     </connections>
@@ -2614,13 +2614,13 @@
         <image name="Book" width="16" height="16"/>
         <image name="Books" width="32" height="32"/>
         <image name="ChooseDateSmall" width="12" height="12"/>
-        <image name="CoverPlaceholder" width="512" height="512"/>
+        <image name="CoverPlaceholder" width="64" height="64"/>
         <image name="HilightMarker" width="4" height="36"/>
         <image name="Minus" width="12" height="12"/>
         <image name="NSAddTemplate" width="11" height="11"/>
         <image name="NSRemoveTemplate" width="11" height="11"/>
         <image name="People" width="32" height="32"/>
-        <image name="Person" width="32" height="32"/>
+        <image name="Person" width="16" height="16"/>
         <image name="PersonPlaceholder" width="64" height="64"/>
         <image name="Plus" width="12" height="12"/>
         <image name="Publishers" width="32" height="32"/>
