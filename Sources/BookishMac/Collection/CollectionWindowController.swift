@@ -19,7 +19,10 @@ class CollectionWindowController: NSWindowController, DocumentWindowController, 
     
     var personIndexController: PersonIndexViewController?
     var personDetailController: PersonDetailViewController?
-    
+
+    var publisherIndexController: PublisherIndexViewController?
+//    var personDetailController: PersonDetailViewController?
+
     override func windowDidLoad() {
         super.windowDidLoad()
         window?.autorecalculatesKeyViewLoop = false

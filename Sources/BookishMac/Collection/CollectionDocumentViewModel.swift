@@ -23,7 +23,8 @@ import BookishModel
     @objc var bookIndex: NSArrayController?
     @objc var selectedIndexes: NSMutableIndexSet?
     @objc var selectedPeople: NSMutableIndexSet?
-    
+    @objc var selectedPublishers: NSMutableIndexSet?
+
     @objc dynamic var modeIndex: Int = 0
     
     @objc let detailFont = NSFont.systemFont(ofSize: 14, weight: NSFont.Weight.regular)
