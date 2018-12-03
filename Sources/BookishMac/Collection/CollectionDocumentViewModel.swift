@@ -24,6 +24,7 @@ import BookishModel
     @objc var selectedIndexes: NSMutableIndexSet?
     @objc var selectedPeople: NSMutableIndexSet?
     @objc var selectedPublishers: NSMutableIndexSet?
+    @objc var selectedSeries: NSMutableIndexSet?
 
     @objc dynamic var modeIndex: Int = 0
     

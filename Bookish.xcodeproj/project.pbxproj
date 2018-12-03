@@ -35,6 +35,7 @@
 		22462E972158F65200A4C56C /* CollectionViewActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22462E962158F65200A4C56C /* CollectionViewActions.swift */; };
 		2250C6E121B191B200E899E2 /* BookPublisherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2250C6E021B191B200E899E2 /* BookPublisherCell.swift */; };
 		2250C6FC21B541B400E899E2 /* PublisherIndexViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2250C6FB21B541B400E899E2 /* PublisherIndexViewController.swift */; };
+		2250C70021B54D0900E899E2 /* SeriesIndexViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2250C6FF21B54D0900E899E2 /* SeriesIndexViewController.swift */; };
 		226E8E6B21AC0918001F191F /* AnnotatedComboBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226E8E6A21AC0918001F191F /* AnnotatedComboBox.swift */; };
 		226E8E6D21AC38D5001F191F /* BookHeadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226E8E6C21AC38D5001F191F /* BookHeadingCell.swift */; };
 		226E8E6F21AC3D6A001F191F /* BookEditablePersonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226E8E6E21AC3D6A001F191F /* BookEditablePersonCell.swift */; };
@@ -187,6 +188,7 @@
 		22462E962158F65200A4C56C /* CollectionViewActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewActions.swift; sourceTree = "<group>"; };
 		2250C6E021B191B200E899E2 /* BookPublisherCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookPublisherCell.swift; sourceTree = "<group>"; };
 		2250C6FB21B541B400E899E2 /* PublisherIndexViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublisherIndexViewController.swift; sourceTree = "<group>"; };
+		2250C6FF21B54D0900E899E2 /* SeriesIndexViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeriesIndexViewController.swift; sourceTree = "<group>"; };
 		226E8E6A21AC0918001F191F /* AnnotatedComboBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotatedComboBox.swift; sourceTree = "<group>"; };
 		226E8E6C21AC38D5001F191F /* BookHeadingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookHeadingCell.swift; sourceTree = "<group>"; };
 		226E8E6E21AC3D6A001F191F /* BookEditablePersonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookEditablePersonCell.swift; sourceTree = "<group>"; };
@@ -384,6 +386,7 @@
 				227F451021821B7F000D8B8D /* Books */,
 				227F451121821B90000D8B8D /* People */,
 				2250C6FD21B541C100E899E2 /* Publisher */,
+				2250C6FE21B54CF000E899E2 /* Series */,
 				22D39E5C2146CC4400282467 /* Actions */,
 				227F451B21835EF4000D8B8D /* Importers */,
 				22D39E632147E9BA00282467 /* Transformers */,
@@ -418,6 +421,14 @@
 				2250C6FB21B541B400E899E2 /* PublisherIndexViewController.swift */,
 			);
 			path = Publisher;
+			sourceTree = "<group>";
+		};
+		2250C6FE21B54CF000E899E2 /* Series */ = {
+			isa = PBXGroup;
+			children = (
+				2250C6FF21B54D0900E899E2 /* SeriesIndexViewController.swift */,
+			);
+			path = Series;
 			sourceTree = "<group>";
 		};
 		227F450D2181EDE1000D8B8D /* People */ = {
@@ -961,6 +972,7 @@
 				220CDA9F214A86A80064CC91 /* PersonIndexViewController.swift in Sources */,
 				22D39E552146A84E00282467 /* BookDateCell.swift in Sources */,
 				22143FD1212F076000B689DF /* CollectionRootViewController.swift in Sources */,
+				2250C70021B54D0900E899E2 /* SeriesIndexViewController.swift in Sources */,
 				220CDAA1214A8D510064CC91 /* PersonDetailViewController.swift in Sources */,
 				22D39E5E2146D9F100282467 /* ValidatingButton.swift in Sources */,
 				22D1B2432180CA9E0062F2CB /* PersonBookCell.swift in Sources */,
