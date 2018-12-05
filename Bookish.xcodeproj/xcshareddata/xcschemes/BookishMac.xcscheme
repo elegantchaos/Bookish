@@ -139,7 +139,7 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "-logs Model,Application,Actions"
+            argument = "-logs Model,Application,DeliciousImporter"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
