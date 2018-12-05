@@ -12,6 +12,87 @@ import Logger
 let seriesDetectorChannel = Logger("DeliciousImporter")
 
 class SeriesDetector {
+    struct Result {
+        let name: String
+        let subtitle: String
+        let series: String
+        let index: Int
+    }
+    
+    func detect(name: String, subtitle: String) -> Result? {
+        return nil
+    }
+    
+    func extract(_ from: NSTextCheckingResult, string: String, matches: [Int]) -> [String] {
+        var extracted: [String] = []
+        for match in matches {
+            if let range = Range(from.range(at: match), in: string) {
+                extracted.append(String(string[range]))
+            } else {
+                extracted.append("")
+            }
+        }
+        return extracted
+    }
+}
+
+class SeriesBracketsSBookDetector: SeriesDetector {
+    let pattern = try! NSRegularExpression(pattern: "(.*) \\((.*)S[.]{0,1}\\)")
+
+    override func detect(name: String, subtitle: String) -> Result? {
+        let range = NSRange(location: 0, length: name.count)
+        if let match = pattern.firstMatch(in: name, options: [], range: range) {
+            let extracted = extract(match, string: name, matches: [1,2])
+            let matchedSeries = extracted[1]
+            let matchedName = extracted[0]
+            if !matchedSeries.isEmpty && !name.isEmpty {
+                let matchedSubtitle = subtitle.contains(matchedSeries) ? "" : subtitle
+                return Result(name: matchedName, subtitle: matchedSubtitle, series: matchedSeries, index: 0)
+            }
+        }
+        
+        return nil
+    }
+}
+
+class SeriesBracketsBookDetector: SeriesDetector {
+    let pattern = try! NSRegularExpression(pattern: "(.*) \\((.*)\\)$")
+    
+    override func detect(name: String, subtitle: String) -> Result? {
+        let range = NSRange(location: 0, length: name.count)
+        if let match = pattern.firstMatch(in: name, options: [], range: range) {
+            let extracted = extract(match, string: name, matches: [1,2])
+            let matchedSeries = extracted[1]
+            let matchedName = extracted[0]
+            if subtitle == matchedSeries {
+                return Result(name: matchedName, subtitle: "", series: matchedSeries, index: 0)
+            }
+        }
+        
+        return nil
+    }
+}
+
+class SeriesNameBookDetector: SeriesDetector {
+    let pattern = try! NSRegularExpression(pattern: "(.*)\\:+ (.*)\\:{0,1} Bk\\. (\\d+)(.*)")
+
+    override func detect(name: String, subtitle: String) -> Result? {
+        if let match = pattern.firstMatch(in: name, options: [], range: NSRange(location: 0, length: name.count)) {
+            let extracted = extract(match, string: name, matches: [1,2,3,4])
+            let matchedSeries = extracted[0]
+            let matchedName = extracted[1] + extracted[4]
+            let matchedIndex = (extracted[2] as NSString).integerValue
+            if !matchedSeries.isEmpty && !name.isEmpty {
+                let matchedSubtitle = subtitle.contains(matchedSeries) ? "" : subtitle
+                return Result(name: matchedName, subtitle: matchedSubtitle, series: matchedSeries, index: matchedIndex)
+            }
+        }
+        
+        return nil
+    }
+}
+
+class SeriesScanner {
     typealias Record = [String:Any]
     typealias RecordList = [Record]
     
@@ -24,9 +105,9 @@ class SeriesDetector {
     
     let formatsToSkip = ["Audio CD", "Audio CD Enhanced", "Audio CD Import", "Video Game", "VHS Tape", "VideoGame", "DVD"]
     
+    let detectors = [ SeriesBracketsSBookDetector(), SeriesBracketsBookDetector(), SeriesNameBookDetector() ]
+    
     let seriesNameBookPattern = try! NSRegularExpression(pattern: "(.*)\\((.*)S[.]{0,1}\\)")
-    let seriesSPattern = try! NSRegularExpression(pattern: "(.*)\\((.*)S[.]{0,1}\\)")
-    let seriesPattern = try! NSRegularExpression(pattern: "(.*)\\((.*)\\)$")
     let bookIndexPatterns = [
         try! NSRegularExpression(pattern: "(.*)\\:{0,1} Bk\\.{0,1} *(\\d+)"),
         try! NSRegularExpression(pattern: "(.*)\\:{0,1} Book\\.{0,1} *(\\d+)"),
@@ -54,50 +135,24 @@ class SeriesDetector {
         }
     }
     
-    private func process(record: Record) {
+    public func run() {
         let books: [Book] = context.everyEntity()
         for book in books {
-            if let (series, index) = process(book: book) {
-                if let entry = book.series {
-                    context.delete(entry)
-                }
-                process(series: series, index: index, for: book)
-            }
-        }
-    }
-
-    private func process(book: Book) -> (String, Int)? {
-        if let series = book.series?.series?.name, !series.isEmpty {
-            deliciousChannel.log("Explicit series <\(series)>, book <\(book.name ?? "")> subtitle <\(book.subtitle ?? "")>")
-            return extractIndex(from: series, book: book)
-        }
-        
-        if let name = book.name {
-            for match in seriesSPattern.matches(in: name, options: [], range: NSRange(location: 0, length: name.count)) {
-                if let nameRange = Range(match.range(at: 1), in: name), let seriesRange = Range(match.range(at: 2), in: name) {
-                    let adjustedName = String(name[nameRange])
-                    let series = String(name[seriesRange])
-                    book.name = adjustedName
-                    deliciousChannel.log("(S.) <\(series)>, book <\(book.name ?? "")> subtitle <\(book.subtitle ?? "")>")
-                    return extractIndex(from: series, book: book)
+            for detector in detectors {
+                let name = book.name ?? ""
+                let subtitle = book.subtitle ?? ""
+                if let detected = detector.detect(name: name, subtitle: subtitle) {
+                    book.name = detected.name
+                    book.subtitle = detected.subtitle
+                    deliciousChannel.log("extracted <\(detected.name)> <\(detected.subtitle)> <\(detected.series) \(detected.index)> from <\(name)> <\(subtitle)>")
+                    process(series: detected.series, index: detected.index, for: book)
                 }
             }
-            
-            for match in seriesPattern.matches(in: name, options: [], range: NSRange(location: 0, length: name.count)) {
-                if let nameRange = Range(match.range(at: 1), in: name), let seriesRange = Range(match.range(at: 2), in: name) {
-                    let adjustedName = String(name[nameRange])
-                    let series = String(name[seriesRange])
-                    if series == book.subtitle {
-                        book.name = adjustedName
-                        book.subtitle = nil
-                        deliciousChannel.log("() <\(series)>, book <\(book.name ?? "")> subtitle <\(book.subtitle ?? "")>")
-                        return extractIndex(from: series, book: book)
-                    }
-                }
-            }
+//            if let (series, index) = process(book: book) {
+//                if let entry = book.series {
+//                    context.delete(entry)
+//                }
         }
-        
-        return nil
     }
 
     private func process(series: String, index: Int, for book: Book) {

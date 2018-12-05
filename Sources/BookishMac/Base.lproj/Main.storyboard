@@ -395,6 +395,18 @@
                                     </items>
                                 </menu>
                             </menuItem>
+                            <menuItem title="Collection" id="ocN-wE-Zc8">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Collection" identifier="menu.book" id="PET-8T-wg6">
+                                    <items>
+                                        <menuItem title="Scan For Series" keyEquivalent="E" identifier="menu.ScanSeries" id="18S-Lg-R9p">
+                                            <connections>
+                                                <action selector="performAction:" target="Ady-hI-5gd" id="Vak-aB-Iwf"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
                             <menuItem title="View" id="H8h-7b-M4v">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="View" id="HyV-fh-RgO">

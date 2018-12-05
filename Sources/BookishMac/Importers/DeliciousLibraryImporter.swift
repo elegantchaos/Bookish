@@ -84,15 +84,8 @@ class DeliciousLibraryImportSession: ImportSession {
                 
                 process(creators: creators, for: book)
                 
-                if let publishers = record["publishersCompositeString"] as? String {
-                    process(publishers: publishers, for: book)
-                }
-                
-                if let (series, index) = inferSeries(in: record, for: book) {
-                    if book.subtitle == series {
-                        book.subtitle = nil
-                    }
-                    process(series: series, index: index, for: book)
+                if let series = record["seriesSingularString"] as? String, !series.isEmpty {
+                    process(series: series, index: 0, for: book)
                 }
             }
         }
@@ -131,79 +124,6 @@ class DeliciousLibraryImportSession: ImportSession {
                 publisher.addToBooks(book)
             }
         }
-    }
-    
-    private func inferSeries(in record: Record, for book: Book) -> (String, Int)? {
-        if let series = record["seriesSingularString"] as? String, !series.isEmpty {
-            deliciousChannel.log("Explicit series <\(series)>, book <\(book.name ?? "")> subtitle <\(book.subtitle ?? "")>")
-            return extractIndex(from: series, book: book)
-        }
-        
-        if let name = book.name {
-            for match in seriesSPattern.matches(in: name, options: [], range: NSRange(location: 0, length: name.count)) {
-                if let nameRange = Range(match.range(at: 1), in: name), let seriesRange = Range(match.range(at: 2), in: name) {
-                    let adjustedName = String(name[nameRange])
-                    let series = String(name[seriesRange])
-                    book.name = adjustedName
-                    deliciousChannel.log("(S.) <\(series)>, book <\(book.name ?? "")> subtitle <\(book.subtitle ?? "")>")
-                    return extractIndex(from: series, book: book)
-                }
-            }
-            
-            for match in seriesPattern.matches(in: name, options: [], range: NSRange(location: 0, length: name.count)) {
-                if let nameRange = Range(match.range(at: 1), in: name), let seriesRange = Range(match.range(at: 2), in: name) {
-                    let adjustedName = String(name[nameRange])
-                    let series = String(name[seriesRange])
-                    if series == book.subtitle {
-                        book.name = adjustedName
-                        book.subtitle = nil
-                        deliciousChannel.log("() <\(series)>, book <\(book.name ?? "")> subtitle <\(book.subtitle ?? "")>")
-                        return extractIndex(from: series, book: book)
-                    }
-                }
-            }
-        }
-
-        return nil
-    }
-    
-    private func extractIndex(from series: String, book: Book) -> (String, Int) {
-        if let (extractedSeries, index) = extractIndex(from: series) {
-            deliciousChannel.log("extracted index \(index) from series \(series) leaving \(extractedSeries)")
-            return (extractedSeries, index)
-        }
-
-        if let name = book.name {
-            if let (extractedName, index) = extractIndex(from: name) {
-                book.name = extractedName
-                deliciousChannel.log("extracted index \(index) from name \(name) leaving \(extractedName)")
-                return (extractedName, index)
-            }
-        }
-
-        if let subtitle = book.subtitle {
-            if let (extractedSubtitle, index) = extractIndex(from: subtitle) {
-                book.subtitle = extractedSubtitle
-                deliciousChannel.log("extracted index \(index) from subtitle \(subtitle) leaving \(extractedSubtitle)")
-                return (extractedSubtitle, index)
-            }
-        }
-
-        return (series, 0)
-    }
-    
-    private func extractIndex(from string: String) -> (String, Int)? {
-        for pattern in bookIndexPatterns {
-            for match in pattern.matches(in: string, options: [], range: NSRange(location: 0, length: string.count)) {
-                if let seriesRange = Range(match.range(at: 1), in: string), let indexRange = Range(match.range(at: 2), in: string) {
-                    let adjustedSeries = String(string[seriesRange])
-                    let index = (String(string[indexRange]) as NSString).integerValue
-                    return (adjustedSeries, index)
-                }
-            }
-        }
-
-        return nil
     }
     
     private func process(series: String, index: Int, for book: Book) {
