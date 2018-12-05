@@ -54,7 +54,10 @@ class DeliciousLibraryImportSession: ImportSession {
     
     private func process(record: Record) {
         let format = record["formatSingularString"] as? String
-        if (format == nil || !formatsToSkip.contains(format!)) {
+        let formatOK = format == nil || !formatsToSkip.contains(format!)
+        let type = record["type"] as? String
+        let typeOK = type == nil || !formatsToSkip.contains(type!)
+        if formatOK && typeOK {
             if let title = record["title"] as? String, let creators = record["creatorsCompositeString"] as? String {
                 let book = Book(context: context)
                 book.name = title
