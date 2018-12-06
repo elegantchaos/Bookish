@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Salman Rushdie
+title: "Midnight's Children (Picador Books)"
+edition: "Paperback"
+isbn: "0330267140"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">Before Salman Rushdie had that problem with a certain religious-political figure with a serious need to chill out, he'd already shown he was an important literary force. Quite simply, <span style="font-style:italic;">Midnight's Children</span> is amazing--fun, beautiful, erudite, both fairy tale and political narrative told through a supernatural narrator who is caught between different worlds. Though it's a big book, with big themes of India's nationhood and of ethnic and personal identity, it's far from a dry history lesson. Rushdie tells the story in his own brand of magical realism, with a prose of lyrical, transcendent goofiness.&nbsp;</span></p>
+  
+publisher: "Picador"
+publishing_year: "1982"

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Stanislaw Lem Joanna Kilmartin Steve Cox
+title: "Solaris"
+edition: "Paperback"
+isbn: "0571162150"
+notes: |-
+  
+publisher: "Faber and Faber Ltd"
+publishing_year: "1991"

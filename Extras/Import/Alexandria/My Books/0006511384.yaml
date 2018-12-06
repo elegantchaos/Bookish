@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Greg Bear
+title: "Darwin's Radio"
+edition: "Paperback"
+isbn: "0006511384"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">Greg Bear notoriously reworks traditional SF themes in his own special way. His first success, <span style="font-style:italic;">Blood Music</span> (1985), features an intelligent plague which seems destructive but eventually recreates humanity in new, transcendent form--echoing Arthur C. Clarke's rough-hewn 1953 classic <span style="font-style:italic;">Childhood's End</span>. <span style="font-style:italic;">Darwin's Radio</span> revisits this territory but foregrounds scientific, medical and political reactions to disaster; it's reminiscent of a Michael Crichton technothriller. The menace is a "new" virus, SHEVA, which is in fact very old--embedded in a ancient human DNA sequences and now emerging as "Herod's 'Flu", which in pregnant women always forces miscarriage. Chillingly, US health aauthorities first see this threat as something to boost funding, while conservative scientists suppress research into the bizarre reality of what's happening. Evidence from Neanderthal remains and Stalin's mass graves hints that SHEVA is no disease but evolution in action. Human genomes everywhere, linked by the subtle network of "Darwin's radio", are activating Plan B: the creation of a new species. Then, with the world racked by panic, riots, death cults and martial law, SHEVA begins to mutate ... Tense stuff, though some biological info-dumps are tough going, and it's awkwardly paced towards the end when nine months are needed for the biologist heroine's own pregnancy, leading to... but that would be telling. This is a fearfully plausible scientific thriller. --<span style="font-style:italic;">David L Langford&nbsp;</span></span></p>
+  
+publisher: "HarperCollins"
+publishing_year: "2000"

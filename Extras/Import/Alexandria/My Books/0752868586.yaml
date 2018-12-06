@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Ian Rankin
+title: "The Naming Of The Dead"
+edition: "Hardback"
+isbn: "0752868586"
+notes: |-
+  
+publisher: "Orion"
+publishing_year: "2006"

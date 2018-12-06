@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Alan W. Biermann
+title: "Great Ideas in Computer Science"
+edition: "Paperback"
+isbn: "0262521482"
+notes: |-
+  
+publisher: "The MIT Press"
+publishing_year: "1990"

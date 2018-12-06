@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Cem Kaner James Bach Brett Pettichord
+title: "Lessons Learned in Software Testing"
+edition: "Paperback"
+isbn: "0471081124"
+notes: |-
+  
+publisher: "John Wiley & Sons Inc"
+publishing_year: "2002"

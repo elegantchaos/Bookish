@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Jo Nesbo
+title: "The Snowman"
+edition: "Paperback"
+isbn: "0099520273"
+notes: |-
+  
+publisher: "Vintage"
+publishing_year: "2010"

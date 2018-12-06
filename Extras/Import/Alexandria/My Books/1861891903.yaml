@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Charlotte Sleigh
+title: "Ant (Animal S.)"
+edition: "Paperback"
+isbn: "1861891903"
+notes: |-
+  
+publisher: "Reaktion Books Ltd"
+publishing_year: "2003"

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Greg Bear
+title: "Quantico"
+edition: "Paperback"
+isbn: "0007129793"
+notes: |-
+  
+publisher: "HarperCollins Publishers Ltd"
+publishing_year: "2006"

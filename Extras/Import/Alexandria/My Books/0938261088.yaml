@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - n/a
+title: "Roget's Thesaurus"
+edition: "Paperback"
+isbn: "0938261088"
+notes: |-
+  
+publisher: "B C S Associates"
+publishing_year: "1992"

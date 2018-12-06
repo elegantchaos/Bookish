@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Steven Brindle
+title: "Brunel"
+edition: "Paperback"
+isbn: "0753821257"
+notes: |-
+  
+publisher: "Phoenix"
+publishing_year: "2006"

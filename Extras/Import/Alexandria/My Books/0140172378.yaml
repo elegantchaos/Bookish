@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Will Baker
+title: "Shadow Hunter"
+edition: "Paperback"
+isbn: "0140172378"
+notes: |-
+  
+publisher: "Penguin Books Ltd"
+publishing_year: "1994"

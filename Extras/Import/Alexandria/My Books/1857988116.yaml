@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - James Blish
+title: "Cities in Flight (S.F.Masterworks S.)"
+edition: "Paperback"
+isbn: "1857988116"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">One of the grandest, and certainly one of the best written, of wide-screen space operas, Blish's <span style="font-style:italic;">Cities in Flight</span> takes us from the collapse of American civilisation at the moment of its greatest scientific success to its final transfiguration at a moment of cosmic disaster. New York, enclosed in a vast dome, and powered by anti-gravity and hyper- drive, wanders among the stars, a labourer for hire, and yet also the seed of humanity's brief ascendancy in a hostile galaxy. This is the story of people as well as vast historical moments-- of Wagoner, the Senator who gives his life and good name for humanity's future; Chris, the naive youngster to whom New York gives everything, and from whom it will take everything away; and above all John Amalfi, who starts as Mayor of New York and ends up as a sort of god. And along the way, we meet some of the strangest of the shapes human society takes among the stars. Crackling with ideas about the progress of history, and passionate in its evocation of the deep reaches of time and space, Blish's sequence is intelligent and visionary, a true classic of the genre. --<span style="font-style:italic;">Roz Kaveney&nbsp;</span></span></p>
+  
+publisher: "Gollancz"
+publishing_year: "1999"

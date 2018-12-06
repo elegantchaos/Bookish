@@ -1,0 +1,15 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Simon Singh
+title: "The Code Book"
+edition: "Hardback"
+isbn: "1857028791"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">With their inextricable links to history, mystery and war, codes and ciphers offer a rich seam of material for any author. The relative dearth of non-technical books on the subject may be a reflection of its pretty technical foundations, which compel hard decisions about what to include and what to gloss over. Few are better qualified to take on the challenge than Simon Singh, the particle physicist turned science writer whose book <span style="font-style:italic;">Fermat's Last Theorem</span>, recounting the dauntingly complex story behind the proof of this mathematical conjecture, deservedly became a No. 1 bestseller.
+  
+  
+  
+  <span style="font-style:italic;">The Code Book</span> contains many fascinating accounts of code-breaking in action, from its use in unmasking the Man in the Iron Mask and the defeat of the Nazis to the breaking of a modern cipher system by a world-wide army of amateurs in 1994. It is especially good on the most recent developments, such as quantum cryptology and the thorny civil liberties issues raised by the advent of very secure cipher systems over the Internet. But Singh's mathematical prowess sometimes gets the better of his journalistic instincts, leading to technical descriptions that unnecessarily disrupt the narrative flow. So buy it-- and have a shot at the 10,000 pound mystery cipher--but be prepared to skip. <span style="font-style:italic;">--Robert Matthews&nbsp;</span></span></p>
+  
+publisher: "Fourth Estate"
+publishing_year: "1999"

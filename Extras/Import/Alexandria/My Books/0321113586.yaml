@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Herb Sutter Andrei Alexandrescu
+title: "C++ Coding Standards"
+edition: "Paperback"
+isbn: "0321113586"
+notes: |-
+  
+publisher: "Addison Wesley"
+publishing_year: "2004"

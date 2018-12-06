@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - C. J. Cherryh
+title: "Ealdwood"
+edition: "Paperback"
+isbn: "0575045752"
+notes: |-
+  
+publisher: "Gollancz"
+publishing_year: "1991"

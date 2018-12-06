@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Jonas Jonasson
+title: "The Hundred-Year-Old Man Who Climbed Out of the Window and Disappeared"
+edition: "Paperback"
+isbn: "0349141800"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">Hundred-Year-Old Man Who Climbed Out of the Window and Disap&nbsp;</span></p>
+  
+publisher: "Abacus"
+publishing_year: "2015"

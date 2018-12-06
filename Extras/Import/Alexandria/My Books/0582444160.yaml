@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - G. Stephenson
+title: "Mathematical Methods for Science Students"
+edition: "Paperback"
+isbn: "0582444160"
+notes: |-
+  
+publisher: "Prentice Hall"
+publishing_year: "1973"

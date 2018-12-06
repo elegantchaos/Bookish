@@ -1,0 +1,23 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Herb Sutter
+title: "Exceptional C++"
+edition: "Paperback"
+isbn: "0201615622"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">Aimed at the experienced C++ programmer, Herb Sutter's <span style="font-style:italic;">ExceptionalC++</span> tests any reader's knowledge of advanced C++ language features and idioms with several dozen programming puzzles and explanations. This is a book that can definitely help bring your C++ class design skills to the next level.
+  
+  
+  
+  Based on the author's <span style="font-style:italic;">Guru of the Week</span> Internet column, this book poses a series of challenging questions on the inner workings of C++, centring around generic programming with the Standard Template Library(STL), exception handling, memory management and class design. Even if you think you know C++ well, most of these problems will teach you something more about the language and how to write more robust classes that are "exception safe". Don't think this is just "language lawyering" though. The author's explanations stress sound programming principles (favouring simplicity) and <span style="font-style:italic;">idioms</span> (such as the <span style="font-style:italic;">Pimpl idiom</span> for class design that promotes faster compile times and better maintainability, or using "smart" <span style="font-style:italic;">auto_ptr</span>'s with STL.) Judging from the range and depth of these examples, Sutter's command of the inner workings of C++ is impressive and he does an excellent job at conveying this expertise without jargon or a lot of theory.
+  
+  
+  
+  After reading this book, C++ designers will learn several "best practices" at how to write robust, efficient classes that are "exception safe" (meaning they don't throw any handled exceptions and don't leak resources). Chances are you'll gain a better understanding of memory management techniques and working with STL too. For the experienced developer seeking leading-edge knowledge of some of the best ways to use C++, <span style="font-style:italic;">ExceptionalC++</span> is both a challenging and truly worthwhile source of information. <span style="font-style:italic;">--Richard Dragan, Amazon.com</span>
+  
+  
+  
+  <span style="font-weight:bold;">Topics covered:</span> Advanced C++ programming tutorial, generic programming, tips for string classes, containers and STL, temporary objects, exception-safe code tutorial, virtual functions, class inheritance, the <span style="font-style:italic;">Pimpl idiom</span>, namespaces, memory management, C++ memory areas, overloading <span style="font-style:italic;">new</span> and <span style="font-style:italic;">delete</span>, using smart pointer with <span style="font-style:italic;">auto_ptr</span>, using <span style="font-style:italic;">const</span>, casts and hints for better performance and code maintainability.&nbsp;</span></p>
+  
+publisher: "Addison Wesley"
+publishing_year: "1999"

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Edgar Wallace
+title: "The Ringer"
+edition: ""
+isbn: "B0000CHOWU"
+notes: |-
+  
+publisher: "Pan Books"
+publishing_year: "1950"

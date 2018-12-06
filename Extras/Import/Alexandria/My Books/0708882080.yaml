@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Terry Brooks
+title: "The Wishsong Of Shannara"
+edition: "Paperback"
+isbn: "0708882080"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">1st edition 1st printing paperback, vg++ In stock shipped from our UK warehouse&nbsp;</span></p>
+  
+publisher: "Orbit"
+publishing_year: "1986"

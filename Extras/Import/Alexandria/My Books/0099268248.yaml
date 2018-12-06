@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Donald Antrim
+title: "The Hundred Brothers"
+edition: "Paperback"
+isbn: "0099268248"
+notes: |-
+  
+publisher: "Minerva"
+publishing_year: "1998"

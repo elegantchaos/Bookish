@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - David Arscott David Marl
+title: "Frozen City (Unicorn S)"
+edition: "Paperback"
+isbn: "004823317X"
+notes: |-
+  
+publisher: "Unwin Pbs."
+publishing_year: "1985"

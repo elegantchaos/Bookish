@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Frank D. Luna
+title: "Introduction to 3D Game Programming with DirectX 9.0c"
+edition: "Paperback"
+isbn: "1598220160"
+notes: |-
+  
+publisher: "Wordware Publishing Inc.,U.S."
+publishing_year: "2006"

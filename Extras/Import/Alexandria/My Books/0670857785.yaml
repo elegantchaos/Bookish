@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - William Gibson
+title: "Idoru"
+edition: "Hardback"
+isbn: "0670857785"
+notes: |-
+  
+publisher: "Viking"
+publishing_year: "1996"

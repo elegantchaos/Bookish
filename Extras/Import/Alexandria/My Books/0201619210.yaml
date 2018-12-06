@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Fabio Policarpo Alan Watt
+title: "3d Games"
+edition: "Hardback"
+isbn: "0201619210"
+notes: |-
+  
+publisher: "Addison Wesley"
+publishing_year: "2000"

@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Guy Gavriel Kay
+title: "Sailing to Sarantium"
+edition: "Paperback"
+isbn: "0671021931"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">Guy Gavriel Kay's fantasy career began with "The Fionavar Tapestry", a popular trilogy mixing Arthurian and Tolkienian themes. He's since developed an original vein of alternative-historical fiction: richly suspenseful stories whose period settings have different country names and added magic. <span style="font-style:italic;">The Lions of Al-Rassan</span> reinvented medieval Spain; <span style="font-style:italic;">Sailing to Sarantium</span> lovingly reflects the intrigue and splendour of the Byzantine Empire and echoes W.B. Yeats's famous <span style="font-style:italic;">Byzantium</span> poems. Magic exists: at least one old god is horribly real, and those artificial singing birds celebrated by Yeats take their life from an unexpected creepy source. Sarantium City is intensely imagined, with dynastic upheavals, riot and rebellion, a smashing chariot race, and knives glinting in every alley. There's sharp intelligence here, too. The hero, an outlander mosaic expert summoned to decorate Sarantium's newest and greatest dome, faces his worst test at the Emperor's court--where mechanical trickery lurks, conversation is double-edged and exile awaits the loser in a debate on mosaic techniques. There's also a Sherlockian challenge to deduce how the top charioteer pulled off a magical- seeming coup. Kay has laid fine groundwork for this new series "The Sarantine Mosaic", with more to follow. --<span style="font-style:italic;">David Langford&nbsp;</span></span></p>
+  
+publisher: "Earthlight"
+publishing_year: "1999"

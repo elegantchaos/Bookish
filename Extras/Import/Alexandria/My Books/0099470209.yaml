@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - David Gemmell
+title: "Legend"
+edition: "Paperback"
+isbn: "0099470209"
+notes: |-
+  
+publisher: "Legend"
+publishing_year: "1986"

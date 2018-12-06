@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - David Peace
+title: "The Damned Utd"
+edition: "Paperback"
+isbn: "0571224334"
+notes: |-
+  
+publisher: "Faber and Faber"
+publishing_year: "2007"

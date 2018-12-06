@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Christopher Brookmyre
+title: "One Fine Day In The Middle Of The Night"
+edition: "Paperback"
+isbn: "0349112096"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">Gavin is creating a unique 'holiday experience', every facility any tourist who hates abroad will ever want, will all be available on a converted North Sea oil rig. To test the facilities he's hosting a reunion for his old school (none of his ex-classmates can remember him, but what the heck, it's free). He is so busy showing off that he doesn't notice that another group have invited themselves along -- a collection of terrorist mercenaries who are occasionally of more danger to themselves than to the public. And they in turn are unaware that Inspector MacGregor has got wind of their activities. Within twenty-four hours Gavin's dream has blown to the four winds, along with a lot of other things. Fast, rabidly funny, and seriously over the top.&nbsp;</span></p>
+  
+publisher: "Abacus"
+publishing_year: "2000"

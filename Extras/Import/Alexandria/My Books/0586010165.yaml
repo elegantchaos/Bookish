@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Isaac Asimov
+title: "The Naked Sun (Robot Series)"
+edition: "Paperback"
+isbn: "0586010165"
+notes: |-
+  
+publisher: "Collins"
+publishing_year: "1993"

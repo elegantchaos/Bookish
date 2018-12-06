@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Greg Bear
+title: "Eternity"
+edition: "Paperback"
+isbn: "0575046139"
+notes: |-
+  
+publisher: "Gollancz"
+publishing_year: "1989"

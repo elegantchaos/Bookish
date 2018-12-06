@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Jonathan Coe
+title: "What a Carve Up! (Essential.penguin)"
+edition: "Paperback"
+isbn: "0140294562"
+notes: |-
+  
+publisher: "Penguin Books Ltd"
+publishing_year: "2001"

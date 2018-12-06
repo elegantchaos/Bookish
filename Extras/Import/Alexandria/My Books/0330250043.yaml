@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Arthur C Clarke
+title: "Imperial Earth"
+edition: "Paperback"
+isbn: "0330250043"
+notes: |-
+  
+publisher: "Pan Bks."
+publishing_year: "1977"

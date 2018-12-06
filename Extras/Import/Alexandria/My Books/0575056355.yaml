@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Nick Hornby
+title: "Fever Pitch"
+edition: "Paperback"
+isbn: "0575056355"
+notes: |-
+  
+publisher: "Gollancz"
+publishing_year: "1993"

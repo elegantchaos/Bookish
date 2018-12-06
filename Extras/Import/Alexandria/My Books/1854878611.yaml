@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - David G. Hartwell
+title: "The Science Fiction Century"
+edition: "Paperback"
+isbn: "1854878611"
+notes: |-
+  
+publisher: "Constable and Robinson"
+publishing_year: "1998"

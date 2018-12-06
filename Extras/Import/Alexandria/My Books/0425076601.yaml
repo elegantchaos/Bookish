@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Dick Philip K.
+title: "Man in the High Castle"
+edition: ""
+isbn: "0425076601"
+notes: |-
+  
+publisher: "Berkley Publishing Group"
+publishing_year: "1983"

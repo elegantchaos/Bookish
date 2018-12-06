@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Tom DeMarco Tim Lister
+title: "Waltzing with Bears"
+edition: "Paperback"
+isbn: "0932633609"
+notes: |-
+  
+publisher: "Dorset House Publishing Co"
+publishing_year: "2003"

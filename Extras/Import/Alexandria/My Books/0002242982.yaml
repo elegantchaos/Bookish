@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Katharine Kerr
+title: "A Time of Justice"
+edition: "Paperback"
+isbn: "0002242982"
+notes: |-
+  
+publisher: "Collins"
+publishing_year: "1994"

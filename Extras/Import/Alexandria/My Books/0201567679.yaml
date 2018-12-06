@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Inc. Apple Computer
+title: "MacsBug Reference and Debugging Guide"
+edition: "Paperback"
+isbn: "0201567679"
+notes: |-
+  
+publisher: "Addison Wesley"
+publishing_year: "1991"

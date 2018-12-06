@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Alfred V. Aho Ravi Sethi Jeffrey D. Ullman
+title: "Compilers"
+edition: "Paperback"
+isbn: "0201101947"
+notes: |-
+  
+publisher: "Addison Wesley"
+publishing_year: "1986"

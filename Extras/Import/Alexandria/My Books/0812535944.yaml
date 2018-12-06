@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Nelson Carole Douglas
+title: "Keepers of Edanvant"
+edition: "Paperback"
+isbn: "0812535944"
+notes: |-
+  
+publisher: "Tor Books"
+publishing_year: "1988"

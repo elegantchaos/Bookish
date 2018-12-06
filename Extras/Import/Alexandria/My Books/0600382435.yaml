@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - n/a
+title: "Best Science Fiction Stories"
+edition: "Hardback"
+isbn: "0600382435"
+notes: |-
+  
+publisher: "Hamlyn"
+publishing_year: "1977"

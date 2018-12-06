@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Robertson Davies
+title: "Murther and Walking Spirits"
+edition: "Paperback"
+isbn: "0140159320"
+notes: |-
+  
+publisher: "Penguin Books Ltd"
+publishing_year: "1992"

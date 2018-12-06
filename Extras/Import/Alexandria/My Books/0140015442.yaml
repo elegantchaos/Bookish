@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - John Wyndham Lucas Parkes
+title: "The Outward Urge"
+edition: "Paperback"
+isbn: "0140015442"
+notes: |-
+  
+publisher: "Penguin Books Ltd"
+publishing_year: "1970"

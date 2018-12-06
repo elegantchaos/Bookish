@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Albert Camus
+title: "The Outsider (Penguin Modern Classics)"
+edition: "Paperback"
+isbn: "0141182504"
+notes: |-
+  
+publisher: "Penguin Books Ltd"
+publishing_year: "2000"

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Robert Orfali Dan Harkey Jeri Edwards
+title: "The Essential Distributed Objects Survival Guide"
+edition: "Paperback"
+isbn: "0471129933"
+notes: |-
+  
+publisher: "John Wiley & Sons Inc"
+publishing_year: "1995"

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Arthur C Clarke
+title: "Glide Path"
+edition: "Paperback"
+isbn: "0283986123"
+notes: |-
+  
+publisher: "New English Library"
+publishing_year: "1980"

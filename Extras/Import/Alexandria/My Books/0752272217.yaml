@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Scott Adams
+title: "The Dilbert Future"
+edition: "Paperback"
+isbn: "0752272217"
+notes: |-
+  
+publisher: "Boxtree"
+publishing_year: "2000"

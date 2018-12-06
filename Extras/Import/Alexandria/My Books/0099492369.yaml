@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Kathy Reichs
+title: "Bones to Ashes"
+edition: "Paperback"
+isbn: "0099492369"
+notes: |-
+  
+publisher: "Arrow Books Ltd"
+publishing_year: "2008"

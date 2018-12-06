@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - John Julius Norwich Quentin Blake
+title: "The Illustrated Christmas Cracker"
+edition: "Hardback"
+isbn: "0385605250"
+notes: |-
+  
+publisher: "Doubleday"
+publishing_year: "2002"

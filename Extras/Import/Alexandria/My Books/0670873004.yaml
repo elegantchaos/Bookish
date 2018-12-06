@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Simon Armitage
+title: "All Points North"
+edition: "Hardback"
+isbn: "0670873004"
+notes: |-
+  
+publisher: "Viking"
+publishing_year: "1998"

@@ -1,0 +1,19 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Apple Computer Inc
+title: "Learning Carbon"
+edition: "Paperback"
+isbn: "0596001614"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">In <span style="font-style:italic;">Learning Carbon</span> you first learn that Carbon is one of the three sets of programming APIs Apple provides for developing Mac OS X applications. Carbon enables developers to access the new OS X features such as pre-emptive multi-tasking, protected memory and the all important Aqua look and feel. Carbon's thousands of functions, data structures and constants are bundled into related groups called "managers"-event-handling managers, printing managers and so on.
+  
+  
+  
+  The anonymous authors adopt a tutorial approach using the set of managers common to almost all OS X applications, building the book around a simple Moon Travel Planner application. You use Apple's integrated free Project Builder and Interface Builder development tools throughout. You need no previous programming experience to work through <span style="font-style:italic;">Learning Carbon</span>. It really does take a "press this button, type these words" approach. Though a little programming experience will help you understand why you're pressing these buttons and typing those words.
+  
+  
+  
+  To get full value from <span style="font-style:italic;">Learning Carbon</span> the authors expect you to read a lot of the background material on OS X and Carbon provided with the OS in PDF format. <span style="font-style:italic;">Learning Carbon</span> will take you rapidly from Carbon newbie to competence, but as with other such high-level programming approaches you're swapping a gain in in-depth knowledge of the OS for an in-depth knowledge of many APIs. <span style="font-style:italic;">Learning Carbon</span> is a great way to get started, but it will only take you to the foothills of OS X application development. --<span style="font-style:italic;">Steve Patient&nbsp;</span></span></p>
+  
+publisher: "O'Reilly UK"
+publishing_year: "2001"

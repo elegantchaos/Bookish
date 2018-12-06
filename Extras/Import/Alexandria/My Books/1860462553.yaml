@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Peter Hoeg Barbara Haveland
+title: "The Woman and the Ape"
+edition: "Paperback"
+isbn: "1860462553"
+notes: |-
+  
+publisher: "The Harvill Press"
+publishing_year: "1997"

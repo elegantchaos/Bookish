@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Isaac Asimov
+title: "Forward the Foundation (Foundation S.)"
+edition: "Paperback"
+isbn: "0385404565"
+notes: |-
+  
+publisher: "Doubleday"
+publishing_year: "1993"

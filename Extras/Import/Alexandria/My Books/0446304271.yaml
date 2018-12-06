@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Sergio Aragones
+title: "Sergio Aragones Mad As the Devil"
+edition: "Paperback"
+isbn: "0446304271"
+notes: |-
+  
+publisher: "Warner Books Inc"
+publishing_year: "1982"

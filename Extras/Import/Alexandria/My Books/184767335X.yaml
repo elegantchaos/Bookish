@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Scarlett Thomas
+title: "PopCo"
+edition: "Paperback"
+isbn: "184767335X"
+notes: |-
+  
+publisher: "Canongate Books"
+publishing_year: "2009"

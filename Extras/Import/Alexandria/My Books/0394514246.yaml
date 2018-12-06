@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Cook
+title: "Dwellers of the Forbidden City"
+edition: "Paperback"
+isbn: "0394514246"
+notes: |-
+  
+publisher: "Random House Inc (P)"
+publishing_year: "1981"

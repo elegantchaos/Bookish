@@ -12,6 +12,8 @@ import BookishModel
     enum Mode: Int {
         case books = 0
         case people = 1
+        case publishers = 2
+        case series = 3
     }
     
     typealias  WindowController = CollectionWindowController
@@ -21,7 +23,9 @@ import BookishModel
     @objc var bookIndex: NSArrayController?
     @objc var selectedIndexes: NSMutableIndexSet?
     @objc var selectedPeople: NSMutableIndexSet?
-    
+    @objc var selectedPublishers: NSMutableIndexSet?
+    @objc var selectedSeries: NSMutableIndexSet?
+
     @objc dynamic var modeIndex: Int = 0
     
     @objc let detailFont = NSFont.systemFont(ofSize: 14, weight: NSFont.Weight.regular)

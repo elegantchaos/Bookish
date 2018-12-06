@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Kathleen Ann Goonan
+title: "Crescent City Rhapsody"
+edition: "Paperback"
+isbn: "1857988884"
+notes: |-
+  
+publisher: "Gollancz"
+publishing_year: "2000"

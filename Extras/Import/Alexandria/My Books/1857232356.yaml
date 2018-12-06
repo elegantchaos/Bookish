@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Iain M. Banks
+title: "Feersum Endjinn"
+edition: "Hardback"
+isbn: "1857232356"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">In a future where the ancients have long since departed Earth for the stars, those left behind live complacent lives filled with technological marvels they no longer understand. Then a cosmic threat known as the Encroachment begins a devastating ice age on Earth, and it sets in motion a series of events that will bring together a cast of original characters who must struggle through war, political intrigues and age-old mysteries to save the world. (B 4worned, 1 oph Banx' carrokters theenx en funetic inglish, which makes for some tough reading but also some innovative prose.)&nbsp;</span></p>
+  
+publisher: "Orbit"
+publishing_year: "1994"

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Russell Griffin
+title: "Makeshift God (Panther Bks.)"
+edition: "Paperback"
+isbn: "0586051767"
+notes: |-
+  
+publisher: "Granada"
+publishing_year: "1982"

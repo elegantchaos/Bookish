@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Sheilah Graham
+title: "Beloved infidel"
+edition: ""
+isbn: "B0000CKC5J"
+notes: |-
+  
+publisher: "Cassell"
+publishing_year: "1959"

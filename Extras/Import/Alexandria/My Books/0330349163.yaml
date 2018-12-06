@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Julian Barnes
+title: "Cross Channel"
+edition: "Paperback"
+isbn: "0330349163"
+notes: |-
+  
+publisher: "Picador"
+publishing_year: "1996"

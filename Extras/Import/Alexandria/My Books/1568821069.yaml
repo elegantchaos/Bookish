@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Keith Herber
+title: "1920s Investigator's Campanion"
+edition: "Paperback"
+isbn: "1568821069"
+notes: |-
+  
+publisher: "Wizard's Attic Publishing Services"
+publishing_year: "1997"

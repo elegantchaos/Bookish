@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Neil Cross
+title: "Burial"
+edition: "Paperback"
+isbn: "1416526161"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">1st edition 1st printing trade paperback fine condition. In stock shipped from our UK warehouse&nbsp;</span></p>
+  
+publisher: "Simon & Schuster UK"
+publishing_year: "2009"

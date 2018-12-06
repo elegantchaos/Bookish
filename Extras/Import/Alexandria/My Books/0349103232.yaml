@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Iain Banks
+title: "The Crow Road"
+edition: "Paperback"
+isbn: "0349103232"
+notes: |-
+  
+publisher: "Abacus"
+publishing_year: "1993"

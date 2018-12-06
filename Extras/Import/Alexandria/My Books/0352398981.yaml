@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Jeffrey Konvitz
+title: "Sentinel"
+edition: "Paperback"
+isbn: "0352398981"
+notes: |-
+  
+publisher: "Star Bks."
+publishing_year: "1982"

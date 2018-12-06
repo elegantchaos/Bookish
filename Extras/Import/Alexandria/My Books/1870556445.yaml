@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Tobias Hill
+title: "Year of the Dog"
+edition: "Paperback"
+isbn: "1870556445"
+notes: |-
+  
+publisher: "National Poetry Foundation"
+publishing_year: "1995"

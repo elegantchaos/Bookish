@@ -1,0 +1,19 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Jef Raskin
+title: "The Humane Interface"
+edition: "Paperback"
+isbn: "0201379376"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">Aptly subtitled "New Directions for Designing Interactive Systems", <span style="font-style:italic;">The Humane Interface</span> is essentially an introduction to a new school of the craft of semiotics. Although the author doesn't use this specific term, <span style="font-style:italic;">The Human Interface</span>, the book explores the intelligent design of efficient signs and symbols for the "conversation" between man and computer. The book deals with many types of conceptual devices we use, both to find our way to a piece of data or program function, and to set parameters for searches or other commands, investigating the various strategies used, evaluating them and proposing new, more powerful yet less complicated interfaces.
+  
+  
+  
+  The author introduces new tactics for communicating information, both inward to and outward from a computer--but does not confine this overview to computers. Also under inspection are leads and displays on digital tools such as the oscillograph and the dials of technological commonplaces like the VCR that graces your living room.
+  
+  
+  
+  For the person who has never broached the subject this is a great introduction to a field that badly needs a shake-up, and in the meantime it delivers some well-placed blows. Replete with criticisms and case studies of bad examples (as if they were needed), this book offers real solutions for designers of tomorrow, demonstrating how fresh ideas can be applied to simplify yet simultaneously enhance the interface between people and digital machines. If you've spent a frustrating afternoon reassigning cable or satellite stations to desired channels with the woeful interface usually provided, you'll immediately see the practical value of this refreshing book. --<span style="font-style:italic;">Wilf Hey&nbsp;</span></span></p>
+  
+publisher: "Addison Wesley"
+publishing_year: "2000"

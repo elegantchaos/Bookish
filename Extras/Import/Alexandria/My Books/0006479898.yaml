@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - George R.R. Martin
+title: "A Clash of Kings (Song of Ice & Fire S.)"
+edition: "Paperback"
+isbn: "0006479898"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">George R.R. Martin writes sword-and-sorcery which concentrates on the swords. <span style="font-style:italic;">A Clash of Kings</span> is the second volume of A Song of Ice and Fire, the sequence which began with <span style="font-style:italic;">A Game of Thrones</span> and will take another four volumes to complete. The Seven Kingdoms are divided by revolt and blood feud; beyond their Northern borders, the men of the Night Watch fight the coming of a great cold and the walking corpses that travel with it; on the other side of the ocean, the last of the Kingdom's deposed ruling house mourns her horseclan husband and rears the dragonlets she hatched from his funeral pyre. This is character-driven fantasy--we see most events through the eyes of the sons and daughters of the Stark family, the once and future Kings of the North, whose father's judicial murder started the war. Martin avoids the cosy Californian cheeriness of many epic fantasies in favour of a sense of the squalor and grandeur of high medieval life; there is passion here, and misery and charm--and a profound sense of moral ambiguity as we learn to like the Richard III figure in this epic as much as the more virtuous Starks. --<span style="font-style:italic;">Roz Kaveney&nbsp;</span></span></p>
+  
+publisher: "Voyager"
+publishing_year: "2003"

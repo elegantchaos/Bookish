@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - C. J. Cherryh
+title: "Pretender"
+edition: "Paperback"
+isbn: "0756404088"
+notes: |-
+  
+publisher: "Daw Books"
+publishing_year: "2007"

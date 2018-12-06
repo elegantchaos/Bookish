@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Arthur C Clarke
+title: "Prelude to Space"
+edition: "Paperback"
+isbn: "0283984163"
+notes: |-
+  
+publisher: "Sidg. & J"
+publishing_year: "1977"

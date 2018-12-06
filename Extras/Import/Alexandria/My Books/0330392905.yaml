@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - China Mieville
+title: "The Scar"
+edition: "Paperback"
+isbn: "0330392905"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">The question was always: what would he do for an encore? China Mieville's third novel <span style="font-style:italic;">The Scar</span> is set in the same world as his award-winning <span style="font-style:italic;">Perdido Street Station</span> but is a very different book, set in a very different city. Where his New Crobuzon was an old metropolis of cruelty, oppression and glamour, the floating freebooter city Armada is a place of refuge even for those who experience it as a prison. Brilliant linguist Bellis Coldwine is on the run when she is press-ganged by pirates who turn out to be rather more; her abilities make her a valuable commodity and she finds herself intermittently useful to a project so ambitious that it takes her much of the book to comprehend fully. Mieville takes interesting chances by making Bellis his protagonist--she has an arrogant selfishness that at times makes one breathless--but her guts, determination and intermittent realism about herself gradually endear her to us. This is an intelligent book about how individuals and events influence each other and the meaning of freedom. Mieville has a sense of the sea as the place of a menace almost incomprehensibly huge; like <span style="font-style:italic;">Perdido Street Station</span>, <span style="font-style:italic;">The Scar</span> is full of breath-taking moments of wonder which are also moments of heart-stopping terror. <span style="font-style:italic;">--Roz Kaveney&nbsp;</span></span></p>
+  
+publisher: "Tor Books"
+publishing_year: "2004"

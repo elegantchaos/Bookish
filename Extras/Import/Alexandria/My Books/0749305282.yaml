@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Stanislaw Lem
+title: "Imaginary Magnitude"
+edition: "Paperback"
+isbn: "0749305282"
+notes: |-
+  
+publisher: "Mandarin"
+publishing_year: "1991"

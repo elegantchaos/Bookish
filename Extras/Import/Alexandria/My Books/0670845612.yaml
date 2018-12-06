@@ -1,0 +1,15 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Robert X. Cringely
+title: "Accidental Empires"
+edition: "Hardback"
+isbn: "0670845612"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">Robert X. Cringely manages to capture the contradictions and everyday insanity of computer industry empire building, while at the same time chipping away sardonically at the PR campaigns that have built up some very common business people into the household gods of geekdom. Despite some chuckles at the expense of all things nerdy, white and male in the computer industry, Cringely somehow manages to balance the humour with a genuine appreciation of both the technical and strategic accomplishments of these industry luminaries. Whether you're a hard-boiled Silicon Valley marketing exec fishing for an IPO or just a plain old reader with an interest in business history and anecdotal storytelling, there's something to enjoy here.
+  
+  
+  
+  In his new conclusion, Cringely looks at the likely near-future of the PC industry, arguing that most of the major companies are facing a need to dramatically reformulate their mission in the light of engineering developments already in the works. He offers a new paradigm for the development of the industry as it moves from its early "start up" phase into a more mature, more competitive era. --<span style="font-style:italic;">Jake Bond&nbsp;</span></span></p>
+  
+publisher: "Viking"
+publishing_year: "1992"

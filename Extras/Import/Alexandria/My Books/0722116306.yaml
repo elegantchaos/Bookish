@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Gregory Benford
+title: "Timescape"
+edition: "Paperback"
+isbn: "0722116306"
+notes: |-
+  
+publisher: "Sphere"
+publishing_year: "1982"

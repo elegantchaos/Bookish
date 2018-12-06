@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Simon Broughton Mark Ellingham Richard Trillo
+title: "Rough Guide to World Music (Rough Guides Reference Titles)"
+edition: "Paperback"
+isbn: "1858280176"
+notes: |-
+  
+publisher: "Rough Guides"
+publishing_year: "1994"

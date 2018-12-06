@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Stephen Donaldson
+title: "The Mirror of Her Dreams (Mordant's Need)"
+edition: "Paperback"
+isbn: "0006173993"
+notes: |-
+  
+publisher: "Voyager"
+publishing_year: "1987"

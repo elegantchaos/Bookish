@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Paul Auster
+title: "The New York Trilogy"
+edition: "Paperback"
+isbn: "0571152236"
+notes: |-
+  
+publisher: "Faber and Faber"
+publishing_year: "1988"

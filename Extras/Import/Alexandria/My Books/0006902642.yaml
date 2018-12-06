@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Geoffrey Willans
+title: "Down with Skool! (Armada S)"
+edition: "Paperback"
+isbn: "0006902642"
+notes: |-
+  
+publisher: "Collins"
+publishing_year: "1969"

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Guy Gavriel Kay
+title: "The Darkest Road (The Fionavar Tapestry)"
+edition: "Paperback"
+isbn: "0586215247"
+notes: |-
+  
+publisher: "Collins"
+publishing_year: "1992"

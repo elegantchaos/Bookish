@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Greg Bear
+title: "Legacy"
+edition: "Paperback"
+isbn: "0099350718"
+notes: |-
+  
+publisher: "Legend"
+publishing_year: "1996"

@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Sharon Blackie David Knowles
+title: "Riptide"
+edition: "Paperback"
+isbn: "1906120021"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">A compilation of writing - poetry, short stories and microfiction - from the Highlands and Islands of Scotland. The contributors are: Pam Beasant, Sharon Blackie, Robert Davidson, Angus Dunn, Eva Faber, Alison Flett, Yvonne Gray, John Glenday, Clio Gray, Andrew Greig, Nicky Guthrie, Mandy Haggith, Morag Henderson, Elyse Jamieson, and David Ross.&nbsp;</span></p>
+  
+publisher: "Two Ravens Press"
+publishing_year: "2007"

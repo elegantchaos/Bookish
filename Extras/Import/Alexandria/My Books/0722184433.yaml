@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Craig Thomas
+title: "The Bear's Tears"
+edition: "Paperback"
+isbn: "0722184433"
+notes: |-
+  
+publisher: "Time Warner Paperbacks"
+publishing_year: "1991"

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Tess Gerritsen
+title: "The Apprentice"
+edition: "Paperback"
+isbn: "055381432X"
+notes: |-
+  
+publisher: "Bantam Books Ltd"
+publishing_year: "2003"

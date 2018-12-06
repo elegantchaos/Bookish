@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Paul Horowitz Winfield Hill
+title: "The Art of Electronics"
+edition: "Hardback"
+isbn: "0521370957"
+notes: |-
+  
+publisher: "Cambridge University Press"
+publishing_year: "1989"

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Stanislaw Lem B. Marszal F. Simpson
+title: "Return from the Stars"
+edition: "Paperback"
+isbn: "074930488X"
+notes: |-
+  
+publisher: "Mandarin"
+publishing_year: "1990"

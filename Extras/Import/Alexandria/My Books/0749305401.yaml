@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Stephen Fry
+title: "The Liar"
+edition: "Paperback"
+isbn: "0749305401"
+notes: |-
+  
+publisher: "Mandarin"
+publishing_year: "1992"

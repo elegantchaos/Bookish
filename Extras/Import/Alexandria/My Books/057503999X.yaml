@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Andre Norton
+title: "Year of the Unicorn (Witch World)"
+edition: "Paperback"
+isbn: "057503999X"
+notes: |-
+  
+publisher: "Gollancz"
+publishing_year: "1987"

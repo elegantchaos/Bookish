@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Richard Dawkins
+title: "The God Delusion"
+edition: "Hardback"
+isbn: "0593055489"
+notes: |-
+  
+publisher: "Bantam Press"
+publishing_year: "2006"

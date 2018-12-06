@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Larry Niven
+title: "Ringworld"
+edition: "Paperback"
+isbn: "1857231694"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">In <span style="font-style:italic;">Ringworld</span> and <span style="font-style:italic;">Ringworld Engineers</span> Larry Niven created Known Space, a universe in the distant future with a distinctive and complicated history. The centre of this universe is Ringworld, an expansive hoop-shaped relic 1 million miles across and 600 million miles in circumference that is home to some 30 trillion diverse inhabitants. As in his past novels, Niven's characters in <span style="font-style:italic;">The Ringworld Throne</span> spend their time unravelling the complex problems posed by their society.&nbsp;</span></p>
+  
+publisher: "Orbit"
+publishing_year: "1988"

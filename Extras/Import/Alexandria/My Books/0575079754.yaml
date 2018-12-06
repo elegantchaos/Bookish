@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Scott Lynch
+title: "The Lies of Locke Lamora"
+edition: "Paperback"
+isbn: "0575079754"
+notes: |-
+  
+publisher: "Gollancz"
+publishing_year: "2007"

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Frank Buschmann Regine Meunier Hans Rohnert Peter Sommerlad Michael Stal
+title: "A System of Patterns"
+edition: "Hardback"
+isbn: "0471958697"
+notes: |-
+  
+publisher: "John Wiley and Sons Ltd"
+publishing_year: "1996"

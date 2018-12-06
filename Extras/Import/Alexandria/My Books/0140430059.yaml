@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Jane Austen J.E. Austen-Leigh D.W. Harding
+title: "Persuasion (English Library)"
+edition: "Paperback"
+isbn: "0140430059"
+notes: |-
+  
+publisher: "Penguin Books Ltd"
+publishing_year: "1970"

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - James Lee Burke
+title: "Cadillac Jukebox"
+edition: "Paperback"
+isbn: "0752809628"
+notes: |-
+  
+publisher: "Orion mass market paperback"
+publishing_year: "1997"

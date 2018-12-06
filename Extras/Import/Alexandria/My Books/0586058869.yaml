@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Philip K Dick
+title: "Transmigration of Timothy Archer"
+edition: "Paperback"
+isbn: "0586058869"
+notes: |-
+  
+publisher: "Granada"
+publishing_year: "1983"

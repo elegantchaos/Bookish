@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Margaret Atwood
+title: "MaddAddam"
+edition: "Hardback"
+isbn: "1408819708"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">MARGARET ATWOOD "MADD ADAM" HARDBACK FICTION Maddaddam concludes the dystopian trilogy which began with Oryx and Crake (2003) and continued with The Year of the Flood (2009). While the plot from these previous novels run along a parallel timeline, Maddaddam is the continuation of both books. Maddaddam is written from the perspective of Zeb and Toby, who were both introduced in The Year of the Flood.&nbsp;</span></p>
+  
+publisher: "Bloomsbury Publishing"
+publishing_year: "2013"

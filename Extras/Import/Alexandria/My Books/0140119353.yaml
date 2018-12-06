@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Spike Milligan Jack Hobbs
+title: "William McGonagall Meets George Gershwin"
+edition: "Paperback"
+isbn: "0140119353"
+notes: |-
+  
+publisher: "Penguin Books Ltd"
+publishing_year: "1989"

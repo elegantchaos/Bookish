@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Nancy Kress
+title: "Beggars in Spain (Roc S.)"
+edition: "Paperback"
+isbn: "0451185544"
+notes: |-
+  
+publisher: "RoC"
+publishing_year: "1995"

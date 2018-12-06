@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Laura Beatty
+title: "Pollard"
+edition: "Hardback"
+isbn: "0701182091"
+notes: |-
+  
+publisher: "Chatto & Windus"
+publishing_year: "2008"

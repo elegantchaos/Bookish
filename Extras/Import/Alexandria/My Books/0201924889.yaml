@@ -1,0 +1,19 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - S. Meyers
+title: "Effective C++"
+edition: "Paperback"
+isbn: "0201924889"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">This exceptionally useful text offers Scott Myers's expertise in C++ class design and programming tips. The second edition incorporates recent advances to C++ included in the ISO standard, including namespaces and built-in template classes, and is required reading for any working C++ developer.
+  
+  
+  
+  The book opens with some hints for porting code from C to C++ and then moves on to the proper use of the <span style="font-style:italic;">new</span> and <span style="font-style:italic;">delete</span> operators in C++ for more robust memory management. The text then proceeds to class design, including the proper use of constructors, destructors, and overloaded operator functions for assignment within classes. (These guidelines ensure that you will create custom C++ classes that are fully functional data types, which can be copied and assigned just like built- in C++ classes.)
+  
+  
+  
+  The author also provides a handful of suggestions for general class design, including strategies for using different types of inheritance and encapsulation. Never doctrinaire and always intelligent, these guidelines can make your C++ classes more robust and easier to maintain. --<span style="font-style:italic;">Richard Dragan, Amazon.com&nbsp;</span></span></p>
+  
+publisher: "Addison Wesley"
+publishing_year: "1997"

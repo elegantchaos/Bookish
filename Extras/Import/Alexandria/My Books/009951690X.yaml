@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Richard C. Meredith
+title: "The Timeliner Trilogy"
+edition: "Paperback"
+isbn: "009951690X"
+notes: |-
+  
+publisher: "Legend paperbacks"
+publishing_year: "1987"

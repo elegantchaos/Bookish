@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - China Mieville
+title: "Un Lun Dun"
+edition: "Paperback"
+isbn: "0330453475"
+notes: |-
+  
+publisher: "Pan Books"
+publishing_year: "2008"

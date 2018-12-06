@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Robert B. Parker
+title: "Looking for Rachel Wallace"
+edition: "Paperback"
+isbn: "0140089543"
+notes: |-
+  
+publisher: "Penguin Books Ltd"
+publishing_year: "1987"

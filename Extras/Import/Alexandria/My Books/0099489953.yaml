@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - John Harvey
+title: "Darkness and Light"
+edition: "Paperback"
+isbn: "0099489953"
+notes: |-
+  
+publisher: "Arrow Books Ltd"
+publishing_year: "2007"

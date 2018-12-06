@@ -1,0 +1,9 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Tom Moldvay Jean Wells
+title: "Palace of the Silver Princess (Advanced Dungeons & Dragons S.)"
+edition: "Paperback"
+isbn: "0935696318"
+notes: |-
+  
+publisher: "Wizards of the Coast, UK"

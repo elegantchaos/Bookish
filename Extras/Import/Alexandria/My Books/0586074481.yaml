@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Whitley Strieber
+title: "Catmagic"
+edition: "Paperback"
+isbn: "0586074481"
+notes: |-
+  
+publisher: "Grafton Books"
+publishing_year: "1988"

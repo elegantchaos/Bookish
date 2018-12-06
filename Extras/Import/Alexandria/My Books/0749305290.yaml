@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Stanislaw Lem
+title: "The Futurological Congress"
+edition: "Paperback"
+isbn: "0749305290"
+notes: |-
+  
+publisher: "Mandarin"
+publishing_year: "1991"

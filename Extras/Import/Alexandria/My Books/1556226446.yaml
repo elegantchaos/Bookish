@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Mickey Kawick
+title: "Real Time Strategy Game Programming Using MS Direct X 6.0"
+edition: "Paperback"
+isbn: "1556226446"
+notes: |-
+  
+publisher: "Wordware Publishing, Inc"
+publishing_year: "1999"

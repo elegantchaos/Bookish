@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Hazlitt
+title: "Selected Essays"
+edition: "Paperback"
+isbn: "0882950428"
+notes: |-
+  
+publisher: "Harlan Davidson"
+publishing_year: "1969"

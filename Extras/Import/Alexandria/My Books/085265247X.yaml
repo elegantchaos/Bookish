@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Luke Harding
+title: "Mafia State"
+edition: "Hardback"
+isbn: "085265247X"
+notes: |-
+  
+publisher: "Guardian Books"
+publishing_year: "2011"

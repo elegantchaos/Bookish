@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Carl Hiaasen
+title: "Nature Girl"
+edition: "Paperback"
+isbn: "0552773719"
+notes: |-
+  
+publisher: "Black Swan"
+publishing_year: "2007"

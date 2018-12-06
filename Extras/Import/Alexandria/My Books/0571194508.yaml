@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Tobias Hill
+title: "Underground"
+edition: "Hardback"
+isbn: "0571194508"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">Already lauded for his vivid collections of poetry and short stories, Tobias Hill makes the move to full-length novel with <span style="font-style:italic;">Underground</span> and instantly establishes himself as one of Britain's most exciting young novelists. London Underground worker Casimir is jolted out of his somnambulant routine when he realises, from the evidence on his monitor, that a young woman's supposed accident or suicide attempt is in fact attempted murder. At the same time he becomes particularly obsessed by fleeting glimpses of Walkmaned tube dweller Alice, whose otherworldly beauty haunts the tunnels. Like Neil Bartlett, Hill uses London's hidden history to explore London's hidden present and like Bartlett he does it through the eyes of an outsider. The story unfolds in counterpoint to the childlike telling of Casimir's troubled childhood in Poland, his own underground life, with which he's slowly forced to come to terms. Hill may stuff his book with tubespotter detail about London's fascinating subterranean network--its hidden passages, makeshift dwellings, locked and forgotten stations--but, far from being just another feelgood novel for city commuters and <span style="font-style:italic;">Time Out</span> addicts, <span style="font-style:italic;">Underground</span> is a rich, multi-layered novel that reaches far beyond the end of the Northern line. --<span style="font-style:italic;">Alan Stewart&nbsp;</span></span></p>
+  
+publisher: "Faber and Faber Ltd"
+publishing_year: "1999"

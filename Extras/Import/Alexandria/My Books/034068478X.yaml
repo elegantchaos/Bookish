@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - John Le Carre
+title: "The Tailor of Panama"
+edition: "Hardback"
+isbn: "034068478X"
+notes: |-
+  
+publisher: "Hodder & Stoughton Ltd"
+publishing_year: "1996"

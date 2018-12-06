@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Anthony Burgess
+title: "1985"
+edition: "Paperback"
+isbn: "0099214504"
+notes: |-
+  
+publisher: "Arrow"
+publishing_year: "1980"

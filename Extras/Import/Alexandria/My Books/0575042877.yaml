@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Melissa Scott
+title: "Five-twelfths of Heaven"
+edition: "Paperback"
+isbn: "0575042877"
+notes: |-
+  
+publisher: "Gollancz"
+publishing_year: "1988"

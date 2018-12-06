@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Piers Anthony
+title: "Vicinity Cluster"
+edition: "Paperback"
+isbn: "0586048375"
+notes: |-
+  
+publisher: "Grafton Books"
+publishing_year: "1979"

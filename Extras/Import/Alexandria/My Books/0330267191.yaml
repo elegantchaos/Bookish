@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Julian May
+title: "The Golden Torc (The Saga of the Exiles)"
+edition: "Paperback"
+isbn: "0330267191"
+notes: |-
+  
+publisher: "Tor Books"
+publishing_year: "1982"

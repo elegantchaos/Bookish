@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Terry Pratchett
+title: "Strata"
+edition: "Paperback"
+isbn: "0552133256"
+notes: |-
+  
+publisher: "Corgi Adult"
+publishing_year: "1988"

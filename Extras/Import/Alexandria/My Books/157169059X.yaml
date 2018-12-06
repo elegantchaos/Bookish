@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Kevin Tieskoetter
+title: "Black Art of Macintosh Game Programming"
+edition: "Paperback"
+isbn: "157169059X"
+notes: |-
+  
+publisher: "Waite Group"
+publishing_year: "1996"

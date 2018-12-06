@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Kim Stanley Robinson
+title: "Aurora"
+edition: "Hardback"
+isbn: "0356500462"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">Brand New & Collectible Hardback Edition. Signed (by the author to special publisher's interior book plate). First Edition, First Printing (w/ full numberline, '13579108642'). Fine/Fine condition. Fast UK shipment. For international delivery please inquire.&nbsp;</span></p>
+  
+publisher: "Orbit"
+publishing_year: "2015"

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Julia Leigh
+title: "Disquiet"
+edition: "Hardback"
+isbn: "0571239994"
+notes: |-
+  
+publisher: "Faber & Faber"
+publishing_year: "2008"

@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Nicci French
+title: "What to Do When Someone Dies"
+edition: "Paperback"
+isbn: "014102092X"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">Ellie Faulkner's world has been destroyed. Her husband Greg died in a car crash - and he wasn't alone. In the passenger seat was the body of Milena Livingstone - a woman Ellie's never heard of. But Ellie refuses to leap to the obvious conclusion, despite the whispers and suspicions of those around her.&nbsp;</span></p>
+  
+publisher: "Penguin"
+publishing_year: "2010"

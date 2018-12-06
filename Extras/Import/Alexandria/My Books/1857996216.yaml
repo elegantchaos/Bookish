@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Jonathan Swift
+title: "A Voyage to Lilliput (Phoenix 60p Paperbacks)"
+edition: "Paperback"
+isbn: "1857996216"
+notes: |-
+  
+publisher: "Everyman"
+publishing_year: "1995"

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Gay Talese
+title: "Honor Thy Father"
+edition: "Paperback"
+isbn: "0804110581"
+notes: |-
+  
+publisher: "Ivy Books"
+publishing_year: "1992"

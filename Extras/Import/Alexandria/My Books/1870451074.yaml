@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - L.Ron Hubbard
+title: "Invaders Plan"
+edition: "Paperback"
+isbn: "1870451074"
+notes: |-
+  
+publisher: "New Era Publications UK"
+publishing_year: "1988"

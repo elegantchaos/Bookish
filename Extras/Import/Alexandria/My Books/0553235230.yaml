@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Iain Nicolson
+title: "ASTRONOMY"
+edition: "Paperback"
+isbn: "0553235230"
+notes: |-
+  
+publisher: "Bantam"
+publishing_year: "1983"

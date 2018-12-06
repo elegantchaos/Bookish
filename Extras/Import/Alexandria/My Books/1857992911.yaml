@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Jostein Gaarder Paulette Moller
+title: "Sophie's World"
+edition: "Paperback"
+isbn: "1857992911"
+notes: |-
+  
+publisher: "Phoenix mass market p/bk"
+publishing_year: "1996"

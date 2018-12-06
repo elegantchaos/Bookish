@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Tim Parks
+title: "Teach Us to Sit Still"
+edition: "Paperback"
+isbn: "0099548887"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">a sceptic's search for health and healing. 2011&nbsp;</span></p>
+  
+publisher: "Vintage"
+publishing_year: "2011"

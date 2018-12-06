@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Les Coleman
+title: "Meet the Art Students"
+edition: "Paperback"
+isbn: "1900072181"
+notes: |-
+  
+publisher: "Arc Publications"
+publishing_year: "1997"

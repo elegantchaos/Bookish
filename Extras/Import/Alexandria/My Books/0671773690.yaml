@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Jon Courtenay Grimwood
+title: "Effendi"
+edition: "Paperback"
+isbn: "0671773690"
+notes: |-
+  <p><span style="font-style:italic;font-size:12pt;color:WindowText;">Effendi<span style="font-style:normal;"> is as impressive as </span>Pashazade<span style="font-style:normal;">, Jon Courtenay Grimwood's first novel of crime and punishment in an alternate-world Alexandria. Now the chief of police of El Iskandryia rather than a hunted fugitive seeking refuge there, the electronically and otherwise augmented Ashraf finds himself investigating both terror attacks against tourists and charges of long-ago crimes against humanity levelled against Hamzah, the man whose daughter he might have married. With the help of his equally odd and talented niece, the child Hani, Ashraf pursues his own unorthodox investigatory methods and his own social and political agendas; he is sympathetic neither to the elite who suck the blood of his city nor to the fanatics who seek to replace them. His and Grimwood's city is a place where past and future meet--where mediaeval barbarism and high-tech go hand in hand and every so often the reader is brought face to face with the ways in which this world is both the same as our own and radically different. Grimwood effortlessly plays by several sets of rules at once and is as accomplished a thriller writer--doing noir as well as he does courtrooms--as he is as a writer of his own, sometimes quite strange, brand of commercial SF. </span>--Roz Kaveney&nbsp;</span></p>
+  
+publisher: "Pocket Books"
+publishing_year: "2003"

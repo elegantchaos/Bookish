@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Ian Rankin
+title: "A Good Hanging and Other Stories"
+edition: "Paperback"
+isbn: "0752809431"
+notes: |-
+  
+publisher: "Orion mass market paperback"
+publishing_year: "2000"

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Aeschylus Philip Vellacott
+title: "The Oresteian Trilogy"
+edition: "Paperback"
+isbn: "0140440674"
+notes: |-
+  
+publisher: "Penguin Books Ltd"
+publishing_year: "1971"

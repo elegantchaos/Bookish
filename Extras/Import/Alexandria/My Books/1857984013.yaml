@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Alison Sinclair
+title: "Legacies"
+edition: "Paperback"
+isbn: "1857984013"
+notes: |-
+  
+publisher: "Cassell military"
+publishing_year: "1995"

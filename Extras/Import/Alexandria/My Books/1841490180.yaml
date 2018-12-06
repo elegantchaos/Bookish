@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - K.J. Parker
+title: "The Proof House (Fencer Trilogy)"
+edition: "Paperback"
+isbn: "1841490180"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">Bardas has come a long way from the young soldier who wrought havoc in the wars with the barbarians of the plains, the swordsman who fought successful trials by combat and the commander whose attempts to save his city were dashed by last-moment treachery. He has taken several steps into madness and depravity; in <span style="font-style:italic;">The Proof House</span>, the impressive conclusion of <span style="font-style:italic;">The Fencer Trilogy</span>, his sanity is entirely up for grabs as an imperial posting sends him to where armour is made and souls are tested, not least by the endless din of breastplates and helmets subjected to breaking strain. It is the end-game for his friends as well--for his former secretary and the ambitious merchants she has formed a partnership with, and the half-smart magicians whose attempts to change history have consistently made things radically and disastrously worse. His family--the brothers who betrayed him and the niece whose attempts to kill him have cost her most of her hand--are out there somewhere too...Parker's is a bleak and sardonic fantasy world, where it can never be assumed that things will turn out for the best; this is a startlingly original book with a tone entirely of its own. <span style="font-style:italic;">--Roz Kaveney&nbsp;</span></span></p>
+  
+publisher: "Orbit"
+publishing_year: "2000"

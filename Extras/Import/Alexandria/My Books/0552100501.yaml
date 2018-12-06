@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Frederick Forsyth
+title: "The Dogs of War"
+edition: "Paperback"
+isbn: "0552100501"
+notes: |-
+  
+publisher: "Corgi"
+publishing_year: "1976"

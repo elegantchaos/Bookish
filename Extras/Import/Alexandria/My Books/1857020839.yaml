@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - David Gelernter
+title: "The Muse in the Machine"
+edition: "Hardback"
+isbn: "1857020839"
+notes: |-
+  
+publisher: "Fourth Estate"
+publishing_year: "1994"

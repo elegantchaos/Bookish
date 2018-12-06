@@ -1,0 +1,23 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Apple Computer Inc Inc. Apple
+title: "Learning Cocoa"
+edition: "Paperback"
+isbn: "0596001606"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">With the introduction of Mac OS X, Apple has produced a Macintosh operating system for the 21st century. <span style="font-style:italic;">Learning Cocoa</span> aims to help negotiate the change delivered by the radically different principal programming environment--Cocoa. Anyone wanting to get to grips with programming this new OS can benefit from O'Reilly's <span style="font-style:italic;">Learning Cocoa</span>, a well-written and clear introduction to the revolutionary changes which the Mac OS has undergone from the point of view of application developers.
+  
+  
+  
+  Produced by Apple Computer and a recommended Apple Developer Connection title, <span style="font-style:italic;">Learning Cocoa</span> starts with an introduction to the Cocoa environment and key Mac OS X technologies followed by a chapter introducing the general concepts of object-orientated programming. It then guides the reader through a series of tutorials which illustrate the power of Cocoa's object-orientated APIs and the development tools (such as Project Builder and Interface Builder) which Apple has provided to aid programming for Mac OS X.
+  
+  
+  
+  As each tutorial includes the full code, even the most inexperienced programmer can simply type it in begin to learn from the basics upwards; this is backed up and developed by the inclusion of URLs that take you to the relevant sections of Apple's online developer documentation. The increasing complexity of the tutorials later into the book does, however, ensure that it provides a broad overview of the power of Mac OS X and the techniques required to fully utilise its features.
+  
+  
+  
+  For programmers with a solid understanding of object-orientated application development, <span style="font-style:italic;">Learning Cocoa</span> provides a useful introduction to the key technologies of Mac OS X and a useful addition to Apple's online documentation; for those new to either the Mac or object-orientated programming the book is an invaluable and easy-to-follow source of tutorials and examples which introduce the most exciting development in the Apple world since the introduction of the Macintosh. --<span style="font-style:italic;">Daniel Jardine&nbsp;</span></span></p>
+  
+publisher: "O'Reilly UK"
+publishing_year: "2001"

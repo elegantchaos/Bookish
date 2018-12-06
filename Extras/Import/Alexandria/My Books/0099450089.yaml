@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Henning Mankell
+title: "The Man Who Smiled"
+edition: "Paperback"
+isbn: "0099450089"
+notes: |-
+  
+publisher: "Vintage"
+publishing_year: "2006"

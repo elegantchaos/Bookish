@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - John McLoughlin
+title: "Helix and the Sword (Orbit Bks.)"
+edition: "Paperback"
+isbn: "0708830315"
+notes: |-
+  
+publisher: "Futura Pubns."
+publishing_year: "1986"

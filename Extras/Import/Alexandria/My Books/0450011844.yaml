@@ -1,0 +1,19 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Frank Herbert
+title: "Dune"
+edition: "Paperback"
+isbn: "0450011844"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">This Hugo and Nebula Award winner tells the sweeping tale of a desert planet called Arrakis, the focus of an intricate power struggle in a byzantine interstellar empire. Arrakis is the sole source of Melange, the "spice of spices". Melange is necessary for interstellar travel and also grants psychic powers and longevity, so whoever controls it wields great influence.
+  
+  
+  
+  The troubles begin when stewardship of Arrakis is transferred by the Emperor from the Harkonnen Noble House to House Atreides. The Harkonnens don't want to give up their privilege, though, and through sabotage and treachery they cast young Duke Paul Atreides out into the planet's harsh environment to die. There he falls in with the Fremen, a tribe of desert dwellers who become the basis of the army with which he will reclaim what's rightfully his. Paul Atreides, though, is far more than just a usurped duke. He might be the end product of a very long-term genetic experiment designed to breed a superhuman--he might be a messiah. His struggle is at the centre of a nexus of powerful people and events, and the repercussions will be felt throughout the Imperium.
+  
+  
+  
+  <span style="font-style:italic;">Dune</span> is one of the most famous science fiction novels ever written, and deservedly so. The setting is elaborate and ornate, the plot labyrinthine and the adventures exciting. Five sequels follow. --<span style="font-style:italic;">Brooks Peck&nbsp;</span></span></p>
+  
+publisher: "Hodder & Stoughton Ltd"
+publishing_year: "1982"

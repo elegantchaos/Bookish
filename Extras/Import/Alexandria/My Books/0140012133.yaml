@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Jerome K. Jerome
+title: "Three Men in a Boat"
+edition: "Paperback"
+isbn: "0140012133"
+notes: |-
+  
+publisher: "Penguin Books Ltd"
+publishing_year: "1970"

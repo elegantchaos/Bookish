@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Randall Munroe
+title: "Thing Explainer"
+edition: "Hardback"
+isbn: "1473620910"
+notes: |-
+  
+publisher: "John Murray"
+publishing_year: "2015"

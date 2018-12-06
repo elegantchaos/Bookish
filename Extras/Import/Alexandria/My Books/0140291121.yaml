@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - John Mortimer
+title: "The Summer of a Dormouse"
+edition: "Paperback"
+isbn: "0140291121"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">"The time will come in your life when the voice of God will thunder at you from a cloud, 'From this day forth thou shalt not be able to put on thine own socks'". So writes the playwright, novelist and erstwhile QC, John Mortimer. And as a septuagenarian, he is writing from experience. But it's not the effort it takes to put on socks, or the need to use people as props to stop falling over, or the sad fact that one may be compelled to buy a "Decorative Window Film" to prevent against walking into glass doors that Mortimer objects to. "The real trouble with old age", he says, "is it lasts for such a short time". <span style="font-style:italic;">The Summer of a Dormouse</span> is a wickedly funny journal in which Mortimer wryly observes the absurdities of old age. After all, "No one should grow old who isn't ready to appear ridiculous". And Mortimer freely admits he often does. Such as the time he unintentionally pirouetted down some marble steps after getting out of a hotel bathtub and crashed into a set of shelves. "I fell amongst splintering glass and a hailstorm of cotton-wool buds, aware of a torrent of destruction". However, in spite of his partial immobility, failing eyesight and frequent tendency to topple over, Mortimer deals with his increasing decrepitude with formidable fortitude. Even a death threat fails to faze him: "Some one's offering to kill me--why on earth should they bother?" Sharp and dark, <span style="font-style:italic;">The Summer of a Dormouse</span> is an upbeat account of a man not afraid to stare mortality in the face. --<span style="font-style:italic;">Christopher Kelly&nbsp;</span></span></p>
+  
+publisher: "Penguin Books Ltd"
+publishing_year: "2001"

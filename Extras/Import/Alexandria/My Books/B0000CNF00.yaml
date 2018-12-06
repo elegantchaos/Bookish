@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Geoffrey Household
+title: "The courtesy of death"
+edition: "Hardback"
+isbn: "B0000CNF00"
+notes: |-
+  
+publisher: "Joseph"
+publishing_year: "1967"

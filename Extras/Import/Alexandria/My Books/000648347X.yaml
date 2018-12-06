@@ -1,0 +1,15 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Geoff Ryman
+title: "Unconquered Countries"
+edition: "Paperback"
+isbn: "000648347X"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">From his stories in the Hugo Award winning <span style="font-style:italic;">Interzone</span>, via <span style="font-style:italic;">Was</span>, his examination of the reality and fantasy behind <span style="font-style:italic;">The Wizard of Oz</span>, to his bestselling hypertext novel <span style="font-style:italic;">253</span>, Geoff Ryman has conducted a series of dazzling experiments with the very nature of storytelling. Through this restless innovation, he has constantly explored the gulf between appearance and truth, the way people enact mythologies to fulfil profound inner needs, then become trapped by their own creations.
+  
+  
+  
+  In the previously unpublished "A Fall of Angels", humanity has reached the stars, created "angels" from former humans, and is engaged in a fantastical quest to refuel the dying stars and so defeat entropy. Rich in ideas and beautifully characterised, "A Fall of Angels" is a fusion of hard science fiction and sense-of-wonder poetry. "Fan" questions the reality behind the virtual images of pop music, taking the concept of silicon-enhanced celebrity to its logical conclusion. The challenging "O Happy Day!" considers what happens when ideology replaces reason: in a death camp for heterosexual men the solution is infinitely worse than the problem. The collection ends with the novella "The Unconquered Country", Ryman's allegorical, phantasmagorical response to the horrors of recent Cambodian history. It is a staggering, breathtaking achievement, which rightly won many awards on original publication. Once read, it will never be forgotten. Each story in this book is the product of Geoff Ryman's remarkable imagination, taken together they make a compelling account of one of the finest writers around. --<span style="font-style:italic;">Gary S. Dalkin&nbsp;</span></span></p>
+  
+publisher: "Voyager"
+publishing_year: "1999"

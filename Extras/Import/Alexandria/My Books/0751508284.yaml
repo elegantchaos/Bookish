@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Gary Larson
+title: "The Chickens Are Restless"
+edition: "Paperback"
+isbn: "0751508284"
+notes: |-
+  
+publisher: "Time Warner Paperbacks"
+publishing_year: "1993"

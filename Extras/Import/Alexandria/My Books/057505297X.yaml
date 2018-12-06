@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - William Gibson Bruce Sterling
+title: "The Difference Engine"
+edition: "Paperback"
+isbn: "057505297X"
+notes: |-
+  
+publisher: "Gollancz"
+publishing_year: "1992"

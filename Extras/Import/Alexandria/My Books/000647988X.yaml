@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - George R.R. Martin
+title: "A Game of Thrones"
+edition: "Paperback"
+isbn: "000647988X"
+notes: |-
+  
+publisher: "Voyager"
+publishing_year: "2003"

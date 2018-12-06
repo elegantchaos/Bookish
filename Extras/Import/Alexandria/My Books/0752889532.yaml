@@ -1,0 +1,19 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Ian Rankin
+title: "The Impossible Dead"
+edition: "Hardback"
+isbn: "0752889532"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">The Impossible Dead
+  
+  
+  
+  Ian Rankin
+  
+  
+  
+  Malcolm Fox returns in the stunning second novel in Ian Rankin's new series...&nbsp;</span></p>
+  
+publisher: "Orion"
+publishing_year: "2011"

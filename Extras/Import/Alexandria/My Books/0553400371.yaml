@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Kenneth C Flint
+title: "Isle of destiny"
+edition: "Paperback"
+isbn: "0553400371"
+notes: |-
+  
+publisher: "Bantam"
+publishing_year: "1988"

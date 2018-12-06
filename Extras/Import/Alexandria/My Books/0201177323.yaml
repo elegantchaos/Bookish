@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - n/a
+title: "Inside Macintosh Vol 2"
+edition: "Hardback"
+isbn: "0201177323"
+notes: |-
+  
+publisher: "Addison Wesley"
+publishing_year: "1985"

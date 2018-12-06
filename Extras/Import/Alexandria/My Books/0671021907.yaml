@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Freda Warrington
+title: "The Amber Citadel"
+edition: "Paperback"
+isbn: "0671021907"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">After launching her career with the <span style="font-style:italic;">Blackbird</span> sword-and-sorcery quartet (1986- 88), Freda Warrington turned to darker themes with a historical vampire trilogy that received critical praise. Now <span style="font-style:italic;">The Amber Citadel</span> opens a new sequence in the classic epic-fantasy mould. Peace in the land of Aventuria depends on an ancient pact between the earth itself and its various races: humans, haughty elf-like aesthetes, kobold-like miners and a repugnant minority of faceless shapeshifters. The latter have twisted the mind of Aventuria's aging king and gradually lured him into mad actions ... a colossal monument to himself, enslavement of countless young subjects to build this Tower-of-Babel folly and gory black magic that hurts both the pact and the land. Warrington's story focuses on a young girl conscripted for slave labour and three friends from her village who follow in hope of rescuing her. Many others are entangled in the resulting pursuits, escapes, romantic interludes, grisly encounters and general bloodshed. The novel ends with a measure of victory bought at fearful cost--but offstage the vile shapeshifters are still plotting, and two-thirds of this "Jewelfire Trilogy" is yet to come. A colourful and nicely crafted fantasy of above-average quality. --<span style="font-style:italic;">David Langford&nbsp;</span></span></p>
+  
+publisher: "Simon & Schuster (Trade Division)"
+publishing_year: "1999"

@@ -1,0 +1,15 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Hannu Rajaniemi
+title: "The Fractal Prince"
+edition: ""
+isbn: "B007ZXK0G4"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">Jean le Flambeur is out of prison, but still not free. To pay his debts he has to break into the mind of a living god. But when the stakes are revealed, Jean has to decide how far he is willing to go to get the job done.
+  
+  
+  
+  The sequel to Hannu Rajaniemi's extraordinary debut novel is set to build on the extravagant promise of one of the most exciting new voices to come out of the genre this century.&nbsp;</span></p>
+  
+publisher: "Gollancz"
+publishing_year: "2012"

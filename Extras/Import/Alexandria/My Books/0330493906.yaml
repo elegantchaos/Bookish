@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Minette Walters
+title: "Fox Evil"
+edition: "Paperback"
+isbn: "0330493906"
+notes: |-
+  
+publisher: "Pan"
+publishing_year: "2003"

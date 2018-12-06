@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Doris Lessing
+title: "Shikasta"
+edition: "Paperback"
+isbn: "0006547192"
+notes: |-
+  
+publisher: "Flamingo"
+publishing_year: "1994"

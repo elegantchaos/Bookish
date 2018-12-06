@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Roger Zelazny
+title: "The Dream Master"
+edition: ""
+isbn: "044116708X"
+notes: |-
+  
+publisher: "Ace Books"
+publishing_year: "1987"

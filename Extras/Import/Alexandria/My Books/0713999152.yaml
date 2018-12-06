@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - John Gray
+title: "Black Mass"
+edition: "Hardback"
+isbn: "0713999152"
+notes: |-
+  
+publisher: "Allen Lane"
+publishing_year: "2007"

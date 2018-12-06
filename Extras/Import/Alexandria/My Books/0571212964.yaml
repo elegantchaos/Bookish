@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Michael Frayn
+title: "Spies"
+edition: "Paperback"
+isbn: "0571212964"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">In Michael Frayn's novel <span style="font-style:italic;">Spies</span> an old man returns to the scene of his seemingly ordinary suburban childhood. Stephen Wheatley is unsure of what he is seeking but, as he walks once-familiar streets he hasn't seen in 50 years, he unfolds a story of childish games colliding cruelly with adult realities. It is wartime and Stephen's friend Keith makes the momentous announcement that his mother is a German spy. The two boys begin to spy on the supposed spy, following her on her trips to the shops and to the post, and reading her diary. Keith's mother does have secrets to conceal but they are not the ones the boys suspect. Frayn skilfully manipulates his plot so that the reader's growing awareness of the truth remains just a few steps beyond Stephen's dawning realisation that he is trespassing on painful and dangerous territory. The only false notes occur in the final chapter when the central revelation (already cleverly signposted) is too swiftly followed by further disclosures about Stephen and his family that seem somehow unnecessary and make the denouement less satisfyingly conclusive. This is a much sparer and less expansive book than <span style="font-style:italic;">Headlong</span>, Frayn's Booker Prize-shortlisted 1999 novel, more understated in its wit, but it is, in many ways, more compelling.--<span style="font-style:italic;">Nick Rennison&nbsp;</span></span></p>
+  
+publisher: "Faber and Faber Ltd"
+publishing_year: "2003"

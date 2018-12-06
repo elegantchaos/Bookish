@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - James Thurber Ronald Searle
+title: "Thirteen Clocks (Puffin Books)"
+edition: "Paperback"
+isbn: "0140301801"
+notes: |-
+  
+publisher: "Puffin Books"
+publishing_year: "1970"

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Bob Shaw
+title: "Who Goes Here?"
+edition: "Paperback"
+isbn: "0575042591"
+notes: |-
+  
+publisher: "Gollancz"
+publishing_year: "1988"

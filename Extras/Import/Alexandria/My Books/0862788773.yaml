@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Conor Kostick
+title: "Epic"
+edition: "Paperback"
+isbn: "0862788773"
+notes: |-
+  
+publisher: "The O'Brien Press"
+publishing_year: "2005"

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Ray Davies
+title: "X-ray"
+edition: "Paperback"
+isbn: "0140145273"
+notes: |-
+  
+publisher: "Penguin Books Ltd"
+publishing_year: "1995"

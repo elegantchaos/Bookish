@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Raymond E. Feist Janny Wurts
+title: "Servant of the Empire"
+edition: "Paperback"
+isbn: "0586203818"
+notes: |-
+  
+publisher: "Voyager"
+publishing_year: "2000"

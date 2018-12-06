@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Pat Murphy
+title: "Falling Woman"
+edition: "Paperback"
+isbn: "0747230765"
+notes: |-
+  
+publisher: "Headline Bk. Pub."
+publishing_year: "1988"

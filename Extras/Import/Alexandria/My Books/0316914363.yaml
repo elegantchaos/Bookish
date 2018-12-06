@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Iain Banks
+title: "Whit"
+edition: "Hardback"
+isbn: "0316914363"
+notes: |-
+  
+publisher: "Little Brown"
+publishing_year: "1995"

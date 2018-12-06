@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Dana Shapiro
+title: "The Every Boy"
+edition: "Hardback"
+isbn: "0618478000"
+notes: |-
+  
+publisher: "Houghton Mifflin Company"
+publishing_year: "2005"

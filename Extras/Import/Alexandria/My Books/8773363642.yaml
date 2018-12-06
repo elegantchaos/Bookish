@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - L Ron Hubbard
+title: "Battlefield Earth"
+edition: "Paperback"
+isbn: "8773363642"
+notes: |-
+  
+publisher: "New Era Pubns, Denmark"
+publishing_year: "1985"

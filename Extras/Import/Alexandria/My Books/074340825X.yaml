@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Guy Gavriel Kay
+title: "Lord of Emperors (The Sarantine Mosaic)"
+edition: "Paperback"
+isbn: "074340825X"
+notes: |-
+  
+publisher: "Earthlight"
+publishing_year: "2001"

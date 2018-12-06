@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - William Gibson
+title: "Virtual Light"
+edition: "Paperback"
+isbn: "0140157727"
+notes: |-
+  
+publisher: "Penguin Books Ltd"
+publishing_year: "1994"

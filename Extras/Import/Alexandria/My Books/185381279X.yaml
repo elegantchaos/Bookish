@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Sara Paretsky
+title: "Burn Marks"
+edition: "Paperback"
+isbn: "185381279X"
+notes: |-
+  
+publisher: "Virago Press"
+publishing_year: "1991"

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Tobias Hill
+title: "Skin"
+edition: "Paperback"
+isbn: "0571192300"
+notes: |-
+  
+publisher: "Faber and Faber Ltd"
+publishing_year: "1998"

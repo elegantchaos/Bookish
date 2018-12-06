@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Gerry Swan
+title: "Snakes and Other Reptiles of Australia (Australian Green Guides)"
+edition: "Paperback"
+isbn: "1864363428"
+notes: |-
+  
+publisher: "New Holland Publishers (AUS)"
+publishing_year: "1998"

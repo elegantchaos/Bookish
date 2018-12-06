@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Edward Gibbon
+title: "The Empire of Rome, A.D.98-180 (Phoenix 60p Paperbacks)"
+edition: "Paperback"
+isbn: "1857995376"
+notes: |-
+  
+publisher: "Weidenfeld & Nicholson history"
+publishing_year: "1995"

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Spike Milligan
+title: "Goodbye Soldier"
+edition: "Paperback"
+isbn: "0140103384"
+notes: |-
+  
+publisher: "Penguin Books Ltd"
+publishing_year: "1987"

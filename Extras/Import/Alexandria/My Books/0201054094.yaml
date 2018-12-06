@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Apple Computer Inc.
+title: "Inside Macintosh"
+edition: "Paperback"
+isbn: "0201054094"
+notes: |-
+  
+publisher: "Addison Wesley"
+publishing_year: "1986"

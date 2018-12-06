@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Christmas Humphreys
+title: "Zen Buddhism (Mandala Books)"
+edition: "Paperback"
+isbn: "004294130X"
+notes: |-
+  
+publisher: "Mandala"
+publishing_year: "1984"

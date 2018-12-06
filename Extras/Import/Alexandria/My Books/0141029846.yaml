@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Nicci French
+title: "Losing You"
+edition: "Paperback"
+isbn: "0141029846"
+notes: |-
+  
+publisher: "Penguin Books Ltd"
+publishing_year: "2007"

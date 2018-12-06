@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - C. J. Cherryh
+title: "Inheritor"
+edition: "Paperback"
+isbn: "0886777283"
+notes: |-
+  
+publisher: "Penguin Putnam Inc USA"
+publishing_year: "1997"

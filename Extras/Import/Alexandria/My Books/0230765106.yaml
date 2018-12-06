@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - China Miéville
+title: "Railsea"
+edition: "Hardback"
+isbn: "0230765106"
+notes: |-
+  
+publisher: "Macmillan"
+publishing_year: "2012"

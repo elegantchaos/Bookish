@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - J.K. Backhouse
+title: "Pure Mathematics"
+edition: "Paperback"
+isbn: "0582317983"
+notes: |-
+  
+publisher: "Longman"
+publishing_year: "1971"

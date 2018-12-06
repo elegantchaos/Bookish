@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Steve Jackson Alan Longford
+title: "Creature of Havoc (Puffin Adventure Gamebooks)"
+edition: "Paperback"
+isbn: "0140320407"
+notes: |-
+  
+publisher: "Puffin Books"
+publishing_year: "1986"

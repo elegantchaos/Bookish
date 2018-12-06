@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Tom Smith
+title: "180 Degrees of Separation"
+edition: "Paperback"
+isbn: "1411694198"
+notes: |-
+  
+publisher: "Lulu.com"
+publishing_year: "2006"

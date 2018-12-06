@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Adam Roberts
+title: "Swiftly"
+edition: "Paperback"
+isbn: "0575082348"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">A Wellsian sequel to Gulliver's Travels and a unique piece of SF literature all of its own.&nbsp;</span></p>
+  
+publisher: "Gollancz"
+publishing_year: "2009"

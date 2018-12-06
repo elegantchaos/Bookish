@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - J. E. Lovelock
+title: "The Ages of Gaia"
+edition: "Paperback"
+isbn: "0192860909"
+notes: |-
+  
+publisher: "Oxford Paperbacks"
+publishing_year: "1989"

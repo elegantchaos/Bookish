@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Agatha Christie
+title: "Death on the Nile (Fontana books-no.374)"
+edition: ""
+isbn: "B0000CKGGR"
+notes: |-
+  
+publisher: "Collins"
+publishing_year: "1960"

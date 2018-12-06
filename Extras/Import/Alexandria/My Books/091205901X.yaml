@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - D. Wile
+title: "Tai Chi Touchstones"
+edition: "Paperback"
+isbn: "091205901X"
+notes: |-
+  
+publisher: "Sweet Chi Press"
+publishing_year: "1983"

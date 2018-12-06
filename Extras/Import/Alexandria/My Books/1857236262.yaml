@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Iain M. Banks
+title: "Inversions"
+edition: "Hardback"
+isbn: "1857236262"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">Science fiction readers know that Iain Banks writes "respectable" novels (such as <span style="font-style:italic;">The Wasp Factory</span>) while his alter ego Iain M. Banks produces equally well-written but often more playful sci-fi--most famously, the gaudy and galaxy- spanning Culture series. In <span style="font-style:italic;">Inversions</span>, Banks is being tricky again. Besides extra moons in the sky and stories of devastating meteor showers that toppled a former Empire, this novel's squalid, preindustrial world seems to have no sci-fi elements. The two entwined stories feature a woman who becomes personal physician to one kingdom's absolute monarch, and the male bodyguard of a rival and more "progressive" country's Cromwell-like Protector. Both protagonists are mysterious outsiders from farther away than the King or Protector can ever imagine. Readers of Banks's other science fiction will spot the clues to their origins. Others may be slightly puzzled, especially by a seeming miracle which intervenes when the doctor faces torture--but can still enjoy the elegant narrative reversals, reflections and echoes. There are also generous helpings of blood, violence, poisoning, ingenious deceits and high excitement, spiced with political philosophy. Banks continues his pleasant habit of never repeating himself. --<span style="font-style:italic;">David Langford&nbsp;</span></span></p>
+  
+publisher: "Orbit"
+publishing_year: "1998"

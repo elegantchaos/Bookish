@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Anthony Burgess
+title: "Earthly Powers"
+edition: "Paperback"
+isbn: "0140058966"
+notes: |-
+  
+publisher: "Penguin Books Ltd"
+publishing_year: "1981"

@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Douglas Coupland
+title: "Girlfriend in a Coma"
+edition: "Paperback"
+isbn: "0006551270"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">In this latest novel from the poet laureate of Gen X--who is himself now a dangerously mature 36--boy does indeed meet girl. The year is 1979, and the lovers get right down to business in a very Couplandian bit of <span style="font-style:italic;">plein air</span> intercourse: "Karen and I deflowered each other atop Grouse Mountain, among the cedars beside a ski slope, atop crystal snow shards beneath penlight stars. It was a December night so cold and clear that the air felt like the air of the Moon--lung-burning; mentholated and pure; hint of ozone, zinc, ski wax, and Karen's strawberry shampoo." Are we in for an archetypal '80s romance, played out against a pop-cultural backdrop? Nope. Only hours after losing her virginity, Karen loses consciousness as well--for almost two decades. The narrator and his circle soldier on, making the slow progression from debauched Vancouver youths to semi-responsible adults. Several end up working on a television series that bears a suspicious resemblance to <span style="font-style:italic;">The X-Files</span> (surely a self-referential wink on the author's part). And then ... Karen wakes up. Her astonishment-- which suggests a 20th-century, substance-abusing Rip Van Winkle--dominates the second half of the novel, and gives Coupland free reign to muse about time, identity, and the meaning (if any) of the impending millennium. Alas, he also slaps a concluding apocalypse onto the novel. As sleeping sickness overwhelms the populace, the world ends with neither a bang nor a whimper, but a universal yawn--which doesn't, fortunately, outweigh the sweetness, oddity, and ironic smarts of everything that has preceded it.&nbsp;</span></p>
+  
+publisher: "Flamingo"
+publishing_year: "2004"

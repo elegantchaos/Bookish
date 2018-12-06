@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Terry Pratchett
+title: "Men at Arms"
+edition: "Paperback"
+isbn: "0552140287"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">Another wild romp through Discworld! Corporal Carrot, a young dwarf, is newly in charge of the recruits guarding Ankh-Morpork. Edward, the 37th Lord d'Eath, has just discovered that Ankh-Morpork, kingless for generations, has a sovereign ruler, who must be convinced that he is, in fact, the King. The fate of Ankh-Morpork rides on a young man's courage, an ancient sword's magic and a three-legged poodle's bladder.&nbsp;</span></p>
+  
+publisher: "Corgi Adult"
+publishing_year: "1994"

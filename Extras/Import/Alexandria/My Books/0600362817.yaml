@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - P R Reid
+title: "My Favourite Escape Stories (Beaver Bks.)"
+edition: "Paperback"
+isbn: "0600362817"
+notes: |-
+  
+publisher: "Hamlyn Pbs."
+publishing_year: "1977"

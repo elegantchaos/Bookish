@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Brian Stableford
+title: "The Empire of Fear"
+edition: "Paperback"
+isbn: "0330315757"
+notes: |-
+  
+publisher: "Tor Books"
+publishing_year: "1991"

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Bertrand Russell
+title: "The Problems of Philosophy (Opus Books)"
+edition: "Paperback"
+isbn: "0198880189"
+notes: |-
+  
+publisher: "Oxford Paperbacks"
+publishing_year: "1967"

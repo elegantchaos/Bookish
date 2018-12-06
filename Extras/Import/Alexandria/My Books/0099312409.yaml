@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - John Cooper Clarke
+title: "Ten Years in an Open Necked Shirt (Arena Books)"
+edition: "Paperback"
+isbn: "0099312409"
+notes: |-
+  
+publisher: "Arena"
+publishing_year: "1983"

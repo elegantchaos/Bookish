@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Richard Dawkins
+title: "The Selfish Gene"
+edition: "Hardback"
+isbn: "019857519X"
+notes: |-
+  
+publisher: "Oxford University Press"
+publishing_year: "1976"

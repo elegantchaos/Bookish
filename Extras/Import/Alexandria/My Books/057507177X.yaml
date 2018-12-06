@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Adam Roberts
+title: "On (Gollancz SF S.)"
+edition: "Paperback"
+isbn: "057507177X"
+notes: |-
+  
+publisher: "Gollancz"
+publishing_year: "2001"

@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Mark Billingham
+title: "The Burning Girl"
+edition: "Paperback"
+isbn: "0751534897"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">With <span style="font-style:italic;">The Burning Girl</span>, Mark Billingham steps away from the inventively vicious serial killers of his earlier thrillers to have his police detective Thorne investigate something equally unpleasant--the men who kill for money not kicks and the gangsters who ruthlessly employ them. Thorne's retired friend Carol put Rooker away years ago for setting fire to a girl--whom he mistakenly believed to be the daughter of gang-boss Kelly; the girl did not die, then, but wished she had. Now someone is ringing Carol, saying it was them that burned the girl, and Rooker is promising to tell the truth; Ryan, Alison Kelly's ex-husband and her father's chosen successor, is caught up in gang warfare with a new North London Turkish mafia. As always, Billingham delivers psychological insights you half wish you didn't have, along with a profound sense of just how far the damaged Thorne will go in the name of justice. Anyone who knows North London will recognise this as being as atmospheric as it is moody--Billingham continues to develop from book to book. --<span style="font-style:italic;">Roz Kaveney&nbsp;</span></span></p>
+  
+publisher: "Time Warner Paperbacks"
+publishing_year: "2005"

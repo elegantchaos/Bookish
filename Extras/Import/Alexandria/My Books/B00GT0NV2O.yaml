@@ -1,0 +1,29 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Jane Fancher
+title: "'NetWalkers Book 2"
+edition: ""
+isbn: "B00GT0NV2O"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">The NSpace Communication Network: A really big computer with an even bigger problem.
+  
+  Stephen Ridenour: An enigmatic computer genius on a desperate search for his own sanity.
+  
+  Wesley Smith: A perennial thorn in the ComNetAuthority�s side.
+  
+  Admiral Loren Cantrell: A woman with a mission to which an unwilling Stephen holds the key, and an even less cooperative Smith is the roadblock.
+  
+  HuteNamid: a distant world that holds all the answers.
+  
+  WildCards is the second book of a much larger story that began ten years earlier as recounted in 'NetWalkers (Partners and Of Mentors and Mimetrons). It is continued in NeXus and ColdFusion. Together with the final arc beginning with Homecoming Games, (now in production) they form the core of Fancher�s future history of the ComNet Alliance.
+  
+  
+  
+  A vastly different edition of this book was originally published as "GroundTies." It has been completely rewritten, both for clarity and to incorporate insights gained in writing the prequel, 'NetWalkers.
+  
+  
+  
+  ��NetWalkers: A star-spanning game of wits in which the prize is the soul of the universe.� �Hugo Award Winning author C.J. Cherryh&nbsp;</span></p>
+  
+publisher: "Closed Circle Publications"
+publishing_year: "2013"

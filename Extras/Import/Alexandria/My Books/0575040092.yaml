@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - C. J. Cherryh
+title: "Angel with the Sword"
+edition: "Paperback"
+isbn: "0575040092"
+notes: |-
+  
+publisher: "Gollancz"
+publishing_year: "1987"

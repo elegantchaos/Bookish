@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Poul Anderson
+title: "Star Fox"
+edition: "Paperback"
+isbn: "0586026312"
+notes: |-
+  
+publisher: "Panther"
+publishing_year: "1968"

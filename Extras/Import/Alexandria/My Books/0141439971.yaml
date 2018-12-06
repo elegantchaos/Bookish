@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - H.G. Wells Marina Warner Steven McLean
+title: "The Time Machine (Penguin Classics)"
+edition: "Paperback"
+isbn: "0141439971"
+notes: |-
+  
+publisher: "Penguin Books Ltd"
+publishing_year: "2005"

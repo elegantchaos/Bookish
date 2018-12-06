@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Nicholas Mosley
+title: "Inventing God"
+edition: "Hardback"
+isbn: "0436210118"
+notes: |-
+  
+publisher: "Martin Secker & Warburg Ltd"
+publishing_year: "2003"

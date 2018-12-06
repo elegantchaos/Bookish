@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Ian Rankin
+title: "The Jack Harvey Novels"
+edition: "Paperback"
+isbn: "0752837885"
+notes: |-
+  
+publisher: "Orion"
+publishing_year: "2004"

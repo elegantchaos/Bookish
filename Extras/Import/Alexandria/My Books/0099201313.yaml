@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Terry Brooks
+title: "The Elf Queen Of Shannara"
+edition: "Paperback"
+isbn: "0099201313"
+notes: |-
+  
+publisher: "Orbit"
+publishing_year: "1993"

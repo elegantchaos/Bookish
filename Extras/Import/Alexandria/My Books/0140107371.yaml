@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Marge Piercy
+title: "Gone to Soldiers"
+edition: "Paperback"
+isbn: "0140107371"
+notes: |-
+  
+publisher: "Penguin Books Ltd"
+publishing_year: "1988"

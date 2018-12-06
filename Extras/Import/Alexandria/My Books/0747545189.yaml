@@ -1,0 +1,23 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - William Goldman
+title: "The Princess Bride"
+edition: "Paperback"
+isbn: "0747545189"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">First published well, in 1973 actually, this book spawned the Rob Reiner-directed cult film of the same name. It's a tongue-in-cheek fairytale of love, life, action, death and life again. Featuring the obligatory handsome Prince and supremely beautiful princess, it also boasts a Spanish sword wizard, the Zoo of Death, a chocolate-coated resurrection pill and lots of villains, who span the spectrum from evil, through even more evil to (gasp) <span style="font-style:italic;">most evil</span>. And then there's Fezzik, the gentle giant addicted to rhyming.
+  
+  
+  
+  William Goldman--who's won two Oscars for his screenwriting (<span style="font-style:italic;">Butch Cassidy and the Sundance Kid</span> and <span style="font-style:italic;">All the President's Men</span>), and has endeared himself to dentists and their patients planetwide through his novel <span style="font-style:italic;">Marathon Man</span>--has always claimed he merely abridged this text, extracting the "good parts" from an inventive yet wordy classic by Florinese literary superstar, S Morgenstern.
+  
+  
+  
+  It has, however, been whispered in certain circles that Morgenstern himself is a figment of Goldman's ultra-fertile imagination. Read Goldman's original and special Anniversary introductions and make up your own mind. Oh--and don't forget his explanation as to why he's only "abridged" the first chapter of the sequel <span style="font-style:italic;">Buttercup's Baby</span>--which appears here for the first time--and why it took him so long to get round to it.
+  
+  
+  
+  Completely delightful, suitable for cynics and romantics alike. Suspension of disbelief optional. -- <span style="font-style:italic;">Lisa Gee&nbsp;</span></span></p>
+  
+publisher: "Bloomsbury"
+publishing_year: "1999"

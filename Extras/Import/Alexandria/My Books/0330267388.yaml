@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Douglas Adams
+title: "Life, the Universe and Everything (Hitch Hiker's Guide to the Galaxy)"
+edition: "Paperback"
+isbn: "0330267388"
+notes: |-
+  
+publisher: "Tor Books"
+publishing_year: "1982"

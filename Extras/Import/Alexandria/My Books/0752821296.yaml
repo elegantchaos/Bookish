@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Ian Rankin
+title: "Set in Darkness (Inspector Rebus S.)"
+edition: "Hardback"
+isbn: "0752821296"
+notes: |-
+  
+publisher: "Orion"
+publishing_year: "2000"

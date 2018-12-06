@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Anne Gay
+title: "Mindsail"
+edition: "Paperback"
+isbn: "0708883524"
+notes: |-
+  
+publisher: "Orbit"
+publishing_year: "1991"

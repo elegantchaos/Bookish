@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - John Wyndham
+title: "Chocky (Puffin Books)"
+edition: "Paperback"
+isbn: "0140031219"
+notes: |-
+  
+publisher: "Penguin Books Ltd"
+publishing_year: "2005"

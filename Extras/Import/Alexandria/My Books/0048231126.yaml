@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - J R R Tolkien
+title: "Lord of the Rings"
+edition: "Paperback"
+isbn: "0048231126"
+notes: |-
+  
+publisher: "Allen & U"
+publishing_year: "1974"

@@ -32,10 +32,6 @@ class BookDetailViewController: CollectionViewController {
     
     override func viewWillAppear() {
         super.viewWillAppear()
-
-        if let window = view.window?.windowController as? CollectionWindowController {
-            window.bookDetailController = self
-        }
         
         personList.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
         
@@ -154,7 +150,7 @@ extension BookDetailViewController: ActionContextProvider, PersonChangeObserver 
 // MARK: Table Support
 
 protocol BookDetailTableCell {
-    func setup(for: BookDetailViewController, row: Int, isPerson: Bool)
+    func setup(for: BookDetailViewController, row: DetailDataSource.RowInfo)
     func keyView() -> NSView?
 }
 
@@ -170,14 +166,14 @@ extension BookDetailViewController: NSTableViewDataSource, NSTableViewDelegate {
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         guard let columnID = tableColumn?.identifier else { return nil }
         
-        let (kind, isPerson) = source.info(for: row, editing: editing)
+        let rowInfo = source.info(for: row, editing: editing)
         let headingID = BookDetailViewController.HeadingColumnID
         let isHeading = columnID == headingID
-        let viewID = isHeading ? headingID : NSUserInterfaceItemIdentifier(rawValue: kind.rawValue)
+        let viewID = isHeading ? headingID : NSUserInterfaceItemIdentifier(rawValue: rowInfo.kind.rawValue)
         
         guard let view = tableView.makeView(withIdentifier: viewID, owner: self) else { return nil }
         if let cell = view as? BookDetailTableCell {
-            cell.setup(for: self, row: row, isPerson: isPerson)
+            cell.setup(for: self, row: rowInfo)
         }
         view.scheduleForValidation()
         

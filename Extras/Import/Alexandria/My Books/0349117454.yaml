@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Christopher Brookmyre
+title: "All Fun And Games Until Somebody Loses An Eye"
+edition: "Paperback"
+isbn: "0349117454"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">Intrigue. Espionage. Advanced technology. Clinical violence. Hoovering. It's the new Christopher Brookmyre novel.&nbsp;</span></p>
+  
+publisher: "Abacus"
+publishing_year: "2006"

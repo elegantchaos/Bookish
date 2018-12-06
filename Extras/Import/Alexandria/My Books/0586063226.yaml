@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - H.P. Lovecraft
+title: "Omnibus"
+edition: "Paperback"
+isbn: "0586063226"
+notes: |-
+  
+publisher: "Voyager"
+publishing_year: "1985"

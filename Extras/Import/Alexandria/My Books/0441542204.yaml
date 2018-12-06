@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - J.E. Holmes
+title: "Mordred"
+edition: "Paperback"
+isbn: "0441542204"
+notes: |-
+  
+publisher: "Ace Books"
+publishing_year: "1980"

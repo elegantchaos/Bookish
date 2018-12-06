@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Graham Greene
+title: "The Third Man"
+edition: "Paperback"
+isbn: "0140032789"
+notes: |-
+  
+publisher: "Penguin Books Ltd"
+publishing_year: "1971"

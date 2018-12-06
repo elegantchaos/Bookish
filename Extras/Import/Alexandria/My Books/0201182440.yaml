@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - HALSALL
+title: "Intro To Data Communications"
+edition: "Hardback"
+isbn: "0201182440"
+notes: |-
+  
+publisher: "Addison Wesley"
+publishing_year: "1988"

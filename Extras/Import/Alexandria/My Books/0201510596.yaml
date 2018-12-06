@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Robert Sedgewick
+title: "Algorithms C++"
+edition: "Hardback"
+isbn: "0201510596"
+notes: |-
+  
+publisher: "Addison Wesley"
+publishing_year: "1992"

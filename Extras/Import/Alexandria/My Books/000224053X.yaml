@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Kim Stanley Robinson
+title: "Red Mars"
+edition: "Paperback"
+isbn: "000224053X"
+notes: |-
+  
+publisher: "Collins"
+publishing_year: "1993"

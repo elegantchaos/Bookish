@@ -7,14 +7,10 @@ import BookishModel
 import AppKit
 
 class BookHeadingCell: NSTableCellView, BookDetailTableCell {
-    func setup(for detailView: BookDetailViewController, row: Int, isPerson: Bool) {
+    func setup(for detailView: BookDetailViewController, row: DetailDataSource.RowInfo) {
         let source = detailView.source
         if let field = subviews.first as? NSTextField {
-            if isPerson {
-                field.stringValue = source.person(for: row).role?.name ?? "<unknown role>"
-            } else {
-                field.stringValue = source.details(for: row).label
-            }
+            field.stringValue = source.heading(for: row)
         }
     }
     

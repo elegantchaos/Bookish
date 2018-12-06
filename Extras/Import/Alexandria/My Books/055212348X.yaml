@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - David Eddings
+title: "Queen of Sorcery (Belgariad S.)"
+edition: "Paperback"
+isbn: "055212348X"
+notes: |-
+  
+publisher: "Corgi"
+publishing_year: "1984"

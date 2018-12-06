@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - C. J. Cherryh
+title: "At the Edge of Space"
+edition: "Paperback"
+isbn: "0756401607"
+notes: |-
+  
+publisher: "Daw Books"
+publishing_year: "2003"

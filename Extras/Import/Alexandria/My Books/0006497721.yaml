@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Val McDermid
+title: "Clean Break (Kate Brannigan)"
+edition: "Paperback"
+isbn: "0006497721"
+notes: |-
+  
+publisher: "HarperCollins Publishers Ltd"
+publishing_year: "2003"

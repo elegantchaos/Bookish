@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Terry Pratchett
+title: "The Colour of Magic (A Discworld Novel)"
+edition: "Paperback"
+isbn: "0552124753"
+notes: |-
+  <p><span style="font-style:italic;font-size:12pt;color:WindowText;">The Colour of Magic<span style="font-style:normal;"> is Terry Pratchett's maiden voyage through the bizarre land of Discworld. His entertaining and witty series has grown to more than 20 books, and this is where it all starts--with the tourist Twoflower and his hapless wizard guide, Rincewind ("All wizards get like that... it's the quicksilver fumes. Rots their brains. Mushrooms, too."). Pratchett spoofs fantasy clich�s--and everything else he can think of--while marshalling a profusion of characters through a madcap adventure. </span>The Colour of Magic<span style="font-style:normal;"> is followed by </span>The Light Fantastic<span style="font-style:normal;">. --</span>Blaise Selby, Amazon.com&nbsp;</span></p>
+  
+publisher: "Corgi Adult"
+publishing_year: "1985"

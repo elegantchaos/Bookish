@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Robert J. Nemiroff Jerry T. Bonnell
+title: "The Universe"
+edition: "Hardback"
+isbn: "0500511217"
+notes: |-
+  
+publisher: "Thames and Hudson Ltd"
+publishing_year: "2003"

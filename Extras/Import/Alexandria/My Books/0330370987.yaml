@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - China Mieville
+title: "King Rat"
+edition: "Paperback"
+isbn: "0330370987"
+notes: |-
+  
+publisher: "Tor Books"
+publishing_year: "1999"

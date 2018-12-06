@@ -1,0 +1,15 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - James S. A. Corey
+title: "Leviathan Wakes"
+edition: ""
+isbn: "B004XCGKYQ"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">Humanity has colonized the planets - interstellar travel is still beyond our reach, but the solar system has become a dense network of colonies. But there are tensions - the mineral-rich outer planets resent their dependence on Earth and Mars and the political and military clout they wield over the Belt and beyond.
+  
+  
+  
+  Now, when Captain Jim Holden's ice miner stumbles across a derelict, abandoned ship, he uncovers a secret that threatens to throw the entire system into war. Attacked by a stealth ship belonging to the Mars fleet, Holden must find a way to uncover the motives behind the attack, stop a war and find the truth behind a vast conspiracy that threatens the entire human race.&nbsp;</span></p>
+  
+publisher: "Orbit"
+publishing_year: "2011"

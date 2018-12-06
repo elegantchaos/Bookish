@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - William Green
+title: "Observer's Book of Aircraft (Observer's Pckt. S)"
+edition: "Hardback"
+isbn: "0723215014"
+notes: |-
+  
+publisher: "Warne"
+publishing_year: "1971"

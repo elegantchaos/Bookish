@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Douglas Adams
+title: "So Long, and Thanks for All the Fish"
+edition: "Paperback"
+isbn: "0330287001"
+notes: |-
+  
+publisher: "Tor Books"
+publishing_year: "1985"

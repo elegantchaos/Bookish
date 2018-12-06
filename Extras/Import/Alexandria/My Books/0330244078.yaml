@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - John Le Carre
+title: "Tinker Tailor Soldier Spy"
+edition: "Paperback"
+isbn: "0330244078"
+notes: |-
+  
+publisher: "Pan"
+publishing_year: "1975"

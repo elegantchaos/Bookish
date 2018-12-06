@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Benjamin Hoff E.H. Shepard
+title: "The Tao of Pooh (Wisdom of Pooh S.)"
+edition: "Paperback"
+isbn: "0416195113"
+notes: |-
+  
+publisher: "Methuen Winnie The Pooh"
+publishing_year: "1998"

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Ian Watson
+title: "Oracle"
+edition: "Paperback"
+isbn: "0575602260"
+notes: |-
+  
+publisher: "Gollancz"
+publishing_year: "1998"

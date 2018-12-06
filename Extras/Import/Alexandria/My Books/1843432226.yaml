@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Henning Mankell
+title: "Daniel"
+edition: "Hardback"
+isbn: "1843432226"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">In 1875 Hans Bengler, a young entomologist, leaves Sweden for the expedition of a lifetime to the Kalahari Desert where he hopes to find a previously undiscovered insect to name after himself. Instead, after his long and arduous journey through the sands, he finds a small boy, whose tribe has been decimated by European raiders.&nbsp;</span></p>
+  
+publisher: "Harvill Secker"
+publishing_year: "2010"

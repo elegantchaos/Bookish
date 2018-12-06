@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Haruki Murakami
+title: "Kafka on the Shore"
+edition: "Hardback"
+isbn: "1843431106"
+notes: |-
+  
+publisher: "The Harvill Press"
+publishing_year: "2005"

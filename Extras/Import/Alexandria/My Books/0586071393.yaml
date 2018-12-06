@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Raymond E. Feist
+title: "Faerie Tale"
+edition: "Paperback"
+isbn: "0586071393"
+notes: |-
+  
+publisher: "Voyager"
+publishing_year: "2001"

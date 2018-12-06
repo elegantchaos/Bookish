@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Christopher Brookmyre
+title: "The Sacred Art of Stealing"
+edition: "Paperback"
+isbn: "0349114900"
+notes: |-
+  
+publisher: "Abacus"
+publishing_year: "2003"

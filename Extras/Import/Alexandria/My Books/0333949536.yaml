@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Francis Turner Palgrave
+title: "The Golden Treasury of the Best Songs and Lyrical Poems in the English Language"
+edition: "Paperback"
+isbn: "0333949536"
+notes: |-
+  
+publisher: "Palgrave Macmillan"
+publishing_year: "2000"

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - K.J. Parker
+title: "Pattern (Scavenger Trilogy)"
+edition: "Paperback"
+isbn: "1841491829"
+notes: |-
+  
+publisher: "Orbit"
+publishing_year: "2004"

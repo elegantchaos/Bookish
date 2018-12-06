@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Doris May Lessing
+title: "The Cleft"
+edition: "Paperback"
+isbn: "0007233442"
+notes: |-
+  
+publisher: "HarperPerennial"
+publishing_year: "2008"

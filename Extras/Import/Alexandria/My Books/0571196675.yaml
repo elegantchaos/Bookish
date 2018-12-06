@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Alan Bennett
+title: "Writing Home"
+edition: "Paperback"
+isbn: "0571196675"
+notes: |-
+  
+publisher: "Faber and Faber Ltd"
+publishing_year: "1998"

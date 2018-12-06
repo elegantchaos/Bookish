@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Ben Elton
+title: "This Other Eden"
+edition: "Paperback"
+isbn: "0671851802"
+notes: |-
+  
+publisher: "Pocket Books"
+publishing_year: "1993"

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Geoff Ryman
+title: "253"
+edition: "Paperback"
+isbn: "0006550789"
+notes: |-
+  
+publisher: "Flamingo"
+publishing_year: "1998"

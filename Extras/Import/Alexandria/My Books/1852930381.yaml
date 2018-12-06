@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Ian Bradbury
+title: "The Biosphere"
+edition: "Hardback"
+isbn: "1852930381"
+notes: |-
+  
+publisher: "John Wiley and Sons Ltd"
+publishing_year: "1991"

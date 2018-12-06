@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Poul Anderson
+title: "Trouble Twisters"
+edition: "Paperback"
+isbn: "0586028714"
+notes: |-
+  
+publisher: "Panther"
+publishing_year: "1969"

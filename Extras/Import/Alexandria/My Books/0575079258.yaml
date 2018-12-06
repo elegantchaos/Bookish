@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Scott Lynch
+title: "Red Seas Under Red Skies"
+edition: "Paperback"
+isbn: "0575079258"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">"Balancing thrilling action sequences with the harsh realities of violence and its aftermath, it's the kind of witty romp that reminds you how much fun heroic fantasy is supposed to be. Rip-roaring entertainment."&nbsp;</span></p>
+  
+publisher: "Gollancz"
+publishing_year: "2007"

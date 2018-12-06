@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Don Putnam
+title: "Crosswords for the Enthusiast (Paperfronts S)"
+edition: "Paperback"
+isbn: "0716005972"
+notes: |-
+  
+publisher: "Elliot Right Way"
+publishing_year: "1974"

@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Eugene Byrne
+title: "Thigmoo"
+edition: "Paperback"
+isbn: "0671028626"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">Perhaps the most sublimely silly Utopian novel for years, ThiGMOO-- acronymically, This Great Movement of Ours--is at the same time attractively cynical about human behaviour and motivation. The Museum of the Mind, a collection of erams, virtual representations of imaginary personalities, was put together as an educational aide-- what could be more calculated to interest not very bright students in the rise of feminism than a conversation with a Victorian whore, or in the English Civil War than being shouted at by a ranter? A wave of religious conversions among the erams is but the first of the many problems to hit <span style="font-style:italic;">Daily Mail</span> columnist museum head Sir John; academic skulduggery, the last left-wing hacker in Britain and the First Church of Satan all have a role to play in what follows. And though the erams may have started off as imaginary creations, they rapidly develop an attractive and three-dimensional life of their own--the love affair between streetwalker Nelly and her gallant cavalryman is genuinely touching. Byrne is fascinated both by the minutiae of radical political sects and by the mechanisms of mundane politics; this is an intelligent and thoughtful political satire as well as a very funny one. --<span style="font-style:italic;">Roz Kaveney&nbsp;</span></span></p>
+  
+publisher: "Earthlight"
+publishing_year: "1999"

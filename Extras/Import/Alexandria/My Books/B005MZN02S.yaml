@@ -1,0 +1,15 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Richard Morgan
+title: "The Cold Commands"
+edition: ""
+isbn: "B005MZN02S"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">Ringil Eskiath, scarred wielder of the kiriath-forged broadsword Ravensfriend, is a man on the run - from his past and the family who have disowned him, from the slave trade magnates of Trelayne who want him dead, and apparently from the dark gods themselves, who are taking an interest but making no more sense than they ever have. Outlawed and exiled from his ancestral home in the north, Ringil has only one place left to turn - Yhelteth, city heart of the southern Empire, where perhaps he can seek asylum with the kiriath half-breed Archeth Indamaninarmal, former war comrade and now high-up advisor to the Emperor Jhiral Khimran II.
+  
+  
+  
+  But Archeth Indamaninarmal has problems of her own to contend with, as does her house guest, bodyguard and one time steppe nomad Egar the Dragonbane. And far from gaining the respite he is seeks, Ringil will instead find himself implicated in fresh schemes and doubtful allegiances no safer than those he has left behind. Old enemies are stirring, the old order is rotted through and crumbling, and though no-one yet knows it, the city of Yhelteth is about to explode . . .&nbsp;</span></p>
+  
+publisher: "Gollancz"
+publishing_year: "2011"

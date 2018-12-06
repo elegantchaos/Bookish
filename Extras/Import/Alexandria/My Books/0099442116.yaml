@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Michael Crichton
+title: "The Terminal Man"
+edition: "Paperback"
+isbn: "0099442116"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">Harry has a problem. Ever since getting in a car accident, he's suffered from "thought seizures", violent fits in which he attacks other people. He used to be an artificial intelligence researcher, which may explain why he targets anyone who either works on machines or who acts like a machine--mechanics, gas-station attendants, prostitutes, exotic dancers. But there's hope: He can become part machine himself, undergoing "Stage 3", an experimental procedure implanting 40 electrodes deep in the pleasure centres of his brain. The surgery is successful and blissful pulses of electricity short- circuit Harry's seizures. That is, until Harry figures out how to overload himself with the satisfying jolts and escapes on a murderous rampage. One of Crichton's earliest, playing ably on 70s' fears of computers and mind-control. <span style="font-style:italic;">--Paul Hughes, Amazon.com&nbsp;</span></span></p>
+  
+publisher: "Arrow"
+publishing_year: "1994"

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Tzu Sun
+title: "The Art of War (Wordsworth Classics of World Literature)"
+edition: "Paperback"
+isbn: "1853267791"
+notes: |-
+  
+publisher: "Wordsworth Editions Ltd"
+publishing_year: "1998"

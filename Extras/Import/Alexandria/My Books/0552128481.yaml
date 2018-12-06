@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Terry Pratchett
+title: "The Light Fantastic (A Discworld Novel)"
+edition: "Paperback"
+isbn: "0552128481"
+notes: |-
+  
+publisher: "Corgi Adult"
+publishing_year: "1986"

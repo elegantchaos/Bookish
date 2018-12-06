@@ -1,0 +1,15 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Richard Adams
+title: "Watership Down (Puffin Books)"
+edition: "Paperback"
+isbn: "0140306013"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">Despite the fact that it's often a hard sell at first (what teenager wouldn't cringe at the thought of 400-plus pages of talking rabbits?), Richard Adams' bunny-centric epic rarely fails to win the love and respect of anyone who reads it, regardless of age. Like most great novels, <span style="font-style:italic;">Watership Down</span> is a rich story that can be read (and reread) on many different levels. The book is often praised as an allegory, with its analogues between human and rabbit culture (a fact sometimes used to goad skeptical teens, who resent the challenge that they won't "get" it, into reading it), but it's equally praiseworthy as just a corking good adventure.
+  
+  
+  
+  The story follows a warren of Berkshire rabbits fleeing the destruction of their home by a land developer. As they search for a safe haven, skirting danger at every turn, we become acquainted with the band and its compelling culture and mythos. Adams has crafted a touching, involving world in the dirt and scrub of the English countryside, complete with its own folk history and language (the book comes with a "lapine" glossary, a guide to rabbitese). As much about freedom, ethics and human nature as it is about a bunch of bunnies looking for a warm hidey-hole and some mates, Watership Down will continue to make the transition from classroom desk to bedside table for many generations to come. --<span style="font-style:italic;">Paul Hughes&nbsp;</span></span></p>
+  
+publisher: "Puffin Books"
+publishing_year: "1973"

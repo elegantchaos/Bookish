@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Steve C. McConnell
+title: "Rapid Development"
+edition: "Paperback"
+isbn: "1556159005"
+notes: |-
+  
+publisher: "Microsoft Press International"
+publishing_year: "1996"

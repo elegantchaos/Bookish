@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Julian May
+title: "The Adversary (The Saga of the Exiles)"
+edition: "Paperback"
+isbn: "0330280317"
+notes: |-
+  
+publisher: "Tor Books"
+publishing_year: "1984"

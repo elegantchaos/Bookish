@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Arthur C Clarke
+title: "Earthlight"
+edition: "Paperback"
+isbn: "0330105744"
+notes: |-
+  
+publisher: "Pan Bks."
+publishing_year: "1971"

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Jon Courtenay Grimwood
+title: "Stamping Butterflies (Gollancz SF)"
+edition: "Paperback"
+isbn: "057507650X"
+notes: |-
+  
+publisher: "Gollancz"
+publishing_year: "2005"

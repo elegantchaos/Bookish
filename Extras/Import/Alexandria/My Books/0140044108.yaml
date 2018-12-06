@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Lisa Alther
+title: "Kinflicks"
+edition: "Paperback"
+isbn: "0140044108"
+notes: |-
+  
+publisher: "Penguin Books Ltd"
+publishing_year: "1977"

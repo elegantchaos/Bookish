@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - William R Forstchen
+title: "Ice Prophet"
+edition: "Paperback"
+isbn: "0345307909"
+notes: |-
+  
+publisher: "Ballantine Bks"
+publishing_year: "1984"

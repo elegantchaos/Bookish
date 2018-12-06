@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Neil Gaiman
+title: "American Gods"
+edition: "Paperback"
+isbn: "0755322819"
+notes: |-
+  
+publisher: "Headline Review"
+publishing_year: "2005"

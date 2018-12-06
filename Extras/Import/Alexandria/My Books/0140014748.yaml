@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Iris Murdoch
+title: "The Sandcastle"
+edition: "Paperback"
+isbn: "0140014748"
+notes: |-
+  
+publisher: "Penguin Books Ltd"
+publishing_year: "1978"

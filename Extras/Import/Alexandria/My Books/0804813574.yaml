@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Tsung Hwa Jou Shoshana Shapiro
+title: "The Dao of Taijiquan Way to Rejuvenation"
+edition: "Paperback"
+isbn: "0804813574"
+notes: |-
+  
+publisher: "Tuttle Publishing"
+publishing_year: "1981"

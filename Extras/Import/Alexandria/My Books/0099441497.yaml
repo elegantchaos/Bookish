@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Kathy Reichs
+title: "Cross Bones"
+edition: "Paperback"
+isbn: "0099441497"
+notes: |-
+  
+publisher: "Arrow"
+publishing_year: "2006"

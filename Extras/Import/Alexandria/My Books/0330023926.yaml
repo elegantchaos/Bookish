@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Keith Roberts
+title: "The Furies (Pan science fiction)"
+edition: "Paperback"
+isbn: "0330023926"
+notes: |-
+  
+publisher: "Pan Books"
+publishing_year: "1969"

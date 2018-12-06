@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Michael Marshall Smith
+title: "One of Us"
+edition: "Paperback"
+isbn: "000649997X"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">If you like the brain-stretching work of William Gibson (author of <span style="font-style:italic;">Neuromancer</span>) and Philip K. Dick (author of <span style="font-style:italic;">Do Androids Dream of Electric Sleep?</span>, which was the basis for <span style="font-style:italic;">Blade Runner</span>), you'll feel right at home with this latest futuristic thriller from the author of the well-received <span style="font-style:italic;">Spares</span> (available in paperback). It's 2017, and the first time we meet Hap Thompson he's being hassled in a bar in Ensenada by his alarm clock, which not only talks but walks and has a bad attitude. Hap, a prodigious computer hacker with a pretty bad attitude himself, works for an outfit called REMtemps, which offers a unique service--removing clients' bad dreams by sucking them into the heads of paid professionals. (Could Smith have been influenced at all by the title of one of Dick's best stories, "I Can Dream It for You Wholesale"?) Unfortunately, one of the bad dreams Hap is called on to swallow involves a real murder, and the search for the woman who dreamed it in the first place takes him--and us--on a literally mind-bending journey of scientific and philosophic discovery. But there's plenty of action, gadgetry, and snappy <span style="font-style:italic;">noir</span> dialogue to make it all go down easily. --<span style="font-style:italic;">Dick Adler&nbsp;</span></span></p>
+  
+publisher: "HarperCollins"
+publishing_year: "1999"

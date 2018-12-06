@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Iain M. Banks
+title: "The Player of Games (Orbit Books)"
+edition: "Paperback"
+isbn: "0708883095"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">In <span style="font-style:italic;">The Player of Games</span>, Iain M. Banks presents a distant future that could almost be called the end of history. Humanity has filled the galaxy, and thanks to ultra-high technology everyone has everything they want, no one gets sick, and no one dies. It's a playground society of sports, stellar cruises, parties, and festivals. Jernau Gurgeh, a famed master game player, is looking for something more and finds it when he's invited to a game tournament at a small alien empire. Abruptly Banks veers into different territory. The Empire of Azad is exotic, sensual and vibrant. It has space battle cruisers, a glowing court-- all the stuff of good old science fiction--which appears old-fashioned in contrast to Gurgeh's home. At first it's a relief, but further exploration reveals the empire to be depraved and terrifically unjust. Its defects are gross exaggerations of our own, yet they indict us all the same. Clearly Banks is interested in the idea of a future where everyone can be mature and happy. Yet it's interesting to note that in order to give us this compelling adventure story, he has to return to a more traditional setting. Thoughtful science fiction readers will appreciate the cultural comparisons, and fans of big ideas and action will also be rewarded. -- <span style="font-style:italic;">Brooks Peck&nbsp;</span></span></p>
+  
+publisher: "Orbit"
+publishing_year: "1991"

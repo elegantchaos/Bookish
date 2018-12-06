@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Cornelius Tacitus Michael Grant
+title: "The Annals (Classics S.)"
+edition: "Paperback"
+isbn: "0140440607"
+notes: |-
+  
+publisher: "Penguin Books Ltd"
+publishing_year: "1971"

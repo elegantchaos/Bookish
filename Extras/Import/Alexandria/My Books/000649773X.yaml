@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Gill Alderman
+title: "The Memory Palace"
+edition: "Paperback"
+isbn: "000649773X"
+notes: |-
+  
+publisher: "Voyager"
+publishing_year: "1996"

@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Philip Pullman
+title: "Northern Lights"
+edition: "Paperback"
+isbn: "0590660543"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">Lyra's life is already sufficiently interesting for a novel before she eavesdrops on a presentation by her uncle Lord Asriel to his colleagues in the Jordan College faculty, Oxford. The college, famed for its leadership in experimental theology, is funding Lord Asriel's research into the heretical possibility of the existence of worlds unlike Lyra's own, where everyone is born with a familiar animal companion, magic of a kind works, the Tartars are threatening to overrun Muscovy, and the Pope is a puritanical Protestant. Set in an England familiar and strange, Philip Pullman's lively, taut story is a must-read and re-read for fantasy lovers of all ages. The world-building is outstanding, from the subtle hints of the 1898 Tokay to odd quirks of language to the panserbjorne, while determined, clever Lyra is strongly reminiscent of Joan Aiken's Dido Twite.&nbsp;</span></p>
+  
+publisher: "Scholastic Point"
+publishing_year: "1998"

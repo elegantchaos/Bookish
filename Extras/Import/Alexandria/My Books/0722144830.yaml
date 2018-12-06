@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Harry Harrison
+title: "The stainless steel rat saves the world (Sphere science fiction)"
+edition: "Paperback"
+isbn: "0722144830"
+notes: |-
+  
+publisher: "Sphere"
+publishing_year: "1979"

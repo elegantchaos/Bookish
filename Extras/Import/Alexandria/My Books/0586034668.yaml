@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Isaac Asimov
+title: "Nightfall One"
+edition: "Paperback"
+isbn: "0586034668"
+notes: |-
+  
+publisher: "Grafton Books"
+publishing_year: "1971"

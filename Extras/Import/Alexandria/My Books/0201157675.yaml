@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - David E. Goldberg
+title: "Genetic Algorithms in Search, Optimization and Machine Learning"
+edition: "Hardback"
+isbn: "0201157675"
+notes: |-
+  
+publisher: "Addison Wesley"
+publishing_year: "1988"

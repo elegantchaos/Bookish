@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Stephen Donaldson
+title: "Forbidden Knowledge (Gap S.)"
+edition: "Paperback"
+isbn: "0006470203"
+notes: |-
+  
+publisher: "Collins"
+publishing_year: "1992"

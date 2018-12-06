@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - China Mieville
+title: "Perdido Street Station"
+edition: "Paperback"
+isbn: "0330392891"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">Like the author's 1998 debut book <span style="font-style:italic;">King Rat</span>, this is an urban-gothic novel full of rich city squalor--but this time the setting isn't London but the grimy fantasy metropolis of New Crobuzon. The city sprawls like a mutant Gormenghast, contains strange ethnic minorities such as the khepris (women with huge scarab-beetles for heads), and seethes with seedy technology and thaumaturgy. There are Babbage engines, coke-powered robot "constructs", and an underclass of biomagically "Remade" victims of cruel justice who may be part-machine, part-animal or wholly nightmarish. A visiting garuda--a winged being now stripped of his wings--approaches the overweight, eccentric amateur scientist Isaac Dan der Grimnebulin in hope of buying back the power of flight, and the resulting research programme has accidental but monstrous consequences. Something appalling is loosed, a horror whose deadliness is underlined when New Crobuzon's corrupt government begs help from the Ambassador of Hell ... who refuses, because even the demons are frightened. Dealing with the flying terror becomes a job for Grimnebulin and a much-harried group of cronies--including his khepri lover, the garuda, a reporter for a brutally suppressed subversive newspaper, the group mind of New Crobuzon's constructs, a secret traitor, and one of the strangest giant spiders in fiction. A big, powerful, inventive, mesmerising and memorably horrid novel. --<span style="font-style:italic;">David Langford&nbsp;</span></span></p>
+  
+publisher: "Tor Books"
+publishing_year: "2001"

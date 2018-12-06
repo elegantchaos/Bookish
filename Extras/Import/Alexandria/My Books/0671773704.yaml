@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Jon Courtenay Grimwood
+title: "Felaheen (Arabesk S.)"
+edition: "Paperback"
+isbn: "0671773704"
+notes: |-
+  
+publisher: "Pocket Books"
+publishing_year: "2004"

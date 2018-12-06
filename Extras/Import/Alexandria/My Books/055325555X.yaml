@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - George Alec Effinger
+title: "When Gravity Fails"
+edition: "Paperback"
+isbn: "055325555X"
+notes: |-
+  
+publisher: "Bantam Bks."
+publishing_year: "1991"

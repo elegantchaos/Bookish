@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - B. Bargen
+title: "Inside DirectX"
+edition: "Paperback"
+isbn: "1572316969"
+notes: |-
+  
+publisher: "Microsoft Press International"
+publishing_year: "1998"

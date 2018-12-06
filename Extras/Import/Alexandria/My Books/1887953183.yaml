@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Aeg
+title: "Legend of the Five Rings Role-Playing Game"
+edition: "Hardback"
+isbn: "1887953183"
+notes: |-
+  
+publisher: "Alderac Entertainment Group (AEG)"
+publishing_year: "2002"

@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Samuel R. Delany
+title: "Babel Seventeen (S.F.Masterworks S.)"
+edition: "Paperback"
+isbn: "1857988051"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">In 1967, Samuel R. Delany was young, gay, black and possibly the hippest person on the planet. He was to write more perfect books than <span style="font-style:italic;">Babel-17</span>, but it is perhaps the most delightful, clever and sensual of his works. Its set pieces--an extended wander through space-dock bars as poetess and code-breaker Rydra Wong assembles a crew for desperate adventures; a high society dinner that turns into mayhem; Rydra's subversion/seduction of the sinister Butcher, who cannot say, or think, I, me or mine--are glorious in their arrogant sense that no-one has ever been this smart before. Rydra is one of those protagonists whom the author loves because he identifies with her, whom we love because we are overwhelmed by his infatuation. And the plot? Invaders from another part of human space are using as code a language which cannot be broken, and Rydra must save the day. As a meditation on language and thought, this is as sharp as its decor. Most important, though, is the complex, polymorphous sexiness of the whole thing--its sense of surgical chimerahood, life after death, and clone assassins as just unbearably hot and really really cool. --<span style="font-style:italic;">Roz Kaveney&nbsp;</span></span></p>
+  
+publisher: "Gollancz"
+publishing_year: "1999"

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Peter F. Hamilton
+title: "The Naked God (Night's Dawn Trilogy)"
+edition: "Paperback"
+isbn: "0330351451"
+notes: |-
+  
+publisher: "Tor Books"
+publishing_year: "2000"

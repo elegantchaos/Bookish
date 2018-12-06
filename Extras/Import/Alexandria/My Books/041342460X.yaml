@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Sophocles Don Taylor
+title: "Theban Plays (Methuen World Dramatists S.)"
+edition: "Paperback"
+isbn: "041342460X"
+notes: |-
+  
+publisher: "Methuen Publishing Ltd"
+publishing_year: "1986"

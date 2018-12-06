@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Neal Feinberg Sonya E. Keene Robert Mathews P. Tucker Withington
+title: "Dylan Programming"
+edition: "Paperback"
+isbn: "0201479761"
+notes: |-
+  
+publisher: "Addison Wesley"
+publishing_year: "1996"

@@ -1,0 +1,19 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Andrew Hunt Davis Thomas
+title: "The Pragmatic Programmer"
+edition: "Paperback"
+isbn: "020161622X"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">Programmers are craftspeople. They are trained to use a certain set of tools(editors, object mangers, version trackers) to generate a certain kind of product (programs) that will operate in some environment (operating systems on hardware assemblies). Like any other craft, computer programming has spawned a body of wisdom, most of which isn't taught at universities or in certification classes. Rather, most programmers arrive at the so-called tricks of the trade over time, by independent experimentation. In <span style="font-style:italic;">ThePragmatic Programmer</span>, Andrew Hunt and David Thomas codify many of the truths they've discovered during their respective careers as designers of software and writers of code.
+  
+  
+  
+  Some of the authors' nuggets of pragmatism are concrete, and the path to their implementation is clear. They advise readers to learn one text editor, for example, and use it for everything. They recommend the use of version-tracking software for even the smallest projects, and promote the merits of learning regular expression syntax and a text-manipulation language. Other (perhaps more valuable) advice is softer. The authors note in their section on debugging, "if you see hoof prints think horses, notzebras". That is, suspect everything, but start looking for problems in the most obvious places. They offer some advice on making estimates of time and expense, and on integrating testing into the development process. You'll want a copy of <span style="font-style:italic;">The Pragmatic Programmer</span> for two reasons: It displays your own accumulated wisdom more cleanly than you ever bothered to state it and it introduces you to methods of work that you may not yet have considered. Working programmers will enjoy this book.
+  
+  
+  
+  <span style="font-style:italic;">Topics covered:</span> A workmanlike approach to software design and construction that allows for efficient, profitable development of high-quality products. Elements of the approach include specification development, customer relations, team management, design practices, development tools, and testing procedures. The authors present their approach with the help of anecdotes and technical problems. --<span style="font-style:italic;">DavidWall, amazon.com&nbsp;</span></span></p>
+  
+publisher: "Addison Wesley"
+publishing_year: "1999"

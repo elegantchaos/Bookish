@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Samuel R. Delany
+title: "Nova (Classic S.F.)"
+edition: "Paperback"
+isbn: "0575038187"
+notes: |-
+  
+publisher: "Gollancz"
+publishing_year: "1986"

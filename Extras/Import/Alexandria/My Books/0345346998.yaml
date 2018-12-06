@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Peter S Beagle
+title: "Folk of the Air"
+edition: "Paperback"
+isbn: "0345346998"
+notes: |-
+  
+publisher: "Ballantine"
+publishing_year: "1998"

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Juliet E. McKenna
+title: "The Gambler's Fortune (Einarinn)"
+edition: "Paperback"
+isbn: "185723989X"
+notes: |-
+  
+publisher: "Orbit"
+publishing_year: "2000"

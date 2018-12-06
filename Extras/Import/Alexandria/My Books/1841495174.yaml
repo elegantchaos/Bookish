@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Trudi Canavan
+title: "Voice of the Gods"
+edition: "Paperback"
+isbn: "1841495174"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">Praise for The Black Magician Trilogy: 'A wonderfully and meticulously detailed world, and an edge-of-the-seat plot, this book is a must for lovers of good fantasy' Jennifer Fallon 'Canavan is a natural storyteller' Emerald City&nbsp;</span></p>
+  
+publisher: "Orbit"
+publishing_year: "2008"

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Joseph Schwartz Michael McGuinness
+title: "Einstein for Beginners"
+edition: "Paperback"
+isbn: "0906386055"
+notes: |-
+  
+publisher: "Writers and Readers"
+publishing_year: "1979"

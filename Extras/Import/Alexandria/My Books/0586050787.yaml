@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Frederik Pohl
+title: "Jem"
+edition: "Paperback"
+isbn: "0586050787"
+notes: |-
+  
+publisher: "Panther"
+publishing_year: "1980"

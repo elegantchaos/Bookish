@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Sue Townsend
+title: "The Secret Diary of Adrian Mole Aged Thirteen and Three Quarters"
+edition: "Paperback"
+isbn: "0413537900"
+notes: |-
+  
+publisher: "Mandarin"
+publishing_year: "1983"

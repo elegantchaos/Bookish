@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - C. J. Cherryh
+title: "The Chanur Saga"
+edition: "Paperback"
+isbn: "0886779308"
+notes: |-
+  
+publisher: "Penguin Putnam Inc USA"
+publishing_year: "2000"

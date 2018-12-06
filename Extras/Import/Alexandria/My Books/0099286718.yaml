@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Nicholson Baker
+title: "The Fermata"
+edition: "Paperback"
+isbn: "0099286718"
+notes: |-
+  
+publisher: "Vintage"
+publishing_year: "1995"

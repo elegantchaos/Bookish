@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Douglas Coupland
+title: "Eleanor Rigby"
+edition: "Hardback"
+isbn: "0007162537"
+notes: |-
+  
+publisher: "Fourth Estate"
+publishing_year: "2004"

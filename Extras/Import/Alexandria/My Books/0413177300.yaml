@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Brian Aldiss
+title: "Malacia Tapestry"
+edition: "Paperback"
+isbn: "0413177300"
+notes: |-
+  
+publisher: "Mandarin"
+publishing_year: "1988"

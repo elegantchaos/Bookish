@@ -1,0 +1,19 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Jon Bentley
+title: "Programming Pearls (ACM Press S.)"
+edition: "Paperback"
+isbn: "0201657880"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">This reviewer still has the original edition of Bentley's book, 14-years-old now. Bentley's influential and eponymous columns first appeared in <span style="font-style:italic;">Communications of the ACM</span>. <span style="font-style:italic;">Programming Pearls</span> contains 15 of these--now updated--columns.
+  
+  
+  
+  In his book Bentley assumes little more than a working knowledge of C, but it's in no way a guide to C. Rather, it approaches programming in the same way William Morris approached design--as a creative act founded on knowledge of the craft. From the first essay, Bentley emphasises the importance of accurately defining the problem in arriving at a fast, robust and efficient solution. He gives a number of examples that show how real understanding can reduce programming time, increase accuracy and reduce bugs.
+  
+  
+  
+  The essays are divided into three alliteratively named sections: Preliminaries, Performance and Product. The first section covers writing a program that's correct for the programmer and the client. The second addresses efficiency, code tuning and performance. The last is a little unfocussed, albeit still interesting: it covers sorts, searches and heaps among other subjects. Take note, though: the solutions in the appendices are, in true C fashion, pointers to solutions. <span style="font-style:italic;">Programming Pearls</span> is such a delight, you're likely to find yourself reading it in the bath. --<span style="font-style:italic;">Steve Patient&nbsp;</span></span></p>
+  
+publisher: "Addison Wesley"
+publishing_year: "1999"

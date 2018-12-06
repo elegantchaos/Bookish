@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - B. Bova
+title: "Voyagers II"
+edition: "Paperback"
+isbn: "0413141306"
+notes: |-
+  
+publisher: "Mandarin"
+publishing_year: "1987"

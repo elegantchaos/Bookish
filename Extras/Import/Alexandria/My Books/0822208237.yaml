@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Tennessee Williams
+title: "The Night of the Iguana"
+edition: "Paperback"
+isbn: "0822208237"
+notes: |-
+  
+publisher: "Dramatists Play Service Inc"
+publishing_year: "1990"

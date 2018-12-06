@@ -1,0 +1,15 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Kathy Reichs
+title: "Deja Dead"
+edition: "Paperback"
+isbn: "0099255189"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">Reichs' stunning debut thriller draws on her experience as a forensic anthropologist in North Carolina and Montreal, but it has considerably more going for it than the mere stamp of authenticity. The devil is in the details, and it is the small betraying details--the alignment of cuts in bloody bone--that convince Temperance Brennan that a series of women, murdered in different ways, were killed and dismembered by the same hand and the same saw. Knowing what she knows is one thing, but convincing her police colleagues is quite another.
+  
+  
+  
+  Reichs skilfully depicts police canteen culture and the way it ensures that someone who is an expert outsider, not one of the lads, is always going to have to go that extra mile to prove herself and her ideas. Brennan is a toughie, though, and not too fussy about demarcation disputes. Reichs has found a way of having her cake and eating it and giving us a detective who combines professional expertise with enthusiastic amateurism. Even more compellingly, the suspense is turned up several notches when Brennan realizes that she is hunted as well as hunter--they find the killer's lair and find her photograph among his trophies... --<span style="font-style:italic;">Roz Kaveney&nbsp;</span></span></p>
+  
+publisher: "Arrow"
+publishing_year: "1998"

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - E.E. Simbalist W.K. Backhaus S.C. Betney
+title: "Chivalry & Sorcery"
+edition: "Paperback"
+isbn: "1902500016"
+notes: |-
+  
+publisher: "Brittannia Games Designs"
+publishing_year: "1999"

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Brian Stableford
+title: "Serpent's Blood (Genesys)"
+edition: "Paperback"
+isbn: "0099443414"
+notes: |-
+  
+publisher: "Legend"
+publishing_year: "1996"

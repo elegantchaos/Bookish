@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Katharine Kerr
+title: "A Time of War"
+edition: "Paperback"
+isbn: "0002240688"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">A Time Of War&nbsp;</span></p>
+  
+publisher: "Collins"
+publishing_year: "1993"

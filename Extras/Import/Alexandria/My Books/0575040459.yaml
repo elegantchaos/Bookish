@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - C. J. Cherryh
+title: "Wave without a Shore"
+edition: "Paperback"
+isbn: "0575040459"
+notes: |-
+  
+publisher: "Gollancz"
+publishing_year: "1988"

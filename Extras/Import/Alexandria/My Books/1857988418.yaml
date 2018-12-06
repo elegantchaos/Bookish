@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - James Lovegrove
+title: "Days"
+edition: "Paperback"
+isbn: "1857988418"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">The right amount of credit on your card will buy you anything--a rare matchbook, an albino tiger, the women in the Pleasure department. Days is the grandest of department stores, whose security men are licensed to kill and whose seven owners, a group of very different brothers, brood in a penthouse, fetched endless vast meals by a grumpy butler. James Lovegrove's novel inhabits that realm where satire borders on allegory and realism is full of wild magic; it was, nonetheless, shortlisted for the Arthur C. Clarke prize. Security man Frank has reached a point of alienation such that he can no longer see himself in the mirror; Gordon and Linda have just got their first Days storecard, and are keen to undergo the Days experience; the Book Department's feud for space with their neighbours in Computers is about to enter a new phase. There are flash sales in Ties and Dolls, and a riot in Third World Musical Instruments. And who is sleeping in the Bed Department's four- poster? Endlessly inventive and savage in its humour, Lovegrove's novel will change for ever the way you feel about superstores, and gives a whole new meaning to the phrase "shop till you drop". --<span style="font-style:italic;">Roz Kaveney&nbsp;</span></span></p>
+  
+publisher: "Gollancz"
+publishing_year: "1999"

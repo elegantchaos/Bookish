@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Fred Hoyle Geoffrey Hoyle
+title: "Fifth Planet"
+edition: "Paperback"
+isbn: "0140022449"
+notes: |-
+  
+publisher: "Penguin Books Ltd"
+publishing_year: "1971"

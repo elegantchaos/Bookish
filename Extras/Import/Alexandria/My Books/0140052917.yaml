@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - George Mikes
+title: "Tsi-tsa"
+edition: "Paperback"
+isbn: "0140052917"
+notes: |-
+  
+publisher: "Penguin Books Ltd"
+publishing_year: "1981"

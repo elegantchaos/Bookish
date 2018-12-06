@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - C. J. Cherryh
+title: "Defender"
+edition: "Paperback"
+isbn: "0756400201"
+notes: |-
+  
+publisher: "Daw Books"
+publishing_year: "2008"

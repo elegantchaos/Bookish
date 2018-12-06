@@ -1,0 +1,19 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Iain M. Banks
+title: "Look to Windward"
+edition: "Hardback"
+isbn: "1857239695"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">When using that middle initial M., Iain Banks writes grand space opera combining galactic scope with twisty, tricky probes into the darkest secrets of human and other minds. <span style="font-style:italic;">Look to Windward</span> revisits the utopian but ruthless interstellar Culture introduced in <span style="font-style:italic;">Consider Phlebas</span>, exploring the complex aftermath of a rare Culture mistake--humanitarian tinkering with an unjust civilization that accidentally led to massive civil war and billions dead.
+  
+  
+  
+  After a harrowing battle flashback, the scene shifts to one of the Culture's wonderfully landscaped, ring-shaped artificial worlds called Orbitals. A ghastly light is awaited in the sky from distant suns detonated in the war of <span style="font-style:italic;">Consider Phlebas</span> eight centuries earlier; an occasion for sombre festivity, pyrotechnics, and a memorial symphony from exiled alien composer Ziller. Meanwhile another tortured member of Ziller's race--aggressors and victims in that more recent civil war--arrives on a mission whose dreadful nature emerges through fragments of slowly returning memory. Elsewhere, in the exuberantly imagined airsphere home of floating "behemothaurs" almost too huge to imagine, the clue to what's happening falls belatedly into inexperienced hands...
+  
+  
+  
+  While scattering red herrings and building tension for his final burst of literal and moral fireworks, Banks shows us around the Orbital in sensuous, lyrical travelogues. Rich scenery, high living, low comedy and dangerous sports contrast with reflections on mortality and the lingering aftershock of both those wars, recalled by ravaged veterans. <span style="font-style:italic;">Look to Windward</span> culminates with deft twists, inversions, parallels, and savage justice, as unexpected as we expect from this author. Recommended. --<span style="font-style:italic;">David Langford&nbsp;</span></span></p>
+  
+publisher: "Orbit"
+publishing_year: "2000"

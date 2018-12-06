@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - John Gribbin Marcus Chown
+title: "Reunion"
+edition: "Paperback"
+isbn: "0575052805"
+notes: |-
+  
+publisher: "Gollancz"
+publishing_year: "1992"

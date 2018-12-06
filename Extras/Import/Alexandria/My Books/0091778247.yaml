@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Richard North Patterson
+title: "Degree of Guilt"
+edition: "Hardback"
+isbn: "0091778247"
+notes: |-
+  
+publisher: "Hutchinson"
+publishing_year: "1993"

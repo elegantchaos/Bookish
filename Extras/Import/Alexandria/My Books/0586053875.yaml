@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Philip Jose Farmer
+title: "The Magic Labyrinth"
+edition: "Paperback"
+isbn: "0586053875"
+notes: |-
+  
+publisher: "Grafton Books"
+publishing_year: "1981"

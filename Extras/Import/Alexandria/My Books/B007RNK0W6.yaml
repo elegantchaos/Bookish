@@ -1,0 +1,29 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Graham Lee
+title: "Test-Driven iOS Development"
+edition: ""
+isbn: "B007RNK0W6"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">As iOS apps become increasingly complex and business-critical, iOS developers must ensure consistently superior code quality. This means adopting best practices for creating and testing iOS apps. Test-Driven Development (TDD) is one of the most powerful of these best practices. <span style="font-style:italic;">Test-Driven iOS Development</span> is the first book 100% focused on helping you successfully implement TDD and unit testing in an iOS environment.
+  
+  
+  
+  �
+  
+  
+  
+  Long-time iOS/Mac developer Graham Lee helps you rapidly integrate TDD into your existing processes using Apple�s Xcode 4 and the OCUnit unit testing framework. He guides you through constructing an entire Objective-C iOS app in a test-driven manner, from initial specification to functional product. Lee also introduces powerful patterns for applying TDD in iOS development, and previews powerful automated testing capabilities that will soon arrive on the iOS platform. Coverage includes Understanding the purpose, benefits, and costs of unit testing in iOS environmentsMastering the principles of TDD, and applying them in areas from app design to refactoringWriting usable, readable, and repeatable iOS unit testsUsing OCUnit to set up your Xcode project for TDDUsing domain analysis to identify the classes and interactions your app needs, and designing it accordinglyConsidering third-party tools for iOS unit testingBuilding networking code in a test-driven mannerAutomating testing of view controller code that interacts with usersDesigning to interfaces, not implementationsTesting concurrent code that typically runs in the backgroundApplying TDD to existing appsPreparing for Behavior Driven Development (BDD)
+  
+  
+  
+  �
+  
+  
+  
+  The only iOS-specific guide to TDD and unit testing, <span style="font-style:italic;">Test-Driven iOS Development</span> covers both essential
+  
+  concepts <span style="font-style:italic;">and</span> practical implementation.&nbsp;</span></p>
+  
+publisher: "Addison-Wesley Professional"
+publishing_year: "2012"

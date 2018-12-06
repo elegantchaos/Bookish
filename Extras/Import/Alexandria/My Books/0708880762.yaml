@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - John Varley
+title: "Wizard (Orbit Books)"
+edition: "Paperback"
+isbn: "0708880762"
+notes: |-
+  
+publisher: "Futura Pubns."
+publishing_year: "1981"

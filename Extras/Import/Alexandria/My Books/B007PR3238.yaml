@@ -1,0 +1,19 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - James S. A. Corey
+title: "Caliban's War"
+edition: ""
+isbn: "B007PR3238"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">For someone who didn't intend to wreck the solar system's fragile balance of power, Jim Holden did a pretty good job of it.
+  
+  
+  
+  While Earth and Mars have stopped shooting each other, the core alliance is shattered. The outer planets and the Belt are uncertain in their new - possibly temporary - autonomy.
+  
+  
+  
+  Then, on one of Jupiter's moons, a single super-soldier attacks, slaughtering soldiers of Earth and Mars indiscriminately and reigniting the war. The race is on to discover whether this is the vanguard of an alien army, or if the danger lies closer to home.&nbsp;</span></p>
+  
+publisher: "Orbit"
+publishing_year: "2012"

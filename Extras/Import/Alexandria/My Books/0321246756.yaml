@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Krzysztof Cwalina Brad Abrams
+title: "Framework Design Guidelines"
+edition: "Paperback"
+isbn: "0321246756"
+notes: |-
+  
+publisher: "Addison Wesley"
+publishing_year: "2005"

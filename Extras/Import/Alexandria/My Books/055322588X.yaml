@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Ed Naha
+title: "The Suicide Plague"
+edition: "Paperback"
+isbn: "055322588X"
+notes: |-
+  
+publisher: "Bantam Books"
+publishing_year: "1982"

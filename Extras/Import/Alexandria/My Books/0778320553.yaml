@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Alex Kava
+title: "At the Stroke of Madness"
+edition: "Paperback"
+isbn: "0778320553"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">Special Agent Maggie O'Dell is on the trail of a serial murderer who has an affinity for lopping off his victims' diseased body parts and embalming the rest of their bodies in 55-gallon oil drums. Now Maggie suspects that her friend Gwen may be the murderer's next victim, and her only chance of finding the killer depends on the memory of an Alzheimer-stricken man.&nbsp;</span></p>
+  
+publisher: "Mira Books"
+publishing_year: "2003"

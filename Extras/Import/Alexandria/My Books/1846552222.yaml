@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Walter Moers
+title: "The Alchemaster's Apprentice"
+edition: "Hardback"
+isbn: "1846552222"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">Malaisea, the unhealthiest town in the whole of Zamonia, is home to Echo the Crat, a multitalented creature resembling a cat in appearance but capable of speaking any language under the sun, human or animal. When his mistress dies, Echo finds himself out on the street.&nbsp;</span></p>
+  
+publisher: "Harvill Secker"
+publishing_year: "2009"

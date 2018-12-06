@@ -1,0 +1,15 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Erich Gamma Richard Helm Ralph Johnson John Vissides
+title: "Design patterns"
+edition: "Hardback"
+isbn: "0201633612"
+notes: |-
+  <p><span style="font-style:italic;font-size:12pt;color:WindowText;">Design Patterns<span style="font-style:normal;"> is based on the idea that there are only so many design problems in computer programming. This book identifies some common program-design problems--such as adapting the interface of one object to that of another object or notifying an object of a change in another object's state--and explains the best ways (not always the obvious ways) that the authors know to solve them. The idea is that you can use the authors' sophisticated design ideas to solve problems that you often waste time solving over and over again in your own programming.
+  
+  
+  
+  The authors have come up with some ingenious ways to solve some common vexations among object-oriented programmers. Want to build a page-layout program that embeds inline images among characters of various sizes? How about building a program that converts files of one format to another? Chances are, some programmer already has thought of a better solution than you will and the recipes you need are here. Solutions are presented in generalised diagrams of data and logic structures. The idea is that you can take the concepts presented here and adapt them--in whatever language you use--to your individual situation. You may have to read some of the chapters several times before you fully understand them, but when you find a solution in this book, it will make your job easier and your results more elegant. --</span>Jake Bond&nbsp;</span></p>
+  
+publisher: "Addison Wesley"
+publishing_year: "1995"

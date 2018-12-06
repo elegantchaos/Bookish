@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Jeff Noon
+title: "Automated Alice"
+edition: "Hardback"
+isbn: "0385408080"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">Jeff Noon's previous novels, <span style="font-style:italic;">Vurt</span> and <span style="font-style:italic;">Pollen</span>, have attracted a cult following with their psychedelic science fiction creation of the realm of "Vurt"--a region defined by illusion, dream and drug-induced fantasy. Noon has now decided to link up with an imaginative precursor by introducing Lewis Carroll's Alice as the protagonist in a new adventure that draws on Carroll's through-the-looking-glass inversions of reality, and adds a Jeff Noon menace and edginess absent from Carroll's Wonderland. Alice finds herself in 1998 Manchester when she enters an old grandfather clock, and soon becomes the prime suspect in the puzzling "Jigsaw Murders." Noon emulates Carroll's crazy wordplay throughout, and even adds his own illustrations inspired by those of John Tenniel, the famous interpreter of Alice.&nbsp;</span></p>
+  
+publisher: "Doubleday"
+publishing_year: "1996"

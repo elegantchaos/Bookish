@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Stephen Donaldson
+title: "The Power That Preserves (The Chronicles of Thiomas Covenant, the Unbeliever)"
+edition: "Paperback"
+isbn: "0006152473"
+notes: |-
+  
+publisher: "Voyager"
+publishing_year: "1978"

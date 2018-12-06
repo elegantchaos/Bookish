@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Gayle Rivers
+title: "The Specialist"
+edition: "Paperback"
+isbn: "0552127361"
+notes: |-
+  
+publisher: "Corgi"
+publishing_year: "1986"

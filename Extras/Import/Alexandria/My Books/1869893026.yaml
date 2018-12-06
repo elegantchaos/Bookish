@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - R Halliwell
+title: "Warhammer Fantasy Roleplay"
+edition: "Hardback"
+isbn: "1869893026"
+notes: |-
+  
+publisher: "Games Workshop Ltd"
+publishing_year: "1986"

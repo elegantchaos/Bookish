@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Mark Hodder
+title: "The Strange Affair of Spring Heeled Jack"
+edition: "Paperback"
+isbn: "1616142405"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">London, 1861. Sir Richard Francis Burton - explorer, linguist, scholar, and swordsman; his reputatio....&nbsp;</span></p>
+  
+publisher: "Pyr"
+publishing_year: "2010"

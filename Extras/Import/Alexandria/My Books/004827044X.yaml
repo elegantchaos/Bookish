@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Nigel Rees
+title: "Eavesdroppings"
+edition: "Paperback"
+isbn: "004827044X"
+notes: |-
+  
+publisher: "HarperCollins"
+publishing_year: "1981"

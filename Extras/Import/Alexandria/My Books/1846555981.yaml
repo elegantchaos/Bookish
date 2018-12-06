@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Colson Whitehead
+title: "Zone One"
+edition: "Hardback"
+isbn: "1846555981"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">HardCover. Pub Date :2011-10-01 Pages: 272 Language: English Publisher: Harvill Secker In this brilliantly original take on the post-apocalyptic horror novel. American novelist Colson Whitehead shakes up the zombie genre with genius results. A pandemic has devastated the planet. sorting humanity into two types: the uninfected and the infected. the living and the living dead. Now the plague is receding. and Americans are busy rebuilding civilisation under orders from the provisional government based in Buffalo. Their top mission: the resettlement of Manhattan. Armed forces have successfully reclaimed the island south of Canal Street - aka Zone One - eliminating the most dangerous plague victims. but pockets of infected squatters remain. Teams of civilian volunteers are tasked with clearing out the malfunctioning stragglers who exist in a catatonic state. transfixed by their f...&nbsp;</span></p>
+  
+publisher: "Harvill Secker"
+publishing_year: "2011"

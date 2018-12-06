@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Spike Milligan
+title: "Silly Verse for Kids (Puffin Books)"
+edition: "Paperback"
+isbn: "0140303316"
+notes: |-
+  
+publisher: "Puffin Books"
+publishing_year: "2004"

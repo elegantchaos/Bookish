@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Piers Anthony
+title: "Blue Adept (Split Infinity)"
+edition: "Paperback"
+isbn: "0586054456"
+notes: |-
+  
+publisher: "Grafton Books"
+publishing_year: "1983"

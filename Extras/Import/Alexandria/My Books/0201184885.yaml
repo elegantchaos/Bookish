@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Allen Macro J.N. Buxton
+title: "Craft of Software Engineering"
+edition: "Paperback"
+isbn: "0201184885"
+notes: |-
+  
+publisher: "Addison Wesley"
+publishing_year: "1986"

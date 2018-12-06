@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Michael Moorcock
+title: "The Sword of the Dawn"
+edition: "Paperback"
+isbn: "0441318460"
+notes: |-
+  
+publisher: "Ace Books"
+publishing_year: "1990"

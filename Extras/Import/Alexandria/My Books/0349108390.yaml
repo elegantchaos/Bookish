@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Douglas Coupland
+title: "Generation X"
+edition: "Paperback"
+isbn: "0349108390"
+notes: |-
+  
+publisher: "Abacus"
+publishing_year: "1996"

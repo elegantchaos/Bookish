@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Dorothy Ross MacIver
+title: "The Paper Samurai"
+edition: ""
+isbn: "B00HFWT2A0"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">Behind her brave fa�ade, Audrey Christine Gilbert was as a sad, lonely spinster � or so those around her assumed. Never judge a book by its cover, and never ever doubt the power of a creative mind. This is a short story to while away an hour with, to make you smile and maybe make you sigh.&nbsp;</span></p>
+  
+publisher: "Dorothy Ross MacIver"
+publishing_year: "2013"

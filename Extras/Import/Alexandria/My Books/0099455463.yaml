@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Henning Mankell
+title: "Return of the Dancing Master"
+edition: "Paperback"
+isbn: "0099455463"
+notes: |-
+  
+publisher: "Vintage"
+publishing_year: "2004"

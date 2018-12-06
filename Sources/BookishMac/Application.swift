@@ -42,9 +42,10 @@ class Application: NSObject {
         actionManager.register(PersonUIAction.standardActions())
         actionManager.register(ImporterAction.standardActions())
         actionManager.register([
-            ShowDatePickerAction(identifier: "ShowDatePicker"),
             InsertItemAction(identifier: "InsertItem"),
             RemoveItemAction(identifier: "RemoveItem"),
+            ScanSeriesAction(identifier: "ScanSeries"),
+            ShowDatePickerAction(identifier: "ShowDatePicker"),
             ToggleEditingAction(identifier: "ToggleEditing")
             ])
         

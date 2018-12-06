@@ -1,0 +1,19 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Walter Jon Williams
+title: "This Is Not a Game"
+edition: ""
+isbn: "B002TZ3DM6"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">THIS IS NOT A GAME is a novel built around the coolest phenomenon in the world. That phenomenon is known as the Alternate Reality Game, or ARG. It's big, and it's getting bigger. It's immersive and massively interactive, and it's spreading through the Internet at the speed of light.
+  
+  
+  
+  To the player, the Alternate Reality Game has no boundaries. You can be standing in a parking lot, or a shopping center. A pay phone near you will ring, and on the other end will be someone demanding information. You'd better have the information handy.
+  
+  
+  
+  ARGs combine video, text adventure, radio plays, audio, animation, improvisational theatre, graphics, and story into an immersive experience. Now, one of science fiction's most acclaimed writers, Walter Jon Williams, brings this extraordinary phenomenon to life in a pulse-pounding thriller. This is not a game. This is a novel that will blow your mind.&nbsp;</span></p>
+  
+publisher: "Orbit"
+publishing_year: "2009"

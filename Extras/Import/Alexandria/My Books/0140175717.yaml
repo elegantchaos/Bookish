@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Elmore Leonard
+title: "Pronto"
+edition: "Paperback"
+isbn: "0140175717"
+notes: |-
+  
+publisher: "Penguin Books Ltd"
+publishing_year: "1994"

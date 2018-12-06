@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Terry Pratchett
+title: "Going Postal (Discworld)"
+edition: "Paperback"
+isbn: "0552149438"
+notes: |-
+  
+publisher: "Corgi Adult"
+publishing_year: "2005"

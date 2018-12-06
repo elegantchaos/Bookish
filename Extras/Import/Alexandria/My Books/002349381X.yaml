@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - W. Kenneth Hamblin
+title: "The Earth's Dynamic Systems"
+edition: "Hardback"
+isbn: "002349381X"
+notes: |-
+  
+publisher: "Macmillan USA"
+publishing_year: "1989"

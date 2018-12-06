@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - n/a
+title: "I Ching or Book of Changes (Arkana)"
+edition: "Paperback"
+isbn: "0140192077"
+notes: |-
+  
+publisher: "Arkana"
+publishing_year: "1989"

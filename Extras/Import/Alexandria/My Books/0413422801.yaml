@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - C. J. Cherryh
+title: "The Kif Strike Back"
+edition: "Paperback"
+isbn: "0413422801"
+notes: |-
+  
+publisher: "Mandarin"
+publishing_year: "1988"

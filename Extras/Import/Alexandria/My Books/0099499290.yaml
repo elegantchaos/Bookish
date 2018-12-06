@@ -1,0 +1,23 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Susan Hill
+title: "The Vows of Silence"
+edition: "Paperback"
+isbn: "0099499290"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">Author: Susan Hill
+  
+  Paperback
+  
+  
+  
+  Featuring Detective Simon Serrailer. In the peaceful city of Lafferton, a gunman is terrorising young women. What - if anything - links the attacks? Is the marksman with a rifle the same person as the killer with a handgun or do the police have two snipers on their hands? Detective Chief Superintendent Simon Serrailler is in charge of the case, but he is also struggling to deal with a tragedy at the heart of his own family.
+  
+  
+  
+  ISBN: 9780099499299
+  
+  Publisher: Vintage&nbsp;</span></p>
+  
+publisher: "Vintage"
+publishing_year: "2009"

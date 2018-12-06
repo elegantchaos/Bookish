@@ -1,0 +1,19 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - John Grisham
+title: "The Testament"
+edition: "Paperback"
+isbn: "0099245027"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">Troy Phelan, a 78-year-old eccentric and the 10th-richest man in America, is about to read his last will and testament, divvying up an estate worth $11 billion. Phelan's three ex-wives, thei r grasping offspring, a legion of lawyers, several psychiatrists and a plethora of sound technician s wait breathlessly. However, the magnate shocks everyone with a bizarre, last-gasp attempt to redi stribute the spoils, setting in motion a legal morality tale of a contested will, sin, and redempti on.
+  
+  
+  
+  Nate O'Riley--a washed-up, alcoholic lawyer with two ruined marriages in his wake and the taxman on his tail--is dispatched to the Brazilian wetlands in search of a mysterious heir named in the will . After a harrowing trip upriver, he encounters Rachel Lane, a pure-hearted missionary living with an indigenous tribe and carrying out "God's work." Rachel's grave dedication and kindness impress the jaded lawyer, so much so that a nasty bout of dengue fever leads him to a vision that could cha nge his life.
+  
+  
+  
+  Back in the States, the legal proceedings drag on and Grisham has a high time with Phelan's money-hungry descendents, a regrettable bunch who squandered millions, married strippers, got druggy, and befriended the Mob. The youngest son, Ramble, is a multi-pierced, tattoo-covered malcontent with big dreams for his rock band, the Demon Monkeys. Will Nate get straight with Rachel's aid? Do the greedy heirs get theirs? What's the real legacy of a lifetime's work? The Testament is classic Grisham: a down-and-out lawyer, a lot of money, an action-packed pursuit, and the highest issues at stake. It's not just about great characters; it's about the question of what character is. --<span style="font-style:italic;">Rebekah Warren&nbsp;</span></span></p>
+  
+publisher: "Century"
+publishing_year: "1999"

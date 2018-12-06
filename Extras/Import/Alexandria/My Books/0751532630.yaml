@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Linda Fairstein
+title: "The Deadhouse"
+edition: "Paperback"
+isbn: "0751532630"
+notes: |-
+  
+publisher: "Time Warner Paperbacks"
+publishing_year: "2005"

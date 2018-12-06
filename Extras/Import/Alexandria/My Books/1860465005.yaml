@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Raymond Carver
+title: "Elephant"
+edition: "Paperback"
+isbn: "1860465005"
+notes: |-
+  
+publisher: "The Harvill Press"
+publishing_year: "1998"

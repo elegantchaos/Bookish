@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Stephen Donaldson
+title: "The Real Story (Gap S.)"
+edition: "Paperback"
+isbn: "000647019X"
+notes: |-
+  
+publisher: "Voyager"
+publishing_year: "1999"

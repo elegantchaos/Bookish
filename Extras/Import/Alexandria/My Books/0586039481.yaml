@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - E E Smith
+title: "Skylark of Valeron"
+edition: "Paperback"
+isbn: "0586039481"
+notes: |-
+  
+publisher: "Panther"
+publishing_year: "1974"

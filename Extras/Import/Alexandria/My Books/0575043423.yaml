@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Marjorie Bradley Kellogg William B. Rossow
+title: "Reign of Fire"
+edition: "Paperback"
+isbn: "0575043423"
+notes: |-
+  
+publisher: "Gollancz"
+publishing_year: "1988"

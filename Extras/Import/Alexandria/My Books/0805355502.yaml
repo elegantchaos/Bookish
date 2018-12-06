@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Tim King Brian Knight
+title: "Programming the M68000"
+edition: "Paperback"
+isbn: "0805355502"
+notes: |-
+  
+publisher: "Benjamin Cummings"
+publishing_year: "1986"

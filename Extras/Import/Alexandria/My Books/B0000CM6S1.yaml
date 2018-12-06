@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Patrick Moore
+title: "The true book about Roman Britain (True books)"
+edition: ""
+isbn: "B0000CM6S1"
+notes: |-
+  
+publisher: "Muller"
+publishing_year: "1964"

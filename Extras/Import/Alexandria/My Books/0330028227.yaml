@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Herbert S. Zim
+title: "Codes and Secret Writing"
+edition: "Paperback"
+isbn: "0330028227"
+notes: |-
+  
+publisher: "Macmillan"
+publishing_year: "1977"

@@ -8,55 +8,21 @@ import Actions
 import BookishModel
 import Dispatch
 
-class PersonDetailViewController: CollectionViewController {
-    @IBOutlet weak var nameView: NSTextField!
-    @IBOutlet weak var notesView: NSTextField!
-    @IBOutlet weak var indexView: PersonIndexViewController!
-    @IBOutlet weak var detailsView: NSTableView!
-
-    var indexObserver: NSKeyValueObservation?
-    var rows = [NSManagedObject]()
-    var availableRows = IndexSet()
-    var keyViewTimer: Timer? = nil
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        indexView = nearestSibling()
-    }
-
-    override func viewWillAppear() {
-        super.viewWillAppear()
-        
-        if let window = view.window?.windowController as? CollectionWindowController {
-            window.personDetailController = self
-        }
-
-        if let indexArray = indexView.indexArray {
-            indexObserver = indexArray.observe(\NSArrayController.selection, changeHandler: { (index, change) in
-                self.selectionChanged()
-            })
-            selectionChanged()
-        }
-    }
-    
-    override func viewWillDisappear() {
-        indexObserver = nil
-        super.viewWillDisappear()
-    }
+class PersonDetailViewController: DetailViewController<PersonIndexViewController, Person> {
+    static let bookViewID = NSUserInterfaceItemIdentifier(rawValue: "book")
+    static let roleViewID = NSUserInterfaceItemIdentifier(rawValue: "role")
 
     func selectedRelationships() -> [Relationship] {
         var result = [Relationship]()
-        if let selection = indexView.indexArray.selectedObjects as? [Person] {
-            for person in selection {
-                if let roles = person.relationships as? Set<Relationship> {
-                    result.append(contentsOf: roles)
-                }
+        for person in selectedItems() {
+            if let roles = person.relationships as? Set<Relationship> {
+                result.append(contentsOf: roles)
             }
         }
         return result
     }
-    
-    func rowsForSelection() -> [NSManagedObject] {
+
+    override func rowsForSelection() -> [NSManagedObject] {
         var booksByRole = [Role:Set<Book>]()
         let selected = selectedRelationships()
         for relationship in selected {
@@ -83,111 +49,15 @@ class PersonDetailViewController: CollectionViewController {
         return rows
     }
     
-    func selectionChanged() {
-        let selectedCount = indexView.indexArray.selectedObjects?.count ?? 0
-        let showDetail = selectedCount > 0
-        detailsView.isHidden = !showDetail
-        if showDetail {
-            updateRoles()
-        }
-        if let wc = view.window?.windowController as? CollectionWindowController {
-            wc.validateButtons()
-        }
-    }
     
-    func updateRoles() {
-        rows = rowsForSelection()
-        detailsView.reloadData()
-
-    }
-}
-
-// MARK: Table Support
-
-protocol PersonDetailTableCell {
-    func setup(for view: PersonDetailViewController, row: Int, item: NSManagedObject)
-    func keyView() -> NSView?
-}
-
-extension PersonDetailViewController: NSTableViewDataSource, NSTableViewDelegate {
-    
-    static let bookViewID = NSUserInterfaceItemIdentifier(rawValue: "book")
-    static let roleViewID = NSUserInterfaceItemIdentifier(rawValue: "role")
-    static let unknownViewID = NSUserInterfaceItemIdentifier(rawValue: "unknown")
-
-    func numberOfRows(in tableView: NSTableView) -> Int {
-        return rows.count
-    }
-    
-    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        guard row < rows.count else {
-            return nil
-        }
-
-        let viewID: NSUserInterfaceItemIdentifier
-        let item = rows[row]
+    override func identifier(for item: NSManagedObject) -> NSUserInterfaceItemIdentifier {
         switch item {
         case is Role:
-            viewID = PersonDetailViewController.roleViewID
+            return PersonDetailViewController.roleViewID
         case is Book:
-            viewID = PersonDetailViewController.bookViewID
+            return PersonDetailViewController.bookViewID
         default:
-            viewID = PersonDetailViewController.unknownViewID
+            return super.identifier(for: item)
         }
-    
-        let view = tableView.makeView(withIdentifier: viewID, owner: self)
-        if let cell = view as? PersonDetailTableCell {
-            cell.setup(for: self, row: row, item: item)
-        }
-
-        return view
-    }
-    
-    func tableView(_ tableView: NSTableView, didAdd rowView: NSTableRowView, forRow row: Int) {
-        availableRows.insert(row)
-        scheduleRecalculateKeyViews()
-    }
-    
-    func tableView(_ tableView: NSTableView, didRemove rowView: NSTableRowView, forRow row: Int) {
-        availableRows.remove(row)
-        scheduleRecalculateKeyViews()
-    }
-    
-    func scheduleRecalculateKeyViews() {
-        if let timer = keyViewTimer {
-            timer.invalidate()
-        }
-        
-        keyViewTimer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { _ in
-            self.recalculateKeyViews()
-        }
-    }
-    
-    func recalculateKeyViews() {
-        let rows = availableRows.sorted()
-        var view: NSView = notesView
-        for row in rows {
-            if let rowView = (detailsView.view(atColumn: 0, row: row, makeIfNecessary: false) as? PersonDetailTableCell)?.keyView() {
-                view.nextKeyView = rowView
-                view = rowView
-            }
-        }
-        view.nextKeyView = nameView
-        keyViewTimer = nil
-    }
-}
-
-// MARK: Actions
-
-extension PersonDetailViewController: ActionContextProvider {
-    func provideDetailInfo(context: ActionContext) {
-        if let selection = indexView.indexArray.selectedObjects as? [Person] {
-            context.info[ActionContext.selectionKey] = selection
-        }
-    }
-    
-    func provide(context: ActionContext) {
-        indexView.provideIndexInfo(context: context)
-        provideDetailInfo(context: context)
     }
 }

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Driving Standards Agency
+title: "The Driving Manual (Driving Skills)"
+edition: "Paperback"
+isbn: "0115510540"
+notes: |-
+  
+publisher: "The Stationery Office Books"
+publishing_year: "1992"

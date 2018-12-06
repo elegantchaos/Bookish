@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Boyd Robertson Iain Taylor
+title: "Teach Yourself Gaelic New Edition"
+edition: "Paperback"
+isbn: "0340866675"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">Designed for those who want to progress quickly from the basics to understanding, speaking and writing Scottish Gaelic with confidence. This work consists of 23 thematic units progressing from introducing yourself and talking about everyday topics to reporting events and making suggestions.&nbsp;</span></p>
+  
+publisher: "Teach Yourself"
+publishing_year: "2003"

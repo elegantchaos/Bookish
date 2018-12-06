@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Robert Llewellyn
+title: "The Man on Platform Five"
+edition: "Paperback"
+isbn: "0340707909"
+notes: |-
+  
+publisher: "Coronet Books"
+publishing_year: "1999"

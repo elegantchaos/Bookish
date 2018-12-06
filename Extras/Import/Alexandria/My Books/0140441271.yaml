@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Pliny the Younger Betty Radice
+title: "The Letters of Pliny the Younger (Penguin Classics)"
+edition: "Paperback"
+isbn: "0140441271"
+notes: |-
+  
+publisher: "Penguin Books Ltd"
+publishing_year: "1969"

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Cecilia Tan
+title: "Erotic Fantastic"
+edition: "Paperback"
+isbn: "1885865449"
+notes: |-
+  
+publisher: "Circlet Press"
+publishing_year: "2003"

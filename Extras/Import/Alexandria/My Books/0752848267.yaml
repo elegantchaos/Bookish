@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Lisa Gardner
+title: "The Next Accident"
+edition: "Paperback"
+isbn: "0752848267"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">Amazon store this book for us, then pick, pack and deliver as well as provide 1st Class customer service. Books Found Fast via Amazon..&nbsp;</span></p>
+  
+publisher: "Orion"
+publishing_year: "2007"

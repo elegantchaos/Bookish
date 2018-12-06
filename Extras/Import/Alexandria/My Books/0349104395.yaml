@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Anthony Burgess
+title: "The Kingdom of the Wicked (Abacus Books)"
+edition: "Paperback"
+isbn: "0349104395"
+notes: |-
+  
+publisher: "Abacus"
+publishing_year: "1990"

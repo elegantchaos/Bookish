@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Greg Egan
+title: "Diaspora"
+edition: "Paperback"
+isbn: "0752809253"
+notes: |-
+  
+publisher: "Gollancz"
+publishing_year: "1998"

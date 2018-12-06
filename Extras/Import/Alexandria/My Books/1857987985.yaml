@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Sheri S. Tepper
+title: "Grass (S.F.Masterworks S.)"
+edition: "Paperback"
+isbn: "1857987985"
+notes: |-
+  
+publisher: "Gollancz"
+publishing_year: "2002"

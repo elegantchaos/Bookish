@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - C. J. Cherryh
+title: "Fortress in the Eye of Time"
+edition: "Paperback"
+isbn: "0006482201"
+notes: |-
+  
+publisher: "Voyager"
+publishing_year: "1995"

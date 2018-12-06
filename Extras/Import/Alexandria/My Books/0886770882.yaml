@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - C. J. Cherryh
+title: "Serpent's Reach"
+edition: "Paperback"
+isbn: "0886770882"
+notes: |-
+  
+publisher: "Penguin"
+publishing_year: "1994"

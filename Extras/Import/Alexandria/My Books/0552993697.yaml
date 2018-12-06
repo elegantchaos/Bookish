@@ -1,0 +1,15 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - John Irving
+title: "A Prayer for Owen Meany"
+edition: "Paperback"
+isbn: "0552993697"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">Owen Meany is a dwarfish boy with a strange voice who accidentally kills his best friend's mum with a baseball and believes--correctly, it transpires--that he is an instrument of God, to be redeemed by martyrdom. John Irving's novel, which inspired the 1998 Jim Carrey movie <span style="font-style:italic;">Simon Birch</span>, is his most popular book in Britain, and perhaps the oddest Christian mystic novel since Flannery O'Connor's work. Irving fans will find much that is familiar: the New England prep-school-town setting, symbolic amputations of man and beast, the Garp-like unknown father of the narrator (Owen's orphaned best friend), the rough comedy. The scene of doltish Dr Dolder, Owen's shrink, drunkenly driving his VW down the school's marble steps is a marvellous set piece. So are the Christmas pageants Owen stars in. But it's all, as <span style="font-style:italic;">Highlights</span> magazine used to put it, "fun with a purpose". When Owen plays baby Jesus in the pageants, and glimpses a tombstone with his death date while enacting <span style="font-style:italic;">A Christmas Carol</span>, the slapstick doesn't change the fact that he was born to be martyred. The book's countless subplots add up to a moral argument, specifically an indictment of American foreign policy--from Vietnam to the Contras.
+  
+  
+  
+  The book's mystic religiosity is steeped in Robertson Davies' Deptford trilogy, and the fatal baseball relates to the fatefully misdirected snowball in the first Deptford novel, <span style="font-style:italic;">Fifth Business</span>. Tiny, symbolic Owen echoes the hero of Irving's teacher G�nter Grass's <span style="font-style:italic;">The Tin Drum</span>--the two characters share the same initials. A rollicking entertainment, <span style="font-style:italic;">Owen Meany</span> is also a meditation on literature, history and God. --<span style="font-style:italic;">Tim Appelo&nbsp;</span></span></p>
+  
+publisher: "Black Swan"
+publishing_year: "1990"

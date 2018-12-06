@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - David Eddings
+title: "Magician's Gambit (Belgariad S.)"
+edition: "Paperback"
+isbn: "055212382X"
+notes: |-
+  
+publisher: "Corgi"
+publishing_year: "1984"

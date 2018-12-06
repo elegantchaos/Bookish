@@ -1,0 +1,15 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Henning Mankell
+title: "Firewall"
+edition: "Paperback"
+isbn: "0099459051"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">Not too long ago, Henning Mankell was a well-kept secret, but his latest book, <span style="font-style:italic;">Firewall</span>, will be received by readers worldwide with much fanfare, which is as it should be; Mankell is something special. Some of the initial resistance to Mankell's work might be understandable; like one of the greatest of all filmmakers, Ingmar Bergman, Mankell is from a country noted for Nordic gloom and the lazy-minded are not always prepared to go beyond stereotypes. Their loss: like his cinematic compatriot (Mankell is in fact married to Bergman's daughter), this is an artist of rare achievement.
+  
+  
+  
+  <span style="font-style:italic;">Firewall</span> continues Mankell's unvarnished portraits of modern life, in which society and all its institutions (not least the family) are on the edge. Here, his long-term protagonist, Inspector Kurt Wallander, moves into new area of crime: cyberspace. Various deaths have occurred: the user of a cash machine, a taxi driver killed by two young girls. The country is plunged into blackout by an electricity failure, and a grim find is made at a power station. What's the connection? Wallander finds himself on the trail of cyber terrorists with shady anarchic aims. But can his own malfunctioning team of coppers pull together to help catch them--or is there a fifth columnist in the police? Plotting here is impeccable, although <span style="font-style:italic;">Firewall</span> may not be a prime entry point for those new to Mankell. But Wallander (here worried about his diabetes and failure to lose weight) is one of the great literary coppers: enthusiasts need not hesitate. --<span style="font-style:italic;">Barry Forshaw&nbsp;</span></span></p>
+  
+publisher: "Vintage"
+publishing_year: "2004"

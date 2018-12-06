@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Michelle Spring
+title: "In The Midnight Hour (A Laura Principal Investigation)"
+edition: "Paperback"
+isbn: "0752844865"
+notes: |-
+  
+publisher: "Orion mass market paperback"
+publishing_year: "2002"

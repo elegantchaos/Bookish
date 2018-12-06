@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - n/a
+title: "Laugh Again with the \"Daily Mirror\""
+edition: "Paperback"
+isbn: "0600354245"
+notes: |-
+  
+publisher: "Daily Mirror"
+publishing_year: "1970"

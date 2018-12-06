@@ -1,0 +1,9 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Gary Gygax
+title: "Advanced Dungeons & Dragons"
+edition: "Paperback"
+isbn: "0935696024"
+notes: |-
+  
+publisher: "Wizards of the Coast, UK"

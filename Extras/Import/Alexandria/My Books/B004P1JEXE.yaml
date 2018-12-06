@@ -1,0 +1,23 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - George R. R. Martin
+title: "A Feast for Crows"
+edition: ""
+isbn: "B004P1JEXE"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">HBO�s hit series A GAME OF THRONES is based on George R. R. Martin�s internationally bestselling series A SONG OF ICE AND FIRE, the greatest fantasy epic of the modern age. A FEAST FOR CROWS is the fourth volume in the series.
+  
+  
+  
+  The Lannisters are in power on the Iron Throne.
+  
+  
+  
+  The war in the Seven Kingdoms has burned itself out, but in its bitter aftermath new conflicts spark to life. The Martells of Dorne and the Starks of Winterfell seek vengeance for their dead. Euron Crow�s Eye, as black a pirate as ever raised a sail, returns from the smoking ruins of Valyria to claim the Iron Isles.
+  
+  
+  
+  From the icy north, where Others threaten the Wall, apprentice Maester Samwell Tarly brings a mysterious babe in arms to the Citadel. As plots, intrigue and battle threaten to engulf Westeros, victory will go to the men and women possessed of the coldest steel and the coldest hearts.&nbsp;</span></p>
+  
+publisher: "Harper Voyager"
+publishing_year: "2011"

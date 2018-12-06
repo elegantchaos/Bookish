@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Michael Moorcock
+title: "Swords of Corum"
+edition: "Paperback"
+isbn: "0586067469"
+notes: |-
+  
+publisher: "Grafton Books"
+publishing_year: "1987"

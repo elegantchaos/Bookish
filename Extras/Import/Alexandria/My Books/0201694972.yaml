@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Ben Shneiderman
+title: "Designing the User Interface, 3rd Ed."
+edition: "Hardback"
+isbn: "0201694972"
+notes: |-
+  
+publisher: "Addison Wesley"
+publishing_year: "1998"

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Ian Rankin
+title: "Strip Jack (Inspector Rebus S.)"
+edition: "Paperback"
+isbn: "1857979907"
+notes: |-
+  
+publisher: "Orion mass market paperback"
+publishing_year: "1993"

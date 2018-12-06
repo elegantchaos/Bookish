@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Jon Courtenay Grimwood
+title: "redRobe"
+edition: "Paperback"
+isbn: "0671022601"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">Another high-energy cyberpunk romp set in the alternative future of Jon Courtenay Grimwood's previous novel <span style="font-style:italic;">reMix</span>. Here he pushes gore and mutilation to almost farcical extremes, with medical nanotechnology meaning that ghastly injuries aren't for keeps--one character loses both eyes but is soon painfully seeing again, if only in black and white. The back-story: Pope Joan looted the Vatican's riches for good causes before her assassination, and now the powerful, corrupt Cardinal of Mexico hopes to claw back the money. A top-class though emotionally wrecked professional killer becomes his emissary, hunting Joan's legacy on Samsara, the vast space habitat and prayer wheel which the Dalai Lama and a Buddhist-pacifist AI have established as the UN dumping-ground for all the world's refugees. Other characters include Pope Joan's former lover, a chatty AI built into an advanced handgun, a Japanese child prostitute into whom some remnant of Joan has been downloaded, an illegal warrior clone, and a bunch of military "PaxForce" heavies whose sadistic female leaders defMoma and momaDef provide more tasty torture scenes and weird capitaLisation. Grimwood drives his story at unrelenting speed, with bursts of extreme violence disguising the less logical leaps, while literal background music plays in the wired-up assassin's head. Dizzying, gruesome and slightly tongue-in-cheek action. --<span style="font-style:italic;">David Langford&nbsp;</span></span></p>
+  
+publisher: "Earthlight"
+publishing_year: "2000"

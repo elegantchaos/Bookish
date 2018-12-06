@@ -1,0 +1,23 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - OpenGL Architecture Review Board
+title: "OpenGL Reference Manual"
+edition: "Paperback"
+isbn: "0201657651"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">The <span style="font-style:italic;">OpenGL Programming Guide</span>, now in its third edition, is the definitive volume for programmers using this evolving graphics interface standard. Written by members of the OpenGL Architecture Review Board, this book offers understandable tutorials and lessons on getting up to speed and getting the most out of the latest version of OpenGL, version 1.2.
+  
+  
+  
+  The guide uses code examples in C, and is targeted at programmers with experience in coding, yet new to coding for OpenGL applications. The opening chapters go into descriptive detail of how OpenGL, the software interface for hardware 3D chipsets, works and what you can expect from it, which turns out to be much more than expected. Colour plates are used, for example, to show how OpenGL handles such effects as motion blur and depth-of-field blur, in addition to shadows and texture mapping.
+  
+  
+  
+  This is not a beginners guide to programming computer graphics. Some foreknowledge of both programming in general and computer graphics in particular is required. For example, code snippets are used to describe how to implement these effects, but because OpenGL is platform-independent, some code examples may need to be modified when used with your specific compiler.
+  
+  
+  
+  Written by members of the OpenGL Architecture Review Board, there is no better reference volume for learning and understanding OpenGL. The examples cited are clear, commented and explained. The only drawback to the book is that it lacks a companion CD--all examples must be either typed in or downloaded from an internet FTP site (the URL is listed in the preface). <span style="font-style:italic;">--Mike Caputo, amazon.com&nbsp;</span></span></p>
+  
+publisher: "Addison Wesley"
+publishing_year: "1999"

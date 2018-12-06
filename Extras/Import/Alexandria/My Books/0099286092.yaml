@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Graham Greene
+title: "The Power and the Glory (Vintage Classics)(2005)"
+edition: "Paperback"
+isbn: "0099286092"
+notes: |-
+  
+publisher: "Vintage"
+publishing_year: "2001"

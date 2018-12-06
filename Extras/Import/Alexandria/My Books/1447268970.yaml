@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Emily St. John Mandel
+title: "Station Eleven"
+edition: "Paperback"
+isbn: "1447268970"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">Station Eleven&nbsp;</span></p>
+  
+publisher: "Picador"
+publishing_year: "2015"

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Hammond Innes
+title: "The white South"
+edition: ""
+isbn: "B0000CKW0T"
+notes: |-
+  
+publisher: "Collins"
+publishing_year: "1961"

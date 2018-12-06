@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - John Meade Falkner
+title: "Moonfleet (Penguin Popular Classics)"
+edition: "Paperback"
+isbn: "014062144X"
+notes: |-
+  
+publisher: "Penguin Books Ltd"
+publishing_year: "1995"

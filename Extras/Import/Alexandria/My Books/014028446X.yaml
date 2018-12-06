@@ -1,0 +1,15 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Tim Lott
+title: "Rumours of a Hurricane"
+edition: "Paperback"
+isbn: "014028446X"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">The death of homeless man Charlie Buck is unremarkable to everyone except the few passers-by who witness his drunken--and apparently voluntary--fall beneath a speeding lorry. No loved ones or friends attend his last breaths in hospital--his possessions amount to a National Insurance card, a digital watch and a newspaper obituary for a dead composer. But Charlie was a person. He had a wife and a son, his own set of dreams and personal demons, a biography no more and no less studded with dramas, defeats and victories than anyone else's.
+  
+  
+  
+  This is the mission of <span style="font-style:italic;">Rumours of a Hurricane</span>, Tim Lott's second novel: to chart the life of a single man, revealing it to be remarkable in its ordinariness and epic within its narrow confines. The backdrop to Charlie's tragic saga is the relentlessly changing Britain of the 1980s, a nation twisted by greed and discontent. History weaves gracefully in and out of the tale, its hero riding high as he buys his own council flat and invests in the stock market; laid low as the great storms and the recession hit his home and his business. But Lott's grasp of the recent past is by no means his most impressive talent--what dazzles on every page is his powerful grasp of the human soul and his ability to turn harsh truths into some truly fascinating fiction. Like Lott's first novel <span style="font-style:italic;">White City Blue</span>, this is an uncompromising book, one whose messages we ignore at our peril. --<span style="font-style:italic;">Matthew Baylis&nbsp;</span></span></p>
+  
+publisher: "Penguin Books Ltd"
+publishing_year: "2003"

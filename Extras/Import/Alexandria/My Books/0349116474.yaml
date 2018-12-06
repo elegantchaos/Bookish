@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - David Sedaris
+title: "When You are Engulfed in Flames"
+edition: "Paperback"
+isbn: "0349116474"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">When You are Engulfed in Flames&nbsp;</span></p>
+  
+publisher: "Abacus"
+publishing_year: "2007"

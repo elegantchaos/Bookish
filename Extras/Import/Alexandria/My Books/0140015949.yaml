@@ -1,0 +1,9 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Georges Simenon
+title: "Maigret's First Case"
+edition: "Paperback"
+isbn: "0140015949"
+notes: |-
+  
+publisher: "Penguin"

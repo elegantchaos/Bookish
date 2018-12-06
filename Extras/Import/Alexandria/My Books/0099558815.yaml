@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Ken MacLeod
+title: "The Star Fraction"
+edition: "Paperback"
+isbn: "0099558815"
+notes: |-
+  
+publisher: "Legend"
+publishing_year: "1996"

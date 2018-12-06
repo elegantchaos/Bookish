@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Robert B. Parker
+title: "Valediction"
+edition: "Paperback"
+isbn: "0140074007"
+notes: |-
+  
+publisher: "Penguin Books Ltd"
+publishing_year: "1985"

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - John Aberdein
+title: "Amande's Bed"
+edition: "Paperback"
+isbn: "1902831845"
+notes: |-
+  
+publisher: "Thirsty Books"
+publishing_year: "2006"

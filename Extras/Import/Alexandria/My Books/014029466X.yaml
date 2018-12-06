@@ -1,0 +1,15 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Jonathan Coe
+title: "The Rotters' Club"
+edition: "Paperback"
+isbn: "014029466X"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">At a time when people are looking back on the 1970s with nostalgia, Jonathan <span style="font-style:italic;">What a Carve Up</span> Coe's <span style="font-style:italic;">The Rotters' Club</span> is a timely reminder of quite how ghastly that benighted decade was in Britain. Set in the "industrial" heartland of the West Midlands, it chronicles the growing pains of four Brummie schoolboys--Philip, Sean, Doug and Benjamin--who must not only come to terms with the normal pangs of adolescence but with terrible knitwear, ludicrous pop-music, nightmarish food and insidious racism, all set against the awful, surreal and tragicomic reality of a post-imperial nation.
+  
+  
+  
+  The book suffers in its programmatic attempts to make the four boys and their families symbolise, or represent, Something Important To Do With British Life. Doug, for instance, symbolises Industrial Decline, via his dad, a shop steward at the doomed British Leyland Longbridge plant. For Sean its Sexual Liberation--at least he's the one that looks most likely to get his rocks off. And young Ben Trotter would appear to represent A Young Jonathan Coe. But if this aspect of the novel seems contrived, then the author's capricious, deft, wryly comedic and touchingly empathetic style keeps things chugging along, as he knits together the troubles and tragedies of some fairly ordinary people living through fairly extraordinary years. --<span style="font-style:italic;">Sean Thomas&nbsp;</span></span></p>
+  
+publisher: "Penguin Books Ltd"
+publishing_year: "2002"

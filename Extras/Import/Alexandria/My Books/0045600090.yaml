@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - E.N.K. Clarkson
+title: "Invertebrate Palaeontology and Evolution"
+edition: "Hardback"
+isbn: "0045600090"
+notes: |-
+  
+publisher: "Nelson Thornes"
+publishing_year: "1986"

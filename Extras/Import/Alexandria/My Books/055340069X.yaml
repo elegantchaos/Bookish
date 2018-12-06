@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Isaac Asimov
+title: "Nemesis"
+edition: "Paperback"
+isbn: "055340069X"
+notes: |-
+  
+publisher: "Bantam"
+publishing_year: "1990"

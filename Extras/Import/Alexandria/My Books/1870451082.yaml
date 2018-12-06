@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - L.Ron Hubbard
+title: "Black Genesis (Mission Earth S.)"
+edition: "Paperback"
+isbn: "1870451082"
+notes: |-
+  
+publisher: "New Era Publications UK"
+publishing_year: "1988"

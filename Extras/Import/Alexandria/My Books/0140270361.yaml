@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Nicci French
+title: "The Safe House"
+edition: "Paperback"
+isbn: "0140270361"
+notes: |-
+  
+publisher: "Penguin Books Ltd"
+publishing_year: "2005"

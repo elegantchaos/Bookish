@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - GONZALEZ
+title: "Digital Image Processing"
+edition: "Paperback"
+isbn: "0201110261"
+notes: |-
+  
+publisher: "Longman Higher Education"
+publishing_year: "1987"

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Maryann Barber Joshua Kerievsky
+title: "Refactoring to Patterns"
+edition: "Paperback"
+isbn: "0321213351"
+notes: |-
+  
+publisher: "Addison Wesley"
+publishing_year: "2004"

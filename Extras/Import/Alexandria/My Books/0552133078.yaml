@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Carole Nelson Douglas
+title: "Heir of Rengarth"
+edition: "Paperback"
+isbn: "0552133078"
+notes: |-
+  
+publisher: "Corgi"
+publishing_year: "1989"

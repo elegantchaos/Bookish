@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Jake Arnott
+title: "The Long Firm"
+edition: "Paperback"
+isbn: "0340748788"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">trade edition paperback, fine In stock shipped from our UK warehouse&nbsp;</span></p>
+  
+publisher: "Sceptre"
+publishing_year: "2000"

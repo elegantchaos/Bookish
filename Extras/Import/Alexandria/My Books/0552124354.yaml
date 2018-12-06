@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - David Eddings
+title: "Castle of Wizardry (Belgariad S.)"
+edition: "Paperback"
+isbn: "0552124354"
+notes: |-
+  
+publisher: "Corgi"
+publishing_year: "1984"

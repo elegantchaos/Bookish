@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Geoff Ryman
+title: "The Child Garden"
+edition: "Paperback"
+isbn: "0006510884"
+notes: |-
+  
+publisher: "Voyager"
+publishing_year: "1999"

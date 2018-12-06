@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Clive Barker
+title: "Imajica"
+edition: "Paperback"
+isbn: "000649868X"
+notes: |-
+  
+publisher: "HarperCollins"
+publishing_year: "1997"

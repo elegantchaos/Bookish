@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - C. J. Cherryh
+title: "Precursor"
+edition: "Paperback"
+isbn: "0886779103"
+notes: |-
+  
+publisher: "Daw Books"
+publishing_year: "2000"

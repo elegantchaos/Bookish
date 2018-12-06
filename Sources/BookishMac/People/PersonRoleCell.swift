@@ -6,8 +6,8 @@
 import AppKit
 import BookishModel
 
-class RelationshipCell: NSTableCellView, PersonDetailTableCell {
-    func setup(for view: PersonDetailViewController, row: Int, item: NSManagedObject) {
+class RelationshipCell: NSTableCellView, ManagedObjectTableCell {
+    func setup(for view: ManagedObjectViewController, row: Int, item: NSManagedObject) {
                       if let role = item as? Role, let name = role.name {
             objectValue = item
             textField?.stringValue = name

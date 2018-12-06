@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - C.Sandy Petersen
+title: "The Call of Cthulhu"
+edition: "Hardback"
+isbn: "1568821484"
+notes: |-
+  
+publisher: "Wizard's Attic Publishing Services"
+publishing_year: "2000"

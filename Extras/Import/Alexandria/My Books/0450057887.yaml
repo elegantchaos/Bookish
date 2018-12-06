@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Robert E. Vardeman Victor Milan
+title: "War of Powers"
+edition: "Paperback"
+isbn: "0450057887"
+notes: |-
+  
+publisher: "Hodder & Stoughton Ltd"
+publishing_year: "1993"

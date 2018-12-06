@@ -14,8 +14,8 @@ class BookDetailCell: NSTableCellView, BookDetailTableCell {
     var observer: NSKeyValueObservation?
     var asNumber = false
     
-    func setup(for view: BookDetailViewController, row: Int, isPerson: Bool) {
-        assert(!isPerson)
+    func setup(for view: BookDetailViewController, row: DetailDataSource.RowInfo) {
+        assert(row.category == .detail)
         
         detailView = view
         if let subview = textField, let index = view.indexView.indexArray {

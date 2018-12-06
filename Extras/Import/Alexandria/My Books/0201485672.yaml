@@ -1,0 +1,27 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Martin Fowler
+title: "Refactoring"
+edition: "Hardback"
+isbn: "0201485672"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">Your class library works, but could it be better? <span style="font-style:italic;">Refactoring: Improving the Design of Existing Code</span> shows how refactoring can make object-oriented code simpler and easier to maintain. Today, refactoring requires considerable design know-how, but once tools become available, all programmers should be able to improve their code using refactoring techniques.
+  
+  
+  
+  Besides an introduction to what refactoring is, this handbook provides a catalogue of dozens of tips for improving code. The best thing about <span style="font-style:italic;">Refactoring</span> is its remarkably clear presentation, along with excellent nuts-and-bolts advice, from object expert Martin Fowler. The author is also an authority on software patterns and UML, and this experience helps make this a better book, one that should be immediately accessible to any intermediate or advanced object-oriented developer. (Just like patterns, each refactoring tip is presented with a simple name, a "motivation," and examples using Java and UML.)
+  
+  
+  
+  Early chapters stress the importance of testing in successful refactoring. (When you improve code, you have to test to verify that it still works.) After the discussion on how to detect the "smells" of bad code, readers get to the heart of the book, its catalogue of more than 70 "refactorings"--tips for better and simpler class design. Each tip is illustrated with "before" and "after" code, along with an explanation. Later chapters provide a quick look at refactoring research.
+  
+  
+  
+  Like software patterns, refactoring may be an idea whose time has come. This groundbreaking title will surely help bring refactoring to the programming mainstream. With its clear advice on a hot new topic, <span style="font-style:italic;">Refactoring</span> is sure to be essential reading for anyone who writes or maintains object- oriented software. --<span style="font-style:italic;">Richard Dragan</span>
+  
+  
+  
+  <span style="font-weight:bold;">Topics Covered:</span> Refactoring, improving software code, redesign, design tips, patterns, unit testing, refactoring research and tools.&nbsp;</span></p>
+  
+publisher: "Addison Wesley"
+publishing_year: "1999"

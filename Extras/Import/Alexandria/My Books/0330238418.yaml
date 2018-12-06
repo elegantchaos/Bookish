@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - E R Eddison
+title: "Worm Ouroboros"
+edition: "Paperback"
+isbn: "0330238418"
+notes: |-
+  
+publisher: "Pan Bks."
+publishing_year: "1973"

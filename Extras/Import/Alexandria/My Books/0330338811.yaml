@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Jeff Noon
+title: "Vurt"
+edition: "Paperback"
+isbn: "0330338811"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">If you like literary science fiction, then Jeff Noon is the author for you. <span style="font-style:italic;">Vurt</span>, winner of the 1994 Arthur C. Clarke award, is a cyberpunk novel with a difference, a rollicking, dark, yet humorous examination of a future in which the boundaries between reality and virtual reality are as tenuous as the brush of a feather.&nbsp;</span></p>
+  
+publisher: "Pan"
+publishing_year: "1994"

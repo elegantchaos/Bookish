@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Val McDermid
+title: "Killing the Shadows"
+edition: "Hardback"
+isbn: "0002261081"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">Our culture's obsession with serial killers as its own dark shadow sometimes obscures the fact that people kill for other reasons than sex. In <span style="font-style:italic;">Killing the Shadows</span> Val McDermid's new detective, academic psychologist Fiona Cameron, has become something of a maverick because of her insistence on using other sorts of profiling as well as the standard psycho-sexual ones; she has refused to work for the Metropolitan police any more because of a murder they failed to solve because they took another psychologist's advice. Yet the woman murdered on Hampstead Heath preys on her conscience, along with her own murdered sister, as she works for the Spanish police on a killer who decorates the sights of Toledo with dead tourists. And then someone starts killing crime writers and Fiona's lover Kit is on the killer's list. Val McDermid's ingenuity and solid sense of how crime and investigation works have made her one of the dominant figures in contemporary British crime writing. <span style="font-style:italic;">Killing the Shadows</span> is one of her best books yet, both for its powerful critique of modern policing and for the serious questions it asks about our fascination with the deadliest of criminals. --<span style="font-style:italic;">Roz Kaveney&nbsp;</span></span></p>
+  
+publisher: "HarperCollins"
+publishing_year: "2000"

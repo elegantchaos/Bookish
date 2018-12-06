@@ -1,0 +1,15 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Lucia Alvarez de Toledo Ernesto Guevara
+title: "Bolivian Diary"
+edition: "Paperback"
+isbn: "1844138291"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">Looking back on the life of his revolutionary comrade Che Guevara in his introduction to the <span style="font-style:italic;">Bolivian Diary</span>, Fidel Castro claims that "rarely, if ever, in history has one man's image, name and example spread so rapidly and so completely". Ernesto Guevara de la Sema is the ultimate revolutionary, an icon who spawned a million T-shirts, and whose death in 1967 whilst fermenting revolution in Bolivia enshrined him as a martyr of the radical Left. In his short life Che Guevara led military revolutions in Mexico, the Congo and, most famously, Cuba, before heading to Bolivia in 1966 to establish a guerrilla movement in an attempt to overthrow the Bolivian military dictatorship.
+  
+  
+  
+  His <span style="font-style:italic;">Bolivian Diary</span>, first published in Cuba in 1968, is the remarkable and ultimately tragic first-hand account of Che's formation of a tiny band of revolutionaries, his attempt to proselytise the local peasants, his skirmishes with the Bolivian army, and his final shootout and cold-blooded execution at the hands of the military in October 1967. Stripped of the romantic idealism usually associated with Che, the diary is a sobering account of the drudgery, fear and monotony of guerrilla warfare. Much of the diary is taken up with the preoccupations of basic survival in the primitive conditions of the Bolivian mountains, whilst playing a tense and often ineffective game of hit and run with the Bolivian army. There are some wonderful moments, such as Che breaking off from military preparations to remember that, "I must write some letters to Sartre and Bertrand Russell..." or commandeering a jeep and running it on the urine of his guerrillas. Ultimately this is a tough, uncompromising portrait of a ruthlessly disciplined and single-minded man, relishing a conflict which "gives us the opportunity to turn ourselves into revolutionaries, the highest state of the human species". --<span style="font-style:italic;">Jerry Brotton&nbsp;</span></span></p>
+  
+publisher: "Pimlico"
+publishing_year: "2004"

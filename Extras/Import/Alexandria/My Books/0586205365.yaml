@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - David Zindell
+title: "Neverness"
+edition: "Paperback"
+isbn: "0586205365"
+notes: |-
+  
+publisher: "Voyager"
+publishing_year: "1998"

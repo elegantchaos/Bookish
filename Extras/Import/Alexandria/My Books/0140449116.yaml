@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Homer D.C.H. Rieu Peter Jones E.V. Rieu
+title: "The Odyssey (Penguin Classics)"
+edition: "Paperback"
+isbn: "0140449116"
+notes: |-
+  
+publisher: "Penguin Books Ltd"
+publishing_year: "2003"

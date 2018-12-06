@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - C. J. Cherryh
+title: "Invader"
+edition: "Paperback"
+isbn: "0099444216"
+notes: |-
+  
+publisher: "Legend"
+publishing_year: "1996"

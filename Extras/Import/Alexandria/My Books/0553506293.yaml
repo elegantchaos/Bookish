@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - George Foy
+title: "Contraband"
+edition: "Paperback"
+isbn: "0553506293"
+notes: |-
+  
+publisher: "Bantam Bks."
+publishing_year: "1998"

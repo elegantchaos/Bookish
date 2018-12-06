@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Ken MacLeod
+title: "The Cassini Division"
+edition: "Paperback"
+isbn: "1857237307"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">With his third novel, Ken MacLeod elaborates further on the future timeline of his first two, <span style="font-style:italic;">The Star Fraction</span> (1995) and <span style="font-style:italic;">The Stone Canal</span> (1996). Most relevant is book two, which established a colony on the remote world New Mars via a spatial wormhole created by superhumans--transcendent machine-hosted intelligences called the "fast-folk". The original fast-folk crashed from too much contemplation of their metaphorical navels, but their descendants on Jupiter still harass Earth with virus transmissions that have killed off computers and the Internet. Enter black heroine Ellen May Ngwethu of the Cassini Division, an elite space-going force created to defend against the fast- folk. Her wild doings in the 24th century's anarcho-socialist utopia make for fun reading-- everyone will covet her smart-matter clothing that can become a spacesuit, combat outfit, evening gown or satellite dish at will. But Ellen's and the Division's political philosophy is brutally tough, with alarming plans to use a planet-wrecking doomsday weapon against "enemies" who may not in fact be hostile. In a climax of slam-bang space battle, MacLeod crashes the ongoing ethical debate into a brick wall and leaves you gasping. Witty, skilful, provocative, and just a trifle too glibly resolved. --<span style="font-style:italic;">David Langford&nbsp;</span></span></p>
+  
+publisher: "Orbit"
+publishing_year: "1999"

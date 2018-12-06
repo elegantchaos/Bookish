@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Donald A. Norman Tamara Dunaeff
+title: "Things That Make Us Smart"
+edition: "Paperback"
+isbn: "0201626950"
+notes: |-
+  
+publisher: "Perseus Books"
+publishing_year: "1994"

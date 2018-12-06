@@ -1,0 +1,23 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - David Beazley
+title: "Python Essential Reference (Essential Reference S.)"
+edition: "Paperback"
+isbn: "0735710910"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">For anyone who programs in Python, David M. Beazley's <span style="font-style:italic;">Python Essential Reference, 2nd Edition</span> will serve as a capable and exceptionally competent guide to current Python syntax and library modules. Concise, yet authoritative, this book sets a high standard as a one-volume reference to this powerful object-oriented programming language.
+  
+  
+  
+  Although the author claims that this title is not really a tutorial, the first 100 pages actually provide an excellent guide to the basics of Python as a language. Geared especially to the experienced programmer seeking to see what's different (and potentially better) about Python, sections on the language itself will let you ramp up on the basic and advanced topics. Short sections with code excerpts that show off essential language features will help you learn or enhance your knowledge of Python quickly. Standout sections here include excellent coverage of object-oriented features, like "special methods" that will let you add custom classes to Python that are just as flexible as built-in classes.
+  
+  
+  
+  The heart of this book is the 250-page reference section. The author concentrates on all current Python modules (eschewing deprecated or obsolete APIs). Starting with basic modules for Python services and operating system functions, and including handling strings and math functions, the author explains and illustrates each module with short sample code, along with a full listing of APIs. Sections on Python's impressive support for virtually all networking protocols (including sockets, HTTP, FTP, and e-mail) are a standout and will arguably justify the cost of this title for many Python developers. Later modules look at undocumented functions, plus there's an in-depth guide to integrating Python and C code. (This material can even help you build custom Python modules.)
+  
+  
+  
+  With a remarkably clear presentation style, this well-organised reference offers a compact and worthy guide to today's Python that's sure to meet the needs of many working programmers. <span style="font-style:italic;">--Richard Dragan&nbsp;</span></span></p>
+  
+publisher: "New Riders"
+publishing_year: "2001"

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - David Wingrove
+title: "Chung Kuo"
+edition: "Paperback"
+isbn: "0450551393"
+notes: |-
+  
+publisher: "Hodder & Stoughton Ltd"
+publishing_year: "1993"

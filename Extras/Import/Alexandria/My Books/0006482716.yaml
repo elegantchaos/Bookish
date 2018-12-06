@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Sheri S. Tepper
+title: "The Awakeners"
+edition: "Paperback"
+isbn: "0006482716"
+notes: |-
+  
+publisher: "Voyager"
+publishing_year: "2000"

@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Sergei Lukyanenko
+title: "The Twilight Watch"
+edition: "Paperback"
+isbn: "0099489945"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">`[a] dazzling fantasy'&nbsp;</span></p>
+  
+publisher: "Arrow Books Ltd"
+publishing_year: "2008"

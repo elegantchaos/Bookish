@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Mark F. Komarinski Cary Collett
+title: "Linux System Administration Handbook"
+edition: "Paperback"
+isbn: "0136805965"
+notes: |-
+  
+publisher: "Pearson Education"
+publishing_year: "1998"

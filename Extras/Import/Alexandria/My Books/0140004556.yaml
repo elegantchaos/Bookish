@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Evelyn Waugh
+title: "Scoop (Modern Classics S.)"
+edition: "Paperback"
+isbn: "0140004556"
+notes: |-
+  
+publisher: "Penguin Books Ltd"
+publishing_year: "1973"

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Truman Capote
+title: "In Cold Blood"
+edition: "Paperback"
+isbn: "0141182571"
+notes: |-
+  
+publisher: "Penguin Books Ltd"
+publishing_year: "2000"

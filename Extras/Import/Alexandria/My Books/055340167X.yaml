@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Elizabeth George
+title: "Well Schooled in Murder"
+edition: "Paperback"
+isbn: "055340167X"
+notes: |-
+  
+publisher: "Bantam"
+publishing_year: "1991"

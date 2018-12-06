@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Kazuo Ishiguro
+title: "Never Let Me Go"
+edition: "Paperback"
+isbn: "057122413X"
+notes: |-
+  
+publisher: "Faber and Faber"
+publishing_year: "2006"

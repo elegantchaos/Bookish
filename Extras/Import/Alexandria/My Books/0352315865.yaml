@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Brian Herbert
+title: "Garbage Chronicles"
+edition: "Paperback"
+isbn: "0352315865"
+notes: |-
+  
+publisher: "Star Bks."
+publishing_year: "1985"

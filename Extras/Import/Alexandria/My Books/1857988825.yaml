@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Ursula Le Guin
+title: "The Dispossessed"
+edition: "Paperback"
+isbn: "1857988825"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">Most of Le Guin's science fiction is set in a human galaxy where the distance of time and space imposed by relativity is mitigated by instantaneous transmission of information through a gadget called the ansible. <span style="font-style:italic;">The Dispossessed</span>, famous for being Ken Livingstone's favourite science fiction novel, was the book in which she told us of Shevek, the ansible's inventor, and the ironies of his career. Shevek is a loyal citizen of a poor anarchist world, Anarres, which finds frills like research hard to afford; he travels to the neighbouring world of Urras, to find that unbridled capitalism is not much fun either. "Nio Esseia, a city of four million souls, lifted its delicate glittering towers across the green marshes of the Estuary as if it were built of mist and sunlight...Was all Nio Esseia this? Huge shining boxes of stone and glass, immense, ornate, enormous packages, empty, empty." At once one of the greatest of SF novels about political ideas and idealism, and a stunning novel of character, <span style="font-style:italic;">The Dispossessed</span> has at its centre Shevek, scientist and near-saint, a flawed human being whom we come to know as we know few characters in modern science fiction. --<span style="font-style:italic;">Roz Kaveney&nbsp;</span></span></p>
+  
+publisher: "Gollancz"
+publishing_year: "1999"

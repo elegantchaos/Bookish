@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - J.G. Ballard
+title: "The Drought"
+edition: "Paperback"
+isbn: "014002753X"
+notes: |-
+  
+publisher: "Penguin Books Ltd"
+publishing_year: "1968"

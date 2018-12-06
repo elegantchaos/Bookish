@@ -1,0 +1,15 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Iain Banks
+title: "The Business"
+edition: "Hardback"
+isbn: "0316648442"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">After the shock impact of the excellent <span style="font-style:italic;">The Wasp Factory</span> in 1984, Iain Banks' work has split along two lines. On the one hand, he has written a series of acclaimed science fiction novels (with a devoted following, their own fan magazine and inclusion of his middle initial); on the other hand, a number of diverse, and eclectic, forays into contemporary fiction (for example, the successful television adaption of <span style="font-style:italic;">The Crow Road</span>).
+  
+  
+  
+  <span style="font-style:italic;">The Business</span> is the `90s success story run riot. The eponymous organisation is ancient, rich and invisible. All it lacks is a certain political clout, something the Business has avoided for centuries but with which it is now beginning to toy. A seat in the UN is at stake as Kate Telman, Level 3 executive, is drawn into the (rather polite) machinations of her superiors. Those expecting John Grisham may be disappointed. No bad thing, perhaps: Kate's personal-professional life-- there is, of course, no conflict here for the successful individual of the `90s--is the main concern. Banks' interest is in the moral debates about the position of the Business in a world it finds easy to manipulate, drawing the reader into a discussion of the place of the multi-national in contemporary economic and cultural life. "A lot of successful people are less hard-hearted than they like to think": is one view put forward, and not the only romantic but equivocal sentiment hiding somewhere in <span style="font-style:italic;">The Business</span>.--<span style="font-style:italic;">John Shire&nbsp;</span></span></p>
+  
+publisher: "Little Brown"
+publishing_year: "1999"

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - James Herriot
+title: "Vet in a Spin"
+edition: "Paperback"
+isbn: "0330255320"
+notes: |-
+  
+publisher: "Pan"
+publishing_year: "1978"

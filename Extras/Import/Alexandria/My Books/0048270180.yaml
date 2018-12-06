@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Nigel Rees
+title: "Graffiti Lives, OK?"
+edition: "Paperback"
+isbn: "0048270180"
+notes: |-
+  
+publisher: "Unwin Pbs."
+publishing_year: "1979"

@@ -1,0 +1,23 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Giancarlo Succi Michele Marchesi
+title: "Extreme Programming Examined (XP S.)"
+edition: "Paperback"
+isbn: "0201710404"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">In <span style="font-style:italic;">Extreme Programming Examined</span> the authors have chosen 33 papers from the first annual conference on Extreme Programming and Flexible Processes in Software Engineering. These examine XP issues in categories: Pair programming, testing and refactoring; flexible techniques and UML; Tools for XP development and so on.
+  
+  
+  
+  The essays range from straightforward discussions, such as striking a balance between XP and existing methodologies--patterns for example--to the practical experiences of teams retrofitting testing methodologies during a project. Many of the papers address issues arising when trying to incorporate XP features alongside existing programming practices. This is likely to be the reality in most programming environments where managers are reluctant to abandon existing methods without proof of concept.
+  
+  
+  
+  Perhaps more importantly for the target audience--those running software projects--there are detailed studies of costs and benefits in here. Among the findings discussed are that the number of man hours needed to produce the same code is similar for pairs and single coders--but pairs introduce 15 per cent less errors; and errors are far more costly to eradicate than introduce.
+  
+  
+  
+  No one should expect a single approach to suit all projects though the essays in <span style="font-style:italic;">Extreme Programming Examined</span> successfully argue for wider acceptance of the XP approach. This makes sense. When well-implemented XP appears to enable programmers to produce better, cheaper code to a deadline. You can't afford not to understand how your competitors are becoming more competitive. --<span style="font-style:italic;">Steve Patient&nbsp;</span></span></p>
+  
+publisher: "Addison Wesley"
+publishing_year: "2001"

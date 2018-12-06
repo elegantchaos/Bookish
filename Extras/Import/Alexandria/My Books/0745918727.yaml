@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Stephen Lawhead
+title: "Empyrion"
+edition: "Paperback"
+isbn: "0745918727"
+notes: |-
+  
+publisher: "Lion Publishing PLC"
+publishing_year: "1990"

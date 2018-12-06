@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Jessica Mulligan Bridgette Petrovsky Bridgette Patrovsky
+title: "Developing Online Games"
+edition: "Paperback"
+isbn: "1592730000"
+notes: |-
+  
+publisher: "Prentice Hall PTR"
+publishing_year: "2003"

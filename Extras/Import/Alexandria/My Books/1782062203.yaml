@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Peter May
+title: "Entry Island"
+edition: "Hardback"
+isbn: "1782062203"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">IF YOU FLEE FATE...When Detective Sime Mackenzie is sent from Montreal to investigate a murder on the remote Entry Island, 850 miles from the Canadian mainland, he leaves behind him a life of sleeplessness and regret. FATE WILL FIND YOU...But what had initially seemed an open-and-shut case takes on a disturbing dimension when he meets the prime suspect, the victim's wife, and is convinced that he knows her - even though they have never met. And when his insomnia becomes punctuated by dreams of a distant Scottish past in another century, this murder in the Gulf of St. Lawrence leads him down a path he could never have foreseen, forcing him to face a conflict between his professional duty and his personal destiny.&nbsp;</span></p>
+  
+publisher: "Quercus"
+publishing_year: "2013"

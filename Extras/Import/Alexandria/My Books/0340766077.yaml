@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Pete Mccarthy
+title: "The Road to McCarthy"
+edition: "Paperback"
+isbn: "0340766077"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">Paperback. Pub Date: 2003 Pages: 480 in Publisher: One Sceptre Lir Setting off from Ireland Pete McCarthy takes us on a wonderful journey around the weird and wonderful Irish communities of the the world.In his own inimitable style Pete recounts his adventures and escapades as. in Morocco he meets the head of Clan McCarthy. and then goes on to visit the renowned Irish peoples of New York. He journeys to the southern hemisphere and then back again to the United States before ending up in a small town called McCarthy in Alaska.Will he encounter enough McCarthy's Bars. as he continues to obey the eighth rule of travel: 'never pass a pub with your name on it' This is a funny. affectionate look at the Irish communties of the world. (20020731 )&nbsp;</span></p>
+  
+publisher: "Sceptre"
+publishing_year: "2003"

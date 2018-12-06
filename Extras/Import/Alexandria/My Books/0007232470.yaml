@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - J. G. Ballard
+title: "Kingdom Come"
+edition: "Paperback"
+isbn: "0007232470"
+notes: |-
+  
+publisher: "HarperPerennial"
+publishing_year: "2007"

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Isaac Asimov
+title: "Foundation and Empire (The Foundation Series)"
+edition: "Paperback"
+isbn: "0586013555"
+notes: |-
+  
+publisher: "Collins"
+publishing_year: "1994"

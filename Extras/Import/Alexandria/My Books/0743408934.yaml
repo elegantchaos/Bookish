@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Miller Lau
+title: "Talisker (The Last Clansman)"
+edition: "Paperback"
+isbn: "0743408934"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">Miller Lau's first novel, the fantasy <span style="font-style:italic;">Talisker</span>, makes some interesting uses of parallel worlds and Celtic mythology, but suffers from problems with plot and characterisation that mark it out as the work of an inexperienced writer. In modern-day Edinburgh, Duncan Talisker has just been released from jail where he has served 15 years for six murders he did not commit. Talisker is the last descendent of Malcolm McLeod, a clansman whose ghost has been recruited by the shape-shifting Sidhe in a battle against the dark God Corvus. Corvus sends a demon to commit more murders, and Inspector Alessandro Chaplin, once a school-friend, is convinced of Talisker's guilt. Their feud travels with them when they, along with the ghost Malcolm, are drawn into the magical world of Sutra, where they become involved in a struggle between the Sidhe, the human Fine and Corvus, who threatens both peoples. Travelling back and forth between the two worlds, Talisker embarks on an intertwined series of adventures, battling evil magic in Sutra and attempting to avoid the police in Edinburgh. There are many familiar plot devices in this book: a prophesy, a magic gem and vengeful gods, while Talisker is a classic suffering hero--a wronged man battling to clear his name. The world of Sutra is quite rich but Lau still has a lot to learn about plotting; the story lacks coherence and is often inconsistent in its details. Hopefully, Lau will develop more fluency in subsequent volumes because there is promise here, albeit not yet fully realised. --<span style="font-style:italic;">Elizabeth Sourbut&nbsp;</span></span></p>
+  
+publisher: "Earthlight"
+publishing_year: "2001"

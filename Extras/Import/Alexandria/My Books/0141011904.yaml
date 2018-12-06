@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Michael Moore
+title: "Stupid White Men"
+edition: "Paperback"
+isbn: "0141011904"
+notes: |-
+  <p><span style="font-style:italic;font-size:12pt;color:WindowText;">Stupid White Men<span style="font-style:normal;">, Michael Moore's screed against "Thief-in-Chief" George Bush's power elite, hit No. 1 at Amazon.com within days of publication. Why? It's as fulminating and crammed with infuriating facts as any right-wing bestseller, as irreverent as </span>The Onion<span style="font-style:normal;">, and as noisily entertaining as a wrestling smackdown. Moore offers a more interesting critique of the 2000 election than Ralph Nader's </span>Crashing the Party<span style="font-style:normal;"> (he argued with Nader, his old boss, who sacked him), and he's serious when he advocates ousting Bush. But Moore's rage is outrageous, couched in shameless gags and madcap comedy: "Old white men wielding martinis and wearing dickies have occupied our nation's capital.... Launch the SCUD missiles! Bring us the head of Antonin Scalia!... We are no longer [able] to hold free and fair elections. We need UN observers, UN troops". Moore's ideas range from on-the-money (Arafat should beat Sharon with Gandhi's non-violent shame tactics) to over-the-top: blacks should put inflatable white dolls in their cars so racist cops will think they're chauffeurs; the ever-more-Republicanesque Democratic Party should be sued for fraud; "no contributions toward advancing our civilization ever came out of the South [except Faulkner, Hellman, and RJ Reynolds]," because it's too hot to think straight there; Korean dictator Kim Jong-il "has got to broaden himself beyond porn and John Wayne" by watching better movies, like </span>Dude, Where's My Car?<span style="font-style:normal;"> (which contains "all you need to know about America"). Whatever your politics, </span>Stupid White Men<span style="font-style:normal;"> should make you blow your stack. --</span>Tim Appelo&nbsp;</span></p>
+  
+publisher: "Penguin Books Ltd"
+publishing_year: "2002"

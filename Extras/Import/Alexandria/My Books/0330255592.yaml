@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Gabriel Garcia Marquez Gabriel Garcia Marquez Gregory Rabassa
+title: "One Hundred Years of Solitude (Picador Books)"
+edition: "Paperback"
+isbn: "0330255592"
+notes: |-
+  
+publisher: "Picador"
+publishing_year: "1978"

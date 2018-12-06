@@ -1,0 +1,19 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Charles Stross
+title: "The Jennifer Morgue"
+edition: ""
+isbn: "B004BDOKB2"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">SOME AGENTS HAVE ALL THE FUN. OTHERS SAVE THE WORLD.
+  
+  
+  
+  Bob Howard is an IT expert and occasional field agent for the Laundry, the branch of Her Majesty's Secret Service that deals with occult threats.
+  
+  
+  
+  Dressed (grudgingly) in a tux and sent to the Caribbean, he must infiltrate a millionaire's yacht in order to prevent him from violating a treaty that will bring down the wrath of an ancient underwater race upon humanity's head. Partnered with a gorgeous American agent who's actually a soul-sucking succubus from another dimension, Bob's mission (should he choose to accept it) is to stop the bad guys, <span style="font-style:italic;">avoid</span> getting the girl, and survive - shaken, perhaps, but not stirred.&nbsp;</span></p>
+  
+publisher: "Orbit"
+publishing_year: "2010"

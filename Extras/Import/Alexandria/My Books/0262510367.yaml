@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Harold Abelson Gerald Jay Sussman
+title: "Structure and Interpretation of Computer Programs"
+edition: "Paperback"
+isbn: "0262510367"
+notes: |-
+  
+publisher: "The MIT Press"
+publishing_year: "1985"

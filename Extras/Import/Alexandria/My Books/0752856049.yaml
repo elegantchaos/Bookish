@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Ed McBain
+title: "Frumious Bandersnatch"
+edition: "Paperback"
+isbn: "0752856049"
+notes: |-
+  
+publisher: "n/a"
+publishing_year: "2004"

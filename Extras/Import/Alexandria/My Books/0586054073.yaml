@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Ursula K Le Guin
+title: "Threshold"
+edition: "Paperback"
+isbn: "0586054073"
+notes: |-
+  
+publisher: "Panther"
+publishing_year: "1982"

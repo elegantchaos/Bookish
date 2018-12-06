@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Brian W Aldiss
+title: "Cryptozoic (Sphere science fiction)"
+edition: "Paperback"
+isbn: "0722111045"
+notes: |-
+  
+publisher: "Sphere"
+publishing_year: "1977"

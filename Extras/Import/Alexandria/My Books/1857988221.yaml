@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Alfred Bester
+title: "The Demolished Man (Millennium SF Masterworks S)"
+edition: "Paperback"
+isbn: "1857988221"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">Alfred Bester's early, pyrotechnic novels gave us two of SF's greatest antiheroes: Gully Foyle in <span style="font-style:italic;">The Stars My Destination</span> (1956) and Ben Reich in <span style="font-style:italic;">The Demolished Man</span> (1953)--which deservedly won the first-ever Hugo Award for Best Novel. Reich is an obsessed monster, haunted by nightmares of a Man With No Face, driven and compelled to murder a rival magnate in a future where crime can't be hidden from police telepaths. The penalty is Demolition: erasure of the criminal's mind. Armed with an ugly weapon holding very special ammo, an insane jingle to mask his thoughts, and the resources of his interplanetary business empire, Reich takes on the world--but, as hinted by clues in chapter 1, he still doesn't understand his own buried motives. It's an impossible problem for police chief Lincoln Powell, one of the hated mind-reading elite--who knows very well whodunnit but can't go to court on telepathic evidence alone. Bester's dazzling 24th century is full of brilliant and dotty conceits, most famously the woven typographic patterns of telepaths' group 'conversations'. A gripping, headlong storyline hurtles from Earth's decadent high society to its lowest dives, with an interlude of mayhem at the Spaceland asteroid resort. The final confrontations are apocalyptic and unforgettable, with major psychological shockers and a moving aftermath. A genuine SF classic. --<span style="font-style:italic;">David Langford&nbsp;</span></span></p>
+  
+publisher: "Gollancz"
+publishing_year: "1999"

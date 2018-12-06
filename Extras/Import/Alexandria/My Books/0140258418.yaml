@@ -1,0 +1,15 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Alex Garland
+title: "The Beach"
+edition: "Paperback"
+isbn: "0140258418"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">In our ever-shrinking world, where popular Western culture seems to have infected every nation on the planet, it is hard to find even a small niche of unspoiled land--forget searching for pristine islands or continents. This is the situation in Alex Garland's debut novel, <span style="font-style:italic;">The Beach</span>. Human progress has reduced Eden to a secret little beach near Thailand. In the tradition of grand adventure novels, Richard, a rootless traveller rambling around Thailand on his way somewhere else, is given a hand-drawn map by a madman who calls himself Daffy Duck. He and two French travellers set out on a journey to find this paradise.
+  
+  
+  
+  What makes this a truly satisfying novel is the number of levels on which it operates. On the surface it's a fast-paced adventure novel; at another level it explores why we search for these utopias, be they mysterious lost continents or small island communes. Garland weaves a gripping and thought-provoking narrative that suggests we are, in fact, such products of our Western culture that we cannot help but pollute and ultimately destroy the very sanctuary we seek. --<span style="font-style:italic;">Amazon.com&nbsp;</span></span></p>
+  
+publisher: "Penguin Books Ltd"
+publishing_year: "2004"

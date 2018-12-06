@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Arthur C. Clarke
+title: "Childhood's End (Pan Science Fiction)"
+edition: "Paperback"
+isbn: "0330105736"
+notes: |-
+  
+publisher: "Pan"
+publishing_year: "1970"

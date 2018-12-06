@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Rick Priestley
+title: "Warhammer 40,000"
+edition: "Paperback"
+isbn: "1872372279"
+notes: |-
+  
+publisher: "Games Workshop"
+publishing_year: "1992"

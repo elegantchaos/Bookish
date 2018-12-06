@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Katharine Kerr
+title: "Days of Blood and Fire"
+edition: "Paperback"
+isbn: "0553372041"
+notes: |-
+  
+publisher: "Bantam USA"
+publishing_year: "1993"

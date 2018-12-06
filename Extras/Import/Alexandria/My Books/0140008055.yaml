@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Sir Arthur Conan Doyle
+title: "The Casebook of Sherlock Holmes"
+edition: "Paperback"
+isbn: "0140008055"
+notes: |-
+  
+publisher: "Penguin Books Ltd"
+publishing_year: "2004"

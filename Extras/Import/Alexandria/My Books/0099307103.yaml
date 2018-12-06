@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Kathy Reichs
+title: "Deadly Decisions"
+edition: "Paperback"
+isbn: "0099307103"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">Kathy Reichs' forensic anthropologist Tempe Brennan is arguably the best of the current crop of thriller pathologists; her third outing, <span style="font-style:italic;">Deadly Decisions</span>, pits her reconstructive skills against a bunch of Hell's Angels with a taste for ultra-violence. Hardly has she pieced together the jigsaw fragments of identical twins, before she finds herself engaged in identifying the teenage girl whose skull and long bones turned up near the grave of some earlier victims of inter-gang strife. Her sweetheart Ryan is under investigation for corruption; her nephew is sleeping on the sofa and showing an unholy fascination with bikes and bikers; and Tempe is having a series of really bad hair days. In addition to the usual fascinating material about the identification of human bones, Reichs tells us all about the way in which biker gangs have become a serious part of the criminal underworld, a subculture with a taste for mayhem and with rules it is death to break. Tempe is on her usual brittle good form--a woman torn between her cold clinical intelligence and a crusading desire to avenge the helpless that regularly brings her into conflict with more quietly committed colleagues. This is an excellent thriller that combines real intelligence with a radical social anger. --<span style="font-style:italic;">Roz Kaveney&nbsp;</span></span></p>
+  
+publisher: "Arrow"
+publishing_year: "2001"

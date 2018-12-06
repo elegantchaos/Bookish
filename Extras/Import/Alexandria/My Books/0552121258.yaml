@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Whitley Strieber
+title: "The Hunger"
+edition: "Paperback"
+isbn: "0552121258"
+notes: |-
+  
+publisher: "Corgi"
+publishing_year: "1982"

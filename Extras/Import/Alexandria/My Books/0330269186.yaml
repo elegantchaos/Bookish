@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Dick Francis
+title: "Twice Shy"
+edition: "Paperback"
+isbn: "0330269186"
+notes: |-
+  
+publisher: "Pan"
+publishing_year: "1983"

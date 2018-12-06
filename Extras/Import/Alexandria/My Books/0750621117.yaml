@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Steve Heath
+title: "Newnes Power PC Programming Pocket Book (Newnes Pocket Books)"
+edition: "Hardback"
+isbn: "0750621117"
+notes: |-
+  
+publisher: "Newnes"
+publishing_year: "1995"

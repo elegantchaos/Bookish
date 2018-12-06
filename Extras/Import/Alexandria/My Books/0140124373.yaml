@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Grant Naylor
+title: "Red Dwarf"
+edition: "Paperback"
+isbn: "0140124373"
+notes: |-
+  
+publisher: "Penguin Books Ltd"
+publishing_year: "2005"

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Thomas Hardy
+title: "The Mayor of Casterbridge"
+edition: "Paperback"
+isbn: "1404373047"
+notes: |-
+  
+publisher: "Indypublish.com"
+publishing_year: "2003"

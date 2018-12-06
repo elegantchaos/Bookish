@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Anthony Trollope
+title: "Barchester Towers"
+edition: "Hardback"
+isbn: "0140620214"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">Barchester Towers in half the time&nbsp;</span></p>
+  
+publisher: "Penguin Books Ltd"
+publishing_year: "1994"

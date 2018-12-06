@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Herman Melville
+title: "Moby Dick"
+edition: "Hardback"
+isbn: "3895080888"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">Arguably Herman Melville's greatest work, and hailed as a classic American novel, <span style="font-style:italic;">Moby Dick</span> tells the tale of one man's fatal obsession and his willingness to sacrifice his life and that of his crew to achieve his goal. The story follows the fortunes of Captain Ahab and the culturally and spiritually diverse crew of the Pequod, a 19th century whaling ship. The Pequod is on its last voyage out of New Bedford, Mass, in pursuit of Moby Dick, the great white whale which has been Ahab's obsessional quarry and bitter adversary for many years. Narrated by sole survivor Ishmael, the tale forms a complex fictional fusion, combining a wealth of literary symbolism, hidden meaning and philosophical debate with adventure narrative and a detailed historical account of the 19th century whaling trade. --<span style="font-style:italic;">Emily Lowson&nbsp;</span></span></p>
+  
+publisher: "Konemann UK Ltd"
+publishing_year: "1995"
