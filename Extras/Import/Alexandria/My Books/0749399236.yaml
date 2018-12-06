@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Italo Calvino William Weaver
+title: "If on a Winter's Night a Traveller"
+edition: "Paperback"
+isbn: "0749399236"
+notes: |-
+  
+publisher: "Vintage"
+publishing_year: "1992"

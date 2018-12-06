@@ -1,0 +1,15 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - John Clute
+title: "Appleseed"
+edition: "Paperback"
+isbn: "1841491004"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">Post-modern to the nth degree, fermenting genre references and massive conceptual detail into data overload, <span style="font-style:italic;">Appleseed</span> reconfigures the distant future through a century of science-fictional preconceptions and techo-pagan fantasy. Throwing the Stinky Meat Brain reader into a spaced-opera populated by exceptionally alien ETs, where not just the technology but the biology is future-shockingly outr� where an AI interfaced humanity has been reduced to a nihilistic vulgar hedonism, <span style="font-style:italic;">Appleseed</span> is a phantasmasgoriacal tuned-in, switched-on, tripped-out and hung-over epic in the spirit of the 60s brave <span style="font-style:italic;">New Worlds</span> of New Wave SF; imagine Aldiss, Delany and Moorcock rewriting <span style="font-style:italic;">The Hitch-Hiker's Guide to the Galaxy</span> novels as forensically graphic anti-erotic hard(core) SF.
+  
+  
+  
+  In wired prose, Clute even dissects the online zeitgeist Most of the data streams displayed the Insort Geront logo, the fiery three-snake caduceus, the marque of the vastest of the godzillas--an ancient Human Earth term for any corporation, whether snail or trad dot.com or seeded nous cube, which having gone rogue was no longer subject to the rule of law of any individual state or planet or system Whether this is pretentious adolescent obscenity, a synaesthetic masterpiece which redefines the genre, or a honker of a shaggy dog story is a debate primed to run for years.<span style="font-style:italic;">--Gary S. Dalkin&nbsp;</span></span></p>
+  
+publisher: "Orbit"
+publishing_year: "2002"

@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Terry Brooks
+title: "The Elfstones Of Shannara"
+edition: "Paperback"
+isbn: "0708880959"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">The Elfstones of Shannara (Orbit Books)&nbsp;</span></p>
+  
+publisher: "Orbit"
+publishing_year: "1982"

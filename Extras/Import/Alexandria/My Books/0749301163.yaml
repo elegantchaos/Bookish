@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - C. J. Cherryh
+title: "Cuckoo's Egg"
+edition: "Paperback"
+isbn: "0749301163"
+notes: |-
+  
+publisher: "Mandarin"
+publishing_year: "1989"

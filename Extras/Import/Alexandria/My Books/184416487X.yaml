@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - James Maxey
+title: "Bitterwood"
+edition: "Paperback"
+isbn: "184416487X"
+notes: |-
+  
+publisher: "Solaris"
+publishing_year: "2007"

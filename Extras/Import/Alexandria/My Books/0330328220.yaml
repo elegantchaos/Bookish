@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Napolean Ponce de Leon
+title: "Five Black Ships"
+edition: "Hardback"
+isbn: "0330328220"
+notes: |-
+  
+publisher: "Picador"
+publishing_year: "1997"

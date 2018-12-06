@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Nigel Williams
+title: "The Wimbledon Trilogy"
+edition: "Hardback"
+isbn: "0571171931"
+notes: |-
+  
+publisher: "Faber and Faber Ltd"
+publishing_year: "1995"

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - C. J. Cherryh
+title: "Brothers of Earth (Orbit Bks.)"
+edition: "Paperback"
+isbn: "0860079465"
+notes: |-
+  
+publisher: "Futura Pubns."
+publishing_year: "1977"

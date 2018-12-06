@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - James Lee Burke
+title: "Jolie Blon's Bounce"
+edition: "Paperback"
+isbn: "0752849565"
+notes: |-
+  
+publisher: "Orion mass market paperback"
+publishing_year: "2003"

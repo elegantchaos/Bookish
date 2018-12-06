@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - H G Wells
+title: "War of the Worlds"
+edition: "Paperback"
+isbn: "0140005706"
+notes: |-
+  
+publisher: "Penguin"
+publishing_year: "1971"

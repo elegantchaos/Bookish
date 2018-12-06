@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Julian May
+title: "The Nonborn King (The Saga of the Exiles)"
+edition: "Paperback"
+isbn: "033026902X"
+notes: |-
+  
+publisher: "Tor Books"
+publishing_year: "1983"

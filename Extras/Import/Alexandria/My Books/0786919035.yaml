@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Paul Kidd
+title: "Queen of the Demonweb Pits (Greyhawk (Novels))"
+edition: "Paperback"
+isbn: "0786919035"
+notes: |-
+  
+publisher: "Esdevium"
+publishing_year: "2001"

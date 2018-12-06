@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - M.E. Tucker
+title: "Sedimentary Petrology"
+edition: "Paperback"
+isbn: "0632000740"
+notes: |-
+  
+publisher: "Blackwell Science (UK)"
+publishing_year: "1981"

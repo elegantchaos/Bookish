@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Bruce Robinson
+title: "The Peculiar Memories of Thomas Penman"
+edition: "Paperback"
+isbn: "0747542376"
+notes: |-
+  
+publisher: "Bloomsbury"
+publishing_year: "1998"

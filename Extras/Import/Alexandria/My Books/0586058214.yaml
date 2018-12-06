@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Len Deighton
+title: "Mexico Set (Panther Books)"
+edition: "Paperback"
+isbn: "0586058214"
+notes: |-
+  
+publisher: "HarperCollins"
+publishing_year: "1985"

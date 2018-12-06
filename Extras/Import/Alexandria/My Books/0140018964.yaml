@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Graham Greene
+title: "A Gun for Sale"
+edition: "Paperback"
+isbn: "0140018964"
+notes: |-
+  
+publisher: "Penguin Books Ltd"
+publishing_year: "1970"

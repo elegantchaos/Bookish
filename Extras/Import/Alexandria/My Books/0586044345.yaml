@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Aldous Huxley
+title: "Brave New World"
+edition: "Paperback"
+isbn: "0586044345"
+notes: |-
+  
+publisher: "Flamingo"
+publishing_year: "1977"

@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Stan Nicholls
+title: "Orcs"
+edition: "Paperback"
+isbn: "0575074876"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">trade edition paperback, fine In stock shipped from our UK warehouse&nbsp;</span></p>
+  
+publisher: "Gollancz"
+publishing_year: "2004"

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Carol Hill
+title: "Amanda and the Eleven Million Mile High Dancer"
+edition: "Paperback"
+isbn: "074750234X"
+notes: |-
+  
+publisher: "Bloomsbury"
+publishing_year: "1988"

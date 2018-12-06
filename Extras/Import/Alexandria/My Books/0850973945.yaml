@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - E.M. Peet
+title: "Applied Mathematics"
+edition: "Paperback"
+isbn: "0850973945"
+notes: |-
+  
+publisher: "Letts Educational Ltd"
+publishing_year: "1982"

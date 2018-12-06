@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Peter Carey
+title: "The Tax Inspector"
+edition: "Paperback"
+isbn: "0571166326"
+notes: |-
+  
+publisher: "Faber and Faber Ltd"
+publishing_year: "1992"

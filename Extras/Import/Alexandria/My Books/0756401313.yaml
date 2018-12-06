@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - C. J. Cherryh
+title: "Explorer"
+edition: "Paperback"
+isbn: "0756401313"
+notes: |-
+  
+publisher: "Daw Books"
+publishing_year: "2003"

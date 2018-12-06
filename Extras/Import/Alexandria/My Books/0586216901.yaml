@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Nicola Griffith
+title: "Ammonite"
+edition: "Paperback"
+isbn: "0586216901"
+notes: |-
+  
+publisher: "Collins"
+publishing_year: "1993"

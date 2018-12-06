@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Dave Mark
+title: "\"Macworld\" Ultimate MAC Programming"
+edition: "Paperback"
+isbn: "1568841957"
+notes: |-
+  
+publisher: "John Wiley & Sons Inc"
+publishing_year: "1994"

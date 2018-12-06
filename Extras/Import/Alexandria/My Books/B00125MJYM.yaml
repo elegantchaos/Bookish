@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Robin Williams
+title: "The Non-Designer's Design Book"
+edition: ""
+isbn: "B00125MJYM"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">A lot has happened in the world of digital design since the first edition of this title was published, but one thing remains true: There is an ever-growing number of people attempting to design pages with no formal training. This book is the one place they can turn to find quick, non-intimidating, excellent design help from trusted design instructor Robin Williams. This revised classic--now in full color--includes a new section on the hot topic of Color itself. <span style="font-style:italic;">In The Non-Designer's Design Book,</span> 3rd Editio <span style="font-style:italic;">n,</span> Robin turns her attention to the basic principles that govern good design. Readers who follow her clearly explained concepts will produce more sophisticated and professional pages immediately. Humor-infused, jargon-free prose interspersed with design exercises, quizzes, and illustrations make learning a snap--which is just what audiences have come to expect from this best-selling author.&nbsp;</span></p>
+  
+publisher: "Peachpit Press"
+publishing_year: "2008"

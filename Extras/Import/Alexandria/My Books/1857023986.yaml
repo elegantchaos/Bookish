@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Jeff Noon
+title: "Pollen"
+edition: "Paperback"
+isbn: "1857023986"
+notes: |-
+  
+publisher: "Fourth Estate"
+publishing_year: "1995"

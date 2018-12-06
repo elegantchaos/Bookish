@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Michael Marshall Smith
+title: "Only Forward"
+edition: "Paperback"
+isbn: "0006512666"
+notes: |-
+  
+publisher: "HarperCollins"
+publishing_year: "1998"

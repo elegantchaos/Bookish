@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Margaret Yorke
+title: "Find Me A Villain"
+edition: "Paperback"
+isbn: "0751525537"
+notes: |-
+  
+publisher: "Sphere"
+publishing_year: "2000"

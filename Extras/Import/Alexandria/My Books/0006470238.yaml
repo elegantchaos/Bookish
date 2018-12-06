@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Stephen Donaldson
+title: "This Day All Gods Die (Gap S.)"
+edition: "Paperback"
+isbn: "0006470238"
+notes: |-
+  
+publisher: "Voyager"
+publishing_year: "1997"

@@ -1,0 +1,9 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Sir Arthur Quiller- Couch
+title: "Studies in Literature"
+edition: "Hardback"
+isbn: "0837139058"
+notes: |-
+  
+publisher: "Greenwood Press, London"

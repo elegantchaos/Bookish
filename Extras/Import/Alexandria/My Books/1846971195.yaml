@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - John Aberdein
+title: "Strip the Willow"
+edition: "Paperback"
+isbn: "1846971195"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">As the predatory LeopCorp tries to take over the bankrupt city of Uberdeen, Lucy's quest for fellow-resisters must speed up pronto.&nbsp;</span></p>
+  
+publisher: "Polygon An Imprint of Birlinn Limited"
+publishing_year: "2009"

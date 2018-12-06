@@ -1,0 +1,19 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Charles Stross
+title: "The Fuller Memorandum"
+edition: ""
+isbn: "B003TWONNG"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">Bob Howard is an IT specialist and field agent for the Laundry, the branch of Her Majesty�s secret service that deals with occult threats.
+  
+  
+  
+  Overworked and underpaid, Bob is used to his two jobs overflowing from a strict nine to five and, since his wife Mo has a very similar job description, he understands that work will sometimes follow her home, too. But when �work� involves zombie assassins and minions of a mad god's cult, he realises things are spinning out of control.
+  
+  
+  
+  When a top-secret dossier goes missing and his boss Angleton is implicated, Bob must contend with suspiciously helpful Russian intelligence operatives and an unscrupulous apocalyptic cult before confronting the decades-old secret that lies at the heart of the Laundry: what is so important about the missing Fuller Memorandum? And why are all the people who know dying . . . ?&nbsp;</span></p>
+  
+publisher: "Orbit"
+publishing_year: "2010"

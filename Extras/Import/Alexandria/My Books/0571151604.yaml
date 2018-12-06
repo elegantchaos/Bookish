@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Tom Stoppard
+title: "Hapgood"
+edition: "Paperback"
+isbn: "0571151604"
+notes: |-
+  
+publisher: "Faber and Faber Ltd"
+publishing_year: "1988"

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Tricia Sullivan
+title: "Sound Mind"
+edition: "Paperback"
+isbn: "1841494054"
+notes: |-
+  
+publisher: "Orbit"
+publishing_year: "2007"

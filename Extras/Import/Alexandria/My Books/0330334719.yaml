@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Walter Mosley
+title: "Black Betty"
+edition: "Paperback"
+isbn: "0330334719"
+notes: |-
+  
+publisher: "Pan"
+publishing_year: "1995"

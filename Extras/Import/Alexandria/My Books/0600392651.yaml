@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Joe Kaufman
+title: "What Makes it Go"
+edition: ""
+isbn: "0600392651"
+notes: |-
+  
+publisher: "Hamlyn"
+publishing_year: "1972"

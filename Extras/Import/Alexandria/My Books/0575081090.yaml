@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Greg Bear
+title: "Blood Music"
+edition: "Paperback"
+isbn: "0575081090"
+notes: |-
+  
+publisher: "Gollancz"
+publishing_year: "2007"

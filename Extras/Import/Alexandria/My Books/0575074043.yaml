@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Paul Cornell
+title: "British Summertime (Gollancz SF S.)"
+edition: "Paperback"
+isbn: "0575074043"
+notes: |-
+  
+publisher: "Gollancz"
+publishing_year: "2004"

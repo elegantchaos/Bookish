@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - n/a
+title: "\"Daily Mirror\" Junior Crossword Book"
+edition: "Paperback"
+isbn: "0859390624"
+notes: |-
+  
+publisher: "Daily Mirror"
+publishing_year: "1976"

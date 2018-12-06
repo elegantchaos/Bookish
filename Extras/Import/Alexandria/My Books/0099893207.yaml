@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - James Ellroy
+title: "American Tabloid"
+edition: "Paperback"
+isbn: "0099893207"
+notes: |-
+  
+publisher: "Arrow"
+publishing_year: "1995"

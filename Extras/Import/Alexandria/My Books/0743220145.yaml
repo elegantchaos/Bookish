@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Glen Duncan
+title: "Weathercock"
+edition: "Paperback"
+isbn: "0743220145"
+notes: |-
+  
+publisher: "Scribner"
+publishing_year: "2003"

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Greg Bear
+title: "Eon"
+edition: "Paperback"
+isbn: "0099547104"
+notes: |-
+  
+publisher: "Legend paperbacks"
+publishing_year: "1992"

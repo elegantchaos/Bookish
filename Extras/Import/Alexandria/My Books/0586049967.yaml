@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Brian Aldiss
+title: "Enemies of the System"
+edition: "Paperback"
+isbn: "0586049967"
+notes: |-
+  
+publisher: "Triad Books"
+publishing_year: "1985"

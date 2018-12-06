@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Peter Kent
+title: "Official Netscape JavaScript 1.2 Book"
+edition: "Paperback"
+isbn: "1566046750"
+notes: |-
+  
+publisher: "Ventana Communications Group Inc"
+publishing_year: "1997"

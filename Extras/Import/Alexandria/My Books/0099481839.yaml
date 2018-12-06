@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Karin Slaughter
+title: "Triptych"
+edition: "Paperback"
+isbn: "0099481839"
+notes: |-
+  
+publisher: "Arrow"
+publishing_year: "2007"

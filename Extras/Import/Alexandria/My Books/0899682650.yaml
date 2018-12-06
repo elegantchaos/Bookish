@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Sophocles
+title: "The Three Theban Plays"
+edition: "Hardback"
+isbn: "0899682650"
+notes: |-
+  
+publisher: "Buccaneer Books Inc"
+publishing_year: "1992"

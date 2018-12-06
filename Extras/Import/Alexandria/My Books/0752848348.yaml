@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Michael Connelly
+title: "City of Bones"
+edition: "Paperback"
+isbn: "0752848348"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">Michael Connelly's world-weary cop Harry Bosch gets another outing in <span style="font-style:italic;">City of Bones</span>, torn apart by having to investigate the long-ago killing of a much abused boy and by his doomed affair with a much younger woman cop. This is not the best or the most ingenious, but is the gloomiest and perhaps most thoughful, of Connelly's thrillers about Bosch, thrillers which take the assumptions of the police procedural and makes them part of the creation of a mood in which to investigate is to struggle with the tragic forces in life. Connelly is especially good on the more positive aspects of canteen culture, that real desire to protect the innocent and serve society that Bosch calls "the blue religion"; when, as here, a paedophile witness is outed to the press or a suspect shot in dubious circumstances, it is not just good standards of policework, but something more important that is being betrayed. If <span style="font-style:italic;">City of Bones</span>turns out to be the last of Connelly's books about Bosch, or the last in which he is controlled and constrained in his mission of justice by his role as a police officer, it will not be a dying fall to one of the more impressive thriller series of our time. <span style="font-style:italic;">--Roz Kaveney&nbsp;</span></span></p>
+  
+publisher: "Orion mass market paperback"
+publishing_year: "2002"

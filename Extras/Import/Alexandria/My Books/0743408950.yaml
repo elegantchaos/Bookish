@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Richard Calder
+title: "Impakto"
+edition: "Paperback"
+isbn: "0743408950"
+notes: |-
+  
+publisher: "Earthlight"
+publishing_year: "2001"

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Mervyn Peake
+title: "Titus Groan"
+edition: "Paperback"
+isbn: "0413523705"
+notes: |-
+  
+publisher: "Methuen Pbs."
+publishing_year: "1985"

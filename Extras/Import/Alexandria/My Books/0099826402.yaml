@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Anthony Burgess
+title: "Any Old Iron"
+edition: "Paperback"
+isbn: "0099826402"
+notes: |-
+  
+publisher: "Vintage"
+publishing_year: "1992"

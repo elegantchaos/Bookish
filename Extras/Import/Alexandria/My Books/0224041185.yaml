@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Irvine Welsh
+title: "Filth"
+edition: "Paperback"
+isbn: "0224041185"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">Irvine Welsh has produced more than his share of revolting characters in his short yet spectacular writing career, but in the creation of Detective Sergeant Bruce Robertson he has surpassed himself. The protagonist of <span style="font-style:italic;">Filth</span> is, both personally and professionally, utterly corrupt; a thief, drug user, misogynist and racist, with standards of appearance and personal hygiene that are simply beyond belief. It goes without saying that his wife and children have left him but, oddly, he still has few drinking mates, and even some of the women he so hideously abuses are still prepared to give him the benefit of the doubt. "The undeniable sexuality which is part and parcel of the complete dominance over another human being", opines the viciously selfish Robertson, is just part of what makes, "poliswork such a satisfying career." But, strangely, as we chart his inevitable decline...from what is admittedly a very low baseline--a solid, almost conventional, underlying morality begins to assert itself. Amid the degradation we come across a hint of reason as Welsh's stunningly direct dialogue and hideously imaginative plot combine in a thrilling, undeniably unsettling novel. --<span style="font-style:italic;">Nick Wroe&nbsp;</span></span></p>
+  
+publisher: "Jonathan Cape"
+publishing_year: "1998"

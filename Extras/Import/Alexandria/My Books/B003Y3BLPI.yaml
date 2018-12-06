@@ -1,0 +1,31 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Tim Powers
+title: "Declare"
+edition: ""
+isbn: "B003Y3BLPI"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">A mesmerising, award-winning, daringly imaginative, multi-levelled thriller for fans of John le Carre or Neal Stephenson
+  
+  
+  
+  An ultra-secret MI6 codename. A deadly game of deception and intrigue. Dark forces from the depths of history. The terrible secret at the heart of the cold war.
+  
+  
+  
+  Operation: DECLARE
+  
+  
+  
+  London, 1963. A cryptic phone call forces ex-MI6 agent Andrew Hale to confront the nightmare that has haunted his adult life: an ultra-secret wartime operation, codenamed Declare.
+  
+  
+  
+  Operation Declare took Hale from Nazi-occupied Paris to the ruins of post-war Berlin and the trackless wastes of the Arabian desert, culminating in a night of betrayal and mind-shattering terror on the glacial slopes of Mount Ararat.
+  
+  
+  
+  Now, with the Cold War at its height, his superiors want him to return to the mountain and face the dark secret entombed within its icy summit. Hale has no choice but to comply, for Declare is the key to a conflict far deeper, far colder, than the Cold War itself.&nbsp;</span></p>
+  
+publisher: "Corvus"
+publishing_year: "2010"

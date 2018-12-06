@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Brian Aldiss
+title: "Equator"
+edition: "Paperback"
+isbn: "0755100573"
+notes: |-
+  
+publisher: "House of Stratus Ltd"
+publishing_year: "2001"

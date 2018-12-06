@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Jeff VanderMeer
+title: "Acceptance"
+edition: "Hardback"
+isbn: "0007553536"
+notes: |-
+  
+publisher: "Fourth Estate"
+publishing_year: "2014"

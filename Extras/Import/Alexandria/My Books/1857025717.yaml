@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Dava Sobel
+title: "Longitude"
+edition: "Paperback"
+isbn: "1857025717"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">The thorniest scientific problem of the 18th century was how to determine longitude. Many thousands of lives had been lost at sea over the centuries due to the inability to determine an east-west position. This is the engrossing story of the clockmaker, John "Longitude" Harrison, who solved the problem that Newton and Galileo had failed to conquer, yet claimed only half the promised rich reward. --<span style="font-style:italic;">Amazon.com&nbsp;</span></span></p>
+  
+publisher: "Fourth Estate"
+publishing_year: "1998"

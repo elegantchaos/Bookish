@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Falcon Travis
+title: "Knight Book of Secret Codes (Knight Books)"
+edition: "Paperback"
+isbn: "0340197781"
+notes: |-
+  
+publisher: "Hodder Children's Books"
+publishing_year: "1992"

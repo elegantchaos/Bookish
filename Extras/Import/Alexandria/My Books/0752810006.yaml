@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Michael Connelly
+title: "The Black Echo"
+edition: "Paperback"
+isbn: "0752810006"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">The Black Echo&nbsp;</span></p>
+  
+publisher: "Orion"
+publishing_year: "1997"

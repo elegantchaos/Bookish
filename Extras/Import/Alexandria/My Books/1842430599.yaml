@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Robert B. Parker
+title: "Widow's Walk"
+edition: "Paperback"
+isbn: "1842430599"
+notes: |-
+  
+publisher: "No Exit Press"
+publishing_year: "2002"

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Virgil W. F. Jackson Knight
+title: "The Aeneid (Classics S.)"
+edition: "Paperback"
+isbn: "0140440518"
+notes: |-
+  
+publisher: "Penguin Books Ltd"
+publishing_year: "2002"

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Anthony Burgess
+title: "Childhood (Penguin 60s)"
+edition: "Paperback"
+isbn: "0146002342"
+notes: |-
+  
+publisher: "Penguin"
+publishing_year: "1996"

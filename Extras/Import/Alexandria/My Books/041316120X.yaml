@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - C. J. Cherryh
+title: "Visible Light"
+edition: "Paperback"
+isbn: "041316120X"
+notes: |-
+  
+publisher: "Mandarin"
+publishing_year: "1988"

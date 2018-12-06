@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Robert Shea
+title: "The Illuminatus Trilogy"
+edition: "Paperback"
+isbn: "0440539811"
+notes: |-
+  
+publisher: "Bantam Doubleday Dell Publishing Group"
+publishing_year: "1989"

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Robert A. Heinlein
+title: "The Cat Who Walks Through Walls"
+edition: "Paperback"
+isbn: "0450393151"
+notes: |-
+  
+publisher: "Hodder & Stoughton Ltd"
+publishing_year: "1993"

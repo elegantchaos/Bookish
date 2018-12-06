@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Philip K. Dick
+title: "The Game-players of Titan"
+edition: "Paperback"
+isbn: "000648249X"
+notes: |-
+  
+publisher: "Voyager"
+publishing_year: "1996"

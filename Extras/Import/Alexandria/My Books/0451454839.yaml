@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Stephen Bury
+title: "Interface"
+edition: "Paperback"
+isbn: "0451454839"
+notes: |-
+  
+publisher: "Signet Books"
+publishing_year: "1997"

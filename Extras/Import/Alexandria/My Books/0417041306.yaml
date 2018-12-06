@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Ben Bova
+title: "Colony"
+edition: "Paperback"
+isbn: "0417041306"
+notes: |-
+  
+publisher: "Magnum Bks."
+publishing_year: "1979"

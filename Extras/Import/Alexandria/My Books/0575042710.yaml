@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Jack Vance
+title: "Big Planet"
+edition: "Paperback"
+isbn: "0575042710"
+notes: |-
+  
+publisher: "Gollancz"
+publishing_year: "1989"

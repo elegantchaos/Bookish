@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Richard Grant
+title: "Rumors of Spring"
+edition: "Paperback"
+isbn: "0553266489"
+notes: |-
+  
+publisher: "Bantam Books (Mm)"
+publishing_year: "1988"

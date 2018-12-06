@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Bruce \"Tog\" Tognazzini
+title: "Tog on Interface"
+edition: "Paperback"
+isbn: "0201608421"
+notes: |-
+  
+publisher: "Addison Wesley"
+publishing_year: "1992"

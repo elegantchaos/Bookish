@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - C. J. Cherryh
+title: "Fortress of Ice"
+edition: "Paperback"
+isbn: "0380820250"
+notes: |-
+  
+publisher: "Eos"
+publishing_year: "2007"

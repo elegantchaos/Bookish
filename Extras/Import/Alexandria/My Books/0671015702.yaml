@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - John McLaren
+title: "Press Send"
+edition: "Paperback"
+isbn: "0671015702"
+notes: |-
+  
+publisher: "Pocket Books"
+publishing_year: "1998"

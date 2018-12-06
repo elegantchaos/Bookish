@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Ian Rankin
+title: "Exit Music"
+edition: "Paperback"
+isbn: "0752893513"
+notes: |-
+  
+publisher: "Orion"
+publishing_year: "2008"

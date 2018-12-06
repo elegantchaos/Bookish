@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Ian Rankin
+title: "Even Dogs in the Wild"
+edition: "Hardback"
+isbn: "1409159361"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">Hands in his pockets, Rebus turned to face Cafferty. They were old men now, similar builds, similar backgrounds. Sat together in a pub, the casual onlooker might mistake them for pals who'd known one another since school. But their history told a different story. Retirement doesn't suit John Rebus. He wasn't made for hobbies, holidays or home improvements. Being a cop is in his blood. So when DI Siobhan Clarke asks for his help on a case, Rebus doesn't need long to consider his options. Clarke's been investigating the death of a senior lawyer whose body was found along with a threatening note. On the other side of Edinburgh, Big Ger Cafferty - Rebus's long-time nemesis - has received an identical note and a bullet through his window. Now it's up to Clarke and Rebus to connect the dots and stop a killer. Meanwhile, DI Malcolm Fox joins forces with a covert team from Glasgow who are tailing a notorious crime family. There's something they want, and they'll stop at nothing to get it. It's a game of dog eat dog - in the city, as in the wild. EVEN DOGS IN THE WILD brings back Ian Rankin's greatest characters in a story exploring the darkest corners of our instincts and desires.&nbsp;</span></p>
+  
+publisher: "Orion"
+publishing_year: "2015"

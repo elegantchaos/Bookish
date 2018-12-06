@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - James P. Blaylock
+title: "Land of Dreams"
+edition: "Paperback"
+isbn: "0586201777"
+notes: |-
+  
+publisher: "Grafton Books"
+publishing_year: "1989"

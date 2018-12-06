@@ -1,0 +1,27 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Richard Dawkins
+title: "The Blind Watchmaker (Penguin Press Science S.)"
+edition: "Paperback"
+isbn: "0140080562"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">Richard Dawkins is not a shy man. Edward Larson's research shows that most scientists today are not formally religious, but Dawkins is an in-your-face atheist:
+  
+  
+  
+  I want to persuade the reader, not just that the Darwinian world-view happens to be true, but that it is the only known theory that could, in principle, solve the mystery of our existence.
+  
+  
+  
+  The title of this 1986 work, Dawkins's second book, refers to the Rev. William Paley's 1802 work, <span style="font-style:italic;">Natural Theology</span>, which argued that just as finding a watch would lead you to conclude that a watchmaker must exist, the complexity of living organisms proves that a Creator exists.
+  
+  
+  
+  Not so, says Dawkins: "All appearances to the contrary, the only watchmaker in nature is the blind forces of physics, albeit deployed in a very special way...it is the blind watchmaker".
+  
+  
+  
+  Dawkins is a hard-core scientist: he doesn't just tell you what is so, he shows you how to find out for yourself. For this book, he wrote Biomorph, one of the first artificial life programs.&nbsp;</span></p>
+  
+publisher: "Penguin Books Ltd"
+publishing_year: "1988"

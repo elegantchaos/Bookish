@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Simon Flynn
+title: "The Science Magpie"
+edition: "Paperback"
+isbn: "1848315996"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">Science Magpie&nbsp;</span></p>
+  
+publisher: "Icon Books Ltd"
+publishing_year: "2013"

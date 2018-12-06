@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Steve Toltz
+title: "A Fraction of the Whole"
+edition: "Hardback"
+isbn: "024114390X"
+notes: |-
+  
+publisher: "Hamish Hamilton"
+publishing_year: "2008"

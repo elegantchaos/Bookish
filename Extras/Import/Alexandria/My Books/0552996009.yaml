@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Bill Bryson
+title: "Notes from a Small Island"
+edition: "Paperback"
+isbn: "0552996009"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">Bill Bryson is an unabashed Anglophile who, through a mistake of history, happened to be born and bred in Iowa. Righting that error, he spent 20 years in England before deciding to repatriate: "I had recently read that 3.7 million Americans according to a Gallup poll, believed that they had been abducted by aliens at one time or another, so it was clear that my people needed me." That comic tone enlivens this account of Bryson's farewell walking tour of the countryside of "the green and kindly island that had for two decades been my home."&nbsp;</span></p>
+  
+publisher: "Black Swan"
+publishing_year: "1996"

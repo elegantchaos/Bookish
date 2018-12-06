@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Aldous Huxley
+title: "Island"
+edition: ""
+isbn: "0060831014"
+notes: |-
+  
+publisher: "HarperCollins Publishers"
+publishing_year: "1972"

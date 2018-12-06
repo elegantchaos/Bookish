@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Patrick Tilley
+title: "The Amtrak Wars"
+edition: "Paperback"
+isbn: "0722185170"
+notes: |-
+  
+publisher: "Time Warner Paperbacks"
+publishing_year: "1991"

@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Andrea Badenoch
+title: "Driven"
+edition: "Paperback"
+isbn: "0330369261"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">paperback, fine In stock shipped from our UK warehouse&nbsp;</span></p>
+  
+publisher: "Pan"
+publishing_year: "2000"

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Isaac Asimov
+title: "The Caves of Steel (Robot Series)"
+edition: "Paperback"
+isbn: "0586008357"
+notes: |-
+  
+publisher: "Voyager"
+publishing_year: "1993"

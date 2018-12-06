@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - George Orwell
+title: "Animal farm ; [and], Burmese days ; [and], A clergyman's daughter ; [and], Coming up for air ; [and], Keep the aspidistra flying ; [and], Nineteen eighty four"
+edition: ""
+isbn: "0706405676"
+notes: |-
+  
+publisher: "Octopus Books"
+publishing_year: "1976"

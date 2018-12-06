@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Lisa Black
+title: "Takeover"
+edition: "Paperback"
+isbn: "0061544477"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">A grisly death in a quiet suburb pulls forensic scientist Theresa MacLean into the case.A terr....&nbsp;</span></p>
+  
+publisher: "HarperTorch"
+publishing_year: "2009"

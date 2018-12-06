@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Dave Finnigan
+title: "The Complete Juggler"
+edition: "Paperback"
+isbn: "0961552107"
+notes: |-
+  
+publisher: "Jugglebug"
+publishing_year: "1991"

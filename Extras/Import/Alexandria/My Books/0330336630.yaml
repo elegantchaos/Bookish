@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Minette Walters
+title: "The Scold's Bridle"
+edition: "Paperback"
+isbn: "0330336630"
+notes: |-
+  
+publisher: "Pan"
+publishing_year: "1995"

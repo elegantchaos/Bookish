@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Stephen Donaldson
+title: "Daughter of Regals"
+edition: "Paperback"
+isbn: "0006169856"
+notes: |-
+  
+publisher: "Fontana"
+publishing_year: "1985"

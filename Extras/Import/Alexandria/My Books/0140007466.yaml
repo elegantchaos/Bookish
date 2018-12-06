@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - F.Scott Fitzgerald
+title: "The Great Gatsby (Modern Classics S.)"
+edition: "Paperback"
+isbn: "0140007466"
+notes: |-
+  
+publisher: "Penguin Books Ltd"
+publishing_year: "1973"

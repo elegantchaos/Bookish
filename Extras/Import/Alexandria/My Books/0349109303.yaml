@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Christopher Brookmyre
+title: "Country of the Blind"
+edition: "Paperback"
+isbn: "0349109303"
+notes: |-
+  
+publisher: "Abacus"
+publishing_year: "1998"

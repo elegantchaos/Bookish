@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Garry Nelson
+title: "Left Foot in the Grave?"
+edition: "Paperback"
+isbn: "0002187744"
+notes: |-
+  
+publisher: "HarperCollinsWillow"
+publishing_year: "1998"

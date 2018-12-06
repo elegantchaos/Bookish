@@ -1,0 +1,27 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Josh Bloch
+title: "Effective Java (Java S.)"
+edition: "Paperback"
+isbn: "0201310058"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">You may think you're a hot Java programmer, but you aren't perfect--yet. Josh Bloch is one of the Java core architects and in <span style="font-style:italic;">Effective Java Programming Language Guide</span> provides a Java master class.
+  
+  
+  
+  Bloch provides 57 items (did he reject "varieties"?) grouped by subject. Each item highlights a "gotcha", expands on best practice or argues for deprecating a common practice. For example, among the gotchas, he points out problems with relying on finalisers, whose implementation varies from one JVM to another and may not run at all under some circumstances.
+  
+  
+  
+  Best practice also gets a lot of airing. A neat example is not relying on Java's default object serialisation API, which--among other problems--can cause the object to break if you make any changes. This can result in a code maintenance nightmare. In the last category he discusses the string concatenation, "+". Using this can be a hundred times slower than appending to a StringBuffer. No problem for a one-off string but using it repeatedly can cripple performance.
+  
+  
+  
+  Many of the items discussed are fairly trivial, such as returning zero rather than null for zero length arrays or avoiding the use of floats when you need precise answers--perhaps they were thrown in to make the magic "57"--but despite these <span style="font-style:italic;">Effective Java Programming Language Guide</span> offers a fascinating insight into Java's architecture and solid, easily assimilated guidance on its effective usage.
+  
+  
+  
+  Unlike most books for programmers, this is one you really will find difficult to put down. Every serious Java programmer should read it. --<span style="font-style:italic;">Steve Patient&nbsp;</span></span></p>
+  
+publisher: "Addison Wesley"
+publishing_year: "2001"

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Samantha Lee
+title: "Childe Rolande"
+edition: "Paperback"
+isbn: "0708883230"
+notes: |-
+  
+publisher: "Futura Orbit"
+publishing_year: "1989"

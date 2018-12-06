@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Andy Weir
+title: "The Martian"
+edition: "Paperback"
+isbn: "0091956145"
+notes: |-
+  
+publisher: "Del Rey"
+publishing_year: "2014"

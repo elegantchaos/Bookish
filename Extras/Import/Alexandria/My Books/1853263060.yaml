@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Norman Stone Nicolo Machiavelli
+title: "The Prince (Wordsworth Reference S.)"
+edition: "Paperback"
+isbn: "1853263060"
+notes: |-
+  
+publisher: "Wordsworth Editions Ltd"
+publishing_year: "1993"

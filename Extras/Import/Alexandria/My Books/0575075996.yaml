@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Stephen Donaldson
+title: "The Runes Of The Earth"
+edition: "Paperback"
+isbn: "0575075996"
+notes: |-
+  
+publisher: "Gollancz"
+publishing_year: "2005"

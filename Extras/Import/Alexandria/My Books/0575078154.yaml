@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Alastair Reynolds
+title: "Pushing Ice (Gollancz)"
+edition: "Paperback"
+isbn: "0575078154"
+notes: |-
+  
+publisher: "Gollancz"
+publishing_year: "2006"

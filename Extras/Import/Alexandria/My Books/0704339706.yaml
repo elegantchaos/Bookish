@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Naomi Mitchison
+title: "Memoirs of a Spacewoman"
+edition: "Paperback"
+isbn: "0704339706"
+notes: |-
+  
+publisher: "The Women's Press"
+publishing_year: "1985"

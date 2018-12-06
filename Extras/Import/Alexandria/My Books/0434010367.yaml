@@ -1,0 +1,15 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Kathy Reichs
+title: "Bare Bones"
+edition: "Hardback"
+isbn: "0434010367"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">In <span style="font-style:italic;">Bare Bones</span> Kathy Reichs leads her heroine, Temperance Brennan, into one of her scariest, most gruesome adventures yet. As fans of this popular series already know, Tempe is a forensic anthropologist: an expert in the human form (especially bones) who helps solve crimes. A dead baby is only the first in a series of grisly remains, both human and animal, that Tempe must sort through and decode. Meanwhile, as several seemingly unrelated cases begin to intertwine, her sleuthing puts her in the crosshairs of a very nasty stalker who hides behind an e-mail alias.
+  
+  
+  
+  Reichs knows how to keep the narrative ball rolling with a canny mix of plot developments, character delineation and scientific detail, all relayed via Tempe's smart, breezy, sarcastic voice. In fact, <span style="font-style:italic;">Bare Bones</span> has a few too many characters and plot lines for Reichs--or most readers--to keep perfect track of. But it's a fun ride anyway, enlivened by some steamy romantic scenes and some fascinating, appalling facts about the illicit trade in endangered wildlife, including the information that bears' gall bladders fetch more money per ounce than cocaine. <span style="font-style:italic;">Bare Bones</span> is a crisp, enjoyable read that cements Kathy Reichs' standing as the best forensic-thriller writer at work today. <span style="font-style:italic;">--Nicholas H Allison, Amazon.com&nbsp;</span></span></p>
+  
+publisher: "William Heinemann"
+publishing_year: "2003"

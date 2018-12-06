@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Donald E Knuth
+title: "Art of Computer Programming"
+edition: "Hardback"
+isbn: "0201038013"
+notes: |-
+  
+publisher: "Addison-Wesley"
+publishing_year: "1968"

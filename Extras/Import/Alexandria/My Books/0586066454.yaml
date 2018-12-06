@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - William Gibson
+title: "Neuromancer"
+edition: "Paperback"
+isbn: "0586066454"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">Case was the best interface cowboy who ever ran in Earth's computer matrix. Then he double- crossed the <span style="font-style:italic;">wrong</span> people.� Winner of the Hugo, Nebula and Philip K. Dick Awards.&nbsp;</span></p>
+  
+publisher: "Voyager"
+publishing_year: "1986"

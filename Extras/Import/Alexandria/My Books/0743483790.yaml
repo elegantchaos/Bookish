@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Mark Gatiss
+title: "The Vesuvius Club"
+edition: "Paperback"
+isbn: "0743483790"
+notes: |-
+  
+publisher: "Pocket Books"
+publishing_year: "2005"

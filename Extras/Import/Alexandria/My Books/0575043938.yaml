@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Jack Vance
+title: "Showboat World"
+edition: "Paperback"
+isbn: "0575043938"
+notes: |-
+  
+publisher: "Gollancz"
+publishing_year: "1990"

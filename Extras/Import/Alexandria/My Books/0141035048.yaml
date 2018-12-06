@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Sue Townsend
+title: "Adrian Mole and the Weapons of Mass Destruction (Penguin Celebrations)"
+edition: "Paperback"
+isbn: "0141035048"
+notes: |-
+  
+publisher: "Penguin Books Ltd"
+publishing_year: "2007"

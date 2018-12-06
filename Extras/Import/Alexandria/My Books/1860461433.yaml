@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Peter Hoeg
+title: "Borderliners (Harvill Panther S.)"
+edition: "Paperback"
+isbn: "1860461433"
+notes: |-
+  
+publisher: "The Harvill Press"
+publishing_year: "1996"

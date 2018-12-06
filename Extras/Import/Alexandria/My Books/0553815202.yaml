@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Tony Strong
+title: "Tell Me Lies"
+edition: "Paperback"
+isbn: "0553815202"
+notes: |-
+  
+publisher: "Bantam"
+publishing_year: "2004"

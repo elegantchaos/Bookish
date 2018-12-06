@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - David Harel
+title: "Algorithmics"
+edition: "Paperback"
+isbn: "0201192403"
+notes: |-
+  
+publisher: "Addison Wesley"
+publishing_year: "1987"

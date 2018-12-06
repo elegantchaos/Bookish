@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Tim Denvir
+title: "Introduction to Discrete Mathematics for Software Engineering (Computer Science Series)"
+edition: "Paperback"
+isbn: "0333407377"
+notes: |-
+  
+publisher: "Palgrave Macmillan"
+publishing_year: "1986"

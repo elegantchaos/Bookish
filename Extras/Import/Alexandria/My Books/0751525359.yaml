@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Patricia Cornwell
+title: "The Last Precinct"
+edition: "Paperback"
+isbn: "0751525359"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">What is peculiarly impressive about Patricia Cornwell's new addition to her popular series about the pathologist Kay Scarpetta, <span style="font-style:italic;">The Last Precinct</span>, is that it is a book in which everything is up for grabs and all is at stake. Murders we thought settled for good in previous books, with guilt allocated and people arrested or killed, suddenly come bubbling to the surface again. Kay finds herself accused of the killing of difficult Deputy Police Chief Diane Bray, and of framing the deformed psychopath who killed Diane and burst into Kay's home with murderous intent. Even the hideous death of Kay's lover Benton, several books ago, turns out to have been more complicated than we thought. Kay finds herself in jeopardy several times over with her headstrong lesbian niece, her only entirely reliable ally. This is a book in which Cornwell takes her heroine into new areas--we get the same amount of complicated forensic lore, but there is a new personal urgency to it, a sense that detection is not a game. Kay's relationships with colleagues have always been prickly, but here they become more problematic than ever before; Cornwell's admirers will be pleased by this, her most tense and nervy book for years. --<span style="font-style:italic;">Roz Kaveney</span> <span style="font-style:italic;">This review refers to the hardcover edition of this title.&nbsp;</span></span></p>
+  
+publisher: "Time Warner Paperbacks"
+publishing_year: "2001"

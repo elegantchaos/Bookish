@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Val McDermid
+title: "The Wire in the Blood"
+edition: "Paperback"
+isbn: "000649983X"
+notes: |-
+  
+publisher: "HarperCollins"
+publishing_year: "1998"

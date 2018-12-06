@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Anne McCaffrey
+title: "Dragonquest"
+edition: "Paperback"
+isbn: "0722159048"
+notes: |-
+  
+publisher: "Sphere"
+publishing_year: "1974"

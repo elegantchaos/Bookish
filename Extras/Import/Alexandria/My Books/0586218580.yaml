@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - David Eddings
+title: "Domes of Fire (Tamuli)"
+edition: "Paperback"
+isbn: "0586218580"
+notes: |-
+  
+publisher: "Collins"
+publishing_year: "1993"

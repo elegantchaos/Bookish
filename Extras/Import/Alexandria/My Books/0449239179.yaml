@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Isaac Asimov
+title: "The Hugo Winners"
+edition: "Paperback"
+isbn: "0449239179"
+notes: |-
+  
+publisher: "Fawcett Books"
+publishing_year: "1979"

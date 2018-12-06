@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Iain Banks
+title: "The Wasp Factory"
+edition: "Paperback"
+isbn: "0349101779"
+notes: |-
+  
+publisher: "Abacus"
+publishing_year: "1992"

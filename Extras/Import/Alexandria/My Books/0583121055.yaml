@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Michael Moorcock
+title: "The End of All Songs (The Dancers at the End of Time)"
+edition: "Paperback"
+isbn: "0583121055"
+notes: |-
+  
+publisher: "Grafton Books"
+publishing_year: "1977"

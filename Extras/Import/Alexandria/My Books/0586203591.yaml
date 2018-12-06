@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Brad Linaweaver
+title: "Moon of Ice"
+edition: "Paperback"
+isbn: "0586203591"
+notes: |-
+  
+publisher: "Grafton Books"
+publishing_year: "1989"

@@ -1,0 +1,19 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Philip Pullman
+title: "The Subtle Knife (His Dark Materials)"
+edition: "Paperback"
+isbn: "0590112899"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">At the end of <span style="font-style:italic;">The Northern Lights</span>, Lyra Silvertongue watched in fear and fascination as her father, Lord Asriel, created a bridge between worlds. Lyra and her daemon, Pantalaimon, are now lost in an alternate universe where they meet Will Parry, a fugitive from a third universe. Will has found a small window between Cittagazze (a place where children roam unchecked but invisible Specters suck the spirit out of adults) and his Oxford, which, with its Burger Kings and cars, is frighteningly different from the Oxford Lyra knows.
+  
+  
+  
+  Will's father, an explorer, disappeared years ago, but recently some odd characters have started asking questions about him, and now, having accidentally killed one of them, Will is wanted by the police. Armed with the Subtle Knife, a tool that cuts any material (including that which separates universes) and Lyra's alethiometer, the children set out to find John Parry, with adults of various stripes in desperate pursuit.
+  
+  
+  
+  Lyra's finest qualities, her courage and quick mind, are stretched to the limit as she has to lie, cheat and steal to keep herself and Will out of danger. However, she must also learn when to tell the truth and when to trust, for, though she does not yet know it, she has a huge part to play in the upcoming battle between Good and Evil.&nbsp;</span></p>
+  
+publisher: "Scholastic Point"
+publishing_year: "1998"

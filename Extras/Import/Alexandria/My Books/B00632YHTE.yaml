@@ -1,0 +1,19 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - John Meaney
+title: "Transmission"
+edition: ""
+isbn: "B00632YHTE"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">The second volume of Meaney's epic Ragnarok space opera trilogy. The dark matter in the universe is alive and is seeking to pervert human history to its own ends.
+  
+  
+  
+  Its influence has reached back into the dark ages, to the centre of the Third Reich and 600 years into the future.
+  
+  
+  
+  The Ragnarok universe not only provides a stunning SF rationale for Norse mythology but posits a world where pilots are locked into symbiotic relationships with their ships and the cities can come alive.&nbsp;</span></p>
+  
+publisher: "Gollancz"
+publishing_year: "2012"

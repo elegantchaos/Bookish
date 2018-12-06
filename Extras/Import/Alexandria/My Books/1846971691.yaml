@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Kevin MacNeil
+title: "A Method Actor's Guide to Jekyll and Hyde"
+edition: "Hardback"
+isbn: "1846971691"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">After a bike crash in a foggy Edinburgh, troubled young actor Robert Lewis wakes to find that life has changed for the darker. And the weirder. He's still a deceitful egoist but now life seems to be deceiving and manipulating him. Everything that can go wrong is going wrong.&nbsp;</span></p>
+  
+publisher: "Polygon An Imprint of Birlinn Limited"
+publishing_year: "2010"

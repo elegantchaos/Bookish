@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Les Coleman
+title: "Unthinking"
+edition: "Paperback"
+isbn: "0946407959"
+notes: |-
+  
+publisher: "Arc Publications"
+publishing_year: "1993"

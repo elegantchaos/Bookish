@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Ian Rankin
+title: "The Black Book (Inspector Rebus S.)"
+edition: "Paperback"
+isbn: "1857974131"
+notes: |-
+  
+publisher: "Orion mass market paperback"
+publishing_year: "1994"

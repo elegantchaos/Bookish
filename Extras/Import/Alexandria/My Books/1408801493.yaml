@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Jeremy Stangroom
+title: "Einstein's Riddle"
+edition: "Hardback"
+isbn: "1408801493"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">Einstein's Riddle&nbsp;</span></p>
+  
+publisher: "Bloomsbury Publishing"
+publishing_year: "2009"

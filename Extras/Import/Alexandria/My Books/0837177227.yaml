@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Percy Lubbock
+title: "Earlham"
+edition: "Hardback"
+isbn: "0837177227"
+notes: |-
+  
+publisher: "Greenwood Press"
+publishing_year: "1974"

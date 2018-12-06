@@ -1,0 +1,13 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Stieg Larsson
+title: "The Girl Who Played with Fire"
+edition: ""
+isbn: "B002RHGYOA"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">Lisbeth Salander is a wanted woman. Two Millennium journalists about to expose the truth about sex trafficking in Sweden are murdered, and Salander's prints are on the weapon. Her history of unpredictable and vengeful behaviour makes her an official danger to society - but no-one can find her.
+  
+  Mikael Blomkvist, editor-in-chief of Millennium, does not believe the police. Using all his magazine staff and resources to prove Salander's innocence, Blomkvist also uncovers her terrible past, spent in criminally corrupt institutions. Yet Salander is more avenging angel than helpless victim. She may be an expert at staying out of sight - but she has ways of tracking down her most elusive enemies.&nbsp;</span></p>
+  
+publisher: "Quercus"
+publishing_year: "2009"

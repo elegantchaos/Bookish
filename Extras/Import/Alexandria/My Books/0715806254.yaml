@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - n/a
+title: "Basketball (Know the Game S)"
+edition: "Paperback"
+isbn: "0715806254"
+notes: |-
+  
+publisher: "EP"
+publishing_year: "1978"

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Albert Camus
+title: "L' Etranger (Folio S.)"
+edition: "Paperback"
+isbn: "2070360024"
+notes: |-
+  
+publisher: "Editions Flammarion"
+publishing_year: "1991"

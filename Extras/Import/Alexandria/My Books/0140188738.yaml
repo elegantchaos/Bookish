@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Anthony Burgess
+title: "The Complete Enderby"
+edition: "Paperback"
+isbn: "0140188738"
+notes: |-
+  
+publisher: "Penguin Books Ltd"
+publishing_year: "1995"

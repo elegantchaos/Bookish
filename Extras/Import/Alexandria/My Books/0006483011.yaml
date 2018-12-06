@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - T.H. White
+title: "The Once and Future King"
+edition: "Paperback"
+isbn: "0006483011"
+notes: |-
+  
+publisher: "Voyager"
+publishing_year: "1996"

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Randel Helms
+title: "Tolkien's World"
+edition: "Paperback"
+isbn: "0586043659"
+notes: |-
+  
+publisher: "HarperCollins"
+publishing_year: "1976"

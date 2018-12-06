@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Sue Grafton
+title: "A Is for Alibi"
+edition: "Paperback"
+isbn: "033031582X"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">All our books are used but in good condition. All books checked carefully for damage before listing.EXCELLENT value for money and ready for dispatch using Amazons fufillment service.We believe you will be completely satisfied with our quick and reliable service. All orders are dispatched as swiftly as possible&nbsp;</span></p>
+  
+publisher: "Pan"
+publishing_year: "2004"

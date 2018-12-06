@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Val McDermid
+title: "Dead Beat"
+edition: "Paperback"
+isbn: "0575600020"
+notes: |-
+  
+publisher: "n/a"
+publishing_year: "1996"

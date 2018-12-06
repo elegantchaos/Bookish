@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - James Lovegrove
+title: "Imagined Slights (Gollancz SF S.)"
+edition: "Paperback"
+isbn: "1857988019"
+notes: |-
+  
+publisher: "Gollancz"
+publishing_year: "2002"

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Christopher Brookmyre
+title: "Attack of the Unsinkable Rubber Ducks"
+edition: "Paperback"
+isbn: "0349118817"
+notes: |-
+  
+publisher: "Abacus"
+publishing_year: "2008"

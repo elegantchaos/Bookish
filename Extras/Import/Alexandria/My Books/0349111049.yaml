@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Charles Higson
+title: "Happy Now"
+edition: "Paperback"
+isbn: "0349111049"
+notes: |-
+  
+publisher: "Abacus"
+publishing_year: "1999"

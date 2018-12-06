@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Frank McCourt
+title: "Angela's Ashes"
+edition: "Paperback"
+isbn: "000649840X"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">"Worse than the ordinary miserable childhood is the miserable Irish childhood," writes Frank McCourt in <span style="font-style:italic;">Angela's Ashes</span>. "Worse yet is the miserable Irish Catholic childhood." Welcome, then, to the pinnacle of the miserable Irish Catholic childhood. Born in Brooklyn in 1930 to recent Irish immigrants Malachy and Angela McCourt, Frank grew up in Limerick after his parents returned to Ireland because of poor prospects in America. It turns out that prospects weren't so great back in the old country either--not with Malachy for a father. A chronically unemployed and nearly unemployable alcoholic, he appears to be the model on which many of our more insulting clich�s about drunken Irish manhood are based. Mix in abject poverty, and frequent death and illness, and you have all the makings of a truly difficult early life. Fortunately, in McCourt's able hands it also has all the makings of a compelling memoir.&nbsp;</span></p>
+  
+publisher: "Flamingo"
+publishing_year: "1997"

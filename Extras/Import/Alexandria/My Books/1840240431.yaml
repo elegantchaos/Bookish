@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Robert Bircher
+title: "101 Reasons Not to Do Anything"
+edition: "Paperback"
+isbn: "1840240431"
+notes: |-
+  
+publisher: "Summersdale Publishers"
+publishing_year: "1998"

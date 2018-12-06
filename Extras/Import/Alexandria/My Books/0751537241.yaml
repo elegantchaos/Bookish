@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Mark Billingham
+title: "Buried"
+edition: "Paperback"
+isbn: "0751537241"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">Buried A retired copper's son is kidnapped. Many of the villains he put away had sworn revenge. So why doesn't he mention the one who is still the main suspect in a four-year-old murder? Full description&nbsp;</span></p>
+  
+publisher: "Sphere"
+publishing_year: "2007"

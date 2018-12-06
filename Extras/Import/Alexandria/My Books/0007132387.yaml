@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Greg Bear
+title: "Darwin's Children"
+edition: "Paperback"
+isbn: "0007132387"
+notes: |-
+  
+publisher: "HarperCollins"
+publishing_year: "2004"

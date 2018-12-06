@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - C. J. Cherryh
+title: "Heavy Time"
+edition: "Paperback"
+isbn: "0450565378"
+notes: |-
+  
+publisher: "Hodder & Stoughton Ltd"
+publishing_year: "1992"

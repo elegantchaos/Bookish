@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Greg Bear
+title: "The Forge of God"
+edition: "Paperback"
+isbn: "0099618702"
+notes: |-
+  
+publisher: "Legend"
+publishing_year: "1992"

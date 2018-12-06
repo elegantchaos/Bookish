@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Alastair Reynolds
+title: "The Prefect"
+edition: "Paperback"
+isbn: "0575082186"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">"An enjoyable novel which shows Reynolds growth as a writer. Though good before, I think this is one his best novels to date."&nbsp;</span></p>
+  
+publisher: "Gollancz"
+publishing_year: "2008"

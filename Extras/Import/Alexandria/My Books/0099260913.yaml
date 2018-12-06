@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Greg Egan
+title: "Permutation City"
+edition: "Paperback"
+isbn: "0099260913"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">What would happen if you could copy your memories and personality into a computer generated universe, live there, and return? Greg Egan, author of <span style="font-style:italic;">Quarantine</span> explores the possibilities in this suspenseful book. Battles rage on different levels as computer personalities on a locked chip fight to escape. Meanwhile sticky legal questions are raised in the real world. Think about the copyright laws, and what about the legal rights of computer programs?&nbsp;</span></p>
+  
+publisher: "Legend paperbacks"

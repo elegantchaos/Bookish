@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Peter Hoeg
+title: "Miss Smilla's Feeling for Snow (Harvill Panther S.)"
+edition: "Paperback"
+isbn: "1860461670"
+notes: |-
+  
+publisher: "The Harvill Press"
+publishing_year: "1996"

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Eric Brown
+title: "Engineman"
+edition: "Paperback"
+isbn: "0330330438"
+notes: |-
+  
+publisher: "Tor Books"
+publishing_year: "1994"

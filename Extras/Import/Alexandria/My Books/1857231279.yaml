@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - William James
+title: "The Other Side of Heaven (Sunfall Trilogy)"
+edition: "Paperback"
+isbn: "1857231279"
+notes: |-
+  
+publisher: "Orbit"
+publishing_year: "1993"

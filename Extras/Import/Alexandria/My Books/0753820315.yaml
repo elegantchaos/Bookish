@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - James Lee Burke
+title: "Black Cherry Blues"
+edition: "Paperback"
+isbn: "0753820315"
+notes: |-
+  
+publisher: "Phoenix mass market p/bk"
+publishing_year: "2005"

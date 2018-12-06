@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Stephen Donaldson
+title: "A Dark and Hungry God Arises (Gap S.)"
+edition: "Paperback"
+isbn: "0006470211"
+notes: |-
+  
+publisher: "Collins"
+publishing_year: "1993"

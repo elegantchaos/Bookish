@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Salvador Dali
+title: "Dali (PostcardBooks S.)"
+edition: "Paperback"
+isbn: "3822893390"
+notes: |-
+  
+publisher: "Taschen"
+publishing_year: "1995"

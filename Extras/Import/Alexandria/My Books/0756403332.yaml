@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - C. J. Cherryh
+title: "Destroyer"
+edition: "Paperback"
+isbn: "0756403332"
+notes: |-
+  
+publisher: "Daw Books"
+publishing_year: "2006"

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Peter Cook William Cook
+title: "Tragically I Was an Only Twin"
+edition: "Paperback"
+isbn: "0099443252"
+notes: |-
+  
+publisher: "Arrow"
+publishing_year: "2003"

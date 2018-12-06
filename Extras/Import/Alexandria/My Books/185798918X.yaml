@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Darren O'Shaughnessy
+title: "Hell's Horizon (City S.)"
+edition: "Paperback"
+isbn: "185798918X"
+notes: |-
+  
+publisher: "Gollancz"
+publishing_year: "2000"

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Raymond E. Feist Janny Wurts
+title: "Mistress of the Empire"
+edition: "Paperback"
+isbn: "0586203796"
+notes: |-
+  
+publisher: "Voyager"
+publishing_year: "2000"

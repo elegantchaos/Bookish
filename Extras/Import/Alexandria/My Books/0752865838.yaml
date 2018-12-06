@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Michael Connelly
+title: "The Lincoln Lawyer"
+edition: "Hardback"
+isbn: "0752865838"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">London published Fiction&nbsp;</span></p>
+  
+publisher: "Orion"
+publishing_year: "2005"

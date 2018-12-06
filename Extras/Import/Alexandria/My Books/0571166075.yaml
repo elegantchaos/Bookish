@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Simon Armitage
+title: "Kid"
+edition: "Paperback"
+isbn: "0571166075"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">Amongst the most successful and widely read of younger English poets, in this reissue of his 1992 book Kid demonstrates the easy appeal of Simon Armitage's verse: his ability to mimic the quotidian voices of "real life", his acts of social ventriloquism which imply a literary version of verbal democracy. As a result, Armitage often seems content to coolly observe, reserving a judgement that the poem's form is left to provide: the sonnet "Poem" (the very title implying neutrality), detailing a man's casual brutalities, ends with "Here's how they rated him when they looked back: / sometimes he did this, sometimes he did that." The forensic quality of texts such as these (see the list of a dead man's belongings in "About His Person") resemble news reports from the forgotten of Modern Britain, charting their particular mutant strains of violence, despair and illegality. Occasionally, poems move through such closely observed detail towards a sudden symbolic or metaphoric turn--a sudden crystallisation of insight. Armitage though seems wary of such structures: one or two poems play explicitly with the urge for poetic meaning and poke fun at the simple coalescences of metaphoric elision--"Eighteen Plays on Golfing as a Watchword" parodies Wallace Stevens in its jokey round of golfing metaphors ("The flag and the green / from this elevation; / a heron in its pool / of stagnant water.")--as if Armitage doesn't want anything to interrupt the directness of his more serious verse, as if the obviously poetic would only curdle his intent. Part of the "New Gen" of British poets and a major player in the British poetry scene, Armitage's is a voice of importance. --<span style="font-style:italic;">Burhan Tufail&nbsp;</span></span></p>
+  
+publisher: "Faber and Faber Ltd"
+publishing_year: "2002"

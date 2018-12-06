@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Grafton  Sue
+title: "I Is for Innocent"
+edition: "Paperback"
+isbn: "0330455583"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">It was a Monday early in December when Kinsey Millhone first got involved i the Isabelle Barney murder case. She was out of work, The usual private investigator had just dropped dead of a heart attack. Kinsey was more than happy to oblige. The trouble started on the very first day of the investigation. Either Kinsey's predecessor was incompetent - or someone had been getting away with murder. And next time it might turn out to be hers...&nbsp;</span></p>
+  
+publisher: "Pan Macmillan"
+publishing_year: "2007"

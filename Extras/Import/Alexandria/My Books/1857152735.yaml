@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Evelyn Waugh
+title: "Decline and Fall"
+edition: "Hardback"
+isbn: "1857152735"
+notes: |-
+  
+publisher: "Everyman's Library"
+publishing_year: "2003"

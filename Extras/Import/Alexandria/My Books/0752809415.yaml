@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Ian Rankin
+title: "Hide and Seek (Inspector Rebus S.)"
+edition: "Paperback"
+isbn: "0752809415"
+notes: |-
+  
+publisher: "Orion mass market paperback"
+publishing_year: "1998"

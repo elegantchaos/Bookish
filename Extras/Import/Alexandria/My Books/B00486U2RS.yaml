@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Charles Stross
+title: "Accelerando"
+edition: ""
+isbn: "B00486U2RS"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">His most ambitious novel to date, ACCELERANDO is a multi-generational saga following a brilliant clan of 21st-century posthumans. The year is some time between 2010 and 2015. The recession has ended, but populations are ageing and the rate of tech change is accelerating dizzyingly. Manfred makes his living from spreading ideas around, putting people in touch with one another and leaving a spray of technologies in his wake. He lives at the cutting edge of intelligence amplification technology, but even Manfred can take on too much. And when his pet robot cat picks up some interesting information from the SETI data, his world - and the world of his descendants - is turned on its head.&nbsp;</span></p>
+  
+publisher: "Orbit"
+publishing_year: "2010"

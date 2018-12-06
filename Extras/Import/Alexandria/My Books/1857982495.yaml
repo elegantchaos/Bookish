@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Kristine Kathryn Rusch
+title: "Alien Influences"
+edition: "Paperback"
+isbn: "1857982495"
+notes: |-
+  
+publisher: "Gollancz"
+publishing_year: "1995"

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - A.E.Van Vogt
+title: "The Book of Ptath"
+edition: "Paperback"
+isbn: "0881847887"
+notes: |-
+  
+publisher: "Carroll & Graf Publishing"
+publishing_year: "1992"

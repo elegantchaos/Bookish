@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Anthony Burgess
+title: "Little Wilson and Big God (Penguin Non-fiction)"
+edition: "Paperback"
+isbn: "0140108246"
+notes: |-
+  
+publisher: "Penguin Books Ltd"
+publishing_year: "1988"

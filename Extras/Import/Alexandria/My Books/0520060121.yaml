@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Alfred Tennyson, Baron Tennyson
+title: "The Poems of Tennyson"
+edition: "Hardback"
+isbn: "0520060121"
+notes: |-
+  
+publisher: "Univ of California Pr"
+publishing_year: "1987"

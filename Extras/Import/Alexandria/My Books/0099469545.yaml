@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Arnaldur Indridason
+title: "Silence of the Grave"
+edition: "Paperback"
+isbn: "0099469545"
+notes: |-
+  
+publisher: "Vintage"
+publishing_year: "2006"

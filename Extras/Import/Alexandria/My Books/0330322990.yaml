@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Julian May
+title: "Diamond Mask (Galactic Milieu Trilogy)"
+edition: "Paperback"
+isbn: "0330322990"
+notes: |-
+  
+publisher: "Tor Books"
+publishing_year: "1995"

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Anthony Burgess
+title: "Future Imperfect"
+edition: "Paperback"
+isbn: "0099225018"
+notes: |-
+  
+publisher: "Vintage"
+publishing_year: "1994"

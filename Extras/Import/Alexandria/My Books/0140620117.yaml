@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Charlotte Bronte
+title: "Jane Eyre"
+edition: "Paperback"
+isbn: "0140620117"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">This need not be limited to a juvenile sale. It is a beautiful gift book edition of the famous novel, a favorite of this gifted artist who has been working on it for years. A fine piece of bookmaking. (Kirkus Reviews)&nbsp;</span></p>
+  
+publisher: "Penguin Classics"
+publishing_year: "1994"

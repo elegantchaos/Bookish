@@ -1,0 +1,23 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Eric J. Ray Eric May John Posner
+title: "Learning XML"
+edition: "Paperback"
+isbn: "0596000464"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">Although <span style="font-style:italic;">Learning XML</span> covers XML with a broad brush, it nevertheless presents the key elements of the technology with enough detail to familiarise the reader with the crucial markup language. This guide is brief enough to tackle in a weekend.
+  
+  
+  
+  Author Erik T Ray begins with an excellent summary of XML's history as an outgrowth of SGML and HTML. He outlines very clearly the elements of markup, demystifying concepts such as attributes, entities and namespaces with numerous clear examples. To illustrate a real-world XML application, he gives the reader a look at a document written in DocBook--a publicly available XML document type for publishing technical writings--and explains the sections of the document step by step. A simplified version of DocBook is used later in the book to illustrate transformation--a powerful benefit of XML.
+  
+  
+  
+  The all-important Document Type Definition (DTD) is covered in depth, but the still-unofficial alternative--XML Schema--is only briefly addressed. The author makes liberal use of graphical illustrations, tables and code to demonstrate concepts along the way, keeping the reader engaged and on track. Ray also gets into a deep discussion of programming XML utilities with Perl.
+  
+  
+  
+  <span style="font-style:italic;">Learning XML</span> is a highly readable introduction to XML for readers with existing knowledge of markup and Web technologies, and it meets its goals very well--to deliver a broad perspective of XML and its potential. <span style="font-style:italic;">--Stephen W Plain&nbsp;</span></span></p>
+  
+publisher: "O'Reilly UK"
+publishing_year: "2001"

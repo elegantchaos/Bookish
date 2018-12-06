@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - C.J. Cherryh
+title: "Hammerfall"
+edition: "Hardback"
+isbn: "0061052604"
+notes: |-
+  
+publisher: "William Morrow"
+publishing_year: "2002"

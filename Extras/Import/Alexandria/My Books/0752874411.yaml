@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Harlan Coben
+title: "The Woods"
+edition: "Hardback"
+isbn: "0752874411"
+notes: |-
+  
+publisher: "Orion"
+publishing_year: "2007"

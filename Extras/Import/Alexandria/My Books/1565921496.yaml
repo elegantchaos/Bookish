@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Larry Wall Randal L. Schwartz Tom Christiansen
+title: "Programming Perl (A Nutshell Handbook)"
+edition: "Paperback"
+isbn: "1565921496"
+notes: |-
+  
+publisher: "O'Reilly UK"
+publishing_year: "1996"

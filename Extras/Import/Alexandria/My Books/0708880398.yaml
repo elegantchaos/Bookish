@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Tanith Lee
+title: "Shadowfire (Orbit Bks.)"
+edition: "Paperback"
+isbn: "0708880398"
+notes: |-
+  
+publisher: "Futura Pubns."
+publishing_year: "1979"

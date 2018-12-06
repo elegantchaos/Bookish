@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Brian Stableford
+title: "Critical Threshold"
+edition: "Paperback"
+isbn: "0600320413"
+notes: |-
+  
+publisher: "Hamlyn"
+publishing_year: "1979"

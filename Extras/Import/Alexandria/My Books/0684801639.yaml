@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Susie Bright
+title: "Best American Erotica 1995"
+edition: "Paperback"
+isbn: "0684801639"
+notes: |-
+  
+publisher: "Pocket Books"
+publishing_year: "1995"

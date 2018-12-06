@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Isaac Asimov
+title: "Foundation (The Foundation Series)"
+edition: "Paperback"
+isbn: "0586010807"
+notes: |-
+  <p><span style="font-style:italic;font-size:12pt;color:WindowText;">Foundation<span style="font-style:normal;"> marks the first of a series of tales set so far in the future that Earth is all but forgotten by humans who live throughout the galaxy. Yet all is not well with the Galactic Empire. Its vast size is crippling to it. In particular, the administrative planet, honeycombed and tunneled with offices and staff, is vulnerable to attack or breakdown. The only person willing to confront this imminent catastrophe is Hari Seldon, a psychohistorian and mathematician. Seldon can scientifically predict the future, and it doesn't look pretty: a new Dark Age is scheduled to send humanity into barbarism in 500 years. He concocts a scheme to save the knowledge of the race in an Encyclopedia Galactica. But this project will take generations to complete, and who will take up the torch after him? The first Foundation trilogy (</span>Foundation, Foundation and Empire, Second Foundation<span style="font-style:normal;">) won a Hugo Award in 1965 for "Best All-Time Series". It's science fiction on the grand scale; one of the classics of the field. -- </span>Brooks Peck&nbsp;</span></p>
+  
+publisher: "Collins"
+publishing_year: "1994"

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - A R, etc. Woolley
+title: "HAMLYN GUIDE - MINERALS"
+edition: "Paperback"
+isbn: "0600563944"
+notes: |-
+  
+publisher: "Hamlyn"
+publishing_year: "1989"

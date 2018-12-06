@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - James P. Blaylock
+title: "The Disappearing Dwarf"
+edition: "Paperback"
+isbn: "0586201734"
+notes: |-
+  
+publisher: "Grafton Books"
+publishing_year: "1989"

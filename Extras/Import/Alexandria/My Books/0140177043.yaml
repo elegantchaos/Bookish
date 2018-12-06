@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Guy Gavriel Kay
+title: "Tigana (Roc S.)"
+edition: "Paperback"
+isbn: "0140177043"
+notes: |-
+  
+publisher: "RoC"
+publishing_year: "1994"

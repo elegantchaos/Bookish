@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Philip K. Dick
+title: "We Can Build You"
+edition: "Paperback"
+isbn: "0006482791"
+notes: |-
+  
+publisher: "Voyager"
+publishing_year: "1997"

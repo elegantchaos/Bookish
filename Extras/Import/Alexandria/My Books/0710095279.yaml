@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - n/a
+title: "I Ching"
+edition: "Paperback"
+isbn: "0710095279"
+notes: |-
+  
+publisher: "Routledge"
+publishing_year: "1983"

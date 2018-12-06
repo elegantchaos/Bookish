@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Simon Armitage
+title: "Little Green Man"
+edition: "Hardback"
+isbn: "0670894427"
+notes: |-
+  <p><span style="font-style:italic;font-size:12pt;color:WindowText;">Little Green Man<span style="font-style:normal;">, Simon Armitage's first novel, draws on the author's gritty Yorkshire upbringing to produce a vivid story of childhood nostalgia and adult disillusionment. Armitage's protagonist is the feckless Barney, thirtysomething, divorced, and alienated from his autistic son. His only passion are his mates, "the old friends, the ones you were brought up with, who go further back than you remember, who've been there since the beginning. You didn't choose them--they're like family. Like blood." When Barney unearths what turns out to be a priceless relic from his childhood days--the "little green man" of the novel's title--he gets back in touch with his old gang: Winkie, Pompus, Stubbs and Tony Football. Desperate to "turn back the clock" and relive their childhood escapades, Barney proposes a game of truth or dare. Each member of the gang "dares" another. Failure to complete a dare leads to disqualification. The winner walks away with the priceless little green man. As the stakes get higher, friendships begin to dissolve as hairy women are seduced, sheep are slaughtered and excrement eaten. In the process the gang reveal some of their deepest secrets, from abuse to impotence, and as the game begins to get out of hand, Barney himself has to confront the responsibilities of adulthood. The problem is that the novel's brutally frank portrayal of both Barney and his gang is so convincing that it becomes difficult to feel any sympathy for anyone. </span>Little Green Man<span style="font-style:normal;"> is a tough, uncompromising debut novel, but many fans of Armitage may feel it lacks the originality of his highly acclaimed poetry. --</span>Jerry Brotton&nbsp;</span></p>
+  
+publisher: "Viking"
+publishing_year: "2001"

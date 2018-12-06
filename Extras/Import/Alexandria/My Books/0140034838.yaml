@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Michael Moorcock
+title: "Cure for Cancer"
+edition: "Paperback"
+isbn: "0140034838"
+notes: |-
+  
+publisher: "Penguin"
+publishing_year: "1973"

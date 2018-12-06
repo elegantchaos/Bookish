@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Jon Courtenay Grimwood
+title: "End Of The World Blues"
+edition: "Paperback"
+isbn: "0575079533"
+notes: |-
+  
+publisher: "Gollancz"
+publishing_year: "2007"

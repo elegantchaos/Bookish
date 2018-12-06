@@ -1,0 +1,9 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - n/a
+title: "Great Science Fiction Stories"
+edition: ""
+isbn: "0904230988"
+notes: |-
+  
+publisher: "Hamlyn"

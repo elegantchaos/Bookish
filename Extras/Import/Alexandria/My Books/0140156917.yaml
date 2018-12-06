@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Barbara Vine
+title: "King Solomon's Carpet"
+edition: "Paperback"
+isbn: "0140156917"
+notes: |-
+  
+publisher: "Penguin Books Ltd"
+publishing_year: "1992"

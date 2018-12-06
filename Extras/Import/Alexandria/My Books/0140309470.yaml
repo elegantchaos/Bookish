@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Eric Williams
+title: "Great Escape Stories (Puffin Books)"
+edition: "Paperback"
+isbn: "0140309470"
+notes: |-
+  
+publisher: "Puffin Books"
+publishing_year: "1963"

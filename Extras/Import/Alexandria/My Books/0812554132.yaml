@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Susan Shwartz
+title: "Heritage of Flight"
+edition: "Paperback"
+isbn: "0812554132"
+notes: |-
+  
+publisher: "Tor Books"
+publishing_year: "1989"

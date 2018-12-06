@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Ken MacLeod
+title: "The Sky Road"
+edition: "Paperback"
+isbn: "1857239679"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">In the sequence that started with <span style="font-style:italic;">The Star Fraction</span>, MacLeod has created a future where the crucial historical event is left-wing students arguing about anarchism in the 70s. On this turns the destruction and renaissance of civilisation, here and elsewhere in the human galaxy. In his fourth book <span style="font-style:italic;">The Sky Road</span> he productively fills in some of the gaps. This is the story of Myra, Trot turned entrepreneur, whose nuclear deterrence-for-hire is so crucial to the event known by some as the Fall and others as the Deliverance. It is also the story of young Clovis, part-time worker in the yard building the first spaceship for centuries, part-time scholar trying to find out what Myra the Deliverer was really like. MacLeod's quirky and intelligent take on the world of power politics--the paradoxes that arise when ideology is made praxis--and his charmingly cynical gift for engaging and engaged protagonists, are something to which the SF audience has become used. What this book also has is a profound sense of the beauty of a simpler and stiller world; MacLeod's real gift is his capacity to see all sides of a question, even when he is sure of the answer. --<span style="font-style:italic;">Roz Kaveney&nbsp;</span></span></p>
+  
+publisher: "Orbit"
+publishing_year: "2000"

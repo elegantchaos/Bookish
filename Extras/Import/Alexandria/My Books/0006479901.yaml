@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - George R.R. Martin
+title: "A Storm of Swords"
+edition: "Paperback"
+isbn: "0006479901"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">The third volume of his six-volume fantasy epic <span style="font-style:italic;">A Song of Ice and Fire</span>, <span style="font-style:italic;">A Storm of Swords</span> continues Martin's vigorous account of the civil wars which follow the death of King Robert, the usurper who deposed a dynasty gone mad and dangerous, and the judicial murder by his widow and heir of Ned Stark, the man who made him king. The surviving Stark children are scattered--Robb leading revolt in the North, Arya learning hard lessons as she treks through the war zone, Sansa an observer of court intrigue, crippled Bran heading towards a sorcerous destiny, Jon engaged in desperate defence of the icewall against barbarians and worse things. Daenerys, pretender and ruler of dragons, is building an empire elsewhere. And characters we have thought of as villains, notably Jaime Kingslayer, are developing belated consciences ... Martin keeps on upping the ante of violence and betrayal in this compelling saga of a fantasy middle ages soiled with blood and mud; his economic use of magic and his fascination with complex characters make this the sword-and-sorcery series for people with adult taste. As the series proceeds, his writing gets ever leaner and sharper, the evocation of the magical ever more sinister. <span style="font-style:italic;">--Roz Kaveney&nbsp;</span></span></p>
+  
+publisher: "Voyager"
+publishing_year: "2003"

@@ -1,0 +1,23 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Malcolm Gladwell
+title: "Blink"
+edition: "Paperback"
+isbn: "0141014598"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">: For <span style="font-style:italic;">Blink</span>, Malcolm Gladwell, author of the bestselling <span style="font-style:italic;">The Tipping Point</span> explores the extraordinarily perceptive and deceptive power of the sub-conscious mind. Gladwell's major claim is that decisions made very quickly can be every bit as good as a decision made cautiously and deliberately. What we are actually doing is what Gladwell calls `thin-slicing'. When we leap to a decision or have a hunch our unconscious is sifting through the situation in front of us looking for a pattern, throwing out the irrelevant information and zeroing in on what really matters. Our unconscious mind is so good at this that it often delivers a better answer than more deliberate and protracted ways of thinking. Much of this is utterly mysterious but some of the most astonishing and useful examples of thin-slicing can be learned.
+  
+  
+  
+  �
+  
+  
+  
+  Gladwell hopes to convince us that our snap judgements and first impressions can be educated and controlled so instead of merely praising the mysterious process of instinct and intuition he is interested in those moments when our instincts betray us, the situations where our powers of rapid cognition can go awry, where we fail to read the signs. Most disturbing of all is the degree to which culturally determined preconceptions and prejudices control us. Without reducing matters to racism and sexism Gladwell shows us that there are facts about people's appearance�their size or shape or color or sex�that can trigger a very similar set of powerful associations which explains why utter mediocrities (such as U.S. President Warren Harding) can sometimes end up in positions of enormous responsibility; or why tall people earn substantially more than their shorter colleagues; or why car salesmen unconsciously charge prices according to race and gender. �
+  
+  
+  
+  Gladwell's conversational prose style is concise, informative, accessible and entertaining. The stories, scientific findings and psychological tests are consistently surprising whether he is dealing with speed-dating, record promotions, police shoot-outs, the human face, or the reasons doctors get sued. --<span style="font-style:italic;">Larry Brown</span> END&nbsp;</span></p>
+  
+publisher: "Penguin Books Ltd"
+publishing_year: "2006"

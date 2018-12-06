@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Baroness P. D. James
+title: "Death in Holy Orders"
+edition: "Paperback"
+isbn: "0571209696"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">A near fine copy.&nbsp;</span></p>
+  
+publisher: "Faber and Faber"
+publishing_year: "2001"

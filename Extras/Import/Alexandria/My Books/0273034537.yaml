@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Ian Holyer
+title: "Functional Programming with Miranda"
+edition: "Paperback"
+isbn: "0273034537"
+notes: |-
+  
+publisher: "Routledge, an imprint of Taylor & Francis Books Lt"
+publishing_year: "1991"

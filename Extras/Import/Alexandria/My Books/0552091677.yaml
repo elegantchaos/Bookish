@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Gordon R Dickson
+title: "Alien Way"
+edition: "Paperback"
+isbn: "0552091677"
+notes: |-
+  
+publisher: "Corgi"
+publishing_year: "1973"

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Julie Burchill
+title: "Ambition"
+edition: "Paperback"
+isbn: "0552135585"
+notes: |-
+  
+publisher: "Corgi"
+publishing_year: "1990"

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Sergio Aragones
+title: "Mad Menagerie"
+edition: "Paperback"
+isbn: "0446354198"
+notes: |-
+  
+publisher: "Warner Books Inc"
+publishing_year: "1988"

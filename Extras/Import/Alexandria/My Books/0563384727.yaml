@@ -1,0 +1,15 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Christopher Lee
+title: "This Sceptred Isle Vol 2"
+edition: "Hardback"
+isbn: "0563384727"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">To form a view of where Britain is at today, and indeed when it has been here before, take a look at <span style="font-style:italic;">This Sceptred Isle--Twentieth Century</span>, sequel to the award-winning earlier text <span style="font-style:italic;">This Sceptred Isle</span>,covering the Romans to Queen Victoria. The writer is a specialist in contemporary and military history who has aimed this book specifically at the general reader. The style is almost conversational and the comment circumspect, taking care to view actions in the context of their times. Organised chronologically, chapters on each decade are sub-divided into a section for each year, so that the book may be used as a reference tool and need not necessarily be read cover to cover--beneficial in what is a long text not broken by illustrations.
+  
+  
+  
+  The coverage includes major world events and extends to sport, the arts and medicine. Also recorded are diverting details of everyday life, such as the appearance of the board game <span style="font-style:italic;">Monopoly</span> and the first advertisement on British television. Containing more fact than philosophy, presenting opinions without being opinionated and taking the spin out of politics, <span style="font-style:italic;">Twentieth Century</span> reports 100 years of unrest and fast-paced change and yet clearly expresses that our problems are not new and that in some significant ways the 20th century ends as it began. --<span style="font-style:italic;">Karen Tiley&nbsp;</span></span></p>
+  
+publisher: "BBC Books"
+publishing_year: "1999"

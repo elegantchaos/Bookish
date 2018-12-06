@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Piers Anthony
+title: "Juxtaposition (Split Infinity)"
+edition: "Paperback"
+isbn: "0586054464"
+notes: |-
+  
+publisher: "Grafton Books"
+publishing_year: "1983"

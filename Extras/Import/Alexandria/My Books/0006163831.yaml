@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Stephen Donaldson
+title: "The One Tree (The Second Chronicles of Thomas Covenant)"
+edition: "Paperback"
+isbn: "0006163831"
+notes: |-
+  
+publisher: "Voyager"
+publishing_year: "1996"

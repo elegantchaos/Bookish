@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Samuel R. Delany
+title: "The Fall of the Towers"
+edition: "Paperback"
+isbn: "140003132X"
+notes: |-
+  
+publisher: "Vintage Books USA"
+publishing_year: "2004"

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Alexei Sayle
+title: "The Dog Catcher"
+edition: "Hardback"
+isbn: "0340818689"
+notes: |-
+  
+publisher: "Sceptre"
+publishing_year: "2001"

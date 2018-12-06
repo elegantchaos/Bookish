@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Guy Gavriel Kay
+title: "The Wandering Fire (The Finovar Tapestry)"
+edition: "Paperback"
+isbn: "0586215239"
+notes: |-
+  
+publisher: "Voyager"
+publishing_year: "1992"

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - C.J. Cherryh
+title: "Fortress of Dragons"
+edition: "Paperback"
+isbn: "0061020443"
+notes: |-
+  
+publisher: "Avon Books"
+publishing_year: "2001"

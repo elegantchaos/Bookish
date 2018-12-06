@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Alastair Reynolds
+title: "Century Rain (Gollancz)"
+edition: "Paperback"
+isbn: "0575076917"
+notes: |-
+  
+publisher: "Gollancz"
+publishing_year: "2005"

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - School Mathematics Project
+title: "School Mathematics Project"
+edition: "Hardback"
+isbn: "0521202426"
+notes: |-
+  
+publisher: "Cambridge University Press"
+publishing_year: "1973"

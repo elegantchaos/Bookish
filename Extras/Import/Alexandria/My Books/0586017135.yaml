@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Isaac Asimov
+title: "Second Foundation (The Foundation Series)"
+edition: "Paperback"
+isbn: "0586017135"
+notes: |-
+  
+publisher: "Collins"
+publishing_year: "2004"

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - MacK Reynolds
+title: "Earth Unaware"
+edition: "Paperback"
+isbn: "0843906286"
+notes: |-
+  
+publisher: "Leisure Books (Mm)"
+publishing_year: "1979"

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Colin Thubron
+title: "Samarkand (Penguin 60s)"
+edition: "Paperback"
+isbn: "0146001273"
+notes: |-
+  
+publisher: "Penguin"
+publishing_year: "1996"

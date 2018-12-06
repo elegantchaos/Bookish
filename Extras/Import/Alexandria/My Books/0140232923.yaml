@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Neal Stephenson
+title: "Snow Crash"
+edition: "Paperback"
+isbn: "0140232923"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">From the opening line of his breakthrough cyberpunk novel <span style="font-style:italic;">Snow Crash</span>, Neal Stephenson plunges the reader into a not-too-distant future. It is a world where the Mafia controls pizza delivery, the United States exists as a patchwork of corporate-franchise city states, and the Internet--incarnate as the Metaverse--looks something like last year's hype would lead you to believe it should. Enter Hiro Protagonist--hacker, samurai swordsman and pizza-delivery driver. When his best friend fries his brain on a new designer drug called Snow Crash and his beautiful, brainy ex-girlfriend asks for his help, what's a guy with a name like that to do? He rushes to the rescue. A breakneck-paced 21st-century novel, <span style="font-style:italic;">Snow Crash</span> interweaves everything from Sumerian myth to visions of a postmodern civilization on the brink of collapse. Faster than the speed of television and a whole lot more fun, <span style="font-style:italic;">Snow Crash</span> is the portrayal of a future that is bizarre enough to be plausible. --<span style="font-style:italic;">Acton Lane&nbsp;</span></span></p>
+  
+publisher: "RoC"
+publishing_year: "2004"

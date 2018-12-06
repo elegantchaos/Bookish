@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Neal Asher
+title: "The Voyage of the Sable Keech"
+edition: "Paperback"
+isbn: "0330411608"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">'What's most striking about The Voyage of the Sable Keech is its sense of supreme story-telling confidence'&nbsp;</span></p>
+  
+publisher: "Tor"
+publishing_year: "2006"

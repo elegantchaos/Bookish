@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Alan Douglas Sid Astley
+title: "Transistor Electronic Organs for the Amateur"
+edition: "Hardback"
+isbn: "0273417509"
+notes: |-
+  
+publisher: "Pitman"
+publishing_year: "1969"

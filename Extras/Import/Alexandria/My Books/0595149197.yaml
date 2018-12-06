@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Richard M. Stallman Roland H. Pesch
+title: "Debugging With Gdb"
+edition: "Paperback"
+isbn: "0595149197"
+notes: |-
+  
+publisher: "Iuniverse Inc"
+publishing_year: "2000"

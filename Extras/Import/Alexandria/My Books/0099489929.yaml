@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Sergei Lukyanenko
+title: "The Night Watch"
+edition: "Paperback"
+isbn: "0099489929"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">All that stands between darkness and light is The Night Watch... The phenomenal Russian bestseller (over a million copies sold in hardcover). First of the Night Watch Trilogy, gloriously readable vampire novels set in a richly realised post-Soviet Moscow that have sold for huge advances accross Europe 20041130&nbsp;</span></p>
+  
+publisher: "Arrow Books Ltd"
+publishing_year: "2007"

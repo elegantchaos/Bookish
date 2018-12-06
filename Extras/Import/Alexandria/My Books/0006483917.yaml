@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - C. J. Cherryh
+title: "Fortress of Owls (A Galasien Novel)"
+edition: "Paperback"
+isbn: "0006483917"
+notes: |-
+  
+publisher: "Voyager"
+publishing_year: "2000"

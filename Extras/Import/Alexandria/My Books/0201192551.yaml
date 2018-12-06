@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Apple
+title: "Mac Family Hdware Ref"
+edition: ""
+isbn: "0201192551"
+notes: |-
+  
+publisher: "Addison Wesley Longman Publishing Co"
+publishing_year: "1988"

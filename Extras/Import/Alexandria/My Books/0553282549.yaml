@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Pat Cadigan
+title: "Synners (Spectra Special Editions)"
+edition: "Paperback"
+isbn: "0553282549"
+notes: |-
+  
+publisher: "Spectra"
+publishing_year: "1991"

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - James Lee Burke
+title: "The Tin Roof Blowdown"
+edition: "Hardback"
+isbn: "0752889168"
+notes: |-
+  
+publisher: "Orion"
+publishing_year: "2007"

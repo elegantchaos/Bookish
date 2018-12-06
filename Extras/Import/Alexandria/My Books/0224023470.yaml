@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Phillip Knightley Caroline Kennedy
+title: "An Affair of State"
+edition: "Hardback"
+isbn: "0224023470"
+notes: |-
+  
+publisher: "Jonathan Cape"
+publishing_year: "1987"

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Gary Gygax
+title: "Advanced Dungeons & Dragons Monster Manual"
+edition: "Paperback"
+isbn: "0880380314"
+notes: |-
+  
+publisher: "Wizards of the Coast, UK"
+publishing_year: "1983"

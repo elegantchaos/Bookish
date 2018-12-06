@@ -1,0 +1,15 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Val McDermid
+title: "The Distant Echo"
+edition: "Hardback"
+isbn: "000714282X"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">Val McDermid's <span style="font-style:italic;">The Distant Echo</span> is, even more so than with her previous work, a masterpiece of trickery and misdirection. In 1978, four male students find the body of Rosie Duff half-buried in the snow and their lives are variously damaged by the suspicion that falls on them when the murder is never solved; a quarter of a century later, the case is reopened and suddenly the quartet start to be killed one after the other.
+  
+  
+  
+  This is an effective thriller because it is so intelligent about the ways in which time changes things--secrets that seemed important become trivial and investigative techniques become ever more accurate. It is also intelligent about the ways in which things do not change--the friendships of the four men persist even when one becomes a fundamentalist preacher and another a post-modern literary theorist. Unusually for McDermid, this is a very Scots book as well--the investigating officers Maclennan and Lawson are very much men of a particular time and place. McDermid has a real sense of how to make forensic details count in a murder story--she also, more importantly, has a heart--this is a novel that makes us care passionately about victims and suspects alike. --<span style="font-style:italic;">Roz Kaveney&nbsp;</span></span></p>
+  
+publisher: "HarperCollins"
+publishing_year: "2003"

@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Christopher Brookmyre
+title: "Boiling a Frog"
+edition: "Paperback"
+isbn: "0349114137"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">In Christopher Brookmyre's first two thrillers, <span style="font-style:italic;">Quite Ugly One Morning</span> and<span style="font-style:italic;">Country of the Blind</span>, his investigative reporter hero Jack Parlabane was a partisan crusader against the sleaze and cronyism of the latter days of Conservative government. In the excellent new <span style="font-style:italic;">Boiling a Frog</span>, Jack finds himself far more confused in an era of spin, so confused, indeed, that he finds himself in jail for burgling the offices of the Catholic Church in Scotland. For once, we know far more than he does--that the outbreak of public morality that has followed a child-porn scandal is as spurious as the photographs which turned up on the hard discs of various senior Labour figures; the excitement here is in watching Parlabane follow his nose through a web of deceit and murder to the truth. By turns passionately analytical and uproariously bawdy, <span style="font-style:italic;">Boiling a Frog</span> works equally well as thriller and satire, a scathingly truthful caricature of the New Scotland. It also has a heart--Brookmyre is as good on the well-characterised plotters' consciences as he is on Parlabane's jail encounters with comically menacing thugs. <span style="font-style:italic;">--Roz Kaveney&nbsp;</span></span></p>
+  
+publisher: "Abacus"
+publishing_year: "2002"

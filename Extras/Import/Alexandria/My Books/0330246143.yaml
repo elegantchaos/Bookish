@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Sir Arthur Conan Doyle
+title: "Adventures of Sherlock Holmes"
+edition: "Paperback"
+isbn: "0330246143"
+notes: |-
+  
+publisher: "Macmillan Education Australia"
+publishing_year: "1976"

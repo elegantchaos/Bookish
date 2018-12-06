@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Margaret Atwood
+title: "The Handmaid's Tale (Contemporary Classics)"
+edition: "Paperback"
+isbn: "0099740915"
+notes: |-
+  
+publisher: "Vintage"
+publishing_year: "1996"

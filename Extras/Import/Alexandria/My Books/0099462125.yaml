@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Susan Hill
+title: "The Risk of Darkness"
+edition: "Paperback"
+isbn: "0099462125"
+notes: |-
+  
+publisher: "Vintage"
+publishing_year: "2007"

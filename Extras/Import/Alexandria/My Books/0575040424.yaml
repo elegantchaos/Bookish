@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - C. J. Cherryh
+title: "Hestia"
+edition: "Paperback"
+isbn: "0575040424"
+notes: |-
+  
+publisher: "Gollancz"
+publishing_year: "1988"

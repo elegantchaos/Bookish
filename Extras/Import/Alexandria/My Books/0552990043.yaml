@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - A A Attanasio
+title: "Radix"
+edition: "Paperback"
+isbn: "0552990043"
+notes: |-
+  
+publisher: "Corgi"
+publishing_year: "1982"

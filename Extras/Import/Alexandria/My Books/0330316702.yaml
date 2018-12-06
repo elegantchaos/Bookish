@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Larry Niven Steven Barnes
+title: "The Barsoom Project"
+edition: "Paperback"
+isbn: "0330316702"
+notes: |-
+  
+publisher: "Tor Books"
+publishing_year: "1991"

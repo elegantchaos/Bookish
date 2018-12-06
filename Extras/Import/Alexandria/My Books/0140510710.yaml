@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Valerie Pitt
+title: "The Penguin Dictionary of Physics (Penguin Reference Books)"
+edition: "Paperback"
+isbn: "0140510710"
+notes: |-
+  
+publisher: "Penguin Books Ltd"
+publishing_year: "1977"

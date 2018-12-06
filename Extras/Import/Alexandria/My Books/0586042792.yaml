@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Chris Boyce
+title: "Catchworld (Panther science fiction)"
+edition: "Paperback"
+isbn: "0586042792"
+notes: |-
+  
+publisher: "Panther"
+publishing_year: "1977"

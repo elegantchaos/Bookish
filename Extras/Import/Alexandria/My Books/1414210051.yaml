@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Thomas Carlyle
+title: "Sartor Resartus"
+edition: "Paperback"
+isbn: "1414210051"
+notes: |-
+  
+publisher: "Indypublish.com"
+publishing_year: "2003"

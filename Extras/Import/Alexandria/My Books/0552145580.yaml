@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - R. D. Wingfield
+title: "Night Frost"
+edition: "Paperback"
+isbn: "0552145580"
+notes: |-
+  
+publisher: "Corgi Adult"
+publishing_year: "1997"

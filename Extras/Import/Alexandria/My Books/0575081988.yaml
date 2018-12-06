@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Richard Matheson
+title: "I Am Legend (Film Tie-In) (Gollancz S.F.)"
+edition: "Paperback"
+isbn: "0575081988"
+notes: |-
+  
+publisher: "Gollancz"
+publishing_year: "2007"

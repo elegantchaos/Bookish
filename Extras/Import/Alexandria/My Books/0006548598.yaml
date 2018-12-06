@@ -1,0 +1,15 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Douglas Coupland
+title: "Microserfs"
+edition: "Paperback"
+isbn: "0006548598"
+notes: |-
+  <p><span style="font-style:italic;font-size:12pt;color:WindowText;">Microserfs<span style="font-style:normal;"> is not about Microsoft--it's about programmers who are searching for lives. A hilarious but frighteningly real look at geek life in the nineties, Coupland's book manifests a peculiar sense of how technology affects the human race and how it will continue to affect all of us. </span>Microserfs<span style="font-style:normal;"> is the hilarious journal of Dan, an ex-Microsoft programmer who, with his coder comrades, is on a quest to find purpose in life. This isn't just fodder for techies. The thoughts and fears of the not-so-stereotypical characters are easy for any of us to relate to, and their witty conversations and quirky view of the world make this a surprisingly thought-provoking book.
+  
+  
+  
+  "... just think about the way high-tech cultures purposefully protract out the adolescence of their employees well into their late 20s, if not their early 30s," muses one programmer. "I mean, all those Nerf toys and free beverages! And the way tech firms won't even call work 'the office,' but instead, 'the campus'. It's sick and evil." END&nbsp;</span></span></p>
+  
+publisher: "Flamingo"
+publishing_year: "1996"

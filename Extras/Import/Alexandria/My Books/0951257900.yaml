@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Peter J Cockerell
+title: "ARM Assembly Language Programming"
+edition: "Paperback"
+isbn: "0951257900"
+notes: |-
+  
+publisher: "MTC"
+publishing_year: "1987"

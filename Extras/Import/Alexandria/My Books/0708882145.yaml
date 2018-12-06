@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Chris Beebee
+title: "The Hub"
+edition: "Paperback"
+isbn: "0708882145"
+notes: |-
+  
+publisher: "Futura Orbit"
+publishing_year: "1988"

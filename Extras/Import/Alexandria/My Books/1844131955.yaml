@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Iain Banks
+title: "Raw Spirit"
+edition: "Hardback"
+isbn: "1844131955"
+notes: |-
+  
+publisher: "Century"
+publishing_year: "2003"

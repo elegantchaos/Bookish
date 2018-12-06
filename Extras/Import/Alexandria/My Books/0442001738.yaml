@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Lawrence Davis
+title: "Handbook of Genetic Algorithms"
+edition: "Hardback"
+isbn: "0442001738"
+notes: |-
+  
+publisher: "Van Nost. Reinhold"
+publishing_year: "1991"

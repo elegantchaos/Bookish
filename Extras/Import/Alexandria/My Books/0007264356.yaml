@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Warren St. John
+title: "Outcasts United"
+edition: "Hardback"
+isbn: "0007264356"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">The extraordinary story of a refugee football team and the transformation of a small American town.&nbsp;</span></p>
+  
+publisher: "Fourth Estate"
+publishing_year: "2009"

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Bruce Jones
+title: "Tarotown"
+edition: "Paperback"
+isbn: "0352311851"
+notes: |-
+  
+publisher: "Star Bks."
+publishing_year: "1982"

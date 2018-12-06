@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Paul Johnston
+title: "The House of Dust"
+edition: "Paperback"
+isbn: "0340766131"
+notes: |-
+  
+publisher: "New English Library"
+publishing_year: "2002"

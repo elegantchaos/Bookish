@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Ken MacLeod
+title: "The Stone Canal"
+edition: "Paperback"
+isbn: "0099559013"
+notes: |-
+  
+publisher: "Legend"
+publishing_year: "1997"

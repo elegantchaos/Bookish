@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - C. J. Cherryh
+title: "Rider at the Gate"
+edition: "Paperback"
+isbn: "0340638281"
+notes: |-
+  
+publisher: "New English Library"
+publishing_year: "1996"

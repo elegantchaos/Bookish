@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Oliver Chalmers
+title: "Observer's Book of Rocks and Minerals of Australia (Australian Observer's Pckt. S)"
+edition: "Hardback"
+isbn: "072321655X"
+notes: |-
+  
+publisher: "Warne"
+publishing_year: "1979"

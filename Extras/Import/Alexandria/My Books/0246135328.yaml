@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Katharine Kerr
+title: "Dawnspell"
+edition: "Paperback"
+isbn: "0246135328"
+notes: |-
+  
+publisher: "Grafton"
+publishing_year: "1989"

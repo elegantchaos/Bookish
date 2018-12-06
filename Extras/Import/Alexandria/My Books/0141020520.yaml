@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Marina Lewycka
+title: "A Short History of Tractors in Ukrainian"
+edition: "Paperback"
+isbn: "0141020520"
+notes: |-
+  
+publisher: "Penguin Books Ltd"
+publishing_year: "2006"

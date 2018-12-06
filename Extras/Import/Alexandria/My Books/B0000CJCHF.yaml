@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Claud Cockburn
+title: "In time of trouble"
+edition: "Hardback"
+isbn: "B0000CJCHF"
+notes: |-
+  
+publisher: "Hart-Davis"
+publishing_year: "1956"

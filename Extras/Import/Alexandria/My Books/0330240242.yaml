@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Arthur C Clarke
+title: "Rendezvous with Rama"
+edition: "Paperback"
+isbn: "0330240242"
+notes: |-
+  
+publisher: "Pan Bks."
+publishing_year: "1974"

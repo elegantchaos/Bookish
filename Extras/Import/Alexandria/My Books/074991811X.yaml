@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Stephen Russell
+title: "Barefoot Doctor's Handbook for the Urban Warrior"
+edition: "Paperback"
+isbn: "074991811X"
+notes: |-
+  
+publisher: "Piatkus Books"
+publishing_year: "1998"

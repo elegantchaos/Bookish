@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - F.M. Dostoevsky
+title: "Crime and Punishment (Wordsworth Classics)"
+edition: "Paperback"
+isbn: "1853262005"
+notes: |-
+  
+publisher: "Wordsworth Editions Ltd"
+publishing_year: "1994"

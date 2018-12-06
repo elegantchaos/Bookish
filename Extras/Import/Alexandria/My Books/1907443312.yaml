@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Marc Calhoun
+title: "Exploring the Isles of the West"
+edition: "Paperback"
+isbn: "1907443312"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">Marc Calhoun lives in Seattle in the Western United States, fully 5000 miles away from the Hebrides, but he has been fascinated by their landscape and history ever since seriously beginning to explore the western islands of Scotland over twenty years ago. Exploring the Isles of the West is a compilation of his years of exploring the islands, recounting not only the physical journeys but his own journey from tourist to serious explorer dedicated to seeing and learning as much as possible about the islands. A companion volume to Exploring the Isles of the West: Firth of Clyde to the Small Isles,this book describes visits to islands from Skye to St Kilda, the Flannans, and North Rona. It is not a guidebook. Instead, it offers the reader glimpses, through landscape and history, of islands seen at a moment in time. Marc shares with the reader how to experience the islands - by learning the landscape, by learning the history, and ultimately by learning to love a group of islands that are truly unique.&nbsp;</span></p>
+  
+publisher: "The Islands Book Trust"
+publishing_year: "2012"

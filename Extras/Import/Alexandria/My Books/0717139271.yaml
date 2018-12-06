@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Tim Severin
+title: "The Brendan Voyage"
+edition: "Paperback"
+isbn: "0717139271"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">Brendan Voyage&nbsp;</span></p>
+  
+publisher: "Gill & Macmillan Ltd"
+publishing_year: "2005"

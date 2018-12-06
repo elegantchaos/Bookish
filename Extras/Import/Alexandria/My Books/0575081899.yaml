@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Greg Bear
+title: "City at the End of Time"
+edition: "Paperback"
+isbn: "0575081899"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">Trade edition paperback, vg++ In stock shipped from our UK warehouse&nbsp;</span></p>
+  
+publisher: "Gollancz"
+publishing_year: "2008"

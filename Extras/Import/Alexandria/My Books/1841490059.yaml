@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Ian Irvine
+title: "The Tower on the Rift (View from the Mirror S.)"
+edition: "Paperback"
+isbn: "1841490059"
+notes: |-
+  
+publisher: "Orbit"
+publishing_year: "2000"

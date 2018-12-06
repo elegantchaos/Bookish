@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Val McDermid
+title: "The Mermaids Singing"
+edition: "Paperback"
+isbn: "0006493580"
+notes: |-
+  
+publisher: "HarperCollins Publishers Ltd"
+publishing_year: "1999"

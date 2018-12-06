@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - n/a
+title: "Sweet Life"
+edition: "Paperback"
+isbn: "1573441333"
+notes: |-
+  
+publisher: "Cleis Press"
+publishing_year: "2001"

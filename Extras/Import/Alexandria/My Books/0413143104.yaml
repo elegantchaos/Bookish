@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - C. J. Cherryh
+title: "The Faded Sun Trilogy"
+edition: "Paperback"
+isbn: "0413143104"
+notes: |-
+  
+publisher: "Mandarin"
+publishing_year: "1987"

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Martin Rees Ian Ridpath
+title: "Collins Encyclopedia of the Universe"
+edition: "Hardback"
+isbn: "0007105851"
+notes: |-
+  
+publisher: "Collins"
+publishing_year: "2001"

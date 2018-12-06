@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Kent Beck
+title: "Test Driven Development (The Addison-Wesley Signature Series)"
+edition: "Paperback"
+isbn: "0321146530"
+notes: |-
+  
+publisher: "Addison Wesley"
+publishing_year: "2002"

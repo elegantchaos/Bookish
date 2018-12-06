@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Linwood Barclay
+title: "No Time For Goodbye"
+edition: "Paperback"
+isbn: "0752893688"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">Orion Books Edition.&nbsp;</span></p>
+  
+publisher: "Orion"
+publishing_year: "2008"

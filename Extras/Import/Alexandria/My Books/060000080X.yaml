@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Christine Metcalf
+title: "Cats"
+edition: "Paperback"
+isbn: "060000080X"
+notes: |-
+  
+publisher: "Hamlyn"
+publishing_year: "1969"

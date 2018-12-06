@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - M. Jakubowski
+title: "The Mammoth Book of Best New Erotica"
+edition: "Paperback"
+isbn: "1845290755"
+notes: |-
+  
+publisher: "Constable and Robinson"
+publishing_year: "2005"

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Christopher Brookmyre
+title: "Quite Ugly One Morning"
+edition: "Paperback"
+isbn: "0349108854"
+notes: |-
+  
+publisher: "Abacus"
+publishing_year: "1998"

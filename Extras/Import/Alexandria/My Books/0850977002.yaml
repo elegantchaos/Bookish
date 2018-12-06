@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - James Breithaupt
+title: "A Level Physics Course Companion"
+edition: "Paperback"
+isbn: "0850977002"
+notes: |-
+  
+publisher: "Charles Letts"
+publishing_year: "1985"

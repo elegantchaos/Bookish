@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Alexander Solzhenitsyn Michael Glenny
+title: "August 1914"
+edition: "Paperback"
+isbn: "014003739X"
+notes: |-
+  
+publisher: "Penguin Books Ltd"
+publishing_year: "1974"

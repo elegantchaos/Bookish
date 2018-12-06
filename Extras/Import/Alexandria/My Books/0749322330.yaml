@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Adrian Edmondson
+title: "The Gobbler"
+edition: "Paperback"
+isbn: "0749322330"
+notes: |-
+  
+publisher: "Mandarin"
+publishing_year: "1996"

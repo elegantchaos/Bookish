@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Ernest Hemingway
+title: "The Short Happy Life of Francis Macomber and Other Stories (Modern Classics S.)"
+edition: "Paperback"
+isbn: "0140019820"
+notes: |-
+  
+publisher: "Penguin Books Ltd"
+publishing_year: "1970"

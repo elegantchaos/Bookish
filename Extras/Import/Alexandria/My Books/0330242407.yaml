@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Rudyard Kipling J. Lockwood Kipling W. H. Drake
+title: "The Jungle Book (Piccolo Books)"
+edition: "Paperback"
+isbn: "0330242407"
+notes: |-
+  
+publisher: "Macmillan Children's Books"
+publishing_year: "1986"

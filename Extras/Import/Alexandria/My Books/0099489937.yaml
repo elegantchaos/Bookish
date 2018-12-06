@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Sergei Lukyanenko Vladimir Vasiliev
+title: "The Day Watch"
+edition: "Paperback"
+isbn: "0099489937"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">The second installment of the phenomenal Night Watch trilogy; vampire novels set in a richly realised post-Soviet Moscow. Reminiscent of Philip Pullman's His Dark Materials in its ambitions and achievement, it has sold for huge advances all over Europe.&nbsp;</span></p>
+  
+publisher: "Arrow Books Ltd"
+publishing_year: "2008"

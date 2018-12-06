@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - John Sladek
+title: "Reproductive System"
+edition: "Paperback"
+isbn: "0586042873"
+notes: |-
+  
+publisher: "Panther"
+publishing_year: "1977"

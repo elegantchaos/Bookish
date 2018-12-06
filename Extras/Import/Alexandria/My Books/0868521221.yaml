@@ -1,0 +1,9 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Jane Austen
+title: "Northanger Abbey"
+edition: "Paperback"
+isbn: "0868521221"
+notes: |-
+  
+publisher: "Ad Donker Publishers"

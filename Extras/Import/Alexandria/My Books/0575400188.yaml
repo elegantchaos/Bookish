@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Nick Hornby
+title: "High Fidelity"
+edition: "Paperback"
+isbn: "0575400188"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">It has been said often enough that baby boomers are a television generation, but <span style="font-style:italic;">High Fidelity</span> reminds that in a way they are the record-album generation as well. This hilarious novel is obsessed with music; Hornby's narrator is an early thirtysomething bloke who runs a London record store. He sells albums recorded the old-fashioned way--on vinyl--and is having a tough time making other transitions as well, specifically to adulthood. The book is in one sense a love story, both sweet and interesting; most entertaining, though, are the hilarious arguments over arcane matters of pop music. --<span style="font-style:italic;">Christine Buttery&nbsp;</span></span></p>
+  
+publisher: "Indigo"
+publishing_year: "1996"

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - A. E. Van Vogt
+title: "The Empire of Isher"
+edition: "Paperback"
+isbn: "0312875002"
+notes: |-
+  
+publisher: "Orb Books"
+publishing_year: "2000"

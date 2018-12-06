@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Jerry Pournelle
+title: "Mercenary, The"
+edition: "Paperback"
+isbn: "0860079724"
+notes: |-
+  
+publisher: "Futura Pubns."
+publishing_year: "1977"

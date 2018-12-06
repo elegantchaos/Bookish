@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Julian May
+title: "The Many-coloured Land (The Saga of the Exiles)"
+edition: "Paperback"
+isbn: "033026656X"
+notes: |-
+  
+publisher: "Tor Books"
+publishing_year: "1982"

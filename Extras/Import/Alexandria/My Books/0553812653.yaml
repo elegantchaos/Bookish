@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Mo Hayder
+title: "Birdman"
+edition: "Paperback"
+isbn: "0553812653"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">This crackling psychological thriller introduces police detective Jack Caffery, on the hunt for a serial killer nicknamed "The Millennium Ripper" by the British tabloids after the bodies of five prostitutes are unearthed beneath the rubble of a Greenwich landfill. All the victims were raped and their bodies horrendously mutilated--but not until after they were killed by a dose of heroin injected directly into the brain stem. What stuns Caffery even more than the post-mortem savagery is the one detail of the murders the public doesn't know; the hearts of the women were replaced with birds that were still alive when they were sewn into the victims' chests. Caffery himself is a tortured man, still burdened by guilt over the decades- old murder of his younger brother and frustrated because he cannot bring the man he knows to have been responsible to the bar of justice. When the Millennium Ripper confesses to the prostitute killings just before taking his own life, Caffery faces his own limitations and begins to make peace with his past. But then another prostitute is found dead, her body savaged in the same way, a bird where her heart was, and Caffery realises that his past may never truly be put to rest. A solid page turner, this gripping debut by a young Englishwoman introduces a complex and fascinating protagonist destined for another appearance. Meanwhile, <span style="font-style:italic;">Birdman</span> will enthral readers who just can't get enough of Hannibal Lechter. -- <span style="font-style:italic;">Patrick O'Kelley&nbsp;</span></span></p>
+  
+publisher: "Bantam Books (Transworld Publishers a division of the Random House Group)"
+publishing_year: "2001"

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Jonathan Coe
+title: "The Dwarves of Death"
+edition: "Paperback"
+isbn: "0140294929"
+notes: |-
+  
+publisher: "Penguin Books Ltd"
+publishing_year: "2004"

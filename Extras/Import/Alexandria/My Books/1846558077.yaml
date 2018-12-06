@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Henning Mankell
+title: "An Event in Autumn"
+edition: "Hardback"
+isbn: "1846558077"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">Event in Autumn&nbsp;</span></p>
+  
+publisher: "Harvill Secker"
+publishing_year: "2014"

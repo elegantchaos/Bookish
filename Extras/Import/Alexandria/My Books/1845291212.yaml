@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Maxim Jakubowski
+title: "The Mammoth Book of Erotic On-line Diaries"
+edition: "Paperback"
+isbn: "1845291212"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">'Candid accounts of their most private lives by ordinary and extraordinary people, straight from the hottest blogs on the internet.'&nbsp;</span></p>
+  
+publisher: "Robinson Publishing"
+publishing_year: "2005"

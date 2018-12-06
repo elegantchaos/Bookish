@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Anne Civardi
+title: "Detective's Handbook (Spy & Detective Guides)"
+edition: "Paperback"
+isbn: "086020278X"
+notes: |-
+  
+publisher: "Usborne Publishing Ltd"
+publishing_year: "1995"

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Mark Billingham
+title: "Lifeless"
+edition: "Paperback"
+isbn: "0751536164"
+notes: |-
+  
+publisher: "Sphere"
+publishing_year: "2006"

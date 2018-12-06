@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Mario Puzo
+title: "The Last Don"
+edition: "Hardback"
+isbn: "0434604984"
+notes: |-
+  
+publisher: "William Heinemann"
+publishing_year: "1996"

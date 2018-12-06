@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Geoffrey Willans Geoffrey Willians Ronald Searle
+title: "Whizz for Atomms"
+edition: "Paperback"
+isbn: "185145960X"
+notes: |-
+  
+publisher: "Chrysalis Children's Books"
+publishing_year: "1992"

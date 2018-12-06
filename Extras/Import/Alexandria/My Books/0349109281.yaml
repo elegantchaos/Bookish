@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Christopher Brookmyre
+title: "Not the End of the World"
+edition: "Paperback"
+isbn: "0349109281"
+notes: |-
+  
+publisher: "Abacus"
+publishing_year: "1999"

@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Ken MacLeod
+title: "Intrusion"
+edition: "Hardback"
+isbn: "1841499390"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">Hardcover Pages Number: 320 Language: English. Publisher: of Orbit. March 1 (2012) The childhood. the new novel from the award-winning author of THE EXECUTION CHANNEL and THE of NIGHT the SESSIONS&nbsp;</span></p>
+  
+publisher: "Orbit"
+publishing_year: "2012"

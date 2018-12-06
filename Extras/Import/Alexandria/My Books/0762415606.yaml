@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Carol Queen
+title: "Five Minute Erotica"
+edition: "Paperback"
+isbn: "0762415606"
+notes: |-
+  
+publisher: "Running Press"
+publishing_year: "2003"

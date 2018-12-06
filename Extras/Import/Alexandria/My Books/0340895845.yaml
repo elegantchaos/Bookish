@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Kathryn Fox
+title: "Malicious Intent"
+edition: "Paperback"
+isbn: "0340895845"
+notes: |-
+  
+publisher: "Hodder & Stoughton Paperbacks"
+publishing_year: "2005"

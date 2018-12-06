@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Pat Cadigan
+title: "Fools"
+edition: "Paperback"
+isbn: "0586218416"
+notes: |-
+  
+publisher: "Collins"
+publishing_year: "1994"

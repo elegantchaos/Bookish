@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Joe Celko
+title: "Joe Celko's SQL Puzzles and Answers"
+edition: "Paperback"
+isbn: "1558604537"
+notes: |-
+  
+publisher: "Morgan Kaufmann"
+publishing_year: "1997"

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Andrew M. Greeley
+title: "God Game"
+edition: "Paperback"
+isbn: "0812583361"
+notes: |-
+  
+publisher: "Tor Books"
+publishing_year: "1987"

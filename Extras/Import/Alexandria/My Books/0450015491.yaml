@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Isaac Asimov
+title: "Pirates of the Asteroids"
+edition: "Paperback"
+isbn: "0450015491"
+notes: |-
+  
+publisher: "New Eng. Lib."
+publishing_year: "1973"

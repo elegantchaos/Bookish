@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Brian W Aldiss
+title: "Frankenstein Unbound"
+edition: "Paperback"
+isbn: "0586054340"
+notes: |-
+  
+publisher: "Granada"
+publishing_year: "1982"

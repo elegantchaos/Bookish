@@ -1,0 +1,27 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Jessica Hekman
+title: "Linux in a Nutshell"
+edition: "Paperback"
+isbn: "1565921674"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">Linux has command line utilities, boy does it have them. <span style="font-style:italic;">Linux In A Nutshell</span> lists around 200 basic utilities beginners should find immediately useful in the first few pages. This is a little odd as it really isn't a book aimed at beginners. Rather, it is for the competent or even expert Linux user. The sad truth is no one has a brain large enough to keep all these commands and utilities instantly available, hence the need for quick references.
+  
+  
+  
+  Around half the book is devoted to command line utilities: what they do, how to invoke them and the various options they take. Naturally, it is the options causing problems. While -c says to send stuff to the standard output in some utilities, in others it doesn't. For example it tells mke2fs to scan a device for bad blocks. It also covers boot issues, various shells, emacs, vi, sed, gawk and pattern matching. CVS and RCS for version control get good coverage. Gnome and KDE get a short chapter each and oddly, so does fvwm2. Some of these choices seem arbitrary. For Perl you are referred elsewhere, PHP isn't mentioned and neither is python.
+  
+  
+  
+  In practice, the Linux man pages usually provide more information. Many of the book entries provide no more information than you would get from the usage instructions provided by the -h (or --help) option or by entering a nonsense option. The other complaint is inconsistency. Some of the commands have a usage example but most don't.
+  
+  
+  
+  The problem with <span style="font-style:italic;">Linux In A Nutshell</span> is that if you are actually at your desk using Linux, it is quicker to reference the system itself for the information but the book is rather too large to carry around to reference when you might need it (though why do you need it if you aren't using Linux at the time? Pub quizzes perhaps?).
+  
+  
+  
+  Given that Linux commands comes with usage instructions, man pages and info pages as well as often having extra documentation, how-tos and source code--all for the versions you're using--it is hard to see quite what purpose its authors intended this book to serve. --<span style="font-style:italic;">Steve Patient&nbsp;</span></span></p>
+  
+publisher: "O'Reilly UK"
+publishing_year: "1996"

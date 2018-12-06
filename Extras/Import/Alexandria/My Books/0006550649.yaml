@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - J.G. Ballard
+title: "Cocaine Nights"
+edition: "Paperback"
+isbn: "0006550649"
+notes: |-
+  
+publisher: "Flamingo"
+publishing_year: "1997"

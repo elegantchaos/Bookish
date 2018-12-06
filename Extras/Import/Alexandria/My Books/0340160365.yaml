@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - John Creasey
+title: "Send Inspector West"
+edition: "Paperback"
+isbn: "0340160365"
+notes: |-
+  
+publisher: "Coronet Books"
+publishing_year: "1974"

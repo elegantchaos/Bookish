@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - David Flannagan
+title: "Java in a Nutshell"
+edition: "Paperback"
+isbn: "1565921836"
+notes: |-
+  
+publisher: "O'Reilly UK"
+publishing_year: "1996"

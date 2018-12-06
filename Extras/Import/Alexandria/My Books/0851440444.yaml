@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - n/a
+title: "\"Evening News\" Book of Crossword Puzzles"
+edition: "Paperback"
+isbn: "0851440444"
+notes: |-
+  
+publisher: "Assoc. Newsprs."
+publishing_year: "1971"

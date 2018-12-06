@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Arthur C Clarke
+title: "Expedition to Earth (Sphere science fiction)"
+edition: "Paperback"
+isbn: "0722124236"
+notes: |-
+  
+publisher: "Sphere"
+publishing_year: "1973"

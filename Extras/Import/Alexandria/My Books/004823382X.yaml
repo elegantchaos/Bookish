@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Louise Cooper
+title: "Mirage"
+edition: "Paperback"
+isbn: "004823382X"
+notes: |-
+  
+publisher: "HarperCollins"
+publishing_year: "1987"

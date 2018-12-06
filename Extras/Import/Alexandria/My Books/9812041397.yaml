@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Chia Siew Pang Goh Ewe Hock
+title: "T'ai Chi"
+edition: "Paperback"
+isbn: "9812041397"
+notes: |-
+  
+publisher: "Times Editions"
+publishing_year: "1991"

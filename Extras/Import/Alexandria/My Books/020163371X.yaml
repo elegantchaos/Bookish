@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Scott Meyers
+title: "More Effective C++"
+edition: "Paperback"
+isbn: "020163371X"
+notes: |-
+  
+publisher: "Addison Wesley"
+publishing_year: "1996"

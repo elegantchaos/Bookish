@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - R.A. MacAvoy
+title: "Damiano"
+edition: "Paperback"
+isbn: "0553171542"
+notes: |-
+  
+publisher: "Bantam"
+publishing_year: "1985"

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Richard Morgan
+title: "Black Man (Gollancz S.F.)"
+edition: "Paperback"
+isbn: "0575078138"
+notes: |-
+  
+publisher: "Gollancz"
+publishing_year: "2007"

@@ -1,0 +1,19 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Bjarn Stroustrup
+title: "The C++ Programming Language"
+edition: "Paperback"
+isbn: "0201539926"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">In this third edition of <span style="font-style:italic;">The C++ Programming Language</span>, author Bjarne Stroustrup, the creator of C++, presents the full specification for the C++ language and standard library, a spec that will soon become the joint ISO/ANSI C++ standard.
+  
+  
+  
+  Past readers will find that the new edition has changed a great deal and grown considerably to encompass new language features, particularly run-time type identification, namespaces, and the standard library. At the same time, readers will recognise the lucid style and sensible advice that made previous editions so readable and enjoyable. Probably the biggest change is a substantial new section, well over 200 pages in length, covering the contents and design of the C++ standard library, the most important new feature of the C++ specification. The author has also added a substantial number of new exercises while keeping many from previous editions that have retained their value.
+  
+  
+  
+  While <span style="font-style:italic;">The C++ Programming Language</span> is not a C++ tutorial, strictly speaking, anyone learning the language, especially those coming from C, will greatly benefit from the clear presentation of all its elements. It is impossible to overstate the importance of this book for anyone who is serious about using C++. --<span style="font-style:italic;">Jake Bond&nbsp;</span></span></p>
+  
+publisher: "Addison Wesley"
+publishing_year: "1991"

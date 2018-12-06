@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Somtow Suchartikul  Somtow Sucharitkul
+title: "Utopia Hunters"
+edition: "Paperback"
+isbn: "0553245260"
+notes: |-
+  
+publisher: "Bantam Books"
+publishing_year: "1984"

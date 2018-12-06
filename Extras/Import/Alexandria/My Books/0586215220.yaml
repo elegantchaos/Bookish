@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Guy Gavriel Kay
+title: "The Summer Tree (The Fionavar Tapestry)"
+edition: "Paperback"
+isbn: "0586215220"
+notes: |-
+  
+publisher: "Voyager"
+publishing_year: "1992"

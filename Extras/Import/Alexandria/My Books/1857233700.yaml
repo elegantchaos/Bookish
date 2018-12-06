@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - David Brin
+title: "Sundiver"
+edition: "Paperback"
+isbn: "1857233700"
+notes: |-
+  
+publisher: "Orbit"
+publishing_year: "1996"

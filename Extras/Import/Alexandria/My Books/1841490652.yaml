@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Juliet E. McKenna
+title: "The Warriors Bond (Einarinn)"
+edition: "Paperback"
+isbn: "1841490652"
+notes: |-
+  
+publisher: "Orbit"
+publishing_year: "2001"

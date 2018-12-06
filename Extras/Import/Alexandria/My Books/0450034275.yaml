@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Frank Herbert
+title: "Children of Dune"
+edition: "Paperback"
+isbn: "0450034275"
+notes: |-
+  
+publisher: "New English Library"
+publishing_year: "2002"

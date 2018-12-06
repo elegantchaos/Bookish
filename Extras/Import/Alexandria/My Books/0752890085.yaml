@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - George R.R. Martin
+title: "Dreamsongs I"
+edition: "Paperback"
+isbn: "0752890085"
+notes: |-
+  
+publisher: "Gollancz"
+publishing_year: "2008"

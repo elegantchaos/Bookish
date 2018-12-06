@@ -1,0 +1,31 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Iain M. Banks
+title: "The Hydrogen Sonata"
+edition: "Hardback"
+isbn: "0356501507"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">The Hydrogen Sonata
+  
+  Author: Iain. M. Banks
+  
+  Hardback
+  
+  
+  
+  A Culture Novel.
+  
+  
+  
+  An ancient people, organized on military principles and yet almost perversely peaceful, the Gzilt helped set up the Culture ten thousand years earlier and were very nearly one of its founding societies, deciding not to join only at the last moment. Now they've made the collective decision to follow the well-trodden path of millions of other civilizations; they are going to Sublime, elevating themselves to a new and almost infinitely more rich and complex existence.
+  
+  The Scavenger species are circling. It is, truly, the End Days for the Gzilt civilization.
+  
+  
+  
+  Publishers: Orbit
+  
+  ISBN: 9780356501505&nbsp;</span></p>
+  
+publisher: "Orbit"
+publishing_year: "2012"

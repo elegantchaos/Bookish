@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Chimo
+title: "Lila Says"
+edition: "Paperback"
+isbn: "1857025652"
+notes: |-
+  
+publisher: "Fourth Estate"
+publishing_year: "1998"

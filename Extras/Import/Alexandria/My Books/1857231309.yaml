@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - William James
+title: "Before the Sun Falls (Sunfall Trilogy)"
+edition: "Paperback"
+isbn: "1857231309"
+notes: |-
+  
+publisher: "Orbit"
+publishing_year: "1993"

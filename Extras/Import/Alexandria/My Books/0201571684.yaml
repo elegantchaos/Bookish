@@ -1,0 +1,15 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Grady Booch Ivar Jacobson James Rumbaugh
+title: "Unified Modeling Language User Guide (Object Technology S.)"
+edition: "Hardback"
+isbn: "0201571684"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">One of the most important recent developments in software engineering is the Unified Modelling Language (UML) standard for documenting software designs. Written by UML's inventors (the so-called Three Amigos of software engineering), <span style="font-style:italic;">The Unified Modelling Language User Guide</span> provides a very appealing guide to all the fundamentals of using UML effectively. The book opens with a basic tour of the essential concepts and modelling diagrams used in UML, including class diagrams, use case diagrams and basic modelling principles. The authors pay close attention to modelling classes (and documenting the relationships between classes) as well as use case diagrams (which show how software will be used by various actors in a system). This book mixes in a little software engineering theory, too, but it makes use of clear examples and actual UML diagrams to illustrate key concepts.
+  
+  
+  
+  Later in the book, the authors discuss more difficult notational diagrams (such as state diagrams and activity diagrams, which can be used to model behaviour in a system). Whatever your background in software engineering, you'll no doubt appreciate the author's clear explanations of basic (and advanced) modelling concepts, as well as the nuts-and-bolts details of today's powerful UML. With its combination of expert modelling advice and excellent detail on the specifics of UML, this book will be absolutely essential reading for anyone who wants to use UML for real- world software design. --<span style="font-style:italic;">Richard Dragan, Amazon.com&nbsp;</span></span></p>
+  
+publisher: "Addison Wesley"
+publishing_year: "1998"

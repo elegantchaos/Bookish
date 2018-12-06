@@ -1,0 +1,19 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - John Scalzi
+title: "The Last Colony"
+edition: ""
+isbn: "B004E9T0HW"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">John Perry has at last found peace in a violent universe, living quietly with his family in one of humanity�s many colonies. It�s a good life, yet there�s something . . . missing. When John and his wife Jane are asked to lead a new colony world, he jumps at the chance to explore the universe once more.
+  
+  
+  
+  But they soon find out that nothing is what it seems, for his new colony are merely pawns in an interstellar game of war and diplomacy between humanity�s Colonial Union and a new, seemingly unstoppable alien alliance that is dedicated to ending all human colonization.
+  
+  
+  
+  As this contest rages above, Perry struggles to keep his terrified colonists alive in the face of threats both alien and familiar, on a planet yet to reveal its own fatal secrets.&nbsp;</span></p>
+  
+publisher: "Tor"
+publishing_year: "2010"

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Isaac Asimov Martin H. Greenberg
+title: "The Asimov Chronicles"
+edition: "Hardback"
+isbn: "0712646906"
+notes: |-
+  
+publisher: "Legend"
+publishing_year: "1991"

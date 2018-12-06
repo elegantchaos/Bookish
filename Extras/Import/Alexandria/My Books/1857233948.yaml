@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Iain M. Banks
+title: "Excession"
+edition: "Hardback"
+isbn: "1857233948"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">It's not easy to disturb a mega-utopia as vast as the one Iain M. Banks has created in his popular Culture series, where life is devoted to fun and ultra-high-tech is <span style="font-style:italic;">de rigueur</span>. But more than two millennia ago the appearance--and disappearance--of a star older than the universe caused quite a stir. Now the mystery is back, and the key to solving it lies in the mind of the person who witnessed the first disturbance 2,500 years ago. But she's dead, and getting her to cooperate may not be altogether easy.&nbsp;</span></p>
+  
+publisher: "Orbit"
+publishing_year: "1996"

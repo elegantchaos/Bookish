@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Gary Gygax D.A. Trampier C. Sutherland
+title: "Advanced Dungeons & Dragons Players Handbook"
+edition: "Hardback"
+isbn: "0935696016"
+notes: |-
+  
+publisher: "Wizards of the Coast, UK"
+publishing_year: "1980"

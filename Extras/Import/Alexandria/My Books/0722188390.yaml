@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - John Varley
+title: "Millennium"
+edition: "Paperback"
+isbn: "0722188390"
+notes: |-
+  
+publisher: "Sphere Books"
+publishing_year: "1985"

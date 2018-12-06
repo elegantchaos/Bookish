@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Damon Knight
+title: "Other Foot"
+edition: "Hardback"
+isbn: "0080070434"
+notes: |-
+  
+publisher: "Elsevier"
+publishing_year: "1966"

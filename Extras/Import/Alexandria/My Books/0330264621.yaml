@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Robert Silverberg
+title: "Lord Valentine's Castle (Pan Fantasy)"
+edition: "Paperback"
+isbn: "0330264621"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">Valentine, a wanderer who knows nothing except his name, finds himself on the fringes of a great city, and joins a troupe of jugglers and acrobats; gradually, he remembers that he is the Coronal Valentine, executive ruler of the vast world of Majipoor, and all its peoples, human and otherwise... <span style="font-style:italic;">Lord Valentine's Castle</span> was the first of Robert Silverberg's novels about Majipoor, in which he has for two decades explored the question of responsibility and authority; much SF and fantasy plays with constructed dreams of feudalism, but Silverberg asks the important questions of how a ruler can be a good person, and how can the person who rules all be free themselves. Inventively, Valentine's learned skills as a juggler become a fruitful metaphor for much of what he needs to know as he campaigns to reclaim his throne from a usurping imposter: Silverberg explores the implications of what might have been a mere narrative clich�. His portrayal of a huge light world where technology and magic have blended, and where different species and cultures have engineered a diverse harmony, is not the least attractive of SF's utopias; the sheer scale of the canvas gives Valentine's wanderings their own wild poetry. --<span style="font-style:italic;">Roz Kaveney&nbsp;</span></span></p>
+  
+publisher: "Tor Books"
+publishing_year: "1981"

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Andre Norton
+title: "Moon Called"
+edition: "Paperback"
+isbn: "0812515331"
+notes: |-
+  
+publisher: "Tor Books"
+publishing_year: "1991"

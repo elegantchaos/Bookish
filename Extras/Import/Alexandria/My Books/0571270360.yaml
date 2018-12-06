@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Julian Cope
+title: "One Three One"
+edition: "Paperback"
+isbn: "0571270360"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">"Welcome to Sardinia: my hell, my home, my prison, my meditation these past sixteen years. What a place to die. But that's precisely why I was back." When drugged-up Time Traveller and '80s musical burnout Rock Section and his fellow English hooligans get kidnapped during Italia '90, there are ruinous implications. But now Rock has returned to Sardinia one final time to settle some scores and uncover the truth. He believes only Dutch cult leader Judge Barry Hertzog, still incarcerated on the island for the crime, can provide the answers. But through prescription drugs, the persistence of his driver Anna and a quest for the hidden ancient doorways strewn around Sardinia's only highway, the 131, Rock will discover that a greater truth awaits him. Judgement, consequences, hoodwinking on a grand scale, Gnosticism versus agnosticism...131 is a Gnostic whodunit that pursues readers' memories of all previous fiction into a peat bog and impales them with seven-foot-long pikes.&nbsp;</span></p>
+  
+publisher: "Faber & Faber"
+publishing_year: "2014"

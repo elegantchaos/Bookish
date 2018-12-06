@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Alec Guinness John Le Carre
+title: "My Name Escapes Me"
+edition: "Paperback"
+isbn: "0140257233"
+notes: |-
+  
+publisher: "Penguin Books Ltd"
+publishing_year: "1997"

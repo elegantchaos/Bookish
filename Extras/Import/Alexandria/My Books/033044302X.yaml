@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Peter F. Hamilton
+title: "The Dreaming Void"
+edition: "Paperback"
+isbn: "033044302X"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">AD 3580. The Intersolar Commonwealth has spread through the galaxy to over a thousand star systems. It is a culture of rich diversity with a place for everyone. A powerful navy protects it from any hostile species that may lurk among the stars. For Commonwealth citizens, even death has been overcome. At its centre is a massive black hole. This Void is not a natural artefact. Inside there is a strange universe where the laws of physics are very different to those we know. It is slowly consuming the other stars of the galactic core - one day it will have devoured the entire galaxy. Inigo, a human, has started to dream of a wonderful existence of the Void. He has a following of millions of believers. They now clamour to make a pilgrimage into the Void to live the life they have been shown. Other starfaring species fear their migration will cause the Void to expand again. They are prepared to stop them no matter what the cost. And so the pilgrimage begins...&nbsp;</span></p>
+  
+publisher: "Pan Books"
+publishing_year: "2008"

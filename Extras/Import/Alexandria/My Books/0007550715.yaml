@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Jeff VanderMeer
+title: "Annihilation"
+edition: "Hardback"
+isbn: "0007550715"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">Annihilation&nbsp;</span></p>
+  
+publisher: "Fourth Estate"
+publishing_year: "2014"

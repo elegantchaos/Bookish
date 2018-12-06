@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Elizabeth Moon
+title: "Speed of Dark"
+edition: "Paperback"
+isbn: "1841491411"
+notes: |-
+  
+publisher: "Orbit"
+publishing_year: "2002"

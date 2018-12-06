@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Michael J.C. Gordon
+title: "Programming Language Theory and Its Implementation (PHI Series in Computer Science)"
+edition: "Paperback"
+isbn: "0137304099"
+notes: |-
+  
+publisher: "Prentice Hall"
+publishing_year: "1988"

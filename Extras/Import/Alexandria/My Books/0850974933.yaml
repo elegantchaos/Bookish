@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Brian Peter Brindle
+title: "Physics (Key Facts S)"
+edition: "Paperback"
+isbn: "0850974933"
+notes: |-
+  
+publisher: "C Letts"
+publishing_year: "1982"

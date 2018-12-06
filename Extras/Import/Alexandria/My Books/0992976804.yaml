@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Helen Forbes
+title: "In The Shadow Of The Hill"
+edition: "Paperback"
+isbn: "0992976804"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">A crime thriller set in the Highlands of Scotland and the Isle of Harris. An old woman is murdered in Inverness and the investigation leads back to the Isle of Harris, where the investigating officer finds his own family history is intertwined with that of the old woman, who is not as blameless as she first appears.&nbsp;</span></p>
+  
+publisher: "ThunderPoint Publishing Limted"
+publishing_year: "2014"

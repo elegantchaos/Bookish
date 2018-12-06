@@ -1,0 +1,19 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Scott Adams
+title: "The Dilbert Principle"
+edition: "Paperback"
+isbn: "0752224700"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">You loved the comic strip; now read the business advice. Or should that be anti-business advice? Scott Adams provides the hapless victim of re-engineering, rightsizing and Total Quality Management some strategies for fighting back, er, coping. Forced to work long hours, with no hope of a raise? Adams offers tips on maintaining parity in compensation. Along the way, Adams explains what ISO 9000 really is and assesses the irresistibility of female engineers.
+  
+  
+  
+  The breath-taking cynicism of the strip should prepare readers for the author's no-holds-barred attack on management fads, large organizations, pointless bureaucracy and sadistic rule-makers who glory in control of office supplies. Readers of the on-line Dilbert Newsletter are familiar with the kind of e-mail Adams receives from his readers--and may even have sent a few of those missives themselves. Along with illustrative strips, e-mail messages provide excruciating examples of corporate behavior which compel the reader to agree with Adams when he insists that "People are idiots".
+  
+  
+  
+  The final chapter offers a model for would-be successful businesses to follow: the OA5 model. It's introduced with little fanfare, no outrageous promises and just the right amount of self-deprecation.&nbsp;</span></p>
+  
+publisher: "Boxtree"
+publishing_year: "1997"

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - DBC Pierre
+title: "Ludmila's Broken English"
+edition: "Paperback"
+isbn: "0571230954"
+notes: |-
+  
+publisher: "Faber and Faber"
+publishing_year: "2006"

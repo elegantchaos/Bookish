@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Thomas Keneally
+title: "Schindler's List"
+edition: "Paperback"
+isbn: "0340606517"
+notes: |-
+  
+publisher: "Hodder & Stoughton Ltd"
+publishing_year: "1994"

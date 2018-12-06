@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Poul Anderson
+title: "The Earth Book of Stormgate - 1"
+edition: "Paperback"
+isbn: "0450047962"
+notes: |-
+  
+publisher: "New English Library"
+publishing_year: "1980"

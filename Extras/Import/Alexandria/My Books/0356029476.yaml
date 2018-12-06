@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Ursula K Le Guin
+title: "Left Hand of Darkness"
+edition: "Hardback"
+isbn: "0356029476"
+notes: |-
+  
+publisher: "Macdonald"
+publishing_year: "1969"

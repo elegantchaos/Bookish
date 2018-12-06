@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Tricia Sullivan
+title: "Lethe"
+edition: "Paperback"
+isbn: "057560039X"
+notes: |-
+  
+publisher: "Gollancz"
+publishing_year: "1996"

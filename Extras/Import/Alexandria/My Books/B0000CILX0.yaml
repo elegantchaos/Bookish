@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Eugene F Linssen
+title: "The observer's book of common British insects and spiders (Observer's pocket series)"
+edition: ""
+isbn: "B0000CILX0"
+notes: |-
+  
+publisher: "Warne"
+publishing_year: "1953"

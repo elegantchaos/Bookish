@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - James White
+title: "Tomorrow is Too Far"
+edition: "Paperback"
+isbn: "0552091340"
+notes: |-
+  
+publisher: "Corgi"
+publishing_year: "1973"

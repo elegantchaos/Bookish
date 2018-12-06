@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Charles Dickens
+title: "A Tale of Two Cities (Penguin Popular Classics)"
+edition: "Paperback"
+isbn: "0140620788"
+notes: |-
+  
+publisher: "Penguin Books Ltd"
+publishing_year: "1994"

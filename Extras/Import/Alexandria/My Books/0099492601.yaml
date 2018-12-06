@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Christopher Rowley
+title: "Black Ship"
+edition: "Paperback"
+isbn: "0099492601"
+notes: |-
+  
+publisher: "Arrow Bks."
+publishing_year: "1987"

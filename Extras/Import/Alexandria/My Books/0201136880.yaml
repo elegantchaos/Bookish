@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Adele Goldberg David Robson
+title: "Smalltalk-80"
+edition: "Paperback"
+isbn: "0201136880"
+notes: |-
+  
+publisher: "Addison Wesley"
+publishing_year: "1989"

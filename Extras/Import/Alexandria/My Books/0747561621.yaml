@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Jeffrey Eugenides
+title: "Middlesex"
+edition: "Paperback"
+isbn: "0747561621"
+notes: |-
+  
+publisher: "Bloomsbury"
+publishing_year: "2003"

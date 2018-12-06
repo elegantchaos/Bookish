@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Derek B. Miller
+title: "Norwegian by Night"
+edition: "Paperback"
+isbn: "0571294278"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">Norwegian by Night&nbsp;</span></p>
+  
+publisher: "Faber & Faber"
+publishing_year: "2013"

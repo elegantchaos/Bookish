@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Louis De Bernieres
+title: "The War of Don Emmanuel's Nether Parts"
+edition: "Paperback"
+isbn: "0749391308"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">With <span style="font-style:italic;">The War of Don Emmanuel's Nether Parts</span> Louis de Berni�res's sardonic pen has concocted a spicy olla podrida of a novel, set in a fictitious Latin American country, with all the tragedy, ribaldry and humour Berni�res can muster from a debauched military, a clueless oligarchy and an unconventional band of guerrillas. There's a plague of laughing, a flood of magical cats and a torture-happy colonel. The cities, villages, politics and discourse are an inspired amalgam of Latin Americana, but the comedy, horror, adventure and vibrant individuals are pure de Berni�res. This masterpiece, the first of a trilogy, is followed by <span style="font-style:italic;">Se�or Vivo and the Coca Lord</span> and <span style="font-style:italic;">The Troublesome Offspring of Cardinal Guzman</span>. --<span style="font-style:italic;">James Barry&nbsp;</span></span></p>
+  
+publisher: "Minerva"
+publishing_year: "1991"

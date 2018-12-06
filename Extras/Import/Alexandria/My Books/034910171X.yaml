@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Iain Banks
+title: "Canal Dreams"
+edition: "Paperback"
+isbn: "034910171X"
+notes: |-
+  
+publisher: "Abacus"
+publishing_year: "1991"

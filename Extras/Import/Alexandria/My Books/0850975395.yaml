@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - C. W Lapham
+title: "Chemistry (Key facts)"
+edition: "Paperback"
+isbn: "0850975395"
+notes: |-
+  
+publisher: "Letts"
+publishing_year: "1986"

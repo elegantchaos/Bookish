@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - L W Burgess
+title: "Pan Book of Crosswords"
+edition: "Paperback"
+isbn: "0330236083"
+notes: |-
+  
+publisher: "Pan Bks."
+publishing_year: "1973"

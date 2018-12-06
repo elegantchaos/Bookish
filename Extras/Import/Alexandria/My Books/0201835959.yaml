@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Frederick P. Brooks
+title: "The Mythical Man Month and Other Essays on Software Engineering"
+edition: "Paperback"
+isbn: "0201835959"
+notes: |-
+  
+publisher: "Addison Wesley"
+publishing_year: "1995"

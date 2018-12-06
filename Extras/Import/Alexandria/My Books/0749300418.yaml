@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - C. J. Cherryh
+title: "Chanur's Homecoming"
+edition: "Paperback"
+isbn: "0749300418"
+notes: |-
+  
+publisher: "Mandarin"
+publishing_year: "1989"

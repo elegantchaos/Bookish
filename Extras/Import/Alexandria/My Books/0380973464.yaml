@@ -1,0 +1,23 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Neal Stephenson
+title: "Cryptonomicon"
+edition: "Hardback"
+isbn: "0380973464"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">Neal Stephenson enjoys cult status among science fiction fans and techie types thanks to <span style="font-style:italic;">Snow Crash</span>, which so completely redefined conventional notions of the high-tech future that it became a self- fulfilling prophecy. But if his cyberpunk classic was big, <span style="font-style:italic;">Cryptonomicon</span> is huge, gargantuan,massive, not just in size but in scope and appeal. It's the hip, readable heir to <span style="font-style:italic;">Gravity's Rainbow</span> and the Illuminatus trilogy. And it's only the first of a proposed series--for more information, read our interview with Stephenson.
+  
+  
+  
+  <span style="font-style:italic;">Cryptonomicon</span> zooms all over the world, careening conspiratorially back and forth between two time periods- -World War II and the present. Our 1940s' heroes are the brilliant mathematician Lawrence Waterhouse, crypt analyst extraordinaire, and gung-ho, morphine-addicted marine Bobby Shaftoe. They're part of Detachment 2702, an Allied group trying to break Axis communication codes while simultaneously preventing the enemy from figuring out that their codes have been broken. Their job boils down to layer upon layer of deception. Dr. Alan Turing is also a member of 2702,and he explains the unit's strange workings to Waterhouse. "When we want to sink a convoy, we send out an observation plane first... Of course, to observe is not its real duty--we already know exactly where the convoy is. Its real duty is to be observed... Then, when we come round and sink them, the Germans will not find it suspicious."
+  
+  
+  
+  All of this secrecy resonates in the present-day story line, in which the grandchildren of the WWII heroes--inimitable programming geek Randy Waterhouse and the lovely and powerful Amy Shaftoe--team up to help create an offshore data haven in Southeast Asia and maybe uncover some gold once destined for Nazi coffers. To top off the paranoiac tone of the book, the mysterious Enoch Root, key member of Detachment 2702 and the Societas Eruditorum, pops up with an unbreakable encryption scheme left over from WWII to befuddle the 1990s protagonists with conspiratorial ties.
+  
+  
+  
+  <span style="font-style:italic;">Cryptonomicon</span> is vintage Stephenson from start to finish: short on plot, but long on detail so precise it's exhausting. Every page has a math problem, a quotable in-joke, an amazing idea or a bit of sharp prose. Cryptonomicon is also packed with truly weird characters, funky tech, and crypto--all the crypto you'll ever need, in fact, not to mention all the computer jargon of the moment. A word to the wise: if you read this book in one sitting, you may die of information overload (and starvation). <span style="font-style:italic;">--Therese Littleton, Amazon.com&nbsp;</span></span></p>
+  
+publisher: "Avon Books"
+publishing_year: "1999"

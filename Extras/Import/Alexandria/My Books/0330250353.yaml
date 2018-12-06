@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Jack Higgins
+title: "Storm Warning"
+edition: "Paperback"
+isbn: "0330250353"
+notes: |-
+  
+publisher: "Pan"
+publishing_year: "1977"

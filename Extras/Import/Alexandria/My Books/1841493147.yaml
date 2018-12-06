@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Trudi Canavan
+title: "The Novice"
+edition: "Paperback"
+isbn: "1841493147"
+notes: |-
+  
+publisher: "Orbit"
+publishing_year: "2004"

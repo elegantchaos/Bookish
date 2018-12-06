@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - n/a
+title: "English dictionary (Gem dictionary)"
+edition: "Paperback"
+isbn: "0004583213"
+notes: |-
+  
+publisher: "Collins"
+publishing_year: "1980"

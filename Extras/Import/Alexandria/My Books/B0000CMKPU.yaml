@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Matthew Arnold
+title: "The poems of Matthew Arnold (Annotated English poets series)"
+edition: ""
+isbn: "B0000CMKPU"
+notes: |-
+  
+publisher: "Longmans"
+publishing_year: "1965"

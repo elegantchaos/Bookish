@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - A.G. Macdonell
+title: "England, Their England (Picador Books)"
+edition: "Paperback"
+isbn: "0330280414"
+notes: |-
+  
+publisher: "Picador"
+publishing_year: "1983"

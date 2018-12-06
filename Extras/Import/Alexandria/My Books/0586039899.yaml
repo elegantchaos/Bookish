@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Philip Jose Farmer
+title: "The Fabulous Riverboat (The Riverworld Series)"
+edition: "Paperback"
+isbn: "0586039899"
+notes: |-
+  
+publisher: "Collins"
+publishing_year: "1975"

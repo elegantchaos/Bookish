@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Philip K. Dick
+title: "Now Wait for Last Year"
+edition: "Paperback"
+isbn: "0879976543"
+notes: |-
+  
+publisher: "New American Library"
+publishing_year: "1981"

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Alex Kava
+title: "Split Second"
+edition: "Paperback"
+isbn: "1551669153"
+notes: |-
+  
+publisher: "Mira Books"
+publishing_year: "2002"

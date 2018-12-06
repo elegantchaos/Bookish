@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Sara Maitland Patricia Duncker Frank Cottrell Boyce Geoff Ryman
+title: "When It Changed"
+edition: "Paperback"
+isbn: "1905583192"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">Collaborating between leading scientists and literary authors, this unique experiment creates a new strain of science fiction by extending the repertoire of the genre beyond the common places of space travel, time travel, and artificial intelligence. Through the use of diverse, credible, and contemporary research areas--from Planck length to plankton and virtual conversations between Wittgenstein and Turing to future civilizations torn asunder by differences over particle physics--these stories reinstate the furnace of scientific endeavor. Comprised of research from practicing scientists at Manchester University and the stories of established authors--including Frank Cottrell Boyce, Geoff Ryman, Patricia Dunscker, and Sara Maitland--this anthology attempts to take science fiction into new, scientifically realistic fields while explaining the theory and technology behind each story.&nbsp;</span></p>
+  
+publisher: "Comma Press"
+publishing_year: "2009"

@@ -1,0 +1,19 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - J.K. Rowling
+title: "Harry Potter and the Chamber of Secrets"
+edition: "Paperback"
+isbn: "0747538484"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">J K Rowling's sequel to <span style="font-style:italic;">Harry Potter and the Philosopher's Stone</span> carries on where the original left off. Harry is returning to Hogwarts School of Witchcraft and Wizardry after the summer holidays and, right from the start, things are not straightforward.
+  
+  
+  
+  Unable to board the Hogwarts express, Harry and his friends break all the rules and make their way to the school in a magical flying car. From this point on, incredible events happen to Harry and his friends--Harry hears evil voices and someone, or something is attacking the pupils. Can Harry get to the bottom of the mystery before it's too late?
+  
+  
+  
+  As with its predecessor <span style="font-style:italic;">Harry Potter and the Chamber of Secrets</span> is a highly readable and imaginative adventure story with real, fallible, characters, plenty of humour and, of course, loads of magic and spells. There is no need to have read <span style="font-style:italic;">Harry Potter and the Philosopher's Stone</span> to enjoy this book. However, if you have read it, this is the book you have been waiting for... (Ages 9 to Adult)--<span style="font-style:italic;">Philippa Reece&nbsp;</span></span></p>
+  
+publisher: "Bloomsbury"
+publishing_year: "1999"

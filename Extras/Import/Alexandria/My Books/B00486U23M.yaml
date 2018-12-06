@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Charles Stross
+title: "The Atrocity Archives"
+edition: ""
+isbn: "B00486U23M"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">Bob Howard is a low-level techie working for a super-secret government agency. While his colleagues are out saving the world, Bob's under a desk restoring lost data. None of them receive any thanks for the jobs they do, but at least a techie doesn't risk getting shot or eaten in the line of duty. Bob's world is dull but safe, and that's the way it should have stayed; but then he went and got Noticed. Only one thing is certain: it will take more than control-alt-delete to sort this mess out. . .&nbsp;</span></p>
+  
+publisher: "Orbit"
+publishing_year: "2010"

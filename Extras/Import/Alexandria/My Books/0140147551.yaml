@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Robertson Davies
+title: "Deptford Trilogy"
+edition: "Paperback"
+isbn: "0140147551"
+notes: |-
+  
+publisher: "Penguin Books Ltd"
+publishing_year: "2004"

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Bruce Tognazzini
+title: "Tog on Software Design"
+edition: "Paperback"
+isbn: "0201489171"
+notes: |-
+  
+publisher: "Addison Wesley"
+publishing_year: "1995"

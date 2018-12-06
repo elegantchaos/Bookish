@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Neil Gaiman
+title: "Trigger Warning"
+edition: "Paperback"
+isbn: "1472217721"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">Trigger Warning: Short Fictions and Disturbances&nbsp;</span></p>
+  
+publisher: "Headline"
+publishing_year: "2015"

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Bruce T. Holmes
+title: "Anvil of the Heart"
+edition: "Paperback"
+isbn: "0812540638"
+notes: |-
+  
+publisher: "Tor Books"
+publishing_year: "1984"

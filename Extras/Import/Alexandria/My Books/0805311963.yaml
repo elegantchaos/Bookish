@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - George Luger Bill Stubblefield
+title: "Artificial Intelligence"
+edition: "Hardback"
+isbn: "0805311963"
+notes: |-
+  
+publisher: "Benjamin Cummings"
+publishing_year: "1997"

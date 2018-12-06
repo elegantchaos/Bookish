@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Fiona Cooper
+title: "The Empress of the Seven Oceans"
+edition: "Paperback"
+isbn: "0552994901"
+notes: |-
+  
+publisher: "Black Swan"
+publishing_year: "1992"

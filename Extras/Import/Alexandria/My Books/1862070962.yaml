@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Nicholson Baker
+title: "Vox"
+edition: "Paperback"
+isbn: "1862070962"
+notes: |-
+  
+publisher: "Granta Books"
+publishing_year: "1998"

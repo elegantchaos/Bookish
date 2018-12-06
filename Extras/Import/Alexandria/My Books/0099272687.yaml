@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Anne Tyler
+title: "A Patchwork Planet"
+edition: "Paperback"
+isbn: "0099272687"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">Barnaby Gaitlin is one of Anne Tyler's most promising unpromising characters. At 30, he has yet to graduate from college, is already divorced and is used to defeat. His mother thrives on reminding him of his adolescent delinquency and debt to his family, and even his daughter is fed up with his fecklessness. Still, attuned as he is to "the normal quota for misfortune," Barney is one of the star employees of Baltimore's Rent-a-Back, Inc., which pays him an hourly wage to help old people (and one young agoraphobe) run errands and sort out their basements and attics. Anne Tyler makes you admire most of these mothball eccentrics (though they're far from idealised) and hope that they can stave off nursing homes and death. There is, for example, "the unstoppable little black grandma whose children phoned us on an emergency basis whenever she threatened to overdo." And then there's Barnaby's new girlfriend's aunt, who will eventually accuse him of theft--"Over her forearm she carried a Yorkshire terrier, neatly folded like a waiter's napkin. "This is my doorbell," she said, thrusting him toward me. "I'd never have known you were out here if not for Tatters." These people are wonderful creations, but their lives are more brittle than cuddly; Barnaby knows better than to think of them as friends, because they'll only die on him. Yet his job offers at least glimpses of roots and affection. Helping an old lady set up her Christmas tree (on New Year's Eve!) gives him the chance to hang a singular ornament--a snowflake "pancake-sized, slightly crumpled, snipped from giftwrap so old that the Santas were smoking cigarettes." And Barnaby himself is sharp and impatient at painful--and painfully funny--family dinners, apparently unable to keep his finger off the auto-self-destruct button every time his life improves. As much as his superb creator, he is a poet of disappointment, resignation, and minute transformation. --<span style="font-style:italic;">Kerry Fried&nbsp;</span></span></p>
+  
+publisher: "Vintage"
+publishing_year: "1999"

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - T. T Liang
+title: "Tai Chi Ch?Uan for Health and Self-Defense"
+edition: "Hardback"
+isbn: "0394724615"
+notes: |-
+  
+publisher: "Random House USA Inc"
+publishing_year: "1977"

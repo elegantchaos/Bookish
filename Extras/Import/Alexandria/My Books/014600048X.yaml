@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Kahlil Gibran
+title: "Prophet, Madman, Wanderer (Penguin 60s S.)"
+edition: "Paperback"
+isbn: "014600048X"
+notes: |-
+  
+publisher: "Penguin Books Ltd"
+publishing_year: "1995"

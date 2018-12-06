@@ -1,0 +1,13 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Ian Whates
+title: "The Noise Within"
+edition: ""
+isbn: "B004U7FB76"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">On the brink of perfecting the long sought-after human/AI interface, Philip Kaufman finds his world thrown into turmoil as a scandal from the past returns to haunt him and dangerous information falls into his hands. Pursued by assassins and attacked in his own home, he flees. Leyton, a government black-ops specialist, is diverted from his usual duties to hunt down the elusive pirate vessel The Noise Within, wondering all the while why this particular freebooter is considered so important.
+  
+  Two lives collide in this stunning space-opera from seasoned science fiction novelist Ian Whates!&nbsp;</span></p>
+  
+publisher: "Rebellion Publishing Limited"
+publishing_year: "2010"

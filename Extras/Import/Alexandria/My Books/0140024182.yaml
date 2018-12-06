@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - John Dos Passos
+title: "U.S.A. (Modern Classics S.)"
+edition: "Paperback"
+isbn: "0140024182"
+notes: |-
+  
+publisher: "Penguin Books Ltd"
+publishing_year: "1966"

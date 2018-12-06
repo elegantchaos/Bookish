@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Ian Rankin
+title: "Rebus"
+edition: "Paperback"
+isbn: "0752837990"
+notes: |-
+  
+publisher: "Orion"
+publishing_year: "2000"

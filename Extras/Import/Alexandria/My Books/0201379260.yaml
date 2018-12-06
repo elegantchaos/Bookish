@@ -1,0 +1,27 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Nicolai M. Josuttis
+title: "The C++ Standard Library"
+edition: "Hardback"
+isbn: "0201379260"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">Programming with the C++ Standard Library can certainly be difficult, but Nicolai Josuttis' <span style="font-style:italic;">The C++ Standard Library</span> provides one of the best available guides to using the built-in features of C++ effectively.
+  
+  
+  
+  The C++ Standard Library provides plenty of default functionality in the form of the Standard Template Library (STL) for containers (like vectors and linked lists), as well as generic algorithms (which allow you to sort, search and manipulate elements inside containers). The best thing about<span style="font-style:italic;">The C++ Standard Library</span> is that it gives the reader a concise guide to working with these basic containers (from lists to sets and maps, with everything in-between). Each container type is explained along with short code excerpts. Moreover, in a reference section, the author explores the connections between each container type showing how they share similar methods. (Learn just a few methods and you can pretty much work with the mall.)
+  
+  
+  
+  In addition to STL, this book excels at providing a readable introduction to the generic algorithms (which can be used to sort, search and otherwise manipulate STL containers). Other books either mix in this material with the explanation of containers, or make it seem like an esoteric topic. The fact is generic algorithms work with all the STL types and by separating these algorithms out like this, the reader can learn the rich array of algorithms available in today's standard C++. While this book concentrates on STL and algorithms, readers will still find great coverage on Standard Library string classes and streams (including a fine section on internationalisation and locales).
+  
+  
+  
+  For the beginning or intermediate C++ programmer, <span style="font-style:italic;">The C++ Standard Library</span> can be a real timesaver. It arranges and explains the complexities of the C++ Standard Library and STL in a manageable format that's great as a reference and as an approach to programming. -- <span style="font-style:italic;">RichardDragan</span>
+  
+  
+  
+  <span style="font-weight:bold;">Topics covered:</span> history of C++ and the Standard Library, template basics, Big-O Notation, the std namepace, standard exceptions, allocators, standard library utilities, pairs and auto_ptr, numeric limits, the Standard Template Library (STL) basics, containers, iterators, algorithms, vectors, lists, deques, strings, sets, multisets, bitsets, maps, multimaps, stacks, queues, iterator adapters, function objects, element requirements, value and reference semantics, complex numbers, valar rays, stream classes, stream manipulators and formatting, file I/O, internationalisation and locales.&nbsp;</span></p>
+  
+publisher: "Addison Wesley"
+publishing_year: "1999"

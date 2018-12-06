@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - J R R Tolkien Christopher Tolkien
+title: "Silmarillion, The"
+edition: "Paperback"
+isbn: "0048231533"
+notes: |-
+  
+publisher: "Unwin Pbs."
+publishing_year: "1979"

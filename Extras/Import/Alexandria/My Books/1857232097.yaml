@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Robert Jordan
+title: "The Fires of Heaven (Wheel of Time S.)"
+edition: "Paperback"
+isbn: "1857232097"
+notes: |-
+  
+publisher: "Orbit"
+publishing_year: "1994"

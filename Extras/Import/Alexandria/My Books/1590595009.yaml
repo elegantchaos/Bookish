@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Joel Spolsky
+title: "The Best Software Writing I"
+edition: "Paperback"
+isbn: "1590595009"
+notes: |-
+  
+publisher: "APress,US"
+publishing_year: "2005"

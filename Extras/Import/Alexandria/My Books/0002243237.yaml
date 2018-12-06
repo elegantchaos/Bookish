@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - David Eddings
+title: "The Shining Ones (Tamuli)"
+edition: "Paperback"
+isbn: "0002243237"
+notes: |-
+  
+publisher: "Collins"
+publishing_year: "1994"

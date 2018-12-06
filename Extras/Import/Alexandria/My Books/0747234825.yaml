@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Dan Simmons
+title: "Hyperion (Hyperion Cantos)"
+edition: "Paperback"
+isbn: "0747234825"
+notes: |-
+  <p><span style="font-style:italic;font-size:12pt;color:WindowText;">Hyperion<span style="font-style:normal;"> is the first of a much-heralded two-part work -- including the </span>The Fall of Hyperion<span style="font-style:normal;">--about the last days of a vibrant yet self-destructive galactic civilization of humans called the Hegemony. The Hegemony is doomed because in exchange for the knowledge needed to conquer the stars, the human species sold its soul to a hive of machine-based intelligence known as Technocore. Six people embark on a pilgrimage to Hyperion, their only hope for redemption, to seek the help of the Shrike, a half- mechanical, half-organic creature that inspires both terror and devotion in its subjects. The book won the 1990 Hugo Award for Science Fiction.&nbsp;</span></span></p>
+  
+publisher: "Headline"
+publishing_year: "1991"

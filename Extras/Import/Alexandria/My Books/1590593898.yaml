@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Joel Spolsky
+title: "Joel on Software"
+edition: "Paperback"
+isbn: "1590593898"
+notes: |-
+  
+publisher: "APress,US"
+publishing_year: "2004"

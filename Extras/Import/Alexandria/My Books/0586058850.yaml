@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Richard Ford
+title: "Melvaig's Vision"
+edition: "Paperback"
+isbn: "0586058850"
+notes: |-
+  
+publisher: "Grafton Books"
+publishing_year: "1985"

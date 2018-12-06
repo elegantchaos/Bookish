@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Frank Herbert
+title: "God Emperor of Dune"
+edition: "Paperback"
+isbn: "0450052621"
+notes: |-
+  
+publisher: "Hodder & Stoughton Ltd"
+publishing_year: "1982"

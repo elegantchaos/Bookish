@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Arthur Ransome
+title: "The Picts and the Martyrs"
+edition: "Hardback"
+isbn: "0224606417"
+notes: |-
+  
+publisher: "Jonathan Cape"
+publishing_year: "1943"

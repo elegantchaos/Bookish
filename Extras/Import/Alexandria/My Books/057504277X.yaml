@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Marjorie Bradley Kellogg William B. Rossow
+title: "The Wave and the Flame (Lear's Daughters)"
+edition: "Paperback"
+isbn: "057504277X"
+notes: |-
+  
+publisher: "Gollancz"
+publishing_year: "1988"

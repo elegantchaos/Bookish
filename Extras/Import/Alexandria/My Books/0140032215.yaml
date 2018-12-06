@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Graham Greene
+title: "Travels with My Aunt"
+edition: "Paperback"
+isbn: "0140032215"
+notes: |-
+  
+publisher: "Penguin Books Ltd"
+publishing_year: "1972"

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Charles Bukowski
+title: "Tales of Ordinary Madness"
+edition: "Paperback"
+isbn: "0872861554"
+notes: |-
+  
+publisher: "City Lights Books"
+publishing_year: "1986"

@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Michael Crichton
+title: "Next"
+edition: "Paperback"
+isbn: "0007241003"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">Praise for 'Next': 'A wonderful farrago, energetically stirring up a lot of scientific, medical, business and legal issues! marvellous.' Evening Standard 'A satirical black-comedy thriller! Crichton writes likes Tom Wolfe on speed! completely brilliant! Crichton's treatise on how breakthroughs in genetic science have been hijacked by science is anything but dull! top form.' Daily Mail 'One of the most reliable purveyors of brain-engaged fiction at work today! he is too good a writer not to nail us! diverting stuff.' Daily Express 'Crichton has certainly done his research! his alarm is hard to dispute! compelling! extremely funny.' Sunday Times 'Be very afraid! expertly blending science fact with fiction, Crichton sets up mind-boggling scenarios where doctors, lawyers, scientists and big business play God! the pace and intrigue last to the final page.' News of the World '"Next" is 'The Da Vinci Code' with smarts. Own up, your guilty pleasure holiday reading awaits.' SFX 'Gripping' Zoo 'If you're curious about the world of genetic engineering, this is the novel for you! thought-provoking and at times frighteningly real, 'Next' is a demanding but enjoyable read.' Woman Praise for 'State of Fear': 'A gripping, impeccably researched thriller!we don't get much politically engaged fiction these days. Here is a fine example.' Evening Standard 'Exciting!a master storyteller.' Sunday Telegraph 'Terrific! the pages whip by.' Independent 'An enviromental adventure of truly global proportions!it's intelligent, readable and guaranteed to get the grey matter going.' Mirror 'An action-packed page-turner.' Daily Mail 'An entertaining thriller stimulating debate.' Time Out&nbsp;</span></p>
+  
+publisher: "Harper"
+publishing_year: "2007"

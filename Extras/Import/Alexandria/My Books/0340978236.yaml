@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Matt Hilton
+title: "Dead Men's Dust"
+edition: "Paperback"
+isbn: "0340978236"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">Hodder's biggest fiction launch of 2009: Matt Hilton's debut introducing series character Joe Hunter, Britain's best vigilante -- fighting America's worst criminals&nbsp;</span></p>
+  
+publisher: "Hodder Paperbacks"
+publishing_year: "2009"

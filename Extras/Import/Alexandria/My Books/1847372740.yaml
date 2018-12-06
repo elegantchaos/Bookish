@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Nicholson Baker
+title: "Human Smoke"
+edition: "Hardback"
+isbn: "1847372740"
+notes: |-
+  
+publisher: "Simon & Schuster Ltd"
+publishing_year: "2008"

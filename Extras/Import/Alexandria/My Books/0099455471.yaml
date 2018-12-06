@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Henning Mankell
+title: "Chronicler of the Winds"
+edition: "Paperback"
+isbn: "0099455471"
+notes: |-
+  
+publisher: "Vintage"
+publishing_year: "2007"

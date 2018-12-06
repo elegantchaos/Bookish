@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - K.J. Parker
+title: "The Colours in the Steel (Fencer Trilogy)"
+edition: "Paperback"
+isbn: "1857236106"
+notes: |-
+  
+publisher: "Orbit"
+publishing_year: "1999"

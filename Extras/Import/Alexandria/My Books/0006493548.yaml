@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Laurie R. King
+title: "A Grave Talent"
+edition: "Paperback"
+isbn: "0006493548"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">A Grave Talent&nbsp;</span></p>
+  
+publisher: "HarperCollins"
+publishing_year: "1996"

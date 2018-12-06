@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - John W R Taylor
+title: "Rockets and Missiles"
+edition: "Paperback"
+isbn: "060000127X"
+notes: |-
+  
+publisher: "Hamlyn"
+publishing_year: "1969"

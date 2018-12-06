@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Robert L Wilson
+title: "English Language (Key Facts S)"
+edition: "Paperback"
+isbn: "0850975417"
+notes: |-
+  
+publisher: "C Letts"
+publishing_year: "1983"

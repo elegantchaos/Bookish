@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Richard Dingman
+title: "The Little Book of Juggling (Miniature Editions)"
+edition: "Hardback"
+isbn: "1561384194"
+notes: |-
+  
+publisher: "Running Press Miniature Editions"
+publishing_year: "1994"

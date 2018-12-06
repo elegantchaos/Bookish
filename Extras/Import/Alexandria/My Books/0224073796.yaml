@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - John Pilger
+title: "Tell Me No Lies"
+edition: "Paperback"
+isbn: "0224073796"
+notes: |-
+  
+publisher: "Jonathan Cape"
+publishing_year: "2004"

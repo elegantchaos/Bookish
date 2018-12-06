@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Ursula K. Le Guin
+title: "Wizard of Earthsea (New Windmill S.)"
+edition: "Hardback"
+isbn: "0435121723"
+notes: |-
+  
+publisher: "Heinemann Educational Secondary Division"
+publishing_year: "1973"

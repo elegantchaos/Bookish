@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Jacqueline Carey
+title: "Kushiel's Dart"
+edition: "Paperback"
+isbn: "0330493744"
+notes: |-
+  
+publisher: "Tor"
+publishing_year: "2003"

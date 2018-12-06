@@ -1,0 +1,9 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Les Coleman
+title: "Unthunk"
+edition: ""
+isbn: "9197050539"
+notes: |-
+  
+publisher: "n/a"

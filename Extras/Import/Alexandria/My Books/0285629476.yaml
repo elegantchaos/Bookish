@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Philip J. Davis
+title: "Thomas Gray, Philosopher Cat"
+edition: "Hardback"
+isbn: "0285629476"
+notes: |-
+  
+publisher: "Souvenir Press Ltd"
+publishing_year: "1989"

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Sheri S. Tepper
+title: "The True Game"
+edition: "Paperback"
+isbn: "0441003311"
+notes: |-
+  
+publisher: "Ace Books"
+publishing_year: "2005"

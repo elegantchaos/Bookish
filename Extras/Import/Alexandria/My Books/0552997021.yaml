@@ -1,0 +1,15 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Bill Bryson
+title: "A Walk in the Woods"
+edition: "Paperback"
+isbn: "0552997021"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">Bill Bryson has made a living out of travelling and then writing about it. In <span style="font-style:italic;">The Lost Continent</span> he re-created the road trips of his childhood; in <span style="font-style:italic;">Neither Here nor There</span> he retraced the route he followed as a young backpacker traversing Europe. When this American transplant to Britain decided to return home, he made a farewell walking tour of the British countryside and produced <span style="font-style:italic;">Notes from a Small Island</span>. Once back on American soil and safely settled in New Hampshire, Bryson once again hears the siren call of the open road--only this time it's a trail. The Appalachian Trail, to be exact. In <span style="font-style:italic;">A Walk in the Woods</span> Bill Bryson tackles what is, for him, an entirely new subject: the American wilderness. Accompanied only by his old college friend Stephen Katz, Bryson starts out one March morning in north Georgia, intending to walk the entire 2,100 miles to the trail's end atop Maine's Mount Katahdin.
+  
+  
+  
+  If nothing else, <span style="font-style:italic;">A Walk in the Woods</span> is proof positive that the journey is the destination. As Bryson and Katz haul their out-of-shape, middle-aged bodies over hill and dale, the reader is treated to both a very funny personal memoir and a delightful chronicle of the trail, the people who created it, and the places it passes through. Whether you plan to make a trip like this one yourself one day or only care to read about it, <span style="font-style:italic;">A Walk in the Woods</span> is a great way to spend an afternoon. --<span style="font-style:italic;">Alix Wilber&nbsp;</span></span></p>
+  
+publisher: "Black Swan"
+publishing_year: "1998"

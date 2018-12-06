@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Iain Banks
+title: "Stonemouth"
+edition: "Hardback"
+isbn: "1408702509"
+notes: |-
+  
+publisher: "Little, Brown"
+publishing_year: "2012"

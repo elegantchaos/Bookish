@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - David Storey
+title: "Saville"
+edition: "Paperback"
+isbn: "0140046119"
+notes: |-
+  
+publisher: "Penguin Books Ltd"
+publishing_year: "1978"

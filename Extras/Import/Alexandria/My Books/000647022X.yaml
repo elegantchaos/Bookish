@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Stephen Donaldson
+title: "Chaos and Order (Gap S.)"
+edition: "Paperback"
+isbn: "000647022X"
+notes: |-
+  
+publisher: "Collins"
+publishing_year: "1999"

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Bruce Sterling
+title: "Globalhead"
+edition: "Paperback"
+isbn: "1857981537"
+notes: |-
+  
+publisher: "Cassell military"
+publishing_year: "1994"

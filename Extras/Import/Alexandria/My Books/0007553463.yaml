@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Jeff VanderMeer
+title: "Authority"
+edition: "Hardback"
+isbn: "0007553463"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">In the second volume of the Southern Reach Trilogy, questions are answered, stakes are raised, and mysteries are deepened ...Following the disastrous twelfth expedition chronicled in 'Annihilation', the second book of the Southern Reach trilogy introduces John Rodriguez, the new head of the government agency responsible for the safeguarding of Area X. His first day is spent grappling with the fall-out from the last expedition. Area X itself remains a mystery. But, as instructed by a higher authority known only as The Voice, the self-styled Control must battle to 'put his house in order'. From a series of interrogations, a cache of hidden notes and hours of profoundly troubling video footage, the mysteries of Area X begin to reveal themselves-and what they expose pushes Control to confront disturbing truths about both himself and the agency he's promised to serve. Undermined and under pressure to make sense of everything, Rodriguez retreats into his past in a labyrinthine search for answers. Yet the more he uncovers, the more he risks, for the secrets of the Southern Reach are more sinister than anyone could have known.&nbsp;</span></p>
+  
+publisher: "Fourth Estate"
+publishing_year: "2014"

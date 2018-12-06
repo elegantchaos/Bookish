@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Douglas Adams
+title: "The Hitchhiker's Guide To The Galaxy"
+edition: "Paperback"
+isbn: "0330258648"
+notes: |-
+  
+publisher: "Tor Books"
+publishing_year: "1979"

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - C. J. Cherryh
+title: "Foreigner"
+edition: "Paperback"
+isbn: "0099444011"
+notes: |-
+  
+publisher: "Legend paperbacks"
+publishing_year: "1995"

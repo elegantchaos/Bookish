@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Julian May
+title: "Jack the Bodiless (Galactic Milieu Trilogy)"
+edition: "Paperback"
+isbn: "033028553X"
+notes: |-
+  
+publisher: "Tor Books"
+publishing_year: "1993"

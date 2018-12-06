@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - David Eddings
+title: "Pawn of Prophecy (Belgariad S.)"
+edition: "Paperback"
+isbn: "055212284X"
+notes: |-
+  
+publisher: "Corgi Adult"
+publishing_year: "1983"

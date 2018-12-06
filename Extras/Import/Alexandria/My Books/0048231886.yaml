@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - J.R.R. Tolkien
+title: "The Hobbit"
+edition: "Paperback"
+isbn: "0048231886"
+notes: |-
+  
+publisher: "Grafton Books"
+publishing_year: "1981"

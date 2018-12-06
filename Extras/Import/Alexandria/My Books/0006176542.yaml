@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Stephen Donaldson
+title: "A Man Rides Through (Mordant's Need)"
+edition: "Paperback"
+isbn: "0006176542"
+notes: |-
+  
+publisher: "Voyager"
+publishing_year: "1989"

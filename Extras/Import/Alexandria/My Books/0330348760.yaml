@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Sue Grafton
+title: "M is for Malice"
+edition: "Paperback"
+isbn: "0330348760"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">M Is for Malice&nbsp;</span></p>
+  
+publisher: "Pan"
+publishing_year: "2008"

@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Terry Pratchett
+title: "Mort (A Discworld Novel)"
+edition: "Paperback"
+isbn: "0552131067"
+notes: |-
+  
+publisher: "Corgi Adult"
+publishing_year: "1988"

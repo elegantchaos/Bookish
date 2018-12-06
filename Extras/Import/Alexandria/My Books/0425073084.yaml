@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Bear Greg
+title: "Infinity Concerto"
+edition: ""
+isbn: "0425073084"
+notes: |-
+  
+publisher: "Berkley Publishing Group"
+publishing_year: "1984"

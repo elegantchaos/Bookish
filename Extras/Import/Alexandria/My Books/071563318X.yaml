@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Max Brooks
+title: "The Zombie Survival Guide"
+edition: "Paperback"
+isbn: "071563318X"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">Drawing from reams of historical data, laboratory experiments, field research, and eyewitness accounts, this comprehensive and illustrated guide is the only book you'll need to face the greatest challenge mankind has ever encountered. Granted, you probably already know that skills such as wilderness survival, leadership, and basic first aid are important when fighting off hordes of the undead. But The Zombie Survival Guide doesn't stop there, teaching you how to: Identify cases of infection by the zombie virus, Solanum, and recognize the hourly progression of symptoms: 'Hour 8: Numbing Of Extremities And Infected Area, Increased Fever [103-106 Degrees], Increased Dementia, Loss Of Muscular Coordination'; choose the right weapon: 'A Section Of Lead Pipe Will Work For A Single Encounter But Is Too Heavy For Those On The Move'; defend your home: 'A Ten-Foot Cinder-Block Wall, Reinforced Wih Steel Rods And Filled With Concrete, Is The Safest Barrier In Both Class 1 And Class 2 Outbreaks'; and much more. Filled with helpful illustrations and a sample 'Outbreak Journal' that should be kept on your person at all times, The Zombie Survival Guide is the only guide you will need to survive a most certain pandemic. 'Ignorance is the undead's strongest ally, knowledge their deadliest enemy,' Brooks writes. 'Personal choice, the will to live, must be paramount when the dead begin to rise. The choice is up to you.'&nbsp;</span></p>
+  
+publisher: "Gerald Duckworth & Co Ltd"
+publishing_year: "2004"

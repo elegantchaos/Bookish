@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - K W Jeter
+title: "Dr. Adder"
+edition: "Paperback"
+isbn: "0586070761"
+notes: |-
+  
+publisher: "Grafton Bks."
+publishing_year: "1987"

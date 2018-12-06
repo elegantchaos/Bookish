@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Stephen Donaldson
+title: "Lord Foul's Bane (The Chronicles of Thomas Covenant, the Unbeliever)"
+edition: "Paperback"
+isbn: "0006152392"
+notes: |-
+  
+publisher: "Voyager"
+publishing_year: "1996"

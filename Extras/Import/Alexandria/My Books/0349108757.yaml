@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - J.P. Donleavy
+title: "The Ginger Man"
+edition: "Paperback"
+isbn: "0349108757"
+notes: |-
+  
+publisher: "Abacus"
+publishing_year: "1997"

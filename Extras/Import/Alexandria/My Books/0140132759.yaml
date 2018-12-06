@@ -1,0 +1,19 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Haruki Murakami
+title: "A Wild Sheep Chase"
+edition: "Paperback"
+isbn: "0140132759"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">As with many of Haruki Murakami's novels, the plot curdles with complex diversity only to be resolved by a collision between wild fantasy and outright slapstick. <span style="font-style:italic;">A Wild Sheep Chase</span> refers aptly to the tradition of cool but kitsch detective sagas. Except here, the metaphoric goose is now a literal sheep with a distinctive marking; an urban myth with the promise of immortality.
+  
+  
+  
+  The anonymous narrator is a mild-mannered thirtysomething with a more than understanding attitude--things happen because they are supposed to and there's no sense standing in the way of progress or nature. It takes the disappearance of a friend and some gentle intimidation from a right wing conglomerate to break the pattern of apathy and send him off on his adventure.
+  
+  
+  
+  Murakami's detail of the most mundane situations makes his lead character endearing. Those who've read Murakami before will recognise that certain empathy for the strange thoughts and rituals that are now hallmarks of his wry humour. Although an unlikely hero, the quest for a missing friend and the support of a lover with mysterious ears takes him off in search of the elusive sheep in a bizarre adventure--danger and absurdity hindering every movement. --<span style="font-style:italic;">David Trueman&nbsp;</span></span></p>
+  
+publisher: "Penguin Books Ltd"
+publishing_year: "1991"

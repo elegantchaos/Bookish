@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - James Lovegrove
+title: "The Age of Ra"
+edition: ""
+isbn: "B004U7FBRQ"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">The Ancient Egyptian gods have defeated all the other pantheons and claimed dominion over the earth, dividing it into warring factions. Lt. David Westwynter, a British soldier, stumbles into Freegypt, the only place to have remained independent of the gods� influence. There, he encounters the followers of a humanist leader known as the Lightbringer, who has vowed to rid mankind of the shackles of divine oppression. As the world heads towards an apocalyptic battle, there is far more to this freedom fighter than it seems...&nbsp;</span></p>
+  
+publisher: "Solaris"
+publishing_year: "2010"

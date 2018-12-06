@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Gerald Abrahams
+title: "The Pan Book of Chess (Pan Original)"
+edition: "Paperback"
+isbn: "0330230735"
+notes: |-
+  
+publisher: "Macmillan"
+publishing_year: "1966"

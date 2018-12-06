@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Arthur Ransome
+title: "Pigeon Post (Puffin Books)"
+edition: "Paperback"
+isbn: "0140303936"
+notes: |-
+  
+publisher: "Puffin Books"
+publishing_year: "1969"

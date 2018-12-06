@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Ian McEwan
+title: "The Cement Garden (Picador Books)"
+edition: "Paperback"
+isbn: "033025975X"
+notes: |-
+  
+publisher: "Picador"
+publishing_year: "1980"

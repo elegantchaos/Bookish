@@ -1,0 +1,19 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Douglas Coupland
+title: "Miss Wyoming"
+edition: "Paperback"
+isbn: "0002259834"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">Heroine of this outstanding tale is <span style="font-style:italic;">Miss Wyoming</span>, Susan Colgate, teen beauty-queen and low-rent soap actress. Dragooned into stardom by her demonically pushy, hillbilly mother, Susan's career is at rock-bottom. When she finds herself sole survivor of an air-crash, she views it as her opportunity to vanish, embarking on a voyage of personal discovery.
+  
+  
+  
+  Meanwhile, John Johnson, debauched star of such Hollywood legends as Bel Air PI�, also longs to vanish. After a near-death experience, where he is treated to a vision of Susan's face, he roams the badlands of the western States. Back in L.A., a chance meeting sets him on a mission to unravel the mystery of Susan Colgate.
+  
+  
+  
+  Coupland has a genius for capturing the absurdities of modern existence and using them as backdrop for a tale of hope and fulfilment. The curses of the cyber-age--junk-mail and web-junkies, fast food, jaded TV weather forecasters--teem around the central story, creating a vivid and darkly funny tale. His peripheral characters are just as richly drawn. A scriptwriter and his supernaturally intelligent girlfriend, a recluse who spends his evening generating Internet rumours--all manage to be blessed and cursed, numbed by their pointless existences but full of humanity when put to the test. Picture Joseph Heller and Kurt Vonnegut co-writing <span style="font-style:italic;">Zen and The Art of Motorcycle Maintenance</span> and you come halfway to grasping Coupland's uniquely funny and thoughtful brand of storytelling. --<span style="font-style:italic;">Matthew Baylis&nbsp;</span></span></p>
+  
+publisher: "Flamingo"
+publishing_year: "2000"

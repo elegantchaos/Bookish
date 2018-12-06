@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Justina Robson
+title: "Silver Screen"
+edition: "Paperback"
+isbn: "0330375660"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">This first novel by a young British author offers an enjoyably different, even subversive, slant on AIs and cyberspace. Insecure and overweight heroine Anjuli O'Connell is a flawed genius whose photographic memory makes her worry about how human she is. Her best friend, after all, is the quirky corporate AI named 901--successor to past versions of 900, the mysteriously disaster-prone 899, etc. A human friend dies to upload his mind into cyberspace, seeking that SF dream of bodiless immortality ... which doesn't work as expected. Another pal interfaces with terrifying biomechanoid weapons- suits that pull their wearer into mental symbiosis, a new "I" continuous with the old but different: "Where does life end and the machine begin?" Meanwhile 901's grasping multinational owners OptiNet, and the Machine-Greens who preach AI liberation, seem equally murderous. As 901's humanity or otherwise becomes a case for the Strasbourg Court, expert witness Anjuli is targeted by assassins and entangled in the hunt for a Hitchcockian McGuffin known as the Source, perhaps literally the secret of life. This requires a hair-raising solo commando assault, in that biomech suit, on a cult church's heavily fortified abbey bunker. Robson's plot zigzags in unexpected directions, especially with revelations about the Source; there's tragedy and trauma, but happy surprises too. An impressive SF debut. --<span style="font-style:italic;">David Langford&nbsp;</span></span></p>
+  
+publisher: "Tor Books"
+publishing_year: "2000"

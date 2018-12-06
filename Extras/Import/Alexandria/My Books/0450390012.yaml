@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Robert E. Vardeman
+title: "The Keys to Paradise"
+edition: "Paperback"
+isbn: "0450390012"
+notes: |-
+  
+publisher: "Hodder & Stoughton Ltd"
+publishing_year: "1991"

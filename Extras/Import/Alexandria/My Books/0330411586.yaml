@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Neal Asher
+title: "Cowl"
+edition: "Paperback"
+isbn: "0330411586"
+notes: |-
+  
+publisher: "Tor"
+publishing_year: "2005"

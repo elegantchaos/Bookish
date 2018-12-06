@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Philip Jose Farmer
+title: "To Your Scattered Bodies Go"
+edition: "Paperback"
+isbn: "0586039392"
+notes: |-
+  
+publisher: "Collins"
+publishing_year: "1974"

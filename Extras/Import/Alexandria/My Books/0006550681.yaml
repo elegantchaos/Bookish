@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Arundhati Roy
+title: "The God of Small Things"
+edition: "Paperback"
+isbn: "0006550681"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">In her first novel, award-winning Indian screenwriter Arundhati Roy conjures a whoosh of wordplay that rises from the pages like a brilliant jazz improvisation. <span style="font-style:italic;">The God of Small Things</span> is nominally the story of young twins Rahel and Estha and the rest of their family, but the book feels like a million stories spinning out indefinitely; it is the product of a genius child-mind that takes everything in and transforms it in an alchemy of poetry. <span style="font-style:italic;">The God of Small Things</span> is at once exotic and familiar to the Western reader, written in an English that's completely new and invigorated by the Asian Indian influences of culture and language.&nbsp;</span></p>
+  
+publisher: "Flamingo"
+publishing_year: "1998"

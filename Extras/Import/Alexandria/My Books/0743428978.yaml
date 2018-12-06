@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Walter Jon Williams
+title: "The Praxis (Dread Empire's Fall S.)"
+edition: "Paperback"
+isbn: "0743428978"
+notes: |-
+  
+publisher: "Earthlight"
+publishing_year: "2003"

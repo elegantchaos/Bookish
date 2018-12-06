@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - S.H. Hooke
+title: "Middle Eastern Mythology (Penguin Religion & Mythology)"
+edition: "Paperback"
+isbn: "0140136878"
+notes: |-
+  
+publisher: "Penguin Books Ltd"
+publishing_year: "1991"

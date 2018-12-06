@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - R.G. Park
+title: "Foundations of Structural Geology"
+edition: "Paperback"
+isbn: "0216924928"
+notes: |-
+  
+publisher: "Kluwer Academic Publishers"
+publishing_year: "1988"

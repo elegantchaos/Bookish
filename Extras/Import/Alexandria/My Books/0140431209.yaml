@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - George Eliot
+title: "The Mill on the Floss"
+edition: "Paperback"
+isbn: "0140431209"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">Published in 1860,THE MILL ON THE FLOSS is one of the most popular of George Eliot's works.Its story revolves around the lives of Tom and Maggie,the children of the honest but ignorant miller,Mr Tulliver.Tom is a prosaic youth,whereas Maggie is highly strung,intelligent and rebellious,and her sense of frustration is ultimately the root of tragedy.Thwarted and mismatched love affairs trouble the lives of the protagonists;a compromising situation and her own obstinancy cause Maggie to become socially ostracized.However,Maggie's strength of character leads to an important reconciliation in the dramatic but controversial denouement.&nbsp;</span></p>
+  
+publisher: "Penguin Books Ltd"
+publishing_year: "1979"

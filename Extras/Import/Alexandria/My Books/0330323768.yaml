@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Peter F. Hamilton
+title: "Mindstar Rising"
+edition: "Paperback"
+isbn: "0330323768"
+notes: |-
+  
+publisher: "Tor Books"
+publishing_year: "1993"

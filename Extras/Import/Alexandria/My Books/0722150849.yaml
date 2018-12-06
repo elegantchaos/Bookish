@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - P.D. James
+title: "Innocent Blood"
+edition: "Paperback"
+isbn: "0722150849"
+notes: |-
+  
+publisher: "Sphere Books"
+publishing_year: "1981"

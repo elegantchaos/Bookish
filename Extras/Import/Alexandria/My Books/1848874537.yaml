@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - A. D. Miller
+title: "Snowdrops"
+edition: "Paperback"
+isbn: "1848874537"
+notes: |-
+  
+publisher: "Atlantic Books"
+publishing_year: "2011"

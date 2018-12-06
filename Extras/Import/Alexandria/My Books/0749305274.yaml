@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Stanislaw Lem
+title: "Memoirs of a Space Traveller"
+edition: "Paperback"
+isbn: "0749305274"
+notes: |-
+  
+publisher: "Mandarin"
+publishing_year: "1991"

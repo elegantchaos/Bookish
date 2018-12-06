@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Darren O'Shaughnessy
+title: "Ayuamarca"
+edition: "Paperback"
+isbn: "075281639X"
+notes: |-
+  <p><span style="font-size:12pt;color:WindowText;">This is the author's first novel and it's a very strange one. Brash young Capac Raimi, a man with no past, comes to join his uncle's gangster organisation in a big, unnamed city. (Though telling a complete story, the book's billed as "The City: Book 1".) Very soon he's sucked into the empire of The Cardinal, the top crime lord who dominates the city and, it seems, may be looking for a young heir ... Jolts, surprises and dizzying gear changes follow: <span style="font-style:italic;">Ayuamarca</span> offers not just unexpected twists but unexpected <span style="font-style:italic;">kinds</span> of twist. Capac encounters love (or at any rate sex) at first sight, an unstoppable assassin, puzzling advisers, blind men with a strange vision and an aging woman who has the perfect face of a teenager. People on the mysterious Ayuamarca List--which includes Capac's name--tend to vanish from life, from official records and hidden files, even from others' memories. The Cardinal, by turns capricious, violent, charming, gross and deadly, has a fantastic secret rooted in the long-ago magic of the Incas. Before Capac is allowed to learn this, he must make various terrible discoveries about himself and those close to him, including his own lady-love. Violent, black and startlingly original. --<span style="font-style:italic;">David Langford&nbsp;</span></span></p>
+  
+publisher: "Gollancz"
+publishing_year: "1999"

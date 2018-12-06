@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Geoffrey Ashe
+title: "The Quest for Arthur's Britain"
+edition: "Paperback"
+isbn: "0897332873"
+notes: |-
+  
+publisher: "Academy Chicago Publications"
+publishing_year: "2000"
