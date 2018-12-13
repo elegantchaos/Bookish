@@ -43,7 +43,7 @@ class PublisherIndexViewController: CollectionViewController, IndexOwner {
 
 // MARK: Actions
 
-extension PublisherIndexViewController: ActionContextProvider, PublisherConstructionObserver {
+extension PublisherIndexViewController: ActionContextProvider, PublisherLifecycleObserver {
     func provideIndexInfo(context: ActionContext) {
         context.info.addObserver(self)
     }

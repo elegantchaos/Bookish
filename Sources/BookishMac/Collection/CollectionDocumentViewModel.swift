@@ -43,14 +43,14 @@ import BookishModel
         self.managedObjectContext = document.managedObjectContext!
     }
     
-    func addPersonItem(kind: String, shortcut: String) -> NSMenuItem {
+    func addRelationshipItem(kind: String, shortcut: String) -> NSMenuItem {
         let item = NSMenuItem(title: kind, action: ActionManagerMac.Responder.performActionSelector, keyEquivalent: shortcut)
         item.identifier = NSUserInterfaceItemIdentifier(rawValue: "menu.AddRelationship(\"role\": \"\(kind)\")")
         item.keyEquivalentModifierMask = [.command, .option]
         return item
     }
     
-    var addPersonMenu: NSMenu {
+    var addRelationshipMenu: NSMenu {
         get {
             var shortcuts = ["4","3","2","1"]
             let menu = NSMenu()
@@ -60,7 +60,7 @@ import BookishModel
                 for role in results {
                     if let name = role.name {
                         let shortcut = shortcuts.popLast() ?? ""
-                        menu.addItem(addPersonItem(kind: name, shortcut: shortcut))
+                        menu.addItem(addRelationshipItem(kind: name, shortcut: shortcut))
                     }
                 }
             }

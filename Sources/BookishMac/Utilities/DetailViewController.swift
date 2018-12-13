@@ -16,7 +16,7 @@ class DetailViewController<IndexViewController: IndexOwner, Item>: ManagedObject
     var indexObserver: NSKeyValueObservation?
     
     @objc var index: NSArrayController? {
-        return (indexView as? IndexViewController)?.indexArray
+        return indexView?.indexArray
     }
     
     override func awakeFromNib() {
@@ -95,7 +95,7 @@ extension DetailViewController: ActionContextProvider {
     }
     
     func provide(context: ActionContext) {
-        if let indexView = indexView as? IndexViewController {
+        if let indexView = indexView {
             indexView.provideIndexInfo(context: context)
         }
         provideDetailInfo(context: context)

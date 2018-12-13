@@ -108,7 +108,9 @@ extension BookDetailViewController {
 
 // MARK: Action Support
 
-extension BookDetailViewController: ActionContextProvider, PersonChangeObserver {
+extension BookDetailViewController: ActionContextProvider, BookChangeObserver {
+
+    
     func detailRow(for context: ActionContext) -> Int {
         var row = -1
         if let view = context.sender as? NSView {
@@ -130,19 +132,35 @@ extension BookDetailViewController: ActionContextProvider, PersonChangeObserver 
         }
     }
     
-    func added(role: Relationship) {
-        let index = source.insert(relationship: role)
+    func added(relationship: Relationship) {
+        let index = source.insert(relationship: relationship)
         detailsView.insertRows(at: IndexSet(integer: index), withAnimation: .slideDown)
         availableRows.insert(index)
         scheduleRecalculateKeyViews()
     }
     
-    func removed(role: Relationship) {
-        if let row = source.remove(relationship: role) {
+    func removed(relationship: Relationship) {
+        if let row = source.remove(relationship: relationship) {
             detailsView.removeRows(at: IndexSet(integer: row), withAnimation: .slideUp)
             availableRows.remove(row)
             scheduleRecalculateKeyViews()
         }
+    }
+
+    func added(series: Series) {
+        
+    }
+    
+    func removed(series: Series) {
+        
+    }
+    
+    func added(publisher: Publisher) {
+        
+    }
+    
+    func removed(publisher: Publisher) {
+        
     }
 }
 

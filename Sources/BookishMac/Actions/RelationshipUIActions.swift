@@ -7,23 +7,23 @@ import Actions
 import BookishModel
 import AppKit
 
-class PersonUIAction: PersonAction {
+class RelationshipUIAction: ModelAction {
     override class func standardActions() -> [Action] {
         return [
-            FillPersonMenuAction(identifier: "FillPersonMenu"),
-            PopupPersonMenuAction(identifier: "PopupPersonMenu"),
+            FillRelationshipMenuAction(identifier: "FillRelationshipMenu"),
+            ShowAddRelationshipMenuAction(identifier: "ShowAddRelationshipMenu"),
         ]
     }
 }
 
-class FillPersonMenuAction: PersonUIAction {
+class FillRelationshipMenuAction: RelationshipUIAction {
     override func validate(context: ActionContext) -> Bool {
         guard super.validate(context: context) else {
             return false
         }
         
         if let item = context.sender as? NSMenuItem, let viewModel = context.info[ActionContext.viewModelKey] as? CollectionDocumentViewModel {
-            item.submenu = viewModel.addPersonMenu
+            item.submenu = viewModel.addRelationshipMenu
             return true
         }
         
@@ -33,7 +33,7 @@ class FillPersonMenuAction: PersonUIAction {
 
 
 
-class PopupPersonMenuAction: PersonUIAction {
+class ShowAddRelationshipMenuAction: RelationshipUIAction {
     open override func perform(context: ActionContext, completed: @escaping Completion) {
         if let event = NSApplication.shared.currentEvent, let viewModel = context.info[ActionContext.viewModelKey] as? CollectionDocumentViewModel {
             var view = context.sender as? NSView
@@ -42,7 +42,7 @@ class PopupPersonMenuAction: PersonUIAction {
             }
             
             if let view = view {
-                NSMenu.popUpContextMenu(viewModel.addPersonMenu, with: event, for: view)
+                NSMenu.popUpContextMenu(viewModel.addRelationshipMenu, with: event, for: view)
             }
         }
         completed()

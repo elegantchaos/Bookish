@@ -39,11 +39,10 @@ class Application: NSObject {
     
     fileprivate func setupActions() {
         actionManager.register(ModelAction.standardActions())
-        actionManager.register(PersonUIAction.standardActions())
+        actionManager.register(RelationshipUIAction.standardActions())
         actionManager.register(ImporterAction.standardActions())
+        actionManager.register(ModeAction.standardActions())
         actionManager.register([
-            InsertItemAction(identifier: "InsertItem"),
-            RemoveItemAction(identifier: "RemoveItem"),
             ScanSeriesAction(identifier: "ScanSeries"),
             ShowDatePickerAction(identifier: "ShowDatePicker"),
             ToggleEditingAction(identifier: "ToggleEditing")

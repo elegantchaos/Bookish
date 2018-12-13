@@ -104,7 +104,7 @@ class BookishUITests: UITests {
         }
 
         // button
-        clickButton("button.PopupPersonMenu")
+        clickButton("button.ShowAddRelationshipMenu")
         clickMenuItem("Editor")
         XCTAssertEqual(count + 1, tableRowCount("book-details"))
         print("tested button")
@@ -162,7 +162,7 @@ class BookishUITests: UITests {
         with(scope: table("book-details")) {
             clickField("person-0")
         }
-        XCTAssertTrue(button("button.PopupPersonMenu").isEnabled)
+        XCTAssertTrue(button("button.ShowAddRelationshipMenu").isEnabled)
         table("books").click()
         clickMenuItem("Add Person")
         XCTAssertFalse(menuItem(at: ["Add Person", "Author"]).isEnabled)

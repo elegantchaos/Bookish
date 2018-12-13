@@ -31,6 +31,8 @@ extension BookEditablePersonCell: BookDetailTableCell {
             selectedPerson = person
             personCombo.stringValue = name
         }
+        showButtons()
+        self.validateButtons()
     }
     
     func keyView() -> NSView? {

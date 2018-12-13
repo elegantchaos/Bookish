@@ -44,7 +44,7 @@ class PersonIndexViewController: CollectionViewController, IndexOwner {
 
 // MARK: Actions
 
-extension PersonIndexViewController: ActionContextProvider, PersonConstructionObserver {
+extension PersonIndexViewController: ActionContextProvider, PersonLifecycleObserver {
     func provideIndexInfo(context: ActionContext) {
         context.info.addObserver(self)
     }

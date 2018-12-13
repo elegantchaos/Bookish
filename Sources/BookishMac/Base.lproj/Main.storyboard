@@ -65,12 +65,36 @@
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <menu key="submenu" title="New" id="mBB-Wz-5Af">
                                                 <items>
-                                                    <menuItem title="Book" keyEquivalent="N" identifier="menu.NewBook" id="9pa-hN-WM7">
+                                                    <menuItem title="Item" keyEquivalent="n" identifier="menu.NewItem" id="9pa-hN-WM7">
                                                         <connections>
                                                             <action selector="performAction:" target="Ady-hI-5gd" id="Qvf-xa-tYe"/>
                                                         </connections>
                                                     </menuItem>
-                                                    <menuItem title="Collection" keyEquivalent="n" id="FTe-Bk-3er">
+                                                    <menuItem title="Book" identifier="menu.NewBook" id="C64-Y8-nhv">
+                                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                                        <connections>
+                                                            <action selector="performAction:" target="Ady-hI-5gd" id="LhB-RI-3wM"/>
+                                                        </connections>
+                                                    </menuItem>
+                                                    <menuItem title="Person" identifier="menu.NewPerson" id="zf8-5i-lv2">
+                                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                                        <connections>
+                                                            <action selector="performAction:" target="Ady-hI-5gd" id="Cnj-NL-e6m"/>
+                                                        </connections>
+                                                    </menuItem>
+                                                    <menuItem title="Publisher" identifier="menu.NewPublisher" id="vSY-Uz-PHc">
+                                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                                        <connections>
+                                                            <action selector="performAction:" target="Ady-hI-5gd" id="naj-HX-rcl"/>
+                                                        </connections>
+                                                    </menuItem>
+                                                    <menuItem title="Series" identifier="menu.NewSeries" id="vPY-1R-nCA">
+                                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                                        <connections>
+                                                            <action selector="performAction:" target="Ady-hI-5gd" id="nQe-uW-MAv"/>
+                                                        </connections>
+                                                    </menuItem>
+                                                    <menuItem title="Collection" keyEquivalent="N" id="FTe-Bk-3er">
                                                         <connections>
                                                             <action selector="newDocument:" target="Ady-hI-5gd" id="Wjf-77-GPd"/>
                                                         </connections>
@@ -373,13 +397,13 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Book" identifier="menu.book" id="KpK-bQ-eVd">
                                     <items>
-                                        <menuItem title="Add Person" identifier="menu.FillPersonMenu" id="S1Y-5k-gmo">
+                                        <menuItem title="Add Relationship" identifier="menu.FillRelationshipMenu" id="S1Y-5k-gmo">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="performAction:" target="Ady-hI-5gd" id="7NE-A6-iSj"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Remove Person" identifier="menu.RemoveRelationship" id="b2J-PJ-ZCr">
+                                        <menuItem title="Remove Relationship" identifier="menu.RemoveRelationship" id="b2J-PJ-ZCr">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="performAction:" target="Ady-hI-5gd" id="KWo-3k-lfO"/>
@@ -397,7 +421,7 @@
                             </menuItem>
                             <menuItem title="Collection" id="ocN-wE-Zc8">
                                 <modifierMask key="keyEquivalentModifierMask"/>
-                                <menu key="submenu" title="Collection" identifier="menu.book" id="PET-8T-wg6">
+                                <menu key="submenu" title="Collection" identifier="menu.collection" id="PET-8T-wg6">
                                     <items>
                                         <menuItem title="Scan For Series" keyEquivalent="E" identifier="menu.ScanSeries" id="18S-Lg-R9p">
                                             <connections>
@@ -464,6 +488,17 @@
                                     </items>
                                 </menu>
                             </menuItem>
+                            <menuItem title="Debug" id="aw5-w1-gS3">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Debug" id="ll1-kn-1NJ">
+                                    <items>
+                                        <menuItem title="Logger" id="hUi-We-Cbu">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <menu key="submenu" title="Logger" id="jxQ-zu-ChL" customClass="LoggerMenu" customModule="BookishMac" customModuleProvider="target"/>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
                             <menuItem title="Help" id="wpr-3q-Mcd">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Help" systemMenu="help" id="F2S-fz-NVQ">
@@ -512,9 +547,9 @@
                                 </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="TAF-Mz-qpr"/>
                                 <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="dlb-Xe-WiO"/>
-                                <toolbarItem implicitItemIdentifier="42A4917E-FFCE-440D-90B8-1331166CC46A" explicitItemIdentifier="toolbar.PopupPersonMenu" label="Add" paletteLabel="Add Person" image="AddRelationship" sizingBehavior="auto" id="reg-Dx-A2Q" userLabel="Add Person" customClass="ViewBasedToolbarItem" customModule="BookishMac" customModuleProvider="target">
+                                <toolbarItem implicitItemIdentifier="42A4917E-FFCE-440D-90B8-1331166CC46A" explicitItemIdentifier="toolbar.ShowAddRelationshipMenu" label="Add" paletteLabel="Add Person" image="AddRelationship" sizingBehavior="auto" id="reg-Dx-A2Q" userLabel="Add Person" customClass="ViewBasedToolbarItem" customModule="BookishMac" customModuleProvider="target">
                                     <nil key="toolTip"/>
-                                    <button key="view" identifier="toolbar.button.PopupPersonMenu" verticalHuggingPriority="750" id="uup-kx-3kb">
+                                    <button key="view" identifier="toolbar.button.ShowAddRelationshipMenu" verticalHuggingPriority="750" id="uup-kx-3kb">
                                         <rect key="frame" x="18" y="14" width="32" height="32"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="AddRelationship" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="frN-4k-1rM">
@@ -1296,12 +1331,15 @@
                                                                         <rect key="frame" x="90" y="52" width="500" height="23"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
-                                                                            <button identifier="button.PopupPersonMenu" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dao-6l-TBt" userLabel="Add">
+                                                                            <button identifier="button.ShowAddRelationshipMenu" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dao-6l-TBt" userLabel="Add">
                                                                                 <rect key="frame" x="451" y="3" width="15" height="16"/>
                                                                                 <buttonCell key="cell" type="inline" bezelStyle="inline" image="Plus" imagePosition="only" alignment="center" controlSize="mini" lineBreakMode="truncatingTail" state="on" inset="2" id="Xtg-GN-bZk">
                                                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                                     <font key="font" metaFont="smallSystemBold"/>
                                                                                 </buttonCell>
+                                                                                <connections>
+                                                                                    <action selector="performAction:" target="dg1-Od-cPv" id="HBA-8l-gjV"/>
+                                                                                </connections>
                                                                             </button>
                                                                             <button identifier="button.RemoveRelationship" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="uZJ-ZI-bfH" userLabel="Remove">
                                                                                 <rect key="frame" x="466" y="3" width="15" height="16"/>
@@ -1309,6 +1347,9 @@
                                                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                                     <font key="font" metaFont="smallSystemBold"/>
                                                                                 </buttonCell>
+                                                                                <connections>
+                                                                                    <action selector="performAction:" target="dg1-Od-cPv" id="mzn-uo-ezt"/>
+                                                                                </connections>
                                                                             </button>
                                                                             <button identifier="button.RevealPerson" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="c8p-wA-ae7" userLabel="Reveal">
                                                                                 <rect key="frame" x="481" y="3" width="15" height="16"/>
@@ -1316,6 +1357,9 @@
                                                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                                     <font key="font" metaFont="smallSystemBold"/>
                                                                                 </buttonCell>
+                                                                                <connections>
+                                                                                    <action selector="performAction:" target="dg1-Od-cPv" id="0rG-5U-34g"/>
+                                                                                </connections>
                                                                             </button>
                                                                             <comboBox verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="up0-NK-LzO" customClass="AnnotatedComboBox" customModule="BookishMac" customModuleProvider="target">
                                                                                 <rect key="frame" x="2" y="-2" width="450" height="23"/>
@@ -1440,6 +1484,9 @@
                                                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                                     <font key="font" metaFont="smallSystemBold"/>
                                                                                 </buttonCell>
+                                                                                <connections>
+                                                                                    <action selector="performAction:" target="dg1-Od-cPv" id="qWg-M7-9rZ"/>
+                                                                                </connections>
                                                                             </button>
                                                                         </subviews>
                                                                         <constraints>
