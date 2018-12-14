@@ -7,7 +7,9 @@ import AppKit
 import BookishModel
 import Actions
 
-class BookIndexViewController: CollectionViewController {
+class BookIndexViewController: CollectionViewController, BookLifecycleObserver {
+
+    
     @objc weak var detailView: BookDetailViewController!
     @IBOutlet weak var indexArray: NSArrayController!
     @IBOutlet weak var indexTable: NSTableView!
@@ -44,7 +46,22 @@ class BookIndexViewController: CollectionViewController {
 }
 
 extension BookIndexViewController: ActionContextProvider {
+    func provideForIndex(context: ActionContext) {
+        context.info.addObserver(self)
+    }
+    
     func provide(context: ActionContext) {
-        detailView.provide(context: context)
+        provideForIndex(context: context)
+        detailView.provideForDetail(context: context)
+    }
+
+    func created(books: [Book]) {
+        DispatchQueue.main.async {
+            self.select(books: books)
+        }
+    }
+    
+    func deleted(books: [Book]) {
+        
     }
 }

@@ -14,6 +14,12 @@ import BookishModel
         case people = 1
         case publishers = 2
         case series = 3
+        
+        static let names = ["Book", "Person", "Publisher", "Series"]
+        
+        func singluarName() -> String {
+            return Mode.names[rawValue]
+        }
     }
     
     typealias  WindowController = CollectionWindowController

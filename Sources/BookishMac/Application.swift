@@ -5,13 +5,14 @@
 
 import Cocoa
 import BookishModel
+import Actions
 import ActionsKit
 import Logger
 
 let applicationChannel = Logger("Application")
 
-@NSApplicationMain
-class Application: NSObject {
+@NSApplicationMain class Application: NSObject {
+    
     let documentWindowControllerFactory = DocumentWindowControllerFactory()
     let actionManager = ActionManagerMac()
     let importManager = ImportManager()
@@ -20,6 +21,8 @@ class Application: NSObject {
     let uiTesting = CommandLine.arguments.contains("--ui-testing")
     var testDocument = CommandLine.arguments.contains("--test-document")
     let noBlankDocument = CommandLine.arguments.contains("--no-blank-document")
+    
+    var watchedMenuItem: NSMenuItem?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -76,5 +79,43 @@ extension Application: NSApplicationDelegate {
     
     func applicationShouldOpenUntitledFile(_ sender: NSApplication) -> Bool {
         return !noBlankDocument
+    }
+}
+
+extension Application: NSMenuItemValidation {
+    func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
+        if menuItem.action == #selector(delete(_:)) {
+            // special case for the Delete menu item in the Edit menu
+            // we want to leave the action as the default, so that it works in controls in the normal
+            // way, but when it falls down lower we want to map it to the DeleteItem action
+            let validation = Application.sharedInstance.actionManager.validate(identifier: "DeleteItem", info: ActionInfo(sender: menuItem))
+            menuItem.title = validation.name ?? "Delete"
+            
+            watchForDeleteItemClosing(item: menuItem)
+            return validation.enabled
+        }
+        return false
+    }
+    
+    @IBAction func delete(_ sender: Any) {
+        Application.sharedInstance.actionManager.perform(identifier: "DeleteItem", info: ActionInfo(sender: sender))
+    }
+}
+
+extension Application: NSMenuDelegate {
+    func watchForDeleteItemClosing(item: NSMenuItem) {
+        // since we let the action change the name of the menu item, we need a way to ensure that it
+        // gets reset once the menu has been hidden; we do this by becoming the delegate of the edit
+        // menu and implementing menuDidClose
+        watchedMenuItem = item
+        assert((item.menu?.delegate == nil) || (item.menu?.delegate === self))
+        item.menu?.delegate = self
+    }
+    
+    func menuDidClose(_ menu: NSMenu) {
+        if menu == watchedMenuItem?.menu {
+            watchedMenuItem?.title = "Delete"
+            menu.delegate = nil
+        }
     }
 }

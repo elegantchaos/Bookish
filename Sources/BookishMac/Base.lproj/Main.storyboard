@@ -205,7 +205,9 @@
                                             </connections>
                                         </menuItem>
                                         <menuItem title="Delete" id="pa3-QI-u2k">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <string key="keyEquivalent" base64-UTF8="YES">
+CA
+</string>
                                             <connections>
                                                 <action selector="delete:" target="Ady-hI-5gd" id="0Mk-Ml-PaM"/>
                                             </connections>
@@ -494,7 +496,7 @@
                                     <items>
                                         <menuItem title="Logger" id="hUi-We-Cbu">
                                             <modifierMask key="keyEquivalentModifierMask"/>
-                                            <menu key="submenu" title="Logger" id="jxQ-zu-ChL" customClass="LoggerMenu" customModule="BookishMac" customModuleProvider="target"/>
+                                            <menu key="submenu" title="Logger" id="jxQ-zu-ChL" customClass="LoggerMenu" customModule="LoggerKit"/>
                                         </menuItem>
                                     </items>
                                 </menu>
@@ -1142,17 +1144,17 @@
             <objects>
                 <viewController id="TBH-Sa-Ff0" customClass="BookDetailViewController" customModule="BookishMac" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="BXj-Jh-9Ye">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="768"/>
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="400"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <box autoresizesSubviews="NO" boxType="custom" borderType="none" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="YAJ-7k-gyD">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="768"/>
+                                <rect key="frame" x="0.0" y="0.0" width="450" height="400"/>
                                 <view key="contentView" id="maZ-NJ-kB0">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="768"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="450" height="400"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <imageView identifier="cover" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nPv-jB-4iC" userLabel="Cover">
-                                            <rect key="frame" x="50" y="710" width="42" height="42"/>
+                                            <rect key="frame" x="50" y="342" width="42" height="42"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="42" id="E11-fK-gOJ"/>
                                                 <constraint firstAttribute="width" constant="42" id="FCF-as-z1Y"/>
@@ -1163,10 +1165,10 @@
                                             </connections>
                                         </imageView>
                                         <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="10" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HhJ-5d-CNv">
-                                            <rect key="frame" x="96" y="706" width="500" height="50"/>
+                                            <rect key="frame" x="96" y="338" width="350" height="50"/>
                                             <subviews>
                                                 <textField identifier="title" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7rh-Dc-PS1" userLabel="Title">
-                                                    <rect key="frame" x="-2" y="28" width="504" height="22"/>
+                                                    <rect key="frame" x="-2" y="28" width="354" height="22"/>
                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" title="Title" id="o3V-KV-G1K">
                                                         <font key="font" size="18" name=".AppleSystemUIFont"/>
                                                         <color key="textColor" name="Bookish Text"/>
@@ -1178,7 +1180,7 @@
                                                     </connections>
                                                 </textField>
                                                 <textField identifier="subtitle" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="H8A-04-75V" userLabel="Subtitle">
-                                                    <rect key="frame" x="-2" y="0.0" width="504" height="18"/>
+                                                    <rect key="frame" x="-2" y="0.0" width="354" height="18"/>
                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" title="Subtitle" id="tax-bb-RGs">
                                                         <font key="font" size="14" name=".AppleSystemUIFont"/>
                                                         <color key="textColor" name="Bookish Text"/>
@@ -1201,13 +1203,13 @@
                                             </customSpacing>
                                         </stackView>
                                         <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="26" horizontalPageScroll="10" verticalLineScroll="26" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EIm-c8-9OE" userLabel="Details Table">
-                                            <rect key="frame" x="4" y="29" width="592" height="673"/>
+                                            <rect key="frame" x="4" y="61" width="442" height="273"/>
                                             <clipView key="contentView" drawsBackground="NO" id="5CS-Yo-P4n">
-                                                <rect key="frame" x="0.0" y="0.0" width="592" height="673"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="442" height="273"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <tableView identifier="book-details" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="none" columnReordering="NO" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="24" rowSizeStyle="automatic" usesAutomaticRowHeights="YES" viewBased="YES" id="vV5-vW-Afl" userLabel="Table">
-                                                        <rect key="frame" x="0.0" y="0.0" width="592" height="673"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="442" height="273"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <size key="intercellSpacing" width="3" height="2"/>
                                                         <color key="backgroundColor" name="Bookish Detail"/>
@@ -1250,7 +1252,7 @@
                                                                     </tableCellView>
                                                                 </prototypeCellViews>
                                                             </tableColumn>
-                                                            <tableColumn identifier="detail" width="500" minWidth="40" maxWidth="1000" id="sqb-ib-qtW">
+                                                            <tableColumn identifier="detail" width="350" minWidth="40" maxWidth="1000" id="sqb-ib-qtW">
                                                                 <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="justified" title="value">
                                                                     <font key="font" metaFont="smallSystem"/>
                                                                     <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1264,11 +1266,11 @@
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES"/>
                                                                 <prototypeCellViews>
                                                                     <tableCellView identifier="text" id="CTI-AS-fZR" userLabel="text" customClass="BookDetailCell" customModule="BookishMac" customModuleProvider="target">
-                                                                        <rect key="frame" x="90" y="1" width="500" height="24"/>
+                                                                        <rect key="frame" x="90" y="1" width="350" height="24"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="u47-FK-V32">
-                                                                                <rect key="frame" x="2" y="2" width="490" height="18"/>
+                                                                                <rect key="frame" x="2" y="2" width="340" height="18"/>
                                                                                 <textFieldCell key="cell" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" alignment="left" placeholderString="value" id="33t-e1-VWE">
                                                                                     <font key="font" metaFont="systemBold" size="14"/>
                                                                                     <color key="textColor" name="Bookish Detail Text"/>
@@ -1291,11 +1293,11 @@
                                                                         </connections>
                                                                     </tableCellView>
                                                                     <tableCellView identifier="person" id="BkD-e8-vo5" userLabel="person" customClass="BookPersonCell" customModule="BookishMac" customModuleProvider="target">
-                                                                        <rect key="frame" x="90" y="27" width="500" height="23"/>
+                                                                        <rect key="frame" x="90" y="27" width="350" height="23"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <button identifier="button.RevealPerson" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="TJV-Lt-SZS" userLabel="Reveal">
-                                                                                <rect key="frame" x="481" y="3" width="15" height="16"/>
+                                                                                <rect key="frame" x="331" y="3" width="15" height="16"/>
                                                                                 <buttonCell key="cell" type="inline" bezelStyle="inline" image="Reveal" imagePosition="only" alignment="center" controlSize="mini" lineBreakMode="truncatingTail" state="on" inset="2" id="mff-9C-MBs">
                                                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                                     <font key="font" metaFont="smallSystemBold"/>
@@ -1305,7 +1307,7 @@
                                                                                 </connections>
                                                                             </button>
                                                                             <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="Mqx-x5-EGd">
-                                                                                <rect key="frame" x="2" y="2" width="479" height="18"/>
+                                                                                <rect key="frame" x="2" y="2" width="329" height="18"/>
                                                                                 <textFieldCell key="cell" selectable="YES" sendsActionOnEndEditing="YES" alignment="left" placeholderString="value" id="3kp-KF-Qk6">
                                                                                     <font key="font" metaFont="systemBold" size="14"/>
                                                                                     <color key="textColor" name="Bookish Detail Text"/>
@@ -1328,11 +1330,11 @@
                                                                         </connections>
                                                                     </tableCellView>
                                                                     <tableCellView identifier="editablePerson" id="Xqd-Mi-EGo" userLabel="person editable" customClass="BookEditablePersonCell" customModule="BookishMac" customModuleProvider="target">
-                                                                        <rect key="frame" x="90" y="52" width="500" height="23"/>
+                                                                        <rect key="frame" x="90" y="52" width="350" height="23"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <button identifier="button.ShowAddRelationshipMenu" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dao-6l-TBt" userLabel="Add">
-                                                                                <rect key="frame" x="451" y="3" width="15" height="16"/>
+                                                                                <rect key="frame" x="301" y="3" width="15" height="16"/>
                                                                                 <buttonCell key="cell" type="inline" bezelStyle="inline" image="Plus" imagePosition="only" alignment="center" controlSize="mini" lineBreakMode="truncatingTail" state="on" inset="2" id="Xtg-GN-bZk">
                                                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                                     <font key="font" metaFont="smallSystemBold"/>
@@ -1342,7 +1344,7 @@
                                                                                 </connections>
                                                                             </button>
                                                                             <button identifier="button.RemoveRelationship" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="uZJ-ZI-bfH" userLabel="Remove">
-                                                                                <rect key="frame" x="466" y="3" width="15" height="16"/>
+                                                                                <rect key="frame" x="316" y="3" width="15" height="16"/>
                                                                                 <buttonCell key="cell" type="inline" bezelStyle="inline" image="Minus" imagePosition="overlaps" alignment="center" controlSize="mini" lineBreakMode="truncatingTail" state="on" inset="2" id="bbo-qY-Htk">
                                                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                                     <font key="font" metaFont="smallSystemBold"/>
@@ -1352,7 +1354,7 @@
                                                                                 </connections>
                                                                             </button>
                                                                             <button identifier="button.RevealPerson" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="c8p-wA-ae7" userLabel="Reveal">
-                                                                                <rect key="frame" x="481" y="3" width="15" height="16"/>
+                                                                                <rect key="frame" x="331" y="3" width="15" height="16"/>
                                                                                 <buttonCell key="cell" type="inline" bezelStyle="inline" image="Reveal" imagePosition="only" alignment="center" controlSize="mini" lineBreakMode="truncatingTail" state="on" inset="2" id="cA9-6Q-h8r">
                                                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                                     <font key="font" metaFont="smallSystemBold"/>
@@ -1362,7 +1364,7 @@
                                                                                 </connections>
                                                                             </button>
                                                                             <comboBox verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="up0-NK-LzO" customClass="AnnotatedComboBox" customModule="BookishMac" customModuleProvider="target">
-                                                                                <rect key="frame" x="2" y="-2" width="450" height="23"/>
+                                                                                <rect key="frame" x="2" y="-2" width="300" height="23"/>
                                                                                 <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" title="Person" numberOfVisibleItems="5" id="x93-id-LgP">
                                                                                     <font key="font" metaFont="system" size="14"/>
                                                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -1399,11 +1401,11 @@
                                                                         </connections>
                                                                     </tableCellView>
                                                                     <tableCellView identifier="publisher" id="efO-r1-NRc" userLabel="publisher" customClass="BookPublisherCell" customModule="BookishMac" customModuleProvider="target">
-                                                                        <rect key="frame" x="90" y="77" width="500" height="23"/>
+                                                                        <rect key="frame" x="90" y="77" width="350" height="23"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <button identifier="button.RevealPublisher" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cYg-KH-1LT" userLabel="Reveal">
-                                                                                <rect key="frame" x="481" y="3" width="15" height="16"/>
+                                                                                <rect key="frame" x="331" y="3" width="15" height="16"/>
                                                                                 <buttonCell key="cell" type="inline" bezelStyle="inline" image="Reveal" imagePosition="only" alignment="center" controlSize="mini" lineBreakMode="truncatingTail" state="on" inset="2" id="WX4-oJ-Dnd">
                                                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                                     <font key="font" metaFont="smallSystemBold"/>
@@ -1413,7 +1415,7 @@
                                                                                 </connections>
                                                                             </button>
                                                                             <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="ykz-Tv-Hz6">
-                                                                                <rect key="frame" x="2" y="2" width="479" height="18"/>
+                                                                                <rect key="frame" x="2" y="2" width="329" height="18"/>
                                                                                 <textFieldCell key="cell" selectable="YES" sendsActionOnEndEditing="YES" alignment="left" placeholderString="value" id="Y9d-m4-U5Q">
                                                                                     <font key="font" metaFont="systemBold" size="14"/>
                                                                                     <color key="textColor" name="Bookish Detail Text"/>
@@ -1436,11 +1438,11 @@
                                                                         </connections>
                                                                     </tableCellView>
                                                                     <tableCellView identifier="date" id="DyG-Q7-Wwd" userLabel="date" customClass="BookDateCell" customModule="BookishMac" customModuleProvider="target">
-                                                                        <rect key="frame" x="90" y="102" width="500" height="24"/>
+                                                                        <rect key="frame" x="90" y="102" width="350" height="24"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="ZVF-Ib-kQh">
-                                                                                <rect key="frame" x="2" y="2" width="496" height="18"/>
+                                                                                <rect key="frame" x="2" y="2" width="346" height="18"/>
                                                                                 <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" continuous="YES" alignment="left" placeholderString="value" usesSingleLineMode="YES" id="j79-sX-bKh">
                                                                                     <font key="font" metaFont="systemBold" size="14"/>
                                                                                     <color key="textColor" name="Bookish Detail Text"/>
@@ -1463,11 +1465,11 @@
                                                                         </connections>
                                                                     </tableCellView>
                                                                     <tableCellView identifier="editableDate" id="7Lf-1O-gT0" userLabel="date editable" customClass="BookEditableDateCell" customModule="BookishMac" customModuleProvider="target">
-                                                                        <rect key="frame" x="90" y="128" width="500" height="24"/>
+                                                                        <rect key="frame" x="90" y="128" width="350" height="24"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="lhg-Qc-OrU" customClass="AnnotatedTextField" customModule="BookishMac" customModuleProvider="target">
-                                                                                <rect key="frame" x="2" y="2" width="477" height="18"/>
+                                                                                <rect key="frame" x="2" y="2" width="327" height="18"/>
                                                                                 <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" continuous="YES" alignment="left" placeholderString="value" usesSingleLineMode="YES" id="wUa-s6-Ue7">
                                                                                     <font key="font" metaFont="systemBold" size="14"/>
                                                                                     <color key="textColor" name="Bookish Detail Text"/>
@@ -1479,7 +1481,7 @@
                                                                                 </connections>
                                                                             </textField>
                                                                             <button identifier="button.ShowDatePicker" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="M8z-vs-vox" userLabel="Select">
-                                                                                <rect key="frame" x="485" y="3" width="15" height="16"/>
+                                                                                <rect key="frame" x="335" y="3" width="15" height="16"/>
                                                                                 <buttonCell key="cell" type="inline" bezelStyle="inline" image="ChooseDateSmall" imagePosition="only" alignment="center" controlSize="mini" lineBreakMode="truncatingTail" state="on" inset="2" id="thl-sr-2sm">
                                                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                                     <font key="font" metaFont="smallSystemBold"/>
@@ -1503,14 +1505,14 @@
                                                                         </connections>
                                                                     </tableCellView>
                                                                     <tableCellView identifier="editableDimensions" id="GRN-RI-c8z" userLabel="dimensions" customClass="BookDimensionsCell" customModule="BookishMac" customModuleProvider="target">
-                                                                        <rect key="frame" x="90" y="154" width="500" height="24"/>
+                                                                        <rect key="frame" x="90" y="154" width="350" height="24"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <stackView distribution="fillEqually" orientation="horizontal" alignment="top" spacing="10" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dpj-i7-uGg">
-                                                                                <rect key="frame" x="2" y="2" width="496" height="18"/>
+                                                                                <rect key="frame" x="2" y="2" width="346" height="18"/>
                                                                                 <subviews>
                                                                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Rxq-ce-IdX">
-                                                                                        <rect key="frame" x="-2" y="1" width="78" height="17"/>
+                                                                                        <rect key="frame" x="-2" y="1" width="53" height="17"/>
                                                                                         <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="width" id="B5c-Dg-g1y">
                                                                                             <font key="font" metaFont="system"/>
                                                                                             <color key="textColor" name="Bookish Label Text"/>
@@ -1521,7 +1523,7 @@
                                                                                         </connections>
                                                                                     </textField>
                                                                                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="3v3-p9-bdK">
-                                                                                        <rect key="frame" x="82" y="0.0" width="79" height="18"/>
+                                                                                        <rect key="frame" x="57" y="0.0" width="54" height="18"/>
                                                                                         <textFieldCell key="cell" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" alignment="left" placeholderString="width" id="0fH-mt-rvQ">
                                                                                             <font key="font" metaFont="systemBold" size="14"/>
                                                                                             <color key="textColor" name="Bookish Detail Text"/>
@@ -1533,7 +1535,7 @@
                                                                                         </connections>
                                                                                     </textField>
                                                                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ugw-ui-F4a">
-                                                                                        <rect key="frame" x="167" y="1" width="78" height="17"/>
+                                                                                        <rect key="frame" x="117" y="1" width="53" height="17"/>
                                                                                         <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="height" id="2nR-8g-gaj">
                                                                                             <font key="font" metaFont="system"/>
                                                                                             <color key="textColor" name="Bookish Label Text"/>
@@ -1544,7 +1546,7 @@
                                                                                         </connections>
                                                                                     </textField>
                                                                                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="PWE-5c-T00">
-                                                                                        <rect key="frame" x="251" y="0.0" width="78" height="18"/>
+                                                                                        <rect key="frame" x="176" y="0.0" width="53" height="18"/>
                                                                                         <textFieldCell key="cell" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" alignment="left" placeholderString="height" id="McL-UM-Fxu">
                                                                                             <font key="font" metaFont="systemBold" size="14"/>
                                                                                             <color key="textColor" name="Bookish Detail Text"/>
@@ -1556,7 +1558,7 @@
                                                                                         </connections>
                                                                                     </textField>
                                                                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zEK-la-tRl">
-                                                                                        <rect key="frame" x="335" y="1" width="79" height="17"/>
+                                                                                        <rect key="frame" x="235" y="1" width="54" height="17"/>
                                                                                         <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="depth" id="2ll-11-5hb">
                                                                                             <font key="font" metaFont="system"/>
                                                                                             <color key="textColor" name="Bookish Label Text"/>
@@ -1567,7 +1569,7 @@
                                                                                         </connections>
                                                                                     </textField>
                                                                                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="oV8-6N-g7m">
-                                                                                        <rect key="frame" x="420" y="0.0" width="78" height="18"/>
+                                                                                        <rect key="frame" x="295" y="0.0" width="53" height="18"/>
                                                                                         <textFieldCell key="cell" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" alignment="left" placeholderString="depth" id="yMd-Rq-oTb">
                                                                                             <font key="font" metaFont="systemBold" size="14"/>
                                                                                             <color key="textColor" name="Bookish Detail Text"/>
@@ -1611,7 +1613,7 @@
                                                                         </connections>
                                                                     </tableCellView>
                                                                     <tableCellView identifier="series" id="Biy-Ug-fg1" userLabel="series" customClass="BookSeriesCell" customModule="BookishMac" customModuleProvider="target">
-                                                                        <rect key="frame" x="90" y="180" width="500" height="24"/>
+                                                                        <rect key="frame" x="90" y="180" width="350" height="24"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="g9e-mB-bmk" userLabel="Series">
@@ -1627,7 +1629,7 @@
                                                                                 </connections>
                                                                             </textField>
                                                                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="KGH-sB-tNk" userLabel="Index">
-                                                                                <rect key="frame" x="43" y="2" width="436" height="18"/>
+                                                                                <rect key="frame" x="43" y="2" width="286" height="18"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="64" id="6oM-1t-69r"/>
                                                                                 </constraints>
@@ -1642,7 +1644,7 @@
                                                                                 </connections>
                                                                             </textField>
                                                                             <button identifier="button.RevealSeries" horizontalHuggingPriority="260" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="PJr-xJ-30U" userLabel="Reveal">
-                                                                                <rect key="frame" x="481" y="3" width="15" height="16"/>
+                                                                                <rect key="frame" x="331" y="3" width="15" height="16"/>
                                                                                 <buttonCell key="cell" type="inline" bezelStyle="inline" image="Reveal" imagePosition="only" alignment="center" controlSize="mini" lineBreakMode="truncatingTail" state="on" inset="2" id="nd4-B6-Nxt">
                                                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                                     <font key="font" metaFont="smallSystemBold"/>
@@ -1680,7 +1682,7 @@
                                                 <nil key="backgroundColor"/>
                                             </clipView>
                                             <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="1Kf-VT-TKi">
-                                                <rect key="frame" x="0.0" y="657" width="592" height="16"/>
+                                                <rect key="frame" x="0.0" y="257" width="442" height="16"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                             </scroller>
                                             <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="ouR-eG-FUC">
@@ -1689,7 +1691,7 @@
                                             </scroller>
                                         </scrollView>
                                         <button identifier="button.ToggleEditing" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bB5-JR-2gl">
-                                            <rect key="frame" x="538" y="-3" width="64" height="32"/>
+                                            <rect key="frame" x="372" y="13" width="64" height="32"/>
                                             <buttonCell key="cell" type="push" title="Edit" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="nfm-QF-mrY">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="system"/>
@@ -1698,18 +1700,34 @@
                                                 <action selector="performAction:" target="dg1-Od-cPv" id="Svd-1f-jcS"/>
                                             </connections>
                                         </button>
+                                        <button identifier="button..NewBook" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="BCz-xX-NaH">
+                                            <rect key="frame" x="14" y="13" width="36" height="35"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="24" id="4At-G5-N3o"/>
+                                                <constraint firstAttribute="width" constant="24" id="drt-ca-hcY"/>
+                                            </constraints>
+                                            <buttonCell key="cell" type="push" bezelStyle="rounded" image="NSAddTemplate" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="42c-Qn-zth">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="performAction:" target="dg1-Od-cPv" id="kp0-mP-pgz"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="EIm-c8-9OE" firstAttribute="leading" secondItem="maZ-NJ-kB0" secondAttribute="leading" constant="4" id="GPe-5o-Osf"/>
                                         <constraint firstItem="HhJ-5d-CNv" firstAttribute="leading" secondItem="nPv-jB-4iC" secondAttribute="trailing" constant="4" id="Pgb-fr-Tkx"/>
                                         <constraint firstItem="nPv-jB-4iC" firstAttribute="leading" secondItem="maZ-NJ-kB0" secondAttribute="leading" constant="50" id="S2Q-ms-Nk0"/>
-                                        <constraint firstAttribute="bottom" secondItem="bB5-JR-2gl" secondAttribute="bottom" constant="4" id="Sfs-lt-upO"/>
+                                        <constraint firstAttribute="bottom" secondItem="bB5-JR-2gl" secondAttribute="bottom" constant="20" symbolic="YES" id="Sfs-lt-upO"/>
                                         <constraint firstAttribute="trailing" secondItem="HhJ-5d-CNv" secondAttribute="trailing" constant="4" id="YVz-aI-MEL"/>
                                         <constraint firstAttribute="trailing" secondItem="EIm-c8-9OE" secondAttribute="trailing" constant="4" id="Ywz-aN-v4F"/>
-                                        <constraint firstItem="bB5-JR-2gl" firstAttribute="top" secondItem="EIm-c8-9OE" secondAttribute="bottom" constant="4" id="hxR-1z-AB3"/>
+                                        <constraint firstItem="bB5-JR-2gl" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="BCz-xX-NaH" secondAttribute="trailing" constant="12" symbolic="YES" id="d5L-JY-J6a"/>
+                                        <constraint firstItem="BCz-xX-NaH" firstAttribute="leading" secondItem="maZ-NJ-kB0" secondAttribute="leading" constant="20" symbolic="YES" id="dce-CC-WmN"/>
+                                        <constraint firstItem="bB5-JR-2gl" firstAttribute="top" secondItem="EIm-c8-9OE" secondAttribute="bottom" constant="20" symbolic="YES" id="hxR-1z-AB3"/>
                                         <constraint firstItem="EIm-c8-9OE" firstAttribute="top" secondItem="HhJ-5d-CNv" secondAttribute="bottom" constant="4" id="jWi-L0-5hm"/>
-                                        <constraint firstItem="bB5-JR-2gl" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="maZ-NJ-kB0" secondAttribute="leading" constant="4" id="kda-2c-Zik"/>
-                                        <constraint firstAttribute="trailing" secondItem="bB5-JR-2gl" secondAttribute="trailing" constant="4" id="mOe-00-VBH"/>
+                                        <constraint firstAttribute="trailing" secondItem="bB5-JR-2gl" secondAttribute="trailing" constant="20" symbolic="YES" id="mOe-00-VBH"/>
+                                        <constraint firstAttribute="bottom" secondItem="BCz-xX-NaH" secondAttribute="bottom" constant="20" symbolic="YES" id="oVb-Qe-U50"/>
                                         <constraint firstItem="nPv-jB-4iC" firstAttribute="top" secondItem="maZ-NJ-kB0" secondAttribute="top" constant="16" id="pcO-4H-KeH"/>
                                         <constraint firstItem="HhJ-5d-CNv" firstAttribute="centerY" secondItem="nPv-jB-4iC" secondAttribute="centerY" id="tfl-TS-ooi"/>
                                     </constraints>
@@ -1741,7 +1759,7 @@
                 </arrayController>
                 <userDefaultsController representsSharedInstance="YES" id="CPG-9C-fnr"/>
             </objects>
-            <point key="canvasLocation" x="1374" y="2765"/>
+            <point key="canvasLocation" x="1576" y="2765"/>
         </scene>
         <!--Date Picker Popover Controller-->
         <scene sceneID="K1V-fB-Brr">
@@ -1783,7 +1801,7 @@
                         <tabViewItem id="HuQ-JD-SqE"/>
                     </tabViewItems>
                     <tabView key="tabView" type="noTabsNoBorder" id="7Xn-vq-0BQ">
-                        <rect key="frame" x="0.0" y="0.0" width="824" height="768"/>
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="400"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <font key="font" metaFont="message"/>
                         <connections>
@@ -1801,24 +1819,24 @@
                 </tabViewController>
                 <customObject id="EIm-WY-fNg" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1324" y="1793"/>
+            <point key="canvasLocation" x="2295" y="2086"/>
         </scene>
         <!--Person Detail View Controller-->
         <scene sceneID="xv8-hT-z0j">
             <objects>
                 <viewController id="YQJ-9e-4qw" customClass="PersonDetailViewController" customModule="BookishMac" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="QrP-6D-yZd">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="768"/>
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="400"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <box autoresizesSubviews="NO" boxType="custom" borderType="none" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="ngD-fc-lyV" userLabel="Background">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="768"/>
+                                <rect key="frame" x="0.0" y="0.0" width="450" height="400"/>
                                 <view key="contentView" id="lGG-wy-3ri">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="768"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="450" height="400"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <imageView identifier="person.portrait" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="HXp-Nq-8Tg" userLabel="Portrait">
-                                            <rect key="frame" x="50" y="710" width="42" height="42"/>
+                                            <rect key="frame" x="50" y="342" width="42" height="42"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="42" id="AT2-Qe-cjg"/>
                                                 <constraint firstAttribute="width" constant="42" id="RsN-0h-aaX"/>
@@ -1833,7 +1851,7 @@
                                             </connections>
                                         </imageView>
                                         <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Wvi-TN-fxn">
-                                            <rect key="frame" x="94" y="720" width="504" height="22"/>
+                                            <rect key="frame" x="94" y="352" width="354" height="22"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" id="Hiu-h7-vn5">
                                                 <font key="font" metaFont="system" size="18"/>
                                                 <color key="textColor" name="Bookish Text"/>
@@ -1845,7 +1863,7 @@
                                             </connections>
                                         </textField>
                                         <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Suv-V7-thw">
-                                            <rect key="frame" x="94" y="616" width="504" height="100"/>
+                                            <rect key="frame" x="94" y="248" width="354" height="100"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="100" id="WjI-fS-mkm"/>
                                             </constraints>
@@ -1860,19 +1878,19 @@
                                             </connections>
                                         </textField>
                                         <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="26" horizontalPageScroll="10" verticalLineScroll="26" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sUr-5g-BKU" userLabel="Details">
-                                            <rect key="frame" x="96" y="4" width="500" height="608"/>
+                                            <rect key="frame" x="96" y="64" width="350" height="180"/>
                                             <clipView key="contentView" drawsBackground="NO" id="qJ4-6Y-fkk">
-                                                <rect key="frame" x="0.0" y="0.0" width="500" height="608"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="350" height="180"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <tableView identifier="person-details" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="none" columnReordering="NO" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="24" rowSizeStyle="automatic" usesAutomaticRowHeights="YES" viewBased="YES" id="jHn-8w-0MB">
-                                                        <rect key="frame" x="0.0" y="0.0" width="500" height="608"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="350" height="180"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <size key="intercellSpacing" width="3" height="2"/>
                                                         <color key="backgroundColor" name="Bookish Detail"/>
                                                         <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                                         <tableColumns>
-                                                            <tableColumn identifier="value" width="497" minWidth="40" maxWidth="1000" id="VOt-V0-Tp4">
+                                                            <tableColumn identifier="value" width="347" minWidth="40" maxWidth="1000" id="VOt-V0-Tp4">
                                                                 <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="right" title="value">
                                                                     <font key="font" metaFont="smallSystem"/>
                                                                     <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1886,7 +1904,7 @@
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <prototypeCellViews>
                                                                     <tableCellView identifier="book" id="kOa-mX-ie0" userLabel="book cell" customClass="BookCell" customModule="BookishMac" customModuleProvider="target">
-                                                                        <rect key="frame" x="1" y="1" width="497" height="22"/>
+                                                                        <rect key="frame" x="1" y="1" width="347" height="22"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="oeA-lN-ssU">
@@ -1901,7 +1919,7 @@
                                                                                 </connections>
                                                                             </textField>
                                                                             <button identifier="button.RevealBook" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jQ1-F6-YDa" userLabel="Reveal">
-                                                                                <rect key="frame" x="482" y="3" width="15" height="16"/>
+                                                                                <rect key="frame" x="332" y="3" width="15" height="16"/>
                                                                                 <buttonCell key="cell" type="inline" bezelStyle="inline" image="Reveal" imagePosition="only" alignment="center" controlSize="mini" lineBreakMode="truncatingTail" state="on" inset="2" id="lJA-tD-X4w">
                                                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                                     <font key="font" metaFont="smallSystemBold"/>
@@ -1924,11 +1942,11 @@
                                                                         </connections>
                                                                     </tableCellView>
                                                                     <tableCellView identifier="role" id="BUh-17-nIV" userLabel="role cell" customClass="RelationshipCell" customModule="BookishMac" customModuleProvider="target">
-                                                                        <rect key="frame" x="1" y="25" width="497" height="24"/>
+                                                                        <rect key="frame" x="1" y="25" width="347" height="24"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="p0l-TW-mcV">
-                                                                                <rect key="frame" x="2" y="2" width="493" height="20"/>
+                                                                                <rect key="frame" x="2" y="2" width="343" height="20"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="20" id="6ke-Me-olM"/>
                                                                                 </constraints>
@@ -1964,7 +1982,7 @@
                                                 <nil key="backgroundColor"/>
                                             </clipView>
                                             <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="ZJd-3J-eEP">
-                                                <rect key="frame" x="0.0" y="592" width="500" height="16"/>
+                                                <rect key="frame" x="0.0" y="164" width="350" height="16"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                             </scroller>
                                             <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="p1F-YV-V6G">
@@ -1972,6 +1990,22 @@
                                                 <autoresizingMask key="autoresizingMask"/>
                                             </scroller>
                                         </scrollView>
+                                        <button identifier="button..NewPerson" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ee3-Ei-ghf">
+                                            <rect key="frame" x="14" y="13" width="36" height="35"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="24" id="CBc-hW-qjm"/>
+                                                <constraint firstAttribute="height" constant="24" id="LgC-wD-HNF"/>
+                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="24" id="O3Y-Fe-99q"/>
+                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="24" id="UBg-Q7-R4H"/>
+                                            </constraints>
+                                            <buttonCell key="cell" type="push" bezelStyle="rounded" image="NSAddTemplate" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="rqf-Ud-CWY">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="performAction:" target="9ol-mz-Bsh" id="tKr-AD-tLS"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="trailing" secondItem="Suv-V7-thw" secondAttribute="trailing" constant="4" id="21X-Qj-ISj"/>
@@ -1981,11 +2015,13 @@
                                         <constraint firstItem="Wvi-TN-fxn" firstAttribute="centerY" secondItem="HXp-Nq-8Tg" secondAttribute="centerY" id="P4b-Mz-j14"/>
                                         <constraint firstItem="HXp-Nq-8Tg" firstAttribute="leading" secondItem="lGG-wy-3ri" secondAttribute="leading" constant="50" id="UfU-PI-eC3"/>
                                         <constraint firstItem="sUr-5g-BKU" firstAttribute="leading" secondItem="Suv-V7-thw" secondAttribute="leading" id="V4J-Nh-yZb"/>
+                                        <constraint firstItem="ee3-Ei-ghf" firstAttribute="top" secondItem="sUr-5g-BKU" secondAttribute="bottom" constant="20" symbolic="YES" id="X2P-tm-aJJ"/>
                                         <constraint firstItem="HXp-Nq-8Tg" firstAttribute="top" secondItem="lGG-wy-3ri" secondAttribute="top" constant="16" id="YKb-Jq-YRR"/>
                                         <constraint firstItem="Suv-V7-thw" firstAttribute="top" secondItem="Wvi-TN-fxn" secondAttribute="bottom" constant="4" id="Yaj-2V-cpX"/>
                                         <constraint firstItem="Wvi-TN-fxn" firstAttribute="leading" secondItem="HXp-Nq-8Tg" secondAttribute="trailing" constant="4" id="ZVd-0X-b1S"/>
+                                        <constraint firstItem="ee3-Ei-ghf" firstAttribute="leading" secondItem="lGG-wy-3ri" secondAttribute="leading" constant="20" symbolic="YES" id="cwS-SQ-4ta"/>
                                         <constraint firstItem="Wvi-TN-fxn" firstAttribute="leading" secondItem="Suv-V7-thw" secondAttribute="leading" id="nRn-5I-S4v"/>
-                                        <constraint firstAttribute="bottom" secondItem="sUr-5g-BKU" secondAttribute="bottom" constant="4" id="sVl-H0-ojL"/>
+                                        <constraint firstAttribute="bottom" secondItem="ee3-Ei-ghf" secondAttribute="bottom" constant="20" symbolic="YES" id="vLt-ZQ-wBY"/>
                                     </constraints>
                                 </view>
                                 <color key="fillColor" name="Bookish Detail"/>
@@ -2006,7 +2042,7 @@
                 </viewController>
                 <customObject id="9ol-mz-Bsh" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2002" y="2765"/>
+            <point key="canvasLocation" x="2053" y="2765"/>
         </scene>
         <!--Publisher Index View Controller-->
         <scene sceneID="9Ap-Zt-ZhT">
@@ -2319,17 +2355,17 @@
             <objects>
                 <viewController id="n3q-DF-N5R" customClass="SeriesDetailViewController" customModule="BookishMac" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="eNM-Zx-oct">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="400"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <box autoresizesSubviews="NO" boxType="custom" borderType="none" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="nUN-lg-Gx9" userLabel="Background">
-                                <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                                <rect key="frame" x="0.0" y="0.0" width="450" height="400"/>
                                 <view key="contentView" id="XFD-Nz-BUj">
-                                    <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="450" height="400"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <imageView identifier="series.image" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cMe-q7-A3I" userLabel="Portrait">
-                                            <rect key="frame" x="50" y="242" width="42" height="42"/>
+                                            <rect key="frame" x="50" y="342" width="42" height="42"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="42" id="3ud-kK-wtb"/>
                                                 <constraint firstAttribute="width" constant="42" id="yl0-bw-7qq"/>
@@ -2344,7 +2380,7 @@
                                             </connections>
                                         </imageView>
                                         <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1hS-zV-NKy">
-                                            <rect key="frame" x="94" y="252" width="354" height="22"/>
+                                            <rect key="frame" x="94" y="352" width="354" height="22"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" id="BEU-LK-vmL">
                                                 <font key="font" metaFont="system" size="18"/>
                                                 <color key="textColor" name="Bookish Text"/>
@@ -2356,7 +2392,7 @@
                                             </connections>
                                         </textField>
                                         <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ykj-uj-ehm">
-                                            <rect key="frame" x="94" y="148" width="354" height="100"/>
+                                            <rect key="frame" x="94" y="248" width="354" height="100"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="100" id="Me7-r1-I5w"/>
                                             </constraints>
@@ -2371,13 +2407,13 @@
                                             </connections>
                                         </textField>
                                         <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="26" horizontalPageScroll="10" verticalLineScroll="26" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R2H-ks-yZc" userLabel="Details">
-                                            <rect key="frame" x="96" y="4" width="350" height="140"/>
+                                            <rect key="frame" x="96" y="64" width="350" height="180"/>
                                             <clipView key="contentView" drawsBackground="NO" id="EME-m3-Z9W">
-                                                <rect key="frame" x="0.0" y="0.0" width="350" height="140"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="350" height="180"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <tableView identifier="series-details" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="none" columnReordering="NO" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="24" rowSizeStyle="automatic" usesAutomaticRowHeights="YES" viewBased="YES" id="h0t-Bl-8yA">
-                                                        <rect key="frame" x="0.0" y="0.0" width="350" height="140"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="350" height="180"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <size key="intercellSpacing" width="3" height="2"/>
                                                         <color key="backgroundColor" name="Bookish Detail"/>
@@ -2483,20 +2519,40 @@
                                                 <autoresizingMask key="autoresizingMask"/>
                                             </scroller>
                                         </scrollView>
+                                        <button identifier="button..NewSeries" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pU5-9u-1ND">
+                                            <rect key="frame" x="14" y="13" width="36" height="35"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="24" id="3lL-6W-hlT"/>
+                                                <constraint firstAttribute="width" constant="24" id="BUa-4a-Tdl"/>
+                                                <constraint firstAttribute="width" relation="lessThanOrEqual" constant="24" id="fYS-Ub-vDR"/>
+                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="24" id="fsw-l5-8zl"/>
+                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="24" id="qPt-Ez-Cwt"/>
+                                                <constraint firstAttribute="height" relation="lessThanOrEqual" constant="24" id="ugi-84-RAZ"/>
+                                            </constraints>
+                                            <buttonCell key="cell" type="push" bezelStyle="rounded" image="NSAddTemplate" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Jgj-wu-0Xm">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="performAction:" target="bkg-qU-L0Y" id="dL3-ZD-QBN"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="bottom" secondItem="R2H-ks-yZc" secondAttribute="bottom" constant="4" id="Ac8-hk-0Xh"/>
                                         <constraint firstItem="R2H-ks-yZc" firstAttribute="top" secondItem="Ykj-uj-ehm" secondAttribute="bottom" constant="4" id="B9d-Uc-I2Y"/>
                                         <constraint firstItem="cMe-q7-A3I" firstAttribute="leading" secondItem="XFD-Nz-BUj" secondAttribute="leading" constant="50" id="Ddk-gJ-Vjt"/>
                                         <constraint firstItem="cMe-q7-A3I" firstAttribute="top" secondItem="XFD-Nz-BUj" secondAttribute="top" constant="16" id="EY9-Sf-5rl"/>
                                         <constraint firstItem="R2H-ks-yZc" firstAttribute="leading" secondItem="Ykj-uj-ehm" secondAttribute="leading" id="Ex5-au-hDg"/>
                                         <constraint firstItem="1hS-zV-NKy" firstAttribute="leading" secondItem="cMe-q7-A3I" secondAttribute="trailing" constant="4" id="Nya-zP-7fa"/>
                                         <constraint firstItem="Ykj-uj-ehm" firstAttribute="top" secondItem="1hS-zV-NKy" secondAttribute="bottom" constant="4" id="PRa-0t-J5k"/>
+                                        <constraint firstItem="pU5-9u-1ND" firstAttribute="leading" secondItem="XFD-Nz-BUj" secondAttribute="leading" constant="20" symbolic="YES" id="Rc1-A8-rDM"/>
                                         <constraint firstAttribute="trailing" secondItem="1hS-zV-NKy" secondAttribute="trailing" constant="4" id="WcD-eZ-BdQ"/>
                                         <constraint firstAttribute="trailing" secondItem="R2H-ks-yZc" secondAttribute="trailing" constant="4" id="ZKn-TA-yh7"/>
+                                        <constraint firstItem="pU5-9u-1ND" firstAttribute="top" secondItem="R2H-ks-yZc" secondAttribute="bottom" constant="20" symbolic="YES" id="bVX-Ee-gON"/>
                                         <constraint firstAttribute="trailing" secondItem="Ykj-uj-ehm" secondAttribute="trailing" constant="4" id="bjW-Ke-OTd"/>
                                         <constraint firstItem="1hS-zV-NKy" firstAttribute="leading" secondItem="Ykj-uj-ehm" secondAttribute="leading" id="ftE-cJ-GgL"/>
                                         <constraint firstItem="1hS-zV-NKy" firstAttribute="centerY" secondItem="cMe-q7-A3I" secondAttribute="centerY" id="hFZ-Wp-HWF"/>
+                                        <constraint firstAttribute="bottom" secondItem="pU5-9u-1ND" secondAttribute="bottom" constant="20" symbolic="YES" id="t0c-JX-Eyq"/>
                                     </constraints>
                                 </view>
                                 <color key="fillColor" name="Bookish Detail"/>
@@ -2517,24 +2573,24 @@
                 </viewController>
                 <customObject id="bkg-qU-L0Y" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3033" y="2531"/>
+            <point key="canvasLocation" x="3027" y="2765"/>
         </scene>
         <!--Publisher Detail View Controller-->
         <scene sceneID="tCk-nT-C5k">
             <objects>
                 <viewController id="U2M-2A-7Qb" customClass="PublisherDetailViewController" customModule="BookishMac" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="Xs1-9b-r4G">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="400"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <box autoresizesSubviews="NO" boxType="custom" borderType="none" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="LXw-av-XeV" userLabel="Background">
-                                <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                                <rect key="frame" x="0.0" y="0.0" width="450" height="400"/>
                                 <view key="contentView" id="uUS-Jx-Znn">
-                                    <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="450" height="400"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <imageView identifier="publisher.image" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pwF-tx-Ohf" userLabel="Portrait">
-                                            <rect key="frame" x="50" y="242" width="42" height="42"/>
+                                            <rect key="frame" x="50" y="342" width="42" height="42"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="42" id="EQw-L9-1eS"/>
                                                 <constraint firstAttribute="height" constant="42" id="Twr-Zt-0VU"/>
@@ -2549,7 +2605,7 @@
                                             </connections>
                                         </imageView>
                                         <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="GTp-HP-MDW">
-                                            <rect key="frame" x="94" y="252" width="354" height="22"/>
+                                            <rect key="frame" x="94" y="352" width="354" height="22"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" id="AlL-6o-eHj">
                                                 <font key="font" metaFont="system" size="18"/>
                                                 <color key="textColor" name="Bookish Text"/>
@@ -2561,7 +2617,7 @@
                                             </connections>
                                         </textField>
                                         <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ETF-xM-x22">
-                                            <rect key="frame" x="94" y="148" width="354" height="100"/>
+                                            <rect key="frame" x="94" y="248" width="354" height="100"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="100" id="hNl-tE-v21"/>
                                             </constraints>
@@ -2576,13 +2632,13 @@
                                             </connections>
                                         </textField>
                                         <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="26" horizontalPageScroll="10" verticalLineScroll="26" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dZn-hY-ta0" userLabel="Details">
-                                            <rect key="frame" x="96" y="4" width="350" height="140"/>
+                                            <rect key="frame" x="96" y="64" width="350" height="180"/>
                                             <clipView key="contentView" drawsBackground="NO" id="80Q-tS-nJT">
-                                                <rect key="frame" x="0.0" y="0.0" width="350" height="140"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="350" height="180"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <tableView identifier="publisher-details" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="none" columnReordering="NO" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="24" rowSizeStyle="automatic" usesAutomaticRowHeights="YES" viewBased="YES" id="mC6-Zf-gpF">
-                                                        <rect key="frame" x="0.0" y="0.0" width="350" height="140"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="350" height="180"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <size key="intercellSpacing" width="3" height="2"/>
                                                         <color key="backgroundColor" name="Bookish Detail"/>
@@ -2688,11 +2744,31 @@
                                                 <autoresizingMask key="autoresizingMask"/>
                                             </scroller>
                                         </scrollView>
+                                        <button identifier="button..NewPublisher" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vU6-7u-EpC">
+                                            <rect key="frame" x="14" y="13" width="36" height="35"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="24" id="BaT-IB-rz1"/>
+                                                <constraint firstAttribute="width" relation="lessThanOrEqual" constant="24" id="QAA-lJ-lBb"/>
+                                                <constraint firstAttribute="height" constant="24" id="d8R-I8-adO"/>
+                                                <constraint firstAttribute="height" relation="lessThanOrEqual" constant="24" id="eJC-c1-6j9"/>
+                                                <constraint firstAttribute="width" constant="24" id="jr9-nk-ALh"/>
+                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="24" id="vKK-l2-CSY"/>
+                                            </constraints>
+                                            <buttonCell key="cell" type="push" bezelStyle="rounded" image="NSAddTemplate" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="XfA-RV-Hhn">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="performAction:" target="mWl-zV-rjl" id="fQy-cp-zjQ"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="vU6-7u-EpC" firstAttribute="leading" secondItem="uUS-Jx-Znn" secondAttribute="leading" constant="20" symbolic="YES" id="5Qf-26-xdU"/>
                                         <constraint firstAttribute="trailing" secondItem="dZn-hY-ta0" secondAttribute="trailing" constant="4" id="740-d1-gQZ"/>
+                                        <constraint firstAttribute="bottom" secondItem="vU6-7u-EpC" secondAttribute="bottom" constant="20" symbolic="YES" id="8Gw-K3-GR6"/>
                                         <constraint firstItem="GTp-HP-MDW" firstAttribute="centerY" secondItem="pwF-tx-Ohf" secondAttribute="centerY" id="Bnc-GY-F8m"/>
-                                        <constraint firstAttribute="bottom" secondItem="dZn-hY-ta0" secondAttribute="bottom" constant="4" id="FAf-il-zND"/>
+                                        <constraint firstItem="vU6-7u-EpC" firstAttribute="top" secondItem="dZn-hY-ta0" secondAttribute="bottom" constant="20" symbolic="YES" id="KME-PN-0yk"/>
                                         <constraint firstItem="pwF-tx-Ohf" firstAttribute="top" secondItem="uUS-Jx-Znn" secondAttribute="top" constant="16" id="MeA-lp-YPr"/>
                                         <constraint firstAttribute="trailing" secondItem="ETF-xM-x22" secondAttribute="trailing" constant="4" id="N8q-wg-PXM"/>
                                         <constraint firstItem="ETF-xM-x22" firstAttribute="top" secondItem="GTp-HP-MDW" secondAttribute="bottom" constant="4" id="U4t-mz-ZMA"/>
@@ -2722,7 +2798,7 @@
                 </viewController>
                 <customObject id="mWl-zV-rjl" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2551" y="2531"/>
+            <point key="canvasLocation" x="2544" y="2765"/>
         </scene>
     </scenes>
     <resources>
@@ -2731,13 +2807,13 @@
         <image name="Book" width="16" height="16"/>
         <image name="Books" width="32" height="32"/>
         <image name="ChooseDateSmall" width="12" height="12"/>
-        <image name="CoverPlaceholder" width="64" height="64"/>
+        <image name="CoverPlaceholder" width="512" height="512"/>
         <image name="HilightMarker" width="4" height="36"/>
         <image name="Minus" width="12" height="12"/>
         <image name="NSAddTemplate" width="11" height="11"/>
         <image name="NSRemoveTemplate" width="11" height="11"/>
         <image name="People" width="32" height="32"/>
-        <image name="Person" width="16" height="16"/>
+        <image name="Person" width="32" height="32"/>
         <image name="PersonPlaceholder" width="64" height="64"/>
         <image name="Plus" width="12" height="12"/>
         <image name="Publishers" width="32" height="32"/>

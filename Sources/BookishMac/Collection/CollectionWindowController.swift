@@ -10,7 +10,7 @@ import Logger
 
 let validationChannel = Logger("Validation")
 
-class CollectionWindowController: NSWindowController, NSUserInterfaceValidations, DocumentWindowController, ActionContextProvider {
+class CollectionWindowController: NSWindowController, DocumentWindowController, ActionContextProvider {
     var viewModel: CollectionDocumentViewModel?
     typealias ViewModel = CollectionDocumentViewModel
     
@@ -37,17 +37,6 @@ class CollectionWindowController: NSWindowController, NSUserInterfaceValidations
         if let view = window?.contentView {
             view.validateButtons()
         }
-    }
-    
-    func validateUserInterfaceItem(_ item: NSValidatedUserInterfaceItem) -> Bool {
-        if item.action == #selector(delete(_:)) {
-            return Application.sharedInstance.actionManager.validate(identifier: "DeleteItem", info: ActionInfo(sender: item)).enabled
-        }
-        return false
-    }
-    
-    @IBAction func delete(_ sender: Any) {
-        Application.sharedInstance.actionManager.perform(identifier: "DeleteItem", info: ActionInfo(sender: sender))
     }
 }
 

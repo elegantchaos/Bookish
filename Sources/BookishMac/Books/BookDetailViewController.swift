@@ -7,8 +7,11 @@ import AppKit
 import Actions
 import BookishModel
 import Dispatch
+import Logger
 
-class BookDetailViewController: CollectionViewController {
+let bookDetailChannel = Logger("BookDetail")
+
+class BookDetailViewController: CollectionViewController, BookLifecycleObserver {
     @IBOutlet weak var indexView: BookIndexViewController!
     @IBOutlet weak var detailsView: NSTableView!
     @IBOutlet weak var imageView: NSImageView!
@@ -33,6 +36,8 @@ class BookDetailViewController: CollectionViewController {
     override func viewWillAppear() {
         super.viewWillAppear()
         
+        bookDetailChannel.debug("appearing")
+        
         personList.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
         
         if let indexArray = indexView.indexArray {
@@ -44,11 +49,15 @@ class BookDetailViewController: CollectionViewController {
     }
  
     override func viewWillDisappear() {
+        bookDetailChannel.debug("disappearing")
+        
         indexObserver = nil
         super.viewWillDisappear()
     }
     
     func selectionChanged() {
+        bookDetailChannel.debug("selection changed")
+        
         let selectedCount = indexView.indexArray.selectedObjects?.count ?? 0
         let showDetail = selectedCount > 0
         detailsView.isHidden = !showDetail
@@ -76,6 +85,8 @@ class BookDetailViewController: CollectionViewController {
     }
     
     func updatePeople() {
+        bookDetailChannel.debug("updating people list")
+
         let selection = (indexView.indexArray.selectedObjects as? [Book]) ?? []
         source.filter(for: selection, editing: editing)
         detailsView.reloadData()
@@ -88,6 +99,7 @@ extension BookDetailViewController: EditableView {
     func toggleEditing() {
         editing = !editing
         editButton.title = editing ? "Done" : "Edit"
+        bookDetailChannel.debug(editing ? "enabled editing" : "disabled editing")
         let newResponder: NSResponder = editing ? titleView : indexView
         view.window?.makeFirstResponder(newResponder)
         selectionChanged()
@@ -124,12 +136,17 @@ extension BookDetailViewController: ActionContextProvider, BookChangeObserver {
         return row
     }
     
-    func provide(context: ActionContext) {
+    func provideForDetail(context: ActionContext) {
+        context.info.addObserver(self)
         if let selection = indexView.indexArray.selectedObjects as? [Book] {
             context.info[ActionContext.selectionKey] = selection
-            context.info.addObserver(self)
             context.info[ToggleEditingAction.editableKey] = self
         }
+    }
+
+    func provide(context: ActionContext) {
+        provideForDetail(context: context)
+        indexView.provideForIndex(context: context)
     }
     
     func added(relationship: Relationship) {
@@ -161,6 +178,23 @@ extension BookDetailViewController: ActionContextProvider, BookChangeObserver {
     
     func removed(publisher: Publisher) {
         
+    }
+    
+    func created(books: [Book]) {
+        bookDetailChannel.debug("books created")
+        if !self.editing {
+            DispatchQueue.main.async {
+                self.toggleEditing()
+            }
+        }
+    }
+    
+    func deleted(books: [Book]) {
+        DispatchQueue.main.async {
+            if self.editing {
+                self.toggleEditing()
+            }
+        }
     }
 }
 
