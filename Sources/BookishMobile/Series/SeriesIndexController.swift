@@ -9,150 +9,15 @@ import CoreData
 import BookishModel
 import Actions
 
-class SeriesIndexController: UITableViewController, NSFetchedResultsControllerDelegate, ActionContextProvider {
-    
-    func provide(context: ActionContext) {
-    }
-    
-    @IBOutlet var indexTable: UITableView!
-    var detailViewController: PersonDetailController? = nil
-    var managedObjectContext: NSManagedObjectContext? = nil
-    @IBOutlet var addButton: UIBarButtonItem!
+class SeriesIndexController: IndexController<SeriesDetailController, Series> {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         application.collectionController.seriesIndexController = self
-        managedObjectContext = application.persistentContainer.viewContext
-        
-        navigationItem.leftBarButtonItem = editButtonItem
-        navigationItem.rightBarButtonItem = addButton
-        
-        if let split = splitViewController {
-            let controllers = split.viewControllers
-            detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? PersonDetailController
-        }
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        clearsSelectionOnViewWillAppear = splitViewController!.isCollapsed
-        super.viewWillAppear(animated)
-    }
-    
-    // MARK: - Segues
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showDetail" {
-            if let indexPath = tableView.indexPathForSelectedRow {
-                let object = fetchedResultsController.object(at: indexPath)
-                let controller = (segue.destination as! UINavigationController).topViewController as! SeriesDetailController
-                controller.representedObject = object
-                controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
-                controller.navigationItem.leftItemsSupplementBackButton = true
-            }
-        }
-    }
-    
-    // MARK: - Table View
-    
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return fetchedResultsController.sections?.count ?? 0
-    }
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let sectionInfo = fetchedResultsController.sections![section]
-        return sectionInfo.numberOfObjects
-    }
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        let series = fetchedResultsController.object(at: indexPath)
-        configureCell(cell, withSeries: series)
-        return cell
-    }
-    
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            let book = fetchedResultsController.object(at: indexPath)
-            let info = ActionInfo(sender: tableView)
-            info[ActionContext.selectionKey] = [book]
-            application.actionManager.perform(identifier: "DeletePerson", info: info)
-        }
-    }
-    
-    func configureCell(_ cell: UITableViewCell, withSeries series: Series) {
+
+    override func configureCell(_ cell: UITableViewCell, with series: Series) {
         cell.textLabel!.text = series.name
     }
-    
-    // MARK: - Fetched results controller
-    
-    lazy var fetchedResultsController: NSFetchedResultsController<Series> = {
-        let fetchRequest: NSFetchRequest<Series> = Series.fetchRequest()
-        fetchRequest.fetchBatchSize = 20
-        fetchRequest.sortDescriptors = application.viewModel.personIndexSorting
         
-        // Edit the section name key path and cache name if appropriate.
-        // nil for section name key path means "no sections".
-        let results = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext!, sectionNameKeyPath: nil, cacheName: "Master")
-        results.delegate = self
-        
-        do {
-            try results.performFetch()
-        } catch {
-            // Replace this implementation with code to handle the error appropriately.
-            // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            let nserror = error as NSError
-            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
-        }
-        
-        return results
-    }()
-    
-    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        tableView.beginUpdates()
-    }
-    
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
-        switch type {
-        case .insert:
-            tableView.insertSections(IndexSet(integer: sectionIndex), with: .fade)
-        case .delete:
-            tableView.deleteSections(IndexSet(integer: sectionIndex), with: .fade)
-        default:
-            return
-        }
-    }
-    
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-        switch type {
-        case .insert:
-            tableView.insertRows(at: [newIndexPath!], with: .fade)
-        case .delete:
-            tableView.deleteRows(at: [indexPath!], with: .fade)
-        case .update:
-            configureCell(tableView.cellForRow(at: indexPath!)!, withSeries: anObject as! Series)
-        case .move:
-            configureCell(tableView.cellForRow(at: indexPath!)!, withSeries: anObject as! Series)
-            tableView.moveRow(at: indexPath!, to: newIndexPath!)
-        }
-    }
-    
-    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        tableView.endUpdates()
-    }
-    
-    /*
-     // Implementing the above methods to update the table view in response to individual changes may have performance implications if a large number of changes are made simultaneously. If this proves to be an issue, you can instead just implement controllerDidChangeContent: which notifies the delegate that all section and object changes have been processed.
-     
-     func controllerDidChangeContent(controller: NSFetchedResultsController) {
-     // In the simplest, most efficient, case, reload the table view.
-     tableView.reloadData()
-     }
-     */
-    
 }

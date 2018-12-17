@@ -7,22 +7,20 @@ import UIKit
 import BookishModel
 import Actions
 
-class PersonDetailController: UIViewController {
+class PersonDetailController: DetailController<Person> {
     struct SortedRole {
         let role: Role
         let books: [Book]
     }
     
     lazy var placeholderImage = UIImage(named: "PersonPlaceholder")
-    var bindings = [Any]()
     var sortedRoles = [SortedRole]()
     
     @IBOutlet weak var nameLabel: UITextField!
     @IBOutlet weak var notesView: UITextView!
     @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var detailView: UITableView!
     
-    func configureView() {
+    override func configureView() {
         if let person = representedObject, nameLabel != nil {
             bindings.append(TextFieldBinding(for: nameLabel, to: person, path: "name"))
             bindings.append(TextViewBinding(for: notesView, to: person, path: "notes", setIfNull: true))
@@ -40,36 +38,24 @@ class PersonDetailController: UIViewController {
             }
         }
     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        configureView()
-    }
-    
-    var representedObject: Person? {
-        didSet {
-            configureView()
-        }
-    }
-    
-}
 
-// MARK: Table Support
-
-extension PersonDetailController: UITableViewDataSource, UITableViewDelegate {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return sortedRoles.count
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        let sections = sortedRoles.count
+        print(sections)
+        return sections
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return sortedRoles[section].books.count
     }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return sortedRoles[section].role.name
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        let title = sortedRoles[section].role.name
+        print(title)
+        return title
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let role = sortedRoles[indexPath.section]
         let book = role.books[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "book") as! PersonBookRow // if we fail here, it's a coding error as all possible view types should have been registered
