@@ -102,6 +102,12 @@
 		22DE6AE72188A8DC0078D489 /* WhiteSearchFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DE6AE62188A8DC0078D489 /* WhiteSearchFieldCell.swift */; };
 		22DE6AE92189FE070078D489 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DE6AE82189FE070078D489 /* ImageCache.swift */; };
 		22E47CE0216E5EB200E43DBF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22DD42502126D6DB0070C85A /* Assets.xcassets */; };
+		22F1801F21C8089100220D20 /* BookPublisherRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1801B21C8084200220D20 /* BookPublisherRow.swift */; };
+		22F1802121C8095B00220D20 /* BookSeriesRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1801D21C8084900220D20 /* BookSeriesRow.swift */; };
+		22F1802321C810BE00220D20 /* PublisherIndexController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1802221C810BE00220D20 /* PublisherIndexController.swift */; };
+		22F1802521C810C500220D20 /* SeriesIndexController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1802421C810C500220D20 /* SeriesIndexController.swift */; };
+		22F1802721C810CC00220D20 /* PublisherDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1802621C810CC00220D20 /* PublisherDetailController.swift */; };
+		22F1802921C810D400220D20 /* SeriesDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1802821C810D400220D20 /* SeriesDetailController.swift */; };
 		22F35487216FAC0100443C0B /* Actions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F35486216FAC0100443C0B /* Actions.framework */; };
 /* End PBXBuildFile section */
 
@@ -273,6 +279,12 @@
 		22DE6AE521877FFB0078D489 /* Assets.xcfilelist */ = {isa = PBXFileReference; lastKnownFileType = text.xcfilelist; path = Assets.xcfilelist; sourceTree = "<group>"; };
 		22DE6AE62188A8DC0078D489 /* WhiteSearchFieldCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiteSearchFieldCell.swift; sourceTree = "<group>"; };
 		22DE6AE82189FE070078D489 /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
+		22F1801B21C8084200220D20 /* BookPublisherRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookPublisherRow.swift; sourceTree = "<group>"; };
+		22F1801D21C8084900220D20 /* BookSeriesRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookSeriesRow.swift; sourceTree = "<group>"; };
+		22F1802221C810BE00220D20 /* PublisherIndexController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublisherIndexController.swift; sourceTree = "<group>"; };
+		22F1802421C810C500220D20 /* SeriesIndexController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeriesIndexController.swift; sourceTree = "<group>"; };
+		22F1802621C810CC00220D20 /* PublisherDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublisherDetailController.swift; sourceTree = "<group>"; };
+		22F1802821C810D400220D20 /* SeriesDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeriesDetailController.swift; sourceTree = "<group>"; };
 		22F35486216FAC0100443C0B /* Actions.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Actions.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		22F3548A216FAC0100443C0B /* BookishCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BookishCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -374,6 +386,8 @@
 				22D1B238218079C60062F2CB /* CollectionViewModel.swift */,
 				227F450E2181EDF3000D8B8D /* Books */,
 				227F450D2181EDE1000D8B8D /* People */,
+				22F1802A21C8175D00220D20 /* Publisher */,
+				22F1802B21C8176900220D20 /* Series */,
 				227F450F2181EE08000D8B8D /* Utilities */,
 				2242931C212ADC4300E70510 /* Main.storyboard */,
 				2242931F212ADC4400E70510 /* Assets.xcassets */,
@@ -473,11 +487,13 @@
 		227F450E2181EDF3000D8B8D /* Books */ = {
 			isa = PBXGroup;
 			children = (
-				22429318212ADC4300E70510 /* BookIndexController.swift */,
+				22D1B230217E0D780062F2CB /* BookDateRow.swift */,
 				2242931A212ADC4300E70510 /* BookDetailController.swift */,
 				221ED511216B8EAB00594714 /* BookDetailRow.swift */,
-				22D1B230217E0D780062F2CB /* BookDateRow.swift */,
+				22429318212ADC4300E70510 /* BookIndexController.swift */,
 				22D1B22E217E0A3F0062F2CB /* BookPersonRow.swift */,
+				22F1801B21C8084200220D20 /* BookPublisherRow.swift */,
+				22F1801D21C8084900220D20 /* BookSeriesRow.swift */,
 			);
 			path = Books;
 			sourceTree = "<group>";
@@ -635,6 +651,24 @@
 				22DD42692126D6DB0070C85A /* BookishUITestsMac */,
 			);
 			path = Tests;
+			sourceTree = "<group>";
+		};
+		22F1802A21C8175D00220D20 /* Publisher */ = {
+			isa = PBXGroup;
+			children = (
+				22F1802221C810BE00220D20 /* PublisherIndexController.swift */,
+				22F1802621C810CC00220D20 /* PublisherDetailController.swift */,
+			);
+			path = Publisher;
+			sourceTree = "<group>";
+		};
+		22F1802B21C8176900220D20 /* Series */ = {
+			isa = PBXGroup;
+			children = (
+				22F1802421C810C500220D20 /* SeriesIndexController.swift */,
+				22F1802821C810D400220D20 /* SeriesDetailController.swift */,
+			);
+			path = Series;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -916,7 +950,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# build & run sketchx to export the assets\nswift run sketchx Extras/Bookish.sketch Mobile=Assets Sources/BookishMobile \n\n# update list of all assets\nfind Sources/BookishMobile/Assets.xcassets -type f > Sources/BookishMobile/Assets.xcfilelist\n";
+			shellScript = "# build & run sketchx to export the assets\n#swift run sketchx Extras/Bookish.sketch Mobile=Assets Sources/BookishMobile \n\n# update list of all assets\n#find Sources/BookishMobile/Assets.xcassets -type f > Sources/BookishMobile/Assets.xcfilelist\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -930,16 +964,22 @@
 				22429314212ADC4300E70510 /* Application.swift in Sources */,
 				22D1B22F217E0A3F0062F2CB /* BookPersonRow.swift in Sources */,
 				221ED512216B8EAB00594714 /* BookDetailRow.swift in Sources */,
+				22F1801F21C8089100220D20 /* BookPublisherRow.swift in Sources */,
+				22F1802121C8095B00220D20 /* BookSeriesRow.swift in Sources */,
 				22D1B237217F7EF30062F2CB /* PersonDetailController.swift in Sources */,
 				22429319212ADC4300E70510 /* BookIndexController.swift in Sources */,
 				22D1B233217E42950062F2CB /* TextBinding.swift in Sources */,
 				22B1DB412178D8A50067E795 /* ViewExtensions.swift in Sources */,
 				22D1B239218079C60062F2CB /* CollectionViewModel.swift in Sources */,
 				22C2194C21AF24E5002FC0FE /* ToggleEditingAction.swift in Sources */,
+				22F1802721C810CC00220D20 /* PublisherDetailController.swift in Sources */,
+				22F1802921C810D400220D20 /* SeriesDetailController.swift in Sources */,
 				22D1B231217E0D780062F2CB /* BookDateRow.swift in Sources */,
 				2242931B212ADC4300E70510 /* BookDetailController.swift in Sources */,
 				22D1B23D21807F7B0062F2CB /* CollectionController.swift in Sources */,
 				22D1B235217F7ED40062F2CB /* PersonIndexController.swift in Sources */,
+				22F1802321C810BE00220D20 /* PublisherIndexController.swift in Sources */,
+				22F1802521C810C500220D20 /* SeriesIndexController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

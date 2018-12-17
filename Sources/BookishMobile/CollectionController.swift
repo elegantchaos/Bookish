@@ -11,6 +11,8 @@ class CollectionController: UITabBarController {
     var observers = [NSKeyValueObservation]()
     var personIndexController: PersonIndexController!
     var bookIndexController: BookIndexController!
+    var publisherIndexController: PublisherIndexController!
+    var seriesIndexController: SeriesIndexController!
     
     func setup(splitView: UISplitViewController) {
         let navigationController = splitView.viewControllers[splitView.viewControllers.count-1] as! UINavigationController
@@ -56,6 +58,26 @@ extension CollectionController: PersonViewer {
         if let index = personIndexController.fetchedResultsController.indexPath(forObject: person) {
             personIndexController.indexTable.selectRow(at: index, animated: true, scrollPosition: .bottom)
             personIndexController.performSegue(withIdentifier: "showDetail", sender: self)
+        }
+    }
+}
+
+extension CollectionController: PublisherViewer {
+    func reveal(publisher: Publisher) {
+        application.viewModel.mode = .publisher
+        if let index = publisherIndexController.fetchedResultsController.indexPath(forObject: publisher) {
+            publisherIndexController.indexTable.selectRow(at: index, animated: true, scrollPosition: .bottom)
+            publisherIndexController.performSegue(withIdentifier: "showDetail", sender: self)
+        }
+    }
+}
+
+extension CollectionController: SeriesViewer {
+    func reveal(series: Series) {
+        application.viewModel.mode = .series
+        if let index = seriesIndexController.fetchedResultsController.indexPath(forObject: series) {
+            seriesIndexController.indexTable.selectRow(at: index, animated: true, scrollPosition: .bottom)
+            seriesIndexController.performSegue(withIdentifier: "showDetail", sender: self)
         }
     }
 }

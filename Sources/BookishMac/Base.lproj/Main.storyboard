@@ -599,7 +599,7 @@ CA
                 </windowController>
                 <customObject id="6f7-a7-6o1" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-205" y="-34"/>
+            <point key="canvasLocation" x="63" y="690"/>
         </scene>
         <!--Collection Split View Controller-->
         <scene sceneID="o8M-XO-7fb">
@@ -610,7 +610,7 @@ CA
                         <splitViewItem holdingPriority="240" id="eOL-40-wev"/>
                     </splitViewItems>
                     <splitView key="splitView" identifier="collection-split-view" autosaveName="collection-split-view" dividerStyle="thin" vertical="YES" id="Z9o-S4-ubf">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <rect key="frame" x="0.0" y="0.0" width="650" height="400"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <connections>
                             <outlet property="delegate" destination="9dY-ZT-f0K" id="cW0-FO-pQb"/>
@@ -624,30 +624,30 @@ CA
                 </splitViewController>
                 <customObject id="g3G-9b-aKL" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="990" y="816"/>
+            <point key="canvasLocation" x="1148" y="1217"/>
         </scene>
         <!--Collection Root View Controller-->
         <scene sceneID="Uch-bh-vgR">
             <objects>
                 <viewController id="iuc-9t-fNj" customClass="CollectionRootViewController" customModule="BookishMac" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="Nuf-33-Q1V">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <rect key="frame" x="0.0" y="0.0" width="720" height="400"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <containerView translatesAutoresizingMaskIntoConstraints="NO" id="3tE-Et-baJ">
-                                <rect key="frame" x="68" y="0.0" width="956" height="768"/>
+                                <rect key="frame" x="68" y="0.0" width="652" height="400"/>
                                 <connections>
                                     <segue destination="9dY-ZT-f0K" kind="embed" id="CIX-OZ-tND"/>
                                 </connections>
                             </containerView>
                             <box autoresizesSubviews="NO" boxType="custom" borderType="none" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="bwo-VV-nQS">
-                                <rect key="frame" x="0.0" y="0.0" width="68" height="768"/>
+                                <rect key="frame" x="0.0" y="0.0" width="68" height="400"/>
                                 <view key="contentView" id="QaT-Ad-8ce">
-                                    <rect key="frame" x="0.0" y="0.0" width="68" height="768"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="68" height="400"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="16" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="G7s-O5-blY">
-                                            <rect key="frame" x="16" y="541" width="36" height="192"/>
+                                            <rect key="frame" x="16" y="173" width="36" height="192"/>
                                             <subviews>
                                                 <button translatesAutoresizingMaskIntoConstraints="NO" id="pTf-uQ-crF">
                                                     <rect key="frame" x="-2" y="153" width="40" height="41"/>
@@ -799,7 +799,7 @@ CA
                 <customObject id="Ubq-pe-EpL" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <userDefaultsController id="gfZ-c7-Mjj"/>
             </objects>
-            <point key="canvasLocation" x="990" y="-110"/>
+            <point key="canvasLocation" x="1113" y="660"/>
         </scene>
         <!--Collection Index View Controller-->
         <scene sceneID="cxs-Lx-xWA">
@@ -812,7 +812,7 @@ CA
                         <tabViewItem id="nX9-6l-frb"/>
                     </tabViewItems>
                     <tabView key="tabView" drawsBackground="NO" type="noTabsNoBorder" id="xYK-vg-VcG">
-                        <rect key="frame" x="0.0" y="0.0" width="256" height="768"/>
+                        <rect key="frame" x="0.0" y="0.0" width="200" height="400"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <font key="font" metaFont="system"/>
                         <connections>
@@ -830,30 +830,30 @@ CA
                 </tabViewController>
                 <customObject id="NQu-ho-FxW" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="605" y="1793"/>
+            <point key="canvasLocation" x="910" y="1820"/>
         </scene>
         <!--Person Index View Controller-->
         <scene sceneID="NtS-yL-Zz7">
             <objects>
                 <viewController id="pkB-w0-Ho6" customClass="PersonIndexViewController" customModule="BookishMac" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="WIJ-ub-d5r">
-                        <rect key="frame" x="0.0" y="0.0" width="200" height="300"/>
+                        <rect key="frame" x="0.0" y="0.0" width="200" height="400"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <box autoresizesSubviews="NO" horizontalCompressionResistancePriority="760" boxType="custom" borderType="none" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="EaV-GE-ehN" userLabel="Background">
-                                <rect key="frame" x="0.0" y="0.0" width="200" height="300"/>
+                                <rect key="frame" x="0.0" y="0.0" width="200" height="400"/>
                                 <view key="contentView" id="Ok8-kN-ge9">
-                                    <rect key="frame" x="0.0" y="0.0" width="200" height="300"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="200" height="400"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <scrollView horizontalCompressionResistancePriority="760" borderType="none" autohidesScrollers="YES" horizontalLineScroll="23" horizontalPageScroll="10" verticalLineScroll="23" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cB6-3r-Peo" userLabel="Index">
-                                            <rect key="frame" x="0.0" y="29" width="200" height="240"/>
+                                            <rect key="frame" x="0.0" y="29" width="200" height="340"/>
                                             <clipView key="contentView" drawsBackground="NO" id="25y-2t-AU1">
-                                                <rect key="frame" x="0.0" y="0.0" width="200" height="240"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="200" height="340"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <tableView identifier="people" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnSelection="YES" autosaveColumns="NO" rowHeight="21" rowSizeStyle="automatic" usesAutomaticRowHeights="YES" viewBased="YES" id="T2o-3X-3Tj">
-                                                        <rect key="frame" x="0.0" y="0.0" width="200" height="240"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="200" height="340"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <size key="intercellSpacing" width="3" height="2"/>
                                                         <color key="backgroundColor" name="Bookish Index"/>
@@ -922,7 +922,7 @@ CA
                                             </scroller>
                                         </scrollView>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Luv-oJ-vO9">
-                                            <rect key="frame" x="6" y="273" width="192" height="19"/>
+                                            <rect key="frame" x="6" y="373" width="192" height="19"/>
                                             <textFieldCell key="cell" lineBreakMode="clipping" title="People" id="laj-5J-vdz">
                                                 <font key="font" metaFont="system" size="16"/>
                                                 <color key="textColor" name="Bookish Index Text"/>
@@ -983,24 +983,24 @@ CA
                     </connections>
                 </arrayController>
             </objects>
-            <point key="canvasLocation" x="58" y="2531"/>
+            <point key="canvasLocation" x="1290" y="2509"/>
         </scene>
         <!--Book Index View Controller-->
         <scene sceneID="LbK-bz-Udp">
             <objects>
                 <viewController id="cSd-7W-hzi" customClass="BookIndexViewController" customModule="BookishMac" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="JCM-bJ-k8z">
-                        <rect key="frame" x="0.0" y="0.0" width="200" height="300"/>
+                        <rect key="frame" x="0.0" y="0.0" width="200" height="400"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <box autoresizesSubviews="NO" horizontalHuggingPriority="260" horizontalCompressionResistancePriority="740" boxType="custom" borderType="none" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="BHo-v2-qHc" userLabel="Background">
-                                <rect key="frame" x="0.0" y="0.0" width="200" height="300"/>
+                                <rect key="frame" x="0.0" y="0.0" width="200" height="400"/>
                                 <view key="contentView" id="7O7-Td-dIP">
-                                    <rect key="frame" x="0.0" y="0.0" width="200" height="300"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="200" height="400"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LYq-xW-q2s">
-                                            <rect key="frame" x="6" y="273" width="192" height="19"/>
+                                            <rect key="frame" x="6" y="373" width="192" height="19"/>
                                             <textFieldCell key="cell" lineBreakMode="clipping" title="Books" id="zbT-Mn-fQ1">
                                                 <font key="font" metaFont="system" size="16"/>
                                                 <color key="textColor" name="Bookish Index Text"/>
@@ -1008,13 +1008,13 @@ CA
                                             </textFieldCell>
                                         </textField>
                                         <scrollView horizontalHuggingPriority="260" horizontalCompressionResistancePriority="740" borderType="none" autohidesScrollers="YES" horizontalLineScroll="23" horizontalPageScroll="10" verticalLineScroll="23" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dnp-IN-cGx" userLabel="Index">
-                                            <rect key="frame" x="0.0" y="29" width="200" height="240"/>
+                                            <rect key="frame" x="0.0" y="29" width="200" height="340"/>
                                             <clipView key="contentView" drawsBackground="NO" id="MeP-Ej-IYa">
-                                                <rect key="frame" x="0.0" y="0.0" width="200" height="240"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="200" height="340"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <tableView identifier="books" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnSelection="YES" autosaveColumns="NO" rowHeight="21" rowSizeStyle="automatic" usesAutomaticRowHeights="YES" viewBased="YES" id="jZN-rJ-ulS">
-                                                        <rect key="frame" x="0.0" y="0.0" width="200" height="240"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="200" height="340"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <size key="intercellSpacing" width="3" height="2"/>
                                                         <color key="backgroundColor" name="Bookish Index"/>
@@ -1137,7 +1137,7 @@ CA
                     </connections>
                 </arrayController>
             </objects>
-            <point key="canvasLocation" x="-165" y="2531"/>
+            <point key="canvasLocation" x="491" y="2509"/>
         </scene>
         <!--Book Detail View Controller-->
         <scene sceneID="qGP-fN-0GX">
@@ -1759,7 +1759,7 @@ CA
                 </arrayController>
                 <userDefaultsController representsSharedInstance="YES" id="CPG-9C-fnr"/>
             </objects>
-            <point key="canvasLocation" x="1576" y="2765"/>
+            <point key="canvasLocation" x="836" y="2509"/>
         </scene>
         <!--Date Picker Popover Controller-->
         <scene sceneID="K1V-fB-Brr">
@@ -1801,7 +1801,7 @@ CA
                         <tabViewItem id="HuQ-JD-SqE"/>
                     </tabViewItems>
                     <tabView key="tabView" type="noTabsNoBorder" id="7Xn-vq-0BQ">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="400"/>
+                        <rect key="frame" x="0.0" y="0.0" width="765" height="400"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <font key="font" metaFont="message"/>
                         <connections>
@@ -1819,7 +1819,7 @@ CA
                 </tabViewController>
                 <customObject id="EIm-WY-fNg" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2295" y="2086"/>
+            <point key="canvasLocation" x="1466" y="1820"/>
         </scene>
         <!--Person Detail View Controller-->
         <scene sceneID="xv8-hT-z0j">
@@ -2042,30 +2042,30 @@ CA
                 </viewController>
                 <customObject id="9ol-mz-Bsh" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2053" y="2765"/>
+            <point key="canvasLocation" x="1635" y="2509"/>
         </scene>
         <!--Publisher Index View Controller-->
         <scene sceneID="9Ap-Zt-ZhT">
             <objects>
                 <viewController title="Publisher Index View Controller" id="GsH-md-eCA" customClass="PublisherIndexViewController" customModule="BookishMac" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="XhL-CF-8YJ">
-                        <rect key="frame" x="0.0" y="0.0" width="200" height="300"/>
+                        <rect key="frame" x="0.0" y="0.0" width="200" height="400"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <box autoresizesSubviews="NO" horizontalCompressionResistancePriority="760" boxType="custom" borderType="none" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="6md-9j-FzO" userLabel="Background">
-                                <rect key="frame" x="0.0" y="0.0" width="200" height="300"/>
+                                <rect key="frame" x="0.0" y="0.0" width="200" height="400"/>
                                 <view key="contentView" id="oHm-tI-GqO">
-                                    <rect key="frame" x="0.0" y="0.0" width="200" height="300"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="200" height="400"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <scrollView horizontalCompressionResistancePriority="760" borderType="none" autohidesScrollers="YES" horizontalLineScroll="23" horizontalPageScroll="10" verticalLineScroll="23" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F2R-FS-MHQ" userLabel="Index">
-                                            <rect key="frame" x="0.0" y="29" width="200" height="240"/>
+                                            <rect key="frame" x="0.0" y="29" width="200" height="340"/>
                                             <clipView key="contentView" drawsBackground="NO" id="Frg-lC-Lel">
-                                                <rect key="frame" x="0.0" y="0.0" width="200" height="240"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="200" height="340"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <tableView identifier="publishers" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnSelection="YES" autosaveColumns="NO" rowHeight="21" rowSizeStyle="automatic" usesAutomaticRowHeights="YES" viewBased="YES" id="Gzf-vQ-vhp">
-                                                        <rect key="frame" x="0.0" y="0.0" width="200" height="240"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="200" height="340"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <size key="intercellSpacing" width="3" height="2"/>
                                                         <color key="backgroundColor" name="Bookish Index"/>
@@ -2134,7 +2134,7 @@ CA
                                             </scroller>
                                         </scrollView>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lBQ-5B-tRb">
-                                            <rect key="frame" x="6" y="273" width="192" height="19"/>
+                                            <rect key="frame" x="6" y="373" width="192" height="19"/>
                                             <textFieldCell key="cell" lineBreakMode="clipping" title="Publishers" id="hu9-HA-eUR">
                                                 <font key="font" metaFont="system" size="16"/>
                                                 <color key="textColor" name="Bookish Index Text"/>
@@ -2195,30 +2195,30 @@ CA
                     </connections>
                 </arrayController>
             </objects>
-            <point key="canvasLocation" x="285" y="2531"/>
+            <point key="canvasLocation" x="491" y="3081"/>
         </scene>
         <!--Series Index View Controller-->
         <scene sceneID="JjP-rQ-Vry">
             <objects>
                 <viewController id="EEW-TS-smh" customClass="SeriesIndexViewController" customModule="BookishMac" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="B1u-cG-GcL">
-                        <rect key="frame" x="0.0" y="0.0" width="200" height="300"/>
+                        <rect key="frame" x="0.0" y="0.0" width="200" height="400"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <box autoresizesSubviews="NO" horizontalCompressionResistancePriority="760" boxType="custom" borderType="none" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="36w-ac-SCd" userLabel="Background">
-                                <rect key="frame" x="0.0" y="0.0" width="200" height="300"/>
+                                <rect key="frame" x="0.0" y="0.0" width="200" height="400"/>
                                 <view key="contentView" id="LvH-Ki-fEr">
-                                    <rect key="frame" x="0.0" y="0.0" width="200" height="300"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="200" height="400"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <scrollView horizontalCompressionResistancePriority="760" borderType="none" autohidesScrollers="YES" horizontalLineScroll="23" horizontalPageScroll="10" verticalLineScroll="23" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IqM-tW-Aly" userLabel="Index">
-                                            <rect key="frame" x="0.0" y="29" width="200" height="240"/>
+                                            <rect key="frame" x="0.0" y="29" width="200" height="340"/>
                                             <clipView key="contentView" drawsBackground="NO" id="PHm-cq-mEj">
-                                                <rect key="frame" x="0.0" y="0.0" width="200" height="240"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="200" height="340"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <tableView identifier="series" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnSelection="YES" autosaveColumns="NO" rowHeight="21" rowSizeStyle="automatic" usesAutomaticRowHeights="YES" viewBased="YES" id="rcH-BU-zFa">
-                                                        <rect key="frame" x="0.0" y="0.0" width="200" height="240"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="200" height="340"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <size key="intercellSpacing" width="3" height="2"/>
                                                         <color key="backgroundColor" name="Bookish Index"/>
@@ -2287,7 +2287,7 @@ CA
                                             </scroller>
                                         </scrollView>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LWZ-hJ-Qd6">
-                                            <rect key="frame" x="6" y="273" width="192" height="19"/>
+                                            <rect key="frame" x="6" y="373" width="192" height="19"/>
                                             <textFieldCell key="cell" lineBreakMode="clipping" title="Series" id="Ub4-sU-ZlT">
                                                 <font key="font" metaFont="system" size="16"/>
                                                 <color key="textColor" name="Bookish Index Text"/>
@@ -2348,7 +2348,7 @@ CA
                     </connections>
                 </arrayController>
             </objects>
-            <point key="canvasLocation" x="516" y="2531"/>
+            <point key="canvasLocation" x="1283" y="3081"/>
         </scene>
         <!--Series Detail View Controller-->
         <scene sceneID="wWc-sU-aMY">
@@ -2573,7 +2573,7 @@ CA
                 </viewController>
                 <customObject id="bkg-qU-L0Y" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3027" y="2765"/>
+            <point key="canvasLocation" x="1635" y="3081"/>
         </scene>
         <!--Publisher Detail View Controller-->
         <scene sceneID="tCk-nT-C5k">
@@ -2798,16 +2798,16 @@ CA
                 </viewController>
                 <customObject id="mWl-zV-rjl" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2544" y="2765"/>
+            <point key="canvasLocation" x="836" y="3081"/>
         </scene>
     </scenes>
     <resources>
         <image name="AddBook" width="32" height="32"/>
         <image name="AddRelationship" width="32" height="32"/>
-        <image name="Book" width="16" height="16"/>
+        <image name="Book" width="32" height="32"/>
         <image name="Books" width="32" height="32"/>
         <image name="ChooseDateSmall" width="12" height="12"/>
-        <image name="CoverPlaceholder" width="512" height="512"/>
+        <image name="CoverPlaceholder" width="64" height="64"/>
         <image name="HilightMarker" width="4" height="36"/>
         <image name="Minus" width="12" height="12"/>
         <image name="NSAddTemplate" width="11" height="11"/>

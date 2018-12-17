@@ -6,7 +6,9 @@
 import UIKit
 import BookishModel
 import Actions
+import Logger
 
+let bookDetailChannel = Logger("BookDetails")
 
 class BookDetailController: UIViewController {
     let source = DetailDataSource()
@@ -28,9 +30,7 @@ class BookDetailController: UIViewController {
                 imageView.image = placeholderImage
             }
             bindings.append(StringBinding(for: self, property: "title", to: book, path: "name"))
-            if let roles = book.relationships, let sorted = roles.sortedArray(using: application.viewModel.relationshipSorting) as? [Relationship] {
-                source.people = sorted
-            }
+            source.filter(for: [book], editing: isEditing)
         }
     }
 
@@ -60,10 +60,14 @@ extension BookDetailController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let book = representedObject else { fatalError("should have book set") }
-        let info = source.info(for: indexPath.row)
-        let identifier = info.identifier
-        let cell = tableView.dequeueReusableCell(withIdentifier: identifier) as! BookDetailRow // if we fail here, it's a coding error as all possible view types should have been registered
-        cell.setup(row: indexPath.row, book: book, source: source)
+        let info = source.info(for: indexPath.row, editing: isEditing)
+        let identifier = info.kind.rawValue
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: identifier) as? BookDetailRow else {
+            bookDetailChannel.log("Unregistered cell type \(identifier).")
+            return UITableViewCell(style: .default, reuseIdentifier: identifier)
+        }
+
+        cell.setup(row: info, book: book, source: source)
         return cell
     }
 }

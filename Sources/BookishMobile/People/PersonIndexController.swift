@@ -8,18 +8,9 @@ import CoreData
 import BookishModel
 import Actions
 
-class PersonIndexController: UITableViewController, NSFetchedResultsControllerDelegate, ActionContextProvider, BookChangeObserver {
-    
-    func added(books: [Book]) {
-        print("added")
-    }
-    
-    func removed(books: [Book]) {
-        print("removed")
-    }
-    
+class PersonIndexController: UITableViewController, NSFetchedResultsControllerDelegate, ActionContextProvider {
+
     func provide(context: ActionContext) {
-        context.info.addObserver(self)
     }
     
     @IBOutlet var indexTable: UITableView!

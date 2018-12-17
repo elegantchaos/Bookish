@@ -27,6 +27,7 @@ import BookishModel
     @objc let document: CollectionDocument
     @objc let managedObjectContext: NSManagedObjectContext
     @objc var bookIndex: NSArrayController?
+    
     @objc var selectedIndexes: NSMutableIndexSet?
     @objc var selectedPeople: NSMutableIndexSet?
     @objc var selectedPublishers: NSMutableIndexSet?

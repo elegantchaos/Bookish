@@ -10,8 +10,8 @@ class BookPersonRow: BookDetailRow {
     @IBOutlet var personButton: UIButton!
     var relationship: Relationship!
     
-    override func setup(row: Int, book: Book, source: DetailDataSource) {
-        assert(source.info(for: row).isPerson)
+    override func setup(row: DetailDataSource.RowInfo, book: Book, source: DetailDataSource) {
+        assert(row.category == .person)
         relationship = source.person(for: row)
         label.text = relationship.role?.name
         personButton.setTitle(relationship.person?.name, for: .normal)

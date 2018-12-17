@@ -9,7 +9,9 @@ import Foundation
     enum Mode: Int {
         case books = 0
         case people = 1
-        case settings = 2
+        case publisher = 2
+        case series = 3
+        case settings = 4
     }
     
     @objc dynamic var modeIndex: Int = 0
@@ -22,4 +24,6 @@ import Foundation
     let bookIndexSorting = [NSSortDescriptor(key: "name", ascending: true)]
     let personIndexSorting = [NSSortDescriptor(key: "name", ascending: true)]
     let relationshipSorting = [NSSortDescriptor(key: "role.name", ascending: true)]
+    let publisherSorting = [NSSortDescriptor(key: "name", ascending: true)]
+    let seriesSorting = [NSSortDescriptor(key: "name", ascending: true)]
 }
