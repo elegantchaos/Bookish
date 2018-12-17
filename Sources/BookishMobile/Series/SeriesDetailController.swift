@@ -8,14 +8,9 @@ import BookishModel
 import Actions
 
 class SeriesDetailController: UIViewController {
-    struct SortedRole {
-        let role: Role
-        let books: [Book]
-    }
-    
     lazy var placeholderImage = UIImage(named: "SeriesPlaceholder")
     var bindings = [Any]()
-    var sortedRoles = [SortedRole]()
+    var sortedEntries = [Entry]()
     
     @IBOutlet weak var nameLabel: UITextField!
     @IBOutlet weak var notesView: UITextView!
@@ -31,13 +26,10 @@ class SeriesDetailController: UIViewController {
             } else {
                 imageView.image = placeholderImage
             }
-            sortedRoles.removeAll()
-//            for relationship in series.relationships?.sortedArray(using: application.viewModel.relationshipSorting) as! [Relationship] {
-//                if let role = relationship.role,
-//                    let books = relationship.books?.sortedArray(using: application.viewModel.bookIndexSorting) as? [Book] {
-//                    sortedRoles.append(SortedRole(role: role, books: books))
-//                }
-//            }
+            
+            let entries = series.entries?.sortedArray(using: application.viewModel.entrySorting) as! [Entry]
+            sortedEntries.removeAll()
+            sortedEntries.append(contentsOf: entries)
         }
     }
     
@@ -58,22 +50,25 @@ class SeriesDetailController: UIViewController {
 
 extension SeriesDetailController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return sortedRoles.count
+        return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return sortedRoles[section].books.count
+        return sortedEntries.count
     }
-    
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return sortedRoles[section].role.name
-    }
+//
+//    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//        let index = sortedEntries[section].index
+//        return "\(index)"
+//    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let role = sortedRoles[indexPath.section]
-        let book = role.books[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: "book") as! PersonBookRow // if we fail here, it's a coding error as all possible view types should have been registered
-        cell.setup(row: indexPath.row, book: book, role:role.role)
+        let entry = sortedEntries[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "book") as! SeriesBookRow // if we fail here, it's a coding error as all possible view types should have been registered
+        if let book = entry.book {
+            cell.setup(row: indexPath.row, book: book)
+        }
+
         return cell
     }
 }

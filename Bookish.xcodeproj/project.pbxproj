@@ -108,6 +108,7 @@
 		22F1802521C810C500220D20 /* SeriesIndexController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1802421C810C500220D20 /* SeriesIndexController.swift */; };
 		22F1802721C810CC00220D20 /* PublisherDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1802621C810CC00220D20 /* PublisherDetailController.swift */; };
 		22F1802921C810D400220D20 /* SeriesDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1802821C810D400220D20 /* SeriesDetailController.swift */; };
+		22F1802D21C823B800220D20 /* SeriesBookRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1802C21C823B800220D20 /* SeriesBookRow.swift */; };
 		22F35487216FAC0100443C0B /* Actions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F35486216FAC0100443C0B /* Actions.framework */; };
 /* End PBXBuildFile section */
 
@@ -285,6 +286,7 @@
 		22F1802421C810C500220D20 /* SeriesIndexController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeriesIndexController.swift; sourceTree = "<group>"; };
 		22F1802621C810CC00220D20 /* PublisherDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublisherDetailController.swift; sourceTree = "<group>"; };
 		22F1802821C810D400220D20 /* SeriesDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeriesDetailController.swift; sourceTree = "<group>"; };
+		22F1802C21C823B800220D20 /* SeriesBookRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeriesBookRow.swift; sourceTree = "<group>"; };
 		22F35486216FAC0100443C0B /* Actions.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Actions.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		22F3548A216FAC0100443C0B /* BookishCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BookishCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -667,6 +669,7 @@
 			children = (
 				22F1802421C810C500220D20 /* SeriesIndexController.swift */,
 				22F1802821C810D400220D20 /* SeriesDetailController.swift */,
+				22F1802C21C823B800220D20 /* SeriesBookRow.swift */,
 			);
 			path = Series;
 			sourceTree = "<group>";
@@ -977,6 +980,7 @@
 				22D1B231217E0D780062F2CB /* BookDateRow.swift in Sources */,
 				2242931B212ADC4300E70510 /* BookDetailController.swift in Sources */,
 				22D1B23D21807F7B0062F2CB /* CollectionController.swift in Sources */,
+				22F1802D21C823B800220D20 /* SeriesBookRow.swift in Sources */,
 				22D1B235217F7ED40062F2CB /* PersonIndexController.swift in Sources */,
 				22F1802321C810BE00220D20 /* PublisherIndexController.swift in Sources */,
 				22F1802521C810C500220D20 /* SeriesIndexController.swift in Sources */,
