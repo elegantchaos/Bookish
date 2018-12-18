@@ -1,12 +1,12 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-//  Created by Sam Deane on 17/12/2018.
+//  Created by Sam Deane on 18/12/2018.
 //  All code (c) 2018 - present day, Elegant Chaos Limited.
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 import BookishModel
 import Actions
 
-class SeriesBookRow: UITableViewCell, ActionContextProvider {
+class PublisherBookRow: UITableViewCell, ActionContextProvider {
     @IBOutlet weak var bookButton: UIButton!
     
     var binding: StringBinding?

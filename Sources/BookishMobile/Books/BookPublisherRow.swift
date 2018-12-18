@@ -4,6 +4,7 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 import UIKit
+import Actions
 import BookishModel
 
 class BookPublisherRow: BookDetailRow {
@@ -17,3 +18,10 @@ class BookPublisherRow: BookDetailRow {
         publisherButton.setTitle(publisher.name, for: .normal)
    }
 }
+
+extension BookPublisherRow: ActionContextProvider {
+    func provide(context: ActionContext) {
+        context.info[PublisherAction.publisherKey] = publisher
+    }
+}
+

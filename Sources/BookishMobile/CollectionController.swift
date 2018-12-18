@@ -4,15 +4,13 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 import UIKit
+import CoreData
 import BookishModel
 import Actions
 
 class CollectionController: UITabBarController {
     var observers = [NSKeyValueObservation]()
-    var personIndexController: PersonIndexController!
-    var bookIndexController: BookIndexController!
-    var publisherIndexController: PublisherIndexController!
-    var seriesIndexController: SeriesIndexController!
+    var indexControllers: [String:Any] = [:]
     
     func setup(splitView: UISplitViewController) {
         let navigationController = splitView.viewControllers[splitView.viewControllers.count-1] as! UINavigationController
@@ -40,45 +38,37 @@ class CollectionController: UITabBarController {
         }
     }
 
+    func reveal<EntityType: NSManagedObject>(_ object: EntityType, mode: CollectionViewModel.Mode) {
+        application.viewModel.mode = mode
+        if let name = EntityType.entity().name {
+            if let index = indexControllers[name] as? EntitySelection {
+                index.select(object: object)
+            }
+        }
+    }
 }
 
 extension CollectionController: BookViewer {
     @objc func reveal(book: Book) {
-        application.viewModel.mode = .books
-        if let index = bookIndexController.fetchedResultsController.indexPath(forObject: book) {
-            bookIndexController.indexTable.selectRow(at: index, animated: true, scrollPosition: .bottom)
-            bookIndexController.performSegue(withIdentifier: "showDetail", sender: self)
-        }
+        reveal(book, mode: .books)
     }
 }
 
 extension CollectionController: PersonViewer {
     @objc func reveal(person: Person) {
-        application.viewModel.mode = .people
-        if let index = personIndexController.fetchedResultsController.indexPath(forObject: person) {
-            personIndexController.indexTable.selectRow(at: index, animated: true, scrollPosition: .bottom)
-            personIndexController.performSegue(withIdentifier: "showDetail", sender: self)
-        }
+        reveal(person, mode: .people)
     }
 }
 
 extension CollectionController: PublisherViewer {
     func reveal(publisher: Publisher) {
-        application.viewModel.mode = .publisher
-        if let index = publisherIndexController.fetchedResultsController.indexPath(forObject: publisher) {
-            publisherIndexController.indexTable.selectRow(at: index, animated: true, scrollPosition: .bottom)
-            publisherIndexController.performSegue(withIdentifier: "showDetail", sender: self)
-        }
+        reveal(publisher, mode: .publisher)
     }
 }
 
 extension CollectionController: SeriesViewer {
     func reveal(series: Series) {
-        application.viewModel.mode = .series
-        if let index = seriesIndexController.fetchedResultsController.indexPath(forObject: series) {
-            seriesIndexController.indexTable.selectRow(at: index, animated: true, scrollPosition: .bottom)
-            seriesIndexController.performSegue(withIdentifier: "showDetail", sender: self)
-        }
+        reveal(series, mode: .series)
     }
 }
 

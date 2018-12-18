@@ -3,9 +3,7 @@
 //  All code (c) 2018 - present day, Elegant Chaos Limited.
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
-import UIKit
 import BookishModel
-import Actions
 
 class PersonDetailController: DetailController<Person> {
     struct SortedRole {
@@ -41,7 +39,6 @@ class PersonDetailController: DetailController<Person> {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         let sections = sortedRoles.count
-        print(sections)
         return sections
     }
     
@@ -51,7 +48,6 @@ class PersonDetailController: DetailController<Person> {
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         let title = sortedRoles[section].role.name
-        print(title)
         return title
     }
     

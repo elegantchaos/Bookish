@@ -7,18 +7,24 @@ import UIKit
 import CoreData
 import BookishModel
 import Actions
+import Logger
+
+let detailViewChannel = Logger("DetailView")
 
 class DetailController<EntityType>: UIViewController, UITableViewDataSource, UITableViewDelegate {
     var bindings = [Any]()
     @IBOutlet weak var detailView: UITableView!
 
     override func viewDidLoad() {
+        detailViewChannel.debug("view loaded for \(EntityType.self)")
+        
         super.viewDidLoad()
         configureView()
     }
     
     var representedObject: EntityType? {
         didSet {
+            detailViewChannel.debug("represented object changed for \(EntityType.self)")
             configureView()
         }
     }

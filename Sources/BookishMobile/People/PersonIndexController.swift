@@ -3,19 +3,9 @@
 //  All code (c) 2018 - present day, Elegant Chaos Limited.
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
-import UIKit
-import CoreData
 import BookishModel
-import Actions
-
 
 class PersonIndexController: IndexController<PersonDetailController, Person> {
-
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        application.collectionController.personIndexController = self
-    }
 
     override func configureCell(_ cell: UITableViewCell, with person: Person) {
         cell.textLabel!.text = person.name

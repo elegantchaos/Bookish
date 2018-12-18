@@ -111,6 +111,7 @@
 		22F1802D21C823B800220D20 /* SeriesBookRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1802C21C823B800220D20 /* SeriesBookRow.swift */; };
 		22F1802F21C827C600220D20 /* IndexController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1802E21C827C500220D20 /* IndexController.swift */; };
 		22F1803121C82D8E00220D20 /* DetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1803021C82D8E00220D20 /* DetailController.swift */; };
+		22F1803321C9171B00220D20 /* PublisherBookRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1803221C9171B00220D20 /* PublisherBookRow.swift */; };
 		22F35487216FAC0100443C0B /* Actions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F35486216FAC0100443C0B /* Actions.framework */; };
 /* End PBXBuildFile section */
 
@@ -291,6 +292,7 @@
 		22F1802C21C823B800220D20 /* SeriesBookRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeriesBookRow.swift; sourceTree = "<group>"; };
 		22F1802E21C827C500220D20 /* IndexController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexController.swift; sourceTree = "<group>"; };
 		22F1803021C82D8E00220D20 /* DetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailController.swift; sourceTree = "<group>"; };
+		22F1803221C9171B00220D20 /* PublisherBookRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublisherBookRow.swift; sourceTree = "<group>"; };
 		22F35486216FAC0100443C0B /* Actions.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Actions.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		22F3548A216FAC0100443C0B /* BookishCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BookishCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -665,6 +667,7 @@
 			isa = PBXGroup;
 			children = (
 				22F1802221C810BE00220D20 /* PublisherIndexController.swift */,
+				22F1803221C9171B00220D20 /* PublisherBookRow.swift */,
 				22F1802621C810CC00220D20 /* PublisherDetailController.swift */,
 			);
 			path = Publisher;
@@ -971,6 +974,7 @@
 			files = (
 				22D1B23B21807D230062F2CB /* PersonBookRow.swift in Sources */,
 				22429314212ADC4300E70510 /* Application.swift in Sources */,
+				22F1803321C9171B00220D20 /* PublisherBookRow.swift in Sources */,
 				22D1B22F217E0A3F0062F2CB /* BookPersonRow.swift in Sources */,
 				221ED512216B8EAB00594714 /* BookDetailRow.swift in Sources */,
 				22F1801F21C8089100220D20 /* BookPublisherRow.swift in Sources */,

@@ -54,7 +54,7 @@
                                 <rect key="frame" x="0.0" y="136" width="375" height="444"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="detail" id="E4T-eO-oRA" customClass="BookDetailRow" customModule="BookishMobile" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="detail" id="E4T-eO-oRA" userLabel="text" customClass="BookDetailRow" customModule="BookishMobile" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="E4T-eO-oRA" id="EK5-8u-ive">
@@ -147,12 +147,15 @@
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Lq-Ru-KKv">
                                                     <rect key="frame" x="56.5" y="4" width="314.5" height="35.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <state key="normal" title="person link">
+                                                    <state key="normal" title="publisher link">
                                                         <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     </state>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="string" keyPath="actionID" value="RevealPublisher"/>
                                                     </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="performAction:" destination="FJe-Yq-33r" eventType="primaryActionTriggered" id="g0d-rJ-0Dz"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -186,12 +189,15 @@
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JRd-um-fi2">
                                                     <rect key="frame" x="56.5" y="4" width="314.5" height="35.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <state key="normal" title="person link">
+                                                    <state key="normal" title="series link">
                                                         <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     </state>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="string" keyPath="actionID" value="RevealSeries"/>
                                                     </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="performAction:" destination="FJe-Yq-33r" eventType="primaryActionTriggered" id="00u-oN-dsd"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -336,7 +342,7 @@
                                 <rect key="frame" x="4" y="323.5" width="367" height="256.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="book" id="zye-T4-Xvy" customClass="PersonBookRow" customModule="BookishMobile" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="book" id="zye-T4-Xvy" customClass="SeriesBookRow" customModule="BookishMobile" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="367" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zye-T4-Xvy" id="IKr-Iz-Dzt">
@@ -364,7 +370,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="personButton" destination="tDj-y1-u3D" id="0Jr-jg-R8t"/>
+                                            <outlet property="bookButton" destination="tDj-y1-u3D" id="rHz-Ad-Bgh"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -512,7 +518,7 @@
         <scene sceneID="4xs-Oa-Fjd">
             <objects>
                 <splitViewController title="SeriesSplitView" id="2Lc-mJ-yY6" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Series" id="JnU-ed-ngj"/>
+                    <tabBarItem key="tabBarItem" title="Series" image="Book" id="JnU-ed-ngj"/>
                     <connections>
                         <segue destination="DaJ-HY-hHK" kind="relationship" relationship="masterViewController" id="ORm-9n-cuQ"/>
                         <segue destination="dvr-7n-k5m" kind="relationship" relationship="detailViewController" id="eVu-B4-t4m"/>
@@ -585,7 +591,7 @@
                                 <rect key="frame" x="0.0" y="323.5" width="371" height="256.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="book" id="5e6-KI-fjs" customClass="PersonBookRow" customModule="BookishMobile" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="book" id="5e6-KI-fjs" customClass="PublisherBookRow">
                                         <rect key="frame" x="0.0" y="28" width="371" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5e6-KI-fjs" id="wDk-ir-t2O">
@@ -593,7 +599,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dy8-iE-gvr">
-                                                    <rect key="frame" x="16" y="4" width="3360.5" height="35.5"/>
+                                                    <rect key="frame" x="16" y="4" width="351" height="35.5"/>
                                                     <state key="normal" title="Button">
                                                         <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     </state>
@@ -613,7 +619,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="personButton" destination="Dy8-iE-gvr" id="PyG-QM-CfG"/>
+                                            <outlet property="bookButton" destination="Dy8-iE-gvr" id="tmQ-vS-EMB"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -720,7 +726,7 @@
         <scene sceneID="RhV-Xr-Ud1">
             <objects>
                 <splitViewController title="PublisherSplitView" id="kbC-k0-oAm" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Publishers" id="KM0-yd-5BU"/>
+                    <tabBarItem key="tabBarItem" title="Publishers" image="Book" id="KM0-yd-5BU"/>
                     <connections>
                         <segue destination="f2O-MJ-2TM" kind="relationship" relationship="masterViewController" id="Pj8-5g-kN2"/>
                         <segue destination="X7x-8N-Hqk" kind="relationship" relationship="detailViewController" id="ya2-LW-H8h"/>
@@ -1010,7 +1016,7 @@
             <objects>
                 <navigationController id="c4c-vd-fDO" userLabel="Person Index Navigation" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="nTR-H3-EyX">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -1059,8 +1065,8 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Tll-UG-LXB"/>
-        <segue reference="fZr-yF-Vad"/>
-        <segue reference="cPO-LW-cS7"/>
-        <segue reference="m1k-nj-2fO"/>
+        <segue reference="Nu6-en-RsV"/>
+        <segue reference="ya2-LW-H8h"/>
+        <segue reference="eVu-B4-t4m"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -8,7 +8,12 @@ import CoreData
 import BookishModel
 import Actions
 
-class IndexController<DetailControllerType: DetailController<EntityType>, EntityType: NSManagedObject>: UITableViewController, NSFetchedResultsControllerDelegate, ActionContextProvider {
+protocol EntitySelection {
+    func select(object: NSManagedObject)
+}
+
+class IndexController<DetailControllerType: DetailController<EntityType>, EntityType: NSManagedObject>: UITableViewController, NSFetchedResultsControllerDelegate, ActionContextProvider, EntitySelection {
+    var entityName = "\(EntityType.self)"
     var detailViewController: DetailControllerType? = nil
     var managedObjectContext: NSManagedObjectContext? = nil
     @IBOutlet var indexTable: UITableView!
@@ -18,6 +23,7 @@ class IndexController<DetailControllerType: DetailController<EntityType>, Entity
         super.viewDidLoad()
         
         managedObjectContext = application.persistentContainer.viewContext
+        application.collectionController.indexControllers[entityName] = self
         
         navigationItem.leftBarButtonItem = editButtonItem
         navigationItem.rightBarButtonItem = addButton
@@ -33,6 +39,27 @@ class IndexController<DetailControllerType: DetailController<EntityType>, Entity
         super.viewWillAppear(animated)
     }
     
+    func select(object: NSManagedObject) {
+        if let entity = object as? EntityType {
+            if let index = fetchedResultsController.indexPath(forObject: entity) {
+                indexTable.selectRow(at: index, animated: true, scrollPosition: .bottom)
+                performSegue(withIdentifier: "showDetail", sender: self)
+            }
+        }
+    }
+  
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showDetail" {
+            if let indexPath = tableView.indexPathForSelectedRow {
+                let object = fetchedResultsController.object(at: indexPath)
+                let controller = (segue.destination as! UINavigationController).topViewController as! DetailControllerType
+                controller.representedObject = object
+                controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
+                controller.navigationItem.leftItemsSupplementBackButton = true
+            }
+        }
+    }
+
     // MARK: - Table View
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -61,7 +88,7 @@ class IndexController<DetailControllerType: DetailController<EntityType>, Entity
             let book = fetchedResultsController.object(at: indexPath)
             let info = ActionInfo(sender: tableView)
             info[ActionContext.selectionKey] = [book]
-            application.actionManager.perform(identifier: "DeletePerson", info: info)
+            application.actionManager.perform(identifier: "Delete\(entityName)", info: info)
         }
     }
 
@@ -82,6 +109,11 @@ class IndexController<DetailControllerType: DetailController<EntityType>, Entity
         
         do {
             try _fetchedResultsController!.performFetch()
+            
+            if (tableView.indexPathForSelectedRow == nil) && !splitViewController!.isCollapsed {
+                tableView.selectRow(at: IndexPath(row: 0, section: 0), animated: false, scrollPosition: .top)
+            }
+            
         } catch {
             // Replace this implementation with code to handle the error appropriately.
             // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
@@ -94,18 +126,6 @@ class IndexController<DetailControllerType: DetailController<EntityType>, Entity
     
     var _fetchedResultsController: NSFetchedResultsController<EntityType>? = nil
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showDetail" {
-            if let indexPath = tableView.indexPathForSelectedRow {
-                let object = fetchedResultsController.object(at: indexPath)
-                let controller = (segue.destination as! UINavigationController).topViewController as! DetailControllerType
-                controller.representedObject = object
-                controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
-                controller.navigationItem.leftItemsSupplementBackButton = true
-            }
-        }
-    }
-
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.beginUpdates()
     }

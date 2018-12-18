@@ -11,12 +11,6 @@ class BookIndexController: IndexController<BookDetailController, Book> {
         context.info.addObserver(self)
     }    
     
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        application.collectionController.bookIndexController = self
-    }
- 
     override func configureCell(_ cell: UITableViewCell, with book: Book) {
         cell.textLabel!.text = book.name
     }

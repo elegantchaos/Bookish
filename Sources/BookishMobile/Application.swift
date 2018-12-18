@@ -21,8 +21,7 @@ class Application: UIResponder, UIApplicationDelegate, ActionContextProvider {
     var collectionController: CollectionController!
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        actionManager.register(PersonAction.standardActions())
-        actionManager.register(BookAction.standardActions())
+        actionManager.register(ModelAction.standardActions())
         actionManager.installResponder()
 
         applicationChannel.log("did finish launching")

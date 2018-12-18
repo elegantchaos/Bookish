@@ -3,16 +3,26 @@
 //  All code (c) 2018 - present day, Elegant Chaos Limited.
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
+import Actions
 import BookishModel
 
 class BookSeriesRow: BookDetailRow {
     @IBOutlet var seriesButton: UIButton!
-    var series: Entry!
+    var entry: Entry!
 
     override func setup(row: DetailDataSource.RowInfo, book: Book, source: DetailDataSource) {
         assert(row.category == .series)
-        series = source.series(for: row)
-        label.text = series.series?.name
-        seriesButton.setTitle(series.series?.name, for: .normal)
+        entry = source.series(for: row)
+        if let name = entry.series?.name {
+            label.text = name
+            seriesButton.setTitle(name, for: .normal)
+        }
     }
 }
+
+extension BookSeriesRow: ActionContextProvider {
+    func provide(context: ActionContext) {
+        context.info[SeriesAction.seriesKey] = entry.series
+    }
+}
+
