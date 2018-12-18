@@ -8,11 +8,13 @@ import CoreData
 import BookishModel
 import Actions
 
-protocol EntitySelection {
+protocol EntityIndex {
     func select(object: NSManagedObject)
+    func reset()
+    func reload()
 }
 
-class IndexController<DetailControllerType: DetailController<EntityType>, EntityType: NSManagedObject>: UITableViewController, NSFetchedResultsControllerDelegate, ActionContextProvider, EntitySelection {
+class IndexController<DetailControllerType: DetailController<EntityType>, EntityType: NSManagedObject>: UITableViewController, NSFetchedResultsControllerDelegate, ActionContextProvider, EntityIndex {
     var entityName = "\(EntityType.self)"
     var detailViewController: DetailControllerType? = nil
     var managedObjectContext: NSManagedObjectContext? = nil
@@ -34,6 +36,20 @@ class IndexController<DetailControllerType: DetailController<EntityType>, Entity
         }
     }
 
+    func reset() {
+        NSFetchedResultsController<EntityType>.deleteCache(withName: nil)
+        navigationController?.popToRootViewController(animated: false)
+        detailViewController?.reset()
+        _fetchedResultsController = nil
+        managedObjectContext = nil
+    }
+    
+    func reload() {
+        managedObjectContext = application.persistentContainer.viewContext
+        _fetchedResultsController = nil
+        indexTable.reloadData()
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         clearsSelectionOnViewWillAppear = splitViewController!.isCollapsed
         super.viewWillAppear(animated)

@@ -113,6 +113,7 @@
 		22F1803121C82D8E00220D20 /* DetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1803021C82D8E00220D20 /* DetailController.swift */; };
 		22F1803321C9171B00220D20 /* PublisherBookRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1803221C9171B00220D20 /* PublisherBookRow.swift */; };
 		22F1805321C9495300220D20 /* Sample.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 22F1805221C9495300220D20 /* Sample.sqlite */; };
+		22F180A421C951FF00220D20 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F180A321C951FF00220D20 /* SettingsController.swift */; };
 		22F35487216FAC0100443C0B /* Actions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F35486216FAC0100443C0B /* Actions.framework */; };
 /* End PBXBuildFile section */
 
@@ -294,6 +295,7 @@
 		22F1803021C82D8E00220D20 /* DetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailController.swift; sourceTree = "<group>"; };
 		22F1803221C9171B00220D20 /* PublisherBookRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublisherBookRow.swift; sourceTree = "<group>"; };
 		22F1805221C9495300220D20 /* Sample.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = Sample.sqlite; path = "Extras/Sample Data/Sample.sqlite"; sourceTree = SOURCE_ROOT; };
+		22F180A321C951FF00220D20 /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		22F35486216FAC0100443C0B /* Actions.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Actions.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		22F3548A216FAC0100443C0B /* BookishCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BookishCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -399,6 +401,7 @@
 				227F450D2181EDE1000D8B8D /* People */,
 				22F1802A21C8175D00220D20 /* Publisher */,
 				22F1802B21C8176900220D20 /* Series */,
+				22F180A221C951F000220D20 /* Settings */,
 				227F450F2181EE08000D8B8D /* Utilities */,
 				22F1804E21C9459300220D20 /* Resources */,
 			);
@@ -700,6 +703,14 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		22F180A221C951F000220D20 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				22F180A321C951FF00220D20 /* SettingsController.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -996,6 +1007,7 @@
 				22D1B22F217E0A3F0062F2CB /* BookPersonRow.swift in Sources */,
 				221ED512216B8EAB00594714 /* BookDetailRow.swift in Sources */,
 				22F1801F21C8089100220D20 /* BookPublisherRow.swift in Sources */,
+				22F180A421C951FF00220D20 /* SettingsController.swift in Sources */,
 				22F1802121C8095B00220D20 /* BookSeriesRow.swift in Sources */,
 				22D1B237217F7EF30062F2CB /* PersonDetailController.swift in Sources */,
 				22429319212ADC4300E70510 /* BookIndexController.swift in Sources */,

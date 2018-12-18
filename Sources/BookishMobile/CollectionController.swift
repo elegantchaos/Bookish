@@ -12,6 +12,24 @@ class CollectionController: UITabBarController {
     var observers = [NSKeyValueObservation]()
     var indexControllers: [String:Any] = [:]
     
+    func reset(usingSample: Bool) {
+        
+        for controller in indexControllers.values {
+            if let controller = controller as? EntityIndex {
+                controller.reset()
+            }
+        }
+        
+        application.persistentContainer = CollectionContainer(name: "Default")
+        application.persistentContainer.load(usingSample: usingSample, reset: true)
+        
+        for controller in indexControllers.values {
+            if let controller = controller as? EntityIndex {
+                controller.reload()
+            }
+        }
+    }
+    
     func setup(splitView: UISplitViewController) {
         let navigationController = splitView.viewControllers[splitView.viewControllers.count-1] as! UINavigationController
         navigationController.topViewController!.navigationItem.leftBarButtonItem = splitView.displayModeButtonItem
@@ -22,9 +40,10 @@ class CollectionController: UITabBarController {
         super.viewDidLoad()
         
         application.collectionController = self
-        setup(splitView: viewControllers![0] as! UISplitViewController)
-        setup(splitView: viewControllers![1] as! UISplitViewController)
-        
+        for n in 0...3 {
+            setup(splitView: viewControllers![n] as! UISplitViewController)
+        }
+
         let viewModel = application.viewModel
         let modeObserver = application.observe(\Application.viewModel.modeIndex) { (app, change) in
             self.selectedIndex = viewModel.modeIndex
@@ -41,7 +60,7 @@ class CollectionController: UITabBarController {
     func reveal<EntityType: NSManagedObject>(_ object: EntityType, mode: CollectionViewModel.Mode) {
         application.viewModel.mode = mode
         if let name = EntityType.entity().name {
-            if let index = indexControllers[name] as? EntitySelection {
+            if let index = indexControllers[name] as? EntityIndex {
                 index.select(object: object)
             }
         }

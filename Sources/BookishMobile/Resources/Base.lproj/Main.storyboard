@@ -6,6 +6,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -307,11 +308,43 @@
         <!--Settings-->
         <scene sceneID="CfG-Pl-U5P">
             <objects>
-                <viewController id="WzE-F1-Iat" sceneMemberID="viewController">
+                <viewController id="WzE-F1-Iat" customClass="SettingsController" customModule="BookishMobile" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="YrT-jZ-Avn">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Bzv-8x-bww">
+                                <rect key="frame" x="20" y="40" width="335" height="56"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MgS-SD-2Dy">
+                                        <rect key="frame" x="0.0" y="0.0" width="335" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="24" id="Cyb-A2-PN0"/>
+                                        </constraints>
+                                        <state key="normal" title="Reset To Empty"/>
+                                        <connections>
+                                            <action selector="resetToEmpty:" destination="WzE-F1-Iat" eventType="touchUpInside" id="VLA-22-Yke"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FlW-Hb-22l">
+                                        <rect key="frame" x="0.0" y="32" width="335" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="24" id="SyE-3S-T1M"/>
+                                        </constraints>
+                                        <state key="normal" title="Reset To Sample Data"/>
+                                        <connections>
+                                            <action selector="resetToSampleData:" destination="WzE-F1-Iat" eventType="touchUpInside" id="IPs-e9-Y0B"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Bzv-8x-bww" firstAttribute="leading" secondItem="M6n-P8-q4Y" secondAttribute="leading" constant="20" id="FfC-C2-Cht"/>
+                            <constraint firstItem="M6n-P8-q4Y" firstAttribute="trailing" secondItem="Bzv-8x-bww" secondAttribute="trailing" constant="20" id="V6u-69-Xt1"/>
+                            <constraint firstItem="Bzv-8x-bww" firstAttribute="top" secondItem="M6n-P8-q4Y" secondAttribute="top" constant="20" id="gq0-Dy-KAR"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="M6n-P8-q4Y"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Settings" image="Settings" id="B5E-0H-BQa"/>
@@ -1060,7 +1093,7 @@
     </scenes>
     <resources>
         <image name="Book" width="32" height="32"/>
-        <image name="Person" width="16" height="16"/>
+        <image name="Person" width="32" height="32"/>
         <image name="Settings" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>

@@ -22,6 +22,11 @@ class DetailController<EntityType>: UIViewController, UITableViewDataSource, UIT
         configureView()
     }
     
+    func reset() {
+        navigationController?.popToRootViewController(animated: false)
+        bindings = [Any]()
+    }
+    
     var representedObject: EntityType? {
         didSet {
             detailViewChannel.debug("represented object changed for \(EntityType.self)")
