@@ -8,8 +8,6 @@ import BookishModel
 import Actions
 import Logger
 
-let bookDetailChannel = Logger("BookDetails")
-
 class BookDetailController: DetailController<Book> {
     let source = DetailDataSource()
     lazy var placeholderImage = UIImage(named: "CoverPlaceholder")
@@ -41,7 +39,7 @@ class BookDetailController: DetailController<Book> {
         let info = source.info(for: indexPath.row, editing: isEditing)
         let identifier = info.kind.rawValue
         guard let cell = tableView.dequeueReusableCell(withIdentifier: identifier) as? BookDetailRow else {
-            bookDetailChannel.log("Unregistered cell type \(identifier).")
+            detailViewChannel.log("Unregistered cell type \(identifier).")
             return UITableViewCell(style: .default, reuseIdentifier: identifier)
         }
 

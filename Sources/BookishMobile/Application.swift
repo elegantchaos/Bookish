@@ -69,6 +69,13 @@ class Application: UIResponder, UIApplicationDelegate, ActionContextProvider {
          error conditions that could cause the creation of the store to fail.
         */
         let container = CollectionContainer(name: "Collection")
+        let loadSample = true
+        if loadSample {
+            if let url = Bundle.main.url(forResource: "Sample", withExtension: "sqlite") {
+                container.persistentStoreDescriptions = [NSPersistentStoreDescription(url: url)]
+            }
+        }
+        
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
                 // Replace this implementation with code to handle the error appropriately.

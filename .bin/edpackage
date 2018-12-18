@@ -1,0 +1,3 @@
+cd Dependencies/BookishModel
+xcrun swift package edit $1
+.bin/update

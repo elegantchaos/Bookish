@@ -112,6 +112,7 @@
 		22F1802F21C827C600220D20 /* IndexController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1802E21C827C500220D20 /* IndexController.swift */; };
 		22F1803121C82D8E00220D20 /* DetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1803021C82D8E00220D20 /* DetailController.swift */; };
 		22F1803321C9171B00220D20 /* PublisherBookRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1803221C9171B00220D20 /* PublisherBookRow.swift */; };
+		22F1805321C9495300220D20 /* Sample.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 22F1805221C9495300220D20 /* Sample.sqlite */; };
 		22F35487216FAC0100443C0B /* Actions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F35486216FAC0100443C0B /* Actions.framework */; };
 /* End PBXBuildFile section */
 
@@ -237,7 +238,6 @@
 		22960329214032520020B3EB /* AnnotatedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotatedTextField.swift; sourceTree = "<group>"; };
 		2296032B214132840020B3EB /* Bookish.sketch */ = {isa = PBXFileReference; lastKnownFileType = file; name = Bookish.sketch; path = Extras/Bookish.sketch; sourceTree = "<group>"; };
 		2296033021416F960020B3EB /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
-		2296036A214187570020B3EB /* Update.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = Update.sh; sourceTree = "<group>"; };
 		22A69BF421C2DDE600043C3A /* LoggerKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = LoggerKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		22B1DB402178D8A50067E795 /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
 		22C2194A21AF24E5002FC0FE /* ToggleEditingAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleEditingAction.swift; sourceTree = "<group>"; };
@@ -293,6 +293,7 @@
 		22F1802E21C827C500220D20 /* IndexController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexController.swift; sourceTree = "<group>"; };
 		22F1803021C82D8E00220D20 /* DetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailController.swift; sourceTree = "<group>"; };
 		22F1803221C9171B00220D20 /* PublisherBookRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublisherBookRow.swift; sourceTree = "<group>"; };
+		22F1805221C9495300220D20 /* Sample.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = Sample.sqlite; path = "Extras/Sample Data/Sample.sqlite"; sourceTree = SOURCE_ROOT; };
 		22F35486216FAC0100443C0B /* Actions.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Actions.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		22F3548A216FAC0100443C0B /* BookishCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BookishCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -399,11 +400,7 @@
 				22F1802A21C8175D00220D20 /* Publisher */,
 				22F1802B21C8176900220D20 /* Series */,
 				227F450F2181EE08000D8B8D /* Utilities */,
-				2242931C212ADC4300E70510 /* Main.storyboard */,
-				2242931F212ADC4400E70510 /* Assets.xcassets */,
-				22DE6AE521877FFB0078D489 /* Assets.xcfilelist */,
-				22429321212ADC4400E70510 /* LaunchScreen.storyboard */,
-				22429324212ADC4400E70510 /* Info.plist */,
+				22F1804E21C9459300220D20 /* Resources */,
 			);
 			path = BookishMobile;
 			sourceTree = "<group>";
@@ -439,11 +436,7 @@
 				227F451B21835EF4000D8B8D /* Importers */,
 				22D39E632147E9BA00282467 /* Transformers */,
 				221F27272136EC0500DC2DC7 /* Utilities */,
-				22DD42502126D6DB0070C85A /* Assets.xcassets */,
-				22DE6AE421877E740078D489 /* Assets.xcfilelist */,
-				22DD42522126D6DB0070C85A /* Main.storyboard */,
-				22DD42552126D6DB0070C85A /* Info.plist */,
-				22DD42562126D6DB0070C85A /* Bookish.entitlements */,
+				22F1804F21C945D800220D20 /* Resources */,
 			);
 			path = BookishMac;
 			sourceTree = "<group>";
@@ -603,7 +596,6 @@
 				221ED4EE21678BF200594714 /* Configs */,
 				2296032B214132840020B3EB /* Bookish.sketch */,
 				2296033021416F960020B3EB /* Package.swift */,
-				2296036A214187570020B3EB /* Update.sh */,
 				22DD42462126D6DA0070C85A /* Sources */,
 				22DD42782126DD3A0070C85A /* Tests */,
 				22DD42452126D6DA0070C85A /* Products */,
@@ -681,6 +673,31 @@
 				22F1802C21C823B800220D20 /* SeriesBookRow.swift */,
 			);
 			path = Series;
+			sourceTree = "<group>";
+		};
+		22F1804E21C9459300220D20 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				22F1805221C9495300220D20 /* Sample.sqlite */,
+				2242931C212ADC4300E70510 /* Main.storyboard */,
+				2242931F212ADC4400E70510 /* Assets.xcassets */,
+				22DE6AE521877FFB0078D489 /* Assets.xcfilelist */,
+				22429321212ADC4400E70510 /* LaunchScreen.storyboard */,
+				22429324212ADC4400E70510 /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		22F1804F21C945D800220D20 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				22DD42502126D6DB0070C85A /* Assets.xcassets */,
+				22DE6AE421877E740078D489 /* Assets.xcfilelist */,
+				22DD42522126D6DB0070C85A /* Main.storyboard */,
+				22DD42552126D6DB0070C85A /* Info.plist */,
+				22DD42562126D6DB0070C85A /* Bookish.entitlements */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -879,6 +896,7 @@
 			files = (
 				22429323212ADC4400E70510 /* LaunchScreen.storyboard in Resources */,
 				22429320212ADC4400E70510 /* Assets.xcassets in Resources */,
+				22F1805321C9495300220D20 /* Sample.sqlite in Resources */,
 				2242931E212ADC4300E70510 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -935,13 +953,13 @@
 			);
 			name = "Export From Sketch";
 			outputFileListPaths = (
-				"$(SRCROOT)/Sources/BookishMac/Assets.xcfilelist",
+				"$(SRCROOT)/Sources/BookishMac/Resources/Assets.xcfilelist",
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# build & run sketchx to export the assets\nswift run sketchx Extras/Bookish.sketch Mac=Assets Sources/BookishMac \n\n# update list of all assets\n#find Sources/BookishMac/Assets.xcassets -type f > Sources/BookishMac/Assets.xcfilelist\n";
+			shellScript = "# build & run sketchx to export the assets\nswift run sketchx Extras/Bookish.sketch Mac=Assets Sources/BookishMac/Resources \n\n# update list of all assets\n#find Sources/BookishMac/Resources/Assets.xcassets -type f > Sources/BookishMac/Resources/Assets.xcfilelist\n";
 			showEnvVarsInLog = 0;
 		};
 		226EF319217793740012A405 /* Export From Sketch */ = {
@@ -956,13 +974,13 @@
 			);
 			name = "Export From Sketch";
 			outputFileListPaths = (
-				"$(SRCROOT)/Sources/BookishMobile/Assets.xcfilelist",
+				"$(SRCROOT)/Sources/BookishMobile/Resources/Assets.xcfilelist",
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# build & run sketchx to export the assets\n#swift run sketchx Extras/Bookish.sketch Mobile=Assets Sources/BookishMobile \n\n# update list of all assets\n#find Sources/BookishMobile/Assets.xcassets -type f > Sources/BookishMobile/Assets.xcfilelist\n";
+			shellScript = "# build & run sketchx to export the assets\n#swift run sketchx Extras/Bookish.sketch Mobile=Assets Sources/BookishMobile/Resources \n\n# update list of all assets\n#find Sources/BookishMobile/Resources/Assets.xcassets -type f > Sources/BookishMobile/Resources/Assets.xcfilelist\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

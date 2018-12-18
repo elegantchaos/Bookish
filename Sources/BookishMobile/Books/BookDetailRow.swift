@@ -13,7 +13,7 @@ class BookDetailRow: UITableViewCell {
     var binding: TextViewBinding?
     
     func setup(row: DetailDataSource.RowInfo, book: Book, source: DetailDataSource) {
-        assert(row.category == .person)
+        assert(row.category == .detail)
         let rowInfo = source.details(for: row)
         label.text = rowInfo.label
         binding = TextViewBinding(for: detail, to: book, path: rowInfo.binding, setIfNull: true)
