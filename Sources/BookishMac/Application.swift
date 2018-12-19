@@ -8,6 +8,7 @@ import BookishModel
 import Actions
 import ActionsKit
 import Logger
+import BookishCore
 
 let applicationChannel = Logger("Application")
 
@@ -16,7 +17,7 @@ let applicationChannel = Logger("Application")
     let documentWindowControllerFactory = DocumentWindowControllerFactory()
     let actionManager = ActionManagerMac()
     let importManager = ImportManager()
-    let imageCache = ImageCache()
+    let imageCache = NSImageCache()
     
     let uiTesting = CommandLine.arguments.contains("--ui-testing")
     var testDocument = CommandLine.arguments.contains("--test-document")

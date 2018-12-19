@@ -29,7 +29,7 @@ class IndexController<DetailControllerType: DetailController<EntityType>, Entity
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        modelContext = application.persistentContainer.viewContext
+        modelContext = application.collection.viewContext
         application.collectionController.indexControllers[entityName] = self
         
         navigationItem.leftBarButtonItem = editButtonItem
@@ -50,7 +50,7 @@ class IndexController<DetailControllerType: DetailController<EntityType>, Entity
     }
     
     func reload() {
-        modelContext = application.persistentContainer.viewContext
+        modelContext = application.collection.viewContext
         fetcher = makeFetcher()
         indexTable.reloadData()
     }
@@ -90,8 +90,10 @@ class IndexController<DetailControllerType: DetailController<EntityType>, Entity
     override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
         return fetcher.sectionIndexTitles
     }
-    
+
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        guard fetcher.sectionIndexTitles.count > section else { return nil }
+        
         return fetcher.sectionIndexTitle(forSectionName: fetcher.sectionIndexTitles[section])
     }
     

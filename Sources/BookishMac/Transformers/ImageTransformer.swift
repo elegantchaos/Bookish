@@ -4,14 +4,15 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 import AppKit
+import BookishCore
 
 class ImageTransformer: ValueTransformer {
     let placeholderName: String
     let imageKey: String
     let urlKey: String
-    let cache: ImageCache
+    let cache: NSImageCache
     
-    init(placeholder: String, imageKey: String = "image", urlKey: String = "imageURL", cache: ImageCache) {
+    init(placeholder: String, imageKey: String = "image", urlKey: String = "imageURL", cache: NSImageCache) {
         self.placeholderName = placeholder
         self.imageKey = imageKey
         self.urlKey = urlKey

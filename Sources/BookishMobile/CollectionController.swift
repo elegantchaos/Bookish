@@ -13,22 +13,14 @@ class CollectionController: UITabBarController {
     var indexControllers: [String:Any] = [:]
     
     func reset(usingSample: Bool) {
+        let indices = indexControllers.values.compactMap { $0 as? EntityIndex }
+        indices.forEach { $0.reset() }
         
-        for controller in indexControllers.values {
-            if let controller = controller as? EntityIndex {
-                controller.reset()
-            }
-        }
+        application.collection.delete()
+        application.collection = CollectionContainer(name: "Default")
+        application.collection.load(usingSample: usingSample, reset: true)
         
-        application.persistentContainer.delete()
-        application.persistentContainer = CollectionContainer(name: "Default")
-        application.persistentContainer.load(usingSample: usingSample, reset: true)
-        
-        for controller in indexControllers.values {
-            if let controller = controller as? EntityIndex {
-                controller.reload()
-            }
-        }
+        indices.forEach { $0.reload() }
     }
     
     func setup(splitView: UISplitViewController) {

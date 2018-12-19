@@ -6,6 +6,7 @@
 import UIKit
 import CoreData
 import BookishModel
+import BookishCore
 import Logger
 import Actions
 import ActionsKit
@@ -13,23 +14,24 @@ import ActionsKit
 let applicationChannel = Logger("Application")
 
 @UIApplicationMain
-class Application: UIResponder, UIApplicationDelegate, ActionContextProvider {
-
-    var window: UIWindow?
+class Application: UIResponder {
+    var window: UIWindow? // required for storyboard support
     let actionManager = ActionManagerMobile()
+    let imageCache = UIImageCache()
     @objc dynamic let viewModel = CollectionViewModel()
     var collectionController: CollectionController!
-    
+    lazy var collection: CollectionContainer = CollectionContainer.makeDefaultContainer(name: "Default")
+}
+
+// MARK: Application Delegate Support
+
+extension Application: UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         actionManager.register(ModelAction.standardActions())
         actionManager.installResponder()
-
+        
         applicationChannel.log("did finish launching")
         return true
-    }
-
-    override var next: UIResponder? {
-        return actionManager.responder
     }
     
     func applicationWillResignActive(_ application: UIApplication) {
@@ -37,39 +39,42 @@ class Application: UIResponder, UIApplicationDelegate, ActionContextProvider {
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
         applicationChannel.log("will resign")
     }
-
+    
     func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
         applicationChannel.log("did enter background")
     }
-
+    
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
         applicationChannel.log("will enter foreground")
     }
-
+    
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         applicationChannel.log("did become active")
     }
-
+    
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
         applicationChannel.log("will terminate")
-        persistentContainer.save()
+        collection.save()
     }
 
-    lazy var persistentContainer: CollectionContainer = CollectionContainer.makeDefaultContainer(name: "Default")
-
-    func provide(context: ActionContext) {
-        context.info[ActionContext.modelKey] = persistentContainer.viewContext
-        context.info[ActionContext.rootKey] = collectionController
-    }
 }
 
-@objc class ActionPerformer: NSObject {
-    @IBAction func performAction(_ sender: Any) {
+// MARK: Action Support
+
+extension Application: ActionContextProvider {
+    override var next: UIResponder? {
+        return actionManager.responder
+    }
+    
+    func provide(context: ActionContext) {
+        context.info[ActionContext.modelKey] = collection.viewContext
+        context.info[ActionContext.viewModelKey] = viewModel
+        context.info[ActionContext.rootKey] = collectionController
     }
 }

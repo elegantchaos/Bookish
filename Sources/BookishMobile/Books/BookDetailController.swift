@@ -20,16 +20,25 @@ class BookDetailController: DetailController<Book> {
         if let book = representedObject, titleLabel != nil {
             bindings.append(TextFieldBinding(for: titleLabel, to: book, path: "name"))
             bindings.append(TextFieldBinding(for: subtitleLabel, to: book, path: "subtitle"))
-            if let imageData = book.image {
-                imageView.image = UIImage(data: imageData)
-            } else {
-                imageView.image = placeholderImage
-            }
+            configureImage(for: book)
             bindings.append(StringBinding(for: self, property: "title", to: book, path: "name"))
             source.filter(for: [book], editing: isEditing)
         }
     }
     
+    func configureImage(for book: Book) {
+        if let data = book.image, let image = UIImage(data: data) {
+            imageView.image = image
+        } else {
+            imageView.image = UIImage(named: "CoverPlaceholder")
+            if let urlString = book.imageURL, let url = URL(string: urlString) {
+                application.imageCache.image(for: url) { (image) in
+                    self.imageView.image = image
+                }
+            }
+        }
+    }
+
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return source.rows
     }
