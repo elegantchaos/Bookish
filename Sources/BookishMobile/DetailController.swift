@@ -52,4 +52,5 @@ class DetailController<EntityType>: UIViewController, UITableViewDataSource, UIT
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return nil
     }
+
 }

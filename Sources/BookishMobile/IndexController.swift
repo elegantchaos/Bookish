@@ -7,6 +7,7 @@ import UIKit
 import CoreData
 import BookishModel
 import Actions
+import Logger
 
 protocol EntityIndex {
     func select(object: NSManagedObject)
@@ -14,17 +15,21 @@ protocol EntityIndex {
     func reload()
 }
 
+let indexViewChannel = Logger("IndexView")
+
 class IndexController<DetailControllerType: DetailController<EntityType>, EntityType: NSManagedObject>: UITableViewController, NSFetchedResultsControllerDelegate, ActionContextProvider, EntityIndex {
     var entityName = "\(EntityType.self)"
-    var detailViewController: DetailControllerType? = nil
-    var managedObjectContext: NSManagedObjectContext? = nil
+    var detailController: DetailControllerType? = nil
+    var modelContext: NSManagedObjectContext? = nil
+    lazy var fetcher: NSFetchedResultsController<EntityType> = makeFetcher()
+    
     @IBOutlet var indexTable: UITableView!
     @IBOutlet var addButton: UIBarButtonItem!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        managedObjectContext = application.persistentContainer.viewContext
+        modelContext = application.persistentContainer.viewContext
         application.collectionController.indexControllers[entityName] = self
         
         navigationItem.leftBarButtonItem = editButtonItem
@@ -32,21 +37,21 @@ class IndexController<DetailControllerType: DetailController<EntityType>, Entity
         
         if let split = splitViewController {
             let controllers = split.viewControllers
-            detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailControllerType
+            detailController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailControllerType
         }
     }
 
     func reset() {
-        NSFetchedResultsController<EntityType>.deleteCache(withName: nil)
+        NSFetchedResultsController<EntityType>.deleteCache(withName: entityName)
         navigationController?.popToRootViewController(animated: false)
-        detailViewController?.reset()
-        _fetchedResultsController = nil
-        managedObjectContext = nil
+        detailController?.reset()
+        modelContext = nil
+        fetcher.delegate = nil
     }
     
     func reload() {
-        managedObjectContext = application.persistentContainer.viewContext
-        _fetchedResultsController = nil
+        modelContext = application.persistentContainer.viewContext
+        fetcher = makeFetcher()
         indexTable.reloadData()
     }
     
@@ -57,7 +62,7 @@ class IndexController<DetailControllerType: DetailController<EntityType>, Entity
     
     func select(object: NSManagedObject) {
         if let entity = object as? EntityType {
-            if let index = fetchedResultsController.indexPath(forObject: entity) {
+            if let index = fetcher.indexPath(forObject: entity) {
                 indexTable.selectRow(at: index, animated: true, scrollPosition: .bottom)
                 performSegue(withIdentifier: "showDetail", sender: self)
             }
@@ -67,7 +72,7 @@ class IndexController<DetailControllerType: DetailController<EntityType>, Entity
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showDetail" {
             if let indexPath = tableView.indexPathForSelectedRow {
-                let object = fetchedResultsController.object(at: indexPath)
+                let object = fetcher.object(at: indexPath)
                 let controller = (segue.destination as! UINavigationController).topViewController as! DetailControllerType
                 controller.representedObject = object
                 controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
@@ -79,17 +84,25 @@ class IndexController<DetailControllerType: DetailController<EntityType>, Entity
     // MARK: - Table View
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return fetchedResultsController.sections?.count ?? 0
+        return fetcher.sections?.count ?? 1
+    }
+    
+    override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+        return fetcher.sectionIndexTitles
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return fetcher.sectionIndexTitle(forSectionName: fetcher.sectionIndexTitles[section])
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let sectionInfo = fetchedResultsController.sections![section]
+        let sectionInfo = fetcher.sections![section]
         return sectionInfo.numberOfObjects
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        let item = fetchedResultsController.object(at: indexPath)
+        let item = fetcher.object(at: indexPath)
         configureCell(cell, with: item)
         return cell
     }
@@ -101,46 +114,36 @@ class IndexController<DetailControllerType: DetailController<EntityType>, Entity
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let book = fetchedResultsController.object(at: indexPath)
+            let book = fetcher.object(at: indexPath)
             let info = ActionInfo(sender: tableView)
             info[ActionContext.selectionKey] = [book]
             application.actionManager.perform(identifier: "Delete\(entityName)", info: info)
         }
     }
 
-    var fetchedResultsController: NSFetchedResultsController<EntityType> {
-        if _fetchedResultsController != nil {
-            return _fetchedResultsController!
-        }
+
+    func makeFetcher() -> NSFetchedResultsController<EntityType> {
+        let request: NSFetchRequest<EntityType> = EntityType.fetchRequest() as! NSFetchRequest<EntityType>
+        request.fetchBatchSize = 20
+        request.sortDescriptors = application.viewModel.bookIndexSorting
         
-        let fetchRequest: NSFetchRequest<EntityType> = EntityType.fetchRequest() as! NSFetchRequest<EntityType>
-        fetchRequest.fetchBatchSize = 20
-        fetchRequest.sortDescriptors = application.viewModel.bookIndexSorting
-        
-        // Edit the section name key path and cache name if appropriate.
-        // nil for section name key path means "no sections".
-        let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext!, sectionNameKeyPath: nil, cacheName: "Master")
-        aFetchedResultsController.delegate = self
-        _fetchedResultsController = aFetchedResultsController
+        let controller = NSFetchedResultsController(fetchRequest: request, managedObjectContext: modelContext!, sectionNameKeyPath: "sectionName", cacheName: entityName)
+        controller.delegate = self
         
         do {
-            try _fetchedResultsController!.performFetch()
+            try controller.performFetch()
             
             if (tableView.indexPathForSelectedRow == nil) && !splitViewController!.isCollapsed {
                 tableView.selectRow(at: IndexPath(row: 0, section: 0), animated: false, scrollPosition: .top)
             }
             
         } catch {
-            // Replace this implementation with code to handle the error appropriately.
-            // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
             let nserror = error as NSError
-            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+            indexViewChannel.fatal("Unresolved error \(nserror), \(nserror.userInfo)")
         }
         
-        return _fetchedResultsController!
+        return controller
     }
-    
-    var _fetchedResultsController: NSFetchedResultsController<EntityType>? = nil
     
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.beginUpdates()

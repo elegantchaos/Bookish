@@ -21,10 +21,10 @@ import Foundation
         set (value) { modeIndex = value.rawValue }
     }
 
-    let bookIndexSorting = [NSSortDescriptor(key: "name", ascending: true)]
-    let personIndexSorting = [NSSortDescriptor(key: "name", ascending: true)]
+    let bookIndexSorting = [NSSortDescriptor(key: "sortName", ascending: true)]
+    let personIndexSorting = [NSSortDescriptor(key: "sortName", ascending: true)]
     let relationshipSorting = [NSSortDescriptor(key: "role.name", ascending: true)]
     let entrySorting = [NSSortDescriptor(key: "index", ascending: true)]
-    let publisherSorting = [NSSortDescriptor(key: "name", ascending: true)]
-    let seriesSorting = [NSSortDescriptor(key: "name", ascending: true)]
+    let publisherSorting = [NSSortDescriptor(key: "sortName", ascending: true)]
+    let seriesSorting = [NSSortDescriptor(key: "sortName", ascending: true)]
 }

@@ -21,20 +21,6 @@
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "Actions::ActionsKit"
-               BuildableName = "ActionsKit.framework"
-               BlueprintName = "ActionsKit"
-               ReferencedContainer = "container:Dependencies/BookishModel/Dependencies/Mobile/BookishModelDependenciesMobile.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
             buildForTesting = "NO"
             buildForRunning = "YES"
             buildForProfiling = "YES"

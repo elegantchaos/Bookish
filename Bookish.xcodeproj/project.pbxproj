@@ -114,6 +114,13 @@
 		22F1803321C9171B00220D20 /* PublisherBookRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1803221C9171B00220D20 /* PublisherBookRow.swift */; };
 		22F1805321C9495300220D20 /* Sample.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 22F1805221C9495300220D20 /* Sample.sqlite */; };
 		22F180A421C951FF00220D20 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F180A321C951FF00220D20 /* SettingsController.swift */; };
+		22F180BD21CA647000220D20 /* LoggerKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22A69BF421C2DDE600043C3A /* LoggerKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		22F180BE21CA647000220D20 /* Logger.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22DAF399217B5305003CE28B /* Logger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		22F180C021CA64A200220D20 /* BookishModel.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22F180BF21CA64A200220D20 /* BookishModel.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		22F180C121CA64B500220D20 /* ActionsKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22DAF397217B52E6003CE28B /* ActionsKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		22F180C221CA64B500220D20 /* Actions.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22F35486216FAC0100443C0B /* Actions.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		22F180E021CA87A400220D20 /* Sample.sqlite-shm in Resources */ = {isa = PBXBuildFile; fileRef = 22F180DE21CA87A300220D20 /* Sample.sqlite-shm */; };
+		22F180E121CA87A400220D20 /* Sample.sqlite-wal in Resources */ = {isa = PBXBuildFile; fileRef = 22F180DF21CA87A300220D20 /* Sample.sqlite-wal */; };
 		22F35487216FAC0100443C0B /* Actions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F35486216FAC0100443C0B /* Actions.framework */; };
 /* End PBXBuildFile section */
 
@@ -166,7 +173,12 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				22F180C121CA64B500220D20 /* ActionsKit.framework in Embed Frameworks */,
+				22F180C221CA64B500220D20 /* Actions.framework in Embed Frameworks */,
+				22F180BD21CA647000220D20 /* LoggerKit.framework in Embed Frameworks */,
+				22F180BE21CA647000220D20 /* Logger.framework in Embed Frameworks */,
 				2289683A2191DA7C00B80A93 /* Ensembles.framework in Embed Frameworks */,
+				22F180C021CA64A200220D20 /* BookishModel.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -296,6 +308,9 @@
 		22F1803221C9171B00220D20 /* PublisherBookRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublisherBookRow.swift; sourceTree = "<group>"; };
 		22F1805221C9495300220D20 /* Sample.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = Sample.sqlite; path = "Extras/Sample Data/Sample.sqlite"; sourceTree = SOURCE_ROOT; };
 		22F180A321C951FF00220D20 /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
+		22F180BF21CA64A200220D20 /* BookishModel.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BookishModel.framework; path = "../../Library/Developer/Xcode/DerivedData/Bookish-azxjmoessbfkjjalxbqvnjmhexiy/Build/Products/mobile/Debug/BookishModel.framework"; sourceTree = "<group>"; };
+		22F180DE21CA87A300220D20 /* Sample.sqlite-shm */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Sample.sqlite-shm"; path = "Extras/Sample Data/Sample.sqlite-shm"; sourceTree = SOURCE_ROOT; };
+		22F180DF21CA87A300220D20 /* Sample.sqlite-wal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "Sample.sqlite-wal"; path = "Extras/Sample Data/Sample.sqlite-wal"; sourceTree = SOURCE_ROOT; };
 		22F35486216FAC0100443C0B /* Actions.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Actions.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		22F3548A216FAC0100443C0B /* BookishCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BookishCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -595,6 +610,7 @@
 		22DD423B2126D6DA0070C85A = {
 			isa = PBXGroup;
 			children = (
+				22F180BF21CA64A200220D20 /* BookishModel.framework */,
 				228968422191DDBF00B80A93 /* BookishMobile.entitlements */,
 				221ED4EE21678BF200594714 /* Configs */,
 				2296032B214132840020B3EB /* Bookish.sketch */,
@@ -682,6 +698,8 @@
 			isa = PBXGroup;
 			children = (
 				22F1805221C9495300220D20 /* Sample.sqlite */,
+				22F180DE21CA87A300220D20 /* Sample.sqlite-shm */,
+				22F180DF21CA87A300220D20 /* Sample.sqlite-wal */,
 				2242931C212ADC4300E70510 /* Main.storyboard */,
 				2242931F212ADC4400E70510 /* Assets.xcassets */,
 				22DE6AE521877FFB0078D489 /* Assets.xcfilelist */,
@@ -907,7 +925,9 @@
 			files = (
 				22429323212ADC4400E70510 /* LaunchScreen.storyboard in Resources */,
 				22429320212ADC4400E70510 /* Assets.xcassets in Resources */,
+				22F180E121CA87A400220D20 /* Sample.sqlite-wal in Resources */,
 				22F1805321C9495300220D20 /* Sample.sqlite in Resources */,
+				22F180E021CA87A400220D20 /* Sample.sqlite-shm in Resources */,
 				2242931E212ADC4300E70510 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

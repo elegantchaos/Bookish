@@ -20,6 +20,7 @@ class CollectionController: UITabBarController {
             }
         }
         
+        application.persistentContainer.delete()
         application.persistentContainer = CollectionContainer(name: "Default")
         application.persistentContainer.load(usingSample: usingSample, reset: true)
         
