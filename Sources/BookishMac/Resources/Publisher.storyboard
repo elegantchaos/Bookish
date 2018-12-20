@@ -22,13 +22,13 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <scrollView horizontalCompressionResistancePriority="760" borderType="none" autohidesScrollers="YES" horizontalLineScroll="23" horizontalPageScroll="10" verticalLineScroll="23" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F2R-FS-MHQ" userLabel="Index">
-                                            <rect key="frame" x="0.0" y="29" width="200" height="340"/>
+                                            <rect key="frame" x="0.0" y="45" width="200" height="324"/>
                                             <clipView key="contentView" drawsBackground="NO" id="Frg-lC-Lel">
-                                                <rect key="frame" x="0.0" y="0.0" width="200" height="340"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="200" height="324"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <tableView identifier="publishers" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnSelection="YES" autosaveColumns="NO" rowHeight="21" rowSizeStyle="automatic" usesAutomaticRowHeights="YES" viewBased="YES" id="Gzf-vQ-vhp">
-                                                        <rect key="frame" x="0.0" y="0.0" width="200" height="340"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="200" height="324"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <size key="intercellSpacing" width="3" height="2"/>
                                                         <color key="backgroundColor" name="Bookish Index"/>
@@ -102,7 +102,7 @@
                                             </textFieldCell>
                                         </textField>
                                         <searchField wantsLayer="YES" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5v7-St-Xf5">
-                                            <rect key="frame" x="4" y="4" width="192" height="21"/>
+                                            <rect key="frame" x="20" y="20" width="160" height="21"/>
                                             <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="border" drawsBackground="YES" usesSingleLineMode="YES" recentsAutosaveName="people-filter" id="svT-p3-66l">
                                                 <font key="font" metaFont="system"/>
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -118,9 +118,9 @@
                                         <constraint firstAttribute="trailing" secondItem="lBQ-5B-tRb" secondAttribute="trailing" constant="4" id="gJm-Pk-j5E"/>
                                         <constraint firstAttribute="trailing" secondItem="F2R-FS-MHQ" secondAttribute="trailing" id="ncK-zH-COh"/>
                                         <constraint firstItem="F2R-FS-MHQ" firstAttribute="top" secondItem="lBQ-5B-tRb" secondAttribute="bottom" constant="4" id="o0t-qg-4dS"/>
-                                        <constraint firstAttribute="trailing" secondItem="5v7-St-Xf5" secondAttribute="trailing" constant="4" id="u0v-aZ-stO"/>
-                                        <constraint firstAttribute="bottom" secondItem="5v7-St-Xf5" secondAttribute="bottom" constant="4" id="ywC-V5-h7Y"/>
-                                        <constraint firstItem="5v7-St-Xf5" firstAttribute="leading" secondItem="oHm-tI-GqO" secondAttribute="leading" constant="4" id="zPo-4o-Q1O"/>
+                                        <constraint firstAttribute="trailing" secondItem="5v7-St-Xf5" secondAttribute="trailing" constant="20" symbolic="YES" id="u0v-aZ-stO"/>
+                                        <constraint firstAttribute="bottom" secondItem="5v7-St-Xf5" secondAttribute="bottom" constant="20" symbolic="YES" id="ywC-V5-h7Y"/>
+                                        <constraint firstItem="5v7-St-Xf5" firstAttribute="leading" secondItem="oHm-tI-GqO" secondAttribute="leading" constant="20" symbolic="YES" id="zPo-4o-Q1O"/>
                                     </constraints>
                                 </view>
                                 <color key="fillColor" name="Bookish Index"/>
@@ -143,7 +143,7 @@
                     <connections>
                         <binding destination="GsH-md-eCA" name="managedObjectContext" keyPath="self.cvm.managedObjectContext" id="hkJ-bf-9dg"/>
                         <binding destination="GsH-md-eCA" name="selectionIndexes" keyPath="self.cvm.selectedPublishers" id="e8b-pV-rmU"/>
-                        <binding destination="GsH-md-eCA" name="sortDescriptors" keyPath="self.sorting" previousBinding="e8b-pV-rmU" id="K08-d4-BHD"/>
+                        <binding destination="GsH-md-eCA" name="sortDescriptors" keyPath="self.cvm.publisherSorting" previousBinding="e8b-pV-rmU" id="A3n-ES-U7f"/>
                     </connections>
                 </arrayController>
             </objects>

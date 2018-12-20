@@ -727,13 +727,13 @@
 		22F1804F21C945D800220D20 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				22DD42522126D6DB0070C85A /* Main.storyboard */,
 				22F1844721CBD0B100220D20 /* Series.storyboard */,
 				22F1844521CBD09000220D20 /* Person.storyboard */,
 				22F1844321CBD06C00220D20 /* Book.storyboard */,
 				22F1844921CBD0E800220D20 /* Publisher.storyboard */,
 				22DD42502126D6DB0070C85A /* Assets.xcassets */,
 				22DE6AE421877E740078D489 /* Assets.xcfilelist */,
-				22DD42522126D6DB0070C85A /* Main.storyboard */,
 				22DD42552126D6DB0070C85A /* Info.plist */,
 				22DD42562126D6DB0070C85A /* Bookish.entitlements */,
 			);

@@ -38,7 +38,7 @@ class BookDetailViewController: CollectionViewController, BookLifecycleObserver 
         
         bookDetailChannel.debug("appearing")
         
-        personList.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+        personList.sortDescriptors = cvm.personSorting
         
         if let indexArray = indexView.indexArray {
             indexObserver = indexArray.observe(\NSArrayController.selection, changeHandler: { (index, change) in

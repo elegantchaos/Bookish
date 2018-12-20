@@ -30,13 +30,13 @@
                                             </textFieldCell>
                                         </textField>
                                         <scrollView horizontalHuggingPriority="260" horizontalCompressionResistancePriority="740" borderType="none" autohidesScrollers="YES" horizontalLineScroll="23" horizontalPageScroll="10" verticalLineScroll="23" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dnp-IN-cGx" userLabel="Index">
-                                            <rect key="frame" x="0.0" y="29" width="200" height="340"/>
+                                            <rect key="frame" x="0.0" y="45" width="200" height="324"/>
                                             <clipView key="contentView" drawsBackground="NO" id="MeP-Ej-IYa">
-                                                <rect key="frame" x="0.0" y="0.0" width="200" height="340"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="200" height="324"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <tableView identifier="books" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnSelection="YES" autosaveColumns="NO" rowHeight="21" rowSizeStyle="automatic" usesAutomaticRowHeights="YES" viewBased="YES" id="jZN-rJ-ulS">
-                                                        <rect key="frame" x="0.0" y="0.0" width="200" height="340"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="200" height="324"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <size key="intercellSpacing" width="3" height="2"/>
                                                         <color key="backgroundColor" name="Bookish Index"/>
@@ -105,7 +105,7 @@
                                             </scroller>
                                         </scrollView>
                                         <searchField wantsLayer="YES" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iIe-EJ-jul">
-                                            <rect key="frame" x="4" y="4" width="192" height="21"/>
+                                            <rect key="frame" x="20" y="20" width="160" height="21"/>
                                             <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="border" drawsBackground="YES" usesSingleLineMode="YES" recentsAutosaveName="books-filter" id="2Sv-YG-ym6">
                                                 <font key="font" metaFont="system"/>
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -123,15 +123,15 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="iIe-EJ-jul" firstAttribute="top" secondItem="dnp-IN-cGx" secondAttribute="bottom" constant="4" id="3pP-DL-Ft8"/>
-                                        <constraint firstItem="iIe-EJ-jul" firstAttribute="leading" secondItem="7O7-Td-dIP" secondAttribute="leading" constant="4" id="5hs-CY-QBt"/>
+                                        <constraint firstItem="iIe-EJ-jul" firstAttribute="leading" secondItem="7O7-Td-dIP" secondAttribute="leading" constant="20" symbolic="YES" id="5hs-CY-QBt"/>
                                         <constraint firstAttribute="trailing" secondItem="LYq-xW-q2s" secondAttribute="trailing" constant="4" id="I1O-N7-rpk"/>
                                         <constraint firstItem="dnp-IN-cGx" firstAttribute="leading" secondItem="7O7-Td-dIP" secondAttribute="leading" id="Q0k-c7-bqM"/>
                                         <constraint firstItem="dnp-IN-cGx" firstAttribute="top" secondItem="LYq-xW-q2s" secondAttribute="bottom" constant="4" id="QJq-8d-tNV"/>
-                                        <constraint firstAttribute="trailing" secondItem="iIe-EJ-jul" secondAttribute="trailing" constant="4" id="Sjq-hU-UIQ"/>
+                                        <constraint firstAttribute="trailing" secondItem="iIe-EJ-jul" secondAttribute="trailing" constant="20" symbolic="YES" id="Sjq-hU-UIQ"/>
                                         <constraint firstItem="LYq-xW-q2s" firstAttribute="top" secondItem="7O7-Td-dIP" secondAttribute="top" constant="8" id="cN3-Bo-CuX"/>
                                         <constraint firstItem="LYq-xW-q2s" firstAttribute="leading" secondItem="7O7-Td-dIP" secondAttribute="leading" constant="8" id="cqv-6c-QPD"/>
                                         <constraint firstAttribute="trailing" secondItem="dnp-IN-cGx" secondAttribute="trailing" id="f0c-mK-nhK"/>
-                                        <constraint firstAttribute="bottom" secondItem="iIe-EJ-jul" secondAttribute="bottom" constant="4" id="gbR-X6-wg7"/>
+                                        <constraint firstAttribute="bottom" secondItem="iIe-EJ-jul" secondAttribute="bottom" constant="20" symbolic="YES" id="gbR-X6-wg7"/>
                                     </constraints>
                                 </view>
                                 <color key="fillColor" name="Bookish Index"/>
@@ -153,9 +153,9 @@
                 <customObject id="Jsc-1E-0Rn" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <arrayController mode="entity" entityName="Book" preservesSelection="NO" id="gjv-NN-VkV">
                     <connections>
+                        <binding destination="cSd-7W-hzi" name="selectionIndexes" keyPath="self.cvm.selectedBooks" id="hfM-zy-Z5f"/>
                         <binding destination="cSd-7W-hzi" name="managedObjectContext" keyPath="self.cvm.managedObjectContext" id="O9C-yN-jLQ"/>
-                        <binding destination="cSd-7W-hzi" name="selectionIndexes" keyPath="self.cvm.selectedIndexes" id="iTu-h5-N0J"/>
-                        <binding destination="cSd-7W-hzi" name="sortDescriptors" keyPath="self.sorting" previousBinding="iTu-h5-N0J" id="GSF-3H-cKe"/>
+                        <binding destination="cSd-7W-hzi" name="sortDescriptors" keyPath="self.cvm.bookSorting" previousBinding="hfM-zy-Z5f" id="NP8-8Y-QT5"/>
                     </connections>
                 </arrayController>
             </objects>
@@ -187,10 +187,10 @@
                                             </connections>
                                         </imageView>
                                         <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="10" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HhJ-5d-CNv">
-                                            <rect key="frame" x="96" y="338" width="350" height="50"/>
+                                            <rect key="frame" x="96" y="338" width="334" height="50"/>
                                             <subviews>
                                                 <textField identifier="title" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7rh-Dc-PS1" userLabel="Title">
-                                                    <rect key="frame" x="-2" y="28" width="354" height="22"/>
+                                                    <rect key="frame" x="-2" y="28" width="338" height="22"/>
                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" title="Title" id="o3V-KV-G1K">
                                                         <font key="font" size="18" name=".AppleSystemUIFont"/>
                                                         <color key="textColor" name="Bookish Text"/>
@@ -202,7 +202,7 @@
                                                     </connections>
                                                 </textField>
                                                 <textField identifier="subtitle" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="H8A-04-75V" userLabel="Subtitle">
-                                                    <rect key="frame" x="-2" y="0.0" width="354" height="18"/>
+                                                    <rect key="frame" x="-2" y="0.0" width="338" height="18"/>
                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" title="Subtitle" id="tax-bb-RGs">
                                                         <font key="font" size="14" name=".AppleSystemUIFont"/>
                                                         <color key="textColor" name="Bookish Text"/>
@@ -742,7 +742,7 @@
                                         <constraint firstItem="HhJ-5d-CNv" firstAttribute="leading" secondItem="nPv-jB-4iC" secondAttribute="trailing" constant="4" id="Pgb-fr-Tkx"/>
                                         <constraint firstItem="nPv-jB-4iC" firstAttribute="leading" secondItem="maZ-NJ-kB0" secondAttribute="leading" constant="50" id="S2Q-ms-Nk0"/>
                                         <constraint firstAttribute="bottom" secondItem="bB5-JR-2gl" secondAttribute="bottom" constant="20" symbolic="YES" id="Sfs-lt-upO"/>
-                                        <constraint firstAttribute="trailing" secondItem="HhJ-5d-CNv" secondAttribute="trailing" constant="4" id="YVz-aI-MEL"/>
+                                        <constraint firstAttribute="trailing" secondItem="HhJ-5d-CNv" secondAttribute="trailing" constant="20" symbolic="YES" id="YVz-aI-MEL"/>
                                         <constraint firstAttribute="trailing" secondItem="EIm-c8-9OE" secondAttribute="trailing" constant="4" id="Ywz-aN-v4F"/>
                                         <constraint firstItem="bB5-JR-2gl" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="BCz-xX-NaH" secondAttribute="trailing" constant="12" symbolic="YES" id="d5L-JY-J6a"/>
                                         <constraint firstItem="BCz-xX-NaH" firstAttribute="leading" secondItem="maZ-NJ-kB0" secondAttribute="leading" constant="20" symbolic="YES" id="dce-CC-WmN"/>

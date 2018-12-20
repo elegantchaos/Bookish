@@ -15,8 +15,6 @@ class BookIndexViewController: CollectionViewController, BookLifecycleObserver {
     @IBOutlet weak var indexTable: NSTableView!
     @IBOutlet weak var indexSearchField: NSSearchField!
     
-    @objc let sorting = [NSSortDescriptor(key: "name", ascending: true)]
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         detailView = nearestSibling()

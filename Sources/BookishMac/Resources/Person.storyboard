@@ -22,13 +22,13 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <scrollView horizontalCompressionResistancePriority="760" borderType="none" autohidesScrollers="YES" horizontalLineScroll="23" horizontalPageScroll="10" verticalLineScroll="23" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cB6-3r-Peo" userLabel="Index">
-                                            <rect key="frame" x="0.0" y="29" width="200" height="340"/>
+                                            <rect key="frame" x="0.0" y="45" width="200" height="324"/>
                                             <clipView key="contentView" drawsBackground="NO" id="25y-2t-AU1">
-                                                <rect key="frame" x="0.0" y="0.0" width="200" height="340"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="200" height="324"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <tableView identifier="people" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnSelection="YES" autosaveColumns="NO" rowHeight="21" rowSizeStyle="automatic" usesAutomaticRowHeights="YES" viewBased="YES" id="T2o-3X-3Tj">
-                                                        <rect key="frame" x="0.0" y="0.0" width="200" height="340"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="200" height="324"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <size key="intercellSpacing" width="3" height="2"/>
                                                         <color key="backgroundColor" name="Bookish Index"/>
@@ -105,7 +105,7 @@
                                             </textFieldCell>
                                         </textField>
                                         <searchField wantsLayer="YES" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="adO-nY-SYC">
-                                            <rect key="frame" x="4" y="4" width="192" height="21"/>
+                                            <rect key="frame" x="20" y="20" width="160" height="21"/>
                                             <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="border" drawsBackground="YES" usesSingleLineMode="YES" recentsAutosaveName="people-filter" id="UT2-Fk-Sjl">
                                                 <font key="font" metaFont="system"/>
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -124,12 +124,12 @@
                                     <constraints>
                                         <constraint firstItem="cB6-3r-Peo" firstAttribute="top" secondItem="Luv-oJ-vO9" secondAttribute="bottom" constant="4" id="6L9-b8-XSC"/>
                                         <constraint firstItem="adO-nY-SYC" firstAttribute="top" secondItem="cB6-3r-Peo" secondAttribute="bottom" constant="4" id="Efx-ab-7g3"/>
-                                        <constraint firstAttribute="bottom" secondItem="adO-nY-SYC" secondAttribute="bottom" constant="4" id="FOc-xp-tXC"/>
+                                        <constraint firstAttribute="bottom" secondItem="adO-nY-SYC" secondAttribute="bottom" constant="20" symbolic="YES" id="FOc-xp-tXC"/>
                                         <constraint firstAttribute="trailing" secondItem="Luv-oJ-vO9" secondAttribute="trailing" constant="4" id="KDY-Cn-pyg"/>
-                                        <constraint firstAttribute="trailing" secondItem="adO-nY-SYC" secondAttribute="trailing" constant="4" id="Naf-t6-qnz"/>
+                                        <constraint firstAttribute="trailing" secondItem="adO-nY-SYC" secondAttribute="trailing" constant="20" symbolic="YES" id="Naf-t6-qnz"/>
                                         <constraint firstItem="Luv-oJ-vO9" firstAttribute="leading" secondItem="Ok8-kN-ge9" secondAttribute="leading" constant="8" id="RHQ-dr-tAt"/>
                                         <constraint firstAttribute="trailing" secondItem="cB6-3r-Peo" secondAttribute="trailing" id="UGZ-KG-YvU"/>
-                                        <constraint firstItem="adO-nY-SYC" firstAttribute="leading" secondItem="Ok8-kN-ge9" secondAttribute="leading" constant="4" id="Zd1-4t-n8u"/>
+                                        <constraint firstItem="adO-nY-SYC" firstAttribute="leading" secondItem="Ok8-kN-ge9" secondAttribute="leading" constant="20" symbolic="YES" id="Zd1-4t-n8u"/>
                                         <constraint firstItem="Luv-oJ-vO9" firstAttribute="top" secondItem="Ok8-kN-ge9" secondAttribute="top" constant="8" id="mwM-0o-CKL"/>
                                         <constraint firstItem="cB6-3r-Peo" firstAttribute="leading" secondItem="Ok8-kN-ge9" secondAttribute="leading" id="x2a-CU-iCX"/>
                                     </constraints>
@@ -154,7 +154,7 @@
                     <connections>
                         <binding destination="pkB-w0-Ho6" name="managedObjectContext" keyPath="self.cvm.managedObjectContext" id="xlf-yF-oNv"/>
                         <binding destination="pkB-w0-Ho6" name="selectionIndexes" keyPath="self.cvm.selectedPeople" id="QGa-fI-C4B"/>
-                        <binding destination="pkB-w0-Ho6" name="sortDescriptors" keyPath="self.sorting" previousBinding="QGa-fI-C4B" id="8rN-fC-cPe"/>
+                        <binding destination="pkB-w0-Ho6" name="sortDescriptors" keyPath="self.cvm.publisherSorting" previousBinding="QGa-fI-C4B" id="Oef-Be-qHt"/>
                     </connections>
                 </arrayController>
             </objects>

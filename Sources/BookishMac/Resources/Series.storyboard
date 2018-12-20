@@ -22,13 +22,13 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <scrollView horizontalCompressionResistancePriority="760" borderType="none" autohidesScrollers="YES" horizontalLineScroll="23" horizontalPageScroll="10" verticalLineScroll="23" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IqM-tW-Aly" userLabel="Index">
-                                            <rect key="frame" x="0.0" y="29" width="200" height="340"/>
+                                            <rect key="frame" x="0.0" y="45" width="200" height="324"/>
                                             <clipView key="contentView" drawsBackground="NO" id="PHm-cq-mEj">
-                                                <rect key="frame" x="0.0" y="0.0" width="200" height="340"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="200" height="324"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <tableView identifier="series" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnSelection="YES" autosaveColumns="NO" rowHeight="21" rowSizeStyle="automatic" usesAutomaticRowHeights="YES" viewBased="YES" id="rcH-BU-zFa">
-                                                        <rect key="frame" x="0.0" y="0.0" width="200" height="340"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="200" height="324"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <size key="intercellSpacing" width="3" height="2"/>
                                                         <color key="backgroundColor" name="Bookish Index"/>
@@ -102,7 +102,7 @@
                                             </textFieldCell>
                                         </textField>
                                         <searchField wantsLayer="YES" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mFl-kl-VG4">
-                                            <rect key="frame" x="4" y="4" width="192" height="21"/>
+                                            <rect key="frame" x="20" y="20" width="160" height="21"/>
                                             <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="border" drawsBackground="YES" usesSingleLineMode="YES" recentsAutosaveName="people-filter" id="3su-xV-4BC">
                                                 <font key="font" metaFont="system"/>
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -112,15 +112,15 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="LWZ-hJ-Qd6" firstAttribute="leading" secondItem="LvH-Ki-fEr" secondAttribute="leading" constant="8" id="7XN-Qj-Cuy"/>
-                                        <constraint firstItem="mFl-kl-VG4" firstAttribute="leading" secondItem="LvH-Ki-fEr" secondAttribute="leading" constant="4" id="9xn-YQ-GYI"/>
+                                        <constraint firstItem="mFl-kl-VG4" firstAttribute="leading" secondItem="LvH-Ki-fEr" secondAttribute="leading" constant="20" symbolic="YES" id="9xn-YQ-GYI"/>
                                         <constraint firstItem="IqM-tW-Aly" firstAttribute="leading" secondItem="LvH-Ki-fEr" secondAttribute="leading" id="McQ-G2-62F"/>
                                         <constraint firstItem="LWZ-hJ-Qd6" firstAttribute="top" secondItem="LvH-Ki-fEr" secondAttribute="top" constant="8" id="P2O-P3-hYf"/>
                                         <constraint firstAttribute="trailing" secondItem="IqM-tW-Aly" secondAttribute="trailing" id="YAO-KY-nwd"/>
                                         <constraint firstItem="mFl-kl-VG4" firstAttribute="top" secondItem="IqM-tW-Aly" secondAttribute="bottom" constant="4" id="big-yE-2Dm"/>
                                         <constraint firstItem="IqM-tW-Aly" firstAttribute="top" secondItem="LWZ-hJ-Qd6" secondAttribute="bottom" constant="4" id="fV3-9B-6PA"/>
                                         <constraint firstAttribute="trailing" secondItem="LWZ-hJ-Qd6" secondAttribute="trailing" constant="4" id="kpj-GF-lAX"/>
-                                        <constraint firstAttribute="bottom" secondItem="mFl-kl-VG4" secondAttribute="bottom" constant="4" id="pPM-Br-ku3"/>
-                                        <constraint firstAttribute="trailing" secondItem="mFl-kl-VG4" secondAttribute="trailing" constant="4" id="zpN-RI-Ymb"/>
+                                        <constraint firstAttribute="bottom" secondItem="mFl-kl-VG4" secondAttribute="bottom" constant="20" symbolic="YES" id="pPM-Br-ku3"/>
+                                        <constraint firstAttribute="trailing" secondItem="mFl-kl-VG4" secondAttribute="trailing" constant="20" symbolic="YES" id="zpN-RI-Ymb"/>
                                     </constraints>
                                 </view>
                                 <color key="fillColor" name="Bookish Index"/>
@@ -143,7 +143,7 @@
                     <connections>
                         <binding destination="EEW-TS-smh" name="managedObjectContext" keyPath="self.cvm.managedObjectContext" id="iJA-5c-BLE"/>
                         <binding destination="EEW-TS-smh" name="selectionIndexes" keyPath="self.cvm.selectedSeries" id="Cql-dF-3jN"/>
-                        <binding destination="EEW-TS-smh" name="sortDescriptors" keyPath="self.sorting" previousBinding="Cql-dF-3jN" id="0gd-ON-wzY"/>
+                        <binding destination="EEW-TS-smh" name="sortDescriptors" keyPath="self.cvm.seriesSorting" previousBinding="Cql-dF-3jN" id="Wqa-ko-LLF"/>
                     </connections>
                 </arrayController>
             </objects>
@@ -179,7 +179,7 @@
                                             </connections>
                                         </imageView>
                                         <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1hS-zV-NKy">
-                                            <rect key="frame" x="94" y="352" width="354" height="22"/>
+                                            <rect key="frame" x="94" y="352" width="338" height="22"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" id="BEU-LK-vmL">
                                                 <font key="font" metaFont="system" size="18"/>
                                                 <color key="textColor" name="Bookish Text"/>
@@ -190,7 +190,7 @@
                                             </connections>
                                         </textField>
                                         <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ykj-uj-ehm">
-                                            <rect key="frame" x="94" y="248" width="354" height="100"/>
+                                            <rect key="frame" x="94" y="248" width="338" height="100"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="100" id="Me7-r1-I5w"/>
                                             </constraints>
@@ -337,10 +337,10 @@
                                         <constraint firstItem="1hS-zV-NKy" firstAttribute="leading" secondItem="cMe-q7-A3I" secondAttribute="trailing" constant="4" id="Nya-zP-7fa"/>
                                         <constraint firstItem="Ykj-uj-ehm" firstAttribute="top" secondItem="1hS-zV-NKy" secondAttribute="bottom" constant="4" id="PRa-0t-J5k"/>
                                         <constraint firstItem="pU5-9u-1ND" firstAttribute="leading" secondItem="XFD-Nz-BUj" secondAttribute="leading" constant="20" symbolic="YES" id="Rc1-A8-rDM"/>
-                                        <constraint firstAttribute="trailing" secondItem="1hS-zV-NKy" secondAttribute="trailing" constant="4" id="WcD-eZ-BdQ"/>
+                                        <constraint firstAttribute="trailing" secondItem="1hS-zV-NKy" secondAttribute="trailing" constant="20" symbolic="YES" id="WcD-eZ-BdQ"/>
                                         <constraint firstAttribute="trailing" secondItem="R2H-ks-yZc" secondAttribute="trailing" constant="4" id="ZKn-TA-yh7"/>
                                         <constraint firstItem="pU5-9u-1ND" firstAttribute="top" secondItem="R2H-ks-yZc" secondAttribute="bottom" constant="20" symbolic="YES" id="bVX-Ee-gON"/>
-                                        <constraint firstAttribute="trailing" secondItem="Ykj-uj-ehm" secondAttribute="trailing" constant="4" id="bjW-Ke-OTd"/>
+                                        <constraint firstAttribute="trailing" secondItem="Ykj-uj-ehm" secondAttribute="trailing" constant="20" symbolic="YES" id="bjW-Ke-OTd"/>
                                         <constraint firstItem="1hS-zV-NKy" firstAttribute="leading" secondItem="Ykj-uj-ehm" secondAttribute="leading" id="ftE-cJ-GgL"/>
                                         <constraint firstItem="1hS-zV-NKy" firstAttribute="centerY" secondItem="cMe-q7-A3I" secondAttribute="centerY" id="hFZ-Wp-HWF"/>
                                         <constraint firstAttribute="bottom" secondItem="pU5-9u-1ND" secondAttribute="bottom" constant="20" symbolic="YES" id="t0c-JX-Eyq"/>

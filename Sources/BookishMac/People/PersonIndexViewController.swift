@@ -11,8 +11,6 @@ class PersonIndexViewController: CollectionViewController, IndexOwner {
     weak var detailView: PersonDetailViewController!
     @IBOutlet weak var indexArray: NSArrayController!
     @IBOutlet weak var indexTable: NSTableView!
-    
-    @objc let sorting = [NSSortDescriptor(key: "name", ascending: true)]
 
     override func viewDidLoad() {
         super.viewDidLoad()
