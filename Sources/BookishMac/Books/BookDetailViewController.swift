@@ -22,7 +22,6 @@ class BookDetailViewController: CollectionViewController, BookLifecycleObserver 
     @IBOutlet var personList: NSArrayController!
     
     var source = DetailDataSource()
-    var indexObserver: NSKeyValueObservation?
     var availableRows = IndexSet()
     var keyViewTimer: Timer? = nil
     var bookImage: NSImage?
@@ -39,21 +38,9 @@ class BookDetailViewController: CollectionViewController, BookLifecycleObserver 
         bookDetailChannel.debug("appearing")
         
         personList.sortDescriptors = cvm.personSorting
-        
-        if let indexArray = indexView.indexArray {
-            indexObserver = indexArray.observe(\NSArrayController.selection, changeHandler: { (index, change) in
-                self.selectionChanged()
-            })
-            selectionChanged()
-        }
     }
  
-    override func viewWillDisappear() {
-        bookDetailChannel.debug("disappearing")
-        
-        indexObserver = nil
-        super.viewWillDisappear()
-    }
+
     
     func selectionChanged() {
         bookDetailChannel.debug("selection changed")

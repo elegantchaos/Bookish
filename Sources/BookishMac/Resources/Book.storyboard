@@ -21,22 +21,14 @@
                                     <rect key="frame" x="0.0" y="0.0" width="200" height="400"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LYq-xW-q2s">
-                                            <rect key="frame" x="6" y="373" width="192" height="19"/>
-                                            <textFieldCell key="cell" lineBreakMode="clipping" title="Books" id="zbT-Mn-fQ1">
-                                                <font key="font" metaFont="system" size="16"/>
-                                                <color key="textColor" name="Bookish Index Text"/>
-                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                            </textFieldCell>
-                                        </textField>
                                         <scrollView horizontalHuggingPriority="260" horizontalCompressionResistancePriority="740" borderType="none" autohidesScrollers="YES" horizontalLineScroll="23" horizontalPageScroll="10" verticalLineScroll="23" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dnp-IN-cGx" userLabel="Index">
-                                            <rect key="frame" x="0.0" y="45" width="200" height="324"/>
+                                            <rect key="frame" x="0.0" y="47" width="200" height="333"/>
                                             <clipView key="contentView" drawsBackground="NO" id="MeP-Ej-IYa">
-                                                <rect key="frame" x="0.0" y="0.0" width="200" height="324"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="200" height="333"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <tableView identifier="books" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnSelection="YES" autosaveColumns="NO" rowHeight="21" rowSizeStyle="automatic" usesAutomaticRowHeights="YES" viewBased="YES" id="jZN-rJ-ulS">
-                                                        <rect key="frame" x="0.0" y="0.0" width="200" height="324"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="200" height="333"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <size key="intercellSpacing" width="3" height="2"/>
                                                         <color key="backgroundColor" name="Bookish Index"/>
@@ -105,7 +97,7 @@
                                             </scroller>
                                         </scrollView>
                                         <searchField wantsLayer="YES" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iIe-EJ-jul">
-                                            <rect key="frame" x="20" y="20" width="160" height="21"/>
+                                            <rect key="frame" x="20" y="22" width="160" height="21"/>
                                             <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="border" drawsBackground="YES" usesSingleLineMode="YES" recentsAutosaveName="books-filter" id="2Sv-YG-ym6">
                                                 <font key="font" metaFont="system"/>
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -120,18 +112,26 @@
                                                 </binding>
                                             </connections>
                                         </searchField>
+                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="wjo-g4-R5T">
+                                            <rect key="frame" x="18" y="4" width="164" height="14"/>
+                                            <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" placeholderString="3 of 100" id="xfs-eb-Dec">
+                                                <font key="font" metaFont="system" size="11"/>
+                                                <color key="textColor" name="Bookish Index Text"/>
+                                                <color key="backgroundColor" name="Bookish Index"/>
+                                            </textFieldCell>
+                                        </textField>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="iIe-EJ-jul" firstAttribute="top" secondItem="dnp-IN-cGx" secondAttribute="bottom" constant="4" id="3pP-DL-Ft8"/>
                                         <constraint firstItem="iIe-EJ-jul" firstAttribute="leading" secondItem="7O7-Td-dIP" secondAttribute="leading" constant="20" symbolic="YES" id="5hs-CY-QBt"/>
-                                        <constraint firstAttribute="trailing" secondItem="LYq-xW-q2s" secondAttribute="trailing" constant="4" id="I1O-N7-rpk"/>
+                                        <constraint firstItem="wjo-g4-R5T" firstAttribute="leading" secondItem="7O7-Td-dIP" secondAttribute="leading" constant="20" symbolic="YES" id="Fbs-WE-fiW"/>
+                                        <constraint firstItem="wjo-g4-R5T" firstAttribute="top" secondItem="iIe-EJ-jul" secondAttribute="bottom" constant="4" id="ODn-wP-KRX"/>
                                         <constraint firstItem="dnp-IN-cGx" firstAttribute="leading" secondItem="7O7-Td-dIP" secondAttribute="leading" id="Q0k-c7-bqM"/>
-                                        <constraint firstItem="dnp-IN-cGx" firstAttribute="top" secondItem="LYq-xW-q2s" secondAttribute="bottom" constant="4" id="QJq-8d-tNV"/>
                                         <constraint firstAttribute="trailing" secondItem="iIe-EJ-jul" secondAttribute="trailing" constant="20" symbolic="YES" id="Sjq-hU-UIQ"/>
-                                        <constraint firstItem="LYq-xW-q2s" firstAttribute="top" secondItem="7O7-Td-dIP" secondAttribute="top" constant="8" id="cN3-Bo-CuX"/>
-                                        <constraint firstItem="LYq-xW-q2s" firstAttribute="leading" secondItem="7O7-Td-dIP" secondAttribute="leading" constant="8" id="cqv-6c-QPD"/>
+                                        <constraint firstAttribute="trailing" secondItem="wjo-g4-R5T" secondAttribute="trailing" constant="20" symbolic="YES" id="Zbw-go-tPX"/>
+                                        <constraint firstItem="dnp-IN-cGx" firstAttribute="top" secondItem="7O7-Td-dIP" secondAttribute="top" constant="20" symbolic="YES" id="cqF-dH-tTn"/>
                                         <constraint firstAttribute="trailing" secondItem="dnp-IN-cGx" secondAttribute="trailing" id="f0c-mK-nhK"/>
-                                        <constraint firstAttribute="bottom" secondItem="iIe-EJ-jul" secondAttribute="bottom" constant="20" symbolic="YES" id="gbR-X6-wg7"/>
+                                        <constraint firstAttribute="bottom" secondItem="wjo-g4-R5T" secondAttribute="bottom" constant="4" id="vDY-NA-9eN"/>
                                     </constraints>
                                 </view>
                                 <color key="fillColor" name="Bookish Index"/>
@@ -148,6 +148,7 @@
                         <outlet property="indexArray" destination="gjv-NN-VkV" id="8aY-jB-Ac8"/>
                         <outlet property="indexSearchField" destination="iIe-EJ-jul" id="NQ9-lu-ltC"/>
                         <outlet property="indexTable" destination="jZN-rJ-ulS" id="tCe-oe-hE9"/>
+                        <outlet property="selectionLabel" destination="wjo-g4-R5T" id="Qny-aX-6O4"/>
                     </connections>
                 </viewController>
                 <customObject id="Jsc-1E-0Rn" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -786,7 +787,7 @@
     </scenes>
     <resources>
         <image name="ChooseDateSmall" width="12" height="12"/>
-        <image name="CoverPlaceholder" width="64" height="64"/>
+        <image name="CoverPlaceholder" width="512" height="512"/>
         <image name="Minus" width="12" height="12"/>
         <image name="NSAddTemplate" width="11" height="11"/>
         <image name="Plus" width="12" height="12"/>
@@ -801,7 +802,7 @@
             <color red="0.97254901960784312" green="0.97254901960784312" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Bookish Index Text">
-            <color red="0.41568627450980394" green="0.43137254901960786" blue="0.44705882352941179" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.35294117647058826" green="0.36862745098039218" blue="0.3843137254901961" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Bookish Label Text">
             <color red="0.54117647058823526" green="0.55686274509803924" blue="0.5725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
