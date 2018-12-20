@@ -14,10 +14,7 @@ class CollectionWindowController: NSWindowController, DocumentWindowController, 
     var viewModel: CollectionDocumentViewModel?
     typealias ViewModel = CollectionDocumentViewModel
     
-    var bookIndexController: BookIndexViewController?
-    var personIndexController: PersonIndexViewController?
-    var publisherIndexController: PublisherIndexViewController?
-    var seriesIndexController: SeriesIndexViewController?
+    var indexControllers: [String:Any] = [:]
 
     override func windowDidLoad() {
         super.windowDidLoad()
@@ -38,40 +35,40 @@ class CollectionWindowController: NSWindowController, DocumentWindowController, 
             view.validateButtons()
         }
     }
+
+    func reveal<EntityType: NSManagedObject>(_ object: EntityType, mode: CollectionDocumentViewModel.Mode) {
+        if let model = viewModel {
+            model.mode = mode
+            if let name = EntityType.entity().name {
+                if let index = indexControllers[name] as? IndexController<EntityType> {
+                    index.select(items: [object])
+                }
+            }
+        }
+    }
+
 }
 
 extension CollectionWindowController: BookViewer {
     @objc func reveal(book: Book) {
-        if let model = viewModel {
-            bookIndexController?.select(books: [book])
-            model.mode = .books
-        }
+        reveal(book, mode: .books)
     }
 }
 
 extension CollectionWindowController: PersonViewer {
     @objc func reveal(person: Person) {
-        if let model = viewModel {
-            personIndexController?.select(people: [person])
-            model.mode = .people
-        }
+        reveal(person, mode: .people)
     }
 }
 
 extension CollectionWindowController: PublisherViewer {
     func reveal(publisher: Publisher) {
-        if let model = viewModel {
-            publisherIndexController?.select(publishers: [publisher])
-            model.mode = .publishers
-        }
+        reveal(publisher, mode: .publishers)
     }
 }
 
 extension CollectionWindowController: SeriesViewer {
     func reveal(series: Series) {
-        if let model = viewModel {
-            seriesIndexController?.select(series: [series])
-            model.mode = .series
-        }
+        reveal(series, mode: .series)
     }
 }

@@ -109,16 +109,28 @@
                                                 <color key="backgroundColor" name="Bookish Index"/>
                                             </searchFieldCell>
                                         </searchField>
+                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="bX5-YO-5ED">
+                                            <rect key="frame" x="18" y="4" width="164" height="12"/>
+                                            <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" placeholderString="3 of 100" id="f8H-hO-AAv">
+                                                <font key="font" metaFont="system" size="11"/>
+                                                <color key="textColor" name="Bookish Index Text"/>
+                                                <color key="backgroundColor" name="Bookish Index"/>
+                                            </textFieldCell>
+                                        </textField>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="LWZ-hJ-Qd6" firstAttribute="leading" secondItem="LvH-Ki-fEr" secondAttribute="leading" constant="8" id="7XN-Qj-Cuy"/>
                                         <constraint firstItem="mFl-kl-VG4" firstAttribute="leading" secondItem="LvH-Ki-fEr" secondAttribute="leading" constant="20" symbolic="YES" id="9xn-YQ-GYI"/>
                                         <constraint firstItem="IqM-tW-Aly" firstAttribute="leading" secondItem="LvH-Ki-fEr" secondAttribute="leading" id="McQ-G2-62F"/>
                                         <constraint firstItem="LWZ-hJ-Qd6" firstAttribute="top" secondItem="LvH-Ki-fEr" secondAttribute="top" constant="8" id="P2O-P3-hYf"/>
+                                        <constraint firstItem="bX5-YO-5ED" firstAttribute="top" secondItem="mFl-kl-VG4" secondAttribute="bottom" constant="4" id="RBV-BY-9Cj"/>
                                         <constraint firstAttribute="trailing" secondItem="IqM-tW-Aly" secondAttribute="trailing" id="YAO-KY-nwd"/>
                                         <constraint firstItem="mFl-kl-VG4" firstAttribute="top" secondItem="IqM-tW-Aly" secondAttribute="bottom" constant="4" id="big-yE-2Dm"/>
                                         <constraint firstItem="IqM-tW-Aly" firstAttribute="top" secondItem="LWZ-hJ-Qd6" secondAttribute="bottom" constant="4" id="fV3-9B-6PA"/>
+                                        <constraint firstAttribute="bottom" secondItem="bX5-YO-5ED" secondAttribute="bottom" constant="4" id="jTX-9L-xN8"/>
                                         <constraint firstAttribute="trailing" secondItem="LWZ-hJ-Qd6" secondAttribute="trailing" constant="4" id="kpj-GF-lAX"/>
+                                        <constraint firstItem="bX5-YO-5ED" firstAttribute="leading" secondItem="LvH-Ki-fEr" secondAttribute="leading" constant="20" symbolic="YES" id="oK5-kL-QDm"/>
+                                        <constraint firstAttribute="trailing" secondItem="bX5-YO-5ED" secondAttribute="trailing" constant="20" symbolic="YES" id="opd-0h-ePA"/>
                                         <constraint firstAttribute="bottom" secondItem="mFl-kl-VG4" secondAttribute="bottom" constant="20" symbolic="YES" id="pPM-Br-ku3"/>
                                         <constraint firstAttribute="trailing" secondItem="mFl-kl-VG4" secondAttribute="trailing" constant="20" symbolic="YES" id="zpN-RI-Ymb"/>
                                     </constraints>
@@ -136,6 +148,7 @@
                     <connections>
                         <outlet property="indexArray" destination="gtM-1x-aX1" id="03X-dT-qrJ"/>
                         <outlet property="indexTable" destination="rcH-BU-zFa" id="c54-RR-bfo"/>
+                        <outlet property="selectionLabel" destination="bX5-YO-5ED" id="xo0-2I-iOk"/>
                     </connections>
                 </viewController>
                 <customObject id="ZNI-vx-D62" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -358,8 +371,8 @@
                     </view>
                     <connections>
                         <outlet property="detailsTable" destination="h0t-Bl-8yA" id="wDH-f7-cWr"/>
+                        <outlet property="lastFixedKeyView" destination="Ykj-uj-ehm" id="xtB-kx-49m"/>
                         <outlet property="nameView" destination="1hS-zV-NKy" id="F82-ER-sTN"/>
-                        <outlet property="notesView" destination="Ykj-uj-ehm" id="Gcf-yK-cDJ"/>
                     </connections>
                 </viewController>
                 <customObject id="bkg-qU-L0Y" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -381,7 +394,7 @@
             <color red="0.97254901960784312" green="0.97254901960784312" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Bookish Index Text">
-            <color red="0.41568627450980394" green="0.43137254901960786" blue="0.44705882352941179" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.35294117647058826" green="0.36862745098039218" blue="0.3843137254901961" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Bookish Label Text">
             <color red="0.54117647058823526" green="0.55686274509803924" blue="0.5725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

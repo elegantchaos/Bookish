@@ -8,7 +8,7 @@ import Actions
 import BookishModel
 import Dispatch
 
-class PersonDetailViewController: DetailViewController<PersonIndexViewController, Person> {
+class PersonDetailViewController: DetailController<Person> {
     static let bookViewID = NSUserInterfaceItemIdentifier(rawValue: "book")
     static let roleViewID = NSUserInterfaceItemIdentifier(rawValue: "role")
 

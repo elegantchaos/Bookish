@@ -14,7 +14,7 @@ class ManagedObjectViewController: CollectionViewController, NSTableViewDelegate
     static let unknownViewID = NSUserInterfaceItemIdentifier(rawValue: "unknown")
     
     @IBOutlet weak var nameView: NSTextField!
-    @IBOutlet weak var notesView: NSTextField!
+    @IBOutlet weak var lastFixedKeyView: NSControl!
     @IBOutlet weak var detailsTable: NSTableView!
     
     var rows = [NSManagedObject]()
@@ -66,7 +66,7 @@ class ManagedObjectViewController: CollectionViewController, NSTableViewDelegate
     
     func recalculateKeyViews() {
         let rows = availableRows.sorted()
-        var view: NSView = notesView
+        var view: NSView = lastFixedKeyView
         for row in rows {
             if let rowView = (detailsTable.view(atColumn: 0, row: row, makeIfNecessary: false) as? ManagedObjectTableCell)?.keyView() {
                 view.nextKeyView = rowView

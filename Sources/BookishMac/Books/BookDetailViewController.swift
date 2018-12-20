@@ -9,52 +9,32 @@ import BookishModel
 import Dispatch
 import Logger
 
-let bookDetailChannel = Logger("BookDetail")
+class BookDetailViewController: DetailController<Book>, BookLifecycleObserver {
+    static let HeadingColumnID = NSUserInterfaceItemIdentifier(rawValue: "heading")
 
-class BookDetailViewController: CollectionViewController, BookLifecycleObserver {
-    @IBOutlet weak var indexView: BookIndexViewController!
-    @IBOutlet weak var detailsView: NSTableView!
     @IBOutlet weak var imageView: NSImageView!
-    @IBOutlet weak var titleView: NSTextField!
     @IBOutlet weak var subtitleView: NSTextField!
     
     @IBOutlet weak var editButton: NSButton!
     @IBOutlet var personList: NSArrayController!
     
     var source = DetailDataSource()
-    var availableRows = IndexSet()
-    var keyViewTimer: Timer? = nil
     var bookImage: NSImage?
     var editing = false
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        indexView = nearestSibling()
-    }
     
     override func viewWillAppear() {
         super.viewWillAppear()
         
-        bookDetailChannel.debug("appearing")
+        detailChannel.debug("appearing")
         
         personList.sortDescriptors = cvm.personSorting
     }
  
 
     
-    func selectionChanged() {
-        bookDetailChannel.debug("selection changed")
-        
-        let selectedCount = indexView.indexArray.selectedObjects?.count ?? 0
-        let showDetail = selectedCount > 0
-        detailsView.isHidden = !showDetail
-        if showDetail {
-            updatePeople()
-        }
-        if let wc = view.window?.windowController as? CollectionWindowController {
-            wc.validateButtons()
-        }
-        
+    override func selectionChanged() {
+        super.selectionChanged()
+        let selectedCount = index?.selectedObjects?.count ?? 0
         if selectedCount == 1 {
             if let book = indexView.indexArray.selectedObjects[0] as? Book {
                 if let data = book.image, let image = NSImage(data: data) {
@@ -71,13 +51,48 @@ class BookDetailViewController: CollectionViewController, BookLifecycleObserver 
         }
     }
     
-    func updatePeople() {
-        bookDetailChannel.debug("updating people list")
+    override func updateRows() {
+        detailChannel.debug("updating people list")
 
         let selection = (indexView.indexArray.selectedObjects as? [Book]) ?? []
         source.filter(for: selection, editing: editing)
-        detailsView.reloadData()
+        detailsTable.reloadData()
     }
+ 
+    override func numberOfRows(in tableView: NSTableView) -> Int {
+        return source.rows
+    }
+    
+    override func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
+        guard let columnID = tableColumn?.identifier else { return nil }
+        
+        let rowInfo = source.info(for: row, editing: editing)
+        let headingID = BookDetailViewController.HeadingColumnID
+        let isHeading = columnID == headingID
+        let viewID = isHeading ? headingID : NSUserInterfaceItemIdentifier(rawValue: rowInfo.kind.rawValue)
+        
+        guard let view = tableView.makeView(withIdentifier: viewID, owner: self) else { return nil }
+        if let cell = view as? BookDetailTableCell {
+            cell.setup(for: self, row: rowInfo)
+        }
+        view.scheduleForValidation()
+        
+        return view
+    }
+    
+    func tableView(_ tableView: NSTableView, shouldSelectRow row: Int) -> Bool {
+        AnnotatedTableCellView.updateSelection(tableView: tableView, row: row)
+        return true
+    }
+    
+    override func provideForDetail(context: ActionContext) {
+        context.info.addObserver(self)
+        if let selection = indexView.indexArray.selectedObjects as? [Book] {
+            context.info[ActionContext.selectionKey] = selection
+            context.info[ToggleEditingAction.editableKey] = self
+        }
+    }
+
 }
 
 // MARK: EditableView Support
@@ -86,8 +101,8 @@ extension BookDetailViewController: EditableView {
     func toggleEditing() {
         editing = !editing
         editButton.title = editing ? "Done" : "Edit"
-        bookDetailChannel.debug(editing ? "enabled editing" : "disabled editing")
-        let newResponder: NSResponder = editing ? titleView : indexView
+        detailChannel.debug(editing ? "enabled editing" : "disabled editing")
+        let newResponder: NSResponder = editing ? nameView : indexView
         view.window?.makeFirstResponder(newResponder)
         selectionChanged()
     }
@@ -97,57 +112,37 @@ extension BookDetailViewController: EditableView {
 // MARK: Local IBActions
 
 extension BookDetailViewController {
-    
-    @IBAction func changeImage(_ sender: Any){
-        print("change image")
-    }
-    
+     
 }
 
 
 // MARK: Action Support
 
-extension BookDetailViewController: ActionContextProvider, BookChangeObserver {
+extension BookDetailViewController: BookChangeObserver {
 
     
     func detailRow(for context: ActionContext) -> Int {
         var row = -1
         if let view = context.sender as? NSView {
-            row = detailsView.row(for: view)
+            row = detailsTable.row(for: view)
         }
 
         if row < 0, let view = view.window?.firstResponder as? NSView {
-            row = detailsView.row(for: view)
+            row = detailsTable.row(for: view)
         }
 
         return row
     }
     
-    func provideForDetail(context: ActionContext) {
-        context.info.addObserver(self)
-        if let selection = indexView.indexArray.selectedObjects as? [Book] {
-            context.info[ActionContext.selectionKey] = selection
-            context.info[ToggleEditingAction.editableKey] = self
-        }
-    }
-
-    func provide(context: ActionContext) {
-        provideForDetail(context: context)
-        indexView.provideForIndex(context: context)
-    }
     
     func added(relationship: Relationship) {
         let index = source.insert(relationship: relationship)
-        detailsView.insertRows(at: IndexSet(integer: index), withAnimation: .slideDown)
-        availableRows.insert(index)
-        scheduleRecalculateKeyViews()
+        detailsTable.insertRows(at: IndexSet(integer: index), withAnimation: .slideDown)
     }
     
     func removed(relationship: Relationship) {
         if let row = source.remove(relationship: relationship) {
-            detailsView.removeRows(at: IndexSet(integer: row), withAnimation: .slideUp)
-            availableRows.remove(row)
-            scheduleRecalculateKeyViews()
+            detailsTable.removeRows(at: IndexSet(integer: row), withAnimation: .slideUp)
         }
     }
 
@@ -168,7 +163,7 @@ extension BookDetailViewController: ActionContextProvider, BookChangeObserver {
     }
     
     func created(books: [Book]) {
-        bookDetailChannel.debug("books created")
+        detailChannel.debug("books created")
         if !self.editing {
             DispatchQueue.main.async {
                 self.toggleEditing()
@@ -183,6 +178,9 @@ extension BookDetailViewController: ActionContextProvider, BookChangeObserver {
             }
         }
     }
+
+
+    
 }
 
 
@@ -191,59 +189,4 @@ extension BookDetailViewController: ActionContextProvider, BookChangeObserver {
 protocol BookDetailTableCell {
     func setup(for: BookDetailViewController, row: DetailDataSource.RowInfo)
     func keyView() -> NSView?
-}
-
-extension BookDetailViewController: NSTableViewDataSource, NSTableViewDelegate {
-    
-    static let HeadingColumnID = NSUserInterfaceItemIdentifier(rawValue: "heading")
-    
-    func numberOfRows(in tableView: NSTableView) -> Int {
-        return source.rows
-    }
-
-        
-    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        guard let columnID = tableColumn?.identifier else { return nil }
-        
-        let rowInfo = source.info(for: row, editing: editing)
-        let headingID = BookDetailViewController.HeadingColumnID
-        let isHeading = columnID == headingID
-        let viewID = isHeading ? headingID : NSUserInterfaceItemIdentifier(rawValue: rowInfo.kind.rawValue)
-        
-        guard let view = tableView.makeView(withIdentifier: viewID, owner: self) else { return nil }
-        if let cell = view as? BookDetailTableCell {
-            cell.setup(for: self, row: rowInfo)
-        }
-        view.scheduleForValidation()
-        
-        return view
-    }
-
-    func tableView(_ tableView: NSTableView, shouldSelectRow row: Int) -> Bool {
-        AnnotatedTableCellView.updateSelection(tableView: tableView, row: row)
-        return true
-    }
-    
-    fileprivate func scheduleRecalculateKeyViews() {
-        if let timer = keyViewTimer {
-            timer.invalidate()
-        }
-        
-        keyViewTimer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { _ in
-            self.recalculateKeyViews()
-        }
-    }
-    
-    fileprivate func recalculateKeyViews() {
-        let rows = availableRows.sorted()
-        var view: NSView = subtitleView
-        for row in rows {
-            if let rowView = (detailsView.view(atColumn: 1, row: row, makeIfNecessary: false) as? BookDetailTableCell)?.keyView() {
-                view.nextKeyView = rowView
-                view = rowView
-            }
-        }
-        view.nextKeyView = titleView
-        keyViewTimer = nil
-    }
 }

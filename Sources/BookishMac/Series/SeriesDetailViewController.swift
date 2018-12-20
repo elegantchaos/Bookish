@@ -7,7 +7,7 @@
 import AppKit
 import BookishModel
 
-class SeriesDetailViewController: DetailViewController<SeriesIndexViewController, Series> {
+class SeriesDetailViewController: DetailController<Series> {
     static let entryViewID = NSUserInterfaceItemIdentifier(rawValue: "entry")
     
     override func rowsForSelection() -> [NSManagedObject] {

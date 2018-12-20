@@ -8,50 +8,7 @@ import BookishModel
 import Actions
 
 
-class SeriesIndexViewController: CollectionViewController, IndexOwner {
-    weak var detailView: SeriesDetailViewController!
-    @IBOutlet weak var indexArray: NSArrayController!
-    @IBOutlet weak var indexTable: NSTableView!
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        detailView = nearestSibling()
-    }
-    
-    override func viewWillAppear() {
-        if let window = parent?.view.window?.windowController as? CollectionWindowController {
-            window.seriesIndexController = self
-        }
-        
-        if (indexArray.content as? [Series])?.count == 0 {
-            indexArray.fetch(self)
-        }
-        
-        super.viewWillAppear()
-    }
-    
-    func select(series: [Series]) {
-        indexArray.setSelectedObjects(series)
-        let index = indexTable.selectedRow
-        if index != -1 {
-            indexTable.scrollRowToVisible(index)
-        }
-    }
-    
-}
-
-// MARK: Actions
-
-extension SeriesIndexViewController: ActionContextProvider {
-    func provideIndexInfo(context: ActionContext) {
-//        context.info.addObserver(self)
-    }
-    
-    func provide(context: ActionContext) {
-        provideIndexInfo(context: context)
-        detailView.provideDetailInfo(context: context)
-    }
-    
+class SeriesIndexViewController: IndexController<Series>, SeriesLifecycleObserver {
     func created(series: Series) {
         indexArray.setSelectedObjects([series])
     }

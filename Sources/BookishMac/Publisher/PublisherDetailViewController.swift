@@ -6,7 +6,7 @@
 import AppKit
 import BookishModel
 
-class PublisherDetailViewController: DetailViewController<PublisherIndexViewController, Publisher> {
+class PublisherDetailViewController: DetailController<Publisher> {
     static let bookViewID = NSUserInterfaceItemIdentifier(rawValue: "book")
 
     override func rowsForSelection() -> [NSManagedObject] {

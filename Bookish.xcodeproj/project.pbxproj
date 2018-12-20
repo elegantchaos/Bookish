@@ -128,6 +128,8 @@
 		22F1844621CBD09000220D20 /* Person.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22F1844521CBD09000220D20 /* Person.storyboard */; };
 		22F1844821CBD0B100220D20 /* Series.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22F1844721CBD0B100220D20 /* Series.storyboard */; };
 		22F1844A21CBD0E800220D20 /* Publisher.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22F1844921CBD0E800220D20 /* Publisher.storyboard */; };
+		22F1844C21CBF10B00220D20 /* IndexController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1844B21CBF10B00220D20 /* IndexController.swift */; };
+		22F1844E21CBF9B600220D20 /* DetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1844D21CBF9B600220D20 /* DetailController.swift */; };
 		22F35487216FAC0100443C0B /* Actions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F35486216FAC0100443C0B /* Actions.framework */; };
 /* End PBXBuildFile section */
 
@@ -324,6 +326,8 @@
 		22F1844521CBD09000220D20 /* Person.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Person.storyboard; sourceTree = "<group>"; };
 		22F1844721CBD0B100220D20 /* Series.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Series.storyboard; sourceTree = "<group>"; };
 		22F1844921CBD0E800220D20 /* Publisher.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Publisher.storyboard; sourceTree = "<group>"; };
+		22F1844B21CBF10B00220D20 /* IndexController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexController.swift; sourceTree = "<group>"; };
+		22F1844D21CBF9B600220D20 /* DetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailController.swift; sourceTree = "<group>"; };
 		22F35486216FAC0100443C0B /* Actions.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Actions.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		22F3548A216FAC0100443C0B /* BookishCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BookishCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -547,6 +551,8 @@
 		227F451021821B7F000D8B8D /* Books */ = {
 			isa = PBXGroup;
 			children = (
+				22F1844B21CBF10B00220D20 /* IndexController.swift */,
+				22F1844D21CBF9B600220D20 /* DetailController.swift */,
 				224293F9212C1D7500E70510 /* BookIndexViewController.swift */,
 				22429405212D945C00E70510 /* BookDetailViewController.swift */,
 				22960327214025E80020B3EB /* BookPersonCell.swift */,
@@ -1120,6 +1126,7 @@
 				226E8E6F21AC3D6A001F191F /* BookEditablePersonCell.swift in Sources */,
 				2250C71621B7E01A00E899E2 /* SeriesScanner.swift in Sources */,
 				22143FCD212EE79100B689DF /* CollectionDocumentViewModel.swift in Sources */,
+				22F1844E21CBF9B600220D20 /* DetailController.swift in Sources */,
 				22C2194B21AF24E5002FC0FE /* ToggleEditingAction.swift in Sources */,
 				22960328214025E80020B3EB /* BookPersonCell.swift in Sources */,
 				22D39E622147E0C100282467 /* ImageTransformer.swift in Sources */,
@@ -1134,6 +1141,7 @@
 				221F272921382C8E00DC2DC7 /* DateTransformer.swift in Sources */,
 				2250C70A21B55BA700E899E2 /* SeriesDetailViewController.swift in Sources */,
 				22143FD521300F9300B689DF /* CoreDataTransformers.swift in Sources */,
+				22F1844C21CBF10B00220D20 /* IndexController.swift in Sources */,
 				2250C70821B55B9C00E899E2 /* PublisherDetailViewController.swift in Sources */,
 				220CDA9F214A86A80064CC91 /* PersonIndexViewController.swift in Sources */,
 				2250C71021B57CBA00E899E2 /* ManagedObjectViewController.swift in Sources */,

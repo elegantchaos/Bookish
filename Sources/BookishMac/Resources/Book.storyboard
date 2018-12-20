@@ -766,12 +766,13 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="detailsView" destination="vV5-vW-Afl" id="vNS-T3-T7d"/>
+                        <outlet property="detailsTable" destination="vV5-vW-Afl" id="MQm-bw-CxB"/>
                         <outlet property="editButton" destination="bB5-JR-2gl" id="ria-eG-4HB"/>
                         <outlet property="imageView" destination="nPv-jB-4iC" id="a6c-Sp-1gz"/>
+                        <outlet property="lastFixedKeyView" destination="H8A-04-75V" id="YkB-np-svV"/>
+                        <outlet property="nameView" destination="7rh-Dc-PS1" id="W5J-Sm-uzE"/>
                         <outlet property="personList" destination="NUZ-ew-ZHD" id="SVP-2s-l5b"/>
                         <outlet property="subtitleView" destination="H8A-04-75V" id="JB7-lH-3xQ"/>
-                        <outlet property="titleView" destination="7rh-Dc-PS1" id="nz8-qo-cf2"/>
                     </connections>
                 </viewController>
                 <customObject id="dg1-Od-cPv" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -787,7 +788,7 @@
     </scenes>
     <resources>
         <image name="ChooseDateSmall" width="12" height="12"/>
-        <image name="CoverPlaceholder" width="512" height="512"/>
+        <image name="CoverPlaceholder" width="64" height="64"/>
         <image name="Minus" width="12" height="12"/>
         <image name="NSAddTemplate" width="11" height="11"/>
         <image name="Plus" width="12" height="12"/>
