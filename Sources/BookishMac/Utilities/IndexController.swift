@@ -16,22 +16,12 @@ class IndexControllerBase: CollectionViewController {
     @IBOutlet weak var indexSearchField: NSSearchField!
     @IBOutlet weak var selectionLabel: NSTextField!
     var indexObserver: NSKeyValueObservation?
-    weak var detailView: DetailControllerBase!
 }
 
-extension IndexControllerBase: ActionContextProvider, ActionObserver {
-    func provideForIndex(context: ActionContext) {
-        context.info.addObserver(self)
-    }
-    
-    func provide(context: ActionContext) {
-        provideForIndex(context: context)
-        detailView.provideForDetail(context: context)
-    }
-}
-class IndexController<EntityType>: IndexControllerBase {
+class IndexController<EntityType>: IndexControllerBase, ActionContextProvider, ActionObserver {
     let entityName = "\(EntityType.self)"
-    
+    weak var detailView: DetailController<EntityType>!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -69,6 +59,15 @@ class IndexController<EntityType>: IndexControllerBase {
         super.viewWillDisappear()
     }
     
+    func provide(context: ActionContext) {
+        provideForIndex(context: context)
+        detailView.provideForDetail(context: context)
+    }
+
+    func provideForIndex(context: ActionContext) {
+        context.info.addObserver(self)
+    }
+
     func selectionChanged() {
         detailView.selectionChanged()
         

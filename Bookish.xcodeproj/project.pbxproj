@@ -38,8 +38,6 @@
 		2250C70021B54D0900E899E2 /* SeriesIndexViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2250C6FF21B54D0900E899E2 /* SeriesIndexViewController.swift */; };
 		2250C70821B55B9C00E899E2 /* PublisherDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2250C70721B55B9C00E899E2 /* PublisherDetailViewController.swift */; };
 		2250C70A21B55BA700E899E2 /* SeriesDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2250C70921B55BA700E899E2 /* SeriesDetailViewController.swift */; };
-		2250C70E21B571C200E899E2 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2250C70D21B571C200E899E2 /* DetailViewController.swift */; };
-		2250C71021B57CBA00E899E2 /* ManagedObjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2250C70F21B57CBA00E899E2 /* ManagedObjectViewController.swift */; };
 		2250C71221B57F7800E899E2 /* SeriesEntryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2250C71121B57F7800E899E2 /* SeriesEntryCell.swift */; };
 		2250C71421B596C700E899E2 /* BookSeriesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2250C71321B596C700E899E2 /* BookSeriesCell.swift */; };
 		2250C71621B7E01A00E899E2 /* SeriesScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2250C71521B7E01A00E899E2 /* SeriesScanner.swift */; };
@@ -236,8 +234,6 @@
 		2250C6FF21B54D0900E899E2 /* SeriesIndexViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeriesIndexViewController.swift; sourceTree = "<group>"; };
 		2250C70721B55B9C00E899E2 /* PublisherDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublisherDetailViewController.swift; sourceTree = "<group>"; };
 		2250C70921B55BA700E899E2 /* SeriesDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeriesDetailViewController.swift; sourceTree = "<group>"; };
-		2250C70D21B571C200E899E2 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
-		2250C70F21B57CBA00E899E2 /* ManagedObjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedObjectViewController.swift; sourceTree = "<group>"; };
 		2250C71121B57F7800E899E2 /* SeriesEntryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeriesEntryCell.swift; sourceTree = "<group>"; };
 		2250C71321B596C700E899E2 /* BookSeriesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookSeriesCell.swift; sourceTree = "<group>"; };
 		2250C71521B7E01A00E899E2 /* SeriesScanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeriesScanner.swift; sourceTree = "<group>"; };
@@ -405,8 +401,8 @@
 			isa = PBXGroup;
 			children = (
 				22D39E5F2147D4A100282467 /* TestAction.swift */,
-				2250C70D21B571C200E899E2 /* DetailViewController.swift */,
-				2250C70F21B57CBA00E899E2 /* ManagedObjectViewController.swift */,
+				22F1844B21CBF10B00220D20 /* IndexController.swift */,
+				22F1844D21CBF9B600220D20 /* DetailController.swift */,
 				22DE6AE62188A8DC0078D489 /* WhiteSearchFieldCell.swift */,
 				22D39E522146A84500282467 /* AnnotatedTableCellView.swift */,
 				22D39E5D2146D9F100282467 /* ValidatingButton.swift */,
@@ -551,8 +547,6 @@
 		227F451021821B7F000D8B8D /* Books */ = {
 			isa = PBXGroup;
 			children = (
-				22F1844B21CBF10B00220D20 /* IndexController.swift */,
-				22F1844D21CBF9B600220D20 /* DetailController.swift */,
 				224293F9212C1D7500E70510 /* BookIndexViewController.swift */,
 				22429405212D945C00E70510 /* BookDetailViewController.swift */,
 				22960327214025E80020B3EB /* BookPersonCell.swift */,
@@ -1109,7 +1103,6 @@
 				2250C6FC21B541B400E899E2 /* PublisherIndexViewController.swift in Sources */,
 				22DD42482126D6DA0070C85A /* Application.swift in Sources */,
 				22429406212D945C00E70510 /* BookDetailViewController.swift in Sources */,
-				2250C70E21B571C200E899E2 /* DetailViewController.swift in Sources */,
 				2250C71D21B83B5700E899E2 /* RegularExpressionExtensions.swift in Sources */,
 				22DE6AE321875F410078D489 /* ImportSession.swift in Sources */,
 				22D1B24B2180E9060062F2CB /* PersonRoleCell.swift in Sources */,
@@ -1144,7 +1137,6 @@
 				22F1844C21CBF10B00220D20 /* IndexController.swift in Sources */,
 				2250C70821B55B9C00E899E2 /* PublisherDetailViewController.swift in Sources */,
 				220CDA9F214A86A80064CC91 /* PersonIndexViewController.swift in Sources */,
-				2250C71021B57CBA00E899E2 /* ManagedObjectViewController.swift in Sources */,
 				22D39E552146A84E00282467 /* BookDateCell.swift in Sources */,
 				22143FD1212F076000B689DF /* CollectionRootViewController.swift in Sources */,
 				2250C70021B54D0900E899E2 /* SeriesIndexViewController.swift in Sources */,

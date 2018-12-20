@@ -199,7 +199,7 @@
                                                     </textFieldCell>
                                                     <connections>
                                                         <binding destination="TBH-Sa-Ff0" name="font" keyPath="self.cvm.titleFont" id="qVG-GY-wXj"/>
-                                                        <binding destination="TBH-Sa-Ff0" name="value" keyPath="self.indexView.indexArray.selection.name" id="NKi-Gt-6WZ"/>
+                                                        <binding destination="TBH-Sa-Ff0" name="value" keyPath="self.index.selection.name" id="uGc-ti-ca3"/>
                                                     </connections>
                                                 </textField>
                                                 <textField identifier="subtitle" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="H8A-04-75V" userLabel="Subtitle">
@@ -211,7 +211,7 @@
                                                     </textFieldCell>
                                                     <connections>
                                                         <binding destination="TBH-Sa-Ff0" name="font" keyPath="self.cvm.detailFont" id="XRT-vt-RdK"/>
-                                                        <binding destination="TBH-Sa-Ff0" name="value" keyPath="self.indexView.indexArray.selection.subtitle" id="9y0-7l-E6b"/>
+                                                        <binding destination="TBH-Sa-Ff0" name="value" keyPath="self.index.selection.subtitle" id="Ijc-Rq-2xa"/>
                                                         <outlet property="nextKeyView" destination="vV5-vW-Afl" id="THN-M0-CdW"/>
                                                     </connections>
                                                 </textField>
