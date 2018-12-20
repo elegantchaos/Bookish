@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Publisher Index View Controller-->
+        <scene sceneID="9Ap-Zt-ZhT">
+            <objects>
+                <viewController title="Publisher Index View Controller" storyboardIdentifier="Publisher.Index" id="GsH-md-eCA" customClass="PublisherIndexViewController" customModule="BookishMac" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="XhL-CF-8YJ">
+                        <rect key="frame" x="0.0" y="0.0" width="200" height="400"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <box autoresizesSubviews="NO" horizontalCompressionResistancePriority="760" boxType="custom" borderType="none" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="6md-9j-FzO" userLabel="Background">
+                                <rect key="frame" x="0.0" y="0.0" width="200" height="400"/>
+                                <view key="contentView" id="oHm-tI-GqO">
+                                    <rect key="frame" x="0.0" y="0.0" width="200" height="400"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <scrollView horizontalCompressionResistancePriority="760" borderType="none" autohidesScrollers="YES" horizontalLineScroll="23" horizontalPageScroll="10" verticalLineScroll="23" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F2R-FS-MHQ" userLabel="Index">
+                                            <rect key="frame" x="0.0" y="29" width="200" height="340"/>
+                                            <clipView key="contentView" drawsBackground="NO" id="Frg-lC-Lel">
+                                                <rect key="frame" x="0.0" y="0.0" width="200" height="340"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <subviews>
+                                                    <tableView identifier="publishers" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnSelection="YES" autosaveColumns="NO" rowHeight="21" rowSizeStyle="automatic" usesAutomaticRowHeights="YES" viewBased="YES" id="Gzf-vQ-vhp">
+                                                        <rect key="frame" x="0.0" y="0.0" width="200" height="340"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <size key="intercellSpacing" width="3" height="2"/>
+                                                        <color key="backgroundColor" name="Bookish Index"/>
+                                                        <color key="gridColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                        <tableColumns>
+                                                            <tableColumn identifier="names" width="197" minWidth="40" maxWidth="1000" id="dUy-5G-1eP">
+                                                                <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Publishers">
+                                                                    <font key="font" metaFont="smallSystem"/>
+                                                                    <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                                    <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
+                                                                </tableHeaderCell>
+                                                                <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" title="Text Cell" id="4GR-bf-QE3">
+                                                                    <font key="font" metaFont="system"/>
+                                                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                                    <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                </textFieldCell>
+                                                                <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                                <prototypeCellViews>
+                                                                    <tableCellView id="kJk-Of-Kyp">
+                                                                        <rect key="frame" x="1" y="1" width="197" height="21"/>
+                                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                        <subviews>
+                                                                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="am2-Yc-tnh">
+                                                                                <rect key="frame" x="18" y="2" width="181" height="19"/>
+                                                                                <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="i7U-VS-e39">
+                                                                                    <font key="font" metaFont="system" size="16"/>
+                                                                                    <color key="textColor" name="Bookish Index Text"/>
+                                                                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                                                    <connections>
+                                                                                        <binding destination="kJk-Of-Kyp" name="value" keyPath="objectValue.name" id="vMY-0m-8rP"/>
+                                                                                    </connections>
+                                                                                </textFieldCell>
+                                                                            </textField>
+                                                                        </subviews>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="trailing" secondItem="am2-Yc-tnh" secondAttribute="trailing" id="7pD-zl-Mwv"/>
+                                                                            <constraint firstItem="am2-Yc-tnh" firstAttribute="top" secondItem="kJk-Of-Kyp" secondAttribute="top" id="GCD-pz-xLP"/>
+                                                                            <constraint firstAttribute="bottom" secondItem="am2-Yc-tnh" secondAttribute="bottom" constant="2" id="JKi-9H-OGe"/>
+                                                                            <constraint firstItem="am2-Yc-tnh" firstAttribute="leading" secondItem="kJk-Of-Kyp" secondAttribute="leading" constant="20" id="f8z-Qw-WtA"/>
+                                                                        </constraints>
+                                                                        <connections>
+                                                                            <outlet property="textField" destination="am2-Yc-tnh" id="5zD-b9-IWM"/>
+                                                                        </connections>
+                                                                    </tableCellView>
+                                                                </prototypeCellViews>
+                                                            </tableColumn>
+                                                        </tableColumns>
+                                                        <connections>
+                                                            <binding destination="tA8-j4-jhn" name="content" keyPath="arrangedObjects" id="gMp-BL-i8V"/>
+                                                            <binding destination="tA8-j4-jhn" name="selectionIndexes" keyPath="selectionIndexes" previousBinding="gMp-BL-i8V" id="7CE-BU-cMu"/>
+                                                        </connections>
+                                                    </tableView>
+                                                </subviews>
+                                                <color key="backgroundColor" name="Bookish Index"/>
+                                            </clipView>
+                                            <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="ZOT-Cy-pNr">
+                                                <rect key="frame" x="0.0" y="224" width="200" height="16"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                            </scroller>
+                                            <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="7Zt-xy-fuf">
+                                                <rect key="frame" x="224" y="17" width="15" height="102"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                            </scroller>
+                                        </scrollView>
+                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lBQ-5B-tRb">
+                                            <rect key="frame" x="6" y="373" width="192" height="19"/>
+                                            <textFieldCell key="cell" lineBreakMode="clipping" title="Publishers" id="hu9-HA-eUR">
+                                                <font key="font" metaFont="system" size="16"/>
+                                                <color key="textColor" name="Bookish Index Text"/>
+                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </textField>
+                                        <searchField wantsLayer="YES" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5v7-St-Xf5">
+                                            <rect key="frame" x="4" y="4" width="192" height="21"/>
+                                            <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="border" drawsBackground="YES" usesSingleLineMode="YES" recentsAutosaveName="people-filter" id="svT-p3-66l">
+                                                <font key="font" metaFont="system"/>
+                                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="Bookish Index"/>
+                                            </searchFieldCell>
+                                        </searchField>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="lBQ-5B-tRb" firstAttribute="top" secondItem="oHm-tI-GqO" secondAttribute="top" constant="8" id="JZP-6U-oQ9"/>
+                                        <constraint firstItem="F2R-FS-MHQ" firstAttribute="leading" secondItem="oHm-tI-GqO" secondAttribute="leading" id="Xdi-dY-v9I"/>
+                                        <constraint firstItem="5v7-St-Xf5" firstAttribute="top" secondItem="F2R-FS-MHQ" secondAttribute="bottom" constant="4" id="YDw-lf-tfy"/>
+                                        <constraint firstItem="lBQ-5B-tRb" firstAttribute="leading" secondItem="oHm-tI-GqO" secondAttribute="leading" constant="8" id="d3x-HG-lHT"/>
+                                        <constraint firstAttribute="trailing" secondItem="lBQ-5B-tRb" secondAttribute="trailing" constant="4" id="gJm-Pk-j5E"/>
+                                        <constraint firstAttribute="trailing" secondItem="F2R-FS-MHQ" secondAttribute="trailing" id="ncK-zH-COh"/>
+                                        <constraint firstItem="F2R-FS-MHQ" firstAttribute="top" secondItem="lBQ-5B-tRb" secondAttribute="bottom" constant="4" id="o0t-qg-4dS"/>
+                                        <constraint firstAttribute="trailing" secondItem="5v7-St-Xf5" secondAttribute="trailing" constant="4" id="u0v-aZ-stO"/>
+                                        <constraint firstAttribute="bottom" secondItem="5v7-St-Xf5" secondAttribute="bottom" constant="4" id="ywC-V5-h7Y"/>
+                                        <constraint firstItem="5v7-St-Xf5" firstAttribute="leading" secondItem="oHm-tI-GqO" secondAttribute="leading" constant="4" id="zPo-4o-Q1O"/>
+                                    </constraints>
+                                </view>
+                                <color key="fillColor" name="Bookish Index"/>
+                            </box>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="6md-9j-FzO" secondAttribute="trailing" id="Ya9-SW-8ow"/>
+                            <constraint firstAttribute="bottom" secondItem="6md-9j-FzO" secondAttribute="bottom" id="eAZ-xC-bDa"/>
+                            <constraint firstItem="6md-9j-FzO" firstAttribute="leading" secondItem="XhL-CF-8YJ" secondAttribute="leading" id="mJ6-uP-58v"/>
+                            <constraint firstItem="6md-9j-FzO" firstAttribute="top" secondItem="XhL-CF-8YJ" secondAttribute="top" id="n2n-Rf-78b"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="indexArray" destination="tA8-j4-jhn" id="GGK-lF-hr3"/>
+                        <outlet property="indexTable" destination="Gzf-vQ-vhp" id="gBe-wH-Q1w"/>
+                    </connections>
+                </viewController>
+                <customObject id="eOP-sQ-xYT" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <arrayController mode="entity" entityName="Publisher" preservesSelection="NO" id="tA8-j4-jhn">
+                    <connections>
+                        <binding destination="GsH-md-eCA" name="managedObjectContext" keyPath="self.cvm.managedObjectContext" id="hkJ-bf-9dg"/>
+                        <binding destination="GsH-md-eCA" name="selectionIndexes" keyPath="self.cvm.selectedPublishers" id="e8b-pV-rmU"/>
+                        <binding destination="GsH-md-eCA" name="sortDescriptors" keyPath="self.sorting" previousBinding="e8b-pV-rmU" id="K08-d4-BHD"/>
+                    </connections>
+                </arrayController>
+            </objects>
+            <point key="canvasLocation" x="491" y="3081"/>
+        </scene>
+        <!--Publisher Detail View Controller-->
+        <scene sceneID="tCk-nT-C5k">
+            <objects>
+                <viewController storyboardIdentifier="Publisher.Detail" id="U2M-2A-7Qb" customClass="PublisherDetailViewController" customModule="BookishMac" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="Xs1-9b-r4G">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="400"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <box autoresizesSubviews="NO" boxType="custom" borderType="none" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="LXw-av-XeV" userLabel="Background">
+                                <rect key="frame" x="0.0" y="0.0" width="450" height="400"/>
+                                <view key="contentView" id="uUS-Jx-Znn">
+                                    <rect key="frame" x="0.0" y="0.0" width="450" height="400"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <imageView identifier="publisher.image" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pwF-tx-Ohf" userLabel="Portrait">
+                                            <rect key="frame" x="50" y="342" width="42" height="42"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="42" id="EQw-L9-1eS"/>
+                                                <constraint firstAttribute="height" constant="42" id="Twr-Zt-0VU"/>
+                                            </constraints>
+                                            <imageCell key="cell" selectable="YES" editable="YES" alignment="left" animates="YES" imageScaling="proportionallyDown" image="PersonPlaceholder" id="CP5-zk-Goa"/>
+                                            <connections>
+                                                <binding destination="U2M-2A-7Qb" name="value" keyPath="self.index.selection.image" id="D6O-jk-w8D">
+                                                    <dictionary key="options">
+                                                        <string key="NSValueTransformerName">PersonImage</string>
+                                                    </dictionary>
+                                                </binding>
+                                            </connections>
+                                        </imageView>
+                                        <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="GTp-HP-MDW">
+                                            <rect key="frame" x="94" y="352" width="354" height="22"/>
+                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" id="AlL-6o-eHj">
+                                                <font key="font" metaFont="system" size="18"/>
+                                                <color key="textColor" name="Bookish Text"/>
+                                                <color key="backgroundColor" name="Bookish Detail"/>
+                                            </textFieldCell>
+                                            <connections>
+                                                <binding destination="U2M-2A-7Qb" name="value" keyPath="self.index.selection.name" id="0Qx-Rv-QSx"/>
+                                            </connections>
+                                        </textField>
+                                        <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ETF-xM-x22">
+                                            <rect key="frame" x="94" y="248" width="354" height="100"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="100" id="hNl-tE-v21"/>
+                                            </constraints>
+                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" id="yHl-gI-Gxt">
+                                                <font key="font" metaFont="system" size="14"/>
+                                                <color key="textColor" name="Bookish Text"/>
+                                                <color key="backgroundColor" name="Bookish Detail"/>
+                                            </textFieldCell>
+                                            <connections>
+                                                <binding destination="U2M-2A-7Qb" name="value" keyPath="self.index.selection.notes" id="Xll-Uc-EIS"/>
+                                            </connections>
+                                        </textField>
+                                        <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="26" horizontalPageScroll="10" verticalLineScroll="26" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dZn-hY-ta0" userLabel="Details">
+                                            <rect key="frame" x="96" y="64" width="350" height="180"/>
+                                            <clipView key="contentView" drawsBackground="NO" id="80Q-tS-nJT">
+                                                <rect key="frame" x="0.0" y="0.0" width="350" height="180"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <subviews>
+                                                    <tableView identifier="publisher-details" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="none" columnReordering="NO" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="24" rowSizeStyle="automatic" usesAutomaticRowHeights="YES" viewBased="YES" id="mC6-Zf-gpF">
+                                                        <rect key="frame" x="0.0" y="0.0" width="350" height="180"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <size key="intercellSpacing" width="3" height="2"/>
+                                                        <color key="backgroundColor" name="Bookish Detail"/>
+                                                        <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
+                                                        <tableColumns>
+                                                            <tableColumn identifier="value" width="347" minWidth="40" maxWidth="1000" id="JqO-Hb-V3C">
+                                                                <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="right" title="value">
+                                                                    <font key="font" metaFont="smallSystem"/>
+                                                                    <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                                    <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
+                                                                </tableHeaderCell>
+                                                                <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" title="Text Cell" id="ZGS-XP-5gc">
+                                                                    <font key="font" metaFont="system"/>
+                                                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                                    <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                </textFieldCell>
+                                                                <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                                <prototypeCellViews>
+                                                                    <tableCellView identifier="book" id="0ea-vW-ozU" userLabel="book cell" customClass="BookCell" customModule="BookishMac" customModuleProvider="target">
+                                                                        <rect key="frame" x="1" y="1" width="347" height="22"/>
+                                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                        <subviews>
+                                                                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="4Ym-xb-a2t">
+                                                                                <rect key="frame" x="8" y="2" width="38" height="18"/>
+                                                                                <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" sendsActionOnEndEditing="YES" alignment="left" placeholderString="value" id="Fgg-aQ-nR0">
+                                                                                    <font key="font" size="14" name=".AppleSystemUIFont"/>
+                                                                                    <color key="textColor" name="Bookish Detail Text"/>
+                                                                                    <color key="backgroundColor" name="Bookish Detail"/>
+                                                                                </textFieldCell>
+                                                                            </textField>
+                                                                            <button identifier="button.RevealBook" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="BV3-aA-Uop" userLabel="Reveal">
+                                                                                <rect key="frame" x="332" y="3" width="15" height="16"/>
+                                                                                <buttonCell key="cell" type="inline" bezelStyle="inline" image="Reveal" imagePosition="only" alignment="center" controlSize="mini" lineBreakMode="truncatingTail" state="on" inset="2" id="mzW-qG-WZ3">
+                                                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                                    <font key="font" metaFont="smallSystemBold"/>
+                                                                                </buttonCell>
+                                                                                <connections>
+                                                                                    <action selector="performAction:" target="mWl-zV-rjl" id="OCu-0r-Il9"/>
+                                                                                </connections>
+                                                                            </button>
+                                                                        </subviews>
+                                                                        <constraints>
+                                                                            <constraint firstItem="4Ym-xb-a2t" firstAttribute="leading" secondItem="0ea-vW-ozU" secondAttribute="leading" constant="10" id="8YC-R4-3D3"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="BV3-aA-Uop" secondAttribute="trailing" id="L8v-df-k82"/>
+                                                                            <constraint firstItem="4Ym-xb-a2t" firstAttribute="top" secondItem="0ea-vW-ozU" secondAttribute="top" constant="2" id="V6X-th-tRT"/>
+                                                                            <constraint firstItem="BV3-aA-Uop" firstAttribute="centerY" secondItem="4Ym-xb-a2t" secondAttribute="centerY" id="cfc-s3-UKJ"/>
+                                                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="4Ym-xb-a2t" secondAttribute="trailing" id="jft-hT-fcR"/>
+                                                                            <constraint firstAttribute="bottom" secondItem="4Ym-xb-a2t" secondAttribute="bottom" constant="2" id="zKY-iv-zP7"/>
+                                                                        </constraints>
+                                                                        <connections>
+                                                                            <outlet property="textField" destination="4Ym-xb-a2t" id="h2l-YD-0Nt"/>
+                                                                        </connections>
+                                                                    </tableCellView>
+                                                                    <tableCellView identifier="role" id="L4u-jP-5D2" userLabel="role cell" customClass="RelationshipCell" customModule="BookishMac" customModuleProvider="target">
+                                                                        <rect key="frame" x="1" y="25" width="347" height="24"/>
+                                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                        <subviews>
+                                                                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="fZa-js-knx">
+                                                                                <rect key="frame" x="2" y="2" width="343" height="20"/>
+                                                                                <constraints>
+                                                                                    <constraint firstAttribute="height" constant="20" id="Cov-B1-7Iv"/>
+                                                                                </constraints>
+                                                                                <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" continuous="YES" alignment="left" placeholderString="value" drawsBackground="YES" usesSingleLineMode="YES" id="Jbl-Zc-tzd">
+                                                                                    <font key="font" size="14" name=".AppleSystemUIFont"/>
+                                                                                    <color key="textColor" name="Bookish Label Text"/>
+                                                                                    <color key="backgroundColor" name="Bookish Detail"/>
+                                                                                </textFieldCell>
+                                                                            </textField>
+                                                                        </subviews>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="bottom" secondItem="fZa-js-knx" secondAttribute="bottom" constant="2" id="YLS-oA-gCB"/>
+                                                                            <constraint firstItem="fZa-js-knx" firstAttribute="leading" secondItem="L4u-jP-5D2" secondAttribute="leading" constant="2" id="dgD-Xz-Oxe"/>
+                                                                            <constraint firstItem="fZa-js-knx" firstAttribute="top" secondItem="L4u-jP-5D2" secondAttribute="top" constant="2" id="kLJ-Y4-7I8"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="fZa-js-knx" secondAttribute="trailing" constant="2" id="lww-zW-yjW"/>
+                                                                        </constraints>
+                                                                        <connections>
+                                                                            <outlet property="textField" destination="fZa-js-knx" id="nTq-gN-kH8"/>
+                                                                        </connections>
+                                                                    </tableCellView>
+                                                                </prototypeCellViews>
+                                                            </tableColumn>
+                                                        </tableColumns>
+                                                        <connections>
+                                                            <outlet property="dataSource" destination="U2M-2A-7Qb" id="uBA-Dv-ofQ"/>
+                                                            <outlet property="delegate" destination="U2M-2A-7Qb" id="jCF-e2-pyd"/>
+                                                        </connections>
+                                                    </tableView>
+                                                </subviews>
+                                                <nil key="backgroundColor"/>
+                                            </clipView>
+                                            <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="wWv-jT-zjF">
+                                                <rect key="frame" x="0.0" y="124" width="350" height="16"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                            </scroller>
+                                            <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="8M8-UV-GkD">
+                                                <rect key="frame" x="224" y="17" width="15" height="102"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                            </scroller>
+                                        </scrollView>
+                                        <button identifier="button..NewPublisher" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vU6-7u-EpC">
+                                            <rect key="frame" x="14" y="13" width="36" height="35"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="24" id="BaT-IB-rz1"/>
+                                                <constraint firstAttribute="width" relation="lessThanOrEqual" constant="24" id="QAA-lJ-lBb"/>
+                                                <constraint firstAttribute="height" constant="24" id="d8R-I8-adO"/>
+                                                <constraint firstAttribute="height" relation="lessThanOrEqual" constant="24" id="eJC-c1-6j9"/>
+                                                <constraint firstAttribute="width" constant="24" id="jr9-nk-ALh"/>
+                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="24" id="vKK-l2-CSY"/>
+                                            </constraints>
+                                            <buttonCell key="cell" type="push" bezelStyle="rounded" image="NSAddTemplate" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="XfA-RV-Hhn">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="performAction:" target="mWl-zV-rjl" id="fQy-cp-zjQ"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="vU6-7u-EpC" firstAttribute="leading" secondItem="uUS-Jx-Znn" secondAttribute="leading" constant="20" symbolic="YES" id="5Qf-26-xdU"/>
+                                        <constraint firstAttribute="trailing" secondItem="dZn-hY-ta0" secondAttribute="trailing" constant="4" id="740-d1-gQZ"/>
+                                        <constraint firstAttribute="bottom" secondItem="vU6-7u-EpC" secondAttribute="bottom" constant="20" symbolic="YES" id="8Gw-K3-GR6"/>
+                                        <constraint firstItem="GTp-HP-MDW" firstAttribute="centerY" secondItem="pwF-tx-Ohf" secondAttribute="centerY" id="Bnc-GY-F8m"/>
+                                        <constraint firstItem="vU6-7u-EpC" firstAttribute="top" secondItem="dZn-hY-ta0" secondAttribute="bottom" constant="20" symbolic="YES" id="KME-PN-0yk"/>
+                                        <constraint firstItem="pwF-tx-Ohf" firstAttribute="top" secondItem="uUS-Jx-Znn" secondAttribute="top" constant="16" id="MeA-lp-YPr"/>
+                                        <constraint firstAttribute="trailing" secondItem="ETF-xM-x22" secondAttribute="trailing" constant="4" id="N8q-wg-PXM"/>
+                                        <constraint firstItem="ETF-xM-x22" firstAttribute="top" secondItem="GTp-HP-MDW" secondAttribute="bottom" constant="4" id="U4t-mz-ZMA"/>
+                                        <constraint firstItem="dZn-hY-ta0" firstAttribute="leading" secondItem="ETF-xM-x22" secondAttribute="leading" id="WLd-k7-irG"/>
+                                        <constraint firstItem="GTp-HP-MDW" firstAttribute="leading" secondItem="pwF-tx-Ohf" secondAttribute="trailing" constant="4" id="Zbx-1K-IUJ"/>
+                                        <constraint firstItem="dZn-hY-ta0" firstAttribute="top" secondItem="ETF-xM-x22" secondAttribute="bottom" constant="4" id="hnX-52-NVe"/>
+                                        <constraint firstAttribute="trailing" secondItem="GTp-HP-MDW" secondAttribute="trailing" constant="4" id="r2Q-JU-RUW"/>
+                                        <constraint firstItem="GTp-HP-MDW" firstAttribute="leading" secondItem="ETF-xM-x22" secondAttribute="leading" id="riW-YJ-BG3"/>
+                                        <constraint firstItem="pwF-tx-Ohf" firstAttribute="leading" secondItem="uUS-Jx-Znn" secondAttribute="leading" constant="50" id="zjz-T4-aRo"/>
+                                    </constraints>
+                                </view>
+                                <color key="fillColor" name="Bookish Detail"/>
+                            </box>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="LXw-av-XeV" secondAttribute="trailing" id="4wk-XR-Ed2"/>
+                            <constraint firstItem="LXw-av-XeV" firstAttribute="leading" secondItem="Xs1-9b-r4G" secondAttribute="leading" id="HpS-QN-ADH"/>
+                            <constraint firstAttribute="bottom" secondItem="LXw-av-XeV" secondAttribute="bottom" id="ZNK-SL-hRB"/>
+                            <constraint firstItem="LXw-av-XeV" firstAttribute="top" secondItem="Xs1-9b-r4G" secondAttribute="top" id="bXB-Ny-5o8"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="detailsTable" destination="mC6-Zf-gpF" id="uSN-Jm-VW5"/>
+                        <outlet property="nameView" destination="GTp-HP-MDW" id="XnH-I5-s1f"/>
+                        <outlet property="notesView" destination="ETF-xM-x22" id="UVF-hc-shb"/>
+                    </connections>
+                </viewController>
+                <customObject id="mWl-zV-rjl" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="836" y="3081"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="NSAddTemplate" width="11" height="11"/>
+        <image name="PersonPlaceholder" width="64" height="64"/>
+        <image name="Reveal" width="12" height="12"/>
+        <namedColor name="Bookish Detail">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Bookish Detail Text">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Bookish Index">
+            <color red="0.97254901960784312" green="0.97254901960784312" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Bookish Index Text">
+            <color red="0.41568627450980394" green="0.43137254901960786" blue="0.44705882352941179" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Bookish Label Text">
+            <color red="0.54117647058823526" green="0.55686274509803924" blue="0.5725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Bookish Text">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>
