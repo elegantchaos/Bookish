@@ -9,18 +9,26 @@ import Logger
 
 let indexChannel = Logger("Index")
 
+/**
+ Base class containing the things we want to be able to bind to,
+ since they can't live in a Swift generic class.
+ */
 
 class IndexControllerBase: CollectionViewController {
     @IBOutlet weak var indexArray: NSArrayController!
     @IBOutlet weak var indexTable: NSTableView!
     @IBOutlet weak var indexSearchField: NSSearchField!
     @IBOutlet weak var selectionLabel: NSTextField!
-    var indexObserver: NSKeyValueObservation?
 }
 
-class IndexController<EntityType>: IndexControllerBase, ActionContextProvider, ActionObserver {
+/**
+ Index view controller, parameterised by the kind of thing it's indexing.
+ */
+
+class IndexController<EntityType>: IndexControllerBase, ActionObserver {
     let entityName = "\(EntityType.self)"
     weak var detailView: DetailController<EntityType>!
+    var indexObserver: NSKeyValueObservation?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,19 +67,13 @@ class IndexController<EntityType>: IndexControllerBase, ActionContextProvider, A
         super.viewWillDisappear()
     }
     
-    func provide(context: ActionContext) {
-        provideForIndex(context: context)
-        detailView.provideForDetail(context: context)
-    }
-
     func provideForIndex(context: ActionContext) {
         context.info.addObserver(self)
     }
 
     func selectionChanged() {
         detailView.selectionChanged()
-        
-        selectionLabel.stringValue = indexArray.selectionSummary(singular: "book", plural: "books")
+        selectionLabel.stringValue = indexArray.selectionSummary(entity: entityName)
     }
     
     func select(items: [EntityType]) {
@@ -83,4 +85,12 @@ class IndexController<EntityType>: IndexControllerBase, ActionContextProvider, A
     }
 }
 
+// MARK: Action Support
 
+extension IndexController: ActionContextProvider {
+    func provide(context: ActionContext) {
+        provideForIndex(context: context)
+        detailView.provideForDetail(context: context)
+    }
+
+}

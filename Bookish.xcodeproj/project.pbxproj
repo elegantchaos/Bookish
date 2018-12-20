@@ -128,6 +128,8 @@
 		22F1844A21CBD0E800220D20 /* Publisher.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22F1844921CBD0E800220D20 /* Publisher.storyboard */; };
 		22F1844C21CBF10B00220D20 /* IndexController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1844B21CBF10B00220D20 /* IndexController.swift */; };
 		22F1844E21CBF9B600220D20 /* DetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1844D21CBF9B600220D20 /* DetailController.swift */; };
+		22F1845021CC10FF00220D20 /* ArrayControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1844F21CC10FF00220D20 /* ArrayControllerExtensions.swift */; };
+		22F1845221CC11B700220D20 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 22F1845121CC11B700220D20 /* Localizable.strings */; };
 		22F35487216FAC0100443C0B /* Actions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F35486216FAC0100443C0B /* Actions.framework */; };
 /* End PBXBuildFile section */
 
@@ -324,6 +326,8 @@
 		22F1844921CBD0E800220D20 /* Publisher.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Publisher.storyboard; sourceTree = "<group>"; };
 		22F1844B21CBF10B00220D20 /* IndexController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexController.swift; sourceTree = "<group>"; };
 		22F1844D21CBF9B600220D20 /* DetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailController.swift; sourceTree = "<group>"; };
+		22F1844F21CC10FF00220D20 /* ArrayControllerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayControllerExtensions.swift; sourceTree = "<group>"; };
+		22F1845121CC11B700220D20 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		22F35486216FAC0100443C0B /* Actions.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Actions.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		22F3548A216FAC0100443C0B /* BookishCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BookishCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -414,6 +418,7 @@
 				22143FCE212EF9CC00B689DF /* DocumentWindowController.swift */,
 				22D39E502142DB2700282467 /* ViewBasedToolbarItem.swift */,
 				22429402212C3C7400E70510 /* ViewExtensions.swift */,
+				22F1844F21CC10FF00220D20 /* ArrayControllerExtensions.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -735,6 +740,7 @@
 				22DD42502126D6DB0070C85A /* Assets.xcassets */,
 				22DE6AE421877E740078D489 /* Assets.xcfilelist */,
 				22DD42552126D6DB0070C85A /* Info.plist */,
+				22F1845121CC11B700220D20 /* Localizable.strings */,
 				22DD42562126D6DB0070C85A /* Bookish.entitlements */,
 			);
 			path = Resources;
@@ -973,6 +979,7 @@
 				22E47CE0216E5EB200E43DBF /* Assets.xcassets in Resources */,
 				22F1844421CBD06C00220D20 /* Book.storyboard in Resources */,
 				22F1844A21CBD0E800220D20 /* Publisher.storyboard in Resources */,
+				22F1845221CC11B700220D20 /* Localizable.strings in Resources */,
 				22DD42542126D6DB0070C85A /* Main.storyboard in Resources */,
 				22F1844621CBD09000220D20 /* Person.storyboard in Resources */,
 			);
@@ -1126,6 +1133,7 @@
 				22429408212D958400E70510 /* CollectionSplitViewController.swift in Sources */,
 				226E8E7121AC3D74001F191F /* BookEditableDateCell.swift in Sources */,
 				22462E972158F65200A4C56C /* CollectionViewActions.swift in Sources */,
+				22F1845021CC10FF00220D20 /* ArrayControllerExtensions.swift in Sources */,
 				227F451621835801000D8B8D /* ImportManager.swift in Sources */,
 				22D39E5B2146BE4900282467 /* DatePickerPopoverController.swift in Sources */,
 				22D39E532146A84500282467 /* AnnotatedTableCellView.swift in Sources */,
