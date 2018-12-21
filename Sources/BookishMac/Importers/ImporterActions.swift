@@ -115,6 +115,12 @@ class MergeImportRequest: ImportRequest {
 
 class NewImportRequest: ImportRequest {
     init?(importer: Importer) throws {
+        let application = Application.sharedInstance
+        
+        let oldTD = application.testDocument
+        defer { application.testDocument = oldTD }
+        
+        application.testDocument = false
         guard let document = try NSDocumentController.shared.openUntitledDocumentAndDisplay(false) as? CollectionDocument else {
             return nil
         }

@@ -87,6 +87,10 @@ class DeliciousLibraryImportSession: ImportSession {
                 
                 process(creators: creators, for: book)
                 
+                if let publishers = record["publishersCompositeString"] as? String, !publishers.isEmpty {
+                    process(publishers: publishers, for: book)
+                }
+                
                 if let series = record["seriesSingularString"] as? String, !series.isEmpty {
                     process(series: series, index: 0, for: book)
                 }

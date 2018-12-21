@@ -115,8 +115,6 @@
 		22F180BE21CA647000220D20 /* Logger.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22DAF399217B5305003CE28B /* Logger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		22F180C121CA64B500220D20 /* ActionsKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22DAF397217B52E6003CE28B /* ActionsKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		22F180C221CA64B500220D20 /* Actions.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22F35486216FAC0100443C0B /* Actions.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		22F180E021CA87A400220D20 /* Sample.sqlite-shm in Resources */ = {isa = PBXBuildFile; fileRef = 22F180DE21CA87A300220D20 /* Sample.sqlite-shm */; };
-		22F180E121CA87A400220D20 /* Sample.sqlite-wal in Resources */ = {isa = PBXBuildFile; fileRef = 22F180DF21CA87A300220D20 /* Sample.sqlite-wal */; };
 		22F1818321CAB59100220D20 /* BookishCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22F3548A216FAC0100443C0B /* BookishCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		22F181F621CAB8A500220D20 /* BookishModel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F181F521CAB8A500220D20 /* BookishModel.framework */; };
 		22F181F721CAB8B600220D20 /* BookishModel.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22F181F521CAB8A500220D20 /* BookishModel.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -316,8 +314,6 @@
 		22F1803221C9171B00220D20 /* PublisherBookRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublisherBookRow.swift; sourceTree = "<group>"; };
 		22F1805221C9495300220D20 /* Sample.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = Sample.sqlite; path = "Extras/Sample Data/Sample.sqlite"; sourceTree = SOURCE_ROOT; };
 		22F180A321C951FF00220D20 /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
-		22F180DE21CA87A300220D20 /* Sample.sqlite-shm */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Sample.sqlite-shm"; path = "Extras/Sample Data/Sample.sqlite-shm"; sourceTree = SOURCE_ROOT; };
-		22F180DF21CA87A300220D20 /* Sample.sqlite-wal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "Sample.sqlite-wal"; path = "Extras/Sample Data/Sample.sqlite-wal"; sourceTree = SOURCE_ROOT; };
 		22F181F521CAB8A500220D20 /* BookishModel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BookishModel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		22F181F821CAB8F100220D20 /* JSONDump.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = JSONDump.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		22F1844321CBD06C00220D20 /* Book.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Book.storyboard; sourceTree = "<group>"; };
@@ -718,8 +714,6 @@
 			children = (
 				228968422191DDBF00B80A93 /* Bookish.entitlements */,
 				22F1805221C9495300220D20 /* Sample.sqlite */,
-				22F180DE21CA87A300220D20 /* Sample.sqlite-shm */,
-				22F180DF21CA87A300220D20 /* Sample.sqlite-wal */,
 				2242931C212ADC4300E70510 /* Main.storyboard */,
 				2242931F212ADC4400E70510 /* Assets.xcassets */,
 				22DE6AE521877FFB0078D489 /* Assets.xcfilelist */,
@@ -950,9 +944,7 @@
 			files = (
 				22429323212ADC4400E70510 /* LaunchScreen.storyboard in Resources */,
 				22429320212ADC4400E70510 /* Assets.xcassets in Resources */,
-				22F180E121CA87A400220D20 /* Sample.sqlite-wal in Resources */,
 				22F1805321C9495300220D20 /* Sample.sqlite in Resources */,
-				22F180E021CA87A400220D20 /* Sample.sqlite-shm in Resources */,
 				2242931E212ADC4300E70510 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
