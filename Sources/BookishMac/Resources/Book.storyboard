@@ -788,7 +788,7 @@
     </scenes>
     <resources>
         <image name="ChooseDateSmall" width="12" height="12"/>
-        <image name="CoverPlaceholder" width="64" height="64"/>
+        <image name="CoverPlaceholder" width="512" height="512"/>
         <image name="Minus" width="12" height="12"/>
         <image name="NSAddTemplate" width="11" height="11"/>
         <image name="Plus" width="12" height="12"/>
