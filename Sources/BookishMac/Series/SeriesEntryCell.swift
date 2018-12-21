@@ -8,7 +8,7 @@ import AppKit
 import Actions
 import BookishModel
 
-class SeriesEntryCell: NSTableCellView, ActionContextProvider, ManagedObjectTableCell {
+class SeriesEntryCell: NSTableCellView, ActionContextProvider, DetailTableCell {
     func setup(for view: DetailControllerBase, row: Int, item: NSManagedObject) {
         if let entry = item as? Entry, let name = entry.book?.name {
             objectValue = item

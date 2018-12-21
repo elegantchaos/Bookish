@@ -9,7 +9,7 @@ import BookishModel
 class PublisherDetailViewController: DetailController<Publisher> {
     static let bookViewID = NSUserInterfaceItemIdentifier(rawValue: "book")
 
-    override func rowsForSelection() -> [NSManagedObject] {
+    override func detailItemsForSelection() -> [NSManagedObject] {
         let selected: [Publisher] = selectedItems()
         let (_, common): (Set<Book>, Set<Book>) = items(in: selected, property: "books")
         return common.sorted(by: { $0.name ?? "" < $1.name ?? ""})

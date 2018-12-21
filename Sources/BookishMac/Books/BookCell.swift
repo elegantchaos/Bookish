@@ -7,7 +7,7 @@ import AppKit
 import Actions
 import BookishModel
 
-class BookCell: NSTableCellView, ActionContextProvider, ManagedObjectTableCell {
+class BookCell: NSTableCellView, ActionContextProvider, DetailTableCell {
     func setup(for view: DetailControllerBase, row: Int, item: NSManagedObject) {
         if let book = item as? Book, let name = book.name {
             objectValue = item

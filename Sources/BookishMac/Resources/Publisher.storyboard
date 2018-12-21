@@ -22,13 +22,13 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <scrollView horizontalCompressionResistancePriority="760" borderType="none" autohidesScrollers="YES" horizontalLineScroll="23" horizontalPageScroll="10" verticalLineScroll="23" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F2R-FS-MHQ" userLabel="Index">
-                                            <rect key="frame" x="0.0" y="47" width="200" height="322"/>
+                                            <rect key="frame" x="0.0" y="47" width="200" height="333"/>
                                             <clipView key="contentView" drawsBackground="NO" id="Frg-lC-Lel">
-                                                <rect key="frame" x="0.0" y="0.0" width="200" height="322"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="200" height="333"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <tableView identifier="publishers" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnSelection="YES" autosaveColumns="NO" rowHeight="21" rowSizeStyle="automatic" usesAutomaticRowHeights="YES" viewBased="YES" id="Gzf-vQ-vhp">
-                                                        <rect key="frame" x="0.0" y="0.0" width="200" height="322"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="200" height="333"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <size key="intercellSpacing" width="3" height="2"/>
                                                         <color key="backgroundColor" name="Bookish Index"/>
@@ -93,17 +93,9 @@
                                                 <autoresizingMask key="autoresizingMask"/>
                                             </scroller>
                                         </scrollView>
-                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lBQ-5B-tRb">
-                                            <rect key="frame" x="6" y="373" width="192" height="19"/>
-                                            <textFieldCell key="cell" lineBreakMode="clipping" title="Publishers" id="hu9-HA-eUR">
-                                                <font key="font" metaFont="system" size="16"/>
-                                                <color key="textColor" name="Bookish Index Text"/>
-                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                            </textFieldCell>
-                                        </textField>
                                         <searchField wantsLayer="YES" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5v7-St-Xf5">
                                             <rect key="frame" x="20" y="22" width="160" height="21"/>
-                                            <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="border" drawsBackground="YES" usesSingleLineMode="YES" recentsAutosaveName="people-filter" id="svT-p3-66l">
+                                            <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="border" placeholderString="search publishers" drawsBackground="YES" usesSingleLineMode="YES" recentsAutosaveName="people-filter" id="svT-p3-66l">
                                                 <font key="font" metaFont="system"/>
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="Bookish Index"/>
@@ -121,15 +113,12 @@
                                     <constraints>
                                         <constraint firstAttribute="bottom" secondItem="a78-Rx-oUs" secondAttribute="bottom" constant="4" id="4eJ-Wv-9pM"/>
                                         <constraint firstItem="a78-Rx-oUs" firstAttribute="top" secondItem="5v7-St-Xf5" secondAttribute="bottom" constant="4" id="5Bs-n0-5q8"/>
+                                        <constraint firstItem="F2R-FS-MHQ" firstAttribute="top" secondItem="oHm-tI-GqO" secondAttribute="top" constant="20" symbolic="YES" id="CzW-b9-HTm"/>
                                         <constraint firstAttribute="trailing" secondItem="a78-Rx-oUs" secondAttribute="trailing" constant="20" symbolic="YES" id="J39-uW-xrl"/>
-                                        <constraint firstItem="lBQ-5B-tRb" firstAttribute="top" secondItem="oHm-tI-GqO" secondAttribute="top" constant="8" id="JZP-6U-oQ9"/>
                                         <constraint firstItem="F2R-FS-MHQ" firstAttribute="leading" secondItem="oHm-tI-GqO" secondAttribute="leading" id="Xdi-dY-v9I"/>
                                         <constraint firstItem="5v7-St-Xf5" firstAttribute="top" secondItem="F2R-FS-MHQ" secondAttribute="bottom" constant="4" id="YDw-lf-tfy"/>
-                                        <constraint firstItem="lBQ-5B-tRb" firstAttribute="leading" secondItem="oHm-tI-GqO" secondAttribute="leading" constant="8" id="d3x-HG-lHT"/>
-                                        <constraint firstAttribute="trailing" secondItem="lBQ-5B-tRb" secondAttribute="trailing" constant="4" id="gJm-Pk-j5E"/>
                                         <constraint firstItem="a78-Rx-oUs" firstAttribute="leading" secondItem="oHm-tI-GqO" secondAttribute="leading" constant="20" symbolic="YES" id="im5-oV-ToU"/>
                                         <constraint firstAttribute="trailing" secondItem="F2R-FS-MHQ" secondAttribute="trailing" id="ncK-zH-COh"/>
-                                        <constraint firstItem="F2R-FS-MHQ" firstAttribute="top" secondItem="lBQ-5B-tRb" secondAttribute="bottom" constant="4" id="o0t-qg-4dS"/>
                                         <constraint firstAttribute="trailing" secondItem="5v7-St-Xf5" secondAttribute="trailing" constant="20" symbolic="YES" id="u0v-aZ-stO"/>
                                         <constraint firstItem="5v7-St-Xf5" firstAttribute="leading" secondItem="oHm-tI-GqO" secondAttribute="leading" constant="20" symbolic="YES" id="zPo-4o-Q1O"/>
                                     </constraints>
@@ -340,6 +329,16 @@
                                                 <action selector="performAction:" target="mWl-zV-rjl" id="fQy-cp-zjQ"/>
                                             </connections>
                                         </button>
+                                        <button identifier="button.ToggleEditing" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yKH-hF-xOr">
+                                            <rect key="frame" x="372" y="13" width="64" height="32"/>
+                                            <buttonCell key="cell" type="push" title="Edit" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="0Il-51-o1W">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="performAction:" target="mWl-zV-rjl" id="XnO-vx-4Xr"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="vU6-7u-EpC" firstAttribute="leading" secondItem="uUS-Jx-Znn" secondAttribute="leading" constant="20" symbolic="YES" id="5Qf-26-xdU"/>
@@ -351,8 +350,10 @@
                                         <constraint firstAttribute="trailing" secondItem="ETF-xM-x22" secondAttribute="trailing" constant="4" id="N8q-wg-PXM"/>
                                         <constraint firstItem="ETF-xM-x22" firstAttribute="top" secondItem="GTp-HP-MDW" secondAttribute="bottom" constant="4" id="U4t-mz-ZMA"/>
                                         <constraint firstItem="dZn-hY-ta0" firstAttribute="leading" secondItem="ETF-xM-x22" secondAttribute="leading" id="WLd-k7-irG"/>
+                                        <constraint firstAttribute="bottom" secondItem="yKH-hF-xOr" secondAttribute="bottom" constant="20" symbolic="YES" id="Wje-x2-eMt"/>
                                         <constraint firstItem="GTp-HP-MDW" firstAttribute="leading" secondItem="pwF-tx-Ohf" secondAttribute="trailing" constant="4" id="Zbx-1K-IUJ"/>
                                         <constraint firstItem="dZn-hY-ta0" firstAttribute="top" secondItem="ETF-xM-x22" secondAttribute="bottom" constant="4" id="hnX-52-NVe"/>
+                                        <constraint firstAttribute="trailing" secondItem="yKH-hF-xOr" secondAttribute="trailing" constant="20" symbolic="YES" id="jA3-GN-zCo"/>
                                         <constraint firstAttribute="trailing" secondItem="GTp-HP-MDW" secondAttribute="trailing" constant="4" id="r2Q-JU-RUW"/>
                                         <constraint firstItem="GTp-HP-MDW" firstAttribute="leading" secondItem="ETF-xM-x22" secondAttribute="leading" id="riW-YJ-BG3"/>
                                         <constraint firstItem="pwF-tx-Ohf" firstAttribute="leading" secondItem="uUS-Jx-Znn" secondAttribute="leading" constant="50" id="zjz-T4-aRo"/>

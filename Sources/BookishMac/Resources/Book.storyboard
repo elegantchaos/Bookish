@@ -98,7 +98,7 @@
                                         </scrollView>
                                         <searchField wantsLayer="YES" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iIe-EJ-jul">
                                             <rect key="frame" x="20" y="22" width="160" height="21"/>
-                                            <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="border" drawsBackground="YES" usesSingleLineMode="YES" recentsAutosaveName="books-filter" id="2Sv-YG-ym6">
+                                            <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="border" placeholderString="search books" drawsBackground="YES" usesSingleLineMode="YES" recentsAutosaveName="books-filter" id="2Sv-YG-ym6">
                                                 <font key="font" metaFont="system"/>
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="Bookish Detail"/>
@@ -160,7 +160,7 @@
                     </connections>
                 </arrayController>
             </objects>
-            <point key="canvasLocation" x="491" y="2509"/>
+            <point key="canvasLocation" x="223" y="1940"/>
         </scene>
         <!--Book Detail View Controller-->
         <scene sceneID="qGP-fN-0GX">
@@ -783,7 +783,7 @@
                 </arrayController>
                 <userDefaultsController representsSharedInstance="YES" id="CPG-9C-fnr"/>
             </objects>
-            <point key="canvasLocation" x="836" y="2509"/>
+            <point key="canvasLocation" x="568" y="1940"/>
         </scene>
     </scenes>
     <resources>

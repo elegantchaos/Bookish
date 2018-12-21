@@ -22,13 +22,13 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <scrollView horizontalCompressionResistancePriority="760" borderType="none" autohidesScrollers="YES" horizontalLineScroll="23" horizontalPageScroll="10" verticalLineScroll="23" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cB6-3r-Peo" userLabel="Index">
-                                            <rect key="frame" x="0.0" y="47" width="200" height="322"/>
+                                            <rect key="frame" x="0.0" y="47" width="200" height="333"/>
                                             <clipView key="contentView" drawsBackground="NO" id="25y-2t-AU1">
-                                                <rect key="frame" x="0.0" y="0.0" width="200" height="322"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="200" height="333"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <tableView identifier="people" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnSelection="YES" autosaveColumns="NO" rowHeight="21" rowSizeStyle="automatic" usesAutomaticRowHeights="YES" viewBased="YES" id="T2o-3X-3Tj">
-                                                        <rect key="frame" x="0.0" y="0.0" width="200" height="322"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="200" height="333"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <size key="intercellSpacing" width="3" height="2"/>
                                                         <color key="backgroundColor" name="Bookish Index"/>
@@ -96,17 +96,9 @@
                                                 <autoresizingMask key="autoresizingMask"/>
                                             </scroller>
                                         </scrollView>
-                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Luv-oJ-vO9">
-                                            <rect key="frame" x="6" y="373" width="192" height="19"/>
-                                            <textFieldCell key="cell" lineBreakMode="clipping" title="People" id="laj-5J-vdz">
-                                                <font key="font" metaFont="system" size="16"/>
-                                                <color key="textColor" name="Bookish Index Text"/>
-                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                            </textFieldCell>
-                                        </textField>
                                         <searchField wantsLayer="YES" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="adO-nY-SYC">
                                             <rect key="frame" x="20" y="22" width="160" height="21"/>
-                                            <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="border" drawsBackground="YES" usesSingleLineMode="YES" recentsAutosaveName="people-filter" id="UT2-Fk-Sjl">
+                                            <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="border" placeholderString="search people" drawsBackground="YES" usesSingleLineMode="YES" recentsAutosaveName="people-filter" id="UT2-Fk-Sjl">
                                                 <font key="font" metaFont="system"/>
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="Bookish Index"/>
@@ -130,16 +122,13 @@
                                         </textField>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="cB6-3r-Peo" firstAttribute="top" secondItem="Luv-oJ-vO9" secondAttribute="bottom" constant="4" id="6L9-b8-XSC"/>
                                         <constraint firstItem="pPk-kC-luC" firstAttribute="top" secondItem="adO-nY-SYC" secondAttribute="bottom" constant="4" id="BQm-dM-Pau"/>
                                         <constraint firstItem="adO-nY-SYC" firstAttribute="top" secondItem="cB6-3r-Peo" secondAttribute="bottom" constant="4" id="Efx-ab-7g3"/>
                                         <constraint firstAttribute="bottom" secondItem="pPk-kC-luC" secondAttribute="bottom" constant="4" id="IoK-jt-yEO"/>
-                                        <constraint firstAttribute="trailing" secondItem="Luv-oJ-vO9" secondAttribute="trailing" constant="4" id="KDY-Cn-pyg"/>
                                         <constraint firstAttribute="trailing" secondItem="adO-nY-SYC" secondAttribute="trailing" constant="20" symbolic="YES" id="Naf-t6-qnz"/>
-                                        <constraint firstItem="Luv-oJ-vO9" firstAttribute="leading" secondItem="Ok8-kN-ge9" secondAttribute="leading" constant="8" id="RHQ-dr-tAt"/>
                                         <constraint firstAttribute="trailing" secondItem="cB6-3r-Peo" secondAttribute="trailing" id="UGZ-KG-YvU"/>
                                         <constraint firstItem="adO-nY-SYC" firstAttribute="leading" secondItem="Ok8-kN-ge9" secondAttribute="leading" constant="20" symbolic="YES" id="Zd1-4t-n8u"/>
-                                        <constraint firstItem="Luv-oJ-vO9" firstAttribute="top" secondItem="Ok8-kN-ge9" secondAttribute="top" constant="8" id="mwM-0o-CKL"/>
+                                        <constraint firstItem="cB6-3r-Peo" firstAttribute="top" secondItem="Ok8-kN-ge9" secondAttribute="top" constant="20" symbolic="YES" id="dSq-5b-zpo"/>
                                         <constraint firstAttribute="trailing" secondItem="pPk-kC-luC" secondAttribute="trailing" constant="20" symbolic="YES" id="p7I-7y-Grk"/>
                                         <constraint firstItem="cB6-3r-Peo" firstAttribute="leading" secondItem="Ok8-kN-ge9" secondAttribute="leading" id="x2a-CU-iCX"/>
                                         <constraint firstItem="pPk-kC-luC" firstAttribute="leading" secondItem="Ok8-kN-ge9" secondAttribute="leading" constant="20" symbolic="YES" id="x88-Ac-Ags"/>
@@ -357,12 +346,24 @@
                                                 <action selector="performAction:" target="9ol-mz-Bsh" id="tKr-AD-tLS"/>
                                             </connections>
                                         </button>
+                                        <button identifier="button.ToggleEditing" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gmv-Ec-TQ4">
+                                            <rect key="frame" x="372" y="13" width="64" height="32"/>
+                                            <buttonCell key="cell" type="push" title="Edit" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="xBx-Mp-LlK">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="performAction:" target="9ol-mz-Bsh" id="HRn-4H-kaN"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="trailing" secondItem="Suv-V7-thw" secondAttribute="trailing" constant="4" id="21X-Qj-ISj"/>
                                         <constraint firstItem="sUr-5g-BKU" firstAttribute="top" secondItem="Suv-V7-thw" secondAttribute="bottom" constant="4" id="2KW-sh-Wz6"/>
                                         <constraint firstAttribute="trailing" secondItem="Wvi-TN-fxn" secondAttribute="trailing" constant="4" id="3Ki-Sr-48o"/>
+                                        <constraint firstAttribute="bottom" secondItem="gmv-Ec-TQ4" secondAttribute="bottom" constant="20" symbolic="YES" id="6z9-ya-Zac"/>
                                         <constraint firstAttribute="trailing" secondItem="sUr-5g-BKU" secondAttribute="trailing" constant="4" id="Em6-8C-Eiu"/>
+                                        <constraint firstAttribute="trailing" secondItem="gmv-Ec-TQ4" secondAttribute="trailing" constant="20" symbolic="YES" id="IuI-Xc-UaK"/>
                                         <constraint firstItem="Wvi-TN-fxn" firstAttribute="centerY" secondItem="HXp-Nq-8Tg" secondAttribute="centerY" id="P4b-Mz-j14"/>
                                         <constraint firstItem="HXp-Nq-8Tg" firstAttribute="leading" secondItem="lGG-wy-3ri" secondAttribute="leading" constant="50" id="UfU-PI-eC3"/>
                                         <constraint firstItem="sUr-5g-BKU" firstAttribute="leading" secondItem="Suv-V7-thw" secondAttribute="leading" id="V4J-Nh-yZb"/>

@@ -22,7 +22,7 @@ class PersonDetailViewController: DetailController<Person> {
         return result
     }
 
-    override func rowsForSelection() -> [NSManagedObject] {
+    override func detailItemsForSelection() -> [NSManagedObject] {
         var booksByRole = [Role:Set<Book>]()
         let selected = selectedRelationships()
         for relationship in selected {

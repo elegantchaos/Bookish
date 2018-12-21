@@ -22,13 +22,13 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <scrollView horizontalCompressionResistancePriority="760" borderType="none" autohidesScrollers="YES" horizontalLineScroll="23" horizontalPageScroll="10" verticalLineScroll="23" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IqM-tW-Aly" userLabel="Index">
-                                            <rect key="frame" x="0.0" y="45" width="200" height="324"/>
+                                            <rect key="frame" x="0.0" y="45" width="200" height="335"/>
                                             <clipView key="contentView" drawsBackground="NO" id="PHm-cq-mEj">
-                                                <rect key="frame" x="0.0" y="0.0" width="200" height="324"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="200" height="335"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <tableView identifier="series" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnSelection="YES" autosaveColumns="NO" rowHeight="21" rowSizeStyle="automatic" usesAutomaticRowHeights="YES" viewBased="YES" id="rcH-BU-zFa">
-                                                        <rect key="frame" x="0.0" y="0.0" width="200" height="324"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="200" height="335"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <size key="intercellSpacing" width="3" height="2"/>
                                                         <color key="backgroundColor" name="Bookish Index"/>
@@ -93,17 +93,9 @@
                                                 <autoresizingMask key="autoresizingMask"/>
                                             </scroller>
                                         </scrollView>
-                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LWZ-hJ-Qd6">
-                                            <rect key="frame" x="6" y="373" width="192" height="19"/>
-                                            <textFieldCell key="cell" lineBreakMode="clipping" title="Series" id="Ub4-sU-ZlT">
-                                                <font key="font" metaFont="system" size="16"/>
-                                                <color key="textColor" name="Bookish Index Text"/>
-                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                            </textFieldCell>
-                                        </textField>
                                         <searchField wantsLayer="YES" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mFl-kl-VG4">
                                             <rect key="frame" x="20" y="20" width="160" height="21"/>
-                                            <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="border" drawsBackground="YES" usesSingleLineMode="YES" recentsAutosaveName="people-filter" id="3su-xV-4BC">
+                                            <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="border" placeholderString="search series" drawsBackground="YES" usesSingleLineMode="YES" recentsAutosaveName="people-filter" id="3su-xV-4BC">
                                                 <font key="font" metaFont="system"/>
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="Bookish Index"/>
@@ -119,19 +111,16 @@
                                         </textField>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="LWZ-hJ-Qd6" firstAttribute="leading" secondItem="LvH-Ki-fEr" secondAttribute="leading" constant="8" id="7XN-Qj-Cuy"/>
                                         <constraint firstItem="mFl-kl-VG4" firstAttribute="leading" secondItem="LvH-Ki-fEr" secondAttribute="leading" constant="20" symbolic="YES" id="9xn-YQ-GYI"/>
                                         <constraint firstItem="IqM-tW-Aly" firstAttribute="leading" secondItem="LvH-Ki-fEr" secondAttribute="leading" id="McQ-G2-62F"/>
-                                        <constraint firstItem="LWZ-hJ-Qd6" firstAttribute="top" secondItem="LvH-Ki-fEr" secondAttribute="top" constant="8" id="P2O-P3-hYf"/>
                                         <constraint firstItem="bX5-YO-5ED" firstAttribute="top" secondItem="mFl-kl-VG4" secondAttribute="bottom" constant="4" id="RBV-BY-9Cj"/>
                                         <constraint firstAttribute="trailing" secondItem="IqM-tW-Aly" secondAttribute="trailing" id="YAO-KY-nwd"/>
                                         <constraint firstItem="mFl-kl-VG4" firstAttribute="top" secondItem="IqM-tW-Aly" secondAttribute="bottom" constant="4" id="big-yE-2Dm"/>
-                                        <constraint firstItem="IqM-tW-Aly" firstAttribute="top" secondItem="LWZ-hJ-Qd6" secondAttribute="bottom" constant="4" id="fV3-9B-6PA"/>
                                         <constraint firstAttribute="bottom" secondItem="bX5-YO-5ED" secondAttribute="bottom" constant="4" id="jTX-9L-xN8"/>
-                                        <constraint firstAttribute="trailing" secondItem="LWZ-hJ-Qd6" secondAttribute="trailing" constant="4" id="kpj-GF-lAX"/>
                                         <constraint firstItem="bX5-YO-5ED" firstAttribute="leading" secondItem="LvH-Ki-fEr" secondAttribute="leading" constant="20" symbolic="YES" id="oK5-kL-QDm"/>
                                         <constraint firstAttribute="trailing" secondItem="bX5-YO-5ED" secondAttribute="trailing" constant="20" symbolic="YES" id="opd-0h-ePA"/>
                                         <constraint firstAttribute="bottom" secondItem="mFl-kl-VG4" secondAttribute="bottom" constant="20" symbolic="YES" id="pPM-Br-ku3"/>
+                                        <constraint firstItem="IqM-tW-Aly" firstAttribute="top" secondItem="LvH-Ki-fEr" secondAttribute="top" constant="20" symbolic="YES" id="rf0-tA-EtY"/>
                                         <constraint firstAttribute="trailing" secondItem="mFl-kl-VG4" secondAttribute="trailing" constant="20" symbolic="YES" id="zpN-RI-Ymb"/>
                                     </constraints>
                                 </view>
@@ -160,7 +149,7 @@
                     </connections>
                 </arrayController>
             </objects>
-            <point key="canvasLocation" x="1283" y="3081"/>
+            <point key="canvasLocation" x="490" y="2907"/>
         </scene>
         <!--Series Detail View Controller-->
         <scene sceneID="wWc-sU-aMY">
@@ -341,12 +330,24 @@
                                                 <action selector="performAction:" target="bkg-qU-L0Y" id="dL3-ZD-QBN"/>
                                             </connections>
                                         </button>
+                                        <button identifier="button.ToggleEditing" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="E3Y-5i-wrj">
+                                            <rect key="frame" x="372" y="13" width="64" height="32"/>
+                                            <buttonCell key="cell" type="push" title="Edit" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ta0-g8-8pX">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="performAction:" target="bkg-qU-L0Y" id="Dad-pA-MJo"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="R2H-ks-yZc" firstAttribute="top" secondItem="Ykj-uj-ehm" secondAttribute="bottom" constant="4" id="B9d-Uc-I2Y"/>
                                         <constraint firstItem="cMe-q7-A3I" firstAttribute="leading" secondItem="XFD-Nz-BUj" secondAttribute="leading" constant="50" id="Ddk-gJ-Vjt"/>
                                         <constraint firstItem="cMe-q7-A3I" firstAttribute="top" secondItem="XFD-Nz-BUj" secondAttribute="top" constant="16" id="EY9-Sf-5rl"/>
                                         <constraint firstItem="R2H-ks-yZc" firstAttribute="leading" secondItem="Ykj-uj-ehm" secondAttribute="leading" id="Ex5-au-hDg"/>
+                                        <constraint firstAttribute="bottom" secondItem="E3Y-5i-wrj" secondAttribute="bottom" constant="20" symbolic="YES" id="HjG-SW-3t4"/>
+                                        <constraint firstAttribute="trailing" secondItem="E3Y-5i-wrj" secondAttribute="trailing" constant="20" symbolic="YES" id="I1z-oM-IFz"/>
                                         <constraint firstItem="1hS-zV-NKy" firstAttribute="leading" secondItem="cMe-q7-A3I" secondAttribute="trailing" constant="4" id="Nya-zP-7fa"/>
                                         <constraint firstItem="Ykj-uj-ehm" firstAttribute="top" secondItem="1hS-zV-NKy" secondAttribute="bottom" constant="4" id="PRa-0t-J5k"/>
                                         <constraint firstItem="pU5-9u-1ND" firstAttribute="leading" secondItem="XFD-Nz-BUj" secondAttribute="leading" constant="20" symbolic="YES" id="Rc1-A8-rDM"/>
@@ -377,7 +378,7 @@
                 </viewController>
                 <customObject id="bkg-qU-L0Y" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1635" y="3081"/>
+            <point key="canvasLocation" x="842" y="2907"/>
         </scene>
     </scenes>
     <resources>

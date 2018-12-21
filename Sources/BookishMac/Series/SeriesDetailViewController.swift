@@ -10,7 +10,7 @@ import BookishModel
 class SeriesDetailViewController: DetailController<Series> {
     static let entryViewID = NSUserInterfaceItemIdentifier(rawValue: "entry")
     
-    override func rowsForSelection() -> [NSManagedObject] {
+    override func detailItemsForSelection() -> [NSManagedObject] {
         let selected: [Series] = selectedItems()
         if selected.count == 1, let entries = selected[0].entries as? Set<Entry> {
             return entries.sorted(by: { $0.index < $1.index })

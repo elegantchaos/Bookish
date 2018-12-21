@@ -14,7 +14,7 @@ let indexChannel = Logger("Index")
  since they can't live in a Swift generic class.
  */
 
-class IndexControllerBase: CollectionViewController {
+class IndexControllerBindings: CollectionViewController {
     @IBOutlet weak var indexArray: NSArrayController!
     @IBOutlet weak var indexTable: NSTableView!
     @IBOutlet weak var indexSearchField: NSSearchField!
@@ -25,7 +25,7 @@ class IndexControllerBase: CollectionViewController {
  Index view controller, parameterised by the kind of thing it's indexing.
  */
 
-class IndexController<EntityType>: IndexControllerBase, ActionObserver {
+class IndexController<EntityType>: IndexControllerBindings, ActionObserver {
     let entityName = "\(EntityType.self)"
     weak var detailView: DetailController<EntityType>!
     var indexObserver: NSKeyValueObservation?
