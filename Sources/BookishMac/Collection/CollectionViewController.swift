@@ -6,11 +6,20 @@
 import Cocoa
 
 class CollectionViewController: NSViewController {
+    typealias ViewModel = CollectionDocumentViewModel
+    
     @objc let cvm: CollectionDocumentViewModel
     
     required init?(coder: NSCoder) {
-        self.cvm = Application.sharedInstance.documentWindowControllerFactory.connectViewModel()
+        self.cvm = Application.sharedInstance.documentWindowControllerFactory.viewModel
         super.init(coder: coder)
+        Application.sharedInstance.documentWindowControllerFactory.onFinishedLoading(callback: { (windowController) in
+            self.windowDidLoad(windowController)
+        })
+    }
+    
+    func windowDidLoad(_ window: CollectionWindowController) {
+        
     }
     
     @objc var document: CollectionDocument? {

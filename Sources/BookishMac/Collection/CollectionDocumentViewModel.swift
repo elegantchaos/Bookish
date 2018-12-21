@@ -22,7 +22,8 @@ import BookishModel
         }
     }
     
-    typealias  WindowController = CollectionWindowController
+    typealias WindowController = CollectionWindowController
+    typealias Owner = CollectionViewController
     
     @objc let document: CollectionDocument
     @objc let managedObjectContext: NSManagedObjectContext

@@ -14,7 +14,7 @@ let applicationChannel = Logger("Application")
 
 @NSApplicationMain class Application: NSObject {
     
-    let documentWindowControllerFactory = DocumentWindowControllerFactory()
+    let documentWindowControllerFactory = DocumentWindowControllerFactory<CollectionDocumentViewModel>()
     let actionManager = ActionManagerMac()
     let importManager = ImportManager()
     let imageCache = NSImageCache()

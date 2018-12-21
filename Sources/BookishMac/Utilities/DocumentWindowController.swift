@@ -36,21 +36,29 @@ protocol DocumentViewModel {
  view hierarchy has been set up.
  */
 
-class DocumentWindowControllerFactory {
-    
-    private var documentBeingCreated: Any?
+class DocumentWindowControllerFactory<VM: DocumentViewModel> where VM.WindowController.ViewModel == VM {
+    private var modelBeingCreated: VM?
+    typealias FinishedLoadingCallback = (VM.WindowController) -> Void
+    private var callbacks = [FinishedLoadingCallback]()
 
-    func instantiateController<VM: DocumentViewModel>(for viewModel: VM, storyboard: String = "Main", identifier: String = "Document Window Controller") -> VM.WindowController where VM.WindowController.ViewModel == VM {
-        assert(documentBeingCreated == nil)
-        documentBeingCreated = viewModel
+    func instantiateController(for viewModel: VM, storyboard: String = "Main", identifier: String = "Document Window Controller") -> VM.WindowController {
+        assert(modelBeingCreated == nil)
+        modelBeingCreated = viewModel
         let storyboard = NSStoryboard(name: NSStoryboard.Name(storyboard), bundle: nil)
         var windowController = storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(identifier)) as! VM.WindowController
         windowController.viewModel = viewModel
-        documentBeingCreated = nil
+        for callback in callbacks {
+            callback(windowController)
+        }
+        modelBeingCreated = nil
         return windowController
     }
     
-    func connectViewModel<VM: DocumentViewModel>() -> VM {
-        return documentBeingCreated as! VM
+    var viewModel: VM {
+        return modelBeingCreated!
+    }
+    
+    func onFinishedLoading(callback: @escaping FinishedLoadingCallback) {
+        callbacks.append(callback)
     }
 }

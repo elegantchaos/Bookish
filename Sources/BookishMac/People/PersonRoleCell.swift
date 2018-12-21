@@ -10,7 +10,7 @@ class RelationshipCell: NSTableCellView, DetailTableCell {
     func setup(for view: DetailControllerBase, row: Int, item: NSManagedObject) {
                       if let role = item as? Role, let name = role.name {
             objectValue = item
-            textField?.stringValue = name
+            textField?.stringValue = "Books as \(name)"
             validateButtons()
         }
     }
