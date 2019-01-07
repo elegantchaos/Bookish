@@ -28,36 +28,8 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "Actions::ActionsKit"
-               BuildableName = "ActionsKit.framework"
-               BlueprintName = "ActionsKit"
-               ReferencedContainer = "container:Dependencies/BookishModel/Dependencies/Mac/BookishModelDependenciesMac.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "JSONDump::JSONDump"
-               BuildableName = "JSONDump.framework"
-               BlueprintName = "JSONDump"
-               ReferencedContainer = "container:Dependencies/BookishModel/Dependencies/Mac/BookishModelDependenciesMac.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
                BlueprintIdentifier = "22DD42432126D6DA0070C85A"
-               BuildableName = "BookishMac.app"
+               BuildableName = "Bookish.app"
                BlueprintName = "BookishMac"
                ReferencedContainer = "container:Bookish.xcodeproj">
             </BuildableReference>
@@ -107,7 +79,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "22DD42432126D6DA0070C85A"
-            BuildableName = "BookishMac.app"
+            BuildableName = "Bookish.app"
             BlueprintName = "BookishMac"
             ReferencedContainer = "container:Bookish.xcodeproj">
          </BuildableReference>
@@ -132,7 +104,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "22DD42432126D6DA0070C85A"
-            BuildableName = "BookishMac.app"
+            BuildableName = "Bookish.app"
             BlueprintName = "BookishMac"
             ReferencedContainer = "container:Bookish.xcodeproj">
          </BuildableReference>
@@ -169,7 +141,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "22DD42432126D6DA0070C85A"
-            BuildableName = "BookishMac.app"
+            BuildableName = "Bookish.app"
             BlueprintName = "BookishMac"
             ReferencedContainer = "container:Bookish.xcodeproj">
          </BuildableReference>

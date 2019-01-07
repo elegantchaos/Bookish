@@ -9,6 +9,7 @@ import Actions
 import ActionsKit
 import Logger
 import BookishCore
+import CloudKit
 
 let applicationChannel = Logger("Application")
 
@@ -62,10 +63,16 @@ let applicationChannel = Logger("Application")
         ValueTransformer.setValueTransformer(ImageTransformer(placeholder: "CoverPlaceholder", cache: imageCache), forName: NSValueTransformerName("CoverImage"))
         ValueTransformer.setValueTransformer(ImageTransformer(placeholder: "PersonPlaceholder", cache: imageCache), forName: NSValueTransformerName("PersonImage"))
     }
+    
+    fileprivate func setupCloudKit() {
+        let cloud = BookishCloud()
+        cloud.setup(name: "mac")
+    }
 }
 
 extension Application: NSApplicationDelegate {
     func applicationWillFinishLaunching(_ notification: Notification) {
+        setupCloudKit()
         setupActions()
         setupTransformers()
     }

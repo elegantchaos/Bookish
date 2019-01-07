@@ -4,7 +4,7 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 import XCTest
-@testable import BookishMobile
+@testable import Bookish
 
 class Bookish_iOSTests: XCTestCase {
 

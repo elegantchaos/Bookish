@@ -211,7 +211,7 @@
 		221ED4EA216785BB00594714 /* BookishMobile.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = BookishMobile.xcconfig; sourceTree = "<group>"; };
 		221ED511216B8EAB00594714 /* BookDetailRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailRow.swift; sourceTree = "<group>"; };
 		221F272821382C8E00DC2DC7 /* DateTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTransformer.swift; sourceTree = "<group>"; };
-		22429311212ADC4300E70510 /* BookishMobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BookishMobile.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		22429311212ADC4300E70510 /* Bookish.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bookish.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22429313212ADC4300E70510 /* Application.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
 		22429318212ADC4300E70510 /* BookIndexController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookIndexController.swift; sourceTree = "<group>"; };
 		2242931A212ADC4300E70510 /* BookDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailController.swift; sourceTree = "<group>"; };
@@ -287,7 +287,7 @@
 		22D39E6B2148167500282467 /* UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITests.swift; sourceTree = "<group>"; };
 		22DAF397217B52E6003CE28B /* ActionsKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ActionsKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		22DAF399217B5305003CE28B /* Logger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Logger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		22DD42442126D6DA0070C85A /* BookishMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BookishMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		22DD42442126D6DA0070C85A /* Bookish.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bookish.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22DD42472126D6DA0070C85A /* Application.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
 		22DD42492126D6DA0070C85A /* CollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
 		22DD424B2126D6DA0070C85A /* CollectionDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionDocument.swift; sourceTree = "<group>"; };
@@ -648,10 +648,10 @@
 		22DD42452126D6DA0070C85A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				22DD42442126D6DA0070C85A /* BookishMac.app */,
+				22DD42442126D6DA0070C85A /* Bookish.app */,
 				22DD425B2126D6DB0070C85A /* BookishTestsMac.xctest */,
 				22DD42662126D6DB0070C85A /* BookishUITestsMac.xctest */,
-				22429311212ADC4300E70510 /* BookishMobile.app */,
+				22429311212ADC4300E70510 /* Bookish.app */,
 				22429329212ADC4500E70510 /* BookishTestsMobile.xctest */,
 				22429334212ADC4500E70510 /* BookishUITestsMobile.xctest */,
 			);
@@ -779,7 +779,7 @@
 			);
 			name = BookishMobile;
 			productName = "Bookish iOS";
-			productReference = 22429311212ADC4300E70510 /* BookishMobile.app */;
+			productReference = 22429311212ADC4300E70510 /* Bookish.app */;
 			productType = "com.apple.product-type.application";
 		};
 		22429328212ADC4500E70510 /* BookishTestsMobile */ = {
@@ -834,7 +834,7 @@
 			);
 			name = BookishMac;
 			productName = Bookish;
-			productReference = 22DD42442126D6DA0070C85A /* BookishMac.app */;
+			productReference = 22DD42442126D6DA0070C85A /* Bookish.app */;
 			productType = "com.apple.product-type.application";
 		};
 		22DD425A2126D6DB0070C85A /* BookishTestsMac */ = {
@@ -886,6 +886,9 @@
 					22429310212ADC4300E70510 = {
 						CreatedOnToolsVersion = 10.0;
 						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
 							com.apple.Push = {
 								enabled = 1;
 							};
@@ -905,6 +908,9 @@
 					22DD42432126D6DA0070C85A = {
 						CreatedOnToolsVersion = 10.0;
 						SystemCapabilities = {
+							com.apple.ApplicationGroups.Mac = {
+								enabled = 0;
+							};
 							com.apple.Push = {
 								enabled = 1;
 							};
@@ -1259,8 +1265,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.elegantchaos.Bookish-iOS";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(BOOKISH_BUNDLE_ROOT).ios";
+				PRODUCT_NAME = "$(BOOKISH_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1287,8 +1293,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.elegantchaos.Bookish-iOS";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(BOOKISH_BUNDLE_ROOT).ios";
+				PRODUCT_NAME = "$(BOOKISH_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1317,7 +1323,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/${BOOKISH_MOBILE_NAME}.app/${BOOKISH_MOBILE_NAME}";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/${BOOKISH_NAME}.app/${BOOKISH_NAME}";
 			};
 			name = Debug;
 		};
@@ -1342,7 +1348,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/${BOOKISH_MOBILE_NAME}.app/${BOOKISH_MOBILE_NAME}";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/${BOOKISH_NAME}.app/${BOOKISH_NAME}";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -1367,7 +1373,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "${BOOKISH_MOBILE_NAME}";
+				TEST_TARGET_NAME = "${BOOKISH_NAME}";
 			};
 			name = Debug;
 		};
@@ -1391,7 +1397,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "${BOOKISH_MOBILE_NAME}";
+				TEST_TARGET_NAME = "${BOOKISH_NAME}";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -1529,8 +1535,8 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.elegantchaos.Bookish;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(BOOKISH_BUNDLE_ROOT).mac";
+				PRODUCT_NAME = "$(BOOKISH_NAME)";
 				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
@@ -1553,8 +1559,8 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.elegantchaos.Bookish;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(BOOKISH_BUNDLE_ROOT).mac";
+				PRODUCT_NAME = "$(BOOKISH_NAME)";
 				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
@@ -1577,7 +1583,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.elegantchaos.BookishTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/${BOOKISH_MAC_NAME}.app/Contents/MacOS/${BOOKISH_MAC_NAME}";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/${BOOKISH_NAME}.app/Contents/MacOS/${BOOKISH_NAME}";
 			};
 			name = Debug;
 		};
@@ -1599,7 +1605,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.elegantchaos.BookishTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/${BOOKISH_MAC_NAME}.app/Contents/MacOS/${BOOKISH_MAC_NAME}";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/${BOOKISH_NAME}.app/Contents/MacOS/${BOOKISH_NAME}";
 			};
 			name = Release;
 		};
@@ -1620,7 +1626,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.elegantchaos.BookishUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
-				TEST_TARGET_NAME = "${BOOKISH_MAC_NAME}";
+				TEST_TARGET_NAME = "${BOOKISH_NAME}";
 			};
 			name = Debug;
 		};
@@ -1641,7 +1647,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.elegantchaos.BookishUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
-				TEST_TARGET_NAME = "${BOOKISH_MAC_NAME}";
+				TEST_TARGET_NAME = "${BOOKISH_NAME}";
 			};
 			name = Release;
 		};

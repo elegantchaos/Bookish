@@ -21,15 +21,24 @@ class Application: UIResponder {
     @objc dynamic let viewModel = CollectionViewModel()
     var collectionController: CollectionController!
     lazy var collection: CollectionContainer = CollectionContainer.makeDefaultContainer(name: "Default")
+    
+    func setupActions() {
+        actionManager.register(ModelAction.standardActions())
+        actionManager.installResponder()
+    }
+    
+    func setupCloud() {
+        let cloud = BookishCloud()
+        cloud.setup(name: "mobile")
+    }
 }
 
 // MARK: Application Delegate Support
 
 extension Application: UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        actionManager.register(ModelAction.standardActions())
-        actionManager.installResponder()
-        
+        setupActions()
+        setupCloud()
         applicationChannel.log("did finish launching")
         return true
     }
