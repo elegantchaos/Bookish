@@ -69,6 +69,18 @@ class DeliciousLibraryImportSession: ImportSession {
                     book.isbn = trimmed
                 }
                 
+                if let height = record["boxHeightInInches"] as? Double, height > 0 {
+                    book.height = height
+                }
+
+                if let width = record["boxWidthInInches"] as? Double, width > 0 {
+                    book.width = width
+                }
+
+                if let length = record["boxLengthInInches"] as? Double, length > 0 {
+                    book.length = length
+                }
+
                 book.ean = record["ean"] as? String
                 book.asin = record["asin"] as? String
                 book.classification = record["deweyDecimal"] as? String
