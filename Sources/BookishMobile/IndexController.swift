@@ -136,7 +136,10 @@ class IndexController<DetailControllerType: DetailController<EntityType>, Entity
             try controller.performFetch()
             
             if (tableView.indexPathForSelectedRow == nil) && !splitViewController!.isCollapsed {
-                tableView.selectRow(at: IndexPath(row: 0, section: 0), animated: false, scrollPosition: .top)
+                DispatchQueue.main.async {
+                    self.tableView.selectRow(at: IndexPath(row: 0, section: 0), animated: false, scrollPosition: .top)
+                    self.performSegue(withIdentifier: "showDetail", sender: self)
+                }
             }
             
         } catch {
