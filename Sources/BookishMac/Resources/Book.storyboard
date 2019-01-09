@@ -10,7 +10,7 @@
         <!--Book Index View Controller-->
         <scene sceneID="LbK-bz-Udp">
             <objects>
-                <viewController storyboardIdentifier="Book.Index" id="cSd-7W-hzi" customClass="BookIndexViewController" customModule="BookishMac" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Book.Index" id="cSd-7W-hzi" customClass="BookIndexViewController" customModule="Bookish" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="JCM-bJ-k8z">
                         <rect key="frame" x="0.0" y="0.0" width="200" height="400"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -115,7 +115,7 @@
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="wjo-g4-R5T">
                                             <rect key="frame" x="18" y="4" width="164" height="14"/>
                                             <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" placeholderString="3 of 100" id="xfs-eb-Dec">
-                                                <font key="font" metaFont="system" size="11"/>
+                                                <font key="font" metaFont="smallSystem"/>
                                                 <color key="textColor" name="Bookish Index Text"/>
                                                 <color key="backgroundColor" name="Bookish Index"/>
                                             </textFieldCell>
@@ -154,9 +154,9 @@
                 <customObject id="Jsc-1E-0Rn" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <arrayController mode="entity" entityName="Book" preservesSelection="NO" id="gjv-NN-VkV">
                     <connections>
-                        <binding destination="cSd-7W-hzi" name="selectionIndexes" keyPath="self.cvm.selectedBooks" id="hfM-zy-Z5f"/>
-                        <binding destination="cSd-7W-hzi" name="managedObjectContext" keyPath="self.cvm.managedObjectContext" id="O9C-yN-jLQ"/>
                         <binding destination="cSd-7W-hzi" name="sortDescriptors" keyPath="self.cvm.bookSorting" previousBinding="hfM-zy-Z5f" id="NP8-8Y-QT5"/>
+                        <binding destination="cSd-7W-hzi" name="managedObjectContext" keyPath="self.cvm.managedObjectContext" id="O9C-yN-jLQ"/>
+                        <binding destination="cSd-7W-hzi" name="selectionIndexes" keyPath="self.cvm.selectedBooks" id="hfM-zy-Z5f"/>
                     </connections>
                 </arrayController>
             </objects>
@@ -165,7 +165,7 @@
         <!--Book Detail View Controller-->
         <scene sceneID="qGP-fN-0GX">
             <objects>
-                <viewController storyboardIdentifier="Book.Detail" id="TBH-Sa-Ff0" customClass="BookDetailViewController" customModule="BookishMac" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Book.Detail" id="TBH-Sa-Ff0" customClass="BookDetailViewController" customModule="Bookish" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="BXj-Jh-9Ye">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="400"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -250,7 +250,7 @@
                                                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                 </textFieldCell>
                                                                 <prototypeCellViews>
-                                                                    <tableCellView id="t2y-Xd-csP" customClass="BookHeadingCell" customModule="BookishMac" customModuleProvider="target">
+                                                                    <tableCellView id="t2y-Xd-csP" customClass="BookHeadingCell" customModule="Bookish" customModuleProvider="target">
                                                                         <rect key="frame" x="1" y="1" width="86" height="24"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
@@ -288,7 +288,7 @@
                                                                 </textFieldCell>
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES"/>
                                                                 <prototypeCellViews>
-                                                                    <tableCellView identifier="text" id="CTI-AS-fZR" userLabel="text" customClass="BookDetailCell" customModule="BookishMac" customModuleProvider="target">
+                                                                    <tableCellView identifier="text" id="CTI-AS-fZR" userLabel="text" customClass="BookDetailCell" customModule="Bookish" customModuleProvider="target">
                                                                         <rect key="frame" x="90" y="1" width="350" height="24"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
@@ -315,7 +315,7 @@
                                                                             <outlet property="textField" destination="u47-FK-V32" id="4Tf-cZ-vMJ"/>
                                                                         </connections>
                                                                     </tableCellView>
-                                                                    <tableCellView identifier="person" id="BkD-e8-vo5" userLabel="person" customClass="BookPersonCell" customModule="BookishMac" customModuleProvider="target">
+                                                                    <tableCellView identifier="person" id="BkD-e8-vo5" userLabel="person" customClass="BookPersonCell" customModule="Bookish" customModuleProvider="target">
                                                                         <rect key="frame" x="90" y="27" width="350" height="23"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
@@ -352,7 +352,7 @@
                                                                             <outlet property="personField" destination="Mqx-x5-EGd" id="cG7-Q6-lGG"/>
                                                                         </connections>
                                                                     </tableCellView>
-                                                                    <tableCellView identifier="editablePerson" id="Xqd-Mi-EGo" userLabel="person editable" customClass="BookEditablePersonCell" customModule="BookishMac" customModuleProvider="target">
+                                                                    <tableCellView identifier="editablePerson" id="Xqd-Mi-EGo" userLabel="person editable" customClass="BookEditablePersonCell" customModule="Bookish" customModuleProvider="target">
                                                                         <rect key="frame" x="90" y="52" width="350" height="23"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
@@ -386,7 +386,7 @@
                                                                                     <action selector="performAction:" target="dg1-Od-cPv" id="0rG-5U-34g"/>
                                                                                 </connections>
                                                                             </button>
-                                                                            <comboBox verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="up0-NK-LzO" customClass="AnnotatedComboBox" customModule="BookishMac" customModuleProvider="target">
+                                                                            <comboBox verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="up0-NK-LzO" customClass="AnnotatedComboBox" customModule="Bookish" customModuleProvider="target">
                                                                                 <rect key="frame" x="2" y="-2" width="300" height="23"/>
                                                                                 <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" title="Person" numberOfVisibleItems="5" id="x93-id-LgP">
                                                                                     <font key="font" metaFont="system" size="14"/>
@@ -423,7 +423,7 @@
                                                                             <outlet property="removeButton" destination="uZJ-ZI-bfH" id="cHS-aQ-oaH"/>
                                                                         </connections>
                                                                     </tableCellView>
-                                                                    <tableCellView identifier="publisher" id="efO-r1-NRc" userLabel="publisher" customClass="BookPublisherCell" customModule="BookishMac" customModuleProvider="target">
+                                                                    <tableCellView identifier="publisher" id="efO-r1-NRc" userLabel="publisher" customClass="BookPublisherCell" customModule="Bookish" customModuleProvider="target">
                                                                         <rect key="frame" x="90" y="77" width="350" height="23"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
@@ -460,7 +460,7 @@
                                                                             <outlet property="publisherField" destination="ykz-Tv-Hz6" id="MxR-Gn-pNX"/>
                                                                         </connections>
                                                                     </tableCellView>
-                                                                    <tableCellView identifier="date" id="DyG-Q7-Wwd" userLabel="date" customClass="BookDateCell" customModule="BookishMac" customModuleProvider="target">
+                                                                    <tableCellView identifier="date" id="DyG-Q7-Wwd" userLabel="date" customClass="BookDateCell" customModule="Bookish" customModuleProvider="target">
                                                                         <rect key="frame" x="90" y="102" width="350" height="24"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
@@ -487,11 +487,11 @@
                                                                             <outlet property="textField" destination="ZVF-Ib-kQh" id="buw-hh-9zp"/>
                                                                         </connections>
                                                                     </tableCellView>
-                                                                    <tableCellView identifier="editableDate" id="7Lf-1O-gT0" userLabel="date editable" customClass="BookEditableDateCell" customModule="BookishMac" customModuleProvider="target">
+                                                                    <tableCellView identifier="editableDate" id="7Lf-1O-gT0" userLabel="date editable" customClass="BookEditableDateCell" customModule="Bookish" customModuleProvider="target">
                                                                         <rect key="frame" x="90" y="128" width="350" height="24"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
-                                                                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="lhg-Qc-OrU" customClass="AnnotatedTextField" customModule="BookishMac" customModuleProvider="target">
+                                                                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="lhg-Qc-OrU" customClass="AnnotatedTextField" customModule="Bookish" customModuleProvider="target">
                                                                                 <rect key="frame" x="2" y="2" width="327" height="18"/>
                                                                                 <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" continuous="YES" alignment="left" placeholderString="value" usesSingleLineMode="YES" id="wUa-s6-Ue7">
                                                                                     <font key="font" metaFont="systemBold" size="14"/>
@@ -527,7 +527,7 @@
                                                                             <outlet property="textField" destination="lhg-Qc-OrU" id="9Wf-gl-Qiw"/>
                                                                         </connections>
                                                                     </tableCellView>
-                                                                    <tableCellView identifier="editableDimensions" id="GRN-RI-c8z" userLabel="dimensions" customClass="BookDimensionsCell" customModule="BookishMac" customModuleProvider="target">
+                                                                    <tableCellView identifier="editableDimensions" id="GRN-RI-c8z" userLabel="dimensions" customClass="BookDimensionsCell" customModule="Bookish" customModuleProvider="target">
                                                                         <rect key="frame" x="90" y="154" width="350" height="24"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
@@ -635,7 +635,7 @@
                                                                             <outlet property="widthField" destination="3v3-p9-bdK" id="3Jl-ne-ENN"/>
                                                                         </connections>
                                                                     </tableCellView>
-                                                                    <tableCellView identifier="series" id="Biy-Ug-fg1" userLabel="series" customClass="BookSeriesCell" customModule="BookishMac" customModuleProvider="target">
+                                                                    <tableCellView identifier="series" id="Biy-Ug-fg1" userLabel="series" customClass="BookSeriesCell" customModule="Bookish" customModuleProvider="target">
                                                                         <rect key="frame" x="90" y="180" width="350" height="24"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
@@ -788,7 +788,7 @@
     </scenes>
     <resources>
         <image name="ChooseDateSmall" width="12" height="12"/>
-        <image name="CoverPlaceholder" width="512" height="512"/>
+        <image name="CoverPlaceholder" width="64" height="64"/>
         <image name="Minus" width="12" height="12"/>
         <image name="NSAddTemplate" width="11" height="11"/>
         <image name="Plus" width="12" height="12"/>

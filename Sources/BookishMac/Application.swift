@@ -60,8 +60,6 @@ let applicationChannel = Logger("Application")
         ValueTransformer.setValueTransformer(AuthorsTransformer(), forName: AuthorsTransformer.name)
         ValueTransformer.setValueTransformer(AuthorSelectionTransformer(), forName: AuthorSelectionTransformer.name)
         ValueTransformer.setValueTransformer(DateTransformer(), forName: DateTransformer.name)
-        ValueTransformer.setValueTransformer(ImageTransformer(placeholder: "CoverPlaceholder", cache: imageCache), forName: NSValueTransformerName("CoverImage"))
-        ValueTransformer.setValueTransformer(ImageTransformer(placeholder: "PersonPlaceholder", cache: imageCache), forName: NSValueTransformerName("PersonImage"))
     }
     
     fileprivate func setupCloudKit() {

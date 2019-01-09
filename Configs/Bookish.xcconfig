@@ -1,6 +1,7 @@
 BOOKISH_ENTITLEMENTS_PATH = Sources/${TARGET_NAME}/Resources/Bookish.entitlements
 BOOKISH_INFO_PATH = Sources/${TARGET_NAME}/Resources/Info.plist
 BOOKISH_TEST_INFO_PATH = Tests/${TARGET_NAME}/Info.plist
+BOOKISH_BRIDGING_HEADER_PATH = Sources/BookishCommon/BookishBridge.h
 
 BOOKISH_TEAM = 2H48644JM2
 
