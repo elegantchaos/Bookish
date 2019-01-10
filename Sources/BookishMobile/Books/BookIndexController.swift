@@ -5,6 +5,7 @@
 
 import BookishModel
 import Actions
+import UIKit
 
 class BookIndexController: IndexController<BookDetailController, Book> {
      override func provide(context: ActionContext) {

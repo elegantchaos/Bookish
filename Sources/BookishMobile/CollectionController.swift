@@ -17,8 +17,7 @@ class CollectionController: UITabBarController {
         indices.forEach { $0.reset() }
         
         application.collection.delete()
-        application.collection = CollectionContainer(name: "Default")
-        application.collection.load(usingSample: usingSample, reset: true)
+        application.collection = application.setupCollection(usingSample: usingSample)
         
         indices.forEach { $0.reload() }
     }
@@ -52,10 +51,9 @@ class CollectionController: UITabBarController {
 
     func reveal<EntityType: NSManagedObject>(_ object: EntityType, mode: CollectionViewModel.Mode) {
         application.viewModel.mode = mode
-        if let name = EntityType.entity().name {
-            if let index = indexControllers[name] as? EntityIndex {
-                index.select(object: object)
-            }
+        let name = String(describing: EntityType.self)
+        if let index = indexControllers[name] as? EntityIndex {
+            index.select(object: object)
         }
     }
 }

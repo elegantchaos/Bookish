@@ -19,7 +19,7 @@ let applicationChannel = Logger("Application")
     let actionManager = ActionManagerMac()
     let importManager = ImportManager()
     let imageCache = NSImageCache()
-    
+    let cloud = BookishCloud()
     let uiTesting = CommandLine.arguments.contains("--ui-testing")
     var testDocument = CommandLine.arguments.contains("--test-document")
     let noBlankDocument = CommandLine.arguments.contains("--no-blank-document")
@@ -63,7 +63,6 @@ let applicationChannel = Logger("Application")
     }
     
     fileprivate func setupCloudKit() {
-        let cloud = BookishCloud()
         cloud.setup(name: "mac")
     }
 }

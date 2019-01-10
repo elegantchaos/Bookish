@@ -17,7 +17,7 @@ protocol EntityIndex {
 
 let indexViewChannel = Logger("IndexView")
 
-class IndexController<DetailControllerType: DetailController<EntityType>, EntityType: NSManagedObject>: UITableViewController, NSFetchedResultsControllerDelegate, ActionContextProvider, EntityIndex {
+class IndexController<DetailControllerType: DetailController<EntityType>, EntityType: ModelObject>: UITableViewController, NSFetchedResultsControllerDelegate, ActionContextProvider, EntityIndex {
     var entityName = "\(EntityType.self)"
     var detailController: DetailControllerType? = nil
     var modelContext: NSManagedObjectContext? = nil
@@ -29,7 +29,7 @@ class IndexController<DetailControllerType: DetailController<EntityType>, Entity
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        modelContext = application.collection.viewContext
+        modelContext = application.collection.managedObjectContext
         application.collectionController.indexControllers[entityName] = self
         
         navigationItem.leftBarButtonItem = editButtonItem
@@ -50,7 +50,7 @@ class IndexController<DetailControllerType: DetailController<EntityType>, Entity
     }
     
     func reload() {
-        modelContext = application.collection.viewContext
+        modelContext = application.collection.managedObjectContext
         fetcher = makeFetcher()
         indexTable.reloadData()
     }
@@ -125,29 +125,38 @@ class IndexController<DetailControllerType: DetailController<EntityType>, Entity
 
 
     func makeFetcher() -> NSFetchedResultsController<EntityType> {
-        let request: NSFetchRequest<EntityType> = EntityType.fetchRequest() as! NSFetchRequest<EntityType>
+        guard let context = modelContext else {
+            indexViewChannel.fatal("missing context")
+        }
+        
+        let request: NSFetchRequest<EntityType> = EntityType.fetcher(in: context)
         request.fetchBatchSize = 20
         request.sortDescriptors = application.viewModel.bookIndexSorting
         
-        let controller = NSFetchedResultsController(fetchRequest: request, managedObjectContext: modelContext!, sectionNameKeyPath: "sectionName", cacheName: entityName)
+        let controller = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: "sectionName", cacheName: entityName)
         controller.delegate = self
         
         do {
             try controller.performFetch()
-            
-            if (tableView.indexPathForSelectedRow == nil) && !splitViewController!.isCollapsed {
-                DispatchQueue.main.async {
-                    self.tableView.selectRow(at: IndexPath(row: 0, section: 0), animated: false, scrollPosition: .top)
-                    self.performSegue(withIdentifier: "showDetail", sender: self)
-                }
+            DispatchQueue.main.async {
+                self.selectIfNecessary()
             }
             
         } catch {
             let nserror = error as NSError
-            indexViewChannel.fatal("Unresolved error \(nserror), \(nserror.userInfo)")
+            indexViewChannel.fatal("couldn't make fetch controller \(nserror), \(nserror.userInfo)")
         }
         
         return controller
+    }
+    
+    func selectIfNecessary() {
+        if (tableView.indexPathForSelectedRow == nil) && !splitViewController!.isCollapsed {
+            if self.numberOfSections(in: self.tableView) > 0 {
+                self.tableView.selectRow(at: IndexPath(row: 0, section: 0), animated: false, scrollPosition: .top)
+                self.performSegue(withIdentifier: "showDetail", sender: self)
+            }
+        }
     }
     
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {

@@ -4,6 +4,7 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 import BookishModel
+import UIKit
 
 class SeriesIndexController: IndexController<SeriesDetailController, Series> {
     override func configureCell(_ cell: UITableViewCell, with series: Series) {

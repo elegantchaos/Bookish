@@ -5,6 +5,7 @@
 
 import BookishModel
 import Actions
+import UIKit
 
 class SeriesBookRow: UITableViewCell, ActionContextProvider {
     @IBOutlet weak var bookButton: UIButton!

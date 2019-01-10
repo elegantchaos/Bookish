@@ -8,6 +8,8 @@ import AppKit
 import BookishModel
 
 class CollectionDocument: NSPersistentDocument {
+    let collection = SyncedCollection(identifier: Application.sharedInstance.cloud.collectionIdentifier)
+    
     override open var managedObjectModel: NSManagedObjectModel {
         return BookishModel.loadModel()
     }
@@ -18,19 +20,25 @@ class CollectionDocument: NSPersistentDocument {
 
     override init() {
         super.init()
-        let _ = replaceContext()
+        managedObjectContext = collection.managedObjectContext
     }
     
     init(type typeName: String) throws {
         super.init()
         
-        let context = replaceContext()
+        let context = collection.managedObjectContext
+        managedObjectContext = context
         makeDefaultRoles(context: context)
         
         if Application.sharedInstance.testDocument {
-            Collection.setupTestDocument(context: context)
+            BookishCollection.setupTestDocument(context: context)
         }
         Application.sharedInstance.testDocument = false
+    }
+
+    override func configurePersistentStoreCoordinator(for url: URL, ofType fileType: String, modelConfiguration configuration: String?, storeOptions: [String : Any]? = nil) throws {
+        collection.configure(for: url, ofType: fileType, modelConfiguration: configuration, storeOptions: storeOptions)
+        try super.configurePersistentStoreCoordinator(for: url, ofType: fileType, modelConfiguration: configuration, storeOptions: storeOptions)
     }
     
     func replaceContext() -> NSManagedObjectContext {

@@ -5,6 +5,7 @@
 
 import Actions
 import BookishModel
+import UIKit
 
 class BookSeriesRow: BookDetailRow {
     @IBOutlet var seriesButton: UIButton!

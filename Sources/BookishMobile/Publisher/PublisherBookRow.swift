@@ -5,6 +5,7 @@
 
 import BookishModel
 import Actions
+import UIKit
 
 class PublisherBookRow: UITableViewCell, ActionContextProvider {
     @IBOutlet weak var bookButton: UIButton!

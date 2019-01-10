@@ -85,8 +85,8 @@
 		22D39E6D214816C400282467 /* UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D39E6B2148167500282467 /* UITests.swift */; };
 		22DA6A4121E6525400ECF09A /* CDECloudKitFileSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = 22DA6A4021E6525400ECF09A /* CDECloudKitFileSystem.m */; };
 		22DA6A4221E6525400ECF09A /* CDECloudKitFileSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = 22DA6A4021E6525400ECF09A /* CDECloudKitFileSystem.m */; };
-		22DA6A4721E653F400ECF09A /* BookishSynchroniser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DA6A4621E653F400ECF09A /* BookishSynchroniser.swift */; };
-		22DA6A4821E653F400ECF09A /* BookishSynchroniser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DA6A4621E653F400ECF09A /* BookishSynchroniser.swift */; };
+		22DA6A4721E653F400ECF09A /* SyncedCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DA6A4621E653F400ECF09A /* SyncedCollection.swift */; };
+		22DA6A4821E653F400ECF09A /* SyncedCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DA6A4621E653F400ECF09A /* SyncedCollection.swift */; };
 		22DAF398217B52E6003CE28B /* ActionsKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22DAF397217B52E6003CE28B /* ActionsKit.framework */; };
 		22DAF39A217B5305003CE28B /* Logger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22DAF399217B5305003CE28B /* Logger.framework */; };
 		22DD42482126D6DA0070C85A /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DD42472126D6DA0070C85A /* Application.swift */; };
@@ -282,7 +282,7 @@
 		22DA6A3F21E6525300ECF09A /* CDECloudKitFileSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDECloudKitFileSystem.h; path = "Dependencies/Ensembles2/Source Code/Ensembles/Framework/Extensions/CDECloudKitFileSystem.h"; sourceTree = SOURCE_ROOT; };
 		22DA6A4021E6525400ECF09A /* CDECloudKitFileSystem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CDECloudKitFileSystem.m; path = "Dependencies/Ensembles2/Source Code/Ensembles/Framework/Extensions/CDECloudKitFileSystem.m"; sourceTree = SOURCE_ROOT; };
 		22DA6A4521E6531100ECF09A /* BookishBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookishBridge.h; sourceTree = "<group>"; };
-		22DA6A4621E653F400ECF09A /* BookishSynchroniser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookishSynchroniser.swift; sourceTree = "<group>"; };
+		22DA6A4621E653F400ECF09A /* SyncedCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncedCollection.swift; sourceTree = "<group>"; };
 		22DAF397217B52E6003CE28B /* ActionsKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ActionsKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		22DAF399217B5305003CE28B /* Logger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Logger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		22DD42442126D6DA0070C85A /* Bookish.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bookish.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -629,7 +629,7 @@
 			isa = PBXGroup;
 			children = (
 				22DA6A4521E6531100ECF09A /* BookishBridge.h */,
-				22DA6A4621E653F400ECF09A /* BookishSynchroniser.swift */,
+				22DA6A4621E653F400ECF09A /* SyncedCollection.swift */,
 			);
 			path = BookishCommon;
 			sourceTree = "<group>";
@@ -1087,7 +1087,7 @@
 				22D1B239218079C60062F2CB /* CollectionViewModel.swift in Sources */,
 				22C2194C21AF24E5002FC0FE /* ToggleEditingAction.swift in Sources */,
 				22F1803121C82D8E00220D20 /* DetailController.swift in Sources */,
-				22DA6A4821E653F400ECF09A /* BookishSynchroniser.swift in Sources */,
+				22DA6A4821E653F400ECF09A /* SyncedCollection.swift in Sources */,
 				22F1802721C810CC00220D20 /* PublisherDetailController.swift in Sources */,
 				22F1802921C810D400220D20 /* SeriesDetailController.swift in Sources */,
 				22D1B231217E0D780062F2CB /* BookDateRow.swift in Sources */,
@@ -1176,7 +1176,7 @@
 				22429403212C3C7400E70510 /* ViewExtensions.swift in Sources */,
 				224293FB212C1D7500E70510 /* BookIndexViewController.swift in Sources */,
 				22D39E592146BA9C00282467 /* ShowDatePickerAction.swift in Sources */,
-				22DA6A4721E653F400ECF09A /* BookishSynchroniser.swift in Sources */,
+				22DA6A4721E653F400ECF09A /* SyncedCollection.swift in Sources */,
 				226E8E6D21AC38D5001F191F /* BookHeadingCell.swift in Sources */,
 				22D39E512142DB2700282467 /* ViewBasedToolbarItem.swift in Sources */,
 				226E8E6B21AC0918001F191F /* AnnotatedComboBox.swift in Sources */,

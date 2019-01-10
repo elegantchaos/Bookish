@@ -18,9 +18,19 @@ class Application: UIResponder {
     var window: UIWindow? // required for storyboard support
     let actionManager = ActionManagerMobile()
     let imageCache = UIImageCache()
+    let cloud = BookishCloud()
     @objc dynamic let viewModel = CollectionViewModel()
     var collectionController: CollectionController!
-    lazy var collection: CollectionContainer = CollectionContainer.makeDefaultContainer(name: "Default")
+    lazy var collection: SyncedCollection = setupCollection(usingSample: true)
+    
+    func setupCollection(usingSample: Bool = false) -> SyncedCollection {
+        let collection = SyncedCollection(identifier: cloud.collectionIdentifier)
+        if let container = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first {
+            let url = container.appendingPathComponent("Default")
+            collection.load(url: url, usingSample: usingSample)
+        }
+        return collection
+    }
     
     func setupActions() {
         actionManager.register(ModelAction.standardActions())
@@ -82,7 +92,7 @@ extension Application: ActionContextProvider {
     }
     
     func provide(context: ActionContext) {
-        context.info[ActionContext.modelKey] = collection.viewContext
+        context.info[ActionContext.modelKey] = collection.managedObjectContext
         context.info[ActionContext.viewModelKey] = viewModel
         context.info[ActionContext.rootKey] = collectionController
     }

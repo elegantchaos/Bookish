@@ -4,6 +4,7 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 import BookishModel
+import UIKit
 
 class PublisherIndexController: IndexController<PublisherDetailController, Publisher> {
      

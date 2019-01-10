@@ -14,6 +14,20 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
+               BlueprintIdentifier = "E9D630191BFEB26300B60D60"
+               BuildableName = "Ensembles.framework"
+               BlueprintName = "Ensembles iOS Module"
+               ReferencedContainer = "container:Dependencies/Ensembles2/Source Code/Ensembles/Framework/Ensembles iOS.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
                BlueprintIdentifier = "224293B2212AE16200E70510"
                BuildableName = "BookishModel.framework"
                BlueprintName = "BookishModelMobile"
