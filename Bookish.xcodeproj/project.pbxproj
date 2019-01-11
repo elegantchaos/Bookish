@@ -283,6 +283,7 @@
 		22DA6A4021E6525400ECF09A /* CDECloudKitFileSystem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CDECloudKitFileSystem.m; path = "Dependencies/Ensembles2/Source Code/Ensembles/Framework/Extensions/CDECloudKitFileSystem.m"; sourceTree = SOURCE_ROOT; };
 		22DA6A4521E6531100ECF09A /* BookishBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookishBridge.h; sourceTree = "<group>"; };
 		22DA6A4621E653F400ECF09A /* SyncedCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncedCollection.swift; sourceTree = "<group>"; };
+		22DA6A5321E8C76700ECF09A /* Notes.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = Notes.md; path = Extras/Notes.md; sourceTree = "<group>"; };
 		22DAF397217B52E6003CE28B /* ActionsKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ActionsKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		22DAF399217B5305003CE28B /* Logger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Logger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		22DD42442126D6DA0070C85A /* Bookish.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bookish.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -639,6 +640,7 @@
 			children = (
 				221ED4EE21678BF200594714 /* Configs */,
 				2296032B214132840020B3EB /* Bookish.sketch */,
+				22DA6A5321E8C76700ECF09A /* Notes.md */,
 				2296033021416F960020B3EB /* Package.swift */,
 				22DD42462126D6DA0070C85A /* Sources */,
 				22DD42782126DD3A0070C85A /* Tests */,

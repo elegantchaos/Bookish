@@ -16,4 +16,7 @@
    <FileRef
       location = "group:Dependencies/Ensembles2/Source Code/Ensembles/Framework/Ensembles Mac.xcodeproj">
    </FileRef>
+   <FileRef
+      location = "group:Extras">
+   </FileRef>
 </Workspace>
