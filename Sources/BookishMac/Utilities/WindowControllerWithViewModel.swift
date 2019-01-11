@@ -12,8 +12,8 @@ import AppKit
  the model, but which isn't strictly part of the model.
  */
 
-protocol DocumentWindowController {
-    associatedtype ViewModel: DocumentViewModel
+protocol WindowControllerWithViewModel {
+    associatedtype ViewModel: WindowControllerViewModel
     var viewModel: ViewModel? { get set }    
 }
 
@@ -22,8 +22,8 @@ protocol DocumentWindowController {
  the model, but which isn't strictly part of the model.
  */
 
-protocol DocumentViewModel {
-    associatedtype WindowController: DocumentWindowController
+protocol WindowControllerViewModel {
+    associatedtype WindowController: WindowControllerWithViewModel
 }
 
 /**
@@ -36,7 +36,7 @@ protocol DocumentViewModel {
  view hierarchy has been set up.
  */
 
-class DocumentWindowControllerFactory<VM: DocumentViewModel> where VM.WindowController.ViewModel == VM {
+class WindowControllerFactory<VM: WindowControllerViewModel> where VM.WindowController.ViewModel == VM {
     private var modelBeingCreated: VM?
     typealias FinishedLoadingCallback = (VM.WindowController) -> Void
     private var callbacks = [FinishedLoadingCallback]()

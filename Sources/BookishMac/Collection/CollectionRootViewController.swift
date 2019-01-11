@@ -23,7 +23,7 @@ class CollectionRootViewController: CollectionViewController {
             }
         }
         
-        observer = cvm.observe(\CollectionDocumentViewModel.modeIndex) { (cvm, change) in
+        observer = cvm.observe(\CollectionViewModel.modeIndex) { (cvm, change) in
             self.setMarker(to: cvm.modeIndex)
         }
         

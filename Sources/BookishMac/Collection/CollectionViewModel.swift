@@ -8,7 +8,7 @@ import CoreData
 import ActionsKit
 import BookishModel
 
-@objc class CollectionDocumentViewModel: NSObject, DocumentViewModel {
+@objc class CollectionViewModel: NSObject, WindowControllerViewModel {
     enum Mode: Int {
         case books = 0
         case people = 1
@@ -22,10 +22,11 @@ import BookishModel
         }
     }
     
+    let collection: SyncedCollection
+    
     typealias WindowController = CollectionWindowController
     typealias Owner = CollectionViewController
     
-    @objc let document: CollectionDocument
     @objc let managedObjectContext: NSManagedObjectContext
     @objc var bookIndex: NSArrayController?
     
@@ -54,9 +55,9 @@ import BookishModel
         set (value) { modeIndex = value.rawValue }
     }
     
-    init(document: CollectionDocument) {
-        self.document = document
-        self.managedObjectContext = document.managedObjectContext!
+    init(collection: SyncedCollection) {
+        self.collection = collection
+        self.managedObjectContext = collection.managedObjectContext
     }
     
     func addRelationshipItem(kind: String, shortcut: String) -> NSMenuItem {

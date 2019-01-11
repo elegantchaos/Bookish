@@ -22,7 +22,7 @@ class FillRelationshipMenuAction: RelationshipUIAction {
             return false
         }
         
-        if let item = context.sender as? NSMenuItem, let viewModel = context.info[ActionContext.viewModelKey] as? CollectionDocumentViewModel {
+        if let item = context.sender as? NSMenuItem, let viewModel = context.info[ActionContext.viewModelKey] as? CollectionViewModel {
             item.submenu = viewModel.addRelationshipMenu
             return true
         }
@@ -35,7 +35,7 @@ class FillRelationshipMenuAction: RelationshipUIAction {
 
 class ShowAddRelationshipMenuAction: RelationshipUIAction {
     open override func perform(context: ActionContext, completed: @escaping Completion) {
-        if let event = NSApplication.shared.currentEvent, let viewModel = context.info[ActionContext.viewModelKey] as? CollectionDocumentViewModel {
+        if let event = NSApplication.shared.currentEvent, let viewModel = context.info[ActionContext.viewModelKey] as? CollectionViewModel {
             var view = context.sender as? NSView
             if view == nil {
                 view = (context.sender as? NSToolbarItem)?.view

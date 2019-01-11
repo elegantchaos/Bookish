@@ -6,12 +6,11 @@
 import AppKit
 
 class CollectionIndexViewController: NSTabViewController {
-    typealias ViewModel = CollectionDocumentViewModel
     @IBOutlet weak var detailView: CollectionDetailViewController?
-    @objc let cvm: CollectionDocumentViewModel
+    @objc let cvm: CollectionViewModel
     
     required init?(coder: NSCoder) {
-        self.cvm = Application.sharedInstance.documentWindowControllerFactory.viewModel
+        self.cvm = Application.sharedInstance.windowControllerFactory.viewModel
         super.init(coder: coder)
     }
     

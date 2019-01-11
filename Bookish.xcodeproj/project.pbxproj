@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		220CDA9F214A86A80064CC91 /* PersonIndexViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220CDA9E214A86A80064CC91 /* PersonIndexViewController.swift */; };
 		220CDAA1214A8D510064CC91 /* PersonDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220CDAA0214A8D510064CC91 /* PersonDetailViewController.swift */; };
-		22143FCD212EE79100B689DF /* CollectionDocumentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22143FCC212EE79100B689DF /* CollectionDocumentViewModel.swift */; };
-		22143FCF212EF9CC00B689DF /* DocumentWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22143FCE212EF9CC00B689DF /* DocumentWindowController.swift */; };
+		22143FCD212EE79100B689DF /* CollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22143FCC212EE79100B689DF /* CollectionViewModel.swift */; };
+		22143FCF212EF9CC00B689DF /* WindowControllerWithViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22143FCE212EF9CC00B689DF /* WindowControllerWithViewModel.swift */; };
 		22143FD1212F076000B689DF /* CollectionRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22143FD0212F076000B689DF /* CollectionRootViewController.swift */; };
 		22143FD3212F0F2500B689DF /* AuthorsTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22143FD2212F0F2500B689DF /* AuthorsTransformer.swift */; };
 		22143FD521300F9300B689DF /* CoreDataTransformers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22143FD421300F9300B689DF /* CoreDataTransformers.swift */; };
@@ -91,7 +91,6 @@
 		22DAF39A217B5305003CE28B /* Logger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22DAF399217B5305003CE28B /* Logger.framework */; };
 		22DD42482126D6DA0070C85A /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DD42472126D6DA0070C85A /* Application.swift */; };
 		22DD424A2126D6DA0070C85A /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DD42492126D6DA0070C85A /* CollectionViewController.swift */; };
-		22DD424C2126D6DA0070C85A /* CollectionDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DD424B2126D6DA0070C85A /* CollectionDocument.swift */; };
 		22DD42542126D6DB0070C85A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22DD42522126D6DB0070C85A /* Main.storyboard */; };
 		22DD42602126D6DB0070C85A /* BookishTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DD425F2126D6DB0070C85A /* BookishTests.swift */; };
 		22DD426B2126D6DB0070C85A /* BookishUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DD426A2126D6DB0070C85A /* BookishUITests.swift */; };
@@ -198,8 +197,8 @@
 /* Begin PBXFileReference section */
 		220CDA9E214A86A80064CC91 /* PersonIndexViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonIndexViewController.swift; sourceTree = "<group>"; };
 		220CDAA0214A8D510064CC91 /* PersonDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonDetailViewController.swift; sourceTree = "<group>"; };
-		22143FCC212EE79100B689DF /* CollectionDocumentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionDocumentViewModel.swift; sourceTree = "<group>"; };
-		22143FCE212EF9CC00B689DF /* DocumentWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentWindowController.swift; sourceTree = "<group>"; };
+		22143FCC212EE79100B689DF /* CollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewModel.swift; sourceTree = "<group>"; };
+		22143FCE212EF9CC00B689DF /* WindowControllerWithViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowControllerWithViewModel.swift; sourceTree = "<group>"; };
 		22143FD0212F076000B689DF /* CollectionRootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionRootViewController.swift; sourceTree = "<group>"; };
 		22143FD2212F0F2500B689DF /* AuthorsTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorsTransformer.swift; sourceTree = "<group>"; };
 		22143FD421300F9300B689DF /* CoreDataTransformers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataTransformers.swift; sourceTree = "<group>"; };
@@ -416,7 +415,7 @@
 				226E8E6A21AC0918001F191F /* AnnotatedComboBox.swift */,
 				22143FD421300F9300B689DF /* CoreDataTransformers.swift */,
 				22D39E5A2146BE4900282467 /* DatePickerPopoverController.swift */,
-				22143FCE212EF9CC00B689DF /* DocumentWindowController.swift */,
+				22143FCE212EF9CC00B689DF /* WindowControllerWithViewModel.swift */,
 				22D39E502142DB2700282467 /* ViewBasedToolbarItem.swift */,
 				22429402212C3C7400E70510 /* ViewExtensions.swift */,
 				22F1844F21CC10FF00220D20 /* ArrayControllerExtensions.swift */,
@@ -587,7 +586,7 @@
 				22462E922158ED5000A4C56C /* CollectionIndexViewController.swift */,
 				22462E942158EDEA00A4C56C /* CollectionDetailViewController.swift */,
 				22DD424B2126D6DA0070C85A /* CollectionDocument.swift */,
-				22143FCC212EE79100B689DF /* CollectionDocumentViewModel.swift */,
+				22143FCC212EE79100B689DF /* CollectionViewModel.swift */,
 			);
 			path = Collection;
 			sourceTree = "<group>";
@@ -1141,15 +1140,14 @@
 				228968472191F48400B80A93 /* AuthorSelectionTransformer.swift in Sources */,
 				22DE6AE72188A8DC0078D489 /* WhiteSearchFieldCell.swift in Sources */,
 				22143FD3212F0F2500B689DF /* AuthorsTransformer.swift in Sources */,
-				22143FCF212EF9CC00B689DF /* DocumentWindowController.swift in Sources */,
+				22143FCF212EF9CC00B689DF /* WindowControllerWithViewModel.swift in Sources */,
 				22462E952158EDEA00A4C56C /* CollectionDetailViewController.swift in Sources */,
 				227F451821835814000D8B8D /* Importer.swift in Sources */,
 				22DA6A4121E6525400ECF09A /* CDECloudKitFileSystem.m in Sources */,
 				221C4B35216BAAAC0086D56F /* RelationshipUIActions.swift in Sources */,
-				22DD424C2126D6DA0070C85A /* CollectionDocument.swift in Sources */,
 				226E8E6F21AC3D6A001F191F /* BookEditablePersonCell.swift in Sources */,
 				2250C71621B7E01A00E899E2 /* SeriesScanner.swift in Sources */,
-				22143FCD212EE79100B689DF /* CollectionDocumentViewModel.swift in Sources */,
+				22143FCD212EE79100B689DF /* CollectionViewModel.swift in Sources */,
 				22F1844E21CBF9B600220D20 /* DetailController.swift in Sources */,
 				22C2194B21AF24E5002FC0FE /* ToggleEditingAction.swift in Sources */,
 				22960328214025E80020B3EB /* BookPersonCell.swift in Sources */,

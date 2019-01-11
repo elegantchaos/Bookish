@@ -6,14 +6,12 @@
 import Cocoa
 
 class CollectionViewController: NSViewController {
-    typealias ViewModel = CollectionDocumentViewModel
-    
-    @objc let cvm: CollectionDocumentViewModel
+    @objc let cvm: CollectionViewModel
     
     required init?(coder: NSCoder) {
-        self.cvm = Application.sharedInstance.documentWindowControllerFactory.viewModel
+        self.cvm = Application.sharedInstance.viewModel
         super.init(coder: coder)
-        Application.sharedInstance.documentWindowControllerFactory.onFinishedLoading(callback: { (windowController) in
+        Application.sharedInstance.windowControllerFactory.onFinishedLoading(callback: { (windowController) in
             self.windowDidLoad(windowController)
         })
     }
@@ -22,11 +20,11 @@ class CollectionViewController: NSViewController {
         
     }
     
-    @objc var document: CollectionDocument? {
-        get {
-            return cvm.document
-        }
-    }
+//    @objc var document: CollectionDocument? {
+//        get {
+//            return cvm.document
+//        }
+//    }
     
     override func viewWillAppear() {
         super.viewWillAppear()

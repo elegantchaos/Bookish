@@ -8,10 +8,10 @@ import AppKit
 import BookishModel
 
 class CollectionDocument: NSPersistentDocument {
-    let collection = SyncedCollection(identifier: Application.sharedInstance.cloud.collectionIdentifier)
+    var collection: SyncedCollection!
     
     override open var managedObjectModel: NSManagedObjectModel {
-        return BookishModel.loadModel()
+        return BookishModel.model()
     }
     
     override class var autosavesInPlace: Bool {
@@ -20,25 +20,33 @@ class CollectionDocument: NSPersistentDocument {
 
     override init() {
         super.init()
-        managedObjectContext = collection.managedObjectContext
+        self.fileType = NSSQLiteStoreType
+//        managedObjectContext = collection.managedObjectContext
     }
     
     init(type typeName: String) throws {
         super.init()
+        self.fileType = NSSQLiteStoreType
         
-        let context = collection.managedObjectContext
-        managedObjectContext = context
-        makeDefaultRoles(context: context)
-        
-        if Application.sharedInstance.testDocument {
-            BookishCollection.setupTestDocument(context: context)
-        }
-        Application.sharedInstance.testDocument = false
+//        let context = collection.managedObjectContext
+//        managedObjectContext = context
+//        makeDefaultRoles(context: context)
     }
 
     override func configurePersistentStoreCoordinator(for url: URL, ofType fileType: String, modelConfiguration configuration: String?, storeOptions: [String : Any]? = nil) throws {
-        collection.configure(for: url, ofType: fileType, modelConfiguration: configuration, storeOptions: storeOptions)
-        try super.configurePersistentStoreCoordinator(for: url, ofType: fileType, modelConfiguration: configuration, storeOptions: storeOptions)
+//        try super.configurePersistentStoreCoordinator(for: url, ofType: fileType, modelConfiguration: configuration, storeOptions: storeOptions)
+
+        let mode: CollectionContainer.PopulateMode = Application.sharedInstance.testDocument ? .testData : .empty
+        Application.sharedInstance.testDocument = false
+        collection = SyncedCollection(url: url, identifier: Application.sharedInstance.cloud.collectionIdentifier, mode: mode) { (collection, error) in
+            if let error = error {
+                fatalError("failed to load \(error)")
+            }
+            
+            self.managedObjectContext = collection.managedObjectContext
+        }
+
+        //        collection.configure(for: url, ofType: fileType, modelConfiguration: configuration, storeOptions: storeOptions)
     }
     
     func replaceContext() -> NSManagedObjectContext {
@@ -54,18 +62,9 @@ class CollectionDocument: NSPersistentDocument {
         return context
     }
     
-    /**
-     A few roles should always be present.
-     */
-    
-    func makeDefaultRoles(context: NSManagedObjectContext) {
-        for role in Role.Default.names {
-            _ = Role.role(named: role, context: context)
-        }
-    }
     
     override func makeWindowControllers() {
-        let viewModel = CollectionDocumentViewModel(document: self)
+        let viewModel = CollectionViewModel(collection: self.collection)
         let windowController = Application.sharedInstance.documentWindowControllerFactory.instantiateController(for: viewModel)
         self.addWindowController(windowController)
     }

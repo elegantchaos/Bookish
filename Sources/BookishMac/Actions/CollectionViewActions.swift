@@ -10,8 +10,8 @@ import Logger
 let modeActionChannel = Logger("ModeActions")
 
 extension ActionContext {
-    var viewModel : CollectionDocumentViewModel? {
-        return info[ActionContext.viewModelKey] as? CollectionDocumentViewModel
+    var viewModel : CollectionViewModel? {
+        return info[ActionContext.viewModelKey] as? CollectionViewModel
     }
 }
 
@@ -23,14 +23,14 @@ class ModeAction: DelegatedAction {
         ]
     }
     
-    class func actionIdentifier(for mode: CollectionDocumentViewModel.Mode, action: String, context: ActionContext) -> String {
+    class func actionIdentifier(for mode: CollectionViewModel.Mode, action: String, context: ActionContext) -> String {
         let identifier = "\(action)\(mode.singluarName())"
         modeActionChannel.debug("Identifier \(identifier) for \(mode) \(context)")
         return identifier
     }
     
-    func viewModel(for context: ActionContext) -> CollectionDocumentViewModel? {
-        return context.info[ActionContext.viewModelKey] as? CollectionDocumentViewModel
+    func viewModel(for context: ActionContext) -> CollectionViewModel? {
+        return context.info[ActionContext.viewModelKey] as? CollectionViewModel
     }
 }
 

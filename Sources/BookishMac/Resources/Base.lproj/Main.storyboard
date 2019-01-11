@@ -518,7 +518,7 @@ CA
                         <outlet property="delegate" destination="Voe-Tx-rLC" id="PrD-fu-P6m"/>
                     </connections>
                 </application>
-                <customObject id="Voe-Tx-rLC" customClass="Application" customModule="BookishMac" customModuleProvider="target"/>
+                <customObject id="Voe-Tx-rLC" customClass="Application" customModule="Bookish" customModuleProvider="target"/>
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -527,7 +527,7 @@ CA
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
             <objects>
-                <windowController storyboardIdentifier="Document Window Controller" id="jGA-0Y-lOj" customClass="CollectionWindowController" customModule="BookishMac" customModuleProvider="target" sceneMemberID="viewController">
+                <windowController storyboardIdentifier="Document Window Controller" id="jGA-0Y-lOj" customClass="CollectionWindowController" customModule="Bookish" customModuleProvider="target" sceneMemberID="viewController">
                     <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="CollectionWindow" animationBehavior="default" id="Ckk-yw-fiv">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
@@ -548,7 +548,7 @@ CA
                                 </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="TAF-Mz-qpr"/>
                                 <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="dlb-Xe-WiO"/>
-                                <toolbarItem implicitItemIdentifier="42A4917E-FFCE-440D-90B8-1331166CC46A" explicitItemIdentifier="toolbar.ShowAddRelationshipMenu" label="Add" paletteLabel="Add Person" image="AddRelationship" sizingBehavior="auto" id="reg-Dx-A2Q" userLabel="Add Person" customClass="ViewBasedToolbarItem" customModule="BookishMac" customModuleProvider="target">
+                                <toolbarItem implicitItemIdentifier="42A4917E-FFCE-440D-90B8-1331166CC46A" explicitItemIdentifier="toolbar.ShowAddRelationshipMenu" label="Add" paletteLabel="Add Person" image="AddRelationship" sizingBehavior="auto" id="reg-Dx-A2Q" userLabel="Add Person" customClass="ViewBasedToolbarItem" customModule="Bookish" customModuleProvider="target">
                                     <nil key="toolTip"/>
                                     <button key="view" identifier="toolbar.button.ShowAddRelationshipMenu" verticalHuggingPriority="750" id="uup-kx-3kb">
                                         <rect key="frame" x="18" y="14" width="32" height="32"/>
@@ -562,7 +562,7 @@ CA
                                         </connections>
                                     </button>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="551D39AE-40C4-4D12-BEB0-1B8440DCD640" explicitItemIdentifier="toolbar.RemoveRelationship" label="Remove" paletteLabel="Remove Person" image="RemoveRelationship" sizingBehavior="auto" id="2Iz-4y-jpV" customClass="ViewBasedToolbarItem" customModule="BookishMac" customModuleProvider="target">
+                                <toolbarItem implicitItemIdentifier="551D39AE-40C4-4D12-BEB0-1B8440DCD640" explicitItemIdentifier="toolbar.RemoveRelationship" label="Remove" paletteLabel="Remove Person" image="RemoveRelationship" sizingBehavior="auto" id="2Iz-4y-jpV" customClass="ViewBasedToolbarItem" customModule="Bookish" customModuleProvider="target">
                                     <nil key="toolTip"/>
                                     <button key="view" identifier="toolbar.button.RemoveRelationship" verticalHuggingPriority="750" id="PpS-3K-9lR">
                                         <rect key="frame" x="29" y="14" width="32" height="32"/>
@@ -603,7 +603,7 @@ CA
         <!--Collection Split View Controller-->
         <scene sceneID="o8M-XO-7fb">
             <objects>
-                <splitViewController id="9dY-ZT-f0K" customClass="CollectionSplitViewController" customModule="BookishMac" customModuleProvider="target" sceneMemberID="viewController">
+                <splitViewController id="9dY-ZT-f0K" customClass="CollectionSplitViewController" customModule="Bookish" customModuleProvider="target" sceneMemberID="viewController">
                     <splitViewItems>
                         <splitViewItem canCollapse="YES" holdingPriority="260" behavior="sidebar" id="9x3-Ff-joU"/>
                         <splitViewItem holdingPriority="240" id="eOL-40-wev"/>
@@ -628,7 +628,7 @@ CA
         <!--Collection Root View Controller-->
         <scene sceneID="Uch-bh-vgR">
             <objects>
-                <viewController id="iuc-9t-fNj" customClass="CollectionRootViewController" customModule="BookishMac" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="iuc-9t-fNj" customClass="CollectionRootViewController" customModule="Bookish" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="Nuf-33-Q1V">
                         <rect key="frame" x="0.0" y="0.0" width="720" height="400"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -773,7 +773,7 @@ CA
         <!--Collection Index View Controller-->
         <scene sceneID="cxs-Lx-xWA">
             <objects>
-                <tabViewController selectedTabViewItemIndex="0" tabStyle="unspecified" id="cvB-oN-q7M" customClass="CollectionIndexViewController" customModule="BookishMac" customModuleProvider="target" sceneMemberID="viewController">
+                <tabViewController selectedTabViewItemIndex="0" tabStyle="unspecified" id="cvB-oN-q7M" customClass="CollectionIndexViewController" customModule="Bookish" customModuleProvider="target" sceneMemberID="viewController">
                     <tabViewItems>
                         <tabViewItem label="People" identifier="tab.people" image="Person" id="T2N-QE-AUD"/>
                         <tabViewItem id="zxh-Kx-ds5"/>
@@ -804,7 +804,7 @@ CA
         <!--Date Picker Popover Controller-->
         <scene sceneID="K1V-fB-Brr">
             <objects>
-                <viewController storyboardIdentifier="Date Picker Controller" id="9nQ-zm-vgj" customClass="DatePickerPopoverController" customModule="BookishMac" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Date Picker Controller" id="9nQ-zm-vgj" customClass="DatePickerPopoverController" customModule="Bookish" customModuleProvider="target" sceneMemberID="viewController">
                     <datePicker key="view" verticalHuggingPriority="750" id="875-gL-np3">
                         <rect key="frame" x="0.0" y="0.0" width="139" height="148"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -833,7 +833,7 @@ CA
         <!--Collection Detail View Controller-->
         <scene sceneID="VxI-A7-PK2">
             <objects>
-                <tabViewController selectedTabViewItemIndex="0" tabStyle="unspecified" id="hhy-7W-Ia3" customClass="CollectionDetailViewController" customModule="BookishMac" customModuleProvider="target" sceneMemberID="viewController">
+                <tabViewController selectedTabViewItemIndex="0" tabStyle="unspecified" id="hhy-7W-Ia3" customClass="CollectionDetailViewController" customModule="Bookish" customModuleProvider="target" sceneMemberID="viewController">
                     <tabViewItems>
                         <tabViewItem label="People" id="0N0-Rr-1qn"/>
                         <tabViewItem id="LVm-Tt-qrm"/>
@@ -932,7 +932,7 @@ CA
         <image name="Books" width="32" height="32"/>
         <image name="HilightMarker" width="4" height="36"/>
         <image name="People" width="32" height="32"/>
-        <image name="Person" width="16" height="16"/>
+        <image name="Person" width="32" height="32"/>
         <image name="Publishers" width="32" height="32"/>
         <image name="RemoveBook" width="32" height="32"/>
         <image name="RemoveRelationship" width="32" height="32"/>

@@ -14,11 +14,11 @@ import AppKit
 
 class ImportRequest {
     let importer: Importer
-    let document: CollectionDocument
+    let collection: SyncedCollection
     
-    init(importer: Importer, document: CollectionDocument) {
+    init(importer: Importer, collection: SyncedCollection) {
         self.importer = importer
-        self.document = document
+        self.collection = collection
     }
     
     /**
@@ -54,10 +54,8 @@ class ImportRequest {
      */
     
     func run(for url: URL) {
-        if let managedObjectContext = document.managedObjectContext {
-            importer.run(importing: url, into: managedObjectContext) {
-                self.complete()
-            }
+        importer.run(importing: url, into: collection.managedObjectContext) {
+            self.complete()
         }
     }
     
@@ -98,14 +96,14 @@ class MergeImportRequest: ImportRequest {
      */
     
     override func askForURL() {
-        if let window = document.windowControllers.first?.window {
-            let panel = self.makeOpenPanel()
-            panel.beginSheetModal(for: window) { (response) in
-                if let url = panel.url {
-                    self.run(for: url)
-                }
-            }
-        }
+//        if let window = document.windowControllers.first?.window {
+//            let panel = self.makeOpenPanel()
+//            panel.beginSheetModal(for: window) { (response) in
+//                if let url = panel.url {
+//                    self.run(for: url)
+//                }
+//            }
+//        }
     }
 }
 
@@ -121,16 +119,16 @@ class NewImportRequest: ImportRequest {
         defer { application.testDocument = oldTD }
         
         application.testDocument = false
-        guard let document = try NSDocumentController.shared.openUntitledDocumentAndDisplay(false) as? CollectionDocument else {
-            return nil
-        }
+//        guard let document = try NSDocumentController.shared.openUntitledDocumentAndDisplay(false) as? CollectionDocument else {
+//            return nil
+//        }
         
-        super.init(importer: importer, document: document)
+        super.init(importer: importer, collection: application.viewModel.collection)
     }
     
     override func complete() {
-        document.makeWindowControllers()
-        document.showWindows()
+//        document.makeWindowControllers()
+//        document.showWindows()
     }
 }
 
@@ -175,15 +173,14 @@ class ImportMergedAction: ImporterAction {
     }
     
     override func validate(context: ActionContext) -> Bool {
-        let viewModel = context.info[ActionContext.viewModelKey] as? CollectionDocumentViewModel
+        let viewModel = context.info[ActionContext.viewModelKey] as? CollectionViewModel
         return (viewModel != nil) && (importer(for: context)?.canImport ?? false)
     }
     
     override func perform(context: ActionContext) {
-        if let viewModel = context.info[ActionContext.viewModelKey] as? CollectionDocumentViewModel {
-            let document = viewModel.document
+        if let viewModel = context.info[ActionContext.viewModelKey] as? CollectionViewModel {
             if let importer = importer(for: context) {
-                let request = MergeImportRequest(importer: importer, document: document)
+                let request = MergeImportRequest(importer: importer, collection: viewModel.collection)
                 request.queue()
             }
         }
@@ -246,7 +243,7 @@ class FillMergeMenuAction: ImporterAction {
             return false
         }
         
-        if let item = context.sender as? NSMenuItem, let _ = context.info[ActionContext.viewModelKey] as? CollectionDocumentViewModel {
+        if let item = context.sender as? NSMenuItem, let _ = context.info[ActionContext.viewModelKey] as? CollectionViewModel {
             item.submenu = ImporterAction.makeImportMenu(action: "ImportMerged")
             return true
         }

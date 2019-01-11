@@ -10,9 +10,9 @@ import Logger
 
 let validationChannel = Logger("Validation")
 
-class CollectionWindowController: NSWindowController, DocumentWindowController, ActionContextProvider {
-    var viewModel: CollectionDocumentViewModel?
-    typealias ViewModel = CollectionDocumentViewModel
+class CollectionWindowController: NSWindowController, WindowControllerWithViewModel, ActionContextProvider {
+    var viewModel: CollectionViewModel?
+    typealias ViewModel = CollectionViewModel
     
     var indexControllers: [String:Any] = [:]
 
@@ -36,7 +36,7 @@ class CollectionWindowController: NSWindowController, DocumentWindowController, 
         }
     }
 
-    func reveal<EntityType: NSManagedObject>(_ object: EntityType, mode: CollectionDocumentViewModel.Mode) {
+    func reveal<EntityType: NSManagedObject>(_ object: EntityType, mode: CollectionViewModel.Mode) {
         if let model = viewModel {
             model.mode = mode
             if let name = EntityType.entity().name {

@@ -15,7 +15,7 @@ let applicationChannel = Logger("Application")
 
 @NSApplicationMain class Application: NSObject {
     
-    let documentWindowControllerFactory = DocumentWindowControllerFactory<CollectionDocumentViewModel>()
+    let windowControllerFactory = WindowControllerFactory<CollectionViewModel>()
     let actionManager = ActionManagerMac()
     let importManager = ImportManager()
     let imageCache = NSImageCache()
@@ -23,8 +23,9 @@ let applicationChannel = Logger("Application")
     let uiTesting = CommandLine.arguments.contains("--ui-testing")
     var testDocument = CommandLine.arguments.contains("--test-document")
     let noBlankDocument = CommandLine.arguments.contains("--no-blank-document")
-    
+    var viewModel: CollectionViewModel!
     var watchedMenuItem: NSMenuItem?
+    var windowController: CollectionWindowController!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -69,9 +70,22 @@ let applicationChannel = Logger("Application")
 
 extension Application: NSApplicationDelegate {
     func applicationWillFinishLaunching(_ notification: Notification) {
-        setupCloudKit()
         setupActions()
         setupTransformers()
+        
+        let mode: CollectionContainer.PopulateMode = testDocument ? .testData : .empty
+        let collection = SyncedCollection(identifier: Application.sharedInstance.cloud.collectionIdentifier, mode: mode) { (collection, error) in
+            if let error = error {
+                fatalError("failed to load \(error)")
+            }
+            
+            self.setupCloudKit()
+            let viewModel = CollectionViewModel(collection: collection as! SyncedCollection)
+            self.viewModel = viewModel
+            let windowController = self.windowControllerFactory.instantiateController(for: viewModel)
+            self.windowController = windowController
+            windowController.showWindow(self)
+        }
     }
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {

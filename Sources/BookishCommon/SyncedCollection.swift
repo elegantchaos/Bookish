@@ -13,9 +13,9 @@ class SyncedCollection: CollectionContainer, CDEPersistentStoreEnsembleDelegate 
     var cloudFileSystem: CDECloudKitFileSystem
     var ensemble: CDEPersistentStoreEnsemble!
     
-    init(identifier: String, usingSample: Bool = false, callback: LoadedCallback? = nil) {
+    init(url: URL? = nil, identifier: String, mode: PopulateMode, callback: LoadedCallback? = nil) {
         cloudFileSystem = CDECloudKitFileSystem(privateDatabaseForUbiquityContainerIdentifier: identifier, schemaVersion: .version2)
-        super.init(usingSample: usingSample, addTestData: true) { (collection, error) in
+        super.init(url: url, mode: mode) { (collection, error) in
             if let error = error {
                 fatalError("failed to load \(error)")
             }
@@ -23,13 +23,16 @@ class SyncedCollection: CollectionContainer, CDEPersistentStoreEnsembleDelegate 
             if let collection = collection as? SyncedCollection {
                 collection.setupEnsemble()
             }
+            
+            callback?(collection, error)
         }
     }
 
     func setupEnsemble() {
         if let url = persistentStoreDescriptions[0].url {
-            ensemble = CDEPersistentStoreEnsemble(ensembleIdentifier: "DefaultCollection", persistentStore: url, managedObjectModelURL: BookishModel.modelURL(), cloudFileSystem: cloudFileSystem)
+            let ensemble = CDEPersistentStoreEnsemble(ensembleIdentifier: "DefaultCollection", persistentStore: url, managedObjectModelURL: BookishModel.modelURL(), cloudFileSystem: cloudFileSystem)
             ensemble.delegate = self
+            self.ensemble = ensemble
         }
     }
 
