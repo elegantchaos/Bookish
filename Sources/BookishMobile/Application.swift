@@ -21,14 +21,10 @@ class Application: UIResponder {
     let cloud = BookishCloud()
     @objc dynamic let viewModel = CollectionViewModel()
     var collectionController: CollectionController!
-    lazy var collection: SyncedCollection = setupCollection(usingSample: true)
+    lazy var collection: SyncedCollection = setupCollection()
     
     func setupCollection(usingSample: Bool = false) -> SyncedCollection {
-        let collection = SyncedCollection(identifier: cloud.collectionIdentifier)
-        if let container = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first {
-            let url = container.appendingPathComponent("Default")
-            collection.load(url: url, usingSample: usingSample)
-        }
+        let collection = SyncedCollection(identifier: cloud.collectionIdentifier, usingSample: usingSample)
         return collection
     }
     

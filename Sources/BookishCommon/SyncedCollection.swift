@@ -8,24 +8,31 @@ import BookishCore
 import BookishModel
 import Ensembles
 
-class SyncedCollection: BookishCollection, CDEPersistentStoreEnsembleDelegate {
+class SyncedCollection: CollectionContainer, CDEPersistentStoreEnsembleDelegate {
   
     var cloudFileSystem: CDECloudKitFileSystem
     var ensemble: CDEPersistentStoreEnsemble!
     
-    init(identifier: String) {
+    init(identifier: String, usingSample: Bool = false, callback: LoadedCallback? = nil) {
         cloudFileSystem = CDECloudKitFileSystem(privateDatabaseForUbiquityContainerIdentifier: identifier, schemaVersion: .version2)
-        super.init()
-        
+        super.init(usingSample: usingSample, addTestData: true) { (collection, error) in
+            if let error = error {
+                fatalError("failed to load \(error)")
+            }
+            
+            if let collection = collection as? SyncedCollection {
+                collection.setupEnsemble()
+            }
+        }
     }
-    
-    func configure(for url: URL, ofType fileType: String, modelConfiguration configuration: String?, storeOptions: [String : Any]? = nil) {
-        super.configure(for: url)
-        let modelURL = BookishModel.modelURL()
-        ensemble = CDEPersistentStoreEnsemble(ensembleIdentifier: "DefaultCollection", persistentStore: url, managedObjectModelURL: modelURL, cloudFileSystem: cloudFileSystem)
-        ensemble.delegate = self
+
+    func setupEnsemble() {
+        if let url = persistentStoreDescriptions[0].url {
+            ensemble = CDEPersistentStoreEnsemble(ensembleIdentifier: "DefaultCollection", persistentStore: url, managedObjectModelURL: BookishModel.modelURL(), cloudFileSystem: cloudFileSystem)
+            ensemble.delegate = self
+        }
     }
-    
+
     func sync(_ completion: (() -> Void)?) {
         //        let viewController = self.window?.rootViewController as! ViewController
         //        viewController.activityIndicator?.startAnimating()
@@ -51,15 +58,6 @@ class SyncedCollection: BookishCollection, CDEPersistentStoreEnsembleDelegate {
             }
         }
     }
-    
-    
-    public func load(url: URL, usingSample: Bool = false) {
-        configure(for: url, ofType: NSSQLiteStoreType, modelConfiguration: nil)
-        if usingSample {
-            BookishCollection.setupTestDocument(context: managedObjectContext)
-            save()
-        }
-    }
 
     func deleteStores(remove: Bool = false) {
         let fm = FileManager.default
@@ -80,10 +78,10 @@ class SyncedCollection: BookishCollection, CDEPersistentStoreEnsembleDelegate {
         }
     }
     
-    public func delete() {
+    public func delete(remove: Bool = false) {
         managedObjectContext.reset()
         managedObjectContext.processPendingChanges()
-        deleteStores()
+        deleteStores(remove: remove)
         ensemble.dismantle()
     }
     

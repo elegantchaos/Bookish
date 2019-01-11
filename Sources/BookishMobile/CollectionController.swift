@@ -16,7 +16,7 @@ class CollectionController: UITabBarController {
         let indices = indexControllers.values.compactMap { $0 as? EntityIndex }
         indices.forEach { $0.reset() }
         
-        application.collection.delete()
+        application.collection.delete(remove: true)
         application.collection = application.setupCollection(usingSample: usingSample)
         
         indices.forEach { $0.reload() }
