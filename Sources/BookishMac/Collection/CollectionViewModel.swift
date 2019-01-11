@@ -9,6 +9,9 @@ import ActionsKit
 import BookishModel
 
 @objc class CollectionViewModel: NSObject, WindowControllerViewModel {
+    typealias ViewControllerType = CollectionViewController
+    typealias WindowController = CollectionWindowController
+
     enum Mode: Int {
         case books = 0
         case people = 1
@@ -24,8 +27,6 @@ import BookishModel
     
     let collection: SyncedCollection
     
-    typealias WindowController = CollectionWindowController
-    typealias Owner = CollectionViewController
     
     @objc let managedObjectContext: NSManagedObjectContext
     @objc var bookIndex: NSArrayController?

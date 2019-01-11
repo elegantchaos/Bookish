@@ -87,6 +87,7 @@
 		22DA6A4221E6525400ECF09A /* CDECloudKitFileSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = 22DA6A4021E6525400ECF09A /* CDECloudKitFileSystem.m */; };
 		22DA6A4721E653F400ECF09A /* SyncedCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DA6A4621E653F400ECF09A /* SyncedCollection.swift */; };
 		22DA6A4821E653F400ECF09A /* SyncedCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DA6A4621E653F400ECF09A /* SyncedCollection.swift */; };
+		22DA6A8C21E9098300ECF09A /* CollectionDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DD424B2126D6DA0070C85A /* CollectionDocument.swift */; };
 		22DAF398217B52E6003CE28B /* ActionsKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22DAF397217B52E6003CE28B /* ActionsKit.framework */; };
 		22DAF39A217B5305003CE28B /* Logger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22DAF399217B5305003CE28B /* Logger.framework */; };
 		22DD42482126D6DA0070C85A /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DD42472126D6DA0070C85A /* Application.swift */; };
@@ -1139,6 +1140,7 @@
 				2250C6E121B191B200E899E2 /* BookPublisherCell.swift in Sources */,
 				228968472191F48400B80A93 /* AuthorSelectionTransformer.swift in Sources */,
 				22DE6AE72188A8DC0078D489 /* WhiteSearchFieldCell.swift in Sources */,
+				22DA6A8C21E9098300ECF09A /* CollectionDocument.swift in Sources */,
 				22143FD3212F0F2500B689DF /* AuthorsTransformer.swift in Sources */,
 				22143FCF212EF9CC00B689DF /* WindowControllerWithViewModel.swift in Sources */,
 				22462E952158EDEA00A4C56C /* CollectionDetailViewController.swift in Sources */,

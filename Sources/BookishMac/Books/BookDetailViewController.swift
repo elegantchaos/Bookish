@@ -19,7 +19,6 @@ class BookDetailViewController: DetailController<Book>, BookLifecycleObserver {
     @IBOutlet var personList: NSArrayController!
     
     var source = DetailDataSource()
-    var bookImage: NSImage?
     var editing = false
     
     override func viewWillAppear() {

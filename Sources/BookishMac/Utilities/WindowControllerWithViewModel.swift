@@ -6,14 +6,25 @@
 import AppKit
 
 /**
- A document window controller always has an associated viewModel object.
+ View controllers that implement this protocol get notified once the window
+ that they are in has completely finished loading.
+ */
+
+protocol ViewControllerWithViewModel {
+    associatedtype ViewModel: WindowControllerViewModel
+    func windowDidLoad(_ window: ViewModel.WindowController)
+}
+
+/**
+ Window controllers that implement this protocol have an associated viewModel object.
  
  This contains state which is used by the views and controllers to display
- the model, but which isn't strictly part of the model.
+ the model, but which isn't strictly part of the model and doesn't get persisted with it.
  */
 
 protocol WindowControllerWithViewModel {
     associatedtype ViewModel: WindowControllerViewModel
+    
     var viewModel: ViewModel? { get set }    
 }
 
@@ -23,7 +34,8 @@ protocol WindowControllerWithViewModel {
  */
 
 protocol WindowControllerViewModel {
-    associatedtype WindowController: WindowControllerWithViewModel
+    associatedtype WindowController: NSWindowController, WindowControllerWithViewModel
+    associatedtype ViewControllerType: NSViewController, ViewControllerWithViewModel
 }
 
 /**
@@ -34,12 +46,19 @@ protocol WindowControllerViewModel {
  
  This helps to avoid problems with bindings that try to access model data too early, before the entire
  view hierarchy has been set up.
+ 
+ Once the window is fully loaded, the factory also calls a notification method on any view controller in the hierarchy
+ which implements the ViewControllerWithViewModel protocol.
+ 
+ This is useful for wiring views together and performing other initialisation that can only happen once all views are
+ present, but ideally needs to happen before any views are made visible (ie: after viewWillLoad has been called for all
+ views, but before viewWillAppear has been called for any).
+ 
  */
 
-class WindowControllerFactory<VM: WindowControllerViewModel> where VM.WindowController.ViewModel == VM {
+class WindowControllerFactory<VM: WindowControllerViewModel> where VM.WindowController.ViewModel == VM, VM.ViewControllerType.ViewModel == VM {
     private var modelBeingCreated: VM?
     typealias FinishedLoadingCallback = (VM.WindowController) -> Void
-    private var callbacks = [FinishedLoadingCallback]()
 
     func instantiateController(for viewModel: VM, storyboard: String = "Main", identifier: String = "Document Window Controller") -> VM.WindowController {
         assert(modelBeingCreated == nil)
@@ -47,9 +66,10 @@ class WindowControllerFactory<VM: WindowControllerViewModel> where VM.WindowCont
         let storyboard = NSStoryboard(name: NSStoryboard.Name(storyboard), bundle: nil)
         var windowController = storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(identifier)) as! VM.WindowController
         windowController.viewModel = viewModel
-        for callback in callbacks {
-            callback(windowController)
+        if let controller = windowController.window?.contentViewController {
+            notifyFinishedLoading(window: windowController, controller: controller)
         }
+
         modelBeingCreated = nil
         return windowController
     }
@@ -58,7 +78,12 @@ class WindowControllerFactory<VM: WindowControllerViewModel> where VM.WindowCont
         return modelBeingCreated!
     }
     
-    func onFinishedLoading(callback: @escaping FinishedLoadingCallback) {
-        callbacks.append(callback)
+    func notifyFinishedLoading(window: VM.WindowController, controller: NSViewController) {
+        for child in controller.children {
+            if let vc = child as? VM.ViewControllerType {
+                vc.windowDidLoad(window)
+            }
+            notifyFinishedLoading(window: window, controller: child)
+        }
     }
 }
