@@ -69,9 +69,17 @@ class ImportRequest {
     
     func askForURL() {
         let panel = self.makeOpenPanel()
-        panel.runModal()
-        if let url = panel.url {
-            self.run(for: url)
+        if let window = Application.sharedInstance.windowController.window {
+            panel.beginSheetModal(for: window) { (response) in
+                if let url = panel.url {
+                    self.run(for: url)
+                }
+            }
+        } else {
+            panel.runModal()
+            if let url = panel.url {
+                self.run(for: url)
+            }
         }
     }
     
@@ -80,7 +88,7 @@ class ImportRequest {
      */
     
     func complete() {
-        
+        collection.save()
     }
 }
 
@@ -90,21 +98,7 @@ class ImportRequest {
 
 class MergeImportRequest: ImportRequest {
     
-    /**
-     If we're merging into an existing document,
-     we want the file panel to be a sheet attached to the window.
-     */
     
-    override func askForURL() {
-//        if let window = document.windowControllers.first?.window {
-//            let panel = self.makeOpenPanel()
-//            panel.beginSheetModal(for: window) { (response) in
-//                if let url = panel.url {
-//                    self.run(for: url)
-//                }
-//            }
-//        }
-    }
 }
 
 /**
@@ -119,16 +113,15 @@ class NewImportRequest: ImportRequest {
         defer { application.testDocument = oldTD }
         
         application.testDocument = false
-//        guard let document = try NSDocumentController.shared.openUntitledDocumentAndDisplay(false) as? CollectionDocument else {
-//            return nil
-//        }
-        
         super.init(importer: importer, collection: application.viewModel.collection)
     }
-    
-    override func complete() {
-//        document.makeWindowControllers()
-//        document.showWindows()
+
+    override func run(for url: URL) {
+        collection.reset() { (collection, error) in
+            if error == nil {
+                super.run(for: url)
+            }
+        }
     }
 }
 

@@ -180,14 +180,26 @@ class IndexController<DetailControllerType: DetailController<EntityType>, Entity
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         switch type {
         case .insert:
-            tableView.insertRows(at: [newIndexPath!], with: .fade)
+            if let path = newIndexPath {
+                tableView.insertRows(at: [path], with: .fade)
+            }
+            
         case .delete:
-            tableView.deleteRows(at: [indexPath!], with: .fade)
+            if let path = indexPath {
+                tableView.deleteRows(at: [path], with: .fade)
+            }
+            
         case .update:
-            configureCell(tableView.cellForRow(at: indexPath!)!, with: anObject as! EntityType)
+            
+            if let path = indexPath, let cell = tableView.cellForRow(at: path), let object = anObject as? EntityType {
+                configureCell(cell, with: object)
+            }
+            
         case .move:
-            configureCell(tableView.cellForRow(at: indexPath!)!, with: anObject as! EntityType)
-            tableView.moveRow(at: indexPath!, to: newIndexPath!)
+            if let path = indexPath, let newPath = newIndexPath, let cell = tableView.cellForRow(at: path), let object = anObject as? EntityType {
+                configureCell(cell, with: object)
+                tableView.moveRow(at: path, to: newPath)
+            }
         }
     }
     

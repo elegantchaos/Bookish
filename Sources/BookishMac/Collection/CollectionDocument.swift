@@ -38,7 +38,7 @@ class CollectionDocument: NSPersistentDocument {
 
         let mode: CollectionContainer.PopulateMode = Application.sharedInstance.testDocument ? .testData : .empty
         Application.sharedInstance.testDocument = false
-        collection = SyncedCollection(url: url, identifier: Application.sharedInstance.cloud.collectionIdentifier, mode: mode) { (collection, error) in
+        collection = SyncedCollection(url: url, identifier: Application.sharedInstance.cloudManager.collectionIdentifier, mode: mode) { (collection, error) in
             if let error = error {
                 fatalError("failed to load \(error)")
             }

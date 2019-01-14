@@ -17,7 +17,7 @@ class CollectionController: UITabBarController {
         indices.forEach { $0.reset() }
         
         application.collection.delete(remove: true)
-        application.collection = application.setupCollection(usingSample: usingSample)
+        application.collection = application.setupCollection(mode: usingSample ? .sampleData : .empty)
         
         indices.forEach { $0.reload() }
     }

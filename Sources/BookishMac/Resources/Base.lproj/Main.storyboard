@@ -534,7 +534,7 @@ CA
                         <rect key="contentRect" x="128" y="128" width="1024" height="768"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
                         <value key="minSize" type="size" width="800" height="600"/>
-                        <toolbar key="toolbar" implicitIdentifier="77DEAC6B-FAB4-4044-A5AA-0B8765A74231" explicitIdentifier="toolbar" displayMode="iconAndLabel" sizeMode="small" id="WdN-bQ-LAx">
+                        <toolbar key="toolbar" implicitIdentifier="77DEAC6B-FAB4-4044-A5AA-0B8765A74231" explicitIdentifier="toolbar" prefersToBeShown="NO" displayMode="iconAndLabel" sizeMode="small" id="WdN-bQ-LAx">
                             <allowedToolbarItems>
                                 <toolbarItem implicitItemIdentifier="1CED54FA-DB54-4668-A669-6A9B23CE24FE" explicitItemIdentifier="toolbar.NewBook" label="New" paletteLabel="New Book" tag="-1" image="AddBook" id="KUG-hg-iHG" userLabel="Add Book">
                                     <connections>

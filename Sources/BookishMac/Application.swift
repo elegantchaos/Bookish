@@ -19,7 +19,7 @@ let applicationChannel = Logger("Application")
     let actionManager = ActionManagerMac()
     let importManager = ImportManager()
     let imageCache = NSImageCache()
-    let cloud = BookishCloud()
+    let cloudManager = CloudManager()
     let uiTesting = CommandLine.arguments.contains("--ui-testing")
     var testDocument = CommandLine.arguments.contains("--test-document")
     let noBlankDocument = CommandLine.arguments.contains("--no-blank-document")
@@ -62,29 +62,36 @@ let applicationChannel = Logger("Application")
         ValueTransformer.setValueTransformer(AuthorSelectionTransformer(), forName: AuthorSelectionTransformer.name)
         ValueTransformer.setValueTransformer(DateTransformer(), forName: DateTransformer.name)
     }
-    
+
+    fileprivate func setupWindow(for collection: SyncedCollection) {
+        let viewModel = CollectionViewModel(collection: collection)
+        self.viewModel = viewModel
+        let windowController = self.windowControllerFactory.instantiateController(for: viewModel)
+        self.windowController = windowController
+        windowController.showWindow(self)
+    }
+
     fileprivate func setupCloudKit() {
-        cloud.setup(name: "mac")
+        cloudManager.setup(name: "mac")
     }
 }
 
 extension Application: NSApplicationDelegate {
+    
     func applicationWillFinishLaunching(_ notification: Notification) {
         setupActions()
         setupTransformers()
         
-        let mode: CollectionContainer.PopulateMode = testDocument ? .testData : .empty
-        let collection = SyncedCollection(identifier: Application.sharedInstance.cloud.collectionIdentifier, mode: mode) { (collection, error) in
+        let mode: CollectionContainer.PopulateMode = testDocument ? .replaceWithTestData : .empty
+        let _ = SyncedCollection(identifier: cloudManager.collectionIdentifier, mode: mode) { (sc, error) in
             if let error = error {
                 fatalError("failed to load \(error)")
             }
             
+            let collection = sc as! SyncedCollection
             self.setupCloudKit()
-            let viewModel = CollectionViewModel(collection: collection as! SyncedCollection)
-            self.viewModel = viewModel
-            let windowController = self.windowControllerFactory.instantiateController(for: viewModel)
-            self.windowController = windowController
-            windowController.showWindow(self)
+            self.setupWindow(for: collection)
+            collection.sync()
         }
     }
     
@@ -98,6 +105,16 @@ extension Application: NSApplicationDelegate {
     
     func applicationShouldOpenUntitledFile(_ sender: NSApplication) -> Bool {
         return !noBlankDocument
+    }
+    
+    func applicationWillBecomeActive(_ notification: Notification) {
+        viewModel.collection.save()
+        viewModel.collection.sync()
+    }
+    
+    func applicationWillResignActive(_ notification: Notification) {
+        viewModel.collection.save()
+        viewModel.collection.sync()
     }
 }
 

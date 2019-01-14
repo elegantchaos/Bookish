@@ -9,7 +9,7 @@ import ActionsKit
 import BookishModel
 
 @objc class CollectionViewModel: NSObject, WindowControllerViewModel {
-    typealias ViewControllerType = CollectionViewController
+    typealias ViewController = CollectionViewController
     typealias WindowController = CollectionWindowController
 
     enum Mode: Int {

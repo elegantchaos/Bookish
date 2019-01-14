@@ -35,7 +35,7 @@ protocol WindowControllerWithViewModel {
 
 protocol WindowControllerViewModel {
     associatedtype WindowController: NSWindowController, WindowControllerWithViewModel
-    associatedtype ViewControllerType: NSViewController, ViewControllerWithViewModel
+    associatedtype ViewController: NSViewController, ViewControllerWithViewModel
 }
 
 /**
@@ -56,15 +56,15 @@ protocol WindowControllerViewModel {
  
  */
 
-class WindowControllerFactory<VM: WindowControllerViewModel> where VM.WindowController.ViewModel == VM, VM.ViewControllerType.ViewModel == VM {
-    private var modelBeingCreated: VM?
-    typealias FinishedLoadingCallback = (VM.WindowController) -> Void
+class WindowControllerFactory<ViewModel: WindowControllerViewModel> where ViewModel.WindowController.ViewModel == ViewModel, ViewModel.ViewController.ViewModel == ViewModel {
+    private var modelBeingCreated: ViewModel?
+    typealias FinishedLoadingCallback = (ViewModel.WindowController) -> Void
 
-    func instantiateController(for viewModel: VM, storyboard: String = "Main", identifier: String = "Document Window Controller") -> VM.WindowController {
+    func instantiateController(for viewModel: ViewModel, storyboard: String = "Main", identifier: String = "Document Window Controller") -> ViewModel.WindowController {
         assert(modelBeingCreated == nil)
         modelBeingCreated = viewModel
         let storyboard = NSStoryboard(name: NSStoryboard.Name(storyboard), bundle: nil)
-        var windowController = storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(identifier)) as! VM.WindowController
+        var windowController = storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(identifier)) as! ViewModel.WindowController
         windowController.viewModel = viewModel
         if let controller = windowController.window?.contentViewController {
             notifyFinishedLoading(window: windowController, controller: controller)
@@ -74,13 +74,13 @@ class WindowControllerFactory<VM: WindowControllerViewModel> where VM.WindowCont
         return windowController
     }
     
-    var viewModel: VM {
+    var viewModel: ViewModel {
         return modelBeingCreated!
     }
     
-    func notifyFinishedLoading(window: VM.WindowController, controller: NSViewController) {
+    func notifyFinishedLoading(window: ViewModel.WindowController, controller: NSViewController) {
         for child in controller.children {
-            if let vc = child as? VM.ViewControllerType {
+            if let vc = child as? ViewModel.ViewController {
                 vc.windowDidLoad(window)
             }
             notifyFinishedLoading(window: window, controller: child)

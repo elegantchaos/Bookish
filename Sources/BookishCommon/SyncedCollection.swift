@@ -15,13 +15,14 @@ class SyncedCollection: CollectionContainer, CDEPersistentStoreEnsembleDelegate 
     
     init(url: URL? = nil, identifier: String, mode: PopulateMode, callback: LoadedCallback? = nil) {
         cloudFileSystem = CDECloudKitFileSystem(privateDatabaseForUbiquityContainerIdentifier: identifier, schemaVersion: .version2)
-        super.init(url: url, mode: mode) { (collection, error) in
+        super.init(name: "Blah", url: url, mode: mode) { (collection, error) in
             if let error = error {
                 fatalError("failed to load \(error)")
             }
             
             if let collection = collection as? SyncedCollection {
                 collection.setupEnsemble()
+                collection.setupListeners()
             }
             
             callback?(collection, error)
@@ -29,14 +30,23 @@ class SyncedCollection: CollectionContainer, CDEPersistentStoreEnsembleDelegate 
     }
 
     func setupEnsemble() {
+        CDESetCurrentLoggingLevel(CDELoggingLevel.warning.rawValue)
+
         if let url = persistentStoreDescriptions[0].url {
-            let ensemble = CDEPersistentStoreEnsemble(ensembleIdentifier: "DefaultCollection", persistentStore: url, managedObjectModelURL: BookishModel.modelURL(), cloudFileSystem: cloudFileSystem)
+            let name = url.lastPathComponent
+            let ensemble = CDEPersistentStoreEnsemble(ensembleIdentifier: name, persistentStore: url, managedObjectModelURL: BookishModel.modelURL(), cloudFileSystem: cloudFileSystem)
             ensemble.delegate = self
             self.ensemble = ensemble
         }
     }
 
-    func sync(_ completion: (() -> Void)?) {
+    func setupListeners() {
+        // Listen for local saves, and trigger merges
+        NotificationCenter.default.addObserver(self, selector:#selector(SyncedCollection.localSaveOccurred(_:)), name:NSNotification.Name.CDEMonitoredManagedObjectContextDidSave, object:nil)
+        NotificationCenter.default.addObserver(self, selector:#selector(SyncedCollection.cloudDataDidDownload(_:)), name:NSNotification.Name.CDEICloudFileSystemDidDownloadFiles, object:nil)
+    }
+    
+    func sync(_ completion: (() -> Void)? = nil) {
         //        let viewController = self.window?.rootViewController as! ViewController
         //        viewController.activityIndicator?.startAnimating()
         if !ensemble.isLeeched {
@@ -62,59 +72,20 @@ class SyncedCollection: CollectionContainer, CDEPersistentStoreEnsembleDelegate 
         }
     }
 
-    func deleteStores(remove: Bool = false) {
-        let fm = FileManager.default
-        if let coordinator = managedObjectContext.persistentStoreCoordinator {
-            for store in coordinator.persistentStores {
-                if let url: URL = store.url {
-                    do {
-                        try coordinator.destroyPersistentStore(at: url, ofType: store.type, options: nil)
-                        if remove && fm.fileExists(atPath: url.path) {
-                            try? fm.removeItem(at: url)
-                        }
-                    } catch {
-                        print("failed to delete previous database")
-                    }
-                }
-                try? coordinator.remove(store)
-            }
-        }
-    }
-    
-    public func delete(remove: Bool = false) {
-        managedObjectContext.reset()
-        managedObjectContext.processPendingChanges()
-        deleteStores(remove: remove)
+    override public func delete(remove: Bool = false) {
+        super.delete(remove: remove)
         ensemble.dismantle()
     }
     
-//    public func reset() {
-//        managedObjectContext.reset()
-//        managedObjectContext.processPendingChanges()
-//        deleteStores(remove: true)
-//        loadPersistentStores(completionHandler: { (storeDescription, error) in
-//            if let error = error as NSError? {
-//                fatalError("Unresolved error \(error), \(error.userInfo)")
-//            }
-//        })
-//
-//        BookishCollection.setupTestDocument(context: managedObjectContext)
-//    }
-    
-    public func save() {
-        let context = managedObjectContext
-        if context.hasChanges {
-            do {
-                try context.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nserror = error as NSError
-                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
-            }
-        }
-    }
 
+    @objc private func localSaveOccurred(_ notif: Notification) {
+        self.sync()
+    }
+    
+    @objc private func cloudDataDidDownload(_ notif: Notification) {
+        self.sync()
+    }
+    
     private func persistentStoreEnsemble(_ ensemble: CDEPersistentStoreEnsemble, didSaveMergeChangesWith notification: Notification) {
         managedObjectContext.performAndWait {
             self.managedObjectContext.mergeChanges(fromContextDidSave: notification)

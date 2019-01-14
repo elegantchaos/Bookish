@@ -18,13 +18,13 @@ class Application: UIResponder {
     var window: UIWindow? // required for storyboard support
     let actionManager = ActionManagerMobile()
     let imageCache = UIImageCache()
-    let cloud = BookishCloud()
+    let cloud = CloudManager()
     @objc dynamic let viewModel = CollectionViewModel()
     var collectionController: CollectionController!
     lazy var collection: SyncedCollection = setupCollection()
     
-    func setupCollection(usingSample: Bool = false) -> SyncedCollection {
-        let collection = SyncedCollection(identifier: cloud.collectionIdentifier, usingSample: usingSample)
+    func setupCollection(mode: CollectionContainer.PopulateMode = .empty) -> SyncedCollection {
+        let collection = SyncedCollection(identifier: cloud.collectionIdentifier, mode: mode)
         return collection
     }
     
@@ -34,7 +34,7 @@ class Application: UIResponder {
     }
     
     func setupCloud() {
-        let cloud = BookishCloud()
+        let cloud = CloudManager()
         cloud.setup(name: "mobile")
     }
 }
@@ -45,6 +45,7 @@ extension Application: UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         setupActions()
         setupCloud()
+        collection.sync()
         applicationChannel.log("did finish launching")
         return true
     }
@@ -59,11 +60,23 @@ extension Application: UIApplicationDelegate {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
         applicationChannel.log("did enter background")
+        
+        let taskIdentifier = UIApplication.shared.beginBackgroundTask(expirationHandler: nil)
+        try! collection.managedObjectContext.save()
+        collection.sync {
+            UIApplication.shared.endBackgroundTask(taskIdentifier)
+        }
+
     }
     
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
         applicationChannel.log("will enter foreground")
+        collection.sync {
+            if let index = self.collectionController.indexControllers["Book"] as? BookIndexController {
+                index.reload()
+            }
+        }
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
