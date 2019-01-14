@@ -7,7 +7,7 @@ import Actions
 import BookishModel
 import Logger
 
-let modeActionChannel = Logger("ModeActions")
+let itemActionChannel = Logger("ItemAction")
 
 extension ActionContext {
     var viewModel : CollectionViewModel? {
@@ -15,7 +15,7 @@ extension ActionContext {
     }
 }
 
-class ModeAction: DelegatedAction {
+class ItemAction: DelegatedAction {
     class func standardActions() -> [Action] {
         return [
             NewItemAction(identifier: "NewItem"),
@@ -25,7 +25,7 @@ class ModeAction: DelegatedAction {
     
     class func actionIdentifier(for mode: CollectionViewModel.Mode, action: String, context: ActionContext) -> String {
         let identifier = "\(action)\(mode.singluarName())"
-        modeActionChannel.debug("Identifier \(identifier) for \(mode) \(context)")
+        itemActionChannel.debug("Identifier \(identifier) for \(mode) \(context)")
         return identifier
     }
     
@@ -34,14 +34,14 @@ class ModeAction: DelegatedAction {
     }
 }
 
-class DeleteItemAction: ModeAction {
+class DeleteItemAction: ItemAction {
     init(identifier: String) {
         super.init(identifier: identifier) { (context) -> String in
             guard let model = context.viewModel else {
                 return ""
             }
             
-            return ModeAction.actionIdentifier(for: model.mode, action: "Delete", context: context)
+            return ItemAction.actionIdentifier(for: model.mode, action: "Delete", context: context)
         }
     }
     
@@ -56,14 +56,14 @@ class DeleteItemAction: ModeAction {
     }
 }
 
-class NewItemAction: ModeAction {
+class NewItemAction: ItemAction {
     init(identifier: String) {
         super.init(identifier: identifier) { (context) -> String in
             guard let model = context.viewModel else {
                 return ""
             }
             
-            return ModeAction.actionIdentifier(for: model.mode, action: "New", context: context)
+            return ItemAction.actionIdentifier(for: model.mode, action: "New", context: context)
        }
     }
 }

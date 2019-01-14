@@ -47,7 +47,7 @@ let applicationChannel = Logger("Application")
         actionManager.register(ModelAction.standardActions())
         actionManager.register(RelationshipUIAction.standardActions())
         actionManager.register(ImporterAction.standardActions())
-        actionManager.register(ModeAction.standardActions())
+        actionManager.register(ItemAction.standardActions())
         actionManager.register([
             ScanSeriesAction(identifier: "ScanSeries"),
             ShowDatePickerAction(identifier: "ShowDatePicker"),
