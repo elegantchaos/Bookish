@@ -10,6 +10,7 @@ import BookishCore
 import Logger
 import Actions
 import ActionsKit
+import Ensembles
 
 let applicationChannel = Logger("Application")
 
@@ -34,7 +35,6 @@ class Application: UIResponder {
     }
     
     func setupCloud() {
-        let cloud = CloudManager()
         cloud.setup(name: "mobile")
     }
 }
@@ -46,6 +46,15 @@ extension Application: UIApplicationDelegate {
         setupActions()
         setupCloud()
         collection.sync()
+        
+        NotificationCenter.default.addObserver(forName: NSNotification.Name.CDEPersistentStoreEnsembleDidBeginActivity, object: nil, queue: OperationQueue.main) { (notification) in
+            UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        }
+        
+        NotificationCenter.default.addObserver(forName: NSNotification.Name.CDEPersistentStoreEnsembleWillEndActivity, object: nil, queue: OperationQueue.main) { (notification) in
+            UIApplication.shared.isNetworkActivityIndicatorVisible = false
+        }
+        
         applicationChannel.log("did finish launching")
         return true
     }
