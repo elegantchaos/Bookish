@@ -119,7 +119,7 @@
                                                 </items>
                                             </menu>
                                         </menuItem>
-                                        <menuItem title="Import" identifier="menu.FillImportMenu" id="Kyh-nf-fs3" userLabel="Import">
+                                        <menuItem title="Import" identifier="menu.FillMergeMenu" id="Kyh-nf-fs3" userLabel="Import">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="performAction:" target="Ady-hI-5gd" id="MY0-Js-L6B"/>
@@ -129,12 +129,6 @@
                                         <menuItem title="Close" keyEquivalent="w" id="DVo-aG-piG">
                                             <connections>
                                                 <action selector="performClose:" target="Ady-hI-5gd" id="HmO-Ls-i7Q"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem title="Merge" identifier="menu.FillMergeMenu" id="mLL-Y0-DW2" userLabel="Import">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                            <connections>
-                                                <action selector="performAction:" target="Ady-hI-5gd" id="bg7-zX-emB"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem title="Save…" keyEquivalent="s" id="pxx-59-PXV">
@@ -522,13 +516,13 @@ CA
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="164" y="-794"/>
+            <point key="canvasLocation" x="-172" y="167"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
             <objects>
                 <windowController storyboardIdentifier="Document Window Controller" id="jGA-0Y-lOj" customClass="CollectionWindowController" customModule="Bookish" customModuleProvider="target" sceneMemberID="viewController">
-                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="CollectionWindow" animationBehavior="default" id="Ckk-yw-fiv">
+                    <window key="window" title="Bookish" allowsToolTipsWhenApplicationIsInactive="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="CollectionWindow" animationBehavior="default" id="Ckk-yw-fiv">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="128" y="128" width="1024" height="768"/>

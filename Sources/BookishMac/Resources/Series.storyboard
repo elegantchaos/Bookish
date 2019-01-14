@@ -10,7 +10,7 @@
         <!--Series Index View Controller-->
         <scene sceneID="JjP-rQ-Vry">
             <objects>
-                <viewController storyboardIdentifier="Series.Index" id="EEW-TS-smh" customClass="SeriesIndexViewController" customModule="BookishMac" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Series.Index" id="EEW-TS-smh" customClass="SeriesIndexViewController" customModule="Bookish" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="B1u-cG-GcL">
                         <rect key="frame" x="0.0" y="0.0" width="200" height="400"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -104,7 +104,7 @@
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="bX5-YO-5ED">
                                             <rect key="frame" x="18" y="4" width="164" height="12"/>
                                             <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" placeholderString="3 of 100" id="f8H-hO-AAv">
-                                                <font key="font" metaFont="system" size="11"/>
+                                                <font key="font" metaFont="smallSystem"/>
                                                 <color key="textColor" name="Bookish Index Text"/>
                                                 <color key="backgroundColor" name="Bookish Index"/>
                                             </textFieldCell>
@@ -154,7 +154,7 @@
         <!--Series Detail View Controller-->
         <scene sceneID="wWc-sU-aMY">
             <objects>
-                <viewController storyboardIdentifier="Series.Detail" id="n3q-DF-N5R" customClass="SeriesDetailViewController" customModule="BookishMac" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Series.Detail" id="n3q-DF-N5R" customClass="SeriesDetailViewController" customModule="Bookish" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="eNM-Zx-oct">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="400"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -171,14 +171,7 @@
                                                 <constraint firstAttribute="height" constant="42" id="3ud-kK-wtb"/>
                                                 <constraint firstAttribute="width" constant="42" id="yl0-bw-7qq"/>
                                             </constraints>
-                                            <imageCell key="cell" selectable="YES" editable="YES" alignment="left" animates="YES" imageScaling="proportionallyDown" image="PersonPlaceholder" id="l6B-dD-xui"/>
-                                            <connections>
-                                                <binding destination="n3q-DF-N5R" name="value" keyPath="self.index.selection.image" id="BbC-9O-bkc">
-                                                    <dictionary key="options">
-                                                        <string key="NSValueTransformerName">PersonImage</string>
-                                                    </dictionary>
-                                                </binding>
-                                            </connections>
+                                            <imageCell key="cell" selectable="YES" editable="YES" alignment="left" animates="YES" imageScaling="proportionallyDown" image="SeriesPlaceholder" id="l6B-dD-xui"/>
                                         </imageView>
                                         <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1hS-zV-NKy">
                                             <rect key="frame" x="94" y="352" width="338" height="22"/>
@@ -231,7 +224,7 @@
                                                                 </textFieldCell>
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <prototypeCellViews>
-                                                                    <tableCellView identifier="entry" id="qwi-jb-bi5" userLabel="book cell" customClass="SeriesEntryCell" customModule="BookishMac" customModuleProvider="target">
+                                                                    <tableCellView identifier="entry" id="qwi-jb-bi5" userLabel="book cell" customClass="SeriesEntryCell" customModule="Bookish" customModuleProvider="target">
                                                                         <rect key="frame" x="1" y="1" width="347" height="22"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
@@ -266,7 +259,7 @@
                                                                             <outlet property="textField" destination="2CP-sj-duP" id="jDF-cC-PI1"/>
                                                                         </connections>
                                                                     </tableCellView>
-                                                                    <tableCellView identifier="role" id="8QX-1c-ApE" userLabel="role cell" customClass="RelationshipCell" customModule="BookishMac" customModuleProvider="target">
+                                                                    <tableCellView identifier="role" id="8QX-1c-ApE" userLabel="role cell" customClass="RelationshipCell" customModule="Bookish" customModuleProvider="target">
                                                                         <rect key="frame" x="1" y="25" width="347" height="24"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
@@ -372,6 +365,7 @@
                     </view>
                     <connections>
                         <outlet property="detailsTable" destination="h0t-Bl-8yA" id="wDH-f7-cWr"/>
+                        <outlet property="imageView" destination="cMe-q7-A3I" id="Xgf-xw-mIW"/>
                         <outlet property="lastFixedKeyView" destination="Ykj-uj-ehm" id="xtB-kx-49m"/>
                         <outlet property="nameView" destination="1hS-zV-NKy" id="F82-ER-sTN"/>
                     </connections>
@@ -383,8 +377,8 @@
     </scenes>
     <resources>
         <image name="NSAddTemplate" width="11" height="11"/>
-        <image name="PersonPlaceholder" width="64" height="64"/>
         <image name="Reveal" width="12" height="12"/>
+        <image name="SeriesPlaceholder" width="512" height="512"/>
         <namedColor name="Bookish Detail">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

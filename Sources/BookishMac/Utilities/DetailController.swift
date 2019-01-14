@@ -6,6 +6,7 @@
 import AppKit
 import Actions
 import Logger
+import BookishModel
 
 let detailChannel = Logger("Detail")
 
@@ -23,6 +24,7 @@ class DetailControllerBase: CollectionViewController {
     static let unknownViewID = NSUserInterfaceItemIdentifier(rawValue: "unknown")
 
     @IBOutlet weak var nameView: NSTextField!
+    @IBOutlet weak var imageView: NSImageView!
     @IBOutlet weak var lastFixedKeyView: NSControl!
     @IBOutlet weak var detailsTable: NSTableView!
     @objc var index: NSArrayController?
@@ -156,6 +158,25 @@ class DetailController<EntityKind>: DetailControllerBase {
         if let wc = view.window?.windowController as? CollectionWindowController {
             wc.validateButtons()
         }
+        
+        if selectedCount == 1 {
+            if let item = indexView.indexArray.selectedObjects[0] as? ModelObject {
+                if let data = item.value(forKey: "image") as? Data, let image = NSImage(data: data) {
+                    imageView.image = image
+                } else {
+                    let placeholderName = "\(entityName)Placeholder"
+                    if let image = NSImage(named: placeholderName) {
+                        imageView.image = image
+                        if let urlString = item.value(forKey: "imageURL") as? String, let url = URL(string: urlString) {
+                            application.imageCache.image(for: url) { (image) in
+                                self.imageView.image = image
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
     }
     
     func updateRows() {

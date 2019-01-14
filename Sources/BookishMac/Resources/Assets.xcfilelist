@@ -1,89 +1,108 @@
-Sources/BookishMac/Assets.xcassets/AddBook.imageset/AddBook.png
-Sources/BookishMac/Assets.xcassets/AddBook.imageset/Contents.json
-Sources/BookishMac/Assets.xcassets/AddBook.imageset/AddBook@3x.png
-Sources/BookishMac/Assets.xcassets/AddBook.imageset/AddBook@2x.png
-Sources/BookishMac/Assets.xcassets/RemoveBook.imageset/RemoveBook.png
-Sources/BookishMac/Assets.xcassets/RemoveBook.imageset/Contents.json
-Sources/BookishMac/Assets.xcassets/RemoveBook.imageset/RemoveBook@2x.png
-Sources/BookishMac/Assets.xcassets/RemoveBook.imageset/RemoveBook@3x.png
-Sources/BookishMac/Assets.xcassets/AddRelationship.imageset/AddRelationship@2x.png
-Sources/BookishMac/Assets.xcassets/AddRelationship.imageset/AddRelationship@3x.png
-Sources/BookishMac/Assets.xcassets/AddRelationship.imageset/AddRelationship.png
-Sources/BookishMac/Assets.xcassets/AddRelationship.imageset/Contents.json
-Sources/BookishMac/Assets.xcassets/Plus.imageset/Plus.png
-Sources/BookishMac/Assets.xcassets/Plus.imageset/Plus@2x.png
-Sources/BookishMac/Assets.xcassets/Plus.imageset/Plus@3x.png
-Sources/BookishMac/Assets.xcassets/Plus.imageset/Contents.json
-Sources/BookishMac/Assets.xcassets/Person.imageset/Person.png
-Sources/BookishMac/Assets.xcassets/Person.imageset/Contents.json
-Sources/BookishMac/Assets.xcassets/Person.imageset/Person@3x.png
-Sources/BookishMac/Assets.xcassets/Person.imageset/Person@2x.png
-Sources/BookishMac/Assets.xcassets/AppIcon.appiconset/Icon16.png
-Sources/BookishMac/Assets.xcassets/AppIcon.appiconset/Icon1024.png
-Sources/BookishMac/Assets.xcassets/AppIcon.appiconset/.DS_Store
-Sources/BookishMac/Assets.xcassets/AppIcon.appiconset/Icon512.png
-Sources/BookishMac/Assets.xcassets/AppIcon.appiconset/Icon128.png
-Sources/BookishMac/Assets.xcassets/AppIcon.appiconset/Icon64.png
-Sources/BookishMac/Assets.xcassets/AppIcon.appiconset/Contents.json
-Sources/BookishMac/Assets.xcassets/AppIcon.appiconset/Icon256.png
-Sources/BookishMac/Assets.xcassets/AppIcon.appiconset/Icon32.png
-Sources/BookishMac/Assets.xcassets/RemoveRelationship.imageset/RemoveRelationship@3x.png
-Sources/BookishMac/Assets.xcassets/RemoveRelationship.imageset/RemoveRelationship@2x.png
-Sources/BookishMac/Assets.xcassets/RemoveRelationship.imageset/RemoveRelationship.png
-Sources/BookishMac/Assets.xcassets/RemoveRelationship.imageset/Contents.json
-Sources/BookishMac/Assets.xcassets/Reveal.imageset/Reveal@3x.png
-Sources/BookishMac/Assets.xcassets/Reveal.imageset/Contents.json
-Sources/BookishMac/Assets.xcassets/Reveal.imageset/Reveal@2x.png
-Sources/BookishMac/Assets.xcassets/Reveal.imageset/Reveal.png
-Sources/BookishMac/Assets.xcassets/Colours/Bookish Label Text.colorset/Contents.json
-Sources/BookishMac/Assets.xcassets/Colours/Bookish Index.colorset/Contents.json
-Sources/BookishMac/Assets.xcassets/Colours/Bookish Detail.colorset/Contents.json
-Sources/BookishMac/Assets.xcassets/Colours/Bookish Index Text.colorset/Contents.json
-Sources/BookishMac/Assets.xcassets/Colours/Contents.json
-Sources/BookishMac/Assets.xcassets/Colours/Bookish Sidebar.colorset/Contents.json
-Sources/BookishMac/Assets.xcassets/Colours/Bookish Detail Text.colorset/Contents.json
-Sources/BookishMac/Assets.xcassets/ChooseDate.imageset/ChooseDate@2x.png
-Sources/BookishMac/Assets.xcassets/ChooseDate.imageset/ChooseDate.png
-Sources/BookishMac/Assets.xcassets/ChooseDate.imageset/Contents.json
-Sources/BookishMac/Assets.xcassets/ChooseDate.imageset/ChooseDate@3x.png
-Sources/BookishMac/Assets.xcassets/People.imageset/People@3x.png
-Sources/BookishMac/Assets.xcassets/People.imageset/People@2x.png
-Sources/BookishMac/Assets.xcassets/People.imageset/Contents.json
-Sources/BookishMac/Assets.xcassets/People.imageset/People.png
-Sources/BookishMac/Assets.xcassets/ChooseDateSmall.imageset/ChooseDateSmall.png
-Sources/BookishMac/Assets.xcassets/ChooseDateSmall.imageset/ChooseDateSmall@3x.png
-Sources/BookishMac/Assets.xcassets/ChooseDateSmall.imageset/ChooseDateSmall@2x.png
-Sources/BookishMac/Assets.xcassets/ChooseDateSmall.imageset/Contents.json
-Sources/BookishMac/Assets.xcassets/PersonPlaceholder.imageset/PersonPlaceholder.png
-Sources/BookishMac/Assets.xcassets/PersonPlaceholder.imageset/Contents.json
-Sources/BookishMac/Assets.xcassets/PersonPlaceholder.imageset/PersonPlaceholder@3x.png
-Sources/BookishMac/Assets.xcassets/PersonPlaceholder.imageset/PersonPlaceholder@2x.png
-Sources/BookishMac/Assets.xcassets/Contents.json
-Sources/BookishMac/Assets.xcassets/Books.imageset/Books.png
-Sources/BookishMac/Assets.xcassets/Books.imageset/Books@3x.png
-Sources/BookishMac/Assets.xcassets/Books.imageset/Books@2x.png
-Sources/BookishMac/Assets.xcassets/Books.imageset/Contents.json
-Sources/BookishMac/Assets.xcassets/CoverPlaceholder.imageset/CoverPlaceholder.png
-Sources/BookishMac/Assets.xcassets/CoverPlaceholder.imageset/CoverPlaceholder@3x.png
-Sources/BookishMac/Assets.xcassets/CoverPlaceholder.imageset/Contents.json
-Sources/BookishMac/Assets.xcassets/CoverPlaceholder.imageset/CoverPlaceholder@2x.png
-Sources/BookishMac/Assets.xcassets/Settings.imageset/Settings.png
-Sources/BookishMac/Assets.xcassets/Settings.imageset/Contents.json
-Sources/BookishMac/Assets.xcassets/Settings.imageset/Settings@2x.png
-Sources/BookishMac/Assets.xcassets/Settings.imageset/Settings@3x.png
-Sources/BookishMac/Assets.xcassets/SettingsSmall.imageset/SettingsSmall@3x.png
-Sources/BookishMac/Assets.xcassets/SettingsSmall.imageset/Contents.json
-Sources/BookishMac/Assets.xcassets/SettingsSmall.imageset/SettingsSmall@2x.png
-Sources/BookishMac/Assets.xcassets/SettingsSmall.imageset/SettingsSmall.png
-Sources/BookishMac/Assets.xcassets/Book.imageset/Book@3x.png
-Sources/BookishMac/Assets.xcassets/Book.imageset/Book.png
-Sources/BookishMac/Assets.xcassets/Book.imageset/Book@2x.png
-Sources/BookishMac/Assets.xcassets/Book.imageset/Contents.json
-Sources/BookishMac/Assets.xcassets/HilightMarker.imageset/HilightMarker.png
-Sources/BookishMac/Assets.xcassets/HilightMarker.imageset/Contents.json
-Sources/BookishMac/Assets.xcassets/HilightMarker.imageset/HilightMarker@3x.png
-Sources/BookishMac/Assets.xcassets/HilightMarker.imageset/HilightMarker@2x.png
-Sources/BookishMac/Assets.xcassets/Minus.imageset/Minus@3x.png
-Sources/BookishMac/Assets.xcassets/Minus.imageset/Minus@2x.png
-Sources/BookishMac/Assets.xcassets/Minus.imageset/Minus.png
-Sources/BookishMac/Assets.xcassets/Minus.imageset/Contents.json
+Sources/BookishMac/Resources/Assets.xcassets/AddBook.imageset/AddBook.png
+Sources/BookishMac/Resources/Assets.xcassets/AddBook.imageset/Contents.json
+Sources/BookishMac/Resources/Assets.xcassets/AddBook.imageset/AddBook@3x.png
+Sources/BookishMac/Resources/Assets.xcassets/AddBook.imageset/AddBook@2x.png
+Sources/BookishMac/Resources/Assets.xcassets/RemoveBook.imageset/RemoveBook.png
+Sources/BookishMac/Resources/Assets.xcassets/RemoveBook.imageset/Contents.json
+Sources/BookishMac/Resources/Assets.xcassets/RemoveBook.imageset/RemoveBook@2x.png
+Sources/BookishMac/Resources/Assets.xcassets/RemoveBook.imageset/RemoveBook@3x.png
+Sources/BookishMac/Resources/Assets.xcassets/Series.imageset/Series.png
+Sources/BookishMac/Resources/Assets.xcassets/Series.imageset/Contents.json
+Sources/BookishMac/Resources/Assets.xcassets/Series.imageset/Series@2x.png
+Sources/BookishMac/Resources/Assets.xcassets/Series.imageset/Series@3x.png
+Sources/BookishMac/Resources/Assets.xcassets/BookPlaceholder.imageset/CoverPlaceholder.png
+Sources/BookishMac/Resources/Assets.xcassets/BookPlaceholder.imageset/BookPlaceholder Copy@2x.png
+Sources/BookishMac/Resources/Assets.xcassets/BookPlaceholder.imageset/BookPlaceholder Copy@3x.png
+Sources/BookishMac/Resources/Assets.xcassets/BookPlaceholder.imageset/BookPlaceholder Copy.png
+Sources/BookishMac/Resources/Assets.xcassets/BookPlaceholder.imageset/CoverPlaceholder@3x.png
+Sources/BookishMac/Resources/Assets.xcassets/BookPlaceholder.imageset/Contents.json
+Sources/BookishMac/Resources/Assets.xcassets/BookPlaceholder.imageset/CoverPlaceholder@2x.png
+Sources/BookishMac/Resources/Assets.xcassets/Plus.imageset/Plus.png
+Sources/BookishMac/Resources/Assets.xcassets/Plus.imageset/Plus@2x.png
+Sources/BookishMac/Resources/Assets.xcassets/Plus.imageset/Plus@3x.png
+Sources/BookishMac/Resources/Assets.xcassets/Plus.imageset/Contents.json
+Sources/BookishMac/Resources/Assets.xcassets/PublisherPlaceholder.imageset/PublisherPlaceholder Copy.png
+Sources/BookishMac/Resources/Assets.xcassets/PublisherPlaceholder.imageset/Contents.json
+Sources/BookishMac/Resources/Assets.xcassets/PublisherPlaceholder.imageset/PublisherPlaceholder Copy@3x.png
+Sources/BookishMac/Resources/Assets.xcassets/PublisherPlaceholder.imageset/PublisherPlaceholder Copy@2x.png
+Sources/BookishMac/Resources/Assets.xcassets/Person.imageset/Person.png
+Sources/BookishMac/Resources/Assets.xcassets/Person.imageset/Contents.json
+Sources/BookishMac/Resources/Assets.xcassets/Person.imageset/Person@3x.png
+Sources/BookishMac/Resources/Assets.xcassets/Person.imageset/Person@2x.png
+Sources/BookishMac/Resources/Assets.xcassets/AppIcon.appiconset/Icon16.png
+Sources/BookishMac/Resources/Assets.xcassets/AppIcon.appiconset/Icon1024.png
+Sources/BookishMac/Resources/Assets.xcassets/AppIcon.appiconset/.DS_Store
+Sources/BookishMac/Resources/Assets.xcassets/AppIcon.appiconset/Icon512.png
+Sources/BookishMac/Resources/Assets.xcassets/AppIcon.appiconset/Icon128.png
+Sources/BookishMac/Resources/Assets.xcassets/AppIcon.appiconset/Icon64.png
+Sources/BookishMac/Resources/Assets.xcassets/AppIcon.appiconset/Contents.json
+Sources/BookishMac/Resources/Assets.xcassets/AppIcon.appiconset/Icon256.png
+Sources/BookishMac/Resources/Assets.xcassets/AppIcon.appiconset/Icon32.png
+Sources/BookishMac/Resources/Assets.xcassets/Publishers.imageset/Publishers.png
+Sources/BookishMac/Resources/Assets.xcassets/Publishers.imageset/Publishers@2x.png
+Sources/BookishMac/Resources/Assets.xcassets/Publishers.imageset/Publishers@3x.png
+Sources/BookishMac/Resources/Assets.xcassets/Publishers.imageset/Contents.json
+Sources/BookishMac/Resources/Assets.xcassets/Reveal.imageset/Reveal@3x.png
+Sources/BookishMac/Resources/Assets.xcassets/Reveal.imageset/Contents.json
+Sources/BookishMac/Resources/Assets.xcassets/Reveal.imageset/Reveal@2x.png
+Sources/BookishMac/Resources/Assets.xcassets/Reveal.imageset/Reveal.png
+Sources/BookishMac/Resources/Assets.xcassets/Colours/Bookish Label Text.colorset/Contents.json
+Sources/BookishMac/Resources/Assets.xcassets/Colours/Bookish Index.colorset/Contents.json
+Sources/BookishMac/Resources/Assets.xcassets/Colours/Bookish Detail.colorset/Contents.json
+Sources/BookishMac/Resources/Assets.xcassets/Colours/Bookish Index Text.colorset/Contents.json
+Sources/BookishMac/Resources/Assets.xcassets/Colours/Contents.json
+Sources/BookishMac/Resources/Assets.xcassets/Colours/Bookish Sidebar.colorset/Contents.json
+Sources/BookishMac/Resources/Assets.xcassets/Colours/Bookish Detail Text.colorset/Contents.json
+Sources/BookishMac/Resources/Assets.xcassets/ChooseDate.imageset/ChooseDate@2x.png
+Sources/BookishMac/Resources/Assets.xcassets/ChooseDate.imageset/ChooseDate.png
+Sources/BookishMac/Resources/Assets.xcassets/ChooseDate.imageset/Contents.json
+Sources/BookishMac/Resources/Assets.xcassets/ChooseDate.imageset/ChooseDate@3x.png
+Sources/BookishMac/Resources/Assets.xcassets/People.imageset/People@3x.png
+Sources/BookishMac/Resources/Assets.xcassets/People.imageset/People@2x.png
+Sources/BookishMac/Resources/Assets.xcassets/People.imageset/Contents.json
+Sources/BookishMac/Resources/Assets.xcassets/People.imageset/People.png
+Sources/BookishMac/Resources/Assets.xcassets/ChooseDateSmall.imageset/ChooseDateSmall.png
+Sources/BookishMac/Resources/Assets.xcassets/ChooseDateSmall.imageset/ChooseDateSmall@3x.png
+Sources/BookishMac/Resources/Assets.xcassets/ChooseDateSmall.imageset/ChooseDateSmall@2x.png
+Sources/BookishMac/Resources/Assets.xcassets/ChooseDateSmall.imageset/Contents.json
+Sources/BookishMac/Resources/Assets.xcassets/PersonPlaceholder.imageset/PersonPlaceholder.png
+Sources/BookishMac/Resources/Assets.xcassets/PersonPlaceholder.imageset/Contents.json
+Sources/BookishMac/Resources/Assets.xcassets/PersonPlaceholder.imageset/PersonPlaceholder@3x.png
+Sources/BookishMac/Resources/Assets.xcassets/PersonPlaceholder.imageset/PersonPlaceholder@2x.png
+Sources/BookishMac/Resources/Assets.xcassets/Contents.json
+Sources/BookishMac/Resources/Assets.xcassets/RemoveRelationship.imageset/Contents.json
+Sources/BookishMac/Resources/Assets.xcassets/RemoveRelationship.imageset/RemoveRelationship@3x.png
+Sources/BookishMac/Resources/Assets.xcassets/RemoveRelationship.imageset/RemoveRelationship.png
+Sources/BookishMac/Resources/Assets.xcassets/RemoveRelationship.imageset/RemoveRelationship@2x.png
+Sources/BookishMac/Resources/Assets.xcassets/Books.imageset/Books.png
+Sources/BookishMac/Resources/Assets.xcassets/Books.imageset/Books@3x.png
+Sources/BookishMac/Resources/Assets.xcassets/Books.imageset/Books@2x.png
+Sources/BookishMac/Resources/Assets.xcassets/Books.imageset/Contents.json
+Sources/BookishMac/Resources/Assets.xcassets/Settings.imageset/Settings.png
+Sources/BookishMac/Resources/Assets.xcassets/Settings.imageset/Contents.json
+Sources/BookishMac/Resources/Assets.xcassets/Settings.imageset/Settings@2x.png
+Sources/BookishMac/Resources/Assets.xcassets/Settings.imageset/Settings@3x.png
+Sources/BookishMac/Resources/Assets.xcassets/SeriesPlaceholder.imageset/SeriesPlaceholder@3x.png
+Sources/BookishMac/Resources/Assets.xcassets/SeriesPlaceholder.imageset/SeriesPlaceholder@2x.png
+Sources/BookishMac/Resources/Assets.xcassets/SeriesPlaceholder.imageset/Contents.json
+Sources/BookishMac/Resources/Assets.xcassets/SeriesPlaceholder.imageset/SeriesPlaceholder.png
+Sources/BookishMac/Resources/Assets.xcassets/AddRelationship.imageset/AddRelationship.png
+Sources/BookishMac/Resources/Assets.xcassets/AddRelationship.imageset/AddRelationship@3x.png
+Sources/BookishMac/Resources/Assets.xcassets/AddRelationship.imageset/Contents.json
+Sources/BookishMac/Resources/Assets.xcassets/AddRelationship.imageset/AddRelationship@2x.png
+Sources/BookishMac/Resources/Assets.xcassets/SettingsSmall.imageset/SettingsSmall@3x.png
+Sources/BookishMac/Resources/Assets.xcassets/SettingsSmall.imageset/Contents.json
+Sources/BookishMac/Resources/Assets.xcassets/SettingsSmall.imageset/SettingsSmall@2x.png
+Sources/BookishMac/Resources/Assets.xcassets/SettingsSmall.imageset/SettingsSmall.png
+Sources/BookishMac/Resources/Assets.xcassets/Book.imageset/Book@3x.png
+Sources/BookishMac/Resources/Assets.xcassets/Book.imageset/Book.png
+Sources/BookishMac/Resources/Assets.xcassets/Book.imageset/Book@2x.png
+Sources/BookishMac/Resources/Assets.xcassets/Book.imageset/Contents.json
+Sources/BookishMac/Resources/Assets.xcassets/HilightMarker.imageset/HilightMarker.png
+Sources/BookishMac/Resources/Assets.xcassets/HilightMarker.imageset/Contents.json
+Sources/BookishMac/Resources/Assets.xcassets/HilightMarker.imageset/HilightMarker@3x.png
+Sources/BookishMac/Resources/Assets.xcassets/HilightMarker.imageset/HilightMarker@2x.png
+Sources/BookishMac/Resources/Assets.xcassets/Minus.imageset/Minus@3x.png
+Sources/BookishMac/Resources/Assets.xcassets/Minus.imageset/Minus@2x.png
+Sources/BookishMac/Resources/Assets.xcassets/Minus.imageset/Minus.png
+Sources/BookishMac/Resources/Assets.xcassets/Minus.imageset/Contents.json

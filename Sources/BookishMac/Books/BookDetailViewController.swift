@@ -12,7 +12,6 @@ import Logger
 class BookDetailViewController: DetailController<Book>, BookLifecycleObserver {
     static let HeadingColumnID = NSUserInterfaceItemIdentifier(rawValue: "heading")
 
-    @IBOutlet weak var imageView: NSImageView!
     @IBOutlet weak var subtitleView: NSTextField!
     
     @IBOutlet weak var editButton: NSButton!
@@ -30,25 +29,6 @@ class BookDetailViewController: DetailController<Book>, BookLifecycleObserver {
     }
  
 
-    
-    override func selectionChanged() {
-        super.selectionChanged()
-        let selectedCount = index?.selectedObjects?.count ?? 0
-        if selectedCount == 1 {
-            if let book = indexView.indexArray.selectedObjects[0] as? Book {
-                if let data = book.image, let image = NSImage(data: data) {
-                    imageView.image = image
-                } else {
-                    imageView.image = NSImage(named: "CoverPlaceholder")
-                    if let urlString = book.imageURL, let url = URL(string: urlString) {
-                        application.imageCache.image(for: url) { (image) in
-                            self.imageView.image = image
-                        }
-                    }
-                }
-            }
-        }
-    }
     
     override func updateRows() {
         detailChannel.debug("updating people list")

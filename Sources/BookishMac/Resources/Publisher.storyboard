@@ -10,7 +10,7 @@
         <!--Publisher Index View Controller-->
         <scene sceneID="9Ap-Zt-ZhT">
             <objects>
-                <viewController title="Publisher Index View Controller" storyboardIdentifier="Publisher.Index" id="GsH-md-eCA" customClass="PublisherIndexViewController" customModule="BookishMac" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Publisher Index View Controller" storyboardIdentifier="Publisher.Index" id="GsH-md-eCA" customClass="PublisherIndexViewController" customModule="Bookish" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="XhL-CF-8YJ">
                         <rect key="frame" x="0.0" y="0.0" width="200" height="400"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -104,7 +104,7 @@
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="a78-Rx-oUs">
                                             <rect key="frame" x="18" y="4" width="164" height="14"/>
                                             <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" placeholderString="3 of 100" id="Y4E-az-WcW">
-                                                <font key="font" metaFont="system" size="11"/>
+                                                <font key="font" metaFont="smallSystem"/>
                                                 <color key="textColor" name="Bookish Index Text"/>
                                                 <color key="backgroundColor" name="Bookish Index"/>
                                             </textFieldCell>
@@ -143,8 +143,8 @@
                 <arrayController mode="entity" entityName="Publisher" preservesSelection="NO" id="tA8-j4-jhn">
                     <connections>
                         <binding destination="GsH-md-eCA" name="managedObjectContext" keyPath="self.cvm.managedObjectContext" id="hkJ-bf-9dg"/>
-                        <binding destination="GsH-md-eCA" name="selectionIndexes" keyPath="self.cvm.selectedPublishers" id="e8b-pV-rmU"/>
                         <binding destination="GsH-md-eCA" name="sortDescriptors" keyPath="self.cvm.publisherSorting" previousBinding="e8b-pV-rmU" id="A3n-ES-U7f"/>
+                        <binding destination="GsH-md-eCA" name="selectionIndexes" keyPath="self.cvm.selectedPublishers" id="e8b-pV-rmU"/>
                     </connections>
                 </arrayController>
             </objects>
@@ -153,7 +153,7 @@
         <!--Publisher Detail View Controller-->
         <scene sceneID="tCk-nT-C5k">
             <objects>
-                <viewController storyboardIdentifier="Publisher.Detail" id="U2M-2A-7Qb" customClass="PublisherDetailViewController" customModule="BookishMac" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Publisher.Detail" id="U2M-2A-7Qb" customClass="PublisherDetailViewController" customModule="Bookish" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="Xs1-9b-r4G">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="400"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -170,14 +170,7 @@
                                                 <constraint firstAttribute="width" constant="42" id="EQw-L9-1eS"/>
                                                 <constraint firstAttribute="height" constant="42" id="Twr-Zt-0VU"/>
                                             </constraints>
-                                            <imageCell key="cell" selectable="YES" editable="YES" alignment="left" animates="YES" imageScaling="proportionallyDown" image="PersonPlaceholder" id="CP5-zk-Goa"/>
-                                            <connections>
-                                                <binding destination="U2M-2A-7Qb" name="value" keyPath="self.index.selection.image" id="D6O-jk-w8D">
-                                                    <dictionary key="options">
-                                                        <string key="NSValueTransformerName">PersonImage</string>
-                                                    </dictionary>
-                                                </binding>
-                                            </connections>
+                                            <imageCell key="cell" selectable="YES" editable="YES" alignment="left" animates="YES" imageScaling="proportionallyDown" image="PublisherPlaceholder" id="CP5-zk-Goa"/>
                                         </imageView>
                                         <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="GTp-HP-MDW">
                                             <rect key="frame" x="94" y="352" width="354" height="22"/>
@@ -230,7 +223,7 @@
                                                                 </textFieldCell>
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <prototypeCellViews>
-                                                                    <tableCellView identifier="book" id="0ea-vW-ozU" userLabel="book cell" customClass="BookCell" customModule="BookishMac" customModuleProvider="target">
+                                                                    <tableCellView identifier="book" id="0ea-vW-ozU" userLabel="book cell" customClass="BookCell" customModule="Bookish" customModuleProvider="target">
                                                                         <rect key="frame" x="1" y="1" width="347" height="22"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
@@ -265,7 +258,7 @@
                                                                             <outlet property="textField" destination="4Ym-xb-a2t" id="h2l-YD-0Nt"/>
                                                                         </connections>
                                                                     </tableCellView>
-                                                                    <tableCellView identifier="role" id="L4u-jP-5D2" userLabel="role cell" customClass="RelationshipCell" customModule="BookishMac" customModuleProvider="target">
+                                                                    <tableCellView identifier="role" id="L4u-jP-5D2" userLabel="role cell" customClass="RelationshipCell" customModule="Bookish" customModuleProvider="target">
                                                                         <rect key="frame" x="1" y="25" width="347" height="24"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
@@ -371,6 +364,7 @@
                     </view>
                     <connections>
                         <outlet property="detailsTable" destination="mC6-Zf-gpF" id="uSN-Jm-VW5"/>
+                        <outlet property="imageView" destination="pwF-tx-Ohf" id="WYI-Nb-Opn"/>
                         <outlet property="lastFixedKeyView" destination="ETF-xM-x22" id="Fze-Hu-2n9"/>
                         <outlet property="nameView" destination="GTp-HP-MDW" id="XnH-I5-s1f"/>
                     </connections>
@@ -382,7 +376,7 @@
     </scenes>
     <resources>
         <image name="NSAddTemplate" width="11" height="11"/>
-        <image name="PersonPlaceholder" width="64" height="64"/>
+        <image name="PublisherPlaceholder" width="512" height="512"/>
         <image name="Reveal" width="12" height="12"/>
         <namedColor name="Bookish Detail">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

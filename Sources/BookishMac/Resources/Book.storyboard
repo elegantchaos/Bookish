@@ -182,7 +182,7 @@
                                                 <constraint firstAttribute="height" constant="42" id="E11-fK-gOJ"/>
                                                 <constraint firstAttribute="width" constant="42" id="FCF-as-z1Y"/>
                                             </constraints>
-                                            <imageCell key="cell" selectable="YES" editable="YES" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="proportionallyDown" image="CoverPlaceholder" id="a7U-eh-BHK"/>
+                                            <imageCell key="cell" selectable="YES" editable="YES" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="proportionallyDown" image="BookPlaceholder" id="a7U-eh-BHK"/>
                                             <connections>
                                                 <action selector="changeImage:" target="TBH-Sa-Ff0" id="ecc-po-rQe"/>
                                             </connections>
@@ -787,8 +787,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="BookPlaceholder" width="512" height="512"/>
         <image name="ChooseDateSmall" width="12" height="12"/>
-        <image name="CoverPlaceholder" width="64" height="64"/>
         <image name="Minus" width="12" height="12"/>
         <image name="NSAddTemplate" width="11" height="11"/>
         <image name="Plus" width="12" height="12"/>

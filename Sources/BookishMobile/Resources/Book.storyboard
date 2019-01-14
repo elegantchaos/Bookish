@@ -28,7 +28,7 @@
         <!--Book Detail-->
         <scene sceneID="yUG-lL-AsK">
             <objects>
-                <viewController title="BooksDetail" id="JEX-9P-axG" userLabel="Book Detail" customClass="BookDetailController" customModule="BookishMobile" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="BooksDetail" id="JEX-9P-axG" userLabel="Book Detail" customClass="BookDetailController" customModule="Bookish" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="svH-Pt-448">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -54,7 +54,7 @@
                                 <rect key="frame" x="0.0" y="136" width="375" height="493"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="text" id="E4T-eO-oRA" userLabel="text" customClass="BookDetailRow" customModule="BookishMobile" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="text" id="E4T-eO-oRA" userLabel="text" customClass="BookDetailRow" customModule="Bookish" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="E4T-eO-oRA" id="EK5-8u-ive">
@@ -89,7 +89,7 @@
                                             <outlet property="label" destination="CPf-9R-UcZ" id="nwu-aS-a1c"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="person" id="8jP-PZ-JIr" customClass="BookPersonRow" customModule="BookishMobile" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="person" id="8jP-PZ-JIr" customClass="BookPersonRow" customModule="Bookish" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="72" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8jP-PZ-JIr" id="FDA-BF-Pmn">
@@ -131,7 +131,7 @@
                                             <outlet property="personButton" destination="AL0-Sg-mlg" id="Z74-z0-ceM"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="publisher" id="PrG-vW-feK" customClass="BookPublisherRow" customModule="BookishMobile" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="publisher" id="PrG-vW-feK" customClass="BookPublisherRow" customModule="Bookish" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="116" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="PrG-vW-feK" id="lrQ-hL-abz">
@@ -173,7 +173,7 @@
                                             <outlet property="publisherButton" destination="2Lq-Ru-KKv" id="H2m-G8-r7r"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="series" id="AJG-6E-8o0" customClass="BookSeriesRow" customModule="BookishMobile" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="series" id="AJG-6E-8o0" customClass="BookSeriesRow" customModule="Bookish" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="160" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="AJG-6E-8o0" id="giJ-Ml-box">
@@ -215,7 +215,7 @@
                                             <outlet property="seriesButton" destination="JRd-um-fi2" id="7Tc-2t-peo"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="date" id="0i1-E9-RNz" customClass="BookDateRow" customModule="BookishMobile" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="date" id="0i1-E9-RNz" customClass="BookDateRow" customModule="Bookish" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="204" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0i1-E9-RNz" id="fTl-ql-RjZ">
@@ -256,7 +256,7 @@
                                     <outlet property="delegate" destination="JEX-9P-axG" id="sbA-jp-mls"/>
                                 </connections>
                             </tableView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="S0q-2t-1sR" userLabel="Image">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="S0q-2t-1sR" userLabel="Image">
                                 <rect key="frame" x="4" y="68" width="64" height="64"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="64" id="XUG-63-Iba"/>
@@ -322,7 +322,7 @@
         <!--Book Index-->
         <scene sceneID="smW-Zh-WAh">
             <objects>
-                <tableViewController storyboardIdentifier="BooksIndex" title="BooksIndex" clearsSelectionOnViewWillAppear="NO" id="7bK-jq-Zjz" userLabel="Book Index" customClass="BookIndexController" customModule="BookishMobile" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="BooksIndex" title="BooksIndex" clearsSelectionOnViewWillAppear="NO" id="7bK-jq-Zjz" userLabel="Book Index" customClass="BookIndexController" customModule="Bookish" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="r7i-6Z-zg0">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

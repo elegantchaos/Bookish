@@ -10,7 +10,7 @@
         <!--Person Index View Controller-->
         <scene sceneID="NtS-yL-Zz7">
             <objects>
-                <viewController storyboardIdentifier="Person.Index" id="pkB-w0-Ho6" customClass="PersonIndexViewController" customModule="BookishMac" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Person.Index" id="pkB-w0-Ho6" customClass="PersonIndexViewController" customModule="Bookish" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="WIJ-ub-d5r">
                         <rect key="frame" x="0.0" y="0.0" width="200" height="400"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -115,7 +115,7 @@
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="pPk-kC-luC">
                                             <rect key="frame" x="18" y="4" width="164" height="14"/>
                                             <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" placeholderString="3 of 100" id="Eo9-y8-xbe">
-                                                <font key="font" metaFont="system" size="11"/>
+                                                <font key="font" metaFont="smallSystem"/>
                                                 <color key="textColor" name="Bookish Index Text"/>
                                                 <color key="backgroundColor" name="Bookish Index"/>
                                             </textFieldCell>
@@ -154,8 +154,8 @@
                 <arrayController mode="entity" entityName="Person" preservesSelection="NO" id="2aD-Rb-QIq">
                     <connections>
                         <binding destination="pkB-w0-Ho6" name="managedObjectContext" keyPath="self.cvm.managedObjectContext" id="xlf-yF-oNv"/>
-                        <binding destination="pkB-w0-Ho6" name="selectionIndexes" keyPath="self.cvm.selectedPeople" id="QGa-fI-C4B"/>
                         <binding destination="pkB-w0-Ho6" name="sortDescriptors" keyPath="self.cvm.publisherSorting" previousBinding="QGa-fI-C4B" id="Oef-Be-qHt"/>
+                        <binding destination="pkB-w0-Ho6" name="selectionIndexes" keyPath="self.cvm.selectedPeople" id="QGa-fI-C4B"/>
                     </connections>
                 </arrayController>
             </objects>
@@ -164,7 +164,7 @@
         <!--Person Detail View Controller-->
         <scene sceneID="xv8-hT-z0j">
             <objects>
-                <viewController storyboardIdentifier="Person.Detail" id="YQJ-9e-4qw" customClass="PersonDetailViewController" customModule="BookishMac" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Person.Detail" id="YQJ-9e-4qw" customClass="PersonDetailViewController" customModule="Bookish" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="QrP-6D-yZd">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="400"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -182,13 +182,6 @@
                                                 <constraint firstAttribute="width" constant="42" id="RsN-0h-aaX"/>
                                             </constraints>
                                             <imageCell key="cell" selectable="YES" editable="YES" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="proportionallyDown" image="PersonPlaceholder" id="unM-9l-ls3"/>
-                                            <connections>
-                                                <binding destination="YQJ-9e-4qw" name="value" keyPath="self.index.selection.image" id="XY7-wg-yWU">
-                                                    <dictionary key="options">
-                                                        <string key="NSValueTransformerName">PersonImage</string>
-                                                    </dictionary>
-                                                </binding>
-                                            </connections>
                                         </imageView>
                                         <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Wvi-TN-fxn">
                                             <rect key="frame" x="94" y="352" width="354" height="22"/>
@@ -243,7 +236,7 @@
                                                                 </textFieldCell>
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <prototypeCellViews>
-                                                                    <tableCellView identifier="book" id="kOa-mX-ie0" userLabel="book cell" customClass="BookCell" customModule="BookishMac" customModuleProvider="target">
+                                                                    <tableCellView identifier="book" id="kOa-mX-ie0" userLabel="book cell" customClass="BookCell" customModule="Bookish" customModuleProvider="target">
                                                                         <rect key="frame" x="1" y="1" width="347" height="22"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
@@ -281,7 +274,7 @@
                                                                             <outlet property="textField" destination="oeA-lN-ssU" id="GKy-je-ajI"/>
                                                                         </connections>
                                                                     </tableCellView>
-                                                                    <tableCellView identifier="role" id="BUh-17-nIV" userLabel="role cell" customClass="RelationshipCell" customModule="BookishMac" customModuleProvider="target">
+                                                                    <tableCellView identifier="role" id="BUh-17-nIV" userLabel="role cell" customClass="RelationshipCell" customModule="Bookish" customModuleProvider="target">
                                                                         <rect key="frame" x="1" y="25" width="347" height="24"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
@@ -388,6 +381,7 @@
                     </view>
                     <connections>
                         <outlet property="detailsTable" destination="jHn-8w-0MB" id="WIl-t7-M0u"/>
+                        <outlet property="imageView" destination="HXp-Nq-8Tg" id="Aj9-RD-Fm3"/>
                         <outlet property="lastFixedKeyView" destination="Suv-V7-thw" id="HMy-fa-GO8"/>
                         <outlet property="nameView" destination="Wvi-TN-fxn" id="asu-16-zN9"/>
                     </connections>

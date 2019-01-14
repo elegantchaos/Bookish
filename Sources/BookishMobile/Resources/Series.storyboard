@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="2Lc-mJ-yY6">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -9,13 +12,13 @@
         <!--Series Detail-->
         <scene sceneID="lT9-9B-Yjr">
             <objects>
-                <viewController id="dVV-9Z-yGs" userLabel="Series Detail" customClass="SeriesDetailController" customModule="BookishMobile" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="dVV-9Z-yGs" userLabel="Series Detail" customClass="SeriesDetailController" customModule="Bookish" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="EhG-yC-ZpN">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lb9-IM-mxt">
-                                <rect key="frame" x="325" y="584" width="46" height="30"/>
+                                <rect key="frame" x="325" y="633" width="46" height="30"/>
                                 <state key="normal" title="Button"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="actionID" value="NewBook"/>
@@ -25,10 +28,10 @@
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="iEv-8J-J30" userLabel="Detail Table">
-                                <rect key="frame" x="4" y="323.5" width="367" height="256.5"/>
+                                <rect key="frame" x="4" y="323.5" width="367" height="305.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="book" id="zye-T4-Xvy" customClass="SeriesBookRow" customModule="BookishMobile" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="book" id="zye-T4-Xvy" customClass="SeriesBookRow" customModule="Bookish" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="367" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zye-T4-Xvy" id="IKr-Iz-Dzt">
@@ -72,7 +75,7 @@
                                     </textField>
                                 </subviews>
                             </stackView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ooo-oa-nlg" userLabel="Image">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ooo-oa-nlg" userLabel="Image">
                                 <rect key="frame" x="4" y="68" width="64" height="64"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="64" id="cNe-Ce-OrI"/>
@@ -122,9 +125,9 @@
         <!--Series Index-->
         <scene sceneID="6wX-qI-svv">
             <objects>
-                <tableViewController clearsSelectionOnViewWillAppear="NO" id="94z-01-sl4" userLabel="Series Index" customClass="SeriesIndexController" customModule="BookishMobile" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController clearsSelectionOnViewWillAppear="NO" id="94z-01-sl4" userLabel="Series Index" customClass="SeriesIndexController" customModule="Bookish" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="GvB-68-pIo">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
