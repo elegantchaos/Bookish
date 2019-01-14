@@ -89,7 +89,7 @@
                                     </textField>
                                 </subviews>
                             </stackView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vXo-mJ-5K7" userLabel="Image">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vXo-mJ-5K7" userLabel="Image">
                                 <rect key="frame" x="4" y="68" width="64" height="64"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="64" id="G5J-hB-1bn"/>

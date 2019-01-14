@@ -256,7 +256,7 @@
                                     <outlet property="delegate" destination="JEX-9P-axG" id="sbA-jp-mls"/>
                                 </connections>
                             </tableView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="S0q-2t-1sR" userLabel="Image">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="S0q-2t-1sR" userLabel="Image">
                                 <rect key="frame" x="4" y="68" width="64" height="64"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="64" id="XUG-63-Iba"/>
@@ -392,7 +392,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Book" width="32" height="32"/>
+        <image name="Book" width="16" height="16"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Tll-UG-LXB"/>
