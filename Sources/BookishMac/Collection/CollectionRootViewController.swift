@@ -54,3 +54,26 @@ class CollectionRootViewController: CollectionViewController {
         }
     }
 }
+
+extension CollectionRootViewController: NSMenuItemValidation {
+    func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
+        switch menuItem.action {
+        case #selector(undo(_:)):
+            return cvm.managedObjectContext.undoManager?.canUndo ?? false
+            
+        case #selector(redo(_:)):
+            return cvm.managedObjectContext.undoManager?.canRedo ?? false
+            
+        default:
+            return true
+        }
+    }
+    @objc @IBAction func undo(_ sender: Any) {
+        cvm.managedObjectContext.undoManager?.undo()
+    }
+    
+    @IBAction func redo(_ sender: Any) {
+        cvm.managedObjectContext.undoManager?.redo()
+    }
+    
+}

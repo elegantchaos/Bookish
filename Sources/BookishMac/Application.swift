@@ -120,7 +120,8 @@ extension Application: NSApplicationDelegate {
 
 extension Application: NSMenuItemValidation {
     func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
-        if menuItem.action == #selector(delete(_:)) {
+        switch menuItem.action {
+        case #selector(delete(_:)):
             // special case for the Delete menu item in the Edit menu
             // we want to leave the action as the default, so that it works in controls in the normal
             // way, but when it falls down lower we want to map it to the DeleteItem action
@@ -129,8 +130,18 @@ extension Application: NSMenuItemValidation {
             
             watchForDeleteItemClosing(item: menuItem)
             return validation.enabled
+
+        default:
+            return true
         }
-        return false
+    }
+    
+    @IBAction func undo(_ sender: Any) {
+        viewModel.managedObjectContext.undoManager?.undo()
+    }
+    
+    @IBAction func redo(_ sender: Any) {
+        viewModel.managedObjectContext.undoManager?.redo()
     }
     
     @IBAction func delete(_ sender: Any) {

@@ -46,7 +46,6 @@ class CollectionWindowController: NSWindowController, WindowControllerWithViewMo
             }
         }
     }
-
 }
 
 extension CollectionWindowController: BookViewer {
