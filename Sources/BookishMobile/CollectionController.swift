@@ -37,9 +37,11 @@ class CollectionController: UITabBarController {
         }
 
         let viewModel = application.viewModel
+        self.selectedIndex = viewModel.modeIndex
         let modeObserver = application.observe(\Application.viewModel.modeIndex) { (app, change) in
             self.selectedIndex = viewModel.modeIndex
         }
+        
         observers.append(modeObserver)
     }
     

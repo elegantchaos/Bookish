@@ -14,7 +14,7 @@ import Foundation
         case settings = 4
     }
     
-    @objc dynamic var modeIndex: Int = 0
+    @objc dynamic var modeIndex: Int = Mode.books.rawValue
     
     var mode: Mode {
         get { return Mode(rawValue: modeIndex)! }
