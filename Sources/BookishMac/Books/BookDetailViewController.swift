@@ -11,9 +11,10 @@ import Logger
 
 class BookDetailViewController: DetailController<Book>, BookLifecycleObserver {
     static let HeadingColumnID = NSUserInterfaceItemIdentifier(rawValue: "heading")
+    static let ControlColumnID = NSUserInterfaceItemIdentifier(rawValue: "control")
 
     @IBOutlet weak var subtitleView: NSTextField!
-    
+    @IBOutlet weak var controlColumn: NSTableColumn!
     @IBOutlet weak var editButton: NSButton!
     @IBOutlet var personList: NSArrayController!
     
@@ -24,8 +25,8 @@ class BookDetailViewController: DetailController<Book>, BookLifecycleObserver {
         super.viewWillAppear()
         
         detailChannel.debug("appearing")
-        
         personList.sortDescriptors = cvm.personSorting
+        adjustControlsForEditing()
     }
  
 
@@ -45,10 +46,9 @@ class BookDetailViewController: DetailController<Book>, BookLifecycleObserver {
     override func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         guard let columnID = tableColumn?.identifier else { return nil }
         
-        let rowInfo = source.info(for: row, editing: editing)
-        let headingID = BookDetailViewController.HeadingColumnID
-        let isHeading = columnID == headingID
-        let viewID = isHeading ? headingID : NSUserInterfaceItemIdentifier(rawValue: rowInfo.kind.rawValue)
+        let rowInfo = source.info(for: row)
+        let isSpecial = (columnID == BookDetailViewController.HeadingColumnID) || (columnID == BookDetailViewController.ControlColumnID)
+        let viewID = isSpecial ? columnID : NSUserInterfaceItemIdentifier(rawValue: rowInfo.kind.rawValue)
         
         guard let view = tableView.makeView(withIdentifier: viewID, owner: self) else { return nil }
         if let cell = view as? BookDetailTableCell {
@@ -79,13 +79,17 @@ class BookDetailViewController: DetailController<Book>, BookLifecycleObserver {
 extension BookDetailViewController: EditableView {
     func toggleEditing() {
         editing = !editing
-        editButton.title = editing ? "Done" : "Edit"
-        detailChannel.debug(editing ? "enabled editing" : "disabled editing")
         let newResponder: NSResponder = editing ? nameView : indexView
         view.window?.makeFirstResponder(newResponder)
+        adjustControlsForEditing()
         selectionChanged()
     }
 
+    func adjustControlsForEditing() {
+        controlColumn.isHidden = !editing
+        editButton.title = editing ? "Done" : "Edit"
+        detailChannel.debug(editing ? "enabled editing" : "disabled editing")
+    }
 }
 
 // MARK: Local IBActions
