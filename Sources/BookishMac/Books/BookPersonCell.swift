@@ -20,11 +20,15 @@ extension BookPersonCell: BookDetailTableCell {
         assert(row.category == .person)
         let source = view.source
         detailView = view
-        let relationship = source.person(for: row)
-        objectValue = relationship
-        if let person = relationship.person, let name = person.name {
-            personField.stringValue = name
-            selectedPerson = person
+        if row.placeholder {
+            
+        } else {
+            let relationship = source.person(for: row)
+            objectValue = relationship
+            if let person = relationship.person, let name = person.name {
+                personField.stringValue = name
+                selectedPerson = person
+            }
         }
     }
 

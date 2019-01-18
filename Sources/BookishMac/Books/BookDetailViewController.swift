@@ -16,7 +16,9 @@ class BookDetailViewController: DetailController<Book>, BookLifecycleObserver {
     @IBOutlet weak var subtitleView: NSTextField!
     @IBOutlet weak var controlColumn: NSTableColumn!
     @IBOutlet weak var editButton: NSButton!
-    @IBOutlet var personList: NSArrayController!
+    @IBOutlet weak var personList: NSArrayController!
+    @IBOutlet weak var publisherList: NSArrayController!
+    @IBOutlet weak var seriesList: NSArrayController!
     
     var source = DetailDataSource()
     var editing = false
@@ -26,16 +28,20 @@ class BookDetailViewController: DetailController<Book>, BookLifecycleObserver {
         
         detailChannel.debug("appearing")
         personList.sortDescriptors = cvm.personSorting
+        calculateRows()
         adjustControlsForEditing()
     }
  
 
-    
+    func calculateRows() {
+        let selection = (indexView.indexArray.selectedObjects as? [Book]) ?? []
+        source.filter(for: selection, editing: editing)
+    }
+
     override func updateRows() {
         detailChannel.debug("updating people list")
 
-        let selection = (indexView.indexArray.selectedObjects as? [Book]) ?? []
-        source.filter(for: selection, editing: editing)
+        calculateRows()
         detailsTable.reloadData()
     }
  
@@ -47,8 +53,7 @@ class BookDetailViewController: DetailController<Book>, BookLifecycleObserver {
         guard let columnID = tableColumn?.identifier else { return nil }
         
         let rowInfo = source.info(for: row)
-        let isSpecial = (columnID == BookDetailViewController.HeadingColumnID) || (columnID == BookDetailViewController.ControlColumnID)
-        let viewID = isSpecial ? columnID : NSUserInterfaceItemIdentifier(rawValue: rowInfo.kind.rawValue)
+        let viewID = NSUserInterfaceItemIdentifier(rawValue: rowInfo.viewID(for: columnID.rawValue))
         
         guard let view = tableView.makeView(withIdentifier: viewID, owner: self) else { return nil }
         if let cell = view as? BookDetailTableCell {

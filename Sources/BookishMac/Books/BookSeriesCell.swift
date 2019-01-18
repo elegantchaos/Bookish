@@ -18,12 +18,17 @@ extension BookSeriesCell: BookDetailTableCell {
         assert(row.category == .series)
         let source = view.source
         detailView = view
-        let entry = source.series(for: row)
-        objectValue = entry
-        if let name = entry.series?.name {
-            seriesField?.stringValue = name
+        if row.placeholder {
+            
+        } else {
+            let entry = source.series(for: row)
+            objectValue = entry
+            if let name = entry.series?.name {
+                seriesField?.stringValue = name
+            }
+            indexField.integerValue = Int(entry.index)
         }
-        indexField.integerValue = Int(entry.index)
+        
     }
     
     func keyView() -> NSView? {
