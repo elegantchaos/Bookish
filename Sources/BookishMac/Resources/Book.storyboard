@@ -334,7 +334,8 @@
                                                                                     </userDefinedRuntimeAttribute>
                                                                                 </userDefinedRuntimeAttributes>
                                                                                 <connections>
-                                                                                    <binding destination="t5w-iU-dsl" name="content" keyPath="arrangedObjects.name" id="X9z-eE-JZg"/>
+                                                                                    <binding destination="t5w-iU-dsl" name="content" keyPath="arrangedObjects.name" id="rTj-wB-jwv"/>
+                                                                                    <binding destination="t5w-iU-dsl" name="contentObjects" keyPath="arrangedObjects" previousBinding="rTj-wB-jwv" id="QTl-EG-E3v"/>
                                                                                 </connections>
                                                                             </popUpButton>
                                                                         </subviews>
@@ -457,7 +458,7 @@
                                                                             </button>
                                                                             <comboBox verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="up0-NK-LzO" customClass="AnnotatedComboBox" customModule="Bookish" customModuleProvider="target">
                                                                                 <rect key="frame" x="2" y="-2" width="265" height="23"/>
-                                                                                <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" title="Person" placeholderString="Person" numberOfVisibleItems="5" id="x93-id-LgP">
+                                                                                <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" placeholderString="person name" numberOfVisibleItems="5" id="x93-id-LgP">
                                                                                     <font key="font" metaFont="system" size="14"/>
                                                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -468,7 +469,6 @@
                                                                                     </objectValues>
                                                                                 </comboBoxCell>
                                                                                 <connections>
-                                                                                    <binding destination="NUZ-ew-ZHD" name="content" keyPath="arrangedObjects.name" id="TcP-mf-nZz"/>
                                                                                     <binding destination="TBH-Sa-Ff0" name="font" keyPath="self.cvm.detailFont" id="3S1-D5-yMO"/>
                                                                                     <outlet property="delegate" destination="Xqd-Mi-EGo" id="vYx-lc-luE"/>
                                                                                 </connections>

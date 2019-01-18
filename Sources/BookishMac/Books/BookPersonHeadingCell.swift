@@ -10,10 +10,23 @@ import AppKit
 class BookPersonHeadingCell: NSTableCellView, BookDetailTableCell {
     @IBOutlet weak var rolePopup: ColoredPopUpButton!
     func setup(for detailView: BookDetailViewController, row: DetailDataSource.RowInfo) {
-        rolePopup.setItemStyles()
+//        rolePopup.setItemStyles()
+
+        assert(row.category == .person)
         let source = detailView.source
-        if let field = subviews.first as? NSTextField {
-            field.stringValue = source.heading(for: row)
+        if row.placeholder {
+            rolePopup.selectItem(withTitle: "Author")
+        } else {
+            let relationship = source.person(for: row)
+            objectValue = relationship
+            for item in rolePopup.itemArray {
+                if let itemRole = item.representedObject as? Role, itemRole == relationship.role {
+                    rolePopup.select(item)
+                    break
+                }
+            }
+//            if let role = relationship.role {
+//            }
         }
     }
     

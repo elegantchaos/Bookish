@@ -26,7 +26,7 @@ extension BookEditablePersonCell: BookDetailTableCell {
         let source = view.source
         detailView = view
         if row.placeholder {
-            
+            personCombo.stringValue = ""
         } else {
             let relationship = source.person(for: row)
             objectValue = relationship
