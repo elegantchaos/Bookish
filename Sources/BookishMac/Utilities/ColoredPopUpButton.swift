@@ -5,25 +5,22 @@
 
 import AppKit
 
+var ColoredPopupContext = 0
+
 class ColoredPopUpButton: NSPopUpButton {
-    var tColor: NSColor?
+    var itemColor: NSColor?
     
     @IBInspectable var titleColor: NSColor? {
-        get { return tColor }
+        get { return itemColor }
         set (value) {
-            tColor = value
+            itemColor = value
             setItemStyles()
         }
     }
     
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
+    override func awakeFromNib() {
+        super.awakeFromNib()
         setItemStyles()
-    }
-
-    override func synchronizeTitleAndSelectedItem() {
-        setItemStyles()
-        super.synchronizeTitleAndSelectedItem()
     }
 
     override func addItem(withTitle title: String) {
@@ -42,7 +39,7 @@ class ColoredPopUpButton: NSPopUpButton {
     }
 
     public func setItemStyles() {
-        if let color = tColor {
+        if let color = itemColor {
             for item in self.itemArray {
                 item.attributedTitle = NSAttributedString(string: item.title, attributes: [NSAttributedString.Key.foregroundColor: color])
             }
