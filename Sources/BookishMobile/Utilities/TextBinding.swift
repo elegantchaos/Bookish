@@ -26,7 +26,9 @@ class TextBinding<T>: NSObject {
             boundText = ""
         }
         
-        source.addObserver(self, forKeyPath: path, options: [], context: &textBindingContext)
+        if path != "identifier" {
+            source.addObserver(self, forKeyPath: path, options: [], context: &textBindingContext)
+        }
         
     }
     
