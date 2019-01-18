@@ -45,7 +45,7 @@ class BookDetailController: DetailController<Book> {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let book = representedObject else { fatalError("should have book set") }
-        let info = source.info(for: indexPath.row, editing: isEditing)
+        let info = source.info(for: indexPath.row)
         let identifier = info.kind.rawValue
         guard let cell = tableView.dequeueReusableCell(withIdentifier: identifier) as? BookDetailRow else {
             detailViewChannel.log("Unregistered cell type \(identifier).")
