@@ -53,7 +53,7 @@ extension BookSeriesCell: BookDetailTableCell {
 
 extension BookSeriesCell: ActionContextProvider {
     func provide(context: ActionContext) {
-        if let entry = objectValue as? SeriesEntry, let series = entry.series {
+        if let series = objectValue as? Series {
             context.info[SeriesAction.seriesKey] = series
         }
     }
