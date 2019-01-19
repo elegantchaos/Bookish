@@ -334,8 +334,8 @@
                                                                                     </userDefinedRuntimeAttribute>
                                                                                 </userDefinedRuntimeAttributes>
                                                                                 <connections>
-                                                                                    <binding destination="t5w-iU-dsl" name="content" keyPath="arrangedObjects.name" id="rTj-wB-jwv"/>
-                                                                                    <binding destination="t5w-iU-dsl" name="contentObjects" keyPath="arrangedObjects" previousBinding="rTj-wB-jwv" id="QTl-EG-E3v"/>
+                                                                                    <binding destination="t5w-iU-dsl" name="content" keyPath="arrangedObjects.lowercaseName" id="gg8-xv-S7p"/>
+                                                                                    <binding destination="t5w-iU-dsl" name="contentObjects" keyPath="arrangedObjects" previousBinding="gg8-xv-S7p" id="fXG-Xk-RT9"/>
                                                                                 </connections>
                                                                             </popUpButton>
                                                                         </subviews>
@@ -508,7 +508,7 @@
                                                                             </button>
                                                                             <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="ykz-Tv-Hz6">
                                                                                 <rect key="frame" x="2" y="2" width="294" height="18"/>
-                                                                                <textFieldCell key="cell" selectable="YES" sendsActionOnEndEditing="YES" alignment="left" placeholderString="value" id="Y9d-m4-U5Q">
+                                                                                <textFieldCell key="cell" selectable="YES" sendsActionOnEndEditing="YES" alignment="left" placeholderString="publisher" id="Y9d-m4-U5Q">
                                                                                     <font key="font" metaFont="systemBold" size="14"/>
                                                                                     <color key="textColor" name="Bookish Detail Text"/>
                                                                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -519,7 +519,7 @@
                                                                             </textField>
                                                                             <comboBox verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0Kw-Mc-cKb" userLabel="Publisher" customClass="AnnotatedComboBox" customModule="Bookish" customModuleProvider="target">
                                                                                 <rect key="frame" x="2" y="-2" width="295" height="23"/>
-                                                                                <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" title="Publisher" placeholderString="Publisher" numberOfVisibleItems="5" id="R0n-Lg-8k9">
+                                                                                <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" placeholderString="publisher" numberOfVisibleItems="5" id="R0n-Lg-8k9">
                                                                                     <font key="font" metaFont="system" size="14"/>
                                                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -730,9 +730,9 @@
                                                                         <rect key="frame" x="125" y="180" width="315" height="24"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
-                                                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="g9e-mB-bmk" userLabel="Series">
-                                                                                <rect key="frame" x="2" y="2" width="41" height="18"/>
-                                                                                <textFieldCell key="cell" selectable="YES" sendsActionOnEndEditing="YES" alignment="left" placeholderString="value" id="DeX-RK-agD">
+                                                                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="g9e-mB-bmk" userLabel="Name">
+                                                                                <rect key="frame" x="2" y="2" width="224" height="18"/>
+                                                                                <textFieldCell key="cell" selectable="YES" sendsActionOnEndEditing="YES" alignment="left" placeholderString="publisher" id="DeX-RK-agD">
                                                                                     <font key="font" metaFont="systemBold" size="14"/>
                                                                                     <color key="textColor" name="Bookish Detail Text"/>
                                                                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -742,12 +742,12 @@
                                                                                     <outlet property="delegate" destination="Biy-Ug-fg1" id="vak-MH-7yP"/>
                                                                                 </connections>
                                                                             </textField>
-                                                                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="KGH-sB-tNk" userLabel="Index">
-                                                                                <rect key="frame" x="43" y="2" width="251" height="18"/>
+                                                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="KGH-sB-tNk" userLabel="Position">
+                                                                                <rect key="frame" x="226" y="2" width="68" height="18"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="64" id="6oM-1t-69r"/>
                                                                                 </constraints>
-                                                                                <textFieldCell key="cell" selectable="YES" sendsActionOnEndEditing="YES" alignment="left" placeholderString="value" id="VXG-lr-d2q">
+                                                                                <textFieldCell key="cell" selectable="YES" sendsActionOnEndEditing="YES" alignment="left" placeholderString="#" id="VXG-lr-d2q">
                                                                                     <font key="font" metaFont="systemBold" size="14"/>
                                                                                     <color key="textColor" name="Bookish Detail Text"/>
                                                                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -767,6 +767,24 @@
                                                                                     </connections>
                                                                                 </buttonCell>
                                                                             </button>
+                                                                            <comboBox verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="amO-hE-nks" userLabel="Combo" customClass="AnnotatedComboBox" customModule="Bookish" customModuleProvider="target">
+                                                                                <rect key="frame" x="4" y="-1" width="223" height="23"/>
+                                                                                <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" placeholderString="series" numberOfVisibleItems="5" id="99E-oc-Q9p">
+                                                                                    <font key="font" metaFont="system" size="14"/>
+                                                                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                                    <objectValues>
+                                                                                        <string>Item 1</string>
+                                                                                        <string>Item 2</string>
+                                                                                        <string>Item 3</string>
+                                                                                    </objectValues>
+                                                                                </comboBoxCell>
+                                                                                <connections>
+                                                                                    <binding destination="HyZ-zE-ELC" name="content" keyPath="arrangedObjects.name" id="VlK-xQ-ao2"/>
+                                                                                    <binding destination="TBH-Sa-Ff0" name="font" keyPath="self.cvm.detailFont" id="nx4-xq-C28"/>
+                                                                                    <outlet property="delegate" destination="Biy-Ug-fg1" id="qgM-et-Qva"/>
+                                                                                </connections>
+                                                                            </comboBox>
                                                                         </subviews>
                                                                         <constraints>
                                                                             <constraint firstItem="KGH-sB-tNk" firstAttribute="leading" secondItem="g9e-mB-bmk" secondAttribute="trailing" constant="4" id="9MH-wV-Zis"/>
@@ -774,12 +792,17 @@
                                                                             <constraint firstAttribute="bottom" secondItem="g9e-mB-bmk" secondAttribute="bottom" constant="2" id="IdU-g1-YMz"/>
                                                                             <constraint firstItem="PJr-xJ-30U" firstAttribute="centerY" secondItem="g9e-mB-bmk" secondAttribute="centerY" id="Jxp-4t-zEo"/>
                                                                             <constraint firstItem="g9e-mB-bmk" firstAttribute="leading" secondItem="Biy-Ug-fg1" secondAttribute="leading" constant="4" id="OOU-Lr-Y0H"/>
+                                                                            <constraint firstItem="amO-hE-nks" firstAttribute="trailing" secondItem="g9e-mB-bmk" secondAttribute="trailing" id="Om9-5P-Mjp"/>
                                                                             <constraint firstItem="KGH-sB-tNk" firstAttribute="centerY" secondItem="g9e-mB-bmk" secondAttribute="centerY" id="pe2-ye-aaH"/>
+                                                                            <constraint firstItem="amO-hE-nks" firstAttribute="leading" secondItem="g9e-mB-bmk" secondAttribute="leading" id="vSB-3g-o1I"/>
                                                                             <constraint firstItem="PJr-xJ-30U" firstAttribute="leading" secondItem="KGH-sB-tNk" secondAttribute="trailing" constant="4" id="wn0-aB-jHx"/>
                                                                             <constraint firstItem="g9e-mB-bmk" firstAttribute="top" secondItem="Biy-Ug-fg1" secondAttribute="top" constant="4" id="yb8-Y3-uPA"/>
+                                                                            <constraint firstItem="g9e-mB-bmk" firstAttribute="centerY" secondItem="amO-hE-nks" secondAttribute="centerY" id="zpc-Xe-QJX"/>
                                                                         </constraints>
                                                                         <connections>
                                                                             <outlet property="indexField" destination="KGH-sB-tNk" id="WKH-PR-QUe"/>
+                                                                            <outlet property="positionField" destination="KGH-sB-tNk" id="Xwn-Zy-4Wi"/>
+                                                                            <outlet property="seriesCombo" destination="amO-hE-nks" id="4OW-11-jwQ"/>
                                                                             <outlet property="seriesField" destination="g9e-mB-bmk" id="NkF-0k-Ef7"/>
                                                                             <outlet property="textField" destination="g9e-mB-bmk" id="WFd-GM-yZ0"/>
                                                                         </connections>

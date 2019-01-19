@@ -12,8 +12,8 @@ class SeriesDetailViewController: DetailController<Series> {
     
     override func detailItemsForSelection() -> [NSManagedObject] {
         let selected: [Series] = selectedItems()
-        if selected.count == 1, let entries = selected[0].entries as? Set<Entry> {
-            return entries.sorted(by: { $0.index < $1.index })
+        if selected.count == 1, let entries = selected[0].entries as? Set<SeriesEntry> {
+            return entries.sorted(by: { $0.position < $1.position })
         }
         
         return []
@@ -21,7 +21,7 @@ class SeriesDetailViewController: DetailController<Series> {
     
     override func identifier(for item: NSManagedObject) -> NSUserInterfaceItemIdentifier {
         switch item {
-        case is Entry:
+        case is SeriesEntry:
             return SeriesDetailViewController.entryViewID
         default:
             return super.identifier(for: item)

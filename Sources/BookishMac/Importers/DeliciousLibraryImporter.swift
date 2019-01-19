@@ -110,7 +110,7 @@ class DeliciousLibraryImportSession: ImportSession {
                 }
                 
                 if let series = record["seriesSingularString"] as? String, !series.isEmpty {
-                    process(series: series, index: 0, for: book)
+                    process(series: series, position: 0, for: book)
                 }
             }
         }
@@ -151,7 +151,7 @@ class DeliciousLibraryImportSession: ImportSession {
         }
     }
     
-    private func process(series: String, index: Int, for book: Book) {
+    private func process(series: String, position: Int, for book: Book) {
         let trimmed = series.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         if trimmed != "" {
             let series: Series
@@ -162,11 +162,11 @@ class DeliciousLibraryImportSession: ImportSession {
                 series.name = trimmed
                 cachedSeries[trimmed] = series
             }
-            let entry = Entry(context: context)
+            let entry = SeriesEntry(context: context)
             entry.book = book
             entry.series = series
-            if index != 0 {
-                entry.index = Int16(index)
+            if position != 0 {
+                entry.position = Int16(position)
             }
         }
     }

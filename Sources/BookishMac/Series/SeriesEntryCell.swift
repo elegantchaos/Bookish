@@ -10,15 +10,15 @@ import BookishModel
 
 class SeriesEntryCell: NSTableCellView, ActionContextProvider, DetailTableCell {
     func setup(for view: DetailControllerBase, row: Int, item: NSManagedObject) {
-        if let entry = item as? Entry, let name = entry.book?.name {
+        if let entry = item as? SeriesEntry, let name = entry.book?.name {
             objectValue = item
-            textField?.stringValue = "#\(entry.index): \(name)"
+            textField?.stringValue = "#\(entry.position): \(name)"
             validateButtons()
         }
     }
     
     func provide(context: ActionContext) {
-        if let entry = objectValue as? Entry {
+        if let entry = objectValue as? SeriesEntry {
             context.info[BookAction.bookKey] = entry.book
         }
     }

@@ -207,7 +207,7 @@ class SeriesScanner {
                         book.name = detected.name
                         book.subtitle = detected.subtitle
                         deliciousChannel.log("extracted <\(detected.name)> <\(detected.subtitle)> <\(detected.series) \(detected.index)> from <\(name)> <\(subtitle)>")
-                        process(series: detected.series, index: detected.index, for: book)
+                        process(series: detected.series, position: detected.index, for: book)
                         matched = true
                     }
                 }
@@ -216,7 +216,7 @@ class SeriesScanner {
         
     }
     
-    private func process(series: String, index: Int, for book: Book) {
+    private func process(series: String, position: Int, for book: Book) {
         let trimmed = series.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         if trimmed != "" {
             let series: Series
@@ -227,23 +227,23 @@ class SeriesScanner {
                 series.name = trimmed
                 cachedSeries[trimmed] = series
             }
-            let entry = Entry(context: context)
+            let entry = SeriesEntry(context: context)
             entry.book = book
             entry.series = series
-            if index != 0 {
-                entry.index = Int16(index)
+            if position != 0 {
+                entry.position = Int16(position)
             }
         }
     }
     
-    private func extractIndex(from series: String, book: Book) -> (String, Int) {
-        if let (extractedSeries, index) = extractIndex(from: series) {
+    private func extractPosition(from series: String, book: Book) -> (String, Int) {
+        if let (extractedSeries, index) = extractPosition(from: series) {
             deliciousChannel.log("extracted index \(index) from series \(series) leaving \(extractedSeries)")
             return (extractedSeries, index)
         }
         
         if let name = book.name {
-            if let (extractedName, index) = extractIndex(from: name) {
+            if let (extractedName, index) = extractPosition(from: name) {
                 book.name = extractedName
                 deliciousChannel.log("extracted index \(index) from name \(name) leaving \(extractedName)")
                 return (extractedName, index)
@@ -251,7 +251,7 @@ class SeriesScanner {
         }
         
         if let subtitle = book.subtitle {
-            if let (extractedSubtitle, index) = extractIndex(from: subtitle) {
+            if let (extractedSubtitle, index) = extractPosition(from: subtitle) {
                 book.subtitle = extractedSubtitle
                 deliciousChannel.log("extracted index \(index) from subtitle \(subtitle) leaving \(extractedSubtitle)")
                 return (extractedSubtitle, index)
@@ -261,7 +261,7 @@ class SeriesScanner {
         return (series, 0)
     }
     
-    private func extractIndex(from string: String) -> (String, Int)? {
+    private func extractPosition(from string: String) -> (String, Int)? {
         for pattern in bookIndexPatterns {
             for match in pattern.matches(in: string, options: [], range: NSRange(location: 0, length: string.count)) {
                 if let seriesRange = Range(match.range(at: 1), in: string), let indexRange = Range(match.range(at: 2), in: string) {
