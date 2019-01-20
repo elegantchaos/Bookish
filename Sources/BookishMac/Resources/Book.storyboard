@@ -800,7 +800,6 @@
                                                                             <constraint firstItem="g9e-mB-bmk" firstAttribute="centerY" secondItem="amO-hE-nks" secondAttribute="centerY" id="zpc-Xe-QJX"/>
                                                                         </constraints>
                                                                         <connections>
-                                                                            <outlet property="indexField" destination="KGH-sB-tNk" id="WKH-PR-QUe"/>
                                                                             <outlet property="positionField" destination="KGH-sB-tNk" id="Xwn-Zy-4Wi"/>
                                                                             <outlet property="seriesCombo" destination="amO-hE-nks" id="4OW-11-jwQ"/>
                                                                             <outlet property="seriesField" destination="g9e-mB-bmk" id="NkF-0k-Ef7"/>

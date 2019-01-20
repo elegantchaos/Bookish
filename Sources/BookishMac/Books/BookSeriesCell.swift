@@ -44,6 +44,7 @@ extension BookSeriesCell: BookDetailTableCell {
         
         seriesCombo.isHidden = !view.editing
         seriesField.isHidden = view.editing
+        positionField.isEditable = view.editing
     }
     
     func keyView() -> NSView? {
@@ -73,13 +74,28 @@ extension BookSeriesCell: NSComboBoxDelegate {
     
     override func controlTextDidEndEditing(_ obj: Notification) {
         super.controlTextDidEndEditing(obj)
-        if let context = detailView?.cvm.managedObjectContext {
-            let newName = seriesCombo.stringValue
-            if let updatedSeries = Series.named(newName, in: context) {
-                changeSeries(to: updatedSeries)
-            } else {
-                changeSeries(creating: newName)
+
+        if let context = detailView?.cvm.managedObjectContext, let control = obj.object as? NSControl {
+            if control == seriesCombo {
+                let newName = seriesCombo.stringValue
+                if let updatedSeries = Series.named(newName, in: context) {
+                    changeSeries(to: updatedSeries)
+                } else {
+                    changeSeries(creating: newName)
+                }
+            } else if control == positionField {
+                changePosition(to: positionField.integerValue)
             }
+        }
+    }
+    
+    func changePosition(to position: Int) {
+        if let existingSeries = objectValue as? Series {
+            let actionManager = application.actionManager
+            let info = ActionInfo(sender: self)
+            info[SeriesAction.seriesKey] = existingSeries
+            info[SeriesAction.positionKey] = position
+            actionManager.perform(identifier: "ChangeSeries", info: info)
         }
     }
     
