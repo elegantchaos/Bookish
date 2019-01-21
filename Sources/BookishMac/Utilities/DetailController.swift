@@ -10,9 +10,12 @@ import BookishModel
 
 let detailChannel = Logger("Detail")
 
-protocol DetailTableCell {
-    func setup(for view: DetailControllerBase, row: Int, item: NSManagedObject)
+protocol KeyableTableCell {
     func keyView() -> NSView?
+}
+
+protocol DetailTableCell: KeyableTableCell {
+    func setup(for view: DetailControllerBase, row: Int, item: NSManagedObject)
 }
 
 /**
@@ -30,7 +33,7 @@ class DetailControllerBase: CollectionViewController {
     @objc var index: NSArrayController?
    
     var rows = [NSManagedObject]()
-    var availableRows = IndexSet()
+    var availableRows = 0
     var keyViewTimer: Timer? = nil
 
     func identifier(for item: NSManagedObject) -> NSUserInterfaceItemIdentifier {
@@ -48,12 +51,13 @@ class DetailControllerBase: CollectionViewController {
     }
     
     func recalculateKeyViews() {
-        let rows = availableRows.sorted()
         var view: NSView = lastFixedKeyView
-        for row in rows {
-            if let rowView = (detailsTable.view(atColumn: 0, row: row, makeIfNecessary: false) as? DetailTableCell)?.keyView() {
-                view.nextKeyView = rowView
-                view = rowView
+        for row in 0 ..< availableRows {
+            for column in 0 ..< detailsTable.numberOfColumns {
+                if let rowView = (detailsTable.view(atColumn: column, row: row, makeIfNecessary: false) as? KeyableTableCell)?.keyView() {
+                    view.nextKeyView = rowView
+                    view = rowView
+                }
             }
         }
         view.nextKeyView = nameView
@@ -89,12 +93,12 @@ extension DetailControllerBase: NSTableViewDelegate, NSTableViewDataSource {
     }
     
     func tableView(_ tableView: NSTableView, didAdd rowView: NSTableRowView, forRow row: Int) {
-        availableRows.insert(row)
+        availableRows += 1
         scheduleRecalculateKeyViews()
     }
     
     func tableView(_ tableView: NSTableView, didRemove rowView: NSTableRowView, forRow row: Int) {
-        availableRows.remove(row)
+        availableRows -= 1
         scheduleRecalculateKeyViews()
     }
     

@@ -11,7 +11,7 @@ class BookSeriesCell: AnnotatedTableCellView {
     @IBOutlet weak var seriesField: NSTextField!
     @IBOutlet weak var seriesCombo: AnnotatedComboBox!
     @IBOutlet weak var positionField: NSTextField!
-    var detailView: BookDetailViewController?
+    var detailView: BookDetailViewController!
 }
 
 extension BookSeriesCell: BookDetailTableCell {
@@ -48,7 +48,7 @@ extension BookSeriesCell: BookDetailTableCell {
     }
     
     func keyView() -> NSView? {
-        return seriesField
+        return detailView.editing ? seriesCombo : nil
     }
 }
 

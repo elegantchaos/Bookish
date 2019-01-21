@@ -10,7 +10,7 @@ import BookishModel
 class BookEditablePersonCell: AnnotatedTableCellView {
     @IBOutlet weak var addButton: NSButton!
     @IBOutlet weak var removeButton: NSButton!
-    @IBOutlet weak var personCombo: NSComboBoxCell!
+    @IBOutlet weak var personCombo: AnnotatedComboBox!
     
     var selectedPerson: Person?
     var detailView: BookDetailViewController?
@@ -40,7 +40,7 @@ extension BookEditablePersonCell: BookDetailTableCell {
     }
     
     func keyView() -> NSView? {
-        return textField
+        return personCombo
     }
 }
 

@@ -251,11 +251,11 @@
                                                                 </textFieldCell>
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <prototypeCellViews>
-                                                                    <tableCellView identifier="control" misplaced="YES" id="2T5-Yx-vao">
-                                                                        <rect key="frame" x="1" y="1" width="32" height="24"/>
+                                                                    <tableCellView identifier="control" id="2T5-Yx-vao" customClass="BookControlCell" customModule="Bookish" customModuleProvider="target">
+                                                                        <rect key="frame" x="1" y="1" width="32" height="22"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
-                                                                            <button identifier="button.RemoveRelationship" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cc0-GE-6NI" userLabel="Remove">
+                                                                            <button identifier="button.RemoveItem" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cc0-GE-6NI" userLabel="Remove">
                                                                                 <rect key="frame" x="0.0" y="2" width="32" height="16"/>
                                                                                 <buttonCell key="cell" type="inline" bezelStyle="inline" image="Minus" imagePosition="overlaps" alignment="center" controlSize="mini" lineBreakMode="truncatingTail" state="on" inset="2" id="Vfc-0T-BQP">
                                                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -272,6 +272,9 @@
                                                                             <constraint firstItem="cc0-GE-6NI" firstAttribute="top" secondItem="2T5-Yx-vao" secondAttribute="top" constant="4" id="WPu-Vb-DBw"/>
                                                                             <constraint firstAttribute="bottom" secondItem="cc0-GE-6NI" secondAttribute="bottom" constant="2" id="yHr-g9-tp0"/>
                                                                         </constraints>
+                                                                        <connections>
+                                                                            <outlet property="removeButton" destination="cc0-GE-6NI" id="dLp-jE-ya9"/>
+                                                                        </connections>
                                                                     </tableCellView>
                                                                 </prototypeCellViews>
                                                             </tableColumn>
@@ -334,8 +337,8 @@
                                                                                     </userDefinedRuntimeAttribute>
                                                                                 </userDefinedRuntimeAttributes>
                                                                                 <connections>
-                                                                                    <binding destination="t5w-iU-dsl" name="content" keyPath="arrangedObjects.lowercaseName" id="gg8-xv-S7p"/>
                                                                                     <binding destination="t5w-iU-dsl" name="contentObjects" keyPath="arrangedObjects" previousBinding="gg8-xv-S7p" id="fXG-Xk-RT9"/>
+                                                                                    <binding destination="t5w-iU-dsl" name="content" keyPath="arrangedObjects.lowercaseName" id="gg8-xv-S7p"/>
                                                                                 </connections>
                                                                             </popUpButton>
                                                                         </subviews>
@@ -488,7 +491,7 @@
                                                                         </constraints>
                                                                         <connections>
                                                                             <outlet property="addButton" destination="dao-6l-TBt" id="cpR-gu-HYE"/>
-                                                                            <outlet property="personCombo" destination="x93-id-LgP" id="Hfm-Dd-0ae"/>
+                                                                            <outlet property="personCombo" destination="up0-NK-LzO" id="t4Y-Gd-zvn"/>
                                                                             <outlet property="removeButton" destination="uZJ-ZI-bfH" id="cHS-aQ-oaH"/>
                                                                         </connections>
                                                                     </tableCellView>
@@ -745,9 +748,9 @@
                                                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="KGH-sB-tNk" userLabel="Position">
                                                                                 <rect key="frame" x="226" y="2" width="68" height="18"/>
                                                                                 <constraints>
-                                                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="64" id="6oM-1t-69r"/>
+                                                                                    <constraint firstAttribute="width" constant="64" id="6oM-1t-69r"/>
                                                                                 </constraints>
-                                                                                <textFieldCell key="cell" selectable="YES" sendsActionOnEndEditing="YES" alignment="left" placeholderString="#" id="VXG-lr-d2q">
+                                                                                <textFieldCell key="cell" selectable="YES" sendsActionOnEndEditing="YES" alignment="right" placeholderString="#" id="VXG-lr-d2q">
                                                                                     <font key="font" metaFont="systemBold" size="14"/>
                                                                                     <color key="textColor" name="Bookish Detail Text"/>
                                                                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -788,13 +791,13 @@
                                                                         </subviews>
                                                                         <constraints>
                                                                             <constraint firstItem="KGH-sB-tNk" firstAttribute="leading" secondItem="g9e-mB-bmk" secondAttribute="trailing" constant="4" id="9MH-wV-Zis"/>
+                                                                            <constraint firstItem="amO-hE-nks" firstAttribute="leading" secondItem="Biy-Ug-fg1" secondAttribute="leading" constant="4" id="BSD-kE-nYt"/>
                                                                             <constraint firstAttribute="trailing" secondItem="PJr-xJ-30U" secondAttribute="trailing" constant="4" id="Dba-52-3WQ"/>
                                                                             <constraint firstAttribute="bottom" secondItem="g9e-mB-bmk" secondAttribute="bottom" constant="2" id="IdU-g1-YMz"/>
                                                                             <constraint firstItem="PJr-xJ-30U" firstAttribute="centerY" secondItem="g9e-mB-bmk" secondAttribute="centerY" id="Jxp-4t-zEo"/>
+                                                                            <constraint firstItem="KGH-sB-tNk" firstAttribute="leading" secondItem="amO-hE-nks" secondAttribute="trailing" constant="4" id="Kg1-4A-E4X"/>
                                                                             <constraint firstItem="g9e-mB-bmk" firstAttribute="leading" secondItem="Biy-Ug-fg1" secondAttribute="leading" constant="4" id="OOU-Lr-Y0H"/>
-                                                                            <constraint firstItem="amO-hE-nks" firstAttribute="trailing" secondItem="g9e-mB-bmk" secondAttribute="trailing" id="Om9-5P-Mjp"/>
                                                                             <constraint firstItem="KGH-sB-tNk" firstAttribute="centerY" secondItem="g9e-mB-bmk" secondAttribute="centerY" id="pe2-ye-aaH"/>
-                                                                            <constraint firstItem="amO-hE-nks" firstAttribute="leading" secondItem="g9e-mB-bmk" secondAttribute="leading" id="vSB-3g-o1I"/>
                                                                             <constraint firstItem="PJr-xJ-30U" firstAttribute="leading" secondItem="KGH-sB-tNk" secondAttribute="trailing" constant="4" id="wn0-aB-jHx"/>
                                                                             <constraint firstItem="g9e-mB-bmk" firstAttribute="top" secondItem="Biy-Ug-fg1" secondAttribute="top" constant="4" id="yb8-Y3-uPA"/>
                                                                             <constraint firstItem="g9e-mB-bmk" firstAttribute="centerY" secondItem="amO-hE-nks" secondAttribute="centerY" id="zpc-Xe-QJX"/>

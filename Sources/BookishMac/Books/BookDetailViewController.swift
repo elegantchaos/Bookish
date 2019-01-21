@@ -84,10 +84,18 @@ class BookDetailViewController: DetailController<Book>, BookLifecycleObserver {
 extension BookDetailViewController: EditableView {
     func toggleEditing() {
         editing = !editing
+        
+        // change focus; this will commit any editing changes that were
+        // in progress if we're turning editing off
         let newResponder: NSResponder = editing ? nameView : indexView
         view.window?.makeFirstResponder(newResponder)
-        adjustControlsForEditing()
-        selectionChanged()
+        
+        // rebuild the view on the next cycle, to give editing
+        // changes a chance to get properly committed first
+        DispatchQueue.main.async {
+            self.adjustControlsForEditing()
+            self.selectionChanged()
+        }
     }
 
     func adjustControlsForEditing() {
@@ -139,7 +147,10 @@ extension BookDetailViewController: BookChangeObserver {
     }
     
     func removed(series: Series) {
-        
+        if let row = source.remove(series: series) {
+            detailsTable.removeRows(at: IndexSet(integer: row), withAnimation: .slideUp)
+        }
+
     }
     
     func added(publisher: Publisher) {
@@ -147,7 +158,9 @@ extension BookDetailViewController: BookChangeObserver {
     }
     
     func removed(publisher: Publisher) {
-        
+        if let row = source.remove(publisher: publisher) {
+            detailsTable.removeRows(at: IndexSet(integer: row), withAnimation: .slideUp)
+        }
     }
     
     func created(books: [Book]) {
@@ -174,7 +187,6 @@ extension BookDetailViewController: BookChangeObserver {
 
 // MARK: Table Support
 
-protocol BookDetailTableCell {
+protocol BookDetailTableCell: KeyableTableCell {
     func setup(for: BookDetailViewController, row: DetailDataSource.RowInfo)
-    func keyView() -> NSView?
 }

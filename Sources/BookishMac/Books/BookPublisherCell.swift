@@ -11,7 +11,7 @@ class BookPublisherCell: AnnotatedTableCellView {
     @IBOutlet weak var publisherField: NSTextField!
     @IBOutlet weak var publisherCombo: AnnotatedComboBox!
     
-    var detailView: BookDetailViewController?
+    var detailView: BookDetailViewController!
 }
 
 extension BookPublisherCell: BookDetailTableCell {
@@ -35,7 +35,7 @@ extension BookPublisherCell: BookDetailTableCell {
     }
     
     func keyView() -> NSView? {
-        return publisherField
+        return detailView.editing ? publisherCombo : nil
     }
 }
 
