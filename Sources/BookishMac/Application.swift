@@ -82,7 +82,7 @@ extension Application: NSApplicationDelegate {
         setupActions()
         setupTransformers()
         
-        let mode: CollectionContainer.PopulateMode = testDocument ? .replaceWithTestData : .empty
+        let mode: CollectionContainer.PopulateMode = testDocument ? .replaceWithTestData : .defaultRoles
         let _ = SyncedCollection(identifier: cloudManager.collectionIdentifier, mode: mode) { (sc, error) in
             if let error = error {
                 fatalError("failed to load \(error)")

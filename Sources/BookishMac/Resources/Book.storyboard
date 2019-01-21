@@ -312,14 +312,27 @@
                                                                             <constraint firstAttribute="trailing" secondItem="x1u-dm-Z1R" secondAttribute="trailing" constant="2" id="dl7-bb-ATT"/>
                                                                             <constraint firstItem="x1u-dm-Z1R" firstAttribute="top" secondItem="t2y-Xd-csP" secondAttribute="top" constant="4" id="ih2-Ua-g7V"/>
                                                                         </constraints>
+                                                                        <connections>
+                                                                            <outlet property="textField" destination="x1u-dm-Z1R" id="Vpf-NK-Whq"/>
+                                                                        </connections>
                                                                     </tableCellView>
                                                                     <tableCellView identifier="role" id="Yed-T2-EOc" customClass="BookPersonHeadingCell" customModule="Bookish" customModuleProvider="target">
                                                                         <rect key="frame" x="36" y="27" width="86" height="24"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
-                                                                            <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="K1I-Nb-paf" customClass="ColoredPopUpButton" customModule="Bookish" customModuleProvider="target">
-                                                                                <rect key="frame" x="11" y="-2" width="72" height="22"/>
-                                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sYe-y5-gHz">
+                                                                                <rect key="frame" x="0.0" y="2" width="86" height="18"/>
+                                                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" alignment="right" placeholderString="heading" usesSingleLineMode="YES" id="wNX-ve-U96">
+                                                                                    <font key="font" size="14" name=".AppleSystemUIFont"/>
+                                                                                    <color key="textColor" name="Bookish Label Text"/>
+                                                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                                </textFieldCell>
+                                                                                <connections>
+                                                                                    <binding destination="TBH-Sa-Ff0" name="font" keyPath="self.cvm.labelFont" id="gKJ-s2-Sg8"/>
+                                                                                </connections>
+                                                                            </textField>
+                                                                            <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="K1I-Nb-paf" customClass="ColoredPopUpButton" customModule="Bookish" customModuleProvider="target">
+                                                                                <rect key="frame" x="0.0" y="-1" width="86" height="25"/>
                                                                                 <popUpButtonCell key="cell" type="recessed" title="author" bezelStyle="recessed" alignment="right" lineBreakMode="truncatingTail" state="on" borderStyle="border" inset="2" preferredEdge="maxX" selectedItem="Qu3-8a-seq" id="JXx-IM-b5h">
                                                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
                                                                                     <font key="font" metaFont="system" size="14"/>
@@ -342,8 +355,19 @@
                                                                                 </connections>
                                                                             </popUpButton>
                                                                         </subviews>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="trailing" secondItem="K1I-Nb-paf" secondAttribute="trailing" id="7pb-jk-GBB"/>
+                                                                            <constraint firstItem="K1I-Nb-paf" firstAttribute="leading" secondItem="Yed-T2-EOc" secondAttribute="leading" id="Flt-Os-ni9"/>
+                                                                            <constraint firstItem="sYe-y5-gHz" firstAttribute="leading" secondItem="Yed-T2-EOc" secondAttribute="leading" constant="2" id="QzY-et-j8V"/>
+                                                                            <constraint firstAttribute="bottom" secondItem="sYe-y5-gHz" secondAttribute="bottom" constant="2" id="Qzu-EI-M0q"/>
+                                                                            <constraint firstAttribute="bottom" secondItem="K1I-Nb-paf" secondAttribute="bottom" id="XVd-HU-R1i"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="sYe-y5-gHz" secondAttribute="trailing" constant="2" id="gbf-Bz-gIW"/>
+                                                                            <constraint firstItem="sYe-y5-gHz" firstAttribute="top" secondItem="Yed-T2-EOc" secondAttribute="top" constant="4" id="srY-M4-YYT"/>
+                                                                            <constraint firstItem="K1I-Nb-paf" firstAttribute="top" secondItem="Yed-T2-EOc" secondAttribute="top" id="srw-GD-djk"/>
+                                                                        </constraints>
                                                                         <connections>
                                                                             <outlet property="rolePopup" destination="K1I-Nb-paf" id="1Lu-n5-KzU"/>
+                                                                            <outlet property="textField" destination="sYe-y5-gHz" id="2g3-Ga-uD6"/>
                                                                         </connections>
                                                                     </tableCellView>
                                                                 </prototypeCellViews>
@@ -388,22 +412,12 @@
                                                                             <outlet property="textField" destination="u47-FK-V32" id="4Tf-cZ-vMJ"/>
                                                                         </connections>
                                                                     </tableCellView>
-                                                                    <tableCellView identifier="person" id="BkD-e8-vo5" userLabel="person" customClass="BookPersonCell" customModule="Bookish" customModuleProvider="target">
+                                                                    <tableCellView identifier="person" misplaced="YES" id="BkD-e8-vo5" userLabel="person" customClass="BookPersonCell" customModule="Bookish" customModuleProvider="target">
                                                                         <rect key="frame" x="125" y="27" width="315" height="23"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
-                                                                            <button identifier="button.RevealPerson" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="TJV-Lt-SZS" userLabel="Reveal">
-                                                                                <rect key="frame" x="296" y="3" width="15" height="16"/>
-                                                                                <buttonCell key="cell" type="inline" bezelStyle="inline" image="Reveal" imagePosition="only" alignment="center" controlSize="mini" lineBreakMode="truncatingTail" state="on" inset="2" id="mff-9C-MBs">
-                                                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                                                    <font key="font" metaFont="smallSystemBold"/>
-                                                                                </buttonCell>
-                                                                                <connections>
-                                                                                    <action selector="performAction:" target="dg1-Od-cPv" id="yUa-Dm-yFb"/>
-                                                                                </connections>
-                                                                            </button>
                                                                             <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="Mqx-x5-EGd">
-                                                                                <rect key="frame" x="2" y="2" width="294" height="18"/>
+                                                                                <rect key="frame" x="0.0" y="2" width="296" height="18"/>
                                                                                 <textFieldCell key="cell" selectable="YES" sendsActionOnEndEditing="YES" alignment="left" placeholderString="value" id="3kp-KF-Qk6">
                                                                                     <font key="font" metaFont="systemBold" size="14"/>
                                                                                     <color key="textColor" name="Bookish Detail Text"/>
@@ -413,55 +427,9 @@
                                                                                     <binding destination="TBH-Sa-Ff0" name="font" keyPath="self.cvm.detailFont" id="Qn6-Hd-BAM"/>
                                                                                 </connections>
                                                                             </textField>
-                                                                        </subviews>
-                                                                        <constraints>
-                                                                            <constraint firstItem="TJV-Lt-SZS" firstAttribute="centerY" secondItem="Mqx-x5-EGd" secondAttribute="centerY" id="4PX-N2-P4o"/>
-                                                                            <constraint firstAttribute="bottom" secondItem="Mqx-x5-EGd" secondAttribute="bottom" constant="2" id="K1v-NY-s2x"/>
-                                                                            <constraint firstItem="Mqx-x5-EGd" firstAttribute="leading" secondItem="BkD-e8-vo5" secondAttribute="leading" constant="4" id="n4y-Ix-9fE"/>
-                                                                            <constraint firstAttribute="trailing" secondItem="TJV-Lt-SZS" secondAttribute="trailing" constant="4" id="pME-Mj-jMc"/>
-                                                                            <constraint firstItem="TJV-Lt-SZS" firstAttribute="leading" secondItem="Mqx-x5-EGd" secondAttribute="trailing" constant="2" id="wup-fm-rQN"/>
-                                                                        </constraints>
-                                                                        <connections>
-                                                                            <outlet property="personField" destination="Mqx-x5-EGd" id="cG7-Q6-lGG"/>
-                                                                        </connections>
-                                                                    </tableCellView>
-                                                                    <tableCellView identifier="editablePerson" id="Xqd-Mi-EGo" userLabel="person editable" customClass="BookEditablePersonCell" customModule="Bookish" customModuleProvider="target">
-                                                                        <rect key="frame" x="125" y="52" width="315" height="23"/>
-                                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                                        <subviews>
-                                                                            <button identifier="button.ShowAddRelationshipMenu" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dao-6l-TBt" userLabel="Add">
-                                                                                <rect key="frame" x="266" y="3" width="15" height="16"/>
-                                                                                <buttonCell key="cell" type="inline" bezelStyle="inline" image="Plus" imagePosition="only" alignment="center" controlSize="mini" lineBreakMode="truncatingTail" state="on" inset="2" id="Xtg-GN-bZk">
-                                                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                                                    <font key="font" metaFont="smallSystemBold"/>
-                                                                                </buttonCell>
-                                                                                <connections>
-                                                                                    <action selector="performAction:" target="dg1-Od-cPv" id="HBA-8l-gjV"/>
-                                                                                </connections>
-                                                                            </button>
-                                                                            <button identifier="button.RemoveRelationship" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="uZJ-ZI-bfH" userLabel="Remove">
-                                                                                <rect key="frame" x="281" y="3" width="15" height="16"/>
-                                                                                <buttonCell key="cell" type="inline" bezelStyle="inline" image="Minus" imagePosition="overlaps" alignment="center" controlSize="mini" lineBreakMode="truncatingTail" state="on" inset="2" id="bbo-qY-Htk">
-                                                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                                                    <font key="font" metaFont="smallSystemBold"/>
-                                                                                </buttonCell>
-                                                                                <connections>
-                                                                                    <action selector="performAction:" target="dg1-Od-cPv" id="mzn-uo-ezt"/>
-                                                                                </connections>
-                                                                            </button>
-                                                                            <button identifier="button.RevealPerson" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="c8p-wA-ae7" userLabel="Reveal">
-                                                                                <rect key="frame" x="296" y="3" width="15" height="16"/>
-                                                                                <buttonCell key="cell" type="inline" bezelStyle="inline" image="Reveal" imagePosition="only" alignment="center" controlSize="mini" lineBreakMode="truncatingTail" state="on" inset="2" id="cA9-6Q-h8r">
-                                                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                                                    <font key="font" metaFont="smallSystemBold"/>
-                                                                                </buttonCell>
-                                                                                <connections>
-                                                                                    <action selector="performAction:" target="dg1-Od-cPv" id="0rG-5U-34g"/>
-                                                                                </connections>
-                                                                            </button>
-                                                                            <comboBox verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="up0-NK-LzO" customClass="AnnotatedComboBox" customModule="Bookish" customModuleProvider="target">
-                                                                                <rect key="frame" x="2" y="-2" width="265" height="23"/>
-                                                                                <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" placeholderString="person name" numberOfVisibleItems="5" id="x93-id-LgP">
+                                                                            <comboBox verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="XIj-Fj-GJW" customClass="AnnotatedComboBox" customModule="Bookish" customModuleProvider="target">
+                                                                                <rect key="frame" x="2" y="-1" width="295" height="23"/>
+                                                                                <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" placeholderString="person name" numberOfVisibleItems="5" id="6vZ-XR-bHp">
                                                                                     <font key="font" metaFont="system" size="14"/>
                                                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -472,31 +440,39 @@
                                                                                     </objectValues>
                                                                                 </comboBoxCell>
                                                                                 <connections>
-                                                                                    <binding destination="TBH-Sa-Ff0" name="font" keyPath="self.cvm.detailFont" id="3S1-D5-yMO"/>
-                                                                                    <outlet property="delegate" destination="Xqd-Mi-EGo" id="vYx-lc-luE"/>
+                                                                                    <binding destination="NUZ-ew-ZHD" name="content" keyPath="arrangedObjects.name" id="eeu-xi-3zY"/>
+                                                                                    <binding destination="TBH-Sa-Ff0" name="font" keyPath="self.cvm.detailFont" id="Y7X-px-C02"/>
                                                                                 </connections>
                                                                             </comboBox>
+                                                                            <button identifier="button.RevealPerson" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="TJV-Lt-SZS" userLabel="Reveal">
+                                                                                <rect key="frame" x="296" y="3" width="15" height="16"/>
+                                                                                <buttonCell key="cell" type="inline" bezelStyle="inline" image="Reveal" imagePosition="only" alignment="center" controlSize="mini" lineBreakMode="truncatingTail" state="on" inset="2" id="mff-9C-MBs">
+                                                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                                    <font key="font" metaFont="smallSystemBold"/>
+                                                                                </buttonCell>
+                                                                                <connections>
+                                                                                    <action selector="performAction:" target="dg1-Od-cPv" id="yUa-Dm-yFb"/>
+                                                                                </connections>
+                                                                            </button>
                                                                         </subviews>
                                                                         <constraints>
-                                                                            <constraint firstItem="c8p-wA-ae7" firstAttribute="leading" secondItem="uZJ-ZI-bfH" secondAttribute="trailing" id="Edc-Gl-Ntl"/>
-                                                                            <constraint firstItem="dao-6l-TBt" firstAttribute="centerY" secondItem="up0-NK-LzO" secondAttribute="centerY" id="Enf-hi-OVB"/>
-                                                                            <constraint firstAttribute="bottom" secondItem="up0-NK-LzO" secondAttribute="bottom" constant="2" id="HQB-QK-1TL"/>
-                                                                            <constraint firstItem="up0-NK-LzO" firstAttribute="leading" secondItem="Xqd-Mi-EGo" secondAttribute="leading" constant="2" id="IL8-qN-xm5"/>
-                                                                            <constraint firstItem="dao-6l-TBt" firstAttribute="leading" secondItem="up0-NK-LzO" secondAttribute="trailing" constant="2" id="Jhf-Ay-WDp"/>
-                                                                            <constraint firstItem="up0-NK-LzO" firstAttribute="top" secondItem="Xqd-Mi-EGo" secondAttribute="top" constant="4" id="KvO-mD-Fcx"/>
-                                                                            <constraint firstItem="uZJ-ZI-bfH" firstAttribute="centerY" secondItem="up0-NK-LzO" secondAttribute="centerY" id="Lav-Rl-K5Q"/>
-                                                                            <constraint firstItem="c8p-wA-ae7" firstAttribute="centerY" secondItem="up0-NK-LzO" secondAttribute="centerY" id="QQ3-Wv-BEd"/>
-                                                                            <constraint firstItem="uZJ-ZI-bfH" firstAttribute="leading" secondItem="dao-6l-TBt" secondAttribute="trailing" id="cnC-6S-sW5"/>
-                                                                            <constraint firstAttribute="trailing" secondItem="c8p-wA-ae7" secondAttribute="trailing" constant="4" id="z9P-Tt-Jhm"/>
+                                                                            <constraint firstItem="TJV-Lt-SZS" firstAttribute="centerY" secondItem="Mqx-x5-EGd" secondAttribute="centerY" id="4PX-N2-P4o"/>
+                                                                            <constraint firstItem="XIj-Fj-GJW" firstAttribute="leading" secondItem="BkD-e8-vo5" secondAttribute="leading" constant="2" id="8mJ-tR-IHd"/>
+                                                                            <constraint firstItem="Mqx-x5-EGd" firstAttribute="centerY" secondItem="XIj-Fj-GJW" secondAttribute="centerY" id="EmN-Tv-2Ca"/>
+                                                                            <constraint firstItem="TJV-Lt-SZS" firstAttribute="leading" secondItem="XIj-Fj-GJW" secondAttribute="trailing" constant="2" id="Fwh-uX-Eld"/>
+                                                                            <constraint firstAttribute="bottom" secondItem="Mqx-x5-EGd" secondAttribute="bottom" constant="2" id="K1v-NY-s2x"/>
+                                                                            <constraint firstItem="Mqx-x5-EGd" firstAttribute="leading" secondItem="BkD-e8-vo5" secondAttribute="leading" constant="2" id="n4y-Ix-9fE"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="TJV-Lt-SZS" secondAttribute="trailing" constant="4" id="pME-Mj-jMc"/>
+                                                                            <constraint firstItem="XIj-Fj-GJW" firstAttribute="top" secondItem="BkD-e8-vo5" secondAttribute="top" constant="4" id="ubY-eo-LCB"/>
+                                                                            <constraint firstItem="TJV-Lt-SZS" firstAttribute="leading" secondItem="Mqx-x5-EGd" secondAttribute="trailing" constant="2" id="wup-fm-rQN"/>
                                                                         </constraints>
                                                                         <connections>
-                                                                            <outlet property="addButton" destination="dao-6l-TBt" id="cpR-gu-HYE"/>
-                                                                            <outlet property="personCombo" destination="up0-NK-LzO" id="t4Y-Gd-zvn"/>
-                                                                            <outlet property="removeButton" destination="uZJ-ZI-bfH" id="cHS-aQ-oaH"/>
+                                                                            <outlet property="personCombo" destination="XIj-Fj-GJW" id="uSW-oD-pUc"/>
+                                                                            <outlet property="personField" destination="Mqx-x5-EGd" id="cG7-Q6-lGG"/>
                                                                         </connections>
                                                                     </tableCellView>
                                                                     <tableCellView identifier="publisher" id="efO-r1-NRc" userLabel="publisher" customClass="BookPublisherCell" customModule="Bookish" customModuleProvider="target">
-                                                                        <rect key="frame" x="125" y="77" width="315" height="23"/>
+                                                                        <rect key="frame" x="125" y="52" width="315" height="23"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <button identifier="button.RevealPublisher" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cYg-KH-1LT" userLabel="Reveal">
@@ -555,7 +531,7 @@
                                                                         </connections>
                                                                     </tableCellView>
                                                                     <tableCellView identifier="date" id="DyG-Q7-Wwd" userLabel="date" customClass="BookDateCell" customModule="Bookish" customModuleProvider="target">
-                                                                        <rect key="frame" x="125" y="102" width="315" height="24"/>
+                                                                        <rect key="frame" x="125" y="77" width="315" height="24"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="ZVF-Ib-kQh">
@@ -582,7 +558,7 @@
                                                                         </connections>
                                                                     </tableCellView>
                                                                     <tableCellView identifier="editableDate" id="7Lf-1O-gT0" userLabel="date editable" customClass="BookEditableDateCell" customModule="Bookish" customModuleProvider="target">
-                                                                        <rect key="frame" x="125" y="128" width="315" height="24"/>
+                                                                        <rect key="frame" x="125" y="103" width="315" height="24"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="lhg-Qc-OrU" customClass="AnnotatedTextField" customModule="Bookish" customModuleProvider="target">
@@ -622,7 +598,7 @@
                                                                         </connections>
                                                                     </tableCellView>
                                                                     <tableCellView identifier="editableDimensions" id="GRN-RI-c8z" userLabel="dimensions" customClass="BookDimensionsCell" customModule="Bookish" customModuleProvider="target">
-                                                                        <rect key="frame" x="125" y="154" width="315" height="24"/>
+                                                                        <rect key="frame" x="125" y="129" width="315" height="24"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <stackView distribution="fillEqually" orientation="horizontal" alignment="top" spacing="10" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dpj-i7-uGg">
@@ -730,7 +706,7 @@
                                                                         </connections>
                                                                     </tableCellView>
                                                                     <tableCellView identifier="series" id="Biy-Ug-fg1" userLabel="series" customClass="BookSeriesCell" customModule="Bookish" customModuleProvider="target">
-                                                                        <rect key="frame" x="125" y="180" width="315" height="24"/>
+                                                                        <rect key="frame" x="125" y="155" width="315" height="24"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="g9e-mB-bmk" userLabel="Name">
@@ -925,7 +901,6 @@
         <image name="ChooseDateSmall" width="12" height="12"/>
         <image name="Minus" width="12" height="12"/>
         <image name="NSAddTemplate" width="11" height="11"/>
-        <image name="Plus" width="12" height="12"/>
         <image name="Reveal" width="12" height="12"/>
         <namedColor name="Bookish Detail">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
