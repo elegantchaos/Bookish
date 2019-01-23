@@ -331,7 +331,7 @@
                                                                                     <binding destination="TBH-Sa-Ff0" name="font" keyPath="self.cvm.labelFont" id="gKJ-s2-Sg8"/>
                                                                                 </connections>
                                                                             </textField>
-                                                                            <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="K1I-Nb-paf" customClass="ColoredPopUpButton" customModule="Bookish" customModuleProvider="target">
+                                                                            <popUpButton identifier="button.ChangeRelationship" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="K1I-Nb-paf" customClass="ColoredPopUpButton" customModule="Bookish" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="-1" width="86" height="25"/>
                                                                                 <popUpButtonCell key="cell" type="recessed" title="author" bezelStyle="recessed" alignment="right" lineBreakMode="truncatingTail" state="on" borderStyle="border" inset="2" preferredEdge="maxX" selectedItem="Qu3-8a-seq" id="JXx-IM-b5h">
                                                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
@@ -343,6 +343,9 @@
                                                                                             <menuItem title="Item 3" id="oI8-Z7-csj"/>
                                                                                         </items>
                                                                                     </menu>
+                                                                                    <connections>
+                                                                                        <action selector="performAction:" target="dg1-Od-cPv" id="pfc-px-vyT"/>
+                                                                                    </connections>
                                                                                 </popUpButtonCell>
                                                                                 <userDefinedRuntimeAttributes>
                                                                                     <userDefinedRuntimeAttribute type="color" keyPath="titleColor">
@@ -350,8 +353,8 @@
                                                                                     </userDefinedRuntimeAttribute>
                                                                                 </userDefinedRuntimeAttributes>
                                                                                 <connections>
-                                                                                    <binding destination="t5w-iU-dsl" name="contentObjects" keyPath="arrangedObjects" previousBinding="gg8-xv-S7p" id="fXG-Xk-RT9"/>
-                                                                                    <binding destination="t5w-iU-dsl" name="content" keyPath="arrangedObjects.lowercaseName" id="gg8-xv-S7p"/>
+                                                                                    <binding destination="t5w-iU-dsl" name="content" keyPath="arrangedObjects" id="262-HD-bbl"/>
+                                                                                    <binding destination="t5w-iU-dsl" name="contentValues" keyPath="arrangedObjects.lowercaseName" previousBinding="262-HD-bbl" id="SFu-o4-mq5"/>
                                                                                 </connections>
                                                                             </popUpButton>
                                                                         </subviews>
@@ -442,6 +445,7 @@
                                                                                 <connections>
                                                                                     <binding destination="NUZ-ew-ZHD" name="content" keyPath="arrangedObjects.name" id="eeu-xi-3zY"/>
                                                                                     <binding destination="TBH-Sa-Ff0" name="font" keyPath="self.cvm.detailFont" id="Y7X-px-C02"/>
+                                                                                    <outlet property="delegate" destination="BkD-e8-vo5" id="aBb-fo-AXW"/>
                                                                                 </connections>
                                                                             </comboBox>
                                                                             <button identifier="button.RevealPerson" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="TJV-Lt-SZS" userLabel="Reveal">
@@ -866,6 +870,7 @@
                         <outlet property="nameView" destination="7rh-Dc-PS1" id="W5J-Sm-uzE"/>
                         <outlet property="personList" destination="NUZ-ew-ZHD" id="SVP-2s-l5b"/>
                         <outlet property="publisherList" destination="WWJ-bm-1zc" id="Blm-fU-E7o"/>
+                        <outlet property="roleList" destination="t5w-iU-dsl" id="NFu-K5-NPJ"/>
                         <outlet property="seriesList" destination="HyZ-zE-ELC" id="ccO-zJ-LKI"/>
                         <outlet property="subtitleView" destination="H8A-04-75V" id="JB7-lH-3xQ"/>
                     </connections>

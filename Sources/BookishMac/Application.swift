@@ -13,6 +13,11 @@ import CloudKit
 
 let applicationChannel = Logger("Application")
 
+@objc class PerformActionDummy: NSObject {
+    @IBAction func performAction(_ sender: Any) {
+    }
+}
+
 @NSApplicationMain class Application: NSObject {
     
     let windowControllerFactory = WindowControllerFactory<CollectionViewModel>()

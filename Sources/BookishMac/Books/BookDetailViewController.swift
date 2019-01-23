@@ -19,6 +19,7 @@ class BookDetailViewController: DetailController<Book>, BookLifecycleObserver {
     @IBOutlet weak var personList: NSArrayController!
     @IBOutlet weak var publisherList: NSArrayController!
     @IBOutlet weak var seriesList: NSArrayController!
+    @IBOutlet weak var roleList: NSArrayController!
     
     var source = DetailDataSource()
     var editing = false
