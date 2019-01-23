@@ -41,7 +41,7 @@ extension BookPersonCell: BookDetailTableCell {
         if row.placeholder {
             personCombo.stringValue = ""
         } else {
-            let relationship = source.person(for: row)
+            let relationship = source.relationship(for: row)
             objectValue = relationship
             if let person = relationship.person, let name = person.name {
 //                selectedPerson = person
@@ -105,7 +105,7 @@ extension BookPersonCell: NSComboBoxDelegate {
     func changePerson(creating newPersonName: String) {
         let actionManager = application.actionManager
         let info = makeInfo()
-        info[PersonAction.newPersonKey] = newPersonName
+        info[PersonAction.personKey] = newPersonName
         actionManager.perform(identifier: "ChangeRelationship", info: info)
     }
     

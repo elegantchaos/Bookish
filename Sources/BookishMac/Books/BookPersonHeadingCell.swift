@@ -16,7 +16,7 @@ class BookPersonHeadingCell: NSTableCellView, BookDetailTableCell {
         if row.placeholder {
             rolePopup.selectItem(withTitle: "author")
         } else {
-            let relationship = source.person(for: row)
+            let relationship = source.relationship(for: row)
             objectValue = relationship
             
             if detailView.editing {

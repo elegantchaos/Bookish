@@ -28,9 +28,9 @@ class BookControlCell: NSTableCellView, BookDetailTableCell {
 
         case .person:
             if !row.placeholder {
-                objectValue = source.person(for: row)
-                objectKey = PersonAction.personKey
-                identifier = "button.RemovePerson"
+                objectValue = source.relationship(for: row)
+                objectKey = PersonAction.relationshipKey
+                identifier = "button.RemoveRelationship"
             }
             
         case .publisher:

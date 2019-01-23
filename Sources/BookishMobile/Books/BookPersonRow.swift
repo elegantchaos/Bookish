@@ -13,7 +13,7 @@ class BookPersonRow: BookDetailRow {
     
     override func setup(row: DetailDataSource.RowInfo, book: Book, source: DetailDataSource) {
         assert(row.category == .person)
-        relationship = source.person(for: row)
+        relationship = source.relationship(for: row)
         label.text = relationship.role?.name
         personButton.setTitle(relationship.person?.name, for: .normal)
     }

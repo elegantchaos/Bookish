@@ -128,7 +128,7 @@ class DeliciousLibraryImportSession: ImportSession {
                     author.name = trimmed
                     cachedPeople[trimmed] = author
                 }
-                let relationship = author.relationship(as: Role.Default.authorName)
+                let relationship = author.relationship(as: Role.StandardNames.author)
                 relationship.addToBooks(book)
             }
         }
