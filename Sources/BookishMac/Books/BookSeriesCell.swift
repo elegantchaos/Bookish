@@ -20,7 +20,8 @@ extension BookSeriesCell: BookDetailTableCell {
         let source = view.source
         detailView = view
         if row.placeholder {
-            
+            seriesCombo.stringValue = ""
+            positionField.stringValue = ""
         } else {
             let series = source.series(for: row)
             objectValue = series
