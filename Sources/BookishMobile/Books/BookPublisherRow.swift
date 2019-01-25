@@ -21,7 +21,7 @@ class BookPublisherRow: BookDetailRow {
 
 extension BookPublisherRow: ActionContextProvider {
     func provide(context: ActionContext) {
-        context.info[PublisherAction.publisherKey] = publisher
+        context.info[PublisherAction.newPublisherKey] = publisher
     }
 }
 

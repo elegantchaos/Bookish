@@ -36,7 +36,7 @@ class BookControlCell: NSTableCellView, BookDetailTableCell {
         case .publisher:
             if !row.placeholder {
                 objectValue = source.publisher(for: row)
-                objectKey = PublisherAction.publisherKey
+                objectKey = PublisherAction.newPublisherKey
                 identifier = "button.RemovePublisher"
             }
             

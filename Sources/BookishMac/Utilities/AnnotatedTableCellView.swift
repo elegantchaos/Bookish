@@ -4,6 +4,9 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 import AppKit
+import Logger
+
+let reuseChannel = Logger("CellReuse")
 
 class AnnotatedTableCellView: NSTableCellView, NSTextFieldDelegate {
     
@@ -46,7 +49,7 @@ class AnnotatedTableCellView: NSTableCellView, NSTextFieldDelegate {
     }
     
     override func prepareForReuse() {
-        print("reusing \(self)")
+        reuseChannel.debug("reusing \(self)")
         hideButtons()
         objectValue = nil
         super.prepareForReuse()

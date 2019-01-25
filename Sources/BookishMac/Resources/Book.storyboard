@@ -501,7 +501,7 @@
                                                                                     <binding destination="TBH-Sa-Ff0" name="font" keyPath="self.cvm.detailFont" id="kW3-Pt-N3A"/>
                                                                                 </connections>
                                                                             </textField>
-                                                                            <comboBox verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0Kw-Mc-cKb" userLabel="Publisher" customClass="AnnotatedComboBox" customModule="Bookish" customModuleProvider="target">
+                                                                            <comboBox identifier="combo.ChangePublisher" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0Kw-Mc-cKb" userLabel="Publisher" customClass="AnnotatedComboBox" customModule="Bookish" customModuleProvider="target">
                                                                                 <rect key="frame" x="2" y="-2" width="295" height="23"/>
                                                                                 <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" placeholderString="publisher" numberOfVisibleItems="5" id="R0n-Lg-8k9">
                                                                                     <font key="font" metaFont="system" size="14"/>
@@ -514,9 +514,9 @@
                                                                                     </objectValues>
                                                                                 </comboBoxCell>
                                                                                 <connections>
+                                                                                    <action selector="performAction:" target="dg1-Od-cPv" id="0Pb-nZ-XtN"/>
                                                                                     <binding destination="WWJ-bm-1zc" name="content" keyPath="arrangedObjects.name" id="do2-xk-P8J"/>
                                                                                     <binding destination="TBH-Sa-Ff0" name="font" keyPath="self.cvm.detailFont" id="g4q-w2-Yfk"/>
-                                                                                    <outlet property="delegate" destination="efO-r1-NRc" id="WAh-Ga-xzk"/>
                                                                                 </connections>
                                                                             </comboBox>
                                                                         </subviews>
@@ -716,7 +716,7 @@
                                                                         <subviews>
                                                                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="g9e-mB-bmk" userLabel="Name">
                                                                                 <rect key="frame" x="2" y="2" width="224" height="18"/>
-                                                                                <textFieldCell key="cell" selectable="YES" sendsActionOnEndEditing="YES" alignment="left" placeholderString="publisher" id="DeX-RK-agD">
+                                                                                <textFieldCell key="cell" selectable="YES" sendsActionOnEndEditing="YES" alignment="left" placeholderString="series" id="DeX-RK-agD">
                                                                                     <font key="font" metaFont="systemBold" size="14"/>
                                                                                     <color key="textColor" name="Bookish Detail Text"/>
                                                                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>

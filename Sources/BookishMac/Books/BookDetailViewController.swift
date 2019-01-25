@@ -93,6 +93,22 @@ class BookDetailViewController: DetailController<Book>, BookLifecycleObserver {
         
         return nil
     }
+    
+    func publisher(at index: Int) -> Publisher? {
+        if let publishers = publisherList.arrangedObjects as? [Publisher], index != -1 {
+            return publishers[index]
+        }
+        
+        return nil
+    }
+    
+    func index(of publisher: Publisher) -> Int? {
+        if let publishers = publisherList.arrangedObjects as? [Publisher] {
+            return publishers.firstIndex(of: publisher)
+        }
+        
+        return nil
+    }
 }
 
 // MARK: EditableView Support
@@ -175,11 +191,13 @@ extension BookDetailViewController: BookChangeObserver {
         }
 
     }
+
+    func added(publisher: Publisher) {
+        let _ = source.insert(publisher: publisher)
+    }
     
     func removed(publisher: Publisher) {
-        if let row = source.remove(publisher: publisher) {
-            detailsTable.removeRows(at: IndexSet(integer: row), withAnimation: .slideUp)
-        }
+        let _ = source.remove(publisher: publisher)
     }
     
     func created(books: [Book]) {

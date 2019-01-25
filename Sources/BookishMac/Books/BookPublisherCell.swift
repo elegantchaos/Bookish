@@ -19,19 +19,29 @@ extension BookPublisherCell: BookDetailTableCell {
         assert(row.category == .publisher)
         let source = view.source
         detailView = view
-        publisherField?.isHidden = view.editing
-        publisherCombo?.isHidden = !view.editing
-        
         if row.placeholder {
-            publisherField?.placeholderString = "publisher name"
+            publisherCombo.stringValue = ""
+            detailChannel.debug("setup as a placeholder")
         } else {
             let publisher = source.publisher(for: row)
             objectValue = publisher
             if let name = publisher.name {
-                publisherField?.stringValue = name
-                publisherCombo?.stringValue = name
+                if view.editing {
+                    if let index = view.index(of: publisher) {
+                        detailChannel.debug("setup with selection \(index) \(name)")
+                        publisherCombo.selectItem(at: index)
+                    } else {
+                        detailChannel.debug("setup with unknown name \(name)")
+                        publisherCombo.stringValue = name
+                    }
+                } else {
+                    publisherField.stringValue = name
+                }
             }
         }
+        
+        publisherField?.isHidden = view.editing
+        publisherCombo?.isHidden = !view.editing
     }
     
     func keyView() -> NSView? {
@@ -41,48 +51,21 @@ extension BookPublisherCell: BookDetailTableCell {
 
 extension BookPublisherCell: ActionContextProvider {
     func provide(context: ActionContext) {
-        context.info[PublisherAction.publisherKey] = objectValue as? Publisher
+        context[PublisherAction.publisherKey] = objectValue
+        context.info.addObserver(self)
+        if detailView.editing {
+            let publisher = detailView.publisher(at: publisherCombo.indexOfSelectedItem)
+            context[PublisherAction.newPublisherKey] = publisher ?? publisherCombo.stringValue
+        }
     }
     
 }
 
-extension BookPublisherCell: NSComboBoxDelegate {
-    func comboBoxSelectionDidChange(_ notification: Notification) {
-        if let publishers = detailView?.publisherList?.arrangedObjects as? [Publisher] {
-            let index = publisherCombo.indexOfSelectedItem
-            if index != -1 {
-                let newPublisher = publishers[publisherCombo.indexOfSelectedItem]
-                changePublisher(to: newPublisher)
-            }
-        }
+extension BookPublisherCell: BookChangeObserver {
+    func added(publisher: Publisher) {
+        objectValue = publisher
     }
-    
-    override func controlTextDidEndEditing(_ obj: Notification) {
-        super.controlTextDidEndEditing(obj)
-        if let context = detailView?.cvm.managedObjectContext {
-            let newName = publisherCombo.stringValue
-            if let newPublisher = Publisher.named(newName, in: context) {
-                changePublisher(to: newPublisher)
-            } else {
-                changePublisher(creating: newName)
-            }
-        }
+    func removed(publisher: Publisher) {
+        objectValue = nil
     }
-    
-    func changePublisher(to newPublisher: Publisher) {
-        if let publisher = objectValue as? Publisher, newPublisher != publisher {
-            let actionManager = application.actionManager
-            let info = ActionInfo(sender: self)
-            info[PublisherAction.publisherKey] = newPublisher
-            actionManager.perform(identifier: "ChangePublisher", info: info)
-        }
-    }
-    
-    func changePublisher(creating newPublisherName: String) {
-        let actionManager = application.actionManager
-        let info = ActionInfo(sender: self)
-        info[PublisherAction.newPublisherKey] = newPublisherName
-        actionManager.perform(identifier: "ChangePublisher", info: info)
-    }
-    
 }

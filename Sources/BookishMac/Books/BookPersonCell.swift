@@ -36,7 +36,6 @@ class BookPersonCell: AnnotatedTableCellView {
 
 extension BookPersonCell: BookDetailTableCell {
     func setup(for view: BookDetailViewController, row: DetailDataSource.RowInfo) {
-        detailChannel.debug("setting up")
         assert(row.category == .person)
         let source = view.source
         detailView = view
