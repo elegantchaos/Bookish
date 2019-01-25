@@ -35,7 +35,7 @@ class BookDetailViewController: DetailController<Book>, BookLifecycleObserver {
  
 
     func calculateRows() {
-        let selection = (indexView.indexArray.selectedObjects as? [Book]) ?? []
+        let selection = (index.selectedObjects as? [Book]) ?? []
         source.filter(for: selection, editing: editing)
     }
 
@@ -72,7 +72,7 @@ class BookDetailViewController: DetailController<Book>, BookLifecycleObserver {
     
     override func provideForDetail(context: ActionContext) {
         context.info.addObserver(self)
-        if let selection = indexView.indexArray.selectedObjects as? [Book] {
+        if let selection = index.selectedObjects as? [Book] {
             context.info[ActionContext.selectionKey] = selection
             context.info[ToggleEditingAction.editableKey] = self
         }

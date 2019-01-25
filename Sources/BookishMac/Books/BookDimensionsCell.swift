@@ -19,7 +19,7 @@ class BookDimensionsCell: AnnotatedTableCellView, BookDetailTableCell {
     func setup(for view: BookDetailViewController, row: DetailDataSource.RowInfo) {
         assert(row.category == .detail)
         
-        index = view.indexView.indexArray
+        index = view.index
         setupValue(field: widthField, property: "width")
         setupValue(field: heightField, property: "height")
         setupValue(field: lengthField, property: "length")

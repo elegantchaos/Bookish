@@ -26,7 +26,6 @@ extension BookEditableDateCell: BookDetailTableCell {
     func setup(for view: BookDetailViewController, row: DetailDataSource.RowInfo) {
         assert(row.category == .detail)
         if let subview = textField,
-            let index = view.indexView.indexArray,
             let transformer = ValueTransformer(forName: NSValueTransformerName(rawValue: "DateToString")) {
             let detail = view.source.details(for: row)
             let unlocked = view.editing
@@ -38,9 +37,9 @@ extension BookEditableDateCell: BookDetailTableCell {
             subview.isSelectable = unlocked
             subview.isEditable = unlocked
             subview.identifier = NSUserInterfaceItemIdentifier(rawValue: "date-detail-\(detail.binding)")
-            subview.bind(NSBindingName(rawValue: "value"), to:index, withKeyPath:"selection.\(detail.binding)", options: options)
+            subview.bind(NSBindingName(rawValue: "value"), to:view.index, withKeyPath:"selection.\(detail.binding)", options: options)
             
-            objectValue = index.selection as? NSObject
+            objectValue = view.index.selection as? NSObject
             binding = detail.binding
         }
     }

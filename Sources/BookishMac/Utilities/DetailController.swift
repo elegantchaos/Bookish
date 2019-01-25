@@ -30,7 +30,6 @@ class DetailControllerBase: CollectionViewController {
     @IBOutlet weak var imageView: NSImageView!
     @IBOutlet weak var lastFixedKeyView: NSControl!
     @IBOutlet weak var detailsTable: NSTableView!
-    @objc var index: NSArrayController?
    
     var rows = [NSManagedObject]()
     var availableRows = 0
@@ -107,23 +106,25 @@ extension DetailControllerBase: NSTableViewDelegate, NSTableViewDataSource {
 // MARK: Generic Detail Controller
 
 class DetailController<EntityKind>: DetailControllerBase {
-    weak var indexView: IndexController<EntityKind>!
     let entityName = "\(EntityKind.self)"
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        if let iv: IndexController<EntityKind> = nearestSibling() {
-            indexView = iv
-            index = indexView.indexArray
-        }
+    internal lazy var indexView = connectIndexView()
+    
+    @objc var index: NSArrayController {
+        return indexView.indexArray!
     }
    
+    fileprivate func connectIndexView() -> IndexController<EntityKind> {
+    let iv: IndexController<EntityKind>? = nearestSibling()
+    return iv!
+    }
+    
     func provideForDetail(context: ActionContext) {
         context.info[ActionContext.selectionKey] = selectedItems()
     }
     
     func selectedItems() -> [EntityKind] {
-        if let selection = index?.selectedObjects as? [EntityKind] {
+        if let selection = index.selectedObjects as? [EntityKind] {
             return selection
         }
         
@@ -152,7 +153,7 @@ class DetailController<EntityKind>: DetailControllerBase {
     
     func selectionChanged() {
         detailChannel.debug("selection changed")
-        let selectedCount = index?.selectedObjects?.count ?? 0
+        let selectedCount = index.selectedObjects?.count ?? 0
         let showDetail = selectedCount > 0
         detailsTable.isHidden = !showDetail
         if showDetail {

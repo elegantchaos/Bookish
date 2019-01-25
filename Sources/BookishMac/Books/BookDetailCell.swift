@@ -18,17 +18,17 @@ class BookDetailCell: AnnotatedTableCellView, BookDetailTableCell {
         assert(row.category == .detail)
         
         detailView = view
-        if let subview = textField, let index = view.indexView.indexArray {
+        if let subview = textField {
             let detail = view.source.details(for: row)
             subview.identifier = NSUserInterfaceItemIdentifier(rawValue: "detail-\(detail.binding)")
             subview.isEditable = view.editing
             objectValue = detail
-            index.addObserver(self, forKeyPath: "selection.\(detail.binding)", options: [.initial], context: &detailBindingContext)
+            view.index.addObserver(self, forKeyPath: "selection.\(detail.binding)", options: [.initial], context: &detailBindingContext)
         }
     }
     
     func updateValue() {
-        if let subview = textField, let view = detailView, let index = view.indexView.indexArray, let selection = index.selection as? NSObject, let detail = objectValue as? DetailSpec {
+        if let subview = textField, let view = detailView, let selection = view.index.selection as? NSObject, let detail = objectValue as? DetailSpec {
             let selection = selection.value(forKey: detail.binding) as? NSObject
             if selection === NSMultipleValuesMarker {
                 subview.placeholderString = "Multiple Values"
