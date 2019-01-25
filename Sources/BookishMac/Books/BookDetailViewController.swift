@@ -78,19 +78,36 @@ class BookDetailViewController: DetailController<Book>, BookLifecycleObserver {
         }
     }
 
+    func person(at index: Int) -> Person? {
+        if let people = personList.arrangedObjects as? [Person], index != -1 {
+            return people[index]
+        }
+        
+        return nil
+    }
+    
+    func index(of person: Person) -> Int? {
+        if let people = personList.arrangedObjects as? [Person] {
+            return people.firstIndex(of: person)
+        }
+        
+        return nil
+    }
 }
 
 // MARK: EditableView Support
 
 extension BookDetailViewController: EditableView {
     func toggleEditing() {
-        editing = !editing
-        
         // change focus; this will commit any editing changes that were
         // in progress if we're turning editing off
+        // NB need to do this before changing the editing flag, so that the
+        // context is correct when any editing-related actions fire
         let newResponder: NSResponder = editing ? nameView : indexView
         view.window?.makeFirstResponder(newResponder)
         
+        editing = !editing
+
         // rebuild the view on the next cycle, to give editing
         // changes a chance to get properly committed first
         DispatchQueue.main.async {
@@ -133,8 +150,9 @@ extension BookDetailViewController: BookChangeObserver {
     
     
     func added(relationship: Relationship) {
+//        updateRows()
         let index = source.insert(relationship: relationship)
-        detailsTable.insertRows(at: IndexSet(integer: index), withAnimation: .slideDown)
+        detailsTable.insertRows(at: IndexSet(integer: index + 1), withAnimation: .slideDown)
     }
     
     func removed(relationship: Relationship) {
@@ -143,8 +161,12 @@ extension BookDetailViewController: BookChangeObserver {
         }
     }
 
-    func added(series: Series) {
-        
+    func replaced(relationship: Relationship, with: Relationship) {
+//        updateRows()
+//        if let row = source.update(relationship: relationship, with: with) {
+//            detailsTable.reloadData()
+            ////            detailsTable.reloadData(forRowIndexes: IndexSet(integer: row), columnIndexes: IndexSet([0,1,2]))
+//        }
     }
     
     func removed(series: Series) {
@@ -152,10 +174,6 @@ extension BookDetailViewController: BookChangeObserver {
             detailsTable.removeRows(at: IndexSet(integer: row), withAnimation: .slideUp)
         }
 
-    }
-    
-    func added(publisher: Publisher) {
-        
     }
     
     func removed(publisher: Publisher) {

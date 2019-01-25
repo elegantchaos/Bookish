@@ -5,8 +5,6 @@
 
 import AppKit
 
-var ColoredPopupContext = 0
-
 class ColoredPopUpButton: NSPopUpButton {
     var itemColor: NSColor?
     
@@ -18,8 +16,7 @@ class ColoredPopUpButton: NSPopUpButton {
         }
     }
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    override func viewDidMoveToWindow() {
         setItemStyles()
     }
 

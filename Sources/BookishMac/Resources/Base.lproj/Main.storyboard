@@ -594,10 +594,10 @@ CA
             </objects>
             <point key="canvasLocation" x="63" y="690"/>
         </scene>
-        <!--Collection Split View Controller-->
+        <!--Split View Controller-->
         <scene sceneID="o8M-XO-7fb">
             <objects>
-                <splitViewController id="9dY-ZT-f0K" customClass="CollectionSplitViewController" customModule="Bookish" customModuleProvider="target" sceneMemberID="viewController">
+                <splitViewController id="9dY-ZT-f0K" sceneMemberID="viewController">
                     <splitViewItems>
                         <splitViewItem canCollapse="YES" holdingPriority="260" behavior="sidebar" id="9x3-Ff-joU"/>
                         <splitViewItem holdingPriority="240" id="eOL-40-wev"/>
@@ -755,6 +755,7 @@ CA
                     </view>
                     <connections>
                         <outlet property="buttonContainer" destination="G7s-O5-blY" id="xcj-UE-jx8"/>
+                        <outlet property="mainView" destination="3tE-Et-baJ" id="4nc-2I-B6c"/>
                         <outlet property="selectedMarkerButton" destination="xns-n8-kkA" id="wDm-ji-Vls"/>
                         <outlet property="selectedMarkerConstraint" destination="TPL-Lo-G8g" id="kzA-w3-pKX"/>
                     </connections>

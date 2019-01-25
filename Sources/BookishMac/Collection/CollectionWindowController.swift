@@ -10,9 +10,8 @@ import Logger
 
 let validationChannel = Logger("Validation")
 
-class CollectionWindowController: NSWindowController, WindowControllerWithViewModel, ActionContextProvider {
-    var viewModel: CollectionViewModel?
-    typealias ViewModel = CollectionViewModel
+class CollectionWindowController: NSWindowController, ActionContextProvider {
+    fileprivate var cvm: CollectionViewModel!
     
     var indexControllers: [String:Any] = [:]
 
@@ -22,12 +21,10 @@ class CollectionWindowController: NSWindowController, WindowControllerWithViewMo
     }
     
     func provide(context: ActionContext) {
-        if let model = viewModel {
-            context.info[ActionContext.modelKey] = model.managedObjectContext
-            context.info[ActionContext.viewModelKey] = model
-            context.info[ActionContext.windowKey] = self
-            context.info[ActionContext.rootKey] = self
-        }
+        context.info[ActionContext.modelKey] = cvm.managedObjectContext
+        context.info[ActionContext.viewModelKey] = cvm
+        context.info[ActionContext.windowKey] = self
+        context.info[ActionContext.rootKey] = self
     }
     
     func validateButtons() {
@@ -37,14 +34,24 @@ class CollectionWindowController: NSWindowController, WindowControllerWithViewMo
     }
 
     func reveal<EntityType: NSManagedObject>(_ object: EntityType, mode: CollectionViewModel.Mode) {
-        if let model = viewModel {
-            model.mode = mode
-            if let name = EntityType.entity().name {
-                if let index = indexControllers[name] as? IndexController<EntityType> {
-                    index.select(items: [object])
-                }
+        cvm.mode = mode
+        if let name = EntityType.entity().name {
+            if let index = indexControllers[name] as? IndexController<EntityType> {
+                index.select(items: [object])
             }
         }
+    }
+}
+
+extension CollectionWindowController: WindowControllerWithViewModel {
+    var viewModel: CollectionViewModel {
+        return cvm
+    }
+    
+    typealias ViewModel = CollectionViewModel
+
+    func didConnect(to viewModel: CollectionViewModel) {
+        self.cvm = viewModel
     }
 }
 

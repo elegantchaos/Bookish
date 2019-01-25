@@ -6,8 +6,9 @@
 import AppKit
 
 class AnnotatedTableCellView: NSTableCellView, NSTextFieldDelegate {
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    
+    override func viewDidMoveToWindow() {
+        super.viewDidMoveToWindow()
         hideButtons()
     }
     
@@ -42,5 +43,12 @@ class AnnotatedTableCellView: NSTableCellView, NSTextFieldDelegate {
 
     dynamic func controlTextDidEndEditing(_ obj: Notification) {
         hideButtons()
+    }
+    
+    override func prepareForReuse() {
+        print("reusing \(self)")
+        hideButtons()
+        objectValue = nil
+        super.prepareForReuse()
     }
 }

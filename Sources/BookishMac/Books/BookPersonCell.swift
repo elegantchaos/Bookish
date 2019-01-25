@@ -10,13 +10,20 @@ import BookishModel
 class BookPersonCell: AnnotatedTableCellView {
     
     @IBOutlet weak var personField: NSTextField!
-//    var selectedPerson: Person?
-    var selectedRole: Role? {
-        if let table = detailView.detailsTable, let roles = detailView.roleList.arrangedObjects as? [Role] {
+    
+    var roleCell: BookRoleCell? {
+        if let table = detailView.detailsTable {
             let row = table.row(for: self)
-            if row != -1, let heading = table.view(atColumn: 1, row: row, makeIfNecessary: false) as? BookPersonHeadingCell {
-                return roles[heading.rolePopup.indexOfSelectedItem]
+            if row != -1 {
+                return table.view(atColumn: 1, row: row, makeIfNecessary: false) as? BookRoleCell
             }
+        }
+        return nil
+    }
+    
+    var selectedRole: Role? {
+        if let heading = roleCell, let roles = detailView.roleList.arrangedObjects as? [Role] {
+            return roles[heading.rolePopup.indexOfSelectedItem]
         }
         return nil
     }
@@ -29,32 +36,31 @@ class BookPersonCell: AnnotatedTableCellView {
 
 extension BookPersonCell: BookDetailTableCell {
     func setup(for view: BookDetailViewController, row: DetailDataSource.RowInfo) {
-//        if let heading = view.detailsTable.view(atColumn: 1, row: row.absolute, makeIfNecessary: false) as? BookPersonHeadingCell {
-//            if let role = heading.rolePopup.selectedItem?.representedObject as? Role {
-//                selectedRole = role
-//            }
-//        }
-        
+        detailChannel.debug("setting up")
         assert(row.category == .person)
         let source = view.source
         detailView = view
         if row.placeholder {
             personCombo.stringValue = ""
+            detailChannel.debug("setup as a placeholder")
         } else {
             let relationship = source.relationship(for: row)
             objectValue = relationship
             if let person = relationship.person, let name = person.name {
-//                selectedPerson = person
-                personCombo.stringValue = name
-                personField.stringValue = name
+                if !detailView.editing {
+                    personField.stringValue = name
+                } else if let index = detailView.index(of: person) {
+                    detailChannel.debug("setup with selection \(index) \(name)")
+                    personCombo.selectItem(at: index)
+                } else {
+                    detailChannel.debug("setup with unknown name \(name)")
+                    personCombo.stringValue = name
+                }
             }
         }
 
         personCombo.isHidden = !detailView.editing
         personField.isHidden = detailView.editing
-        
-//        showButtons()
-//        self.validateButtons()
     }
 
     func keyView() -> NSView? {
@@ -65,62 +71,24 @@ extension BookPersonCell: BookDetailTableCell {
 extension BookPersonCell: ActionContextProvider {
     func provide(context: ActionContext) {
         context.info[PersonAction.relationshipKey] = objectValue as? Relationship
+        context.info.addObserver(self)
+        
+        if detailView.editing {
+            let person = detailView.person(at: personCombo.indexOfSelectedItem)
+            context.info[PersonAction.personKey] = person ?? personCombo.stringValue
+            context[PersonAction.roleKey] = selectedRole
+        }
     }
-
 }
 
-extension BookPersonCell: NSComboBoxDelegate {
-    func comboBoxSelectionDidChange(_ notification: Notification) {
-        if let people = detailView?.personList?.arrangedObjects as? [Person] {
-            let index = personCombo.indexOfSelectedItem
-            if index != -1 {
-                let newPerson = people[personCombo.indexOfSelectedItem]
-                changePerson(to: newPerson)
-            }
-        }
+extension BookPersonCell: BookChangeObserver {
+    func replaced(relationship: Relationship, with: Relationship) {
+        objectValue = with
+        roleCell?.objectValue = with
     }
     
-    override func controlTextDidEndEditing(_ obj: Notification) {
-        super.controlTextDidEndEditing(obj)
-        if let context = detailView?.cvm.managedObjectContext {
-            let newName = personCombo.stringValue
-            if let newPerson = Person.named(newName, in: context) {
-                changePerson(to: newPerson)
-            } else {
-                changePerson(creating: newName)
-            }
-        }
-    }
-    
-    func changePerson(to newPerson: Person) {
-        let relationship = objectValue as? Relationship
-        if newPerson != relationship?.person {
-            let actionManager = application.actionManager
-            let info = makeInfo()
-            info[PersonAction.personKey] = newPerson
-            actionManager.perform(identifier: "ChangeRelationship", info: info)
-        }
-    }
-    
-    func changePerson(creating newPersonName: String) {
-        let actionManager = application.actionManager
-        let info = makeInfo()
-        info[PersonAction.personKey] = newPersonName
-        actionManager.perform(identifier: "ChangeRelationship", info: info)
-    }
-    
-    func makeInfo() -> ActionInfo {
-        let info = ActionInfo(sender: self)
-        
-        let relationship = objectValue as? Relationship
-        if let relationship = relationship {
-            info[PersonAction.relationshipKey] = relationship
-        }
-        
-        if let role = selectedRole {
-            info[PersonAction.roleKey] = role
-        }
-        
-        return info
+    func added(relationship: Relationship) {
+        objectValue = relationship
+        roleCell?.objectValue = relationship
     }
 }

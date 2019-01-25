@@ -8,9 +8,7 @@ import CoreData
 import ActionsKit
 import BookishModel
 
-@objc class CollectionViewModel: NSObject, WindowControllerViewModel {
-    typealias ViewController = CollectionViewController
-    typealias WindowController = CollectionWindowController
+@objc class CollectionViewModel: NSObject {
 
     enum Mode: Int {
         case books = 0
@@ -26,7 +24,6 @@ import BookishModel
     }
     
     let collection: SyncedCollection
-    
     
     @objc let managedObjectContext: NSManagedObjectContext
     @objc var bookIndex: NSArrayController?
@@ -85,4 +82,12 @@ import BookishModel
             return menu
         }
     }    
+}
+
+extension CollectionViewModel: WindowControllerViewModel {
+    typealias ViewController = CollectionViewController
+    typealias WindowController = CollectionWindowController
+    
+    func didConnect(to window: CollectionWindowController) {
+    }
 }

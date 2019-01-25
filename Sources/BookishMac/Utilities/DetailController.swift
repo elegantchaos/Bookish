@@ -110,9 +110,8 @@ class DetailController<EntityKind>: DetailControllerBase {
     weak var indexView: IndexController<EntityKind>!
     let entityName = "\(EntityKind.self)"
 
-    override func awakeFromNib() {
-        detailChannel.log("\(entityName) awakened \(self.className)")
-        super.awakeFromNib()
+    override func viewDidLoad() {
+        super.viewDidLoad()
         if let iv: IndexController<EntityKind> = nearestSibling() {
             indexView = iv
             index = indexView.indexArray

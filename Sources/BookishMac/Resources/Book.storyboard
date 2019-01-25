@@ -316,7 +316,7 @@
                                                                             <outlet property="textField" destination="x1u-dm-Z1R" id="Vpf-NK-Whq"/>
                                                                         </connections>
                                                                     </tableCellView>
-                                                                    <tableCellView identifier="role" id="Yed-T2-EOc" customClass="BookPersonHeadingCell" customModule="Bookish" customModuleProvider="target">
+                                                                    <tableCellView identifier="role" id="Yed-T2-EOc" customClass="BookRoleCell" customModule="Bookish" customModuleProvider="target">
                                                                         <rect key="frame" x="36" y="27" width="86" height="24"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
@@ -331,7 +331,7 @@
                                                                                     <binding destination="TBH-Sa-Ff0" name="font" keyPath="self.cvm.labelFont" id="gKJ-s2-Sg8"/>
                                                                                 </connections>
                                                                             </textField>
-                                                                            <popUpButton identifier="button.ChangeRelationship" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="K1I-Nb-paf" customClass="ColoredPopUpButton" customModule="Bookish" customModuleProvider="target">
+                                                                            <popUpButton identifier="button.ChangeRelationship(&quot;skipValidation&quot;: &quot;true&quot;)" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="K1I-Nb-paf" customClass="ColoredPopUpButton" customModule="Bookish" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="-1" width="86" height="25"/>
                                                                                 <popUpButtonCell key="cell" type="recessed" title="author" bezelStyle="recessed" alignment="right" lineBreakMode="truncatingTail" state="on" borderStyle="border" inset="2" preferredEdge="maxX" selectedItem="Qu3-8a-seq" id="JXx-IM-b5h">
                                                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
@@ -430,7 +430,7 @@
                                                                                     <binding destination="TBH-Sa-Ff0" name="font" keyPath="self.cvm.detailFont" id="Qn6-Hd-BAM"/>
                                                                                 </connections>
                                                                             </textField>
-                                                                            <comboBox verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="XIj-Fj-GJW" customClass="AnnotatedComboBox" customModule="Bookish" customModuleProvider="target">
+                                                                            <comboBox identifier="button.person.ChangeRelationship" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="XIj-Fj-GJW" customClass="AnnotatedComboBox" customModule="Bookish" customModuleProvider="target">
                                                                                 <rect key="frame" x="2" y="-1" width="295" height="23"/>
                                                                                 <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" placeholderString="person name" numberOfVisibleItems="5" id="6vZ-XR-bHp">
                                                                                     <font key="font" metaFont="system" size="14"/>
@@ -443,9 +443,10 @@
                                                                                     </objectValues>
                                                                                 </comboBoxCell>
                                                                                 <connections>
-                                                                                    <binding destination="NUZ-ew-ZHD" name="content" keyPath="arrangedObjects.name" id="eeu-xi-3zY"/>
+                                                                                    <action selector="performAction:" target="dg1-Od-cPv" id="4OH-cw-5lj"/>
+                                                                                    <binding destination="NUZ-ew-ZHD" name="content" keyPath="arrangedObjects" id="OWU-Fn-Flh"/>
+                                                                                    <binding destination="NUZ-ew-ZHD" name="contentValues" keyPath="arrangedObjects.name" previousBinding="OWU-Fn-Flh" id="1kU-zy-FcZ"/>
                                                                                     <binding destination="TBH-Sa-Ff0" name="font" keyPath="self.cvm.detailFont" id="Y7X-px-C02"/>
-                                                                                    <outlet property="delegate" destination="BkD-e8-vo5" id="aBb-fo-AXW"/>
                                                                                 </connections>
                                                                             </comboBox>
                                                                             <button identifier="button.RevealPerson" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="TJV-Lt-SZS" userLabel="Reveal">

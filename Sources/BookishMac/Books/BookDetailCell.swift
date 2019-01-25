@@ -9,7 +9,7 @@ import Actions
 
 fileprivate var detailBindingContext: Int = 0
 
-class BookDetailCell: NSTableCellView, BookDetailTableCell {
+class BookDetailCell: AnnotatedTableCellView, BookDetailTableCell {
     var detailView: BookDetailViewController!
     var observer: NSKeyValueObservation?
     var asNumber = false
@@ -51,11 +51,12 @@ class BookDetailCell: NSTableCellView, BookDetailTableCell {
     
     override func prepareForReuse() {
         observer = nil
+        super.prepareForReuse()
     }
 }
 
-extension BookDetailCell: NSControlTextEditingDelegate {
-    func controlTextDidEndEditing(_ obj: Notification) {
+extension BookDetailCell {
+    override func controlTextDidEndEditing(_ obj: Notification) {
         if detailView.editing, let subview = textField, let detail = objectValue as? DetailSpec {
             let actionManager = application.actionManager
             let info = ActionInfo(sender: self)
@@ -64,5 +65,6 @@ extension BookDetailCell: NSControlTextEditingDelegate {
             info[ChangeValueAction.valueKey] = value
             actionManager.perform(identifier: "ChangeValue", info: info)
         }
+        super.controlTextDidEndEditing(obj)
     }
 }

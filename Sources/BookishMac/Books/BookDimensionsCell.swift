@@ -9,7 +9,7 @@ import Actions
 
 fileprivate var detailBindingContext: Int = 0
 
-class BookDimensionsCell: NSTableCellView, BookDetailTableCell {
+class BookDimensionsCell: AnnotatedTableCellView, BookDetailTableCell {
     var index: NSArrayController?
     
     @IBOutlet weak var widthField: NSTextField!
@@ -62,18 +62,6 @@ class BookDimensionsCell: NSTableCellView, BookDetailTableCell {
         cleanupValue(field: widthField, property: "width")
         cleanupValue(field: heightField, property: "height")
         cleanupValue(field: lengthField, property: "length")
+        super.prepareForReuse()
     }
-}
-
-extension BookDimensionsCell: NSControlTextEditingDelegate {
-//    func controlTextDidEndEditing(_ obj: Notification) {
-//        if let subview = textField, let detail = objectValue as? DetailSpec {
-//            let actionManager = application.actionManager
-//            let info = ActionInfo(sender: self)
-//            info[ChangeValueAction.propertyKey] = detail.binding
-//            let value: Any = asNumber ? subview.doubleValue : subview.stringValue
-//            info[ChangeValueAction.valueKey] = value
-//            actionManager.perform(identifier: "ChangeValue", info: info)
-//        }
-//    }
 }
