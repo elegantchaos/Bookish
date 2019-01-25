@@ -31,14 +31,11 @@ extension BookSeriesCell: BookDetailTableCell {
             
             let selection = view.selectedItems()
             switch selection.count {
-            case 0:
-                positionField.stringValue = ""
-                
             case 1:
                 positionField.integerValue = selection[0].position(in: series)
                 
             default:
-                positionField.objectValue = NSMultipleValuesMarker
+                positionField.objectValue = ""
             }
         }
         
