@@ -32,6 +32,7 @@ class BookDetailCell: AnnotatedTableCellView, BookDetailTableCell {
             let selection = selection.value(forKey: detail.binding) as? NSObject
             if selection === NSMultipleValuesMarker {
                 subview.placeholderString = "Multiple Values"
+                subview.objectValue = ""
             } else {
                 subview.objectValue = selection
                 asNumber = selection?.isKind(of: NSNumber.self) ?? false
