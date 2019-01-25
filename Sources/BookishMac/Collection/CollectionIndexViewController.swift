@@ -6,7 +6,6 @@
 import AppKit
 
 class CollectionIndexViewController: NSTabViewController {
-    @IBOutlet weak var detailView: CollectionDetailViewController?
     @objc let cvm: CollectionViewModel
     
     required init?(coder: NSCoder) {
@@ -14,9 +13,6 @@ class CollectionIndexViewController: NSTabViewController {
         super.init(coder: coder)
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        detailView = nearestSibling()
-    }
+    lazy var detailView: CollectionDetailViewController = nearestMatchingController()
  
 }

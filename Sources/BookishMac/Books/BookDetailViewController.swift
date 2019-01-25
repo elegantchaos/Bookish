@@ -70,7 +70,7 @@ class BookDetailViewController: DetailController<Book>, BookLifecycleObserver {
         return true
     }
     
-    override func provideForDetail(context: ActionContext) {
+    override func addContextForDetail(context: ActionContext) {
         context.info.addObserver(self)
         if let selection = index.selectedObjects as? [Book] {
             context.info[ActionContext.selectionKey] = selection

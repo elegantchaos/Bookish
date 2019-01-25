@@ -14,7 +14,7 @@ let indexChannel = Logger("Index")
  since they can't live in a Swift generic class.
  */
 
-class IndexControllerBindings: CollectionViewController {
+class IndexControllerBase: CollectionViewController {
     @IBOutlet weak var indexArray: NSArrayController!
     @IBOutlet weak var indexTable: NSTableView!
     @IBOutlet weak var indexSearchField: NSSearchField!
@@ -25,7 +25,7 @@ class IndexControllerBindings: CollectionViewController {
  Index view controller, parameterised by the kind of thing it's indexing.
  */
 
-class IndexController<EntityType>: IndexControllerBindings, ActionObserver {
+class IndexController<EntityType>: IndexControllerBase, ActionObserver {
     enum FetchState {
         case unfetched
         case fetching
@@ -37,24 +37,16 @@ class IndexController<EntityType>: IndexControllerBindings, ActionObserver {
     }
     
     let entityName = "\(EntityType.self)"
-    weak var detailView: DetailController<EntityType>!
+    
+    lazy var detailView: DetailController<EntityType> = nearestMatchingController()
+    
     var observers: [NSKeyValueObservation] = []
     var fetchSessions: [FetchSession] = []
     var fetchState: FetchState = .unfetched
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-
-        indexChannel.debug(" \(entityName) index loaded")
-    }
-    
     override func windowDidLoad(_ window: CollectionWindowController) {
         indexChannel.debug(" \(entityName) index window loaded")
-        if let dv: DetailController<EntityType> = nearestSibling() {
-            detailView = dv
-        }
-        window.indexControllers[entityName] = self
+        window.register(index: self, for: entityName)
     }
     
     
@@ -102,7 +94,7 @@ class IndexController<EntityType>: IndexControllerBindings, ActionObserver {
         }
     }
     
-    func provideForIndex(context: ActionContext) {
+    func addContextForIndex(context: ActionContext) {
         context.info.addObserver(self)
     }
 
@@ -135,8 +127,8 @@ class IndexController<EntityType>: IndexControllerBindings, ActionObserver {
 
 extension IndexController: ActionContextProvider {
     func provide(context: ActionContext) {
-        provideForIndex(context: context)
-        detailView.provideForDetail(context: context)
+        addContextForIndex(context: context)
+        detailView.addContextForDetail(context: context)
     }
 
 }

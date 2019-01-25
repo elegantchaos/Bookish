@@ -108,18 +108,18 @@ extension DetailControllerBase: NSTableViewDelegate, NSTableViewDataSource {
 class DetailController<EntityKind>: DetailControllerBase {
     let entityName = "\(EntityKind.self)"
 
-    internal lazy var indexView = connectIndexView()
+    internal lazy var indexView: IndexController<EntityKind> = nearestMatchingController()
     
     @objc var index: NSArrayController {
         return indexView.indexArray!
     }
    
     fileprivate func connectIndexView() -> IndexController<EntityKind> {
-    let iv: IndexController<EntityKind>? = nearestSibling()
-    return iv!
+        let iv: IndexController<EntityKind>? = nearestMatchingController()
+        return iv!
     }
     
-    func provideForDetail(context: ActionContext) {
+    func addContextForDetail(context: ActionContext) {
         context.info[ActionContext.selectionKey] = selectedItems()
     }
     
@@ -193,7 +193,7 @@ class DetailController<EntityKind>: DetailControllerBase {
 
 extension DetailController: ActionContextProvider {
     func provide(context: ActionContext) {
-        indexView.provideForIndex(context: context)
-        provideForDetail(context: context)
+        indexView.addContextForIndex(context: context)
+        addContextForDetail(context: context)
     }
 }

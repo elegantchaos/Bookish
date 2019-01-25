@@ -28,7 +28,12 @@ extension NSViewController {
         return NSApp.delegate as! Application
     }
 
-    func nearestChild<T>(excluding: NSViewController? = nil) -> T? where T: NSViewController {
+    /**
+     Find the nearest view of the matching type.
+     We check the view that the method is called on, then all its children recursively.
+    */
+    
+    func nearestIncludingChildren<T>(excluding: NSViewController? = nil) -> T? where T: NSViewController {
         if let view = self as? T {
             return view
         }
@@ -36,7 +41,7 @@ extension NSViewController {
         let searchAll = excluding == nil
         for child in children {
             if searchAll || (excluding !== child) {
-                if let view: T = child.nearestChild() {
+                if let view: T = child.nearestIncludingChildren() {
                     return view
                 }
             }
@@ -44,21 +49,43 @@ extension NSViewController {
         
         return nil
     }
-    
-    func nearest<T>(excluding: NSViewController? = nil) -> T? where T: NSViewController {
-        if let view: T = self.nearestChild(excluding: excluding) {
+
+    /**
+     Find the nearest view of the matching type.
+     We check the view that the method is called on, then all its children recursively.
+     If that fails, we then move up to the parent, and check all our siblings. We continue
+     moving up the parent chain until we find a view, or run out.
+     */
+
+    func nearestIncludingParents<T>(excluding: NSViewController? = nil) -> T? where T: NSViewController {
+        if let view: T = self.nearestIncludingChildren(excluding: excluding) {
             return view
         }
         
         if let parent = self.parent {
-            return parent.nearest(excluding: self)
+            return parent.nearestIncludingParents(excluding: self)
         }
         
         return nil
     }
+
+    /**
+     Find the nearest view of a given type.
+     Can return nil if we fail.
+    */
     
-    func nearestSibling<T>() -> T? where T: NSViewController {
-        return parent?.nearest(excluding: self)
+    func nearestMatchingController<T>() -> T? where T: NSViewController {
+        return parent?.nearestIncludingParents(excluding: self)
+    }
+
+    /**
+     Find the nearest view of a given type.
+     We assume that the search will succeed - if not, it's a runtime error.
+     */
+
+    func nearestMatchingController<T>() -> T where T: NSViewController {
+        let sibling: T? = parent?.nearestIncludingParents(excluding: self)
+        return sibling!
     }
 
 }

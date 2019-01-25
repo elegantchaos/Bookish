@@ -13,7 +13,7 @@ let validationChannel = Logger("Validation")
 class CollectionWindowController: NSWindowController, ActionContextProvider {
     fileprivate var cvm: CollectionViewModel!
     
-    var indexControllers: [String:Any] = [:]
+    private var indexControllers: [String:Any] = [:]
 
     override func windowDidLoad() {
         super.windowDidLoad()
@@ -40,6 +40,10 @@ class CollectionWindowController: NSWindowController, ActionContextProvider {
                 index.select(items: [object])
             }
         }
+    }
+    
+    func register(index controller: IndexControllerBase, for entityName: String) {
+        indexControllers[entityName] = controller
     }
 }
 

@@ -18,7 +18,7 @@ class CollectionRootViewController: CollectionViewController {
     var observer: NSKeyValueObservation?
     
     override func windowDidLoad(_ window: CollectionWindowController) {
-        let mainContent: NSSplitViewController? = nearestChild()
+        let mainContent: NSSplitViewController? = nearestIncludingChildren()
         mainContent?.splitView.setPosition(initialSplit, ofDividerAt: 0)
 
         super.windowDidLoad(window)
