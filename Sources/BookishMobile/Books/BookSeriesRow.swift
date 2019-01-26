@@ -9,12 +9,12 @@ import UIKit
 
 class BookSeriesRow: BookDetailRow {
     @IBOutlet var seriesButton: UIButton!
-    var entry: Entry!
+    var series: Series!
 
     override func setup(row: DetailDataSource.RowInfo, book: Book, source: DetailDataSource) {
         assert(row.category == .series)
-        entry = source.series(for: row)
-        if let name = entry.series?.name {
+        series = source.series(for: row)
+        if let name = series?.name {
             label.text = name
             seriesButton.setTitle(name, for: .normal)
         }
@@ -23,7 +23,7 @@ class BookSeriesRow: BookDetailRow {
 
 extension BookSeriesRow: ActionContextProvider {
     func provide(context: ActionContext) {
-        context.info[SeriesAction.seriesKey] = entry.series
+        context.info[SeriesAction.seriesKey] = series
     }
 }
 

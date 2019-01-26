@@ -59,6 +59,7 @@
 		22960328214025E80020B3EB /* BookPersonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22960327214025E80020B3EB /* BookPersonCell.swift */; };
 		2296032A214032520020B3EB /* AnnotatedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22960329214032520020B3EB /* AnnotatedTextField.swift */; };
 		22A3E0C521FA015900BA4F17 /* Ensembles.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A3E0C421FA014F00BA4F17 /* Ensembles.framework */; };
+		22A3E30721FB8AF500BA4F17 /* Ensembles.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22A3E0C421FA014F00BA4F17 /* Ensembles.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		22A69BF521C2DDE600043C3A /* LoggerKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A69BF421C2DDE600043C3A /* LoggerKit.framework */; };
 		22B1DB412178D8A50067E795 /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B1DB402178D8A50067E795 /* ViewExtensions.swift */; };
 		22C2194B21AF24E5002FC0FE /* ToggleEditingAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C2194A21AF24E5002FC0FE /* ToggleEditingAction.swift */; };
@@ -191,6 +192,7 @@
 				22F180C221CA64B500220D20 /* Actions.framework in Embed Frameworks */,
 				22F180BD21CA647000220D20 /* LoggerKit.framework in Embed Frameworks */,
 				22F180BE21CA647000220D20 /* Logger.framework in Embed Frameworks */,
+				22A3E30721FB8AF500BA4F17 /* Ensembles.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;

@@ -9,7 +9,7 @@ import Actions
 
 class SeriesDetailController: DetailController<Series> {
     lazy var placeholderImage = UIImage(named: "SeriesPlaceholder")
-    var sortedEntries = [Entry]()
+    var sortedEntries = [SeriesEntry]()
     
     @IBOutlet weak var nameLabel: UITextField!
     @IBOutlet weak var notesView: UITextView!
@@ -25,7 +25,7 @@ class SeriesDetailController: DetailController<Series> {
                 imageView.image = placeholderImage
             }
             
-            let entries = series.entries?.sortedArray(using: application.viewModel.entrySorting) as! [Entry]
+            let entries = series.entries?.sortedArray(using: application.viewModel.entrySorting) as! [SeriesEntry]
             sortedEntries.removeAll()
             sortedEntries.append(contentsOf: entries)
         }
