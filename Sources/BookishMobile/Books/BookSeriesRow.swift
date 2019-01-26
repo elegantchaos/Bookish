@@ -13,10 +13,14 @@ class BookSeriesRow: BookDetailRow {
 
     override func setup(row: DetailDataSource.RowInfo, book: Book, source: DetailDataSource) {
         assert(row.category == .series)
-        series = source.series(for: row)
-        if let name = series?.name {
-            label.text = name
-            seriesButton.setTitle(name, for: .normal)
+        if row.placeholder {
+            
+        } else {
+            series = source.series(for: row)
+            if let name = series?.name {
+                label.text = name
+                seriesButton.setTitle(name, for: .normal)
+            }
         }
     }
 }

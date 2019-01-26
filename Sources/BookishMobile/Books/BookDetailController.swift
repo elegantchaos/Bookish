@@ -22,7 +22,16 @@ class BookDetailController: DetailController<Book> {
             bindings.append(TextFieldBinding(for: subtitleLabel, to: book, path: "subtitle"))
             configureImage(for: book)
             bindings.append(StringBinding(for: self, property: "title", to: book, path: "name"))
+            updateView()
+        }
+    }
+    
+    func updateView() {
+        if let book = representedObject, titleLabel != nil {
+            titleLabel.isEnabled = isEditing
+            subtitleLabel.isEnabled = isEditing
             source.filter(for: [book], editing: isEditing)
+            view.validateButtons()
         }
     }
     
@@ -54,5 +63,23 @@ class BookDetailController: DetailController<Book> {
 
         cell.setup(row: info, book: book, source: source)
         return cell
+    }
+    
+}
+
+extension BookDetailController: ActionContextProvider {
+    func provide(context: ActionContext) {
+        context[ToggleEditingAction.editableKey] = self
+    }
+}
+
+extension BookDetailController: EditableView {
+    func setEditing(_ editing: Bool) {
+        isEditing = editing
+    }
+    
+    func didToggleEditing() {
+        updateView()
+        detailView.reloadData()
     }
 }

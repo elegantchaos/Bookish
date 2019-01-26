@@ -31,11 +31,16 @@ class Application: UIResponder {
     
     func setupActions() {
         actionManager.register(ModelAction.standardActions())
+        actionManager.register(EditingAction.standardActions())
         actionManager.installResponder()
     }
     
     func setupCloud() {
         cloud.setup(name: "mobile")
+    }
+    
+    class var sharedInstance: Application {
+        return UIApplication.shared.delegate as! Application
     }
 }
 

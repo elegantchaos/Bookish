@@ -51,7 +51,7 @@
                                 </subviews>
                             </stackView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="SVb-EU-R8f" userLabel="Detail Table">
-                                <rect key="frame" x="0.0" y="136" width="375" height="493"/>
+                                <rect key="frame" x="0.0" y="136" width="375" height="449"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="text" id="E4T-eO-oRA" userLabel="text" customClass="BookDetailRow" customModule="Bookish" customModuleProvider="target">
@@ -264,10 +264,10 @@
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b7Y-qy-voN">
-                                <rect key="frame" x="325" y="633" width="46" height="30"/>
-                                <state key="normal" title="Button"/>
+                                <rect key="frame" x="341" y="589" width="30" height="30"/>
+                                <state key="normal" title="Edit"/>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="actionID" value="NewBook"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="actionID" value="ToggleEditing"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="performAction:" destination="FJe-Yq-33r" eventType="primaryActionTriggered" id="UYD-xa-Wg4"/>
@@ -292,7 +292,20 @@
                         <viewLayoutGuide key="safeArea" id="VUw-jc-0yf"/>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Detail" id="mOI-FS-AaM"/>
+                    <navigationItem key="navigationItem" title="Detail" id="mOI-FS-AaM">
+                        <barButtonItem key="rightBarButtonItem" title="Edit" id="k7V-Vs-bPT">
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="actionID" value="ToggleEditing"/>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="performAction:" destination="FJe-Yq-33r" id="r16-9Q-i0M"/>
+                            </connections>
+                        </barButtonItem>
+                        <connections>
+                            <outlet property="rightBarButtonItem" destination="k7V-Vs-bPT" id="hTV-hu-KYV"/>
+                        </connections>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="detailView" destination="SVb-EU-R8f" id="hMh-4q-cVS"/>
                         <outlet property="imageView" destination="S0q-2t-1sR" id="XYD-zb-Ji5"/>
@@ -356,21 +369,24 @@
                             <outlet property="delegate" destination="7bK-jq-Zjz" id="RA6-mI-bju"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Books" id="Zdf-7t-Un8"/>
+                    <navigationItem key="navigationItem" title="Title" id="2Bj-fb-n2D">
+                        <barButtonItem key="rightBarButtonItem" title="Add" id="FOG-E4-5VL">
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="actionID" value="NewBook"/>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="performAction:" destination="Rux-fX-hf1" id="FKh-Bs-kMt"/>
+                            </connections>
+                        </barButtonItem>
+                        <connections>
+                            <outlet property="rightBarButtonItem" destination="FOG-E4-5VL" id="OSR-Kx-o9o"/>
+                        </connections>
+                    </navigationItem>
                     <connections>
-                        <outlet property="addButton" destination="FOG-E4-5VL" id="jrI-Pv-PeP"/>
                         <outlet property="indexTable" destination="r7i-6Z-zg0" id="qJn-MB-L4G"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rux-fX-hf1" sceneMemberID="firstResponder"/>
-                <barButtonItem title="Add" id="FOG-E4-5VL">
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="string" keyPath="actionID" value="NewBook"/>
-                    </userDefinedRuntimeAttributes>
-                    <connections>
-                        <action selector="performAction:" destination="Rux-fX-hf1" id="FKh-Bs-kMt"/>
-                    </connections>
-                </barButtonItem>
             </objects>
             <point key="canvasLocation" x="546" y="1251"/>
         </scene>
@@ -392,7 +408,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Book" width="32" height="32"/>
+        <image name="Book" width="16" height="16"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="6S0-TO-JiA"/>

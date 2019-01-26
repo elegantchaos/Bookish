@@ -24,7 +24,6 @@ class IndexController<DetailControllerType: DetailController<EntityType>, Entity
     lazy var fetcher: NSFetchedResultsController<EntityType> = makeFetcher()
     
     @IBOutlet var indexTable: UITableView!
-    @IBOutlet var addButton: UIBarButtonItem!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,8 +31,7 @@ class IndexController<DetailControllerType: DetailController<EntityType>, Entity
         modelContext = application.collection.managedObjectContext
         application.collectionController.indexControllers[entityName] = self
         
-        navigationItem.leftBarButtonItem = editButtonItem
-        navigationItem.rightBarButtonItem = addButton
+        navigationItem.rightBarButtonItem = editButtonItem
         
         if let split = splitViewController {
             let controllers = split.viewControllers
