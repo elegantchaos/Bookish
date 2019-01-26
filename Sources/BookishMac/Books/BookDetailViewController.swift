@@ -114,16 +114,22 @@ class BookDetailViewController: DetailController<Book>, BookLifecycleObserver {
 // MARK: EditableView Support
 
 extension BookDetailViewController: EditableView {
-    func toggleEditing() {
+    var isEditing: Bool { return editing }
+    
+    func setEditing(_ value: Bool) {
+        editing = value
+    }
+    
+    func willToggleEditing() {
         // change focus; this will commit any editing changes that were
         // in progress if we're turning editing off
         // NB need to do this before changing the editing flag, so that the
         // context is correct when any editing-related actions fire
         let newResponder: NSResponder = editing ? nameView : indexView
         view.window?.makeFirstResponder(newResponder)
-        
-        editing = !editing
-
+    }
+    
+    func didToggleEditing() {
         // rebuild the view on the next cycle, to give editing
         // changes a chance to get properly committed first
         DispatchQueue.main.async {
@@ -134,7 +140,7 @@ extension BookDetailViewController: EditableView {
 
     func adjustControlsForEditing() {
         controlColumn.isHidden = !editing
-        editButton.title = editing ? "Done" : "Edit"
+//        editButton.title = editing ? "Done" : "Edit"
         detailChannel.debug(editing ? "enabled editing" : "disabled editing")
     }
 }
@@ -202,18 +208,15 @@ extension BookDetailViewController: BookChangeObserver {
     
     func created(books: [Book]) {
         detailChannel.debug("books created")
-        if !self.editing {
-            DispatchQueue.main.async {
-                self.toggleEditing()
-            }
+        DispatchQueue.main.async {
+            let info = ActionInfo(sender: self)
+            self.application.actionManager.perform(identifier: "StartEditing", info: info)
         }
     }
     
     func deleted(books: [Book]) {
         DispatchQueue.main.async {
-            if self.editing {
-                self.toggleEditing()
-            }
+            self.application.actionManager.perform(identifier: "StopEditing")
         }
     }
 

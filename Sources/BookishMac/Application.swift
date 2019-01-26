@@ -53,10 +53,10 @@ let applicationChannel = Logger("Application")
         actionManager.register(RelationshipUIAction.standardActions())
         actionManager.register(ImporterAction.standardActions())
         actionManager.register(ItemAction.standardActions())
+        actionManager.register(EditingAction.standardActions())
         actionManager.register([
             ScanSeriesAction(identifier: "ScanSeries"),
-            ShowDatePickerAction(identifier: "ShowDatePicker"),
-            ToggleEditingAction(identifier: "ToggleEditing")
+            ShowDatePickerAction(identifier: "ShowDatePicker")
             ])
         
         actionManager.installResponder()
