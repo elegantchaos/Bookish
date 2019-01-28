@@ -15,7 +15,7 @@ class SyncedCollection: CollectionContainer, CDEPersistentStoreEnsembleDelegate 
     
     init(url: URL? = nil, identifier: String, mode: PopulateMode, callback: LoadedCallback? = nil) {
         cloudFileSystem = CDECloudKitFileSystem(privateDatabaseForUbiquityContainerIdentifier: identifier, schemaVersion: .version2)
-        super.init(name: "Synced5", url: url, mode: mode) { (collection, error) in
+        super.init(name: "Synced7", url: url, mode: mode) { (collection, error) in
             if let error = error {
                 fatalError("failed to load \(error)")
             }
@@ -86,15 +86,16 @@ class SyncedCollection: CollectionContainer, CDEPersistentStoreEnsembleDelegate 
         self.sync()
     }
     
-    private func persistentStoreEnsemble(_ ensemble: CDEPersistentStoreEnsemble, didSaveMergeChangesWith notification: Notification) {
+    @objc public func persistentStoreEnsemble(_ ensemble: CDEPersistentStoreEnsemble, didSaveMergeChangesWith notification: Notification) {
         managedObjectContext.performAndWait {
             self.managedObjectContext.mergeChanges(fromContextDidSave: notification)
         }
     }
     
-    private func persistentStoreEnsemble(_ ensemble: CDEPersistentStoreEnsemble, globalIdentifiersFor objects: [NSManagedObject]) -> [NSObject] {
+    @objc public func persistentStoreEnsemble(_ ensemble: CDEPersistentStoreEnsemble, globalIdentifiersFor objects: [NSManagedObject]) -> [NSObject] {
         let numberHolders = objects as! [ModelObject]
-        return numberHolders.map { $0.uniqueIdentifier }
+        let identifiers = numberHolders.map { $0.uniqueIdentifier }
+        return identifiers
     }
 
 }

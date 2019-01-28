@@ -39,10 +39,21 @@ extension BookIndexController: BookChangeObserver {
     
     
     func added(books: [Book]) {
-        print("added")
     }
     
     func removed(books: [Book]) {
         print("removed")
+    }
+}
+
+extension BookIndexController: BookLifecycleObserver {
+    func deleted(books: [Book]) {
+    
+    }
+    
+    func created(books: [Book]) {
+        if let book = books.first, let index = fetcher.indexPath(forObject: book) {
+            indexTable.selectRow(at: index, animated: true, scrollPosition: .middle)
+        }
     }
 }

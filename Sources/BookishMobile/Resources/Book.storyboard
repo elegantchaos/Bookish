@@ -118,6 +118,9 @@
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oQ5-BY-QHX" userLabel="Edit Role">
                                                     <rect key="frame" x="15" y="7" width="46" height="30"/>
                                                     <state key="normal" title="Button"/>
+                                                    <connections>
+                                                        <segue destination="pfx-fh-LPl" kind="show" identifier="chooseRole" id="5mL-mK-7QW"/>
+                                                    </connections>
                                                 </button>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Pjo-aU-pHP" userLabel="Edit Person">
                                                     <rect key="frame" x="65" y="7" width="306" height="30"/>
@@ -289,10 +292,10 @@
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b7Y-qy-voN">
-                                <rect key="frame" x="341" y="589" width="30" height="30"/>
-                                <state key="normal" title="Edit"/>
+                                <rect key="frame" x="4" y="589" width="30" height="30"/>
+                                <state key="normal" title="Add"/>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="actionID" value="ToggleEditing"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="actionID" value="NewBook"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="performAction:" destination="FJe-Yq-33r" eventType="primaryActionTriggered" id="UYD-xa-Wg4"/>
@@ -302,13 +305,13 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="VUw-jc-0yf" firstAttribute="trailing" secondItem="SVb-EU-R8f" secondAttribute="trailing" id="29Y-gV-uWg"/>
-                            <constraint firstItem="VUw-jc-0yf" firstAttribute="trailing" secondItem="b7Y-qy-voN" secondAttribute="trailing" constant="4" id="5Iq-Ao-4xm"/>
+                            <constraint firstItem="VUw-jc-0yf" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="b7Y-qy-voN" secondAttribute="trailing" constant="4" id="5Iq-Ao-4xm"/>
                             <constraint firstItem="H32-h1-7Va" firstAttribute="centerY" secondItem="S0q-2t-1sR" secondAttribute="centerY" id="BUG-wC-IPV"/>
                             <constraint firstItem="VUw-jc-0yf" firstAttribute="trailing" secondItem="H32-h1-7Va" secondAttribute="trailing" constant="4" id="GAy-nz-Qsz"/>
                             <constraint firstItem="SVb-EU-R8f" firstAttribute="top" secondItem="S0q-2t-1sR" secondAttribute="bottom" constant="4" id="LPq-Z9-fOG"/>
                             <constraint firstItem="S0q-2t-1sR" firstAttribute="leading" secondItem="VUw-jc-0yf" secondAttribute="leading" constant="4" id="MXu-82-PMj"/>
                             <constraint firstItem="b7Y-qy-voN" firstAttribute="top" secondItem="SVb-EU-R8f" secondAttribute="bottom" constant="4" id="OF2-Ty-Jcc"/>
-                            <constraint firstItem="b7Y-qy-voN" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="VUw-jc-0yf" secondAttribute="leading" constant="4" id="dym-zb-Us3"/>
+                            <constraint firstItem="b7Y-qy-voN" firstAttribute="leading" secondItem="VUw-jc-0yf" secondAttribute="leading" constant="4" id="dym-zb-Us3"/>
                             <constraint firstItem="S0q-2t-1sR" firstAttribute="top" secondItem="VUw-jc-0yf" secondAttribute="top" constant="4" id="gLB-OD-X1c"/>
                             <constraint firstItem="SVb-EU-R8f" firstAttribute="leading" secondItem="VUw-jc-0yf" secondAttribute="leading" id="jZv-6a-XY6"/>
                             <constraint firstItem="VUw-jc-0yf" firstAttribute="bottom" secondItem="b7Y-qy-voN" secondAttribute="bottom" constant="4" id="qW0-Y7-2oE"/>
@@ -341,6 +344,34 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FJe-Yq-33r" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2450" y="1251"/>
+        </scene>
+        <!--Choose Role Controller-->
+        <scene sceneID="y9Z-J1-lxH">
+            <objects>
+                <tableViewController id="pfx-fh-LPl" customClass="ChooseRoleController" customModule="Bookish" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="1Qr-9i-8wo">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="role" id="qBk-Yq-Kao">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qBk-Yq-Kao" id="rVI-31-iVT">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="pfx-fh-LPl" id="lx7-ac-OmL"/>
+                            <outlet property="delegate" destination="pfx-fh-LPl" id="l7n-Tp-60d"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vej-mJ-xfh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3648" y="2053"/>
         </scene>
         <!--Books-->
         <scene sceneID="Nki-YV-4Qg">
@@ -433,7 +464,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Book" width="32" height="32"/>
+        <image name="Book" width="16" height="16"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="6S0-TO-JiA"/>

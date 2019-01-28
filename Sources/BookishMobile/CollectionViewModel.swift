@@ -27,4 +27,5 @@ import Foundation
     let entrySorting = [NSSortDescriptor(key: "index", ascending: true)]
     let publisherSorting = [NSSortDescriptor(key: "sortName", ascending: true)]
     let seriesSorting = [NSSortDescriptor(key: "sortName", ascending: true)]
+    let roleSorting = [NSSortDescriptor(key: "name", ascending: true)]
 }

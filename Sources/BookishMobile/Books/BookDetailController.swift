@@ -72,6 +72,18 @@ class BookDetailController: DetailController<Book> {
         }
         super.provide(context: context)
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "chooseRole" {
+            if let controller = segue.destination as? ChooseRoleController, let button = sender as? UIButton {
+                
+                if let index = detailView.indexPathForRow(at: button.bounds.origin), let cell = detailView.cellForRow(at: index) as? BookPersonRow {
+                    controller.setup(detailView: self, row: cell)
+                }
+            }
+        }
+    }
+
 }
 
 extension BookDetailController: EditableView {

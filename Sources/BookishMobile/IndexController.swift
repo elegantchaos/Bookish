@@ -17,7 +17,7 @@ protocol EntityIndex {
 
 let indexViewChannel = Logger("IndexView")
 
-class IndexController<DetailControllerType: DetailController<EntityType>, EntityType: ModelObject>: UITableViewController, NSFetchedResultsControllerDelegate, ActionContextProvider, EntityIndex {
+class IndexController<DetailControllerType: DetailController<EntityType>, EntityType: ModelObject>: UITableViewController, NSFetchedResultsControllerDelegate, ActionContextProvider, EntityIndex, ActionObserver {
     var entityName = "\(EntityType.self)"
     var modelContext: NSManagedObjectContext? = nil
     lazy var fetcher: NSFetchedResultsController<EntityType> = makeFetcher()
@@ -183,6 +183,7 @@ class IndexController<DetailControllerType: DetailController<EntityType>, Entity
         case .insert:
             if let path = newIndexPath {
                 tableView.insertRows(at: [path], with: .fade)
+                tableView.selectRow(at: path, animated: true, scrollPosition: .middle)
             }
             
         case .delete:
@@ -219,6 +220,7 @@ class IndexController<DetailControllerType: DetailController<EntityType>, Entity
     
 
     func provide(context: ActionContext) {
+        context.info.addObserver(self)
         detailController?.provide(context: context)
     }
     

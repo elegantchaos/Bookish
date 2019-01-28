@@ -45,6 +45,14 @@ class BookPersonRow: BookDetailRow {
         roleButton.isHidden = !source.editing
         personField.isHidden = !source.editing
     }
+    
+    func changeRole(to role: Role) {
+        self.role = role
+        let roleName = role.label ?? "role"
+        roleButton.setTitle("\(roleName) >", for: .normal)
+        application.actionManager.perform(identifier: "ChangeRelationship", info: ActionInfo(sender: self))
+    }
+    
 }
 
 extension BookPersonRow: ActionContextProvider {

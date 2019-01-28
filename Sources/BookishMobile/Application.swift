@@ -24,7 +24,7 @@ class Application: UIResponder {
     var collectionController: CollectionController!
     lazy var collection: SyncedCollection = setupCollection()
     
-    func setupCollection(mode: CollectionContainer.PopulateMode = .empty) -> SyncedCollection {
+    func setupCollection(mode: CollectionContainer.PopulateMode = .defaultRoles) -> SyncedCollection {
         let collection = SyncedCollection(identifier: cloud.collectionIdentifier, mode: mode)
         return collection
     }
