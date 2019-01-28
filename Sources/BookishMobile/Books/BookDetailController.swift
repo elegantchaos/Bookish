@@ -67,6 +67,9 @@ class BookDetailController: DetailController<Book> {
 
     override func provide(context: ActionContext) {
         context[ToggleEditingAction.editableKey] = self
+        if let book = representedObject {
+            context[ActionContext.selectionKey] = [book]
+        }
         super.provide(context: context)
     }
 }

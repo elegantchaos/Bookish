@@ -10,26 +10,33 @@ import UIKit
 class BookPersonRow: BookDetailRow {
     @IBOutlet var personButton: UIButton!
     var relationship: Relationship?
+    var person: Person?
+    var role: Role?
+    var source: DetailDataSource!
+    
     @IBOutlet weak var roleButton: UIButton!
     @IBOutlet weak var roleLabel: UILabel!
     @IBOutlet weak var personField: UITextField!
     
     override func setup(row: DetailDataSource.RowInfo, book: Book, source: DetailDataSource) {
         assert(row.category == .person)
+        self.source = source
         if row.placeholder {
-            roleButton.setTitle("role >", for: .normal)
-            personField.placeholder = "person name"
+            role = Role.named(Role.StandardNames.author, in: book.managedObjectContext!)
         } else {
             relationship = source.relationship(for: row)
-            let role = relationship?.role?.label ?? "role"
-            let person = relationship?.person?.name ?? ""
-            if source.editing {
-                roleButton.setTitle("\(role) >", for: .normal)
-                personField.text = person
-            } else {
-                roleLabel.text = role
-                personButton.setTitle(person, for: .normal)
-            }
+            role = relationship?.role
+            person = relationship?.person
+        }
+        
+        let roleName = role?.label ?? "role"
+        let personName = person?.name ?? ""
+        if source.editing {
+            roleButton.setTitle("\(roleName) >", for: .normal)
+            personField.text = personName
+        } else {
+            roleLabel.text = roleName
+            personButton.setTitle(personName, for: .normal)
         }
         
         roleLabel.isHidden = source.editing
@@ -43,5 +50,16 @@ class BookPersonRow: BookDetailRow {
 extension BookPersonRow: ActionContextProvider {
     func provide(context: ActionContext) {
         context.info[PersonAction.relationshipKey] = relationship
+        if source.editing {
+            if let person = person, person.name == personField.text {
+                context[PersonAction.personKey] = person
+            } else if let name = personField.text, !name.isEmpty {
+                context[PersonAction.personKey] = name
+            }
+            
+            if let role = role {
+                context[PersonAction.roleKey] = role
+            }
+        }
     }
 }
