@@ -183,7 +183,7 @@ class IndexController<DetailControllerType: DetailController<EntityType>, Entity
         case .insert:
             if let path = newIndexPath {
                 tableView.insertRows(at: [path], with: .fade)
-                tableView.selectRow(at: path, animated: true, scrollPosition: .middle)
+//                tableView.selectRow(at: path, animated: true, scrollPosition: .middle)
             }
             
         case .delete:

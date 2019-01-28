@@ -7,6 +7,8 @@ import BookishModel
 import UIKit
 
 class ChooseRoleController: UITableViewController, NSFetchedResultsControllerDelegate {
+    let showIdentifiers = false
+    
     var row: BookPersonRow? = nil
     var fetcher: NSFetchedResultsController<Role>? = nil
     
@@ -47,8 +49,8 @@ class ChooseRoleController: UITableViewController, NSFetchedResultsControllerDel
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "role", for: indexPath)
-        if let item = fetcher?.object(at: indexPath) {
-            cell.textLabel?.text = "\(item.name!) \(item.uuid!)"
+        if let item = fetcher?.object(at: indexPath), let name = item.name {
+            cell.textLabel?.text = showIdentifiers ? "\(name) (id:\(item.uuid!))" : "\(name)"
             cell.accessoryType = (item == row?.role) ? .checkmark : .none
         }
         
@@ -65,6 +67,8 @@ class ChooseRoleController: UITableViewController, NSFetchedResultsControllerDel
             cell.accessoryType = .checkmark
             row?.changeRole(to: newRole)
         }
+        
+        dismiss(animated: true)
     }
 //    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
 //        // Return false if you do not want the specified item to be editable.

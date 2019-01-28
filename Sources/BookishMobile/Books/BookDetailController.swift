@@ -76,8 +76,14 @@ class BookDetailController: DetailController<Book> {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "chooseRole" {
             if let controller = segue.destination as? ChooseRoleController, let button = sender as? UIButton {
+//                if (UI_USER_INTERFACE_IDIOM() == .pad) {
+                    let popover = controller.popoverPresentationController
+                    popover?.sourceRect = button.frame
+                    popover?.sourceView = button.superview
+//                }
                 
-                if let index = detailView.indexPathForRow(at: button.bounds.origin), let cell = detailView.cellForRow(at: index) as? BookPersonRow {
+                let origin = button.convert(button.bounds.origin, to: detailView)
+                if let index = detailView.indexPathForRow(at: origin), let cell = detailView.cellForRow(at: index) as? BookPersonRow {
                     controller.setup(detailView: self, row: cell)
                 }
             }

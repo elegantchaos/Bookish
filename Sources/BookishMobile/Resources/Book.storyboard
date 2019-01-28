@@ -119,7 +119,9 @@
                                                     <rect key="frame" x="15" y="7" width="46" height="30"/>
                                                     <state key="normal" title="Button"/>
                                                     <connections>
-                                                        <segue destination="pfx-fh-LPl" kind="show" identifier="chooseRole" id="5mL-mK-7QW"/>
+                                                        <segue destination="pfx-fh-LPl" kind="popoverPresentation" identifier="chooseRole" popoverAnchorView="svH-Pt-448" id="5mL-mK-7QW">
+                                                            <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                                        </segue>
                                                     </connections>
                                                 </button>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Pjo-aU-pHP" userLabel="Edit Person">
@@ -348,7 +350,7 @@
         <!--Choose Role Controller-->
         <scene sceneID="y9Z-J1-lxH">
             <objects>
-                <tableViewController id="pfx-fh-LPl" customClass="ChooseRoleController" customModule="Bookish" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController modalPresentationStyle="currentContext" id="pfx-fh-LPl" customClass="ChooseRoleController" customModule="Bookish" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="1Qr-9i-8wo">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -368,6 +370,7 @@
                             <outlet property="delegate" destination="pfx-fh-LPl" id="l7n-Tp-60d"/>
                         </connections>
                     </tableView>
+                    <value key="contentSizeForViewInPopover" type="size" width="300" height="400"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vej-mJ-xfh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -426,7 +429,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Title" id="2Bj-fb-n2D">
-                        <barButtonItem key="rightBarButtonItem" title="Add" id="FOG-E4-5VL">
+                        <barButtonItem key="leftBarButtonItem" title="Add" id="FOG-E4-5VL">
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="string" keyPath="actionID" value="NewBook"/>
                             </userDefinedRuntimeAttributes>
