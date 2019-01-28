@@ -10,6 +10,7 @@ import UIKit
 class BookIndexController: IndexController<BookDetailController, Book> {
      override func provide(context: ActionContext) {
         context.info.addObserver(self)
+        super.provide(context: context)
     }    
     
     override func configureCell(_ cell: UITableViewCell, with book: Book) {

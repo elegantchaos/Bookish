@@ -19,11 +19,19 @@ let indexViewChannel = Logger("IndexView")
 
 class IndexController<DetailControllerType: DetailController<EntityType>, EntityType: ModelObject>: UITableViewController, NSFetchedResultsControllerDelegate, ActionContextProvider, EntityIndex {
     var entityName = "\(EntityType.self)"
-    var detailController: DetailControllerType? = nil
     var modelContext: NSManagedObjectContext? = nil
     lazy var fetcher: NSFetchedResultsController<EntityType> = makeFetcher()
     
     @IBOutlet var indexTable: UITableView!
+
+    var detailController: DetailControllerType? {
+        if let split = splitViewController {
+            let controllers = split.viewControllers
+            return (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailControllerType
+        }
+
+        return nil
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,11 +40,6 @@ class IndexController<DetailControllerType: DetailController<EntityType>, Entity
         application.collectionController.indexControllers[entityName] = self
         
         navigationItem.rightBarButtonItem = editButtonItem
-        
-        if let split = splitViewController {
-            let controllers = split.viewControllers
-            detailController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailControllerType
-        }
     }
 
     func reset() {
@@ -216,6 +219,7 @@ class IndexController<DetailControllerType: DetailController<EntityType>, Entity
     
 
     func provide(context: ActionContext) {
+        detailController?.provide(context: context)
     }
     
 }

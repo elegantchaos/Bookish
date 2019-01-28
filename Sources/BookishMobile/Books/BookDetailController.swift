@@ -31,7 +31,7 @@ class BookDetailController: DetailController<Book> {
             titleLabel.isEnabled = isEditing
             subtitleLabel.isEnabled = isEditing
             source.filter(for: [book], editing: isEditing)
-            view.validateButtons()
+            validateButtons()
         }
     }
     
@@ -64,12 +64,10 @@ class BookDetailController: DetailController<Book> {
         cell.setup(row: info, book: book, source: source)
         return cell
     }
-    
-}
 
-extension BookDetailController: ActionContextProvider {
-    func provide(context: ActionContext) {
+    override func provide(context: ActionContext) {
         context[ToggleEditingAction.editableKey] = self
+        super.provide(context: context)
     }
 }
 

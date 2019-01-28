@@ -96,14 +96,14 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ddk-je-YTY">
-                                                    <rect key="frame" x="15" y="15" width="37.5" height="14"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ddk-je-YTY" userLabel="Role">
+                                                    <rect key="frame" x="15" y="15" width="46" height="14"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AL0-Sg-mlg">
-                                                    <rect key="frame" x="56.5" y="4" width="314.5" height="35.5"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AL0-Sg-mlg" userLabel="Person">
+                                                    <rect key="frame" x="65" y="4" width="306" height="35.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <state key="normal" title="person link">
                                                         <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -115,20 +115,39 @@
                                                         <action selector="performAction:" destination="FJe-Yq-33r" eventType="primaryActionTriggered" id="F3D-Ap-v75"/>
                                                     </connections>
                                                 </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oQ5-BY-QHX" userLabel="Edit Role">
+                                                    <rect key="frame" x="15" y="7" width="46" height="30"/>
+                                                    <state key="normal" title="Button"/>
+                                                </button>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Pjo-aU-pHP" userLabel="Edit Person">
+                                                    <rect key="frame" x="65" y="7" width="306" height="30"/>
+                                                    <nil key="textColor"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="Ddk-je-YTY" firstAttribute="leading" secondItem="oQ5-BY-QHX" secondAttribute="leading" id="K3L-qu-ECr"/>
                                                 <constraint firstAttribute="bottom" secondItem="AL0-Sg-mlg" secondAttribute="bottom" constant="4" id="Kdh-q7-Kg7"/>
                                                 <constraint firstItem="Ddk-je-YTY" firstAttribute="top" secondItem="FDA-BF-Pmn" secondAttribute="topMargin" constant="4" id="LCv-8h-pFs"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="Ddk-je-YTY" secondAttribute="bottom" constant="4" id="aFn-it-d3Y"/>
+                                                <constraint firstItem="Pjo-aU-pHP" firstAttribute="centerY" secondItem="AL0-Sg-mlg" secondAttribute="centerY" id="bml-NA-Au7"/>
                                                 <constraint firstItem="AL0-Sg-mlg" firstAttribute="top" secondItem="FDA-BF-Pmn" secondAttribute="top" constant="4" id="hAC-kx-Mg3"/>
+                                                <constraint firstItem="Ddk-je-YTY" firstAttribute="centerY" secondItem="oQ5-BY-QHX" secondAttribute="centerY" id="hZk-zi-J85"/>
                                                 <constraint firstItem="AL0-Sg-mlg" firstAttribute="leading" secondItem="Ddk-je-YTY" secondAttribute="trailing" constant="4" id="iWZ-d4-ChI"/>
+                                                <constraint firstItem="Ddk-je-YTY" firstAttribute="trailing" secondItem="oQ5-BY-QHX" secondAttribute="trailing" id="rC6-6u-kOL"/>
                                                 <constraint firstAttribute="trailing" secondItem="AL0-Sg-mlg" secondAttribute="trailing" constant="4" id="rjM-m5-GmK"/>
+                                                <constraint firstItem="Pjo-aU-pHP" firstAttribute="leading" secondItem="AL0-Sg-mlg" secondAttribute="leading" id="uy5-L8-vnB"/>
+                                                <constraint firstItem="Pjo-aU-pHP" firstAttribute="trailing" secondItem="AL0-Sg-mlg" secondAttribute="trailing" id="wY2-3k-O2e"/>
                                                 <constraint firstItem="Ddk-je-YTY" firstAttribute="leading" secondItem="FDA-BF-Pmn" secondAttribute="leadingMargin" id="x9k-hq-ge0"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="label" destination="Ddk-je-YTY" id="5UA-n5-KyP"/>
                                             <outlet property="personButton" destination="AL0-Sg-mlg" id="Z74-z0-ceM"/>
+                                            <outlet property="personField" destination="Pjo-aU-pHP" id="cpU-Tp-hva"/>
+                                            <outlet property="roleButton" destination="oQ5-BY-QHX" id="QQr-kM-n8V"/>
+                                            <outlet property="roleLabel" destination="Ddk-je-YTY" id="A8I-XG-Y5X"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="publisher" id="PrG-vW-feK" customClass="BookPublisherRow" customModule="Bookish" customModuleProvider="target">

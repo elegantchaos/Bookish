@@ -22,9 +22,65 @@ extension UIResponder {
 
 }
 
-extension UIView {
-    func appendValidatableItems(to items: inout [UIControl]) {
-        let selector = ActionManagerMobile.Responder.performActionSelector
+protocol HasValidatableActions {
+    func validateButtons()
+    func scheduleForValidation()
+}
+
+extension HasValidatableActions {
+    func scheduleForValidation() {
+        OperationQueue.main.addOperation {
+            self.validateButtons()
+        }
+    }
+}
+
+extension ActionManagerMobile {
+    func validate(items: [ActionIdentification]) {
+        for item in items {
+            let identifier = item.actionID
+            if !identifier.isEmpty {
+                let validation = validate(identifier: item.actionID, info: ActionInfo(sender: item))
+                if let button = item as? UIButton {
+                    button.isEnabled = validation.enabled
+                    button.isHidden = !validation.visible
+                    if let name = validation.name {
+                        button.setTitle(name, for: .normal)
+                    }
+                } else if let item = item as? UIBarItem {
+                    item.isEnabled = validation.enabled
+                    if let name = validation.name {
+                        item.title = name
+                    }
+                }
+            }
+        }
+    }
+}
+
+extension UIViewController: HasValidatableActions {
+    func validateButtons() {
+        let actionManager = Application.sharedInstance.actionManager
+        var items = [ActionIdentification]()
+        view.appendValidatableItems(to: &items)
+        navigationController?.appendValidatableItems(to: &items)
+        actionManager.validate(items: items)
+    }
+}
+
+extension UINavigationController {
+    func appendValidatableItems(to items: inout [ActionIdentification]) {
+        if let leftButtons = navigationBar.topItem?.leftBarButtonItems {
+            items.append(contentsOf: leftButtons)
+        }
+        if let rightButtons = navigationBar.topItem?.rightBarButtonItems {
+            items.append(contentsOf: rightButtons)
+        }
+    }
+}
+
+extension UIView: HasValidatableActions {
+    func appendValidatableItems(to items: inout [ActionIdentification]) {
         if !isHidden {
             if let viewItem = self as? UIControl, !viewItem.actionID.isEmpty {
                 validationChannel.log("\(viewItem.actionID)")
@@ -38,23 +94,8 @@ extension UIView {
     
     func validateButtons() {
         let actionManager = Application.sharedInstance.actionManager
-        var items = [UIControl]()
+        var items = [ActionIdentification]()
         appendValidatableItems(to: &items)
-        for item in items {
-            if let button = item as? UIButton, !button.actionID.isEmpty {
-                let validation = actionManager.validate(identifier: button.actionID, info: ActionInfo(sender: button))
-                button.isEnabled = validation.enabled
-                button.isHidden = !validation.visible
-                if let name = validation.name {
-                    button.setTitle(name, for: .normal)
-                }
-            }
-        }
+        actionManager.validate(items: items)
     }
-    
-    func scheduleForValidation() {
-        OperationQueue.main.addOperation {
-            self.validateButtons()
-        }
     }
-}
