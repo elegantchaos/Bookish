@@ -20,8 +20,8 @@ class ChooseRoleTarget: ChooseTarget, ChooseItemTarget {
         return row.role
     }
     
-    func choose(value: Role?) {
-        row.role = value
+    func choose(value: Role) {
+        row.changeRole(to: value)
     }
     
     typealias EntityType = Role
@@ -32,20 +32,14 @@ class ChoosePersonTarget: ChooseTarget, ChooseItemTarget {
         return row.person
     }
     
-    func choose(value: Person?) {
-        row.person = value
+    func choose(value: Person) {
+        row.changePerson(to: value)
     }
     
     typealias EntityType = Person
 }
 
 class BookPersonRow: BookDetailRow {
-    var value: Role? { return role }
-    
-    func choose(value: Role?) {
-    
-    }
-    
     
     var relationship: Relationship?
     var person: Person?
@@ -83,6 +77,7 @@ class BookPersonRow: BookDetailRow {
         personButton.isHidden = source.editing
         
         roleButton.isHidden = !source.editing
+        choosePersonButton.isHidden = !source.editing
         personField.isHidden = !source.editing
     }
     
@@ -92,7 +87,12 @@ class BookPersonRow: BookDetailRow {
         roleButton.setTitle("\(roleName) >", for: .normal)
         application.actionManager.perform(identifier: "ChangeRelationship", info: ActionInfo(sender: self))
     }
-    
+
+    func changePerson(to person: Person) {
+        self.person = person
+        personField.text = person.name
+        application.actionManager.perform(identifier: "ChangeRelationship", info: ActionInfo(sender: self))
+    }
 }
 
 extension BookPersonRow: ActionContextProvider {

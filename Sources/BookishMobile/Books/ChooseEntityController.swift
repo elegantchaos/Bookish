@@ -10,7 +10,7 @@ protocol ChooseItemTarget {
     associatedtype EntityType: ModelObject
     
     var value: EntityType? { get }
-    func choose(value: EntityType?)
+    func choose(value: EntityType)
 }
 
 class ChooseEntityController<ItemTarget: ChooseItemTarget>: UITableViewController, NSFetchedResultsControllerDelegate {
@@ -58,7 +58,7 @@ class ChooseEntityController<ItemTarget: ChooseItemTarget>: UITableViewControlle
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "role", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "item", for: indexPath)
         if let item = fetcher?.object(at: indexPath), let name = item.value(forKey: "name"), let id = item.value(forKey: "uuid") {
             cell.textLabel?.text = showIdentifiers ? "\(name) (id:\(id))" : "\(name)"
             cell.accessoryType = (item == target?.value) ? .checkmark : .none

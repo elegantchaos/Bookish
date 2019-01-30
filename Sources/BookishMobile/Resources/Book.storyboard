@@ -136,12 +136,11 @@
                                                         <action selector="performAction:" destination="FJe-Yq-33r" eventType="editingDidEnd" id="csm-Nm-a7q"/>
                                                     </connections>
                                                 </textField>
-                                                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ull-Xr-JUf">
-                                                    <rect key="frame" x="339" y="6" width="32" height="32"/>
+                                                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ull-Xr-JUf">
+                                                    <rect key="frame" x="339" y="11" width="32" height="22"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="32" id="5xW-Zb-Xpc"/>
                                                     </constraints>
-                                                    <state key="normal" title="Button" image="Person"/>
                                                     <connections>
                                                         <segue destination="nxc-Be-NYv" kind="popoverPresentation" identifier="choosePerson" popoverAnchorView="SVb-EU-R8f" id="w9W-cO-7BV">
                                                             <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
@@ -168,8 +167,9 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="choosePersonButton" destination="ull-Xr-JUf" id="6nb-4o-bfW"/>
                                             <outlet property="label" destination="Ddk-je-YTY" id="5UA-n5-KyP"/>
-                                            <outlet property="personButton" destination="ull-Xr-JUf" id="rtF-jX-Br0"/>
+                                            <outlet property="personButton" destination="AL0-Sg-mlg" id="Kmr-3e-QLw"/>
                                             <outlet property="personField" destination="Pjo-aU-pHP" id="cpU-Tp-hva"/>
                                             <outlet property="roleButton" destination="oQ5-BY-QHX" id="QQr-kM-n8V"/>
                                             <outlet property="roleLabel" destination="Ddk-je-YTY" id="A8I-XG-Y5X"/>
@@ -370,7 +370,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="role" id="qBk-Yq-Kao">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="item" id="qBk-Yq-Kao">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qBk-Yq-Kao" id="rVI-31-iVT">
@@ -390,16 +390,16 @@
             </objects>
             <point key="canvasLocation" x="2666" y="2032"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Choose Person Controller-->
         <scene sceneID="05Q-9Y-fHD">
             <objects>
-                <tableViewController id="nxc-Be-NYv" sceneMemberID="viewController">
+                <tableViewController id="nxc-Be-NYv" customClass="ChoosePersonController" customModule="Bookish" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="2bP-Fx-k8p">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="hSl-Te-Jv1">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="item" id="hSl-Te-Jv1">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="hSl-Te-Jv1" id="97J-wl-qkj">
@@ -510,7 +510,6 @@
     </scenes>
     <resources>
         <image name="Book" width="16" height="16"/>
-        <image name="Person" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="6S0-TO-JiA"/>
