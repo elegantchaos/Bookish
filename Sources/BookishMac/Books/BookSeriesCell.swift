@@ -106,7 +106,9 @@ extension BookSeriesCell: NSComboBoxDelegate {
             if let existingSeries = existingSeries {
                 info[SeriesAction.seriesKey] = existingSeries
             }
-            if (positionField.objectValue as? NSValue) != NSMultipleValuesMarker {
+            
+            
+            if let value = positionField.objectValue as? NSValue, value !== NSMultipleValuesMarker {
                 info[SeriesAction.positionKey] = positionField.integerValue
             }
             actionManager.perform(identifier: "ChangeSeries", info: info)
@@ -120,7 +122,7 @@ extension BookSeriesCell: NSComboBoxDelegate {
         if let existingSeries = objectValue as? Series {
             info[SeriesAction.seriesKey] = existingSeries
         }
-        if (positionField.objectValue as? NSValue) != NSMultipleValuesMarker {
+        if let value = positionField.objectValue as? NSValue, value !== NSMultipleValuesMarker {
             info[SeriesAction.positionKey] = positionField.integerValue
         }
         actionManager.perform(identifier: "ChangeSeries", info: info)
