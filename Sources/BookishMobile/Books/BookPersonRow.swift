@@ -7,16 +7,56 @@ import BookishModel
 import Actions
 import UIKit
 
+class ChooseTarget {
+    let row: BookPersonRow
+    
+    init(row: BookPersonRow) {
+        self.row = row
+    }
+}
+
+class ChooseRoleTarget: ChooseTarget, ChooseItemTarget {
+    var value: Role? {
+        return row.role
+    }
+    
+    func choose(value: Role?) {
+        row.role = value
+    }
+    
+    typealias EntityType = Role
+}
+
+class ChoosePersonTarget: ChooseTarget, ChooseItemTarget {
+    var value: Person? {
+        return row.person
+    }
+    
+    func choose(value: Person?) {
+        row.person = value
+    }
+    
+    typealias EntityType = Person
+}
+
 class BookPersonRow: BookDetailRow {
-    @IBOutlet var personButton: UIButton!
+    var value: Role? { return role }
+    
+    func choose(value: Role?) {
+    
+    }
+    
+    
     var relationship: Relationship?
     var person: Person?
     var role: Role?
     var source: DetailDataSource!
     
+    @IBOutlet var personButton: UIButton!
     @IBOutlet weak var roleButton: UIButton!
     @IBOutlet weak var roleLabel: UILabel!
     @IBOutlet weak var personField: UITextField!
+    @IBOutlet weak var choosePersonButton: UIButton!
     
     override func setup(row: DetailDataSource.RowInfo, book: Book, source: DetailDataSource) {
         assert(row.category == .person)

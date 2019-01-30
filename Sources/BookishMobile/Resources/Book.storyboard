@@ -125,7 +125,7 @@
                                                     </connections>
                                                 </button>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Pjo-aU-pHP" userLabel="Edit Person">
-                                                    <rect key="frame" x="65" y="7" width="306" height="30"/>
+                                                    <rect key="frame" x="65" y="7" width="270" height="30"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
@@ -136,11 +136,26 @@
                                                         <action selector="performAction:" destination="FJe-Yq-33r" eventType="editingDidEnd" id="csm-Nm-a7q"/>
                                                     </connections>
                                                 </textField>
+                                                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ull-Xr-JUf">
+                                                    <rect key="frame" x="339" y="6" width="32" height="32"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="32" id="5xW-Zb-Xpc"/>
+                                                    </constraints>
+                                                    <state key="normal" title="Button" image="Person"/>
+                                                    <connections>
+                                                        <segue destination="nxc-Be-NYv" kind="popoverPresentation" identifier="choosePerson" popoverAnchorView="SVb-EU-R8f" id="w9W-cO-7BV">
+                                                            <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                                        </segue>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="ull-Xr-JUf" firstAttribute="centerY" secondItem="AL0-Sg-mlg" secondAttribute="centerY" id="0FH-F9-N4z"/>
+                                                <constraint firstItem="ull-Xr-JUf" firstAttribute="leading" secondItem="Pjo-aU-pHP" secondAttribute="trailing" constant="4" id="5FI-AE-W68"/>
                                                 <constraint firstItem="Ddk-je-YTY" firstAttribute="leading" secondItem="oQ5-BY-QHX" secondAttribute="leading" id="K3L-qu-ECr"/>
                                                 <constraint firstAttribute="bottom" secondItem="AL0-Sg-mlg" secondAttribute="bottom" constant="4" id="Kdh-q7-Kg7"/>
                                                 <constraint firstItem="Ddk-je-YTY" firstAttribute="top" secondItem="FDA-BF-Pmn" secondAttribute="topMargin" constant="4" id="LCv-8h-pFs"/>
+                                                <constraint firstAttribute="trailing" secondItem="ull-Xr-JUf" secondAttribute="trailing" constant="4" id="Q0H-4j-Q3t"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="Ddk-je-YTY" secondAttribute="bottom" constant="4" id="aFn-it-d3Y"/>
                                                 <constraint firstItem="Pjo-aU-pHP" firstAttribute="centerY" secondItem="AL0-Sg-mlg" secondAttribute="centerY" id="bml-NA-Au7"/>
                                                 <constraint firstItem="AL0-Sg-mlg" firstAttribute="top" secondItem="FDA-BF-Pmn" secondAttribute="top" constant="4" id="hAC-kx-Mg3"/>
@@ -149,13 +164,12 @@
                                                 <constraint firstItem="Ddk-je-YTY" firstAttribute="trailing" secondItem="oQ5-BY-QHX" secondAttribute="trailing" id="rC6-6u-kOL"/>
                                                 <constraint firstAttribute="trailing" secondItem="AL0-Sg-mlg" secondAttribute="trailing" constant="4" id="rjM-m5-GmK"/>
                                                 <constraint firstItem="Pjo-aU-pHP" firstAttribute="leading" secondItem="AL0-Sg-mlg" secondAttribute="leading" id="uy5-L8-vnB"/>
-                                                <constraint firstItem="Pjo-aU-pHP" firstAttribute="trailing" secondItem="AL0-Sg-mlg" secondAttribute="trailing" id="wY2-3k-O2e"/>
                                                 <constraint firstItem="Ddk-je-YTY" firstAttribute="leading" secondItem="FDA-BF-Pmn" secondAttribute="leadingMargin" id="x9k-hq-ge0"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="label" destination="Ddk-je-YTY" id="5UA-n5-KyP"/>
-                                            <outlet property="personButton" destination="AL0-Sg-mlg" id="Z74-z0-ceM"/>
+                                            <outlet property="personButton" destination="ull-Xr-JUf" id="rtF-jX-Br0"/>
                                             <outlet property="personField" destination="Pjo-aU-pHP" id="cpU-Tp-hva"/>
                                             <outlet property="roleButton" destination="oQ5-BY-QHX" id="QQr-kM-n8V"/>
                                             <outlet property="roleLabel" destination="Ddk-je-YTY" id="A8I-XG-Y5X"/>
@@ -345,7 +359,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FJe-Yq-33r" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2450" y="1251"/>
+            <point key="canvasLocation" x="2448.8000000000002" y="1250.824587706147"/>
         </scene>
         <!--Choose Role Controller-->
         <scene sceneID="y9Z-J1-lxH">
@@ -374,7 +388,35 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vej-mJ-xfh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3648" y="2053"/>
+            <point key="canvasLocation" x="2666" y="2032"/>
+        </scene>
+        <!--Table View Controller-->
+        <scene sceneID="05Q-9Y-fHD">
+            <objects>
+                <tableViewController id="nxc-Be-NYv" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="2bP-Fx-k8p">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="hSl-Te-Jv1">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="hSl-Te-Jv1" id="97J-wl-qkj">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="nxc-Be-NYv" id="bzN-rc-Ysw"/>
+                            <outlet property="delegate" destination="nxc-Be-NYv" id="Vgq-9z-uCP"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RYF-YV-8S5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3340" y="2032"/>
         </scene>
         <!--Books-->
         <scene sceneID="Nki-YV-4Qg">
@@ -468,6 +510,7 @@
     </scenes>
     <resources>
         <image name="Book" width="16" height="16"/>
+        <image name="Person" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="6S0-TO-JiA"/>

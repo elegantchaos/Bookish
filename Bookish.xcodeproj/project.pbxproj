@@ -17,6 +17,8 @@
 		221C4B35216BAAAC0086D56F /* RelationshipUIActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221C4B2F216BA96C0086D56F /* RelationshipUIActions.swift */; };
 		221ED512216B8EAB00594714 /* BookDetailRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221ED511216B8EAB00594714 /* BookDetailRow.swift */; };
 		221F272921382C8E00DC2DC7 /* DateTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221F272821382C8E00DC2DC7 /* DateTransformer.swift */; };
+		2237D28322020C3B0033924F /* ChoosePersonController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2237D28222020C3B0033924F /* ChoosePersonController.swift */; };
+		2237D28522020C8F0033924F /* ChooseEntityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2237D28422020C8F0033924F /* ChooseEntityController.swift */; };
 		22429314212ADC4300E70510 /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22429313212ADC4300E70510 /* Application.swift */; };
 		22429319212ADC4300E70510 /* BookIndexController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22429318212ADC4300E70510 /* BookIndexController.swift */; };
 		2242931B212ADC4300E70510 /* BookDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2242931A212ADC4300E70510 /* BookDetailController.swift */; };
@@ -213,6 +215,8 @@
 		221ED4EA216785BB00594714 /* BookishMobile.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = BookishMobile.xcconfig; sourceTree = "<group>"; };
 		221ED511216B8EAB00594714 /* BookDetailRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailRow.swift; sourceTree = "<group>"; };
 		221F272821382C8E00DC2DC7 /* DateTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTransformer.swift; sourceTree = "<group>"; };
+		2237D28222020C3B0033924F /* ChoosePersonController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoosePersonController.swift; sourceTree = "<group>"; };
+		2237D28422020C8F0033924F /* ChooseEntityController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseEntityController.swift; sourceTree = "<group>"; };
 		22429311212ADC4300E70510 /* Bookish.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bookish.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22429313212ADC4300E70510 /* Application.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
 		22429318212ADC4300E70510 /* BookIndexController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookIndexController.swift; sourceTree = "<group>"; };
@@ -549,6 +553,8 @@
 				22F1801B21C8084200220D20 /* BookPublisherRow.swift */,
 				22F1801D21C8084900220D20 /* BookSeriesRow.swift */,
 				22ADA16221FF5C9C00DB0975 /* ChooseRoleController.swift */,
+				2237D28222020C3B0033924F /* ChoosePersonController.swift */,
+				2237D28422020C8F0033924F /* ChooseEntityController.swift */,
 			);
 			path = Books;
 			sourceTree = "<group>";
@@ -1102,12 +1108,14 @@
 				22B1DB412178D8A50067E795 /* ViewExtensions.swift in Sources */,
 				22D1B239218079C60062F2CB /* CollectionViewModel.swift in Sources */,
 				22C2194C21AF24E5002FC0FE /* EditingActions.swift in Sources */,
+				2237D28322020C3B0033924F /* ChoosePersonController.swift in Sources */,
 				22F1803121C82D8E00220D20 /* DetailController.swift in Sources */,
 				22DA6A4821E653F400ECF09A /* SyncedCollection.swift in Sources */,
 				22F1802721C810CC00220D20 /* PublisherDetailController.swift in Sources */,
 				22F1802921C810D400220D20 /* SeriesDetailController.swift in Sources */,
 				22D1B231217E0D780062F2CB /* BookDateRow.swift in Sources */,
 				2242931B212ADC4300E70510 /* BookDetailController.swift in Sources */,
+				2237D28522020C8F0033924F /* ChooseEntityController.swift in Sources */,
 				22D1B23D21807F7B0062F2CB /* CollectionController.swift in Sources */,
 				22F1802D21C823B800220D20 /* SeriesBookRow.swift in Sources */,
 				22ADA16321FF5C9C00DB0975 /* ChooseRoleController.swift in Sources */,

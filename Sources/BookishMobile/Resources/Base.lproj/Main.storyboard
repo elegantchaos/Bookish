@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="alz-nN-8lG">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.55" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="alz-nN-8lG">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.43"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -13,13 +13,13 @@
         <!--Settings-->
         <scene sceneID="CfG-Pl-U5P">
             <objects>
-                <viewController id="WzE-F1-Iat" customClass="SettingsController" customModule="BookishMobile" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="WzE-F1-Iat" customClass="SettingsController" customModule="Bookish" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="YrT-jZ-Avn">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Bzv-8x-bww">
-                                <rect key="frame" x="20" y="40" width="335" height="56"/>
+                                <rect key="frame" x="20" y="40" width="335" height="88"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MgS-SD-2Dy">
                                         <rect key="frame" x="0.0" y="0.0" width="335" height="24"/>
@@ -39,6 +39,16 @@
                                         <state key="normal" title="Reset To Sample Data"/>
                                         <connections>
                                             <action selector="resetToSampleData:" destination="WzE-F1-Iat" eventType="touchUpInside" id="IPs-e9-Y0B"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lML-95-lSq">
+                                        <rect key="frame" x="0.0" y="64" width="335" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="24" id="Tc3-P4-cs1"/>
+                                        </constraints>
+                                        <state key="normal" title="Configure Logging"/>
+                                        <connections>
+                                            <action selector="showLoggingSettings:" destination="WzE-F1-Iat" eventType="touchUpInside" id="ebW-Lf-Ng9"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -61,7 +71,7 @@
         <!--Collection-->
         <scene sceneID="Fh3-Be-TZL">
             <objects>
-                <tabBarController id="alz-nN-8lG" userLabel="Collection" customClass="CollectionController" customModule="BookishMobile" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController id="alz-nN-8lG" userLabel="Collection" customClass="CollectionController" customModule="Bookish" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="nJi-qq-iJt">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>

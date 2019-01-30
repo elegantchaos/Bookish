@@ -73,20 +73,35 @@ class BookDetailController: DetailController<Book> {
         super.provide(context: context)
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "chooseRole" {
-            if let controller = segue.destination as? ChooseRoleController, let button = sender as? UIButton {
-//                if (UI_USER_INTERFACE_IDIOM() == .pad) {
-                    let popover = controller.popoverPresentationController
-                    popover?.sourceRect = button.frame
-                    popover?.sourceView = button.superview
-//                }
-                
-                let origin = button.convert(button.bounds.origin, to: detailView)
-                if let index = detailView.indexPathForRow(at: origin), let cell = detailView.cellForRow(at: index) as? BookPersonRow {
-                    controller.setup(detailView: self, row: cell)
-                }
+    
+    func prepareChooser<TargetType: ChooseItemTarget>(for segue: UIStoryboardSegue, sender: Any?, targetAdaptor: (UITableViewCell) -> TargetType) {
+        if let controller = segue.destination as? ChooseEntityController<TargetType>, let button = sender as? UIButton {
+            let popover = controller.popoverPresentationController
+            popover?.sourceRect = button.frame
+            popover?.sourceView = button.superview
+            
+            let origin = button.convert(button.bounds.origin, to: detailView)
+            if let index = detailView.indexPathForRow(at: origin), let cell = detailView.cellForRow(at: index) {
+                let target = targetAdaptor(cell)
+                controller.setup(target: target, sort: application.viewModel.roleSorting, collection: application.collection)
             }
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segue.identifier {
+        case "chooseRole":
+            prepareChooser(for: segue, sender: sender) { (cell) -> ChooseRoleTarget in
+                return ChooseRoleTarget(row: cell as! BookPersonRow)
+            }
+            
+        case "choosePerson":
+            prepareChooser(for: segue, sender: sender) { (cell) -> ChoosePersonTarget in
+                return ChoosePersonTarget(row: cell as! BookPersonRow)
+            }
+            
+        default:
+            break
         }
     }
 
