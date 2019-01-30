@@ -26,14 +26,16 @@ class TextBinding<T>: NSObject {
             boundText = ""
         }
         
-        if path != "identifier" {
+        if path != "identifier" {
             source.addObserver(self, forKeyPath: path, options: [], context: &textBindingContext)
         }
         
     }
     
     deinit {
-        source?.removeObserver(self, forKeyPath: path, context: &textBindingContext)
+        if path != "identifier" {
+            source?.removeObserver(self, forKeyPath: path, context: &textBindingContext)
+        }
     }
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
