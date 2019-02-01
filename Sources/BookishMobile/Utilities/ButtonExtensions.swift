@@ -3,8 +3,11 @@
 //  All code (c) 2019 - present day, Elegant Chaos Limited.
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
-import Foundation
+import UIKit
 
-class ButtonExtensions {
-    
+extension UIButton {
+    func setTitle(_ string: String?, font: UIFont, for state: UIButton.State = .normal) {
+        let title = NSAttributedString(string: string ?? "", attributes: [NSAttributedString.Key.font: font])
+        setAttributedTitle(title, for: state)
+    }
 }
