@@ -3,7 +3,7 @@
 //  All code (c) 2018 - present day, Elegant Chaos Limited.
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
-import Foundation
+import UIKit
 
 @objc class CollectionViewModel: NSObject {
     enum Mode: Int {
@@ -28,4 +28,10 @@ import Foundation
     let publisherSorting = [NSSortDescriptor(key: "sortName", ascending: true)]
     let seriesSorting = [NSSortDescriptor(key: "sortName", ascending: true)]
     let roleSorting = [NSSortDescriptor(key: "name", ascending: true)]
+
+    let detailFont = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.regular)
+    let labelFont = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.regular)
+    let titleFont = UIFont.systemFont(ofSize: 18, weight: UIFont.Weight.regular)
+    let indexFont = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.regular)
+
 }
