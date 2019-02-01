@@ -48,11 +48,10 @@ class BookPersonRow: BookDetailRow {
     
     @IBOutlet var personButton: UIButton!
     @IBOutlet weak var roleButton: UIButton!
-    @IBOutlet weak var roleLabel: UILabel!
     @IBOutlet weak var personField: UITextField!
     @IBOutlet weak var choosePersonButton: UIButton!
     
-    override func setup(row: DetailDataSource.RowInfo, book: Book, source: DetailDataSource) {
+    override func setupContent(row: DetailDataSource.RowInfo, book: Book, source: DetailDataSource) {
         assert(row.category == .person)
         self.source = source
         if row.placeholder {
@@ -63,34 +62,37 @@ class BookPersonRow: BookDetailRow {
             person = relationship?.person
         }
         
-        let roleName = role?.label ?? "role"
+        setupPerson()
+        setupRole()
+    }
+    
+    func setupPerson() {
         let personName = person?.name ?? ""
-        if source.editing {
-            roleButton.setTitle("\(roleName) >", for: .normal)
-            personField.text = personName
-        } else {
-            roleLabel.text = roleName
-            personButton.setTitle(personName, for: .normal)
-        }
-        
-        roleLabel.isHidden = source.editing
+        personField.font = application.viewModel.detailFont
+        personField.text = personName
+        personButton.setTitle(personName, font: application.viewModel.detailFont)
         personButton.isHidden = source.editing
-        
-        roleButton.isHidden = !source.editing
         choosePersonButton.isHidden = !source.editing
         personField.isHidden = !source.editing
     }
     
+    func setupRole() {
+        let roleName = role?.label ?? "role"
+        label.text = roleName
+        label.isHidden = source.editing
+        roleButton.setTitle(roleName, font: application.viewModel.detailFont)
+        roleButton.isHidden = !source.editing
+    }
+    
     func changeRole(to role: Role) {
         self.role = role
-        let roleName = role.label ?? "role"
-        roleButton.setTitle("\(roleName) >", for: .normal)
+        setupRole()
         application.actionManager.perform(identifier: "ChangeRelationship", info: ActionInfo(sender: self))
     }
 
     func changePerson(to person: Person) {
         self.person = person
-        personField.text = person.name
+        setupPerson()
         application.actionManager.perform(identifier: "ChangeRelationship", info: ActionInfo(sender: self))
     }
 }

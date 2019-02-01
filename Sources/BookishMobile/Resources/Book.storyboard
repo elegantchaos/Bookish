@@ -5,6 +5,7 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.43"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -61,32 +62,45 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CPf-9R-UcZ">
-                                                    <rect key="frame" x="15" y="15" width="37.5" height="14"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="detail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CPf-9R-UcZ">
+                                                    <rect key="frame" x="15" y="15" width="39" height="14"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                                                    <nil key="textColor"/>
+                                                    <color key="textColor" name="Bookish Label Text"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="751" scrollEnabled="NO" keyboardDismissMode="interactive" text="book detail text" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="E4Y-DD-iUg">
-                                                    <rect key="frame" x="56.5" y="4" width="314.5" height="35.5"/>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="751" scrollEnabled="NO" keyboardDismissMode="interactive" editable="NO" text="book detail placeholder" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="W1C-EK-5bp" userLabel="Placeholder">
+                                                    <rect key="frame" x="58" y="4" width="313" height="35.5"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="textColor" name="Bookish Label Text"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences" enablesReturnKeyAutomatically="YES"/>
+                                                </textView>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="751" scrollEnabled="NO" keyboardDismissMode="interactive" text="book detail text" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="E4Y-DD-iUg">
+                                                    <rect key="frame" x="58" y="4" width="313" height="35.5"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="textColor" name="Bookish Detail Text"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences" enablesReturnKeyAutomatically="YES"/>
                                                 </textView>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="E4Y-DD-iUg" firstAttribute="bottom" secondItem="W1C-EK-5bp" secondAttribute="bottom" id="3Ej-uH-iSZ"/>
                                                 <constraint firstItem="E4Y-DD-iUg" firstAttribute="leading" secondItem="CPf-9R-UcZ" secondAttribute="trailing" constant="4" id="9xb-Qk-6cd"/>
+                                                <constraint firstItem="E4Y-DD-iUg" firstAttribute="top" secondItem="W1C-EK-5bp" secondAttribute="top" id="C4q-lx-g9a"/>
                                                 <constraint firstAttribute="trailing" secondItem="E4Y-DD-iUg" secondAttribute="trailing" constant="4" id="C9t-h1-GHe"/>
                                                 <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="CPf-9R-UcZ" secondAttribute="bottom" constant="4" id="F41-dU-v4i"/>
+                                                <constraint firstItem="E4Y-DD-iUg" firstAttribute="leading" secondItem="W1C-EK-5bp" secondAttribute="leading" id="TSv-9H-dPf"/>
                                                 <constraint firstAttribute="bottom" secondItem="E4Y-DD-iUg" secondAttribute="bottom" constant="4" id="XwG-rm-5XW"/>
                                                 <constraint firstItem="CPf-9R-UcZ" firstAttribute="leading" secondItem="EK5-8u-ive" secondAttribute="leadingMargin" id="a1F-ao-Ib3"/>
                                                 <constraint firstItem="CPf-9R-UcZ" firstAttribute="top" secondItem="EK5-8u-ive" secondAttribute="topMargin" constant="4" id="efL-Vg-MJE"/>
                                                 <constraint firstItem="E4Y-DD-iUg" firstAttribute="top" secondItem="EK5-8u-ive" secondAttribute="top" constant="4" id="u2B-g7-Xe5"/>
+                                                <constraint firstItem="E4Y-DD-iUg" firstAttribute="trailing" secondItem="W1C-EK-5bp" secondAttribute="trailing" id="wPy-br-foU"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="detail" destination="E4Y-DD-iUg" id="04g-a8-GTy"/>
                                             <outlet property="label" destination="CPf-9R-UcZ" id="nwu-aS-a1c"/>
+                                            <outlet property="placeholder" destination="W1C-EK-5bp" id="eGg-dY-64B"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="person" id="8jP-PZ-JIr" customClass="BookPersonRow" customModule="Bookish" customModuleProvider="target">
@@ -96,17 +110,17 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ddk-je-YTY" userLabel="Role">
-                                                    <rect key="frame" x="15" y="15" width="46" height="14"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="role" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ddk-je-YTY" userLabel="Role">
+                                                    <rect key="frame" x="15" y="15" width="30" height="14"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                                                    <nil key="textColor"/>
+                                                    <color key="textColor" name="Bookish Label Text"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AL0-Sg-mlg" userLabel="Person">
-                                                    <rect key="frame" x="65" y="4" width="306" height="35.5"/>
+                                                    <rect key="frame" x="49" y="4" width="322" height="35.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <state key="normal" title="person link">
-                                                        <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <state key="normal" title="Some Person">
+                                                        <color key="titleColor" name="Bookish Detail Text"/>
                                                     </state>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="string" keyPath="actionID" value="RevealPerson"/>
@@ -116,17 +130,19 @@
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oQ5-BY-QHX" userLabel="Edit Role">
-                                                    <rect key="frame" x="15" y="7" width="46" height="30"/>
-                                                    <state key="normal" title="Button"/>
+                                                    <rect key="frame" x="15" y="7" width="30" height="30"/>
+                                                    <state key="normal" title="role">
+                                                        <color key="titleColor" name="Bookish Label Text"/>
+                                                    </state>
                                                     <connections>
                                                         <segue destination="pfx-fh-LPl" kind="popoverPresentation" identifier="chooseRole" popoverAnchorView="svH-Pt-448" id="5mL-mK-7QW">
                                                             <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                                                         </segue>
                                                     </connections>
                                                 </button>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Pjo-aU-pHP" userLabel="Edit Person">
-                                                    <rect key="frame" x="65" y="7" width="270" height="30"/>
-                                                    <nil key="textColor"/>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="add person (or choose from list)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Pjo-aU-pHP" userLabel="Edit Person">
+                                                    <rect key="frame" x="49" y="13.5" width="286" height="17"/>
+                                                    <color key="textColor" name="Bookish Detail Text"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                     <userDefinedRuntimeAttributes>
@@ -136,11 +152,14 @@
                                                         <action selector="performAction:" destination="FJe-Yq-33r" eventType="editingDidEnd" id="csm-Nm-a7q"/>
                                                     </connections>
                                                 </textField>
-                                                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ull-Xr-JUf">
+                                                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ull-Xr-JUf">
                                                     <rect key="frame" x="339" y="11" width="32" height="22"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="32" id="5xW-Zb-Xpc"/>
                                                     </constraints>
+                                                    <state key="normal" image="Choose">
+                                                        <color key="titleColor" name="Bookish Detail Text"/>
+                                                    </state>
                                                     <connections>
                                                         <segue destination="nxc-Be-NYv" kind="popoverPresentation" identifier="choosePerson" popoverAnchorView="SVb-EU-R8f" id="w9W-cO-7BV">
                                                             <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
@@ -172,7 +191,6 @@
                                             <outlet property="personButton" destination="AL0-Sg-mlg" id="Kmr-3e-QLw"/>
                                             <outlet property="personField" destination="Pjo-aU-pHP" id="cpU-Tp-hva"/>
                                             <outlet property="roleButton" destination="oQ5-BY-QHX" id="QQr-kM-n8V"/>
-                                            <outlet property="roleLabel" destination="Ddk-je-YTY" id="A8I-XG-Y5X"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="publisher" id="PrG-vW-feK" customClass="BookPublisherRow" customModule="Bookish" customModuleProvider="target">
@@ -182,17 +200,17 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S4w-qp-yKL">
-                                                    <rect key="frame" x="15" y="15" width="37.5" height="14"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="publisher" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S4w-qp-yKL">
+                                                    <rect key="frame" x="15" y="15" width="65.5" height="14"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                                                    <nil key="textColor"/>
+                                                    <color key="textColor" name="Bookish Label Text"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Lq-Ru-KKv">
-                                                    <rect key="frame" x="56.5" y="4" width="314.5" height="35.5"/>
+                                                    <rect key="frame" x="84.5" y="4" width="286.5" height="35.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <state key="normal" title="publisher link">
-                                                        <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <state key="normal" title="Some Publisher">
+                                                        <color key="titleColor" name="Bookish Detail Text"/>
                                                     </state>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="string" keyPath="actionID" value="RevealPublisher"/>
@@ -224,17 +242,17 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fKL-Ho-u1O">
-                                                    <rect key="frame" x="15" y="15" width="37.5" height="14"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="series" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fKL-Ho-u1O">
+                                                    <rect key="frame" x="15" y="15" width="42" height="14"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                                                    <nil key="textColor"/>
+                                                    <color key="textColor" name="Bookish Label Text"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JRd-um-fi2">
-                                                    <rect key="frame" x="56.5" y="4" width="314.5" height="35.5"/>
+                                                    <rect key="frame" x="61" y="4" width="310" height="35.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <state key="normal" title="series link">
-                                                        <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <state key="normal" title="Some Series">
+                                                        <color key="titleColor" name="Bookish Detail Text"/>
                                                     </state>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="string" keyPath="actionID" value="RevealSeries"/>
@@ -266,15 +284,16 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aq1-bT-qbG">
-                                                    <rect key="frame" x="15" y="15" width="37.5" height="14"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aq1-bT-qbG">
+                                                    <rect key="frame" x="15" y="15" width="31" height="14"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                                                    <nil key="textColor"/>
+                                                    <color key="textColor" name="Bookish Label Text"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="751" text="book detail date" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="MbN-Xp-CBW">
-                                                    <rect key="frame" x="56.5" y="4" width="314.5" height="35.5"/>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="751" text="12th November, 1969" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="MbN-Xp-CBW">
+                                                    <rect key="frame" x="50" y="4" width="321" height="35.5"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="textColor" name="Bookish Detail Text"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 </textView>
@@ -510,6 +529,13 @@
     </scenes>
     <resources>
         <image name="Book" width="16" height="16"/>
+        <image name="Choose" width="12" height="12"/>
+        <namedColor name="Bookish Detail Text">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Bookish Label Text">
+            <color red="0.54117647058823526" green="0.55686274509803924" blue="0.5725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="6S0-TO-JiA"/>

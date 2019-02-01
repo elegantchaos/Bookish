@@ -11,14 +11,13 @@ class BookPublisherRow: BookDetailRow {
     @IBOutlet var publisherButton: UIButton!
     var publisher: Publisher!
 
-    override func setup(row: DetailDataSource.RowInfo, book: Book, source: DetailDataSource) {
+    override func setupContent(row: DetailDataSource.RowInfo, book: Book, source: DetailDataSource) {
         assert(row.category == .publisher)
         if row.placeholder {
             
         } else {
             publisher = source.publisher(for: row)
-            label.text = publisher.name
-            publisherButton.setTitle(publisher.name, for: .normal)
+            publisherButton.setTitle(publisher.name, font: application.viewModel.detailFont)
         }
    }
 }

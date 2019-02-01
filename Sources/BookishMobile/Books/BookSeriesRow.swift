@@ -11,15 +11,14 @@ class BookSeriesRow: BookDetailRow {
     @IBOutlet var seriesButton: UIButton!
     var series: Series!
 
-    override func setup(row: DetailDataSource.RowInfo, book: Book, source: DetailDataSource) {
+    override func setupContent(row: DetailDataSource.RowInfo, book: Book, source: DetailDataSource) {
         assert(row.category == .series)
         if row.placeholder {
             
         } else {
             series = source.series(for: row)
             if let name = series?.name {
-                label.text = name
-                seriesButton.setTitle(name, for: .normal)
+                seriesButton.setTitle(name, font: application.viewModel.detailFont)
             }
         }
     }
