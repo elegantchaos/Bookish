@@ -28,7 +28,7 @@ let applicationChannel = Logger("Application")
     let uiTesting = CommandLine.arguments.contains("--ui-testing")
     var testDocument = CommandLine.arguments.contains("--test-document")
     let noBlankDocument = CommandLine.arguments.contains("--no-blank-document")
-    var viewModel: CollectionViewModel!
+    var viewModel: CollectionViewModel?
     var watchedMenuItem: NSMenuItem?
     var windowController: CollectionWindowController!
     
@@ -95,8 +95,10 @@ extension Application: NSApplicationDelegate {
             
             let collection = sc as! SyncedCollection
             self.setupCloudKit()
-            self.setupWindow(for: collection)
-            collection.sync()
+            DispatchQueue.main.async {
+                self.setupWindow(for: collection)
+                collection.sync()
+            }
         }
     }
     
@@ -113,13 +115,13 @@ extension Application: NSApplicationDelegate {
     }
     
     func applicationWillBecomeActive(_ notification: Notification) {
-        viewModel.collection.save()
-        viewModel.collection.sync()
+        viewModel?.collection.save()
+        viewModel?.collection.sync()
     }
     
     func applicationWillResignActive(_ notification: Notification) {
-        viewModel.collection.save()
-        viewModel.collection.sync()
+        viewModel?.collection.save()
+        viewModel?.collection.sync()
     }
 }
 
@@ -142,11 +144,11 @@ extension Application: NSMenuItemValidation {
     }
     
     @IBAction func undo(_ sender: Any) {
-        viewModel.managedObjectContext.undoManager?.undo()
+        viewModel?.managedObjectContext.undoManager?.undo()
     }
     
     @IBAction func redo(_ sender: Any) {
-        viewModel.managedObjectContext.undoManager?.redo()
+        viewModel?.managedObjectContext.undoManager?.redo()
     }
     
     @IBAction func delete(_ sender: Any) {

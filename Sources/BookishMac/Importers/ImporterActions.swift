@@ -113,7 +113,7 @@ class NewImportRequest: ImportRequest {
         defer { application.testDocument = oldTD }
         
         application.testDocument = false
-        super.init(importer: importer, collection: application.viewModel.collection)
+        super.init(importer: importer, collection: application.viewModel!.collection)
     }
 
     override func run(for url: URL) {

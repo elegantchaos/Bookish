@@ -14,7 +14,7 @@ class CollectionViewController: NSViewController, ViewControllerWithViewModel {
     @objc let cvm: CollectionViewModel
     
     required init?(coder: NSCoder) {
-        self.cvm = Application.sharedInstance.viewModel
+        self.cvm = Application.sharedInstance.windowControllerFactory.viewModel
         super.init(coder: coder)
     }
     
