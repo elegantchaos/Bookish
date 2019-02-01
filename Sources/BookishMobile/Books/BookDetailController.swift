@@ -18,6 +18,9 @@ class BookDetailController: DetailController<Book> {
 
     override func configureView() {
         if let book = representedObject, titleLabel != nil {
+            let vm = application.viewModel
+            titleLabel.font = vm.titleFont
+            subtitleLabel.font = vm.detailFont
             bindings.append(TextFieldBinding(for: titleLabel, to: book, path: "name"))
             bindings.append(TextFieldBinding(for: subtitleLabel, to: book, path: "subtitle"))
             configureImage(for: book)

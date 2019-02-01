@@ -29,9 +29,16 @@ import UIKit
     let seriesSorting = [NSSortDescriptor(key: "sortName", ascending: true)]
     let roleSorting = [NSSortDescriptor(key: "name", ascending: true)]
 
-    let detailFont = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.regular)
-    let labelFont = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.regular)
-    let titleFont = UIFont.systemFont(ofSize: 18, weight: UIFont.Weight.regular)
-    let indexFont = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.regular)
+    let detailFont: UIFont
+    let labelFont: UIFont
+    let titleFont: UIFont
+    let indexFont: UIFont
 
+    override init() {
+        detailFont = UIFont.preferredFont(forTextStyle: .body)
+        labelFont = detailFont
+        titleFont = UIFont.preferredFont(forTextStyle: .title1)
+        indexFont = UIFont.preferredFont(forTextStyle: .subheadline)
+        super.init()
+    }
 }
