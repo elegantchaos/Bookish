@@ -490,19 +490,7 @@
                             <outlet property="delegate" destination="7bK-jq-Zjz" id="RA6-mI-bju"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Title" id="2Bj-fb-n2D">
-                        <barButtonItem key="leftBarButtonItem" title="Add" id="FOG-E4-5VL">
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="string" keyPath="actionID" value="NewBook"/>
-                            </userDefinedRuntimeAttributes>
-                            <connections>
-                                <action selector="performAction:" destination="Rux-fX-hf1" id="FKh-Bs-kMt"/>
-                            </connections>
-                        </barButtonItem>
-                        <connections>
-                            <outlet property="rightBarButtonItem" destination="FOG-E4-5VL" id="OSR-Kx-o9o"/>
-                        </connections>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Title" id="2Bj-fb-n2D"/>
                     <connections>
                         <outlet property="indexTable" destination="r7i-6Z-zg0" id="qJn-MB-L4G"/>
                     </connections>
@@ -525,7 +513,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SLD-UC-DBI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1670" y="1251"/>
+            <point key="canvasLocation" x="1569" y="1251"/>
         </scene>
     </scenes>
     <resources>
