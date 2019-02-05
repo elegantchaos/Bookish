@@ -9,4 +9,12 @@ class RootRow: UITableViewCell {
     
     @IBOutlet weak var itemLabel: UILabel!
     @IBOutlet weak var itemImage: UIImageView!
+    
+    var item: RootController.Item?
+    
+    func setup(for item: RootController.Item) {
+        self.item = item
+        itemLabel.text = item.name
+        itemImage.image = UIImage(named: "\(item.entity)Placeholder")
+    }
 }

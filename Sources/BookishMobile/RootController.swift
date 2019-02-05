@@ -10,13 +10,14 @@ class RootController: UITableViewController {
 
     struct Item {
         let name: String
+        let entity: String
     }
     
     let items = [
-        Item(name: "Books"),
-        Item(name: "People"),
-        Item(name: "Publishers"),
-        Item(name: "Series")
+        Item(name: "Books", entity: "Book"),
+        Item(name: "People", entity: "Person"),
+        Item(name: "Publishers", entity: "Publisher"),
+        Item(name: "Series", entity: "Series")
         ]
     
     override func viewDidLoad() {
@@ -35,8 +36,7 @@ class RootController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "item") as! RootRow
         let item = items[indexPath.row]
-        cell.itemLabel.text = item.name
-        cell.itemImage.image = UIImage(named: "\(item.name)Placeholder")
+        cell.setup(for: item)
         return cell
     }
  
@@ -46,8 +46,8 @@ class RootController: UITableViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showIndex" {
-            if let controller = segue.destination as? IndexController {
-                controller.setup(for: "Book", context: application.collection.managedObjectContext)
+            if let controller = segue.destination as? IndexControllerX, let row = sender as? RootRow, let item = row.item {
+                controller.setup(for: item.entity, context: application.collection.managedObjectContext)
             }
         }
     }

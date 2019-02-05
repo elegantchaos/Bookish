@@ -21,7 +21,7 @@ protocol DetailControllerP: UIViewController {
     var representedObject: ModelObject { get set }
 }
 
-class IndexController: UITableViewController, NSFetchedResultsControllerDelegate, ActionContextProvider, EntityIndex, ActionObserver {
+class IndexControllerX: UITableViewController, NSFetchedResultsControllerDelegate, ActionContextProvider, EntityIndex, ActionObserver {
     typealias EntityType = ModelObject
     var entityName = ""
     var modelContext: NSManagedObjectContext? = nil
@@ -39,17 +39,16 @@ class IndexController: UITableViewController, NSFetchedResultsControllerDelegate
 //    }
     
     override func viewDidLoad() {
+        indexViewChannel.debug("\(entityName) index didLoad")
         super.viewDidLoad()
-        
-        modelContext = application.collection.managedObjectContext
-        //        application.collectionController.indexControllers[entityName] = self
-        
         navigationItem.rightBarButtonItem = editButtonItem
     }
     
     func setup(for entityName: String, context: NSManagedObjectContext) {
+        indexViewChannel.debug("\(entityName) setup")
         self.modelContext = context
         self.entityName = entityName
+        self.title = entityName
         reload()
     }
     
@@ -63,10 +62,13 @@ class IndexController: UITableViewController, NSFetchedResultsControllerDelegate
     
     func reload() {
         fetcher = makeFetcher()
-        indexTable.reloadData()
+        if let indexTable = view as? UITableView {
+            indexTable.reloadData()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        indexViewChannel.debug("\(entityName) index willAppear")
         clearsSelectionOnViewWillAppear = splitViewController!.isCollapsed
         super.viewWillAppear(animated)
     }
