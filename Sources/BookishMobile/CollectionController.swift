@@ -10,6 +10,7 @@ import Actions
 
 class CollectionController: UITabBarController {
     var observers = [NSKeyValueObservation]()
+    
     var indexControllers: [String:Any] = [:]
     
     func reset(usingSample: Bool) {
@@ -88,14 +89,7 @@ extension CollectionController: UISplitViewControllerDelegate {
     func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController:UIViewController, onto primaryViewController:UIViewController) -> Bool {
         guard let secondaryAsNavController = secondaryViewController as? UINavigationController else { return false }
         
-        if let topAsDetailController = secondaryAsNavController.topViewController as? BookDetailController {
-            if topAsDetailController.representedObject == nil {
-                // Return true to indicate that we have handled the collapse by doing nothing; the secondary controller will be discarded.
-                return true
-            }
-        }
-        
-        if let topAsDetailController = secondaryAsNavController.topViewController as? PersonDetailController {
+        if let topAsDetailController = secondaryAsNavController.topViewController as? DetailControllerX {
             if topAsDetailController.representedObject == nil {
                 // Return true to indicate that we have handled the collapse by doing nothing; the secondary controller will be discarded.
                 return true

@@ -1,6 +1,6 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-//  Created by Sam Deane on 01/02/2019.
-//  All code (c) 2019 - present day, Elegant Chaos Limited.
+//  Created by Sam Deane on 17/12/2018.
+//  All code (c) 2018 - present day, Elegant Chaos Limited.
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 import UIKit
@@ -9,40 +9,36 @@ import BookishModel
 import Actions
 import Logger
 
-protocol DetailControllerP: UIViewController {
-    var representedObject: ModelObject { get set }
-}
 
-class GenericIndexController: UITableViewController, NSFetchedResultsControllerDelegate, ActionContextProvider, EntityIndex, ActionObserver {
-    typealias EntityType = ModelObject
-    var entityName = ""
+class ObsoleteIndexController<DetailControllerType: DetailController<EntityType>, EntityType: ModelObject>: UITableViewController, NSFetchedResultsControllerDelegate, ActionContextProvider, EntityIndex, ActionObserver {
+    var entityName = "\(EntityType.self)"
     var modelContext: NSManagedObjectContext? = nil
     lazy var fetcher: NSFetchedResultsController<EntityType> = makeFetcher()
     
     @IBOutlet var indexTable: UITableView!
-    
-//    var detailController: DetailControllerType? {
-//        if let split = splitViewController {
-//            let controllers = split.viewControllers
-//            return (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailControllerType
-//        }
-//
-//        return nil
-//    }
-    
+
+    var detailController: DetailControllerType? {
+        if let split = splitViewController {
+            let controllers = split.viewControllers
+            return (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailControllerType
+        }
+
+        return nil
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
         modelContext = application.collection.managedObjectContext
-        //        application.collectionController.indexControllers[entityName] = self
+//        application.collectionController.indexControllers[entityName] = self
         
         navigationItem.rightBarButtonItem = editButtonItem
     }
-    
+
     func reset() {
         NSFetchedResultsController<EntityType>.deleteCache(withName: entityName)
         navigationController?.popToRootViewController(animated: false)
-//        detailController?.reset()
+        detailController?.reset()
         modelContext = nil
         fetcher.delegate = nil
     }
@@ -66,20 +62,19 @@ class GenericIndexController: UITableViewController, NSFetchedResultsControllerD
             }
         }
     }
-    
+  
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showDetail" {
             if let indexPath = tableView.indexPathForSelectedRow {
                 let object = fetcher.object(at: indexPath)
-                if var controller = (segue.destination as! UINavigationController).topViewController as? DetailControllerP {
-                    controller.representedObject = object
-                    controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
-                    controller.navigationItem.leftItemsSupplementBackButton = true
-                }
+                let controller = (segue.destination as! UINavigationController).topViewController as! DetailControllerType
+                controller.representedObject = object
+                controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
+                controller.navigationItem.leftItemsSupplementBackButton = true
             }
         }
     }
-    
+
     // MARK: - Table View
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -89,7 +84,7 @@ class GenericIndexController: UITableViewController, NSFetchedResultsControllerD
     override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
         return fetcher.sectionIndexTitles
     }
-    
+
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         guard fetcher.sectionIndexTitles.count > section else { return nil }
         
@@ -102,7 +97,7 @@ class GenericIndexController: UITableViewController, NSFetchedResultsControllerD
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "item", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         let item = fetcher.object(at: indexPath)
         configureCell(cell, with: item)
         return cell
@@ -121,15 +116,14 @@ class GenericIndexController: UITableViewController, NSFetchedResultsControllerD
             application.actionManager.perform(identifier: "Delete\(entityName)", info: info)
         }
     }
-    
-    
+
+
     func makeFetcher() -> NSFetchedResultsController<EntityType> {
         guard let context = modelContext else {
             indexViewChannel.fatal("missing context")
         }
         
-        let request = NSFetchRequest<EntityType>()
-        request.entity = context.persistentStoreCoordinator?.managedObjectModel.entitiesByName[entityName]
+        let request: NSFetchRequest<EntityType> = EntityType.fetcher(in: context)
         request.fetchBatchSize = 20
         request.sortDescriptors = application.viewModel.bookIndexSorting
         
@@ -182,7 +176,7 @@ class GenericIndexController: UITableViewController, NSFetchedResultsControllerD
         case .insert:
             if let path = newIndexPath {
                 tableView.insertRows(at: [path], with: .fade)
-                //                tableView.selectRow(at: path, animated: true, scrollPosition: .middle)
+//                tableView.selectRow(at: path, animated: true, scrollPosition: .middle)
             }
             
         case .delete:
@@ -207,7 +201,7 @@ class GenericIndexController: UITableViewController, NSFetchedResultsControllerD
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.endUpdates()
     }
-    
+
     /*
      // Implementing the above methods to update the table view in response to individual changes may have performance implications if a large number of changes are made simultaneously. If this proves to be an issue, you can instead just implement controllerDidChangeContent: which notifies the delegate that all section and object changes have been processed.
      
@@ -217,10 +211,10 @@ class GenericIndexController: UITableViewController, NSFetchedResultsControllerD
      }
      */
     
-    
+
     func provide(context: ActionContext) {
         context.info.addObserver(self)
-//        detailController?.provide(context: context)
+        detailController?.provide(context: context)
     }
     
 }

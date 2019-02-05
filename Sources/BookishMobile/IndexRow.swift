@@ -4,19 +4,14 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 import UIKit
+import BookishModel
 
 class IndexRow: UITableViewCell {
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        textLabel?.font = application.viewModel.indexFont
-    }
-    
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    @IBOutlet weak var titleLabel: UILabel!
         
-        textLabel?.font = application.viewModel.indexFont
+    func configure(for object: ModelObject) {
+        titleLabel?.font = application.viewModel.indexFont
+        titleLabel?.text = object.value(forKey: "name") as? String
     }
-    
-    
 }
 

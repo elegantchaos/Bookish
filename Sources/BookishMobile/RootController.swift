@@ -32,15 +32,11 @@ class RootController: UITableViewController {
         cell.itemImage.image = UIImage(named: "\(item.name)Placeholder")
         return cell
     }
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        performSegue(withIdentifier: <#T##String#>, sender: <#T##Any?#>)
-    }
  
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showIndex" {
-            if let controller = segue.destination as? GenericIndexController {
-                controller.entityName = "Book"
+            if let controller = segue.destination as? IndexController {
+                controller.setup(for: "Book", context: application.collection.managedObjectContext)
             }
         }
     }

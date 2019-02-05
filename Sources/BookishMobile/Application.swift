@@ -87,9 +87,9 @@ extension Application: UIApplicationDelegate {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
         applicationChannel.log("will enter foreground")
         collection.sync {
-            if let index = self.collectionController.indexControllers["Book"] as? BookIndexController {
-                index.reload()
-            }
+//            if let index = self.collectionController.indexControllers["Book"] as? BookIndexController {
+//                index.reload()
+//            }
         }
     }
     
