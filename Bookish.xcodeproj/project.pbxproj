@@ -216,7 +216,6 @@
 		2237D404220368520033924F /* ButtonExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonExtensions.swift; sourceTree = "<group>"; };
 		22429311212ADC4300E70510 /* Bookish.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bookish.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22429313212ADC4300E70510 /* Application.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
-		22429318212ADC4300E70510 /* BookIndexController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookIndexController.swift; sourceTree = "<group>"; };
 		2242931A212ADC4300E70510 /* BookDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailController.swift; sourceTree = "<group>"; };
 		2242931D212ADC4300E70510 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2242931F212ADC4400E70510 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -277,7 +276,6 @@
 		22D1B22E217E0A3F0062F2CB /* BookPersonRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookPersonRow.swift; sourceTree = "<group>"; };
 		22D1B230217E0D780062F2CB /* BookDateRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDateRow.swift; sourceTree = "<group>"; };
 		22D1B232217E42950062F2CB /* TextBinding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextBinding.swift; sourceTree = "<group>"; };
-		22D1B234217F7ED40062F2CB /* PersonIndexController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonIndexController.swift; sourceTree = "<group>"; };
 		22D1B236217F7EF30062F2CB /* PersonDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonDetailController.swift; sourceTree = "<group>"; };
 		22D1B238218079C60062F2CB /* CollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewModel.swift; sourceTree = "<group>"; };
 		22D1B23A21807D230062F2CB /* PersonBookRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonBookRow.swift; sourceTree = "<group>"; };
@@ -321,12 +319,9 @@
 		22DE6AE62188A8DC0078D489 /* WhiteSearchFieldCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiteSearchFieldCell.swift; sourceTree = "<group>"; };
 		22F1801B21C8084200220D20 /* BookPublisherRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookPublisherRow.swift; sourceTree = "<group>"; };
 		22F1801D21C8084900220D20 /* BookSeriesRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookSeriesRow.swift; sourceTree = "<group>"; };
-		22F1802221C810BE00220D20 /* PublisherIndexController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublisherIndexController.swift; sourceTree = "<group>"; };
-		22F1802421C810C500220D20 /* SeriesIndexController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeriesIndexController.swift; sourceTree = "<group>"; };
 		22F1802621C810CC00220D20 /* PublisherDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublisherDetailController.swift; sourceTree = "<group>"; };
 		22F1802821C810D400220D20 /* SeriesDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeriesDetailController.swift; sourceTree = "<group>"; };
 		22F1802C21C823B800220D20 /* SeriesBookRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeriesBookRow.swift; sourceTree = "<group>"; };
-		22F1802E21C827C500220D20 /* ObsoleteIndexController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObsoleteIndexController.swift; sourceTree = "<group>"; };
 		22F1803021C82D8E00220D20 /* DetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailController.swift; sourceTree = "<group>"; };
 		22F1803221C9171B00220D20 /* PublisherBookRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublisherBookRow.swift; sourceTree = "<group>"; };
 		22F1805221C9495300220D20 /* Sample.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = Sample.sqlite; path = "Extras/Sample Data/Sample.sqlite"; sourceTree = SOURCE_ROOT; };
@@ -449,7 +444,6 @@
 				22A831892204AAB2006A0952 /* RootController.swift */,
 				22A8318B2204B410006A0952 /* RootRow.swift */,
 				22A8318D2204B68B006A0952 /* IndexController.swift */,
-				22F1802E21C827C500220D20 /* ObsoleteIndexController.swift */,
 				22A8318722049CB2006A0952 /* IndexRow.swift */,
 				22F1803021C82D8E00220D20 /* DetailController.swift */,
 				227F450E2181EDF3000D8B8D /* Books */,
@@ -540,7 +534,6 @@
 		227F450D2181EDE1000D8B8D /* People */ = {
 			isa = PBXGroup;
 			children = (
-				22D1B234217F7ED40062F2CB /* PersonIndexController.swift */,
 				22D1B236217F7EF30062F2CB /* PersonDetailController.swift */,
 				22D1B23A21807D230062F2CB /* PersonBookRow.swift */,
 			);
@@ -553,7 +546,6 @@
 				22D1B230217E0D780062F2CB /* BookDateRow.swift */,
 				2242931A212ADC4300E70510 /* BookDetailController.swift */,
 				221ED511216B8EAB00594714 /* BookDetailRow.swift */,
-				22429318212ADC4300E70510 /* BookIndexController.swift */,
 				22D1B22E217E0A3F0062F2CB /* BookPersonRow.swift */,
 				22F1801B21C8084200220D20 /* BookPublisherRow.swift */,
 				22F1801D21C8084900220D20 /* BookSeriesRow.swift */,
@@ -733,7 +725,6 @@
 		22F1802A21C8175D00220D20 /* Publisher */ = {
 			isa = PBXGroup;
 			children = (
-				22F1802221C810BE00220D20 /* PublisherIndexController.swift */,
 				22F1803221C9171B00220D20 /* PublisherBookRow.swift */,
 				22F1802621C810CC00220D20 /* PublisherDetailController.swift */,
 			);
@@ -743,7 +734,6 @@
 		22F1802B21C8176900220D20 /* Series */ = {
 			isa = PBXGroup;
 			children = (
-				22F1802421C810C500220D20 /* SeriesIndexController.swift */,
 				22F1802821C810D400220D20 /* SeriesDetailController.swift */,
 				22F1802C21C823B800220D20 /* SeriesBookRow.swift */,
 			);

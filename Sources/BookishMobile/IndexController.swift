@@ -232,3 +232,49 @@ class IndexController: UITableViewController, NSFetchedResultsControllerDelegate
     }
     
 }
+
+
+/*
+ 
+ extension BookIndexController: BookChangeObserver {
+ func added(relationship: Relationship) {
+ }
+ 
+ func removed(relationship: Relationship) {
+ }
+ 
+ func added(series: Series) {
+ }
+ 
+ func removed(series: Series) {
+ }
+ 
+ func added(publisher: Publisher) {
+ }
+ 
+ func removed(publisher: Publisher) {
+ }
+ 
+ 
+ func added(books: [Book]) {
+ }
+ 
+ func removed(books: [Book]) {
+ print("removed")
+ }
+ }
+ 
+ extension BookIndexController: BookLifecycleObserver {
+ func deleted(books: [Book]) {
+ 
+ }
+ 
+ func created(books: [Book]) {
+ if let book = books.first, let index = fetcher.indexPath(forObject: book) {
+ indexTable.selectRow(at: index, animated: true, scrollPosition: .middle)
+ }
+ }
+ }
+
+ */
+

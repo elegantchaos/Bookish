@@ -6,6 +6,8 @@
 import UIKit
 
 class RootController: UITableViewController {
+    var collapseDetailViewController: Bool = true
+
     struct Item {
         let name: String
     }
@@ -16,7 +18,12 @@ class RootController: UITableViewController {
         Item(name: "Publishers"),
         Item(name: "Series")
         ]
-        
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.splitViewController?.delegate = self
+    }
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -33,11 +40,25 @@ class RootController: UITableViewController {
         return cell
     }
  
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        collapseDetailViewController = false
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showIndex" {
             if let controller = segue.destination as? IndexController {
                 controller.setup(for: "Book", context: application.collection.managedObjectContext)
             }
         }
+    }
+}
+
+extension RootController: UISplitViewControllerDelegate {
+    func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController: UIViewController, onto primaryViewController: UIViewController) -> Bool {
+        guard let nav = primaryViewController as? UINavigationController, let controller = nav.topViewController as? RootController else {
+            return true
+        }
+        
+        return controller.collapseDetailViewController
     }
 }

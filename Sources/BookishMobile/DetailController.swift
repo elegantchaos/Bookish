@@ -53,15 +53,16 @@ class DetailControllerX: UIViewController, UITableViewDataSource, UITableViewDel
         detailViewChannel.debug("view loaded for \(EntityType.self)")
         
         super.viewDidLoad()
+
+        navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
+        navigationItem.leftItemsSupplementBackButton = true
+
         configureView()
     }
     
     func setup(for object: EntityType) {
         detailViewChannel.debug("setup for \(object)")
         representedObject = object
-        
-        navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
-        navigationItem.leftItemsSupplementBackButton = true
         configureView()
     }
     
