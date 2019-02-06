@@ -42,7 +42,7 @@ class PersonDetailProvider: DetailProvider {
     }
 
     func info(section: Int, row: Int) -> DetailItem {
-        let info = SimpleDetailItem(kind: .text, absolute: row, index: row, placeholder: false, source: nil)
+        let info = SimpleDetailItem(kind: DetailSpec.textKind, absolute: row, index: row, placeholder: false, source: nil)
         return info
     }
     

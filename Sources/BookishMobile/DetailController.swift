@@ -132,7 +132,7 @@ class DetailControllerX: UIViewController, UITableViewDataSource, UITableViewDel
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let object = representedObject else { fatalError("should have object set") }
         if let info = source?.info(section: indexPath.section, row: indexPath.row) {
-            let identifier = info.kind.rawValue
+            let identifier = info.kind
             if let cell = tableView.dequeueReusableCell(withIdentifier: identifier) as? DetailRow {
                 cell.setup(row: info, object: object)
                 return cell
