@@ -14,7 +14,7 @@ class BookDetailCell: AnnotatedTableCellView, BookDetailTableCell {
     var observer: NSKeyValueObservation?
     var asNumber = false
     
-    func setup(for view: BookDetailViewController, row: DetailDataSource.RowInfo) {
+    func setup(for view: BookDetailViewController, row: DetailItem) {
         assert(row.category == .detail)
         
         detailView = view

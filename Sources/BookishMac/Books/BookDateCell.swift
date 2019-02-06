@@ -12,7 +12,7 @@ class BookDateCell: NSTableCellView {
 }
 
 extension BookDateCell: BookDetailTableCell {
-    func setup(for view: BookDetailViewController, row: DetailDataSource.RowInfo) {
+    func setup(for view: BookDetailViewController, row: DetailItem) {
         assert(row.category == .detail)
         if let subview = textField,
             let transformer = ValueTransformer(forName: NSValueTransformerName(rawValue: "DateToString")) {

@@ -6,7 +6,7 @@
 import BookishModel
 
 class BookDateRow: BookDetailRow {
-    override func setupContent(row: DetailDataSource.RowInfo, book: Book) {
+    override func setupContent(row: DetailItem, book: Book) {
         assert(row.category == .detail)
         let rowInfo = source.details(for: row)
         detail.font = application.viewModel.detailFont

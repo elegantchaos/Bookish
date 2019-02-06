@@ -12,7 +12,7 @@ class BookControlCell: NSTableCellView, BookDetailTableCell {
     @IBOutlet weak var removeButton: NSButton!
     private var objectKey: String = ""
     
-    func setup(for detailView: BookDetailViewController, row: DetailDataSource.RowInfo) {
+    func setup(for detailView: BookDetailViewController, row: DetailItem) {
         let source = detailView.source
 
         var hidden = false

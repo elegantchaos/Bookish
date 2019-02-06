@@ -21,7 +21,7 @@ class BookDetailViewController: DetailController<Book>, BookLifecycleObserver {
     @IBOutlet weak var seriesList: NSArrayController!
     @IBOutlet weak var roleList: NSArrayController!
     
-    var source = DetailDataSource()
+    var source = BookDetailProvider()
     var editing = false
     
     override func viewWillAppear() {
@@ -228,5 +228,5 @@ extension BookDetailViewController: BookChangeObserver {
 // MARK: Table Support
 
 protocol BookDetailTableCell: KeyableTableCell {
-    func setup(for: BookDetailViewController, row: DetailDataSource.RowInfo)
+    func setup(for: BookDetailViewController, row: DetailItem)
 }

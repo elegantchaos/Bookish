@@ -8,7 +8,7 @@ import BookishModel
 
 
 class BookDetailRow: UITableViewCell, UITextViewDelegate, DetailRow {
-    func setup(row: DetailDataSource.RowInfo, object: ModelObject) {
+    func setup(row: DetailItem, object: ModelObject) {
         if let book = object as? Book {
             setup(row: row, book: book)
         }
@@ -19,10 +19,10 @@ class BookDetailRow: UITableViewCell, UITextViewDelegate, DetailRow {
     @IBOutlet weak var placeholder: UITextView!
     
     var bindings = [Any]()
-    var source: DetailDataSource!
-    var info: DetailDataSource.RowInfo!
+    var source: BookDetailProvider!
+    var info: DetailItem!
     
-    func setup(row: DetailDataSource.RowInfo, book: Book) {
+    func setup(row: DetailItem, book: Book) {
         info = row
         source = row.source
         label.font = application.viewModel.labelFont
@@ -40,7 +40,7 @@ class BookDetailRow: UITableViewCell, UITextViewDelegate, DetailRow {
         }
     }
     
-    func setupContent(row: DetailDataSource.RowInfo, book: Book) {
+    func setupContent(row: DetailItem, book: Book) {
         assert(row.category == .detail)
         let rowInfo = source.details(for: row)
         detail.font = application.viewModel.detailFont

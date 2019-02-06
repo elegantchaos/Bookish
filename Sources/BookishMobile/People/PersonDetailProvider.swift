@@ -8,7 +8,7 @@ import BookishModel
 
 
 extension Person: DetailOwner {
-    func getProvider() -> DetailProvider {
+    public func getProvider() -> DetailProvider {
         return PersonDetailProvider()
     }
 }
@@ -41,8 +41,8 @@ class PersonDetailProvider: DetailProvider {
         return sortedRoles[section].books.count
     }
 
-    func info(section: Int, row: Int) -> DetailDataSource.RowInfo {
-        let info = DetailDataSource.RowInfo(kind: .text, category: .detail, absolute: row, index: row, placeholder: false, source: nil)
+    func info(section: Int, row: Int) -> DetailItem {
+        let info = DetailItem(kind: .text, category: .detail, absolute: row, index: row, placeholder: false, source: nil)
         return info
     }
     

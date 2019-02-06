@@ -15,7 +15,7 @@ class BookPublisherCell: AnnotatedTableCellView {
 }
 
 extension BookPublisherCell: BookDetailTableCell {
-    func setup(for view: BookDetailViewController, row: DetailDataSource.RowInfo) {
+    func setup(for view: BookDetailViewController, row: DetailItem) {
         assert(row.category == .publisher)
         let source = view.source
         detailView = view
