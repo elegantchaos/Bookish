@@ -24,7 +24,7 @@ import UIKit
     let bookIndexSorting = [NSSortDescriptor(key: "sortName", ascending: true)]
     let personIndexSorting = [NSSortDescriptor(key: "sortName", ascending: true)]
     let relationshipSorting = [NSSortDescriptor(key: "role.name", ascending: true)]
-    let entrySorting = [NSSortDescriptor(key: "index", ascending: true)]
+    let entrySorting = [NSSortDescriptor(key: "position", ascending: true)]
     let publisherSorting = [NSSortDescriptor(key: "sortName", ascending: true)]
     let seriesSorting = [NSSortDescriptor(key: "sortName", ascending: true)]
     let roleSorting = [NSSortDescriptor(key: "name", ascending: true)]
