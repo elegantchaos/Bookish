@@ -12,7 +12,7 @@ class BookPublisherRow: BookDetailRow {
     var publisher: Publisher!
 
     override func setupContent(row: DetailItem, book: Book) {
-        assert(row.category == .publisher)
+        assert(row is PublisherDetailItem)
         if row.placeholder {
             
         } else {

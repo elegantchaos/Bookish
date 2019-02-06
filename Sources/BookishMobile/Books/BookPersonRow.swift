@@ -51,7 +51,7 @@ class BookPersonRow: BookDetailRow {
     @IBOutlet weak var choosePersonButton: UIButton!
     
     override func setupContent(row: DetailItem, book: Book) {
-        assert(row.category == .person)
+        assert(row is PersonDetailItem)
         if row.placeholder {
             role = Role.named(Role.StandardNames.author, in: book.managedObjectContext!)
         } else {

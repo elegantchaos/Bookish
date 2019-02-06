@@ -26,7 +26,7 @@ class BookDetailRow: UITableViewCell, UITextViewDelegate, DetailRow {
         info = row
         source = row.source
         label.font = application.viewModel.labelFont
-        label.text = source.heading(for: row) // TOOD: move method to info?
+        label.text = row.heading
         setupContent(row: row, book: book)
     }
     
@@ -41,7 +41,7 @@ class BookDetailRow: UITableViewCell, UITextViewDelegate, DetailRow {
     }
     
     func setupContent(row: DetailItem, book: Book) {
-        assert(row.category == .detail)
+        assert(row is SimpleDetailItem)
         let rowInfo = source.details(for: row)
         detail.font = application.viewModel.detailFont
         detail.isEditable = source.editing
