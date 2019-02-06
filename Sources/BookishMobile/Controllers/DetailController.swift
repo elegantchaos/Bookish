@@ -172,12 +172,12 @@ class DetailControllerX: UIViewController, UITableViewDataSource, UITableViewDel
         switch segue.identifier {
         case "chooseRole":
             prepareChooser(for: segue, sender: sender) { (cell) -> ChooseRoleTarget in
-                return ChooseRoleTarget(row: cell as! BookPersonRow)
+                return ChooseRoleTarget(row: cell as! PersonRow)
             }
             
         case "choosePerson":
             prepareChooser(for: segue, sender: sender) { (cell) -> ChoosePersonTarget in
-                return ChoosePersonTarget(row: cell as! BookPersonRow)
+                return ChoosePersonTarget(row: cell as! PersonRow)
             }
             
         default:

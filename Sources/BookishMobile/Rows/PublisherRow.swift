@@ -7,7 +7,7 @@ import UIKit
 import Actions
 import BookishModel
 
-class BookPublisherRow: BookDetailRow {
+class PublisherRow: BookDetailRow {
     @IBOutlet var publisherButton: UIButton!
     var publisher: Publisher!
     
@@ -23,7 +23,7 @@ class BookPublisherRow: BookDetailRow {
     }
 }
 
-extension BookPublisherRow: ActionContextProvider {
+extension PublisherRow: ActionContextProvider {
     func provide(context: ActionContext) {
         context.info[PublisherAction.newPublisherKey] = publisher
     }

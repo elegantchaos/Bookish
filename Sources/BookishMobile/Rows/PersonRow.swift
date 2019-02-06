@@ -8,9 +8,9 @@ import Actions
 import UIKit
 
 class ChooseTarget {
-    let row: BookPersonRow
+    let row: PersonRow
     
-    init(row: BookPersonRow) {
+    init(row: PersonRow) {
         self.row = row
     }
 }
@@ -39,7 +39,7 @@ class ChoosePersonTarget: ChooseTarget, ChooseItemTarget {
     typealias EntityType = Person
 }
 
-class BookPersonRow: BookDetailRow {
+class PersonRow: BookDetailRow {
     
     var relationship: Relationship?
     var person: Person?
@@ -70,17 +70,20 @@ class BookPersonRow: BookDetailRow {
         personField.font = application.viewModel.detailFont
         personField.text = personName
         personButton.setTitle(personName, font: application.viewModel.detailFont)
-        personButton.isHidden = source.editing
-        choosePersonButton.isHidden = !source.editing
-        personField.isHidden = !source.editing
+        let editing = info.source.isEditing
+        personButton.isHidden = editing
+        choosePersonButton.isHidden = !editing
+        personField.isHidden = !editing
     }
     
     func setupRole() {
         let roleName = role?.label ?? "role"
         label.text = roleName
-        label.isHidden = source.editing
+        
+        let editing = info.source.isEditing
+        label.isHidden = editing
         roleButton.setTitle(roleName, font: application.viewModel.detailFont)
-        roleButton.isHidden = !source.editing
+        roleButton.isHidden = !editing
     }
     
     func changeRole(to role: Role) {
@@ -96,10 +99,10 @@ class BookPersonRow: BookDetailRow {
     }
 }
 
-extension BookPersonRow: ActionContextProvider {
+extension PersonRow: ActionContextProvider {
     func provide(context: ActionContext) {
         context.info[PersonAction.relationshipKey] = relationship
-        if source.editing {
+        if info.source.isEditing {
             if let person = person, person.name == personField.text {
                 context[PersonAction.personKey] = person
             } else if let name = personField.text, !name.isEmpty {

@@ -7,7 +7,7 @@ import Actions
 import BookishModel
 import UIKit
 
-class BookSeriesRow: BookDetailRow {
+class SeriesRow: BookDetailRow {
     @IBOutlet var seriesButton: UIButton!
     var series: Series!
 
@@ -25,7 +25,7 @@ class BookSeriesRow: BookDetailRow {
     }
 }
 
-extension BookSeriesRow: ActionContextProvider {
+extension SeriesRow: ActionContextProvider {
     func provide(context: ActionContext) {
         context.info[SeriesAction.seriesKey] = series
     }

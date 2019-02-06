@@ -19,12 +19,10 @@ class BookDetailRow: UITableViewCell, UITextViewDelegate, DetailRow {
     @IBOutlet weak var placeholder: UITextView!
     
     var bindings = [Any]()
-    var source: BookDetailProvider!
     var info: DetailItem!
     
     func setup(row: DetailItem, book: Book) {
         info = row
-        source = row.source
         label.font = application.viewModel.labelFont
         label.text = row.heading
         setupContent(row: row, book: book)
@@ -41,25 +39,18 @@ class BookDetailRow: UITableViewCell, UITextViewDelegate, DetailRow {
     }
     
     func setupContent(row: DetailItem, book: Book) {
-        assert(row is SimpleDetailItem)
-        let rowInfo = source.details(for: row)
-        detail.font = application.viewModel.detailFont
-        detail.isEditable = source.editing
-        let binding = TextViewBinding(for: detail, to: book, path: rowInfo.binding, setIfNull: true)
-        bindings.append(binding)
-        
-        let observation = detail.observe(\UITextView.text) { (observed, value) in
-            self.updatePlaceholder()
+        if let item = row as? SimpleDetailItem {
+            detail.font = application.viewModel.detailFont
+            detail.isEditable = item.source.isEditing
+            let binding = TextViewBinding(for: detail, to: book, path: item.spec.binding, setIfNull: true)
+            bindings.append(binding)
+            
+            let observation = detail.observe(\UITextView.text) { (observed, value) in
+                self.updatePlaceholder()
+            }
+            bindings.append(observation)
+            updatePlaceholder()
         }
-        bindings.append(observation)
-        updatePlaceholder()
-//        if let text = book.value(forKey: rowInfo.binding) as? String, !text.isEmpty {
-//            placeholder.isHidden = true
-//            placeholder.text = ""
-//        } else {
-//            placeholder.isHidden = false
-//            placeholder.text = "add \(label.text!)"
-//        }
     }
     
     override func prepareForReuse() {

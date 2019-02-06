@@ -7,7 +7,7 @@ import UIKit
 import BookishModel
 import Actions
 
-class PersonBookRow: UITableViewCell, ActionContextProvider, DetailRow {
+class BookRow: UITableViewCell, ActionContextProvider, DetailRow {
     @IBOutlet weak var personButton: UIButton!
     
     var binding: StringBinding?
