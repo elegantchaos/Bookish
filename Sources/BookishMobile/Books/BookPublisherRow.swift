@@ -10,16 +10,17 @@ import BookishModel
 class BookPublisherRow: BookDetailRow {
     @IBOutlet var publisherButton: UIButton!
     var publisher: Publisher!
-
+    
     override func setupContent(row: DetailItem, book: Book) {
-        assert(row is PublisherDetailItem)
-        if row.placeholder {
-            
-        } else {
-            publisher = source.publisher(for: row)
-            publisherButton.setTitle(publisher.name, font: application.viewModel.detailFont)
+        if let item = row as? PublisherDetailItem {
+            if row.placeholder {
+                
+            } else {
+                publisher = item.publisher
+                publisherButton.setTitle(publisher.name, font: application.viewModel.detailFont)
+            }
         }
-   }
+    }
 }
 
 extension BookPublisherRow: ActionContextProvider {

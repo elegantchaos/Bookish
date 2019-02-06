@@ -12,13 +12,14 @@ class BookSeriesRow: BookDetailRow {
     var series: Series!
 
     override func setupContent(row: DetailItem, book: Book) {
-        assert(row is SeriesDetailItem)
-        if row.placeholder {
-            
-        } else {
-            series = source.series(for: row)
-            if let name = series?.name {
-                seriesButton.setTitle(name, font: application.viewModel.detailFont)
+        if let item = row as? SeriesDetailItem {
+            if item.placeholder {
+                
+            } else {
+                series = item.series
+                if let name = item.series?.name {
+                    seriesButton.setTitle(name, font: application.viewModel.detailFont)
+                }
             }
         }
     }
