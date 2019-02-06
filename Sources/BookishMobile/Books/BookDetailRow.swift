@@ -6,18 +6,28 @@
 import UIKit
 import BookishModel
 
-class BookDetailRow: UITableViewCell, UITextViewDelegate {
+
+class BookDetailRow: UITableViewCell, UITextViewDelegate, DetailRow {
+    func setup(row: DetailDataSource.RowInfo, object: ModelObject) {
+        if let book = object as? Book {
+            setup(row: row, book: book)
+        }
+    }
+    
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var detail: UITextView!
     @IBOutlet weak var placeholder: UITextView!
     
     var bindings = [Any]()
+    var source: DetailDataSource!
+    var info: DetailDataSource.RowInfo!
     
-    func setup(row: DetailDataSource.RowInfo, book: Book, source: DetailDataSource) {
+    func setup(row: DetailDataSource.RowInfo, book: Book) {
+        info = row
+        source = row.source
         label.font = application.viewModel.labelFont
-        
-        label.text = source.heading(for: row)
-        setupContent(row: row, book: book, source: source)
+        label.text = source.heading(for: row) // TOOD: move method to info?
+        setupContent(row: row, book: book)
     }
     
     func updatePlaceholder() {
@@ -30,7 +40,7 @@ class BookDetailRow: UITableViewCell, UITextViewDelegate {
         }
     }
     
-    func setupContent(row: DetailDataSource.RowInfo, book: Book, source: DetailDataSource) {
+    func setupContent(row: DetailDataSource.RowInfo, book: Book) {
         assert(row.category == .detail)
         let rowInfo = source.details(for: row)
         detail.font = application.viewModel.detailFont

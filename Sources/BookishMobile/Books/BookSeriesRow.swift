@@ -11,7 +11,7 @@ class BookSeriesRow: BookDetailRow {
     @IBOutlet var seriesButton: UIButton!
     var series: Series!
 
-    override func setupContent(row: DetailDataSource.RowInfo, book: Book, source: DetailDataSource) {
+    override func setupContent(row: DetailDataSource.RowInfo, book: Book) {
         assert(row.category == .series)
         if row.placeholder {
             

@@ -20,6 +20,7 @@
 		2237D28322020C3B0033924F /* ChoosePersonController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2237D28222020C3B0033924F /* ChoosePersonController.swift */; };
 		2237D28522020C8F0033924F /* ChooseEntityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2237D28422020C8F0033924F /* ChooseEntityController.swift */; };
 		2237D405220368520033924F /* ButtonExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2237D404220368520033924F /* ButtonExtensions.swift */; };
+		22387990220B05810019F9EA /* Details.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2238798F220B05810019F9EA /* Details.swift */; };
 		22429314212ADC4300E70510 /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22429313212ADC4300E70510 /* Application.swift */; };
 		2242931E212ADC4300E70510 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2242931C212ADC4300E70510 /* Main.storyboard */; };
 		22429320212ADC4400E70510 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2242931F212ADC4400E70510 /* Assets.xcassets */; };
@@ -214,6 +215,7 @@
 		2237D28222020C3B0033924F /* ChoosePersonController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoosePersonController.swift; sourceTree = "<group>"; };
 		2237D28422020C8F0033924F /* ChooseEntityController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseEntityController.swift; sourceTree = "<group>"; };
 		2237D404220368520033924F /* ButtonExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonExtensions.swift; sourceTree = "<group>"; };
+		2238798F220B05810019F9EA /* Details.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Details.swift; sourceTree = "<group>"; };
 		22429311212ADC4300E70510 /* Bookish.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bookish.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22429313212ADC4300E70510 /* Application.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
 		2242931A212ADC4300E70510 /* BookDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailController.swift; sourceTree = "<group>"; };
@@ -446,6 +448,7 @@
 				22A8318D2204B68B006A0952 /* IndexController.swift */,
 				22A8318722049CB2006A0952 /* IndexRow.swift */,
 				22F1803021C82D8E00220D20 /* DetailController.swift */,
+				2238798F220B05810019F9EA /* Details.swift */,
 				227F450E2181EDF3000D8B8D /* Books */,
 				227F450D2181EDE1000D8B8D /* People */,
 				22F1802A21C8175D00220D20 /* Publisher */,
@@ -1103,6 +1106,7 @@
 				22A8318C2204B410006A0952 /* RootRow.swift in Sources */,
 				22A8318A2204AAB2006A0952 /* RootController.swift in Sources */,
 				22B1DB412178D8A50067E795 /* ViewExtensions.swift in Sources */,
+				22387990220B05810019F9EA /* Details.swift in Sources */,
 				22D1B239218079C60062F2CB /* CollectionViewModel.swift in Sources */,
 				22C2194C21AF24E5002FC0FE /* EditingActions.swift in Sources */,
 				2237D28322020C3B0033924F /* ChoosePersonController.swift in Sources */,

@@ -31,6 +31,8 @@ import Logger
 //
 //}
 
+
+
 class DetailControllerX: UIViewController, UITableViewDataSource, UITableViewDelegate, ActionContextProvider {
     typealias EntityType = ModelObject
     
@@ -40,9 +42,8 @@ class DetailControllerX: UIViewController, UITableViewDataSource, UITableViewDel
     var bindings = [Any]()
     var entityName = ""
     var representedObject: EntityType?
+    var source: DetailProvider?
     
-    let source = DetailDataSource()
-
     lazy var placeholderImage = UIImage(named: "CoverPlaceholder")
     
     @IBOutlet weak var titleLabel: UITextField!
@@ -63,18 +64,25 @@ class DetailControllerX: UIViewController, UITableViewDataSource, UITableViewDel
     func setup(for object: EntityType) {
         detailViewChannel.debug("setup for \(object)")
         representedObject = object
+        source = (object as? DetailOwner)?.getProvider()
         configureView()
     }
     
     func configureView() {
-        if let book = representedObject, titleLabel != nil {
+        if let source = source, let object = representedObject, titleLabel != nil {
             let vm = application.viewModel
             titleLabel.font = vm.titleFont
             subtitleLabel.font = vm.detailFont
-            bindings.append(TextFieldBinding(for: titleLabel, to: book, path: "name"))
-            bindings.append(TextFieldBinding(for: subtitleLabel, to: book, path: "subtitle"))
-            configureImage(for: book)
-            bindings.append(StringBinding(for: self, property: "title", to: book, path: "name"))
+            if let path = source.titleProperty {
+                bindings.append(TextFieldBinding(for: titleLabel, to: object, path: path))
+                bindings.append(StringBinding(for: self, property: "title", to: object, path: path))
+            }
+            
+            if let path = source.subtitleProperty {
+                bindings.append(TextFieldBinding(for: subtitleLabel, to: object, path: path))
+            }
+            
+            configureImage(for: object)
             updateView()
         }
     }
@@ -88,7 +96,7 @@ class DetailControllerX: UIViewController, UITableViewDataSource, UITableViewDel
         if let book = representedObject as? Book, titleLabel != nil {
             titleLabel.isEnabled = isEditing
             subtitleLabel.isEnabled = isEditing
-            source.filter(for: [book], editing: isEditing)
+            source?.filter(for: [book], editing: isEditing)
             validateButtons()
         }
     }
@@ -107,20 +115,22 @@ class DetailControllerX: UIViewController, UITableViewDataSource, UITableViewDel
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return source.rows
+        return source?.itemCount ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let book = representedObject as? Book else { fatalError("should have book set") }
-        let info = source.info(for: indexPath.row)
-        let identifier = info.kind.rawValue
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: identifier) as? BookDetailRow else {
+        if let info = source?.info(for: indexPath.row) {
+            let identifier = info.kind.rawValue
+            if let cell = tableView.dequeueReusableCell(withIdentifier: identifier) as? DetailRow {
+                cell.setup(row: info, object: book)
+                return cell
+            }
+
             detailViewChannel.log("Unregistered cell type \(identifier).")
-            return UITableViewCell(style: .default, reuseIdentifier: identifier)
         }
         
-        cell.setup(row: info, book: book, source: source)
-        return cell
+        fatalError("unregistered table cell")
     }
     
     func provide(context: ActionContext) {

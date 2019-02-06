@@ -44,16 +44,14 @@ class BookPersonRow: BookDetailRow {
     var relationship: Relationship?
     var person: Person?
     var role: Role?
-    var source: DetailDataSource!
     
     @IBOutlet var personButton: UIButton!
     @IBOutlet weak var roleButton: UIButton!
     @IBOutlet weak var personField: UITextField!
     @IBOutlet weak var choosePersonButton: UIButton!
     
-    override func setupContent(row: DetailDataSource.RowInfo, book: Book, source: DetailDataSource) {
+    override func setupContent(row: DetailDataSource.RowInfo, book: Book) {
         assert(row.category == .person)
-        self.source = source
         if row.placeholder {
             role = Role.named(Role.StandardNames.author, in: book.managedObjectContext!)
         } else {
