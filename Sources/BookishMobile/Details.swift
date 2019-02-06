@@ -9,3 +9,6 @@ import UIKit
 protocol DetailRow: UITableViewCell {
     func setup(row: DetailItem, object: ModelObject)
 }
+
+extension CollectionViewModel: DetailContext {
+}

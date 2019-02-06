@@ -499,6 +499,37 @@
                                             <outlet property="label" destination="pMd-cN-nzQ" id="rvc-YH-NX3"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="book" id="Nfz-Hj-uMC" customClass="PersonBookRow" customModule="Bookish" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="248" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Nfz-Hj-uMC" id="YIe-Gk-swm">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qme-y3-tce">
+                                                    <rect key="frame" x="16" y="4" width="355" height="35.5"/>
+                                                    <state key="normal" title="Button">
+                                                        <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    </state>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="actionID" value="RevealBook"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="performAction:" destination="pBo-5d-NDY" eventType="primaryActionTriggered" id="BHO-uR-ajw"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="Qme-y3-tce" secondAttribute="trailing" constant="4" id="4uB-ej-axF"/>
+                                                <constraint firstItem="Qme-y3-tce" firstAttribute="top" secondItem="YIe-Gk-swm" secondAttribute="top" constant="4" id="5ta-X8-8mh"/>
+                                                <constraint firstItem="Qme-y3-tce" firstAttribute="leading" secondItem="YIe-Gk-swm" secondAttribute="leading" constant="16" id="F74-fE-dyy"/>
+                                                <constraint firstAttribute="bottom" secondItem="Qme-y3-tce" secondAttribute="bottom" constant="4" id="GSb-cA-ccJ"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="personButton" destination="Qme-y3-tce" id="X5u-VM-BeR"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="nAr-WG-Ppx" id="qpK-4A-UM5"/>

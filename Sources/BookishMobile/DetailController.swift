@@ -96,10 +96,10 @@ class DetailControllerX: UIViewController, UITableViewDataSource, UITableViewDel
         }
 
     func updateView() {
-        if let object = representedObject as? EntityType, titleLabel != nil {
+        if let object = representedObject, titleLabel != nil {
             titleLabel.isEnabled = isEditing
             subtitleLabel.isEnabled = isEditing
-            source?.filter(for: [object], editing: isEditing)
+            source?.filter(for: [object], editing: isEditing, context:application.viewModel)
             validateButtons()
         }
     }

@@ -7,19 +7,19 @@ import UIKit
 import BookishModel
 import Actions
 
-class PersonBookRow: UITableViewCell, ActionContextProvider {
+class PersonBookRow: UITableViewCell, ActionContextProvider, DetailRow {
     @IBOutlet weak var personButton: UIButton!
     
     var binding: StringBinding?
     var book: Book?
-    
-    func setup(row: Int, book: Book, role: Role) {
-        self.book = book
-        personButton.setTitle(book.name, for: .normal)
-//        binding = StringBinding(for: personButton, property: "value", to: book, path: "name")
-//        binding = TextViewBinding(for: detail, to: book, path: "name")
-    }
 
+    func setup(row: DetailItem, object: ModelObject) {
+        if let item = row as? PersonBookDetailItem, let book = item.book {
+            self.book = book
+            personButton.setTitle(book.name, for: .normal)
+        }
+    }
+    
     func provide(context: ActionContext) {
         context.info[BookAction.bookKey] = book
     }
