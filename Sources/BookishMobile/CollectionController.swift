@@ -8,17 +8,17 @@ import CoreData
 import BookishModel
 import Actions
 
-class CollectionController: UITabBarController {
+class CollectionController: UISplitViewController {
     var observers = [NSKeyValueObservation]()
     
     var indexControllers: [String:Any] = [:]
     
-    func reset(usingSample: Bool) {
+    func reset(mode: CollectionContainer.PopulateMode) {
         let indices = indexControllers.values.compactMap { $0 as? EntityIndex }
         indices.forEach { $0.reset() }
         
         application.collection.delete(remove: true)
-        application.collection = application.setupCollection(mode: usingSample ? .sampleData : .empty)
+        application.collection = application.setupCollection(mode: mode)
         
         indices.forEach { $0.reload() }
     }
@@ -33,24 +33,24 @@ class CollectionController: UITabBarController {
         super.viewDidLoad()
         
         application.collectionController = self
-        for n in 0...3 {
-            setup(splitView: viewControllers![n] as! UISplitViewController)
-        }
+//        for n in 0...3 {
+//            setup(splitView: viewControllers![n] as! UISplitViewController)
+//        }
 
         let viewModel = application.viewModel
-        self.selectedIndex = viewModel.modeIndex
-        let modeObserver = application.observe(\Application.viewModel.modeIndex) { (app, change) in
-            self.selectedIndex = viewModel.modeIndex
-        }
-        
-        observers.append(modeObserver)
+//        self.selectedIndex = viewModel.modeIndex
+//        let modeObserver = application.observe(\Application.viewModel.modeIndex) { (app, change) in
+//            self.selectedIndex = viewModel.modeIndex
+//        }
+//
+//        observers.append(modeObserver)
     }
     
-    override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-        if let index = tabBar.items!.firstIndex(of: item) {
-            application.viewModel.modeIndex = index
-        }
-    }
+//    override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+//        if let index = tabBar.items!.firstIndex(of: item) {
+//            application.viewModel.modeIndex = index
+//        }
+//    }
 
     func reveal<EntityType: NSManagedObject>(_ object: EntityType, mode: CollectionViewModel.Mode) {
         application.viewModel.mode = mode

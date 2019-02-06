@@ -20,7 +20,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Bzv-8x-bww">
-                                <rect key="frame" x="20" y="84" width="335" height="88"/>
+                                <rect key="frame" x="20" y="84" width="335" height="120"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MgS-SD-2Dy">
                                         <rect key="frame" x="0.0" y="0.0" width="335" height="24"/>
@@ -29,21 +29,31 @@
                                         </constraints>
                                         <state key="normal" title="Reset To Empty"/>
                                         <connections>
-                                            <action selector="resetToEmpty:" destination="WzE-F1-Iat" eventType="touchUpInside" id="VLA-22-Yke"/>
+                                            <action selector="resetToEmpty:" destination="2k3-Sp-2fA" eventType="primaryActionTriggered" id="0Gr-mj-Ell"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iwa-I9-Mim">
+                                        <rect key="frame" x="0.0" y="32" width="335" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="24" id="MGq-z1-Jlv"/>
+                                        </constraints>
+                                        <state key="normal" title="Reset To Test Data"/>
+                                        <connections>
+                                            <action selector="resetToTestData:" destination="2k3-Sp-2fA" eventType="primaryActionTriggered" id="oai-rj-tVt"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FlW-Hb-22l">
-                                        <rect key="frame" x="0.0" y="32" width="335" height="24"/>
+                                        <rect key="frame" x="0.0" y="64" width="335" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="24" id="SyE-3S-T1M"/>
                                         </constraints>
                                         <state key="normal" title="Reset To Sample Data"/>
                                         <connections>
-                                            <action selector="resetToSampleData:" destination="WzE-F1-Iat" eventType="touchUpInside" id="IPs-e9-Y0B"/>
+                                            <action selector="resetToSampleData:" destination="2k3-Sp-2fA" eventType="primaryActionTriggered" id="yZi-RP-P5F"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lML-95-lSq">
-                                        <rect key="frame" x="0.0" y="64" width="335" height="24"/>
+                                        <rect key="frame" x="0.0" y="96" width="335" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="24" id="Tc3-P4-cs1"/>
                                         </constraints>
@@ -67,7 +77,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2k3-Sp-2fA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-156" y="4082"/>
+            <point key="canvasLocation" x="-156" y="4129"/>
         </scene>
         <!--Bookish-->
         <scene sceneID="chZ-qP-1aq">
@@ -133,14 +143,6 @@
             </objects>
             <point key="canvasLocation" x="-156" y="3312.5937031484259"/>
         </scene>
-        <!--BooksIndex-->
-        <scene sceneID="ucY-8e-yui">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Book" referencedIdentifier="BooksIndex" id="tgY-xh-yma" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ISJ-kS-n9G" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-157" y="3876"/>
-        </scene>
         <!--Index ControllerX-->
         <scene sceneID="I5G-e3-xhx">
             <objects>
@@ -201,10 +203,10 @@
             </objects>
             <point key="canvasLocation" x="-927" y="3313"/>
         </scene>
-        <!--Split View Controller-->
+        <!--Collection Controller-->
         <scene sceneID="atk-Nd-z8K">
             <objects>
-                <splitViewController id="2I7-7n-d9F" sceneMemberID="viewController">
+                <splitViewController id="2I7-7n-d9F" customClass="CollectionController" customModule="Bookish" customModuleProvider="target" sceneMemberID="viewController">
                     <connections>
                         <segue destination="LDw-Js-eN4" kind="relationship" relationship="masterViewController" id="iQA-A7-3Cx"/>
                         <segue destination="eOD-1j-hXg" kind="relationship" relationship="detailViewController" id="wHW-t9-qJD"/>
@@ -653,6 +655,6 @@
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Uag-ye-IkJ"/>
+        <segue reference="wHW-t9-qJD"/>
     </inferredMetricsTieBreakers>
 </document>

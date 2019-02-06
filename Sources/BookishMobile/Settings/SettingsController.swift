@@ -12,11 +12,15 @@ class SettingsController: UIViewController {
     lazy var loggingSettings: LoggerSettingsView? = LoggerSettingsView()
     
     @IBAction func resetToEmpty(_ sender: Any) {
-        application.collectionController.reset(usingSample: false)
+        application.collectionController.reset(mode: .empty)
     }
-    
+
+    @IBAction func resetToTestData(_ sender: Any) {
+        application.collectionController.reset(mode: .testData)
+    }
+
     @IBAction func resetToSampleData(_ sender: Any) {
-        application.collectionController.reset(usingSample: true)
+        application.collectionController.reset(mode: .sampleData)
     }
     
     @IBAction func showLoggingSettings(_ sender: Any) {
