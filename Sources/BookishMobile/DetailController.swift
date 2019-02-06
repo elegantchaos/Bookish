@@ -24,7 +24,7 @@ import Logger
 //class DetailController: UIViewController {
 //    var representedObject: EntityType? {
 //        didSet {
-//            detailViewChannel.debug("represented object changed for \(EntityType.self)")
+//            detailViewChannel.debug("represented object changed for \(entityName)")
 //            configureView()
 //        }
 //    }
@@ -51,7 +51,7 @@ class DetailControllerX: UIViewController, UITableViewDataSource, UITableViewDel
     @IBOutlet weak var imageView: UIImageView!
     
     override func viewDidLoad() {
-        detailViewChannel.debug("view loaded for \(EntityType.self)")
+        detailViewChannel.debug("view loaded for \(entityName)")
         
         super.viewDidLoad()
 
@@ -80,6 +80,9 @@ class DetailControllerX: UIViewController, UITableViewDataSource, UITableViewDel
             
             if let path = source.subtitleProperty {
                 bindings.append(TextFieldBinding(for: subtitleLabel, to: object, path: path))
+                subtitleLabel.isHidden = false
+            } else {
+                subtitleLabel.isHidden = true
             }
             
             configureImage(for: object)
@@ -93,10 +96,10 @@ class DetailControllerX: UIViewController, UITableViewDataSource, UITableViewDel
         }
 
     func updateView() {
-        if let book = representedObject as? Book, titleLabel != nil {
+        if let object = representedObject as? EntityType, titleLabel != nil {
             titleLabel.isEnabled = isEditing
             subtitleLabel.isEnabled = isEditing
-            source?.filter(for: [book], editing: isEditing)
+            source?.filter(for: [object], editing: isEditing)
             validateButtons()
         }
     }
@@ -114,16 +117,24 @@ class DetailControllerX: UIViewController, UITableViewDataSource, UITableViewDel
         }
     }
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return source?.sectionCount ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return source?.sectionTitle(for: section)
+    }
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return source?.itemCount ?? 0
+        return source?.itemCount(for: section) ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let book = representedObject as? Book else { fatalError("should have book set") }
-        if let info = source?.info(for: indexPath.row) {
+        guard let object = representedObject else { fatalError("should have object set") }
+        if let info = source?.info(section: indexPath.section, row: indexPath.row) {
             let identifier = info.kind.rawValue
             if let cell = tableView.dequeueReusableCell(withIdentifier: identifier) as? DetailRow {
-                cell.setup(row: info, object: book)
+                cell.setup(row: info, object: object)
                 return cell
             }
 
@@ -132,6 +143,8 @@ class DetailControllerX: UIViewController, UITableViewDataSource, UITableViewDel
         
         fatalError("unregistered table cell")
     }
+    
+
     
     func provide(context: ActionContext) {
         context[ToggleEditingAction.editableKey] = self

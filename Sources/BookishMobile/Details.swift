@@ -17,19 +17,33 @@ protocol DetailOwner {
 protocol DetailProvider {
     var titleProperty: String? { get }
     var subtitleProperty: String? { get }
-    var itemCount: Int { get }
-    func info(for row: Int) -> DetailDataSource.RowInfo
+    var sectionCount: Int { get }
+    func sectionTitle(for section: Int) -> String
+    func itemCount(for section: Int) -> Int
+    func info(section: Int, row: Int) -> DetailDataSource.RowInfo // TODO: just take IndexPath?
     func filter(for selection: [ModelObject], editing: Bool)
 }
 
 extension DetailDataSource: DetailProvider {
+    func info(section: Int, row: Int) -> DetailDataSource.RowInfo {
+        return info(for: row)
+    }
+    
     func filter(for selection: [ModelObject], editing: Bool) {
         if let books = selection as? [Book] {
             filter(for: books, editing: editing)
         }
     }
     
-    var itemCount: Int {
+    var sectionCount: Int {
+        return 1
+    }
+
+    func sectionTitle(for section: Int) -> String {
+        return ""
+    }
+    
+    func itemCount(for section: Int) -> Int {
         return rows
     }
     
