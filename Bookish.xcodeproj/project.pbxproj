@@ -321,7 +321,6 @@
 		22F1801B21C8084200220D20 /* BookPublisherRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookPublisherRow.swift; sourceTree = "<group>"; };
 		22F1801D21C8084900220D20 /* BookSeriesRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookSeriesRow.swift; sourceTree = "<group>"; };
 		22F1802621C810CC00220D20 /* PublisherDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublisherDetailController.swift; sourceTree = "<group>"; };
-		22F1802821C810D400220D20 /* SeriesDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeriesDetailController.swift; sourceTree = "<group>"; };
 		22F1802C21C823B800220D20 /* SeriesBookRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeriesBookRow.swift; sourceTree = "<group>"; };
 		22F1803021C82D8E00220D20 /* DetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailController.swift; sourceTree = "<group>"; };
 		22F1803221C9171B00220D20 /* PublisherBookRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublisherBookRow.swift; sourceTree = "<group>"; };
@@ -735,7 +734,6 @@
 		22F1802B21C8176900220D20 /* Series */ = {
 			isa = PBXGroup;
 			children = (
-				22F1802821C810D400220D20 /* SeriesDetailController.swift */,
 				22F1802C21C823B800220D20 /* SeriesBookRow.swift */,
 			);
 			path = Series;
