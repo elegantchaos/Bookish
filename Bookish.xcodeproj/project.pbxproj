@@ -108,9 +108,7 @@
 		22E47CE0216E5EB200E43DBF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22DD42502126D6DB0070C85A /* Assets.xcassets */; };
 		22F1801F21C8089100220D20 /* BookPublisherRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1801B21C8084200220D20 /* BookPublisherRow.swift */; };
 		22F1802121C8095B00220D20 /* BookSeriesRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1801D21C8084900220D20 /* BookSeriesRow.swift */; };
-		22F1802D21C823B800220D20 /* SeriesBookRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1802C21C823B800220D20 /* SeriesBookRow.swift */; };
 		22F1803121C82D8E00220D20 /* DetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1803021C82D8E00220D20 /* DetailController.swift */; };
-		22F1803321C9171B00220D20 /* PublisherBookRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1803221C9171B00220D20 /* PublisherBookRow.swift */; };
 		22F1805321C9495300220D20 /* Sample.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 22F1805221C9495300220D20 /* Sample.sqlite */; };
 		22F180A421C951FF00220D20 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F180A321C951FF00220D20 /* SettingsController.swift */; };
 		22F180BD21CA647000220D20 /* LoggerKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22A69BF421C2DDE600043C3A /* LoggerKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -130,10 +128,6 @@
 		22F1844E21CBF9B600220D20 /* DetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1844D21CBF9B600220D20 /* DetailController.swift */; };
 		22F1845021CC10FF00220D20 /* ArrayControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1844F21CC10FF00220D20 /* ArrayControllerExtensions.swift */; };
 		22F1845221CC11B700220D20 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 22F1845121CC11B700220D20 /* Localizable.strings */; };
-		22F1845421E3819900220D20 /* Book.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22F1845321E3819900220D20 /* Book.storyboard */; };
-		22F1845621E381D200220D20 /* Person.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22F1845521E381D200220D20 /* Person.storyboard */; };
-		22F1845821E381F500220D20 /* Publisher.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22F1845721E381F500220D20 /* Publisher.storyboard */; };
-		22F1845A21E3821100220D20 /* Series.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22F1845921E3821100220D20 /* Series.storyboard */; };
 		22F35487216FAC0100443C0B /* Actions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F35486216FAC0100443C0B /* Actions.framework */; };
 /* End PBXBuildFile section */
 
@@ -218,7 +212,6 @@
 		2238798F220B05810019F9EA /* Details.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Details.swift; sourceTree = "<group>"; };
 		22429311212ADC4300E70510 /* Bookish.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bookish.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22429313212ADC4300E70510 /* Application.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
-		2242931A212ADC4300E70510 /* BookDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailController.swift; sourceTree = "<group>"; };
 		2242931D212ADC4300E70510 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2242931F212ADC4400E70510 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		22429322212ADC4400E70510 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -320,10 +313,7 @@
 		22DE6AE62188A8DC0078D489 /* WhiteSearchFieldCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiteSearchFieldCell.swift; sourceTree = "<group>"; };
 		22F1801B21C8084200220D20 /* BookPublisherRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookPublisherRow.swift; sourceTree = "<group>"; };
 		22F1801D21C8084900220D20 /* BookSeriesRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookSeriesRow.swift; sourceTree = "<group>"; };
-		22F1802621C810CC00220D20 /* PublisherDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublisherDetailController.swift; sourceTree = "<group>"; };
-		22F1802C21C823B800220D20 /* SeriesBookRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeriesBookRow.swift; sourceTree = "<group>"; };
 		22F1803021C82D8E00220D20 /* DetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailController.swift; sourceTree = "<group>"; };
-		22F1803221C9171B00220D20 /* PublisherBookRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublisherBookRow.swift; sourceTree = "<group>"; };
 		22F1805221C9495300220D20 /* Sample.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = Sample.sqlite; path = "Extras/Sample Data/Sample.sqlite"; sourceTree = SOURCE_ROOT; };
 		22F180A321C951FF00220D20 /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		22F181F521CAB8A500220D20 /* BookishModel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BookishModel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -336,10 +326,6 @@
 		22F1844D21CBF9B600220D20 /* DetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailController.swift; sourceTree = "<group>"; };
 		22F1844F21CC10FF00220D20 /* ArrayControllerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayControllerExtensions.swift; sourceTree = "<group>"; };
 		22F1845121CC11B700220D20 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
-		22F1845321E3819900220D20 /* Book.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Book.storyboard; sourceTree = "<group>"; };
-		22F1845521E381D200220D20 /* Person.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Person.storyboard; sourceTree = "<group>"; };
-		22F1845721E381F500220D20 /* Publisher.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Publisher.storyboard; sourceTree = "<group>"; };
-		22F1845921E3821100220D20 /* Series.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Series.storyboard; sourceTree = "<group>"; };
 		22F35486216FAC0100443C0B /* Actions.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Actions.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		22F3548A216FAC0100443C0B /* BookishCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BookishCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -435,23 +421,29 @@
 			path = Utilities;
 			sourceTree = "<group>";
 		};
+		223879BE220B44A40019F9EA /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				2237D28422020C8F0033924F /* ChooseEntityController.swift */,
+				2237D28222020C3B0033924F /* ChoosePersonController.swift */,
+				22ADA16221FF5C9C00DB0975 /* ChooseRoleController.swift */,
+				22D1B23C21807F7B0062F2CB /* CollectionController.swift */,
+				22F1803021C82D8E00220D20 /* DetailController.swift */,
+				22A8318D2204B68B006A0952 /* IndexController.swift */,
+				22A831892204AAB2006A0952 /* RootController.swift */,
+				22F180A321C951FF00220D20 /* SettingsController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
 		22429312212ADC4300E70510 /* BookishMobile */ = {
 			isa = PBXGroup;
 			children = (
 				22429313212ADC4300E70510 /* Application.swift */,
-				22D1B23C21807F7B0062F2CB /* CollectionController.swift */,
 				22D1B238218079C60062F2CB /* CollectionViewModel.swift */,
-				22A831892204AAB2006A0952 /* RootController.swift */,
-				22A8318B2204B410006A0952 /* RootRow.swift */,
-				22A8318D2204B68B006A0952 /* IndexController.swift */,
-				22A8318722049CB2006A0952 /* IndexRow.swift */,
-				22F1803021C82D8E00220D20 /* DetailController.swift */,
 				2238798F220B05810019F9EA /* Details.swift */,
-				227F450E2181EDF3000D8B8D /* Books */,
-				227F450D2181EDE1000D8B8D /* People */,
-				22F1802A21C8175D00220D20 /* Publisher */,
-				22F1802B21C8176900220D20 /* Series */,
-				22F180A221C951F000220D20 /* Settings */,
+				223879BE220B44A40019F9EA /* Controllers */,
+				227F450E2181EDF3000D8B8D /* Rows */,
 				227F450F2181EE08000D8B8D /* Utilities */,
 				22F1804E21C9459300220D20 /* Resources */,
 			);
@@ -532,28 +524,19 @@
 			path = Series;
 			sourceTree = "<group>";
 		};
-		227F450D2181EDE1000D8B8D /* People */ = {
+		227F450E2181EDF3000D8B8D /* Rows */ = {
 			isa = PBXGroup;
 			children = (
-				22D1B23A21807D230062F2CB /* PersonBookRow.swift */,
-			);
-			path = People;
-			sourceTree = "<group>";
-		};
-		227F450E2181EDF3000D8B8D /* Books */ = {
-			isa = PBXGroup;
-			children = (
+				22A8318B2204B410006A0952 /* RootRow.swift */,
+				22A8318722049CB2006A0952 /* IndexRow.swift */,
 				22D1B230217E0D780062F2CB /* BookDateRow.swift */,
-				2242931A212ADC4300E70510 /* BookDetailController.swift */,
 				221ED511216B8EAB00594714 /* BookDetailRow.swift */,
 				22D1B22E217E0A3F0062F2CB /* BookPersonRow.swift */,
 				22F1801B21C8084200220D20 /* BookPublisherRow.swift */,
 				22F1801D21C8084900220D20 /* BookSeriesRow.swift */,
-				22ADA16221FF5C9C00DB0975 /* ChooseRoleController.swift */,
-				2237D28222020C3B0033924F /* ChoosePersonController.swift */,
-				2237D28422020C8F0033924F /* ChooseEntityController.swift */,
+				22D1B23A21807D230062F2CB /* PersonBookRow.swift */,
 			);
-			path = Books;
+			path = Rows;
 			sourceTree = "<group>";
 		};
 		227F450F2181EE08000D8B8D /* Utilities */ = {
@@ -722,30 +705,9 @@
 			path = Tests;
 			sourceTree = "<group>";
 		};
-		22F1802A21C8175D00220D20 /* Publisher */ = {
-			isa = PBXGroup;
-			children = (
-				22F1803221C9171B00220D20 /* PublisherBookRow.swift */,
-				22F1802621C810CC00220D20 /* PublisherDetailController.swift */,
-			);
-			path = Publisher;
-			sourceTree = "<group>";
-		};
-		22F1802B21C8176900220D20 /* Series */ = {
-			isa = PBXGroup;
-			children = (
-				22F1802C21C823B800220D20 /* SeriesBookRow.swift */,
-			);
-			path = Series;
-			sourceTree = "<group>";
-		};
 		22F1804E21C9459300220D20 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				22F1845921E3821100220D20 /* Series.storyboard */,
-				22F1845721E381F500220D20 /* Publisher.storyboard */,
-				22F1845521E381D200220D20 /* Person.storyboard */,
-				22F1845321E3819900220D20 /* Book.storyboard */,
 				228968422191DDBF00B80A93 /* Bookish.entitlements */,
 				22F1805221C9495300220D20 /* Sample.sqlite */,
 				2242931C212ADC4300E70510 /* Main.storyboard */,
@@ -772,14 +734,6 @@
 				22DD42562126D6DB0070C85A /* Bookish.entitlements */,
 			);
 			path = Resources;
-			sourceTree = "<group>";
-		};
-		22F180A221C951F000220D20 /* Settings */ = {
-			isa = PBXGroup;
-			children = (
-				22F180A321C951FF00220D20 /* SettingsController.swift */,
-			);
-			path = Settings;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -985,11 +939,7 @@
 				22429323212ADC4400E70510 /* LaunchScreen.storyboard in Resources */,
 				22429320212ADC4400E70510 /* Assets.xcassets in Resources */,
 				22F1805321C9495300220D20 /* Sample.sqlite in Resources */,
-				22F1845A21E3821100220D20 /* Series.storyboard in Resources */,
-				22F1845421E3819900220D20 /* Book.storyboard in Resources */,
 				2242931E212ADC4300E70510 /* Main.storyboard in Resources */,
-				22F1845621E381D200220D20 /* Person.storyboard in Resources */,
-				22F1845821E381F500220D20 /* Publisher.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1090,7 +1040,6 @@
 			files = (
 				22D1B23B21807D230062F2CB /* PersonBookRow.swift in Sources */,
 				22429314212ADC4300E70510 /* Application.swift in Sources */,
-				22F1803321C9171B00220D20 /* PublisherBookRow.swift in Sources */,
 				22D1B22F217E0A3F0062F2CB /* BookPersonRow.swift in Sources */,
 				221ED512216B8EAB00594714 /* BookDetailRow.swift in Sources */,
 				22F1801F21C8089100220D20 /* BookPublisherRow.swift in Sources */,
@@ -1113,7 +1062,6 @@
 				22A8318822049CB2006A0952 /* IndexRow.swift in Sources */,
 				22A8318E2204B68B006A0952 /* IndexController.swift in Sources */,
 				22D1B23D21807F7B0062F2CB /* CollectionController.swift in Sources */,
-				22F1802D21C823B800220D20 /* SeriesBookRow.swift in Sources */,
 				22ADA16321FF5C9C00DB0975 /* ChooseRoleController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
