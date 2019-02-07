@@ -28,14 +28,13 @@ class IndexControllerX: UITableViewController, NSFetchedResultsControllerDelegat
     
     @IBOutlet var indexTable: UITableView!
     
-//    var detailController: DetailControllerType? {
-//        if let split = splitViewController {
-//            let controllers = split.viewControllers
-//            return (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailControllerType
-//        }
-//
-//        return nil
-//    }
+    var detailController: DetailControllerX? {
+        if let detailNavigation = splitViewController?.viewControllers.last as? UINavigationController {
+            return detailNavigation.topViewController as? DetailControllerX
+        }
+
+        return nil
+    }
     
     override func viewDidLoad() {
         indexViewChannel.debug("\(entityType!) index didLoad")
@@ -56,7 +55,7 @@ class IndexControllerX: UITableViewController, NSFetchedResultsControllerDelegat
             NSFetchedResultsController<ModelObject>.deleteCache(withName: cacheName)
         }
         navigationController?.popToRootViewController(animated: false)
-//        detailController?.reset()
+        detailController?.reset()
         modelContext = nil
         fetcher.delegate = nil
     }
@@ -123,7 +122,6 @@ class IndexControllerX: UITableViewController, NSFetchedResultsControllerDelegat
     }
     
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
         return true
     }
     
@@ -232,7 +230,7 @@ class IndexControllerX: UITableViewController, NSFetchedResultsControllerDelegat
     
     func provide(context: ActionContext) {
         context.info.addObserver(self)
-//        detailController?.provide(context: context)
+        detailController?.provide(context: context)
     }
     
 }
