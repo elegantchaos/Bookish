@@ -11,9 +11,17 @@ class RootController: UITableViewController {
     struct Item {
         let name: String
         let entity: String
+        let identifier: String
+        
+        init(name: String = "", entity: String = "", identifier: String = "item") {
+            self.name = name
+            self.entity = entity
+            self.identifier = identifier
+        }
     }
     
     let items = [
+        Item(identifier: "intro"),
         Item(name: "Books", entity: "Book"),
         Item(name: "People", entity: "Person"),
         Item(name: "Publishers", entity: "Publisher"),
@@ -34,14 +42,15 @@ class RootController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "item") as! RootRow
         let item = items[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: item.identifier) as! RootRow
         cell.setup(for: item)
         return cell
     }
  
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         collapseDetailViewController = false
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

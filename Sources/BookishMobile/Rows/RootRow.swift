@@ -7,14 +7,23 @@ import UIKit
 
 class RootRow: UITableViewCell {
     
-    @IBOutlet weak var itemLabel: UILabel!
-    @IBOutlet weak var itemImage: UIImageView!
-    
     var item: RootController.Item?
     
     func setup(for item: RootController.Item) {
         self.item = item
+    }
+}
+
+class RootCategoryRow: RootRow {
+    @IBOutlet weak var itemLabel: UILabel!
+    @IBOutlet weak var itemImage: UIImageView!
+    
+    override func setup(for item: RootController.Item) {
+        super.setup(for: item)
         itemLabel.text = item.name
         itemImage.image = UIImage(named: "\(item.entity)Placeholder")
     }
+}
+
+class RootIntroRow: RootRow {
 }

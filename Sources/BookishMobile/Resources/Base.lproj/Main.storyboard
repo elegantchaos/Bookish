@@ -83,39 +83,61 @@
         <scene sceneID="chZ-qP-1aq">
             <objects>
                 <tableViewController clearsSelectionOnViewWillAppear="NO" id="42u-r8-GRV" customClass="RootController" customModule="Bookish" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="cVi-4X-PaA">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="cVi-4X-PaA">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="item" id="Pug-G1-TFI" customClass="RootRow" customModule="Bookish" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="intro" rowHeight="80" id="w1M-bD-nZt" customClass="RootIntroRow" customModule="Bookish" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="80"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="w1M-bD-nZt" id="HLR-Ec-7eo">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="browse your collection" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yBU-ph-KOW">
+                                            <rect key="frame" x="2" y="20" width="355" height="40"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="yBU-ph-KOW" firstAttribute="top" secondItem="HLR-Ec-7eo" secondAttribute="top" constant="20" symbolic="YES" id="Bds-X9-Ffv"/>
+                                        <constraint firstItem="yBU-ph-KOW" firstAttribute="leading" secondItem="HLR-Ec-7eo" secondAttribute="leading" constant="2" id="Q7O-zW-Vpw"/>
+                                        <constraint firstAttribute="bottom" secondItem="yBU-ph-KOW" secondAttribute="bottom" constant="20" symbolic="YES" id="gwH-kC-5Uw"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="yBU-ph-KOW" secondAttribute="trailing" constant="2" id="ufN-BZ-OsG"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="item" rowHeight="80" id="Pug-G1-TFI" customClass="RootCategoryRow" customModule="Bookish" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="108" width="375" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Pug-G1-TFI" id="wC3-fk-jQu">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="341" height="80"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QuK-Kh-VM4">
-                                            <rect key="frame" x="36" y="7.5" width="321" height="21"/>
+                                            <rect key="frame" x="92" y="41.5" width="239" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Book" translatesAutoresizingMaskIntoConstraints="NO" id="Vx2-27-GWA">
-                                            <rect key="frame" x="2" y="2" width="32" height="32"/>
+                                            <rect key="frame" x="20" y="20" width="64" height="64"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="32" id="5Hy-82-4Od"/>
-                                                <constraint firstAttribute="width" constant="32" id="fRc-SI-Fxm"/>
+                                                <constraint firstAttribute="height" constant="64" id="5Hy-82-4Od"/>
+                                                <constraint firstAttribute="width" constant="64" id="fRc-SI-Fxm"/>
                                             </constraints>
                                         </imageView>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="QuK-Kh-VM4" firstAttribute="centerY" secondItem="Vx2-27-GWA" secondAttribute="centerY" id="4eX-64-AC1"/>
-                                        <constraint firstItem="QuK-Kh-VM4" firstAttribute="leading" secondItem="Vx2-27-GWA" secondAttribute="trailing" constant="2" id="8U4-jU-vvt"/>
-                                        <constraint firstAttribute="bottom" secondItem="Vx2-27-GWA" secondAttribute="bottom" constant="2" id="PCX-bC-7BG"/>
+                                        <constraint firstItem="QuK-Kh-VM4" firstAttribute="leading" secondItem="Vx2-27-GWA" secondAttribute="trailing" constant="8" symbolic="YES" id="8U4-jU-vvt"/>
+                                        <constraint firstAttribute="bottom" secondItem="Vx2-27-GWA" secondAttribute="bottom" constant="20" symbolic="YES" id="PCX-bC-7BG"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="QuK-Kh-VM4" secondAttribute="trailing" constant="2" id="bsb-cq-fJg"/>
-                                        <constraint firstItem="Vx2-27-GWA" firstAttribute="leading" secondItem="wC3-fk-jQu" secondAttribute="leading" constant="2" id="k69-J5-lVO"/>
-                                        <constraint firstItem="Vx2-27-GWA" firstAttribute="top" secondItem="wC3-fk-jQu" secondAttribute="top" constant="2" id="o1g-ll-cfw"/>
+                                        <constraint firstItem="Vx2-27-GWA" firstAttribute="leading" secondItem="wC3-fk-jQu" secondAttribute="leading" constant="20" symbolic="YES" id="k69-J5-lVO"/>
+                                        <constraint firstItem="Vx2-27-GWA" firstAttribute="top" secondItem="wC3-fk-jQu" secondAttribute="top" constant="20" symbolic="YES" id="o1g-ll-cfw"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
@@ -672,17 +694,17 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Book" width="16" height="16"/>
+        <image name="Book" width="32" height="32"/>
         <image name="Choose" width="12" height="12"/>
         <image name="Settings" width="32" height="32"/>
         <namedColor name="Bookish Detail Text">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Bookish Index Text">
-            <color red="0.35294117647058826" green="0.36862745098039218" blue="0.3843137254901961" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.3529999852180481" green="0.36899998784065247" blue="0.38400000333786011" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Bookish Label Text">
-            <color red="0.54117647058823526" green="0.55686274509803924" blue="0.5725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.54100000858306885" green="0.55699998140335083" blue="0.57300001382827759" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
