@@ -62,8 +62,10 @@ class DetailControllerX: UIViewController, UITableViewDataSource, UITableViewDel
     }
     
     func setup(for object: EntityType) {
-        detailViewChannel.debug("setup for \(object)")
+        entityName = String(describing: type(of: object))
         representedObject = object
+        detailViewChannel.debug("setup for \(entityName) \(object)")
+
         source = (object as? DetailOwner)?.getProvider()
         configureView()
     }
@@ -108,7 +110,7 @@ class DetailControllerX: UIViewController, UITableViewDataSource, UITableViewDel
         if let data = object.value(forKey: "image") as? Data, let image = UIImage(data: data) {
             imageView.image = image
         } else {
-            imageView.image = UIImage(named: "CoverPlaceholder")
+            imageView.image = UIImage(named: "\(entityName)Placeholder")
             if let urlString = object.value(forKey: "imageURL") as? String, let url = URL(string: urlString) {
                 application.imageCache.image(for: url) { (image) in
                     self.imageView.image = image
