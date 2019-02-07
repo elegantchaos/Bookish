@@ -95,18 +95,18 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="browse your collection" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yBU-ph-KOW">
-                                            <rect key="frame" x="2" y="20" width="355" height="40"/>
+                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="tap a category to browse your collection" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="nu0-7P-bja">
+                                            <rect key="frame" x="2" y="20" width="371" height="40"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        </textView>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="yBU-ph-KOW" firstAttribute="top" secondItem="HLR-Ec-7eo" secondAttribute="top" constant="20" symbolic="YES" id="Bds-X9-Ffv"/>
-                                        <constraint firstItem="yBU-ph-KOW" firstAttribute="leading" secondItem="HLR-Ec-7eo" secondAttribute="leading" constant="2" id="Q7O-zW-Vpw"/>
-                                        <constraint firstAttribute="bottom" secondItem="yBU-ph-KOW" secondAttribute="bottom" constant="20" symbolic="YES" id="gwH-kC-5Uw"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="yBU-ph-KOW" secondAttribute="trailing" constant="2" id="ufN-BZ-OsG"/>
+                                        <constraint firstAttribute="bottom" secondItem="nu0-7P-bja" secondAttribute="bottom" constant="20" symbolic="YES" id="1Wg-Er-TYd"/>
+                                        <constraint firstItem="nu0-7P-bja" firstAttribute="leading" secondItem="HLR-Ec-7eo" secondAttribute="leading" constant="2" id="Qg8-g4-Y1g"/>
+                                        <constraint firstItem="nu0-7P-bja" firstAttribute="top" secondItem="HLR-Ec-7eo" secondAttribute="top" constant="20" symbolic="YES" id="XNm-zT-Tvw"/>
+                                        <constraint firstAttribute="trailing" secondItem="nu0-7P-bja" secondAttribute="trailing" constant="2" id="ghq-Y3-n1v"/>
                                     </constraints>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -118,8 +118,8 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QuK-Kh-VM4">
-                                            <rect key="frame" x="92" y="41.5" width="239" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <rect key="frame" x="92" y="34" width="239" height="36"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -168,7 +168,7 @@
         <!--Index-->
         <scene sceneID="I5G-e3-xhx">
             <objects>
-                <tableViewController title="Index" id="twP-4I-K8J" userLabel="Index" customClass="IndexControllerX" customModule="Bookish" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Index" id="twP-4I-K8J" userLabel="Index" customClass="IndexController" customModule="Bookish" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="uFP-rn-Wga">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

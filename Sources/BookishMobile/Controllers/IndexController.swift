@@ -21,7 +21,7 @@ protocol DetailControllerP: UIViewController {
     var representedObject: ModelObject { get set }
 }
 
-class IndexControllerX: UITableViewController, NSFetchedResultsControllerDelegate, ActionContextProvider, EntityIndex, ActionObserver {
+class IndexController: UITableViewController, NSFetchedResultsControllerDelegate, ActionContextProvider, EntityIndex, ActionObserver {
     var entityType: ModelObject.Type?
     var modelContext: NSManagedObjectContext?
     lazy var fetcher: NSFetchedResultsController<ModelObject> = makeFetcher()

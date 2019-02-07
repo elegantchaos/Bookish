@@ -20,11 +20,11 @@ class CollectionController: UITableViewController {
     }
     
     let items = [
-        Item(identifier: "intro"),
         Item(entity: Book.self),
         Item(entity: Person.self),
         Item(entity: Publisher.self),
-        Item(entity: Series.self)
+        Item(entity: Series.self),
+        Item(identifier: "intro"),
         ]
     
     override func viewDidLoad() {
@@ -54,7 +54,7 @@ class CollectionController: UITableViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showIndex" {
-            if let controller = segue.destination as? IndexControllerX, let row = sender as? RootRow, let item = row.item, let entity = item.entity {
+            if let controller = segue.destination as? IndexController, let row = sender as? RootRow, let item = row.item, let entity = item.entity {
                 controller.setup(for: entity, context: application.collection.managedObjectContext)
             }
         }
