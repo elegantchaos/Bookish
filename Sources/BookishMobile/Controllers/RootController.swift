@@ -4,17 +4,16 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 import UIKit
+import BookishModel
 
 class RootController: UITableViewController {
     var collapseDetailViewController: Bool = true
 
     struct Item {
-        let name: String
-        let entity: String
+        let entity: ModelObject.Type?
         let identifier: String
         
-        init(name: String = "", entity: String = "", identifier: String = "item") {
-            self.name = name
+        init(entity: ModelObject.Type? = nil, identifier: String = "item") {
             self.entity = entity
             self.identifier = identifier
         }
@@ -22,10 +21,10 @@ class RootController: UITableViewController {
     
     let items = [
         Item(identifier: "intro"),
-        Item(name: "Books", entity: "Book"),
-        Item(name: "People", entity: "Person"),
-        Item(name: "Publishers", entity: "Publisher"),
-        Item(name: "Series", entity: "Series")
+        Item(entity: Book.self),
+        Item(entity: Person.self),
+        Item(entity: Publisher.self),
+        Item(entity: Series.self)
         ]
     
     override func viewDidLoad() {
@@ -55,8 +54,8 @@ class RootController: UITableViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showIndex" {
-            if let controller = segue.destination as? IndexControllerX, let row = sender as? RootRow, let item = row.item {
-                controller.setup(for: item.entity, context: application.collection.managedObjectContext)
+            if let controller = segue.destination as? IndexControllerX, let row = sender as? RootRow, let item = row.item, let entity = item.entity {
+                controller.setup(for: entity, context: application.collection.managedObjectContext)
             }
         }
     }

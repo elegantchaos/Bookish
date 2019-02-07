@@ -4,6 +4,7 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 import UIKit
+import BookishModel
 
 class RootRow: UITableViewCell {
     
@@ -20,8 +21,10 @@ class RootCategoryRow: RootRow {
     
     override func setup(for item: RootController.Item) {
         super.setup(for: item)
-        itemLabel.text = item.name
-        itemImage.image = UIImage(named: "\(item.entity)Placeholder")
+        if let entity = item.entity {
+            itemLabel.text = entity.categoryLabel
+            itemImage.image = UIImage(named: entity.categoryPlaceholderName)
+        }
     }
 }
 

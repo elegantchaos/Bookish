@@ -22,10 +22,9 @@ protocol DetailControllerP: UIViewController {
 }
 
 class IndexControllerX: UITableViewController, NSFetchedResultsControllerDelegate, ActionContextProvider, EntityIndex, ActionObserver {
-    typealias EntityType = ModelObject
-    var entityName = ""
-    var modelContext: NSManagedObjectContext? = nil
-    lazy var fetcher: NSFetchedResultsController<EntityType> = makeFetcher()
+    var entityType: ModelObject.Type?
+    var modelContext: NSManagedObjectContext?
+    lazy var fetcher: NSFetchedResultsController<ModelObject> = makeFetcher()
     
     @IBOutlet var indexTable: UITableView!
     
@@ -39,21 +38,23 @@ class IndexControllerX: UITableViewController, NSFetchedResultsControllerDelegat
 //    }
     
     override func viewDidLoad() {
-        indexViewChannel.debug("\(entityName) index didLoad")
+        indexViewChannel.debug("\(entityType!) index didLoad")
         super.viewDidLoad()
         navigationItem.rightBarButtonItem = editButtonItem
     }
     
-    func setup(for entityName: String, context: NSManagedObjectContext) {
-        indexViewChannel.debug("\(entityName) setup")
+    func setup(for entityType: ModelObject.Type, context: NSManagedObjectContext) {
+        indexViewChannel.debug("\(entityType) setup")
+        self.entityType = entityType
         self.modelContext = context
-        self.entityName = entityName
-        self.title = entityName
+        self.title = entityType.categoryLabel
         reload()
     }
     
     func reset() {
-        NSFetchedResultsController<EntityType>.deleteCache(withName: entityName)
+        if let cacheName = entityType?.categoryLabel {
+            NSFetchedResultsController<ModelObject>.deleteCache(withName: cacheName)
+        }
         navigationController?.popToRootViewController(animated: false)
 //        detailController?.reset()
         modelContext = nil
@@ -68,13 +69,13 @@ class IndexControllerX: UITableViewController, NSFetchedResultsControllerDelegat
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        indexViewChannel.debug("\(entityName) index willAppear")
+        indexViewChannel.debug("\(entityType!) index willAppear")
         clearsSelectionOnViewWillAppear = splitViewController!.isCollapsed
         super.viewWillAppear(animated)
     }
     
     func select(object: NSManagedObject) {
-        if let entity = object as? EntityType {
+        if let entity = object as? ModelObject {
             if let index = fetcher.indexPath(forObject: entity) {
                 indexTable.selectRow(at: index, animated: true, scrollPosition: .bottom)
                 performSegue(withIdentifier: "showDetail", sender: self)
@@ -131,22 +132,23 @@ class IndexControllerX: UITableViewController, NSFetchedResultsControllerDelegat
             let book = fetcher.object(at: indexPath)
             let info = ActionInfo(sender: tableView)
             info[ActionContext.selectionKey] = [book]
-            application.actionManager.perform(identifier: "Delete\(entityName)", info: info)
+            application.actionManager.perform(identifier: "Delete\(entityType!)", info: info)
         }
     }
     
     
-    func makeFetcher() -> NSFetchedResultsController<EntityType> {
-        guard let context = modelContext else {
-            indexViewChannel.fatal("missing context")
+    func makeFetcher() -> NSFetchedResultsController<ModelObject> {
+        guard let context = modelContext, let entityType = entityType else {
+            indexViewChannel.fatal("missing context or entity type")
         }
         
-        let request = NSFetchRequest<EntityType>()
+        let request = NSFetchRequest<ModelObject>()
+        let entityName = String(describing: entityType)
         request.entity = context.persistentStoreCoordinator?.managedObjectModel.entitiesByName[entityName]
         request.fetchBatchSize = 20
         request.sortDescriptors = application.viewModel.bookIndexSorting
         
-        let controller = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: "sectionName", cacheName: entityName)
+        let controller = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: "sectionName", cacheName: entityType.categoryLabel)
         controller.delegate = self
         
         do {
@@ -202,12 +204,12 @@ class IndexControllerX: UITableViewController, NSFetchedResultsControllerDelegat
             
         case .update:
             
-            if let path = indexPath, let cell = tableView.cellForRow(at: path) as? IndexRow, let object = anObject as? EntityType {
+            if let path = indexPath, let cell = tableView.cellForRow(at: path) as? IndexRow, let object = anObject as? ModelObject {
                 cell.configure(for: object)
             }
             
         case .move:
-            if let path = indexPath, let newPath = newIndexPath, let cell = tableView.cellForRow(at: path) as? IndexRow, let object = anObject as? EntityType {
+            if let path = indexPath, let newPath = newIndexPath, let cell = tableView.cellForRow(at: path) as? IndexRow, let object = anObject as? ModelObject {
                 cell.configure(for: object)
                 tableView.moveRow(at: path, to: newPath)
             }
