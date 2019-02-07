@@ -8,9 +8,9 @@ import BookishModel
 
 class RootRow: UITableViewCell {
     
-    var item: RootController.Item?
+    var item: CollectionController.Item?
     
-    func setup(for item: RootController.Item) {
+    func setup(for item: CollectionController.Item) {
         self.item = item
     }
 }
@@ -19,7 +19,7 @@ class RootCategoryRow: RootRow {
     @IBOutlet weak var itemLabel: UILabel!
     @IBOutlet weak var itemImage: UIImageView!
     
-    override func setup(for item: RootController.Item) {
+    override func setup(for item: CollectionController.Item) {
         super.setup(for: item)
         if let entity = item.entity {
             itemLabel.text = entity.categoryLabel

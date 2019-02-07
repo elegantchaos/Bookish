@@ -6,7 +6,7 @@
 import UIKit
 import BookishModel
 
-class RootController: UITableViewController {
+class CollectionController: UITableViewController {
     var collapseDetailViewController: Bool = true
 
     struct Item {
@@ -61,9 +61,9 @@ class RootController: UITableViewController {
     }
 }
 
-extension RootController: UISplitViewControllerDelegate {
+extension CollectionController: UISplitViewControllerDelegate {
     func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController: UIViewController, onto primaryViewController: UIViewController) -> Bool {
-        guard let nav = primaryViewController as? UINavigationController, let controller = nav.topViewController as? RootController else {
+        guard let nav = primaryViewController as? UINavigationController, let controller = nav.topViewController as? CollectionController else {
             return true
         }
         

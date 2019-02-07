@@ -64,7 +64,7 @@
 		22A3E30721FB8AF500BA4F17 /* Ensembles.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22A3E0C421FA014F00BA4F17 /* Ensembles.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		22A69BF521C2DDE600043C3A /* LoggerKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A69BF421C2DDE600043C3A /* LoggerKit.framework */; };
 		22A8318822049CB2006A0952 /* IndexRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A8318722049CB2006A0952 /* IndexRow.swift */; };
-		22A8318A2204AAB2006A0952 /* RootController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A831892204AAB2006A0952 /* RootController.swift */; };
+		22A8318A2204AAB2006A0952 /* CollectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A831892204AAB2006A0952 /* CollectionController.swift */; };
 		22A8318C2204B410006A0952 /* RootRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A8318B2204B410006A0952 /* RootRow.swift */; };
 		22A8318E2204B68B006A0952 /* IndexController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A8318D2204B68B006A0952 /* IndexController.swift */; };
 		22ADA16321FF5C9C00DB0975 /* ChooseRoleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22ADA16221FF5C9C00DB0975 /* ChooseRoleController.swift */; };
@@ -262,7 +262,7 @@
 		22A3E0C421FA014F00BA4F17 /* Ensembles.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Ensembles.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		22A69BF421C2DDE600043C3A /* LoggerKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = LoggerKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		22A8318722049CB2006A0952 /* IndexRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexRow.swift; sourceTree = "<group>"; };
-		22A831892204AAB2006A0952 /* RootController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootController.swift; sourceTree = "<group>"; };
+		22A831892204AAB2006A0952 /* CollectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionController.swift; sourceTree = "<group>"; };
 		22A8318B2204B410006A0952 /* RootRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootRow.swift; sourceTree = "<group>"; };
 		22A8318D2204B68B006A0952 /* IndexController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexController.swift; sourceTree = "<group>"; };
 		22ADA16221FF5C9C00DB0975 /* ChooseRoleController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseRoleController.swift; sourceTree = "<group>"; };
@@ -430,7 +430,7 @@
 				22D1B23C21807F7B0062F2CB /* ApplicationRootController.swift */,
 				22F1803021C82D8E00220D20 /* DetailController.swift */,
 				22A8318D2204B68B006A0952 /* IndexController.swift */,
-				22A831892204AAB2006A0952 /* RootController.swift */,
+				22A831892204AAB2006A0952 /* CollectionController.swift */,
 				22F180A321C951FF00220D20 /* SettingsController.swift */,
 			);
 			path = Controllers;
@@ -1049,7 +1049,7 @@
 				22DA6A4221E6525400ECF09A /* CDECloudKitFileSystem.m in Sources */,
 				22D1B233217E42950062F2CB /* TextBinding.swift in Sources */,
 				22A8318C2204B410006A0952 /* RootRow.swift in Sources */,
-				22A8318A2204AAB2006A0952 /* RootController.swift in Sources */,
+				22A8318A2204AAB2006A0952 /* CollectionController.swift in Sources */,
 				22B1DB412178D8A50067E795 /* ViewExtensions.swift in Sources */,
 				22387990220B05810019F9EA /* Details.swift in Sources */,
 				22D1B239218079C60062F2CB /* CollectionViewModel.swift in Sources */,
