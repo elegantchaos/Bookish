@@ -76,7 +76,7 @@
 		22D1B233217E42950062F2CB /* TextBinding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D1B232217E42950062F2CB /* TextBinding.swift */; };
 		22D1B239218079C60062F2CB /* CollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D1B238218079C60062F2CB /* CollectionViewModel.swift */; };
 		22D1B23B21807D230062F2CB /* BookRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D1B23A21807D230062F2CB /* BookRow.swift */; };
-		22D1B23D21807F7B0062F2CB /* CollectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D1B23C21807F7B0062F2CB /* CollectionController.swift */; };
+		22D1B23D21807F7B0062F2CB /* ApplicationRootController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D1B23C21807F7B0062F2CB /* ApplicationRootController.swift */; };
 		22D1B23E2180BF550062F2CB /* Actions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F35486216FAC0100443C0B /* Actions.framework */; };
 		22D1B23F2180BF5D0062F2CB /* Logger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22DAF399217B5305003CE28B /* Logger.framework */; };
 		22D1B2402180BF6D0062F2CB /* ActionsKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22DAF397217B52E6003CE28B /* ActionsKit.framework */; };
@@ -273,7 +273,7 @@
 		22D1B232217E42950062F2CB /* TextBinding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextBinding.swift; sourceTree = "<group>"; };
 		22D1B238218079C60062F2CB /* CollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewModel.swift; sourceTree = "<group>"; };
 		22D1B23A21807D230062F2CB /* BookRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookRow.swift; sourceTree = "<group>"; };
-		22D1B23C21807F7B0062F2CB /* CollectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionController.swift; sourceTree = "<group>"; };
+		22D1B23C21807F7B0062F2CB /* ApplicationRootController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationRootController.swift; sourceTree = "<group>"; };
 		22D1B2422180CA9E0062F2CB /* BookCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCell.swift; sourceTree = "<group>"; };
 		22D1B2482180D7B60062F2CB /* BookDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailCell.swift; sourceTree = "<group>"; };
 		22D1B24A2180E9060062F2CB /* PersonRoleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonRoleCell.swift; sourceTree = "<group>"; };
@@ -427,7 +427,7 @@
 				2237D28422020C8F0033924F /* ChooseEntityController.swift */,
 				2237D28222020C3B0033924F /* ChoosePersonController.swift */,
 				22ADA16221FF5C9C00DB0975 /* ChooseRoleController.swift */,
-				22D1B23C21807F7B0062F2CB /* CollectionController.swift */,
+				22D1B23C21807F7B0062F2CB /* ApplicationRootController.swift */,
 				22F1803021C82D8E00220D20 /* DetailController.swift */,
 				22A8318D2204B68B006A0952 /* IndexController.swift */,
 				22A831892204AAB2006A0952 /* RootController.swift */,
@@ -1061,7 +1061,7 @@
 				2237D28522020C8F0033924F /* ChooseEntityController.swift in Sources */,
 				22A8318822049CB2006A0952 /* IndexRow.swift in Sources */,
 				22A8318E2204B68B006A0952 /* IndexController.swift in Sources */,
-				22D1B23D21807F7B0062F2CB /* CollectionController.swift in Sources */,
+				22D1B23D21807F7B0062F2CB /* ApplicationRootController.swift in Sources */,
 				22ADA16321FF5C9C00DB0975 /* ChooseRoleController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

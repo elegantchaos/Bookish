@@ -225,10 +225,10 @@
             </objects>
             <point key="canvasLocation" x="-927" y="3313"/>
         </scene>
-        <!--Collection Controller-->
+        <!--Application Root Controller-->
         <scene sceneID="atk-Nd-z8K">
             <objects>
-                <splitViewController id="2I7-7n-d9F" customClass="CollectionController" customModule="Bookish" customModuleProvider="target" sceneMemberID="viewController">
+                <splitViewController id="2I7-7n-d9F" customClass="ApplicationRootController" customModule="Bookish" customModuleProvider="target" sceneMemberID="viewController">
                     <connections>
                         <segue destination="LDw-Js-eN4" kind="relationship" relationship="masterViewController" id="iQA-A7-3Cx"/>
                         <segue destination="eOD-1j-hXg" kind="relationship" relationship="detailViewController" id="wHW-t9-qJD"/>

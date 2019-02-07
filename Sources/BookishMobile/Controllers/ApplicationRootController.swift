@@ -8,7 +8,7 @@ import CoreData
 import BookishModel
 import Actions
 
-class CollectionController: UISplitViewController {
+class ApplicationRootController: UISplitViewController {
     var observers = [NSKeyValueObservation]()
     
     var indexControllers: [String:Any] = [:]
@@ -61,31 +61,31 @@ class CollectionController: UISplitViewController {
     }
 }
 
-extension CollectionController: BookViewer {
+extension ApplicationRootController: BookViewer {
     @objc func reveal(book: Book) {
         reveal(book, mode: .books)
     }
 }
 
-extension CollectionController: PersonViewer {
+extension ApplicationRootController: PersonViewer {
     @objc func reveal(person: Person) {
         reveal(person, mode: .people)
     }
 }
 
-extension CollectionController: PublisherViewer {
+extension ApplicationRootController: PublisherViewer {
     func reveal(publisher: Publisher) {
         reveal(publisher, mode: .publisher)
     }
 }
 
-extension CollectionController: SeriesViewer {
+extension ApplicationRootController: SeriesViewer {
     func reveal(series: Series) {
         reveal(series, mode: .series)
     }
 }
 
-extension CollectionController: UISplitViewControllerDelegate {
+extension ApplicationRootController: UISplitViewControllerDelegate {
     func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController:UIViewController, onto primaryViewController:UIViewController) -> Bool {
         guard let secondaryAsNavController = secondaryViewController as? UINavigationController else { return false }
         

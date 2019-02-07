@@ -21,7 +21,7 @@ class Application: UIResponder {
     let imageCache = UIImageCache()
     let cloud = CloudManager()
     @objc dynamic let viewModel = CollectionViewModel()
-    var collectionController: CollectionController!
+    var collectionController: ApplicationRootController!
     lazy var collection: SyncedCollection = setupCollection()
     
     func setupCollection(mode: CollectionContainer.PopulateMode = .defaultRoles) -> SyncedCollection {
