@@ -8,9 +8,8 @@ import AppKit
 
 class BookHeadingCell: NSTableCellView, BookDetailTableCell {
     func setup(for detailView: BookDetailViewController, row: DetailItem) {
-        let source = detailView.source
         if let field = subviews.first as? NSTextField {
-            field.stringValue = source.heading(for: row)
+            field.stringValue = row.heading
         }
     }
     

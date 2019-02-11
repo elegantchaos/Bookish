@@ -21,7 +21,7 @@ import UIKit
         set (value) { modeIndex = value.rawValue }
     }
 
-    let bookIndexSorting = [NSSortDescriptor(key: "sortName", ascending: true)]
+    let bookSorting = [NSSortDescriptor(key: "sortName", ascending: true)]
     let personIndexSorting = [NSSortDescriptor(key: "sortName", ascending: true)]
     let relationshipSorting = [NSSortDescriptor(key: "role.name", ascending: true)]
     let entrySorting = [NSSortDescriptor(key: "position", ascending: true)]

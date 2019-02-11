@@ -17,7 +17,7 @@ class BookDimensionsCell: AnnotatedTableCellView, BookDetailTableCell {
     @IBOutlet weak var lengthField: NSTextField!
     
     func setup(for view: BookDetailViewController, row: DetailItem) {
-        assert(row.category == .detail)
+        assert(row is SimpleDetailItem)
         
         index = view.index
         setupValue(field: widthField, property: "width")

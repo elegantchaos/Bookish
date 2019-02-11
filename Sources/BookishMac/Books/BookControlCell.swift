@@ -13,40 +13,13 @@ class BookControlCell: NSTableCellView, BookDetailTableCell {
     private var objectKey: String = ""
     
     func setup(for detailView: BookDetailViewController, row: DetailItem) {
-        let source = detailView.source
-
-        var hidden = false
-        var identifier: String? = nil
-        
-        switch row.kind {
-        case .series:
-            if !row.placeholder {
-                objectValue = source.series(for: row)
-                objectKey = SeriesAction.seriesKey
-                identifier = "button.RemoveSeries"
-            }
-
-        case .person:
-            if !row.placeholder {
-                objectValue = source.relationship(for: row)
-                objectKey = PersonAction.relationshipKey
-                identifier = "button.RemoveRelationship"
-            }
-            
-        case .publisher:
-            if !row.placeholder {
-                objectValue = source.publisher(for: row)
-                objectKey = PublisherAction.newPublisherKey
-                identifier = "button.RemovePublisher"
-            }
-            
-        default:
-            hidden = true
-        }
-        
-        removeButton.isHidden = hidden
-        if let identifier = identifier {
+        if let (key, identifier, object) = row.removeAction {
+            objectValue = object
+            objectKey = key
             removeButton.identifier = NSUserInterfaceItemIdentifier(rawValue: identifier)
+            removeButton.isHidden = false
+        } else {
+            removeButton.isHidden = true
         }
     }
     

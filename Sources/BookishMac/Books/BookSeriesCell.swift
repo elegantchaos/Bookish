@@ -16,14 +16,13 @@ class BookSeriesCell: AnnotatedTableCellView {
 
 extension BookSeriesCell: BookDetailTableCell {
     func setup(for view: BookDetailViewController, row: DetailItem) {
-        assert(row.category == .series)
-        let source = view.source
+        assert(row is SeriesDetailItem)
+        
         detailView = view
         if row.placeholder {
             seriesCombo.stringValue = ""
             positionField.stringValue = ""
-        } else {
-            let series = source.series(for: row)
+        } else if let item = row as? SeriesDetailItem, let series = item.series {
             objectValue = series
             if let name = series.name {
                 seriesField?.stringValue = name

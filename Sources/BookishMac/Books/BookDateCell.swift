@@ -13,16 +13,17 @@ class BookDateCell: NSTableCellView {
 
 extension BookDateCell: BookDetailTableCell {
     func setup(for view: BookDetailViewController, row: DetailItem) {
-        assert(row.category == .detail)
+        assert(row is SimpleDetailItem)
         if let subview = textField,
-            let transformer = ValueTransformer(forName: NSValueTransformerName(rawValue: "DateToString")) {
-            let detail = view.source.details(for: row)
+            let transformer = ValueTransformer(forName: NSValueTransformerName(rawValue: "DateToString")),
+            let item = row as? SimpleDetailItem {
+            let binding = item.spec.binding
             let options: [NSBindingOption:Any] = [
                 .valueTransformer: transformer,
             ]
             
-            subview.identifier = NSUserInterfaceItemIdentifier(rawValue: "date-detail-\(detail.binding)")
-            subview.bind(NSBindingName(rawValue: "value"), to:view.index, withKeyPath:"selection.\(detail.binding)", options: options)
+            subview.identifier = NSUserInterfaceItemIdentifier(rawValue: "date-detail-\(binding)")
+            subview.bind(NSBindingName(rawValue: "value"), to:view.index, withKeyPath:"selection.\(binding)", options: options)
         }
     }
     

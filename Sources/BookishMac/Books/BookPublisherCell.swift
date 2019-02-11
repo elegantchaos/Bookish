@@ -16,14 +16,14 @@ class BookPublisherCell: AnnotatedTableCellView {
 
 extension BookPublisherCell: BookDetailTableCell {
     func setup(for view: BookDetailViewController, row: DetailItem) {
-        assert(row.category == .publisher)
-        let source = view.source
+        assert(row is PublisherDetailItem)
+
         detailView = view
+
         if row.placeholder {
             publisherCombo.stringValue = ""
             detailChannel.debug("setup as a placeholder")
-        } else {
-            let publisher = source.publisher(for: row)
+        } else if let item = row as? PublisherDetailItem, let publisher = item.publisher {
             objectValue = publisher
             if let name = publisher.name {
                 if view.editing {

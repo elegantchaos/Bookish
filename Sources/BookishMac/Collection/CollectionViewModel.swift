@@ -47,6 +47,8 @@ import BookishModel
     @objc var publisherSorting = [NSSortDescriptor(key: "sortName", ascending: true)]
     @objc var seriesSorting = [NSSortDescriptor(key: "sortName", ascending: true)]
     @objc var roleSorting = [NSSortDescriptor(key: "name", ascending: true)]
+    @objc var entrySorting = [NSSortDescriptor(key: "position", ascending: true)]
+    @objc var relationshipSorting = [NSSortDescriptor(key: "role.name", ascending: true)]
 
     var mode: Mode {
         get { return Mode(rawValue: modeIndex)! }
@@ -90,4 +92,7 @@ extension CollectionViewModel: WindowControllerViewModel {
     
     func didConnect(to window: CollectionWindowController) {
     }
+}
+
+extension CollectionViewModel: DetailContext {
 }

@@ -36,7 +36,7 @@ class BookDetailViewController: DetailController<Book>, BookLifecycleObserver {
 
     func calculateRows() {
         let selection = (index.selectedObjects as? [Book]) ?? []
-        source.filter(for: selection, editing: editing)
+        source.filter(for: selection, editing: editing, context: cvm)
     }
 
     override func updateRows() {
@@ -47,13 +47,13 @@ class BookDetailViewController: DetailController<Book>, BookLifecycleObserver {
     }
  
     override func numberOfRows(in tableView: NSTableView) -> Int {
-        return source.rows
+        return source.itemCount(for: 0)
     }
     
     override func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         guard let columnID = tableColumn?.identifier else { return nil }
         
-        let rowInfo = source.info(for: row)
+        let rowInfo = source.info(section: 0, row: row)
         let viewID = NSUserInterfaceItemIdentifier(rawValue: rowInfo.viewID(for: columnID.rawValue))
         
         guard let view = tableView.makeView(withIdentifier: viewID, owner: self) else { return nil }
