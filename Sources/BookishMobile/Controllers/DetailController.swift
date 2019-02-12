@@ -11,29 +11,7 @@ import Logger
 
 let detailViewChannel = Logger("DetailView")
 
-// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-//  Created by Sam Deane on 20/08/2018.
-//  All code (c) 2018 - present day, Elegant Chaos Limited.
-// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-
-import UIKit
-import BookishModel
-import Actions
-import Logger
-
-//class DetailController: UIViewController {
-//    var representedObject: EntityType? {
-//        didSet {
-//            detailViewChannel.debug("represented object changed for \(entityName)")
-//            configureView()
-//        }
-//    }
-//
-//}
-
-
-
-class DetailControllerX: UIViewController, UITableViewDataSource, UITableViewDelegate, ActionContextProvider {
+class DetailController: UIViewController, UITableViewDataSource, UITableViewDelegate, ActionContextProvider {
     typealias EntityType = ModelObject
     
     @IBOutlet weak var detailView: UITableView!
@@ -189,7 +167,7 @@ class DetailControllerX: UIViewController, UITableViewDataSource, UITableViewDel
     
 }
 
-extension DetailControllerX: EditableView {
+extension DetailController: EditableView {
     func setEditing(_ editing: Bool) {
         isEditing = editing
     }

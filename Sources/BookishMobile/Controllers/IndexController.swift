@@ -28,9 +28,9 @@ class IndexController: UITableViewController, NSFetchedResultsControllerDelegate
     
     @IBOutlet var indexTable: UITableView!
     
-    var detailController: DetailControllerX? {
+    var detailController: DetailController? {
         if let detailNavigation = splitViewController?.viewControllers.last as? UINavigationController {
-            return detailNavigation.topViewController as? DetailControllerX
+            return detailNavigation.topViewController as? DetailController
         }
 
         return nil
@@ -86,7 +86,7 @@ class IndexController: UITableViewController, NSFetchedResultsControllerDelegate
         if segue.identifier == "showDetail" {
             if let indexPath = tableView.indexPathForSelectedRow {
                 let object = fetcher.object(at: indexPath)
-                if let nav = segue.destination as? UINavigationController, let detail = nav.topViewController as? DetailControllerX {
+                if let nav = segue.destination as? UINavigationController, let detail = nav.topViewController as? DetailController {
                     detail.setup(for: object)
                 }
             }

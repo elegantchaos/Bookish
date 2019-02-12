@@ -424,13 +424,13 @@
 		223879BE220B44A40019F9EA /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				22D1B23C21807F7B0062F2CB /* ApplicationRootController.swift */,
 				2237D28422020C8F0033924F /* ChooseEntityController.swift */,
 				2237D28222020C3B0033924F /* ChoosePersonController.swift */,
 				22ADA16221FF5C9C00DB0975 /* ChooseRoleController.swift */,
-				22D1B23C21807F7B0062F2CB /* ApplicationRootController.swift */,
+				22A831892204AAB2006A0952 /* CollectionController.swift */,
 				22F1803021C82D8E00220D20 /* DetailController.swift */,
 				22A8318D2204B68B006A0952 /* IndexController.swift */,
-				22A831892204AAB2006A0952 /* CollectionController.swift */,
 				22F180A321C951FF00220D20 /* SettingsController.swift */,
 			);
 			path = Controllers;
