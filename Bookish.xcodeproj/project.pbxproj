@@ -1022,9 +1022,9 @@
 			name = "Export From Sketch";
 			outputFileListPaths = (
 				"",
-				"$(SRCROOT)/Sources/BookishMobile/Resources/Assets.xcfilelist",
 			);
 			outputPaths = (
+				"${SRCROOT}/Sources/BookishMobile/Resources/Assets.xcassets",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

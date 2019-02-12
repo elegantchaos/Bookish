@@ -53,7 +53,7 @@ class PersonRow: BookDetailRow {
     override func setupContent(row: DetailItem, book: Book) {
         if let item = row as? PersonDetailItem {
             if item.placeholder {
-                role = Role.named(Role.StandardNames.author, in: book.managedObjectContext!)
+                role = Role.named(Role.StandardName.author, in: book.managedObjectContext!)
             } else {
                 relationship = item.relationship
                 role = relationship?.role

@@ -40,6 +40,7 @@ class IndexController: UITableViewController, NSFetchedResultsControllerDelegate
         indexViewChannel.debug("\(entityType!) index didLoad")
         super.viewDidLoad()
         navigationItem.rightBarButtonItem = editButtonItem
+        fetch(filter: "")
     }
     
     func setup(for entityType: ModelObject.Type, context: NSManagedObjectContext) {
@@ -62,9 +63,7 @@ class IndexController: UITableViewController, NSFetchedResultsControllerDelegate
     
     func reload() {
         fetcher = makeFetcher()
-        if let indexTable = view as? UITableView {
-            indexTable.reloadData()
-        }
+        fetch(filter: "")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -115,9 +114,15 @@ class IndexController: UITableViewController, NSFetchedResultsControllerDelegate
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "item", for: indexPath) as! IndexRow
-        let item = fetcher.object(at: indexPath)
-        cell.configure(for: item)
+        let cell: UITableViewCell
+        if tableView == indexTable {
+            cell = tableView.dequeueReusableCell(withIdentifier: "item", for: indexPath)
+            let item = fetcher.object(at: indexPath)
+            (cell as! IndexRow).configure(for: item)
+        } else {
+            cell = UITableViewCell(style: .default, reuseIdentifier: "search")
+        }
+        
         return cell
     }
     
@@ -144,22 +149,11 @@ class IndexController: UITableViewController, NSFetchedResultsControllerDelegate
         let entityName = String(describing: entityType)
         request.entity = context.persistentStoreCoordinator?.managedObjectModel.entitiesByName[entityName]
         request.fetchBatchSize = 20
-        request.sortDescriptors = application.viewModel.bookIndexSorting
+        request.sortDescriptors = application.viewModel.bookSorting
+        request.predicate = NSPredicate(format: "name contains[cd] \"z\"")
         
         let controller = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: "sectionName", cacheName: entityType.categoryLabel)
         controller.delegate = self
-        
-        do {
-            try controller.performFetch()
-            DispatchQueue.main.async {
-                self.selectIfNecessary()
-            }
-            
-        } catch {
-            let nserror = error as NSError
-            indexViewChannel.fatal("couldn't make fetch controller \(nserror), \(nserror.userInfo)")
-        }
-        
         return controller
     }
     
@@ -235,6 +229,29 @@ class IndexController: UITableViewController, NSFetchedResultsControllerDelegate
     
 }
 
+extension IndexController: UISearchBarDelegate {
+    func fetch(filter: String) {
+//        let predicate = filter.isEmpty ? nil : NSPredicate(format: "name contains[cd] z")
+//        fetcher = makeFetcher()
+//        fetcher.fetchRequest.predicate = predicate
+//
+        do {
+            NSFetchedResultsController<ModelObject>.deleteCache(withName: entityType!.categoryLabel)
+            try fetcher.performFetch()
+            tableView.reloadData()
+        } catch let err {
+            print(err)
+        }
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        fetch(filter: searchBar.text ?? "")
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        fetch(filter: "")
+    }
+}
 
 /*
  
