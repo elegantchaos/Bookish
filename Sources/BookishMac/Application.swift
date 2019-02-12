@@ -126,7 +126,7 @@ extension Application: NSApplicationDelegate {
 }
 
 extension Application: NSMenuItemValidation {
-    func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
+    override func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
         switch menuItem.action {
         case #selector(delete(_:)):
             // special case for the Delete menu item in the Edit menu

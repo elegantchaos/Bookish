@@ -44,7 +44,7 @@ class AnnotatedTableCellView: NSTableCellView, NSTextFieldDelegate {
         }
     }
 
-    dynamic func controlTextDidEndEditing(_ obj: Notification) {
+    override dynamic func controlTextDidEndEditing(_ obj: Notification) {
         hideButtons()
     }
     

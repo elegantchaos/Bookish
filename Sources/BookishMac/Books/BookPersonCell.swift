@@ -36,14 +36,12 @@ class BookPersonCell: AnnotatedTableCellView {
 
 extension BookPersonCell: BookDetailTableCell {
     func setup(for view: BookDetailViewController, row: DetailItem) {
-        assert(row.category == .person)
-        let source = view.source
+        assert(row is PersonDetailItem)
         detailView = view
         if row.placeholder {
             personCombo.stringValue = ""
             detailChannel.debug("setup as a placeholder")
-        } else {
-            let relationship = source.relationship(for: row)
+        } else if let item = row as? PersonDetailItem, let relationship = item.relationship {
             objectValue = relationship
             if let person = relationship.person, let name = person.name {
                 if !detailView.editing {

@@ -67,7 +67,7 @@ class CollectionRootViewController: CollectionViewController {
 }
 
 extension CollectionRootViewController: NSMenuItemValidation {
-    func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
+    override func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
         switch menuItem.action {
         case #selector(undo(_:)):
             return cvm.managedObjectContext.undoManager?.canUndo ?? false

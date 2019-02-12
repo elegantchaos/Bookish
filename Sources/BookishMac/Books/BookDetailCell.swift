@@ -15,15 +15,15 @@ class BookDetailCell: AnnotatedTableCellView, BookDetailTableCell {
     var asNumber = false
     
     func setup(for view: BookDetailViewController, row: DetailItem) {
-        assert(row.category == .detail)
+        assert(row is SimpleDetailItem)
         
         detailView = view
-        if let subview = textField {
-            let detail = view.source.details(for: row)
-            subview.identifier = NSUserInterfaceItemIdentifier(rawValue: "detail-\(detail.binding)")
+        if let item = row as? SimpleDetailItem, let subview = textField {
+            let binding = item.spec.binding
+            subview.identifier = NSUserInterfaceItemIdentifier(rawValue: "detail-\(binding)")
             subview.isEditable = view.editing
-            objectValue = detail
-            view.index.addObserver(self, forKeyPath: "selection.\(detail.binding)", options: [.initial], context: &detailBindingContext)
+            objectValue = item.spec
+            view.index.addObserver(self, forKeyPath: "selection.\(binding)", options: [.initial], context: &detailBindingContext)
         }
     }
     
