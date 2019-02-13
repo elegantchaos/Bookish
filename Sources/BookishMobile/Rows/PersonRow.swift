@@ -67,9 +67,9 @@ class PersonRow: BookDetailRow {
     
     func setupPerson() {
         let personName = person?.name ?? ""
-        personField.font = application.viewModel.detailFont
+        personField.font = application.viewState.detailFont
         personField.text = personName
-        personButton.setTitle(personName, font: application.viewModel.detailFont)
+        personButton.setTitle(personName, font: application.viewState.detailFont)
         personButton.linkedObject = person
         let editing = info.source.isEditing
         personButton.isHidden = editing
@@ -83,7 +83,7 @@ class PersonRow: BookDetailRow {
         
         let editing = info.source.isEditing
         label.isHidden = editing
-        roleButton.setTitle(roleName, font: application.viewModel.detailFont)
+        roleButton.setTitle(roleName, font: application.viewState.detailFont)
         roleButton.isHidden = !editing
     }
     

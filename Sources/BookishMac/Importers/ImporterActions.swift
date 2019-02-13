@@ -166,12 +166,12 @@ class ImportMergedAction: ImporterAction {
     }
     
     override func validate(context: ActionContext) -> Bool {
-        let viewModel = context.info[ActionContext.viewModelKey] as? CollectionViewModel
+        let viewModel = context.info[ActionContext.viewModelKey] as? CollectionViewState
         return (viewModel != nil) && (importer(for: context)?.canImport ?? false)
     }
     
     override func perform(context: ActionContext) {
-        if let viewModel = context.info[ActionContext.viewModelKey] as? CollectionViewModel {
+        if let viewModel = context.info[ActionContext.viewModelKey] as? CollectionViewState {
             if let importer = importer(for: context) {
                 let request = MergeImportRequest(importer: importer, collection: viewModel.collection)
                 request.queue()
@@ -236,7 +236,7 @@ class FillMergeMenuAction: ImporterAction {
             return false
         }
         
-        if let item = context.sender as? NSMenuItem, let _ = context.info[ActionContext.viewModelKey] as? CollectionViewModel {
+        if let item = context.sender as? NSMenuItem, let _ = context.info[ActionContext.viewModelKey] as? CollectionViewState {
             item.submenu = ImporterAction.makeImportMenu(action: "ImportMerged")
             return true
         }

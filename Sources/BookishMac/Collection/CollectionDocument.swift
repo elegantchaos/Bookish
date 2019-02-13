@@ -64,7 +64,7 @@ class CollectionDocument: NSPersistentDocument {
     
     
     override func makeWindowControllers() {
-        let viewModel = CollectionViewModel(collection: self.collection)
+        let viewModel = CollectionViewState(collection: self.collection)
         let windowController = Application.sharedInstance.windowControllerFactory.instantiateController(for: viewModel)
         self.addWindowController(windowController)
     }

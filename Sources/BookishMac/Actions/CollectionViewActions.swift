@@ -10,8 +10,8 @@ import Logger
 let itemActionChannel = Logger("ItemAction")
 
 extension ActionContext {
-    var viewModel : CollectionViewModel? {
-        return info[ActionContext.viewModelKey] as? CollectionViewModel
+    var viewModel : CollectionViewState? {
+        return info[ActionContext.viewModelKey] as? CollectionViewState
     }
 }
 
@@ -23,14 +23,14 @@ class ItemAction: DelegatedAction {
         ]
     }
     
-    class func actionIdentifier(for mode: CollectionViewModel.Mode, action: String, context: ActionContext) -> String {
+    class func actionIdentifier(for mode: CollectionViewState.Mode, action: String, context: ActionContext) -> String {
         let identifier = "\(action)\(mode.singluarName())"
         itemActionChannel.debug("Identifier \(identifier) for \(mode) \(context)")
         return identifier
     }
     
-    func viewModel(for context: ActionContext) -> CollectionViewModel? {
-        return context.info[ActionContext.viewModelKey] as? CollectionViewModel
+    func viewModel(for context: ActionContext) -> CollectionViewState? {
+        return context.info[ActionContext.viewModelKey] as? CollectionViewState
     }
 }
 

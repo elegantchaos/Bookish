@@ -10,7 +10,7 @@ class IndexRow: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
         
     func configure(for object: ModelObject) {
-        titleLabel?.font = application.viewModel.indexFont
+        titleLabel?.font = application.viewState.indexFont
         titleLabel?.text = object.value(forKey: "name") as? String
     }
 }

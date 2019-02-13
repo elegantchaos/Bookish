@@ -20,7 +20,7 @@ let applicationChannel = Logger("Application")
 
 @NSApplicationMain class Application: NSObject {
     
-    let windowControllerFactory = WindowControllerFactory<CollectionViewModel>()
+    let windowControllerFactory = WindowControllerFactory<CollectionViewState>()
     let actionManager = ActionManagerMac()
     let importManager = ImportManager()
     let imageCache = NSImageCache()
@@ -28,7 +28,7 @@ let applicationChannel = Logger("Application")
     let uiTesting = CommandLine.arguments.contains("--ui-testing")
     var testDocument = CommandLine.arguments.contains("--test-document")
     let noBlankDocument = CommandLine.arguments.contains("--no-blank-document")
-    var viewModel: CollectionViewModel?
+    var viewModel: CollectionViewState?
     var watchedMenuItem: NSMenuItem?
     var windowController: CollectionWindowController!
     
@@ -69,7 +69,7 @@ let applicationChannel = Logger("Application")
     }
 
     fileprivate func setupWindow(for collection: SyncedCollection) {
-        let viewModel = CollectionViewModel(collection: collection)
+        let viewModel = CollectionViewState(collection: collection)
         self.viewModel = viewModel
         let windowController = self.windowControllerFactory.instantiateController(for: viewModel)
         self.windowController = windowController
@@ -126,7 +126,7 @@ extension Application: NSApplicationDelegate {
 }
 
 extension Application: NSMenuItemValidation {
-    override func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
+    /* override */ func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
         switch menuItem.action {
         case #selector(delete(_:)):
             // special case for the Delete menu item in the Edit menu

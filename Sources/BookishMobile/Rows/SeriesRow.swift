@@ -18,7 +18,7 @@ class SeriesRow: BookDetailRow {
             } else {
                 series = item.series
                 if let name = item.series?.name {
-                    seriesButton.setTitle(name, font: application.viewModel.detailFont)
+                    seriesButton.setTitle(name, font: application.viewState.detailFont)
                     seriesButton.linkedObject = series
                 }
             }

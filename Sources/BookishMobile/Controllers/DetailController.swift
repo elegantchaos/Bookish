@@ -48,7 +48,7 @@ class DetailController: UIViewController, UITableViewDataSource, UITableViewDele
     
     func configureView() {
         if let source = source, let object = representedObject, titleLabel != nil {
-            let vm = application.viewModel
+            let vm = application.viewState
             titleLabel.font = vm.titleFont
             subtitleLabel.font = vm.detailFont
             if let path = source.titleProperty {
@@ -77,7 +77,7 @@ class DetailController: UIViewController, UITableViewDataSource, UITableViewDele
         if let object = representedObject, titleLabel != nil {
             titleLabel.isEnabled = isEditing
             subtitleLabel.isEnabled = isEditing
-            source?.filter(for: [object], editing: isEditing, context:application.viewModel)
+            source?.filter(for: [object], editing: isEditing, context:application.viewState)
             validateButtons()
         }
     }
@@ -141,7 +141,7 @@ class DetailController: UIViewController, UITableViewDataSource, UITableViewDele
             let origin = button.convert(button.bounds.origin, to: detailView)
             if let index = detailView.indexPathForRow(at: origin), let cell = detailView.cellForRow(at: index) {
                 let target = targetAdaptor(cell)
-                controller.setup(target: target, sort: application.viewModel.roleSorting, collection: application.collection)
+                controller.setup(target: target, sort: application.viewState.roleSorting, collection: application.collection)
             }
         }
     }

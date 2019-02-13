@@ -4,23 +4,9 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 import UIKit
+import BookishModel
 
-@objc class CollectionViewModel: NSObject {
-    enum Mode: Int {
-        case books = 0
-        case people = 1
-        case publisher = 2
-        case series = 3
-        case settings = 4
-    }
-    
-    @objc dynamic var modeIndex: Int = Mode.books.rawValue
-    
-    var mode: Mode {
-        get { return Mode(rawValue: modeIndex)! }
-        set (value) { modeIndex = value.rawValue }
-    }
-
+@objc class CollectionViewState: NSObject {
     let bookSorting = [NSSortDescriptor(key: "sortName", ascending: true)]
     let personIndexSorting = [NSSortDescriptor(key: "sortName", ascending: true)]
     let relationshipSorting = [NSSortDescriptor(key: "role.name", ascending: true)]
@@ -38,7 +24,11 @@ import UIKit
         detailFont = UIFont.preferredFont(forTextStyle: .body)
         labelFont = detailFont
         titleFont = UIFont.preferredFont(forTextStyle: .title1)
-        indexFont = UIFont.preferredFont(forTextStyle: .subheadline)
+        indexFont = UIFont.preferredFont(forTextStyle: .title3)
         super.init()
     }
+}
+
+extension CollectionViewState: DetailContext {
+    
 }

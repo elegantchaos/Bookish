@@ -11,7 +11,7 @@ import Logger
 let validationChannel = Logger("Validation")
 
 class CollectionWindowController: NSWindowController, ActionContextProvider {
-    fileprivate var cvm: CollectionViewModel!
+    fileprivate var cvm: CollectionViewState!
     
     private var indexControllers: [String:Any] = [:]
 
@@ -33,7 +33,7 @@ class CollectionWindowController: NSWindowController, ActionContextProvider {
         }
     }
 
-    func reveal<EntityType: NSManagedObject>(_ object: EntityType, mode: CollectionViewModel.Mode) {
+    func reveal<EntityType: NSManagedObject>(_ object: EntityType, mode: CollectionViewState.Mode) {
         cvm.mode = mode
         if let name = EntityType.entity().name {
             if let index = indexControllers[name] as? IndexController<EntityType> {
@@ -48,13 +48,13 @@ class CollectionWindowController: NSWindowController, ActionContextProvider {
 }
 
 extension CollectionWindowController: WindowControllerWithViewModel {
-    var viewModel: CollectionViewModel {
+    var viewModel: CollectionViewState {
         return cvm
     }
     
-    typealias ViewModel = CollectionViewModel
+    typealias ViewModel = CollectionViewState
 
-    func didConnect(to viewModel: CollectionViewModel) {
+    func didConnect(to viewModel: CollectionViewState) {
         self.cvm = viewModel
     }
 }

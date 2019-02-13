@@ -23,7 +23,7 @@ class BookDetailRow: UITableViewCell, UITextViewDelegate, DetailRow {
     
     func setup(row: DetailItem, book: Book) {
         info = row
-        label.font = application.viewModel.labelFont
+        label.font = application.viewState.labelFont
         label.text = row.heading
         setupContent(row: row, book: book)
     }
@@ -40,7 +40,7 @@ class BookDetailRow: UITableViewCell, UITextViewDelegate, DetailRow {
     
     func setupContent(row: DetailItem, book: Book) {
         if let item = row as? SimpleDetailItem {
-            detail.font = application.viewModel.detailFont
+            detail.font = application.viewState.detailFont
             detail.isEditable = item.source.isEditing
             let binding = TextViewBinding(for: detail, to: book, path: item.spec.binding, setIfNull: true)
             bindings.append(binding)

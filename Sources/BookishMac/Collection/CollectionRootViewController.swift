@@ -34,7 +34,7 @@ class CollectionRootViewController: CollectionViewController {
             }
         }
         
-        observer = cvm.observe(\CollectionViewModel.modeIndex) { (cvm, change) in
+        observer = cvm.observe(\CollectionViewState.modeIndex) { (cvm, change) in
             self.setMarker(to: cvm.modeIndex)
         }
         
@@ -67,7 +67,7 @@ class CollectionRootViewController: CollectionViewController {
 }
 
 extension CollectionRootViewController: NSMenuItemValidation {
-    override func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
+    /* override */ func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
         switch menuItem.action {
         case #selector(undo(_:)):
             return cvm.managedObjectContext.undoManager?.canUndo ?? false

@@ -17,7 +17,7 @@ class PublisherRow: BookDetailRow {
                 
             } else {
                 publisher = item.publisher
-                publisherButton.setTitle(publisher.name, font: application.viewModel.detailFont)
+                publisherButton.setTitle(publisher.name, font: application.viewState.detailFont)
                 publisherButton.linkedObject = publisher
             }
         }

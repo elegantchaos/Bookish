@@ -9,9 +9,9 @@ import Logger
 let collectionViewChannel = Logger("CollectionView")
 
 class CollectionViewController: NSViewController, ViewControllerWithViewModel {
-    typealias ViewModel = CollectionViewModel
+    typealias ViewModel = CollectionViewState
     
-    @objc let cvm: CollectionViewModel
+    @objc let cvm: CollectionViewState
     
     required init?(coder: NSCoder) {
         self.cvm = Application.sharedInstance.windowControllerFactory.viewModel

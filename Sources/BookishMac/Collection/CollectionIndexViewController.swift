@@ -6,7 +6,7 @@
 import AppKit
 
 class CollectionIndexViewController: NSTabViewController {
-    @objc let cvm: CollectionViewModel
+    @objc let cvm: CollectionViewState
     
     required init?(coder: NSCoder) {
         self.cvm = Application.sharedInstance.windowControllerFactory.viewModel

@@ -10,7 +10,8 @@
 		220CDA9F214A86A80064CC91 /* PersonIndexViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220CDA9E214A86A80064CC91 /* PersonIndexViewController.swift */; };
 		220CDAA1214A8D510064CC91 /* PersonDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220CDAA0214A8D510064CC91 /* PersonDetailViewController.swift */; };
 		220EF17C2214782C0022F4D9 /* LinkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220EF17A221478070022F4D9 /* LinkButton.swift */; };
-		22143FCD212EE79100B689DF /* CollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22143FCC212EE79100B689DF /* CollectionViewModel.swift */; };
+		220EF17E2214836F0022F4D9 /* StoryboardApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220EF17D2214836F0022F4D9 /* StoryboardApplication.swift */; };
+		22143FCD212EE79100B689DF /* CollectionViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22143FCC212EE79100B689DF /* CollectionViewState.swift */; };
 		22143FCF212EF9CC00B689DF /* WindowControllerWithViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22143FCE212EF9CC00B689DF /* WindowControllerWithViewModel.swift */; };
 		22143FD1212F076000B689DF /* CollectionRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22143FD0212F076000B689DF /* CollectionRootViewController.swift */; };
 		22143FD3212F0F2500B689DF /* AuthorsTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22143FD2212F0F2500B689DF /* AuthorsTransformer.swift */; };
@@ -75,7 +76,7 @@
 		22D1B22F217E0A3F0062F2CB /* PersonRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D1B22E217E0A3F0062F2CB /* PersonRow.swift */; };
 		22D1B231217E0D780062F2CB /* DateRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D1B230217E0D780062F2CB /* DateRow.swift */; };
 		22D1B233217E42950062F2CB /* TextBinding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D1B232217E42950062F2CB /* TextBinding.swift */; };
-		22D1B239218079C60062F2CB /* CollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D1B238218079C60062F2CB /* CollectionViewModel.swift */; };
+		22D1B239218079C60062F2CB /* CollectionViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D1B238218079C60062F2CB /* CollectionViewState.swift */; };
 		22D1B23B21807D230062F2CB /* BookRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D1B23A21807D230062F2CB /* BookRow.swift */; };
 		22D1B23D21807F7B0062F2CB /* ApplicationRootController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D1B23C21807F7B0062F2CB /* ApplicationRootController.swift */; };
 		22D1B23E2180BF550062F2CB /* Actions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F35486216FAC0100443C0B /* Actions.framework */; };
@@ -110,7 +111,6 @@
 		22F1801F21C8089100220D20 /* PublisherRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1801B21C8084200220D20 /* PublisherRow.swift */; };
 		22F1802121C8095B00220D20 /* SeriesRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1801D21C8084900220D20 /* SeriesRow.swift */; };
 		22F1803121C82D8E00220D20 /* DetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1803021C82D8E00220D20 /* DetailController.swift */; };
-		22F1805321C9495300220D20 /* Sample.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 22F1805221C9495300220D20 /* Sample.sqlite */; };
 		22F180A421C951FF00220D20 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F180A321C951FF00220D20 /* SettingsController.swift */; };
 		22F180BD21CA647000220D20 /* LoggerKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22A69BF421C2DDE600043C3A /* LoggerKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		22F180BE21CA647000220D20 /* Logger.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22DAF399217B5305003CE28B /* Logger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -198,7 +198,8 @@
 		220CDA9E214A86A80064CC91 /* PersonIndexViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonIndexViewController.swift; sourceTree = "<group>"; };
 		220CDAA0214A8D510064CC91 /* PersonDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonDetailViewController.swift; sourceTree = "<group>"; };
 		220EF17A221478070022F4D9 /* LinkButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkButton.swift; sourceTree = "<group>"; };
-		22143FCC212EE79100B689DF /* CollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewModel.swift; sourceTree = "<group>"; };
+		220EF17D2214836F0022F4D9 /* StoryboardApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardApplication.swift; sourceTree = "<group>"; };
+		22143FCC212EE79100B689DF /* CollectionViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewState.swift; sourceTree = "<group>"; };
 		22143FCE212EF9CC00B689DF /* WindowControllerWithViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowControllerWithViewModel.swift; sourceTree = "<group>"; };
 		22143FD0212F076000B689DF /* CollectionRootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionRootViewController.swift; sourceTree = "<group>"; };
 		22143FD2212F0F2500B689DF /* AuthorsTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorsTransformer.swift; sourceTree = "<group>"; };
@@ -273,7 +274,7 @@
 		22D1B22E217E0A3F0062F2CB /* PersonRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonRow.swift; sourceTree = "<group>"; };
 		22D1B230217E0D780062F2CB /* DateRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateRow.swift; sourceTree = "<group>"; };
 		22D1B232217E42950062F2CB /* TextBinding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextBinding.swift; sourceTree = "<group>"; };
-		22D1B238218079C60062F2CB /* CollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewModel.swift; sourceTree = "<group>"; };
+		22D1B238218079C60062F2CB /* CollectionViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewState.swift; sourceTree = "<group>"; };
 		22D1B23A21807D230062F2CB /* BookRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookRow.swift; sourceTree = "<group>"; };
 		22D1B23C21807F7B0062F2CB /* ApplicationRootController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationRootController.swift; sourceTree = "<group>"; };
 		22D1B2422180CA9E0062F2CB /* BookCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCell.swift; sourceTree = "<group>"; };
@@ -316,7 +317,6 @@
 		22F1801B21C8084200220D20 /* PublisherRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublisherRow.swift; sourceTree = "<group>"; };
 		22F1801D21C8084900220D20 /* SeriesRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeriesRow.swift; sourceTree = "<group>"; };
 		22F1803021C82D8E00220D20 /* DetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailController.swift; sourceTree = "<group>"; };
-		22F1805221C9495300220D20 /* Sample.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = Sample.sqlite; path = "Extras/Sample Data/Sample.sqlite"; sourceTree = SOURCE_ROOT; };
 		22F180A321C951FF00220D20 /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		22F181F521CAB8A500220D20 /* BookishModel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BookishModel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		22F181F821CAB8F100220D20 /* JSONDump.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = JSONDump.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -442,7 +442,7 @@
 			isa = PBXGroup;
 			children = (
 				22429313212ADC4300E70510 /* Application.swift */,
-				22D1B238218079C60062F2CB /* CollectionViewModel.swift */,
+				22D1B238218079C60062F2CB /* CollectionViewState.swift */,
 				2238798F220B05810019F9EA /* Details.swift */,
 				223879BE220B44A40019F9EA /* Controllers */,
 				227F450E2181EDF3000D8B8D /* Rows */,
@@ -548,6 +548,7 @@
 				22B1DB402178D8A50067E795 /* ViewExtensions.swift */,
 				2237D404220368520033924F /* ButtonExtensions.swift */,
 				220EF17A221478070022F4D9 /* LinkButton.swift */,
+				220EF17D2214836F0022F4D9 /* StoryboardApplication.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -591,7 +592,7 @@
 				22462E922158ED5000A4C56C /* CollectionIndexViewController.swift */,
 				22462E942158EDEA00A4C56C /* CollectionDetailViewController.swift */,
 				22DD424B2126D6DA0070C85A /* CollectionDocument.swift */,
-				22143FCC212EE79100B689DF /* CollectionViewModel.swift */,
+				22143FCC212EE79100B689DF /* CollectionViewState.swift */,
 			);
 			path = Collection;
 			sourceTree = "<group>";
@@ -712,7 +713,6 @@
 			isa = PBXGroup;
 			children = (
 				228968422191DDBF00B80A93 /* Bookish.entitlements */,
-				22F1805221C9495300220D20 /* Sample.sqlite */,
 				2242931C212ADC4300E70510 /* Main.storyboard */,
 				2242931F212ADC4400E70510 /* Assets.xcassets */,
 				22DE6AE521877FFB0078D489 /* Assets.xcfilelist */,
@@ -941,7 +941,6 @@
 			files = (
 				22429323212ADC4400E70510 /* LaunchScreen.storyboard in Resources */,
 				22429320212ADC4400E70510 /* Assets.xcassets in Resources */,
-				22F1805321C9495300220D20 /* Sample.sqlite in Resources */,
 				2242931E212ADC4300E70510 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1055,8 +1054,9 @@
 				22A8318C2204B410006A0952 /* RootRow.swift in Sources */,
 				22A8318A2204AAB2006A0952 /* CollectionController.swift in Sources */,
 				22B1DB412178D8A50067E795 /* ViewExtensions.swift in Sources */,
+				220EF17E2214836F0022F4D9 /* StoryboardApplication.swift in Sources */,
 				22387990220B05810019F9EA /* Details.swift in Sources */,
-				22D1B239218079C60062F2CB /* CollectionViewModel.swift in Sources */,
+				22D1B239218079C60062F2CB /* CollectionViewState.swift in Sources */,
 				22C2194C21AF24E5002FC0FE /* EditingActions.swift in Sources */,
 				2237D28322020C3B0033924F /* ChoosePersonController.swift in Sources */,
 				22F1803121C82D8E00220D20 /* DetailController.swift in Sources */,
@@ -1118,7 +1118,7 @@
 				22DA6A4121E6525400ECF09A /* CDECloudKitFileSystem.m in Sources */,
 				221C4B35216BAAAC0086D56F /* RelationshipUIActions.swift in Sources */,
 				2250C71621B7E01A00E899E2 /* SeriesScanner.swift in Sources */,
-				22143FCD212EE79100B689DF /* CollectionViewModel.swift in Sources */,
+				22143FCD212EE79100B689DF /* CollectionViewState.swift in Sources */,
 				22F1844E21CBF9B600220D20 /* DetailController.swift in Sources */,
 				22C2194B21AF24E5002FC0FE /* EditingActions.swift in Sources */,
 				22960328214025E80020B3EB /* BookPersonCell.swift in Sources */,

@@ -15,12 +15,11 @@ import Ensembles
 let applicationChannel = Logger("Application")
 
 @UIApplicationMain
-class Application: UIResponder {
-    var window: UIWindow? // required for storyboard support
+class Application: StoryboardApplication {
     let actionManager = ActionManagerMobile()
     let imageCache = UIImageCache()
     let cloud = CloudManager()
-    @objc dynamic let viewModel = CollectionViewModel()
+    let viewState = CollectionViewState()
     var collectionController: CollectionController!
     lazy var collection: SyncedCollection = setupCollection()
     
@@ -86,11 +85,7 @@ extension Application: UIApplicationDelegate {
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
         applicationChannel.log("will enter foreground")
-        collection.sync {
-//            if let index = self.collectionController.indexControllers["Book"] as? BookIndexController {
-//                index.reload()
-//            }
-        }
+        collection.sync()
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
@@ -116,7 +111,7 @@ extension Application: ActionContextProvider {
     
     func provide(context: ActionContext) {
         context.info[ActionContext.modelKey] = collection.managedObjectContext
-        context.info[ActionContext.viewModelKey] = viewModel
+        context.info[ActionContext.viewModelKey] = viewState
         context.info[ActionContext.rootKey] = collectionController
     }
 }

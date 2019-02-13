@@ -191,7 +191,7 @@ extension IndexController: NSFetchedResultsControllerDelegate {
         let entityName = String(describing: entityType)
         request.entity = context.persistentStoreCoordinator?.managedObjectModel.entitiesByName[entityName]
         request.fetchBatchSize = 20
-        request.sortDescriptors = application.viewModel.bookSorting
+        request.sortDescriptors = application.viewState.bookSorting
         
         let controller = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: "sectionName", cacheName: entityType.categoryLabel)
         controller.delegate = self
