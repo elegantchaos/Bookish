@@ -150,7 +150,6 @@ class IndexController: UITableViewController, NSFetchedResultsControllerDelegate
         request.entity = context.persistentStoreCoordinator?.managedObjectModel.entitiesByName[entityName]
         request.fetchBatchSize = 20
         request.sortDescriptors = application.viewModel.bookSorting
-        request.predicate = NSPredicate(format: "name contains[cd] \"z\"")
         
         let controller = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: "sectionName", cacheName: entityType.categoryLabel)
         controller.delegate = self
@@ -231,10 +230,9 @@ class IndexController: UITableViewController, NSFetchedResultsControllerDelegate
 
 extension IndexController: UISearchBarDelegate {
     func fetch(filter: String) {
-//        let predicate = filter.isEmpty ? nil : NSPredicate(format: "name contains[cd] z")
-//        fetcher = makeFetcher()
-//        fetcher.fetchRequest.predicate = predicate
-//
+        let predicate = filter.isEmpty ? nil : NSPredicate(format: "name contains[cd] %@", filter)
+        fetcher.fetchRequest.predicate = predicate
+
         do {
             NSFetchedResultsController<ModelObject>.deleteCache(withName: entityType!.categoryLabel)
             try fetcher.performFetch()
