@@ -11,6 +11,9 @@ import Actions
 class ApplicationRootController: UISplitViewController {
     var observers = [NSKeyValueObservation]()
     
+    var detailNav: UINavigationController!
+    var indexNav: UINavigationController!
+    
     var indexControllers: [String:Any] = [:]
     
     func reset(mode: CollectionContainer.PopulateMode) {
@@ -24,20 +27,21 @@ class ApplicationRootController: UISplitViewController {
     }
     
     func setup(splitView: UISplitViewController) {
-        let navigationController = splitView.viewControllers[splitView.viewControllers.count-1] as! UINavigationController
-        navigationController.topViewController!.navigationItem.leftBarButtonItem = splitView.displayModeButtonItem
         splitView.delegate = self
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        indexNav = viewControllers.first as? UINavigationController
+        detailNav = viewControllers.last as? UINavigationController
         
         application.collectionController = self
 //        for n in 0...3 {
 //            setup(splitView: viewControllers![n] as! UISplitViewController)
 //        }
 
-        let viewModel = application.viewModel
+//        let viewModel = application.viewModel
 //        self.selectedIndex = viewModel.modeIndex
 //        let modeObserver = application.observe(\Application.viewModel.modeIndex) { (app, change) in
 //            self.selectedIndex = viewModel.modeIndex
@@ -53,6 +57,7 @@ class ApplicationRootController: UISplitViewController {
 //    }
 
     func reveal<EntityType: NSManagedObject>(_ object: EntityType, mode: CollectionViewModel.Mode) {
+        
         application.viewModel.mode = mode
         let name = String(describing: EntityType.self)
         if let index = indexControllers[name] as? EntityIndex {

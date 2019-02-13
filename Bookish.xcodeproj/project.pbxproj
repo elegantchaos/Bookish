@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		220CDA9F214A86A80064CC91 /* PersonIndexViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220CDA9E214A86A80064CC91 /* PersonIndexViewController.swift */; };
 		220CDAA1214A8D510064CC91 /* PersonDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220CDAA0214A8D510064CC91 /* PersonDetailViewController.swift */; };
+		220EF17C2214782C0022F4D9 /* LinkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220EF17A221478070022F4D9 /* LinkButton.swift */; };
 		22143FCD212EE79100B689DF /* CollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22143FCC212EE79100B689DF /* CollectionViewModel.swift */; };
 		22143FCF212EF9CC00B689DF /* WindowControllerWithViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22143FCE212EF9CC00B689DF /* WindowControllerWithViewModel.swift */; };
 		22143FD1212F076000B689DF /* CollectionRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22143FD0212F076000B689DF /* CollectionRootViewController.swift */; };
@@ -196,6 +197,7 @@
 /* Begin PBXFileReference section */
 		220CDA9E214A86A80064CC91 /* PersonIndexViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonIndexViewController.swift; sourceTree = "<group>"; };
 		220CDAA0214A8D510064CC91 /* PersonDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonDetailViewController.swift; sourceTree = "<group>"; };
+		220EF17A221478070022F4D9 /* LinkButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkButton.swift; sourceTree = "<group>"; };
 		22143FCC212EE79100B689DF /* CollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewModel.swift; sourceTree = "<group>"; };
 		22143FCE212EF9CC00B689DF /* WindowControllerWithViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowControllerWithViewModel.swift; sourceTree = "<group>"; };
 		22143FD0212F076000B689DF /* CollectionRootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionRootViewController.swift; sourceTree = "<group>"; };
@@ -545,6 +547,7 @@
 				22D1B232217E42950062F2CB /* TextBinding.swift */,
 				22B1DB402178D8A50067E795 /* ViewExtensions.swift */,
 				2237D404220368520033924F /* ButtonExtensions.swift */,
+				220EF17A221478070022F4D9 /* LinkButton.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -1039,6 +1042,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				22D1B23B21807D230062F2CB /* BookRow.swift in Sources */,
+				220EF17C2214782C0022F4D9 /* LinkButton.swift in Sources */,
 				22429314212ADC4300E70510 /* Application.swift in Sources */,
 				22D1B22F217E0A3F0062F2CB /* PersonRow.swift in Sources */,
 				221ED512216B8EAB00594714 /* BookDetailRow.swift in Sources */,

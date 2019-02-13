@@ -337,7 +337,7 @@
                                                     <color key="textColor" name="Bookish Label Text"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ekw-of-MC3" userLabel="Person">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ekw-of-MC3" userLabel="Person" customClass="LinkButton" customModule="Bookish" customModuleProvider="target">
                                                     <rect key="frame" x="49" y="4" width="322" height="35.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <state key="normal" title="Some Person">
@@ -348,6 +348,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                     <connections>
                                                         <action selector="performAction:" destination="pBo-5d-NDY" eventType="primaryActionTriggered" id="UY7-qR-BF8"/>
+                                                        <segue destination="nAr-WG-Ppx" kind="show" identifier="pushDetail" id="DI5-zU-b3h"/>
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r6r-Kv-luW" userLabel="Edit Role">
@@ -423,7 +424,7 @@
                                                     <color key="textColor" name="Bookish Label Text"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MGE-Im-Xl3">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MGE-Im-Xl3" customClass="LinkButton" customModule="Bookish" customModuleProvider="target">
                                                     <rect key="frame" x="84.5" y="4" width="286.5" height="35.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <state key="normal" title="Some Publisher">
@@ -434,6 +435,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                     <connections>
                                                         <action selector="performAction:" destination="pBo-5d-NDY" eventType="primaryActionTriggered" id="HnL-Kp-6cl"/>
+                                                        <segue destination="nAr-WG-Ppx" kind="showDetail" identifier="pushDetail" id="Xbf-Ja-Si9"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -465,7 +467,7 @@
                                                     <color key="textColor" name="Bookish Label Text"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Taj-wV-1gx">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Taj-wV-1gx" customClass="LinkButton" customModule="Bookish" customModuleProvider="target">
                                                     <rect key="frame" x="61" y="4" width="310" height="35.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <state key="normal" title="Some Series">
@@ -476,6 +478,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                     <connections>
                                                         <action selector="performAction:" destination="pBo-5d-NDY" eventType="primaryActionTriggered" id="oah-l2-akQ"/>
+                                                        <segue destination="nAr-WG-Ppx" kind="show" identifier="pushDetail" id="PHh-nk-yIK"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -537,7 +540,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qme-y3-tce">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qme-y3-tce" customClass="LinkButton" customModule="Bookish" customModuleProvider="target">
                                                     <rect key="frame" x="16" y="4" width="355" height="35.5"/>
                                                     <state key="normal" title="Button">
                                                         <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -547,6 +550,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                     <connections>
                                                         <action selector="performAction:" destination="pBo-5d-NDY" eventType="primaryActionTriggered" id="BHO-uR-ajw"/>
+                                                        <segue destination="nAr-WG-Ppx" kind="show" identifier="pushDetail" id="S3b-FH-Mlg"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -626,7 +630,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pBo-5d-NDY" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2393" y="3313"/>
+            <point key="canvasLocation" x="2274" y="3313"/>
         </scene>
         <!--Detail Navigation-->
         <scene sceneID="sXZ-Qs-UP2">

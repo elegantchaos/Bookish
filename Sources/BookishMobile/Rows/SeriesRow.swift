@@ -8,7 +8,7 @@ import BookishModel
 import UIKit
 
 class SeriesRow: BookDetailRow {
-    @IBOutlet var seriesButton: UIButton!
+    @IBOutlet var seriesButton: LinkButton!
     var series: Series!
 
     override func setupContent(row: DetailItem, book: Book) {
@@ -19,6 +19,7 @@ class SeriesRow: BookDetailRow {
                 series = item.series
                 if let name = item.series?.name {
                     seriesButton.setTitle(name, font: application.viewModel.detailFont)
+                    seriesButton.linkedObject = series
                 }
             }
         }

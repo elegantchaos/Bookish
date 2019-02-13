@@ -45,7 +45,7 @@ class PersonRow: BookDetailRow {
     var person: Person?
     var role: Role?
     
-    @IBOutlet var personButton: UIButton!
+    @IBOutlet var personButton: LinkButton!
     @IBOutlet weak var roleButton: UIButton!
     @IBOutlet weak var personField: UITextField!
     @IBOutlet weak var choosePersonButton: UIButton!
@@ -70,6 +70,7 @@ class PersonRow: BookDetailRow {
         personField.font = application.viewModel.detailFont
         personField.text = personName
         personButton.setTitle(personName, font: application.viewModel.detailFont)
+        personButton.linkedObject = person
         let editing = info.source.isEditing
         personButton.isHidden = editing
         choosePersonButton.isHidden = !editing

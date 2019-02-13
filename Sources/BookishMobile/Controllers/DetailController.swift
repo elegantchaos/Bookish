@@ -43,9 +43,7 @@ class DetailController: UIViewController, UITableViewDataSource, UITableViewDele
         entityName = String(describing: type(of: object))
         representedObject = object
         detailViewChannel.debug("setup for \(entityName) \(object)")
-
         source = (object as? DetailOwner)?.getProvider()
-        configureView()
     }
     
     func configureView() {
@@ -159,12 +157,16 @@ class DetailController: UIViewController, UITableViewDataSource, UITableViewDele
             prepareChooser(for: segue, sender: sender) { (cell) -> ChoosePersonTarget in
                 return ChoosePersonTarget(row: cell as! PersonRow)
             }
-            
+
+        case "pushDetail":
+            if let link = sender as? LinkButton, let detail = segue.destination as? DetailController, let object = link.linkedObject {
+                detail.setup(for: object)
+            }
+
         default:
             break
         }
     }
-    
 }
 
 extension DetailController: EditableView {

@@ -8,7 +8,7 @@ import BookishModel
 import Actions
 
 class BookRow: UITableViewCell, ActionContextProvider, DetailRow {
-    @IBOutlet weak var personButton: UIButton!
+    @IBOutlet weak var personButton: LinkButton!
     
     var binding: StringBinding?
     var book: Book?
@@ -17,6 +17,7 @@ class BookRow: UITableViewCell, ActionContextProvider, DetailRow {
         if let item = row as? PersonBookDetailItem, let book = item.book {
             self.book = book
             personButton.setTitle(book.name, for: .normal)
+            personButton.linkedObject = book
         }
     }
     

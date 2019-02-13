@@ -8,7 +8,7 @@ import Actions
 import BookishModel
 
 class PublisherRow: BookDetailRow {
-    @IBOutlet var publisherButton: UIButton!
+    @IBOutlet var publisherButton: LinkButton!
     var publisher: Publisher!
     
     override func setupContent(row: DetailItem, book: Book) {
@@ -18,6 +18,7 @@ class PublisherRow: BookDetailRow {
             } else {
                 publisher = item.publisher
                 publisherButton.setTitle(publisher.name, font: application.viewModel.detailFont)
+                publisherButton.linkedObject = publisher
             }
         }
     }
