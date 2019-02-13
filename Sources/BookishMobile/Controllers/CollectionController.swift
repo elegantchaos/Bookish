@@ -8,7 +8,9 @@ import BookishModel
 
 class CollectionController: UITableViewController {
     var collapseDetailViewController: Bool = true
-
+    var detailNav: UINavigationController!
+    var indexNav: UINavigationController!
+    
     struct Item {
         let entity: ModelObject.Type?
         let identifier: String
@@ -26,10 +28,23 @@ class CollectionController: UITableViewController {
         Item(entity: Series.self),
         Item(identifier: "intro"),
         ]
-    
+
+    func reset(mode: CollectionContainer.PopulateMode) {
+        indexNav.popToRootViewController(animated: false)
+        detailNav.popToRootViewController(animated: false)
+        application.collection.delete(remove: true)
+        application.collection = application.setupCollection(mode: mode)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        if let splitView = splitViewController {
+            splitView.delegate = self
+            indexNav = splitView.viewControllers.first as? UINavigationController
+            detailNav = splitView.viewControllers.last as? UINavigationController
+        }
         self.splitViewController?.delegate = self
+        application.collectionController = self
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
