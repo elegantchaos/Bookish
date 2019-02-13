@@ -21,12 +21,14 @@ protocol DetailControllerP: UIViewController {
     var representedObject: ModelObject { get set }
 }
 
-class IndexController: UITableViewController, NSFetchedResultsControllerDelegate, ActionContextProvider, EntityIndex, ActionObserver {
+class IndexController: UITableViewController, EntityIndex, ActionObserver {
     var entityType: ModelObject.Type?
     var modelContext: NSManagedObjectContext?
     lazy var fetcher: NSFetchedResultsController<ModelObject> = makeFetcher()
     
     @IBOutlet var indexTable: UITableView!
+    @IBOutlet weak var searchBar: UISearchBar!
+    
     
     var detailController: DetailController? {
         if let detailNavigation = splitViewController?.viewControllers.last as? UINavigationController {
@@ -34,13 +36,6 @@ class IndexController: UITableViewController, NSFetchedResultsControllerDelegate
         }
 
         return nil
-    }
-    
-    override func viewDidLoad() {
-        indexViewChannel.debug("\(entityType!) index didLoad")
-        super.viewDidLoad()
-        navigationItem.rightBarButtonItem = editButtonItem
-        fetch(filter: "")
     }
     
     func setup(for entityType: ModelObject.Type, context: NSManagedObjectContext) {
@@ -66,19 +61,39 @@ class IndexController: UITableViewController, NSFetchedResultsControllerDelegate
         fetch(filter: "")
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        indexViewChannel.debug("\(entityType!) index willAppear")
-        clearsSelectionOnViewWillAppear = splitViewController!.isCollapsed
-        super.viewWillAppear(animated)
+    func fetch(filter: String) {
+        let predicate = filter.isEmpty ? nil : NSPredicate(format: "name contains[cd] %@", filter)
+        fetcher.fetchRequest.predicate = predicate
+        
+        do {
+            NSFetchedResultsController<ModelObject>.deleteCache(withName: entityType!.categoryLabel)
+            try fetcher.performFetch()
+            tableView.reloadData()
+            DispatchQueue.main.async {
+                self.selectFirstItemIfNecessary()
+            }
+        } catch let err {
+            print(err)
+        }
     }
     
+
     func select(object: NSManagedObject) {
         if let entity = object as? ModelObject {
             if let index = fetcher.indexPath(forObject: entity) {
-                indexTable.selectRow(at: index, animated: true, scrollPosition: .bottom)
+                indexTable.selectRow(at: index, animated: true, scrollPosition: .middle)
                 performSegue(withIdentifier: "showDetail", sender: self)
             }
         }
+    }
+    
+    func selectFirstItemIfNecessary() {
+//        if (tableView.indexPathForSelectedRow == nil) && !splitViewController!.isCollapsed {
+//            if numberOfSections(in: self.tableView) > 0 {
+//                tableView.selectRow(at: IndexPath(row: 0, section: 0), animated: false, scrollPosition: .top)
+//                performSegue(withIdentifier: "showDetail", sender: self)
+//            }
+//        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -91,6 +106,22 @@ class IndexController: UITableViewController, NSFetchedResultsControllerDelegate
             }
         }
     }
+    
+    // MARK: View Controller
+    
+    override func viewDidLoad() {
+        indexViewChannel.debug("\(entityType!) index didLoad")
+        super.viewDidLoad()
+        navigationItem.rightBarButtonItem = editButtonItem
+        fetch(filter: "")
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        indexViewChannel.debug("\(entityType!) index willAppear")
+        clearsSelectionOnViewWillAppear = splitViewController!.isCollapsed
+        super.viewWillAppear(animated)
+    }
+   
     
     // MARK: - Table View
     
@@ -139,7 +170,18 @@ class IndexController: UITableViewController, NSFetchedResultsControllerDelegate
         }
     }
     
-    
+}
+
+
+extension IndexController: ActionContextProvider {
+    func provide(context: ActionContext) {
+        context.info.addObserver(self)
+        detailController?.provide(context: context)
+    }
+}
+
+
+extension IndexController: NSFetchedResultsControllerDelegate {
     func makeFetcher() -> NSFetchedResultsController<ModelObject> {
         guard let context = modelContext, let entityType = entityType else {
             indexViewChannel.fatal("missing context or entity type")
@@ -156,15 +198,7 @@ class IndexController: UITableViewController, NSFetchedResultsControllerDelegate
         return controller
     }
     
-    func selectIfNecessary() {
-        if (tableView.indexPathForSelectedRow == nil) && !splitViewController!.isCollapsed {
-            if self.numberOfSections(in: self.tableView) > 0 {
-                self.tableView.selectRow(at: IndexPath(row: 0, section: 0), animated: false, scrollPosition: .top)
-                self.performSegue(withIdentifier: "showDetail", sender: self)
-            }
-        }
-    }
-    
+
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.beginUpdates()
     }
@@ -211,38 +245,10 @@ class IndexController: UITableViewController, NSFetchedResultsControllerDelegate
         tableView.endUpdates()
     }
     
-    /*
-     // Implementing the above methods to update the table view in response to individual changes may have performance implications if a large number of changes are made simultaneously. If this proves to be an issue, you can instead just implement controllerDidChangeContent: which notifies the delegate that all section and object changes have been processed.
-     
-     func controllerDidChangeContent(controller: NSFetchedResultsController) {
-     // In the simplest, most efficient, case, reload the table view.
-     tableView.reloadData()
-     }
-     */
-    
-    
-    func provide(context: ActionContext) {
-        context.info.addObserver(self)
-        detailController?.provide(context: context)
-    }
-    
 }
 
 extension IndexController: UISearchBarDelegate {
-    func fetch(filter: String) {
-        let predicate = filter.isEmpty ? nil : NSPredicate(format: "name contains[cd] %@", filter)
-        fetcher.fetchRequest.predicate = predicate
-
-        do {
-            NSFetchedResultsController<ModelObject>.deleteCache(withName: entityType!.categoryLabel)
-            try fetcher.performFetch()
-            tableView.reloadData()
-        } catch let err {
-            print(err)
-        }
-    }
-    
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         fetch(filter: searchBar.text ?? "")
     }
     

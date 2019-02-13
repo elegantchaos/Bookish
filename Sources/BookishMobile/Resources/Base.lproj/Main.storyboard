@@ -173,10 +173,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" id="ma7-hX-oF7">
+                        <searchBar key="tableHeaderView" contentMode="redraw" searchBarStyle="prominent" id="ma7-hX-oF7">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <textInputTraits key="textInputTraits"/>
+                            <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="name"/>
                             <connections>
                                 <outlet property="delegate" destination="twP-4I-K8J" id="7TW-OA-gTY"/>
                             </connections>
@@ -211,6 +211,7 @@
                     </tableView>
                     <connections>
                         <outlet property="indexTable" destination="uFP-rn-Wga" id="Ae9-TH-CsI"/>
+                        <outlet property="searchBar" destination="ma7-hX-oF7" id="GnE-lp-VDz"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HJI-gc-Ln8" userLabel="First Responder" sceneMemberID="firstResponder"/>
