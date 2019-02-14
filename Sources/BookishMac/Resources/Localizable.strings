@@ -5,15 +5,3 @@
   Created by Sam Deane on 20/12/2018.
   Copyright © 2018 Elegant Chaos Limited. All rights reserved.
 */
-
-Book.singular = "book";
-Book.plural = "books";
-
-Person.singular = "person";
-Person.plural = "people";
-
-Publisher.singular = "publisher";
-Publisher.plural = "publishers";
-
-Series.singular = "series";
-Series.plural = "series";
