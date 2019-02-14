@@ -1,0 +1,10 @@
+/* 
+  Localizable.strings
+  Bookish
+
+  Created by Sam Deane on 14/02/2019.
+  Copyright © 2019 Elegant Chaos Limited. All rights reserved.
+*/
+
+index.search.count = "search %@ %@";
+index.search.none = "no \(%@) to search";

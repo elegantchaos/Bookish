@@ -68,16 +68,26 @@ class IndexController: UITableViewController, EntityIndex, ActionObserver {
         do {
             NSFetchedResultsController<ModelObject>.deleteCache(withName: entityType!.categoryLabel)
             try fetcher.performFetch()
-            tableView.reloadData()
-            DispatchQueue.main.async {
-                self.selectFirstItemIfNecessary()
-            }
+            self.updateAfterFetch()
         } catch let err {
             print(err)
         }
     }
     
-
+    func updateAfterFetch() {
+        tableView.reloadData()
+        let key: String
+        let count = fetcher.fetchedObjects?.count ?? 0
+        let label = entityType?.categoryLabel.lowercased() ?? ""
+        if label.isEmpty {
+            key = "index.search.unknown"
+        } else {
+            key = count > 0 ? "index.search.count" : "index.search.none"
+        }
+        let format = NSLocalizedString(key, comment: "")
+        searchBar.placeholder = String(format: format, count as NSNumber, label)
+    }
+    
     func select(object: NSManagedObject) {
         if let entity = object as? ModelObject {
             if let index = fetcher.indexPath(forObject: entity) {
@@ -122,6 +132,10 @@ class IndexController: UITableViewController, EntityIndex, ActionObserver {
         super.viewWillAppear(animated)
     }
    
+    override func viewWillDisappear(_ animated: Bool) {
+        modelContext = nil
+        fetcher.delegate = nil
+    }
     
     // MARK: - Table View
     

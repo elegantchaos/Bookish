@@ -73,8 +73,8 @@ class SyncedCollection: CollectionContainer, CDEPersistentStoreEnsembleDelegate 
     }
 
     override public func delete(remove: Bool = false) {
-        super.delete(remove: remove)
         ensemble.dismantle()
+        super.delete(remove: remove)
     }
     
 

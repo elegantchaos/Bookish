@@ -30,10 +30,16 @@ class CollectionController: UITableViewController {
         ]
 
     func reset(mode: CollectionContainer.PopulateMode) {
+        if let detailView = detailNav.topViewController as? DetailController {
+            detailView.reset()
+        }
         indexNav.popToRootViewController(animated: false)
         detailNav.popToRootViewController(animated: false)
-        application.collection.delete(remove: true)
-        application.collection = application.setupCollection(mode: mode)
+        let application = self.application
+        application.collection.delete(remove: false)
+        DispatchQueue.main.async {
+            application.collection = application.setupCollection(mode: mode)
+        }
     }
 
     override func viewDidLoad() {

@@ -11,6 +11,7 @@
 		220CDAA1214A8D510064CC91 /* PersonDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220CDAA0214A8D510064CC91 /* PersonDetailViewController.swift */; };
 		220EF17C2214782C0022F4D9 /* LinkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220EF17A221478070022F4D9 /* LinkButton.swift */; };
 		220EF17E2214836F0022F4D9 /* StoryboardApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220EF17D2214836F0022F4D9 /* StoryboardApplication.swift */; };
+		2211A915221599F1004B7589 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2211A914221599F1004B7589 /* Localizable.strings */; };
 		22143FCD212EE79100B689DF /* CollectionViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22143FCC212EE79100B689DF /* CollectionViewState.swift */; };
 		22143FCF212EF9CC00B689DF /* WindowControllerWithViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22143FCE212EF9CC00B689DF /* WindowControllerWithViewModel.swift */; };
 		22143FD1212F076000B689DF /* CollectionRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22143FD0212F076000B689DF /* CollectionRootViewController.swift */; };
@@ -199,6 +200,7 @@
 		220CDAA0214A8D510064CC91 /* PersonDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonDetailViewController.swift; sourceTree = "<group>"; };
 		220EF17A221478070022F4D9 /* LinkButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkButton.swift; sourceTree = "<group>"; };
 		220EF17D2214836F0022F4D9 /* StoryboardApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardApplication.swift; sourceTree = "<group>"; };
+		2211A914221599F1004B7589 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		22143FCC212EE79100B689DF /* CollectionViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewState.swift; sourceTree = "<group>"; };
 		22143FCE212EF9CC00B689DF /* WindowControllerWithViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowControllerWithViewModel.swift; sourceTree = "<group>"; };
 		22143FD0212F076000B689DF /* CollectionRootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionRootViewController.swift; sourceTree = "<group>"; };
@@ -714,6 +716,7 @@
 			children = (
 				228968422191DDBF00B80A93 /* Bookish.entitlements */,
 				2242931C212ADC4300E70510 /* Main.storyboard */,
+				2211A914221599F1004B7589 /* Localizable.strings */,
 				2242931F212ADC4400E70510 /* Assets.xcassets */,
 				22DE6AE521877FFB0078D489 /* Assets.xcfilelist */,
 				22429321212ADC4400E70510 /* LaunchScreen.storyboard */,
@@ -940,6 +943,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				22429323212ADC4400E70510 /* LaunchScreen.storyboard in Resources */,
+				2211A915221599F1004B7589 /* Localizable.strings in Resources */,
 				22429320212ADC4400E70510 /* Assets.xcassets in Resources */,
 				2242931E212ADC4300E70510 /* Main.storyboard in Resources */,
 			);
