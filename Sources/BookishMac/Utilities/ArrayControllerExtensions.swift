@@ -10,7 +10,7 @@ extension NSArrayController {
         let arranged = (arrangedObjects as! NSArray).count
         let selected = selectionIndexes.count
         let key = (arranged == 1) ? "\(entity).singular" : "\(entity).plural"
-        let kind = NSLocalizedString(key, comment: "entity label")
+        let kind = key.localized
         if selected < 2 {
             return "\(arranged) \(kind)"
         } else {
