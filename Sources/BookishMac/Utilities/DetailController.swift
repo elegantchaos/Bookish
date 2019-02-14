@@ -105,7 +105,7 @@ extension DetailControllerBase: NSTableViewDelegate, NSTableViewDataSource {
 
 // MARK: Generic Detail Controller
 
-class DetailController<EntityKind>: DetailControllerBase {
+class DetailController<EntityKind: ModelObject>: DetailControllerBase {
     let entityName = "\(EntityKind.self)"
 
     internal lazy var indexView: IndexController<EntityKind> = nearestMatchingController()

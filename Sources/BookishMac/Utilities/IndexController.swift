@@ -6,6 +6,7 @@
 import AppKit
 import Actions
 import Logger
+import BookishModel
 
 let indexChannel = Logger("Index")
 
@@ -25,7 +26,7 @@ class IndexControllerBase: CollectionViewController {
  Index view controller, parameterised by the kind of thing it's indexing.
  */
 
-class IndexController<EntityType>: IndexControllerBase, ActionObserver {
+class IndexController<EntityType: ModelObject>: IndexControllerBase, ActionObserver {
     enum FetchState {
         case unfetched
         case fetching
@@ -101,7 +102,12 @@ class IndexController<EntityType>: IndexControllerBase, ActionObserver {
     func selectionChanged() {
         indexChannel.debug("\(entityName) selection changed")
         detailView.selectionChanged()
-        selectionLabel.stringValue = indexArray.selectionSummary(entity: entityName)
+        
+        let entityCount = (indexArray.arrangedObjects as? NSArray)?.count ?? 0
+        let selectedCount = indexArray.selectionIndexes.count
+        selectionLabel.stringValue = EntityType.entityCount(entityCount, selected: selectedCount, prefix: "selected")
+        selectionLabel.isHidden = selectedCount < 2
+        indexSearchField.placeholderString = EntityType.entityCount(entityCount, prefix: "search")
     }
     
     func select(items: [EntityType]) {

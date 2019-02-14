@@ -33,7 +33,7 @@ class CollectionWindowController: NSWindowController, ActionContextProvider {
         }
     }
 
-    func reveal<EntityType: NSManagedObject>(_ object: EntityType, mode: CollectionViewState.Mode) {
+    func reveal<EntityType: ModelObject>(_ object: EntityType, mode: CollectionViewState.Mode) {
         cvm.mode = mode
         if let name = EntityType.entity().name {
             if let index = indexControllers[name] as? IndexController<EntityType> {
