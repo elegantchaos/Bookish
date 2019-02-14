@@ -6,5 +6,7 @@
   Copyright © 2019 Elegant Chaos Limited. All rights reserved.
 */
 
-index.search.count = "search %@ %@";
-index.search.none = "no \(%@) to search";
+index.search.count = "search {count} {type}";
+index.search.none = "no {type} to search";
+index.search.unknown = "<unknown>";
+

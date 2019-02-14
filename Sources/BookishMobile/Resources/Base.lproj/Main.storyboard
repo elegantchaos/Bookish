@@ -263,13 +263,13 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="OIG-qG-exT">
                                 <rect key="frame" x="72" y="77" width="299" height="46"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Title" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oty-fJ-Mqu">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="enter title" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oty-fJ-Mqu">
                                         <rect key="frame" x="0.0" y="0.0" width="299" height="21"/>
                                         <color key="textColor" name="Bookish Detail Text"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Subtitle" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WhK-lb-mv0">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="enter subtitle" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WhK-lb-mv0">
                                         <rect key="frame" x="0.0" y="25" width="299" height="21"/>
                                         <color key="textColor" name="Bookish Detail Text"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -604,6 +604,42 @@
                                         <connections>
                                             <outlet property="detail" destination="Igm-FP-WEA" id="7no-cK-26m"/>
                                             <outlet property="label" destination="oE8-My-J7G" id="BsM-gT-VsS"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="editableDimensions" id="Dgp-db-ISo" customClass="DateRow" customModule="Bookish" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="336" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Dgp-db-ISo" id="2Jk-9O-lML">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qce-iP-2CL">
+                                                    <rect key="frame" x="15" y="15" width="31" height="14"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                                    <color key="textColor" name="Bookish Label Text"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="751" text="12th November, 1969" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="GWf-1K-OsY">
+                                                    <rect key="frame" x="50" y="4" width="321" height="35.5"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="textColor" name="Bookish Detail Text"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                </textView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Qce-iP-2CL" firstAttribute="leading" secondItem="2Jk-9O-lML" secondAttribute="leadingMargin" id="443-Kj-UcR"/>
+                                                <constraint firstAttribute="trailing" secondItem="GWf-1K-OsY" secondAttribute="trailing" constant="4" id="D0p-fz-Ou0"/>
+                                                <constraint firstItem="GWf-1K-OsY" firstAttribute="leading" secondItem="Qce-iP-2CL" secondAttribute="trailing" constant="4" id="Twd-JU-Q6r"/>
+                                                <constraint firstAttribute="bottom" secondItem="GWf-1K-OsY" secondAttribute="bottom" constant="4" id="eP9-tl-Ey8"/>
+                                                <constraint firstItem="Qce-iP-2CL" firstAttribute="top" secondItem="2Jk-9O-lML" secondAttribute="topMargin" constant="4" id="qJP-u3-jBW"/>
+                                                <constraint firstItem="GWf-1K-OsY" firstAttribute="top" secondItem="2Jk-9O-lML" secondAttribute="top" constant="4" id="t8T-E7-Doo"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="Qce-iP-2CL" secondAttribute="bottom" constant="4" id="uru-sz-PRm"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="detail" destination="GWf-1K-OsY" id="cBs-bA-kSf"/>
+                                            <outlet property="label" destination="Qce-iP-2CL" id="hD8-S2-sms"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

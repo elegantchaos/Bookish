@@ -56,7 +56,7 @@ class DetailController: UIViewController, UITableViewDataSource, UITableViewDele
                 bindings.append(StringBinding(for: self, property: "title", to: object, path: path))
             }
             
-            if let path = source.subtitleProperty {
+            if let path = source.subtitleProperty, let value = object.value(forKey: path) as? String, source.isEditing || !value.isEmpty {
                 bindings.append(TextFieldBinding(for: subtitleLabel, to: object, path: path))
                 subtitleLabel.isHidden = false
             } else {
@@ -77,6 +77,7 @@ class DetailController: UIViewController, UITableViewDataSource, UITableViewDele
         if let object = representedObject, titleLabel != nil {
             titleLabel.isEnabled = isEditing
             subtitleLabel.isEnabled = isEditing
+            subtitleLabel.isHidden = (subtitleLabel.text?.isEmpty ?? true) && !isEditing
             source?.filter(for: [object], editing: isEditing, context:application.viewState)
             validateButtons()
         }

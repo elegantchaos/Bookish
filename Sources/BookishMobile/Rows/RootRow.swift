@@ -22,8 +22,8 @@ class RootCategoryRow: RootRow {
     override func setup(for item: CollectionController.Item) {
         super.setup(for: item)
         if let entity = item.entity {
-            itemLabel.text = entity.categoryLabel
-            itemImage.image = UIImage(named: entity.categoryPlaceholderName)
+            itemLabel.text = entity.entityTitle
+            itemImage.image = UIImage(named: entity.entityPlaceholder)
         }
     }
 }

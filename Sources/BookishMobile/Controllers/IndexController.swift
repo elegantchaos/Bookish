@@ -42,12 +42,12 @@ class IndexController: UITableViewController, EntityIndex, ActionObserver {
         indexViewChannel.debug("\(entityType) setup")
         self.entityType = entityType
         self.modelContext = context
-        self.title = entityType.categoryLabel
+        self.title = entityType.entityTitle
         reload()
     }
     
     func reset() {
-        if let cacheName = entityType?.categoryLabel {
+        if let cacheName = entityType?.entityLabel {
             NSFetchedResultsController<ModelObject>.deleteCache(withName: cacheName)
         }
         navigationController?.popToRootViewController(animated: false)
@@ -66,7 +66,7 @@ class IndexController: UITableViewController, EntityIndex, ActionObserver {
         fetcher.fetchRequest.predicate = predicate
         
         do {
-            NSFetchedResultsController<ModelObject>.deleteCache(withName: entityType!.categoryLabel)
+            NSFetchedResultsController<ModelObject>.deleteCache(withName: entityType!.entityLabel)
             try fetcher.performFetch()
             self.updateAfterFetch()
         } catch let err {
@@ -78,14 +78,14 @@ class IndexController: UITableViewController, EntityIndex, ActionObserver {
         tableView.reloadData()
         let key: String
         let count = fetcher.fetchedObjects?.count ?? 0
-        let label = entityType?.categoryLabel.lowercased() ?? ""
+        let label = entityType?.entityLabel ?? ""
         if label.isEmpty {
             key = "index.search.unknown"
         } else {
             key = count > 0 ? "index.search.count" : "index.search.none"
         }
-        let format = NSLocalizedString(key, comment: "")
-        searchBar.placeholder = String(format: format, count as NSNumber, label)
+    
+        searchBar.placeholder = key.localized(with: ["count" : count, "type": label])
     }
     
     func select(object: NSManagedObject) {
@@ -207,7 +207,7 @@ extension IndexController: NSFetchedResultsControllerDelegate {
         request.fetchBatchSize = 20
         request.sortDescriptors = application.viewState.bookSorting
         
-        let controller = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: "sectionName", cacheName: entityType.categoryLabel)
+        let controller = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: "sectionName", cacheName: entityType.entityLabel)
         controller.delegate = self
         return controller
     }
