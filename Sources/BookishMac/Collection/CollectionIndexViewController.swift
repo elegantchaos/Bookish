@@ -7,7 +7,7 @@ import AppKit
 import BookishModel
 import Actions
 
-class CollectionIndexViewController: NSTabViewController, ViewControllerWithViewModel {
+class CollectionIndexViewController: NSTabViewController {
     @objc let cvm: CollectionViewState
     
     let entities = [ Book.self, Person.self, Publisher.self, Series.self ]
@@ -27,27 +27,6 @@ class CollectionIndexViewController: NSTabViewController, ViewControllerWithView
             }
         }
         super.viewDidLoad()
-    }
-    
-    func windowDidLoad(_ window: NSWindowController, storyboard: NSStoryboard) {
-//        if let window = window as? CollectionWindowController {
-////            let state = Application.sharedInstance.windowControllerFactory.viewModel
-//            for entity in entities {
-//                if let controller = storyboard.instantiateController(withIdentifier: "Index") as? GenericIndexController {
-//                    controller.setup(for: entity, window: window)
-//                    let tab = NSTabViewItem(viewController: controller)
-//                    addTabViewItem(tab)
-//                }
-//            }
-//        }
-        //            for n in 0 ..< entities.count {
-        //                let entity = entities[n]
-        //                if let controller = tabViewItems[n].viewController as? GenericIndexController {
-        //                    controller.loadView()
-        //                    controller.setup(for: entity, window: window)
-        //                }
-        //            }
-        //        }
     }
 }
 

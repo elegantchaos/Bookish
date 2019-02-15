@@ -769,14 +769,14 @@ CA
         <!--Collection Index View Controller-->
         <scene sceneID="cxs-Lx-xWA">
             <objects>
-                <tabViewController selectedTabViewItemIndex="0" tabStyle="unspecified" id="cvB-oN-q7M" customClass="CollectionIndexViewController" customModule="Bookish" customModuleProvider="target" sceneMemberID="viewController">
+                <tabViewController selectedTabViewItemIndex="1" tabStyle="unspecified" id="cvB-oN-q7M" customClass="CollectionIndexViewController" customModule="Bookish" customModuleProvider="target" sceneMemberID="viewController">
                     <tabViewItems>
                         <tabViewItem id="fRQ-uG-bbC"/>
                         <tabViewItem id="g3C-Bk-WhB"/>
                         <tabViewItem id="0q9-nw-Q4n"/>
                         <tabViewItem id="oyY-U2-Rrc"/>
                     </tabViewItems>
-                    <tabView key="tabView" drawsBackground="NO" id="xYK-vg-VcG">
+                    <tabView key="tabView" drawsBackground="NO" type="noTabsNoBorder" id="xYK-vg-VcG">
                         <rect key="frame" x="0.0" y="0.0" width="200" height="400"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <font key="font" metaFont="system"/>

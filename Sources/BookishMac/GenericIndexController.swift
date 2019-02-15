@@ -15,10 +15,13 @@ let indexChannel = Logger("Index")
  */
 
 class GenericIndexController: CollectionViewController {
+    
     @IBOutlet var indexArray: NSArrayController!
     @IBOutlet weak var indexTable: NSTableView!
     @IBOutlet weak var indexSearchField: NSSearchField!
     @IBOutlet weak var selectionLabel: NSTextField!
+
+    typealias FetchCompletion = () -> Void
 
     enum FetchState {
         case unfetched
@@ -45,23 +48,24 @@ class GenericIndexController: CollectionViewController {
         print("blah")
     }
     
+    override func windowDidLoad(_ window: NSWindowController, storyboard: NSStoryboard) {
+        if let window = window as? CollectionWindowController {
+            window.register(index: self, for: entityName)
+        }
+        super.windowDidLoad(window, storyboard: storyboard)
+    }
+    
     override func viewWillAppear() {
         indexChannel.debug("\(entityType) index appearing")
         
-        entityName = String(describing: entityType)
         title = entityType.entityTitle
         indexArray.entityName = entityName
         indexArray.sortDescriptors = [NSSortDescriptor(key: "sortName", ascending: true)]
-//        window.register(index: self, for: entityName)
-
-        if let indexArray = indexArray {
-            observers.append(indexArray.observe(\NSArrayController.selection, changeHandler: { (index, change) in
-                self.selectionChanged()
-            }))
-            
-            fetchIfNecessary {
-            }
-        }
+        observers.append(indexArray.observe(\NSArrayController.selection, changeHandler: { (index, change) in
+            self.selectionChanged()
+        }))
+        
+        fetchIfNecessary()
         
         super.viewWillAppear()
     }
@@ -75,12 +79,13 @@ class GenericIndexController: CollectionViewController {
     
     func setup(for entity: ModelObject.Type) {
         entityType = entity
+        entityName = String(describing: entityType)
         indexChannel.debug("\(entityType) setup")
     }
     
-    func fetchIfNecessary(then: @escaping () -> Void) {
+    func fetchIfNecessary(then: FetchCompletion? = nil) {
         if fetchState == .fetched {
-            then()
+            then?()
         } else {
             indexChannel.debug("\(entityType) fetching data")
             if fetchState == .unfetched {
@@ -94,7 +99,7 @@ class GenericIndexController: CollectionViewController {
                 if let index = self.fetchSessions.firstIndex(where: { return ($0 === fetchSession)}) {
                     self.fetchSessions.remove(at: index)
                 }
-                then()
+                then?()
             })
             fetchSessions.append(fetchSession)
         }
