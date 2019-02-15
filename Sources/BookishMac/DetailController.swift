@@ -66,7 +66,14 @@ class DetailControllerBase: CollectionViewController {
     @IBAction func changeImage(_ sender: Any){
         print("change image")
     }
+
     
+    func selectionChanged() {
+    }
+    
+    func addContextForDetail(context: ActionContext) {
+    }
+
 }
 
 // MARK: Table Support
@@ -100,7 +107,6 @@ extension DetailControllerBase: NSTableViewDelegate, NSTableViewDataSource {
         availableRows -= 1
         scheduleRecalculateKeyViews()
     }
-    
 }
 
 // MARK: Generic Detail Controller
@@ -108,7 +114,7 @@ extension DetailControllerBase: NSTableViewDelegate, NSTableViewDataSource {
 class DetailController<EntityKind: ModelObject>: DetailControllerBase {
     let entityName = "\(EntityKind.self)"
 
-    internal lazy var indexView: IndexController<EntityKind> = nearestMatchingController()
+    internal lazy var indexView: GenericIndexController = nearestMatchingController()
     
     @objc var index: NSArrayController {
         return indexView.indexArray!
@@ -119,7 +125,7 @@ class DetailController<EntityKind: ModelObject>: DetailControllerBase {
         return iv!
     }
     
-    func addContextForDetail(context: ActionContext) {
+    override func addContextForDetail(context: ActionContext) {
         context.info[ActionContext.selectionKey] = selectedItems()
     }
     
@@ -151,7 +157,7 @@ class DetailController<EntityKind: ModelObject>: DetailControllerBase {
         return []
     }
     
-    func selectionChanged() {
+    override func selectionChanged() {
         detailChannel.debug("selection changed")
         let selectedCount = index.selectedObjects?.count ?? 0
         let showDetail = selectedCount > 0
