@@ -24,6 +24,7 @@ class CollectionIndexViewController: NSTabViewController, ViewControllerWithView
             for n in 0 ..< entities.count {
                 let entity = entities[n]
                 if let controller = tabViewItems[n].viewController as? GenericIndexController {
+                    controller.loadView()
                     controller.setup(for: entity, window: window)
                 }
             }

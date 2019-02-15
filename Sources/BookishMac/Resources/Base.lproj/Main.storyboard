@@ -776,7 +776,7 @@ CA
                         <tabViewItem id="Uc8-DQ-1y5"/>
                         <tabViewItem id="oy9-Cw-pSS"/>
                     </tabViewItems>
-                    <tabView key="tabView" drawsBackground="NO" type="noTabsNoBorder" id="xYK-vg-VcG">
+                    <tabView key="tabView" drawsBackground="NO" id="xYK-vg-VcG">
                         <rect key="frame" x="0.0" y="0.0" width="200" height="400"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <font key="font" metaFont="system"/>
@@ -826,10 +826,10 @@ CA
             </objects>
             <point key="canvasLocation" x="1632" y="-9"/>
         </scene>
-        <!--People-->
+        <!--Index-->
         <scene sceneID="TMn-oN-ehg">
             <objects>
-                <viewController title="People" storyboardIdentifier="Book.Index" id="PUA-xK-Wyi" customClass="GenericIndexController" customModule="Bookish" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Index" id="PUA-xK-Wyi" customClass="GenericIndexController" customModule="Bookish" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="aQJ-zo-YyZ">
                         <rect key="frame" x="0.0" y="0.0" width="200" height="400"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -900,6 +900,7 @@ CA
                                                         </tableColumns>
                                                         <connections>
                                                             <binding destination="iUG-Sw-kPc" name="content" keyPath="arrangedObjects" id="Nh4-cp-4Az"/>
+                                                            <binding destination="iUG-Sw-kPc" name="selectionIndexes" keyPath="selectionIndexes" previousBinding="Nh4-cp-4Az" id="TVo-kI-Ed3"/>
                                                         </connections>
                                                     </tableView>
                                                 </subviews>
@@ -963,14 +964,19 @@ CA
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="indexArray" destination="iUG-Sw-kPc" id="oMb-LD-ahf"/>
-                        <outlet property="indexSearchField" destination="Yal-1G-peJ" id="mWO-Bc-lnc"/>
-                        <outlet property="indexTable" destination="6dc-sq-CeH" id="LOO-YH-yhq"/>
-                        <outlet property="selectionLabel" destination="NQL-eA-Rw2" id="4sH-6S-TWs"/>
+                        <outlet property="indexArray" destination="iUG-Sw-kPc" id="8gC-Go-fCf"/>
+                        <outlet property="indexSearchField" destination="Yal-1G-peJ" id="SbF-Of-6f4"/>
+                        <outlet property="indexTable" destination="6dc-sq-CeH" id="ZaV-S5-1dR"/>
+                        <outlet property="selectionLabel" destination="NQL-eA-Rw2" id="znT-f7-ir6"/>
                     </connections>
                 </viewController>
                 <customObject id="2hD-xJ-qyJ" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-                <arrayController mode="entity" entityName="Book" preservesSelection="NO" id="iUG-Sw-kPc"/>
+                <arrayController mode="entity" entityName="Book" preservesSelection="NO" id="iUG-Sw-kPc">
+                    <connections>
+                        <binding destination="PUA-xK-Wyi" name="managedObjectContext" keyPath="self.cvm.managedObjectContext" id="lJS-PU-xhb"/>
+                    </connections>
+                </arrayController>
+                <userDefaultsController id="0XB-YH-O2i"/>
             </objects>
             <point key="canvasLocation" x="945" y="1955"/>
         </scene>
@@ -1740,7 +1746,7 @@ CA
             <color red="0.35294117647058826" green="0.36862745098039218" blue="0.3843137254901961" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Bookish Label Text">
-            <color red="0.54117647058823526" green="0.55686274509803924" blue="0.5725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.54100000858306885" green="0.55699998140335083" blue="0.57300001382827759" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Bookish Text">
             <color name="ibMissingResourceColor" catalog="#$assets-com.apple.dt.DVTKit" colorSpace="catalog"/>

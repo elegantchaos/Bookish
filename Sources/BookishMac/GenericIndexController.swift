@@ -15,7 +15,7 @@ let indexChannel = Logger("Index")
  */
 
 class GenericIndexController: CollectionViewController {
-    @IBOutlet weak var indexArray: NSArrayController!
+    @IBOutlet var indexArray: NSArrayController!
     @IBOutlet weak var indexTable: NSTableView!
     @IBOutlet weak var indexSearchField: NSSearchField!
     @IBOutlet weak var selectionLabel: NSTextField!
@@ -39,6 +39,11 @@ class GenericIndexController: CollectionViewController {
     var observers: [NSKeyValueObservation] = []
     var fetchSessions: [FetchSession] = []
     var fetchState: FetchState = .unfetched
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        print("blah")
+    }
     
     override func viewWillAppear() {
         indexChannel.debug("\(entityType) index appearing")
@@ -67,8 +72,10 @@ class GenericIndexController: CollectionViewController {
         entityName = String(describing: entity)
         title = entity.entityTitle
         indexArray.entityName = entityName
+        indexArray.sortDescriptors = [NSSortDescriptor(key: "sortName", ascending: true)]
         window.register(index: self, for: entityName)
         indexChannel.debug("\(entityType) setup")
+        selectionChanged()
     }
     
     func fetchIfNecessary(then: @escaping () -> Void) {
