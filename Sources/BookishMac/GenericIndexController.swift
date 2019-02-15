@@ -8,7 +8,7 @@ import Actions
 import Logger
 import BookishModel
 
-//let indexChannel = Logger("Index")
+let indexChannel = Logger("Index")
 
 /**
  Index view controller, parameterised by the kind of thing it's indexing.
@@ -43,12 +43,6 @@ class GenericIndexController: CollectionViewController {
     var fetchSessions: [FetchSession] = []
     var fetchState: FetchState = .unfetched
     
-    override func windowDidLoad(_ window: CollectionWindowController) {
-        indexChannel.debug(" \(entityType) index window loaded")
-//        window.register(index: self, for: entityName)
-    }
-    
-    
     override func viewWillAppear() {
         indexChannel.debug("\(entityType) index appearing")
         
@@ -71,12 +65,13 @@ class GenericIndexController: CollectionViewController {
         super.viewWillDisappear()
     }
     
-    func setup(for entity: ModelObject.Type) {
-        indexChannel.debug("\(entityType) setup")
+    func setup(for entity: ModelObject.Type, window: CollectionWindowController) {
         entityType = entity
         entityName = String(describing: entity)
         title = entity.entityTitle
         indexArray.entityName = entityName
+        window.register(index: self, for: entityName)
+        indexChannel.debug("\(entityType) setup")
     }
     
     func fetchIfNecessary(then: @escaping () -> Void) {
@@ -145,6 +140,38 @@ extension GenericIndexController: ActionContextProvider {
     
 }
 
-extension GenericIndexController: ActionObserver {
+extension GenericIndexController: BookLifecycleObserver {
+    func created(books: [Book]) {
+        self.select(items: books)
+    }
     
+    func deleted(books: [Book]) {
+    }
+}
+
+extension GenericIndexController: PersonLifecycleObserver {
+    func created(person: Person) {
+        self.select(items: [person])
+    }
+    
+    func deleted(person: Person) {
+    }
+}
+
+extension GenericIndexController: PublisherLifecycleObserver {
+    func created(publisher: Publisher) {
+        self.select(items: [publisher])
+    }
+    
+    func deleted(publisher: Publisher) {
+    }
+}
+
+extension GenericIndexController: SeriesLifecycleObserver {
+    func created(series: Series) {
+        self.select(items: [series])
+    }
+    
+    func deleted(series: Series) {
+    }
 }

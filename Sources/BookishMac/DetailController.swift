@@ -120,8 +120,8 @@ class DetailController<EntityKind: ModelObject>: DetailControllerBase {
         return indexView.indexArray!
     }
    
-    fileprivate func connectIndexView() -> IndexController<EntityKind> {
-        let iv: IndexController<EntityKind>? = nearestMatchingController()
+    fileprivate func connectIndexView() -> GenericIndexController {
+        let iv: GenericIndexController? = nearestMatchingController()
         return iv!
     }
     

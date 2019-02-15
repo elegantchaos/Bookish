@@ -6,7 +6,9 @@
 import AppKit
 import BookishModel
 
-class CollectionIndexViewController: NSTabViewController {
+class CollectionIndexViewController: NSTabViewController, ViewControllerWithViewModel {
+    typealias ViewModel = CollectionViewState
+    
     @objc let cvm: CollectionViewState
     
     let entities = [ Book.self, Person.self, Publisher.self, Series.self ]
@@ -16,20 +18,15 @@ class CollectionIndexViewController: NSTabViewController {
         super.init(coder: coder)
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
+    func windowDidLoad(_ window: CollectionWindowController) {
         for n in 0 ..< entities.count {
             let entity = entities[n]
             if let controller = tabViewItems[n].viewController as? GenericIndexController {
-                controller.setup(for: entity)
+                controller.setup(for: entity, window: window)
             }
         }
     }
+    
 
     lazy var detailView: CollectionDetailViewController = nearestMatchingController()
- 
-    override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
-        print("blah")
-    }
 }
