@@ -22,19 +22,16 @@ extension BookSeriesCell: DetailTableCell {
         if row.placeholder {
             seriesCombo.stringValue = ""
             positionField.stringValue = ""
-        } else if let item = row as? SeriesDetailItem, let series = item.series, let selection = view.selectedItems as? [Book] {
+        } else if let item = row as? SeriesDetailItem, let series = item.series {
             objectValue = series
             if let name = series.name {
                 seriesField?.stringValue = name
                 seriesCombo?.stringValue = name
             }
             
-            
-            switch selection.count {
-            case 1:
-                positionField.integerValue = selection[0].position(in: series)
-                
-            default:
+            if let selection = view.index.selection as? Book {
+                positionField.integerValue = selection.position(in: series)
+            } else {
                 positionField.objectValue = ""
             }
         }

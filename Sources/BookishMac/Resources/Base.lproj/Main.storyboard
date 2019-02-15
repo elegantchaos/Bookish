@@ -601,7 +601,7 @@ CA
                 <splitViewController id="9dY-ZT-f0K" sceneMemberID="viewController">
                     <splitViewItems>
                         <splitViewItem canCollapse="YES" holdingPriority="260" behavior="sidebar" id="9x3-Ff-joU"/>
-                        <splitViewItem holdingPriority="240" id="eOL-40-wev"/>
+                        <splitViewItem id="KMV-0r-aNK"/>
                     </splitViewItems>
                     <splitView key="splitView" identifier="collection-split-view" autosaveName="collection-split-view" dividerStyle="thin" vertical="YES" id="Z9o-S4-ubf">
                         <rect key="frame" x="0.0" y="0.0" width="650" height="400"/>
@@ -613,7 +613,7 @@ CA
                     <connections>
                         <outlet property="splitView" destination="Z9o-S4-ubf" id="Tqp-yl-mGN"/>
                         <segue destination="cvB-oN-q7M" kind="relationship" relationship="splitItems" id="FOa-1R-R6C"/>
-                        <segue destination="hhy-7W-Ia3" kind="relationship" relationship="splitItems" id="MnP-QH-Cqm"/>
+                        <segue destination="iPd-Ru-zxR" kind="relationship" relationship="splitItems" id="bhr-eE-8ic"/>
                     </connections>
                 </splitViewController>
                 <customObject id="g3G-9b-aKL" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -769,7 +769,7 @@ CA
         <!--Collection Index View Controller-->
         <scene sceneID="cxs-Lx-xWA">
             <objects>
-                <tabViewController selectedTabViewItemIndex="1" tabStyle="unspecified" id="cvB-oN-q7M" customClass="CollectionIndexViewController" customModule="Bookish" customModuleProvider="target" sceneMemberID="viewController">
+                <tabViewController selectedTabViewItemIndex="0" tabStyle="unspecified" id="cvB-oN-q7M" customClass="CollectionIndexViewController" customModule="Bookish" customModuleProvider="target" sceneMemberID="viewController">
                     <tabViewItems>
                         <tabViewItem id="Yv4-5C-giI"/>
                         <tabViewItem id="Omf-W1-chn"/>
@@ -781,7 +781,6 @@ CA
                         <autoresizingMask key="autoresizingMask"/>
                         <font key="font" metaFont="system"/>
                         <connections>
-                            <binding destination="cvB-oN-q7M" name="selectedIndex" keyPath="self.cvm.modeIndex" id="yrk-GL-vaZ"/>
                             <outlet property="delegate" destination="cvB-oN-q7M" id="x9P-QO-RHD"/>
                         </connections>
                     </tabView>
@@ -794,8 +793,9 @@ CA
                     </connections>
                 </tabViewController>
                 <customObject id="NQu-ho-FxW" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <userDefaultsController id="hxe-pj-t8N"/>
             </objects>
-            <point key="canvasLocation" x="910" y="1820"/>
+            <point key="canvasLocation" x="545" y="1834"/>
         </scene>
         <!--Date Picker Popover Controller-->
         <scene sceneID="K1V-fB-Brr">
@@ -825,69 +825,6 @@ CA
                 <userDefaultsController id="Y0f-97-Wet"/>
             </objects>
             <point key="canvasLocation" x="1632" y="-9"/>
-        </scene>
-        <!--Collection Detail View Controller-->
-        <scene sceneID="VxI-A7-PK2">
-            <objects>
-                <tabViewController selectedTabViewItemIndex="0" tabStyle="unspecified" id="hhy-7W-Ia3" customClass="CollectionDetailViewController" customModule="Bookish" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabViewItems>
-                        <tabViewItem label="People" id="0N0-Rr-1qn"/>
-                        <tabViewItem id="LVm-Tt-qrm"/>
-                        <tabViewItem id="ewE-gX-5ET"/>
-                        <tabViewItem id="NTt-tS-FBI"/>
-                    </tabViewItems>
-                    <tabView key="tabView" type="noTabsNoBorder" id="7Xn-vq-0BQ">
-                        <rect key="frame" x="0.0" y="0.0" width="765" height="400"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <font key="font" metaFont="message"/>
-                        <connections>
-                            <binding destination="hhy-7W-Ia3" name="selectedIndex" keyPath="self.cvm.modeIndex" id="OQf-zv-QFn"/>
-                            <outlet property="delegate" destination="hhy-7W-Ia3" id="kqP-V8-tTq"/>
-                        </connections>
-                    </tabView>
-                    <connections>
-                        <outlet property="tabView" destination="7Xn-vq-0BQ" id="1e6-U7-WdO"/>
-                        <segue destination="She-6V-CW3" kind="relationship" relationship="tabItems" id="dc3-v7-7LN"/>
-                        <segue destination="Fn5-vA-MT6" kind="relationship" relationship="tabItems" id="lPi-w1-nv0"/>
-                        <segue destination="sPJ-pr-qCi" kind="relationship" relationship="tabItems" id="G1F-pY-Yxe"/>
-                        <segue destination="Uiu-HE-PDC" kind="relationship" relationship="tabItems" id="HSi-8d-Cww"/>
-                    </connections>
-                </tabViewController>
-                <customObject id="EIm-WY-fNg" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1466" y="1820"/>
-        </scene>
-        <!--Book.Detail-->
-        <scene sceneID="Zmw-Mg-U0n">
-            <objects>
-                <controllerPlaceholder storyboardName="Book" referencedIdentifier="Book.Detail" id="She-6V-CW3" sceneMemberID="viewController"/>
-                <customObject id="cGe-Rd-9dc" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1283" y="2294"/>
-        </scene>
-        <!--Publisher.Detail-->
-        <scene sceneID="Ler-LK-FyW">
-            <objects>
-                <controllerPlaceholder storyboardName="Publisher" referencedIdentifier="Publisher.Detail" id="sPJ-pr-qCi" sceneMemberID="viewController"/>
-                <customObject id="khV-gk-SX8" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1541" y="2294"/>
-        </scene>
-        <!--Person.Detail-->
-        <scene sceneID="wRG-sW-RZt">
-            <objects>
-                <controllerPlaceholder storyboardName="Person" referencedIdentifier="Person.Detail" id="Fn5-vA-MT6" sceneMemberID="viewController"/>
-                <customObject id="hgm-J0-8KU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1406" y="2294"/>
-        </scene>
-        <!--Series.Detail-->
-        <scene sceneID="UMZ-bV-UUR">
-            <objects>
-                <controllerPlaceholder storyboardName="Series" referencedIdentifier="Series.Detail" id="Uiu-HE-PDC" sceneMemberID="viewController"/>
-                <customObject id="N10-Dl-ayv" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1677" y="2294"/>
         </scene>
         <!--People-->
         <scene sceneID="TMn-oN-ehg">
@@ -963,7 +900,6 @@ CA
                                                         </tableColumns>
                                                         <connections>
                                                             <binding destination="iUG-Sw-kPc" name="content" keyPath="arrangedObjects" id="Nh4-cp-4Az"/>
-                                                            <binding destination="iUG-Sw-kPc" name="selectionIndexes" keyPath="selectionIndexes" previousBinding="Nh4-cp-4Az" id="4q9-SN-ztU"/>
                                                         </connections>
                                                     </tableView>
                                                 </subviews>
@@ -1034,35 +970,780 @@ CA
                     </connections>
                 </viewController>
                 <customObject id="2hD-xJ-qyJ" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-                <arrayController mode="entity" entityName="Book" preservesSelection="NO" id="iUG-Sw-kPc">
+                <arrayController mode="entity" entityName="Book" preservesSelection="NO" id="iUG-Sw-kPc"/>
+            </objects>
+            <point key="canvasLocation" x="945" y="1955"/>
+        </scene>
+        <!--Generic Detail Controller-->
+        <scene sceneID="IG1-NS-twE">
+            <objects>
+                <viewController storyboardIdentifier="Book.Detail" id="iPd-Ru-zxR" customClass="GenericDetailController" customModule="Bookish" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="R3E-BF-7F8">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="400"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <box autoresizesSubviews="NO" boxType="custom" borderType="none" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="6ox-qd-nVx">
+                                <rect key="frame" x="0.0" y="0.0" width="450" height="400"/>
+                                <view key="contentView" id="dHN-9c-iuf">
+                                    <rect key="frame" x="0.0" y="0.0" width="450" height="400"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <imageView identifier="cover" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dMP-oM-auc" userLabel="Cover">
+                                            <rect key="frame" x="50" y="342" width="42" height="42"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="42" id="27d-C0-r4J"/>
+                                                <constraint firstAttribute="width" constant="42" id="Q6a-Ca-XeM"/>
+                                            </constraints>
+                                            <imageCell key="cell" selectable="YES" editable="YES" alignment="left" animates="YES" imageScaling="proportionallyDown" image="BookPlaceholder" id="ulF-Ai-YB0"/>
+                                            <connections>
+                                                <action selector="changeImage:" target="iPd-Ru-zxR" id="43E-io-G2L"/>
+                                            </connections>
+                                        </imageView>
+                                        <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="10" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GRq-94-pzl">
+                                            <rect key="frame" x="96" y="338" width="334" height="50"/>
+                                            <subviews>
+                                                <textField identifier="title" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8AP-XC-qfz" userLabel="Title">
+                                                    <rect key="frame" x="-2" y="28" width="338" height="22"/>
+                                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" title="Title" id="8WP-pw-UuU">
+                                                        <font key="font" size="18" name=".AppleSystemUIFont"/>
+                                                        <color key="textColor" name="Bookish Text"/>
+                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                    <connections>
+                                                        <binding destination="iPd-Ru-zxR" name="font" keyPath="self.cvm.titleFont" id="dtS-8T-N5L"/>
+                                                    </connections>
+                                                </textField>
+                                                <textField identifier="subtitle" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1Sf-0s-kNb" userLabel="Subtitle">
+                                                    <rect key="frame" x="-2" y="0.0" width="338" height="18"/>
+                                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" title="Subtitle" id="xtq-Zc-CXA">
+                                                        <font key="font" size="14" name=".AppleSystemUIFont"/>
+                                                        <color key="textColor" name="Bookish Text"/>
+                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                    <connections>
+                                                        <binding destination="iPd-Ru-zxR" name="font" keyPath="self.cvm.detailFont" id="DaI-ZN-JMi"/>
+                                                        <outlet property="nextKeyView" destination="2eK-Gk-TD8" id="QDz-FH-JIs"/>
+                                                    </connections>
+                                                </textField>
+                                            </subviews>
+                                            <visibilityPriorities>
+                                                <integer value="1000"/>
+                                                <integer value="1000"/>
+                                            </visibilityPriorities>
+                                            <customSpacing>
+                                                <real value="3.4028234663852886e+38"/>
+                                                <real value="3.4028234663852886e+38"/>
+                                            </customSpacing>
+                                        </stackView>
+                                        <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="26" horizontalPageScroll="10" verticalLineScroll="26" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F4f-dy-2SG" userLabel="Details Table">
+                                            <rect key="frame" x="4" y="61" width="442" height="273"/>
+                                            <clipView key="contentView" drawsBackground="NO" id="Roj-As-ygB">
+                                                <rect key="frame" x="0.0" y="0.0" width="442" height="273"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <subviews>
+                                                    <tableView identifier="book-details" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="none" columnReordering="NO" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="24" rowSizeStyle="automatic" usesAutomaticRowHeights="YES" viewBased="YES" id="2eK-Gk-TD8" userLabel="Table">
+                                                        <rect key="frame" x="0.0" y="0.0" width="442" height="273"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <size key="intercellSpacing" width="3" height="2"/>
+                                                        <color key="backgroundColor" name="Bookish Detail"/>
+                                                        <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
+                                                        <tableColumns>
+                                                            <tableColumn identifier="control" width="32" minWidth="10" maxWidth="3.4028234663852886e+38" id="7Kn-Bq-No6" userLabel="control">
+                                                                <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left">
+                                                                    <font key="font" metaFont="smallSystem"/>
+                                                                    <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                </tableHeaderCell>
+                                                                <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="TNN-hs-F2I">
+                                                                    <font key="font" metaFont="system"/>
+                                                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                                    <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                </textFieldCell>
+                                                                <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                                <prototypeCellViews>
+                                                                    <tableCellView identifier="control" id="z15-Jq-lY2" customClass="BookControlCell" customModule="Bookish" customModuleProvider="target">
+                                                                        <rect key="frame" x="1" y="1" width="32" height="22"/>
+                                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                        <subviews>
+                                                                            <button identifier="button.RemoveItem" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Sbn-Xa-IQf" userLabel="Remove">
+                                                                                <rect key="frame" x="0.0" y="2" width="32" height="16"/>
+                                                                                <buttonCell key="cell" type="inline" bezelStyle="inline" image="Minus" imagePosition="overlaps" alignment="center" controlSize="mini" lineBreakMode="truncatingTail" state="on" inset="2" id="YsL-R1-YZ8">
+                                                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                                    <font key="font" metaFont="smallSystemBold"/>
+                                                                                </buttonCell>
+                                                                                <connections>
+                                                                                    <action selector="performAction:" target="hXB-DS-vDG" id="sfV-jr-wBD"/>
+                                                                                </connections>
+                                                                            </button>
+                                                                        </subviews>
+                                                                        <constraints>
+                                                                            <constraint firstItem="Sbn-Xa-IQf" firstAttribute="top" secondItem="z15-Jq-lY2" secondAttribute="top" constant="4" id="HmG-3O-AvZ"/>
+                                                                            <constraint firstAttribute="bottom" secondItem="Sbn-Xa-IQf" secondAttribute="bottom" constant="2" id="X4w-bU-ssl"/>
+                                                                            <constraint firstItem="Sbn-Xa-IQf" firstAttribute="leading" secondItem="z15-Jq-lY2" secondAttribute="leading" id="bnA-i3-yYa"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="Sbn-Xa-IQf" secondAttribute="trailing" id="o78-eq-JKT"/>
+                                                                        </constraints>
+                                                                        <connections>
+                                                                            <outlet property="removeButton" destination="Sbn-Xa-IQf" id="P4G-wb-KV2"/>
+                                                                        </connections>
+                                                                    </tableCellView>
+                                                                </prototypeCellViews>
+                                                            </tableColumn>
+                                                            <tableColumn identifier="heading" width="86" minWidth="40" maxWidth="1000" id="YZu-Oi-uW1">
+                                                                <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="right" title="heading">
+                                                                    <font key="font" metaFont="smallSystem"/>
+                                                                    <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                                    <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
+                                                                </tableHeaderCell>
+                                                                <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" title="Text Cell" id="l3Y-Kl-gmX">
+                                                                    <font key="font" metaFont="system" size="16"/>
+                                                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                                    <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                </textFieldCell>
+                                                                <prototypeCellViews>
+                                                                    <tableCellView identifier="heading" id="H3U-Uy-6cm" customClass="BookHeadingCell" customModule="Bookish" customModuleProvider="target">
+                                                                        <rect key="frame" x="36" y="1" width="86" height="24"/>
+                                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                        <subviews>
+                                                                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8hj-He-i4c">
+                                                                                <rect key="frame" x="0.0" y="2" width="86" height="18"/>
+                                                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" alignment="right" placeholderString="heading" usesSingleLineMode="YES" id="UOa-YW-YPe">
+                                                                                    <font key="font" size="14" name=".AppleSystemUIFont"/>
+                                                                                    <color key="textColor" name="Bookish Label Text"/>
+                                                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                                </textFieldCell>
+                                                                                <connections>
+                                                                                    <binding destination="iPd-Ru-zxR" name="font" keyPath="self.cvm.labelFont" id="2d5-o9-GdE"/>
+                                                                                </connections>
+                                                                            </textField>
+                                                                        </subviews>
+                                                                        <constraints>
+                                                                            <constraint firstItem="8hj-He-i4c" firstAttribute="leading" secondItem="H3U-Uy-6cm" secondAttribute="leading" constant="2" id="C0s-ji-qVF"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="8hj-He-i4c" secondAttribute="trailing" constant="2" id="N5f-Hb-x6N"/>
+                                                                            <constraint firstItem="8hj-He-i4c" firstAttribute="top" secondItem="H3U-Uy-6cm" secondAttribute="top" constant="4" id="VP5-Tr-oAT"/>
+                                                                            <constraint firstAttribute="bottom" secondItem="8hj-He-i4c" secondAttribute="bottom" constant="2" id="agL-1S-u3Z"/>
+                                                                        </constraints>
+                                                                        <connections>
+                                                                            <outlet property="textField" destination="8hj-He-i4c" id="CbJ-4y-N8u"/>
+                                                                        </connections>
+                                                                    </tableCellView>
+                                                                    <tableCellView identifier="role" id="gTk-cA-HWq" customClass="BookRoleCell" customModule="Bookish" customModuleProvider="target">
+                                                                        <rect key="frame" x="36" y="27" width="86" height="24"/>
+                                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                        <subviews>
+                                                                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xa7-qU-nfU">
+                                                                                <rect key="frame" x="0.0" y="2" width="86" height="18"/>
+                                                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" alignment="right" placeholderString="heading" usesSingleLineMode="YES" id="FNK-md-hTj">
+                                                                                    <font key="font" size="14" name=".AppleSystemUIFont"/>
+                                                                                    <color key="textColor" name="Bookish Label Text"/>
+                                                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                                </textFieldCell>
+                                                                                <connections>
+                                                                                    <binding destination="iPd-Ru-zxR" name="font" keyPath="self.cvm.labelFont" id="Hpc-l9-49n"/>
+                                                                                </connections>
+                                                                            </textField>
+                                                                            <popUpButton identifier="button.ChangeRelationship(&quot;skipValidation&quot;: &quot;true&quot;)" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="deO-Ij-A46" customClass="ColoredPopUpButton" customModule="Bookish" customModuleProvider="target">
+                                                                                <rect key="frame" x="0.0" y="-1" width="86" height="25"/>
+                                                                                <popUpButtonCell key="cell" type="recessed" title="author" bezelStyle="recessed" alignment="right" lineBreakMode="truncatingTail" state="on" borderStyle="border" inset="2" preferredEdge="maxX" selectedItem="9h9-U8-GNc" id="eAr-Xl-VDY">
+                                                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
+                                                                                    <font key="font" metaFont="system" size="14"/>
+                                                                                    <menu key="menu" id="NEZ-9G-6ts">
+                                                                                        <items>
+                                                                                            <menuItem title="author" state="on" id="9h9-U8-GNc"/>
+                                                                                            <menuItem title="Item 2" id="NHI-aE-Ypu"/>
+                                                                                            <menuItem title="Item 3" id="7VD-Wr-paX"/>
+                                                                                        </items>
+                                                                                    </menu>
+                                                                                    <connections>
+                                                                                        <action selector="performAction:" target="hXB-DS-vDG" id="sXK-hl-d8H"/>
+                                                                                    </connections>
+                                                                                </popUpButtonCell>
+                                                                                <userDefinedRuntimeAttributes>
+                                                                                    <userDefinedRuntimeAttribute type="color" keyPath="titleColor">
+                                                                                        <color key="value" name="Bookish Label Text"/>
+                                                                                    </userDefinedRuntimeAttribute>
+                                                                                </userDefinedRuntimeAttributes>
+                                                                                <connections>
+                                                                                    <binding destination="w9J-74-RHS" name="content" keyPath="arrangedObjects" id="JKH-hC-Hcq"/>
+                                                                                    <binding destination="w9J-74-RHS" name="contentValues" keyPath="arrangedObjects.lowercaseName" previousBinding="JKH-hC-Hcq" id="tg4-RC-pbu"/>
+                                                                                </connections>
+                                                                            </popUpButton>
+                                                                        </subviews>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="bottom" secondItem="xa7-qU-nfU" secondAttribute="bottom" constant="2" id="7ic-El-Gc8"/>
+                                                                            <constraint firstItem="xa7-qU-nfU" firstAttribute="top" secondItem="gTk-cA-HWq" secondAttribute="top" constant="4" id="KkZ-wl-5tv"/>
+                                                                            <constraint firstItem="deO-Ij-A46" firstAttribute="top" secondItem="gTk-cA-HWq" secondAttribute="top" id="NpP-o7-MeC"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="deO-Ij-A46" secondAttribute="trailing" id="QLy-3p-xCK"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="xa7-qU-nfU" secondAttribute="trailing" constant="2" id="TfO-Ja-Rel"/>
+                                                                            <constraint firstItem="deO-Ij-A46" firstAttribute="leading" secondItem="gTk-cA-HWq" secondAttribute="leading" id="VkP-IN-eJt"/>
+                                                                            <constraint firstItem="xa7-qU-nfU" firstAttribute="leading" secondItem="gTk-cA-HWq" secondAttribute="leading" constant="2" id="Ye2-5r-Tdv"/>
+                                                                            <constraint firstAttribute="bottom" secondItem="deO-Ij-A46" secondAttribute="bottom" id="ggQ-NP-Nef"/>
+                                                                        </constraints>
+                                                                        <connections>
+                                                                            <outlet property="rolePopup" destination="deO-Ij-A46" id="Fnb-mw-37v"/>
+                                                                            <outlet property="textField" destination="xa7-qU-nfU" id="kHr-nE-0Aa"/>
+                                                                        </connections>
+                                                                    </tableCellView>
+                                                                </prototypeCellViews>
+                                                            </tableColumn>
+                                                            <tableColumn identifier="detail" width="315" minWidth="40" maxWidth="1000" id="K3l-Pn-aek">
+                                                                <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="justified" title="value">
+                                                                    <font key="font" metaFont="smallSystem"/>
+                                                                    <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                                    <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
+                                                                </tableHeaderCell>
+                                                                <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" title="Text Cell" id="jzR-Fd-cTU">
+                                                                    <font key="font" metaFont="system"/>
+                                                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                                    <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                </textFieldCell>
+                                                                <tableColumnResizingMask key="resizingMask" resizeWithTable="YES"/>
+                                                                <prototypeCellViews>
+                                                                    <tableCellView identifier="text" id="1mF-bf-MwG" userLabel="text" customClass="BookDetailCell" customModule="Bookish" customModuleProvider="target">
+                                                                        <rect key="frame" x="125" y="1" width="315" height="24"/>
+                                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                        <subviews>
+                                                                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="JOA-TY-6BX">
+                                                                                <rect key="frame" x="2" y="2" width="305" height="18"/>
+                                                                                <textFieldCell key="cell" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" alignment="left" placeholderString="value" id="sJA-hB-JNM">
+                                                                                    <font key="font" metaFont="systemBold" size="14"/>
+                                                                                    <color key="textColor" name="Bookish Detail Text"/>
+                                                                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                                                </textFieldCell>
+                                                                                <connections>
+                                                                                    <binding destination="iPd-Ru-zxR" name="font" keyPath="self.cvm.detailFont" id="fJW-hq-xin"/>
+                                                                                    <outlet property="delegate" destination="1mF-bf-MwG" id="9dE-ZW-sop"/>
+                                                                                </connections>
+                                                                            </textField>
+                                                                        </subviews>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="bottom" secondItem="JOA-TY-6BX" secondAttribute="bottom" constant="2" id="8o0-rA-RqR"/>
+                                                                            <constraint firstItem="JOA-TY-6BX" firstAttribute="leading" secondItem="1mF-bf-MwG" secondAttribute="leading" constant="4" id="ZF1-3P-3cg"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="JOA-TY-6BX" secondAttribute="trailing" constant="10" id="mP9-rS-oIV"/>
+                                                                            <constraint firstItem="JOA-TY-6BX" firstAttribute="top" secondItem="1mF-bf-MwG" secondAttribute="top" constant="4" id="uau-UH-F2D"/>
+                                                                        </constraints>
+                                                                        <connections>
+                                                                            <outlet property="textField" destination="JOA-TY-6BX" id="WYb-j7-6ig"/>
+                                                                        </connections>
+                                                                    </tableCellView>
+                                                                    <tableCellView identifier="person" misplaced="YES" id="Obe-M6-xbY" userLabel="person" customClass="BookPersonCell" customModule="Bookish" customModuleProvider="target">
+                                                                        <rect key="frame" x="125" y="27" width="315" height="23"/>
+                                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                        <subviews>
+                                                                            <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="8Gb-0S-SzA">
+                                                                                <rect key="frame" x="0.0" y="2" width="296" height="18"/>
+                                                                                <textFieldCell key="cell" selectable="YES" sendsActionOnEndEditing="YES" alignment="left" placeholderString="value" id="nBn-Wa-0hd">
+                                                                                    <font key="font" metaFont="systemBold" size="14"/>
+                                                                                    <color key="textColor" name="Bookish Detail Text"/>
+                                                                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                                                </textFieldCell>
+                                                                                <connections>
+                                                                                    <binding destination="iPd-Ru-zxR" name="font" keyPath="self.cvm.detailFont" id="pjU-hr-xAb"/>
+                                                                                </connections>
+                                                                            </textField>
+                                                                            <comboBox identifier="button.person.ChangeRelationship" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="HQX-Fz-RCn" customClass="AnnotatedComboBox" customModule="Bookish" customModuleProvider="target">
+                                                                                <rect key="frame" x="2" y="-1" width="295" height="23"/>
+                                                                                <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" placeholderString="person name" numberOfVisibleItems="5" id="8YE-Pj-MOf">
+                                                                                    <font key="font" metaFont="system" size="14"/>
+                                                                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                                    <objectValues>
+                                                                                        <string>Item 1</string>
+                                                                                        <string>Item 2</string>
+                                                                                        <string>Item 3</string>
+                                                                                    </objectValues>
+                                                                                </comboBoxCell>
+                                                                                <connections>
+                                                                                    <action selector="performAction:" target="hXB-DS-vDG" id="Zls-Au-bOk"/>
+                                                                                    <binding destination="1YZ-LZ-X6M" name="content" keyPath="arrangedObjects" id="vb4-hv-8NV"/>
+                                                                                    <binding destination="1YZ-LZ-X6M" name="contentValues" keyPath="arrangedObjects.name" previousBinding="vb4-hv-8NV" id="7wI-89-hXT"/>
+                                                                                    <binding destination="iPd-Ru-zxR" name="font" keyPath="self.cvm.detailFont" id="aFK-gO-6g2"/>
+                                                                                </connections>
+                                                                            </comboBox>
+                                                                            <button identifier="button.RevealPerson" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Viz-hv-cyj" userLabel="Reveal">
+                                                                                <rect key="frame" x="296" y="3" width="15" height="16"/>
+                                                                                <buttonCell key="cell" type="inline" bezelStyle="inline" image="Reveal" imagePosition="only" alignment="center" controlSize="mini" lineBreakMode="truncatingTail" state="on" inset="2" id="po9-V5-Xt2">
+                                                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                                    <font key="font" metaFont="smallSystemBold"/>
+                                                                                </buttonCell>
+                                                                                <connections>
+                                                                                    <action selector="performAction:" target="hXB-DS-vDG" id="aLI-uf-5t2"/>
+                                                                                </connections>
+                                                                            </button>
+                                                                        </subviews>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="trailing" secondItem="Viz-hv-cyj" secondAttribute="trailing" constant="4" id="4va-1o-xLT"/>
+                                                                            <constraint firstItem="HQX-Fz-RCn" firstAttribute="top" secondItem="Obe-M6-xbY" secondAttribute="top" constant="4" id="AQO-hL-FpR"/>
+                                                                            <constraint firstAttribute="bottom" secondItem="8Gb-0S-SzA" secondAttribute="bottom" constant="2" id="Jbv-W5-CWt"/>
+                                                                            <constraint firstItem="Viz-hv-cyj" firstAttribute="centerY" secondItem="8Gb-0S-SzA" secondAttribute="centerY" id="KfB-cn-aCe"/>
+                                                                            <constraint firstItem="8Gb-0S-SzA" firstAttribute="leading" secondItem="Obe-M6-xbY" secondAttribute="leading" constant="2" id="TPI-CG-BPU"/>
+                                                                            <constraint firstItem="8Gb-0S-SzA" firstAttribute="centerY" secondItem="HQX-Fz-RCn" secondAttribute="centerY" id="agT-QZ-F2O"/>
+                                                                            <constraint firstItem="HQX-Fz-RCn" firstAttribute="leading" secondItem="Obe-M6-xbY" secondAttribute="leading" constant="2" id="eIE-S9-tuP"/>
+                                                                            <constraint firstItem="Viz-hv-cyj" firstAttribute="leading" secondItem="HQX-Fz-RCn" secondAttribute="trailing" constant="2" id="xfh-Zj-kTH"/>
+                                                                            <constraint firstItem="Viz-hv-cyj" firstAttribute="leading" secondItem="8Gb-0S-SzA" secondAttribute="trailing" constant="2" id="yva-F7-oof"/>
+                                                                        </constraints>
+                                                                        <connections>
+                                                                            <outlet property="personCombo" destination="HQX-Fz-RCn" id="Osx-9j-lYB"/>
+                                                                            <outlet property="personField" destination="8Gb-0S-SzA" id="SEI-pd-lZx"/>
+                                                                        </connections>
+                                                                    </tableCellView>
+                                                                    <tableCellView identifier="publisher" id="5Ra-ba-7w7" userLabel="publisher" customClass="BookPublisherCell" customModule="Bookish" customModuleProvider="target">
+                                                                        <rect key="frame" x="125" y="52" width="315" height="23"/>
+                                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                        <subviews>
+                                                                            <button identifier="button.RevealPublisher" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6Bs-db-AY7" userLabel="Reveal">
+                                                                                <rect key="frame" x="296" y="3" width="15" height="16"/>
+                                                                                <buttonCell key="cell" type="inline" bezelStyle="inline" image="Reveal" imagePosition="only" alignment="center" controlSize="mini" lineBreakMode="truncatingTail" state="on" inset="2" id="hWC-bP-4Q0">
+                                                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                                    <font key="font" metaFont="smallSystemBold"/>
+                                                                                </buttonCell>
+                                                                                <connections>
+                                                                                    <action selector="performAction:" target="hXB-DS-vDG" id="RpI-Ey-1hG"/>
+                                                                                </connections>
+                                                                            </button>
+                                                                            <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="q63-dF-QC4">
+                                                                                <rect key="frame" x="2" y="2" width="294" height="18"/>
+                                                                                <textFieldCell key="cell" selectable="YES" sendsActionOnEndEditing="YES" alignment="left" placeholderString="publisher" id="8kh-jc-Zdo">
+                                                                                    <font key="font" metaFont="systemBold" size="14"/>
+                                                                                    <color key="textColor" name="Bookish Detail Text"/>
+                                                                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                                                </textFieldCell>
+                                                                                <connections>
+                                                                                    <binding destination="iPd-Ru-zxR" name="font" keyPath="self.cvm.detailFont" id="JZR-OU-b7K"/>
+                                                                                </connections>
+                                                                            </textField>
+                                                                            <comboBox identifier="combo.ChangePublisher" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Qd7-xd-Uad" userLabel="Publisher" customClass="AnnotatedComboBox" customModule="Bookish" customModuleProvider="target">
+                                                                                <rect key="frame" x="2" y="-2" width="295" height="23"/>
+                                                                                <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" placeholderString="publisher" numberOfVisibleItems="5" id="BRY-uU-uqY">
+                                                                                    <font key="font" metaFont="system" size="14"/>
+                                                                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                                    <objectValues>
+                                                                                        <string>Item 1</string>
+                                                                                        <string>Item 2</string>
+                                                                                        <string>Item 3</string>
+                                                                                    </objectValues>
+                                                                                </comboBoxCell>
+                                                                                <connections>
+                                                                                    <action selector="performAction:" target="hXB-DS-vDG" id="aaT-JS-aRK"/>
+                                                                                    <binding destination="CR5-gP-SXo" name="content" keyPath="arrangedObjects.name" id="Hph-8y-H8D"/>
+                                                                                    <binding destination="iPd-Ru-zxR" name="font" keyPath="self.cvm.detailFont" id="vJJ-TI-N1l"/>
+                                                                                </connections>
+                                                                            </comboBox>
+                                                                        </subviews>
+                                                                        <constraints>
+                                                                            <constraint firstItem="Qd7-xd-Uad" firstAttribute="leading" secondItem="5Ra-ba-7w7" secondAttribute="leading" constant="2" id="0U7-oF-Ek6"/>
+                                                                            <constraint firstAttribute="bottom" secondItem="q63-dF-QC4" secondAttribute="bottom" constant="2" id="ENs-oz-gkX"/>
+                                                                            <constraint firstItem="6Bs-db-AY7" firstAttribute="leading" secondItem="q63-dF-QC4" secondAttribute="trailing" constant="2" id="TFM-68-Skd"/>
+                                                                            <constraint firstItem="q63-dF-QC4" firstAttribute="leading" secondItem="5Ra-ba-7w7" secondAttribute="leading" constant="4" id="d76-RA-UdU"/>
+                                                                            <constraint firstItem="6Bs-db-AY7" firstAttribute="centerY" secondItem="q63-dF-QC4" secondAttribute="centerY" id="dzf-Pe-fs8"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="6Bs-db-AY7" secondAttribute="trailing" constant="4" id="fKD-ip-soo"/>
+                                                                            <constraint firstAttribute="bottom" secondItem="Qd7-xd-Uad" secondAttribute="bottom" constant="2" id="jrO-aH-bdx"/>
+                                                                            <constraint firstItem="6Bs-db-AY7" firstAttribute="leading" secondItem="Qd7-xd-Uad" secondAttribute="trailing" constant="2" id="qzp-ZB-mmS"/>
+                                                                        </constraints>
+                                                                        <connections>
+                                                                            <outlet property="publisherCombo" destination="Qd7-xd-Uad" id="lP2-Qk-pFb"/>
+                                                                            <outlet property="publisherField" destination="q63-dF-QC4" id="xrk-Tt-Swb"/>
+                                                                        </connections>
+                                                                    </tableCellView>
+                                                                    <tableCellView identifier="date" id="ph3-eN-NOK" userLabel="date" customClass="BookDateCell" customModule="Bookish" customModuleProvider="target">
+                                                                        <rect key="frame" x="125" y="77" width="315" height="24"/>
+                                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                        <subviews>
+                                                                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="sbu-3d-sR8">
+                                                                                <rect key="frame" x="2" y="2" width="311" height="18"/>
+                                                                                <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" continuous="YES" alignment="left" placeholderString="value" usesSingleLineMode="YES" id="Nmf-qx-JtN">
+                                                                                    <font key="font" metaFont="systemBold" size="14"/>
+                                                                                    <color key="textColor" name="Bookish Detail Text"/>
+                                                                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                                                </textFieldCell>
+                                                                                <connections>
+                                                                                    <binding destination="iPd-Ru-zxR" name="font" keyPath="self.cvm.detailFont" id="UDu-OC-CoC"/>
+                                                                                    <outlet property="delegate" destination="ph3-eN-NOK" id="LHK-7d-X29"/>
+                                                                                </connections>
+                                                                            </textField>
+                                                                        </subviews>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="bottom" secondItem="sbu-3d-sR8" secondAttribute="bottom" constant="2" id="Glp-QX-Cyo"/>
+                                                                            <constraint firstItem="sbu-3d-sR8" firstAttribute="top" secondItem="ph3-eN-NOK" secondAttribute="top" constant="4" id="Nuq-ci-0Rh"/>
+                                                                            <constraint firstItem="sbu-3d-sR8" firstAttribute="leading" secondItem="ph3-eN-NOK" secondAttribute="leading" constant="4" id="Qb0-if-6ui"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="sbu-3d-sR8" secondAttribute="trailing" constant="4" id="qcF-4H-8yu"/>
+                                                                        </constraints>
+                                                                        <connections>
+                                                                            <outlet property="textField" destination="sbu-3d-sR8" id="cWM-Yp-qE6"/>
+                                                                        </connections>
+                                                                    </tableCellView>
+                                                                    <tableCellView identifier="editableDate" id="bf1-KR-OAm" userLabel="date editable" customClass="BookEditableDateCell" customModule="Bookish" customModuleProvider="target">
+                                                                        <rect key="frame" x="125" y="103" width="315" height="24"/>
+                                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                        <subviews>
+                                                                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="FHu-L0-2fo" customClass="AnnotatedTextField" customModule="Bookish" customModuleProvider="target">
+                                                                                <rect key="frame" x="2" y="2" width="292" height="18"/>
+                                                                                <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" continuous="YES" alignment="left" placeholderString="value" usesSingleLineMode="YES" id="cSC-pm-4CO">
+                                                                                    <font key="font" metaFont="systemBold" size="14"/>
+                                                                                    <color key="textColor" name="Bookish Detail Text"/>
+                                                                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                                                </textFieldCell>
+                                                                                <connections>
+                                                                                    <binding destination="iPd-Ru-zxR" name="font" keyPath="self.cvm.detailFont" id="Yg3-fO-1QG"/>
+                                                                                    <outlet property="delegate" destination="bf1-KR-OAm" id="j9V-O0-Nsa"/>
+                                                                                </connections>
+                                                                            </textField>
+                                                                            <button identifier="button.ShowDatePicker" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rHT-TB-CL5" userLabel="Select">
+                                                                                <rect key="frame" x="300" y="3" width="15" height="16"/>
+                                                                                <buttonCell key="cell" type="inline" bezelStyle="inline" image="ChooseDateSmall" imagePosition="only" alignment="center" controlSize="mini" lineBreakMode="truncatingTail" state="on" inset="2" id="hN6-rN-vOm">
+                                                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                                    <font key="font" metaFont="smallSystemBold"/>
+                                                                                </buttonCell>
+                                                                                <connections>
+                                                                                    <action selector="performAction:" target="hXB-DS-vDG" id="ZVc-tw-hWu"/>
+                                                                                </connections>
+                                                                            </button>
+                                                                        </subviews>
+                                                                        <constraints>
+                                                                            <constraint firstItem="rHT-TB-CL5" firstAttribute="leading" secondItem="FHu-L0-2fo" secondAttribute="trailing" constant="8" symbolic="YES" id="7su-y8-liH"/>
+                                                                            <constraint firstAttribute="bottom" secondItem="FHu-L0-2fo" secondAttribute="bottom" constant="2" id="Zwz-og-n9W"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="rHT-TB-CL5" secondAttribute="trailing" id="bkL-X4-CYi"/>
+                                                                            <constraint firstItem="FHu-L0-2fo" firstAttribute="top" secondItem="bf1-KR-OAm" secondAttribute="top" constant="4" id="llL-bQ-mLY"/>
+                                                                            <constraint firstItem="FHu-L0-2fo" firstAttribute="leading" secondItem="bf1-KR-OAm" secondAttribute="leading" constant="4" id="omo-5g-MON"/>
+                                                                            <constraint firstItem="rHT-TB-CL5" firstAttribute="centerY" secondItem="FHu-L0-2fo" secondAttribute="centerY" id="zug-i7-rxm"/>
+                                                                        </constraints>
+                                                                        <connections>
+                                                                            <outlet property="infoButton" destination="rHT-TB-CL5" id="iKc-8w-gIS"/>
+                                                                            <outlet property="textField" destination="FHu-L0-2fo" id="Qaj-S3-GXi"/>
+                                                                        </connections>
+                                                                    </tableCellView>
+                                                                    <tableCellView identifier="editableDimensions" id="OZV-07-tGS" userLabel="dimensions" customClass="BookDimensionsCell" customModule="Bookish" customModuleProvider="target">
+                                                                        <rect key="frame" x="125" y="129" width="315" height="24"/>
+                                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                        <subviews>
+                                                                            <stackView distribution="fillEqually" orientation="horizontal" alignment="top" spacing="10" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YeD-9c-Svh">
+                                                                                <rect key="frame" x="2" y="2" width="311" height="18"/>
+                                                                                <subviews>
+                                                                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="NT3-31-wYX">
+                                                                                        <rect key="frame" x="-2" y="1" width="48" height="17"/>
+                                                                                        <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="width" id="Qg8-Fc-Df5">
+                                                                                            <font key="font" metaFont="system"/>
+                                                                                            <color key="textColor" name="Bookish Label Text"/>
+                                                                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                                        </textFieldCell>
+                                                                                        <connections>
+                                                                                            <binding destination="iPd-Ru-zxR" name="font" keyPath="self.cvm.detailFont" id="DzM-lZ-mPV"/>
+                                                                                        </connections>
+                                                                                    </textField>
+                                                                                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="Uct-nx-Fvm">
+                                                                                        <rect key="frame" x="52" y="0.0" width="47" height="18"/>
+                                                                                        <textFieldCell key="cell" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" alignment="left" placeholderString="width" id="Pp6-rI-4NU">
+                                                                                            <font key="font" metaFont="systemBold" size="14"/>
+                                                                                            <color key="textColor" name="Bookish Detail Text"/>
+                                                                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                                                        </textFieldCell>
+                                                                                        <connections>
+                                                                                            <binding destination="iPd-Ru-zxR" name="font" keyPath="self.cvm.detailFont" id="Bse-TO-Yut"/>
+                                                                                            <outlet property="delegate" destination="OZV-07-tGS" id="t4u-b9-2kc"/>
+                                                                                        </connections>
+                                                                                    </textField>
+                                                                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6RX-Gy-wMc">
+                                                                                        <rect key="frame" x="105" y="1" width="48" height="17"/>
+                                                                                        <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="height" id="vw4-Bd-DOH">
+                                                                                            <font key="font" metaFont="system"/>
+                                                                                            <color key="textColor" name="Bookish Label Text"/>
+                                                                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                                        </textFieldCell>
+                                                                                        <connections>
+                                                                                            <binding destination="iPd-Ru-zxR" name="font" keyPath="self.cvm.detailFont" id="PFf-jl-cfy"/>
+                                                                                        </connections>
+                                                                                    </textField>
+                                                                                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="8Zt-m9-RRf">
+                                                                                        <rect key="frame" x="159" y="0.0" width="47" height="18"/>
+                                                                                        <textFieldCell key="cell" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" alignment="left" placeholderString="height" id="E42-Ig-qlh">
+                                                                                            <font key="font" metaFont="systemBold" size="14"/>
+                                                                                            <color key="textColor" name="Bookish Detail Text"/>
+                                                                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                                                        </textFieldCell>
+                                                                                        <connections>
+                                                                                            <binding destination="iPd-Ru-zxR" name="font" keyPath="self.cvm.detailFont" id="TuW-dh-C6F"/>
+                                                                                            <outlet property="delegate" destination="OZV-07-tGS" id="CLL-7k-aRi"/>
+                                                                                        </connections>
+                                                                                    </textField>
+                                                                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wCh-V3-Gxz">
+                                                                                        <rect key="frame" x="212" y="1" width="48" height="17"/>
+                                                                                        <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="depth" id="5Kv-Mv-Z8U">
+                                                                                            <font key="font" metaFont="system"/>
+                                                                                            <color key="textColor" name="Bookish Label Text"/>
+                                                                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                                        </textFieldCell>
+                                                                                        <connections>
+                                                                                            <binding destination="iPd-Ru-zxR" name="font" keyPath="self.cvm.detailFont" id="Rc0-9T-8Wv"/>
+                                                                                        </connections>
+                                                                                    </textField>
+                                                                                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="m4w-OJ-dra">
+                                                                                        <rect key="frame" x="266" y="0.0" width="47" height="18"/>
+                                                                                        <textFieldCell key="cell" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" alignment="left" placeholderString="depth" id="fZK-YQ-q7L">
+                                                                                            <font key="font" metaFont="systemBold" size="14"/>
+                                                                                            <color key="textColor" name="Bookish Detail Text"/>
+                                                                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                                                        </textFieldCell>
+                                                                                        <connections>
+                                                                                            <binding destination="iPd-Ru-zxR" name="font" keyPath="self.cvm.detailFont" id="T8w-ar-PaC"/>
+                                                                                            <outlet property="delegate" destination="OZV-07-tGS" id="Uyd-sw-1Qs"/>
+                                                                                        </connections>
+                                                                                    </textField>
+                                                                                </subviews>
+                                                                                <visibilityPriorities>
+                                                                                    <integer value="1000"/>
+                                                                                    <integer value="1000"/>
+                                                                                    <integer value="1000"/>
+                                                                                    <integer value="1000"/>
+                                                                                    <integer value="1000"/>
+                                                                                    <integer value="1000"/>
+                                                                                </visibilityPriorities>
+                                                                                <customSpacing>
+                                                                                    <real value="3.4028234663852886e+38"/>
+                                                                                    <real value="3.4028234663852886e+38"/>
+                                                                                    <real value="3.4028234663852886e+38"/>
+                                                                                    <real value="3.4028234663852886e+38"/>
+                                                                                    <real value="3.4028234663852886e+38"/>
+                                                                                    <real value="3.4028234663852886e+38"/>
+                                                                                </customSpacing>
+                                                                            </stackView>
+                                                                        </subviews>
+                                                                        <constraints>
+                                                                            <constraint firstItem="YeD-9c-Svh" firstAttribute="top" secondItem="OZV-07-tGS" secondAttribute="top" constant="4" id="4db-Ll-xXF"/>
+                                                                            <constraint firstAttribute="bottom" secondItem="YeD-9c-Svh" secondAttribute="bottom" constant="2" id="aAZ-0k-3LI"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="YeD-9c-Svh" secondAttribute="trailing" constant="2" id="eYt-aR-RIR"/>
+                                                                            <constraint firstItem="YeD-9c-Svh" firstAttribute="leading" secondItem="OZV-07-tGS" secondAttribute="leading" constant="2" id="ktr-xC-uti"/>
+                                                                        </constraints>
+                                                                        <connections>
+                                                                            <outlet property="heightField" destination="8Zt-m9-RRf" id="xxZ-nX-FUf"/>
+                                                                            <outlet property="lengthField" destination="m4w-OJ-dra" id="kpO-1U-TNR"/>
+                                                                            <outlet property="textField" destination="Uct-nx-Fvm" id="KnQ-G1-RyE"/>
+                                                                            <outlet property="widthField" destination="Uct-nx-Fvm" id="MaL-em-Ce5"/>
+                                                                        </connections>
+                                                                    </tableCellView>
+                                                                    <tableCellView identifier="series" id="X8k-lU-fh1" userLabel="series" customClass="BookSeriesCell" customModule="Bookish" customModuleProvider="target">
+                                                                        <rect key="frame" x="125" y="155" width="315" height="24"/>
+                                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                        <subviews>
+                                                                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="V9b-km-eI4" userLabel="Name">
+                                                                                <rect key="frame" x="2" y="2" width="224" height="18"/>
+                                                                                <textFieldCell key="cell" selectable="YES" sendsActionOnEndEditing="YES" alignment="left" placeholderString="series" id="uZx-rp-KSD">
+                                                                                    <font key="font" metaFont="systemBold" size="14"/>
+                                                                                    <color key="textColor" name="Bookish Detail Text"/>
+                                                                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                                                </textFieldCell>
+                                                                                <connections>
+                                                                                    <binding destination="iPd-Ru-zxR" name="font" keyPath="self.cvm.detailFont" id="v3a-Ju-b66"/>
+                                                                                    <outlet property="delegate" destination="X8k-lU-fh1" id="RPk-9u-xnA"/>
+                                                                                </connections>
+                                                                            </textField>
+                                                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="E6d-pw-nI7" userLabel="Position">
+                                                                                <rect key="frame" x="226" y="2" width="68" height="18"/>
+                                                                                <constraints>
+                                                                                    <constraint firstAttribute="width" constant="64" id="cLm-Ou-hNA"/>
+                                                                                </constraints>
+                                                                                <textFieldCell key="cell" selectable="YES" sendsActionOnEndEditing="YES" alignment="right" placeholderString="#" id="hCR-9v-kKA">
+                                                                                    <font key="font" metaFont="systemBold" size="14"/>
+                                                                                    <color key="textColor" name="Bookish Detail Text"/>
+                                                                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                                                </textFieldCell>
+                                                                                <connections>
+                                                                                    <binding destination="iPd-Ru-zxR" name="font" keyPath="self.cvm.detailFont" id="lfU-sd-caX"/>
+                                                                                    <outlet property="delegate" destination="X8k-lU-fh1" id="XbA-tR-uaz"/>
+                                                                                </connections>
+                                                                            </textField>
+                                                                            <button identifier="button.RevealSeries" horizontalHuggingPriority="260" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sBM-cZ-emg" userLabel="Reveal">
+                                                                                <rect key="frame" x="296" y="3" width="15" height="16"/>
+                                                                                <buttonCell key="cell" type="inline" bezelStyle="inline" image="Reveal" imagePosition="only" alignment="center" controlSize="mini" lineBreakMode="truncatingTail" state="on" inset="2" id="eCN-3w-jLe">
+                                                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                                    <font key="font" metaFont="smallSystemBold"/>
+                                                                                    <connections>
+                                                                                        <action selector="performAction:" target="hXB-DS-vDG" id="ELm-SG-80r"/>
+                                                                                    </connections>
+                                                                                </buttonCell>
+                                                                            </button>
+                                                                            <comboBox verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dnj-ua-zEn" userLabel="Combo" customClass="AnnotatedComboBox" customModule="Bookish" customModuleProvider="target">
+                                                                                <rect key="frame" x="4" y="-1" width="223" height="23"/>
+                                                                                <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" placeholderString="series" numberOfVisibleItems="5" id="NiC-Re-HGz">
+                                                                                    <font key="font" metaFont="system" size="14"/>
+                                                                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                                    <objectValues>
+                                                                                        <string>Item 1</string>
+                                                                                        <string>Item 2</string>
+                                                                                        <string>Item 3</string>
+                                                                                    </objectValues>
+                                                                                </comboBoxCell>
+                                                                                <connections>
+                                                                                    <binding destination="wOp-DM-WH9" name="content" keyPath="arrangedObjects.name" id="MrE-CT-uiq"/>
+                                                                                    <binding destination="iPd-Ru-zxR" name="font" keyPath="self.cvm.detailFont" id="G9d-ea-gF9"/>
+                                                                                    <outlet property="delegate" destination="X8k-lU-fh1" id="PDt-Vr-aZL"/>
+                                                                                </connections>
+                                                                            </comboBox>
+                                                                        </subviews>
+                                                                        <constraints>
+                                                                            <constraint firstItem="sBM-cZ-emg" firstAttribute="leading" secondItem="E6d-pw-nI7" secondAttribute="trailing" constant="4" id="GXn-I3-dM5"/>
+                                                                            <constraint firstItem="E6d-pw-nI7" firstAttribute="centerY" secondItem="V9b-km-eI4" secondAttribute="centerY" id="GiB-xC-bsJ"/>
+                                                                            <constraint firstItem="V9b-km-eI4" firstAttribute="top" secondItem="X8k-lU-fh1" secondAttribute="top" constant="4" id="Ixa-x3-iAF"/>
+                                                                            <constraint firstItem="V9b-km-eI4" firstAttribute="centerY" secondItem="dnj-ua-zEn" secondAttribute="centerY" id="JAV-TV-XJR"/>
+                                                                            <constraint firstItem="sBM-cZ-emg" firstAttribute="centerY" secondItem="V9b-km-eI4" secondAttribute="centerY" id="SBO-VY-4fE"/>
+                                                                            <constraint firstItem="dnj-ua-zEn" firstAttribute="leading" secondItem="X8k-lU-fh1" secondAttribute="leading" constant="4" id="cGk-Z1-e4y"/>
+                                                                            <constraint firstItem="V9b-km-eI4" firstAttribute="leading" secondItem="X8k-lU-fh1" secondAttribute="leading" constant="4" id="cPi-F2-K9G"/>
+                                                                            <constraint firstAttribute="bottom" secondItem="V9b-km-eI4" secondAttribute="bottom" constant="2" id="eFC-Qp-SzD"/>
+                                                                            <constraint firstItem="E6d-pw-nI7" firstAttribute="leading" secondItem="V9b-km-eI4" secondAttribute="trailing" constant="4" id="htM-Nz-cTK"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="sBM-cZ-emg" secondAttribute="trailing" constant="4" id="siG-po-PSv"/>
+                                                                            <constraint firstItem="E6d-pw-nI7" firstAttribute="leading" secondItem="dnj-ua-zEn" secondAttribute="trailing" constant="4" id="wbI-Ag-Hzh"/>
+                                                                        </constraints>
+                                                                        <connections>
+                                                                            <outlet property="positionField" destination="E6d-pw-nI7" id="dDN-CB-Y3S"/>
+                                                                            <outlet property="seriesCombo" destination="dnj-ua-zEn" id="ucj-KK-wrX"/>
+                                                                            <outlet property="seriesField" destination="V9b-km-eI4" id="a0b-U2-xTw"/>
+                                                                            <outlet property="textField" destination="V9b-km-eI4" id="ILm-HD-OKb"/>
+                                                                        </connections>
+                                                                    </tableCellView>
+                                                                </prototypeCellViews>
+                                                            </tableColumn>
+                                                        </tableColumns>
+                                                        <connections>
+                                                            <outlet property="dataSource" destination="iPd-Ru-zxR" id="bqY-2j-vb2"/>
+                                                            <outlet property="delegate" destination="iPd-Ru-zxR" id="T64-zi-uxZ"/>
+                                                        </connections>
+                                                    </tableView>
+                                                </subviews>
+                                                <nil key="backgroundColor"/>
+                                            </clipView>
+                                            <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="0.33333333333333331" horizontal="YES" id="DHT-a3-Mbm">
+                                                <rect key="frame" x="0.0" y="257" width="442" height="16"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                            </scroller>
+                                            <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="SeE-4J-Sd8">
+                                                <rect key="frame" x="224" y="17" width="15" height="102"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                            </scroller>
+                                        </scrollView>
+                                        <button identifier="button.ToggleEditing" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Lbu-fX-2FZ">
+                                            <rect key="frame" x="372" y="13" width="64" height="32"/>
+                                            <buttonCell key="cell" type="push" title="Edit" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="UCg-PD-mdH">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="performAction:" target="hXB-DS-vDG" id="iI2-pq-co3"/>
+                                            </connections>
+                                        </button>
+                                        <button identifier="button..NewBook" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="EZV-LB-qVW">
+                                            <rect key="frame" x="14" y="13" width="36" height="35"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="24" id="NW4-nu-cnX"/>
+                                                <constraint firstAttribute="width" constant="24" id="uj6-Kv-K2a"/>
+                                            </constraints>
+                                            <buttonCell key="cell" type="push" bezelStyle="rounded" image="NSAddTemplate" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="f4q-S6-aGx">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="performAction:" target="hXB-DS-vDG" id="X5C-8B-48l"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="Lbu-fX-2FZ" secondAttribute="bottom" constant="20" symbolic="YES" id="0Go-V0-vPH"/>
+                                        <constraint firstItem="dMP-oM-auc" firstAttribute="top" secondItem="dHN-9c-iuf" secondAttribute="top" constant="16" id="2iI-rW-xht"/>
+                                        <constraint firstItem="F4f-dy-2SG" firstAttribute="leading" secondItem="dHN-9c-iuf" secondAttribute="leading" constant="4" id="4Pa-R6-fXC"/>
+                                        <constraint firstAttribute="bottom" secondItem="EZV-LB-qVW" secondAttribute="bottom" constant="20" symbolic="YES" id="FpU-Pc-QSF"/>
+                                        <constraint firstItem="dMP-oM-auc" firstAttribute="leading" secondItem="dHN-9c-iuf" secondAttribute="leading" constant="50" id="HyG-MU-B8Y"/>
+                                        <constraint firstAttribute="trailing" secondItem="Lbu-fX-2FZ" secondAttribute="trailing" constant="20" symbolic="YES" id="Jeg-0V-omQ"/>
+                                        <constraint firstItem="EZV-LB-qVW" firstAttribute="leading" secondItem="dHN-9c-iuf" secondAttribute="leading" constant="20" symbolic="YES" id="Lrf-7y-IEC"/>
+                                        <constraint firstAttribute="trailing" secondItem="GRq-94-pzl" secondAttribute="trailing" constant="20" symbolic="YES" id="Min-KM-KnT"/>
+                                        <constraint firstAttribute="trailing" secondItem="F4f-dy-2SG" secondAttribute="trailing" constant="4" id="eft-s7-wnz"/>
+                                        <constraint firstItem="F4f-dy-2SG" firstAttribute="top" secondItem="GRq-94-pzl" secondAttribute="bottom" constant="4" id="jHe-jX-Aow"/>
+                                        <constraint firstItem="Lbu-fX-2FZ" firstAttribute="top" secondItem="F4f-dy-2SG" secondAttribute="bottom" constant="20" symbolic="YES" id="mQA-pH-2fT"/>
+                                        <constraint firstItem="GRq-94-pzl" firstAttribute="leading" secondItem="dMP-oM-auc" secondAttribute="trailing" constant="4" id="rMD-1b-BX9"/>
+                                        <constraint firstItem="GRq-94-pzl" firstAttribute="centerY" secondItem="dMP-oM-auc" secondAttribute="centerY" id="tzB-NT-WE9"/>
+                                        <constraint firstItem="Lbu-fX-2FZ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="EZV-LB-qVW" secondAttribute="trailing" constant="12" symbolic="YES" id="yES-4H-Gvt"/>
+                                    </constraints>
+                                </view>
+                                <color key="fillColor" name="Bookish Detail"/>
+                            </box>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="6ox-qd-nVx" firstAttribute="top" secondItem="R3E-BF-7F8" secondAttribute="top" id="MsT-O2-lZ3"/>
+                            <constraint firstAttribute="bottom" secondItem="6ox-qd-nVx" secondAttribute="bottom" id="TX9-Ff-cdz"/>
+                            <constraint firstItem="6ox-qd-nVx" firstAttribute="leading" secondItem="R3E-BF-7F8" secondAttribute="leading" id="U3F-3V-Ems"/>
+                            <constraint firstAttribute="trailing" secondItem="6ox-qd-nVx" secondAttribute="trailing" id="h4O-pG-rfz"/>
+                        </constraints>
+                    </view>
                     <connections>
-                        <binding destination="PUA-xK-Wyi" name="sortDescriptors" keyPath="self.cvm.bookSorting" previousBinding="bBC-NH-B6M" id="zPg-hY-aDJ"/>
-                        <binding destination="PUA-xK-Wyi" name="managedObjectContext" keyPath="self.cvm.managedObjectContext" id="h2w-0g-ntU"/>
-                        <binding destination="PUA-xK-Wyi" name="selectionIndexes" keyPath="self.cvm.selectedBooks" id="bBC-NH-B6M"/>
+                        <outlet property="controlColumn" destination="7Kn-Bq-No6" id="MEs-RR-4IF"/>
+                        <outlet property="detailsTable" destination="2eK-Gk-TD8" id="Ukm-lJ-MMj"/>
+                        <outlet property="editButton" destination="Lbu-fX-2FZ" id="odc-gd-Wyt"/>
+                        <outlet property="imageView" destination="dMP-oM-auc" id="h0U-0n-SxO"/>
+                        <outlet property="lastFixedKeyView" destination="1Sf-0s-kNb" id="EdG-75-7rl"/>
+                        <outlet property="nameView" destination="8AP-XC-qfz" id="w5V-Nc-idP"/>
+                        <outlet property="personList" destination="1YZ-LZ-X6M" id="8up-bV-aPY"/>
+                        <outlet property="publisherList" destination="CR5-gP-SXo" id="giI-cG-g1g"/>
+                        <outlet property="roleList" destination="w9J-74-RHS" id="s5H-zG-i6q"/>
+                        <outlet property="seriesList" destination="wOp-DM-WH9" id="tPE-Z6-Oua"/>
+                        <outlet property="subtitleView" destination="1Sf-0s-kNb" id="WhU-AZ-tcw"/>
+                    </connections>
+                </viewController>
+                <customObject id="hXB-DS-vDG" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <arrayController mode="entity" entityName="Person" automaticallyPreparesContent="YES" id="1YZ-LZ-X6M">
+                    <connections>
+                        <binding destination="iPd-Ru-zxR" name="managedObjectContext" keyPath="self.cvm.managedObjectContext" id="FQp-2R-3UT"/>
                     </connections>
                 </arrayController>
+                <arrayController mode="entity" entityName="Series" automaticallyPreparesContent="YES" id="wOp-DM-WH9" userLabel="Series List">
+                    <connections>
+                        <binding destination="iPd-Ru-zxR" name="managedObjectContext" keyPath="self.cvm.managedObjectContext" id="Omz-ZW-Vgk"/>
+                    </connections>
+                </arrayController>
+                <arrayController mode="entity" entityName="Publisher" automaticallyPreparesContent="YES" id="CR5-gP-SXo" userLabel="Publisher List">
+                    <connections>
+                        <binding destination="iPd-Ru-zxR" name="managedObjectContext" keyPath="self.cvm.managedObjectContext" id="ala-dp-hWR"/>
+                    </connections>
+                </arrayController>
+                <arrayController mode="entity" entityName="Role" automaticallyPreparesContent="YES" id="w9J-74-RHS" userLabel="Role List">
+                    <connections>
+                        <binding destination="iPd-Ru-zxR" name="managedObjectContext" keyPath="self.cvm.managedObjectContext" id="G2V-eU-KER"/>
+                    </connections>
+                </arrayController>
+                <userDefaultsController representsSharedInstance="YES" id="Sho-0I-oFd"/>
             </objects>
-            <point key="canvasLocation" x="238" y="1976"/>
+            <point key="canvasLocation" x="1311" y="1820"/>
         </scene>
     </scenes>
     <resources>
         <image name="AddBook" width="32" height="32"/>
         <image name="AddRelationship" width="32" height="32"/>
+        <image name="BookPlaceholder" width="512" height="512"/>
         <image name="Books" width="32" height="32"/>
+        <image name="ChooseDateSmall" width="12" height="12"/>
         <image name="HilightMarker" width="4" height="36"/>
+        <image name="Minus" width="12" height="12"/>
+        <image name="NSAddTemplate" width="11" height="11"/>
         <image name="People" width="32" height="32"/>
         <image name="Publishers" width="32" height="32"/>
         <image name="RemoveBook" width="32" height="32"/>
         <image name="RemoveRelationship" width="32" height="32"/>
+        <image name="Reveal" width="12" height="12"/>
         <image name="Series" width="32" height="32"/>
         <namedColor name="Bookish Detail">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <namedColor name="Bookish Detail Text">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="Bookish Index">
-            <color red="0.97254901960784312" green="0.97254901960784312" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.97299998998641968" green="0.97299998998641968" blue="0.98000001907348633" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Bookish Index Text">
             <color red="0.35294117647058826" green="0.36862745098039218" blue="0.3843137254901961" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Bookish Label Text">
+            <color red="0.54117647058823526" green="0.55686274509803924" blue="0.5725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Bookish Text">
+            <color name="ibMissingResourceColor" catalog="#$assets-com.apple.dt.DVTKit" colorSpace="catalog"/>
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>

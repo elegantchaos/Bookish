@@ -40,22 +40,27 @@ class GenericDetailController: CollectionViewController {
     @IBOutlet weak var roleList: NSArrayController!
     
     var entityName: String = ""
-    var selectedItems: [ModelObject] = []
-    var source = BookDetailProvider()
+    @objc var index: NSArrayController!
+    var source = DetailProvider()
     var editing = false
     
     internal lazy var indexView: GenericIndexController = nearestMatchingController()
     
-    @objc var index: NSArrayController {
-        return indexView.indexArray!
-    }
+//    @objc var index: NSArrayController {
+//        return indexView.indexArray!
+//    }
     
    var rows = [NSManagedObject]()
     var availableRows = 0
     var keyViewTimer: Timer? = nil
     
-    func setup(for object: ModelObject, selection: [ModelObject]) {
-        
+    func setup(for index: GenericIndexController, type entityType: ModelObject.Type) {
+        detailChannel.debug("setup for \(entityType)")
+        indexView = index
+        self.index = index.indexArray
+        entityName = String(describing: entityType)
+        source = entityType.getProvider()
+        selectionChanged()
     }
     
     func identifier(for item: NSManagedObject) -> NSUserInterfaceItemIdentifier {
@@ -97,7 +102,7 @@ class GenericDetailController: CollectionViewController {
     }
     
     func addContextForDetail(context: ActionContext) {
-        context.info[ActionContext.selectionKey] = selectedItems
+        context.info[ActionContext.selectionKey] = index?.selectedObjects
     }
     
     func items<Container, Item>(in selection: [Container], property: String) -> (Set<Item>, Set<Item>) where Container: NSManagedObject {
@@ -122,12 +127,25 @@ class GenericDetailController: CollectionViewController {
     
     func selectionChanged() {
         detailChannel.debug("selection changed")
-        let selectedCount = index.selectedObjects?.count ?? 0
+        let selectedCount = index?.selectedObjects?.count ?? 0
         let showDetail = selectedCount > 0
         detailsTable.isHidden = !showDetail
-        if showDetail {
+        if showDetail, let object = index.selection as? NSObject {
             updateRows()
+            
+            if let path = source.titleProperty {
+                nameView.objectValue = object.value(forKey: path)
+            }
+            
+            if let path = source.subtitleProperty, let value = object.value(forKey: path) as? String, source.isEditing || !value.isEmpty {
+                subtitleView.objectValue = value
+                subtitleView.isHidden = false
+            } else {
+                subtitleView.isHidden = true
+            }
+
         }
+        
         if let wc = view.window?.windowController as? CollectionWindowController {
             wc.validateButtons()
         }
@@ -152,12 +170,17 @@ class GenericDetailController: CollectionViewController {
         
     }
     
-    func updateRows() {
-        rows = detailItemsForSelection()
-        detailsTable.reloadData()
-        
+    func calculateRows() {
+        let selection = index?.selectedObjects as? [ModelObject] ?? []
+        source.filter(for: selection, editing: editing, context: cvm)
     }
 
+    func updateRows() {
+        detailChannel.debug("updating people list")
+        
+        calculateRows()
+        detailsTable.reloadData()
+    }
     func person(at index: Int) -> Person? {
         if let people = personList.arrangedObjects as? [Person], index != -1 {
             return people[index]
@@ -282,72 +305,72 @@ extension GenericDetailController {
 
 // MARK: Action Support
 
-extension GenericDetailController: BookChangeObserver {
-    
-    
-    func detailRow(for context: ActionContext) -> Int {
-        var row = -1
-        if let view = context.sender as? NSView {
-            row = detailsTable.row(for: view)
-        }
-        
-        if row < 0, let view = view.window?.firstResponder as? NSView {
-            row = detailsTable.row(for: view)
-        }
-        
-        return row
-    }
-    
-    
-    func added(relationship: Relationship) {
-        //        updateRows()
-        let index = source.insert(relationship: relationship)
-        detailsTable.insertRows(at: IndexSet(integer: index + 1), withAnimation: .slideDown)
-    }
-    
-    func removed(relationship: Relationship) {
-        if let row = source.remove(relationship: relationship) {
-            detailsTable.removeRows(at: IndexSet(integer: row), withAnimation: .slideUp)
-        }
-    }
-    
-    func replaced(relationship: Relationship, with: Relationship) {
-        //        updateRows()
-        //        if let row = source.update(relationship: relationship, with: with) {
-        //            detailsTable.reloadData()
-        ////            detailsTable.reloadData(forRowIndexes: IndexSet(integer: row), columnIndexes: IndexSet([0,1,2]))
-        //        }
-    }
-    
-    func removed(series: Series) {
-        if let row = source.remove(series: series) {
-            detailsTable.removeRows(at: IndexSet(integer: row), withAnimation: .slideUp)
-        }
-        
-    }
-    
-    func added(publisher: Publisher) {
-        let _ = source.insert(publisher: publisher)
-    }
-    
-    func removed(publisher: Publisher) {
-        let _ = source.remove(publisher: publisher)
-    }
-    
-    func created(books: [Book]) {
-        detailChannel.debug("books created")
-        DispatchQueue.main.async {
-            let info = ActionInfo(sender: self)
-            self.application.actionManager.perform(identifier: "StartEditing", info: info)
-        }
-    }
-    
-    func deleted(books: [Book]) {
-        DispatchQueue.main.async {
-            self.application.actionManager.perform(identifier: "StopEditing")
-        }
-    }
-    
-    
-    
-}
+//extension GenericDetailController: BookChangeObserver {
+//
+//
+//    func detailRow(for context: ActionContext) -> Int {
+//        var row = -1
+//        if let view = context.sender as? NSView {
+//            row = detailsTable.row(for: view)
+//        }
+//
+//        if row < 0, let view = view.window?.firstResponder as? NSView {
+//            row = detailsTable.row(for: view)
+//        }
+//
+//        return row
+//    }
+//
+//
+//    func added(relationship: Relationship) {
+//        //        updateRows()
+//        let index = source.insert(relationship: relationship)
+//        detailsTable.insertRows(at: IndexSet(integer: index + 1), withAnimation: .slideDown)
+//    }
+//
+//    func removed(relationship: Relationship) {
+//        if let row = source.remove(relationship: relationship) {
+//            detailsTable.removeRows(at: IndexSet(integer: row), withAnimation: .slideUp)
+//        }
+//    }
+//
+//    func replaced(relationship: Relationship, with: Relationship) {
+//        //        updateRows()
+//        //        if let row = source.update(relationship: relationship, with: with) {
+//        //            detailsTable.reloadData()
+//        ////            detailsTable.reloadData(forRowIndexes: IndexSet(integer: row), columnIndexes: IndexSet([0,1,2]))
+//        //        }
+//    }
+//
+//    func removed(series: Series) {
+//        if let row = source.remove(series: series) {
+//            detailsTable.removeRows(at: IndexSet(integer: row), withAnimation: .slideUp)
+//        }
+//
+//    }
+//
+//    func added(publisher: Publisher) {
+//        let _ = source.insert(publisher: publisher)
+//    }
+//
+//    func removed(publisher: Publisher) {
+//        let _ = source.remove(publisher: publisher)
+//    }
+//
+//    func created(books: [Book]) {
+//        detailChannel.debug("books created")
+//        DispatchQueue.main.async {
+//            let info = ActionInfo(sender: self)
+//            self.application.actionManager.perform(identifier: "StartEditing", info: info)
+//        }
+//    }
+//
+//    func deleted(books: [Book]) {
+//        DispatchQueue.main.async {
+//            self.application.actionManager.perform(identifier: "StopEditing")
+//        }
+//    }
+//
+//
+//
+//}

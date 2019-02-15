@@ -30,9 +30,6 @@ class GenericIndexController: CollectionViewController {
         var observer: NSKeyValueObservation? = nil
     }
     
-    override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
-        print("blah")
-    }
 
     var entityType: ModelObject.Type = ModelObject.self
     var entityName: String = ""
@@ -102,13 +99,15 @@ class GenericIndexController: CollectionViewController {
     
     func selectionChanged() {
         indexChannel.debug("\(entityType) selection changed")
-        detailView.selectionChanged()
-        
-        let entityCount = (indexArray.arrangedObjects as? NSArray)?.count ?? 0
-        let selectedCount = indexArray.selectionIndexes.count
-        selectionLabel.stringValue = entityType.entityCount(entityCount, selected: selectedCount, prefix: "selected")
-        selectionLabel.isHidden = selectedCount < 2
-        indexSearchField.placeholderString = entityType.entityCount(entityCount, prefix: "search")
+        if let selection = indexArray.selectedObjects as? [ModelObject] {
+            detailView.setup(for: self, type: entityType)
+            
+            let entityCount = (indexArray.arrangedObjects as? NSArray)?.count ?? 0
+            let selectedCount = selection.count
+            selectionLabel.stringValue = entityType.entityCount(entityCount, selected: selectedCount, prefix: "selected")
+            selectionLabel.isHidden = selectedCount < 2
+            indexSearchField.placeholderString = entityType.entityCount(entityCount, prefix: "search")
+        }
     }
     
     func select(items: [ModelObject]) {

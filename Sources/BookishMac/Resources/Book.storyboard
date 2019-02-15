@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14490.59" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
+        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14490.59"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -24,7 +25,7 @@
                                             <rect key="frame" x="0.0" y="47" width="200" height="333"/>
                                             <clipView key="contentView" drawsBackground="NO" id="MeP-Ej-IYa">
                                                 <rect key="frame" x="0.0" y="0.0" width="200" height="333"/>
-                                                <autoresizingMask key="autoresizingMask"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <tableView identifier="books" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnSelection="YES" autosaveColumns="NO" rowHeight="21" rowSizeStyle="automatic" usesAutomaticRowHeights="YES" viewBased="YES" id="jZN-rJ-ulS">
                                                         <rect key="frame" x="0.0" y="0.0" width="200" height="333"/>
@@ -228,7 +229,7 @@
                                             <rect key="frame" x="4" y="61" width="442" height="273"/>
                                             <clipView key="contentView" drawsBackground="NO" id="5CS-Yo-P4n">
                                                 <rect key="frame" x="0.0" y="0.0" width="442" height="273"/>
-                                                <autoresizingMask key="autoresizingMask"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <tableView identifier="book-details" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="none" columnReordering="NO" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="24" rowSizeStyle="automatic" usesAutomaticRowHeights="YES" viewBased="YES" id="vV5-vW-Afl" userLabel="Table">
                                                         <rect key="frame" x="0.0" y="0.0" width="442" height="273"/>

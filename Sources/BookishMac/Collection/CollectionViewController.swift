@@ -9,7 +9,6 @@ import Logger
 let collectionViewChannel = Logger("CollectionView")
 
 class CollectionViewController: NSViewController, ViewControllerWithViewModel {
-    typealias ViewModel = CollectionViewState
     
     @objc let cvm: CollectionViewState
     
@@ -18,7 +17,7 @@ class CollectionViewController: NSViewController, ViewControllerWithViewModel {
         super.init(coder: coder)
     }
     
-    func windowDidLoad(_ window: CollectionWindowController) {
+    func windowDidLoad(_ window: NSWindowController) {
         collectionViewChannel.debug("\(self) windowDidLoad")
     }
     

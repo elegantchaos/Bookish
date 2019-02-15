@@ -11,8 +11,7 @@ import AppKit
  */
 
 protocol ViewControllerWithViewModel {
-    associatedtype ViewModel: WindowControllerViewModel
-    func windowDidLoad(_ window: ViewModel.WindowController)
+    func windowDidLoad(_ window: NSWindowController)
 }
 
 /**
@@ -61,7 +60,7 @@ protocol WindowControllerViewModel {
  
  */
 
-class WindowControllerFactory<ViewModel: WindowControllerViewModel> where ViewModel.WindowController.ViewModel == ViewModel, ViewModel.ViewController.ViewModel == ViewModel {
+class WindowControllerFactory<ViewModel: WindowControllerViewModel> where ViewModel.WindowController.ViewModel == ViewModel {
     private var modelBeingCreated: ViewModel?
     typealias FinishedLoadingCallback = (ViewModel.WindowController) -> Void
 
@@ -87,7 +86,7 @@ class WindowControllerFactory<ViewModel: WindowControllerViewModel> where ViewMo
     }
     
     func notifyFinishedLoading(window: ViewModel.WindowController, controller: NSViewController) {
-        (controller as? ViewModel.ViewController)?.windowDidLoad(window)
+        (controller as? ViewControllerWithViewModel)?.windowDidLoad(window)
         for child in controller.children {
             notifyFinishedLoading(window: window, controller: child)
         }
