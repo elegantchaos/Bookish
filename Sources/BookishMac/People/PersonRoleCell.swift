@@ -7,8 +7,8 @@ import AppKit
 import BookishModel
 
 class RelationshipCell: NSTableCellView, DetailTableCell {
-    func setup(for view: DetailControllerBase, row: Int, item: NSManagedObject) {
-                      if let role = item as? Role, let name = role.name {
+    func setup(for row: DetailItem, of view: GenericDetailController) {
+        if let item = row as? PersonDetailItem, let role = item.relationship?.role, let name = role.name {
             objectValue = item
             textField?.stringValue = "Books as \(name)"
             validateButtons()

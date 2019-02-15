@@ -37,7 +37,7 @@ class GenericIndexController: CollectionViewController {
     var entityType: ModelObject.Type = ModelObject.self
     var entityName: String = ""
     
-    lazy var detailView: DetailControllerBase = nearestMatchingController()
+    lazy var detailView: GenericDetailController = nearestMatchingController()
     
     var observers: [NSKeyValueObservation] = []
     var fetchSessions: [FetchSession] = []

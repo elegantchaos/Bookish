@@ -11,8 +11,8 @@ class BookDateCell: NSTableCellView {
     @IBOutlet weak var infoButton: NSButton!
 }
 
-extension BookDateCell: BookDetailTableCell {
-    func setup(for view: BookDetailViewController, row: DetailItem) {
+extension BookDateCell: DetailTableCell {
+    func setup(for row: DetailItem, of view: GenericDetailController) {
         assert(row is SimpleDetailItem)
         if let subview = textField,
             let transformer = ValueTransformer(forName: NSValueTransformerName(rawValue: "DateToString")),

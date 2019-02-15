@@ -9,7 +9,7 @@ import BookishModel
 import Dispatch
 import Logger
 
-class BookDetailViewController: DetailController<Book>, BookLifecycleObserver {
+class GenericDetailController: DetailController<Book>, BookLifecycleObserver {
     static let HeadingColumnID = NSUserInterfaceItemIdentifier(rawValue: "heading")
     static let ControlColumnID = NSUserInterfaceItemIdentifier(rawValue: "control")
 
@@ -57,7 +57,7 @@ class BookDetailViewController: DetailController<Book>, BookLifecycleObserver {
         let viewID = NSUserInterfaceItemIdentifier(rawValue: rowInfo.viewID(for: columnID.rawValue))
         
         guard let view = tableView.makeView(withIdentifier: viewID, owner: self) else { return nil }
-        if let cell = view as? BookDetailTableCell {
+        if let cell = view as? DetailTableCell {
             cell.setup(for: self, row: rowInfo)
         }
         view.scheduleForValidation()
@@ -78,42 +78,12 @@ class BookDetailViewController: DetailController<Book>, BookLifecycleObserver {
         }
     }
 
-    func person(at index: Int) -> Person? {
-        if let people = personList.arrangedObjects as? [Person], index != -1 {
-            return people[index]
-        }
-        
-        return nil
-    }
-    
-    func index(of person: Person) -> Int? {
-        if let people = personList.arrangedObjects as? [Person] {
-            return people.firstIndex(of: person)
-        }
-        
-        return nil
-    }
-    
-    func publisher(at index: Int) -> Publisher? {
-        if let publishers = publisherList.arrangedObjects as? [Publisher], index != -1 {
-            return publishers[index]
-        }
-        
-        return nil
-    }
-    
-    func index(of publisher: Publisher) -> Int? {
-        if let publishers = publisherList.arrangedObjects as? [Publisher] {
-            return publishers.firstIndex(of: publisher)
-        }
-        
-        return nil
-    }
+
 }
 
 // MARK: EditableView Support
 
-extension BookDetailViewController: EditableView {
+extension GenericDetailController: EditableView {
     var isEditing: Bool { return editing }
     
     func setEditing(_ value: Bool) {
@@ -147,14 +117,14 @@ extension BookDetailViewController: EditableView {
 
 // MARK: Local IBActions
 
-extension BookDetailViewController {
+extension GenericDetailController {
      
 }
 
 
 // MARK: Action Support
 
-extension BookDetailViewController: BookChangeObserver {
+extension GenericDetailController: BookChangeObserver {
 
     
     func detailRow(for context: ActionContext) -> Int {
@@ -227,6 +197,6 @@ extension BookDetailViewController: BookChangeObserver {
 
 // MARK: Table Support
 
-protocol BookDetailTableCell: KeyableTableCell {
-    func setup(for: BookDetailViewController, row: DetailItem)
+protocol DetailTableCell: KeyableTableCell {
+    func setup(for: GenericDetailController, row: DetailItem)
 }

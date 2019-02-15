@@ -8,16 +8,16 @@ import AppKit
 import BookishModel
 
 
-class BookRoleCell: NSTableCellView, BookDetailTableCell {
+class BookRoleCell: NSTableCellView, DetailTableCell {
     @IBOutlet weak var rolePopup: ColoredPopUpButton!
-    func setup(for detailView: BookDetailViewController, row: DetailItem) {
+    func setup(for row: DetailItem, of view: GenericDetailController) {
         assert(row is PersonDetailItem)
         if row.placeholder {
             rolePopup.selectItem(withTitle: "author")
         } else if let item = row as? PersonDetailItem, let relationship = item.relationship {
             objectValue = relationship
             
-            if detailView.editing {
+            if view.editing {
                 let index = rolePopup.indexOfItem(withRepresentedObject: relationship.role)
                 rolePopup.select(rolePopup.item(at: index))
             } else {
@@ -25,8 +25,8 @@ class BookRoleCell: NSTableCellView, BookDetailTableCell {
             }
         }
         
-        textField?.isHidden = detailView.editing
-        rolePopup.isHidden = !detailView.editing
+        textField?.isHidden = view.editing
+        rolePopup.isHidden = !view.editing
         rolePopup.isEnabled = true
     }
     

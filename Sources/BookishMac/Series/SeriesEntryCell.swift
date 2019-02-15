@@ -9,12 +9,12 @@ import Actions
 import BookishModel
 
 class SeriesEntryCell: NSTableCellView, ActionContextProvider, DetailTableCell {
-    func setup(for view: DetailControllerBase, row: Int, item: NSManagedObject) {
-        if let entry = item as? SeriesEntry, let name = entry.book?.name {
-            objectValue = item
-            textField?.stringValue = "#\(entry.position): \(name)"
-            validateButtons()
-        }
+    func setup(for row: DetailItem, of view: GenericDetailController) {
+//        if let item = row as? SeriesDetailItem, let entry = item.series, let name = entry.book?.name {
+//            objectValue = item
+//            textField?.stringValue = "#\(entry.position): \(name)"
+//            validateButtons()
+//        }
     }
     
     func provide(context: ActionContext) {

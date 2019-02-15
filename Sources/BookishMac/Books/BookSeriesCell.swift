@@ -11,25 +11,25 @@ class BookSeriesCell: AnnotatedTableCellView {
     @IBOutlet weak var seriesField: NSTextField!
     @IBOutlet weak var seriesCombo: AnnotatedComboBox!
     @IBOutlet weak var positionField: NSTextField!
-    var detailView: BookDetailViewController!
+    var detailView: GenericDetailController!
 }
 
-extension BookSeriesCell: BookDetailTableCell {
-    func setup(for view: BookDetailViewController, row: DetailItem) {
+extension BookSeriesCell: DetailTableCell {
+    func setup(for row: DetailItem, of view: GenericDetailController) {
         assert(row is SeriesDetailItem)
         
         detailView = view
         if row.placeholder {
             seriesCombo.stringValue = ""
             positionField.stringValue = ""
-        } else if let item = row as? SeriesDetailItem, let series = item.series {
+        } else if let item = row as? SeriesDetailItem, let series = item.series, let selection = view.selectedItems as? [Book] {
             objectValue = series
             if let name = series.name {
                 seriesField?.stringValue = name
                 seriesCombo?.stringValue = name
             }
             
-            let selection = view.selectedItems()
+            
             switch selection.count {
             case 1:
                 positionField.integerValue = selection[0].position(in: series)

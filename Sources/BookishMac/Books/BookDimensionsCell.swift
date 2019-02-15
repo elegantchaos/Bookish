@@ -9,14 +9,14 @@ import Actions
 
 fileprivate var detailBindingContext: Int = 0
 
-class BookDimensionsCell: AnnotatedTableCellView, BookDetailTableCell {
+class BookDimensionsCell: AnnotatedTableCellView, DetailTableCell {
     var index: NSArrayController?
     
     @IBOutlet weak var widthField: NSTextField!
     @IBOutlet weak var heightField: NSTextField!
     @IBOutlet weak var lengthField: NSTextField!
     
-    func setup(for view: BookDetailViewController, row: DetailItem) {
+    func setup(for row: DetailItem, of view: GenericDetailController) {
         assert(row is SimpleDetailItem)
         
         index = view.index

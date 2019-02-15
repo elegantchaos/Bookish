@@ -7,12 +7,12 @@ import Actions
 import BookishModel
 import AppKit
 
-class BookControlCell: NSTableCellView, BookDetailTableCell {
+class BookControlCell: NSTableCellView, DetailTableCell {
     
     @IBOutlet weak var removeButton: NSButton!
     private var objectKey: String = ""
     
-    func setup(for detailView: BookDetailViewController, row: DetailItem) {
+    func setup(for row: DetailItem, of view: GenericDetailController) {
         if let (key, identifier, object) = row.removeAction {
             objectValue = object
             objectKey = key

@@ -11,11 +11,11 @@ class BookPublisherCell: AnnotatedTableCellView {
     @IBOutlet weak var publisherField: NSTextField!
     @IBOutlet weak var publisherCombo: AnnotatedComboBox!
     
-    var detailView: BookDetailViewController!
+    var detailView: GenericDetailController!
 }
 
-extension BookPublisherCell: BookDetailTableCell {
-    func setup(for view: BookDetailViewController, row: DetailItem) {
+extension BookPublisherCell: DetailTableCell {
+    func setup(for row: DetailItem, of view: GenericDetailController) {
         assert(row is PublisherDetailItem)
 
         detailView = view

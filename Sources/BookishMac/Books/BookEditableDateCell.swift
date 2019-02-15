@@ -22,8 +22,8 @@ class BookEditableDateCell: AnnotatedTableCellView, ActionContextProvider {
     
 }
 
-extension BookEditableDateCell: BookDetailTableCell {
-    func setup(for view: BookDetailViewController, row: DetailItem) {
+extension BookEditableDateCell: DetailTableCell {
+    func setup(for row: DetailItem, of view: GenericDetailController) {
         assert(row is SimpleDetailItem)
         if let subview = textField,
             let transformer = ValueTransformer(forName: NSValueTransformerName(rawValue: "DateToString")),

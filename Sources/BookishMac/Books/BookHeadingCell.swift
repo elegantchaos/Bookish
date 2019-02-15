@@ -6,8 +6,8 @@
 import BookishModel
 import AppKit
 
-class BookHeadingCell: NSTableCellView, BookDetailTableCell {
-    func setup(for detailView: BookDetailViewController, row: DetailItem) {
+class BookHeadingCell: NSTableCellView, DetailTableCell {
+    func setup(for row: DetailItem, of view: GenericDetailController) {
         if let field = subviews.first as? NSTextField {
             field.stringValue = row.heading
         }
