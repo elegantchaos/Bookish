@@ -102,7 +102,8 @@ class GenericDetailController: CollectionViewController {
     }
     
     func addContextForDetail(context: ActionContext) {
-        context.info[ActionContext.selectionKey] = index?.selectedObjects
+        context.info.addObserver(self)
+        context[ToggleEditingAction.editableKey] = self
     }
     
     func items<Container, Item>(in selection: [Container], property: String) -> (Set<Item>, Set<Item>) where Container: NSManagedObject {
@@ -168,6 +169,7 @@ class GenericDetailController: CollectionViewController {
             }
         }
         
+        adjustControlsForEditing()
     }
     
     func calculateRows() {
@@ -257,8 +259,8 @@ extension GenericDetailController: NSTableViewDelegate, NSTableViewDataSource {
 
 extension GenericDetailController: ActionContextProvider {
     func provide(context: ActionContext) {
-        indexView.addContextForIndex(context: context)
         addContextForDetail(context: context)
+        indexView.addContextForIndex(context: context)
     }
 }
 
@@ -305,7 +307,7 @@ extension GenericDetailController {
 
 // MARK: Action Support
 
-//extension GenericDetailController: BookChangeObserver {
+extension GenericDetailController: BookChangeObserver {
 //
 //
 //    func detailRow(for context: ActionContext) -> Int {
@@ -322,55 +324,64 @@ extension GenericDetailController {
 //    }
 //
 //
-//    func added(relationship: Relationship) {
-//        //        updateRows()
-//        let index = source.insert(relationship: relationship)
-//        detailsTable.insertRows(at: IndexSet(integer: index + 1), withAnimation: .slideDown)
-//    }
-//
-//    func removed(relationship: Relationship) {
-//        if let row = source.remove(relationship: relationship) {
-//            detailsTable.removeRows(at: IndexSet(integer: row), withAnimation: .slideUp)
-//        }
-//    }
-//
-//    func replaced(relationship: Relationship, with: Relationship) {
-//        //        updateRows()
-//        //        if let row = source.update(relationship: relationship, with: with) {
-//        //            detailsTable.reloadData()
-//        ////            detailsTable.reloadData(forRowIndexes: IndexSet(integer: row), columnIndexes: IndexSet([0,1,2]))
-//        //        }
-//    }
-//
-//    func removed(series: Series) {
-//        if let row = source.remove(series: series) {
-//            detailsTable.removeRows(at: IndexSet(integer: row), withAnimation: .slideUp)
-//        }
-//
-//    }
-//
-//    func added(publisher: Publisher) {
-//        let _ = source.insert(publisher: publisher)
-//    }
-//
-//    func removed(publisher: Publisher) {
-//        let _ = source.remove(publisher: publisher)
-//    }
-//
-//    func created(books: [Book]) {
-//        detailChannel.debug("books created")
-//        DispatchQueue.main.async {
-//            let info = ActionInfo(sender: self)
-//            self.application.actionManager.perform(identifier: "StartEditing", info: info)
-//        }
-//    }
-//
-//    func deleted(books: [Book]) {
-//        DispatchQueue.main.async {
-//            self.application.actionManager.perform(identifier: "StopEditing")
-//        }
-//    }
-//
-//
-//
-//}
+    func added(relationship: Relationship) {
+        //        updateRows()
+        if let source = source as? BookDetailProvider {
+            let index = source.insert(relationship: relationship)
+            detailsTable.insertRows(at: IndexSet(integer: index + 1), withAnimation: .slideDown)
+        }
+    }
+
+    func removed(relationship: Relationship) {
+        if let source = source as? BookDetailProvider {
+            if let row = source.remove(relationship: relationship) {
+            detailsTable.removeRows(at: IndexSet(integer: row), withAnimation: .slideUp)
+        }
+        }
+    }
+
+    func replaced(relationship: Relationship, with: Relationship) {
+        //        updateRows()
+        //        if let row = source.update(relationship: relationship, with: with) {
+        //            detailsTable.reloadData()
+        ////            detailsTable.reloadData(forRowIndexes: IndexSet(integer: row), columnIndexes: IndexSet([0,1,2]))
+        //        }
+    }
+
+    func removed(series: Series) {
+        if let source = source as? BookDetailProvider {
+        if let row = source.remove(series: series) {
+            detailsTable.removeRows(at: IndexSet(integer: row), withAnimation: .slideUp)
+        }
+        }
+    }
+
+    func added(publisher: Publisher) {
+        if let source = source as? BookDetailProvider {
+            let _ = source.insert(publisher: publisher)
+        }
+    }
+
+    func removed(publisher: Publisher) {
+        if let source = source as? BookDetailProvider {
+        let _ = source.remove(publisher: publisher)
+        }
+    }
+
+    func created(books: [Book]) {
+        detailChannel.debug("books created")
+        DispatchQueue.main.async {
+            let info = ActionInfo(sender: self)
+            self.application.actionManager.perform(identifier: "StartEditing", info: info)
+        }
+    }
+
+    func deleted(books: [Book]) {
+        DispatchQueue.main.async {
+            self.application.actionManager.perform(identifier: "StopEditing")
+        }
+    }
+
+
+
+}

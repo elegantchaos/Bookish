@@ -106,6 +106,7 @@ class GenericIndexController: CollectionViewController {
     }
     
     func addContextForIndex(context: ActionContext) {
+        context.info[ActionContext.selectionKey] = indexArray?.selectedObjects
         context.info.addObserver(self)
     }
     
