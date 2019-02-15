@@ -771,10 +771,10 @@ CA
             <objects>
                 <tabViewController selectedTabViewItemIndex="0" tabStyle="unspecified" id="cvB-oN-q7M" customClass="CollectionIndexViewController" customModule="Bookish" customModuleProvider="target" sceneMemberID="viewController">
                     <tabViewItems>
-                        <tabViewItem id="Yv4-5C-giI"/>
-                        <tabViewItem id="Omf-W1-chn"/>
-                        <tabViewItem id="Uc8-DQ-1y5"/>
-                        <tabViewItem id="oy9-Cw-pSS"/>
+                        <tabViewItem id="fRQ-uG-bbC"/>
+                        <tabViewItem id="g3C-Bk-WhB"/>
+                        <tabViewItem id="0q9-nw-Q4n"/>
+                        <tabViewItem id="oyY-U2-Rrc"/>
                     </tabViewItems>
                     <tabView key="tabView" drawsBackground="NO" id="xYK-vg-VcG">
                         <rect key="frame" x="0.0" y="0.0" width="200" height="400"/>
@@ -787,10 +787,10 @@ CA
                     </tabView>
                     <connections>
                         <outlet property="tabView" destination="xYK-vg-VcG" id="scu-2W-rWu"/>
-                        <segue destination="PUA-xK-Wyi" kind="relationship" relationship="tabItems" id="BaD-bj-UzJ"/>
-                        <segue destination="PUA-xK-Wyi" kind="relationship" relationship="tabItems" id="yFy-Ql-i03"/>
-                        <segue destination="PUA-xK-Wyi" kind="relationship" relationship="tabItems" id="uMj-tF-hfO"/>
-                        <segue destination="PUA-xK-Wyi" kind="relationship" relationship="tabItems" id="619-Se-icf"/>
+                        <segue destination="PUA-xK-Wyi" kind="relationship" relationship="tabItems" id="xhx-1L-hiY"/>
+                        <segue destination="PUA-xK-Wyi" kind="relationship" relationship="tabItems" id="het-yo-6H7"/>
+                        <segue destination="PUA-xK-Wyi" kind="relationship" relationship="tabItems" id="AyL-gR-mKa"/>
+                        <segue destination="PUA-xK-Wyi" kind="relationship" relationship="tabItems" id="5PC-lz-gPu"/>
                     </connections>
                 </tabViewController>
                 <customObject id="NQu-ho-FxW" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -831,7 +831,7 @@ CA
         <!--Index-->
         <scene sceneID="TMn-oN-ehg">
             <objects>
-                <viewController title="Index" id="PUA-xK-Wyi" customClass="GenericIndexController" customModule="Bookish" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Index" storyboardIdentifier="Index" id="PUA-xK-Wyi" customClass="GenericIndexController" customModule="Bookish" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="aQJ-zo-YyZ">
                         <rect key="frame" x="0.0" y="0.0" width="200" height="400"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -980,7 +980,7 @@ CA
                 </arrayController>
                 <userDefaultsController id="0XB-YH-O2i"/>
             </objects>
-            <point key="canvasLocation" x="945" y="1955"/>
+            <point key="canvasLocation" x="898" y="1957"/>
         </scene>
         <!--Generic Detail Controller-->
         <scene sceneID="IG1-NS-twE">
@@ -1755,6 +1755,6 @@ CA
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="BaD-bj-UzJ"/>
+        <segue reference="het-yo-6H7"/>
     </inferredMetricsTieBreakers>
 </document>

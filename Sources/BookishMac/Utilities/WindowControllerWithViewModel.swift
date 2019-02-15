@@ -11,7 +11,7 @@ import AppKit
  */
 
 protocol ViewControllerWithViewModel {
-    func windowDidLoad(_ window: NSWindowController)
+    func windowDidLoad(_ window: NSWindowController, storyboard: NSStoryboard)
 }
 
 /**
@@ -74,7 +74,7 @@ class WindowControllerFactory<ViewModel: WindowControllerViewModel> where ViewMo
         viewModel.didConnect(to: windowController)
         
         if let controller = windowController.window?.contentViewController {
-            notifyFinishedLoading(window: windowController, controller: controller)
+            notifyFinishedLoading(window: windowController, controller: controller, storyboard: storyboard)
         }
 
         modelBeingCreated = savedViewModel
@@ -85,10 +85,10 @@ class WindowControllerFactory<ViewModel: WindowControllerViewModel> where ViewMo
         return modelBeingCreated!
     }
     
-    func notifyFinishedLoading(window: ViewModel.WindowController, controller: NSViewController) {
-        (controller as? ViewControllerWithViewModel)?.windowDidLoad(window)
+    func notifyFinishedLoading(window: ViewModel.WindowController, controller: NSViewController, storyboard: NSStoryboard) {
+        (controller as? ViewControllerWithViewModel)?.windowDidLoad(window, storyboard: storyboard)
         for child in controller.children {
-            notifyFinishedLoading(window: window, controller: child)
+            notifyFinishedLoading(window: window, controller: child, storyboard: storyboard)
         }
     }
 }

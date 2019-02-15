@@ -17,7 +17,12 @@ class CollectionViewController: NSViewController, ViewControllerWithViewModel {
         super.init(coder: coder)
     }
     
-    func windowDidLoad(_ window: NSWindowController) {
+    init(state: CollectionViewState, nibName nibNameOrNil: NSNib.Name?, bundle nibBundleOrNil: Bundle?) {
+        self.cvm = state
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    }
+    
+    func windowDidLoad(_ window: NSWindowController, storyboard: NSStoryboard) {
         collectionViewChannel.debug("\(self) windowDidLoad")
     }
     

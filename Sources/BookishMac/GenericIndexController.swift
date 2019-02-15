@@ -48,6 +48,12 @@ class GenericIndexController: CollectionViewController {
     override func viewWillAppear() {
         indexChannel.debug("\(entityType) index appearing")
         
+        entityName = String(describing: entityType)
+        title = entityType.entityTitle
+        indexArray.entityName = entityName
+        indexArray.sortDescriptors = [NSSortDescriptor(key: "sortName", ascending: true)]
+//        window.register(index: self, for: entityName)
+
         if let indexArray = indexArray {
             observers.append(indexArray.observe(\NSArrayController.selection, changeHandler: { (index, change) in
                 self.selectionChanged()
@@ -67,15 +73,9 @@ class GenericIndexController: CollectionViewController {
         super.viewWillDisappear()
     }
     
-    func setup(for entity: ModelObject.Type, window: CollectionWindowController) {
+    func setup(for entity: ModelObject.Type) {
         entityType = entity
-        entityName = String(describing: entity)
-        title = entity.entityTitle
-        indexArray.entityName = entityName
-        indexArray.sortDescriptors = [NSSortDescriptor(key: "sortName", ascending: true)]
-        window.register(index: self, for: entityName)
         indexChannel.debug("\(entityType) setup")
-        selectionChanged()
     }
     
     func fetchIfNecessary(then: @escaping () -> Void) {
