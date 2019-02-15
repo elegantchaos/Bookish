@@ -781,6 +781,7 @@ CA
                         <autoresizingMask key="autoresizingMask"/>
                         <font key="font" metaFont="system"/>
                         <connections>
+                            <binding destination="cvB-oN-q7M" name="selectedIndex" keyPath="self.cvm.modeIndex" id="ddC-L7-dIR"/>
                             <outlet property="delegate" destination="cvB-oN-q7M" id="x9P-QO-RHD"/>
                         </connections>
                     </tabView>
@@ -794,6 +795,7 @@ CA
                 </tabViewController>
                 <customObject id="NQu-ho-FxW" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <userDefaultsController id="hxe-pj-t8N"/>
+                <userDefaultsController id="Zgq-0R-3eR"/>
             </objects>
             <point key="canvasLocation" x="545" y="1834"/>
         </scene>
