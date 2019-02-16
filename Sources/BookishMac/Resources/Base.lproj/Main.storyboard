@@ -1760,7 +1760,6 @@ CA
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="controlColumn" destination="7Kn-Bq-No6" id="MEs-RR-4IF"/>
                         <outlet property="detailsTable" destination="2eK-Gk-TD8" id="Ukm-lJ-MMj"/>
                         <outlet property="editButton" destination="Lbu-fX-2FZ" id="odc-gd-Wyt"/>
                         <outlet property="imageView" destination="dMP-oM-auc" id="h0U-0n-SxO"/>

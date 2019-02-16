@@ -32,7 +32,6 @@ class GenericDetailController: CollectionViewController {
     @IBOutlet weak var lastFixedKeyView: NSControl!
     @IBOutlet weak var detailsTable: NSTableView!
     @IBOutlet weak var subtitleView: NSTextField!
-    @IBOutlet weak var controlColumn: NSTableColumn!
     @IBOutlet weak var editButton: NSButton!
     @IBOutlet weak var personList: NSArrayController!
     @IBOutlet weak var publisherList: NSArrayController!
@@ -143,8 +142,18 @@ class GenericDetailController: CollectionViewController {
     
     fileprivate func updateTable(visible: Bool) {
         if visible {
-            updateRows()
+            detailChannel.debug("filtering details")
+            
+            let selection = index?.selectedObjects as? [ModelObject] ?? []
+            source.filter(for: selection, editing: editing, combining: true, context: cvm)
+
+            detailsTable.reloadData()
+            let visibleColumns = source.visibleColumns
+            for column in detailsTable.tableColumns {
+                column.isHidden = !visibleColumns.contains(column.identifier.rawValue)
+            }
         }
+        
         detailsTable.isHidden = !visible
     }
     
@@ -182,16 +191,6 @@ class GenericDetailController: CollectionViewController {
         if let wc = view.window?.windowController as? CollectionWindowController {
             wc.validateButtons()
         }
-        
-        
-        adjustControlsForEditing()
-    }
-    
-    func updateRows() {
-        detailChannel.debug("filtering details")
-        let selection = index?.selectedObjects as? [ModelObject] ?? []
-        source.filter(for: selection, editing: editing, combining: true, context: cvm)
-        detailsTable.reloadData()
     }
     
     func person(at index: Int) -> Person? {
@@ -299,15 +298,8 @@ extension GenericDetailController: EditableView {
         // rebuild the view on the next cycle, to give editing
         // changes a chance to get properly committed first
         DispatchQueue.main.async {
-            self.adjustControlsForEditing()
             self.selectionChanged()
         }
-    }
-    
-    func adjustControlsForEditing() {
-        controlColumn.isHidden = !editing
-        //        editButton.title = editing ? "Done" : "Edit"
-        detailChannel.debug(editing ? "enabled editing" : "disabled editing")
     }
 }
 
