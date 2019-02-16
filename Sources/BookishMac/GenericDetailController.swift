@@ -51,7 +51,6 @@ class GenericDetailController: CollectionViewController {
 //    }
     
    var rows = [NSManagedObject]()
-    var availableRows = 0
     var keyViewTimer: Timer? = nil
     
     func setup(for index: GenericIndexController, type entityType: ModelObject.Type) {
@@ -79,7 +78,7 @@ class GenericDetailController: CollectionViewController {
     
     func recalculateKeyViews() {
         var view: NSView = lastFixedKeyView
-        for row in 0 ..< availableRows {
+        for row in 0 ..< source.combinedCount {
             for column in 0 ..< detailsTable.numberOfColumns {
                 if let rowView = (detailsTable.view(atColumn: column, row: row, makeIfNecessary: false) as? KeyableTableCell)?.keyView() {
                     view.nextKeyView = rowView
@@ -126,63 +125,75 @@ class GenericDetailController: CollectionViewController {
         return []
     }
     
-    func selectionChanged() {
-        detailChannel.debug("selection changed")
-        let selectedCount = index?.selectedObjects?.count ?? 0
-        let showDetail = selectedCount > 0
-        detailsTable.isHidden = !showDetail
-        if showDetail, let object = index.selection as? NSObject {
+    fileprivate func updateTitle(for object: NSObject, visible: Bool) {
+        nameView.isHidden = !visible
+        if let path = source.titleProperty {
+            nameView.objectValue = object.value(forKey: path)
+        }
+    }
+    
+    fileprivate func updateSubtitle(for object: NSObject, visible: Bool) {
+        if visible, let path = source.subtitleProperty, let value = object.value(forKey: path) as? String, source.isEditing || !value.isEmpty {
+            subtitleView.objectValue = value
+            subtitleView.isHidden = false
+        } else {
+            subtitleView.isHidden = true
+        }
+    }
+    
+    fileprivate func updateTable(visible: Bool) {
+        if visible {
             updateRows()
-            
-            if let path = source.titleProperty {
-                nameView.objectValue = object.value(forKey: path)
-            }
-            
-            if let path = source.subtitleProperty, let value = object.value(forKey: path) as? String, source.isEditing || !value.isEmpty {
-                subtitleView.objectValue = value
-                subtitleView.isHidden = false
+        }
+        detailsTable.isHidden = !visible
+    }
+    
+    fileprivate func updateImage(for object: NSObject, visible: Bool) {
+        imageView.isHidden = !visible
+        if visible {
+            if let data = object.value(forKey: "image") as? Data, let image = NSImage(data: data) {
+                imageView.image = image
             } else {
-                subtitleView.isHidden = true
-            }
-
-        }
-        
-        if let wc = view.window?.windowController as? CollectionWindowController {
-            wc.validateButtons()
-        }
-        
-        if selectedCount == 1 {
-            if let item = indexView.indexArray.selectedObjects[0] as? ModelObject {
-                if let data = item.value(forKey: "image") as? Data, let image = NSImage(data: data) {
+                let placeholderName = "\(entityName)Placeholder"
+                if let image = NSImage(named: placeholderName) {
                     imageView.image = image
-                } else {
-                    let placeholderName = "\(entityName)Placeholder"
-                    if let image = NSImage(named: placeholderName) {
-                        imageView.image = image
-                        if let urlString = item.value(forKey: "imageURL") as? String, let url = URL(string: urlString) {
-                            application.imageCache.image(for: url) { (image) in
-                                self.imageView.image = image
-                            }
+                    
+                    if let urlString = object.value(forKey: "imageURL") as? String, let url = URL(string: urlString) {
+                        application.imageCache.image(for: url) { (image) in
+                            self.imageView.image = image
                         }
                     }
                 }
             }
         }
+    }
+    
+    func selectionChanged() {
+        detailChannel.debug("selection changed")
+        let selectedCount = index.selectedObjects?.count ?? 0
+        let showDetail = selectedCount > 0
+        if let object = index.selection as? NSObject {
+            updateTable(visible: showDetail)
+            updateTitle(for: object, visible: showDetail)
+            updateSubtitle(for: object, visible: showDetail)
+            updateImage(for: object, visible: showDetail)
+        }
+
+        if let wc = view.window?.windowController as? CollectionWindowController {
+            wc.validateButtons()
+        }
+        
         
         adjustControlsForEditing()
     }
     
-    func calculateRows() {
-        let selection = index?.selectedObjects as? [ModelObject] ?? []
-        source.filter(for: selection, editing: editing, context: cvm)
-    }
-
     func updateRows() {
-        detailChannel.debug("updating people list")
-        
-        calculateRows()
+        detailChannel.debug("filtering details")
+        let selection = index?.selectedObjects as? [ModelObject] ?? []
+        source.filter(for: selection, editing: editing, combining: true, context: cvm)
         detailsTable.reloadData()
     }
+    
     func person(at index: Int) -> Person? {
         if let people = personList.arrangedObjects as? [Person], index != -1 {
             return people[index]
@@ -220,16 +231,21 @@ class GenericDetailController: CollectionViewController {
 
 extension GenericDetailController: NSTableViewDelegate, NSTableViewDataSource {
     func numberOfRows(in tableView: NSTableView) -> Int {
-        return source.itemCount(for: 0)
+        return source.combinedCount
     }
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         guard let columnID = tableColumn?.identifier else { return nil }
         
-        let rowInfo = source.info(section: 0, row: row)
+        let rowInfo = source.combinedInfo(row: row)
         let viewID = NSUserInterfaceItemIdentifier(rawValue: rowInfo.viewID(for: columnID.rawValue))
         
-        guard let view = tableView.makeView(withIdentifier: viewID, owner: self) else { return nil }
+        guard let view = tableView.makeView(withIdentifier: viewID, owner: self) else {
+            let view = tableView.makeView(withIdentifier: GenericDetailController.unknownViewID, owner: self) as! NSTableCellView
+            view.textField?.stringValue = "missing <\(viewID.rawValue)> cell"
+            return view
+        }
+        
         if let cell = view as? DetailTableCell {
             cell.setup(for: rowInfo, of: self)
         }
@@ -244,18 +260,15 @@ extension GenericDetailController: NSTableViewDelegate, NSTableViewDataSource {
     }
 
     func tableView(_ tableView: NSTableView, didAdd rowView: NSTableRowView, forRow row: Int) {
-        availableRows += 1
         scheduleRecalculateKeyViews()
     }
     
     func tableView(_ tableView: NSTableView, didRemove rowView: NSTableRowView, forRow row: Int) {
-        availableRows -= 1
         scheduleRecalculateKeyViews()
     }
 }
 
-// MARK: Generic Detail Controller
-
+// MARK: Action Support
 
 extension GenericDetailController: ActionContextProvider {
     func provide(context: ActionContext) {
@@ -298,74 +311,38 @@ extension GenericDetailController: EditableView {
     }
 }
 
-// MARK: Local IBActions
 
-extension GenericDetailController {
-    
-}
-
-
-// MARK: Action Support
+// MARK: Change Notifications
 
 extension GenericDetailController: BookChangeObserver {
-//
-//
-//    func detailRow(for context: ActionContext) -> Int {
-//        var row = -1
-//        if let view = context.sender as? NSView {
-//            row = detailsTable.row(for: view)
-//        }
-//
-//        if row < 0, let view = view.window?.firstResponder as? NSView {
-//            row = detailsTable.row(for: view)
-//        }
-//
-//        return row
-//    }
-//
-//
     func added(relationship: Relationship) {
-        //        updateRows()
-        if let source = source as? BookDetailProvider {
-            let index = source.insert(relationship: relationship)
-            detailsTable.insertRows(at: IndexSet(integer: index + 1), withAnimation: .slideDown)
-        }
+        let changes = source.inserted(details: [relationship])
+        detailsTable.insertRows(at: changes, withAnimation: .slideDown)
     }
 
     func removed(relationship: Relationship) {
-        if let source = source as? BookDetailProvider {
-            if let row = source.remove(relationship: relationship) {
-            detailsTable.removeRows(at: IndexSet(integer: row), withAnimation: .slideUp)
-        }
-        }
+        let changes = source.removed(details: [relationship])
+        detailsTable.removeRows(at: changes, withAnimation: .slideUp)
     }
 
     func replaced(relationship: Relationship, with: Relationship) {
-        //        updateRows()
-        //        if let row = source.update(relationship: relationship, with: with) {
-        //            detailsTable.reloadData()
-        ////            detailsTable.reloadData(forRowIndexes: IndexSet(integer: row), columnIndexes: IndexSet([0,1,2]))
-        //        }
+        let changes = source.updated(details: [relationship], with: [with])
+        detailsTable.reloadData(forRowIndexes: changes, columnIndexes: IndexSet([0,1,2]))
     }
 
     func removed(series: Series) {
-        if let source = source as? BookDetailProvider {
-        if let row = source.remove(series: series) {
-            detailsTable.removeRows(at: IndexSet(integer: row), withAnimation: .slideUp)
-        }
-        }
+        let changes = source.removed(details: [series])
+        detailsTable.removeRows(at: changes, withAnimation: .slideUp)
     }
 
     func added(publisher: Publisher) {
-        if let source = source as? BookDetailProvider {
-            let _ = source.insert(publisher: publisher)
-        }
+        let changes = source.inserted(details: [publisher])
+        detailsTable.insertRows(at: changes, withAnimation: .slideDown)
     }
 
     func removed(publisher: Publisher) {
-        if let source = source as? BookDetailProvider {
-        let _ = source.remove(publisher: publisher)
-        }
+        let changes = source.removed(details: [publisher])
+        detailsTable.removeRows(at: changes, withAnimation: .slideUp)
     }
 
     func created(books: [Book]) {

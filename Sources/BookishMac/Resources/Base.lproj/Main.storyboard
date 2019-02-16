@@ -1206,8 +1206,26 @@ CA
                                                                 </textFieldCell>
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES"/>
                                                                 <prototypeCellViews>
+                                                                    <tableCellView identifier="unknown" id="Mkn-9w-XT4" userLabel="unknown">
+                                                                        <rect key="frame" x="125" y="1" width="315" height="17"/>
+                                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                        <subviews>
+                                                                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xZM-wD-djI">
+                                                                                <rect key="frame" x="0.0" y="0.0" width="315" height="17"/>
+                                                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                                                                <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="unknown id" id="REU-zd-Vvh">
+                                                                                    <font key="font" metaFont="system"/>
+                                                                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                                                </textFieldCell>
+                                                                            </textField>
+                                                                        </subviews>
+                                                                        <connections>
+                                                                            <outlet property="textField" destination="xZM-wD-djI" id="T7x-3h-G0H"/>
+                                                                        </connections>
+                                                                    </tableCellView>
                                                                     <tableCellView identifier="text" id="1mF-bf-MwG" userLabel="text" customClass="BookDetailCell" customModule="Bookish" customModuleProvider="target">
-                                                                        <rect key="frame" x="125" y="1" width="315" height="24"/>
+                                                                        <rect key="frame" x="125" y="20" width="315" height="24"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="JOA-TY-6BX">
@@ -1234,7 +1252,7 @@ CA
                                                                         </connections>
                                                                     </tableCellView>
                                                                     <tableCellView identifier="person" misplaced="YES" id="Obe-M6-xbY" userLabel="person" customClass="BookPersonCell" customModule="Bookish" customModuleProvider="target">
-                                                                        <rect key="frame" x="125" y="27" width="315" height="23"/>
+                                                                        <rect key="frame" x="125" y="46" width="315" height="23"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="8Gb-0S-SzA">
@@ -1295,7 +1313,7 @@ CA
                                                                         </connections>
                                                                     </tableCellView>
                                                                     <tableCellView identifier="publisher" id="5Ra-ba-7w7" userLabel="publisher" customClass="BookPublisherCell" customModule="Bookish" customModuleProvider="target">
-                                                                        <rect key="frame" x="125" y="52" width="315" height="23"/>
+                                                                        <rect key="frame" x="125" y="71" width="315" height="23"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <button identifier="button.RevealPublisher" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6Bs-db-AY7" userLabel="Reveal">
@@ -1354,7 +1372,7 @@ CA
                                                                         </connections>
                                                                     </tableCellView>
                                                                     <tableCellView identifier="date" id="ph3-eN-NOK" userLabel="date" customClass="BookDateCell" customModule="Bookish" customModuleProvider="target">
-                                                                        <rect key="frame" x="125" y="77" width="315" height="24"/>
+                                                                        <rect key="frame" x="125" y="96" width="315" height="24"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="sbu-3d-sR8">
@@ -1381,7 +1399,7 @@ CA
                                                                         </connections>
                                                                     </tableCellView>
                                                                     <tableCellView identifier="editableDate" id="bf1-KR-OAm" userLabel="date editable" customClass="BookEditableDateCell" customModule="Bookish" customModuleProvider="target">
-                                                                        <rect key="frame" x="125" y="103" width="315" height="24"/>
+                                                                        <rect key="frame" x="125" y="122" width="315" height="24"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="FHu-L0-2fo" customClass="AnnotatedTextField" customModule="Bookish" customModuleProvider="target">
@@ -1421,7 +1439,7 @@ CA
                                                                         </connections>
                                                                     </tableCellView>
                                                                     <tableCellView identifier="editableDimensions" id="OZV-07-tGS" userLabel="dimensions" customClass="BookDimensionsCell" customModule="Bookish" customModuleProvider="target">
-                                                                        <rect key="frame" x="125" y="129" width="315" height="24"/>
+                                                                        <rect key="frame" x="125" y="148" width="315" height="24"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <stackView distribution="fillEqually" orientation="horizontal" alignment="top" spacing="10" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YeD-9c-Svh">
@@ -1529,7 +1547,7 @@ CA
                                                                         </connections>
                                                                     </tableCellView>
                                                                     <tableCellView identifier="series" id="X8k-lU-fh1" userLabel="series" customClass="BookSeriesCell" customModule="Bookish" customModuleProvider="target">
-                                                                        <rect key="frame" x="125" y="155" width="315" height="24"/>
+                                                                        <rect key="frame" x="125" y="174" width="315" height="24"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="V9b-km-eI4" userLabel="Name">
@@ -1606,6 +1624,67 @@ CA
                                                                             <outlet property="seriesCombo" destination="dnj-ua-zEn" id="ucj-KK-wrX"/>
                                                                             <outlet property="seriesField" destination="V9b-km-eI4" id="a0b-U2-xTw"/>
                                                                             <outlet property="textField" destination="V9b-km-eI4" id="ILm-HD-OKb"/>
+                                                                        </connections>
+                                                                    </tableCellView>
+                                                                    <tableCellView identifier="book" id="YCW-gp-vkv" userLabel="book" customClass="SeriesEntryCell" customModule="Bookish" customModuleProvider="target">
+                                                                        <rect key="frame" x="125" y="200" width="315" height="22"/>
+                                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                        <subviews>
+                                                                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="8XU-ZR-Wgb">
+                                                                                <rect key="frame" x="8" y="2" width="38" height="18"/>
+                                                                                <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" sendsActionOnEndEditing="YES" alignment="left" placeholderString="value" id="OTX-Op-Z52">
+                                                                                    <font key="font" size="14" name=".AppleSystemUIFont"/>
+                                                                                    <color key="textColor" name="Bookish Detail Text"/>
+                                                                                    <color key="backgroundColor" name="Bookish Detail"/>
+                                                                                </textFieldCell>
+                                                                            </textField>
+                                                                            <button identifier="button.RevealBook" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="75K-Gw-0cm" userLabel="Reveal">
+                                                                                <rect key="frame" x="300" y="3" width="15" height="16"/>
+                                                                                <buttonCell key="cell" type="inline" bezelStyle="inline" image="Reveal" imagePosition="only" alignment="center" controlSize="mini" lineBreakMode="truncatingTail" state="on" inset="2" id="Amc-qV-xxa">
+                                                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                                    <font key="font" metaFont="smallSystemBold"/>
+                                                                                </buttonCell>
+                                                                                <connections>
+                                                                                    <action selector="performAction:" target="hXB-DS-vDG" id="lyg-6w-BM9"/>
+                                                                                </connections>
+                                                                            </button>
+                                                                        </subviews>
+                                                                        <constraints>
+                                                                            <constraint firstItem="75K-Gw-0cm" firstAttribute="centerY" secondItem="8XU-ZR-Wgb" secondAttribute="centerY" id="1ED-89-hNZ"/>
+                                                                            <constraint firstAttribute="bottom" secondItem="8XU-ZR-Wgb" secondAttribute="bottom" constant="2" id="DKG-yy-WKd"/>
+                                                                            <constraint firstItem="8XU-ZR-Wgb" firstAttribute="leading" secondItem="YCW-gp-vkv" secondAttribute="leading" constant="10" id="d9S-RC-j8v"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="75K-Gw-0cm" secondAttribute="trailing" id="g2m-Ho-Btk"/>
+                                                                            <constraint firstItem="8XU-ZR-Wgb" firstAttribute="top" secondItem="YCW-gp-vkv" secondAttribute="top" constant="2" id="kvX-87-sg5"/>
+                                                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="8XU-ZR-Wgb" secondAttribute="trailing" id="qf3-v3-AoI"/>
+                                                                        </constraints>
+                                                                        <connections>
+                                                                            <outlet property="textField" destination="8XU-ZR-Wgb" id="eLb-dV-KRJ"/>
+                                                                        </connections>
+                                                                    </tableCellView>
+                                                                    <tableCellView identifier="section" id="amt-x4-xNy" userLabel="section" customClass="SectionCell" customModule="Bookish" customModuleProvider="target">
+                                                                        <rect key="frame" x="125" y="224" width="315" height="24"/>
+                                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                        <subviews>
+                                                                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="YPE-nH-Ujd">
+                                                                                <rect key="frame" x="2" y="2" width="311" height="20"/>
+                                                                                <constraints>
+                                                                                    <constraint firstAttribute="height" constant="20" id="5hD-6b-SgW"/>
+                                                                                </constraints>
+                                                                                <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" continuous="YES" alignment="left" placeholderString="value" drawsBackground="YES" usesSingleLineMode="YES" id="6Br-E5-tLj">
+                                                                                    <font key="font" size="14" name=".AppleSystemUIFont"/>
+                                                                                    <color key="textColor" name="Bookish Label Text"/>
+                                                                                    <color key="backgroundColor" name="Bookish Detail"/>
+                                                                                </textFieldCell>
+                                                                            </textField>
+                                                                        </subviews>
+                                                                        <constraints>
+                                                                            <constraint firstItem="YPE-nH-Ujd" firstAttribute="top" secondItem="amt-x4-xNy" secondAttribute="top" constant="2" id="Ss2-jd-EQH"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="YPE-nH-Ujd" secondAttribute="trailing" constant="2" id="ePW-1v-X8a"/>
+                                                                            <constraint firstAttribute="bottom" secondItem="YPE-nH-Ujd" secondAttribute="bottom" constant="2" id="nqt-DQ-A3X"/>
+                                                                            <constraint firstItem="YPE-nH-Ujd" firstAttribute="leading" secondItem="amt-x4-xNy" secondAttribute="leading" constant="2" id="x2y-Vp-Sbu"/>
+                                                                        </constraints>
+                                                                        <connections>
+                                                                            <outlet property="textField" destination="YPE-nH-Ujd" id="kaP-Rj-sXe"/>
                                                                         </connections>
                                                                     </tableCellView>
                                                                 </prototypeCellViews>

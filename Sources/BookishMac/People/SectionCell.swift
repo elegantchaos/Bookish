@@ -6,11 +6,10 @@
 import AppKit
 import BookishModel
 
-class RelationshipCell: NSTableCellView, DetailTableCell {
+class SectionCell: NSTableCellView, DetailTableCell {
     func setup(for row: DetailItem, of view: GenericDetailController) {
-        if let item = row as? PersonDetailItem, let role = item.relationship?.role, let name = role.name {
-            objectValue = item
-            textField?.stringValue = "Books as \(name)"
+        if let item = row as? SectionDetailItem {
+            textField?.stringValue = item.kind
             validateButtons()
         }
     }

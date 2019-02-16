@@ -79,7 +79,7 @@
 		22D1B2402180BF6D0062F2CB /* ActionsKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22DAF397217B52E6003CE28B /* ActionsKit.framework */; };
 		22D1B2432180CA9E0062F2CB /* BookCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D1B2422180CA9E0062F2CB /* BookCell.swift */; };
 		22D1B2492180D7B60062F2CB /* BookDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D1B2482180D7B60062F2CB /* BookDetailCell.swift */; };
-		22D1B24B2180E9060062F2CB /* PersonRoleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D1B24A2180E9060062F2CB /* PersonRoleCell.swift */; };
+		22D1B24B2180E9060062F2CB /* SectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D1B24A2180E9060062F2CB /* SectionCell.swift */; };
 		22D39E512142DB2700282467 /* ViewBasedToolbarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D39E502142DB2700282467 /* ViewBasedToolbarItem.swift */; };
 		22D39E532146A84500282467 /* AnnotatedTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D39E522146A84500282467 /* AnnotatedTableCellView.swift */; };
 		22D39E552146A84E00282467 /* BookDateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D39E542146A84E00282467 /* BookDateCell.swift */; };
@@ -273,7 +273,7 @@
 		22D1B23C21807F7B0062F2CB /* ApplicationRootController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationRootController.swift; sourceTree = "<group>"; };
 		22D1B2422180CA9E0062F2CB /* BookCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCell.swift; sourceTree = "<group>"; };
 		22D1B2482180D7B60062F2CB /* BookDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailCell.swift; sourceTree = "<group>"; };
-		22D1B24A2180E9060062F2CB /* PersonRoleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonRoleCell.swift; sourceTree = "<group>"; };
+		22D1B24A2180E9060062F2CB /* SectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionCell.swift; sourceTree = "<group>"; };
 		22D39E502142DB2700282467 /* ViewBasedToolbarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewBasedToolbarItem.swift; sourceTree = "<group>"; };
 		22D39E522146A84500282467 /* AnnotatedTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotatedTableCellView.swift; sourceTree = "<group>"; };
 		22D39E542146A84E00282467 /* BookDateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDateCell.swift; sourceTree = "<group>"; };
@@ -570,7 +570,7 @@
 			isa = PBXGroup;
 			children = (
 				220CDAA0214A8D510064CC91 /* PersonDetailViewController.swift */,
-				22D1B24A2180E9060062F2CB /* PersonRoleCell.swift */,
+				22D1B24A2180E9060062F2CB /* SectionCell.swift */,
 			);
 			path = People;
 			sourceTree = "<group>";
@@ -1096,7 +1096,7 @@
 				225488DC21F20B2500EE8ECB /* BookRoleCell.swift in Sources */,
 				2250C71D21B83B5700E899E2 /* RegularExpressionExtensions.swift in Sources */,
 				22DE6AE321875F410078D489 /* ImportSession.swift in Sources */,
-				22D1B24B2180E9060062F2CB /* PersonRoleCell.swift in Sources */,
+				22D1B24B2180E9060062F2CB /* SectionCell.swift in Sources */,
 				227F4514218352A0000D8B8D /* ImporterActions.swift in Sources */,
 				2250C6E121B191B200E899E2 /* BookPublisherCell.swift in Sources */,
 				228968472191F48400B80A93 /* AuthorSelectionTransformer.swift in Sources */,
