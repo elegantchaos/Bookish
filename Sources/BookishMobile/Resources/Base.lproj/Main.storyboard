@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.55" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="2I7-7n-d9F">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.59" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="2I7-7n-d9F">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.43"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.45"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
@@ -546,9 +546,9 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qme-y3-tce" customClass="LinkButton" customModule="Bookish" customModuleProvider="target">
-                                                    <rect key="frame" x="4" y="4" width="367" height="35.5"/>
+                                                    <rect key="frame" x="20" y="4" width="351" height="35.5"/>
                                                     <state key="normal" title="Button">
-                                                        <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                        <color key="titleColor" name="Bookish Detail Text"/>
                                                     </state>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="string" keyPath="actionID" value="RevealBook"/>
@@ -562,7 +562,7 @@
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="Qme-y3-tce" secondAttribute="trailing" constant="4" id="4uB-ej-axF"/>
                                                 <constraint firstAttribute="bottom" secondItem="Qme-y3-tce" secondAttribute="bottom" constant="4" id="NlT-zT-yuc"/>
-                                                <constraint firstItem="Qme-y3-tce" firstAttribute="leading" secondItem="YIe-Gk-swm" secondAttribute="leading" constant="4" id="sGs-It-kRc"/>
+                                                <constraint firstItem="Qme-y3-tce" firstAttribute="leading" secondItem="YIe-Gk-swm" secondAttribute="leading" constant="20" symbolic="YES" id="sGs-It-kRc"/>
                                                 <constraint firstItem="Qme-y3-tce" firstAttribute="top" secondItem="YIe-Gk-swm" secondAttribute="top" constant="4" id="tgi-u8-XK3"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -791,7 +791,7 @@
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Bookish Index Text">
-            <color red="0.3529999852180481" green="0.36899998784065247" blue="0.38400000333786011" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.35294117647058826" green="0.36862745098039218" blue="0.3843137254901961" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Bookish Label Text">
             <color red="0.54100000858306885" green="0.55699998140335083" blue="0.57300001382827759" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

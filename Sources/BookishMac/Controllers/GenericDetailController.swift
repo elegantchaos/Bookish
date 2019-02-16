@@ -38,18 +38,12 @@ class GenericDetailController: CollectionViewController {
     @IBOutlet weak var seriesList: NSArrayController!
     @IBOutlet weak var roleList: NSArrayController!
     
-    var entityName: String = ""
     @objc var index: NSArrayController!
+
+    var entityName: String = ""
     var source = DetailProvider()
     var editing = false
-    
-    internal lazy var indexView: GenericIndexController = nearestMatchingController()
-    
-//    @objc var index: NSArrayController {
-//        return indexView.indexArray!
-//    }
-    
-   var rows = [NSManagedObject]()
+    var indexView: GenericIndexController!
     var keyViewTimer: Timer? = nil
     
     func setup(for index: GenericIndexController, type entityType: ModelObject.Type) {
@@ -59,10 +53,6 @@ class GenericDetailController: CollectionViewController {
         entityName = String(describing: entityType)
         source = entityType.getProvider()
         selectionChanged()
-    }
-    
-    func identifier(for item: NSManagedObject) -> NSUserInterfaceItemIdentifier {
-        return GenericDetailController.unknownViewID
     }
     
     func scheduleRecalculateKeyViews() {
@@ -93,12 +83,6 @@ class GenericDetailController: CollectionViewController {
         print("change image")
     }
     
-    
-    fileprivate func connectIndexView() -> GenericIndexController {
-        let iv: GenericIndexController? = nearestMatchingController()
-        return iv!
-    }
-    
     func addContextForDetail(context: ActionContext) {
         context.info.addObserver(self)
         context[ToggleEditingAction.editableKey] = self
@@ -118,10 +102,6 @@ class GenericDetailController: CollectionViewController {
             }
         }
         return (all, common)
-    }
-    
-    func detailItemsForSelection() -> [NSManagedObject] {
-        return []
     }
     
     fileprivate func updateTitle(for object: NSObject, visible: Bool) {
@@ -193,6 +173,12 @@ class GenericDetailController: CollectionViewController {
         }
     }
     
+
+}
+
+// MARK: Other Indexes
+
+extension GenericDetailController {
     func person(at index: Int) -> Person? {
         if let people = personList.arrangedObjects as? [Person], index != -1 {
             return people[index]

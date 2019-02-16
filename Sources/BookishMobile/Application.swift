@@ -47,6 +47,7 @@ class Application: StoryboardApplication {
 
 extension Application: UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        BookishModel.registerLocalizations()
         setupActions()
         setupCloud()
         collection.sync()

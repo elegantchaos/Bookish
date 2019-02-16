@@ -84,7 +84,7 @@ let applicationChannel = Logger("Application")
 extension Application: NSApplicationDelegate {
     
     func applicationWillFinishLaunching(_ notification: Notification) {
-        StringLocalization.registerLocalizationBundle(Bundle(for: Book.self))
+        BookishModel.registerLocalizations()
         setupActions()
         setupTransformers()
         
