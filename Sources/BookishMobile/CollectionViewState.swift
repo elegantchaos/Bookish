@@ -20,13 +20,25 @@ import BookishModel
     let titleFont: UIFont
     let indexFont: UIFont
 
+    var showDebug: Bool
+    
     override init() {
+        let defaults = UserDefaults.standard
+        
         detailFont = UIFont.preferredFont(forTextStyle: .body)
         labelFont = detailFont
         titleFont = UIFont.preferredFont(forTextStyle: .title1)
         indexFont = UIFont.preferredFont(forTextStyle: .title3)
+        showDebug = defaults.bool(forKey: "showDebug")
+        
         super.init()
     }
+    
+    func save() {
+        let defaults = UserDefaults.standard
+        defaults.set(showDebug, forKey: "showDebug")
+    }
+    
 }
 
 extension CollectionViewState: DetailContext {

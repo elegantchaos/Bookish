@@ -11,6 +11,12 @@ import LoggerKit
 class SettingsController: UIViewController {
     lazy var loggingSettings: LoggerSettingsView? = LoggerSettingsView()
     
+    @IBOutlet weak var showDebugSwitch: UISwitch!
+
+    override func viewWillAppear(_ animated: Bool) {
+        showDebugSwitch.isOn = application.viewState.showDebug
+    }
+    
     @IBAction func resetToEmpty(_ sender: Any) {
         application.collectionController.reset(mode: .empty)
     }
@@ -29,4 +35,9 @@ class SettingsController: UIViewController {
             }
         }
     }
+    
+    @IBAction func toggleShowDebug(_ sender: Any) {
+        application.viewState.showDebug = showDebugSwitch.isOn
+    }
+    
 }

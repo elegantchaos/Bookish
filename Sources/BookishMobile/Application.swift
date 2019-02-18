@@ -76,6 +76,7 @@ extension Application: UIApplicationDelegate {
         applicationChannel.log("did enter background")
         
         let taskIdentifier = UIApplication.shared.beginBackgroundTask(expirationHandler: nil)
+        viewState.save()
         try! collection.managedObjectContext.save()
         collection.sync {
             UIApplication.shared.endBackgroundTask(taskIdentifier)
@@ -98,6 +99,7 @@ extension Application: UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
         applicationChannel.log("will terminate")
+        viewState.save()
         collection.save()
     }
 

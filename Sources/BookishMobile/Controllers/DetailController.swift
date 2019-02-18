@@ -78,7 +78,7 @@ class DetailController: UIViewController, UITableViewDataSource, UITableViewDele
             titleLabel.isEnabled = isEditing
             subtitleLabel.isEnabled = isEditing
             subtitleLabel.isHidden = (subtitleLabel.text?.isEmpty ?? true) && !isEditing
-            source?.filter(for: [object], editing: isEditing, context:application.viewState)
+            source?.filter(for: [object], editing: isEditing, combining: false, context:application.viewState)
             validateButtons()
         }
     }
