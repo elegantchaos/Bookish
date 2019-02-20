@@ -50,10 +50,10 @@ class PersonRow: BookDetailRow {
     @IBOutlet weak var personField: UITextField!
     @IBOutlet weak var choosePersonButton: UIButton!
     
-    override func setupContent(row: DetailItem, book: Book) {
+    override func setupContent(row: DetailItem, object: ModelObject) {
         if let item = row as? PersonDetailItem {
             if item.placeholder {
-                role = Role.named(Role.StandardName.author, in: book.managedObjectContext!)
+                role = Role.named(Role.StandardName.author, in: object.managedObjectContext!)
             } else {
                 relationship = item.relationship
                 role = relationship?.role

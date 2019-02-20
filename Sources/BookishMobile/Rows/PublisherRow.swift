@@ -11,7 +11,7 @@ class PublisherRow: BookDetailRow {
     @IBOutlet var publisherButton: LinkButton!
     var publisher: Publisher!
     
-    override func setupContent(row: DetailItem, book: Book) {
+    override func setupContent(row: DetailItem, object: ModelObject) {
         if let item = row as? PublisherDetailItem {
             if row.placeholder {
                 

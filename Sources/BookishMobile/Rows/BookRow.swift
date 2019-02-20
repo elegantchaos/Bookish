@@ -14,7 +14,7 @@ class BookRow: UITableViewCell, ActionContextProvider, DetailRow {
     var book: Book?
 
     func setup(row: DetailItem, object: ModelObject) {
-        if let item = row as? PersonBookDetailItem, let book = item.book {
+        if let item = row as? BookDetailItem, let book = item.book {
             self.book = book
             personButton.setTitle(book.name, font: application.viewState.detailFont)
             personButton.linkedObject = book

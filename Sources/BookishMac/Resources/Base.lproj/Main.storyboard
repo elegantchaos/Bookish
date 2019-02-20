@@ -391,25 +391,38 @@ CA
                             </menuItem>
                             <menuItem title="Book" id="EkW-3w-kBG">
                                 <modifierMask key="keyEquivalentModifierMask"/>
-                                <menu key="submenu" title="Book" identifier="menu.book" id="KpK-bQ-eVd">
+                                <menu key="submenu" title="Book" identifier="menu.book" id="uD1-YW-cRV">
                                     <items>
-                                        <menuItem title="Add Relationship" identifier="menu.FillRelationshipMenu" id="S1Y-5k-gmo">
+                                        <menuItem title="Add Relationship" identifier="menu.FillRelationshipMenu" id="C5y-Gx-Qyt">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
-                                                <action selector="performAction:" target="Ady-hI-5gd" id="7NE-A6-iSj"/>
+                                                <action selector="performAction:" target="Ady-hI-5gd" id="EQl-8d-V5X"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Remove Relationship" identifier="menu.RemoveRelationship" id="b2J-PJ-ZCr">
+                                        <menuItem title="Remove Relationship" identifier="menu.RemoveRelationship" id="cQL-cO-JdW">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
-                                                <action selector="performAction:" target="Ady-hI-5gd" id="KWo-3k-lfO"/>
+                                                <action selector="performAction:" target="Ady-hI-5gd" id="qm1-VV-kWF"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem isSeparatorItem="YES" id="ceK-9f-B2v"/>
-                                        <menuItem title="Delete Book" identifier="menu.DeleteBook" id="60m-wd-nbQ">
+                                        <menuItem isSeparatorItem="YES" id="IxZ-JX-aj7"/>
+                                        <menuItem title="Delete Book" identifier="menu.DeleteBook" id="IB1-oA-c5b">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
-                                                <action selector="performAction:" target="Ady-hI-5gd" id="Ghm-YB-CNA"/>
+                                                <action selector="performAction:" target="Ady-hI-5gd" id="dGA-hW-CIl"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
+                            <menuItem title="Person" id="Gum-BW-JVl" userLabel="Person">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Person" identifier="menu.book" id="0WV-fZ-bve">
+                                    <items>
+                                        <menuItem title="Add Relationship" identifier="menu.MergePerson" id="6gc-P5-rss" userLabel="Merge People">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="performAction:" target="Ady-hI-5gd" id="pYY-Er-J0a"/>
                                             </connections>
                                         </menuItem>
                                     </items>
@@ -1820,10 +1833,10 @@ CA
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Bookish Index">
-            <color red="0.97299998998641968" green="0.97299998998641968" blue="0.98000001907348633" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.97254901960784312" green="0.97254901960784312" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Bookish Index Text">
-            <color red="0.35294117647058826" green="0.36862745098039218" blue="0.3843137254901961" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.3529999852180481" green="0.36899998784065247" blue="0.38400000333786011" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Bookish Label Text">
             <color red="0.54100000858306885" green="0.55699998140335083" blue="0.57300001382827759" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

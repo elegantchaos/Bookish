@@ -9,7 +9,7 @@ import BookishModel
 
 class BookCell: NSTableCellView, ActionContextProvider, DetailTableCell {
     func setup(for row: DetailItem, of view: GenericDetailController) {
-        if let item = row as? PersonBookDetailItem, let book = item.book, let name = book.name {
+        if let item = row as? BookDetailItem, let book = item.book, let name = book.name {
             objectValue = book
             textField?.stringValue = name
             validateButtons()

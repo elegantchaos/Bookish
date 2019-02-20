@@ -9,9 +9,10 @@ import BookishModel
 
 class BookDetailRow: UITableViewCell, UITextViewDelegate, DetailRow {
     func setup(row: DetailItem, object: ModelObject) {
-        if let book = object as? Book {
-            setup(row: row, book: book)
-        }
+        info = row
+        label.font = application.viewState.labelFont
+        label.text = row.heading
+        setupContent(row: row, object: object)
     }
     
     @IBOutlet weak var label: UILabel!
@@ -20,13 +21,6 @@ class BookDetailRow: UITableViewCell, UITextViewDelegate, DetailRow {
     
     var bindings = [Any]()
     var info: DetailItem!
-    
-    func setup(row: DetailItem, book: Book) {
-        info = row
-        label.font = application.viewState.labelFont
-        label.text = row.heading
-        setupContent(row: row, book: book)
-    }
     
     func updatePlaceholder() {
         if let text = detail.text, !text.isEmpty {
@@ -38,11 +32,11 @@ class BookDetailRow: UITableViewCell, UITextViewDelegate, DetailRow {
         }
     }
     
-    func setupContent(row: DetailItem, book: Book) {
+    func setupContent(row: DetailItem, object: ModelObject) {
         if let item = row as? SimpleDetailItem {
             detail.font = application.viewState.detailFont
             detail.isEditable = item.source.isEditing
-            let binding = TextViewBinding(for: detail, to: book, path: item.spec.binding, setIfNull: true)
+            let binding = TextViewBinding(for: detail, to: object, path: item.spec.binding, setIfNull: true)
             bindings.append(binding)
             
             let observation = detail.observe(\UITextView.text) { (observed, value) in

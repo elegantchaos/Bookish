@@ -55,7 +55,6 @@ let applicationChannel = Logger("Application")
         actionManager.register(ItemAction.standardActions())
         actionManager.register(EditingAction.standardActions())
         actionManager.register([
-            ScanSeriesAction(identifier: "ScanSeries"),
             ShowDatePickerAction(identifier: "ShowDatePicker")
             ])
         

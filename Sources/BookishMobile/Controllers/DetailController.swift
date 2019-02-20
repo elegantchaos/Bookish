@@ -20,7 +20,7 @@ class DetailController: UIViewController, UITableViewDataSource, UITableViewDele
     var bindings = [Any]()
     var entityName = ""
     var representedObject: EntityType?
-    var source: DetailProvider?
+    var provider: DetailProvider?
     
     lazy var placeholderImage = UIImage(named: "CoverPlaceholder")
     
@@ -43,11 +43,11 @@ class DetailController: UIViewController, UITableViewDataSource, UITableViewDele
         entityName = String(describing: type(of: object))
         representedObject = object
         detailViewChannel.debug("setup for \(entityName) \(object)")
-        source = (object as? DetailOwner)?.getProvider()
+        provider = object.getProvider()
     }
     
     func configureView() {
-        if let source = source, let object = representedObject, titleLabel != nil {
+        if let source = provider, let object = representedObject, titleLabel != nil {
             let vm = application.viewState
             titleLabel.font = vm.titleFont
             subtitleLabel.font = vm.detailFont
@@ -78,7 +78,7 @@ class DetailController: UIViewController, UITableViewDataSource, UITableViewDele
             titleLabel.isEnabled = isEditing
             subtitleLabel.isEnabled = isEditing
             subtitleLabel.isHidden = (subtitleLabel.text?.isEmpty ?? true) && !isEditing
-            source?.filter(for: [object], editing: isEditing, combining: false, context:application.viewState)
+            provider?.filter(for: [object], editing: isEditing, combining: false, context:application.viewState)
             validateButtons()
         }
     }
@@ -97,20 +97,20 @@ class DetailController: UIViewController, UITableViewDataSource, UITableViewDele
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return source?.sectionCount ?? 0
+        return provider?.sectionCount ?? 0
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return source?.sectionTitle(for: section)
+        return provider?.sectionTitle(for: section)
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return source?.itemCount(for: section) ?? 0
+        return provider?.itemCount(for: section) ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let object = representedObject else { fatalError("should have object set") }
-        if let info = source?.info(section: indexPath.section, row: indexPath.row) {
+        if let info = provider?.info(section: indexPath.section, row: indexPath.row) {
             let identifier = info.kind
             if let cell = tableView.dequeueReusableCell(withIdentifier: identifier) as? DetailRow {
                 cell.setup(row: info, object: object)

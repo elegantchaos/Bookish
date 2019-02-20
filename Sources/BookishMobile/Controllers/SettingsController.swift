@@ -22,11 +22,11 @@ class SettingsController: UIViewController {
     }
 
     @IBAction func resetToTestData(_ sender: Any) {
-        application.collectionController.reset(mode: .testData)
+        application.collectionController.reset(mode: .replaceWithTestData)
     }
 
     @IBAction func resetToSampleData(_ sender: Any) {
-        application.collectionController.reset(mode: .sampleData)
+        application.collectionController.reset(mode: .replaceWithSampleData)
     }
     
     @IBAction func showLoggingSettings(_ sender: Any) {

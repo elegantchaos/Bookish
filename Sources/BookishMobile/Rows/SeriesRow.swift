@@ -11,7 +11,7 @@ class SeriesRow: BookDetailRow {
     @IBOutlet var seriesButton: LinkButton!
     var series: Series!
 
-    override func setupContent(row: DetailItem, book: Book) {
+    override func setupContent(row: DetailItem, object: ModelObject) {
         if let item = row as? SeriesDetailItem {
             if item.placeholder {
                 

@@ -115,7 +115,7 @@ class NewImportRequest: ImportRequest {
         application.testDocument = false
         super.init(importer: importer, collection: application.viewModel!.collection)
     }
-
+    
     override func run(for url: URL) {
         collection.reset() { (collection, error) in
             if error == nil {

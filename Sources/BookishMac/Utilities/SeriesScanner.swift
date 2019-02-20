@@ -9,7 +9,7 @@ import CoreData
 import JSONDump
 import Logger
 
-let seriesDetectorChannel = Logger("DeliciousImporter")
+let seriesScannerChannel = Logger("SeriesScanner")
 
 class SeriesDetector {
     static let bookPattern = "(Book |Bk\\. |Bk\\.|Bk |No\\. |No\\.|No |)"
@@ -206,7 +206,7 @@ class SeriesScanner {
                     if let detected = detector.detect(name: name, subtitle: subtitle) {
                         book.name = detected.name
                         book.subtitle = detected.subtitle
-                        deliciousChannel.log("extracted <\(detected.name)> <\(detected.subtitle)> <\(detected.series) \(detected.index)> from <\(name)> <\(subtitle)>")
+                        seriesScannerChannel.log("extracted <\(detected.name)> <\(detected.subtitle)> <\(detected.series) \(detected.index)> from <\(name)> <\(subtitle)>")
                         process(series: detected.series, position: detected.index, for: book)
                         matched = true
                     }
@@ -238,14 +238,14 @@ class SeriesScanner {
     
     private func extractPosition(from series: String, book: Book) -> (String, Int) {
         if let (extractedSeries, index) = extractPosition(from: series) {
-            deliciousChannel.log("extracted index \(index) from series \(series) leaving \(extractedSeries)")
+            seriesScannerChannel.log("extracted index \(index) from series \(series) leaving \(extractedSeries)")
             return (extractedSeries, index)
         }
         
         if let name = book.name {
             if let (extractedName, index) = extractPosition(from: name) {
                 book.name = extractedName
-                deliciousChannel.log("extracted index \(index) from name \(name) leaving \(extractedName)")
+                seriesScannerChannel.log("extracted index \(index) from name \(name) leaving \(extractedName)")
                 return (extractedName, index)
             }
         }
@@ -253,7 +253,7 @@ class SeriesScanner {
         if let subtitle = book.subtitle {
             if let (extractedSubtitle, index) = extractPosition(from: subtitle) {
                 book.subtitle = extractedSubtitle
-                deliciousChannel.log("extracted index \(index) from subtitle \(subtitle) leaving \(extractedSubtitle)")
+                seriesScannerChannel.log("extracted index \(index) from subtitle \(subtitle) leaving \(extractedSubtitle)")
                 return (extractedSubtitle, index)
             }
         }
