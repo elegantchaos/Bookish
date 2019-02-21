@@ -27,26 +27,19 @@ class CollectionDocument: NSPersistentDocument {
     init(type typeName: String) throws {
         super.init()
         self.fileType = NSSQLiteStoreType
-        
-//        let context = collection.managedObjectContext
-//        managedObjectContext = context
-//        makeDefaultRoles(context: context)
     }
 
     override func configurePersistentStoreCoordinator(for url: URL, ofType fileType: String, modelConfiguration configuration: String?, storeOptions: [String : Any]? = nil) throws {
-//        try super.configurePersistentStoreCoordinator(for: url, ofType: fileType, modelConfiguration: configuration, storeOptions: storeOptions)
-
-        let mode: CollectionContainer.PopulateMode = Application.sharedInstance.testDocument ? .testData : .empty
-        Application.sharedInstance.testDocument = false
-        collection = SyncedCollection(url: url, identifier: Application.sharedInstance.cloudManager.collectionIdentifier, mode: mode) { (collection, error) in
+        let application = Application.sharedInstance
+        let mode = application.mode
+        application.mode = .defaultRoles
+        collection = SyncedCollection(url: url, identifier: application.cloudManager.collectionIdentifier, mode: mode) { (collection, error) in
             if let error = error {
                 fatalError("failed to load \(error)")
             }
             
             self.managedObjectContext = collection.managedObjectContext
         }
-
-        //        collection.configure(for: url, ofType: fileType, modelConfiguration: configuration, storeOptions: storeOptions)
     }
     
     func replaceContext() -> NSManagedObjectContext {

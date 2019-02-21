@@ -109,10 +109,10 @@ class NewImportRequest: ImportRequest {
     init?(importer: Importer) throws {
         let application = Application.sharedInstance
         
-        let oldTD = application.testDocument
-        defer { application.testDocument = oldTD }
+        let oldMode = application.mode
+        defer { application.mode = oldMode }
         
-        application.testDocument = false
+        application.mode = .defaultRoles
         super.init(importer: importer, collection: application.viewModel!.collection)
     }
     

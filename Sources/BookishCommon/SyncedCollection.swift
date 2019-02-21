@@ -11,16 +11,16 @@ import Ensembles
 class SyncedCollection: CollectionContainer, CDEPersistentStoreEnsembleDelegate {
   
     var cloudFileSystem: CDECloudKitFileSystem
-    var ensemble: CDEPersistentStoreEnsemble!
+    var ensemble: CDEPersistentStoreEnsemble?
     
-    init(url: URL? = nil, identifier: String, mode: PopulateMode, callback: LoadedCallback? = nil) {
+    init(url: URL? = nil, identifier: String, mode: PopulateMode, shouldSync: Bool = true, callback: LoadedCallback? = nil) {
         cloudFileSystem = CDECloudKitFileSystem(privateDatabaseForUbiquityContainerIdentifier: identifier, schemaVersion: .version2)
         super.init(name: "Synced13", url: url, mode: mode) { (collection, error) in
             if let error = error {
                 fatalError("failed to load \(error)")
             }
             
-            if let collection = collection as? SyncedCollection {
+            if shouldSync, let collection = collection as? SyncedCollection {
                 collection.setupEnsemble()
                 collection.setupListeners()
             }
@@ -47,13 +47,13 @@ class SyncedCollection: CollectionContainer, CDEPersistentStoreEnsembleDelegate 
     }
     
     func sync(_ completion: (() -> Void)? = nil) {
-        //        let viewController = self.window?.rootViewController as! ViewController
-        //        viewController.activityIndicator?.startAnimating()
+        guard let ensemble = ensemble else {
+            completion?()
+            return
+        }
+
         if !ensemble.isLeeched {
-            ensemble.leechPersistentStore {
-                error in
-                //                viewController.activityIndicator?.stopAnimating()
-                //                viewController.refresh()
+            ensemble.leechPersistentStore { error in
                 if error == nil {
                     self.sync(completion) // Trigger first merge
                 }
@@ -63,17 +63,15 @@ class SyncedCollection: CollectionContainer, CDEPersistentStoreEnsembleDelegate 
             }
         }
         else {
-            ensemble.merge {
-                error in
-                //                viewController.activityIndicator?.stopAnimating()
-                //                viewController.refresh()
+            ensemble.merge { error in
                 completion?()
             }
         }
     }
 
     override public func delete(remove: Bool = false) {
-        ensemble.dismantle()
+        ensemble?.dismantle()
+        
         super.delete(remove: remove)
     }
     

@@ -26,7 +26,8 @@ let applicationChannel = Logger("Application")
     let imageCache = NSImageCache()
     let cloudManager = CloudManager()
     let uiTesting = CommandLine.arguments.contains("--ui-testing")
-    var testDocument = CommandLine.arguments.contains("--test-document")
+    var mode: SyncedCollection.PopulateMode = .defaultRoles
+    let sampleDocument = CommandLine.arguments.contains("--sample-document")
     let noBlankDocument = CommandLine.arguments.contains("--no-blank-document")
     var viewModel: CollectionViewState?
     var watchedMenuItem: NSMenuItem?
@@ -87,8 +88,14 @@ extension Application: NSApplicationDelegate {
         setupActions()
         setupTransformers()
         
-        let mode: CollectionContainer.PopulateMode = testDocument ? .replaceWithTestData : .defaultRoles
-        let _ = SyncedCollection(identifier: cloudManager.collectionIdentifier, mode: mode) { (sc, error) in
+        if CommandLine.arguments.contains("--test-document") {
+            mode = .replaceWithTestData
+        } else if CommandLine.arguments.contains("--sample-document") {
+            mode = .replaceWithSampleData
+        }
+        
+        let shouldSync = mode == .defaultRoles
+        let _ = SyncedCollection(identifier: cloudManager.collectionIdentifier, mode: mode, shouldSync: shouldSync) { (sc, error) in
             if let error = error {
                 fatalError("failed to load \(error)")
             }
