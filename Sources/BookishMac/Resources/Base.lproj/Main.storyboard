@@ -419,10 +419,16 @@ CA
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Person" identifier="menu.person" id="0WV-fZ-bve">
                                     <items>
-                                        <menuItem title="Merge People" identifier="menu.MergePerson" id="6gc-P5-rss" userLabel="Merge People">
+                                        <menuItem title="Merge People" identifier="menu.MergePerson" id="6gc-P5-rss">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="performAction:" target="Ady-hI-5gd" id="pYY-Er-J0a"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Split People" identifier="menu.SplitPerson" id="cQA-Db-633">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="performAction:" target="Ady-hI-5gd" id="pfo-nP-q9v"/>
                                             </connections>
                                         </menuItem>
                                     </items>
@@ -1028,22 +1034,24 @@ CA
                                                     <rect key="frame" x="-2" y="28" width="338" height="22"/>
                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" title="Title" id="8WP-pw-UuU">
                                                         <font key="font" size="18" name=".AppleSystemUIFont"/>
-                                                        <color key="textColor" name="Bookish Text"/>
+                                                        <color key="textColor" name="Bookish Detail Text"/>
                                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
                                                     <connections>
                                                         <binding destination="iPd-Ru-zxR" name="font" keyPath="self.cvm.titleFont" id="dtS-8T-N5L"/>
+                                                        <outlet property="delegate" destination="iPd-Ru-zxR" id="ONF-yo-jSc"/>
                                                     </connections>
                                                 </textField>
                                                 <textField identifier="subtitle" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1Sf-0s-kNb" userLabel="Subtitle">
                                                     <rect key="frame" x="-2" y="0.0" width="338" height="18"/>
                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" title="Subtitle" id="xtq-Zc-CXA">
                                                         <font key="font" size="14" name=".AppleSystemUIFont"/>
-                                                        <color key="textColor" name="Bookish Text"/>
+                                                        <color key="textColor" name="Bookish Detail Text"/>
                                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
                                                     <connections>
                                                         <binding destination="iPd-Ru-zxR" name="font" keyPath="self.cvm.detailFont" id="DaI-ZN-JMi"/>
+                                                        <outlet property="delegate" destination="iPd-Ru-zxR" id="DlF-5Z-PRa"/>
                                                         <outlet property="nextKeyView" destination="2eK-Gk-TD8" id="QDz-FH-JIs"/>
                                                     </connections>
                                                 </textField>
@@ -1128,7 +1136,7 @@ CA
                                                                         <subviews>
                                                                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8hj-He-i4c">
                                                                                 <rect key="frame" x="0.0" y="2" width="86" height="18"/>
-                                                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" alignment="right" placeholderString="heading" usesSingleLineMode="YES" id="UOa-YW-YPe">
+                                                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" alignment="right" title="heading" usesSingleLineMode="YES" id="UOa-YW-YPe">
                                                                                     <font key="font" size="14" name=".AppleSystemUIFont"/>
                                                                                     <color key="textColor" name="Bookish Label Text"/>
                                                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1842,9 +1850,6 @@ CA
         </namedColor>
         <namedColor name="Bookish Label Text">
             <color red="0.54117647058823526" green="0.55686274509803924" blue="0.5725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="Bookish Text">
-            <color name="ibMissingResourceColor" catalog="#$assets-com.apple.dt.DVTKit" colorSpace="catalog"/>
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>

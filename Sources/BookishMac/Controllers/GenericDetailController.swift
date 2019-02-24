@@ -41,6 +41,7 @@ class GenericDetailController: CollectionViewController {
     @objc var index: NSArrayController!
 
     var entityName: String = ""
+    var entityType: ModelObject.Type = ModelObject.self
     var source = DetailProvider()
     var editing = false
     var indexView: GenericIndexController!
@@ -50,7 +51,8 @@ class GenericDetailController: CollectionViewController {
         detailChannel.debug("setup for \(entityType)")
         indexView = index
         self.index = index.indexArray
-        entityName = String(describing: entityType)
+        self.entityName = String(describing: entityType)
+        self.entityType = entityType
         source = entityType.getProvider()
         selectionChanged()
     }
@@ -337,6 +339,28 @@ extension GenericDetailController: BookChangeObserver {
         }
     }
 
+}
 
 
+extension GenericDetailController: NSControlTextEditingDelegate {
+    func controlTextDidChange(_ obj: Notification) {
+        if let field = obj.object as? NSTextField {
+            let property: String?
+            switch field {
+            case nameView:
+                property = source.titleProperty
+            case subtitleView:
+                property = source.subtitleProperty
+            default:
+                property = nil
+            }
+
+            if let property = property {
+                let info = ActionInfo(sender: field)
+                info[ChangeValueAction.propertyKey] = property
+                info[ChangeValueAction.valueKey] = field.stringValue
+                application.actionManager.perform(identifier: "ChangeValue", info: info)
+            }
+        }
+    }
 }
