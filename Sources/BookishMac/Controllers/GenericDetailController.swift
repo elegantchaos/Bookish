@@ -108,6 +108,7 @@ class GenericDetailController: CollectionViewController {
     
     fileprivate func updateTitle(for object: NSObject, visible: Bool) {
         nameView.isHidden = !visible
+        nameView.isEditable = source.isEditing
         if let path = source.titleProperty {
             nameView.objectValue = object.value(forKey: path)
         }
@@ -117,6 +118,7 @@ class GenericDetailController: CollectionViewController {
         if visible, let path = source.subtitleProperty, let value = object.value(forKey: path) as? String, source.isEditing || !value.isEmpty {
             subtitleView.objectValue = value
             subtitleView.isHidden = false
+            subtitleView.isEditable = source.isEditing
         } else {
             subtitleView.isHidden = true
         }
@@ -343,7 +345,7 @@ extension GenericDetailController: BookChangeObserver {
 
 
 extension GenericDetailController: NSControlTextEditingDelegate {
-    func controlTextDidChange(_ obj: Notification) {
+    func controlTextDidEndEditing(_ obj: Notification) {
         if let field = obj.object as? NSTextField {
             let property: String?
             switch field {

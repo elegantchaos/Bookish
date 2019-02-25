@@ -9,7 +9,10 @@ import AppKit
 class BookHeadingCell: NSTableCellView, DetailTableCell {
     func setup(for row: DetailItem, of view: GenericDetailController) {
         if let field = subviews.first as? NSTextField {
-            field.stringValue = row.heading
+            let text = row.heading
+            field.stringValue = text
+            field.isEditable = false
+            field.isSelectable = !text.isEmpty
         }
     }
     
