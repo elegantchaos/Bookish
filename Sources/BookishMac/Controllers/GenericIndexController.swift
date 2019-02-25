@@ -43,11 +43,6 @@ class GenericIndexController: CollectionViewController {
     var fetchSessions: [FetchSession] = []
     var fetchState: FetchState = .unfetched
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        print("blah")
-    }
-    
     override func windowDidLoad(_ window: NSWindowController, storyboard: NSStoryboard) {
         if let window = window as? CollectionWindowController {
             window.register(index: self, for: entityName)

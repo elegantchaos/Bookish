@@ -939,16 +939,16 @@ CA
                                         </scrollView>
                                         <searchField wantsLayer="YES" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yal-1G-peJ">
                                             <rect key="frame" x="20" y="22" width="160" height="21"/>
-                                            <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="border" placeholderString="search books" drawsBackground="YES" usesSingleLineMode="YES" recentsAutosaveName="books-filter" id="1o1-S1-KHI">
+                                            <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="border" placeholderString="search books" drawsBackground="YES" usesSingleLineMode="YES" sendsSearchStringImmediately="YES" recentsAutosaveName="books-filter" id="1o1-S1-KHI">
                                                 <font key="font" metaFont="system"/>
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="Bookish Detail"/>
                                             </searchFieldCell>
                                             <connections>
-                                                <binding destination="iUG-Sw-kPc" name="predicate" keyPath="filterPredicate" id="2Yt-HR-Zmc">
+                                                <binding destination="iUG-Sw-kPc" name="predicate" keyPath="filterPredicate" id="4jZ-eU-awR">
                                                     <dictionary key="options">
                                                         <string key="NSDisplayName">predicate</string>
-                                                        <string key="NSPredicateFormat">name contains $value</string>
+                                                        <string key="NSPredicateFormat">name contains[c] $value</string>
                                                     </dictionary>
                                                 </binding>
                                             </connections>
