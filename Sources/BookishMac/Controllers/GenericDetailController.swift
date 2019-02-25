@@ -47,8 +47,11 @@ class GenericDetailController: CollectionViewController {
     var indexView: GenericIndexController!
     var keyViewTimer: Timer? = nil
     
+    let doubleClickRecogniser = NSClickGestureRecognizer(target: self, action: #selector(textDoubleClick(_:)))
+
     func setup(for index: GenericIndexController, type entityType: ModelObject.Type) {
         detailChannel.debug("setup for \(entityType)")
+        doubleClickRecogniser.numberOfClicksRequired = 2
         indexView = index
         self.index = index.indexArray
         self.entityName = String(describing: entityType)
@@ -108,9 +111,12 @@ class GenericDetailController: CollectionViewController {
     
     fileprivate func updateTitle(for object: NSObject, visible: Bool) {
         nameView.isHidden = !visible
-        nameView.isEditable = source.isEditing
-        if let path = source.titleProperty {
-            nameView.objectValue = object.value(forKey: path)
+        if visible {
+            nameView.isEditable = source.isEditing
+            if let path = source.titleProperty {
+                nameView.objectValue = object.value(forKey: path)
+            }
+            addDoubleClickUnlock(to: nameView)
         }
     }
     
@@ -119,6 +125,7 @@ class GenericDetailController: CollectionViewController {
             subtitleView.objectValue = value
             subtitleView.isHidden = false
             subtitleView.isEditable = source.isEditing
+            addDoubleClickUnlock(to: subtitleView)
         } else {
             subtitleView.isHidden = true
         }
@@ -174,6 +181,20 @@ class GenericDetailController: CollectionViewController {
 
         if let wc = view.window?.windowController as? CollectionWindowController {
             wc.validateButtons()
+        }
+    }
+    
+    func addDoubleClickUnlock(to control: NSControl) {
+        if source.isEditing {
+            control.removeGestureRecognizer(doubleClickRecogniser)
+        } else {
+            control.addGestureRecognizer(doubleClickRecogniser)
+        }
+    }
+    
+    @IBAction func textDoubleClick(_ sender: Any) {
+        if !source.isEditing {
+            application.actionManager.perform(identifier: "ToggleEditing")
         }
     }
     
@@ -365,4 +386,13 @@ extension GenericDetailController: NSControlTextEditingDelegate {
             }
         }
     }
+}
+
+
+extension GenericDetailController: NSTextFieldDelegate {
+//    func textView(_ textView: NSTextView, doubleClickedOn cell: NSTextAttachmentCellProtocol, in cellFrame: NSRect, at charIndex: Int) {
+//        if !source.isEditing {
+//            application.actionManager.perform(identifier: "ToggleEditing")
+//        }
+//    }
 }
