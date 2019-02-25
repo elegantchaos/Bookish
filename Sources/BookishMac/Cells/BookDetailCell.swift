@@ -36,6 +36,12 @@ class BookDetailCell: AnnotatedTableCellView, DetailTableCell {
             } else {
                 subview.objectValue = selection
                 asNumber = selection?.isKind(of: NSNumber.self) ?? false
+                var font = detailView.cvm.detailFont
+                if detail.isDebug, let smaller = NSFont(descriptor: font.fontDescriptor, size: font.pointSize - 2) {
+                    font = smaller
+                    subview.textColor = NSColor(named: "Bookish Label Text")
+                }
+                subview.font = font
             }
         }
     }

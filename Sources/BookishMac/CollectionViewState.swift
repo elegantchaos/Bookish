@@ -50,7 +50,7 @@ import BookishModel
     @objc var entrySorting = [NSSortDescriptor(key: "position", ascending: true)]
     @objc var relationshipSorting = [NSSortDescriptor(key: "role.name", ascending: true)]
 
-    var showDebug: Bool = true
+    var showDebug: Bool = UserDefaults.standard.bool(forKey: "showDebug")
     
     var mode: Mode {
         get { return Mode(rawValue: modeIndex)! }
