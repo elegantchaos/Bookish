@@ -617,7 +617,7 @@ CA
         <!--Window Controller-->
         <scene sceneID="pOa-g2-DfK">
             <objects>
-                <windowController id="GRm-cO-8JL" customClass="ScannerWindowController" customModule="Bookish" customModuleProvider="target" sceneMemberID="viewController">
+                <windowController storyboardIdentifier="ScannerWindow" id="GRm-cO-8JL" customClass="ScannerWindowController" customModule="Bookish" customModuleProvider="target" sceneMemberID="viewController">
                     <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="NDY-DS-igy">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
@@ -643,11 +643,25 @@ CA
                         <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KeA-eY-ggS">
-                                <rect key="frame" x="20" y="20" width="440" height="230"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="KeA-eY-ggS">
+                                <rect key="frame" x="20" y="61" width="440" height="189"/>
                             </customView>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="SgJ-BQ-X9K">
+                                <rect key="frame" x="385" y="13" width="81" height="32"/>
+                                <buttonCell key="cell" type="push" title="Button" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="yuz-YB-Pj6">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
                         </subviews>
+                        <constraints>
+                            <constraint firstItem="KeA-eY-ggS" firstAttribute="top" secondItem="iE7-gu-E3H" secondAttribute="top" constant="20" id="FVO-Ra-hvi"/>
+                            <constraint firstItem="KeA-eY-ggS" firstAttribute="leading" secondItem="iE7-gu-E3H" secondAttribute="leading" constant="20" id="HBC-ae-KVU"/>
+                            <constraint firstItem="SgJ-BQ-X9K" firstAttribute="top" secondItem="KeA-eY-ggS" secondAttribute="bottom" constant="20" symbolic="YES" id="TKu-l0-Afs"/>
+                            <constraint firstAttribute="bottom" secondItem="SgJ-BQ-X9K" secondAttribute="bottom" constant="20" id="f8y-kR-1j0"/>
+                            <constraint firstAttribute="trailing" secondItem="KeA-eY-ggS" secondAttribute="trailing" constant="20" id="u8d-PR-3Bg"/>
+                            <constraint firstAttribute="trailing" secondItem="SgJ-BQ-X9K" secondAttribute="trailing" constant="20" id="up4-5w-A03"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="imageView" destination="KeA-eY-ggS" id="gpE-Fj-dS9"/>

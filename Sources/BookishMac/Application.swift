@@ -32,6 +32,7 @@ let applicationChannel = Logger("Application")
     var viewModel: CollectionViewState?
     var watchedMenuItem: NSMenuItem?
     var windowController: CollectionWindowController!
+    var scannerWindow: ScannerWindowController!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -74,6 +75,10 @@ let applicationChannel = Logger("Application")
         let windowController = self.windowControllerFactory.instantiateController(for: viewModel)
         self.windowController = windowController
         windowController.showWindow(self)
+        
+        let storyboard = NSStoryboard(name: NSStoryboard.Name("Main"), bundle: nil)
+        scannerWindow = storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier("ScannerWindow")) as! ScannerWindowController
+        scannerWindow.showWindow(self)
     }
 
     fileprivate func setupCloudKit() {

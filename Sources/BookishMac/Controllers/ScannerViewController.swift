@@ -17,7 +17,7 @@ class ScannerViewController: NSViewController, AVCaptureVideoDataOutputSampleBuf
     var requests = [VNRequest]()
     
     override func viewDidLoad() {
-        self.viewDidLoad()
+        super.viewDidLoad()
         self.setupVideo()
         self.startDetection()
     }
@@ -33,13 +33,13 @@ class ScannerViewController: NSViewController, AVCaptureVideoDataOutputSampleBuf
         session.addOutput(deviceOutput)
         let imageLayer = AVCaptureVideoPreviewLayer(session: session)
         imageLayer.frame = imageView.bounds
-        imageView.layer?.addSublayer(imageLayer)
+        imageView.layer = imageLayer
         session.startRunning()
     }
     
     func startDetection() {
         let request = VNDetectBarcodesRequest(completionHandler: self.detectHandler)
-        request.symbologies = [VNBarcodeSymbology.Code39] // or use .QR, etc
+        request.symbologies = [.EAN13] // or use .QR, etc
         self.requests = [request]
     }
     
