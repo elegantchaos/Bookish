@@ -56,6 +56,8 @@
 		22A3E0C521FA015900BA4F17 /* Ensembles.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A3E0C421FA014F00BA4F17 /* Ensembles.framework */; };
 		22A3E30721FB8AF500BA4F17 /* Ensembles.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22A3E0C421FA014F00BA4F17 /* Ensembles.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		22A69BF521C2DDE600043C3A /* LoggerKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A69BF421C2DDE600043C3A /* LoggerKit.framework */; };
+		22A6D46C22256E9E0083D4E8 /* ScannerWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A6D46B22256E9E0083D4E8 /* ScannerWindowController.swift */; };
+		22A6D46E22256EAB0083D4E8 /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A6D46D22256EAB0083D4E8 /* ScannerViewController.swift */; };
 		22A8318822049CB2006A0952 /* IndexRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A8318722049CB2006A0952 /* IndexRow.swift */; };
 		22A8318A2204AAB2006A0952 /* CollectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A831892204AAB2006A0952 /* CollectionController.swift */; };
 		22A8318C2204B410006A0952 /* RootRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A8318B2204B410006A0952 /* RootRow.swift */; };
@@ -239,6 +241,8 @@
 		22A3E0C321FA014400BA4F17 /* Ensembles.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Ensembles.framework; path = "../../Library/Developer/Xcode/DerivedData/Bookish-azxjmoessbfkjjalxbqvnjmhexiy/Build/Products/Debug-iphoneos/Ensembles.framework"; sourceTree = "<group>"; };
 		22A3E0C421FA014F00BA4F17 /* Ensembles.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Ensembles.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		22A69BF421C2DDE600043C3A /* LoggerKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = LoggerKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		22A6D46B22256E9E0083D4E8 /* ScannerWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerWindowController.swift; sourceTree = "<group>"; };
+		22A6D46D22256EAB0083D4E8 /* ScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerViewController.swift; sourceTree = "<group>"; };
 		22A8318722049CB2006A0952 /* IndexRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexRow.swift; sourceTree = "<group>"; };
 		22A831892204AAB2006A0952 /* CollectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionController.swift; sourceTree = "<group>"; };
 		22A8318B2204B410006A0952 /* RootRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootRow.swift; sourceTree = "<group>"; };
@@ -528,6 +532,8 @@
 				22429400212C32BF00E70510 /* CollectionWindowController.swift */,
 				22462E922158ED5000A4C56C /* CollectionIndexViewController.swift */,
 				22462E942158EDEA00A4C56C /* CollectionDetailViewController.swift */,
+				22A6D46B22256E9E0083D4E8 /* ScannerWindowController.swift */,
+				22A6D46D22256EAB0083D4E8 /* ScannerViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1020,11 +1026,13 @@
 				22D1B24B2180E9060062F2CB /* SectionCell.swift in Sources */,
 				227F4514218352A0000D8B8D /* ImporterUIActions.swift in Sources */,
 				2250C6E121B191B200E899E2 /* BookPublisherCell.swift in Sources */,
+				22A6D46E22256EAB0083D4E8 /* ScannerViewController.swift in Sources */,
 				228968472191F48400B80A93 /* AuthorSelectionTransformer.swift in Sources */,
 				2254895921F62DE300EE8ECB /* BookControlCell.swift in Sources */,
 				22DE6AE72188A8DC0078D489 /* WhiteSearchFieldCell.swift in Sources */,
 				22DA6A8C21E9098300ECF09A /* CollectionDocument.swift in Sources */,
 				22143FD3212F0F2500B689DF /* AuthorsTransformer.swift in Sources */,
+				22A6D46C22256E9E0083D4E8 /* ScannerWindowController.swift in Sources */,
 				22143FCF212EF9CC00B689DF /* WindowControllerWithViewModel.swift in Sources */,
 				22462E952158EDEA00A4C56C /* CollectionDetailViewController.swift in Sources */,
 				22DA6A4121E6525400ECF09A /* CDECloudKitFileSystem.m in Sources */,
