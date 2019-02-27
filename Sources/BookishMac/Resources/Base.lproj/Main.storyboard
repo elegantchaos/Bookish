@@ -690,6 +690,10 @@ CA
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
+                            <progressIndicator hidden="YES" wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="hHr-dd-BPj">
+                                <rect key="frame" x="272" y="214" width="16" height="16"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            </progressIndicator>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mhL-cd-WyS">
                                 <rect key="frame" x="14" y="13" width="66" height="32"/>
                                 <buttonCell key="cell" type="push" title="Test" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="rPm-kC-xL6">
@@ -722,6 +726,7 @@ CA
                         <outlet property="barcodeView" destination="tGW-qR-OP0" id="8dh-im-idW"/>
                         <outlet property="imageView" destination="KeA-eY-ggS" id="gpE-Fj-dS9"/>
                         <outlet property="infoView" destination="hl0-fC-THd" id="w9g-cU-PkM"/>
+                        <outlet property="lookupSpinner" destination="hHr-dd-BPj" id="eiZ-Nv-1Im"/>
                     </connections>
                 </viewController>
                 <customObject id="2SH-QY-2xC" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

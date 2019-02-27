@@ -7,6 +7,7 @@ import AppKit
 import AVFoundation
 import Vision
 import Foundation
+import BookishModel
 
 class ScannerViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDelegate {
 
@@ -14,11 +15,14 @@ class ScannerViewController: NSViewController, AVCaptureVideoDataOutputSampleBuf
     @IBOutlet weak var imageView: NSView!
     @IBOutlet weak var barcodeView: NSTextField!
     @IBOutlet weak var infoView: NSTextView!
+    @IBOutlet weak var lookupSpinner: NSProgressIndicator!
+    
     
     var captureDevice: AVCaptureDevice!
     var session = AVCaptureSession()
     var requests = [VNRequest]()
     var detected: String = ""
+    var lookup: LookupSession? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,43 +76,35 @@ class ScannerViewController: NSViewController, AVCaptureVideoDataOutputSampleBuf
     }
     
     func lookup(ean: String) {
-        if let url = URL(string: "https://www.googleapis.com/books/v1/volumes?q=isbn:\(ean)") {
-            if let data = try? Data(contentsOf: url) {
-                if let parsed = try? JSONSerialization.jsonObject(with: data, options: []), let data = parsed as? [String:Any] {
-                    DispatchQueue.main.async {
-                        self.found(data: data)
-                    }
-                }
-            }
+        lookup?.cancel()
+        lookup = application.lookupManager.lookup(ean: ean) { (session, state) in
+            self.lookupUpdate(session: session, state: state)
         }
     }
     
-    func found(data: [String:Any]) {
-        if let items = data["items"] as? [[String:Any]] {
-            if items.count > 0, let item = items[0]["volumeInfo"] as? [String:Any] {
-                var summary = ""
-                if let title = item["title"] as? String {
-                    summary += "\(title)\n"
-                }
-                if let authors = item["authors"] as? [String] {
-                    summary += authors.joined(separator: ", ")
-                    summary += "\n"
-                }
-                if let publisher = item["publisher"] as? String {
-                    summary += "\(publisher)\n"
-                }
-                if let publishedDate = item["publishedDate"] as? String {
-                    let detector = try? NSDataDetector(types: NSTextCheckingResult.CheckingType.date.rawValue)
-                    if let matches = detector?.matches(in: publishedDate, options: NSRegularExpression.MatchingOptions(), range: NSRange(location: 0, length: publishedDate.count)) {
-                        if let date = matches.first?.date {
-                            summary += "\(date)"
-                        }
-                    }
-                }
-                infoView.string = summary
-            }
+    func lookupUpdate(session: LookupSession, state: LookupSession.State) {
+        var text = infoView.string
+        switch state {
+        case .starting:
+            text = "Starting lookup for \(session.search)."
+            lookupSpinner.startAnimation(self)
+            lookupSpinner.isHidden = false
+            
+        case .done:
+            text += "\n\nFinished lookup."
+            lookupSpinner.stopAnimation(self)
+            lookupSpinner.isHidden = true
+
+        case .foundCandidate(let candidate):
+            text += "\n\nFound: \(candidate.summary)"
+            
+        default:
+            break
         }
+        
+        infoView.string = text
     }
+
     
     @IBAction func doTest(_ sender: Any) {
         detected(ean: "9781408832240")

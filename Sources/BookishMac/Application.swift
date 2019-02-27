@@ -25,6 +25,7 @@ let applicationChannel = Logger("Application")
     let importManager = ImportManager()
     let imageCache = NSImageCache()
     let cloudManager = CloudManager()
+    let lookupManager = LookupManager()
     let uiTesting = CommandLine.arguments.contains("--ui-testing")
     var mode: SyncedCollection.PopulateMode = .defaultRoles
     let sampleDocument = CommandLine.arguments.contains("--sample-document")
@@ -48,6 +49,10 @@ let applicationChannel = Logger("Application")
     func resetState() {
         let defaultsName = Bundle.main.bundleIdentifier!
         UserDefaults.standard.removePersistentDomain(forName: defaultsName)
+    }
+    
+    fileprivate func setupLookups() {
+        lookupManager.register(service: GoogleLookupService(name: "Google"))
     }
     
     fileprivate func setupActions() {
@@ -91,6 +96,7 @@ extension Application: NSApplicationDelegate {
     func applicationWillFinishLaunching(_ notification: Notification) {
         BookishModel.registerLocalizations()
         setupActions()
+        setupLookups()
         setupTransformers()
         
         if CommandLine.arguments.contains("--test-document") {
