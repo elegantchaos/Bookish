@@ -18,6 +18,7 @@
 		221C4B35216BAAAC0086D56F /* RelationshipUIActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221C4B2F216BA96C0086D56F /* RelationshipUIActions.swift */; };
 		221ED512216B8EAB00594714 /* BookDetailRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221ED511216B8EAB00594714 /* BookDetailRow.swift */; };
 		221F272921382C8E00DC2DC7 /* DateTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221F272821382C8E00DC2DC7 /* DateTransformer.swift */; };
+		2231C4BB2227EBC100D730FB /* ScannerCandidateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2231C4BA2227EBC100D730FB /* ScannerCandidateCell.swift */; };
 		2237D28322020C3B0033924F /* ChoosePersonController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2237D28222020C3B0033924F /* ChoosePersonController.swift */; };
 		2237D28522020C8F0033924F /* ChooseEntityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2237D28422020C8F0033924F /* ChooseEntityController.swift */; };
 		2237D405220368520033924F /* ButtonExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2237D404220368520033924F /* ButtonExtensions.swift */; };
@@ -194,6 +195,7 @@
 		221ED4EA216785BB00594714 /* BookishMobile.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = BookishMobile.xcconfig; sourceTree = "<group>"; };
 		221ED511216B8EAB00594714 /* BookDetailRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailRow.swift; sourceTree = "<group>"; };
 		221F272821382C8E00DC2DC7 /* DateTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTransformer.swift; sourceTree = "<group>"; };
+		2231C4BA2227EBC100D730FB /* ScannerCandidateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerCandidateCell.swift; sourceTree = "<group>"; };
 		2237D28222020C3B0033924F /* ChoosePersonController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoosePersonController.swift; sourceTree = "<group>"; };
 		2237D28422020C8F0033924F /* ChooseEntityController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseEntityController.swift; sourceTree = "<group>"; };
 		2237D404220368520033924F /* ButtonExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonExtensions.swift; sourceTree = "<group>"; };
@@ -534,6 +536,7 @@
 				22462E942158EDEA00A4C56C /* CollectionDetailViewController.swift */,
 				22A6D46B22256E9E0083D4E8 /* ScannerWindowController.swift */,
 				22A6D46D22256EAB0083D4E8 /* ScannerViewController.swift */,
+				2231C4BA2227EBC100D730FB /* ScannerCandidateCell.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1053,6 +1056,7 @@
 				22143FD521300F9300B689DF /* CoreDataTransformers.swift in Sources */,
 				225488DE21F2333100EE8ECB /* ColoredPopUpButton.swift in Sources */,
 				22D39E552146A84E00282467 /* BookDateCell.swift in Sources */,
+				2231C4BB2227EBC100D730FB /* ScannerCandidateCell.swift in Sources */,
 				22143FD1212F076000B689DF /* CollectionRootViewController.swift in Sources */,
 				22D39E5E2146D9F100282467 /* ValidatingButton.swift in Sources */,
 				2263587E2216E7C100779D63 /* GenericDetailController.swift in Sources */,

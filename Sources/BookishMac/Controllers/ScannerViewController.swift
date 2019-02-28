@@ -11,12 +11,13 @@ import BookishModel
 
 class ScannerViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDelegate {
 
+    static let candidateViewID = NSUserInterfaceItemIdentifier(rawValue: "candidate")
     
     @IBOutlet weak var imageView: NSView!
     @IBOutlet weak var barcodeView: NSTextField!
     @IBOutlet weak var candidatesTable: NSTableView!
     @IBOutlet weak var lookupSpinner: NSProgressIndicator!
-    
+    @IBOutlet weak var addButton: NSButton!
     
     var captureDevice: AVCaptureDevice!
     var session = AVCaptureSession()
@@ -86,20 +87,26 @@ class ScannerViewController: NSViewController, AVCaptureVideoDataOutputSampleBuf
     func lookupUpdate(session: LookupSession, state: LookupSession.State) {
         switch state {
         case .starting:
-            barcodeView.stringValue = "Starting lookup for \(session.search)."
+            barcodeView.stringValue = "Looking up \(session.search)…"
             lookupSpinner.startAnimation(self)
             lookupSpinner.isHidden = false
             candidates.removeAll()
+            addButton.isEnabled = false
             
         case .done:
-            barcodeView.stringValue = "\n\nFinished lookup."
+            barcodeView.stringValue = "\(candidates.count) candidates found."
             lookupSpinner.stopAnimation(self)
             lookupSpinner.isHidden = true
 
         case .foundCandidate(let candidate):
+            let rows = IndexSet(integer: candidates.count)
             candidates.append(candidate)
-            candidatesTable.reloadData()
-            
+            candidatesTable.insertRows(at: rows, withAnimation: .slideDown)
+            if candidatesTable.selectedRow == -1 {
+                candidatesTable.selectRowIndexes(rows, byExtendingSelection: false)
+            }
+            addButton.isEnabled = true
+
         default:
             break
         }
@@ -137,14 +144,16 @@ class ScannerViewController: NSViewController, AVCaptureVideoDataOutputSampleBuf
     }
 }
 
-extension ScannerViewController: NSTableViewDataSource, NSTableViewDelegate {
+extension ScannerViewController: NSTableViewDelegate, NSTableViewDataSource {
     func numberOfRows(in tableView: NSTableView) -> Int {
         return candidates.count
     }
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        let view = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "candidate"), owner: self) as! NSTableCellView
-        view.textField?.stringValue = candidates[row].summary
+        let view = tableView.makeView(withIdentifier: ScannerViewController.candidateViewID, owner: self) as! NSTableCellView
+        let candidate = candidates[row]
+        view.textField?.stringValue = candidate.summary
+
         return view
     }
 }
