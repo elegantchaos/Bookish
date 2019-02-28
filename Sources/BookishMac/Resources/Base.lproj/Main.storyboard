@@ -661,7 +661,7 @@ CA
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="160" id="rzJ-7g-vKq"/>
                                 </constraints>
-                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="ISBN978-1-4088-3224-0" id="62h-Uw-TeO">
+                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="Scanning for barcodes…" id="62h-Uw-TeO">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -680,17 +680,17 @@ CA
                                     <action selector="doTest:" target="aUv-cC-c5u" id="Fzl-Kg-4af"/>
                                 </connections>
                             </button>
-                            <scrollView borderType="line" autohidesScrollers="YES" horizontalLineScroll="44" horizontalPageScroll="10" verticalLineScroll="44" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u2d-ar-e3H">
+                            <scrollView borderType="line" autohidesScrollers="YES" horizontalLineScroll="52" horizontalPageScroll="10" verticalLineScroll="52" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u2d-ar-e3H">
                                 <rect key="frame" x="280" y="61" width="180" height="164"/>
-                                <clipView key="contentView" id="Vch-os-6Ge">
+                                <clipView key="contentView" drawsBackground="NO" id="Vch-os-6Ge">
                                     <rect key="frame" x="1" y="1" width="178" height="162"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="none" columnResizing="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" rowHeight="42" rowSizeStyle="automatic" usesAutomaticRowHeights="YES" viewBased="YES" id="JR5-Tw-44o">
+                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="none" selectionHighlightStyle="sourceList" columnResizing="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" rowHeight="50" rowSizeStyle="automatic" usesAutomaticRowHeights="YES" viewBased="YES" id="JR5-Tw-44o">
                                             <rect key="frame" x="0.0" y="0.0" width="178" height="162"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
-                                            <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="_sourceListBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
                                                 <tableColumn identifier="candidates" width="174" minWidth="40" maxWidth="1000" id="hUS-sK-buP">
@@ -707,11 +707,11 @@ CA
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView identifier="candidate" id="fmA-St-1LR" customClass="ScannerCandidateCell" customModule="Bookish" customModuleProvider="target">
-                                                            <rect key="frame" x="1" y="1" width="174" height="42"/>
+                                                            <rect key="frame" x="1" y="1" width="174" height="50"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="LYQ-OI-993">
-                                                                    <rect key="frame" x="2" y="2" width="38" height="38"/>
+                                                                    <rect key="frame" x="2" y="6" width="38" height="38"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="38" id="A2U-Ew-pcU"/>
                                                                         <constraint firstAttribute="height" constant="38" id="gPn-fS-VQ8"/>
@@ -719,11 +719,11 @@ CA
                                                                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="BookPlaceholder" id="OxN-xC-h59"/>
                                                                 </imageView>
                                                                 <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jjc-Sx-Ky0">
-                                                                    <rect key="frame" x="44" y="0.0" width="130" height="42"/>
+                                                                    <rect key="frame" x="44" y="4" width="130" height="42"/>
                                                                     <subviews>
                                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="GCb-VL-yjr">
                                                                             <rect key="frame" x="-2" y="28" width="30" height="14"/>
-                                                                            <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" sendsActionOnEndEditing="YES" title="Title" usesSingleLineMode="YES" id="nV2-SB-x8g">
+                                                                            <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" sendsActionOnEndEditing="YES" title="Title" id="nV2-SB-x8g">
                                                                                 <font key="font" metaFont="systemBold" size="11"/>
                                                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -731,7 +731,7 @@ CA
                                                                         </textField>
                                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="PHe-fp-wHl">
                                                                             <rect key="frame" x="-2" y="14" width="45" height="14"/>
-                                                                            <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" sendsActionOnEndEditing="YES" title="Authors" id="JKz-Tb-EGx">
+                                                                            <textFieldCell key="cell" selectable="YES" sendsActionOnEndEditing="YES" title="Authors" id="JKz-Tb-EGx">
                                                                                 <font key="font" metaFont="smallSystem"/>
                                                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -739,7 +739,7 @@ CA
                                                                         </textField>
                                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="3CI-L9-vYg">
                                                                             <rect key="frame" x="-2" y="0.0" width="53" height="14"/>
-                                                                            <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" sendsActionOnEndEditing="YES" title="Publisher" usesSingleLineMode="YES" id="so2-sE-FSL">
+                                                                            <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" sendsActionOnEndEditing="YES" title="Publisher" id="so2-sE-FSL">
                                                                                 <font key="font" metaFont="smallSystem"/>
                                                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -760,8 +760,8 @@ CA
                                                             </subviews>
                                                             <constraints>
                                                                 <constraint firstItem="Jjc-Sx-Ky0" firstAttribute="leading" secondItem="LYQ-OI-993" secondAttribute="trailing" constant="4" id="0eT-f4-sQO"/>
-                                                                <constraint firstItem="Jjc-Sx-Ky0" firstAttribute="top" secondItem="fmA-St-1LR" secondAttribute="top" id="EVR-1O-pwX"/>
-                                                                <constraint firstAttribute="bottom" secondItem="Jjc-Sx-Ky0" secondAttribute="bottom" id="jKj-pn-xkj"/>
+                                                                <constraint firstItem="Jjc-Sx-Ky0" firstAttribute="top" secondItem="fmA-St-1LR" secondAttribute="top" constant="4" id="EVR-1O-pwX"/>
+                                                                <constraint firstAttribute="bottom" secondItem="Jjc-Sx-Ky0" secondAttribute="bottom" constant="4" id="jKj-pn-xkj"/>
                                                                 <constraint firstItem="Jjc-Sx-Ky0" firstAttribute="centerY" secondItem="LYQ-OI-993" secondAttribute="centerY" id="nhC-4A-jpT"/>
                                                                 <constraint firstAttribute="trailing" secondItem="Jjc-Sx-Ky0" secondAttribute="trailing" id="s8Z-KJ-YPt"/>
                                                                 <constraint firstItem="LYQ-OI-993" firstAttribute="leading" secondItem="fmA-St-1LR" secondAttribute="leading" constant="2" id="t0c-nZ-uDX"/>
@@ -784,6 +784,7 @@ CA
                                             </connections>
                                         </tableView>
                                     </subviews>
+                                    <nil key="backgroundColor"/>
                                 </clipView>
                                 <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="116-bz-sko">
                                     <rect key="frame" x="1" y="118" width="161" height="16"/>
@@ -2060,7 +2061,7 @@ CA
             <color red="0.97254901960784312" green="0.97254901960784312" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Bookish Index Text">
-            <color red="0.35294117647058826" green="0.36862745098039218" blue="0.3843137254901961" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.3529999852180481" green="0.36899998784065247" blue="0.38400000333786011" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Bookish Label Text">
             <color red="0.54100000858306885" green="0.55699998140335083" blue="0.57300001382827759" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

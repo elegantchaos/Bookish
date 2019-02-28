@@ -28,6 +28,8 @@ class ScannerViewController: NSViewController, AVCaptureVideoDataOutputSampleBuf
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        barcodeView.stringValue = "candidate.lookup.scanning".localized
         self.setupVideo()
         self.startDetection()
     }
@@ -74,7 +76,7 @@ class ScannerViewController: NSViewController, AVCaptureVideoDataOutputSampleBuf
     
     func detected(ean: String) {
         detected = ean
-        barcodeView.stringValue = ean
+        barcodeView.stringValue = "candidate.lookup.detected".localized(with: ["search": ean])
     }
     
     func lookup(ean: String) {
@@ -87,14 +89,14 @@ class ScannerViewController: NSViewController, AVCaptureVideoDataOutputSampleBuf
     func lookupUpdate(session: LookupSession, state: LookupSession.State) {
         switch state {
         case .starting:
-            barcodeView.stringValue = "Looking up \(session.search)…"
+            barcodeView.stringValue = "candidate.lookup.start".localized(with: ["search": session.search])
             lookupSpinner.startAnimation(self)
             lookupSpinner.isHidden = false
             candidates.removeAll()
             addButton.isEnabled = false
             
         case .done:
-            barcodeView.stringValue = "\(candidates.count) candidates found."
+            barcodeView.stringValue = "candidate.found".localized(count: candidates.count)
             lookupSpinner.stopAnimation(self)
             lookupSpinner.isHidden = true
 
