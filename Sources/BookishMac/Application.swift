@@ -82,7 +82,7 @@ let applicationChannel = Logger("Application")
         windowController.showWindow(self)
         
         let storyboard = NSStoryboard(name: NSStoryboard.Name("Main"), bundle: nil)
-        scannerWindow = storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier("ScannerWindow")) as! ScannerWindowController
+        scannerWindow = storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier("ScannerWindow")) as? ScannerWindowController
         scannerWindow.showWindow(self)
     }
 

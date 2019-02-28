@@ -150,9 +150,9 @@ extension ScannerViewController: NSTableViewDelegate, NSTableViewDataSource {
     }
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        let view = tableView.makeView(withIdentifier: ScannerViewController.candidateViewID, owner: self) as! NSTableCellView
+        let view = tableView.makeView(withIdentifier: ScannerViewController.candidateViewID, owner: self) as! ScannerCandidateCell
         let candidate = candidates[row]
-        view.textField?.stringValue = candidate.summary
+        view.setup(with: candidate)
 
         return view
     }
