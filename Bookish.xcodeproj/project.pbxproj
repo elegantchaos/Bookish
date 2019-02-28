@@ -520,6 +520,7 @@
 				22D1B24A2180E9060062F2CB /* SectionCell.swift */,
 				2250C71321B596C700E899E2 /* BookSeriesCell.swift */,
 				2250C71121B57F7800E899E2 /* SeriesEntryCell.swift */,
+				2231C4BA2227EBC100D730FB /* ScannerCandidateCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -536,7 +537,6 @@
 				22462E942158EDEA00A4C56C /* CollectionDetailViewController.swift */,
 				22A6D46B22256E9E0083D4E8 /* ScannerWindowController.swift */,
 				22A6D46D22256EAB0083D4E8 /* ScannerViewController.swift */,
-				2231C4BA2227EBC100D730FB /* ScannerCandidateCell.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";

@@ -52,7 +52,7 @@ let applicationChannel = Logger("Application")
     }
     
     fileprivate func setupLookups() {
-        lookupManager.register(service: GoogleLookupService(name: "Google"))
+        lookupManager.register(service: GoogleLookupService(name: "Google Books"))
     }
     
     fileprivate func setupActions() {

@@ -14,6 +14,7 @@ class ScannerCandidateCell: NSTableCellView {
     @IBOutlet weak var titleField: NSTextField!
     @IBOutlet weak var authorsField: NSTextField!
     @IBOutlet weak var publisherField: NSTextField!
+    @IBOutlet weak var sourceField: NSTextField!
     
     class func makeDateFormatter() -> DateFormatter {
         let formatter = DateFormatter()
@@ -22,6 +23,7 @@ class ScannerCandidateCell: NSTableCellView {
     }
     
     func setup(with candidate: LookupCandidate) {
+        sourceField.stringValue = "candidate.found.source".localized(with: ["source": candidate.service.name])
         titleField.stringValue = candidate.title
         authorsField.stringValue = candidate.authors.joined(separator: ", ")
         
