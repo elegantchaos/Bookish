@@ -14,7 +14,7 @@ class ScannerViewController: NSViewController, AVCaptureVideoDataOutputSampleBuf
     
     @IBOutlet weak var imageView: NSView!
     @IBOutlet weak var barcodeView: NSTextField!
-    @IBOutlet weak var infoView: NSTextView!
+    @IBOutlet weak var candidatesTable: NSTableView!
     @IBOutlet weak var lookupSpinner: NSProgressIndicator!
     
     
@@ -23,6 +23,7 @@ class ScannerViewController: NSViewController, AVCaptureVideoDataOutputSampleBuf
     var requests = [VNRequest]()
     var detected: String = ""
     var lookup: LookupSession? = nil
+    var candidates: [LookupCandidate] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -83,26 +84,25 @@ class ScannerViewController: NSViewController, AVCaptureVideoDataOutputSampleBuf
     }
     
     func lookupUpdate(session: LookupSession, state: LookupSession.State) {
-        var text = infoView.string
         switch state {
         case .starting:
-            text = "Starting lookup for \(session.search)."
+            barcodeView.stringValue = "Starting lookup for \(session.search)."
             lookupSpinner.startAnimation(self)
             lookupSpinner.isHidden = false
+            candidates.removeAll()
             
         case .done:
-            text += "\n\nFinished lookup."
+            barcodeView.stringValue = "\n\nFinished lookup."
             lookupSpinner.stopAnimation(self)
             lookupSpinner.isHidden = true
 
         case .foundCandidate(let candidate):
-            text += "\n\nFound: \(candidate.summary)"
+            candidates.append(candidate)
+            candidatesTable.reloadData()
             
         default:
             break
         }
-        
-        infoView.string = text
     }
 
     
@@ -110,6 +110,15 @@ class ScannerViewController: NSViewController, AVCaptureVideoDataOutputSampleBuf
         detected(ean: "9781408832240")
         lookup(ean: "9781408832240")
     }
+    
+    @IBAction func doAdd(_ sender: Any) {
+        let state = application.viewModel
+        if let candidate = candidates.first, let context = state?.managedObjectContext {
+            let book = candidate.makeBook(in: context)
+            application.windowController.reveal(book: book)
+        }
+    }
+    
     
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else {
@@ -125,5 +134,17 @@ class ScannerViewController: NSViewController, AVCaptureVideoDataOutputSampleBuf
         } catch {
             print(error)
         }
+    }
+}
+
+extension ScannerViewController: NSTableViewDataSource, NSTableViewDelegate {
+    func numberOfRows(in tableView: NSTableView) -> Int {
+        return candidates.count
+    }
+    
+    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
+        let view = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "candidate"), owner: self) as! NSTableCellView
+        view.textField?.stringValue = candidates[row].summary
+        return view
     }
 }
