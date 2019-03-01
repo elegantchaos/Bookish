@@ -10,7 +10,7 @@ import Foundation
 import BookishModel
 
 class ScannerViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDelegate {
-
+    
     static let candidateViewID = NSUserInterfaceItemIdentifier(rawValue: "candidate")
     
     @IBOutlet weak var imageView: NSView!
@@ -30,6 +30,8 @@ class ScannerViewController: NSViewController, AVCaptureVideoDataOutputSampleBuf
         super.viewDidLoad()
         
         barcodeView.stringValue = "candidate.lookup.scanning".localized
+        candidatesTable.isHidden = true
+        
         self.setupVideo()
         self.startDetection()
     }
@@ -42,7 +44,7 @@ class ScannerViewController: NSViewController, AVCaptureVideoDataOutputSampleBuf
         let deviceOutput = AVCaptureVideoDataOutput()
         deviceOutput.videoSettings = [kCVPixelBufferPixelFormatTypeKey as String: Int(kCVPixelFormatType_32BGRA)]
         deviceOutput.setSampleBufferDelegate(self, queue: DispatchQueue.global(qos: DispatchQoS.QoSClass.default))
-       
+        
         session.addInput(deviceInput)
         session.addOutput(deviceOutput)
         let imageLayer = AVCaptureVideoPreviewLayer(session: session)
@@ -53,36 +55,39 @@ class ScannerViewController: NSViewController, AVCaptureVideoDataOutputSampleBuf
     }
     
     func startDetection() {
-        let request = VNDetectBarcodesRequest(completionHandler: self.detectHandler)
-        request.symbologies = [.EAN13, .EAN8] // or use .QR, etc
+        let request = VNDetectBarcodesRequest(completionHandler: { (request: VNRequest, error: Error?) in
+            if let observations = request.results {
+                let barcodes = observations.compactMap({ ($0 as? VNBarcodeObservation)?.payloadStringValue })
+                for barcode in barcodes {
+                    self.detected(barcode: barcode)
+                }
+            }
+        })
+        
+        request.symbologies = [.EAN13]
         self.requests = [request]
     }
     
-    func detectHandler(request: VNRequest, error: Error?) {
-        guard let observations = request.results else {
-            //print("no result")
-            return
-        }
-        let results = observations.map({$0 as? VNBarcodeObservation})
-        for result in results {
-            if let value = result?.payloadStringValue, detected != value {
-                DispatchQueue.main.async {
-                    self.detected(ean: value)
-                }
-                lookup(ean: value)
+    func detected(barcode value: String) {
+        if detected != value {
+            detected = value
+            let valid = value.isISBN13
+            if valid {
+                lookup(isbn: value)
+            }
+            
+            DispatchQueue.main.async {
+                let key = valid ? "candidate.lookup.valid" : "candidate.lookup.invalid"
+                self.barcodeView.stringValue = key.localized(with: ["search": value])
             }
         }
     }
     
-    func detected(ean: String) {
-        detected = ean
-        barcodeView.stringValue = "candidate.lookup.detected".localized(with: ["search": ean])
-    }
     
-    func lookup(ean: String) {
+    func lookup(isbn: String) {
         lookup?.cancel()
         if let collection = application.viewModel?.collection {
-            lookup = application.lookupManager.lookup(ean: ean, collection: collection) { (session, state) in
+            lookup = application.lookupManager.lookup(ean: isbn, collection: collection) { (session, state) in
                 self.lookupUpdate(session: session, state: state)
             }
         }
@@ -95,6 +100,7 @@ class ScannerViewController: NSViewController, AVCaptureVideoDataOutputSampleBuf
             lookupSpinner.startAnimation(self)
             lookupSpinner.isHidden = false
             candidates.removeAll()
+            candidatesTable.isHidden = true
             candidatesTable.reloadData()
             addButton.isEnabled = false
             
@@ -102,25 +108,26 @@ class ScannerViewController: NSViewController, AVCaptureVideoDataOutputSampleBuf
             barcodeView.stringValue = "candidate.found".localized(count: candidates.count)
             lookupSpinner.stopAnimation(self)
             lookupSpinner.isHidden = true
-
+            
         case .foundCandidate(let candidate):
             let rows = IndexSet(integer: candidates.count)
             candidates.append(candidate)
+            candidatesTable.isHidden = false
             candidatesTable.insertRows(at: rows, withAnimation: .slideDown)
             if candidatesTable.selectedRow == -1 {
                 candidatesTable.selectRowIndexes(rows, byExtendingSelection: false)
             }
             addButton.isEnabled = true
-
+            
         default:
             break
         }
     }
-
+    
     
     @IBAction func doTest(_ sender: Any) {
-        detected(ean: "9781408832240")
-        lookup(ean: "9781408832240")
+        detected(barcode: "9781408832240")
+        lookup(isbn: "9781408832240")
     }
     
     @IBAction func doAdd(_ sender: Any) {
@@ -158,7 +165,7 @@ extension ScannerViewController: NSTableViewDelegate, NSTableViewDataSource {
         let view = tableView.makeView(withIdentifier: ScannerViewController.candidateViewID, owner: self) as! ScannerCandidateCell
         let candidate = candidates[row]
         view.setup(with: candidate)
-
+        
         return view
     }
 }
