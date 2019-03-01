@@ -54,7 +54,25 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      codeCoverageEnabled = "YES"
+      onlyGenerateCoverageForSpecifiedTargets = "YES"
       shouldUseLaunchSchemeArgsEnv = "NO">
+      <CodeCoverageTargets>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "22429390212AE0F300E70510"
+            BuildableName = "BookishModel.framework"
+            BlueprintName = "BookishModelMac"
+            ReferencedContainer = "container:Dependencies/BookishModel/BookishModel.xcodeproj">
+         </BuildableReference>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "224293B2212AE16200E70510"
+            BuildableName = "BookishModel.framework"
+            BlueprintName = "BookishModelMobile"
+            ReferencedContainer = "container:Dependencies/BookishModel/BookishModel.xcodeproj">
+         </BuildableReference>
+      </CodeCoverageTargets>
       <Testables>
          <TestableReference
             skipped = "YES"
