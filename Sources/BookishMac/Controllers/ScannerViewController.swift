@@ -81,8 +81,10 @@ class ScannerViewController: NSViewController, AVCaptureVideoDataOutputSampleBuf
     
     func lookup(ean: String) {
         lookup?.cancel()
-        lookup = application.lookupManager.lookup(ean: ean) { (session, state) in
-            self.lookupUpdate(session: session, state: state)
+        if let collection = application.viewModel?.collection {
+            lookup = application.lookupManager.lookup(ean: ean, collection: collection) { (session, state) in
+                self.lookupUpdate(session: session, state: state)
+            }
         }
     }
     
@@ -93,6 +95,7 @@ class ScannerViewController: NSViewController, AVCaptureVideoDataOutputSampleBuf
             lookupSpinner.startAnimation(self)
             lookupSpinner.isHidden = false
             candidates.removeAll()
+            candidatesTable.reloadData()
             addButton.isEnabled = false
             
         case .done:

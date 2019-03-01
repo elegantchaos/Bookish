@@ -53,6 +53,7 @@ let applicationChannel = Logger("Application")
     
     fileprivate func setupLookups() {
         lookupManager.register(service: GoogleLookupService(name: "Google Books"))
+        lookupManager.register(service: ExistingCollectionLookupService(name: "Existing Collection"))
     }
     
     fileprivate func setupActions() {
