@@ -379,10 +379,20 @@ extension GenericDetailController: NSControlTextEditingDelegate {
             }
 
             if let property = property {
-                let info = ActionInfo(sender: field)
-                info[ChangeValueAction.propertyKey] = property
-                info[ChangeValueAction.valueKey] = field.stringValue
-                application.actionManager.perform(identifier: "ChangeValue", info: info)
+                let sendAction: Bool
+                let newValue = field.stringValue
+                if let object = index.selection as? NSObject, let oldValue = object.value(forKey: property) as? String {
+                    sendAction = oldValue != newValue
+                } else {
+                    sendAction = true
+                }
+                
+                if sendAction {
+                    let info = ActionInfo(sender: field)
+                    info[ChangeValueAction.propertyKey] = property
+                    info[ChangeValueAction.valueKey] = field.stringValue
+                    application.actionManager.perform(identifier: "ChangeValue", info: info)
+                }
             }
         }
     }
