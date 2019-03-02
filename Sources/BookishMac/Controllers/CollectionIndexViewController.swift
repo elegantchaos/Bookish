@@ -10,7 +10,7 @@ import Actions
 class CollectionIndexViewController: NSTabViewController {
     @objc let cvm: CollectionViewState
     
-    let entities = [ Book.self, Person.self, Publisher.self, Series.self ]
+    let entities = [ Book.self, Person.self, Publisher.self, Series.self, Role.self ]
     
     lazy var detailView: GenericDetailController = nearestMatchingController()
     

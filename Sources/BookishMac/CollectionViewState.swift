@@ -53,8 +53,14 @@ import BookishModel
     var showDebug: Bool = UserDefaults.standard.bool(forKey: "showDebug")
     
     var mode: Mode {
-        get { return Mode(rawValue: modeIndex)! }
-        set (value) { modeIndex = value.rawValue }
+        get {
+            return Mode(rawValue: modeIndex)!
+            
+        }
+        set (value) {
+            modeIndex = value.rawValue
+            
+        }
     }
     
     init(collection: SyncedCollection) {

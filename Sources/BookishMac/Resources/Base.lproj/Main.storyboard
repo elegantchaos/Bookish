@@ -724,7 +724,7 @@ CA
                                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="GCb-VL-yjr">
                                                                             <rect key="frame" x="-2" y="39" width="30" height="14"/>
                                                                             <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" sendsActionOnEndEditing="YES" title="Title" id="nV2-SB-x8g">
-                                                                                <font key="font" metaFont="systemBold" size="11"/>
+                                                                                <font key="font" metaFont="smallSystemBold"/>
                                                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                             </textFieldCell>
@@ -748,7 +748,7 @@ CA
                                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="ce2-6U-SpK">
                                                                             <rect key="frame" x="-2" y="0.0" width="37" height="11"/>
                                                                             <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" sendsActionOnEndEditing="YES" alignment="right" title="source:" id="4s1-bH-DhD">
-                                                                                <font key="font" metaFont="system" size="9"/>
+                                                                                <font key="font" metaFont="miniSystem"/>
                                                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                             </textFieldCell>
@@ -886,10 +886,10 @@ CA
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <stackView distribution="equalSpacing" orientation="vertical" alignment="centerX" spacing="16" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="G7s-O5-blY">
-                                            <rect key="frame" x="4" y="173" width="64" height="192"/>
+                                            <rect key="frame" x="4" y="121" width="64" height="244"/>
                                             <subviews>
                                                 <button translatesAutoresizingMaskIntoConstraints="NO" id="pTf-uQ-crF">
-                                                    <rect key="frame" x="12" y="153" width="40" height="41"/>
+                                                    <rect key="frame" x="12" y="205" width="40" height="41"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="36" id="EmN-TV-lN9"/>
                                                         <constraint firstAttribute="width" constant="36" id="eXA-M2-dTV"/>
@@ -903,7 +903,7 @@ CA
                                                     </connections>
                                                 </button>
                                                 <button translatesAutoresizingMaskIntoConstraints="NO" id="fIv-Pl-PNw">
-                                                    <rect key="frame" x="12" y="101" width="40" height="41"/>
+                                                    <rect key="frame" x="12" y="153" width="40" height="41"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="36" id="aoT-LG-Qg2"/>
                                                         <constraint firstAttribute="width" constant="36" id="pyP-xV-h8M"/>
@@ -917,7 +917,7 @@ CA
                                                     </connections>
                                                 </button>
                                                 <button translatesAutoresizingMaskIntoConstraints="NO" id="3gT-z5-UYY">
-                                                    <rect key="frame" x="12" y="49" width="40" height="41"/>
+                                                    <rect key="frame" x="12" y="101" width="40" height="41"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="36" id="E5Q-1J-Lhg"/>
                                                         <constraint firstAttribute="width" constant="36" id="Zvd-K5-Pbf"/>
@@ -931,7 +931,7 @@ CA
                                                     </connections>
                                                 </button>
                                                 <button translatesAutoresizingMaskIntoConstraints="NO" id="5F3-j3-4IV">
-                                                    <rect key="frame" x="12" y="-3" width="40" height="41"/>
+                                                    <rect key="frame" x="12" y="49" width="40" height="41"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="36" id="YXf-sL-kMg"/>
                                                         <constraint firstAttribute="height" constant="36" id="fHw-Dt-2Zk"/>
@@ -944,14 +944,30 @@ CA
                                                         <action selector="selectRadio:" target="iuc-9t-fNj" id="GYR-q2-pcX"/>
                                                     </connections>
                                                 </button>
+                                                <button translatesAutoresizingMaskIntoConstraints="NO" id="9dZ-so-hT6">
+                                                    <rect key="frame" x="12" y="-3" width="40" height="41"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="36" id="Wx3-ZQ-Dr4"/>
+                                                        <constraint firstAttribute="width" constant="36" id="id5-iQ-ngE"/>
+                                                    </constraints>
+                                                    <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" image="Role" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="n3q-Vs-Uy6">
+                                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                        <font key="font" metaFont="system"/>
+                                                    </buttonCell>
+                                                    <connections>
+                                                        <action selector="selectRadio:" target="iuc-9t-fNj" id="Dhv-sr-G9b"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <visibilityPriorities>
                                                 <integer value="1000"/>
                                                 <integer value="1000"/>
                                                 <integer value="1000"/>
                                                 <integer value="1000"/>
+                                                <integer value="1000"/>
                                             </visibilityPriorities>
                                             <customSpacing>
+                                                <real value="3.4028234663852886e+38"/>
                                                 <real value="3.4028234663852886e+38"/>
                                                 <real value="3.4028234663852886e+38"/>
                                                 <real value="3.4028234663852886e+38"/>
@@ -1021,6 +1037,7 @@ CA
                         <tabViewItem id="g3C-Bk-WhB"/>
                         <tabViewItem id="0q9-nw-Q4n"/>
                         <tabViewItem id="oyY-U2-Rrc"/>
+                        <tabViewItem id="geT-BH-4hZ"/>
                     </tabViewItems>
                     <tabView key="tabView" drawsBackground="NO" type="noTabsNoBorder" id="xYK-vg-VcG">
                         <rect key="frame" x="0.0" y="0.0" width="200" height="400"/>
@@ -1037,6 +1054,7 @@ CA
                         <segue destination="PUA-xK-Wyi" kind="relationship" relationship="tabItems" id="het-yo-6H7"/>
                         <segue destination="PUA-xK-Wyi" kind="relationship" relationship="tabItems" id="AyL-gR-mKa"/>
                         <segue destination="PUA-xK-Wyi" kind="relationship" relationship="tabItems" id="5PC-lz-gPu"/>
+                        <segue destination="PUA-xK-Wyi" kind="relationship" relationship="tabItems" id="rTk-Z6-Vsq"/>
                     </connections>
                 </tabViewController>
                 <customObject id="NQu-ho-FxW" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -2061,6 +2079,7 @@ CA
         <image name="RemoveBook" width="32" height="32"/>
         <image name="RemoveRelationship" width="32" height="32"/>
         <image name="Reveal" width="12" height="12"/>
+        <image name="Role" width="32" height="32"/>
         <image name="Series" width="32" height="32"/>
         <namedColor name="Bookish Detail">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -2079,6 +2098,6 @@ CA
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="het-yo-6H7"/>
+        <segue reference="5PC-lz-gPu"/>
     </inferredMetricsTieBreakers>
 </document>
