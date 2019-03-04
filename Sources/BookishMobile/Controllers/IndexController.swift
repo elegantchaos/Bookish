@@ -26,6 +26,7 @@ class IndexController: UITableViewController, EntityIndex, ActionObserver {
     var modelContext: NSManagedObjectContext?
     lazy var fetcher: NSFetchedResultsController<ModelObject> = makeFetcher()
     
+    static let useSectionThreshold = 20
     @IBOutlet var indexTable: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     
@@ -137,36 +138,24 @@ class IndexController: UITableViewController, EntityIndex, ActionObserver {
         fetcher.delegate = nil
     }
     
-    var showSections: Bool {
-        guard let count = fetcher.fetchedObjects?.count else {
-            return false
-        }
-        
-        return count > 20
-    }
-    
     // MARK: - Table View
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return showSections ? (fetcher.sections?.count ?? 1) : 1
+        return fetcher.sections?.count ?? 1
     }
     
     override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
-        return showSections ? fetcher.sectionIndexTitles : nil
+        return fetcher.sectionIndexTitles
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        guard showSections, fetcher.sectionIndexTitles.count > section else { return nil }
+        guard fetcher.sectionIndexTitles.count > section else { return nil }
         return fetcher.sectionIndexTitle(forSectionName: fetcher.sectionIndexTitles[section])
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if showSections {
-            let sectionInfo = fetcher.sections![section]
-            return sectionInfo.numberOfObjects
-        } else {
-            return fetcher.fetchedObjects?.count ?? 0
-        }
+        let sectionInfo = fetcher.sections![section]
+        return sectionInfo.numberOfObjects
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -218,7 +207,7 @@ extension IndexController: NSFetchedResultsControllerDelegate {
         request.fetchBatchSize = 20
         request.sortDescriptors = application.viewState.entitySorting[entityName]
         let sectionPath: String?
-        if let count = try? context.count(for: request), count > 20 {
+        if let count = try? context.count(for: request), count > IndexController.useSectionThreshold {
             sectionPath = "sectionName"
         } else {
             sectionPath = nil
