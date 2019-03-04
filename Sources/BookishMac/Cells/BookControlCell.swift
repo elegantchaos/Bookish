@@ -12,7 +12,7 @@ class BookControlCell: NSTableCellView, DetailTableCell {
     @IBOutlet weak var removeButton: NSButton!
     private var objectKey: String = ""
     
-    func setup(for row: DetailItem, of view: GenericDetailController) {
+    func setup(for row: DetailItem, of view: DetailController) {
         if let (key, identifier, object) = row.removeAction {
             objectValue = object
             objectKey = key

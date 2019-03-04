@@ -11,11 +11,11 @@ class BookSeriesCell: AnnotatedTableCellView {
     @IBOutlet weak var seriesField: NSTextField!
     @IBOutlet weak var seriesCombo: AnnotatedComboBox!
     @IBOutlet weak var positionField: NSTextField!
-    var detailView: GenericDetailController!
+    var detailView: DetailController!
 }
 
 extension BookSeriesCell: DetailTableCell {
-    func setup(for row: DetailItem, of view: GenericDetailController) {
+    func setup(for row: DetailItem, of view: DetailController) {
         assert(row is SeriesDetailItem)
         
         detailView = view

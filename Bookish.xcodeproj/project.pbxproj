@@ -32,7 +32,6 @@
 		22429401212C32BF00E70510 /* CollectionWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22429400212C32BF00E70510 /* CollectionWindowController.swift */; };
 		22429403212C3C7400E70510 /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22429402212C3C7400E70510 /* ViewExtensions.swift */; };
 		22462E932158ED5000A4C56C /* CollectionIndexViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22462E922158ED5000A4C56C /* CollectionIndexViewController.swift */; };
-		22462E952158EDEA00A4C56C /* CollectionDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22462E942158EDEA00A4C56C /* CollectionDetailViewController.swift */; };
 		22462E972158F65200A4C56C /* CollectionViewActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22462E962158F65200A4C56C /* CollectionViewActions.swift */; };
 		2250C6E121B191B200E899E2 /* BookPublisherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2250C6E021B191B200E899E2 /* BookPublisherCell.swift */; };
 		2250C71221B57F7800E899E2 /* SeriesEntryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2250C71121B57F7800E899E2 /* SeriesEntryCell.swift */; };
@@ -42,12 +41,12 @@
 		225488DC21F20B2500EE8ECB /* BookRoleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225488DB21F20B2500EE8ECB /* BookRoleCell.swift */; };
 		225488DE21F2333100EE8ECB /* ColoredPopUpButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225488DD21F2333100EE8ECB /* ColoredPopUpButton.swift */; };
 		2254895921F62DE300EE8ECB /* BookControlCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2254895821F62DE300EE8ECB /* BookControlCell.swift */; };
-		2263587E2216E7C100779D63 /* GenericDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2263587D2216E7C100779D63 /* GenericDetailController.swift */; };
+		2263587E2216E7C100779D63 /* DetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2263587D2216E7C100779D63 /* DetailController.swift */; };
 		226E8E6B21AC0918001F191F /* AnnotatedComboBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226E8E6A21AC0918001F191F /* AnnotatedComboBox.swift */; };
 		226E8E6D21AC38D5001F191F /* BookHeadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226E8E6C21AC38D5001F191F /* BookHeadingCell.swift */; };
 		226E8E7121AC3D74001F191F /* BookEditableDateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226E8E7021AC3D74001F191F /* BookEditableDateCell.swift */; };
 		226E8E8C21AC73D9001F191F /* BookDimensionsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226E8E8B21AC73D9001F191F /* BookDimensionsCell.swift */; };
-		227BCFD02216D6F10073C8E6 /* GenericIndexController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227BCFCF2216D6F10073C8E6 /* GenericIndexController.swift */; };
+		227BCFD02216D6F10073C8E6 /* IndexController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227BCFCF2216D6F10073C8E6 /* IndexController.swift */; };
 		227F4514218352A0000D8B8D /* ImporterUIActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227F4513218352A0000D8B8D /* ImporterUIActions.swift */; };
 		228968412191DD9000B80A93 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 228968402191DD9000B80A93 /* CloudKit.framework */; };
 		228968442191DDC200B80A93 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 228968432191DDC200B80A93 /* CloudKit.framework */; };
@@ -215,7 +214,6 @@
 		22429400212C32BF00E70510 /* CollectionWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionWindowController.swift; sourceTree = "<group>"; };
 		22429402212C3C7400E70510 /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
 		22462E922158ED5000A4C56C /* CollectionIndexViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionIndexViewController.swift; sourceTree = "<group>"; };
-		22462E942158EDEA00A4C56C /* CollectionDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionDetailViewController.swift; sourceTree = "<group>"; };
 		22462E962158F65200A4C56C /* CollectionViewActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewActions.swift; sourceTree = "<group>"; };
 		2250C6E021B191B200E899E2 /* BookPublisherCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookPublisherCell.swift; sourceTree = "<group>"; };
 		2250C71121B57F7800E899E2 /* SeriesEntryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeriesEntryCell.swift; sourceTree = "<group>"; };
@@ -225,12 +223,12 @@
 		225488DB21F20B2500EE8ECB /* BookRoleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookRoleCell.swift; sourceTree = "<group>"; };
 		225488DD21F2333100EE8ECB /* ColoredPopUpButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColoredPopUpButton.swift; sourceTree = "<group>"; };
 		2254895821F62DE300EE8ECB /* BookControlCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookControlCell.swift; sourceTree = "<group>"; };
-		2263587D2216E7C100779D63 /* GenericDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericDetailController.swift; sourceTree = "<group>"; };
+		2263587D2216E7C100779D63 /* DetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailController.swift; sourceTree = "<group>"; };
 		226E8E6A21AC0918001F191F /* AnnotatedComboBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotatedComboBox.swift; sourceTree = "<group>"; };
 		226E8E6C21AC38D5001F191F /* BookHeadingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookHeadingCell.swift; sourceTree = "<group>"; };
 		226E8E7021AC3D74001F191F /* BookEditableDateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookEditableDateCell.swift; sourceTree = "<group>"; };
 		226E8E8B21AC73D9001F191F /* BookDimensionsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDimensionsCell.swift; sourceTree = "<group>"; };
-		227BCFCF2216D6F10073C8E6 /* GenericIndexController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericIndexController.swift; sourceTree = "<group>"; };
+		227BCFCF2216D6F10073C8E6 /* IndexController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexController.swift; sourceTree = "<group>"; };
 		227F4513218352A0000D8B8D /* ImporterUIActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImporterUIActions.swift; sourceTree = "<group>"; };
 		228968402191DD9000B80A93 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/System/Library/Frameworks/CloudKit.framework; sourceTree = DEVELOPER_DIR; };
 		228968422191DDBF00B80A93 /* Bookish.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Bookish.entitlements; sourceTree = "<group>"; };
@@ -528,13 +526,12 @@
 		227F451221821BAC000D8B8D /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				227BCFCF2216D6F10073C8E6 /* GenericIndexController.swift */,
-				2263587D2216E7C100779D63 /* GenericDetailController.swift */,
+				227BCFCF2216D6F10073C8E6 /* IndexController.swift */,
+				2263587D2216E7C100779D63 /* DetailController.swift */,
 				22143FD0212F076000B689DF /* CollectionRootViewController.swift */,
 				22DD42492126D6DA0070C85A /* CollectionViewController.swift */,
 				22429400212C32BF00E70510 /* CollectionWindowController.swift */,
 				22462E922158ED5000A4C56C /* CollectionIndexViewController.swift */,
-				22462E942158EDEA00A4C56C /* CollectionDetailViewController.swift */,
 				22A6D46B22256E9E0083D4E8 /* ScannerWindowController.swift */,
 				22A6D46D22256EAB0083D4E8 /* ScannerViewController.swift */,
 			);
@@ -1038,7 +1035,6 @@
 				22143FD3212F0F2500B689DF /* AuthorsTransformer.swift in Sources */,
 				22A6D46C22256E9E0083D4E8 /* ScannerWindowController.swift in Sources */,
 				22143FCF212EF9CC00B689DF /* WindowControllerWithViewModel.swift in Sources */,
-				22462E952158EDEA00A4C56C /* CollectionDetailViewController.swift in Sources */,
 				22DA6A4121E6525400ECF09A /* CDECloudKitFileSystem.m in Sources */,
 				221C4B35216BAAAC0086D56F /* RelationshipUIActions.swift in Sources */,
 				2250C71621B7E01A00E899E2 /* SeriesScanner.swift in Sources */,
@@ -1047,7 +1043,7 @@
 				22960328214025E80020B3EB /* BookPersonCell.swift in Sources */,
 				226E8E7121AC3D74001F191F /* BookEditableDateCell.swift in Sources */,
 				22462E972158F65200A4C56C /* CollectionViewActions.swift in Sources */,
-				227BCFD02216D6F10073C8E6 /* GenericIndexController.swift in Sources */,
+				227BCFD02216D6F10073C8E6 /* IndexController.swift in Sources */,
 				22F1845021CC10FF00220D20 /* ArrayControllerExtensions.swift in Sources */,
 				22D39E5B2146BE4900282467 /* DatePickerPopoverController.swift in Sources */,
 				22D39E532146A84500282467 /* AnnotatedTableCellView.swift in Sources */,
@@ -1060,7 +1056,7 @@
 				2231C4BB2227EBC100D730FB /* ScannerCandidateCell.swift in Sources */,
 				22143FD1212F076000B689DF /* CollectionRootViewController.swift in Sources */,
 				22D39E5E2146D9F100282467 /* ValidatingButton.swift in Sources */,
-				2263587E2216E7C100779D63 /* GenericDetailController.swift in Sources */,
+				2263587E2216E7C100779D63 /* DetailController.swift in Sources */,
 				22D1B2432180CA9E0062F2CB /* BookCell.swift in Sources */,
 				22429403212C3C7400E70510 /* ViewExtensions.swift in Sources */,
 				22D39E592146BA9C00282467 /* ShowDatePickerAction.swift in Sources */,

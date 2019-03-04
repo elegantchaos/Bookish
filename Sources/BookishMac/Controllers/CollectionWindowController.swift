@@ -36,13 +36,13 @@ class CollectionWindowController: NSWindowController, ActionContextProvider {
     func reveal<EntityType: ModelObject>(_ object: EntityType, mode: CollectionViewState.Mode) {
         cvm.mode = mode
         if let name = EntityType.entity().name {
-            if let index = indexControllers[name] as? GenericIndexController {
+            if let index = indexControllers[name] as? IndexController {
                 index.select(items: [object])
             }
         }
     }
     
-    func register(index controller: GenericIndexController, for entityName: String) {
+    func register(index controller: IndexController, for entityName: String) {
         indexControllers[entityName] = controller
     }
 }

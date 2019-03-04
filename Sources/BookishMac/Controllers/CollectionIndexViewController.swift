@@ -12,7 +12,7 @@ class CollectionIndexViewController: NSTabViewController {
     
     let entities = [ Book.self, Person.self, Publisher.self, Series.self, Role.self ]
     
-    lazy var detailView: GenericDetailController = nearestMatchingController()
+    lazy var detailView: DetailController = nearestMatchingController()
     
     required init?(coder: NSCoder) {
         self.cvm = Application.sharedInstance.windowControllerFactory.viewModel
@@ -22,7 +22,7 @@ class CollectionIndexViewController: NSTabViewController {
     override func viewDidLoad() {
         for n in 0 ..< entities.count {
             let entity = entities[n]
-            if let controller = tabViewItems[n].viewController as? GenericIndexController {
+            if let controller = tabViewItems[n].viewController as? IndexController {
                 controller.setup(for: entity)
             }
         }

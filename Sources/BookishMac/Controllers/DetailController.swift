@@ -16,7 +16,7 @@ protocol KeyableTableCell {
 }
 
 protocol DetailTableCell: KeyableTableCell {
-    func setup(for row: DetailItem, of view: GenericDetailController)
+    func setup(for row: DetailItem, of view: DetailController)
 }
 
 /**
@@ -24,7 +24,7 @@ protocol DetailTableCell: KeyableTableCell {
  as they can't go into a Swift generic class.
  */
 
-class GenericDetailController: CollectionViewController {
+class DetailController: CollectionViewController {
     static let unknownViewID = NSUserInterfaceItemIdentifier(rawValue: "unknown")
     
     @IBOutlet weak var nameView: NSTextField!
@@ -44,12 +44,12 @@ class GenericDetailController: CollectionViewController {
     var entityType: ModelObject.Type = ModelObject.self
     var source = DetailProvider()
     var editing = false
-    var indexView: GenericIndexController!
+    var indexView: IndexController!
     var keyViewTimer: Timer? = nil
     
     let doubleClickRecogniser = NSClickGestureRecognizer(target: self, action: #selector(textDoubleClick(_:)))
 
-    func setup(for index: GenericIndexController, type entityType: ModelObject.Type) {
+    func setup(for index: IndexController, type entityType: ModelObject.Type) {
         detailChannel.debug("setup for \(entityType)")
         doubleClickRecogniser.numberOfClicksRequired = 2
         indexView = index
@@ -203,7 +203,7 @@ class GenericDetailController: CollectionViewController {
 
 // MARK: Other Indexes
 
-extension GenericDetailController {
+extension DetailController {
     func person(at index: Int) -> Person? {
         if let people = personList.arrangedObjects as? [Person], index != -1 {
             return people[index]
@@ -239,7 +239,7 @@ extension GenericDetailController {
 
 // MARK: Table Support
 
-extension GenericDetailController: NSTableViewDelegate, NSTableViewDataSource {
+extension DetailController: NSTableViewDelegate, NSTableViewDataSource {
     func numberOfRows(in tableView: NSTableView) -> Int {
         return source.combinedCount
     }
@@ -251,7 +251,7 @@ extension GenericDetailController: NSTableViewDelegate, NSTableViewDataSource {
         let viewID = NSUserInterfaceItemIdentifier(rawValue: rowInfo.viewID(for: columnID.rawValue))
         
         guard let view = tableView.makeView(withIdentifier: viewID, owner: self) else {
-            let view = tableView.makeView(withIdentifier: GenericDetailController.unknownViewID, owner: self) as! NSTableCellView
+            let view = tableView.makeView(withIdentifier: DetailController.unknownViewID, owner: self) as! NSTableCellView
             view.textField?.stringValue = "missing <\(viewID.rawValue)> cell"
             return view
         }
@@ -280,7 +280,7 @@ extension GenericDetailController: NSTableViewDelegate, NSTableViewDataSource {
 
 // MARK: Action Support
 
-extension GenericDetailController: ActionContextProvider {
+extension DetailController: ActionContextProvider {
     func provide(context: ActionContext) {
         addContextForDetail(context: context)
         indexView.addContextForIndex(context: context)
@@ -289,7 +289,7 @@ extension GenericDetailController: ActionContextProvider {
 
 // MARK: EditableView Support
 
-extension GenericDetailController: EditableView {
+extension DetailController: EditableView {
     var isEditing: Bool { return editing }
     
     func setEditing(_ value: Bool) {
@@ -317,7 +317,7 @@ extension GenericDetailController: EditableView {
 
 // MARK: Change Notifications
 
-extension GenericDetailController: BookChangeObserver {
+extension DetailController: BookChangeObserver {
     func added(relationship: Relationship) {
         let changes = source.inserted(details: [relationship])
         detailsTable.insertRows(at: changes, withAnimation: .slideDown)
@@ -365,7 +365,7 @@ extension GenericDetailController: BookChangeObserver {
 }
 
 
-extension GenericDetailController: NSControlTextEditingDelegate {
+extension DetailController: NSControlTextEditingDelegate {
     func controlTextDidEndEditing(_ obj: Notification) {
         if let field = obj.object as? NSTextField {
             let property: String?
@@ -399,7 +399,7 @@ extension GenericDetailController: NSControlTextEditingDelegate {
 }
 
 
-extension GenericDetailController: NSTextFieldDelegate {
+extension DetailController: NSTextFieldDelegate {
 //    func textView(_ textView: NSTextView, doubleClickedOn cell: NSTextAttachmentCellProtocol, in cellFrame: NSRect, at charIndex: Int) {
 //        if !source.isEditing {
 //            application.actionManager.perform(identifier: "ToggleEditing")

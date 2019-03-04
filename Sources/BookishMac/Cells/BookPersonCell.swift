@@ -28,14 +28,14 @@ class BookPersonCell: AnnotatedTableCellView {
         return nil
     }
 
-    var detailView: GenericDetailController!
+    var detailView: DetailController!
 
     @IBOutlet weak var personCombo: AnnotatedComboBox!
 
 }
 
 extension BookPersonCell: DetailTableCell {
-    func setup(for row: DetailItem, of view: GenericDetailController) {
+    func setup(for row: DetailItem, of view: DetailController) {
         assert(row is PersonDetailItem)
         detailView = view
         if row.placeholder {

@@ -16,7 +16,7 @@ class BookDimensionsCell: AnnotatedTableCellView, DetailTableCell {
     @IBOutlet weak var heightField: NSTextField!
     @IBOutlet weak var lengthField: NSTextField!
     
-    func setup(for row: DetailItem, of view: GenericDetailController) {
+    func setup(for row: DetailItem, of view: DetailController) {
         assert(row is SimpleDetailItem)
         
         index = view.index

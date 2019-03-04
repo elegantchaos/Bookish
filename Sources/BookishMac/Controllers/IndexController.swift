@@ -14,7 +14,7 @@ let indexChannel = Logger("Index")
  Index view controller, parameterised by the kind of thing it's indexing.
  */
 
-class GenericIndexController: CollectionViewController {
+class IndexController: CollectionViewController {
     
     @IBOutlet var indexArray: NSArrayController!
     @IBOutlet weak var indexTable: NSTableView!
@@ -37,7 +37,7 @@ class GenericIndexController: CollectionViewController {
     var entityType: ModelObject.Type = ModelObject.self
     var entityName: String = ""
     
-    lazy var detailView: GenericDetailController = nearestMatchingController()
+    lazy var detailView: DetailController = nearestMatchingController()
     
     var observers: [NSKeyValueObservation] = []
     var fetchSessions: [FetchSession] = []
@@ -139,7 +139,7 @@ class GenericIndexController: CollectionViewController {
 
 // MARK: Action Support
 
-extension GenericIndexController: ActionContextProvider {
+extension IndexController: ActionContextProvider {
     func provide(context: ActionContext) {
         addContextForIndex(context: context)
         detailView.addContextForDetail(context: context)
@@ -147,7 +147,7 @@ extension GenericIndexController: ActionContextProvider {
     
 }
 
-extension GenericIndexController: BookLifecycleObserver {
+extension IndexController: BookLifecycleObserver {
     func created(books: [Book]) {
         self.select(items: books)
     }
@@ -156,7 +156,7 @@ extension GenericIndexController: BookLifecycleObserver {
     }
 }
 
-extension GenericIndexController: PersonLifecycleObserver {
+extension IndexController: PersonLifecycleObserver {
     func created(person: Person) {
         self.select(items: [person])
     }
@@ -165,7 +165,7 @@ extension GenericIndexController: PersonLifecycleObserver {
     }
 }
 
-extension GenericIndexController: PublisherLifecycleObserver {
+extension IndexController: PublisherLifecycleObserver {
     func created(publisher: Publisher) {
         self.select(items: [publisher])
     }
@@ -174,7 +174,7 @@ extension GenericIndexController: PublisherLifecycleObserver {
     }
 }
 
-extension GenericIndexController: SeriesLifecycleObserver {
+extension IndexController: SeriesLifecycleObserver {
     func created(series: Series) {
         self.select(items: [series])
     }

@@ -7,7 +7,7 @@ import AppKit
 import BookishModel
 
 class SectionCell: NSTableCellView, DetailTableCell {
-    func setup(for row: DetailItem, of view: GenericDetailController) {
+    func setup(for row: DetailItem, of view: DetailController) {
         if let item = row as? SectionDetailItem {
             textField?.stringValue = item.kind
             validateButtons()

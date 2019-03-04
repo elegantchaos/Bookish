@@ -10,11 +10,11 @@ import Actions
 fileprivate var detailBindingContext: Int = 0
 
 class BookDetailCell: AnnotatedTableCellView, DetailTableCell {
-    var detailView: GenericDetailController!
+    var detailView: DetailController!
     var observer: NSKeyValueObservation?
     var asNumber = false
     
-    func setup(for row: DetailItem, of view: GenericDetailController) {
+    func setup(for row: DetailItem, of view: DetailController) {
         assert(row is SimpleDetailItem)
         
         detailView = view

@@ -23,7 +23,7 @@ class BookEditableDateCell: AnnotatedTableCellView, ActionContextProvider {
 }
 
 extension BookEditableDateCell: DetailTableCell {
-    func setup(for row: DetailItem, of view: GenericDetailController) {
+    func setup(for row: DetailItem, of view: DetailController) {
         assert(row is SimpleDetailItem)
         if let subview = textField,
             let transformer = ValueTransformer(forName: NSValueTransformerName(rawValue: "DateToString")),

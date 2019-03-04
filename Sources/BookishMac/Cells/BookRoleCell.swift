@@ -10,7 +10,7 @@ import BookishModel
 
 class BookRoleCell: NSTableCellView, DetailTableCell {
     @IBOutlet weak var rolePopup: ColoredPopUpButton!
-    func setup(for row: DetailItem, of view: GenericDetailController) {
+    func setup(for row: DetailItem, of view: DetailController) {
         assert(row is PersonDetailItem)
         if row.placeholder {
             rolePopup.selectItem(withTitle: "author")

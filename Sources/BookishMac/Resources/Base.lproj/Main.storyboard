@@ -1095,7 +1095,7 @@ CA
         <!--Index-->
         <scene sceneID="TMn-oN-ehg">
             <objects>
-                <viewController title="Index" storyboardIdentifier="Index" id="PUA-xK-Wyi" customClass="GenericIndexController" customModule="Bookish" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Index" storyboardIdentifier="Index" id="PUA-xK-Wyi" customClass="IndexController" customModule="Bookish" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="aQJ-zo-YyZ">
                         <rect key="frame" x="0.0" y="0.0" width="200" height="400"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1246,10 +1246,10 @@ CA
             </objects>
             <point key="canvasLocation" x="898" y="1957"/>
         </scene>
-        <!--Generic Detail Controller-->
+        <!--Detail Controller-->
         <scene sceneID="IG1-NS-twE">
             <objects>
-                <viewController storyboardIdentifier="Book.Detail" id="iPd-Ru-zxR" customClass="GenericDetailController" customModule="Bookish" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Book.Detail" id="iPd-Ru-zxR" customClass="DetailController" customModule="Bookish" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="R3E-BF-7F8">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="400"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -2094,7 +2094,7 @@ CA
             <color red="0.3529999852180481" green="0.36899998784065247" blue="0.38400000333786011" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Bookish Label Text">
-            <color red="0.54100000858306885" green="0.55699998140335083" blue="0.57300001382827759" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.54117647058823526" green="0.55686274509803924" blue="0.5725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
