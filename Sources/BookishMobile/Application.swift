@@ -21,10 +21,17 @@ class Application: StoryboardApplication {
     let cloud = CloudManager()
     let viewState = CollectionViewState()
     var collectionController: CollectionController!
-    lazy var collection: SyncedCollection = setupCollection()
+    lazy var collection: SyncedCollection = setupInitialCollection()
     
-    func setupCollection(mode: CollectionContainer.PopulateMode = .defaultRoles) -> SyncedCollection {
-        let collection = SyncedCollection(identifier: cloud.collectionIdentifier, mode: mode)
+    func setupInitialCollection() -> SyncedCollection {
+        let useSample = CommandLine.arguments.contains("--sample-document")
+        let mode: CollectionContainer.PopulateMode = useSample ? .replaceWithSampleData : .defaultRoles
+        let shouldSync = mode == .defaultRoles
+        return setupCollection(mode: mode, shouldSync: shouldSync)
+    }
+    
+    func setupCollection(mode: CollectionContainer.PopulateMode = .defaultRoles, shouldSync: Bool = true) -> SyncedCollection {
+        let collection = SyncedCollection(identifier: cloud.collectionIdentifier, mode: mode, shouldSync: shouldSync)
         return collection
     }
     

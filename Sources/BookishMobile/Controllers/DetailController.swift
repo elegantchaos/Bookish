@@ -140,9 +140,9 @@ class DetailController: UIViewController, UITableViewDataSource, UITableViewDele
             popover?.sourceView = button.superview
             
             let origin = button.convert(button.bounds.origin, to: detailView)
-            if let index = detailView.indexPathForRow(at: origin), let cell = detailView.cellForRow(at: index) {
+            if let sort = application.viewState.entitySorting["Role"], let index = detailView.indexPathForRow(at: origin), let cell = detailView.cellForRow(at: index) {
                 let target = targetAdaptor(cell)
-                controller.setup(target: target, sort: application.viewState.roleSorting, collection: application.collection)
+                controller.setup(target: target, sort: sort, collection: application.collection)
             }
         }
     }

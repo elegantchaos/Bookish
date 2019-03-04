@@ -10,8 +10,6 @@ import Actions
 class CollectionIndexViewController: NSTabViewController {
     @objc let cvm: CollectionViewState
     
-    let entities = [ Book.self, Person.self, Publisher.self, Series.self, Role.self ]
-    
     lazy var detailView: DetailController = nearestMatchingController()
     
     required init?(coder: NSCoder) {
@@ -20,12 +18,14 @@ class CollectionIndexViewController: NSTabViewController {
     }
     
     override func viewDidLoad() {
+        let entities = BookishModel.topLevelEntities
         for n in 0 ..< entities.count {
             let entity = entities[n]
             if let controller = tabViewItems[n].viewController as? IndexController {
                 controller.setup(for: entity)
             }
         }
+        
         super.viewDidLoad()
     }
 }

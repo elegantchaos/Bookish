@@ -21,13 +21,7 @@ class CollectionController: UITableViewController {
         }
     }
     
-    let items = [
-        Item(entity: Book.self),
-        Item(entity: Person.self),
-        Item(entity: Publisher.self),
-        Item(entity: Series.self),
-        Item(identifier: "intro"),
-        ]
+    var items = BookishModel.topLevelEntities.map { Item(entity: $0) }
 
     func reset(mode: CollectionContainer.PopulateMode) {
         if let detailView = detailNav.topViewController as? DetailController {
@@ -44,6 +38,9 @@ class CollectionController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        items.append(Item(identifier: "intro"))
+
         if let splitView = splitViewController {
             splitView.delegate = self
             indexNav = splitView.viewControllers.first as? UINavigationController
