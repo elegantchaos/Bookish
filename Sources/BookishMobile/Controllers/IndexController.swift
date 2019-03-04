@@ -137,25 +137,36 @@ class IndexController: UITableViewController, EntityIndex, ActionObserver {
         fetcher.delegate = nil
     }
     
+    var showSections: Bool {
+        guard let count = fetcher.fetchedObjects?.count else {
+            return false
+        }
+        
+        return count > 20
+    }
+    
     // MARK: - Table View
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return fetcher.sections?.count ?? 1
+        return showSections ? (fetcher.sections?.count ?? 1) : 1
     }
     
     override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
-        return fetcher.sectionIndexTitles
+        return showSections ? fetcher.sectionIndexTitles : nil
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        guard fetcher.sectionIndexTitles.count > section else { return nil }
-        
+        guard showSections, fetcher.sectionIndexTitles.count > section else { return nil }
         return fetcher.sectionIndexTitle(forSectionName: fetcher.sectionIndexTitles[section])
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let sectionInfo = fetcher.sections![section]
-        return sectionInfo.numberOfObjects
+        if showSections {
+            let sectionInfo = fetcher.sections![section]
+            return sectionInfo.numberOfObjects
+        } else {
+            return fetcher.fetchedObjects?.count ?? 0
+        }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -206,8 +217,13 @@ extension IndexController: NSFetchedResultsControllerDelegate {
         request.entity = context.persistentStoreCoordinator?.managedObjectModel.entitiesByName[entityName]
         request.fetchBatchSize = 20
         request.sortDescriptors = application.viewState.entitySorting[entityName]
-        
-        let controller = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: "sectionName", cacheName: entityType.entityLabel)
+        let sectionPath: String?
+        if let count = try? context.count(for: request), count > 20 {
+            sectionPath = "sectionName"
+        } else {
+            sectionPath = nil
+        }
+        let controller = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: sectionPath, cacheName: entityType.entityLabel)
         controller.delegate = self
         return controller
     }
