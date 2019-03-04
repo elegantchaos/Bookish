@@ -438,9 +438,15 @@ CA
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Collection" identifier="menu.collection" id="PET-8T-wg6">
                                     <items>
-                                        <menuItem title="Scan For Series" keyEquivalent="E" identifier="menu.ScanSeries" id="18S-Lg-R9p">
+                                        <menuItem title="Show Scanner" identifier="menu.ToggleScanner" id="18S-Lg-R9p">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="performAction:" target="Ady-hI-5gd" id="Vak-aB-Iwf"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Scan For Series" keyEquivalent="E" identifier="menu.ScanSeries" id="Tsh-Kz-aXA">
+                                            <connections>
+                                                <action selector="performAction:" target="Ady-hI-5gd" id="qWr-r1-UDk"/>
                                             </connections>
                                         </menuItem>
                                     </items>

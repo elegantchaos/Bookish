@@ -12,9 +12,10 @@ let validationChannel = Logger("Validation")
 
 class CollectionWindowController: NSWindowController, ActionContextProvider {
     fileprivate var cvm: CollectionViewState!
-    
-    private var indexControllers: [String:Any] = [:]
+    var scannerWindow: ScannerWindowController?
 
+    private var indexControllers: [String:Any] = [:]
+    
     override func windowDidLoad() {
         super.windowDidLoad()
         window?.autorecalculatesKeyViewLoop = false
@@ -32,7 +33,7 @@ class CollectionWindowController: NSWindowController, ActionContextProvider {
             view.validateButtons()
         }
     }
-
+    
     func reveal<EntityType: ModelObject>(_ object: EntityType, mode: CollectionViewState.Mode) {
         cvm.mode = mode
         if let name = EntityType.entity().name {
@@ -45,6 +46,27 @@ class CollectionWindowController: NSWindowController, ActionContextProvider {
     func register(index controller: IndexController, for entityName: String) {
         indexControllers[entityName] = controller
     }
+    
+    fileprivate func setupScannerWindow() -> ScannerWindowController {
+        let storyboard = NSStoryboard(name: NSStoryboard.Name("Main"), bundle: nil)
+        let window = storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier("ScannerWindow")) as! ScannerWindowController
+        
+        return window
+    }
+
+    func toggleScanner() {
+        if scannerWindow == nil {
+            scannerWindow = setupScannerWindow()
+            if let window = window, let scanner = scannerWindow?.window {
+                window.beginSheet(scanner, completionHandler: { (response) in
+                print("done")
+            })
+            }
+        } else {
+            scannerWindow?.close()
+            scannerWindow = nil
+        }
+    }
 }
 
 extension CollectionWindowController: WindowControllerWithViewModel {
@@ -53,7 +75,7 @@ extension CollectionWindowController: WindowControllerWithViewModel {
     }
     
     typealias ViewModel = CollectionViewState
-
+    
     func didConnect(to viewModel: CollectionViewState) {
         self.cvm = viewModel
     }

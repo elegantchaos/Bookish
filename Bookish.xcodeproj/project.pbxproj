@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		220EF17C2214782C0022F4D9 /* LinkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220EF17A221478070022F4D9 /* LinkButton.swift */; };
 		220EF17E2214836F0022F4D9 /* StoryboardApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220EF17D2214836F0022F4D9 /* StoryboardApplication.swift */; };
+		22115AFE222D881000C3F170 /* ScannerActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22115AFD222D881000C3F170 /* ScannerActions.swift */; };
 		2211A915221599F1004B7589 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2211A914221599F1004B7589 /* Localizable.strings */; };
 		22143FCD212EE79100B689DF /* CollectionViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22143FCC212EE79100B689DF /* CollectionViewState.swift */; };
 		22143FCF212EF9CC00B689DF /* WindowControllerWithViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22143FCE212EF9CC00B689DF /* WindowControllerWithViewModel.swift */; };
@@ -183,6 +184,7 @@
 /* Begin PBXFileReference section */
 		220EF17A221478070022F4D9 /* LinkButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkButton.swift; sourceTree = "<group>"; };
 		220EF17D2214836F0022F4D9 /* StoryboardApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardApplication.swift; sourceTree = "<group>"; };
+		22115AFD222D881000C3F170 /* ScannerActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerActions.swift; sourceTree = "<group>"; };
 		2211A914221599F1004B7589 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		22143FCC212EE79100B689DF /* CollectionViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewState.swift; sourceTree = "<group>"; };
 		22143FCE212EF9CC00B689DF /* WindowControllerWithViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowControllerWithViewModel.swift; sourceTree = "<group>"; };
@@ -545,6 +547,7 @@
 				227F4513218352A0000D8B8D /* ImporterUIActions.swift */,
 				221C4B2F216BA96C0086D56F /* RelationshipUIActions.swift */,
 				22D39E582146BA9C00282467 /* ShowDatePickerAction.swift */,
+				22115AFD222D881000C3F170 /* ScannerActions.swift */,
 			);
 			path = Actions;
 			sourceTree = "<group>";
@@ -1053,6 +1056,7 @@
 				22143FD521300F9300B689DF /* CoreDataTransformers.swift in Sources */,
 				225488DE21F2333100EE8ECB /* ColoredPopUpButton.swift in Sources */,
 				22D39E552146A84E00282467 /* BookDateCell.swift in Sources */,
+				22115AFE222D881000C3F170 /* ScannerActions.swift in Sources */,
 				2231C4BB2227EBC100D730FB /* ScannerCandidateCell.swift in Sources */,
 				22143FD1212F076000B689DF /* CollectionRootViewController.swift in Sources */,
 				22D39E5E2146D9F100282467 /* ValidatingButton.swift in Sources */,
