@@ -26,12 +26,6 @@ import BookishModel
     let collection: SyncedCollection
     
     @objc let managedObjectContext: NSManagedObjectContext
-    @objc var bookIndex: NSArrayController?
-    
-    @objc var selectedBooks: NSMutableIndexSet?
-    @objc var selectedPeople: NSMutableIndexSet?
-    @objc var selectedPublishers: NSMutableIndexSet?
-    @objc var selectedSeries: NSMutableIndexSet?
 
     @objc dynamic var modeIndex: Int = 0
     
@@ -41,16 +35,9 @@ import BookishModel
     @objc let titleFont = NSFont.systemFont(ofSize: 18, weight: NSFont.Weight.regular)
     @objc let indexFont = NSFont.systemFont(ofSize: 14, weight: NSFont.Weight.regular)
 
-    // bindable sort descriptors
-    @objc var bookSorting = [NSSortDescriptor(key: "sortName", ascending: true)]
-    @objc var personSorting = [NSSortDescriptor(key: "sortName", ascending: true)]
-    @objc var publisherSorting = [NSSortDescriptor(key: "sortName", ascending: true)]
-    @objc var seriesSorting = [NSSortDescriptor(key: "sortName", ascending: true)]
-    @objc var roleSorting = [NSSortDescriptor(key: "name", ascending: true)]
-    @objc var entrySorting = [NSSortDescriptor(key: "position", ascending: true)]
-    @objc var relationshipSorting = [NSSortDescriptor(key: "role.name", ascending: true)]
-
     var showDebug: Bool = UserDefaults.standard.bool(forKey: "showDebug")
+
+    var entitySorting: [String:[NSSortDescriptor]]
     
     var mode: Mode {
         get {
@@ -65,7 +52,8 @@ import BookishModel
     
     init(collection: SyncedCollection) {
         self.collection = collection
-        self.managedObjectContext = collection.managedObjectContext
+        managedObjectContext = collection.managedObjectContext
+        entitySorting = BookishModel.defaultSorting
     }
     
     func addRelationshipItem(kind: String, shortcut: String) -> NSMenuItem {
@@ -80,7 +68,7 @@ import BookishModel
             var shortcuts = ["4","3","2","1"]
             let menu = NSMenu()
             let request: NSFetchRequest<Role> = Role.fetchRequest()
-            request.sortDescriptors = roleSorting
+            request.sortDescriptors = entitySorting["Role"]
             if let results = try? managedObjectContext.fetch(request) {
                 for role in results {
                     if let name = role.name {
