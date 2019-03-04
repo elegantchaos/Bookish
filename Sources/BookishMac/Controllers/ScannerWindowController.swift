@@ -6,5 +6,8 @@
 import AppKit
 
 class ScannerWindowController: NSWindowController {
-    
+    deinit {
+        print("scanner window deinit")
+    }
+
 }

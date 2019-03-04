@@ -438,8 +438,7 @@ CA
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Collection" identifier="menu.collection" id="PET-8T-wg6">
                                     <items>
-                                        <menuItem title="Show Scanner" identifier="menu.ToggleScanner" id="18S-Lg-R9p">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                        <menuItem title="Show Scanner" keyEquivalent="k" identifier="menu.ToggleScanner" id="18S-Lg-R9p">
                                             <connections>
                                                 <action selector="performAction:" target="Ady-hI-5gd" id="Vak-aB-Iwf"/>
                                             </connections>
@@ -836,6 +835,7 @@ CA
                     <connections>
                         <outlet property="addButton" destination="SgJ-BQ-X9K" id="eXJ-bt-i8c"/>
                         <outlet property="barcodeView" destination="tGW-qR-OP0" id="8dh-im-idW"/>
+                        <outlet property="candidatesScrollView" destination="u2d-ar-e3H" id="u2Z-zx-3B9"/>
                         <outlet property="candidatesTable" destination="JR5-Tw-44o" id="Mst-Yi-aBt"/>
                         <outlet property="imageView" destination="KeA-eY-ggS" id="gpE-Fj-dS9"/>
                         <outlet property="lookupSpinner" destination="hHr-dd-BPj" id="eiZ-Nv-1Im"/>

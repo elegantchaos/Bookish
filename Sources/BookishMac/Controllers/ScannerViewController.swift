@@ -4,68 +4,53 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 import AppKit
-import AVFoundation
-import Vision
 import Foundation
 import BookishModel
 
-class ScannerViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDelegate {
+
+class ScannerViewController: NSViewController, BarcodeScannerDelegate {
     
     static let candidateViewID = NSUserInterfaceItemIdentifier(rawValue: "candidate")
     
     @IBOutlet weak var imageView: NSView!
     @IBOutlet weak var barcodeView: NSTextField!
     @IBOutlet weak var candidatesTable: NSTableView!
+    @IBOutlet weak var candidatesScrollView: NSScrollView!
     @IBOutlet weak var lookupSpinner: NSProgressIndicator!
     @IBOutlet weak var addButton: NSButton!
-    
-    var captureDevice: AVCaptureDevice!
-    var session = AVCaptureSession()
-    var requests = [VNRequest]()
+
+    var scanner: BarcodeScanner? = nil
     var detected: String = ""
     var lookup: LookupSession? = nil
     var candidates: [LookupCandidate] = []
+    
+    deinit {
+        print("scanner view deinit")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         barcodeView.stringValue = "candidate.lookup.scanning".localized
-        candidatesTable.isHidden = true
+        candidatesScrollView.isHidden = true
         
-        self.setupVideo()
-        self.startDetection()
+        if let scanner = BarcodeScanner(delegate: self) {
+            self.scanner = scanner
+            scanner.run()
+        }
     }
     
-    func setupVideo() {
-        session.sessionPreset = AVCaptureSession.Preset.photo
-        captureDevice = AVCaptureDevice.default(for: AVMediaType.video)
-        let deviceInput = try! AVCaptureDeviceInput(device: captureDevice!)
-        
-        let deviceOutput = AVCaptureVideoDataOutput()
-        deviceOutput.videoSettings = [kCVPixelBufferPixelFormatTypeKey as String: Int(kCVPixelFormatType_32BGRA)]
-        deviceOutput.setSampleBufferDelegate(self, queue: DispatchQueue.global(qos: DispatchQoS.QoSClass.default))
-        
-        session.addInput(deviceInput)
-        session.addOutput(deviceOutput)
-        let imageLayer = AVCaptureVideoPreviewLayer(session: session)
-        imageLayer.frame = imageView.bounds
-        imageLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
-        imageView.layer = imageLayer
-        session.startRunning()
+    override func viewWillDisappear() {
+        candidatesTable.delegate = nil
+        candidatesTable.dataSource = nil
+        scanner?.shutdown()
+        scanner = nil
+        lookup = nil
     }
     
-    func startDetection() {
-        let request = VNDetectBarcodesRequest(completionHandler: { (request: VNRequest, error: Error?) in
-            if let observations = request.results {
-                let barcodes = observations.compactMap({ ($0 as? VNBarcodeObservation)?.payloadStringValue })
-                for barcode in barcodes {
-                    self.detected(barcode: barcode)
-                }
-            }
-        })
-        
-        request.symbologies = [.EAN13]
-        self.requests = [request]
+    func attach(layer: CALayer) {
+        layer.frame = view.bounds
+        imageView.layer = layer
     }
     
     func detected(barcode value: String) {
@@ -100,7 +85,7 @@ class ScannerViewController: NSViewController, AVCaptureVideoDataOutputSampleBuf
             lookupSpinner.startAnimation(self)
             lookupSpinner.isHidden = false
             candidates.removeAll()
-            candidatesTable.isHidden = true
+            candidatesScrollView.isHidden = true
             candidatesTable.reloadData()
             addButton.isEnabled = false
             
@@ -112,7 +97,7 @@ class ScannerViewController: NSViewController, AVCaptureVideoDataOutputSampleBuf
         case .foundCandidate(let candidate):
             let rows = IndexSet(integer: candidates.count)
             candidates.append(candidate)
-            candidatesTable.isHidden = false
+            candidatesScrollView.isHidden = false
             candidatesTable.insertRows(at: rows, withAnimation: .slideDown)
             if candidatesTable.selectedRow == -1 {
                 candidatesTable.selectRowIndexes(rows, byExtendingSelection: false)
@@ -138,22 +123,7 @@ class ScannerViewController: NSViewController, AVCaptureVideoDataOutputSampleBuf
         }
     }
     
-    
-    func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
-        guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else {
-            return
-        }
-        var requestOptions:[VNImageOption:Any] = [:]
-        if let camData = CMGetAttachment(sampleBuffer, key: kCMSampleBufferAttachmentKey_CameraIntrinsicMatrix, attachmentModeOut: nil) {
-            requestOptions = [.cameraIntrinsics:camData]
-        }
-        let imageRequestHandler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: CGImagePropertyOrientation(rawValue: 6)!, options: requestOptions)
-        do {
-            try imageRequestHandler.perform(self.requests)
-        } catch {
-            print(error)
-        }
-    }
+
 }
 
 extension ScannerViewController: NSTableViewDelegate, NSTableViewDataSource {

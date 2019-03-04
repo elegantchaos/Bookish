@@ -10,6 +10,7 @@
 		220EF17C2214782C0022F4D9 /* LinkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220EF17A221478070022F4D9 /* LinkButton.swift */; };
 		220EF17E2214836F0022F4D9 /* StoryboardApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220EF17D2214836F0022F4D9 /* StoryboardApplication.swift */; };
 		22115AFE222D881000C3F170 /* ScannerActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22115AFD222D881000C3F170 /* ScannerActions.swift */; };
+		22115B00222D97C300C3F170 /* BarcodeScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22115AFF222D97C300C3F170 /* BarcodeScanner.swift */; };
 		2211A915221599F1004B7589 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2211A914221599F1004B7589 /* Localizable.strings */; };
 		22143FCD212EE79100B689DF /* CollectionViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22143FCC212EE79100B689DF /* CollectionViewState.swift */; };
 		22143FCF212EF9CC00B689DF /* WindowControllerWithViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22143FCE212EF9CC00B689DF /* WindowControllerWithViewModel.swift */; };
@@ -185,6 +186,7 @@
 		220EF17A221478070022F4D9 /* LinkButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkButton.swift; sourceTree = "<group>"; };
 		220EF17D2214836F0022F4D9 /* StoryboardApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardApplication.swift; sourceTree = "<group>"; };
 		22115AFD222D881000C3F170 /* ScannerActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerActions.swift; sourceTree = "<group>"; };
+		22115AFF222D97C300C3F170 /* BarcodeScanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeScanner.swift; sourceTree = "<group>"; };
 		2211A914221599F1004B7589 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		22143FCC212EE79100B689DF /* CollectionViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewState.swift; sourceTree = "<group>"; };
 		22143FCE212EF9CC00B689DF /* WindowControllerWithViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowControllerWithViewModel.swift; sourceTree = "<group>"; };
@@ -378,6 +380,7 @@
 			isa = PBXGroup;
 			children = (
 				2250C71521B7E01A00E899E2 /* SeriesScanner.swift */,
+				22115AFF222D97C300C3F170 /* BarcodeScanner.swift */,
 				22D39E5F2147D4A100282467 /* TestAction.swift */,
 				225488DD21F2333100EE8ECB /* ColoredPopUpButton.swift */,
 				22DE6AE62188A8DC0078D489 /* WhiteSearchFieldCell.swift */,
@@ -1050,6 +1053,7 @@
 				22F1845021CC10FF00220D20 /* ArrayControllerExtensions.swift in Sources */,
 				22D39E5B2146BE4900282467 /* DatePickerPopoverController.swift in Sources */,
 				22D39E532146A84500282467 /* AnnotatedTableCellView.swift in Sources */,
+				22115B00222D97C300C3F170 /* BarcodeScanner.swift in Sources */,
 				22D39E602147D4A100282467 /* TestAction.swift in Sources */,
 				22462E932158ED5000A4C56C /* CollectionIndexViewController.swift in Sources */,
 				221F272921382C8E00DC2DC7 /* DateTransformer.swift in Sources */,
