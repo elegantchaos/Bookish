@@ -45,8 +45,14 @@ class CollectionRootViewController: CollectionViewController {
         if index < buttons.count {
             let button = buttons[index]
             let offset = (selectedMarkerButton.frame.height - button.frame.height) / 2.0
-            let adjusted = buttonContainer.convert(button.frame, to: selectedMarkerButton.superview!)
-            selectedMarkerConstraint.constant = adjusted.origin.y - offset
+            let constant = button.frame.origin.y - offset
+            print(constant)
+            selectedMarkerConstraint.constant = constant
+            NSAnimationContext.runAnimationGroup({context in
+                context.duration = 0.25
+                context.allowsImplicitAnimation = true
+                view.layoutSubtreeIfNeeded()
+            }, completionHandler:nil)
         }
     }
     
