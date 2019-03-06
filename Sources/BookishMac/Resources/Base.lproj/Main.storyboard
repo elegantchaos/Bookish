@@ -24,7 +24,11 @@
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="VOq-y0-SEH"/>
-                                        <menuItem title="Preferences…" keyEquivalent="," id="BOF-NM-1cW"/>
+                                        <menuItem title="Preferences…" keyEquivalent="," id="BOF-NM-1cW">
+                                            <connections>
+                                                <segue destination="VPh-mj-9ju" kind="show" id="gpG-WT-cBl"/>
+                                            </connections>
+                                        </menuItem>
                                         <menuItem isSeparatorItem="YES" id="wFC-TO-SCJ"/>
                                         <menuItem title="Services" id="NMo-om-nkz">
                                             <modifierMask key="keyEquivalentModifierMask"/>
@@ -548,7 +552,7 @@ CA
         <scene sceneID="R2V-B0-nI4">
             <objects>
                 <windowController storyboardIdentifier="Document Window Controller" id="jGA-0Y-lOj" customClass="CollectionWindowController" customModule="Bookish" customModuleProvider="target" sceneMemberID="viewController">
-                    <window key="window" title="Bookish" allowsToolTipsWhenApplicationIsInactive="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="CollectionWindow" animationBehavior="default" id="Ckk-yw-fiv">
+                    <window key="window" title="Bookish" allowsToolTipsWhenApplicationIsInactive="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="window.collection" animationBehavior="default" id="Ckk-yw-fiv">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="128" y="128" width="1024" height="768"/>
@@ -618,13 +622,13 @@ CA
                 </windowController>
                 <customObject id="6f7-a7-6o1" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="63" y="690"/>
+            <point key="canvasLocation" x="63" y="864"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="pOa-g2-DfK">
             <objects>
                 <windowController storyboardIdentifier="ScannerWindow" id="GRm-cO-8JL" customClass="ScannerWindowController" customModule="Bookish" customModuleProvider="target" sceneMemberID="viewController">
-                    <window key="window" title="Scanner" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="NDY-DS-igy">
+                    <window key="window" title="Scanner" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" visibleAtLaunch="NO" frameAutosaveName="window.scanner" animationBehavior="default" id="NDY-DS-igy">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="196" y="249" width="480" height="270"/>
@@ -639,7 +643,69 @@ CA
                 </windowController>
                 <customObject id="clU-Fw-4E3" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-516" y="1471"/>
+            <point key="canvasLocation" x="-173" y="1604"/>
+        </scene>
+        <!--Window Controller-->
+        <scene sceneID="ygZ-mN-npu">
+            <objects>
+                <windowController showSeguePresentationStyle="single" id="VPh-mj-9ju" sceneMemberID="viewController">
+                    <window key="window" title="Preferences" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" visibleAtLaunch="NO" frameAutosaveName="window.preferences" animationBehavior="default" id="6id-Zj-wDR">
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+                        <rect key="contentRect" x="425" y="470" width="480" height="270"/>
+                        <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1440"/>
+                        <connections>
+                            <outlet property="delegate" destination="VPh-mj-9ju" id="pke-Qj-p1e"/>
+                        </connections>
+                    </window>
+                    <connections>
+                        <segue destination="uxo-7t-ulj" kind="relationship" relationship="window.shadowedContentViewController" id="xre-1u-xqH"/>
+                    </connections>
+                </windowController>
+                <customObject id="TsB-MY-FYp" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-173" y="2037"/>
+        </scene>
+        <!--Preferences-->
+        <scene sceneID="AJW-T0-Erv">
+            <objects>
+                <viewController title="Preferences" id="uxo-7t-ulj" sceneMemberID="viewController">
+                    <view key="view" id="Z0i-o7-heg">
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LWV-M0-xUK">
+                                <rect key="frame" x="18" y="234" width="136" height="18"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="check" title="Show Debug Items" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="Dh6-Ab-h8y">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <binding destination="JlA-Na-zm6" name="value" keyPath="values.showDebug" id="TG4-6y-T8s"/>
+                                </connections>
+                            </button>
+                            <button identifier="button.ToggleScanner" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JUS-Hi-HLV">
+                                <rect key="frame" x="394" y="13" width="72" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="push" title="Done" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="OdU-HO-GEk">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                    <string key="keyEquivalent" base64-UTF8="YES">
+Gw
+</string>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="close:" target="Nlb-RY-r4r" id="ENB-u3-4j4"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                    </view>
+                </viewController>
+                <customObject id="Nlb-RY-r4r" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <userDefaultsController id="JlA-Na-zm6"/>
+            </objects>
+            <point key="canvasLocation" x="376" y="2011"/>
         </scene>
         <!--Scanner View Controller-->
         <scene sceneID="FRg-eQ-smd">
@@ -872,7 +938,7 @@ Gw
                 <customObject id="2SH-QY-2xC" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <userDefaultsController id="PMo-Pb-1pe"/>
             </objects>
-            <point key="canvasLocation" x="-302" y="1928"/>
+            <point key="canvasLocation" x="376" y="1604"/>
         </scene>
         <!--Split View Controller-->
         <scene sceneID="o8M-XO-7fb">
@@ -897,7 +963,7 @@ Gw
                 </splitViewController>
                 <customObject id="g3G-9b-aKL" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1148" y="1217"/>
+            <point key="canvasLocation" x="1107" y="1249"/>
         </scene>
         <!--Collection Root View Controller-->
         <scene sceneID="Uch-bh-vgR">
@@ -1093,9 +1159,8 @@ Gw
                 </tabViewController>
                 <customObject id="NQu-ho-FxW" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <userDefaultsController id="hxe-pj-t8N"/>
-                <userDefaultsController id="Zgq-0R-3eR"/>
             </objects>
-            <point key="canvasLocation" x="545" y="1834"/>
+            <point key="canvasLocation" x="818" y="1820"/>
         </scene>
         <!--Date Picker Popover Controller-->
         <scene sceneID="K1V-fB-Brr">
@@ -1278,7 +1343,7 @@ Gw
                 </arrayController>
                 <userDefaultsController id="0XB-YH-O2i"/>
             </objects>
-            <point key="canvasLocation" x="898" y="1957"/>
+            <point key="canvasLocation" x="1113" y="2102"/>
         </scene>
         <!--Detail Controller-->
         <scene sceneID="IG1-NS-twE">
@@ -2096,7 +2161,7 @@ Gw
                 </arrayController>
                 <userDefaultsController representsSharedInstance="YES" id="Sho-0I-oFd"/>
             </objects>
-            <point key="canvasLocation" x="1311" y="1820"/>
+            <point key="canvasLocation" x="1502" y="1820"/>
         </scene>
     </scenes>
     <resources>
@@ -2122,13 +2187,13 @@ Gw
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Bookish Index">
-            <color red="0.97254901960784312" green="0.97254901960784312" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.97299998998641968" green="0.97299998998641968" blue="0.98000001907348633" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Bookish Index Text">
             <color red="0.3529999852180481" green="0.36899998784065247" blue="0.38400000333786011" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Bookish Label Text">
-            <color red="0.54117647058823526" green="0.55686274509803924" blue="0.5725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.54100000858306885" green="0.55699998140335083" blue="0.57300001382827759" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>

@@ -23,6 +23,8 @@ import BookishModel
         }
     }
     
+    static let ViewStateChangedNotification = NSNotification.Name(rawValue: "ViewStateChanged")
+    
     let collection: SyncedCollection
     
     @objc let managedObjectContext: NSManagedObjectContext
@@ -35,10 +37,9 @@ import BookishModel
     @objc let titleFont = NSFont.systemFont(ofSize: 18, weight: NSFont.Weight.regular)
     @objc let indexFont = NSFont.systemFont(ofSize: 14, weight: NSFont.Weight.regular)
 
-    var showDebug: Bool = UserDefaults.standard.bool(forKey: "showDebug")
-
+    var observers = [NSObjectProtocol]()
+    var showDebug: Bool = false
     var entitySorting: [String:[NSSortDescriptor]]
-    
     var mode: Mode {
         get {
             return Mode(rawValue: modeIndex)!
@@ -54,6 +55,38 @@ import BookishModel
         self.collection = collection
         managedObjectContext = collection.managedObjectContext
         entitySorting = BookishModel.defaultSorting
+        super.init()
+        _ = loadFromDefaults()
+        
+        let centre = NotificationCenter.default
+        observers.append(centre.addObserver(forName: UserDefaults.didChangeNotification, object: nil, queue: nil) { (notification) in
+            if self.loadFromDefaults() {
+                centre.post(name: CollectionViewState.ViewStateChangedNotification, object: self)
+            }
+        })
+
+    }
+    
+    deinit {
+        for observer in observers {
+            NotificationCenter.default.removeObserver(observer)
+        }
+    }
+    
+    func loadFromDefaults() -> Bool {
+        var changed = false
+        
+        let showDebug = UserDefaults.standard.bool(forKey: "showDebug")
+        if showDebug != self.showDebug {
+            self.showDebug = showDebug
+            changed = true
+        }
+        
+        return changed
+    }
+    
+    func saveToDefaults() {
+        
     }
     
     func addRelationshipItem(kind: String, shortcut: String) -> NSMenuItem {

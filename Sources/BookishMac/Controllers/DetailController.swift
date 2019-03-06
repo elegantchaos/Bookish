@@ -46,6 +46,7 @@ class DetailController: CollectionViewController {
     var editing = false
     var indexView: IndexController!
     var keyViewTimer: Timer? = nil
+    var observers = [NSObjectProtocol]()
     
     let doubleClickRecogniser = NSClickGestureRecognizer(target: self, action: #selector(textDoubleClick(_:)))
 
@@ -58,6 +59,23 @@ class DetailController: CollectionViewController {
         self.entityType = entityType
         source = entityType.getProvider()
         selectionChanged()
+    }
+
+    override func viewWillAppear() {
+        let observer = NotificationCenter.default.addObserver(forName: CollectionViewState.ViewStateChangedNotification, object: nil, queue: nil) { (notification) in
+            self.selectionChanged()
+        }
+        observers.append(observer)
+        super.viewWillAppear()
+    }
+
+    override func viewWillDisappear() {
+        let nc = NotificationCenter.default
+        for observer in observers {
+            nc.removeObserver(observer)
+        }
+        observers.removeAll()
+        super.viewWillDisappear()
     }
     
     func scheduleRecalculateKeyViews() {
@@ -396,13 +414,4 @@ extension DetailController: NSControlTextEditingDelegate {
             }
         }
     }
-}
-
-
-extension DetailController: NSTextFieldDelegate {
-//    func textView(_ textView: NSTextView, doubleClickedOn cell: NSTextAttachmentCellProtocol, in cellFrame: NSRect, at charIndex: Int) {
-//        if !source.isEditing {
-//            application.actionManager.perform(identifier: "ToggleEditing")
-//        }
-//    }
 }

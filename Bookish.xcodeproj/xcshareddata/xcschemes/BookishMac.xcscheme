@@ -149,10 +149,6 @@
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "-showDebug YES"
-            isEnabled = "YES">
-         </CommandLineArgument>
-         <CommandLineArgument
             argument = "-ApplePersistenceIgnoreState YES"
             isEnabled = "NO">
          </CommandLineArgument>
