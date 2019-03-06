@@ -6,19 +6,16 @@
 import Cocoa
 
 class DateTransformer: ValueTransformer {
-    static let name = NSValueTransformerName(rawValue: "DateToString")
-    
     let formatter: DateFormatter
     let detector: NSDataDetector?
     
-    override init() {
+    init(dateStyle: DateFormatter.Style = .medium,  timeStyle: DateFormatter.Style = .none) {
         let f = DateFormatter()
-        f.dateStyle = .medium
-        f.timeStyle = .short
+        f.dateStyle = dateStyle
+        f.timeStyle = timeStyle
         f.locale = Locale.current
         f.doesRelativeDateFormatting = true
         self.formatter = f
-        
         self.detector = try? NSDataDetector(types: NSTextCheckingResult.CheckingType.date.rawValue)
     }
     

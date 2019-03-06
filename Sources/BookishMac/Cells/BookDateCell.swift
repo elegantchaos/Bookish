@@ -9,13 +9,15 @@ import BookishModel
 
 class BookDateCell: NSTableCellView {
     @IBOutlet weak var infoButton: NSButton!
+    
+    var transformerName: String { return "DateToString" }
 }
 
 extension BookDateCell: DetailTableCell {
     func setup(for row: DetailItem, of view: DetailController) {
         assert(row is SimpleDetailItem)
         if let subview = textField,
-            let transformer = ValueTransformer(forName: NSValueTransformerName(rawValue: "DateToString")),
+            let transformer = ValueTransformer(forName: NSValueTransformerName(rawValue: transformerName)),
             let item = row as? SimpleDetailItem {
             let binding = item.spec.binding
             let options: [NSBindingOption:Any] = [

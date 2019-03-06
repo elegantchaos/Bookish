@@ -1415,7 +1415,7 @@ Gw
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <tableView identifier="book-details" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="none" columnReordering="NO" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="24" rowSizeStyle="automatic" usesAutomaticRowHeights="YES" viewBased="YES" id="2eK-Gk-TD8" userLabel="Table">
-                                                        <rect key="frame" x="0.0" y="0.0" width="442" height="273"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="442" height="276"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <size key="intercellSpacing" width="3" height="2"/>
                                                         <color key="backgroundColor" name="Bookish Detail"/>
@@ -1767,8 +1767,35 @@ Gw
                                                                             <outlet property="textField" destination="sbu-3d-sR8" id="cWM-Yp-qE6"/>
                                                                         </connections>
                                                                     </tableCellView>
-                                                                    <tableCellView identifier="editableDate" id="bf1-KR-OAm" userLabel="date editable" customClass="BookEditableDateCell" customModule="Bookish" customModuleProvider="target">
+                                                                    <tableCellView identifier="time" id="DvG-l5-t3c" userLabel="date" customClass="TimeCell" customModule="Bookish" customModuleProvider="target">
                                                                         <rect key="frame" x="125" y="123" width="315" height="24"/>
+                                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                        <subviews>
+                                                                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="3aI-AW-NdK">
+                                                                                <rect key="frame" x="2" y="2" width="311" height="18"/>
+                                                                                <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" continuous="YES" alignment="left" placeholderString="value" usesSingleLineMode="YES" id="ZpI-TQ-QpZ">
+                                                                                    <font key="font" metaFont="systemBold" size="14"/>
+                                                                                    <color key="textColor" name="Bookish Detail Text"/>
+                                                                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                                                </textFieldCell>
+                                                                                <connections>
+                                                                                    <binding destination="iPd-Ru-zxR" name="font" keyPath="self.cvm.detailFont" id="aPy-SL-hXm"/>
+                                                                                    <outlet property="delegate" destination="DvG-l5-t3c" id="lct-zT-blg"/>
+                                                                                </connections>
+                                                                            </textField>
+                                                                        </subviews>
+                                                                        <constraints>
+                                                                            <constraint firstItem="3aI-AW-NdK" firstAttribute="leading" secondItem="DvG-l5-t3c" secondAttribute="leading" constant="4" id="7Ax-nJ-2L7"/>
+                                                                            <constraint firstItem="3aI-AW-NdK" firstAttribute="top" secondItem="DvG-l5-t3c" secondAttribute="top" constant="4" id="FZ5-NE-ASb"/>
+                                                                            <constraint firstAttribute="bottom" secondItem="3aI-AW-NdK" secondAttribute="bottom" constant="2" id="WGK-eo-4Jy"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="3aI-AW-NdK" secondAttribute="trailing" constant="4" id="Wlz-F2-Unp"/>
+                                                                        </constraints>
+                                                                        <connections>
+                                                                            <outlet property="textField" destination="3aI-AW-NdK" id="psH-Vn-Ub2"/>
+                                                                        </connections>
+                                                                    </tableCellView>
+                                                                    <tableCellView identifier="editableDate" id="bf1-KR-OAm" userLabel="date editable" customClass="BookEditableDateCell" customModule="Bookish" customModuleProvider="target">
+                                                                        <rect key="frame" x="125" y="149" width="315" height="24"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="FHu-L0-2fo" customClass="AnnotatedTextField" customModule="Bookish" customModuleProvider="target">
@@ -1808,7 +1835,7 @@ Gw
                                                                         </connections>
                                                                     </tableCellView>
                                                                     <tableCellView identifier="editableDimensions" id="OZV-07-tGS" userLabel="dimensions" customClass="BookDimensionsCell" customModule="Bookish" customModuleProvider="target">
-                                                                        <rect key="frame" x="125" y="149" width="315" height="24"/>
+                                                                        <rect key="frame" x="125" y="175" width="315" height="24"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <stackView distribution="fillEqually" orientation="horizontal" alignment="top" spacing="10" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YeD-9c-Svh">
@@ -1916,7 +1943,7 @@ Gw
                                                                         </connections>
                                                                     </tableCellView>
                                                                     <tableCellView identifier="series" id="X8k-lU-fh1" userLabel="series" customClass="BookSeriesCell" customModule="Bookish" customModuleProvider="target">
-                                                                        <rect key="frame" x="125" y="175" width="315" height="24"/>
+                                                                        <rect key="frame" x="125" y="201" width="315" height="24"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="V9b-km-eI4" userLabel="Name">
@@ -1993,7 +2020,7 @@ Gw
                                                                         </connections>
                                                                     </tableCellView>
                                                                     <tableCellView identifier="book" id="YCW-gp-vkv" userLabel="book" customClass="SeriesEntryCell" customModule="Bookish" customModuleProvider="target">
-                                                                        <rect key="frame" x="125" y="201" width="315" height="22"/>
+                                                                        <rect key="frame" x="125" y="227" width="315" height="22"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="8XU-ZR-Wgb">
@@ -2028,7 +2055,7 @@ Gw
                                                                         </connections>
                                                                     </tableCellView>
                                                                     <tableCellView identifier="section" id="amt-x4-xNy" userLabel="section" customClass="SectionCell" customModule="Bookish" customModuleProvider="target">
-                                                                        <rect key="frame" x="125" y="225" width="315" height="24"/>
+                                                                        <rect key="frame" x="125" y="251" width="315" height="24"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="YPE-nH-Ujd">

@@ -72,7 +72,9 @@ let applicationChannel = Logger("Application")
     fileprivate func setupTransformers() {
         ValueTransformer.setValueTransformer(AuthorsTransformer(), forName: AuthorsTransformer.name)
         ValueTransformer.setValueTransformer(AuthorSelectionTransformer(), forName: AuthorSelectionTransformer.name)
-        ValueTransformer.setValueTransformer(DateTransformer(), forName: DateTransformer.name)
+
+        ValueTransformer.setValueTransformer(DateTransformer(timeStyle: .none), forName: NSValueTransformerName(rawValue: "DateToString"))
+        ValueTransformer.setValueTransformer(DateTransformer(timeStyle: .short), forName: NSValueTransformerName(rawValue: "TimeToString"))
     }
 
     fileprivate func setupWindow(for collection: SyncedCollection) {
