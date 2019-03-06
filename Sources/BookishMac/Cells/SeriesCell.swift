@@ -7,14 +7,14 @@ import AppKit
 import BookishModel
 import Actions
 
-class BookSeriesCell: AnnotatedTableCellView {
+class SeriesCell: AnnotatedTableCellView {
     @IBOutlet weak var seriesField: NSTextField!
     @IBOutlet weak var seriesCombo: AnnotatedComboBox!
     @IBOutlet weak var positionField: NSTextField!
     var detailView: DetailController!
 }
 
-extension BookSeriesCell: DetailTableCell {
+extension SeriesCell: DetailTableCell {
     func setup(for row: DetailItem, of view: DetailController) {
         assert(row is SeriesDetailItem)
         
@@ -46,7 +46,7 @@ extension BookSeriesCell: DetailTableCell {
     }
 }
 
-extension BookSeriesCell: ActionContextProvider {
+extension SeriesCell: ActionContextProvider {
     func provide(context: ActionContext) {
         if let series = objectValue as? Series {
             context.info[SeriesAction.seriesKey] = series
@@ -55,7 +55,7 @@ extension BookSeriesCell: ActionContextProvider {
 }
 
 
-extension BookSeriesCell: NSComboBoxDelegate {
+extension SeriesCell: NSComboBoxDelegate {
     func comboBoxSelectionDidChange(_ notification: Notification) {
         if let allSeries = detailView?.seriesList?.arrangedObjects as? [Series] {
             let index = seriesCombo.indexOfSelectedItem

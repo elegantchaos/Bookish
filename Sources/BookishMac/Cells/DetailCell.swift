@@ -9,7 +9,7 @@ import Actions
 
 fileprivate var detailBindingContext: Int = 0
 
-class BookDetailCell: AnnotatedTableCellView, DetailTableCell {
+class DetailCell: AnnotatedTableCellView, DetailTableCell {
     var detailView: DetailController!
     var observer: NSKeyValueObservation?
     var asNumber = false
@@ -62,7 +62,7 @@ class BookDetailCell: AnnotatedTableCellView, DetailTableCell {
     }
 }
 
-extension BookDetailCell {
+extension DetailCell {
     override func controlTextDidEndEditing(_ obj: Notification) {
         if detailView.editing, let subview = textField, let detail = objectValue as? DetailSpec {
             let actionManager = application.actionManager

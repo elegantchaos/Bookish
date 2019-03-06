@@ -7,14 +7,14 @@ import AppKit
 import Actions
 import BookishModel
 
-class BookPublisherCell: AnnotatedTableCellView {
+class PublisherCell: AnnotatedTableCellView {
     @IBOutlet weak var publisherField: NSTextField!
     @IBOutlet weak var publisherCombo: AnnotatedComboBox!
     
     var detailView: DetailController!
 }
 
-extension BookPublisherCell: DetailTableCell {
+extension PublisherCell: DetailTableCell {
     func setup(for row: DetailItem, of view: DetailController) {
         assert(row is PublisherDetailItem)
 
@@ -49,7 +49,7 @@ extension BookPublisherCell: DetailTableCell {
     }
 }
 
-extension BookPublisherCell: ActionContextProvider {
+extension PublisherCell: ActionContextProvider {
     func provide(context: ActionContext) {
         context[PublisherAction.publisherKey] = objectValue
         context.info.addObserver(self)
@@ -61,7 +61,7 @@ extension BookPublisherCell: ActionContextProvider {
     
 }
 
-extension BookPublisherCell: BookChangeObserver {
+extension PublisherCell: BookChangeObserver {
     func added(publisher: Publisher) {
         objectValue = publisher
     }

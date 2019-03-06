@@ -7,7 +7,7 @@ import AppKit
 import Actions
 import BookishModel
 
-class BookEditableDateCell: AnnotatedTableCellView, ActionContextProvider {
+class EditableDateCell: AnnotatedTableCellView, ActionContextProvider {
     @IBOutlet weak var infoButton: NSButton!
     var binding: String = ""
     
@@ -22,7 +22,7 @@ class BookEditableDateCell: AnnotatedTableCellView, ActionContextProvider {
     
 }
 
-extension BookEditableDateCell: DetailTableCell {
+extension EditableDateCell: DetailTableCell {
     func setup(for row: DetailItem, of view: DetailController) {
         assert(row is SimpleDetailItem)
         if let subview = textField,

@@ -7,15 +7,15 @@ import AppKit
 import Actions
 import BookishModel
 
-class BookPersonCell: AnnotatedTableCellView {
+class RelationshipCell: AnnotatedTableCellView {
     
     @IBOutlet weak var personField: NSTextField!
     
-    var roleCell: BookRoleCell? {
+    var roleCell: RoleCell? {
         if let table = detailView.detailsTable {
             let row = table.row(for: self)
             if row != -1 {
-                return table.view(atColumn: 1, row: row, makeIfNecessary: false) as? BookRoleCell
+                return table.view(atColumn: 1, row: row, makeIfNecessary: false) as? RoleCell
             }
         }
         return nil
@@ -34,7 +34,7 @@ class BookPersonCell: AnnotatedTableCellView {
 
 }
 
-extension BookPersonCell: DetailTableCell {
+extension RelationshipCell: DetailTableCell {
     func setup(for row: DetailItem, of view: DetailController) {
         assert(row is PersonDetailItem)
         detailView = view
@@ -65,7 +65,7 @@ extension BookPersonCell: DetailTableCell {
     }
 }
 
-extension BookPersonCell: ActionContextProvider {
+extension RelationshipCell: ActionContextProvider {
     func provide(context: ActionContext) {
         context.info[PersonAction.relationshipKey] = objectValue as? Relationship
         context.info.addObserver(self)
@@ -78,7 +78,7 @@ extension BookPersonCell: ActionContextProvider {
     }
 }
 
-extension BookPersonCell: BookChangeObserver {
+extension RelationshipCell: BookChangeObserver {
     func replaced(relationship: Relationship, with: Relationship) {
         objectValue = with
         roleCell?.objectValue = with

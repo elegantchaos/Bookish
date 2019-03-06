@@ -9,7 +9,7 @@ import Actions
 
 fileprivate var detailBindingContext: Int = 0
 
-class BookDimensionsCell: AnnotatedTableCellView, DetailTableCell {
+class DimensionsCell: AnnotatedTableCellView, DetailTableCell {
     var index: NSArrayController?
     
     @IBOutlet weak var widthField: NSTextField!

@@ -1473,7 +1473,7 @@ Gw
                                                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                 </textFieldCell>
                                                                 <prototypeCellViews>
-                                                                    <tableCellView identifier="heading" id="H3U-Uy-6cm" customClass="BookHeadingCell" customModule="Bookish" customModuleProvider="target">
+                                                                    <tableCellView identifier="heading" id="H3U-Uy-6cm" customClass="HeadingCell" customModule="Bookish" customModuleProvider="target">
                                                                         <rect key="frame" x="36" y="1" width="86" height="24"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
@@ -1499,7 +1499,7 @@ Gw
                                                                             <outlet property="textField" destination="8hj-He-i4c" id="CbJ-4y-N8u"/>
                                                                         </connections>
                                                                     </tableCellView>
-                                                                    <tableCellView identifier="role" id="gTk-cA-HWq" customClass="BookRoleCell" customModule="Bookish" customModuleProvider="target">
+                                                                    <tableCellView identifier="role" id="gTk-cA-HWq" customClass="RoleCell" customModule="Bookish" customModuleProvider="target">
                                                                         <rect key="frame" x="36" y="27" width="86" height="24"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
@@ -1593,7 +1593,7 @@ Gw
                                                                             <outlet property="textField" destination="xZM-wD-djI" id="T7x-3h-G0H"/>
                                                                         </connections>
                                                                     </tableCellView>
-                                                                    <tableCellView identifier="text" id="1mF-bf-MwG" userLabel="text" customClass="BookDetailCell" customModule="Bookish" customModuleProvider="target">
+                                                                    <tableCellView identifier="text" id="1mF-bf-MwG" userLabel="text" customClass="DetailCell" customModule="Bookish" customModuleProvider="target">
                                                                         <rect key="frame" x="125" y="20" width="315" height="24"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
@@ -1620,7 +1620,7 @@ Gw
                                                                             <outlet property="textField" destination="JOA-TY-6BX" id="WYb-j7-6ig"/>
                                                                         </connections>
                                                                     </tableCellView>
-                                                                    <tableCellView identifier="person" id="Obe-M6-xbY" userLabel="person" customClass="BookPersonCell" customModule="Bookish" customModuleProvider="target">
+                                                                    <tableCellView identifier="person" id="Obe-M6-xbY" userLabel="person" customClass="RelationshipCell" customModule="Bookish" customModuleProvider="target">
                                                                         <rect key="frame" x="125" y="46" width="315" height="24"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
@@ -1681,7 +1681,7 @@ Gw
                                                                             <outlet property="personField" destination="8Gb-0S-SzA" id="SEI-pd-lZx"/>
                                                                         </connections>
                                                                     </tableCellView>
-                                                                    <tableCellView identifier="publisher" id="5Ra-ba-7w7" userLabel="publisher" customClass="BookPublisherCell" customModule="Bookish" customModuleProvider="target">
+                                                                    <tableCellView identifier="publisher" id="5Ra-ba-7w7" userLabel="publisher" customClass="PublisherCell" customModule="Bookish" customModuleProvider="target">
                                                                         <rect key="frame" x="125" y="72" width="315" height="23"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
@@ -1740,7 +1740,7 @@ Gw
                                                                             <outlet property="publisherField" destination="q63-dF-QC4" id="xrk-Tt-Swb"/>
                                                                         </connections>
                                                                     </tableCellView>
-                                                                    <tableCellView identifier="date" id="ph3-eN-NOK" userLabel="date" customClass="BookDateCell" customModule="Bookish" customModuleProvider="target">
+                                                                    <tableCellView identifier="date" id="ph3-eN-NOK" userLabel="date" customClass="DateCell" customModule="Bookish" customModuleProvider="target">
                                                                         <rect key="frame" x="125" y="97" width="315" height="24"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
@@ -1794,7 +1794,7 @@ Gw
                                                                             <outlet property="textField" destination="3aI-AW-NdK" id="psH-Vn-Ub2"/>
                                                                         </connections>
                                                                     </tableCellView>
-                                                                    <tableCellView identifier="editableDate" id="bf1-KR-OAm" userLabel="date editable" customClass="BookEditableDateCell" customModule="Bookish" customModuleProvider="target">
+                                                                    <tableCellView identifier="editableDate" id="bf1-KR-OAm" userLabel="date editable" customClass="EditableDateCell" customModule="Bookish" customModuleProvider="target">
                                                                         <rect key="frame" x="125" y="149" width="315" height="24"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
@@ -1834,7 +1834,7 @@ Gw
                                                                             <outlet property="textField" destination="FHu-L0-2fo" id="Qaj-S3-GXi"/>
                                                                         </connections>
                                                                     </tableCellView>
-                                                                    <tableCellView identifier="editableDimensions" id="OZV-07-tGS" userLabel="dimensions" customClass="BookDimensionsCell" customModule="Bookish" customModuleProvider="target">
+                                                                    <tableCellView identifier="editableDimensions" id="OZV-07-tGS" userLabel="dimensions" customClass="DimensionsCell" customModule="Bookish" customModuleProvider="target">
                                                                         <rect key="frame" x="125" y="175" width="315" height="24"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
@@ -1942,7 +1942,7 @@ Gw
                                                                             <outlet property="widthField" destination="Uct-nx-Fvm" id="MaL-em-Ce5"/>
                                                                         </connections>
                                                                     </tableCellView>
-                                                                    <tableCellView identifier="series" id="X8k-lU-fh1" userLabel="series" customClass="BookSeriesCell" customModule="Bookish" customModuleProvider="target">
+                                                                    <tableCellView identifier="series" id="X8k-lU-fh1" userLabel="series" customClass="SeriesCell" customModule="Bookish" customModuleProvider="target">
                                                                         <rect key="frame" x="125" y="201" width="315" height="24"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>

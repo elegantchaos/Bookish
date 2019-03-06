@@ -5,6 +5,6 @@
 
 import Foundation
 
-class TimeCell: BookDateCell {
+class TimeCell: DateCell {
     override var transformerName: String { return "TimeToString" }
 }

@@ -7,13 +7,13 @@ import AppKit
 import Actions
 import BookishModel
 
-class BookDateCell: NSTableCellView {
+class DateCell: NSTableCellView {
     @IBOutlet weak var infoButton: NSButton!
     
     var transformerName: String { return "DateToString" }
 }
 
-extension BookDateCell: DetailTableCell {
+extension DateCell: DetailTableCell {
     func setup(for row: DetailItem, of view: DetailController) {
         assert(row is SimpleDetailItem)
         if let subview = textField,

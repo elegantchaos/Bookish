@@ -8,7 +8,7 @@ import AppKit
 import BookishModel
 
 
-class BookRoleCell: NSTableCellView, DetailTableCell {
+class RoleCell: NSTableCellView, DetailTableCell {
     @IBOutlet weak var rolePopup: ColoredPopUpButton!
     func setup(for row: DetailItem, of view: DetailController) {
         assert(row is PersonDetailItem)
@@ -37,7 +37,7 @@ class BookRoleCell: NSTableCellView, DetailTableCell {
 }
 
 
-extension BookRoleCell: ActionContextProvider {
+extension RoleCell: ActionContextProvider {
     func provide(context: ActionContext) {
         context.info[PersonAction.relationshipKey] = objectValue as? Relationship
         context.info[PersonAction.roleKey] = rolePopup.selectedItem?.representedObject as? Role
