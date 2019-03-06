@@ -389,64 +389,65 @@ CA
                                     </items>
                                 </menu>
                             </menuItem>
-                            <menuItem title="Book" id="EkW-3w-kBG">
+                            <menuItem title="Actions" id="ocN-wE-Zc8">
                                 <modifierMask key="keyEquivalentModifierMask"/>
-                                <menu key="submenu" title="Book" identifier="menu.book" id="uD1-YW-cRV">
-                                    <items>
-                                        <menuItem title="Add Relationship" identifier="menu.FillRelationshipMenu" id="C5y-Gx-Qyt">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                            <connections>
-                                                <action selector="performAction:" target="Ady-hI-5gd" id="EQl-8d-V5X"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem title="Remove Relationship" identifier="menu.RemoveRelationship" id="cQL-cO-JdW">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                            <connections>
-                                                <action selector="performAction:" target="Ady-hI-5gd" id="qm1-VV-kWF"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem isSeparatorItem="YES" id="IxZ-JX-aj7"/>
-                                        <menuItem title="Delete Book" identifier="menu.DeleteBook" id="IB1-oA-c5b">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                            <connections>
-                                                <action selector="performAction:" target="Ady-hI-5gd" id="dGA-hW-CIl"/>
-                                            </connections>
-                                        </menuItem>
-                                    </items>
-                                </menu>
-                            </menuItem>
-                            <menuItem title="Person" id="Gum-BW-JVl" userLabel="Person">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <menu key="submenu" title="Person" identifier="menu.person" id="0WV-fZ-bve">
-                                    <items>
-                                        <menuItem title="Merge People" identifier="menu.MergePerson" id="6gc-P5-rss">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                            <connections>
-                                                <action selector="performAction:" target="Ady-hI-5gd" id="pYY-Er-J0a"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem title="Split People" identifier="menu.SplitPerson" id="cQA-Db-633">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                            <connections>
-                                                <action selector="performAction:" target="Ady-hI-5gd" id="pfo-nP-q9v"/>
-                                            </connections>
-                                        </menuItem>
-                                    </items>
-                                </menu>
-                            </menuItem>
-                            <menuItem title="Collection" id="ocN-wE-Zc8">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <menu key="submenu" title="Collection" identifier="menu.collection" id="PET-8T-wg6">
+                                <menu key="submenu" title="Actions" identifier="menu.collection" id="PET-8T-wg6">
                                     <items>
                                         <menuItem title="Show Scanner" keyEquivalent="k" identifier="menu.ToggleScanner" id="18S-Lg-R9p">
                                             <connections>
                                                 <action selector="performAction:" target="Ady-hI-5gd" id="Vak-aB-Iwf"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Scan For Series" keyEquivalent="E" identifier="menu.ScanSeries" id="Tsh-Kz-aXA">
-                                            <connections>
-                                                <action selector="performAction:" target="Ady-hI-5gd" id="qWr-r1-UDk"/>
-                                            </connections>
+                                        <menuItem isSeparatorItem="YES" id="r0r-ey-JKj"/>
+                                        <menuItem title="Book" id="EkW-3w-kBG">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <menu key="submenu" title="Book" identifier="menu.book" id="uD1-YW-cRV">
+                                                <items>
+                                                    <menuItem title="Add Relationship" identifier="menu.FillRelationshipMenu" id="C5y-Gx-Qyt">
+                                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                                        <connections>
+                                                            <action selector="performAction:" target="Ady-hI-5gd" id="EQl-8d-V5X"/>
+                                                        </connections>
+                                                    </menuItem>
+                                                    <menuItem title="Remove Relationship" identifier="menu.RemoveRelationship" id="cQL-cO-JdW">
+                                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                                        <connections>
+                                                            <action selector="performAction:" target="Ady-hI-5gd" id="qm1-VV-kWF"/>
+                                                        </connections>
+                                                    </menuItem>
+                                                </items>
+                                            </menu>
+                                        </menuItem>
+                                        <menuItem title="Person" id="Gum-BW-JVl" userLabel="Person">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <menu key="submenu" title="Person" identifier="menu.person" id="0WV-fZ-bve">
+                                                <items>
+                                                    <menuItem title="Merge People" identifier="menu.MergePerson" id="6gc-P5-rss">
+                                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                                        <connections>
+                                                            <action selector="performAction:" target="Ady-hI-5gd" id="pYY-Er-J0a"/>
+                                                        </connections>
+                                                    </menuItem>
+                                                    <menuItem title="Split People" identifier="menu.SplitPerson" id="cQA-Db-633">
+                                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                                        <connections>
+                                                            <action selector="performAction:" target="Ady-hI-5gd" id="pfo-nP-q9v"/>
+                                                        </connections>
+                                                    </menuItem>
+                                                </items>
+                                            </menu>
+                                        </menuItem>
+                                        <menuItem title="Series" id="T6B-ZP-Ozf" userLabel="Series">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <menu key="submenu" title="Series" id="UVe-2c-Mh9">
+                                                <items>
+                                                    <menuItem title="Suggest Series" keyEquivalent="E" identifier="menu.ScanSeries" id="Tsh-Kz-aXA">
+                                                        <connections>
+                                                            <action selector="performAction:" target="Ady-hI-5gd" id="qWr-r1-UDk"/>
+                                                        </connections>
+                                                    </menuItem>
+                                                </items>
+                                            </menu>
                                         </menuItem>
                                     </items>
                                 </menu>
@@ -652,10 +653,13 @@ CA
                                 <rect key="frame" x="20" y="61" width="244" height="189"/>
                             </customView>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="SgJ-BQ-X9K">
-                                <rect key="frame" x="401" y="13" width="65" height="32"/>
-                                <buttonCell key="cell" type="push" title="Add" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="yuz-YB-Pj6">
+                                <rect key="frame" x="367" y="13" width="99" height="32"/>
+                                <buttonCell key="cell" type="push" title="Add Book" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="yuz-YB-Pj6">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
+                                    <string key="keyEquivalent" base64-UTF8="YES">
+DQ
+</string>
                                 </buttonCell>
                                 <connections>
                                     <action selector="doAdd:" target="aUv-cC-c5u" id="70A-YU-AzS"/>
