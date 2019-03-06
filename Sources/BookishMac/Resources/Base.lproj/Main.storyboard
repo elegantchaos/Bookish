@@ -623,7 +623,7 @@ CA
         <scene sceneID="pOa-g2-DfK">
             <objects>
                 <windowController storyboardIdentifier="ScannerWindow" id="GRm-cO-8JL" customClass="ScannerWindowController" customModule="Bookish" customModuleProvider="target" sceneMemberID="viewController">
-                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="NDY-DS-igy">
+                    <window key="window" title="Scanner" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="NDY-DS-igy">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="196" y="249" width="480" height="270"/>
@@ -675,16 +675,43 @@ CA
                             <progressIndicator hidden="YES" wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="hHr-dd-BPj">
                                 <rect key="frame" x="444" y="234" width="16" height="16"/>
                             </progressIndicator>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mhL-cd-WyS">
-                                <rect key="frame" x="14" y="13" width="66" height="32"/>
-                                <buttonCell key="cell" type="push" title="Test" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="rPm-kC-xL6">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="doTest:" target="aUv-cC-c5u" id="Fzl-Kg-4af"/>
-                                </connections>
-                            </button>
+                            <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="6" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" fixedFrame="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ocm-8G-u1u">
+                                <rect key="frame" x="20" y="20" width="120" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button identifier="button.ToggleScanner" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mhL-cd-WyS">
+                                        <rect key="frame" x="-6" y="-7" width="72" height="32"/>
+                                        <buttonCell key="cell" type="push" title="Done" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="rPm-kC-xL6">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                            <string key="keyEquivalent" base64-UTF8="YES">
+Gw
+</string>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="performAction:" target="2SH-QY-2xC" id="D9v-ix-VF5"/>
+                                        </connections>
+                                    </button>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ewn-yD-jnE">
+                                        <rect key="frame" x="60" y="-7" width="66" height="32"/>
+                                        <buttonCell key="cell" type="push" title="Test" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="T77-ZR-gM1">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="doTest:" target="aUv-cC-c5u" id="L16-f1-bST"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <visibilityPriorities>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                </visibilityPriorities>
+                                <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                </customSpacing>
+                            </stackView>
                             <scrollView borderType="line" autohidesScrollers="YES" horizontalLineScroll="52" horizontalPageScroll="10" verticalLineScroll="52" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u2d-ar-e3H">
                                 <rect key="frame" x="284" y="61" width="176" height="164"/>
                                 <clipView key="contentView" drawsBackground="NO" id="Vch-os-6Ge">
@@ -822,11 +849,8 @@ CA
                             <constraint firstItem="KeA-eY-ggS" firstAttribute="top" secondItem="iE7-gu-E3H" secondAttribute="top" constant="20" id="FVO-Ra-hvi"/>
                             <constraint firstItem="KeA-eY-ggS" firstAttribute="leading" secondItem="iE7-gu-E3H" secondAttribute="leading" constant="20" id="HBC-ae-KVU"/>
                             <constraint firstItem="hHr-dd-BPj" firstAttribute="leading" secondItem="tGW-qR-OP0" secondAttribute="trailing" id="NOT-hf-pUr"/>
-                            <constraint firstItem="SgJ-BQ-X9K" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="mhL-cd-WyS" secondAttribute="trailing" constant="100" id="SuK-Hj-fZy"/>
                             <constraint firstItem="SgJ-BQ-X9K" firstAttribute="top" secondItem="KeA-eY-ggS" secondAttribute="bottom" constant="20" symbolic="YES" id="TKu-l0-Afs"/>
-                            <constraint firstAttribute="bottom" secondItem="mhL-cd-WyS" secondAttribute="bottom" constant="20" id="UPF-BA-9xc"/>
                             <constraint firstItem="hHr-dd-BPj" firstAttribute="centerY" secondItem="tGW-qR-OP0" secondAttribute="centerY" id="Vvz-kx-WYS"/>
-                            <constraint firstItem="mhL-cd-WyS" firstAttribute="leading" secondItem="iE7-gu-E3H" secondAttribute="leading" constant="20" id="XmC-ca-5eV"/>
                             <constraint firstAttribute="bottom" secondItem="SgJ-BQ-X9K" secondAttribute="bottom" constant="20" id="f8y-kR-1j0"/>
                             <constraint firstAttribute="trailing" secondItem="u2d-ar-e3H" secondAttribute="trailing" constant="20" id="iNs-hC-IUc"/>
                             <constraint firstAttribute="trailing" secondItem="SgJ-BQ-X9K" secondAttribute="trailing" constant="20" id="up4-5w-A03"/>
