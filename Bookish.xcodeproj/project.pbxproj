@@ -36,7 +36,6 @@
 		22462E932158ED5000A4C56C /* CollectionIndexViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22462E922158ED5000A4C56C /* CollectionIndexViewController.swift */; };
 		22462E972158F65200A4C56C /* CollectionViewActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22462E962158F65200A4C56C /* CollectionViewActions.swift */; };
 		2250C6E121B191B200E899E2 /* PublisherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2250C6E021B191B200E899E2 /* PublisherCell.swift */; };
-		2250C71221B57F7800E899E2 /* SeriesEntryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2250C71121B57F7800E899E2 /* SeriesEntryCell.swift */; };
 		2250C71421B596C700E899E2 /* SeriesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2250C71321B596C700E899E2 /* SeriesCell.swift */; };
 		2250C71621B7E01A00E899E2 /* SeriesScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2250C71521B7E01A00E899E2 /* SeriesScanner.swift */; };
 		2250C71D21B83B5700E899E2 /* RegularExpressionExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2250C71C21B83B5700E899E2 /* RegularExpressionExtensions.swift */; };
@@ -54,6 +53,8 @@
 		228968412191DD9000B80A93 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 228968402191DD9000B80A93 /* CloudKit.framework */; };
 		228968442191DDC200B80A93 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 228968432191DDC200B80A93 /* CloudKit.framework */; };
 		228968472191F48400B80A93 /* AuthorSelectionTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228968452191EFA900B80A93 /* AuthorSelectionTransformer.swift */; };
+		2295A9132232BCD70085CD86 /* DoubleClickAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2295A9122232BCD70085CD86 /* DoubleClickAction.swift */; };
+		2295A9312232C6A90085CD86 /* EntryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2295A9302232C6A90085CD86 /* EntryCell.swift */; };
 		22960328214025E80020B3EB /* RelationshipCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22960327214025E80020B3EB /* RelationshipCell.swift */; };
 		2296032A214032520020B3EB /* AnnotatedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22960329214032520020B3EB /* AnnotatedTextField.swift */; };
 		22A3E0C521FA015900BA4F17 /* Ensembles.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A3E0C421FA014F00BA4F17 /* Ensembles.framework */; };
@@ -221,7 +222,6 @@
 		22462E922158ED5000A4C56C /* CollectionIndexViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionIndexViewController.swift; sourceTree = "<group>"; };
 		22462E962158F65200A4C56C /* CollectionViewActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewActions.swift; sourceTree = "<group>"; };
 		2250C6E021B191B200E899E2 /* PublisherCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublisherCell.swift; sourceTree = "<group>"; };
-		2250C71121B57F7800E899E2 /* SeriesEntryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeriesEntryCell.swift; sourceTree = "<group>"; };
 		2250C71321B596C700E899E2 /* SeriesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeriesCell.swift; sourceTree = "<group>"; };
 		2250C71521B7E01A00E899E2 /* SeriesScanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeriesScanner.swift; sourceTree = "<group>"; };
 		2250C71C21B83B5700E899E2 /* RegularExpressionExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegularExpressionExtensions.swift; sourceTree = "<group>"; };
@@ -240,6 +240,8 @@
 		228968422191DDBF00B80A93 /* Bookish.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Bookish.entitlements; sourceTree = "<group>"; };
 		228968432191DDC200B80A93 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		228968452191EFA900B80A93 /* AuthorSelectionTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorSelectionTransformer.swift; sourceTree = "<group>"; };
+		2295A9122232BCD70085CD86 /* DoubleClickAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleClickAction.swift; sourceTree = "<group>"; };
+		2295A9302232C6A90085CD86 /* EntryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryCell.swift; sourceTree = "<group>"; };
 		22960327214025E80020B3EB /* RelationshipCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelationshipCell.swift; sourceTree = "<group>"; };
 		22960329214032520020B3EB /* AnnotatedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotatedTextField.swift; sourceTree = "<group>"; };
 		2296032B214132840020B3EB /* Bookish.sketch */ = {isa = PBXFileReference; lastKnownFileType = file; name = Bookish.sketch; path = Extras/Bookish.sketch; sourceTree = "<group>"; };
@@ -382,6 +384,7 @@
 			isa = PBXGroup;
 			children = (
 				2250C71521B7E01A00E899E2 /* SeriesScanner.swift */,
+				2295A9122232BCD70085CD86 /* DoubleClickAction.swift */,
 				22115AFF222D97C300C3F170 /* BarcodeScanner.swift */,
 				22D39E5F2147D4A100282467 /* TestAction.swift */,
 				225488DD21F2333100EE8ECB /* ColoredPopUpButton.swift */,
@@ -513,6 +516,7 @@
 			isa = PBXGroup;
 			children = (
 				22D1B2422180CA9E0062F2CB /* BookCell.swift */,
+				2295A9302232C6A90085CD86 /* EntryCell.swift */,
 				2254895821F62DE300EE8ECB /* BookControlCell.swift */,
 				22D39E542146A84E00282467 /* DateCell.swift */,
 				225AEEEB2230224B00E9D1AF /* TimeCell.swift */,
@@ -525,7 +529,6 @@
 				225488DB21F20B2500EE8ECB /* RoleCell.swift */,
 				22D1B24A2180E9060062F2CB /* SectionCell.swift */,
 				2250C71321B596C700E899E2 /* SeriesCell.swift */,
-				2250C71121B57F7800E899E2 /* SeriesEntryCell.swift */,
 				2231C4BA2227EBC100D730FB /* ScannerCandidateCell.swift */,
 			);
 			path = Cells;
@@ -1028,7 +1031,6 @@
 				22D1B2492180D7B60062F2CB /* DetailCell.swift in Sources */,
 				22DD424A2126D6DA0070C85A /* CollectionViewController.swift in Sources */,
 				2250C71421B596C700E899E2 /* SeriesCell.swift in Sources */,
-				2250C71221B57F7800E899E2 /* SeriesEntryCell.swift in Sources */,
 				22429401212C32BF00E70510 /* CollectionWindowController.swift in Sources */,
 				22DD42482126D6DA0070C85A /* Application.swift in Sources */,
 				225488DC21F20B2500EE8ECB /* RoleCell.swift in Sources */,
@@ -1046,6 +1048,7 @@
 				22143FCF212EF9CC00B689DF /* WindowControllerWithViewModel.swift in Sources */,
 				22DA6A4121E6525400ECF09A /* CDECloudKitFileSystem.m in Sources */,
 				221C4B35216BAAAC0086D56F /* RelationshipUIActions.swift in Sources */,
+				2295A9132232BCD70085CD86 /* DoubleClickAction.swift in Sources */,
 				2250C71621B7E01A00E899E2 /* SeriesScanner.swift in Sources */,
 				22143FCD212EE79100B689DF /* CollectionViewState.swift in Sources */,
 				22C2194B21AF24E5002FC0FE /* EditingActions.swift in Sources */,
@@ -1063,6 +1066,7 @@
 				22143FD521300F9300B689DF /* CoreDataTransformers.swift in Sources */,
 				225488DE21F2333100EE8ECB /* ColoredPopUpButton.swift in Sources */,
 				22D39E552146A84E00282467 /* DateCell.swift in Sources */,
+				2295A9312232C6A90085CD86 /* EntryCell.swift in Sources */,
 				225AEEEC2230224B00E9D1AF /* TimeCell.swift in Sources */,
 				22115AFE222D881000C3F170 /* ScannerActions.swift in Sources */,
 				2231C4BB2227EBC100D730FB /* ScannerCandidateCell.swift in Sources */,

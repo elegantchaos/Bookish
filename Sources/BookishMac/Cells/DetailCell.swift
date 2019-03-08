@@ -24,6 +24,7 @@ class DetailCell: AnnotatedTableCellView, DetailTableCell {
             subview.isEditable = view.editing
             objectValue = item.spec
             view.index.addObserver(self, forKeyPath: "selection.\(binding)", options: [.initial], context: &detailBindingContext)
+            view.addDoubleClickUnlock(to: subview)
         }
     }
     

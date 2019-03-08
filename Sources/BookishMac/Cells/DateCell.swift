@@ -26,6 +26,7 @@ extension DateCell: DetailTableCell {
             
             subview.identifier = NSUserInterfaceItemIdentifier(rawValue: "date-detail-\(binding)")
             subview.bind(NSBindingName(rawValue: "value"), to:view.index, withKeyPath:"selection.\(binding)", options: options)
+            view.addDoubleClickUnlock(to: subview)
         }
     }
     

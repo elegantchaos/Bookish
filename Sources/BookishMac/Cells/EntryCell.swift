@@ -1,16 +1,17 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-//  Created by Sam Deane on 24/10/2018.
-//  All code (c) 2018 - present day, Elegant Chaos Limited.
+//  Created by Sam Deane on 08/03/2019.
+//  All code (c) 2019 - present day, Elegant Chaos Limited.
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
 
 import AppKit
 import Actions
 import BookishModel
 
-class BookCell: NSTableCellView, DetailTableCell {
+class EntryCell: NSTableCellView, DetailTableCell {
     func setup(for row: DetailItem, of view: DetailController) {
-        if let item = row as? BookDetailItem, let book = item.book, let name = book.name {
-            objectValue = book
+        if let item = row as? SeriesEntryDetailItem, let entry = item.entry, let book = entry.book, let name = book.name {
+            objectValue = entry
             textField?.stringValue = name
             validateButtons()
         }
@@ -21,8 +22,9 @@ class BookCell: NSTableCellView, DetailTableCell {
     }
 }
 
-extension BookCell: ActionContextProvider {
+extension EntryCell: ActionContextProvider {
     func provide(context: ActionContext) {
-        context.info[BookAction.bookKey] = objectValue as? Book
+        let entry = objectValue as? SeriesEntry
+        context.info[BookAction.bookKey] = entry?.book
     }
 }

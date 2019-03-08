@@ -277,7 +277,8 @@ extension DetailController: NSTableViewDelegate, NSTableViewDataSource {
         if let cell = view as? DetailTableCell {
             cell.setup(for: rowInfo, of: self)
         }
-        view.scheduleForValidation()
+        view.validateButtons()
+//        view.scheduleForValidation()
         
         return view
     }
