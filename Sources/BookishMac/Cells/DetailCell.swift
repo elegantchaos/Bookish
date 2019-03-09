@@ -66,12 +66,9 @@ class DetailCell: AnnotatedTableCellView, DetailTableCell {
 extension DetailCell {
     override func controlTextDidEndEditing(_ obj: Notification) {
         if detailView.editing, let subview = textField, let detail = objectValue as? DetailSpec {
-            let actionManager = application.actionManager
-            let info = ActionInfo(sender: self)
-            info[ChangeValueAction.propertyKey] = detail.binding
             let value: Any = asNumber ? subview.doubleValue : subview.stringValue
-            info[ChangeValueAction.valueKey] = value
-            actionManager.perform(identifier: "ChangeValue", info: info)
+            ChangeValueAction.send("ChangeValue", from: self, manager: application.actionManager, property: detail.binding, value: value)
+
         }
         super.controlTextDidEndEditing(obj)
     }

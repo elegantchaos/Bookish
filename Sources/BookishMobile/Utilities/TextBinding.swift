@@ -4,6 +4,8 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 import UIKit
+import Actions
+import BookishModel
 
 fileprivate var textBindingContext: Int = 0
 
@@ -67,7 +69,7 @@ class TextViewBinding: TextBinding<UITextView>, UITextViewDelegate {
     }
 
     func textViewDidChange(_ textView: UITextView) {
-        source?.setValue(target.text, forKey:path)
+        ChangeValueAction.send("ChangeValue", from: textView, manager: textView.application.actionManager, property: path, value: target.text, to: source)
     }
 }
 
@@ -82,7 +84,7 @@ class TextFieldBinding: TextBinding<UITextField>, UITextFieldDelegate {
     }
     
     func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
-        source?.setValue(target.text, forKey:path)
+        ChangeValueAction.send("ChangeValue", from: textField, manager: textField.application.actionManager, property: path, value: target.text as Any, to: source)
     }
     
     override var boundText: String {
