@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2203744C223408AF004C8EC5 /* DateTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221F272821382C8E00DC2DC7 /* DateTransformer.swift */; };
 		220EF17C2214782C0022F4D9 /* LinkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220EF17A221478070022F4D9 /* LinkButton.swift */; };
 		220EF17E2214836F0022F4D9 /* StoryboardApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220EF17D2214836F0022F4D9 /* StoryboardApplication.swift */; };
 		22115AFE222D881000C3F170 /* ScannerActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22115AFD222D881000C3F170 /* ScannerActions.swift */; };
@@ -985,6 +986,7 @@
 				22F180A421C951FF00220D20 /* SettingsController.swift in Sources */,
 				2237D405220368520033924F /* ButtonExtensions.swift in Sources */,
 				22F1802121C8095B00220D20 /* SeriesRow.swift in Sources */,
+				2203744C223408AF004C8EC5 /* DateTransformer.swift in Sources */,
 				22DA6A4221E6525400ECF09A /* CDECloudKitFileSystem.m in Sources */,
 				22D1B233217E42950062F2CB /* TextBinding.swift in Sources */,
 				22A8318C2204B410006A0952 /* RootRow.swift in Sources */,

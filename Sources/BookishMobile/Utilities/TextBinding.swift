@@ -9,20 +9,23 @@ import BookishModel
 
 fileprivate var textBindingContext: Int = 0
 
+
 class TextBinding<T>: NSObject {
     var target: T
     weak var source: NSObject?
     let path: String
     let setIfNull: Bool
+    let transformer: ValueTransformer?
     
-    init(for target: T, to source: NSObject, path: String, setIfNull: Bool = false) {
+    init(for target: T, to source: NSObject, path: String, transformer: ValueTransformer? = nil, setIfNull: Bool = false) {
         self.target = target
         self.source = source
         self.path = path
+        self.transformer = transformer
         self.setIfNull = setIfNull
         super.init()
-        
-        if let value = source.value(forKey: path) as? String {
+
+        if let value = stringValue {
             boundText = value
         } else if setIfNull {
             boundText = ""
@@ -40,8 +43,16 @@ class TextBinding<T>: NSObject {
         }
     }
     
+    fileprivate var stringValue: String? {
+        var value = source?.value(forKey: path)
+        if let transformer = transformer {
+            value = transformer.transformedValue(value)
+        }
+        return value as? String
+    }
+        
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if let string = source?.value(forKey: path) as? String {
+        if let string = stringValue {
             boundText = string
         }
     }
@@ -54,8 +65,8 @@ class TextBinding<T>: NSObject {
 }
 
 class TextViewBinding: TextBinding<UITextView>, UITextViewDelegate {
-    override init(for target: UITextView, to source: NSObject, path: String, setIfNull: Bool = false) {
-        super.init(for: target, to: source, path: path, setIfNull: setIfNull)
+    override init(for target: UITextView, to source: NSObject, path: String, transformer: ValueTransformer? = nil, setIfNull: Bool = false) {
+        super.init(for: target, to: source, path: path, transformer: transformer, setIfNull: setIfNull)
         target.delegate = self
     }
     
@@ -74,8 +85,8 @@ class TextViewBinding: TextBinding<UITextView>, UITextViewDelegate {
 }
 
 class TextFieldBinding: TextBinding<UITextField>, UITextFieldDelegate {
-    override init(for target: UITextField, to source: NSObject, path: String, setIfNull: Bool = false) {
-        super.init(for: target, to: source, path: path, setIfNull: setIfNull)
+    override init(for target: UITextField, to source: NSObject, path: String, transformer: ValueTransformer? = nil, setIfNull: Bool = false) {
+        super.init(for: target, to: source, path: path, transformer: transformer, setIfNull: setIfNull)
         target.delegate = self
     }
 

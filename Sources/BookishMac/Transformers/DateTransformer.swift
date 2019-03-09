@@ -3,7 +3,7 @@
 //  All code (c) 2018 - present day, Elegant Chaos Limited.
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
-import Cocoa
+import Foundation
 
 class DateTransformer: ValueTransformer {
     let formatter: DateFormatter
