@@ -11,6 +11,44 @@ import Logger
 import BookishCore
 import CloudKit
 
+protocol ActionPackable {
+    var packed: Any { get }
+}
+
+extension String: ActionPackable {
+    var packed: Any { return self }
+}
+
+extension Dictionary: ActionPackable {
+    var packed: Any {
+        var valid: [Key:Any] = [:]
+        for (key,value) in self {
+            if let object = value as? ActionPackable {
+                valid[key] = object.packed
+            }
+        }
+        return valid
+    }
+}
+
+extension Array: ActionPackable {
+    var packed: Any {
+        var valid: [Any] = []
+        for value in self {
+            if let object = value as? ActionPackable {
+                valid.append(object.packed)
+            }
+        }
+        return valid
+    }
+}
+
+extension ModelObject: ActionPackable {
+    var packed: Any {
+        return self.uniqueIdentifier as! String
+    }
+}
+
 let applicationChannel = Logger("Application")
 
 @objc class PerformActionDummy: NSObject {
@@ -40,7 +78,7 @@ let applicationChannel = Logger("Application")
             resetState()
         }
     }
-
+    
     static var sharedInstance: Application {
         return NSApp.delegate as! Application
     }
@@ -66,17 +104,23 @@ let applicationChannel = Logger("Application")
             ToggleScannerAction(identifier: "ToggleScanner")
             ])
         
+        actionManager.registerNotification() { (stage, action) in
+            if stage == .willPerform {
+                self.journal(action: action)
+            }
+        }
+
         actionManager.installResponder()
     }
     
     fileprivate func setupTransformers() {
         ValueTransformer.setValueTransformer(AuthorsTransformer(), forName: AuthorsTransformer.name)
         ValueTransformer.setValueTransformer(AuthorSelectionTransformer(), forName: AuthorSelectionTransformer.name)
-
+        
         ValueTransformer.setValueTransformer(DateTransformer(timeStyle: .none), forName: NSValueTransformerName(rawValue: "DateToString"))
         ValueTransformer.setValueTransformer(DateTransformer(timeStyle: .short), forName: NSValueTransformerName(rawValue: "TimeToString"))
     }
-
+    
     fileprivate func setupWindow(for collection: SyncedCollection) {
         let viewModel = CollectionViewState(collection: collection)
         self.viewModel = viewModel
@@ -88,6 +132,16 @@ let applicationChannel = Logger("Application")
     
     fileprivate func setupCloudKit() {
         cloudManager.setup(name: "mac")
+    }
+    
+    fileprivate func journal(action: ActionContext) {
+        var valid: [String:Any] = [:]
+        for (key,value) in action.packed {
+            if let object = value as? ActionPackable {
+                valid[key] = object.packed
+            }
+        }
+        print("action performed \(valid)")
     }
 }
 
@@ -123,7 +177,7 @@ extension Application: NSApplicationDelegate {
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         applicationChannel.log("finished launching")
     }
-
+    
     func applicationWillTerminate(_ aNotification: Notification) {
         applicationChannel.debug("will terminate")
     }
@@ -155,7 +209,7 @@ extension Application: NSMenuItemValidation {
             
             watchForDeleteItemClosing(item: menuItem)
             return validation.enabled
-
+            
         default:
             return true
         }

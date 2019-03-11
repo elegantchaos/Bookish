@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2203744C223408AF004C8EC5 /* DateTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221F272821382C8E00DC2DC7 /* DateTransformer.swift */; };
+		2203744E22340B7D004C8EC5 /* AuthorSelectionTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228968452191EFA900B80A93 /* AuthorSelectionTransformer.swift */; };
 		220EF17C2214782C0022F4D9 /* LinkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220EF17A221478070022F4D9 /* LinkButton.swift */; };
 		220EF17E2214836F0022F4D9 /* StoryboardApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220EF17D2214836F0022F4D9 /* StoryboardApplication.swift */; };
 		22115AFE222D881000C3F170 /* ScannerActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22115AFD222D881000C3F170 /* ScannerActions.swift */; };
@@ -979,6 +980,7 @@
 			files = (
 				22D1B23B21807D230062F2CB /* BookRow.swift in Sources */,
 				220EF17C2214782C0022F4D9 /* LinkButton.swift in Sources */,
+				2203744E22340B7D004C8EC5 /* AuthorSelectionTransformer.swift in Sources */,
 				22429314212ADC4300E70510 /* Application.swift in Sources */,
 				22D1B22F217E0A3F0062F2CB /* PersonRow.swift in Sources */,
 				221ED512216B8EAB00594714 /* BookDetailRow.swift in Sources */,
