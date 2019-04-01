@@ -6,6 +6,6 @@
 import BookishModel
 import UIKit
 
-protocol DetailRow: UITableViewCell {
+protocol DetailRow: AnyObject {
     func setup(row: DetailItem, object: ModelObject)
 }

@@ -18,7 +18,8 @@ let applicationChannel = Logger("Application")
 class Application: StoryboardApplication {
     let actionManager = ActionManagerMobile()
     let imageCache = UIImageCache()
-    let cloud = CloudManager()
+    let lookupManager = LookupManager()
+    let cloudManager = CloudManager()
     let viewState = CollectionViewState()
     var collectionController: CollectionController!
     lazy var collection: SyncedCollection = setupInitialCollection()
@@ -31,7 +32,7 @@ class Application: StoryboardApplication {
     }
     
     func setupCollection(mode: CollectionContainer.PopulateMode = .defaultRoles, shouldSync: Bool = true) -> SyncedCollection {
-        let collection = SyncedCollection(identifier: cloud.collectionIdentifier, mode: mode, shouldSync: shouldSync)
+        let collection = SyncedCollection(identifier: cloudManager.collectionIdentifier, mode: mode, shouldSync: shouldSync)
         return collection
     }
     
@@ -41,10 +42,23 @@ class Application: StoryboardApplication {
         actionManager.installResponder()
     }
     
+    fileprivate func setupLookups() {
+        lookupManager.register(service: GoogleLookupService(name: "Google Books"))
+        lookupManager.register(service: ExistingCollectionLookupService(name: "Existing Collection"))
+    }
+
     func setupCloud() {
-        cloud.setup(name: "mobile")
+        cloudManager.setup(name: "mobile")
     }
     
+    fileprivate func journal(action: ActionContext) {
+        cloudManager.addJournalEntry(action.serializedDictionary)
+    }
+    
+    @IBAction func showJournal(_ sender: Any) {
+        print(cloudManager.allJournalEntries())
+    }
+
     class var sharedInstance: Application {
         return UIApplication.shared.delegate as! Application
     }
@@ -57,6 +71,7 @@ extension Application: UIApplicationDelegate {
         BookishModel.registerLocalizations()
         setupActions()
         setupCloud()
+        setupLookups()
         collection.sync()
         
         NotificationCenter.default.addObserver(forName: NSNotification.Name.CDEPersistentStoreEnsembleDidBeginActivity, object: nil, queue: OperationQueue.main) { (notification) in

@@ -11,43 +11,6 @@ import Logger
 import BookishCore
 import CloudKit
 
-protocol ActionPackable {
-    var packed: Any { get }
-}
-
-extension String: ActionPackable {
-    var packed: Any { return self }
-}
-
-extension Dictionary: ActionPackable {
-    var packed: Any {
-        var valid: [Key:Any] = [:]
-        for (key,value) in self {
-            if let object = value as? ActionPackable {
-                valid[key] = object.packed
-            }
-        }
-        return valid
-    }
-}
-
-extension Array: ActionPackable {
-    var packed: Any {
-        var valid: [Any] = []
-        for value in self {
-            if let object = value as? ActionPackable {
-                valid.append(object.packed)
-            }
-        }
-        return valid
-    }
-}
-
-extension ModelObject: ActionPackable {
-    var packed: Any {
-        return self.uniqueIdentifier as! String
-    }
-}
 
 let applicationChannel = Logger("Application")
 
@@ -135,13 +98,11 @@ let applicationChannel = Logger("Application")
     }
     
     fileprivate func journal(action: ActionContext) {
-        var valid: [String:Any] = [:]
-        for (key,value) in action.packed {
-            if let object = value as? ActionPackable {
-                valid[key] = object.packed
-            }
-        }
-        print("action performed \(valid)")
+        cloudManager.addJournalEntry(action.serializedDictionary)
+    }
+    
+    @IBAction func showJournal(_ sender: Any) {
+        print(cloudManager.allJournalEntries())
     }
 }
 

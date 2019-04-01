@@ -112,7 +112,7 @@ class DetailController: UIViewController, UITableViewDataSource, UITableViewDele
         guard let object = representedObject else { fatalError("should have object set") }
         if let info = provider?.info(section: indexPath.section, row: indexPath.row) {
             let identifier = info.kind
-            if let cell = tableView.dequeueReusableCell(withIdentifier: identifier) as? DetailRow {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: identifier) as? DetailRow & UITableViewCell {
                 cell.setup(row: info, object: object)
                 return cell
             }

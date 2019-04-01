@@ -3,7 +3,7 @@
 //  All code (c) 2018 - present day, Elegant Chaos Limited.
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
-import Cocoa
+import Foundation
 import BookishModel
 
 class AuthorsTransformer: ValueTransformer, CoreDataTransformer {

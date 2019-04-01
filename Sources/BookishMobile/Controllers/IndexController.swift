@@ -17,7 +17,7 @@ protocol EntityIndex {
 
 let indexViewChannel = Logger("IndexView")
 
-protocol DetailControllerP: UIViewController {
+protocol DetailControllerP: AnyObject {
     var representedObject: ModelObject { get set }
 }
 

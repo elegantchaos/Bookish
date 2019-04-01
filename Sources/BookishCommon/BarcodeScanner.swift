@@ -7,7 +7,7 @@ import Foundation
 import AVFoundation
 import Vision
 
-protocol BarcodeScannerDelegate: NSObject {
+protocol BarcodeScannerDelegate: AnyObject {
     func detected(barcode: String)
     func attach(layer: CALayer)
 }
