@@ -1,6 +1,6 @@
 [submodule "Dependencies/BookishModel"]
 	path = Dependencies/BookishModel
 	url = https://github.com/elegantchaos/BookishModel.git
-[submodule "Dependencies/Ensembles2"]
-	path = Dependencies/Ensembles2
-	url = git@github.com:samdeane/ensembles2.git
+[submodule "Dependencies/Ensembles"]
+	path = Dependencies/Ensembles
+	url = git@github.com:mentalfaculty/ensembles-next.git

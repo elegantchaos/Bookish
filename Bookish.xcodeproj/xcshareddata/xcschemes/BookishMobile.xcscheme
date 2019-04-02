@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1010"
+   LastUpgradeVersion = "1020"
    version = "1.7">
    <BuildAction
       parallelizeBuildables = "NO"
@@ -35,7 +35,7 @@
                BlueprintIdentifier = "E9D630191BFEB26300B60D60"
                BuildableName = "Ensembles.framework"
                BlueprintName = "Ensembles iOS Module"
-               ReferencedContainer = "container:Dependencies/Ensembles2/Source Code/Ensembles/Framework/Ensembles iOS.xcodeproj">
+               ReferencedContainer = "container:Dependencies/Ensembles/Framework/Ensembles iOS.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
