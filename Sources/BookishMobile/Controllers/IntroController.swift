@@ -21,6 +21,10 @@ class IntroController: UIViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
+        if let url = Bundle.main.url(forResource: "Introduction", withExtension: ".rtf"), let text = try? NSAttributedString(url: url, options: [:], documentAttributes: nil) {
+            disclaimerText.attributedText = text
+        }
+        
         showAlwaysSwitch.isOn = !UserDefaults.standard.bool(forKey: IntroController.OncePerVersionKey)
         super.viewWillAppear(animated)
     }

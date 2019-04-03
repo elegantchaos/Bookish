@@ -109,7 +109,7 @@
 		22E346012254DCEB0089F300 /* CDECloudKitFileSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E346002254DCEB0089F300 /* CDECloudKitFileSystem.m */; };
 		22E346022254DCEB0089F300 /* CDECloudKitFileSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E346002254DCEB0089F300 /* CDECloudKitFileSystem.m */; };
 		22E346042254DEAC0089F300 /* IntroController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E346032254DEAC0089F300 /* IntroController.swift */; };
-		22E346062254E5390089F300 /* Disclaimer.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 22E346052254E5390089F300 /* Disclaimer.rtf */; };
+		22E346062254E5390089F300 /* Introduction.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 22E346052254E5390089F300 /* Introduction.rtf */; };
 		22E346082254F6D60089F300 /* BundleExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E346072254F6D60089F300 /* BundleExtensions.swift */; };
 		22E47CE0216E5EB200E43DBF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22DD42502126D6DB0070C85A /* Assets.xcassets */; };
 		22F1801F21C8089100220D20 /* PublisherRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1801B21C8084200220D20 /* PublisherRow.swift */; };
@@ -312,7 +312,7 @@
 		22E345FF2254DCEB0089F300 /* CDECloudKitFileSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDECloudKitFileSystem.h; path = Dependencies/Ensembles/Framework/Extensions/CDECloudKitFileSystem.h; sourceTree = SOURCE_ROOT; };
 		22E346002254DCEB0089F300 /* CDECloudKitFileSystem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CDECloudKitFileSystem.m; path = Dependencies/Ensembles/Framework/Extensions/CDECloudKitFileSystem.m; sourceTree = SOURCE_ROOT; };
 		22E346032254DEAC0089F300 /* IntroController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroController.swift; sourceTree = "<group>"; };
-		22E346052254E5390089F300 /* Disclaimer.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = Disclaimer.rtf; sourceTree = "<group>"; };
+		22E346052254E5390089F300 /* Introduction.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = Introduction.rtf; sourceTree = "<group>"; };
 		22E346072254F6D60089F300 /* BundleExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleExtensions.swift; sourceTree = "<group>"; };
 		22F1801B21C8084200220D20 /* PublisherRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublisherRow.swift; sourceTree = "<group>"; };
 		22F1801D21C8084900220D20 /* SeriesRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeriesRow.swift; sourceTree = "<group>"; };
@@ -672,7 +672,7 @@
 		22F1804E21C9459300220D20 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				22E346052254E5390089F300 /* Disclaimer.rtf */,
+				22E346052254E5390089F300 /* Introduction.rtf */,
 				228968422191DDBF00B80A93 /* Bookish.entitlements */,
 				2242931C212ADC4300E70510 /* Main.storyboard */,
 				2211A914221599F1004B7589 /* Localizable.strings */,
@@ -900,7 +900,7 @@
 				22429323212ADC4400E70510 /* LaunchScreen.storyboard in Resources */,
 				2211A915221599F1004B7589 /* Localizable.strings in Resources */,
 				22429320212ADC4400E70510 /* Assets.xcassets in Resources */,
-				22E346062254E5390089F300 /* Disclaimer.rtf in Resources */,
+				22E346062254E5390089F300 /* Introduction.rtf in Resources */,
 				2242931E212ADC4300E70510 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

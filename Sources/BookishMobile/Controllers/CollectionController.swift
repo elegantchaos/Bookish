@@ -43,6 +43,7 @@ class CollectionController: UITableViewController {
 
         if let splitView = splitViewController {
             splitView.delegate = self
+            splitView.preferredDisplayMode = .allVisible
             indexNav = splitView.viewControllers.first as? UINavigationController
             detailNav = splitView.viewControllers.last as? UINavigationController
         }
@@ -80,11 +81,16 @@ class CollectionController: UITableViewController {
 }
 
 extension CollectionController: UISplitViewControllerDelegate {
+
     func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController: UIViewController, onto primaryViewController: UIViewController) -> Bool {
-        guard let nav = primaryViewController as? UINavigationController, let controller = nav.topViewController as? CollectionController else {
-            return true
-        }
+//        guard let nav = primaryViewController as? UINavigationController, let controller = nav.topViewController as? CollectionController else {
+//            return true
+//        }
+//
+//        return controller.collapseDetailViewController
         
-        return controller.collapseDetailViewController
+        let shouldSkipDefaultBehaviour = true
+        
+        return shouldSkipDefaultBehaviour
     }
 }

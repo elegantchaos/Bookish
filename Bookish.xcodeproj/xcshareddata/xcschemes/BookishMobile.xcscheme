@@ -148,6 +148,10 @@
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
+            argument = "-introOncePerVersion NO"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
             argument = "--sample-document"
             isEnabled = "YES">
          </CommandLineArgument>

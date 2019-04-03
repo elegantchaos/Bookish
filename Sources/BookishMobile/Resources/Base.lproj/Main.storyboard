@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="2I7-7n-d9F">
-    <device id="ipad11_0rounded" orientation="portrait">
+    <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -16,14 +16,14 @@
             <objects>
                 <viewController id="WzE-F1-Iat" customClass="SettingsController" customModule="Bookish" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="YrT-jZ-Avn">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="1194"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Bzv-8x-bww">
-                                <rect key="frame" x="20" y="94" width="280" height="169.5"/>
+                                <rect key="frame" x="20" y="107.99999999999999" width="335" height="169.66666666666663"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MgS-SD-2Dy">
-                                        <rect key="frame" x="86.5" y="0.0" width="107" height="24"/>
+                                        <rect key="frame" x="114" y="0.0" width="107" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="24" id="Cyb-A2-PN0"/>
                                         </constraints>
@@ -33,7 +33,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iwa-I9-Mim">
-                                        <rect key="frame" x="75.5" y="35.5" width="129" height="24"/>
+                                        <rect key="frame" x="103" y="35.666666666666657" width="129" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="24" id="MGq-z1-Jlv"/>
                                         </constraints>
@@ -43,7 +43,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FlW-Hb-22l">
-                                        <rect key="frame" x="64.5" y="71" width="151" height="24"/>
+                                        <rect key="frame" x="92" y="71" width="151" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="24" id="SyE-3S-T1M"/>
                                         </constraints>
@@ -53,7 +53,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lML-95-lSq">
-                                        <rect key="frame" x="76.5" y="106.5" width="127" height="24"/>
+                                        <rect key="frame" x="104" y="106.66666666666666" width="127" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="24" id="Tc3-P4-cs1"/>
                                         </constraints>
@@ -63,10 +63,10 @@
                                         </connections>
                                     </button>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="arJ-Jh-qkp">
-                                        <rect key="frame" x="39.5" y="138.5" width="201" height="31"/>
+                                        <rect key="frame" x="67" y="138.66666666666666" width="201" height="31"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show Debug Items" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KOr-hT-L52">
-                                                <rect key="frame" x="0.0" y="5.5" width="144" height="20.5"/>
+                                                <rect key="frame" x="0.0" y="5.3333333333333428" width="144" height="20.333333333333332"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -104,19 +104,19 @@
             <objects>
                 <tableViewController clearsSelectionOnViewWillAppear="NO" id="42u-r8-GRV" userLabel="Collection" customClass="CollectionController" customModule="Bookish" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="cVi-4X-PaA">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="1194"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="intro" rowHeight="80" id="w1M-bD-nZt" customClass="RootIntroRow" customModule="Bookish" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="320" height="80"/>
+                                <rect key="frame" x="0.0" y="28" width="375" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="w1M-bD-nZt" id="HLR-Ec-7eo">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="tap a category to browse your collection" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="nu0-7P-bja">
-                                            <rect key="frame" x="2" y="20" width="316" height="40"/>
+                                            <rect key="frame" x="2" y="20" width="371" height="40"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -131,14 +131,14 @@
                                 </tableViewCellContentView>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="item" rowHeight="80" id="Pug-G1-TFI" customClass="RootCategoryRow" customModule="Bookish" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="108" width="320" height="80"/>
+                                <rect key="frame" x="0.0" y="108" width="375" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Pug-G1-TFI" id="wC3-fk-jQu">
-                                    <rect key="frame" x="0.0" y="0.0" width="286" height="80"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="341" height="80"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QuK-Kh-VM4">
-                                            <rect key="frame" x="92" y="34" width="184" height="36"/>
+                                            <rect key="frame" x="92" y="34" width="239" height="36"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -190,11 +190,11 @@
             <objects>
                 <tableViewController title="Index" id="twP-4I-K8J" userLabel="Index" customClass="IndexController" customModule="Bookish" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="uFP-rn-Wga">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="1194"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <searchBar key="tableHeaderView" contentMode="redraw" searchBarStyle="prominent" id="ma7-hX-oF7">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="name"/>
                             <connections>
@@ -203,14 +203,14 @@
                         </searchBar>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="item" id="yp9-4S-v3c" customClass="IndexRow" customModule="Bookish" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="72" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="72" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="yp9-4S-v3c" id="NGT-s8-dIC">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NVU-d0-qj4">
-                                            <rect key="frame" x="20" y="4" width="280" height="35.5"/>
+                                            <rect key="frame" x="20" y="4" width="335" height="35.666666666666664"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" name="Bookish Index Text"/>
                                             <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -248,7 +248,7 @@
             <objects>
                 <navigationController id="LDw-Js-eN4" userLabel="Collection Navigation" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="5f0-xy-7fX">
-                        <rect key="frame" x="0.0" y="24" width="320" height="50"/>
+                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -278,96 +278,77 @@
             <objects>
                 <viewController id="OTD-EK-oba" customClass="IntroController" customModule="Bookish" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="SjE-9z-Kxb">
-                        <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="jdd-3M-l6b">
-                                <rect key="frame" x="0.0" y="24" width="834" height="1150"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Caveat Emptor" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6hE-ym-yAL">
+                                <rect key="frame" x="0.0" y="64" width="375" height="36"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="749" showsHorizontalScrollIndicator="NO" editable="NO" usesAttributedText="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ybJ-xu-ER5">
+                                <rect key="frame" x="20" y="108" width="335" height="566"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <attributedString key="attributedText">
+                                    <fragment>
+                                        <string key="content">Welcome to the Bookish alpha release.
+</string>
+                                        <attributes>
+                                            <font key="NSFont" size="16" name="SFProText-Regular"/>
+                                            <font key="NSOriginalFont" size="16" name="SFProText-Regular"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7DX-dF-3CI">
+                                <rect key="frame" x="20" y="694" width="335" height="33"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" title="Whatever. Get On With It!"/>
+                                <connections>
+                                    <action selector="dismissAction:" destination="OTD-EK-oba" eventType="primaryActionTriggered" id="ZdJ-xg-8EI"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="FHA-VO-Zzc">
+                                <rect key="frame" x="81.333333333333314" y="747" width="212.66666666666669" height="31"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Caveat Emptor" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6hE-ym-yAL">
-                                        <rect key="frame" x="360.5" y="0.0" width="113" height="20.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Show This Every Time" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GJ1-CA-Uid">
+                                        <rect key="frame" x="0.0" y="5.6666666666666288" width="159.66666666666666" height="19.666666666666668"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="751" ambiguous="YES" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ybJ-xu-ER5">
-                                        <rect key="frame" x="217" y="79.5" width="400" height="892"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <attributedString key="attributedText">
-                                            <fragment>
-                                                <mutableString key="content">Welcome to the Bookish alpha release.
-
-A small disclaimer, so that you know what you're letting yourself in for:
-
-This is an early release, and is in an unfinished state. The user interface in particular is distinctly unpolished. Watch out for splinters...
-
-You will probably encounter bugs, and you will most certainly encounter things that don't seem untuitive. You'll probably feel that there are essential features missing. You may have to use your imagination at times! 
-
-All this is to be expected right now, but I am interested in hearing about it. Please do let me know what doesn't work for you, or what you think I need to change or add. It might be on my list already, but it might not.
-
-At this stage </mutableString>
-                                                <attributes>
-                                                    <font key="NSFont" size="16" name="SFProText-Regular"/>
-                                                    <font key="NSOriginalFont" size="16" name="SFProText-Regular"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                </attributes>
-                                            </fragment>
-                                            <fragment content="I cannot guarantee that your data is safe">
-                                                <attributes>
-                                                    <font key="NSFont" size="16" name="SFProText-Bold"/>
-                                                    <font key="NSOriginalFont" size="16" name="SFProText-Bold"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                </attributes>
-                                            </fragment>
-                                            <fragment content=". Please don't spend days entering your entire collection">
-                                                <attributes>
-                                                    <font key="NSFont" size="16" name="SFProText-Regular"/>
-                                                    <font key="NSOriginalFont" size="16" name="SFProText-Regular"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                </attributes>
-                                            </fragment>
-                                            <fragment>
-                                                <string key="content">! I do have some safety features in place though to try to prevent data loss, though, so do let me know if something bad happens!
-
-The Mac version of the application features import from Delicious Library. If you are already a user of that application, this is a good way to get some data into Bookish to play around with.</string>
-                                                <attributes>
-                                                    <font key="NSFont" size="16" name="SFProText-Regular"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                </attributes>
-                                            </fragment>
-                                        </attributedString>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                    </textView>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7DX-dF-3CI">
-                                        <rect key="frame" x="384" y="1030" width="66" height="30"/>
-                                        <state key="normal" title="Whatever"/>
-                                        <connections>
-                                            <action selector="dismissAction:" destination="OTD-EK-oba" eventType="primaryActionTriggered" id="ZdJ-xg-8EI"/>
-                                        </connections>
-                                    </button>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="UBs-5g-aRi">
-                                        <rect key="frame" x="301" y="1119" width="232" height="31"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Remind Me Every Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GJ1-CA-Uid">
-                                                <rect key="frame" x="0.0" y="0.0" width="175" height="31"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HE4-YX-L4t">
-                                                <rect key="frame" x="183" y="0.0" width="51" height="31"/>
-                                            </switch>
-                                        </subviews>
-                                    </stackView>
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HE4-YX-L4t">
+                                        <rect key="frame" x="163.66666666666669" y="0.0" width="51" height="31"/>
+                                    </switch>
                                 </subviews>
-                            </stackView>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="HE4-YX-L4t" secondAttribute="trailing" id="3kM-u3-P3i"/>
+                                    <constraint firstItem="HE4-YX-L4t" firstAttribute="top" secondItem="FHA-VO-Zzc" secondAttribute="top" id="BjT-V6-6QH"/>
+                                    <constraint firstAttribute="bottom" secondItem="HE4-YX-L4t" secondAttribute="bottom" id="Ewk-9K-x7x"/>
+                                    <constraint firstItem="GJ1-CA-Uid" firstAttribute="leading" secondItem="FHA-VO-Zzc" secondAttribute="leading" id="bIQ-47-5rq"/>
+                                    <constraint firstItem="HE4-YX-L4t" firstAttribute="centerY" secondItem="GJ1-CA-Uid" secondAttribute="centerY" id="joD-VG-BAM"/>
+                                    <constraint firstItem="HE4-YX-L4t" firstAttribute="leading" secondItem="GJ1-CA-Uid" secondAttribute="trailing" constant="4" id="pcv-s7-N9z"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="jdd-3M-l6b" firstAttribute="top" secondItem="ucj-Q9-403" secondAttribute="top" id="4qU-x1-a5c"/>
-                            <constraint firstItem="jdd-3M-l6b" firstAttribute="leading" secondItem="ucj-Q9-403" secondAttribute="leading" id="J4C-1x-VVe"/>
-                            <constraint firstItem="ucj-Q9-403" firstAttribute="bottom" secondItem="jdd-3M-l6b" secondAttribute="bottom" id="LkH-So-ubV"/>
-                            <constraint firstItem="ucj-Q9-403" firstAttribute="trailing" secondItem="jdd-3M-l6b" secondAttribute="trailing" id="QUh-HC-gOU"/>
+                            <constraint firstItem="FHA-VO-Zzc" firstAttribute="centerX" secondItem="ucj-Q9-403" secondAttribute="centerX" id="4qZ-5t-z16"/>
+                            <constraint firstItem="7DX-dF-3CI" firstAttribute="leading" secondItem="ucj-Q9-403" secondAttribute="leading" constant="20" id="FV1-t1-Q74"/>
+                            <constraint firstItem="6hE-ym-yAL" firstAttribute="top" secondItem="ucj-Q9-403" secondAttribute="top" constant="20" id="O2D-W8-sUX"/>
+                            <constraint firstItem="7DX-dF-3CI" firstAttribute="top" secondItem="ybJ-xu-ER5" secondAttribute="bottom" constant="20" id="Tsw-CK-EHf"/>
+                            <constraint firstItem="FHA-VO-Zzc" firstAttribute="top" secondItem="7DX-dF-3CI" secondAttribute="bottom" constant="20" id="V7l-j2-0F0"/>
+                            <constraint firstItem="ucj-Q9-403" firstAttribute="bottom" secondItem="FHA-VO-Zzc" secondAttribute="bottom" id="aPH-xM-lk6"/>
+                            <constraint firstItem="ucj-Q9-403" firstAttribute="trailing" secondItem="7DX-dF-3CI" secondAttribute="trailing" constant="20" id="b8Q-SE-4dC"/>
+                            <constraint firstItem="ybJ-xu-ER5" firstAttribute="leading" secondItem="ucj-Q9-403" secondAttribute="leading" constant="20" id="buL-73-Cvn"/>
+                            <constraint firstItem="6hE-ym-yAL" firstAttribute="leading" secondItem="ucj-Q9-403" secondAttribute="leading" id="f9o-cs-ou7"/>
+                            <constraint firstItem="ucj-Q9-403" firstAttribute="trailing" secondItem="ybJ-xu-ER5" secondAttribute="trailing" constant="20" id="kDH-cT-wOF"/>
+                            <constraint firstItem="ybJ-xu-ER5" firstAttribute="top" secondItem="6hE-ym-yAL" secondAttribute="bottom" constant="8" symbolic="YES" id="kxg-nc-mRV"/>
+                            <constraint firstItem="ucj-Q9-403" firstAttribute="trailing" secondItem="6hE-ym-yAL" secondAttribute="trailing" id="sCN-pJ-Hkc"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ucj-Q9-403"/>
                     </view>
@@ -378,27 +359,27 @@ The Mac version of the application features import from Delicious Library. If yo
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RV2-Zs-U5B" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="624" y="2373"/>
+            <point key="canvasLocation" x="623.74100719424462" y="2372.8643216080404"/>
         </scene>
         <!--Detail-->
         <scene sceneID="DvW-JO-kN2">
             <objects>
                 <viewController title="BooksDetail" id="nAr-WG-Ppx" userLabel="Detail" customClass="DetailController" customModule="Bookish" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="JVN-AU-Gli">
-                        <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="OIG-qG-exT">
-                                <rect key="frame" x="72" y="87" width="758" height="46"/>
+                                <rect key="frame" x="72" y="101" width="299" height="46"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="enter title" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oty-fJ-Mqu">
-                                        <rect key="frame" x="0.0" y="0.0" width="758" height="21"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="299" height="21"/>
                                         <color key="textColor" name="Bookish Detail Text"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="enter subtitle" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WhK-lb-mv0">
-                                        <rect key="frame" x="0.0" y="25" width="758" height="21"/>
+                                        <rect key="frame" x="0.0" y="25" width="299" height="21"/>
                                         <color key="textColor" name="Bookish Detail Text"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -406,14 +387,14 @@ The Mac version of the application features import from Delicious Library. If yo
                                 </subviews>
                             </stackView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="aFB-mG-XXZ" userLabel="Detail Table">
-                                <rect key="frame" x="0.0" y="146" width="834" height="940"/>
+                                <rect key="frame" x="0.0" y="160" width="375" height="531"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="text" id="SZe-Ho-ZMK" userLabel="text" customClass="BookDetailRow" customModule="Bookish" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="834" height="44"/>
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="SZe-Ho-ZMK" id="19q-be-aHk">
-                                            <rect key="frame" x="0.0" y="0.0" width="834" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="detail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zeG-ZB-an2">
@@ -423,14 +404,14 @@ The Mac version of the application features import from Delicious Library. If yo
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="751" scrollEnabled="NO" keyboardDismissMode="interactive" editable="NO" text="book detail placeholder" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="vlr-c5-uce" userLabel="Placeholder">
-                                                    <rect key="frame" x="58" y="4" width="772" height="35.5"/>
+                                                    <rect key="frame" x="58" y="4" width="662" height="35.666666666666664"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <color key="textColor" name="Bookish Label Text"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences" enablesReturnKeyAutomatically="YES"/>
                                                 </textView>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="751" scrollEnabled="NO" keyboardDismissMode="interactive" text="book detail text" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="BSu-ww-5eS">
-                                                    <rect key="frame" x="58" y="4" width="772" height="35.5"/>
+                                                    <rect key="frame" x="58" y="4" width="662" height="35.666666666666664"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <color key="textColor" name="Bookish Detail Text"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -458,10 +439,10 @@ The Mac version of the application features import from Delicious Library. If yo
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="person" id="Cvf-PC-4Y6" customClass="PersonRow" customModule="Bookish" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="72" width="834" height="44"/>
+                                        <rect key="frame" x="0.0" y="72" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Cvf-PC-4Y6" id="dPe-CT-ga3">
-                                            <rect key="frame" x="0.0" y="0.0" width="834" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="role" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yVM-R2-Pwb" userLabel="Role">
@@ -471,7 +452,7 @@ The Mac version of the application features import from Delicious Library. If yo
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ekw-of-MC3" userLabel="Person" customClass="LinkButton" customModule="Bookish" customModuleProvider="target">
-                                                    <rect key="frame" x="49" y="4" width="781" height="35.5"/>
+                                                    <rect key="frame" x="49" y="4" width="671" height="35.666666666666664"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <state key="normal" title="Some Person">
                                                         <color key="titleColor" name="Bookish Detail Text"/>
@@ -494,7 +475,7 @@ The Mac version of the application features import from Delicious Library. If yo
                                                     </connections>
                                                 </button>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="add person (or choose from list)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fl3-Jd-qn1" userLabel="Edit Person">
-                                                    <rect key="frame" x="49" y="13.5" width="745" height="17"/>
+                                                    <rect key="frame" x="49" y="13.333333333333336" width="635" height="17"/>
                                                     <color key="textColor" name="Bookish Detail Text"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
@@ -506,7 +487,7 @@ The Mac version of the application features import from Delicious Library. If yo
                                                     </connections>
                                                 </textField>
                                                 <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9BK-D2-Ln3">
-                                                    <rect key="frame" x="798" y="11" width="32" height="22"/>
+                                                    <rect key="frame" x="688" y="11" width="32" height="22"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="32" id="TuO-OO-6gZ"/>
                                                     </constraints>
@@ -545,20 +526,20 @@ The Mac version of the application features import from Delicious Library. If yo
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="publisher" id="bZc-SB-x2g" customClass="PublisherRow" customModule="Bookish" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="116" width="834" height="44"/>
+                                        <rect key="frame" x="0.0" y="116" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bZc-SB-x2g" id="fj5-0p-LUL">
-                                            <rect key="frame" x="0.0" y="0.0" width="834" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="publisher" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gvT-P4-bqc">
-                                                    <rect key="frame" x="15" y="15" width="65.5" height="14"/>
+                                                    <rect key="frame" x="8" y="12.000000000000002" width="65.666666666666671" height="19.666666666666671"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                                     <color key="textColor" name="Bookish Label Text"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MGE-Im-Xl3" customClass="LinkButton" customModule="Bookish" customModuleProvider="target">
-                                                    <rect key="frame" x="84.5" y="4" width="745.5" height="35.5"/>
+                                                    <rect key="frame" x="77.666666666666686" y="4" width="642.33333333333326" height="35.666666666666664"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <state key="normal" title="Some Publisher">
                                                         <color key="titleColor" name="Bookish Detail Text"/>
@@ -588,20 +569,20 @@ The Mac version of the application features import from Delicious Library. If yo
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="series" id="nVO-oK-1Tu" customClass="SeriesRow" customModule="Bookish" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="160" width="834" height="44"/>
+                                        <rect key="frame" x="0.0" y="160" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="nVO-oK-1Tu" id="i2d-CB-cQo">
-                                            <rect key="frame" x="0.0" y="0.0" width="834" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="series" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KG3-Ya-Qij">
-                                                    <rect key="frame" x="15" y="15" width="42" height="14"/>
+                                                    <rect key="frame" x="8" y="12.000000000000002" width="42" height="19.666666666666671"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                                     <color key="textColor" name="Bookish Label Text"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Taj-wV-1gx" customClass="LinkButton" customModule="Bookish" customModuleProvider="target">
-                                                    <rect key="frame" x="61" y="4" width="769" height="35.5"/>
+                                                    <rect key="frame" x="54" y="4" width="666" height="35.666666666666664"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <state key="normal" title="Some Series">
                                                         <color key="titleColor" name="Bookish Detail Text"/>
@@ -631,20 +612,20 @@ The Mac version of the application features import from Delicious Library. If yo
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="date" id="lEu-Mv-HXH" customClass="DateRow" customModule="Bookish" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="204" width="834" height="44"/>
+                                        <rect key="frame" x="0.0" y="204" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="lEu-Mv-HXH" id="j31-jT-po7">
-                                            <rect key="frame" x="0.0" y="0.0" width="834" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pMd-cN-nzQ">
-                                                    <rect key="frame" x="15" y="15" width="31" height="14"/>
+                                                    <rect key="frame" x="8" y="12.000000000000002" width="31" height="19.666666666666671"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                                     <color key="textColor" name="Bookish Label Text"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="751" text="12th November, 1969" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="O0q-kQ-lou">
-                                                    <rect key="frame" x="50" y="4" width="780" height="35.5"/>
+                                                    <rect key="frame" x="43" y="4" width="677" height="35.666666666666664"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <color key="textColor" name="Bookish Detail Text"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -667,20 +648,20 @@ The Mac version of the application features import from Delicious Library. If yo
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="time" id="YUp-Qo-fNx" customClass="DateRow" customModule="Bookish" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="248" width="834" height="44"/>
+                                        <rect key="frame" x="0.0" y="248" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="YUp-Qo-fNx" id="aky-1D-thN">
-                                            <rect key="frame" x="0.0" y="0.0" width="834" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="odI-ai-Vg8">
-                                                    <rect key="frame" x="15" y="15" width="31" height="14"/>
+                                                    <rect key="frame" x="8" y="12.000000000000002" width="31" height="19.666666666666671"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                                     <color key="textColor" name="Bookish Label Text"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="751" text="12th November, 1969" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="jut-bJ-0e0">
-                                                    <rect key="frame" x="50" y="4" width="780" height="35.5"/>
+                                                    <rect key="frame" x="43" y="4" width="677" height="35.666666666666664"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <color key="textColor" name="Bookish Detail Text"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -703,14 +684,14 @@ The Mac version of the application features import from Delicious Library. If yo
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="book" id="Nfz-Hj-uMC" customClass="BookRow" customModule="Bookish" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="292" width="834" height="44"/>
+                                        <rect key="frame" x="0.0" y="292" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Nfz-Hj-uMC" id="YIe-Gk-swm">
-                                            <rect key="frame" x="0.0" y="0.0" width="834" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qme-y3-tce" customClass="LinkButton" customModule="Bookish" customModuleProvider="target">
-                                                    <rect key="frame" x="20" y="4" width="810" height="35.5"/>
+                                                    <rect key="frame" x="20" y="4" width="700" height="35.666666666666664"/>
                                                     <state key="normal" title="Button">
                                                         <color key="titleColor" name="Bookish Detail Text"/>
                                                     </state>
@@ -735,20 +716,20 @@ The Mac version of the application features import from Delicious Library. If yo
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="editableDate" id="iRj-RX-yKX" customClass="DateRow" customModule="Bookish" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="336" width="834" height="44"/>
+                                        <rect key="frame" x="0.0" y="336" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="iRj-RX-yKX" id="024-Io-AH9">
-                                            <rect key="frame" x="0.0" y="0.0" width="834" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oE8-My-J7G">
-                                                    <rect key="frame" x="15" y="15" width="31" height="14"/>
+                                                    <rect key="frame" x="8" y="12.000000000000002" width="31" height="19.666666666666671"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                                     <color key="textColor" name="Bookish Label Text"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="751" text="12th November, 1969" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Igm-FP-WEA">
-                                                    <rect key="frame" x="50" y="4" width="780" height="35.5"/>
+                                                    <rect key="frame" x="43" y="4" width="677" height="35.666666666666664"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <color key="textColor" name="Bookish Detail Text"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -771,20 +752,20 @@ The Mac version of the application features import from Delicious Library. If yo
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="editableDimensions" id="Dgp-db-ISo" customClass="DateRow" customModule="Bookish" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="380" width="834" height="44"/>
+                                        <rect key="frame" x="0.0" y="380" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Dgp-db-ISo" id="2Jk-9O-lML">
-                                            <rect key="frame" x="0.0" y="0.0" width="834" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qce-iP-2CL">
-                                                    <rect key="frame" x="15" y="15" width="31" height="14"/>
+                                                    <rect key="frame" x="8" y="12.000000000000002" width="31" height="19.666666666666671"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                                     <color key="textColor" name="Bookish Label Text"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="751" text="12th November, 1969" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="GWf-1K-OsY">
-                                                    <rect key="frame" x="50" y="4" width="780" height="35.5"/>
+                                                    <rect key="frame" x="43" y="4" width="677" height="35.666666666666664"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <color key="textColor" name="Bookish Detail Text"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -813,14 +794,14 @@ The Mac version of the application features import from Delicious Library. If yo
                                 </connections>
                             </tableView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5dl-lh-HqV" userLabel="Image">
-                                <rect key="frame" x="4" y="78" width="64" height="64"/>
+                                <rect key="frame" x="4" y="92" width="64" height="64"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="64" id="0H7-wq-wLn"/>
                                     <constraint firstAttribute="width" constant="64" id="HYW-yd-srL"/>
                                 </constraints>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="19" translatesAutoresizingMaskIntoConstraints="NO" id="ZWF-Kz-IF9">
-                                <rect key="frame" x="4" y="1090" width="826" height="30"/>
+                                <rect key="frame" x="4" y="695" width="367" height="30"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rwf-BZ-iOh">
                                         <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
@@ -833,7 +814,7 @@ The Mac version of the application features import from Delicious Library. If yo
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oeh-SH-0fM">
-                                        <rect key="frame" x="791" y="0.0" width="35" height="30"/>
+                                        <rect key="frame" x="332" y="0.0" width="35" height="30"/>
                                         <state key="normal" title="Scan"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="string" keyPath="actionID" value="ScanBooks"/>
@@ -900,14 +881,14 @@ The Mac version of the application features import from Delicious Library. If yo
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="tpW-5n-rfC" userLabel="Image">
-                                <rect key="frame" x="20" y="44" width="560" height="256"/>
+                                <rect key="frame" x="20" y="64" width="560" height="256"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="256" id="fXw-qR-PiX"/>
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="273" translatesAutoresizingMaskIntoConstraints="NO" id="EqM-Q8-DiZ" userLabel="Label">
-                                <rect key="frame" x="20" y="320" width="560" height="25"/>
+                                <rect key="frame" x="20" y="340" width="560" height="25"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="suq-2m-LpO">
                                         <rect key="frame" x="0.0" y="0.0" width="267" height="25"/>
@@ -924,27 +905,27 @@ The Mac version of the application features import from Delicious Library. If yo
                                 </subviews>
                             </stackView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="56i-x1-GO0">
-                                <rect key="frame" x="20" y="365" width="560" height="345"/>
+                                <rect key="frame" x="20" y="385" width="560" height="311"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="candidate" id="jb9-CD-17D" customClass="CandidateRow" customModule="Bookish" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="560" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jb9-CD-17D" id="WRt-wS-ZWe">
-                                            <rect key="frame" x="0.0" y="0.0" width="560" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="560" height="43.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" axis="vertical" distribution="equalSpacing" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="qW5-8G-1UK">
-                                                    <rect key="frame" x="40" y="4" width="516" height="35.5"/>
+                                                    <rect key="frame" x="40" y="4" width="428" height="35.666666666666664"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wxq-v3-0Zu">
-                                                            <rect key="frame" x="0.0" y="0.0" width="516" height="20.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="428" height="20.333333333333332"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FA8-cP-qC4">
-                                                            <rect key="frame" x="0.0" y="28.5" width="516" height="7"/>
+                                                            <rect key="frame" x="0.0" y="28.333333333333332" width="428" height="7.3333333333333321"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -981,7 +962,7 @@ The Mac version of the application features import from Delicious Library. If yo
                                 </connections>
                             </tableView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="55" translatesAutoresizingMaskIntoConstraints="NO" id="fcW-2t-VaW" userLabel="Buttons">
-                                <rect key="frame" x="20" y="730" width="560" height="30"/>
+                                <rect key="frame" x="20" y="716" width="560" height="30"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C3B-Am-MaJ">
                                         <rect key="frame" x="0.0" y="0.0" width="150" height="30"/>
@@ -1041,7 +1022,7 @@ The Mac version of the application features import from Delicious Library. If yo
             <objects>
                 <navigationController id="eOD-1j-hXg" userLabel="Detail Navigation" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="f8h-3s-03z">
-                        <rect key="frame" x="0.0" y="24" width="834" height="50"/>
+                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -1057,15 +1038,15 @@ The Mac version of the application features import from Delicious Library. If yo
             <objects>
                 <tableViewController id="yrX-21-Y9m" customClass="ChoosePersonController" customModule="Bookish" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="dc3-qC-B8a">
-                        <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="item" id="8mo-1K-HQQ">
-                                <rect key="frame" x="0.0" y="28" width="834" height="44"/>
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8mo-1K-HQQ" id="NO9-fb-7Wb">
-                                    <rect key="frame" x="0.0" y="0.0" width="834" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -1085,15 +1066,15 @@ The Mac version of the application features import from Delicious Library. If yo
             <objects>
                 <tableViewController modalPresentationStyle="currentContext" id="vw2-zK-dZb" customClass="ChooseRoleController" customModule="Bookish" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Scj-Iv-aWV">
-                        <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="item" id="hS3-2z-ED4">
-                                <rect key="frame" x="0.0" y="28" width="834" height="44"/>
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="hS3-2z-ED4" id="TrS-F8-ehu">
-                                    <rect key="frame" x="0.0" y="0.0" width="834" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -1111,7 +1092,7 @@ The Mac version of the application features import from Delicious Library. If yo
         </scene>
     </scenes>
     <resources>
-        <image name="Book" width="32" height="32"/>
+        <image name="Book" width="16" height="16"/>
         <image name="Choose" width="12" height="12"/>
         <image name="Settings" width="32" height="32"/>
         <namedColor name="Bookish Detail Text">
