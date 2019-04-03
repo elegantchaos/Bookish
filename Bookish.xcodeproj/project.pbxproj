@@ -95,8 +95,6 @@
 		22D39E5E2146D9F100282467 /* ValidatingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D39E5D2146D9F100282467 /* ValidatingButton.swift */; };
 		22D39E602147D4A100282467 /* TestAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D39E5F2147D4A100282467 /* TestAction.swift */; };
 		22D39E6D214816C400282467 /* UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D39E6B2148167500282467 /* UITests.swift */; };
-		22DA6A4121E6525400ECF09A /* CDECloudKitFileSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = 22DA6A4021E6525400ECF09A /* CDECloudKitFileSystem.m */; };
-		22DA6A4221E6525400ECF09A /* CDECloudKitFileSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = 22DA6A4021E6525400ECF09A /* CDECloudKitFileSystem.m */; };
 		22DA6A4721E653F400ECF09A /* SyncedCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DA6A4621E653F400ECF09A /* SyncedCollection.swift */; };
 		22DA6A4821E653F400ECF09A /* SyncedCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DA6A4621E653F400ECF09A /* SyncedCollection.swift */; };
 		22DA6A8C21E9098300ECF09A /* CollectionDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DD424B2126D6DA0070C85A /* CollectionDocument.swift */; };
@@ -108,6 +106,11 @@
 		22DD42602126D6DB0070C85A /* BookishTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DD425F2126D6DB0070C85A /* BookishTests.swift */; };
 		22DD426B2126D6DB0070C85A /* BookishUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DD426A2126D6DB0070C85A /* BookishUITests.swift */; };
 		22DE6AE72188A8DC0078D489 /* WhiteSearchFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DE6AE62188A8DC0078D489 /* WhiteSearchFieldCell.swift */; };
+		22E346012254DCEB0089F300 /* CDECloudKitFileSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E346002254DCEB0089F300 /* CDECloudKitFileSystem.m */; };
+		22E346022254DCEB0089F300 /* CDECloudKitFileSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E346002254DCEB0089F300 /* CDECloudKitFileSystem.m */; };
+		22E346042254DEAC0089F300 /* IntroController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E346032254DEAC0089F300 /* IntroController.swift */; };
+		22E346062254E5390089F300 /* Disclaimer.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 22E346052254E5390089F300 /* Disclaimer.rtf */; };
+		22E346082254F6D60089F300 /* BundleExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E346072254F6D60089F300 /* BundleExtensions.swift */; };
 		22E47CE0216E5EB200E43DBF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22DD42502126D6DB0070C85A /* Assets.xcassets */; };
 		22F1801F21C8089100220D20 /* PublisherRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1801B21C8084200220D20 /* PublisherRow.swift */; };
 		22F1802121C8095B00220D20 /* SeriesRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1801D21C8084900220D20 /* SeriesRow.swift */; };
@@ -283,8 +286,6 @@
 		22D39E5D2146D9F100282467 /* ValidatingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatingButton.swift; sourceTree = "<group>"; };
 		22D39E5F2147D4A100282467 /* TestAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestAction.swift; sourceTree = "<group>"; };
 		22D39E6B2148167500282467 /* UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITests.swift; sourceTree = "<group>"; };
-		22DA6A3F21E6525300ECF09A /* CDECloudKitFileSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDECloudKitFileSystem.h; path = "Dependencies/Ensembles2/Source Code/Ensembles/Framework/Extensions/CDECloudKitFileSystem.h"; sourceTree = SOURCE_ROOT; };
-		22DA6A4021E6525400ECF09A /* CDECloudKitFileSystem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CDECloudKitFileSystem.m; path = "Dependencies/Ensembles2/Source Code/Ensembles/Framework/Extensions/CDECloudKitFileSystem.m"; sourceTree = SOURCE_ROOT; };
 		22DA6A4521E6531100ECF09A /* BookishBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookishBridge.h; sourceTree = "<group>"; };
 		22DA6A4621E653F400ECF09A /* SyncedCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncedCollection.swift; sourceTree = "<group>"; };
 		22DA6A5321E8C76700ECF09A /* Notes.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = Notes.md; path = Extras/Notes.md; sourceTree = "<group>"; };
@@ -308,6 +309,11 @@
 		22DE6AE421877E740078D489 /* Assets.xcfilelist */ = {isa = PBXFileReference; lastKnownFileType = text.xcfilelist; path = Assets.xcfilelist; sourceTree = "<group>"; };
 		22DE6AE521877FFB0078D489 /* Assets.xcfilelist */ = {isa = PBXFileReference; lastKnownFileType = text.xcfilelist; path = Assets.xcfilelist; sourceTree = "<group>"; };
 		22DE6AE62188A8DC0078D489 /* WhiteSearchFieldCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiteSearchFieldCell.swift; sourceTree = "<group>"; };
+		22E345FF2254DCEB0089F300 /* CDECloudKitFileSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDECloudKitFileSystem.h; path = Dependencies/Ensembles/Framework/Extensions/CDECloudKitFileSystem.h; sourceTree = SOURCE_ROOT; };
+		22E346002254DCEB0089F300 /* CDECloudKitFileSystem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CDECloudKitFileSystem.m; path = Dependencies/Ensembles/Framework/Extensions/CDECloudKitFileSystem.m; sourceTree = SOURCE_ROOT; };
+		22E346032254DEAC0089F300 /* IntroController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroController.swift; sourceTree = "<group>"; };
+		22E346052254E5390089F300 /* Disclaimer.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = Disclaimer.rtf; sourceTree = "<group>"; };
+		22E346072254F6D60089F300 /* BundleExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleExtensions.swift; sourceTree = "<group>"; };
 		22F1801B21C8084200220D20 /* PublisherRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublisherRow.swift; sourceTree = "<group>"; };
 		22F1801D21C8084900220D20 /* SeriesRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeriesRow.swift; sourceTree = "<group>"; };
 		22F1803021C82D8E00220D20 /* DetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailController.swift; sourceTree = "<group>"; };
@@ -422,6 +428,7 @@
 				22A831892204AAB2006A0952 /* CollectionController.swift */,
 				22F1803021C82D8E00220D20 /* DetailController.swift */,
 				22A8318D2204B68B006A0952 /* IndexController.swift */,
+				22E346032254DEAC0089F300 /* IntroController.swift */,
 				22F180A321C951FF00220D20 /* SettingsController.swift */,
 				22BE791F22525D7A002EADD7 /* ScannerController.swift */,
 			);
@@ -516,6 +523,7 @@
 				22D1B232217E42950062F2CB /* TextBinding.swift */,
 				22B1DB402178D8A50067E795 /* ViewExtensions.swift */,
 				2237D404220368520033924F /* ButtonExtensions.swift */,
+				22E346072254F6D60089F300 /* BundleExtensions.swift */,
 				220EF17A221478070022F4D9 /* LinkButton.swift */,
 				220EF17D2214836F0022F4D9 /* StoryboardApplication.swift */,
 			);
@@ -584,6 +592,8 @@
 		22DA6A4421E6531100ECF09A /* BookishCommon */ = {
 			isa = PBXGroup;
 			children = (
+				22E345FF2254DCEB0089F300 /* CDECloudKitFileSystem.h */,
+				22E346002254DCEB0089F300 /* CDECloudKitFileSystem.m */,
 				22DA6A4521E6531100ECF09A /* BookishBridge.h */,
 				22DA6A4621E653F400ECF09A /* SyncedCollection.swift */,
 				22115AFF222D97C300C3F170 /* BarcodeScanner.swift */,
@@ -625,8 +635,6 @@
 				22DA6A4421E6531100ECF09A /* BookishCommon */,
 				22429344212ADC8B00E70510 /* BookishMac */,
 				22429312212ADC4300E70510 /* BookishMobile */,
-				22DA6A3F21E6525300ECF09A /* CDECloudKitFileSystem.h */,
-				22DA6A4021E6525400ECF09A /* CDECloudKitFileSystem.m */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -664,6 +672,7 @@
 		22F1804E21C9459300220D20 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				22E346052254E5390089F300 /* Disclaimer.rtf */,
 				228968422191DDBF00B80A93 /* Bookish.entitlements */,
 				2242931C212ADC4300E70510 /* Main.storyboard */,
 				2211A914221599F1004B7589 /* Localizable.strings */,
@@ -891,6 +900,7 @@
 				22429323212ADC4400E70510 /* LaunchScreen.storyboard in Resources */,
 				2211A915221599F1004B7589 /* Localizable.strings in Resources */,
 				22429320212ADC4400E70510 /* Assets.xcassets in Resources */,
+				22E346062254E5390089F300 /* Disclaimer.rtf in Resources */,
 				2242931E212ADC4300E70510 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -993,13 +1003,13 @@
 				2203744E22340B7D004C8EC5 /* AuthorSelectionTransformer.swift in Sources */,
 				22429314212ADC4300E70510 /* Application.swift in Sources */,
 				22D1B22F217E0A3F0062F2CB /* PersonRow.swift in Sources */,
+				22E346042254DEAC0089F300 /* IntroController.swift in Sources */,
 				221ED512216B8EAB00594714 /* BookDetailRow.swift in Sources */,
 				22F1801F21C8089100220D20 /* PublisherRow.swift in Sources */,
 				22F180A421C951FF00220D20 /* SettingsController.swift in Sources */,
 				2237D405220368520033924F /* ButtonExtensions.swift in Sources */,
 				22F1802121C8095B00220D20 /* SeriesRow.swift in Sources */,
 				2203744C223408AF004C8EC5 /* DateTransformer.swift in Sources */,
-				22DA6A4221E6525400ECF09A /* CDECloudKitFileSystem.m in Sources */,
 				22D1B233217E42950062F2CB /* TextBinding.swift in Sources */,
 				22A8318C2204B410006A0952 /* RootRow.swift in Sources */,
 				22BE792122525E79002EADD7 /* BarcodeScanner.swift in Sources */,
@@ -1012,9 +1022,11 @@
 				22BE792022525D7A002EADD7 /* ScannerController.swift in Sources */,
 				2237D28322020C3B0033924F /* ChoosePersonController.swift in Sources */,
 				22F1803121C82D8E00220D20 /* DetailController.swift in Sources */,
+				22E346082254F6D60089F300 /* BundleExtensions.swift in Sources */,
 				22DA6A4821E653F400ECF09A /* SyncedCollection.swift in Sources */,
 				22D1B231217E0D780062F2CB /* DateRow.swift in Sources */,
 				2237D28522020C8F0033924F /* ChooseEntityController.swift in Sources */,
+				22E346022254DCEB0089F300 /* CDECloudKitFileSystem.m in Sources */,
 				22A8318822049CB2006A0952 /* IndexRow.swift in Sources */,
 				22A8318E2204B68B006A0952 /* IndexController.swift in Sources */,
 				22D1B23D21807F7B0062F2CB /* ApplicationRootController.swift in Sources */,
@@ -1059,10 +1071,10 @@
 				2254895921F62DE300EE8ECB /* BookControlCell.swift in Sources */,
 				22DE6AE72188A8DC0078D489 /* WhiteSearchFieldCell.swift in Sources */,
 				22DA6A8C21E9098300ECF09A /* CollectionDocument.swift in Sources */,
+				22E346012254DCEB0089F300 /* CDECloudKitFileSystem.m in Sources */,
 				22143FD3212F0F2500B689DF /* AuthorsTransformer.swift in Sources */,
 				22A6D46C22256E9E0083D4E8 /* ScannerWindowController.swift in Sources */,
 				22143FCF212EF9CC00B689DF /* WindowControllerWithViewModel.swift in Sources */,
-				22DA6A4121E6525400ECF09A /* CDECloudKitFileSystem.m in Sources */,
 				221C4B35216BAAAC0086D56F /* RelationshipUIActions.swift in Sources */,
 				2295A9132232BCD70085CD86 /* DoubleClickAction.swift in Sources */,
 				2250C71621B7E01A00E899E2 /* SeriesScanner.swift in Sources */,

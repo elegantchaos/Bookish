@@ -7,4 +7,14 @@ import UIKit
 import BookishModel
 
 class ApplicationRootController: UISplitViewController {
+    var showIntro = IntroController.shouldShow
+
+    override func viewDidAppear(_ animated: Bool) {
+        if showIntro {
+            performSegue(withIdentifier: "intro", sender: self)
+            showIntro = false
+        }
+        
+        super.viewDidAppear(animated)
+    }
 }

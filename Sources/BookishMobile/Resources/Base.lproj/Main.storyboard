@@ -266,11 +266,119 @@
                     <connections>
                         <segue destination="LDw-Js-eN4" kind="relationship" relationship="masterViewController" id="iQA-A7-3Cx"/>
                         <segue destination="eOD-1j-hXg" kind="relationship" relationship="detailViewController" id="wHW-t9-qJD"/>
+                        <segue destination="OTD-EK-oba" kind="presentation" identifier="intro" id="9Fp-Yx-ArH"/>
                     </connections>
                 </splitViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="raC-Zi-1V1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-156" y="2373"/>
+        </scene>
+        <!--Intro Controller-->
+        <scene sceneID="rA1-y3-yhc">
+            <objects>
+                <viewController id="OTD-EK-oba" customClass="IntroController" customModule="Bookish" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="SjE-9z-Kxb">
+                        <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="jdd-3M-l6b">
+                                <rect key="frame" x="0.0" y="24" width="834" height="1150"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Caveat Emptor" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6hE-ym-yAL">
+                                        <rect key="frame" x="360.5" y="0.0" width="113" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="751" ambiguous="YES" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ybJ-xu-ER5">
+                                        <rect key="frame" x="217" y="79.5" width="400" height="892"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <attributedString key="attributedText">
+                                            <fragment>
+                                                <mutableString key="content">Welcome to the Bookish alpha release.
+
+A small disclaimer, so that you know what you're letting yourself in for:
+
+This is an early release, and is in an unfinished state. The user interface in particular is distinctly unpolished. Watch out for splinters...
+
+You will probably encounter bugs, and you will most certainly encounter things that don't seem untuitive. You'll probably feel that there are essential features missing. You may have to use your imagination at times! 
+
+All this is to be expected right now, but I am interested in hearing about it. Please do let me know what doesn't work for you, or what you think I need to change or add. It might be on my list already, but it might not.
+
+At this stage </mutableString>
+                                                <attributes>
+                                                    <font key="NSFont" size="16" name="SFProText-Regular"/>
+                                                    <font key="NSOriginalFont" size="16" name="SFProText-Regular"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content="I cannot guarantee that your data is safe">
+                                                <attributes>
+                                                    <font key="NSFont" size="16" name="SFProText-Bold"/>
+                                                    <font key="NSOriginalFont" size="16" name="SFProText-Bold"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content=". Please don't spend days entering your entire collection">
+                                                <attributes>
+                                                    <font key="NSFont" size="16" name="SFProText-Regular"/>
+                                                    <font key="NSOriginalFont" size="16" name="SFProText-Regular"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment>
+                                                <string key="content">! I do have some safety features in place though to try to prevent data loss, though, so do let me know if something bad happens!
+
+The Mac version of the application features import from Delicious Library. If you are already a user of that application, this is a good way to get some data into Bookish to play around with.</string>
+                                                <attributes>
+                                                    <font key="NSFont" size="16" name="SFProText-Regular"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7DX-dF-3CI">
+                                        <rect key="frame" x="384" y="1030" width="66" height="30"/>
+                                        <state key="normal" title="Whatever"/>
+                                        <connections>
+                                            <action selector="dismissAction:" destination="OTD-EK-oba" eventType="primaryActionTriggered" id="ZdJ-xg-8EI"/>
+                                        </connections>
+                                    </button>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="UBs-5g-aRi">
+                                        <rect key="frame" x="301" y="1119" width="232" height="31"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Remind Me Every Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GJ1-CA-Uid">
+                                                <rect key="frame" x="0.0" y="0.0" width="175" height="31"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HE4-YX-L4t">
+                                                <rect key="frame" x="183" y="0.0" width="51" height="31"/>
+                                            </switch>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="jdd-3M-l6b" firstAttribute="top" secondItem="ucj-Q9-403" secondAttribute="top" id="4qU-x1-a5c"/>
+                            <constraint firstItem="jdd-3M-l6b" firstAttribute="leading" secondItem="ucj-Q9-403" secondAttribute="leading" id="J4C-1x-VVe"/>
+                            <constraint firstItem="ucj-Q9-403" firstAttribute="bottom" secondItem="jdd-3M-l6b" secondAttribute="bottom" id="LkH-So-ubV"/>
+                            <constraint firstItem="ucj-Q9-403" firstAttribute="trailing" secondItem="jdd-3M-l6b" secondAttribute="trailing" id="QUh-HC-gOU"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="ucj-Q9-403"/>
+                    </view>
+                    <connections>
+                        <outlet property="disclaimerText" destination="ybJ-xu-ER5" id="qQR-8f-fF4"/>
+                        <outlet property="showAlwaysSwitch" destination="HE4-YX-L4t" id="edK-7A-mc0"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RV2-Zs-U5B" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="624" y="2373"/>
         </scene>
         <!--Detail-->
         <scene sceneID="DvW-JO-kN2">
@@ -1013,10 +1121,10 @@
             <color red="0.35294117647058826" green="0.36862745098039218" blue="0.3843137254901961" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Bookish Label Text">
-            <color red="0.54117647058823526" green="0.55686274509803924" blue="0.5725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.54100000858306885" green="0.55699998140335083" blue="0.57300001382827759" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Uag-ye-IkJ"/>
+        <segue reference="wHW-t9-qJD"/>
     </inferredMetricsTieBreakers>
 </document>
