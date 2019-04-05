@@ -148,7 +148,8 @@ class ImporterAction: Action {
                 title.append("…")
             }
             let item = NSMenuItem(title: title, action: ActionManagerMac.Responder.performActionSelector, keyEquivalent: "")
-            item.identifier = NSUserInterfaceItemIdentifier(rawValue: "menu.\(action).\(importer.name)")
+            let importerID = type(of: importer).identifier
+            item.identifier = NSUserInterfaceItemIdentifier(rawValue: "menu.\(action)(\"id\":\"\(importerID)\")")
             menu.addItem(item)
         }
         return menu
@@ -162,7 +163,12 @@ class ImporterAction: Action {
 class ImportMergedAction: ImporterAction {
     func importer(for context: ActionContext) -> Importer? {
         let importManager = Application.sharedInstance.importManager // TODO: read from context?
-        return importManager.importer(named: context.parameters[0])
+        guard let importerID = context["id"] as? String else {
+            return nil
+            
+        }
+        
+        return importManager.importer(identifier: importerID)
     }
     
     override func validate(context: ActionContext) -> Bool {
@@ -187,7 +193,12 @@ class ImportMergedAction: ImporterAction {
 class ImportNewAction: ImporterAction {
     func importer(for context: ActionContext) -> Importer? {
         let importManager = Application.sharedInstance.importManager // TODO: read from context?
-        return importManager.importer(named: context.parameters[0])
+        guard let importerID = context["id"] as? String else {
+            return nil
+            
+        }
+
+        return importManager.importer(identifier: importerID)
     }
     
     override func validate(context: ActionContext) -> Bool {

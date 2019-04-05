@@ -78,6 +78,11 @@ class CollectionController: UITableViewController {
             }
         }
     }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        print(traitCollection)
+        super.traitCollectionDidChange(previousTraitCollection)
+    }
 }
 
 extension CollectionController: UISplitViewControllerDelegate {
@@ -88,6 +93,8 @@ extension CollectionController: UISplitViewControllerDelegate {
 //        }
 //
 //        return controller.collapseDetailViewController
+        
+        print("collapsing")
         
         let shouldSkipDefaultBehaviour = true
         
