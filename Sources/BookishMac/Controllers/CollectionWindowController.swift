@@ -10,7 +10,7 @@ import Logger
 
 let validationChannel = Logger("Validation")
 
-class CollectionWindowController: NSWindowController, ActionContextProvider {
+class CollectionWindowController: NSWindowController, NSWindowDelegate, ActionContextProvider {
     fileprivate var cvm: CollectionViewState!
     var scannerWindow: ScannerWindowController?
 

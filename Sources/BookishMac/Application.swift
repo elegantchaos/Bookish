@@ -42,6 +42,10 @@ let applicationChannel = Logger("Application")
         }
     }
     
+    func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
+        return true
+    }
+    
     static var sharedInstance: Application {
         return NSApp.delegate as! Application
     }
