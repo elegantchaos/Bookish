@@ -18,7 +18,12 @@ class CollectionWindowController: NSWindowController, NSWindowDelegate, ActionCo
     
     override func windowDidLoad() {
         super.windowDidLoad()
+        
         window?.autorecalculatesKeyViewLoop = false
+        
+        // need to set the autosave name late - loading from a storyboard will overwrite it with the default value otherwise
+        window?.setFrameUsingName("collection.window")
+        windowFrameAutosaveName = "collection.window"
     }
     
     func provide(context: ActionContext) {
