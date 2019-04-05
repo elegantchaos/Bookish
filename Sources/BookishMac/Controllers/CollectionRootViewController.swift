@@ -10,7 +10,7 @@ class CollectionRootViewController: CollectionViewController {
     @IBOutlet weak var selectedMarkerButton: NSButton!
     @IBOutlet weak var buttonContainer: NSView!
     @IBOutlet weak var mainView: NSView!
-    
+
     let initialSplit: CGFloat = 256.0
 
     var buttons: [NSButton] = []
@@ -18,10 +18,17 @@ class CollectionRootViewController: CollectionViewController {
     var observer: NSKeyValueObservation?
     
     override func windowDidLoad(_ window: NSWindowController, storyboard: NSStoryboard) {
-        let mainContent: NSSplitViewController? = nearestIncludingChildren()
-        mainContent?.splitView.setPosition(initialSplit, ofDividerAt: 0)
-
         super.windowDidLoad(window, storyboard: storyboard)
+
+        // need to set the autosave name late - loading from a storyboard will overwrite it with the default value otherwise
+        let mainContent: NSSplitViewController? = nearestIncludingChildren()
+        let autosaveName = "collection.splitview"
+        if UserDefaults.standard.object(forKey: "NSSplitView Subview Frames \(autosaveName)") == nil {
+            // manually set the initial divider position first time only
+            mainContent?.splitView.setPosition(initialSplit, ofDividerAt: 0)
+        }
+        mainContent?.splitView.autosaveName = autosaveName
+        
     }
     
     override func viewWillAppear() {

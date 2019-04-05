@@ -959,10 +959,10 @@ Gw
             <objects>
                 <splitViewController id="9dY-ZT-f0K" sceneMemberID="viewController">
                     <splitViewItems>
-                        <splitViewItem canCollapse="YES" holdingPriority="260" behavior="sidebar" id="9x3-Ff-joU"/>
+                        <splitViewItem canCollapse="YES" holdingPriority="750" behavior="sidebar" id="9x3-Ff-joU"/>
                         <splitViewItem id="KMV-0r-aNK"/>
                     </splitViewItems>
-                    <splitView key="splitView" identifier="collection-split-view" autosaveName="collection-split-view" dividerStyle="thin" vertical="YES" id="Z9o-S4-ubf">
+                    <splitView key="splitView" identifier="collection-split-view" autosaveName="" dividerStyle="thin" vertical="YES" id="Z9o-S4-ubf">
                         <rect key="frame" x="0.0" y="0.0" width="650" height="400"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <connections>
