@@ -7,7 +7,7 @@ import AppKit
 import Actions
 import ActionsKit
 
-extension NSView {
+extension NSResponder {
     
     /**
      Convenience to return the application delegate singleton.
@@ -19,14 +19,6 @@ extension NSView {
 }
 
 extension NSViewController {
-    
-    /**
-     Convenience to return the application delegate singleton.
-     */
-    
-    var application: Application {
-        return NSApp.delegate as! Application
-    }
 
     /**
      Find the nearest view of the matching type.

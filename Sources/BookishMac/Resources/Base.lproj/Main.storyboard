@@ -419,6 +419,12 @@ CA
                                                             <action selector="performAction:" target="Ady-hI-5gd" id="qm1-VV-kWF"/>
                                                         </connections>
                                                     </menuItem>
+                                                    <menuItem title="Lookup Cover" identifier="menu.LookupCover" id="wrN-QJ-U7Y">
+                                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                                        <connections>
+                                                            <action selector="performAction:" target="Ady-hI-5gd" id="QLS-2c-PZm"/>
+                                                        </connections>
+                                                    </menuItem>
                                                 </items>
                                             </menu>
                                         </menuItem>
@@ -959,7 +965,7 @@ Gw
             <objects>
                 <splitViewController id="9dY-ZT-f0K" sceneMemberID="viewController">
                     <splitViewItems>
-                        <splitViewItem canCollapse="YES" holdingPriority="750" behavior="sidebar" id="9x3-Ff-joU"/>
+                        <splitViewItem canCollapse="YES" holdingPriority="260" behavior="sidebar" id="9x3-Ff-joU"/>
                         <splitViewItem id="KMV-0r-aNK"/>
                     </splitViewItems>
                     <splitView key="splitView" identifier="collection-split-view" autosaveName="" dividerStyle="thin" vertical="YES" id="Z9o-S4-ubf">
@@ -1373,45 +1379,58 @@ Gw
                                     <rect key="frame" x="0.0" y="0.0" width="450" height="400"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <imageView identifier="cover" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dMP-oM-auc" userLabel="Cover">
-                                            <rect key="frame" x="50" y="342" width="42" height="42"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="42" id="27d-C0-r4J"/>
-                                                <constraint firstAttribute="width" constant="42" id="Q6a-Ca-XeM"/>
-                                            </constraints>
-                                            <imageCell key="cell" selectable="YES" editable="YES" alignment="left" animates="YES" imageScaling="proportionallyDown" image="BookPlaceholder" id="ulF-Ai-YB0"/>
-                                            <connections>
-                                                <action selector="changeImage:" target="iPd-Ru-zxR" id="43E-io-G2L"/>
-                                            </connections>
-                                        </imageView>
-                                        <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="10" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GRq-94-pzl">
-                                            <rect key="frame" x="96" y="338" width="334" height="50"/>
+                                        <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="4" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hwr-fK-udc">
+                                            <rect key="frame" x="4" y="346" width="442" height="50"/>
                                             <subviews>
-                                                <textField identifier="title" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8AP-XC-qfz" userLabel="Title">
-                                                    <rect key="frame" x="-2" y="28" width="338" height="22"/>
-                                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" title="Title" id="8WP-pw-UuU">
-                                                        <font key="font" size="18" name=".AppleSystemUIFont"/>
-                                                        <color key="textColor" name="Bookish Detail Text"/>
-                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                    </textFieldCell>
+                                                <imageView identifier="cover" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dMP-oM-auc" userLabel="Cover">
+                                                    <rect key="frame" x="0.0" y="4" width="42" height="42"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="42" id="27d-C0-r4J"/>
+                                                        <constraint firstAttribute="width" constant="42" id="Q6a-Ca-XeM"/>
+                                                    </constraints>
+                                                    <imageCell key="cell" selectable="YES" editable="YES" alignment="left" animates="YES" imageScaling="proportionallyDown" image="BookPlaceholder" id="ulF-Ai-YB0"/>
                                                     <connections>
-                                                        <binding destination="iPd-Ru-zxR" name="font" keyPath="self.cvm.titleFont" id="dtS-8T-N5L"/>
-                                                        <outlet property="delegate" destination="iPd-Ru-zxR" id="ONF-yo-jSc"/>
+                                                        <action selector="changeImage:" target="iPd-Ru-zxR" id="43E-io-G2L"/>
                                                     </connections>
-                                                </textField>
-                                                <textField identifier="subtitle" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1Sf-0s-kNb" userLabel="Subtitle">
-                                                    <rect key="frame" x="-2" y="0.0" width="338" height="18"/>
-                                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" title="Subtitle" id="xtq-Zc-CXA">
-                                                        <font key="font" size="14" name=".AppleSystemUIFont"/>
-                                                        <color key="textColor" name="Bookish Detail Text"/>
-                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                    </textFieldCell>
-                                                    <connections>
-                                                        <binding destination="iPd-Ru-zxR" name="font" keyPath="self.cvm.detailFont" id="DaI-ZN-JMi"/>
-                                                        <outlet property="delegate" destination="iPd-Ru-zxR" id="DlF-5Z-PRa"/>
-                                                        <outlet property="nextKeyView" destination="2eK-Gk-TD8" id="QDz-FH-JIs"/>
-                                                    </connections>
-                                                </textField>
+                                                </imageView>
+                                                <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="10" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GRq-94-pzl">
+                                                    <rect key="frame" x="46" y="0.0" width="396" height="50"/>
+                                                    <subviews>
+                                                        <textField identifier="title" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8AP-XC-qfz" userLabel="Title">
+                                                            <rect key="frame" x="-2" y="28" width="338" height="22"/>
+                                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" title="Title" id="8WP-pw-UuU">
+                                                                <font key="font" size="18" name=".AppleSystemUIFont"/>
+                                                                <color key="textColor" name="Bookish Detail Text"/>
+                                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                            </textFieldCell>
+                                                            <connections>
+                                                                <binding destination="iPd-Ru-zxR" name="font" keyPath="self.cvm.titleFont" id="dtS-8T-N5L"/>
+                                                                <outlet property="delegate" destination="iPd-Ru-zxR" id="ONF-yo-jSc"/>
+                                                            </connections>
+                                                        </textField>
+                                                        <textField identifier="subtitle" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1Sf-0s-kNb" userLabel="Subtitle">
+                                                            <rect key="frame" x="-2" y="0.0" width="338" height="18"/>
+                                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" title="Subtitle" id="xtq-Zc-CXA">
+                                                                <font key="font" size="14" name=".AppleSystemUIFont"/>
+                                                                <color key="textColor" name="Bookish Detail Text"/>
+                                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                            </textFieldCell>
+                                                            <connections>
+                                                                <binding destination="iPd-Ru-zxR" name="font" keyPath="self.cvm.detailFont" id="DaI-ZN-JMi"/>
+                                                                <outlet property="delegate" destination="iPd-Ru-zxR" id="DlF-5Z-PRa"/>
+                                                                <outlet property="nextKeyView" destination="2eK-Gk-TD8" id="QDz-FH-JIs"/>
+                                                            </connections>
+                                                        </textField>
+                                                    </subviews>
+                                                    <visibilityPriorities>
+                                                        <integer value="1000"/>
+                                                        <integer value="1000"/>
+                                                    </visibilityPriorities>
+                                                    <customSpacing>
+                                                        <real value="3.4028234663852886e+38"/>
+                                                        <real value="3.4028234663852886e+38"/>
+                                                    </customSpacing>
+                                                </stackView>
                                             </subviews>
                                             <visibilityPriorities>
                                                 <integer value="1000"/>
@@ -1423,9 +1442,9 @@ Gw
                                             </customSpacing>
                                         </stackView>
                                         <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="26" horizontalPageScroll="10" verticalLineScroll="26" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F4f-dy-2SG" userLabel="Details Table">
-                                            <rect key="frame" x="4" y="61" width="442" height="273"/>
+                                            <rect key="frame" x="4" y="61" width="442" height="281"/>
                                             <clipView key="contentView" drawsBackground="NO" id="Roj-As-ygB">
-                                                <rect key="frame" x="0.0" y="0.0" width="442" height="273"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="442" height="281"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <tableView identifier="book-details" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="none" columnReordering="NO" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="24" rowSizeStyle="automatic" usesAutomaticRowHeights="YES" viewBased="YES" id="2eK-Gk-TD8" userLabel="Table">
@@ -2176,18 +2195,16 @@ Gw
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="bottom" secondItem="Lbu-fX-2FZ" secondAttribute="bottom" constant="20" symbolic="YES" id="0Go-V0-vPH"/>
-                                        <constraint firstItem="dMP-oM-auc" firstAttribute="top" secondItem="dHN-9c-iuf" secondAttribute="top" constant="16" id="2iI-rW-xht"/>
+                                        <constraint firstItem="Hwr-fK-udc" firstAttribute="top" secondItem="dHN-9c-iuf" secondAttribute="top" constant="4" id="2ZG-qg-xNX"/>
                                         <constraint firstItem="F4f-dy-2SG" firstAttribute="leading" secondItem="dHN-9c-iuf" secondAttribute="leading" constant="4" id="4Pa-R6-fXC"/>
+                                        <constraint firstAttribute="trailing" secondItem="Hwr-fK-udc" secondAttribute="trailing" constant="4" id="6Uh-Qe-Qab"/>
                                         <constraint firstAttribute="bottom" secondItem="EZV-LB-qVW" secondAttribute="bottom" constant="20" symbolic="YES" id="FpU-Pc-QSF"/>
-                                        <constraint firstItem="dMP-oM-auc" firstAttribute="leading" secondItem="dHN-9c-iuf" secondAttribute="leading" constant="50" id="HyG-MU-B8Y"/>
                                         <constraint firstAttribute="trailing" secondItem="Lbu-fX-2FZ" secondAttribute="trailing" constant="20" symbolic="YES" id="Jeg-0V-omQ"/>
                                         <constraint firstItem="EZV-LB-qVW" firstAttribute="leading" secondItem="dHN-9c-iuf" secondAttribute="leading" constant="20" symbolic="YES" id="Lrf-7y-IEC"/>
-                                        <constraint firstAttribute="trailing" secondItem="GRq-94-pzl" secondAttribute="trailing" constant="20" symbolic="YES" id="Min-KM-KnT"/>
+                                        <constraint firstItem="F4f-dy-2SG" firstAttribute="top" secondItem="Hwr-fK-udc" secondAttribute="bottom" constant="4" id="VHs-VD-yF5"/>
                                         <constraint firstAttribute="trailing" secondItem="F4f-dy-2SG" secondAttribute="trailing" constant="4" id="eft-s7-wnz"/>
-                                        <constraint firstItem="F4f-dy-2SG" firstAttribute="top" secondItem="GRq-94-pzl" secondAttribute="bottom" constant="4" id="jHe-jX-Aow"/>
+                                        <constraint firstItem="Hwr-fK-udc" firstAttribute="leading" secondItem="dHN-9c-iuf" secondAttribute="leading" constant="4" id="mKE-vL-Tma"/>
                                         <constraint firstItem="Lbu-fX-2FZ" firstAttribute="top" secondItem="F4f-dy-2SG" secondAttribute="bottom" constant="20" symbolic="YES" id="mQA-pH-2fT"/>
-                                        <constraint firstItem="GRq-94-pzl" firstAttribute="leading" secondItem="dMP-oM-auc" secondAttribute="trailing" constant="4" id="rMD-1b-BX9"/>
-                                        <constraint firstItem="GRq-94-pzl" firstAttribute="centerY" secondItem="dMP-oM-auc" secondAttribute="centerY" id="tzB-NT-WE9"/>
                                         <constraint firstItem="Lbu-fX-2FZ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="EZV-LB-qVW" secondAttribute="trailing" constant="12" symbolic="YES" id="yES-4H-Gvt"/>
                                     </constraints>
                                 </view>
@@ -2204,7 +2221,9 @@ Gw
                     <connections>
                         <outlet property="detailsTable" destination="2eK-Gk-TD8" id="Ukm-lJ-MMj"/>
                         <outlet property="editButton" destination="Lbu-fX-2FZ" id="odc-gd-Wyt"/>
+                        <outlet property="imageHeight" destination="27d-C0-r4J" id="Pza-zD-x7z"/>
                         <outlet property="imageView" destination="dMP-oM-auc" id="h0U-0n-SxO"/>
+                        <outlet property="imageWidth" destination="Q6a-Ca-XeM" id="dda-1v-70Q"/>
                         <outlet property="lastFixedKeyView" destination="1Sf-0s-kNb" id="EdG-75-7rl"/>
                         <outlet property="nameView" destination="8AP-XC-qfz" id="w5V-Nc-idP"/>
                         <outlet property="personList" destination="1YZ-LZ-X6M" id="8up-bV-aPY"/>
@@ -2263,7 +2282,7 @@ Gw
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Bookish Index">
-            <color red="0.97299998998641968" green="0.97299998998641968" blue="0.98000001907348633" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.97254901960784312" green="0.97254901960784312" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Bookish Index Text">
             <color red="0.3529999852180481" green="0.36899998784065247" blue="0.38400000333786011" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

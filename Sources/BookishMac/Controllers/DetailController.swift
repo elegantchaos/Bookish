@@ -37,6 +37,8 @@ class DetailController: CollectionViewController {
     @IBOutlet weak var publisherList: NSArrayController!
     @IBOutlet weak var seriesList: NSArrayController!
     @IBOutlet weak var roleList: NSArrayController!
+    @IBOutlet weak var imageWidth: NSLayoutConstraint!
+    @IBOutlet weak var imageHeight: NSLayoutConstraint!
     
     @objc var index: NSArrayController!
 
@@ -66,6 +68,11 @@ class DetailController: CollectionViewController {
             self.selectionChanged()
         }
         observers.append(observer)
+        
+        let size = CGFloat(256.0)
+        imageHeight.constant = size
+        imageWidth.constant = size
+        
         super.viewWillAppear()
     }
 

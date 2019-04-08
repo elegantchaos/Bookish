@@ -31,6 +31,7 @@ class CollectionWindowController: NSWindowController, NSWindowDelegate, ActionCo
         context.info[ActionContext.viewModelKey] = cvm
         context.info[ActionContext.windowKey] = self
         context.info[ActionContext.rootKey] = self
+        context.info[LookupCoverAction.managerKey] = application.lookupManager
     }
     
     func validateButtons() {
