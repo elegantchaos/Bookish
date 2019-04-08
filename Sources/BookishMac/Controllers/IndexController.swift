@@ -106,8 +106,8 @@ class IndexController: CollectionViewController {
     }
     
     func selectionChanged() {
-        indexChannel.debug("\(entityType) selection changed")
         if let selection = indexArray.selectedObjects as? [ModelObject] {
+            indexChannel.debug("\(entityType) selection changed to \(selection) ")
             detailView.setup(for: self, type: entityType)
             
             let entityCount = (indexArray.arrangedObjects as? NSArray)?.count ?? 0
@@ -119,20 +119,13 @@ class IndexController: CollectionViewController {
     }
     
     func select(items: [ModelObject]) {
-        let index = indexArray
         fetchIfNecessary {
-            var selection = items
-            if selection.count == 0, let content = index?.arrangedObjects as? [ModelObject], let first = content.first {
-                selection = [first]
+            DispatchQueue.main.async {
+                self.indexArray.setSelectedObjects(items)
+                let selection = self.indexTable.selectedRowIndexes
+                self.indexTable.scrollRowToVisible(selection[selection.startIndex])
+                self.indexTable.scrollRowToVisible(selection[selection.endIndex])
             }
-            indexChannel.debug("\(self.entityName) selecting \(selection)")
-            self.indexArray.setSelectedObjects(selection)
-            let index = self.indexTable.selectedRow
-            if index != -1 {
-                self.indexTable.scrollRowToVisible(index)
-            }
-        }
-        DispatchQueue.main.async {
         }
     }
 }

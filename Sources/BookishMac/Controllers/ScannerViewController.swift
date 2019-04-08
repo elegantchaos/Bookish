@@ -14,6 +14,7 @@ class ScannerViewController: NSViewController, BarcodeScannerDelegate {
     
     @IBOutlet weak var imageView: NSView!
     @IBOutlet weak var barcodeView: NSTextField!
+    @IBOutlet weak var searchField: NSTextField!
     @IBOutlet weak var candidatesTable: NSTableView!
     @IBOutlet weak var candidatesScrollView: NSScrollView!
     @IBOutlet weak var lookupSpinner: NSProgressIndicator!
@@ -63,6 +64,7 @@ class ScannerViewController: NSViewController, BarcodeScannerDelegate {
             
             DispatchQueue.main.async {
                 let key = valid ? "candidate.lookup.valid" : "candidate.lookup.invalid"
+                self.searchField.stringValue = value
                 self.barcodeView.stringValue = key.localized(with: ["search": value])
             }
         }
@@ -111,19 +113,31 @@ class ScannerViewController: NSViewController, BarcodeScannerDelegate {
     
     
     @IBAction func doTest(_ sender: Any) {
-        detected(barcode: "9781408832240")
-        lookup(isbn: "9781408832240")
+        searchField.stringValue = "9781408832240"
+        doSearch(sender)
+    }
+    
+    @IBAction func doSearch(_ sender: Any) {
+        let code = searchField.stringValue
+        if detected != code {
+            detected(barcode: code)
+            lookup(isbn: code)
+        }
     }
     
     @IBAction func doAdd(_ sender: Any) {
         let state = application.viewModel
-        if let candidate = candidates.first, let context = state?.managedObjectContext {
-            let book = candidate.makeBook(in: context)
-            application.windowController.reveal(book: book)
+        let index = candidatesTable.selectedRow
+        if (index >= 0) && (index < candidates.count) {
+            let candidate = candidates[index]
+            if let context = state?.managedObjectContext {
+                let book = candidate.makeBook(in: context)
+                application.windowController.reveal(book: book)
+            }
         }
     }
     
-
+    
 }
 
 extension ScannerViewController: NSTableViewDelegate, NSTableViewDataSource {
