@@ -1379,12 +1379,12 @@ Gw
                                     <rect key="frame" x="0.0" y="0.0" width="450" height="400"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="10" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GRq-94-pzl">
+                                        <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="10" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GRq-94-pzl" userLabel="Header">
                                             <rect key="frame" x="20" y="330" width="334" height="50"/>
                                             <subviews>
                                                 <textField identifier="title" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8AP-XC-qfz" userLabel="Title">
                                                     <rect key="frame" x="-2" y="28" width="338" height="22"/>
-                                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" title="Title" id="8WP-pw-UuU">
+                                                    <textFieldCell key="cell" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" title="Title" id="8WP-pw-UuU">
                                                         <font key="font" size="18" name=".AppleSystemUIFont"/>
                                                         <color key="textColor" name="Bookish Detail Text"/>
                                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1396,7 +1396,7 @@ Gw
                                                 </textField>
                                                 <textField identifier="subtitle" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1Sf-0s-kNb" userLabel="Subtitle">
                                                     <rect key="frame" x="-2" y="0.0" width="338" height="18"/>
-                                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" title="Subtitle" id="xtq-Zc-CXA">
+                                                    <textFieldCell key="cell" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" title="Subtitle" id="xtq-Zc-CXA">
                                                         <font key="font" size="14" name=".AppleSystemUIFont"/>
                                                         <color key="textColor" name="Bookish Detail Text"/>
                                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1417,14 +1417,14 @@ Gw
                                                 <real value="3.4028234663852886e+38"/>
                                             </customSpacing>
                                         </stackView>
-                                        <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="26" horizontalPageScroll="10" verticalLineScroll="26" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F4f-dy-2SG" userLabel="Details Table">
-                                            <rect key="frame" x="4" y="61" width="442" height="261"/>
+                                        <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="26" horizontalPageScroll="10" verticalLineScroll="26" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F4f-dy-2SG" userLabel="Details">
+                                            <rect key="frame" x="4" y="61" width="350" height="261"/>
                                             <clipView key="contentView" drawsBackground="NO" id="Roj-As-ygB">
-                                                <rect key="frame" x="0.0" y="0.0" width="442" height="261"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="350" height="261"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <tableView identifier="book-details" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="none" columnReordering="NO" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="24" rowSizeStyle="automatic" usesAutomaticRowHeights="YES" viewBased="YES" id="2eK-Gk-TD8" userLabel="Table">
-                                                        <rect key="frame" x="0.0" y="0.0" width="442" height="304"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="350" height="304"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <size key="intercellSpacing" width="3" height="2"/>
                                                         <color key="backgroundColor" name="Bookish Detail"/>
@@ -1567,7 +1567,7 @@ Gw
                                                                     </tableCellView>
                                                                 </prototypeCellViews>
                                                             </tableColumn>
-                                                            <tableColumn identifier="detail" width="315" minWidth="40" maxWidth="1000" id="K3l-Pn-aek">
+                                                            <tableColumn identifier="detail" width="223" minWidth="40" maxWidth="1000" id="K3l-Pn-aek">
                                                                 <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="justified" title="value">
                                                                     <font key="font" metaFont="smallSystem"/>
                                                                     <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1581,11 +1581,11 @@ Gw
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES"/>
                                                                 <prototypeCellViews>
                                                                     <tableCellView identifier="unknown" id="Mkn-9w-XT4" userLabel="unknown">
-                                                                        <rect key="frame" x="125" y="1" width="315" height="17"/>
+                                                                        <rect key="frame" x="125" y="1" width="223" height="17"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="xZM-wD-djI">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="315" height="17"/>
+                                                                                <rect key="frame" x="0.0" y="0.0" width="223" height="17"/>
                                                                                 <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="unknown id" id="REU-zd-Vvh">
                                                                                     <font key="font" metaFont="system"/>
                                                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -1603,11 +1603,11 @@ Gw
                                                                         </connections>
                                                                     </tableCellView>
                                                                     <tableCellView identifier="text" id="1mF-bf-MwG" userLabel="text" customClass="DetailCell" customModule="Bookish" customModuleProvider="target">
-                                                                        <rect key="frame" x="125" y="20" width="315" height="24"/>
+                                                                        <rect key="frame" x="125" y="20" width="223" height="24"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="JOA-TY-6BX">
-                                                                                <rect key="frame" x="2" y="2" width="305" height="18"/>
+                                                                                <rect key="frame" x="2" y="2" width="213" height="18"/>
                                                                                 <textFieldCell key="cell" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" alignment="left" placeholderString="value" id="sJA-hB-JNM">
                                                                                     <font key="font" metaFont="systemBold" size="14"/>
                                                                                     <color key="textColor" name="Bookish Detail Text"/>
@@ -1630,11 +1630,11 @@ Gw
                                                                         </connections>
                                                                     </tableCellView>
                                                                     <tableCellView identifier="person" id="Obe-M6-xbY" userLabel="person" customClass="RelationshipCell" customModule="Bookish" customModuleProvider="target">
-                                                                        <rect key="frame" x="125" y="46" width="315" height="24"/>
+                                                                        <rect key="frame" x="125" y="46" width="223" height="24"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="8Gb-0S-SzA">
-                                                                                <rect key="frame" x="0.0" y="2" width="296" height="18"/>
+                                                                                <rect key="frame" x="0.0" y="2" width="204" height="18"/>
                                                                                 <textFieldCell key="cell" selectable="YES" sendsActionOnEndEditing="YES" alignment="left" placeholderString="value" id="nBn-Wa-0hd">
                                                                                     <font key="font" metaFont="systemBold" size="14"/>
                                                                                     <color key="textColor" name="Bookish Detail Text"/>
@@ -1645,7 +1645,7 @@ Gw
                                                                                 </connections>
                                                                             </textField>
                                                                             <comboBox identifier="button.person.ChangeRelationship" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="HQX-Fz-RCn" customClass="AnnotatedComboBox" customModule="Bookish" customModuleProvider="target">
-                                                                                <rect key="frame" x="2" y="-1" width="295" height="23"/>
+                                                                                <rect key="frame" x="2" y="-1" width="203" height="23"/>
                                                                                 <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" placeholderString="person name" numberOfVisibleItems="5" id="8YE-Pj-MOf">
                                                                                     <font key="font" metaFont="system" size="14"/>
                                                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -1664,7 +1664,7 @@ Gw
                                                                                 </connections>
                                                                             </comboBox>
                                                                             <button identifier="button.RevealPerson" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Viz-hv-cyj" userLabel="Reveal">
-                                                                                <rect key="frame" x="296" y="3" width="15" height="16"/>
+                                                                                <rect key="frame" x="204" y="3" width="15" height="16"/>
                                                                                 <buttonCell key="cell" type="inline" bezelStyle="inline" image="Reveal" imagePosition="only" alignment="center" controlSize="mini" lineBreakMode="truncatingTail" state="on" inset="2" id="po9-V5-Xt2">
                                                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                                     <font key="font" metaFont="smallSystemBold"/>
@@ -1691,11 +1691,11 @@ Gw
                                                                         </connections>
                                                                     </tableCellView>
                                                                     <tableCellView identifier="publisher" id="5Ra-ba-7w7" userLabel="publisher" customClass="PublisherCell" customModule="Bookish" customModuleProvider="target">
-                                                                        <rect key="frame" x="125" y="72" width="315" height="23"/>
+                                                                        <rect key="frame" x="125" y="72" width="223" height="23"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <button identifier="button.RevealPublisher" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6Bs-db-AY7" userLabel="Reveal">
-                                                                                <rect key="frame" x="296" y="3" width="15" height="16"/>
+                                                                                <rect key="frame" x="204" y="3" width="15" height="16"/>
                                                                                 <buttonCell key="cell" type="inline" bezelStyle="inline" image="Reveal" imagePosition="only" alignment="center" controlSize="mini" lineBreakMode="truncatingTail" state="on" inset="2" id="hWC-bP-4Q0">
                                                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                                     <font key="font" metaFont="smallSystemBold"/>
@@ -1705,7 +1705,7 @@ Gw
                                                                                 </connections>
                                                                             </button>
                                                                             <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="q63-dF-QC4">
-                                                                                <rect key="frame" x="2" y="2" width="294" height="18"/>
+                                                                                <rect key="frame" x="2" y="2" width="202" height="18"/>
                                                                                 <textFieldCell key="cell" selectable="YES" sendsActionOnEndEditing="YES" alignment="left" placeholderString="publisher" id="8kh-jc-Zdo">
                                                                                     <font key="font" metaFont="systemBold" size="14"/>
                                                                                     <color key="textColor" name="Bookish Detail Text"/>
@@ -1716,7 +1716,7 @@ Gw
                                                                                 </connections>
                                                                             </textField>
                                                                             <comboBox identifier="combo.ChangePublisher" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Qd7-xd-Uad" userLabel="Publisher" customClass="AnnotatedComboBox" customModule="Bookish" customModuleProvider="target">
-                                                                                <rect key="frame" x="2" y="-2" width="295" height="23"/>
+                                                                                <rect key="frame" x="2" y="-2" width="203" height="23"/>
                                                                                 <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" placeholderString="publisher" numberOfVisibleItems="5" id="BRY-uU-uqY">
                                                                                     <font key="font" metaFont="system" size="14"/>
                                                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -1750,11 +1750,11 @@ Gw
                                                                         </connections>
                                                                     </tableCellView>
                                                                     <tableCellView identifier="date" id="ph3-eN-NOK" userLabel="date" customClass="DateCell" customModule="Bookish" customModuleProvider="target">
-                                                                        <rect key="frame" x="125" y="97" width="315" height="24"/>
+                                                                        <rect key="frame" x="125" y="97" width="223" height="24"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="sbu-3d-sR8">
-                                                                                <rect key="frame" x="2" y="2" width="311" height="18"/>
+                                                                                <rect key="frame" x="2" y="2" width="219" height="18"/>
                                                                                 <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" continuous="YES" alignment="left" placeholderString="value" usesSingleLineMode="YES" id="Nmf-qx-JtN">
                                                                                     <font key="font" metaFont="systemBold" size="14"/>
                                                                                     <color key="textColor" name="Bookish Detail Text"/>
@@ -1777,11 +1777,11 @@ Gw
                                                                         </connections>
                                                                     </tableCellView>
                                                                     <tableCellView identifier="time" id="DvG-l5-t3c" userLabel="time" customClass="TimeCell" customModule="Bookish" customModuleProvider="target">
-                                                                        <rect key="frame" x="125" y="123" width="315" height="24"/>
+                                                                        <rect key="frame" x="125" y="123" width="223" height="24"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="3aI-AW-NdK">
-                                                                                <rect key="frame" x="2" y="2" width="311" height="18"/>
+                                                                                <rect key="frame" x="2" y="2" width="219" height="18"/>
                                                                                 <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" continuous="YES" alignment="left" placeholderString="value" usesSingleLineMode="YES" id="ZpI-TQ-QpZ">
                                                                                     <font key="font" metaFont="systemBold" size="14"/>
                                                                                     <color key="textColor" name="Bookish Detail Text"/>
@@ -1804,11 +1804,11 @@ Gw
                                                                         </connections>
                                                                     </tableCellView>
                                                                     <tableCellView identifier="editableDate" id="bf1-KR-OAm" userLabel="date editable" customClass="EditableDateCell" customModule="Bookish" customModuleProvider="target">
-                                                                        <rect key="frame" x="125" y="149" width="315" height="24"/>
+                                                                        <rect key="frame" x="125" y="149" width="223" height="24"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="FHu-L0-2fo" customClass="AnnotatedTextField" customModule="Bookish" customModuleProvider="target">
-                                                                                <rect key="frame" x="2" y="2" width="292" height="18"/>
+                                                                                <rect key="frame" x="2" y="2" width="200" height="18"/>
                                                                                 <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" continuous="YES" alignment="left" placeholderString="value" usesSingleLineMode="YES" id="cSC-pm-4CO">
                                                                                     <font key="font" metaFont="systemBold" size="14"/>
                                                                                     <color key="textColor" name="Bookish Detail Text"/>
@@ -1820,7 +1820,7 @@ Gw
                                                                                 </connections>
                                                                             </textField>
                                                                             <button identifier="button.ShowDatePicker" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rHT-TB-CL5" userLabel="Select">
-                                                                                <rect key="frame" x="300" y="3" width="15" height="16"/>
+                                                                                <rect key="frame" x="208" y="3" width="15" height="16"/>
                                                                                 <buttonCell key="cell" type="inline" bezelStyle="inline" image="ChooseDateSmall" imagePosition="only" alignment="center" controlSize="mini" lineBreakMode="truncatingTail" state="on" inset="2" id="hN6-rN-vOm">
                                                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                                     <font key="font" metaFont="smallSystemBold"/>
@@ -1844,14 +1844,14 @@ Gw
                                                                         </connections>
                                                                     </tableCellView>
                                                                     <tableCellView identifier="editableDimensions" id="OZV-07-tGS" userLabel="dimensions" customClass="DimensionsCell" customModule="Bookish" customModuleProvider="target">
-                                                                        <rect key="frame" x="125" y="175" width="315" height="24"/>
+                                                                        <rect key="frame" x="125" y="175" width="223" height="24"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <stackView distribution="fillEqually" orientation="horizontal" alignment="top" spacing="10" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YeD-9c-Svh">
-                                                                                <rect key="frame" x="2" y="2" width="311" height="18"/>
+                                                                                <rect key="frame" x="2" y="2" width="219" height="18"/>
                                                                                 <subviews>
                                                                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="NT3-31-wYX">
-                                                                                        <rect key="frame" x="-2" y="1" width="48" height="17"/>
+                                                                                        <rect key="frame" x="-2" y="1" width="38" height="17"/>
                                                                                         <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="width" id="Qg8-Fc-Df5">
                                                                                             <font key="font" metaFont="system"/>
                                                                                             <color key="textColor" name="Bookish Label Text"/>
@@ -1861,8 +1861,8 @@ Gw
                                                                                             <binding destination="iPd-Ru-zxR" name="font" keyPath="self.cvm.detailFont" id="DzM-lZ-mPV"/>
                                                                                         </connections>
                                                                                     </textField>
-                                                                                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="Uct-nx-Fvm">
-                                                                                        <rect key="frame" x="52" y="0.0" width="47" height="18"/>
+                                                                                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="751" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Uct-nx-Fvm">
+                                                                                        <rect key="frame" x="42" y="0.0" width="34" height="18"/>
                                                                                         <textFieldCell key="cell" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" alignment="left" placeholderString="100" id="Pp6-rI-4NU">
                                                                                             <font key="font" metaFont="systemBold" size="14"/>
                                                                                             <color key="textColor" name="Bookish Detail Text"/>
@@ -1873,8 +1873,8 @@ Gw
                                                                                             <outlet property="delegate" destination="OZV-07-tGS" id="t4u-b9-2kc"/>
                                                                                         </connections>
                                                                                     </textField>
-                                                                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6RX-Gy-wMc">
-                                                                                        <rect key="frame" x="105" y="1" width="48" height="17"/>
+                                                                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6RX-Gy-wMc">
+                                                                                        <rect key="frame" x="82" y="1" width="43" height="17"/>
                                                                                         <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="height" id="vw4-Bd-DOH">
                                                                                             <font key="font" metaFont="system"/>
                                                                                             <color key="textColor" name="Bookish Label Text"/>
@@ -1884,8 +1884,8 @@ Gw
                                                                                             <binding destination="iPd-Ru-zxR" name="font" keyPath="self.cvm.detailFont" id="PFf-jl-cfy"/>
                                                                                         </connections>
                                                                                     </textField>
-                                                                                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="8Zt-m9-RRf">
-                                                                                        <rect key="frame" x="159" y="0.0" width="47" height="18"/>
+                                                                                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="751" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8Zt-m9-RRf">
+                                                                                        <rect key="frame" x="131" y="0.0" width="34" height="18"/>
                                                                                         <textFieldCell key="cell" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" alignment="left" placeholderString="100" id="E42-Ig-qlh">
                                                                                             <font key="font" metaFont="systemBold" size="14"/>
                                                                                             <color key="textColor" name="Bookish Detail Text"/>
@@ -1896,8 +1896,8 @@ Gw
                                                                                             <outlet property="delegate" destination="OZV-07-tGS" id="CLL-7k-aRi"/>
                                                                                         </connections>
                                                                                     </textField>
-                                                                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wCh-V3-Gxz">
-                                                                                        <rect key="frame" x="212" y="1" width="48" height="17"/>
+                                                                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wCh-V3-Gxz">
+                                                                                        <rect key="frame" x="171" y="1" width="40" height="17"/>
                                                                                         <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="depth" id="5Kv-Mv-Z8U">
                                                                                             <font key="font" metaFont="system"/>
                                                                                             <color key="textColor" name="Bookish Label Text"/>
@@ -1907,8 +1907,8 @@ Gw
                                                                                             <binding destination="iPd-Ru-zxR" name="font" keyPath="self.cvm.detailFont" id="Rc0-9T-8Wv"/>
                                                                                         </connections>
                                                                                     </textField>
-                                                                                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="m4w-OJ-dra">
-                                                                                        <rect key="frame" x="266" y="0.0" width="47" height="18"/>
+                                                                                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="751" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="m4w-OJ-dra">
+                                                                                        <rect key="frame" x="217" y="0.0" width="4" height="18"/>
                                                                                         <textFieldCell key="cell" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" alignment="left" placeholderString="100" id="fZK-YQ-q7L">
                                                                                             <font key="font" metaFont="systemBold" size="14"/>
                                                                                             <color key="textColor" name="Bookish Detail Text"/>
@@ -1952,11 +1952,11 @@ Gw
                                                                         </connections>
                                                                     </tableCellView>
                                                                     <tableCellView identifier="series" id="X8k-lU-fh1" userLabel="series" customClass="SeriesCell" customModule="Bookish" customModuleProvider="target">
-                                                                        <rect key="frame" x="125" y="201" width="315" height="24"/>
+                                                                        <rect key="frame" x="125" y="201" width="223" height="24"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="V9b-km-eI4" userLabel="Name">
-                                                                                <rect key="frame" x="2" y="2" width="278" height="18"/>
+                                                                                <rect key="frame" x="2" y="2" width="186" height="18"/>
                                                                                 <textFieldCell key="cell" selectable="YES" sendsActionOnEndEditing="YES" alignment="left" placeholderString="series" id="uZx-rp-KSD">
                                                                                     <font key="font" metaFont="systemBold" size="14"/>
                                                                                     <color key="textColor" name="Bookish Detail Text"/>
@@ -1968,7 +1968,7 @@ Gw
                                                                                 </connections>
                                                                             </textField>
                                                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="E6d-pw-nI7" userLabel="Position">
-                                                                                <rect key="frame" x="280" y="2" width="14" height="18"/>
+                                                                                <rect key="frame" x="188" y="2" width="14" height="18"/>
                                                                                 <textFieldCell key="cell" selectable="YES" sendsActionOnEndEditing="YES" alignment="right" placeholderString="#" id="hCR-9v-kKA">
                                                                                     <font key="font" metaFont="systemBold" size="14"/>
                                                                                     <color key="textColor" name="Bookish Detail Text"/>
@@ -1980,7 +1980,7 @@ Gw
                                                                                 </connections>
                                                                             </textField>
                                                                             <button identifier="button.RevealSeries" horizontalHuggingPriority="260" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sBM-cZ-emg" userLabel="Reveal">
-                                                                                <rect key="frame" x="296" y="3" width="15" height="16"/>
+                                                                                <rect key="frame" x="204" y="3" width="15" height="16"/>
                                                                                 <buttonCell key="cell" type="inline" bezelStyle="inline" image="Reveal" imagePosition="only" alignment="center" controlSize="mini" lineBreakMode="truncatingTail" state="on" inset="2" id="eCN-3w-jLe">
                                                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                                     <font key="font" metaFont="smallSystemBold"/>
@@ -1990,7 +1990,7 @@ Gw
                                                                                 </buttonCell>
                                                                             </button>
                                                                             <comboBox horizontalHuggingPriority="249" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dnj-ua-zEn" userLabel="Combo" customClass="AnnotatedComboBox" customModule="Bookish" customModuleProvider="target">
-                                                                                <rect key="frame" x="4" y="-1" width="277" height="23"/>
+                                                                                <rect key="frame" x="4" y="-1" width="185" height="23"/>
                                                                                 <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" placeholderString="series" numberOfVisibleItems="5" id="NiC-Re-HGz">
                                                                                     <font key="font" metaFont="system" size="14"/>
                                                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -2029,11 +2029,11 @@ Gw
                                                                         </connections>
                                                                     </tableCellView>
                                                                     <tableCellView identifier="entry" id="0kY-If-jOa" userLabel="entry" customClass="EntryCell" customModule="Bookish" customModuleProvider="target">
-                                                                        <rect key="frame" x="125" y="227" width="315" height="24"/>
+                                                                        <rect key="frame" x="125" y="227" width="223" height="24"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="wP2-Ap-vn5">
-                                                                                <rect key="frame" x="2" y="2" width="311" height="18"/>
+                                                                                <rect key="frame" x="2" y="2" width="219" height="18"/>
                                                                                 <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" sendsActionOnEndEditing="YES" alignment="left" placeholderString="value" id="xk5-QQ-PT7">
                                                                                     <font key="font" size="14" name=".AppleSystemUIFont"/>
                                                                                     <color key="textColor" name="Bookish Detail Text"/>
@@ -2041,7 +2041,7 @@ Gw
                                                                                 </textFieldCell>
                                                                             </textField>
                                                                             <button identifier="entry.button.RevealBook" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="57f-co-nil" userLabel="Reveal">
-                                                                                <rect key="frame" x="300" y="3" width="15" height="16"/>
+                                                                                <rect key="frame" x="208" y="3" width="15" height="16"/>
                                                                                 <buttonCell key="cell" type="inline" bezelStyle="inline" image="Reveal" imagePosition="only" alignment="center" controlSize="mini" lineBreakMode="truncatingTail" state="on" inset="2" id="gHd-9o-c3v">
                                                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                                     <font key="font" metaFont="smallSystemBold"/>
@@ -2064,11 +2064,11 @@ Gw
                                                                         </connections>
                                                                     </tableCellView>
                                                                     <tableCellView identifier="book" id="YCW-gp-vkv" userLabel="book" customClass="BookCell" customModule="Bookish" customModuleProvider="target">
-                                                                        <rect key="frame" x="125" y="253" width="315" height="24"/>
+                                                                        <rect key="frame" x="125" y="253" width="223" height="24"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="8XU-ZR-Wgb">
-                                                                                <rect key="frame" x="2" y="2" width="311" height="18"/>
+                                                                                <rect key="frame" x="2" y="2" width="219" height="18"/>
                                                                                 <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" sendsActionOnEndEditing="YES" alignment="left" placeholderString="value" id="OTX-Op-Z52">
                                                                                     <font key="font" size="14" name=".AppleSystemUIFont"/>
                                                                                     <color key="textColor" name="Bookish Detail Text"/>
@@ -2076,7 +2076,7 @@ Gw
                                                                                 </textFieldCell>
                                                                             </textField>
                                                                             <button identifier="book.button.RevealBook" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="75K-Gw-0cm" userLabel="Reveal">
-                                                                                <rect key="frame" x="300" y="3" width="15" height="16"/>
+                                                                                <rect key="frame" x="208" y="3" width="15" height="16"/>
                                                                                 <buttonCell key="cell" type="inline" bezelStyle="inline" image="Reveal" imagePosition="only" alignment="center" controlSize="mini" lineBreakMode="truncatingTail" state="on" inset="2" id="Amc-qV-xxa">
                                                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                                     <font key="font" metaFont="smallSystemBold"/>
@@ -2099,11 +2099,11 @@ Gw
                                                                         </connections>
                                                                     </tableCellView>
                                                                     <tableCellView identifier="section" id="amt-x4-xNy" userLabel="section" customClass="SectionCell" customModule="Bookish" customModuleProvider="target">
-                                                                        <rect key="frame" x="125" y="279" width="315" height="24"/>
+                                                                        <rect key="frame" x="125" y="279" width="223" height="24"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="YPE-nH-Ujd">
-                                                                                <rect key="frame" x="2" y="2" width="311" height="20"/>
+                                                                                <rect key="frame" x="2" y="2" width="219" height="20"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="20" id="5hD-6b-SgW"/>
                                                                                 </constraints>
@@ -2136,7 +2136,7 @@ Gw
                                                 <nil key="backgroundColor"/>
                                             </clipView>
                                             <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="0.33333333333333331" horizontal="YES" id="DHT-a3-Mbm">
-                                                <rect key="frame" x="0.0" y="257" width="442" height="16"/>
+                                                <rect key="frame" x="0.0" y="245" width="342" height="16"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                             </scroller>
                                             <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="SeE-4J-Sd8">
@@ -2184,16 +2184,16 @@ Gw
                                         <constraint firstAttribute="bottom" secondItem="Lbu-fX-2FZ" secondAttribute="bottom" constant="20" symbolic="YES" id="0Go-V0-vPH"/>
                                         <constraint firstItem="F4f-dy-2SG" firstAttribute="leading" secondItem="dHN-9c-iuf" secondAttribute="leading" constant="4" id="4Pa-R6-fXC"/>
                                         <constraint firstAttribute="trailing" secondItem="dMP-oM-auc" secondAttribute="trailing" constant="20" symbolic="YES" id="5VD-a6-3Bq"/>
+                                        <constraint firstItem="dMP-oM-auc" firstAttribute="leading" secondItem="GRq-94-pzl" secondAttribute="trailing" constant="34" id="6f1-vP-c7n"/>
                                         <constraint firstAttribute="bottom" secondItem="EZV-LB-qVW" secondAttribute="bottom" constant="20" symbolic="YES" id="FpU-Pc-QSF"/>
                                         <constraint firstItem="F4f-dy-2SG" firstAttribute="top" secondItem="GRq-94-pzl" secondAttribute="bottom" constant="8" id="HmM-j7-geU"/>
                                         <constraint firstAttribute="trailing" secondItem="Lbu-fX-2FZ" secondAttribute="trailing" constant="20" symbolic="YES" id="Jeg-0V-omQ"/>
                                         <constraint firstItem="EZV-LB-qVW" firstAttribute="leading" secondItem="dHN-9c-iuf" secondAttribute="leading" constant="20" symbolic="YES" id="Lrf-7y-IEC"/>
-                                        <constraint firstAttribute="trailing" secondItem="GRq-94-pzl" secondAttribute="trailing" constant="96" id="Sla-hf-1cr"/>
                                         <constraint firstItem="GRq-94-pzl" firstAttribute="top" secondItem="dHN-9c-iuf" secondAttribute="top" constant="20" symbolic="YES" id="bjM-FH-ZG7"/>
-                                        <constraint firstAttribute="trailing" secondItem="F4f-dy-2SG" secondAttribute="trailing" constant="4" id="eft-s7-wnz"/>
                                         <constraint firstItem="GRq-94-pzl" firstAttribute="leading" secondItem="dHN-9c-iuf" secondAttribute="leading" constant="20" symbolic="YES" id="gID-3E-67E"/>
                                         <constraint firstItem="dMP-oM-auc" firstAttribute="top" secondItem="dHN-9c-iuf" secondAttribute="top" constant="20" symbolic="YES" id="hKb-cO-585"/>
                                         <constraint firstItem="Lbu-fX-2FZ" firstAttribute="top" secondItem="F4f-dy-2SG" secondAttribute="bottom" constant="20" symbolic="YES" id="mQA-pH-2fT"/>
+                                        <constraint firstItem="F4f-dy-2SG" firstAttribute="trailing" secondItem="GRq-94-pzl" secondAttribute="trailing" id="qvr-Ck-2b8"/>
                                         <constraint firstItem="Lbu-fX-2FZ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="EZV-LB-qVW" secondAttribute="trailing" constant="12" symbolic="YES" id="yES-4H-Gvt"/>
                                     </constraints>
                                 </view>
