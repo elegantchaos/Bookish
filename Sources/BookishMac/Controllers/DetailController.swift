@@ -69,10 +69,6 @@ class DetailController: CollectionViewController {
         }
         observers.append(observer)
         
-        let size = CGFloat(256.0)
-        imageHeight.constant = size
-        imageWidth.constant = size
-        
         super.viewWillAppear()
     }
 
@@ -174,23 +170,35 @@ class DetailController: CollectionViewController {
     }
     
     fileprivate func updateImage(for object: NSObject, visible: Bool) {
-        imageView.isHidden = !visible
+        var size: CGFloat = source.isEditing ? 48 : 64
+        let maxSize: CGFloat = 256
+        var hide = !visible
+        
         if visible {
             if let data = object.value(forKey: "image") as? Data, let image = NSImage(data: data) {
                 imageView.image = image
+                size = max(image.size.width, maxSize)
+                
             } else {
-                let placeholderName = "\(entityName)Placeholder"
-                if let image = NSImage(named: placeholderName) {
-                    imageView.image = image
-                    
-                    if let urlString = object.value(forKey: "imageURL") as? String, let url = URL(string: urlString) {
-                        application.imageCache.image(for: url) { (image) in
-                            self.imageView.image = image
+                hide = true
+                if let urlString = object.value(forKey: "imageURL") as? String, let url = URL(string: urlString) {
+                    application.imageCache.image(for: url) { (image) in
+                        self.imageView.image = image
+                        self.imageView.isHidden = false
+                        if !self.source.isEditing {
+                            size = max(image.size.width, maxSize)
+                            self.imageHeight.constant = size
+                            self.imageWidth.constant = size
                         }
                     }
                 }
             }
         }
+        
+        imageView.alphaValue = 1.0
+        imageHeight.constant = size
+        imageWidth.constant = size
+        imageView.isHidden = hide
     }
     
     func selectionChanged() {
