@@ -1220,13 +1220,13 @@ Gw
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <scrollView horizontalHuggingPriority="260" horizontalCompressionResistancePriority="740" borderType="none" autohidesScrollers="YES" horizontalLineScroll="23" horizontalPageScroll="10" verticalLineScroll="23" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8vI-pf-KKk" userLabel="Index">
-                                            <rect key="frame" x="0.0" y="47" width="200" height="333"/>
+                                            <rect key="frame" x="0.0" y="55" width="200" height="325"/>
                                             <clipView key="contentView" drawsBackground="NO" id="iWu-oE-IA8">
-                                                <rect key="frame" x="0.0" y="0.0" width="200" height="333"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="200" height="325"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <tableView identifier="books" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnSelection="YES" autosaveColumns="NO" rowHeight="21" rowSizeStyle="automatic" usesAutomaticRowHeights="YES" viewBased="YES" id="6dc-sq-CeH">
-                                                        <rect key="frame" x="0.0" y="0.0" width="200" height="333"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="200" height="325"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <size key="intercellSpacing" width="3" height="2"/>
                                                         <color key="backgroundColor" name="Bookish Index"/>
@@ -1328,7 +1328,7 @@ Gw
                                         <constraint firstItem="Yal-1G-peJ" firstAttribute="leading" secondItem="A2m-0i-gcO" secondAttribute="leading" constant="20" symbolic="YES" id="jlr-dB-uth"/>
                                         <constraint firstItem="8vI-pf-KKk" firstAttribute="top" secondItem="A2m-0i-gcO" secondAttribute="top" constant="20" symbolic="YES" id="nJI-NB-D35"/>
                                         <constraint firstItem="NQL-eA-Rw2" firstAttribute="leading" secondItem="A2m-0i-gcO" secondAttribute="leading" constant="20" symbolic="YES" id="nOX-Ie-LKG"/>
-                                        <constraint firstItem="Yal-1G-peJ" firstAttribute="top" secondItem="8vI-pf-KKk" secondAttribute="bottom" constant="4" id="nqQ-5c-RMb"/>
+                                        <constraint firstItem="Yal-1G-peJ" firstAttribute="top" secondItem="8vI-pf-KKk" secondAttribute="bottom" constant="12" id="nqQ-5c-RMb"/>
                                         <constraint firstAttribute="trailing" secondItem="Yal-1G-peJ" secondAttribute="trailing" constant="20" symbolic="YES" id="znZ-VI-lxj"/>
                                     </constraints>
                                 </view>
@@ -2269,10 +2269,10 @@ Gw
             <color red="0.3529999852180481" green="0.36899998784065247" blue="0.38400000333786011" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Bookish Label Text">
-            <color red="0.54100000858306885" green="0.55699998140335083" blue="0.57300001382827759" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.54117647058823526" green="0.55686274509803924" blue="0.5725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="5PC-lz-gPu"/>
+        <segue reference="het-yo-6H7"/>
     </inferredMetricsTieBreakers>
 </document>
