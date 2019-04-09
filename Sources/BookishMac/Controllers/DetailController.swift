@@ -51,16 +51,19 @@ class DetailController: CollectionViewController {
     var observers = [NSObjectProtocol]()
     
     let doubleClickRecogniser = NSClickGestureRecognizer(target: self, action: #selector(textDoubleClick(_:)))
-
+    let clickRecogniser = NSClickGestureRecognizer(target: self, action: #selector(chooseImage(_:)))
+    
     func setup(for index: IndexController, type entityType: ModelObject.Type) {
         detailChannel.debug("setup for \(entityType)")
         doubleClickRecogniser.numberOfClicksRequired = 2
+        clickRecogniser.numberOfClicksRequired = 1
         indexView = index
         self.index = index.indexArray
         self.entityName = String(describing: entityType)
         self.entityType = entityType
         source = entityType.getProvider()
         selectionChanged()
+        
     }
 
     override func viewWillAppear() {
@@ -68,7 +71,8 @@ class DetailController: CollectionViewController {
             self.selectionChanged()
         }
         observers.append(observer)
-        
+        imageView.addGestureRecognizer(clickRecogniser)
+
         super.viewWillAppear()
     }
 
@@ -78,6 +82,8 @@ class DetailController: CollectionViewController {
             nc.removeObserver(observer)
         }
         observers.removeAll()
+        imageView.removeGestureRecognizer(clickRecogniser)
+
         super.viewWillDisappear()
     }
     
@@ -103,12 +109,6 @@ class DetailController: CollectionViewController {
         }
         view.nextKeyView = nameView
         keyViewTimer = nil
-    }
-    
-    @IBAction func changeImage(_ sender: Any){
-        if let image = imageView.image, let data = image.tiffRepresentation {
-            ChangeValueAction.send("ChangeValue", from: self, manager: application.actionManager, property: "image", value: data)
-        }
     }
     
     func addContextForDetail(context: ActionContext) {
@@ -243,6 +243,30 @@ class DetailController: CollectionViewController {
         }
     }
     
+    @IBAction func chooseImage(_ sender: Any) {
+        let panel = NSOpenPanel()
+        panel.canChooseDirectories = false
+        panel.allowsMultipleSelection = false
+        panel.allowsOtherFileTypes = false
+        panel.allowedFileTypes = NSImage.imageUnfilteredTypes
+        panel.prompt = "detail.image.choose.prompt".localized
+        panel.message = "detail.image.choose.message".localized
+        application.windowController.showPanel(panel) { response in
+            if let url = panel.url {
+                if let image = NSImage(contentsOf: url) {
+                    self.imageView.image = image
+                    self.changeImage(sender)
+                }
+            }
+        }
+
+    }
+
+    @IBAction func changeImage(_ sender: Any){
+        if let image = imageView.image, let data = image.tiffRepresentation {
+            ChangeValueAction.send("ChangeValue", from: self, manager: application.actionManager, property: "image", value: data)
+        }
+    }
 
 }
 

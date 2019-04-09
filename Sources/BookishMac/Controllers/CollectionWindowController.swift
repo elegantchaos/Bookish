@@ -73,6 +73,18 @@ class CollectionWindowController: NSWindowController, NSWindowDelegate, ActionCo
             scannerWindow = nil
         }
     }
+    
+    func showPanel<Panel: NSSavePanel>(_ panel: Panel, completion: @escaping (NSApplication.ModalResponse) -> Void) {
+        if let window = window {
+            panel.beginSheetModal(for: window) { (response) in
+                completion(response)
+            }
+        } else {
+            let response = panel.runModal()
+            completion(response)
+        }
+
+    }
 }
 
 extension CollectionWindowController: WindowControllerWithViewModel {

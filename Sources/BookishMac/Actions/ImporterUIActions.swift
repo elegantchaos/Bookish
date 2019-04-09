@@ -75,14 +75,7 @@ class ImportRequest {
     
     func askForURL() {
         let panel = self.makeOpenPanel()
-        if let window = Application.sharedInstance.windowController.window {
-            panel.beginSheetModal(for: window) { (response) in
-                if let url = panel.url {
-                    self.run(for: url)
-                }
-            }
-        } else {
-            panel.runModal()
+        Application.sharedInstance.windowController.showPanel(panel) { (response) in
             if let url = panel.url {
                 self.run(for: url)
             }
