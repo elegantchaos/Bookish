@@ -106,7 +106,9 @@ class DetailController: CollectionViewController {
     }
     
     @IBAction func changeImage(_ sender: Any){
-        print("change image")
+        if let image = imageView.image, let data = image.tiffRepresentation {
+            ChangeValueAction.send("ChangeValue", from: self, manager: application.actionManager, property: "image", value: data)
+        }
     }
     
     func addContextForDetail(context: ActionContext) {
