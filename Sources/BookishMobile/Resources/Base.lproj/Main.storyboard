@@ -312,7 +312,7 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="FHA-VO-Zzc">
-                                <rect key="frame" x="81.333333333333314" y="747" width="212.66666666666669" height="31"/>
+                                <rect key="frame" x="81.333333333333329" y="747" width="212.66666666666669" height="31"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Show This Every Time" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GJ1-CA-Uid">
                                         <rect key="frame" x="0.0" y="5.6666666666666288" width="159.66666666666666" height="19.666666666666668"/>
@@ -404,14 +404,14 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="751" scrollEnabled="NO" keyboardDismissMode="interactive" editable="NO" text="book detail placeholder" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="vlr-c5-uce" userLabel="Placeholder">
-                                                    <rect key="frame" x="58" y="4" width="662" height="35.666666666666664"/>
+                                                    <rect key="frame" x="58" y="4" width="313" height="35.666666666666664"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <color key="textColor" name="Bookish Label Text"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences" enablesReturnKeyAutomatically="YES"/>
                                                 </textView>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="751" scrollEnabled="NO" keyboardDismissMode="interactive" text="book detail text" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="BSu-ww-5eS">
-                                                    <rect key="frame" x="58" y="4" width="662" height="35.666666666666664"/>
+                                                    <rect key="frame" x="58" y="4" width="313" height="35.666666666666664"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <color key="textColor" name="Bookish Detail Text"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -438,7 +438,7 @@
                                             <outlet property="placeholder" destination="vlr-c5-uce" id="Zgj-1u-I3f"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="person" id="Cvf-PC-4Y6" customClass="PersonRow" customModule="Bookish" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="relationship" id="Cvf-PC-4Y6" customClass="RelationshipRow" customModule="Bookish" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="72" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Cvf-PC-4Y6" id="dPe-CT-ga3">
@@ -452,7 +452,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ekw-of-MC3" userLabel="Person" customClass="LinkButton" customModule="Bookish" customModuleProvider="target">
-                                                    <rect key="frame" x="49" y="4" width="671" height="35.666666666666664"/>
+                                                    <rect key="frame" x="49" y="4" width="322" height="35.666666666666664"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <state key="normal" title="Some Person">
                                                         <color key="titleColor" name="Bookish Detail Text"/>
@@ -475,7 +475,7 @@
                                                     </connections>
                                                 </button>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="add person (or choose from list)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fl3-Jd-qn1" userLabel="Edit Person">
-                                                    <rect key="frame" x="49" y="13.333333333333336" width="635" height="17"/>
+                                                    <rect key="frame" x="49" y="13.333333333333336" width="286" height="17"/>
                                                     <color key="textColor" name="Bookish Detail Text"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
@@ -487,7 +487,7 @@
                                                     </connections>
                                                 </textField>
                                                 <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9BK-D2-Ln3">
-                                                    <rect key="frame" x="688" y="11" width="32" height="22"/>
+                                                    <rect key="frame" x="339" y="11" width="32" height="22"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="32" id="TuO-OO-6gZ"/>
                                                     </constraints>
@@ -525,21 +525,53 @@
                                             <outlet property="roleButton" destination="r6r-Kv-luW" id="y4m-Ue-66m"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="publisher" id="bZc-SB-x2g" customClass="PublisherRow" customModule="Bookish" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="person" id="v3v-lk-WeV" customClass="PersonRow" customModule="Bookish" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="116" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="v3v-lk-WeV" id="T74-iA-8lV">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mAb-z3-NvJ" userLabel="Person" customClass="LinkButton" customModule="Bookish" customModuleProvider="target">
+                                                    <rect key="frame" x="20" y="4" width="351" height="35.666666666666664"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <state key="normal" title="Some Person">
+                                                        <color key="titleColor" name="Bookish Detail Text"/>
+                                                    </state>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="actionID" value="RevealPerson"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="performAction:" destination="pBo-5d-NDY" eventType="primaryActionTriggered" id="Xfa-1V-dK0"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="mAb-z3-NvJ" firstAttribute="leading" secondItem="T74-iA-8lV" secondAttribute="leading" constant="20" symbolic="YES" id="LZV-3F-g0W"/>
+                                                <constraint firstAttribute="bottom" secondItem="mAb-z3-NvJ" secondAttribute="bottom" constant="4" id="Y6L-hz-dLe"/>
+                                                <constraint firstItem="mAb-z3-NvJ" firstAttribute="top" secondItem="T74-iA-8lV" secondAttribute="top" constant="4" id="gF2-E1-siB"/>
+                                                <constraint firstAttribute="trailing" secondItem="mAb-z3-NvJ" secondAttribute="trailing" constant="4" id="wmT-fK-45a"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="personButton" destination="mAb-z3-NvJ" id="Xlp-qp-B8i"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="publisher" id="bZc-SB-x2g" customClass="PublisherRow" customModule="Bookish" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="160" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bZc-SB-x2g" id="fj5-0p-LUL">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="publisher" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gvT-P4-bqc">
-                                                    <rect key="frame" x="8" y="12.000000000000002" width="65.666666666666671" height="19.666666666666671"/>
+                                                    <rect key="frame" x="15" y="15" width="65.666666666666671" height="14"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                                     <color key="textColor" name="Bookish Label Text"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MGE-Im-Xl3" customClass="LinkButton" customModule="Bookish" customModuleProvider="target">
-                                                    <rect key="frame" x="77.666666666666686" y="4" width="642.33333333333326" height="35.666666666666664"/>
+                                                    <rect key="frame" x="84.666666666666657" y="4" width="286.33333333333337" height="35.666666666666664"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <state key="normal" title="Some Publisher">
                                                         <color key="titleColor" name="Bookish Detail Text"/>
@@ -569,20 +601,20 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="series" id="nVO-oK-1Tu" customClass="SeriesRow" customModule="Bookish" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="160" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="204" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="nVO-oK-1Tu" id="i2d-CB-cQo">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="series" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KG3-Ya-Qij">
-                                                    <rect key="frame" x="8" y="12.000000000000002" width="42" height="19.666666666666671"/>
+                                                    <rect key="frame" x="15" y="15" width="42" height="14"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                                     <color key="textColor" name="Bookish Label Text"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Taj-wV-1gx" customClass="LinkButton" customModule="Bookish" customModuleProvider="target">
-                                                    <rect key="frame" x="54" y="4" width="666" height="35.666666666666664"/>
+                                                    <rect key="frame" x="61" y="4" width="310" height="35.666666666666664"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <state key="normal" title="Some Series">
                                                         <color key="titleColor" name="Bookish Detail Text"/>
@@ -612,20 +644,20 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="date" id="lEu-Mv-HXH" customClass="DateRow" customModule="Bookish" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="204" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="248" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="lEu-Mv-HXH" id="j31-jT-po7">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pMd-cN-nzQ">
-                                                    <rect key="frame" x="8" y="12.000000000000002" width="31" height="19.666666666666671"/>
+                                                    <rect key="frame" x="15" y="15" width="31" height="14"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                                     <color key="textColor" name="Bookish Label Text"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="751" text="12th November, 1969" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="O0q-kQ-lou">
-                                                    <rect key="frame" x="43" y="4" width="677" height="35.666666666666664"/>
+                                                    <rect key="frame" x="50" y="4" width="321" height="35.666666666666664"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <color key="textColor" name="Bookish Detail Text"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -648,20 +680,20 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="time" id="YUp-Qo-fNx" customClass="DateRow" customModule="Bookish" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="248" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="292" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="YUp-Qo-fNx" id="aky-1D-thN">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="odI-ai-Vg8">
-                                                    <rect key="frame" x="8" y="12.000000000000002" width="31" height="19.666666666666671"/>
+                                                    <rect key="frame" x="15" y="15" width="31" height="14"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                                     <color key="textColor" name="Bookish Label Text"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="751" text="12th November, 1969" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="jut-bJ-0e0">
-                                                    <rect key="frame" x="43" y="4" width="677" height="35.666666666666664"/>
+                                                    <rect key="frame" x="50" y="4" width="321" height="35.666666666666664"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <color key="textColor" name="Bookish Detail Text"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -684,14 +716,14 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="book" id="Nfz-Hj-uMC" customClass="BookRow" customModule="Bookish" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="292" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="336" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Nfz-Hj-uMC" id="YIe-Gk-swm">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qme-y3-tce" customClass="LinkButton" customModule="Bookish" customModuleProvider="target">
-                                                    <rect key="frame" x="20" y="4" width="700" height="35.666666666666664"/>
+                                                    <rect key="frame" x="20" y="4" width="351" height="35.666666666666664"/>
                                                     <state key="normal" title="Button">
                                                         <color key="titleColor" name="Bookish Detail Text"/>
                                                     </state>
@@ -716,20 +748,20 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="editableDate" id="iRj-RX-yKX" customClass="DateRow" customModule="Bookish" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="336" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="380" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="iRj-RX-yKX" id="024-Io-AH9">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oE8-My-J7G">
-                                                    <rect key="frame" x="8" y="12.000000000000002" width="31" height="19.666666666666671"/>
+                                                    <rect key="frame" x="15" y="15" width="31" height="14"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                                     <color key="textColor" name="Bookish Label Text"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="751" text="12th November, 1969" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Igm-FP-WEA">
-                                                    <rect key="frame" x="43" y="4" width="677" height="35.666666666666664"/>
+                                                    <rect key="frame" x="50" y="4" width="321" height="35.666666666666664"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <color key="textColor" name="Bookish Detail Text"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -752,20 +784,20 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="editableDimensions" id="Dgp-db-ISo" customClass="DateRow" customModule="Bookish" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="380" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="424" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Dgp-db-ISo" id="2Jk-9O-lML">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qce-iP-2CL">
-                                                    <rect key="frame" x="8" y="12.000000000000002" width="31" height="19.666666666666671"/>
+                                                    <rect key="frame" x="15" y="15" width="31" height="14"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                                     <color key="textColor" name="Bookish Label Text"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="751" text="12th November, 1969" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="GWf-1K-OsY">
-                                                    <rect key="frame" x="43" y="4" width="677" height="35.666666666666664"/>
+                                                    <rect key="frame" x="50" y="4" width="321" height="35.666666666666664"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <color key="textColor" name="Bookish Detail Text"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -785,6 +817,38 @@
                                         <connections>
                                             <outlet property="detail" destination="GWf-1K-OsY" id="cBs-bA-kSf"/>
                                             <outlet property="label" destination="Qce-iP-2CL" id="hD8-S2-sms"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="entry" id="E56-3E-FAD" customClass="SeriesEntryRow" customModule="Bookish" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="468" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="E56-3E-FAD" id="ovx-cL-MRt">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ei7-Yz-rl6" customClass="LinkButton" customModule="Bookish" customModuleProvider="target">
+                                                    <rect key="frame" x="20" y="4" width="351" height="35.666666666666664"/>
+                                                    <state key="normal" title="Button">
+                                                        <color key="titleColor" name="Bookish Detail Text"/>
+                                                    </state>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="actionID" value="RevealBook"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="performAction:" destination="pBo-5d-NDY" eventType="primaryActionTriggered" id="y1e-Bv-W6L"/>
+                                                        <segue destination="nAr-WG-Ppx" kind="show" identifier="pushDetail" id="gEI-eC-5qR"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="ei7-Yz-rl6" secondAttribute="bottom" constant="4" id="NNh-SX-LIb"/>
+                                                <constraint firstItem="ei7-Yz-rl6" firstAttribute="top" secondItem="ovx-cL-MRt" secondAttribute="top" constant="4" id="Yig-ax-JCO"/>
+                                                <constraint firstAttribute="trailing" secondItem="ei7-Yz-rl6" secondAttribute="trailing" constant="4" id="fiD-O8-2bZ"/>
+                                                <constraint firstItem="ei7-Yz-rl6" firstAttribute="leading" secondItem="ovx-cL-MRt" secondAttribute="leading" constant="20" symbolic="YES" id="knd-85-3Y9"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="bookButton" destination="ei7-Yz-rl6" id="ggy-7t-cBV"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -908,7 +972,7 @@
                                 <rect key="frame" x="20" y="385" width="560" height="311"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="candidate" id="jb9-CD-17D" customClass="CandidateRow" customModule="Bookish" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="candidate" id="jb9-CD-17D" customClass="CandidateRow" customModule="Bookish" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="560" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jb9-CD-17D" id="WRt-wS-ZWe">
@@ -916,16 +980,16 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" axis="vertical" distribution="equalSpacing" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="qW5-8G-1UK">
-                                                    <rect key="frame" x="40" y="4" width="428" height="35.666666666666664"/>
+                                                    <rect key="frame" x="40" y="4" width="741" height="35.666666666666664"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wxq-v3-0Zu">
-                                                            <rect key="frame" x="0.0" y="0.0" width="428" height="20.333333333333332"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="741" height="20.333333333333332"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FA8-cP-qC4">
-                                                            <rect key="frame" x="0.0" y="28.333333333333332" width="428" height="7.3333333333333321"/>
+                                                            <rect key="frame" x="0.0" y="28.333333333333332" width="741" height="7.3333333333333321"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -1092,7 +1156,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Book" width="16" height="16"/>
+        <image name="Book" width="32" height="32"/>
         <image name="Choose" width="12" height="12"/>
         <image name="Settings" width="32" height="32"/>
         <namedColor name="Bookish Detail Text">

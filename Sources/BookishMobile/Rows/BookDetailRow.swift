@@ -10,12 +10,14 @@ import BookishModel
 class BookDetailRow: UITableViewCell, UITextViewDelegate, DetailRow {
     func setup(row: DetailItem, object: ModelObject) {
         info = row
-        label.font = application.viewState.labelFont
-        label.text = row.heading
+        if let label = label {
+            label.font = application.viewState.labelFont
+            label.text = row.heading
+        }
         setupContent(row: row, object: object)
     }
     
-    @IBOutlet weak var label: UILabel!
+    @IBOutlet weak var label: UILabel?
     @IBOutlet weak var detail: UITextView!
     @IBOutlet weak var placeholder: UITextView!
     
@@ -28,7 +30,7 @@ class BookDetailRow: UITableViewCell, UITextViewDelegate, DetailRow {
             placeholder.text = ""
         } else {
             placeholder.isHidden = false
-            placeholder.text = "add \(label.text!)"
+            placeholder.text = "add \(label!.text!)"
         }
     }
     

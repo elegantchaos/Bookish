@@ -57,7 +57,7 @@ class DetailController: UIViewController, UITableViewDataSource, UITableViewDele
             }
             
             if let value = object.value(forKey: "summary") as? String, source.isEditing || !value.isEmpty {
-                bindings.append(TextFieldBinding(for: subtitleLabel, to: object, path: path))
+                subtitleLabel.text = value
                 subtitleLabel.isHidden = false
             } else {
                 subtitleLabel.isHidden = true
@@ -151,12 +151,12 @@ class DetailController: UIViewController, UITableViewDataSource, UITableViewDele
         switch segue.identifier {
         case "chooseRole":
             prepareChooser(for: segue, sender: sender) { (cell) -> ChooseRoleTarget in
-                return ChooseRoleTarget(row: cell as! PersonRow)
+                return ChooseRoleTarget(row: cell as! RelationshipRow)
             }
             
         case "choosePerson":
             prepareChooser(for: segue, sender: sender) { (cell) -> ChoosePersonTarget in
-                return ChoosePersonTarget(row: cell as! PersonRow)
+                return ChoosePersonTarget(row: cell as! RelationshipRow)
             }
 
         case "pushDetail":
