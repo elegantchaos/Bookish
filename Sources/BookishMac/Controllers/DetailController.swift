@@ -157,7 +157,8 @@ class DetailController: CollectionViewController {
     fileprivate func updateTable(visible: Bool) {
         if visible {
             detailChannel.debug("filtering details")
-            
+
+            detailsTable.headerView?.isHidden = !cvm.showDebug
             let selection = index?.selectedObjects as? [ModelObject] ?? []
             source.filter(for: selection, editing: editing, combining: true, context: cvm)
 
@@ -165,6 +166,9 @@ class DetailController: CollectionViewController {
             let visibleColumns = source.visibleColumns
             for column in detailsTable.tableColumns {
                 column.isHidden = !visibleColumns.contains(column.identifier.rawValue)
+                if column.isHidden {
+                    print("hidden \(column)")
+                }
             }
         }
         
@@ -314,6 +318,7 @@ extension DetailController: NSTableViewDelegate, NSTableViewDataSource {
     }
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
+        print("making view for row \(row)")
         guard let columnID = tableColumn?.identifier else { return nil }
         
         let rowInfo = source.combinedInfo(row: row)
@@ -328,8 +333,6 @@ extension DetailController: NSTableViewDelegate, NSTableViewDataSource {
         if let cell = view as? DetailTableCell {
             cell.setup(for: rowInfo, of: self)
         }
-        view.validateButtons()
-//        view.scheduleForValidation()
         
         return view
     }

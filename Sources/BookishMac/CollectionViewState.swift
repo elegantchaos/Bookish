@@ -15,10 +15,11 @@ import BookishModel
         case people = 1
         case publishers = 2
         case series = 3
+        case role = 4
         
-        static let names = ["Book", "Person", "Publisher", "Series"]
+        static let names = ["Book", "Person", "Publisher", "Series", "Role"]
         
-        func singluarName() -> String {
+        func singularName() -> String {
             return Mode.names[rawValue]
         }
     }

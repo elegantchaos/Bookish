@@ -72,7 +72,7 @@ class CollectionRootViewController: CollectionViewController {
             }
             sender.state = .on
             if let index = buttons.firstIndex(of: sender) {
-                cvm.modeIndex = index
+                application.windowController.reveal(index: index)
                 setMarker(to: index)
             }
         }

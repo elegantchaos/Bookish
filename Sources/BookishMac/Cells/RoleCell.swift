@@ -11,10 +11,10 @@ import BookishModel
 class RoleCell: NSTableCellView, DetailTableCell {
     @IBOutlet weak var rolePopup: ColoredPopUpButton!
     func setup(for row: DetailItem, of view: DetailController) {
-        assert(row is PersonDetailItem)
+        assert(row is RelationshipDetailItem)
         if row.placeholder {
             rolePopup.selectItem(withTitle: "author")
-        } else if let item = row as? PersonDetailItem, let relationship = item.relationship {
+        } else if let item = row as? RelationshipDetailItem, let relationship = item.relationship {
             objectValue = relationship
             
             if view.editing {

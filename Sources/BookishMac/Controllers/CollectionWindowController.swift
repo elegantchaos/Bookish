@@ -40,6 +40,14 @@ class CollectionWindowController: NSWindowController, NSWindowDelegate, ActionCo
         }
     }
     
+    func reveal(index: Int) {
+        cvm.modeIndex = index
+        let name = cvm.mode.singularName()
+        if let index = indexControllers[name] as? IndexController {
+            index.selectionChanged()
+        }
+    }
+    
     func reveal<EntityType: ModelObject>(_ object: EntityType, mode: CollectionViewState.Mode) {
         cvm.mode = mode
         if let name = EntityType.entity().name {

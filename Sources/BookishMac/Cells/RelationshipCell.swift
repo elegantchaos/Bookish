@@ -36,12 +36,12 @@ class RelationshipCell: AnnotatedTableCellView {
 
 extension RelationshipCell: DetailTableCell {
     func setup(for row: DetailItem, of view: DetailController) {
-        assert(row is PersonDetailItem)
+        assert(row is RelationshipDetailItem)
         detailView = view
         if row.placeholder {
             personCombo.stringValue = ""
             detailChannel.debug("setup as a placeholder")
-        } else if let item = row as? PersonDetailItem, let relationship = item.relationship {
+        } else if let item = row as? RelationshipDetailItem, let relationship = item.relationship {
             objectValue = relationship
             if let person = relationship.person, let name = person.name {
                 if !detailView.editing {

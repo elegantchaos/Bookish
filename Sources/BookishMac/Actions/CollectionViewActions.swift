@@ -24,7 +24,7 @@ class ItemAction: DelegatedAction {
     }
     
     class func actionIdentifier(for mode: CollectionViewState.Mode, action: String, context: ActionContext) -> String {
-        let identifier = "\(action)\(mode.singluarName())"
+        let identifier = "\(action)\(mode.singularName())"
         itemActionChannel.debug("Identifier \(identifier) for \(mode) \(context)")
         return identifier
     }
@@ -49,7 +49,7 @@ class DeleteItemAction: ItemAction {
         var result: Action.Validation = super.validate(context: context)
         
         if let model = context.viewModel {
-            result = Action.Validation(enabled: result.enabled, visible: result.visible, name: "Delete \(model.mode.singluarName())")
+            result = Action.Validation(enabled: result.enabled, visible: result.visible, name: "Delete \(model.mode.singularName())")
         }
         
         return result

@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "PublisherPlaceholder.png",
+      "filename" : "RolePlaceholder.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "PublisherPlaceholder@2x.png",
+      "filename" : "RolePlaceholder@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "PublisherPlaceholder@3x.png",
+      "filename" : "RolePlaceholder@3x.png",
       "scale" : "3x"
     }
   ],
