@@ -56,7 +56,7 @@ class DetailController: UIViewController, UITableViewDataSource, UITableViewDele
                 bindings.append(StringBinding(for: self, property: "title", to: object, path: path))
             }
             
-            if let path = source.subtitleProperty, let value = object.value(forKey: path) as? String, source.isEditing || !value.isEmpty {
+            if let value = object.value(forKey: "summary") as? String, source.isEditing || !value.isEmpty {
                 bindings.append(TextFieldBinding(for: subtitleLabel, to: object, path: path))
                 subtitleLabel.isHidden = false
             } else {

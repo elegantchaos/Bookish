@@ -144,7 +144,7 @@ class DetailController: CollectionViewController {
     }
     
     fileprivate func updateSubtitle(for object: NSObject, visible: Bool) {
-        if visible, let path = source.subtitleProperty, let value = object.value(forKey: path) as? String, source.isEditing || !value.isEmpty {
+        if visible, let value = object.value(forKey: "summary") as? String, source.isEditing || !value.isEmpty {
             subtitleView.objectValue = value
             subtitleView.isHidden = false
             subtitleView.isEditable = source.isEditing
@@ -445,8 +445,6 @@ extension DetailController: NSControlTextEditingDelegate {
             switch field {
             case nameView:
                 property = source.titleProperty
-            case subtitleView:
-                property = source.subtitleProperty
             default:
                 property = nil
             }
