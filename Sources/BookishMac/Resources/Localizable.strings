@@ -5,3 +5,6 @@
   Created by Sam Deane on 20/12/2018.
   Copyright © 2018 Elegant Chaos Limited. All rights reserved.
 */
+
+detail.image.choose.prompt = "Set Image";
+detail.image.choose.message = "Select the image to use.";
