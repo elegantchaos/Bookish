@@ -318,7 +318,6 @@ extension DetailController: NSTableViewDelegate, NSTableViewDataSource {
     }
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        print("making view for row \(row)")
         guard let columnID = tableColumn?.identifier else { return nil }
         
         let rowInfo = source.combinedInfo(row: row)
