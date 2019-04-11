@@ -15,6 +15,23 @@ class IndexCell: NSTableCellView {
         }
     }
     
+    override var backgroundStyle: NSView.BackgroundStyle {
+        get {
+            return super.backgroundStyle
+        }
+        
+        set (value) {
+            switch value {
+            case .emphasized:
+                textField?.textColor = NSColor(named: "Bookish Index Text Selected")
+                
+            default:
+                textField?.textColor = NSColor(named: "Bookish Index Text")
+            }
+            super.backgroundStyle = value
+        }
+    }
+    
     fileprivate func updateImage(for object: ModelObject) {
         if let imageView = imageView {
             if let data = object.value(forKey: "image") as? Data, let image = NSImage(data: data) {

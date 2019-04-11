@@ -13,6 +13,7 @@ class DetailCell: AnnotatedTableCellView, DetailTableCell {
     var detailView: DetailController!
     var observer: NSKeyValueObservation?
     var asNumber = false
+    var originalValue = ""
     
     func setup(for row: DetailItem, of view: DetailController) {
         assert(row is SimpleDetailItem)
@@ -33,9 +34,10 @@ class DetailCell: AnnotatedTableCellView, DetailTableCell {
             let selection = selection.value(forKey: detail.binding) as? NSObject
             if selection === NSMultipleValuesMarker {
                 subview.placeholderString = "Multiple Values"
-                subview.objectValue = ""
+                subview.stringValue = ""
             } else {
                 subview.objectValue = selection
+                originalValue = subview.stringValue
                 asNumber = selection?.isKind(of: NSNumber.self) ?? false
                 var font = detailView.cvm.detailFont
                 if detail.isDebug, let smaller = NSFont(descriptor: font.fontDescriptor, size: font.pointSize - 2) {
@@ -66,8 +68,21 @@ class DetailCell: AnnotatedTableCellView, DetailTableCell {
 extension DetailCell {
     override func controlTextDidEndEditing(_ obj: Notification) {
         if detailView.editing, let subview = textField, let detail = objectValue as? DetailSpec {
-            let value: Any = asNumber ? subview.doubleValue : subview.stringValue
-            ChangeValueAction.send("ChangeValue", from: self, manager: application.actionManager, property: detail.binding, value: value)
+            let value: Any
+            let changed: Bool
+            if asNumber {
+                let number = subview.doubleValue
+                changed = number != (originalValue as NSString).doubleValue
+                value = number
+            } else {
+                let string = subview.stringValue
+                changed = string != originalValue
+                value = string
+            }
+            
+            if changed {
+                ChangeValueAction.send("ChangeValue", from: self, manager: application.actionManager, property: detail.binding, value: value)
+            }
 
         }
         super.controlTextDidEndEditing(obj)

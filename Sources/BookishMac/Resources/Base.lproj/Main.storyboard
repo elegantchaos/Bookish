@@ -1022,7 +1022,7 @@ Gw
                                         <stackView distribution="equalSpacing" orientation="vertical" alignment="centerX" spacing="16" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="G7s-O5-blY">
                                             <rect key="frame" x="4" y="121" width="64" height="244"/>
                                             <subviews>
-                                                <button translatesAutoresizingMaskIntoConstraints="NO" id="pTf-uQ-crF">
+                                                <button toolTip="Books" translatesAutoresizingMaskIntoConstraints="NO" id="pTf-uQ-crF">
                                                     <rect key="frame" x="12" y="205" width="40" height="41"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="36" id="EmN-TV-lN9"/>
@@ -1036,7 +1036,7 @@ Gw
                                                         <action selector="selectRadio:" target="iuc-9t-fNj" id="5mL-91-eW5"/>
                                                     </connections>
                                                 </button>
-                                                <button translatesAutoresizingMaskIntoConstraints="NO" id="fIv-Pl-PNw">
+                                                <button toolTip="People" translatesAutoresizingMaskIntoConstraints="NO" id="fIv-Pl-PNw">
                                                     <rect key="frame" x="12" y="153" width="40" height="41"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="36" id="aoT-LG-Qg2"/>
@@ -1050,7 +1050,7 @@ Gw
                                                         <action selector="selectRadio:" target="iuc-9t-fNj" id="oeG-Ss-Lrq"/>
                                                     </connections>
                                                 </button>
-                                                <button translatesAutoresizingMaskIntoConstraints="NO" id="3gT-z5-UYY">
+                                                <button toolTip="Publishers" translatesAutoresizingMaskIntoConstraints="NO" id="3gT-z5-UYY">
                                                     <rect key="frame" x="12" y="101" width="40" height="41"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="36" id="E5Q-1J-Lhg"/>
@@ -1064,7 +1064,7 @@ Gw
                                                         <action selector="selectRadio:" target="iuc-9t-fNj" id="2Td-BW-uJN"/>
                                                     </connections>
                                                 </button>
-                                                <button translatesAutoresizingMaskIntoConstraints="NO" id="5F3-j3-4IV">
+                                                <button toolTip="Series" translatesAutoresizingMaskIntoConstraints="NO" id="5F3-j3-4IV">
                                                     <rect key="frame" x="12" y="49" width="40" height="41"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="36" id="YXf-sL-kMg"/>
@@ -1078,7 +1078,7 @@ Gw
                                                         <action selector="selectRadio:" target="iuc-9t-fNj" id="GYR-q2-pcX"/>
                                                     </connections>
                                                 </button>
-                                                <button translatesAutoresizingMaskIntoConstraints="NO" id="9dZ-so-hT6">
+                                                <button toolTip="Roles" translatesAutoresizingMaskIntoConstraints="NO" id="9dZ-so-hT6">
                                                     <rect key="frame" x="12" y="-3" width="40" height="41"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="36" id="Wx3-ZQ-Dr4"/>
@@ -1249,11 +1249,11 @@ Gw
                                                         <rect key="frame" x="0.0" y="0.0" width="200" height="325"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <size key="intercellSpacing" width="3" height="2"/>
-                                                        <color key="backgroundColor" name="Bookish Index"/>
+                                                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                                         <tableColumns>
                                                             <tableColumn identifier="titles" width="197" minWidth="40" maxWidth="1000" id="jWN-mD-vb5">
-                                                                <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Books">
+                                                                <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Index">
                                                                     <font key="font" metaFont="smallSystem"/>
                                                                     <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                     <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
@@ -1311,6 +1311,7 @@ Gw
                                                         <connections>
                                                             <binding destination="iUG-Sw-kPc" name="content" keyPath="arrangedObjects" id="Nh4-cp-4Az"/>
                                                             <binding destination="iUG-Sw-kPc" name="selectionIndexes" keyPath="selectionIndexes" previousBinding="Nh4-cp-4Az" id="TVo-kI-Ed3"/>
+                                                            <outlet property="delegate" destination="PUA-xK-Wyi" id="D6S-XB-Tc6"/>
                                                         </connections>
                                                     </tableView>
                                                 </subviews>
@@ -1905,8 +1906,8 @@ Gw
                                                                             <outlet property="textField" destination="FHu-L0-2fo" id="Qaj-S3-GXi"/>
                                                                         </connections>
                                                                     </tableCellView>
-                                                                    <tableCellView identifier="editableDimensions" id="OZV-07-tGS" userLabel="dimensions" customClass="DimensionsCell" customModule="Bookish" customModuleProvider="target">
-                                                                        <rect key="frame" x="125" y="201" width="259" height="24"/>
+                                                                    <tableCellView identifier="editableDimensions" misplaced="YES" id="OZV-07-tGS" userLabel="dimensions" customClass="DimensionsCell" customModule="Bookish" customModuleProvider="target">
+                                                                        <rect key="frame" x="125" y="201" width="223" height="24"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <stackView distribution="fillEqually" orientation="horizontal" alignment="top" spacing="10" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YeD-9c-Svh">
@@ -2323,18 +2324,18 @@ Gw
         <image name="AddBook" width="32" height="32"/>
         <image name="AddRelationship" width="32" height="32"/>
         <image name="BookPlaceholder" width="512" height="512"/>
-        <image name="Books" width="32" height="32"/>
+        <image name="Books" width="512" height="512"/>
         <image name="ChooseDateSmall" width="12" height="12"/>
         <image name="HilightMarker" width="4" height="36"/>
         <image name="Minus" width="12" height="12"/>
         <image name="NSAddTemplate" width="11" height="11"/>
-        <image name="People" width="32" height="32"/>
-        <image name="Publishers" width="32" height="32"/>
+        <image name="People" width="512" height="512"/>
+        <image name="Publishers" width="512" height="512"/>
         <image name="RemoveBook" width="32" height="32"/>
         <image name="RemoveRelationship" width="32" height="32"/>
         <image name="Reveal" width="12" height="12"/>
-        <image name="Role" width="32" height="32"/>
-        <image name="Series" width="32" height="32"/>
+        <image name="Role" width="512" height="512"/>
+        <image name="Series" width="512" height="512"/>
         <namedColor name="Bookish Detail">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

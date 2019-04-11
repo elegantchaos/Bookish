@@ -137,7 +137,13 @@ class DetailController: CollectionViewController {
         if visible {
             nameView.isEditable = source.isEditing
             if let path = source.titleProperty {
-                nameView.objectValue = object.value(forKey: path)
+                let value = object.value(forKey: path) as? NSObject
+                if value === NSMultipleValuesMarker {
+                    nameView.placeholderString = "multiple items selected"
+                    nameView.stringValue = ""
+                } else {
+                    nameView.objectValue = value
+                }
             }
             addDoubleClickUnlock(to: nameView)
         }

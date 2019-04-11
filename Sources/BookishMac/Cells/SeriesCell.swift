@@ -72,7 +72,7 @@ extension SeriesCell: NSComboBoxDelegate {
         if let context = detailView?.cvm.managedObjectContext, let control = obj.object as? NSControl {
             if control == seriesCombo {
                 let newName = seriesCombo.stringValue
-                if let updatedSeries = Series.named(newName, in: context, createIfMissing: false) {
+                if !newName.isEmpty, let updatedSeries = Series.named(newName, in: context, createIfMissing: false) {
                     changeSeries(to: updatedSeries)
                 } else {
                     changeSeries(creating: newName)
