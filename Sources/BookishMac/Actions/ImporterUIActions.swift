@@ -206,7 +206,7 @@ class ImportNewAction: ImporterAction {
     
     override func perform(context: ActionContext) {
         if let importer = importer(for: context) {
-            if let request = try? NewImportRequest(importer: importer) {
+            if let request = ((try? NewImportRequest(importer: importer)) as NewImportRequest??) {
                 request?.queue()
             }
         }

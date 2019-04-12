@@ -21,3 +21,5 @@ BOOKISH_BUILD = ${BUILD_NUMBER}
 BOOKISH_COPYRIGHT = Copyright © 2019 Elegant Chaos Limited. All rights reserved.
 
 CURRENT_PROJECT_VERSION = ${BUILD_NUMBER}
+
+SWIFT_VERSION = 5.0
