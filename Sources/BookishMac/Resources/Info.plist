@@ -52,5 +52,7 @@
 	<string>zSIl0MxSxtFoS1fs7hUY4ZLvWy96GrmMqghIFMvKUFI=</string>
 	<key>SUFeedURL</key>
 	<string>https://bookish.elegantchaos.com/updates/bookish.xml</string>
+	<key>SUPublicDSAKeyFile</key>
+	<string>dsa_pub.pem</string>
 </dict>
 </plist>

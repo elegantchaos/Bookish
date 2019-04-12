@@ -10,7 +10,7 @@ import ActionsKit
 import Logger
 import BookishCore
 import CloudKit
-
+import Sparkle
 
 let applicationChannel = Logger("Application")
 
@@ -19,8 +19,9 @@ let applicationChannel = Logger("Application")
     }
 }
 
-@NSApplicationMain class Application: NSObject {
+@NSApplicationMain class Application: NSObject, SPUUpdaterDelegate, SPUStandardUserDriverDelegate {
     
+    lazy var updateManager = makeUpdateManager()
     let windowControllerFactory = WindowControllerFactory<CollectionViewState>()
     let actionManager = ActionManagerMac()
     let importManager = ImportManager()
@@ -50,9 +51,18 @@ let applicationChannel = Logger("Application")
         return NSApp.delegate as! Application
     }
     
+    func makeUpdateManager() -> SPUStandardUpdaterController {
+        let updateManager = SPUStandardUpdaterController(updaterDelegate: self, userDriverDelegate: self)
+        return updateManager
+    }
+    
     func resetState() {
         let defaultsName = Bundle.main.bundleIdentifier!
         UserDefaults.standard.removePersistentDomain(forName: defaultsName)
+    }
+    
+    fileprivate func setupUpdates() {
+        updateManager.checkForUpdates(self)
     }
     
     fileprivate func setupLookups() {
@@ -118,6 +128,7 @@ extension Application: NSApplicationDelegate {
         setupActions()
         setupLookups()
         setupTransformers()
+        setupUpdates()
         
         if CommandLine.arguments.contains("--test-document") {
             mode = .replaceWithTestData
@@ -191,6 +202,10 @@ extension Application: NSMenuItemValidation {
     
     @IBAction func delete(_ sender: Any) {
         Application.sharedInstance.actionManager.perform(identifier: "DeleteItem", info: ActionInfo(sender: sender))
+    }
+    
+    @IBAction func checkForUpdates(_ sender: Any) {
+        updateManager.checkForUpdates(sender)
     }
 }
 

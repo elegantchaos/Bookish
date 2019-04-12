@@ -1,6 +1,7 @@
 export BUILD_DIR="$PWD/.build"
-xcodebuild -workspace Bookish.xcworkspace -scheme generate_appcast BUILD_DIR="$BUILD_DIR"
+xcodebuild build -workspace Bookish.xcworkspace -scheme generate_appcast BUILD_DIR="$BUILD_DIR"
 CAST_DIR="$PWD/Dependencies/Website/updates"
 mkdir -p "$CAST_DIR"
-.build/Release/generate_appcast "$CAST_DIR"
+#.build/Release/generate_appcast "$CAST_DIR"
+.build/Release/generate_appcast -n "Bookish Sparkle DSA 1024 Key" -k ~/Library/Keychains/login.keychain "$CAST_DIR"
 

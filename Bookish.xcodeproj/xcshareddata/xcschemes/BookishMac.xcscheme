@@ -32,10 +32,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "6DAD10F818CA067900237084"
-               BuildableName = "Ensembles.framework"
-               BlueprintName = "Ensembles"
-               ReferencedContainer = "container:Dependencies/Ensembles/Framework/Ensembles Mac.xcodeproj">
+               BlueprintIdentifier = "8DC2EF4F0486A6940098B216"
+               BuildableName = "Sparkle.framework"
+               BlueprintName = "Sparkle"
+               ReferencedContainer = "container:Dependencies/Sparkle/Sparkle.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -46,10 +46,52 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8DC2EF4F0486A6940098B216"
-               BuildableName = "Sparkle.framework"
-               BlueprintName = "Sparkle"
+               BlueprintIdentifier = "724BB36B1D31D0B7005D534A"
+               BuildableName = "org.sparkle-project.InstallerConnection.xpc"
+               BlueprintName = "SparkleInstallerConnection"
                ReferencedContainer = "container:Dependencies/Sparkle/Sparkle.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "726E07AC1CAF08D6001A286B"
+               BuildableName = "org.sparkle-project.InstallerLauncher.xpc"
+               BlueprintName = "SparkleInstallerLauncher"
+               ReferencedContainer = "container:Dependencies/Sparkle/Sparkle.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "724BB3921D333832005D534A"
+               BuildableName = "org.sparkle-project.InstallerStatus.xpc"
+               BlueprintName = "SparkleInstallerStatus"
+               ReferencedContainer = "container:Dependencies/Sparkle/Sparkle.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "6DAD10F818CA067900237084"
+               BuildableName = "Ensembles.framework"
+               BlueprintName = "Ensembles"
+               ReferencedContainer = "container:Dependencies/Ensembles/Framework/Ensembles Mac.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry

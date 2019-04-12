@@ -26,7 +26,7 @@
                                         <menuItem title="Check For Updates…" id="fQk-Q7-aGJ">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
-                                                <action selector="checkForUpdates:" target="ZgR-DK-GFM" id="fQg-jF-PRR"/>
+                                                <action selector="checkForUpdates:" target="Ady-hI-5gd" id="X2t-JY-V4N"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="VOq-y0-SEH"/>
@@ -562,7 +562,6 @@ CA
                 </application>
                 <customObject id="Voe-Tx-rLC" customClass="Application" customModule="Bookish" customModuleProvider="target"/>
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
-                <customObject id="ZgR-DK-GFM" customClass="SUUpdater"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-118" y="192"/>
