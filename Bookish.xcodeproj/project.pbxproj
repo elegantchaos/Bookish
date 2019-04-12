@@ -23,6 +23,9 @@
 		221B8557225E2E0C00BC4D32 /* PersonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221B8556225E2E0C00BC4D32 /* PersonCell.swift */; };
 		221B8559225E5C8600BC4D32 /* RelationshipRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221B8558225E5C8600BC4D32 /* RelationshipRow.swift */; };
 		221B855B225E5F0500BC4D32 /* SeriesEntryRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221B855A225E5F0500BC4D32 /* SeriesEntryRow.swift */; };
+		221B8569226093D500BC4D32 /* Ensembles.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22A3E0C421FA014F00BA4F17 /* Ensembles.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		221B856B2260941C00BC4D32 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 221B856A2260941C00BC4D32 /* Sparkle.framework */; };
+		221B856C2260942F00BC4D32 /* Sparkle.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 221B856A2260941C00BC4D32 /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		221C4B35216BAAAC0086D56F /* RelationshipUIActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221C4B2F216BA96C0086D56F /* RelationshipUIActions.swift */; };
 		221ED512216B8EAB00594714 /* BookDetailRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221ED511216B8EAB00594714 /* BookDetailRow.swift */; };
 		221F272921382C8E00DC2DC7 /* DateTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221F272821382C8E00DC2DC7 /* DateTransformer.swift */; };
@@ -56,7 +59,6 @@
 		226E8E8C21AC73D9001F191F /* DimensionsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226E8E8B21AC73D9001F191F /* DimensionsCell.swift */; };
 		227BCFD02216D6F10073C8E6 /* IndexController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227BCFCF2216D6F10073C8E6 /* IndexController.swift */; };
 		227F4514218352A0000D8B8D /* ImporterUIActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227F4513218352A0000D8B8D /* ImporterUIActions.swift */; };
-		228968412191DD9000B80A93 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 228968402191DD9000B80A93 /* CloudKit.framework */; };
 		228968442191DDC200B80A93 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 228968432191DDC200B80A93 /* CloudKit.framework */; };
 		228968472191F48400B80A93 /* AuthorSelectionTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228968452191EFA900B80A93 /* AuthorSelectionTransformer.swift */; };
 		2295A9132232BCD70085CD86 /* DoubleClickAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2295A9122232BCD70085CD86 /* DoubleClickAction.swift */; };
@@ -172,6 +174,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				221B856C2260942F00BC4D32 /* Sparkle.framework in Embed Frameworks */,
+				221B8569226093D500BC4D32 /* Ensembles.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -211,6 +215,8 @@
 		221B8556225E2E0C00BC4D32 /* PersonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonCell.swift; sourceTree = "<group>"; };
 		221B8558225E5C8600BC4D32 /* RelationshipRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelationshipRow.swift; sourceTree = "<group>"; };
 		221B855A225E5F0500BC4D32 /* SeriesEntryRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeriesEntryRow.swift; sourceTree = "<group>"; };
+		221B856A2260941C00BC4D32 /* Sparkle.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Sparkle.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		221B856D2260A36200BC4D32 /* .bin */ = {isa = PBXFileReference; lastKnownFileType = folder; path = .bin; sourceTree = "<group>"; };
 		221C4B2F216BA96C0086D56F /* RelationshipUIActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelationshipUIActions.swift; sourceTree = "<group>"; };
 		221ED4E9216785BB00594714 /* BookishMac.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = BookishMac.xcconfig; sourceTree = "<group>"; };
 		221ED4EA216785BB00594714 /* BookishMobile.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = BookishMobile.xcconfig; sourceTree = "<group>"; };
@@ -252,7 +258,6 @@
 		226E8E8B21AC73D9001F191F /* DimensionsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DimensionsCell.swift; sourceTree = "<group>"; };
 		227BCFCF2216D6F10073C8E6 /* IndexController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexController.swift; sourceTree = "<group>"; };
 		227F4513218352A0000D8B8D /* ImporterUIActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImporterUIActions.swift; sourceTree = "<group>"; };
-		228968402191DD9000B80A93 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/System/Library/Frameworks/CloudKit.framework; sourceTree = DEVELOPER_DIR; };
 		228968422191DDBF00B80A93 /* Bookish.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Bookish.entitlements; sourceTree = "<group>"; };
 		228968432191DDC200B80A93 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		228968452191EFA900B80A93 /* AuthorSelectionTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorSelectionTransformer.swift; sourceTree = "<group>"; };
@@ -367,8 +372,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				221B856B2260941C00BC4D32 /* Sparkle.framework in Frameworks */,
 				22A69BF521C2DDE600043C3A /* LoggerKit.framework in Frameworks */,
-				228968412191DD9000B80A93 /* CloudKit.framework in Frameworks */,
 				22D1B23E2180BF550062F2CB /* Actions.framework in Frameworks */,
 				22DAF39A217B5305003CE28B /* Logger.framework in Frameworks */,
 				22DAF398217B52E6003CE28B /* ActionsKit.framework in Frameworks */,
@@ -494,13 +499,13 @@
 		224293F6212B12CA00E70510 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				221B856A2260941C00BC4D32 /* Sparkle.framework */,
 				22A3E0C421FA014F00BA4F17 /* Ensembles.framework */,
 				22F35486216FAC0100443C0B /* Actions.framework */,
 				22DAF397217B52E6003CE28B /* ActionsKit.framework */,
 				22F3548A216FAC0100443C0B /* BookishCore.framework */,
 				22F181F521CAB8A500220D20 /* BookishModel.framework */,
 				228968432191DDC200B80A93 /* CloudKit.framework */,
-				228968402191DD9000B80A93 /* CloudKit.framework */,
 				22A3E0C321FA014400BA4F17 /* Ensembles.framework */,
 				22F181F821CAB8F100220D20 /* JSONDump.framework */,
 				22DAF399217B5305003CE28B /* Logger.framework */,
@@ -617,6 +622,7 @@
 		22DD423B2126D6DA0070C85A = {
 			isa = PBXGroup;
 			children = (
+				221B856D2260A36200BC4D32 /* .bin */,
 				221ED4EE21678BF200594714 /* Configs */,
 				2296032B214132840020B3EB /* Bookish.sketch */,
 				22DA6A5321E8C76700ECF09A /* Notes.md */,
@@ -1479,6 +1485,7 @@
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "$(BOOKISH_BUNDLE_ROOT).mac";
 				PRODUCT_NAME = "$(BOOKISH_NAME)";
@@ -1501,6 +1508,7 @@
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "$(BOOKISH_BUNDLE_ROOT).mac";
 				PRODUCT_NAME = "$(BOOKISH_NAME)";
