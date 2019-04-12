@@ -1,0 +1,5 @@
+rm -rf "$PWD/.build/export"
+xcodebuild -exportArchive -archivePath "$PWD/.build/archive.xcarchive" -exportPath "$PWD/.build/export" -exportOptionsPlist "$PWD/Sources/BookishMac/Resources/Export Options.plist" -allowProvisioningUpdates
+
+rm -rf "$PWD/.build/notarized"
+xcodebuild -exportNotarizedApp -archivePath "$PWD/.build/archive.xcarchive" -exportPath "$PWD/.build/notarized"
