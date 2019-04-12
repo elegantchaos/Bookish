@@ -26,7 +26,11 @@ protocol DetailTableCell: KeyableTableCell {
 
 class DetailController: CollectionViewController {
     static let unknownViewID = NSUserInterfaceItemIdentifier(rawValue: "unknown")
-    
+
+    let ImageSizeMax: CGFloat = 256
+    let ImageSizeEditing: CGFloat = 64
+    let ImageSizePlaceholder: CGFloat = 64
+
     @IBOutlet weak var nameView: NSTextField!
     @IBOutlet weak var imageView: NSImageView!
     @IBOutlet weak var lastFixedKeyView: NSControl!
@@ -183,7 +187,7 @@ class DetailController: CollectionViewController {
     
     fileprivate func updateImageSize(visible: Bool) {
         if visible, let image = imageView.image {
-            let maxSize: CGFloat = source.isEditing ? 48 : 256
+            let maxSize = source.isEditing ? ImageSizeEditing : ImageSizeMax
             let height = min(image.size.height, maxSize)
             let scale = height/image.size.height
             let width = image.size.width * scale
@@ -196,7 +200,7 @@ class DetailController: CollectionViewController {
                 let placeholderName = "\(entityName)Placeholder"
                 imageView.image = NSImage(named: placeholderName)
             }
-            let size: CGFloat = hidden ? 0 : 48
+            let size: CGFloat = hidden ? 0 : ImageSizePlaceholder
             imageHeight.constant = size
             imageWidth.constant = size
             imageView.isHidden = hidden
