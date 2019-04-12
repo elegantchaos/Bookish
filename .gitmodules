@@ -4,3 +4,6 @@
 [submodule "Dependencies/Ensembles"]
 	path = Dependencies/Ensembles
 	url = git@github.com:mentalfaculty/ensembles-next.git
+[submodule "Dependencies/Sparkle"]
+	path = Dependencies/Sparkle
+	url = git@github.com:elegantchaos/Sparkle.git

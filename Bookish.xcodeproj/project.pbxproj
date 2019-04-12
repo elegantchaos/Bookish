@@ -856,6 +856,7 @@
 					};
 					22DD42432126D6DA0070C85A = {
 						CreatedOnToolsVersion = 10.0;
+						LastSwiftMigration = 1020;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.Mac = {
 								enabled = 0;
@@ -873,10 +874,12 @@
 					};
 					22DD425A2126D6DB0070C85A = {
 						CreatedOnToolsVersion = 10.0;
+						LastSwiftMigration = 1020;
 						TestTargetID = 22DD42432126D6DA0070C85A;
 					};
 					22DD42652126D6DB0070C85A = {
 						CreatedOnToolsVersion = 10.0;
+						LastSwiftMigration = 1020;
 						TestTargetID = 22DD42432126D6DA0070C85A;
 					};
 				};
@@ -1481,7 +1484,7 @@
 				PRODUCT_NAME = "$(BOOKISH_NAME)";
 				SUPPORTED_PLATFORMS = macosx;
 				SWIFT_OBJC_BRIDGING_HEADER = "$(BOOKISH_BRIDGING_HEADER_PATH)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -1503,7 +1506,7 @@
 				PRODUCT_NAME = "$(BOOKISH_NAME)";
 				SUPPORTED_PLATFORMS = macosx;
 				SWIFT_OBJC_BRIDGING_HEADER = "$(BOOKISH_BRIDGING_HEADER_PATH)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
@@ -1524,7 +1527,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.elegantchaos.BookishTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/${BOOKISH_NAME}.app/Contents/MacOS/${BOOKISH_NAME}";
 			};
 			name = Debug;
@@ -1546,7 +1549,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.elegantchaos.BookishTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/${BOOKISH_NAME}.app/Contents/MacOS/${BOOKISH_NAME}";
 			};
 			name = Release;
@@ -1567,7 +1570,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.elegantchaos.BookishUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TEST_TARGET_NAME = "${BOOKISH_NAME}";
 			};
 			name = Debug;
@@ -1588,7 +1591,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.elegantchaos.BookishUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TEST_TARGET_NAME = "${BOOKISH_NAME}";
 			};
 			name = Release;

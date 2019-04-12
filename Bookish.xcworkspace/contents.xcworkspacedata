@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Workspace
    version = "1.0">
+   <Group
+      location = "container:"
+      name = "Third Party">
+      <FileRef
+         location = "group:Dependencies/Sparkle/Sparkle.xcodeproj">
+      </FileRef>
+   </Group>
    <FileRef
       location = "group:README.md">
    </FileRef>
@@ -15,6 +22,9 @@
    </FileRef>
    <FileRef
       location = "group:Dependencies/Ensembles/Framework/Ensembles Mac.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:Dependencies/Sparkle/Sparkle.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Extras">
