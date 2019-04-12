@@ -1,0 +1,6 @@
+export BUILD_DIR="$PWD/.build"
+xcodebuild -workspace Bookish.xcworkspace -scheme generate_appcast BUILD_DIR="$BUILD_DIR"
+CAST_DIR="$PWD/Dependencies/Website/updates"
+mkdir -p "$CAST_DIR"
+.build/Release/generate_appcast "$CAST_DIR"
+
