@@ -1,3 +1,1 @@
-xcodebuild -workspace Bookish.xcworkspace -scheme BookishMac archive -archivePath "$PWD/archive"
-xcodebuild -workspace Bookish.xcworkspace -scheme BookishMac -exportArchive -archivePath "$PWD/archive"
-xcodebuild -exportNotarizedApp -archivePath "$PWD/archive" -exportPath "$PWD/export"
+xcodebuild -workspace Bookish.xcworkspace -scheme BookishMac archive -archivePath "$PWD/.build/archive"

@@ -1,2 +1,2 @@
-xcodebuild -exportArchive -archivePath "$PWD/archive.xcarchive" -exportPath "$PWD/export" -exportOptionsPlist "$PWD/Sources/BookishMac/Resources/Export Options.plist"
-xcodebuild -exportNotarizedApp -archivePath "$PWD/archive.xcarchive" -exportPath "$PWD/notarized"
+xcodebuild -exportArchive -archivePath "$PWD/.build/archive.xcarchive" -exportPath "$PWD/.build/export" -exportOptionsPlist "$PWD/Sources/BookishMac/Resources/Export Options.plist"
+xcodebuild -exportNotarizedApp -archivePath "$PWD/.build/archive.xcarchive" -exportPath "$PWD/.build/notarized"

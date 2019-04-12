@@ -26,6 +26,13 @@
 		221B8569226093D500BC4D32 /* Ensembles.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22A3E0C421FA014F00BA4F17 /* Ensembles.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		221B856B2260941C00BC4D32 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 221B856A2260941C00BC4D32 /* Sparkle.framework */; };
 		221B856C2260942F00BC4D32 /* Sparkle.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 221B856A2260941C00BC4D32 /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		221B856F2260AF8D00BC4D32 /* Logger.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22DAF399217B5305003CE28B /* Logger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		221B85702260AF8D00BC4D32 /* LoggerKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22A69BF421C2DDE600043C3A /* LoggerKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		221B85712260AF9700BC4D32 /* Actions.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22F35486216FAC0100443C0B /* Actions.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		221B85722260AF9700BC4D32 /* ActionsKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22DAF397217B52E6003CE28B /* ActionsKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		221B85732260B4D100BC4D32 /* BookishCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22F3548A216FAC0100443C0B /* BookishCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		221B85742260B4DB00BC4D32 /* BookishModel.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22F181F521CAB8A500220D20 /* BookishModel.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		221B85752260B55900BC4D32 /* JSONDump.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22F181F821CAB8F100220D20 /* JSONDump.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		221C4B35216BAAAC0086D56F /* RelationshipUIActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221C4B2F216BA96C0086D56F /* RelationshipUIActions.swift */; };
 		221ED512216B8EAB00594714 /* BookDetailRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221ED511216B8EAB00594714 /* BookDetailRow.swift */; };
 		221F272921382C8E00DC2DC7 /* DateTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221F272821382C8E00DC2DC7 /* DateTransformer.swift */; };
@@ -174,6 +181,13 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				221B85752260B55900BC4D32 /* JSONDump.framework in Embed Frameworks */,
+				221B85742260B4DB00BC4D32 /* BookishModel.framework in Embed Frameworks */,
+				221B85732260B4D100BC4D32 /* BookishCore.framework in Embed Frameworks */,
+				221B85712260AF9700BC4D32 /* Actions.framework in Embed Frameworks */,
+				221B85722260AF9700BC4D32 /* ActionsKit.framework in Embed Frameworks */,
+				221B856F2260AF8D00BC4D32 /* Logger.framework in Embed Frameworks */,
+				221B85702260AF8D00BC4D32 /* LoggerKit.framework in Embed Frameworks */,
 				221B856C2260942F00BC4D32 /* Sparkle.framework in Embed Frameworks */,
 				221B8569226093D500BC4D32 /* Ensembles.framework in Embed Frameworks */,
 			);
@@ -216,7 +230,7 @@
 		221B8558225E5C8600BC4D32 /* RelationshipRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelationshipRow.swift; sourceTree = "<group>"; };
 		221B855A225E5F0500BC4D32 /* SeriesEntryRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeriesEntryRow.swift; sourceTree = "<group>"; };
 		221B856A2260941C00BC4D32 /* Sparkle.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Sparkle.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		221B856D2260A36200BC4D32 /* .bin */ = {isa = PBXFileReference; lastKnownFileType = folder; path = .bin; sourceTree = "<group>"; };
+		221B856E2260AD6C00BC4D32 /* Export Options.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Export Options.plist"; sourceTree = "<group>"; };
 		221C4B2F216BA96C0086D56F /* RelationshipUIActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelationshipUIActions.swift; sourceTree = "<group>"; };
 		221ED4E9216785BB00594714 /* BookishMac.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = BookishMac.xcconfig; sourceTree = "<group>"; };
 		221ED4EA216785BB00594714 /* BookishMobile.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = BookishMobile.xcconfig; sourceTree = "<group>"; };
@@ -622,7 +636,6 @@
 		22DD423B2126D6DA0070C85A = {
 			isa = PBXGroup;
 			children = (
-				221B856D2260A36200BC4D32 /* .bin */,
 				221ED4EE21678BF200594714 /* Configs */,
 				2296032B214132840020B3EB /* Bookish.sketch */,
 				22DA6A5321E8C76700ECF09A /* Notes.md */,
@@ -709,6 +722,7 @@
 				22DD42502126D6DB0070C85A /* Assets.xcassets */,
 				22DE6AE421877E740078D489 /* Assets.xcfilelist */,
 				22DD42552126D6DB0070C85A /* Info.plist */,
+				221B856E2260AD6C00BC4D32 /* Export Options.plist */,
 				22F1845121CC11B700220D20 /* Localizable.strings */,
 				22DD42562126D6DB0070C85A /* Bookish.entitlements */,
 			);
