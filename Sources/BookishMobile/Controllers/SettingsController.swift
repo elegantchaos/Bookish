@@ -12,21 +12,48 @@ class SettingsController: UIViewController {
     lazy var loggingSettings: LoggerSettingsView? = LoggerSettingsView()
     
     @IBOutlet weak var showDebugSwitch: UISwitch!
-
+    @IBOutlet weak var aboutLabel: UILabel!
+    
     override func viewWillAppear(_ animated: Bool) {
         showDebugSwitch.isOn = application.viewState.showDebug
+        aboutLabel.text = Bundle.main.fullVersion
+    }
+    
+    func confirm(title: String, message: String, completion: @escaping () -> Void) {
+        let alert = UIAlertController(title: title.localized, message: message.localized, preferredStyle: .alert)
+        alert.addAction(
+            UIAlertAction(title: "reset.ok".localized, style: .destructive) { (UIAlertAction) in
+                completion()
+            }
+        )
+        
+        alert.addAction(
+            UIAlertAction(title: "reset.cancel".localized, style: .cancel)
+        )
+        
+        self.present(alert, animated: true, completion: nil)
+
     }
     
     @IBAction func resetToEmpty(_ sender: Any) {
-        application.collectionController.reset(mode: .empty)
+        let application = self.application
+        confirm(title: "reset.empty.title", message: "reset.empty.message") {
+            application.collectionController.reset(mode: .empty)
+        }
     }
 
     @IBAction func resetToTestData(_ sender: Any) {
-        application.collectionController.reset(mode: .replaceWithTestData)
+        let application = self.application
+        confirm(title: "reset.test.title", message: "reset.test.message") {
+            application.collectionController.reset(mode: .replaceWithTestData)
+        }
     }
 
     @IBAction func resetToSampleData(_ sender: Any) {
-        application.collectionController.reset(mode: .replaceWithSampleData)
+        let application = self.application
+        confirm(title: "reset.sample.title", message: "reset.sample.message") {
+            application.collectionController.reset(mode: .replaceWithSampleData)
+        }
     }
     
     @IBAction func showLoggingSettings(_ sender: Any) {

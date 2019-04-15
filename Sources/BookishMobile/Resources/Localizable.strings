@@ -10,3 +10,13 @@ index.search.count = "search {count} {type}";
 index.search.none = "no {type} to search";
 index.search.unknown = "<unknown>";
 
+reset.empty.title = "Reset";
+reset.empty.message = "Warning! This action will remove all your current data with an empty database. It cannot be undone.";
+reset.ok = "Reset";
+reset.cancel = "Cancel";
+
+reset.test.title = "Reset";
+reset.test.message = "Warning! This action will replace all your current data with a test database. It cannot be undone.";
+
+reset.sample.title = "Reset";
+reset.sample.message = "Warning! This action will replace all your current data with a sample database. It cannot be undone.";
