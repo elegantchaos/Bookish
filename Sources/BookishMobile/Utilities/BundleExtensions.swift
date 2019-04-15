@@ -33,4 +33,26 @@ extension Bundle {
         
         return build.isEmpty ? version : "\(version) (\(build))"
     }
+    
+    var shortName: String {
+        guard let version = object(forInfoDictionaryKey: "CFBundleName") as? NSString else {
+            return ""
+        }
+        
+        return version as String
+    }
+    
+    var fullName: String {
+        let version = fullVersion
+        let name = shortName
+        return "\(name) \(version)"
+    }
+    
+    var copyright: String {
+        guard let version = object(forInfoDictionaryKey: "NSHumanReadableCopyright") as? NSString else {
+            return ""
+        }
+        
+        return version as String
+    }
 }

@@ -12,11 +12,11 @@ class SettingsController: UITableViewController {
     lazy var loggingSettings: LoggerSettingsView? = LoggerSettingsView()
     
     @IBOutlet weak var showDebugSwitch: UISwitch!
-    @IBOutlet weak var aboutLabel: UILabel!
+    @IBOutlet weak var aboutText: UITextView!
     
     override func viewWillAppear(_ animated: Bool) {
         showDebugSwitch.isOn = application.viewState.showDebug
-        aboutLabel.text = Bundle.main.fullVersion
+        aboutText.text = "\(Bundle.main.fullName)\n\(Bundle.main.copyright)"
     }
     
     func confirm(title: String, message: String, completion: @escaping () -> Void) {
