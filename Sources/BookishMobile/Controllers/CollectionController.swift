@@ -40,7 +40,7 @@ class CollectionController: UITableViewController {
         super.viewDidLoad()
 
         items.append(Item(identifier: "intro"))
-
+        
         if let splitView = splitViewController {
             splitView.delegate = self
             splitView.preferredDisplayMode = .allVisible

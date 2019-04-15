@@ -129,6 +129,9 @@ class ScannerController: UIViewController, BarcodeScannerDelegate {
         }
     }
     
+    @IBAction func doDone(_ sender: Any) {
+        presentingViewController?.dismiss(animated: true)
+    }
 }
 
 

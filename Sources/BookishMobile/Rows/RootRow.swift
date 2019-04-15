@@ -28,5 +28,30 @@ class RootCategoryRow: RootRow {
     }
 }
 
-class RootIntroRow: RootRow {
+class RootIntroRow: RootRow, UITextViewDelegate {
+    @IBOutlet weak var itemText: UITextView!
+    
+    override func setup(for item: CollectionController.Item) {
+        super.setup(for: item)
+        if let url = Bundle.main.url(forResource: "Help", withExtension: ".rtf"), let text = try? NSAttributedString(url: url, options: [:], documentAttributes: nil) {
+            itemText.attributedText = text
+            itemText.delegate = self
+        }
+    }
+    
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
+        if URL.scheme == "action" {
+            switch URL.host {
+            case "search":
+                print("searching")
+                
+            case "add":
+                application.collectionController.performSegue(withIdentifier: "showScanner", sender: self)
+                
+            default:
+                print("unhandled action \(URL)")
+            }
+        }
+        return false
+    }
 }
