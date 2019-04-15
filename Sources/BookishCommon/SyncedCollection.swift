@@ -14,8 +14,9 @@ class SyncedCollection: CollectionContainer, CDEPersistentStoreEnsembleDelegate 
     var ensemble: CDEPersistentStoreEnsemble?
     
     init(url: URL? = nil, identifier: String, mode: PopulateMode, shouldSync: Bool = true, callback: LoadedCallback? = nil) {
+        let name = UserDefaults.standard.string(forKey: "Collection") ?? "Default"
         cloudFileSystem = CDECloudKitFileSystem(privateDatabaseForUbiquityContainerIdentifier: identifier, schemaVersion: .version2)
-        super.init(name: "Synced13", url: url, mode: mode) { (collection, error) in
+        super.init(name: name, url: url, mode: mode) { (collection, error) in
             if let error = error {
                 fatalError("failed to load \(error)")
             }
