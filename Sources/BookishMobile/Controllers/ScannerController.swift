@@ -14,6 +14,7 @@ class ScannerController: UIViewController, BarcodeScannerDelegate {
     @IBOutlet weak var barcodeView: UILabel!
     @IBOutlet weak var lookupSpinner: UIActivityIndicatorView!
     @IBOutlet weak var addButton: UIButton!
+    @IBOutlet weak var searchField: UITextField!
     
     var scanner: BarcodeScanner? = nil
     var detected: String = ""
@@ -26,7 +27,8 @@ class ScannerController: UIViewController, BarcodeScannerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        barcodeView.text = "candidate.lookup.scanning".localized
+        barcodeView.text = "scanner.startup".localized
+        lookupSpinner.isHidden = true
         candidatesTable.isHidden = true
         lookupManager = application.lookupManager
         collection = application.collection
@@ -58,11 +60,12 @@ class ScannerController: UIViewController, BarcodeScannerDelegate {
             detected = value
             let valid = value.isISBN13
             if valid {
-                lookup(isbn: value)
+                lookup(text: value)
             }
             
             DispatchQueue.main.async {
                 let key = valid ? "candidate.lookup.valid" : "candidate.lookup.invalid"
+                self.searchField.text = value
                 self.barcodeView.text = key.localized(with: ["search": value])
             }
         }
@@ -76,10 +79,10 @@ class ScannerController: UIViewController, BarcodeScannerDelegate {
         imageLayer = layer
     }
     
-    func lookup(isbn: String) {
+    func lookup(text: String) {
         lookup?.cancel()
         if let manager = lookupManager, let collection = collection {
-            lookup = manager.lookup(ean: isbn, context: collection.managedObjectContext) { (session, state) in
+            lookup = manager.lookup(ean: text, context: collection.managedObjectContext) { (session, state) in
                 self.lookupUpdate(session: session, state: state)
             }
         }
@@ -119,7 +122,7 @@ class ScannerController: UIViewController, BarcodeScannerDelegate {
     
     @IBAction func doTest(_ sender: Any) {
         detected(barcode: "9781408832240")
-        lookup(isbn: "9781408832240")
+        lookup(text: "9781408832240")
     }
 
     @IBAction func doAdd(_ sender: Any) {
@@ -131,6 +134,13 @@ class ScannerController: UIViewController, BarcodeScannerDelegate {
     
     @IBAction func doDone(_ sender: Any) {
         presentingViewController?.dismiss(animated: true)
+    }
+    
+    @IBAction func doSearch(_ sender: Any) {
+        searchField.resignFirstResponder()
+        if let search = searchField.text {
+            lookup(text: search)
+        }
     }
 }
 
