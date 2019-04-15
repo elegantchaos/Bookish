@@ -8,7 +8,7 @@ import CoreData
 import Logger
 import LoggerKit
 
-class SettingsController: UIViewController {
+class SettingsController: UITableViewController {
     lazy var loggingSettings: LoggerSettingsView? = LoggerSettingsView()
     
     @IBOutlet weak var showDebugSwitch: UISwitch!
