@@ -18,4 +18,19 @@ extension Bundle {
         let version = object(forInfoDictionaryKey: "CFBundleVersion") as? NSNumber
         return version?.intValue ?? 0
     }
+    
+    var shortVersion: String {
+        guard let version = object(forInfoDictionaryKey: "CFBundleShortVersionString") as? NSString else {
+            return ""
+        }
+        
+        return version as String
+    }
+    
+    var fullVersion: String {
+        let version = shortVersion
+        let build = buildString
+        
+        return build.isEmpty ? version : "\(version) (\(build))"
+    }
 }
