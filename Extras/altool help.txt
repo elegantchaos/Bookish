@@ -1,0 +1,43 @@
+Copyright (c) 2009-2018, Apple Inc. Version 1.1.1138
+
+Usage: altool --validate-app -f <file> -t <platform> -u <username> [-p <password>]
+       altool --upload-app -f <file> -t <platform> -u <username> [-p <password>]
+       altool --notarize-app -f <file> --primary-bundle-id <bundle_id> -u <username> [-p <password>] [--asc-provider <provider_shortname>]
+       altool --notarization-info <uuid> -u <username> [-p <password>]
+       altool --notarization-history <page> -u <username> [-p <password>] [--asc-provider <provider_shortname>]
+
+ -f, --file <file>                  <file> specifies the path to the file to process.
+ -t, --type {osx | ios | appletvos} Specify the platform of the file.
+ -u, --username <username>          Username. Required to connect for validation, upload, and notarization.
+ -p, --password <password>          Password. Required if username specified.
+                                    If this argument is not supplied on the command line, it will be read from stdin.
+                                    Alternatively to entering <password> in plaintext, it may also be specified using a '@keychain:'
+                                    or '@env:' prefix followed by a keychain password item name or environment variable name.
+                                    Example: '-p @keychain:<name>' uses the password stored in the keychain password item named <name>
+                                                                   and whose Account value matches the user name specified
+                                    Example: '-p @env:<variable>'  uses the value in the environment variable named <variable>
+
+     --primary-bundle-id <bundle_id> Used with --notarize-app to uniquely identify a package.
+
+     --asc-provider <provider_shortname> Required with --notarize-app and --notarization-history when a user account is associated with multiple
+                                         providers.
+
+ -v, --validate-app                 Validates an app archive for the App Store. The username, password, and file path to the app archive are required.
+     --upload-app                   Uploads the given app archive to the App Store. The username, password, and file path to the app archive are required.
+
+     --notarize-app                 Uploads the given app package, dmg or zip file for notarization. The file path to the package, user name,
+                                    password, and --primary-bundle-id are required. --asc-provider is required for an account associated with multiple providers.
+                                    If successful, the UUID associated with the upload is returned.
+
+     --notarization-info <uuid>     Returns the status and log file URL of a package previously uploaded for notarization with the specified uuid.
+                                    The user name and password are required. The log file can be retrieved with 'curl <log_file_url>'.
+
+     --notarization-history <page>  Returns a list of all uploads submitted for notarization. <page> specifies a range of entries where 0
+                                    returns the most recent number of entries. A new page value will be returned which can be used as the
+                                    <page> value to the next use of --notarization-history and so forth until no more items are returned. The user name
+                                    and password are required. --asc-provider is required for an account associated with multiple providers.
+
+     --output-format {xml | normal} Specifies how the output is formatted. 'xml' displays the output in a structured format; 'normal' displays in
+                                    an unstructured format (default).
+
+ -h, --help                         Display this output.
