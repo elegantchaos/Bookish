@@ -1,5 +1,14 @@
 rm -rf "$PWD/.build/export"
 xcodebuild -exportArchive -archivePath "$PWD/.build/archive.xcarchive" -exportPath "$PWD/.build/export" -exportOptionsPlist "$PWD/Sources/BookishMac/Resources/Export Options.plist" -allowProvisioningUpdates
 
+BUILD=$(/usr/libexec/PlistBuddy -c "Print CFBundleVersion" .build/export/Bookish.app/Contents/Info.plist)
+VERSION=$(/usr/libexec/PlistBuddy -c "Print CFBundleShortVersionString" .build/export/Bookish.app/Contents/Info.plist)
+echo $BUILD
+echo $VERSION
+
+ditto -c -k --sequesterRsrc --keepParent ".build/export/Bookish.app/" "Dependencies/Website/updates/bookish-$VERSION-$BUILD.zip"
+
+xcrun altool --notarize-app --primary-bundle-id "com.elegantchaos.bookish.mac" --username "company@elegantchaos.com" --password "@keychain:AC_PASSWORD" --file "Dependencies/Website/updates/bookish-$VERSION-$BUILD.zip"
+
 rm -rf "$PWD/.build/notarized"
 xcodebuild -exportNotarizedApp -archivePath "$PWD/.build/archive.xcarchive" -exportPath "$PWD/.build/notarized"
