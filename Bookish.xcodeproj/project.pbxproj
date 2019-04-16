@@ -36,9 +36,6 @@
 		221B86FD2260CC3100BC4D32 /* dsa_pub-4096.pem in Resources */ = {isa = PBXBuildFile; fileRef = 221B86FC2260CC3100BC4D32 /* dsa_pub-4096.pem */; };
 		221B86FF2260D88400BC4D32 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 221B86FE2260D85A00BC4D32 /* dsa_pub.pem */; };
 		221B87012260DA8600BC4D32 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 221B87002260DA8600BC4D32 /* CloudKit.framework */; };
-		221B873E2260E9E600BC4D32 /* org.sparkle-project.InstallerStatus.xpc in Resources */ = {isa = PBXBuildFile; fileRef = 221B873C2260E9BA00BC4D32 /* org.sparkle-project.InstallerStatus.xpc */; };
-		221B873F2260E9E600BC4D32 /* org.sparkle-project.InstallerLauncher.xpc in Resources */ = {isa = PBXBuildFile; fileRef = 221B873B2260E9BA00BC4D32 /* org.sparkle-project.InstallerLauncher.xpc */; };
-		221B87402260E9E600BC4D32 /* org.sparkle-project.InstallerConnection.xpc in Resources */ = {isa = PBXBuildFile; fileRef = 221B873D2260E9BA00BC4D32 /* org.sparkle-project.InstallerConnection.xpc */; };
 		221B87412260E9EC00BC4D32 /* org.sparkle-project.InstallerStatus.xpc in Embed XPC Services */ = {isa = PBXBuildFile; fileRef = 221B873C2260E9BA00BC4D32 /* org.sparkle-project.InstallerStatus.xpc */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		221B87422260E9EC00BC4D32 /* org.sparkle-project.InstallerLauncher.xpc in Embed XPC Services */ = {isa = PBXBuildFile; fileRef = 221B873B2260E9BA00BC4D32 /* org.sparkle-project.InstallerLauncher.xpc */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		221B87432260E9EC00BC4D32 /* org.sparkle-project.InstallerConnection.xpc in Embed XPC Services */ = {isa = PBXBuildFile; fileRef = 221B873D2260E9BA00BC4D32 /* org.sparkle-project.InstallerConnection.xpc */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -999,12 +996,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				221B873E2260E9E600BC4D32 /* org.sparkle-project.InstallerStatus.xpc in Resources */,
 				221B86FF2260D88400BC4D32 /* dsa_pub.pem in Resources */,
 				22E47CE0216E5EB200E43DBF /* Assets.xcassets in Resources */,
 				221B86FD2260CC3100BC4D32 /* dsa_pub-4096.pem in Resources */,
-				221B87402260E9E600BC4D32 /* org.sparkle-project.InstallerConnection.xpc in Resources */,
-				221B873F2260E9E600BC4D32 /* org.sparkle-project.InstallerLauncher.xpc in Resources */,
 				22F1845221CC11B700220D20 /* Localizable.strings in Resources */,
 				22DD42542126D6DB0070C85A /* Main.storyboard in Resources */,
 			);
