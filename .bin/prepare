@@ -1,16 +1,2 @@
-echo "Exporting"
-rm -rf "$PWD/.build/export"
-xcodebuild -exportArchive -archivePath "$PWD/.build/archive.xcarchive" -exportPath "$PWD/.build/export" -exportOptionsPlist "$PWD/Sources/BookishMac/Resources/Export Options.plist" -allowProvisioningUpdates
-
-echo "Compressing"
-BUILD=$(/usr/libexec/PlistBuddy -c "Print CFBundleVersion" .build/export/Bookish.app/Contents/Info.plist)
-VERSION=$(/usr/libexec/PlistBuddy -c "Print CFBundleShortVersionString" .build/export/Bookish.app/Contents/Info.plist)
-echo $BUILD
-echo $VERSION
-
-ditto -c -k --sequesterRsrc --keepParent ".build/export/Bookish.app/" "Dependencies/Website/updates/bookish-$VERSION-$BUILD.zip"
-rm -rf Dependencies/Website/updates/.tmp
-
-echo "Updating Latest"
-cd "Dependencies/Website/"
-ln -sf "updates/bookish-$VERSION-$BUILD.zip" "bookish.zip"
+swift run ReleaseTools export
+swift run ReleaseTools compress --to="Dependencies/Website/updates/" --latest="Dependencies/Website/"

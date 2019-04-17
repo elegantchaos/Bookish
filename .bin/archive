@@ -1,2 +1,1 @@
-echo "Archiving"
-xcodebuild -workspace Bookish.xcworkspace -scheme BookishMac archive -archivePath "$PWD/.build/archive" > "$PWD/.build/archive.log"
+swift run ReleaseTools archive
