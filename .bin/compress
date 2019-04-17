@@ -3,3 +3,4 @@ VERSION=$(/usr/libexec/PlistBuddy -c "Print CFBundleShortVersionString" .build/e
 echo $BUILD
 echo $VERSION
 ditto -c -k --sequesterRsrc --keepParent ".build/export/Bookish.app/" "Dependencies/Website/updates/bookish-$VERSION-$BUILD.zip"
+rm -rf Dependencies/Website/updates/.tmp

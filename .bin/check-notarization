@@ -1,0 +1,2 @@
+xcrun altool --notarization-history 0 -u "company@elegantchaos.com" -p "@keychain:AC_PASSWORD"
+xcrun altool --notarization-info bf3cb4a9-3502-439e-bce1-5b07986aeeb8 -u "company@elegantchaos.com" -p "@keychain:AC_PASSWORD"
