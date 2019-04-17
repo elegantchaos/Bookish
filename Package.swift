@@ -7,6 +7,7 @@ let package = Package(
     name: "BookishCore",
     dependencies: [
         .package(url: "git@github.com:elegantchaos/SketchX", from: "1.0.2"),
+        .package(url: "git@github.com:elegantchaos/ReleaseTools", .branch("master")),
     ],
     targets: [
         ],
