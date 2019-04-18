@@ -1,2 +1,3 @@
 swift run ReleaseTools export
 swift run ReleaseTools compress --to="Dependencies/Website/updates/" --latest="Dependencies/Website/"
+swift run ReleaseTools appcast --to="Dependencies/Website/updates/"

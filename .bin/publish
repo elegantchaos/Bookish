@@ -1,0 +1,2 @@
+swift run ReleaseTools publish --repo="Dependencies/Website/updates/"
+
