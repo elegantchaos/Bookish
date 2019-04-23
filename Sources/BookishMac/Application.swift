@@ -62,7 +62,6 @@ let applicationChannel = Logger("Application")
     }
     
     fileprivate func setupUpdates() {
-        updateManager.checkForUpdates(self)
     }
     
     fileprivate func setupLookups() {
