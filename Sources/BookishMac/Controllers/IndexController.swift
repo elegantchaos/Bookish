@@ -118,13 +118,16 @@ class IndexController: CollectionViewController {
         }
     }
     
-    func select(items: [ModelObject]) {
+    func select(items: [ModelObject], forEditing: Bool = false) {
         fetchIfNecessary {
             DispatchQueue.main.async {
                 self.indexArray.setSelectedObjects(items)
                 let selection = self.indexTable.selectedRowIndexes
                 self.indexTable.scrollRowToVisible(selection[selection.startIndex])
                 self.indexTable.scrollRowToVisible(selection[selection.endIndex])
+                if forEditing && !self.detailView.isEditing {
+                    self.application.actionManager.perform(identifier: "ToggleEditing")
+                }
             }
         }
     }
@@ -142,7 +145,7 @@ extension IndexController: ActionContextProvider {
 
 extension IndexController: BookLifecycleObserver {
     func created(books: [Book]) {
-        self.select(items: books)
+        self.select(items: books, forEditing: true)
     }
     
     func deleted(books: [Book]) {
@@ -151,7 +154,7 @@ extension IndexController: BookLifecycleObserver {
 
 extension IndexController: PersonLifecycleObserver {
     func created(person: Person) {
-        self.select(items: [person])
+        self.select(items: [person], forEditing: true)
     }
     
     func deleted(person: Person) {
@@ -160,7 +163,7 @@ extension IndexController: PersonLifecycleObserver {
 
 extension IndexController: PublisherLifecycleObserver {
     func created(publisher: Publisher) {
-        self.select(items: [publisher])
+        self.select(items: [publisher], forEditing: true)
     }
     
     func deleted(publisher: Publisher) {
@@ -169,7 +172,7 @@ extension IndexController: PublisherLifecycleObserver {
 
 extension IndexController: SeriesLifecycleObserver {
     func created(series: Series) {
-        self.select(items: [series])
+        self.select(items: [series], forEditing: true)
     }
     
     func deleted(series: Series) {
