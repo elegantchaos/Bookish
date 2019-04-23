@@ -383,8 +383,9 @@ extension DetailController: EditableView {
         // in progress if we're turning editing off
         // NB need to do this before changing the editing flag, so that the
         // context is correct when any editing-related actions fire
-        let newResponder: NSResponder = editing ? nameView : indexView
-        view.window?.makeFirstResponder(newResponder)
+        if editing {
+            view.window?.makeFirstResponder(indexView)
+        }
     }
     
     func didToggleEditing() {
@@ -392,6 +393,9 @@ extension DetailController: EditableView {
         // changes a chance to get properly committed first
         DispatchQueue.main.async {
             self.selectionChanged()
+            if self.editing {
+                self.view.window?.makeFirstResponder(self.nameView)
+            }
         }
     }
 }
