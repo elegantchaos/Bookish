@@ -285,7 +285,7 @@ Copyright</string>
         <scene sceneID="I5G-e3-xhx">
             <objects>
                 <tableViewController title="Index" id="twP-4I-K8J" userLabel="Index" customClass="IndexController" customModule="Bookish" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="uFP-rn-Wga">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelectionDuringEditing="YES" allowsMultipleSelectionDuringEditing="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="uFP-rn-Wga">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1098,16 +1098,16 @@ Copyright</string>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" axis="vertical" distribution="equalSpacing" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="qW5-8G-1UK">
-                                                    <rect key="frame" x="40" y="4" width="516" height="35.666666666666664"/>
+                                                    <rect key="frame" x="40" y="4" width="291" height="35.666666666666664"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wxq-v3-0Zu">
-                                                            <rect key="frame" x="0.0" y="0.0" width="516" height="20.333333333333332"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="291" height="20.333333333333332"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FA8-cP-qC4">
-                                                            <rect key="frame" x="0.0" y="28.333333333333332" width="516" height="7.3333333333333321"/>
+                                                            <rect key="frame" x="0.0" y="28.333333333333332" width="291" height="7.3333333333333321"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -1283,7 +1283,7 @@ Copyright</string>
         </scene>
     </scenes>
     <resources>
-        <image name="Book" width="16" height="16"/>
+        <image name="Book" width="32" height="32"/>
         <image name="Choose" width="12" height="12"/>
         <image name="Settings" width="32" height="32"/>
         <namedColor name="Bookish Detail Text">
@@ -1297,7 +1297,7 @@ Copyright</string>
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="wHW-t9-qJD"/>
+        <segue reference="Uag-ye-IkJ"/>
         <segue reference="qgO-US-OtR"/>
     </inferredMetricsTieBreakers>
 </document>

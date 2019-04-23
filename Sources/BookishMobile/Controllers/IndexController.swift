@@ -107,6 +107,14 @@ class IndexController: UITableViewController, EntityIndex, ActionObserver {
 //        }
     }
     
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        if identifier == "showDetail" {
+            return !tableView.isEditing
+        } else {
+            return super.shouldPerformSegue(withIdentifier: identifier, sender: sender)
+        }
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showDetail" {
             if let indexPath = tableView.indexPathForSelectedRow {
@@ -184,6 +192,12 @@ class IndexController: UITableViewController, EntityIndex, ActionObserver {
         }
     }
     
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        return [UITableViewRowAction(style: .destructive, title: "Delete", handler: { (action, path) in
+            print(action)
+            print(path)
+        })]
+    }
 }
 
 
