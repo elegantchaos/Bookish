@@ -20,6 +20,8 @@
 	<string>$(BOOKISH_VERSION)</string>
 	<key>CFBundleVersion</key>
 	<string>$(BOOKISH_BUILD)</string>
+	<key>Commit</key>
+	<string>$(BOOKISH_COMMIT)</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Access to the camera is required for barcode scanning and book cover recognition.</string>
 	<key>LSRequiresIPhoneOS</key>
