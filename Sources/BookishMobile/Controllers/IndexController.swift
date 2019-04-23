@@ -7,6 +7,7 @@ import UIKit
 import CoreData
 import BookishModel
 import Actions
+import ActionsKit
 import Logger
 
 protocol EntityIndex {
@@ -132,6 +133,11 @@ class IndexController: UITableViewController, EntityIndex, ActionObserver {
         indexViewChannel.debug("\(entityType!) index didLoad")
         super.viewDidLoad()
         navigationItem.rightBarButtonItem = editButtonItem
+        
+        let selector = ActionManagerMobile.Responder.performActionSelector
+        
+        let deleteItem = UIBarButtonItem(title: "Delete", style: .plain, target: nil, action: selector)
+        navigationItem.rightBarButtonItems = [editButtonItem, deleteItem]
         fetch(filter: "")
     }
     
@@ -192,11 +198,32 @@ class IndexController: UITableViewController, EntityIndex, ActionObserver {
         }
     }
     
-    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        return [UITableViewRowAction(style: .destructive, title: "Delete", handler: { (action, path) in
+    override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let item1 = UIContextualAction(style: .normal, title: "Foo", handler: { (action, view, handler) in
             print(action)
-            print(path)
-        })]
+            handler(true)
+        })
+        
+        let item2 = UIContextualAction(style: .destructive, title: "Bar", handler: { (action, view, handler) in
+            print(action)
+            handler(true)
+        })
+        
+        return UISwipeActionsConfiguration(actions: [item1,item2])
+    }
+    
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let item1 = UIContextualAction(style: .normal, title: "Wibble", handler: { (action, view, handler) in
+            print(action)
+            handler(true)
+        })
+        
+        let item2 = UIContextualAction(style: .destructive, title: "Delete", handler: { (action, view, handler) in
+            print(action)
+            handler(true)
+        })
+        
+        return UISwipeActionsConfiguration(actions: [item1,item2])
     }
 }
 
