@@ -22,17 +22,17 @@ extension SeriesCell: DetailTableCell {
         if row.placeholder {
             seriesCombo.stringValue = ""
             positionField.stringValue = ""
-        } else if let item = row as? SeriesDetailItem, let series = item.series {
+        } else if let item = row as? SeriesDetailItem, let entry = item.entry, let series = entry.series {
             objectValue = series
             if let name = series.name {
                 seriesField?.stringValue = name
                 seriesCombo?.stringValue = name
             }
             
-            if let selection = view.index.selection as? Book {
-                positionField.integerValue = selection.position(in: series)
+            if entry.position > 0 {
+                positionField.stringValue = "\(entry.position)"
             } else {
-                positionField.objectValue = ""
+                positionField.stringValue = ""
             }
         }
         
@@ -51,6 +51,7 @@ extension SeriesCell: ActionContextProvider {
         if let series = objectValue as? Series {
             context.info[SeriesAction.seriesKey] = series
         }
+        context.info.addObserver(self)
     }
 }
 
@@ -124,4 +125,17 @@ extension SeriesCell: NSComboBoxDelegate {
         actionManager.perform(identifier: "ChangeSeries", info: info)
     }
     
+}
+extension SeriesCell: BookChangeObserver {
+    func added(series: Series, position: Int) {
+        objectValue = series
+    }
+    
+    func changed(series: Series, to: Series, position: Int) {
+        objectValue = series
+    }
+    
+    func removed(series: Series) {
+        objectValue = nil
+    }
 }

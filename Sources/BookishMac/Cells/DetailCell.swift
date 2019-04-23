@@ -26,6 +26,7 @@ class DetailCell: AnnotatedTableCellView, DetailTableCell {
             objectValue = item.spec
             view.index.addObserver(self, forKeyPath: "selection.\(binding)", options: [.initial], context: &detailBindingContext)
             view.addDoubleClickUnlock(to: subview)
+            subview.placeholderString = "detail.\(binding).placeholder".localized
         }
     }
     

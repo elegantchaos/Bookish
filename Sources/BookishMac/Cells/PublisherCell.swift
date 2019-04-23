@@ -68,4 +68,7 @@ extension PublisherCell: BookChangeObserver {
     func removed(publisher: Publisher) {
         objectValue = nil
     }
+    func changed(publisher: Publisher, to: Publisher) {
+        objectValue = to
+    }
 }

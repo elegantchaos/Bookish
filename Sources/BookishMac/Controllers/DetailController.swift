@@ -340,6 +340,7 @@ extension DetailController: NSTableViewDelegate, NSTableViewDataSource {
         }
         
         if let cell = view as? DetailTableCell {
+            print("made \(cell) for \(rowInfo)")
             cell.setup(for: rowInfo, of: self)
         }
         
@@ -406,7 +407,9 @@ extension DetailController: EditableView {
 extension DetailController: BookChangeObserver {
     func added(relationship: Relationship) {
         let changes = source.inserted(details: [relationship])
-        detailsTable.insertRows(at: changes, withAnimation: .slideDown)
+        if changes.count > 0, let index = changes.last {
+            detailsTable.insertRows(at: IndexSet(integer: index + 1), withAnimation: .slideDown)
+        }
     }
 
     func removed(relationship: Relationship) {
@@ -426,9 +429,14 @@ extension DetailController: BookChangeObserver {
 
     func added(publisher: Publisher) {
         let changes = source.inserted(details: [publisher])
-        detailsTable.insertRows(at: changes, withAnimation: .slideDown)
+        detailsTable.reloadData(forRowIndexes: changes, columnIndexes: IndexSet([0,1,2]))
     }
 
+    func changed(publisher: Publisher, to: Publisher) {
+        let changes = source.inserted(details: [publisher])
+        detailsTable.reloadData(forRowIndexes: changes, columnIndexes: IndexSet([0,1,2]))
+    }
+    
     func removed(publisher: Publisher) {
         let changes = source.removed(details: [publisher])
         detailsTable.removeRows(at: changes, withAnimation: .slideUp)
