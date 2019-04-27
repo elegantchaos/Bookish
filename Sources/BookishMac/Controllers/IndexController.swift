@@ -145,7 +145,9 @@ extension IndexController: ActionContextProvider {
 
 extension IndexController: BookLifecycleObserver {
     func created(books: [Book]) {
-        self.select(items: books, forEditing: true)
+        for book in books {
+            application.windowController.reveal(book: book)
+        }
     }
     
     func deleted(books: [Book]) {
@@ -154,7 +156,7 @@ extension IndexController: BookLifecycleObserver {
 
 extension IndexController: PersonLifecycleObserver {
     func created(person: Person) {
-        self.select(items: [person], forEditing: true)
+        application.windowController.reveal(person: person)
     }
     
     func deleted(person: Person) {
@@ -163,7 +165,7 @@ extension IndexController: PersonLifecycleObserver {
 
 extension IndexController: PublisherLifecycleObserver {
     func created(publisher: Publisher) {
-        self.select(items: [publisher], forEditing: true)
+        application.windowController.reveal(publisher: publisher)
     }
     
     func deleted(publisher: Publisher) {
@@ -172,9 +174,18 @@ extension IndexController: PublisherLifecycleObserver {
 
 extension IndexController: SeriesLifecycleObserver {
     func created(series: Series) {
-        self.select(items: [series], forEditing: true)
+        application.windowController.reveal(series: series)
     }
     
     func deleted(series: Series) {
+    }
+}
+
+extension IndexController: RoleLifecycleObserver {
+    func created(role: Role) {
+        application.windowController.reveal(role: role)
+    }
+    
+    func deleted(role: Role) {
     }
 }

@@ -130,3 +130,9 @@ extension CollectionWindowController: SeriesViewer {
         reveal(series, mode: .series)
     }
 }
+
+extension CollectionWindowController: RoleViewer {
+    func reveal(role: Role) {
+        reveal(role, mode: .role)
+    }
+}
