@@ -11,6 +11,15 @@
         }
       },
       {
+        "package": "CommandShell",
+        "repositoryURL": "https://github.com/elegantchaos/CommandShell",
+        "state": {
+          "branch": null,
+          "revision": "9d6d6462ffefc51bc49d6dc3ac80b2c9496a456d",
+          "version": "1.0.2"
+        }
+      },
+      {
         "package": "Docopt",
         "repositoryURL": "https://github.com/elegantchaos/docopt.swift",
         "state": {
@@ -42,8 +51,8 @@
         "repositoryURL": "git@github.com:elegantchaos/SketchX",
         "state": {
           "branch": null,
-          "revision": "eaa3a6f3a7a15d21acd10aeed1086874ad03e00f",
-          "version": "1.0.2"
+          "revision": "37e2ceb8ee528fdb4d8198e7d652427e9f152dac",
+          "version": "1.0.4"
         }
       }
     ]
