@@ -7,9 +7,16 @@ import AppKit
 import Actions
 import BookishModel
 
-class RelationshipCell: AnnotatedTableCellView {
+class RelationshipCell: NSTableCellView {
     
     @IBOutlet weak var personField: NSTextField!
+    
+    let clickRecogniser = NSClickGestureRecognizer(target: self, action: #selector(personClicked(_:)))
+
+    override func viewWillMove(toWindow newWindow: NSWindow?) {
+        print("willMoveTo \(newWindow)")
+        super.viewWillMove(toWindow: newWindow)
+    }
     
     var roleCell: RoleCell? {
         if let table = detailView.detailsTable {
@@ -37,6 +44,9 @@ class RelationshipCell: AnnotatedTableCellView {
 extension RelationshipCell: DetailTableCell {
     func setup(for row: DetailItem, of view: DetailController) {
         assert(row is RelationshipDetailItem)
+        
+        personField.addGestureRecognizer(clickRecogniser)
+
         detailView = view
         if row.placeholder {
             personCombo.stringValue = ""
@@ -62,6 +72,10 @@ extension RelationshipCell: DetailTableCell {
 
     func keyView() -> NSView? {
         return detailView.editing ? personCombo : personField
+    }
+    
+    @IBAction func personClicked(_ sender: Any) {
+        application.actionManager.perform(identifier: "RevealPerson", info: ActionInfo(sender: self))
     }
 }
 

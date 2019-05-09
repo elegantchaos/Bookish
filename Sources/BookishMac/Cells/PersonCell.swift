@@ -9,7 +9,7 @@ import BookishModel
 
 class PersonCell: AnnotatedTableCellView {
     
-    @IBOutlet weak var personField: NSTextField!
+    @IBOutlet weak var personButton: NSButton!
     var detailView: DetailController!
 
 }
@@ -19,16 +19,16 @@ extension PersonCell: DetailTableCell {
         assert(row is PersonDetailItem)
         detailView = view
         if row.placeholder {
-            personField.stringValue = ""
+            personButton.stringValue = ""
             detailChannel.debug("setup as a placeholder")
         } else if let item = row as? PersonDetailItem, let person = item.person, let name = person.name {
             objectValue = person
-            personField.stringValue = name
+            personButton.stringValue = name
         }
     }
     
     func keyView() -> NSView? {
-        return personField
+        return personButton
     }
 }
 

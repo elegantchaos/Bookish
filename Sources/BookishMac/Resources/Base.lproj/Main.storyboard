@@ -1090,6 +1090,7 @@ Gw
                                     <constraint firstAttribute="width" constant="68" id="yJb-Xd-Ul9"/>
                                 </constraints>
                                 <color key="fillColor" red="0.86299508810043335" green="0.86210739612579346" blue="0.8980451226234436" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <font key="titleFont" metaFont="smallSystem"/>
                             </box>
                             <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="7" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QF4-CS-GTr">
                                 <rect key="frame" x="20" y="20" width="28" height="0.0"/>
@@ -1323,6 +1324,7 @@ Gw
                                     </constraints>
                                 </view>
                                 <color key="fillColor" name="Bookish Index"/>
+                                <font key="titleFont" metaFont="smallSystem"/>
                             </box>
                         </subviews>
                         <constraints>
@@ -1617,11 +1619,11 @@ Gw
                                                                         <rect key="frame" x="125" y="46" width="223" height="24"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
-                                                                            <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="8Gb-0S-SzA">
-                                                                                <rect key="frame" x="0.0" y="2" width="204" height="18"/>
+                                                                            <textField identifier="personButton.RevealPerson" horizontalHuggingPriority="249" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="8Gb-0S-SzA">
+                                                                                <rect key="frame" x="0.0" y="2" width="223" height="18"/>
                                                                                 <textFieldCell key="cell" selectable="YES" sendsActionOnEndEditing="YES" alignment="left" placeholderString="value" id="nBn-Wa-0hd">
                                                                                     <font key="font" metaFont="systemBold" size="14"/>
-                                                                                    <color key="textColor" name="Bookish Detail Text"/>
+                                                                                    <color key="textColor" name="linkColor" catalog="System" colorSpace="catalog"/>
                                                                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                                 </textFieldCell>
                                                                                 <connections>
@@ -1629,7 +1631,7 @@ Gw
                                                                                 </connections>
                                                                             </textField>
                                                                             <comboBox identifier="button.person.ChangeRelationship" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="HQX-Fz-RCn" customClass="AnnotatedComboBox" customModule="Bookish" customModuleProvider="target">
-                                                                                <rect key="frame" x="2" y="-1" width="203" height="23"/>
+                                                                                <rect key="frame" x="2" y="-1" width="222" height="23"/>
                                                                                 <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" placeholderString="person name" numberOfVisibleItems="5" id="8YE-Pj-MOf">
                                                                                     <font key="font" metaFont="system" size="14"/>
                                                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -1647,68 +1649,44 @@ Gw
                                                                                     <binding destination="iPd-Ru-zxR" name="font" keyPath="self.cvm.detailFont" id="aFK-gO-6g2"/>
                                                                                 </connections>
                                                                             </comboBox>
-                                                                            <button identifier="button.RevealPerson" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Viz-hv-cyj" userLabel="Reveal">
-                                                                                <rect key="frame" x="204" y="3" width="15" height="16"/>
-                                                                                <buttonCell key="cell" type="inline" bezelStyle="inline" image="Reveal" imagePosition="only" alignment="center" controlSize="mini" lineBreakMode="truncatingTail" state="on" inset="2" id="po9-V5-Xt2">
-                                                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                                                    <font key="font" metaFont="smallSystemBold"/>
-                                                                                </buttonCell>
-                                                                                <connections>
-                                                                                    <action selector="performAction:" target="hXB-DS-vDG" id="aLI-uf-5t2"/>
-                                                                                </connections>
-                                                                            </button>
                                                                         </subviews>
                                                                         <constraints>
-                                                                            <constraint firstAttribute="trailing" secondItem="Viz-hv-cyj" secondAttribute="trailing" constant="4" id="4va-1o-xLT"/>
                                                                             <constraint firstItem="HQX-Fz-RCn" firstAttribute="top" secondItem="Obe-M6-xbY" secondAttribute="top" constant="4" id="AQO-hL-FpR"/>
                                                                             <constraint firstAttribute="bottom" secondItem="8Gb-0S-SzA" secondAttribute="bottom" constant="2" id="Jbv-W5-CWt"/>
-                                                                            <constraint firstItem="Viz-hv-cyj" firstAttribute="centerY" secondItem="8Gb-0S-SzA" secondAttribute="centerY" id="KfB-cn-aCe"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="8Gb-0S-SzA" secondAttribute="trailing" constant="2" id="TDA-Fw-2aA"/>
                                                                             <constraint firstItem="8Gb-0S-SzA" firstAttribute="leading" secondItem="Obe-M6-xbY" secondAttribute="leading" constant="2" id="TPI-CG-BPU"/>
                                                                             <constraint firstItem="8Gb-0S-SzA" firstAttribute="centerY" secondItem="HQX-Fz-RCn" secondAttribute="centerY" id="agT-QZ-F2O"/>
                                                                             <constraint firstItem="HQX-Fz-RCn" firstAttribute="leading" secondItem="Obe-M6-xbY" secondAttribute="leading" constant="2" id="eIE-S9-tuP"/>
-                                                                            <constraint firstItem="Viz-hv-cyj" firstAttribute="leading" secondItem="HQX-Fz-RCn" secondAttribute="trailing" constant="2" id="xfh-Zj-kTH"/>
-                                                                            <constraint firstItem="Viz-hv-cyj" firstAttribute="leading" secondItem="8Gb-0S-SzA" secondAttribute="trailing" constant="2" id="yva-F7-oof"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="HQX-Fz-RCn" secondAttribute="trailing" constant="2" id="gOV-B5-RHY"/>
                                                                         </constraints>
                                                                         <connections>
                                                                             <outlet property="personCombo" destination="HQX-Fz-RCn" id="Osx-9j-lYB"/>
                                                                             <outlet property="personField" destination="8Gb-0S-SzA" id="SEI-pd-lZx"/>
                                                                         </connections>
                                                                     </tableCellView>
-                                                                    <tableCellView identifier="person" id="0U2-Rw-46u" userLabel="person" customClass="PersonCell" customModule="Bookish" customModuleProvider="target">
+                                                                    <tableCellView identifier="person" misplaced="YES" id="0U2-Rw-46u" userLabel="person" customClass="PersonCell" customModule="Bookish" customModuleProvider="target">
                                                                         <rect key="frame" x="125" y="72" width="223" height="24"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
-                                                                            <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="2bK-mY-49V">
-                                                                                <rect key="frame" x="0.0" y="2" width="204" height="18"/>
-                                                                                <textFieldCell key="cell" selectable="YES" sendsActionOnEndEditing="YES" alignment="left" placeholderString="person name" id="aSU-Cv-LW2">
-                                                                                    <font key="font" metaFont="systemBold" size="14"/>
-                                                                                    <color key="textColor" name="Bookish Detail Text"/>
-                                                                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                                                                </textFieldCell>
-                                                                                <connections>
-                                                                                    <binding destination="iPd-Ru-zxR" name="font" keyPath="self.cvm.detailFont" id="F1l-Ov-6Ae"/>
-                                                                                </connections>
-                                                                            </textField>
-                                                                            <button identifier="button.RevealPerson" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KeZ-Oz-S8j" userLabel="Reveal">
-                                                                                <rect key="frame" x="204" y="3" width="15" height="16"/>
-                                                                                <buttonCell key="cell" type="inline" bezelStyle="inline" image="Reveal" imagePosition="only" alignment="center" controlSize="mini" lineBreakMode="truncatingTail" state="on" inset="2" id="Z3p-5M-WoB">
+                                                                            <button identifier="button.RevealPerson" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xga-21-Mvn">
+                                                                                <rect key="frame" x="0.0" y="0.0" width="223" height="17"/>
+                                                                                <buttonCell key="cell" type="square" title="person name" bezelStyle="shadowlessSquare" alignment="left" imageScaling="proportionallyDown" inset="2" id="GQZ-fw-NpL">
                                                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                                                    <font key="font" metaFont="smallSystemBold"/>
+                                                                                    <font key="font" metaFont="system"/>
                                                                                 </buttonCell>
                                                                                 <connections>
-                                                                                    <action selector="performAction:" target="hXB-DS-vDG" id="VCh-tp-80f"/>
+                                                                                    <action selector="performAction:" target="hXB-DS-vDG" id="hNo-34-eaM"/>
                                                                                 </connections>
                                                                             </button>
                                                                         </subviews>
                                                                         <constraints>
-                                                                            <constraint firstAttribute="trailing" secondItem="KeZ-Oz-S8j" secondAttribute="trailing" constant="4" id="1Ju-B6-TVI"/>
-                                                                            <constraint firstAttribute="bottom" secondItem="2bK-mY-49V" secondAttribute="bottom" constant="2" id="9fC-yK-Kbc"/>
-                                                                            <constraint firstItem="2bK-mY-49V" firstAttribute="leading" secondItem="0U2-Rw-46u" secondAttribute="leading" constant="2" id="NeI-dl-g1p"/>
-                                                                            <constraint firstItem="KeZ-Oz-S8j" firstAttribute="centerY" secondItem="2bK-mY-49V" secondAttribute="centerY" id="c6v-JS-e96"/>
-                                                                            <constraint firstItem="KeZ-Oz-S8j" firstAttribute="leading" secondItem="2bK-mY-49V" secondAttribute="trailing" constant="2" id="z78-sO-BXQ"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="xga-21-Mvn" secondAttribute="trailing" id="3l8-X2-eRt"/>
+                                                                            <constraint firstItem="xga-21-Mvn" firstAttribute="top" secondItem="0U2-Rw-46u" secondAttribute="top" id="ZGV-yE-hvn"/>
+                                                                            <constraint firstAttribute="bottom" secondItem="xga-21-Mvn" secondAttribute="bottom" id="qmt-cG-EkD"/>
+                                                                            <constraint firstItem="xga-21-Mvn" firstAttribute="leading" secondItem="0U2-Rw-46u" secondAttribute="leading" id="vnu-xH-JNq"/>
                                                                         </constraints>
                                                                         <connections>
-                                                                            <outlet property="personField" destination="2bK-mY-49V" id="x6c-7V-H0y"/>
+                                                                            <outlet property="personButton" destination="xga-21-Mvn" id="W90-Fw-UlM"/>
                                                                         </connections>
                                                                     </tableCellView>
                                                                     <tableCellView identifier="publisher" id="5Ra-ba-7w7" userLabel="publisher" customClass="PublisherCell" customModule="Bookish" customModuleProvider="target">
@@ -2232,7 +2210,7 @@ Gw
                                                 <constraint firstAttribute="width" constant="24" id="1RW-Mz-i0O"/>
                                                 <constraint firstAttribute="height" constant="24" id="xBU-Ec-vs3"/>
                                             </constraints>
-                                            <buttonCell key="cell" type="push" bezelStyle="rounded" image="NSGoRightTemplate" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="jyu-ah-VWU">
+                                            <buttonCell key="cell" type="push" bezelStyle="rounded" image="NSRightFacingTriangleTemplate" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="jyu-ah-VWU">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
@@ -2263,6 +2241,7 @@ Gw
                                     </constraints>
                                 </view>
                                 <color key="fillColor" name="Bookish Detail"/>
+                                <font key="titleFont" metaFont="smallSystem"/>
                             </box>
                         </subviews>
                         <constraints>
@@ -2323,7 +2302,7 @@ Gw
         <image name="Minus" width="12" height="12"/>
         <image name="NSAddTemplate" width="11" height="11"/>
         <image name="NSGoLeftTemplate" width="9" height="12"/>
-        <image name="NSGoRightTemplate" width="9" height="12"/>
+        <image name="NSRightFacingTriangleTemplate" width="9" height="12"/>
         <image name="People" width="512" height="512"/>
         <image name="Publishers" width="512" height="512"/>
         <image name="RemoveBook" width="32" height="32"/>

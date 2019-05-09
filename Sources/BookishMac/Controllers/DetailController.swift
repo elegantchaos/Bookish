@@ -57,7 +57,7 @@ class DetailController: CollectionViewController {
     
     let doubleClickRecogniser = NSClickGestureRecognizer(target: self, action: #selector(textDoubleClick(_:)))
     let clickRecogniser = NSClickGestureRecognizer(target: self, action: #selector(chooseImage(_:)))
-    
+
     func setup(for index: IndexController, type entityType: ModelObject.Type) {
         detailChannel.debug("setup for \(entityType)")
         doubleClickRecogniser.numberOfClicksRequired = 2
@@ -257,7 +257,7 @@ class DetailController: CollectionViewController {
             application.actionManager.perform(identifier: "ToggleEditing")
         }
     }
-    
+
     @IBAction func chooseImage(_ sender: Any) {
         let panel = NSOpenPanel()
         panel.canChooseDirectories = false
