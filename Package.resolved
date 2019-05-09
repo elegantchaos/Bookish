@@ -50,9 +50,9 @@
         "package": "SketchX",
         "repositoryURL": "git@github.com:elegantchaos/SketchX",
         "state": {
-          "branch": null,
-          "revision": "37e2ceb8ee528fdb4d8198e7d652427e9f152dac",
-          "version": "1.0.4"
+          "branch": "bookish",
+          "revision": "eefa1a84a85c02817421012e66687d1cad20dcc2",
+          "version": null
         }
       }
     ]
