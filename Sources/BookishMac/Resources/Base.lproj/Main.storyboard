@@ -2204,7 +2204,7 @@ Gw
                                                 <constraint firstAttribute="height" constant="24" id="NW4-nu-cnX"/>
                                                 <constraint firstAttribute="width" constant="24" id="uj6-Kv-K2a"/>
                                             </constraints>
-                                            <buttonCell key="cell" type="push" title="&lt;" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="f4q-S6-aGx">
+                                            <buttonCell key="cell" type="push" bezelStyle="rounded" image="NSGoLeftTemplate" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="f4q-S6-aGx">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
@@ -2232,7 +2232,7 @@ Gw
                                                 <constraint firstAttribute="width" constant="24" id="1RW-Mz-i0O"/>
                                                 <constraint firstAttribute="height" constant="24" id="xBU-Ec-vs3"/>
                                             </constraints>
-                                            <buttonCell key="cell" type="push" title="&gt;" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="jyu-ah-VWU">
+                                            <buttonCell key="cell" type="push" bezelStyle="rounded" image="NSGoRightTemplate" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="jyu-ah-VWU">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
@@ -2322,6 +2322,8 @@ Gw
         <image name="HilightMarker" width="4" height="36"/>
         <image name="Minus" width="12" height="12"/>
         <image name="NSAddTemplate" width="11" height="11"/>
+        <image name="NSGoLeftTemplate" width="9" height="12"/>
+        <image name="NSGoRightTemplate" width="9" height="12"/>
         <image name="People" width="512" height="512"/>
         <image name="Publishers" width="512" height="512"/>
         <image name="RemoveBook" width="32" height="32"/>
