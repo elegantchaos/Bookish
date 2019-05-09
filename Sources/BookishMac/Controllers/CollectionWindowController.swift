@@ -40,6 +40,13 @@ class CollectionWindowController: NSWindowController, NSWindowDelegate, ActionCo
         }
     }
     
+    func navigateBack(completed: @escaping Action.Completion) {
+        if let object = cvm.navigationStack.goBack() {
+            reveal(object: object, pushOntoStack: false)
+        }
+        completed()
+    }
+    
     func reveal(index: Int) {
         cvm.modeIndex = index
         let name = cvm.mode.singularName()
@@ -47,17 +54,17 @@ class CollectionWindowController: NSWindowController, NSWindowDelegate, ActionCo
             index.selectionChanged()
         }
     }
-    
-    func reveal<EntityType: ModelObject>(_ object: EntityType, mode: CollectionViewState.Mode) {
-        cvm.mode = mode
-        let current = cvm.navigationStack.last
-        if current == nil || current! != object {
-            if let name = EntityType.entity().name {
-                if let index = indexControllers[name] as? IndexController {
-                    index.select(items: [object])
-                    cvm.navigationStack.append(object)
-                }
+   
+    func reveal(object: ModelObject, pushOntoStack: Bool = true) {
+        let entityName = type(of:object).entityName
+        if let index = indexControllers[entityName] as? IndexController {
+            if pushOntoStack {
+                cvm.navigationStack.push(object)
             }
+            let mode = CollectionViewState.Mode.named(entityName)
+            let modeChanged = mode != cvm.mode
+            cvm.mode = mode
+            index.select(items: [object], forceUpdate: modeChanged)
         }
     }
     
@@ -113,30 +120,30 @@ extension CollectionWindowController: WindowControllerWithViewModel {
 
 extension CollectionWindowController: BookViewer {
     @objc func reveal(book: Book) {
-        reveal(book, mode: .books)
+        reveal(object: book)
     }
 }
 
 extension CollectionWindowController: PersonViewer {
     @objc func reveal(person: Person) {
-        reveal(person, mode: .people)
+        reveal(object: person)
     }
 }
 
 extension CollectionWindowController: PublisherViewer {
     func reveal(publisher: Publisher) {
-        reveal(publisher, mode: .publishers)
+        reveal(object: publisher)
     }
 }
 
 extension CollectionWindowController: SeriesViewer {
     func reveal(series: Series) {
-        reveal(series, mode: .series)
+        reveal(object: series)
     }
 }
 
 extension CollectionWindowController: RoleViewer {
     func reveal(role: Role) {
-        reveal(role, mode: .role)
+        reveal(object: role)
     }
 }

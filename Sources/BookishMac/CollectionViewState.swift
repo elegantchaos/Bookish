@@ -22,6 +22,14 @@ import BookishModel
         func singularName() -> String {
             return Mode.names[rawValue]
         }
+        
+        static func named(_ name: String) -> Mode {
+            if let index = Mode.names.firstIndex(of: name), let mode = Mode(rawValue: index) {
+                return mode
+            }
+            
+            fatalError("unknown entity \(name)")
+        }
     }
     
     static let ViewStateChangedNotification = NSNotification.Name(rawValue: "ViewStateChanged")
@@ -52,7 +60,7 @@ import BookishModel
         }
     }
     
-    var navigationStack: [ModelObject] = []
+    var navigationStack = NavigationStack<ModelObject>()
     
     init(collection: SyncedCollection) {
         self.collection = collection

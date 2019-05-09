@@ -10,6 +10,7 @@ import Logger
 import BookishModel
 
 let detailChannel = Logger("Detail")
+let detailCellChannel = Logger("DetailCell")
 
 protocol KeyableTableCell {
     func keyView() -> NSView?
@@ -340,7 +341,7 @@ extension DetailController: NSTableViewDelegate, NSTableViewDataSource {
         }
         
         if let cell = view as? DetailTableCell {
-            print("made \(cell) for \(rowInfo)")
+            detailCellChannel.log("made \(cell) for \(rowInfo)")
             cell.setup(for: rowInfo, of: self)
         }
         

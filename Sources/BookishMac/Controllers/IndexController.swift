@@ -106,19 +106,18 @@ class IndexController: CollectionViewController {
     }
     
     func selectionChanged() {
-        if let selection = indexArray.selectedObjects as? [ModelObject] {
-            indexChannel.debug("\(entityType) selection changed to \(selection) ")
-            detailView.setup(for: self, type: entityType)
-            
-            let entityCount = (indexArray.arrangedObjects as? NSArray)?.count ?? 0
-            let selectedCount = selection.count
-            selectionLabel.stringValue = entityType.entityCount(entityCount, selected: selectedCount, prefix: "selected")
-            selectionLabel.isHidden = selectedCount < 2
-            indexSearchField.placeholderString = entityType.entityCount(entityCount, prefix: "search")
-        }
+        let selection = indexArray.selectedObjects as? [ModelObject] ?? []
+        indexChannel.debug("\(entityType) selection changed to \(selection) ")
+        detailView.setup(for: self, type: entityType)
+        
+        let entityCount = (indexArray.arrangedObjects as? NSArray)?.count ?? 0
+        let selectedCount = selection.count
+        selectionLabel.stringValue = entityType.entityCount(entityCount, selected: selectedCount, prefix: "selected")
+        selectionLabel.isHidden = selectedCount < 2
+        indexSearchField.placeholderString = entityType.entityCount(entityCount, prefix: "search")
     }
     
-    func select(items: [ModelObject], forEditing: Bool = false) {
+    func select(items: [ModelObject], forEditing: Bool = false, forceUpdate: Bool = false) {
         fetchIfNecessary {
             DispatchQueue.main.async {
                 self.indexArray.setSelectedObjects(items)
@@ -127,6 +126,8 @@ class IndexController: CollectionViewController {
                 self.indexTable.scrollRowToVisible(selection[selection.endIndex])
                 if forEditing && !self.detailView.isEditing {
                     self.application.actionManager.perform(identifier: "ToggleEditing")
+                } else if forceUpdate {
+                    self.selectionChanged()
                 }
             }
         }
