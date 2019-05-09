@@ -18,3 +18,16 @@ class NavigateBackAction: Action {
         }
     }
 }
+
+class NavigateForwardAction: Action {
+    override func validate(context: ActionContext) -> Action.Validation {
+        let viewModel = context.info[ActionContext.viewModelKey] as? CollectionViewState
+        return Action.Validation(enabled: viewModel?.navigationStack.canGoForward ?? false)
+    }
+    
+    override func perform(context: ActionContext, completed: @escaping Action.Completion) {
+        if let window = context[ActionContext.windowKey] as? CollectionWindowController {
+            window.navigateForward(completed: completed)
+        }
+    }
+}

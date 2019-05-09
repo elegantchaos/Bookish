@@ -46,7 +46,14 @@ class CollectionWindowController: NSWindowController, NSWindowDelegate, ActionCo
         }
         completed()
     }
-    
+
+    func navigateForward(completed: @escaping Action.Completion) {
+        if let object = cvm.navigationStack.goForward() {
+            reveal(object: object, pushOntoStack: false)
+        }
+        completed()
+    }
+
     func reveal(index: Int) {
         cvm.modeIndex = index
         let name = cvm.mode.singularName()

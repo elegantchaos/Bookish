@@ -2212,8 +2212,8 @@ Gw
                                                 <action selector="performAction:" target="hXB-DS-vDG" id="X5C-8B-48l"/>
                                             </connections>
                                         </button>
-                                        <button identifier="button..NewBook" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dox-GR-yrg" userLabel="New Button">
-                                            <rect key="frame" x="50" y="13" width="36" height="35"/>
+                                        <button identifier="button.NewItem" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dox-GR-yrg" userLabel="New Button">
+                                            <rect key="frame" x="86" y="13" width="36" height="35"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="24" id="WnE-ew-1r7"/>
                                                 <constraint firstAttribute="height" constant="24" id="vRO-gA-SAM"/>
@@ -2222,6 +2222,23 @@ Gw
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
+                                            <connections>
+                                                <action selector="performAction:" target="hXB-DS-vDG" id="i75-W5-B0N"/>
+                                            </connections>
+                                        </button>
+                                        <button identifier="button.NavigateForward" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FD5-lr-tXu" userLabel="Forward Button">
+                                            <rect key="frame" x="50" y="13" width="36" height="35"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="24" id="1RW-Mz-i0O"/>
+                                                <constraint firstAttribute="height" constant="24" id="xBU-Ec-vs3"/>
+                                            </constraints>
+                                            <buttonCell key="cell" type="push" title="&gt;" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="jyu-ah-VWU">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="performAction:" target="hXB-DS-vDG" id="sxw-0B-ggB"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                     <constraints>
@@ -2234,12 +2251,14 @@ Gw
                                         <constraint firstAttribute="trailing" secondItem="Lbu-fX-2FZ" secondAttribute="trailing" constant="20" symbolic="YES" id="Jeg-0V-omQ"/>
                                         <constraint firstItem="EZV-LB-qVW" firstAttribute="leading" secondItem="dHN-9c-iuf" secondAttribute="leading" constant="20" symbolic="YES" id="Lrf-7y-IEC"/>
                                         <constraint firstItem="dox-GR-yrg" firstAttribute="centerY" secondItem="EZV-LB-qVW" secondAttribute="centerY" id="R8a-ym-VEp"/>
+                                        <constraint firstItem="dox-GR-yrg" firstAttribute="leading" secondItem="FD5-lr-tXu" secondAttribute="trailing" constant="12" symbolic="YES" id="RjW-Sg-cpd"/>
+                                        <constraint firstItem="FD5-lr-tXu" firstAttribute="centerY" secondItem="EZV-LB-qVW" secondAttribute="centerY" id="XUy-WA-DIE"/>
                                         <constraint firstItem="GRq-94-pzl" firstAttribute="top" secondItem="dHN-9c-iuf" secondAttribute="top" constant="20" symbolic="YES" id="bjM-FH-ZG7"/>
                                         <constraint firstItem="GRq-94-pzl" firstAttribute="leading" secondItem="dHN-9c-iuf" secondAttribute="leading" constant="20" symbolic="YES" id="gID-3E-67E"/>
                                         <constraint firstItem="dMP-oM-auc" firstAttribute="top" secondItem="dHN-9c-iuf" secondAttribute="top" constant="20" symbolic="YES" id="hKb-cO-585"/>
-                                        <constraint firstItem="dox-GR-yrg" firstAttribute="leading" secondItem="EZV-LB-qVW" secondAttribute="trailing" constant="12" symbolic="YES" id="iOe-fu-cuz"/>
                                         <constraint firstItem="Lbu-fX-2FZ" firstAttribute="top" secondItem="F4f-dy-2SG" secondAttribute="bottom" constant="20" symbolic="YES" id="mQA-pH-2fT"/>
                                         <constraint firstItem="F4f-dy-2SG" firstAttribute="trailing" secondItem="GRq-94-pzl" secondAttribute="trailing" id="qvr-Ck-2b8"/>
+                                        <constraint firstItem="FD5-lr-tXu" firstAttribute="leading" secondItem="EZV-LB-qVW" secondAttribute="trailing" constant="12" symbolic="YES" id="tdd-kI-Svp"/>
                                         <constraint firstItem="Lbu-fX-2FZ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="EZV-LB-qVW" secondAttribute="trailing" constant="12" symbolic="YES" id="yES-4H-Gvt"/>
                                     </constraints>
                                 </view>
@@ -2317,10 +2336,10 @@ Gw
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Bookish Index">
-            <color red="0.97254901960784312" green="0.97254901960784312" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.97299998998641968" green="0.97299998998641968" blue="0.98000001907348633" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Bookish Index Text">
-            <color red="0.35294117647058826" green="0.36862745098039218" blue="0.3843137254901961" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.3529999852180481" green="0.36899998784065247" blue="0.38400000333786011" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Bookish Label Text">
             <color red="0.54100000858306885" green="0.55699998140335083" blue="0.57300001382827759" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

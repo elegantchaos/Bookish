@@ -79,7 +79,8 @@ let applicationChannel = Logger("Application")
             ShowDatePickerAction(identifier: "ShowDatePicker"),
             ToggleScannerAction(identifier: "ToggleScanner"),
             LookupCoverAction(identifier: "LookupCover"),
-            NavigateBackAction(identifier: "NavigateBack")
+            NavigateBackAction(identifier: "NavigateBack"),
+            NavigateForwardAction(identifier: "NavigateForward")
             ])
         
         actionManager.registerNotification() { (stage, action) in
