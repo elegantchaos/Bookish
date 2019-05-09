@@ -50,9 +50,13 @@ class CollectionWindowController: NSWindowController, NSWindowDelegate, ActionCo
     
     func reveal<EntityType: ModelObject>(_ object: EntityType, mode: CollectionViewState.Mode) {
         cvm.mode = mode
-        if let name = EntityType.entity().name {
-            if let index = indexControllers[name] as? IndexController {
-                index.select(items: [object])
+        let current = cvm.navigationStack.last
+        if current == nil || current! != object {
+            if let name = EntityType.entity().name {
+                if let index = indexControllers[name] as? IndexController {
+                    index.select(items: [object])
+                    cvm.navigationStack.append(object)
+                }
             }
         }
     }

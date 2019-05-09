@@ -52,6 +52,8 @@ import BookishModel
         }
     }
     
+    var navigationStack: [ModelObject] = []
+    
     init(collection: SyncedCollection) {
         self.collection = collection
         managedObjectContext = collection.managedObjectContext
