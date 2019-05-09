@@ -1,1 +1,1 @@
-swift run ReleaseTools archive
+swift run rt archive

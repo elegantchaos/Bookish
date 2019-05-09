@@ -1,1 +1,1 @@
-swift run ReleaseTools compress
+swift run rt compress

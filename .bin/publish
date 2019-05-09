@@ -1,2 +1,2 @@
-swift run ReleaseTools publish --repo="Dependencies/Website/updates/"
+swift run rt publish --repo="Dependencies/Website/updates/"
 
