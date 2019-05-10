@@ -11,8 +11,6 @@ class RelationshipCell: NSTableCellView {
     
     @IBOutlet weak var personField: NSTextField!
     
-    let clickRecogniser = NSClickGestureRecognizer(target: self, action: #selector(personClicked(_:)))
-
     override func viewWillMove(toWindow newWindow: NSWindow?) {
         print("willMoveTo \(newWindow)")
         super.viewWillMove(toWindow: newWindow)
@@ -45,6 +43,7 @@ extension RelationshipCell: DetailTableCell {
     func setup(for row: DetailItem, of view: DetailController) {
         assert(row is RelationshipDetailItem)
         
+        let clickRecogniser = NSClickGestureRecognizer(target: self, action: #selector(personClicked(_:)))
         personField.addGestureRecognizer(clickRecogniser)
 
         detailView = view
