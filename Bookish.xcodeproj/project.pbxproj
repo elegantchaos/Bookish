@@ -75,6 +75,7 @@
 		227F4514218352A0000D8B8D /* ImporterUIActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227F4513218352A0000D8B8D /* ImporterUIActions.swift */; };
 		228968442191DDC200B80A93 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 228968432191DDC200B80A93 /* CloudKit.framework */; };
 		228968472191F48400B80A93 /* AuthorSelectionTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228968452191EFA900B80A93 /* AuthorSelectionTransformer.swift */; };
+		22905A6F2285D082001C308C /* LinkField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22905A6E2285D082001C308C /* LinkField.swift */; };
 		2295A9132232BCD70085CD86 /* DoubleClickAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2295A9122232BCD70085CD86 /* DoubleClickAction.swift */; };
 		2295A9312232C6A90085CD86 /* EntryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2295A9302232C6A90085CD86 /* EntryCell.swift */; };
 		22960328214025E80020B3EB /* RelationshipCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22960327214025E80020B3EB /* RelationshipCell.swift */; };
@@ -303,6 +304,7 @@
 		228968422191DDBF00B80A93 /* Bookish.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Bookish.entitlements; sourceTree = "<group>"; };
 		228968432191DDC200B80A93 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		228968452191EFA900B80A93 /* AuthorSelectionTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorSelectionTransformer.swift; sourceTree = "<group>"; };
+		22905A6E2285D082001C308C /* LinkField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkField.swift; sourceTree = "<group>"; };
 		2295A9122232BCD70085CD86 /* DoubleClickAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleClickAction.swift; sourceTree = "<group>"; };
 		2295A9302232C6A90085CD86 /* EntryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryCell.swift; sourceTree = "<group>"; };
 		22960327214025E80020B3EB /* RelationshipCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelationshipCell.swift; sourceTree = "<group>"; };
@@ -462,6 +464,7 @@
 				22DE6AE62188A8DC0078D489 /* WhiteSearchFieldCell.swift */,
 				22D39E522146A84500282467 /* AnnotatedTableCellView.swift */,
 				22D39E5D2146D9F100282467 /* ValidatingButton.swift */,
+				22905A6E2285D082001C308C /* LinkField.swift */,
 				2250C71C21B83B5700E899E2 /* RegularExpressionExtensions.swift */,
 				22960329214032520020B3EB /* AnnotatedTextField.swift */,
 				226E8E6A21AC0918001F191F /* AnnotatedComboBox.swift */,
@@ -1161,6 +1164,7 @@
 				22D1B2492180D7B60062F2CB /* DetailCell.swift in Sources */,
 				22DD424A2126D6DA0070C85A /* CollectionViewController.swift in Sources */,
 				2250C71421B596C700E899E2 /* SeriesCell.swift in Sources */,
+				22905A6F2285D082001C308C /* LinkField.swift in Sources */,
 				22429401212C32BF00E70510 /* CollectionWindowController.swift in Sources */,
 				22DD42482126D6DA0070C85A /* Application.swift in Sources */,
 				225488DC21F20B2500EE8ECB /* RoleCell.swift in Sources */,

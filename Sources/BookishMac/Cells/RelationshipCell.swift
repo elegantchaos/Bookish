@@ -11,11 +11,6 @@ class RelationshipCell: NSTableCellView {
     
     @IBOutlet weak var personField: NSTextField!
     
-    override func viewWillMove(toWindow newWindow: NSWindow?) {
-        print("willMoveTo \(newWindow)")
-        super.viewWillMove(toWindow: newWindow)
-    }
-    
     var roleCell: RoleCell? {
         if let table = detailView.detailsTable {
             let row = table.row(for: self)
@@ -43,9 +38,6 @@ extension RelationshipCell: DetailTableCell {
     func setup(for row: DetailItem, of view: DetailController) {
         assert(row is RelationshipDetailItem)
         
-        let clickRecogniser = NSClickGestureRecognizer(target: self, action: #selector(personClicked(_:)))
-        personField.addGestureRecognizer(clickRecogniser)
-
         detailView = view
         if row.placeholder {
             personCombo.stringValue = ""
@@ -73,9 +65,6 @@ extension RelationshipCell: DetailTableCell {
         return detailView.editing ? personCombo : personField
     }
     
-    @IBAction func personClicked(_ sender: Any) {
-        application.actionManager.perform(identifier: "RevealPerson", info: ActionInfo(sender: self))
-    }
 }
 
 extension RelationshipCell: ActionContextProvider {

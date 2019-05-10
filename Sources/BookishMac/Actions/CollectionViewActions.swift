@@ -20,6 +20,7 @@ class ItemAction: DelegatedAction {
         return [
             NewItemAction(identifier: "NewItem"),
             DeleteItemAction(identifier: "DeleteItem"),
+            RevealItemAction(identifier: "RevealItem")
         ]
     }
     
@@ -65,5 +66,21 @@ class NewItemAction: ItemAction {
             
             return ItemAction.actionIdentifier(for: model.mode, action: "New", context: context)
        }
+    }
+}
+
+class RevealItemAction: DelegatedAction {
+    init(identifier: String) {
+        super.init(identifier: identifier) { (context) -> String in
+            if context[PublisherAction.publisherKey] != nil {
+                return "RevealPublisher"
+            } else if context[SeriesAction.seriesKey] != nil {
+                return "RevealSeries"
+            } else if context[BookAction.bookKey] != nil {
+                return "RevealBook"
+            } else {
+                return "RevealPerson"
+            }
+        }
     }
 }
