@@ -10,7 +10,7 @@
             ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
             <ActionContent
                title = "Update Build Number"
-               scriptText = "cd &quot;${SOURCE_ROOT}&quot;&#10;&#10;# update main Bookish build number&#10;swift run ReleaseTools update-build&#10;&#10;# update BookishModel build number&#10;swift run ReleaseTools update-build --repo=&quot;Dependencies/BookishModel&quot;&#10;">
+               scriptText = "cd &quot;${SOURCE_ROOT}&quot;&#10;&#10;# update main Bookish build number&#10;swift run rt update-build&#10;&#10;# update BookishModel build number&#10;swift run rt update-build --repo=&quot;Dependencies/BookishModel&quot;&#10;">
                <EnvironmentBuildable>
                   <BuildableReference
                      BuildableIdentifier = "primary"
