@@ -105,8 +105,8 @@ let applicationChannel = Logger("Application")
         self.viewModel = viewModel
         let windowController = self.windowControllerFactory.instantiateController(for: viewModel)
         self.windowController = windowController
+        windowController.pushInitialObject()
         windowController.showWindow(self)
-        
     }
     
     fileprivate func setupCloudKit() {

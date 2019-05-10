@@ -13,7 +13,7 @@ let validationChannel = Logger("Validation")
 class CollectionWindowController: NSWindowController, NSWindowDelegate, ActionContextProvider {
     fileprivate var cvm: CollectionViewState!
     var scannerWindow: ScannerWindowController?
-
+    
     private var indexControllers: [String:Any] = [:]
     
     override func windowDidLoad() {
@@ -40,28 +40,40 @@ class CollectionWindowController: NSWindowController, NSWindowDelegate, ActionCo
         }
     }
     
+    func pushInitialObject() {
+        // push the selection from the initial index controller onto the navigation stack
+        let name = cvm.mode.singularName()
+        if let index = indexControllers[name] as? IndexController {
+            index.fetchIfNecessary() {
+                if let selection = index.indexArray.selectedObjects.first as? ModelObject {
+                    self.cvm.navigationStack.push(selection)
+                }
+            }
+        }
+    }
+    
     func navigateBack(completed: @escaping Action.Completion) {
         if let object = cvm.navigationStack.goBack() {
             reveal(object: object, pushOntoStack: false)
         }
         completed()
     }
-
+    
     func navigateForward(completed: @escaping Action.Completion) {
         if let object = cvm.navigationStack.goForward() {
             reveal(object: object, pushOntoStack: false)
         }
         completed()
     }
-
+    
     func reveal(index: Int) {
         cvm.modeIndex = index
         let name = cvm.mode.singularName()
         if let index = indexControllers[name] as? IndexController {
-            index.selectionChanged()
+            index.updateDetailView()
         }
     }
-   
+    
     func reveal(object: ModelObject, pushOntoStack: Bool = true) {
         let entityName = type(of:object).entityName
         if let index = indexControllers[entityName] as? IndexController {
@@ -85,14 +97,14 @@ class CollectionWindowController: NSWindowController, NSWindowDelegate, ActionCo
         
         return window
     }
-
+    
     func toggleScanner() {
         if scannerWindow == nil {
             scannerWindow = setupScannerWindow()
             if let window = window, let scanner = scannerWindow?.window {
                 window.beginSheet(scanner, completionHandler: { (response) in
-                print("done")
-            })
+                    print("done")
+                })
             }
         } else {
             scannerWindow?.close()
@@ -109,7 +121,7 @@ class CollectionWindowController: NSWindowController, NSWindowDelegate, ActionCo
             let response = panel.runModal()
             completion(response)
         }
-
+        
     }
 }
 
