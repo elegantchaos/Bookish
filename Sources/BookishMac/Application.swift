@@ -13,13 +13,14 @@ import CloudKit
 import Sparkle
 
 let applicationChannel = Logger("Application")
+let updaterChannel = Logger("Updater")
 
 @objc class PerformActionDummy: NSObject {
     @IBAction func performAction(_ sender: Any) {
     }
 }
 
-@NSApplicationMain class Application: NSObject, SPUUpdaterDelegate, SPUStandardUserDriverDelegate {
+@NSApplicationMain class Application: NSObject, SPUStandardUserDriverDelegate {
     
     lazy var updateManager = makeUpdateManager()
     let windowControllerFactory = WindowControllerFactory<CollectionViewState>()
@@ -50,20 +51,13 @@ let applicationChannel = Logger("Application")
     static var sharedInstance: Application {
         return NSApp.delegate as! Application
     }
-    
-    func makeUpdateManager() -> SPUStandardUpdaterController {
-        let updateManager = SPUStandardUpdaterController(updaterDelegate: self, userDriverDelegate: self)
-        return updateManager
-    }
+
     
     func resetState() {
         let defaultsName = Bundle.main.bundleIdentifier!
         UserDefaults.standard.removePersistentDomain(forName: defaultsName)
     }
-    
-    fileprivate func setupUpdates() {
-    }
-    
+ 
     fileprivate func setupLookups() {
         lookupManager.register(service: GoogleLookupService(name: "Google Books"))
         lookupManager.register(service: ExistingCollectionLookupService(name: "Existing Collection"))
@@ -187,6 +181,9 @@ extension Application: NSMenuItemValidation {
             
             watchForDeleteItemClosing(item: menuItem)
             return validation.enabled
+        
+        case #selector(checkForUpdates(_:)):
+            return updateManager.validate(menuItem)
             
         default:
             return true
@@ -225,5 +222,31 @@ extension Application: NSMenuDelegate {
             watchedMenuItem?.title = "Delete"
             menu.delegate = nil
         }
+    }
+}
+
+extension Application: SPUUpdaterDelegate {
+    
+    fileprivate func makeUpdateManager() -> SPUStandardUpdaterController {
+        let updateManager = SPUStandardUpdaterController(updaterDelegate: self, userDriverDelegate: self)
+        return updateManager
+    }
+    
+    fileprivate func setupUpdates() {
+        if let updater = updateManager.updater, UserDefaults.standard.bool(forKey: "SUHasLaunchedBefore") {
+            updater.checkForUpdatesInBackground()
+        }
+    }
+
+    func updaterDidNotFindUpdate(_ updater: SPUUpdater) {
+        updaterChannel.log("No updates pending.")
+    }
+    
+    func updater(_ updater: SPUUpdater, didFindValidUpdate item: SUAppcastItem) {
+        updaterChannel.log("Found pending update \(item.displayVersionString ?? "(unknown version)").")
+    }
+    
+    func updater(_ updater: SPUUpdater, willScheduleUpdateCheckAfterDelay delay: TimeInterval) {
+        updaterChannel.log("Checking for update in \(Int(delay)) seconds.")
     }
 }
