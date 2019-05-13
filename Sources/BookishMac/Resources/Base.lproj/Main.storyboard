@@ -908,23 +908,10 @@ DQ
                                 </holdingPriorities>
                             </splitView>
                             <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="6" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ocm-8G-u1u">
-                                <rect key="frame" x="20" y="20" width="120" height="21"/>
+                                <rect key="frame" x="417" y="20" width="120" height="21"/>
                                 <subviews>
-                                    <button identifier="button.ToggleScanner" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mhL-cd-WyS">
-                                        <rect key="frame" x="-6" y="-7" width="72" height="32"/>
-                                        <buttonCell key="cell" type="push" title="Done" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="rPm-kC-xL6">
-                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="system"/>
-                                            <string key="keyEquivalent" base64-UTF8="YES">
-Gw
-</string>
-                                        </buttonCell>
-                                        <connections>
-                                            <action selector="performAction:" target="2SH-QY-2xC" id="D9v-ix-VF5"/>
-                                        </connections>
-                                    </button>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ewn-yD-jnE">
-                                        <rect key="frame" x="60" y="-7" width="66" height="32"/>
+                                        <rect key="frame" x="-6" y="-7" width="66" height="32"/>
                                         <buttonCell key="cell" type="push" title="Test" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="T77-ZR-gM1">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -938,6 +925,19 @@ Gw
                                             </binding>
                                         </connections>
                                     </button>
+                                    <button identifier="button.ToggleScanner" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mhL-cd-WyS">
+                                        <rect key="frame" x="54" y="-7" width="72" height="32"/>
+                                        <buttonCell key="cell" type="push" title="Done" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="rPm-kC-xL6">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                            <string key="keyEquivalent" base64-UTF8="YES">
+Gw
+</string>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="performAction:" target="2SH-QY-2xC" id="D9v-ix-VF5"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <visibilityPriorities>
                                     <integer value="1000"/>
@@ -948,36 +948,23 @@ Gw
                                     <real value="3.4028234663852886e+38"/>
                                 </customSpacing>
                             </stackView>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="SgJ-BQ-X9K">
-                                <rect key="frame" x="444" y="13" width="99" height="32"/>
-                                <buttonCell key="cell" type="push" title="Add Book" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="yuz-YB-Pj6">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="doAdd:" target="aUv-cC-c5u" id="70A-YU-AzS"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="ocm-8G-u1u" firstAttribute="leading" secondItem="iE7-gu-E3H" secondAttribute="leading" constant="20" id="GKg-d6-Vdm"/>
+                            <constraint firstItem="ocm-8G-u1u" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="iE7-gu-E3H" secondAttribute="leading" constant="20" id="GKg-d6-Vdm"/>
                             <constraint firstItem="d0R-PB-g9S" firstAttribute="firstBaseline" secondItem="xtR-ni-tmI" secondAttribute="firstBaseline" id="I4e-rF-u2u"/>
                             <constraint firstAttribute="trailing" secondItem="d0R-PB-g9S" secondAttribute="trailing" constant="20" symbolic="YES" id="NOv-jy-PA6"/>
-                            <constraint firstItem="SgJ-BQ-X9K" firstAttribute="top" secondItem="qBV-6i-3MW" secondAttribute="bottom" constant="20" symbolic="YES" id="PiD-sM-xMm"/>
+                            <constraint firstAttribute="trailing" secondItem="ocm-8G-u1u" secondAttribute="trailing" constant="20" symbolic="YES" id="QiL-Sz-u8t"/>
                             <constraint firstItem="qBV-6i-3MW" firstAttribute="leading" secondItem="iE7-gu-E3H" secondAttribute="leading" constant="20" symbolic="YES" id="QlK-6r-PvZ"/>
-                            <constraint firstAttribute="bottom" secondItem="SgJ-BQ-X9K" secondAttribute="bottom" constant="20" id="f8y-kR-1j0"/>
-                            <constraint firstItem="SgJ-BQ-X9K" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ocm-8G-u1u" secondAttribute="trailing" constant="40" id="fx8-vX-5he"/>
+                            <constraint firstItem="ocm-8G-u1u" firstAttribute="top" secondItem="qBV-6i-3MW" secondAttribute="bottom" constant="20" id="gCR-bs-JWh"/>
+                            <constraint firstAttribute="bottom" secondItem="ocm-8G-u1u" secondAttribute="bottom" constant="20" id="ieS-Sx-1TR"/>
                             <constraint firstItem="d0R-PB-g9S" firstAttribute="leading" secondItem="xtR-ni-tmI" secondAttribute="trailing" constant="8" symbolic="YES" id="l4V-Lt-TRN"/>
                             <constraint firstAttribute="trailing" secondItem="qBV-6i-3MW" secondAttribute="trailing" constant="20" symbolic="YES" id="mDZ-z2-Qpz"/>
                             <constraint firstItem="xtR-ni-tmI" firstAttribute="top" secondItem="iE7-gu-E3H" secondAttribute="top" constant="20" id="mcw-X9-5JZ"/>
                             <constraint firstItem="qBV-6i-3MW" firstAttribute="top" secondItem="xtR-ni-tmI" secondAttribute="bottom" constant="20" id="sCO-bE-NeX"/>
                             <constraint firstItem="xtR-ni-tmI" firstAttribute="leading" secondItem="iE7-gu-E3H" secondAttribute="leading" constant="20" id="sQw-R9-p96"/>
-                            <constraint firstAttribute="trailing" secondItem="SgJ-BQ-X9K" secondAttribute="trailing" constant="20" id="up4-5w-A03"/>
-                            <constraint firstItem="SgJ-BQ-X9K" firstAttribute="centerY" secondItem="ocm-8G-u1u" secondAttribute="centerY" id="wX5-CE-hzu"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="addButton" destination="SgJ-BQ-X9K" id="eXJ-bt-i8c"/>
                         <outlet property="candidatesScrollView" destination="u2d-ar-e3H" id="u2Z-zx-3B9"/>
                         <outlet property="candidatesTable" destination="JR5-Tw-44o" id="Mst-Yi-aBt"/>
                         <outlet property="imageView" destination="KeA-eY-ggS" id="gpE-Fj-dS9"/>

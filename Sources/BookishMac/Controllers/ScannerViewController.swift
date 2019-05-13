@@ -19,7 +19,6 @@ class ScannerViewController: NSViewController, BarcodeScannerDelegate {
     @IBOutlet weak var searchButton: NSButton!
     @IBOutlet weak var candidatesTable: NSTableView!
     @IBOutlet weak var candidatesScrollView: NSScrollView!
-    @IBOutlet weak var addButton: NSButton!
     @IBOutlet weak var splitView: NSSplitView!
     
     var scanner: BarcodeScanner? = nil
@@ -98,7 +97,6 @@ class ScannerViewController: NSViewController, BarcodeScannerDelegate {
             candidates.removeAll()
             candidatesScrollView.isHidden = true
             candidatesTable.reloadData()
-            addButton.isEnabled = false
             
         case .done:
             statusLabel.stringValue = "candidate.found".localized(count: candidates.count)
@@ -113,7 +111,6 @@ class ScannerViewController: NSViewController, BarcodeScannerDelegate {
             if candidatesTable.selectedRow == -1 {
                 candidatesTable.selectRowIndexes(rows, byExtendingSelection: false)
             }
-            addButton.isEnabled = true
             
         default:
             break
