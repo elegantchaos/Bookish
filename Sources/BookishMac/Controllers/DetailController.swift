@@ -71,6 +71,10 @@ class DetailController: CollectionViewController {
         view.isHidden = false
     }
 
+    func setupAsEmpty() {
+        view.isHidden = true
+    }
+    
     override func viewWillAppear() {
         let observer = NotificationCenter.default.addObserver(forName: CollectionViewState.ViewStateChangedNotification, object: nil, queue: nil) { (notification) in
             self.selectionChanged()

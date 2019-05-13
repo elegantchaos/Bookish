@@ -1358,33 +1358,20 @@ Gw
                                             </textFieldCell>
                                         </textField>
                                         <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LQL-fe-j2k">
-                                            <rect key="frame" x="20" y="0.0" width="160" height="400"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="200" height="400"/>
                                             <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="waL-lX-hio">
-                                                <rect key="frame" x="0.0" y="0.0" width="160" height="400"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="200" height="400"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
-                                                    <textView editable="NO" selectable="NO" importsGraphics="NO" verticallyResizable="NO" spellingCorrection="YES" smartInsertDelete="YES" id="crJ-jZ-8TW">
-                                                        <rect key="frame" x="0.0" y="0.0" width="160" height="400"/>
+                                                    <textView editable="NO" importsGraphics="NO" verticallyResizable="NO" spellingCorrection="YES" smartInsertDelete="YES" id="crJ-jZ-8TW">
+                                                        <rect key="frame" x="0.0" y="0.0" width="200" height="400"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <color key="textColor" name="Bookish Index Text"/>
                                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                        <size key="minSize" width="160" height="400"/>
+                                                        <size key="minSize" width="200" height="400"/>
                                                         <size key="maxSize" width="240" height="10000000"/>
                                                         <attributedString key="textStorage">
-                                                            <fragment>
-                                                                <string key="content">
-
-
-
-
-
-
-
-
-
-Your collection currently has no books.
-
-Maybe you should add some.</string>
+                                                            <fragment content="EMPTY COLLECTION">
                                                                 <attributes>
                                                                     <color key="NSColor" name="Bookish Index Text"/>
                                                                     <font key="NSFont" size="15" name="Helvetica"/>
@@ -1393,6 +1380,9 @@ Maybe you should add some.</string>
                                                             </fragment>
                                                         </attributedString>
                                                         <color key="insertionPointColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                        <connections>
+                                                            <outlet property="delegate" destination="PUA-xK-Wyi" id="ITg-Sb-bJG"/>
+                                                        </connections>
                                                     </textView>
                                                 </subviews>
                                             </clipView>
@@ -1401,7 +1391,7 @@ Maybe you should add some.</string>
                                                 <autoresizingMask key="autoresizingMask"/>
                                             </scroller>
                                             <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="DEk-Jb-uco">
-                                                <rect key="frame" x="144" y="0.0" width="16" height="400"/>
+                                                <rect key="frame" x="184" y="0.0" width="16" height="400"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                             </scroller>
                                         </scrollView>
@@ -1410,7 +1400,7 @@ Maybe you should add some.</string>
                                         <constraint firstAttribute="trailing" secondItem="NQL-eA-Rw2" secondAttribute="trailing" constant="20" symbolic="YES" id="1gP-dM-Lga"/>
                                         <constraint firstAttribute="bottom" secondItem="NQL-eA-Rw2" secondAttribute="bottom" constant="4" id="7ea-uc-BNF"/>
                                         <constraint firstAttribute="bottom" secondItem="LQL-fe-j2k" secondAttribute="bottom" id="7vl-mq-oPz"/>
-                                        <constraint firstItem="LQL-fe-j2k" firstAttribute="leading" secondItem="A2m-0i-gcO" secondAttribute="leading" constant="20" symbolic="YES" id="Bl9-iz-s45"/>
+                                        <constraint firstItem="LQL-fe-j2k" firstAttribute="leading" secondItem="A2m-0i-gcO" secondAttribute="leading" id="Bl9-iz-s45"/>
                                         <constraint firstItem="8vI-pf-KKk" firstAttribute="leading" secondItem="A2m-0i-gcO" secondAttribute="leading" id="HVV-XH-kcg"/>
                                         <constraint firstAttribute="trailing" secondItem="8vI-pf-KKk" secondAttribute="trailing" id="IYu-Nd-cJi"/>
                                         <constraint firstItem="NQL-eA-Rw2" firstAttribute="top" secondItem="Yal-1G-peJ" secondAttribute="bottom" constant="4" id="Urz-pu-Alp"/>
@@ -1419,7 +1409,7 @@ Maybe you should add some.</string>
                                         <constraint firstItem="8vI-pf-KKk" firstAttribute="top" secondItem="A2m-0i-gcO" secondAttribute="top" constant="20" symbolic="YES" id="nJI-NB-D35"/>
                                         <constraint firstItem="NQL-eA-Rw2" firstAttribute="leading" secondItem="A2m-0i-gcO" secondAttribute="leading" constant="20" symbolic="YES" id="nOX-Ie-LKG"/>
                                         <constraint firstItem="Yal-1G-peJ" firstAttribute="top" secondItem="8vI-pf-KKk" secondAttribute="bottom" constant="12" id="nqQ-5c-RMb"/>
-                                        <constraint firstAttribute="trailing" secondItem="LQL-fe-j2k" secondAttribute="trailing" constant="20" symbolic="YES" id="uxC-4B-As2"/>
+                                        <constraint firstAttribute="trailing" secondItem="LQL-fe-j2k" secondAttribute="trailing" id="uxC-4B-As2"/>
                                         <constraint firstAttribute="trailing" secondItem="Yal-1G-peJ" secondAttribute="trailing" constant="20" symbolic="YES" id="znZ-VI-lxj"/>
                                     </constraints>
                                 </view>

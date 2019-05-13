@@ -55,6 +55,12 @@ class IndexController: CollectionViewController {
     override func viewWillAppear() {
         indexChannel.debug("\(entityType) index appearing")
         
+        if let url = Bundle.main.url(forResource: "Empty \(entityName)", withExtension: ".rtf"), let text = try? NSAttributedString(url: url, options: [:], documentAttributes: nil) {
+            if let storage = emptyIndexView.textStorage {
+                storage.replaceCharacters(in: NSRange(location: 0, length:storage.length), with: text)
+            }
+        }
+
         updateVisibility()
 
         title = entityType.entityTitle
@@ -122,9 +128,9 @@ class IndexController: CollectionViewController {
         if entityCount == 0 {
             indexTable.isHidden = true
             indexSearchField.isHidden = true
-            detailView.view.isHidden = true
             emptyIndexView.isHidden = false
-            emptyIndexView.string = "\(self.entityName).empty".localized
+            
+            detailView.setupAsEmpty()
             view.window?.makeFirstResponder(emptyIndexView)
         } else {
             indexTable.isHidden = false
@@ -217,5 +223,16 @@ extension IndexController: RoleLifecycleObserver {
     }
     
     func deleted(role: Role) {
+    }
+}
+
+extension IndexController: NSTextViewDelegate {
+    func textView(_ textView: NSTextView, clickedOnLink link: Any, at charIndex: Int) -> Bool {
+        if let url = link as? URL, url.scheme == "action", let action = url.host {
+            application.actionManager.perform(identifier: action)
+            return true
+        }
+        
+        return false
     }
 }
