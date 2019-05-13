@@ -125,10 +125,13 @@ extension Application: NSApplicationDelegate {
         setupTransformers()
         setupUpdates()
         
-        if CommandLine.arguments.contains("--test-document") {
+        let arguments = CommandLine.arguments
+        if arguments.contains("--test-document") {
             mode = .replaceWithTestData
-        } else if CommandLine.arguments.contains("--sample-document") {
+        } else if arguments.contains("--sample-document") {
             mode = .replaceWithSampleData
+        } else if arguments.contains("--empty-document") {
+            mode = .replaceWithDefaultRoles
         }
         
         let shouldSync = mode == .defaultRoles
