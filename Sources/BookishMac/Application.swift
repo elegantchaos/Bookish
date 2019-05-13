@@ -69,10 +69,10 @@ let updaterChannel = Logger("Updater")
         actionManager.register(ImporterAction.standardActions())
         actionManager.register(ItemAction.standardActions())
         actionManager.register(EditingAction.standardActions())
+        actionManager.register(LookupAction.standardActions())
         actionManager.register([
             ShowDatePickerAction(identifier: "ShowDatePicker"),
             ToggleScannerAction(identifier: "ToggleScanner"),
-            LookupCoverAction(identifier: "LookupCover"),
             NavigateBackAction(identifier: "NavigateBack"),
             NavigateForwardAction(identifier: "NavigateForward")
             ])

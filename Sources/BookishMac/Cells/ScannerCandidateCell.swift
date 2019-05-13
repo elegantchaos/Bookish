@@ -4,6 +4,7 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 import AppKit
+import Actions
 import BookishModel
 
 class ScannerCandidateCell: NSTableCellView {
@@ -15,6 +16,9 @@ class ScannerCandidateCell: NSTableCellView {
     @IBOutlet weak var authorsField: NSTextField!
     @IBOutlet weak var publisherField: NSTextField!
     @IBOutlet weak var sourceField: NSTextField!
+    @IBOutlet weak var actionButton: NSButton!
+
+    var candidate: LookupCandidate? = nil
     
     class func makeDateFormatter() -> DateFormatter {
         let formatter = DateFormatter()
@@ -23,6 +27,8 @@ class ScannerCandidateCell: NSTableCellView {
     }
     
     func setup(with candidate: LookupCandidate) {
+        self.candidate = candidate
+
         sourceField.stringValue = "candidate.found.source".localized(with: ["source": candidate.service.name])
         titleField.stringValue = candidate.title
         authorsField.stringValue = candidate.authors.joined(separator: ", ")
@@ -37,6 +43,9 @@ class ScannerCandidateCell: NSTableCellView {
             publisher += year
         }
 
+        actionButton.identifier = NSUserInterfaceItemIdentifier(rawValue: candidate.action)
+        actionButton.validateButtons()
+        
         publisherField.stringValue = publisher
         
         if let urlString = candidate.image, let url = URL(string: urlString) {
@@ -45,5 +54,11 @@ class ScannerCandidateCell: NSTableCellView {
             }
         }
 
+    }
+}
+
+extension ScannerCandidateCell: ActionContextProvider {
+    func provide(context: ActionContext) {
+        context[LookupAction.candidateKey] = candidate
     }
 }

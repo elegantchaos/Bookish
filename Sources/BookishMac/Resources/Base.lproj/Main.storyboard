@@ -728,15 +728,15 @@ DQ
                                 <rect key="frame" x="20" y="61" width="517" height="196"/>
                                 <subviews>
                                     <customView fixedFrame="YES" id="KeA-eY-ggS" userLabel="Scanner">
-                                        <rect key="frame" x="0.0" y="0.0" width="285" height="196"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="214" height="196"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     </customView>
                                     <customView id="Xmx-s8-TZH" userLabel="Candidates">
-                                        <rect key="frame" x="286" y="0.0" width="231" height="196"/>
+                                        <rect key="frame" x="215" y="0.0" width="302" height="196"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tGW-qR-OP0" userLabel="Prompt">
-                                                <rect key="frame" x="18" y="179" width="199" height="17"/>
+                                                <rect key="frame" x="18" y="179" width="270" height="17"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="160" id="rzJ-7g-vKq"/>
                                                 </constraints>
@@ -747,22 +747,22 @@ DQ
                                                 </textFieldCell>
                                             </textField>
                                             <progressIndicator hidden="YES" wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="hHr-dd-BPj" userLabel="Spinner">
-                                                <rect key="frame" x="215" y="180" width="16" height="16"/>
+                                                <rect key="frame" x="286" y="180" width="16" height="16"/>
                                             </progressIndicator>
                                             <scrollView borderType="line" autohidesScrollers="YES" horizontalLineScroll="63" horizontalPageScroll="10" verticalLineScroll="63" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u2d-ar-e3H">
-                                                <rect key="frame" x="20" y="0.0" width="211" height="171"/>
+                                                <rect key="frame" x="20" y="0.0" width="282" height="171"/>
                                                 <clipView key="contentView" drawsBackground="NO" id="Vch-os-6Ge">
-                                                    <rect key="frame" x="1" y="1" width="209" height="169"/>
+                                                    <rect key="frame" x="1" y="1" width="280" height="169"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="none" selectionHighlightStyle="sourceList" columnResizing="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" rowHeight="61" rowSizeStyle="automatic" usesAutomaticRowHeights="YES" viewBased="YES" id="JR5-Tw-44o">
-                                                            <rect key="frame" x="0.0" y="0.0" width="209" height="169"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="280" height="169"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <size key="intercellSpacing" width="3" height="2"/>
                                                             <color key="backgroundColor" name="_sourceListBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                                             <tableColumns>
-                                                                <tableColumn identifier="candidates" width="200" minWidth="40" maxWidth="1000" id="hUS-sK-buP">
+                                                                <tableColumn identifier="candidates" width="277" minWidth="40" maxWidth="1000" id="hUS-sK-buP">
                                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
                                                                         <font key="font" metaFont="smallSystem"/>
                                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -776,7 +776,7 @@ DQ
                                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                     <prototypeCellViews>
                                                                         <tableCellView identifier="candidate" id="fmA-St-1LR" customClass="ScannerCandidateCell" customModule="Bookish" customModuleProvider="target">
-                                                                            <rect key="frame" x="1" y="1" width="200" height="61"/>
+                                                                            <rect key="frame" x="1" y="1" width="277" height="61"/>
                                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                             <subviews>
                                                                                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="LYQ-OI-993">
@@ -788,7 +788,7 @@ DQ
                                                                                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="BookPlaceholder" id="OxN-xC-h59"/>
                                                                                 </imageView>
                                                                                 <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jjc-Sx-Ky0">
-                                                                                    <rect key="frame" x="44" y="4" width="156" height="53"/>
+                                                                                    <rect key="frame" x="44" y="4" width="179" height="53"/>
                                                                                     <subviews>
                                                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="GCb-VL-yjr">
                                                                                             <rect key="frame" x="-2" y="39" width="30" height="14"/>
@@ -836,16 +836,29 @@ DQ
                                                                                         <real value="3.4028234663852886e+38"/>
                                                                                     </customSpacing>
                                                                                 </stackView>
+                                                                                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kFn-7Q-3sU">
+                                                                                    <rect key="frame" x="222" y="-2" width="60" height="27"/>
+                                                                                    <buttonCell key="cell" type="push" title="Action" bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="2uq-ap-HAc">
+                                                                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                                        <font key="font" metaFont="smallSystem"/>
+                                                                                    </buttonCell>
+                                                                                    <connections>
+                                                                                        <action selector="performAction:" target="2SH-QY-2xC" id="cj2-1b-ho8"/>
+                                                                                    </connections>
+                                                                                </button>
                                                                             </subviews>
                                                                             <constraints>
                                                                                 <constraint firstItem="Jjc-Sx-Ky0" firstAttribute="leading" secondItem="LYQ-OI-993" secondAttribute="trailing" constant="4" id="0eT-f4-sQO"/>
+                                                                                <constraint firstAttribute="bottom" secondItem="kFn-7Q-3sU" secondAttribute="bottom" constant="4" id="3w4-rT-gaj"/>
                                                                                 <constraint firstItem="Jjc-Sx-Ky0" firstAttribute="top" secondItem="fmA-St-1LR" secondAttribute="top" constant="4" id="EVR-1O-pwX"/>
+                                                                                <constraint firstAttribute="trailing" secondItem="kFn-7Q-3sU" secondAttribute="trailing" id="SWG-vm-Wtw"/>
+                                                                                <constraint firstItem="kFn-7Q-3sU" firstAttribute="leading" secondItem="Jjc-Sx-Ky0" secondAttribute="trailing" constant="4" id="YoT-kd-xpx"/>
                                                                                 <constraint firstAttribute="bottom" secondItem="Jjc-Sx-Ky0" secondAttribute="bottom" constant="4" id="jKj-pn-xkj"/>
                                                                                 <constraint firstItem="Jjc-Sx-Ky0" firstAttribute="centerY" secondItem="LYQ-OI-993" secondAttribute="centerY" id="nhC-4A-jpT"/>
-                                                                                <constraint firstAttribute="trailing" secondItem="Jjc-Sx-Ky0" secondAttribute="trailing" id="s8Z-KJ-YPt"/>
                                                                                 <constraint firstItem="LYQ-OI-993" firstAttribute="leading" secondItem="fmA-St-1LR" secondAttribute="leading" constant="2" id="t0c-nZ-uDX"/>
                                                                             </constraints>
                                                                             <connections>
+                                                                                <outlet property="actionButton" destination="kFn-7Q-3sU" id="1gB-lO-yoZ"/>
                                                                                 <outlet property="authorsField" destination="PHe-fp-wHl" id="pgf-zU-tmM"/>
                                                                                 <outlet property="coverView" destination="LYQ-OI-993" id="YcZ-hY-O9a"/>
                                                                                 <outlet property="imageView" destination="LYQ-OI-993" id="rzl-SU-NvD"/>
