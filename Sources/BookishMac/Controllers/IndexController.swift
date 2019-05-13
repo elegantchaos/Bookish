@@ -20,6 +20,7 @@ class IndexController: CollectionViewController {
     @IBOutlet weak var indexTable: NSTableView!
     @IBOutlet weak var indexSearchField: NSSearchField!
     @IBOutlet weak var selectionLabel: NSTextField!
+    @IBOutlet weak var emptyIndexView: NSTextView!
 
     typealias FetchCompletion = () -> Void
 
@@ -47,12 +48,15 @@ class IndexController: CollectionViewController {
         if let window = window as? CollectionWindowController {
             window.register(index: self, for: entityName)
         }
+
         super.windowDidLoad(window, storyboard: storyboard)
     }
     
     override func viewWillAppear() {
         indexChannel.debug("\(entityType) index appearing")
         
+        updateVisibility()
+
         title = entityType.entityTitle
         indexArray.entityName = entityName
         indexArray.sortDescriptors = [NSSortDescriptor(key: "sortName", ascending: true)]
@@ -60,7 +64,9 @@ class IndexController: CollectionViewController {
             self.selectionChanged()
         }))
         
-        fetchIfNecessary()
+        fetchIfNecessary() {
+            self.updateVisibility()
+        }
         
         super.viewWillAppear()
     }
@@ -108,6 +114,23 @@ class IndexController: CollectionViewController {
     func selectionChanged() {
         indexChannel.debug("\(entityType) selection changed")
         updateDetailView()
+        updateVisibility()
+    }
+    
+    func updateVisibility() {
+        let entityCount = (indexArray.arrangedObjects as? NSArray)?.count ?? 0
+        if entityCount == 0 {
+            indexTable.isHidden = true
+            indexSearchField.isHidden = true
+            detailView.view.isHidden = true
+            emptyIndexView.isHidden = false
+            emptyIndexView.string = "\(self.entityName).empty".localized
+            view.window?.makeFirstResponder(emptyIndexView)
+        } else {
+            indexTable.isHidden = false
+            indexSearchField.isHidden = false
+            emptyIndexView.isHidden = true
+        }
     }
     
     func updateDetailView() {

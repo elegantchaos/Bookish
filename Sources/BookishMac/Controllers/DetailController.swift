@@ -68,7 +68,7 @@ class DetailController: CollectionViewController {
         self.entityType = entityType
         source = entityType.getProvider()
         selectionChanged()
-        
+        view.isHidden = false
     }
 
     override func viewWillAppear() {
@@ -78,6 +78,8 @@ class DetailController: CollectionViewController {
         observers.append(observer)
         imageView.addGestureRecognizer(clickRecogniser)
 
+        view.isHidden = true
+        
         super.viewWillAppear()
     }
 

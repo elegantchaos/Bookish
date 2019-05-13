@@ -8,3 +8,59 @@
 
 detail.image.choose.prompt = "Set Image";
 detail.image.choose.message = "Select the image to use.";
+
+Book.empty = "
+
+
+
+
+
+
+
+
+
+Your collection currently contains no books.
+
+Maybe you should add some.";
+
+Person.empty = "
+
+
+
+
+
+
+
+
+
+Your collection currently contains no people.
+
+Maybe you should add some.";
+
+Publisher.empty = "
+
+
+
+
+
+
+
+
+
+Your collection currently contains no publishers.
+
+Maybe you should add some.";
+
+Series.empty = "
+
+
+
+
+
+
+
+
+
+Your collection currently contains no series.
+
+Maybe you should add some.";
