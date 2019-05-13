@@ -10,20 +10,17 @@ import Logger
 
 let validationChannel = Logger("Validation")
 
-class CollectionWindowController: NSWindowController, NSWindowDelegate, ActionContextProvider {
+class CollectionWindowController: LateAutosavingWindowController, NSWindowDelegate, ActionContextProvider {
     fileprivate var cvm: CollectionViewState!
     var scannerWindow: ScannerWindowController?
     
+    override var lateAutosaveName: String? { return "collection.window" }
     private var indexControllers: [String:Any] = [:]
     
     override func windowDidLoad() {
         super.windowDidLoad()
         
         window?.autorecalculatesKeyViewLoop = false
-        
-        // need to set the autosave name late - loading from a storyboard will overwrite it with the default value otherwise
-        window?.setFrameUsingName("collection.window")
-        windowFrameAutosaveName = "collection.window"
     }
     
     func provide(context: ActionContext) {

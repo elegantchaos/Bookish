@@ -13,17 +13,23 @@ class ScannerViewController: NSViewController, BarcodeScannerDelegate {
     static let candidateViewID = NSUserInterfaceItemIdentifier(rawValue: "candidate")
     
     @IBOutlet weak var imageView: NSView!
-    @IBOutlet weak var barcodeView: NSTextField!
+    @IBOutlet weak var statusLabel: NSTextField!
+    @IBOutlet weak var statusSpinner: NSProgressIndicator!
     @IBOutlet weak var searchField: NSTextField!
+    @IBOutlet weak var searchButton: NSButton!
     @IBOutlet weak var candidatesTable: NSTableView!
     @IBOutlet weak var candidatesScrollView: NSScrollView!
-    @IBOutlet weak var lookupSpinner: NSProgressIndicator!
     @IBOutlet weak var addButton: NSButton!
-
+    @IBOutlet weak var splitView: NSSplitView!
+    
     var scanner: BarcodeScanner? = nil
     var detected: String = ""
     var lookup: LookupSession? = nil
     var candidates: [LookupCandidate] = []
+    
+    @objc var gotSearchText: Bool {
+        return !searchField.stringValue.isEmpty
+    }
     
     deinit {
         print("scanner view deinit")
@@ -32,8 +38,11 @@ class ScannerViewController: NSViewController, BarcodeScannerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        barcodeView.stringValue = "candidate.lookup.scanning".localized
+        statusLabel.stringValue = "candidate.lookup.initial".localized
         candidatesScrollView.isHidden = true
+
+        // need to set the autosave name late - loading from a storyboard will overwrite it with the default value otherwise
+        splitView.autosaveName = "scanner.splitview"
         
         if let scanner = BarcodeScanner(delegate: self) {
             self.scanner = scanner
@@ -65,7 +74,7 @@ class ScannerViewController: NSViewController, BarcodeScannerDelegate {
             DispatchQueue.main.async {
                 let key = valid ? "candidate.lookup.valid" : "candidate.lookup.invalid"
                 self.searchField.stringValue = value
-                self.barcodeView.stringValue = key.localized(with: ["search": value])
+                self.statusLabel.stringValue = key.localized(with: ["search": value])
             }
         }
     }
@@ -83,18 +92,18 @@ class ScannerViewController: NSViewController, BarcodeScannerDelegate {
     func lookupUpdate(session: LookupSession, state: LookupSession.State) {
         switch state {
         case .starting:
-            barcodeView.stringValue = "candidate.lookup.start".localized(with: ["search": session.search])
-            lookupSpinner.startAnimation(self)
-            lookupSpinner.isHidden = false
+            statusLabel.stringValue = "candidate.lookup.start".localized(with: ["search": session.search])
+            statusSpinner.startAnimation(self)
+            statusSpinner.isHidden = false
             candidates.removeAll()
             candidatesScrollView.isHidden = true
             candidatesTable.reloadData()
             addButton.isEnabled = false
             
         case .done:
-            barcodeView.stringValue = "candidate.found".localized(count: candidates.count)
-            lookupSpinner.stopAnimation(self)
-            lookupSpinner.isHidden = true
+            statusLabel.stringValue = "candidate.found".localized(count: candidates.count)
+            statusSpinner.stopAnimation(self)
+            statusSpinner.isHidden = true
             
         case .foundCandidate(let candidate):
             let rows = IndexSet(integer: candidates.count)
@@ -110,7 +119,6 @@ class ScannerViewController: NSViewController, BarcodeScannerDelegate {
             break
         }
     }
-    
     
     @IBAction func doTest(_ sender: Any) {
         searchField.stringValue = "9781408832240"
@@ -151,5 +159,11 @@ extension ScannerViewController: NSTableViewDelegate, NSTableViewDataSource {
         view.setup(with: candidate)
         
         return view
+    }
+}
+
+extension ScannerViewController: NSTextFieldDelegate {
+    func controlTextDidChange(_ obj: Notification) {
+        searchButton.isEnabled = !searchField.stringValue.isEmpty
     }
 }

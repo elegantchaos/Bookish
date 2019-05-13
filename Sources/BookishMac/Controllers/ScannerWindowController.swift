@@ -5,7 +5,9 @@
 
 import AppKit
 
-class ScannerWindowController: NSWindowController {
+class ScannerWindowController: LateAutosavingWindowController {
+    override var lateAutosaveName: String? { return "scanner.window" }
+
     deinit {
         print("scanner window deinit")
     }
