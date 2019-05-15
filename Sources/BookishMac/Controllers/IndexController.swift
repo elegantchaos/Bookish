@@ -18,6 +18,7 @@ class IndexController: CollectionViewController {
     
     @IBOutlet var indexArray: NSArrayController!
     @IBOutlet weak var indexTable: NSTableView!
+    @IBOutlet weak var indexView: NSScrollView!
     @IBOutlet weak var indexSearchField: NSSearchField!
     @IBOutlet weak var selectionLabel: NSTextField!
     @IBOutlet weak var emptyIndexView: NSTextView!
@@ -126,14 +127,14 @@ class IndexController: CollectionViewController {
     func updateVisibility() {
         let entityCount = (indexArray.arrangedObjects as? NSArray)?.count ?? 0
         if entityCount == 0 {
-            indexTable.isHidden = true
+            indexView.isHidden = true
             indexSearchField.isHidden = true
             emptyIndexView.isHidden = false
             
             detailView.setupAsEmpty()
             view.window?.makeFirstResponder(emptyIndexView)
         } else {
-            indexTable.isHidden = false
+            indexView.isHidden = false
             indexSearchField.isHidden = false
             emptyIndexView.isHidden = true
         }
