@@ -42,8 +42,9 @@ class CollectionWindowController: LateAutosavingWindowController, NSWindowDelega
         let name = cvm.mode.singularName()
         if let index = indexControllers[name] as? IndexController {
             index.fetchIfNecessary() {
-                if let selection = index.indexArray.selectedObjects.first as? ModelObject {
-                    self.cvm.navigationStack.push(selection)
+                if let objects = index.indexArray.arrangedObjects as? Array<ModelObject>, let first = objects.first {
+                    self.cvm.navigationStack.push(first)
+                    index.select(items: [first])
                 }
             }
         }
@@ -99,9 +100,7 @@ class CollectionWindowController: LateAutosavingWindowController, NSWindowDelega
         if scannerWindow == nil {
             scannerWindow = setupScannerWindow()
             if let window = window, let scanner = scannerWindow?.window {
-                window.beginSheet(scanner, completionHandler: { (response) in
-                    print("done")
-                })
+                window.beginSheet(scanner)
             }
         } else {
             scannerWindow?.close()

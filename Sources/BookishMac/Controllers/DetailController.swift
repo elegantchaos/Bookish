@@ -184,7 +184,7 @@ class DetailController: CollectionViewController {
             for column in detailsTable.tableColumns {
                 column.isHidden = !visibleColumns.contains(column.identifier.rawValue)
                 if column.isHidden {
-                    print("hidden \(column)")
+                    detailChannel.debug("hidden \(column)")
                 }
             }
         }

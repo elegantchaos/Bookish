@@ -1246,6 +1246,44 @@ Gw
                                     <rect key="frame" x="0.0" y="0.0" width="200" height="400"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
+                                        <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" horizontalScrollElasticity="none" verticalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="LQL-fe-j2k">
+                                            <rect key="frame" x="0.0" y="0.0" width="200" height="400"/>
+                                            <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="waL-lX-hio">
+                                                <rect key="frame" x="0.0" y="0.0" width="200" height="400"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <subviews>
+                                                    <textView editable="NO" importsGraphics="NO" verticallyResizable="NO" spellingCorrection="YES" smartInsertDelete="YES" id="crJ-jZ-8TW">
+                                                        <rect key="frame" x="0.0" y="0.0" width="200" height="400"/>
+                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                        <color key="textColor" name="Bookish Index Text"/>
+                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                        <size key="minSize" width="200" height="400"/>
+                                                        <size key="maxSize" width="240" height="10000000"/>
+                                                        <attributedString key="textStorage">
+                                                            <fragment content="EMPTY COLLECTION">
+                                                                <attributes>
+                                                                    <color key="NSColor" name="Bookish Index Text"/>
+                                                                    <font key="NSFont" size="15" name="Helvetica"/>
+                                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                                </attributes>
+                                                            </fragment>
+                                                        </attributedString>
+                                                        <color key="insertionPointColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                        <connections>
+                                                            <outlet property="delegate" destination="PUA-xK-Wyi" id="ITg-Sb-bJG"/>
+                                                        </connections>
+                                                    </textView>
+                                                </subviews>
+                                            </clipView>
+                                            <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="5Bj-uu-xYv">
+                                                <rect key="frame" x="-100" y="-100" width="240" height="16"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                            </scroller>
+                                            <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="DEk-Jb-uco">
+                                                <rect key="frame" x="-100" y="-100" width="16" height="400"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                            </scroller>
+                                        </scrollView>
                                         <scrollView horizontalHuggingPriority="260" horizontalCompressionResistancePriority="740" borderType="none" autohidesScrollers="YES" horizontalLineScroll="42" horizontalPageScroll="10" verticalLineScroll="42" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8vI-pf-KKk" userLabel="Index">
                                             <rect key="frame" x="0.0" y="55" width="200" height="325"/>
                                             <clipView key="contentView" drawsBackground="NO" id="iWu-oE-IA8">
@@ -1357,44 +1395,6 @@ Gw
                                                 <color key="backgroundColor" name="Bookish Index"/>
                                             </textFieldCell>
                                         </textField>
-                                        <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LQL-fe-j2k">
-                                            <rect key="frame" x="0.0" y="0.0" width="200" height="400"/>
-                                            <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="waL-lX-hio">
-                                                <rect key="frame" x="0.0" y="0.0" width="200" height="400"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                <subviews>
-                                                    <textView editable="NO" importsGraphics="NO" verticallyResizable="NO" spellingCorrection="YES" smartInsertDelete="YES" id="crJ-jZ-8TW">
-                                                        <rect key="frame" x="0.0" y="0.0" width="200" height="400"/>
-                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                        <color key="textColor" name="Bookish Index Text"/>
-                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                        <size key="minSize" width="200" height="400"/>
-                                                        <size key="maxSize" width="240" height="10000000"/>
-                                                        <attributedString key="textStorage">
-                                                            <fragment content="EMPTY COLLECTION">
-                                                                <attributes>
-                                                                    <color key="NSColor" name="Bookish Index Text"/>
-                                                                    <font key="NSFont" size="15" name="Helvetica"/>
-                                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                                </attributes>
-                                                            </fragment>
-                                                        </attributedString>
-                                                        <color key="insertionPointColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                        <connections>
-                                                            <outlet property="delegate" destination="PUA-xK-Wyi" id="ITg-Sb-bJG"/>
-                                                        </connections>
-                                                    </textView>
-                                                </subviews>
-                                            </clipView>
-                                            <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="5Bj-uu-xYv">
-                                                <rect key="frame" x="-100" y="-100" width="240" height="16"/>
-                                                <autoresizingMask key="autoresizingMask"/>
-                                            </scroller>
-                                            <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="DEk-Jb-uco">
-                                                <rect key="frame" x="184" y="0.0" width="16" height="400"/>
-                                                <autoresizingMask key="autoresizingMask"/>
-                                            </scroller>
-                                        </scrollView>
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="trailing" secondItem="NQL-eA-Rw2" secondAttribute="trailing" constant="20" symbolic="YES" id="1gP-dM-Lga"/>
@@ -1432,7 +1432,7 @@ Gw
                     </connections>
                 </viewController>
                 <customObject id="2hD-xJ-qyJ" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-                <arrayController mode="entity" entityName="Book" preservesSelection="NO" id="iUG-Sw-kPc">
+                <arrayController mode="entity" entityName="Book" preservesSelection="NO" avoidsEmptySelection="NO" id="iUG-Sw-kPc">
                     <connections>
                         <binding destination="PUA-xK-Wyi" name="managedObjectContext" keyPath="self.cvm.managedObjectContext" id="lJS-PU-xhb"/>
                     </connections>
@@ -2152,7 +2152,7 @@ Gw
                                                                             <outlet property="textField" destination="8XU-ZR-Wgb" id="eLb-dV-KRJ"/>
                                                                         </connections>
                                                                     </tableCellView>
-                                                                    <tableCellView identifier="section" id="amt-x4-xNy" userLabel="section" customClass="SectionCell" customModule="Bookish" customModuleProvider="target">
+                                                                    <tableCellView identifier="section" misplaced="YES" id="amt-x4-xNy" userLabel="section" customClass="SectionCell" customModule="Bookish" customModuleProvider="target">
                                                                         <rect key="frame" x="125" y="305" width="223" height="24"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
@@ -2161,15 +2161,18 @@ Gw
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="20" id="5hD-6b-SgW"/>
                                                                                 </constraints>
-                                                                                <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" continuous="YES" alignment="left" placeholderString="series name" drawsBackground="YES" usesSingleLineMode="YES" id="6Br-E5-tLj">
-                                                                                    <font key="font" size="14" name=".AppleSystemUIFont"/>
-                                                                                    <color key="textColor" name="Bookish Label Text"/>
+                                                                                <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" continuous="YES" alignment="left" placeholderString="section name" drawsBackground="YES" usesSingleLineMode="YES" id="6Br-E5-tLj">
+                                                                                    <font key="font" size="18" name=".AppleSystemUIFont"/>
+                                                                                    <color key="textColor" name="Bookish Index Text"/>
                                                                                     <color key="backgroundColor" name="Bookish Detail"/>
                                                                                 </textFieldCell>
+                                                                                <connections>
+                                                                                    <binding destination="iPd-Ru-zxR" name="font" keyPath="self.cvm.titleFont" id="Jhk-ca-apY"/>
+                                                                                </connections>
                                                                             </textField>
                                                                         </subviews>
                                                                         <constraints>
-                                                                            <constraint firstItem="YPE-nH-Ujd" firstAttribute="top" secondItem="amt-x4-xNy" secondAttribute="top" constant="2" id="Ss2-jd-EQH"/>
+                                                                            <constraint firstItem="YPE-nH-Ujd" firstAttribute="top" secondItem="amt-x4-xNy" secondAttribute="top" constant="20" symbolic="YES" id="Ss2-jd-EQH"/>
                                                                             <constraint firstAttribute="trailing" secondItem="YPE-nH-Ujd" secondAttribute="trailing" constant="2" id="ePW-1v-X8a"/>
                                                                             <constraint firstAttribute="bottom" secondItem="YPE-nH-Ujd" secondAttribute="bottom" constant="2" id="nqt-DQ-A3X"/>
                                                                             <constraint firstItem="YPE-nH-Ujd" firstAttribute="leading" secondItem="amt-x4-xNy" secondAttribute="leading" constant="2" id="x2y-Vp-Sbu"/>
@@ -2358,7 +2361,7 @@ Gw
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Bookish Index">
-            <color red="0.97254901960784312" green="0.97254901960784312" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.97299998998641968" green="0.97299998998641968" blue="0.98000001907348633" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Bookish Index Text">
             <color red="0.3529999852180481" green="0.36899998784065247" blue="0.38400000333786011" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
