@@ -30,7 +30,7 @@ let updaterChannel = Logger("Updater")
     let cloudManager = CloudManager()
     let lookupManager = LookupManager()
     let uiTesting = CommandLine.arguments.contains("--ui-testing")
-    var mode: SyncedCollection.PopulateMode = .defaultRoles
+    var mode: SyncedCollection.PopulateMode = .populateWith(sample: "Roles")
     let sampleDocument = CommandLine.arguments.contains("--sample-document")
     let noBlankDocument = CommandLine.arguments.contains("--no-blank-document")
     var viewModel: CollectionViewState?
@@ -125,16 +125,19 @@ extension Application: NSApplicationDelegate {
         setupTransformers()
         setupUpdates()
         
+        var shouldSync = true
         let arguments = CommandLine.arguments
         if arguments.contains("--test-document") {
-            mode = .replaceWithTestData
+            mode = .replaceWith(sample: "Test")
+            shouldSync = false
         } else if arguments.contains("--sample-document") {
-            mode = .replaceWithSampleData
+            mode = .replaceWith(sample: "Sample")
+            shouldSync = false
         } else if arguments.contains("--empty-document") {
-            mode = .replaceWithDefaultRoles
+            mode = .replaceWith(sample: "Roles")
+            shouldSync = false
         }
         
-        let shouldSync = mode == .defaultRoles
         let _ = SyncedCollection(identifier: cloudManager.collectionIdentifier, mode: mode, shouldSync: shouldSync) { (sc, error) in
             if let error = error {
                 fatalError("failed to load \(error)")

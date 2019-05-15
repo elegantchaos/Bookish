@@ -60,7 +60,7 @@ class ImportRequest {
      */
     
     func run(for url: URL) {
-        importer.run(importing: url, into: collection.managedObjectContext) {
+        importer.run(importing: url, in: collection.managedObjectContext) {
             self.complete()
         }
     }
@@ -108,10 +108,6 @@ class NewImportRequest: ImportRequest {
     init?(importer: Importer) throws {
         let application = Application.sharedInstance
         
-        let oldMode = application.mode
-        defer { application.mode = oldMode }
-        
-        application.mode = .defaultRoles
         super.init(importer: importer, collection: application.viewModel!.collection)
     }
     

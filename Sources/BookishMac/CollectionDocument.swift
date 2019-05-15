@@ -32,7 +32,6 @@ class CollectionDocument: NSPersistentDocument {
     override func configurePersistentStoreCoordinator(for url: URL, ofType fileType: String, modelConfiguration configuration: String?, storeOptions: [String : Any]? = nil) throws {
         let application = Application.sharedInstance
         let mode = application.mode
-        application.mode = .defaultRoles
         collection = SyncedCollection(url: url, identifier: application.cloudManager.collectionIdentifier, mode: mode) { (collection, error) in
             if let error = error {
                 fatalError("failed to load \(error)")
