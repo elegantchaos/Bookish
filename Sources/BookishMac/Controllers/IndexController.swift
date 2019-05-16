@@ -23,7 +23,7 @@ class IndexController: CollectionViewController {
     @IBOutlet weak var selectionLabel: NSTextField!
     @IBOutlet weak var emptyIndexView: NSTextView!
 
-    typealias FetchCompletion = () -> Void
+    typealias Completion = () -> Void
 
     enum FetchState {
         case unfetched
@@ -42,7 +42,7 @@ class IndexController: CollectionViewController {
     lazy var detailView: DetailController = nearestMatchingController()
     
     var observers: [NSKeyValueObservation] = []
-    var fetchCompletions: [FetchCompletion] = []
+    var fetchCompletions: [Completion] = []
     var fetchState: FetchState = .unfetched
     var fetchObserver: NSKeyValueObservation? = nil
     
@@ -54,23 +54,28 @@ class IndexController: CollectionViewController {
         super.windowDidLoad(window, storyboard: storyboard)
     }
     
-    override func viewWillAppear() {
-        indexChannel.debug("\(entityType) index appearing")
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
+        indexView.isHidden = true
+        emptyIndexView.isHidden = true
         if let url = Bundle.main.url(forResource: "Empty \(entityName)", withExtension: ".rtf"), let text = try? NSAttributedString(url: url, options: [:], documentAttributes: nil) {
             if let storage = emptyIndexView.textStorage {
                 storage.replaceCharacters(in: NSRange(location: 0, length:storage.length), with: text)
             }
         }
-
-        updateVisibility()
-
+        
         title = entityType.entityTitle
         indexArray.entityName = entityName
         indexArray.sortDescriptors = [NSSortDescriptor(key: "sortName", ascending: true)]
         observers.append(indexArray.observe(\NSArrayController.selection, changeHandler: { (index, change) in
             self.selectionChanged()
         }))
+        
+    }
+    
+    override func viewWillAppear() {
+        indexChannel.debug("\(entityType) index appearing")
         
         fetchIfNecessary() {
             self.updateVisibility()
@@ -92,13 +97,19 @@ class IndexController: CollectionViewController {
         indexChannel.debug("\(entityType) setup")
     }
     
-    func fetchIfNecessary(then completion: FetchCompletion? = nil) {
+    func completeOnMainThread(completion: Completion?) {
+        if let completion = completion {
+            DispatchQueue.main.async(execute: completion)
+        }
+    }
+    
+    func fetchIfNecessary(then completion: Completion? = nil) {
         DispatchQueue.main.async {
             self.fetchOnMainThread(then: completion)
         }
     }
     
-    func fetchOnMainThread(then completion: FetchCompletion? = nil) {
+    func fetchOnMainThread(then completion: Completion? = nil) {
         switch self.fetchState {
         case .fetched:
             assert(fetchCompletions.count == 0)
@@ -117,11 +128,13 @@ class IndexController: CollectionViewController {
                 fetchCompletions.append(completion)
             }
             fetchObserver = indexArray.observe(\NSArrayController.content) { (value, change) in
-                self.fetchState = .fetched
-                for completion in self.fetchCompletions {
-                    completion()
+                DispatchQueue.main.async {
+                    self.fetchState = .fetched
+                    for completion in self.fetchCompletions {
+                        completion()
+                    }
+                    self.fetchCompletions.removeAll()
                 }
-                self.fetchCompletions.removeAll()
             }
             fetchState = .fetching
             indexArray.fetch(self)
@@ -169,19 +182,20 @@ class IndexController: CollectionViewController {
         indexSearchField.placeholderString = entityType.entityCount(entityCount, prefix: "search")
     }
     
-    func select(items: [ModelObject], forEditing: Bool = false, forceUpdate: Bool = false) {
+    func select(items: [ModelObject], forEditing: Bool = false, forceUpdate: Bool = false, completion: Completion? = nil) {
         fetchIfNecessary {
+            indexChannel.log("Selecting \(items)")
+            self.indexArray.setSelectedObjects(items)
+            let selection = self.indexTable.selectedRowIndexes
+            self.indexTable.scrollRowToVisible(selection[selection.startIndex])
+            self.indexTable.scrollRowToVisible(selection[selection.endIndex])
+            if forEditing && !self.detailView.isEditing {
+                self.application.actionManager.perform(identifier: "ToggleEditing")
+            } else if forceUpdate {
+                self.updateDetailView()
+            }
             DispatchQueue.main.async {
-                indexChannel.log("Selecting \(items)")
-                self.indexArray.setSelectedObjects(items)
-                let selection = self.indexTable.selectedRowIndexes
-                self.indexTable.scrollRowToVisible(selection[selection.startIndex])
-                self.indexTable.scrollRowToVisible(selection[selection.endIndex])
-                if forEditing && !self.detailView.isEditing {
-                    self.application.actionManager.perform(identifier: "ToggleEditing")
-                } else if forceUpdate {
-                    self.updateDetailView()
-                }
+                completion?()
             }
         }
     }

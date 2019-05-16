@@ -44,7 +44,9 @@ class CollectionWindowController: LateAutosavingWindowController, NSWindowDelega
             index.fetchIfNecessary() {
                 if let objects = index.indexArray.arrangedObjects as? Array<ModelObject>, let first = objects.first {
                     self.cvm.navigationStack.push(first)
-                    index.select(items: [first])
+                    index.select(items: [first]) {
+                        self.showWindow(self)
+                    }
                 }
             }
         }

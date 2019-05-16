@@ -100,7 +100,6 @@ let updaterChannel = Logger("Updater")
         let windowController = self.windowControllerFactory.instantiateController(for: viewModel)
         self.windowController = windowController
         windowController.pushInitialObject()
-        windowController.showWindow(self)
     }
     
     fileprivate func setupCloudKit() {
@@ -125,20 +124,23 @@ extension Application: NSApplicationDelegate {
         setupTransformers()
         setupUpdates()
         
-        var shouldSync = true
+        var name: String? = nil
         let arguments = CommandLine.arguments
         if arguments.contains("--test-document") {
-            mode = .replaceWith(sample: "Test")
-            shouldSync = false
+            name = "Test"
         } else if arguments.contains("--sample-document") {
-            mode = .replaceWith(sample: "Sample")
-            shouldSync = false
+            name = "Sample"
         } else if arguments.contains("--empty-document") {
-            mode = .replaceWith(sample: "Roles")
+            name = "Roles"
+        }
+
+        var shouldSync = true
+        if let name = name {
+            mode = .replaceWith(sample: name)
             shouldSync = false
         }
         
-        let _ = SyncedCollection(identifier: cloudManager.collectionIdentifier, mode: mode, shouldSync: shouldSync) { (sc, error) in
+        let _ = SyncedCollection(name: name, identifier: cloudManager.collectionIdentifier, mode: mode, shouldSync: shouldSync) { (sc, error) in
             if let error = error {
                 fatalError("failed to load \(error)")
             }
