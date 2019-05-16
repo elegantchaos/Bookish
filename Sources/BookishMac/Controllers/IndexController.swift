@@ -42,8 +42,9 @@ class IndexController: CollectionViewController {
     lazy var detailView: DetailController = nearestMatchingController()
     
     var observers: [NSKeyValueObservation] = []
-    var fetchSessions: [FetchSession] = []
+    var fetchCompletions: [FetchCompletion] = []
     var fetchState: FetchState = .unfetched
+    var fetchObserver: NSKeyValueObservation? = nil
     
     override func windowDidLoad(_ window: NSWindowController, storyboard: NSStoryboard) {
         if let window = window as? CollectionWindowController {
@@ -91,25 +92,40 @@ class IndexController: CollectionViewController {
         indexChannel.debug("\(entityType) setup")
     }
     
-    func fetchIfNecessary(then: FetchCompletion? = nil) {
-        if fetchState == .fetched {
-            then?()
-        } else {
-            indexChannel.debug("\(entityType) fetching data")
-            if fetchState == .unfetched {
-                indexArray.fetch(self)
-                fetchState = .fetching
+    func fetchIfNecessary(then completion: FetchCompletion? = nil) {
+        DispatchQueue.main.async {
+            self.fetchOnMainThread(then: completion)
+        }
+    }
+    
+    func fetchOnMainThread(then completion: FetchCompletion? = nil) {
+        switch self.fetchState {
+        case .fetched:
+            assert(fetchCompletions.count == 0)
+            completion?()
+            
+        case .fetching:
+            assert(fetchCompletions.count > 0)
+            if let completion = completion {
+                fetchCompletions.append(completion)
             }
-            let fetchSession = FetchSession()
-            fetchSession.observer = indexArray.observe(\NSArrayController.content, changeHandler: { (value, change) in
+            
+        case .unfetched:
+            indexChannel.debug("\(entityType) fetching data")
+            assert(fetchCompletions.count == 0)
+            if let completion = completion {
+                fetchCompletions.append(completion)
+            }
+            fetchObserver = indexArray.observe(\NSArrayController.content) { (value, change) in
                 self.fetchState = .fetched
-                indexChannel.debug("\(self.entityName) changed")
-                if let index = self.fetchSessions.firstIndex(where: { return ($0 === fetchSession)}) {
-                    self.fetchSessions.remove(at: index)
+                for completion in self.fetchCompletions {
+                    completion()
                 }
-                then?()
-            })
-            fetchSessions.append(fetchSession)
+                self.fetchCompletions.removeAll()
+            }
+            fetchState = .fetching
+            indexArray.fetch(self)
+            
         }
     }
     
@@ -156,6 +172,7 @@ class IndexController: CollectionViewController {
     func select(items: [ModelObject], forEditing: Bool = false, forceUpdate: Bool = false) {
         fetchIfNecessary {
             DispatchQueue.main.async {
+                indexChannel.log("Selecting \(items)")
                 self.indexArray.setSelectedObjects(items)
                 let selection = self.indexTable.selectedRowIndexes
                 self.indexTable.scrollRowToVisible(selection[selection.startIndex])
