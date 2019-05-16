@@ -851,8 +851,8 @@
 				22DD42402126D6DA0070C85A /* Sources */,
 				22DD42412126D6DA0070C85A /* Frameworks */,
 				22DD42422126D6DA0070C85A /* Resources */,
-				22429366212AE0AE00E70510 /* Embed Frameworks */,
 				221B870E2260E20200BC4D32 /* Sign XPC */,
+				22429366212AE0AE00E70510 /* Embed Frameworks */,
 				221B872E2260E96200BC4D32 /* Embed XPC Services */,
 			);
 			buildRules = (
@@ -1065,7 +1065,8 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\nDependencies/Sparkle/bin/codesign_xpc \"$EXPANDED_CODE_SIGN_IDENTITY_NAME\" \"${BUILT_PRODUCTS_DIR}/\"*.xpc\n";
+			shellScript = "SIGNER=Dependencies/Sparkle/bin/codesign_embedded_executable\n\n\"$SIGNER\" \"$EXPANDED_CODE_SIGN_IDENTITY_NAME\" \"${BUILT_PRODUCTS_DIR}/\"*.xpc\n\"$SIGNER\" \"$EXPANDED_CODE_SIGN_IDENTITY_NAME\" \"${BUILT_PRODUCTS_DIR}/Sparkle.framework/Versions/A/Resources/Autoupdate\"\n\"$SIGNER\" \"$EXPANDED_CODE_SIGN_IDENTITY_NAME\" \"${BUILT_PRODUCTS_DIR}/Sparkle.framework/Versions/A/Resources/Updater.app\"\n\n";
+			showEnvVarsInLog = 0;
 		};
 		226EF3182177935B0012A405 /* Export From Sketch */ = {
 			isa = PBXShellScriptBuildPhase;
