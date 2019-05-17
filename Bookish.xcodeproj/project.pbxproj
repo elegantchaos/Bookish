@@ -634,14 +634,14 @@
 		227F451221821BAC000D8B8D /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				227BCFCF2216D6F10073C8E6 /* IndexController.swift */,
-				2263587D2216E7C100779D63 /* DetailController.swift */,
+				22462E922158ED5000A4C56C /* CollectionIndexViewController.swift */,
 				22143FD0212F076000B689DF /* CollectionRootViewController.swift */,
 				22DD42492126D6DA0070C85A /* CollectionViewController.swift */,
 				22429400212C32BF00E70510 /* CollectionWindowController.swift */,
-				22462E922158ED5000A4C56C /* CollectionIndexViewController.swift */,
-				22A6D46B22256E9E0083D4E8 /* ScannerWindowController.swift */,
+				2263587D2216E7C100779D63 /* DetailController.swift */,
+				227BCFCF2216D6F10073C8E6 /* IndexController.swift */,
 				22A6D46D22256EAB0083D4E8 /* ScannerViewController.swift */,
+				22A6D46B22256E9E0083D4E8 /* ScannerWindowController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";

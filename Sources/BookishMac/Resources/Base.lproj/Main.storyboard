@@ -641,12 +641,12 @@ CA
             <objects>
                 <viewController title="Preferences" id="uxo-7t-ulj" sceneMemberID="viewController">
                     <view key="view" id="Z0i-o7-heg">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                        <rect key="frame" x="0.0" y="0.0" width="500" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LWV-M0-xUK">
-                                <rect key="frame" x="18" y="234" width="136" height="18"/>
-                                <buttonCell key="cell" type="check" title="Show Debug Items" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="Dh6-Ab-h8y">
+                                <rect key="frame" x="18" y="234" width="172" height="18"/>
+                                <buttonCell key="cell" type="check" title="Show Debug Information" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="Dh6-Ab-h8y">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -665,7 +665,7 @@ CA
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="GJB-dz-d5r">
-                                <rect key="frame" x="357" y="192" width="109" height="32"/>
+                                <rect key="frame" x="377" y="192" width="109" height="32"/>
                                 <buttonCell key="cell" type="push" title="Check Now" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Wi9-o3-iJG">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -674,14 +674,27 @@ CA
                                     <action selector="checkForUpdates:" target="Nlb-RY-r4r" id="jkt-O3-lbF"/>
                                 </connections>
                             </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="d2F-aS-Y6M">
+                                <rect key="frame" x="38" y="176" width="223" height="18"/>
+                                <buttonCell key="cell" type="check" title="Download Updates Automatically" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="rBm-j4-WB9">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <binding destination="JlA-Na-zm6" name="value" keyPath="values.SUAllowsAutomaticUpdates" id="Pv6-t4-S2F"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="d2F-aS-Y6M" secondAttribute="trailing" constant="20" symbolic="YES" id="Qw2-ES-Odp"/>
                             <constraint firstItem="LWV-M0-xUK" firstAttribute="leading" secondItem="Z0i-o7-heg" secondAttribute="leading" constant="20" id="U3t-Eq-MCH"/>
                             <constraint firstItem="NUc-Rw-oKE" firstAttribute="top" secondItem="LWV-M0-xUK" secondAttribute="bottom" constant="20" id="gYi-A2-XMw"/>
                             <constraint firstAttribute="trailing" secondItem="GJB-dz-d5r" secondAttribute="trailing" constant="20" symbolic="YES" id="iHn-NO-wA3"/>
+                            <constraint firstItem="d2F-aS-Y6M" firstAttribute="leading" secondItem="Z0i-o7-heg" secondAttribute="leading" constant="40" id="plv-k1-b9I"/>
                             <constraint firstItem="GJB-dz-d5r" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="NUc-Rw-oKE" secondAttribute="trailing" constant="8" symbolic="YES" id="wsD-c6-HYh"/>
                             <constraint firstItem="LWV-M0-xUK" firstAttribute="top" secondItem="Z0i-o7-heg" secondAttribute="top" constant="20" id="yNg-nO-9cH"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="LWV-M0-xUK" secondAttribute="trailing" constant="20" id="ySh-Ct-4OL"/>
+                            <constraint firstItem="d2F-aS-Y6M" firstAttribute="top" secondItem="NUc-Rw-oKE" secondAttribute="bottom" constant="10" id="zC5-g9-KmW"/>
                             <constraint firstItem="NUc-Rw-oKE" firstAttribute="leading" secondItem="Z0i-o7-heg" secondAttribute="leading" constant="20" symbolic="YES" id="ziL-2R-jio"/>
                             <constraint firstItem="GJB-dz-d5r" firstAttribute="centerY" secondItem="NUc-Rw-oKE" secondAttribute="centerY" id="zyW-lZ-y35"/>
                         </constraints>

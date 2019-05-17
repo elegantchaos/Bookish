@@ -75,14 +75,17 @@ class DetailController: CollectionViewController {
         view.isHidden = true
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupAsEmpty()
+    }
+    
     override func viewWillAppear() {
         let observer = NotificationCenter.default.addObserver(forName: CollectionViewState.ViewStateChangedNotification, object: nil, queue: nil) { (notification) in
             self.selectionChanged()
         }
         observers.append(observer)
         imageView.addGestureRecognizer(clickRecogniser)
-
-        view.isHidden = true
         
         super.viewWillAppear()
     }
