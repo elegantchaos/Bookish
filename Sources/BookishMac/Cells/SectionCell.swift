@@ -10,7 +10,7 @@ class SectionCell: NSTableCellView, DetailTableCell {
     func setup(for row: DetailItem, of view: DetailController) {
         if let item = row as? SectionDetailItem {
             textField?.stringValue = item.kind
-            validateButtons()
+            application.actionManager.validateControls(of: self)
         }
     }
     

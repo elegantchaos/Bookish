@@ -248,8 +248,8 @@ class DetailController: CollectionViewController {
             updateImage(for: object, visible: showDetail)
         }
 
-        if let wc = view.window?.windowController as? CollectionWindowController {
-            wc.validateButtons()
+        if let view = view.window?.contentView {
+            application.actionManager.validateControls(of: view)
         }
     }
     

@@ -13,7 +13,7 @@ class EntryCell: NSTableCellView, DetailTableCell {
         if let item = row as? SeriesEntryDetailItem, let entry = item.entry, let book = entry.book, let name = book.name {
             objectValue = entry
             textField?.stringValue = name
-            validateButtons()
+            application.actionManager.validateControls(of: self)
         }
     }
     

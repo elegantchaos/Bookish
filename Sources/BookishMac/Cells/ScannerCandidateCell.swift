@@ -44,7 +44,7 @@ class ScannerCandidateCell: NSTableCellView {
         }
 
         actionButton.identifier = NSUserInterfaceItemIdentifier(rawValue: candidate.action)
-        actionButton.validateButtons()
+        application.actionManager.validateControls(of: actionButton)
         
         publisherField.stringValue = publisher
         

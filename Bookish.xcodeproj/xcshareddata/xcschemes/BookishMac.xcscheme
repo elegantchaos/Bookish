@@ -241,7 +241,7 @@
          </CommandLineArgument>
          <CommandLineArgument
             argument = "--sample-document"
-            isEnabled = "YES">
+            isEnabled = "NO">
          </CommandLineArgument>
       </CommandLineArguments>
       <AdditionalOptions>

@@ -30,12 +30,7 @@ class CollectionWindowController: LateAutosavingWindowController, NSWindowDelega
         context.info[ActionContext.rootKey] = self
         context.info[LookupCoverAction.managerKey] = application.lookupManager
     }
-    
-    func validateButtons() {
-        if let view = window?.contentView {
-            view.validateButtons()
-        }
-    }
+
     
     func pushInitialObject() {
         // push the selection from the initial index controller onto the navigation stack

@@ -4,6 +4,7 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 import Actions
+import BookishModel
 
 protocol EditableView {
     var isEditing: Bool { get }
@@ -74,9 +75,12 @@ class StopEditingAction: EditingAction {
 class ToggleEditingAction: EditingAction {
     
     override func validate(context: ActionContext) -> Validation {
-        if let view = context[ToggleEditingAction.editableKey] as? EditableView {
-            let name = view.isEditing ? "Done" : "Edit"
-            return Action.Validation(enabled: true, visible: true, name: name)
+        if let view = context[ToggleEditingAction.editableKey] as? EditableView, let selection = context[ActionContext.selectionKey] as? [ModelObject], selection.count > 0 {
+            let kind = type(of: selection.first!).entityName
+            let singular = (selection.count > 1) ? "\(kind).title" : "\(kind).title.singular"
+            let name = view.isEditing ? "editing.stop.long" : "editing.start.long"
+            let shortName = view.isEditing ? "editing.stop.short" : "editing.start.short"
+            return Action.Validation(enabled: true, visible: true, name: name.localized(with: ["entity": singular.localized]), shortName: shortName.localized)
         }
         
         return Validation(visible: false)

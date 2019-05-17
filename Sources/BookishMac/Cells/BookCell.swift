@@ -12,7 +12,7 @@ class BookCell: NSTableCellView, DetailTableCell {
         if let item = row as? BookDetailItem, let book = item.book, let name = book.name {
             objectValue = book
             textField?.stringValue = name
-            validateButtons()
+            application.actionManager.validateControls(of: self)
         }
     }
     

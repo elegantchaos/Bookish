@@ -5,13 +5,13 @@
       location = "group:README.md">
    </FileRef>
    <FileRef
-      location = "group:Extras">
-   </FileRef>
-   <FileRef
       location = "group:Bookish.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Dependencies/BookishModel/BookishModel.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:Extras">
    </FileRef>
    <Group
       location = "container:"

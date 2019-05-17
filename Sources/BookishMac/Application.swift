@@ -70,6 +70,7 @@ let updaterChannel = Logger("Updater")
         actionManager.register(ItemAction.standardActions())
         actionManager.register(EditingAction.standardActions())
         actionManager.register(LookupAction.standardActions())
+        actionManager.register(FilterActions.standardActions())
         actionManager.register([
             ShowDatePickerAction(identifier: "ShowDatePicker"),
             ToggleScannerAction(identifier: "ToggleScanner"),

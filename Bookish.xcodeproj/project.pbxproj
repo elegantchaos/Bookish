@@ -62,6 +62,8 @@
 		2250C71421B596C700E899E2 /* SeriesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2250C71321B596C700E899E2 /* SeriesCell.swift */; };
 		2250C71621B7E01A00E899E2 /* SeriesScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2250C71521B7E01A00E899E2 /* SeriesScanner.swift */; };
 		2250C71D21B83B5700E899E2 /* RegularExpressionExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2250C71C21B83B5700E899E2 /* RegularExpressionExtensions.swift */; };
+		2251B78D228EBF05006C1529 /* FilterActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2251B78C228EBF05006C1529 /* FilterActions.swift */; };
+		2251B7E7228EE021006C1529 /* TagsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2251B7E6228EE021006C1529 /* TagsCell.swift */; };
 		225488DC21F20B2500EE8ECB /* RoleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225488DB21F20B2500EE8ECB /* RoleCell.swift */; };
 		225488DE21F2333100EE8ECB /* ColoredPopUpButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225488DD21F2333100EE8ECB /* ColoredPopUpButton.swift */; };
 		2254895921F62DE300EE8ECB /* BookControlCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2254895821F62DE300EE8ECB /* BookControlCell.swift */; };
@@ -118,7 +120,6 @@
 		22D39E552146A84E00282467 /* DateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D39E542146A84E00282467 /* DateCell.swift */; };
 		22D39E592146BA9C00282467 /* ShowDatePickerAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D39E582146BA9C00282467 /* ShowDatePickerAction.swift */; };
 		22D39E5B2146BE4900282467 /* DatePickerPopoverController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D39E5A2146BE4900282467 /* DatePickerPopoverController.swift */; };
-		22D39E5E2146D9F100282467 /* ValidatingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D39E5D2146D9F100282467 /* ValidatingButton.swift */; };
 		22D39E602147D4A100282467 /* TestAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D39E5F2147D4A100282467 /* TestAction.swift */; };
 		22D39E6D214816C400282467 /* UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D39E6B2148167500282467 /* UITests.swift */; };
 		22DA6A4721E653F400ECF09A /* SyncedCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DA6A4621E653F400ECF09A /* SyncedCollection.swift */; };
@@ -295,6 +296,8 @@
 		2250C71321B596C700E899E2 /* SeriesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeriesCell.swift; sourceTree = "<group>"; };
 		2250C71521B7E01A00E899E2 /* SeriesScanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeriesScanner.swift; sourceTree = "<group>"; };
 		2250C71C21B83B5700E899E2 /* RegularExpressionExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegularExpressionExtensions.swift; sourceTree = "<group>"; };
+		2251B78C228EBF05006C1529 /* FilterActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterActions.swift; sourceTree = "<group>"; };
+		2251B7E6228EE021006C1529 /* TagsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsCell.swift; sourceTree = "<group>"; };
 		225488DB21F20B2500EE8ECB /* RoleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleCell.swift; sourceTree = "<group>"; };
 		225488DD21F2333100EE8ECB /* ColoredPopUpButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColoredPopUpButton.swift; sourceTree = "<group>"; };
 		2254895821F62DE300EE8ECB /* BookControlCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookControlCell.swift; sourceTree = "<group>"; };
@@ -350,7 +353,6 @@
 		22D39E542146A84E00282467 /* DateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCell.swift; sourceTree = "<group>"; };
 		22D39E582146BA9C00282467 /* ShowDatePickerAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowDatePickerAction.swift; sourceTree = "<group>"; };
 		22D39E5A2146BE4900282467 /* DatePickerPopoverController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerPopoverController.swift; sourceTree = "<group>"; };
-		22D39E5D2146D9F100282467 /* ValidatingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatingButton.swift; sourceTree = "<group>"; };
 		22D39E5F2147D4A100282467 /* TestAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestAction.swift; sourceTree = "<group>"; };
 		22D39E6B2148167500282467 /* UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITests.swift; sourceTree = "<group>"; };
 		22DA6A4521E6531100ECF09A /* BookishBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookishBridge.h; sourceTree = "<group>"; };
@@ -480,7 +482,6 @@
 				2250C71C21B83B5700E899E2 /* RegularExpressionExtensions.swift */,
 				2250C71521B7E01A00E899E2 /* SeriesScanner.swift */,
 				22D39E5F2147D4A100282467 /* TestAction.swift */,
-				22D39E5D2146D9F100282467 /* ValidatingButton.swift */,
 				22D39E502142DB2700282467 /* ViewBasedToolbarItem.swift */,
 				22429402212C3C7400E70510 /* ViewExtensions.swift */,
 				22DE6AE62188A8DC0078D489 /* WhiteSearchFieldCell.swift */,
@@ -611,22 +612,23 @@
 			isa = PBXGroup;
 			children = (
 				22D1B2422180CA9E0062F2CB /* BookCell.swift */,
-				221B8537225E0BB800BC4D32 /* IndexCell.swift */,
-				2295A9302232C6A90085CD86 /* EntryCell.swift */,
 				2254895821F62DE300EE8ECB /* BookControlCell.swift */,
 				22D39E542146A84E00282467 /* DateCell.swift */,
-				225AEEEB2230224B00E9D1AF /* TimeCell.swift */,
 				22D1B2482180D7B60062F2CB /* DetailCell.swift */,
 				226E8E8B21AC73D9001F191F /* DimensionsCell.swift */,
 				226E8E7021AC3D74001F191F /* EditableDateCell.swift */,
+				2295A9302232C6A90085CD86 /* EntryCell.swift */,
 				226E8E6C21AC38D5001F191F /* HeadingCell.swift */,
-				22960327214025E80020B3EB /* RelationshipCell.swift */,
+				221B8537225E0BB800BC4D32 /* IndexCell.swift */,
 				221B8556225E2E0C00BC4D32 /* PersonCell.swift */,
 				2250C6E021B191B200E899E2 /* PublisherCell.swift */,
+				22960327214025E80020B3EB /* RelationshipCell.swift */,
 				225488DB21F20B2500EE8ECB /* RoleCell.swift */,
+				2231C4BA2227EBC100D730FB /* ScannerCandidateCell.swift */,
 				22D1B24A2180E9060062F2CB /* SectionCell.swift */,
 				2250C71321B596C700E899E2 /* SeriesCell.swift */,
-				2231C4BA2227EBC100D730FB /* ScannerCandidateCell.swift */,
+				2251B7E6228EE021006C1529 /* TagsCell.swift */,
+				225AEEEB2230224B00E9D1AF /* TimeCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -650,6 +652,7 @@
 			isa = PBXGroup;
 			children = (
 				22462E962158F65200A4C56C /* CollectionViewActions.swift */,
+				2251B78C228EBF05006C1529 /* FilterActions.swift */,
 				22F0CFD8228442E800B8B506 /* NavigationActions.swift */,
 				227F4513218352A0000D8B8D /* ImporterUIActions.swift */,
 				221C4B2F216BA96C0086D56F /* RelationshipUIActions.swift */,
@@ -1190,6 +1193,7 @@
 				225488DC21F20B2500EE8ECB /* RoleCell.swift in Sources */,
 				2250C71D21B83B5700E899E2 /* RegularExpressionExtensions.swift in Sources */,
 				22D1B24B2180E9060062F2CB /* SectionCell.swift in Sources */,
+				2251B7E7228EE021006C1529 /* TagsCell.swift in Sources */,
 				227F4514218352A0000D8B8D /* ImporterUIActions.swift in Sources */,
 				2250C6E121B191B200E899E2 /* PublisherCell.swift in Sources */,
 				22A6D46E22256EAB0083D4E8 /* ScannerViewController.swift in Sources */,
@@ -1203,6 +1207,7 @@
 				22143FCF212EF9CC00B689DF /* WindowControllerWithViewModel.swift in Sources */,
 				221C4B35216BAAAC0086D56F /* RelationshipUIActions.swift in Sources */,
 				2295A9132232BCD70085CD86 /* DoubleClickAction.swift in Sources */,
+				2251B78D228EBF05006C1529 /* FilterActions.swift in Sources */,
 				2250C71621B7E01A00E899E2 /* SeriesScanner.swift in Sources */,
 				22143FCD212EE79100B689DF /* CollectionViewState.swift in Sources */,
 				22C2194B21AF24E5002FC0FE /* EditingActions.swift in Sources */,
@@ -1227,7 +1232,6 @@
 				22115AFE222D881000C3F170 /* ScannerActions.swift in Sources */,
 				2231C4BB2227EBC100D730FB /* ScannerCandidateCell.swift in Sources */,
 				22143FD1212F076000B689DF /* CollectionRootViewController.swift in Sources */,
-				22D39E5E2146D9F100282467 /* ValidatingButton.swift in Sources */,
 				2263587E2216E7C100779D63 /* DetailController.swift in Sources */,
 				22D1B2432180CA9E0062F2CB /* BookCell.swift in Sources */,
 				22429403212C3C7400E70510 /* ViewExtensions.swift in Sources */,
