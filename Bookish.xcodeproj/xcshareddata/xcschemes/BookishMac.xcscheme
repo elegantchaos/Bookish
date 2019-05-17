@@ -243,6 +243,10 @@
             argument = "--sample-document"
             isEnabled = "NO">
          </CommandLineArgument>
+         <CommandLineArgument
+            argument = "--debug-container"
+            isEnabled = "YES">
+         </CommandLineArgument>
       </CommandLineArguments>
       <AdditionalOptions>
       </AdditionalOptions>

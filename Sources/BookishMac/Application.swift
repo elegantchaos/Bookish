@@ -31,7 +31,6 @@ let updaterChannel = Logger("Updater")
     let lookupManager = LookupManager()
     let uiTesting = CommandLine.arguments.contains("--ui-testing")
     var mode: SyncedCollection.PopulateMode = .populateWith(sample: "Roles")
-    let sampleDocument = CommandLine.arguments.contains("--sample-document")
     let noBlankDocument = CommandLine.arguments.contains("--no-blank-document")
     var viewModel: CollectionViewState?
     var watchedMenuItem: NSMenuItem?
@@ -114,6 +113,12 @@ let updaterChannel = Logger("Updater")
     @IBAction func showJournal(_ sender: Any) {
         print(cloudManager.allJournalEntries())
     }
+    
+    @IBAction func revealContainer(_ sender: Any) {
+        if let url = viewModel?.collection.persistentStoreCoordinator.persistentStores.first?.url {
+            NSWorkspace.shared.selectFile(url.path, inFileViewerRootedAtPath: url.deletingLastPathComponent().path)
+        }
+    }
 }
 
 extension Application: NSApplicationDelegate {
@@ -126,18 +131,21 @@ extension Application: NSApplicationDelegate {
         setupUpdates()
         
         var name: String? = nil
+        var shouldSync = true
         let arguments = CommandLine.arguments
         if arguments.contains("--test-document") {
-            name = "Test"
+            mode = .replaceWith(sample: "Test")
+            shouldSync = false
         } else if arguments.contains("--sample-document") {
-            name = "Sample"
+            mode = .replaceWith(sample: "Sample")
+            shouldSync = false
         } else if arguments.contains("--empty-document") {
-            name = "Roles"
+            mode = .replaceWith(sample: "Roles")
+            shouldSync = false
         }
 
-        var shouldSync = true
-        if let name = name {
-            mode = .replaceWith(sample: name)
+        if arguments.contains("--debug-container") {
+            name = "DebugContainer"
             shouldSync = false
         }
         

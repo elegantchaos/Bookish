@@ -494,6 +494,12 @@ DQ
                                                 <action selector="showJournal:" target="Ady-hI-5gd" id="3WV-SG-IY6"/>
                                             </connections>
                                         </menuItem>
+                                        <menuItem title="Reveal Container" id="AxQ-aY-ehC">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="revealContainer:" target="Ady-hI-5gd" id="11i-NR-iL4"/>
+                                            </connections>
+                                        </menuItem>
                                     </items>
                                 </menu>
                             </menuItem>

@@ -35,7 +35,7 @@ extension TagsCell: DetailTableCell {
         }
         
         detailView = view
-        tagsField.objectValue = initialTags
+        tagsField.objectValue = Array(initialTags)
         changed = false
     }
     
@@ -45,8 +45,9 @@ extension TagsCell: DetailTableCell {
     
     override func prepareForReuse() {
         changed = false
-        initialTags = []
-        allTags = [:]
+        initialTags.removeAll()
+        allTags.removeAll()
+        tagsField.objectValue = nil
     }
 }
 
@@ -93,21 +94,26 @@ extension TagsCell {
     
     override func controlTextDidEndEditing(_ obj: Notification) {
         if changed, let tags = tagsField.objectValue as? [Tag] {
+            print("current \(tags)")
             let currentTags = Set<Tag>(tags)
+            print("initial \(initialTags)")
             let addedTags = currentTags.subtracting(initialTags)
             let removedTags = initialTags.subtracting(currentTags)
             print("added \(addedTags)")
             print("removed \(removedTags)")
             
-            if let selection = detailView.index.selectedObjects as? [ModelObject] {
-                for object in selection {
-                    if var tags = object.value(forKey: "tags") as? Set<Tag> {
-                        tags.subtract(removedTags)
-                        tags.formUnion(addedTags)
-                        object.setValue(tags, forKey: "tags")
+            if let selection = detailView.index.selectedObjects as? [Book] {
+                for book in selection {
+                    for tag in removedTags {
+                        tag.removeFromBooks(book)
+                    }
+                    for tag in addedTags {
+                        tag.addToBooks(book)
                     }
                 }
             }
+            
+            detailView.cvm.collection.save()
         }
     }
 }
