@@ -144,6 +144,7 @@ class IndexController: CollectionViewController {
     
     func addContextForIndex(context: ActionContext) {
         context.info[ActionContext.selectionKey] = indexArray?.selectedObjects
+        context[FilterActions.filterableKey] = self
         context.info.addObserver(self)
     }
     
@@ -266,5 +267,11 @@ extension IndexController: NSTextViewDelegate {
         }
         
         return false
+    }
+}
+
+extension IndexController: FilterableView {
+    func clearFilter() {
+        indexSearchField.stringValue = ""
     }
 }

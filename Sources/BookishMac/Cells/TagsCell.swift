@@ -93,6 +93,7 @@ extension TagsCell {
     }
     
     override func controlTextDidEndEditing(_ obj: Notification) {
+        // TODO: move this into an action
         if changed, let tags = tagsField.objectValue as? [Tag] {
             print("current \(tags)")
             let currentTags = Set<Tag>(tags)

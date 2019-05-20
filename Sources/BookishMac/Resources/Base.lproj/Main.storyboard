@@ -182,6 +182,12 @@ DQ
                                                 <action selector="performAction:" target="Ady-hI-5gd" id="enT-Op-kT6"/>
                                             </connections>
                                         </menuItem>
+                                        <menuItem title="Clear Filter" identifier="menu.ClearFilter" id="6CH-oj-aKI">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="performAction:" target="Ady-hI-5gd" id="DMR-FD-1C2"/>
+                                            </connections>
+                                        </menuItem>
                                         <menuItem isSeparatorItem="YES" id="oAg-Xw-rzY"/>
                                         <menuItem title="Find" id="4EN-yA-p0u">
                                             <modifierMask key="keyEquivalentModifierMask"/>
@@ -354,9 +360,9 @@ DQ
                                     </items>
                                 </menu>
                             </menuItem>
-                            <menuItem title="Actions" id="ocN-wE-Zc8">
+                            <menuItem title="Collection" id="ocN-wE-Zc8">
                                 <modifierMask key="keyEquivalentModifierMask"/>
-                                <menu key="submenu" title="Actions" identifier="menu.collection" id="PET-8T-wg6">
+                                <menu key="submenu" title="Collection" identifier="menu.collection" id="PET-8T-wg6">
                                     <items>
                                         <menuItem title="Scan / Lookup" keyEquivalent="k" identifier="menu.ToggleScanner" id="18S-Lg-R9p">
                                             <connections>
@@ -1945,13 +1951,13 @@ Gw
                                                                         </connections>
                                                                     </tableCellView>
                                                                     <tableCellView identifier="editableDimensions" id="OZV-07-tGS" userLabel="dimensions" customClass="DimensionsCell" customModule="Bookish" customModuleProvider="target">
-                                                                        <rect key="frame" x="125" y="199" width="235" height="24"/>
+                                                                        <rect key="frame" x="125" y="199" width="223" height="24"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
-                                                                            <stackView distribution="fillEqually" orientation="horizontal" alignment="top" spacing="10" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YeD-9c-Svh">
-                                                                                <rect key="frame" x="2" y="2" width="231" height="18"/>
+                                                                            <stackView distribution="fillEqually" orientation="horizontal" alignment="top" spacing="4" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YeD-9c-Svh">
+                                                                                <rect key="frame" x="2" y="2" width="219" height="18"/>
                                                                                 <subviews>
-                                                                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="NT3-31-wYX">
+                                                                                    <textField horizontalHuggingPriority="252" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="NT3-31-wYX">
                                                                                         <rect key="frame" x="-2" y="1" width="38" height="17"/>
                                                                                         <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="width" id="Qg8-Fc-Df5">
                                                                                             <font key="font" metaFont="system"/>
@@ -1962,10 +1968,10 @@ Gw
                                                                                             <binding destination="iPd-Ru-zxR" name="font" keyPath="self.cvm.detailFont" id="DzM-lZ-mPV"/>
                                                                                         </connections>
                                                                                     </textField>
-                                                                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="251" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="Uct-nx-Fvm">
-                                                                                        <rect key="frame" x="42" y="0.0" width="28" height="18"/>
+                                                                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="251" verticalCompressionResistancePriority="751" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Uct-nx-Fvm">
+                                                                                        <rect key="frame" x="36" y="0.0" width="38" height="18"/>
                                                                                         <constraints>
-                                                                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="24" id="I4e-XG-UTx"/>
+                                                                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" priority="750" constant="24" id="I4e-XG-UTx"/>
                                                                                         </constraints>
                                                                                         <textFieldCell key="cell" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" alignment="left" placeholderString="100" id="Pp6-rI-4NU">
                                                                                             <font key="font" metaFont="systemBold" size="14"/>
@@ -1977,8 +1983,8 @@ Gw
                                                                                             <outlet property="delegate" destination="OZV-07-tGS" id="t4u-b9-2kc"/>
                                                                                         </connections>
                                                                                     </textField>
-                                                                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6RX-Gy-wMc">
-                                                                                        <rect key="frame" x="76" y="1" width="43" height="17"/>
+                                                                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6RX-Gy-wMc">
+                                                                                        <rect key="frame" x="74" y="1" width="43" height="17"/>
                                                                                         <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="height" id="vw4-Bd-DOH">
                                                                                             <font key="font" metaFont="system"/>
                                                                                             <color key="textColor" name="Bookish Label Text"/>
@@ -1988,10 +1994,10 @@ Gw
                                                                                             <binding destination="iPd-Ru-zxR" name="font" keyPath="self.cvm.detailFont" id="PFf-jl-cfy"/>
                                                                                         </connections>
                                                                                     </textField>
-                                                                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="8Zt-m9-RRf">
-                                                                                        <rect key="frame" x="125" y="0.0" width="28" height="18"/>
+                                                                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="751" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8Zt-m9-RRf">
+                                                                                        <rect key="frame" x="117" y="0.0" width="28" height="18"/>
                                                                                         <constraints>
-                                                                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="24" id="gbh-pF-tTU"/>
+                                                                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" priority="750" constant="24" id="gbh-pF-tTU"/>
                                                                                         </constraints>
                                                                                         <textFieldCell key="cell" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" alignment="left" placeholderString="100" id="E42-Ig-qlh">
                                                                                             <font key="font" metaFont="systemBold" size="14"/>
@@ -2003,8 +2009,8 @@ Gw
                                                                                             <outlet property="delegate" destination="OZV-07-tGS" id="CLL-7k-aRi"/>
                                                                                         </connections>
                                                                                     </textField>
-                                                                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wCh-V3-Gxz">
-                                                                                        <rect key="frame" x="159" y="1" width="40" height="17"/>
+                                                                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wCh-V3-Gxz">
+                                                                                        <rect key="frame" x="145" y="1" width="40" height="17"/>
                                                                                         <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="depth" id="5Kv-Mv-Z8U">
                                                                                             <font key="font" metaFont="system"/>
                                                                                             <color key="textColor" name="Bookish Label Text"/>
@@ -2014,8 +2020,8 @@ Gw
                                                                                             <binding destination="iPd-Ru-zxR" name="font" keyPath="self.cvm.detailFont" id="Rc0-9T-8Wv"/>
                                                                                         </connections>
                                                                                     </textField>
-                                                                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="m4w-OJ-dra">
-                                                                                        <rect key="frame" x="205" y="0.0" width="28" height="18"/>
+                                                                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="751" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="m4w-OJ-dra">
+                                                                                        <rect key="frame" x="185" y="0.0" width="36" height="18"/>
                                                                                         <constraints>
                                                                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="24" id="wH7-Oa-z2S"/>
                                                                                         </constraints>
@@ -2204,16 +2210,16 @@ Gw
                                                                             <outlet property="textField" destination="YPE-nH-Ujd" id="kaP-Rj-sXe"/>
                                                                         </connections>
                                                                     </tableCellView>
-                                                                    <tableCellView identifier="tags" id="c1W-dh-PWu" userLabel="tags" customClass="TagsCell" customModule="Bookish" customModuleProvider="target">
-                                                                        <rect key="frame" x="125" y="347" width="223" height="26"/>
+                                                                    <tableCellView identifier="tags" misplaced="YES" id="c1W-dh-PWu" userLabel="tags" customClass="TagsCell" customModule="Bookish" customModuleProvider="target">
+                                                                        <rect key="frame" x="125" y="347" width="223" height="29"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
-                                                                            <tokenField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gIe-qP-Hs2">
-                                                                                <rect key="frame" x="2" y="2" width="219" height="22"/>
-                                                                                <tokenFieldCell key="cell" selectable="YES" editable="YES" borderStyle="bezel" alignment="left" drawsBackground="YES" allowsEditingTextAttributes="YES" id="pZH-pO-gae">
+                                                                            <tokenField verticalHuggingPriority="751" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="gIe-qP-Hs2">
+                                                                                <rect key="frame" x="0.0" y="4" width="221" height="17"/>
+                                                                                <tokenFieldCell key="cell" selectable="YES" editable="YES" alignment="left" placeholderString="enter tags" drawsBackground="YES" allowsEditingTextAttributes="YES" tokenStyle="rounded" id="pZH-pO-gae">
                                                                                     <font key="font" metaFont="system"/>
-                                                                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                                    <color key="textColor" name="Bookish Detail Text"/>
+                                                                                    <color key="backgroundColor" name="Bookish Detail"/>
                                                                                 </tokenFieldCell>
                                                                                 <connections>
                                                                                     <outlet property="delegate" destination="c1W-dh-PWu" id="QrC-VG-0uI"/>
@@ -2221,10 +2227,10 @@ Gw
                                                                             </tokenField>
                                                                         </subviews>
                                                                         <constraints>
-                                                                            <constraint firstItem="gIe-qP-Hs2" firstAttribute="leading" secondItem="c1W-dh-PWu" secondAttribute="leading" constant="2" id="2mI-TS-lxw"/>
-                                                                            <constraint firstAttribute="bottom" secondItem="gIe-qP-Hs2" secondAttribute="bottom" constant="2" id="LYu-Rx-96N"/>
+                                                                            <constraint firstItem="gIe-qP-Hs2" firstAttribute="leading" secondItem="c1W-dh-PWu" secondAttribute="leading" id="2mI-TS-lxw"/>
+                                                                            <constraint firstAttribute="bottom" secondItem="gIe-qP-Hs2" secondAttribute="bottom" constant="4" id="LYu-Rx-96N"/>
                                                                             <constraint firstAttribute="trailing" secondItem="gIe-qP-Hs2" secondAttribute="trailing" constant="2" id="OdC-Az-VaC"/>
-                                                                            <constraint firstItem="gIe-qP-Hs2" firstAttribute="top" secondItem="c1W-dh-PWu" secondAttribute="top" constant="2" id="emJ-2j-A1Y"/>
+                                                                            <constraint firstItem="gIe-qP-Hs2" firstAttribute="top" secondItem="c1W-dh-PWu" secondAttribute="top" constant="6" id="emJ-2j-A1Y"/>
                                                                         </constraints>
                                                                         <connections>
                                                                             <outlet property="tagsField" destination="gIe-qP-Hs2" id="jkS-EY-LGh"/>
@@ -2416,7 +2422,7 @@ Gw
             <color red="0.35294117647058826" green="0.36862745098039218" blue="0.3843137254901961" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Bookish Label Text">
-            <color red="0.54117647058823526" green="0.55686274509803924" blue="0.5725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.54100000858306885" green="0.55699998140335083" blue="0.57300001382827759" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>

@@ -42,6 +42,9 @@ class CollectionWindowController: LateAutosavingWindowController, NSWindowDelega
                     index.select(items: [first], forceUpdate: true) {
                         self.showWindow(self)
                     }
+                } else {
+                    // we've got no objects
+                    self.showWindow(self)
                 }
             }
         }
