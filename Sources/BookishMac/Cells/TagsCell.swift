@@ -36,6 +36,7 @@ extension TagsCell: DetailTableCell {
         
         detailView = view
         tagsField.objectValue = Array(initialTags)
+        tagsField.isEditable = view.isEditing
         changed = false
     }
     
@@ -48,6 +49,7 @@ extension TagsCell: DetailTableCell {
         initialTags.removeAll()
         allTags.removeAll()
         tagsField.objectValue = nil
+        detailView = nil
     }
 }
 
@@ -93,28 +95,15 @@ extension TagsCell {
     }
     
     override func controlTextDidEndEditing(_ obj: Notification) {
-        // TODO: move this into an action
         if changed, let tags = tagsField.objectValue as? [Tag] {
-            print("current \(tags)")
             let currentTags = Set<Tag>(tags)
-            print("initial \(initialTags)")
             let addedTags = currentTags.subtracting(initialTags)
             let removedTags = initialTags.subtracting(currentTags)
-            print("added \(addedTags)")
-            print("removed \(removedTags)")
-            
-            if let selection = detailView.index.selectedObjects as? [Book] {
-                for book in selection {
-                    for tag in removedTags {
-                        tag.removeFromBooks(book)
-                    }
-                    for tag in addedTags {
-                        tag.addToBooks(book)
-                    }
-                }
-            }
-            
-            detailView.cvm.collection.save()
+            let info = ActionInfo(sender: self)
+            info[ChangeTagsAction.addedTagsKey] = addedTags
+            info[ChangeTagsAction.removedTagsKey] = removedTags
+            application.actionManager.perform(identifier: "ChangeTags", info: info)
+            changed = false
         }
     }
 }

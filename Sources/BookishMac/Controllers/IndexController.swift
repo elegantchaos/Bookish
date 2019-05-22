@@ -68,15 +68,16 @@ class IndexController: CollectionViewController {
         title = entityType.entityTitle
         indexArray.entityName = entityName
         indexArray.sortDescriptors = [NSSortDescriptor(key: "sortName", ascending: true)]
-        observers.append(indexArray.observe(\NSArrayController.selection, changeHandler: { (index, change) in
-            self.selectionChanged()
-        }))
         
     }
     
     override func viewWillAppear() {
         indexChannel.debug("\(entityType) index appearing")
-        
+
+        observers.append(indexArray.observe(\NSArrayController.selection, changeHandler: { (index, change) in
+            self.selectionChanged()
+        }))
+
         fetchIfNecessary() {
             self.updateVisibility()
         }

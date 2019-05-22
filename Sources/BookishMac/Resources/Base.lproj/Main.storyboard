@@ -1529,7 +1529,7 @@ Gw
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <tableView identifier="book-details" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="none" columnReordering="NO" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="24" rowSizeStyle="automatic" usesAutomaticRowHeights="YES" viewBased="YES" id="2eK-Gk-TD8" userLabel="Table">
-                                                        <rect key="frame" x="0.0" y="0.0" width="350" height="374"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="350" height="377"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <size key="intercellSpacing" width="3" height="2"/>
                                                         <color key="backgroundColor" name="Bookish Detail"/>
@@ -1995,7 +1995,7 @@ Gw
                                                                                         </connections>
                                                                                     </textField>
                                                                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="751" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8Zt-m9-RRf">
-                                                                                        <rect key="frame" x="117" y="0.0" width="28" height="18"/>
+                                                                                        <rect key="frame" x="117" y="0.0" width="36" height="18"/>
                                                                                         <constraints>
                                                                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" priority="750" constant="24" id="gbh-pF-tTU"/>
                                                                                         </constraints>
@@ -2010,7 +2010,7 @@ Gw
                                                                                         </connections>
                                                                                     </textField>
                                                                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wCh-V3-Gxz">
-                                                                                        <rect key="frame" x="145" y="1" width="40" height="17"/>
+                                                                                        <rect key="frame" x="153" y="1" width="40" height="17"/>
                                                                                         <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="depth" id="5Kv-Mv-Z8U">
                                                                                             <font key="font" metaFont="system"/>
                                                                                             <color key="textColor" name="Bookish Label Text"/>
@@ -2021,7 +2021,7 @@ Gw
                                                                                         </connections>
                                                                                     </textField>
                                                                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="751" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="m4w-OJ-dra">
-                                                                                        <rect key="frame" x="185" y="0.0" width="36" height="18"/>
+                                                                                        <rect key="frame" x="193" y="0.0" width="28" height="18"/>
                                                                                         <constraints>
                                                                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="24" id="wH7-Oa-z2S"/>
                                                                                         </constraints>
@@ -2210,8 +2210,8 @@ Gw
                                                                             <outlet property="textField" destination="YPE-nH-Ujd" id="kaP-Rj-sXe"/>
                                                                         </connections>
                                                                     </tableCellView>
-                                                                    <tableCellView identifier="tags" misplaced="YES" id="c1W-dh-PWu" userLabel="tags" customClass="TagsCell" customModule="Bookish" customModuleProvider="target">
-                                                                        <rect key="frame" x="125" y="347" width="223" height="29"/>
+                                                                    <tableCellView identifier="tags" id="c1W-dh-PWu" userLabel="tags" customClass="TagsCell" customModule="Bookish" customModuleProvider="target">
+                                                                        <rect key="frame" x="125" y="347" width="223" height="27"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <tokenField verticalHuggingPriority="751" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="gIe-qP-Hs2">
