@@ -70,10 +70,11 @@ let updaterChannel = Logger("Updater")
         actionManager.register(EditingAction.standardActions())
         actionManager.register(FilterActions.standardActions())
         actionManager.register([
-            ShowDatePickerAction(identifier: "ShowDatePicker"),
-            ToggleScannerAction(identifier: "ToggleScanner"),
-            NavigateBackAction(identifier: "NavigateBack"),
-            NavigateForwardAction(identifier: "NavigateForward")
+            ShowDatePickerAction(),
+            ToggleScannerAction(),
+            NavigateBackAction(),
+            NavigateForwardAction(),
+            ConfirmationAction()
             ])
         
         actionManager.registerNotification() { (stage, action) in

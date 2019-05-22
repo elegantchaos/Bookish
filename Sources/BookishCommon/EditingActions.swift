@@ -31,9 +31,9 @@ class EditingAction: Action {
 
     class func standardActions() -> [Action] {
         return [
-            StartEditingAction(identifier: "StartEditing"),
-            StopEditingAction(identifier: "StopEditing"),
-            ToggleEditingAction(identifier: "ToggleEditing")
+            StartEditingAction(),
+            StopEditingAction(),
+            ToggleEditingAction()
         ]
     }
     

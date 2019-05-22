@@ -10,7 +10,7 @@ class FilterActions: Action {
     
     class func standardActions() -> [Action] {
         return [
-            ClearFilterAction(identifier: "ClearFilter")
+            ClearFilterAction()
         ]
     }
 

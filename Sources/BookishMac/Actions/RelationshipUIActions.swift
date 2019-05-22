@@ -10,8 +10,8 @@ import AppKit
 class RelationshipUIAction: ModelAction {
     override class func standardActions() -> [Action] {
         return [
-            FillRelationshipMenuAction(identifier: "FillRelationshipMenu"),
-            ShowAddRelationshipMenuAction(identifier: "ShowAddRelationshipMenu"),
+            FillRelationshipMenuAction(),
+            ShowAddRelationshipMenuAction(),
         ]
     }
 }

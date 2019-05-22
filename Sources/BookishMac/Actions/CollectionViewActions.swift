@@ -18,9 +18,9 @@ extension ActionContext {
 class ItemAction: DelegatedAction {
     class func standardActions() -> [Action] {
         return [
-            NewItemAction(identifier: "NewItem"),
-            DeleteItemAction(identifier: "DeleteItem"),
-            RevealItemAction(identifier: "RevealItem")
+            NewItemAction(),
+            DeleteItemAction(),
+            RevealItemAction()
         ]
     }
     
@@ -36,7 +36,7 @@ class ItemAction: DelegatedAction {
 }
 
 class DeleteItemAction: ItemAction {
-    init(identifier: String) {
+    init(identifier: String? = nil) {
         super.init(identifier: identifier) { (context) -> String in
             guard let model = context.viewModel else {
                 return ""
@@ -58,7 +58,7 @@ class DeleteItemAction: ItemAction {
 }
 
 class NewItemAction: ItemAction {
-    init(identifier: String) {
+    init(identifier: String? = nil) {
         super.init(identifier: identifier) { (context) -> String in
             guard let model = context.viewModel else {
                 return ""
@@ -70,7 +70,7 @@ class NewItemAction: ItemAction {
 }
 
 class RevealItemAction: DelegatedAction {
-    init(identifier: String) {
+    init(identifier: String? = nil) {
         super.init(identifier: identifier) { (context) -> String in
             if context[PublisherAction.publisherKey] != nil {
                 return "RevealPublisher"

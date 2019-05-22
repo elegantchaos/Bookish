@@ -6,6 +6,7 @@
 import Foundation
 import AppKit
 import Actions
+import ActionsKit
 import BookishModel
 
 
@@ -21,7 +22,7 @@ class TagsCell: AnnotatedTableCellView {
 extension TagsCell: DetailTableCell {
     func setup(for row: DetailItem, of view: DetailController) {
         assert(row is TagsDetailItem)
-
+        
         let tagList: [Tag] = view.cvm.managedObjectContext.everyEntity()
         for tag in tagList {
             if let name = tag.name {
@@ -51,6 +52,43 @@ extension TagsCell: DetailTableCell {
         tagsField.objectValue = nil
         detailView = nil
     }
+    
+    @IBAction func confirmDeletion(_ sender: NSMenuItem) {
+        if let window = window, let tag = sender.representedObject as? Tag, let name = tag.name {
+            let actionManager = application.actionManager
+            let alert = NSAlert()
+            alert.messageText = "Tag.delete.message".localized(with: ["tag": name])
+            alert.informativeText = "Tag.delete.info".localized(with: ["tag": name])
+            alert.addButton(withTitle: "Tag.delete.ok".localized)
+            alert.addButton(withTitle: "Tag.delete.cancel".localized)
+            alert.showsSuppressionButton = true
+            alert.beginSheetModal(for: window) { (response) in
+                let info = ActionInfo(sender: sender)
+                info[TagAction.tagKey] = tag
+                actionManager.perform(identifier: "DeleteTag", info: info)
+            }
+        }
+    }
+    
+    @IBAction func confirmRename(_ sender: NSMenuItem) {
+        if let window = window, let tag = sender.representedObject as? Tag, let name = tag.name {
+            let actionManager = application.actionManager
+            let alert = NSAlert()
+            alert.messageText = "Tag.rename.message".localized(with: ["tag": name])
+            alert.informativeText = "Tag.rename.info".localized(with: ["tag": name])
+            alert.addButton(withTitle: "Tag.rename.ok".localized)
+            alert.addButton(withTitle: "Tag.rename.cancel".localized)
+            let field = NSTextField(string: name)
+            alert.accessoryView = field
+            
+            alert.beginSheetModal(for: window) { (response) in
+                let info = ActionInfo(sender: sender)
+                info[TagAction.tagKey] = tag
+                info[TagAction.tagNameKey] = field.stringValue
+                actionManager.perform(identifier: "RenameTag", info: info)
+            }
+        }
+    }
 }
 
 extension TagsCell: NSTokenFieldDelegate {
@@ -69,7 +107,7 @@ extension TagsCell: NSTokenFieldDelegate {
         
         return tag.name ?? "<unknown-tag>"
     }
-
+    
     func tokenField(_ tokenField: NSTokenField, editingStringForRepresentedObject representedObject: Any) -> String? {
         guard let tag = representedObject as? Tag else {
             return nil
@@ -77,7 +115,7 @@ extension TagsCell: NSTokenFieldDelegate {
         
         return tag.name ?? "<unknown-tag>"
     }
-
+    
     func tokenField(_ tokenField: NSTokenField, representedObjectForEditing editingString: String) -> Any? {
         if let tag = allTags[editingString] {
             return tag
@@ -86,6 +124,27 @@ extension TagsCell: NSTokenFieldDelegate {
         let newTag = Tag.named(editingString, in: detailView.cvm.managedObjectContext)
         allTags[editingString] = newTag
         return newTag
+    }
+    
+    func tokenField(_ tokenField: NSTokenField, hasMenuForRepresentedObject representedObject: Any) -> Bool {
+        return detailView.isEditing
+    }
+    
+    func tokenField(_ tokenField: NSTokenField, menuForRepresentedObject representedObject: Any) -> NSMenu? {
+        guard let tag = representedObject as? Tag else {
+            return nil
+        }
+        
+        let menu = NSMenu(title: "Tag Menu")
+        let deleteItem = menu.addItem(withTitle: "Delete Tag", action: #selector(confirmDeletion(_:)), keyEquivalent: "")
+        deleteItem.identifier = NSUserInterfaceItemIdentifier(rawValue: "DeleteTag")
+        deleteItem.representedObject = tag
+        
+        let renameItem = menu.addItem(withTitle: "Rename Tag", action: #selector(confirmRename(_:)), keyEquivalent: "")
+        renameItem.identifier = NSUserInterfaceItemIdentifier(rawValue: "RenameTag")
+        renameItem.representedObject = tag
+        
+        return menu
     }
 }
 
