@@ -22,23 +22,37 @@ class TagsCell: AnnotatedTableCellView {
 extension TagsCell: DetailTableCell {
     func setup(for row: DetailItem, of view: DetailController) {
         assert(row is TagsDetailItem)
+        if let info = row as? TagsDetailItem {
+            initialTags = info.tags
+        }
         
-        let tagList: [Tag] = view.cvm.managedObjectContext.everyEntity()
+        detailView = view
+        tagsField.isEditable = view.isEditing
+        loadInitialContent()
+    }
+    
+    func loadInitialContent() {
+        let tagList: [Tag] = detailView.cvm.managedObjectContext.everyEntity()
         for tag in tagList {
             if let name = tag.name {
                 allTags[name] = tag
             }
         }
         
-        initialTags.removeAll()
-        if let info = row as? TagsDetailItem {
-            initialTags = info.tags
-        }
-        
-        detailView = view
         tagsField.objectValue = Array(initialTags)
-        tagsField.isEditable = view.isEditing
         changed = false
+    }
+    
+    func processChanges() {
+        if  let tags = tagsField.objectValue as? [Tag] {
+            let currentTags = Set<Tag>(tags)
+            let addedTags = currentTags.subtracting(initialTags)
+            let removedTags = initialTags.subtracting(currentTags)
+            let info = ActionInfo(sender: self)
+            info[ChangeTagsAction.addedTagsKey] = addedTags
+            info[ChangeTagsAction.removedTagsKey] = removedTags
+            application.actionManager.perform(identifier: "ChangeTags", info: info)
+        }
     }
     
     func keyView() -> NSView? {
@@ -54,6 +68,7 @@ extension TagsCell: DetailTableCell {
     }
     
     @IBAction func confirmDeletion(_ sender: NSMenuItem) {
+        processChanges()
         if let window = window, let tag = sender.representedObject as? Tag, let name = tag.name {
             let actionManager = application.actionManager
             let alert = NSAlert()
@@ -71,6 +86,7 @@ extension TagsCell: DetailTableCell {
     }
     
     @IBAction func confirmRename(_ sender: NSMenuItem) {
+        processChanges()
         if let window = window, let tag = sender.representedObject as? Tag, let name = tag.name {
             let actionManager = application.actionManager
             let alert = NSAlert()
@@ -135,12 +151,12 @@ extension TagsCell: NSTokenFieldDelegate {
             return nil
         }
         
-        let menu = NSMenu(title: "Tag Menu")
-        let deleteItem = menu.addItem(withTitle: "Delete Tag", action: #selector(confirmDeletion(_:)), keyEquivalent: "")
+        let menu = NSMenu(title: "Tag.menu.title".localized)
+        let deleteItem = menu.addItem(withTitle: "Tag.delete.menu".localized, action: #selector(confirmDeletion(_:)), keyEquivalent: "")
         deleteItem.identifier = NSUserInterfaceItemIdentifier(rawValue: "DeleteTag")
         deleteItem.representedObject = tag
         
-        let renameItem = menu.addItem(withTitle: "Rename Tag", action: #selector(confirmRename(_:)), keyEquivalent: "")
+        let renameItem = menu.addItem(withTitle: "Tag.rename.menu".localized, action: #selector(confirmRename(_:)), keyEquivalent: "")
         renameItem.identifier = NSUserInterfaceItemIdentifier(rawValue: "RenameTag")
         renameItem.representedObject = tag
         
@@ -154,15 +170,31 @@ extension TagsCell {
     }
     
     override func controlTextDidEndEditing(_ obj: Notification) {
-        if changed, let tags = tagsField.objectValue as? [Tag] {
-            let currentTags = Set<Tag>(tags)
-            let addedTags = currentTags.subtracting(initialTags)
-            let removedTags = initialTags.subtracting(currentTags)
-            let info = ActionInfo(sender: self)
-            info[ChangeTagsAction.addedTagsKey] = addedTags
-            info[ChangeTagsAction.removedTagsKey] = removedTags
-            application.actionManager.perform(identifier: "ChangeTags", info: info)
-            changed = false
+        if changed {
+            processChanges()
         }
+    }
+}
+
+extension TagsCell: ActionContextProvider {
+    func provide(context: ActionContext) {
+        context.info.addObserver(self)
+    }
+}
+
+extension TagsCell: TagObserver {
+    func deleted(tags: Set<Tag>) {
+        initialTags.subtract(tags)
+        loadInitialContent()
+    }
+    
+    func renamed(tags: Set<Tag>) {
+        loadInitialContent()
+    }
+    
+    func changed(adding addedTags: Set<Tag>, removing removedTags: Set<Tag>) {
+        changed = false
+        initialTags.subtract(removedTags)
+        initialTags.formUnion(addedTags)
     }
 }

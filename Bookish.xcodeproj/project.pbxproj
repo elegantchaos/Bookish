@@ -126,7 +126,6 @@
 		22D39E6D214816C400282467 /* UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D39E6B2148167500282467 /* UITests.swift */; };
 		22DA6A4721E653F400ECF09A /* SyncedCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DA6A4621E653F400ECF09A /* SyncedCollection.swift */; };
 		22DA6A4821E653F400ECF09A /* SyncedCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DA6A4621E653F400ECF09A /* SyncedCollection.swift */; };
-		22DA6A8C21E9098300ECF09A /* CollectionDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DD424B2126D6DA0070C85A /* CollectionDocument.swift */; };
 		22DAF398217B52E6003CE28B /* ActionsKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22DAF397217B52E6003CE28B /* ActionsKit.framework */; };
 		22DAF39A217B5305003CE28B /* Logger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22DAF399217B5305003CE28B /* Logger.framework */; };
 		22DD42482126D6DA0070C85A /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DD42472126D6DA0070C85A /* Application.swift */; };
@@ -1209,7 +1208,6 @@
 				228968472191F48400B80A93 /* AuthorSelectionTransformer.swift in Sources */,
 				2254895921F62DE300EE8ECB /* BookControlCell.swift in Sources */,
 				22DE6AE72188A8DC0078D489 /* WhiteSearchFieldCell.swift in Sources */,
-				22DA6A8C21E9098300ECF09A /* CollectionDocument.swift in Sources */,
 				22E346012254DCEB0089F300 /* CDECloudKitFileSystem.m in Sources */,
 				22143FD3212F0F2500B689DF /* AuthorsTransformer.swift in Sources */,
 				22A6D46C22256E9E0083D4E8 /* ScannerWindowController.swift in Sources */,
