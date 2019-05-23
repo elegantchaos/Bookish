@@ -30,7 +30,6 @@ let updaterChannel = Logger("Updater")
     let cloudManager = CloudManager()
     let lookupManager = LookupManager()
     let uiTesting = CommandLine.arguments.contains("--ui-testing")
-    var mode: SyncedCollection.PopulateMode = .populateWith(sample: "Roles")
     let noBlankDocument = CommandLine.arguments.contains("--no-blank-document")
     var viewModel: CollectionViewState?
     var watchedMenuItem: NSMenuItem?
@@ -130,6 +129,7 @@ extension Application: NSApplicationDelegate {
         setupTransformers()
         setupUpdates()
         
+        var mode: SyncedCollection.PopulateMode = .populateWith(sample: "Roles")
         var name: String? = nil
         var shouldSync = true
         let arguments = CommandLine.arguments
