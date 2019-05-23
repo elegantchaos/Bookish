@@ -78,9 +78,11 @@ extension TagsCell: DetailTableCell {
             alert.addButton(withTitle: "Tag.delete.cancel".localized)
             alert.showsSuppressionButton = true
             alert.beginSheetModal(for: window) { (response) in
-                let info = ActionInfo(sender: sender)
-                info[TagAction.tagKey] = tag
-                actionManager.perform(identifier: "DeleteTag", info: info)
+                if response == .OK {
+                    let info = ActionInfo(sender: sender)
+                    info[TagAction.tagKey] = tag
+                    actionManager.perform(identifier: "DeleteTag", info: info)
+                }
             }
         }
     }
@@ -94,15 +96,19 @@ extension TagsCell: DetailTableCell {
             alert.informativeText = "Tag.rename.info".localized(with: ["tag": name])
             alert.addButton(withTitle: "Tag.rename.ok".localized)
             alert.addButton(withTitle: "Tag.rename.cancel".localized)
-            let field = NSTextField(string: name)
+            let field = NSTextField(frame: NSRect(x: 0, y: 0, width: 250, height: 22))
+            field.focusRingType = .none
+            field.stringValue = name
             alert.accessoryView = field
-            
             alert.beginSheetModal(for: window) { (response) in
-                let info = ActionInfo(sender: sender)
-                info[TagAction.tagKey] = tag
-                info[TagAction.tagNameKey] = field.stringValue
-                actionManager.perform(identifier: "RenameTag", info: info)
+                if response == .OK {
+                    let info = ActionInfo(sender: sender)
+                    info[TagAction.tagKey] = tag
+                    info[TagAction.tagNameKey] = field.stringValue
+                    actionManager.perform(identifier: "RenameTag", info: info)
+                }
             }
+            alert.window.makeFirstResponder(field)
         }
     }
 }
