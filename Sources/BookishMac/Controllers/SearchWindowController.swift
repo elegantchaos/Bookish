@@ -6,14 +6,11 @@
 import AppKit
 import Logger
 
-let scannerChannel = Logger("com.elegantchaos.bookish.Scanner")
-
-class ScannerWindowController: LateAutosavingWindowController {
-    override var lateAutosaveName: String? { return "scanner.window" }
-
+class SearchWindowController: LateAutosavingWindowController {
+    override var lateAutosaveName: String? { return "search.window" }
+    
     deinit {
-        scannerChannel.log("window disposed")
+        searchChannel.log("window disposed")
     }
-
-
+    
 }

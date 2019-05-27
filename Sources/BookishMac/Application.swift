@@ -71,6 +71,7 @@ let updaterChannel = Logger("Updater")
         actionManager.register([
             ShowDatePickerAction(),
             ToggleScannerAction(),
+            ToggleSearchAction(),
             NavigateBackAction(),
             NavigateForwardAction(),
             ConfirmationAction()

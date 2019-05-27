@@ -129,20 +129,6 @@ class ScannerViewController: NSViewController, BarcodeScannerDelegate {
             lookup(isbn: code)
         }
     }
-    
-    @IBAction func doAdd(_ sender: Any) {
-        let state = application.viewModel
-        let index = candidatesTable.selectedRow
-        if (index >= 0) && (index < candidates.count) {
-            let candidate = candidates[index]
-            if let context = state?.managedObjectContext {
-                let book = candidate.makeBook(in: context)
-                application.windowController.reveal(book: book)
-            }
-        }
-    }
-    
-    
 }
 
 extension ScannerViewController: NSTableViewDelegate, NSTableViewDataSource {

@@ -13,7 +13,8 @@ let validationChannel = Logger("Validation")
 class CollectionWindowController: LateAutosavingWindowController, NSWindowDelegate, ActionContextProvider {
     fileprivate var cvm: CollectionViewState!
     var scannerWindow: ScannerWindowController?
-    
+    var searchWindow: SearchWindowController?
+
     override var lateAutosaveName: String? { return "collection.window" }
     private var indexControllers: [String:Any] = [:]
     
@@ -105,6 +106,25 @@ class CollectionWindowController: LateAutosavingWindowController, NSWindowDelega
         } else {
             scannerWindow?.close()
             scannerWindow = nil
+        }
+    }
+    
+    fileprivate func setupSearchWindow() -> SearchWindowController {
+        let storyboard = NSStoryboard(name: NSStoryboard.Name("Main"), bundle: nil)
+        let window = storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier("SearchWindow")) as! SearchWindowController
+        
+        return window
+    }
+
+    func toggleSearch() {
+        if searchWindow == nil {
+            searchWindow = setupSearchWindow()
+            if let window = window, let scanner = searchWindow?.window {
+                window.beginSheet(scanner)
+            }
+        } else {
+            searchWindow?.close()
+            searchWindow = nil
         }
     }
     
