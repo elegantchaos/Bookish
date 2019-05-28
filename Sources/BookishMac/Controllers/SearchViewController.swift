@@ -7,6 +7,7 @@ import AppKit
 import Foundation
 import BookishModel
 import Logger
+import CoreSpotlight
 
 let searchChannel = Channel("com.elegantchaos.bookish.Search")
 
@@ -25,6 +26,7 @@ class SearchViewController: NSViewController {
     var search: String = ""
     var lookup: LookupSession? = nil
     var fetcher: NSFetchedResultsController<ModelObject>? = nil
+    var searcher: CSSearchQuery? = nil
     var results: [ModelObject] = []
     
     @objc var gotSearchText: Bool {
@@ -107,6 +109,18 @@ class SearchViewController: NSViewController {
             predicate = NSPredicate(format: newFormat)
         }
 
+        var value = searchField.stringValue
+        if !value.contains("*") {
+            value = "*\(value)*"
+        }
+        let query = "name == \"\(value)\"cd"
+        let searcher = CSSearchQuery(queryString: query, attributes: [])
+        searcher.foundItemsHandler = { items in
+            print("found \(items)")
+        }
+        searcher.start()
+        self.searcher = searcher
+        
         let request = NSFetchRequest<ModelObject>()
         request.entity = context.persistentStoreCoordinator?.managedObjectModel.entitiesByName[entityName]
         request.fetchBatchSize = 20

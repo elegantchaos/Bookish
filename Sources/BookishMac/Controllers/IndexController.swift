@@ -139,7 +139,6 @@ class IndexController: CollectionViewController {
             }
             fetchState = .fetching
             indexArray.fetch(self)
-            
         }
     }
     

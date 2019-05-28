@@ -11,6 +11,8 @@ import Logger
 import BookishCore
 import CloudKit
 import Sparkle
+import CoreSpotlight
+import CoreData
 
 let applicationChannel = Logger("Application")
 let updaterChannel = Logger("Updater")
@@ -124,6 +126,11 @@ let updaterChannel = Logger("Updater")
 extension Application: NSApplicationDelegate {
     
     func applicationWillFinishLaunching(_ notification: Notification) {
+        let indexingService = CSSearchableIndex.default()
+        indexingService.indexDelegate = self
+        let coreSpotlightStatus = CSSearchableIndex.isIndexingAvailable() ? "enabled" : "disabled"
+        print("CoreSpotlight indexing \(coreSpotlightStatus).")
+
         BookishModel.registerLocalizations()
         setupActions()
         setupLookups()
@@ -162,6 +169,7 @@ extension Application: NSApplicationDelegate {
                 collection.sync()
             }
         }
+        
     }
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
@@ -184,6 +192,27 @@ extension Application: NSApplicationDelegate {
     func applicationWillResignActive(_ notification: Notification) {
         viewModel?.collection.save()
         viewModel?.collection.sync()
+    }
+    
+    func application(_ application: NSApplication, willContinueUserActivityWithType userActivityType: String) -> Bool {
+        print("will continue")
+        print(userActivityType)
+        return true
+    }
+    
+    func application(_ application: NSApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([NSUserActivityRestoring]) -> Void) -> Bool {
+        print("continuing \(userActivity)")
+        
+        if
+            let context = viewModel?.collection.managedObjectContext,
+            let userInfo = userActivity.userInfo as? Dictionary<String,Any>,
+            let identifier = userInfo["kCSSearchableItemActivityIdentifier"] as? String,
+            let uri = URL(string: identifier),
+            let objectID = context.persistentStoreCoordinator?.managedObjectID(forURIRepresentation: uri),
+            let object = context.object(with: objectID) as? ModelObject {
+                windowController.reveal(object: object)
+        }
+        return true
     }
 }
 
@@ -267,4 +296,18 @@ extension Application: SPUUpdaterDelegate {
     func updater(_ updater: SPUUpdater, willScheduleUpdateCheckAfterDelay delay: TimeInterval) {
         updaterChannel.log("Checking for update in \(Int(delay)) seconds.")
     }
+}
+
+extension Application: CSSearchableIndexDelegate {
+    func searchableIndex(_ searchableIndex: CSSearchableIndex, reindexAllSearchableItemsWithAcknowledgementHandler acknowledgementHandler: @escaping () -> Void) {
+        print("reindex called")
+        acknowledgementHandler()
+    }
+    
+    func searchableIndex(_ searchableIndex: CSSearchableIndex, reindexSearchableItemsWithIdentifiers identifiers: [String], acknowledgementHandler: @escaping () -> Void) {
+        print("reindex called for \(identifiers)")
+        acknowledgementHandler()
+    }
+    
+    
 }

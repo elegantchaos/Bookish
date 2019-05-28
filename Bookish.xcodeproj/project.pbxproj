@@ -926,7 +926,7 @@
 		22DD423C2126D6DA0070C85A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1000;
+				LastSwiftUpdateCheck = 1020;
 				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = "Elegant Chaos Limited";
 				TargetAttributes = {

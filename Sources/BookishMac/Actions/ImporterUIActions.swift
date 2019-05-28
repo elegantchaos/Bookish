@@ -46,7 +46,9 @@ class ImportRequest {
         let panel = NSOpenPanel()
         panel.canChooseDirectories = false
         panel.allowsMultipleSelection = false
-        panel.directoryURL = importer.defaultImportLocation?.deletingLastPathComponent()
+        if let defaultDirectory = importer.defaultImportLocation?.deletingLastPathComponent() {
+            panel.directoryURL = defaultDirectory
+        }
         panel.allowedFileTypes = importer.fileTypes
         panel.allowsMultipleSelection = false
         panel.allowsOtherFileTypes = false
