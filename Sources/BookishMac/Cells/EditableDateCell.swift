@@ -25,7 +25,7 @@ class EditableDateCell: AnnotatedTableCellView, ActionContextProvider {
 extension EditableDateCell: DetailTableCell {
     func setup(for row: DetailItem, of view: DetailController) {
         assert(row is SimpleDetailItem)
-        if let subview = textField, let index = view.index,
+        if let subview = textField, let index = view.indexView,
             let transformer = ValueTransformer(forName: NSValueTransformerName(rawValue: "DateToString")),
             let item = row as? SimpleDetailItem {
             binding = item.spec.binding
@@ -40,7 +40,7 @@ extension EditableDateCell: DetailTableCell {
             subview.identifier = NSUserInterfaceItemIdentifier(rawValue: "date-detail-\(binding)")
             subview.bind(NSBindingName(rawValue: "value"), to: index, withKeyPath:"selection.\(binding)", options: options)
             
-            objectValue = view.index.selection as? NSObject
+            objectValue = index.selection as? NSObject
         }
     }
     

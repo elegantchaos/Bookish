@@ -16,7 +16,12 @@ let indexChannel = Logger("Index")
 
 class IndexController: CollectionViewController {
     
-    @IBOutlet var indexArray: NSArrayController!
+    enum SelectionValue {
+        case noSelection
+        case multipleValues
+        case value(value: Any?)
+    }
+    
     @IBOutlet weak var indexTable: NSTableView!
     @IBOutlet weak var indexView: NSScrollView!
     @IBOutlet weak var indexSearchField: NSSearchField!
@@ -27,6 +32,56 @@ class IndexController: CollectionViewController {
 
     var entityType: ModelObject.Type = ModelObject.self
     var entityName: String = ""
+    private var fetcher: NSFetchedResultsController<ModelObject>? = nil
+    private var selectedObjects: [ModelObject] = []
+    
+    var selectionCount: Int {
+        return selectedObjects.count
+    }
+    
+    var selection: [ModelObject] {
+        return selectedObjects
+    }
+    
+    func selectionValue(forKey key: String) -> SelectionValue {
+        switch selectedObjects.count {
+        case 0:
+            return .noSelection
+        case 1:
+            let value = selectedObjects.first!.value(forKey: key)
+            return .value(value: value)
+        default:
+            return .multipleValues // TODO: fix this
+        }
+    }
+    
+    func copySelectionValue(forKey key: String, to field: NSTextField) {
+        let value = selectionValue(forKey: key)
+        switch value {
+        case .value(let value):
+            field.objectValue = value
+        case .multipleValues:
+            field.placeholderString = "Multiple values"
+        case .noSelection:
+            break
+        }
+    }
+
+    func bindSelectionValue(forKey key: String, to field: NSTextField) {
+        copySelectionValue(forKey: key, to: field) // TODO: make this actually bind?
+    }
+    
+    func unbindSelectionValue(forKey key: String, from field: NSTextField) {
+        // TODO: implement this
+    }
+    
+    var objectCount: Int {
+        return fetcher?.fetchedObjects?.count ?? 0
+    }
+    
+    var objects: [ModelObject] {
+        return fetcher?.fetchedObjects ?? []
+    }
     
     lazy var detailView: DetailController = nearestMatchingController()
     
@@ -52,18 +107,10 @@ class IndexController: CollectionViewController {
         }
         
         title = entityType.entityTitle
-        indexArray.entityName = entityName
-        indexArray.sortDescriptors = [NSSortDescriptor(key: "sortName", ascending: true)]
-        indexArray.fetch(self)
     }
     
     override func viewWillAppear() {
         indexChannel.debug("\(entityType) index appearing")
-
-        observers.append(indexArray.observe(\NSArrayController.selection, changeHandler: { (index, change) in
-            self.selectionChanged()
-        }))
-
         self.updateVisibility()
         super.viewWillAppear()
     }
@@ -78,7 +125,21 @@ class IndexController: CollectionViewController {
     func setup(for entity: ModelObject.Type) {
         entityType = entity
         entityName = String(describing: entityType)
-        indexChannel.debug("\(entityType) setup")
+        
+        let context = cvm.managedObjectContext
+        let request = NSFetchRequest<ModelObject>()
+        request.entity = context.persistentStoreCoordinator?.managedObjectModel.entitiesByName[entityName]
+        request.fetchBatchSize = 20
+        request.sortDescriptors = cvm.entitySorting[entityName]
+        let fetcher = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: entityName)
+        fetcher.delegate = self
+        do {
+            try fetcher.performFetch()
+            self.fetcher = fetcher
+        } catch {
+            print(error)
+        }
+        indexChannel.debug("\(entityType) setup with \(objectCount) objects.")
     }
     
     func completeOnMainThread(completion: Completion?) {
@@ -88,7 +149,7 @@ class IndexController: CollectionViewController {
     }
     
     func addContextForIndex(context: ActionContext) {
-        context.info[ActionContext.selectionKey] = indexArray?.selectedObjects
+        context.info[ActionContext.selectionKey] = selectedObjects
         context[FilterActions.filterableKey] = self
         context.info.addObserver(self)
     }
@@ -100,8 +161,7 @@ class IndexController: CollectionViewController {
     }
     
     func updateVisibility() {
-        let entityCount = (indexArray.arrangedObjects as? NSArray)?.count ?? 0
-        if entityCount == 0 {
+        if objectCount == 0 {
             indexView.isHidden = true
             indexSearchField.isHidden = true
             emptyIndexView.isHidden = false
@@ -116,32 +176,63 @@ class IndexController: CollectionViewController {
     }
     
     func updateDetailView() {
-        let selection = indexArray.selectedObjects as? [ModelObject] ?? []
-        indexChannel.debug("showing detail for \(entityType): \(selection)")
+        indexChannel.debug("showing detail for \(entityType): \(selectedObjects)")
 
         detailView.setup(for: self, type: entityType)
         
-        let entityCount = (indexArray.arrangedObjects as? NSArray)?.count ?? 0
-        let selectedCount = selection.count
-        selectionLabel.stringValue = entityType.entityCount(entityCount, selected: selectedCount, prefix: "selected")
+        let selectedCount = selectedObjects.count
+        selectionLabel.stringValue = entityType.entityCount(objectCount, selected: selectedCount, prefix: "selected")
         selectionLabel.isHidden = selectedCount < 2
-        indexSearchField.placeholderString = entityType.entityCount(entityCount, prefix: "search")
+        indexSearchField.placeholderString = entityType.entityCount(objectCount, prefix: "search")
     }
     
     func select(items: [ModelObject], forEditing: Bool = false, forceUpdate: Bool = false, completion: Completion? = nil) {
         indexChannel.log("Selecting \(items)")
-        self.indexArray.setSelectedObjects(items)
-        let selection = self.indexTable.selectedRowIndexes
-        self.indexTable.scrollRowToVisible(selection[selection.startIndex])
-        self.indexTable.scrollRowToVisible(selection[selection.endIndex])
-        if forEditing && !self.detailView.isEditing {
-            self.application.actionManager.perform(identifier: "ToggleEditing")
-        } else if forceUpdate {
-            self.updateDetailView()
+        if items != selectedObjects {
+            selectedObjects = items
+            
+//            self.indexTable.r
+//            let selection = self.indexTable.selectedRowIndexes
+//            self.indexTable.scrollRowToVisible(selection[selection.startIndex])
+//            self.indexTable.scrollRowToVisible(selection[selection.endIndex])
+
+            if forEditing && !self.detailView.isEditing {
+                self.application.actionManager.perform(identifier: "ToggleEditing")
+            } else if forceUpdate {
+                self.updateDetailView()
+            }
+            DispatchQueue.main.async {
+                completion?()
+            }
         }
-        DispatchQueue.main.async {
-            completion?()
+    }
+}
+
+// MARK: Table Support
+
+extension IndexController: NSTableViewDataSource, NSTableViewDelegate {
+    func numberOfRows(in tableView: NSTableView) -> Int {
+        return objectCount
+    }
+    
+    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
+        guard let columnID = tableColumn?.identifier else { return nil }
+        
+        guard let view = tableView.makeView(withIdentifier: columnID, owner: self) else {
+            return nil
         }
+        
+        if let cell = view as? IndexCell {
+            let object = objects[row]
+            detailCellChannel.log("made \(cell) for \(object)")
+            cell.objectValue = object
+        }
+        
+        return view
+    }
+
+    func tableViewSelectionDidChange(_ notification: Notification) {
+        print("selected")
     }
 }
 
@@ -217,4 +308,8 @@ extension IndexController: FilterableView {
     func clearFilter() {
         indexSearchField.stringValue = ""
     }
+}
+
+extension IndexController: NSFetchedResultsControllerDelegate {
+    
 }

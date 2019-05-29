@@ -1387,9 +1387,8 @@ Gw
                                                             </tableColumn>
                                                         </tableColumns>
                                                         <connections>
-                                                            <binding destination="iUG-Sw-kPc" name="content" keyPath="arrangedObjects" id="Nh4-cp-4Az"/>
-                                                            <binding destination="iUG-Sw-kPc" name="selectionIndexes" keyPath="selectionIndexes" previousBinding="Nh4-cp-4Az" id="TVo-kI-Ed3"/>
-                                                            <outlet property="delegate" destination="PUA-xK-Wyi" id="D6S-XB-Tc6"/>
+                                                            <outlet property="dataSource" destination="PUA-xK-Wyi" id="GZN-RV-FZq"/>
+                                                            <outlet property="delegate" destination="PUA-xK-Wyi" id="Yo8-fS-ulQ"/>
                                                         </connections>
                                                     </tableView>
                                                 </subviews>
@@ -1411,14 +1410,6 @@ Gw
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="Bookish Detail"/>
                                             </searchFieldCell>
-                                            <connections>
-                                                <binding destination="iUG-Sw-kPc" name="predicate" keyPath="filterPredicate" id="4jZ-eU-awR">
-                                                    <dictionary key="options">
-                                                        <string key="NSDisplayName">predicate</string>
-                                                        <string key="NSPredicateFormat">name contains[c] $value</string>
-                                                    </dictionary>
-                                                </binding>
-                                            </connections>
                                         </searchField>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="NQL-eA-Rw2">
                                             <rect key="frame" x="18" y="4" width="164" height="14"/>
@@ -1458,7 +1449,6 @@ Gw
                     </view>
                     <connections>
                         <outlet property="emptyIndexView" destination="crJ-jZ-8TW" id="9Qm-NQ-wgN"/>
-                        <outlet property="indexArray" destination="iUG-Sw-kPc" id="8gC-Go-fCf"/>
                         <outlet property="indexSearchField" destination="Yal-1G-peJ" id="SbF-Of-6f4"/>
                         <outlet property="indexTable" destination="6dc-sq-CeH" id="ZaV-S5-1dR"/>
                         <outlet property="indexView" destination="8vI-pf-KKk" id="VK1-z5-kvI"/>
@@ -1466,11 +1456,6 @@ Gw
                     </connections>
                 </viewController>
                 <customObject id="2hD-xJ-qyJ" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-                <arrayController mode="entity" entityName="Book" automaticallyPreparesContent="YES" preservesSelection="NO" avoidsEmptySelection="NO" id="iUG-Sw-kPc">
-                    <connections>
-                        <binding destination="PUA-xK-Wyi" name="managedObjectContext" keyPath="self.cvm.managedObjectContext" id="lJS-PU-xhb"/>
-                    </connections>
-                </arrayController>
                 <userDefaultsController id="0XB-YH-O2i"/>
             </objects>
             <point key="canvasLocation" x="1113" y="2102"/>
@@ -2758,7 +2743,7 @@ Gw
             <color red="0.97299998998641968" green="0.97299998998641968" blue="0.98000001907348633" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Bookish Index Text">
-            <color red="0.35294117647058826" green="0.36862745098039218" blue="0.3843137254901961" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.3529999852180481" green="0.36899998784065247" blue="0.38400000333786011" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Bookish Label Text">
             <color red="0.54100000858306885" green="0.55699998140335083" blue="0.57300001382827759" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

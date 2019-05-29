@@ -10,40 +10,31 @@ import Actions
 fileprivate var detailBindingContext: Int = 0
 
 class DimensionsCell: AnnotatedTableCellView, DetailTableCell {
-    var index: NSArrayController?
-    
     @IBOutlet weak var widthField: NSTextField!
     @IBOutlet weak var heightField: NSTextField!
     @IBOutlet weak var lengthField: NSTextField!
     
+    var detailView: DetailController!
+    
     func setup(for row: DetailItem, of view: DetailController) {
         assert(row is SimpleDetailItem)
-        
-        index = view.index
+    
+        detailView = view
         setupValue(field: widthField, property: "width")
         setupValue(field: heightField, property: "height")
         setupValue(field: lengthField, property: "length")
     }
     
     func setupValue(field: NSTextField, property: String) {
-        if let index = index {
-            index.addObserver(self, forKeyPath: "selection.\(property)", options: [.initial], context: &detailBindingContext)
-        }
+        detailView.indexView.bindSelectionValue(forKey: property, to: field)
     }
     
     func updateValue(field: NSTextField, property: String) {
-        if let selection = index?.selection as? NSObject {
-            let selection = selection.value(forKey: property) as? NSObject
-            if selection === NSMultipleValuesMarker {
-                field.placeholderString = "Multiple Values"
-            } else {
-                field.objectValue = selection
-            }
-        }
+        detailView.indexView.copySelectionValue(forKey: property, to: field)
     }
     
     func cleanupValue(field: NSTextField, property: String) {
-        index?.removeObserver(self, forKeyPath: "selection.\(property)", context: &detailBindingContext)
+        detailView.indexView.unbindSelectionValue(forKey: property, from: field)
     }
 
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {

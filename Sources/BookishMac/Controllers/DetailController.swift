@@ -44,8 +44,6 @@ class DetailController: CollectionViewController {
     @IBOutlet weak var roleList: NSArrayController!
     @IBOutlet weak var imageWidth: NSLayoutConstraint!
     @IBOutlet weak var imageHeight: NSLayoutConstraint!
-    
-    @objc var index: NSArrayController!
 
     var entityName: String = ""
     var entityType: ModelObject.Type = ModelObject.self
@@ -63,7 +61,6 @@ class DetailController: CollectionViewController {
         doubleClickRecogniser.numberOfClicksRequired = 2
         clickRecogniser.numberOfClicksRequired = 1
         indexView = index
-        self.index = index.indexArray
         self.entityName = String(describing: entityType)
         self.entityType = entityType
         source = entityType.getProvider()
@@ -179,7 +176,7 @@ class DetailController: CollectionViewController {
             detailChannel.debug("filtering details")
 
             detailsTable.headerView?.isHidden = !cvm.showDebug
-            let selection = index?.selectedObjects as? [ModelObject] ?? []
+            let selection = indexView.selection
             source.filter(for: selection, editing: editing, combining: true, context: cvm)
 
             detailsTable.reloadData()
@@ -239,9 +236,9 @@ class DetailController: CollectionViewController {
     
     func selectionChanged() {
         detailChannel.debug("selection changed")
-        let selectedCount = index.selectedObjects?.count ?? 0
+        let selectedCount = indexView.selectionCount
         let showDetail = selectedCount > 0
-        if let object = index.selection as? NSObject {
+        if let object = indexView.selection.first {
             updateTable(visible: showDetail)
             updateTitle(for: object, visible: showDetail)
             updateSubtitle(for: object, visible: showDetail)
@@ -481,12 +478,18 @@ extension DetailController: NSControlTextEditingDelegate {
             }
 
             if let property = property {
-                let sendAction: Bool
                 let newValue = field.stringValue
-                if let object = index.selection as? NSObject, let oldValue = object.value(forKey: property) as? String {
-                    sendAction = oldValue != newValue
-                } else {
-                    sendAction = true
+                let oldValue = indexView.selectionValue(forKey: property)
+                let sendAction: Bool
+                switch oldValue {
+                case .value(value: let value):
+                    if let oldValue = value as? String {
+                        sendAction = oldValue != newValue
+                    } else {
+                        sendAction = false
+                    }
+                default:
+                    sendAction = false
                 }
                 
                 if sendAction {

@@ -19,43 +19,39 @@ class DetailCell: AnnotatedTableCellView, DetailTableCell {
         assert(row is SimpleDetailItem)
         
         detailView = view
+
         if let item = row as? SimpleDetailItem, let subview = textField {
+            var font = detailView.cvm.detailFont
+            if item.spec.isDebug, let smaller = NSFont(descriptor: font.fontDescriptor, size: font.pointSize - 2) {
+                font = smaller
+                subview.textColor = NSColor(named: "Bookish Label Text")
+            }
+            subview.font = font
+
             let binding = item.spec.binding
             subview.identifier = NSUserInterfaceItemIdentifier(rawValue: "detail-\(binding)")
             subview.isEditable = view.editing
             objectValue = item.spec
-            view.index.addObserver(self, forKeyPath: "selection.\(binding)", options: [.initial], context: &detailBindingContext)
+            updateValue()
             view.addDoubleClickUnlock(to: subview)
             subview.placeholderString = "detail.\(binding).placeholder".localized
         }
     }
     
     func updateValue() {
-        if let subview = textField, let view = detailView, let selection = view.index.selection as? NSObject, let detail = objectValue as? DetailSpec {
-            let selection = selection.value(forKey: detail.binding) as? NSObject
-            if selection === NSMultipleValuesMarker {
-                subview.placeholderString = "Multiple Values"
-                subview.stringValue = ""
-            } else {
-                subview.objectValue = selection
-                originalValue = subview.stringValue
-                asNumber = selection?.isKind(of: NSNumber.self) ?? false
-                var font = detailView.cvm.detailFont
-                if detail.isDebug, let smaller = NSFont(descriptor: font.fontDescriptor, size: font.pointSize - 2) {
-                    font = smaller
-                    subview.textColor = NSColor(named: "Bookish Label Text")
-                }
-                subview.font = font
+
+        if let subview = textField, let spec = objectValue as? DetailSpec {
+            detailView.indexView.copySelectionValue(forKey: spec.binding, to: subview)
+            let value = detailView.indexView.selectionValue(forKey: spec.binding)
+            switch value {
+            case .value(value: let value):
+                asNumber = ((value as? NSNumber) != nil)
+            default:
+                asNumber = false
             }
         }
     }
-    
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if context == &detailBindingContext {
-            updateValue()
-        }
-    }
-    
+
     func keyView() -> NSView? {
         return textField
     }

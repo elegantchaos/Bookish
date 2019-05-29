@@ -16,7 +16,7 @@ class DateCell: NSTableCellView {
 extension DateCell: DetailTableCell {
     func setup(for row: DetailItem, of view: DetailController) {
         assert(row is SimpleDetailItem)
-        if let subview = textField, let index = view.index,
+        if let subview = textField, let index = view.indexView,
             let transformer = ValueTransformer(forName: NSValueTransformerName(rawValue: transformerName)),
             let item = row as? SimpleDetailItem {
             let binding = item.spec.binding
@@ -25,7 +25,7 @@ extension DateCell: DetailTableCell {
             ]
             
             subview.identifier = NSUserInterfaceItemIdentifier(rawValue: "date-detail-\(binding)")
-            subview.bind(NSBindingName(rawValue: "value"), to: index, withKeyPath:"selection.\(binding)", options: options)
+            index.bindSelectionValue(forKey: binding, to: subview)
             view.addDoubleClickUnlock(to: subview)
         }
     }
