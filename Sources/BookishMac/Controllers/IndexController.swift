@@ -51,24 +51,36 @@ class IndexController: CollectionViewController {
             let value = selectedObjects.first!.value(forKey: key)
             return .value(value: value)
         default:
-            return .multipleValues // TODO: fix this
+            let value = selectedObjects.first!.value(forKey: key) as? NSObject
+            for item in selectedObjects {
+                let nextValue = item.value(forKey: key) as? NSObject
+                if nextValue != value {
+                    return .multipleValues
+                }
+            }
+            return .value(value: value)
         }
     }
     
-    func copySelectionValue(forKey key: String, to field: NSTextField) {
+    func copySelectionValue(forKey key: String, to field: NSTextField, transformer: ValueTransformer? = nil) {
         let value = selectionValue(forKey: key)
         switch value {
         case .value(let value):
-            field.objectValue = value
+            if let transformer = transformer {
+                field.objectValue = transformer.transformedValue(value)
+            } else {
+                field.objectValue = value
+            }
         case .multipleValues:
             field.placeholderString = "Multiple values"
+            field.objectValue = nil
         case .noSelection:
             break
         }
     }
 
-    func bindSelectionValue(forKey key: String, to field: NSTextField) {
-        copySelectionValue(forKey: key, to: field) // TODO: make this actually bind?
+    func bindSelectionValue(forKey key: String, to field: NSTextField, transformer: ValueTransformer? = nil) {
+        copySelectionValue(forKey: key, to: field, transformer: transformer) // TODO: make this actually bind?
     }
     
     func unbindSelectionValue(forKey key: String, from field: NSTextField) {
@@ -232,7 +244,11 @@ extension IndexController: NSTableViewDataSource, NSTableViewDelegate {
     }
 
     func tableViewSelectionDidChange(_ notification: Notification) {
-        print("selected")
+        selectedObjects.removeAll()
+        for index in indexTable.selectedRowIndexes {
+            selectedObjects.append(objects[index])
+        }
+        selectionChanged()
     }
 }
 

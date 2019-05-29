@@ -20,12 +20,8 @@ extension DateCell: DetailTableCell {
             let transformer = ValueTransformer(forName: NSValueTransformerName(rawValue: transformerName)),
             let item = row as? SimpleDetailItem {
             let binding = item.spec.binding
-            let options: [NSBindingOption:Any] = [
-                .valueTransformer: transformer,
-            ]
-            
             subview.identifier = NSUserInterfaceItemIdentifier(rawValue: "date-detail-\(binding)")
-            index.bindSelectionValue(forKey: binding, to: subview)
+            index.bindSelectionValue(forKey: binding, to: subview, transformer: transformer)
             view.addDoubleClickUnlock(to: subview)
         }
     }

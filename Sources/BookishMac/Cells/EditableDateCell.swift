@@ -29,18 +29,12 @@ extension EditableDateCell: DetailTableCell {
             let transformer = ValueTransformer(forName: NSValueTransformerName(rawValue: "DateToString")),
             let item = row as? SimpleDetailItem {
             binding = item.spec.binding
-            let unlocked = view.editing
-            let options: [NSBindingOption:Any] = [
-                .valueTransformer: transformer,
-                .conditionallySetsEditable: unlocked
-            ]
-            
+            let unlocked = view.editing            
             subview.isSelectable = unlocked
             subview.isEditable = unlocked
             subview.identifier = NSUserInterfaceItemIdentifier(rawValue: "date-detail-\(binding)")
-            subview.bind(NSBindingName(rawValue: "value"), to: index, withKeyPath:"selection.\(binding)", options: options)
-            
-            objectValue = index.selection as? NSObject
+            index.bindSelectionValue(forKey: binding, to: subview, transformer: transformer)
+            objectValue = index.selection
         }
     }
     

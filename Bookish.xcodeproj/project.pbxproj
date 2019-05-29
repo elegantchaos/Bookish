@@ -83,6 +83,8 @@
 		228968442191DDC200B80A93 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 228968432191DDC200B80A93 /* CloudKit.framework */; };
 		228968472191F48400B80A93 /* AuthorSelectionTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228968452191EFA900B80A93 /* AuthorSelectionTransformer.swift */; };
 		22905A6F2285D082001C308C /* LinkField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22905A6E2285D082001C308C /* LinkField.swift */; };
+		229106D2229EBF14002DB502 /* UITextBindings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229106D1229EBF14002DB502 /* UITextBindings.swift */; };
+		229106D3229EBF2F002DB502 /* TextBinding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D1B232217E42950062F2CB /* TextBinding.swift */; };
 		2295A9132232BCD70085CD86 /* DoubleClickAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2295A9122232BCD70085CD86 /* DoubleClickAction.swift */; };
 		2295A9312232C6A90085CD86 /* EntryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2295A9302232C6A90085CD86 /* EntryCell.swift */; };
 		22960328214025E80020B3EB /* RelationshipCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22960327214025E80020B3EB /* RelationshipCell.swift */; };
@@ -324,6 +326,7 @@
 		228968432191DDC200B80A93 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		228968452191EFA900B80A93 /* AuthorSelectionTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorSelectionTransformer.swift; sourceTree = "<group>"; };
 		22905A6E2285D082001C308C /* LinkField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkField.swift; sourceTree = "<group>"; };
+		229106D1229EBF14002DB502 /* UITextBindings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextBindings.swift; sourceTree = "<group>"; };
 		2295A9122232BCD70085CD86 /* DoubleClickAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleClickAction.swift; sourceTree = "<group>"; };
 		2295A9302232C6A90085CD86 /* EntryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryCell.swift; sourceTree = "<group>"; };
 		22960327214025E80020B3EB /* RelationshipCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelationshipCell.swift; sourceTree = "<group>"; };
@@ -611,7 +614,7 @@
 		227F450F2181EE08000D8B8D /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				22D1B232217E42950062F2CB /* TextBinding.swift */,
+				229106D1229EBF14002DB502 /* UITextBindings.swift */,
 				22B1DB402178D8A50067E795 /* ViewExtensions.swift */,
 				2237D404220368520033924F /* ButtonExtensions.swift */,
 				22E346072254F6D60089F300 /* BundleExtensions.swift */,
@@ -692,6 +695,7 @@
 		22DA6A4421E6531100ECF09A /* BookishCommon */ = {
 			isa = PBXGroup;
 			children = (
+				22D1B232217E42950062F2CB /* TextBinding.swift */,
 				22E345FF2254DCEB0089F300 /* CDECloudKitFileSystem.h */,
 				22E346002254DCEB0089F300 /* CDECloudKitFileSystem.m */,
 				22DA6A4521E6531100ECF09A /* BookishBridge.h */,
@@ -1140,6 +1144,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				22D1B23B21807D230062F2CB /* BookRow.swift in Sources */,
+				229106D2229EBF14002DB502 /* UITextBindings.swift in Sources */,
 				220EF17C2214782C0022F4D9 /* LinkButton.swift in Sources */,
 				22BE792322527632002EADD7 /* CandidateRow.swift in Sources */,
 				2203744E22340B7D004C8EC5 /* AuthorSelectionTransformer.swift in Sources */,
@@ -1210,6 +1215,7 @@
 				22DD42482126D6DA0070C85A /* Application.swift in Sources */,
 				225488DC21F20B2500EE8ECB /* RoleCell.swift in Sources */,
 				2250C71D21B83B5700E899E2 /* RegularExpressionExtensions.swift in Sources */,
+				229106D3229EBF2F002DB502 /* TextBinding.swift in Sources */,
 				22D1B24B2180E9060062F2CB /* SectionCell.swift in Sources */,
 				2251B7E7228EE021006C1529 /* TagsCell.swift in Sources */,
 				227F4514218352A0000D8B8D /* ImporterUIActions.swift in Sources */,
