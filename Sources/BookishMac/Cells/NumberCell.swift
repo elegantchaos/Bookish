@@ -1,10 +1,12 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-//  Created by Sam Deane on 10/09/2018.
-//  All code (c) 2018 - present day, Elegant Chaos Limited.
+//  Created by Sam Deane on 29/05/2019.
+//  All code (c) 2019 - present day, Elegant Chaos Limited.
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
-class DateCell: TransformedCell {
+import Foundation
+
+class NumberCell: TransformedCell {
     override var transformerName: String {
-        return "DateToString"
+        return "DoubleToString"
     }
 }

@@ -89,6 +89,8 @@
 		229106D7229EE896002DB502 /* DoubleTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229106D6229EE896002DB502 /* DoubleTransformer.swift */; };
 		229106D9229EEE94002DB502 /* Binder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229106D8229EEE94002DB502 /* Binder.swift */; };
 		229106DB229EEF6F002DB502 /* Selection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229106DA229EEF6F002DB502 /* Selection.swift */; };
+		229106DD229EF811002DB502 /* NumberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229106DC229EF811002DB502 /* NumberCell.swift */; };
+		229106DF229EF910002DB502 /* TransformedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229106DE229EF910002DB502 /* TransformedCell.swift */; };
 		2295A9132232BCD70085CD86 /* DoubleClickAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2295A9122232BCD70085CD86 /* DoubleClickAction.swift */; };
 		2295A9312232C6A90085CD86 /* EntryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2295A9302232C6A90085CD86 /* EntryCell.swift */; };
 		22960328214025E80020B3EB /* RelationshipCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22960327214025E80020B3EB /* RelationshipCell.swift */; };
@@ -335,6 +337,8 @@
 		229106D6229EE896002DB502 /* DoubleTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleTransformer.swift; sourceTree = "<group>"; };
 		229106D8229EEE94002DB502 /* Binder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Binder.swift; sourceTree = "<group>"; };
 		229106DA229EEF6F002DB502 /* Selection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Selection.swift; sourceTree = "<group>"; };
+		229106DC229EF811002DB502 /* NumberCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberCell.swift; sourceTree = "<group>"; };
+		229106DE229EF910002DB502 /* TransformedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformedCell.swift; sourceTree = "<group>"; };
 		2295A9122232BCD70085CD86 /* DoubleClickAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleClickAction.swift; sourceTree = "<group>"; };
 		2295A9302232C6A90085CD86 /* EntryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryCell.swift; sourceTree = "<group>"; };
 		22960327214025E80020B3EB /* RelationshipCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelationshipCell.swift; sourceTree = "<group>"; };
@@ -641,7 +645,9 @@
 				22D1B2422180CA9E0062F2CB /* BookCell.swift */,
 				2254895821F62DE300EE8ECB /* BookControlCell.swift */,
 				22D39E542146A84E00282467 /* DateCell.swift */,
+				229106DE229EF910002DB502 /* TransformedCell.swift */,
 				22D1B2482180D7B60062F2CB /* DetailCell.swift */,
+				229106DC229EF811002DB502 /* NumberCell.swift */,
 				226E8E8B21AC73D9001F191F /* DimensionsCell.swift */,
 				226E8E7021AC3D74001F191F /* EditableDateCell.swift */,
 				2295A9302232C6A90085CD86 /* EntryCell.swift */,
@@ -1236,6 +1242,7 @@
 				22A6D46E22256EAB0083D4E8 /* ScannerViewController.swift in Sources */,
 				228968472191F48400B80A93 /* AuthorSelectionTransformer.swift in Sources */,
 				2254895921F62DE300EE8ECB /* BookControlCell.swift in Sources */,
+				229106DF229EF910002DB502 /* TransformedCell.swift in Sources */,
 				22DE6AE72188A8DC0078D489 /* WhiteSearchFieldCell.swift in Sources */,
 				22E346012254DCEB0089F300 /* CDECloudKitFileSystem.m in Sources */,
 				22143FD3212F0F2500B689DF /* AuthorsTransformer.swift in Sources */,
@@ -1244,6 +1251,7 @@
 				221C4B35216BAAAC0086D56F /* RelationshipUIActions.swift in Sources */,
 				2295A9132232BCD70085CD86 /* DoubleClickAction.swift in Sources */,
 				22C893B92296E960001508C8 /* SearchActions.swift in Sources */,
+				229106DD229EF811002DB502 /* NumberCell.swift in Sources */,
 				2251B78D228EBF05006C1529 /* FilterActions.swift in Sources */,
 				2250C71621B7E01A00E899E2 /* SeriesScanner.swift in Sources */,
 				22143FCD212EE79100B689DF /* CollectionViewState.swift in Sources */,

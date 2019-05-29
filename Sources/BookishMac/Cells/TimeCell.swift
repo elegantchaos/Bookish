@@ -3,8 +3,8 @@
 //  All code (c) 2019 - present day, Elegant Chaos Limited.
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
-import Foundation
-
-class TimeCell: DateCell {
-    override var transformerName: String { return "TimeToString" }
+class TimeCell: TransformedCell {
+    override var transformerName: String {
+        return "TimeToString"
+    }
 }

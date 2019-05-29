@@ -1519,7 +1519,7 @@ Gw
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <tableView identifier="book-details" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="none" columnReordering="NO" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="24" rowSizeStyle="automatic" usesAutomaticRowHeights="YES" viewBased="YES" id="2eK-Gk-TD8" userLabel="Table">
-                                                        <rect key="frame" x="0.0" y="0.0" width="350" height="375"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="350" height="401"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <size key="intercellSpacing" width="3" height="2"/>
                                                         <color key="backgroundColor" name="Bookish Detail"/>
@@ -1724,8 +1724,35 @@ Gw
                                                                             <outlet property="textField" destination="JOA-TY-6BX" id="WYb-j7-6ig"/>
                                                                         </connections>
                                                                     </tableCellView>
-                                                                    <tableCellView identifier="relationship" id="Obe-M6-xbY" userLabel="relationship" customClass="RelationshipCell" customModule="Bookish" customModuleProvider="target">
+                                                                    <tableCellView identifier="number" id="B0y-7u-SOa" userLabel="number" customClass="NumberCell" customModule="Bookish" customModuleProvider="target">
                                                                         <rect key="frame" x="125" y="46" width="223" height="24"/>
+                                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                        <subviews>
+                                                                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="zw6-fP-RB6">
+                                                                                <rect key="frame" x="2" y="2" width="213" height="18"/>
+                                                                                <textFieldCell key="cell" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" alignment="left" placeholderString="number value" id="wC4-sl-ay2">
+                                                                                    <font key="font" metaFont="systemBold" size="14"/>
+                                                                                    <color key="textColor" name="Bookish Detail Text"/>
+                                                                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                                                </textFieldCell>
+                                                                                <connections>
+                                                                                    <binding destination="iPd-Ru-zxR" name="font" keyPath="self.cvm.detailFont" id="n7p-iV-nso"/>
+                                                                                    <outlet property="delegate" destination="B0y-7u-SOa" id="SPY-3Z-GTh"/>
+                                                                                </connections>
+                                                                            </textField>
+                                                                        </subviews>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="bottom" secondItem="zw6-fP-RB6" secondAttribute="bottom" constant="2" id="J8d-HB-vKi"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="zw6-fP-RB6" secondAttribute="trailing" constant="10" id="LVe-6E-PVA"/>
+                                                                            <constraint firstItem="zw6-fP-RB6" firstAttribute="top" secondItem="B0y-7u-SOa" secondAttribute="top" constant="4" id="PVh-Co-5hk"/>
+                                                                            <constraint firstItem="zw6-fP-RB6" firstAttribute="leading" secondItem="B0y-7u-SOa" secondAttribute="leading" constant="4" id="i0J-YW-lXM"/>
+                                                                        </constraints>
+                                                                        <connections>
+                                                                            <outlet property="textField" destination="zw6-fP-RB6" id="bZ2-J1-r55"/>
+                                                                        </connections>
+                                                                    </tableCellView>
+                                                                    <tableCellView identifier="relationship" id="Obe-M6-xbY" userLabel="relationship" customClass="RelationshipCell" customModule="Bookish" customModuleProvider="target">
+                                                                        <rect key="frame" x="125" y="72" width="223" height="24"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="8Gb-0S-SzA" customClass="LinkField" customModule="Bookish" customModuleProvider="target">
@@ -1774,7 +1801,7 @@ Gw
                                                                         </connections>
                                                                     </tableCellView>
                                                                     <tableCellView identifier="person" id="0U2-Rw-46u" userLabel="person" customClass="PersonCell" customModule="Bookish" customModuleProvider="target">
-                                                                        <rect key="frame" x="125" y="72" width="223" height="22"/>
+                                                                        <rect key="frame" x="125" y="98" width="223" height="22"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="Cvm-9v-lXb" customClass="LinkField" customModule="Bookish" customModuleProvider="target">
@@ -1800,7 +1827,7 @@ Gw
                                                                         </connections>
                                                                     </tableCellView>
                                                                     <tableCellView identifier="publisher" id="5Ra-ba-7w7" userLabel="publisher" customClass="PublisherCell" customModule="Bookish" customModuleProvider="target">
-                                                                        <rect key="frame" x="125" y="96" width="223" height="23"/>
+                                                                        <rect key="frame" x="125" y="122" width="223" height="23"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="q63-dF-QC4" customClass="LinkField" customModule="Bookish" customModuleProvider="target">
@@ -1847,7 +1874,7 @@ Gw
                                                                         </connections>
                                                                     </tableCellView>
                                                                     <tableCellView identifier="date" id="ph3-eN-NOK" userLabel="date" customClass="DateCell" customModule="Bookish" customModuleProvider="target">
-                                                                        <rect key="frame" x="125" y="121" width="223" height="24"/>
+                                                                        <rect key="frame" x="125" y="147" width="223" height="24"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="sbu-3d-sR8">
@@ -1874,7 +1901,7 @@ Gw
                                                                         </connections>
                                                                     </tableCellView>
                                                                     <tableCellView identifier="time" id="DvG-l5-t3c" userLabel="time" customClass="TimeCell" customModule="Bookish" customModuleProvider="target">
-                                                                        <rect key="frame" x="125" y="147" width="223" height="24"/>
+                                                                        <rect key="frame" x="125" y="173" width="223" height="24"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="3aI-AW-NdK">
@@ -1901,7 +1928,7 @@ Gw
                                                                         </connections>
                                                                     </tableCellView>
                                                                     <tableCellView identifier="editableDate" id="bf1-KR-OAm" userLabel="date editable" customClass="EditableDateCell" customModule="Bookish" customModuleProvider="target">
-                                                                        <rect key="frame" x="125" y="173" width="223" height="24"/>
+                                                                        <rect key="frame" x="125" y="199" width="223" height="24"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="FHu-L0-2fo" customClass="AnnotatedTextField" customModule="Bookish" customModuleProvider="target">
@@ -1941,7 +1968,7 @@ Gw
                                                                         </connections>
                                                                     </tableCellView>
                                                                     <tableCellView identifier="editableDimensions" id="OZV-07-tGS" userLabel="dimensions" customClass="DimensionsCell" customModule="Bookish" customModuleProvider="target">
-                                                                        <rect key="frame" x="125" y="199" width="223" height="24"/>
+                                                                        <rect key="frame" x="125" y="225" width="223" height="24"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <stackView distribution="equalCentering" orientation="horizontal" alignment="top" spacing="4" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YeD-9c-Svh">
@@ -2049,7 +2076,7 @@ Gw
                                                                         </connections>
                                                                     </tableCellView>
                                                                     <tableCellView identifier="series" id="X8k-lU-fh1" userLabel="series" customClass="SeriesCell" customModule="Bookish" customModuleProvider="target">
-                                                                        <rect key="frame" x="125" y="225" width="223" height="24"/>
+                                                                        <rect key="frame" x="125" y="251" width="223" height="24"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="251" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="V9b-km-eI4" userLabel="Name" customClass="LinkField" customModule="Bookish" customModuleProvider="target">
@@ -2117,7 +2144,7 @@ Gw
                                                                         </connections>
                                                                     </tableCellView>
                                                                     <tableCellView identifier="entry" id="0kY-If-jOa" userLabel="entry" customClass="EntryCell" customModule="Bookish" customModuleProvider="target">
-                                                                        <rect key="frame" x="125" y="251" width="223" height="24"/>
+                                                                        <rect key="frame" x="125" y="277" width="223" height="24"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="wP2-Ap-vn5" customClass="LinkField" customModule="Bookish" customModuleProvider="target">
@@ -2140,7 +2167,7 @@ Gw
                                                                         </connections>
                                                                     </tableCellView>
                                                                     <tableCellView identifier="book" id="YCW-gp-vkv" userLabel="book" customClass="BookCell" customModule="Bookish" customModuleProvider="target">
-                                                                        <rect key="frame" x="125" y="277" width="223" height="24"/>
+                                                                        <rect key="frame" x="125" y="303" width="223" height="24"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="8XU-ZR-Wgb" customClass="LinkField" customModule="Bookish" customModuleProvider="target">
@@ -2163,7 +2190,7 @@ Gw
                                                                         </connections>
                                                                     </tableCellView>
                                                                     <tableCellView identifier="section" id="amt-x4-xNy" userLabel="section" customClass="SectionCell" customModule="Bookish" customModuleProvider="target">
-                                                                        <rect key="frame" x="125" y="303" width="223" height="42"/>
+                                                                        <rect key="frame" x="125" y="329" width="223" height="42"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="YPE-nH-Ujd">
@@ -2192,7 +2219,7 @@ Gw
                                                                         </connections>
                                                                     </tableCellView>
                                                                     <tableCellView identifier="tags" id="c1W-dh-PWu" userLabel="tags" customClass="TagsCell" customModule="Bookish" customModuleProvider="target">
-                                                                        <rect key="frame" x="125" y="347" width="223" height="27"/>
+                                                                        <rect key="frame" x="125" y="373" width="223" height="27"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <tokenField verticalHuggingPriority="751" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="gIe-qP-Hs2">
@@ -2740,13 +2767,16 @@ Gw
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Bookish Index">
-            <color red="0.97299998998641968" green="0.97299998998641968" blue="0.98000001907348633" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.97254901960784312" green="0.97254901960784312" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Bookish Index Text">
+            <color red="0.3529999852180481" green="0.36899998784065247" blue="0.38400000333786011" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Bookish Index Text">
             <color red="0.3529999852180481" green="0.36899998784065247" blue="0.38400000333786011" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Bookish Label Text">
-            <color red="0.54100000858306885" green="0.55699998140335083" blue="0.57300001382827759" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.54117647058823526" green="0.55686274509803924" blue="0.5725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>

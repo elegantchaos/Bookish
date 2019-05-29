@@ -54,14 +54,14 @@ class IndexController: CollectionViewController {
     func bindSelectionValue(forKey key: String, to field: NSTextField, transformer: ValueTransformer? = nil, hideIfEmpty: Bool = false) -> Binder {
         let value = selection.value(forKey: key)
         field.placeholderString = "detail.\(key).placeholder".localized
-        let binder = NSTextFieldBinder(target: field, property: key, source: value, actionManager: application.actionManager, transformer: transformer)
+        let binder = NSTextFieldBinder(target: field, property: key, source: value, actionManager: application.actionManager, transformer: transformer, hideIfEmpty: hideIfEmpty)
         return binder
     }
 
     func bindSelectionValue(forKey key: String, to field: NSTextField, transformer transformerName: String, hideIfEmpty: Bool = false) -> Binder {
         let transformer = ValueTransformer(forName: NSValueTransformerName(rawValue: transformerName))
         let value = selection.value(forKey: key)
-        let binder = NSTextFieldBinder(target: field, property: key, source: value, actionManager: application.actionManager, transformer: transformer)
+        let binder = NSTextFieldBinder(target: field, property: key, source: value, actionManager: application.actionManager, transformer: transformer, hideIfEmpty: hideIfEmpty)
         return binder
     }
 
