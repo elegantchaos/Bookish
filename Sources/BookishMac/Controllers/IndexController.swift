@@ -18,7 +18,7 @@ enum SelectionValue {
 
 fileprivate var binderContext: Int = 0
 
-class BaseBinder: NSObject {
+class Binder: NSObject {
     let target: Any
     let property: String
     let source: SelectionValue
@@ -96,10 +96,9 @@ class BaseBinder: NSObject {
 
 }
 
-class Binder<T, V: Equatable>: BaseBinder {
+class TypedBinder<T, V: Equatable>: Binder {
     var current: V?
-
-    var specificTarget: T { return target as! T }
+    var typedTarget: T { return target as! T }
     
     init(target: T, property: String, source: SelectionValue, actionManager: ActionManager, transformer: ValueTransformer? = nil) {
         super.init(target: target, property: property, source: source, actionManager: actionManager)
@@ -126,31 +125,31 @@ class Binder<T, V: Equatable>: BaseBinder {
     }
 }
 
-class NSTextFieldBinder: Binder<NSTextField, String>, NSTextFieldDelegate {
+class NSTextFieldBinder: TypedBinder<NSTextField, String>, NSTextFieldDelegate {
     override func setEmpty() {
-        specificTarget.stringValue = ""
-        specificTarget.placeholderString = nil
+        typedTarget.stringValue = ""
+        typedTarget.placeholderString = nil
     }
     
     override func setMultiple() {
-        specificTarget.stringValue = ""
-        specificTarget.placeholderString = "Multiple values"
+        typedTarget.stringValue = ""
+        typedTarget.placeholderString = "Multiple values"
     }
     
     override func set(value: String) {
-        specificTarget.stringValue = value
+        typedTarget.stringValue = value
     }
     
     override func connect() {
-        specificTarget.delegate = self
+        typedTarget.delegate = self
     }
     
     override func disconnect() {
-        specificTarget.delegate = nil
+        typedTarget.delegate = nil
     }
     
     func controlTextDidEndEditing(_ obj: Notification) {
-        changed(newValue: specificTarget.stringValue)
+        changed(newValue: typedTarget.stringValue)
     }
 }
 
@@ -229,7 +228,7 @@ class IndexController: CollectionViewController {
         }
     }
 
-    func bindSelectionValue(forKey key: String, to field: NSTextField, transformer: ValueTransformer? = nil, hideIfEmpty: Bool = false) -> BaseBinder {
+    func bindSelectionValue(forKey key: String, to field: NSTextField, transformer: ValueTransformer? = nil, hideIfEmpty: Bool = false) -> Binder {
         let value = selectionValue(forKey: key)
         let binder = NSTextFieldBinder(target: field, property: key, source: value, actionManager: application.actionManager, transformer: transformer)
         return binder

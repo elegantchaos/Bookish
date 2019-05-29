@@ -52,7 +52,7 @@ class DetailController: CollectionViewController {
     var indexView: IndexController!
     var keyViewTimer: Timer? = nil
     var observers = [NSObjectProtocol]()
-    var binders: [BaseBinder] = []
+    var binders: [Binder] = []
     
     let doubleClickRecogniser = NSClickGestureRecognizer(target: self, action: #selector(textDoubleClick(_:)))
     let clickRecogniser = NSClickGestureRecognizer(target: self, action: #selector(chooseImage(_:)))
