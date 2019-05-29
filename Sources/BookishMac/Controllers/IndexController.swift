@@ -10,17 +10,99 @@ import BookishModel
 
 let indexChannel = Logger("Index")
 
+enum SelectionValue {
+    case noSelection
+    case multipleValues
+    case value(value: Any?, source: Any?)
+}
+
+fileprivate var binderContext: Int = 0
+
+protocol BinderTarget {
+    func set(value: Any?)
+    func setMultiple()
+    func setEmpty()
+    func connect(to: Binder)
+}
+
+extension NSTextField: BinderTarget {
+    func set(value: Any?) {
+        objectValue = value
+    }
+    func setMultiple() {
+        objectValue = nil
+        placeholderString = "Multiple Values"
+    }
+    func setEmpty() {
+        objectValue = nil
+        placeholderString = nil
+    }
+    func connect(to: Binder) {
+        if let connectable = to as? NSTextFieldDelegate {
+            delegate = connectable
+        }
+    }
+}
+
+class Binder<T, V>: NSObject {
+    let target: BinderTarget
+    let property: String
+    let source: SelectionValue
+    let actionManager: ActionManager
+    var current: Any? = nil
+    
+    init(target: BinderTarget, property: String, source: SelectionValue, actionManager: ActionManager) {
+        self.target = target
+        self.property = property
+        self.source = source
+        self.actionManager = actionManager
+        super.init()
+        
+        switch source {
+        case .noSelection:
+            target.setEmpty()
+            
+        case .multipleValues:
+            target.setMultiple()
+            
+        case .value(let value, let source):
+            target.set(value: value)
+            current = value
+            if let object = source as? NSObject {
+                object.addObserver(self, forKeyPath: property, options: [], context: &binderContext)
+            }
+        }
+    }
+    
+    deinit {
+        switch source {
+        case .value(_, let source):
+            if let object = source as? NSObject {
+                object.removeObserver(self, forKeyPath: property, context: &binderContext)
+            }
+        default:
+            break
+        }
+    }
+
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if context == &binderContext {
+            
+        } else {
+            super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
+        }
+    }
+    
+    func changed(newValue: Any?) {
+        ChangeValueAction.send("ChangeValue", from: target, manager: actionManager, property: property, value: newValue)
+    }
+}
+
 /**
  Index view controller, parameterised by the kind of thing it's indexing.
  */
 
 class IndexController: CollectionViewController {
-    
-    enum SelectionValue {
-        case noSelection
-        case multipleValues
-        case value(value: Any?)
-    }
     
     @IBOutlet weak var indexTable: NSTableView!
     @IBOutlet weak var indexView: NSScrollView!
@@ -48,8 +130,9 @@ class IndexController: CollectionViewController {
         case 0:
             return .noSelection
         case 1:
-            let value = selectedObjects.first!.value(forKey: key)
-            return .value(value: value)
+            let object = selectedObjects.first!
+            let value = object.value(forKey: key)
+            return .value(value: value, source: object)
         default:
             let value = selectedObjects.first!.value(forKey: key) as? NSObject
             for item in selectedObjects {
@@ -58,7 +141,7 @@ class IndexController: CollectionViewController {
                     return .multipleValues
                 }
             }
-            return .value(value: value)
+            return .value(value: value, source: nil)
         }
     }
     

@@ -85,6 +85,7 @@
 		22905A6F2285D082001C308C /* LinkField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22905A6E2285D082001C308C /* LinkField.swift */; };
 		229106D2229EBF14002DB502 /* UITextBindings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229106D1229EBF14002DB502 /* UITextBindings.swift */; };
 		229106D3229EBF2F002DB502 /* TextBinding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D1B232217E42950062F2CB /* TextBinding.swift */; };
+		229106D5229EC9A2002DB502 /* NSTextBindings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229106D4229EC9A2002DB502 /* NSTextBindings.swift */; };
 		2295A9132232BCD70085CD86 /* DoubleClickAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2295A9122232BCD70085CD86 /* DoubleClickAction.swift */; };
 		2295A9312232C6A90085CD86 /* EntryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2295A9302232C6A90085CD86 /* EntryCell.swift */; };
 		22960328214025E80020B3EB /* RelationshipCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22960327214025E80020B3EB /* RelationshipCell.swift */; };
@@ -327,6 +328,7 @@
 		228968452191EFA900B80A93 /* AuthorSelectionTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorSelectionTransformer.swift; sourceTree = "<group>"; };
 		22905A6E2285D082001C308C /* LinkField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkField.swift; sourceTree = "<group>"; };
 		229106D1229EBF14002DB502 /* UITextBindings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextBindings.swift; sourceTree = "<group>"; };
+		229106D4229EC9A2002DB502 /* NSTextBindings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSTextBindings.swift; sourceTree = "<group>"; };
 		2295A9122232BCD70085CD86 /* DoubleClickAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleClickAction.swift; sourceTree = "<group>"; };
 		2295A9302232C6A90085CD86 /* EntryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryCell.swift; sourceTree = "<group>"; };
 		22960327214025E80020B3EB /* RelationshipCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelationshipCell.swift; sourceTree = "<group>"; };
@@ -501,6 +503,7 @@
 				22429402212C3C7400E70510 /* ViewExtensions.swift */,
 				22DE6AE62188A8DC0078D489 /* WhiteSearchFieldCell.swift */,
 				22143FCE212EF9CC00B689DF /* WindowControllerWithViewModel.swift */,
+				229106D4229EC9A2002DB502 /* NSTextBindings.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -1242,6 +1245,7 @@
 				22F1845021CC10FF00220D20 /* ArrayControllerExtensions.swift in Sources */,
 				22D39E5B2146BE4900282467 /* DatePickerPopoverController.swift in Sources */,
 				22D39E532146A84500282467 /* AnnotatedTableCellView.swift in Sources */,
+				229106D5229EC9A2002DB502 /* NSTextBindings.swift in Sources */,
 				22115B00222D97C300C3F170 /* BarcodeScanner.swift in Sources */,
 				22F1EA9722958B380042C7EF /* ConfirmationAction.swift in Sources */,
 				22697A7E2289A03200E17B83 /* LateAutosavingWindowController.swift in Sources */,

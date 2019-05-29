@@ -44,17 +44,3 @@ class TextFieldBinding: TextBinding<UITextField>, UITextFieldDelegate {
         set(value) { target.text = value }
     }
 }
-
-class StringBinding: TextBinding<NSObject> {
-    let property: String
-    init(for target: NSObject, property: String, to source: NSObject, path: String, setIfNull: Bool = false) {
-        self.property = property
-        super.init(for: target, to: source, path: path, setIfNull: setIfNull)
-    }
-    
-    override var boundText: String {
-        get { return target.value(forKey: property) as? String ?? "" }
-        set(value) { target.setValue(value, forKey: property) }
-    }
-}
-
