@@ -62,7 +62,17 @@ class IndexController: CollectionViewController {
         }
     }
     
-    func copySelectionValue(forKey key: String, to field: NSTextField, transformer: ValueTransformer? = nil) {
+    func selectionSingleValue(forKey key: String) -> Any? {
+        let value = selectionValue(forKey: key)
+        switch value {
+        case .value(let value):
+            return value
+        default:
+            return nil
+        }
+    }
+    
+    func copySelectionValue(forKey key: String, to field: NSTextField, transformer: ValueTransformer? = nil, hideIfEmpty: Bool = false) {
         let value = selectionValue(forKey: key)
         switch value {
         case .value(let value):
@@ -71,6 +81,7 @@ class IndexController: CollectionViewController {
             } else {
                 field.objectValue = value
             }
+            field.isHidden = (hideIfEmpty && field.stringValue.isEmpty)
         case .multipleValues:
             field.placeholderString = "Multiple values"
             field.objectValue = nil
@@ -79,8 +90,8 @@ class IndexController: CollectionViewController {
         }
     }
 
-    func bindSelectionValue(forKey key: String, to field: NSTextField, transformer: ValueTransformer? = nil) {
-        copySelectionValue(forKey: key, to: field, transformer: transformer) // TODO: make this actually bind?
+    func bindSelectionValue(forKey key: String, to field: NSTextField, transformer: ValueTransformer? = nil, hideIfEmpty: Bool = false) {
+        copySelectionValue(forKey: key, to: field, transformer: transformer, hideIfEmpty: hideIfEmpty) // TODO: make this actually bind?
     }
     
     func unbindSelectionValue(forKey key: String, from field: NSTextField) {

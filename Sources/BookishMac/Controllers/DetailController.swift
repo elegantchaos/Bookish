@@ -143,31 +143,24 @@ class DetailController: CollectionViewController {
         return (all, common)
     }
     
-    fileprivate func updateTitle(for object: NSObject, visible: Bool) {
+    fileprivate func updateTitle(visible: Bool) {
         nameView.isHidden = !visible
         if visible {
             nameView.isEditable = source.isEditing
             if let path = source.titleProperty {
-                let value = object.value(forKey: path) as? NSObject
-                if value === NSMultipleValuesMarker {
-                    nameView.placeholderString = "multiple items selected"
-                    nameView.stringValue = ""
-                } else {
-                    nameView.objectValue = value
-                }
+                indexView.bindSelectionValue(forKey: path, to: nameView)
             }
             addDoubleClickUnlock(to: nameView)
         }
     }
     
-    fileprivate func updateSubtitle(for object: NSObject, visible: Bool) {
-        if visible, let value = object.value(forKey: "summary") as? String, source.isEditing || !value.isEmpty {
-            subtitleView.objectValue = value
-            subtitleView.isHidden = false
+    fileprivate func updateSubtitle(visible: Bool) {
+        subtitleView.isHidden = visible
+        if visible {
+            indexView.bindSelectionValue(forKey: "summary", to: subtitleView, hideIfEmpty: true)
             subtitleView.isEditable = source.isEditing
             addDoubleClickUnlock(to: subtitleView)
         } else {
-            subtitleView.isHidden = true
         }
     }
     
@@ -214,14 +207,14 @@ class DetailController: CollectionViewController {
         }
     }
     
-    fileprivate func updateImage(for object: NSObject, visible: Bool) {
+    fileprivate func updateImage(visible: Bool) {
         imageView.image = nil
         if visible {
-            if let data = object.value(forKey: "image") as? Data, let image = NSImage(data: data) {
+            if let data = indexView.selectionSingleValue(forKey: "image") as? Data, let image = NSImage(data: data) {
                 imageView.image = image
                 
             } else {
-                if let urlString = object.value(forKey: "imageURL") as? String, let url = URL(string: urlString) {
+                if let urlString = indexView.selectionSingleValue(forKey: "imageURL") as? String, let url = URL(string: urlString) {
                     application.imageCache.image(for: url) { (image) in
                         self.imageView.image = image
                         self.updateImageSize(visible: visible)
@@ -238,12 +231,10 @@ class DetailController: CollectionViewController {
         detailChannel.debug("selection changed")
         let selectedCount = indexView.selectionCount
         let showDetail = selectedCount > 0
-        if let object = indexView.selection.first {
-            updateTable(visible: showDetail)
-            updateTitle(for: object, visible: showDetail)
-            updateSubtitle(for: object, visible: showDetail)
-            updateImage(for: object, visible: showDetail)
-        }
+        updateTable(visible: showDetail)
+        updateTitle(visible: showDetail)
+        updateSubtitle(visible: showDetail)
+        updateImage(visible: showDetail)
 
         if let view = view.window?.contentView {
             application.actionManager.validateControls(of: view)
