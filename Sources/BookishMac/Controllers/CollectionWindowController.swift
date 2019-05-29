@@ -71,7 +71,7 @@ class CollectionWindowController: LateAutosavingWindowController, NSWindowDelega
         }
     }
     
-    func reveal(object: ModelObject, pushOntoStack: Bool = true, forEditing: Bool = false) {
+    func reveal(object: ModelObject, pushOntoStack: Bool = true, afterCreating: Bool = false) {
         let entityName = type(of:object).entityName
         if let index = indexControllers[entityName] as? IndexController {
             if pushOntoStack {
@@ -80,7 +80,16 @@ class CollectionWindowController: LateAutosavingWindowController, NSWindowDelega
             let mode = CollectionViewState.Mode.named(entityName)
             let modeChanged = mode != cvm.mode
             cvm.mode = mode
-            index.select(items: [object], forEditing: forEditing, forceUpdate: modeChanged)
+            if afterCreating {
+                index.postInsertion = {
+                    index.select(items: [object], forceUpdate: modeChanged)
+                    if !index.detailView.isEditing {
+                        self.application.actionManager.perform(identifier: "ToggleEditing")
+                    }
+                }
+            } else {
+                index.select(items: [object], forceUpdate: modeChanged)
+            }
         }
     }
     

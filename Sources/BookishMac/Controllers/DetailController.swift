@@ -67,10 +67,17 @@ class DetailController: CollectionViewController {
         source = entityType.getProvider()
         selectionChanged()
         view.isHidden = false
+        
+        // if we're editing, and the first responder is currently outside our view,
+        // select the name field; if something inside us is already selected, leave it alone
+        if editing && !view.contains(responder: view.window?.firstResponder) {
+            view.window?.makeFirstResponder(nameView)
+        }
     }
 
     func setupAsEmpty() {
         view.isHidden = true
+        editing = false
     }
     
     override func viewDidLoad() {
@@ -242,6 +249,10 @@ class DetailController: CollectionViewController {
 
         if let view = view.window?.contentView {
             application.actionManager.validateControls(of: view)
+        }
+        
+        if editing && !showDetail {
+            application.actionManager.perform(identifier: "ToggleEditing")
         }
     }
     

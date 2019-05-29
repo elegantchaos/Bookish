@@ -16,6 +16,20 @@ extension NSResponder {
     var application: Application {
         return NSApp.delegate as! Application
     }
+
+    /**
+     Does the chain from another responder include this one?
+    */
+    
+    func contains(responder: NSResponder?) -> Bool {
+        if responder == self {
+            return true
+        } else if responder == nil {
+            return false
+        } else {
+            return contains(responder: responder?.nextResponder)
+        }
+    }
 }
 
 extension NSViewController {
@@ -79,6 +93,5 @@ extension NSViewController {
         let sibling: T? = parent?.nearestIncludingParents(excluding: self)
         return sibling!
     }
-
 }
 

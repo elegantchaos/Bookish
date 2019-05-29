@@ -31,6 +31,8 @@ class IndexController: CollectionViewController {
     var entityType: ModelObject.Type = ModelObject.self
     var entityName: String = ""
     var selection = Selection<ModelObject>()
+    var postInsertion: Completion? = nil
+    
     private var fetcher: NSFetchedResultsController<ModelObject>? = nil
     
     func copySelectionValue(forKey key: String, to field: NSTextField, transformer: ValueTransformer? = nil, hideIfEmpty: Bool = false) {
@@ -150,12 +152,6 @@ class IndexController: CollectionViewController {
         context.info.addObserver(self)
     }
     
-    func selectionChanged() {
-        indexChannel.debug("\(entityType) selection changed")
-        updateDetailView()
-        updateVisibility()
-    }
-    
     func updateVisibility() {
         if objectCount == 0 {
             indexView.isHidden = true
@@ -182,7 +178,7 @@ class IndexController: CollectionViewController {
         indexSearchField.placeholderString = entityType.entityCount(objectCount, prefix: "search")
     }
     
-    func select(items: [ModelObject], forEditing: Bool = false, forceUpdate: Bool = false, completion: Completion? = nil) {
+    func select(items: [ModelObject], forceUpdate: Bool = false, completion: Completion? = nil) {
         indexChannel.log("Selecting \(items)")
         if items != selection.objects {
             selection.objects = items
@@ -190,13 +186,11 @@ class IndexController: CollectionViewController {
             indexTable.selectRowIndexes(indexes, byExtendingSelection: false)
             indexTable.scrollRowToVisible(indexes[indexes.startIndex])
             indexTable.scrollRowToVisible(indexes[indexes.endIndex])
+            updateDetailView()
+        } else if forceUpdate {
+            updateDetailView()
         }
         
-        if forEditing && !self.detailView.isEditing {
-            self.application.actionManager.perform(identifier: "ToggleEditing")
-        } else if forceUpdate {
-            self.updateDetailView()
-        }
         DispatchQueue.main.async {
             completion?()
         }
@@ -228,7 +222,9 @@ extension IndexController: NSTableViewDataSource, NSTableViewDelegate {
 
     func tableViewSelectionDidChange(_ notification: Notification) {
         selection.set(from: indexTable.selectedRowIndexes, of: objects)
-        selectionChanged()
+        indexChannel.debug("Selected \(selection.objects) (via table)")
+        updateDetailView()
+        updateVisibility()
     }
 }
 
@@ -245,7 +241,7 @@ extension IndexController: ActionContextProvider {
 extension IndexController: BookLifecycleObserver {
     func created(books: [Book]) {
         for book in books {
-            application.windowController.reveal(object: book, forEditing: true)
+            application.windowController.reveal(object: book, afterCreating: true)
         }
     }
     
@@ -255,7 +251,7 @@ extension IndexController: BookLifecycleObserver {
 
 extension IndexController: PersonLifecycleObserver {
     func created(person: Person) {
-        application.windowController.reveal(object: person, forEditing: true)
+        application.windowController.reveal(object: person, afterCreating: true)
     }
     
     func deleted(person: Person) {
@@ -264,7 +260,7 @@ extension IndexController: PersonLifecycleObserver {
 
 extension IndexController: PublisherLifecycleObserver {
     func created(publisher: Publisher) {
-        application.windowController.reveal(object: publisher, forEditing: true)
+        application.windowController.reveal(object: publisher, afterCreating: true)
     }
     
     func deleted(publisher: Publisher) {
@@ -273,7 +269,7 @@ extension IndexController: PublisherLifecycleObserver {
 
 extension IndexController: SeriesLifecycleObserver {
     func created(series: Series) {
-        application.windowController.reveal(object: series, forEditing: true)
+        application.windowController.reveal(object: series, afterCreating: true)
     }
     
     func deleted(series: Series) {
@@ -282,7 +278,7 @@ extension IndexController: SeriesLifecycleObserver {
 
 extension IndexController: RoleLifecycleObserver {
     func created(role: Role) {
-        application.windowController.reveal(object: role, forEditing: true)
+        application.windowController.reveal(object: role, afterCreating: true)
     }
     
     func deleted(role: Role) {
@@ -307,5 +303,44 @@ extension IndexController: FilterableView {
 }
 
 extension IndexController: NSFetchedResultsControllerDelegate {
-    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        switch type {
+        case .insert:
+            indexChannel.debug("\(entityType) inserted \(anObject)")
+            if let path = newIndexPath {
+                indexTable.insertRows(at: [path.item], withAnimation: .slideDown)
+                //                tableView.selectRow(at: path, animated: true, scrollPosition: .middle)
+            }
+            updateVisibility()
+            postInsertion?()
+            postInsertion = nil
+
+        case .delete:
+            indexChannel.debug("\(entityType) deleted \(anObject)")
+            if let path = indexPath {
+                indexTable.removeRows(at: [path.item], withAnimation: .effectFade)
+            }
+            updateVisibility()
+
+        case .update:
+            
+            if let indexPath = indexPath {
+                let row = indexPath.item
+                for column in 0..<indexTable.numberOfColumns {
+                    if let cell = indexTable.view(atColumn: column, row: row, makeIfNecessary: true) as? NSTableCellView {
+                        //                        configureCell(cell: cell, row: row, column: column)
+                    }
+                }
+            }
+            
+        case .move:
+            if let indexPath = indexPath, let newIndexPath = newIndexPath {
+                indexTable.removeRows(at: [indexPath.item], withAnimation: .effectFade)
+                indexTable.insertRows(at: [newIndexPath.item], withAnimation: .effectFade)
+            }
+            
+        default:
+            break
+        }
+    }
 }
