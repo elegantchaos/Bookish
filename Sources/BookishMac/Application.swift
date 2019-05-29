@@ -94,6 +94,8 @@ let updaterChannel = Logger("Updater")
         
         ValueTransformer.setValueTransformer(DateTransformer(timeStyle: .none), forName: NSValueTransformerName(rawValue: "DateToString"))
         ValueTransformer.setValueTransformer(DateTransformer(timeStyle: .short), forName: NSValueTransformerName(rawValue: "TimeToString"))
+        
+        ValueTransformer.setValueTransformer(DoubleTransformer(), forName: NSValueTransformerName(rawValue: "DoubleToString"))
     }
     
     fileprivate func setupWindow(for collection: SyncedCollection) {

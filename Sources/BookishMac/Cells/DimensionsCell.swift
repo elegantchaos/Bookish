@@ -26,33 +26,11 @@ class DimensionsCell: AnnotatedTableCellView, DetailTableCell {
     }
     
     func setupValue(field: NSTextField, property: String) {
-        detailView.indexView.bindSelectionValue(forKey: property, to: field)
-    }
-    
-    func updateValue(field: NSTextField, property: String) {
-        detailView.indexView.copySelectionValue(forKey: property, to: field)
-    }
-    
-    func cleanupValue(field: NSTextField, property: String) {
-        detailView.indexView.unbindSelectionValue(forKey: property, from: field)
-    }
-
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if context == &detailBindingContext {
-            updateValue(field: widthField, property: "width")
-            updateValue(field: heightField, property: "height")
-            updateValue(field: lengthField, property: "length")
-        }
+        let binder = detailView.indexView.bindSelectionValue(forKey: property, to: field, transformer: "DoubleToString")
+        detailView.binders.append(binder)
     }
     
     func keyView() -> NSView? {
         return textField
-    }
-    
-    override func prepareForReuse() {
-        cleanupValue(field: widthField, property: "width")
-        cleanupValue(field: heightField, property: "height")
-        cleanupValue(field: lengthField, property: "length")
-        super.prepareForReuse()
     }
 }

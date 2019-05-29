@@ -10,148 +10,9 @@ import BookishModel
 
 let indexChannel = Logger("Index")
 
-enum SelectionValue {
-    case noSelection
-    case multipleValues
-    case value(value: Any?, source: Any?)
-}
 
-fileprivate var binderContext: Int = 0
 
-class Binder: NSObject {
-    let target: Any
-    let property: String
-    let source: SelectionValue
-    let actionManager: ActionManager
-    let transformer: ValueTransformer?
 
-    init(target: Any, property: String, source: SelectionValue, actionManager: ActionManager, transformer: ValueTransformer? = nil) {
-        self.target = target
-        self.property = property
-        self.source = source
-        self.actionManager = actionManager
-        self.transformer = transformer
-        super.init()
-        
-        connect()
-        switch source {
-        case .noSelection:
-            setEmpty()
-            
-        case .multipleValues:
-            setMultiple()
-            
-        case .value(let value, let source):
-            set(untransformedValue: value)
-            if let object = source as? NSObject {
-                object.addObserver(self, forKeyPath: property, options: [], context: &binderContext)
-            }
-        }
-    }
-    
-    deinit {
-        disconnect()
-        switch source {
-        case .value(_, let source):
-            if let object = source as? NSObject {
-                object.removeObserver(self, forKeyPath: property, context: &binderContext)
-            }
-        default:
-            break
-        }
-    }
-    
-    func connect() {
-    }
-    
-    func disconnect() {
-    }
-    
-    func set(untransformedValue: Any?) {
-        let value = transformer == nil ? untransformedValue : transformer!.transformedValue(untransformedValue)
-        if let value = value {
-            set(value: value)
-        } else {
-            setEmpty()
-        }
-    }
-
-    func set(value: Any) {
-    }
-    
-    func setMultiple() {
-    }
-    
-    func setEmpty() {
-    }
-
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if context == &binderContext {
-            let value = (object as? NSObject)?.value(forKey: property)
-            set(untransformedValue: value)
-        } else {
-            super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
-        }
-    }
-
-}
-
-class TypedBinder<T, V: Equatable>: Binder {
-    var current: V?
-    var typedTarget: T { return target as! T }
-    
-    init(target: T, property: String, source: SelectionValue, actionManager: ActionManager, transformer: ValueTransformer? = nil) {
-        super.init(target: target, property: property, source: source, actionManager: actionManager)
-    }
-
-    override func set(value: Any) {
-        if let value = value as? V {
-            if value != current {
-                current = value
-                set(value: value)
-            }
-        } else {
-            setEmpty()
-        }
-    }
-    func set(value: V) {
-    }
-    
-    func changed(newValue: V) {
-        if current != newValue {
-            current = newValue
-            ChangeValueAction.send("ChangeValue", from: target, manager: actionManager, property: property, value: newValue)
-        }
-    }
-}
-
-class NSTextFieldBinder: TypedBinder<NSTextField, String>, NSTextFieldDelegate {
-    override func setEmpty() {
-        typedTarget.stringValue = ""
-        typedTarget.placeholderString = nil
-    }
-    
-    override func setMultiple() {
-        typedTarget.stringValue = ""
-        typedTarget.placeholderString = "Multiple values"
-    }
-    
-    override func set(value: String) {
-        typedTarget.stringValue = value
-    }
-    
-    override func connect() {
-        typedTarget.delegate = self
-    }
-    
-    override func disconnect() {
-        typedTarget.delegate = nil
-    }
-    
-    func controlTextDidEndEditing(_ obj: Notification) {
-        changed(newValue: typedTarget.stringValue)
-    }
-}
 
 /**
  Index view controller, parameterised by the kind of thing it's indexing.
@@ -169,49 +30,11 @@ class IndexController: CollectionViewController {
 
     var entityType: ModelObject.Type = ModelObject.self
     var entityName: String = ""
+    var selection = Selection<ModelObject>()
     private var fetcher: NSFetchedResultsController<ModelObject>? = nil
-    private var selectedObjects: [ModelObject] = []
-    
-    var selectionCount: Int {
-        return selectedObjects.count
-    }
-    
-    var selection: [ModelObject] {
-        return selectedObjects
-    }
-    
-    func selectionValue(forKey key: String) -> SelectionValue {
-        switch selectedObjects.count {
-        case 0:
-            return .noSelection
-        case 1:
-            let object = selectedObjects.first!
-            let value = object.value(forKey: key)
-            return .value(value: value, source: object)
-        default:
-            let value = selectedObjects.first!.value(forKey: key) as? NSObject
-            for item in selectedObjects {
-                let nextValue = item.value(forKey: key) as? NSObject
-                if nextValue != value {
-                    return .multipleValues
-                }
-            }
-            return .value(value: value, source: nil)
-        }
-    }
-    
-    func selectionSingleValue(forKey key: String) -> Any? {
-        let value = selectionValue(forKey: key)
-        switch value {
-        case .value(let value):
-            return value
-        default:
-            return nil
-        }
-    }
     
     func copySelectionValue(forKey key: String, to field: NSTextField, transformer: ValueTransformer? = nil, hideIfEmpty: Bool = false) {
-        let value = selectionValue(forKey: key)
+        let value = selection.value(forKey: key)
         switch value {
         case .value(let value):
             if let transformer = transformer {
@@ -229,10 +52,20 @@ class IndexController: CollectionViewController {
     }
 
     func bindSelectionValue(forKey key: String, to field: NSTextField, transformer: ValueTransformer? = nil, hideIfEmpty: Bool = false) -> Binder {
-        let value = selectionValue(forKey: key)
+        let value = selection.value(forKey: key)
+        field.placeholderString = "detail.\(key).placeholder".localized
         let binder = NSTextFieldBinder(target: field, property: key, source: value, actionManager: application.actionManager, transformer: transformer)
         return binder
     }
+
+    func bindSelectionValue(forKey key: String, to field: NSTextField, transformer transformerName: String, hideIfEmpty: Bool = false) -> Binder {
+        let transformer = ValueTransformer(forName: NSValueTransformerName(rawValue: transformerName))
+        let value = selection.value(forKey: key)
+        let binder = NSTextFieldBinder(target: field, property: key, source: value, actionManager: application.actionManager, transformer: transformer)
+        return binder
+    }
+
+
     
     func unbindSelectionValue(forKey key: String, from field: NSTextField) {
         // TODO: implement this
@@ -312,7 +145,7 @@ class IndexController: CollectionViewController {
     }
     
     func addContextForIndex(context: ActionContext) {
-        context.info[ActionContext.selectionKey] = selectedObjects
+        context.info[ActionContext.selectionKey] = selection.objects
         context[FilterActions.filterableKey] = self
         context.info.addObserver(self)
     }
@@ -339,11 +172,11 @@ class IndexController: CollectionViewController {
     }
     
     func updateDetailView() {
-        indexChannel.debug("showing detail for \(entityType): \(selectedObjects)")
+        indexChannel.debug("showing detail for \(entityType): \(selection)")
 
         detailView.setup(for: self, type: entityType)
         
-        let selectedCount = selectedObjects.count
+        let selectedCount = selection.count
         selectionLabel.stringValue = entityType.entityCount(objectCount, selected: selectedCount, prefix: "selected")
         selectionLabel.isHidden = selectedCount < 2
         indexSearchField.placeholderString = entityType.entityCount(objectCount, prefix: "search")
@@ -351,22 +184,21 @@ class IndexController: CollectionViewController {
     
     func select(items: [ModelObject], forEditing: Bool = false, forceUpdate: Bool = false, completion: Completion? = nil) {
         indexChannel.log("Selecting \(items)")
-        if items != selectedObjects {
-            selectedObjects = items
-            
-//            self.indexTable.r
-//            let selection = self.indexTable.selectedRowIndexes
-//            self.indexTable.scrollRowToVisible(selection[selection.startIndex])
-//            self.indexTable.scrollRowToVisible(selection[selection.endIndex])
-
-            if forEditing && !self.detailView.isEditing {
-                self.application.actionManager.perform(identifier: "ToggleEditing")
-            } else if forceUpdate {
-                self.updateDetailView()
-            }
-            DispatchQueue.main.async {
-                completion?()
-            }
+        if items != selection.objects {
+            selection.objects = items
+            let indexes = selection.indexes(in: objects)
+            indexTable.selectRowIndexes(indexes, byExtendingSelection: false)
+            indexTable.scrollRowToVisible(indexes[indexes.startIndex])
+            indexTable.scrollRowToVisible(indexes[indexes.endIndex])
+        }
+        
+        if forEditing && !self.detailView.isEditing {
+            self.application.actionManager.perform(identifier: "ToggleEditing")
+        } else if forceUpdate {
+            self.updateDetailView()
+        }
+        DispatchQueue.main.async {
+            completion?()
         }
     }
 }
@@ -395,10 +227,7 @@ extension IndexController: NSTableViewDataSource, NSTableViewDelegate {
     }
 
     func tableViewSelectionDidChange(_ notification: Notification) {
-        selectedObjects.removeAll()
-        for index in indexTable.selectedRowIndexes {
-            selectedObjects.append(objects[index])
-        }
+        selection.set(from: indexTable.selectedRowIndexes, of: objects)
         selectionChanged()
     }
 }

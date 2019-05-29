@@ -172,7 +172,7 @@ class DetailController: CollectionViewController {
             detailChannel.debug("filtering details")
 
             detailsTable.headerView?.isHidden = !cvm.showDebug
-            let selection = indexView.selection
+            let selection = indexView.selection.objects
             source.filter(for: selection, editing: editing, combining: true, context: cvm)
 
             detailsTable.reloadData()
@@ -213,11 +213,11 @@ class DetailController: CollectionViewController {
     fileprivate func updateImage(visible: Bool) {
         imageView.image = nil
         if visible {
-            if let data = indexView.selectionSingleValue(forKey: "image") as? Data, let image = NSImage(data: data) {
+            if let data = indexView.selection.singleValue(forKey: "image") as? Data, let image = NSImage(data: data) {
                 imageView.image = image
                 
             } else {
-                if let urlString = indexView.selectionSingleValue(forKey: "imageURL") as? String, let url = URL(string: urlString) {
+                if let urlString = indexView.selection.singleValue(forKey: "imageURL") as? String, let url = URL(string: urlString) {
                     application.imageCache.image(for: url) { (image) in
                         self.imageView.image = image
                         self.updateImageSize(visible: visible)
@@ -233,7 +233,7 @@ class DetailController: CollectionViewController {
     func selectionChanged() {
         detailChannel.debug("selection changed")
         binders.removeAll()
-        let selectedCount = indexView.selectionCount
+        let selectedCount = indexView.selection.count
         let showDetail = selectedCount > 0
         updateTable(visible: showDetail)
         updateTitle(visible: showDetail)
@@ -458,42 +458,4 @@ extension DetailController: BookChangeObserver {
         }
     }
 
-}
-
-
-extension DetailController: NSControlTextEditingDelegate {
-    func controlTextDidEndEditing(_ obj: Notification) {
-        if let field = obj.object as? NSTextField {
-            let property: String?
-            switch field {
-            case nameView:
-                property = source.titleProperty
-            default:
-                property = nil
-            }
-
-            if let property = property {
-                let newValue = field.stringValue
-                let oldValue = indexView.selectionValue(forKey: property)
-                let sendAction: Bool
-                switch oldValue {
-                case .value(value: let value):
-                    if let oldValue = value as? String {
-                        sendAction = oldValue != newValue
-                    } else {
-                        sendAction = false
-                    }
-                default:
-                    sendAction = false
-                }
-                
-                if sendAction {
-                    let info = ActionInfo(sender: field)
-                    info[ChangeValueAction.propertyKey] = property
-                    info[ChangeValueAction.valueKey] = field.stringValue
-                    application.actionManager.perform(identifier: "ChangeValue", info: info)
-                }
-            }
-        }
-    }
 }

@@ -21,7 +21,8 @@ extension DateCell: DetailTableCell {
             let item = row as? SimpleDetailItem {
             let binding = item.spec.binding
             subview.identifier = NSUserInterfaceItemIdentifier(rawValue: "date-detail-\(binding)")
-            index.bindSelectionValue(forKey: binding, to: subview, transformer: transformer)
+            let binder = index.bindSelectionValue(forKey: binding, to: subview, transformer: transformer)
+            view.binders.append(binder)
             view.addDoubleClickUnlock(to: subview)
         }
     }

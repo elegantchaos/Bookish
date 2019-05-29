@@ -86,6 +86,9 @@
 		229106D2229EBF14002DB502 /* UITextBindings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229106D1229EBF14002DB502 /* UITextBindings.swift */; };
 		229106D3229EBF2F002DB502 /* TextBinding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D1B232217E42950062F2CB /* TextBinding.swift */; };
 		229106D5229EC9A2002DB502 /* NSTextBindings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229106D4229EC9A2002DB502 /* NSTextBindings.swift */; };
+		229106D7229EE896002DB502 /* DoubleTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229106D6229EE896002DB502 /* DoubleTransformer.swift */; };
+		229106D9229EEE94002DB502 /* Binder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229106D8229EEE94002DB502 /* Binder.swift */; };
+		229106DB229EEF6F002DB502 /* Selection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229106DA229EEF6F002DB502 /* Selection.swift */; };
 		2295A9132232BCD70085CD86 /* DoubleClickAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2295A9122232BCD70085CD86 /* DoubleClickAction.swift */; };
 		2295A9312232C6A90085CD86 /* EntryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2295A9302232C6A90085CD86 /* EntryCell.swift */; };
 		22960328214025E80020B3EB /* RelationshipCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22960327214025E80020B3EB /* RelationshipCell.swift */; };
@@ -329,6 +332,9 @@
 		22905A6E2285D082001C308C /* LinkField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkField.swift; sourceTree = "<group>"; };
 		229106D1229EBF14002DB502 /* UITextBindings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextBindings.swift; sourceTree = "<group>"; };
 		229106D4229EC9A2002DB502 /* NSTextBindings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSTextBindings.swift; sourceTree = "<group>"; };
+		229106D6229EE896002DB502 /* DoubleTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleTransformer.swift; sourceTree = "<group>"; };
+		229106D8229EEE94002DB502 /* Binder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Binder.swift; sourceTree = "<group>"; };
+		229106DA229EEF6F002DB502 /* Selection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Selection.swift; sourceTree = "<group>"; };
 		2295A9122232BCD70085CD86 /* DoubleClickAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleClickAction.swift; sourceTree = "<group>"; };
 		2295A9302232C6A90085CD86 /* EntryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryCell.swift; sourceTree = "<group>"; };
 		22960327214025E80020B3EB /* RelationshipCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelationshipCell.swift; sourceTree = "<group>"; };
@@ -490,20 +496,22 @@
 				22D39E522146A84500282467 /* AnnotatedTableCellView.swift */,
 				22960329214032520020B3EB /* AnnotatedTextField.swift */,
 				22F1844F21CC10FF00220D20 /* ArrayControllerExtensions.swift */,
+				229106D8229EEE94002DB502 /* Binder.swift */,
 				225488DD21F2333100EE8ECB /* ColoredPopUpButton.swift */,
 				22143FD421300F9300B689DF /* CoreDataTransformers.swift */,
 				22D39E5A2146BE4900282467 /* DatePickerPopoverController.swift */,
 				2295A9122232BCD70085CD86 /* DoubleClickAction.swift */,
 				22697A7D2289A03200E17B83 /* LateAutosavingWindowController.swift */,
 				22905A6E2285D082001C308C /* LinkField.swift */,
+				229106D4229EC9A2002DB502 /* NSTextBindings.swift */,
 				2250C71C21B83B5700E899E2 /* RegularExpressionExtensions.swift */,
 				2250C71521B7E01A00E899E2 /* SeriesScanner.swift */,
+				229106DA229EEF6F002DB502 /* Selection.swift */,
 				22D39E5F2147D4A100282467 /* TestAction.swift */,
 				22D39E502142DB2700282467 /* ViewBasedToolbarItem.swift */,
 				22429402212C3C7400E70510 /* ViewExtensions.swift */,
 				22DE6AE62188A8DC0078D489 /* WhiteSearchFieldCell.swift */,
 				22143FCE212EF9CC00B689DF /* WindowControllerWithViewModel.swift */,
-				229106D4229EC9A2002DB502 /* NSTextBindings.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -691,6 +699,7 @@
 				22143FD2212F0F2500B689DF /* AuthorsTransformer.swift */,
 				228968452191EFA900B80A93 /* AuthorSelectionTransformer.swift */,
 				221F272821382C8E00DC2DC7 /* DateTransformer.swift */,
+				229106D6229EE896002DB502 /* DoubleTransformer.swift */,
 			);
 			path = Transformers;
 			sourceTree = "<group>";
@@ -1210,6 +1219,7 @@
 				2296032A214032520020B3EB /* AnnotatedTextField.swift in Sources */,
 				22F0CFD9228442E800B8B506 /* NavigationActions.swift in Sources */,
 				226E8E8C21AC73D9001F191F /* DimensionsCell.swift in Sources */,
+				229106DB229EEF6F002DB502 /* Selection.swift in Sources */,
 				22D1B2492180D7B60062F2CB /* DetailCell.swift in Sources */,
 				22DD424A2126D6DA0070C85A /* CollectionViewController.swift in Sources */,
 				2250C71421B596C700E899E2 /* SeriesCell.swift in Sources */,
@@ -1253,6 +1263,7 @@
 				22D39E602147D4A100282467 /* TestAction.swift in Sources */,
 				22462E932158ED5000A4C56C /* CollectionIndexViewController.swift in Sources */,
 				221F272921382C8E00DC2DC7 /* DateTransformer.swift in Sources */,
+				229106D9229EEE94002DB502 /* Binder.swift in Sources */,
 				22143FD521300F9300B689DF /* CoreDataTransformers.swift in Sources */,
 				225488DE21F2333100EE8ECB /* ColoredPopUpButton.swift in Sources */,
 				22D39E552146A84E00282467 /* DateCell.swift in Sources */,
@@ -1266,6 +1277,7 @@
 				22D1B2432180CA9E0062F2CB /* BookCell.swift in Sources */,
 				22429403212C3C7400E70510 /* ViewExtensions.swift in Sources */,
 				22D39E592146BA9C00282467 /* ShowDatePickerAction.swift in Sources */,
+				229106D7229EE896002DB502 /* DoubleTransformer.swift in Sources */,
 				22DA6A4721E653F400ECF09A /* SyncedCollection.swift in Sources */,
 				221B8538225E0BB800BC4D32 /* IndexCell.swift in Sources */,
 				226E8E6D21AC38D5001F191F /* HeadingCell.swift in Sources */,

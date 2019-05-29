@@ -11,7 +11,6 @@ fileprivate var detailBindingContext: Int = 0
 
 class DetailCell: AnnotatedTableCellView, DetailTableCell {
     var detailView: DetailController!
-    var observer: NSKeyValueObservation?
     var asNumber = false
     var originalValue = ""
     
@@ -32,56 +31,13 @@ class DetailCell: AnnotatedTableCellView, DetailTableCell {
             subview.identifier = NSUserInterfaceItemIdentifier(rawValue: "detail-\(binding)")
             subview.isEditable = view.editing
             objectValue = item.spec
-            updateValue()
             view.addDoubleClickUnlock(to: subview)
-            subview.placeholderString = "detail.\(binding).placeholder".localized
-        }
-    }
-    
-    func updateValue() {
-
-        if let subview = textField, let spec = objectValue as? DetailSpec {
-            detailView.indexView.copySelectionValue(forKey: spec.binding, to: subview)
-            let value = detailView.indexView.selectionValue(forKey: spec.binding)
-            switch value {
-            case .value(value: let value):
-                asNumber = ((value as? NSNumber) != nil)
-            default:
-                asNumber = false
-            }
+            let binder = detailView.indexView.bindSelectionValue(forKey: binding, to: subview)
+            detailView.binders.append(binder)
         }
     }
 
     func keyView() -> NSView? {
         return textField
-    }
-    
-    override func prepareForReuse() {
-        observer = nil
-        super.prepareForReuse()
-    }
-}
-
-extension DetailCell {
-    override func controlTextDidEndEditing(_ obj: Notification) {
-        if detailView.editing, let subview = textField, let detail = objectValue as? DetailSpec {
-            let value: Any
-            let changed: Bool
-            if asNumber {
-                let number = subview.doubleValue
-                changed = number != (originalValue as NSString).doubleValue
-                value = number
-            } else {
-                let string = subview.stringValue
-                changed = string != originalValue
-                value = string
-            }
-            
-            if changed {
-                ChangeValueAction.send("ChangeValue", from: self, manager: application.actionManager, property: detail.binding, value: value)
-            }
-
-        }
-        super.controlTextDidEndEditing(obj)
     }
 }

@@ -26,15 +26,15 @@ extension EditableDateCell: DetailTableCell {
     func setup(for row: DetailItem, of view: DetailController) {
         assert(row is SimpleDetailItem)
         if let subview = textField, let index = view.indexView,
-            let transformer = ValueTransformer(forName: NSValueTransformerName(rawValue: "DateToString")),
             let item = row as? SimpleDetailItem {
             binding = item.spec.binding
-            let unlocked = view.editing            
+            let unlocked = view.editing
             subview.isSelectable = unlocked
             subview.isEditable = unlocked
             subview.identifier = NSUserInterfaceItemIdentifier(rawValue: "date-detail-\(binding)")
-            index.bindSelectionValue(forKey: binding, to: subview, transformer: transformer)
-            objectValue = index.selection
+            let binder = index.bindSelectionValue(forKey: binding, to: subview, transformer: "DateToString")
+            view.binders.append(binder)
+            objectValue = index.selection.objects
         }
     }
     
