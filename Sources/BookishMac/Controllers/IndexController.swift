@@ -23,13 +23,14 @@ class BaseBinder: NSObject {
     let property: String
     let source: SelectionValue
     let actionManager: ActionManager
-    var current: Any? = nil
+    let transformer: ValueTransformer?
 
-    init(target: Any, property: String, source: SelectionValue, actionManager: ActionManager) {
+    init(target: Any, property: String, source: SelectionValue, actionManager: ActionManager, transformer: ValueTransformer? = nil) {
         self.target = target
         self.property = property
         self.source = source
         self.actionManager = actionManager
+        self.transformer = transformer
         super.init()
         
         connect()
@@ -41,12 +42,7 @@ class BaseBinder: NSObject {
             setMultiple()
             
         case .value(let value, let source):
-            if let value = value {
-                set(value: value)
-                current = value
-            } else {
-                setEmpty()
-            }
+            set(untransformedValue: value)
             if let object = source as? NSObject {
                 object.addObserver(self, forKeyPath: property, options: [], context: &binderContext)
             }
@@ -71,6 +67,15 @@ class BaseBinder: NSObject {
     func disconnect() {
     }
     
+    func set(untransformedValue: Any?) {
+        let value = transformer == nil ? untransformedValue : transformer!.transformedValue(untransformedValue)
+        if let value = value {
+            set(value: value)
+        } else {
+            setEmpty()
+        }
+    }
+
     func set(value: Any) {
     }
     
@@ -82,12 +87,8 @@ class BaseBinder: NSObject {
 
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if context == &binderContext {
-            if let object = object as? NSObject, let value = object.value(forKey: property) {
-                set(value: value)
-            } else {
-                setEmpty()
-                current = nil
-            }
+            let value = (object as? NSObject)?.value(forKey: property)
+            set(untransformedValue: value)
         } else {
             super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
         }
@@ -96,16 +97,17 @@ class BaseBinder: NSObject {
 }
 
 class Binder<T, V: Equatable>: BaseBinder {
+    var current: V?
+
     var specificTarget: T { return target as! T }
-    var specificCurrent: V? { return current as? V }
     
-    init(target: T, property: String, source: SelectionValue, actionManager: ActionManager) {
+    init(target: T, property: String, source: SelectionValue, actionManager: ActionManager, transformer: ValueTransformer? = nil) {
         super.init(target: target, property: property, source: source, actionManager: actionManager)
     }
 
     override func set(value: Any) {
         if let value = value as? V {
-            if value != specificCurrent {
+            if value != current {
                 current = value
                 set(value: value)
             }
@@ -117,7 +119,7 @@ class Binder<T, V: Equatable>: BaseBinder {
     }
     
     func changed(newValue: V) {
-        if specificCurrent != newValue {
+        if current != newValue {
             current = newValue
             ChangeValueAction.send("ChangeValue", from: target, manager: actionManager, property: property, value: newValue)
         }
@@ -229,7 +231,7 @@ class IndexController: CollectionViewController {
 
     func bindSelectionValue(forKey key: String, to field: NSTextField, transformer: ValueTransformer? = nil, hideIfEmpty: Bool = false) -> BaseBinder {
         let value = selectionValue(forKey: key)
-        let binder = NSTextFieldBinder(target: field, property: key, source: value, actionManager: application.actionManager)
+        let binder = NSTextFieldBinder(target: field, property: key, source: value, actionManager: application.actionManager, transformer: transformer)
         return binder
     }
     
