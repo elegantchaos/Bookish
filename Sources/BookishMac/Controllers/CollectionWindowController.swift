@@ -37,16 +37,14 @@ class CollectionWindowController: LateAutosavingWindowController, NSWindowDelega
         // push the selection from the initial index controller onto the navigation stack
         let name = cvm.mode.singularName()
         if let index = indexControllers[name] as? IndexController {
-            index.fetchIfNecessary() {
-                if let objects = index.indexArray.arrangedObjects as? Array<ModelObject>, let first = objects.first {
-                    self.cvm.navigationStack.push(first)
-                    index.select(items: [first], forceUpdate: true) {
-                        self.showWindow(self)
-                    }
-                } else {
-                    // we've got no objects
+            if let objects = index.indexArray.arrangedObjects as? Array<ModelObject>, let first = objects.first {
+                self.cvm.navigationStack.push(first)
+                index.select(items: [first], forceUpdate: true) {
                     self.showWindow(self)
                 }
+            } else {
+                // we've got no objects
+                self.showWindow(self)
             }
         }
     }

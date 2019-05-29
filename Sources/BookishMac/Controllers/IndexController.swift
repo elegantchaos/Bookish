@@ -25,26 +25,12 @@ class IndexController: CollectionViewController {
 
     typealias Completion = () -> Void
 
-    enum FetchState {
-        case unfetched
-        case fetching
-        case fetched
-    }
-    
-    class FetchSession {
-        var observer: NSKeyValueObservation? = nil
-    }
-    
-
     var entityType: ModelObject.Type = ModelObject.self
     var entityName: String = ""
     
     lazy var detailView: DetailController = nearestMatchingController()
     
     var observers: [NSKeyValueObservation] = []
-    var fetchCompletions: [Completion] = []
-    var fetchState: FetchState = .unfetched
-    var fetchObserver: NSKeyValueObservation? = nil
     
     override func windowDidLoad(_ window: NSWindowController, storyboard: NSStoryboard) {
         if let window = window as? CollectionWindowController {
@@ -68,7 +54,7 @@ class IndexController: CollectionViewController {
         title = entityType.entityTitle
         indexArray.entityName = entityName
         indexArray.sortDescriptors = [NSSortDescriptor(key: "sortName", ascending: true)]
-        
+        indexArray.fetch(self)
     }
     
     override func viewWillAppear() {
@@ -78,10 +64,7 @@ class IndexController: CollectionViewController {
             self.selectionChanged()
         }))
 
-        fetchIfNecessary() {
-            self.updateVisibility()
-        }
-        
+        self.updateVisibility()
         super.viewWillAppear()
     }
     
@@ -101,44 +84,6 @@ class IndexController: CollectionViewController {
     func completeOnMainThread(completion: Completion?) {
         if let completion = completion {
             DispatchQueue.main.async(execute: completion)
-        }
-    }
-    
-    func fetchIfNecessary(then completion: Completion? = nil) {
-        DispatchQueue.main.async {
-            self.fetchOnMainThread(then: completion)
-        }
-    }
-    
-    func fetchOnMainThread(then completion: Completion? = nil) {
-        switch self.fetchState {
-        case .fetched:
-            assert(fetchCompletions.count == 0)
-            completion?()
-            
-        case .fetching:
-            assert(fetchCompletions.count > 0)
-            if let completion = completion {
-                fetchCompletions.append(completion)
-            }
-            
-        case .unfetched:
-            indexChannel.debug("\(entityType) fetching data")
-            assert(fetchCompletions.count == 0)
-            if let completion = completion {
-                fetchCompletions.append(completion)
-            }
-            fetchObserver = indexArray.observe(\NSArrayController.content) { (value, change) in
-                DispatchQueue.main.async {
-                    self.fetchState = .fetched
-                    for completion in self.fetchCompletions {
-                        completion()
-                    }
-                    self.fetchCompletions.removeAll()
-                }
-            }
-            fetchState = .fetching
-            indexArray.fetch(self)
         }
     }
     
@@ -184,20 +129,18 @@ class IndexController: CollectionViewController {
     }
     
     func select(items: [ModelObject], forEditing: Bool = false, forceUpdate: Bool = false, completion: Completion? = nil) {
-        fetchIfNecessary {
-            indexChannel.log("Selecting \(items)")
-            self.indexArray.setSelectedObjects(items)
-            let selection = self.indexTable.selectedRowIndexes
-            self.indexTable.scrollRowToVisible(selection[selection.startIndex])
-            self.indexTable.scrollRowToVisible(selection[selection.endIndex])
-            if forEditing && !self.detailView.isEditing {
-                self.application.actionManager.perform(identifier: "ToggleEditing")
-            } else if forceUpdate {
-                self.updateDetailView()
-            }
-            DispatchQueue.main.async {
-                completion?()
-            }
+        indexChannel.log("Selecting \(items)")
+        self.indexArray.setSelectedObjects(items)
+        let selection = self.indexTable.selectedRowIndexes
+        self.indexTable.scrollRowToVisible(selection[selection.startIndex])
+        self.indexTable.scrollRowToVisible(selection[selection.endIndex])
+        if forEditing && !self.detailView.isEditing {
+            self.application.actionManager.perform(identifier: "ToggleEditing")
+        } else if forceUpdate {
+            self.updateDetailView()
+        }
+        DispatchQueue.main.async {
+            completion?()
         }
     }
 }
