@@ -18,56 +18,35 @@ enum SelectionValue {
 
 fileprivate var binderContext: Int = 0
 
-protocol BinderTarget {
-    func set(value: Any?)
-    func setMultiple()
-    func setEmpty()
-    func connect(to: Binder)
-}
-
-extension NSTextField: BinderTarget {
-    func set(value: Any?) {
-        objectValue = value
-    }
-    func setMultiple() {
-        objectValue = nil
-        placeholderString = "Multiple Values"
-    }
-    func setEmpty() {
-        objectValue = nil
-        placeholderString = nil
-    }
-    func connect(to: Binder) {
-        if let connectable = to as? NSTextFieldDelegate {
-            delegate = connectable
-        }
-    }
-}
-
-class Binder<T, V>: NSObject {
-    let target: BinderTarget
+class BaseBinder: NSObject {
+    let target: Any
     let property: String
     let source: SelectionValue
     let actionManager: ActionManager
     var current: Any? = nil
-    
-    init(target: BinderTarget, property: String, source: SelectionValue, actionManager: ActionManager) {
+
+    init(target: Any, property: String, source: SelectionValue, actionManager: ActionManager) {
         self.target = target
         self.property = property
         self.source = source
         self.actionManager = actionManager
         super.init()
         
+        connect()
         switch source {
         case .noSelection:
-            target.setEmpty()
+            setEmpty()
             
         case .multipleValues:
-            target.setMultiple()
+            setMultiple()
             
         case .value(let value, let source):
-            target.set(value: value)
-            current = value
+            if let value = value {
+                set(value: value)
+                current = value
+            } else {
+                setEmpty()
+            }
             if let object = source as? NSObject {
                 object.addObserver(self, forKeyPath: property, options: [], context: &binderContext)
             }
@@ -75,6 +54,7 @@ class Binder<T, V>: NSObject {
     }
     
     deinit {
+        disconnect()
         switch source {
         case .value(_, let source):
             if let object = source as? NSObject {
@@ -84,17 +64,91 @@ class Binder<T, V>: NSObject {
             break
         }
     }
+    
+    func connect() {
+    }
+    
+    func disconnect() {
+    }
+    
+    func set(value: Any) {
+    }
+    
+    func setMultiple() {
+    }
+    
+    func setEmpty() {
+    }
 
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if context == &binderContext {
-            
+            if let object = object as? NSObject, let value = object.value(forKey: property) {
+                set(value: value)
+            } else {
+                setEmpty()
+                current = nil
+            }
         } else {
             super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
         }
     }
+
+}
+
+class Binder<T, V: Equatable>: BaseBinder {
+    var specificTarget: T { return target as! T }
+    var specificCurrent: V? { return current as? V }
     
-    func changed(newValue: Any?) {
-        ChangeValueAction.send("ChangeValue", from: target, manager: actionManager, property: property, value: newValue)
+    init(target: T, property: String, source: SelectionValue, actionManager: ActionManager) {
+        super.init(target: target, property: property, source: source, actionManager: actionManager)
+    }
+
+    override func set(value: Any) {
+        if let value = value as? V {
+            if value != specificCurrent {
+                current = value
+                set(value: value)
+            }
+        } else {
+            setEmpty()
+        }
+    }
+    func set(value: V) {
+    }
+    
+    func changed(newValue: V) {
+        if specificCurrent != newValue {
+            current = newValue
+            ChangeValueAction.send("ChangeValue", from: target, manager: actionManager, property: property, value: newValue)
+        }
+    }
+}
+
+class NSTextFieldBinder: Binder<NSTextField, String>, NSTextFieldDelegate {
+    override func setEmpty() {
+        specificTarget.stringValue = ""
+        specificTarget.placeholderString = nil
+    }
+    
+    override func setMultiple() {
+        specificTarget.stringValue = ""
+        specificTarget.placeholderString = "Multiple values"
+    }
+    
+    override func set(value: String) {
+        specificTarget.stringValue = value
+    }
+    
+    override func connect() {
+        specificTarget.delegate = self
+    }
+    
+    override func disconnect() {
+        specificTarget.delegate = nil
+    }
+    
+    func controlTextDidEndEditing(_ obj: Notification) {
+        changed(newValue: specificTarget.stringValue)
     }
 }
 
@@ -173,8 +227,10 @@ class IndexController: CollectionViewController {
         }
     }
 
-    func bindSelectionValue(forKey key: String, to field: NSTextField, transformer: ValueTransformer? = nil, hideIfEmpty: Bool = false) {
-        copySelectionValue(forKey: key, to: field, transformer: transformer, hideIfEmpty: hideIfEmpty) // TODO: make this actually bind?
+    func bindSelectionValue(forKey key: String, to field: NSTextField, transformer: ValueTransformer? = nil, hideIfEmpty: Bool = false) -> BaseBinder {
+        let value = selectionValue(forKey: key)
+        let binder = NSTextFieldBinder(target: field, property: key, source: value, actionManager: application.actionManager)
+        return binder
     }
     
     func unbindSelectionValue(forKey key: String, from field: NSTextField) {

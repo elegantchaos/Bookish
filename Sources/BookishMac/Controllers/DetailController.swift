@@ -52,6 +52,7 @@ class DetailController: CollectionViewController {
     var indexView: IndexController!
     var keyViewTimer: Timer? = nil
     var observers = [NSObjectProtocol]()
+    var binders: [BaseBinder] = []
     
     let doubleClickRecogniser = NSClickGestureRecognizer(target: self, action: #selector(textDoubleClick(_:)))
     let clickRecogniser = NSClickGestureRecognizer(target: self, action: #selector(chooseImage(_:)))
@@ -148,7 +149,8 @@ class DetailController: CollectionViewController {
         if visible {
             nameView.isEditable = source.isEditing
             if let path = source.titleProperty {
-                indexView.bindSelectionValue(forKey: path, to: nameView)
+                let binder = indexView.bindSelectionValue(forKey: path, to: nameView)
+                binders.append(binder)
             }
             addDoubleClickUnlock(to: nameView)
         }
@@ -157,7 +159,8 @@ class DetailController: CollectionViewController {
     fileprivate func updateSubtitle(visible: Bool) {
         subtitleView.isHidden = visible
         if visible {
-            indexView.bindSelectionValue(forKey: "summary", to: subtitleView, hideIfEmpty: true)
+            let binder = indexView.bindSelectionValue(forKey: "summary", to: subtitleView, hideIfEmpty: true)
+            binders.append(binder)
             subtitleView.isEditable = source.isEditing
             addDoubleClickUnlock(to: subtitleView)
         } else {
@@ -229,6 +232,7 @@ class DetailController: CollectionViewController {
     
     func selectionChanged() {
         detailChannel.debug("selection changed")
+        binders.removeAll()
         let selectedCount = indexView.selectionCount
         let showDetail = selectedCount > 0
         updateTable(visible: showDetail)
