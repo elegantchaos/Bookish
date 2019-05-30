@@ -33,7 +33,7 @@ class DateTransformer: ValueTransformer {
     
     override func reverseTransformedValue(_ value: Any?) -> Any? {
         guard let string = value as? String else {
-            return value
+            return nil
         }
         
         if let date = formatter.date(from: string) {
@@ -46,7 +46,7 @@ class DateTransformer: ValueTransformer {
             }
         }
         
-        return value
+        return nil
     }
     
 }

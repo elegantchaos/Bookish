@@ -17,7 +17,7 @@ class DoubleTransformer: ValueTransformer {
         } else if let number = value as? Double {
             return "\(number)"
         } else {
-            return value
+            return nil
         }
     }
     
@@ -25,7 +25,7 @@ class DoubleTransformer: ValueTransformer {
         if let string = value as? NSString {
             return string.doubleValue
         } else {
-            return value
+            return nil
         }
     }
     

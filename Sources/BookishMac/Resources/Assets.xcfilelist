@@ -13,10 +13,8 @@ Sources/BookishMac/Resources/Assets.xcassets/Series.imageset/Series@3x.png
 Sources/BookishMac/Resources/Assets.xcassets/RolePlaceholder.imageset/RolePlaceholder.png
 Sources/BookishMac/Resources/Assets.xcassets/RolePlaceholder.imageset/RolePlaceholder@2x.png
 Sources/BookishMac/Resources/Assets.xcassets/RolePlaceholder.imageset/RolePlaceholder@3x.png
-Sources/BookishMac/Resources/Assets.xcassets/BookPlaceholder.imageset/BookPlaceholder Copy@2x.png
-Sources/BookishMac/Resources/Assets.xcassets/BookPlaceholder.imageset/BookPlaceholder Copy@3x.png
+Sources/BookishMac/Resources/Assets.xcassets/RolePlaceholder.imageset/Contents.json
 Sources/BookishMac/Resources/Assets.xcassets/BookPlaceholder.imageset/BookPlaceholder@3x.png
-Sources/BookishMac/Resources/Assets.xcassets/BookPlaceholder.imageset/BookPlaceholder Copy.png
 Sources/BookishMac/Resources/Assets.xcassets/BookPlaceholder.imageset/BookPlaceholder@2x.png
 Sources/BookishMac/Resources/Assets.xcassets/BookPlaceholder.imageset/BookPlaceholder.png
 Sources/BookishMac/Resources/Assets.xcassets/BookPlaceholder.imageset/Contents.json
@@ -24,20 +22,16 @@ Sources/BookishMac/Resources/Assets.xcassets/Plus.imageset/Plus.png
 Sources/BookishMac/Resources/Assets.xcassets/Plus.imageset/Plus@2x.png
 Sources/BookishMac/Resources/Assets.xcassets/Plus.imageset/Plus@3x.png
 Sources/BookishMac/Resources/Assets.xcassets/Plus.imageset/Contents.json
-Sources/BookishMac/Resources/Assets.xcassets/PublisherPlaceholder.imageset/PublisherPlaceholder Copy.png
 Sources/BookishMac/Resources/Assets.xcassets/PublisherPlaceholder.imageset/PublisherPlaceholder@2x.png
 Sources/BookishMac/Resources/Assets.xcassets/PublisherPlaceholder.imageset/PublisherPlaceholder@3x.png
 Sources/BookishMac/Resources/Assets.xcassets/PublisherPlaceholder.imageset/Contents.json
 Sources/BookishMac/Resources/Assets.xcassets/PublisherPlaceholder.imageset/PublisherPlaceholder.png
-Sources/BookishMac/Resources/Assets.xcassets/PublisherPlaceholder.imageset/PublisherPlaceholder Copy@3x.png
-Sources/BookishMac/Resources/Assets.xcassets/PublisherPlaceholder.imageset/PublisherPlaceholder Copy@2x.png
 Sources/BookishMac/Resources/Assets.xcassets/Person.imageset/Person.png
 Sources/BookishMac/Resources/Assets.xcassets/Person.imageset/Contents.json
 Sources/BookishMac/Resources/Assets.xcassets/Person.imageset/Person@3x.png
 Sources/BookishMac/Resources/Assets.xcassets/Person.imageset/Person@2x.png
 Sources/BookishMac/Resources/Assets.xcassets/AppIcon.appiconset/Icon16.png
 Sources/BookishMac/Resources/Assets.xcassets/AppIcon.appiconset/Icon1024.png
-Sources/BookishMac/Resources/Assets.xcassets/AppIcon.appiconset/.DS_Store
 Sources/BookishMac/Resources/Assets.xcassets/AppIcon.appiconset/Icon512.png
 Sources/BookishMac/Resources/Assets.xcassets/AppIcon.appiconset/Icon128.png
 Sources/BookishMac/Resources/Assets.xcassets/AppIcon.appiconset/Icon64.png
@@ -53,6 +47,7 @@ Sources/BookishMac/Resources/Assets.xcassets/Reveal.imageset/Contents.json
 Sources/BookishMac/Resources/Assets.xcassets/Reveal.imageset/Reveal@2x.png
 Sources/BookishMac/Resources/Assets.xcassets/Reveal.imageset/Reveal.png
 Sources/BookishMac/Resources/Assets.xcassets/Colours/Bookish Label Text.colorset/Contents.json
+Sources/BookishMac/Resources/Assets.xcassets/Colours/Bookish Index Text Selected.colorset/Contents.json
 Sources/BookishMac/Resources/Assets.xcassets/Colours/Bookish Index.colorset/Contents.json
 Sources/BookishMac/Resources/Assets.xcassets/Colours/Bookish Text.colorset/Contents.json
 Sources/BookishMac/Resources/Assets.xcassets/Colours/Bookish Detail.colorset/Contents.json

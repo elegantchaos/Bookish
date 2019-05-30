@@ -126,7 +126,7 @@ class TypedBinder<T, V: Equatable>: Binder {
     func changed(newValue: V) {
         if current != newValue {
             current = newValue
-            let transformed = transformer == nil ? newValue : transformer!.reverseTransformedValue(newValue)!
+            let transformed = transformer == nil ? newValue : transformer!.reverseTransformedValue(newValue)
             ChangeValueAction.send("ChangeValue", from: target, manager: actionManager, property: property, value: transformed)
         }
     }
