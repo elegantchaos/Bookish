@@ -12,8 +12,12 @@ import CoreSpotlight
 let searchChannel = Channel("com.elegantchaos.bookish.Search")
 
 class SearchViewController: NSViewController {
+    enum SearchMode {
+        case basic
+        case advanced
+    }
     
-    static let candidateViewID = NSUserInterfaceItemIdentifier(rawValue: "candidate")
+    static let resultViewID = NSUserInterfaceItemIdentifier(rawValue: "result")
     
     @IBOutlet weak var statusLabel: NSTextField!
     @IBOutlet weak var statusSpinner: NSProgressIndicator!
@@ -28,6 +32,8 @@ class SearchViewController: NSViewController {
     var fetcher: NSFetchedResultsController<ModelObject>? = nil
     var searcher: CSSearchQuery? = nil
     var results: [ModelObject] = []
+    var mode: SearchMode = .basic
+    var tableUpdater: FetchedResultsTableUpdater? = nil
     
     @objc var gotSearchText: Bool {
         return !searchField.stringValue.isEmpty
@@ -42,6 +48,7 @@ class SearchViewController: NSViewController {
         
         statusLabel.stringValue = "search.initial".localized
         candidatesScrollView.isHidden = true
+        predicateEditor.isHidden = mode == .basic
         
         if let context = application.viewModel?.managedObjectContext {
             
@@ -83,14 +90,65 @@ class SearchViewController: NSViewController {
     }
     
     override func viewWillDisappear() {
+        searcher?.cancel()
+        searcher = nil
+        fetcher = nil
         candidatesTable.delegate = nil
         candidatesTable.dataSource = nil
         lookup = nil
     }
     
-    func search(for string: String) {
-        search = string
-        
+    func startSearch() {
+        switch mode {
+        case .basic:
+            startBasicSearch()
+
+        case .advanced:
+            startAdvancedSearch()
+        }
+    }
+    
+    func startBasicSearch() {
+        searcher?.cancel()
+        guard let model = application.viewModel else {
+            searchChannel.fatal("missing model")
+        }
+
+        let context = model.managedObjectContext
+        let string = searchField.stringValue
+        var value = string
+        if !value.contains("*") {
+            value = "*\(value)*"
+        }
+        let query = "name == \"\(value)\"cd"
+        let searcher = CSSearchQuery(queryString: query, attributes: [])
+        searcher.foundItemsHandler = { items in
+            var newResults: Set<ModelObject> = []
+            for item in items {
+                if let object = context.object(uri: item.uniqueIdentifier) as? ModelObject {
+                    newResults.insert(object)
+                }
+            }
+            DispatchQueue.main.async {
+                self.candidatesScrollView.isHidden = false
+                let count = self.results.count
+                let additions = newResults.subtracting(self.results)
+//                let indexes = IndexSet(integersIn: Range<IndexSet.Element>(uncheckedBounds: (count, count + additions.count - 1)))
+                self.results.append(contentsOf: additions)
+//                self.candidatesTable.insertRows(at: indexes, withAnimation: .slideDown)
+                self.candidatesTable.reloadData()
+            }
+        }
+
+        searchChannel.log("starting basic search for \(value)")
+        results.removeAll()
+        candidatesTable.reloadData()
+        searcher.start()
+        self.searcher = searcher
+        self.search = string
+    }
+    
+    func startAdvancedSearch() {
         guard let model = application.viewModel else {
             searchChannel.fatal("missing model")
         }
@@ -108,18 +166,6 @@ class SearchViewController: NSViewController {
             let newFormat = format.replacingOccurrences(of: "any field", with: "name")
             predicate = NSPredicate(format: newFormat)
         }
-
-        var value = searchField.stringValue
-        if !value.contains("*") {
-            value = "*\(value)*"
-        }
-        let query = "name == \"\(value)\"cd"
-        let searcher = CSSearchQuery(queryString: query, attributes: [])
-        searcher.foundItemsHandler = { items in
-            print("found \(items)")
-        }
-        searcher.start()
-        self.searcher = searcher
         
         let request = NSFetchRequest<ModelObject>()
         request.entity = context.persistentStoreCoordinator?.managedObjectModel.entitiesByName[entityName]
@@ -131,6 +177,7 @@ class SearchViewController: NSViewController {
         controller.delegate = self
         fetcher = controller
         do {
+            searchChannel.log("starting advanced search for \(predicate!)")
             try controller.performFetch()
             self.candidatesTable.reloadData()
             self.candidatesScrollView.isHidden = false
@@ -139,36 +186,36 @@ class SearchViewController: NSViewController {
         }
     }
     
-    
     @IBAction func doSearch(_ sender: Any) {
-        let string = searchField.stringValue
-//        if search != string {
-            search(for: string)
-//        }
+        startSearch()
     }
 }
 
 extension SearchViewController: NSTableViewDelegate, NSTableViewDataSource {
     func numberOfRows(in tableView: NSTableView) -> Int {
-        guard let sections = fetcher?.sections, sections.count > 0 else {
-            return 0
+        let count: Int
+        if let sections = fetcher?.sections, sections.count > 0 {
+            count = sections[0].numberOfObjects
+            searchChannel.debug("got \(count) advanced results")
+        } else {
+            count = results.count
+            searchChannel.debug("got \(count) simple results")
         }
         
-        return sections[0].numberOfObjects
+        return count
     }
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        guard let sections = fetcher?.sections, sections.count > 0 else {
-            return nil
+        let object: ModelObject
+        
+        if let fetcher = fetcher, let sections = fetcher.sections, sections.count > 0 {
+            object = fetcher.object(at: IndexPath(item: row, section: 0))
+        } else {
+            object = results[row]
         }
         
-        let view = tableView.makeView(withIdentifier: SearchViewController.candidateViewID, owner: self) as! ScannerCandidateCell
-        let item = fetcher?.object(at: IndexPath(item: row, section: 0))
-        if let name = item?.value(forKey: "name") as? String {
-            view.titleField.stringValue = name
-        }
-        //        view.setup(with: candidate)
-        
+        let view = tableView.makeView(withIdentifier: SearchViewController.resultViewID, owner: self) as! SearchResultCell
+        view.setup(for: object)
         return view
     }
 }
@@ -195,63 +242,11 @@ extension SearchViewController: NSFetchedResultsControllerDelegate {
         request.sortDescriptors = model.entitySorting[entityName]
         request.predicate = NSPredicate(format: "name contains[cd] %@", search)
         let controller = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: entityType.entityLabel)
-        controller.delegate = self
+        tableUpdater = FetchedResultsTableUpdater(table: candidatesTable)
+        controller.delegate = tableUpdater
         return controller
     }
     
     
-    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        candidatesTable.beginUpdates()
-    }
-    //
-    //    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
-    //        switch type {
-    //        case .insert:
-    //            candidatesTable.insertSections(IndexSet(integer: sectionIndex), with: .fade)
-    //        case .delete:
-    //            candidatesTable.deleteSections(IndexSet(integer: sectionIndex), with: .fade)
-    //        default:
-    //            return
-    //        }
-    //    }
-    
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-        switch type {
-        case .insert:
-            if let path = newIndexPath {
-                candidatesTable.insertRows(at: [path.item], withAnimation: .slideDown)
-                //                tableView.selectRow(at: path, animated: true, scrollPosition: .middle)
-            }
-            
-        case .delete:
-            if let path = indexPath {
-                candidatesTable.removeRows(at: [path.item], withAnimation: .effectFade)
-            }
-            
-        case .update:
-            
-            if let indexPath = indexPath {
-                let row = indexPath.item
-                for column in 0..<candidatesTable.numberOfColumns {
-                    if let cell = candidatesTable.view(atColumn: column, row: row, makeIfNecessary: true) as? NSTableCellView {
-                        //                        configureCell(cell: cell, row: row, column: column)
-                    }
-                }
-            }
-            
-        case .move:
-            if let indexPath = indexPath, let newIndexPath = newIndexPath {
-                candidatesTable.removeRows(at: [indexPath.item], withAnimation: .effectFade)
-                candidatesTable.insertRows(at: [newIndexPath.item], withAnimation: .effectFade)
-            }
-            
-        default:
-            break
-        }
-    }
-    
-    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        candidatesTable.endUpdates()
-    }
     
 }

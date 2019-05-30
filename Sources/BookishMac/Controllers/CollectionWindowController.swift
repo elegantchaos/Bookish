@@ -81,7 +81,7 @@ class CollectionWindowController: LateAutosavingWindowController, NSWindowDelega
             let modeChanged = mode != cvm.mode
             cvm.mode = mode
             if afterCreating {
-                index.postInsertion = {
+                index.tableUpdater?.postInsertion = {
                     index.select(items: [object], forceUpdate: modeChanged)
                     if !index.detailView.isEditing {
                         self.application.actionManager.perform(identifier: "ToggleEditing")

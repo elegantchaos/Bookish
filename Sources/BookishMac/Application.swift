@@ -209,9 +209,7 @@ extension Application: NSApplicationDelegate {
             let context = viewModel?.collection.managedObjectContext,
             let userInfo = userActivity.userInfo as? Dictionary<String,Any>,
             let identifier = userInfo["kCSSearchableItemActivityIdentifier"] as? String,
-            let uri = URL(string: identifier),
-            let objectID = context.persistentStoreCoordinator?.managedObjectID(forURIRepresentation: uri),
-            let object = context.object(with: objectID) as? ModelObject {
+            let object = context.object(uri: identifier) as? ModelObject {
                 windowController.reveal(object: object)
         }
         return true
