@@ -196,7 +196,8 @@ class DetailController: CollectionViewController {
     }
     
     fileprivate func updateImageSize(visible: Bool) {
-        if visible, let image = imageView.image {
+        let placeholder = entityType.entityPlaceholder
+        if visible, let image = imageView.image, (image.name() ?? "") != placeholder {
             let maxSize = source.isEditing ? ImageSizeEditing : ImageSizeMax
             let height = min(image.size.height, maxSize)
             let scale = height/image.size.height
@@ -207,8 +208,7 @@ class DetailController: CollectionViewController {
         } else {
             let hidden = !visible || !source.isEditing
             if !hidden {
-                let placeholderName = "\(entityName)Placeholder"
-                imageView.image = NSImage(named: placeholderName)
+                imageView.image = NSImage(named: entityType.entityPlaceholder)
             }
             let size: CGFloat = hidden ? 0 : ImageSizePlaceholder
             imageHeight.constant = size
@@ -220,16 +220,10 @@ class DetailController: CollectionViewController {
     fileprivate func updateImage(visible: Bool) {
         imageView.image = nil
         if visible {
-            if let data = indexView.selection.singleValue(forKey: "image") as? Data, let image = NSImage(data: data) {
-                imageView.image = image
-                
-            } else {
-                if let urlString = indexView.selection.singleValue(forKey: "imageURL") as? String, let url = URL(string: urlString) {
-                    application.imageCache.image(for: url) { (image) in
-                        self.imageView.image = image
-                        self.updateImageSize(visible: visible)
-                    }
-                }
+            if let proxy = indexView.selection.proxy(withUniformKeys: ["imageData", "imageURL"]) as? ModelEntityCommon {
+                proxy.setImage(for: imageView, cache: application.imageCache, callback:{ (image) in
+                    self.updateImageSize(visible: visible)
+                })
             }
         }
         

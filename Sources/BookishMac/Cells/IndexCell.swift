@@ -9,8 +9,8 @@ import BookishModel
 class IndexCell: NSTableCellView {
     override var objectValue: Any? {
         didSet {
-            if let object = objectValue as? ModelObject {
-                updateImage(for: object)
+            if let object = objectValue as? ModelEntityCommon, let view = imageView {
+                object.setImage(for: view, cache: application.imageCache)
             }
         }
     }
@@ -32,20 +32,4 @@ class IndexCell: NSTableCellView {
         }
     }
     
-    fileprivate func updateImage(for object: ModelObject) {
-        if let imageView = imageView {
-            if let data = object.value(forKey: "image") as? Data, let image = NSImage(data: data) {
-                imageView.image = image
-                
-            } else {
-                let placeholderName = type(of: object).entityPlaceholder
-                imageView.image = NSImage(named: placeholderName)
-                if let urlString = object.value(forKey: "imageURL") as? String, let url = URL(string: urlString) {
-                    application.imageCache.image(for: url) { (image) in
-                        imageView.image = image
-                    }
-                }
-            }
-        }
-    }
 }

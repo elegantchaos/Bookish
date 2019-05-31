@@ -29,9 +29,9 @@ class SearchViewController: NSViewController {
     
     var search: String = ""
     var lookup: LookupSession? = nil
-    var fetcher: NSFetchedResultsController<ModelObject>? = nil
+    var fetcher: NSFetchedResultsController<ModelEntity>? = nil
     var searcher: CSSearchQuery? = nil
-    var results: [ModelObject] = []
+    var results: [ModelEntity] = []
     var mode: SearchMode = .basic
     var tableUpdater: FetchedResultsTableUpdater? = nil
     
@@ -123,15 +123,15 @@ class SearchViewController: NSViewController {
         let query = "name == \"\(value)\"cd"
         let searcher = CSSearchQuery(queryString: query, attributes: [])
         searcher.foundItemsHandler = { items in
-            var newResults: Set<ModelObject> = []
+            var newResults: Set<ModelEntity> = []
             for item in items {
-                if let object = context.object(uri: item.uniqueIdentifier) as? ModelObject {
+                if let object = context.object(uri: item.uniqueIdentifier) as? ModelEntity {
                     newResults.insert(object)
                 }
             }
             DispatchQueue.main.async {
                 self.candidatesScrollView.isHidden = false
-                let count = self.results.count
+//                let count = self.results.count
                 let additions = newResults.subtracting(self.results)
 //                let indexes = IndexSet(integersIn: Range<IndexSet.Element>(uncheckedBounds: (count, count + additions.count - 1)))
                 self.results.append(contentsOf: additions)
@@ -167,7 +167,7 @@ class SearchViewController: NSViewController {
             predicate = NSPredicate(format: newFormat)
         }
         
-        let request = NSFetchRequest<ModelObject>()
+        let request = NSFetchRequest<ModelEntity>()
         request.entity = context.persistentStoreCoordinator?.managedObjectModel.entitiesByName[entityName]
         request.fetchBatchSize = 20
         request.sortDescriptors = model.entitySorting[entityName]
@@ -206,7 +206,7 @@ extension SearchViewController: NSTableViewDelegate, NSTableViewDataSource {
     }
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        let object: ModelObject
+        let object: ModelEntity
         
         if let fetcher = fetcher, let sections = fetcher.sections, sections.count > 0 {
             object = fetcher.object(at: IndexPath(item: row, section: 0))
@@ -215,7 +215,9 @@ extension SearchViewController: NSTableViewDelegate, NSTableViewDataSource {
         }
         
         let view = tableView.makeView(withIdentifier: SearchViewController.resultViewID, owner: self) as! SearchResultCell
-        view.setup(for: object)
+        if let object = object as? ModelEntityCommon {
+            view.setup(for: object)
+        }
         return view
     }
 }

@@ -42,6 +42,19 @@ class Selection<T: NSObject> {
         }
     }
 
+    func proxy(withUniformKeys keys: [String]) -> Any? {
+        for key in keys {
+            let value = self.value(forKey: key)
+            switch value {
+            case .value(_, let object):
+                return object
+            default:
+                break
+            }
+        }
+        return nil
+    }
+    
     func set(from indexes: IndexSet, of allObjects: [T]) {
         objects.removeAll()
         for index in indexes {

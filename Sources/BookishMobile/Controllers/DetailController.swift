@@ -84,7 +84,7 @@ class DetailController: UIViewController, UITableViewDataSource, UITableViewDele
     }
     
     func configureImage(for object: EntityType) {
-        if let data = object.value(forKey: "image") as? Data, let image = UIImage(data: data) {
+        if let data = object.value(forKey: "imageData") as? Data, let image = UIImage(data: data) {
             imageView.image = image
         } else {
             imageView.image = UIImage(named: "\(entityName)Placeholder")

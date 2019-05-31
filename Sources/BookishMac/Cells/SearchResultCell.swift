@@ -15,24 +15,15 @@ class SearchResultCell: NSTableCellView {
     @IBOutlet weak var publisherField: NSTextField!
     @IBOutlet weak var actionButton: NSButton!
     
-    func setup(for object: ModelObject) {
+    func setup(for object: ModelEntityCommon) {
         objectValue = object
-        if let name = object.value(forKey: "name") as? String {
+        if let name = object.name {
             titleField.stringValue = name
         }
         //
         //        actionButton.identifier = NSUserInterfaceItemIdentifier(rawValue: candidate.action)
         application.actionManager.validateControls(of: actionButton)
-        if let data = object.value(forKey: "image") as? Data, let image = NSImage(data: data) {
-            coverView.image = image
-        } else {
-            coverView.image = NSImage(named: type(of:object).entityPlaceholder)
-            if let urlString = object.value(forKey: "imageURL") as? String, let url = URL(string: urlString) {
-                application.imageCache.image(for: url) { (image) in
-                    self.coverView.image = image
-                }
-            }
-        }
+        object.setImage(for: coverView, cache: application.imageCache)
     }
 }
 

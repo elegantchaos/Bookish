@@ -237,11 +237,11 @@
          </CommandLineArgument>
          <CommandLineArgument
             argument = "--empty-document"
-            isEnabled = "YES">
+            isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "--sample-document"
-            isEnabled = "NO">
+            isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "--debug-container"
