@@ -82,7 +82,7 @@ class ScannerController: UIViewController, BarcodeScannerDelegate {
     func lookup(text: String) {
         lookup?.cancel()
         if let manager = lookupManager, let collection = collection {
-            lookup = manager.lookup(ean: text, context: collection.managedObjectContext) { (session, state) in
+            lookup = manager.lookup(query: text, context: collection.managedObjectContext) { (session, state) in
                 self.lookupUpdate(session: session, state: state)
             }
         }

@@ -391,8 +391,8 @@ DQ
                                                             <action selector="performAction:" target="Ady-hI-5gd" id="qm1-VV-kWF"/>
                                                         </connections>
                                                     </menuItem>
-                                                    <menuItem title="Lookup Cover" identifier="menu.LookupCover" id="wrN-QJ-U7Y">
-                                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                                    <menuItem title="Lookup Cover" keyEquivalent="v" identifier="menu.LookupCover" id="wrN-QJ-U7Y">
+                                                        <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                                                         <connections>
                                                             <action selector="performAction:" target="Ady-hI-5gd" id="QLS-2c-PZm"/>
                                                         </connections>
@@ -2781,13 +2781,10 @@ Gw
             <color red="0.97299998998641968" green="0.97299998998641968" blue="0.98000001907348633" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Bookish Index Text">
-            <color red="0.35294117647058826" green="0.36862745098039218" blue="0.3843137254901961" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="Bookish Index Text">
-            <color red="0.35294117647058826" green="0.36862745098039218" blue="0.3843137254901961" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.3529999852180481" green="0.36899998784065247" blue="0.38400000333786011" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Bookish Label Text">
-            <color red="0.54100000858306885" green="0.55699998140335083" blue="0.57300001382827759" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.54117647058823526" green="0.55686274509803924" blue="0.5725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
