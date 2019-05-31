@@ -285,7 +285,7 @@ class DetailController: CollectionViewController {
 
     @IBAction func changeImage(_ sender: Any){
         if let image = imageView.image, let data = image.tiffRepresentation {
-            ChangeValueAction.send("ChangeValue", from: self, manager: application.actionManager, property: "image", value: data)
+            ChangeValueAction.send("ChangeValue", from: self, manager: application.actionManager, property: "imageData", value: data)
         }
     }
 
