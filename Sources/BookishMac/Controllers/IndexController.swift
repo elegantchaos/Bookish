@@ -103,9 +103,24 @@ class IndexController: CollectionViewController {
             self.updateVisibility()
         }
         fetcher.delegate = tableUpdater
+        self.fetcher = fetcher
+        performRequest()
+    }
+    
+    func updateRequest(predicate: NSPredicate? = nil) {
+        if let fetcher = fetcher {
+            if let cache = fetcher.cacheName {
+                type(of: fetcher).deleteCache(withName: cache)
+            }
+            fetcher.fetchRequest.predicate = predicate
+            performRequest()
+            indexTable.reloadData()
+        }
+    }
+    
+    func performRequest() {
         do {
-            try fetcher.performFetch()
-            self.fetcher = fetcher
+            try fetcher?.performFetch()
         } catch {
             print(error)
         }
@@ -118,7 +133,7 @@ class IndexController: CollectionViewController {
     }
     
     func updateVisibility() {
-        if objectCount == 0 {
+        if entityType.count(in: cvm.managedObjectContext) == 0 {
             indexView.isHidden = true
             indexSearchField.isHidden = true
             emptyIndexView.isHidden = false
@@ -314,5 +329,21 @@ extension IndexController: NSTextViewDelegate {
 extension IndexController: FilterableView {
     func clearFilter() {
         indexSearchField.stringValue = ""
+    }
+}
+
+extension IndexController: NSSearchFieldDelegate {
+    func searchFieldDidStartSearching(_ sender: NSSearchField) {
+        print("started")
+    }
+
+    func searchFieldDidEndSearching(_ sender: NSSearchField) {
+        print("ended")
+    }
+    
+    @IBAction func filterChanged(_ sender: NSSearchField) {
+        let search = indexSearchField.stringValue
+        let predicate = search.isEmpty ? nil : NSPredicate(format: "name contains[cd] %@", indexSearchField.stringValue)
+        updateRequest(predicate: predicate)
     }
 }
