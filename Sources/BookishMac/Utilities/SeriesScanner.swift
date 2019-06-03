@@ -178,14 +178,14 @@ class SeriesScanner {
     }
     
     private func makeCaches() {
-        let everySeries: [Series] = context.everyEntity()
+        let everySeries: [Series] = Series.everyEntity(in: context)
         for series in everySeries {
             if let name = series.name {
                 cachedSeries[name] = series
             }
         }
         
-        let everyPublisher: [Publisher] = context.everyEntity()
+        let everyPublisher: [Publisher] = Publisher.everyEntity(in: context)
         for publisher in everyPublisher {
             if let name = publisher.name {
                 cachedPublishers[name] = publisher
@@ -194,7 +194,7 @@ class SeriesScanner {
     }
     
     public func run() {
-        let books: [Book] = context.everyEntity()
+        let books: [Book] = Book.everyEntity(in: context)
         
         var matched: Bool
         repeat {

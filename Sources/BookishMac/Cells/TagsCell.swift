@@ -32,7 +32,7 @@ extension TagsCell: DetailTableCell {
     }
     
     func loadInitialContent() {
-        let tagList: [Tag] = detailView.cvm.managedObjectContext.everyEntity()
+        let tagList: [Tag] = Tag.everyEntity(in: detailView.cvm.managedObjectContext)
         for tag in tagList {
             if let name = tag.name {
                 allTags[name] = tag

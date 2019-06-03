@@ -133,7 +133,9 @@ class IndexController: CollectionViewController {
     }
     
     func updateVisibility() {
-        if entityType.count(in: cvm.managedObjectContext) == 0 {
+//        let count = cvm.managedObjectContext.countEntities(type: entityType)
+        let count = entityType.countEntities(in: cvm.managedObjectContext)
+        if count == 0 {
             indexView.isHidden = true
             indexSearchField.isHidden = true
             emptyIndexView.isHidden = false

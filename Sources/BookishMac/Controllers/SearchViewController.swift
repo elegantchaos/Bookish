@@ -77,7 +77,7 @@ class SearchViewController: NSViewController {
             )
             
             
-            let description = ModelObject.entityDescription(for: Book.self, in: context)
+            let description = Book.entityDescription(in: context)
             print(description.attributeKeys)
             let bookTemplates = NSPredicateEditorRowTemplate.templates(withAttributeKeyPaths: ["added", "asin", "classification", "format", "height", "imageURL", "importDate", "importRaw", "isbn", "length", "log", "modified", "name", "notes", "owner", "pages", "published", "read", "sortName", "source", "subtitle", "uuid", "weight", "width"], in:description)
             var templates: [NSPredicateEditorRowTemplate] = [compound, template]
