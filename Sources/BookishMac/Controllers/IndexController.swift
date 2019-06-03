@@ -345,7 +345,7 @@ extension IndexController: NSSearchFieldDelegate {
     
     @IBAction func filterChanged(_ sender: NSSearchField) {
         let search = indexSearchField.stringValue
-        let predicate = search.isEmpty ? nil : NSPredicate(format: "name contains[cd] %@", indexSearchField.stringValue)
+        let predicate = search.isEmpty ? nil : NSPredicate(format: "(name contains[cd] %@) or (tags.name contains[cd] %@)", search, search)
         updateRequest(predicate: predicate)
     }
 }

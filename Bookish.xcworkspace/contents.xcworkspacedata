@@ -13,6 +13,9 @@
    <FileRef
       location = "group:Extras">
    </FileRef>
+   <FileRef
+      location = "group:Dependencies/Website">
+   </FileRef>
    <Group
       location = "container:"
       name = "Third Party">
