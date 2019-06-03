@@ -32,4 +32,8 @@ class IndexCell: NSTableCellView {
         }
     }
     
+    override func prepareForReuse() {
+        imageView?.image = nil
+        super.prepareForReuse()
+    }
 }
