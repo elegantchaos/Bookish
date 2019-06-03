@@ -109,6 +109,7 @@
 		22ADA16321FF5C9C00DB0975 /* ChooseRoleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22ADA16221FF5C9C00DB0975 /* ChooseRoleController.swift */; };
 		22B07AA42294604C00068680 /* Expressions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22B07AA32294604C00068680 /* Expressions.framework */; };
 		22B07AA52294608300068680 /* Expressions.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22B07AA32294604C00068680 /* Expressions.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		22B11CB822A5457F003FA7D7 /* ShowURLAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B11CB722A5457F003FA7D7 /* ShowURLAction.swift */; };
 		22B1DB412178D8A50067E795 /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B1DB402178D8A50067E795 /* ViewExtensions.swift */; };
 		22BE792022525D7A002EADD7 /* ScannerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BE791F22525D7A002EADD7 /* ScannerController.swift */; };
 		22BE792122525E79002EADD7 /* BarcodeScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22115AFF222D97C300C3F170 /* BarcodeScanner.swift */; };
@@ -360,6 +361,7 @@
 		22A8318D2204B68B006A0952 /* IndexController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexController.swift; sourceTree = "<group>"; };
 		22ADA16221FF5C9C00DB0975 /* ChooseRoleController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseRoleController.swift; sourceTree = "<group>"; };
 		22B07AA32294604C00068680 /* Expressions.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Expressions.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		22B11CB722A5457F003FA7D7 /* ShowURLAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowURLAction.swift; sourceTree = "<group>"; };
 		22B1DB402178D8A50067E795 /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
 		22BE790322523F85002EADD7 /* BuildNumber.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = BuildNumber.xcconfig; sourceTree = "<group>"; };
 		22BE791F22525D7A002EADD7 /* ScannerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerController.swift; sourceTree = "<group>"; };
@@ -698,6 +700,7 @@
 				22F0CFD8228442E800B8B506 /* NavigationActions.swift */,
 				227F4513218352A0000D8B8D /* ImporterUIActions.swift */,
 				221C4B2F216BA96C0086D56F /* RelationshipUIActions.swift */,
+				22B11CB722A5457F003FA7D7 /* ShowURLAction.swift */,
 				22D39E582146BA9C00282467 /* ShowDatePickerAction.swift */,
 				22115AFD222D881000C3F170 /* ScannerActions.swift */,
 				22C893B82296E960001508C8 /* SearchActions.swift */,
@@ -1263,6 +1266,7 @@
 				2251B78D228EBF05006C1529 /* FilterActions.swift in Sources */,
 				2250C71621B7E01A00E899E2 /* SeriesScanner.swift in Sources */,
 				22143FCD212EE79100B689DF /* CollectionViewState.swift in Sources */,
+				22B11CB822A5457F003FA7D7 /* ShowURLAction.swift in Sources */,
 				22C2194B21AF24E5002FC0FE /* EditingActions.swift in Sources */,
 				22960328214025E80020B3EB /* RelationshipCell.swift in Sources */,
 				226E8E7121AC3D74001F191F /* EditableDateCell.swift in Sources */,

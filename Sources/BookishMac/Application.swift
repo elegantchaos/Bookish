@@ -76,7 +76,10 @@ let updaterChannel = Logger("Updater")
             ToggleSearchAction(),
             NavigateBackAction(),
             NavigateForwardAction(),
-            ConfirmationAction()
+            ConfirmationAction(),
+            ShowURLAction(plistKey: "release-notes", identifier: "ShowReleaseNotes"),
+            ShowURLAction(plistKey: "quickstart", identifier: "ShowQuickStart"),
+            ShowURLAction(plistKey: "help", identifier: "ShowHelp"),
             ])
         
         actionManager.registerNotification() { (stage, action) in

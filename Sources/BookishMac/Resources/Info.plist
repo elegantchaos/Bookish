@@ -62,5 +62,11 @@
 	<integer>86400</integer>
 	<key>SUEnableSystemProfiling</key>
 	<false/>
+	<key>release-notes</key>
+	<string>https://bookish.elegantchaos.com/release-notes</string>
+	<key>quickstart</key>
+	<string>https://bookish.elegantchaos.com/quickstart</string>
+	<key>help</key>
+	<string>https://bookish.elegantchaos.com/help</string>
 </dict>
 </plist>

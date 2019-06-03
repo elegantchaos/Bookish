@@ -518,9 +518,22 @@ DQ
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Help" systemMenu="help" id="F2S-fz-NVQ">
                                     <items>
-                                        <menuItem title="Bookish Help" keyEquivalent="?" id="FKE-Sm-Kum">
+                                        <menuItem title="Release Notes" identifier="menu.ShowReleaseNotes" id="FKE-Sm-Kum">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
-                                                <action selector="showHelp:" target="Ady-hI-5gd" id="y7X-2Q-9no"/>
+                                                <action selector="performAction:" target="Ady-hI-5gd" id="ziw-YV-s0c"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Quick Start Guide" identifier="menu.ShowQuickStart" id="yFG-Tm-hKZ">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="performAction:" target="Ady-hI-5gd" id="LQb-Zk-cA1"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="Zoz-QJ-Esj"/>
+                                        <menuItem title="Bookish Help" keyEquivalent="?" identifier="menu.ShowHelp" id="mxO-ET-Tzd">
+                                            <connections>
+                                                <action selector="performAction:" target="Ady-hI-5gd" id="utG-OB-Yk8"/>
                                             </connections>
                                         </menuItem>
                                     </items>
