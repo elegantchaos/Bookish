@@ -110,6 +110,8 @@
 		22B07AA42294604C00068680 /* Expressions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22B07AA32294604C00068680 /* Expressions.framework */; };
 		22B07AA52294608300068680 /* Expressions.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22B07AA32294604C00068680 /* Expressions.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		22B11CB822A5457F003FA7D7 /* ShowURLAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B11CB722A5457F003FA7D7 /* ShowURLAction.swift */; };
+		22B11CBA22A55CA6003FA7D7 /* ImportWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B11CB922A55CA6003FA7D7 /* ImportWindowController.swift */; };
+		22B11CBC22A55CB1003FA7D7 /* ImportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B11CBB22A55CB1003FA7D7 /* ImportViewController.swift */; };
 		22B1DB412178D8A50067E795 /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B1DB402178D8A50067E795 /* ViewExtensions.swift */; };
 		22BE792022525D7A002EADD7 /* ScannerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BE791F22525D7A002EADD7 /* ScannerController.swift */; };
 		22BE792122525E79002EADD7 /* BarcodeScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22115AFF222D97C300C3F170 /* BarcodeScanner.swift */; };
@@ -362,6 +364,8 @@
 		22ADA16221FF5C9C00DB0975 /* ChooseRoleController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseRoleController.swift; sourceTree = "<group>"; };
 		22B07AA32294604C00068680 /* Expressions.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Expressions.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		22B11CB722A5457F003FA7D7 /* ShowURLAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowURLAction.swift; sourceTree = "<group>"; };
+		22B11CB922A55CA6003FA7D7 /* ImportWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportWindowController.swift; sourceTree = "<group>"; };
+		22B11CBB22A55CB1003FA7D7 /* ImportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportViewController.swift; sourceTree = "<group>"; };
 		22B1DB402178D8A50067E795 /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
 		22BE790322523F85002EADD7 /* BuildNumber.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = BuildNumber.xcconfig; sourceTree = "<group>"; };
 		22BE791F22525D7A002EADD7 /* ScannerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerController.swift; sourceTree = "<group>"; };
@@ -687,6 +691,8 @@
 				22A6D46B22256E9E0083D4E8 /* ScannerWindowController.swift */,
 				22C893B42296E68F001508C8 /* SearchViewController.swift */,
 				22C893B62296E698001508C8 /* SearchWindowController.swift */,
+				22B11CB922A55CA6003FA7D7 /* ImportWindowController.swift */,
+				22B11CBB22A55CB1003FA7D7 /* ImportViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1242,6 +1248,7 @@
 				22905A6F2285D082001C308C /* LinkField.swift in Sources */,
 				22429401212C32BF00E70510 /* CollectionWindowController.swift in Sources */,
 				22DD42482126D6DA0070C85A /* Application.swift in Sources */,
+				22B11CBA22A55CA6003FA7D7 /* ImportWindowController.swift in Sources */,
 				225488DC21F20B2500EE8ECB /* RoleCell.swift in Sources */,
 				2250C71D21B83B5700E899E2 /* RegularExpressionExtensions.swift in Sources */,
 				229106D3229EBF2F002DB502 /* TextBinding.swift in Sources */,
@@ -1271,6 +1278,7 @@
 				22960328214025E80020B3EB /* RelationshipCell.swift in Sources */,
 				226E8E7121AC3D74001F191F /* EditableDateCell.swift in Sources */,
 				22462E972158F65200A4C56C /* CollectionViewActions.swift in Sources */,
+				22B11CBC22A55CB1003FA7D7 /* ImportViewController.swift in Sources */,
 				227BCFD02216D6F10073C8E6 /* IndexController.swift in Sources */,
 				22F1845021CC10FF00220D20 /* ArrayControllerExtensions.swift in Sources */,
 				22D39E5B2146BE4900282467 /* DatePickerPopoverController.swift in Sources */,

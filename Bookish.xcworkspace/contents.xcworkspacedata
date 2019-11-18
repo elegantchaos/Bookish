@@ -10,12 +10,6 @@
    <FileRef
       location = "group:Dependencies/BookishModel/BookishModel.xcodeproj">
    </FileRef>
-   <FileRef
-      location = "group:Extras">
-   </FileRef>
-   <FileRef
-      location = "group:Dependencies/Website">
-   </FileRef>
    <Group
       location = "container:"
       name = "Third Party">

@@ -646,7 +646,7 @@ DQ
                 </windowController>
                 <customObject id="clU-Fw-4E3" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-246" y="1628"/>
+            <point key="canvasLocation" x="63" y="1604"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="ygZ-mN-npu">
@@ -1025,7 +1025,7 @@ Gw
                 <userDefaultsController id="PMo-Pb-1pe"/>
                 <userDefaultsController id="h6q-3c-Hsj"/>
             </objects>
-            <point key="canvasLocation" x="375.5" y="1628.5"/>
+            <point key="canvasLocation" x="64" y="2081"/>
         </scene>
         <!--Split View Controller-->
         <scene sceneID="o8M-XO-7fb">
@@ -1247,7 +1247,7 @@ Gw
                 <customObject id="NQu-ho-FxW" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <userDefaultsController id="hxe-pj-t8N"/>
             </objects>
-            <point key="canvasLocation" x="818" y="1820"/>
+            <point key="canvasLocation" x="1113" y="1820"/>
         </scene>
         <!--Date Picker Popover Controller-->
         <scene sceneID="K1V-fB-Brr">
@@ -1475,7 +1475,7 @@ Gw
                 <customObject id="2hD-xJ-qyJ" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <userDefaultsController id="0XB-YH-O2i"/>
             </objects>
-            <point key="canvasLocation" x="1113" y="2102"/>
+            <point key="canvasLocation" x="1266" y="2513"/>
         </scene>
         <!--Detail Controller-->
         <scene sceneID="IG1-NS-twE">
@@ -2435,7 +2435,7 @@ Gw
                 </windowController>
                 <customObject id="Q02-Rh-0kL" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-246" y="2072"/>
+            <point key="canvasLocation" x="-672" y="1669"/>
         </scene>
         <!--Search View Controller-->
         <scene sceneID="Wgd-33-3WQ">
@@ -2768,7 +2768,25 @@ Gw
                 <userDefaultsController id="wDZ-he-Ipt"/>
                 <userDefaultsController id="lEa-Nn-8TJ"/>
             </objects>
-            <point key="canvasLocation" x="-246" y="2683"/>
+            <point key="canvasLocation" x="-672" y="2260"/>
+        </scene>
+        <!--Window Controller-->
+        <scene sceneID="X7A-AI-Ljj">
+            <objects>
+                <windowController storyboardIdentifier="ImportWindow" id="BNM-qE-afg" customClass="SearchWindowController" customModule="Bookish" customModuleProvider="target" sceneMemberID="viewController">
+                    <window key="window" title="Search" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="IzO-qh-bH9">
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+                        <rect key="contentRect" x="196" y="249" width="600" height="400"/>
+                        <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1440"/>
+                        <connections>
+                            <outlet property="delegate" destination="BNM-qE-afg" id="SeC-pg-Urv"/>
+                        </connections>
+                    </window>
+                </windowController>
+                <customObject id="I3e-Nz-K4A" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="652" y="1771"/>
         </scene>
     </scenes>
     <resources>
