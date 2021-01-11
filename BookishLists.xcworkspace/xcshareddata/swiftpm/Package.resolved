@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "KeyValueStore",
+        "repositoryURL": "https://github.com/elegantchaos/KeyValueStore.git",
+        "state": {
+          "branch": null,
+          "revision": "c93b73e1b83bf8b0738ef92ce1422aa071870e18",
+          "version": "1.0.0"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

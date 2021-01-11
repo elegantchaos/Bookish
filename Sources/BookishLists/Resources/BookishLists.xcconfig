@@ -1,0 +1,22 @@
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+//  Created by Sam Deane on 11/01/2021.
+//  All code (c) 2021 - present day, Sam Deane.
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+#include ".rt/RTCatalyst.xcconfig"
+
+RT_VERSION = 1.0.0
+RT_PRODUCT_NAME = Bookist Lists
+RT_SHORT_NAME = BookishLists
+RT_BUNDLE_IDENTIFIER = com.elegantchaos.bookish.lists
+RT_TEAM = 2H48644JM2
+RT_APP_ICON = AppIconMobile
+
+ACTION_STATUS_ADDITIONAL_FRAMEWORKS = 
+
+ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon$(RT_TYPE)
+IPHONEOS_DEPLOYMENT_TARGET = 14.0
+
+SWIFT_OBJC_BRIDGING_HEADER =
+
+TARGETED_DEVICE_FAMILY = 1,2
