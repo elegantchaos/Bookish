@@ -14,24 +14,29 @@ struct ContentView: View {
         NavigationView {
             VStack {
                 List(selection: $selection) {
-                    ForEach(model.lists) { list in
-                        Text(list.name)
+                    ForEach(model.lists.order, id: \.self) { id in
+                        let list = model.binding(forBook: id)
+                        NavigationLink(destination: BookListView(list: list)) {
+                            Text(list.wrappedValue.name)
+                        }
                     }
                 }
             }
+            .navigationTitle(model.appName)
+            .navigationBarItems(
+                leading: EditButton(),
+                trailing:
+                    HStack {
+                        Button(action: handleAdd) { Image(systemName: "plus") }
+                    }
+            )
         }
-        .navigationTitle(model.appName)
-        .navigationBarItems(
-            leading: EditButton(),
-            trailing:
-                HStack {
-                    Button(action: handleAdd) { Image(systemName: "plus") }
-                }
-        )
         .navigationBarTitleDisplayMode(.inline)
     }
     
     func handleAdd() {
-        model.lists.append(BookList(id: UUID(), name: "Untitled", entries: [:]))
+        let list = BookList(id: UUID(), name: "Untitled", entries: [], values: [:])
+        model.lists.order.append(list.id)
+        model.lists.values[list.id] = list
     }
 }
