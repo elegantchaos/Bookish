@@ -7,7 +7,7 @@ import Combine
 import SwiftUI
 
 @main
-struct BookishListsApp: App {
+struct Application: App {
     static let store = NSUbiquitousKeyValueStore.default
     let model = Model(from: store)
     
@@ -18,7 +18,7 @@ struct BookishListsApp: App {
                 .environmentObject(model)
                 .onReceive(
                     model.objectWillChange.debounce(for: .seconds(1), scheduler: RunLoop.main), perform: { _ in
-                        model.save(to: BookishListsApp.store)
+                        model.save(to: Application.store)
                 })
         }
     }
