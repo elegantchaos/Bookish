@@ -5,6 +5,7 @@
 
 import SwiftUI
 import SwiftUIExtensions
+import BookishImporter
 
 enum ListEntryKind {
     case list(String)
@@ -48,7 +49,27 @@ struct ContentView: View {
     
     @State var importing = false
     @State var selection: UUID? = nil
+    @State var progress = 0.0
+    @State var showProgress = false
     
+    let manager = ImportManager()
+//
+//    func session(_ session: ImportSession, willImportItems count: Int) {
+//        showProgress = true
+//    }
+//
+//    func session(_ session: ImportSession, willImportItem label: String, index: Int, of count: Int) {
+//        progress = Double(index) / Double(count)
+//    }
+//
+//    func sessionDidFinish(_ session: ImportSession) {
+//        showProgress = false
+//    }
+//
+//    func sessionDidFail(_ session: ImportSession) {
+//        showProgress = false
+//    }
+//
     var body: some View {
         VStack {
             NavigationView {
@@ -79,8 +100,14 @@ struct ContentView: View {
             .navigationBarTitleDisplayMode(.inline)
             .fileImporter(isPresented: $importing, allowedContentTypes: [.xml], onCompletion: handleImporting)
 
-            Button(action: handleImport) {
-                Text("Import From Delicious")
+            HStack {
+                Button(action: handleImport) {
+                    Text("Import From Delicious")
+                }
+                
+                if showProgress {
+                    ProgressView(value: progress)
+                }
             }
         }
     }
@@ -97,13 +124,35 @@ struct ContentView: View {
     func handleImporting(_ result: Result<URL,Error>) {
         switch result {
             case .success(let url):
-                if let importer = DeliciousLibraryImporter(url: url) {
-                    importer.run()
-                    print(importer.books)
-                }
-                
+                manager.importFrom(url, monitor: self)
+
             case .failure(let error):
                 print(error)
         }
     }
+}
+
+extension ContentView: ImportMonitor {
+    func session(_ session: ImportSession, willImportItems count: Int) {
+        showProgress = true
+    }
+    
+    func session(_ session: ImportSession, willImportItem label: String, index: Int, of count: Int) {
+        progress = Double(index) / Double(count)
+    }
+    
+    func sessionDidFinish(_ session: ImportSession) {
+        showProgress = false
+        if let session = session as? DeliciousLibraryImportSession {
+            for importedBook in session.books.values {
+                let book = Book(id: importedBook.id, name: importedBook.title)
+                model.books.append(book)
+            }
+        }
+    }
+    
+    func sessionDidFail(_ session: ImportSession) {
+        showProgress = false
+    }
+
 }

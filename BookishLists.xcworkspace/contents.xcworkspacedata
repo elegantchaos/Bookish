@@ -8,6 +8,9 @@
       location = "group:Extras">
    </FileRef>
    <FileRef
+      location = "group:../BookishImporter">
+   </FileRef>
+   <FileRef
       location = "group:../SwiftUIExtensions">
    </FileRef>
 </Workspace>
