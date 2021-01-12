@@ -17,6 +17,7 @@
 		8B1F10AC25AC8EC400108A34 /* BarcodeScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1F10AB25AC8EC400108A34 /* BarcodeScanner.swift */; };
 		8B1F10D225AC971A00108A34 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 226F15DE251A28F600D6B12E /* Assets.xcassets */; };
 		8B1F10D825ACB30A00108A34 /* BookListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1F10D725ACB30A00108A34 /* BookListView.swift */; };
+		8B1F10E225ADC28800108A34 /* BookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1F10E125ADC28800108A34 /* BookView.swift */; };
 		8B6CAAC8252B2C8B00FF2035 /* KeyValueStore in Frameworks */ = {isa = PBXBuildFile; productRef = 8B6CAAC7252B2C8B00FF2035 /* KeyValueStore */; };
 /* End PBXBuildFile section */
 
@@ -76,6 +77,7 @@
 		22F68597251B8B7D00E867CE /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		8B1F10AB25AC8EC400108A34 /* BarcodeScanner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarcodeScanner.swift; sourceTree = "<group>"; };
 		8B1F10D725ACB30A00108A34 /* BookListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookListView.swift; sourceTree = "<group>"; };
+		8B1F10E125ADC28800108A34 /* BookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookView.swift; sourceTree = "<group>"; };
 		8BE9ADE9252B0DDA00F97D53 /* Tools.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Tools.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -117,6 +119,7 @@
 			children = (
 				229E259A25254AED00C41777 /* ContentView.swift */,
 				8B1F10D725ACB30A00108A34 /* BookListView.swift */,
+				8B1F10E125ADC28800108A34 /* BookView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -402,6 +405,7 @@
 				229E259B25254AED00C41777 /* ContentView.swift in Sources */,
 				8B1F10AC25AC8EC400108A34 /* BarcodeScanner.swift in Sources */,
 				8B1F10D825ACB30A00108A34 /* BookListView.swift in Sources */,
+				8B1F10E225ADC28800108A34 /* BookView.swift in Sources */,
 				226F15DB251A28EA00D6B12E /* Application.swift in Sources */,
 				221717DC2522773B00C43604 /* Model.swift in Sources */,
 			);
