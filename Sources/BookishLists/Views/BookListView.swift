@@ -12,9 +12,13 @@ struct BookListView: View {
 
     var body: some View {
         VStack {
+            TextField("Name", text: $list.name)
+                .padding()
+            
             List(selection: $selection) {
                 ForEach(list.entries, id: \.self) { id in
-                    Text(list.name)
+                    let book = model.binding(forBook: id)
+                    Text(book.wrappedValue.name)
                 }
             }
         }
@@ -29,6 +33,8 @@ struct BookListView: View {
     }
     
     func handleAdd() {
-        
+        let book = Book(id: UUID().uuidString, name: "Untitled Book")
+        list.entries.append(book.id)
+        model.books.append(book)
     }
 }

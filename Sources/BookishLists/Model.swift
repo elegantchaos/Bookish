@@ -13,14 +13,14 @@ extension String {
 
 struct Book: Identifiable, Codable {
     let id: String
-    let name: String
+    var name: String
 }
 
 struct BookList: Identifiable, Codable {
     let id: String
     var name: String
-    let entries: [BookList.ID]
-    let values: [BookList.ID:String]
+    var entries: [BookList.ID]
+    var values: [BookList.ID:String]
 }
 
 protocol JSONCodable {
@@ -42,25 +42,21 @@ protocol IndexedList where Value: Identifiable, Value: Codable  {
     associatedtype Value
     var order: [Value.ID] { get set }
     var index: [Value.ID:Value] { get set }
+    mutating func append(_ value: Value)
 }
 
 struct SimpleIndexedList<T>: IndexedList where T: Identifiable, T: Codable {
     var order: [T.ID] = []
     var index: [T.ID:T] = [:]
+
+    mutating func append(_ value: T) {
+        order.append(value.id)
+        index[value.id] = value
+    }
 }
 
-//struct OrderedBooks: IndexedList {
-//    var order: [Book.ID] = []
-//    var index: [Book.ID:Book] = [:]
-//}
-
-//struct OrderedBookLists: OrderedList {
-//    var order: [BookList.ID] = []
-//    var values: [BookList.ID:BookList] = [:]
-//}
-
-typealias OrderedBookLists = SimpleIndexedList<BookList>
-typealias OrderedBooks = SimpleIndexedList<Book>
+typealias BookListIndex = SimpleIndexedList<BookList>
+typealias BookIndex = SimpleIndexedList<Book>
 
 extension IndexedList {
     mutating func load(from store: KeyValueStore, with decoder: JSONDecoder, idKey: String) {
@@ -81,8 +77,8 @@ extension IndexedList {
 }
 
 class Model: ObservableObject {
-    @Published var books = OrderedBooks()
-    @Published var lists = OrderedBookLists()
+    @Published var books = BookIndex()
+    @Published var lists = BookListIndex()
 
     init() {
     }
@@ -108,10 +104,17 @@ class Model: ObservableObject {
         books.save(to: store, with: encoder, idKey: .booksKey)
     }
 
-    func binding(forBook id: BookList.ID) -> Binding<BookList> {
+    func binding(forBookList id: BookList.ID) -> Binding<BookList> {
         Binding<BookList>(
             get: { self.lists.index[id]! },
             set: { newValue in self.lists.index[id] = newValue }
+        )
+    }
+
+    func binding(forBook id: Book.ID) -> Binding<Book> {
+        Binding<Book>(
+            get: { self.books.index[id]! },
+            set: { newValue in self.books.index[id] = newValue }
         )
     }
 }

@@ -15,7 +15,7 @@ struct ContentView: View {
             VStack {
                 List(selection: $selection) {
                     ForEach(model.lists.order, id: \.self) { id in
-                        let list = model.binding(forBook: id)
+                        let list = model.binding(forBookList: id)
                         NavigationLink(destination: BookListView(list: list)) {
                             Text(list.wrappedValue.name)
                         }
@@ -35,8 +35,7 @@ struct ContentView: View {
     }
     
     func handleAdd() {
-        let list = BookList(id: UUID().uuidString, name: "Untitled", entries: [], values: [:])
-        model.lists.order.append(list.id)
-        model.lists.index[list.id] = list
+        let list = BookList(id: UUID().uuidString, name: "Untitled List", entries: [], values: [:])
+        model.lists.append(list)
     }
 }
