@@ -4,6 +4,7 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 import SwiftUI
+import SwiftUIExtensions
 
 enum ListEntryKind {
     case list(String)
@@ -44,40 +45,65 @@ struct ListEntry: Identifiable {
 
 struct ContentView: View {
     @EnvironmentObject var model: Model
-
+    
+    @State var importing = false
     @State var selection: UUID? = nil
     
     var body: some View {
-        NavigationView {
-            VStack {
-                let entries = model.lists.order.map({ ListEntry(list: $0, model: model) })
-                List(entries, children: \.children) { entry in
-                    switch entry.kind {
-                        case .book(let id):
-                            if let binding = model.binding(forBook: id) {
-                                LinkView(binding: binding)
-                            }
-                        case .list(let id):
-                            if let binding = model.binding(forBookList: id) {
-                                LinkView(binding: binding)
-                            }
+        VStack {
+            NavigationView {
+                VStack {
+                    let entries = model.lists.order.map({ ListEntry(list: $0, model: model) })
+                    List(entries, children: \.children) { entry in
+                        switch entry.kind {
+                            case .book(let id):
+                                if let binding = model.binding(forBook: id) {
+                                    ListItemLinkView(for: binding)
+                                }
+                            case .list(let id):
+                                if let binding = model.binding(forBookList: id) {
+                                    ListItemLinkView(for: binding)
+                                }
+                        }
                     }
                 }
+                .navigationTitle(model.appName)
+                .navigationBarItems(
+                    leading: EditButton(),
+                    trailing:
+                        HStack {
+                            Button(action: handleAdd) { Image(systemName: "plus") }
+                        }
+                )
             }
-            .navigationTitle(model.appName)
-            .navigationBarItems(
-                leading: EditButton(),
-                trailing:
-                    HStack {
-                        Button(action: handleAdd) { Image(systemName: "plus") }
-                    }
-            )
+            .navigationBarTitleDisplayMode(.inline)
+            .fileImporter(isPresented: $importing, allowedContentTypes: [.xml], onCompletion: handleImporting)
+
+            Button(action: handleImport) {
+                Text("Import From Delicious")
+            }
         }
-        .navigationBarTitleDisplayMode(.inline)
     }
     
     func handleAdd() {
         let list = BookList(id: UUID().uuidString, name: "Untitled List", entries: [], values: [:])
         model.lists.append(list)
+    }
+    
+    func handleImport() {
+        importing = true
+    }
+    
+    func handleImporting(_ result: Result<URL,Error>) {
+        switch result {
+            case .success(let url):
+                if let importer = DeliciousLibraryImporter(url: url) {
+                    importer.run()
+                    print(importer.books)
+                }
+                
+            case .failure(let error):
+                print(error)
+        }
     }
 }

@@ -4,48 +4,15 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 import SwiftUI
+import SwiftUIExtensions
 
-protocol Labelled {
-    static func labelView(binding: Binding<Self>) -> LabelType
-    static func iconView(binding: Binding<Self>) -> Image?
-    associatedtype LabelType: View
-}
-
-protocol Linkable {
-    static func linkView(binding: Binding<Self>) -> LinkType
-    associatedtype LinkType: View
-}
-
-struct LinkView<T>: View where T: Linkable, T: Labelled {
-    let binding: Binding<T>
-    
-    var body: some View {
-        NavigationLink(destination: T.linkView(binding: binding)) {
-            LabelView(binding: binding)
-        }
-    }
-}
-
-struct LabelView<T>: View where T: Labelled {
-    let binding: Binding<T>
-    
-    var body: some View {
-        HStack {
-            if let icon = T.iconView(binding: binding) {
-                icon
-            }
-            T.labelView(binding: binding)
-        }
-    }
-}
-
-extension BookList: Linkable {
+extension BookList: ListItemLinkable {
     static func linkView(binding: Binding<BookList>) -> some View {
         BookListView(list: binding)
     }
 }
 
-extension BookList: Labelled {
+extension BookList: ListItemViewable {
     static func iconView(binding: Binding<BookList>) -> Image? {
         Image(systemName: "books.vertical")
     }
@@ -55,17 +22,17 @@ extension BookList: Labelled {
     }
 }
 
-extension Book: Linkable {
-    static func iconView(binding: Binding<Book>) -> Image? {
-        Image(systemName: "book")
-    }
-    
+extension Book: ListItemLinkable {
     static func linkView(binding: Binding<Book>) -> some View {
         BookView(book: binding)
     }
 }
 
-extension Book: Labelled {
+extension Book: ListItemViewable {
+    static func iconView(binding: Binding<Book>) -> Image? {
+        Image(systemName: "book")
+    }
+    
     static func labelView(binding: Binding<Book>) -> some View {
         Text(binding.wrappedValue.name)
     }

@@ -2,12 +2,39 @@
   "object": {
     "pins": [
       {
+        "package": "ISBN",
+        "repositoryURL": "https://github.com/elegantchaos/ISBN.git",
+        "state": {
+          "branch": null,
+          "revision": "536c1a0c5bc077043b2743013421ae41166bcde9",
+          "version": "1.0.0"
+        }
+      },
+      {
         "package": "KeyValueStore",
         "repositoryURL": "https://github.com/elegantchaos/KeyValueStore.git",
         "state": {
           "branch": null,
           "revision": "c93b73e1b83bf8b0738ef92ce1422aa071870e18",
           "version": "1.0.0"
+        }
+      },
+      {
+        "package": "Localization",
+        "repositoryURL": "https://github.com/elegantchaos/Localization.git",
+        "state": {
+          "branch": null,
+          "revision": "c7e9058785748455314cd3b5bedc300d17bc287f",
+          "version": "1.0.3"
+        }
+      },
+      {
+        "package": "Logger",
+        "repositoryURL": "https://github.com/elegantchaos/Logger.git",
+        "state": {
+          "branch": null,
+          "revision": "37c1cdb1ba691e85b2d47cc7faed7a9cd11d5350",
+          "version": "1.5.7"
         }
       }
     ]

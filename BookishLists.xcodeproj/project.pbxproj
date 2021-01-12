@@ -19,6 +19,11 @@
 		8B1F10D825ACB30A00108A34 /* BookListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1F10D725ACB30A00108A34 /* BookListView.swift */; };
 		8B1F10E225ADC28800108A34 /* BookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1F10E125ADC28800108A34 /* BookView.swift */; };
 		8B1F10EC25ADD40F00108A34 /* LinkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1F10EB25ADD40F00108A34 /* LinkView.swift */; };
+		8B1F10F725ADE46500108A34 /* SwiftUIExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 8B1F10F625ADE46500108A34 /* SwiftUIExtensions */; };
+		8B1F110725ADF4FD00108A34 /* Logger in Frameworks */ = {isa = PBXBuildFile; productRef = 8B1F110625ADF4FD00108A34 /* Logger */; };
+		8B1F111A25ADF53000108A34 /* DeliciousLibraryImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1F111325ADF53000108A34 /* DeliciousLibraryImporter.swift */; };
+		8B1F112F25ADF56F00108A34 /* Localization in Frameworks */ = {isa = PBXBuildFile; productRef = 8B1F112E25ADF56F00108A34 /* Localization */; };
+		8B1F114225ADFB0D00108A34 /* ISBN in Frameworks */ = {isa = PBXBuildFile; productRef = 8B1F114125ADFB0D00108A34 /* ISBN */; };
 		8B6CAAC8252B2C8B00FF2035 /* KeyValueStore in Frameworks */ = {isa = PBXBuildFile; productRef = 8B6CAAC7252B2C8B00FF2035 /* KeyValueStore */; };
 /* End PBXBuildFile section */
 
@@ -80,6 +85,7 @@
 		8B1F10D725ACB30A00108A34 /* BookListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookListView.swift; sourceTree = "<group>"; };
 		8B1F10E125ADC28800108A34 /* BookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookView.swift; sourceTree = "<group>"; };
 		8B1F10EB25ADD40F00108A34 /* LinkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkView.swift; sourceTree = "<group>"; };
+		8B1F111325ADF53000108A34 /* DeliciousLibraryImporter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliciousLibraryImporter.swift; sourceTree = "<group>"; };
 		8BE9ADE9252B0DDA00F97D53 /* Tools.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Tools.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -88,6 +94,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B1F110725ADF4FD00108A34 /* Logger in Frameworks */,
+				8B1F112F25ADF56F00108A34 /* Localization in Frameworks */,
+				8B1F114225ADFB0D00108A34 /* ISBN in Frameworks */,
+				8B1F10F725ADE46500108A34 /* SwiftUIExtensions in Frameworks */,
 				8B6CAAC8252B2C8B00FF2035 /* KeyValueStore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -202,6 +212,7 @@
 				221717DB2522773B00C43604 /* Model.swift */,
 				8B1F10AB25AC8EC400108A34 /* BarcodeScanner.swift */,
 				226F15DA251A28EA00D6B12E /* Application.swift */,
+				8B1F111325ADF53000108A34 /* DeliciousLibraryImporter.swift */,
 				2207D47025265FC400A014D5 /* Views */,
 				22ED67F1251E439200B0226D /* Resources */,
 			);
@@ -243,6 +254,10 @@
 			name = BookishLists;
 			packageProductDependencies = (
 				8B6CAAC7252B2C8B00FF2035 /* KeyValueStore */,
+				8B1F10F625ADE46500108A34 /* SwiftUIExtensions */,
+				8B1F110625ADF4FD00108A34 /* Logger */,
+				8B1F112E25ADF56F00108A34 /* Localization */,
+				8B1F114125ADFB0D00108A34 /* ISBN */,
 			);
 			productName = "Samedi's Crafting";
 			productReference = 226F15D7251A28EA00D6B12E /* Bookish Lists.app */;
@@ -340,6 +355,10 @@
 			mainGroup = 226F15CE251A28EA00D6B12E;
 			packageReferences = (
 				8B6CAAC6252B2C8B00FF2035 /* XCRemoteSwiftPackageReference "KeyValueStore" */,
+				8B1F10F525ADE46500108A34 /* XCRemoteSwiftPackageReference "SwiftUIExtensions" */,
+				8B1F110525ADF4FD00108A34 /* XCRemoteSwiftPackageReference "Logger" */,
+				8B1F112D25ADF56F00108A34 /* XCRemoteSwiftPackageReference "Localization" */,
+				8B1F114025ADFB0D00108A34 /* XCRemoteSwiftPackageReference "ISBN" */,
 			);
 			productRefGroup = 226F15D8251A28EA00D6B12E /* Products */;
 			projectDirPath = "";
@@ -412,6 +431,7 @@
 				8B1F10E225ADC28800108A34 /* BookView.swift in Sources */,
 				226F15DB251A28EA00D6B12E /* Application.swift in Sources */,
 				221717DC2522773B00C43604 /* Model.swift in Sources */,
+				8B1F111A25ADF53000108A34 /* DeliciousLibraryImporter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -763,6 +783,38 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		8B1F10F525ADE46500108A34 /* XCRemoteSwiftPackageReference "SwiftUIExtensions" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/elegantchaos/SwiftUIExtensions.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.1;
+			};
+		};
+		8B1F110525ADF4FD00108A34 /* XCRemoteSwiftPackageReference "Logger" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/elegantchaos/Logger.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.5.7;
+			};
+		};
+		8B1F112D25ADF56F00108A34 /* XCRemoteSwiftPackageReference "Localization" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/elegantchaos/Localization.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.3;
+			};
+		};
+		8B1F114025ADFB0D00108A34 /* XCRemoteSwiftPackageReference "ISBN" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/elegantchaos/ISBN.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		8B6CAAC6252B2C8B00FF2035 /* XCRemoteSwiftPackageReference "KeyValueStore" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/elegantchaos/KeyValueStore.git";
@@ -774,6 +826,26 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		8B1F10F625ADE46500108A34 /* SwiftUIExtensions */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8B1F10F525ADE46500108A34 /* XCRemoteSwiftPackageReference "SwiftUIExtensions" */;
+			productName = SwiftUIExtensions;
+		};
+		8B1F110625ADF4FD00108A34 /* Logger */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8B1F110525ADF4FD00108A34 /* XCRemoteSwiftPackageReference "Logger" */;
+			productName = Logger;
+		};
+		8B1F112E25ADF56F00108A34 /* Localization */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8B1F112D25ADF56F00108A34 /* XCRemoteSwiftPackageReference "Localization" */;
+			productName = Localization;
+		};
+		8B1F114125ADFB0D00108A34 /* ISBN */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8B1F114025ADFB0D00108A34 /* XCRemoteSwiftPackageReference "ISBN" */;
+			productName = ISBN;
+		};
 		8B6CAAC7252B2C8B00FF2035 /* KeyValueStore */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 8B6CAAC6252B2C8B00FF2035 /* XCRemoteSwiftPackageReference "KeyValueStore" */;

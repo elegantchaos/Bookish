@@ -4,6 +4,7 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 import SwiftUI
+import SwiftUIExtensions
 
 struct BookListView: View {
     @EnvironmentObject var model: Model
@@ -18,7 +19,7 @@ struct BookListView: View {
             List(selection: $selection) {
                 ForEach(list.entries, id: \.self) { id in
                     let book = model.binding(forBook: id)
-                    LinkView(binding: book)
+                    ListItemLinkView(for: book)
                 }
             }
         }
