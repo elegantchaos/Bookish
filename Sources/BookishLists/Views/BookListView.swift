@@ -18,9 +18,7 @@ struct BookListView: View {
             List(selection: $selection) {
                 ForEach(list.entries, id: \.self) { id in
                     let book = model.binding(forBook: id)
-                    NavigationLink(destination: BookView(book: book)) {
-                        Text(book.wrappedValue.name)
-                    }
+                    LinkView(binding: book)
                 }
             }
         }
