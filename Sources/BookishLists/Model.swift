@@ -12,48 +12,70 @@ extension String {
 }
 
 struct Book: Identifiable, Codable {
-    let id: UUID
+    let id: String
     let name: String
 }
 
 struct BookList: Identifiable, Codable {
-    let id: UUID
+    let id: String
     var name: String
-    let entries: [UUID]
-    let values: [UUID:String]
+    let entries: [BookList.ID]
+    let values: [BookList.ID:String]
 }
 
-protocol OrderedList where Value: Identifiable, Value: Codable {
+protocol JSONCodable {
+    static func decode(fromJSONCoding string: String) -> Self
+    var encodeAsJSON: String { get }
+}
+
+extension UUID: JSONCodable {
+    static func decode(fromJSONCoding string: String) -> UUID {
+        UUID(uuidString: string) ?? UUID()
+    }
+    
+    var encodeAsJSON: String {
+        self.uuidString
+    }
+}
+
+protocol IndexedList where Value: Identifiable, Value: Codable  {
     associatedtype Value
     var order: [Value.ID] { get set }
-    var values: [Value.ID:Value] { get set }
+    var index: [Value.ID:Value] { get set }
 }
 
-struct OrderedBooks: OrderedList {
-    var order: [UUID] = []
-    var values: [UUID:Book] = [:]
+struct SimpleIndexedList<T>: IndexedList where T: Identifiable, T: Codable {
+    var order: [T.ID] = []
+    var index: [T.ID:T] = [:]
 }
 
-struct OrderedBookLists: OrderedList {
-    var order: [UUID] = []
-    var values: [UUID:BookList] = [:]
-}
+//struct OrderedBooks: IndexedList {
+//    var order: [Book.ID] = []
+//    var index: [Book.ID:Book] = [:]
+//}
 
+//struct OrderedBookLists: OrderedList {
+//    var order: [BookList.ID] = []
+//    var values: [BookList.ID:BookList] = [:]
+//}
 
-extension OrderedList {
+typealias OrderedBookLists = SimpleIndexedList<BookList>
+typealias OrderedBooks = SimpleIndexedList<Book>
+
+extension IndexedList {
     mutating func load(from store: KeyValueStore, with decoder: JSONDecoder, idKey: String) {
         var raw: [Value] = []
         raw.load(from: store, with: decoder, idKey: idKey)
         for value in raw {
             let id = value.id
             order.append(id)
-            values[id] = value
+            index[id] = value
         }
     }
     
     func save(to store: KeyValueStore, with encoder: JSONEncoder, idKey: String) {
         store.set(order, forKey: idKey)
-        let raw = Array(values.values)
+        let raw = Array(index.values)
         raw.save(to: store, with: encoder)
     }
 }
@@ -86,10 +108,10 @@ class Model: ObservableObject {
         books.save(to: store, with: encoder, idKey: .booksKey)
     }
 
-    func binding(forBook id: UUID) -> Binding<BookList> {
+    func binding(forBook id: BookList.ID) -> Binding<BookList> {
         Binding<BookList>(
-            get: { self.lists.values[id]! },
-            set: { newValue in self.lists.values[id] = newValue }
+            get: { self.lists.index[id]! },
+            set: { newValue in self.lists.index[id] = newValue }
         )
     }
 }

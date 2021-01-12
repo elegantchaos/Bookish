@@ -35,8 +35,8 @@ struct ContentView: View {
     }
     
     func handleAdd() {
-        let list = BookList(id: UUID(), name: "Untitled", entries: [], values: [:])
+        let list = BookList(id: UUID().uuidString, name: "Untitled", entries: [], values: [:])
         model.lists.order.append(list.id)
-        model.lists.values[list.id] = list
+        model.lists.index[list.id] = list
     }
 }
