@@ -5,41 +5,39 @@
 
 import SwiftUI
 
+enum ListEntryKind {
+    case list(String)
+    case book(String)
+}
+
 struct ListEntry: Identifiable {
-    let listID: String?
-    let bookID: String?
+    let kind: ListEntryKind
     let model: Model
     
     init(book: String, model: Model) {
-        self.listID = nil
-        self.bookID = book
+        self.kind = .book(book)
         self.model = model
     }
     
     init(list: String, model: Model) {
-        self.listID = list
-        self.bookID = nil
+        self.kind = .list(list)
         self.model = model
     }
 
     var id: String {
-        listID ?? bookID ?? ""
-    }
-
-    var listBinding: Binding<BookList>? {
-        guard let id = listID else { return nil }
-        return model.binding(forBookList: id)
-    }
-
-    var bookBinding: Binding<Book>? {
-        guard let id = bookID else { return nil }
-        return model.binding(forBook: id)
+        switch self.kind {
+        case .book(let id): return id
+        case .list(let id): return id
+        }
     }
 
     var children: [ListEntry]? {
-        guard let id = listID, let list = model.lists.index[id] else { return nil }
-        
-        return list.entries.map({ ListEntry(book: $0, model: model)})
+        switch kind {
+            case .book: return nil
+            case .list(let id):
+                guard let list = model.lists.index[id], list.entries.count > 0 else { return nil }
+                return list.entries.map({ ListEntry(book: $0, model: model)})
+        }
     }
 }
 
@@ -50,17 +48,19 @@ struct ContentView: View {
     @State var selection: UUID? = nil
     
     var body: some View {
-        // TODO: generic system for listing possible entry types and identifying the corresponding views
         NavigationView {
             VStack {
                 let entries = model.lists.order.map({ ListEntry(list: $0, model: model) })
                 List(entries, children: \.children) { entry in
-                    if let binding = entry.listBinding {
-                        LinkView(binding: binding)
-                    } else if let binding = entry.bookBinding {
-                        NavigationLink(destination: BookView(book: binding)) {
-                            Text(binding.wrappedValue.name)
-                        }
+                    switch entry.kind {
+                        case .book(let id):
+                            if let binding = model.binding(forBook: id) {
+                                LinkView(binding: binding)
+                            }
+                        case .list(let id):
+                            if let binding = model.binding(forBookList: id) {
+                                LinkView(binding: binding)
+                            }
                     }
                 }
             }
