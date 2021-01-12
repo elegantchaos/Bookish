@@ -47,12 +47,8 @@ struct ListEntry: Identifiable {
 struct ContentView: View {
     @EnvironmentObject var model: Model
     
-    @State var importing = false
     @State var selection: UUID? = nil
-    @State var progress = 0.0
-    @State var showProgress = false
     
-    let manager = ImportManager()
 //
 //    func session(_ session: ImportSession, willImportItems count: Int) {
 //        showProgress = true
@@ -98,17 +94,7 @@ struct ContentView: View {
                 )
             }
             .navigationBarTitleDisplayMode(.inline)
-            .fileImporter(isPresented: $importing, allowedContentTypes: [.xml], onCompletion: handleImporting)
 
-            HStack {
-                Button(action: handleImport) {
-                    Text("Import From Delicious")
-                }
-                
-                if showProgress {
-                    ProgressView(value: progress)
-                }
-            }
         }
     }
     
@@ -116,43 +102,4 @@ struct ContentView: View {
         let list = BookList(id: UUID().uuidString, name: "Untitled List", entries: [], values: [:])
         model.lists.append(list)
     }
-    
-    func handleImport() {
-        importing = true
-    }
-    
-    func handleImporting(_ result: Result<URL,Error>) {
-        switch result {
-            case .success(let url):
-                manager.importFrom(url, monitor: self)
-
-            case .failure(let error):
-                print(error)
-        }
-    }
-}
-
-extension ContentView: ImportMonitor {
-    func session(_ session: ImportSession, willImportItems count: Int) {
-        showProgress = true
-    }
-    
-    func session(_ session: ImportSession, willImportItem label: String, index: Int, of count: Int) {
-        progress = Double(index) / Double(count)
-    }
-    
-    func sessionDidFinish(_ session: ImportSession) {
-        showProgress = false
-        if let session = session as? DeliciousLibraryImportSession {
-            for importedBook in session.books.values {
-                let book = Book(id: importedBook.id, name: importedBook.title)
-                model.books.append(book)
-            }
-        }
-    }
-    
-    func sessionDidFail(_ session: ImportSession) {
-        showProgress = false
-    }
-
 }

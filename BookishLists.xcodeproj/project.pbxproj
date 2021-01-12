@@ -24,6 +24,7 @@
 		8B1F112F25ADF56F00108A34 /* Localization in Frameworks */ = {isa = PBXBuildFile; productRef = 8B1F112E25ADF56F00108A34 /* Localization */; };
 		8B1F114225ADFB0D00108A34 /* ISBN in Frameworks */ = {isa = PBXBuildFile; productRef = 8B1F114125ADFB0D00108A34 /* ISBN */; };
 		8B1F115125AE04DE00108A34 /* BookishImporter in Frameworks */ = {isa = PBXBuildFile; productRef = 8B1F115025AE04DE00108A34 /* BookishImporter */; };
+		8B2A7CC825AE140A0024C1A2 /* ThreadExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 8B2A7CC725AE140A0024C1A2 /* ThreadExtensions */; };
 		8B6CAAC8252B2C8B00FF2035 /* KeyValueStore in Frameworks */ = {isa = PBXBuildFile; productRef = 8B6CAAC7252B2C8B00FF2035 /* KeyValueStore */; };
 /* End PBXBuildFile section */
 
@@ -95,6 +96,7 @@
 			files = (
 				8B1F110725ADF4FD00108A34 /* Logger in Frameworks */,
 				8B1F112F25ADF56F00108A34 /* Localization in Frameworks */,
+				8B2A7CC825AE140A0024C1A2 /* ThreadExtensions in Frameworks */,
 				8B1F114225ADFB0D00108A34 /* ISBN in Frameworks */,
 				8B1F10F725ADE46500108A34 /* SwiftUIExtensions in Frameworks */,
 				8B1F115125AE04DE00108A34 /* BookishImporter in Frameworks */,
@@ -258,6 +260,7 @@
 				8B1F112E25ADF56F00108A34 /* Localization */,
 				8B1F114125ADFB0D00108A34 /* ISBN */,
 				8B1F115025AE04DE00108A34 /* BookishImporter */,
+				8B2A7CC725AE140A0024C1A2 /* ThreadExtensions */,
 			);
 			productName = "Samedi's Crafting";
 			productReference = 226F15D7251A28EA00D6B12E /* Bookish Lists.app */;
@@ -360,6 +363,7 @@
 				8B1F112D25ADF56F00108A34 /* XCRemoteSwiftPackageReference "Localization" */,
 				8B1F114025ADFB0D00108A34 /* XCRemoteSwiftPackageReference "ISBN" */,
 				8B1F114F25AE04DE00108A34 /* XCRemoteSwiftPackageReference "BookishImporter" */,
+				8B2A7CC625AE140A0024C1A2 /* XCRemoteSwiftPackageReference "ThreadExtensions" */,
 			);
 			productRefGroup = 226F15D8251A28EA00D6B12E /* Products */;
 			projectDirPath = "";
@@ -823,6 +827,14 @@
 				minimumVersion = 0.0.1;
 			};
 		};
+		8B2A7CC625AE140A0024C1A2 /* XCRemoteSwiftPackageReference "ThreadExtensions" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/elegantchaos/ThreadExtensions.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		8B6CAAC6252B2C8B00FF2035 /* XCRemoteSwiftPackageReference "KeyValueStore" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/elegantchaos/KeyValueStore.git";
@@ -858,6 +870,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8B1F114F25AE04DE00108A34 /* XCRemoteSwiftPackageReference "BookishImporter" */;
 			productName = BookishImporter;
+		};
+		8B2A7CC725AE140A0024C1A2 /* ThreadExtensions */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8B2A7CC625AE140A0024C1A2 /* XCRemoteSwiftPackageReference "ThreadExtensions" */;
+			productName = ThreadExtensions;
 		};
 		8B6CAAC7252B2C8B00FF2035 /* KeyValueStore */ = {
 			isa = XCSwiftPackageProductDependency;
