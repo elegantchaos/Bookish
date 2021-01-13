@@ -8,6 +8,15 @@
       location = "group:Extras">
    </FileRef>
    <FileRef
+      location = "group:../Files">
+   </FileRef>
+   <FileRef
+      location = "group:../ObjectStore">
+   </FileRef>
+   <FileRef
+      location = "group:../KeyValueStore">
+   </FileRef>
+   <FileRef
       location = "group:../ThreadExtensions">
    </FileRef>
    <FileRef

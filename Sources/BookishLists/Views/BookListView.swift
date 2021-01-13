@@ -12,9 +12,8 @@ struct BookListView: View {
     @EnvironmentObject var model: Model
     @State var selection: UUID? = nil
     @Binding var list: BookList
-    @State var importing = false
-    @State var progress = 0.0
-    @State var showProgress = false
+    @State var importRequested = false
+    @State var importProgress: Double? = nil
 
     let manager = ImportManager()
 
@@ -24,12 +23,14 @@ struct BookListView: View {
                 .padding()
             
             HStack {
-                Button(action: handleImport) {
+                Button(action: handleRequestImport) {
                     Text("Import From Delicious")
                 }
                 
-                if showProgress {
-                    ProgressView(value: progress)
+                if let progress = importProgress {
+                    ProgressView(value: progress) {
+                        Text("Blah")
+                    }
                 }
             }
 
@@ -48,7 +49,7 @@ struct BookListView: View {
                     Button(action: handleAdd) { Image(systemName: "plus") }
                 }
         )
-        .fileImporter(isPresented: $importing, allowedContentTypes: [.xml], onCompletion: handleImporting)
+        .fileImporter(isPresented: $importRequested, allowedContentTypes: [.xml], onCompletion: handlePerformImport)
     }
     
     func handleAdd() {
@@ -57,11 +58,11 @@ struct BookListView: View {
         model.books.append(book)
     }
     
-    func handleImport() {
-        importing = true
+    func handleRequestImport() {
+        importRequested = true
     }
     
-    func handleImporting(_ result: Result<URL,Error>) {
+    func handlePerformImport(_ result: Result<URL,Error>) {
         switch result {
             case .success(let url):
                 manager.importFrom(url, monitor: self)
@@ -74,19 +75,20 @@ struct BookListView: View {
 
 extension BookListView: ImportMonitor {
     func session(_ session: ImportSession, willImportItems count: Int) {
-        showProgress = true
+        importProgress = 0.0
     }
     
     func session(_ session: ImportSession, willImportItem label: String, index: Int, of count: Int) {
-        progress = Double(index) / Double(count)
+        importProgress = Double(index) / Double(count)
     }
     
     func sessionDidFinish(_ session: ImportSession) {
-        showProgress = false
+        importProgress = nil
         if let session = session as? DeliciousLibraryImportSession {
-            for importedBook in session.books.values {
-                let book = Book(id: importedBook.id, name: importedBook.title)
-                onMainQueue {
+            onMainQueue {
+                for importedBook in session.books.values {
+//                let importedBook = session.books.randomElement()!.value
+                    let book = Book(id: importedBook.id, name: importedBook.title)
                     list.entries.append(book.id)
                     model.books.append(book)
                 }
@@ -95,7 +97,7 @@ extension BookListView: ImportMonitor {
     }
     
     func sessionDidFail(_ session: ImportSession) {
-        showProgress = false
+        importProgress =  nil
     }
 
 }

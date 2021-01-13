@@ -2,30 +2,12 @@
   "object": {
     "pins": [
       {
-        "package": "Files",
-        "repositoryURL": "https://github.com/elegantchaos/Files.git",
-        "state": {
-          "branch": null,
-          "revision": "db5919720720a0e1a593bd4073ef344485577db2",
-          "version": "1.1.4"
-        }
-      },
-      {
         "package": "ISBN",
         "repositoryURL": "https://github.com/elegantchaos/ISBN.git",
         "state": {
           "branch": null,
-          "revision": "536c1a0c5bc077043b2743013421ae41166bcde9",
-          "version": "1.0.0"
-        }
-      },
-      {
-        "package": "KeyValueStore",
-        "repositoryURL": "https://github.com/elegantchaos/KeyValueStore.git",
-        "state": {
-          "branch": null,
-          "revision": "c93b73e1b83bf8b0738ef92ce1422aa071870e18",
-          "version": "1.0.0"
+          "revision": "0a1e8396bbc5407c92329ce1ef493d7f79cdb6cf",
+          "version": "1.0.1"
         }
       },
       {
@@ -44,6 +26,15 @@
           "branch": null,
           "revision": "37c1cdb1ba691e85b2d47cc7faed7a9cd11d5350",
           "version": "1.5.7"
+        }
+      },
+      {
+        "package": "XCTestExtensions",
+        "repositoryURL": "https://github.com/elegantchaos/XCTestExtensions.git",
+        "state": {
+          "branch": null,
+          "revision": "15991478b5c9bda527a0a59567ad0fa26940f74c",
+          "version": "1.1.2"
         }
       }
     ]

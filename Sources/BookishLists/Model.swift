@@ -3,8 +3,9 @@
 //  All code (c) 2021 - present day, Sam Deane.
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
-import SwiftUI
 import KeyValueStore
+import ObjectStore
+import SwiftUI
 
 extension String {
     static let booksKey = "Books"
@@ -38,14 +39,14 @@ extension UUID: JSONCodable {
     }
 }
 
-protocol IndexedList where Value: Identifiable, Value: Codable  {
+protocol IndexedList where Value: Identifiable, Value: Codable, Value.ID: Codable  {
     associatedtype Value
     var order: [Value.ID] { get set }
     var index: [Value.ID:Value] { get set }
     mutating func append(_ value: Value)
 }
 
-struct SimpleIndexedList<T>: IndexedList where T: Identifiable, T: Codable {
+struct SimpleIndexedList<T>: IndexedList where T: Identifiable, T: Codable, T.ID: Codable {
     var order: [T.ID] = []
     var index: [T.ID:T] = [:]
 
@@ -59,20 +60,18 @@ typealias BookListIndex = SimpleIndexedList<BookList>
 typealias BookIndex = SimpleIndexedList<Book>
 
 extension IndexedList {
-    mutating func load(from store: KeyValueStore, with decoder: JSONDecoder, idKey: String) {
-        var raw: [Value] = []
-        raw.load(from: store, with: decoder, idKey: idKey)
-        for value in raw {
-            let id = value.id
-            order.append(id)
-            index[id] = value
+    mutating func load(from store: ObjectStore, with decoder: JSONDecoder, idKey id: String) where Value.ID == String {
+        if let ids = store.load([String].self, withId: id), let objects = store.load(Value.self, withIds: ids) {
+            order = ids
+            for object in objects {
+                index[object.id] = object
+            }
         }
     }
     
-    func save(to store: KeyValueStore, with encoder: JSONEncoder, idKey: String) {
-        store.set(order, forKey: idKey)
-        let raw = Array(index.values)
-        raw.save(to: store, with: encoder)
+    func save(to store: ObjectStore, with encoder: JSONEncoder, idKey id: String) where Value.ID == String {
+        store.save(order, withId: id)
+        store.save(Array(index.values))
     }
 }
 
@@ -83,7 +82,7 @@ class Model: ObservableObject {
     init() {
     }
     
-    init(from store: KeyValueStore) {
+    init(from store: ObjectStore) {
         let decoder = JSONDecoder()
         
         lists.load(from: store, with: decoder, idKey: .listsKey)
@@ -91,14 +90,26 @@ class Model: ObservableObject {
         
         migrate(from: store)
         
+        let allBooks = Set(books.index.keys)
+        let allLists = lists.index.values
+        for list in allLists {
+            let entries = Set(list.entries)
+            let normalised = entries.intersection(allBooks)
+            if normalised.count < entries.count {
+                var updated = list
+                updated.entries = Array(normalised)
+                lists.index[list.id] = updated
+                print("Removed some missing entries for \(list.name)")
+            }
+        }
     }
     
     var appName: String { "Bookish Lists" }
     
-    func migrate(from store: KeyValueStore) {
+    func migrate(from store: ObjectStore) {
     }
     
-    func save(to store: KeyValueStore) {
+    func save(to store: ObjectStore) {
         let encoder = JSONEncoder()
         lists.save(to: store, with: encoder, idKey: .listsKey)
         books.save(to: store, with: encoder, idKey: .booksKey)
@@ -113,7 +124,7 @@ class Model: ObservableObject {
 
     func binding(forBook id: Book.ID) -> Binding<Book> {
         Binding<Book>(
-            get: { self.books.index[id]! },
+            get: { self.books.index[id] ?? Book(id: id, name: "<missing>") },
             set: { newValue in self.books.index[id] = newValue }
         )
     }
