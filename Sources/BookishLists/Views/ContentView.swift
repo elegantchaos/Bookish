@@ -100,6 +100,7 @@ struct ExtractedView: View {
                             ListItemLinkView(for: binding)
                         }
                     }
+                    .onMove(perform: handleMove)
                     .onDelete(perform: handleDelete)
                 }
             } else {
@@ -117,6 +118,10 @@ struct ExtractedView: View {
                     }
                 }
             }
+    }
+    
+    func handleMove(fromOffsets from: IndexSet, toOffset to: Int) {
+        model.lists.move(fromOffsets: from, toOffset: to)
     }
     
     func handleDelete(_ indices: IndexSet) {
