@@ -43,6 +43,7 @@ protocol IndexedList where Value: Identifiable, Value: Codable, Value.ID: Codabl
     associatedtype Value
     var order: [Value.ID] { get set }
     var index: [Value.ID:Value] { get set }
+    init(order: [Value.ID], index: [Value.ID:Value])
     mutating func append(_ value: Value)
     mutating func move(fromOffsets from: IndexSet, toOffset to: Int)
     mutating func remove(itemWithID id: Value.ID)
@@ -87,18 +88,34 @@ typealias BookListIndex = SimpleIndexedList<BookList>
 typealias BookIndex = SimpleIndexedList<Book>
 
 extension IndexedList {
-    mutating func load(from store: ObjectStore, with decoder: JSONDecoder, idKey id: String) where Value.ID == String {
-        if let ids = store.load([String].self, withId: id), let objects = store.load(Value.self, withIds: ids) {
-            order = ids
-            for object in objects {
-                index[object.id] = object
+    static func load(from store: ObjectStore, idKey id: String, completion: @escaping (Result<Self,Error>) -> ()) where Value.ID == String {
+        store.load([String].self, withId: id) { result in
+            switch result {
+                case let .failure(error):
+                    completion(.failure(error))
+
+                case let .success(ids):
+                    store.load(Value.self, withIds: ids) { objects, errors in
+                        var index: [Value.ID:Value] = [:]
+                        for object in objects {
+                            index[object.id] = object
+                        }
+                        completion(.success(Self(order: ids, index: index)))
+                    }
             }
         }
     }
     
-    func save(to store: ObjectStore, with encoder: JSONEncoder, idKey id: String) where Value.ID == String {
-        store.save(order, withId: id)
-        store.save(Array(index.values))
+    func save(to store: ObjectStore, idKey id: String) where Value.ID == String {
+        store.save(order, withId: id) { result in
+            switch result {
+                case let .failure(error): print(error) // TODO: handle this properly
+                case .success:
+                    store.save(Array(index.values)) { results in
+                        
+                    }
+            }
+        }
     }
 }
 
@@ -110,13 +127,37 @@ class Model: ObservableObject {
     }
     
     init(from store: ObjectStore) {
-        let decoder = JSONDecoder()
-        
-        lists.load(from: store, with: decoder, idKey: .listsKey)
-        books.load(from: store, with: decoder, idKey: .booksKey)
-        
         migrate(from: store)
-        
+        loadBooks(store: store)
+    }
+    
+    func loadBooks(store: ObjectStore) {
+        BookIndex.load(from: store, idKey: .booksKey) { result in
+            switch result {
+                case let .success(index):
+                    self.books = index
+                    self.loadLists(store: store)
+                    
+                case let .failure(error):
+                    print(error)
+            }
+        }
+    }
+
+    func loadLists(store: ObjectStore) {
+        BookListIndex.load(from: store, idKey: .listsKey) { result in
+            switch result {
+                case let .success(index):
+                    self.lists = index
+                    self.normaliseData()
+                    
+                case let .failure(error):
+                    print(error)
+            }
+        }
+    }
+    
+    func normaliseData() {
         let allBooks = Set(books.index.keys)
         let allLists = lists.index.values
         for list in allLists {
@@ -137,9 +178,8 @@ class Model: ObservableObject {
     }
     
     func save(to store: ObjectStore) {
-        let encoder = JSONEncoder()
-        lists.save(to: store, with: encoder, idKey: .listsKey)
-        books.save(to: store, with: encoder, idKey: .booksKey)
+        lists.save(to: store, idKey: .listsKey)
+        books.save(to: store, idKey: .booksKey)
     }
 
     func binding(forBookList id: BookList.ID) -> Binding<BookList> {

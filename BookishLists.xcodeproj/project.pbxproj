@@ -26,6 +26,8 @@
 		8B1F114225ADFB0D00108A34 /* ISBN in Frameworks */ = {isa = PBXBuildFile; productRef = 8B1F114125ADFB0D00108A34 /* ISBN */; };
 		8B1F115125AE04DE00108A34 /* BookishImporter in Frameworks */ = {isa = PBXBuildFile; productRef = 8B1F115025AE04DE00108A34 /* BookishImporter */; };
 		8B2A7CC825AE140A0024C1A2 /* ThreadExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 8B2A7CC725AE140A0024C1A2 /* ThreadExtensions */; };
+		8B58C7B425B71528007F6B70 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B58C7B325B71528007F6B70 /* CloudKit.framework */; };
+		8B58C7B625B716AF007F6B70 /* CloudKitObjectStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B58C7B525B716AF007F6B70 /* CloudKitObjectStore.swift */; };
 		8B6CAAC8252B2C8B00FF2035 /* KeyValueStore in Frameworks */ = {isa = PBXBuildFile; productRef = 8B6CAAC7252B2C8B00FF2035 /* KeyValueStore */; };
 /* End PBXBuildFile section */
 
@@ -87,6 +89,8 @@
 		8B1F10D725ACB30A00108A34 /* BookListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookListView.swift; sourceTree = "<group>"; };
 		8B1F10E125ADC28800108A34 /* BookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookView.swift; sourceTree = "<group>"; };
 		8B1F10EB25ADD40F00108A34 /* LinkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkView.swift; sourceTree = "<group>"; };
+		8B58C7B325B71528007F6B70 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		8B58C7B525B716AF007F6B70 /* CloudKitObjectStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitObjectStore.swift; sourceTree = "<group>"; };
 		8BE9ADE9252B0DDA00F97D53 /* Tools.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Tools.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -98,6 +102,7 @@
 				8B1F110725ADF4FD00108A34 /* Logger in Frameworks */,
 				8B1F112F25ADF56F00108A34 /* Localization in Frameworks */,
 				8B2A7CC825AE140A0024C1A2 /* ThreadExtensions in Frameworks */,
+				8B58C7B425B71528007F6B70 /* CloudKit.framework in Frameworks */,
 				8B1F114225ADFB0D00108A34 /* ISBN in Frameworks */,
 				8B1F10F725ADE46500108A34 /* SwiftUIExtensions in Frameworks */,
 				8B1F115125AE04DE00108A34 /* BookishImporter in Frameworks */,
@@ -216,6 +221,7 @@
 				221717DB2522773B00C43604 /* Model.swift */,
 				8B1F10AB25AC8EC400108A34 /* BarcodeScanner.swift */,
 				226F15DA251A28EA00D6B12E /* Application.swift */,
+				8B58C7B525B716AF007F6B70 /* CloudKitObjectStore.swift */,
 				2207D47025265FC400A014D5 /* Views */,
 				22ED67F1251E439200B0226D /* Resources */,
 			);
@@ -234,6 +240,7 @@
 		22F685A5251B8BBA00E867CE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8B58C7B325B71528007F6B70 /* CloudKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -440,6 +447,7 @@
 				8B1F10E225ADC28800108A34 /* BookView.swift in Sources */,
 				226F15DB251A28EA00D6B12E /* Application.swift in Sources */,
 				221717DC2522773B00C43604 /* Model.swift in Sources */,
+				8B58C7B625B716AF007F6B70 /* CloudKitObjectStore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -796,7 +804,7 @@
 			repositoryURL = "https://github.com/elegantchaos/ObjectStore.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
+				minimumVersion = 2.0.1;
 			};
 		};
 		8B1F10F525ADE46500108A34 /* XCRemoteSwiftPackageReference "SwiftUIExtensions" */ = {
