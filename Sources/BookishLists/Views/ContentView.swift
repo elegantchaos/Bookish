@@ -46,10 +46,8 @@ struct ListEntry: Identifiable {
 
 struct ContentView: View {
     @EnvironmentObject var model: Model
-    
-    @State var selection: UUID? = nil
-    
-//
+
+    //
 //    func session(_ session: ImportSession, willImportItems count: Int) {
 //        showProgress = true
 //    }
@@ -69,29 +67,15 @@ struct ContentView: View {
     var body: some View {
         VStack {
             NavigationView {
-                VStack {
-                    let entries = model.lists.order.map({ ListEntry(list: $0, model: model) })
-                    List(entries, children: \.children) { entry in
-                        switch entry.kind {
-                            case .book(let id):
-                                if let binding = model.binding(forBook: id) {
-                                    ListItemLinkView(for: binding)
-                                }
-                            case .list(let id):
-                                if let binding = model.binding(forBookList: id) {
-                                    ListItemLinkView(for: binding)
-                                }
-                        }
-                    }
-                }
-                .navigationTitle(model.appName)
-                .navigationBarItems(
-                    leading: EditButton(),
-                    trailing:
-                        HStack {
-                            Button(action: handleAdd) { Image(systemName: "plus") }
-                        }
-                )
+                ExtractedView()
+                    .navigationTitle(model.appName)
+                    .navigationBarItems(
+                        leading: EditButton(),
+                        trailing:
+                            HStack {
+                                Button(action: handleAdd) { Image(systemName: "plus") }
+                            }
+                    )
             }
             .navigationBarTitleDisplayMode(.inline)
 
@@ -101,5 +85,41 @@ struct ContentView: View {
     func handleAdd() {
         let list = BookList(id: UUID().uuidString, name: "Untitled List", entries: [], values: [:])
         model.lists.append(list)
+    }
+    
+}
+
+struct ExtractedView: View {
+    @EnvironmentObject var model: Model
+    @Environment(\.editMode) var editMode
+    var body: some View {
+            if editMode?.wrappedValue == .active {
+                List() {
+                    ForEach(model.lists.order, id: \.self) { id in
+                        if let binding = model.binding(forBookList: id) {
+                            ListItemLinkView(for: binding)
+                        }
+                    }
+                    .onDelete(perform: handleDelete)
+                }
+            } else {
+                let entries = model.lists.order.map({ ListEntry(list: $0, model: model) })
+                List(entries, children: \.children) { entry in
+                    switch entry.kind {
+                        case .book(let id):
+                            if let binding = model.binding(forBook: id) {
+                                ListItemLinkView(for: binding)
+                            }
+                        case .list(let id):
+                            if let binding = model.binding(forBookList: id) {
+                                ListItemLinkView(for: binding)
+                            }
+                    }
+                }
+            }
+    }
+    
+    func handleDelete(_ indices: IndexSet) {
+        model.lists.remove(indices)
     }
 }

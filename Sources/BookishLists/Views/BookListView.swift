@@ -39,6 +39,8 @@ struct BookListView: View {
                     let book = model.binding(forBook: id)
                     ListItemLinkView(for: book)
                 }
+                .onDelete(perform: handleDelete)
+                .onMove(perform: handleMove)
             }
         }
         .navigationTitle(list.name)
@@ -50,6 +52,18 @@ struct BookListView: View {
                 }
         )
         .fileImporter(isPresented: $importRequested, allowedContentTypes: [.xml], onCompletion: handlePerformImport)
+    }
+
+    func handleMove(fromOffsets from: IndexSet, toOffset to: Int) {
+        var modified = list.entries
+        modified.move(fromOffsets: from, toOffset: to)
+        list.entries = modified
+    }
+    
+    func handleDelete(_ items: IndexSet?) {
+        if let items = items {
+            list.entries.remove(atOffsets: items)
+        }
     }
     
     func handleAdd() {

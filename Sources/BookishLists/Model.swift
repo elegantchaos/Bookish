@@ -44,6 +44,10 @@ protocol IndexedList where Value: Identifiable, Value: Codable, Value.ID: Codabl
     var order: [Value.ID] { get set }
     var index: [Value.ID:Value] { get set }
     mutating func append(_ value: Value)
+    mutating func move(fromOffsets from: IndexSet, toOffset to: Int)
+    mutating func remove(itemWithID id: Value.ID)
+    mutating func remove(at itemIndex: Int)
+    mutating func remove(_ indices: IndexSet)
 }
 
 struct SimpleIndexedList<T>: IndexedList where T: Identifiable, T: Codable, T.ID: Codable {
@@ -53,6 +57,29 @@ struct SimpleIndexedList<T>: IndexedList where T: Identifiable, T: Codable, T.ID
     mutating func append(_ value: T) {
         order.append(value.id)
         index[value.id] = value
+    }
+    
+    mutating func move(fromOffsets from: IndexSet, toOffset to: Int) {
+        order.move(fromOffsets: from, toOffset: to)
+    }
+    
+    mutating func remove(itemWithID id: T.ID) {
+        index.removeValue(forKey: id)
+        if let position = order.firstIndex(of: id) {
+            order.remove(at: position)
+        }
+    }
+
+    mutating func remove(at itemIndex: Int) {
+        let id = order[itemIndex]
+        order.remove(at: itemIndex)
+        index.removeValue(forKey: id)
+    }
+
+    mutating func remove(_ indices: IndexSet) {
+        for item in indices {
+            remove(at: item)
+        }
     }
 }
 
@@ -117,7 +144,7 @@ class Model: ObservableObject {
 
     func binding(forBookList id: BookList.ID) -> Binding<BookList> {
         Binding<BookList>(
-            get: { self.lists.index[id]! },
+            get: { self.lists.index[id] ?? BookList(id: id, name: "<mising>", entries: [], values: [:]) },
             set: { newValue in self.lists.index[id] = newValue }
         )
     }
