@@ -46,28 +46,22 @@ struct ListEntry: Identifiable {
 
 struct ContentView: View {
     @EnvironmentObject var model: Model
-
-    //
-//    func session(_ session: ImportSession, willImportItems count: Int) {
-//        showProgress = true
-//    }
-//
-//    func session(_ session: ImportSession, willImportItem label: String, index: Int, of count: Int) {
-//        progress = Double(index) / Double(count)
-//    }
-//
-//    func sessionDidFinish(_ session: ImportSession) {
-//        showProgress = false
-//    }
-//
-//    func sessionDidFail(_ session: ImportSession) {
-//        showProgress = false
-//    }
-//
+    @EnvironmentObject var sheetController: SheetController
+    
     var body: some View {
         VStack {
             NavigationView {
                 ExtractedView()
+                    .toolbar {
+                        ToolbarItem(placement: .bottomBar) {
+                            Spacer()
+                        }
+                        ToolbarItem(placement: .bottomBar) {
+                            Button(action: handlePreferences) {
+                                Label("Preferences", systemImage: "gear")
+                            }
+                        }
+                    }
                     .navigationTitle(model.appName)
                     .navigationBarItems(
                         leading: EditButton(),
@@ -78,7 +72,7 @@ struct ContentView: View {
                     )
             }
             .navigationBarTitleDisplayMode(.inline)
-
+            .usingSheetController()
         }
     }
     
@@ -86,45 +80,21 @@ struct ContentView: View {
         let list = BookList(id: UUID().uuidString, name: "Untitled List", entries: [], values: [:])
         model.lists.append(list)
     }
-    
+
+    func handlePreferences() {
+        sheetController.show {
+            PreferencesView()
+        }
+    }
 }
 
 struct ExtractedView: View {
-    @EnvironmentObject var model: Model
     @Environment(\.editMode) var editMode
     var body: some View {
             if editMode?.wrappedValue == .active {
-                List() {
-                    ForEach(model.lists.order, id: \.self) { id in
-                        if let binding = model.binding(forBookList: id) {
-                            ListItemLinkView(for: binding)
-                        }
-                    }
-                    .onMove(perform: handleMove)
-                    .onDelete(perform: handleDelete)
-                }
+                EditableBookListsView()
             } else {
-                let entries = model.lists.order.map({ ListEntry(list: $0, model: model) })
-                List(entries, children: \.children) { entry in
-                    switch entry.kind {
-                        case .book(let id):
-                            if let binding = model.binding(forBook: id) {
-                                ListItemLinkView(for: binding)
-                            }
-                        case .list(let id):
-                            if let binding = model.binding(forBookList: id) {
-                                ListItemLinkView(for: binding)
-                            }
-                    }
-                }
+                BookListsView()
             }
-    }
-    
-    func handleMove(fromOffsets from: IndexSet, toOffset to: Int) {
-        model.lists.move(fromOffsets: from, toOffset: to)
-    }
-    
-    func handleDelete(_ indices: IndexSet) {
-        model.lists.remove(indices)
     }
 }

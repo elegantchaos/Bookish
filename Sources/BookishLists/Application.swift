@@ -3,14 +3,16 @@
 //  All code (c) 2021 - present day, Sam Deane.
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
+import CloudKit
 import Combine
 import Files
 import ObjectStore
 import SwiftUI
+import SwiftUIExtensions
 
 @main
 struct Application: App {
-    let store: FileObjectStore<JSONObjectCoder>
+    let store: ObjectStore
     let model: Model
     
     init() {
@@ -22,10 +24,11 @@ struct Application: App {
     }
     
     var body: some Scene {
-
+        let sheetController = SheetController()
         return WindowGroup {
             ContentView()
                 .environmentObject(model)
+                .environmentObject(sheetController)
                 .onReceive(
                     model.objectWillChange.debounce(for: .seconds(1), scheduler: RunLoop.main), perform: { _ in
                         model.save(to: store)
@@ -33,9 +36,11 @@ struct Application: App {
         }
     }
     
-    static func setupStore() -> FileObjectStore<JSONObjectCoder> {
-        let folder = FileManager.default.locations.documents.folder("com.elegantchaos.bookish.lists") // TODO: move to application support?
-        let store = FileObjectStore(root: folder, coder: JSONObjectCoder())
+    static func setupStore() -> ObjectStore {
+//        let folder = FileManager.default.locations.documents.folder("com.elegantchaos.bookish.lists") // TODO: move to application support?
+//        let store = FileObjectStore(root: folder, coder: JSONObjectCoder())
+        let container = CKContainer(identifier: "iCloud.com.elegantchaos.Bookish.Lists")
+        let store = CloudKitObjectStore(container: container, coder: JSONObjectCoder())
         return store
     }
 }
