@@ -25,4 +25,7 @@
    <FileRef
       location = "group:../SwiftUIExtensions">
    </FileRef>
+   <FileRef
+      location = "group:../Logger">
+   </FileRef>
 </Workspace>
