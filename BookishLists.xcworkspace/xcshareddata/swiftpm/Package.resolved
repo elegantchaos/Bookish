@@ -29,6 +29,15 @@
         }
       },
       {
+        "package": "SheetController",
+        "repositoryURL": "https://github.com/elegantchaos/SheetController.git",
+        "state": {
+          "branch": null,
+          "revision": "843ad66eadda3d1f8f0a76d8954edb81d064d3ef",
+          "version": "1.0.0"
+        }
+      },
+      {
         "package": "XCTestExtensions",
         "repositoryURL": "https://github.com/elegantchaos/XCTestExtensions.git",
         "state": {

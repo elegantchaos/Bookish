@@ -4,7 +4,7 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 import SwiftUI
-import SwiftUIExtensions
+import SheetController
 import BookishImporter
 
 enum ListEntryKind {
@@ -49,30 +49,31 @@ struct ContentView: View {
     @EnvironmentObject var sheetController: SheetController
     
     var body: some View {
-        VStack {
-            NavigationView {
-                ExtractedView()
-                    .toolbar {
-                        ToolbarItem(placement: .bottomBar) {
-                            Spacer()
-                        }
-                        ToolbarItem(placement: .bottomBar) {
-                            Button(action: handlePreferences) {
-                                Label("Preferences", systemImage: "gear")
+        SheetControllerHost {
+            VStack {
+                NavigationView {
+                    RootIndexView()
+                        .toolbar {
+                            ToolbarItem(placement: .bottomBar) {
+                                Spacer()
+                            }
+                            ToolbarItem(placement: .bottomBar) {
+                                Button(action: handlePreferences) {
+                                    Label("Preferences", systemImage: "gear")
+                                }
                             }
                         }
-                    }
-                    .navigationTitle(model.appName)
-                    .navigationBarItems(
-                        leading: EditButton(),
-                        trailing:
-                            HStack {
-                                Button(action: handleAdd) { Image(systemName: "plus") }
-                            }
-                    )
+                        .navigationTitle(model.appName)
+                        .navigationBarItems(
+                            leading: EditButton(),
+                            trailing:
+                                HStack {
+                                    Button(action: handleAdd) { Image(systemName: "plus") }
+                                }
+                        )
+                }
+                .navigationBarTitleDisplayMode(.inline)
             }
-            .navigationBarTitleDisplayMode(.inline)
-            .usingSheetController()
         }
     }
     
@@ -88,7 +89,7 @@ struct ContentView: View {
     }
 }
 
-struct ExtractedView: View {
+struct RootIndexView: View {
     @Environment(\.editMode) var editMode
     var body: some View {
             if editMode?.wrappedValue == .active {

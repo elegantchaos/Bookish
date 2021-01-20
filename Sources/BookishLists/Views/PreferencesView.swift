@@ -4,15 +4,21 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 import SwiftUI
-import SwiftUIExtensions
+import SheetController
+import LoggerUI
 
 struct PreferencesView: View {
     @EnvironmentObject var sheetController: SheetController
     
     var body: some View {
-        Text("Preferences")
-        Button(action: sheetController.dismiss) {
-            Text("Done")
+        NavigationView {
+            LoggerChannelsView()
+                .padding()
+                .navigationTitle("Log Channels")
+                .navigationBarItems(trailing:
+                    Button(action: sheetController.dismiss) {
+                        Text("Done")
+                    })
         }
     }
 }

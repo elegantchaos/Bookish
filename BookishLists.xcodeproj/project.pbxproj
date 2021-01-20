@@ -32,6 +32,10 @@
 		8B58C7C625B84424007F6B70 /* EditableBookListsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B58C7C525B84424007F6B70 /* EditableBookListsView.swift */; };
 		8B58C7CC25B84AB8007F6B70 /* PreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B58C7CB25B84AB8007F6B70 /* PreferencesView.swift */; };
 		8B6CAAC8252B2C8B00FF2035 /* KeyValueStore in Frameworks */ = {isa = PBXBuildFile; productRef = 8B6CAAC7252B2C8B00FF2035 /* KeyValueStore */; };
+		8B80467325B8788900698F28 /* SheetController in Frameworks */ = {isa = PBXBuildFile; productRef = 8B80467225B8788900698F28 /* SheetController */; };
+		8B80467D25B87C4A00698F28 /* LoggerUI in Frameworks */ = {isa = PBXBuildFile; productRef = 8B80467C25B87C4A00698F28 /* LoggerUI */; };
+		8B80468725B8803B00698F28 /* IndexedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B80468625B8803B00698F28 /* IndexedList.swift */; };
+		8B80468D25B8807600698F28 /* IndexedList+ObjectStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B80468C25B8807600698F28 /* IndexedList+ObjectStore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,6 +101,8 @@
 		8B58C7BF25B843C7007F6B70 /* BookListsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookListsView.swift; sourceTree = "<group>"; };
 		8B58C7C525B84424007F6B70 /* EditableBookListsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableBookListsView.swift; sourceTree = "<group>"; };
 		8B58C7CB25B84AB8007F6B70 /* PreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesView.swift; sourceTree = "<group>"; };
+		8B80468625B8803B00698F28 /* IndexedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexedList.swift; sourceTree = "<group>"; };
+		8B80468C25B8807600698F28 /* IndexedList+ObjectStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IndexedList+ObjectStore.swift"; sourceTree = "<group>"; };
 		8BE9ADE9252B0DDA00F97D53 /* Tools.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Tools.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -111,6 +117,8 @@
 				8B58C7B425B71528007F6B70 /* CloudKit.framework in Frameworks */,
 				8B1F114225ADFB0D00108A34 /* ISBN in Frameworks */,
 				8B1F10F725ADE46500108A34 /* SwiftUIExtensions in Frameworks */,
+				8B80467325B8788900698F28 /* SheetController in Frameworks */,
+				8B80467D25B87C4A00698F28 /* LoggerUI in Frameworks */,
 				8B1F115125AE04DE00108A34 /* BookishImporter in Frameworks */,
 				8B6CAAC8252B2C8B00FF2035 /* KeyValueStore in Frameworks */,
 				8B09310F25AF52BD00E4A9FD /* ObjectStore in Frameworks */,
@@ -233,6 +241,8 @@
 				8B58C7B525B716AF007F6B70 /* CloudKitObjectStore.swift */,
 				2207D47025265FC400A014D5 /* Views */,
 				22ED67F1251E439200B0226D /* Resources */,
+				8B80468625B8803B00698F28 /* IndexedList.swift */,
+				8B80468C25B8807600698F28 /* IndexedList+ObjectStore.swift */,
 			);
 			path = BookishLists;
 			sourceTree = "<group>";
@@ -280,6 +290,8 @@
 				8B1F115025AE04DE00108A34 /* BookishImporter */,
 				8B2A7CC725AE140A0024C1A2 /* ThreadExtensions */,
 				8B09310E25AF52BD00E4A9FD /* ObjectStore */,
+				8B80467225B8788900698F28 /* SheetController */,
+				8B80467C25B87C4A00698F28 /* LoggerUI */,
 			);
 			productName = "Samedi's Crafting";
 			productReference = 226F15D7251A28EA00D6B12E /* Bookish Lists.app */;
@@ -384,6 +396,7 @@
 				8B1F114F25AE04DE00108A34 /* XCRemoteSwiftPackageReference "BookishImporter" */,
 				8B2A7CC625AE140A0024C1A2 /* XCRemoteSwiftPackageReference "ThreadExtensions" */,
 				8B09310D25AF52BD00E4A9FD /* XCRemoteSwiftPackageReference "ObjectStore" */,
+				8B80467125B8788900698F28 /* XCRemoteSwiftPackageReference "SheetController" */,
 			);
 			productRefGroup = 226F15D8251A28EA00D6B12E /* Products */;
 			projectDirPath = "";
@@ -458,7 +471,9 @@
 				8B1F10E225ADC28800108A34 /* BookView.swift in Sources */,
 				226F15DB251A28EA00D6B12E /* Application.swift in Sources */,
 				221717DC2522773B00C43604 /* Model.swift in Sources */,
+				8B80468725B8803B00698F28 /* IndexedList.swift in Sources */,
 				8B58C7B625B716AF007F6B70 /* CloudKitObjectStore.swift in Sources */,
+				8B80468D25B8807600698F28 /* IndexedList+ObjectStore.swift in Sources */,
 				8B58C7CC25B84AB8007F6B70 /* PreferencesView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -824,7 +839,7 @@
 			repositoryURL = "https://github.com/elegantchaos/SwiftUIExtensions.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.1.1;
+				minimumVersion = 1.2.0;
 			};
 		};
 		8B1F110525ADF4FD00108A34 /* XCRemoteSwiftPackageReference "Logger" */ = {
@@ -832,7 +847,7 @@
 			repositoryURL = "https://github.com/elegantchaos/Logger.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.5.7;
+				minimumVersion = 1.6.0;
 			};
 		};
 		8B1F112D25ADF56F00108A34 /* XCRemoteSwiftPackageReference "Localization" */ = {
@@ -870,6 +885,14 @@
 		8B6CAAC6252B2C8B00FF2035 /* XCRemoteSwiftPackageReference "KeyValueStore" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/elegantchaos/KeyValueStore.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+		8B80467125B8788900698F28 /* XCRemoteSwiftPackageReference "SheetController" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/elegantchaos/SheetController.git";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 1.0.0;
@@ -917,6 +940,15 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8B6CAAC6252B2C8B00FF2035 /* XCRemoteSwiftPackageReference "KeyValueStore" */;
 			productName = KeyValueStore;
+		};
+		8B80467225B8788900698F28 /* SheetController */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8B80467125B8788900698F28 /* XCRemoteSwiftPackageReference "SheetController" */;
+			productName = SheetController;
+		};
+		8B80467C25B87C4A00698F28 /* LoggerUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = LoggerUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
