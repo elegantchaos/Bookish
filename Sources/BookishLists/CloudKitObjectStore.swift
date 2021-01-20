@@ -32,28 +32,6 @@ public struct CloudKitObjectStore<CoderType>: ObjectStore where CoderType: Objec
         }
         
         cloudKitStoreChannel.log("Loading \(ids)")
-
-//        func store(_ error: Error, for id: String) {
-////            cloudKitStoreChannel.log("Load failed for \(id): \(error)")
-//            errors[id] = error
-//            completeIfDone()
-//        }
-//
-//        func store(_ object: T) {
-////            cloudKitStoreChannel.log("Loaded \(object)")
-//            loaded.append(object)
-//            completeIfDone()
-//        }
-//
-//        func completeIfDone() {
-//            if loaded.count + errors.count == ids.count {
-//                cloudKitStoreChannel.log(errors.count == 0 ? "Finished load of \(ids)." : "Finished load with errors: \(errors)")
-//                DispatchQueue.main.async {
-//                    completion(loaded, errors)
-//                }
-//            }
-//        }
-//
         
         var recordIDs: [CKRecord.ID] = []
         for id in ids {
@@ -63,6 +41,7 @@ public struct CloudKitObjectStore<CoderType>: ObjectStore where CoderType: Objec
         let fetch = CKFetchRecordsOperation()
         fetch.recordIDs = recordIDs
         fetch.fetchRecordsCompletionBlock = { records, error in
+            // TODO: batch up the loading
             var loaded: [T] = []
             var errors: [String:Error] = [:]
             
@@ -122,31 +101,45 @@ public struct CloudKitObjectStore<CoderType>: ObjectStore where CoderType: Objec
             }
         }
         
-        let operation = CKModifyRecordsOperation()
-        operation.recordsToSave = records
-        operation.savePolicy = .allKeys
-        operation.queuePriority = .high
-        operation.perRecordCompletionBlock = { record, error in
-            if let error = error {
-                print("saving error: \(error)")
+        var totalDone = 0
+        save(records: records, batchSize: records.count) { done in
+            cloudKitStoreChannel.log("Saved \(done) records.")
+            totalDone += done
+            if totalDone == ids.count {
+                cloudKitStoreChannel.log(errors.count == 0 ? "Saving done for \(ids)" : "Saving produced errors: \(errors)")
+                completion(errors)
             }
         }
-        operation.modifyRecordsCompletionBlock = { records, ids, error in
-            if let error = error {
-                print(error)
-            }
-            
-            if let records = records, let ids = ids {
-                print(records, ids)
-            }
-
-            cloudKitStoreChannel.log(errors.count == 0 ? "Saving done for \(ids)" : "Saving produced errors: \(errors)")
-            completion(errors)
-        }
-        database.add(operation)
     }
 
     public func remove(objectsWithIds ids: [String], completion: ([String : Error]) -> ()) {
         
+    }
+    
+    
+    public func save(records: [CKRecord], batchSize: Int, completion: @escaping (Int) -> ()) {
+        cloudKitStoreChannel.log("Saving \(records.count) records in batches of \(batchSize).")
+        var remaining = records
+        while remaining.count > 0 {
+            let count = min(batchSize, remaining.count)
+            let batch = Array(remaining[0 ..< count])
+            remaining.removeFirst(count)
+
+            cloudKitStoreChannel.log("Saving batch of \(count).")
+            let operation = CKModifyRecordsOperation()
+            operation.recordsToSave = batch
+            operation.savePolicy = .allKeys
+            operation.queuePriority = .high
+            operation.modifyRecordsCompletionBlock = { _, _, error in
+                if let error = (error as (NSError?)), error.code == CKError.Code.limitExceeded.rawValue {
+                    let newBatchSize = batchSize / 2
+                    cloudKitStoreChannel.log("Retrying with batchSize of \(newBatchSize)")
+                    save(records: batch, batchSize: newBatchSize, completion: completion)
+                } else {
+                    completion(count)
+                }
+            }
+            database.add(operation)
+        }
     }
 }

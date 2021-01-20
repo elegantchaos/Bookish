@@ -46,6 +46,7 @@ typealias BookListIndex = SimpleIndexedList<BookList>
 typealias BookIndex = SimpleIndexedList<Book>
 
 class Model: ObservableObject {
+    var loaded = false
     @Published var books = BookIndex()
     @Published var lists = BookListIndex()
 
@@ -99,6 +100,8 @@ class Model: ObservableObject {
                 modelChannel.log("Removed some missing entries for \(list.name)")
             }
         }
+        
+        loaded = true
         modelChannel.log("Loading completed.")
     }
     
@@ -108,8 +111,17 @@ class Model: ObservableObject {
     }
     
     func save(to store: ObjectStore) {
-        lists.save(to: store, idKey: .listsKey)
-        books.save(to: store, idKey: .booksKey)
+        if loaded {
+            lists.save(to: store, idKey: .listsKey) { result in
+                if !result {
+                    modelChannel.log("Saving lists failed")
+                } else {
+                    self.books.save(to: store, idKey: .booksKey) { result in
+                        modelChannel.log(result ? "Saving done" : "Saving books failed")
+                    }
+                }
+            }
+        }
     }
 
     func binding(forBookList id: BookList.ID) -> Binding<BookList> {

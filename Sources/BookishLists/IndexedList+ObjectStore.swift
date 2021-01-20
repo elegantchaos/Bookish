@@ -27,13 +27,15 @@ extension IndexedList {
         }
     }
     
-    func save(to store: ObjectStore, idKey id: String) where Value.ID == String {
+    func save(to store: ObjectStore, idKey id: String, completion: @escaping (Bool) -> ()) where Value.ID == String {
         store.save(order, withId: id) { result in
             switch result {
-                case let .failure(error): print(error) // TODO: handle this properly
+                case .failure:
+                    completion(false)
+                    
                 case .success:
                     store.save(Array(index.values)) { results in
-                        
+                        completion(results.count == 0)
                     }
             }
         }
