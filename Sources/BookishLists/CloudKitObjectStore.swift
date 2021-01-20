@@ -5,7 +5,10 @@
 
 import CloudKit
 import Foundation
+import Logger
 import ObjectStore
+
+let cloudKitStoreChannel = Channel("CloudKitStore")
 
 public struct CloudKitObjectStore<CoderType>: ObjectStore where CoderType: ObjectCoder {
     let container: CKContainer
@@ -21,28 +24,36 @@ public struct CloudKitObjectStore<CoderType>: ObjectStore where CoderType: Objec
         self.database = container.privateCloudDatabase
         self.coder = coder
     }
-
-//    func file(forId id: String) -> File {
-//        return root.file(id)
-//    }
     
     public func load<T>(_ type: T.Type, withIds ids: [String], completion: @escaping ([T], [String : Error]) -> ()) where T : Decodable {
+        guard ids.count > 0 else {
+            completion([], [:])
+            return
+        }
+        
+        cloudKitStoreChannel.log("Loading \(ids)")
+
         var loaded: [T] = []
         var errors: [String:Error] = [:]
         
         func store(_ error: Error, for id: String) {
+            cloudKitStoreChannel.log("Load failed for \(id): \(error)")
             errors[id] = error
             completeIfDone()
         }
         
         func store(_ object: T) {
+            cloudKitStoreChannel.log("Loaded \(object)")
             loaded.append(object)
             completeIfDone()
         }
         
         func completeIfDone() {
             if loaded.count + errors.count == ids.count {
-                completion(loaded, errors)
+                cloudKitStoreChannel.log(errors.count == 0 ? "Finished load of \(ids)." : "Finished load with errors: \(errors)")
+                DispatchQueue.main.async {
+                    completion(loaded, errors)
+                }
             }
         }
         
@@ -64,10 +75,18 @@ public struct CloudKitObjectStore<CoderType>: ObjectStore where CoderType: Objec
         }
     }
     
-    public func save<T>(_ objects: [T], withIds ids: [String], completion: ([String : Error]) -> ()) where T : Encodable {
+    public func save<T>(_ objects: [T], withIds ids: [String], completion: @escaping ([String : Error]) -> ()) where T : Encodable {
         assert(objects.count == ids.count)
+        guard objects.count > 0 else {
+            completion([:])
+            return
+        }
+        
+        cloudKitStoreChannel.log("Saving \(ids)")
         
         var records: [CKRecord] = []
+        var errors: [String:Error] = [:]
+        
         for (object, id) in zip(objects, ids) {
             do {
                 let data = try coder.encodeObject(object)
@@ -77,15 +96,17 @@ public struct CloudKitObjectStore<CoderType>: ObjectStore where CoderType: Objec
                 ])
                 records.append(record)
             } catch {
-                print(error)
+                errors[id] = error
+                cloudKitStoreChannel.log(error)
             }
         }
         
         let operation = CKModifyRecordsOperation()
         operation.recordsToSave = records
-        operation.savePolicy = .changedKeys
+        operation.savePolicy = .allKeys
         operation.completionBlock = {
-            
+            cloudKitStoreChannel.log(errors.count == 0 ? "Saving done for \(ids)" : "Saving produced errors: \(errors)")
+            completion(errors)
         }
         database.add(operation)
     }

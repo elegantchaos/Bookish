@@ -4,8 +4,11 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 import KeyValueStore
+import Logger
 import ObjectStore
 import SwiftUI
+
+let modelChannel = Channel("Model")
 
 extension String {
     static let booksKey = "Books"
@@ -39,85 +42,8 @@ extension UUID: JSONCodable {
     }
 }
 
-protocol IndexedList where Value: Identifiable, Value: Codable, Value.ID: Codable  {
-    associatedtype Value
-    var order: [Value.ID] { get set }
-    var index: [Value.ID:Value] { get set }
-    init(order: [Value.ID], index: [Value.ID:Value])
-    mutating func append(_ value: Value)
-    mutating func move(fromOffsets from: IndexSet, toOffset to: Int)
-    mutating func remove(itemWithID id: Value.ID)
-    mutating func remove(at itemIndex: Int)
-    mutating func remove(_ indices: IndexSet)
-}
-
-struct SimpleIndexedList<T>: IndexedList where T: Identifiable, T: Codable, T.ID: Codable {
-    var order: [T.ID] = []
-    var index: [T.ID:T] = [:]
-
-    mutating func append(_ value: T) {
-        order.append(value.id)
-        index[value.id] = value
-    }
-    
-    mutating func move(fromOffsets from: IndexSet, toOffset to: Int) {
-        order.move(fromOffsets: from, toOffset: to)
-    }
-    
-    mutating func remove(itemWithID id: T.ID) {
-        index.removeValue(forKey: id)
-        if let position = order.firstIndex(of: id) {
-            order.remove(at: position)
-        }
-    }
-
-    mutating func remove(at itemIndex: Int) {
-        let id = order[itemIndex]
-        order.remove(at: itemIndex)
-        index.removeValue(forKey: id)
-    }
-
-    mutating func remove(_ indices: IndexSet) {
-        for item in indices {
-            remove(at: item)
-        }
-    }
-}
-
 typealias BookListIndex = SimpleIndexedList<BookList>
 typealias BookIndex = SimpleIndexedList<Book>
-
-extension IndexedList {
-    static func load(from store: ObjectStore, idKey id: String, completion: @escaping (Result<Self,Error>) -> ()) where Value.ID == String {
-        store.load([String].self, withId: id) { result in
-            switch result {
-                case let .failure(error):
-                    completion(.failure(error))
-
-                case let .success(ids):
-                    store.load(Value.self, withIds: ids) { objects, errors in
-                        var index: [Value.ID:Value] = [:]
-                        for object in objects {
-                            index[object.id] = object
-                        }
-                        completion(.success(Self(order: ids, index: index)))
-                    }
-            }
-        }
-    }
-    
-    func save(to store: ObjectStore, idKey id: String) where Value.ID == String {
-        store.save(order, withId: id) { result in
-            switch result {
-                case let .failure(error): print(error) // TODO: handle this properly
-                case .success:
-                    store.save(Array(index.values)) { results in
-                        
-                    }
-            }
-        }
-    }
-}
 
 class Model: ObservableObject {
     @Published var books = BookIndex()
@@ -132,6 +58,7 @@ class Model: ObservableObject {
     }
     
     func loadBooks(store: ObjectStore) {
+        modelChannel.log("Loading books")
         BookIndex.load(from: store, idKey: .booksKey) { result in
             switch result {
                 case let .success(index):
@@ -139,12 +66,13 @@ class Model: ObservableObject {
                     self.loadLists(store: store)
                     
                 case let .failure(error):
-                    print(error)
+                    modelChannel.log(error)
             }
         }
     }
 
     func loadLists(store: ObjectStore) {
+        modelChannel.log("Loading lists")
         BookListIndex.load(from: store, idKey: .listsKey) { result in
             switch result {
                 case let .success(index):
@@ -152,12 +80,13 @@ class Model: ObservableObject {
                     self.normaliseData()
                     
                 case let .failure(error):
-                    print(error)
+                    modelChannel.log(error)
             }
         }
     }
     
     func normaliseData() {
+        modelChannel.log("Normalising data")
         let allBooks = Set(books.index.keys)
         let allLists = lists.index.values
         for list in allLists {
@@ -167,9 +96,10 @@ class Model: ObservableObject {
                 var updated = list
                 updated.entries = Array(normalised)
                 lists.index[list.id] = updated
-                print("Removed some missing entries for \(list.name)")
+                modelChannel.log("Removed some missing entries for \(list.name)")
             }
         }
+        modelChannel.log("Loading completed.")
     }
     
     var appName: String { "Bookish Lists" }
