@@ -10,14 +10,14 @@ import SwiftUI
 struct BookView: View {
     @EnvironmentObject var model: Model
     @State var selection: UUID? = nil
-    @Binding var book: Book
+    @State var book: CDBook
 
     var body: some View {
         VStack {
-            TextField("Name", text: $book.name)
+            TextField("Name", text: $book.name.onNone(""))
                 .padding()
             
         }
-        .navigationTitle(book.name)
+        .navigationTitle(book.name ?? "")
     }
 }

@@ -21,12 +21,12 @@ extension BookList: ListItemViewable {
         Text(binding.wrappedValue.name)
     }
 }
-
-extension Book: ListItemLinkable {
-    static func linkView(binding: Binding<Book>) -> some View {
-        BookView(book: binding)
-    }
-}
+//
+//extension Book: ListItemLinkable {
+//    static func linkView(binding: Binding<Book>) -> some View {
+//        BookView(book: binding)
+//    }
+//}
 
 extension Book: ListItemViewable {
     static func iconView(binding: Binding<Book>) -> Image? {

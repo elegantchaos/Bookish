@@ -20,15 +20,22 @@ extension Binding where Value == String? {
 
 struct BookListView: View {
     @EnvironmentObject var model: Model
+    @Environment(\.managedObjectContext) var managedObjectContext
     @State var selection: UUID? = nil
     @State var list: CDList
     @State var importRequested = false
     @State var importProgress: Double? = nil
 
+    @FetchRequest(
+        entity: CDBook.entity(),
+        sortDescriptors: []
+    ) var books: FetchedResults<CDBook>
+
     let manager = ImportManager()
 
     var body: some View {
-        VStack {
+        
+        return VStack {
             TextField("Name", text: $list.name.onNone(""))
                 .padding()
             
@@ -44,14 +51,18 @@ struct BookListView: View {
                 }
             }
 
-//            List(selection: $selection) {
-//                ForEach(list.entries, id: \.self) { id in
-//                    let book = model.binding(forBook: id)
-//                    ListItemLinkView(for: book)
-//                }
+            List(/*selection: $selection*/) {
+                if let books = list.books as? Set<CDBook> {
+                    let sorted = books.sorted { ($0.name ?? "") < ($1.name ?? "") }
+                    ForEach(sorted) { book in
+                        NavigationLink(destination: BookView(book: book)) {
+                            Text(book.name ?? "")
+                        }
+                    }
+                }
 //                .onDelete(perform: handleDelete)
 //                .onMove(perform: handleMove)
-//            }
+            }
         }
         .navigationTitle(list.name ?? "Untitled")
         .navigationBarItems(
@@ -77,7 +88,11 @@ struct BookListView: View {
     }
     
     func handleAdd() {
-//        let book = Book(id: UUID().uuidString, name: "Untitled Book")
+        let book = CDBook(context: managedObjectContext)
+        book.id = UUID()
+        book.addToLists(list)
+        try? managedObjectContext.saveContext()
+        //        let book = Book(id: UUID().uuidString, name: "Untitled Book")
 //        list.entries.append(book.id)
 //        model.books.append(book)
     }
