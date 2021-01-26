@@ -14,7 +14,6 @@
 		226F15F8251A28F600D6B12E /* BookishListsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226F15F7251A28F600D6B12E /* BookishListsUITests.swift */; };
 		229E259B25254AED00C41777 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E259A25254AED00C41777 /* ContentView.swift */; };
 		22F68598251B8B7D00E867CE /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F68597251B8B7D00E867CE /* main.swift */; };
-		8B09310F25AF52BD00E4A9FD /* ObjectStore in Frameworks */ = {isa = PBXBuildFile; productRef = 8B09310E25AF52BD00E4A9FD /* ObjectStore */; };
 		8B1F10AC25AC8EC400108A34 /* BarcodeScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1F10AB25AC8EC400108A34 /* BarcodeScanner.swift */; };
 		8B1F10D225AC971A00108A34 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 226F15DE251A28F600D6B12E /* Assets.xcassets */; };
 		8B1F10D825ACB30A00108A34 /* BookListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1F10D725ACB30A00108A34 /* BookListView.swift */; };
@@ -27,7 +26,6 @@
 		8B1F115125AE04DE00108A34 /* BookishImporter in Frameworks */ = {isa = PBXBuildFile; productRef = 8B1F115025AE04DE00108A34 /* BookishImporter */; };
 		8B2A7CC825AE140A0024C1A2 /* ThreadExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 8B2A7CC725AE140A0024C1A2 /* ThreadExtensions */; };
 		8B58C7B425B71528007F6B70 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B58C7B325B71528007F6B70 /* CloudKit.framework */; };
-		8B58C7B625B716AF007F6B70 /* CloudKitObjectStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B58C7B525B716AF007F6B70 /* CloudKitObjectStore.swift */; };
 		8B58C7C025B843C7007F6B70 /* BookListsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B58C7BF25B843C7007F6B70 /* BookListsView.swift */; };
 		8B58C7C625B84424007F6B70 /* EditableBookListsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B58C7C525B84424007F6B70 /* EditableBookListsView.swift */; };
 		8B58C7CC25B84AB8007F6B70 /* PreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B58C7CB25B84AB8007F6B70 /* PreferencesView.swift */; };
@@ -101,7 +99,6 @@
 		8B1F10E125ADC28800108A34 /* BookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookView.swift; sourceTree = "<group>"; };
 		8B1F10EB25ADD40F00108A34 /* LinkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkView.swift; sourceTree = "<group>"; };
 		8B58C7B325B71528007F6B70 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
-		8B58C7B525B716AF007F6B70 /* CloudKitObjectStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitObjectStore.swift; sourceTree = "<group>"; };
 		8B58C7BF25B843C7007F6B70 /* BookListsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookListsView.swift; sourceTree = "<group>"; };
 		8B58C7C525B84424007F6B70 /* EditableBookListsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableBookListsView.swift; sourceTree = "<group>"; };
 		8B58C7CB25B84AB8007F6B70 /* PreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesView.swift; sourceTree = "<group>"; };
@@ -129,7 +126,6 @@
 				8B80467D25B87C4A00698F28 /* LoggerUI in Frameworks */,
 				8B1F115125AE04DE00108A34 /* BookishImporter in Frameworks */,
 				8B6CAAC8252B2C8B00FF2035 /* KeyValueStore in Frameworks */,
-				8B09310F25AF52BD00E4A9FD /* ObjectStore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -250,7 +246,6 @@
 				8B987C9E25C047E5003D6F9F /* CoreDataStack.swift */,
 				8B1F10AB25AC8EC400108A34 /* BarcodeScanner.swift */,
 				226F15DA251A28EA00D6B12E /* Application.swift */,
-				8B58C7B525B716AF007F6B70 /* CloudKitObjectStore.swift */,
 				2207D47025265FC400A014D5 /* Views */,
 				22ED67F1251E439200B0226D /* Resources */,
 				8B80468625B8803B00698F28 /* IndexedList.swift */,
@@ -301,7 +296,6 @@
 				8B1F114125ADFB0D00108A34 /* ISBN */,
 				8B1F115025AE04DE00108A34 /* BookishImporter */,
 				8B2A7CC725AE140A0024C1A2 /* ThreadExtensions */,
-				8B09310E25AF52BD00E4A9FD /* ObjectStore */,
 				8B80467225B8788900698F28 /* SheetController */,
 				8B80467C25B87C4A00698F28 /* LoggerUI */,
 			);
@@ -407,7 +401,6 @@
 				8B1F114025ADFB0D00108A34 /* XCRemoteSwiftPackageReference "ISBN" */,
 				8B1F114F25AE04DE00108A34 /* XCRemoteSwiftPackageReference "BookishImporter" */,
 				8B2A7CC625AE140A0024C1A2 /* XCRemoteSwiftPackageReference "ThreadExtensions" */,
-				8B09310D25AF52BD00E4A9FD /* XCRemoteSwiftPackageReference "ObjectStore" */,
 				8B80467125B8788900698F28 /* XCRemoteSwiftPackageReference "SheetController" */,
 			);
 			productRefGroup = 226F15D8251A28EA00D6B12E /* Products */;
@@ -488,7 +481,6 @@
 				226F15DB251A28EA00D6B12E /* Application.swift in Sources */,
 				221717DC2522773B00C43604 /* Model.swift in Sources */,
 				8B80468725B8803B00698F28 /* IndexedList.swift in Sources */,
-				8B58C7B625B716AF007F6B70 /* CloudKitObjectStore.swift in Sources */,
 				8B80468D25B8807600698F28 /* IndexedList+ObjectStore.swift in Sources */,
 				8B58C7CC25B84AB8007F6B70 /* PreferencesView.swift in Sources */,
 			);
@@ -842,14 +834,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		8B09310D25AF52BD00E4A9FD /* XCRemoteSwiftPackageReference "ObjectStore" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/elegantchaos/ObjectStore.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.0.1;
-			};
-		};
 		8B1F10F525ADE46500108A34 /* XCRemoteSwiftPackageReference "SwiftUIExtensions" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/elegantchaos/SwiftUIExtensions.git";
@@ -917,11 +901,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		8B09310E25AF52BD00E4A9FD /* ObjectStore */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8B09310D25AF52BD00E4A9FD /* XCRemoteSwiftPackageReference "ObjectStore" */;
-			productName = ObjectStore;
-		};
 		8B1F10F625ADE46500108A34 /* SwiftUIExtensions */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 8B1F10F525ADE46500108A34 /* XCRemoteSwiftPackageReference "SwiftUIExtensions" */;

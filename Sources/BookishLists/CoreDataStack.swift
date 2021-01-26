@@ -5,6 +5,7 @@
 
 import Foundation
 import CoreData
+import SwiftUI
 
 class CoreDataStack {
     
@@ -24,17 +25,6 @@ class CoreDataStack {
     
     init(containerName: String) {
         self.containerName = containerName
-        _ = persistentContainer
-    }
-}
-
-extension NSManagedObjectContext {
-    func saveContext() {
-        guard hasChanges else { return }
-        do {
-            try save()
-        } catch let error as NSError {
-            print(error.localizedDescription)
-        }
+        persistentContainer.viewContext.automaticallyMergesChangesFromParent = true
     }
 }

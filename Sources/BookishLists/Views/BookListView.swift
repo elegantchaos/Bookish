@@ -19,6 +19,7 @@ extension Binding where Value == String? {
 }
 
 struct BookListView: View {
+    @EnvironmentObject var model: Model
     @Environment(\.managedObjectContext) var context
     @State var selection: UUID? = nil
     @ObservedObject var list: CDList
@@ -73,7 +74,7 @@ struct BookListView: View {
                 let book = list.sortedBooks[index]
                 list.removeFromBooks(book)
             }
-            context.saveContext()
+            model.save()
         }
     }
     
@@ -81,7 +82,7 @@ struct BookListView: View {
         let book = CDBook(context: context)
         book.id = UUID()
         book.addToLists(list)
-        context.saveContext()
+        model.save()
     }
     
     func handleRequestImport() {
@@ -118,7 +119,7 @@ extension BookListView: ImportMonitor {
                     book.name = importedBook.title
                     list.addToBooks(book)
                 }
-                context.saveContext()
+                model.save()
             }
         }
     }

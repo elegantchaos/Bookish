@@ -24,6 +24,6 @@ struct BookView: View {
     }
     
     func handleDisappear() {
-        try? managedObjectContext.save()
+        model.save()
     }
 }

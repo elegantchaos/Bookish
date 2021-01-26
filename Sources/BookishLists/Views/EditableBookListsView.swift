@@ -7,6 +7,7 @@ import SwiftUI
 import SwiftUIExtensions
 
 struct EditableBookListsView: View {
+    @EnvironmentObject var model: Model
     @Environment(\.managedObjectContext) var context
     @FetchRequest(
         entity: CDList.entity(),
@@ -30,7 +31,7 @@ struct EditableBookListsView: View {
                 let list = lists[index]
                 context.delete(list)
             }
-            context.saveContext()
+            model.save()
         }
     }
 }
