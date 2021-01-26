@@ -7,16 +7,24 @@ import SwiftUI
 import SwiftUIExtensions
 
 struct BookListsView: View {
-    @EnvironmentObject var model: Model
     @FetchRequest(
         entity: CDList.entity(),
-        sortDescriptors: []
+        sortDescriptors: [NSSortDescriptor(key: "name", ascending: true)]
     ) var lists: FetchedResults<CDList>
     
     var body: some View {
-        List(lists) { list in
-            NavigationLink(destination: BookListView(list: list)) {
-                Text(list.name ?? "<>")
+        let entries = lists.map({ ListEntry(list: $0)})
+        List(entries, children: \.children) { entry in
+            switch entry.kind {
+                case let .list(list):
+                    NavigationLink(destination: BookListView(list: list)) {
+                        Label(list.name ?? "", systemImage: "books.vertical")
+                    }
+
+                case let .book(book):
+                    NavigationLink(destination: BookView(book: book)) {
+                        Label(book.name ?? "", systemImage: "book")
+                    }
             }
         }
     }

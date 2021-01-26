@@ -48,7 +48,7 @@ struct BookListView: View {
             List(selection: $selection) {
                 ForEach(list.sortedBooks) { book in
                     NavigationLink(destination: BookView(book: book)) {
-                        Text(book.name ?? "")
+                        Label(book.name ?? "", systemImage: "book")
                     }
                     .tag(book.id)
                 }
@@ -67,12 +67,6 @@ struct BookListView: View {
         .fileImporter(isPresented: $importRequested, allowedContentTypes: [.xml], onCompletion: handlePerformImport)
     }
 
-    func handleMove(fromOffsets from: IndexSet, toOffset to: Int) {
-//        var modified = list.entries
-//        modified.move(fromOffsets: from, toOffset: to)
-//        list.entries = modified
-    }
-    
     func handleDelete(_ items: IndexSet?) {
         if let items = items {
             items.forEach { index in

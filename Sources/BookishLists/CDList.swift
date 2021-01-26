@@ -13,4 +13,9 @@ class CDList: NSManagedObject {
         let sorted = books.sorted { ($0.name ?? "") < ($1.name ?? "") }
         return sorted
     }
+    
+    var children: [NSManagedObject]? {
+        guard let books = books as? Set<CDBook> else { return nil }
+        return Array(books)
+    }
 }

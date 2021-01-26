@@ -8,37 +8,34 @@ import SheetController
 import BookishImporter
 
 enum ListEntryKind {
-    case list(String)
-    case book(String)
+    case list(CDList)
+    case book(CDBook)
 }
 
 struct ListEntry: Identifiable {
     let kind: ListEntryKind
-    let model: Model
     
-    init(book: String, model: Model) {
+    init(book: CDBook) {
         self.kind = .book(book)
-        self.model = model
     }
     
-    init(list: String, model: Model) {
+    init(list: CDList) {
         self.kind = .list(list)
-        self.model = model
     }
 
-    var id: String {
+    var id: UUID {
         switch self.kind {
-        case .book(let id): return id
-        case .list(let id): return id
+            case .book(let book): return book.id!
+            case .list(let list): return list.id!
         }
     }
 
     var children: [ListEntry]? {
         switch kind {
             case .book: return nil
-            case .list(let id):
-                guard let list = model.lists.index[id], list.entries.count > 0 else { return nil }
-                return list.entries.map({ ListEntry(book: $0, model: model)})
+            case .list(let list):
+                guard let books = list.books as? Set<CDBook> else { return nil }
+                return books.map({ ListEntry(book: $0)})
         }
     }
 }

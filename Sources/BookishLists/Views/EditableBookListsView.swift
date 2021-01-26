@@ -7,24 +7,30 @@ import SwiftUI
 import SwiftUIExtensions
 
 struct EditableBookListsView: View {
-    @EnvironmentObject var model: Model
+    @Environment(\.managedObjectContext) var context
+    @FetchRequest(
+        entity: CDList.entity(),
+        sortDescriptors: [NSSortDescriptor(key: "name", ascending: true)]
+    ) var lists: FetchedResults<CDList>
+
     var body: some View {
         List() {
-            ForEach(model.lists.order, id: \.self) { id in
-//                if let binding = model.binding(forBookList: id) {
-//                    ListItemLinkView(for: binding)
-//                }
+            ForEach(lists) { list in
+                NavigationLink(destination: BookListView(list: list)) {
+                    Text(list.name ?? "<List>")
+                }
             }
-            .onMove(perform: handleMove)
             .onDelete(perform: handleDelete)
         }
     }
     
-    func handleMove(fromOffsets from: IndexSet, toOffset to: Int) {
-        model.lists.move(fromOffsets: from, toOffset: to)
-    }
-    
-    func handleDelete(_ indices: IndexSet) {
-        model.lists.remove(indices)
+    func handleDelete(_ items: IndexSet?) {
+        if let items = items {
+            items.forEach { index in
+                let list = lists[index]
+                context.delete(list)
+            }
+            context.saveContext()
+        }
     }
 }
