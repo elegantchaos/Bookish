@@ -27,7 +27,9 @@ struct Application: App {
     var body: some Scene {
         let sheetController = SheetController()
         return WindowGroup {
+            let coreDataStack = CoreDataStack(containerName: "BookishLists")
             ContentView()
+                .environment(\.managedObjectContext, coreDataStack.viewContext)
                 .environmentObject(model)
                 .environmentObject(sheetController)
                 .onReceive(

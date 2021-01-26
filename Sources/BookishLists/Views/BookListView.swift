@@ -8,10 +8,20 @@ import SwiftUI
 import SwiftUIExtensions
 import ThreadExtensions
 
+extension Binding where Value == String? {
+    func onNone(_ fallback: String) -> Binding<String> {
+        return Binding<String>(get: {
+            return self.wrappedValue ?? fallback
+        }) { value in
+            self.wrappedValue = value
+        }
+    }
+}
+
 struct BookListView: View {
     @EnvironmentObject var model: Model
     @State var selection: UUID? = nil
-    @Binding var list: BookList
+    @State var list: CDList
     @State var importRequested = false
     @State var importProgress: Double? = nil
 
@@ -19,7 +29,7 @@ struct BookListView: View {
 
     var body: some View {
         VStack {
-            TextField("Name", text: $list.name)
+            TextField("Name", text: $list.name.onNone(""))
                 .padding()
             
             HStack {
@@ -34,16 +44,16 @@ struct BookListView: View {
                 }
             }
 
-            List(selection: $selection) {
-                ForEach(list.entries, id: \.self) { id in
-                    let book = model.binding(forBook: id)
-                    ListItemLinkView(for: book)
-                }
-                .onDelete(perform: handleDelete)
-                .onMove(perform: handleMove)
-            }
+//            List(selection: $selection) {
+//                ForEach(list.entries, id: \.self) { id in
+//                    let book = model.binding(forBook: id)
+//                    ListItemLinkView(for: book)
+//                }
+//                .onDelete(perform: handleDelete)
+//                .onMove(perform: handleMove)
+//            }
         }
-        .navigationTitle(list.name)
+        .navigationTitle(list.name ?? "Untitled")
         .navigationBarItems(
             leading: EditButton(),
             trailing:
@@ -55,21 +65,21 @@ struct BookListView: View {
     }
 
     func handleMove(fromOffsets from: IndexSet, toOffset to: Int) {
-        var modified = list.entries
-        modified.move(fromOffsets: from, toOffset: to)
-        list.entries = modified
+//        var modified = list.entries
+//        modified.move(fromOffsets: from, toOffset: to)
+//        list.entries = modified
     }
     
     func handleDelete(_ items: IndexSet?) {
-        if let items = items {
-            list.entries.remove(atOffsets: items)
-        }
+//        if let items = items {
+//            list.entries.remove(atOffsets: items)
+//        }
     }
     
     func handleAdd() {
-        let book = Book(id: UUID().uuidString, name: "Untitled Book")
-        list.entries.append(book.id)
-        model.books.append(book)
+//        let book = Book(id: UUID().uuidString, name: "Untitled Book")
+//        list.entries.append(book.id)
+//        model.books.append(book)
     }
     
     func handleRequestImport() {
@@ -100,12 +110,12 @@ extension BookListView: ImportMonitor {
         importProgress = nil
         if let session = session as? DeliciousLibraryImportSession {
             onMainQueue {
-                for importedBook in session.books.values {
-//                let importedBook = session.books.randomElement()!.value
-                    let book = Book(id: importedBook.id, name: importedBook.title)
-                    list.entries.append(book.id)
-                    model.books.append(book)
-                }
+//                for importedBook in session.books.values {
+////                let importedBook = session.books.randomElement()!.value
+//                    let book = Book(id: importedBook.id, name: importedBook.title)
+//                    list.entries.append(book.id)
+//                    model.books.append(book)
+//                }
             }
         }
     }

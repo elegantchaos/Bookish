@@ -46,6 +46,7 @@ struct ListEntry: Identifiable {
 
 struct ContentView: View {
     @EnvironmentObject var model: Model
+    @Environment(\.managedObjectContext) var managedObjectContext
     @EnvironmentObject var sheetController: SheetController
     
     var body: some View {
@@ -78,8 +79,15 @@ struct ContentView: View {
     }
     
     func handleAdd() {
-        let list = BookList(id: UUID().uuidString, name: "Untitled List", entries: [], values: [:])
-        model.lists.append(list)
+        let list = CDList(context: managedObjectContext)
+        list.id = UUID()
+        list.name = "Untitled"
+        
+        do {
+            try managedObjectContext.save()
+        } catch let error as NSError {
+            print(error.localizedDescription)
+        }
     }
 
     func handlePreferences() {

@@ -5,12 +5,12 @@
 
 import SwiftUI
 import SwiftUIExtensions
-
-extension BookList: ListItemLinkable {
-    static func linkView(binding: Binding<BookList>) -> some View {
-        BookListView(list: binding)
-    }
-}
+//
+//extension BookList: ListItemLinkable {
+//    static func linkView(binding: Binding<BookList>) -> some View {
+//        BookListView(list: binding)
+//    }
+//}
 
 extension BookList: ListItemViewable {
     static func iconView(binding: Binding<BookList>) -> Image? {

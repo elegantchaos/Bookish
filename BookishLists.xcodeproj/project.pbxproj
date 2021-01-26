@@ -36,6 +36,8 @@
 		8B80467D25B87C4A00698F28 /* LoggerUI in Frameworks */ = {isa = PBXBuildFile; productRef = 8B80467C25B87C4A00698F28 /* LoggerUI */; };
 		8B80468725B8803B00698F28 /* IndexedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B80468625B8803B00698F28 /* IndexedList.swift */; };
 		8B80468D25B8807600698F28 /* IndexedList+ObjectStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B80468C25B8807600698F28 /* IndexedList+ObjectStore.swift */; };
+		8B987C9F25C047E5003D6F9F /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B987C9E25C047E5003D6F9F /* CoreDataStack.swift */; };
+		8B987CAB25C04876003D6F9F /* BookishLists.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8B987CA925C04876003D6F9F /* BookishLists.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,6 +105,8 @@
 		8B58C7CB25B84AB8007F6B70 /* PreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesView.swift; sourceTree = "<group>"; };
 		8B80468625B8803B00698F28 /* IndexedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexedList.swift; sourceTree = "<group>"; };
 		8B80468C25B8807600698F28 /* IndexedList+ObjectStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IndexedList+ObjectStore.swift"; sourceTree = "<group>"; };
+		8B987C9E25C047E5003D6F9F /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		8B987CAA25C04876003D6F9F /* BooklistLists.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BooklistLists.xcdatamodel; sourceTree = "<group>"; };
 		8BE9ADE9252B0DDA00F97D53 /* Tools.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Tools.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -228,6 +232,7 @@
 				22ED67E3251E424600B0226D /* BookishLists.xcconfig */,
 				226F15DE251A28F600D6B12E /* Assets.xcassets */,
 				226F15E3251A28F600D6B12E /* Info.plist */,
+				8B987CA925C04876003D6F9F /* BookishLists.xcdatamodeld */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -236,6 +241,7 @@
 			isa = PBXGroup;
 			children = (
 				221717DB2522773B00C43604 /* Model.swift */,
+				8B987C9E25C047E5003D6F9F /* CoreDataStack.swift */,
 				8B1F10AB25AC8EC400108A34 /* BarcodeScanner.swift */,
 				226F15DA251A28EA00D6B12E /* Application.swift */,
 				8B58C7B525B716AF007F6B70 /* CloudKitObjectStore.swift */,
@@ -465,6 +471,8 @@
 				229E259B25254AED00C41777 /* ContentView.swift in Sources */,
 				8B58C7C025B843C7007F6B70 /* BookListsView.swift in Sources */,
 				8B1F10EC25ADD40F00108A34 /* LinkView.swift in Sources */,
+				8B987CAB25C04876003D6F9F /* BookishLists.xcdatamodeld in Sources */,
+				8B987C9F25C047E5003D6F9F /* CoreDataStack.swift in Sources */,
 				8B58C7C625B84424007F6B70 /* EditableBookListsView.swift in Sources */,
 				8B1F10AC25AC8EC400108A34 /* BarcodeScanner.swift in Sources */,
 				8B1F10D825ACB30A00108A34 /* BookListView.swift in Sources */,
@@ -951,6 +959,19 @@
 			productName = LoggerUI;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		8B987CA925C04876003D6F9F /* BookishLists.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				8B987CAA25C04876003D6F9F /* BooklistLists.xcdatamodel */,
+			);
+			currentVersion = 8B987CAA25C04876003D6F9F /* BooklistLists.xcdatamodel */;
+			path = BookishLists.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 226F15CF251A28EA00D6B12E /* Project object */;
 }

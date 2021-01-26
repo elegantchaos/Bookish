@@ -8,19 +8,15 @@ import SwiftUIExtensions
 
 struct BookListsView: View {
     @EnvironmentObject var model: Model
-
+    @FetchRequest(
+        entity: CDList.entity(),
+        sortDescriptors: []
+    ) var lists: FetchedResults<CDList>
+    
     var body: some View {
-        let entries = model.lists.order.map({ ListEntry(list: $0, model: model) })
-        List(entries, children: \.children) { entry in
-            switch entry.kind {
-                case .book(let id):
-                    if let binding = model.binding(forBook: id) {
-                        ListItemLinkView(for: binding)
-                    }
-                case .list(let id):
-                    if let binding = model.binding(forBookList: id) {
-                        ListItemLinkView(for: binding)
-                    }
+        List(lists) { list in
+            NavigationLink(destination: BookListView(list: list)) {
+                Text(list.name ?? "<>")
             }
         }
     }

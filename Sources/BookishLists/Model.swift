@@ -54,8 +54,8 @@ class Model: ObservableObject {
     }
     
     init(from store: ObjectStore) {
-        migrate(from: store)
-        loadBooks(store: store)
+//        migrate(from: store)
+//        loadBooks(store: store)
     }
     
     func loadBooks(store: ObjectStore) {
@@ -114,17 +114,17 @@ class Model: ObservableObject {
     }
     
     func save(to store: ObjectStore) {
-        if loaded {
-            lists.save(to: store, idKey: .listsKey) { result in
-                if !result {
-                    modelChannel.log("Saving lists failed")
-                } else {
-                    self.books.save(to: store, idKey: .booksKey) { result in
-                        modelChannel.log(result ? "Saving done" : "Saving books failed")
-                    }
-                }
-            }
-        }
+//        if loaded {
+//            lists.save(to: store, idKey: .listsKey) { result in
+//                if !result {
+//                    modelChannel.log("Saving lists failed")
+//                } else {
+//                    self.books.save(to: store, idKey: .booksKey) { result in
+//                        modelChannel.log(result ? "Saving done" : "Saving books failed")
+//                    }
+//                }
+//            }
+//        }
     }
 
     func binding(forBookList id: BookList.ID) -> Binding<BookList> {

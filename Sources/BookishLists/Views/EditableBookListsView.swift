@@ -11,9 +11,9 @@ struct EditableBookListsView: View {
     var body: some View {
         List() {
             ForEach(model.lists.order, id: \.self) { id in
-                if let binding = model.binding(forBookList: id) {
-                    ListItemLinkView(for: binding)
-                }
+//                if let binding = model.binding(forBookList: id) {
+//                    ListItemLinkView(for: binding)
+//                }
             }
             .onMove(perform: handleMove)
             .onDelete(perform: handleDelete)
