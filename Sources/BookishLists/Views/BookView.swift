@@ -17,7 +17,11 @@ struct BookView: View {
         VStack {
             TextField("Name", text: $book.name.onNone(""))
                 .padding()
+
+            TextField("Notes", text: book.binding(forProperty: "notes"))
+                .padding()
             
+
         }
         .navigationTitle(book.name ?? "")
         .onDisappear(perform: handleDisappear)
