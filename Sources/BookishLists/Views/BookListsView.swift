@@ -17,14 +17,9 @@ struct BookListsView: View {
         List(entries, children: \.children) { entry in
             switch entry.kind {
                 case let .list(list):
-                    NavigationLink(destination: BookListView(list: list)) {
-                        Label(list.name ?? "", systemImage: "books.vertical")
-                    }
-
+                    LinkView(list)
                 case let .book(book):
-                    NavigationLink(destination: BookView(book: book)) {
-                        Label(book.name ?? "", systemImage: "book")
-                    }
+                    LinkView(book)
             }
         }
     }

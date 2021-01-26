@@ -48,13 +48,9 @@ struct BookListView: View {
 
             List(selection: $selection) {
                 ForEach(list.sortedBooks) { book in
-                    NavigationLink(destination: BookView(book: book)) {
-                        Label(book.name ?? "", systemImage: "book")
-                    }
-                    .tag(book.id)
+                    LinkView(book)
                 }
                 .onDelete(perform: handleDelete)
-//                .onMove(perform: handleMove)
             }
         }
         .navigationTitle(list.name ?? "Untitled")

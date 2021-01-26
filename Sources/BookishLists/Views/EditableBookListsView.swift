@@ -17,9 +17,7 @@ struct EditableBookListsView: View {
     var body: some View {
         List() {
             ForEach(lists) { list in
-                NavigationLink(destination: BookListView(list: list)) {
-                    Text(list.name ?? "<List>")
-                }
+                LinkView(list)
             }
             .onDelete(perform: handleDelete)
         }
