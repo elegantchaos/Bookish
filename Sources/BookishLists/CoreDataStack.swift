@@ -29,9 +29,12 @@ class CoreDataStack {
 }
 
 extension NSManagedObjectContext {
-    
-    func saveContext() throws {
+    func saveContext() {
         guard hasChanges else { return }
-        try save()
+        do {
+            try save()
+        } catch let error as NSError {
+            print(error.localizedDescription)
+        }
     }
 }

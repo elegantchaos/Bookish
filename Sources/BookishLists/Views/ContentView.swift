@@ -82,7 +82,7 @@ struct ContentView: View {
         let list = CDList(context: managedObjectContext)
         list.id = UUID()
         list.name = "Untitled"
-        
+        managedObjectContext.saveContext()
         do {
             try managedObjectContext.save()
         } catch let error as NSError {

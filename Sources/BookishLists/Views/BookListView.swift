@@ -19,8 +19,7 @@ extension Binding where Value == String? {
 }
 
 struct BookListView: View {
-    @EnvironmentObject var model: Model
-    @Environment(\.managedObjectContext) var managedObjectContext
+    @Environment(\.managedObjectContext) var context
     @State var selection: UUID? = nil
     @ObservedObject var list: CDList
     @State var importRequested = false
@@ -46,11 +45,12 @@ struct BookListView: View {
                 }
             }
 
-            List(/*selection: $selection*/) {
+            List(selection: $selection) {
                 ForEach(list.sortedBooks) { book in
                     NavigationLink(destination: BookView(book: book)) {
                         Text(book.name ?? "")
                     }
+                    .tag(book.id)
                 }
                 .onDelete(perform: handleDelete)
 //                .onMove(perform: handleMove)
@@ -79,18 +79,15 @@ struct BookListView: View {
                 let book = list.sortedBooks[index]
                 list.removeFromBooks(book)
             }
-            try? managedObjectContext.saveContext()
+            context.saveContext()
         }
     }
     
     func handleAdd() {
-        let book = CDBook(context: managedObjectContext)
+        let book = CDBook(context: context)
         book.id = UUID()
         book.addToLists(list)
-        try? managedObjectContext.saveContext()
-        //        let book = Book(id: UUID().uuidString, name: "Untitled Book")
-//        list.entries.append(book.id)
-//        model.books.append(book)
+        context.saveContext()
     }
     
     func handleRequestImport() {
@@ -121,12 +118,13 @@ extension BookListView: ImportMonitor {
         importProgress = nil
         if let session = session as? DeliciousLibraryImportSession {
             onMainQueue {
-//                for importedBook in session.books.values {
-////                let importedBook = session.books.randomElement()!.value
-//                    let book = Book(id: importedBook.id, name: importedBook.title)
-//                    list.entries.append(book.id)
-//                    model.books.append(book)
-//                }
+                for importedBook in session.books.values {
+                    let book = CDBook(context: context)
+                    book.id = UUID(uuidString: importedBook.id)!
+                    book.name = importedBook.title
+                    list.addToBooks(book)
+                }
+                context.saveContext()
             }
         }
     }
