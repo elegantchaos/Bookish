@@ -61,13 +61,15 @@ class Model: ObservableObject {
     func loadBooks(store: ObjectStore) {
         modelChannel.log("Loading books")
         BookIndex.load(from: store, idKey: .booksKey) { result in
+            print("blah")
             switch result {
                 case let .success(index):
                     self.books = index
                     self.loadLists(store: store)
                     
                 case let .failure(error):
-                    modelChannel.log(error)
+                    modelChannel.log("Loading books failed: \(error)")
+                    self.loaded = true
             }
         }
     }
@@ -81,7 +83,8 @@ class Model: ObservableObject {
                     self.normaliseData()
                     
                 case let .failure(error):
-                    modelChannel.log(error)
+                    modelChannel.log("Loading lists failed: \(error)")
+                    self.loaded = true
             }
         }
     }
