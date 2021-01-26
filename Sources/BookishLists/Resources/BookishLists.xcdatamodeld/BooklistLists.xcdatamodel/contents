@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="20C69" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Book" representedClassName=".CDBook" syncable="YES" codeGenerationType="class">
+    <entity name="Book" representedClassName=".CDBook" syncable="YES" codeGenerationType="category">
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="name" attributeType="String" defaultValueString="Untitled"/>
         <attribute name="properties" optional="YES" attributeType="String"/>
         <relationship name="lists" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="List" inverseName="books" inverseEntity="List"/>
     </entity>
-    <entity name="List" representedClassName=".CDList" syncable="YES" codeGenerationType="class">
+    <entity name="List" representedClassName=".CDList" syncable="YES" codeGenerationType="category">
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="name" attributeType="String" defaultValueString="Untitled"/>
         <attribute name="properties" optional="YES" attributeType="String"/>

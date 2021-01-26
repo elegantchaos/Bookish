@@ -8,9 +8,10 @@ import Foundation
 import SwiftUI
 
 struct BookView: View {
+    @Environment(\.managedObjectContext) var managedObjectContext
     @EnvironmentObject var model: Model
     @State var selection: UUID? = nil
-    @State var book: CDBook
+    @ObservedObject var book: CDBook
 
     var body: some View {
         VStack {
@@ -19,5 +20,10 @@ struct BookView: View {
             
         }
         .navigationTitle(book.name ?? "")
+        .onDisappear(perform: handleDisappear)
+    }
+    
+    func handleDisappear() {
+        try? managedObjectContext.save()
     }
 }

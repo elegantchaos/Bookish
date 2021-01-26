@@ -22,14 +22,9 @@ struct BookListView: View {
     @EnvironmentObject var model: Model
     @Environment(\.managedObjectContext) var managedObjectContext
     @State var selection: UUID? = nil
-    @State var list: CDList
+    @ObservedObject var list: CDList
     @State var importRequested = false
     @State var importProgress: Double? = nil
-
-    @FetchRequest(
-        entity: CDBook.entity(),
-        sortDescriptors: []
-    ) var books: FetchedResults<CDBook>
 
     let manager = ImportManager()
 
@@ -52,15 +47,12 @@ struct BookListView: View {
             }
 
             List(/*selection: $selection*/) {
-                if let books = list.books as? Set<CDBook> {
-                    let sorted = books.sorted { ($0.name ?? "") < ($1.name ?? "") }
-                    ForEach(sorted) { book in
-                        NavigationLink(destination: BookView(book: book)) {
-                            Text(book.name ?? "")
-                        }
+                ForEach(list.sortedBooks) { book in
+                    NavigationLink(destination: BookView(book: book)) {
+                        Text(book.name ?? "")
                     }
                 }
-//                .onDelete(perform: handleDelete)
+                .onDelete(perform: handleDelete)
 //                .onMove(perform: handleMove)
             }
         }
@@ -82,9 +74,13 @@ struct BookListView: View {
     }
     
     func handleDelete(_ items: IndexSet?) {
-//        if let items = items {
-//            list.entries.remove(atOffsets: items)
-//        }
+        if let items = items {
+            items.forEach { index in
+                let book = list.sortedBooks[index]
+                list.removeFromBooks(book)
+            }
+            try? managedObjectContext.saveContext()
+        }
     }
     
     func handleAdd() {

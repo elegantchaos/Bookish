@@ -38,6 +38,8 @@
 		8B80468D25B8807600698F28 /* IndexedList+ObjectStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B80468C25B8807600698F28 /* IndexedList+ObjectStore.swift */; };
 		8B987C9F25C047E5003D6F9F /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B987C9E25C047E5003D6F9F /* CoreDataStack.swift */; };
 		8B987CAB25C04876003D6F9F /* BookishLists.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8B987CA925C04876003D6F9F /* BookishLists.xcdatamodeld */; };
+		8B987CB525C06708003D6F9F /* CDBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B987CB425C06708003D6F9F /* CDBook.swift */; };
+		8B987CBB25C0671E003D6F9F /* CDList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B987CBA25C0671E003D6F9F /* CDList.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -107,6 +109,8 @@
 		8B80468C25B8807600698F28 /* IndexedList+ObjectStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IndexedList+ObjectStore.swift"; sourceTree = "<group>"; };
 		8B987C9E25C047E5003D6F9F /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		8B987CAA25C04876003D6F9F /* BooklistLists.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BooklistLists.xcdatamodel; sourceTree = "<group>"; };
+		8B987CB425C06708003D6F9F /* CDBook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDBook.swift; sourceTree = "<group>"; };
+		8B987CBA25C0671E003D6F9F /* CDList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDList.swift; sourceTree = "<group>"; };
 		8BE9ADE9252B0DDA00F97D53 /* Tools.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Tools.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -241,6 +245,8 @@
 			isa = PBXGroup;
 			children = (
 				221717DB2522773B00C43604 /* Model.swift */,
+				8B987CB425C06708003D6F9F /* CDBook.swift */,
+				8B987CBA25C0671E003D6F9F /* CDList.swift */,
 				8B987C9E25C047E5003D6F9F /* CoreDataStack.swift */,
 				8B1F10AB25AC8EC400108A34 /* BarcodeScanner.swift */,
 				226F15DA251A28EA00D6B12E /* Application.swift */,
@@ -470,6 +476,7 @@
 			files = (
 				229E259B25254AED00C41777 /* ContentView.swift in Sources */,
 				8B58C7C025B843C7007F6B70 /* BookListsView.swift in Sources */,
+				8B987CBB25C0671E003D6F9F /* CDList.swift in Sources */,
 				8B1F10EC25ADD40F00108A34 /* LinkView.swift in Sources */,
 				8B987CAB25C04876003D6F9F /* BookishLists.xcdatamodeld in Sources */,
 				8B987C9F25C047E5003D6F9F /* CoreDataStack.swift in Sources */,
@@ -477,6 +484,7 @@
 				8B1F10AC25AC8EC400108A34 /* BarcodeScanner.swift in Sources */,
 				8B1F10D825ACB30A00108A34 /* BookListView.swift in Sources */,
 				8B1F10E225ADC28800108A34 /* BookView.swift in Sources */,
+				8B987CB525C06708003D6F9F /* CDBook.swift in Sources */,
 				226F15DB251A28EA00D6B12E /* Application.swift in Sources */,
 				221717DC2522773B00C43604 /* Model.swift in Sources */,
 				8B80468725B8803B00698F28 /* IndexedList.swift in Sources */,
