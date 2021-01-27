@@ -35,6 +35,7 @@
 		8B987CB525C06708003D6F9F /* CDBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B987CB425C06708003D6F9F /* CDBook.swift */; };
 		8B987CBB25C0671E003D6F9F /* CDList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B987CBA25C0671E003D6F9F /* CDList.swift */; };
 		8B987CDD25C19263003D6F9F /* ExtensibleManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B987CDC25C19263003D6F9F /* ExtensibleManagedObject.swift */; };
+		8B987CF725C1BAE2003D6F9F /* AllBooksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B987CF625C1BAE2003D6F9F /* AllBooksView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,6 +103,7 @@
 		8B987CB425C06708003D6F9F /* CDBook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDBook.swift; sourceTree = "<group>"; };
 		8B987CBA25C0671E003D6F9F /* CDList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDList.swift; sourceTree = "<group>"; };
 		8B987CDC25C19263003D6F9F /* ExtensibleManagedObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensibleManagedObject.swift; sourceTree = "<group>"; };
+		8B987CF625C1BAE2003D6F9F /* AllBooksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllBooksView.swift; sourceTree = "<group>"; };
 		8BE9ADE9252B0DDA00F97D53 /* Tools.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Tools.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -152,6 +154,7 @@
 			children = (
 				8B58C7BF25B843C7007F6B70 /* ListIndexView.swift */,
 				8B1F10D725ACB30A00108A34 /* ListView.swift */,
+				8B987CF625C1BAE2003D6F9F /* AllBooksView.swift */,
 				8B1F10E125ADC28800108A34 /* BookView.swift */,
 				229E259A25254AED00C41777 /* ContentView.swift */,
 				8B58C7CB25B84AB8007F6B70 /* PreferencesView.swift */,
@@ -459,6 +462,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				229E259B25254AED00C41777 /* ContentView.swift in Sources */,
+				8B987CF725C1BAE2003D6F9F /* AllBooksView.swift in Sources */,
 				8B58C7C025B843C7007F6B70 /* ListIndexView.swift in Sources */,
 				8B987CBB25C0671E003D6F9F /* CDList.swift in Sources */,
 				8B987CAB25C04876003D6F9F /* BookishLists.xcdatamodeld in Sources */,

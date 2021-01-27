@@ -13,9 +13,14 @@ struct ListIndexView: View {
     ) var lists: FetchedResults<CDList>
     
     var body: some View {
-        let entries = lists.map({ ListEntry(list: $0)})
-        List(entries, children: \.children) { entry in
+        var entries = lists.map({ ListEntry(list: $0)})
+        entries.insert(ListEntry(), at: 0)
+        return List(entries, children: \.children) { entry in
             switch entry.kind {
+                case .allBooks:
+                    NavigationLink(destination: AllBooksView()) {
+                        Label("All Books", systemImage: "books.vertical")
+                    }
                 case let .list(list):
                     LinkView(list)
                 case let .book(book):
@@ -23,6 +28,7 @@ struct ListIndexView: View {
             }
         }
     }
+
 }
 
 

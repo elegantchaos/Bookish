@@ -3,9 +3,11 @@
 //  All code (c) 2021 - present day, Sam Deane.
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
+import BookishImporter
 import KeyValueStore
 import Logger
 import SwiftUI
+import ThreadExtensions
 
 let modelChannel = Channel("Model")
 
@@ -26,8 +28,12 @@ extension UUID: JSONCodable {
 
 class Model: ObservableObject {
     let stack: CoreDataStack
-    var loaded = false
+    let importer = ImportManager()
 
+    @Published var importProgress: Double? = nil
+    @Published var status: String? = nil
+    @Published var errors: [Error] = []
+    
     init(stack: CoreDataStack) {
         self.stack = stack
     }
@@ -44,4 +50,83 @@ class Model: ObservableObject {
             print(error.localizedDescription)
         }
     }
+    
+    func delete(_ object: ExtensibleManagedObject) {
+        stack.viewContext.delete(object)
+        save()
+    }
+    
+    func add<T>() -> T where T: ExtensibleManagedObject {
+        let object = T(context: stack.viewContext)
+        save()
+        return object
+    }
+    
+    func removeAllData() {
+        let context = stack.viewContext
+        let coordinator = stack.coordinator
+        for entity in ["Book", "List"] {
+            let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: entity)
+            let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+
+            do {
+                try coordinator.execute(deleteRequest, with: context)
+            } catch let error as NSError {
+                notify(error)
+            }
+        }
+    }
+    
+    func handlePerformImport(_ result: Result<URL,Error>) {
+        switch result {
+            case .success(let url):
+                importer.importFrom(url, monitor: self)
+
+            case .failure(let error):
+                notify(error)
+        }
+    }
+    
+    func notify(_ error: Error) {
+        onMainQueue {
+            print(error)
+            self.errors.append(error)
+        }
+    }
+    
+    func add(importedBooksFrom session: DeliciousLibraryImportSession) {
+        onMainQueue { [self] in // TODO: add on a background context?
+            let context = stack.viewContext
+            let list = CDList(context: context)
+            for importedBook in session.books.values {
+                let book = CDBook(context: context)
+                book.name = importedBook.title
+                list.addToBooks(book)
+            }
+            save()
+        }
+
+    }
+}
+
+extension Model: ImportMonitor {
+    func session(_ session: ImportSession, willImportItems count: Int) {
+        importProgress = 0.0
+    }
+    
+    func session(_ session: ImportSession, willImportItem label: String, index: Int, of count: Int) {
+        importProgress = Double(index) / Double(count)
+    }
+    
+    func sessionDidFinish(_ session: ImportSession) {
+        importProgress = nil
+        if let session = session as? DeliciousLibraryImportSession {
+            self.add(importedBooksFrom: session)
+        }
+    }
+    
+    func sessionDidFail(_ session: ImportSession) {
+        importProgress =  nil
+    }
+
 }

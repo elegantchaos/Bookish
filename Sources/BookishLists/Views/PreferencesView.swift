@@ -8,17 +8,24 @@ import SheetController
 import LoggerUI
 
 struct PreferencesView: View {
+    @EnvironmentObject var model: Model
     @EnvironmentObject var sheetController: SheetController
     
     var body: some View {
         NavigationView {
-            LoggerChannelsView()
-                .padding()
-                .navigationTitle("Log Channels")
-                .navigationBarItems(trailing:
-                    Button(action: sheetController.dismiss) {
-                        Text("Done")
-                    })
+            VStack {
+                Button(action: model.removeAllData) {
+                    Text("Remove All Data")
+                }
+                
+                LoggerChannelsView()
+                    .padding()
+            }
+            .navigationTitle("Log Channels")
+            .navigationBarItems(trailing:
+                Button(action: sheetController.dismiss) {
+                    Text("Done")
+                })
         }
     }
 }

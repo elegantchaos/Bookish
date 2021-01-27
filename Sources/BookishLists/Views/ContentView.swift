@@ -8,12 +8,19 @@ import SheetController
 import BookishImporter
 
 enum ListEntryKind {
+    case allBooks
     case list(CDList)
     case book(CDBook)
 }
 
 struct ListEntry: Identifiable {
+    static let allBooksId = UUID()
+    
     let kind: ListEntryKind
+    
+    init() {
+        self.kind = .allBooks
+    }
     
     init(book: CDBook) {
         self.kind = .book(book)
@@ -25,6 +32,7 @@ struct ListEntry: Identifiable {
 
     var id: UUID {
         switch self.kind {
+            case .allBooks: return ListEntry.allBooksId
             case .book(let book): return book.id
             case .list(let list): return list.id
         }
@@ -32,6 +40,7 @@ struct ListEntry: Identifiable {
 
     var children: [ListEntry]? {
         switch kind {
+            case .allBooks: return nil
             case .book: return nil
             case .list(let list):
                 guard let books = list.books as? Set<CDBook> else { return nil }
@@ -45,8 +54,8 @@ struct ContentView: View {
     @EnvironmentObject var model: Model
     @Environment(\.managedObjectContext) var managedObjectContext
     @EnvironmentObject var sheetController: SheetController
-    @State var showMenu = false
-    
+    @State var importRequested = false
+
     var body: some View {
         SheetControllerHost {
             VStack {
@@ -59,7 +68,7 @@ struct ContentView: View {
                                 Menu() {
                                     Button(action: handleAdd) { Text("New List") }
                                     Menu("Import…") {
-                                        Button(action: handleImport) { Text("From Delicious Library") }
+                                        Button(action: handleRequestImport) { Text("From Delicious Library") }
                                     }
                                 } label: {
                                     Image(systemName: "ellipsis.circle")
@@ -67,6 +76,7 @@ struct ContentView: View {
                         )
                 }
                 .navigationBarTitleDisplayMode(.inline)
+                .fileImporter(isPresented: $importRequested, allowedContentTypes: [.xml], onCompletion: model.handlePerformImport)
                 .toolbar {
                     ToolbarItem(placement: .bottomBar) {
                         Spacer()
@@ -82,13 +92,14 @@ struct ContentView: View {
     }
     
     func handleAdd() {
-        let list = CDList(context: managedObjectContext)
-        model.save()
+        let _ : CDList = model.add()
     }
 
-    func handleImport() {
-        
+    func handleRequestImport() {
+        importRequested = true
     }
+    
+
     func handlePreferences() {
         sheetController.show {
             PreferencesView()
