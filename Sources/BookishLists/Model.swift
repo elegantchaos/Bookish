@@ -99,7 +99,13 @@ class Model: ObservableObject {
             let context = stack.viewContext
             let list = CDList(context: context)
             for importedBook in session.books.values {
-                let book = CDBook.named(importedBook.title, in: context)
+                let book: CDBook
+                if let id = UUID(uuidString: importedBook.id) {
+                    book = CDBook.withId(id, in: context)
+                } else {
+                    book = CDBook.named(importedBook.title, in: context)
+                }
+                
                 book.name = importedBook.title
                 list.addToBooks(book)
             }

@@ -6,8 +6,7 @@
 import CoreData
 import SwiftUI
 
-class ExtensibleManagedObject: NSManagedObject {
-    @NSManaged public var id: UUID
+class ExtensibleManagedObject: IdentifiableManagedObject {
     @NSManaged public var name: String
     @NSManaged public var properties: String?
 
@@ -45,9 +44,5 @@ class ExtensibleManagedObject: NSManagedObject {
             print("Failed to encoded properties: \(properties) \(error)")
         }
     }
-
-}
-
-extension ExtensibleManagedObject : Identifiable {
 
 }
