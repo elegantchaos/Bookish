@@ -21,6 +21,9 @@ struct BookView: View {
             TextField("Notes", text: book.binding(forProperty: "notes"))
                 .padding()
             
+            ForEach(Array(book.decodedProperties.keys), id: \.self) { key in
+                Text(key)
+            }
 
         }
         .navigationTitle(book.name)

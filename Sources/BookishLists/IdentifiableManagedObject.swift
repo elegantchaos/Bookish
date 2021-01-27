@@ -5,6 +5,29 @@
 
 import CoreData
 
+
+/**
+ Generic which gets an existing entity of a given identifier and type.
+ */
+
+internal func getWithId<EntityType: NSManagedObject>(_ identifier: EntityType.ID, type: EntityType.Type, in context: NSManagedObjectContext, createIfMissing: Bool) -> EntityType? where EntityType: Identifiable {
+    let request: NSFetchRequest<EntityType> = EntityType.fetcher(in: context)
+    request.predicate = NSPredicate(format: "id = %@", String(describing: identifier))
+    if let results = try? context.fetch(request), let object = results.first {
+        return object
+    }
+
+    if createIfMissing {
+        let description = EntityType.self.entityDescription(in: context)
+        if let object = NSManagedObject(entity: description, insertInto: context) as? EntityType {
+            object.setValue(identifier, forKey: "id")
+            return object
+        }
+    }
+
+    return nil
+}
+
 class IdentifiableManagedObject: NSManagedObject, Identifiable {
     @NSManaged public var id: UUID
 
@@ -24,3 +47,6 @@ class IdentifiableManagedObject: NSManagedObject, Identifiable {
         return getWithId(id, type: self, in: context, createIfMissing: createIfMissing)
     }
 }
+
+
+// TODO: could we use a protocol to implement withId, instead of needing a subclass?

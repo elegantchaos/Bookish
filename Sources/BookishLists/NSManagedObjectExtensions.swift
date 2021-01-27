@@ -28,28 +28,6 @@ internal func getNamed<EntityType: NSManagedObject>(_ named: String, type: Entit
 }
 
 
-/**
- Generic which gets an existing entity of a given identifier and type.
- */
-
-internal func getWithId<EntityType: NSManagedObject>(_ identifier: EntityType.ID, type: EntityType.Type, in context: NSManagedObjectContext, createIfMissing: Bool) -> EntityType? where EntityType: Identifiable {
-    let request: NSFetchRequest<EntityType> = EntityType.fetcher(in: context)
-    request.predicate = NSPredicate(format: "id = %@", String(describing: identifier))
-    if let results = try? context.fetch(request), let object = results.first {
-        return object
-    }
-
-    if createIfMissing {
-        let description = EntityType.self.entityDescription(in: context)
-        if let object = NSManagedObject(entity: description, insertInto: context) as? EntityType {
-            object.setValue(identifier, forKey: "id")
-            return object
-        }
-    }
-
-    return nil
-}
-
 extension NSManagedObject {
     /**
      Return the entity of our type with a given name, or make it if it doesn't exist.
