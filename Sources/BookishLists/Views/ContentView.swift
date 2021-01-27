@@ -81,6 +81,13 @@ struct ContentView: View {
                     ToolbarItem(placement: .bottomBar) {
                         Spacer()
                     }
+                    
+                    ToolbarItem(placement: .bottomBar) {
+                        if let progress = model.importProgress {
+                            ProgressView("Importing", value: progress)
+                        }
+                    }
+                    
                     ToolbarItem(placement: .bottomBar) {
                         Button(action: handlePreferences) {
                             Label("Preferences", systemImage: "gear")

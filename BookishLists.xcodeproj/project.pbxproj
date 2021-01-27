@@ -36,6 +36,9 @@
 		8B987CBB25C0671E003D6F9F /* CDList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B987CBA25C0671E003D6F9F /* CDList.swift */; };
 		8B987CDD25C19263003D6F9F /* ExtensibleManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B987CDC25C19263003D6F9F /* ExtensibleManagedObject.swift */; };
 		8B987CF725C1BAE2003D6F9F /* AllBooksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B987CF625C1BAE2003D6F9F /* AllBooksView.swift */; };
+		8B987D0125C1CA60003D6F9F /* NSManagedObjectExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B987CFE25C1CA60003D6F9F /* NSManagedObjectExtensions.swift */; };
+		8B987D0225C1CA60003D6F9F /* NSManagedObjectContextExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B987CFF25C1CA60003D6F9F /* NSManagedObjectContextExtensions.swift */; };
+		8B987D0325C1CA60003D6F9F /* NSEntityDescriptionExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B987D0025C1CA60003D6F9F /* NSEntityDescriptionExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -104,6 +107,9 @@
 		8B987CBA25C0671E003D6F9F /* CDList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDList.swift; sourceTree = "<group>"; };
 		8B987CDC25C19263003D6F9F /* ExtensibleManagedObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensibleManagedObject.swift; sourceTree = "<group>"; };
 		8B987CF625C1BAE2003D6F9F /* AllBooksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllBooksView.swift; sourceTree = "<group>"; };
+		8B987CFE25C1CA60003D6F9F /* NSManagedObjectExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSManagedObjectExtensions.swift; sourceTree = "<group>"; };
+		8B987CFF25C1CA60003D6F9F /* NSManagedObjectContextExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSManagedObjectContextExtensions.swift; sourceTree = "<group>"; };
+		8B987D0025C1CA60003D6F9F /* NSEntityDescriptionExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSEntityDescriptionExtensions.swift; sourceTree = "<group>"; };
 		8BE9ADE9252B0DDA00F97D53 /* Tools.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Tools.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -241,6 +247,9 @@
 				8B987CBA25C0671E003D6F9F /* CDList.swift */,
 				8B987C9E25C047E5003D6F9F /* CoreDataStack.swift */,
 				8B1F10AB25AC8EC400108A34 /* BarcodeScanner.swift */,
+				8B987D0025C1CA60003D6F9F /* NSEntityDescriptionExtensions.swift */,
+				8B987CFF25C1CA60003D6F9F /* NSManagedObjectContextExtensions.swift */,
+				8B987CFE25C1CA60003D6F9F /* NSManagedObjectExtensions.swift */,
 				226F15DA251A28EA00D6B12E /* Application.swift */,
 				2207D47025265FC400A014D5 /* Views */,
 				22ED67F1251E439200B0226D /* Resources */,
@@ -467,10 +476,13 @@
 				8B987CBB25C0671E003D6F9F /* CDList.swift in Sources */,
 				8B987CAB25C04876003D6F9F /* BookishLists.xcdatamodeld in Sources */,
 				8B987C9F25C047E5003D6F9F /* CoreDataStack.swift in Sources */,
+				8B987D0325C1CA60003D6F9F /* NSEntityDescriptionExtensions.swift in Sources */,
 				8B1F10AC25AC8EC400108A34 /* BarcodeScanner.swift in Sources */,
 				8B1F10D825ACB30A00108A34 /* ListView.swift in Sources */,
 				8B1F10E225ADC28800108A34 /* BookView.swift in Sources */,
+				8B987D0125C1CA60003D6F9F /* NSManagedObjectExtensions.swift in Sources */,
 				8B987CB525C06708003D6F9F /* CDBook.swift in Sources */,
+				8B987D0225C1CA60003D6F9F /* NSManagedObjectContextExtensions.swift in Sources */,
 				226F15DB251A28EA00D6B12E /* Application.swift in Sources */,
 				221717DC2522773B00C43604 /* Model.swift in Sources */,
 				8B58C7CC25B84AB8007F6B70 /* PreferencesView.swift in Sources */,

@@ -65,7 +65,7 @@ class Model: ObservableObject {
     func removeAllData() {
         let context = stack.viewContext
         let coordinator = stack.coordinator
-        for entity in ["Book", "List"] {
+        for entity in ["CDBook", "CDList"] {
             let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: entity)
             let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
 
@@ -99,7 +99,7 @@ class Model: ObservableObject {
             let context = stack.viewContext
             let list = CDList(context: context)
             for importedBook in session.books.values {
-                let book = CDBook(context: context)
+                let book = CDBook.named(importedBook.title, in: context)
                 book.name = importedBook.title
                 list.addToBooks(book)
             }
@@ -111,15 +111,21 @@ class Model: ObservableObject {
 
 extension Model: ImportMonitor {
     func session(_ session: ImportSession, willImportItems count: Int) {
-        importProgress = 0.0
+        onMainQueue {
+            self.importProgress = 0.0
+        }
     }
     
     func session(_ session: ImportSession, willImportItem label: String, index: Int, of count: Int) {
-        importProgress = Double(index) / Double(count)
+        onMainQueue {
+            self.importProgress = Double(index) / Double(count)
+        }
     }
     
     func sessionDidFinish(_ session: ImportSession) {
-        importProgress = nil
+        onMainQueue {
+            self.importProgress = nil
+        }
         if let session = session as? DeliciousLibraryImportSession {
             self.add(importedBooksFrom: session)
         }
