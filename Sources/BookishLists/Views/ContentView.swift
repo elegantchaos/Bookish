@@ -52,16 +52,6 @@ struct ContentView: View {
             VStack {
                 NavigationView {
                     RootIndexView()
-                        .toolbar {
-                            ToolbarItem(placement: .bottomBar) {
-                                Spacer()
-                            }
-                            ToolbarItem(placement: .bottomBar) {
-                                Button(action: handlePreferences) {
-                                    Label("Preferences", systemImage: "gear")
-                                }
-                            }
-                        }
                         .navigationTitle(model.appName)
                         .navigationBarItems(
                             leading: EditButton(),
@@ -77,6 +67,16 @@ struct ContentView: View {
                         )
                 }
                 .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .bottomBar) {
+                        Spacer()
+                    }
+                    ToolbarItem(placement: .bottomBar) {
+                        Button(action: handlePreferences) {
+                            Label("Preferences", systemImage: "gear")
+                        }
+                    }
+                }
             }
         }
     }
