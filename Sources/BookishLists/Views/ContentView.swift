@@ -25,8 +25,8 @@ struct ListEntry: Identifiable {
 
     var id: UUID {
         switch self.kind {
-            case .book(let book): return book.id!
-            case .list(let list): return list.id!
+            case .book(let book): return book.id
+            case .list(let list): return list.id
         }
     }
 
@@ -77,8 +77,6 @@ struct ContentView: View {
     
     func handleAdd() {
         let list = CDList(context: managedObjectContext)
-        list.id = UUID()
-        list.name = "Untitled"
         model.save()
     }
 
@@ -93,9 +91,9 @@ struct RootIndexView: View {
     @Environment(\.editMode) var editMode
     var body: some View {
             if editMode?.wrappedValue == .active {
-                EditableBookListsView()
+                EditableListIndexView()
             } else {
-                BookListsView()
+                ListIndexView()
             }
     }
 }

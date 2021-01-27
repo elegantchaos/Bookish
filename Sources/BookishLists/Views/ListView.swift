@@ -18,7 +18,7 @@ extension Binding where Value == String? {
     }
 }
 
-struct BookListView: View {
+struct ListView: View {
     @EnvironmentObject var model: Model
     @Environment(\.managedObjectContext) var context
     @State var selection: UUID? = nil
@@ -31,7 +31,7 @@ struct BookListView: View {
     var body: some View {
         
         return VStack {
-            TextField("Name", text: $list.name.onNone(""))
+            TextField("Name", text: $list.name)
                 .padding()
             
             HStack {
@@ -53,7 +53,7 @@ struct BookListView: View {
                 .onDelete(perform: handleDelete)
             }
         }
-        .navigationTitle(list.name ?? "Untitled")
+        .navigationTitle(list.name)
         .navigationBarItems(
             leading: EditButton(),
             trailing:
@@ -76,7 +76,6 @@ struct BookListView: View {
     
     func handleAdd() {
         let book = CDBook(context: context)
-        book.id = UUID()
         book.addToLists(list)
         model.save()
     }
@@ -96,7 +95,7 @@ struct BookListView: View {
     }
 }
 
-extension BookListView: ImportMonitor {
+extension ListView: ImportMonitor {
     func session(_ session: ImportSession, willImportItems count: Int) {
         importProgress = 0.0
     }

@@ -6,7 +6,7 @@
 import SwiftUI
 import SwiftUIExtensions
 
-struct BookListsView: View {
+struct ListIndexView: View {
     @FetchRequest(
         entity: CDList.entity(),
         sortDescriptors: [NSSortDescriptor(key: "name", ascending: true)]
@@ -21,6 +21,35 @@ struct BookListsView: View {
                 case let .book(book):
                     LinkView(book)
             }
+        }
+    }
+}
+
+
+struct EditableListIndexView: View {
+    @EnvironmentObject var model: Model
+    @Environment(\.managedObjectContext) var context
+    @FetchRequest(
+        entity: CDList.entity(),
+        sortDescriptors: [NSSortDescriptor(key: "name", ascending: true)]
+    ) var lists: FetchedResults<CDList>
+
+    var body: some View {
+        List() {
+            ForEach(lists) { list in
+                LinkView(list)
+            }
+            .onDelete(perform: handleDelete)
+        }
+    }
+    
+    func handleDelete(_ items: IndexSet?) {
+        if let items = items {
+            items.forEach { index in
+                let list = lists[index]
+                context.delete(list)
+            }
+            model.save()
         }
     }
 }

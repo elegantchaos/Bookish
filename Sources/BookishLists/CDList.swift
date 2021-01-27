@@ -7,10 +7,10 @@ import CoreData
 import SwiftUI
 import SwiftUIExtensions
 
-class CDList: NSManagedObject {
+class CDList: ExtensibleManagedObject {
     var sortedBooks: [CDBook] {
         guard let books = books as? Set<CDBook> else { return [] }
-        let sorted = books.sorted { ($0.name ?? "") < ($1.name ?? "") }
+        let sorted = books.sorted { $0.name < $1.name }
         return sorted
     }
     
@@ -20,11 +20,36 @@ class CDList: NSManagedObject {
     }
 }
 
+extension CDList {
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<CDList> {
+        return NSFetchRequest<CDList>(entityName: "List")
+    }
+    
+    @NSManaged public var books: NSSet?
+}
+
+// MARK: Generated accessors for books
+extension CDList {
+
+    @objc(addBooksObject:)
+    @NSManaged public func addToBooks(_ value: CDBook)
+
+    @objc(removeBooksObject:)
+    @NSManaged public func removeFromBooks(_ value: CDBook)
+
+    @objc(addBooks:)
+    @NSManaged public func addToBooks(_ values: NSSet)
+
+    @objc(removeBooks:)
+    @NSManaged public func removeFromBooks(_ values: NSSet)
+
+}
+
 extension CDList: AutoLinked {
     var linkView: some View {
-        BookListView(list: self)
+        ListView(list: self)
     }
     var labelView: some View {
-        Label(name ?? "Untitled", systemImage: "books.vertical")
+        Label(name, systemImage: "books.vertical")
     }
 }

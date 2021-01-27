@@ -7,38 +7,33 @@ import CoreData
 import SwiftUI
 import SwiftUIExtensions
 
-class CDBook: NSManagedObject {
-    func binding(forProperty key: String) -> Binding<String> {
-        Binding<String> { () -> String in
-            return self.decodedProperties[key] ?? ""
-        } set: { (value) in
-            var updated = self.decodedProperties
-            updated[key] = value
-            self.encode(properties: updated)
-        }
-    }
-    
-    var decodedProperties: [String:String] {
-        guard let data = properties?.data(using: .utf8) else { return [:] }
-        let decoder = JSONDecoder()
-        do {
-            let decoded = try decoder.decode([String:String].self, from: data)
-            return decoded
-        } catch {
-            return [:]
-        }
+class CDBook: ExtensibleManagedObject {
+}
 
+extension CDBook {
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<CDBook> {
+        return NSFetchRequest<CDBook>(entityName: "Book")
     }
-    
-    func encode(properties: [String:String]) {
-        let encoder = JSONEncoder()
-        do {
-            let json = try encoder.encode(properties)
-            self.properties = String(data: json, encoding: .utf8)
-        } catch {
-            print("Failed to encoded properties: \(properties) \(error)")
-        }
-    }
+
+    @NSManaged public var lists: NSSet?
+}
+
+
+// MARK: Generated accessors for lists
+extension CDBook {
+
+    @objc(addListsObject:)
+    @NSManaged public func addToLists(_ value: CDList)
+
+    @objc(removeListsObject:)
+    @NSManaged public func removeFromLists(_ value: CDList)
+
+    @objc(addLists:)
+    @NSManaged public func addToLists(_ values: NSSet)
+
+    @objc(removeLists:)
+    @NSManaged public func removeFromLists(_ values: NSSet)
+
 }
 
 extension CDBook: AutoLinked {
@@ -46,6 +41,6 @@ extension CDBook: AutoLinked {
         BookView(book: self)
     }
     var labelView: some View {
-        Label(name ?? "Untitled", systemImage: "book")
+        Label(name, systemImage: "book")
     }
 }

@@ -15,7 +15,7 @@ struct BookView: View {
 
     var body: some View {
         VStack {
-            TextField("Name", text: $book.name.onNone(""))
+            TextField("Name", text: $book.name)
                 .padding()
 
             TextField("Notes", text: book.binding(forProperty: "notes"))
@@ -23,7 +23,7 @@ struct BookView: View {
             
 
         }
-        .navigationTitle(book.name ?? "")
+        .navigationTitle(book.name)
         .onDisappear(perform: handleDisappear)
     }
     
