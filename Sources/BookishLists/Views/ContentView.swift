@@ -45,6 +45,7 @@ struct ContentView: View {
     @EnvironmentObject var model: Model
     @Environment(\.managedObjectContext) var managedObjectContext
     @EnvironmentObject var sheetController: SheetController
+    @State var showMenu = false
     
     var body: some View {
         SheetControllerHost {
@@ -65,8 +66,13 @@ struct ContentView: View {
                         .navigationBarItems(
                             leading: EditButton(),
                             trailing:
-                                HStack {
-                                    Button(action: handleAdd) { Image(systemName: "plus") }
+                                Menu() {
+                                    Button(action: handleAdd) { Text("New List") }
+                                    Menu("Import…") {
+                                        Button(action: handleImport) { Text("From Delicious Library") }
+                                    }
+                                } label: {
+                                    Image(systemName: "ellipsis.circle")
                                 }
                         )
                 }
@@ -80,6 +86,9 @@ struct ContentView: View {
         model.save()
     }
 
+    func handleImport() {
+        
+    }
     func handlePreferences() {
         sheetController.show {
             PreferencesView()
