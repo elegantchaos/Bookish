@@ -28,7 +28,7 @@ class ExtensibleManagedObject: IdentifiableManagedObject {
     var decodedProperties: [String:Any] {
         guard let data = properties?.data(using: .utf8) else { return [:] }
         do {
-            let decoded = try JSONSerialization.jsonObject(with: data, options: []) as? [String:Any]
+            let decoded = try PropertyListSerialization.propertyList(from: data, options: [], format: nil) as? [String:Any]
             return decoded ?? [:]
         } catch {
             return [:]
@@ -38,7 +38,7 @@ class ExtensibleManagedObject: IdentifiableManagedObject {
     
     func encode(properties: [String:Any]) {
         do {
-            let json = try JSONSerialization.data(withJSONObject: properties, options: [])
+            let json = try PropertyListSerialization.data(fromPropertyList: properties, format: .xml, options: PropertyListSerialization.WriteOptions())
             self.properties = String(data: json, encoding: .utf8)
         } catch {
             print("Failed to encoded properties: \(properties) \(error)")

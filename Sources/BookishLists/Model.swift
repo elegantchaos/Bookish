@@ -107,6 +107,7 @@ class Model: ObservableObject {
                 }
                 
                 book.name = importedBook.title
+                book.encode(properties: importedBook.raw)
                 list.addToBooks(book)
             }
             save()

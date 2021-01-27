@@ -21,10 +21,24 @@ struct BookView: View {
             TextField("Notes", text: book.binding(forProperty: "notes"))
                 .padding()
             
-            ForEach(Array(book.decodedProperties.keys), id: \.self) { key in
-                Text(key)
+            ScrollView {
+                VStack {
+                    let props = book.decodedProperties
+                    ForEach(Array(props.keys.sorted()), id: \.self) { key in
+                        HStack {
+                            if let value = props[key] {
+                                let string = String(describing: value)
+                                if !string.isEmpty {
+                                    Text(key)
+                                    Spacer()
+                                    Text(string)
+                                }
+                            }
+                        }
+                    }
+                }
             }
-
+            .padding()
         }
         .navigationTitle(book.name)
         .onDisappear(perform: handleDisappear)
