@@ -9,7 +9,10 @@ import SwiftUIExtensions
 struct ListIndexView: View {
     @FetchRequest(
         entity: CDList.entity(),
-        sortDescriptors: [NSSortDescriptor(key: "name", ascending: true)]
+        sortDescriptors: [
+            NSSortDescriptor(key: "name", ascending: true)
+        ],
+        predicate: NSPredicate(format: "container == null")
     ) var lists: FetchedResults<CDList>
     
     var body: some View {

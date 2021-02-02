@@ -4,6 +4,7 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 import BookishImporter
+import CoreData
 import KeyValueStore
 import Logger
 import SwiftUI
@@ -110,6 +111,10 @@ class Model: ObservableObject {
                 book.encode(properties: importedBook.raw)
                 list.addToBooks(book)
             }
+
+            let group = CDList.named("Imports", in: context)
+            group.addToLists(list)
+
             save()
         }
 

@@ -2,18 +2,30 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="20C69" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="CDBook" representedClassName=".CDBook" syncable="YES">
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="imageData" optional="YES" attributeType="Binary"/>
+        <attribute name="imageURL" optional="YES" attributeType="URI"/>
         <attribute name="name" attributeType="String" defaultValueString="Untitled"/>
         <attribute name="properties" optional="YES" attributeType="String"/>
         <relationship name="lists" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDList" inverseName="books" inverseEntity="CDList"/>
     </entity>
+    <entity name="CDEntry" representedClassName=".CDEntry" syncable="YES">
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="properties" optional="YES" attributeType="String"/>
+    </entity>
     <entity name="CDList" representedClassName=".CDList" syncable="YES">
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="imageData" optional="YES" attributeType="Binary"/>
+        <attribute name="imageURL" optional="YES" attributeType="URI"/>
         <attribute name="name" attributeType="String" defaultValueString="Untitled"/>
         <attribute name="properties" optional="YES" attributeType="String"/>
         <relationship name="books" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDBook" inverseName="lists" inverseEntity="CDBook"/>
+        <relationship name="container" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDList" inverseName="lists" inverseEntity="CDList"/>
+        <relationship name="lists" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDList" inverseName="container" inverseEntity="CDList"/>
     </entity>
     <elements>
-        <element name="CDBook" positionX="-63" positionY="-18" width="128" height="89"/>
-        <element name="CDList" positionX="-54" positionY="18" width="128" height="89"/>
+        <element name="CDBook" positionX="-63" positionY="-18" width="128" height="119"/>
+        <element name="CDEntry" positionX="-54" positionY="63" width="128" height="74"/>
+        <element name="CDList" positionX="-54" positionY="18" width="128" height="149"/>
     </elements>
 </model>

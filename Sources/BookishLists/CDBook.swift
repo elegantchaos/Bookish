@@ -12,7 +12,7 @@ class CDBook: ExtensibleManagedObject {
 
 extension CDBook {
     @nonobjc public class func fetchRequest() -> NSFetchRequest<CDBook> {
-        return NSFetchRequest<CDBook>(entityName: "Book")
+        return NSFetchRequest<CDBook>(entityName: "CDBook")
     }
 
     @NSManaged public var lists: NSSet?

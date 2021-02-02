@@ -9,6 +9,8 @@ import SwiftUI
 class ExtensibleManagedObject: IdentifiableManagedObject {
     @NSManaged public var name: String
     @NSManaged public var properties: String?
+    @NSManaged public var imageData: Data?
+    @NSManaged public var imageURL: URL?
 
     override func awakeFromInsert() {
         super.awakeFromInsert()

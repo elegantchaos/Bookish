@@ -43,8 +43,12 @@ struct ListEntry: Identifiable {
             case .allBooks: return nil
             case .book: return nil
             case .list(let list):
-                guard let books = list.books as? Set<CDBook> else { return nil }
-                return books.map({ ListEntry(book: $0)})
+                let books = list.books ?? []
+                let lists = list.lists ?? []
+                var children: [ListEntry] = []
+                children.append(contentsOf: books.map({ ListEntry(book: $0)}))
+                children.append(contentsOf: lists.map({ ListEntry(list: $0)}))
+                return children.count > 0 ? children : nil
         }
     }
 }
