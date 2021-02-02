@@ -13,7 +13,15 @@ enum ListEntryKind {
     case book(CDBook)
 }
 
-struct ListEntry: Identifiable {
+struct ListEntry: Identifiable, Hashable {
+    static func == (lhs: ListEntry, rhs: ListEntry) -> Bool {
+        lhs.id == rhs.id
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        id.hash(into: &hasher)
+    }
+    
     static let allBooksId = UUID()
     
     let kind: ListEntryKind
@@ -59,7 +67,7 @@ struct ContentView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
     @EnvironmentObject var sheetController: SheetController
     @State var importRequested = false
-
+    
     var body: some View {
         SheetControllerHost {
             VStack {
@@ -70,7 +78,8 @@ struct ContentView: View {
                             leading: EditButton(),
                             trailing:
                                 Menu() {
-                                    Button(action: handleAdd) { Text("New List") }
+                                    Button(action: handleAddList) { Text("New List") }
+                                    Button(action: handleAddGroup) { Text("New Group") }
                                     Menu("Import…") {
                                         Button(action: handleRequestImport) { Text("From Delicious Library") }
                                     }
@@ -102,7 +111,11 @@ struct ContentView: View {
         }
     }
     
-    func handleAdd() {
+    func handleAddList() {
+        let _ : CDList = model.add()
+    }
+
+    func handleAddGroup() {
         let _ : CDList = model.add()
     }
 

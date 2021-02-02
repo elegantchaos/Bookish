@@ -99,6 +99,7 @@ class Model: ObservableObject {
         onMainQueue { [self] in // TODO: add on a background context?
             let context = stack.viewContext
             let list = CDList(context: context)
+            list.name = "Imported from Delicious Library"
             for importedBook in session.books.values {
                 let book: CDBook
                 if let id = UUID(uuidString: importedBook.id) {
@@ -113,7 +114,7 @@ class Model: ObservableObject {
             }
 
             let group = CDList.named("Imports", in: context)
-            group.addToLists(list)
+            list.container = group
 
             save()
         }

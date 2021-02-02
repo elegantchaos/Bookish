@@ -15,23 +15,29 @@ struct ListIndexView: View {
         predicate: NSPredicate(format: "container == null")
     ) var lists: FetchedResults<CDList>
     
+    @State var selection: UUID?
+    
     var body: some View {
         var entries = lists.map({ ListEntry(list: $0)})
         entries.insert(ListEntry(), at: 0)
-        return List(entries, children: \.children) { entry in
-            switch entry.kind {
-                case .allBooks:
-                    NavigationLink(destination: AllBooksView()) {
-                        Label("All Books", systemImage: "books.vertical")
-                    }
-                case let .list(list):
-                    LinkView(list)
-                case let .book(book):
-                    LinkView(book)
+        return VStack {
+            Text(String(describing: selection))
+            List(entries, children: \.children, selection: $selection) { entry in
+                switch entry.kind {
+                    case .allBooks:
+                        NavigationLink(destination: AllBooksView()) {
+                            Label("All Books", systemImage: "books.vertical")
+                        }
+                    case let .list(list):
+                        LinkView(list, selection: $selection)
+                    case let .book(book):
+                        LinkView(book, selection: $selection)
+                }
             }
+            
         }
     }
-
+    
 }
 
 
@@ -42,11 +48,12 @@ struct EditableListIndexView: View {
         entity: CDList.entity(),
         sortDescriptors: [NSSortDescriptor(key: "name", ascending: true)]
     ) var lists: FetchedResults<CDList>
+    @State var selection: UUID?
 
     var body: some View {
         List() {
             ForEach(lists) { list in
-                LinkView(list)
+                LinkView(list, selection: $selection)
             }
             .onDelete(perform: handleDelete)
         }

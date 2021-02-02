@@ -34,7 +34,7 @@ struct ListView: View {
 
             List(selection: $selection) {
                 ForEach(list.sortedBooks) { book in
-                    LinkView(book)
+                    LinkView(book, selection: $selection)
                 }
                 .onDelete(perform: handleDelete)
             }
