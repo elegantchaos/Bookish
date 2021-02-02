@@ -22,7 +22,9 @@ struct AllBooksView: View {
         return VStack {
             List(selection: $selection) {
                 ForEach(books) { book in
-                    LinkView(book, selection: $selection)
+                    if !book.isDeleted {
+                        LinkView(book, selection: $selection)
+                    }
                 }
                 .onDelete(perform: handleDelete)
             }

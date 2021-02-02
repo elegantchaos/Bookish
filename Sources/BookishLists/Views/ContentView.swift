@@ -67,12 +67,12 @@ struct ContentView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
     @EnvironmentObject var sheetController: SheetController
     @State var importRequested = false
-    
+
     var body: some View {
         SheetControllerHost {
             VStack {
                 NavigationView {
-                    RootIndexView()
+                    RootIndexView(selection: $model.selection)
                         .navigationTitle(model.appName)
                         .navigationBarItems(
                             leading: EditButton(),
@@ -112,11 +112,16 @@ struct ContentView: View {
     }
     
     func handleAddList() {
-        let _ : CDList = model.add()
+        let list : CDList = model.add()
+        if let selection = model.selection, let container = CDList.withId(selection, in: model.stack.viewContext) {
+            list.container = container
+        }
+        model.selection = list.id
     }
 
     func handleAddGroup() {
-        let _ : CDList = model.add()
+        let list: CDList = model.add()
+        model.selection = list.id
     }
 
     func handleRequestImport() {
@@ -133,11 +138,13 @@ struct ContentView: View {
 
 struct RootIndexView: View {
     @Environment(\.editMode) var editMode
+    @Binding var selection: UUID?
+
     var body: some View {
             if editMode?.wrappedValue == .active {
-                EditableListIndexView()
+                EditableListIndexView(selection: $selection)
             } else {
-                ListIndexView()
+                ListIndexView(selection: $selection)
             }
     }
 }

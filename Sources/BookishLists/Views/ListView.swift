@@ -20,7 +20,6 @@ extension Binding where Value == String? {
 struct ListView: View {
     @EnvironmentObject var model: Model
     @Environment(\.managedObjectContext) var context
-    @State var selection: UUID? = nil
     @ObservedObject var list: CDList
 
     var body: some View {
@@ -32,9 +31,9 @@ struct ListView: View {
             TextField("Notes", text: list.binding(forProperty: "notes"))
                 .padding()
 
-            List(selection: $selection) {
+            List(selection: $model.selection) {
                 ForEach(list.sortedBooks) { book in
-                    LinkView(book, selection: $selection)
+                    LinkView(book, selection: $model.selection)
                 }
                 .onDelete(perform: handleDelete)
             }
@@ -45,6 +44,7 @@ struct ListView: View {
             trailing:
                 HStack {
                     Button(action: handleAdd) { Image(systemName: "plus") }
+                    Button(action: handleDeleteList) { Image(systemName: "ellipsis.circle") }
                 }
         )
     }
@@ -57,6 +57,10 @@ struct ListView: View {
             }
             model.save()
         }
+    }
+    
+    func handleDeleteList() {
+        model.delete(list)
     }
     
     func handleAdd() {

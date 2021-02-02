@@ -34,6 +34,7 @@ class Model: ObservableObject {
     @Published var importProgress: Double? = nil
     @Published var status: String? = nil
     @Published var errors: [Error] = []
+    @Published var selection: UUID? = nil
     
     init(stack: CoreDataStack) {
         self.stack = stack
@@ -53,8 +54,18 @@ class Model: ObservableObject {
     }
     
     func delete(_ object: ExtensibleManagedObject) {
-        stack.viewContext.delete(object)
-        save()
+        print("deleting \(object.objectID)")
+        if object.id == selection {
+            print("cleared selection")
+            selection = nil
+        }
+        let context = stack.viewContext
+        context.perform {
+            context.delete(object)
+            onMainQueue {
+                self.save()
+            }
+        }
     }
     
     func add<T>() -> T where T: ExtensibleManagedObject {

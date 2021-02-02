@@ -15,7 +15,7 @@ struct ListIndexView: View {
         predicate: NSPredicate(format: "container == null")
     ) var lists: FetchedResults<CDList>
     
-    @State var selection: UUID?
+    @Binding var selection: UUID?
     
     var body: some View {
         var entries = lists.map({ ListEntry(list: $0)})
@@ -29,15 +29,29 @@ struct ListIndexView: View {
                             Label("All Books", systemImage: "books.vertical")
                         }
                     case let .list(list):
-                        LinkView(list, selection: $selection)
+                        if !list.isDeleted {
+                            OLinkView(list, selection: $selection)
+                        }
                     case let .book(book):
-                        LinkView(book, selection: $selection)
+                        if !book.isDeleted {
+                            OLinkView(book, selection: $selection)
+                        }
                 }
             }
             
         }
     }
     
+//    static func query() -> NSFetchRequest<CDList> {
+//        let request: NSFetchRequest<CDList> = CDList.fetchRequest()
+//        request.sortDescriptors = [
+//            NSSortDescriptor(key: "name", ascending: true)
+//        ]
+//        request.predicate = NSPredicate(format: "container == null")
+//        request.que
+//    ) var lists: FetchedResults<CDList>
+//
+//    }
 }
 
 
@@ -48,12 +62,15 @@ struct EditableListIndexView: View {
         entity: CDList.entity(),
         sortDescriptors: [NSSortDescriptor(key: "name", ascending: true)]
     ) var lists: FetchedResults<CDList>
-    @State var selection: UUID?
+
+    @Binding var selection: UUID?
 
     var body: some View {
         List() {
             ForEach(lists) { list in
-                LinkView(list, selection: $selection)
+                if !list.isDeleted {
+                    LinkView(list, selection: $selection)
+                }
             }
             .onDelete(perform: handleDelete)
         }
@@ -63,9 +80,8 @@ struct EditableListIndexView: View {
         if let items = items {
             items.forEach { index in
                 let list = lists[index]
-                context.delete(list)
+                model.delete(list)
             }
-            model.save()
         }
     }
 }

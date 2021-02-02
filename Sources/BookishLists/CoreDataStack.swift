@@ -27,5 +27,10 @@ class CoreDataStack {
     init(containerName: String) {
         self.containerName = containerName
         persistentContainer.viewContext.automaticallyMergesChangesFromParent = true
+        do {
+            try persistentContainer.viewContext.setQueryGenerationFrom(.current)
+        } catch {
+            fatalError("###\(#function): Failed to pin viewContext to the current generation:\(error)")
+        }
     }
 }
