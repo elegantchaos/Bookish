@@ -21,8 +21,8 @@ struct ListView: View {
     @EnvironmentObject var model: Model
     @Environment(\.managedObjectContext) var context
     @ObservedObject var list: CDList
-    @SceneStorage("selectedBook") var selectedBook = ""
-
+    @State var selection: UUID?
+    
     var body: some View {
         
         return VStack {
@@ -32,9 +32,9 @@ struct ListView: View {
             TextField("Notes", text: list.binding(forProperty: "notes"))
                 .padding()
 
-            List(selection: selection) {
+            List(selection: $selection) {
                 ForEach(list.sortedBooks) { book in
-                    LinkView(book, selection: selection)
+                    LinkView(book, selection: $selection)
                 }
                 .onDelete(perform: handleDelete)
             }
@@ -50,16 +50,6 @@ struct ListView: View {
         )
     }
 
-    var selection: Binding<UUID?> {
-        Binding<UUID?> { () -> UUID? in
-            print("selected book is \(selectedBook)")
-            return selectedBook.isEmpty ? nil : UUID(uuidString: selectedBook)
-        } set: { uuid in
-            selectedBook = uuid?.uuidString ?? ""
-            print("set to \(selectedBook)")
-        }
-
-    }
     func handleDelete(_ items: IndexSet?) {
         if let items = items {
             items.forEach { index in

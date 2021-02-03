@@ -67,13 +67,11 @@ struct ContentView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
     @EnvironmentObject var sheetController: SheetController
     @State var importRequested = false
-    @SceneStorage("selectedItem") var selectedItem = ""
 
     var body: some View {
         SheetControllerHost {
-            VStack {
                 NavigationView {
-                    RootIndexView(selection: selection)
+                    RootIndexView(selection: $model.selection)
                         .navigationTitle(model.appName)
                         .navigationBarItems(
                             leading: EditButton(),
@@ -108,21 +106,10 @@ struct ContentView: View {
                         }
                     }
                 }
-            }
+            
         }
     }
     
-    var selection: Binding<UUID?> {
-        Binding<UUID?> { () -> UUID? in
-            print("selected item is \(selectedItem)")
-            return selectedItem.isEmpty ? nil : UUID(uuidString: selectedItem)
-        } set: { uuid in
-            selectedItem = uuid?.uuidString ?? ""
-            print("set item to \(selectedItem)")
-        }
-
-    }
- 
     func handleAddList() {
         let list : CDList = model.add()
         if let selection = model.selection, let container = CDList.withId(selection, in: model.stack.viewContext) {
@@ -153,10 +140,18 @@ struct RootIndexView: View {
     @Binding var selection: UUID?
 
     var body: some View {
-            if editMode?.wrappedValue == .active {
-                EditableListIndexView(selection: $selection)
-            } else {
-                ListIndexView(selection: $selection)
+        VStack {
+                if editMode?.wrappedValue == .active {
+                    EditableListIndexView(selection: $selection)
+                } else {
+                    ListIndexView(selection: $selection)
+                }
+            
+            if let uuid = selection {
+                Text(uuid.uuidString)
             }
+
+
+        }
     }
 }

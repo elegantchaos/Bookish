@@ -27,10 +27,10 @@ struct Application: App {
                 .environment(\.managedObjectContext, model.stack.viewContext)
                 .environmentObject(model)
                 .environmentObject(sheetController)
-//                .onReceive(
-//                    model.objectWillChange.debounce(for: .seconds(1), scheduler: RunLoop.main), perform: { _ in
-//                        model.save()
-//                })
+                .onReceive(
+                    model.objectWillChange.debounce(for: .seconds(1), scheduler: RunLoop.main), perform: { _ in
+                        model.save()
+                })
         }
         .onChange(of: scenePhase) { newScenePhase in
               switch newScenePhase {

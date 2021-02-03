@@ -42,7 +42,9 @@ class Model: ObservableObject {
         self.stack = stack
         
         if let string = UserDefaults.standard.string(forKey: "selection"), let uuid = UUID(uuidString: string) {
-            selection = uuid
+            onMainQueue {
+                self.selection = uuid
+            }
         }
     }
     

@@ -21,11 +21,10 @@ struct ListIndexView: View {
         var entries = lists.map({ ListEntry(list: $0)})
         entries.insert(ListEntry(), at: 0)
         return VStack {
-            Text(String(describing: selection))
             List(entries, children: \.children, selection: $selection) { entry in
                 switch entry.kind {
                     case .allBooks:
-                        NavigationLink(destination: AllBooksView()) {
+                        NavigationLink(destination: AllBooksView(), tag: entry.id, selection: $selection) {
                             Label("All Books", systemImage: "books.vertical")
                         }
                     case let .list(list):
@@ -66,7 +65,7 @@ struct EditableListIndexView: View {
     @Binding var selection: UUID?
 
     var body: some View {
-        List() {
+        List(lists, selection: $selection) { list in
             ForEach(lists) { list in
                 if !list.isDeleted {
                     LinkView(list, selection: $selection)
