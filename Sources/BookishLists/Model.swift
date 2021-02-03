@@ -5,6 +5,7 @@
 
 import BookishImporter
 import CoreData
+import Images
 import KeyValueStore
 import Logger
 import SwiftUI
@@ -30,7 +31,8 @@ extension UUID: JSONCodable {
 class Model: ObservableObject {
     let stack: CoreDataStack
     let importer = ImportManager()
-
+    let images = UIImageCache()
+    
     @Published var importProgress: Double? = nil
     @Published var status: String? = nil
     @Published var errors: [Error] = []
@@ -120,6 +122,7 @@ class Model: ObservableObject {
                 }
                 
                 book.name = importedBook.title
+                book.imageURL = importedBook.images.first
                 book.encode(properties: importedBook.raw)
                 list.addToBooks(book)
             }

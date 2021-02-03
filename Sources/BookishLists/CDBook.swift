@@ -4,6 +4,7 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 import CoreData
+import Images
 import SwiftUI
 import SwiftUIExtensions
 
@@ -41,6 +42,39 @@ extension CDBook: AutoLinked {
         BookView(book: self)
     }
     var labelView: some View {
-        Label(name, systemImage: "book")
+        Label {
+            Text(name)
+        } icon: {
+            if let url = imageURL {
+                LabelIconView(url: url, placeholder: "book")
+            } else {
+                Image(systemName: "book")
+            }
+        }
+    }
+}
+
+struct AsyncImageView: View {
+    @ObservedObject var image: AsyncImage
+    
+    init(_ image: AsyncImage) {
+        self.image = image
+    }
+    
+    var body: some View {
+        Image(uiImage: image.image)
+            .resizable()
+            .aspectRatio(contentMode: .fill)
+            .frame(maxWidth: 32, maxHeight: 32)
+    }
+}
+struct LabelIconView: View {
+    @EnvironmentObject var model: Model
+    
+    let url: URL
+    let placeholder: String
+    var body: some View {
+        let image = model.images.image(for: url, default: placeholder)
+        AsyncImageView(image)
     }
 }

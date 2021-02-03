@@ -41,6 +41,7 @@
 		8B987D0325C1CA60003D6F9F /* NSEntityDescriptionExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B987D0025C1CA60003D6F9F /* NSEntityDescriptionExtensions.swift */; };
 		8B987D0925C1D519003D6F9F /* IdentifiableManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B987D0825C1D519003D6F9F /* IdentifiableManagedObject.swift */; };
 		8BED2A1825C97D29000DD7C6 /* CDEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BED2A1725C97D29000DD7C6 /* CDEntry.swift */; };
+		8BED2A2425CAC0D1000DD7C6 /* Images in Frameworks */ = {isa = PBXBuildFile; productRef = 8BED2A2325CAC0D1000DD7C6 /* Images */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -122,6 +123,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8BED2A2425CAC0D1000DD7C6 /* Images in Frameworks */,
 				8B1F110725ADF4FD00108A34 /* Logger in Frameworks */,
 				8B1F112F25ADF56F00108A34 /* Localization in Frameworks */,
 				8B2A7CC825AE140A0024C1A2 /* ThreadExtensions in Frameworks */,
@@ -307,6 +309,7 @@
 				8B2A7CC725AE140A0024C1A2 /* ThreadExtensions */,
 				8B80467225B8788900698F28 /* SheetController */,
 				8B80467C25B87C4A00698F28 /* LoggerUI */,
+				8BED2A2325CAC0D1000DD7C6 /* Images */,
 			);
 			productName = "Samedi's Crafting";
 			productReference = 226F15D7251A28EA00D6B12E /* Bookish Lists.app */;
@@ -411,6 +414,7 @@
 				8B1F114F25AE04DE00108A34 /* XCRemoteSwiftPackageReference "BookishImporter" */,
 				8B2A7CC625AE140A0024C1A2 /* XCRemoteSwiftPackageReference "ThreadExtensions" */,
 				8B80467125B8788900698F28 /* XCRemoteSwiftPackageReference "SheetController" */,
+				8BED2A2225CAC0D1000DD7C6 /* XCRemoteSwiftPackageReference "Images" */,
 			);
 			productRefGroup = 226F15D8251A28EA00D6B12E /* Products */;
 			projectDirPath = "";
@@ -910,6 +914,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		8BED2A2225CAC0D1000DD7C6 /* XCRemoteSwiftPackageReference "Images" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/elegantchaos/Images.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -956,6 +968,11 @@
 		8B80467C25B87C4A00698F28 /* LoggerUI */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = LoggerUI;
+		};
+		8BED2A2325CAC0D1000DD7C6 /* Images */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8BED2A2225CAC0D1000DD7C6 /* XCRemoteSwiftPackageReference "Images" */;
+			productName = Images;
 		};
 /* End XCSwiftPackageProductDependency section */
 

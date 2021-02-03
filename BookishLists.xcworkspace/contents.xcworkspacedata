@@ -11,6 +11,9 @@
       location = "group:../Files">
    </FileRef>
    <FileRef
+      location = "group:../Images">
+   </FileRef>
+   <FileRef
       location = "group:../KeyValueStore">
    </FileRef>
    <FileRef
