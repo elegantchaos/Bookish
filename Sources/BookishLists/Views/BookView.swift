@@ -11,17 +11,26 @@ struct BookView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
     @EnvironmentObject var model: Model
     @ObservedObject var book: CDBook
-
+    @State var title = ""
+    
     var body: some View {
         ScrollView {
         VStack {
             HStack {
                 VStack {
-                    TextField("Name", text: $book.name)
-                        .padding()
+//                    Label {
+//                        TextField("Name", text: $book.name)
+//                            .padding()
+//                    } icon: {
+//                        Image(systemName: "tag")
+//                    }
 
-                    TextField("Notes", text: book.binding(forProperty: "notes"))
-                        .padding()
+                    Label {
+                        TextField("Notes", text: book.binding(forProperty: "notes"))
+                            .padding()
+                    } icon: {
+                        Image(systemName: "note.text")
+                    }
                     
                     Spacer()
                 }
@@ -31,8 +40,9 @@ struct BookView: View {
                 AsyncImageView(model.image(for: book))
                     .frame(maxWidth: 256, maxHeight: 256)
             }
+            .padding()
 
-            DisclosureGroup("Properties") {
+            DisclosureGroup("Raw Properties") {
                 VStack {
                     let props = book.decodedProperties
                     ForEach(Array(props.keys.sorted()), id: \.self) { key in
@@ -52,12 +62,25 @@ struct BookView: View {
             .padding()
         }
         }
-        .navigationTitle(book.name)
         .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .principal) {
+                        TextField("Name", text: $title, onCommit: handleCommit)
+                    }
+                }
+        .onAppear(perform: handleAppear)
         .onDisappear(perform: handleDisappear)
+    }
+    
+    func handleAppear() {
+        title = book.name
     }
     
     func handleDisappear() {
         model.save()
+    }
+    
+    func handleCommit() {
+        book.name = title
     }
 }
