@@ -27,6 +27,10 @@ class ExtensibleManagedObject: IdentifiableManagedObject {
         }
     }
     
+    func string(forKey key: String) -> String? {
+        decodedProperties[key] as? String
+    }
+    
     var decodedProperties: [String:Any] {
         guard let data = properties?.data(using: .utf8) else { return [:] }
         do {

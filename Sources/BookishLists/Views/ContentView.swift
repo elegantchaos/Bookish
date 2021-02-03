@@ -22,7 +22,7 @@ struct ListEntry: Identifiable, Hashable {
         id.hash(into: &hasher)
     }
     
-    static let allBooksId = UUID()
+    static let allBooksId = UUID(uuidString: "A6CC34C5-ECB4-4F33-B177-EBF1A1FCA91D")!
     
     let kind: ListEntryKind
     
@@ -67,12 +67,13 @@ struct ContentView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
     @EnvironmentObject var sheetController: SheetController
     @State var importRequested = false
+    @SceneStorage("selectedItem") var selectedItem = ""
 
     var body: some View {
         SheetControllerHost {
             VStack {
                 NavigationView {
-                    RootIndexView(selection: $model.selection)
+                    RootIndexView(selection: selection)
                         .navigationTitle(model.appName)
                         .navigationBarItems(
                             leading: EditButton(),
@@ -111,6 +112,17 @@ struct ContentView: View {
         }
     }
     
+    var selection: Binding<UUID?> {
+        Binding<UUID?> { () -> UUID? in
+            print("selected item is \(selectedItem)")
+            return selectedItem.isEmpty ? nil : UUID(uuidString: selectedItem)
+        } set: { uuid in
+            selectedItem = uuid?.uuidString ?? ""
+            print("set item to \(selectedItem)")
+        }
+
+    }
+ 
     func handleAddList() {
         let list : CDList = model.add()
         if let selection = model.selection, let container = CDList.withId(selection, in: model.stack.viewContext) {

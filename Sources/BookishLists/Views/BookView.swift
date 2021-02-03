@@ -62,10 +62,19 @@ struct BookView: View {
             .padding()
         }
         }
-        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarTitleDisplayMode(.large)
                 .toolbar {
                     ToolbarItem(placement: .principal) {
-                        TextField("Name", text: $title, onCommit: handleCommit)
+                        VStack {
+                            TextField("Name", text: $title, onCommit: handleCommit)
+                                .font(.title)
+                            
+                            if let subtitle = book.string(forKey: "subtitle") {
+                                Text(subtitle)
+                            }
+                        }
+                        .padding(.vertical)
+                        
                     }
                 }
         .onAppear(perform: handleAppear)

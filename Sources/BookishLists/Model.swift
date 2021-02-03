@@ -40,11 +40,17 @@ class Model: ObservableObject {
     
     init(stack: CoreDataStack) {
         self.stack = stack
+        
+        if let string = UserDefaults.standard.string(forKey: "selection"), let uuid = UUID(uuidString: string) {
+            selection = uuid
+        }
     }
     
     var appName: String { "Bookish Lists" }
     
     func save() {
+        UserDefaults.standard.set(selection?.uuidString, forKey: "selection")
+        
         let context = stack.viewContext
         guard context.hasChanges else { return }
         do {
