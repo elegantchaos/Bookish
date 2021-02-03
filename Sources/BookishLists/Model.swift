@@ -134,6 +134,14 @@ class Model: ObservableObject {
         }
 
     }
+    
+    func image(for book: CDBook) -> AsyncImage {
+        images.image(for: book.imageURL, default: "book")
+    }
+    
+    func image(for list: CDList) -> AsyncImage {
+        images.image(for: list.imageURL, default: "books.vertical")
+    }
 }
 
 extension Model: ImportMonitor {

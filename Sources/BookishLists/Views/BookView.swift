@@ -10,18 +10,29 @@ import SwiftUI
 struct BookView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
     @EnvironmentObject var model: Model
-    @State var selection: UUID? = nil
     @ObservedObject var book: CDBook
 
     var body: some View {
+        ScrollView {
         VStack {
-            TextField("Name", text: $book.name)
-                .padding()
+            HStack {
+                VStack {
+                    TextField("Name", text: $book.name)
+                        .padding()
 
-            TextField("Notes", text: book.binding(forProperty: "notes"))
-                .padding()
-            
-            ScrollView {
+                    TextField("Notes", text: book.binding(forProperty: "notes"))
+                        .padding()
+                    
+                    Spacer()
+                }
+
+                Spacer()
+                
+                AsyncImageView(model.image(for: book))
+                    .frame(maxWidth: 256, maxHeight: 256)
+            }
+
+            DisclosureGroup("Properties") {
                 VStack {
                     let props = book.decodedProperties
                     ForEach(Array(props.keys.sorted()), id: \.self) { key in
@@ -40,7 +51,9 @@ struct BookView: View {
             }
             .padding()
         }
+        }
         .navigationTitle(book.name)
+        .navigationBarTitleDisplayMode(.inline)
         .onDisappear(perform: handleDisappear)
     }
     

@@ -64,8 +64,7 @@ struct AsyncImageView: View {
     var body: some View {
         Image(uiImage: image.image)
             .resizable()
-            .aspectRatio(contentMode: .fill)
-            .frame(maxWidth: 32, maxHeight: 32)
+            .aspectRatio(contentMode: .fit)
     }
 }
 struct LabelIconView: View {
@@ -76,5 +75,6 @@ struct LabelIconView: View {
     var body: some View {
         let image = model.images.image(for: url, default: placeholder)
         AsyncImageView(image)
+            .frame(maxWidth: 32, maxHeight: 32)
     }
 }

@@ -88,7 +88,7 @@ struct ContentView: View {
                                 }
                         )
                 }
-                .navigationBarTitleDisplayMode(.inline)
+                .navigationBarTitleDisplayMode(.automatic)
                 .fileImporter(isPresented: $importRequested, allowedContentTypes: [.xml], onCompletion: model.handlePerformImport)
                 .toolbar {
                     ToolbarItem(placement: .bottomBar) {
