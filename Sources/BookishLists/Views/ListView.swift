@@ -23,6 +23,14 @@ struct ListView: View {
     @ObservedObject var list: CDList
     @State var selection: UUID?
     
+    var fields: [String:String] {
+        if let fields = list.decodedProperties["fields"] as? [String:String] {
+            return fields
+        }
+        
+        return [:]
+    }
+    
     var body: some View {
         
         return VStack {
@@ -32,6 +40,17 @@ struct ListView: View {
             TextField("Notes", text: list.binding(forProperty: "notes"))
                 .padding()
 
+            Button(action: handleAddField) {
+                Image(systemName: "plus.circle")
+            }
+            
+            List() {
+                let keys = Array(fields.keys)
+                ForEach(keys, id: \.self) { key in
+                    Text(key)
+                }
+            }
+            
             List(selection: $selection) {
                 ForEach(list.sortedBooks) { book in
                     LinkView(book, selection: $selection)
@@ -69,5 +88,14 @@ struct ListView: View {
         book.addToLists(list)
         model.save()
     }
-    
+
+    func handleAddField() {
+        var properties = list.decodedProperties
+        var fields = self.fields
+        let index = fields.count + 1
+        let key = "Untitled \(index)"
+        fields[key] = "<string>"
+        properties["fields"] = fields
+        list.encode(properties: properties)
+    }
 }

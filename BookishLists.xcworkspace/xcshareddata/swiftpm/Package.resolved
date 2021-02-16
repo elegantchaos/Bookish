@@ -2,15 +2,6 @@
   "object": {
     "pins": [
       {
-        "package": "Images",
-        "repositoryURL": "https://github.com/elegantchaos/Images.git",
-        "state": {
-          "branch": null,
-          "revision": "59a9088a3f83e4e074df55e6d74b38cf52ffe75d",
-          "version": "1.0.0"
-        }
-      },
-      {
         "package": "ISBN",
         "repositoryURL": "https://github.com/elegantchaos/ISBN.git",
         "state": {
@@ -42,8 +33,8 @@
         "repositoryURL": "https://github.com/elegantchaos/XCTestExtensions.git",
         "state": {
           "branch": null,
-          "revision": "8c80db8f01d0a33453bd0b223cb05639f3ead1d7",
-          "version": "1.2.0"
+          "revision": "d57bdae3d001084247cd7cad771326cf710c3cc5",
+          "version": "1.3.0"
         }
       }
     ]
