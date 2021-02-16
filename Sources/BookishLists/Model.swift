@@ -131,7 +131,7 @@ class Model: ObservableObject {
                 
                 book.name = importedBook.title
                 book.imageURL = importedBook.images.first
-                book.encode(properties: importedBook.raw)
+                book.set(importedBook.raw, forKey: "raw")
                 list.addToBooks(book)
             }
 

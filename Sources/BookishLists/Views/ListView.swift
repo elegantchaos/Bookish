@@ -24,11 +24,7 @@ struct ListView: View {
     @State var selection: UUID?
     
     var fields: [String:String] {
-        if let fields = list.decodedProperties["fields"] as? [String:String] {
-            return fields
-        }
-        
-        return [:]
+        return list.dict(forKey: "fields") ?? [:]
     }
     
     var body: some View {
@@ -90,12 +86,10 @@ struct ListView: View {
     }
 
     func handleAddField() {
-        var properties = list.decodedProperties
         var fields = self.fields
         let index = fields.count + 1
         let key = "Untitled \(index)"
         fields[key] = "<string>"
-        properties["fields"] = fields
-        list.encode(properties: properties)
+        list.set(fields, forKey: "fields")
     }
 }

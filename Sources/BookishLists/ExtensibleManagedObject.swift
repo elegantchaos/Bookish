@@ -8,10 +8,12 @@ import SwiftUI
 
 class ExtensibleManagedObject: IdentifiableManagedObject {
     @NSManaged public var name: String
-    @NSManaged public var properties: String?
+    @NSManaged fileprivate var codedProperties: String?
     @NSManaged public var imageData: Data?
     @NSManaged public var imageURL: URL?
 
+    fileprivate lazy var cachedProperties: [String:Any] = decodedProperties
+    
     override func awakeFromInsert() {
         super.awakeFromInsert()
         id = UUID()
@@ -27,12 +29,39 @@ class ExtensibleManagedObject: IdentifiableManagedObject {
         }
     }
     
+    var sortedKeys: [String] {
+        cachedProperties.keys.sorted()
+    }
+
+    func property(forKey key: String) -> Any? {
+        return cachedProperties[key]
+    }
+
     func string(forKey key: String) -> String? {
-        decodedProperties[key] as? String
+        return cachedProperties[key] as? String
+    }
+
+    func dict<K,V>(forKey key: String) -> [K:V]? {
+        return cachedProperties[key] as? [K:V]
     }
     
-    var decodedProperties: [String:Any] {
-        guard let data = properties?.data(using: .utf8) else { return [:] }
+    func set(_ value: String, forKey key: String) {
+        cachedProperties[key] = value
+        scheduleEncoding()
+    }
+    
+    func set<K,V>(_ value: [K:V], forKey key: String) {
+        cachedProperties[key] = value
+        scheduleEncoding()
+    }
+    
+    fileprivate func scheduleEncoding() {
+        objectWillChange.send()
+        encode(properties: cachedProperties)
+    }
+    
+    fileprivate var decodedProperties: [String:Any] {
+        guard let data = codedProperties?.data(using: .utf8) else { return [:] }
         do {
             let decoded = try PropertyListSerialization.propertyList(from: data, options: [], format: nil) as? [String:Any]
             return decoded ?? [:]
@@ -42,10 +71,10 @@ class ExtensibleManagedObject: IdentifiableManagedObject {
 
     }
     
-    func encode(properties: [String:Any]) {
+    fileprivate func encode(properties: [String:Any]) {
         do {
             let json = try PropertyListSerialization.data(fromPropertyList: properties, format: .xml, options: PropertyListSerialization.WriteOptions())
-            self.properties = String(data: json, encoding: .utf8)
+            self.codedProperties = String(data: json, encoding: .utf8)
         } catch {
             print("Failed to encoded properties: \(properties) \(error)")
         }
