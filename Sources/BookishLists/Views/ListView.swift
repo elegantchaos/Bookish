@@ -17,12 +17,6 @@ extension Binding where Value == String? {
     }
 }
 
-enum FieldType: String {
-    case string
-    case integer
-    case real
-}
-
 struct ListView: View {
     @EnvironmentObject var model: Model
     @Environment(\.managedObjectContext) var context
@@ -43,9 +37,8 @@ struct ListView: View {
             }
             
             List() {
-                let keys = Array(list.fields.keys)
-                ForEach(keys, id: \.self) { key in
-                    Text(key)
+                ForEach(list.fields, id: \.self) { field in
+                    FieldEditorView(field: field)
                 }
             }
             

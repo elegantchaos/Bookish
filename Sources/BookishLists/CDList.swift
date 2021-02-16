@@ -3,6 +3,7 @@
 //  All code (c) 2021 - present day, Elegant Chaos Limited.
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
+import Combine
 import CoreData
 import Images
 import SwiftUI
@@ -11,6 +12,11 @@ import SwiftUIExtensions
 class CDList: NamedManagedObject {
     @NSManaged public var container: CDList?
 
+    fileprivate lazy var cachedFields: [ListField] = decodedFields
+    fileprivate var watchers: [AnyCancellable] = []
+    
+    var fields: [ListField] { cachedFields }
+    
     var sortedLists: [CDList] {
         guard let lists = lists else { return [] }
         let sorted = lists.sorted {
@@ -29,20 +35,37 @@ class CDList: NamedManagedObject {
         return sorted
     }
 
-    var fields: [String:String] {
-        return dict(forKey: "fields") ?? [:]
+    var decodedFields: [ListField] {
+        let strings: [String] = array(forKey: "fields") ?? []
+        print(strings)
+        return strings.map({ string in
+            let items = string.split(separator: "•", maxSplits: 1)
+            let kind = ListField.Kind(rawValue: String(items[0])) ?? .string
+            let field = ListField(key: String(items[1]), kind: kind)
+            
+            let watcher = field.objectWillChange.sink {
+                self.scheduleFieldEncoding()
+            }
+            
+            self.watchers.append(watcher)
+            
+            return field
+        })
     }
 
-    func addField(name: String? = nil, type: FieldType = .string) {
-        var fields = self.fields
-        let key = name ?? untitledName(for: fields)
-        fields[key] = type.rawValue
-        set(fields, forKey: "fields")
+    func addField(name: String? = nil, kind: ListField.Kind = .string) {
+        objectWillChange.send()
+        let key = name ?? "Untitled \(kind)"
+        cachedFields.append(ListField(key: key, kind: kind))
+        scheduleFieldEncoding()
     }
-
-    func untitledName(for fields: [String:String]) -> String {
-        let index = fields.count + 1
-        return "Untitled \(index)"
+    
+    func scheduleFieldEncoding() {
+        let strings = cachedFields.map({ field in
+            "\(field.kind)•\(field.key)"
+        })
+        set(strings, forKey: "fields")
+        print(strings)
     }
     
     func add(_ book: CDBook) {

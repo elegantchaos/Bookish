@@ -47,7 +47,16 @@ class ExtensibleManagedObject: NSManagedObject, Identifiable {
         return cachedProperties[key] as? [K:V]
     }
     
+    func array<V>(forKey key: String) -> [V]? {
+        return cachedProperties[key] as? [V]
+    }
+    
     func set(_ value: String, forKey key: String) {
+        cachedProperties[key] = value
+        scheduleEncoding()
+    }
+    
+    func set<V>(_ value: [V], forKey key: String) {
         cachedProperties[key] = value
         scheduleEncoding()
     }
