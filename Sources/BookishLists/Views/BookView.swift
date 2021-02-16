@@ -10,7 +10,6 @@ import SwiftUI
 struct BookView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
     @EnvironmentObject var model: Model
-    @ObservedObject var entry: CDEntry
     @ObservedObject var book: CDBook
     @State var title = ""
     
@@ -43,7 +42,7 @@ struct BookView: View {
             }
             .padding()
 
-            DisclosureGroup("Raw Properties") {
+            DisclosureGroup("Raw Book Properties") {
                 VStack {
                     let raw: [String:Any] = book.dict(forKey: "raw") ?? [:]
                     let keys = raw.keys.sorted()

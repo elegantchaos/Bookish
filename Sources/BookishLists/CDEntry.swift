@@ -21,7 +21,7 @@ extension CDEntry {
 extension CDEntry: AutoLinked {
     var linkView: some View {
         assert(isDeleted == false)
-        return BookView(entry: self, book: book)
+        return EntryView(entry: self)
     }
     var labelView: some View {
         assert(isDeleted == false)
