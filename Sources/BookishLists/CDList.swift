@@ -60,6 +60,16 @@ class CDList: NamedManagedObject {
         scheduleFieldEncoding()
     }
     
+    func moveFields(fromOffsets from: IndexSet, toOffset to: Int) {
+        cachedFields.move(fromOffsets: from, toOffset: to)
+        scheduleFieldEncoding()
+    }
+
+    func deleteFields(atOffsets offsets: IndexSet) {
+        cachedFields.remove(atOffsets: offsets)
+        scheduleFieldEncoding()
+    }
+    
     func scheduleFieldEncoding() {
         let strings = cachedFields.map({ field in
             "\(field.kind)•\(field.key)"

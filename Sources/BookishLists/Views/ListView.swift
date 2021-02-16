@@ -22,6 +22,7 @@ struct ListView: View {
     @Environment(\.managedObjectContext) var context
     @ObservedObject var list: CDList
     @State var selection: UUID?
+    @State var editFields: EditMode = .active
     
     var body: some View {
         
@@ -40,6 +41,8 @@ struct ListView: View {
                 ForEach(list.fields, id: \.self) { field in
                     FieldEditorView(field: field)
                 }
+                .onMove(perform: list.moveFields)
+                .onDelete(perform: list.deleteFields)
             }
             
             List(selection: $selection) {
