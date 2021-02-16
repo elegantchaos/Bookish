@@ -35,6 +35,19 @@ extension CDBook {
 
 }
 
+extension CDBook: AutoLinked {
+    var linkView: some View {
+        assert(isDeleted == false)
+        return BookView(book: self)
+    }
+    
+    var labelView: some View {
+        assert(isDeleted == false)
+        return ImageOwnerLabelView(object: self)
+    }
+}
+
+
 struct ImageOwnerLabelView: View {
     @ObservedObject var object: NamedManagedObject
     

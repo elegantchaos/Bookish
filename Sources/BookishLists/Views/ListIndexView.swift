@@ -18,10 +18,16 @@ struct ListIndexView: View {
     @Binding var selection: UUID?
     
     var body: some View {
-        let entries = lists.map({ ListEntry(list: $0)})
+        var entries = lists.map({ ListEntry(list: $0)})
+        entries.insert(ListEntry(), at: 0)
+        
         return VStack {
             List(entries, children: \.children, selection: $selection) { entry in
                 switch entry.kind {
+                    case .allBooks:
+                        NavigationLink(destination: AllBooksView()) {
+                            Label("All Books", systemImage: "books.vertical")
+                        }
                     case let .list(list):
                         OLinkView(list, selection: $selection)
                     case let .entry(entry):

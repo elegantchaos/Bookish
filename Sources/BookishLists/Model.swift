@@ -131,8 +131,11 @@ class Model: ObservableObject {
                 
                 book.name = importedBook.title
                 book.imageURL = importedBook.images.first
-                book.set(importedBook.raw, forKey: "raw")
-                list.add(book)
+                
+                let entry = CDEntry(context: context)
+                entry.book = book
+                entry.list = list
+                entry.set(importedBook.raw, forKey: "raw")
             }
 
             let group = CDList.named("Imports", in: context)

@@ -7,54 +7,6 @@ import SwiftUI
 import SheetController
 import BookishImporter
 
-enum ListEntryKind {
-    case list(CDList)
-    case entry(CDEntry)
-}
-
-struct ListEntry: Identifiable, Hashable {
-    static func == (lhs: ListEntry, rhs: ListEntry) -> Bool {
-        lhs.id == rhs.id
-    }
-    
-    func hash(into hasher: inout Hasher) {
-        id.hash(into: &hasher)
-    }
-    
-    static let allBooksId = UUID(uuidString: "A6CC34C5-ECB4-4F33-B177-EBF1A1FCA91D")!
-    
-    let kind: ListEntryKind
-    
-    init(book: CDEntry) {
-        self.kind = .entry(book)
-    }
-    
-    init(list: CDList) {
-        self.kind = .list(list)
-    }
-
-    var id: UUID {
-        switch self.kind {
-            case .entry(let entry): return entry.id
-            case .list(let list): return list.id
-        }
-    }
-
-    var children: [ListEntry]? {
-        switch kind {
-            case .entry: return nil
-            case .list(let list):
-                let entries = list.sortedEntries
-                let lists = list.sortedLists
-                var children: [ListEntry] = []
-                children.append(contentsOf: entries.map({ ListEntry(book: $0)}))
-                children.append(contentsOf: lists.map({ ListEntry(list: $0)}))
-                return children.count > 0 ? children : nil
-        }
-    }
-}
-
-
 struct ContentView: View {
     @EnvironmentObject var model: Model
     @Environment(\.managedObjectContext) var managedObjectContext
