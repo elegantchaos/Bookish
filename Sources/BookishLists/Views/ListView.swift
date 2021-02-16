@@ -20,9 +20,9 @@ extension Binding where Value == String? {
 struct ListView: View {
     @EnvironmentObject var model: Model
     @Environment(\.managedObjectContext) var context
+    @Environment(\.editMode) var editMode
     @ObservedObject var list: CDList
     @State var selection: UUID?
-    @State var editFields: EditMode = .active
     
     var body: some View {
         
@@ -33,16 +33,8 @@ struct ListView: View {
             TextField("Notes", text: list.binding(forProperty: "notes"))
                 .padding()
 
-            Button(action: handleAddField) {
-                Image(systemName: "plus.circle")
-            }
-            
-            List() {
-                ForEach(list.fields, id: \.self) { field in
-                    FieldEditorView(field: field)
-                }
-                .onMove(perform: list.moveFields)
-                .onDelete(perform: list.deleteFields)
+            if editMode?.wrappedValue == .active {
+                FieldEditorView(list: list)
             }
             
             List(selection: $selection) {
@@ -51,6 +43,8 @@ struct ListView: View {
                 }
                 .onDelete(perform: handleDelete)
             }
+            
+            Spacer()
         }
         .navigationTitle(list.name)
         .navigationBarItems(
@@ -83,7 +77,4 @@ struct ListView: View {
         model.save()
     }
 
-    func handleAddField() {
-        list.addField()
-    }
 }

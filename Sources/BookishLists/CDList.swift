@@ -53,6 +53,10 @@ class CDList: NamedManagedObject {
         })
     }
 
+    func newField() {
+        addField()
+    }
+    
     func addField(name: String? = nil, kind: ListField.Kind = .string) {
         objectWillChange.send()
         let key = name ?? "Untitled \(kind)"

@@ -7,8 +7,9 @@ import Foundation
 
 class ListField: ObservableObject, Identifiable {
     
-    enum Kind: String {
+    enum Kind: String, CaseIterable {
         case string
+        case number
     }
 
     let id: UUID
