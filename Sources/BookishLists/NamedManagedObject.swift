@@ -28,8 +28,12 @@ internal func getWithId<EntityType: NSManagedObject>(_ identifier: EntityType.ID
     return nil
 }
 
-class IdentifiableManagedObject: NSManagedObject, Identifiable {
-    @NSManaged public var id: UUID
+/// A subclass of ExtensibleManagedObject which has a name and optional image associated with it.
+
+class NamedManagedObject: ExtensibleManagedObject {
+    @NSManaged public var name: String
+    @NSManaged public var imageData: Data?
+    @NSManaged public var imageURL: URL?
 
     /**
      Return the entity of our type with a given uuid.

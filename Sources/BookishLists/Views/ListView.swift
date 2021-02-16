@@ -17,15 +17,17 @@ extension Binding where Value == String? {
     }
 }
 
+enum FieldType: String {
+    case string
+    case integer
+    case real
+}
+
 struct ListView: View {
     @EnvironmentObject var model: Model
     @Environment(\.managedObjectContext) var context
     @ObservedObject var list: CDList
     @State var selection: UUID?
-    
-    var fields: [String:String] {
-        return list.dict(forKey: "fields") ?? [:]
-    }
     
     var body: some View {
         
@@ -41,14 +43,14 @@ struct ListView: View {
             }
             
             List() {
-                let keys = Array(fields.keys)
+                let keys = Array(list.fields.keys)
                 ForEach(keys, id: \.self) { key in
                     Text(key)
                 }
             }
             
             List(selection: $selection) {
-                ForEach(list.sortedBooks) { book in
+                ForEach(list.sortedEntries) { book in
                     LinkView(book, selection: $selection)
                 }
                 .onDelete(perform: handleDelete)
@@ -68,8 +70,8 @@ struct ListView: View {
     func handleDelete(_ items: IndexSet?) {
         if let items = items {
             items.forEach { index in
-                let book = list.sortedBooks[index]
-                list.removeFromBooks(book)
+                let entry = list.sortedEntries[index]
+                model.delete(entry)
             }
             model.save()
         }
@@ -81,15 +83,11 @@ struct ListView: View {
     
     func handleAdd() {
         let book = CDBook(context: context)
-        book.addToLists(list)
+        list.add(book)
         model.save()
     }
 
     func handleAddField() {
-        var fields = self.fields
-        let index = fields.count + 1
-        let key = "Untitled \(index)"
-        fields[key] = "<string>"
-        list.set(fields, forKey: "fields")
+        list.addField()
     }
 }

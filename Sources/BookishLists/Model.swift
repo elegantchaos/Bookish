@@ -62,7 +62,7 @@ class Model: ObservableObject {
             print(error.localizedDescription)
         }
     }
-    
+
     func delete(_ object: ExtensibleManagedObject) {
         print("deleting \(object.objectID)")
         if object.id == selection {
@@ -132,7 +132,7 @@ class Model: ObservableObject {
                 book.name = importedBook.title
                 book.imageURL = importedBook.images.first
                 book.set(importedBook.raw, forKey: "raw")
-                list.addToBooks(book)
+                list.add(book)
             }
 
             let group = CDList.named("Imports", in: context)
@@ -141,6 +141,10 @@ class Model: ObservableObject {
             save()
         }
 
+    }
+    
+    func image(for entry: CDEntry) -> AsyncImage {
+        image(for: entry.book)
     }
     
     func image(for book: CDBook) -> AsyncImage {

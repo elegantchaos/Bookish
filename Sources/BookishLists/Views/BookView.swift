@@ -10,6 +10,7 @@ import SwiftUI
 struct BookView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
     @EnvironmentObject var model: Model
+    @ObservedObject var entry: CDEntry
     @ObservedObject var book: CDBook
     @State var title = ""
     

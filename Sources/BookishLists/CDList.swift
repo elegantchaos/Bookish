@@ -8,18 +8,49 @@ import Images
 import SwiftUI
 import SwiftUIExtensions
 
-class CDList: ExtensibleManagedObject {
+class CDList: NamedManagedObject {
     @NSManaged public var container: CDList?
 
-    var sortedBooks: [CDBook] {
-        guard let books = books else { return [] }
-        let sorted = books.sorted { $0.name < $1.name }
+    var sortedLists: [CDList] {
+        guard let lists = lists else { return [] }
+        let sorted = lists.sorted {
+            return ($0.name == $1.name) ? ($0.id < $1.id) : ($0.name < $1.name)
+        }
+
         return sorted
     }
     
-    var children: [NSManagedObject]? {
-        guard let books = books else { return nil }
-        return Array(books)
+    var sortedEntries: [CDEntry] {
+        guard let entries = entries else { return [] }
+        let sorted = entries.sorted {
+            return ($0.book.name == $1.book.name) ? ($0.book.id < $1.book.id) : ($0.book.name < $1.book.name)
+        }
+        
+        return sorted
+    }
+
+    var fields: [String:String] {
+        return dict(forKey: "fields") ?? [:]
+    }
+
+    func addField(name: String? = nil, type: FieldType = .string) {
+        var fields = self.fields
+        let key = name ?? untitledName(for: fields)
+        fields[key] = type.rawValue
+        set(fields, forKey: "fields")
+    }
+
+    func untitledName(for fields: [String:String]) -> String {
+        let index = fields.count + 1
+        return "Untitled \(index)"
+    }
+    
+    func add(_ book: CDBook) {
+        if let context = self.managedObjectContext {
+            let entry = CDEntry(context: context)
+            entry.book = book
+            entry.list = self
+        }
     }
 }
 
@@ -28,23 +59,23 @@ extension CDList {
         return NSFetchRequest<CDList>(entityName: "CDList")
     }
     
-    @NSManaged public var books: Set<CDBook>?
+    @NSManaged public var entries: Set<CDEntry>?
     @NSManaged public var lists: Set<CDList>?
 }
 
 extension CDList {
 
-    @objc(addBooksObject:)
-    @NSManaged public func addToBooks(_ value: CDBook)
+    @objc(addEntriesObject:)
+    @NSManaged public func addToEntries(_ value: CDEntry)
 
-    @objc(removeBooksObject:)
-    @NSManaged public func removeFromBooks(_ value: CDBook)
+    @objc(removeEntriesObject:)
+    @NSManaged public func removeFromEntries(_ value: CDEntry)
 
-    @objc(addBooks:)
-    @NSManaged public func addToBooks(_ values: NSSet)
+    @objc(addEntries:)
+    @NSManaged public func addToEntries(_ values: NSSet)
 
-    @objc(removeBooks:)
-    @NSManaged public func removeFromBooks(_ values: NSSet)
+    @objc(removeEntries:)
+    @NSManaged public func removeFromEntries(_ values: NSSet)
 
 }
 

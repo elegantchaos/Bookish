@@ -35,11 +35,10 @@
 		8B987CB525C06708003D6F9F /* CDBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B987CB425C06708003D6F9F /* CDBook.swift */; };
 		8B987CBB25C0671E003D6F9F /* CDList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B987CBA25C0671E003D6F9F /* CDList.swift */; };
 		8B987CDD25C19263003D6F9F /* ExtensibleManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B987CDC25C19263003D6F9F /* ExtensibleManagedObject.swift */; };
-		8B987CF725C1BAE2003D6F9F /* AllBooksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B987CF625C1BAE2003D6F9F /* AllBooksView.swift */; };
 		8B987D0125C1CA60003D6F9F /* NSManagedObjectExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B987CFE25C1CA60003D6F9F /* NSManagedObjectExtensions.swift */; };
 		8B987D0225C1CA60003D6F9F /* NSManagedObjectContextExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B987CFF25C1CA60003D6F9F /* NSManagedObjectContextExtensions.swift */; };
 		8B987D0325C1CA60003D6F9F /* NSEntityDescriptionExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B987D0025C1CA60003D6F9F /* NSEntityDescriptionExtensions.swift */; };
-		8B987D0925C1D519003D6F9F /* IdentifiableManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B987D0825C1D519003D6F9F /* IdentifiableManagedObject.swift */; };
+		8B987D0925C1D519003D6F9F /* NamedManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B987D0825C1D519003D6F9F /* NamedManagedObject.swift */; };
 		8BED2A1825C97D29000DD7C6 /* CDEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BED2A1725C97D29000DD7C6 /* CDEntry.swift */; };
 		8BED2A2425CAC0D1000DD7C6 /* Images in Frameworks */ = {isa = PBXBuildFile; productRef = 8BED2A2325CAC0D1000DD7C6 /* Images */; };
 /* End PBXBuildFile section */
@@ -109,11 +108,10 @@
 		8B987CB425C06708003D6F9F /* CDBook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDBook.swift; sourceTree = "<group>"; };
 		8B987CBA25C0671E003D6F9F /* CDList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDList.swift; sourceTree = "<group>"; };
 		8B987CDC25C19263003D6F9F /* ExtensibleManagedObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensibleManagedObject.swift; sourceTree = "<group>"; };
-		8B987CF625C1BAE2003D6F9F /* AllBooksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllBooksView.swift; sourceTree = "<group>"; };
 		8B987CFE25C1CA60003D6F9F /* NSManagedObjectExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSManagedObjectExtensions.swift; sourceTree = "<group>"; };
 		8B987CFF25C1CA60003D6F9F /* NSManagedObjectContextExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSManagedObjectContextExtensions.swift; sourceTree = "<group>"; };
 		8B987D0025C1CA60003D6F9F /* NSEntityDescriptionExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSEntityDescriptionExtensions.swift; sourceTree = "<group>"; };
-		8B987D0825C1D519003D6F9F /* IdentifiableManagedObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentifiableManagedObject.swift; sourceTree = "<group>"; };
+		8B987D0825C1D519003D6F9F /* NamedManagedObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NamedManagedObject.swift; sourceTree = "<group>"; };
 		8BE9ADE9252B0DDA00F97D53 /* Tools.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Tools.xcconfig; sourceTree = "<group>"; };
 		8BED2A1725C97D29000DD7C6 /* CDEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDEntry.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -166,7 +164,6 @@
 			children = (
 				8B58C7BF25B843C7007F6B70 /* ListIndexView.swift */,
 				8B1F10D725ACB30A00108A34 /* ListView.swift */,
-				8B987CF625C1BAE2003D6F9F /* AllBooksView.swift */,
 				8B1F10E125ADC28800108A34 /* BookView.swift */,
 				229E259A25254AED00C41777 /* ContentView.swift */,
 				8B58C7CB25B84AB8007F6B70 /* PreferencesView.swift */,
@@ -247,20 +244,20 @@
 		22ED67F6251E43AA00B0226D /* BookishLists */ = {
 			isa = PBXGroup;
 			children = (
-				221717DB2522773B00C43604 /* Model.swift */,
-				8B987CB425C06708003D6F9F /* CDBook.swift */,
-				8B987CDC25C19263003D6F9F /* ExtensibleManagedObject.swift */,
-				8B987D0825C1D519003D6F9F /* IdentifiableManagedObject.swift */,
-				8B987CBA25C0671E003D6F9F /* CDList.swift */,
-				8BED2A1725C97D29000DD7C6 /* CDEntry.swift */,
-				8B987C9E25C047E5003D6F9F /* CoreDataStack.swift */,
+				226F15DA251A28EA00D6B12E /* Application.swift */,
 				8B1F10AB25AC8EC400108A34 /* BarcodeScanner.swift */,
+				8B987CB425C06708003D6F9F /* CDBook.swift */,
+				8BED2A1725C97D29000DD7C6 /* CDEntry.swift */,
+				8B987CBA25C0671E003D6F9F /* CDList.swift */,
+				8B987C9E25C047E5003D6F9F /* CoreDataStack.swift */,
+				8B987CDC25C19263003D6F9F /* ExtensibleManagedObject.swift */,
+				8B987D0825C1D519003D6F9F /* NamedManagedObject.swift */,
+				221717DB2522773B00C43604 /* Model.swift */,
 				8B987D0025C1CA60003D6F9F /* NSEntityDescriptionExtensions.swift */,
 				8B987CFF25C1CA60003D6F9F /* NSManagedObjectContextExtensions.swift */,
 				8B987CFE25C1CA60003D6F9F /* NSManagedObjectExtensions.swift */,
-				226F15DA251A28EA00D6B12E /* Application.swift */,
-				2207D47025265FC400A014D5 /* Views */,
 				22ED67F1251E439200B0226D /* Resources */,
+				2207D47025265FC400A014D5 /* Views */,
 			);
 			path = BookishLists;
 			sourceTree = "<group>";
@@ -481,7 +478,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				229E259B25254AED00C41777 /* ContentView.swift in Sources */,
-				8B987CF725C1BAE2003D6F9F /* AllBooksView.swift in Sources */,
 				8B58C7C025B843C7007F6B70 /* ListIndexView.swift in Sources */,
 				8B987CBB25C0671E003D6F9F /* CDList.swift in Sources */,
 				8B987CAB25C04876003D6F9F /* BookishLists.xcdatamodeld in Sources */,
@@ -497,7 +493,7 @@
 				221717DC2522773B00C43604 /* Model.swift in Sources */,
 				8B58C7CC25B84AB8007F6B70 /* PreferencesView.swift in Sources */,
 				8BED2A1825C97D29000DD7C6 /* CDEntry.swift in Sources */,
-				8B987D0925C1D519003D6F9F /* IdentifiableManagedObject.swift in Sources */,
+				8B987D0925C1D519003D6F9F /* NamedManagedObject.swift in Sources */,
 				8B987CDD25C19263003D6F9F /* ExtensibleManagedObject.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

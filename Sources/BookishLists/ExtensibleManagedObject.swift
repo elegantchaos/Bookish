@@ -6,14 +6,16 @@
 import CoreData
 import SwiftUI
 
-class ExtensibleManagedObject: IdentifiableManagedObject {
-    @NSManaged public var name: String
+/// An NSManagedObject subclass which supports additional dynamic properties.
+/// The extra properties are encoded as data and stored in a single core-data
+/// attribute called `codedProperties`.
+
+class ExtensibleManagedObject: NSManagedObject, Identifiable {
+    @NSManaged public var id: UUID
     @NSManaged fileprivate var codedProperties: String?
-    @NSManaged public var imageData: Data?
-    @NSManaged public var imageURL: URL?
 
     fileprivate lazy var cachedProperties: [String:Any] = decodedProperties
-    
+
     override func awakeFromInsert() {
         super.awakeFromInsert()
         id = UUID()

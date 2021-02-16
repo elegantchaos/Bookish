@@ -8,7 +8,7 @@ import Images
 import SwiftUI
 import SwiftUIExtensions
 
-class CDBook: ExtensibleManagedObject {
+class CDBook: NamedManagedObject {
 }
 
 extension CDBook {
@@ -19,33 +19,30 @@ extension CDBook {
     @NSManaged public var lists: NSSet?
 }
 
-
-// MARK: Generated accessors for lists
 extension CDBook {
 
-    @objc(addListsObject:)
-    @NSManaged public func addToLists(_ value: CDList)
+    @objc(addEntriesObject:)
+    @NSManaged public func addToEntries(_ value: CDEntry)
 
-    @objc(removeListsObject:)
-    @NSManaged public func removeFromLists(_ value: CDList)
+    @objc(removeEntriesObject:)
+    @NSManaged public func removeFromEntries(_ value: CDEntry)
 
-    @objc(addLists:)
-    @NSManaged public func addToLists(_ values: NSSet)
+    @objc(addEntries:)
+    @NSManaged public func addToEntries(_ values: NSSet)
 
-    @objc(removeLists:)
-    @NSManaged public func removeFromLists(_ values: NSSet)
+    @objc(removeEntries:)
+    @NSManaged public func removeFromEntries(_ values: NSSet)
 
 }
 
-extension CDBook: AutoLinked {
-    var linkView: some View {
-        BookView(book: self)
-    }
-    var labelView: some View {
+struct ImageOwnerLabelView: View {
+    @ObservedObject var object: NamedManagedObject
+    
+    var body: some View {
         Label {
-            Text(name)
+            Text(object.name)
         } icon: {
-            if let url = imageURL {
+            if let url = object.imageURL {
                 LabelIconView(url: url, placeholder: "book")
             } else {
                 Image(systemName: "book")
@@ -67,6 +64,7 @@ struct AsyncImageView: View {
             .aspectRatio(contentMode: .fit)
     }
 }
+
 struct LabelIconView: View {
     @EnvironmentObject var model: Model
     

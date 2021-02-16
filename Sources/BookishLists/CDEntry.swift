@@ -4,12 +4,27 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 import CoreData
+import SwiftUI
+import SwiftUIExtensions
 
 class CDEntry: ExtensibleManagedObject {
+    @NSManaged public var book: CDBook
+    @NSManaged public var list: CDList
 }
 
 extension CDEntry {
     @nonobjc public class func fetchRequest() -> NSFetchRequest<CDEntry> {
         return NSFetchRequest<CDEntry>(entityName: "CDEntry")
+    }
+}
+
+extension CDEntry: AutoLinked {
+    var linkView: some View {
+        assert(isDeleted == false)
+        return BookView(entry: self, book: book)
+    }
+    var labelView: some View {
+        assert(isDeleted == false)
+        return ImageOwnerLabelView(object: book)
     }
 }

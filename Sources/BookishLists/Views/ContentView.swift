@@ -8,9 +8,8 @@ import SheetController
 import BookishImporter
 
 enum ListEntryKind {
-    case allBooks
     case list(CDList)
-    case book(CDBook)
+    case entry(CDEntry)
 }
 
 struct ListEntry: Identifiable, Hashable {
@@ -26,12 +25,8 @@ struct ListEntry: Identifiable, Hashable {
     
     let kind: ListEntryKind
     
-    init() {
-        self.kind = .allBooks
-    }
-    
-    init(book: CDBook) {
-        self.kind = .book(book)
+    init(book: CDEntry) {
+        self.kind = .entry(book)
     }
     
     init(list: CDList) {
@@ -40,21 +35,19 @@ struct ListEntry: Identifiable, Hashable {
 
     var id: UUID {
         switch self.kind {
-            case .allBooks: return ListEntry.allBooksId
-            case .book(let book): return book.id
+            case .entry(let entry): return entry.id
             case .list(let list): return list.id
         }
     }
 
     var children: [ListEntry]? {
         switch kind {
-            case .allBooks: return nil
-            case .book: return nil
+            case .entry: return nil
             case .list(let list):
-                let books = list.books ?? []
-                let lists = list.lists ?? []
+                let entries = list.sortedEntries
+                let lists = list.sortedLists
                 var children: [ListEntry] = []
-                children.append(contentsOf: books.map({ ListEntry(book: $0)}))
+                children.append(contentsOf: entries.map({ ListEntry(book: $0)}))
                 children.append(contentsOf: lists.map({ ListEntry(list: $0)}))
                 return children.count > 0 ? children : nil
         }
