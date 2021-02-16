@@ -65,7 +65,11 @@ class ExtensibleManagedObject: NSManagedObject, Identifiable {
         cachedProperties[key] = value
         scheduleEncoding()
     }
-    
+ 
+    func merge(properties: [String:Any]) {
+        cachedProperties.merge(properties) { existing, new in new }
+        scheduleEncoding()
+    }
     fileprivate func scheduleEncoding() {
         objectWillChange.send()
         encode(properties: cachedProperties)
@@ -84,8 +88,8 @@ class ExtensibleManagedObject: NSManagedObject, Identifiable {
     
     fileprivate func encode(properties: [String:Any]) {
         do {
-            let json = try PropertyListSerialization.data(fromPropertyList: properties, format: .xml, options: PropertyListSerialization.WriteOptions())
-            self.codedProperties = String(data: json, encoding: .utf8)
+            let encoded = try PropertyListSerialization.data(fromPropertyList: properties, format: .xml, options: PropertyListSerialization.WriteOptions())
+            self.codedProperties = String(data: encoded, encoding: .utf8)
         } catch {
             print("Failed to encoded properties: \(properties) \(error)")
         }

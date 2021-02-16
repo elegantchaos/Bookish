@@ -18,20 +18,21 @@ struct EntryView: View {
             VStack {
                 BookView(book: entry.book)
 
-                List(entry.list.fields) { field in
-                    let raw: [String:Any] = entry.dict(forKey: "raw") ?? [:]
-                    if let value = raw[field.key] {
-                        Text(String(describing: value))
+                ForEach(entry.list.fields) { field in
+                    if let value = entry.property(forKey: field.key) {
+                        HStack {
+                            Text(field.key)
+                            Text(String(describing: value))
+                        }
                     }
                 }
                 
                 DisclosureGroup("Raw List Properties") {
                     VStack {
-                        let raw: [String:Any] = entry.dict(forKey: "raw") ?? [:]
-                        let keys = raw.keys.sorted()
+                        let keys = entry.sortedKeys
                         ForEach(keys, id: \.self) { key in
                             HStack {
-                                if let value = raw[key] {
+                                if let value = entry.property(forKey: key) {
                                     let string = String(describing: value)
                                     if !string.isEmpty {
                                         Text(key)

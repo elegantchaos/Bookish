@@ -44,11 +44,10 @@ struct BookView: View {
 
             DisclosureGroup("Raw Book Properties") {
                 VStack {
-                    let raw: [String:Any] = book.dict(forKey: "raw") ?? [:]
-                    let keys = raw.keys.sorted()
+                    let keys = book.sortedKeys
                     ForEach(keys, id: \.self) { key in
                         HStack {
-                            if let value = raw[key] {
+                            if let value = book.property(forKey: key) {
                                 let string = String(describing: value)
                                 if !string.isEmpty {
                                     Text(key)

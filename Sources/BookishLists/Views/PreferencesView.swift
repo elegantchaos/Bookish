@@ -14,7 +14,7 @@ struct PreferencesView: View {
     var body: some View {
         NavigationView {
             VStack {
-                Button(action: model.removeAllData) {
+                Button(action: handleRemoveAll) {
                     Text("Remove All Data")
                 }
                 
@@ -27,5 +27,11 @@ struct PreferencesView: View {
                     Text("Done")
                 })
         }
+    }
+    
+    func handleRemoveAll() {
+        model.objectWillChange.send()
+        model.removeAllData()
+        sheetController.dismiss()
     }
 }

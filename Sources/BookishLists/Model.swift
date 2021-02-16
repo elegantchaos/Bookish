@@ -87,16 +87,16 @@ class Model: ObservableObject {
     func removeAllData() {
         let context = stack.viewContext
         let coordinator = stack.coordinator
-        for entity in ["CDBook", "CDList"] {
+        for entity in ["CDBook", "CDList", "CDEntry"] {
             let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: entity)
             let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-
             do {
                 try coordinator.execute(deleteRequest, with: context)
             } catch let error as NSError {
                 notify(error)
             }
         }
+        save()
     }
     
     func handlePerformImport(_ result: Result<URL,Error>) {
@@ -135,7 +135,7 @@ class Model: ObservableObject {
                 let entry = CDEntry(context: context)
                 entry.book = book
                 entry.list = list
-                entry.set(importedBook.raw, forKey: "raw")
+                entry.merge(properties: importedBook.raw)
             }
 
             let group = CDList.named("Imports", in: context)
