@@ -121,24 +121,33 @@ class Model: ObservableObject {
             let context = stack.viewContext
             let list = CDList(context: context)
             list.name = "Imported from Delicious Library"
-            for importedBook in session.books.values {
-                let book: CDBook
-                if let id = UUID(uuidString: importedBook.id) {
-                    book = CDBook.withId(id, in: context)
-                } else {
-                    book = CDBook.named(importedBook.title, in: context)
-                }
-                
-                book.name = importedBook.title
-                book.imageURL = importedBook.images.first
-                book.merge(properties: importedBook.raw)
-                list.add(book)
-            }
-
             let group = CDList.named("Imports", in: context)
             list.container = group
 
-            save()
+            var index = 0
+            let count = session.books.count
+            for importedBook in session.books.values {
+                onMainQueue {
+                    importProgress = Double(index + count) / Double(count * 2)
+                    let book: CDBook
+                    if let id = UUID(uuidString: importedBook.id) {
+                        book = CDBook.withId(id, in: context)
+                    } else {
+                        book = CDBook.named(importedBook.title, in: context)
+                    }
+                    
+                    book.name = importedBook.title
+                    book.imageURL = importedBook.images.first
+                    book.merge(properties: importedBook.raw)
+                    list.add(book)
+                    index += 1
+                }
+            }
+
+            onMainQueue {
+                save()
+                importProgress = nil
+            }
         }
 
     }
@@ -161,21 +170,20 @@ extension Model: ImportMonitor {
     
     func session(_ session: ImportSession, willImportItem label: String, index: Int, of count: Int) {
         onMainQueue {
-            self.importProgress = Double(index) / Double(count)
+            self.importProgress = Double(index) / Double(count * 2)
         }
     }
     
     func sessionDidFinish(_ session: ImportSession) {
-        onMainQueue {
-            self.importProgress = nil
-        }
         if let session = session as? DeliciousLibraryImportSession {
             self.add(importedBooksFrom: session)
         }
     }
     
     func sessionDidFail(_ session: ImportSession) {
-        importProgress =  nil
+        onMainQueue {
+            self.importProgress =  nil
+        }
     }
 
 }

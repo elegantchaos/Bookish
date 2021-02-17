@@ -13,8 +13,30 @@ import SwiftUI
 class ExtensibleManagedObject: NSManagedObject, Identifiable {
     @NSManaged public var id: UUID
     @NSManaged fileprivate var codedProperties: String?
+    @NSManaged public var properties: Set<CDProperty>?
 
-    fileprivate lazy var cachedProperties: [String:Any] = decodedProperties
+    class DecodedProperty {
+        let property: CDProperty
+        var value: Any
+        
+        init(for object: ExtensibleManagedObject) {
+            self.value = ""
+            self.property = CDProperty(context: object.managedObjectContext!)
+            object.addToProperties(property)
+        }
+        
+        init?(property: CDProperty) {
+            do {
+                self.value = try PropertyListSerialization.propertyList(from: property.value, options: [], format: nil)
+                self.property = property
+            } catch {
+                print("Failed to decode property")
+                return nil
+            }
+        }
+    }
+
+    fileprivate lazy var cachedProperties: [String:DecodedProperty] = [:]
 
     override func awakeFromInsert() {
         super.awakeFromInsert()
@@ -23,53 +45,86 @@ class ExtensibleManagedObject: NSManagedObject, Identifiable {
 
     func binding(forProperty key: String) -> Binding<String> {
         Binding<String> { () -> String in
-            return (self.decodedProperties[key] as? String) ?? ""
+            return self.string(forKey: key) ?? ""
         } set: { (value) in
-            var updated = self.decodedProperties
-            updated[key] = value
-            self.encode(properties: updated)
+            self.set(value, forKey: key)
         }
     }
     
     var sortedKeys: [String] {
-        cachedProperties.keys.sorted()
+        guard let properties = properties else { return [] }
+        return properties.map({ $0.key })
     }
 
     func property(forKey key: String) -> Any? {
-        return cachedProperties[key]
+        if let cached = cachedProperties[key] {
+            return cached.value
+        }
+        
+        guard let properties = properties else { return nil }
+        
+        for p in properties {
+            if p.key == key, let decoded = DecodedProperty(property: p) {
+                cachedProperties[key] = decoded
+                return decoded.value
+            }
+        }
+        
+        return nil
     }
 
+    func makeProperty(forKey key: String) -> DecodedProperty {
+        let decoded = DecodedProperty(for: self)
+        cachedProperties[key] = decoded
+        return decoded
+    }
+    
+    func setProperty(_ value: Any, forKey key: String) {
+        
+        let cached = cachedProperties[key] ?? makeProperty(forKey: key)
+        cached.value = value
+        DispatchQueue.global(qos: .background).async {
+            do {
+                let encoded = try PropertyListSerialization.data(fromPropertyList: value, format: .xml, options: PropertyListSerialization.WriteOptions())
+                self.managedObjectContext?.perform {
+                    cached.property.value = encoded
+                }
+            } catch {
+                print("Failed to encoded property \(key) with value \(value)")
+            }
+        }
+    }
+    
     func string(forKey key: String) -> String? {
-        return cachedProperties[key] as? String
+        return property(forKey: key) as? String
     }
 
     func dict<K,V>(forKey key: String) -> [K:V]? {
-        return cachedProperties[key] as? [K:V]
+        return property(forKey: key) as? [K:V]
     }
     
     func array<V>(forKey key: String) -> [V]? {
-        return cachedProperties[key] as? [V]
+        return property(forKey: key) as? [V]
     }
     
     func set(_ value: String, forKey key: String) {
-        cachedProperties[key] = value
-        scheduleEncoding()
+        setProperty(value, forKey: key)
     }
     
     func set<V>(_ value: [V], forKey key: String) {
-        cachedProperties[key] = value
-        scheduleEncoding()
+        setProperty(value, forKey: key)
     }
     
     func set<K,V>(_ value: [K:V], forKey key: String) {
-        cachedProperties[key] = value
-        scheduleEncoding()
+        setProperty(value, forKey: key)
     }
  
     func merge(properties: [String:Any]) {
-        cachedProperties.merge(properties) { existing, new in new }
-        scheduleEncoding()
+        for item in properties {
+            setProperty(item.value, forKey: item.key)
+        }
     }
+    
     fileprivate func scheduleEncoding() {
         objectWillChange.send()
         encode(properties: cachedProperties)
@@ -94,5 +149,22 @@ class ExtensibleManagedObject: NSManagedObject, Identifiable {
             print("Failed to encoded properties: \(properties) \(error)")
         }
     }
+
+}
+
+// MARK: Generated accessors for properties
+extension ExtensibleManagedObject {
+
+    @objc(addPropertiesObject:)
+    @NSManaged public func addToProperties(_ value: CDProperty)
+
+    @objc(removePropertiesObject:)
+    @NSManaged public func removeFromProperties(_ value: CDProperty)
+
+    @objc(addProperties:)
+    @NSManaged public func addToProperties(_ values: NSSet)
+
+    @objc(removeProperties:)
+    @NSManaged public func removeFromProperties(_ values: NSSet)
 
 }

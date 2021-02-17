@@ -58,7 +58,7 @@ struct BookView: View {
                 }
                 
                 DisclosureGroup("Raw Properties") {
-                    VStack {
+                    LazyVStack {
                         let keys = book.sortedKeys
                         ForEach(keys, id: \.self) { key in
                             HStack {

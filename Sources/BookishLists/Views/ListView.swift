@@ -26,7 +26,7 @@ struct ListView: View {
     
     var body: some View {
         
-        return VStack {
+        return LazyVStack {
             TextField("Name", text: $list.name)
                 .padding()
 
