@@ -8,6 +8,7 @@ import CoreData
 import Images
 import SwiftUI
 import SwiftUIExtensions
+import ThreadExtensions
 
 class CDList: NamedManagedObject {
     @NSManaged public var container: CDList?
@@ -37,7 +38,7 @@ class CDList: NamedManagedObject {
 
     var decodedFields: [ListField] {
         let strings: [String] = array(forKey: "fields") ?? []
-        print(strings)
+        print("Decoding \(strings)")
         return strings.map({ string in
             let items = string.split(separator: "•", maxSplits: 1)
             let kind = ListField.Kind(rawValue: String(items[0])) ?? .string
@@ -58,7 +59,6 @@ class CDList: NamedManagedObject {
     }
     
     func addField(name: String? = nil, kind: ListField.Kind = .string) {
-        objectWillChange.send()
         let key = name ?? "Untitled \(kind)"
         cachedFields.append(ListField(key: key, kind: kind))
         scheduleFieldEncoding()
@@ -75,11 +75,13 @@ class CDList: NamedManagedObject {
     }
     
     func scheduleFieldEncoding() {
-        let strings = cachedFields.map({ field in
-            "\(field.kind)•\(field.key)"
-        })
-        set(strings, forKey: "fields")
-        print(strings)
+        onMainQueue { [self] in
+            let strings = cachedFields.map({ field in
+                "\(field.kind)•\(field.key)"
+            })
+            set(strings, forKey: "fields")
+            print("Encoded as \(strings)")
+        }
     }
     
     func add(_ book: CDBook) {

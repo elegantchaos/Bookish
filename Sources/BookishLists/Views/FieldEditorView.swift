@@ -32,10 +32,12 @@ struct FieldEditorView: View {
 
 struct FieldEditorFieldView: View {
     @ObservedObject var field: ListField
+    @State var key = ""
     
     var body: some View {
         HStack {
-            TextField("name", text: $field.key)
+            TextField("name", text: $key, onEditingChanged: handleEditingChanged, onCommit: handleCommit)
+                .onAppear(perform: handleAppear)
             
             Picker(selection: $field.kind, label: Text("Kind")) {
                 ForEach(ListField.Kind.allCases, id: \.self) { kind in
@@ -43,6 +45,26 @@ struct FieldEditorFieldView: View {
                 }
             }
             .pickerStyle(MenuPickerStyle())
+        }
+    }
+    
+    func handleAppear() {
+        key = field.key
+    }
+    
+    func handleEditingChanged(_ isEditing: Bool) {
+        if !isEditing {
+            saveChanges()
+        }
+    }
+    
+    func handleCommit() {
+        saveChanges()
+    }
+    
+    func saveChanges() {
+        if key != field.key {
+            field.key = key
         }
     }
 }
