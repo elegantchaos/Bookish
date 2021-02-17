@@ -4,12 +4,17 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 import Foundation
+import Localization
 
 class ListField: ObservableObject, Identifiable {
     
     enum Kind: String, CaseIterable {
         case string
         case number
+        
+        var label: String {
+            rawValue.localized
+        }
     }
 
     let id: UUID

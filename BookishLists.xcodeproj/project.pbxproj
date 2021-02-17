@@ -44,6 +44,8 @@
 		8BE1493625DC178F00A1DC32 /* AllBooksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE1493525DC178F00A1DC32 /* AllBooksView.swift */; };
 		8BE1493825DC250300A1DC32 /* FieldEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE1493725DC250300A1DC32 /* FieldEditorView.swift */; };
 		8BE1493A25DC2CCB00A1DC32 /* ListField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE1493925DC2CCB00A1DC32 /* ListField.swift */; };
+		8BE1493C25DD597B00A1DC32 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8BE1493B25DD597B00A1DC32 /* Localizable.strings */; };
+		8BE1493E25DD5CA700A1DC32 /* FieldKindMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE1493D25DD5CA700A1DC32 /* FieldKindMenu.swift */; };
 		8BED2A1825C97D29000DD7C6 /* CDEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BED2A1725C97D29000DD7C6 /* CDEntry.swift */; };
 		8BED2A2425CAC0D1000DD7C6 /* Images in Frameworks */ = {isa = PBXBuildFile; productRef = 8BED2A2325CAC0D1000DD7C6 /* Images */; };
 /* End PBXBuildFile section */
@@ -122,6 +124,8 @@
 		8BE1493525DC178F00A1DC32 /* AllBooksView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllBooksView.swift; sourceTree = "<group>"; };
 		8BE1493725DC250300A1DC32 /* FieldEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldEditorView.swift; sourceTree = "<group>"; };
 		8BE1493925DC2CCB00A1DC32 /* ListField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListField.swift; sourceTree = "<group>"; };
+		8BE1493B25DD597B00A1DC32 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		8BE1493D25DD5CA700A1DC32 /* FieldKindMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldKindMenu.swift; sourceTree = "<group>"; };
 		8BE9ADE9252B0DDA00F97D53 /* Tools.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Tools.xcconfig; sourceTree = "<group>"; };
 		8BED2A1725C97D29000DD7C6 /* CDEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDEntry.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -173,6 +177,7 @@
 			isa = PBXGroup;
 			children = (
 				8BE1493525DC178F00A1DC32 /* AllBooksView.swift */,
+				8BE1493F25DD5D5200A1DC32 /* Components */,
 				8BE1493125DC156400A1DC32 /* BookView.swift */,
 				229E259A25254AED00C41777 /* ContentView.swift */,
 				8B1F10E125ADC28800108A34 /* EntryView.swift */,
@@ -246,6 +251,7 @@
 			children = (
 				226F15E0251A28F600D6B12E /* PreviewContent */,
 				22ED67EC251E438200B0226D /* BookishLists.entitlements */,
+				8BE1493B25DD597B00A1DC32 /* Localizable.strings */,
 				22ED67E3251E424600B0226D /* BookishLists.xcconfig */,
 				226F15DE251A28F600D6B12E /* Assets.xcassets */,
 				226F15E3251A28F600D6B12E /* Info.plist */,
@@ -292,6 +298,14 @@
 				8B58C7B325B71528007F6B70 /* CloudKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8BE1493F25DD5D5200A1DC32 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				8BE1493D25DD5CA700A1DC32 /* FieldKindMenu.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -445,6 +459,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8BE1493C25DD597B00A1DC32 /* Localizable.strings in Resources */,
 				8B1F10D225AC971A00108A34 /* Assets.xcassets in Resources */,
 				226F15E2251A28F600D6B12E /* Preview Assets.xcassets in Resources */,
 			);
@@ -494,6 +509,7 @@
 			files = (
 				8BE1493825DC250300A1DC32 /* FieldEditorView.swift in Sources */,
 				8BE1493A25DC2CCB00A1DC32 /* ListField.swift in Sources */,
+				8BE1493E25DD5CA700A1DC32 /* FieldKindMenu.swift in Sources */,
 				229E259B25254AED00C41777 /* ContentView.swift in Sources */,
 				8BE1493225DC156400A1DC32 /* BookView.swift in Sources */,
 				8B58C7C025B843C7007F6B70 /* ListIndexView.swift in Sources */,

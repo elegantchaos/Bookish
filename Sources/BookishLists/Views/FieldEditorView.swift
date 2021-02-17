@@ -4,6 +4,7 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 import SwiftUI
+import Localization
 
 struct FieldEditorView: View {
     @ObservedObject var list: CDList
@@ -39,12 +40,9 @@ struct FieldEditorFieldView: View {
             TextField("name", text: $key, onEditingChanged: handleEditingChanged, onCommit: handleCommit)
                 .onAppear(perform: handleAppear)
             
-            Picker(selection: $field.kind, label: Text("Kind")) {
-                ForEach(ListField.Kind.allCases, id: \.self) { kind in
-                    Text(kind.rawValue)
-                }
+            Button(action: { print("blah") }) {
+                FieldKindMenu(field: field)
             }
-            .pickerStyle(MenuPickerStyle())
         }
     }
     

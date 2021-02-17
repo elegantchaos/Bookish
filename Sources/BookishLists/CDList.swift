@@ -42,26 +42,25 @@ class CDList: NamedManagedObject {
         return strings.map({ string in
             let items = string.split(separator: "•", maxSplits: 1)
             let kind = ListField.Kind(rawValue: String(items[0])) ?? .string
-            let field = ListField(key: String(items[1]), kind: kind)
-            
-            let watcher = field.objectWillChange.sink {
-                self.scheduleFieldEncoding()
-            }
-            
-            self.watchers.append(watcher)
-            
-            return field
+            return makeField(name: String(items[1]), kind: kind)
         })
     }
 
     func newField() {
-        addField()
+        cachedFields.append(makeField())
+        scheduleFieldEncoding()
     }
     
-    func addField(name: String? = nil, kind: ListField.Kind = .string) {
+    func makeField(name: String? = nil, kind: ListField.Kind = .string) -> ListField {
         let key = name ?? "Untitled \(kind)"
-        cachedFields.append(ListField(key: key, kind: kind))
-        scheduleFieldEncoding()
+        let field = ListField(key: key, kind: kind)
+        let watcher = field.objectWillChange.sink {
+            print("field \(key) changed")
+            self.scheduleFieldEncoding()
+        }
+        self.watchers.append(watcher)
+        
+        return field
     }
     
     func moveFields(fromOffsets from: IndexSet, toOffset to: Int) {
