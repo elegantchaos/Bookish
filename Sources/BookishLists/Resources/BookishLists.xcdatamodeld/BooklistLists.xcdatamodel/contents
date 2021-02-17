@@ -6,13 +6,8 @@
         <attribute name="imageData" optional="YES" attributeType="Binary"/>
         <attribute name="imageURL" optional="YES" attributeType="URI"/>
         <attribute name="name" attributeType="String" defaultValueString="Untitled"/>
-        <relationship name="entries" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CDEntry" inverseName="book" inverseEntity="CDEntry"/>
-    </entity>
-    <entity name="CDEntry" representedClassName=".CDEntry" syncable="YES">
-        <attribute name="codedProperties" optional="YES" attributeType="String"/>
-        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
-        <relationship name="book" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDBook" inverseName="entries" inverseEntity="CDBook"/>
-        <relationship name="list" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDList" inverseName="entries" inverseEntity="CDList"/>
+        <relationship name="lists" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CDList" inverseName="books" inverseEntity="CDList"/>
+        <relationship name="properties" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDProperty" inverseName="book" inverseEntity="CDProperty"/>
     </entity>
     <entity name="CDList" representedClassName=".CDList" syncable="YES">
         <attribute name="codedProperties" optional="YES" attributeType="String"/>
@@ -20,13 +15,20 @@
         <attribute name="imageData" optional="YES" attributeType="Binary"/>
         <attribute name="imageURL" optional="YES" attributeType="URI"/>
         <attribute name="name" attributeType="String" defaultValueString="Untitled"/>
+        <relationship name="books" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CDBook" inverseName="lists" inverseEntity="CDBook"/>
         <relationship name="container" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDList" inverseName="lists" inverseEntity="CDList"/>
-        <relationship name="entries" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CDEntry" inverseName="list" inverseEntity="CDEntry"/>
         <relationship name="lists" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDList" inverseName="container" inverseEntity="CDList"/>
+        <relationship name="properties" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDProperty" inverseName="list" inverseEntity="CDProperty"/>
+    </entity>
+    <entity name="CDProperty" representedClassName=".CDProperty" syncable="YES">
+        <attribute name="codedProperties" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <relationship name="book" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDBook" inverseName="properties" inverseEntity="CDBook"/>
+        <relationship name="list" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDList" inverseName="properties" inverseEntity="CDList"/>
     </entity>
     <elements>
-        <element name="CDBook" positionX="-63" positionY="-18" width="128" height="119"/>
-        <element name="CDEntry" positionX="-54" positionY="63" width="128" height="89"/>
-        <element name="CDList" positionX="-54" positionY="18" width="128" height="149"/>
+        <element name="CDBook" positionX="-63" positionY="-18" width="128" height="134"/>
+        <element name="CDProperty" positionX="-54" positionY="63" width="128" height="89"/>
+        <element name="CDList" positionX="-54" positionY="18" width="128" height="164"/>
     </elements>
 </model>

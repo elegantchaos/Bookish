@@ -6,7 +6,7 @@
 import Foundation
 import Localization
 
-class ListField: ObservableObject, Identifiable {
+class Field: ObservableObject, Identifiable {
     
     enum Kind: String, CaseIterable {
         case string
@@ -34,13 +34,13 @@ class ListField: ObservableObject, Identifiable {
     }
 }
 
-extension ListField: Equatable {
-    static func == (lhs: ListField, rhs: ListField) -> Bool {
+extension Field: Equatable {
+    static func == (lhs: Field, rhs: Field) -> Bool {
         lhs.id == rhs.id
     }
 }
 
-extension ListField: Hashable {
+extension Field: Hashable {
     func hash(into hasher: inout Hasher) {
         id.hash(into: &hasher)
     }

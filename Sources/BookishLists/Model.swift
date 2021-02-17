@@ -131,11 +131,8 @@ class Model: ObservableObject {
                 
                 book.name = importedBook.title
                 book.imageURL = importedBook.images.first
-                
-                let entry = CDEntry(context: context)
-                entry.book = book
-                entry.list = list
-                entry.merge(properties: importedBook.raw)
+                book.merge(properties: importedBook.raw)
+                list.add(book)
             }
 
             let group = CDList.named("Imports", in: context)
@@ -144,10 +141,6 @@ class Model: ObservableObject {
             save()
         }
 
-    }
-    
-    func image(for entry: CDEntry) -> AsyncImage {
-        image(for: entry.book)
     }
     
     func image(for book: CDBook) -> AsyncImage {

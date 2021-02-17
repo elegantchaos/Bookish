@@ -52,5 +52,10 @@ class NamedManagedObject: ExtensibleManagedObject {
     }
 }
 
+extension Array where Element == NamedManagedObject {
+    var sortedByName: [Element] {
+        return sorted { ($0.name == $1.name) ? ($0.id < $1.id) : ($0.name < $1.name) }
+    }
+}
 
 // TODO: could we use a protocol to implement withId, instead of needing a subclass?

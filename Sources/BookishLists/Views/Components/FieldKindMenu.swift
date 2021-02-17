@@ -6,12 +6,12 @@
 import SwiftUI
 
 struct FieldKindMenu: View {
-    @ObservedObject var field: ListField
+    @ObservedObject var field: Field
     
     var body: some View {
         Menu {
             Picker("", selection: $field.kind) {
-                ForEach(ListField.Kind.allCases, id: \.self) { kind in
+                ForEach(Field.Kind.allCases, id: \.self) { kind in
                     Text(kind.label)
                 }
             }
@@ -24,7 +24,7 @@ struct FieldKindMenu: View {
         }
     }
     
-    func handleSetKind(to kind: ListField.Kind) {
+    func handleSetKind(to kind: Field.Kind) {
         field.kind = kind
     }
 }

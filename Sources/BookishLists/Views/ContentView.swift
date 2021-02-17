@@ -89,7 +89,7 @@ struct RootIndexView: View {
                 if editMode?.wrappedValue == .active {
                     EditableListIndexView(selection: $selection)
                 } else {
-                    ListIndexView(selection: $selection)
+                    IndexView(selection: $selection)
                 }
             
             if let uuid = selection {

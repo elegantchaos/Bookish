@@ -7,18 +7,18 @@ import SwiftUI
 import Localization
 
 struct FieldEditorView: View {
-    @ObservedObject var list: CDList
+    @ObservedObject var fields: FieldList
 
     var body: some View {
         List() {
-            ForEach(list.fields, id: \.self) { field in
+            ForEach(fields.fields, id: \.self) { field in
                 FieldEditorFieldView(field: field)
             }
-            .onMove(perform: list.moveFields)
-            .onDelete(perform: list.deleteFields)
+            .onMove(perform: fields.moveFields)
+            .onDelete(perform: fields.deleteFields)
         }
 
-        Button(action: list.newField) {
+        Button(action: fields.newField) {
             HStack {
                 Image(systemName: "plus.circle.fill")
                     .font(.title2)
@@ -32,7 +32,7 @@ struct FieldEditorView: View {
 }
 
 struct FieldEditorFieldView: View {
-    @ObservedObject var field: ListField
+    @ObservedObject var field: Field
     @State var key = ""
     
     var body: some View {

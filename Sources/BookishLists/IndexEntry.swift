@@ -4,11 +4,12 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 import Foundation
+import SwiftUIExtensions
 
 enum ListEntryKind {
     case allBooks
     case list(CDList)
-    case entry(CDEntry)
+    case book(CDBook, CDList?)
 }
 
 extension UUID {
@@ -31,8 +32,8 @@ struct ListEntry: Identifiable, Hashable {
         self.kind = .allBooks
     }
     
-    init(book: CDEntry) {
-        self.kind = .entry(book)
+    init(book: CDBook, in list: CDList? = nil) {
+        self.kind = .book(book, list)
     }
     
     init(list: CDList) {
@@ -42,7 +43,7 @@ struct ListEntry: Identifiable, Hashable {
     var id: UUID {
         switch self.kind {
             case .allBooks: return .allBooksId
-            case .entry(let entry): return entry.id
+            case .book(let book,_): return book.id
             case .list(let list): return list.id
         }
     }
@@ -50,15 +51,14 @@ struct ListEntry: Identifiable, Hashable {
     var children: [ListEntry]? {
         switch kind {
             case .allBooks: return nil
-            case .entry: return nil
+            case .book: return nil
             case .list(let list):
-                let entries = list.sortedEntries
+                let entries = list.sortedBooks
                 let lists = list.sortedLists
                 var children: [ListEntry] = []
-                children.append(contentsOf: entries.map({ ListEntry(book: $0)}))
+                children.append(contentsOf: entries.map({ ListEntry(book: $0, in: list)}))
                 children.append(contentsOf: lists.map({ ListEntry(list: $0)}))
                 return children.count > 0 ? children : nil
         }
     }
 }
-

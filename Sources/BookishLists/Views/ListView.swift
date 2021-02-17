@@ -34,12 +34,12 @@ struct ListView: View {
                 .padding()
 
             if editMode?.wrappedValue == .active {
-                FieldEditorView(list: list)
+                FieldEditorView(fields: list.fields)
             }
             
             List(selection: $selection) {
-                ForEach(list.sortedEntries) { book in
-                    LinkView(book, selection: $selection)
+                ForEach(list.sortedBooks) { book in
+                    LinkView(BookInList(book, in: list), selection: $selection)
                 }
                 .onDelete(perform: handleDelete)
             }
@@ -60,7 +60,7 @@ struct ListView: View {
     func handleDelete(_ items: IndexSet?) {
         if let items = items {
             items.forEach { index in
-                let entry = list.sortedEntries[index]
+                let entry = list.sortedBooks[index]
                 model.delete(entry)
             }
             model.save()

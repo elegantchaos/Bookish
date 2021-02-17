@@ -6,7 +6,36 @@
 import SwiftUI
 import SwiftUIExtensions
 
-struct ListIndexView: View {
+struct BookInList {
+    let book: CDBook
+    let list: CDList?
+    
+    init(_ book: CDBook, in list: CDList? = nil) {
+        self.book = book
+        self.list = list
+    }
+}
+
+extension BookInList: Identifiable {
+    var id: UUID { book.id }
+}
+
+extension BookInList: AutoLinked {
+    var linkView: some View {
+        assert(book.isDeleted == false)
+        assert((list == nil) || (list!.isDeleted == false))
+        
+        let fields = list?.fields ?? FieldList()
+        return BookView(book: book, fields: fields)
+    }
+    
+    var labelView: some View {
+        assert(book.isDeleted == false)
+        return ImageOwnerLabelView(object: book)
+    }
+}
+
+struct IndexView: View {
     @FetchRequest(
         entity: CDList.entity(),
         sortDescriptors: [
@@ -30,8 +59,8 @@ struct ListIndexView: View {
                         }
                     case let .list(list):
                         OLinkView(list, selection: $selection)
-                    case let .entry(entry):
-                        OLinkView(entry, selection: $selection)
+                    case let .book(book, list):
+                        LinkView(BookInList(book, in: list), selection: $selection)
                 }
             }
             

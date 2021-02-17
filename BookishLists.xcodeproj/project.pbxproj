@@ -25,7 +25,7 @@
 		8B1F115125AE04DE00108A34 /* BookishImporter in Frameworks */ = {isa = PBXBuildFile; productRef = 8B1F115025AE04DE00108A34 /* BookishImporter */; };
 		8B2A7CC825AE140A0024C1A2 /* ThreadExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 8B2A7CC725AE140A0024C1A2 /* ThreadExtensions */; };
 		8B58C7B425B71528007F6B70 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B58C7B325B71528007F6B70 /* CloudKit.framework */; };
-		8B58C7C025B843C7007F6B70 /* ListIndexView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B58C7BF25B843C7007F6B70 /* ListIndexView.swift */; };
+		8B58C7C025B843C7007F6B70 /* IndexView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B58C7BF25B843C7007F6B70 /* IndexView.swift */; };
 		8B58C7CC25B84AB8007F6B70 /* PreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B58C7CB25B84AB8007F6B70 /* PreferencesView.swift */; };
 		8B6CAAC8252B2C8B00FF2035 /* KeyValueStore in Frameworks */ = {isa = PBXBuildFile; productRef = 8B6CAAC7252B2C8B00FF2035 /* KeyValueStore */; };
 		8B80467325B8788900698F28 /* SheetController in Frameworks */ = {isa = PBXBuildFile; productRef = 8B80467225B8788900698F28 /* SheetController */; };
@@ -43,10 +43,11 @@
 		8BE1493425DC16E400A1DC32 /* IndexEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE1493325DC16E400A1DC32 /* IndexEntry.swift */; };
 		8BE1493625DC178F00A1DC32 /* AllBooksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE1493525DC178F00A1DC32 /* AllBooksView.swift */; };
 		8BE1493825DC250300A1DC32 /* FieldEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE1493725DC250300A1DC32 /* FieldEditorView.swift */; };
-		8BE1493A25DC2CCB00A1DC32 /* ListField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE1493925DC2CCB00A1DC32 /* ListField.swift */; };
+		8BE1493A25DC2CCB00A1DC32 /* Field.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE1493925DC2CCB00A1DC32 /* Field.swift */; };
 		8BE1493C25DD597B00A1DC32 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8BE1493B25DD597B00A1DC32 /* Localizable.strings */; };
 		8BE1493E25DD5CA700A1DC32 /* FieldKindMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE1493D25DD5CA700A1DC32 /* FieldKindMenu.swift */; };
-		8BED2A1825C97D29000DD7C6 /* CDEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BED2A1725C97D29000DD7C6 /* CDEntry.swift */; };
+		8BE1494125DD7D7D00A1DC32 /* FieldList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE1494025DD7D7D00A1DC32 /* FieldList.swift */; };
+		8BED2A1825C97D29000DD7C6 /* CDProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BED2A1725C97D29000DD7C6 /* CDProperty.swift */; };
 		8BED2A2425CAC0D1000DD7C6 /* Images in Frameworks */ = {isa = PBXBuildFile; productRef = 8BED2A2325CAC0D1000DD7C6 /* Images */; };
 /* End PBXBuildFile section */
 
@@ -108,7 +109,7 @@
 		8B1F10D725ACB30A00108A34 /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
 		8B1F10E125ADC28800108A34 /* EntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryView.swift; sourceTree = "<group>"; };
 		8B58C7B325B71528007F6B70 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
-		8B58C7BF25B843C7007F6B70 /* ListIndexView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListIndexView.swift; sourceTree = "<group>"; };
+		8B58C7BF25B843C7007F6B70 /* IndexView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexView.swift; sourceTree = "<group>"; };
 		8B58C7CB25B84AB8007F6B70 /* PreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesView.swift; sourceTree = "<group>"; };
 		8B987C9E25C047E5003D6F9F /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		8B987CAA25C04876003D6F9F /* BooklistLists.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BooklistLists.xcdatamodel; sourceTree = "<group>"; };
@@ -123,11 +124,12 @@
 		8BE1493325DC16E400A1DC32 /* IndexEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexEntry.swift; sourceTree = "<group>"; };
 		8BE1493525DC178F00A1DC32 /* AllBooksView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllBooksView.swift; sourceTree = "<group>"; };
 		8BE1493725DC250300A1DC32 /* FieldEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldEditorView.swift; sourceTree = "<group>"; };
-		8BE1493925DC2CCB00A1DC32 /* ListField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListField.swift; sourceTree = "<group>"; };
+		8BE1493925DC2CCB00A1DC32 /* Field.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Field.swift; sourceTree = "<group>"; };
 		8BE1493B25DD597B00A1DC32 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		8BE1493D25DD5CA700A1DC32 /* FieldKindMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldKindMenu.swift; sourceTree = "<group>"; };
+		8BE1494025DD7D7D00A1DC32 /* FieldList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldList.swift; sourceTree = "<group>"; };
 		8BE9ADE9252B0DDA00F97D53 /* Tools.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Tools.xcconfig; sourceTree = "<group>"; };
-		8BED2A1725C97D29000DD7C6 /* CDEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDEntry.swift; sourceTree = "<group>"; };
+		8BED2A1725C97D29000DD7C6 /* CDProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDProperty.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,7 +183,7 @@
 				8BE1493125DC156400A1DC32 /* BookView.swift */,
 				229E259A25254AED00C41777 /* ContentView.swift */,
 				8B1F10E125ADC28800108A34 /* EntryView.swift */,
-				8B58C7BF25B843C7007F6B70 /* ListIndexView.swift */,
+				8B58C7BF25B843C7007F6B70 /* IndexView.swift */,
 				8B1F10D725ACB30A00108A34 /* ListView.swift */,
 				8BE1493725DC250300A1DC32 /* FieldEditorView.swift */,
 				8B58C7CB25B84AB8007F6B70 /* PreferencesView.swift */,
@@ -266,10 +268,11 @@
 				226F15DA251A28EA00D6B12E /* Application.swift */,
 				8B1F10AB25AC8EC400108A34 /* BarcodeScanner.swift */,
 				8B987CB425C06708003D6F9F /* CDBook.swift */,
-				8BED2A1725C97D29000DD7C6 /* CDEntry.swift */,
+				8BED2A1725C97D29000DD7C6 /* CDProperty.swift */,
 				8B987CBA25C0671E003D6F9F /* CDList.swift */,
 				8B987C9E25C047E5003D6F9F /* CoreDataStack.swift */,
-				8BE1493925DC2CCB00A1DC32 /* ListField.swift */,
+				8BE1493925DC2CCB00A1DC32 /* Field.swift */,
+				8BE1494025DD7D7D00A1DC32 /* FieldList.swift */,
 				8BE1493325DC16E400A1DC32 /* IndexEntry.swift */,
 				8B987CDC25C19263003D6F9F /* ExtensibleManagedObject.swift */,
 				8B987D0825C1D519003D6F9F /* NamedManagedObject.swift */,
@@ -508,13 +511,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				8BE1493825DC250300A1DC32 /* FieldEditorView.swift in Sources */,
-				8BE1493A25DC2CCB00A1DC32 /* ListField.swift in Sources */,
+				8BE1493A25DC2CCB00A1DC32 /* Field.swift in Sources */,
 				8BE1493E25DD5CA700A1DC32 /* FieldKindMenu.swift in Sources */,
 				229E259B25254AED00C41777 /* ContentView.swift in Sources */,
 				8BE1493225DC156400A1DC32 /* BookView.swift in Sources */,
-				8B58C7C025B843C7007F6B70 /* ListIndexView.swift in Sources */,
+				8B58C7C025B843C7007F6B70 /* IndexView.swift in Sources */,
 				8B987CBB25C0671E003D6F9F /* CDList.swift in Sources */,
 				8B987CAB25C04876003D6F9F /* BookishLists.xcdatamodeld in Sources */,
+				8BE1494125DD7D7D00A1DC32 /* FieldList.swift in Sources */,
 				8B987C9F25C047E5003D6F9F /* CoreDataStack.swift in Sources */,
 				8B987D0325C1CA60003D6F9F /* NSEntityDescriptionExtensions.swift in Sources */,
 				8B1F10AC25AC8EC400108A34 /* BarcodeScanner.swift in Sources */,
@@ -528,7 +532,7 @@
 				226F15DB251A28EA00D6B12E /* Application.swift in Sources */,
 				221717DC2522773B00C43604 /* Model.swift in Sources */,
 				8B58C7CC25B84AB8007F6B70 /* PreferencesView.swift in Sources */,
-				8BED2A1825C97D29000DD7C6 /* CDEntry.swift in Sources */,
+				8BED2A1825C97D29000DD7C6 /* CDProperty.swift in Sources */,
 				8B987D0925C1D519003D6F9F /* NamedManagedObject.swift in Sources */,
 				8B987CDD25C19263003D6F9F /* ExtensibleManagedObject.swift in Sources */,
 			);

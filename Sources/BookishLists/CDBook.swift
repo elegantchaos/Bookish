@@ -19,34 +19,6 @@ extension CDBook {
     @NSManaged public var lists: NSSet?
 }
 
-extension CDBook {
-
-    @objc(addEntriesObject:)
-    @NSManaged public func addToEntries(_ value: CDEntry)
-
-    @objc(removeEntriesObject:)
-    @NSManaged public func removeFromEntries(_ value: CDEntry)
-
-    @objc(addEntries:)
-    @NSManaged public func addToEntries(_ values: NSSet)
-
-    @objc(removeEntries:)
-    @NSManaged public func removeFromEntries(_ values: NSSet)
-
-}
-
-extension CDBook: AutoLinked {
-    var linkView: some View {
-        assert(isDeleted == false)
-        return BookView(book: self)
-    }
-    
-    var labelView: some View {
-        assert(isDeleted == false)
-        return ImageOwnerLabelView(object: self)
-    }
-}
-
 
 struct ImageOwnerLabelView: View {
     @ObservedObject var object: NamedManagedObject
