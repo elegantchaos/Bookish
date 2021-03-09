@@ -1,0 +1,22 @@
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+//  Created by Sam Deane on 11/01/2021.
+//  All code (c) 2021 - present day, Sam Deane.
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+#include ".rt/RTBaseline.xcconfig"
+
+PRODUCT_NAME = $(TARGET_NAME)
+
+CODE_SIGN_IDENTITY = -
+CODE_SIGN_STYLE = Automatic
+DEVELOPMENT_TEAM = 2H48644JM2
+ENABLE_HARDENED_RUNTIME = YES
+
+SDKROOT = macosx
+SUPPORTED_PLATFORMS = macosx
+SKIP_INSTALL = YES
+MACOSX_DEPLOYMENT_TARGET = 10.15
+IPHONEOS_DEPLOYMENT_TARGET = 14.1
+
+RT_LOG = echo
+RT_LOG_FILE = echo >> /tmp/$(RT_SHORT_NAME).log
