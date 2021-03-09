@@ -6,6 +6,7 @@
 import CaptureView
 import SheetController
 import SwiftUI
+import SwiftUIExtensions
 
 struct ScannerView: View {
     @EnvironmentObject var lookup: LookupManager
@@ -14,6 +15,7 @@ struct ScannerView: View {
     @State var candidates: [LookupCandidate] = []
     @State var search: String = ""
     @State var searching = false
+    @State var selection: LookupCandidate?
     
     var body: some View {
         NavigationView {
@@ -40,7 +42,8 @@ struct ScannerView: View {
                     
                     if gotCandidates {
                         ForEach(candidates, id: \.title) { candidate in
-                            CandidateView(candidate: candidate)
+                            LinkView(candidate, selection: $selection)
+//                            CandidateView(candidate: candidate)
                         }
                     }
                 }

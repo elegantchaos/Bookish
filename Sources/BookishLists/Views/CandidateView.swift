@@ -4,6 +4,25 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 import SwiftUI
+import SwiftUIExtensions
+
+extension LookupCandidate: AutoLinked {
+    public var linkView: some View {
+        return CandidateDetailView(candidate: self)
+    }
+    
+    public var labelView: some View {
+        Label {
+            Text(title)
+        } icon: {
+            if let string = image, let url = URL(string: string) {
+                LabelIconView(url: url, placeholder: "book")
+            } else {
+                Image(systemName: "book")
+            }
+        }
+    }
+}
 
 struct CandidateView: View {
     let candidate: LookupCandidate
@@ -20,5 +39,13 @@ struct CandidateView: View {
     
     func handleAdd() {
         
+    }
+}
+
+struct CandidateDetailView: View {
+    let candidate: LookupCandidate
+
+    var body: some View {
+        Text("detail here")
     }
 }
