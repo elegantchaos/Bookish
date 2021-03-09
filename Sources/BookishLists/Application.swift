@@ -14,11 +14,20 @@ import SheetController
 struct Application: App {
     @Environment(\.scenePhase) var scenePhase
     let model: Model
+    let lookup: LookupManager
     
     init() {
         let stack = CoreDataStack(containerName: "BookishLists")
         self.model = Model(stack: stack)
+        self.lookup = LookupManager()
+    
+        setupLookup()
     }
+    
+    func setupLookup() {
+        lookup.register(service: GoogleLookupService(name: "Google"))
+    }
+    
     
     var body: some Scene {
         let sheetController = SheetController()
@@ -27,6 +36,7 @@ struct Application: App {
                 .environment(\.managedObjectContext, model.stack.viewContext)
                 .environmentObject(model)
                 .environmentObject(sheetController)
+                .environmentObject(lookup)
                 .onReceive(
                     model.objectWillChange.debounce(for: .seconds(1), scheduler: RunLoop.main), perform: { _ in
                         model.save()

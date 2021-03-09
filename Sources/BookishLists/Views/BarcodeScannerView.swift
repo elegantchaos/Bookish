@@ -4,11 +4,12 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 import SwiftUI
-import AVFoundation
-import AVKit
 
-final class AVCaptureController: UIViewController {
-    var scanner: BarcodeScanner? = nil
+typealias BarcodeCallback = (String) -> ()
+
+final class BarcodeScannerController: UIViewController {
+    var scanner: BarcodeScanner?
+    var callback: BarcodeCallback?
     
     override func loadView() {
         scanner = BarcodeScanner(delegate: self)
@@ -28,9 +29,9 @@ final class AVCaptureController: UIViewController {
     }
 }
 
-extension AVCaptureController: BarcodeScannerDelegate {
+extension BarcodeScannerController: BarcodeScannerDelegate {
     func detected(barcode: String) {
-        print(barcode)
+        callback?(barcode)
     }
     
     func attach(layer: CALayer) {
@@ -41,12 +42,16 @@ extension AVCaptureController: BarcodeScannerDelegate {
     }
 }
 
-struct AVCaptureView : UIViewControllerRepresentable {
-    public func makeUIViewController(context: UIViewControllerRepresentableContext<AVCaptureView>) -> AVCaptureController {
-        return AVCaptureController()
+struct BarcodeScannerView : UIViewControllerRepresentable {
+    let callback: BarcodeCallback
+    
+    public func makeUIViewController(context: UIViewControllerRepresentableContext<BarcodeScannerView>) -> BarcodeScannerController {
+        let controller = BarcodeScannerController()
+        controller.callback = callback
+        return controller
     }
     
-    public func updateUIViewController(_ uiViewController: AVCaptureController, context: UIViewControllerRepresentableContext<AVCaptureView>) {
+    public func updateUIViewController(_ uiViewController: BarcodeScannerController, context: UIViewControllerRepresentableContext<BarcodeScannerView>) {
     }
     
 }
