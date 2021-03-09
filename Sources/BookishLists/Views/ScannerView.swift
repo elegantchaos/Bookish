@@ -12,39 +12,48 @@ struct ScannerView: View {
     @State var barcode: String = ""
     @State var session: LookupSession? = nil
     @State var candidates: [LookupCandidate] = []
+    @State var search: String = ""
+    @State var searching = false
     
     var body: some View {
         NavigationView {
             VStack {
-                Spacer()
+                HStack {
+                    SearchBar(value: $search, action: handleSearchChanged)
+                    
+                    if !search.isEmpty && session?.search != search {
+                        Button(action: handleLookup) {
+                            Text("Search")
+                                .padding()
+                        }
+                    }
+                }
+                
+                let gotCandidates = candidates.count > 0
+                if searching || gotCandidates {
+                    HStack {
+                        Text(gotCandidates ? "Found \(candidates.count) candidates:" : "Searching…")
+                        if searching {
+                            ProgressView()
+                        }
+                    }
+                    
+                    if gotCandidates {
+                        ForEach(candidates, id: \.title) { candidate in
+                            CandidateView(candidate: candidate)
+                        }
+                    }
+                }
+                
                 CaptureView { scanned in
                     if scanned != barcode {
                         barcode = scanned
                         session?.cancel()
                         session = lookup.lookup(query: scanned) { session, state in
-                            lookupUpdate(session: session, state: state)
+                            handleLookupProgress(session: session, state: state)
                         }
                     }
                 }
-
-                if let session = session {
-                    HStack {
-                        ProgressView()
-                        Text("looking up \(session.search)")
-                    }
-                }
-                
-                if candidates.count > 0 {
-                    Text("Found \(candidates.count) candidates:")
-                    ForEach(candidates, id: \.title) { candidate in
-                        HStack {
-                            Text(candidate.title)
-                            Text(candidate.authors.joined(separator: ", "))
-                        }
-                    }
-                }
-
-                Spacer()
             }
             .navigationBarItems(
                 trailing: SheetDismissButton()
@@ -52,17 +61,41 @@ struct ScannerView: View {
         }
     }
     
-    func lookupUpdate(session: LookupSession, state: LookupSession.State) {
+    func handleLookup() {
+        lookup(value: search)
+    }
+    
+    func handleSearchChanged(_ value: String) {
+        if value.isEmpty {
+            session?.cancel()
+            candidates = []
+        } else {
+            lookup(value: value)
+        }
+    }
+    
+    func lookup(value: String) {
+        if value != session?.search {
+            search = value
+            session?.cancel()
+            session = lookup.lookup(query: value) { session, state in
+                handleLookupProgress(session: session, state: state)
+            }
+        }
+    }
+    
+    func handleLookupProgress(session: LookupSession, state: LookupSession.State) {
         switch state {
             case .starting:
+                searching = true
                 candidates = []
-            
+                
             case .done:
-                self.session = nil
-            
+                searching = false
+                
             case .foundCandidate(let candidate):
                 candidates.append(candidate)
-
+                
             default:
                 break
         }
