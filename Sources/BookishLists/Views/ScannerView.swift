@@ -11,6 +11,7 @@ struct ScannerView: View {
         NavigationView {
             VStack {
                 Spacer()
+                AVCaptureView()
                 Text("scanner goes here")
                     .padding()
                 Spacer()

@@ -19,7 +19,7 @@ protocol BarcodeScannerDelegate: AnyObject {
     
     var requests = [VNRequest]()
     
-    init?(delegate: BarcodeScannerDelegate) {
+    init?(delegate: BarcodeScannerDelegate? = nil) {
         
         guard let device = AVCaptureDevice.default(for: AVMediaType.video) else {
             return nil
