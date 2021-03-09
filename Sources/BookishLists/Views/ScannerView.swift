@@ -42,8 +42,8 @@ struct ScannerView: View {
                     
                     if gotCandidates {
                         ForEach(candidates, id: \.title) { candidate in
-                            LinkView(candidate, selection: $selection)
-//                            CandidateView(candidate: candidate)
+//                            LinkView(candidate, selection: $selection)
+                            CandidateView(candidate: candidate)
                         }
                     }
                 }

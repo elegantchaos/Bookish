@@ -29,6 +29,7 @@ struct CandidateView: View {
     
     var body: some View {
         HStack {
+            LinkView(candidate, selection: .constant(nil))
             Text(candidate.title)
             Text(candidate.authors.joined(separator: ", "))
             Button(action: handleAdd) {
