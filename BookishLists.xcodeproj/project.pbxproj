@@ -24,6 +24,8 @@
 		8B1F114225ADFB0D00108A34 /* ISBN in Frameworks */ = {isa = PBXBuildFile; productRef = 8B1F114125ADFB0D00108A34 /* ISBN */; };
 		8B1F115125AE04DE00108A34 /* BookishImporter in Frameworks */ = {isa = PBXBuildFile; productRef = 8B1F115025AE04DE00108A34 /* BookishImporter */; };
 		8B2A7CC825AE140A0024C1A2 /* ThreadExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 8B2A7CC725AE140A0024C1A2 /* ThreadExtensions */; };
+		8B42BE4825F7912700855D08 /* IndexMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B42BE4725F7912700855D08 /* IndexMenuView.swift */; };
+		8B42BE4A25F794D800855D08 /* ScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B42BE4925F794D800855D08 /* ScannerView.swift */; };
 		8B58C7B425B71528007F6B70 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B58C7B325B71528007F6B70 /* CloudKit.framework */; };
 		8B58C7C025B843C7007F6B70 /* IndexView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B58C7BF25B843C7007F6B70 /* IndexView.swift */; };
 		8B58C7CC25B84AB8007F6B70 /* PreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B58C7CB25B84AB8007F6B70 /* PreferencesView.swift */; };
@@ -108,6 +110,8 @@
 		8B1F10AB25AC8EC400108A34 /* BarcodeScanner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarcodeScanner.swift; sourceTree = "<group>"; };
 		8B1F10D725ACB30A00108A34 /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
 		8B1F10E125ADC28800108A34 /* EntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryView.swift; sourceTree = "<group>"; };
+		8B42BE4725F7912700855D08 /* IndexMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexMenuView.swift; sourceTree = "<group>"; };
+		8B42BE4925F794D800855D08 /* ScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerView.swift; sourceTree = "<group>"; };
 		8B58C7B325B71528007F6B70 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		8B58C7BF25B843C7007F6B70 /* IndexView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexView.swift; sourceTree = "<group>"; };
 		8B58C7CB25B84AB8007F6B70 /* PreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesView.swift; sourceTree = "<group>"; };
@@ -178,7 +182,9 @@
 		2207D47025265FC400A014D5 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				8B42BE4725F7912700855D08 /* IndexMenuView.swift */,
 				8BE1493525DC178F00A1DC32 /* AllBooksView.swift */,
+				8B42BE4925F794D800855D08 /* ScannerView.swift */,
 				8BE1493F25DD5D5200A1DC32 /* Components */,
 				8BE1493125DC156400A1DC32 /* BookView.swift */,
 				229E259A25254AED00C41777 /* ContentView.swift */,
@@ -194,12 +200,12 @@
 		226F15CE251A28EA00D6B12E = {
 			isa = PBXGroup;
 			children = (
-				226F15D9251A28EA00D6B12E /* Sources */,
 				226F15EB251A28F600D6B12E /* BookishListsTests */,
 				226F15F6251A28F600D6B12E /* BookishListsUITests */,
-				22F68596251B8B7D00E867CE /* Tools */,
-				226F15D8251A28EA00D6B12E /* Products */,
 				22F685A5251B8BBA00E867CE /* Frameworks */,
+				226F15D8251A28EA00D6B12E /* Products */,
+				226F15D9251A28EA00D6B12E /* Sources */,
+				22F68596251B8B7D00E867CE /* Tools */,
 			);
 			sourceTree = "<group>";
 		};
@@ -515,9 +521,11 @@
 				8BE1493E25DD5CA700A1DC32 /* FieldKindMenu.swift in Sources */,
 				229E259B25254AED00C41777 /* ContentView.swift in Sources */,
 				8BE1493225DC156400A1DC32 /* BookView.swift in Sources */,
+				8B42BE4825F7912700855D08 /* IndexMenuView.swift in Sources */,
 				8B58C7C025B843C7007F6B70 /* IndexView.swift in Sources */,
 				8B987CBB25C0671E003D6F9F /* CDList.swift in Sources */,
 				8B987CAB25C04876003D6F9F /* BookishLists.xcdatamodeld in Sources */,
+				8B42BE4A25F794D800855D08 /* ScannerView.swift in Sources */,
 				8BE1494125DD7D7D00A1DC32 /* FieldList.swift in Sources */,
 				8B987C9F25C047E5003D6F9F /* CoreDataStack.swift in Sources */,
 				8B987D0325C1CA60003D6F9F /* NSEntityDescriptionExtensions.swift in Sources */,
@@ -947,7 +955,7 @@
 			repositoryURL = "https://github.com/elegantchaos/SheetController.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
+				minimumVersion = 1.0.1;
 			};
 		};
 		8BED2A2225CAC0D1000DD7C6 /* XCRemoteSwiftPackageReference "Images" */ = {
