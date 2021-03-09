@@ -7,13 +7,15 @@ import SwiftUI
 
 struct SearchBar: View {
     @Binding var value: String
+    
+    let placeholder: String
     let action: (String) -> ()
     
     @State var isEditing: Bool = false
     
     var body: some View {
         ZStack(alignment: .trailing) {
-            TextField("Search", text: $value, onEditingChanged: handleEditing, onCommit: handleCommit)
+            TextField(placeholder, text: $value, onEditingChanged: handleEditing, onCommit: handleCommit)
                 .padding(7)
                 .padding(.horizontal, 8)
                 .background(Color(.systemGray6))

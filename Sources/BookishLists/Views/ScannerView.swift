@@ -19,11 +19,11 @@ struct ScannerView: View {
         NavigationView {
             VStack {
                 HStack {
-                    SearchBar(value: $search, action: handleSearchChanged)
+                    SearchBar(value: $search, placeholder: "Enter EAN, ISBN, title, author, etc", action: handleSearchChanged)
                     
                     if !search.isEmpty && session?.search != search {
                         Button(action: handleLookup) {
-                            Text("Search")
+                            Text("Find")
                                 .padding()
                         }
                     }

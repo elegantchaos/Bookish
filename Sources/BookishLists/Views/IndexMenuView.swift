@@ -14,7 +14,7 @@ struct IndexMenuView: View {
     var body: some View {
         Button(action: handleAddList) { Text("New List") }
         Button(action: handleAddGroup) { Text("New Group") }
-        Button(action: handleScan) { Text("Scan Books…") }
+        Button(action: handleScan) { Text("Add Books…") }
         Menu("Import…") {
             Button(action: handleRequestImport) { Text("From Delicious Library") }
         }
