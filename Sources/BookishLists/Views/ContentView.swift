@@ -22,6 +22,7 @@ struct ContentView: View {
                             trailing: IndexMenuButton()
                         )
                 }
+                .fileImporter(isPresented: $model.importRequested, allowedContentTypes: [.xml], onCompletion: model.handlePerformImport)
                 .navigationBarTitleDisplayMode(.automatic)
                 .toolbar {
                     ToolbarItem(placement: .bottomBar) {

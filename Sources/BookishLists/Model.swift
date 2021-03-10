@@ -33,6 +33,7 @@ class Model: ObservableObject {
     let importer = ImportManager()
     let images = UIImageCache()
     
+    @Published var importRequested = false
     @Published var importProgress: Double? = nil
     @Published var status: String? = nil
     @Published var errors: [Error] = []
@@ -102,7 +103,9 @@ class Model: ObservableObject {
     func handlePerformImport(_ result: Result<URL,Error>) {
         switch result {
             case .success(let url):
-                importer.importFrom(url, monitor: self)
+                url.accessSecurityScopedResource { url in
+                    importer.importFrom(url, monitor: self)
+                }
 
             case .failure(let error):
                 notify(error)

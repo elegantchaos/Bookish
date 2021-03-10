@@ -8,7 +8,6 @@ import SheetController
 
 struct IndexMenuView: View {
     @EnvironmentObject var model: Model
-    @State var importRequested = false
     @EnvironmentObject var sheetController: SheetController
 
     var body: some View {
@@ -18,7 +17,6 @@ struct IndexMenuView: View {
         Menu("Import…") {
             Button(action: handleRequestImport) { Text("From Delicious Library") }
         }
-        .fileImporter(isPresented: $importRequested, allowedContentTypes: [.xml], onCompletion: model.handlePerformImport)
     }
     
     func handleAddList() {
@@ -35,7 +33,7 @@ struct IndexMenuView: View {
     }
 
     func handleRequestImport() {
-        importRequested = true
+        model.importRequested = true
     }
 
     func handleScan() {
