@@ -1,1 +1,4 @@
-../../.build/tools/rt
+#!/bin/bash
+
+source "bootstrap-tools"
+"$RT" "$@"
