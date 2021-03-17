@@ -9,7 +9,35 @@ import SwiftUIExtensions
 
 class CDProperty: NSManagedObject {
     @NSManaged public var key: String
-    @NSManaged public var value: Data
+    @NSManaged fileprivate var encodedValue: Data
+    
+    fileprivate var decodedProperty: Any?
+    
+    var value: Any {
+        get {
+            if decodedProperty == nil {
+                do {
+                    decodedProperty = try PropertyListSerialization.propertyList(from: encodedValue, options: [], format: nil)
+                } catch {
+                    print("Failed to decode property")
+                    decodedProperty = NSNull()
+                }
+            }
+
+            return decodedProperty!
+        }
+
+        set(newValue) {
+            decodedProperty = newValue
+            managedObjectContext?.perform { [self] in
+                do {
+                    encodedValue = try PropertyListSerialization.data(fromPropertyList: value, format: .xml, options: PropertyListSerialization.WriteOptions())
+                } catch {
+                    print("Failed to encoded property \(key) with value \(value)")
+                }
+            }
+        }
+    }
 }
 
 extension CDProperty {

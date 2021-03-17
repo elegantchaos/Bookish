@@ -15,28 +15,7 @@ class ExtensibleManagedObject: NSManagedObject, Identifiable {
     @NSManaged fileprivate var codedProperties: String?
     @NSManaged public var properties: Set<CDProperty>?
 
-    class DecodedProperty {
-        let property: CDProperty
-        var value: Any
-        
-        init(for object: ExtensibleManagedObject) {
-            self.value = ""
-            self.property = CDProperty(context: object.managedObjectContext!)
-            object.addToProperties(property)
-        }
-        
-        init?(property: CDProperty) {
-            do {
-                self.value = try PropertyListSerialization.propertyList(from: property.value, options: [], format: nil)
-                self.property = property
-            } catch {
-                print("Failed to decode property")
-                return nil
-            }
-        }
-    }
-
-    fileprivate lazy var cachedProperties: [String:DecodedProperty] = [:]
+    fileprivate lazy var cachedProperties: [String:CDProperty] = [:]
 
     override func awakeFromInsert() {
         super.awakeFromInsert()
@@ -53,46 +32,47 @@ class ExtensibleManagedObject: NSManagedObject, Identifiable {
     
     var sortedKeys: [String] {
         guard let properties = properties else { return [] }
-        return properties.map({ $0.key })
+        let keys = properties.map({ $0.key })
+        let uniqued = Set(keys)
+        if keys.count > uniqued.count {
+            print("Duplicate keys present!")
+        }
+        let sorted = uniqued.sorted()
+        return sorted
     }
 
-    func property(forKey key: String) -> Any? {
+    func makeRecord(forKey key: String) -> CDProperty {
+        let record = CDProperty(context: managedObjectContext!)
+        record.key = key
+        addToProperties(record)
+        return record
+    }
+    
+    func propertyRecord(forKey key: String) -> CDProperty? {
         if let cached = cachedProperties[key] {
-            return cached.value
+            return cached
         }
         
         guard let properties = properties else { return nil }
         
         for p in properties {
-            if p.key == key, let decoded = DecodedProperty(property: p) {
-                cachedProperties[key] = decoded
-                return decoded.value
+            cachedProperties[p.key] = p
+            if p.key == key {
+                return p
             }
         }
         
         return nil
     }
 
-    func makeProperty(forKey key: String) -> DecodedProperty {
-        let decoded = DecodedProperty(for: self)
-        cachedProperties[key] = decoded
-        return decoded
+    func property(forKey key: String) -> Any? {
+        let record = propertyRecord(forKey: key)
+        return record?.value
     }
     
     func setProperty(_ value: Any, forKey key: String) {
-        
-        let cached = cachedProperties[key] ?? makeProperty(forKey: key)
-        cached.value = value
-        DispatchQueue.global(qos: .background).async {
-            do {
-                let encoded = try PropertyListSerialization.data(fromPropertyList: value, format: .xml, options: PropertyListSerialization.WriteOptions())
-                self.managedObjectContext?.perform {
-                    cached.property.value = encoded
-                }
-            } catch {
-                print("Failed to encoded property \(key) with value \(value)")
-            }
-        }
+        let record = propertyRecord(forKey: key) ?? makeRecord(forKey: key)
+        record.value = value
     }
     
     func string(forKey key: String) -> String? {

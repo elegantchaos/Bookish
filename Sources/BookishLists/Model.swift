@@ -29,15 +29,33 @@ extension UUID: JSONCodable {
 }
 
 class Model: ObservableObject {
+    class ImportProgress {
+        let name: String
+        let count: Int
+        let list: CDList
+        var done: Int
+        
+        init(name: String, count: Int, context: NSManagedObjectContext) {
+            self.name = name
+            self.count = count
+            self.done = 0
+            self.list = CDList(context: context)
+            
+            list.name = "Imported from Delicious Library"
+            list.container = CDList.named("Imports", in: context)
+        }
+    }
+    
     let stack: CoreDataStack
     let importer = ImportManager()
     let images = UIImageCache()
     
     @Published var importRequested = false
-    @Published var importProgress: Double? = nil
-    @Published var status: String? = nil
+    @Published var importProgress: ImportProgress?
+    @Published var status: String?
     @Published var errors: [Error] = []
-    @Published var selection: UUID? = nil
+    @Published var selection: UUID?
+    
     
     init(stack: CoreDataStack) {
         self.stack = stack
@@ -119,40 +137,9 @@ class Model: ObservableObject {
         }
     }
     
-    func add(importedBooksFrom session: DeliciousLibraryImportSession) {
-        onMainQueue { [self] in // TODO: add on a background context?
-            let context = stack.viewContext
-            let list = CDList(context: context)
-            list.name = "Imported from Delicious Library"
-            let group = CDList.named("Imports", in: context)
-            list.container = group
-
-            var index = 0
-            let count = session.books.count
-            for importedBook in session.books.values {
-                onMainQueue {
-                    importProgress = Double(index + count) / Double(count * 2)
-                    let book: CDBook
-                    if let id = UUID(uuidString: importedBook.id) {
-                        book = CDBook.withId(id, in: context)
-                    } else {
-                        book = CDBook.named(importedBook.title, in: context)
-                    }
-                    
-                    book.name = importedBook.title
-                    book.imageURL = importedBook.images.first
-                    book.merge(properties: importedBook.raw)
-                    list.add(book)
-                    index += 1
-                }
-            }
-
-            onMainQueue {
-                save()
-                importProgress = nil
-            }
-        }
-
+    func finishImport() {
+        save()
+        importProgress = nil
     }
     
     func image(for book: CDBook) -> AsyncImage {
@@ -166,26 +153,44 @@ class Model: ObservableObject {
 
 extension Model: ImportMonitor {
     func session(_ session: ImportSession, willImportItems count: Int) {
-        onMainQueue {
-            self.importProgress = 0.0
+        let context = stack.viewContext
+        context.perform { [self] in
+            importProgress = ImportProgress(name: "Imported from Delicious Library", count: count, context: context)
+            selection = importProgress?.list.id
         }
     }
     
-    func session(_ session: ImportSession, willImportItem label: String, index: Int, of count: Int) {
-        onMainQueue {
-            self.importProgress = Double(index) / Double(count * 2)
+    func session(_ session: ImportSession, didImport item: Any) {
+        if let progress = importProgress, let importedBook = item as? DeliciousLibraryImportSession.Book {
+            let context = stack.viewContext
+            context.perform {
+                let book: CDBook
+                if let id = UUID(uuidString: importedBook.id) {
+                    book = CDBook.withId(id, in: context)
+                } else {
+                    book = CDBook.named(importedBook.title, in: context)
+                }
+                
+                book.name = importedBook.title
+                book.imageURL = importedBook.images.first
+                book.merge(properties: importedBook.raw)
+                progress.list.add(book)
+                progress.done += 1
+                print(progress.done)
+            }
         }
     }
     
     func sessionDidFinish(_ session: ImportSession) {
-        if let session = session as? DeliciousLibraryImportSession {
-            self.add(importedBooksFrom: session)
+        stack.viewContext.perform {
+            self.finishImport()
         }
     }
     
     func sessionDidFail(_ session: ImportSession) {
-        onMainQueue {
-            self.importProgress =  nil
+        print("Import failed!") // TODO: handle error(s)
+        stack.viewContext.perform {
+            self.finishImport()
         }
     }
 
