@@ -112,8 +112,8 @@ class Model: ObservableObject {
         switch result {
             case .success(let url):
                 url.accessSecurityScopedResource { url in
-                    stack.onBackground { context, completion in
-                        let bi = DeliciousBackgroundImporter(model: self, context: context, completion: completion)
+                    stack.onBackground { context in
+                        let bi = DeliciousImportMonitor(model: self, context: context)
                         self.importer.importFrom(url, monitor: bi)
                     }
                 }

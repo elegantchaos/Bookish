@@ -34,23 +34,7 @@ class CoreDataStack {
         }
     }
     
-    func onBackground(do work: @escaping (NSManagedObjectContext, @escaping ()->()) -> ()) {
-        let mainContext = viewContext
-        let context = persistentContainer.newBackgroundContext()
-        context.perform {
-            var watcher = NotificationCenter.default
-                .publisher(for: .NSManagedObjectContextDidSave, object: context)
-                .sink { notification in
-                    mainContext.mergeChanges(fromContextDidSave: notification)
-                }
-            
-            work(context) {
-                do {
-                    try context.save()
-                } catch {
-                    print("Failed to save changes to background context")
-                }
-            }
-        }
+    func onBackground(do work: @escaping (NSManagedObjectContext) -> ()) {
+        persistentContainer.performBackgroundTask(work)
     }
 }

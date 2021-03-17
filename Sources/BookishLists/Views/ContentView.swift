@@ -32,6 +32,7 @@ struct ContentView: View {
                     ToolbarItem(placement: .bottomBar) {
                         if let progress = model.importProgress {
                             ProgressView(progress.label, value: Double(progress.count), total: Double(progress.total))
+                                .frame(width: 512)
                         }
                     }
                     

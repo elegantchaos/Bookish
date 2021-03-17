@@ -1,29 +1,25 @@
-//
-//  DeliciousBackgroundImporter.swift
-//  BookishLists
-//
-//  Created by Sam Developer on 17/03/2021.
-//
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+//  Created by Sam Deane on 17/03/21.
+//  All code (c) 2021 - present day, Elegant Chaos Limited.
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 import BookishImporter
 import CoreData
 import Foundation
 import ThreadExtensions
 
-class DeliciousBackgroundImporter: ObservableObject {
+class DeliciousImportMonitor: ObservableObject {
     let model: Model
     let list: CDList
     let context: NSManagedObjectContext
-    let completion: () -> ()
     
     var count = 0
     var done = 0
     var intervals: TimeInterval = 0
     
-    init(model: Model, context: NSManagedObjectContext, completion: @escaping () -> ()) {
+    init(model: Model, context: NSManagedObjectContext) {
         self.model = model
         self.context = context
-        self.completion = completion
         self.list = CDList(context: context)
         
         list.name = "Imported from Delicious Library"
@@ -31,7 +27,7 @@ class DeliciousBackgroundImporter: ObservableObject {
     }
 }
 
-extension DeliciousBackgroundImporter: ImportMonitor {
+extension DeliciousImportMonitor: ImportMonitor {
     func session(_ session: ImportSession, willImportItems count: Int) {
         self.count = count
         self.intervals = Date.timeIntervalSinceReferenceDate
@@ -55,7 +51,7 @@ extension DeliciousBackgroundImporter: ImportMonitor {
 
             let now = Date.timeIntervalSinceReferenceDate
             let elapsed = now - intervals
-            if elapsed > 1.0 {
+            if elapsed > 0.1 {
                 intervals = now
                 report(label: "Importing: \(importedBook.title)")
             }
@@ -78,9 +74,19 @@ extension DeliciousBackgroundImporter: ImportMonitor {
         }
     }
     
+    func save() {
+        do {
+            try context.save()
+        } catch {
+            print("Failed to save changes to background context")
+        }
+    }
+    
     func cleanup() {
+        report(label: "Saving…")
+        save()
         onMainQueue {
-            self.completion()
+            self.model.save()
             self.model.importProgress = nil
         }
     }
