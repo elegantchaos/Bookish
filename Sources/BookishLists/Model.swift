@@ -28,23 +28,25 @@ extension UUID: JSONCodable {
     }
 }
 
-class Model: ObservableObject {
-    class ImportProgress {
-        let name: String
-        let count: Int
-        let list: CDList
-        var done: Int
+class ImportProgress: ObservableObject {
+    let count: Int
+    let name: String
+    let list: CDList
+
+    @Published var done: Int
+    
+    init(name: String, count: Int, context: NSManagedObjectContext) {
+        self.name = name
+        self.count = count
+        self.done = 0
+        self.list = CDList(context: context)
         
-        init(name: String, count: Int, context: NSManagedObjectContext) {
-            self.name = name
-            self.count = count
-            self.done = 0
-            self.list = CDList(context: context)
-            
-            list.name = "Imported from Delicious Library"
-            list.container = CDList.named("Imports", in: context)
-        }
+        list.name = "Imported from Delicious Library"
+        list.container = CDList.named("Imports", in: context)
     }
+}
+
+class Model: ObservableObject {
     
     let stack: CoreDataStack
     let importer = ImportManager()
