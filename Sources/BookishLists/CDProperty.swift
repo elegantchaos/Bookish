@@ -29,13 +29,13 @@ class CDProperty: NSManagedObject {
 
         set(newValue) {
             decodedProperty = newValue
-            managedObjectContext?.perform { [self] in
+//            managedObjectContext?.perform { [self] in
                 do {
                     encodedValue = try PropertyListSerialization.data(fromPropertyList: value, format: .xml, options: PropertyListSerialization.WriteOptions())
                 } catch {
                     print("Failed to encoded property \(key) with value \(value)")
                 }
-            }
+//            }
         }
     }
 }

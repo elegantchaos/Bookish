@@ -128,7 +128,10 @@ class Model: ObservableObject {
         switch result {
             case .success(let url):
                 url.accessSecurityScopedResource { url in
-                    importer.importFrom(url, monitor: self)
+                    stack.onBackground { context, completion in
+                        let bi = DeliciousBackgroundImporter(name: "blah", count: 0, context: context, completion: completion)
+                        self.importer.importFrom(url, monitor: bi)
+                    }
                 }
 
             case .failure(let error):
@@ -158,53 +161,4 @@ class Model: ObservableObject {
     func image(for list: CDList) -> AsyncImage {
         images.image(for: list.imageURL, default: "books.vertical")
     }
-}
-
-extension Model: ImportMonitor {
-    func session(_ session: ImportSession, willImportItems count: Int) {
-        stack.onBackground { context, completion in
-            let importProgress = ImportProgress(name: "Imported from Delicious Library", count: count, context: context, completion: completion)
-            onMainQueue {
-                self.importProgress = importProgress
-                self.selection = importProgress.list.id
-            }
-        }
-    }
-    
-    func session(_ session: ImportSession, didImport item: Any) {
-        if let progress = importProgress, let importedBook = item as? DeliciousLibraryImportSession.Book {
-            let context = progress.context
-            context.perform {
-                let book: CDBook
-                if let id = UUID(uuidString: importedBook.id) {
-                    book = CDBook.withId(id, in: context)
-                } else {
-                    book = CDBook.named(importedBook.title, in: context)
-                }
-                
-                book.name = importedBook.title
-                book.imageURL = importedBook.images.first
-                book.merge(properties: importedBook.raw)
-                progress.list.add(book)
-                onMainQueue {
-                    progress.done += 1
-                    print(progress.done)
-                }
-            }
-        }
-    }
-    
-    func sessionDidFinish(_ session: ImportSession) {
-        importProgress?.context.perform {
-            self.finishImport()
-        }
-    }
-    
-    func sessionDidFail(_ session: ImportSession) {
-        importProgress?.context.perform {
-            print("Import failed!") // TODO: handle error(s)
-            self.finishImport()
-        }
-    }
-
 }
