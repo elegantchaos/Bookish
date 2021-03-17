@@ -32,13 +32,17 @@ class ImportProgress: ObservableObject {
     let count: Int
     let name: String
     let list: CDList
-
+    let context: NSManagedObjectContext
+    let completion: () -> ()
+    
     @Published var done: Int
     
-    init(name: String, count: Int, context: NSManagedObjectContext) {
+    init(name: String, count: Int, context: NSManagedObjectContext, completion: @escaping () -> ()) {
         self.name = name
         self.count = count
         self.done = 0
+        self.context = context
+        self.completion = completion
         self.list = CDList(context: context)
         
         list.name = "Imported from Delicious Library"
@@ -140,8 +144,11 @@ class Model: ObservableObject {
     }
     
     func finishImport() {
-        save()
-        importProgress = nil
+        importProgress?.completion()
+        onMainQueue {
+            self.importProgress = nil
+            self.save()
+        }
     }
     
     func image(for book: CDBook) -> AsyncImage {
@@ -155,16 +162,18 @@ class Model: ObservableObject {
 
 extension Model: ImportMonitor {
     func session(_ session: ImportSession, willImportItems count: Int) {
-        let context = stack.viewContext
-        context.perform { [self] in
-            importProgress = ImportProgress(name: "Imported from Delicious Library", count: count, context: context)
-            selection = importProgress?.list.id
+        stack.onBackground { context, completion in
+            let importProgress = ImportProgress(name: "Imported from Delicious Library", count: count, context: context, completion: completion)
+            onMainQueue {
+                self.importProgress = importProgress
+                self.selection = importProgress.list.id
+            }
         }
     }
     
     func session(_ session: ImportSession, didImport item: Any) {
         if let progress = importProgress, let importedBook = item as? DeliciousLibraryImportSession.Book {
-            let context = stack.viewContext
+            let context = progress.context
             context.perform {
                 let book: CDBook
                 if let id = UUID(uuidString: importedBook.id) {
@@ -177,21 +186,23 @@ extension Model: ImportMonitor {
                 book.imageURL = importedBook.images.first
                 book.merge(properties: importedBook.raw)
                 progress.list.add(book)
-                progress.done += 1
-                print(progress.done)
+                onMainQueue {
+                    progress.done += 1
+                    print(progress.done)
+                }
             }
         }
     }
     
     func sessionDidFinish(_ session: ImportSession) {
-        stack.viewContext.perform {
+        importProgress?.context.perform {
             self.finishImport()
         }
     }
     
     func sessionDidFail(_ session: ImportSession) {
-        print("Import failed!") // TODO: handle error(s)
-        stack.viewContext.perform {
+        importProgress?.context.perform {
+            print("Import failed!") // TODO: handle error(s)
             self.finishImport()
         }
     }
