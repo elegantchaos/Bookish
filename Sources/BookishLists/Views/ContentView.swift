@@ -31,7 +31,7 @@ struct ContentView: View {
                     
                     ToolbarItem(placement: .bottomBar) {
                         if let progress = model.importProgress {
-                            ProgressIndicator(progress: progress)
+                            ProgressView(progress.label, value: Double(progress.count), total: Double(progress.total))
                         }
                     }
                     
@@ -52,13 +52,6 @@ struct ContentView: View {
     }
 }
 
-struct ProgressIndicator: View {
-    @ObservedObject var progress: ImportProgress
-    
-    var body: some View {
-        ProgressView("Importing", value: Double(progress.done), total: Double(progress.count))
-    }
-}
 struct RootIndexView: View {
     @Environment(\.editMode) var editMode
     @Binding var selection: UUID?

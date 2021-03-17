@@ -28,26 +28,10 @@ extension UUID: JSONCodable {
     }
 }
 
-class ImportProgress: ObservableObject {
+struct ImportProgress {
     let count: Int
-    let name: String
-    let list: CDList
-    let context: NSManagedObjectContext
-    let completion: () -> ()
-    
-    @Published var done: Int
-    
-    init(name: String, count: Int, context: NSManagedObjectContext, completion: @escaping () -> ()) {
-        self.name = name
-        self.count = count
-        self.done = 0
-        self.context = context
-        self.completion = completion
-        self.list = CDList(context: context)
-        
-        list.name = "Imported from Delicious Library"
-        list.container = CDList.named("Imports", in: context)
-    }
+    let total: Int
+    let label: String
 }
 
 class Model: ObservableObject {
@@ -129,7 +113,7 @@ class Model: ObservableObject {
             case .success(let url):
                 url.accessSecurityScopedResource { url in
                     stack.onBackground { context, completion in
-                        let bi = DeliciousBackgroundImporter(name: "blah", count: 0, context: context, completion: completion)
+                        let bi = DeliciousBackgroundImporter(model: self, context: context, completion: completion)
                         self.importer.importFrom(url, monitor: bi)
                     }
                 }
@@ -143,14 +127,6 @@ class Model: ObservableObject {
         onMainQueue {
             print(error)
             self.errors.append(error)
-        }
-    }
-    
-    func finishImport() {
-        importProgress?.completion()
-        onMainQueue {
-            self.importProgress = nil
-            self.save()
         }
     }
     
