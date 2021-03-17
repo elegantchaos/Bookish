@@ -13,8 +13,6 @@ struct BookView: View {
     @ObservedObject var book: CDBook
     @ObservedObject var fields: FieldList
     
-    @State var title = ""
-    
     var body: some View {
         ScrollView {
             VStack {
@@ -39,7 +37,7 @@ struct BookView: View {
                     
                     Spacer()
                     
-                    AsyncImageView(model.image(for: book))
+                    AsyncImageView(model.image(for: book, usePlacholder: false))
                         .frame(maxWidth: 256, maxHeight: 256)
                 }
                 .padding()
@@ -82,30 +80,21 @@ struct BookView: View {
         .toolbar {
             ToolbarItem(placement: .principal) {
                 VStack {
-                    TextField("Name", text: $title, onCommit: handleCommit)
-                        .font(.title)
+                    DeferredTextField(label: "Name", text: $book.name)
                     
                     if let subtitle = book.string(forKey: "subtitle") {
                         Text(subtitle)
+                            .font(.subheadline)
                     }
                 }
                 .padding(.vertical)
                 
             }
         }
-        .onAppear(perform: handleAppear)
         .onDisappear(perform: handleDisappear)
-    }
-    
-    func handleAppear() {
-        title = book.name
     }
     
     func handleDisappear() {
         model.save()
-    }
-    
-    func handleCommit() {
-        book.name = title
     }
 }

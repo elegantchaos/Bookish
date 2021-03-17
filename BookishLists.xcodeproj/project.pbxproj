@@ -23,6 +23,7 @@
 		8B1F115125AE04DE00108A34 /* BookishImporter in Frameworks */ = {isa = PBXBuildFile; productRef = 8B1F115025AE04DE00108A34 /* BookishImporter */; };
 		8B2A7CC825AE140A0024C1A2 /* ThreadExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 8B2A7CC725AE140A0024C1A2 /* ThreadExtensions */; };
 		8B39B479260252AB003B0C5B /* DeliciousImportMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B39B478260252AB003B0C5B /* DeliciousImportMonitor.swift */; };
+		8B39B47B26027F35003B0C5B /* DeferredTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B39B47A26027F35003B0C5B /* DeferredTextField.swift */; };
 		8B42BE4825F7912700855D08 /* IndexMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B42BE4725F7912700855D08 /* IndexMenuView.swift */; };
 		8B42BE4A25F794D800855D08 /* ScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B42BE4925F794D800855D08 /* ScannerView.swift */; };
 		8B57F07C25F7B989007DB517 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B57F07B25F7B989007DB517 /* AVFoundation.framework */; };
@@ -108,6 +109,7 @@
 		8B1F10D725ACB30A00108A34 /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
 		8B1F10E125ADC28800108A34 /* EntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryView.swift; sourceTree = "<group>"; };
 		8B39B478260252AB003B0C5B /* DeliciousImportMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliciousImportMonitor.swift; sourceTree = "<group>"; };
+		8B39B47A26027F35003B0C5B /* DeferredTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeferredTextField.swift; sourceTree = "<group>"; };
 		8B42BE4725F7912700855D08 /* IndexMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexMenuView.swift; sourceTree = "<group>"; };
 		8B42BE4925F794D800855D08 /* ScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerView.swift; sourceTree = "<group>"; };
 		8B57F07B25F7B989007DB517 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.3.sdk/System/Library/Frameworks/AVFoundation.framework; sourceTree = DEVELOPER_DIR; };
@@ -342,6 +344,7 @@
 			children = (
 				8BE1493D25DD5CA700A1DC32 /* FieldKindMenu.swift */,
 				8B57F09325F7E096007DB517 /* SearchBar.swift */,
+				8B39B47A26027F35003B0C5B /* DeferredTextField.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -578,6 +581,7 @@
 				8B58C7CC25B84AB8007F6B70 /* PreferencesView.swift in Sources */,
 				8BED2A1825C97D29000DD7C6 /* CDProperty.swift in Sources */,
 				8B57F08825F7C0E9007DB517 /* LookupSession.swift in Sources */,
+				8B39B47B26027F35003B0C5B /* DeferredTextField.swift in Sources */,
 				8B987D0925C1D519003D6F9F /* NamedManagedObject.swift in Sources */,
 				8B987CDD25C19263003D6F9F /* ExtensibleManagedObject.swift in Sources */,
 			);

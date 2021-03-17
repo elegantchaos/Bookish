@@ -45,7 +45,7 @@ struct ListView: View {
         }
         .toolbar {
             ToolbarItem(placement: .principal) {
-                TextField("Name", text: $list.name)
+                DeferredTextField(label: "Name", text: $list.name)
             }
 
             ToolbarItem(placement: .navigationBarLeading) {
