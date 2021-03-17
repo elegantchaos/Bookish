@@ -88,7 +88,7 @@ class Model: ObservableObject {
     func removeAllData() {
         let context = stack.viewContext
         let coordinator = stack.coordinator
-        for entity in ["CDBook", "CDList", "CDEntry"] {
+        for entity in ["CDBook", "CDList", "CDProperty"] {
             let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: entity)
             let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
             do {
