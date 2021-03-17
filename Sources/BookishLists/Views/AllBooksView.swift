@@ -19,22 +19,27 @@ struct AllBooksView: View {
     
     var body: some View {
         
-        return VStack {
-            List(selection: $selection) {
-                ForEach(books) { book in
-                    LinkView(BookInList(book), selection: $selection)
+        return List(selection: $selection) {
+            ForEach(books) { book in
+                LinkView(BookInList(book), selection: $selection)
+            }
+            .onDelete(perform: handleDelete)
+        }
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                EditButton()
+            }
+            
+            ToolbarItem(placement: .principal) {
+                VStack {
+                    Text("All Books")
                 }
-                .onDelete(perform: handleDelete)
+            }
+            
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button(action: handleAdd) { Image(systemName: "plus") }
             }
         }
-        .navigationTitle("All Books")
-        .navigationBarItems(
-            leading: EditButton(),
-            trailing:
-                HStack {
-                    Button(action: handleAdd) { Image(systemName: "plus") }
-                }
-        )
     }
  
     func handleDelete(_ items: IndexSet?) {
