@@ -36,6 +36,8 @@ extension BookInList: AutoLinked {
 }
 
 struct IndexView: View {
+    @EnvironmentObject var model: Model
+    
     @FetchRequest(
         entity: CDList.entity(),
         sortDescriptors: [
@@ -54,7 +56,7 @@ struct IndexView: View {
             List(entries, children: \.children, selection: $selection) { entry in
                 switch entry.kind {
                     case .allBooks:
-                        NavigationLink(destination: AllBooksView()) {
+                        NavigationLink(destination: AllBooksView(), tag: UUID.allBooksID, selection: $selection) {
                             Label("All Books", systemImage: "books.vertical")
                         }
                     case let .list(list):

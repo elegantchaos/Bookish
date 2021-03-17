@@ -13,7 +13,7 @@ enum ListEntryKind {
 }
 
 extension UUID {
-    static let allBooksId = UUID(uuidString: "A6CC34C5-ECB4-4F33-B177-EBF1A1FCA91D")!
+    static let allBooksID = UUID(uuidString: "A6CC34C5-ECB4-4F33-B177-EBF1A1FCA91D")!
 }
 
 struct ListEntry: Identifiable, Hashable {
@@ -42,7 +42,9 @@ struct ListEntry: Identifiable, Hashable {
 
     var id: UUID {
         switch self.kind {
-            case .allBooks: return .allBooksId
+            case .allBooks:
+                print(UUID.allBooksID)
+                return .allBooksID
             case .book(let book,_): return book.id
             case .list(let list): return list.id
         }

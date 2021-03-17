@@ -34,6 +34,24 @@ struct ImportProgress {
     let label: String
 }
 
+struct SelectionStats {
+    let books: Int
+    let lists: Int
+    
+    init(selection: UUID?, context: NSManagedObjectContext) {
+        if selection == .allBooksID {
+            books = CDBook.countEntities(in: context)
+            lists = 0
+        } else if let id = selection, let list = CDList.withId(id, in: context) {
+            books = list.books?.count ?? 0
+            lists = list.lists?.count ?? 0
+        } else {
+            books = 0
+            lists = 0
+        }
+    }
+}
+
 class Model: ObservableObject {
     
     let stack: CoreDataStack
@@ -44,8 +62,20 @@ class Model: ObservableObject {
     @Published var importProgress: ImportProgress?
     @Published var status: String?
     @Published var errors: [Error] = []
-    @Published var selection: UUID?
+    @Published var selection: UUID? {
+        willSet(newValue) {
+            _selectionStats = nil
+        }
+    }
     
+    var _selectionStats: SelectionStats?
+    var selectionStats: SelectionStats {
+        if _selectionStats == nil {
+            _selectionStats = SelectionStats(selection: selection, context: stack.viewContext)
+        }
+        
+        return _selectionStats!
+    }
     
     init(stack: CoreDataStack) {
         self.stack = stack
@@ -65,7 +95,7 @@ class Model: ObservableObject {
         let context = stack.viewContext
         guard context.hasChanges else { return }
         do {
-            objectWillChange.send()
+//            objectWillChange.send()
             try context.save()
         } catch let error as NSError {
             print(error.localizedDescription)

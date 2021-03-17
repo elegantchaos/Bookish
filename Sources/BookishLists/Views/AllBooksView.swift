@@ -15,13 +15,13 @@ struct AllBooksView: View {
         sortDescriptors: [NSSortDescriptor(key: "name", ascending: true)]
     ) var books: FetchedResults<CDBook>
 
-    @State var selection: UUID?
+    @State var selectedBook: UUID?
     
     var body: some View {
         
-        return List(selection: $selection) {
+        return List(selection: $selectedBook) {
             ForEach(books) { book in
-                LinkView(BookInList(book), selection: $selection)
+                LinkView(BookInList(book), selection: $selectedBook)
             }
             .onDelete(perform: handleDelete)
         }

@@ -22,14 +22,11 @@ struct ListView: View {
     @Environment(\.managedObjectContext) var context
     @Environment(\.editMode) var editMode
     @ObservedObject var list: CDList
-    @State var selection: UUID?
+    @State var selectedBook: UUID?
     
     var body: some View {
         
-        return LazyVStack {
-            TextField("Name", text: $list.name)
-                .padding()
-
+        return VStack {
             TextField("Notes", text: list.binding(forProperty: "notes"))
                 .padding()
 
@@ -37,24 +34,32 @@ struct ListView: View {
                 FieldEditorView(fields: list.fields)
             }
             
-            List(selection: $selection) {
+            List(selection: $selectedBook) {
                 ForEach(list.sortedBooks) { book in
-                    LinkView(BookInList(book, in: list), selection: $selection)
+                    LinkView(BookInList(book, in: list), selection: $selectedBook)
                 }
                 .onDelete(perform: handleDelete)
             }
             
             Spacer()
         }
-        .navigationTitle(list.name)
-        .navigationBarItems(
-            leading: EditButton(),
-            trailing:
-                HStack {
-                    Button(action: handleAdd) { Image(systemName: "plus") }
-                    Button(action: handleDeleteList) { Image(systemName: "ellipsis.circle") }
-                }
-        )
+        .toolbar {
+            ToolbarItem(placement: .principal) {
+                TextField("Name", text: $list.name)
+            }
+
+            ToolbarItem(placement: .navigationBarLeading) {
+                EditButton()
+            }
+            
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button(action: handleAdd) { Image(systemName: "plus") }
+            }
+
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button(action: handleDeleteList) { Image(systemName: "ellipsis.circle") }
+            }
+        }
     }
 
     func handleDelete(_ items: IndexSet?) {
