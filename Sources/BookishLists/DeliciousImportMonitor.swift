@@ -11,6 +11,8 @@ import ThreadExtensions
 class DeliciousImportMonitor: ObservableObject {
     let model: Model
     let list: CDList
+    let allPeople: CDList
+    let allPublishers: CDList
     let context: NSManagedObjectContext
     
     var count = 0
@@ -21,9 +23,14 @@ class DeliciousImportMonitor: ObservableObject {
         self.model = model
         self.context = context
         self.list = CDList(context: context)
-        
-        list.name = "Imported from Delicious Library"
-        list.container = CDList.named("Imports", in: context)
+        self.allPeople = CDList.allPeople(in: context)
+        self.allPublishers = CDList.allPublishers(in: context)
+
+        let date = Date()
+        let formatted = DateFormatter.localizedString(from: date, dateStyle: .short, timeStyle: .none)
+        list.name = "Delicious Library \(formatted)"
+        list.container = CDList.allImports(in: context)
+        list.set(date, forKey: "imported")
     }
 }
 
@@ -45,7 +52,7 @@ extension DeliciousImportMonitor: ImportMonitor {
             
             book.name = importedBook.title
             book.imageURL = importedBook.images.first
-            book.merge(properties: importedBook.raw)
+            book.merge(properties: importedBook.properties)
             list.add(book)
             done += 1
 
@@ -55,6 +62,23 @@ extension DeliciousImportMonitor: ImportMonitor {
                 intervals = now
                 report(label: "Importing: \(importedBook.title)")
             }
+            
+            if let authors = importedBook.properties[.authorsKey] as? [String] {
+                for author in authors {
+                    let list = CDList.named(author, in: context)
+                    list.container = allPeople
+                    list.add(book)
+                }
+            }
+
+            if let publishers = importedBook.properties[.publishersKey] as? [String] {
+                for publisher in publishers {
+                    let list = CDList.named(publisher, in: context)
+                    list.container = self.allPublishers
+                    list.add(book)
+                }
+            }
+
         }
     }
     

@@ -5,6 +5,7 @@
 
 import SwiftUI
 import SheetController
+import BookishImporterSamples
 
 struct IndexMenuView: View {
     @EnvironmentObject var model: Model
@@ -16,6 +17,7 @@ struct IndexMenuView: View {
         Button(action: handleScan) { Text("Add Books…") }
         Menu("Import…") {
             Button(action: handleRequestImport) { Text("From Delicious Library") }
+            Button(action: handleImportSample) { Text("Delicious Library Sample") }
         }
     }
     
@@ -34,6 +36,14 @@ struct IndexMenuView: View {
 
     func handleRequestImport() {
         model.importRequested = true
+    }
+
+    func handleImportSample() {
+        let url = BookishImporter.urlForSample(withName: "DeliciousSmall")
+        model.stack.onBackground { context in
+            let bi = DeliciousImportMonitor(model: model, context: context)
+            model.importer.importFrom(url, monitor: bi)
+        }
     }
 
     func handleScan() {

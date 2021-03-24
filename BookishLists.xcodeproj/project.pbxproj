@@ -62,6 +62,7 @@
 		8BE1494125DD7D7D00A1DC32 /* FieldList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE1494025DD7D7D00A1DC32 /* FieldList.swift */; };
 		8BED2A1825C97D29000DD7C6 /* CDProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BED2A1725C97D29000DD7C6 /* CDProperty.swift */; };
 		8BED2A2425CAC0D1000DD7C6 /* Images in Frameworks */ = {isa = PBXBuildFile; productRef = 8BED2A2325CAC0D1000DD7C6 /* Images */; };
+		8BF9CCC1260BA99B000CA4A5 /* BookishImporterSamples in Frameworks */ = {isa = PBXBuildFile; productRef = 8BF9CCC0260BA99B000CA4A5 /* BookishImporterSamples */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -159,6 +160,7 @@
 				8B58C7B425B71528007F6B70 /* CloudKit.framework in Frameworks */,
 				8B1F114225ADFB0D00108A34 /* ISBN in Frameworks */,
 				8B1F10F725ADE46500108A34 /* SwiftUIExtensions in Frameworks */,
+				8BF9CCC1260BA99B000CA4A5 /* BookishImporterSamples in Frameworks */,
 				8B57F09025F7C6BD007DB517 /* CaptureView in Frameworks */,
 				8B80467325B8788900698F28 /* SheetController in Frameworks */,
 				8B80467D25B87C4A00698F28 /* LoggerUI in Frameworks */,
@@ -378,6 +380,7 @@
 				8B80467C25B87C4A00698F28 /* LoggerUI */,
 				8BED2A2325CAC0D1000DD7C6 /* Images */,
 				8B57F08F25F7C6BD007DB517 /* CaptureView */,
+				8BF9CCC0260BA99B000CA4A5 /* BookishImporterSamples */,
 			);
 			productName = "Samedi's Crafting";
 			productReference = 226F15D7251A28EA00D6B12E /* Bookish Lists.app */;
@@ -1063,6 +1066,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8BED2A2225CAC0D1000DD7C6 /* XCRemoteSwiftPackageReference "Images" */;
 			productName = Images;
+		};
+		8BF9CCC0260BA99B000CA4A5 /* BookishImporterSamples */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = BookishImporterSamples;
 		};
 /* End XCSwiftPackageProductDependency section */
 

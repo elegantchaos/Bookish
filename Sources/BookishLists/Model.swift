@@ -124,6 +124,7 @@ class Model: ObservableObject {
     }
     
     func removeAllData() {
+        objectWillChange.send()
         let context = stack.viewContext
         let coordinator = stack.coordinator
         for entity in ["CDBook", "CDList", "CDProperty"] {
@@ -131,6 +132,7 @@ class Model: ObservableObject {
             let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
             do {
                 try coordinator.execute(deleteRequest, with: context)
+                context.refreshAllObjects()
             } catch let error as NSError {
                 notify(error)
             }

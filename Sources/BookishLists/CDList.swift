@@ -107,3 +107,42 @@ extension CDList: AutoLinked {
         Label(name, systemImage: "books.vertical")
     }
 }
+
+extension UUID {
+    static let allPeopleID = UUID(uuidString: "A6CC34C5-ECB4-4F33-B177-EBF1A1FCA91E")!
+    static let allPublishersID = UUID(uuidString: "A6CC34C5-ECB4-4F33-B177-EBF1A1FCA91F")!
+    static let allImportsID = UUID(uuidString: "A6CC34C5-ECB4-4F33-B177-EBF1A1FCA91A")!
+}
+
+extension CDList {
+    static func allPeople(in context: NSManagedObjectContext) -> CDList {
+        if let list = CDList.withId(.allPeopleID, in: context, createIfMissing: false) {
+            return list
+        }
+
+        let list = CDList.withId(.allPeopleID, in: context)
+        list.name = "People"
+        return list
+    }
+
+    static func allPublishers(in context: NSManagedObjectContext) -> CDList {
+        if let list = CDList.withId(.allPublishersID, in: context, createIfMissing: false) {
+            return list
+        }
+
+        let list = CDList.withId(.allPublishersID, in: context)
+        list.name = "Publishers"
+        return list
+    }
+
+    static func allImports(in context: NSManagedObjectContext) -> CDList {
+        if let list = CDList.withId(.allImportsID, in: context, createIfMissing: false) {
+            return list
+        }
+
+        let list = CDList.withId(.allImportsID, in: context)
+        list.name = "Imports"
+        return list
+    }
+
+}

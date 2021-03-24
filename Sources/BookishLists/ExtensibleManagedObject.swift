@@ -70,6 +70,12 @@ class ExtensibleManagedObject: NSManagedObject, Identifiable {
         return record?.value
     }
     
+    func removeProperty(forKey key: String) {
+        if let record = propertyRecord(forKey: key) {
+            managedObjectContext?.delete(record)
+        }
+    }
+    
     func setProperty(_ value: Any, forKey key: String) {
         let record = propertyRecord(forKey: key) ?? makeRecord(forKey: key)
         record.value = value
@@ -87,8 +93,20 @@ class ExtensibleManagedObject: NSManagedObject, Identifiable {
         return property(forKey: key) as? [V]
     }
     
-    func set(_ value: String, forKey key: String) {
-        setProperty(value, forKey: key)
+    func set(_ value: String?, forKey key: String) {
+        if let value = value {
+            setProperty(value, forKey: key)
+        } else {
+            removeProperty(forKey: key)
+        }
+    }
+    
+    func set(_ value: Date?, forKey key: String) {
+        if let value = value {
+            setProperty(value, forKey: key)
+        } else {
+            removeProperty(forKey: key)
+        }
     }
     
     func set<V>(_ value: [V], forKey key: String) {
