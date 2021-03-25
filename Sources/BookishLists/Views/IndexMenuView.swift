@@ -15,9 +15,10 @@ struct IndexMenuView: View {
         Button(action: handleAddList) { Text("New List") }
         Button(action: handleAddGroup) { Text("New Group") }
         Button(action: handleScan) { Text("Add Books…") }
-        Menu("Import…") {
-            Button(action: handleRequestImport) { Text("From Delicious Library") }
-            Button(action: handleImportSample) { Text("Delicious Library Sample") }
+        Menu("Import") {
+            Button(action: handleImportSmall) { Text("Delicious Library Small Sample") }
+            Button(action: handleImportFull) { Text("Delicious Library Full Sample") }
+            Button(action: handleRequestImport) { Text("From Delicious Library…") }
         }
     }
     
@@ -38,12 +39,12 @@ struct IndexMenuView: View {
         model.importRequested = true
     }
 
-    func handleImportSample() {
-        let url = BookishImporter.urlForSample(withName: "DeliciousSmall")
-        model.stack.onBackground { context in
-            let bi = DeliciousImportMonitor(model: model, context: context)
-            model.importer.importFrom(url, monitor: bi)
-        }
+    func handleImportSmall() {
+        model.importFromDelicious(sampleNamed: "DeliciousSmall")
+    }
+
+    func handleImportFull() {
+        model.importFromDelicious(sampleNamed: "DeliciousFull")
     }
 
     func handleScan() {

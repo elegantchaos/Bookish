@@ -4,6 +4,7 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 import BookishImporter
+import BookishImporterSamples
 import CoreData
 import Images
 import KeyValueStore
@@ -144,14 +145,23 @@ class Model: ObservableObject {
         switch result {
             case .success(let url):
                 url.accessSecurityScopedResource { url in
-                    stack.onBackground { context in
-                        let bi = DeliciousImportMonitor(model: self, context: context)
-                        self.importer.importFrom(url, monitor: bi)
-                    }
+                    importFromDelicious(url: url)
                 }
 
             case .failure(let error):
                 notify(error)
+        }
+    }
+    
+    func importFromDelicious(sampleNamed name: String) {
+        let url = BookishImporter.urlForSample(withName: name)
+        importFromDelicious(url: url)
+    }
+    
+    func importFromDelicious(url: URL) {
+        stack.onBackground { context in
+            let bi = DeliciousImportMonitor(model: self, context: context)
+            self.importer.importFrom(url, monitor: bi)
         }
     }
     
