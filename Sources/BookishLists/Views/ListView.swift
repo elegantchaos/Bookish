@@ -22,7 +22,7 @@ struct ListView: View {
     @Environment(\.managedObjectContext) var context
     @Environment(\.editMode) var editMode
     @ObservedObject var list: CDList
-    @State var selectedBook: UUID?
+    @State var selectedBook: String?
     
     var body: some View {
         

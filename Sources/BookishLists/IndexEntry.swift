@@ -12,8 +12,8 @@ enum ListEntryKind {
     case book(CDBook, CDList?)
 }
 
-extension UUID {
-    static let allBooksID = UUID(uuidString: "A6CC34C5-ECB4-4F33-B177-EBF1A1FCA91D")!
+extension String {
+    static let allBooksID = "all-books"
 }
 
 struct ListEntry: Identifiable, Hashable {
@@ -40,13 +40,20 @@ struct ListEntry: Identifiable, Hashable {
         self.kind = .list(list)
     }
 
-    var id: UUID {
+    var id: String {
         switch self.kind {
             case .allBooks:
-                print(UUID.allBooksID)
                 return .allBooksID
-            case .book(let book,_): return book.id
-            case .list(let list): return list.id
+
+            case .list(let list):
+                return list.id
+                
+            case .book(let book,let list):
+                if let list = list {
+                    return "\(list.id)-\(book.id)"
+                } else {
+                    return book.id
+                }
         }
     }
 

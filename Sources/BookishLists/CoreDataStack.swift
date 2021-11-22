@@ -30,7 +30,7 @@ class CoreDataStack {
         do {
             try persistentContainer.viewContext.setQueryGenerationFrom(.current)
         } catch {
-            fatalError("###\(#function): Failed to pin viewContext to the current generation:\(error)")
+            print("###\(#function): Failed to pin viewContext to the current generation: \(error)")
         }
     }
     

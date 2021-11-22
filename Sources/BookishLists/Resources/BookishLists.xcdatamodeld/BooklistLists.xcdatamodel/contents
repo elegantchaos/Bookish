@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="18154" systemVersion="20D91" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19571" systemVersion="21C5039b" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
     <entity name="CDBook" representedClassName=".CDBook" syncable="YES">
-        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="id" optional="YES" attributeType="String"/>
         <attribute name="imageData" optional="YES" attributeType="Binary"/>
         <attribute name="imageURL" optional="YES" attributeType="URI"/>
         <attribute name="name" attributeType="String" defaultValueString="Untitled"/>
@@ -9,7 +9,7 @@
         <relationship name="properties" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDProperty" inverseName="book" inverseEntity="CDProperty"/>
     </entity>
     <entity name="CDList" representedClassName=".CDList" syncable="YES">
-        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="id" optional="YES" attributeType="String"/>
         <attribute name="imageData" optional="YES" attributeType="Binary"/>
         <attribute name="imageURL" optional="YES" attributeType="URI"/>
         <attribute name="name" attributeType="String" defaultValueString="Untitled"/>

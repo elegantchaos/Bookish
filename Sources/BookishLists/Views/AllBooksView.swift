@@ -15,7 +15,7 @@ struct AllBooksView: View {
         sortDescriptors: [NSSortDescriptor(key: "name", ascending: true)]
     ) var books: FetchedResults<CDBook>
 
-    @State var selectedBook: UUID?
+    @State var selectedBook: String?
     
     var body: some View {
         

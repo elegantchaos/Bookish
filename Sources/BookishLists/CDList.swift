@@ -108,10 +108,10 @@ extension CDList: AutoLinked {
     }
 }
 
-extension UUID {
-    static let allPeopleID = UUID(uuidString: "A6CC34C5-ECB4-4F33-B177-EBF1A1FCA91E")!
-    static let allPublishersID = UUID(uuidString: "A6CC34C5-ECB4-4F33-B177-EBF1A1FCA91F")!
-    static let allImportsID = UUID(uuidString: "A6CC34C5-ECB4-4F33-B177-EBF1A1FCA91A")!
+extension String {
+    static let allPeopleID = "all-people"
+    static let allPublishersID = "all-publishers"
+    static let allImportsID = "all-imports"
 }
 
 extension CDList {

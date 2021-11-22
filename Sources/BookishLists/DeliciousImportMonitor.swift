@@ -44,8 +44,8 @@ extension DeliciousImportMonitor: ImportMonitor {
     func session(_ session: ImportSession, didImport item: Any) {
         if let importedBook = item as? DeliciousLibraryImportSession.Book {
             let book: CDBook
-            if let id = UUID(uuidString: importedBook.id) {
-                book = CDBook.withId(id, in: context)
+            if let id = UUID(uuidString: importedBook.id) { // TODO: just use the id we're given here?
+                book = CDBook.withId(id.uuidString, in: context)
             } else {
                 book = CDBook.named(importedBook.title, in: context)
             }

@@ -11,7 +11,7 @@ import SwiftUI
 /// attribute called `codedProperties`.
 
 class ExtensibleManagedObject: NSManagedObject, Identifiable {
-    @NSManaged public var id: UUID
+    @NSManaged public var id: String
     @NSManaged fileprivate var codedProperties: String?
     @NSManaged public var properties: Set<CDProperty>?
 
@@ -19,7 +19,7 @@ class ExtensibleManagedObject: NSManagedObject, Identifiable {
 
     override func awakeFromInsert() {
         super.awakeFromInsert()
-        id = UUID()
+        id = UUID().uuidString
     }
 
     func binding(forProperty key: String) -> Binding<String> {

@@ -36,7 +36,7 @@ struct ContentView: View {
                 ToolbarItem(placement: .bottomBar) {
                     if let progress = model.importProgress {
                         ProgressView(progress.label, value: Double(progress.count), total: Double(progress.total))
-                            .frame(width: 512)
+                            .frame(maxWidth: 512)
                     }
                 }
                 
@@ -59,7 +59,7 @@ struct ContentView: View {
 
 struct RootIndexView: View {
     @Environment(\.editMode) var editMode
-    @Binding var selection: UUID?
+    @Binding var selection: String?
     
     var body: some View {
         VStack {
@@ -77,7 +77,7 @@ struct RootIndexView: View {
 
 struct SelectionCountView: View {
     @Environment(\.managedObjectContext) var context
-    @Binding var selection: UUID?
+    @Binding var selection: String?
     let stats: SelectionStats
     
     var body: some View {

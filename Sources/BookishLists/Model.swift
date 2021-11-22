@@ -41,7 +41,7 @@ struct SelectionStats {
     let books: Int
     let lists: Int
     
-    init(selection: UUID?, context: NSManagedObjectContext) {
+    init(selection: String?, context: NSManagedObjectContext) {
         if selection == .allBooksID {
             books = CDBook.countEntities(in: context)
             lists = 0
@@ -65,7 +65,7 @@ class Model: ObservableObject {
     @Published var importProgress: ImportProgress?
     @Published var status: String?
     @Published var errors: [Error] = []
-    @Published var selection: UUID? {
+    @Published var selection: String? {
         willSet(newValue) {
             _selectionStats = nil
         }
@@ -83,9 +83,9 @@ class Model: ObservableObject {
     init(stack: CoreDataStack) {
         self.stack = stack
         
-        if let string = UserDefaults.standard.string(forKey: "selection"), let uuid = UUID(uuidString: string) {
+        if let string = UserDefaults.standard.string(forKey: "selection") {
             onMainQueue {
-                self.selection = uuid
+                self.selection = string
             }
         }
     }
@@ -93,7 +93,7 @@ class Model: ObservableObject {
     var appName: String { "Bookish Lists" }
     
     func save() {
-        UserDefaults.standard.set(selection?.uuidString, forKey: "selection")
+        UserDefaults.standard.set(selection, forKey: "selection")
         
         let context = stack.viewContext
         guard context.hasChanges else { return }
