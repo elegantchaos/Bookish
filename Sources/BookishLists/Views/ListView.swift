@@ -23,6 +23,7 @@ struct ListView: View {
     @Environment(\.editMode) var editMode
     @ObservedObject var list: CDList
     @State var selection: String?
+    @State var filter: String = ""
     
     var body: some View {
         let isEditing = editMode?.wrappedValue == .active
@@ -37,26 +38,31 @@ struct ListView: View {
             
             List(selection: $selection) {
                 ForEach(list.sortedBooks) { book in
-                    if isEditing {
-                        LabelView(BookInList(book, in: list))
-                    } else {
-                        LinkView(BookInList(book, in: list), selection: $selection)
+                    if filter.isEmpty || book.name.contains(filter) {
+                        if isEditing {
+                            LabelView(BookInList(book, in: list))
+                        } else {
+                            LinkView(BookInList(book, in: list), selection: $selection)
+                        }
                     }
                 }
                 .onDelete(perform: handleDelete)
 
                 ForEach(list.sortedLists) { list in
+                    if filter.isEmpty || list.name.contains(filter) {
                     if isEditing {
                         LabelView(list)
                     } else {
                         OLinkView(list, selection: $selection)
+                    }
                     }
                 }
                 .onDelete(perform: handleDelete)
 
             }
             .listStyle(.plain)
-
+            .searchable(text: $filter)
+            
             Spacer()
         }
         .toolbar {
@@ -73,7 +79,7 @@ struct ListView: View {
             }
 
             ToolbarItem(placement: .navigationBarTrailing) {
-                Button(action: handleDeleteList) { Image(systemName: "ellipsis.circle") }
+                Button(action: handleDeleteList) { Image(systemName: "trash") }
             }
         }
     }

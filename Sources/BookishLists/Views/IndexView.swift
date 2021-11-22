@@ -77,47 +77,4 @@ struct IndexView: View {
             }
         }
     }
-    
-//    static func query() -> NSFetchRequest<CDList> {
-//        let request: NSFetchRequest<CDList> = CDList.fetchRequest()
-//        request.sortDescriptors = [
-//            NSSortDescriptor(key: "name", ascending: true)
-//        ]
-//        request.predicate = NSPredicate(format: "container == null")
-//        request.que
-//    ) var lists: FetchedResults<CDList>
-//
-//    }
-}
-
-
-struct EditableListIndexView: View {
-    @EnvironmentObject var model: Model
-    @Environment(\.managedObjectContext) var context
-    @FetchRequest(
-        entity: CDList.entity(),
-        sortDescriptors: [NSSortDescriptor(key: "name", ascending: true)]
-    ) var lists: FetchedResults<CDList>
-
-    @Binding var selection: String?
-
-    var body: some View {
-        List(lists, selection: $selection) { list in
-            ForEach(lists) { list in
-                if !list.isDeleted {
-                    LinkView(list, selection: $selection)
-                }
-            }
-            .onDelete(perform: handleDelete)
-        }
-    }
-    
-    func handleDelete(_ items: IndexSet?) {
-        if let items = items {
-            items.forEach { index in
-                let list = lists[index]
-                model.delete(list)
-            }
-        }
-    }
 }
