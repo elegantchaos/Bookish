@@ -47,7 +47,6 @@ struct IndexView: View {
     ) var lists: FetchedResults<CDList>
     
     @Binding var selection: String?
-    @State var filter: String = ""
     
     var body: some View {
         var entries = lists.map({ ListEntry(list: $0)})
@@ -69,7 +68,6 @@ struct IndexView: View {
                         LinkView(BookInList(book, in: list), selection: $selection)
                 }
             }
-            .searchable(text: $filter)
             .listStyle(.plain)
             .navigationTitle(model.appName)
             .toolbar {

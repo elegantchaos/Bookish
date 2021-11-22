@@ -16,15 +16,19 @@ struct AllBooksView: View {
     ) var books: FetchedResults<CDBook>
 
     @State var selectedBook: String?
-    
+    @State var filter: String = ""
+
     var body: some View {
         
         return List(selection: $selectedBook) {
             ForEach(books) { book in
-                LinkView(BookInList(book), selection: $selectedBook)
+                if filter.isEmpty || book.name.contains(filter) {
+                    LinkView(BookInList(book), selection: $selectedBook)
+                }
             }
             .onDelete(perform: handleDelete)
         }
+        .searchable(text: $filter)
         .listStyle(.plain)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
