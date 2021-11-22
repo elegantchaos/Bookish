@@ -47,18 +47,20 @@ struct IndexView: View {
     ) var lists: FetchedResults<CDList>
     
     @Binding var selection: String?
+    @State var filter: String = ""
     
     var body: some View {
         var entries = lists.map({ ListEntry(list: $0)})
         entries.insert(ListEntry(), at: 0)
         
         return VStack {
-            List(entries, children: \.children, selection: $selection) { entry in
+            List(entries, selection: $selection) { entry in
                 switch entry.kind {
                     case .allBooks:
                         NavigationLink(destination: AllBooksView(), tag: .allBooksID, selection: $selection) {
                             Label("All Books", systemImage: "books.vertical")
                         }
+
                         
                     case let .list(list):
                         OLinkView(list, selection: $selection)
@@ -67,7 +69,14 @@ struct IndexView: View {
                         LinkView(BookInList(book, in: list), selection: $selection)
                 }
             }
-            
+            .searchable(text: $filter)
+            .listStyle(.plain)
+            .navigationTitle(model.appName)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    IndexMenuButton()
+                }
+            }
         }
     }
     

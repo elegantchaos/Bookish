@@ -22,25 +22,41 @@ struct ListView: View {
     @Environment(\.managedObjectContext) var context
     @Environment(\.editMode) var editMode
     @ObservedObject var list: CDList
-    @State var selectedBook: String?
+    @State var selection: String?
     
     var body: some View {
+        let isEditing = editMode?.wrappedValue == .active
         
         return VStack {
             TextField("Notes", text: list.binding(forProperty: "notes"))
                 .padding()
 
-            if editMode?.wrappedValue == .active {
+            if isEditing {
                 FieldEditorView(fields: list.fields)
             }
             
-            List(selection: $selectedBook) {
+            List(selection: $selection) {
                 ForEach(list.sortedBooks) { book in
-                    LinkView(BookInList(book, in: list), selection: $selectedBook)
+                    if isEditing {
+                        LabelView(BookInList(book, in: list))
+                    } else {
+                        LinkView(BookInList(book, in: list), selection: $selection)
+                    }
                 }
                 .onDelete(perform: handleDelete)
+
+                ForEach(list.sortedLists) { list in
+                    if isEditing {
+                        LabelView(list)
+                    } else {
+                        OLinkView(list, selection: $selection)
+                    }
+                }
+                .onDelete(perform: handleDelete)
+
             }
-            
+            .listStyle(.plain)
+
             Spacer()
         }
         .toolbar {

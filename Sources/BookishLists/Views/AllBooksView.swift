@@ -25,6 +25,7 @@ struct AllBooksView: View {
             }
             .onDelete(perform: handleDelete)
         }
+        .listStyle(.plain)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 EditButton()

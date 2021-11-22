@@ -15,12 +15,7 @@ struct ContentView: View {
     var body: some View {
         SheetControllerHost {
             NavigationView {
-                RootIndexView(selection: $model.selection)
-                    .navigationTitle(model.appName)
-                    .navigationBarItems(
-                        leading: EditButton(),
-                        trailing: IndexMenuButton()
-                    )
+                IndexView(selection: $model.selection)
             }
             .fileImporter(isPresented: $model.importRequested, allowedContentTypes: [.xml], onCompletion: model.handlePerformImport)
             .navigationBarTitleDisplayMode(.automatic)
@@ -53,24 +48,6 @@ struct ContentView: View {
     func handlePreferences() {
         sheetController.show {
             PreferencesView()
-        }
-    }
-}
-
-struct RootIndexView: View {
-    @Environment(\.editMode) var editMode
-    @Binding var selection: String?
-    
-    var body: some View {
-        VStack {
-            if editMode?.wrappedValue == .active {
-                EditableListIndexView(selection: $selection)
-            } else {
-                IndexView(selection: $selection)
-            }
-            
-            
-            
         }
     }
 }

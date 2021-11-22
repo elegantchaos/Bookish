@@ -752,7 +752,7 @@
 			baseConfigurationReference = 22ED67E3251E424600B0226D /* BookishLists.xcconfig */;
 			buildSettings = {
 				ENABLE_PREVIEWS = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 			};
 			name = Debug;
 		};
@@ -761,7 +761,7 @@
 			baseConfigurationReference = 22ED67E3251E424600B0226D /* BookishLists.xcconfig */;
 			buildSettings = {
 				ENABLE_PREVIEWS = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 			};
 			name = Release;
 		};
