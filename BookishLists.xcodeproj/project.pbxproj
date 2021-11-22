@@ -126,6 +126,7 @@
 		8B58C7B325B71528007F6B70 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		8B58C7BF25B843C7007F6B70 /* IndexView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexView.swift; sourceTree = "<group>"; };
 		8B58C7CB25B84AB8007F6B70 /* PreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesView.swift; sourceTree = "<group>"; };
+		8B602EEA274BD58500DE50A5 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		8B987C9E25C047E5003D6F9F /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		8B987CAA25C04876003D6F9F /* BooklistLists.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BooklistLists.xcdatamodel; sourceTree = "<group>"; };
 		8B987CB425C06708003D6F9F /* CDBook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDBook.swift; sourceTree = "<group>"; };
@@ -208,6 +209,7 @@
 		226F15CE251A28EA00D6B12E = {
 			isa = PBXGroup;
 			children = (
+				8B602EEA274BD58500DE50A5 /* README.md */,
 				226F15D9251A28EA00D6B12E /* Sources */,
 				22F685A5251B8BBA00E867CE /* Frameworks */,
 				226F15D8251A28EA00D6B12E /* Products */,
