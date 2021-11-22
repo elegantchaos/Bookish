@@ -967,7 +967,7 @@
 			repositoryURL = "https://github.com/elegantchaos/BookishImporter.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
+				minimumVersion = 1.1.0;
 			};
 		};
 		8B2A7CC625AE140A0024C1A2 /* XCRemoteSwiftPackageReference "ThreadExtensions" */ = {

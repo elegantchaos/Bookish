@@ -12,6 +12,8 @@ import Logger
 import SwiftUI
 import ThreadExtensions
 
+typealias AsyncImage = Images.AsyncImage
+
 let modelChannel = Channel("Model")
 
 protocol JSONCodable {
