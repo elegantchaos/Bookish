@@ -62,10 +62,10 @@ struct SelectionCountView: View {
             if stats.lists > 0 {
                 Text("\(stats.lists) lists")
             }
-
-            if stats.books > 0 {
-                Text("\(stats.books) books")
-            }
+//
+//            if stats.books > 0 {
+//                Text("\(stats.books) books")
+//            }
         }
     }
 }

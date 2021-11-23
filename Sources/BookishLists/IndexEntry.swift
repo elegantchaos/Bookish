@@ -9,7 +9,7 @@ import SwiftUIExtensions
 enum ListEntryKind {
     case allBooks
     case list(CDList)
-    case book(CDBook, CDList?)
+    case book(CDList, CDList?)
 }
 
 extension String {
@@ -32,7 +32,7 @@ struct ListEntry: Identifiable, Hashable {
         self.kind = .allBooks
     }
     
-    init(book: CDBook, in list: CDList? = nil) {
+    init(book: CDList, in list: CDList? = nil) {
         self.kind = .book(book, list)
     }
     

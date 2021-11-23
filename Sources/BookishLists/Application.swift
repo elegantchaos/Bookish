@@ -21,6 +21,9 @@ struct Application: App {
         self.model = Model(stack: stack)
         self.lookup = LookupManager()
     
+//        model.removeAllData()
+//        exit(0)
+        
         setupLookup()
     }
     

@@ -7,10 +7,10 @@ import SwiftUI
 import SwiftUIExtensions
 
 struct BookInList {
-    let book: CDBook
+    let book: CDList
     let list: CDList?
     
-    init(_ book: CDBook, in list: CDList? = nil) {
+    init(_ book: CDList, in list: CDList? = nil) {
         self.book = book
         self.list = list
     }

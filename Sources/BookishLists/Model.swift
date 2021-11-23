@@ -43,10 +43,10 @@ struct SelectionStats {
     
     init(selection: String?, context: NSManagedObjectContext) {
         if selection == .allBooksID {
-            books = CDBook.countEntities(in: context)
+            books = CDList.countEntities(in: context)
             lists = 0
         } else if let id = selection, let list = CDList.withId(id, in: context) {
-            books = list.books?.count ?? 0
+            books = 0 // list.books?.count ?? 0 // TODO: fix this
             lists = list.lists?.count ?? 0
         } else {
             books = 0
@@ -130,7 +130,7 @@ class Model: ObservableObject {
         objectWillChange.send()
         let context = stack.viewContext
         let coordinator = stack.coordinator
-        for entity in ["CDBook", "CDList", "CDProperty"] {
+        for entity in ["CDList", "CDProperty"] {
             let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: entity)
             let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
             do {
@@ -174,19 +174,11 @@ class Model: ObservableObject {
         }
     }
     
-    func image(for book: CDBook, usePlacholder: Bool = true) -> AsyncImage {
+    func image(for book: CDList, usePlacholder: Bool = true) -> AsyncImage {
         if usePlacholder {
             return images.image(for: book.imageURL, default: "book")
         } else {
             return images.image(for: book.imageURL)
-        }
-    }
-    
-    func image(for list: CDList, usePlacholder: Bool = true) -> AsyncImage {
-        if usePlacholder {
-            return images.image(for: list.imageURL, default: "books.vertical")
-        } else {
-            return images.image(for: list.imageURL)
         }
     }
 }

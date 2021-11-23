@@ -25,7 +25,7 @@ struct ListActionsMenuView: View {
     }
     
     func handleAdd() {
-        let book = CDBook(context: context)
+        let book = CDList(context: context)
         list.add(book)
         model.save()
     }

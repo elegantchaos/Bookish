@@ -11,9 +11,9 @@ import ThreadExtensions
 struct AllBooksIndexView: View {
     @EnvironmentObject var model: Model
     @FetchRequest(
-        entity: CDBook.entity(),
+        entity: CDList.entity(),
         sortDescriptors: [NSSortDescriptor(key: "name", ascending: true)]
-    ) var books: FetchedResults<CDBook>
+    ) var books: FetchedResults<CDList>
 
     @State var selectedBook: String?
     @State var filter: String = ""
@@ -57,6 +57,6 @@ struct AllBooksIndexView: View {
     }
     
     func handleAdd() {
-        let _ : CDBook = model.add()
+        let _ : CDList = model.add()
     }
 }

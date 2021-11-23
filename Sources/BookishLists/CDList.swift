@@ -27,13 +27,14 @@ class CDList: NamedManagedObject {
         return sorted
     }
     
-    var sortedBooks: [CDBook] {
-        guard let books = books else { return [] }
-        let sorted = books.sorted {
-            return ($0.name == $1.name) ? ($0.id < $1.id) : ($0.name < $1.name)
-        }
-        
-        return sorted
+    var sortedBooks: [CDList] {
+        return sortedLists
+//        guard let books = books else { return [] }
+//        let sorted = books.sorted {
+//            return ($0.name == $1.name) ? ($0.id < $1.id) : ($0.name < $1.name)
+//        }
+//        
+//        return sorted
     }
 
     fileprivate var decodedFields: FieldList {
@@ -53,8 +54,8 @@ class CDList: NamedManagedObject {
         }
     }
     
-    func add(_ book: CDBook) {
-        addToBooks(book)
+    func add(_ book: CDList) {
+        addToLists(book)
     }
 }
 
@@ -63,24 +64,7 @@ extension CDList {
         return NSFetchRequest<CDList>(entityName: "CDList")
     }
     
-    @NSManaged public var books: Set<CDBook>?
     @NSManaged public var lists: Set<CDList>?
-}
-
-extension CDList {
-
-    @objc(addBooksObject:)
-    @NSManaged fileprivate func addToBooks(_ value: CDBook)
-
-    @objc(removeBooksObject:)
-    @NSManaged fileprivate func removeFromBooks(_ value: CDBook)
-
-    @objc(addBooks:)
-    @NSManaged fileprivate func addToBooks(_ values: NSSet)
-
-    @objc(removeBooks:)
-    @NSManaged fileprivate func removeFromBooks(_ values: NSSet)
-
 }
 
 extension CDList {
