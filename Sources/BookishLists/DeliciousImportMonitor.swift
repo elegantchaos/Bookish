@@ -67,7 +67,9 @@ extension DeliciousImportMonitor: ImportMonitor {
                 for author in authors {
                     let list = CDList.named(author, in: context)
                     list.container = allPeople
-                    list.add(book)
+                    
+                    let authorList = list.lists?.first(where: { $0.name == "author" }) ?? list.addList(withName: "author")
+                    authorList.add(book)
                 }
             }
 
