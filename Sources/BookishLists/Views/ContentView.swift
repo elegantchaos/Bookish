@@ -15,7 +15,7 @@ struct ContentView: View {
     var body: some View {
         SheetControllerHost {
             NavigationView {
-                IndexView(selection: $model.selection)
+                RootIndexView(selection: $model.selection)
             }
             .fileImporter(isPresented: $model.importRequested, allowedContentTypes: [.xml], onCompletion: model.handlePerformImport)
             .navigationBarTitleDisplayMode(.automatic)

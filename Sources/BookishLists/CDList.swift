@@ -101,7 +101,7 @@ extension CDList {
 
 extension CDList: AutoLinked {
     var linkView: some View {
-        ListView(list: self)
+        ListIndexView(list: self)
     }
     var labelView: some View {
         Label(name, systemImage: "books.vertical")
@@ -145,4 +145,10 @@ extension CDList {
         return list
     }
 
+    func addList(withName name: String) -> CDList {
+        let list = CDList(in: managedObjectContext!)
+        list.name = name
+        list.container = self
+        return list
+    }
 }

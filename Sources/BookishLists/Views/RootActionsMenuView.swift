@@ -54,7 +54,7 @@ struct RootActionsMenuView: View {
     }
 }
 
-struct IndexMenuButton: View {
+struct RootActionsMenuButton: View {
     var body: some View {
         Menu() {
             RootActionsMenuView()

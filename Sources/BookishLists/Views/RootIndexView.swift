@@ -56,7 +56,7 @@ struct RootIndexView: View {
             List(entries, selection: $selection) { entry in
                 switch entry.kind {
                     case .allBooks:
-                        NavigationLink(destination: AllBooksView(), tag: .allBooksID, selection: $selection) {
+                        NavigationLink(destination: AllBooksIndexView(), tag: .allBooksID, selection: $selection) {
                             Label("All Books", systemImage: "books.vertical")
                         }
 
@@ -72,7 +72,7 @@ struct RootIndexView: View {
             .navigationTitle(model.appName)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    IndexMenuButton()
+                   RootActionsMenuButton()
                 }
             }
         }

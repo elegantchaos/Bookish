@@ -70,16 +70,8 @@ struct ListIndexView: View {
                 DeferredTextField(label: "Name", text: $list.name)
             }
 
-            ToolbarItem(placement: .navigationBarLeading) {
-                EditButton()
-            }
-            
             ToolbarItem(placement: .navigationBarTrailing) {
-                Button(action: handleAdd) { Image(systemName: "plus") }
-            }
-
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Button(action: handleDeleteList) { Image(systemName: "trash") }
+                ListActionsMenuButton(list: list)
             }
         }
     }
@@ -94,14 +86,4 @@ struct ListIndexView: View {
         }
     }
     
-    func handleDeleteList() {
-        model.delete(list)
-    }
-    
-    func handleAdd() {
-        let book = CDBook(context: context)
-        list.add(book)
-        model.save()
-    }
-
 }
