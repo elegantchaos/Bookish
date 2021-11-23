@@ -6,17 +6,36 @@
 import SwiftUI
 
 struct RecordLabel: View {
+    enum NameMode {
+        case normal
+        case includeRole
+    }
+    
     let record: CDRecord
+    let nameMode: NameMode
+
+    init(record: CDRecord, nameMode: NameMode = .normal) {
+        self.record = record
+        self.nameMode = nameMode
+    }
     
     var body: some View {
         Label {
-            Text(record.name)
+            Text(recordName)
         } icon: {
             if let url = record.imageURL {
                 LabelIconView(url: url, placeholder: imageName)
             } else {
                 Image(systemName: imageName)
             }
+        }
+    }
+    
+    var recordName: String {
+        if nameMode == .includeRole, record.kind == .personRole, let person = record.containedBy?.first {
+            return "\(person.name) (\(record.name))"
+        } else {
+            return record.name
         }
     }
     

@@ -18,6 +18,7 @@ extension CDRecord {
     @NSManaged internal var codedProperties: String?
     @NSManaged public var properties: Set<CDProperty>?
     @NSManaged public var contents: Set<CDRecord>?
+    @NSManaged public var containedBy: Set<CDRecord>?
 }
 
 // MARK: Child Records

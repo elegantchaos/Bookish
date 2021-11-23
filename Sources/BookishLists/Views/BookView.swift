@@ -12,6 +12,7 @@ struct BookView: View {
     @EnvironmentObject var model: Model
     @ObservedObject var book: CDRecord
     @ObservedObject var fields: FieldList
+    @State var selection: String?
     
     var body: some View {
         ScrollView {
@@ -28,6 +29,7 @@ struct BookView: View {
                         Label {
                             TextField("Notes", text: book.binding(forProperty: "notes"))
                                 .padding()
+                                .fixedSize(horizontal: true, vertical: false)
                         } icon: {
                             Image(systemName: "note.text")
                         }
@@ -50,6 +52,16 @@ struct BookView: View {
                                 Text(field.key)
                                 Text(string)
                                 Spacer()
+                            }
+                        }
+                    }
+                }
+                
+                DisclosureGroup("Links") {
+                    VStack(alignment: .leading) {
+                        if let contained = book.containedBy?.sortedByName {
+                            ForEach(contained) { item in
+                                RecordLink(item, nameMode: .includeRole, selection: $selection)
                             }
                         }
                     }

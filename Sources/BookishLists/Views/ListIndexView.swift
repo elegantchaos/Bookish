@@ -29,8 +29,15 @@ struct ListIndexView: View {
         let isEditing = editMode?.wrappedValue == .active
         
         return VStack {
-            TextField("Notes", text: list.binding(forProperty: "notes"))
-                .padding()
+            if isEditing {
+                TextField("Notes", text: list.binding(forProperty: "notes"))
+                    .fixedSize(horizontal: false, vertical: true)
+                    .padding()
+            } else {
+                Text(list.string(forKey: "notes") ?? "")
+                    .fixedSize(horizontal: false, vertical: true)
+                    .padding()
+            }
             
             if isEditing {
                 FieldEditorView(fields: list.fields)
