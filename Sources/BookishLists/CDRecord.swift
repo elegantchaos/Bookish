@@ -86,12 +86,6 @@ class CDRecord: NSManagedObject, Identifiable {
     }
 }
 
-extension String {
-    static let allPeopleID = "all-people"
-    static let allPublishersID = "all-publishers"
-    static let allImportsID = "all-imports"
-}
-
 extension CDRecord {
     func findOrMakeChildListWithName(_ name: String, kind: Kind) -> CDRecord {
         let kindCode = kind.rawValue

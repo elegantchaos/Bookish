@@ -7,7 +7,7 @@
 
 import CoreData
 
-// MARK: Core Data Backed Properties
+// MARK: CoreData Backed Properties
 
 extension CDRecord {
     @NSManaged public var id: String
@@ -114,30 +114,6 @@ extension CDRecord {
         object.name = name
         creationCallback(object)
         return object
-    }
-
-}
-
-extension NSManagedObjectContext {
-    var allPeople: CDRecord {
-        return CDRecord.findOrMakeWithID(.allPeopleID, in: self) { created in
-            created.kind = .personIndex
-            created.name = "People"
-        }
-    }
-
-    var allPublishers: CDRecord {
-        return CDRecord.findOrMakeWithID(.allPublishersID, in: self) { created in
-            created.kind = .publisherIndex
-            created.name = "Publishers"
-        }
-    }
-
-    var allImports: CDRecord {
-        return CDRecord.findOrMakeWithID(.allImportsID, in: self) { record in
-            record.kind = .importIndex
-            record.name = "Imports"
-        }
     }
 
 }

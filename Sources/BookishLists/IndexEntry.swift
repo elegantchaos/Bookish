@@ -57,17 +57,4 @@ struct ListEntry: Identifiable, Hashable {
         }
     }
 
-    var children: [ListEntry]? {
-        switch kind {
-            case .allBooks: return nil
-            case .book: return nil
-            case .list(let list):
-                let entries = list.sortedBooks
-                let lists = list.sortedLists
-                var children: [ListEntry] = []
-                children.append(contentsOf: entries.map({ ListEntry(book: $0, in: list)}))
-                children.append(contentsOf: lists.map({ ListEntry(list: $0)}))
-                return children.count > 0 ? children : nil
-        }
-    }
 }
