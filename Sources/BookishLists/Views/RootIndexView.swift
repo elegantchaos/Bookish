@@ -35,7 +35,7 @@ extension BookInList: AutoLinked {
     }
 }
 
-struct IndexView: View {
+struct RootIndexView: View {
     @EnvironmentObject var model: Model
     
     @FetchRequest(

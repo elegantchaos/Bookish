@@ -8,7 +8,7 @@ import SwiftUI
 import SwiftUIExtensions
 import ThreadExtensions
 
-struct AllBooksView: View {
+struct AllBooksIndexView: View {
     @EnvironmentObject var model: Model
     @FetchRequest(
         entity: CDBook.entity(),

@@ -33,5 +33,6 @@ struct PreferencesView: View {
         model.objectWillChange.send()
         model.removeAllData()
         sheetController.dismiss()
+        exit(0)
     }
 }

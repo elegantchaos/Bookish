@@ -17,7 +17,7 @@ extension Binding where Value == String? {
     }
 }
 
-struct ListView: View {
+struct ListIndexView: View {
     @EnvironmentObject var model: Model
     @Environment(\.managedObjectContext) var context
     @Environment(\.editMode) var editMode

@@ -7,7 +7,7 @@ import SwiftUI
 import SheetController
 import BookishImporterSamples
 
-struct IndexMenuView: View {
+struct RootActionsMenuView: View {
     @EnvironmentObject var model: Model
     @EnvironmentObject var sheetController: SheetController
 
@@ -57,7 +57,7 @@ struct IndexMenuView: View {
 struct IndexMenuButton: View {
     var body: some View {
         Menu() {
-            IndexMenuView()
+            RootActionsMenuView()
         } label: {
             Image(systemName: "ellipsis.circle")
         }
