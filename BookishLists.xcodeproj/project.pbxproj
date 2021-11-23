@@ -56,6 +56,7 @@
 		8BB6653F274D3560002CC0E8 /* RecordLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB6653E274D3560002CC0E8 /* RecordLabel.swift */; };
 		8BB66541274D3568002CC0E8 /* RecordLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB66540274D3568002CC0E8 /* RecordLink.swift */; };
 		8BB66543274D3B99002CC0E8 /* AsyncImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB66542274D3B99002CC0E8 /* AsyncImageView.swift */; };
+		8BB66545274D4041002CC0E8 /* CDRecord+RootLists.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB66544274D4041002CC0E8 /* CDRecord+RootLists.swift */; };
 		8BE1493225DC156400A1DC32 /* BookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE1493125DC156400A1DC32 /* BookView.swift */; };
 		8BE1493425DC16E400A1DC32 /* IndexEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE1493325DC16E400A1DC32 /* IndexEntry.swift */; };
 		8BE1493625DC178F00A1DC32 /* AllBooksIndexView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE1493525DC178F00A1DC32 /* AllBooksIndexView.swift */; };
@@ -144,6 +145,7 @@
 		8BB6653E274D3560002CC0E8 /* RecordLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordLabel.swift; sourceTree = "<group>"; };
 		8BB66540274D3568002CC0E8 /* RecordLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordLink.swift; sourceTree = "<group>"; };
 		8BB66542274D3B99002CC0E8 /* AsyncImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncImageView.swift; sourceTree = "<group>"; };
+		8BB66544274D4041002CC0E8 /* CDRecord+RootLists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDRecord+RootLists.swift"; sourceTree = "<group>"; };
 		8BE1493125DC156400A1DC32 /* BookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookView.swift; sourceTree = "<group>"; };
 		8BE1493325DC16E400A1DC32 /* IndexEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexEntry.swift; sourceTree = "<group>"; };
 		8BE1493525DC178F00A1DC32 /* AllBooksIndexView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllBooksIndexView.swift; sourceTree = "<group>"; };
@@ -293,6 +295,7 @@
 				8BED2A1725C97D29000DD7C6 /* CDProperty.swift */,
 				8B987CBA25C0671E003D6F9F /* CDRecord.swift */,
 				8BB66539274D1F30002CC0E8 /* CDRecord+CoreData.swift */,
+				8BB66544274D4041002CC0E8 /* CDRecord+RootLists.swift */,
 				8BB6653C274D2D62002CC0E8 /* CDRecord+Sorting.swift */,
 				8B987C9E25C047E5003D6F9F /* CoreDataStack.swift */,
 				8B57F08C25F7C166007DB517 /* DataFetcher.swift */,
@@ -569,6 +572,7 @@
 				8B57F08B25F7C0E9007DB517 /* LookupCandidate.swift in Sources */,
 				8BB6653B274D215A002CC0E8 /* NSManagedObjectExtensions.swift in Sources */,
 				8BE1493A25DC2CCB00A1DC32 /* Field.swift in Sources */,
+				8BB66545274D4041002CC0E8 /* CDRecord+RootLists.swift in Sources */,
 				8B57F08A25F7C0E9007DB517 /* AmazonLookupService.swift in Sources */,
 				8BE1493E25DD5CA700A1DC32 /* FieldKindMenu.swift in Sources */,
 				8B57F08725F7C0E9007DB517 /* LookupManager.swift in Sources */,
@@ -767,8 +771,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 22ED67E3251E424600B0226D /* BookishLists.xcconfig */;
 			buildSettings = {
-				ENABLE_PREVIEWS = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 			};
 			name = Debug;
 		};
@@ -776,8 +778,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 22ED67E3251E424600B0226D /* BookishLists.xcconfig */;
 			buildSettings = {
-				ENABLE_PREVIEWS = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 			};
 			name = Release;
 		};
