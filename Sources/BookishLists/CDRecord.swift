@@ -13,12 +13,17 @@ import ThreadExtensions
 class CDRecord: NSManagedObject, Identifiable {
     enum Kind: Int16 {
         case root
-        case index
         case group
-        case book
         case list
+        case book
+        case personIndex
+        case personRole
         case person
-        case role
+        case publisherIndex
+        case publisher
+        case seriesIndex
+        case series
+        case importIndex
         case importSession
     }
     
@@ -32,6 +37,10 @@ class CDRecord: NSManagedObject, Identifiable {
         set { kindCode = newValue.rawValue }
     }
 
+    var isBook: Bool {
+        kindCode == Kind.book.rawValue
+    }
+    
     var watcher: AnyCancellable? = nil
     
     func sorted(ofKind kind: Kind) -> [CDRecord] {
@@ -44,6 +53,9 @@ class CDRecord: NSManagedObject, Identifiable {
 
     }
     
+    var sortedContents: [CDRecord] {
+        contents?.sortedByName ?? []
+    }
     var sortedLists: [CDRecord] {
         return sorted(ofKind: .list)
     }
@@ -74,15 +86,6 @@ class CDRecord: NSManagedObject, Identifiable {
     }
 }
 
-extension CDRecord: AutoLinked {
-    var linkView: some View {
-        ListIndexView(list: self)
-    }
-    var labelView: some View {
-        Label(name, systemImage: "books.vertical")
-    }
-}
-
 extension String {
     static let allPeopleID = "all-people"
     static let allPublishersID = "all-publishers"
@@ -90,27 +93,6 @@ extension String {
 }
 
 extension CDRecord {
-    static func allPeople(in context: NSManagedObjectContext) -> CDRecord {
-        return CDRecord.findOrMakeWithID(.allPeopleID, in: context) { created in
-            created.kind = .index
-            created.name = "People"
-        }
-    }
-
-    static func allPublishers(in context: NSManagedObjectContext) -> CDRecord {
-        return CDRecord.findOrMakeWithID(.allPublishersID, in: context) { created in
-            created.kind = .index
-            created.name = "Publishers"
-        }
-    }
-
-    static func allImports(in context: NSManagedObjectContext) -> CDRecord {
-        return CDRecord.findOrMakeWithID(.allImportsID, in: context) { record in
-            record.kind = .index
-            record.name = "Imports"
-        }
-    }
-
     func findOrMakeChildListWithName(_ name: String, kind: Kind) -> CDRecord {
         let kindCode = kind.rawValue
         if let list = contents?.first(where: { ($0.kindCode == kindCode) && ($0.name == name) }) {
@@ -254,10 +236,4 @@ extension CDRecord {
         }
     }
 
-}
-
-extension Array where Element == CDRecord {
-    var sortedByName: [Element] {
-        return sorted { ($0.name == $1.name) ? ($0.id < $1.id) : ($0.name < $1.name) }
-    }
 }

@@ -12,7 +12,8 @@ struct AllBooksIndexView: View {
     @EnvironmentObject var model: Model
     @FetchRequest(
         entity: CDRecord.entity(),
-        sortDescriptors: [NSSortDescriptor(key: "name", ascending: true)]
+        sortDescriptors: [NSSortDescriptor(key: "name", ascending: true)],
+        predicate: NSPredicate(format: "kindCode == \(CDRecord.Kind.book.rawValue)")
     ) var books: FetchedResults<CDRecord>
 
     @State var selectedBook: String?
@@ -23,7 +24,7 @@ struct AllBooksIndexView: View {
         return List(selection: $selectedBook) {
             ForEach(books) { book in
                 if filter.isEmpty || book.name.contains(filter) {
-                    LinkView(BookInList(book), selection: $selectedBook)
+                    RecordLink(book, selection: $selectedBook)
                 }
             }
             .onDelete(perform: handleDelete)

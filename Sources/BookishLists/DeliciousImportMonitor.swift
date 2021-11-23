@@ -23,14 +23,15 @@ class DeliciousImportMonitor: ObservableObject {
         self.model = model
         self.context = context
         self.list = CDRecord(context: context)
-        self.allPeople = CDRecord.allPeople(in: context)
-        self.allPublishers = CDRecord.allPublishers(in: context)
-
+        self.allPeople = context.allPeople
+        self.allPublishers = context.allPublishers
+        
         let date = Date()
         let formatted = DateFormatter.localizedString(from: date, dateStyle: .short, timeStyle: .none)
         list.name = "Delicious Library \(formatted)"
-        CDRecord.allImports(in: context).addToContents(list)
+        list.set("Records imported from Delicious Library on \(formatted).", forKey: "notes")
         list.set(date, forKey: "imported")
+        context.allImports.addToContents(list)
     }
 }
 
@@ -49,7 +50,9 @@ extension DeliciousImportMonitor: ImportMonitor {
                     newBook.kind = .book
                 }
             } else {
-                book = CDRecord.named(importedBook.title, in: context)
+                book = CDRecord.findOrMakeWithName(importedBook.title, in: context) { newBook in
+                    newBook.kind = .book
+                }
             }
             
             book.name = importedBook.title
@@ -67,17 +70,22 @@ extension DeliciousImportMonitor: ImportMonitor {
             
             if let authors = importedBook.properties[.authorsKey] as? [String] {
                 for author in authors {
-                    let list = CDRecord.named(author, in: context)
+                    let list = CDRecord.findOrMakeWithName(author, in: context) { newAuthor in
+                        newAuthor.kind = .person
+                    }
                     allPeople.addToContents(list)
                     
-                    let authorList = list.findOrMakeChildListWithName("As Author", kind: .role)
+                    let authorList = list.findOrMakeChildListWithName("As Author", kind: .personRole)
                     authorList.add(book)
                 }
             }
 
             if let publishers = importedBook.properties[.publishersKey] as? [String] {
                 for publisher in publishers {
-                    let list = CDRecord.named(publisher, in: context)
+                    let list = CDRecord.findOrMakeWithName(publisher, in: context) { newPublisher in
+                        newPublisher.kind = .publisher
+                    }
+
                     self.allPublishers.addToContents(list)
                     list.add(book)
                 }

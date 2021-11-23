@@ -31,34 +31,23 @@ struct ListIndexView: View {
         return VStack {
             TextField("Notes", text: list.binding(forProperty: "notes"))
                 .padding()
-
+            
             if isEditing {
                 FieldEditorView(fields: list.fields)
             }
             
+            let items: [CDRecord] = list.sortedContents
             List(selection: $selection) {
-                ForEach(list.sortedBooks) { book in
-                    if filter.isEmpty || book.name.contains(filter) {
+                ForEach(items) { item in
+                    if include(item) {
                         if isEditing {
-                            LabelView(BookInList(book, in: list))
+                            RecordLabel(record: item)
                         } else {
-                            LinkView(BookInList(book, in: list), selection: $selection)
+                            RecordLink(item, in: list, selection: $selection)
                         }
                     }
                 }
                 .onDelete(perform: handleDelete)
-
-                ForEach(list.sortedLists) { list in
-                    if filter.isEmpty || list.name.contains(filter) {
-                    if isEditing {
-                        LabelView(list)
-                    } else {
-                        OLinkView(list, selection: $selection)
-                    }
-                    }
-                }
-                .onDelete(perform: handleDelete)
-
             }
             .listStyle(.plain)
             .searchable(text: $filter)
@@ -69,13 +58,17 @@ struct ListIndexView: View {
             ToolbarItem(placement: .principal) {
                 DeferredTextField(label: "Name", text: $list.name)
             }
-
+            
             ToolbarItem(placement: .navigationBarTrailing) {
                 ListActionsMenuButton(list: list)
             }
         }
     }
-
+    
+    func include(_ item: CDRecord) -> Bool {
+        filter.isEmpty || item.name.contains(filter)
+    }
+    
     func handleDelete(_ items: IndexSet?) {
         if let items = items {
             items.forEach { index in

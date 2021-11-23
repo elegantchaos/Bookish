@@ -93,4 +93,51 @@ extension CDRecord {
         return object
     }
 
+    class func withName(_ name: String, in context: NSManagedObjectContext) -> CDRecord? {
+        let request: NSFetchRequest<CDRecord> = CDRecord.fetcher(in: context)
+        request.predicate = NSPredicate(format: "name = %@", name)
+        if let results = try? context.fetch(request), let object = results.first {
+            return object
+        }
+        
+        return nil
+    }
+    
+    class func findOrMakeWithName(_ name: String, in context: NSManagedObjectContext, creationCallback: CreationCallback) -> CDRecord {
+        let request: NSFetchRequest<CDRecord> = CDRecord.fetcher(in: context)
+        request.predicate = NSPredicate(format: "name = %@", name)
+        if let results = try? context.fetch(request), let object = results.first {
+            return object
+        }
+
+        let object = CDRecord(in: context)
+        object.name = name
+        creationCallback(object)
+        return object
+    }
+
+}
+
+extension NSManagedObjectContext {
+    var allPeople: CDRecord {
+        return CDRecord.findOrMakeWithID(.allPeopleID, in: self) { created in
+            created.kind = .personIndex
+            created.name = "People"
+        }
+    }
+
+    var allPublishers: CDRecord {
+        return CDRecord.findOrMakeWithID(.allPublishersID, in: self) { created in
+            created.kind = .publisherIndex
+            created.name = "Publishers"
+        }
+    }
+
+    var allImports: CDRecord {
+        return CDRecord.findOrMakeWithID(.allImportsID, in: self) { record in
+            record.kind = .importIndex
+            record.name = "Imports"
+        }
+    }
+
 }

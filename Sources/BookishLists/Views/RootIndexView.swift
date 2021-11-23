@@ -6,35 +6,6 @@
 import SwiftUI
 import SwiftUIExtensions
 
-struct BookInList {
-    let book: CDRecord
-    let list: CDRecord?
-    
-    init(_ book: CDRecord, in list: CDRecord? = nil) {
-        self.book = book
-        self.list = list
-    }
-}
-
-extension BookInList: Identifiable {
-    var id: String { book.id }
-}
-
-extension BookInList: AutoLinked {
-    var linkView: some View {
-        assert(book.isDeleted == false)
-        assert((list == nil) || (list!.isDeleted == false))
-        
-        let fields = list?.fields ?? FieldList()
-        return BookView(book: book, fields: fields)
-    }
-    
-    var labelView: some View {
-        assert(book.isDeleted == false)
-        return ImageOwnerLabelView(object: book)
-    }
-}
-
 struct RootIndexView: View {
     @EnvironmentObject var model: Model
     
@@ -60,12 +31,11 @@ struct RootIndexView: View {
                             Label("All Books", systemImage: "books.vertical")
                         }
 
-                        
                     case let .list(list):
-                        OLinkView(list, selection: $selection)
+                        RecordLink(list, selection: $selection)
                         
                     case let .book(book, list):
-                        LinkView(BookInList(book, in: list), selection: $selection)
+                        RecordLink(book, in: list, selection: $selection)
                 }
             }
             .listStyle(.plain)
