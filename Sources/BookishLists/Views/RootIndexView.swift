@@ -7,10 +7,10 @@ import SwiftUI
 import SwiftUIExtensions
 
 struct BookInList {
-    let book: CDList
-    let list: CDList?
+    let book: CDRecord
+    let list: CDRecord?
     
-    init(_ book: CDList, in list: CDList? = nil) {
+    init(_ book: CDRecord, in list: CDRecord? = nil) {
         self.book = book
         self.list = list
     }
@@ -39,12 +39,12 @@ struct RootIndexView: View {
     @EnvironmentObject var model: Model
     
     @FetchRequest(
-        entity: CDList.entity(),
+        entity: CDRecord.entity(),
         sortDescriptors: [
             NSSortDescriptor(key: "name", ascending: true)
         ],
-        predicate: NSPredicate(format: "container == null")
-    ) var lists: FetchedResults<CDList>
+        predicate: NSPredicate(format: "containedBy.@count == 0")
+    ) var lists: FetchedResults<CDRecord>
     
     @Binding var selection: String?
     

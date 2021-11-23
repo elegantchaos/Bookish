@@ -21,7 +21,7 @@ import SwiftUIExtensions
 
 
 struct ImageOwnerLabelView: View {
-    @ObservedObject var object: NamedManagedObject
+    @ObservedObject var object: CDRecord
     
     var body: some View {
         Label {

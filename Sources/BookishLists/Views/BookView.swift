@@ -10,7 +10,7 @@ import SwiftUI
 struct BookView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
     @EnvironmentObject var model: Model
-    @ObservedObject var book: CDList
+    @ObservedObject var book: CDRecord
     @ObservedObject var fields: FieldList
     
     var body: some View {

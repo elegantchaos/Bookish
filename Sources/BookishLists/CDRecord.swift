@@ -1,27 +1,133 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-//  Created by Sam Deane on 27/01/2021.
+//  Created by Sam Deane on 26/01/2021.
 //  All code (c) 2021 - present day, Elegant Chaos Limited.
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
+import Combine
 import CoreData
+import Images
 import SwiftUI
+import SwiftUIExtensions
+import ThreadExtensions
 
-/// An NSManagedObject subclass which supports additional dynamic properties.
-/// The extra properties are encoded as data and stored in a single core-data
-/// attribute called `codedProperties`.
-
-class ExtensibleManagedObject: NSManagedObject, Identifiable {
-    @NSManaged public var id: String
-    @NSManaged fileprivate var codedProperties: String?
-    @NSManaged public var properties: Set<CDProperty>?
-
+class CDRecord: NSManagedObject, Identifiable {
+    enum Kind: Int16 {
+        case root
+        case index
+        case group
+        case book
+        case list
+        case person
+        case role
+        case importSession
+    }
+    
+    fileprivate lazy var cachedFields: FieldList = decodedFields
+    
+    var fields: FieldList { cachedFields }
     fileprivate lazy var cachedProperties: [String:CDProperty] = [:]
 
-    override func awakeFromInsert() {
-        super.awakeFromInsert()
-        id = UUID().uuidString
+    var kind: Kind {
+        get { Kind(rawValue: kindCode)! }
+        set { kindCode = newValue.rawValue }
     }
 
+    var watcher: AnyCancellable? = nil
+    
+    func sorted(ofKind kind: Kind) -> [CDRecord] {
+        guard let lists = contents?.filter({ $0.kindCode == kind.rawValue }) else { return [] }
+        let sorted = lists.sorted {
+            return ($0.name == $1.name) ? ($0.id < $1.id) : ($0.name < $1.name)
+        }
+
+        return sorted
+
+    }
+    
+    var sortedLists: [CDRecord] {
+        return sorted(ofKind: .list)
+    }
+
+    var sortedBooks: [CDRecord] {
+        return sorted(ofKind: .book)
+    }
+
+    fileprivate var decodedFields: FieldList {
+        let list = FieldList(decodedFrom: array(forKey: "fields") ?? [])
+        watcher = list.objectWillChange.sink {
+            print("Fields changed")
+            self.scheduleFieldEncoding()
+        }
+        return list
+    }
+
+    fileprivate func scheduleFieldEncoding() {
+        onMainQueue { [self] in
+            let strings = fields.encoded
+            set(strings, forKey: "fields")
+            print("Encoded as \(strings)")
+        }
+    }
+    
+    func add(_ book: CDRecord) {
+        addToContents(book)
+    }
+}
+
+extension CDRecord: AutoLinked {
+    var linkView: some View {
+        ListIndexView(list: self)
+    }
+    var labelView: some View {
+        Label(name, systemImage: "books.vertical")
+    }
+}
+
+extension String {
+    static let allPeopleID = "all-people"
+    static let allPublishersID = "all-publishers"
+    static let allImportsID = "all-imports"
+}
+
+extension CDRecord {
+    static func allPeople(in context: NSManagedObjectContext) -> CDRecord {
+        return CDRecord.findOrMakeWithID(.allPeopleID, in: context) { created in
+            created.kind = .index
+            created.name = "People"
+        }
+    }
+
+    static func allPublishers(in context: NSManagedObjectContext) -> CDRecord {
+        return CDRecord.findOrMakeWithID(.allPublishersID, in: context) { created in
+            created.kind = .index
+            created.name = "Publishers"
+        }
+    }
+
+    static func allImports(in context: NSManagedObjectContext) -> CDRecord {
+        return CDRecord.findOrMakeWithID(.allImportsID, in: context) { record in
+            record.kind = .index
+            record.name = "Imports"
+        }
+    }
+
+    func findOrMakeChildListWithName(_ name: String, kind: Kind) -> CDRecord {
+        let kindCode = kind.rawValue
+        if let list = contents?.first(where: { ($0.kindCode == kindCode) && ($0.name == name) }) {
+            return list
+        }
+            
+        let list = CDRecord(in: managedObjectContext!)
+        list.kind = kind
+        list.name = name
+        addToContents(list)
+        return list
+    }
+}
+
+// MARK: Properties
+
+extension CDRecord {
     func binding(forProperty key: String) -> Binding<String> {
         Binding<String> { () -> String in
             return self.string(forKey: key) ?? ""
@@ -150,19 +256,8 @@ class ExtensibleManagedObject: NSManagedObject, Identifiable {
 
 }
 
-// MARK: Generated accessors for properties
-extension ExtensibleManagedObject {
-
-    @objc(addPropertiesObject:)
-    @NSManaged public func addToProperties(_ value: CDProperty)
-
-    @objc(removePropertiesObject:)
-    @NSManaged public func removeFromProperties(_ value: CDProperty)
-
-    @objc(addProperties:)
-    @NSManaged public func addToProperties(_ values: NSSet)
-
-    @objc(removeProperties:)
-    @NSManaged public func removeFromProperties(_ values: NSSet)
-
+extension Array where Element == CDRecord {
+    var sortedByName: [Element] {
+        return sorted { ($0.name == $1.name) ? ($0.id < $1.id) : ($0.name < $1.name) }
+    }
 }

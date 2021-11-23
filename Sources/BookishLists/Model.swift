@@ -43,11 +43,11 @@ struct SelectionStats {
     
     init(selection: String?, context: NSManagedObjectContext) {
         if selection == .allBooksID {
-            books = CDList.countEntities(in: context)
+            books = CDRecord.countEntities(in: context)
             lists = 0
-        } else if let id = selection, let list = CDList.withId(id, in: context) {
+        } else if let id = selection, let list = CDRecord.withId(id, in: context) {
             books = 0 // list.books?.count ?? 0 // TODO: fix this
-            lists = list.lists?.count ?? 0
+            lists = list.contents?.count ?? 0
         } else {
             books = 0
             lists = 0
@@ -105,7 +105,7 @@ class Model: ObservableObject {
         }
     }
 
-    func delete(_ object: ExtensibleManagedObject) {
+    func delete(_ object: CDRecord) {
         print("deleting \(object.objectID)")
         if object.id == selection {
             print("cleared selection")
@@ -120,8 +120,9 @@ class Model: ObservableObject {
         }
     }
     
-    func add<T>() -> T where T: ExtensibleManagedObject {
-        let object = T(context: stack.viewContext)
+    func add(_ kind: CDRecord.Kind) -> CDRecord {
+        let object = CDRecord(in: stack.viewContext)
+        object.kind = kind
         save()
         return object
     }
@@ -130,7 +131,7 @@ class Model: ObservableObject {
         objectWillChange.send()
         let context = stack.viewContext
         let coordinator = stack.coordinator
-        for entity in ["CDList", "CDProperty"] {
+        for entity in ["CDRecord", "CDProperty"] {
             let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: entity)
             let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
             do {
@@ -174,7 +175,7 @@ class Model: ObservableObject {
         }
     }
     
-    func image(for book: CDList, usePlacholder: Bool = true) -> AsyncImage {
+    func image(for book: CDRecord, usePlacholder: Bool = true) -> AsyncImage {
         if usePlacholder {
             return images.image(for: book.imageURL, default: "book")
         } else {

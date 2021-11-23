@@ -109,23 +109,3 @@ extension NSManagedObject {
     }
 
 }
-
-
-protocol IMO where Self: NSManagedObject {
-    static func withId<I>(_ id: I, in context: NSManagedObjectContext) -> Self where I: Identifiable
-    static func withId<I>(_ id: I, in context: NSManagedObjectContext, createIfMissing: Bool) -> Self? where I: Identifiable
-}
-
-extension IMO {
-    static func withId(_ id: Self.ID, in context: NSManagedObjectContext) -> Self where Self: Identifiable {
-        return getWithId(id, type: self, in: context, createIfMissing: true)!
-    }
-
-    /**
-     Return the entity of our type with a given uuid.
-     */
-    
-    static func withId(_ id: Self.ID, in context: NSManagedObjectContext, createIfMissing: Bool = false) -> Self? where Self: Identifiable {
-        return getWithId(id, type: self, in: context, createIfMissing: createIfMissing)
-    }
-}

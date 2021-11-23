@@ -12,7 +12,7 @@ struct ListActionsMenuView: View {
     @Environment(\.managedObjectContext) var context
     @EnvironmentObject var sheetController: SheetController
 
-    let list: CDList
+    let list: CDRecord
     
     var body: some View {
         Button(action: handleAdd) { Label("New Book", systemImage: "plus") }
@@ -25,7 +25,7 @@ struct ListActionsMenuView: View {
     }
     
     func handleAdd() {
-        let book = CDList(context: context)
+        let book = CDRecord(context: context)
         list.add(book)
         model.save()
     }
@@ -33,7 +33,7 @@ struct ListActionsMenuView: View {
 }
 
 struct ListActionsMenuButton: View {
-    let list: CDList
+    let list: CDRecord
 
     var body: some View {
         Menu() {

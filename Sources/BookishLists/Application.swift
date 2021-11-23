@@ -20,9 +20,12 @@ struct Application: App {
         let stack = CoreDataStack(containerName: "BookishLists")
         self.model = Model(stack: stack)
         self.lookup = LookupManager()
-    
-//        model.removeAllData()
-//        exit(0)
+
+        if CommandLine.arguments.contains("--wipeAllData") {
+            model.removeAllData()
+            model.save()
+            exit(0)
+        }
         
         setupLookup()
     }

@@ -47,12 +47,11 @@
 		8B987C9F25C047E5003D6F9F /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B987C9E25C047E5003D6F9F /* CoreDataStack.swift */; };
 		8B987CAB25C04876003D6F9F /* BookishLists.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8B987CA925C04876003D6F9F /* BookishLists.xcdatamodeld */; };
 		8B987CB525C06708003D6F9F /* CDBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B987CB425C06708003D6F9F /* CDBook.swift */; };
-		8B987CBB25C0671E003D6F9F /* CDList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B987CBA25C0671E003D6F9F /* CDList.swift */; };
-		8B987CDD25C19263003D6F9F /* ExtensibleManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B987CDC25C19263003D6F9F /* ExtensibleManagedObject.swift */; };
-		8B987D0125C1CA60003D6F9F /* NSManagedObjectExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B987CFE25C1CA60003D6F9F /* NSManagedObjectExtensions.swift */; };
+		8B987CBB25C0671E003D6F9F /* CDRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B987CBA25C0671E003D6F9F /* CDRecord.swift */; };
 		8B987D0225C1CA60003D6F9F /* NSManagedObjectContextExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B987CFF25C1CA60003D6F9F /* NSManagedObjectContextExtensions.swift */; };
 		8B987D0325C1CA60003D6F9F /* NSEntityDescriptionExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B987D0025C1CA60003D6F9F /* NSEntityDescriptionExtensions.swift */; };
-		8B987D0925C1D519003D6F9F /* NamedManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B987D0825C1D519003D6F9F /* NamedManagedObject.swift */; };
+		8BB6653A274D1F30002CC0E8 /* CDRecord+CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB66539274D1F30002CC0E8 /* CDRecord+CoreData.swift */; };
+		8BB6653B274D215A002CC0E8 /* NSManagedObjectExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B987CFE25C1CA60003D6F9F /* NSManagedObjectExtensions.swift */; };
 		8BE1493225DC156400A1DC32 /* BookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE1493125DC156400A1DC32 /* BookView.swift */; };
 		8BE1493425DC16E400A1DC32 /* IndexEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE1493325DC16E400A1DC32 /* IndexEntry.swift */; };
 		8BE1493625DC178F00A1DC32 /* AllBooksIndexView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE1493525DC178F00A1DC32 /* AllBooksIndexView.swift */; };
@@ -132,12 +131,11 @@
 		8B987C9E25C047E5003D6F9F /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		8B987CAA25C04876003D6F9F /* BooklistLists.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BooklistLists.xcdatamodel; sourceTree = "<group>"; };
 		8B987CB425C06708003D6F9F /* CDBook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDBook.swift; sourceTree = "<group>"; };
-		8B987CBA25C0671E003D6F9F /* CDList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDList.swift; sourceTree = "<group>"; };
-		8B987CDC25C19263003D6F9F /* ExtensibleManagedObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensibleManagedObject.swift; sourceTree = "<group>"; };
+		8B987CBA25C0671E003D6F9F /* CDRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDRecord.swift; sourceTree = "<group>"; };
 		8B987CFE25C1CA60003D6F9F /* NSManagedObjectExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSManagedObjectExtensions.swift; sourceTree = "<group>"; };
 		8B987CFF25C1CA60003D6F9F /* NSManagedObjectContextExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSManagedObjectContextExtensions.swift; sourceTree = "<group>"; };
 		8B987D0025C1CA60003D6F9F /* NSEntityDescriptionExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSEntityDescriptionExtensions.swift; sourceTree = "<group>"; };
-		8B987D0825C1D519003D6F9F /* NamedManagedObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NamedManagedObject.swift; sourceTree = "<group>"; };
+		8BB66539274D1F30002CC0E8 /* CDRecord+CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDRecord+CoreData.swift"; sourceTree = "<group>"; };
 		8BE1493125DC156400A1DC32 /* BookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookView.swift; sourceTree = "<group>"; };
 		8BE1493325DC16E400A1DC32 /* IndexEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexEntry.swift; sourceTree = "<group>"; };
 		8BE1493525DC178F00A1DC32 /* AllBooksIndexView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllBooksIndexView.swift; sourceTree = "<group>"; };
@@ -286,14 +284,13 @@
 				226F15DA251A28EA00D6B12E /* Application.swift */,
 				8B987CB425C06708003D6F9F /* CDBook.swift */,
 				8BED2A1725C97D29000DD7C6 /* CDProperty.swift */,
-				8B987CBA25C0671E003D6F9F /* CDList.swift */,
+				8B987CBA25C0671E003D6F9F /* CDRecord.swift */,
+				8BB66539274D1F30002CC0E8 /* CDRecord+CoreData.swift */,
 				8B987C9E25C047E5003D6F9F /* CoreDataStack.swift */,
 				8B57F08C25F7C166007DB517 /* DataFetcher.swift */,
 				8BE1493925DC2CCB00A1DC32 /* Field.swift */,
 				8BE1494025DD7D7D00A1DC32 /* FieldList.swift */,
 				8BE1493325DC16E400A1DC32 /* IndexEntry.swift */,
-				8B987CDC25C19263003D6F9F /* ExtensibleManagedObject.swift */,
-				8B987D0825C1D519003D6F9F /* NamedManagedObject.swift */,
 				221717DB2522773B00C43604 /* Model.swift */,
 				8B987D0025C1CA60003D6F9F /* NSEntityDescriptionExtensions.swift */,
 				8B39B478260252AB003B0C5B /* DeliciousImportMonitor.swift */,
@@ -558,6 +555,7 @@
 				8B57F08625F7C0E9007DB517 /* GoogleLookupService.swift in Sources */,
 				8BE1493825DC250300A1DC32 /* FieldEditorView.swift in Sources */,
 				8B57F08B25F7C0E9007DB517 /* LookupCandidate.swift in Sources */,
+				8BB6653B274D215A002CC0E8 /* NSManagedObjectExtensions.swift in Sources */,
 				8BE1493A25DC2CCB00A1DC32 /* Field.swift in Sources */,
 				8B57F08A25F7C0E9007DB517 /* AmazonLookupService.swift in Sources */,
 				8BE1493E25DD5CA700A1DC32 /* FieldKindMenu.swift in Sources */,
@@ -567,12 +565,13 @@
 				8BE1493225DC156400A1DC32 /* BookView.swift in Sources */,
 				8B42BE4825F7912700855D08 /* RootActionsMenuView.swift in Sources */,
 				8B58C7C025B843C7007F6B70 /* RootIndexView.swift in Sources */,
-				8B987CBB25C0671E003D6F9F /* CDList.swift in Sources */,
+				8B987CBB25C0671E003D6F9F /* CDRecord.swift in Sources */,
 				8B602EF1274BF58400DE50A5 /* ListActionsMenuView.swift in Sources */,
 				8B39B479260252AB003B0C5B /* DeliciousImportMonitor.swift in Sources */,
 				8B987CAB25C04876003D6F9F /* BookishLists.xcdatamodeld in Sources */,
 				8B42BE4A25F794D800855D08 /* ScannerView.swift in Sources */,
 				8B57F08D25F7C166007DB517 /* DataFetcher.swift in Sources */,
+				8BB6653A274D1F30002CC0E8 /* CDRecord+CoreData.swift in Sources */,
 				8BE1494125DD7D7D00A1DC32 /* FieldList.swift in Sources */,
 				8B987C9F25C047E5003D6F9F /* CoreDataStack.swift in Sources */,
 				8B987D0325C1CA60003D6F9F /* NSEntityDescriptionExtensions.swift in Sources */,
@@ -580,7 +579,6 @@
 				8BE1493625DC178F00A1DC32 /* AllBooksIndexView.swift in Sources */,
 				8B1F10D825ACB30A00108A34 /* ListIndexView.swift in Sources */,
 				8B1F10E225ADC28800108A34 /* EntryView.swift in Sources */,
-				8B987D0125C1CA60003D6F9F /* NSManagedObjectExtensions.swift in Sources */,
 				8B987CB525C06708003D6F9F /* CDBook.swift in Sources */,
 				8B987D0225C1CA60003D6F9F /* NSManagedObjectContextExtensions.swift in Sources */,
 				8BE1493425DC16E400A1DC32 /* IndexEntry.swift in Sources */,
@@ -591,8 +589,6 @@
 				8BED2A1825C97D29000DD7C6 /* CDProperty.swift in Sources */,
 				8B57F08825F7C0E9007DB517 /* LookupSession.swift in Sources */,
 				8B39B47B26027F35003B0C5B /* DeferredTextField.swift in Sources */,
-				8B987D0925C1D519003D6F9F /* NamedManagedObject.swift in Sources */,
-				8B987CDD25C19263003D6F9F /* ExtensibleManagedObject.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

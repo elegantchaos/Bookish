@@ -10,9 +10,9 @@ import ThreadExtensions
 
 class DeliciousImportMonitor: ObservableObject {
     let model: Model
-    let list: CDList
-    let allPeople: CDList
-    let allPublishers: CDList
+    let list: CDRecord
+    let allPeople: CDRecord
+    let allPublishers: CDRecord
     let context: NSManagedObjectContext
     
     var count = 0
@@ -22,14 +22,14 @@ class DeliciousImportMonitor: ObservableObject {
     init(model: Model, context: NSManagedObjectContext) {
         self.model = model
         self.context = context
-        self.list = CDList(context: context)
-        self.allPeople = CDList.allPeople(in: context)
-        self.allPublishers = CDList.allPublishers(in: context)
+        self.list = CDRecord(context: context)
+        self.allPeople = CDRecord.allPeople(in: context)
+        self.allPublishers = CDRecord.allPublishers(in: context)
 
         let date = Date()
         let formatted = DateFormatter.localizedString(from: date, dateStyle: .short, timeStyle: .none)
         list.name = "Delicious Library \(formatted)"
-        list.container = CDList.allImports(in: context)
+        CDRecord.allImports(in: context).addToContents(list)
         list.set(date, forKey: "imported")
     }
 }
@@ -43,11 +43,13 @@ extension DeliciousImportMonitor: ImportMonitor {
     
     func session(_ session: ImportSession, didImport item: Any) {
         if let importedBook = item as? DeliciousLibraryImportSession.Book {
-            let book: CDList
+            let book: CDRecord
             if let id = UUID(uuidString: importedBook.id) { // TODO: just use the id we're given here?
-                book = CDList.withId(id.uuidString, in: context)
+                book = CDRecord.findOrMakeWithID(id.uuidString, in: context) { newBook in
+                    newBook.kind = .book
+                }
             } else {
-                book = CDList.named(importedBook.title, in: context)
+                book = CDRecord.named(importedBook.title, in: context)
             }
             
             book.name = importedBook.title
@@ -65,18 +67,18 @@ extension DeliciousImportMonitor: ImportMonitor {
             
             if let authors = importedBook.properties[.authorsKey] as? [String] {
                 for author in authors {
-                    let list = CDList.named(author, in: context)
-                    list.container = allPeople
+                    let list = CDRecord.named(author, in: context)
+                    allPeople.addToContents(list)
                     
-                    let authorList = list.lists?.first(where: { $0.name == "author" }) ?? list.addList(withName: "author")
+                    let authorList = list.findOrMakeChildListWithName("As Author", kind: .role)
                     authorList.add(book)
                 }
             }
 
             if let publishers = importedBook.properties[.publishersKey] as? [String] {
                 for publisher in publishers {
-                    let list = CDList.named(publisher, in: context)
-                    list.container = self.allPublishers
+                    let list = CDRecord.named(publisher, in: context)
+                    self.allPublishers.addToContents(list)
                     list.add(book)
                 }
             }

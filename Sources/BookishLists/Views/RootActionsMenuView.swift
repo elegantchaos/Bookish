@@ -23,15 +23,15 @@ struct RootActionsMenuView: View {
     }
     
     func handleAddList() {
-        let list : CDList = model.add()
-        if let selection = model.selection, let container = CDList.withId(selection, in: model.stack.viewContext) {
-            list.container = container
+        let list : CDRecord = model.add(.list)
+        if let selection = model.selection, let container = CDRecord.withId(selection, in: model.stack.viewContext) {
+            container.addToContents(list)
         }
         model.selection = list.id
     }
 
     func handleAddGroup() {
-        let list: CDList = model.add()
+        let list: CDRecord = model.add(.group)
         model.selection = list.id
     }
 

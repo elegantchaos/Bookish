@@ -21,7 +21,7 @@ struct ListIndexView: View {
     @EnvironmentObject var model: Model
     @Environment(\.managedObjectContext) var context
     @Environment(\.editMode) var editMode
-    @ObservedObject var list: CDList
+    @ObservedObject var list: CDRecord
     @State var selection: String?
     @State var filter: String = ""
     
