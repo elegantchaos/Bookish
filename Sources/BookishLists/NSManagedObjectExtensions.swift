@@ -51,7 +51,8 @@ extension NSManagedObject {
      */
     
     public class func everyEntity<T: NSManagedObject>(in context: NSManagedObjectContext, sorting: [NSSortDescriptor]? = nil) -> [T] {
-        return context.everyEntity(type: self, sorting: sorting)
+        let entities: [T] = context.everyEntity(type: T.self, sorting: sorting)
+        return entities
     }
     
     /**

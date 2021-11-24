@@ -15,7 +15,7 @@ struct PreferencesView: View {
         NavigationView {
             VStack {
                 Button(action: handleRemoveAll) {
-                    Text("Remove All Data")
+                    Text("Wipe Data And Exit")
                 }
                 
                 LoggerChannelsView()

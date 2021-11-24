@@ -104,17 +104,40 @@ extension CDRecord {
         return nil
     }
     
-    class func findOrMakeWithName(_ name: String, in context: NSManagedObjectContext, creationCallback: CreationCallback) -> CDRecord {
+    class func findOrMakeWithName(_ name: String, kind: Kind? = nil, in context: NSManagedObjectContext, creationCallback: CreationCallback? = nil) -> CDRecord {
         let request: NSFetchRequest<CDRecord> = CDRecord.fetcher(in: context)
-        request.predicate = NSPredicate(format: "name = %@", name)
+        if let kindCode = kind?.rawValue {
+            request.predicate = NSPredicate(format: "(name = %@) and (kindCode = \(kindCode))", name)
+        } else {
+            request.predicate = NSPredicate(format: "name = %@", name)
+        }
+        
         if let results = try? context.fetch(request), let object = results.first {
             return object
         }
 
         let object = CDRecord(in: context)
         object.name = name
-        creationCallback(object)
+        if let kindCode = kind?.rawValue {
+            object.kindCode = kindCode
+        }
+        
+        if let callback = creationCallback {
+            callback(object)
+        }
+        
         return object
+    }
+
+    class func countOfKind(_ kind: Kind, in context: NSManagedObjectContext) -> Int {
+        let request: NSFetchRequest<CDRecord> = CDRecord.fetcher(in: context)
+        request.predicate = NSPredicate(format: "kindCode = \(kind.rawValue)")
+        request.resultType = .countResultType
+        if let count = try? context.count(for: request) {
+            return count
+        }
+        
+        return 0
     }
 
 }

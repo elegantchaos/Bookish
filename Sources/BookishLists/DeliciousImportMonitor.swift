@@ -13,6 +13,7 @@ class DeliciousImportMonitor: ObservableObject {
     let list: CDRecord
     let allPeople: CDRecord
     let allPublishers: CDRecord
+    let allSeries: CDRecord
     let context: NSManagedObjectContext
     
     var count = 0
@@ -25,7 +26,8 @@ class DeliciousImportMonitor: ObservableObject {
         self.list = CDRecord(context: context)
         self.allPeople = context.allPeople
         self.allPublishers = context.allPublishers
-        
+        self.allSeries = context.allSeries
+
         let date = Date()
         let formatted = DateFormatter.localizedString(from: date, dateStyle: .short, timeStyle: .none)
         list.name = "Delicious Library \(formatted)"
@@ -70,9 +72,7 @@ extension DeliciousImportMonitor: ImportMonitor {
             
             if let authors = importedBook.properties[.authorsKey] as? [String] {
                 for author in authors {
-                    let list = CDRecord.findOrMakeWithName(author, in: context) { newAuthor in
-                        newAuthor.kind = .person
-                    }
+                    let list = CDRecord.findOrMakeWithName(author, kind: .person, in: context)
                     allPeople.addToContents(list)
                     
                     let authorList = list.findOrMakeChildListWithName("As Author", kind: .personRole)
@@ -82,15 +82,19 @@ extension DeliciousImportMonitor: ImportMonitor {
 
             if let publishers = importedBook.properties[.publishersKey] as? [String] {
                 for publisher in publishers {
-                    let list = CDRecord.findOrMakeWithName(publisher, in: context) { newPublisher in
-                        newPublisher.kind = .publisher
-                    }
-
+                    let list = CDRecord.findOrMakeWithName(publisher, kind: .publisher, in: context)
                     self.allPublishers.addToContents(list)
                     list.add(book)
                 }
             }
 
+            if let series = importedBook.properties[.seriesKey] as? String, !series.isEmpty {
+                let list = CDRecord.findOrMakeWithName(series, kind: .series, in: context)
+                self.allSeries.addToContents(list)
+                list.add(book)
+
+            }
+            save()
         }
     }
     

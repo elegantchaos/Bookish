@@ -59,8 +59,8 @@ struct SelectionCountView: View {
     
     var body: some View {
         return HStack {
-            if stats.lists > 0 {
-                Text("\(stats.lists) lists")
+            if stats.items > 0 {
+                Text("\(stats.items) items")
             }
 //
 //            if stats.books > 0 {

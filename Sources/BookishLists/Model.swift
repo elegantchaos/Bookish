@@ -39,18 +39,18 @@ struct ImportProgress {
 
 struct SelectionStats {
     let books: Int
-    let lists: Int
+    let items: Int
     
     init(selection: String?, context: NSManagedObjectContext) {
         if selection == .allBooksID {
-            books = CDRecord.countEntities(in: context)
-            lists = 0
-        } else if let id = selection, let list = CDRecord.withId(id, in: context) {
-            books = 0 // list.books?.count ?? 0 // TODO: fix this
-            lists = list.contents?.count ?? 0
+            items = CDRecord.countOfKind(.book, in: context)
+            books = items
+        } else if let id = selection, let contents = CDRecord.withId(id, in: context)?.contents {
+            items = contents.count
+            books = contents.filter({ $0.kindCode == CDRecord.Kind.book.rawValue }).count
         } else {
             books = 0
-            lists = 0
+            items = 0
         }
     }
 }
