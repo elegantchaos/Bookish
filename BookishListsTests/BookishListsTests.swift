@@ -1,14 +1,12 @@
-//
-//  Samedi_s_CraftingTests.swift
-//  Samedi's CraftingTests
-//
-//  Created by Sam Developer on 11/01/2021.
-//
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+//  Created by Sam Deane on 25/11/21.
+//  All code (c) 2021 - present day, Elegant Chaos Limited.
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 import XCTest
-@testable import Samedi_s_Crafting
+@testable import BookistLists
 
-class Samedi_s_CraftingTests: XCTestCase {
+class BookishListsTests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
