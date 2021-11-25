@@ -3,6 +3,7 @@
 //  All code (c) 2018 - present day, Elegant Chaos Limited.
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
+import Coercion
 import Foundation
 import ISBN
 import Logger
@@ -25,21 +26,21 @@ extension Dictionary where Key == String, Value == Any {
     }
 
     mutating func extractString(forKey key: Key, as asKey: Key? = nil, from source: inout Self) {
-        if let string = source[key] as? String {
+        if let string = source[asString: key] {
             source.removeValue(forKey: key)
             self[asKey ?? key] = string
         }
     }
 
     mutating func extractDate(forKey key: Key, as asKey: Key? = nil, from source: inout Self) {
-        if let string = source[key] as? Date {
+        if let string = source[asDate: key] {
             source.removeValue(forKey: key)
             self[asKey ?? key] = string
         }
     }
 
     mutating func extractStringList(forKey key: Key, separator: Character = "\n", as asKey: Key? = nil, from source: inout Self) {
-        if let string = source[key] as? String {
+        if let string = source[asString: key] {
             source.removeValue(forKey: key)
             let trimSet = CharacterSet.whitespacesAndNewlines
             self[asKey ?? key] = string.split(separator: separator).map({ $0.trimmingCharacters(in: trimSet) })
@@ -48,19 +49,19 @@ extension Dictionary where Key == String, Value == Any {
     
     mutating func extractISBN(as asKey: Key = .isbnKey, from source: inout Self) {
         // NB we leave the original delicious ean/isbn keys in the source so they get stored unmodified
-        if let ean = source["ean"] as? String, ean.isISBN13 {
+        if let ean = source[asString: "ean"], ean.isISBN13 {
             self[asKey] = ean
-        } else if let value = source["isbn"] as? String {
+        } else if let value = source[asString: "isbn"] {
             let trimmed = value.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
             self[.isbnKey] = trimmed.isbn10to13
         }
     }
 
     mutating func extractID(from source: inout Self) -> String {
-        if let uuid = source["uuidString"] as? String {
+        if let uuid = source[asString: "uuidString"] {
             source.removeValue(forKey: "uuidString")
             return uuid
-        } else if let uuid = source["foreignUUIDString"] as? String {
+        } else if let uuid = source[asString: "foreignUUIDString"] {
             source.removeValue(forKey: "foreignUUIDString")
             return uuid
         } else {
@@ -124,14 +125,16 @@ public class DeliciousLibraryImportSession: URLImportSession {
 
             var urls: [URL] = []
             for key in ["coverImageLargeURLString", "coverImageMediumURLString", "coverImageSmallURLString"] {
-                if let string = unprocessed[key] as? String, let url = URL(string: string) {
+                if let string = unprocessed[asString: key], let url = URL(string: string) {
                     urls.append(url)
                     unprocessed.removeValue(forKey: key)
                 }
             }
 
             for (key, value) in unprocessed {
-                processed["delicious.\(key)"] = value
+                if (value as? Int != 0) && (value as? String != "") {
+                    processed["delicious.\(key)"] = value
+                }
             }
             
             images = urls

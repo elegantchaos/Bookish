@@ -4,12 +4,20 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 import Foundation
-import CoreData
 import Logger
 import Expressions
 
 public class SeriesCleaner {
-    let detectors = [ NameSeriesBookBracketsDetector(), TitleInSeriesDetector(), SeriesBracketsBookNumberDetector(), SeriesBracketsBookDetector(), NameBookSeriesBracketsSDetector(), SeriesBracketsSBookDetector(), SubtitleBookDetector(), SeriesNameBookDetector()]
+    let detectors = [
+        NameSeriesBookBracketsDetector(),
+        TitleInSeriesDetector(),
+        SeriesBracketsBookNumberDetector(),
+        SeriesBracketsBookDetector(),
+        NameBookSeriesBracketsSDetector(),
+        SeriesBracketsSBookDetector(),
+        SubtitleBookDetector(),
+        SeriesNameBookDetector()
+    ]
     
     public init() {
     }

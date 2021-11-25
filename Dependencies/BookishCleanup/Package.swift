@@ -14,6 +14,7 @@ let package = Package(
     ],
     
     dependencies: [
+        .package(url: "https://github.com/elegantchaos/ElegantStrings.git", from: "1.0.2"),
         .package(url: "https://github.com/elegantchaos/Expressions.git", from: "1.1.1"),
         .package(url: "https://github.com/elegantchaos/Logger.git", from: "1.7.3"),
     ],
@@ -21,7 +22,7 @@ let package = Package(
     targets: [
         .target(
             name: "BookishCleanup",
-            dependencies: ["Expressions", "Logger"]
+            dependencies: ["ElegantStrings", "Expressions", "Logger"]
         ),
         
         .testTarget(

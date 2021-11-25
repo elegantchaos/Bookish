@@ -5,6 +5,7 @@
 
 import BookishCleanup
 import BookishImporter
+import Coercion
 import CoreData
 import Foundation
 import ThreadExtensions
@@ -17,6 +18,7 @@ class DeliciousImportMonitor: ObservableObject {
     let allSeries: CDRecord
     let context: NSManagedObjectContext
     let seriesCleaner: SeriesCleaner
+    let publisherCleaner: PublisherCleaner
     
     var count = 0
     var done = 0
@@ -30,6 +32,7 @@ class DeliciousImportMonitor: ObservableObject {
         self.allPublishers = context.allPublishers
         self.allSeries = context.allSeries
         self.seriesCleaner = SeriesCleaner()
+        self.publisherCleaner = PublisherCleaner()
         
         let date = Date()
         let formatted = DateFormatter.localizedString(from: date, dateStyle: .short, timeStyle: .none)
@@ -47,11 +50,52 @@ extension DeliciousImportMonitor: ImportMonitor {
         report(label: "Importing…")
     }
     
+    func cleanupPublisher(_ raw: DeliciousLibraryImportSession.Book) -> DeliciousLibraryImportSession.Book {
+        let title = raw.title
+        let subtitle = raw.properties[asString: .subtitleKey, default: ""]
+        let series = raw.properties[asString: .seriesKey, default: ""]
+        let publishers = (raw.properties[.publishersKey] as? [String]) ?? []
+
+        guard let cleaned = publisherCleaner.cleanup(book: .init(title: title, subtitle: subtitle, publishers: publishers, series: series)) else {
+            return raw
+        }
+
+        var book = raw
+        if book.title != cleaned.title {
+            book.properties["original.title"] = book.title
+            book.title = cleaned.title
+        }
+         
+        if subtitle != cleaned.subtitle {
+            if !subtitle.isEmpty {
+                book.properties["original.subtitle"] = subtitle
+            }
+            book.properties[.subtitleKey] = cleaned.subtitle.isEmpty ? nil : cleaned.subtitle
+        }
+        
+        if series != cleaned.series {
+            if !series.isEmpty {
+                book.properties["original.series"] = series
+            }
+            book.properties[.seriesKey] = cleaned.series.isEmpty ? nil : cleaned.series
+        }
+
+        if publishers != cleaned.publishers {
+            if !publishers.isEmpty {
+                book.properties["original.publisher"] = publishers
+            }
+            book.properties[.publishersKey] = cleaned.publishers.isEmpty ? nil : cleaned.publishers
+        }
+
+        return book
+
+    }
+    
     func cleanupSeries(_ raw: DeliciousLibraryImportSession.Book) -> DeliciousLibraryImportSession.Book {
         let title = raw.title
-        let subtitle = (raw.properties[.subtitleKey] as? String) ?? ""
-        let series = (raw.properties[.seriesKey] as? String) ?? ""
-        let position = (raw.properties[.seriesPositionKey] as? Int) ?? 0
+        let subtitle = raw.properties[asString: .subtitleKey, default: ""]
+        let series = raw.properties[asString: .seriesKey, default: ""]
+        let position = raw.properties[asInt: .seriesPositionKey, default: 0]
         
         guard let cleaned = seriesCleaner.cleanup(book: .init(title: title, subtitle: subtitle, series: series, position: position)) else {
             return raw
@@ -89,7 +133,7 @@ extension DeliciousImportMonitor: ImportMonitor {
     
     func session(_ session: ImportSession, didImport item: Any) {
         if let rawBook = item as? DeliciousLibraryImportSession.Book {
-            let importedBook = cleanupSeries(rawBook)
+            let importedBook = cleanupSeries(cleanupPublisher(rawBook))
             
             let book: CDRecord
             if let id = UUID(uuidString: importedBook.id) { // TODO: just use the id we're given here?
@@ -176,3 +220,25 @@ extension DeliciousImportMonitor: ImportMonitor {
         }
     }
 }
+
+// TODO: move into Coercion
+
+
+public extension Dictionary {
+    subscript(asString key: Key, default defaultValue: String, converter: Converter = StandardConverter.shared) -> String {
+        return converter.asString(self[key]) ?? defaultValue
+    }
+
+    subscript(asInt key: Key, default defaultValue: Int, converter: Converter = StandardConverter.shared) -> Int {
+        return converter.asInt(self[key]) ?? defaultValue
+    }
+
+    subscript(asDouble key: Key, default defaultValue: Double, converter: Converter = StandardConverter.shared) -> Double {
+        return converter.asDouble(self[key]) ?? defaultValue
+    }
+    
+    subscript(asDate key: Key, default defaultValue: Date, converter: Converter = StandardConverter.shared) -> Date {
+        return converter.asDate(self[key]) ?? defaultValue
+    }
+}
+
