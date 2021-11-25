@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -45,6 +45,9 @@
 		8B6CAAC8252B2C8B00FF2035 /* KeyValueStore in Frameworks */ = {isa = PBXBuildFile; productRef = 8B6CAAC7252B2C8B00FF2035 /* KeyValueStore */; };
 		8B80467325B8788900698F28 /* SheetController in Frameworks */ = {isa = PBXBuildFile; productRef = 8B80467225B8788900698F28 /* SheetController */; };
 		8B80467D25B87C4A00698F28 /* LoggerUI in Frameworks */ = {isa = PBXBuildFile; productRef = 8B80467C25B87C4A00698F28 /* LoggerUI */; };
+		8B8A88E5274FCAD700EA2FAA /* BookishImporter in Frameworks */ = {isa = PBXBuildFile; productRef = 8B8A88E4274FCAD700EA2FAA /* BookishImporter */; };
+		8B8A88E7274FCADB00EA2FAA /* BookishImporterSamples in Frameworks */ = {isa = PBXBuildFile; productRef = 8B8A88E6274FCADB00EA2FAA /* BookishImporterSamples */; };
+		8B8A88E9274FCC1A00EA2FAA /* BookishCleanup in Frameworks */ = {isa = PBXBuildFile; productRef = 8B8A88E8274FCC1A00EA2FAA /* BookishCleanup */; };
 		8B987C9F25C047E5003D6F9F /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B987C9E25C047E5003D6F9F /* CoreDataStack.swift */; };
 		8B987CAB25C04876003D6F9F /* BookishLists.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8B987CA925C04876003D6F9F /* BookishLists.xcdatamodeld */; };
 		8B987CB525C06708003D6F9F /* LabelIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B987CB425C06708003D6F9F /* LabelIconView.swift */; };
@@ -68,7 +71,6 @@
 		8BE1494125DD7D7D00A1DC32 /* FieldList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE1494025DD7D7D00A1DC32 /* FieldList.swift */; };
 		8BED2A1825C97D29000DD7C6 /* CDProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BED2A1725C97D29000DD7C6 /* CDProperty.swift */; };
 		8BED2A2425CAC0D1000DD7C6 /* Images in Frameworks */ = {isa = PBXBuildFile; productRef = 8BED2A2325CAC0D1000DD7C6 /* Images */; };
-		8BF9CCC1260BA99B000CA4A5 /* BookishImporterSamples in Frameworks */ = {isa = PBXBuildFile; productRef = 8BF9CCC0260BA99B000CA4A5 /* BookishImporterSamples */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -166,16 +168,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B8A88E5274FCAD700EA2FAA /* BookishImporter in Frameworks */,
 				8B57F07C25F7B989007DB517 /* AVFoundation.framework in Frameworks */,
+				8B8A88E7274FCADB00EA2FAA /* BookishImporterSamples in Frameworks */,
 				8BED2A2425CAC0D1000DD7C6 /* Images in Frameworks */,
 				8B1F110725ADF4FD00108A34 /* Logger in Frameworks */,
+				8B8A88E9274FCC1A00EA2FAA /* BookishCleanup in Frameworks */,
 				8B1F112F25ADF56F00108A34 /* Localization in Frameworks */,
 				8B2A7CC825AE140A0024C1A2 /* ThreadExtensions in Frameworks */,
 				8B58C7B425B71528007F6B70 /* CloudKit.framework in Frameworks */,
 				8B1F114225ADFB0D00108A34 /* ISBN in Frameworks */,
 				8B1AF906274FBB12001BFB00 /* Expressions in Frameworks */,
 				8B1F10F725ADE46500108A34 /* SwiftUIExtensions in Frameworks */,
-				8BF9CCC1260BA99B000CA4A5 /* BookishImporterSamples in Frameworks */,
 				8B57F09025F7C6BD007DB517 /* CaptureView in Frameworks */,
 				8B80467325B8788900698F28 /* SheetController in Frameworks */,
 				8B80467D25B87C4A00698F28 /* LoggerUI in Frameworks */,
@@ -409,8 +413,10 @@
 				8B80467C25B87C4A00698F28 /* LoggerUI */,
 				8BED2A2325CAC0D1000DD7C6 /* Images */,
 				8B57F08F25F7C6BD007DB517 /* CaptureView */,
-				8BF9CCC0260BA99B000CA4A5 /* BookishImporterSamples */,
 				8B1AF905274FBB12001BFB00 /* Expressions */,
+				8B8A88E4274FCAD700EA2FAA /* BookishImporter */,
+				8B8A88E6274FCADB00EA2FAA /* BookishImporterSamples */,
+				8B8A88E8274FCC1A00EA2FAA /* BookishCleanup */,
 			);
 			productName = "Samedi's Crafting";
 			productReference = 226F15D7251A28EA00D6B12E /* Bookish Lists.app */;
@@ -495,7 +501,7 @@
 				};
 			};
 			buildConfigurationList = 226F15D2251A28EA00D6B12E /* Build configuration list for PBXProject "BookishLists" */;
-			compatibilityVersion = "Xcode 9.3";
+			compatibilityVersion = "Xcode 12.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -1094,14 +1100,22 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = LoggerUI;
 		};
+		8B8A88E4274FCAD700EA2FAA /* BookishImporter */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = BookishImporter;
+		};
+		8B8A88E6274FCADB00EA2FAA /* BookishImporterSamples */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = BookishImporterSamples;
+		};
+		8B8A88E8274FCC1A00EA2FAA /* BookishCleanup */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = BookishCleanup;
+		};
 		8BED2A2325CAC0D1000DD7C6 /* Images */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 8BED2A2225CAC0D1000DD7C6 /* XCRemoteSwiftPackageReference "Images" */;
 			productName = Images;
-		};
-		8BF9CCC0260BA99B000CA4A5 /* BookishImporterSamples */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = BookishImporterSamples;
 		};
 /* End XCSwiftPackageProductDependency section */
 

@@ -21,6 +21,7 @@ public extension String {
     static let publishedDateKey = "published"
     static let publishersKey = "publishers"
     static let seriesKey = "series"
+    static let seriesPositionKey = "seriesPosition"
     static let subtitleKey = "subtitle"
     static let widthKey = "width"
 }

@@ -8,8 +8,11 @@ import CoreData
 import Logger
 import Expressions
 
-class SeriesCleaner {
+public class SeriesCleaner {
     let detectors = [ NameSeriesBookBracketsDetector(), TitleInSeriesDetector(), SeriesBracketsBookNumberDetector(), SeriesBracketsBookDetector(), NameBookSeriesBracketsSDetector(), SeriesBracketsSBookDetector(), SubtitleBookDetector(), SeriesNameBookDetector()]
+    
+    public init() {
+    }
     
     let bookIndexPatterns = [
         try! NSRegularExpression(pattern: "(.*)\\:{0,1} Bk\\.{0,1} *(\\d+)"),
@@ -17,11 +20,18 @@ class SeriesCleaner {
         try! NSRegularExpression(pattern: "(.*)\\:{0,1} No\\.{0,1} *(\\d+)")
     ]
     
-    struct Book {
-        var title: String
-        var subtitle: String
-        var series: String
-        var position: Int
+    public struct Book {
+        public var title: String
+        public var subtitle: String
+        public var series: String
+        public var position: Int
+
+        public init(title: String, subtitle: String, series: String, position: Int) {
+            self.title = title
+            self.subtitle = subtitle
+            self.series = series
+            self.position = position
+        }
     }
     
     public func cleanup(book input: Book) -> Book? {

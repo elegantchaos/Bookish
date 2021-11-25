@@ -47,12 +47,11 @@ extension Dictionary where Key == String, Value == Any {
     }
     
     mutating func extractISBN(as asKey: Key = .isbnKey, from source: inout Self) {
+        // NB we leave the original delicious ean/isbn keys in the source so they get stored unmodified
         if let ean = source["ean"] as? String, ean.isISBN13 {
-            source.removeValue(forKey: "ean")
             self[asKey] = ean
         } else if let value = source["isbn"] as? String {
             let trimmed = value.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-            source.removeValue(forKey: "isbn")
             self[.isbnKey] = trimmed.isbn10to13
         }
     }
@@ -91,8 +90,8 @@ public class DeliciousLibraryImporter: Importer {
 public class DeliciousLibraryImportSession: URLImportSession {
     public struct Book {
         public let id: String
-        public let title: String
-        public let properties: [String:Any]
+        public var title: String
+        public var properties: [String:Any]
         public let images: [URL]
         
         init?(info: Validated) {
@@ -107,13 +106,14 @@ public class DeliciousLibraryImportSession: URLImportSession {
             
             processed.extractString(forKey: "subtitle", as: .subtitleKey, from: &unprocessed)
             processed.extractString(forKey: "asin", as: .asinKey, from: &unprocessed)
-            processed.extractString(forKey: "dewey", as: .deweyKey, from: &unprocessed)
+            processed.extractString(forKey: "deweyDecimal", as: .deweyKey, from: &unprocessed)
             processed.extractString(forKey: "seriesSingularString", as: .seriesKey, from: &unprocessed)
             processed.extractISBN(from: &unprocessed)
             processed.extractNonZeroDouble(forKey: "boxHeightInInches", as: .heightKey, from: &unprocessed)
             processed.extractNonZeroDouble(forKey: "boxWidthInInches", as: .widthKey, from: &unprocessed)
             processed.extractNonZeroDouble(forKey: "boxLengthInInches", as: .lengthKey, from: &unprocessed)
             processed.extractNonZeroInt(forKey: "pages", as: .pagesKey, from: &unprocessed)
+            processed.extractNonZeroInt(forKey: "numberInSeries", as: .seriesPositionKey, from: &unprocessed)
             processed.extractDate(forKey: "creationDate", as: .addedDateKey, from: &unprocessed)
             processed.extractDate(forKey: "lastModificationDate", as: .modifiedDateKey, from: &unprocessed)
             processed.extractDate(forKey: "publishDate", as: .publishedDateKey, from: &unprocessed)

@@ -3,6 +3,7 @@
 //  All code (c) 2021 - present day, Elegant Chaos Limited.
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
+import BookishCleanup
 import BookishImporter
 import CoreData
 import Foundation
@@ -15,6 +16,7 @@ class DeliciousImportMonitor: ObservableObject {
     let allPublishers: CDRecord
     let allSeries: CDRecord
     let context: NSManagedObjectContext
+    let seriesCleaner: SeriesCleaner
     
     var count = 0
     var done = 0
@@ -27,7 +29,8 @@ class DeliciousImportMonitor: ObservableObject {
         self.allPeople = context.allPeople
         self.allPublishers = context.allPublishers
         self.allSeries = context.allSeries
-
+        self.seriesCleaner = SeriesCleaner()
+        
         let date = Date()
         let formatted = DateFormatter.localizedString(from: date, dateStyle: .short, timeStyle: .none)
         list.name = "Delicious Library \(formatted)"
@@ -44,8 +47,50 @@ extension DeliciousImportMonitor: ImportMonitor {
         report(label: "Importing…")
     }
     
+    func cleanupSeries(_ raw: DeliciousLibraryImportSession.Book) -> DeliciousLibraryImportSession.Book {
+        let title = raw.title
+        let subtitle = (raw.properties[.subtitleKey] as? String) ?? ""
+        let series = (raw.properties[.seriesKey] as? String) ?? ""
+        let position = (raw.properties[.seriesPositionKey] as? Int) ?? 0
+        
+        guard let cleaned = seriesCleaner.cleanup(book: .init(title: title, subtitle: subtitle, series: series, position: position)) else {
+            return raw
+        }
+        
+        var book = raw
+        if book.title != cleaned.title {
+            book.properties["original.title"] = book.title
+            book.title = cleaned.title
+        }
+         
+        if subtitle != cleaned.subtitle {
+            if !subtitle.isEmpty {
+                book.properties["original.subtitle"] = subtitle
+            }
+            book.properties[.subtitleKey] = cleaned.subtitle.isEmpty ? nil : cleaned.subtitle
+        }
+        
+        if series != cleaned.series {
+            if !series.isEmpty {
+                book.properties["original.series"] = series
+            }
+            book.properties[.seriesKey] = cleaned.series.isEmpty ? nil : cleaned.series
+        }
+        
+        if position != cleaned.position {
+            if position != 0 {
+                book.properties["original.position"] = position
+            }
+            book.properties[.seriesPositionKey] = cleaned.position == 0 ? nil : cleaned.position
+        }
+
+        return book
+    }
+    
     func session(_ session: ImportSession, didImport item: Any) {
-        if let importedBook = item as? DeliciousLibraryImportSession.Book {
+        if let rawBook = item as? DeliciousLibraryImportSession.Book {
+            let importedBook = cleanupSeries(rawBook)
+            
             let book: CDRecord
             if let id = UUID(uuidString: importedBook.id) { // TODO: just use the id we're given here?
                 book = CDRecord.findOrMakeWithID(id.uuidString, in: context) { newBook in
