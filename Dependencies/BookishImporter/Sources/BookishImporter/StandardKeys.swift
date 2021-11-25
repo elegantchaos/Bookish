@@ -10,6 +10,7 @@ public extension String {
     static let asinKey = "asin"
     static let authorsKey = "authors"
     static let deweyKey = "dewey"
+    static let editionsKey = "editions"
     static let formatKey = "format"
     static let genresKey = "genres"
     static let heightKey = "height"

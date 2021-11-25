@@ -41,9 +41,12 @@ extension Dictionary where Key == String, Value == Any {
 
     mutating func extractStringList(forKey key: Key, separator: Character = "\n", as asKey: Key? = nil, from source: inout Self) {
         if let string = source[asString: key] {
-            source.removeValue(forKey: key)
-            let trimSet = CharacterSet.whitespacesAndNewlines
-            self[asKey ?? key] = string.split(separator: separator).map({ $0.trimmingCharacters(in: trimSet) })
+            let items = string.split(separator: separator)
+            if items.count > 0 {
+                source.removeValue(forKey: key)
+                let trimSet = CharacterSet.whitespacesAndNewlines
+                self[asKey ?? key] = items.map({ $0.trimmingCharacters(in: trimSet) })
+            }
         }
     }
     
@@ -119,6 +122,7 @@ public class DeliciousLibraryImportSession: URLImportSession {
             processed.extractDate(forKey: "lastModificationDate", as: .modifiedDateKey, from: &unprocessed)
             processed.extractDate(forKey: "publishDate", as: .publishedDateKey, from: &unprocessed)
             processed.extractStringList(forKey: "creatorsCompositeString", as: .authorsKey, from: &unprocessed)
+            processed.extractStringList(forKey: "editionsCompositeString", as: .editionsKey, from: &unprocessed)
             processed.extractStringList(forKey: "publishersCompositeString", as: .publishersKey, from: &unprocessed)
             processed.extractStringList(forKey: "genresCompositeString", as: .genresKey, from: &unprocessed)
             processed.extractStringList(forKey: "illustratorsCompositeString", as: .illustratorsKey, from: &unprocessed)
