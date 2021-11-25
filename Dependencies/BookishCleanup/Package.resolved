@@ -1,0 +1,25 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Expressions",
+        "repositoryURL": "https://github.com/elegantchaos/Expressions.git",
+        "state": {
+          "branch": null,
+          "revision": "3f1a4caccb9e33d95d0650e9b78350acd3576300",
+          "version": "1.1.1"
+        }
+      },
+      {
+        "package": "Logger",
+        "repositoryURL": "https://github.com/elegantchaos/Logger.git",
+        "state": {
+          "branch": null,
+          "revision": "50da0037cd25c2f9444effbb2afe15bb00f70a98",
+          "version": "1.7.3"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
