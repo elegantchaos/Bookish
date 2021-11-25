@@ -14,6 +14,9 @@ struct BookView: View {
     @ObservedObject var fields: FieldList
     @State var selection: String?
     
+    @AppStorage("showLinks") var showLinks = true
+    @AppStorage("showRaw") var  showRaw = false
+    
     var body: some View {
         ScrollView {
             VStack {
@@ -57,33 +60,30 @@ struct BookView: View {
                     }
                 }
                 
-                DisclosureGroup("Links") {
+                DisclosureGroup("Links", isExpanded: $showLinks) {
                     VStack(alignment: .leading) {
                         if let contained = book.containedBy?.sortedByName {
                             ForEach(contained) { item in
-                                RecordLink(item, nameMode: .includeRole, selection: $selection)
+                                HStack {
+                                    RecordLink(item, nameMode: .includeRole, selection: $selection)
+                                        .foregroundColor(.primary)
+                                    Spacer()
+                                }
                             }
                         }
                     }
                 }
                 
-                DisclosureGroup("Raw Properties") {
-                    LazyVStack {
+                DisclosureGroup("Raw Properties", isExpanded: $showRaw) {
+                    LazyVStack(alignment: .leading) {
                         let keys = book.sortedKeys
                         ForEach(keys, id: \.self) { key in
-                            HStack {
-                                if let value = book.property(forKey: key) {
-                                    let string = String(describing: value)
-                                    if !string.isEmpty {
-                                        Text(key)
-                                        Spacer()
-                                        Text(string)
-                                    }
-                                }
+                            if let value = book.property(forKey: key) {
+                                RawPropertyView(key: key, value: value)
+                                    .padding(.bottom)
                             }
                         }
                     }
-                    .padding()
                 }
             }
             .padding()
@@ -108,5 +108,27 @@ struct BookView: View {
     
     func handleDisappear() {
         model.save()
+    }
+}
+
+struct RawPropertyView: View {
+    let key: String
+    let value: Any
+    
+    var body: some View {
+        let string: String
+        if let list = value as? [String] {
+            string = list.joined(separator: ", ")
+        } else {
+            string = String(describing: value)
+        }
+        
+        return VStack(alignment: .leading) {
+        if !string.isEmpty {
+            Text(key)
+                .foregroundColor(.secondary)
+            Text(string)
+        }
+        }
     }
 }

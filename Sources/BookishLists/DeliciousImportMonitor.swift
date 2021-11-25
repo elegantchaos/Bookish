@@ -36,6 +36,7 @@ class DeliciousImportMonitor: ObservableObject {
         
         let date = Date()
         let formatted = DateFormatter.localizedString(from: date, dateStyle: .short, timeStyle: .none)
+        list.kind = .importSession
         list.name = "Delicious Library \(formatted)"
         list.set("Records imported from Delicious Library on \(formatted).", forKey: "notes")
         list.set(date, forKey: "imported")
@@ -78,8 +79,8 @@ extension DeliciousImportMonitor: ImportMonitor {
                 report(label: "Importing: \(importedBook.title)")
             }
             
-            addPeople(to: book, from: importedBook, withKey: .authorsKey, asRole: "As Author")
-            addPeople(to: book, from: importedBook, withKey: .illustratorsKey, asRole: "As Illustrator")
+            addPeople(to: book, from: importedBook, withKey: .authorsKey, asRole: "Author")
+            addPeople(to: book, from: importedBook, withKey: .illustratorsKey, asRole: "Illustrator")
 
             if let publishers = importedBook.properties[.publishersKey] as? [String] {
                 for publisher in publishers {

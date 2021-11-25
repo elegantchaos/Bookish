@@ -21,7 +21,13 @@ struct RecordLabel: View {
     
     var body: some View {
         Label {
-            Text(recordName)
+            HStack {
+                Text(recordName)
+                if let annotation = recordAnnotation {
+                    Text("(\(annotation))")
+                        .foregroundColor(.secondary)
+                }
+            }
         } icon: {
             if let url = record.imageURL {
                 LabelIconView(url: url, placeholder: imageName)
@@ -33,9 +39,20 @@ struct RecordLabel: View {
     
     var recordName: String {
         if nameMode == .includeRole, record.kind == .personRole, let person = record.containedBy?.first {
-            return "\(person.name) (\(record.name))"
+            return person.name
         } else {
             return record.name
+        }
+    }
+    
+    var recordAnnotation: String? {
+        guard nameMode == .includeRole else { return nil }
+        if record.kind == .personRole {
+            return record.name
+        } else if record.kind == .publisher {
+            return "Publisher"
+        } else {
+            return "\(record.kind)"
         }
     }
     
