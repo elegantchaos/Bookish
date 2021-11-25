@@ -30,9 +30,9 @@ struct RecordLabel: View {
             }
         } icon: {
             if let url = record.imageURL {
-                LabelIconView(url: url, placeholder: imageName)
+                LabelIconView(url: url, placeholder: record.kind.iconName)
             } else {
-                Image(systemName: imageName)
+                Image(systemName: record.kind.iconName)
             }
         }
     }
@@ -49,15 +49,15 @@ struct RecordLabel: View {
         guard nameMode == .includeRole else { return nil }
         if record.kind == .personRole {
             return record.name
-        } else if record.kind == .publisher {
-            return "Publisher"
         } else {
-            return "\(record.kind)"
+            return record.kind.roleLabel
         }
     }
-    
-    var imageName: String {
-        switch record.kind {
+}
+
+extension CDRecord.Kind {
+    var iconName: String {
+        switch self {
             case .book: return "book"
             case .group: return "folder"
             case .person: return "person"
@@ -70,6 +70,22 @@ struct RecordLabel: View {
                 
             default:
                 return "books.vertical"
+        }
+    }
+    
+    var roleLabel: String {
+        switch self {
+            case .publisher:
+                return "Publisher"
+
+            case .series:
+                return "Series"
+                
+            case .importSession:
+                return "Imported"
+
+            default:
+                return "\(self)"
         }
     }
 }
