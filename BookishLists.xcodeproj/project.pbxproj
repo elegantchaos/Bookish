@@ -13,6 +13,7 @@
 		226F15ED251A28F600D6B12E /* BookishListsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226F15EC251A28F600D6B12E /* BookishListsTests.swift */; };
 		226F15F8251A28F600D6B12E /* BookishListsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226F15F7251A28F600D6B12E /* BookishListsUITests.swift */; };
 		229E259B25254AED00C41777 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E259A25254AED00C41777 /* ContentView.swift */; };
+		8B012F502757D23B00FCF5DA /* FieldsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B012F4F2757D23B00FCF5DA /* FieldsView.swift */; };
 		8B1AF906274FBB12001BFB00 /* Expressions in Frameworks */ = {isa = PBXBuildFile; productRef = 8B1AF905274FBB12001BFB00 /* Expressions */; };
 		8B1AF911274FC32C001BFB00 /* BookishImporter in Resources */ = {isa = PBXBuildFile; fileRef = 8B1AF910274FC2E1001BFB00 /* BookishImporter */; };
 		8B1F10D225AC971A00108A34 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 226F15DE251A28F600D6B12E /* Assets.xcassets */; };
@@ -115,6 +116,7 @@
 		22ED67EC251E438200B0226D /* BookishLists.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BookishLists.entitlements; sourceTree = "<group>"; };
 		22F68595251B8B7D00E867CE /* Tools */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Tools; sourceTree = BUILT_PRODUCTS_DIR; };
 		22F68597251B8B7D00E867CE /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		8B012F4F2757D23B00FCF5DA /* FieldsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldsView.swift; sourceTree = "<group>"; };
 		8B1AF910274FC2E1001BFB00 /* BookishImporter */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = BookishImporter; path = Dependencies/BookishImporter; sourceTree = "<group>"; };
 		8B1F10D725ACB30A00108A34 /* ListIndexView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListIndexView.swift; sourceTree = "<group>"; };
 		8B1F10E125ADC28800108A34 /* EntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryView.swift; sourceTree = "<group>"; };
@@ -213,6 +215,7 @@
 				229E259A25254AED00C41777 /* ContentView.swift */,
 				8B1F10E125ADC28800108A34 /* EntryView.swift */,
 				8BE1493725DC250300A1DC32 /* FieldEditorView.swift */,
+				8B012F4F2757D23B00FCF5DA /* FieldsView.swift */,
 				8B602EF0274BF58400DE50A5 /* ListActionsMenuView.swift */,
 				8B1F10D725ACB30A00108A34 /* ListIndexView.swift */,
 				8B58C7CB25B84AB8007F6B70 /* PreferencesView.swift */,
@@ -588,6 +591,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B57F08625F7C0E9007DB517 /* GoogleLookupService.swift in Sources */,
+				8B012F502757D23B00FCF5DA /* FieldsView.swift in Sources */,
 				8BE1493825DC250300A1DC32 /* FieldEditorView.swift in Sources */,
 				8B57F08B25F7C0E9007DB517 /* LookupCandidate.swift in Sources */,
 				8BB6653B274D215A002CC0E8 /* NSManagedObjectExtensions.swift in Sources */,

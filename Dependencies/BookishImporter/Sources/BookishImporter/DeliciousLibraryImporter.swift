@@ -33,9 +33,9 @@ extension Dictionary where Key == String, Value == Any {
     }
 
     mutating func extractDate(forKey key: Key, as asKey: Key? = nil, from source: inout Self) {
-        if let string = source[asDate: key] {
+        if let date = source[asDate: key] {
             source.removeValue(forKey: key)
-            self[asKey ?? key] = string
+            self[asKey ?? key] = date
         }
     }
 

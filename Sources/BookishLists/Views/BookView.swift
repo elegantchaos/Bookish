@@ -45,20 +45,8 @@ struct BookView: View {
                     AsyncImageView(model.image(for: book, usePlacholder: false))
                         .frame(maxWidth: 256, maxHeight: 256)
                 }
-                .padding()
                 
-                ForEach(fields.fields) { field in
-                    if let value = book.property(forKey: field.key) {
-                        let string = String(describing: value)
-                        if !string.isEmpty {
-                            HStack {
-                                Text(field.key)
-                                Text(string)
-                                Spacer()
-                            }
-                        }
-                    }
-                }
+                FieldsView(record: book, fields: fields)
                 
                 DisclosureGroup("Links", isExpanded: $showLinks) {
                     VStack(alignment: .leading) {

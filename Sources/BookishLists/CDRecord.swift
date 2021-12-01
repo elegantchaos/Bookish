@@ -167,6 +167,10 @@ extension CDRecord {
         return property(forKey: key) as? String
     }
 
+    func date(forKey key: String) -> Date? {
+        return property(forKey: key) as? Date
+    }
+
     func dict<K,V>(forKey key: String) -> [K:V]? {
         return property(forKey: key) as? [K:V]
     }

@@ -182,4 +182,15 @@ class Model: ObservableObject {
             return images.image(for: book.imageURL)
         }
     }
+    
+    func makeDefaultFields() -> FieldList {
+        let list = FieldList()
+        list.addField(name: "added", kind: .date)
+        list.addField(name: "published", kind: .date)
+        list.addField(name: "asin", kind: .string)
+        list.addField(name: "isbn", kind: .string)
+        return list
+    }
+    
+    lazy var defaultFields = makeDefaultFields()
 }

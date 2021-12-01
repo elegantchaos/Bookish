@@ -11,6 +11,7 @@ class Field: ObservableObject, Identifiable {
     enum Kind: String, CaseIterable {
         case string
         case number
+        case date
         
         var label: String {
             rawValue.localized

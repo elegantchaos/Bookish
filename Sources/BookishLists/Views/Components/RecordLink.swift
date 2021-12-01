@@ -6,6 +6,8 @@
 import SwiftUI
 
 struct RecordLink: View {
+    @EnvironmentObject var model: Model
+    
     let record: CDRecord
     let list: CDRecord?
     let selection: Binding<String?>
@@ -21,7 +23,7 @@ struct RecordLink: View {
     var body: some View {
         NavigationLink(tag: record.id, selection: selection) {
             if record.isBook {
-                BookView(book: record, fields: list?.fields ?? FieldList())
+                BookView(book: record, fields: list?.fields ?? model.defaultFields)
             } else {
                 ListIndexView(list: record)
             }

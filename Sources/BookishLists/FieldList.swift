@@ -33,6 +33,11 @@ class FieldList: ObservableObject {
         fields.append(makeField())
     }
     
+    func addField(name: String, kind: Field.Kind) {
+        let field = makeField(name: name, kind: kind)
+        fields.append(field)
+    }
+    
     func makeField(name: String? = nil, kind: Field.Kind = .string) -> Field {
         let key = name ?? "Untitled \(kind)"
         let field = Field(key: key, kind: kind)
