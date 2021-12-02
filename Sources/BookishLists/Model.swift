@@ -187,6 +187,7 @@ class Model: ObservableObject {
         let list = FieldList()
         list.addField(name: "added", kind: .date)
         list.addField(name: "published", kind: .date)
+        list.addField(name: "format", kind: .string)
         list.addField(name: "asin", kind: .string)
         list.addField(name: "isbn", kind: .string)
         return list
