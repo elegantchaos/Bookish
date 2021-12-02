@@ -10,7 +10,7 @@ struct FieldsView: View {
     let fields: FieldList
     
     var body: some View {
-        VStack {
+        VStack(spacing: 4.0) {
             ForEach(fields.fields) { field in
                 switch field.kind {
                     case .string:

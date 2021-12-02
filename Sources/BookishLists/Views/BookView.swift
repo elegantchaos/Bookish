@@ -8,6 +8,7 @@ import Foundation
 import SwiftUI
 
 struct BookView: View {
+    @Environment(\.horizontalSizeClass) var size
     @Environment(\.managedObjectContext) var managedObjectContext
     @EnvironmentObject var model: Model
     @ObservedObject var book: CDRecord
@@ -19,35 +20,35 @@ struct BookView: View {
     
     var body: some View {
         ScrollView {
-            VStack {
-                HStack {
-                    VStack {
-                        //                    Label {
-                        //                        TextField("Name", text: $book.name)
-                        //                            .padding()
-                        //                    } icon: {
-                        //                        Image(systemName: "tag")
-                        //                    }
-                        
+            VStack(spacing: 0) {
+                if size == .compact {
+                    AsyncImageView(model.image(for: book, usePlacholder: false))
+                        .frame(maxWidth: 256, maxHeight: 256)
+                        .padding(.bottom)
+
+                    HStack(alignment: .top, spacing: 0) {
+                        Image(systemName: "note.text")
+
+                        TextEditor(text: book.binding(forProperty: "notes"))
+                            .lineLimit(10)
+                    }
+                } else {
+                    HStack(alignment: .top) {
                         Label {
-                            TextField("Notes", text: book.binding(forProperty: "notes"))
-                                .padding()
+                            TextField("notes", text: book.binding(forProperty: "notes"))
                                 .fixedSize(horizontal: true, vertical: false)
                         } icon: {
                             Image(systemName: "note.text")
                         }
-                        
-                        Spacer()
+
+                        AsyncImageView(model.image(for: book, usePlacholder: false))
+                            .frame(maxWidth: 256, maxHeight: 256)
                     }
-                    
-                    Spacer()
-                    
-                    AsyncImageView(model.image(for: book, usePlacholder: false))
-                        .frame(maxWidth: 256, maxHeight: 256)
                 }
                 
                 FieldsView(record: book, fields: fields)
-                
+                    .padding(.bottom)
+
                 DisclosureGroup("Links", isExpanded: $showLinks) {
                     VStack(alignment: .leading) {
                         if let contained = book.containedBy?.sortedByName {
@@ -61,6 +62,7 @@ struct BookView: View {
                         }
                     }
                 }
+                .padding(.vertical)
                 
                 DisclosureGroup("Raw Properties", isExpanded: $showRaw) {
                     LazyVStack(alignment: .leading) {
@@ -73,9 +75,10 @@ struct BookView: View {
                         }
                     }
                 }
+                .padding(.vertical)
             }
-            .padding()
         }
+        .padding()
         .navigationBarTitleDisplayMode(.large)
         .toolbar {
             ToolbarItem(placement: .principal) {
