@@ -6,27 +6,24 @@
 import Foundation
 import Localization
 
-public class ImportSession: Equatable {
-    public static func == (lhs: ImportSession, rhs: ImportSession) -> Bool {
-        return lhs === rhs
-    }
-    
+public class ImportSession: Identifiable {
     public typealias Completion = (ImportSession?) -> Void
     
+    public let id = UUID()
     let importer: Importer
-    let monitor: ImportMonitor?
+    let delegate: ImportDelegate
     
-    init?(importer: Importer, monitor: ImportMonitor?) {
+    init?(importer: Importer, delegate: ImportDelegate) {
         self.importer = importer
-        self.monitor = monitor
+        self.delegate = delegate
     }
     
     func performImport() {
         let importer = self.importer
         DispatchQueue.global(qos: .userInitiated).async {
-            importer.manager.sessionWillBegin(self)
+            importer.manager?.sessionWillBegin(self)
             self.run()
-            importer.manager.sessionDidFinish(self)
+            importer.manager?.sessionDidFinish(self)
         }
     }
 
@@ -47,12 +44,18 @@ public class URLImportSession: ImportSession {
     
     let url: URL
     
-    init?(importer: Importer, url: URL, monitor: ImportMonitor?) {
+    init?(importer: Importer, url: URL, delegate: ImportDelegate) {
         guard FileManager.default.fileExists(atURL: url) else {
             return nil
         }
         
         self.url = url
-        super.init(importer: importer, monitor: monitor)
+        super.init(importer: importer, delegate: delegate)
+    }
+}
+
+extension ImportSession: Equatable {
+    public static func == (lhs: ImportSession, rhs: ImportSession) -> Bool {
+        return lhs.id == rhs.id
     }
 }

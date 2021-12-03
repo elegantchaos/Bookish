@@ -17,17 +17,15 @@ public class ImportManager {
         return instances.sorted(by: { return $0.name < $1.name })
     }
     
-    public init() {
-        // TODO: build this dynamically - from plugins maybe?
-        register([
-            DeliciousLibraryImporter(manager: self),
-        ])
+    public init(_ importersToRegister: [Importer]) {
+        register(importersToRegister)
     }
     
     public func register(_ importersToRegister: [Importer]) {
         for importer in importersToRegister {
             importerChannel.log("Registered \(importer.name)")
             importers[type(of: importer).identifier] = importer
+            importer.manager = self
         }
     }
     
@@ -35,15 +33,26 @@ public class ImportManager {
         return importers[identifier]
     }
     
-    public func importFrom(_ url: URL, monitor: ImportMonitor) {
+    public func importFrom(_ url: URL, delegate: ImportDelegate) {
         for importer in sortedImporters {
-            if let session = importer.makeSession(importing: url, monitor: monitor) {
+            if let session = importer.makeSession(importing: url, delegate: delegate) {
                 session.performImport()
                 break
             }
         }
         
-        monitor.noImporter()
+        delegate.noImporter()
+    }
+    
+    public func importFrom(_ dictionaries: [[String:Any]], delegate: ImportDelegate) {
+        for importer in sortedImporters {
+            if let session = importer.makeSession(importing: dictionaries, delegate: delegate) {
+                session.performImport()
+                break
+            }
+        }
+        
+        delegate.noImporter()
     }
     
     func sessionWillBegin(_ session: ImportSession) {

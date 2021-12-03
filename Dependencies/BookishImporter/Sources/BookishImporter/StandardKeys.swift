@@ -24,5 +24,6 @@ public extension String {
     static let seriesKey = "series"
     static let seriesPositionKey = "seriesPosition"
     static let subtitleKey = "subtitle"
+    static let titleKey = "title"
     static let widthKey = "width"
 }

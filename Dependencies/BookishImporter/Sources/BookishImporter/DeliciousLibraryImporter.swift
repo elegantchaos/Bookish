@@ -7,83 +7,16 @@ import Coercion
 import Foundation
 import ISBN
 import Logger
+import SwiftUI
 
 let deliciousChannel = Channel("DeliciousImporter")
-
-extension Dictionary where Key == String, Value == Any {
-    mutating func extractNonZeroDouble(forKey key: Key, as asKey: Key? = nil, from source: inout Self) {
-        if let value = self[key] as? Double, value != 0 {
-            self[asKey ?? key] = value
-        }
-        source.removeValue(forKey: key)
-    }
-
-    mutating func extractNonZeroInt(forKey key: Key, as asKey: Key? = nil, from source: inout Self) {
-        if let value = self[key] as? Int, value != 0 {
-            self[asKey ?? key] = value
-        }
-        source.removeValue(forKey: key)
-    }
-
-    mutating func extractString(forKey key: Key, as asKey: Key? = nil, from source: inout Self) {
-        if let string = source[asString: key] {
-            source.removeValue(forKey: key)
-            self[asKey ?? key] = string
-        }
-    }
-
-    mutating func extractDate(forKey key: Key, as asKey: Key? = nil, from source: inout Self) {
-        if let date = source[asDate: key] {
-            source.removeValue(forKey: key)
-            self[asKey ?? key] = date
-        }
-    }
-
-    mutating func extractStringList(forKey key: Key, separator: Character = "\n", as asKey: Key? = nil, from source: inout Self) {
-        if let string = source[asString: key] {
-            let items = string.split(separator: separator)
-            if items.count > 0 {
-                source.removeValue(forKey: key)
-                let trimSet = CharacterSet.whitespacesAndNewlines
-                self[asKey ?? key] = items.map({ $0.trimmingCharacters(in: trimSet) })
-            }
-        }
-    }
-    
-    mutating func extractISBN(as asKey: Key = .isbnKey, from source: inout Self) {
-        // NB we leave the original delicious ean/isbn keys in the source so they get stored unmodified
-        if let ean = source[asString: "ean"], ean.isISBN13 {
-            self[asKey] = ean
-        } else if let value = source[asString: "isbn"] {
-            let trimmed = value.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-            self[.isbnKey] = trimmed.isbn10to13
-        }
-    }
-
-    mutating func extractID(from source: inout Self) -> String {
-        if let uuid = source[asString: "uuidString"] {
-            source.removeValue(forKey: "uuidString")
-            return uuid
-        } else if let uuid = source[asString: "foreignUUIDString"] {
-            source.removeValue(forKey: "foreignUUIDString")
-            return uuid
-        } else {
-            return "delicious-import-\(source["title"]!)"
-        }
-
-    }
-}
 
 
 public class DeliciousLibraryImporter: Importer {
     override class public var identifier: String { return "com.elegantchaos.bookish.importer.delicious-library" }
 
-    public init(manager: ImportManager) {
-        super.init(name: "Delicious Library", source: .userSpecifiedFile, manager: manager)
-    }
-    
-    override func makeSession(importing url: URL, monitor: ImportMonitor?) -> URLImportSession? {
-        return DeliciousLibraryImportSession(importer: self, url: url, monitor: monitor)
+    override func makeSession(importing url: URL, delegate: ImportDelegate) -> URLImportSession? {
+        return DeliciousLibraryImportSession(importer: self, url: url, delegate: delegate)
     }
 
     public override var fileTypes: [String]? {
@@ -92,59 +25,7 @@ public class DeliciousLibraryImporter: Importer {
 }
 
 public class DeliciousLibraryImportSession: URLImportSession {
-    public struct Book {
-        public let id: String
-        public var title: String
-        public var properties: [String:Any]
-        public let images: [URL]
-        
-        init?(info: Validated) {
-            deliciousChannel.log("Started import")
-            
-            var unprocessed = info.properties
-            var processed: [String:Any] = [:]
-            
-            id = processed.extractID(from: &unprocessed)
-            title = info.title
-            processed[.formatKey] = info.format
-            
-            processed.extractString(forKey: "subtitle", as: .subtitleKey, from: &unprocessed)
-            processed.extractString(forKey: "asin", as: .asinKey, from: &unprocessed)
-            processed.extractString(forKey: "deweyDecimal", as: .deweyKey, from: &unprocessed)
-            processed.extractString(forKey: "seriesSingularString", as: .seriesKey, from: &unprocessed)
-            processed.extractISBN(from: &unprocessed)
-            processed.extractNonZeroDouble(forKey: "boxHeightInInches", as: .heightKey, from: &unprocessed)
-            processed.extractNonZeroDouble(forKey: "boxWidthInInches", as: .widthKey, from: &unprocessed)
-            processed.extractNonZeroDouble(forKey: "boxLengthInInches", as: .lengthKey, from: &unprocessed)
-            processed.extractNonZeroInt(forKey: "pages", as: .pagesKey, from: &unprocessed)
-            processed.extractNonZeroInt(forKey: "numberInSeries", as: .seriesPositionKey, from: &unprocessed)
-            processed.extractDate(forKey: "creationDate", as: .addedDateKey, from: &unprocessed)
-            processed.extractDate(forKey: "lastModificationDate", as: .modifiedDateKey, from: &unprocessed)
-            processed.extractDate(forKey: "publishDate", as: .publishedDateKey, from: &unprocessed)
-            processed.extractStringList(forKey: "creatorsCompositeString", as: .authorsKey, from: &unprocessed)
-            processed.extractStringList(forKey: "editionsCompositeString", as: .editionsKey, from: &unprocessed)
-            processed.extractStringList(forKey: "publishersCompositeString", as: .publishersKey, from: &unprocessed)
-            processed.extractStringList(forKey: "genresCompositeString", as: .genresKey, from: &unprocessed)
-            processed.extractStringList(forKey: "illustratorsCompositeString", as: .illustratorsKey, from: &unprocessed)
-
-            var urls: [URL] = []
-            for key in ["coverImageLargeURLString", "coverImageMediumURLString", "coverImageSmallURLString"] {
-                if let string = unprocessed[asString: key], let url = URL(string: string) {
-                    urls.append(url)
-                    unprocessed.removeValue(forKey: key)
-                }
-            }
-
-            for (key, value) in unprocessed {
-                if (value as? Int != 0) && (value as? String != "") {
-                    processed["delicious.\(key)"] = value
-                }
-            }
-            
-            images = urls
-            properties = processed
-        }
-    }
+    
     
     typealias Record = [String:Any]
     typealias RecordList = [Record]
@@ -152,7 +33,7 @@ public class DeliciousLibraryImportSession: URLImportSession {
     
     let list: RecordList
 
-    override init?(importer: Importer, url: URL, monitor: ImportMonitor?) {
+    override init?(importer: Importer, url: URL, delegate: ImportDelegate) {
         // check we can parse the xml
         guard let data = try? Data(contentsOf: url), let list = (try? PropertyListSerialization.propertyList(from: data, options: [], format: nil)) as? RecordList else {
             return nil
@@ -164,108 +45,173 @@ public class DeliciousLibraryImportSession: URLImportSession {
         }
         
         self.list = list
-        super.init(importer: importer, url: url, monitor: monitor)
+        super.init(importer: importer, url: url, delegate: delegate)
     }
     
-    struct Validated {
-        let format: String?
-        let title: String
-        let properties: [String:Any]
-    }
-    
-    func validate(_ record: Record) -> Validated? {
+    func validate(_ record: Record) -> ImportedBook? {
         let format = record["formatSingularString"] as? String
         guard format == nil || !formatsToSkip.contains(format!) else { return nil }
+        
         let type = record["type"] as? String
         guard type == nil || !formatsToSkip.contains(type!) else { return nil }
+        
         guard let title = record["title"] as? String else { return nil }
+
         var properties = record
-        properties.removeValue(forKey: "title")
-        properties.removeValue(forKey: "formatSingularString")
-        return Validated(format: format, title: title, properties: properties)
+        properties[.formatKey] = format
+
+        let id = properties.extractDeliciousID()
+        let images = properties.extractImages()
+
+        return ImportedBook(id: id, title: title, images: images, properties: properties)
+                                
     }
     
     override func run() {
-        let monitor = self.monitor
-        monitor?.session(self, willImportItems: list.count)
+        delegate.session(self, willImportItems: list.count)
         for record in list {
-            if let info = self.validate(record) {
-                if let book = Book(info: info) {
-                    monitor?.session(self, didImport: book)
-                } else {
-                    deliciousChannel.log("failed to make book from \(record)")
-                }
+            if var book = self.validate(record) {
+                deliciousChannel.log("Started import")
+                book.importFromDelicious()
+                delegate.session(self, didImport: book)
             } else {
                 deliciousChannel.log("skipped non-book \(record["title"] ?? record)")
             }
         }
-        monitor?.sessionDidFinish(self)
+        delegate.sessionDidFinish(self)
     }
-    
-    //
-    //private func process(creators: String, for book: Book) {
-    //    var index = 1
-    //    for creator in creators.split(separator: "\n") {
-    //        let trimmed = creator.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-    //        if trimmed != "" {
-    //            let author: Person
-    //            if let cached = cachedPeople[trimmed] {
-    //                author = cached
-    //            } else {
-    //                author = Person.named(trimmed, in: context)
-    //                if author.source == nil {
-    //                    author.source = DeliciousLibraryImporter.identifier
-    //                    author.uuid = "\(book.uuid!)-author-\(index)"
-    //                }
-    //                index += 1
-    //                cachedPeople[trimmed] = author
-    //            }
-    //            let relationship = author.relationship(as: Role.StandardName.author)
-    //            relationship.add(book)
-    //        }
-    //    }
-    //}
-    
-    //private func process(publishers: String, for book: Book) {
-    //    for publisher in publishers.split(separator: "\n") {
-    //        let trimmed = publisher.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-    //        if trimmed != "" {
-    //            let publisher: Publisher
-    //            if let cached = cachedPublishers[trimmed] {
-    //                publisher = cached
-    //            } else {
-    //                publisher = Publisher.named(trimmed, in: context)
-    //                if publisher.source == nil {
-    //                    publisher.source = DeliciousLibraryImporter.identifier
-    //                }
-    //                cachedPublishers[trimmed] = publisher
-    //            }
-    //            publisher.add(book)
-    //        }
-    //    }
-    //}
-    //
-    //private func process(series: String, position: Int, for book: Book) {
-    //    let trimmed = series.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-    //    if trimmed != "" {
-    //        let series: Series
-    //        if let cached = cachedSeries[trimmed] {
-    //            series = cached
-    //        } else {
-    //            series = Series.named(trimmed, in: context)
-    //            if series.source == nil {
-    //                series.source = DeliciousLibraryImporter.identifier
-    //            }
-    //            cachedSeries[trimmed] = series
-    //        }
-    //        let entry = SeriesEntry(context: context)
-    //        entry.book = book
-    //        entry.series = series
-    //        if position != 0 {
-    //            entry.position = Int16(position)
-    //        }
-    //    }
-    //}
     
 }
 
+/// Delicious Library specific extraction methods
+private extension Dictionary where Key == String, Value == Any {
+    mutating func extractImages() -> [URL] {
+        var urls: [URL] = []
+        for key in ["coverImageLargeURLString", "coverImageMediumURLString", "coverImageSmallURLString"] {
+            if let string = self[asString: key], let url = URL(string: string) {
+                urls.append(url)
+                self.removeValue(forKey: key)
+            }
+        }
+        return urls
+    }
+    
+    mutating func extractDeliciousID() -> String {
+        if let uuid = self[asString: "uuidString"] {
+            self.removeValue(forKey: "uuidString")
+            return uuid
+        } else if let uuid = self[asString: "foreignUUIDString"] {
+            self.removeValue(forKey: "foreignUUIDString")
+            return uuid
+        } else {
+            return "delicious-import-\(self["title"]!)"
+        }
+
+    }
+}
+
+
+
+extension ImportedBook {
+    mutating func importFromDelicious() {
+
+        var unprocessed = properties
+        var processed: [String:Any] = [:]
+        
+        processed.extractString(forKey: "format", as: .formatKey, from: &unprocessed)
+        processed.extractString(forKey: "subtitle", as: .subtitleKey, from: &unprocessed)
+        processed.extractString(forKey: "asin", as: .asinKey, from: &unprocessed)
+        processed.extractString(forKey: "deweyDecimal", as: .deweyKey, from: &unprocessed)
+        processed.extractString(forKey: "seriesSingularString", as: .seriesKey, from: &unprocessed)
+        processed.extractISBN(from: &unprocessed)
+        processed.extractNonZeroDouble(forKey: "boxHeightInInches", as: .heightKey, from: &unprocessed)
+        processed.extractNonZeroDouble(forKey: "boxWidthInInches", as: .widthKey, from: &unprocessed)
+        processed.extractNonZeroDouble(forKey: "boxLengthInInches", as: .lengthKey, from: &unprocessed)
+        processed.extractNonZeroInt(forKey: "pages", as: .pagesKey, from: &unprocessed)
+        processed.extractNonZeroInt(forKey: "numberInSeries", as: .seriesPositionKey, from: &unprocessed)
+        processed.extractDate(forKey: "creationDate", as: .addedDateKey, from: &unprocessed)
+        processed.extractDate(forKey: "lastModificationDate", as: .modifiedDateKey, from: &unprocessed)
+        processed.extractDate(forKey: "publishDate", as: .publishedDateKey, from: &unprocessed)
+        processed.extractStringList(forKey: "creatorsCompositeString", as: .authorsKey, from: &unprocessed)
+        processed.extractStringList(forKey: "editionsCompositeString", as: .editionsKey, from: &unprocessed)
+        processed.extractStringList(forKey: "publishersCompositeString", as: .publishersKey, from: &unprocessed)
+        processed.extractStringList(forKey: "genresCompositeString", as: .genresKey, from: &unprocessed)
+        processed.extractStringList(forKey: "illustratorsCompositeString", as: .illustratorsKey, from: &unprocessed)
+
+        for (key, value) in unprocessed {
+            if (value as? Int != 0) && (value as? String != "") {
+                processed["delicious.\(key)"] = value
+            }
+        }
+        
+        properties = processed
+    }
+}
+
+
+
+
+//
+//private func process(creators: String, for book: Book) {
+//    var index = 1
+//    for creator in creators.split(separator: "\n") {
+//        let trimmed = creator.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+//        if trimmed != "" {
+//            let author: Person
+//            if let cached = cachedPeople[trimmed] {
+//                author = cached
+//            } else {
+//                author = Person.named(trimmed, in: context)
+//                if author.source == nil {
+//                    author.source = DeliciousLibraryImporter.identifier
+//                    author.uuid = "\(book.uuid!)-author-\(index)"
+//                }
+//                index += 1
+//                cachedPeople[trimmed] = author
+//            }
+//            let relationship = author.relationship(as: Role.StandardName.author)
+//            relationship.add(book)
+//        }
+//    }
+//}
+
+//private func process(publishers: String, for book: Book) {
+//    for publisher in publishers.split(separator: "\n") {
+//        let trimmed = publisher.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+//        if trimmed != "" {
+//            let publisher: Publisher
+//            if let cached = cachedPublishers[trimmed] {
+//                publisher = cached
+//            } else {
+//                publisher = Publisher.named(trimmed, in: context)
+//                if publisher.source == nil {
+//                    publisher.source = DeliciousLibraryImporter.identifier
+//                }
+//                cachedPublishers[trimmed] = publisher
+//            }
+//            publisher.add(book)
+//        }
+//    }
+//}
+//
+//private func process(series: String, position: Int, for book: Book) {
+//    let trimmed = series.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+//    if trimmed != "" {
+//        let series: Series
+//        if let cached = cachedSeries[trimmed] {
+//            series = cached
+//        } else {
+//            series = Series.named(trimmed, in: context)
+//            if series.source == nil {
+//                series.source = DeliciousLibraryImporter.identifier
+//            }
+//            cachedSeries[trimmed] = series
+//        }
+//        let entry = SeriesEntry(context: context)
+//        entry.book = book
+//        entry.series = series
+//        if position != 0 {
+//            entry.position = Int16(position)
+//        }
+//    }
+//}

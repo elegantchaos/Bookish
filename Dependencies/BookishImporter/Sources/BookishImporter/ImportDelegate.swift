@@ -5,16 +5,16 @@
 
 import Foundation
 
-public protocol ImportMonitor {
+public protocol ImportDelegate {
     func chooseFile(for importer: Importer, completion: @escaping (URL) -> Void)
     func session(_ session: ImportSession, willImportItems count: Int)
-    func session(_ session: ImportSession, didImport item: Any)
+    func session(_ session: ImportSession, didImport book: ImportedBook)
     func sessionDidFinish(_ session: ImportSession)
     func sessionDidFail(_ session: ImportSession)
     func noImporter()
 }
 
-public extension ImportMonitor {
+public extension ImportDelegate {
     func chooseFile(for importer: Importer, completion: @escaping (URL) -> Void) { }
     func noImporter() { }
 //    func session(_ session: ImportSession, willImportItems count: Int) { }
