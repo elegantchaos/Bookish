@@ -34,10 +34,4 @@ public class LookupManager: ObservableObject {
         session.run()
         return session
     }
-    
-    public func restore(persisted: LookupCandidate.Persisted) -> LookupCandidate? {
-        guard let service = services.first(where: { $0.name == persisted.name }) else { return nil }
-        return service.restore(persisted: persisted.data)
-    }
-
 }

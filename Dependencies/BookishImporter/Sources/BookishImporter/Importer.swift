@@ -8,12 +8,12 @@ import Foundation
 import Localization
 
 public class Importer {
-    public let name: String
+    public static let defaultSource = "default"
+    
     public weak var manager: ImportManager?
     public class var id: String { return "import" }
 
-    public init(_ name: String) {
-        self.name = name
+    public init() {
     }
         
     public var fileTypes: [String]? {
@@ -38,15 +38,7 @@ public class Importer {
         return string
     }
 
-    internal func makeSession(delegate: ImportDelegate) -> ImportSession? {
-        return nil
-    }
-
-    internal func makeSession(importing url: URL, delegate: ImportDelegate) -> URLImportSession? {
-        return nil
-    }
-
-    internal func makeSession(importing dictionaries: [[String:Any]], delegate: ImportDelegate) -> DictionariesImportSession? {
+    internal func makeSession(source: Any, delegate: ImportDelegate) -> ImportSession? {
         return nil
     }
 }

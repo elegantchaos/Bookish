@@ -37,6 +37,14 @@ public struct BookRecord: Identifiable {
     public var imageURLS: [URL] {
         properties[.imageURLsKey] as? [URL] ?? []
     }
+    
+    public var authors: [String] {
+        (properties[.authorsKey] as? [String]) ?? []
+    }
+    
+    public var publishers: [String] {
+        (properties[.publishersKey] as? [String]) ?? []
+    }
 }
 
 extension BookRecord: Equatable {

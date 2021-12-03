@@ -19,7 +19,7 @@ extension LookupCandidate: AutoLinked {
                     .font(.footnote)
             }
         } icon: {
-            if let string = image, let url = URL(string: string) {
+            if let url = image {
                 LabelIconView(url: url, placeholder: "book")
             } else {
                 Image(systemName: "book")

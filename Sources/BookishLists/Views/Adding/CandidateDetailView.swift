@@ -8,7 +8,8 @@ import SwiftUI
 struct CandidateDetailView: View {
     @EnvironmentObject var appearance: AppearanceController
     @EnvironmentObject var model: Model
-    
+    @Environment(\.presentationMode) var presentationMode
+
     let candidate: LookupCandidate
     
     var body: some View {
@@ -17,7 +18,7 @@ struct CandidateDetailView: View {
             PropertyView(label: "authors", icon: "person.2", value: candidate.authors.joined(separator: ", "))
             PropertyView(label: "publisher", icon: "building.2", value: candidate.publisher)
 
-            if let date = candidate.date {
+            if let date = candidate.book.properties[asDate: .publishedDateKey] {
                 PropertyView(label: "date", icon: "calendar", value: appearance.formatted(date: date))
             }
 
@@ -32,6 +33,7 @@ struct CandidateDetailView: View {
     }
     
     func handleAdd() {
-        model.importFromDictionaries(dictionaries: [candidate.importProperties])
+        model.importFrom([candidate.book])
+        presentationMode.wrappedValue.dismiss()
     }
 }

@@ -3,39 +3,29 @@
 //  All code (c) 2019 - present day, Elegant Chaos Limited.
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
-//import Datastore
+import BookishCore
 import Foundation
+import BookishCore
 
 public class LookupCandidate: Identifiable {
-    public struct Persisted: Codable {
-        let name: String
-        let data: String
-    }
-    
     public let id = UUID()
     public let service: LookupService
     public let title: String
     public let authors: [String]
     public let publisher: String
-    public let date: Date?
-    public let image: String?
+    public let image: URL?
+    public let book: BookRecord
+    public var imported = false
     
-    public init(service: LookupService, title: String? = nil, authors: [String]? = [], publisher: String? = nil, date: Date? = nil, image: String? = nil) {
-        self.title = title ?? ""
-        self.authors = authors ?? []
-        self.publisher = publisher ?? ""
-        self.date = date
+    public init(service: LookupService, record: BookRecord) {
+        self.title = record.title
+        self.authors = record.authors
+        self.publisher = record.publishers.first ?? ""
         self.service = service
-        self.image = image
+        self.book = record
+        self.image = record.imageURLS.first
     }
-    
-    public var persisted: Persisted {
-        return Persisted(name: service.name, data: persistedData)
-    }
-    
-    internal var persistedData: String {
-        return ""
-    }
+
     public var summary: String {
         return summaryItems.joined(separator: ", ")
     }
@@ -45,24 +35,6 @@ public class LookupCandidate: Identifiable {
         items.append(contentsOf: authors)
         items.append(publisher)
         return items
-    }
-    
-    public var action: String {
-        return ""
-    }
-    
-    public var existingBook: Any? {
-        return nil
-    }
-    
-    public var importProperties: [String:Any] {
-        var book: [String:Any] = [:]
-        book["id"] = id
-        book[.titleKey] = title
-        book[.authorsKey] = authors
-        book[.publishersKey] = [publisher]
-        book[.publishedDateKey] = date
-        return book
     }
 }
 

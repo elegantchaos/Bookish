@@ -16,7 +16,8 @@ let deliciousChannel = Channel("DeliciousImporter")
 public class DeliciousLibraryImporter: Importer {
     override class public var id: String { return "com.elegantchaos.bookish.importer.delicious-library" }
 
-    override func makeSession(importing url: URL, delegate: ImportDelegate) -> URLImportSession? {
+    override func makeSession(source: Any, delegate: ImportDelegate) -> ImportSession? {
+        guard let url = source as? URL else { return nil }
         return DeliciousLibraryImportSession(importer: self, url: url, delegate: delegate)
     }
 
@@ -76,12 +77,12 @@ public class DeliciousLibraryImportSession: URLImportSession {
 
 /// Delicious Library specific extraction methods
 private extension Dictionary where Key == String, Value == Any {
-    mutating func extractImages() {
+    mutating func extractImages(from data: inout [String:Any]) {
         var urls: [URL] = []
         for key in ["coverImageLargeURLString", "coverImageMediumURLString", "coverImageSmallURLString"] {
-            if let string = self[asString: key], let url = URL(string: string) {
+            if let string = data[asString: key], let url = URL(string: string) {
                 urls.append(url)
-                self.removeValue(forKey: key)
+                data.removeValue(forKey: key)
             }
         }
         
@@ -129,7 +130,7 @@ extension BookRecord {
         processed.extractStringList(forKey: "publishersCompositeString", as: .publishersKey, from: &unprocessed)
         processed.extractStringList(forKey: "genresCompositeString", as: .genresKey, from: &unprocessed)
         processed.extractStringList(forKey: "illustratorsCompositeString", as: .illustratorsKey, from: &unprocessed)
-        processed.extractImages()
+        processed.extractImages(from: &unprocessed)
 
         for (key, value) in unprocessed {
             if (value as? Int != 0) && (value as? String != "") {

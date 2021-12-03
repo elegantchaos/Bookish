@@ -3,6 +3,7 @@
 //  All code (c) 2021 - present day, Sam Deane.
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
+import BookishCore
 import BookishImporter
 import BookishImporterSamples
 import CoreData
@@ -83,8 +84,9 @@ class Model: ObservableObject {
     init(stack: CoreDataStack) {
         self.stack = stack
         self.importer = ImportManager([
-            DeliciousLibraryImporter("Delicious Library"),
-            DictionariesImporter("Manual Import"),
+            DeliciousLibraryImporter(),
+            DictionariesImporter(),
+            BookRecordsImporter()
         ])
         
         if let string = UserDefaults.standard.string(forKey: "selection") {
@@ -151,7 +153,7 @@ class Model: ObservableObject {
         switch result {
             case .success(let url):
                 url.accessSecurityScopedResource { url in
-                    importFromDelicious(url: url)
+                    importFrom(url)
                 }
 
             case .failure(let error):
@@ -161,22 +163,16 @@ class Model: ObservableObject {
     
     func importFromDelicious(sampleNamed name: String) {
         let url = BookishImporter.urlForSample(withName: name)
-        importFromDelicious(url: url)
+        importFrom(url)
     }
-    
-    func importFromDelicious(url: URL) {
+
+    func importFrom(_ source: Any) {
         stack.onBackground { context in
             let delegate = ImportHandler(model: self, context: context)
-            self.importer.importFrom(url, delegate: delegate)
+            self.importer.importFrom(source, delegate: delegate)
         }
     }
-    
-    func importFromDictionaries(dictionaries: [[String:Any]]) {
-        stack.onBackground { context in
-            let delegate = ImportHandler(model: self, context: context)
-            self.importer.importFrom(dictionaries, delegate: delegate)
-        }
-    }
+
     
     func notify(_ error: Error) {
         onMainQueue {

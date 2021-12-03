@@ -15,16 +15,18 @@ let dictionariesImporterChannel = Channel("DictionariesImporter")
 public class DictionariesImporter: Importer {
     override class public var id: String { return "com.elegantchaos.bookish.importer.dictionaries" }
 
-    override func makeSession(importing dictionaries: [[String:Any]], delegate: ImportDelegate) -> DictionariesImportSession? {
+    override func makeSession(source: Any, delegate: ImportDelegate) -> ImportSession? {
+        guard let dictionaries = source as? [[String:Any]] else { return nil }
+
         let session = DictionariesImportSession(importer: self, dictionaries: dictionaries, delegate: delegate)
         return session
     }
 }
 
 public class DictionariesImportSession: ImportSession {
-    public static func == (lhs: DictionariesImportSession, rhs: DictionariesImportSession) -> Bool {
-        return lhs === rhs
-    }
+//    public static func == (lhs: DictionariesImportSession, rhs: DictionariesImportSession) -> Bool {
+//        return lhs === rhs
+//    }
     
     let dictionaries: [[String:Any]]
     

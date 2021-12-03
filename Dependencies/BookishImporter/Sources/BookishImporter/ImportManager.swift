@@ -14,7 +14,7 @@ public class ImportManager {
     
     public var sortedImporters: [Importer] {
         let instances = importers.values
-        return instances.sorted(by: { return $0.name < $1.name })
+        return instances.sorted(by: { return $0.id < $1.id })
     }
     
     public init(_ importersToRegister: [Importer]) {
@@ -23,7 +23,7 @@ public class ImportManager {
     
     public func register(_ importersToRegister: [Importer]) {
         for importer in importersToRegister {
-            importerChannel.log("Registered \(importer.name)")
+            importerChannel.log("Registered \(importer.id)")
             importers[type(of: importer).id] = importer
             importer.manager = self
         }
@@ -33,9 +33,9 @@ public class ImportManager {
         return importers[identifier]
     }
     
-    public func importFrom(_ url: URL, delegate: ImportDelegate) {
+    public func importFrom(_ source: Any, delegate: ImportDelegate) {
         for importer in sortedImporters {
-            if let session = importer.makeSession(importing: url, delegate: delegate) {
+            if let session = importer.makeSession(source: source, delegate: delegate) {
                 session.performImport()
                 break
             }
@@ -43,18 +43,7 @@ public class ImportManager {
         
         delegate.noImporter()
     }
-    
-    public func importFrom(_ dictionaries: [[String:Any]], delegate: ImportDelegate) {
-        for importer in sortedImporters {
-            if let session = importer.makeSession(importing: dictionaries, delegate: delegate) {
-                session.performImport()
-                break
-            }
-        }
-        
-        delegate.noImporter()
-    }
-    
+
     func sessionWillBegin(_ session: ImportSession) {
         sessions.append(session)
     }

@@ -6,15 +6,9 @@
 //import Datastore
 import Foundation
 import ISBN
+import BookishCore
 
 public class GoogleLookupCandidate: LookupCandidate {
-    let info: [String:Any]
-    
-    override var persistedData: String {
-        guard let data = try? JSONSerialization.data(withJSONObject: info, options: .prettyPrinted), let json = String(data: data, encoding: .utf8) else { return "" }
-        return json
-    }
-    
     class func isbn(from info: [String:Any]) -> String? {
         if let identifiers = info["industryIdentifiers"] as? [[String:Any]] {
             for id in identifiers {
@@ -36,14 +30,16 @@ public class GoogleLookupCandidate: LookupCandidate {
     }
     
     init(info: [String:Any], service: GoogleLookupService) {
-        let title = info["title"] as? String
-        let authors = info["authors"] as? [String]
-        let publisher = info["publisher"] as? String
+        var updated = info
 
-        var date: Date? = nil
-        if let publishedDate = info["publishedDate"] as? String {
-            let matches = service.dateDetector.matches(in: publishedDate, options: NSRegularExpression.MatchingOptions(), range: NSRange(location: 0, length: publishedDate.count))
-            date = matches.first?.date
+        if let publisher = updated.extractString(forKey: "publisher") {
+            updated[.publishersKey] = [publisher]
+        }
+
+        if let string = updated.extractString(forKey: "publishedDate") {
+            let matches = service.dateDetector.matches(in: string, options: NSRegularExpression.MatchingOptions(), range: NSRange(location: 0, length: string.count))
+            let date: Date? = matches.first?.date
+            updated[.publishedDateKey] = date
         }
         
         var image: String? = nil
@@ -53,34 +49,19 @@ public class GoogleLookupCandidate: LookupCandidate {
             image = image?.replacingOccurrences(of: "http://", with: "https://")
 //            image = image?.replacingOccurrences(of: "zoom=1&", with: "")
         }
+        
+        if let image = image, let url = URL(string: image) {
+            updated[.imageURLsKey] = [url]
+        }
 
-        self.info = info
-        super.init(service: service, title: title, authors: authors, publisher: publisher, date: date, image: image)
-    }
-    
-    public var isbn: String? {
-        return GoogleLookupCandidate.isbn(from: info)
-    }
+        updated[.isbnKey] = GoogleLookupCandidate.isbn(from: info)
 
-    public override var summaryItems: [String] {
-        var items = super.summaryItems
         if let pages = info["pageCount"] as? NSNumber {
-            items.append("\(pages) pages")
+            updated[.pagesKey] = pages.intValue
         }
-        if let isbn = self.isbn {
-            items.append("ISBN: \(isbn)")
-        }
-        return items
-    }
 
-    public override var importProperties: [String : Any] {
-        var properties = super.importProperties
-        properties.merge(info, uniquingKeysWith: { k1, k2 in k1 })
-        return properties
-    }
-    
-    public override var action: String {
-        return "AddCandidate"
+        let book = BookRecord(updated, id: UUID().uuidString, source: service.name)!
+        super.init(service: service, record: book)
     }
  }
 

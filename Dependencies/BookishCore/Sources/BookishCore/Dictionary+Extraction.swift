@@ -10,7 +10,7 @@ import ISBN
 /// Generic utilities for extracting a value from a dictionary and cleaning it up.
 /// If the extraction is successful, the key is removed from the source dictionary.
 
-extension Dictionary where Key == String, Value == Any {
+public extension Dictionary where Key == String, Value == Any {
     mutating func extractNonZeroDouble(forKey key: Key) -> Double? {
         
         guard let value = self[asDouble: key], value != 0 else { return nil }
@@ -62,7 +62,7 @@ extension Dictionary where Key == String, Value == Any {
 /// and adding it this dictionary.
 /// If the extraction is successful, the key is removed from the source dictionary.
 
-extension Dictionary where Key == String, Value == Any {
+public extension Dictionary where Key == String, Value == Any {
 
     mutating func extractNonZeroDouble(forKey key: Key, as asKey: Key? = nil, from source: inout Self) {
         self[asKey ?? key] = source.extractNonZeroDouble(forKey:key)

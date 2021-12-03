@@ -62,8 +62,9 @@ struct AddBooksView: View {
                         CandidatesView(candidates: candidates, selection: $selection)
                     }
                 } else {
-                    Text("Enter a search term to look for possible book candidates, or use the camera to scan a barcode.")
+                    Text("Enter a title, author, etc to look for a book.\n\nUse the camera to scan a barcode.")
                         .fixedSize(horizontal: false, vertical: true)
+                        .padding()
                 }
 
                 if !searching || !gotCandidates {
