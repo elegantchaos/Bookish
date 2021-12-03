@@ -141,6 +141,7 @@
 		8B58C7CB25B84AB8007F6B70 /* PreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesView.swift; sourceTree = "<group>"; };
 		8B602EEA274BD58500DE50A5 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		8B602EF0274BF58400DE50A5 /* ListActionsMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListActionsMenuView.swift; sourceTree = "<group>"; };
+		8B6DD260275A677A00304468 /* BookishCore */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = BookishCore; path = Dependencies/BookishCore; sourceTree = "<group>"; };
 		8B8A88E3274FC36A00EA2FAA /* BookishCleanup */ = {isa = PBXFileReference; lastKnownFileType = folder; name = BookishCleanup; path = Dependencies/BookishCleanup; sourceTree = "<group>"; };
 		8B987C9E25C047E5003D6F9F /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		8B987CAA25C04876003D6F9F /* BooklistLists.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BooklistLists.xcdatamodel; sourceTree = "<group>"; };
@@ -349,6 +350,7 @@
 		8B1AF90D274FC235001BFB00 /* Packages */ = {
 			isa = PBXGroup;
 			children = (
+				8B6DD260275A677A00304468 /* BookishCore */,
 				8B8A88E3274FC36A00EA2FAA /* BookishCleanup */,
 				8B1AF910274FC2E1001BFB00 /* BookishImporter */,
 			);

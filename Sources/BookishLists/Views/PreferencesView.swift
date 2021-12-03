@@ -15,7 +15,7 @@ struct PreferencesView: View {
         NavigationView {
             VStack {
                 Button(action: handleRemoveAll) {
-                    Text("Wipe Data And Exit")
+                    Text("Wipe All Data")
                 }
                 
                 LoggerChannelsView()
@@ -33,6 +33,5 @@ struct PreferencesView: View {
         model.objectWillChange.send()
         model.removeAllData()
         sheetController.dismiss()
-        exit(0)
     }
 }

@@ -3,6 +3,7 @@
 //  All code (c) 2018 - present day, Elegant Chaos Limited.
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
+import BookishCore
 import Coercion
 import Foundation
 import ISBN
@@ -13,7 +14,7 @@ let deliciousChannel = Channel("DeliciousImporter")
 
 
 public class DeliciousLibraryImporter: Importer {
-    override class public var identifier: String { return "com.elegantchaos.bookish.importer.delicious-library" }
+    override class public var id: String { return "com.elegantchaos.bookish.importer.delicious-library" }
 
     override func makeSession(importing url: URL, delegate: ImportDelegate) -> URLImportSession? {
         return DeliciousLibraryImportSession(importer: self, url: url, delegate: delegate)
@@ -27,15 +28,13 @@ public class DeliciousLibraryImporter: Importer {
 public class DeliciousLibraryImportSession: URLImportSession {
     
     
-    typealias Record = [String:Any]
-    typealias RecordList = [Record]
     let formatsToSkip = ["Audio CD", "Audio CD Enhanced", "Audio CD Import", "Video Game", "VHS Tape", "VideoGame", "DVD"]
     
-    let list: RecordList
+    let list: [[String:Any]]
 
     override init?(importer: Importer, url: URL, delegate: ImportDelegate) {
         // check we can parse the xml
-        guard let data = try? Data(contentsOf: url), let list = (try? PropertyListSerialization.propertyList(from: data, options: [], format: nil)) as? RecordList else {
+        guard let data = try? Data(contentsOf: url), let list = (try? PropertyListSerialization.propertyList(from: data, options: [], format: nil)) as? [[String:Any]] else {
             return nil
         }
         
@@ -48,23 +47,15 @@ public class DeliciousLibraryImportSession: URLImportSession {
         super.init(importer: importer, url: url, delegate: delegate)
     }
     
-    func validate(_ record: Record) -> ImportedBook? {
+    func validate(_ record: [String:Any]) -> BookRecord? {
+        var properties = record
         let format = record["formatSingularString"] as? String
         guard format == nil || !formatsToSkip.contains(format!) else { return nil }
         
         let type = record["type"] as? String
         guard type == nil || !formatsToSkip.contains(type!) else { return nil }
-        
-        guard let title = record["title"] as? String else { return nil }
 
-        var properties = record
-        properties[.formatKey] = format
-
-        let id = properties.extractDeliciousID()
-        let images = properties.extractImages()
-
-        return ImportedBook(id: id, title: title, images: images, properties: properties)
-                                
+        return BookRecord(properties, id: properties.extractDeliciousID(), source: importer.id)
     }
     
     override func run() {
@@ -85,7 +76,7 @@ public class DeliciousLibraryImportSession: URLImportSession {
 
 /// Delicious Library specific extraction methods
 private extension Dictionary where Key == String, Value == Any {
-    mutating func extractImages() -> [URL] {
+    mutating func extractImages() {
         var urls: [URL] = []
         for key in ["coverImageLargeURLString", "coverImageMediumURLString", "coverImageSmallURLString"] {
             if let string = self[asString: key], let url = URL(string: string) {
@@ -93,7 +84,8 @@ private extension Dictionary where Key == String, Value == Any {
                 self.removeValue(forKey: key)
             }
         }
-        return urls
+        
+        self[.imageURLsKey] = urls
     }
     
     mutating func extractDeliciousID() -> String {
@@ -112,7 +104,7 @@ private extension Dictionary where Key == String, Value == Any {
 
 
 
-extension ImportedBook {
+extension BookRecord {
     mutating func importFromDelicious() {
 
         var unprocessed = properties
@@ -137,10 +129,13 @@ extension ImportedBook {
         processed.extractStringList(forKey: "publishersCompositeString", as: .publishersKey, from: &unprocessed)
         processed.extractStringList(forKey: "genresCompositeString", as: .genresKey, from: &unprocessed)
         processed.extractStringList(forKey: "illustratorsCompositeString", as: .illustratorsKey, from: &unprocessed)
+        processed.extractImages()
 
         for (key, value) in unprocessed {
             if (value as? Int != 0) && (value as? String != "") {
                 processed["delicious.\(key)"] = value
+            } else {
+                deliciousChannel.debug("Dropped empty value \(value) for \(key)")
             }
         }
         

@@ -30,8 +30,11 @@ public class ImportSession: Identifiable {
     internal func run() {
     }
     
+    public var source: String {
+        return importer.id
+    }
+
     public var title: String {
-        let id = type(of: importer).identifier
         let name = "\(id).name".localized
         return "importer.progress.title".localized(with: ["name": name])
     }

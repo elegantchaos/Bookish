@@ -3,12 +3,13 @@
 //  All code (c) 2021 - present day, Elegant Chaos Limited.
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
+import BookishCore
 import Foundation
 
 public protocol ImportDelegate {
     func chooseFile(for importer: Importer, completion: @escaping (URL) -> Void)
     func session(_ session: ImportSession, willImportItems count: Int)
-    func session(_ session: ImportSession, didImport book: ImportedBook)
+    func session(_ session: ImportSession, didImport book: BookRecord)
     func sessionDidFinish(_ session: ImportSession)
     func sessionDidFail(_ session: ImportSession)
     func noImporter()

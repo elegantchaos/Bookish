@@ -4,6 +4,7 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 import BookishCleanup
+import BookishCore
 import BookishImporter
 import Coercion
 import CoreData
@@ -44,15 +45,15 @@ extension ImportHandler: ImportDelegate {
         let date = Date()
         let formatted = DateFormatter.localizedString(from: date, dateStyle: .short, timeStyle: .none)
         list.kind = .importSession
-        list.name = "\(session.title) \(formatted)"
-        list.set("Records imported from \(session.title) on \(formatted).", forKey: "notes")
+        list.name = "\(session.source.localized) \(formatted)"
+        list.set("Records imported from \(session.source.localized) on \(formatted).", forKey: "notes")
         list.set(date, forKey: "imported")
         context.allImports.addToContents(list)
 
         report(label: "Importing…")
     }
     
-    func session(_ session: ImportSession, didImport rawBook: ImportedBook) {
+    func session(_ session: ImportSession, didImport rawBook: BookRecord) {
         let importedBook = cleanupSeries(cleanupPublisher(rawBook))
         
         let book = CDRecord.findOrMakeWithID(importedBook.id, in: context) { newBook in
@@ -60,7 +61,7 @@ extension ImportHandler: ImportDelegate {
             }
         
         book.name = importedBook.title
-        book.imageURL = importedBook.images.first
+        book.imageURL = importedBook.imageURLS.first
         book.merge(properties: importedBook.properties)
         list.add(book)
         done += 1
@@ -104,7 +105,7 @@ extension ImportHandler: ImportDelegate {
 }
 
 extension ImportHandler {
-    func cleanupPublisher(_ raw: ImportedBook) -> ImportedBook {
+    func cleanupPublisher(_ raw: BookRecord) -> BookRecord {
         let title = raw.title
         let subtitle = raw.properties[asString: .subtitleKey, default: ""]
         let series = raw.properties[asString: .seriesKey, default: ""]
@@ -145,7 +146,7 @@ extension ImportHandler {
 
     }
     
-    func cleanupSeries(_ raw: ImportedBook) -> ImportedBook {
+    func cleanupSeries(_ raw: BookRecord) -> BookRecord {
         let title = raw.title
         let subtitle = raw.properties[asString: .subtitleKey, default: ""]
         let series = raw.properties[asString: .seriesKey, default: ""]
@@ -185,7 +186,7 @@ extension ImportHandler {
         return book
     }
     
-    func addPeople(to book: CDRecord, from importedBook: ImportedBook, withKey key: String, asRole role: String) {
+    func addPeople(to book: CDRecord, from importedBook: BookRecord, withKey key: String, asRole role: String) {
         if let people = importedBook.properties[key] as? [String] {
             for person in people {
                 let list = CDRecord.findOrMakeWithName(person, kind: .person, in: context)

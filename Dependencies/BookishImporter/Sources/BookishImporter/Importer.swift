@@ -10,7 +10,7 @@ import Localization
 public class Importer {
     public let name: String
     public weak var manager: ImportManager?
-    public class var identifier: String { return "import" }
+    public class var id: String { return "import" }
 
     public init(_ name: String) {
         self.name = name
@@ -21,7 +21,7 @@ public class Importer {
     }
     
     public var panelPrompt: String {
-        let identifier = type(of:self).identifier
+        let identifier = type(of:self).id
         var string = "\(identifier).prompt".localized
         if string == "\(identifier).prompt" {
             string = "importer.prompt".localized
@@ -30,7 +30,7 @@ public class Importer {
     }
 
     public var panelMessage: String {
-        let identifier = type(of:self).identifier
+        let identifier = type(of:self).id
         var string = "\(identifier).message".localized
         if string == "\(identifier).message" {
             string = "importer.message".localized
@@ -49,4 +49,8 @@ public class Importer {
     internal func makeSession(importing dictionaries: [[String:Any]], delegate: ImportDelegate) -> DictionariesImportSession? {
         return nil
     }
+}
+
+extension Importer: Identifiable {
+    public var id: String { Self.id }
 }

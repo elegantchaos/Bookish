@@ -8,3 +8,6 @@
 
 string = "String";
 number = "Number";
+
+com.elegantchaos.bookish.importer.delicious-library = "Delicious Library";
+com.elegantchaos.bookish.importer.dictionaries = "Manually Added";

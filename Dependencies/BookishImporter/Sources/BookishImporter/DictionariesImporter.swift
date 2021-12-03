@@ -8,11 +8,12 @@ import Foundation
 import ISBN
 import Logger
 import SwiftUI
+import BookishCore
 
 let dictionariesImporterChannel = Channel("DictionariesImporter")
 
 public class DictionariesImporter: Importer {
-    override class public var identifier: String { return "com.elegantchaos.bookish.importer.dictionaries" }
+    override class public var id: String { return "com.elegantchaos.bookish.importer.dictionaries" }
 
     override func makeSession(importing dictionaries: [[String:Any]], delegate: ImportDelegate) -> DictionariesImportSession? {
         let session = DictionariesImportSession(importer: self, dictionaries: dictionaries, delegate: delegate)
@@ -32,19 +33,10 @@ public class DictionariesImportSession: ImportSession {
         super.init(importer: importer, delegate: delegate)
     }
     
-    func validate(_ record: [String:Any]) -> ImportedBook? {
-        guard let title = record[asString: .titleKey] else { return nil }
-        guard let id = record[asString: "id"] else { return nil }
-
-        // TODO: process images
-        
-        return ImportedBook(id: id, title: title, images: [], properties: record)
-    }
-
     override func run() {
         delegate.session(self, willImportItems: dictionaries.count)
         for record in dictionaries {
-            if let book = self.validate(record) {
+            if let book = BookRecord(record) {
                 dictionariesImporterChannel.log("Imported \(book.title)")
                 delegate.session(self, didImport: book)
             } else {

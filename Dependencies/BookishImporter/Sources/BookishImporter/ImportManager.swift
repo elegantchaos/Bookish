@@ -24,7 +24,7 @@ public class ImportManager {
     public func register(_ importersToRegister: [Importer]) {
         for importer in importersToRegister {
             importerChannel.log("Registered \(importer.name)")
-            importers[type(of: importer).identifier] = importer
+            importers[type(of: importer).id] = importer
             importer.manager = self
         }
     }

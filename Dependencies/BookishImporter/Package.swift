@@ -21,6 +21,7 @@ let package = Package(
             targets: ["BookishImporterSamples"]),
     ],
     dependencies: [
+        .package(path: "../BookishCore"),
         .package(url: "https://github.com/elegantchaos/Coercion.git", from: "1.1.2"),
         .package(url: "https://github.com/elegantchaos/Files.git", from: "1.1.4"),
         .package(url: "https://github.com/elegantchaos/Localization.git", from: "1.0.3"),
@@ -31,7 +32,14 @@ let package = Package(
     targets: [
         .target(
             name: "BookishImporter",
-            dependencies: ["Coercion", "Files", "ISBN", "Localization" ,"Logger"]
+            dependencies: [
+                "BookishCore",
+                "Coercion",
+                "Files",
+                "ISBN",
+                "Localization",
+                "Logger"
+            ]
         ),
         
         .target(
