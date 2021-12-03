@@ -26,7 +26,6 @@ struct SearchBar: View {
                 Button(action: handleCancel) { Image(systemName: "xmark.circle.fill") }
                     .foregroundColor(Color(.systemGray2))
                     .padding(.trailing, 16)
-                    .animation(.default)
             }
         }
     }

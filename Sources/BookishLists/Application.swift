@@ -10,16 +10,25 @@ import Logger
 import SwiftUI
 import SheetController
 
+class AppearanceController: ObservableObject {
+    func formatted(date: Date) -> String {
+        let formatted = DateFormatter.localizedString(from: date, dateStyle: .short, timeStyle: .none)
+        return formatted
+    }
+}
+
 @main
 struct Application: App {
     @Environment(\.scenePhase) var scenePhase
     let model: Model
     let lookup: LookupManager
+    let appearance: AppearanceController
     
     init() {
         let stack = CoreDataStack(containerName: "BookishLists")
         self.model = Model(stack: stack)
         self.lookup = LookupManager()
+        self.appearance = AppearanceController()
 
         if CommandLine.arguments.contains("--wipeAllData") {
             model.removeAllData()
@@ -43,6 +52,7 @@ struct Application: App {
                     .environmentObject(model)
                     .environmentObject(sheetController)
                     .environmentObject(lookup)
+                    .environmentObject(appearance)
                     .onReceive(
                         model.objectWillChange.debounce(for: .seconds(1), scheduler: RunLoop.main), perform: { _ in
                             model.save()

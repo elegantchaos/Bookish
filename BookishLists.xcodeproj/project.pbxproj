@@ -62,6 +62,8 @@
 		8BB66541274D3568002CC0E8 /* RecordLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB66540274D3568002CC0E8 /* RecordLink.swift */; };
 		8BB66543274D3B99002CC0E8 /* AsyncImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB66542274D3B99002CC0E8 /* AsyncImageView.swift */; };
 		8BB66545274D4041002CC0E8 /* CDRecord+RootLists.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB66544274D4041002CC0E8 /* CDRecord+RootLists.swift */; };
+		8BCF6B48275A29000023DBE3 /* CandidatesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCF6B47275A29000023DBE3 /* CandidatesView.swift */; };
+		8BCF6B4A275A29540023DBE3 /* CandidateDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCF6B49275A29540023DBE3 /* CandidateDetailView.swift */; };
 		8BE1493225DC156400A1DC32 /* BookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE1493125DC156400A1DC32 /* BookView.swift */; };
 		8BE1493425DC16E400A1DC32 /* IndexEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE1493325DC16E400A1DC32 /* IndexEntry.swift */; };
 		8BE1493625DC178F00A1DC32 /* AllBooksIndexView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE1493525DC178F00A1DC32 /* AllBooksIndexView.swift */; };
@@ -153,6 +155,8 @@
 		8BB66540274D3568002CC0E8 /* RecordLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordLink.swift; sourceTree = "<group>"; };
 		8BB66542274D3B99002CC0E8 /* AsyncImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncImageView.swift; sourceTree = "<group>"; };
 		8BB66544274D4041002CC0E8 /* CDRecord+RootLists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDRecord+RootLists.swift"; sourceTree = "<group>"; };
+		8BCF6B47275A29000023DBE3 /* CandidatesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandidatesView.swift; sourceTree = "<group>"; };
+		8BCF6B49275A29540023DBE3 /* CandidateDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandidateDetailView.swift; sourceTree = "<group>"; };
 		8BE1493125DC156400A1DC32 /* BookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookView.swift; sourceTree = "<group>"; };
 		8BE1493325DC16E400A1DC32 /* IndexEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexEntry.swift; sourceTree = "<group>"; };
 		8BE1493525DC178F00A1DC32 /* AllBooksIndexView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllBooksIndexView.swift; sourceTree = "<group>"; };
@@ -212,6 +216,8 @@
 				8BE1493525DC178F00A1DC32 /* AllBooksIndexView.swift */,
 				8BE1493125DC156400A1DC32 /* BookView.swift */,
 				8B57F09125F7D9F2007DB517 /* CandidateView.swift */,
+				8BCF6B47275A29000023DBE3 /* CandidatesView.swift */,
+				8BCF6B49275A29540023DBE3 /* CandidateDetailView.swift */,
 				229E259A25254AED00C41777 /* ContentView.swift */,
 				8B1F10E125ADC28800108A34 /* EntryView.swift */,
 				8BE1493725DC250300A1DC32 /* FieldEditorView.swift */,
@@ -612,6 +618,7 @@
 				8B42BE4A25F794D800855D08 /* ScannerView.swift in Sources */,
 				8B57F08D25F7C166007DB517 /* DataFetcher.swift in Sources */,
 				8BB6653A274D1F30002CC0E8 /* CDRecord+CoreData.swift in Sources */,
+				8BCF6B48275A29000023DBE3 /* CandidatesView.swift in Sources */,
 				8BE1494125DD7D7D00A1DC32 /* FieldList.swift in Sources */,
 				8B987C9F25C047E5003D6F9F /* CoreDataStack.swift in Sources */,
 				8B987D0325C1CA60003D6F9F /* NSEntityDescriptionExtensions.swift in Sources */,
@@ -632,6 +639,7 @@
 				8B57F08825F7C0E9007DB517 /* LookupSession.swift in Sources */,
 				8B39B47B26027F35003B0C5B /* DeferredTextField.swift in Sources */,
 				8BB66543274D3B99002CC0E8 /* AsyncImageView.swift in Sources */,
+				8BCF6B4A275A29540023DBE3 /* CandidateDetailView.swift in Sources */,
 				8BB6653F274D3560002CC0E8 /* RecordLabel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

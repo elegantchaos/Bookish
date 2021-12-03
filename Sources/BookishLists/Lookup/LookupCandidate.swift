@@ -6,12 +6,13 @@
 //import Datastore
 import Foundation
 
-public class LookupCandidate: CustomStringConvertible {
+public class LookupCandidate: Identifiable {
     public struct Persisted: Codable {
         let name: String
         let data: String
     }
     
+    public let id = UUID()
     public let service: LookupService
     public let title: String
     public let authors: [String]
@@ -31,7 +32,7 @@ public class LookupCandidate: CustomStringConvertible {
     public var persisted: Persisted {
         return Persisted(name: service.name, data: persistedData)
     }
-
+    
     internal var persistedData: String {
         return ""
     }
@@ -53,7 +54,9 @@ public class LookupCandidate: CustomStringConvertible {
     public var existingBook: Any? {
         return nil
     }
-    
+}
+
+extension LookupCandidate: CustomStringConvertible {
     public var description: String {
         get {
             return "<Candidate: \(title) \(authors) \(publisher)>"

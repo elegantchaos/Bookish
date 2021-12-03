@@ -13,9 +13,10 @@ struct ScannerView: View {
     @State var barcode: String = ""
     @State var session: LookupSession? = nil
     @State var candidates: [LookupCandidate] = []
+    @State var showCapture = false
     @State var search: String = ""
     @State var searching = false
-    @State var selection: LookupCandidate?
+    @State var selection: UUID?
     
     var body: some View {
         NavigationView {
@@ -26,11 +27,28 @@ struct ScannerView: View {
                     if !search.isEmpty && session?.search != search {
                         Button(action: handleLookup) {
                             Text("Find")
-                                .padding()
                         }
                     }
+
+                    Button(action: handleToggleCapture) {
+                        Image(systemName: showCapture ? "camera.fill" : "camera")
+                    }
+                    .padding(.trailing)
                 }
-                
+
+                if showCapture {
+                    CaptureView { scanned in
+                        if scanned != barcode {
+                            barcode = scanned
+                            session?.cancel()
+                            session = lookup.lookup(query: scanned) { session, state in
+                                handleLookupProgress(session: session, state: state)
+                            }
+                        }
+                    }
+                    .aspectRatio(1.0, contentMode: .fit)
+                }
+
                 let gotCandidates = candidates.count > 0
                 if searching || gotCandidates {
                     HStack {
@@ -41,27 +59,30 @@ struct ScannerView: View {
                     }
                     
                     if gotCandidates {
-                        ForEach(candidates, id: \.title) { candidate in
-//                            LinkView(candidate, selection: $selection)
-                            CandidateView(candidate: candidate)
-                        }
+                        CandidatesView(candidates: candidates, selection: $selection)
                     }
+                } else {
+                    Text("Enter a search term to look for possible book candidates, or use the camera to scan a barcode.")
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+
+                if !searching || !gotCandidates {
+                    Spacer()
                 }
                 
-                CaptureView { scanned in
-                    if scanned != barcode {
-                        barcode = scanned
-                        session?.cancel()
-                        session = lookup.lookup(query: scanned) { session, state in
-                            handleLookupProgress(session: session, state: state)
-                        }
-                    }
-                }
+
             }
             .navigationBarItems(
                 trailing: SheetDismissButton()
             )
+            .navigationTitle("Add Books")
+            .navigationBarTitleDisplayMode(.inline)
         }
+        .navigationViewStyle(.stack)
+    }
+    
+    func handleToggleCapture() {
+        showCapture = !showCapture
     }
     
     func handleLookup() {

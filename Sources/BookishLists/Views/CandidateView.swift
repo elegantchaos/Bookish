@@ -13,7 +13,11 @@ extension LookupCandidate: AutoLinked {
     
     public var labelView: some View {
         Label {
-            Text(title)
+            VStack(alignment: .leading) {
+                Text(title)
+                Text(authors.joined(separator: ", "))
+                    .font(.footnote)
+            }
         } icon: {
             if let string = image, let url = URL(string: string) {
                 LabelIconView(url: url, placeholder: "book")
@@ -21,32 +25,5 @@ extension LookupCandidate: AutoLinked {
                 Image(systemName: "book")
             }
         }
-    }
-}
-
-struct CandidateView: View {
-    let candidate: LookupCandidate
-    
-    var body: some View {
-        HStack {
-            LinkView(candidate, selection: .constant(nil))
-            Text(candidate.title)
-            Text(candidate.authors.joined(separator: ", "))
-            Button(action: handleAdd) {
-                Image(systemName: "plus.circle")
-            }
-        }
-    }
-    
-    func handleAdd() {
-        
-    }
-}
-
-struct CandidateDetailView: View {
-    let candidate: LookupCandidate
-
-    var body: some View {
-        Text("detail here")
     }
 }
