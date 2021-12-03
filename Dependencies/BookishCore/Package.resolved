@@ -1,0 +1,25 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Coercion",
+        "repositoryURL": "https://github.com/elegantchaos/Coercion.git",
+        "state": {
+          "branch": null,
+          "revision": "f5ae9b7b191d9c042047e08e880e80ce676de230",
+          "version": "1.1.2"
+        }
+      },
+      {
+        "package": "ISBN",
+        "repositoryURL": "https://github.com/elegantchaos/ISBN.git",
+        "state": {
+          "branch": null,
+          "revision": "d7ca6431b321a932ce509b214173e166e3378430",
+          "version": "1.0.2"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
