@@ -10,7 +10,7 @@ import CoreData
 import Foundation
 import ThreadExtensions
 
-class DeliciousImportMonitor: ObservableObject {
+class ImportHandler: ObservableObject {
     let model: Model
     let list: CDRecord
     let allPeople: CDRecord
@@ -33,74 +33,78 @@ class DeliciousImportMonitor: ObservableObject {
         self.allSeries = context.allSeries
         self.seriesCleaner = SeriesCleaner()
         self.publisherCleaner = PublisherCleaner()
+    }
+}
+
+extension ImportHandler: ImportDelegate {
+    func session(_ session: ImportSession, willImportItems count: Int) {
+        self.count = count
+        self.intervals = Date.timeIntervalSinceReferenceDate
         
         let date = Date()
         let formatted = DateFormatter.localizedString(from: date, dateStyle: .short, timeStyle: .none)
         list.kind = .importSession
-        list.name = "Delicious Library \(formatted)"
-        list.set("Records imported from Delicious Library on \(formatted).", forKey: "notes")
+        list.name = "\(session.title) \(formatted)"
+        list.set("Records imported from \(session.title) on \(formatted).", forKey: "notes")
         list.set(date, forKey: "imported")
         context.allImports.addToContents(list)
-    }
-}
 
-extension DeliciousImportMonitor: ImportMonitor {
-    func session(_ session: ImportSession, willImportItems count: Int) {
-        self.count = count
-        self.intervals = Date.timeIntervalSinceReferenceDate
         report(label: "Importing…")
     }
     
-    func session(_ session: ImportSession, didImport item: Any) {
-        if let rawBook = item as? DeliciousLibraryImportSession.Book {
-            let importedBook = cleanupSeries(cleanupPublisher(rawBook))
-            
-            let book: CDRecord
-            if let id = UUID(uuidString: importedBook.id) { // TODO: just use the id we're given here?
-                book = CDRecord.findOrMakeWithID(id.uuidString, in: context) { newBook in
-                    newBook.kind = .book
-                }
-            } else {
-                book = CDRecord.findOrMakeWithName(importedBook.title, in: context) { newBook in
-                    newBook.kind = .book
-                }
+    func session(_ session: ImportSession, didImport rawBook: ImportedBook) {
+        let importedBook = cleanupSeries(cleanupPublisher(rawBook))
+        
+        let book = CDRecord.findOrMakeWithID(importedBook.id, in: context) { newBook in
+                newBook.kind = .book
             }
-            
-            book.name = importedBook.title
-            book.imageURL = importedBook.images.first
-            book.merge(properties: importedBook.properties)
-            list.add(book)
-            done += 1
+        
+        book.name = importedBook.title
+        book.imageURL = importedBook.images.first
+        book.merge(properties: importedBook.properties)
+        list.add(book)
+        done += 1
 
-            let now = Date.timeIntervalSinceReferenceDate
-            let elapsed = now - intervals
-            if elapsed > 0.1 {
-                intervals = now
-                report(label: "Importing: \(importedBook.title)")
-            }
-            
-            addPeople(to: book, from: importedBook, withKey: .authorsKey, asRole: "Author")
-            addPeople(to: book, from: importedBook, withKey: .illustratorsKey, asRole: "Illustrator")
-
-            if let publishers = importedBook.properties[.publishersKey] as? [String] {
-                for publisher in publishers {
-                    let list = CDRecord.findOrMakeWithName(publisher, kind: .publisher, in: context)
-                    self.allPublishers.addToContents(list)
-                    list.add(book)
-                }
-            }
-
-            if let series = importedBook.properties[.seriesKey] as? String, !series.isEmpty {
-                let list = CDRecord.findOrMakeWithName(series, kind: .series, in: context)
-                self.allSeries.addToContents(list)
-                list.add(book)
-
-            }
-            save()
+        let now = Date.timeIntervalSinceReferenceDate
+        let elapsed = now - intervals
+        if elapsed > 0.1 {
+            intervals = now
+            report(label: "Importing: \(importedBook.title)")
         }
+        
+        addPeople(to: book, from: importedBook, withKey: .authorsKey, asRole: "Author")
+        addPeople(to: book, from: importedBook, withKey: .illustratorsKey, asRole: "Illustrator")
+
+        if let publishers = importedBook.properties[.publishersKey] as? [String] {
+            for publisher in publishers {
+                let list = CDRecord.findOrMakeWithName(publisher, kind: .publisher, in: context)
+                self.allPublishers.addToContents(list)
+                list.add(book)
+            }
+        }
+
+        if let series = importedBook.properties[.seriesKey] as? String, !series.isEmpty {
+            let list = CDRecord.findOrMakeWithName(series, kind: .series, in: context)
+            self.allSeries.addToContents(list)
+            list.add(book)
+
+        }
+        save()
     }
-  
-    func cleanupPublisher(_ raw: DeliciousLibraryImportSession.Book) -> DeliciousLibraryImportSession.Book {
+
+    func sessionDidFinish(_ session: ImportSession) {
+        cleanup()
+    }
+    
+    func sessionDidFail(_ session: ImportSession) {
+        print("Import failed!") // TODO: handle error(s)
+        cleanup()
+    }
+
+}
+
+extension ImportHandler {
+    func cleanupPublisher(_ raw: ImportedBook) -> ImportedBook {
         let title = raw.title
         let subtitle = raw.properties[asString: .subtitleKey, default: ""]
         let series = raw.properties[asString: .seriesKey, default: ""]
@@ -141,7 +145,7 @@ extension DeliciousImportMonitor: ImportMonitor {
 
     }
     
-    func cleanupSeries(_ raw: DeliciousLibraryImportSession.Book) -> DeliciousLibraryImportSession.Book {
+    func cleanupSeries(_ raw: ImportedBook) -> ImportedBook {
         let title = raw.title
         let subtitle = raw.properties[asString: .subtitleKey, default: ""]
         let series = raw.properties[asString: .seriesKey, default: ""]
@@ -181,7 +185,7 @@ extension DeliciousImportMonitor: ImportMonitor {
         return book
     }
     
-    func addPeople(to book: CDRecord, from importedBook: DeliciousLibraryImportSession.Book, withKey key: String, asRole role: String) {
+    func addPeople(to book: CDRecord, from importedBook: ImportedBook, withKey key: String, asRole role: String) {
         if let people = importedBook.properties[key] as? [String] {
             for person in people {
                 let list = CDRecord.findOrMakeWithName(person, kind: .person, in: context)
@@ -194,14 +198,6 @@ extension DeliciousImportMonitor: ImportMonitor {
     }
     
     
-    func sessionDidFinish(_ session: ImportSession) {
-        cleanup()
-    }
-    
-    func sessionDidFail(_ session: ImportSession) {
-        print("Import failed!") // TODO: handle error(s)
-        cleanup()
-    }
 
     func report(label: String) {
         let progress = ImportProgress(count: done, total: count, label: label)

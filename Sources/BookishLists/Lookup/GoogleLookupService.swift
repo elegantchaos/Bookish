@@ -73,7 +73,12 @@ public class GoogleLookupCandidate: LookupCandidate {
         return items
     }
 
-
+    public override var importProperties: [String : Any] {
+        var properties = super.importProperties
+        properties.merge(info, uniquingKeysWith: { k1, k2 in k1 })
+        return properties
+    }
+    
     public override var action: String {
         return "AddCandidate"
     }

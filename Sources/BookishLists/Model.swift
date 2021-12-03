@@ -58,7 +58,7 @@ struct SelectionStats {
 class Model: ObservableObject {
     
     let stack: CoreDataStack
-    let importer = ImportManager()
+    let importer: ImportManager
     let images = UIImageCache()
     
     @Published var importRequested = false
@@ -82,6 +82,10 @@ class Model: ObservableObject {
     
     init(stack: CoreDataStack) {
         self.stack = stack
+        self.importer = ImportManager([
+            DeliciousLibraryImporter("Delicious Library"),
+            DictionariesImporter("Manual Import"),
+        ])
         
         if let string = UserDefaults.standard.string(forKey: "selection") {
             onMainQueue {
@@ -98,7 +102,6 @@ class Model: ObservableObject {
         let context = stack.viewContext
         guard context.hasChanges else { return }
         do {
-//            objectWillChange.send()
             try context.save()
         } catch let error as NSError {
             print(error.localizedDescription)
@@ -163,8 +166,15 @@ class Model: ObservableObject {
     
     func importFromDelicious(url: URL) {
         stack.onBackground { context in
-            let bi = DeliciousImportMonitor(model: self, context: context)
-            self.importer.importFrom(url, monitor: bi)
+            let delegate = ImportHandler(model: self, context: context)
+            self.importer.importFrom(url, delegate: delegate)
+        }
+    }
+    
+    func importFromDictionaries(dictionaries: [[String:Any]]) {
+        stack.onBackground { context in
+            let delegate = ImportHandler(model: self, context: context)
+            self.importer.importFrom(dictionaries, delegate: delegate)
         }
     }
     

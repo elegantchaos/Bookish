@@ -8,7 +8,7 @@ import SheetController
 import SwiftUI
 import SwiftUIExtensions
 
-struct ScannerView: View {
+struct AddBooksView: View {
     @EnvironmentObject var lookup: LookupManager
     @State var barcode: String = ""
     @State var session: LookupSession? = nil

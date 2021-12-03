@@ -32,12 +32,10 @@ struct ContentView: View {
                     if let progress = model.importProgress {
                         ProgressView(progress.label, value: Double(progress.count), total: Double(progress.total))
                             .frame(maxWidth: 512)
-                    }
-                }
-                
-                ToolbarItem(placement: .bottomBar) {
-                    Button(action: handlePreferences) {
-                        Label("Preferences", systemImage: "gear")
+                    } else {
+                        Button(action: handlePreferences) {
+                            Label("Preferences", systemImage: "gear")
+                        }
                     }
                 }
             }

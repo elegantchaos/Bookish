@@ -49,7 +49,7 @@ struct RootActionsMenuView: View {
 
     func handleScan() {
         sheetController.show {
-            ScannerView()
+            AddBooksView()
         }
     }
 }

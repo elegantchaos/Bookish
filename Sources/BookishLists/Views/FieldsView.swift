@@ -6,42 +6,54 @@
 import SwiftUI
 
 struct FieldsView: View {
+    @EnvironmentObject var appearance: AppearanceController
+    
     let record: CDRecord
     let fields: FieldList
     
     var body: some View {
         VStack(spacing: 4.0) {
             ForEach(fields.fields) { field in
-                switch field.kind {
-                    case .string:
-                        if let string = record.string(forKey: field.key), !string.isEmpty {
-                            HStack {
-                                Label(field.key, systemImage: "tag")
-                                Spacer()
-                                Text(string)
-                            }
-                        }
-
-                    case .date:
-                        if let date = record.date(forKey: field.key) {
-                            HStack {
-                                Label(field.key, systemImage: "calendar")
-                                Spacer()
-                                Text(DateFormatter.localizedString(from: date, dateStyle: .medium, timeStyle: .none))
-                            }
-                        }
-
-                    case .number:
-                        if let string = record.string(forKey: field.key), !string.isEmpty {
-                            HStack {
-                                Label(field.key, systemImage: "tag")
-                                Spacer()
-                                Text(string)
-                            }
-                        }
-
+                if let (text, icon) = textAndIcon(for: field) {
+                    PropertyView(label: field.key, icon: icon, value: text)
                 }
             }
+        }
+    }
+        
+    func textAndIcon(for field: Field) -> (String, String)? {
+        switch field.kind {
+            case .string:
+                if let string = record.string(forKey: field.key), !string.isEmpty {
+                    return (string, "tag")
+                }
+                
+            case .date:
+                if let date = record.date(forKey: field.key) {
+                    let string = appearance.formatted(date: date)
+                    return (string, "calendar")
+                }
+                
+            case .number:
+                if let string = record.string(forKey: field.key), !string.isEmpty {
+                    return (string, "tag")
+                }
+        }
+        
+        return nil
+    }
+}
+
+struct PropertyView: View {
+    let label: String
+    let icon: String
+    let value: String
+
+    var body: some View {
+        HStack {
+            Label(label, systemImage: icon)
+            Spacer()
+            Text(value)
         }
     }
 }

@@ -54,6 +54,16 @@ public class LookupCandidate: Identifiable {
     public var existingBook: Any? {
         return nil
     }
+    
+    public var importProperties: [String:Any] {
+        var book: [String:Any] = [:]
+        book["id"] = id
+        book[.titleKey] = title
+        book[.authorsKey] = authors
+        book[.publishersKey] = [publisher]
+        book[.publishedDateKey] = date
+        return book
+    }
 }
 
 extension LookupCandidate: CustomStringConvertible {
