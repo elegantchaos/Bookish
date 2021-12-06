@@ -7,7 +7,7 @@ import BookishCore
 import Foundation
 import BookishCore
 
-public class LookupCandidate: Identifiable {
+public class LookupCandidate: ObservableObject, Identifiable {
     public let id = UUID()
     public let service: LookupService
     public let title: String
@@ -15,7 +15,7 @@ public class LookupCandidate: Identifiable {
     public let publisher: String
     public let image: URL?
     public let book: BookRecord
-    public var imported = false
+    @Published public var imported = false
     
     public init(service: LookupService, record: BookRecord) {
         self.title = record.title

@@ -9,8 +9,7 @@ struct CandidateDetailView: View {
     @EnvironmentObject var appearance: AppearanceController
     @EnvironmentObject var model: Model
     @Environment(\.presentationMode) var presentationMode
-
-    let candidate: LookupCandidate
+    @ObservedObject var candidate: LookupCandidate
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -29,29 +28,43 @@ struct CandidateDetailView: View {
                 .frame(maxWidth: 256, maxHeight: 256)
         
             Spacer()
-            
-        }
-        .padding()
-        .toolbar {
-            ToolbarItem(placement: .bottomBar) {
-                Button(action: handleAdd) {
-                    Text("Add To Collection")
-                        .buttonStyle(.borderedProminent)
-                }
-            }
-            
-            ToolbarItem(placement: .bottomBar) {
-                Menu("Lists") {
+
+            HStack {
+                Spacer()
+                Menu {
                     Button("A", action: handleAdd)
                     Button("B", action: handleAdd)
                     Button("C", action: handleAdd)
+                } label: {
+                    Text("Add To Collection")
+                } primaryAction: {
+                    handleAdd()
+ 
                 }
+                .foregroundColor(.white)
+                .padding(4.0)
+                .background(
+                    RoundedRectangle(cornerRadius: 8.0, style: .continuous)
+                        .foregroundColor(.accentColor)
+                )
             }
         }
+        .padding()
     }
     
     func handleAdd() {
         model.importFrom([candidate.book])
+        candidate.imported = true
         presentationMode.wrappedValue.dismiss()
+    }
+}
+
+struct MainActionButtonStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .background(
+                RoundedRectangle(cornerRadius: 4.0, style: .continuous)
+                    .foregroundColor(.red)
+            )
     }
 }

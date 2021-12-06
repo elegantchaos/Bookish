@@ -80,6 +80,12 @@ struct AddBooksView: View {
             .navigationBarTitleDisplayMode(.inline)
         }
         .navigationViewStyle(.stack)
+        .onAppear(perform: handleAppeared)
+    }
+    
+    func handleAppeared() {
+        search = "phlebas"
+        handleLookup()
     }
     
     func handleToggleCapture() {

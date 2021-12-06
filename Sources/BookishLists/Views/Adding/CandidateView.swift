@@ -12,17 +12,42 @@ extension LookupCandidate: AutoLinked {
     }
     
     public var labelView: some View {
-        Label {
-            VStack(alignment: .leading) {
-                Text(title)
-                Text(authors.joined(separator: ", "))
-                    .font(.footnote)
+        return CandidateLabelView(candidate: self)
+    }
+}
+
+struct CandidateLabelView: View {
+    @ObservedObject var candidate: LookupCandidate
+    
+    var body: some View {
+        HStack {
+            ZStack(alignment: .bottomTrailing) {
+                if let url = candidate.image {
+                    LabelIconView(url: url, placeholder: "book")
+                } else {
+                    Image(systemName: "book")
+                }
+                
+                if candidate.imported {
+                    Image(systemName: "checkmark")
+                        .font(.footnote)
+                        .foregroundStyle(.primary, .tint, .background)
+                        .symbolRenderingMode(.palette)
+                        .symbolVariant(.circle)
+                        .symbolVariant(.fill)
+
+                    Image(systemName: "checkmark")
+                        .font(.footnote)
+                        .symbolRenderingMode(.monochrome)
+                        .symbolVariant(.circle)
+
+                }
             }
-        } icon: {
-            if let url = image {
-                LabelIconView(url: url, placeholder: "book")
-            } else {
-                Image(systemName: "book")
+            
+            VStack(alignment: .leading) {
+                Text(candidate.title)
+                Text(candidate.authors.joined(separator: ", "))
+                    .font(.footnote)
             }
         }
     }
