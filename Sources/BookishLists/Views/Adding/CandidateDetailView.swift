@@ -24,10 +24,20 @@ struct CandidateDetailView: View {
 
             PropertyView(label: "found by", icon: "globe", value: candidate.service.name)
             
+            let image = model.images.image(for: candidate.image)
+            AsyncImageView(image)
+                .frame(maxWidth: 256, maxHeight: 256)
+        
             Spacer()
             
-            Button(action: handleAdd) {
-                Text("Add To Collection")
+        }
+        .padding()
+        .toolbar {
+            ToolbarItem(placement: .bottomBar) {
+                Button(action: handleAdd) {
+                    Text("Add To Collection")
+                        .buttonStyle(.borderedProminent)
+                }
             }
         }
     }
