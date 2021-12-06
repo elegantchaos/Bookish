@@ -86,7 +86,7 @@ private extension Dictionary where Key == String, Value == Any {
             }
         }
         
-        self[.imageURLsKey] = urls
+        self[BookKey.imageURLs.rawValue] = urls
     }
     
     mutating func extractDeliciousID() -> String {
@@ -111,25 +111,25 @@ extension BookRecord {
         var unprocessed = properties
         var processed: [String:Any] = [:]
         
-        processed.extractString(forKey: "format", as: .formatKey, from: &unprocessed)
-        processed.extractString(forKey: "subtitle", as: .subtitleKey, from: &unprocessed)
-        processed.extractString(forKey: "asin", as: .asinKey, from: &unprocessed)
-        processed.extractString(forKey: "deweyDecimal", as: .deweyKey, from: &unprocessed)
-        processed.extractString(forKey: "seriesSingularString", as: .seriesKey, from: &unprocessed)
+        processed.extractString(forKey: "format", as: .format, from: &unprocessed)
+        processed.extractString(forKey: "subtitle", as: .subtitle, from: &unprocessed)
+        processed.extractString(forKey: "asin", as: .asin, from: &unprocessed)
+        processed.extractString(forKey: "deweyDecimal", as: .dewey, from: &unprocessed)
+        processed.extractString(forKey: "seriesSingularString", as: .series, from: &unprocessed)
         processed.extractISBN(from: &unprocessed)
-        processed.extractNonZeroDouble(forKey: "boxHeightInInches", as: .heightKey, from: &unprocessed)
-        processed.extractNonZeroDouble(forKey: "boxWidthInInches", as: .widthKey, from: &unprocessed)
-        processed.extractNonZeroDouble(forKey: "boxLengthInInches", as: .lengthKey, from: &unprocessed)
-        processed.extractNonZeroInt(forKey: "pages", as: .pagesKey, from: &unprocessed)
-        processed.extractNonZeroInt(forKey: "numberInSeries", as: .seriesPositionKey, from: &unprocessed)
-        processed.extractDate(forKey: "creationDate", as: .addedDateKey, from: &unprocessed)
-        processed.extractDate(forKey: "lastModificationDate", as: .modifiedDateKey, from: &unprocessed)
-        processed.extractDate(forKey: "publishDate", as: .publishedDateKey, from: &unprocessed)
-        processed.extractStringList(forKey: "creatorsCompositeString", as: .authorsKey, from: &unprocessed)
-        processed.extractStringList(forKey: "editionsCompositeString", as: .editionsKey, from: &unprocessed)
-        processed.extractStringList(forKey: "publishersCompositeString", as: .publishersKey, from: &unprocessed)
-        processed.extractStringList(forKey: "genresCompositeString", as: .genresKey, from: &unprocessed)
-        processed.extractStringList(forKey: "illustratorsCompositeString", as: .illustratorsKey, from: &unprocessed)
+        processed.extractNonZeroDouble(forKey: "boxHeightInInches", as: .height, from: &unprocessed)
+        processed.extractNonZeroDouble(forKey: "boxWidthInInches", as: .width, from: &unprocessed)
+        processed.extractNonZeroDouble(forKey: "boxLengthInInches", as: .length, from: &unprocessed)
+        processed.extractNonZeroInt(forKey: "pages", as: .pages, from: &unprocessed)
+        processed.extractNonZeroInt(forKey: "numberInSeries", as: .seriesPosition, from: &unprocessed)
+        processed.extractDate(forKey: "creationDate", as: .addedDate, from: &unprocessed)
+        processed.extractDate(forKey: "lastModificationDate", as: .modifiedDate, from: &unprocessed)
+        processed.extractDate(forKey: "publishDate", as: .publishedDate, from: &unprocessed)
+        processed.extractStringList(forKey: "creatorsCompositeString", as: .authors, from: &unprocessed)
+        processed.extractStringList(forKey: "editionsCompositeString", as: .editions, from: &unprocessed)
+        processed.extractStringList(forKey: "publishersCompositeString", as: .publishers, from: &unprocessed)
+        processed.extractStringList(forKey: "genresCompositeString", as: .genres, from: &unprocessed)
+        processed.extractStringList(forKey: "illustratorsCompositeString", as: .illustrators, from: &unprocessed)
         processed.extractImages(from: &unprocessed)
 
         for (key, value) in unprocessed {

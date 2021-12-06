@@ -33,13 +33,13 @@ public class GoogleLookupCandidate: LookupCandidate {
         var updated = info
 
         if let publisher = updated.extractString(forKey: "publisher") {
-            updated[.publishersKey] = [publisher]
+            updated[.publishers] = [publisher]
         }
 
         if let string = updated.extractString(forKey: "publishedDate") {
             let matches = service.dateDetector.matches(in: string, options: NSRegularExpression.MatchingOptions(), range: NSRange(location: 0, length: string.count))
             let date: Date? = matches.first?.date
-            updated[.publishedDateKey] = date
+            updated[.publishedDate] = date
         }
         
         var image: String? = nil
@@ -51,13 +51,13 @@ public class GoogleLookupCandidate: LookupCandidate {
         }
         
         if let image = image, let url = URL(string: image) {
-            updated[.imageURLsKey] = [url]
+            updated[.imageURLs] = [url]
         }
 
-        updated[.isbnKey] = GoogleLookupCandidate.isbn(from: info)
+        updated[.isbn] = GoogleLookupCandidate.isbn(from: info)
 
         if let pages = info["pageCount"] as? NSNumber {
-            updated[.pagesKey] = pages.intValue
+            updated[.pages] = pages.intValue
         }
 
         let book = BookRecord(updated, id: UUID().uuidString, source: service.name)!

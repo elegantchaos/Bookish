@@ -19,11 +19,11 @@ public class LookupCandidate: ObservableObject, Identifiable {
     
     public init(service: LookupService, record: BookRecord) {
         self.title = record.title
-        self.authors = record.authors
-        self.publisher = record.publishers.first ?? ""
+        self.authors = record.strings(forKey:.authors)
+        self.publisher = record.strings(forKey: .publishers).first ?? ""
         self.service = service
         self.book = record
-        self.image = record.imageURLS.first
+        self.image = record.urls(forKey: .imageURLs).first
     }
 
     public var summary: String {

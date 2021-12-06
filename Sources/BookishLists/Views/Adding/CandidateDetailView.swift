@@ -17,7 +17,7 @@ struct CandidateDetailView: View {
             PropertyView(label: "authors", icon: "person.2", value: candidate.authors.joined(separator: ", "))
             PropertyView(label: "publisher", icon: "building.2", value: candidate.publisher)
 
-            if let date = candidate.book.properties[asDate: .publishedDateKey] {
+            if let date = candidate.book.date(forKey: .publishedDate) {
                 PropertyView(label: "date", icon: "calendar", value: appearance.formatted(date: date))
             }
 

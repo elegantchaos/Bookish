@@ -5,29 +5,31 @@
 
 import Foundation
 
-public extension String {
-    static let addedDateKey = "added"
-    static let asinKey = "asin"
-    static let authorsKey = "authors"
-    static let deweyKey = "dewey"
-    static let editionsKey = "editions"
-    static let formatKey = "format"
-    static let genresKey = "genres"
-    static let heightKey = "height"
-    static let idKey = "id"
-    static let illustratorsKey = "illustrators"
-    static let imageURLsKey = "imageURLs"
-    static let isbnKey = "isbn"
-    static let lengthKey = "length"
-    static let modifiedDateKey = "modified"
-    static let pagesKey = "pages"
-    static let publishedDateKey = "published"
-    static let publishersKey = "publishers"
-    static let seriesKey = "series"
-    static let seriesPositionKey = "seriesPosition"
-    static let sourceKey = "source"
-    static let sourceRawKey = "source.raw"
-    static let subtitleKey = "subtitle"
-    static let titleKey = "title"
-    static let widthKey = "width"
+public enum BookKey: String, CaseIterable {
+    case addedDate
+    case asin
+    case authors
+    case description
+    case dewey
+    case editions
+    case format
+    case genres
+    case height
+    case id
+    case illustrators
+    case imageURLs
+    case isbn
+    case length
+    case modifiedDate
+    case notes
+    case pages
+    case publishedDate
+    case publishers
+    case series
+    case seriesPosition
+    case source
+    case sourceRaw
+    case subtitle
+    case title
+    case width
 }

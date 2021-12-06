@@ -61,7 +61,7 @@ extension ImportHandler: ImportDelegate {
             }
         
         book.name = importedBook.title
-        book.imageURL = importedBook.imageURLS.first
+        book.imageURL = importedBook.urls(forKey: .imageURLs).first
         book.merge(properties: importedBook.properties)
         list.add(book)
         done += 1
@@ -73,23 +73,22 @@ extension ImportHandler: ImportDelegate {
             report(label: "Importing: \(importedBook.title)")
         }
         
-        addPeople(to: book, from: importedBook, withKey: .authorsKey, asRole: "Author")
-        addPeople(to: book, from: importedBook, withKey: .illustratorsKey, asRole: "Illustrator")
+        addPeople(to: book, from: importedBook, withKey: .authors, asRole: "Author")
+        addPeople(to: book, from: importedBook, withKey: .illustrators, asRole: "Illustrator")
 
-        if let publishers = importedBook.properties[.publishersKey] as? [String] {
-            for publisher in publishers {
-                let list = CDRecord.findOrMakeWithName(publisher, kind: .publisher, in: context)
-                self.allPublishers.addToContents(list)
-                list.add(book)
-            }
+        for publisher in importedBook.strings(forKey: .publishers) {
+            let list = CDRecord.findOrMakeWithName(publisher, kind: .publisher, in: context)
+            self.allPublishers.addToContents(list)
+            list.add(book)
         }
 
-        if let series = importedBook.properties[.seriesKey] as? String, !series.isEmpty {
+        let series = importedBook.string(forKey: .series)
+        if !series.isEmpty {
             let list = CDRecord.findOrMakeWithName(series, kind: .series, in: context)
             self.allSeries.addToContents(list)
             list.add(book)
-
         }
+        
         save()
     }
 
@@ -107,9 +106,9 @@ extension ImportHandler: ImportDelegate {
 extension ImportHandler {
     func cleanupPublisher(_ raw: BookRecord) -> BookRecord {
         let title = raw.title
-        let subtitle = raw.properties[asString: .subtitleKey, default: ""]
-        let series = raw.properties[asString: .seriesKey, default: ""]
-        let publishers = (raw.properties[.publishersKey] as? [String]) ?? []
+        let subtitle = raw.string(forKey: .subtitle)
+        let series = raw.string(forKey: .series)
+        let publishers = raw.strings(forKey: .publishers)
 
         guard let cleaned = publisherCleaner.cleanup(book: .init(title: title, subtitle: subtitle, publishers: publishers, series: series)) else {
             return raw
@@ -125,21 +124,21 @@ extension ImportHandler {
             if !subtitle.isEmpty {
                 book.properties["original.subtitle"] = subtitle
             }
-            book.properties[.subtitleKey] = cleaned.subtitle.isEmpty ? nil : cleaned.subtitle
+            book[.subtitle] = cleaned.subtitle.isEmpty ? nil : cleaned.subtitle
         }
         
         if series != cleaned.series {
             if !series.isEmpty {
                 book.properties["original.series"] = series
             }
-            book.properties[.seriesKey] = cleaned.series.isEmpty ? nil : cleaned.series
+            book[.series] = cleaned.series.isEmpty ? nil : cleaned.series
         }
 
         if publishers != cleaned.publishers {
             if !publishers.isEmpty {
                 book.properties["original.publisher"] = publishers
             }
-            book.properties[.publishersKey] = cleaned.publishers.isEmpty ? nil : cleaned.publishers
+            book[.publishers] = cleaned.publishers.isEmpty ? nil : cleaned.publishers
         }
 
         return book
@@ -148,9 +147,9 @@ extension ImportHandler {
     
     func cleanupSeries(_ raw: BookRecord) -> BookRecord {
         let title = raw.title
-        let subtitle = raw.properties[asString: .subtitleKey, default: ""]
-        let series = raw.properties[asString: .seriesKey, default: ""]
-        let position = raw.properties[asInt: .seriesPositionKey, default: 0]
+        let subtitle = raw.string(forKey: .subtitle)
+        let series = raw.string(forKey: .series)
+        let position = raw.int(forKey: .seriesPosition)
         
         guard let cleaned = seriesCleaner.cleanup(book: .init(title: title, subtitle: subtitle, series: series, position: position)) else {
             return raw
@@ -166,27 +165,27 @@ extension ImportHandler {
             if !subtitle.isEmpty {
                 book.properties["original.subtitle"] = subtitle
             }
-            book.properties[.subtitleKey] = cleaned.subtitle.isEmpty ? nil : cleaned.subtitle
+            book[.subtitle] = cleaned.subtitle.isEmpty ? nil : cleaned.subtitle
         }
         
         if series != cleaned.series {
             if !series.isEmpty {
                 book.properties["original.series"] = series
             }
-            book.properties[.seriesKey] = cleaned.series.isEmpty ? nil : cleaned.series
+            book[.series] = cleaned.series.isEmpty ? nil : cleaned.series
         }
         
         if position != cleaned.position {
             if position != 0 {
                 book.properties["original.position"] = position
             }
-            book.properties[.seriesPositionKey] = cleaned.position == 0 ? nil : cleaned.position
+            book[.seriesPosition] = cleaned.position == 0 ? nil : cleaned.position
         }
 
         return book
     }
     
-    func addPeople(to book: CDRecord, from importedBook: BookRecord, withKey key: String, asRole role: String) {
+    func addPeople(to book: CDRecord, from importedBook: BookRecord, withKey key: BookKey, asRole role: String) {
         if let people = importedBook.properties[key] as? [String] {
             for person in people {
                 let list = CDRecord.findOrMakeWithName(person, kind: .person, in: context)

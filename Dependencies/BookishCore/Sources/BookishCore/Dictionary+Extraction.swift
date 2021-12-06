@@ -6,6 +6,10 @@
 import Coercion
 import Foundation
 import ISBN
+import SwiftUI
+import AudioToolbox
+
+// TODO: move these to BookRecord?
 
 /// Generic utilities for extracting a value from a dictionary and cleaning it up.
 /// If the extraction is successful, the key is removed from the source dictionary.
@@ -84,8 +88,66 @@ public extension Dictionary where Key == String, Value == Any {
         self[asKey ?? key] = source.extractStringList(forKey: key, separator: separator)
     }
     
-    mutating func extractISBN(as asKey: Key = .isbnKey, from source: inout Self) {
+    mutating func extractISBN(as asKey: Key, from source: inout Self) {
         self[asKey] = source.extractISBN()
     }
 }
 
+public extension Dictionary where Key == String, Value == Any {
+    mutating func extractNonZeroDouble(forKey key: Key, as asKey: BookKey? = nil, from source: inout Self) {
+        extractNonZeroDouble(forKey: key, as: asKey?.rawValue, from: &source)
+    }
+
+    mutating func extractNonZeroInt(forKey key: Key, as asKey: BookKey? = nil, from source: inout Self) {
+        extractNonZeroDouble(forKey: key, as: asKey?.rawValue, from: &source)
+    }
+
+    mutating func extractString(forKey key: Key, as asKey: BookKey? = nil, from source: inout Self) {
+        extractString(forKey: key, as: asKey?.rawValue, from: &source)
+    }
+
+    mutating func extractDate(forKey key: Key, as asKey: BookKey? = nil, from source: inout Self) {
+        extractDate(forKey: key, as: asKey?.rawValue, from: &source)
+    }
+
+    mutating func extractStringList(forKey key: Key, separator: Character = "\n", as asKey: BookKey? = nil, from source: inout Self) {
+        extractStringList(forKey: key, separator: separator, as: asKey?.rawValue, from: &source)
+    }
+    
+    mutating func extractISBN(as asKey: BookKey = .isbn, from source: inout Self) {
+        extractISBN(as: asKey.rawValue, from: &source)
+    }
+
+    mutating func extractNonZeroDouble(forKey key: BookKey) -> Double? {
+        return extractNonZeroDouble(forKey: key.rawValue)
+    }
+
+    mutating func extractNonZeroInt(forKey key: BookKey) -> Int? {
+        return extractNonZeroInt(forKey: key.rawValue)
+    }
+
+    mutating func extractString(forKey key: BookKey) -> String? {
+        return extractString(forKey: key.rawValue)
+    }
+
+    mutating func extractDate(forKey key: BookKey) -> Date? {
+        return extractDate(forKey: key.rawValue)
+    }
+
+    mutating func extractStringList(forKey key: BookKey, separator: Character = "\n") -> [String] {
+        return extractStringList(forKey: key.rawValue, separator: separator)
+    }
+    
+    func urls(forKey key: BookKey) -> [URL] {
+        self[key.rawValue] as? [URL] ?? []
+    }
+    
+    func strings(forKey key: BookKey) -> [String] {
+        self[key.rawValue] as? [String] ?? []
+    }
+    
+    subscript(_ key: BookKey) -> Any? {
+        get { self[key.rawValue] }
+        set(newValue) { self[key.rawValue] = newValue }
+    }
+}

@@ -3,6 +3,7 @@
 //  All code (c) 2021 - present day, Elegant Chaos Limited.
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
+import Coercion
 import Foundation
 
 /// A dictionary-based book record.
@@ -25,26 +26,51 @@ public struct BookRecord: Identifiable {
     ///
     public init?(_ dictionary: [String:Any], id explicitID: String? = nil, source: String? = nil) {
         var properties = dictionary
-        guard let id = explicitID ?? properties.extractString(forKey: .idKey), let title = properties.extractString(forKey: .titleKey) else { return nil }
+        guard let id = explicitID ?? properties.extractString(forKey: .id), let title = properties.extractString(forKey: .title) else { return nil }
         self.id = id
         self.title = title
-        self.source = source ?? properties.extractString(forKey: .sourceKey) ?? Self.defaultSource
+        self.source = source ?? properties.extractString(forKey: .source) ?? Self.defaultSource
         self.properties = properties
     }
 
     public static let defaultSource = "com.elegantchaos.bookish.raw"
     
-    public var imageURLS: [URL] {
-        properties[.imageURLsKey] as? [URL] ?? []
+    public func date(forKey key: BookKey) -> Date? {
+        properties[asDate: key.rawValue]
     }
     
-    public var authors: [String] {
-        (properties[.authorsKey] as? [String]) ?? []
+    public func urls(forKey key: BookKey) -> [URL] {
+        properties.urls(forKey: key)
+    }
+
+    public func strings(forKey key: BookKey) -> [String] {
+        properties.strings(forKey: key)
     }
     
-    public var publishers: [String] {
-        (properties[.publishersKey] as? [String]) ?? []
+    public subscript(_ key: BookKey) -> Any? {
+        get { properties[key] }
+        set(newValue) { properties[key] = newValue }
     }
+
+    public func string(forKey key: BookKey, default defaultValue: String = "") -> String {
+        properties[asString: key.rawValue] ?? defaultValue
+    }
+    
+    public func int(forKey key: BookKey, default defaultValue: Int = 0) -> Int {
+        properties[asInt: key.rawValue] ?? defaultValue
+    }
+    
+//    public var imageURLS: [URL] {
+//        properties.urls(forKey: .imageURLs)
+//    }
+//
+//    public var authors: [String] {
+//        properties.strings(forKey: .authors)
+//    }
+//    
+//    public var publishers: [String] {
+//        properties.strings(forKey: .publishers)
+//    }
 }
 
 extension BookRecord: Equatable {
