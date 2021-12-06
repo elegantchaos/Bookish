@@ -39,6 +39,14 @@ struct CandidateDetailView: View {
                         .buttonStyle(.borderedProminent)
                 }
             }
+            
+            ToolbarItem(placement: .bottomBar) {
+                Menu("Lists") {
+                    Button("A", action: handleAdd)
+                    Button("B", action: handleAdd)
+                    Button("C", action: handleAdd)
+                }
+            }
         }
     }
     
