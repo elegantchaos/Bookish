@@ -150,4 +150,14 @@ public extension Dictionary where Key == String, Value == Any {
         get { self[key.rawValue] }
         set(newValue) { self[key.rawValue] = newValue }
     }
+    
+    mutating func extractKeys(_ keys: [BookKey], from source: inout Self) {
+        for key in keys {
+            let raw = key.rawValue
+            if let value = source[raw] {
+                self[raw] = value
+                source.removeValue(forKey: raw)
+            }
+        }
+    }
 }

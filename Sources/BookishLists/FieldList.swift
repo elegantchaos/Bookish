@@ -3,6 +3,7 @@
 //  All code (c) 2021 - present day, Elegant Chaos Limited.
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
+import BookishCore
 import Combine
 import Foundation
 
@@ -32,7 +33,11 @@ class FieldList: ObservableObject {
     func newField() {
         fields.append(makeField())
     }
-    
+
+    func addField(name: BookKey, kind: Field.Kind) {
+        addField(name: name.rawValue, kind: kind)
+    }
+
     func addField(name: String, kind: Field.Kind) {
         let field = makeField(name: name, kind: kind)
         fields.append(field)

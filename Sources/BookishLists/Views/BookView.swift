@@ -21,36 +21,15 @@ struct BookView: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 0) {
-                if size == .compact {
-                    AsyncImageView(model.image(for: book, usePlacholder: false))
-                        .frame(maxWidth: 256, maxHeight: 256)
-                        .padding(.bottom)
+                AsyncImageView(model.image(for: book, usePlacholder: false))
+                    .frame(maxWidth: 256, maxHeight: 256)
+                    .padding(.bottom)
 
-                    HStack(alignment: .top, spacing: 0) {
-                        Image(systemName: "note.text")
-
-                        TextEditor(text: book.binding(forProperty: "notes"))
-                            .lineLimit(10)
-                    }
-                } else {
-                    HStack(alignment: .top) {
-                        Label {
-                            TextField("notes", text: book.binding(forProperty: "notes"))
-                                .fixedSize(horizontal: true, vertical: false)
-                        } icon: {
-                            Image(systemName: "note.text")
-                        }
-
-                        AsyncImageView(model.image(for: book, usePlacholder: false))
-                            .frame(maxWidth: 256, maxHeight: 256)
-                    }
-                }
-                
                 FieldsView(record: book, fields: fields)
                     .padding(.bottom)
 
                 DisclosureGroup("Links", isExpanded: $showLinks) {
-                    VStack(alignment: .leading) {
+                    VStack(alignment: .leading, spacing: 8.0) {
                         if let contained = book.containedBy?.sortedByName {
                             ForEach(contained) { item in
                                 HStack {
@@ -65,7 +44,7 @@ struct BookView: View {
                 .padding(.vertical)
                 
                 DisclosureGroup("Raw Properties", isExpanded: $showRaw) {
-                    LazyVStack(alignment: .leading) {
+                    LazyVStack(alignment: .leading, spacing: 8.0) {
                         let keys = book.sortedKeys
                         ForEach(keys, id: \.self) { key in
                             if let value = book.property(forKey: key) {

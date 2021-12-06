@@ -13,15 +13,15 @@ struct CandidateDetailView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            PropertyView(label: "title", icon: "tag", value: candidate.title)
-            PropertyView(label: "authors", icon: "person.2", value: candidate.authors.joined(separator: ", "))
-            PropertyView(label: "publisher", icon: "building.2", value: candidate.publisher)
+            PropertyView(label: "title", icon: "tag", value: candidate.title, layout: .inline)
+            PropertyView(label: "authors", icon: "person.2", value: candidate.authors.joined(separator: ", "), layout: .inline)
+            PropertyView(label: "publisher", icon: "building.2", value: candidate.publisher, layout: .inline)
 
             if let date = candidate.book.date(forKey: .publishedDate) {
-                PropertyView(label: "date", icon: "calendar", value: appearance.formatted(date: date))
+                PropertyView(label: "date", icon: "calendar", value: appearance.formatted(date: date), layout: .inline)
             }
 
-            PropertyView(label: "found by", icon: "globe", value: candidate.service.name)
+            PropertyView(label: "found by", icon: "globe", value: candidate.service.name, layout: .inline)
             
             let image = model.images.image(for: candidate.image)
             AsyncImageView(image)

@@ -30,40 +30,50 @@ public class GoogleLookupCandidate: LookupCandidate {
     }
     
     init(info: [String:Any], service: GoogleLookupService) {
-        var updated = info
-
-        if let publisher = updated.extractString(forKey: "publisher") {
-            updated[.publishers] = [publisher]
+        var unprocessed = info
+        var properties: [String:Any] = [:]
+        
+        if let publisher = unprocessed.extractString(forKey: "publisher") {
+            properties[.publishers] = [publisher]
         }
 
-        if let string = updated.extractString(forKey: "publishedDate") {
+        if let string = unprocessed.extractString(forKey: "publishedDate") {
             let matches = service.dateDetector.matches(in: string, options: NSRegularExpression.MatchingOptions(), range: NSRange(location: 0, length: string.count))
             let date: Date? = matches.first?.date
-            updated[.publishedDate] = date
+            properties[.publishedDate] = date
         }
         
-        var image: String? = nil
-        if let images = info["imageLinks"] as? [String:Any] {
-            image = (images["thumbnail"] as? String) ?? (images["smallThumbnail"] as? String)
-            image = image?.replacingOccurrences(of: "edge=curl&", with: "")
-            image = image?.replacingOccurrences(of: "http://", with: "https://")
-//            image = image?.replacingOccurrences(of: "zoom=1&", with: "")
-        }
-        
-        if let image = image, let url = URL(string: image) {
-            updated[.imageURLs] = [url]
+        if let links = info["imageLinks"] as? [String:String] {
+            let urls = links.values.compactMap({ $0.urlCleaningGoogleImageParameters })
+            properties[.imageURLs] = urls
         }
 
-        updated[.isbn] = GoogleLookupCandidate.isbn(from: info)
+        properties.extractKeys(BookKey.allCases, from: &unprocessed)
+        properties[.isbn] = GoogleLookupCandidate.isbn(from: info)
 
         if let pages = info["pageCount"] as? NSNumber {
-            updated[.pages] = pages.intValue
+            properties[.pages] = pages.intValue
         }
 
-        let book = BookRecord(updated, id: UUID().uuidString, source: service.name)!
+        for (key,value) in unprocessed {
+            properties["google-books.\(key)"] = value
+        }
+        
+        let book = BookRecord(properties, id: UUID().uuidString, source: service.name)!
         super.init(service: service, record: book)
     }
  }
+
+extension String {
+    var urlCleaningGoogleImageParameters: URL? {
+        let cleaned =
+            self
+            .replacingOccurrences(of: "edge=curl&", with: "")
+            .replacingOccurrences(of: "http://", with: "https://")
+        
+        return URL(string: cleaned)
+    }
+}
 
 public class GoogleLookupService: LookupService {
     var fetcher: DataFetcher = JSONDataFetcher()

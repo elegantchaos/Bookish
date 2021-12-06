@@ -24,8 +24,10 @@ struct RecordLabel: View {
             HStack {
                 Text(recordName)
                 if let annotation = recordAnnotation {
-                    Text("(\(annotation))")
+                    Spacer()
+                    Text(annotation)
                         .foregroundColor(.secondary)
+                        .font(.footnote)
                 }
             }
         } icon: {
@@ -33,6 +35,7 @@ struct RecordLabel: View {
                 LabelIconView(url: url, placeholder: record.kind.iconName)
             } else {
                 Image(systemName: record.kind.iconName)
+                    .frame(minWidth: 20.0)
             }
         }
     }
@@ -82,7 +85,7 @@ extension CDRecord.Kind {
                 return "Series"
                 
             case .importSession:
-                return "Imported"
+                return "From"
 
             default:
                 return "\(self)"

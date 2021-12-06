@@ -191,11 +191,15 @@ class Model: ObservableObject {
     
     func makeDefaultFields() -> FieldList {
         let list = FieldList()
-        list.addField(name: "added", kind: .date)
-        list.addField(name: "published", kind: .date)
-        list.addField(name: "format", kind: .string)
-        list.addField(name: "asin", kind: .string)
-        list.addField(name: "isbn", kind: .string)
+        list.addField(name: .description, kind: .paragraph)
+        list.addField(name: .notes, kind: .paragraph)
+        list.addField(name: .addedDate, kind: .date)
+        list.addField(name: .publishedDate, kind: .date)
+        list.addField(name: .format, kind: .string)
+        list.addField(name: .asin, kind: .string)
+        list.addField(name: .isbn, kind: .string)
+        list.addField(name: .dewey, kind: .string)
+        list.addField(name: .pages, kind: .number)
         return list
     }
     

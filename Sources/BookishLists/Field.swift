@@ -10,6 +10,7 @@ class Field: ObservableObject, Identifiable {
     
     enum Kind: String, CaseIterable {
         case string
+        case paragraph
         case number
         case date
         
