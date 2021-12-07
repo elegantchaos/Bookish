@@ -14,35 +14,23 @@ struct FieldsView: View {
     var body: some View {
         VStack(spacing: 8.0) {
             ForEach(fields.fields) { field in
-                if let (text, icon, layout) = textAndIcon(for: field) {
-                    PropertyView(label: field.key, icon: icon, value: text, layout: layout)
+                if let text = text(for: field), !text.isEmpty {
+                    PropertyView(label: field.label, icon: field.icon, value: text, layout: field.layout)
                 }
             }
         }
     }
         
-    func textAndIcon(for field: Field) -> (String, String, PropertyView.Layout)? {
+    func text(for field: Field) -> String? {
         switch field.kind {
-            case .string:
-                if let string = record.string(forKey: field.key), !string.isEmpty {
-                    return (string, "tag", .inline)
-                }
-
-            case .paragraph:
-                if let string = record.string(forKey: field.key), !string.isEmpty {
-                    return (string, "note.text", .below)
-                }
-
             case .date:
                 if let date = record.date(forKey: field.key) {
                     let string = appearance.formatted(date: date)
-                    return (string, "calendar", .inline)
+                    return string
                 }
-                
-            case .number:
-                if let string = record.string(forKey: field.key), !string.isEmpty {
-                    return (string, "tag", .inline)
-                }
+
+            default:
+                return record.string(forKey: field.key)
         }
         
         return nil

@@ -6,15 +6,10 @@
 import SwiftUI
 
 struct PropertyView: View {
-    enum Layout {
-        case inline
-        case below
-    }
-
     let label: String
     let icon: String
     let value: String
-    let layout: Layout
+    let layout: Field.Layout
 
     var body: some View {
         VStack {
@@ -39,6 +34,12 @@ struct PropertyView: View {
                     }
                     .padding(.bottom)
 
+                case .belowNoLabel:
+                    HStack {
+                        Text(value)
+                        Spacer()
+                    }
+                    .padding(.bottom)
             }
         }
     }

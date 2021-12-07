@@ -31,26 +31,22 @@ class FieldList: ObservableObject {
     }
     
     func newField() {
-        fields.append(makeField())
+        let field = makeField()
+        addField(field)
     }
 
-    func addField(name: BookKey, kind: Field.Kind) {
-        addField(name: name.rawValue, kind: kind)
-    }
-
-    func addField(name: String, kind: Field.Kind) {
-        let field = makeField(name: name, kind: kind)
-        fields.append(field)
+    func addField(_ field: Field) {
+        let watcher = field.objectWillChange.sink {
+            print("\(field) changed")
+            self.objectWillChange.send()
+        }
+        self.watchers.append(watcher)
+        self.fields.append(field)
     }
     
     func makeField(name: String? = nil, kind: Field.Kind = .string) -> Field {
         let key = name ?? "Untitled \(kind)"
-        let field = Field(key: key, kind: kind)
-        let watcher = field.objectWillChange.sink {
-            print("field \(key) changed")
-            self.objectWillChange.send()
-        }
-        self.watchers.append(watcher)
+        let field = Field(key, kind: kind)
         
         return field
     }
