@@ -13,6 +13,8 @@ struct ContentView: View {
     @EnvironmentObject var sheetController: SheetController
     
     var body: some View {
+        let showingProgress = model.importProgress != nil
+
         SheetControllerHost {
             NavigationView {
                 RootIndexView(selection: $model.selection)
@@ -32,9 +34,23 @@ struct ContentView: View {
                     if let progress = model.importProgress {
                         ProgressView(progress.label, value: Double(progress.count), total: Double(progress.total))
                             .frame(maxWidth: 512)
-                    } else {
-                        UndoRedoView()
-                        
+                    }
+                }
+                
+                ToolbarItem(placement: .bottomBar) {
+                    if !showingProgress {
+                        UndoView()
+                    }
+                }
+
+                ToolbarItem(placement: .bottomBar) {
+                    if !showingProgress {
+                        RedoView()
+                    }
+                }
+
+                ToolbarItem(placement: .bottomBar) {
+                    if !showingProgress {
                         Button(action: handlePreferences) {
                             Label("Preferences", systemImage: "gear")
                         }

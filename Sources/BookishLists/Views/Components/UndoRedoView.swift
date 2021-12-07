@@ -5,17 +5,26 @@
 
 import SwiftUI
 
-struct UndoRedoView: View {
+struct UndoView: View {
     @EnvironmentObject var model: Model
     
     var body: some View {
         let manager = model.stack.undoManager
-        if manager.canUndo {
-            Button("Undo", action: model.handleUndo)
+        Button(action: model.handleUndo) {
+            Image(systemName: "arrowshape.turn.up.backward")
         }
-        
-        if manager.canRedo {
-            Button("Redo", action: model.handleRedo)
+        .disabled(!manager.canUndo)
+    }
+}
+
+struct RedoView: View {
+    @EnvironmentObject var model: Model
+    
+    var body: some View {
+        let manager = model.stack.undoManager
+        Button(action: model.handleRedo) {
+            Image(systemName: "arrowshape.turn.up.forward")
         }
+        .disabled(!manager.canRedo)
     }
 }
