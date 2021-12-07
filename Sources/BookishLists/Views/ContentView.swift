@@ -10,6 +10,7 @@ import BookishImporter
 struct ContentView: View {
     @EnvironmentObject var model: Model
     @Environment(\.managedObjectContext) var managedObjectContext
+    
     @EnvironmentObject var sheetController: SheetController
     
     var body: some View {

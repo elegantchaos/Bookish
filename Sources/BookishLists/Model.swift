@@ -62,7 +62,6 @@ class Model: ObservableObject {
     let importer: ImportManager
     let images = UIImageCache()
     
-    @Published var undo: [NSQueryGenerationToken] = []
     @Published var importRequested = false
     @Published var importProgress: ImportProgress?
     @Published var status: String?
@@ -119,10 +118,6 @@ class Model: ObservableObject {
         }
         let context = stack.viewContext
         context.perform {
-            if let token = context.queryGenerationToken {
-                self.undo.append(token)
-            }
-            
             context.delete(object)
             onMainQueue {
                 self.save()
@@ -210,17 +205,25 @@ class Model: ObservableObject {
     
     lazy var defaultFields = makeDefaultFields()
     
+    var canUndo: Bool {
+        stack.viewContext.undoManager?.canUndo ?? false
+    }
+    
     func handleUndo() {
         objectWillChange.send()
         stack.viewContext.performAndWait {
-            stack.undoManager.undo()
+            stack.viewContext.undoManager?.undo()
         }
+    }
+    
+    var canRedo: Bool {
+        stack.viewContext.undoManager?.canRedo ?? false
     }
     
     func handleRedo() {
         objectWillChange.send()
         stack.viewContext.performAndWait {
-            stack.undoManager.redo()
+            stack.viewContext.undoManager?.redo()
         }
     }
 }

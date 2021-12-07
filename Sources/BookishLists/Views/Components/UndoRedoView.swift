@@ -9,11 +9,10 @@ struct UndoView: View {
     @EnvironmentObject var model: Model
     
     var body: some View {
-        let manager = model.stack.undoManager
         Button(action: model.handleUndo) {
             Image(systemName: "arrowshape.turn.up.backward")
         }
-        .disabled(!manager.canUndo)
+        .disabled(!model.canUndo)
     }
 }
 
@@ -21,10 +20,9 @@ struct RedoView: View {
     @EnvironmentObject var model: Model
     
     var body: some View {
-        let manager = model.stack.undoManager
         Button(action: model.handleRedo) {
             Image(systemName: "arrowshape.turn.up.forward")
         }
-        .disabled(!manager.canRedo)
+        .disabled(!model.canRedo)
     }
 }

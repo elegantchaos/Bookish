@@ -10,7 +10,7 @@ import SwiftUI
 class CoreDataStack {
     
     private let containerName: String
-    let undoManager = UndoManager()
+    let undoManager: UndoManager
     var viewContext: NSManagedObjectContext { persistentContainer.viewContext }
     var coordinator: NSPersistentStoreCoordinator { persistentContainer.persistentStoreCoordinator }
 
@@ -25,8 +25,9 @@ class CoreDataStack {
         return container
     }()
     
-    init(containerName: String) {
+    init(containerName: String, undoManager: UndoManager) {
         self.containerName = containerName
+        self.undoManager = undoManager
         persistentContainer.viewContext.automaticallyMergesChangesFromParent = true
         persistentContainer.viewContext.undoManager = undoManager
         do {

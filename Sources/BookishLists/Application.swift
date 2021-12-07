@@ -20,12 +20,16 @@ class AppearanceController: ObservableObject {
 @main
 struct Application: App {
     @Environment(\.scenePhase) var scenePhase
+
     let model: Model
     let lookup: LookupManager
     let appearance: AppearanceController
-    
+    let sheetController = SheetController()
+
     init() {
-        let stack = CoreDataStack(containerName: "BookishLists")
+        let undoManager = UndoManager()
+        let stack = CoreDataStack(containerName: "BookishLists", undoManager: undoManager)
+
         self.model = Model(stack: stack)
         self.lookup = LookupManager()
         self.appearance = AppearanceController()
@@ -45,7 +49,6 @@ struct Application: App {
     
     
     var body: some Scene {
-            let sheetController = SheetController()
             return WindowGroup {
                 ContentView()
                     .environment(\.managedObjectContext, model.stack.viewContext)
