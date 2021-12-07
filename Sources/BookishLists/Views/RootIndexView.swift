@@ -42,7 +42,9 @@ struct RootIndexView: View {
             .navigationTitle(model.appName)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                   RootActionsMenuButton()
+                    ActionsMenuButton {
+                        RootActionsMenu()
+                    }
                 }
             }
         }

@@ -11,7 +11,7 @@ struct RecordLabel: View {
         case includeRole
     }
     
-    let record: CDRecord
+    @ObservedObject var record: CDRecord
     let nameMode: NameMode
 
     init(record: CDRecord, nameMode: NameMode = .normal) {

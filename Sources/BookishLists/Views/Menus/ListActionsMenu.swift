@@ -7,12 +7,11 @@ import SwiftUI
 import SheetController
 import BookishImporterSamples
 
-struct ListActionsMenuView: View {
+struct ListActionsMenu: View {
     @EnvironmentObject var model: Model
     @Environment(\.managedObjectContext) var context
     @EnvironmentObject var sheetController: SheetController
-
-    let list: CDRecord
+    @ObservedObject var list: CDRecord
     
     var body: some View {
         Button(action: handleAdd) { Label("New Book", systemImage: "plus") }
@@ -37,7 +36,7 @@ struct ListActionsMenuButton: View {
 
     var body: some View {
         Menu() {
-            ListActionsMenuView(list: list)
+            ListActionsMenu(list: list)
         } label: {
             Image(systemName: "ellipsis.circle")
         }

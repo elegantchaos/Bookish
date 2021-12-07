@@ -10,6 +10,7 @@ import SwiftUI
 struct BookView: View {
     @Environment(\.horizontalSizeClass) var size
     @Environment(\.managedObjectContext) var managedObjectContext
+    @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var model: Model
     @ObservedObject var book: CDRecord
     @ObservedObject var fields: FieldList
@@ -61,7 +62,7 @@ struct BookView: View {
         .navigationBarTitleDisplayMode(.large)
         .toolbar {
             ToolbarItem(placement: .principal) {
-                VStack {
+                VStack(alignment: .center) {
                     DeferredTextField(label: "Name", text: $book.name)
                     
                     if let subtitle = book.string(forKey: "subtitle") {
@@ -69,15 +70,28 @@ struct BookView: View {
                             .font(.subheadline)
                     }
                 }
-                .padding(.vertical)
-                
+            }
+            
+            ToolbarItem {
+                ActionsMenuButton {
+                    BookActionsMenu(book: book, deleteCallback: handleDelete)
+                }
             }
         }
         .onDisappear(perform: handleDisappear)
+        .onReceive(book.objectWillChange) {
+            print("book changed")
+            model.objectWillChange.send()
+        }
     }
     
     func handleDisappear() {
         model.save()
+    }
+    
+    func handleDelete() {
+        presentationMode.wrappedValue.dismiss()
+        model.delete(book)
     }
 }
 

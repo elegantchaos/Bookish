@@ -33,6 +33,8 @@ struct ContentView: View {
                         ProgressView(progress.label, value: Double(progress.count), total: Double(progress.total))
                             .frame(maxWidth: 512)
                     } else {
+                        UndoRedoView()
+                        
                         Button(action: handlePreferences) {
                             Label("Preferences", systemImage: "gear")
                         }

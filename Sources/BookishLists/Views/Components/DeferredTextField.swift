@@ -7,7 +7,7 @@ import SwiftUI
 
 struct DeferredTextField: View {
     let label: String
-    let text: Binding<String>
+    @Binding var text: String
     
     @State var value: String = ""
     
@@ -17,16 +17,16 @@ struct DeferredTextField: View {
     }
     
     func handleAppear() {
-        value = text.wrappedValue
+        value = text
     }
 
     func handleCommit() {
-        text.wrappedValue = value
+        text = value
     }
     
     func handleEditingChanged(_ isEditing: Bool) {
         if isEditing {
-            value = text.wrappedValue
+            value = text
         } else {
             handleCommit()
         }

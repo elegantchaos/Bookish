@@ -26,7 +26,7 @@
 		8B2A7CC825AE140A0024C1A2 /* ThreadExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 8B2A7CC725AE140A0024C1A2 /* ThreadExtensions */; };
 		8B39B479260252AB003B0C5B /* ImportHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B39B478260252AB003B0C5B /* ImportHandler.swift */; };
 		8B39B47B26027F35003B0C5B /* DeferredTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B39B47A26027F35003B0C5B /* DeferredTextField.swift */; };
-		8B42BE4825F7912700855D08 /* RootActionsMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B42BE4725F7912700855D08 /* RootActionsMenuView.swift */; };
+		8B42BE4825F7912700855D08 /* RootActionsMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B42BE4725F7912700855D08 /* RootActionsMenu.swift */; };
 		8B42BE4A25F794D800855D08 /* AddBooksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B42BE4925F794D800855D08 /* AddBooksView.swift */; };
 		8B57F07C25F7B989007DB517 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B57F07B25F7B989007DB517 /* AVFoundation.framework */; };
 		8B57F08625F7C0E9007DB517 /* GoogleLookupService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B57F08025F7C0E9007DB517 /* GoogleLookupService.swift */; };
@@ -42,9 +42,12 @@
 		8B58C7B425B71528007F6B70 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B58C7B325B71528007F6B70 /* CloudKit.framework */; };
 		8B58C7C025B843C7007F6B70 /* RootIndexView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B58C7BF25B843C7007F6B70 /* RootIndexView.swift */; };
 		8B58C7CC25B84AB8007F6B70 /* PreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B58C7CB25B84AB8007F6B70 /* PreferencesView.swift */; };
-		8B602EF1274BF58400DE50A5 /* ListActionsMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B602EF0274BF58400DE50A5 /* ListActionsMenuView.swift */; };
+		8B602EF1274BF58400DE50A5 /* ListActionsMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B602EF0274BF58400DE50A5 /* ListActionsMenu.swift */; };
 		8B6CAAC8252B2C8B00FF2035 /* KeyValueStore in Frameworks */ = {isa = PBXBuildFile; productRef = 8B6CAAC7252B2C8B00FF2035 /* KeyValueStore */; };
 		8B6DD267275E87F600304468 /* PropertyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6DD266275E87F600304468 /* PropertyView.swift */; };
+		8B6DD269275F8C1900304468 /* ActionsMenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6DD268275F8C1900304468 /* ActionsMenuButton.swift */; };
+		8B6DD26C275F8C8600304468 /* BookActionsMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6DD26B275F8C8600304468 /* BookActionsMenu.swift */; };
+		8B6DD26E275FB27500304468 /* UndoRedoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6DD26D275FB27500304468 /* UndoRedoView.swift */; };
 		8B80467325B8788900698F28 /* SheetController in Frameworks */ = {isa = PBXBuildFile; productRef = 8B80467225B8788900698F28 /* SheetController */; };
 		8B80467D25B87C4A00698F28 /* LoggerUI in Frameworks */ = {isa = PBXBuildFile; productRef = 8B80467C25B87C4A00698F28 /* LoggerUI */; };
 		8B8A88E5274FCAD700EA2FAA /* BookishImporter in Frameworks */ = {isa = PBXBuildFile; productRef = 8B8A88E4274FCAD700EA2FAA /* BookishImporter */; };
@@ -125,7 +128,7 @@
 		8B1F10E125ADC28800108A34 /* EntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryView.swift; sourceTree = "<group>"; };
 		8B39B478260252AB003B0C5B /* ImportHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportHandler.swift; sourceTree = "<group>"; };
 		8B39B47A26027F35003B0C5B /* DeferredTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeferredTextField.swift; sourceTree = "<group>"; };
-		8B42BE4725F7912700855D08 /* RootActionsMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootActionsMenuView.swift; sourceTree = "<group>"; };
+		8B42BE4725F7912700855D08 /* RootActionsMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootActionsMenu.swift; sourceTree = "<group>"; };
 		8B42BE4925F794D800855D08 /* AddBooksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBooksView.swift; sourceTree = "<group>"; };
 		8B57F07B25F7B989007DB517 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.3.sdk/System/Library/Frameworks/AVFoundation.framework; sourceTree = DEVELOPER_DIR; };
 		8B57F08025F7C0E9007DB517 /* GoogleLookupService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleLookupService.swift; sourceTree = "<group>"; };
@@ -141,9 +144,12 @@
 		8B58C7BF25B843C7007F6B70 /* RootIndexView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootIndexView.swift; sourceTree = "<group>"; };
 		8B58C7CB25B84AB8007F6B70 /* PreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesView.swift; sourceTree = "<group>"; };
 		8B602EEA274BD58500DE50A5 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		8B602EF0274BF58400DE50A5 /* ListActionsMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListActionsMenuView.swift; sourceTree = "<group>"; };
+		8B602EF0274BF58400DE50A5 /* ListActionsMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListActionsMenu.swift; sourceTree = "<group>"; };
 		8B6DD260275A677A00304468 /* BookishCore */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = BookishCore; path = Dependencies/BookishCore; sourceTree = "<group>"; };
 		8B6DD266275E87F600304468 /* PropertyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyView.swift; sourceTree = "<group>"; };
+		8B6DD268275F8C1900304468 /* ActionsMenuButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionsMenuButton.swift; sourceTree = "<group>"; };
+		8B6DD26B275F8C8600304468 /* BookActionsMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookActionsMenu.swift; sourceTree = "<group>"; };
+		8B6DD26D275FB27500304468 /* UndoRedoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UndoRedoView.swift; sourceTree = "<group>"; };
 		8B8A88E3274FC36A00EA2FAA /* BookishCleanup */ = {isa = PBXFileReference; lastKnownFileType = folder; name = BookishCleanup; path = Dependencies/BookishCleanup; sourceTree = "<group>"; };
 		8B987C9E25C047E5003D6F9F /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		8B987CAA25C04876003D6F9F /* BooklistLists.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BooklistLists.xcdatamodel; sourceTree = "<group>"; };
@@ -222,11 +228,10 @@
 				8B1F10E125ADC28800108A34 /* EntryView.swift */,
 				8BE1493725DC250300A1DC32 /* FieldEditorView.swift */,
 				8B012F4F2757D23B00FCF5DA /* FieldsView.swift */,
-				8B6DD266275E87F600304468 /* PropertyView.swift */,
-				8B602EF0274BF58400DE50A5 /* ListActionsMenuView.swift */,
 				8B1F10D725ACB30A00108A34 /* ListIndexView.swift */,
 				8B58C7CB25B84AB8007F6B70 /* PreferencesView.swift */,
-				8B42BE4725F7912700855D08 /* RootActionsMenuView.swift */,
+				8B6DD266275E87F600304468 /* PropertyView.swift */,
+				8B6DD26A275F8C6B00304468 /* Menus */,
 				8B58C7BF25B843C7007F6B70 /* RootIndexView.swift */,
 				8BCF6B4B275A4EFC0023DBE3 /* Adding */,
 				8BE1493F25DD5D5200A1DC32 /* Components */,
@@ -382,6 +387,16 @@
 			path = Lookup;
 			sourceTree = "<group>";
 		};
+		8B6DD26A275F8C6B00304468 /* Menus */ = {
+			isa = PBXGroup;
+			children = (
+				8B602EF0274BF58400DE50A5 /* ListActionsMenu.swift */,
+				8B42BE4725F7912700855D08 /* RootActionsMenu.swift */,
+				8B6DD26B275F8C8600304468 /* BookActionsMenu.swift */,
+			);
+			path = Menus;
+			sourceTree = "<group>";
+		};
 		8BCF6B4B275A4EFC0023DBE3 /* Adding */ = {
 			isa = PBXGroup;
 			children = (
@@ -403,6 +418,8 @@
 				8BB6653E274D3560002CC0E8 /* RecordLabel.swift */,
 				8BB66540274D3568002CC0E8 /* RecordLink.swift */,
 				8B57F09325F7E096007DB517 /* SearchBar.swift */,
+				8B6DD268275F8C1900304468 /* ActionsMenuButton.swift */,
+				8B6DD26D275FB27500304468 /* UndoRedoView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -610,6 +627,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B57F08625F7C0E9007DB517 /* GoogleLookupService.swift in Sources */,
+				8B6DD26C275F8C8600304468 /* BookActionsMenu.swift in Sources */,
 				8B012F502757D23B00FCF5DA /* FieldsView.swift in Sources */,
 				8BE1493825DC250300A1DC32 /* FieldEditorView.swift in Sources */,
 				8B57F08B25F7C0E9007DB517 /* LookupCandidate.swift in Sources */,
@@ -622,11 +640,12 @@
 				8B57F09425F7E096007DB517 /* SearchBar.swift in Sources */,
 				229E259B25254AED00C41777 /* ContentView.swift in Sources */,
 				8BE1493225DC156400A1DC32 /* BookView.swift in Sources */,
-				8B42BE4825F7912700855D08 /* RootActionsMenuView.swift in Sources */,
+				8B42BE4825F7912700855D08 /* RootActionsMenu.swift in Sources */,
 				8B58C7C025B843C7007F6B70 /* RootIndexView.swift in Sources */,
 				8B987CBB25C0671E003D6F9F /* CDRecord.swift in Sources */,
-				8B602EF1274BF58400DE50A5 /* ListActionsMenuView.swift in Sources */,
+				8B602EF1274BF58400DE50A5 /* ListActionsMenu.swift in Sources */,
 				8B39B479260252AB003B0C5B /* ImportHandler.swift in Sources */,
+				8B6DD269275F8C1900304468 /* ActionsMenuButton.swift in Sources */,
 				8B987CAB25C04876003D6F9F /* BookishLists.xcdatamodeld in Sources */,
 				8B42BE4A25F794D800855D08 /* AddBooksView.swift in Sources */,
 				8B57F08D25F7C166007DB517 /* DataFetcher.swift in Sources */,
@@ -636,6 +655,7 @@
 				8B987C9F25C047E5003D6F9F /* CoreDataStack.swift in Sources */,
 				8B987D0325C1CA60003D6F9F /* NSEntityDescriptionExtensions.swift in Sources */,
 				8B57F09225F7D9F2007DB517 /* CandidateView.swift in Sources */,
+				8B6DD26E275FB27500304468 /* UndoRedoView.swift in Sources */,
 				8BE1493625DC178F00A1DC32 /* AllBooksIndexView.swift in Sources */,
 				8B1F10D825ACB30A00108A34 /* ListIndexView.swift in Sources */,
 				8B6DD267275E87F600304468 /* PropertyView.swift in Sources */,

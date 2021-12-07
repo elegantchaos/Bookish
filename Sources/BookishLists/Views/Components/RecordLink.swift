@@ -7,21 +7,20 @@ import SwiftUI
 
 struct RecordLink: View {
     @EnvironmentObject var model: Model
-    
-    let record: CDRecord
+    @ObservedObject var record: CDRecord
     let list: CDRecord?
-    let selection: Binding<String?>
+    @Binding var selection: String?
     let nameMode: RecordLabel.NameMode
     
     init(_ record: CDRecord, nameMode: RecordLabel.NameMode = .normal, in list: CDRecord? = nil, selection: Binding<String?>) {
         self.record = record
         self.list = list
-        self.selection = selection
+        self._selection = .init(projectedValue: selection)
         self.nameMode = nameMode
     }
 
     var body: some View {
-        NavigationLink(tag: record.id, selection: selection) {
+        NavigationLink(tag: record.id, selection: $selection) {
             if record.isBook {
                 BookView(book: record, fields: list?.fields ?? model.defaultFields)
             } else {
