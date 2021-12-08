@@ -11,7 +11,7 @@ struct BookView: View {
     @Environment(\.horizontalSizeClass) var size
     @Environment(\.managedObjectContext) var managedObjectContext
     @Environment(\.presentationMode) var presentationMode
-    @EnvironmentObject var model: Model
+    @EnvironmentObject var model: ModelController
     @ObservedObject var book: CDRecord
     @ObservedObject var fields: FieldList
     @State var selection: String?

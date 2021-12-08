@@ -56,16 +56,11 @@ struct SelectionStats {
     }
 }
 
-class Model: ObservableObject {
+class ModelController: ObservableObject {
     
     let stack: CoreDataStack
-    let importer: ImportManager
     let images = UIImageCache()
     
-    @Published var importRequested = false
-    @Published var importProgress: ImportProgress?
-    @Published var status: String?
-    @Published var errors: [Error] = []
     @Published var selection: String? {
         willSet(newValue) {
             _selectionStats = nil
@@ -83,11 +78,6 @@ class Model: ObservableObject {
     
     init(stack: CoreDataStack) {
         self.stack = stack
-        self.importer = ImportManager([
-            DeliciousLibraryImporter(),
-            DictionariesImporter(),
-            BookRecordsImporter()
-        ])
         
         if let string = UserDefaults.standard.string(forKey: "selection") {
             onMainQueue {
@@ -125,62 +115,20 @@ class Model: ObservableObject {
         }
     }
     
-    func add(_ kind: CDRecord.Kind) -> CDRecord {
+    func add(_ kind: CDRecord.Kind, setup: ((CDRecord) -> Void)? = nil) -> CDRecord {
         let object = CDRecord(in: stack.viewContext)
+        
         object.kind = kind
+        setup?(object)
         save()
         return object
     }
     
-    func removeAllData() {
+    func removeAllData() throws {
         objectWillChange.send()
-        let context = stack.viewContext
-        let coordinator = stack.coordinator
-        for entity in ["CDRecord", "CDProperty"] {
-            let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: entity)
-            let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-            do {
-                try coordinator.execute(deleteRequest, with: context)
-                context.refreshAllObjects()
-            } catch let error as NSError {
-                notify(error)
-            }
-        }
-        save()
-    }
-    
-    func handlePerformImport(_ result: Result<URL,Error>) {
-        switch result {
-            case .success(let url):
-                url.accessSecurityScopedResource { url in
-                    importFrom(url)
-                }
-
-            case .failure(let error):
-                notify(error)
-        }
-    }
-    
-    func importFromDelicious(sampleNamed name: String) {
-        let url = BookishImporter.urlForSample(withName: name)
-        importFrom(url)
+        try stack.removeAllData()
     }
 
-    func importFrom(_ source: Any) {
-        stack.onBackground { context in
-            let delegate = ImportHandler(model: self, context: context)
-            self.importer.importFrom(source, delegate: delegate)
-        }
-    }
-
-    
-    func notify(_ error: Error) {
-        onMainQueue {
-            print(error)
-            self.errors.append(error)
-        }
-    }
-    
     func image(for book: CDRecord, usePlacholder: Bool = true) -> AsyncImage {
         if usePlacholder {
             return images.image(for: book.imageURL, default: "book")

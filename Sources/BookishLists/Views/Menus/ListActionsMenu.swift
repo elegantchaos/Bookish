@@ -8,7 +8,7 @@ import SheetController
 import BookishImporterSamples
 
 struct ListActionsMenu: View {
-    @EnvironmentObject var model: Model
+    @EnvironmentObject var model: ModelController
     @Environment(\.managedObjectContext) var context
     @EnvironmentObject var sheetController: SheetController
     @ObservedObject var list: CDRecord
@@ -27,18 +27,5 @@ struct ListActionsMenu: View {
         let book = CDRecord(context: context)
         list.add(book)
         model.save()
-    }
-
-}
-
-struct ListActionsMenuButton: View {
-    let list: CDRecord
-
-    var body: some View {
-        Menu() {
-            ListActionsMenu(list: list)
-        } label: {
-            Image(systemName: "ellipsis.circle")
-        }
     }
 }

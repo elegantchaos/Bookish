@@ -9,7 +9,7 @@ import SwiftUIExtensions
 import ThreadExtensions
 
 struct AllBooksIndexView: View {
-    @EnvironmentObject var model: Model
+    @EnvironmentObject var model: ModelController
     @FetchRequest(
         entity: CDRecord.entity(),
         sortDescriptors: [NSSortDescriptor(key: "name", ascending: true)],
@@ -20,7 +20,6 @@ struct AllBooksIndexView: View {
     @State var filter: String = ""
 
     var body: some View {
-        
         return List(selection: $selectedBook) {
             ForEach(books) { book in
                 if filter.isEmpty || book.name.contains(filter) {
@@ -29,21 +28,14 @@ struct AllBooksIndexView: View {
             }
             .onDelete(perform: handleDelete)
         }
+        .navigationBarTitle("All Books", displayMode: .inline)
         .searchable(text: $filter)
         .listStyle(.plain)
         .toolbar {
-            ToolbarItem(placement: .navigationBarLeading) {
-                EditButton()
-            }
-            
-            ToolbarItem(placement: .principal) {
-                VStack {
-                    Text("All Books")
-                }
-            }
-            
             ToolbarItem(placement: .navigationBarTrailing) {
-                Button(action: handleAdd) { Image(systemName: "plus") }
+                ActionsMenuButton {
+                    AllBooksActionsMenu()
+                }
             }
         }
     }
@@ -55,9 +47,5 @@ struct AllBooksIndexView: View {
                 model.delete(book)
             }
         }
-    }
-    
-    func handleAdd() {
-        let _ : CDRecord = model.add(.book)
     }
 }

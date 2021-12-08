@@ -7,7 +7,7 @@ import SwiftUI
 import SwiftUIExtensions
 
 struct RootIndexView: View {
-    @EnvironmentObject var model: Model
+    @EnvironmentObject var model: ModelController
     
     @FetchRequest(
         entity: CDRecord.entity(),
@@ -24,7 +24,7 @@ struct RootIndexView: View {
         entries.insert(ListEntry(), at: 0)
         
         return VStack {
-            List(entries, selection: $selection) { entry in
+            List(entries, selection: $model.selection) { entry in
                 switch entry.kind {
                     case .allBooks:
                         NavigationLink(destination: AllBooksIndexView(), tag: .allBooksID, selection: $selection) {
@@ -32,14 +32,14 @@ struct RootIndexView: View {
                         }
 
                     case let .list(list):
-                        RecordLink(list, selection: $selection)
+                        RecordLink(list, selection: $model.selection)
                         
                     case let .book(book, list):
                         RecordLink(book, in: list, selection: $selection)
                 }
             }
             .listStyle(.plain)
-            .navigationTitle(model.appName)
+            .navigationBarTitle(model.appName, displayMode: .inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     ActionsMenuButton {

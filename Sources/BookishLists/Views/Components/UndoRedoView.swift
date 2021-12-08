@@ -6,7 +6,7 @@
 import SwiftUI
 
 struct UndoView: View {
-    @EnvironmentObject var model: Model
+    @EnvironmentObject var model: ModelController
     
     var body: some View {
         Button(action: model.handleUndo) {
@@ -17,7 +17,7 @@ struct UndoView: View {
 }
 
 struct RedoView: View {
-    @EnvironmentObject var model: Model
+    @EnvironmentObject var model: ModelController
     
     var body: some View {
         Button(action: model.handleRedo) {

@@ -6,7 +6,7 @@
 import SwiftUI
 
 struct RecordLink: View {
-    @EnvironmentObject var model: Model
+    @EnvironmentObject var model: ModelController
     @ObservedObject var record: CDRecord
     let list: CDRecord?
     @Binding var selection: String?
@@ -15,7 +15,7 @@ struct RecordLink: View {
     init(_ record: CDRecord, nameMode: RecordLabel.NameMode = .normal, in list: CDRecord? = nil, selection: Binding<String?>) {
         self.record = record
         self.list = list
-        self._selection = .init(projectedValue: selection)
+        self._selection = selection
         self.nameMode = nameMode
     }
 

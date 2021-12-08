@@ -7,7 +7,8 @@ import SwiftUI
 
 struct CandidateDetailView: View {
     @EnvironmentObject var appearance: AppearanceController
-    @EnvironmentObject var model: Model
+    @EnvironmentObject var importController: ImportController
+    @EnvironmentObject var model: ModelController
     @Environment(\.presentationMode) var presentationMode
     @ObservedObject var candidate: LookupCandidate
     
@@ -53,7 +54,7 @@ struct CandidateDetailView: View {
     }
     
     func handleAdd() {
-        model.importFrom([candidate.book])
+        importController.import(from: [candidate.book])
         candidate.imported = true
         presentationMode.wrappedValue.dismiss()
     }

@@ -3,15 +3,19 @@
 //  All code (c) 2021 - present day, Elegant Chaos Limited.
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
+import SheetController
 import SwiftUI
 
-struct BookActionsMenu: View {
-    @EnvironmentObject var model: ModelController
-    @ObservedObject var book: CDRecord
-    let deleteCallback: () -> ()
-    
+struct AddBooksButton: View {
+    @EnvironmentObject var sheetController: SheetController
+
     var body: some View {
-        Button(action: deleteCallback) { Label("Delete", systemImage: "trash") }
-        EditButton()
+        Button(action: handleScan) { Text("Add Books…") }
+    }
+
+    func handleScan() {
+        sheetController.show {
+            AddBooksView()
+        }
     }
 }

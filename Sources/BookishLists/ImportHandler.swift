@@ -12,7 +12,8 @@ import Foundation
 import ThreadExtensions
 
 class ImportHandler: ObservableObject {
-    let model: Model
+    let model: ModelController
+    let importController: ImportController
     let list: CDRecord
     let allPeople: CDRecord
     let allPublishers: CDRecord
@@ -25,8 +26,9 @@ class ImportHandler: ObservableObject {
     var done = 0
     var intervals: TimeInterval = 0
     
-    init(model: Model, context: NSManagedObjectContext) {
+    init(model: ModelController, importController: ImportController, context: NSManagedObjectContext) {
         self.model = model
+        self.importController = importController
         self.context = context
         self.list = CDRecord(context: context)
         self.allPeople = context.allPeople
@@ -202,7 +204,7 @@ extension ImportHandler {
     func report(label: String) {
         let progress = ImportProgress(count: done, total: count, label: label)
         onMainQueue {
-            self.model.importProgress = progress
+            self.importController.importProgress = progress
         }
     }
     
@@ -219,7 +221,7 @@ extension ImportHandler {
         save()
         onMainQueue {
             self.model.save()
-            self.model.importProgress = nil
+            self.importController.importProgress = nil
         }
     }
 }

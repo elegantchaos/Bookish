@@ -1,17 +1,25 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-//  Created by Sam Deane on 07/12/21.
+//  Created by Sam Deane on 22/11/21.
 //  All code (c) 2021 - present day, Elegant Chaos Limited.
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 import SwiftUI
+import SheetController
+import BookishImporterSamples
 
-struct BookActionsMenu: View {
+struct AllBooksActionsMenu: View {
     @EnvironmentObject var model: ModelController
-    @ObservedObject var book: CDRecord
-    let deleteCallback: () -> ()
+    @EnvironmentObject var sheetController: SheetController
     
     var body: some View {
-        Button(action: deleteCallback) { Label("Delete", systemImage: "trash") }
+        AddBooksButton()
         EditButton()
     }
+    
+    func handleAdd() {
+        sheetController.show {
+            AddBooksView()
+        }
+    }
+
 }

@@ -10,33 +10,29 @@ import Logger
 import SwiftUI
 import SheetController
 
-class AppearanceController: ObservableObject {
-    func formatted(date: Date) -> String {
-        let formatted = DateFormatter.localizedString(from: date, dateStyle: .short, timeStyle: .none)
-        return formatted
-    }
-}
-
 @main
 struct Application: App {
     @Environment(\.scenePhase) var scenePhase
 
-    let model: Model
-    let lookup: LookupManager
-    let appearance: AppearanceController
-    let sheetController = SheetController()
-
+    let modelController: ModelController
+    let lookupController: LookupManager
+    let appearanceController: AppearanceController
+    let importController: ImportController
+    let sheetController: SheetController
+    let statusController: StatusController
+    
     init() {
         let undoManager = UndoManager()
         let stack = CoreDataStack(containerName: "BookishLists", undoManager: undoManager)
-
-        self.model = Model(stack: stack)
-        self.lookup = LookupManager()
-        self.appearance = AppearanceController()
+        self.modelController = ModelController(stack: stack)
+        self.importController = ImportController(model: modelController)
+        self.lookupController = LookupManager()
+        self.sheetController = SheetController()
+        self.appearanceController = AppearanceController()
+        self.statusController = StatusController()
 
         if CommandLine.arguments.contains("--wipeAllData") {
-            model.removeAllData()
-            model.save()
+            try? modelController.removeAllData()
             exit(0)
         }
         
@@ -44,22 +40,24 @@ struct Application: App {
     }
     
     func setupLookup() {
-        lookup.register(service: GoogleLookupService(name: "Google"))
+        lookupController.register(service: GoogleLookupService(name: "Google"))
     }
     
     
     var body: some Scene {
             return WindowGroup {
                 ContentView()
-                    .environment(\.managedObjectContext, model.stack.viewContext)
-                    .environmentObject(model)
+                    .environment(\.managedObjectContext, modelController.stack.viewContext)
+                    .environmentObject(modelController)
                     .environmentObject(sheetController)
-                    .environmentObject(lookup)
-                    .environmentObject(appearance)
+                    .environmentObject(lookupController)
+                    .environmentObject(appearanceController)
+                    .environmentObject(importController)
+                    .environmentObject(statusController)
                     .onReceive(
-                        model.objectWillChange.debounce(for: .seconds(1), scheduler: RunLoop.main), perform: { _ in
+                        modelController.objectWillChange.debounce(for: .seconds(1), scheduler: RunLoop.main), perform: { _ in
                             print("model changed")
-                            model.save()
+                            modelController.save()
                     })
             }
             .onChange(of: scenePhase) { newScenePhase in
@@ -70,7 +68,7 @@ struct Application: App {
                     print("App is inactive")
                   case .background:
                     print("App is in background")
-                    model.save()
+                    modelController.save()
                   @unknown default:
                     print("Oh - interesting: I received an unexpected new value.")
                   }

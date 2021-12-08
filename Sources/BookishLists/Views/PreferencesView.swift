@@ -8,8 +8,9 @@ import SheetController
 import LoggerUI
 
 struct PreferencesView: View {
-    @EnvironmentObject var model: Model
+    @EnvironmentObject var model: ModelController
     @EnvironmentObject var sheetController: SheetController
+    @EnvironmentObject var statusController: StatusController
     
     var body: some View {
         NavigationView {
@@ -30,9 +31,12 @@ struct PreferencesView: View {
     }
     
     func handleRemoveAll() {
-        model.objectWillChange.send()
-        model.removeAllData()
+        do {
+            try model.removeAllData()
+        } catch {
+            statusController.notify(error)
+        }
         sheetController.dismiss()
-        exit(0)
+//        exit(0)
     }
 }

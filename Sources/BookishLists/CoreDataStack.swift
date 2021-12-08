@@ -40,4 +40,18 @@ class CoreDataStack {
     func onBackground(do work: @escaping (NSManagedObjectContext) -> ()) {
         persistentContainer.performBackgroundTask(work)
     }
+    
+    func removeAllData() throws {
+        let context = viewContext
+        let entityNames = persistentContainer.managedObjectModel.entities.map({ $0.name!})
+        for entity in entityNames {
+            let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: entity)
+            let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+            try coordinator.execute(deleteRequest, with: context)
+        }
+
+        context.refreshAllObjects()
+        try context.save()
+    }
+
 }

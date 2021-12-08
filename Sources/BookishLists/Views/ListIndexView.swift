@@ -18,7 +18,7 @@ extension Binding where Value == String? {
 }
 
 struct ListIndexView: View {
-    @EnvironmentObject var model: Model
+    @EnvironmentObject var model: ModelController
     @Environment(\.managedObjectContext) var context
     @Environment(\.editMode) var editMode
     @ObservedObject var list: CDRecord
@@ -67,7 +67,9 @@ struct ListIndexView: View {
             }
             
             ToolbarItem(placement: .navigationBarTrailing) {
-                ListActionsMenuButton(list: list)
+                ActionsMenuButton {
+                    ListActionsMenu(list: list)
+                }
             }
         }
     }

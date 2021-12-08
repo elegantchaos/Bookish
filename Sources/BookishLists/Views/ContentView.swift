@@ -8,23 +8,23 @@ import SheetController
 import BookishImporter
 
 struct ContentView: View {
-    @EnvironmentObject var model: Model
+    @EnvironmentObject var modelController: ModelController
+    @EnvironmentObject var importController: ImportController
     @Environment(\.managedObjectContext) var managedObjectContext
     
     @EnvironmentObject var sheetController: SheetController
     
     var body: some View {
-        let showingProgress = model.importProgress != nil
+        let showingProgress = importController.importProgress != nil
 
         SheetControllerHost {
             NavigationView {
-                RootIndexView(selection: $model.selection)
+                RootIndexView(selection: $modelController.selection)
             }
-            .fileImporter(isPresented: $model.importRequested, allowedContentTypes: [.xml], onCompletion: model.handlePerformImport)
             .navigationBarTitleDisplayMode(.automatic)
             .toolbar {
                 ToolbarItem(placement: .bottomBar) {
-                    SelectionCountView(selection: $model.selection, stats: model.selectionStats)
+                    SelectionCountView(selection: $modelController.selection, stats: modelController.selectionStats)
                 }
                 
                 ToolbarItem(placement: .bottomBar) {
@@ -32,7 +32,7 @@ struct ContentView: View {
                 }
                 
                 ToolbarItem(placement: .bottomBar) {
-                    if let progress = model.importProgress {
+                    if let progress = importController.importProgress {
                         ProgressView(progress.label, value: Double(progress.count), total: Double(progress.total))
                             .frame(maxWidth: 512)
                     }

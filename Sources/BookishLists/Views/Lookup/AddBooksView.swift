@@ -84,8 +84,10 @@ struct AddBooksView: View {
     }
     
     func handleAppeared() {
-        search = "phlebas"
-        handleLookup()
+        #if DEBUG
+            search = "phlebas"
+            handleLookup()
+        #endif
     }
     
     func handleToggleCapture() {

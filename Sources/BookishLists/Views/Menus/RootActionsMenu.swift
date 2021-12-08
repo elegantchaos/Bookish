@@ -8,18 +8,13 @@ import SheetController
 import BookishImporterSamples
 
 struct RootActionsMenu: View {
-    @EnvironmentObject var model: Model
-    @EnvironmentObject var sheetController: SheetController
+    @EnvironmentObject var model: ModelController
 
     var body: some View {
         Button(action: handleAddList) { Text("New List") }
         Button(action: handleAddGroup) { Text("New Group") }
-        Button(action: handleScan) { Text("Add Books…") }
-        Menu("Import") {
-            Button(action: handleImportSmall) { Text("Delicious Library Small Sample") }
-            Button(action: handleImportFull) { Text("Delicious Library Full Sample") }
-            Button(action: handleRequestImport) { Text("From Delicious Library…") }
-        }
+        AddBooksButton()
+        ImportMenu()
     }
     
     func handleAddList() {
@@ -35,21 +30,4 @@ struct RootActionsMenu: View {
         model.selection = list.id
     }
 
-    func handleRequestImport() {
-        model.importRequested = true
-    }
-
-    func handleImportSmall() {
-        model.importFromDelicious(sampleNamed: "DeliciousSmall")
-    }
-
-    func handleImportFull() {
-        model.importFromDelicious(sampleNamed: "DeliciousFull")
-    }
-
-    func handleScan() {
-        sheetController.show {
-            AddBooksView()
-        }
-    }
 }

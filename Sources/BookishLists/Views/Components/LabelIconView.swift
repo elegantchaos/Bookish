@@ -8,7 +8,7 @@ import SwiftUI
 import SwiftUIExtensions
 
 struct LabelIconView: View {
-    @EnvironmentObject var model: Model
+    @EnvironmentObject var model: ModelController
     
     let url: URL
     let placeholder: String

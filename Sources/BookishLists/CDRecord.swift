@@ -3,6 +3,7 @@
 //  All code (c) 2021 - present day, Elegant Chaos Limited.
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
+import BookishCore
 import Combine
 import CoreData
 import Images
@@ -207,6 +208,14 @@ extension CDRecord {
         for item in properties {
             setProperty(item.value, forKey: item.key)
         }
+    }
+    
+    func set(_ value: String, forKey key: BookKey) {
+        set(value, forKey: key.rawValue)
+    }
+    
+    func set(_ value: Date, forKey key: BookKey) {
+        set(value, forKey: key.rawValue)
     }
     
     fileprivate func scheduleEncoding() {
