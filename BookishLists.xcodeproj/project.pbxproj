@@ -244,8 +244,8 @@
 				8B58C7CB25B84AB8007F6B70 /* PreferencesView.swift */,
 				8B6DD266275E87F600304468 /* PropertyView.swift */,
 				8B58C7BF25B843C7007F6B70 /* RootIndexView.swift */,
-				8BCF6B4B275A4EFC0023DBE3 /* Lookup */,
 				8BE1493F25DD5D5200A1DC32 /* Components */,
+				8BCF6B4B275A4EFC0023DBE3 /* Lookup */,
 				8B6DD26A275F8C6B00304468 /* Menus */,
 			);
 			path = Views;
@@ -425,6 +425,8 @@
 		8BE1493F25DD5D5200A1DC32 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				8B6DD268275F8C1900304468 /* ActionsMenuButton.swift */,
+				8B6DD271275FDCCC00304468 /* AddBooksButton.swift */,
 				8BB66542274D3B99002CC0E8 /* AsyncImageView.swift */,
 				8B39B47A26027F35003B0C5B /* DeferredTextField.swift */,
 				8BE1493D25DD5CA700A1DC32 /* FieldKindMenu.swift */,
@@ -432,9 +434,7 @@
 				8BB6653E274D3560002CC0E8 /* RecordLabel.swift */,
 				8BB66540274D3568002CC0E8 /* RecordLink.swift */,
 				8B57F09325F7E096007DB517 /* SearchBar.swift */,
-				8B6DD268275F8C1900304468 /* ActionsMenuButton.swift */,
 				8B6DD26D275FB27500304468 /* UndoRedoView.swift */,
-				8B6DD271275FDCCC00304468 /* AddBooksButton.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";

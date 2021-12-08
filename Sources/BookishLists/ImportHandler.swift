@@ -41,66 +41,74 @@ class ImportHandler: ObservableObject {
 
 extension ImportHandler: ImportDelegate {
     func session(_ session: ImportSession, willImportItems count: Int) {
-        self.count = count
-        self.intervals = Date.timeIntervalSinceReferenceDate
-        
-        let date = Date()
-        let formatted = DateFormatter.localizedString(from: date, dateStyle: .short, timeStyle: .none)
-        list.kind = .importSession
-        list.name = "\(session.source.localized) \(formatted)"
-        list.set("Records imported from \(session.source.localized) on \(formatted).", forKey: "notes")
-        list.set(date, forKey: "imported")
-        context.allImports.addToContents(list)
+        context.perform { [self] in
+            self.count = count
+            self.intervals = Date.timeIntervalSinceReferenceDate
+            
+            let date = Date()
+            let formatted = DateFormatter.localizedString(from: date, dateStyle: .short, timeStyle: .none)
+            list.kind = .importSession
+            list.name = "\(session.source.localized) \(formatted)"
+            list.set("Records imported from \(session.source.localized) on \(formatted).", forKey: "notes")
+            list.set(date, forKey: "imported")
+            context.allImports.addToContents(list)
 
-        report(label: "Importing…")
+            report(label: "Importing…")
+        }
     }
     
     func session(_ session: ImportSession, didImport rawBook: BookRecord) {
-        let importedBook = cleanupSeries(cleanupPublisher(rawBook))
-        
-        let book = CDRecord.findOrMakeWithID(importedBook.id, in: context) { newBook in
-                newBook.kind = .book
+        context.perform { [self] in
+            let importedBook = cleanupSeries(cleanupPublisher(rawBook))
+            
+            let book = CDRecord.findOrMakeWithID(importedBook.id, in: context) { newBook in
+                    newBook.kind = .book
+                }
+            
+            book.name = importedBook.title
+            book.imageURL = importedBook.urls(forKey: .imageURLs).first
+            book.merge(properties: importedBook.properties)
+            list.add(book)
+            done += 1
+
+            let now = Date.timeIntervalSinceReferenceDate
+            let elapsed = now - intervals
+            if elapsed > 0.1 {
+                intervals = now
+                report(label: "Importing: \(importedBook.title)")
             }
-        
-        book.name = importedBook.title
-        book.imageURL = importedBook.urls(forKey: .imageURLs).first
-        book.merge(properties: importedBook.properties)
-        list.add(book)
-        done += 1
+            
+            addPeople(to: book, from: importedBook, withKey: .authors, asRole: "Author")
+            addPeople(to: book, from: importedBook, withKey: .illustrators, asRole: "Illustrator")
 
-        let now = Date.timeIntervalSinceReferenceDate
-        let elapsed = now - intervals
-        if elapsed > 0.1 {
-            intervals = now
-            report(label: "Importing: \(importedBook.title)")
-        }
-        
-        addPeople(to: book, from: importedBook, withKey: .authors, asRole: "Author")
-        addPeople(to: book, from: importedBook, withKey: .illustrators, asRole: "Illustrator")
+            for publisher in importedBook.strings(forKey: .publishers) {
+                let list = CDRecord.findOrMakeWithName(publisher, kind: .publisher, in: context)
+                self.allPublishers.addToContents(list)
+                list.add(book)
+            }
 
-        for publisher in importedBook.strings(forKey: .publishers) {
-            let list = CDRecord.findOrMakeWithName(publisher, kind: .publisher, in: context)
-            self.allPublishers.addToContents(list)
-            list.add(book)
+            let series = importedBook.string(forKey: .series)
+            if !series.isEmpty {
+                let list = CDRecord.findOrMakeWithName(series, kind: .series, in: context)
+                self.allSeries.addToContents(list)
+                list.add(book)
+            }
+            
+            save()
         }
-
-        let series = importedBook.string(forKey: .series)
-        if !series.isEmpty {
-            let list = CDRecord.findOrMakeWithName(series, kind: .series, in: context)
-            self.allSeries.addToContents(list)
-            list.add(book)
-        }
-        
-        save()
     }
 
     func sessionDidFinish(_ session: ImportSession) {
-        cleanup()
+        context.perform { [self] in
+            cleanup()
+        }
     }
     
     func sessionDidFail(_ session: ImportSession) {
-        print("Import failed!") // TODO: handle error(s)
-        cleanup()
+        context.perform { [self] in
+            print("Import failed!") // TODO: handle error(s)
+            cleanup()
+        }
     }
 
 }

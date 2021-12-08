@@ -15,7 +15,9 @@ struct BookView: View {
     @ObservedObject var book: CDRecord
     @ObservedObject var fields: FieldList
     @State var selection: String?
-    
+    @State var showAddLinkPopover = false
+    @State var addLinkKind: CDRecord.Kind = .person
+
     @AppStorage("showLinks") var showLinks = true
     @AppStorage("showRaw") var  showRaw = false
     
@@ -74,7 +76,17 @@ struct BookView: View {
             
             ToolbarItem {
                 ActionsMenuButton {
-                    BookActionsMenu(book: book, deleteCallback: handleDelete)
+                    BookActionsMenu(book: book, deleteCallback: handleDelete, addLinkCallback: handleAddLink)
+                }
+                .popover(isPresented: $showAddLinkPopover) {
+                    switch addLinkKind {
+                        case .person:
+                            AddLinkView(PersonFetchProvider.self)
+                                .frame(minWidth: 400, maxWidth: .infinity, minHeight: 400, maxHeight: .infinity)
+
+                        default:
+                            EmptyView()
+                    }
                 }
             }
         }
@@ -92,6 +104,11 @@ struct BookView: View {
     func handleDelete() {
         presentationMode.wrappedValue.dismiss()
         model.delete(book)
+    }
+    
+    func handleAddLink(_ kind: CDRecord.Kind) {
+        showAddLinkPopover = true
+        
     }
 }
 

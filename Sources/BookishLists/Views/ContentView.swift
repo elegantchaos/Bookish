@@ -10,17 +10,19 @@ import BookishImporter
 struct ContentView: View {
     @EnvironmentObject var modelController: ModelController
     @EnvironmentObject var importController: ImportController
+    @EnvironmentObject var statusController: StatusController
     @Environment(\.managedObjectContext) var managedObjectContext
     
     @EnvironmentObject var sheetController: SheetController
     
     var body: some View {
-        let showingProgress = importController.importProgress != nil
+        let showingProgress = importController.isImporting
 
         SheetControllerHost {
             NavigationView {
                 RootIndexView(selection: $modelController.selection)
             }
+            .fileImporter(isPresented: $importController.importRequested, allowedContentTypes: [.xml], onCompletion: importController.handlePerformImport)
             .navigationBarTitleDisplayMode(.automatic)
             .toolbar {
                 ToolbarItem(placement: .bottomBar) {

@@ -6,6 +6,7 @@
 import SwiftUI
 
 struct ActionsMenuButton<MenuContent>: View where MenuContent: View {
+    
     let content: () -> MenuContent
     
     var body: some View {
@@ -15,4 +16,5 @@ struct ActionsMenuButton<MenuContent>: View where MenuContent: View {
             Image(systemName: "ellipsis.circle")
         }
     }
+    
 }

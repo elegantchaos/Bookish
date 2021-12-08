@@ -12,6 +12,8 @@ class ImportController: ObservableObject {
     
     @Published var importRequested = false
     @Published var importProgress: ImportProgress?
+
+    @Published private var importCompletion: ((_ result: Result<URL,Error>) -> ())?
     
     init(model: ModelController) {
         self.model = model
@@ -22,6 +24,10 @@ class ImportController: ObservableObject {
         ])
     }
     
+    var isImporting: Bool {
+        importProgress != nil
+    }
+    
     func `import`(from source: Any) {
         model.stack.onBackground { context in
             let delegate = ImportHandler(model: self.model, importController: self, context: context)
@@ -29,4 +35,13 @@ class ImportController: ObservableObject {
         }
     }
 
+    func chooseFileToImport(completion: @escaping (_ result: Result<URL,Error>) -> ()) {
+        importCompletion = completion
+        importRequested = true
+    }
+    
+    func handlePerformImport(_ result: Result<URL,Error>) {
+        importCompletion?(result)
+        importCompletion = nil
+    }
 }
