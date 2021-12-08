@@ -82,8 +82,13 @@ struct BookView: View {
                     switch addLinkKind {
                         case .person:
                             AddLinkView(PersonFetchProvider.self)
-                                .frame(minWidth: 400, maxWidth: .infinity, minHeight: 400, maxHeight: .infinity)
 
+                        case .series:
+                            AddLinkView(SeriesFetchProvider.self)
+                            
+                        case .publisher:
+                            AddLinkView(PublisherFetchProvider.self)
+                            
                         default:
                             EmptyView()
                     }
@@ -108,6 +113,7 @@ struct BookView: View {
     
     func handleAddLink(_ kind: CDRecord.Kind) {
         showAddLinkPopover = true
+        addLinkKind = kind
         
     }
 }

@@ -24,16 +24,28 @@ struct BookActionsMenu: View {
 }
 
 protocol FetchProvider {
-    static func request() -> NSFetchRequest<CDRecord>
+    static var kind: CDRecord.Kind { get }
 }
 
-struct PersonFetchProvider: FetchProvider {
+extension FetchProvider {
     static func request() -> NSFetchRequest<CDRecord> {
         let request: NSFetchRequest<CDRecord> = CDRecord.fetchRequest()
         request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
-        request.predicate = NSPredicate(format: "kindCode == \(CDRecord.Kind.person.rawValue)")
+        request.predicate = NSPredicate(format: "kindCode == \(kind.rawValue)")
         return request
     }
+}
+
+class PersonFetchProvider: FetchProvider {
+    static var kind: CDRecord.Kind { .person }
+}
+
+class PublisherFetchProvider: FetchProvider {
+    static var kind: CDRecord.Kind { .publisher }
+}
+
+class SeriesFetchProvider: FetchProvider {
+    static var kind: CDRecord.Kind { .series }
 }
 
 struct AddLinkView<P: FetchProvider>: View {
@@ -57,6 +69,7 @@ struct AddLinkView<P: FetchProvider>: View {
                 }
             }
         }
+        .frame(minWidth: 400, maxWidth: .infinity, minHeight: 400, maxHeight: .infinity)
     }
  
 }
