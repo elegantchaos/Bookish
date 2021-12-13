@@ -6,20 +6,35 @@
 import CoreData
 import SwiftUI
 
+protocol BookActionsDelegate {
+    func handleDelete()
+    func handlePickLink(kind: CDRecord.Kind)
+    func handleAddLink(to: CDRecord)
+}
+
 struct BookActionsMenu: View {
     @EnvironmentObject var model: ModelController
+
     @ObservedObject var book: CDRecord
-    let deleteCallback: () -> ()
-    let addLinkCallback: (CDRecord.Kind) -> ()
+    let delegate: BookActionsDelegate
     
     var body: some View {
         Menu("Add Link") {
-            Button(action: { addLinkCallback(.person) }) { Label("Person", systemImage: "link") }
-            Button(action: { addLinkCallback(.publisher) }) { Label("Publisher", systemImage: "link") }
-            Button(action: { addLinkCallback(.series) }) { Label("Series", systemImage: "link") }
+            AddLinkButton(kind: .person, delegate: delegate)
+            AddLinkButton(kind: .publisher, delegate: delegate)
+            AddLinkButton(kind: .series, delegate: delegate)
         }
-        Button(action: deleteCallback) { Label("Delete", systemImage: "trash") }
+        Button(action: delegate.handleDelete) { Label("Delete", systemImage: "trash") }
         EditButton()
+    }
+}
+
+struct AddLinkButton: View {
+    let kind: CDRecord.Kind
+    let delegate: BookActionsDelegate
+
+    var body: some View {
+        Button(action: { delegate.handlePickLink(kind: kind) }) { Label(kind.roleLabel, systemImage: kind.iconName) }
     }
 }
 
@@ -50,26 +65,41 @@ class SeriesFetchProvider: FetchProvider {
 
 struct AddLinkView<P: FetchProvider>: View {
     @EnvironmentObject var model: ModelController
-    @FetchRequest(fetchRequest: P.request()) var books: FetchedResults<CDRecord>
+    @FetchRequest(fetchRequest: P.request()) var records: FetchedResults<CDRecord>
 
-    @State var selectedBook: String?
     @State var filter: String = ""
 
-    init(_ provider: P.Type) {
+    let delegate: BookActionsDelegate
+
+    init(_ provider: P.Type, delegate: BookActionsDelegate) {
+        self.delegate = delegate
     }
     
     var body: some View {
         VStack {
+            Text("Add \(P.kind.roleLabel) Link")
+
             TextField("filter", text: $filter)
+                .padding(.horizontal)
+
             List {
-                ForEach(books) { book in
-                    if filter.isEmpty || book.name.contains(filter) {
-                        Text(book.name)
+                ForEach(records) { record in
+                    if filter.isEmpty || record.name.contains(filter) {
+                        Button(action: { handleAddRecord(record) }) {
+                            RecordLabel(record: record)
+                        }
                     }
                 }
             }
+            .listStyle(.plain)
+//            .frame(maxHeight: .infinity)
+            
+            Text("End \(records.count)")
         }
-        .frame(minWidth: 400, maxWidth: .infinity, minHeight: 400, maxHeight: .infinity)
+        .padding(.vertical)
     }
  
+    func handleAddRecord(_ record: CDRecord) {
+        delegate.handleAddLink(to: record)
+    }
 }

@@ -78,6 +78,9 @@ extension CDRecord.Kind {
     
     var roleLabel: String {
         switch self {
+            case .person:
+                return "Person"
+                
             case .publisher:
                 return "Publisher"
 
