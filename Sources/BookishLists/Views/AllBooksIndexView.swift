@@ -10,20 +10,20 @@ import ThreadExtensions
 
 struct AllBooksIndexView: View {
     @EnvironmentObject var model: ModelController
+    @SceneStorage("allBooksSelection") var selection: String?
     @FetchRequest(
         entity: CDRecord.entity(),
         sortDescriptors: [NSSortDescriptor(key: "name", ascending: true)],
         predicate: NSPredicate(format: "kindCode == \(CDRecord.Kind.book.rawValue)")
     ) var books: FetchedResults<CDRecord>
 
-    @State var selectedBook: String?
     @State var filter: String = ""
 
     var body: some View {
-        return List(selection: $selectedBook) {
+        return List(selection: $selection) {
             ForEach(books) { book in
                 if filter.isEmpty || book.name.contains(filter) {
-                    RecordLink(book, selection: $selectedBook)
+                    RecordLink(book, selection: $selection)
                 }
             }
             .onDelete(perform: handleDelete)

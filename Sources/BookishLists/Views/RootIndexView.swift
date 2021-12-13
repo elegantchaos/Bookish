@@ -8,6 +8,7 @@ import SwiftUIExtensions
 
 struct RootIndexView: View {
     @EnvironmentObject var model: ModelController
+    @SceneStorage("rootSelection") var selection: String?
     
     @FetchRequest(
         entity: CDRecord.entity(),
@@ -16,8 +17,6 @@ struct RootIndexView: View {
         ],
         predicate: NSPredicate(format: "containedBy.@count == 0")
     ) var lists: FetchedResults<CDRecord>
-    
-    @Binding var selection: String?
     
     var body: some View {
         var entries = lists.map({ ListEntry(list: $0)})

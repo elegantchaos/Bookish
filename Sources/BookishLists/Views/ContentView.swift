@@ -20,14 +20,14 @@ struct ContentView: View {
 
         SheetControllerHost {
             NavigationView {
-                RootIndexView(selection: $modelController.selection)
+                RootIndexView()
             }
             .fileImporter(isPresented: $importController.importRequested, allowedContentTypes: [.xml], onCompletion: importController.handlePerformImport)
             .navigationBarTitleDisplayMode(.automatic)
             .toolbar {
-                ToolbarItem(placement: .bottomBar) {
-                    SelectionCountView(selection: $modelController.selection, stats: modelController.selectionStats)
-                }
+//                ToolbarItem(placement: .bottomBar) {
+//                    SelectionCountView(selection: $modelController.selection, stats: modelController.selectionStats)
+//                }
                 
                 ToolbarItem(placement: .bottomBar) {
                     Spacer()
