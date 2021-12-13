@@ -14,20 +14,18 @@ struct BookView: View {
     @EnvironmentObject var model: ModelController
     @ObservedObject var book: CDRecord
     @ObservedObject var fields: FieldList
-    @State var selection: String?
-    @State var isAddingLink = false
-    @State var addLinkKind: CDRecord.Kind = .person
+    @State var linkSession: AddLinkSessionView.Session? = nil
 
     @AppStorage("showLinks") var showLinks = true
     @AppStorage("showRaw") var  showRaw = false
     
     var body: some View {
         VStack(spacing: 0) {
-            if isAddingLink {
-                AddLinkSessionView(kind: addLinkKind, delegate: self)
+            if let session = linkSession {
+                AddLinkSessionView(session: session, delegate: self)
                     .toolbar {
                         ToolbarItem {
-                            Button(action: { isAddingLink = false} ) {
+                            Button(action: { linkSession = nil} ) {
                                 Text("Cancel")
                             }
                         }
@@ -48,7 +46,7 @@ struct BookView: View {
                                         let roles = book.sortedRoles(for: item)
                                         ForEach(roles, id: \.self) { role in
                                             HStack {
-                                                RecordLink(item, nameMode: .role(role), selection: $selection)
+                                                RecordLink(item, nameMode: .role(role), selection: .constant(nil))
                                                     .foregroundColor(.primary)
                                                 Spacer()
                                             }
@@ -114,11 +112,9 @@ extension BookView: BookActionsDelegate {
         model.delete(book)
     }
     
-    func handlePickLink(kind: CDRecord.Kind) {
-        
+    func handlePickLink(kind: CDRecord.Kind, role: String) {
         DispatchQueue.main.async {
-            isAddingLink = true
-            addLinkKind = kind
+            linkSession = .init(kind: kind, role: role)
         }
     }
     
@@ -126,7 +122,12 @@ extension BookView: BookActionsDelegate {
 
 extension BookView: AddLinkDelegate {
     func handleAddLink(to linked: CDRecord) {
-        isAddingLink = false
-        linked.addToContents(book)
+        if let session = linkSession {
+            linked.addToContents(book)
+            if let role = session.role {
+                book.addRole(role, for: linked)
+            }
+            linkSession = nil
+        }
     }
 }

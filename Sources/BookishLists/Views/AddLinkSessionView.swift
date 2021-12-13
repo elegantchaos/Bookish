@@ -6,10 +6,15 @@
 import SwiftUI
 
 struct AddLinkSessionView: View {
-    let kind: CDRecord.Kind
+    struct Session {
+        let kind: CDRecord.Kind
+        let role: String?
+    }
+    
+    let session: Session
     let delegate: AddLinkDelegate
     var body: some View {
-        switch kind {
+        switch session.kind {
             case .person:
                 AddLinkView(PersonFetchProvider.self, delegate: delegate)
 

@@ -8,7 +8,7 @@ import SwiftUI
 
 protocol BookActionsDelegate {
     func handleDelete()
-    func handlePickLink(kind: CDRecord.Kind)
+    func handlePickLink(kind: CDRecord.Kind, role: String)
     func handleAddLink(to: CDRecord)
 }
 
@@ -20,7 +20,9 @@ struct BookActionsMenu: View {
     
     var body: some View {
         Menu("Add Link") {
-            AddLinkButton(kind: .person, delegate: delegate)
+            ForEach(model.sortedRoles, id: \.self) { role in
+                AddLinkButton(kind: .person, role: role, delegate: delegate)
+            }
             AddLinkButton(kind: .publisher, delegate: delegate)
             AddLinkButton(kind: .series, delegate: delegate)
         }

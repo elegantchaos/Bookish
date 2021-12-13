@@ -151,6 +151,12 @@ class ModelController: ObservableObject {
         return list
     }
     
+    var roles: [String] { // TODO: make this editable by the user
+        return ["Author", "Editor", "Illustrator", "Collaborator", "Reviewer"]
+    }
+    
+    lazy var sortedRoles = roles.sorted()
+    
     lazy var defaultFields = makeDefaultFields()
     
     var canUndo: Bool {
