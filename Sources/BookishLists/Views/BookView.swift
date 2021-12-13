@@ -24,8 +24,7 @@ struct BookView: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 0) {
-                AsyncImageView(model.image(for: book, usePlacholder: false))
-                    .frame(maxWidth: 256, maxHeight: 256)
+                AsyncImageView(model.image(for: book, usePlacholder: false), sizeMode: .fixedUnlessEmpty(.init(width: 256, height: 256)))
                     .padding(.bottom)
 
                 FieldsView(record: book, fields: fields)

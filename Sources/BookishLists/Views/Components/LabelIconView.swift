@@ -14,7 +14,6 @@ struct LabelIconView: View {
     let placeholder: String
     var body: some View {
         let image = model.images.image(for: url, default: placeholder)
-        AsyncImageView(image)
-            .frame(maxWidth: 32, maxHeight: 32)
+        AsyncImageView(image, sizeMode: .fixed(.init(width: 32, height: 32)))
     }
 }
