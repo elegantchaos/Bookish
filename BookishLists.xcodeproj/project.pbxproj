@@ -51,6 +51,10 @@
 		8B6DD270275FC5CE00304468 /* AllBooksActionsMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6DD26F275FC5CE00304468 /* AllBooksActionsMenu.swift */; };
 		8B6DD272275FDCCC00304468 /* AddBooksButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6DD271275FDCCC00304468 /* AddBooksButton.swift */; };
 		8B6EF80E2760FD860070AEB6 /* StatusController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6EF80D2760FD860070AEB6 /* StatusController.swift */; };
+		8B70FA9D2767819D0061A542 /* AddLinkSessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B70FA9C2767819D0061A542 /* AddLinkSessionView.swift */; };
+		8B70FA9F276781DF0061A542 /* AddLinkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B70FA9E276781DF0061A542 /* AddLinkButton.swift */; };
+		8B70FAA1276782100061A542 /* FetchProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B70FAA0276782100061A542 /* FetchProvider.swift */; };
+		8B70FAA3276782510061A542 /* AddLinkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B70FAA2276782510061A542 /* AddLinkView.swift */; };
 		8B80467325B8788900698F28 /* SheetController in Frameworks */ = {isa = PBXBuildFile; productRef = 8B80467225B8788900698F28 /* SheetController */; };
 		8B80467D25B87C4A00698F28 /* LoggerUI in Frameworks */ = {isa = PBXBuildFile; productRef = 8B80467C25B87C4A00698F28 /* LoggerUI */; };
 		8B8A88E5274FCAD700EA2FAA /* BookishImporter in Frameworks */ = {isa = PBXBuildFile; productRef = 8B8A88E4274FCAD700EA2FAA /* BookishImporter */; };
@@ -159,6 +163,10 @@
 		8B6DD26F275FC5CE00304468 /* AllBooksActionsMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllBooksActionsMenu.swift; sourceTree = "<group>"; };
 		8B6DD271275FDCCC00304468 /* AddBooksButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBooksButton.swift; sourceTree = "<group>"; };
 		8B6EF80D2760FD860070AEB6 /* StatusController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusController.swift; sourceTree = "<group>"; };
+		8B70FA9C2767819D0061A542 /* AddLinkSessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLinkSessionView.swift; sourceTree = "<group>"; };
+		8B70FA9E276781DF0061A542 /* AddLinkButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLinkButton.swift; sourceTree = "<group>"; };
+		8B70FAA0276782100061A542 /* FetchProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchProvider.swift; sourceTree = "<group>"; };
+		8B70FAA2276782510061A542 /* AddLinkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLinkView.swift; sourceTree = "<group>"; };
 		8B8A88E3274FC36A00EA2FAA /* BookishCleanup */ = {isa = PBXFileReference; lastKnownFileType = folder; name = BookishCleanup; path = Dependencies/BookishCleanup; sourceTree = "<group>"; };
 		8B987C9E25C047E5003D6F9F /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		8B987CAA25C04876003D6F9F /* BooklistLists.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BooklistLists.xcdatamodel; sourceTree = "<group>"; };
@@ -244,6 +252,9 @@
 				8B58C7CB25B84AB8007F6B70 /* PreferencesView.swift */,
 				8B6DD266275E87F600304468 /* PropertyView.swift */,
 				8B58C7BF25B843C7007F6B70 /* RootIndexView.swift */,
+				8B70FA9C2767819D0061A542 /* AddLinkSessionView.swift */,
+				8B70FA9E276781DF0061A542 /* AddLinkButton.swift */,
+				8B70FAA2276782510061A542 /* AddLinkView.swift */,
 				8BE1493F25DD5D5200A1DC32 /* Components */,
 				8BCF6B4B275A4EFC0023DBE3 /* Lookup */,
 				8B6DD26A275F8C6B00304468 /* Menus */,
@@ -335,6 +346,7 @@
 				8BB6653C274D2D62002CC0E8 /* CDRecord+Sorting.swift */,
 				8B987C9E25C047E5003D6F9F /* CoreDataStack.swift */,
 				8B57F08C25F7C166007DB517 /* DataFetcher.swift */,
+				8B70FAA0276782100061A542 /* FetchProvider.swift */,
 				8BE1493925DC2CCB00A1DC32 /* Field.swift */,
 				8BE1494025DD7D7D00A1DC32 /* FieldList.swift */,
 				8B39B478260252AB003B0C5B /* ImportHandler.swift */,
@@ -663,6 +675,7 @@
 				8B6EF80E2760FD860070AEB6 /* StatusController.swift in Sources */,
 				8BB66545274D4041002CC0E8 /* CDRecord+RootLists.swift in Sources */,
 				8BE53C7A2760DB59004729B9 /* AppearanceController.swift in Sources */,
+				8B70FAA3276782510061A542 /* AddLinkView.swift in Sources */,
 				8B57F08A25F7C0E9007DB517 /* AmazonLookupService.swift in Sources */,
 				8BE1493E25DD5CA700A1DC32 /* FieldKindMenu.swift in Sources */,
 				8B57F08725F7C0E9007DB517 /* LookupManager.swift in Sources */,
@@ -683,7 +696,9 @@
 				8BB6653A274D1F30002CC0E8 /* CDRecord+CoreData.swift in Sources */,
 				8BCF6B48275A29000023DBE3 /* CandidatesView.swift in Sources */,
 				8BE1494125DD7D7D00A1DC32 /* FieldList.swift in Sources */,
+				8B70FA9F276781DF0061A542 /* AddLinkButton.swift in Sources */,
 				8B987C9F25C047E5003D6F9F /* CoreDataStack.swift in Sources */,
+				8B70FAA1276782100061A542 /* FetchProvider.swift in Sources */,
 				8B987D0325C1CA60003D6F9F /* NSEntityDescriptionExtensions.swift in Sources */,
 				8B57F09225F7D9F2007DB517 /* CandidateView.swift in Sources */,
 				8B6DD26E275FB27500304468 /* UndoRedoView.swift in Sources */,
@@ -693,6 +708,7 @@
 				8B1F10E225ADC28800108A34 /* EntryView.swift in Sources */,
 				8B987CB525C06708003D6F9F /* LabelIconView.swift in Sources */,
 				8B987D0225C1CA60003D6F9F /* NSManagedObjectContextExtensions.swift in Sources */,
+				8B70FA9D2767819D0061A542 /* AddLinkSessionView.swift in Sources */,
 				8BE1493425DC16E400A1DC32 /* IndexEntry.swift in Sources */,
 				8BB6653D274D2D62002CC0E8 /* CDRecord+Sorting.swift in Sources */,
 				8BE53C7C2760DB61004729B9 /* ImportController.swift in Sources */,

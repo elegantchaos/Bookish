@@ -24,7 +24,14 @@ struct BookView: View {
     var body: some View {
         VStack(spacing: 0) {
             if isAddingLink {
-                AddLinkSession(kind: addLinkKind, delegate: self)
+                AddLinkSessionView(kind: addLinkKind, delegate: self)
+                    .toolbar {
+                        ToolbarItem {
+                            Button(action: { isAddingLink = false} ) {
+                                Text("Cancel")
+                            }
+                        }
+                    }
             } else {
                 ScrollView {
                     VStack(spacing: 0) {
@@ -63,6 +70,13 @@ struct BookView: View {
                         .padding(.vertical)
                     }
                 }
+                .toolbar {
+                    ToolbarItem {
+                        ActionsMenuButton {
+                            BookActionsMenu(book: book, delegate: self)
+                        }
+                    }
+                }
             }
         }
         .padding()
@@ -77,16 +91,6 @@ struct BookView: View {
                             .font(.subheadline)
                     }
                 }
-            }
-            
-            ToolbarItem {
-                ActionsMenuButton {
-                    BookActionsMenu(book: book, delegate: self)
-                }
-//                .popover(isPresented: $showAddLinkPopover) {
-//                    addLinkPopover
-//                        .frame(maxWidth: 400)
-//                }
             }
         }
         .onDisappear(perform: handleDisappear)
@@ -117,35 +121,12 @@ struct BookView: View {
     }
 }
 
-struct AddLinkSession: View {
-    let kind: CDRecord.Kind
-    let delegate: BookActionsDelegate
-    var body: some View {
-        switch kind {
-            case .person:
-                AddLinkView(PersonFetchProvider.self, delegate: delegate)
-
-            case .series:
-                AddLinkView(SeriesFetchProvider.self, delegate: delegate)
-                
-            case .publisher:
-                AddLinkView(PublisherFetchProvider.self, delegate: delegate)
-                
-            default:
-                EmptyView()
-        }
-    }
-}
 extension BookView: BookActionsDelegate {
     func handleDelete() {
         presentationMode.wrappedValue.dismiss()
         model.delete(book)
     }
     
-    func handleAddLink(to: CDRecord) {
-        isAddingLink = false
-    }
-
     func handlePickLink(kind: CDRecord.Kind) {
         
         DispatchQueue.main.async {
@@ -155,6 +136,14 @@ extension BookView: BookActionsDelegate {
     }
     
 }
+
+extension BookView: AddLinkDelegate {
+    func handleAddLink(to linked: CDRecord) {
+        isAddingLink = false
+        linked.addToContents(book)
+    }
+}
+
 struct RawPropertyView: View {
     let key: String
     let value: Any
