@@ -12,21 +12,34 @@ struct PreferencesView: View {
     @EnvironmentObject var sheetController: SheetController
     @EnvironmentObject var statusController: StatusController
     
+    @AppStorage("enableRawProperties") var enableRawProperties = false
+    
     var body: some View {
         NavigationView {
-            VStack {
-                Button(action: handleRemoveAll) {
-                    Text("Wipe All Data")
+            List {
+                Section("General") {
+                    Toggle("Show Raw Properties", isOn: $enableRawProperties)
+                    
+                    NavigationLink("Logging") {
+                        LoggerChannelsView()
+                            .listStyle(.plain)
+                            .navigationTitle("Log Channels")
+                    }
                 }
-                
-                LoggerChannelsView()
-                    .padding()
+
+                Section("Danger Zone") {
+                    HStack {
+                        Spacer()
+                        Button("Wipe All Data", role: .destructive, action: handleRemoveAll)
+                            .buttonStyle(.borderedProminent)
+                            .buttonBorderShape(.capsule)
+                        Spacer()
+                    }
+                }
             }
-            .navigationTitle("Log Channels")
-            .navigationBarItems(trailing:
-                Button(action: sheetController.dismiss) {
-                    Text("Done")
-                })
+            .listStyle(.plain)
+            .navigationTitle("Settings")
+            .navigationBarTitleDisplayMode(.inline)
         }
     }
     
@@ -37,6 +50,6 @@ struct PreferencesView: View {
             statusController.notify(error)
         }
         sheetController.dismiss()
-//        exit(0)
+        //        exit(0)
     }
 }

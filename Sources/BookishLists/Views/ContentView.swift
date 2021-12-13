@@ -51,14 +51,6 @@ struct ContentView: View {
                         RedoView()
                     }
                 }
-
-                ToolbarItem(placement: .bottomBar) {
-                    if !showingProgress {
-                        Button(action: handlePreferences) {
-                            Label("Preferences", systemImage: "gear")
-                        }
-                    }
-                }
             }
             
         }

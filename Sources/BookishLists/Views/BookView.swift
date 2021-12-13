@@ -18,7 +18,8 @@ struct BookView: View {
 
     @AppStorage("showLinks") var showLinks = true
     @AppStorage("showRaw") var  showRaw = false
-    
+    @AppStorage("enableRawProperties") var enableRawProperties = false
+
     var body: some View {
         VStack(spacing: 0) {
             if let session = linkSession {
@@ -57,6 +58,7 @@ struct BookView: View {
                         }
                         .padding(.vertical)
                         
+                        if enableRawProperties {
                         DisclosureGroup("Raw Properties", isExpanded: $showRaw) {
                             LazyVStack(alignment: .leading, spacing: 8.0) {
                                 let keys = book.sortedKeys
@@ -69,6 +71,7 @@ struct BookView: View {
                             }
                         }
                         .padding(.vertical)
+                        }
                     }
                 }
                 .toolbar {

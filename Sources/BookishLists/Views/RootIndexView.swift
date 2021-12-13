@@ -23,18 +23,26 @@ struct RootIndexView: View {
         entries.insert(ListEntry(), at: 0)
         
         return VStack {
-            List(entries, selection: $model.selection) { entry in
-                switch entry.kind {
-                    case .allBooks:
-                        NavigationLink(destination: AllBooksIndexView(), tag: .allBooksID, selection: $selection) {
-                            Label("All Books", systemImage: "books.vertical")
-                        }
+            List(selection: $model.selection) {
+                ForEach(entries) { entry in
+                    switch entry.kind {
+                        case .allBooks:
+                            NavigationLink(destination: AllBooksIndexView(), tag: .allBooksID, selection: $selection) {
+                                Label("All Books", systemImage: "books.vertical")
+                            }
 
-                    case let .list(list):
-                        RecordLink(list, selection: $model.selection)
-                        
-                    case let .book(book, list):
-                        RecordLink(book, in: list, selection: $selection)
+                        case let .list(list):
+                            RecordLink(list, selection: $model.selection)
+                            
+                        case let .book(book, list):
+                            RecordLink(book, in: list, selection: $selection)
+                    }
+                }
+
+                Spacer()
+                
+                NavigationLink(destination: PreferencesView()) {
+                    Label("Settings", systemImage: "gear")
                 }
             }
             .listStyle(.plain)
