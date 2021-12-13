@@ -88,6 +88,38 @@ class CDRecord: NSManagedObject, Identifiable {
 }
 
 extension CDRecord {
+    func addRole(_ role: String, for record: CDRecord) {
+        let key = "\(BookKey.linkRoles.rawValue).\(record.id)"
+        var roles: Set<String> = Set(array(forKey: key) ?? [])
+        roles.insert(role)
+        set(Array(roles), forKey: key)
+    }
+
+    func removeRole(_ role: String, from record: CDRecord) {
+        let key = "\(BookKey.linkRoles.rawValue).\(record.id)"
+        var roles: Set<String> = Set(array(forKey: key) ?? [])
+        roles.remove(role)
+        set(Array(roles), forKey: key)
+    }
+    
+    func roles(for record: CDRecord) -> Set<String> {
+        let key = "\(BookKey.linkRoles.rawValue).\(record.id)"
+        let roles: Set<String> = Set(array(forKey: key) ?? [record.defaultRole])
+        return roles
+    }
+
+    func sortedRoles(for record: CDRecord) -> [String] {
+        let key = "\(BookKey.linkRoles.rawValue).\(record.id)"
+        let roles: [String] = array(forKey: key) ?? [record.defaultRole]
+        return roles.sorted()
+    }
+
+    var defaultRole: String {
+        return kind.roleLabel
+    }
+}
+
+extension CDRecord {
     func findOrMakeChildListWithName(_ name: String, kind: Kind) -> CDRecord {
         let kindCode = kind.rawValue
         if let list = contents?.first(where: { ($0.kindCode == kindCode) && ($0.name == name) }) {
@@ -168,6 +200,11 @@ extension CDRecord {
         return property(forKey: key) as? String
     }
 
+    func strings(forKey key: String) -> [String] {
+        guard let joined = string(forKey: key) else { return [] }
+        return joined.split(separator: ",").map({ String($0) })
+    }
+    
     func date(forKey key: String) -> Date? {
         return property(forKey: key) as? Date
     }

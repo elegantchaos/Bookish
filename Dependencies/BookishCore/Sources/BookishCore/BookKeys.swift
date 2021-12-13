@@ -19,6 +19,7 @@ public enum BookKey: String, CaseIterable {
     case illustrators
     case imageURLs
     case isbn
+    case linkRoles
     case length
     case modifiedDate
     case notes

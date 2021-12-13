@@ -198,11 +198,10 @@ extension ImportHandler {
     func addPeople(to book: CDRecord, from importedBook: BookRecord, withKey key: BookKey, asRole role: String) {
         if let people = importedBook.properties[key] as? [String] {
             for person in people {
-                let list = CDRecord.findOrMakeWithName(person, kind: .person, in: context)
-                allPeople.addToContents(list)
-                
-                let authorList = list.findOrMakeChildListWithName(role, kind: .personRole)
-                authorList.add(book)
+                let person = CDRecord.findOrMakeWithName(person, kind: .person, in: context)
+                allPeople.addToContents(person)
+                person.addToContents(book)
+                book.addRole(role, for: person)
             }
         }
     }

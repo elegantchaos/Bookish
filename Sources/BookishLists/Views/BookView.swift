@@ -45,10 +45,13 @@ struct BookView: View {
                             VStack(alignment: .leading, spacing: 8.0) {
                                 if let contained = book.containedBy?.sortedByName {
                                     ForEach(contained) { item in
-                                        HStack {
-                                            RecordLink(item, nameMode: .includeRole, selection: $selection)
-                                                .foregroundColor(.primary)
-                                            Spacer()
+                                        let roles = book.sortedRoles(for: item)
+                                        ForEach(roles, id: \.self) { role in
+                                            HStack {
+                                                RecordLink(item, nameMode: .role(role), selection: $selection)
+                                                    .foregroundColor(.primary)
+                                                Spacer()
+                                            }
                                         }
                                     }
                                 }
@@ -103,22 +106,6 @@ struct BookView: View {
     func handleDisappear() {
         model.save()
     }
-    
-    @ViewBuilder var addLinkPopover: some View {
-        switch addLinkKind {
-            case .person:
-                AddLinkView(PersonFetchProvider.self, delegate: self)
-
-            case .series:
-                AddLinkView(SeriesFetchProvider.self, delegate: self)
-                
-            case .publisher:
-                AddLinkView(PublisherFetchProvider.self, delegate: self)
-                
-            default:
-                EmptyView()
-        }
-    }
 }
 
 extension BookView: BookActionsDelegate {
@@ -141,27 +128,5 @@ extension BookView: AddLinkDelegate {
     func handleAddLink(to linked: CDRecord) {
         isAddingLink = false
         linked.addToContents(book)
-    }
-}
-
-struct RawPropertyView: View {
-    let key: String
-    let value: Any
-    
-    var body: some View {
-        let string: String
-        if let list = value as? [String] {
-            string = list.joined(separator: ", ")
-        } else {
-            string = String(describing: value)
-        }
-        
-        return VStack(alignment: .leading) {
-        if !string.isEmpty {
-            Text(key)
-                .foregroundColor(.secondary)
-            Text(string)
-        }
-        }
     }
 }

@@ -8,7 +8,7 @@ import SwiftUI
 struct RecordLabel: View {
     enum NameMode {
         case normal
-        case includeRole
+        case role(String)
     }
     
     @ObservedObject var record: CDRecord
@@ -22,7 +22,7 @@ struct RecordLabel: View {
     var body: some View {
         Label {
             HStack {
-                Text(recordName)
+                Text(record.name)
                 if let annotation = recordAnnotation {
                     Spacer()
                     Text(annotation)
@@ -40,20 +40,10 @@ struct RecordLabel: View {
         }
     }
     
-    var recordName: String {
-        if nameMode == .includeRole, record.kind == .personRole, let person = record.containedBy?.first {
-            return person.name
-        } else {
-            return record.name
-        }
-    }
-    
     var recordAnnotation: String? {
-        guard nameMode == .includeRole else { return nil }
-        if record.kind == .personRole {
-            return record.name
-        } else {
-            return record.kind.roleLabel
+        switch nameMode {
+            case .role(let role): return role
+            case .normal: return nil
         }
     }
 }
