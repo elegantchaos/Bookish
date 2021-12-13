@@ -57,12 +57,13 @@ class CDRecord: NSManagedObject, Identifiable {
     var sortedContents: [CDRecord] {
         contents?.sortedByName ?? []
     }
-    var sortedLists: [CDRecord] {
-        return sorted(ofKind: .list)
-    }
 
-    var sortedBooks: [CDRecord] {
-        return sorted(ofKind: .book)
+//    var sortedBooks: [CDRecord] {
+//        return sorted(ofKind: .book)
+//    }
+
+    var sortedContainedBy: [CDRecord] {
+        containedBy?.sortedByName ?? []
     }
 
     fileprivate var decodedFields: FieldList {
@@ -95,7 +96,7 @@ extension CDRecord {
         set(Array(roles), forKey: key)
     }
 
-    func removeRole(_ role: String, from record: CDRecord) {
+    func removeRole(_ role: String, of record: CDRecord) {
         let key = "\(BookKey.linkRoles.rawValue).\(record.id)"
         var roles: Set<String> = Set(array(forKey: key) ?? [])
         roles.remove(role)

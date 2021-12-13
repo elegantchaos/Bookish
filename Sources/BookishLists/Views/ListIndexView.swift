@@ -79,13 +79,13 @@ struct ListIndexView: View {
     }
     
     func handleDelete(_ items: IndexSet?) {
-        if let items = items {
-            items.forEach { index in
-                let entry = list.sortedBooks[index]
-                model.delete(entry)
-            }
-            model.save()
-        }
+//        if let items = items {
+//            items.forEach { index in
+//                let entry = list.sortedBooks[index]
+//                model.delete(entry)
+//            }
+//            model.save()
+//        }
     }
     
 }

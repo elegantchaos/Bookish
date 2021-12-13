@@ -9,6 +9,7 @@ struct RecordLabel: View {
     enum NameMode {
         case normal
         case role(String)
+        case roleInline(String)
     }
     
     @ObservedObject var record: CDRecord
@@ -22,7 +23,7 @@ struct RecordLabel: View {
     var body: some View {
         Label {
             HStack {
-                Text(record.name)
+                Text(recordName)
                 if let annotation = recordAnnotation {
                     Spacer()
                     Text(annotation)
@@ -40,10 +41,17 @@ struct RecordLabel: View {
         }
     }
     
+    var recordName: String {
+        switch nameMode {
+            case .roleInline(let role): return "\(record.name) (\(role))"
+            default: return record.name
+        }
+    }
+
     var recordAnnotation: String? {
         switch nameMode {
             case .role(let role): return role
-            case .normal: return nil
+            default: return nil
         }
     }
 }

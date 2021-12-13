@@ -118,6 +118,12 @@ extension BookView: BookActionsDelegate {
         }
     }
     
+    func handleRemoveLink(to record: CDRecord, role: String) {
+        if book.roles(for: record).count == 1 {
+            record.removeFromContents(book)
+        }
+        book.removeRole(role, of: record)
+    }
 }
 
 extension BookView: AddLinkDelegate {
