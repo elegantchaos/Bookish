@@ -18,7 +18,7 @@ class ImportHandler: ObservableObject {
     let allPeople: CDRecord
     let allPublishers: CDRecord
     let allSeries: CDRecord
-    let context: NSManagedObjectContext
+    let workContext: NSManagedObjectContext
     let seriesCleaner: SeriesCleaner
     let publisherCleaner: PublisherCleaner
     let savedUndoManager: UndoManager?
@@ -31,7 +31,7 @@ class ImportHandler: ObservableObject {
     init(model: ModelController, importController: ImportController, context: NSManagedObjectContext, undoManager: UndoManager?) {
         self.model = model
         self.importController = importController
-        self.context = context
+        self.workContext = context
         self.list = CDRecord(context: context)
         self.allPeople = context.allPeople
         self.allPublishers = context.allPublishers
@@ -57,75 +57,14 @@ class ImportHandler: ObservableObject {
 
 extension ImportHandler: ImportDelegate {
     func session(_ session: ImportSession, willImportItems count: Int) {
-        context.perform { [self] in
-
-            self.count = count
-            self.intervals = Date.timeIntervalSinceReferenceDate
-            
-            let date = Date()
-            let formatted = DateFormatter.localizedString(from: date, dateStyle: .short, timeStyle: .none)
-            list.kind = .importSession
-            list.name = "\(session.source.localized) \(formatted)"
-            list.set("Records imported from \(session.source.localized) on \(formatted).", forKey: "notes")
-            list.set(date, forKey: .importedDate)
-            context.allImports.addToContents(list)
-            
-            // build an index of previously imported books
-            // we will use this to attempt not to import the same book from the same source twice
-            let request = CDRecord.fetchRequest()
-            request.predicate = NSPredicate(format: "kindCode == \(CDRecord.Kind.book.rawValue)")
-            if let results = try? context.fetch(request) {
-                for book in results {
-                    if let id = book.string(forKey: BookKey.importedID.rawValue) {
-                        importIndex[id] = book
-                    }
-                }
-            }
-            
-            report(label: "Importing…")
+        workContext.perform { [self] in
+            prepare(count: count, source: session.source.localized)
         }
     }
     
     func session(_ session: ImportSession, didImport rawBook: BookRecord) {
-        context.perform { [self] in
-            let importedBook = cleanupSeries(cleanupPublisher(rawBook))
-            
-            let book = importIndex[importedBook.id] ?? CDRecord.findOrMakeWithID(UUID().uuidString, in: context) { newBook in
-                newBook.kind = .book
-            }
-            
-            book.name = importedBook.title
-            book.imageURL = importedBook.urls(forKey: .imageURLs).first
-            book.merge(properties: importedBook.properties)
-            book.set(importedBook.id, forKey: .importedID)
-            book.set(importedBook.source, forKey: .source)
-            list.add(book)
-            done += 1
-
-            let now = Date.timeIntervalSinceReferenceDate
-            let elapsed = now - intervals
-            if elapsed > 0.1 {
-                intervals = now
-                report(label: "Importing: \(importedBook.title)")
-            }
-            
-            addPeople(to: book, from: importedBook, withKey: .authors, asRole: "Author")
-            addPeople(to: book, from: importedBook, withKey: .illustrators, asRole: "Illustrator")
-
-            for publisher in importedBook.strings(forKey: .publishers) {
-                let list = CDRecord.findOrMakeWithName(publisher, kind: .publisher, in: context)
-                self.allPublishers.addToContents(list)
-                list.add(book)
-            }
-
-            let series = importedBook.string(forKey: .series)
-            if !series.isEmpty {
-                let list = CDRecord.findOrMakeWithName(series, kind: .series, in: context)
-                self.allSeries.addToContents(list)
-                list.add(book)
-            }
-            
-            saveImportContext()
+        workContext.perform { [self] in
+            process(rawBook: rawBook)
         }
     }
 
@@ -137,10 +76,103 @@ extension ImportHandler: ImportDelegate {
         print("Import failed!") // TODO: handle error(s)
         cleanup()
     }
-
 }
 
-extension ImportHandler {
+private extension ImportHandler {
+    func prepare(count: Int, source: String) {
+
+        self.count = count
+        self.intervals = Date.timeIntervalSinceReferenceDate
+        
+        let date = Date()
+        let formattedDate = DateFormatter.localizedString(from: date, dateStyle: .short, timeStyle: .none)
+        let formattedDateTime = DateFormatter.localizedString(from: date, dateStyle: .medium, timeStyle: .full)
+        list.kind = .importSession
+        list.name = "\(source) \(formattedDate)"
+        list.set("Records imported from \(source) on \(formattedDateTime).", forKey: "notes")
+        list.set(date, forKey: .importedDate)
+        workContext.allImports.addToContents(list)
+        
+        // build an index of previously imported books
+        // we will use this to attempt not to import the same book from the same source twice
+        let request = CDRecord.fetchRequest()
+        request.predicate = NSPredicate(format: "kindCode == \(CDRecord.Kind.book.rawValue)")
+        if let results = try? workContext.fetch(request) {
+            for book in results {
+                if let id = book.string(forKey: BookKey.importedID.rawValue) {
+                    importIndex[id] = book
+                }
+            }
+        }
+        
+        report(label: "Importing…")
+    }
+    
+    func process(rawBook: BookRecord) {
+        let importedBook = cleanupSeries(cleanupPublisher(rawBook))
+        
+        let book = importIndex[importedBook.id] ?? CDRecord.findOrMakeWithID(UUID().uuidString, in: workContext) { newBook in
+            newBook.kind = .book
+        }
+        
+        book.name = importedBook.title
+        book.imageURL = importedBook.urls(forKey: .imageURLs).first
+        book.merge(properties: importedBook.properties)
+        book.set(importedBook.id, forKey: .importedID)
+        book.set(importedBook.source, forKey: .source)
+        list.add(book)
+        done += 1
+
+        addPeople(to: book, from: importedBook, withKey: .authors, asRole: "Author")
+        addPeople(to: book, from: importedBook, withKey: .illustrators, asRole: "Illustrator")
+
+        for publisher in importedBook.strings(forKey: .publishers) {
+            let list = CDRecord.findOrMakeWithName(publisher, kind: .publisher, in: workContext)
+            self.allPublishers.addToContents(list)
+            list.add(book)
+        }
+
+        let series = importedBook.string(forKey: .series)
+        if !series.isEmpty {
+            let list = CDRecord.findOrMakeWithName(series, kind: .series, in: workContext)
+            self.allSeries.addToContents(list)
+            list.add(book)
+        }
+
+        report(book: importedBook)
+    }
+    
+    func report(book: BookRecord) {
+        let now = Date.timeIntervalSinceReferenceDate
+        let elapsed = now - intervals
+        if elapsed > 0.1 {
+            intervals = now
+            report(label: "Imported: \(book.title)")
+            saveImportContext()
+        }
+    }
+    
+    func report(label: String) {
+        let progress = ImportProgress(count: done, total: count, label: label)
+        onMainQueue {
+            self.importController.importProgress = progress
+        }
+    }
+    
+    func cleanup() {
+        workContext.perform { [self] in
+            report(label: "Finishing…")
+            saveImportContext()
+
+            let mainContext = model.stack.viewContext
+            mainContext.perform { [self] in
+                model.save()
+                mainContext.undoManager = savedUndoManager
+                importController.importProgress = nil
+            }
+        }
+    }
+
     func cleanupPublisher(_ raw: BookRecord) -> BookRecord {
         let title = raw.title
         let subtitle = raw.string(forKey: .subtitle)
@@ -225,7 +257,7 @@ extension ImportHandler {
     func addPeople(to book: CDRecord, from importedBook: BookRecord, withKey key: BookKey, asRole role: String) {
         if let people = importedBook.properties[key] as? [String] {
             for person in people {
-                let person = CDRecord.findOrMakeWithName(person, kind: .person, in: context)
+                let person = CDRecord.findOrMakeWithName(person, kind: .person, in: workContext)
                 allPeople.addToContents(person)
                 person.addToContents(book)
                 book.addRole(role, for: person)
@@ -233,35 +265,11 @@ extension ImportHandler {
         }
     }
     
-    
-
-    func report(label: String) {
-        let progress = ImportProgress(count: done, total: count, label: label)
-        onMainQueue {
-            self.importController.importProgress = progress
-        }
-    }
-    
     func saveImportContext() {
         do {
-            try context.save()
+            try workContext.save()
         } catch {
             print("Failed to save changes to background context")
-        }
-    }
-    
-    func cleanup() {
-        report(label: "Saving…")
-
-        context.perform {
-            self.saveImportContext()
-        }
-        
-        let mainContext = model.stack.viewContext
-        mainContext.perform { [self] in
-            model.save()
-            mainContext.undoManager = savedUndoManager
-            importController.importProgress = nil
         }
     }
 }

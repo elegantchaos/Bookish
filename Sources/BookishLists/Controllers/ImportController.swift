@@ -5,6 +5,7 @@
 
 import BookishImporter
 import SwiftUI
+import UniformTypeIdentifiers
 
 class ImportController: ObservableObject {
     let importer: ImportManager
@@ -12,7 +13,7 @@ class ImportController: ObservableObject {
     
     @Published var importRequested = false
     @Published var importProgress: ImportProgress?
-
+    @Published var importContentTypes: [UTType] = [.xml]
     @Published private var importCompletion: ((_ result: Result<URL,Error>) -> ())?
     
     init(model: ModelController) {

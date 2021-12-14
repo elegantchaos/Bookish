@@ -10,7 +10,6 @@ import BookishImporterSamples
 struct ListActionsMenu: View {
     @EnvironmentObject var model: ModelController
     @Environment(\.managedObjectContext) var context
-    @EnvironmentObject var sheetController: SheetController
     @ObservedObject var list: CDRecord
     
     var body: some View {

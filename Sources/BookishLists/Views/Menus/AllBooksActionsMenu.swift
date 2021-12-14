@@ -8,7 +8,6 @@ import SheetController
 import BookishImporterSamples
 
 struct AllBooksActionsMenu: View {
-    @EnvironmentObject var model: ModelController
     @EnvironmentObject var sheetController: SheetController
     
     var body: some View {

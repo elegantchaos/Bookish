@@ -27,7 +27,7 @@ struct RootIndexView: View {
                 ForEach(entries) { entry in
                     switch entry.kind {
                         case .allBooks:
-                            NavigationLink(destination: AllBooksIndexView(), tag: .allBooksID, selection: $selection) {
+                            NavigationLink(destination: AllBooksView(), tag: .allBooksID, selection: $selection) {
                                 Label("All Books", systemImage: "books.vertical")
                             }
 

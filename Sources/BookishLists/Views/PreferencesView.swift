@@ -9,7 +9,7 @@ import LoggerUI
 
 struct PreferencesView: View {
     @EnvironmentObject var model: ModelController
-    @EnvironmentObject var sheetController: SheetController
+    @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var statusController: StatusController
     
     @AppStorage("enableRawProperties") var enableRawProperties = false
@@ -49,7 +49,7 @@ struct PreferencesView: View {
         } catch {
             statusController.notify(error)
         }
-        sheetController.dismiss()
+        presentationMode.wrappedValue.dismiss()
         exit(0)
     }
 }
