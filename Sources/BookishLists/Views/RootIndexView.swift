@@ -23,37 +23,43 @@ struct RootIndexView: View {
         entries.insert(ListEntry(), at: 0)
         
         return VStack {
-            List(selection: $model.selection) {
-                ForEach(entries) { entry in
-                    switch entry.kind {
-                        case .allBooks:
-                            NavigationLink(destination: AllBooksView(), tag: .allBooksID, selection: $selection) {
-                                Label("All Books", systemImage: "books.vertical")
-                            }
-
-                        case let .list(list):
-                            RecordLink(list, selection: $model.selection)
-                            
-                        case let .book(book, list):
-                            RecordLink(book, in: list, selection: $selection)
+            VStack {
+                List(selection: $model.selection) {
+                    ForEach(entries) { entry in
+                        switch entry.kind {
+                            case .allBooks:
+                                NavigationLink(destination: AllBooksView(), tag: .allBooksID, selection: $selection) {
+                                    Label("All Books", systemImage: "books.vertical")
+                                }
+                                
+                            case let .list(list):
+                                RecordLink(list, selection: $model.selection)
+                                
+                            case let .book(book, list):
+                                RecordLink(book, in: list, selection: $selection)
+                        }
                     }
+                    
                 }
-
-                Spacer()
-                
+            }
+            .frame(maxHeight: .infinity)
+            
+            List {
                 NavigationLink(destination: PreferencesView()) {
                     Label("Settings", systemImage: "gear")
                 }
             }
-            .listStyle(.plain)
-            .navigationBarTitle(model.appName, displayMode: .inline)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    ActionsMenuButton {
-                        RootActionsMenu()
-                    }
+            .frame(height: 64) // TODO: this should be dynamic
+        }
+        .listStyle(.plain)
+        .navigationBarTitle(model.appName, displayMode: .inline)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                ActionsMenuButton {
+                    RootActionsMenu()
                 }
             }
         }
+        
     }
 }

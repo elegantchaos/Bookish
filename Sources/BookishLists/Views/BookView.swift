@@ -16,7 +16,8 @@ struct BookView: View {
     @ObservedObject var book: CDRecord
     @ObservedObject var fields: FieldList
     @State var linkSession: AddLinkSessionView.Session? = nil
-
+    @State var selection: String?
+    
     @AppStorage("showLinks") var showLinks = true
     @AppStorage("showRaw") var  showRaw = false
     @AppStorage("enableRawProperties") var enableRawProperties = false
@@ -49,7 +50,7 @@ struct BookView: View {
                                         let roles = book.sortedRoles(for: item)
                                         ForEach(roles, id: \.self) { role in
                                             HStack {
-                                                RecordLink(item, nameMode: .role(role), selection: .constant(nil))
+                                                RecordLink(item, nameMode: .role(role), selection: $selection)
                                                     .foregroundColor(.primary)
                                                 Spacer()
                                             }
@@ -95,12 +96,14 @@ struct BookView: View {
             ToolbarItem(placement: .principal) {
                 VStack(alignment: .center) {
                     DeferredTextField(label: "Name", text: $book.name)
+                        .font(.headline)
                     
-                    if let subtitle = book.string(forKey: "subtitle") {
+                    if let subtitle = book.string(forKey: "subtitle"), !subtitle.isEmpty {
                         Text(subtitle)
-                            .font(.subheadline)
+                            .font(.title)
                     }
                 }
+                .frame(maxWidth: .infinity)
             }
         }
         .onDisappear(perform: handleDisappear)
