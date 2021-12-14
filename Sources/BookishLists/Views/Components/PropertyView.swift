@@ -5,11 +5,24 @@
 
 import SwiftUI
 
-struct PropertyView: View {
+struct PropertyView<Content>: View where Content: View {
     let label: String
     let icon: String
-    let value: String
+    let content: () -> Content
     let layout: Field.Layout
+
+    init(label: String, icon: String, layout: Field.Layout, @ViewBuilder content: @escaping () -> Content) {
+        self.label = label
+        self.icon = icon
+        self.content = content
+        self.layout = layout
+    }
+
+    init(label: String, icon: String, value: String, layout: Field.Layout) where Content == Text {
+        self.init(label: label, icon: icon, layout: layout, content: {
+            Text(value)
+        })
+    }
 
     var body: some View {
         VStack {
@@ -18,7 +31,7 @@ struct PropertyView: View {
                     HStack {
                         Label(label, systemImage: icon)
                         Spacer()
-                        Text(value)
+                        content()
                     }
 
                 case .below:
@@ -29,18 +42,19 @@ struct PropertyView: View {
                     .padding(.top)
                     
                     HStack {
-                        Text(value)
+                        content()
                         Spacer()
                     }
                     .padding(.bottom)
 
                 case .belowNoLabel:
                     HStack {
-                        Text(value)
+                        content()
                         Spacer()
                     }
                     .padding(.bottom)
             }
         }
     }
+
 }

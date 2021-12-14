@@ -61,6 +61,22 @@ class Field: ObservableObject, Identifiable {
         get { kind.rawValue }
         set { kind = Kind(rawValue: newValue) ?? .string }
     }
+    
+    func text(for record: CDRecord, withAppearance appearance: AppearanceController) -> String {
+        switch kind {
+            case .date:
+                if let date = record.date(forKey: key) {
+                    let string = appearance.formatted(date: date)
+                    return string
+                }
+
+            default:
+                return record.string(forKey: key) ?? ""
+        }
+        
+        return ""
+    }
+
 }
 
 extension Field: Equatable {

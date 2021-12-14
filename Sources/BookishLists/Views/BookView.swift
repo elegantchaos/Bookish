@@ -11,6 +11,7 @@ struct BookView: View {
     @Environment(\.horizontalSizeClass) var size
     @Environment(\.managedObjectContext) var managedObjectContext
     @Environment(\.presentationMode) var presentationMode
+    @Environment(\.editMode) var editMode
     @EnvironmentObject var model: ModelController
     @ObservedObject var book: CDRecord
     @ObservedObject var fields: FieldList
@@ -21,6 +22,7 @@ struct BookView: View {
     @AppStorage("enableRawProperties") var enableRawProperties = false
 
     var body: some View {
+        let isEditing = editMode?.wrappedValue.isEditing ?? false
         VStack(spacing: 0) {
             if let session = linkSession {
                 AddLinkSessionView(session: session, delegate: self)
@@ -76,8 +78,12 @@ struct BookView: View {
                 }
                 .toolbar {
                     ToolbarItem {
-                        ActionsMenuButton {
-                            BookActionsMenu(book: book, delegate: self)
+                        if isEditing {
+                            EditButton()
+                        } else {
+                            ActionsMenuButton {
+                                BookActionsMenu(book: book, delegate: self)
+                            }
                         }
                     }
                 }
