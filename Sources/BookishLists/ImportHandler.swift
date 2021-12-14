@@ -50,7 +50,7 @@ extension ImportHandler: ImportDelegate {
             list.kind = .importSession
             list.name = "\(session.source.localized) \(formatted)"
             list.set("Records imported from \(session.source.localized) on \(formatted).", forKey: "notes")
-            list.set(date, forKey: "imported")
+            list.set(date, forKey: .importedDate)
             context.allImports.addToContents(list)
 
             report(label: "Importing…")
