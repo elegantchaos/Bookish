@@ -65,6 +65,7 @@ public class DeliciousLibraryImportSession: URLImportSession {
             if var book = self.validate(record) {
                 deliciousChannel.log("Started import")
                 book.importFromDelicious()
+                book[.source] = importer.id
                 delegate.session(self, didImport: book)
             } else {
                 deliciousChannel.log("skipped non-book \(record["title"] ?? record)")
@@ -140,6 +141,8 @@ extension BookRecord {
             }
         }
         
+        processed[BookKey.importedDate.rawValue] = Date()
+
         properties = processed
     }
 }

@@ -14,7 +14,7 @@ let package = Package(
     ],
     
     dependencies: [
-        .package(url: "https://github.com/elegantchaos/Coercion.git", from: "1.1.2"),
+        .package(url: "https://github.com/elegantchaos/Coercion.git", from: "1.1.3"),
         .package(url: "https://github.com/elegantchaos/ISBN.git", from: "1.0.2"),
     ],
     
