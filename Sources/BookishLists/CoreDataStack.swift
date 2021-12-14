@@ -41,6 +41,10 @@ class CoreDataStack {
         persistentContainer.performBackgroundTask(work)
     }
     
+    func newBackgroundContext() -> NSManagedObjectContext {
+        persistentContainer.newBackgroundContext()
+    }
+    
     func removeAllData() throws {
         let context = viewContext
         let entityNames = persistentContainer.managedObjectModel.entities.map({ $0.name!})

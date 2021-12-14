@@ -49,14 +49,15 @@ public class DeliciousLibraryImportSession: URLImportSession {
     }
     
     func validate(_ record: [String:Any]) -> BookRecord? {
-        var properties = record
+        var unprocessed = record
+        let id = unprocessed.extractDeliciousID()
         let format = record["formatSingularString"] as? String
         guard format == nil || !formatsToSkip.contains(format!) else { return nil }
         
         let type = record["type"] as? String
         guard type == nil || !formatsToSkip.contains(type!) else { return nil }
 
-        return BookRecord(properties, id: properties.extractDeliciousID(), source: importer.id)
+        return BookRecord(unprocessed, id: id, source: importer.id)
     }
     
     override func run() {
@@ -65,7 +66,6 @@ public class DeliciousLibraryImportSession: URLImportSession {
             if var book = self.validate(record) {
                 deliciousChannel.log("Started import")
                 book.importFromDelicious()
-                book[.source] = importer.id
                 delegate.session(self, didImport: book)
             } else {
                 deliciousChannel.log("skipped non-book \(record["title"] ?? record)")
@@ -133,6 +133,9 @@ extension BookRecord {
         processed.extractStringList(forKey: "illustratorsCompositeString", as: .illustrators, from: &unprocessed)
         processed.extractImages(from: &unprocessed)
 
+        processed[BookKey.importedID.rawValue] = unprocessed.extractDeliciousID()
+        processed[BookKey.importedDate.rawValue] = Date()
+
         for (key, value) in unprocessed {
             if (value as? Int != 0) && (value as? String != "") {
                 processed["delicious.\(key)"] = value
@@ -141,7 +144,6 @@ extension BookRecord {
             }
         }
         
-        processed[BookKey.importedDate.rawValue] = Date()
 
         properties = processed
     }

@@ -21,12 +21,14 @@ class ImportHandler: ObservableObject {
     let context: NSManagedObjectContext
     let seriesCleaner: SeriesCleaner
     let publisherCleaner: PublisherCleaner
-    
+    let savedUndoManager: UndoManager?
+
     var count = 0
     var done = 0
     var intervals: TimeInterval = 0
+    var importIndex: [String:CDRecord] = [:]
     
-    init(model: ModelController, importController: ImportController, context: NSManagedObjectContext) {
+    init(model: ModelController, importController: ImportController, context: NSManagedObjectContext, undoManager: UndoManager?) {
         self.model = model
         self.importController = importController
         self.context = context
@@ -36,12 +38,27 @@ class ImportHandler: ObservableObject {
         self.allSeries = context.allSeries
         self.seriesCleaner = SeriesCleaner()
         self.publisherCleaner = PublisherCleaner()
+        self.savedUndoManager = undoManager
+    }
+    
+    static func run(importer: ImportManager, source: Any, model: ModelController, importController: ImportController) {
+        let mainContext = model.stack.viewContext
+        mainContext.perform {
+            let savedUndoManager = mainContext.undoManager
+            mainContext.undoManager = nil
+            model.stack.onBackground { context in
+                let delegate = ImportHandler(model: model, importController: importController, context: context, undoManager: savedUndoManager)
+                importer.importFrom(source, delegate: delegate)
+            }
+        }
+
     }
 }
 
 extension ImportHandler: ImportDelegate {
     func session(_ session: ImportSession, willImportItems count: Int) {
         context.perform { [self] in
+
             self.count = count
             self.intervals = Date.timeIntervalSinceReferenceDate
             
@@ -52,7 +69,19 @@ extension ImportHandler: ImportDelegate {
             list.set("Records imported from \(session.source.localized) on \(formatted).", forKey: "notes")
             list.set(date, forKey: .importedDate)
             context.allImports.addToContents(list)
-
+            
+            // build an index of previously imported books
+            // we will use this to attempt not to import the same book from the same source twice
+            let request = CDRecord.fetchRequest()
+            request.predicate = NSPredicate(format: "kindCode == \(CDRecord.Kind.book.rawValue)")
+            if let results = try? context.fetch(request) {
+                for book in results {
+                    if let id = book.string(forKey: BookKey.importedID.rawValue) {
+                        importIndex[id] = book
+                    }
+                }
+            }
+            
             report(label: "Importing…")
         }
     }
@@ -61,13 +90,15 @@ extension ImportHandler: ImportDelegate {
         context.perform { [self] in
             let importedBook = cleanupSeries(cleanupPublisher(rawBook))
             
-            let book = CDRecord.findOrMakeWithID(importedBook.id, in: context) { newBook in
-                    newBook.kind = .book
-                }
+            let book = importIndex[importedBook.id] ?? CDRecord.findOrMakeWithID(UUID().uuidString, in: context) { newBook in
+                newBook.kind = .book
+            }
             
             book.name = importedBook.title
             book.imageURL = importedBook.urls(forKey: .imageURLs).first
             book.merge(properties: importedBook.properties)
+            book.set(importedBook.id, forKey: .importedID)
+            book.set(importedBook.source, forKey: .source)
             list.add(book)
             done += 1
 
@@ -94,21 +125,17 @@ extension ImportHandler: ImportDelegate {
                 list.add(book)
             }
             
-            save()
+            saveImportContext()
         }
     }
 
     func sessionDidFinish(_ session: ImportSession) {
-        context.perform { [self] in
-            cleanup()
-        }
+        cleanup()
     }
     
     func sessionDidFail(_ session: ImportSession) {
-        context.perform { [self] in
-            print("Import failed!") // TODO: handle error(s)
-            cleanup()
-        }
+        print("Import failed!") // TODO: handle error(s)
+        cleanup()
     }
 
 }
@@ -215,7 +242,7 @@ extension ImportHandler {
         }
     }
     
-    func save() {
+    func saveImportContext() {
         do {
             try context.save()
         } catch {
@@ -225,10 +252,16 @@ extension ImportHandler {
     
     func cleanup() {
         report(label: "Saving…")
-        save()
-        onMainQueue {
-            self.model.save()
-            self.importController.importProgress = nil
+
+        context.perform {
+            self.saveImportContext()
+        }
+        
+        let mainContext = model.stack.viewContext
+        mainContext.perform { [self] in
+            model.save()
+            mainContext.undoManager = savedUndoManager
+            importController.importProgress = nil
         }
     }
 }

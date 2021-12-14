@@ -55,7 +55,7 @@ struct Application: App {
                     .environmentObject(importController)
                     .environmentObject(statusController)
                     .onReceive(
-                        modelController.objectWillChange.debounce(for: .seconds(1), scheduler: RunLoop.main), perform: { _ in
+                        modelController.objectWillChange.debounce(for: .seconds(10), scheduler: RunLoop.main), perform: { _ in
                             print("model changed")
                             modelController.save()
                     })

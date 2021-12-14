@@ -50,6 +50,6 @@ struct PreferencesView: View {
             statusController.notify(error)
         }
         sheetController.dismiss()
-        //        exit(0)
+        exit(0)
     }
 }

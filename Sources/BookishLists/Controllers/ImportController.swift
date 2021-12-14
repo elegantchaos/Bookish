@@ -29,10 +29,7 @@ class ImportController: ObservableObject {
     }
     
     func `import`(from source: Any) {
-        model.stack.onBackground { context in
-            let delegate = ImportHandler(model: self.model, importController: self, context: context)
-            self.importer.importFrom(source, delegate: delegate)
-        }
+        ImportHandler.run(importer: importer, source: source, model: model, importController: self)
     }
 
     func chooseFileToImport(completion: @escaping (_ result: Result<URL,Error>) -> ()) {
