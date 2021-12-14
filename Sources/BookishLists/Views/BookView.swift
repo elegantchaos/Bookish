@@ -91,7 +91,6 @@ struct BookView: View {
             }
         }
         .padding()
-        .navigationBarTitleDisplayMode(.large)
         .toolbar {
             ToolbarItem(placement: .principal) {
                 VStack(alignment: .center) {
@@ -100,9 +99,10 @@ struct BookView: View {
                     
                     if let subtitle = book.string(forKey: "subtitle"), !subtitle.isEmpty {
                         Text(subtitle)
-                            .font(.title)
+                            .font(.subheadline)
                     }
                 }
+                .multilineTextAlignment(.center)
                 .frame(maxWidth: .infinity)
             }
         }

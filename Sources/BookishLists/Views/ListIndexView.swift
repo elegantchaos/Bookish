@@ -64,6 +64,9 @@ struct ListIndexView: View {
         .toolbar {
             ToolbarItem(placement: .principal) {
                 DeferredTextField(label: "Name", text: $list.name)
+                    .multilineTextAlignment(.center)
+                    .font(.headline)
+                    .frame(maxWidth: .infinity)
             }
             
             ToolbarItem(placement: .navigationBarTrailing) {
