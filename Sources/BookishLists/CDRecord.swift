@@ -52,6 +52,22 @@ class CDRecord: NSManagedObject, Identifiable {
         }
     }
     
+    var canAddLists: Bool {
+        switch kind {
+            case .group: return true
+            case .root: return id == ModelController.RootList.lists.id
+            default: return false
+        }
+    }
+
+    var canAddGroups: Bool {
+        switch kind {
+            case .group: return true
+            case .root: return id == ModelController.RootList.lists.id
+            default: return false
+        }
+    }
+
     var watcher: AnyCancellable? = nil
     
     func sorted(ofKind kind: Kind) -> [CDRecord] {

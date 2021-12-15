@@ -81,6 +81,16 @@ extension CDRecord {
         return nil
     }
     
+    class func findWithID(_ identifier: String, in context: NSManagedObjectContext) -> CDRecord? {
+        let request: NSFetchRequest<CDRecord> = CDRecord.fetcher(in: context)
+        request.predicate = NSPredicate(format: "id = %@", identifier)
+        if let results = try? context.fetch(request), let object = results.first {
+            return object
+        }
+        
+        return nil
+    }
+    
     class func findOrMakeWithID(_ identifier: String, in context: NSManagedObjectContext, creationCallback: CreationCallback) -> CDRecord {
         let request: NSFetchRequest<CDRecord> = CDRecord.fetcher(in: context)
         request.predicate = NSPredicate(format: "id = %@", identifier)

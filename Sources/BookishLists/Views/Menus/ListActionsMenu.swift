@@ -14,8 +14,13 @@ struct ListActionsMenu: View {
     @Binding var selection: String?
 
     var body: some View {
-        AddRecordButton(container: list, kind: .list, selection: $selection)
-        AddRecordButton(container: list, kind: .group, selection: $selection)
+        if list.canAddLists {
+            AddRecordButton(container: list, kind: .list, selection: $selection)
+        }
+        
+        if list.canAddGroups {
+            AddRecordButton(container: list, kind: .group, selection: $selection)
+        }
 
         if list.canAddLinks {
             Menu("Add Link") {

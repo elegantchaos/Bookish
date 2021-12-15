@@ -13,7 +13,7 @@ struct AddRecordButton: View {
     
     var body: some View {
         Button(action: handleAddRecord) {
-            Text(LocalizedStringKey(kind.newLabel))
+            Label(LocalizedStringKey(kind.newLabel), systemImage: kind.iconName)
         }
     }
 

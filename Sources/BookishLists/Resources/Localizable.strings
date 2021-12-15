@@ -41,3 +41,9 @@ root.people = "People";
 root.publishers = "Publishers";
 root.series = "Series";
 root.lists = "My Lists";
+
+// Book Adding Modes
+add.scan = "Scan Books";
+add.scan.help = "Use the camera to scan a barcode.";
+add.search = "Add Books";
+add.search.help = "Enter a title, author, etc to search for books to add.";

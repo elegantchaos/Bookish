@@ -12,9 +12,8 @@ struct RootActionsMenu: View {
     @Binding var selection: String?
     
     var body: some View {
-        AddRecordButton(container: nil, kind: .list, selection: $selection)
-        AddRecordButton(container: nil, kind: .group, selection: $selection)
-        AddBooksButton()
+        AddBooksButton(mode: .scan)
+        AddBooksButton(mode: .search)
         ImportMenu()
     }
 }

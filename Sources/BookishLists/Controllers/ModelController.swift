@@ -67,7 +67,6 @@ class ModelController: ObservableObject {
     }
     
     var appName: String { "Bookish Lists" }
-    var rootLists: [RootList:CDRecord] = [:]
 
     func save() {
         let context = stack.viewContext
@@ -126,20 +125,21 @@ class ModelController: ObservableObject {
         }
     }
 
-    func rootList(_ list: RootList) -> CDRecord {
-        rootLists[list]!
+    func rootList(_ list: RootList, in context: NSManagedObjectContext) -> CDRecord {
+        return CDRecord.findWithID(list.id, in: context)!
     }
     
     func makeRootLists() {
         let context = stack.viewContext
         context.perform {
             for list in RootList.allCases {
-                self.rootLists[list] = CDRecord.findOrMakeWithID(list.id, in: context) { created in
+                _ = CDRecord.findOrMakeWithID(list.id, in: context) { created in
                     created.kind = .root
                     created.name = list.label
                 }
             }
         }
+        save()
     }
     
     func makeDefaultFields() -> FieldList {

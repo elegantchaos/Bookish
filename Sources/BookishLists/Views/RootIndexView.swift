@@ -19,6 +19,8 @@ struct RootIndexView: View {
     ) var lists: FetchedResults<CDRecord>
     
     var body: some View {
+        traceChanges()
+
         var entries = lists.map({ ListEntry(list: $0)})
         entries.insert(ListEntry(), at: 0)
         

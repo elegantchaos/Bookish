@@ -11,14 +11,6 @@ struct AllBooksActionsMenu: View {
     @EnvironmentObject var sheetController: SheetController
     
     var body: some View {
-        AddBooksButton()
         EditButton()
     }
-    
-    func handleAdd() {
-        sheetController.show {
-            AddBooksView()
-        }
-    }
-
 }

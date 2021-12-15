@@ -18,6 +18,7 @@ class ImportHandler: ObservableObject {
     let allPeople: CDRecord
     let allPublishers: CDRecord
     let allSeries: CDRecord
+    let allImports: CDRecord
     let workContext: NSManagedObjectContext
     let seriesCleaner: SeriesCleaner
     let publisherCleaner: PublisherCleaner
@@ -33,9 +34,10 @@ class ImportHandler: ObservableObject {
         self.importController = importController
         self.workContext = context
         self.list = CDRecord(context: context)
-        self.allPeople = model.rootList(.people)
-        self.allPublishers = model.rootList(.publishers)
-        self.allSeries = model.rootList(.series)
+        self.allPeople = model.rootList(.people, in: context)
+        self.allPublishers = model.rootList(.publishers, in: context)
+        self.allSeries = model.rootList(.series, in: context)
+        self.allImports = model.rootList(.imports, in: context)
         self.seriesCleaner = SeriesCleaner()
         self.publisherCleaner = PublisherCleaner()
         self.savedUndoManager = undoManager
@@ -92,7 +94,6 @@ private extension ImportHandler {
         list.set("Records imported from \(source) on \(formattedDateTime).", forKey: "notes")
         list.set(date, forKey: .importedDate)
         
-        let allImports = model.rootList(.imports)
         allImports.addToContents(list)
         
         // build an index of previously imported books

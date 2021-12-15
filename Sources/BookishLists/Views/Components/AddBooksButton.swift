@@ -8,14 +8,18 @@ import SwiftUI
 
 struct AddBooksButton: View {
     @EnvironmentObject var sheetController: SheetController
-
+    let mode: AddBooksView.Mode
+    
     var body: some View {
-        Button(action: handleScan) { Text("Add Books…") }
+        Button(action: handleScan) {
+            Label("\(mode.label)…", systemImage: mode.iconName)
+        }
     }
 
+    
     func handleScan() {
         sheetController.show {
-            AddBooksView()
+            AddBooksView(mode: mode)
         }
     }
 }

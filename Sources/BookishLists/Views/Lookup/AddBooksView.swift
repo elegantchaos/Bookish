@@ -9,11 +9,32 @@ import SwiftUI
 import SwiftUIExtensions
 
 struct AddBooksView: View {
+    enum Mode: String {
+        case scan
+        case search
+
+        var label: String {
+            return NSLocalizedString("add.\(rawValue)", comment: "")
+        }
+        
+        var help: String {
+            return NSLocalizedString("add.\(rawValue).help", comment: "")
+        }
+
+        var iconName: String {
+            switch self {
+                case .scan: return "barcode.viewfinder"
+                case .search: return "magnifyingglass.circle"
+            }
+        }
+    }
+    
+    let mode: Mode
+    
     @EnvironmentObject var lookup: LookupManager
     @State var barcode: String = ""
     @State var session: LookupSession? = nil
     @State var candidates: [LookupCandidate] = []
-    @State var showCapture = false
     @State var search: String = ""
     @State var searching = false
     @State var selection: UUID?
@@ -21,22 +42,7 @@ struct AddBooksView: View {
     var body: some View {
         NavigationView {
             VStack {
-                HStack {
-                    SearchBar(value: $search, placeholder: "Enter EAN, ISBN, title, author, etc", action: handleSearchChanged)
-                    
-                    if !search.isEmpty && session?.search != search {
-                        Button(action: handleLookup) {
-                            Text("Find")
-                        }
-                    }
-
-                    Button(action: handleToggleCapture) {
-                        Image(systemName: showCapture ? "camera.fill" : "camera")
-                    }
-                    .padding(.trailing)
-                }
-
-                if showCapture {
+                if mode == .scan {
                     CaptureView { scanned in
                         if scanned != barcode {
                             barcode = scanned
@@ -47,6 +53,16 @@ struct AddBooksView: View {
                         }
                     }
                     .aspectRatio(1.0, contentMode: .fit)
+                } else {
+                    HStack {
+                        SearchBar(value: $search, placeholder: "Enter EAN, ISBN, title, author, etc", action: handleSearchChanged)
+                        
+                        if !search.isEmpty && session?.search != search {
+                            Button(action: handleLookup) {
+                                Text("Find")
+                            }
+                        }
+                    }
                 }
 
                 let gotCandidates = candidates.count > 0
@@ -62,7 +78,7 @@ struct AddBooksView: View {
                         CandidatesView(candidates: candidates, selection: $selection)
                     }
                 } else {
-                    Text("Enter a title, author, etc to look for a book.\n\nUse the camera to scan a barcode.")
+                    Text(mode.help)
                         .fixedSize(horizontal: false, vertical: true)
                         .padding()
                 }
@@ -76,7 +92,7 @@ struct AddBooksView: View {
             .navigationBarItems(
                 trailing: SheetDismissButton()
             )
-            .navigationTitle("Add Books")
+            .navigationTitle(mode.label)
             .navigationBarTitleDisplayMode(.inline)
         }
         .navigationViewStyle(.stack)
@@ -85,13 +101,11 @@ struct AddBooksView: View {
     
     func handleAppeared() {
         #if DEBUG
+        if mode == .search {
             search = "phlebas"
             handleLookup()
+        }
         #endif
-    }
-    
-    func handleToggleCapture() {
-        showCapture = !showCapture
     }
     
     func handleLookup() {
