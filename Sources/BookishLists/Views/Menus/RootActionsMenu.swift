@@ -9,17 +9,12 @@ import BookishImporterSamples
 
 struct RootActionsMenu: View {
     @EnvironmentObject var model: ModelController
-
+    @Binding var selection: String?
+    
     var body: some View {
-        AddRecordButton(container: nil, kind: .list, selection: $model.selection)
-        AddRecordButton(container: nil, kind: .group, selection: $model.selection)
+        AddRecordButton(container: nil, kind: .list, selection: $selection)
+        AddRecordButton(container: nil, kind: .group, selection: $selection)
         AddBooksButton()
         ImportMenu()
     }
-    
-    func handleAddGroup() {
-        let list: CDRecord = model.add(.group)
-        model.selection = list.id
-    }
-
 }

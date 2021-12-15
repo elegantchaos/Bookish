@@ -61,36 +61,13 @@ class ModelController: ObservableObject {
     let stack: CoreDataStack
     let images = UIImageCache()
     
-    @Published var selection: String? {
-        willSet(newValue) {
-            _selectionStats = nil
-        }
-    }
-    
-    var _selectionStats: SelectionStats?
-    var selectionStats: SelectionStats {
-        if _selectionStats == nil {
-            _selectionStats = SelectionStats(selection: selection, context: stack.viewContext)
-        }
-        
-        return _selectionStats!
-    }
-    
     init(stack: CoreDataStack) {
         self.stack = stack
-        
-        if let string = UserDefaults.standard.string(forKey: "selection") {
-            onMainQueue {
-                self.selection = string
-            }
-        }
     }
     
     var appName: String { "Bookish Lists" }
     
     func save() {
-        UserDefaults.standard.set(selection, forKey: "selection")
-        
         let context = stack.viewContext
         guard context.hasChanges else { return }
         do {
@@ -102,10 +79,6 @@ class ModelController: ObservableObject {
 
     func delete(_ object: CDRecord) {
         print("deleting \(object.objectID)")
-        if object.id == selection {
-            print("cleared selection")
-            selection = nil
-        }
         let context = stack.viewContext
         context.perform {
             context.delete(object)
@@ -179,10 +152,5 @@ class ModelController: ObservableObject {
         stack.viewContext.performAndWait {
             stack.viewContext.undoManager?.redo()
         }
-    }
-    
-    var selectedRecord: CDRecord? {
-        guard let selection = selection, let record = CDRecord.withId(selection, in: stack.viewContext) else { return nil }
-        return record
     }
 }

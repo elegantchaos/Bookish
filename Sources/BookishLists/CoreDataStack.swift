@@ -9,13 +9,14 @@ import SwiftUI
 
 class CoreDataStack {
     
-    private let containerName: String
-    let undoManager: UndoManager
+    private let undoManager: UndoManager
+    private let persistentContainer: NSPersistentContainer
+
     var viewContext: NSManagedObjectContext { persistentContainer.viewContext }
     var coordinator: NSPersistentStoreCoordinator { persistentContainer.persistentStoreCoordinator }
-
-    private lazy var persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentCloudKitContainer(name: containerName)
+    
+    class func makeContainer(name: String) -> NSPersistentContainer {
+        let container = NSPersistentCloudKitContainer(name: name)
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
                 print(error.localizedDescription)
@@ -23,15 +24,16 @@ class CoreDataStack {
             print(storeDescription)
         })
         return container
-    }()
+    }
     
     init(containerName: String, undoManager: UndoManager) {
-        self.containerName = containerName
+        let container = Self.makeContainer(name: containerName)
         self.undoManager = undoManager
-        persistentContainer.viewContext.automaticallyMergesChangesFromParent = true
-        persistentContainer.viewContext.undoManager = undoManager
+        self.persistentContainer = container
+        container.viewContext.automaticallyMergesChangesFromParent = true
+        container.viewContext.undoManager = undoManager
         do {
-            try persistentContainer.viewContext.setQueryGenerationFrom(.current)
+            try container.viewContext.setQueryGenerationFrom(.current)
         } catch {
             print("###\(#function): Failed to pin viewContext to the current generation: \(error)")
         }

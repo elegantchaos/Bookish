@@ -24,7 +24,7 @@ struct RootIndexView: View {
         
         return VStack {
             VStack {
-                List(selection: $model.selection) {
+                List(selection: $selection) {
                     ForEach(entries) { entry in
                         switch entry.kind {
                             case .allBooks:
@@ -33,7 +33,7 @@ struct RootIndexView: View {
                                 }
                                 
                             case let .list(list):
-                                RecordLink(list, selection: $model.selection)
+                                RecordLink(list, selection: $selection)
                                 
                             case let .book(book, list):
                                 RecordLink(book, in: list, selection: $selection)
@@ -56,7 +56,7 @@ struct RootIndexView: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 ActionsMenuButton {
-                    RootActionsMenu()
+                    RootActionsMenu(selection: $selection)
                 }
             }
         }
