@@ -57,6 +57,8 @@
 		8B70FAA3276782510061A542 /* AddLinkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B70FAA2276782510061A542 /* AddLinkView.swift */; };
 		8B70FAA527678F9A0061A542 /* RawPropertyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B70FAA427678F9A0061A542 /* RawPropertyView.swift */; };
 		8B70FAA72768B6A70061A542 /* FieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B70FAA62768B6A70061A542 /* FieldView.swift */; };
+		8B70FAAA276A0C300061A542 /* AddRecordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B70FAA9276A0C300061A542 /* AddRecordButton.swift */; };
+		8B70FAAC276A19C10061A542 /* LinkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B70FAAB276A19C10061A542 /* LinkController.swift */; };
 		8B80467325B8788900698F28 /* SheetController in Frameworks */ = {isa = PBXBuildFile; productRef = 8B80467225B8788900698F28 /* SheetController */; };
 		8B80467D25B87C4A00698F28 /* LoggerUI in Frameworks */ = {isa = PBXBuildFile; productRef = 8B80467C25B87C4A00698F28 /* LoggerUI */; };
 		8B8A88E5274FCAD700EA2FAA /* BookishImporter in Frameworks */ = {isa = PBXBuildFile; productRef = 8B8A88E4274FCAD700EA2FAA /* BookishImporter */; };
@@ -171,6 +173,8 @@
 		8B70FAA2276782510061A542 /* AddLinkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLinkView.swift; sourceTree = "<group>"; };
 		8B70FAA427678F9A0061A542 /* RawPropertyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RawPropertyView.swift; sourceTree = "<group>"; };
 		8B70FAA62768B6A70061A542 /* FieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldView.swift; sourceTree = "<group>"; };
+		8B70FAA9276A0C300061A542 /* AddRecordButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecordButton.swift; sourceTree = "<group>"; };
+		8B70FAAB276A19C10061A542 /* LinkController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkController.swift; sourceTree = "<group>"; };
 		8B8A88E3274FC36A00EA2FAA /* BookishCleanup */ = {isa = PBXFileReference; lastKnownFileType = folder; name = BookishCleanup; path = Dependencies/BookishCleanup; sourceTree = "<group>"; };
 		8B987C9E25C047E5003D6F9F /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		8B987CAA25C04876003D6F9F /* BooklistLists.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BooklistLists.xcdatamodel; sourceTree = "<group>"; };
@@ -416,6 +420,7 @@
 		8B6DD26A275F8C6B00304468 /* Menus */ = {
 			isa = PBXGroup;
 			children = (
+				8BE1493D25DD5CA700A1DC32 /* FieldKindMenu.swift */,
 				8B602EF0274BF58400DE50A5 /* ListActionsMenu.swift */,
 				8B6DD26F275FC5CE00304468 /* AllBooksActionsMenu.swift */,
 				8B42BE4725F7912700855D08 /* RootActionsMenu.swift */,
@@ -440,10 +445,10 @@
 			isa = PBXGroup;
 			children = (
 				8B6DD268275F8C1900304468 /* ActionsMenuButton.swift */,
+				8B70FAA9276A0C300061A542 /* AddRecordButton.swift */,
 				8B6DD271275FDCCC00304468 /* AddBooksButton.swift */,
 				8BB66542274D3B99002CC0E8 /* AsyncImageView.swift */,
 				8B39B47A26027F35003B0C5B /* DeferredTextField.swift */,
-				8BE1493D25DD5CA700A1DC32 /* FieldKindMenu.swift */,
 				8B012F4F2757D23B00FCF5DA /* FieldsView.swift */,
 				8B70FAA62768B6A70061A542 /* FieldView.swift */,
 				8B987CB425C06708003D6F9F /* LabelIconView.swift */,
@@ -464,6 +469,7 @@
 				8B6EF80D2760FD860070AEB6 /* StatusController.swift */,
 				8BE53C7B2760DB61004729B9 /* ImportController.swift */,
 				221717DB2522773B00C43604 /* ModelController.swift */,
+				8B70FAAB276A19C10061A542 /* LinkController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -682,6 +688,7 @@
 				8BB66545274D4041002CC0E8 /* CDRecord+RootLists.swift in Sources */,
 				8BE53C7A2760DB59004729B9 /* AppearanceController.swift in Sources */,
 				8B70FAA3276782510061A542 /* AddLinkView.swift in Sources */,
+				8B70FAAC276A19C10061A542 /* LinkController.swift in Sources */,
 				8B57F08A25F7C0E9007DB517 /* AmazonLookupService.swift in Sources */,
 				8BE1493E25DD5CA700A1DC32 /* FieldKindMenu.swift in Sources */,
 				8B57F08725F7C0E9007DB517 /* LookupManager.swift in Sources */,
@@ -706,6 +713,7 @@
 				8B70FA9F276781DF0061A542 /* AddLinkButton.swift in Sources */,
 				8B987C9F25C047E5003D6F9F /* CoreDataStack.swift in Sources */,
 				8B70FAA1276782100061A542 /* FetchProvider.swift in Sources */,
+				8B70FAAA276A0C300061A542 /* AddRecordButton.swift in Sources */,
 				8B987D0325C1CA60003D6F9F /* NSEntityDescriptionExtensions.swift in Sources */,
 				8B57F09225F7D9F2007DB517 /* CandidateView.swift in Sources */,
 				8B6DD26E275FB27500304468 /* UndoRedoView.swift in Sources */,

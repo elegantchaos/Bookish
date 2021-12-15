@@ -6,17 +6,23 @@
 import SwiftUI
 
 struct AddLinkButton: View {
+    @EnvironmentObject var linkController: LinkController
+    
     let kind: CDRecord.Kind
-    let delegate: BookActionsDelegate
     let role: String
-
-    init(kind: CDRecord.Kind, role: String? = nil, delegate: BookActionsDelegate) {
+    let label: String
+    
+    init(kind: CDRecord.Kind, role: String? = nil) {
         self.kind = kind
-        self.delegate = delegate
-        self.role = role ?? kind.roleLabel
+        self.role = role ?? "\(kind)"
+        self.label = NSLocalizedString("role.\(self.role)", comment: "")
     }
     
     var body: some View {
-        Button(action: { delegate.handlePickLink(kind: kind, role: role) }) { Label(role, systemImage: kind.iconName) }
+        Button(action: handlePickLink) { Label(label, systemImage: kind.iconName) }
+    }
+    
+    func handlePickLink() {
+        linkController.session = .init(kind: kind, role: role)
     }
 }

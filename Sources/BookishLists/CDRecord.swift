@@ -42,6 +42,20 @@ class CDRecord: NSManagedObject, Identifiable {
         kindCode == Kind.book.rawValue
     }
     
+    var canDelete: Bool {
+        switch kind {
+            case .list, .group: return true
+            default: return false
+        }
+    }
+    
+    var canAddLinks: Bool {
+        switch kind {
+            case .book, .list: return true
+            default: return false
+        }
+    }
+    
     var watcher: AnyCancellable? = nil
     
     func sorted(ofKind kind: Kind) -> [CDRecord] {

@@ -152,7 +152,7 @@ class ModelController: ObservableObject {
     }
     
     var roles: [String] { // TODO: make this editable by the user
-        return ["Author", "Editor", "Illustrator", "Collaborator", "Reviewer"]
+        return ["author", "editor", "illustrator", "collaborator", "reviewer"]
     }
     
     lazy var sortedRoles = roles.sorted()
@@ -179,5 +179,10 @@ class ModelController: ObservableObject {
         stack.viewContext.performAndWait {
             stack.viewContext.undoManager?.redo()
         }
+    }
+    
+    var selectedRecord: CDRecord? {
+        guard let selection = selection, let record = CDRecord.withId(selection, in: stack.viewContext) else { return nil }
+        return record
     }
 }

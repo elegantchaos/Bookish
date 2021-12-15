@@ -11,3 +11,26 @@ number = "Number";
 
 com.elegantchaos.bookish.importer.delicious-library = "Delicious Library";
 com.elegantchaos.bookish.importer.records = "Manually Added";
+
+new.list = "New List";
+new.group = "New Group";
+
+untitled.list = "Untitled List";
+untitled.group = "Untitled Group";
+
+// Kind roles
+role.book = "Book";
+role.list = "List";
+role.group = "Group";
+role.person = "Person";
+role.publisher = "Publisher";
+role.series = "Series";
+role.importSession = "From";
+
+// Person roles
+role.author = "Author";
+role.editor = "Editor";
+role.illustrator = "Illustrator";
+role.collaborator = "Collaborator";
+role.reviewer = "Reviewer";
+

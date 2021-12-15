@@ -75,21 +75,14 @@ extension CDRecord.Kind {
     }
     
     var roleLabel: String {
-        switch self {
-            case .person:
-                return "Person"
-                
-            case .publisher:
-                return "Publisher"
-
-            case .series:
-                return "Series"
-                
-            case .importSession:
-                return "From"
-
-            default:
-                return "\(self)"
-        }
+        return "role.\(self)"
+    }
+    
+    var untitledLabel: String {
+        return "untitled.\(self)"
+    }
+    
+    var newLabel: String {
+        return "new.\(self)"
     }
 }

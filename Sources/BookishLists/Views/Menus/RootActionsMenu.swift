@@ -11,20 +11,12 @@ struct RootActionsMenu: View {
     @EnvironmentObject var model: ModelController
 
     var body: some View {
-        Button(action: handleAddList) { Text("New List") }
-        Button(action: handleAddGroup) { Text("New Group") }
+        AddRecordButton(container: nil, kind: .list, selection: $model.selection)
+        AddRecordButton(container: nil, kind: .group, selection: $model.selection)
         AddBooksButton()
         ImportMenu()
     }
     
-    func handleAddList() {
-        let list : CDRecord = model.add(.list)
-        if let selection = model.selection, let container = CDRecord.withId(selection, in: model.stack.viewContext) {
-            container.addToContents(list)
-        }
-        model.selection = list.id
-    }
-
     func handleAddGroup() {
         let list: CDRecord = model.add(.group)
         model.selection = list.id

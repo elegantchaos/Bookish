@@ -11,10 +11,27 @@ struct ListActionsMenu: View {
     @EnvironmentObject var model: ModelController
     @Environment(\.managedObjectContext) var context
     @ObservedObject var list: CDRecord
-    
+    @Binding var selection: String?
+
     var body: some View {
-        Button(action: handleAdd) { Label("New Book", systemImage: "plus") }
-        Button(action: handleDeleteList) { Label("Delete List", systemImage: "trash") }
+        AddRecordButton(container: list, kind: .list, selection: $selection)
+        AddRecordButton(container: list, kind: .group, selection: $selection)
+
+        if list.canAddLinks {
+            Menu("Add Link") {
+                AddLinkButton(kind: .book)
+                ForEach(model.sortedRoles, id: \.self) { role in
+                    AddLinkButton(kind: .person, role: role)
+                }
+                AddLinkButton(kind: .publisher)
+                AddLinkButton(kind: .series)
+            }
+        }
+
+        if list.canDelete {
+            Button(action: handleDeleteList) { Label("Delete List", systemImage: "trash") }
+        }
+        
         EditButton()
     }
     

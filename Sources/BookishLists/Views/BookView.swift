@@ -13,9 +13,9 @@ struct BookView: View {
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.editMode) var editMode
     @EnvironmentObject var model: ModelController
+    @EnvironmentObject var linkController: LinkController
     @ObservedObject var book: CDRecord
     @ObservedObject var fields: FieldList
-    @State var linkSession: AddLinkSessionView.Session? = nil
     @State var selection: String?
     
     @AppStorage("showLinks") var showLinks = true
@@ -25,16 +25,7 @@ struct BookView: View {
     var body: some View {
         let isEditing = editMode?.wrappedValue.isEditing ?? false
         VStack(spacing: 0) {
-            if let session = linkSession {
-                AddLinkSessionView(session: session, delegate: self)
-                    .toolbar {
-                        ToolbarItem {
-                            Button(action: { linkSession = nil} ) {
-                                Text("Cancel")
-                            }
-                        }
-                    }
-            } else {
+            LinkSessionHost(delegate: self) {
                 ScrollView {
                     VStack(spacing: 0) {
                         AsyncImageView(model.image(for: book, usePlacholder: false), sizeMode: .fixedUnlessEmpty(.init(width: 256, height: 256)))
@@ -124,12 +115,6 @@ extension BookView: BookActionsDelegate {
         model.delete(book)
     }
     
-    func handlePickLink(kind: CDRecord.Kind, role: String) {
-        DispatchQueue.main.async {
-            linkSession = .init(kind: kind, role: role)
-        }
-    }
-    
     func handleRemoveLink(to record: CDRecord, role: String) {
         if book.roles(for: record).count == 1 {
             record.removeFromContents(book)
@@ -140,12 +125,12 @@ extension BookView: BookActionsDelegate {
 
 extension BookView: AddLinkDelegate {
     func handleAddLink(to linked: CDRecord) {
-        if let session = linkSession {
+        if let session = linkController.session {
             linked.addToContents(book)
             if let role = session.role {
                 book.addRole(role, for: linked)
             }
-            linkSession = nil
+            linkController.session = nil
         }
     }
 }

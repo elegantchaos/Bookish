@@ -18,6 +18,10 @@ extension FetchProvider {
     }
 }
 
+class BookFetchProvider: FetchProvider {
+    static var kind: CDRecord.Kind { .book }
+}
+
 class PersonFetchProvider: FetchProvider {
     static var kind: CDRecord.Kind { .person }
 }
