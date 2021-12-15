@@ -17,14 +17,10 @@ class CDRecord: NSManagedObject, Identifiable {
         case group
         case list
         case book
-        case personIndex
         case personRole
         case person
-        case publisherIndex
         case publisher
-        case seriesIndex
         case series
-        case importIndex
         case importSession
     }
     

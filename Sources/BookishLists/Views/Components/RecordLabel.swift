@@ -33,9 +33,9 @@ struct RecordLabel: View {
             }
         } icon: {
             if let url = record.imageURL {
-                LabelIconView(url: url, placeholder: record.kind.iconName)
+                LabelIconView(url: url, placeholder: record.iconName)
             } else {
-                Image(systemName: record.kind.iconName)
+                Image(systemName: record.iconName)
                     .frame(minWidth: 20.0)
             }
         }
@@ -56,21 +56,38 @@ struct RecordLabel: View {
     }
 }
 
+extension CDRecord {
+    var iconName: String {
+        switch kind {
+            case .root:
+                if let rootList = ModelController.RootList(rawValue: id) {
+                    switch rootList {
+                        case .imports:       return "display.and.arrow.down"
+                        case .people:        return "person.2"
+                        case .publishers:    return "building.2"
+                        default:             break
+                    }
+                }
+                
+            default:
+                return kind.iconName
+        }
+        
+        return "books.vertical"
+    }
+}
 extension CDRecord.Kind {
     var iconName: String {
         switch self {
-            case .book: return "book"
-            case .group: return "folder"
-            case .person: return "person"
-            case .personIndex: return "person.2"
-            case .personRole: return "person.text.rectangle"
-            case .publisherIndex: return "building.2"
-            case .publisher: return "building.columns"
-            case .importIndex: return "display.and.arrow.down"
-            case .importSession: return "square.and.arrow.down"
-                
-            default:
-                return "books.vertical"
+            case .book:             return "book"
+            case .group:            return "folder"
+            case .person:           return "person"
+            case .personRole:       return "person.text.rectangle"
+            case .publisher:        return "building.columns"
+            case .importSession: 	return "square.and.arrow.down"
+            case .series:           return "books.vertical"
+            case .root: 	        return "books.vertical"
+            case .list:             return "books.vertical"
         }
     }
     

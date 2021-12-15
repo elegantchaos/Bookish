@@ -63,10 +63,12 @@ class ModelController: ObservableObject {
     
     init(stack: CoreDataStack) {
         self.stack = stack
+        makeRootLists()
     }
     
     var appName: String { "Bookish Lists" }
-    
+    var rootLists: [RootList:CDRecord] = [:]
+
     func save() {
         let context = stack.viewContext
         guard context.hasChanges else { return }
@@ -107,6 +109,36 @@ class ModelController: ObservableObject {
             return images.image(for: book.imageURL, default: "book")
         } else {
             return images.image(for: book.imageURL)
+        }
+    }
+    
+    enum RootList: String, CaseIterable {
+        case imports = "root.imports"
+        case people = "root.people"
+        case publishers = "root.publishers"
+        case series = "root.series"
+        case lists = "root.lists"
+        
+        var id: String { rawValue }
+        
+        var label: String {
+            return NSLocalizedString(id, comment: "")
+        }
+    }
+
+    func rootList(_ list: RootList) -> CDRecord {
+        rootLists[list]!
+    }
+    
+    func makeRootLists() {
+        let context = stack.viewContext
+        context.perform {
+            for list in RootList.allCases {
+                self.rootLists[list] = CDRecord.findOrMakeWithID(list.id, in: context) { created in
+                    created.kind = .root
+                    created.name = list.label
+                }
+            }
         }
     }
     

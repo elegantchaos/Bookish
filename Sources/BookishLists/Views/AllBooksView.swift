@@ -14,7 +14,7 @@ struct AllBooksView: View {
 
     var body: some View {
         AllBooksContentView()
-            .navigationBarTitle("All Books", displayMode: .inline)
+            .navigationBarTitle("root.books", displayMode: .inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     if editMode.isEditing {

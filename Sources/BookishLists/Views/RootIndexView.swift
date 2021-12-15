@@ -29,7 +29,7 @@ struct RootIndexView: View {
                         switch entry.kind {
                             case .allBooks:
                                 NavigationLink(destination: AllBooksView(), tag: .allBooksID, selection: $selection) {
-                                    Label("All Books", systemImage: "books.vertical")
+                                    Label("root.books", systemImage: "books.vertical")
                                 }
                                 
                             case let .list(list):

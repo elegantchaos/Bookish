@@ -33,9 +33,9 @@ class ImportHandler: ObservableObject {
         self.importController = importController
         self.workContext = context
         self.list = CDRecord(context: context)
-        self.allPeople = context.allPeople
-        self.allPublishers = context.allPublishers
-        self.allSeries = context.allSeries
+        self.allPeople = model.rootList(.people)
+        self.allPublishers = model.rootList(.publishers)
+        self.allSeries = model.rootList(.series)
         self.seriesCleaner = SeriesCleaner()
         self.publisherCleaner = PublisherCleaner()
         self.savedUndoManager = undoManager
@@ -91,7 +91,9 @@ private extension ImportHandler {
         list.name = "\(source) \(formattedDate)"
         list.set("Records imported from \(source) on \(formattedDateTime).", forKey: "notes")
         list.set(date, forKey: .importedDate)
-        workContext.allImports.addToContents(list)
+        
+        let allImports = model.rootList(.imports)
+        allImports.addToContents(list)
         
         // build an index of previously imported books
         // we will use this to attempt not to import the same book from the same source twice

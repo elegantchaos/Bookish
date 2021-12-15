@@ -34,3 +34,10 @@ role.illustrator = "Illustrator";
 role.collaborator = "Collaborator";
 role.reviewer = "Reviewer";
 
+// Root List Names
+root.books = "All Books";
+root.imports = "Imports";
+root.people = "People";
+root.publishers = "Publishers";
+root.series = "Series";
+root.lists = "My Lists";
