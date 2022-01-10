@@ -126,7 +126,11 @@ class ModelController: ObservableObject {
     }
 
     func rootList(_ list: RootList, in context: NSManagedObjectContext) -> CDRecord {
-        return CDRecord.findWithID(list.id, in: context)!
+        guard let record = CDRecord.findWithID(list.id, in: context) else {
+            fatalError("missing list \(list.id)")
+        }
+
+        return record
     }
     
     func makeRootLists() {
@@ -134,12 +138,14 @@ class ModelController: ObservableObject {
         context.perform {
             for list in RootList.allCases {
                 _ = CDRecord.findOrMakeWithID(list.id, in: context) { created in
+                    print("made root list \(created.id)")
                     created.kind = .root
                     created.name = list.label
                 }
             }
+
+            self.save()
         }
-        save()
     }
     
     func makeDefaultFields() -> FieldList {
