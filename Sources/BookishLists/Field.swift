@@ -70,6 +70,15 @@ class Field: ObservableObject, Identifiable {
                     return string
                 }
 
+            case .number:
+                if let int = record.integer(forKey: key) {
+                    return "\(int)"
+                } else if let double = record.double(forKey: key) {
+                    return "\(double)"
+                } else {
+                    return ""
+                }
+                
             default:
                 return record.string(forKey: key) ?? ""
         }
