@@ -33,11 +33,6 @@ class ImportHandler: ObservableObject {
         self.model = model
         self.importController = importController
         self.workContext = context
-        
-        let entities: [CDRecord] = CDRecord.everyEntity(in: context)
-        for entity in entities {
-            print(entity.id)
-        }
 
         self.list = CDRecord(context: context)
         self.allPeople = model.rootList(.people, in: context)
@@ -50,6 +45,7 @@ class ImportHandler: ObservableObject {
     }
     
     static func run(importer: ImportManager, source: Any, model: ModelController, importController: ImportController) {
+        model.save()
         let mainContext = model.stack.viewContext
         mainContext.perform {
             let savedUndoManager = mainContext.undoManager
