@@ -26,7 +26,7 @@ struct RecordLabel: View {
                 Text(recordName)
                 if let annotation = recordAnnotation {
                     Spacer()
-                    Text(annotation)
+                    Text(LocalizedStringKey(annotation))
                         .foregroundColor(.secondary)
                         .font(.footnote)
                 }
