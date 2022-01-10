@@ -1127,7 +1127,7 @@
 			repositoryURL = "https://github.com/elegantchaos/CaptureView.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.2;
+				minimumVersion = 1.0.3;
 			};
 		};
 		8B6CAAC6252B2C8B00FF2035 /* XCRemoteSwiftPackageReference "KeyValueStore" */ = {

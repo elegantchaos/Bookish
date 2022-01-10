@@ -2,9 +2,12 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "container:BookishLists.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:../SwiftUIExtensions">
    </FileRef>
    <FileRef
-      location = "container:BookishLists.xcodeproj">
+      location = "group:../CaptureView">
    </FileRef>
 </Workspace>
