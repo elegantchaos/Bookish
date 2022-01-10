@@ -43,6 +43,7 @@ struct Application: App {
     
     func setupLookup() {
         lookupController.register(service: GoogleLookupService(name: "Google"))
+        lookupController.register(service: SelfLookupService(name: "Existing Collection", model: modelController))
     }
     
     

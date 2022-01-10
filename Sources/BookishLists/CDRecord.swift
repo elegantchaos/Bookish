@@ -113,6 +113,21 @@ class CDRecord: NSManagedObject, Identifiable {
     func add(_ book: CDRecord) {
         addToContents(book)
     }
+    
+    func asBookRecord(from source: String) -> BookRecord? {
+        var values: [String: Any] = [
+            BookKey.title.rawValue: name
+        ]
+        
+        if let p = properties {
+            for property in p {
+                values[property.key] = property.value
+            }
+
+        }
+
+        return BookRecord(values, id: id, source: source)
+    }
 }
 
 extension CDRecord {

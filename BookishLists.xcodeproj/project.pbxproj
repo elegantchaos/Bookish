@@ -86,6 +86,7 @@
 		8BE1493C25DD597B00A1DC32 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8BE1493B25DD597B00A1DC32 /* Localizable.strings */; };
 		8BE1493E25DD5CA700A1DC32 /* FieldKindMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE1493D25DD5CA700A1DC32 /* FieldKindMenu.swift */; };
 		8BE1494125DD7D7D00A1DC32 /* FieldList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE1494025DD7D7D00A1DC32 /* FieldList.swift */; };
+		8BE15B20278C558000CACE2F /* SelfLookupService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE15B1F278C558000CACE2F /* SelfLookupService.swift */; };
 		8BE53C7A2760DB59004729B9 /* AppearanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE53C792760DB59004729B9 /* AppearanceController.swift */; };
 		8BE53C7C2760DB61004729B9 /* ImportController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE53C7B2760DB61004729B9 /* ImportController.swift */; };
 		8BE53C7F2760E197004729B9 /* ImportMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE53C7E2760E197004729B9 /* ImportMenu.swift */; };
@@ -197,6 +198,7 @@
 		8BE1493B25DD597B00A1DC32 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		8BE1493D25DD5CA700A1DC32 /* FieldKindMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldKindMenu.swift; sourceTree = "<group>"; };
 		8BE1494025DD7D7D00A1DC32 /* FieldList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldList.swift; sourceTree = "<group>"; };
+		8BE15B1F278C558000CACE2F /* SelfLookupService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfLookupService.swift; sourceTree = "<group>"; };
 		8BE53C792760DB59004729B9 /* AppearanceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceController.swift; sourceTree = "<group>"; };
 		8BE53C7B2760DB61004729B9 /* ImportController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportController.swift; sourceTree = "<group>"; };
 		8BE53C7E2760E197004729B9 /* ImportMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportMenu.swift; sourceTree = "<group>"; };
@@ -409,6 +411,7 @@
 				8B57F08225F7C0E9007DB517 /* LookupSession.swift */,
 				8B57F08325F7C0E9007DB517 /* LookupService.swift */,
 				8B57F08425F7C0E9007DB517 /* AmazonLookupService.swift */,
+				8BE15B1F278C558000CACE2F /* SelfLookupService.swift */,
 				8B57F08525F7C0E9007DB517 /* LookupCandidate.swift */,
 			);
 			path = Lookup;
@@ -689,6 +692,7 @@
 				8BE1493E25DD5CA700A1DC32 /* FieldKindMenu.swift in Sources */,
 				8B57F08725F7C0E9007DB517 /* LookupManager.swift in Sources */,
 				8BE53C7F2760E197004729B9 /* ImportMenu.swift in Sources */,
+				8BE15B20278C558000CACE2F /* SelfLookupService.swift in Sources */,
 				8B57F09425F7E096007DB517 /* SearchBar.swift in Sources */,
 				8B6DD272275FDCCC00304468 /* AddBooksButton.swift in Sources */,
 				229E259B25254AED00C41777 /* ContentView.swift in Sources */,
