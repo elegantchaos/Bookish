@@ -50,10 +50,7 @@ public class GoogleLookupCandidate: LookupCandidate {
 
         properties.extractKeys(BookKey.allCases, from: &unprocessed)
         properties[.isbn] = GoogleLookupCandidate.isbn(from: info)
-
-        if let pages = info["pageCount"] as? NSNumber {
-            properties[.pages] = pages.intValue
-        }
+        properties[.pages] = unprocessed.extractNonZeroInt(forKey: "pageCount")
 
         for (key,value) in unprocessed {
             properties["google-books.\(key)"] = value
