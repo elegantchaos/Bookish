@@ -243,6 +243,14 @@ extension CDRecord {
         return property(forKey: key) as? String
     }
 
+    func integer(forKey key: String) -> Int? {
+        return property(forKey: key) as? Int
+    }
+
+    func double(forKey key: String) -> Double? {
+        return property(forKey: key) as? Double
+    }
+
     func strings(forKey key: String) -> [String] {
         guard let joined = string(forKey: key) else { return [] }
         return joined.split(separator: ",").map({ String($0) })
