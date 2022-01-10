@@ -15,17 +15,19 @@ struct AddLinkView<P: FetchProvider>: View {
 
     @State var filter: String = ""
 
+    let role: String
     let delegate: AddLinkDelegate
 
-    init(_ provider: P.Type, delegate: AddLinkDelegate) {
+    init(_ provider: P.Type, role: String, delegate: AddLinkDelegate) {
         self.delegate = delegate
+        self.role = NSLocalizedString("role.\(role)", comment: "")
     }
     
     var body: some View {
         VStack {
-            Text("Add \(P.kind.roleLabel) Link")
+//            Text("\(role) to link to:")
 
-            TextField("filter", text: $filter)
+            TextField("\(role) to link to:", text: $filter)
                 .padding(.horizontal)
 
             List {

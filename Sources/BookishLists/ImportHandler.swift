@@ -134,8 +134,8 @@ private extension ImportHandler {
         list.add(book)
         done += 1
 
-        addPeople(to: book, from: importedBook, withKey: .authors, asRole: "Author")
-        addPeople(to: book, from: importedBook, withKey: .illustrators, asRole: "Illustrator")
+        addPeople(to: book, from: importedBook, withKey: .authors, asRole: "author")
+        addPeople(to: book, from: importedBook, withKey: .illustrators, asRole: "illustrator")
 
         for publisher in importedBook.strings(forKey: .publishers) {
             let list = CDRecord.findOrMakeWithName(publisher, kind: .publisher, in: workContext)

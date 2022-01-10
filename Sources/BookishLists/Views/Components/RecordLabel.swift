@@ -26,7 +26,7 @@ struct RecordLabel: View {
                 Text(recordName)
                 if let annotation = recordAnnotation {
                     Spacer()
-                    Text(LocalizedStringKey(annotation))
+                    Text(annotation)
                         .foregroundColor(.secondary)
                         .font(.footnote)
                 }
@@ -43,14 +43,16 @@ struct RecordLabel: View {
     
     var recordName: String {
         switch nameMode {
-            case .roleInline(let role): return "\(record.name) (\(role))"
+            case .roleInline(let role):
+                let localizedRole = "role.\(role)".localized
+                return "\(record.name) (\(localizedRole))"
             default: return record.name
         }
     }
 
     var recordAnnotation: String? {
         switch nameMode {
-            case .role(let role): return role
+            case .role(let role): return "role.\(role)".localized
             default: return nil
         }
     }
@@ -92,8 +94,8 @@ extension CDRecord.Kind {
         }
     }
     
-    var roleLabel: String {
-        return "role.\(self)"
+    var defaultRole: String {
+        return "\(self)"
     }
     
     var untitledLabel: String {

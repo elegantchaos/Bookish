@@ -158,7 +158,7 @@ extension CDRecord {
     }
 
     var defaultRole: String {
-        return kind.roleLabel
+        return kind.defaultRole
     }
 }
 

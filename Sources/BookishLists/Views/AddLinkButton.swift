@@ -14,7 +14,7 @@ struct AddLinkButton: View {
     
     init(kind: CDRecord.Kind, role: String? = nil) {
         self.kind = kind
-        self.role = role ?? "\(kind)"
+        self.role = role ?? kind.defaultRole
         self.label = NSLocalizedString("role.\(self.role)", comment: "")
     }
     
