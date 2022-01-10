@@ -13,6 +13,7 @@ import ThreadExtensions
 
 class CDRecord: NSManagedObject, Identifiable {
     enum Kind: Int16 {
+        case unknown = -1
         case root
         case group
         case list
@@ -30,7 +31,7 @@ class CDRecord: NSManagedObject, Identifiable {
     fileprivate lazy var cachedProperties: [String:CDProperty] = [:]
 
     var kind: Kind {
-        get { Kind(rawValue: kindCode)! }
+        get { Kind(rawValue: kindCode) ?? .unknown }
         set { kindCode = newValue.rawValue }
     }
 

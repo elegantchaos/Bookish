@@ -79,6 +79,7 @@ extension CDRecord {
 extension CDRecord.Kind {
     var iconName: String {
         switch self {
+            case .unknown:          return "questionmark"
             case .book:             return "book"
             case .group:            return "folder"
             case .person:           return "person"
