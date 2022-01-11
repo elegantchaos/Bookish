@@ -23,15 +23,10 @@ struct ListActionsMenu: View {
         }
 
         if list.canAddLinks {
-            Menu("Add Link") {
-                AddLinkButton(kind: .book)
-                ForEach(model.sortedRoles, id: \.self) { role in
-                    AddLinkButton(kind: .person, role: role)
-                }
-                AddLinkButton(kind: .publisher)
-                AddLinkButton(kind: .series)
-            }
+            AddLinkMenu()
         }
+
+        RemoveItemMenu(list)
 
         if list.canDelete {
             Button(action: handleDeleteList) { Label("Delete List", systemImage: "trash") }

@@ -75,6 +75,7 @@ struct ListIndexView: View {
             ToolbarItem(placement: .navigationBarTrailing) {
                 ActionsMenuButton {
                     ListActionsMenu(list: list, selection: $selection)
+                        .environment(\.recordContainer, list)
                 }
             }
         }
@@ -105,6 +106,22 @@ extension ListIndexView: AddLinkDelegate {
             }
             linkController.session = nil
         }
+    }
+}
+
+extension ListIndexView: RecordContainer {
+    func handleRemove(record: CDRecord, as role: String) {
+        if record.roles(for: list).count == 1 {
+            list.removeFromContents(record)
+        }
+        record.removeRole(role, of: list)
+    }
+    
+    func handleRemoveLink(of record: CDRecord, as role: String) {
+        if list.roles(for: record).count == 1 {
+            record.removeFromContents(list)
+        }
+        list.removeRole(role, of: record)
     }
 }
 

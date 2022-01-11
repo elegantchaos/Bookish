@@ -75,6 +75,7 @@ struct BookView: View {
                         } else {
                             ActionsMenuButton {
                                 BookActionsMenu(book: book, delegate: self)
+                                    .environment(\.recordContainer, book)
                             }
                         }
                     }
@@ -113,13 +114,6 @@ extension BookView: BookActionsDelegate {
     func handleDelete() {
         presentationMode.wrappedValue.dismiss()
         model.delete(book)
-    }
-    
-    func handleRemoveLink(to record: CDRecord, role: String) {
-        if book.roles(for: record).count == 1 {
-            record.removeFromContents(book)
-        }
-        book.removeRole(role, of: record)
     }
 }
 
