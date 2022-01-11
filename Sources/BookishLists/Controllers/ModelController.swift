@@ -151,10 +151,22 @@ class ModelController: ObservableObject {
     }
     
     func makeDefaultLists(in container: CDRecord, context: NSManagedObjectContext) {
-        let titles = ["Reading List", "Book Club", "Reading History", "Library Books", "Loaned Out", "Borrowed"]
-        for title in titles {
+        let titles: [(String, String)] = [
+            ("Reading List", "Books to read next."),
+            ("Book Club", "Upcoming titles for the book club."),
+            ("Reading History", "Books that I've read."),
+            ("Library Books", "Books from the library."),
+            ("On Loan", "Books I've leant out"),
+            ("Borrowed", "Books I've borrowed from someone.")
+        ]
+             
+        let date = Date()
+        for (title, description) in titles {
             let list = CDRecord.make(kind: .list, in: context)
             list.name = title
+            list.set(description, forKey: .description)
+            list.set(date, forKey: .addedDate)
+            list.set(date, forKey: .modifiedDate)
             container.add(list)
         }
     }

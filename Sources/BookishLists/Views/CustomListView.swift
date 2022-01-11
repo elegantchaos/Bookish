@@ -7,37 +7,40 @@ import SwiftUI
 import SwiftUIExtensions
 import ThreadExtensions
 
-struct ListIndexView: View {
+extension Binding where Value == String? {
+    func onNone(_ fallback: String) -> Binding<String> {
+        return Binding<String>(get: {
+            return self.wrappedValue ?? fallback
+        }) { value in
+            self.wrappedValue = value
+        }
+    }
+}
+
+struct CustomListView: View {
     @EnvironmentObject var model: ModelController
     @EnvironmentObject var linkController: LinkController
     @Environment(\.managedObjectContext) var context
     @Environment(\.editMode) var editMode
     @Environment(\.presentationMode) var presentationMode
     @ObservedObject var list: CDRecord
+    @ObservedObject var fields: FieldList
     @State var selection: String?
     @State var filter: String = ""
+
+    @AppStorage("showItems") var showItems = true
 
     var body: some View {
         let isEditing = editMode?.wrappedValue == .active
         
-        return VStack {
+        return VStack(spacing: 0) {
             LinkSessionHost(delegate: self) {
-                if isEditing {
-                    TextField("Notes", text: list.binding(forProperty: "notes"))
-                        .fixedSize(horizontal: false, vertical: true)
-                        .padding()
-                } else {
-                    Text(list.string(forKey: "notes") ?? "")
-                        .fixedSize(horizontal: false, vertical: true)
-                        .padding()
-                }
-                
-                if isEditing {
-                    FieldEditorView(fields: list.fields)
-                }
+                FieldsView(record: list, fields: fields)
+                    .padding(.bottom)
                 
                 let items: [CDRecord] = list.sortedContents
-                List(selection: $selection) {
+//                DisclosureGroup("Items", isExpanded: $showItems) {
+                    LazyVStack(alignment: .leading, spacing: 8.0) {
                     ForEach(items) { item in
                         if include(item) {
                             if isEditing {
@@ -48,14 +51,33 @@ struct ListIndexView: View {
                         }
                     }
                     .onDelete(perform: handleDelete)
-                }
-                .listStyle(.plain)
-                .searchable(text: $filter)
+                    .foregroundColor(.primary)
+//                    .searchable(text: $filter)
+                    }
+                    .padding(.vertical)
+//                }
+                
+                RawPropertiesGroup(record: list)
                 
                 Spacer()
             }
+            .toolbar {
+                ToolbarItem {
+                    if isEditing {
+                        EditButton()
+                    } else if linkController.session == nil {
+                        ActionsMenuButton {
+                            ListActionsMenu(list: list, selection: $selection)
+                                .environment(\.recordViewer, self)
+                        }
+                    }
+                    
+                }
+            }
         }
-        .navigationBarBackButtonHidden(linkController.session != nil)
+        .padding()
+        .navigationBarBackButtonHidden(isEditing || linkController.session != nil)
+        .navigationTitle(list.name)
         .toolbar {
             ToolbarItem(placement: .principal) {
                 if linkController.session == nil {
@@ -67,15 +89,6 @@ struct ListIndexView: View {
                     Text("_Adding To_ \(list.name)")
                         .multilineTextAlignment(.center)
                         .font(.headline)
-                }
-            }
-            
-            ToolbarItem(placement: .navigationBarTrailing) {
-                if linkController.session == nil {
-                    ActionsMenuButton {
-                        ListActionsMenu(list: list, selection: $selection)
-                            .environment(\.recordViewer, self)
-                    }
                 }
             }
         }
@@ -97,7 +110,7 @@ struct ListIndexView: View {
     
 }
 
-extension ListIndexView: AddLinkDelegate {
+extension CustomListView: AddLinkDelegate {
     func handleAddLink(to linked: CDRecord) {
         if let session = linkController.session {
             list.addToContents(linked)
@@ -109,37 +122,7 @@ extension ListIndexView: AddLinkDelegate {
     }
 }
 
-extension ListIndexView: RecordViewer {
+extension CustomListView: RecordViewer {
     var container: CDRecord { return list }
     func dismiss() { presentationMode.wrappedValue.dismiss() }
-}
-
-struct LinkSessionHost<Content>: View where Content: View {
-    @EnvironmentObject var linkController: LinkController
-
-    let delegate: AddLinkDelegate
-    @ViewBuilder let content: () -> Content
-    
-    var body: some View {
-        if let session = linkController.session {
-            AddLinkSessionView(session: session, delegate: delegate)
-                .onDisappear(perform: handleDisappear)
-                .toolbar {
-                    ToolbarItem {
-                        Button(action: { linkController.session = nil} ) {
-                            Text("Cancel")
-                        }
-                    }
-                }
-        } else {
-            content()
-        }
-    }
-    
-    func handleDisappear() {
-        if linkController.session != nil {
-            print("link session was cancelled by view getting hidden")
-            linkController.session = nil
-        }
-    }
 }

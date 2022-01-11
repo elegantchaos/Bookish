@@ -19,8 +19,6 @@ struct BookView: View {
     @State var selection: String?
     
     @AppStorage("showLinks") var showLinks = true
-    @AppStorage("showRaw") var  showRaw = false
-    @AppStorage("enableRawProperties") var enableRawProperties = false
 
     var body: some View {
         let isEditing = editMode?.wrappedValue.isEditing ?? false
@@ -35,7 +33,7 @@ struct BookView: View {
                             .padding(.bottom)
                         
                         DisclosureGroup("Links", isExpanded: $showLinks) {
-                            VStack(alignment: .leading, spacing: 8.0) {
+                            LazyVStack(alignment: .leading, spacing: 8.0) {
                                 if let contained = book.containedBy?.sortedByName {
                                     ForEach(contained) { item in
                                         let roles = book.sortedRoles(for: item)
@@ -52,20 +50,8 @@ struct BookView: View {
                         }
                         .padding(.vertical)
                         
-                        if enableRawProperties {
-                        DisclosureGroup("Raw Properties", isExpanded: $showRaw) {
-                            LazyVStack(alignment: .leading, spacing: 8.0) {
-                                let keys = book.sortedKeys
-                                ForEach(keys, id: \.self) { key in
-                                    if let value = book.property(forKey: key) {
-                                        RawPropertyView(key: key, value: value)
-                                            .padding(.bottom)
-                                    }
-                                }
-                            }
-                        }
+                        RawPropertiesGroup(record: book)
                         .padding(.vertical)
-                        }
                     }
                 }
                 .toolbar {
@@ -83,6 +69,8 @@ struct BookView: View {
             }
         }
         .padding()
+        .navigationBarBackButtonHidden(isEditing || linkController.session != nil)
+        .navigationTitle(book.name)
         .toolbar {
             ToolbarItem(placement: .principal) {
                 VStack(alignment: .center) {

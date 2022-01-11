@@ -96,6 +96,8 @@
 		8BED2A2425CAC0D1000DD7C6 /* Images in Frameworks */ = {isa = PBXBuildFile; productRef = 8BED2A2325CAC0D1000DD7C6 /* Images */; };
 		8BEDD695278DE5A500B41149 /* NSManagedObjectExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B987CFE25C1CA60003D6F9F /* NSManagedObjectExtensions.swift */; };
 		8BEDD696278DE5F400B41149 /* NSManagedObjectContextExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B987CFF25C1CA60003D6F9F /* NSManagedObjectContextExtensions.swift */; };
+		8BEDD698278DE9D400B41149 /* RawPropertiesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BEDD697278DE9D400B41149 /* RawPropertiesView.swift */; };
+		8BEDD69A278DF3FA00B41149 /* CustomListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BEDD699278DF3FA00B41149 /* CustomListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -212,6 +214,8 @@
 		8BE53C7E2760E197004729B9 /* ImportMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportMenu.swift; sourceTree = "<group>"; };
 		8BE9ADE9252B0DDA00F97D53 /* Tools.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Tools.xcconfig; sourceTree = "<group>"; };
 		8BED2A1725C97D29000DD7C6 /* CDProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDProperty.swift; sourceTree = "<group>"; };
+		8BEDD697278DE9D400B41149 /* RawPropertiesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RawPropertiesView.swift; sourceTree = "<group>"; };
+		8BEDD699278DF3FA00B41149 /* CustomListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -263,7 +267,9 @@
 				229E259A25254AED00C41777 /* ContentView.swift */,
 				8B1F10E125ADC28800108A34 /* EntryView.swift */,
 				8BE1493725DC250300A1DC32 /* FieldEditorView.swift */,
+				8BEDD699278DF3FA00B41149 /* CustomListView.swift */,
 				8B1F10D725ACB30A00108A34 /* ListIndexView.swift */,
+				8BEDD697278DE9D400B41149 /* RawPropertiesView.swift */,
 				8B58C7CB25B84AB8007F6B70 /* PreferencesView.swift */,
 				8B58C7BF25B843C7007F6B70 /* RootIndexView.swift */,
 				8B70FA9C2767819D0061A542 /* AddLinkSessionView.swift */,
@@ -698,6 +704,7 @@
 				8BE1493A25DC2CCB00A1DC32 /* Field.swift in Sources */,
 				8B6EF80E2760FD860070AEB6 /* StatusController.swift in Sources */,
 				8BE53C7A2760DB59004729B9 /* AppearanceController.swift in Sources */,
+				8BEDD69A278DF3FA00B41149 /* CustomListView.swift in Sources */,
 				8B70FAA3276782510061A542 /* AddLinkView.swift in Sources */,
 				8B70FAAC276A19C10061A542 /* LinkController.swift in Sources */,
 				8B57F08A25F7C0E9007DB517 /* AmazonLookupService.swift in Sources */,
@@ -728,6 +735,7 @@
 				8BE1494125DD7D7D00A1DC32 /* FieldList.swift in Sources */,
 				8B70FA9F276781DF0061A542 /* AddLinkButton.swift in Sources */,
 				8B987C9F25C047E5003D6F9F /* CoreDataStack.swift in Sources */,
+				8BEDD698278DE9D400B41149 /* RawPropertiesView.swift in Sources */,
 				8B70FAA1276782100061A542 /* FetchProvider.swift in Sources */,
 				8B70FAAA276A0C300061A542 /* AddRecordButton.swift in Sources */,
 				8B987D0325C1CA60003D6F9F /* NSEntityDescriptionExtensions.swift in Sources */,
