@@ -5,17 +5,17 @@
 
 import SwiftUI
 
-protocol RecordContainer {
-    func handleRemove(record: CDRecord, as role: String)
-    func handleRemoveLink(of record: CDRecord, as role: String)
+protocol RecordContainerView {
+    var container: CDRecord { get }
+    func dismiss()
 }
 
 struct RecordContainerKey: EnvironmentKey {
-    static let defaultValue: CDRecord? = nil
+    static let defaultValue: RecordContainerView? = nil
 }
 
 extension EnvironmentValues {
-    var recordContainer: CDRecord? {
+    var recordContainer: RecordContainerView? {
         get { self[RecordContainerKey.self] }
         set { self[RecordContainerKey.self] = newValue }
     }

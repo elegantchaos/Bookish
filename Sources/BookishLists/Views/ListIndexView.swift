@@ -22,6 +22,7 @@ struct ListIndexView: View {
     @EnvironmentObject var linkController: LinkController
     @Environment(\.managedObjectContext) var context
     @Environment(\.editMode) var editMode
+    @Environment(\.presentationMode) var presentationMode
     @ObservedObject var list: CDRecord
     @State var selection: String?
     @State var filter: String = ""
@@ -75,7 +76,7 @@ struct ListIndexView: View {
             ToolbarItem(placement: .navigationBarTrailing) {
                 ActionsMenuButton {
                     ListActionsMenu(list: list, selection: $selection)
-                        .environment(\.recordContainer, list)
+                        .environment(\.recordContainer, self)
                 }
             }
         }
@@ -109,20 +110,9 @@ extension ListIndexView: AddLinkDelegate {
     }
 }
 
-extension ListIndexView: RecordContainer {
-    func handleRemove(record: CDRecord, as role: String) {
-        if record.roles(for: list).count == 1 {
-            list.removeFromContents(record)
-        }
-        record.removeRole(role, of: list)
-    }
-    
-    func handleRemoveLink(of record: CDRecord, as role: String) {
-        if list.roles(for: record).count == 1 {
-            record.removeFromContents(list)
-        }
-        list.removeRole(role, of: record)
-    }
+extension ListIndexView: RecordContainerView {
+    var container: CDRecord { return list }
+    func dismiss() { presentationMode.wrappedValue.dismiss() }
 }
 
 struct LinkSessionHost<Content>: View where Content: View {

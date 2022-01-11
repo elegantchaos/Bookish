@@ -74,8 +74,8 @@ struct BookView: View {
                             EditButton()
                         } else {
                             ActionsMenuButton {
-                                BookActionsMenu(book: book, delegate: self)
-                                    .environment(\.recordContainer, book)
+                                BookActionsMenu()
+                                    .environment(\.recordContainer, self)
                             }
                         }
                     }
@@ -110,11 +110,9 @@ struct BookView: View {
     }
 }
 
-extension BookView: BookActionsDelegate {
-    func handleDelete() {
-        presentationMode.wrappedValue.dismiss()
-        model.delete(book)
-    }
+extension BookView: RecordContainerView {
+    var container: CDRecord { return book }
+    func dismiss() { presentationMode.wrappedValue.dismiss() }
 }
 
 extension BookView: AddLinkDelegate {

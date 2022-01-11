@@ -8,8 +8,15 @@ import SwiftUI
 struct AddLinkMenu: View {
     @EnvironmentObject var model: ModelController
 
+    enum Mode {
+        case link
+        case item
+    }
+    
+    let mode: Mode
+
     var body: some View {
-        Menu("Add Link") {
+        Menu(mode == .link ? "Add Link" : "Add Item") {
             AddLinkButton(kind: .book)
             ForEach(model.sortedRoles, id: \.self) { role in
                 AddLinkButton(kind: .person, role: role)

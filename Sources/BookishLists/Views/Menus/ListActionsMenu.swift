@@ -8,8 +8,6 @@ import SheetController
 import BookishImporterSamples
 
 struct ListActionsMenu: View {
-    @EnvironmentObject var model: ModelController
-    @Environment(\.managedObjectContext) var context
     @ObservedObject var list: CDRecord
     @Binding var selection: String?
 
@@ -23,25 +21,15 @@ struct ListActionsMenu: View {
         }
 
         if list.canAddLinks {
-            AddLinkMenu()
+            AddLinkMenu(mode: .item)
         }
 
-        RemoveItemMenu(list)
+        RemoveLinkMenu(mode: .item)
 
         if list.canDelete {
-            Button(action: handleDeleteList) { Label("Delete List", systemImage: "trash") }
+            DeleteContainerButton()
         }
         
         EditButton()
-    }
-    
-    func handleDeleteList() {
-        model.delete(list)
-    }
-    
-    func handleAdd() {
-        let book = CDRecord(context: context)
-        list.add(book)
-        model.save()
     }
 }

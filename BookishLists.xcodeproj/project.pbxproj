@@ -66,7 +66,7 @@
 		8B8A88E9274FCC1A00EA2FAA /* BookishCleanup in Frameworks */ = {isa = PBXBuildFile; productRef = 8B8A88E8274FCC1A00EA2FAA /* BookishCleanup */; };
 		8B918BAB278DA60A00D8E41D /* AddLinkMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B918BAA278DA60A00D8E41D /* AddLinkMenu.swift */; };
 		8B918BAD278DA61800D8E41D /* RemoveLinkMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B918BAC278DA61800D8E41D /* RemoveLinkMenu.swift */; };
-		8B918BAF278DA6D000D8E41D /* RecordContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B918BAE278DA6D000D8E41D /* RecordContainer.swift */; };
+		8B918BAF278DA6D000D8E41D /* RecordContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B918BAE278DA6D000D8E41D /* RecordContainerView.swift */; };
 		8B918BB1278DABC300D8E41D /* RemoveItemMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B918BB0278DABC300D8E41D /* RemoveItemMenu.swift */; };
 		8B987C9F25C047E5003D6F9F /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B987C9E25C047E5003D6F9F /* CoreDataStack.swift */; };
 		8B987CAB25C04876003D6F9F /* BookishLists.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8B987CA925C04876003D6F9F /* BookishLists.xcdatamodeld */; };
@@ -74,6 +74,7 @@
 		8B987CBB25C0671E003D6F9F /* CDRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B987CBA25C0671E003D6F9F /* CDRecord.swift */; };
 		8B987D0225C1CA60003D6F9F /* NSManagedObjectContextExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B987CFF25C1CA60003D6F9F /* NSManagedObjectContextExtensions.swift */; };
 		8B987D0325C1CA60003D6F9F /* NSEntityDescriptionExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B987D0025C1CA60003D6F9F /* NSEntityDescriptionExtensions.swift */; };
+		8BA7330C278DB51800D21635 /* DeleteContainerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA7330B278DB51800D21635 /* DeleteContainerButton.swift */; };
 		8BB6653A274D1F30002CC0E8 /* CDRecord+CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB66539274D1F30002CC0E8 /* CDRecord+CoreData.swift */; };
 		8BB6653B274D215A002CC0E8 /* NSManagedObjectExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B987CFE25C1CA60003D6F9F /* NSManagedObjectExtensions.swift */; };
 		8BB6653D274D2D62002CC0E8 /* CDRecord+Sorting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB6653C274D2D62002CC0E8 /* CDRecord+Sorting.swift */; };
@@ -182,7 +183,7 @@
 		8B8A88E3274FC36A00EA2FAA /* BookishCleanup */ = {isa = PBXFileReference; lastKnownFileType = folder; name = BookishCleanup; path = Dependencies/BookishCleanup; sourceTree = "<group>"; };
 		8B918BAA278DA60A00D8E41D /* AddLinkMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLinkMenu.swift; sourceTree = "<group>"; };
 		8B918BAC278DA61800D8E41D /* RemoveLinkMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoveLinkMenu.swift; sourceTree = "<group>"; };
-		8B918BAE278DA6D000D8E41D /* RecordContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordContainer.swift; sourceTree = "<group>"; };
+		8B918BAE278DA6D000D8E41D /* RecordContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordContainerView.swift; sourceTree = "<group>"; };
 		8B918BB0278DABC300D8E41D /* RemoveItemMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoveItemMenu.swift; sourceTree = "<group>"; };
 		8B987C9E25C047E5003D6F9F /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		8B987CAA25C04876003D6F9F /* BooklistLists.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BooklistLists.xcdatamodel; sourceTree = "<group>"; };
@@ -191,6 +192,7 @@
 		8B987CFE25C1CA60003D6F9F /* NSManagedObjectExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSManagedObjectExtensions.swift; sourceTree = "<group>"; };
 		8B987CFF25C1CA60003D6F9F /* NSManagedObjectContextExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSManagedObjectContextExtensions.swift; sourceTree = "<group>"; };
 		8B987D0025C1CA60003D6F9F /* NSEntityDescriptionExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSEntityDescriptionExtensions.swift; sourceTree = "<group>"; };
+		8BA7330B278DB51800D21635 /* DeleteContainerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteContainerButton.swift; sourceTree = "<group>"; };
 		8BB66539274D1F30002CC0E8 /* CDRecord+CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDRecord+CoreData.swift"; sourceTree = "<group>"; };
 		8BB6653C274D2D62002CC0E8 /* CDRecord+Sorting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDRecord+Sorting.swift"; sourceTree = "<group>"; };
 		8BB6653E274D3560002CC0E8 /* RecordLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordLabel.swift; sourceTree = "<group>"; };
@@ -469,7 +471,8 @@
 				8BB66540274D3568002CC0E8 /* RecordLink.swift */,
 				8B57F09325F7E096007DB517 /* SearchBar.swift */,
 				8B6DD26D275FB27500304468 /* UndoRedoView.swift */,
-				8B918BAE278DA6D000D8E41D /* RecordContainer.swift */,
+				8B918BAE278DA6D000D8E41D /* RecordContainerView.swift */,
+				8BA7330B278DB51800D21635 /* DeleteContainerButton.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -704,6 +707,7 @@
 				8BE1493E25DD5CA700A1DC32 /* FieldKindMenu.swift in Sources */,
 				8B57F08725F7C0E9007DB517 /* LookupManager.swift in Sources */,
 				8BE53C7F2760E197004729B9 /* ImportMenu.swift in Sources */,
+				8BA7330C278DB51800D21635 /* DeleteContainerButton.swift in Sources */,
 				8BE15B20278C558000CACE2F /* SelfLookupService.swift in Sources */,
 				8B57F09425F7E096007DB517 /* SearchBar.swift in Sources */,
 				8B6DD272275FDCCC00304468 /* AddBooksButton.swift in Sources */,
@@ -718,7 +722,7 @@
 				8B6DD269275F8C1900304468 /* ActionsMenuButton.swift in Sources */,
 				8B987CAB25C04876003D6F9F /* BookishLists.xcdatamodeld in Sources */,
 				8B70FAA72768B6A70061A542 /* FieldView.swift in Sources */,
-				8B918BAF278DA6D000D8E41D /* RecordContainer.swift in Sources */,
+				8B918BAF278DA6D000D8E41D /* RecordContainerView.swift in Sources */,
 				8B42BE4A25F794D800855D08 /* AddBooksView.swift in Sources */,
 				8B57F08D25F7C166007DB517 /* DataFetcher.swift in Sources */,
 				8BB6653A274D1F30002CC0E8 /* CDRecord+CoreData.swift in Sources */,

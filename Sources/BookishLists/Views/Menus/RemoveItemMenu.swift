@@ -7,26 +7,16 @@ import SwiftUI
 
 
 struct RemoveItemMenu: View {
-    let record: CDRecord
-    let links: [CDRecord]
-    
-    @Environment(\.recordContainer) var container: CDRecord?
-    
-    init(_ record: CDRecord) {
-        self.record = record
-        self.links = record.sortedContents
-        
-        print("Contents for \(record.name)")
-        print(links.map({ $0.name }))
-    }
+    @Environment(\.recordContainer) var container: RecordContainerView?
     
     var body: some View {
-        if links.count > 0 {
+        let links = sortedContents
+        if links.count > 0, let containingRecord = container?.container {
             Menu("Remove Item") {
-                ForEach(links) { record in
-                    ForEach(record.sortedRoles(for: record), id: \.self) { role in
-                        Button(action: { handleRemove(record: record, as: role) }) {
-                            RecordLabel(record: record)
+                ForEach(links) { linkedRecord in
+                    ForEach(linkedRecord.sortedRoles(for: containingRecord), id: \.self) { role in
+                        Button(action: { handleRemove(record: linkedRecord, as: role) }) {
+                            RecordLabel(record: linkedRecord)
                         }
                     }
                 }
@@ -34,8 +24,19 @@ struct RemoveItemMenu: View {
         }
     }
     
+    var sortedContents: [CDRecord] {
+        guard let container = container?.container else {
+            return []
+        }
+
+        let links = container.sortedContents
+        print("Contents for \(container.name)")
+        print(links.map({ $0.name }))
+        return links
+    }
+    
     func handleRemove(record: CDRecord, as role: String) {
-        if let container = container {
+        if let container = container?.container {
             if record.roles(for: container).count == 1 {
                 container.removeFromContents(record)
             }
