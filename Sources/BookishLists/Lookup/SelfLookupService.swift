@@ -18,8 +18,7 @@ public class SelfLookupService: LookupService {
     
     public override func lookup(search: String, session: LookupSession) {
         model.stack.onBackground { context in
-            let request: NSFetchRequest<CDRecord> = CDRecord.fetcher(in: context)
-            request.predicate = NSPredicate(format: "name CONTAINS[cd] %@", search)
+            let request: NSFetchRequest<CDRecord> = CDRecord.fetchRequest(predicate: NSPredicate(format: "name CONTAINS[cd] %@", search))
             if let records = try? context.fetch(request) {
                 for result in records {
                     if result.kind == .book, let book = result.asBookRecord(from: self.name)  {

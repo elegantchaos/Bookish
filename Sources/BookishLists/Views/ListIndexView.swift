@@ -65,18 +65,27 @@ struct ListIndexView: View {
                 Spacer()
             }
         }
+        .navigationBarBackButtonHidden(linkController.session != nil)
         .toolbar {
             ToolbarItem(placement: .principal) {
-                DeferredTextField(label: "Name", text: $list.name)
-                    .multilineTextAlignment(.center)
-                    .font(.headline)
-                    .frame(maxWidth: .infinity)
+                if linkController.session == nil {
+                    DeferredTextField(label: "Name", text: $list.name)
+                        .multilineTextAlignment(.center)
+                        .font(.headline)
+                        .frame(maxWidth: .infinity)
+                } else {
+                    Text("_Adding To_ \(list.name)")
+                        .multilineTextAlignment(.center)
+                        .font(.headline)
+                }
             }
             
             ToolbarItem(placement: .navigationBarTrailing) {
-                ActionsMenuButton {
-                    ListActionsMenu(list: list, selection: $selection)
-                        .environment(\.recordViewer, self)
+                if linkController.session == nil {
+                    ActionsMenuButton {
+                        ListActionsMenu(list: list, selection: $selection)
+                            .environment(\.recordViewer, self)
+                    }
                 }
             }
         }
@@ -124,6 +133,7 @@ struct LinkSessionHost<Content>: View where Content: View {
     var body: some View {
         if let session = linkController.session {
             AddLinkSessionView(session: session, delegate: delegate)
+                .onDisappear(perform: handleDisappear)
                 .toolbar {
                     ToolbarItem {
                         Button(action: { linkController.session = nil} ) {
@@ -133,6 +143,13 @@ struct LinkSessionHost<Content>: View where Content: View {
                 }
         } else {
             content()
+        }
+    }
+    
+    func handleDisappear() {
+        if linkController.session != nil {
+            print("link session was cancelled by view getting hidden")
+            linkController.session = nil
         }
     }
 }

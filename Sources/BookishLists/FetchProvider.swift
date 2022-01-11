@@ -11,9 +11,10 @@ protocol FetchProvider {
 
 extension FetchProvider {
     static func request() -> NSFetchRequest<CDRecord> {
-        let request: NSFetchRequest<CDRecord> = CDRecord.fetchRequest()
-        request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
-        request.predicate = NSPredicate(format: "kindCode == \(kind.rawValue)")
+        let request = CDRecord.fetchRequest(
+            predicate: NSPredicate(format: "kindCode == \(kind.rawValue)"),
+            sort: [NSSortDescriptor(key: "name", ascending: true)]
+        )
         return request
     }
 }

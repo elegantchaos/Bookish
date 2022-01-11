@@ -13,7 +13,7 @@ import ThreadExtensions
 
 class CDRecord: NSManagedObject, Identifiable {
     enum Kind: Int16 {
-        case unknown = -1
+        case unknown
         case root
         case group
         case list
@@ -159,21 +159,6 @@ extension CDRecord {
 
     var defaultRole: String {
         return kind.defaultRole
-    }
-}
-
-extension CDRecord {
-    func findOrMakeChildListWithName(_ name: String, kind: Kind) -> CDRecord {
-        let kindCode = kind.rawValue
-        if let list = contents?.first(where: { ($0.kindCode == kindCode) && ($0.name == name) }) {
-            return list
-        }
-            
-        let list = CDRecord(in: managedObjectContext!)
-        list.kind = kind
-        list.name = name
-        addToContents(list)
-        return list
     }
 }
 

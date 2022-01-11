@@ -71,11 +71,9 @@
 		8B987CAB25C04876003D6F9F /* BookishLists.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8B987CA925C04876003D6F9F /* BookishLists.xcdatamodeld */; };
 		8B987CB525C06708003D6F9F /* LabelIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B987CB425C06708003D6F9F /* LabelIconView.swift */; };
 		8B987CBB25C0671E003D6F9F /* CDRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B987CBA25C0671E003D6F9F /* CDRecord.swift */; };
-		8B987D0225C1CA60003D6F9F /* NSManagedObjectContextExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B987CFF25C1CA60003D6F9F /* NSManagedObjectContextExtensions.swift */; };
 		8B987D0325C1CA60003D6F9F /* NSEntityDescriptionExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B987D0025C1CA60003D6F9F /* NSEntityDescriptionExtensions.swift */; };
 		8BA7330C278DB51800D21635 /* DeleteContainerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA7330B278DB51800D21635 /* DeleteContainerButton.swift */; };
 		8BB6653A274D1F30002CC0E8 /* CDRecord+CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB66539274D1F30002CC0E8 /* CDRecord+CoreData.swift */; };
-		8BB6653B274D215A002CC0E8 /* NSManagedObjectExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B987CFE25C1CA60003D6F9F /* NSManagedObjectExtensions.swift */; };
 		8BB6653D274D2D62002CC0E8 /* CDRecord+Sorting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB6653C274D2D62002CC0E8 /* CDRecord+Sorting.swift */; };
 		8BB6653F274D3560002CC0E8 /* RecordLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB6653E274D3560002CC0E8 /* RecordLabel.swift */; };
 		8BB66541274D3568002CC0E8 /* RecordLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB66540274D3568002CC0E8 /* RecordLink.swift */; };
@@ -96,6 +94,8 @@
 		8BE53C7F2760E197004729B9 /* ImportMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE53C7E2760E197004729B9 /* ImportMenu.swift */; };
 		8BED2A1825C97D29000DD7C6 /* CDProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BED2A1725C97D29000DD7C6 /* CDProperty.swift */; };
 		8BED2A2425CAC0D1000DD7C6 /* Images in Frameworks */ = {isa = PBXBuildFile; productRef = 8BED2A2325CAC0D1000DD7C6 /* Images */; };
+		8BEDD695278DE5A500B41149 /* NSManagedObjectExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B987CFE25C1CA60003D6F9F /* NSManagedObjectExtensions.swift */; };
+		8BEDD696278DE5F400B41149 /* NSManagedObjectContextExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B987CFF25C1CA60003D6F9F /* NSManagedObjectContextExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -689,12 +689,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B57F08625F7C0E9007DB517 /* GoogleLookupService.swift in Sources */,
+				8BEDD695278DE5A500B41149 /* NSManagedObjectExtensions.swift in Sources */,
 				8B6DD26C275F8C8600304468 /* BookActionsMenu.swift in Sources */,
 				8B012F502757D23B00FCF5DA /* FieldsView.swift in Sources */,
 				8B6DD270275FC5CE00304468 /* AllBooksActionsMenu.swift in Sources */,
 				8BE1493825DC250300A1DC32 /* FieldEditorView.swift in Sources */,
 				8B57F08B25F7C0E9007DB517 /* LookupCandidate.swift in Sources */,
-				8BB6653B274D215A002CC0E8 /* NSManagedObjectExtensions.swift in Sources */,
 				8BE1493A25DC2CCB00A1DC32 /* Field.swift in Sources */,
 				8B6EF80E2760FD860070AEB6 /* StatusController.swift in Sources */,
 				8BE53C7A2760DB59004729B9 /* AppearanceController.swift in Sources */,
@@ -719,6 +719,7 @@
 				8B6DD269275F8C1900304468 /* ActionsMenuButton.swift in Sources */,
 				8B987CAB25C04876003D6F9F /* BookishLists.xcdatamodeld in Sources */,
 				8B70FAA72768B6A70061A542 /* FieldView.swift in Sources */,
+				8BEDD696278DE5F400B41149 /* NSManagedObjectContextExtensions.swift in Sources */,
 				8B918BAF278DA6D000D8E41D /* RecordViewer.swift in Sources */,
 				8B42BE4A25F794D800855D08 /* AddBooksView.swift in Sources */,
 				8B57F08D25F7C166007DB517 /* DataFetcher.swift in Sources */,
@@ -739,7 +740,6 @@
 				8B1F10E225ADC28800108A34 /* EntryView.swift in Sources */,
 				8B987CB525C06708003D6F9F /* LabelIconView.swift in Sources */,
 				8B918BAD278DA61800D8E41D /* RemoveLinkMenu.swift in Sources */,
-				8B987D0225C1CA60003D6F9F /* NSManagedObjectContextExtensions.swift in Sources */,
 				8B70FA9D2767819D0061A542 /* AddLinkSessionView.swift in Sources */,
 				8BE1493425DC16E400A1DC32 /* IndexEntry.swift in Sources */,
 				8BB6653D274D2D62002CC0E8 /* CDRecord+Sorting.swift in Sources */,

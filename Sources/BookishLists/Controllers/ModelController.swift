@@ -90,9 +90,7 @@ class ModelController: ObservableObject {
     }
     
     func add(_ kind: CDRecord.Kind, setup: ((CDRecord) -> Void)? = nil) -> CDRecord {
-        let object = CDRecord(in: stack.viewContext)
-        
-        object.kind = kind
+        let object = CDRecord.make(kind: kind, in: stack.viewContext)
         setup?(object)
         save()
         return object
@@ -141,10 +139,23 @@ class ModelController: ObservableObject {
                     print("made root list \(created.id)")
                     created.kind = .root
                     created.name = list.label
+                    
+                    if list == .lists {
+                        self.makeDefaultLists(in: created, context: context)
+                    }
                 }
             }
 
             self.save()
+        }
+    }
+    
+    func makeDefaultLists(in container: CDRecord, context: NSManagedObjectContext) {
+        let titles = ["Reading List", "Book Club", "Reading History", "Library Books", "Loaned Out", "Borrowed"]
+        for title in titles {
+            let list = CDRecord.make(kind: .list, in: context)
+            list.name = title
+            container.add(list)
         }
     }
     

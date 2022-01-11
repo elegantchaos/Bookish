@@ -60,8 +60,11 @@ extension CDRecord {
 
 extension CDRecord {
 
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<CDRecord> {
-        return NSFetchRequest<CDRecord>(entityName: "CDRecord")
+    @nonobjc public class func fetchRequest(predicate: NSPredicate?, sort: [NSSortDescriptor]? = nil) -> NSFetchRequest<CDRecord> {
+        let request = NSFetchRequest<CDRecord>(entityName: "CDRecord")
+        request.predicate = predicate
+        request.sortDescriptors = sort
+        return request
     }
 
     typealias CreationCallback = (CDRecord) -> ()
@@ -72,8 +75,7 @@ extension CDRecord {
     }
 
     class func withId(_ identifier: String, in context: NSManagedObjectContext) -> CDRecord? {
-        let request: NSFetchRequest<CDRecord> = CDRecord.fetcher(in: context)
-        request.predicate = NSPredicate(format: "id = %@", identifier)
+        let request = fetchRequest(predicate: NSPredicate(format: "id = %@", identifier))
         if let results = try? context.fetch(request), let object = results.first {
             return object
         }
@@ -82,8 +84,7 @@ extension CDRecord {
     }
     
     class func findWithID(_ identifier: String, in context: NSManagedObjectContext) -> CDRecord? {
-        let request: NSFetchRequest<CDRecord> = CDRecord.fetcher(in: context)
-        request.predicate = NSPredicate(format: "id = %@", identifier)
+        let request = fetchRequest(predicate: NSPredicate(format: "id = %@", identifier))
         if let results = try? context.fetch(request), let object = results.first {
             return object
         }
@@ -92,21 +93,26 @@ extension CDRecord {
     }
     
     class func findOrMakeWithID(_ identifier: String, in context: NSManagedObjectContext, creationCallback: CreationCallback) -> CDRecord {
-        let request: NSFetchRequest<CDRecord> = CDRecord.fetcher(in: context)
-        request.predicate = NSPredicate(format: "id = %@", identifier)
+        let request = fetchRequest(predicate: NSPredicate(format: "id = %@", identifier))
         if let results = try? context.fetch(request), let object = results.first {
             return object
         }
 
-        let object = CDRecord(in: context)
+        let object = CDRecord(context: context)
         object.id = identifier
         creationCallback(object)
+        assert(object.kind != .unknown, "callback should have set kind")
         return object
     }
 
+    class func make(kind: Kind, in context: NSManagedObjectContext) -> CDRecord {
+        let record = CDRecord(context: context)
+        record.kind = kind
+        return record
+    }
+    
     class func withName(_ name: String, in context: NSManagedObjectContext) -> CDRecord? {
-        let request: NSFetchRequest<CDRecord> = CDRecord.fetcher(in: context)
-        request.predicate = NSPredicate(format: "name = %@", name)
+        let request = CDRecord.fetchRequest(predicate: NSPredicate(format: "name = %@", name))
         if let results = try? context.fetch(request), let object = results.first {
             return object
         }
@@ -115,18 +121,19 @@ extension CDRecord {
     }
     
     class func findOrMakeWithName(_ name: String, kind: Kind? = nil, in context: NSManagedObjectContext, creationCallback: CreationCallback? = nil) -> CDRecord {
-        let request: NSFetchRequest<CDRecord> = CDRecord.fetcher(in: context)
+        let predicate: NSPredicate
         if let kindCode = kind?.rawValue {
-            request.predicate = NSPredicate(format: "(name = %@) and (kindCode = \(kindCode))", name)
+            predicate = NSPredicate(format: "(name = %@) and (kindCode = \(kindCode))", name)
         } else {
-            request.predicate = NSPredicate(format: "name = %@", name)
+            predicate = NSPredicate(format: "name = %@", name)
         }
-        
+
+        let request = CDRecord.fetchRequest(predicate: predicate)
         if let results = try? context.fetch(request), let object = results.first {
             return object
         }
 
-        let object = CDRecord(in: context)
+        let object = CDRecord(context: context)
         object.name = name
         if let kindCode = kind?.rawValue {
             object.kindCode = kindCode
@@ -136,12 +143,13 @@ extension CDRecord {
             callback(object)
         }
         
+        assert(object.kind != .unknown, "callback or caller should have set kind")
+
         return object
     }
 
     class func countOfKind(_ kind: Kind, in context: NSManagedObjectContext) -> Int {
-        let request: NSFetchRequest<CDRecord> = CDRecord.fetcher(in: context)
-        request.predicate = NSPredicate(format: "kindCode = \(kind.rawValue)")
+        let request = CDRecord.fetchRequest(predicate: NSPredicate(format: "kindCode = \(kind.rawValue)"))
         request.resultType = .countResultType
         if let count = try? context.count(for: request) {
             return count
@@ -150,4 +158,15 @@ extension CDRecord {
         return 0
     }
 
+    func findOrMakeChildListWithName(_ name: String, kind: Kind) -> CDRecord {
+        let kindCode = kind.rawValue
+        if let list = contents?.first(where: { ($0.kindCode == kindCode) && ($0.name == name) }) {
+            return list
+        }
+            
+        let list = CDRecord.make(kind: kind, in: managedObjectContext!)
+        list.name = name
+        addToContents(list)
+        return list
+    }
 }

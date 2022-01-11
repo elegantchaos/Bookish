@@ -106,8 +106,7 @@ private extension ImportHandler {
         
         // build an index of previously imported books
         // we will use this to attempt not to import the same book from the same source twice
-        let request = CDRecord.fetchRequest()
-        request.predicate = NSPredicate(format: "kindCode == \(CDRecord.Kind.book.rawValue)")
+        let request = CDRecord.fetchRequest(predicate: NSPredicate(format: "kindCode == \(CDRecord.Kind.book.rawValue)"))
         if let results = try? workContext.fetch(request) {
             for book in results {
                 if let id = book.string(forKey: BookKey.importedID.rawValue) {
