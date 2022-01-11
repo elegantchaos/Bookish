@@ -7,7 +7,7 @@ import SwiftUI
 
 struct DeleteContainerButton: View {
     @EnvironmentObject var model: ModelController
-    @Environment(\.recordContainer) var container: RecordContainerView?
+    @Environment(\.recordViewer) var container: RecordViewer?
     
     var body: some View {
         Button(action: handleDelete) {

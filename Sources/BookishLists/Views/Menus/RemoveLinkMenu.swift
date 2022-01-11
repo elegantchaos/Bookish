@@ -7,7 +7,7 @@ import SwiftUI
 
 
 struct RemoveLinkMenu: View {
-    @Environment(\.recordContainer) var container: RecordContainerView?
+    @Environment(\.recordViewer) var viewer: RecordViewer?
     
     enum Mode {
         case link
@@ -17,9 +17,9 @@ struct RemoveLinkMenu: View {
     let mode: Mode
     
     var body: some View {
-        let links = sortedLinks
-        if links.count > 0, let containingRecord = container?.container {
-            Menu(mode == .link ? "Remove Link" : "Remove Item") {
+        
+        if let (links, label) = sortedLinks, let containingRecord = viewer?.container {
+            Menu(label) {
                 ForEach(links) { linkedRecord in
                     RoleItemsView(mode: mode, containingRecord: containingRecord, linkedRecord: linkedRecord)
                 }
@@ -27,50 +27,59 @@ struct RemoveLinkMenu: View {
         }
     }
     
-    var sortedLinks: [CDRecord] {
-        guard let container = container?.container else {
-            return []
+    var sortedLinks: ([CDRecord], String)? {
+        guard let container = viewer?.container else {
+            return nil
         }
         
         let links: [CDRecord]
+        let label: String
+        let debug: String
         
         switch mode {
             case .link:
                 links = container.sortedContainedBy
-                print("Links for \(container.name)")
+                label = "Remove Link"
+                debug = "Links for \(container.name)"
                 
             case .item:
                 links = container.sortedContents
-                print("Contents for \(container.name)")
+                label = "Remove Item"
+                debug = "Contents of \(container.name)"
         }
         
+        guard links.count > 0 else { return nil }
+        
+        print(debug)
         print(links.map({ $0.name }))
-        return links
+        return (links, label)
     }
 }
 
-struct RoleItemsView: View {
-    let mode: RemoveLinkMenu.Mode
-    let containingRecord: CDRecord
-    let linkedRecord: CDRecord
-    
-    var body: some View {
-        let roles: [String]
-        let action: (CDRecord, String) -> ()
-        
+private struct RoleItemsView: View {
+    internal init(mode: RemoveLinkMenu.Mode, containingRecord: CDRecord, linkedRecord: CDRecord) {
         switch mode {
             case .link:
-                roles = containingRecord.sortedRoles(for: linkedRecord)
-                action = { linkedRecord, role in handleRemoveLink(of: linkedRecord, from: containingRecord, as: role) }
-                
+                self.containingRecord = containingRecord
+                self.linkedRecord = linkedRecord
+                self.labelRecord = linkedRecord
+
             case .item:
-                roles = linkedRecord.sortedRoles(for: containingRecord)
-                action = { linkedRecord, role in handleRemoveLink(of: containingRecord, from: linkedRecord, as: role) }
+                self.containingRecord = linkedRecord
+                self.linkedRecord = containingRecord
+                self.labelRecord = linkedRecord
         }
-        
+    }
+    
+    let containingRecord: CDRecord
+    let linkedRecord: CDRecord
+    let labelRecord: CDRecord
+    
+    var body: some View {
+        let roles = containingRecord.sortedRoles(for: linkedRecord)
         return ForEach(roles, id: \.self) { role in
-            Button(action: { action(linkedRecord, role) }) {
-                RecordLabel(record: linkedRecord, nameMode: .roleInline(role))
+            Button(action: { handleRemoveLink(of: linkedRecord, from: containingRecord, as: role) }) {
+                RecordLabel(record: labelRecord, nameMode: .roleInline(role))
             }
         }
     }

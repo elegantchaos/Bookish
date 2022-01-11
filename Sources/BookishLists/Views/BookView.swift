@@ -75,7 +75,7 @@ struct BookView: View {
                         } else {
                             ActionsMenuButton {
                                 BookActionsMenu()
-                                    .environment(\.recordContainer, self)
+                                    .environment(\.recordViewer, self)
                             }
                         }
                     }
@@ -110,7 +110,7 @@ struct BookView: View {
     }
 }
 
-extension BookView: RecordContainerView {
+extension BookView: RecordViewer {
     var container: CDRecord { return book }
     func dismiss() { presentationMode.wrappedValue.dismiss() }
 }

@@ -66,8 +66,7 @@
 		8B8A88E9274FCC1A00EA2FAA /* BookishCleanup in Frameworks */ = {isa = PBXBuildFile; productRef = 8B8A88E8274FCC1A00EA2FAA /* BookishCleanup */; };
 		8B918BAB278DA60A00D8E41D /* AddLinkMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B918BAA278DA60A00D8E41D /* AddLinkMenu.swift */; };
 		8B918BAD278DA61800D8E41D /* RemoveLinkMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B918BAC278DA61800D8E41D /* RemoveLinkMenu.swift */; };
-		8B918BAF278DA6D000D8E41D /* RecordContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B918BAE278DA6D000D8E41D /* RecordContainerView.swift */; };
-		8B918BB1278DABC300D8E41D /* RemoveItemMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B918BB0278DABC300D8E41D /* RemoveItemMenu.swift */; };
+		8B918BAF278DA6D000D8E41D /* RecordViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B918BAE278DA6D000D8E41D /* RecordViewer.swift */; };
 		8B987C9F25C047E5003D6F9F /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B987C9E25C047E5003D6F9F /* CoreDataStack.swift */; };
 		8B987CAB25C04876003D6F9F /* BookishLists.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8B987CA925C04876003D6F9F /* BookishLists.xcdatamodeld */; };
 		8B987CB525C06708003D6F9F /* LabelIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B987CB425C06708003D6F9F /* LabelIconView.swift */; };
@@ -183,8 +182,7 @@
 		8B8A88E3274FC36A00EA2FAA /* BookishCleanup */ = {isa = PBXFileReference; lastKnownFileType = folder; name = BookishCleanup; path = Dependencies/BookishCleanup; sourceTree = "<group>"; };
 		8B918BAA278DA60A00D8E41D /* AddLinkMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLinkMenu.swift; sourceTree = "<group>"; };
 		8B918BAC278DA61800D8E41D /* RemoveLinkMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoveLinkMenu.swift; sourceTree = "<group>"; };
-		8B918BAE278DA6D000D8E41D /* RecordContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordContainerView.swift; sourceTree = "<group>"; };
-		8B918BB0278DABC300D8E41D /* RemoveItemMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoveItemMenu.swift; sourceTree = "<group>"; };
+		8B918BAE278DA6D000D8E41D /* RecordViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewer.swift; sourceTree = "<group>"; };
 		8B987C9E25C047E5003D6F9F /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		8B987CAA25C04876003D6F9F /* BooklistLists.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BooklistLists.xcdatamodel; sourceTree = "<group>"; };
 		8B987CB425C06708003D6F9F /* LabelIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelIconView.swift; sourceTree = "<group>"; };
@@ -438,7 +436,6 @@
 				8BE53C7E2760E197004729B9 /* ImportMenu.swift */,
 				8B918BAA278DA60A00D8E41D /* AddLinkMenu.swift */,
 				8B918BAC278DA61800D8E41D /* RemoveLinkMenu.swift */,
-				8B918BB0278DABC300D8E41D /* RemoveItemMenu.swift */,
 			);
 			path = Menus;
 			sourceTree = "<group>";
@@ -471,7 +468,7 @@
 				8BB66540274D3568002CC0E8 /* RecordLink.swift */,
 				8B57F09325F7E096007DB517 /* SearchBar.swift */,
 				8B6DD26D275FB27500304468 /* UndoRedoView.swift */,
-				8B918BAE278DA6D000D8E41D /* RecordContainerView.swift */,
+				8B918BAE278DA6D000D8E41D /* RecordViewer.swift */,
 				8BA7330B278DB51800D21635 /* DeleteContainerButton.swift */,
 			);
 			path = Components;
@@ -722,7 +719,7 @@
 				8B6DD269275F8C1900304468 /* ActionsMenuButton.swift in Sources */,
 				8B987CAB25C04876003D6F9F /* BookishLists.xcdatamodeld in Sources */,
 				8B70FAA72768B6A70061A542 /* FieldView.swift in Sources */,
-				8B918BAF278DA6D000D8E41D /* RecordContainerView.swift in Sources */,
+				8B918BAF278DA6D000D8E41D /* RecordViewer.swift in Sources */,
 				8B42BE4A25F794D800855D08 /* AddBooksView.swift in Sources */,
 				8B57F08D25F7C166007DB517 /* DataFetcher.swift in Sources */,
 				8BB6653A274D1F30002CC0E8 /* CDRecord+CoreData.swift in Sources */,
@@ -736,7 +733,6 @@
 				8B57F09225F7D9F2007DB517 /* CandidateView.swift in Sources */,
 				8B6DD26E275FB27500304468 /* UndoRedoView.swift in Sources */,
 				8B70FAA527678F9A0061A542 /* RawPropertyView.swift in Sources */,
-				8B918BB1278DABC300D8E41D /* RemoveItemMenu.swift in Sources */,
 				8BE1493625DC178F00A1DC32 /* AllBooksView.swift in Sources */,
 				8B1F10D825ACB30A00108A34 /* ListIndexView.swift in Sources */,
 				8B6DD267275E87F600304468 /* PropertyView.swift in Sources */,

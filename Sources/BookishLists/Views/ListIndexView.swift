@@ -76,7 +76,7 @@ struct ListIndexView: View {
             ToolbarItem(placement: .navigationBarTrailing) {
                 ActionsMenuButton {
                     ListActionsMenu(list: list, selection: $selection)
-                        .environment(\.recordContainer, self)
+                        .environment(\.recordViewer, self)
                 }
             }
         }
@@ -110,7 +110,7 @@ extension ListIndexView: AddLinkDelegate {
     }
 }
 
-extension ListIndexView: RecordContainerView {
+extension ListIndexView: RecordViewer {
     var container: CDRecord { return list }
     func dismiss() { presentationMode.wrappedValue.dismiss() }
 }

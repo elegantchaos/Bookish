@@ -5,18 +5,18 @@
 
 import SwiftUI
 
-protocol RecordContainerView {
+protocol RecordViewer {
     var container: CDRecord { get }
     func dismiss()
 }
 
-struct RecordContainerKey: EnvironmentKey {
-    static let defaultValue: RecordContainerView? = nil
+struct RecordViewerKey: EnvironmentKey {
+    static let defaultValue: RecordViewer? = nil
 }
 
 extension EnvironmentValues {
-    var recordContainer: RecordContainerView? {
-        get { self[RecordContainerKey.self] }
-        set { self[RecordContainerKey.self] = newValue }
+    var recordViewer: RecordViewer? {
+        get { self[RecordViewerKey.self] }
+        set { self[RecordViewerKey.self] = newValue }
     }
 }
