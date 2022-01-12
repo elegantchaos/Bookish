@@ -59,5 +59,4 @@ class CoreDataStack {
         context.refreshAllObjects()
         try context.save()
     }
-
 }

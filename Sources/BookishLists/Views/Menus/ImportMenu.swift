@@ -8,6 +8,7 @@ import SwiftUI
 import BookishImporter
 
 struct ImportMenu: View {
+    @EnvironmentObject var fileController: FilePickerController
     @EnvironmentObject var importController: ImportController
     @EnvironmentObject var statusController: StatusController
     
@@ -20,7 +21,7 @@ struct ImportMenu: View {
     }
 
     func handleRequestImport() {
-        importController.chooseFileToImport { result in
+        fileController.chooseFileToImport { result in
             switch result {
                 case .success(let url):
                     url.accessSecurityScopedResource { url in

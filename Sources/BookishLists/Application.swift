@@ -21,6 +21,8 @@ struct Application: App {
     let sheetController: SheetController
     let statusController: StatusController
     let linkController: LinkController
+    let exportController: ExportController
+    let filePickerController: FilePickerController
     
     init() {
         let undoManager = UndoManager()
@@ -32,6 +34,8 @@ struct Application: App {
         self.appearanceController = AppearanceController()
         self.statusController = StatusController()
         self.linkController = LinkController()
+        self.exportController = ExportController(model: modelController)
+        self.filePickerController = FilePickerController()
 
         if CommandLine.arguments.contains("--wipeAllData") {
             try? modelController.removeAllData()
@@ -58,6 +62,8 @@ struct Application: App {
                     .environmentObject(importController)
                     .environmentObject(statusController)
                     .environmentObject(linkController)
+                    .environmentObject(filePickerController)
+                    .environmentObject(exportController)
                     .onReceive(
                         modelController.objectWillChange.debounce(for: .seconds(10), scheduler: RunLoop.main), perform: { _ in
                             print("model changed")

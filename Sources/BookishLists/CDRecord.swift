@@ -46,6 +46,13 @@ class CDRecord: NSManagedObject, Identifiable {
         }
     }
     
+    var canExport: Bool {
+        switch kind {
+            case .list, .book: return true
+            default: return false
+        }
+    }
+    
     var canAddLinks: Bool {
         switch kind {
             case .book, .list: return true
@@ -128,7 +135,36 @@ class CDRecord: NSManagedObject, Identifiable {
 
         return BookRecord(values, id: id, source: source)
     }
+    
+    typealias InterchangeRecord = [String:Any]
+
+    func asInterchange() -> InterchangeRecord {
+
+        var encodedProperties = InterchangeRecord()
+        if let properties = properties {
+            for property in properties {
+//                encodedProperties[property.key] = property.value
+
+                if let value = property.value as? JSONRepresentable {
+                    encodedProperties[property.key] = value.asJSONType
+                } else if let value = property.value as? JSONRepresentableObject {
+                    encodedProperties[property.key] = value.asJSONObject
+                } else {
+                    fatalError("can't encode key \(property.key): \(property.value) type: \(type(of: property.value))")
+                }
+            }
+        }
+
+        let values: InterchangeRecord = [
+            "id": id,
+            "name": name,
+            "properties": encodedProperties
+        ]
+
+        return values
+    }
 }
+
 
 extension CDRecord {
     func addRole(_ role: String, for record: CDRecord) {
