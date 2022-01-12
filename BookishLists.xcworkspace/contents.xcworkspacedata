@@ -5,6 +5,9 @@
       location = "container:BookishLists.xcodeproj">
    </FileRef>
    <FileRef
+      location = "group:../JSONRepresentable">
+   </FileRef>
+   <FileRef
       location = "group:../SwiftUIExtensions">
    </FileRef>
    <FileRef

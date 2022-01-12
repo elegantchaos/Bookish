@@ -12,25 +12,36 @@ protocol JSONType {
     var asJSONType: JSONType { get }
 }
 
+extension JSONType {
+    var asJSONType: JSONType {
+        return self
+    }
+}
+
 protocol JSONRepresentable {
     var asJSONType: JSONType { get }
 }
 
+typealias JSONDictionary = Dictionary<String, JSONType>
+typealias JSONArray = Array<JSONType>
+
 extension Int: JSONType {
-    var asJSONType: JSONType { return self }
 }
 
 extension Double: JSONType {
-    var asJSONType: JSONType { return self }
 }
 
 extension String: JSONType {
-    var asJSONType: JSONType { return self }
 }
 
-extension CFString: JSONType {
-    var asJSONType: JSONType { return self }
+extension JSONDictionary: JSONType {
 }
+
+
+extension JSONArray: JSONType {
+}
+
+// MARK: Swift Foundation Types
 
 extension Date: JSONRepresentable {
     var asJSONType: JSONType {
@@ -38,37 +49,39 @@ extension Date: JSONRepresentable {
     }
 }
 
-typealias JSONDictionary = Dictionary<String, JSONType>
+//
+//extension Array: JSONRepresentable where Element == Any {
+//    var asJSONType: JSONType {
+//        return self.map { (item: Any) -> JSONType in
+//            guard let rep = item as? JSONRepresentable else { fatalError("") }
+//            return rep.asJSONType
+//        }
+//    }
+//}
 
-extension JSONDictionary: JSONType {
-    var asJSONType: JSONType {
-        return self
-    }
+// MARK: Core Foundation Types
+
+extension CFString: JSONRepresentable {
+    var asJSONType: JSONType { return self as String }
 }
 
-typealias JSONArray = Array<JSONType>
-
-extension JSONArray: JSONType {
-    var asJSONType: JSONType {
-        return self
-    }
-}
-
-extension Array: JSONRepresentable where Element == Any {
-    var asJSONType: JSONType {
-        return self.map { (item: Any) -> JSONType in
-            guard let rep = item as? JSONRepresentable else { fatalError("") }
-            return rep.asJSONType
-        }
-    }
-}
+// MARK: ObjC Foundation Types
 
 extension NSArray: JSONRepresentable {
     var asJSONType: JSONType {
         return self.map { (item: Any) -> JSONType in
-            guard let rep = item as? JSONRepresentable else { fatalError("") }
-            return rep.asJSONType
+            return (item as! JSONRepresentable).asJSONType
         }
+    }
+}
+
+extension NSDictionary: JSONRepresentable {
+    var asJSONType: JSONType {
+        var mapped = JSONDictionary()
+        for (key, value) in self {
+            mapped[key as! String] = (value as! JSONRepresentable).asJSONType
+        }
+        return mapped
     }
 }
 
