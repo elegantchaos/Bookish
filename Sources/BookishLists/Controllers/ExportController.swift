@@ -14,6 +14,6 @@ class ExportController: ObservableObject {
     
     func export(_ root: CDRecord) throws -> Data {
         let dictionary = root.asInterchange()
-        return try ExtendedJSONSerialization.data(withJSONObject: dictionary, options: [.prettyPrinted, .sortedKeys])
+        return try JSONSerialization.data(withJSONObject: dictionary, options: [.prettyPrinted, .sortedKeys])
     }
 }

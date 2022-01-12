@@ -143,12 +143,8 @@ class CDRecord: NSManagedObject, Identifiable {
         var encodedProperties = InterchangeRecord()
         if let properties = properties {
             for property in properties {
-//                encodedProperties[property.key] = property.value
-
                 if let value = property.value as? JSONRepresentable {
                     encodedProperties[property.key] = value.asJSONType
-                } else if let value = property.value as? JSONRepresentableObject {
-                    encodedProperties[property.key] = value.asJSONObject
                 } else {
                     fatalError("can't encode key \(property.key): \(property.value) type: \(type(of: property.value))")
                 }
