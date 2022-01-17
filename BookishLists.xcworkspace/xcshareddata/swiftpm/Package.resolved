@@ -2,6 +2,15 @@
   "object": {
     "pins": [
       {
+        "package": "Bundles",
+        "repositoryURL": "https://github.com/elegantchaos/Bundles",
+        "state": {
+          "branch": null,
+          "revision": "f310de200a3fb08e23fb1fc21ed7984972a6b2b4",
+          "version": "1.0.10"
+        }
+      },
+      {
         "package": "Coercion",
         "repositoryURL": "https://github.com/elegantchaos/Coercion.git",
         "state": {
@@ -47,15 +56,6 @@
         }
       },
       {
-        "package": "ISBN",
-        "repositoryURL": "https://github.com/elegantchaos/ISBN.git",
-        "state": {
-          "branch": null,
-          "revision": "d7ca6431b321a932ce509b214173e166e3378430",
-          "version": "1.0.2"
-        }
-      },
-      {
         "package": "KeyValueStore",
         "repositoryURL": "https://github.com/elegantchaos/KeyValueStore.git",
         "state": {
@@ -89,6 +89,15 @@
           "branch": null,
           "revision": "0f523c77bf4b0dbbdc0838b952262ed45fab17f8",
           "version": "1.0.6"
+        }
+      },
+      {
+        "package": "SemanticVersion",
+        "repositoryURL": "https://github.com/elegantchaos/SemanticVersion.git",
+        "state": {
+          "branch": null,
+          "revision": "6bda5a45a2f687a82a0fbb002bee8ad31e44f478",
+          "version": "1.1.0"
         }
       },
       {

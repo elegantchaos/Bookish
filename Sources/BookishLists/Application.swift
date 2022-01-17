@@ -3,6 +3,7 @@
 //  All code (c) 2021 - present day, Sam Deane.
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
+import Bundles
 import CloudKit
 import Combine
 import Files
@@ -23,10 +24,13 @@ struct Application: App {
     let linkController: LinkController
     let exportController: ExportController
     let filePickerController: FilePickerController
+    let info: BundleInfo
     
     init() {
+        
         let undoManager = UndoManager()
         let stack = CoreDataStack(containerName: "BookishLists", undoManager: undoManager)
+        self.info = BundleInfo(for: Bundle.main)
         self.modelController = ModelController(stack: stack)
         self.importController = ImportController(model: modelController)
         self.lookupController = LookupManager()
@@ -34,7 +38,7 @@ struct Application: App {
         self.appearanceController = AppearanceController()
         self.statusController = StatusController()
         self.linkController = LinkController()
-        self.exportController = ExportController(model: modelController)
+        self.exportController = ExportController(model: modelController, info: info)
         self.filePickerController = FilePickerController()
 
         if CommandLine.arguments.contains("--wipeAllData") {

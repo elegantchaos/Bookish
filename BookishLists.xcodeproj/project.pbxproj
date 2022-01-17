@@ -67,6 +67,7 @@
 		8B918BAB278DA60A00D8E41D /* AddLinkMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B918BAA278DA60A00D8E41D /* AddLinkMenu.swift */; };
 		8B918BAD278DA61800D8E41D /* RemoveLinkMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B918BAC278DA61800D8E41D /* RemoveLinkMenu.swift */; };
 		8B918BAF278DA6D000D8E41D /* RecordViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B918BAE278DA6D000D8E41D /* RecordViewer.swift */; };
+		8B92A3CA2795B03F003CA08E /* Bundles in Frameworks */ = {isa = PBXBuildFile; productRef = 8B92A3C92795B03F003CA08E /* Bundles */; };
 		8B987C9F25C047E5003D6F9F /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B987C9E25C047E5003D6F9F /* CoreDataStack.swift */; };
 		8B987CAB25C04876003D6F9F /* BookishLists.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8B987CA925C04876003D6F9F /* BookishLists.xcdatamodeld */; };
 		8B987CB525C06708003D6F9F /* LabelIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B987CB425C06708003D6F9F /* LabelIconView.swift */; };
@@ -232,6 +233,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B92A3CA2795B03F003CA08E /* Bundles in Frameworks */,
 				8B8A88E5274FCAD700EA2FAA /* BookishImporter in Frameworks */,
 				8B57F07C25F7B989007DB517 /* AVFoundation.framework in Frameworks */,
 				8B8A88E7274FCADB00EA2FAA /* BookishImporterSamples in Frameworks */,
@@ -539,6 +541,7 @@
 				8B8A88E6274FCADB00EA2FAA /* BookishImporterSamples */,
 				8B8A88E8274FCC1A00EA2FAA /* BookishCleanup */,
 				8BEDD6A4278F3B9B00B41149 /* JSONRepresentable */,
+				8B92A3C92795B03F003CA08E /* Bundles */,
 			);
 			productName = "Samedi's Crafting";
 			productReference = 226F15D7251A28EA00D6B12E /* Bookish Lists.app */;
@@ -643,6 +646,7 @@
 				8B57F08E25F7C6BD007DB517 /* XCRemoteSwiftPackageReference "CaptureView" */,
 				8B1AF904274FBB12001BFB00 /* XCRemoteSwiftPackageReference "Expressions" */,
 				8BEDD6A3278F3B9B00B41149 /* XCRemoteSwiftPackageReference "JSONRepresentable" */,
+				8B92A3C82795B03F003CA08E /* XCRemoteSwiftPackageReference "Bundles" */,
 			);
 			productRefGroup = 226F15D8251A28EA00D6B12E /* Products */;
 			projectDirPath = "";
@@ -1194,6 +1198,14 @@
 				minimumVersion = 1.0.1;
 			};
 		};
+		8B92A3C82795B03F003CA08E /* XCRemoteSwiftPackageReference "Bundles" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/elegantchaos/Bundles";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		8BED2A2225CAC0D1000DD7C6 /* XCRemoteSwiftPackageReference "Images" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/elegantchaos/Images.git";
@@ -1273,6 +1285,11 @@
 		8B8A88E8274FCC1A00EA2FAA /* BookishCleanup */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = BookishCleanup;
+		};
+		8B92A3C92795B03F003CA08E /* Bundles */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8B92A3C82795B03F003CA08E /* XCRemoteSwiftPackageReference "Bundles" */;
+			productName = Bundles;
 		};
 		8BED2A2325CAC0D1000DD7C6 /* Images */ = {
 			isa = XCSwiftPackageProductDependency;
