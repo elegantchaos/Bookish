@@ -13,6 +13,11 @@ class ExportedList: ReferenceFileDocument {
         case noObjectInBackgroundContext
     }
     
+    struct Snapshot {
+        let name: String
+        let data: Data
+    }
+    
     static var readableContentTypes: [UTType] = [bookishType, .json]
     static var writableContentTypes: [UTType] = [bookishType]
 
@@ -27,20 +32,26 @@ class ExportedList: ReferenceFileDocument {
     required init(configuration: ReadConfiguration) throws {
     }
     
-    func snapshot(contentType: UTType) throws -> Data {
+    func snapshot(contentType: UTType) throws -> Snapshot {
         guard let id = record?.objectID else { throw ExportError.noObject }
 
         let context = exporter.model.stack.newBackgroundContext()
         var data: Data!
+        var name: String = "Bookish Export"
+
         try context.performAndWait {
             guard let copy = context.object(with: id) as? CDRecord else { throw ExportError.noObjectInBackgroundContext }
             data = try exporter.export(copy)
+            name = copy.name
         }
 
-        return data
+        return Snapshot(name: name, data: data)
     }
     
-    func fileWrapper(snapshot: Data, configuration: WriteConfiguration) throws -> FileWrapper {
-        return FileWrapper(regularFileWithContents: snapshot)
+    func fileWrapper(snapshot: Snapshot, configuration: WriteConfiguration) throws -> FileWrapper {
+        let wrapper = FileWrapper(regularFileWithContents: snapshot.data)
+        wrapper.filename = snapshot.name
+
+        return wrapper
     }
 }
