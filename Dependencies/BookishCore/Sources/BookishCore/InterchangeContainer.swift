@@ -12,6 +12,15 @@ public class InterchangeContainer {
         self.index = [:]
     }
     
+    public init(_ content: [Any]) throws {
+        let records = try content.map { try InterchangeRecord($0) }
+        var index: Index = [:]
+        for record in records {
+            index[record.id.id] = record
+        }
+        self.index = index
+    }
+    
     public private(set) var index: Index
 
     public enum AddResult {
@@ -19,12 +28,16 @@ public class InterchangeContainer {
         case alreadyExists
     }
     
-    public func add(_ record: InterchangeRecord) -> AddResult {
+    @discardableResult public func add(_ record: InterchangeRecord) -> AddResult {
         let id = record.id.id
         guard index[id] == nil else { return .alreadyExists }
         
         index[id] = record
         print("added \(record.id)")
         return .added
+    }
+    
+    public func asList() throws -> [Any] {
+        return index.values.sorted(by: { $0.id.id < $1.id.id }).map({ $0.asDictionary })
     }
 }

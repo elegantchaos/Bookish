@@ -9,14 +9,25 @@ public struct InterchangeFileType: Codable {
     public init(_ format: String, version: Int, variant: Variant = .normal) {
         self.format = format
         self.version = version
-        self.variant = variant
+        self.variantName = variant == .normal ? nil : variant.rawValue
     }
     
-    public enum Variant: Codable {
+    private enum CodingKeys: String, CodingKey {
+        case format = "format"
+        case version = "version"
+        case variantName = "variant"
+      }
+    
+    public enum Variant: String, Codable {
         case normal
+        case compact
     }
     
     let format: String
     let version: Int
-    let variant: Variant
+    let variantName: String?
+    
+    var variant: Variant {
+        variantName.flatMap { Variant(rawValue: $0) } ?? .normal
+    }
 }
