@@ -20,7 +20,7 @@ struct ExportButton: View {
 
     func handleExport() {
         if let root = container?.container {
-            fileController.chooseLocationToExport(ExportedList(root, exporter: exporter)) { result in
+            fileController.chooseLocationToExport(BookishInterchangeDocument(root, exporter: exporter)) { result in
                 switch result {
                     case .success:
                         break

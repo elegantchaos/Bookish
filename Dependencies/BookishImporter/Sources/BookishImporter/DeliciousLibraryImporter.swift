@@ -9,6 +9,7 @@ import Foundation
 import ISBN
 import Logger
 import SwiftUI
+import UniformTypeIdentifiers
 
 let deliciousChannel = Channel("DeliciousImporter")
 
@@ -16,13 +17,13 @@ let deliciousChannel = Channel("DeliciousImporter")
 public class DeliciousLibraryImporter: Importer {
     override class public var id: String { return "com.elegantchaos.bookish.importer.delicious-library" }
 
-    override func makeSession(source: Any, delegate: ImportDelegate) -> ImportSession? {
+    override open func makeSession(source: Any, delegate: ImportDelegate) -> ImportSession? {
         guard let url = source as? URL else { return nil }
         return DeliciousLibraryImportSession(importer: self, url: url, delegate: delegate)
     }
 
-    public override var fileTypes: [String]? {
-        return ["xml"]
+    public override var fileTypes: [UTType]? {
+        return [.xml]
     }
 }
 
@@ -60,7 +61,7 @@ public class DeliciousLibraryImportSession: URLImportSession {
         return BookRecord(unprocessed, id: id, source: importer.id)
     }
     
-    override func run() {
+    override open func run() {
         delegate.session(self, willImportItems: list.count)
         for record in list {
             if var book = self.validate(record) {

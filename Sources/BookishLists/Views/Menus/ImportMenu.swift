@@ -16,11 +16,28 @@ struct ImportMenu: View {
         Menu("Import") {
             Button(action: handleImportSmall) { Text("Delicious Library Small Sample") }
             Button(action: handleImportFull) { Text("Delicious Library Full Sample") }
-            Button(action: handleRequestImport) { Text("From Delicious Library…") }
+            Button(action: handleRequestImportDelicious) { Text("From Delicious Library…") }
+            Button(action: handleRequestImportInterchange) { Text("From Bookish Export…") }
         }
     }
 
-    func handleRequestImport() {
+    func handleRequestImportDelicious() {
+        fileController.importContentTypes = [.xml]
+        fileController.chooseFileToImport { result in
+            switch result {
+                case .success(let url):
+                    url.accessSecurityScopedResource { url in
+                        importController.import(from: url)
+                    }
+
+                case .failure(let error):
+                    statusController.notify(error)
+            }
+        }
+    }
+
+    func handleRequestImportInterchange() {
+        fileController.importContentTypes = [BookishInterchangeDocument.bookishType]
         fileController.chooseFileToImport { result in
             switch result {
                 case .success(let url):

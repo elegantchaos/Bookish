@@ -74,6 +74,19 @@ struct Application: App {
                             modelController.save()
                     })
             }
+            .handlesExternalEvents(matching: ["*"])
+            .commands {
+                CommandGroup(before: .importExport) {
+                    Button(action: { print("blah") }) {
+                        Text("Command Test")
+                    }
+
+                }
+//                ImportFromDevicesCommands()
+//                Button(action: { print("blah") }) {
+//                    Text("Command Test")
+//                }
+            }
             .onChange(of: scenePhase) { newScenePhase in
                   switch newScenePhase {
                   case .active:

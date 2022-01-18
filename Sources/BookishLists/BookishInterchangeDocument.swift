@@ -6,7 +6,7 @@
 import SwiftUI
 import UniformTypeIdentifiers
 
-class ExportedList: ReferenceFileDocument {
+class BookishInterchangeDocument: ReferenceFileDocument {
     static let bookishType = UTType("com.elegantchaos.bookish")!
     enum ExportError: Error {
         case noObject
@@ -23,6 +23,7 @@ class ExportedList: ReferenceFileDocument {
 
     var exporter: ExportController!
     var record: CDRecord?
+    var properties: [String:Any]?
 
     init(_ record: CDRecord, exporter: ExportController) {
         self.record = record
@@ -30,6 +31,9 @@ class ExportedList: ReferenceFileDocument {
     }
 
     required init(configuration: ReadConfiguration) throws {
+        guard let data = configuration.file.regularFileContents else { throw CocoaError(.fileReadCorruptFile) }
+        let decoded = try JSONSerialization.jsonObject(with: data, options: .json5Allowed)
+        properties = decoded as? [String:Any]
     }
     
     func snapshot(contentType: UTType) throws -> Snapshot {

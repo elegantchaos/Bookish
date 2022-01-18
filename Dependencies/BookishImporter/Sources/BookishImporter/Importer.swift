@@ -6,17 +6,18 @@
 import Files
 import Foundation
 import Localization
+import UniformTypeIdentifiers
 
-public class Importer {
+open class Importer {
     public static let defaultSource = "default"
     
     public weak var manager: ImportManager?
-    public class var id: String { return "import" }
+    open class var id: String { return "import" }
 
     public init() {
     }
         
-    public var fileTypes: [String]? {
+    open var fileTypes: [UTType]? {
         return nil
     }
     
@@ -38,11 +39,11 @@ public class Importer {
         return string
     }
 
-    internal func makeSession(source: Any, delegate: ImportDelegate) -> ImportSession? {
+    open func makeSession(source: Any, delegate: ImportDelegate) -> ImportSession? {
         return nil
     }
 }
 
 extension Importer: Identifiable {
-    public var id: String { Self.id }
+    open var id: String { Self.id }
 }

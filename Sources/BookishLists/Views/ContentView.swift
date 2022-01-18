@@ -12,8 +12,8 @@ import CoreData
 class FilePickerController: ObservableObject {
     @Published var importRequested = false
     @Published var exportRequested = false
-    @Published var exportDocument: ExportedList?
-    @Published var importContentTypes: [UTType] = [.xml]
+    @Published var exportDocument: BookishInterchangeDocument?
+    @Published var importContentTypes: [UTType] = []
     @Published var exportContentType: UTType = .json
     @Published private var importCompletion: ((_ result: Result<URL,Error>) -> ())?
     @Published private var exportCompletion: ((_ result: Result<URL,Error>) -> ())?
@@ -23,7 +23,7 @@ class FilePickerController: ObservableObject {
         importRequested = true
     }
 
-    func chooseLocationToExport(_ document: ExportedList, completion: @escaping (_ result: Result<URL,Error>) -> ()) {
+    func chooseLocationToExport(_ document: BookishInterchangeDocument, completion: @escaping (_ result: Result<URL,Error>) -> ()) {
         exportDocument = document
         exportCompletion = completion
         exportRequested = true
@@ -51,8 +51,12 @@ struct ContentView: View {
             NavigationView {
                 RootIndexView()
             }
+//            .importsItemProviders([BookishInterchangeDocument.bookishType]) { itemProviders in
+//                print("blah")
+//                return true
+//            }
             .fileImporter(isPresented: $fileController.importRequested, allowedContentTypes: fileController.importContentTypes, onCompletion: fileController.handlePerformImport)
-            .fileExporter(isPresented: $fileController.exportRequested, document: fileController.exportDocument, contentType: ExportedList.writableContentTypes.first!, onCompletion: fileController.handlePerformExport)
+            .fileExporter(isPresented: $fileController.exportRequested, document: fileController.exportDocument, contentType: BookishInterchangeDocument.writableContentTypes.first!, onCompletion: fileController.handlePerformExport)
             .navigationBarTitleDisplayMode(.automatic)
             .toolbar {
                 ToolbarItem(placement: .bottomBar) {

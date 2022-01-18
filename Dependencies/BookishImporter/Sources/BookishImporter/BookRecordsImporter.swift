@@ -15,7 +15,7 @@ let bookRecordsImporterChannel = Channel("BookRecordsImporter")
 public class BookRecordsImporter: Importer {
     override class public var id: String { return "com.elegantchaos.bookish.importer.records" }
 
-    override func makeSession(source: Any, delegate: ImportDelegate) -> ImportSession? {
+    override open func makeSession(source: Any, delegate: ImportDelegate) -> ImportSession? {
         guard let records = source as? [BookRecord] else { return nil }
 
         let session = BookRecordsImportSession(importer: self, records: records, delegate: delegate)
@@ -35,7 +35,7 @@ public class BookRecordsImportSession: ImportSession {
         super.init(importer: importer, delegate: delegate)
     }
     
-    override func run() {
+    override open func run() {
         delegate.session(self, willImportItems: records.count)
         for book in records {
             bookRecordsImporterChannel.log("Imported \(book.title)")

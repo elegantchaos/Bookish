@@ -6,14 +6,14 @@
 import Foundation
 import Localization
 
-public class ImportSession: Identifiable {
+open class ImportSession: Identifiable {
     public typealias Completion = (ImportSession?) -> Void
     
     public let id = UUID()
     let importer: Importer
-    let delegate: ImportDelegate
+    public let delegate: ImportDelegate
     
-    init?(importer: Importer, delegate: ImportDelegate) {
+    public init?(importer: Importer, delegate: ImportDelegate) {
         self.importer = importer
         self.delegate = delegate
     }
@@ -27,7 +27,7 @@ public class ImportSession: Identifiable {
         }
     }
 
-    internal func run() {
+    open func run() {
     }
     
     public var source: String {

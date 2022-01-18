@@ -18,7 +18,8 @@ class ImportController: ObservableObject {
         self.importer = ImportManager([
             DeliciousLibraryImporter(),
             DictionariesImporter(),
-            BookRecordsImporter()
+            BookRecordsImporter(),
+            BookishInterchangeImporter(),
         ])
     }
     
