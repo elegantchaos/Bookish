@@ -7,6 +7,7 @@ import BookishCore
 import Combine
 import CoreData
 import Images
+import JSONRepresentable
 import SwiftUI
 import SwiftUIExtensions
 import ThreadExtensions
@@ -151,10 +152,15 @@ class CDRecord: NSManagedObject, Identifiable {
             }
         }
 
+        let items = contents?.map({ $0.id }) ?? []
+        let links = containedBy?.map({ $0.id }) ?? []
         let values: InterchangeRecord = [
             "id": id,
+            "kind": "\(kind)",
             "name": name,
-            "properties": encodedProperties
+            "properties": encodedProperties,
+            "items": items,
+            "links": links
         ]
 
         return values

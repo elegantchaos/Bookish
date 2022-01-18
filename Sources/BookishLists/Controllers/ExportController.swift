@@ -6,6 +6,27 @@
 import SwiftUI
 import Bundles
 
+class InterchangeRecords {
+    init() {
+        self.index = [:]
+    }
+    
+    var index: [String:CDRecord.InterchangeRecord]
+    
+    func add(_ object: CDRecord, deep: Bool) {
+        if index[object.id] == nil {
+            index[object.id] = object.asInterchange()
+            print("added \(object.id)")
+
+            if deep {
+                object.contents?.forEach { add($0, deep: deep) }
+                object.containedBy?.forEach { add($0, deep: deep) }
+            }
+        }
+        
+    }
+}
+
 class ExportController: ObservableObject {
     let model: ModelController
     let info: BundleInfo
@@ -16,8 +37,9 @@ class ExportController: ObservableObject {
     }
     
     func export(_ root: CDRecord) throws -> Data {
-        let dictionary = root.asInterchange()
-        
+        let records = InterchangeRecords()
+        records.add(root, deep: true)
+
         let wrapper: [String:Any] = [
             "type": [
                 "format": "com.elegantchaos.bookish.list",
@@ -30,7 +52,10 @@ class ExportController: ObservableObject {
                 "build": info.build,
                 "commit": info.commit
             ],
-            "content": dictionary
+            "content": [
+                "items": records.index,
+                "root": root.id
+            ]
         ]
         
         return try JSONSerialization.data(withJSONObject: wrapper, options: [.prettyPrinted, .sortedKeys])
