@@ -46,7 +46,7 @@ public struct InterchangeRecord {
         var dictionary = properties
         dictionary.merge(id.asDictionary, uniquingKeysWith: { l, r in r })
         dictionary["items"] = items.map { $0.asDictionary }
-        dictionary["links"] = items.map { $0.asDictionary }
+        dictionary["links"] = links.map { $0.asDictionary }
         return dictionary
     }
     

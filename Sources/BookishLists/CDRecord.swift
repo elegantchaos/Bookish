@@ -137,11 +137,13 @@ class CDRecord: NSManagedObject, Identifiable {
         return BookRecord(values, id: id, source: source)
     }
     
-    typealias InterchangeRecord = [String:Any]
 
+    func asInterchangeID() -> InterchangeID {
+        return InterchangeID(id: id, name: name, kind: "\(kind)")
+    }
+    
     func asInterchange() -> InterchangeRecord {
-
-        var encodedProperties = InterchangeRecord()
+        var encodedProperties: [String:Any] = [:]
         if let properties = properties {
             for property in properties {
                 if let value = property.value as? JSONRepresentable {
@@ -152,18 +154,14 @@ class CDRecord: NSManagedObject, Identifiable {
             }
         }
 
-        let items = contents?.map({ $0.id }) ?? []
-        let links = containedBy?.map({ $0.id }) ?? []
-        let values: InterchangeRecord = [
-            "id": id,
-            "kind": "\(kind)",
-            "name": name,
-            "properties": encodedProperties,
-            "items": items,
-            "links": links
-        ]
+        let items = contents?.map({ $0.asInterchangeID() }) ?? []
+        let links = containedBy?.map({ $0.asInterchangeID() }) ?? []
+        var record = InterchangeRecord(id: id, name: name, kind: "\(kind)")
+        record.properties = encodedProperties
+        record.items = items
+        record.links = links
 
-        return values
+        return record
     }
 }
 

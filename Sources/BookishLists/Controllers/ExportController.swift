@@ -3,27 +3,32 @@
 //  All code (c) 2022 - present day, Elegant Chaos Limited.
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
-import SwiftUI
+import BookishCore
 import Bundles
+import SwiftUI
 
-class InterchangeRecords {
-    init() {
-        self.index = [:]
-    }
-    
-    var index: [String:CDRecord.InterchangeRecord]
-    
-    func add(_ object: CDRecord, deep: Bool) {
-        if index[object.id] == nil {
-            index[object.id] = object.asInterchange()
-            print("added \(object.id)")
-
-            if deep {
-                object.contents?.forEach { add($0, deep: deep) }
-                object.containedBy?.forEach { add($0, deep: deep) }
+extension InterchangeContainer {
+    enum Depth {
+        case shallow
+        case oneLevel
+        case deep
+        
+        var nextDepth: Depth {
+            switch self {
+                case .deep: return .deep
+                default: return .shallow
             }
         }
-        
+    }
+    
+    func add(_ object: CDRecord, depth: Depth) {
+        if add(object.asInterchange()) == .added {
+            if depth != .shallow {
+                let items: Set<CDRecord> = object.contents ?? []
+                let objects = items.union(object.containedBy ?? [])
+                objects.forEach { add($0, depth: depth.nextDepth) }
+            }
+        }
     }
 }
 
@@ -37,27 +42,12 @@ class ExportController: ObservableObject {
     }
     
     func export(_ root: CDRecord) throws -> Data {
-        let records = InterchangeRecords()
-        records.add(root, deep: true)
+        let container = InterchangeContainer()
+        container.add(root, depth: .shallow)
 
-        let wrapper: [String:Any] = [
-            "type": [
-                "format": "com.elegantchaos.bookish.list",
-                "version": 1,
-                "variant": "compact"
-            ],
-            "creator": [
-                "id": info.id,
-                "version": info.version.asString,
-                "build": info.build,
-                "commit": info.commit
-            ],
-            "content": [
-                "items": records.index,
-                "root": root.id
-            ]
-        ]
-        
-        return try JSONSerialization.data(withJSONObject: wrapper, options: [.prettyPrinted, .sortedKeys])
+        let type = InterchangeFileType("com.elegantchaos.bookish.list", version: 1)
+        let creator = InterchangeCreator(info)
+        let file = InterchangeFile(type: type, creator: creator, content: container, root: root.id)
+        return try file.encode()
     }
 }

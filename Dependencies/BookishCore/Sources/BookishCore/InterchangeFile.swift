@@ -61,7 +61,7 @@ public struct InterchangeFile {
         }
     }
     
-    func encode() throws -> Data {
+    public func encode() throws -> Data {
         let encoder = JSONEncoder()
         let headerData = try encoder.encode(header)
         
