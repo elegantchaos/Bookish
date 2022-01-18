@@ -68,6 +68,10 @@
 		8B918BAD278DA61800D8E41D /* RemoveLinkMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B918BAC278DA61800D8E41D /* RemoveLinkMenu.swift */; };
 		8B918BAF278DA6D000D8E41D /* RecordViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B918BAE278DA6D000D8E41D /* RecordViewer.swift */; };
 		8B92A3CA2795B03F003CA08E /* Bundles in Frameworks */ = {isa = PBXBuildFile; productRef = 8B92A3C92795B03F003CA08E /* Bundles */; };
+		8B92A3D22796E09A003CA08E /* Document22.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B92A3D02796E09A003CA08E /* Document22.png */; };
+		8B92A3D32796E09A003CA08E /* Document44.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B92A3D12796E09A003CA08E /* Document44.png */; };
+		8B92A3D62796E194003CA08E /* Document64.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B92A3D42796E194003CA08E /* Document64.png */; };
+		8B92A3D72796E194003CA08E /* Document320.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B92A3D52796E194003CA08E /* Document320.png */; };
 		8B987C9F25C047E5003D6F9F /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B987C9E25C047E5003D6F9F /* CoreDataStack.swift */; };
 		8B987CAB25C04876003D6F9F /* BookishLists.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8B987CA925C04876003D6F9F /* BookishLists.xcdatamodeld */; };
 		8B987CB525C06708003D6F9F /* LabelIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B987CB425C06708003D6F9F /* LabelIconView.swift */; };
@@ -191,6 +195,10 @@
 		8B918BAC278DA61800D8E41D /* RemoveLinkMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoveLinkMenu.swift; sourceTree = "<group>"; };
 		8B918BAE278DA6D000D8E41D /* RecordViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewer.swift; sourceTree = "<group>"; };
 		8B92A3CB2796CB46003CA08E /* Extras */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Extras; sourceTree = "<group>"; };
+		8B92A3D02796E09A003CA08E /* Document22.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Document22.png; sourceTree = "<group>"; };
+		8B92A3D12796E09A003CA08E /* Document44.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Document44.png; sourceTree = "<group>"; };
+		8B92A3D42796E194003CA08E /* Document64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Document64.png; sourceTree = "<group>"; };
+		8B92A3D52796E194003CA08E /* Document320.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Document320.png; sourceTree = "<group>"; };
 		8B987C9E25C047E5003D6F9F /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		8B987CAA25C04876003D6F9F /* BooklistLists.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BooklistLists.xcdatamodel; sourceTree = "<group>"; };
 		8B987CB425C06708003D6F9F /* LabelIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelIconView.swift; sourceTree = "<group>"; };
@@ -355,6 +363,10 @@
 		22ED67F1251E439200B0226D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				8B92A3D02796E09A003CA08E /* Document22.png */,
+				8B92A3D12796E09A003CA08E /* Document44.png */,
+				8B92A3D42796E194003CA08E /* Document64.png */,
+				8B92A3D52796E194003CA08E /* Document320.png */,
 				226F15E0251A28F600D6B12E /* PreviewContent */,
 				22ED67EC251E438200B0226D /* BookishLists.entitlements */,
 				8BE1493B25DD597B00A1DC32 /* Localizable.strings */,
@@ -664,8 +676,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B92A3D32796E09A003CA08E /* Document44.png in Resources */,
+				8B92A3D22796E09A003CA08E /* Document22.png in Resources */,
+				8B92A3D62796E194003CA08E /* Document64.png in Resources */,
 				8B1AF911274FC32C001BFB00 /* BookishImporter in Resources */,
 				8BE1493C25DD597B00A1DC32 /* Localizable.strings in Resources */,
+				8B92A3D72796E194003CA08E /* Document320.png in Resources */,
 				8B1F10D225AC971A00108A34 /* Assets.xcassets in Resources */,
 				226F15E2251A28F600D6B12E /* Preview Assets.xcassets in Resources */,
 			);
