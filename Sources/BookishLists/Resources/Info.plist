@@ -24,10 +24,21 @@
 	<false/>
 	<key>LSApplicationCategoryType</key>
 	<string>public.app-category.reference</string>
-	<key>NSCameraUsageDescription</key>
-	<string>This application uses the camera to scan barcodes.</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSExceptionDomains</key>
+		<dict>
+			<key>ecx.images-amazon.com</key>
+			<dict>
+				<key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+			</dict>
+		</dict>
+	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>This application uses the camera to scan barcodes.</string>
 	<key>NSHumanReadableCopyright</key>
 	<string>$(RT_COPYRIGHT)</string>
 	<key>UIApplicationSceneManifest</key>
@@ -60,16 +71,46 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>NSAppTransportSecurity</key>
-	<dict>
-		<key>NSExceptionDomains</key>
+	<key>CFBundleDocumentTypes</key>
+	<array>
 		<dict>
-			<key>ecx.images-amazon.com</key>
+			<key>CFBundleTypeName</key>
+			<string>Bookish Export</string>
+			<key>LSHandlerRank</key>
+			<string>Owner</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>com.elegantchaos.bookish</string>
+			</array>
+		</dict>
+	</array>
+	<key>UTExportedTypeDeclarations</key>
+	<array>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.json</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>Bookish Export</string>
+			<key>UTTypeIconFiles</key>
+			<array>
+				<string>Document</string>
+			</array>
+			<key>UTTypeIdentifier</key>
+			<string>com.elegantchaos.bookish</string>
+			<key>UTTypeTagSpecification</key>
 			<dict>
-				<key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
-				<true/>
+				<key>public.filename-extension</key>
+				<array>
+					<string>bookish</string>
+				</array>
+				<key>public.mime-type</key>
+				<array>
+					<string>application/bookish</string>
+				</array>
 			</dict>
 		</dict>
-	</dict>
+	</array>
 </dict>
 </plist>
