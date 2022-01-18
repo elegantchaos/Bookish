@@ -7,13 +7,14 @@ import SwiftUI
 import UniformTypeIdentifiers
 
 class ExportedList: ReferenceFileDocument {
+    static let bookishType = UTType("com.elegantchaos.bookish")!
     enum ExportError: Error {
         case noObject
         case noObjectInBackgroundContext
     }
     
-    static var readableContentTypes: [UTType] = [.json]
-    static var writableContentTypes: [UTType] = [.json]
+    static var readableContentTypes: [UTType] = [bookishType, .json]
+    static var writableContentTypes: [UTType] = [bookishType]
 
     var exporter: ExportController!
     var record: CDRecord?
