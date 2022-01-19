@@ -28,6 +28,7 @@
 		8B39B47B26027F35003B0C5B /* DeferredTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B39B47A26027F35003B0C5B /* DeferredTextField.swift */; };
 		8B42BE4825F7912700855D08 /* RootActionsMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B42BE4725F7912700855D08 /* RootActionsMenu.swift */; };
 		8B42BE4A25F794D800855D08 /* AddBooksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B42BE4925F794D800855D08 /* AddBooksView.swift */; };
+		8B4858A627982BFF0082F860 /* CDRecord+Interchange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4858A527982BFF0082F860 /* CDRecord+Interchange.swift */; };
 		8B57F07C25F7B989007DB517 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B57F07B25F7B989007DB517 /* AVFoundation.framework */; };
 		8B57F08625F7C0E9007DB517 /* GoogleLookupService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B57F08025F7C0E9007DB517 /* GoogleLookupService.swift */; };
 		8B57F08725F7C0E9007DB517 /* LookupManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B57F08125F7C0E9007DB517 /* LookupManager.swift */; };
@@ -160,6 +161,7 @@
 		8B39B47A26027F35003B0C5B /* DeferredTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeferredTextField.swift; sourceTree = "<group>"; };
 		8B42BE4725F7912700855D08 /* RootActionsMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootActionsMenu.swift; sourceTree = "<group>"; };
 		8B42BE4925F794D800855D08 /* AddBooksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBooksView.swift; sourceTree = "<group>"; };
+		8B4858A527982BFF0082F860 /* CDRecord+Interchange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDRecord+Interchange.swift"; sourceTree = "<group>"; };
 		8B57F07B25F7B989007DB517 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.3.sdk/System/Library/Frameworks/AVFoundation.framework; sourceTree = DEVELOPER_DIR; };
 		8B57F08025F7C0E9007DB517 /* GoogleLookupService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleLookupService.swift; sourceTree = "<group>"; };
 		8B57F08125F7C0E9007DB517 /* LookupManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LookupManager.swift; sourceTree = "<group>"; };
@@ -387,6 +389,7 @@
 				8BE53C7D2760DE2C004729B9 /* Controllers */,
 				8BED2A1725C97D29000DD7C6 /* CDProperty.swift */,
 				8B987CBA25C0671E003D6F9F /* CDRecord.swift */,
+				8B4858A527982BFF0082F860 /* CDRecord+Interchange.swift */,
 				8BB66539274D1F30002CC0E8 /* CDRecord+CoreData.swift */,
 				8BB6653C274D2D62002CC0E8 /* CDRecord+Sorting.swift */,
 				8B987C9E25C047E5003D6F9F /* CoreDataStack.swift */,
@@ -784,6 +787,7 @@
 				8B6DD26E275FB27500304468 /* UndoRedoView.swift in Sources */,
 				8B70FAA527678F9A0061A542 /* RawPropertyView.swift in Sources */,
 				8BE1493625DC178F00A1DC32 /* AllBooksView.swift in Sources */,
+				8B4858A627982BFF0082F860 /* CDRecord+Interchange.swift in Sources */,
 				8BEDD69C278EE3C000B41149 /* ExportButton.swift in Sources */,
 				8B1F10D825ACB30A00108A34 /* ListIndexView.swift in Sources */,
 				8B6DD267275E87F600304468 /* PropertyView.swift in Sources */,

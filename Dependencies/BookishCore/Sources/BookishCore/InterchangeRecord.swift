@@ -30,8 +30,8 @@ public struct InterchangeRecord {
         self.links = links
     }
     
-    public init(id: String, name: String, kind: String) {
-        self.id = InterchangeID(id: id, name: name, kind: kind)
+    public init(id: String, name: String, kind: String, checksum: Int) {
+        self.id = InterchangeID(id: id, name: name, kind: kind, checksum: checksum)
         self.properties = [:]
         self.items = []
         self.links = []

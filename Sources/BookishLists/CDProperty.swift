@@ -7,11 +7,11 @@ import CoreData
 import SwiftUI
 import SwiftUIExtensions
 
-class CDProperty: NSManagedObject {
+public class CDProperty: NSManagedObject {
     @NSManaged public var key: String
     @NSManaged fileprivate var encodedValue: Data
     
-    fileprivate var decodedProperty: Any?
+    private var decodedProperty: Any?
     
     var value: Any {
         get {
@@ -37,6 +37,11 @@ class CDProperty: NSManagedObject {
                 }
 //            }
         }
+    }
+    
+    func hashChecksum(into hasher: inout Hasher) {
+        key.hash(into: &hasher)
+        encodedValue.hash(into: &hasher)
     }
 }
 
