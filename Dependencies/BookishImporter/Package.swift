@@ -1,4 +1,4 @@
-// swift-tools-version:5.5
+// swift-tools-version:5.7
 
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 //  Created by Sam Developer on 12/01/2021.
@@ -10,7 +10,7 @@ import PackageDescription
 let package = Package(
     name: "BookishImporter",
     platforms: [
-        .macOS(.v12), .iOS(.v15)
+        .iOS(.v16), .macCatalyst(.v16)
     ],
     products: [
         .library(
