@@ -6,14 +6,25 @@
 import SwiftUIExtensions
 import SwiftUI
 
+
+extension LookupCandidate: AutoLinked {
+    public var linkView: CandidateDetailView {
+        return CandidateDetailView(candidate: self)
+    }
+    
+    public var labelView: CandidateLabelView {
+        return CandidateLabelView(candidate: self)
+    }
+}
+
 struct CandidatesView: View {
     let candidates: [LookupCandidate]
-    @Binding var selection: UUID?
+    @Binding var selection: LookupCandidate.ID?
     
     var body: some View {
         List {
             ForEach(candidates) { candidate in
-//                LinkView(candidate, selection: $selection)
+                LinkView<LookupCandidate>(candidate, selection: $selection)
             }
         }
         .listStyle(.plain)

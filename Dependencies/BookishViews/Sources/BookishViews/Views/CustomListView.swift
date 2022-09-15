@@ -112,12 +112,14 @@ struct CustomListView: View {
 
 extension CustomListView: AddLinkDelegate {
     func handleAddLink(to linked: CDRecord) {
-        if let session = linkController.session {
-            list.addToContents(linked)
-            if let role = session.role {
-                list.addRole(role, for: linked)
+        onMainQueue {
+            if let session = linkController.session {
+                list.addToContents(linked)
+                if let role = session.role {
+                    list.addRole(role, for: linked)
+                }
+                linkController.session = nil
             }
-            linkController.session = nil
         }
     }
 }

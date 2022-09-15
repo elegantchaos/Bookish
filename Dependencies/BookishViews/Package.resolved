@@ -109,6 +109,15 @@
       }
     },
     {
+      "identity" : "labelled",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/elegantchaos/Labelled.git",
+      "state" : {
+        "revision" : "9177120bfc53b55572b044c80e91b035d24db12b",
+        "version" : "1.0.8"
+      }
+    },
+    {
       "identity" : "localization",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/elegantchaos/Localization.git",

@@ -6,20 +6,10 @@
 import SwiftUI
 import SwiftUIExtensions
 
-extension LookupCandidate: AutoLinked {
-    public var linkView: some View {
-        return CandidateDetailView(candidate: self)
-    }
-    
-    public var labelView: some View {
-        return CandidateLabelView(candidate: self)
-    }
-}
-
-struct CandidateLabelView: View {
+public struct CandidateLabelView: View {
     @ObservedObject var candidate: LookupCandidate
     
-    var body: some View {
+    public var body: some View {
         HStack {
             ZStack(alignment: .bottomTrailing) {
                 if let url = candidate.image {
