@@ -126,13 +126,6 @@
 			remoteGlobalIDString = 226F15D6251A28EA00D6B12E;
 			remoteInfo = "Samedi's Crafting";
 		};
-		22F685AC251B8BC900E867CE /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 226F15CF251A28EA00D6B12E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 22F68594251B8B7D00E867CE;
-			remoteInfo = Tools;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -151,8 +144,8 @@
 		229E259A25254AED00C41777 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		22ED67E3251E424600B0226D /* BookishLists.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = BookishLists.xcconfig; sourceTree = "<group>"; };
 		22ED67EC251E438200B0226D /* BookishLists.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BookishLists.entitlements; sourceTree = "<group>"; };
-		22F68595251B8B7D00E867CE /* Tools */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Tools; sourceTree = BUILT_PRODUCTS_DIR; };
 		22F68597251B8B7D00E867CE /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		22FEE38B28D3176B00A2090E /* Info.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Info.h; sourceTree = "<group>"; };
 		8B012F4F2757D23B00FCF5DA /* FieldsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldsView.swift; sourceTree = "<group>"; };
 		8B1AF910274FC2E1001BFB00 /* BookishImporter */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = BookishImporter; path = Dependencies/BookishImporter; sourceTree = "<group>"; };
 		8B1F10D725ACB30A00108A34 /* ListIndexView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListIndexView.swift; sourceTree = "<group>"; };
@@ -324,7 +317,6 @@
 				226F15D7251A28EA00D6B12E /* Bookish Lists.app */,
 				226F15E8251A28F600D6B12E /* BookishListsTests.xctest */,
 				226F15F3251A28F600D6B12E /* BookishListsUITests.xctest */,
-				22F68595251B8B7D00E867CE /* Tools */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -374,6 +366,7 @@
 				226F15E0251A28F600D6B12E /* PreviewContent */,
 				22ED67EC251E438200B0226D /* BookishLists.entitlements */,
 				8BE1493B25DD597B00A1DC32 /* Localizable.strings */,
+				22FEE38B28D3176B00A2090E /* Info.h */,
 				22ED67E3251E424600B0226D /* BookishLists.xcconfig */,
 				226F15DE251A28F600D6B12E /* Assets.xcassets */,
 				226F15E3251A28F600D6B12E /* Info.plist */,
@@ -539,7 +532,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				22F685AD251B8BC900E867CE /* PBXTargetDependency */,
 			);
 			name = BookishLists;
 			packageProductDependencies = (
@@ -600,23 +592,6 @@
 			productReference = 226F15F3251A28F600D6B12E /* BookishListsUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
-		22F68594251B8B7D00E867CE /* Tools */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 22F68599251B8B7D00E867CE /* Build configuration list for PBXNativeTarget "Tools" */;
-			buildPhases = (
-				22F685A4251B8B9A00E867CE /* Update Build Version */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = Tools;
-			packageProductDependencies = (
-			);
-			productName = Tools;
-			productReference = 22F68595251B8B7D00E867CE /* Tools */;
-			productType = "com.apple.product-type.tool";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -636,9 +611,6 @@
 					226F15F2251A28F600D6B12E = {
 						CreatedOnToolsVersion = 12.0;
 						TestTargetID = 226F15D6251A28EA00D6B12E;
-					};
-					22F68594251B8B7D00E867CE = {
-						CreatedOnToolsVersion = 12.0;
 					};
 				};
 			};
@@ -670,7 +642,6 @@
 			projectRoot = "";
 			targets = (
 				226F15D6251A28EA00D6B12E /* BookishLists */,
-				22F68594251B8B7D00E867CE /* Tools */,
 				226F15E7251A28F600D6B12E /* BookishListsTests */,
 				226F15F2251A28F600D6B12E /* BookishListsUITests */,
 			);
@@ -708,27 +679,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		22F685A4251B8B9A00E867CE /* Update Build Version */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Update Build Version";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "source \"$PROJECT_DIR/Extras/Scripts/bootstrap-tools\"\n\"$RT\" update-build --header \"$BUILT_PRODUCTS_DIR/RTInfo.h\" --repo \"$SOURCE_ROOT\"\n";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		226F15D3251A28EA00D6B12E /* Sources */ = {
@@ -840,11 +790,6 @@
 			isa = PBXTargetDependency;
 			target = 226F15D6251A28EA00D6B12E /* BookishLists */;
 			targetProxy = 226F15F4251A28F600D6B12E /* PBXContainerItemProxy */;
-		};
-		22F685AD251B8BC900E867CE /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 22F68594251B8B7D00E867CE /* Tools */;
-			targetProxy = 22F685AC251B8BC900E867CE /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1065,38 +1010,6 @@
 			};
 			name = Release;
 		};
-		22F6859A251B8B7D00E867CE /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8BE9ADE9252B0DDA00F97D53 /* Tools.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "-";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 2H48644JM2;
-				ENABLE_HARDENED_RUNTIME = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
-				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
-				SUPPORTED_PLATFORMS = macosx;
-				SWIFT_VERSION = 5.0;
-			};
-			name = Debug;
-		};
-		22F6859B251B8B7D00E867CE /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8BE9ADE9252B0DDA00F97D53 /* Tools.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "-";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 2H48644JM2;
-				ENABLE_HARDENED_RUNTIME = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
-				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
-				SUPPORTED_PLATFORMS = macosx;
-				SWIFT_VERSION = 5.0;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1136,15 +1049,6 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		22F68599251B8B7D00E867CE /* Build configuration list for PBXNativeTarget "Tools" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				22F6859A251B8B7D00E867CE /* Debug */,
-				22F6859B251B8B7D00E867CE /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
@@ -1161,7 +1065,7 @@
 			repositoryURL = "https://github.com/elegantchaos/SwiftUIExtensions.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.3.1;
+				minimumVersion = 1.3.8;
 			};
 		};
 		8B1F110525ADF4FD00108A34 /* XCRemoteSwiftPackageReference "Logger" */ = {
@@ -1241,7 +1145,7 @@
 			repositoryURL = "https://github.com/elegantchaos/JSONRepresentable.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
+				minimumVersion = 1.0.1;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
