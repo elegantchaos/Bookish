@@ -11,33 +11,21 @@
 		226F15ED251A28F600D6B12E /* BookishListsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226F15EC251A28F600D6B12E /* BookishListsTests.swift */; };
 		226F15F8251A28F600D6B12E /* BookishListsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226F15F7251A28F600D6B12E /* BookishListsUITests.swift */; };
 		22A2989928D355D80038599F /* BookishViews in Frameworks */ = {isa = PBXBuildFile; productRef = 22A2989828D355D80038599F /* BookishViews */; };
-		22E0ECD828D362AB009A22A8 /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226F15DA251A28EA00D6B12E /* Application.swift */; };
-		8B1AF906274FBB12001BFB00 /* Expressions in Frameworks */ = {isa = PBXBuildFile; productRef = 8B1AF905274FBB12001BFB00 /* Expressions */; };
+		22E0ECD928D36769009A22A8 /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226F15DA251A28EA00D6B12E /* Application.swift */; };
 		8B1AF911274FC32C001BFB00 /* BookishImporter in Resources */ = {isa = PBXBuildFile; fileRef = 8B1AF910274FC2E1001BFB00 /* BookishImporter */; };
 		8B1F10D225AC971A00108A34 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 226F15DE251A28F600D6B12E /* Assets.xcassets */; };
-		8B1F10F725ADE46500108A34 /* SwiftUIExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 8B1F10F625ADE46500108A34 /* SwiftUIExtensions */; };
-		8B1F110725ADF4FD00108A34 /* Logger in Frameworks */ = {isa = PBXBuildFile; productRef = 8B1F110625ADF4FD00108A34 /* Logger */; };
-		8B1F112F25ADF56F00108A34 /* Localization in Frameworks */ = {isa = PBXBuildFile; productRef = 8B1F112E25ADF56F00108A34 /* Localization */; };
-		8B1F114225ADFB0D00108A34 /* ISBN in Frameworks */ = {isa = PBXBuildFile; productRef = 8B1F114125ADFB0D00108A34 /* ISBN */; };
-		8B2A7CC825AE140A0024C1A2 /* ThreadExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 8B2A7CC725AE140A0024C1A2 /* ThreadExtensions */; };
 		8B57F07C25F7B989007DB517 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B57F07B25F7B989007DB517 /* AVFoundation.framework */; };
-		8B57F09025F7C6BD007DB517 /* CaptureView in Frameworks */ = {isa = PBXBuildFile; productRef = 8B57F08F25F7C6BD007DB517 /* CaptureView */; };
 		8B58C7B425B71528007F6B70 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B58C7B325B71528007F6B70 /* CloudKit.framework */; };
-		8B6CAAC8252B2C8B00FF2035 /* KeyValueStore in Frameworks */ = {isa = PBXBuildFile; productRef = 8B6CAAC7252B2C8B00FF2035 /* KeyValueStore */; };
-		8B80467325B8788900698F28 /* SheetController in Frameworks */ = {isa = PBXBuildFile; productRef = 8B80467225B8788900698F28 /* SheetController */; };
 		8B80467D25B87C4A00698F28 /* LoggerUI in Frameworks */ = {isa = PBXBuildFile; productRef = 8B80467C25B87C4A00698F28 /* LoggerUI */; };
 		8B8A88E5274FCAD700EA2FAA /* BookishImporter in Frameworks */ = {isa = PBXBuildFile; productRef = 8B8A88E4274FCAD700EA2FAA /* BookishImporter */; };
 		8B8A88E7274FCADB00EA2FAA /* BookishImporterSamples in Frameworks */ = {isa = PBXBuildFile; productRef = 8B8A88E6274FCADB00EA2FAA /* BookishImporterSamples */; };
 		8B8A88E9274FCC1A00EA2FAA /* BookishCleanup in Frameworks */ = {isa = PBXBuildFile; productRef = 8B8A88E8274FCC1A00EA2FAA /* BookishCleanup */; };
-		8B92A3CA2795B03F003CA08E /* Bundles in Frameworks */ = {isa = PBXBuildFile; productRef = 8B92A3C92795B03F003CA08E /* Bundles */; };
 		8B92A3D22796E09A003CA08E /* Document22.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B92A3D02796E09A003CA08E /* Document22.png */; };
 		8B92A3D32796E09A003CA08E /* Document44.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B92A3D12796E09A003CA08E /* Document44.png */; };
 		8B92A3D62796E194003CA08E /* Document64.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B92A3D42796E194003CA08E /* Document64.png */; };
 		8B92A3D72796E194003CA08E /* Document320.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B92A3D52796E194003CA08E /* Document320.png */; };
 		8B987CAB25C04876003D6F9F /* BookishLists.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8B987CA925C04876003D6F9F /* BookishLists.xcdatamodeld */; };
 		8BE1493C25DD597B00A1DC32 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8BE1493B25DD597B00A1DC32 /* Localizable.strings */; };
-		8BED2A2425CAC0D1000DD7C6 /* Images in Frameworks */ = {isa = PBXBuildFile; productRef = 8BED2A2325CAC0D1000DD7C6 /* Images */; };
-		8BEDD6A5278F3B9B00B41149 /* JSONRepresentable in Frameworks */ = {isa = PBXBuildFile; productRef = 8BEDD6A4278F3B9B00B41149 /* JSONRepresentable */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,25 +83,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8B92A3CA2795B03F003CA08E /* Bundles in Frameworks */,
 				8B8A88E5274FCAD700EA2FAA /* BookishImporter in Frameworks */,
 				8B57F07C25F7B989007DB517 /* AVFoundation.framework in Frameworks */,
 				8B8A88E7274FCADB00EA2FAA /* BookishImporterSamples in Frameworks */,
 				22A2989928D355D80038599F /* BookishViews in Frameworks */,
-				8BED2A2425CAC0D1000DD7C6 /* Images in Frameworks */,
-				8B1F110725ADF4FD00108A34 /* Logger in Frameworks */,
 				8B8A88E9274FCC1A00EA2FAA /* BookishCleanup in Frameworks */,
-				8B1F112F25ADF56F00108A34 /* Localization in Frameworks */,
-				8B2A7CC825AE140A0024C1A2 /* ThreadExtensions in Frameworks */,
 				8B58C7B425B71528007F6B70 /* CloudKit.framework in Frameworks */,
-				8B1F114225ADFB0D00108A34 /* ISBN in Frameworks */,
-				8BEDD6A5278F3B9B00B41149 /* JSONRepresentable in Frameworks */,
-				8B1AF906274FBB12001BFB00 /* Expressions in Frameworks */,
-				8B1F10F725ADE46500108A34 /* SwiftUIExtensions in Frameworks */,
-				8B57F09025F7C6BD007DB517 /* CaptureView in Frameworks */,
-				8B80467325B8788900698F28 /* SheetController in Frameworks */,
 				8B80467D25B87C4A00698F28 /* LoggerUI in Frameworks */,
-				8B6CAAC8252B2C8B00FF2035 /* KeyValueStore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -275,22 +251,10 @@
 			);
 			name = BookishLists;
 			packageProductDependencies = (
-				8B6CAAC7252B2C8B00FF2035 /* KeyValueStore */,
-				8B1F10F625ADE46500108A34 /* SwiftUIExtensions */,
-				8B1F110625ADF4FD00108A34 /* Logger */,
-				8B1F112E25ADF56F00108A34 /* Localization */,
-				8B1F114125ADFB0D00108A34 /* ISBN */,
-				8B2A7CC725AE140A0024C1A2 /* ThreadExtensions */,
-				8B80467225B8788900698F28 /* SheetController */,
 				8B80467C25B87C4A00698F28 /* LoggerUI */,
-				8BED2A2325CAC0D1000DD7C6 /* Images */,
-				8B57F08F25F7C6BD007DB517 /* CaptureView */,
-				8B1AF905274FBB12001BFB00 /* Expressions */,
 				8B8A88E4274FCAD700EA2FAA /* BookishImporter */,
 				8B8A88E6274FCADB00EA2FAA /* BookishImporterSamples */,
 				8B8A88E8274FCC1A00EA2FAA /* BookishCleanup */,
-				8BEDD6A4278F3B9B00B41149 /* JSONRepresentable */,
-				8B92A3C92795B03F003CA08E /* Bundles */,
 				22A2989828D355D80038599F /* BookishViews */,
 			);
 			productName = "Samedi's Crafting";
@@ -365,18 +329,6 @@
 			);
 			mainGroup = 226F15CE251A28EA00D6B12E;
 			packageReferences = (
-				8B6CAAC6252B2C8B00FF2035 /* XCRemoteSwiftPackageReference "KeyValueStore" */,
-				8B1F10F525ADE46500108A34 /* XCRemoteSwiftPackageReference "SwiftUIExtensions" */,
-				8B1F110525ADF4FD00108A34 /* XCRemoteSwiftPackageReference "Logger" */,
-				8B1F112D25ADF56F00108A34 /* XCRemoteSwiftPackageReference "Localization" */,
-				8B1F114025ADFB0D00108A34 /* XCRemoteSwiftPackageReference "ISBN" */,
-				8B2A7CC625AE140A0024C1A2 /* XCRemoteSwiftPackageReference "ThreadExtensions" */,
-				8B80467125B8788900698F28 /* XCRemoteSwiftPackageReference "SheetController" */,
-				8BED2A2225CAC0D1000DD7C6 /* XCRemoteSwiftPackageReference "Images" */,
-				8B57F08E25F7C6BD007DB517 /* XCRemoteSwiftPackageReference "CaptureView" */,
-				8B1AF904274FBB12001BFB00 /* XCRemoteSwiftPackageReference "Expressions" */,
-				8BEDD6A3278F3B9B00B41149 /* XCRemoteSwiftPackageReference "JSONRepresentable" */,
-				8B92A3C82795B03F003CA08E /* XCRemoteSwiftPackageReference "Bundles" */,
 			);
 			productRefGroup = 226F15D8251A28EA00D6B12E /* Products */;
 			projectDirPath = "";
@@ -426,7 +378,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				22E0ECD828D362AB009A22A8 /* Application.swift in Sources */,
+				22E0ECD928D36769009A22A8 /* Application.swift in Sources */,
 				8B987CAB25C04876003D6F9F /* BookishLists.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -720,154 +672,10 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCRemoteSwiftPackageReference section */
-		8B1AF904274FBB12001BFB00 /* XCRemoteSwiftPackageReference "Expressions" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/elegantchaos/Expressions";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
-			};
-		};
-		8B1F10F525ADE46500108A34 /* XCRemoteSwiftPackageReference "SwiftUIExtensions" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/elegantchaos/SwiftUIExtensions.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.3.8;
-			};
-		};
-		8B1F110525ADF4FD00108A34 /* XCRemoteSwiftPackageReference "Logger" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/elegantchaos/Logger.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.6.0;
-			};
-		};
-		8B1F112D25ADF56F00108A34 /* XCRemoteSwiftPackageReference "Localization" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/elegantchaos/Localization.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.3;
-			};
-		};
-		8B1F114025ADFB0D00108A34 /* XCRemoteSwiftPackageReference "ISBN" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/elegantchaos/ISBN.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.2;
-			};
-		};
-		8B2A7CC625AE140A0024C1A2 /* XCRemoteSwiftPackageReference "ThreadExtensions" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/elegantchaos/ThreadExtensions.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
-			};
-		};
-		8B57F08E25F7C6BD007DB517 /* XCRemoteSwiftPackageReference "CaptureView" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/elegantchaos/CaptureView.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.3;
-			};
-		};
-		8B6CAAC6252B2C8B00FF2035 /* XCRemoteSwiftPackageReference "KeyValueStore" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/elegantchaos/KeyValueStore.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
-			};
-		};
-		8B80467125B8788900698F28 /* XCRemoteSwiftPackageReference "SheetController" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/elegantchaos/SheetController.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.1;
-			};
-		};
-		8B92A3C82795B03F003CA08E /* XCRemoteSwiftPackageReference "Bundles" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/elegantchaos/Bundles";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
-			};
-		};
-		8BED2A2225CAC0D1000DD7C6 /* XCRemoteSwiftPackageReference "Images" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/elegantchaos/Images.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.1.0;
-			};
-		};
-		8BEDD6A3278F3B9B00B41149 /* XCRemoteSwiftPackageReference "JSONRepresentable" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/elegantchaos/JSONRepresentable.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.1;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
 /* Begin XCSwiftPackageProductDependency section */
 		22A2989828D355D80038599F /* BookishViews */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = BookishViews;
-		};
-		8B1AF905274FBB12001BFB00 /* Expressions */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8B1AF904274FBB12001BFB00 /* XCRemoteSwiftPackageReference "Expressions" */;
-			productName = Expressions;
-		};
-		8B1F10F625ADE46500108A34 /* SwiftUIExtensions */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8B1F10F525ADE46500108A34 /* XCRemoteSwiftPackageReference "SwiftUIExtensions" */;
-			productName = SwiftUIExtensions;
-		};
-		8B1F110625ADF4FD00108A34 /* Logger */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8B1F110525ADF4FD00108A34 /* XCRemoteSwiftPackageReference "Logger" */;
-			productName = Logger;
-		};
-		8B1F112E25ADF56F00108A34 /* Localization */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8B1F112D25ADF56F00108A34 /* XCRemoteSwiftPackageReference "Localization" */;
-			productName = Localization;
-		};
-		8B1F114125ADFB0D00108A34 /* ISBN */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8B1F114025ADFB0D00108A34 /* XCRemoteSwiftPackageReference "ISBN" */;
-			productName = ISBN;
-		};
-		8B2A7CC725AE140A0024C1A2 /* ThreadExtensions */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8B2A7CC625AE140A0024C1A2 /* XCRemoteSwiftPackageReference "ThreadExtensions" */;
-			productName = ThreadExtensions;
-		};
-		8B57F08F25F7C6BD007DB517 /* CaptureView */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8B57F08E25F7C6BD007DB517 /* XCRemoteSwiftPackageReference "CaptureView" */;
-			productName = CaptureView;
-		};
-		8B6CAAC7252B2C8B00FF2035 /* KeyValueStore */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8B6CAAC6252B2C8B00FF2035 /* XCRemoteSwiftPackageReference "KeyValueStore" */;
-			productName = KeyValueStore;
-		};
-		8B80467225B8788900698F28 /* SheetController */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8B80467125B8788900698F28 /* XCRemoteSwiftPackageReference "SheetController" */;
-			productName = SheetController;
 		};
 		8B80467C25B87C4A00698F28 /* LoggerUI */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -884,21 +692,6 @@
 		8B8A88E8274FCC1A00EA2FAA /* BookishCleanup */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = BookishCleanup;
-		};
-		8B92A3C92795B03F003CA08E /* Bundles */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8B92A3C82795B03F003CA08E /* XCRemoteSwiftPackageReference "Bundles" */;
-			productName = Bundles;
-		};
-		8BED2A2325CAC0D1000DD7C6 /* Images */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8BED2A2225CAC0D1000DD7C6 /* XCRemoteSwiftPackageReference "Images" */;
-			productName = Images;
-		};
-		8BEDD6A4278F3B9B00B41149 /* JSONRepresentable */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8BEDD6A3278F3B9B00B41149 /* XCRemoteSwiftPackageReference "JSONRepresentable" */;
-			productName = JSONRepresentable;
 		};
 /* End XCSwiftPackageProductDependency section */
 

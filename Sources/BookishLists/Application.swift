@@ -58,7 +58,7 @@ struct Application: App {
     
     var body: some Scene {
             return WindowGroup {
-                ContentView()
+                RootView()
                     .environment(\.managedObjectContext, modelController.stack.viewContext)
                     .environmentObject(modelController)
                     .environmentObject(sheetController)
