@@ -13,6 +13,7 @@
 		226F15ED251A28F600D6B12E /* BookishListsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226F15EC251A28F600D6B12E /* BookishListsTests.swift */; };
 		226F15F8251A28F600D6B12E /* BookishListsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226F15F7251A28F600D6B12E /* BookishListsUITests.swift */; };
 		229E259B25254AED00C41777 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E259A25254AED00C41777 /* ContentView.swift */; };
+		22FEE39828D33C3A00A2090E /* LabelWithFixedWidthIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FEE39728D33C3A00A2090E /* LabelWithFixedWidthIcon.swift */; };
 		8B012F502757D23B00FCF5DA /* FieldsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B012F4F2757D23B00FCF5DA /* FieldsView.swift */; };
 		8B1AF906274FBB12001BFB00 /* Expressions in Frameworks */ = {isa = PBXBuildFile; productRef = 8B1AF905274FBB12001BFB00 /* Expressions */; };
 		8B1AF911274FC32C001BFB00 /* BookishImporter in Resources */ = {isa = PBXBuildFile; fileRef = 8B1AF910274FC2E1001BFB00 /* BookishImporter */; };
@@ -146,6 +147,7 @@
 		22ED67EC251E438200B0226D /* BookishLists.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BookishLists.entitlements; sourceTree = "<group>"; };
 		22F68597251B8B7D00E867CE /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		22FEE38B28D3176B00A2090E /* Info.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Info.h; sourceTree = "<group>"; };
+		22FEE39728D33C3A00A2090E /* LabelWithFixedWidthIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelWithFixedWidthIcon.swift; sourceTree = "<group>"; };
 		8B012F4F2757D23B00FCF5DA /* FieldsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldsView.swift; sourceTree = "<group>"; };
 		8B1AF910274FC2E1001BFB00 /* BookishImporter */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = BookishImporter; path = Dependencies/BookishImporter; sourceTree = "<group>"; };
 		8B1F10D725ACB30A00108A34 /* ListIndexView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListIndexView.swift; sourceTree = "<group>"; };
@@ -494,6 +496,7 @@
 				8B012F4F2757D23B00FCF5DA /* FieldsView.swift */,
 				8B70FAA62768B6A70061A542 /* FieldView.swift */,
 				8B987CB425C06708003D6F9F /* LabelIconView.swift */,
+				22FEE39728D33C3A00A2090E /* LabelWithFixedWidthIcon.swift */,
 				8B6DD266275E87F600304468 /* PropertyView.swift */,
 				8B70FAA427678F9A0061A542 /* RawPropertyView.swift */,
 				8BB6653E274D3560002CC0E8 /* RecordLabel.swift */,
@@ -727,6 +730,7 @@
 				8BEDD69E278EE49700B41149 /* ExportController.swift in Sources */,
 				8BCF6B48275A29000023DBE3 /* CandidatesView.swift in Sources */,
 				8BE1494125DD7D7D00A1DC32 /* FieldList.swift in Sources */,
+				22FEE39828D33C3A00A2090E /* LabelWithFixedWidthIcon.swift in Sources */,
 				8B70FA9F276781DF0061A542 /* AddLinkButton.swift in Sources */,
 				8B987C9F25C047E5003D6F9F /* CoreDataStack.swift in Sources */,
 				8BEDD698278DE9D400B41149 /* RawPropertiesView.swift in Sources */,

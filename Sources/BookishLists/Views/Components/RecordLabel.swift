@@ -32,12 +32,15 @@ struct RecordLabel: View {
                 }
             }
         } icon: {
-            if let url = record.imageURL {
-                LabelIconView(url: url, placeholder: record.iconName)
-            } else {
-                Image(systemName: record.iconName)
-                    .frame(minWidth: 20.0)
+            HStack {
+                Spacer()
+                if let url = record.imageURL {
+                    LabelIconView(url: url, placeholder: record.iconName)
+                } else {
+                    Image(systemName: record.iconName)
+                }
             }
+            .frame(width: .labelIconWidth)
         }
     }
     

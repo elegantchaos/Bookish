@@ -5,6 +5,7 @@
 
 import SwiftUI
 
+
 struct PropertyView<Content>: View where Content: View {
     let label: String
     let icon: String
@@ -29,14 +30,14 @@ struct PropertyView<Content>: View where Content: View {
             switch layout {
                 case .inline:
                     HStack {
-                        Label(label, systemImage: icon)
+                        LabelWithFixedWidthIcon(label, systemImage: icon)
                         Spacer()
                         content()
                     }
 
                 case .below:
                     HStack {
-                        Label(label, systemImage: icon)
+                        LabelWithFixedWidthIcon(label, systemImage: icon)
                         Spacer()
                     }
                     .padding(.top)
