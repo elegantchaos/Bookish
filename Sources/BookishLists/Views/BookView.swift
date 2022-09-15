@@ -73,7 +73,7 @@ struct BookView: View {
         .navigationTitle(book.name)
         .toolbar {
             ToolbarItem(placement: .principal) {
-                VStack(alignment: .center) {
+                VStack(alignment: .center, spacing: 0.0) {
                     DeferredTextField(label: "Name", text: $book.name)
                         .font(.headline)
                     
