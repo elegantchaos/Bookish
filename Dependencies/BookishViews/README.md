@@ -34,9 +34,9 @@ Each property consists of a key, and a jsonEncoded value.
 
 ### Relationships
 
-Records are linked to other records with relationships. 
+Records are linked to other records with relationships, and form a graph.
 
-This is a many-to-many relationship, as a record be contained by more than one other record.
+This is a many-to-many relationship, as a record be contained by more than one other record. Cycles are allowed.
 
 The `contents` property represents the records that this record "contains".
 
@@ -44,7 +44,7 @@ The `containedBy` property represents the records that "contain" this record.
 
 ("contained" may be the wrong concept here - "linked" would be better).
 
-One record can only link to another record _once_. 
+Any record can only link to another record _once_. 
  
 ## Representing Relationships
 
@@ -72,6 +72,23 @@ Book Record
     Publisher Record
 ```
 
+### Complex List
+
+Some lists need to associate some data with each entry, or may need multiple entries to the same record.
+
+For example, a Reading List needs to associate a date with each book, and might contain the same book twice if the user has read it twice.
+
+This can be achieved using an intermediate Record for each entry.
+
+```
+Reading List Record
+  Entry Record 1(date: 12/10/21)
+    Book Record 1
+  Entry Record 2 (date: 14/02/22)
+    Book Record 2
+  Entry Record 3 (date: 05/04/22)
+    Book Record 1
+```
 
 
 
