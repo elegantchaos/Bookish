@@ -3,8 +3,10 @@
 //  All code (c) 2022 - present day, Elegant Chaos Limited.
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
+import Logger
 import SwiftUI
 
+let linkMenuChannel = Channel("Link Menu")
 
 struct RemoveLinkMenu: View {
     @Environment(\.recordViewer) var viewer: RecordViewer?
@@ -50,8 +52,8 @@ struct RemoveLinkMenu: View {
         
         guard links.count > 0 else { return nil }
         
-        print(debug)
-        print(links.map({ $0.name }))
+        linkMenuChannel.log(debug)
+        linkMenuChannel.log(links.map({ $0.name }))
         return (links, label)
     }
 }
