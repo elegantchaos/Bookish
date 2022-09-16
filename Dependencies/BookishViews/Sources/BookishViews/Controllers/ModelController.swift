@@ -115,6 +115,7 @@ public class ModelController: ObservableObject {
         case publishers = "root.publishers"
         case series = "root.series"
         case lists = "root.lists"
+        case roles = "root.roles"
         
         var id: String { rawValue }
         
