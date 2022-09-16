@@ -45,7 +45,7 @@ extension CDRecord {
         let roleID = roleID(role)
         if let roleRecord = findChildWithID(roleID, kind: .roleList) {
             // remove record from the list
-            roleRecord.removeFromContents(self)
+            roleRecord.removeFromContents(record)
             
             // if it's empty, remove the list too
             if roleRecord.contents?.count == 0 {
