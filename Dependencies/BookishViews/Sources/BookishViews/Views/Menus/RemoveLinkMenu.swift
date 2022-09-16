@@ -76,7 +76,7 @@ private struct RoleItemsView: View {
     let labelRecord: CDRecord
     
     var body: some View {
-        let roles = containingRecord.sortedRoles(for: linkedRecord)
+        let roles = containingRecord.roleNames(for: linkedRecord).sorted()
         return ForEach(roles, id: \.self) { role in
             Button(action: { handleRemoveLink(of: linkedRecord, from: containingRecord, as: role) }) {
                 RecordLabel(record: labelRecord, nameMode: .roleInline(role))
@@ -85,7 +85,7 @@ private struct RoleItemsView: View {
     }
 
     func handleRemoveLink(of record: CDRecord, from container: CDRecord, as role: String) {
-        if container.roles(for: record).count == 1 {
+        if container.roleNames(for: record).count == 1 {
             record.removeFromContents(container)
         }
         container.removeRole(role, of: record)
