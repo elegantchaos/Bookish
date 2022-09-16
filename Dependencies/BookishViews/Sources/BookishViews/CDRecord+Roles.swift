@@ -4,6 +4,7 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 import Foundation
+import ThreadExtensions
 
 extension CDRecord {
     
@@ -35,21 +36,34 @@ extension CDRecord {
             created.name = role
         }
 
-        // add the record to the list
-        roleRecord.addToContents(record)
+        // add the record to the list if necessary
+        // we flag that this object will change, even though in fact it doesn't
+        // because the roleRecord changes and views looking at this record might need
+        // refreshing as a result
+        if !roleRecord.contains(record) {
+            onMainQueue {
+                self.objectWillChange.send()
+            }
+            roleRecord.addToContents(record)
+        }
+        
     }
 
     /// Remove a given role for another record from this record.
     func removeRole(_ role: String, of record: CDRecord) {
         // find the list for the given role
         let roleID = roleID(role)
-        if let roleRecord = findChildWithID(roleID, kind: .roleList) {
+        if let roleRecord = findChildWithID(roleID, kind: .roleList), roleRecord.contains(record) {
+            onMainQueue {
+                self.objectWillChange.send()
+            }
+
             // remove record from the list
             roleRecord.removeFromContents(record)
             
             // if it's empty, remove the list too
             if roleRecord.contents?.count == 0 {
-                removeFromContents(roleRecord)
+                managedObjectContext!.delete(roleRecord)
             }
         }
     }
