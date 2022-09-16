@@ -2,6 +2,181 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <array>
+<dict>
+		<key>actorsCompositeString</key>
+		<string></string>
+		<key>amazonLastLookupDate</key>
+		<date>2014-12-06T15:02:15Z</date>
+		<key>amazonLastPricesLookupDate</key>
+		<date>2014-12-06T15:02:15Z</date>
+		<key>amazonLastSynopsesLookupDate</key>
+		<date>2014-12-06T15:02:15Z</date>
+		<key>amazonProductGroup</key>
+		<string>eBooks</string>
+		<key>asin</key>
+		<string>B00GTB3INA</string>
+		<key>associatedURL</key>
+		<string></string>
+		<key>audienceRecommendedAgeSingularString</key>
+		<string></string>
+		<key>boxHeightInInches</key>
+		<real>0.0</real>
+		<key>boxLengthInInches</key>
+		<real>0.0</real>
+		<key>boxWeightInPounds</key>
+		<real>0.0</real>
+		<key>boxWidthInInches</key>
+		<real>0.0</real>
+		<key>buyPrice</key>
+		<string></string>
+		<key>cinematographersCompositeString</key>
+		<string></string>
+		<key>composersCompositeString</key>
+		<string></string>
+		<key>conditionSingularString</key>
+		<string></string>
+		<key>conductorsCompositeString</key>
+		<string></string>
+		<key>countryCode</key>
+		<string>gb</string>
+		<key>coverImageColorsCompositeString</key>
+		<string>purple
+black
+dark purple
+blue
+dark blue
+navy blue
+grey
+light blue
+dark green
+brown
+navy
+dark brown
+sky blue
+teal
+green
+lavender</string>
+		<key>coverImageDominantColorRGBA</key>
+		<integer>-16382201</integer>
+		<key>coverImageEdgeDominantColorRGBA</key>
+		<integer>-16382201</integer>
+		<key>coverImageIsCustom</key>
+		<integer>0</integer>
+		<key>coverImageLargeURLString</key>
+		<string>http://ecx.images-amazon.com/images/I/514Z%2BeEIK4L.jpg</string>
+		<key>coverImageLargestHeightInPixels</key>
+		<integer>500</integer>
+		<key>coverImageLargestWidthInPixels</key>
+		<integer>333</integer>
+		<key>coverImageMediumURLString</key>
+		<string>http://ecx.images-amazon.com/images/I/514Z%2BeEIK4L._SL160_.jpg</string>
+		<key>coverImageNormalizedCornerRadiusLowerLeft</key>
+		<real>0.0011330879954719317</real>
+		<key>coverImageNormalizedCornerRadiusLowerRight</key>
+		<real>0.001</real>
+		<key>coverImageNormalizedCornerRadiusUpperLeft</key>
+		<real>0.001</real>
+		<key>coverImageNormalizedCornerRadiusUpperRight</key>
+		<real>0.0017386499255364928</real>
+		<key>coverImageSmallURLString</key>
+		<string>http://ecx.images-amazon.com/images/I/514Z%2BeEIK4L._SL75_.jpg</string>
+		<key>creationDate</key>
+		<date>2014-12-06T15:02:13Z</date>
+		<key>creatorsCompositeString</key>
+		<string>Jane Fancher
+CJ Cherryh</string>
+		<key>currentValue</key>
+		<string></string>
+		<key>deweyDecimal</key>
+		<string></string>
+		<key>ean</key>
+		<string></string>
+		<key>editionsCompositeString</key>
+		<string>1</string>
+		<key>explicitPhysicalFormat</key>
+		<string></string>
+		<key>featuresCompositeString</key>
+		<string></string>
+		<key>foreignUUIDString</key>
+		<string></string>
+		<key>formatSingularString</key>
+		<string>Kindle Edition</string>
+		<key>genresCompositeString</key>
+		<string>Fiction
+Romance
+Science Fiction &amp; Fantasy
+Kindle eBooks</string>
+		<key>hasExperienced</key>
+		<integer>0</integer>
+		<key>illustratorsCompositeString</key>
+		<string>Jane Fancher</string>
+		<key>isSigned</key>
+		<integer>0</integer>
+		<key>isbn</key>
+		<string></string>
+		<key>key</key>
+		<string></string>
+		<key>languagesCompositeString</key>
+		<string>English (Published)</string>
+		<key>lastModificationDate</key>
+		<date>2014-12-06T15:02:13Z</date>
+		<key>libraryOfCongressCallNumber</key>
+		<string></string>
+		<key>locationSingularString</key>
+		<string></string>
+		<key>maximumPlayers</key>
+		<integer>0</integer>
+		<key>minimumPlayers</key>
+		<integer>0</integer>
+		<key>minutes</key>
+		<integer>0</integer>
+		<key>netRating</key>
+		<real>0.0</real>
+		<key>notes</key>
+		<string></string>
+		<key>numberInSeries</key>
+		<integer>0</integer>
+		<key>numberOfMedia</key>
+		<integer>1</integer>
+		<key>ownerSingularString</key>
+		<string></string>
+		<key>pages</key>
+		<integer>629</integer>
+		<key>platformsCompositeString</key>
+		<string></string>
+		<key>price</key>
+		<string></string>
+		<key>privateCollection</key>
+		<integer>0</integer>
+		<key>publishDate</key>
+		<date>2013-11-20T00:00:00Z</date>
+		<key>publishersCompositeString</key>
+		<string>Closed Circle Publications</string>
+		<key>purchaseDate</key>
+		<date>2014-12-06T15:02:13Z</date>
+		<key>rare</key>
+		<integer>0</integer>
+		<key>rating</key>
+		<real>0.0</real>
+		<key>screenwritersCompositeString</key>
+		<string></string>
+		<key>serialNumber</key>
+		<string></string>
+		<key>seriesSingularString</key>
+		<string></string>
+		<key>subtitle</key>
+		<string></string>
+		<key>title</key>
+		<string>'NetWalkers 3: NeXus</string>
+		<key>tracksCompositeString</key>
+		<string></string>
+		<key>type</key>
+		<string>Book</string>
+		<key>used</key>
+		<integer>0</integer>
+		<key>uuidString</key>
+		<string>E9024499-1B8D-4321-B3EB-3AE1C6E3304F</string>
+	</dict>
 	<dict>
 		<key>actorsCompositeString</key>
 		<string></string>
