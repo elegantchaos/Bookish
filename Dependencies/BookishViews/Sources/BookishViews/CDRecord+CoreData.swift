@@ -28,17 +28,26 @@ extension CDRecord {
 
 extension  CDRecord {
     @objc(addContentsObject:)
-    @NSManaged public func addToContents(_ value: CDRecord)
+    @NSManaged public func addToContents(_ record: CDRecord)
 
     @objc(removeContentsObject:)
-    @NSManaged public func removeFromContents(_ value: CDRecord)
+    @NSManaged public func removeFromContents(_ record: CDRecord)
 
     @objc(addContents:)
-    @NSManaged public func addToContents(_ values: NSSet)
+    @NSManaged public func addToContents(_ records: NSSet)
 
     @objc(removeContents:)
-    @NSManaged public func removeFromContents(_ values: NSSet)
+    @NSManaged public func removeFromContents(_ records: NSSet)
 
+    func contains(_ value: CDRecord) -> Bool {
+        guard let contents else { return false }
+        return contents.contains(value)
+    }
+    
+    func containedBy(_ value: CDRecord) -> Bool {
+        guard let containedBy else { return false }
+        return containedBy.contains(value)
+    }
 }
 
 // MARK: Property Records
