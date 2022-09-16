@@ -19,10 +19,11 @@ class CDRecord: NSManagedObject, Identifiable {
         case group
         case list
         case book
-        case personRole
+        case role
         case person
         case publisher
         case series
+        case entry
         case importSession
     }
     
@@ -138,38 +139,6 @@ class CDRecord: NSManagedObject, Identifiable {
     }
 }
 
-
-extension CDRecord {
-    func addRole(_ role: String, for record: CDRecord) {
-        let key = "\(BookKey.linkRoles.rawValue).\(record.id)"
-        var roles: Set<String> = Set(array(forKey: key) ?? [])
-        roles.insert(role)
-        set(Array(roles), forKey: key)
-    }
-
-    func removeRole(_ role: String, of record: CDRecord) {
-        let key = "\(BookKey.linkRoles.rawValue).\(record.id)"
-        var roles: Set<String> = Set(array(forKey: key) ?? [])
-        roles.remove(role)
-        set(Array(roles), forKey: key)
-    }
-    
-    func roles(for record: CDRecord) -> Set<String> {
-        let key = "\(BookKey.linkRoles.rawValue).\(record.id)"
-        let roles: Set<String> = Set(array(forKey: key) ?? [record.defaultRole])
-        return roles
-    }
-
-    func sortedRoles(for record: CDRecord) -> [String] {
-        let key = "\(BookKey.linkRoles.rawValue).\(record.id)"
-        let roles: [String] = array(forKey: key) ?? [record.defaultRole]
-        return roles.sorted()
-    }
-
-    var defaultRole: String {
-        return kind.defaultRole
-    }
-}
 
 // MARK: Properties
 

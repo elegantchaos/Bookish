@@ -34,15 +34,12 @@ struct BookView: View {
                         
                         DisclosureGroup("Links", isExpanded: $showLinks) {
                             LazyVStack(alignment: .leading, spacing: 8.0) {
-                                if let contained = book.containedBy?.sortedByName {
-                                    ForEach(contained) { item in
-                                        let roles = book.sortedRoles(for: item)
-                                        ForEach(roles, id: \.self) { role in
-                                            HStack {
-                                                RecordLink(item, nameMode: .role(role), selection: $selection)
-                                                    .foregroundColor(.primary)
-                                                Spacer()
-                                            }
+                                if let entries = book.roleEntries() {
+                                    ForEach(entries) { entry in
+                                        HStack {
+                                            RecordLink(entry.record, nameMode: .role(entry.role), selection: $selection)
+                                                .foregroundColor(.primary)
+                                            Spacer()
                                         }
                                     }
                                 }

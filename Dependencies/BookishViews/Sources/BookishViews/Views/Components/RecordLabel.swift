@@ -88,12 +88,13 @@ extension CDRecord.Kind {
             case .book:             return "book"
             case .group:            return "folder"
             case .person:           return "person"
-            case .personRole:       return "person.text.rectangle"
+            case .role:       return "person.text.rectangle"
             case .publisher:        return "building.columns"
             case .importSession: 	return "square.and.arrow.down"
             case .series:           return "books.vertical"
             case .root: 	        return "books.vertical"
             case .list:             return "books.vertical"
+            case .entry:             return "list.bullet"
         }
     }
     
