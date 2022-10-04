@@ -8,25 +8,25 @@ import SwiftUI
 struct AddLinkSessionView: View {
     struct Session {
         let kind: CDRecord.Kind
-        let role: String?
+        let role: CDRecord?
     }
     
     let session: Session
     let delegate: AddLinkDelegate
     var body: some View {
-        let role = session.role ?? session.kind.defaultRole
+        let role = session.role
         switch session.kind {
             case .book:
-                AddLinkView(BookFetchProvider.self, role: role, delegate: delegate)
+                AddLinkView(BookFetchProvider.self, kind: session.kind, delegate: delegate)
 
             case .person:
-                AddLinkView(PersonFetchProvider.self, role: role, delegate: delegate)
+                AddLinkView(PersonFetchProvider.self, kind: session.kind, delegate: delegate)
 
             case .series:
-                AddLinkView(SeriesFetchProvider.self, role: role, delegate: delegate)
+                AddLinkView(SeriesFetchProvider.self, kind: session.kind, delegate: delegate)
                 
             case .publisher:
-                AddLinkView(PublisherFetchProvider.self, role: role, delegate: delegate)
+                AddLinkView(PublisherFetchProvider.self, kind: session.kind, delegate: delegate)
                 
             default:
                 Text(String("Missing FetchProvider for \(session.kind)"))

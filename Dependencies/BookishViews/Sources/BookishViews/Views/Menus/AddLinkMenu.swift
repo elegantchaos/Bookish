@@ -18,7 +18,7 @@ struct AddLinkMenu: View {
     var body: some View {
         Menu(mode == .link ? "Add Link" : "Add Item") {
             AddLinkButton(kind: .book)
-            ForEach(model.sortedRoles, id: \.self) { role in
+            ForEach(model.sortedRoles, id: \CDRecord.id) { role in
                 AddLinkButton(kind: .person, role: role)
             }
             AddLinkButton(kind: .publisher)

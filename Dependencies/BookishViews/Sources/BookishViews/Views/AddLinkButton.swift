@@ -9,13 +9,13 @@ struct AddLinkButton: View {
     @EnvironmentObject var linkController: LinkController
     
     let kind: CDRecord.Kind
-    let role: String
+    let role: CDRecord?
     let label: String
     
-    init(kind: CDRecord.Kind, role: String? = nil) {
+    init(kind: CDRecord.Kind, role: CDRecord? = nil) {
         self.kind = kind
-        self.role = role ?? kind.defaultRole
-        self.label = NSLocalizedString("role.\(self.role)", comment: "")
+        self.role = role
+        self.label = role?.name ?? "\(kind)"
     }
     
     var body: some View {

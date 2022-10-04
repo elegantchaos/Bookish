@@ -141,8 +141,15 @@ public class ModelController: ObservableObject {
                     created.kind = .root
                     created.name = list.label
                     
-                    if list == .lists {
-                        self.makeDefaultLists(in: created, context: context)
+                    switch list {
+                        case .lists:
+                            self.makeDefaultLists(in: created, context: context)
+                            
+                        case .roles:
+                            self.makeDefaultRoles(in: created, context: context)
+                            
+                        default:
+                            break
                     }
                 }
             }
@@ -172,6 +179,35 @@ public class ModelController: ObservableObject {
         }
     }
     
+    
+    var roles: [CDRecord] {
+        return rootList(.roles, in: stack.viewContext).childredWithKind(.role)
+    }
+    
+    var sortedRoles: [CDRecord] {
+        return roles.sortedByName
+    }
+    
+    func role(_ role: String, in context: NSManagedObjectContext) -> CDRecord {
+        let id = "role.\(role)"
+        guard let record = CDRecord.findWithID(id, in: context) else {
+            fatalError("missing role \(role)")
+        }
+
+        return record
+    }
+
+    func makeDefaultRoles(in container: CDRecord, context: NSManagedObjectContext) {
+        let roles = ["author", "editor", "illustrator", "collaborator", "reviewer"]
+        for role in roles {
+            let list = CDRecord.make(kind: .role, in: context)
+            let id = "role.\(role)"
+            list.id = id
+            list.name = id.localized
+            container.add(list)
+        }
+    }
+    
     func makeDefaultFields() -> FieldList {
         let list = FieldList()
         list.addField(Field(.description, kind: .paragraph, layout: .belowNoLabel))
@@ -186,11 +222,6 @@ public class ModelController: ObservableObject {
         return list
     }
     
-    var roles: [String] { // TODO: make this editable by the user
-        return ["author", "editor", "illustrator", "collaborator", "reviewer"]
-    }
-    
-    lazy var sortedRoles = roles.sorted()
     
     lazy var defaultFields = makeDefaultFields()
     

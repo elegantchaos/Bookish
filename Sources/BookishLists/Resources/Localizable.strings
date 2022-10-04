@@ -41,6 +41,7 @@ root.people = "People";
 root.publishers = "Publishers";
 root.series = "Series";
 root.lists = "My Lists";
+root.roles = "Roles";
 
 // Book Adding Modes
 add.scan = "Scan Books";

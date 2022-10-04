@@ -9,7 +9,7 @@ struct RecordLabel: View {
     enum NameMode {
         case normal
         case role(String)
-        case roleInline(String)
+        case roleInline(CDRecord)
     }
     
     @ObservedObject var record: CDRecord

@@ -26,6 +26,10 @@ class CDRecord: NSManagedObject, Identifiable {
         case series
         case entry
         case importSession
+        
+        var roleLabel: String {
+            return "role.\(self)".localized
+        }
     }
     
     fileprivate lazy var cachedFields: FieldList = decodedFields

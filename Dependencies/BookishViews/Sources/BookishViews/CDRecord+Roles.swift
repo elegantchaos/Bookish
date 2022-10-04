@@ -24,16 +24,16 @@ extension CDRecord {
     
 
     /// The identifier to use for a role list for a given role
-    func roleID(_ role: String) -> String {
-        return "\(role).\(id)"
+    func roleID(_ role: CDRecord) -> String {
+        return "\(role.id).\(id)"
     }
 
     /// Add another record in a given role to this record
-    func addRole(_ role: String, for record: CDRecord) {
+    func addRole(_ role: CDRecord, for record: CDRecord) {
         // find the list for the given role
         let roleID = roleID(role)
         let roleRecord = findOrMakeChildWithID(roleID, kind: .roleList) { created in
-            created.name = role
+            created.name = role.name
         }
 
         // add the record to the list if necessary
@@ -50,7 +50,7 @@ extension CDRecord {
     }
 
     /// Remove a given role for another record from this record.
-    func removeRole(_ role: String, of record: CDRecord) {
+    func removeRole(_ role: CDRecord, of record: CDRecord) {
         // find the list for the given role
         let roleID = roleID(role)
         if let roleRecord = findChildWithID(roleID, kind: .roleList), roleRecord.contains(record) {
@@ -76,10 +76,14 @@ extension CDRecord {
 
     /// Return the names of all the roles that a given record fulfils
     /// for this record.
-    func roleNames(for record: CDRecord) -> [String] {
-        let roleRecords = roleLists().filter({ $0.contents?.contains(record) ?? false })
-        let roles = roleRecords.map { $0.name }
-        return roles
+    func roles(for record: CDRecord) -> [CDRecord] {
+        let roleRecords = roleLists()                               // lists of roles for this record
+            .filter { $0.contents?.contains(record) ?? false }      // just the ones containing the passed in record
+            .compactMap { $0.containedBy }                          // each role list should be contained by a role record
+            .flatMap { $0 }                                         // set of all containing records
+            .filter { $0.kind == .role }                            // just the role ones
+        
+        return roleRecords
     }
 
     /// Return a list of the role/record pairs associated with this record.

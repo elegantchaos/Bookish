@@ -19,6 +19,8 @@ class ImportHandler: ObservableObject {
     let allPublishers: CDRecord
     let allSeries: CDRecord
     let allImports: CDRecord
+    let roleAuthor: CDRecord
+    let roleIllustrator: CDRecord
     let workContext: NSManagedObjectContext
     let seriesCleaner: SeriesCleaner
     let publisherCleaner: PublisherCleaner
@@ -39,6 +41,8 @@ class ImportHandler: ObservableObject {
         self.allPublishers = model.rootList(.publishers, in: context)
         self.allSeries = model.rootList(.series, in: context)
         self.allImports = model.rootList(.imports, in: context)
+        self.roleAuthor = model.role("author", in: context)
+        self.roleIllustrator = model.role("illustrator", in: context)
         self.seriesCleaner = SeriesCleaner()
         self.publisherCleaner = PublisherCleaner()
         self.savedUndoManager = undoManager
@@ -133,8 +137,8 @@ private extension ImportHandler {
         list.add(book)
         done += 1
 
-        addPeople(to: book, from: importedBook, withKey: .authors, asRole: "author")
-        addPeople(to: book, from: importedBook, withKey: .illustrators, asRole: "illustrator")
+        addPeople(to: book, from: importedBook, withKey: .authors, asRole: roleAuthor)
+        addPeople(to: book, from: importedBook, withKey: .illustrators, asRole: roleIllustrator)
 
         for publisher in importedBook.strings(forKey: .publishers) {
             let list = CDRecord.findOrMakeWithName(publisher, kind: .publisher, in: workContext)
@@ -264,7 +268,7 @@ private extension ImportHandler {
         return book
     }
     
-    func addPeople(to book: CDRecord, from importedBook: BookRecord, withKey key: BookKey, asRole role: String) {
+    func addPeople(to book: CDRecord, from importedBook: BookRecord, withKey key: BookKey, asRole role: CDRecord) {
         if let people = importedBook.properties[key] as? [String] {
             for person in people {
                 let person = CDRecord.findOrMakeWithName(person, kind: .person, in: workContext)
