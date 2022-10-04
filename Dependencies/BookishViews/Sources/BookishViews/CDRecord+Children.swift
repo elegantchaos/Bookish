@@ -28,23 +28,23 @@ extension CDRecord {
             return possibles.first
         }
     }
-
+    
     func findOrMakeChildWithName(_ name: String, kind: Kind, creationCallback: CreationCallback? = nil) -> CDRecord {
         let kindCode = kind.rawValue
         if let existing = contents?.first(where: { ($0.kindCode == kindCode) && ($0.name == name) }) {
             return existing
         }
-            
+        
         let new = CDRecord.make(kind: kind, in: managedObjectContext!)
         new.name = name
         addToContents(new)
         if let callback = creationCallback {
             callback(new)
         }
-
+        
         return new
     }
-
+    
     func findChildWithID(_ id: String, kind: Kind? = nil) -> CDRecord? {
         guard let contents = contents else { return nil }
         
@@ -60,20 +60,28 @@ extension CDRecord {
             return possibles.first
         }
     }
+    
     func findOrMakeChildWithID(_ id: String, kind: Kind, creationCallback: CreationCallback? = nil) -> CDRecord {
         let kindCode = kind.rawValue
         if let existing = contents?.first(where: { ($0.kindCode == kindCode) && ($0.id == id) }) {
             return existing
         }
-            
+        
         let new = CDRecord.make(kind: kind, in: managedObjectContext!)
         new.id = id
         addToContents(new)
-
+        
         if let callback = creationCallback {
             callback(new)
         }
-
+        
         return new
     }
+
+    func containersWithKind(_ kind: Kind) -> [CDRecord] {
+        let kindCode = kind.rawValue
+        guard let containedBy else { return [] }
+        return containedBy.filter { $0.kindCode == kindCode }
+    }
+
 }

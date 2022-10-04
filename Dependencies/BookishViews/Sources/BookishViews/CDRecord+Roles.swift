@@ -17,7 +17,7 @@ extension CDRecord {
     /// multiple times, we can't just use the record id. Instead we need a
     /// combination of the record id and the role.
     struct RoleAndRecord: Identifiable {
-        let role: String
+        let role: CDRecord
         let record: CDRecord
         var id: String { "\(role).\(record.id)" }
     }
@@ -33,7 +33,8 @@ extension CDRecord {
         // find the list for the given role
         let roleID = roleID(role)
         let roleRecord = findOrMakeChildWithID(roleID, kind: .roleList) { created in
-            created.name = role.name
+            created.name = "\(self.name) \(role.name)s"
+            role.addToContents(created)
         }
 
         // add the record to the list if necessary
@@ -89,11 +90,12 @@ extension CDRecord {
     /// Return a list of the role/record pairs associated with this record.
     func roles() -> [RoleAndRecord] {
         var entries: [RoleAndRecord] = []
-        for role in roleLists() {
-            let roleName = role.name
-            if let recordsInRole = role.contents {
-                for record in recordsInRole {
-                    entries.append(.init(role: roleName, record: record))
+        for roleList in roleLists() {
+            if let recordsInRole = roleList.contents {
+                if let role = roleList.containersWithKind(.role).first {
+                    for record in recordsInRole {
+                        entries.append(.init(role: role, record: record))
+                    }
                 }
             }
         }

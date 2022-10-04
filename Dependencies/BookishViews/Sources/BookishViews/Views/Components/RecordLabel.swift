@@ -8,7 +8,7 @@ import SwiftUI
 struct RecordLabel: View {
     enum NameMode {
         case normal
-        case role(String)
+        case role(CDRecord)
         case roleInline(CDRecord)
     }
     
@@ -47,15 +47,14 @@ struct RecordLabel: View {
     var recordName: String {
         switch nameMode {
             case .roleInline(let role):
-                let localizedRole = "role.\(role)".localized
-                return "\(record.name) (\(localizedRole))"
+                return "\(record.name) (\(role.name))"
             default: return record.name
         }
     }
 
     var recordAnnotation: String? {
         switch nameMode {
-            case .role(let role): return "role.\(role)".localized
+            case .role(let role): return role.name
             default: return nil
         }
     }
@@ -100,10 +99,6 @@ extension CDRecord.Kind {
             case .list:             return "books.vertical"
             case .entry:             return "list.bullet.rectangle"
         }
-    }
-    
-    var defaultRole: String {
-        return "\(self)"
     }
     
     var untitledLabel: String {
