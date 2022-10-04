@@ -67,9 +67,12 @@ extension CDRecord {
             case .root:
                 if let rootList = ModelController.RootList(rawValue: id) {
                     switch rootList {
-                        case .imports:       return "display.and.arrow.down"
-                        case .people:        return "person.2"
-                        case .publishers:    return "building.2"
+                        case .imports:      return "display.and.arrow.down"
+                        case .people:       return "person.2"
+                        case .publishers:   return "building.2"
+                        case .roles:        return "person.crop.rectangle.stack"
+                        case .series:       return "square.stack"
+                            
                         default:             break
                     }
                 }
@@ -88,11 +91,11 @@ extension CDRecord.Kind {
             case .book:             return "book"
             case .group:            return "folder"
             case .person:           return "person"
-            case .role:             return "person.text.rectangle"
+            case .role:             return "person.crop.rectangle"
             case .roleList:         return "list.bullet"
             case .publisher:        return "building.columns"
             case .importSession: 	return "square.and.arrow.down"
-            case .series:           return "books.vertical"
+            case .series:           return "square.stack"
             case .root: 	        return "books.vertical"
             case .list:             return "books.vertical"
             case .entry:             return "list.bullet.rectangle"
