@@ -47,6 +47,10 @@ struct Application: App {
             exit(0)
         }
         
+        if CommandLine.arguments.contains("--standardData") {
+            try? modelController.setupStandardData(using: importController)
+        }
+        
         setupLookup()
     }
     

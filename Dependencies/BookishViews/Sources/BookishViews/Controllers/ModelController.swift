@@ -101,6 +101,11 @@ public class ModelController: ObservableObject {
         try stack.removeAllData()
     }
 
+    public func setupStandardData(using importController: ImportController) throws {
+        try removeAllData()
+        importController.import(from: BookishImporter.urlForSample(withName: "DeliciousSmall"))
+    }
+    
     func image(for book: CDRecord, usePlacholder: Bool = true) -> AsyncImage {
         if usePlacholder {
             return images.image(for: book.imageURL, default: "book")
