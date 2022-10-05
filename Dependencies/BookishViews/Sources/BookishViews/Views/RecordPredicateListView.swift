@@ -5,7 +5,8 @@
 
 import SwiftUI
 
-struct RecordIndexView: View {
+/// Returns a list of records matching a given predicate (optionally sorted).
+struct RecordPredicateListView: View {
     @Binding var selection: String?
     @FetchRequest var lists: FetchedResults<CDRecord>
     

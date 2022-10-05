@@ -66,43 +66,42 @@ struct KindIndexContentView: View {
     @State var editSelection = Set<String>()
     @Namespace var namespace
     
-    @FetchRequest(
-        entity: CDRecord.entity(),
-        sortDescriptors: [NSSortDescriptor(key: "name", ascending: true)]
-    ) var books: FetchedResults<CDRecord>
+    @FetchRequest var books: FetchedResults<CDRecord>
     
     @State var filter: String = ""
     
     init(kind: CDRecord.Kind) {
-        books.nsPredicate = NSPredicate(format: "kindCode == \(kind.rawValue)")
+        let sort = [NSSortDescriptor(key: "name", ascending: true)]
+        let predicate = NSPredicate(format: "kindCode == \(kind.rawValue)")
+        self._books = .init(entity: CDRecord.entity(), sortDescriptors: sort, predicate: predicate)
     }
     
     var body: some View {
-        if editMode.isEditing {
-            List(selection: $editSelection) {
-                ForEach(books) { book in
-                    if filter.isEmpty || book.name.contains(filter) {
+        let isEditing = editMode.isEditing
+
+        List(selection: isEditing ? $editSelection : singleSelection) {
+            ForEach(books) { book in
+                if filter.isEmpty || book.name.contains(filter) {
+                    if isEditing {
                         RecordLabel(record: book)
-                            .matchedGeometryEffect(id: book.id, in: namespace)
-                    }
-                }
-                .onDelete(perform: handleDelete)
-            }
-            .listStyle(.plain)
-            .searchable(text: $filter)
-        } else {
-            List(selection: $selection) {
-                ForEach(books) { book in
-                    if filter.isEmpty || book.name.contains(filter) {
+                    } else {
                         RecordLink(book, selection: $selection)
-                            .matchedGeometryEffect(id: book.id, in: namespace)
                     }
                 }
-                .onDelete(perform: handleDelete)
             }
-            .listStyle(.plain)
-            .searchable(text: $filter)
+            .onDelete(perform: handleDelete)
         }
+        .listStyle(.plain)
+        .searchable(text: $filter)
+    }
+    
+    var singleSelection: Binding<Set<String>> {
+        return Binding {
+            return .init(self.selection.map { [$0] } ?? [])
+        } set: { newSelection in
+            self.selection = newSelection.first
+        }
+
     }
     
        func handleDelete(_ items: IndexSet?) {

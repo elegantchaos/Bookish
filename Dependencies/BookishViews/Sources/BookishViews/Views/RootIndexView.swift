@@ -20,7 +20,7 @@ struct RootIndexView: View {
             VStack {
                 List(selection: $selection) {
                     KindIndexesListView(kinds: kinds, selection: $selection)
-                    RecordIndexView(predicate: predicate, selection: $selection)
+                    RecordPredicateListView(predicate: predicate, selection: $selection)
                 }
             }
             .frame(maxHeight: .infinity)
