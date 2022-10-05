@@ -10,6 +10,7 @@ import UniformTypeIdentifiers
 import CoreData
 
 public struct RootView: View {
+    @EnvironmentObject var model: ModelController
     @EnvironmentObject var fileController: FilePickerController
     @EnvironmentObject var importController: ImportController
     @EnvironmentObject var statusController: StatusController
@@ -19,8 +20,10 @@ public struct RootView: View {
     
     public var body: some View {
         SheetControllerHost {
-            NavigationView {
+            NavigationStack {
                 RootIndexView()
+                    .navigationDestination(for: String.self, destination: destinationByID)
+                    .navigationDestination(for: CDRecord.self, destination: destinationByRecord)
             }
 //            .importsItemProviders([BookishInterchangeDocument.bookishType]) { itemProviders in
 //                print("blah")
@@ -41,6 +44,38 @@ public struct RootView: View {
                         }
                     }
                 }
+            }
+        }
+    }
+    
+    func destinationByID(_ id: String) -> some View {
+        Group {
+            if id == .rootPreferencesID {
+                PreferencesView()
+            } else {
+                EmptyView()
+            }
+        }
+    }
+    
+    func destinationByRecord(_ record: CDRecord) -> some View {
+//        if record.isBook {
+//            return BookView(book: record, fields: list?.fields ?? model.defaultFields)
+//        } else {
+//
+        Group {
+            switch record.kind {
+                case .list:
+                    CustomListView(list: record, fields: model.defaultFields)
+                    
+                case .role:
+                    LinksIndexView(list: record)
+                    
+                case .publisher, .series, .person:
+                    BackLinksIndexView(list: record)
+                    
+                default:
+                    ListIndexView(list: record)
             }
         }
     }

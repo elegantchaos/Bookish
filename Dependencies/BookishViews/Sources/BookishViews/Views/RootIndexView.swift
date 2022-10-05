@@ -26,7 +26,7 @@ struct RootIndexView: View {
             .frame(maxHeight: .infinity)
             
             List {
-                NavigationLink(destination: PreferencesView()) {
+                NavigationLink(value: String.rootPreferencesID) {
                     Label("Settings", systemImage: "gear")
                 }
             }

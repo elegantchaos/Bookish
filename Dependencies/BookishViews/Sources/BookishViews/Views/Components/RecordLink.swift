@@ -20,26 +20,7 @@ struct RecordLink: View {
     }
 
     var body: some View {
-        NavigationLink(tag: record.id, selection: $selection) {
-            if record.isBook {
-                BookView(book: record, fields: list?.fields ?? model.defaultFields)
-            } else {
-                
-                switch record.kind {
-                    case .list:
-                        CustomListView(list: record, fields: model.defaultFields)
-                        
-                    case .role:
-                        LinksIndexView(list: record)
-                        
-                    case .publisher, .series, .person:
-                        BackLinksIndexView(list: record)
-                        
-                    default:
-                        ListIndexView(list: record)
-                }
-            }
-        } label: {
+        NavigationLink(value: record) {
             RecordLabel(record: record, nameMode: nameMode)
         }
     }

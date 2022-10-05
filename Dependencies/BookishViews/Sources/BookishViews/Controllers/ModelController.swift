@@ -237,6 +237,7 @@ public class ModelController: ObservableObject {
 }
 
 extension String {
+    static let rootPreferencesID = "root.preferences"
     static let rootListsID = "root.lists"
     static let rootRolesID = "root.roles"
 }
