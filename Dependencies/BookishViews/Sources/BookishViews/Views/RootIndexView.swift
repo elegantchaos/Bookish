@@ -15,35 +15,28 @@ struct RootIndexView: View {
         sortDescriptors: [
             NSSortDescriptor(key: "name", ascending: true)
         ],
-        predicate: NSPredicate(format: "containedBy.@count == 0")
+        predicate: NSPredicate(format: "kindCode == \(CDRecord.Kind.root.rawValue)")
     ) var lists: FetchedResults<CDRecord>
     
     var body: some View {
         traceChanges()
 
-        var entries = lists.map({ ListEntry(list: $0)})
-        entries.insert(ListEntry(), at: 0)
+        let kinds: [CDRecord.Kind] = [.book, .person, .publisher, .series]
         
         return VStack {
             VStack {
                 List(selection: $selection) {
-                    ForEach(entries) { entry in
-                        switch entry.kind {
-                            case .allBooks:
-                                NavigationLink(tag: .allBooksID, selection: $selection) {
-                                    AllBooksView()
-                                } label: {
-                                    Label("root.books", systemImage: "books.vertical")
-                                }
-                                
-                            case let .list(list):
-                                RecordLink(list, selection: $selection)
-                                
-                            case let .book(book, list):
-                                RecordLink(book, in: list, selection: $selection)
+                    ForEach(kinds) { kind in
+                        NavigationLink(tag: kind.allItemsTag, selection: $selection) {
+                            KindIndexView(kind: kind)
+                        } label: {
+                            Label(kind.pluralLabel, systemImage: kind.indexIconName)
                         }
                     }
-                    
+
+                    ForEach(lists) { list in
+                        RecordLink(list, selection: $selection)
+                    }
                 }
             }
             .frame(maxHeight: .infinity)

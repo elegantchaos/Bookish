@@ -15,7 +15,7 @@ struct AddLinkButton: View {
     init(kind: CDRecord.Kind, role: CDRecord? = nil) {
         self.kind = kind
         self.role = role
-        self.label = role?.name ?? "\(kind)"
+        self.label = role?.name ?? kind.roleLabel
     }
     
     var body: some View {

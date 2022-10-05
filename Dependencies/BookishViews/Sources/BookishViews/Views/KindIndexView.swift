@@ -8,12 +8,41 @@ import SwiftUI
 import SwiftUIExtensions
 import ThreadExtensions
 
-struct AllBooksView: View {
+
+protocol KindProvider {
+    static var kind: CDRecord.Kind { get }
+}
+
+extension KindProvider {
+    var kind: CDRecord.Kind { Self.kind }
+    var tag: String { "all-\(Self.kind)" }
+}
+
+
+struct BooksKind: KindProvider {
+    static var kind: CDRecord.Kind { .book }
+}
+
+struct PeopleKind: KindProvider {
+    static var kind: CDRecord.Kind { .person }
+}
+
+struct PublishersKind: KindProvider {
+    static var kind: CDRecord.Kind { .publisher }
+}
+
+struct SeriesKind: KindProvider {
+    static var kind: CDRecord.Kind { .series }
+}
+
+struct KindIndexView: View {
     @Environment(\.editMode) var editMode
     @State var filter: String = ""
 
+    let kind: CDRecord.Kind
+    
     var body: some View {
-        AllBooksContentView()
+        KindIndexContentView(kind: kind)
             .navigationBarTitle("root.books", displayMode: .inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -29,7 +58,8 @@ struct AllBooksView: View {
     }
 }
 
-struct AllBooksContentView: View {
+
+struct KindIndexContentView: View {
     @EnvironmentObject var model: ModelController
     @Environment(\.editMode) var editMode
     @SceneStorage("allBooksSelection") var selection: String?
@@ -38,11 +68,14 @@ struct AllBooksContentView: View {
     
     @FetchRequest(
         entity: CDRecord.entity(),
-        sortDescriptors: [NSSortDescriptor(key: "name", ascending: true)],
-        predicate: NSPredicate(format: "kindCode == \(CDRecord.Kind.book.rawValue)")
+        sortDescriptors: [NSSortDescriptor(key: "name", ascending: true)]
     ) var books: FetchedResults<CDRecord>
     
     @State var filter: String = ""
+    
+    init(kind: CDRecord.Kind) {
+        books.nsPredicate = NSPredicate(format: "kindCode == \(kind.rawValue)")
+    }
     
     var body: some View {
         if editMode.isEditing {

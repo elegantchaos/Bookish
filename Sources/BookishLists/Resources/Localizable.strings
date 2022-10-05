@@ -27,6 +27,15 @@ role.publisher = "Publisher";
 role.series = "Series";
 role.importSession = "From";
 
+// Kind plurals
+plural.book = "Books";
+plural.list = "Lists";
+plural.group = "Groups";
+plural.person = "People";
+plural.publisher = "Publishers";
+plural.series = "Series";
+plural.importSession = "Imports";
+
 // Person roles
 role.author = "Author";
 role.editor = "Editor";
@@ -37,7 +46,6 @@ role.reviewer = "Reviewer";
 // Root List Names
 root.books = "All Books";
 root.imports = "Imports";
-root.people = "People";
 root.publishers = "Publishers";
 root.series = "Series";
 root.lists = "My Lists";

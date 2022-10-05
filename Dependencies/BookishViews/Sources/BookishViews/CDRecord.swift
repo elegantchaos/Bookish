@@ -13,7 +13,7 @@ import SwiftUIExtensions
 import ThreadExtensions
 
 class CDRecord: NSManagedObject, Identifiable {
-    enum Kind: Int16 {
+    enum Kind: Int16, Identifiable {
         case unknown
         case root
         case group
@@ -24,12 +24,9 @@ class CDRecord: NSManagedObject, Identifiable {
         case person
         case publisher
         case series
-        case entry
         case importSession
         
-        var roleLabel: String {
-            return "role.\(self)".localized
-        }
+        var id: Int16 { rawValue }
     }
     
     fileprivate lazy var cachedFields: FieldList = decodedFields
@@ -59,10 +56,17 @@ class CDRecord: NSManagedObject, Identifiable {
             default: return false
         }
     }
-    
+
+    var canAddItems: Bool {
+        switch kind {
+            case .list: return true
+            default: return false
+        }
+    }
+
     var canAddLinks: Bool {
         switch kind {
-            case .book, .list: return true
+            case .book: return true
             default: return false
         }
     }

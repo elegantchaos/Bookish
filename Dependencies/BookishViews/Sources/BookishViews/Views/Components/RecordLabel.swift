@@ -64,25 +64,23 @@ extension CDRecord {
     var iconName: String {
         switch kind {
             case .root:
-                if let rootList = ModelController.RootList(rawValue: id) {
-                    switch rootList {
-                        case .imports:      return "display.and.arrow.down"
-                        case .people:       return "person.2"
-                        case .publishers:   return "building.2"
-                        case .roles:        return "person.crop.rectangle.stack"
-                        case .series:       return "square.stack"
-                            
-                        default:             break
-                    }
-                }
+                return "books.vertical"
+//                if let rootList = ModelController.RootList(rawValue: id) {
+//                    switch rootList {
+//                        case .imports:      return "display.and.arrow.down"
+//                        case .roles:        return "person.crop.rectangle.stack"
+//                        case .series:       return "square.stack"
+//
+//                        default:             break
+//                    }
+//                }
                 
             default:
                 return kind.iconName
         }
-        
-        return "books.vertical"
     }
 }
+
 extension CDRecord.Kind {
     var iconName: String {
         switch self {
@@ -97,8 +95,25 @@ extension CDRecord.Kind {
             case .series:           return "square.stack"
             case .root: 	        return "books.vertical"
             case .list:             return "books.vertical"
-            case .entry:             return "list.bullet.rectangle"
         }
+    }
+    
+    var indexIconName: String {
+        switch self {
+            case .person: return "person.2"
+            case .publisher: return "building.2"
+            case .series: return "square.stack"
+            default:
+                return iconName
+        }
+    }
+    
+    var roleLabel: String {
+        return "role.\(self)".localized
+    }
+    
+    var pluralLabel: String {
+        return "plural.\(self)".localized
     }
     
     var untitledLabel: String {
@@ -107,5 +122,9 @@ extension CDRecord.Kind {
     
     var newLabel: String {
         return "new.\(self)"
+    }
+
+    var allItemsTag: String {
+        return "all-\(self)"
     }
 }

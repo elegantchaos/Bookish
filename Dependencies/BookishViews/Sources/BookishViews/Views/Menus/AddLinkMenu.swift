@@ -16,13 +16,18 @@ struct AddLinkMenu: View {
     let mode: Mode
 
     var body: some View {
-        Menu(mode == .link ? "Add Link" : "Add Item") {
-            AddLinkButton(kind: .book)
-            ForEach(model.sortedRoles, id: \CDRecord.id) { role in
-                AddLinkButton(kind: .person, role: role)
+        let isLinkMode = mode == .link
+        Menu(isLinkMode ? "Add Link" : "Add Item") {
+            if isLinkMode {
+                ForEach(model.sortedRoles, id: \CDRecord.id) { role in
+                    AddLinkButton(kind: .person, role: role)
+                }
+            } else {
+                AddLinkButton(kind: .book)
+                AddLinkButton(kind: .person)
+                AddLinkButton(kind: .publisher)
+                AddLinkButton(kind: .series)
             }
-            AddLinkButton(kind: .publisher)
-            AddLinkButton(kind: .series)
         }
     }
 }

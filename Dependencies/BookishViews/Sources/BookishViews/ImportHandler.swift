@@ -15,9 +15,6 @@ class ImportHandler: ObservableObject {
     let model: ModelController
     let importController: ImportController
     let list: CDRecord
-    let allPeople: CDRecord
-    let allPublishers: CDRecord
-    let allSeries: CDRecord
     let allImports: CDRecord
     let roleAuthor: CDRecord
     let roleIllustrator: CDRecord
@@ -39,9 +36,6 @@ class ImportHandler: ObservableObject {
         self.workContext = context
 
         self.list = CDRecord(context: context)
-        self.allPeople = model.rootList(.people, in: context)
-        self.allPublishers = model.rootList(.publishers, in: context)
-        self.allSeries = model.rootList(.series, in: context)
         self.allImports = model.rootList(.imports, in: context)
         self.roleAuthor = model.role("author", in: context)
         self.roleIllustrator = model.role("illustrator", in: context)
@@ -145,17 +139,13 @@ private extension ImportHandler {
         addPeople(to: book, from: importedBook, withKey: .illustrators, asRole: roleIllustrator)
 
         for publisher in importedBook.strings(forKey: .publishers) {
-            let publisherRecord = CDRecord.findOrMakeWithName(publisher, kind: .publisher, in: workContext) { created in
-                self.allPublishers.addToContents(created)
-            }
+            let publisherRecord = CDRecord.findOrMakeWithName(publisher, kind: .publisher, in: workContext)
             book.addLink(to: publisherRecord, role: rolePublisher)
         }
 
         let series = importedBook.string(forKey: .series)
         if !series.isEmpty {
-            let seriesRecord = CDRecord.findOrMakeWithName(series, kind: .series, in: workContext) { created in
-                self.allSeries.addToContents(created)
-            }
+            let seriesRecord = CDRecord.findOrMakeWithName(series, kind: .series, in: workContext)
             book.addLink(to: seriesRecord, role: roleSeries)
         }
 
@@ -278,7 +268,6 @@ private extension ImportHandler {
         if let people = importedBook.properties[key] as? [String] {
             for person in people {
                 let person = CDRecord.findOrMakeWithName(person, kind: .person, in: workContext)
-                allPeople.addToContents(person)
                 book.addLink(to: person, role: role)
             }
         }

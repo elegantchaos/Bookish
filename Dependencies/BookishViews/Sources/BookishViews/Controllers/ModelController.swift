@@ -115,13 +115,10 @@ public class ModelController: ObservableObject {
     }
     
     enum RootList: String, CaseIterable {
-        case imports = "root.imports"
-        case people = "root.people"
-        case publishers = "root.publishers"
-        case series = "root.series"
         case lists = "root.lists"
         case roles = "root.roles"
-        
+        case imports = "root.imports"
+
         var id: String { rawValue }
         
         var label: String {

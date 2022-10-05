@@ -20,9 +20,14 @@ struct ListActionsMenu: View {
             AddRecordButton(container: list, kind: .group, selection: $selection)
         }
 
-        if list.canAddLinks {
+        if list.canAddItems {
             AddLinkMenu(mode: .item)
             RemoveLinkMenu(mode: .item)
+        }
+
+        if list.canAddLinks {
+            AddLinkMenu(mode: .link)
+            RemoveLinkMenu(mode: .link)
         }
 
         if list.canDelete {
