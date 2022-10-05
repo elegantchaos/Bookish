@@ -203,7 +203,7 @@ public class ModelController: ObservableObject {
     }
 
     func makeDefaultRoles(in container: CDRecord, context: NSManagedObjectContext) {
-        let roles = ["author", "editor", "illustrator", "collaborator", "reviewer"]
+        let roles = ["author", "editor", "illustrator", "collaborator", "reviewer", "publisher", "series"]
         for role in roles {
             let list = CDRecord.make(kind: .role, in: context)
             let id = "role.\(role)"

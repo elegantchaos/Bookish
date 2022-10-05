@@ -21,6 +21,8 @@ class ImportHandler: ObservableObject {
     let allImports: CDRecord
     let roleAuthor: CDRecord
     let roleIllustrator: CDRecord
+    let rolePublisher: CDRecord
+    let roleSeries: CDRecord
     let workContext: NSManagedObjectContext
     let seriesCleaner: SeriesCleaner
     let publisherCleaner: PublisherCleaner
@@ -43,6 +45,8 @@ class ImportHandler: ObservableObject {
         self.allImports = model.rootList(.imports, in: context)
         self.roleAuthor = model.role("author", in: context)
         self.roleIllustrator = model.role("illustrator", in: context)
+        self.rolePublisher = model.role("publisher", in: context)
+        self.roleSeries = model.role("series", in: context)
         self.seriesCleaner = SeriesCleaner()
         self.publisherCleaner = PublisherCleaner()
         self.savedUndoManager = undoManager
@@ -141,16 +145,18 @@ private extension ImportHandler {
         addPeople(to: book, from: importedBook, withKey: .illustrators, asRole: roleIllustrator)
 
         for publisher in importedBook.strings(forKey: .publishers) {
-            let list = CDRecord.findOrMakeWithName(publisher, kind: .publisher, in: workContext)
-            self.allPublishers.addToContents(list)
-            list.add(book)
+            let publisherRecord = CDRecord.findOrMakeWithName(publisher, kind: .publisher, in: workContext) { created in
+                self.allPublishers.addToContents(created)
+            }
+            book.addLink(to: publisherRecord, role: rolePublisher)
         }
 
         let series = importedBook.string(forKey: .series)
         if !series.isEmpty {
-            let list = CDRecord.findOrMakeWithName(series, kind: .series, in: workContext)
-            self.allSeries.addToContents(list)
-            list.add(book)
+            let seriesRecord = CDRecord.findOrMakeWithName(series, kind: .series, in: workContext) { created in
+                self.allSeries.addToContents(created)
+            }
+            book.addLink(to: seriesRecord, role: roleSeries)
         }
 
         report(book: importedBook)
