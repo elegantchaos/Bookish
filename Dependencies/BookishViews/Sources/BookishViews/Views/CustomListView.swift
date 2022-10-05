@@ -61,24 +61,23 @@ struct CustomListView: View {
                 
                 Spacer()
             }
-            .toolbar {
-                ToolbarItem {
-                    if isEditing {
-                        EditButton()
-                    } else if linkController.session == nil {
-                        ActionsMenuButton {
-                            ListActionsMenu(list: list, selection: $selection)
-                                .environment(\.recordViewer, self)
-                        }
-                    }
-                    
-                }
-            }
         }
         .padding()
         .navigationBarBackButtonHidden(isEditing || linkController.session != nil)
         .navigationTitle(list.name)
         .toolbar {
+            ToolbarItem {
+                if isEditing {
+                    EditButton()
+                } else if linkController.session == nil {
+                    ActionsMenuButton {
+                        ListActionsMenu(list: list, selection: $selection)
+                            .environment(\.recordViewer, self)
+                    }
+                }
+                
+            }
+
             ToolbarItem(placement: .principal) {
                 if linkController.session == nil {
                     DeferredTextField(label: "Name", text: $list.name)
