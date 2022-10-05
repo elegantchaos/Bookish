@@ -91,7 +91,7 @@ extension CDRecord.Kind {
             case .group:            return "folder"
             case .person:           return "person"
             case .role:             return "person.crop.rectangle"
-            case .roleList:         return "list.bullet"
+            case .link:             return "link"
             case .publisher:        return "building.columns"
             case .importSession: 	return "square.and.arrow.down"
             case .series:           return "square.stack"

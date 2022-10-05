@@ -1,6 +1,38 @@
 
 ## Database Design Notes
 
+All entities are represented as `CDRecords`, which have properties, and contain/are-contained-by other records.
+
+Entity types include: book, person, publisher, role, list, series
+
+### Book
+
+Each book is represented by a record.
+
+Properties: 
+
+- isbn
+- subtitle
+- pages
+- etc...
+
+Contained records:
+
+- relationship: a list of related records (eg authors); each entry is a person, the containing record is the role
+
+Containing records:
+
+- publisher
+
+
+Contained records:
+  
+- relationships
+  -  
+    - person 1, person 2
+Properties  
+
+
 A `Book` has properties, and is a member of zero or more `List`s.
 A `List` has properties, and contains `Book`s and other `List`s.
 
@@ -34,3 +66,7 @@ As lists are unordered, a special property is added to each book, indicating tha
 
 
  
+### Book Role
+
+
+Saf[Book] -> [RoleList] -> [Person]

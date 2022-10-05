@@ -116,7 +116,7 @@ extension CustomListView: AddLinkDelegate {
             if let session = linkController.session {
                 list.addToContents(linked)
                 if let role = session.role {
-                    list.addRole(role, for: linked)
+                    list.addLink(to: linked, role: role)
                 }
                 linkController.session = nil
             }

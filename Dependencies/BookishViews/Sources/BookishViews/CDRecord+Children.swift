@@ -7,7 +7,7 @@ import Foundation
 
 extension CDRecord {
     
-    func childredWithKind(_ kind: Kind) -> [CDRecord] {
+    func contentsWithKind(_ kind: Kind) -> [CDRecord] {
         let kindCode = kind.rawValue
         guard let contents = contents else { return [] }
         return contents.filter { $0.kindCode == kindCode }
@@ -82,6 +82,12 @@ extension CDRecord {
         let kindCode = kind.rawValue
         guard let containedBy else { return [] }
         return containedBy.filter { $0.kindCode == kindCode }
+    }
+
+    func containersExcludingKind(_ kind: Kind) -> [CDRecord] {
+        let kindCode = kind.rawValue
+        guard let containedBy else { return [] }
+        return containedBy.filter { $0.kindCode != kindCode }
     }
 
 }

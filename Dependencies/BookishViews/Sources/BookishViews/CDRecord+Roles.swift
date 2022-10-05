@@ -29,24 +29,20 @@ extension CDRecord {
     }
 
     /// Add another record in a given role to this record
-    func addRole(_ role: CDRecord, for record: CDRecord) {
-        // find the list for the given role
-        let roleID = roleID(role)
-        let roleRecord = findOrMakeChildWithID(roleID, kind: .roleList) { created in
-            created.name = "\(self.name) \(role.name)s"
-            role.addToContents(created)
-        }
+    func addLink(to record: CDRecord, role: CDRecord? = nil) {
+        // make a link record
+        let link = CDRecord.make(kind: .link, in: managedObjectContext!)
+        link.addToContents(self)    // the link points to this item
+        record.addToContents(link)  // the item being linked points to the link record
+        role?.addToContents(link)  // if a role was passed, that also points to the link record
 
         // add the record to the list if necessary
         // we flag that this object will change, even though in fact it doesn't
         // because the roleRecord changes and views looking at this record might need
         // refreshing as a result
-        if !roleRecord.contains(record) {
-            onMainQueue {
-                self.objectWillChange.send()
-            }
-            roleRecord.addToContents(record)
-        }
+//            onMainQueue {
+//                self.objectWillChange.send()
+//            }
         
     }
 
@@ -54,7 +50,7 @@ extension CDRecord {
     func removeRole(_ role: CDRecord, of record: CDRecord) {
         // find the list for the given role
         let roleID = roleID(role)
-        if let roleRecord = findChildWithID(roleID, kind: .roleList), roleRecord.contains(record) {
+        if let roleRecord = findChildWithID(roleID, kind: .link), roleRecord.contains(record) {
             onMainQueue {
                 self.objectWillChange.send()
             }
@@ -69,20 +65,25 @@ extension CDRecord {
         }
     }
 
-    /// Return all the role lists for this record.
-    func roleLists() -> [CDRecord] {
-        let roleRecords = childredWithKind(.roleList)
-        return roleRecords
+    /// Return all link records pointing to this record.
+    func linksTo() -> [CDRecord] {
+        let linkRecords = containersWithKind(.link)
+        return linkRecords
+    }
+
+    /// Return all the link records pointing from this record.
+    func linksFrom() -> [CDRecord] {
+        let linkRecords = contentsWithKind(.link)
+        return linkRecords
     }
 
     /// Return the names of all the roles that a given record fulfils
     /// for this record.
     func roles(for record: CDRecord) -> [CDRecord] {
-        let roleRecords = roleLists()                               // lists of roles for this record
-            .filter { $0.contents?.contains(record) ?? false }      // just the ones containing the passed in record
-            .compactMap { $0.containedBy }                          // each role list should be contained by a role record
-            .flatMap { $0 }                                         // set of all containing records
-            .filter { $0.kind == .role }                            // just the role ones
+        let roleRecords = linksTo()                                 // lists of links to this record
+            .compactMap { $0.containedBy }                          // filter anything without content
+            .filter { $0.contains(record) }                         // keep the ones containing the record we're interested in
+            .compactMap { $0.first { $0.kind == .role } }           // extract the linked roles
         
         return roleRecords
     }
@@ -90,13 +91,9 @@ extension CDRecord {
     /// Return a list of the role/record pairs associated with this record.
     func roles() -> [RoleAndRecord] {
         var entries: [RoleAndRecord] = []
-        for roleList in roleLists() {
-            if let recordsInRole = roleList.contents {
-                if let role = roleList.containersWithKind(.role).first {
-                    for record in recordsInRole {
-                        entries.append(.init(role: role, record: record))
-                    }
-                }
+        for link in linksTo() {
+            if let role = link.containersWithKind(.role).first, let target = link.containersExcludingKind(.role).first {
+                entries.append(.init(role: role, record: target))
             }
         }
         

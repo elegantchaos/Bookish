@@ -186,7 +186,7 @@ public class ModelController: ObservableObject {
     
     
     var roles: [CDRecord] {
-        return rootList(.roles, in: stack.viewContext).childredWithKind(.role)
+        return rootList(.roles, in: stack.viewContext).contentsWithKind(.role)
     }
     
     var sortedRoles: [CDRecord] {

@@ -20,7 +20,7 @@ class CDRecord: NSManagedObject, Identifiable {
         case list
         case book
         case role
-        case roleList
+        case link
         case person
         case publisher
         case series

@@ -274,7 +274,7 @@ private extension ImportHandler {
                 let person = CDRecord.findOrMakeWithName(person, kind: .person, in: workContext)
                 allPeople.addToContents(person)
                 person.addToContents(book)
-                book.addRole(role, for: person)
+                book.addLink(to: person, role: role)
             }
         }
     }

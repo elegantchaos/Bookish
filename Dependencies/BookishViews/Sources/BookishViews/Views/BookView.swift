@@ -105,7 +105,7 @@ extension BookView: AddLinkDelegate {
         if let session = linkController.session {
             linked.addToContents(book)
             if let role = session.role {
-                book.addRole(role, for: linked)
+                book.addLink(to: linked, role: role)
             }
             linkController.session = nil
         }
