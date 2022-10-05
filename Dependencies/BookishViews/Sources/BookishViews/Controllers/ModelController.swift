@@ -114,17 +114,6 @@ public class ModelController: ObservableObject {
         }
     }
     
-    enum RootList: String, CaseIterable {
-        case lists = "root.lists"
-        case roles = "root.roles"
-
-        var id: String { rawValue }
-        
-        var label: String {
-            return NSLocalizedString(id, comment: "")
-        }
-    }
-
     // MARK: Root Lists
     
     typealias ListSetupFunction = (CDRecord, NSManagedObjectContext) -> Void
@@ -132,16 +121,16 @@ public class ModelController: ObservableObject {
     func makeRootLists() {
         let context = stack.viewContext
         context.perform { [self] in
-            makeRootList(.lists, context: context, setup: makeDefaultLists)
-            makeRootList(.roles, context: context, setup: makeDefaultRoles)
+            makeRootList(.rootListsID, context: context, setup: makeDefaultLists)
+            makeRootList(.rootRolesID, context: context, setup: makeDefaultRoles)
             save()
         }
     }
     
-    @discardableResult func makeRootList(_ kind: RootList, context: NSManagedObjectContext, setup: ListSetupFunction? = nil) -> CDRecord {
-        return CDRecord.findOrMakeWithID(kind.id, in: context) { created in
+    @discardableResult func makeRootList(_ id: String, context: NSManagedObjectContext, setup: ListSetupFunction? = nil) -> CDRecord {
+        return CDRecord.findOrMakeWithID(id, in: context) { created in
             created.kind = .root
-            created.name = kind.label
+            created.name = id.localized
             setup?(created, context)
         }
     }
@@ -162,22 +151,15 @@ public class ModelController: ObservableObject {
     }
     
     func makeDefaultLists(in container: CDRecord, context: NSManagedObjectContext) {
-        let titles: [(String, String, String)] = [
-            ("reading", "Reading List", "Books to read next."),
-            ("bookclub", "Book Club", "Upcoming titles for the book club."),
-            ("history", "Reading History", "Books that I've read."),
-            ("library", "Library Books", "Books from the library."),
-            ("loan", "On Loan", "Books I've leant out"),
-            ("borrowed", "Borrowed", "Books I've borrowed from someone."),
-            ("imports", "Imports", "Book Import sessions.")
-        ]
+        let names = ["reading", "bookclub", "history", "library", "loan", "borrowed", "imports"]
              
         let date = Date()
-        for (name, title, description) in titles {
+        for name in names {
+            let id = idForDefaultList(name)
             let list = CDRecord.make(kind: .list, in: context)
-            list.id = idForDefaultList(name)
-            list.name = title
-            list.set(description, forKey: .description)
+            list.id = id
+            list.name = id.localized
+            list.set("\(id).description".localized, forKey: .description)
             list.set(date, forKey: .addedDate)
             list.set(date, forKey: .modifiedDate)
             container.add(list)
@@ -252,4 +234,9 @@ public class ModelController: ObservableObject {
             stack.viewContext.undoManager?.redo()
         }
     }
+}
+
+extension String {
+    static let rootListsID = "root.lists"
+    static let rootRolesID = "root.roles"
 }

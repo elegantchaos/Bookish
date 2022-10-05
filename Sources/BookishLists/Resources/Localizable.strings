@@ -43,13 +43,29 @@ role.illustrator = "Illustrator";
 role.collaborator = "Collaborator";
 role.reviewer = "Reviewer";
 
-// Root List Names
-root.books = "All Books";
-root.imports = "Imports";
-root.publishers = "Publishers";
-root.series = "Series";
-root.lists = "My Lists";
+// Root Lists
+root.book = "All Books";
+root.people = "All People";
+root.publisher = "All Publishers";
+root.series = "All Series";
+root.lists = "Lists";
 root.roles = "Roles";
+
+// Default Lists
+default.reading = "Reading List";
+default.reading.description = "Books to read next.";
+default.bookclub = "Book Club";
+default.bookclub.description = "Upcoming titles for the book club.";
+default.history = "Reading History";
+default.history.description = "Books that I've read.";
+default.library = "Library Books";
+default.library.description = "Books from the library.";
+default.loan = "On Loan";
+default.loan.description = "Books I've leant out";
+default.borrowed = "Borrowed";
+default.borrowed.description = "Books I've borrowed from someone.";
+default.imports = "Imports";
+default.imports.description = "Book Import sessions.";
 
 // Book Adding Modes
 add.scan = "Scan Books";

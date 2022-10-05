@@ -74,7 +74,7 @@ class CDRecord: NSManagedObject, Identifiable {
     var canAddLists: Bool {
         switch kind {
             case .group: return true
-            case .root: return id == ModelController.RootList.lists.id
+            case .root: return id == .rootListsID
             default: return false
         }
     }
@@ -82,7 +82,7 @@ class CDRecord: NSManagedObject, Identifiable {
     var canAddGroups: Bool {
         switch kind {
             case .group: return true
-            case .root: return id == ModelController.RootList.lists.id
+            case .root: return id == .rootListsID
             default: return false
         }
     }

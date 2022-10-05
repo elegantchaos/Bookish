@@ -13,17 +13,20 @@ struct KindIndexView: View {
     @Environment(\.editMode) var editMode
     @SceneStorage var selection: String?
     @State var editSelection = Set<String>()
-    @Namespace var namespace
     
     @FetchRequest var books: FetchedResults<CDRecord>
     
     @State var filter: String = ""
+
+    let title: String
     
     init(kind: CDRecord.Kind) {
         let sort = [NSSortDescriptor(key: "name", ascending: true)]
         let predicate = NSPredicate(format: "kindCode == \(kind.rawValue)")
+
         self._books = .init(entity: CDRecord.entity(), sortDescriptors: sort, predicate: predicate)
         self._selection = .init("\(kind.allItemsTag).selection")
+        self.title = "root.\(kind)".localized
     }
     
     var body: some View {
@@ -43,7 +46,7 @@ struct KindIndexView: View {
         }
         .listStyle(.plain)
         .searchable(text: $filter)
-        .navigationBarTitle("root.books", displayMode: .inline)
+        .navigationBarTitle(title, displayMode: .inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 if editMode.isEditing {
