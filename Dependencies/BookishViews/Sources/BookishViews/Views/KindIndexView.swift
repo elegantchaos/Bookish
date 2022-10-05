@@ -8,61 +8,10 @@ import SwiftUI
 import SwiftUIExtensions
 import ThreadExtensions
 
-
-protocol KindProvider {
-    static var kind: CDRecord.Kind { get }
-}
-
-extension KindProvider {
-    var kind: CDRecord.Kind { Self.kind }
-    var tag: String { "all-\(Self.kind)" }
-}
-
-
-struct BooksKind: KindProvider {
-    static var kind: CDRecord.Kind { .book }
-}
-
-struct PeopleKind: KindProvider {
-    static var kind: CDRecord.Kind { .person }
-}
-
-struct PublishersKind: KindProvider {
-    static var kind: CDRecord.Kind { .publisher }
-}
-
-struct SeriesKind: KindProvider {
-    static var kind: CDRecord.Kind { .series }
-}
-
 struct KindIndexView: View {
-    @Environment(\.editMode) var editMode
-    @State var filter: String = ""
-
-    let kind: CDRecord.Kind
-    
-    var body: some View {
-        KindIndexContentView(kind: kind)
-            .navigationBarTitle("root.books", displayMode: .inline)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    if editMode.isEditing {
-                        EditButton()
-                    } else {
-                        ActionsMenuButton {
-                            AllBooksActionsMenu()
-                        }
-                    }
-                }
-            }
-    }
-}
-
-
-struct KindIndexContentView: View {
     @EnvironmentObject var model: ModelController
     @Environment(\.editMode) var editMode
-    @SceneStorage("allBooksSelection") var selection: String?
+    @SceneStorage var selection: String?
     @State var editSelection = Set<String>()
     @Namespace var namespace
     
@@ -74,6 +23,7 @@ struct KindIndexContentView: View {
         let sort = [NSSortDescriptor(key: "name", ascending: true)]
         let predicate = NSPredicate(format: "kindCode == \(kind.rawValue)")
         self._books = .init(entity: CDRecord.entity(), sortDescriptors: sort, predicate: predicate)
+        self._selection = .init("\(kind.allItemsTag).selection")
     }
     
     var body: some View {
@@ -93,6 +43,18 @@ struct KindIndexContentView: View {
         }
         .listStyle(.plain)
         .searchable(text: $filter)
+        .navigationBarTitle("root.books", displayMode: .inline)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                if editMode.isEditing {
+                    EditButton()
+                } else {
+                    ActionsMenuButton {
+                        AllBooksActionsMenu()
+                    }
+                }
+            }
+        }
     }
     
     var singleSelection: Binding<Set<String>> {

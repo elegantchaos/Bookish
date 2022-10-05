@@ -117,7 +117,6 @@ public class ModelController: ObservableObject {
     enum RootList: String, CaseIterable {
         case lists = "root.lists"
         case roles = "root.roles"
-        case imports = "root.imports"
 
         var id: String { rawValue }
         
@@ -126,53 +125,57 @@ public class ModelController: ObservableObject {
         }
     }
 
-    func rootList(_ list: RootList, in context: NSManagedObjectContext) -> CDRecord {
-        guard let record = CDRecord.findWithID(list.id, in: context) else {
-            fatalError("missing list \(list.id)")
+    // MARK: Root Lists
+    
+    typealias ListSetupFunction = (CDRecord, NSManagedObjectContext) -> Void
+    
+    func makeRootLists() {
+        let context = stack.viewContext
+        context.perform { [self] in
+            makeRootList(.lists, context: context, setup: makeDefaultLists)
+            makeRootList(.roles, context: context, setup: makeDefaultRoles)
+            save()
+        }
+    }
+    
+    @discardableResult func makeRootList(_ kind: RootList, context: NSManagedObjectContext, setup: ListSetupFunction? = nil) -> CDRecord {
+        return CDRecord.findOrMakeWithID(kind.id, in: context) { created in
+            created.kind = .root
+            created.name = kind.label
+            setup?(created, context)
+        }
+    }
+    
+    // MARK: Default Lists
+    
+    func defaultList(_ name: String, in context: NSManagedObjectContext) -> CDRecord {
+        let id = "default.\(name)"
+        guard let record = CDRecord.findWithID(id, in: context), record.kind == .list else {
+            fatalError("missing list \(id)")
         }
 
         return record
     }
     
-    func makeRootLists() {
-        let context = stack.viewContext
-        context.perform {
-            for list in RootList.allCases {
-                _ = CDRecord.findOrMakeWithID(list.id, in: context) { created in
-                    print("made root list \(created.id)")
-                    created.kind = .root
-                    created.name = list.label
-                    
-                    switch list {
-                        case .lists:
-                            self.makeDefaultLists(in: created, context: context)
-                            
-                        case .roles:
-                            self.makeDefaultRoles(in: created, context: context)
-                            
-                        default:
-                            break
-                    }
-                }
-            }
-
-            self.save()
-        }
+    func idForDefaultList(_ name: String) -> String {
+        return "default.\(name)"
     }
     
     func makeDefaultLists(in container: CDRecord, context: NSManagedObjectContext) {
-        let titles: [(String, String)] = [
-            ("Reading List", "Books to read next."),
-            ("Book Club", "Upcoming titles for the book club."),
-            ("Reading History", "Books that I've read."),
-            ("Library Books", "Books from the library."),
-            ("On Loan", "Books I've leant out"),
-            ("Borrowed", "Books I've borrowed from someone.")
+        let titles: [(String, String, String)] = [
+            ("reading", "Reading List", "Books to read next."),
+            ("bookclub", "Book Club", "Upcoming titles for the book club."),
+            ("history", "Reading History", "Books that I've read."),
+            ("library", "Library Books", "Books from the library."),
+            ("loan", "On Loan", "Books I've leant out"),
+            ("borrowed", "Borrowed", "Books I've borrowed from someone."),
+            ("imports", "Imports", "Book Import sessions.")
         ]
              
         let date = Date()
-        for (title, description) in titles {
+        for (name, title, description) in titles {
             let list = CDRecord.make(kind: .list, in: context)
+            list.id = idForDefaultList(name)
             list.name = title
             list.set(description, forKey: .description)
             list.set(date, forKey: .addedDate)
@@ -181,9 +184,10 @@ public class ModelController: ObservableObject {
         }
     }
     
+    // MARK: Roles
     
     var roles: [CDRecord] {
-        return rootList(.roles, in: stack.viewContext).contentsWithKind(.role)
+        return defaultList("roles", in: stack.viewContext).contentsWithKind(.role)
     }
     
     var sortedRoles: [CDRecord] {
@@ -192,7 +196,7 @@ public class ModelController: ObservableObject {
     
     func role(_ role: String, in context: NSManagedObjectContext) -> CDRecord {
         let id = "role.\(role)"
-        guard let record = CDRecord.findWithID(id, in: context) else {
+        guard let record = CDRecord.findWithID(id, in: context), record.kind == .role else {
             fatalError("missing role \(role)")
         }
 

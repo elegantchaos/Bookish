@@ -36,7 +36,7 @@ class ImportHandler: ObservableObject {
         self.workContext = context
 
         self.list = CDRecord(context: context)
-        self.allImports = model.rootList(.imports, in: context)
+        self.allImports = model.defaultList("imports", in: context)
         self.roleAuthor = model.role("author", in: context)
         self.roleIllustrator = model.role("illustrator", in: context)
         self.rolePublisher = model.role("publisher", in: context)

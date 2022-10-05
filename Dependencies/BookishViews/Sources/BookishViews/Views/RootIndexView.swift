@@ -30,6 +30,7 @@ struct RootIndexView: View {
                     Label("Settings", systemImage: "gear")
                 }
             }
+            .listRowSeparator(.hidden)
             .frame(height: 64) // TODO: this should be dynamic
         }
         .listStyle(.plain)
