@@ -12,7 +12,13 @@ extension CDRecord {
         guard let contents = contents else { return [] }
         return contents.filter { $0.kindCode == kindCode }
     }
-    
+
+    func contentsExcludingKind(_ kind: Kind) -> [CDRecord] {
+        let kindCode = kind.rawValue
+        guard let contents = contents else { return [] }
+        return contents.filter { $0.kindCode != kindCode }
+    }
+
     func findChildWithName(_ name: String, kind: Kind? = nil) -> CDRecord? {
         guard let contents = contents else { return nil }
         

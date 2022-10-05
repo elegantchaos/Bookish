@@ -23,10 +23,21 @@ struct RecordLink: View {
         NavigationLink(tag: record.id, selection: $selection) {
             if record.isBook {
                 BookView(book: record, fields: list?.fields ?? model.defaultFields)
-            } else if record.kind == .list {
-                CustomListView(list: record, fields: model.defaultFields)
             } else {
-                ListIndexView(list: record)
+                
+                switch record.kind {
+                    case .list:
+                        CustomListView(list: record, fields: model.defaultFields)
+                        
+                    case .role:
+                        LinksIndexView(list: record)
+                        
+                    case .publisher, .series, .person:
+                        BackLinksIndexView(list: record)
+                        
+                    default:
+                        ListIndexView(list: record)
+                }
             }
         } label: {
             RecordLabel(record: record, nameMode: nameMode)
