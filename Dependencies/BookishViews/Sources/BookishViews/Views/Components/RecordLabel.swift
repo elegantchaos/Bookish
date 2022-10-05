@@ -64,16 +64,11 @@ extension CDRecord {
     var iconName: String {
         switch kind {
             case .root:
-                return "books.vertical"
-//                if let rootList = ModelController.RootList(rawValue: id) {
-//                    switch rootList {
-//                        case .imports:      return "display.and.arrow.down"
-//                        case .roles:        return "person.crop.rectangle.stack"
-//                        case .series:       return "square.stack"
-//
-//                        default:             break
-//                    }
-//                }
+                switch id {
+                    case .rootListsID: return "list.bullet.clipboard"
+                    case .rootRolesID: return "person.crop.rectangle.stack"
+                    default: return "books.vertical"
+                }
                 
             default:
                 return kind.iconName
@@ -100,6 +95,7 @@ extension CDRecord.Kind {
     
     var indexIconName: String {
         switch self {
+            case .book: return "books.vertical"
             case .person: return "person.2"
             case .publisher: return "building.2"
             case .series: return "square.stack"
