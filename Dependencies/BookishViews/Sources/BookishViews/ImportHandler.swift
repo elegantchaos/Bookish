@@ -52,12 +52,6 @@ class ImportHandler: ObservableObject {
         mainContext.perform {
             let savedUndoManager = mainContext.undoManager
             mainContext.undoManager = nil
-
-            let entities: [CDRecord] = CDRecord.everyEntity(in: mainContext)
-//            for entity in entities {
-//                print(entity.id)
-//            }
-
             model.stack.onBackground { context in
                 let delegate = ImportHandler(model: model, importController: importController, context: context, undoManager: savedUndoManager)
                 importer.importFrom(source, delegate: delegate)
@@ -108,7 +102,7 @@ private extension ImportHandler {
         
         // build an index of previously imported books
         // we will use this to attempt not to import the same book from the same source twice
-        let request = CDRecord.fetchRequest(predicate: NSPredicate(format: "kindCode == \(CDRecord.Kind.book.rawValue)"))
+        let request = CDRecord.fetchRequest(predicate: NSPredicate(format: "kindCode == \(RecordKind.book.rawValue)"))
         if let results = try? workContext.fetch(request) {
             for book in results {
                 if let id = book.string(forKey: BookKey.importedID.rawValue) {

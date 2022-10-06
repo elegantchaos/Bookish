@@ -8,7 +8,7 @@ import SwiftUI
 struct AddRecordButton: View {
     @EnvironmentObject var model: ModelController
     let container: CDRecord?
-    let kind: CDRecord.Kind
+    let kind: RecordKind
     @Binding var selection: String?
     
     var body: some View {

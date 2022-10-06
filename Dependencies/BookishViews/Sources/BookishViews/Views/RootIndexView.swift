@@ -11,8 +11,8 @@ struct RootIndexView: View {
     @EnvironmentObject var navigation: NavigationController
     @SceneStorage("rootSelection") var selection: String?
 
-    let kinds: [CDRecord.Kind] = [.book, .person, .publisher, .series]
-    let predicate = NSPredicate(format: "kindCode == \(CDRecord.Kind.root.rawValue)")
+    let kinds: [RecordKind] = [.book, .person, .publisher, .series]
+    let predicate = NSPredicate(format: "kindCode == \(RecordKind.root.rawValue)")
 
     var body: some View {
         traceChanges()
@@ -20,7 +20,7 @@ struct RootIndexView: View {
         return VStack {
             VStack {
                 List(selection: $selection) {
-                    KindIndexesListView(kinds: kinds, selection: $selection)
+                    KindIndexesListView(kinds: kinds)
                     RecordPredicateListView(predicate: predicate, selection: $selection)
                 }
             }

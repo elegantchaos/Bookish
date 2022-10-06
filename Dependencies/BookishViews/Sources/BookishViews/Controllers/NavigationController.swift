@@ -6,18 +6,21 @@
 import Foundation
 import SwiftUI
 
+
 public class NavigationController: ObservableObject {
     lazy var defaultFields = makeDefaultFields()
     
-    public struct Link {
-        let record: CDRecord
-        let context: CDRecord?
-    }
-
-    public init() {
+    @Published var path: NavigationPath {
+        didSet {
+            print(path)
+        }
     }
     
-    func fields(for link: Link) -> FieldList {
+    public init() {
+        self.path = .init()
+    }
+    
+    func fields(for link: RecordWithContext) -> FieldList {
         link.context?.fields ?? defaultFields
     }
     
@@ -31,7 +34,7 @@ public class NavigationController: ObservableObject {
         }
     }
     
-    func destinationByRecord(_ link: Link) -> some View {
+    func destinationByRecord(_ link: RecordWithContext) -> some View {
         let record = link.record
         return VStack {
             if record.isBook {
@@ -52,6 +55,10 @@ public class NavigationController: ObservableObject {
                 }
             }
         }
+    }
+    
+    func destinationByKind(_ kind: RecordKind) -> some View {
+        KindIndexView(kind: kind)
     }
     
     func makeDefaultFields() -> FieldList {
@@ -75,7 +82,8 @@ struct NavigationModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
             .navigationDestination(for: String.self, destination: navigation.destinationByID)
-            .navigationDestination(for: NavigationController.Link.self, destination: navigation.destinationByRecord)
+            .navigationDestination(for: RecordKind.self, destination: navigation.destinationByKind)
+            .navigationDestination(for: RecordWithContext.self, destination: navigation.destinationByRecord)
     }
 }
 
@@ -83,12 +91,4 @@ extension View {
     func standardNavigation() -> some View {
         self.modifier(NavigationModifier())
     }
-}
-
-extension NavigationController.Link: Hashable {
-    public static func == (lhs: Self, rhs: Self) -> Bool {
-        return (lhs.record == rhs.record) && (lhs.context == rhs.context)
-    }
-    
-    
 }

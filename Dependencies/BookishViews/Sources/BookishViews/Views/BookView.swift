@@ -37,7 +37,7 @@ struct BookView: View {
                                 if let entries = book.roles() {
                                     ForEach(entries) { entry in
                                         HStack {
-                                            RecordLink(entry.record, nameMode: .role(entry.role), selection: $selection)
+                                            RecordLink(entry.record, nameMode: .role(entry.role))
                                                 .foregroundColor(.primary)
                                             Spacer()
                                         }

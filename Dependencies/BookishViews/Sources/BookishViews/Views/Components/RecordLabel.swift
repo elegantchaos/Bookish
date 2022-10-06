@@ -76,7 +76,7 @@ extension CDRecord {
     }
 }
 
-extension CDRecord.Kind {
+extension RecordKind {
     var iconName: String {
         switch self {
             case .unknown:          return "questionmark"

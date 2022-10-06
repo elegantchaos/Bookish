@@ -10,6 +10,7 @@ import UniformTypeIdentifiers
 import CoreData
 
 public struct RootView: View {
+    @EnvironmentObject var navigation: NavigationController
     @EnvironmentObject var fileController: FilePickerController
     @EnvironmentObject var importController: ImportController
     @EnvironmentObject var statusController: StatusController
@@ -19,7 +20,7 @@ public struct RootView: View {
     
     public var body: some View {
         SheetControllerHost {
-            NavigationStack {
+            NavigationStack(path: $navigation.path) {
                 RootIndexView()
             }
 //            .importsItemProviders([BookishInterchangeDocument.bookishType]) { itemProviders in

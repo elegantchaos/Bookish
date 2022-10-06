@@ -15,10 +15,10 @@ struct AddLinkView<P: FetchProvider>: View {
 
     @State var filter: String = ""
 
-    let kind: CDRecord.Kind
+    let kind: RecordKind
     let delegate: AddLinkDelegate
 
-    init(_ provider: P.Type, kind: CDRecord.Kind, delegate: AddLinkDelegate) {
+    init(_ provider: P.Type, kind: RecordKind, delegate: AddLinkDelegate) {
         self.delegate = delegate
         self.kind = kind
     }

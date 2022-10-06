@@ -7,7 +7,7 @@ import SwiftUI
 
 struct AddLinkSessionView: View {
     struct Session {
-        let kind: CDRecord.Kind
+        let kind: RecordKind
         let role: CDRecord?
     }
     

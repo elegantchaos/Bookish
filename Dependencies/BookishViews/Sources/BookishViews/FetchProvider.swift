@@ -6,7 +6,7 @@
 import CoreData
 
 protocol FetchProvider {
-    static var kind: CDRecord.Kind { get }
+    static var kind: RecordKind { get }
 }
 
 extension FetchProvider {
@@ -20,17 +20,17 @@ extension FetchProvider {
 }
 
 class BookFetchProvider: FetchProvider {
-    static var kind: CDRecord.Kind { .book }
+    static var kind: RecordKind { .book }
 }
 
 class PersonFetchProvider: FetchProvider {
-    static var kind: CDRecord.Kind { .person }
+    static var kind: RecordKind { .person }
 }
 
 class PublisherFetchProvider: FetchProvider {
-    static var kind: CDRecord.Kind { .publisher }
+    static var kind: RecordKind { .publisher }
 }
 
 class SeriesFetchProvider: FetchProvider {
-    static var kind: CDRecord.Kind { .series }
+    static var kind: RecordKind { .series }
 }

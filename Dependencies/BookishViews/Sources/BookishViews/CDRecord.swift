@@ -13,34 +13,18 @@ import SwiftUIExtensions
 import ThreadExtensions
 
 class CDRecord: NSManagedObject, Identifiable {
-    enum Kind: Int16, Identifiable {
-        case unknown
-        case root
-        case group
-        case list
-        case book
-        case role
-        case link
-        case person
-        case publisher
-        case series
-        case importSession
-        
-        var id: Int16 { rawValue }
-    }
-    
     fileprivate lazy var cachedFields: FieldList = decodedFields
     
     var fields: FieldList { cachedFields }
     fileprivate lazy var cachedProperties: [String:CDProperty] = [:]
 
-    var kind: Kind {
-        get { Kind(rawValue: kindCode) ?? .unknown }
+    var kind: RecordKind {
+        get { RecordKind(rawValue: kindCode) ?? .unknown }
         set { kindCode = newValue.rawValue }
     }
 
     var isBook: Bool {
-        kindCode == Kind.book.rawValue
+        kindCode == RecordKind.book.rawValue
     }
     
     var canDelete: Bool {
@@ -89,7 +73,7 @@ class CDRecord: NSManagedObject, Identifiable {
 
     var watcher: AnyCancellable? = nil
     
-    func sorted(ofKind kind: Kind) -> [CDRecord] {
+    func sorted(ofKind kind: RecordKind) -> [CDRecord] {
         guard let lists = contents?.filter({ $0.kindCode == kind.rawValue }) else { return [] }
         let sorted = lists.sorted {
             return ($0.name == $1.name) ? ($0.id < $1.id) : ($0.name < $1.name)

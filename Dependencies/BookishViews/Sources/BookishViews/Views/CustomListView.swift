@@ -46,7 +46,7 @@ struct CustomListView: View {
                             if isEditing {
                                 RecordLabel(record: item)
                             } else {
-                                RecordLink(item, in: list, selection: $selection)
+                                RecordLink(item, in: list)
                             }
                         }
                     }

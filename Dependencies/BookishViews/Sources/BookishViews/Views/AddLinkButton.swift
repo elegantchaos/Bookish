@@ -8,11 +8,11 @@ import SwiftUI
 struct AddLinkButton: View {
     @EnvironmentObject var linkController: LinkController
     
-    let kind: CDRecord.Kind
+    let kind: RecordKind
     let role: CDRecord?
     let label: String
     
-    init(kind: CDRecord.Kind, role: CDRecord? = nil) {
+    init(kind: RecordKind, role: CDRecord? = nil) {
         self.kind = kind
         self.role = role
         self.label = role?.name ?? kind.roleLabel

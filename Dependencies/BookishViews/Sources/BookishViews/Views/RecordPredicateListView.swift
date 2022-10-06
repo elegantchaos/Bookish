@@ -18,7 +18,7 @@ struct RecordPredicateListView: View {
     
     var body: some View {
         ForEach(lists) { list in
-            RecordLink(list, selection: $selection)
+            RecordLink(list)
         }
     }
 }

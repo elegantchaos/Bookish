@@ -20,7 +20,7 @@ struct KindIndexView: View {
 
     let title: String
     
-    init(kind: CDRecord.Kind) {
+    init(kind: RecordKind) {
         let sort = [NSSortDescriptor(key: "name", ascending: true)]
         let predicate = NSPredicate(format: "kindCode == \(kind.rawValue)")
 
@@ -38,7 +38,7 @@ struct KindIndexView: View {
                     if isEditing {
                         RecordLabel(record: book)
                     } else {
-                        RecordLink(book, selection: $selection)
+                        RecordLink(book)
                     }
                 }
             }

@@ -6,21 +6,19 @@
 import SwiftUI
 
 struct RecordLink: View {
-    @EnvironmentObject var model: ModelController
     @ObservedObject var record: CDRecord
-    let list: CDRecord?
-    @Binding var selection: String?
+    
+    let link: RecordWithContext
     let nameMode: RecordLabel.NameMode
     
-    init(_ record: CDRecord, nameMode: RecordLabel.NameMode = .normal, in list: CDRecord? = nil, selection: Binding<String?>) {
+    init(_ record: CDRecord, nameMode: RecordLabel.NameMode = .normal, in context: CDRecord? = nil) {
         self.record = record
-        self.list = list
-        self._selection = selection
+        self.link = RecordWithContext(record: record, context: context)
         self.nameMode = nameMode
     }
 
     var body: some View {
-        NavigationLink(value: NavigationController.Link(record: record, context: list)) {
+        NavigationLink(value: link) {
             RecordLabel(record: record, nameMode: nameMode)
         }
     }

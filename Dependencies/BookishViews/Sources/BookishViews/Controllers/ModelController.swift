@@ -48,7 +48,7 @@ struct SelectionStats {
             books = items
         } else if let id = selection, let contents = CDRecord.withId(id, in: context)?.contents {
             items = contents.count
-            books = contents.filter({ $0.kindCode == CDRecord.Kind.book.rawValue }).count
+            books = contents.filter({ $0.kindCode == RecordKind.book.rawValue }).count
         } else {
             books = 0
             items = 0
@@ -89,7 +89,7 @@ public class ModelController: ObservableObject {
         }
     }
     
-    func add(_ kind: CDRecord.Kind, setup: ((CDRecord) -> Void)? = nil) -> CDRecord {
+    func add(_ kind: RecordKind, setup: ((CDRecord) -> Void)? = nil) -> CDRecord {
         let object = CDRecord.make(kind: kind, in: stack.viewContext)
         setup?(object)
         save()

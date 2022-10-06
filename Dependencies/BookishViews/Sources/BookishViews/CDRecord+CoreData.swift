@@ -117,7 +117,7 @@ extension CDRecord {
         return object
     }
 
-    class func make(kind: Kind, in context: NSManagedObjectContext) -> CDRecord {
+    class func make(kind: RecordKind, in context: NSManagedObjectContext) -> CDRecord {
         let record = CDRecord(context: context)
         record.kind = kind
         return record
@@ -132,7 +132,7 @@ extension CDRecord {
         return nil
     }
     
-    class func findOrMakeWithName(_ name: String, kind: Kind? = nil, in context: NSManagedObjectContext, creationCallback: CreationCallback? = nil) -> CDRecord {
+    class func findOrMakeWithName(_ name: String, kind: RecordKind? = nil, in context: NSManagedObjectContext, creationCallback: CreationCallback? = nil) -> CDRecord {
         let predicate: NSPredicate
         if let kindCode = kind?.rawValue {
             predicate = NSPredicate(format: "(name = %@) and (kindCode = \(kindCode))", name)
@@ -160,7 +160,7 @@ extension CDRecord {
         return object
     }
 
-    class func countOfKind(_ kind: Kind, in context: NSManagedObjectContext) -> Int {
+    class func countOfKind(_ kind: RecordKind, in context: NSManagedObjectContext) -> Int {
         let request = CDRecord.fetchRequest(predicate: NSPredicate(format: "kindCode = \(kind.rawValue)"))
         request.resultType = .countResultType
         if let count = try? context.count(for: request) {

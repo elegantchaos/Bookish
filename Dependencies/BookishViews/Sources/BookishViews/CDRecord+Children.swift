@@ -7,19 +7,19 @@ import Foundation
 
 extension CDRecord {
     
-    func contentsWithKind(_ kind: Kind) -> [CDRecord] {
+    func contentsWithKind(_ kind: RecordKind) -> [CDRecord] {
         let kindCode = kind.rawValue
         guard let contents = contents else { return [] }
         return contents.filter { $0.kindCode == kindCode }
     }
 
-    func contentsExcludingKind(_ kind: Kind) -> [CDRecord] {
+    func contentsExcludingKind(_ kind: RecordKind) -> [CDRecord] {
         let kindCode = kind.rawValue
         guard let contents = contents else { return [] }
         return contents.filter { $0.kindCode != kindCode }
     }
 
-    func findChildWithName(_ name: String, kind: Kind? = nil) -> CDRecord? {
+    func findChildWithName(_ name: String, kind: RecordKind? = nil) -> CDRecord? {
         guard let contents = contents else { return nil }
         
         let possibles = contents.filter { $0.name == name }
@@ -35,7 +35,7 @@ extension CDRecord {
         }
     }
     
-    func findOrMakeChildWithName(_ name: String, kind: Kind, creationCallback: CreationCallback? = nil) -> CDRecord {
+    func findOrMakeChildWithName(_ name: String, kind: RecordKind, creationCallback: CreationCallback? = nil) -> CDRecord {
         let kindCode = kind.rawValue
         if let existing = contents?.first(where: { ($0.kindCode == kindCode) && ($0.name == name) }) {
             return existing
@@ -51,7 +51,7 @@ extension CDRecord {
         return new
     }
     
-    func findChildWithID(_ id: String, kind: Kind? = nil) -> CDRecord? {
+    func findChildWithID(_ id: String, kind: RecordKind? = nil) -> CDRecord? {
         guard let contents = contents else { return nil }
         
         let possibles = contents.filter { $0.id == id }
@@ -67,7 +67,7 @@ extension CDRecord {
         }
     }
     
-    func findOrMakeChildWithID(_ id: String, kind: Kind, creationCallback: CreationCallback? = nil) -> CDRecord {
+    func findOrMakeChildWithID(_ id: String, kind: RecordKind, creationCallback: CreationCallback? = nil) -> CDRecord {
         let kindCode = kind.rawValue
         if let existing = contents?.first(where: { ($0.kindCode == kindCode) && ($0.id == id) }) {
             return existing
@@ -84,13 +84,13 @@ extension CDRecord {
         return new
     }
 
-    func containersWithKind(_ kind: Kind) -> [CDRecord] {
+    func containersWithKind(_ kind: RecordKind) -> [CDRecord] {
         let kindCode = kind.rawValue
         guard let containedBy else { return [] }
         return containedBy.filter { $0.kindCode == kindCode }
     }
 
-    func containersExcludingKind(_ kind: Kind) -> [CDRecord] {
+    func containersExcludingKind(_ kind: RecordKind) -> [CDRecord] {
         let kindCode = kind.rawValue
         guard let containedBy else { return [] }
         return containedBy.filter { $0.kindCode != kindCode }

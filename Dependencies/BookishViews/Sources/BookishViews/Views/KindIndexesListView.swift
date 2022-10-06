@@ -7,14 +7,11 @@ import SwiftUI
 
 /// Returns a list of the top-level index views for a given list of record kinds.
 struct KindIndexesListView: View {
-    let kinds: [CDRecord.Kind]
-    @Binding var selection: String?
+    let kinds: [RecordKind]
     
     var body: some View {
         ForEach(kinds) { kind in
-            NavigationLink(tag: kind.allItemsTag, selection: $selection) {
-                KindIndexView(kind: kind)
-            } label: {
+            NavigationLink(value: kind) {
                 Label(kind.pluralLabel, systemImage: kind.indexIconName)
             }
         }
