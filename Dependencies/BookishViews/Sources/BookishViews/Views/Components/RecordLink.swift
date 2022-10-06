@@ -20,7 +20,7 @@ struct RecordLink: View {
     }
 
     var body: some View {
-        NavigationLink(value: record) {
+        NavigationLink(value: NavigationController.Link(record: record, context: list)) {
             RecordLabel(record: record, nameMode: nameMode)
         }
     }

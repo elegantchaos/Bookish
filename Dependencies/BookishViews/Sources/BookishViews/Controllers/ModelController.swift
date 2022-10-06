@@ -118,6 +118,14 @@ public class ModelController: ObservableObject {
     
     typealias ListSetupFunction = (CDRecord, NSManagedObjectContext) -> Void
     
+    func rootList(_ id: String, in context: NSManagedObjectContext) -> CDRecord {
+        guard let record = CDRecord.findWithID(id, in: context), record.kind == .root else {
+            fatalError("missing root list \(id)")
+        }
+
+        return record
+    }
+    
     func makeRootLists() {
         let context = stack.viewContext
         context.perform { [self] in
@@ -169,7 +177,7 @@ public class ModelController: ObservableObject {
     // MARK: Roles
     
     var roles: [CDRecord] {
-        return defaultList("roles", in: stack.viewContext).contentsWithKind(.role)
+        return rootList(.rootRolesID, in: stack.viewContext).contentsWithKind(.role)
     }
     
     var sortedRoles: [CDRecord] {
@@ -196,22 +204,7 @@ public class ModelController: ObservableObject {
         }
     }
     
-    func makeDefaultFields() -> FieldList {
-        let list = FieldList()
-        list.addField(Field(.description, kind: .paragraph, layout: .belowNoLabel))
-        list.addField(Field(.notes, kind: .paragraph, layout: .below))
-        list.addField(Field(.addedDate, kind: .date, label: "added"))
-        list.addField(Field(.publishedDate, kind: .date, label: "published"))
-        list.addField(Field(.format, kind: .string))
-        list.addField(Field(.asin, kind: .string, icon: "barcode"))
-        list.addField(Field(.isbn, kind: .string, icon: "barcode"))
-        list.addField(Field(.dewey, kind: .string))
-        list.addField(Field(.pages, kind: .number))
-        return list
-    }
     
-    
-    lazy var defaultFields = makeDefaultFields()
     
     var canUndo: Bool {
         stack.viewContext.undoManager?.canUndo ?? false

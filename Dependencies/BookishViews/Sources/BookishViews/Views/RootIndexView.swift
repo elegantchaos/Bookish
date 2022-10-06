@@ -8,6 +8,7 @@ import SwiftUIExtensions
 
 struct RootIndexView: View {
     @EnvironmentObject var model: ModelController
+    @EnvironmentObject var navigation: NavigationController
     @SceneStorage("rootSelection") var selection: String?
 
     let kinds: [CDRecord.Kind] = [.book, .person, .publisher, .series]
@@ -35,6 +36,7 @@ struct RootIndexView: View {
         }
         .listStyle(.plain)
         .navigationBarTitle(model.appName, displayMode: .inline)
+        .standardNavigation()
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 ActionsMenuButton {
@@ -44,4 +46,7 @@ struct RootIndexView: View {
         }
         
     }
+    
+    
+   
 }

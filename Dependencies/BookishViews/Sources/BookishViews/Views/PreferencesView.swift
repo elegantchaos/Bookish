@@ -15,32 +15,30 @@ struct PreferencesView: View {
     @AppStorage("enableRawProperties") var enableRawProperties = false
     
     var body: some View {
-        NavigationView {
-            List {
-                Section("General") {
-                    Toggle("Show Raw Properties", isOn: $enableRawProperties)
-                    
-                    NavigationLink("Logging") {
-                        LoggerChannelsView()
-                            .listStyle(.plain)
-                            .navigationTitle("Log Channels")
-                    }
-                }
-
-                Section("Danger Zone") {
-                    HStack {
-                        Spacer()
-                        Button("Wipe All Data", role: .destructive, action: handleRemoveAll)
-                            .buttonStyle(.borderedProminent)
-                            .buttonBorderShape(.capsule)
-                        Spacer()
-                    }
+        List {
+            Section("General") {
+                Toggle("Show Raw Properties", isOn: $enableRawProperties)
+                
+                NavigationLink("Logging") {
+                    LoggerChannelsView()
+                        .listStyle(.plain)
+                        .navigationTitle("Log Channels")
                 }
             }
-            .listStyle(.plain)
-            .navigationTitle("Settings")
-            .navigationBarTitleDisplayMode(.inline)
+
+            Section("Danger Zone") {
+                HStack {
+                    Spacer()
+                    Button("Wipe All Data", role: .destructive, action: handleRemoveAll)
+                        .buttonStyle(.borderedProminent)
+                        .buttonBorderShape(.capsule)
+                    Spacer()
+                }
+            }
         }
+        .listStyle(.plain)
+        .navigationTitle("Settings")
+        .navigationBarTitleDisplayMode(.inline)
     }
     
     func handleRemoveAll() {
