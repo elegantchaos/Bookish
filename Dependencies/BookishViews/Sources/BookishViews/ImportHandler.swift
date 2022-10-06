@@ -54,9 +54,9 @@ class ImportHandler: ObservableObject {
             mainContext.undoManager = nil
 
             let entities: [CDRecord] = CDRecord.everyEntity(in: mainContext)
-            for entity in entities {
-                print(entity.id)
-            }
+//            for entity in entities {
+//                print(entity.id)
+//            }
 
             model.stack.onBackground { context in
                 let delegate = ImportHandler(model: model, importController: importController, context: context, undoManager: savedUndoManager)

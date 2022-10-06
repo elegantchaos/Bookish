@@ -82,13 +82,13 @@ private extension Dictionary where Key == String, Value == Any {
     mutating func extractImages(from data: inout [String:Any]) {
         var urls: [URL] = []
         for key in ["coverImageLargeURLString", "coverImageMediumURLString", "coverImageSmallURLString"] {
-            if let string = data[asString: key], let url = URL(string: string) {
+            if let string = data[asString: key], let url = URL(string: string.removingPercentEncoding ?? string) {
                 urls.append(url)
                 data.removeValue(forKey: key)
             }
         }
         
-        self[BookKey.imageURLs.rawValue] = urls
+        self[BookKey.imageURLs.rawValue] = urls.map { $0.absoluteString }
     }
     
     mutating func extractDeliciousID() -> String {

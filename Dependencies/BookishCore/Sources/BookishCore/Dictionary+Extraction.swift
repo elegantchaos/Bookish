@@ -139,7 +139,20 @@ public extension Dictionary where Key == String, Value == Any {
     }
     
     func urls(forKey key: BookKey) -> [URL] {
-        self[key.rawValue] as? [URL] ?? []
+        if let urls = self[key.rawValue] as? [URL] {
+            return urls
+        }
+        
+        if let strings = self[key.rawValue] as? [String] {
+            return strings.compactMap { URL(string: $0) }
+        }
+        
+        if let url = self[key.rawValue] as? URL {
+            return [url]
+        }
+        
+        guard let string = self[key.rawValue] as? String, let url = URL(string: string) else { return [] }
+        return [url]
     }
     
     func strings(forKey key: BookKey) -> [String] {
