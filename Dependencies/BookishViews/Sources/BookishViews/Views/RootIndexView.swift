@@ -6,13 +6,17 @@
 import SwiftUI
 import SwiftUIExtensions
 
+extension [NSSortDescriptor] {
+    static let defaultSort = [NSSortDescriptor(key: "name", ascending: true)]
+}
+
 struct RootIndexView: View {
     @EnvironmentObject var model: ModelController
     @EnvironmentObject var navigation: NavigationController
     @SceneStorage("rootSelection") var selection: String?
+    @FetchRequest(entity: CDRecord.entity(), sortDescriptors: .defaultSort, predicate: .isRootView) var records: FetchedResults<CDRecord>
 
     let kinds: [RecordKind] = [.book, .person, .publisher, .series]
-    let predicate = NSPredicate(format: "kindCode == \(RecordKind.root.rawValue)")
 
     var body: some View {
         traceChanges()
@@ -21,7 +25,7 @@ struct RootIndexView: View {
             VStack {
                 List(selection: $selection) {
                     KindIndexesListView(kinds: kinds)
-                    FilteredRecordListView(predicate: predicate, filter: .constant(""))
+                    FilteredRecordListView(records: records, filter: .constant(""))
                 }
             }
             .frame(maxHeight: .infinity)
@@ -46,7 +50,9 @@ struct RootIndexView: View {
         }
         
     }
-    
-    
-   
+}
+
+extension NSPredicate {
+    /// True for records of kind `.root`.
+    static let isRootView: NSPredicate = .init(format: "kindCode == \(RecordKind.root.rawValue)")
 }

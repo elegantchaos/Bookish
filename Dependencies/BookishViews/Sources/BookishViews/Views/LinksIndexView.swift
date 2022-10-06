@@ -116,6 +116,6 @@ extension LinksIndexView: AddLinkDelegate {
 }
 
 extension LinksIndexView: RecordViewer {
-    var container: CDRecord { return list }
+    var record: CDRecord { return list }
     func dismiss() { presentationMode.wrappedValue.dismiss() }
 }

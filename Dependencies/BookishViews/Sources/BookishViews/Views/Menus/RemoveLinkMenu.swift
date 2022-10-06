@@ -20,7 +20,7 @@ struct RemoveLinkMenu: View {
     
     var body: some View {
         
-        if let (links, label) = sortedLinks, let containingRecord = viewer?.container {
+        if let (links, label) = sortedLinks, let containingRecord = viewer?.record {
             Menu(label) {
                 ForEach(links) { linkedRecord in
                     RoleItemsView(mode: mode, containingRecord: containingRecord, linkedRecord: linkedRecord)
@@ -30,7 +30,7 @@ struct RemoveLinkMenu: View {
     }
     
     var sortedLinks: ([CDRecord], String)? {
-        guard let container = viewer?.container else {
+        guard let container = viewer?.record else {
             return nil
         }
         

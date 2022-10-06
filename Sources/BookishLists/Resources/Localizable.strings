@@ -45,7 +45,7 @@ role.reviewer = "Reviewer";
 
 // Root Lists
 root.book = "All Books";
-root.people = "All People";
+root.person = "All People";
 root.publisher = "All Publishers";
 root.series = "All Series";
 root.lists = "Lists";

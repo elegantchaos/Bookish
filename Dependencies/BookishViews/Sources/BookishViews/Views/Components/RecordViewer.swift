@@ -6,7 +6,7 @@
 import SwiftUI
 
 protocol RecordViewer {
-    var container: CDRecord { get }
+    var record: CDRecord { get }
     func dismiss()
 }
 

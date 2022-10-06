@@ -96,7 +96,7 @@ struct BookView: View {
 }
 
 extension BookView: RecordViewer {
-    var container: CDRecord { return book }
+    var record: CDRecord { return book }
     func dismiss() { presentationMode.wrappedValue.dismiss() }
 }
 

@@ -116,6 +116,6 @@ extension BackLinksIndexView: AddLinkDelegate {
 }
 
 extension BackLinksIndexView: RecordViewer {
-    var container: CDRecord { return list }
+    var record: CDRecord { return list }
     func dismiss() { presentationMode.wrappedValue.dismiss() }
 }

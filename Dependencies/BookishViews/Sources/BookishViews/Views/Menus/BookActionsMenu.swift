@@ -9,7 +9,7 @@ struct BookActionsMenu: View {
     var body: some View {
         AddLinkMenu(mode: .link)
         RemoveLinkMenu(mode: .link)
-        DeleteContainerButton()
+        DeleteViewedButton()
         EditButton()
     }
 }

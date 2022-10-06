@@ -31,7 +31,7 @@ struct ListActionsMenu: View {
         }
 
         if list.canDelete {
-            DeleteContainerButton()
+            DeleteViewedButton()
         }
         
         EditButton()

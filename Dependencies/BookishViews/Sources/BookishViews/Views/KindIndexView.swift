@@ -11,24 +11,23 @@ import ThreadExtensions
 struct KindIndexView: View {
     @EnvironmentObject var model: ModelController
     @Environment(\.editMode) var editMode
+    @FetchRequest var records: FetchedResults<CDRecord>
     @State var selection: Set<String> = []
-    
-    
     @State var filter: String = ""
 
-    let predicate: NSPredicate
     let title: String
     
     init(kind: RecordKind) {
         self.title = "root.\(kind)".localized
-        self.predicate = NSPredicate(format: "kindCode == \(kind.rawValue)")
+        let predicate = NSPredicate(format: "kindCode == \(kind.rawValue)")
+        self._records = .init(entity: CDRecord.entity(), sortDescriptors: [NSSortDescriptor(key: "name", ascending: true)], predicate: predicate)
     }
     
     var body: some View {
         let isEditing = editMode.isEditing
 
         List(selection: $selection) {
-            FilteredRecordListView(predicate: predicate, filter: $filter, onDelete: handleDelete)
+            FilteredRecordListView(records: records, filter: $filter, onDelete: handleDelete)
         }
         .listStyle(.plain)
         .searchable(text: $filter)
@@ -43,7 +42,9 @@ struct KindIndexView: View {
             
             ToolbarItem(placement: .navigationBarTrailing) {
                 ActionsMenuButton {
-                    AllBooksActionsMenu()
+                    VStack {
+                        KindIndexActionsMenu(records: records, selection: $selection)
+                    }
                 }
             }
         }
@@ -53,7 +54,7 @@ struct KindIndexView: View {
            if let items = items {
                items.forEach { index in
                    let book = records[index]
-                   model.delete(book)
+                   model.delete([book])
                }
            }
        }

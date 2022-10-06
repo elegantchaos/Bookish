@@ -19,7 +19,7 @@ struct ExportButton: View {
     }
 
     func handleExport() {
-        if let root = container?.container {
+        if let root = container?.record {
             fileController.chooseLocationToExport(BookishInterchangeDocument(root, exporter: exporter)) { result in
                 switch result {
                     case .success:

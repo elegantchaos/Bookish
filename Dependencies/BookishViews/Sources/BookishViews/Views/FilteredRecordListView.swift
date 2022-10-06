@@ -7,16 +7,14 @@ import SwiftUI
 
 /// Returns a list of records matching a given predicate (optionally sorted).
 struct FilteredRecordListView: View {
-    @Binding var filter: String
-    @FetchRequest var records: FetchedResults<CDRecord>
-    
     typealias DeleteHandler = (IndexSet?, FetchedResults<CDRecord>) -> ()
-    
+
+    let records: FetchedResults<CDRecord>
+    @Binding var filter: String
     let onDelete: DeleteHandler?
-    
-    init(predicate: NSPredicate, filter: Binding<String>, sort: [NSSortDescriptor]? = nil, onDelete: ((IndexSet?, FetchedResults<CDRecord>) -> ())? = nil) {
-        let sort = sort ?? [NSSortDescriptor(key: "name", ascending: true)]
-        self._records = .init(entity: CDRecord.entity(), sortDescriptors: sort, predicate: predicate)
+
+    init(records: FetchedResults<CDRecord>, filter: Binding<String>, onDelete: DeleteHandler? = nil) {
+        self.records = records
         self._filter = filter
         self.onDelete = onDelete
     }

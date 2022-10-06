@@ -1,24 +1,22 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-//  Created by Sam Deane on 11/01/22.
+//  Created by Sam Deane on 06/10/22.
 //  All code (c) 2022 - present day, Elegant Chaos Limited.
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 import SwiftUI
 
-struct DeleteContainerButton: View {
+struct DeleteSelectionButton: View {
     @EnvironmentObject var model: ModelController
-    @Environment(\.recordViewer) var container: RecordViewer?
+    
+    let selection: Set<String>
     
     var body: some View {
         Button(action: handleDelete) {
-            Label("Delete", systemImage: "trash")
+            Label("Delete Selected Items", systemImage: "trash")
         }
     }
     
     func handleDelete() {
-        if let view = container {
-            view.dismiss()
-            model.delete(view.container)
-        }
+        model.delete(selection)
     }
 }

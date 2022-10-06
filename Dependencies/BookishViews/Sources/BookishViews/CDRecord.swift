@@ -29,7 +29,7 @@ class CDRecord: NSManagedObject, Identifiable {
     
     var canDelete: Bool {
         switch kind {
-            case .list, .group: return true
+            case .list, .group, .person, .book, .publisher, .series: return true
             default: return false
         }
     }

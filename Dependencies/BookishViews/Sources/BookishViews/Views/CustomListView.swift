@@ -124,6 +124,6 @@ extension CustomListView: AddLinkDelegate {
 }
 
 extension CustomListView: RecordViewer {
-    var container: CDRecord { return list }
+    var record: CDRecord { return list }
     func dismiss() { presentationMode.wrappedValue.dismiss() }
 }

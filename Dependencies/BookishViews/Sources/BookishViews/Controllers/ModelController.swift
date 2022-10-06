@@ -78,11 +78,37 @@ public class ModelController: ObservableObject {
         }
     }
 
-    func delete(_ object: CDRecord) {
-        print("deleting \(object.objectID)")
+    func recordsWithIDs<IDCollection>(_ ids: IDCollection) -> [CDRecord] where IDCollection: Collection, IDCollection.Element == String {
+        let context = stack.viewContext
+        var records: [CDRecord] = []
+        context.performAndWait {
+            records = ids.compactMap { CDRecord.findWithID($0, in: context) }
+        }
+        return records
+    }
+    
+    func delete<IDS>(_ ids: IDS) where IDS: Collection, IDS.Element == String {
         let context = stack.viewContext
         context.perform {
-            context.delete(object)
+            for id in ids {
+                if let object = CDRecord.findWithID(id, in: context) {
+                    print("deleting \(id)")
+                    context.delete(object)
+                }
+            }
+            onMainQueue {
+                self.save()
+            }
+        }
+    }
+    
+    func delete(_ objects: [CDRecord]) {
+        let context = stack.viewContext
+        context.perform {
+            for object in objects {
+                print("deleting \(object.objectID)")
+                context.delete(object)
+            }
             onMainQueue {
                 self.save()
             }
