@@ -66,7 +66,7 @@ public class ModelController: ObservableObject {
         makeRootLists()
     }
     
-    var appName: String { "Bookish Lists" }
+    var appName: String { "Bookish" }
 
     public func save() {
         let context = stack.viewContext

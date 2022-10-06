@@ -13,7 +13,7 @@ struct AddRecordButton: View {
     
     var body: some View {
         Button(action: handleAddRecord) {
-            Label(LocalizedStringKey(kind.newLabel), systemImage: kind.iconName)
+            Label(kind.newLabel, systemImage: kind.iconName)
         }
     }
 
@@ -22,7 +22,7 @@ struct AddRecordButton: View {
         if let container = container {
             container.addToContents(record)
         }
-        record.name = NSLocalizedString(kind.untitledLabel, comment: "")
+        record.name = kind.untitledLabel
         selection = record.id
     }
 }

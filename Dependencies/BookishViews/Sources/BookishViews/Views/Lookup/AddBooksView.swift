@@ -14,11 +14,11 @@ struct AddBooksView: View {
         case search
 
         var label: String {
-            return NSLocalizedString("add.\(rawValue)", comment: "")
+            return "add.\(rawValue)".localized
         }
         
         var help: String {
-            return NSLocalizedString("add.\(rawValue).help", comment: "")
+            return "add.\(rawValue).help".localized
         }
 
         var iconName: String {

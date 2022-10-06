@@ -89,7 +89,7 @@ extension CDRecord {
     }
 
     /// Return a list of the role/record pairs associated with this record.
-    func roles() -> [RoleAndRecord] {
+    func linkedRecords() -> [RoleAndRecord] {
         var entries: [RoleAndRecord] = []
         for link in linksTo() {
             if let role = link.containersWithKind(.role).first, let target = link.containersExcludingKind(.role).first {
@@ -100,5 +100,8 @@ extension CDRecord {
         return entries
     }
     
-
+    var asLink: RoleAndRecord? {
+        guard let role = containersWithKind(.role).first, let target = containersExcludingKind(.role).first else { return nil }
+        return RoleAndRecord(role: role, record: target)
+    }
 }

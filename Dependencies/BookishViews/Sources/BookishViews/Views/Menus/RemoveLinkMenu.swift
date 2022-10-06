@@ -10,88 +10,27 @@ let linkMenuChannel = Channel("Link Menu")
 
 struct RemoveLinkMenu: View {
     @Environment(\.recordViewer) var viewer: RecordViewer?
-    
-    enum Mode {
-        case link
-        case item
-    }
-    
-    let mode: Mode
+    @EnvironmentObject var model: ModelController
     
     var body: some View {
         
-        if let (links, label) = sortedLinks, let containingRecord = viewer?.record {
-            Menu(label) {
-                ForEach(links) { linkedRecord in
-                    RoleItemsView(mode: mode, containingRecord: containingRecord, linkedRecord: linkedRecord)
+        if let record = viewer?.record {
+            let records = record.linksTo()
+            if records.count > 0 {
+                Menu("Remove Link") {
+                    ForEach(records, id: \.self) { record in
+                        if let link = record.asLink {
+                            Button(action: { handleRemoveLink(record) }) {
+                                RecordLabel(record: link.record, nameMode: .roleInline(link.role))
+                            }
+                        }
+                    }
                 }
             }
         }
     }
     
-    var sortedLinks: ([CDRecord], String)? {
-        guard let container = viewer?.record else {
-            return nil
-        }
-        
-        let links: [CDRecord]
-        let label: String
-        let debug: String
-        
-        switch mode {
-            case .link:
-                links = container.sortedContainedBy
-                label = "Remove Link"
-                debug = "Links for \(container.name)"
-                
-            case .item:
-                links = container.sortedContents
-                label = "Remove Item"
-                debug = "Contents of \(container.name)"
-        }
-        
-        guard links.count > 0 else { return nil }
-        
-        linkMenuChannel.log(debug)
-        linkMenuChannel.log(links.map({ $0.name }))
-        return (links, label)
+    func handleRemoveLink(_ link: CDRecord) {
+        model.delete([link])
     }
-}
-
-private struct RoleItemsView: View {
-    internal init(mode: RemoveLinkMenu.Mode, containingRecord: CDRecord, linkedRecord: CDRecord) {
-        switch mode {
-            case .link:
-                self.containingRecord = containingRecord
-                self.linkedRecord = linkedRecord
-                self.labelRecord = linkedRecord
-
-            case .item:
-                self.containingRecord = linkedRecord
-                self.linkedRecord = containingRecord
-                self.labelRecord = linkedRecord
-        }
-    }
-    
-    let containingRecord: CDRecord
-    let linkedRecord: CDRecord
-    let labelRecord: CDRecord
-    
-    var body: some View {
-        let roles = containingRecord.roles(for: linkedRecord).sortedByName
-        return ForEach(roles) { role in
-            Button(action: { handleRemoveLink(of: linkedRecord, from: containingRecord, as: role) }) {
-                RecordLabel(record: labelRecord, nameMode: .roleInline(role))
-            }
-        }
-    }
-
-    func handleRemoveLink(of record: CDRecord, from container: CDRecord, as role: CDRecord) {
-        if container.roles(for: record).count == 1 {
-            record.removeFromContents(container)
-        }
-        container.removeRole(role, of: record)
-    }
-    
-
 }

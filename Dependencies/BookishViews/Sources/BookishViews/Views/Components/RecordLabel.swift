@@ -113,11 +113,11 @@ extension RecordKind {
     }
     
     var untitledLabel: String {
-        return "untitled.\(self)"
+        return "untitled.\(self)".localized
     }
     
     var newLabel: String {
-        return "new.\(self)"
+        return "new.\(self)".localized
     }
 
     var allItemsTag: String {

@@ -8,7 +8,7 @@ import SwiftUI
 struct BookActionsMenu: View {
     var body: some View {
         AddLinkMenu(mode: .link)
-        RemoveLinkMenu(mode: .link)
+        RemoveLinkMenu()
         DeleteViewedButton()
         EditButton()
     }

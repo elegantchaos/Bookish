@@ -22,12 +22,12 @@ struct ListActionsMenu: View {
 
         if list.canAddItems {
             AddLinkMenu(mode: .item)
-            RemoveLinkMenu(mode: .item)
+//            RemoveLinkMenu(mode: .item)
         }
 
         if list.canAddLinks {
             AddLinkMenu(mode: .link)
-            RemoveLinkMenu(mode: .link)
+            RemoveLinkMenu()
         }
 
         if list.canDelete {

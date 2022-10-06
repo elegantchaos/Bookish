@@ -34,7 +34,7 @@ struct BookView: View {
                         
                         DisclosureGroup("Links", isExpanded: $showLinks) {
                             LazyVStack(alignment: .leading, spacing: 8.0) {
-                                if let entries = book.roles() {
+                                if let entries = book.linkedRecords() {
                                     ForEach(entries) { entry in
                                         HStack {
                                             RecordLink(entry.record, nameMode: .role(entry.role))
