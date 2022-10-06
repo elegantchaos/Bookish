@@ -11,68 +11,48 @@ import ThreadExtensions
 struct KindIndexView: View {
     @EnvironmentObject var model: ModelController
     @Environment(\.editMode) var editMode
-    @SceneStorage var selection: String?
-    @State var editSelection = Set<String>()
+    @State var selection: Set<String> = []
     
-    @FetchRequest var books: FetchedResults<CDRecord>
     
     @State var filter: String = ""
 
+    let predicate: NSPredicate
     let title: String
     
     init(kind: RecordKind) {
-        let sort = [NSSortDescriptor(key: "name", ascending: true)]
-        let predicate = NSPredicate(format: "kindCode == \(kind.rawValue)")
-
-        self._books = .init(entity: CDRecord.entity(), sortDescriptors: sort, predicate: predicate)
-        self._selection = .init("\(kind.allItemsTag).selection")
         self.title = "root.\(kind)".localized
+        self.predicate = NSPredicate(format: "kindCode == \(kind.rawValue)")
     }
     
     var body: some View {
         let isEditing = editMode.isEditing
 
-        List(selection: isEditing ? $editSelection : singleSelection) {
-            ForEach(books) { book in
-                if filter.isEmpty || book.name.contains(filter) {
-                    if isEditing {
-                        RecordLabel(record: book)
-                    } else {
-                        RecordLink(book)
-                    }
-                }
-            }
-            .onDelete(perform: handleDelete)
+        List(selection: $selection) {
+            FilteredRecordListView(predicate: predicate, filter: $filter, onDelete: handleDelete)
         }
         .listStyle(.plain)
         .searchable(text: $filter)
         .navigationBarTitle(title, displayMode: .inline)
+        .navigationBarBackButtonHidden(isEditing)
         .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
-                if editMode.isEditing {
+            ToolbarItem(placement: .navigationBarLeading) {
+                if isEditing {
                     EditButton()
-                } else {
-                    ActionsMenuButton {
-                        AllBooksActionsMenu()
-                    }
+                }
+            }
+            
+            ToolbarItem(placement: .navigationBarTrailing) {
+                ActionsMenuButton {
+                    AllBooksActionsMenu()
                 }
             }
         }
     }
     
-    var singleSelection: Binding<Set<String>> {
-        return Binding {
-            return .init(self.selection.map { [$0] } ?? [])
-        } set: { newSelection in
-            self.selection = newSelection.first
-        }
-
-    }
-    
-       func handleDelete(_ items: IndexSet?) {
+    func handleDelete(_ items: IndexSet?, records: FetchedResults<CDRecord>) {
            if let items = items {
                items.forEach { index in
-                   let book = books[index]
+                   let book = records[index]
                    model.delete(book)
                }
            }
