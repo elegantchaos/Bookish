@@ -45,7 +45,7 @@ public class NavigationController: ObservableObject {
                         CustomListView(list: record, fields: defaultFields)
                         
                     case .role:
-                        LinksIndexView(list: record)
+                        RoleView(role: record, excludingKind: .book)
                         
                     case .organisation, .series, .person:
                         BackLinksIndexView(list: record)

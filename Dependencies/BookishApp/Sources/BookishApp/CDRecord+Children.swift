@@ -108,13 +108,9 @@ extension CDRecord {
 
     /// Move links of this record to another.
     func moveLinks(to target: CDRecord) {
-        if let contents {
-            for object in contents {
-                if object.kind == .link {
-                    removeFromContents(object)
-                    target.addToContents(object)
-                }
-            }
+        for link in linksTo() {
+            link.removeFromContents(self)
+            link.addToContents(target)
         }
     }
 
@@ -126,14 +122,18 @@ extension CDRecord {
     func replaceWith(_ target: CDRecord) {
         copyProperties(to: target)
         moveLinks(to: target)
-
+        
         if let containedBy {
             for object in containedBy {
-                if object.kind == .link {
-                    object.addToContents(target)
-                    target.removeFromContents(self)
-                }
+                print("replaced object still contained by \(object)")
             }
         }
+        
+        if let contents {
+            for object in contents {
+                print("replaced object still contains \(object)")
+            }
+        }
+
     }
 }

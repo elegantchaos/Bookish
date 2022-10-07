@@ -7,33 +7,39 @@ import SwiftUI
 import SwiftUIExtensions
 import ThreadExtensions
 
-struct LinksIndexView: View {
+/// Displays a list of the records with a given role.
+
+struct RoleView: View {
     @EnvironmentObject var model: ModelController
     @EnvironmentObject var linkController: LinkController
     @Environment(\.managedObjectContext) var context
     @Environment(\.editMode) var editMode
     @Environment(\.presentationMode) var presentationMode
-    @ObservedObject var list: CDRecord
-    @State var selection: String?
+    
+    @ObservedObject var role: CDRecord
+    let excludingKind: RecordKind
+        
+    @State var selection: Set<String> = []
     @State var filter: String = ""
 
     var body: some View {
         let isEditing = editMode?.wrappedValue == .active
+        let records = sortedItems
         
         return VStack {
             LinkSessionHost(delegate: self) {
                 if isEditing {
-                    TextField("Notes", text: list.binding(forProperty: "notes"))
+                    TextField("Notes", text: role.binding(forProperty: "notes"))
                         .fixedSize(horizontal: false, vertical: true)
                         .padding()
                 } else {
-                    Text(list.string(forKey: "notes") ?? "")
+                    Text(role.string(forKey: "notes") ?? "")
                         .fixedSize(horizontal: false, vertical: true)
                         .padding()
                 }
                 
                 if isEditing {
-                    FieldEditorView(fields: list.fields)
+                    FieldEditorView(fields: role.fields)
                 }
                 
                 List(selection: $selection) {
@@ -42,7 +48,7 @@ struct LinksIndexView: View {
                             if isEditing {
                                 RecordLabel(record: item)
                             } else {
-                                RecordLink(item, in: list)
+                                RecordLink(item, in: role)
                             }
                         }
                     }
@@ -58,12 +64,12 @@ struct LinksIndexView: View {
         .toolbar {
             ToolbarItem(placement: .principal) {
                 if linkController.session == nil {
-                    DeferredTextField(label: "Name", text: $list.name)
+                    DeferredTextField(label: "Name", text: $role.name)
                         .multilineTextAlignment(.center)
                         .font(.headline)
                         .frame(maxWidth: .infinity)
                 } else {
-                    Text("_Adding To_ \(list.name)")
+                    Text("_Adding To_ \(role.name)")
                         .multilineTextAlignment(.center)
                         .font(.headline)
                 }
@@ -72,7 +78,7 @@ struct LinksIndexView: View {
             ToolbarItem(placement: .navigationBarTrailing) {
                 if linkController.session == nil {
                     ActionsMenuButton {
-                        ListActionsMenu(list: list, selection: $selection)
+                        RoleActionsMenu(role: role, records: records, selection: $selection)
                             .environment(\.recordViewer, self)
                     }
                 }
@@ -81,14 +87,14 @@ struct LinksIndexView: View {
     }
     
     var sortedItems: [CDRecord] {
-        let links = list.linksForRole()
+        let links = role.linksForRole()
         let linked = links
             .compactMap { $0.contents }
             .flatMap { $0 }
-            .filter { $0.kind != .book }
+            .filter { $0.kind != excludingKind }
 
         var deduplicated = Set(linked)
-        deduplicated.remove(list)
+        deduplicated.remove(role)
         return deduplicated.sortedByName
     }
     
@@ -108,19 +114,19 @@ struct LinksIndexView: View {
     
 }
 
-extension LinksIndexView: AddLinkDelegate {
+extension RoleView: AddLinkDelegate {
     func handleAddLink(to linked: CDRecord) {
         if let session = linkController.session {
-            list.addToContents(linked)
+            role.addToContents(linked)
             if let role = session.role {
-                list.addLink(to: linked, role: role)
+                role.addLink(to: linked, role: role)
             }
             linkController.session = nil
         }
     }
 }
 
-extension LinksIndexView: RecordViewer {
-    var record: CDRecord { return list }
+extension RoleView: RecordViewer {
+    var record: CDRecord { return role }
     func dismiss() { presentationMode.wrappedValue.dismiss() }
 }

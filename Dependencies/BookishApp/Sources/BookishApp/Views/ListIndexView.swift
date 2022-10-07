@@ -122,7 +122,7 @@ struct LinkSessionHost<Content>: View where Content: View {
     
     var body: some View {
         if let session = linkController.session {
-            AddLinkSessionView(session: session, delegate: delegate)
+            AddLinkView(kind: session.kind, delegate: delegate)
                 .onDisappear(perform: handleDisappear)
                 .toolbar {
                     ToolbarItem {

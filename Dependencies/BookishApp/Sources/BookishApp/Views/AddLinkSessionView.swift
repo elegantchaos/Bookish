@@ -14,22 +14,6 @@ struct AddLinkSessionView: View {
     let session: Session
     let delegate: AddLinkDelegate
     var body: some View {
-        let role = session.role
-        switch session.kind {
-            case .book:
-                AddLinkView(kind: session.kind, delegate: delegate)
-
-            case .person:
-                AddLinkView(kind: session.kind, delegate: delegate)
-
-            case .series:
-                AddLinkView(kind: session.kind, delegate: delegate)
-                
-            case .organisation:
-                AddLinkView(kind: session.kind, delegate: delegate)
-                
-            default:
-                Text(String("Missing FetchProvider for \(session.kind)"))
-        }
+        AddLinkView(kind: session.kind, delegate: delegate)
     }
 }
