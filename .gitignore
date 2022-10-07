@@ -55,3 +55,4 @@ Backup[ ]of[ ]*.numbers/
 # compiled python
 *.pyc
 test-build
+Extras/Legacy
