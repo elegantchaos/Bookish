@@ -7,20 +7,7 @@ import Foundation
 import ThreadExtensions
 
 extension CDRecord {
-    
-    /// A combination of a record and a role.
-    /// A record can be linked to another record in multiple roles. For example
-    /// a person could be both author and illustrator of the same book.
-    ///
-    /// To show a list of all the links from a record, SwiftUI needs each list
-    /// item to have a unique identifier. Since the same record might crop up
-    /// multiple times, we can't just use the record id. Instead we need a
-    /// combination of the record id and the role.
-    struct RoleAndRecord: Identifiable {
-        let role: CDRecord
-        let record: CDRecord
-        var id: String { "\(role).\(record.id)" }
-    }
+
     
 
     /// The identifier to use for a role list for a given role
@@ -86,22 +73,5 @@ extension CDRecord {
             .compactMap { $0.first { $0.kind == .role } }           // extract the linked roles
         
         return roleRecords
-    }
-
-    /// Return a list of the role/record pairs associated with this record.
-    func linkedRecords() -> [RoleAndRecord] {
-        var entries: [RoleAndRecord] = []
-        for link in linksTo() {
-            if let role = link.containersWithKind(.role).first, let target = link.containersExcludingKind(.role).first {
-                entries.append(.init(role: role, record: target))
-            }
-        }
-        
-        return entries
-    }
-    
-    var asLink: RoleAndRecord? {
-        guard let role = containersWithKind(.role).first, let target = containersExcludingKind(.role).first else { return nil }
-        return RoleAndRecord(role: role, record: target)
     }
 }

@@ -90,6 +90,7 @@ extension RecordKind {
             case .series:           return "square.stack"
             case .root: 	        return "books.vertical"
             case .list:             return "books.vertical"
+            case .merged:           return "arrow.triangle.merge"
         }
     }
     

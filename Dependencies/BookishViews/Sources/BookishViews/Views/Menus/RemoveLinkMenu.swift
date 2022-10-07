@@ -18,7 +18,7 @@ struct RemoveLinkMenu: View {
             let records = record.linksTo()
             if records.count > 0 {
                 Menu("Remove Link") {
-                    ForEach(records, id: \.self) { record in
+                    ForEach(records) { record in
                         if let link = record.asLink {
                             Button(action: { handleRemoveLink(record) }) {
                                 RecordLabel(record: link.record, nameMode: .roleInline(link.role))

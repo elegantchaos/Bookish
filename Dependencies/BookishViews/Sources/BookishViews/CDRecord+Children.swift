@@ -96,4 +96,28 @@ extension CDRecord {
         return containedBy.filter { $0.kindCode != kindCode }
     }
 
+    /// Move all contents of this record to another.
+    func moveContents(to target: CDRecord) {
+        if let contents {
+            for object in contents {
+                removeFromContents(object)
+                target.addToContents(object)
+            }
+        }
+    }
+    
+    /// Replace this object with another one.
+    /// We move all our properties and content links to the other object.
+    /// Then we update any object that pointed to us to point at the other object instead.
+    func replaceWith(_ target: CDRecord) {
+        moveProperties(to: target)
+        moveContents(to: target)
+
+        if let containedBy {
+            for object in containedBy {
+                object.addToContents(target)
+                target.removeFromContents(self)
+            }
+        }
+    }
 }

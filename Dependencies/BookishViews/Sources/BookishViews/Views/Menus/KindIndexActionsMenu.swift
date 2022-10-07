@@ -36,12 +36,11 @@ struct KindIndexActionsMenu: View {
         }
         .disabled(selection.count == 0)
 
+        MergeSelectionButton(selection: selection)
+            .disabled(selection.count < 2)
+        
         DeleteSelectionButton(selection: selection)
             .disabled(!deletableItemsSelected)
-        
-        if selection.count > 1 {
-            Text("Merge")
-        }
     }
     
     var showEditButton: Bool {

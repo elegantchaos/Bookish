@@ -17,6 +17,7 @@ public enum RecordKind: Int16, Identifiable {
     case publisher
     case series
     case importSession
+    case merged
     
     public var id: Int16 { rawValue }
 }

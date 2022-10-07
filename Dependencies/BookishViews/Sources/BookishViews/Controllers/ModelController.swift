@@ -122,6 +122,38 @@ public class ModelController: ObservableObject {
         return object
     }
     
+    /// Merge a group of objects together.
+    /// This results in a new object which:
+    /// - contains all the properties of the old objects
+    /// - links to all the objects linked to by the old objects
+    /// - is linked to by everything that used to link to the old objects
+    ///
+    /// The old objects are then changed to be of type `.merged`, and are
+    /// linked to the new object, so that they stay around.
+    func merge(_ objects: [CDRecord]) {
+        if let kind = objects.first?.kind {
+            let context = stack.viewContext
+            context.perform {
+                let merged = CDRecord.make(kind: kind, in: context)
+                merged.name = objects.map { $0.name }.joined(separator: " / ")
+                merged.imageURL = objects.compactMap { $0.imageURL }.first
+                merged.imageData = objects.compactMap { $0.imageData }.first
+
+                for object in objects {
+                    object.replaceWith(merged)
+                    object.kind = .merged
+                    merged.addToContents(object)
+                }
+            }
+            
+        }
+    }
+    
+    func moveProperties(of source: CDRecord, to target: CDRecord) {
+        
+    }
+    
+    
     public func removeAllData() throws {
         objectWillChange.send()
         try stack.removeAllData()
