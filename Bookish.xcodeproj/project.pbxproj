@@ -59,7 +59,6 @@
 		226F15F9251A28F600D6B12E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		22ED67E3251E424600B0226D /* BookishLists.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = BookishLists.xcconfig; sourceTree = "<group>"; };
 		22ED67EC251E438200B0226D /* Bookish.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Bookish.entitlements; sourceTree = "<group>"; };
-		22F68597251B8B7D00E867CE /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		22FEE38B28D3176B00A2090E /* Info.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Info.h; sourceTree = "<group>"; };
 		22FEE39928D3444E00A2090E /* BookishViews */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = BookishViews; path = Dependencies/BookishViews; sourceTree = "<group>"; };
 		8B1AF910274FC2E1001BFB00 /* BookishImporter */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = BookishImporter; path = Dependencies/BookishImporter; sourceTree = "<group>"; };
@@ -75,7 +74,6 @@
 		8B92A3D52796E194003CA08E /* Document320.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Document320.png; sourceTree = "<group>"; };
 		8B987CAA25C04876003D6F9F /* BooklistLists.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BooklistLists.xcdatamodel; sourceTree = "<group>"; };
 		8BE1493B25DD597B00A1DC32 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
-		8BE9ADE9252B0DDA00F97D53 /* Tools.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Tools.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,7 +135,6 @@
 			isa = PBXGroup;
 			children = (
 				22ED67F6251E43AA00B0226D /* Bookish */,
-				22F68596251B8B7D00E867CE /* Tools */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -194,15 +191,6 @@
 				22ED67F1251E439200B0226D /* Resources */,
 			);
 			path = Bookish;
-			sourceTree = "<group>";
-		};
-		22F68596251B8B7D00E867CE /* Tools */ = {
-			isa = PBXGroup;
-			children = (
-				22F68597251B8B7D00E867CE /* main.swift */,
-				8BE9ADE9252B0DDA00F97D53 /* Tools.xcconfig */,
-			);
-			path = Tools;
 			sourceTree = "<group>";
 		};
 		22F685A5251B8BBA00E867CE /* Frameworks */ = {
