@@ -22,7 +22,7 @@ struct RoleAndRecord: Identifiable {
 
 extension CDRecord {
     var asLink: RoleAndRecord? {
-        guard let role = containersWithKind(.role).first, let target = containersExcludingKind(.role).first else { return nil }
+        guard let role = containersWithKind(.role).first, let target = contents?.first else { return nil }
         return RoleAndRecord(role: role, record: target, link: self)
     }
 

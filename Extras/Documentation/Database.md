@@ -6,7 +6,15 @@ The low-level Bookish packages use a simple `BookRecord` abstraction.
 
 These are essentially dictionaries that are guaranteed to have an id, title, source, and can contain other simple properties. Records are not explicitly linked, but can be implicitly linked by storing ids to other records.
 
-This is a low complexity, low dependency abstraction that can be used by other components - for example the importer library, and the data cleanup library. Doing this removes any dependency on the underlying storage mechanism that the app uses at runtime, and also on the data syncing mechanism.
+This is a low complexity, low dependency abstraction that can be used by other components. 
+
+Doing this removes any dependency on the underlying storage mechanism that the app uses at runtime, and also on the data syncing mechanism.
+
+Collections of these records are used an an interchange format, which the main app knows how to ingest and write out.  This format is just a series of dictionaries, so can easily be saved to JSON, XML, etc.
+
+Interop with other applications and document formats are implemented as a transformation to/from the interchange format. This simplifies the import task and allows it to be tested in isolation from the rest of the app.
+
+Record cleanup 
 
 ## Application Level
  

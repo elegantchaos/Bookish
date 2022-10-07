@@ -81,9 +81,10 @@ struct BackLinksIndexView: View {
     }
     
     var sortedItems: [CDRecord] {
-        let links = list.linksFrom()
-        let linked = links.flatMap { $0.contentsExcludingKind(.role) }
-        let deduplicated = Set(linked)
+        let links = list.linksTo()
+        let linked = links.compactMap { $0.contents }.flatMap { $0 }
+        var deduplicated = Set(linked)
+        deduplicated.remove(list)
         return deduplicated.sortedByName
     }
     
