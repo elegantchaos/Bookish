@@ -17,7 +17,7 @@
                BlueprintIdentifier = "22F68594251B8B7D00E867CE"
                BuildableName = "Tools"
                BlueprintName = "Tools"
-               ReferencedContainer = "container:BookishLists.xcodeproj">
+               ReferencedContainer = "container:Bookish.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -47,7 +47,7 @@
             BlueprintIdentifier = "22F68594251B8B7D00E867CE"
             BuildableName = "Tools"
             BlueprintName = "Tools"
-            ReferencedContainer = "container:BookishLists.xcodeproj">
+            ReferencedContainer = "container:Bookish.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -64,7 +64,7 @@
             BlueprintIdentifier = "22F68594251B8B7D00E867CE"
             BuildableName = "Tools"
             BlueprintName = "Tools"
-            ReferencedContainer = "container:BookishLists.xcodeproj">
+            ReferencedContainer = "container:Bookish.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

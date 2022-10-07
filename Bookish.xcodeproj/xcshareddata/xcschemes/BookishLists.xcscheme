@@ -16,8 +16,8 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "226F15D6251A28EA00D6B12E"
                BuildableName = "Bookish Lists.app"
-               BlueprintName = "BookishLists"
-               ReferencedContainer = "container:BookishLists.xcodeproj">
+               BlueprintName = "Bookish"
+               ReferencedContainer = "container:Bookish.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -29,9 +29,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "226F15F2251A28F600D6B12E"
-               BuildableName = "BookishListsUITests.xctest"
-               BlueprintName = "BookishListsUITests"
-               ReferencedContainer = "container:BookishLists.xcodeproj">
+               BuildableName = "BookishUITests.xctest"
+               BlueprintName = "BookishUITests"
+               ReferencedContainer = "container:Bookish.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -47,9 +47,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "226F15E7251A28F600D6B12E"
-               BuildableName = "BookishListsTests.xctest"
-               BlueprintName = "BookishListsTests"
-               ReferencedContainer = "container:BookishLists.xcodeproj">
+               BuildableName = "BookishTests.xctest"
+               BlueprintName = "BookishTests"
+               ReferencedContainer = "container:Bookish.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -72,8 +72,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "226F15D6251A28EA00D6B12E"
             BuildableName = "Bookish Lists.app"
-            BlueprintName = "BookishLists"
-            ReferencedContainer = "container:BookishLists.xcodeproj">
+            BlueprintName = "Bookish"
+            ReferencedContainer = "container:Bookish.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <CommandLineArguments>
@@ -115,8 +115,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "226F15D6251A28EA00D6B12E"
             BuildableName = "Bookish Lists.app"
-            BlueprintName = "BookishLists"
-            ReferencedContainer = "container:BookishLists.xcodeproj">
+            BlueprintName = "Bookish"
+            ReferencedContainer = "container:Bookish.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

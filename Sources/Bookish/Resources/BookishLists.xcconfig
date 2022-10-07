@@ -6,8 +6,8 @@
 #include ".rt/RTCatalyst.xcconfig"
 
 RT_VERSION = 1.0.0
-RT_PRODUCT_NAME = Bookish Lists
-RT_SHORT_NAME = BookishLists
+RT_PRODUCT_NAME = Bookish
+RT_SHORT_NAME = Bookish
 RT_BUNDLE_IDENTIFIER = com.elegantchaos.bookish.lists
 RT_TEAM = 2H48644JM2
 RT_APP_ICON = AppIcon
@@ -19,4 +19,4 @@ SWIFT_OBJC_BRIDGING_HEADER =
 TARGETED_DEVICE_FAMILY = 1,2
 ENABLE_PREVIEWS = YES
 
-INFOPLIST_PREFIX_HEADER = Sources/BookishLists/Resources/Info.h
+INFOPLIST_PREFIX_HEADER = Sources/Bookish/Resources/Info.h
