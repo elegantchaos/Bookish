@@ -11,7 +11,7 @@ Each record has:
 
 - some fixed properties
 - some flexible properties
-- parent/child relationships with other records
+- contains/containedBy relationships with other records
 
 ### Fixed Properties
 
@@ -30,9 +30,10 @@ Typically this will be a UUID, but it can also be anything; for example, some gl
 
 A one-to-one relationship to `CDProperty` entities is used to represent other properties.
 
-Each property consists of a key, and a jsonEncoded value.
+Each property consists of a key, and a plist-encoded value.
 
-### Relationships
+
+### Connections
 
 Records are linked to other records with relationships, and form a graph.
 
@@ -46,50 +47,58 @@ The `containedBy` property represents the records that "contain" this record.
 
 Any record can only link to another record _once_. 
  
-## Representing Relationships
+## Entities
 
-These primitves can be used to represent different kinds of relationships.
+Bookish has a small set of fundamental entities that the user interacts with. These are records with the following kind values: `book`, `person`, `organisation`, `series`, `list`.
 
+Books are obviously key to the whole thing. 
 
-### Simple List
+People are used to represent authors, illustrators, etc. A person can have multiple roles for any given book, and a book can involve multiple people in multiple roles.  
 
-As an example, the "People" list contains all person records. Each person only needs to appear once, and there is no ordering needed, so the `contents` relationship is fine for this.
+Organisations are used to represent publishers. A book can have multiple publishers. A publisher can have multiple books.
 
-### Semantic Link
+Series are lists of books that are connected in an ordered sequence. Usually this is something that evolves: all the Game Of Thrones books, or all books involving Inspector Rebus, where the order relates to the publication date. Sometimes it's explicit, such as the Gollancz SF Masterworks series.
 
-A book is linked to other records, but each link is associated with a role. Examples of roles are "Author", "Illustrator", "Publisher", "Series", and so on.
+Lists are collections of books. Generally these are made by the user (although the Imports list is automatically maintained). 
 
-This can be achieved using an intermediate Record for each role:
+## Links
 
-```
-Book Record
-  Role Record "Author"
-    Person Record 1
-    Person Record 2
-  Role Record "Illustrator"
-    Person Record 3
-  Role Record "Publisher"
-    Publisher Record
-```
+Although the contains/containedBy relationship provides a low-level way to connect records, it does not provide any context about the purpose of the connection, or the ordering.
+
+For this reason, high-level connections are represented using intermediate records, of type `link`.
+
+A link record's `contains` relationship points to the records that are linked together. Optionally, the `containedBy` relationship points to a record of kind `role`, which attaches a semantic meaning to the link. If present, the `role` record indicates what kind of connection the link represents - for example a book and a person might be linked with the "author" role, to indicate that the person is the author of the book.  
+
+These links can be viewed in either direction, and interpreted accordingly. Thus a book can list all the people linked to it, along with the roles: 'author', 'illustrator' etc, and a person can list all the books linked to it, along with the person's role for each one. 
+
+Because a link us represented by a record, it can have properties associated with it. This can be used for a number of purposes; for example in a reading list, the link could have an associated date representing the time that the item was read.
+ 
+## Lists
+
+Lists are represented using links.
+
+Each entry in the list has a link which connects it to an item.
+
+### Simple Ordered List
+
+In a simple list, each link record has an `index` property representing its order in the list (this index must be managed to ensure that the indexes are unique and consequetive).
+
+These simple link records do not have a role associated with them.
+
+Note that multiple links to the same target record an exist - allowing the same item to appear multiple times in a list. Ensuring that a record only appears once in a list needs to be managed explicitly if required. 
+
+### Roles
+
+Each role is represented by a record of kind `role`. There are a few predefined, but the user can add more.
+
+Each of these contains a link record for every connection between things with that role. 
+
+The items associated with a role are not inherently ordered, so the link records don't need an `index` property.
 
 ### Complex List
 
-Some lists need to associate some data with each entry, or may need multiple entries to the same record.
+Some lists need to associate some other data with each entry, or may need multiple entries to the same record.
 
-For example, a Reading List needs to associate a date with each book, and might contain the same book twice if the user has read it twice.
+For example, a list of the user's reading history might want to associate a date with each entry, representing the date that the book was read. If the user read the book twice, there will be two entries. 
 
-This can be achieved using an intermediate Record for each entry.
-
-```
-Reading List Record
-  Entry Record 1(date: 12/10/21)
-    Book Record 1
-  Entry Record 2 (date: 14/02/22)
-    Book Record 2
-  Entry Record 3 (date: 05/04/22)
-    Book Record 1
-```
-
-
-
-
+This is the same situation as a simple list, but using additional properties for each link record.
