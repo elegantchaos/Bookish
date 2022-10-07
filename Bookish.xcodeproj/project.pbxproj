@@ -57,7 +57,7 @@
 		226F15F3251A28F600D6B12E /* BookishUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BookishUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		226F15F7251A28F600D6B12E /* BookishListsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookishListsUITests.swift; sourceTree = "<group>"; };
 		226F15F9251A28F600D6B12E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		22ED67E3251E424600B0226D /* BookishLists.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = BookishLists.xcconfig; sourceTree = "<group>"; };
+		22ED67E3251E424600B0226D /* Settings.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Settings.xcconfig; sourceTree = "<group>"; };
 		22ED67EC251E438200B0226D /* Bookish.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Bookish.entitlements; sourceTree = "<group>"; };
 		22FEE38B28D3176B00A2090E /* Info.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Info.h; sourceTree = "<group>"; };
 		22FEE39928D3444E00A2090E /* BookishViews */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = BookishViews; path = Dependencies/BookishViews; sourceTree = "<group>"; };
@@ -176,7 +176,7 @@
 				22ED67EC251E438200B0226D /* Bookish.entitlements */,
 				8BE1493B25DD597B00A1DC32 /* Localizable.strings */,
 				22FEE38B28D3176B00A2090E /* Info.h */,
-				22ED67E3251E424600B0226D /* BookishLists.xcconfig */,
+				22ED67E3251E424600B0226D /* Settings.xcconfig */,
 				226F15DE251A28F600D6B12E /* Assets.xcassets */,
 				226F15E3251A28F600D6B12E /* Info.plist */,
 				8B987CA925C04876003D6F9F /* BookishLists.xcdatamodeld */,
@@ -523,14 +523,14 @@
 		};
 		226F15FD251A28F600D6B12E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 22ED67E3251E424600B0226D /* BookishLists.xcconfig */;
+			baseConfigurationReference = 22ED67E3251E424600B0226D /* Settings.xcconfig */;
 			buildSettings = {
 			};
 			name = Debug;
 		};
 		226F15FE251A28F600D6B12E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 22ED67E3251E424600B0226D /* BookishLists.xcconfig */;
+			baseConfigurationReference = 22ED67E3251E424600B0226D /* Settings.xcconfig */;
 			buildSettings = {
 			};
 			name = Release;
