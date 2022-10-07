@@ -47,7 +47,7 @@ public class NavigationController: ObservableObject {
                     case .role:
                         LinksIndexView(list: record)
                         
-                    case .publisher, .series, .person:
+                    case .organisation, .series, .person:
                         BackLinksIndexView(list: record)
                         
                     default:

@@ -28,7 +28,7 @@ class PersonFetchProvider: FetchProvider {
 }
 
 class PublisherFetchProvider: FetchProvider {
-    static var kind: RecordKind { .publisher }
+    static var kind: RecordKind { .organisation }
 }
 
 class SeriesFetchProvider: FetchProvider {

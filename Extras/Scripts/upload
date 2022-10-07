@@ -12,7 +12,7 @@ echo "*************"
 echo "Uploading iOS  "
 echo "*************"
 
-$RT set scheme --platform=iOS BookishLists
+$RT set scheme --platform=iOS Bookish
 $RT archive --platform=iOS 2> /dev/null | xcpretty
 $RT export --platform=iOS
 $RT upload --platform=iOS

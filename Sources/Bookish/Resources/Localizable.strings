@@ -23,7 +23,7 @@ role.book = "Book";
 role.list = "List";
 role.group = "Group";
 role.person = "Person";
-role.publisher = "Publisher";
+role.organisation = "Organisation";
 role.series = "Series";
 role.importSession = "From";
 
@@ -32,7 +32,7 @@ plural.book = "Books";
 plural.list = "Lists";
 plural.group = "Groups";
 plural.person = "People";
-plural.publisher = "Publishers";
+plural.organisation = "Organisations";
 plural.series = "Series";
 plural.importSession = "Imports";
 
@@ -41,12 +41,13 @@ role.author = "Author";
 role.editor = "Editor";
 role.illustrator = "Illustrator";
 role.collaborator = "Collaborator";
+role.publisher = "Publisher";
 role.reviewer = "Reviewer";
 
 // Root Lists
 root.book = "All Books";
 root.person = "All People";
-root.publisher = "All Publishers";
+root.organisation = "All Organisations";
 root.series = "All Series";
 root.lists = "Lists";
 root.roles = "Roles";

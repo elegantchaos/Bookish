@@ -133,7 +133,7 @@ private extension ImportHandler {
         addPeople(to: book, from: importedBook, withKey: .illustrators, asRole: roleIllustrator)
 
         for publisher in importedBook.strings(forKey: .publishers) {
-            let publisherRecord = CDRecord.findOrMakeWithName(publisher, kind: .publisher, in: workContext)
+            let publisherRecord = CDRecord.findOrMakeWithName(publisher, kind: .organisation, in: workContext)
             book.addLink(to: publisherRecord, role: rolePublisher)
         }
 

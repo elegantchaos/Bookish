@@ -14,7 +14,7 @@ public enum RecordKind: Int16, Identifiable {
     case role
     case link
     case person
-    case publisher
+    case organisation
     case series
     case importSession
     case merged

@@ -3,7 +3,7 @@
 //  All code (c) 2021 - present day, Sam Deane.
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
-import BookishViews
+import BookishApp
 import Bundles
 import CloudKit
 import Combine

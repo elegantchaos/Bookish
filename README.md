@@ -3,7 +3,7 @@
 
 All entities are represented as `CDRecords`, which have properties, and contain/are-contained-by other records.
 
-Entity types include: book, person, publisher, role, list, series
+Entity types include: book, person, organisation, role, list, series
 
 ### Book
 

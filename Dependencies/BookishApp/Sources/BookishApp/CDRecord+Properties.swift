@@ -27,7 +27,7 @@ extension CDRecord {
         let sorted = uniqued.sorted()
         return sorted
     }
-
+    
     func makeRecord(forKey key: String) -> CDProperty {
         let record = CDProperty(context: managedObjectContext!)
         record.key = key
@@ -35,7 +35,7 @@ extension CDRecord {
         return record
     }
     
-
+    
     func property(forKey key: String) -> Any? {
         let record = propertyRecord(forKey: key)
         return record?.value
@@ -55,15 +55,15 @@ extension CDRecord {
     func string(forKey key: String) -> String? {
         return property(forKey: key) as? String
     }
-
+    
     func integer(forKey key: String) -> Int? {
         return property(forKey: key) as? Int
     }
-
+    
     func double(forKey key: String) -> Double? {
         return property(forKey: key) as? Double
     }
-
+    
     func strings(forKey key: String) -> [String] {
         guard let joined = string(forKey: key) else { return [] }
         return joined.split(separator: ",").map({ String($0) })
@@ -72,7 +72,7 @@ extension CDRecord {
     func date(forKey key: String) -> Date? {
         return property(forKey: key) as? Date
     }
-
+    
     func dict<K,V>(forKey key: String) -> [K:V]? {
         return property(forKey: key) as? [K:V]
     }
@@ -104,7 +104,7 @@ extension CDRecord {
     func set<K,V>(_ value: [K:V], forKey key: String) {
         setProperty(value, forKey: key)
     }
- 
+    
     func merge(properties: [String:Any]) {
         for item in properties {
             setProperty(item.value, forKey: item.key)
@@ -127,11 +127,9 @@ extension CDRecord {
         } catch {
             return [:]
         }
-
+        
     }
     
-    
-
     /// Move all properties from this record to another
     func moveProperties(to target: CDRecord) {
         if let properties {
@@ -140,4 +138,14 @@ extension CDRecord {
             }
         }
     }
+
+    /// Copy all properties from this record to another
+    func copyProperties(to target: CDRecord) {
+        if let properties {
+            for property in properties {
+                target.addToProperties(property.clone())
+            }
+        }
+    }
+
 }

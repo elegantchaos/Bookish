@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2234049828F0501F00102618 /* BookishApp in Frameworks */ = {isa = PBXBuildFile; productRef = 2234049728F0501F00102618 /* BookishApp */; };
 		226F15E2251A28F600D6B12E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 226F15E1251A28F600D6B12E /* Preview Assets.xcassets */; };
 		226F15ED251A28F600D6B12E /* BookishListsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226F15EC251A28F600D6B12E /* BookishListsTests.swift */; };
 		226F15F8251A28F600D6B12E /* BookishListsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226F15F7251A28F600D6B12E /* BookishListsUITests.swift */; };
-		22A2989928D355D80038599F /* BookishViews in Frameworks */ = {isa = PBXBuildFile; productRef = 22A2989828D355D80038599F /* BookishViews */; };
 		22E0ECD928D36769009A22A8 /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226F15DA251A28EA00D6B12E /* Application.swift */; };
 		8B1AF911274FC32C001BFB00 /* BookishImporter in Resources */ = {isa = PBXBuildFile; fileRef = 8B1AF910274FC2E1001BFB00 /* BookishImporter */; };
 		8B1F10D225AC971A00108A34 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 226F15DE251A28F600D6B12E /* Assets.xcassets */; };
@@ -60,7 +60,7 @@
 		22ED67E3251E424600B0226D /* Settings.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Settings.xcconfig; sourceTree = "<group>"; };
 		22ED67EC251E438200B0226D /* Bookish.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Bookish.entitlements; sourceTree = "<group>"; };
 		22FEE38B28D3176B00A2090E /* Info.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Info.h; sourceTree = "<group>"; };
-		22FEE39928D3444E00A2090E /* BookishViews */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = BookishViews; path = Dependencies/BookishViews; sourceTree = "<group>"; };
+		22FEE39928D3444E00A2090E /* BookishApp */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = BookishApp; path = Dependencies/BookishApp; sourceTree = "<group>"; };
 		8B1AF910274FC2E1001BFB00 /* BookishImporter */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = BookishImporter; path = Dependencies/BookishImporter; sourceTree = "<group>"; };
 		8B57F07B25F7B989007DB517 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.3.sdk/System/Library/Frameworks/AVFoundation.framework; sourceTree = DEVELOPER_DIR; };
 		8B58C7B325B71528007F6B70 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
@@ -83,8 +83,8 @@
 			files = (
 				8B8A88E5274FCAD700EA2FAA /* BookishImporter in Frameworks */,
 				8B57F07C25F7B989007DB517 /* AVFoundation.framework in Frameworks */,
+				2234049828F0501F00102618 /* BookishApp in Frameworks */,
 				8B8A88E7274FCADB00EA2FAA /* BookishImporterSamples in Frameworks */,
-				22A2989928D355D80038599F /* BookishViews in Frameworks */,
 				8B8A88E9274FCC1A00EA2FAA /* BookishCleanup in Frameworks */,
 				8B58C7B425B71528007F6B70 /* CloudKit.framework in Frameworks */,
 				8B80467D25B87C4A00698F28 /* LoggerUI in Frameworks */,
@@ -208,7 +208,7 @@
 				8B6DD260275A677A00304468 /* BookishCore */,
 				8B8A88E3274FC36A00EA2FAA /* BookishCleanup */,
 				8B1AF910274FC2E1001BFB00 /* BookishImporter */,
-				22FEE39928D3444E00A2090E /* BookishViews */,
+				22FEE39928D3444E00A2090E /* BookishApp */,
 			);
 			name = Packages;
 			sourceTree = "<group>";
@@ -243,7 +243,7 @@
 				8B8A88E4274FCAD700EA2FAA /* BookishImporter */,
 				8B8A88E6274FCADB00EA2FAA /* BookishImporterSamples */,
 				8B8A88E8274FCC1A00EA2FAA /* BookishCleanup */,
-				22A2989828D355D80038599F /* BookishViews */,
+				2234049728F0501F00102618 /* BookishApp */,
 			);
 			productName = "Samedi's Crafting";
 			productReference = 226F15D7251A28EA00D6B12E /* Bookish Lists.app */;
@@ -661,9 +661,9 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		22A2989828D355D80038599F /* BookishViews */ = {
+		2234049728F0501F00102618 /* BookishApp */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = BookishViews;
+			productName = BookishApp;
 		};
 		8B80467C25B87C4A00698F28 /* LoggerUI */ = {
 			isa = XCSwiftPackageProductDependency;

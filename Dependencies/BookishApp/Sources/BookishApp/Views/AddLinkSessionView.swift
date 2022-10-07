@@ -25,7 +25,7 @@ struct AddLinkSessionView: View {
             case .series:
                 AddLinkView(SeriesFetchProvider.self, kind: session.kind, delegate: delegate)
                 
-            case .publisher:
+            case .organisation:
                 AddLinkView(PublisherFetchProvider.self, kind: session.kind, delegate: delegate)
                 
             default:

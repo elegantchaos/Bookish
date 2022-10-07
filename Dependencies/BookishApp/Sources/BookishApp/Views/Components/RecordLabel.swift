@@ -85,7 +85,7 @@ extension RecordKind {
             case .person:           return "person"
             case .role:             return "person.crop.rectangle"
             case .link:             return "link"
-            case .publisher:        return "building.columns"
+            case .organisation:        return "building.columns"
             case .importSession: 	return "square.and.arrow.down"
             case .series:           return "square.stack"
             case .root: 	        return "books.vertical"
@@ -98,7 +98,7 @@ extension RecordKind {
         switch self {
             case .book: return "books.vertical"
             case .person: return "person.2"
-            case .publisher: return "building.2"
+            case .organisation: return "building.2"
             case .series: return "square.stack"
             default:
                 return iconName

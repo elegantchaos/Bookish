@@ -105,18 +105,34 @@ extension CDRecord {
             }
         }
     }
-    
-    /// Replace this object with another one.
-    /// We move all our properties and content links to the other object.
-    /// Then we update any object that pointed to us to point at the other object instead.
+
+    /// Move links of this record to another.
+    func moveLinks(to target: CDRecord) {
+        if let contents {
+            for object in contents {
+                if object.kind == .link {
+                    removeFromContents(object)
+                    target.addToContents(object)
+                }
+            }
+        }
+    }
+
+    /// Replace this record with another one in the graph.
+    /// Properties from this record are *copied* to the other object, leaving
+    /// this record's properties untouched.
+    /// Links from this record, are *moved* to the other record.
+    /// Any links that pointed to this record are changed to instead point at the other record.
     func replaceWith(_ target: CDRecord) {
-        moveProperties(to: target)
-        moveContents(to: target)
+        copyProperties(to: target)
+        moveLinks(to: target)
 
         if let containedBy {
             for object in containedBy {
-                object.addToContents(target)
-                target.removeFromContents(self)
+                if object.kind == .link {
+                    object.addToContents(target)
+                    target.removeFromContents(self)
+                }
             }
         }
     }

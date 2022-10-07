@@ -8,7 +8,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "BookishViews",
+    name: "BookishApp",
 
     platforms: [
         .macCatalyst(.v16), .iOS(.v16), .tvOS(.v16), .macOS(.v12)
@@ -16,8 +16,8 @@ let package = Package(
 
     products: [
         .library(
-            name: "BookishViews",
-            targets: ["BookishViews"]
+            name: "BookishApp",
+            targets: ["BookishApp"]
         ),
     ],
     
@@ -44,7 +44,7 @@ let package = Package(
     
     targets: [
         .target(
-            name: "BookishViews",
+            name: "BookishApp",
             dependencies: [
                 .product(name: "BookishCleanup", package: "BookishCleanup"),
                 "BookishCore",
@@ -62,9 +62,9 @@ let package = Package(
         ),
         
         .testTarget(
-            name: "BookishViewsTests",
+            name: "BookishAppTests",
             dependencies: [
-                "BookishViews",
+                "BookishApp",
                 "XCTestExtensions"
             ]
         ),

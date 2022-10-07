@@ -25,7 +25,7 @@ struct AddLinkMenu: View {
             } else {
                 AddLinkButton(kind: .book)
                 AddLinkButton(kind: .person)
-                AddLinkButton(kind: .publisher)
+                AddLinkButton(kind: .organisation)
                 AddLinkButton(kind: .series)
             }
         }

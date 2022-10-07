@@ -16,7 +16,7 @@ struct RootIndexView: View {
     @SceneStorage("rootSelection") var selection: String?
     @FetchRequest(entity: CDRecord.entity(), sortDescriptors: .defaultSort, predicate: .isRootView) var records: FetchedResults<CDRecord>
 
-    let kinds: [RecordKind] = [.book, .person, .publisher, .series]
+    let kinds: [RecordKind] = [.book, .person, .organisation, .series]
 
     var body: some View {
         traceChanges()

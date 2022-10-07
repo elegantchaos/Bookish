@@ -43,6 +43,15 @@ public class CDProperty: NSManagedObject {
         key.hash(into: &hasher)
         encodedValue.hash(into: &hasher)
     }
+
+    /// Return a copy of this property.
+    /// The copy has the same key and value, but is not attached to a record.
+    func clone() -> CDProperty {
+        let copy = CDProperty(context: managedObjectContext!)
+        copy.encodedValue = encodedValue
+        copy.key = key
+        return copy
+    }
 }
 
 extension CDProperty {
