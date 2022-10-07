@@ -1,7 +1,22 @@
-# BookishApp
+# Database Design
 
-This package contains the views and application-level controllers and logic.
+## Low Level
 
+The low-level Bookish packages use a simple `BookRecord` abstraction. 
+
+These are essentially dictionaries that are guaranteed to have an id, title, source, and can contain other simple properties. Records are not explicitly linked, but can be implicitly linked by storing ids to other records.
+
+This is a low complexity, low dependency abstraction that can be used by other components - for example the importer library, and the data cleanup library. Doing this removes any dependency on the underlying storage mechanism that the app uses at runtime, and also on the data syncing mechanism.
+
+## Application Level
+ 
+At the application level, we need a more complicated representation of the data.
+
+Each record still has arbitrary properties, but we also need to be able to quickly access and follow links between records.
+
+Furthermore we need to manage synchronisation of the database across devices.
+
+The current solution for this is to use a simple Core Data database, containing two entity types: `CDRecord` and `CDProperty`. The rest of this document describes the design of that database. 
 
 ## Records
 
