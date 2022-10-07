@@ -36,7 +36,7 @@ struct BookView: View {
                             LazyVStack(alignment: .leading, spacing: 8.0) {
                                 if let linkRecords = book.linksTo() {
                                     ForEach(linkRecords) { linkRecord in
-                                        if let link = linkRecord.asLink {
+                                        if let link = linkRecord.asLinkedRole(to: book) {
                                             HStack {
                                                 RecordLink(link.record, nameMode: .role(link.role))
                                                     .foregroundColor(.primary)
@@ -105,10 +105,7 @@ extension BookView: RecordViewer {
 extension BookView: AddLinkDelegate {
     func handleAddLink(to linked: CDRecord) {
         if let session = linkController.session {
-            linked.addToContents(book)
-            if let role = session.role {
-                book.addLink(to: linked, role: role)
-            }
+            book.addLink(to: linked, role: session.role)
             linkController.session = nil
         }
     }

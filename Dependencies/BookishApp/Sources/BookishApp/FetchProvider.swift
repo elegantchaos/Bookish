@@ -4,33 +4,33 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 import CoreData
-
-protocol FetchProvider {
-    static var kind: RecordKind { get }
-}
-
-extension FetchProvider {
-    static func request() -> NSFetchRequest<CDRecord> {
-        let request = CDRecord.fetchRequest(
-            predicate: NSPredicate(format: "kindCode == \(kind.rawValue)"),
-            sort: [NSSortDescriptor(key: "name", ascending: true)]
-        )
-        return request
-    }
-}
-
-class BookFetchProvider: FetchProvider {
-    static var kind: RecordKind { .book }
-}
-
-class PersonFetchProvider: FetchProvider {
-    static var kind: RecordKind { .person }
-}
-
-class PublisherFetchProvider: FetchProvider {
-    static var kind: RecordKind { .organisation }
-}
-
-class SeriesFetchProvider: FetchProvider {
-    static var kind: RecordKind { .series }
-}
+//
+//protocol FetchProvider {
+//    static var kind: RecordKind { get }
+//}
+//
+//extension FetchProvider {
+//    static func request() -> NSFetchRequest<CDRecord> {
+//        let request = CDRecord.fetchRequest(
+//            predicate: NSPredicate(format: "kindCode == \(kind.rawValue)"),
+//            sort: [NSSortDescriptor(key: "name", ascending: true)]
+//        )
+//        return request
+//    }
+//}
+//
+//class BookFetchProvider: FetchProvider {
+//    static var kind: RecordKind { .book }
+//}
+//
+//class PersonFetchProvider: FetchProvider {
+//    static var kind: RecordKind { .person }
+//}
+//
+//class PublisherFetchProvider: FetchProvider {
+//    static var kind: RecordKind { .organisation }
+//}
+//
+//class SeriesFetchProvider: FetchProvider {
+//    static var kind: RecordKind { .series }
+//}

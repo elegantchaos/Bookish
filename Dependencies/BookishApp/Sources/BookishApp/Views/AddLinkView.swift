@@ -10,15 +10,16 @@ protocol AddLinkDelegate {
     func handleAddLink(to: CDRecord)
 }
 
-struct AddLinkView<P: FetchProvider>: View {
-    @FetchRequest(fetchRequest: P.request()) var records: FetchedResults<CDRecord>
+struct AddLinkView: View {
+    @FetchRequest var records: FetchedResults<CDRecord>
 
     @State var filter: String = ""
 
     let kind: RecordKind
     let delegate: AddLinkDelegate
 
-    init(_ provider: P.Type, kind: RecordKind, delegate: AddLinkDelegate) {
+    init(kind: RecordKind, delegate: AddLinkDelegate) {
+        self._records = .init(entity: CDRecord.entity(), sortDescriptors: .defaultSort, predicate: .init(kind: kind))
         self.delegate = delegate
         self.kind = kind
     }

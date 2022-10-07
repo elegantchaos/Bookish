@@ -13,23 +13,10 @@ import Foundation
 /// item to have a unique identifier. Since the same record might crop up
 /// multiple times, we can't just use the record id. Instead we need a
 /// combination of the record id and the role.
-struct RoleAndRecord: Identifiable {
+///
+struct LinkedRole: Identifiable {
     let role: CDRecord
     let record: CDRecord
     let link: CDRecord
     var id: String { "\(role).\(record.id)" }
-}
-
-extension CDRecord {
-    var asLink: RoleAndRecord? {
-        guard let role = containersWithKind(.role).first, let target = contents?.first else { return nil }
-        return RoleAndRecord(role: role, record: target, link: self)
-    }
-
-    /// Return a list of the role/record pairs associated with this record.
-    func linkedRecords() -> [RoleAndRecord] {
-        let linkRecords = linksTo()
-        return linkRecords.compactMap { $0.asLink }
-    }
-
 }

@@ -15,12 +15,12 @@ struct RemoveLinkMenu: View {
     var body: some View {
         
         if let record = viewer?.record {
-            let records = record.linksTo()
-            if records.count > 0 {
+            let links = record.linksTo()
+            if links.count > 0 {
                 Menu("Remove Link") {
-                    ForEach(records) { record in
-                        if let link = record.asLink {
-                            Button(action: { handleRemoveLink(record) }) {
+                    ForEach(links) { linkRecord in
+                        if let link = linkRecord.asLinkedRole(to: record) {
+                            Button(action: { handleRemoveLink(linkRecord) }) {
                                 RecordLabel(record: link.record, nameMode: .roleInline(link.role))
                             }
                         }

@@ -7,9 +7,6 @@ import Foundation
 import ThreadExtensions
 
 extension CDRecord {
-
-    
-
     /// The identifier to use for a role list for a given role
     func roleID(_ role: CDRecord) -> String {
         return "\(role.id).\(id)"
@@ -50,6 +47,24 @@ extension CDRecord {
         }
 
         return contents
+    }
+
+    /// Assuming that this is a link, and that it's linking
+    /// to a given record, return the other record it links to,
+    /// and the role that it is linked as.
+    func asLinkedRole(to record: CDRecord) -> LinkedRole? {
+        assert(kind == .link)
+        assert(contents!.contains(record))
+        
+        guard let role = containersWithKind(.role).first else { return nil }
+        guard let target = contents?.first(where: { $0 != record }) else { return nil }
+        return LinkedRole(role: role, record: target, link: self)
+    }
+
+    /// Return a list of the role/record pairs associated with this record.
+    func linkedRoles() -> [LinkedRole] {
+        let linkRecords = linksTo()
+        return linkRecords.compactMap { $0.asLinkedRole(to: self) }
     }
 
     /// Return the names of all the roles that a given record fulfils

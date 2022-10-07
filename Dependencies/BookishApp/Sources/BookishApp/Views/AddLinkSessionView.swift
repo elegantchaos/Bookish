@@ -17,16 +17,16 @@ struct AddLinkSessionView: View {
         let role = session.role
         switch session.kind {
             case .book:
-                AddLinkView(BookFetchProvider.self, kind: session.kind, delegate: delegate)
+                AddLinkView(kind: session.kind, delegate: delegate)
 
             case .person:
-                AddLinkView(PersonFetchProvider.self, kind: session.kind, delegate: delegate)
+                AddLinkView(kind: session.kind, delegate: delegate)
 
             case .series:
-                AddLinkView(SeriesFetchProvider.self, kind: session.kind, delegate: delegate)
+                AddLinkView(kind: session.kind, delegate: delegate)
                 
             case .organisation:
-                AddLinkView(PublisherFetchProvider.self, kind: session.kind, delegate: delegate)
+                AddLinkView(kind: session.kind, delegate: delegate)
                 
             default:
                 Text(String("Missing FetchProvider for \(session.kind)"))

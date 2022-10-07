@@ -8,6 +8,11 @@ import SwiftUI
 import SwiftUIExtensions
 import ThreadExtensions
 
+extension NSPredicate {
+    convenience init(kind: RecordKind) {
+        self.init(format: "kindCode == \(kind.rawValue)")
+    }
+}
 struct KindIndexView: View {
     @EnvironmentObject var model: ModelController
     @Environment(\.editMode) var editMode

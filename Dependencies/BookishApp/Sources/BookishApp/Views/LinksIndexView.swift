@@ -81,8 +81,12 @@ struct LinksIndexView: View {
     }
     
     var sortedItems: [CDRecord] {
-        let links = list.linksTo()
-        let linked = links.compactMap { $0.contents }.flatMap { $0 }
+        let links = list.linksForRole()
+        let linked = links
+            .compactMap { $0.contents }
+            .flatMap { $0 }
+            .filter { $0.kind != .book }
+
         var deduplicated = Set(linked)
         deduplicated.remove(list)
         return deduplicated.sortedByName
