@@ -24,7 +24,7 @@
 		8B92A3D32796E09A003CA08E /* Document44.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B92A3D12796E09A003CA08E /* Document44.png */; };
 		8B92A3D62796E194003CA08E /* Document64.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B92A3D42796E194003CA08E /* Document64.png */; };
 		8B92A3D72796E194003CA08E /* Document320.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B92A3D52796E194003CA08E /* Document320.png */; };
-		8B987CAB25C04876003D6F9F /* BookishLists.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8B987CA925C04876003D6F9F /* BookishLists.xcdatamodeld */; };
+		8B987CAB25C04876003D6F9F /* BookishModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8B987CA925C04876003D6F9F /* BookishModel.xcdatamodeld */; };
 		8BE1493C25DD597B00A1DC32 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8BE1493B25DD597B00A1DC32 /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
@@ -46,7 +46,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		226F15D7251A28EA00D6B12E /* Bookish Lists.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bookish Lists.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		226F15D7251A28EA00D6B12E /* Bookish Lists.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = "Bookish Lists.app"; path = Bookish.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		226F15DA251A28EA00D6B12E /* Application.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
 		226F15DE251A28F600D6B12E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		226F15E1251A28F600D6B12E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -179,7 +179,7 @@
 				22ED67E3251E424600B0226D /* Settings.xcconfig */,
 				226F15DE251A28F600D6B12E /* Assets.xcassets */,
 				226F15E3251A28F600D6B12E /* Info.plist */,
-				8B987CA925C04876003D6F9F /* BookishLists.xcdatamodeld */,
+				8B987CA925C04876003D6F9F /* BookishModel.xcdatamodeld */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -367,7 +367,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				22E0ECD928D36769009A22A8 /* Application.swift in Sources */,
-				8B987CAB25C04876003D6F9F /* BookishLists.xcdatamodeld in Sources */,
+				8B987CAB25C04876003D6F9F /* BookishModel.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -684,13 +684,13 @@
 /* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
-		8B987CA925C04876003D6F9F /* BookishLists.xcdatamodeld */ = {
+		8B987CA925C04876003D6F9F /* BookishModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
 				8B987CAA25C04876003D6F9F /* BooklistLists.xcdatamodel */,
 			);
 			currentVersion = 8B987CAA25C04876003D6F9F /* BooklistLists.xcdatamodel */;
-			path = BookishLists.xcdatamodeld;
+			path = BookishModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

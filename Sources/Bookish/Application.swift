@@ -31,7 +31,7 @@ struct Application: App {
     init() {
         
         let undoManager = UndoManager()
-        let stack = CoreDataStack(containerName: "BookishLists", undoManager: undoManager)
+        let stack = CoreDataStack(containerName: "BookishModel", undoManager: undoManager)
         self.info = BundleInfo(for: Bundle.main)
         self.modelController = ModelController(stack: stack)
         self.importController = ImportController(model: modelController)
