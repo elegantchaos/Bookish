@@ -172,3 +172,9 @@ extension CDRecord {
     }
 
 }
+
+extension CDRecord {
+    override var description: String {
+        "<\(kind) \(id) “\(name)”>"
+    }
+}
