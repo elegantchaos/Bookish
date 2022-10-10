@@ -44,7 +44,7 @@ struct Application: App {
         self.linkController = LinkController()
         self.exportController = ExportController(model: modelController, info: info)
         self.filePickerController = FilePickerController()
-        self.navigationController = NavigationController()
+        self.navigationController = NavigationController(context: stack.viewContext)
 
         if CommandLine.arguments.contains("--wipeAllData") {
             try? modelController.removeAllData()

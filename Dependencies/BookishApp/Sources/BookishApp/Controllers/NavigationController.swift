@@ -17,8 +17,8 @@ public class NavigationController: ObservableObject {
     
     var path: NavigationPath
     
-    public init() {
-        self.path = .loadFromDefaults()
+    public init(context: NSManagedObjectContext) {
+        self.path = .loadFromDefaults(context: context)
     }
     
     public func save() {
@@ -40,29 +40,27 @@ public class NavigationController: ObservableObject {
         }
     }
     
-    func destinationByRecord(_ path: RecordPath, context: NSManagedObjectContext) -> some View {
-        print("destination \(path)")
+    func destinationByRecord(_ link: RecordWithContext) -> some View {
+        print("destination \(link)")
 
         return VStack {
-            if let link = path.resolve(withContext: context) {
-                let record = link.record
+            let record = link.record
 
-                if record.isBook {
-                    BookView(book: record, fields: fields(for: link))
-                } else {
-                    switch record.kind {
-                        case .list:
-                            CustomListView(list: record, fields: defaultFields)
-                            
-                        case .role:
-                            RoleView(role: record, excludingKind: .book)
-                            
-                        case .organisation, .series, .person:
-                            BackLinksIndexView(list: record)
-                            
-                        default:
-                            ListIndexView(list: record)
-                    }
+            if record.isBook {
+                BookView(book: record, fields: fields(for: link))
+            } else {
+                switch record.kind {
+                    case .list:
+                        CustomListView(list: record, fields: defaultFields)
+                        
+                    case .role:
+                        RoleView(role: record, excludingKind: .book)
+                        
+                    case .organisation, .series, .person:
+                        BackLinksIndexView(list: record)
+                        
+                    default:
+                        ListIndexView(list: record)
                 }
             }
         }
@@ -93,14 +91,13 @@ public class NavigationController: ObservableObject {
 }
 
 struct NavigationModifier: ViewModifier {
-    @Environment(\.managedObjectContext) var context: NSManagedObjectContext
     @EnvironmentObject var navigation: NavigationController
     
     func body(content: Content) -> some View {
         content
             .navigationDestination(for: String.self, destination: navigation.destinationByID)
             .navigationDestination(for: RecordKind.self, destination: navigation.destinationByKind)
-            .navigationDestination(for: RecordPath.self, destination: { navigation.destinationByRecord($0, context: context) })
+            .navigationDestination(for: RecordWithContext.self, destination: navigation.destinationByRecord)
     }
 }
 
@@ -123,9 +120,11 @@ extension NavigationPath {
         }
     }
     
-    static func loadFromDefaults() -> NavigationPath {
+    static func loadFromDefaults(context: NSManagedObjectContext) -> NavigationPath {
         do {
-            if let path = try UserDefaults.standard.path(forKey: .defaultPathKey) {
+            let decoder = JSONDecoder()
+            decoder.userInfo[.coreDataContextKey] = context
+            if let path = try UserDefaults.standard.path(forKey: .defaultPathKey, decoder: decoder) {
                 navigationChannel.log("Restored path \(path)")
                 return path
             }
