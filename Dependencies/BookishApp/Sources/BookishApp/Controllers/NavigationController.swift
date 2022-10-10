@@ -3,21 +3,26 @@
 //  All code (c) 2022 - present day, Elegant Chaos Limited.
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
+import CoreData
 import Foundation
+import Logger
+import NavigationPathExtensions
 import SwiftUI
+import ThreadExtensions
 
+let navigationChannel = Channel("Navigation")
 
 public class NavigationController: ObservableObject {
     lazy var defaultFields = makeDefaultFields()
     
-    @Published var path: NavigationPath {
-        didSet {
-            print(path)
-        }
-    }
+    var path: NavigationPath
     
     public init() {
-        self.path = .init()
+        self.path = .loadFromDefaults()
+    }
+    
+    public func save() {
+        path.saveToDefaults()
     }
     
     func fields(for link: RecordWithContext) -> FieldList {
@@ -25,7 +30,8 @@ public class NavigationController: ObservableObject {
     }
     
     func destinationByID(_ id: String) -> some View {
-        Group {
+        print("destination \(id)")
+        return Group {
             if id == .rootPreferencesID {
                 PreferencesView()
             } else {
@@ -34,31 +40,37 @@ public class NavigationController: ObservableObject {
         }
     }
     
-    func destinationByRecord(_ link: RecordWithContext) -> some View {
-        let record = link.record
+    func destinationByRecord(_ path: RecordPath, context: NSManagedObjectContext) -> some View {
+        print("destination \(path)")
+
         return VStack {
-            if record.isBook {
-                BookView(book: record, fields: fields(for: link))
-            } else {
-                switch record.kind {
-                    case .list:
-                        CustomListView(list: record, fields: defaultFields)
-                        
-                    case .role:
-                        RoleView(role: record, excludingKind: .book)
-                        
-                    case .organisation, .series, .person:
-                        BackLinksIndexView(list: record)
-                        
-                    default:
-                        ListIndexView(list: record)
+            if let link = path.resolve(withContext: context) {
+                let record = link.record
+
+                if record.isBook {
+                    BookView(book: record, fields: fields(for: link))
+                } else {
+                    switch record.kind {
+                        case .list:
+                            CustomListView(list: record, fields: defaultFields)
+                            
+                        case .role:
+                            RoleView(role: record, excludingKind: .book)
+                            
+                        case .organisation, .series, .person:
+                            BackLinksIndexView(list: record)
+                            
+                        default:
+                            ListIndexView(list: record)
+                    }
                 }
             }
         }
     }
     
     func destinationByKind(_ kind: RecordKind) -> some View {
-        KindIndexView(kind: kind)
+        print("destination \(kind)")
+        return KindIndexView(kind: kind)
     }
     
     func makeDefaultFields() -> FieldList {
@@ -74,21 +86,53 @@ public class NavigationController: ObservableObject {
         list.addField(Field(.pages, kind: .number))
         return list
     }
+    
+    
+    
+
 }
 
 struct NavigationModifier: ViewModifier {
+    @Environment(\.managedObjectContext) var context: NSManagedObjectContext
     @EnvironmentObject var navigation: NavigationController
     
     func body(content: Content) -> some View {
         content
             .navigationDestination(for: String.self, destination: navigation.destinationByID)
             .navigationDestination(for: RecordKind.self, destination: navigation.destinationByKind)
-            .navigationDestination(for: RecordWithContext.self, destination: navigation.destinationByRecord)
+            .navigationDestination(for: RecordPath.self, destination: { navigation.destinationByRecord($0, context: context) })
     }
 }
 
 extension View {
     func standardNavigation() -> some View {
         self.modifier(NavigationModifier())
+    }
+}
+
+extension String {
+    static let defaultPathKey = "path"
+}
+
+extension NavigationPath {
+    func saveToDefaults(key: String = .defaultPathKey) {
+        do {
+            try UserDefaults.standard.set(self, forKey: .defaultPathKey)
+        } catch {
+            navigationChannel.log("Couldn't encode path")
+        }
+    }
+    
+    static func loadFromDefaults() -> NavigationPath {
+        do {
+            if let path = try UserDefaults.standard.path(forKey: .defaultPathKey) {
+                navigationChannel.log("Restored path \(path)")
+                return path
+            }
+        } catch {
+            navigationChannel.log("Couldn't decode path \(error)")
+        }
+        
+        return NavigationPath()
     }
 }

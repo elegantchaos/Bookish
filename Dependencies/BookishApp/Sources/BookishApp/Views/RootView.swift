@@ -10,6 +10,7 @@ import UniformTypeIdentifiers
 import CoreData
 
 public struct RootView: View {
+    @Environment(\.scenePhase) private var scenePhase
     @EnvironmentObject var navigation: NavigationController
     @EnvironmentObject var fileController: FilePickerController
     @EnvironmentObject var importController: ImportController

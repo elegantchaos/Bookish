@@ -8,12 +8,12 @@ import SwiftUI
 struct RecordLink: View {
     @ObservedObject var record: CDRecord
     
-    let link: RecordWithContext
+    let link: RecordPath
     let nameMode: RecordLabel.NameMode
     
     init(_ record: CDRecord, nameMode: RecordLabel.NameMode = .normal, in context: CDRecord? = nil) {
         self.record = record
-        self.link = RecordWithContext(record: record, context: context)
+        self.link = RecordPath(record: record, context: context)
         self.nameMode = nameMode
     }
 

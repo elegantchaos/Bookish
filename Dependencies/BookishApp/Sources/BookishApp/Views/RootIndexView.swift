@@ -13,7 +13,7 @@ extension [NSSortDescriptor] {
 struct RootIndexView: View {
     @EnvironmentObject var model: ModelController
     @EnvironmentObject var navigation: NavigationController
-    @SceneStorage("rootSelection") var selection: String?
+    @State var selection: String?
     @FetchRequest(entity: CDRecord.entity(), sortDescriptors: .defaultSort, predicate: .isRootView) var records: FetchedResults<CDRecord>
 
     let kinds: [RecordKind] = [.book, .person, .organisation, .series]

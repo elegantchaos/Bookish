@@ -5,7 +5,7 @@
 
 import Foundation
 
-public enum RecordKind: Int16, Identifiable {
+public enum RecordKind: Int16, Identifiable, Codable {
     case unknown
     case root
     case group

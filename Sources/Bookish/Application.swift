@@ -12,6 +12,8 @@ import Logger
 import SwiftUI
 import SheetController
 
+let applicationChannel = Channel("Application")
+
 @main
 struct Application: App {
     @Environment(\.scenePhase) var scenePhase
@@ -78,14 +80,14 @@ struct Application: App {
                     .environmentObject(navigationController)
                     .onReceive(
                         modelController.objectWillChange.debounce(for: .seconds(10), scheduler: RunLoop.main), perform: { _ in
-                            print("model changed")
+                            applicationChannel.log("model changed")
                             modelController.save()
                     })
             }
             .handlesExternalEvents(matching: ["*"])
             .commands {
                 CommandGroup(before: .importExport) {
-                    Button(action: { print("blah") }) {
+                    Button(action: { applicationChannel.log("blah") }) {
                         Text("Command Test")
                     }
 
@@ -95,18 +97,21 @@ struct Application: App {
 //                    Text("Command Test")
 //                }
             }
-            .onChange(of: scenePhase) { newScenePhase in
-                  switch newScenePhase {
-                  case .active:
-                    print("App is active")
-                  case .inactive:
-                    print("App is inactive")
-                  case .background:
-                    print("App is in background")
-                    modelController.save()
-                  @unknown default:
-                    print("Oh - interesting: I received an unexpected new value.")
-                  }
-            }
+            .onChange(of: scenePhase, perform: handlePhaseChanged)
+    }
+    
+    func handlePhaseChanged(_ newPhase: ScenePhase) {
+        switch newPhase {
+            case .active:
+                applicationChannel.log("App is active")
+            case .inactive:
+                applicationChannel.log("App is inactive")
+            case .background:
+                applicationChannel.log("App is in background")
+                modelController.save()
+                navigationController.save()
+            @unknown default:
+                applicationChannel.log("Oh - interesting: I received an unexpected new value.")
+        }
     }
 }
