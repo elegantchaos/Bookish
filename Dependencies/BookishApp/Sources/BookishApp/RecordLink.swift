@@ -7,21 +7,21 @@ import Foundation
 import CoreData
 
 /// Link to a record, along with another optional record
-/// which represents the context. Usually this will be a list
+/// which represents the source. Usually this will be a list
 /// containing the record, that we navigated to it from.
-public struct RecordWithContext {
+public struct RecordLink {
     let record: CDRecord
-    let context: CDRecord?
+    let source: CDRecord?
 }
 
-extension RecordWithContext: Hashable { } // To be used as a path component, needs to be Hashable.
+extension RecordLink: Hashable { } // To be used as a path component, needs to be Hashable.
 
 // MARK: Debugging
 
-extension RecordWithContext: CustomDebugStringConvertible {
+extension RecordLink: CustomDebugStringConvertible {
     public var debugDescription: String {
-        if let context {
-            return "\(record) (in \(context)"
+        if let source {
+            return "\(record) (in \(source)"
         } else {
             return "\(record)"
         }
@@ -34,13 +34,15 @@ extension CodingUserInfoKey {
     static let coreDataContextKey = CodingUserInfoKey(rawValue: "coreDataContext")!
 }
 
-extension RecordWithContext: Codable {
+extension RecordLink: Codable {
     struct CodedRepresentation: Codable {
         let id: String
-        let context: String?
+        let source: String?
     }
     
     public init(from decoder: Decoder) throws {
+        // We need a managed object context so that we can look up identifiers and turn them
+        // back into CDRecord instances.
         guard let context = decoder.userInfo[.coreDataContextKey] as? NSManagedObjectContext else {
             throw DecodingError.dataCorrupted(.init(codingPath: decoder.codingPath, debugDescription: "Missing CoreData Context"))
         }
@@ -53,15 +55,15 @@ extension RecordWithContext: Codable {
         }
 
         self.record = record
-        if let id = decoded.context {
-            self.context = CDRecord.findWithID(id, in: context)
+        if let id = decoded.source {
+            self.source = CDRecord.findWithID(id, in: context)
         } else {
-            self.context = nil
+            self.source = nil
         }
     }
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
-        try container.encode(CodedRepresentation(id: record.id, context: context?.id))
+        try container.encode(CodedRepresentation(id: record.id, source: source?.id))
     }
 }

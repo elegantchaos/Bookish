@@ -43,7 +43,7 @@ struct ListIndexView: View {
                             if isEditing {
                                 RecordLabel(record: item)
                             } else {
-                                RecordLink(item, in: list)
+                                RecordNavigationLink(item, in: list)
                             }
                         }
                     }

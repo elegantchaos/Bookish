@@ -28,6 +28,16 @@ class CDRecord: NSManagedObject, Identifiable {
         kindCode == RecordKind.book.rawValue
     }
     
+    var isEntity: Bool {
+        switch kind {
+            case .book, .person, .organisation, .series:
+                return true
+                
+            default:
+                return false
+        }
+    }
+    
     var canDelete: Bool {
         switch kind {
             case .list, .group, .person, .book, .organisation, .series: return true

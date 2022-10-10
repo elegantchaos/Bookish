@@ -48,7 +48,7 @@ struct RoleView: View {
                             if isEditing {
                                 RecordLabel(record: item)
                             } else {
-                                RecordLink(item, in: role)
+                                RecordNavigationLink(item, in: role)
                             }
                         }
                     }

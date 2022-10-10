@@ -25,12 +25,12 @@ public class NavigationController: ObservableObject {
         path.saveToDefaults()
     }
     
-    func fields(for link: RecordWithContext) -> FieldList {
-        link.context?.fields ?? defaultFields
+    func fields(for link: RecordLink) -> FieldList {
+        link.source?.fields ?? defaultFields
     }
     
     func destinationByID(_ id: String) -> some View {
-        print("destination \(id)")
+        navigationChannel.debug("destination \(id)")
         return Group {
             if id == .rootPreferencesID {
                 PreferencesView()
@@ -40,13 +40,13 @@ public class NavigationController: ObservableObject {
         }
     }
     
-    func destinationByRecord(_ link: RecordWithContext) -> some View {
-        print("destination \(link)")
+    func destinationByRecord(_ link: RecordLink) -> some View {
+        navigationChannel.debug("destination \(link)")
 
         return VStack {
             let record = link.record
 
-            if record.isBook {
+            if record.isEntity {
                 BookView(book: record, fields: fields(for: link))
             } else {
                 switch record.kind {
@@ -67,7 +67,7 @@ public class NavigationController: ObservableObject {
     }
     
     func destinationByKind(_ kind: RecordKind) -> some View {
-        print("destination \(kind)")
+        navigationChannel.debug("destination \(kind)")
         return KindIndexView(kind: kind)
     }
     
@@ -97,7 +97,7 @@ struct NavigationModifier: ViewModifier {
         content
             .navigationDestination(for: String.self, destination: navigation.destinationByID)
             .navigationDestination(for: RecordKind.self, destination: navigation.destinationByKind)
-            .navigationDestination(for: RecordWithContext.self, destination: navigation.destinationByRecord)
+            .navigationDestination(for: RecordLink.self, destination: navigation.destinationByRecord)
     }
 }
 
@@ -108,7 +108,7 @@ extension View {
 }
 
 extension String {
-    static let defaultPathKey = "path"
+    static let defaultPathKey = "navigationPath"
 }
 
 extension NavigationPath {

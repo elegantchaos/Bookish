@@ -22,7 +22,7 @@ struct FilteredRecordListView: View {
     var body: some View {
         ForEach(records) { record in
             if filter.isEmpty || record.name.contains(filter) {
-                RecordLink(record)
+                RecordNavigationLink(record)
             }
         }
         .onDelete(perform: deleteAdaptor)

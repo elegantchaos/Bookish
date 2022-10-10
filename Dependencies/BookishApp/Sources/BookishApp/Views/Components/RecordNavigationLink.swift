@@ -5,15 +5,15 @@
 
 import SwiftUI
 
-struct RecordLink: View {
+struct RecordNavigationLink: View {
     @ObservedObject var record: CDRecord
     
-    let link: RecordWithContext
+    let link: RecordLink
     let nameMode: RecordLabel.NameMode
     
-    init(_ record: CDRecord, nameMode: RecordLabel.NameMode = .normal, in context: CDRecord? = nil) {
+    init(_ record: CDRecord, nameMode: RecordLabel.NameMode = .normal, in source: CDRecord? = nil) {
         self.record = record
-        self.link = RecordWithContext(record: record, context: context)
+        self.link = RecordLink(record: record, source: source)
         self.nameMode = nameMode
     }
 

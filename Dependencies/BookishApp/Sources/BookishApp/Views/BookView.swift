@@ -38,7 +38,7 @@ struct BookView: View {
                                     ForEach(linkRecords) { linkRecord in
                                         if let link = linkRecord.asLinkedRole(to: book) {
                                             HStack {
-                                                RecordLink(link.record, nameMode: .role(link.role))
+                                                RecordNavigationLink(link.record, nameMode: .role(link.role))
                                                     .foregroundColor(.primary)
                                                 Spacer()
                                             }
