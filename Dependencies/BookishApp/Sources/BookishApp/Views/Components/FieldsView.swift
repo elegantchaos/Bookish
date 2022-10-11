@@ -6,7 +6,6 @@
 import SwiftUI
 
 struct FieldsView: View {
-    @EnvironmentObject var appearance: AppearanceController
     @Environment(\.editMode) var editMode
     
     let record: CDRecord

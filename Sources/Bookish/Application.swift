@@ -28,6 +28,7 @@ struct Application: App {
     let exportController: ExportController
     let filePickerController: FilePickerController
     let navigationController: NavigationController
+    let editController: EditController
     let info: BundleInfo
     
     init() {
@@ -45,7 +46,8 @@ struct Application: App {
         self.exportController = ExportController(model: modelController, info: info)
         self.filePickerController = FilePickerController()
         self.navigationController = NavigationController(context: stack.viewContext)
-
+        self.editController = EditController()
+        
         if CommandLine.arguments.contains("--wipeAllData") {
             try? modelController.removeAllData()
             exit(0)
@@ -78,6 +80,7 @@ struct Application: App {
                     .environmentObject(filePickerController)
                     .environmentObject(exportController)
                     .environmentObject(navigationController)
+                    .environmentObject(editController)
                     .onReceive(
                         modelController.objectWillChange.debounce(for: .seconds(10), scheduler: RunLoop.main), perform: { _ in
                             applicationChannel.log("model changed")

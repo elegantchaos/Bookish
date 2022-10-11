@@ -35,31 +35,33 @@ struct CustomListView: View {
         
         return VStack(spacing: 0) {
             LinkSessionHost(delegate: self) {
-                FieldsView(record: list, fields: fields)
-                    .padding(.bottom)
-                
-                let items: [CDRecord] = list.sortedContents
-//                DisclosureGroup("Items", isExpanded: $showItems) {
+                List {
+                    FieldsView(record: list, fields: fields)
+                        .padding(.bottom)
+                    
+                    let items: [CDRecord] = list.sortedContents
+                    //                DisclosureGroup("Items", isExpanded: $showItems) {
                     LazyVStack(alignment: .leading, spacing: 8.0) {
-                    ForEach(items) { item in
-                        if include(item) {
-                            if isEditing {
-                                RecordLabel(record: item)
-                            } else {
-                                RecordNavigationLink(item, in: list)
+                        ForEach(items) { item in
+                            if include(item) {
+                                if isEditing {
+                                    RecordLabel(record: item)
+                                } else {
+                                    RecordNavigationLink(item, in: list)
+                                }
                             }
                         }
-                    }
-                    .onDelete(perform: handleDelete)
-                    .foregroundColor(.primary)
-//                    .searchable(text: $filter)
+                        .onDelete(perform: handleDelete)
+                        .foregroundColor(.primary)
+                        //                    .searchable(text: $filter)
                     }
                     .padding(.vertical)
-//                }
-                
-                RawPropertiesGroup(record: list)
-                
-                Spacer()
+                    //                }
+                    
+                    RawPropertiesGroup(record: list)
+                    
+                    Spacer()
+                }
             }
         }
         .padding()
