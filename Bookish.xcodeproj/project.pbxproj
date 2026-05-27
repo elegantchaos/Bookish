@@ -46,7 +46,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		226F15D7251A28EA00D6B12E /* Bookish Lists.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = "Bookish Lists.app"; path = Bookish.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2252C1CF2FC6FC5000515137 /* AGENTS.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = AGENTS.md; sourceTree = "<group>"; };
+		226F15D7251A28EA00D6B12E /* Bookish.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bookish.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		226F15DA251A28EA00D6B12E /* Application.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
 		226F15DE251A28F600D6B12E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		226F15E1251A28F600D6B12E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -111,6 +112,7 @@
 		226F15CE251A28EA00D6B12E = {
 			isa = PBXGroup;
 			children = (
+				2252C1CF2FC6FC5000515137 /* AGENTS.md */,
 				8B602EEA274BD58500DE50A5 /* README.md */,
 				226F15D9251A28EA00D6B12E /* Sources */,
 				8B57F07A25F7B869007DB517 /* Tests */,
@@ -124,7 +126,7 @@
 		226F15D8251A28EA00D6B12E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				226F15D7251A28EA00D6B12E /* Bookish Lists.app */,
+				226F15D7251A28EA00D6B12E /* Bookish.app */,
 				226F15E8251A28F600D6B12E /* BookishTests.xctest */,
 				226F15F3251A28F600D6B12E /* BookishUITests.xctest */,
 			);
@@ -246,7 +248,7 @@
 				2234049728F0501F00102618 /* BookishApp */,
 			);
 			productName = "Samedi's Crafting";
-			productReference = 226F15D7251A28EA00D6B12E /* Bookish Lists.app */;
+			productReference = 226F15D7251A28EA00D6B12E /* Bookish.app */;
 			productType = "com.apple.product-type.application";
 		};
 		226F15E7251A28F600D6B12E /* BookishTests */ = {
