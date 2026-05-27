@@ -4,7 +4,7 @@
 
 Bookish is a personal book cataloguing app for maintaining a durable, searchable record of books, people, publishers, series, lists, and reading-related metadata.
 
-The new iteration should preserve the project’s flexible record model while modernising the app around Swift 6, SwiftUI, SwiftData, and a cleaner separation between domain logic, persistence, import/export, and user interface code.
+The new iteration should preserve the project's flexible record model while modernising the app around Swift 6, SwiftUI, SwiftData, and a cleaner separation between domain logic, persistence, import/export, and user interface code.
 
 ## Product Goals
 
@@ -92,6 +92,19 @@ Bookish should be organised into focused modules:
 
 Domain logic should be testable without launching the app or touching persistent stores. UI code should consume small view models or query wrappers rather than embedding persistence details deeply in views.
 
+Bookish should adopt the project layout described in `Project Layout.md`: a thin root app target over reusable Swift packages under `Dependencies/`, with documentation, scripts, legacy material, and planning notes kept under `Extras/`.
+
+## Layout Adoption Notes
+
+- Keep the root app target thin and move reusable app behavior into package targets.
+- Adopt ActionStatus' command-driven approach for actions, using the external `Commands` and `CommandsUI` packages.
+- Model each user action as a command with explicit availability and execution, then render controls through command UI helpers.
+- Introduce a Bookish command centre that satisfies provider protocols by forwarding to focused services.
+- Prefer Stack's localisation model: each module owns its own string catalog, and code uses generated string catalog symbols whenever tooling allows.
+- Avoid ActionStatus' centralised localisation model for new Bookish code unless a host-level app string genuinely belongs only to the root app.
+- Add owned package dependencies as Git submodules where local co-development is expected, following the ActionStatus pattern.
+- Keep third-party dependencies as normal SwiftPM URL dependencies unless they are owned or regularly edited alongside the app.
+
 ## Non-Goals for the First Modernisation Pass
 
 - Do not attempt to support every historic legacy feature before the new model is stable.
@@ -114,3 +127,5 @@ Domain logic should be testable without launching the app or touching persistent
 - Which legacy import formats are required for the first usable version?
 - What metadata fields are first-class versus custom properties?
 - How much of the current flexible graph model should be exposed directly in the UI?
+- How granular should the Bookish package split be: a small set of packages or Stack-style feature service targets?
+- Should localisation symbol generation rely on Xcode alone, or should command-line builds use an explicit plugin?
