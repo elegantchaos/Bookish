@@ -19,7 +19,7 @@ Reviewed Bookish against the newer Stack, ActionStatus, and ClockSync projects t
 
 ## Open Questions
 
-- Standardise `Sources/` versus `Source/`.
-- Decide whether Bookish needs a root `Package.swift`.
+- `Sources/` is the standard folder name.
+- Root `Package.swift` support should be tooling-managed if needed, probably through `rt`.
 - Decide how much of Stack's service-target granularity to adopt.
 - Decide whether localisation symbol generation should use an explicit command-line plugin.

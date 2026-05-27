@@ -1,6 +1,6 @@
 # Project Layout
 
-This document describes a reusable project layout for Swift application projects. It is based on the layout used across Bookish, Stack, ActionStatus, and ClockSync, with the more recent projects treated as the direction of travel.
+This document describes a reusable project layout for Swift application projects.
 
 The style is similar in spirit to extreme packaging: most reusable application code lives in Swift packages, while the Xcode app target stays thin and focuses on product assembly, platform entry points, entitlements, and bundled app resources.
 
@@ -16,6 +16,8 @@ The style is similar in spirit to extreme packaging: most reusable application c
 - Keep project metadata, planning, assets, scripts, screenshots, and legacy material outside the production source tree.
 
 ## Top-Level Shape
+
+Use `Sources/` for root app source and package source directories. This follows SwiftPM conventions and should be treated as the standard spelling for the template.
 
 Use this shape as the starting template:
 
@@ -67,9 +69,9 @@ Avoid placing domain logic, service implementations, persistence models, or reus
 
 ## Root Package
 
-A root `Package.swift` is useful for local development, indexing, previews, and integration tests. It can aggregate the local packages used by the app target without becoming the main architecture boundary.
+A root `Package.swift` is usually not required. The app target and packages under `Dependencies/` should remain the main build and architecture boundaries.
 
-Use a root package when it helps tools build or test the app's package graph. Do not use it as a dumping ground for product code.
+If tooling needs an aggregate package for local development, indexing, previews, or integration tests, prefer generating or managing that through a ReleaseTools (`rt`) command rather than maintaining it by hand. Do not use a root package as a dumping ground for product code.
 
 ## Dependencies Directory
 
@@ -96,11 +98,11 @@ Recommended layers:
 - **UI**: reusable SwiftUI views, feature screens, view models, preview fixtures, and command-backed controls.
 - **Host**: the app and extension targets that assemble services and UI.
 
-For a small app, these may be targets within one package. For a larger app, they may become multiple packages under `Dependencies/`.
+For a small app, these may be targets within one package. For a larger app, prefer service-based packages or service-based targets under `Dependencies/` so feature ownership stays explicit.
 
 ## Service Packages
 
-Service packages own feature-specific state and operations. Stack's service split is the clearest example of this direction: model, sheet, appearance, hot key, suggestions, settings, and UI helpers each have bounded targets.
+Service packages own feature-specific state and operations. They are the preferred structure for larger apps. Typical service targets include model, persistence, sheets, appearance, hot keys, search, suggestions, accounts, settings, and reusable UI helpers.
 
 Use service packages when a feature has:
 
@@ -115,7 +117,7 @@ Do not create a service package just to move one or two files. A package boundar
 
 Adopt a command-driven approach for user actions.
 
-Use the external `Commands` and `CommandsUI` packages, following the ActionStatus pattern:
+Use the standard `Commands` and `CommandsUI` packages:
 
 - define each action as a command;
 - keep availability and execution on the command;
@@ -141,7 +143,7 @@ Avoid making the command centre a general-purpose global object. If it grows too
 
 ## Localisation
 
-Prefer Stack's localisation direction over ActionStatus' current centralised approach.
+Use module-owned localisation by default.
 
 Each module that owns user-visible text should own its `Resources/Localizable.xcstrings` catalog and declare it as a processed resource in its package target.
 
@@ -152,6 +154,8 @@ Use generated string catalog symbols wherever possible instead of passing string
 - the generated symbol tooling is not available for that target yet.
 
 For command names and help text, prefer deriving localisation keys from stable command IDs. Avoid passing arbitrary strings or localisation keys into command constructors unless the name is truly unbounded.
+
+Centralised app-level localisation is still useful for text that belongs only to the host app: app name, app menus, onboarding, root settings, entitlement descriptions, and platform-specific host screens. Package-owned feature text should stay with the package.
 
 ## Resources
 
@@ -192,8 +196,7 @@ Expected automation includes:
 - formatting and linting;
 - target validation;
 - full project validation;
-- release/upload support;
-- project generation or workflow generation when used.
+- release/upload support.
 
 The template should make the common commands discoverable from README or documentation, not hidden in tribal knowledge.
 
@@ -210,36 +213,17 @@ Recommended conventions:
 
 Submodules add operational overhead, so reserve them for owned packages where local co-development matters. For ordinary third-party dependencies, normal SwiftPM URL dependencies are simpler.
 
-## Relationship to Bookish
-
-Bookish already has the older form of this layout:
-
-- root app source in `Sources/Bookish`;
-- reusable packages in `Dependencies/BookishApp`, `Dependencies/BookishCore`, `Dependencies/BookishCleanup`, and `Dependencies/BookishImporter`;
-- documentation, scripts, and legacy material in `Extras/`.
-
-The modernisation should move it closer to the newer pattern:
-
-- thin root app target;
-- SwiftData persistence separated from storage-independent domain/interchange logic;
-- command-driven actions using `Commands` and `CommandsUI`;
-- module-owned localisations with generated symbols where possible;
-- owned package dependencies as submodules where local co-development is expected.
-
 ## Unclear or Unsettled Parts
 
-- The preferred root folder name is inconsistent: Bookish and ActionStatus use `Sources/`, while Stack uses `Source/`.
-- It is not yet clear whether every app should have a root `Package.swift`; ActionStatus does, Stack and Bookish currently rely more on package manifests under `Dependencies/`, and ClockSync is smaller.
-- The right granularity for package splitting is contextual. Stack has many service targets; ClockSync keeps a smaller package with protocol, Bluetooth, and facade targets.
-- The localisation generation story is still evolving. Xcode generates string catalog symbols automatically, while Stack has an opt-in plugin for command-line builds.
-- ActionStatus currently centralises app localisations, while Stack distributes them by module. The distributed model looks better for reuse, but it needs a reliable generation and validation workflow.
+- Root `Package.swift` support should be handled by tooling if it is needed. It should not be part of the required hand-maintained template.
+- The right granularity for package splitting is contextual. A large app should use service-based packages or targets; a small app may only need protocol, implementation, and facade targets in one package.
+- The localisation generation story is still evolving. Xcode generates string catalog symbols automatically, while command-line builds may need an explicit plugin or validation step.
+- Distributed module-owned localisation needs a reliable generation and validation workflow before it can be treated as fully mechanical.
 - Submodules are useful for owned packages, but the exact policy for branches, update cadence, and release tagging should be standardised.
-- The template does not yet define how project generation should work. A future `novy` template should make that explicit.
 
 ## Template Improvements to Consider
 
-- Standardise on either `Sources/` or `Source/`; `Sources/` matches SwiftPM and should probably be the default.
-- Provide a small root manifest template that aggregates local packages for tooling without encouraging product code at the root package level.
+- Add an `rt` command to create or maintain any aggregate root package needed for tooling.
 - Create a reusable package manifest helper for local-or-remote owned dependencies instead of copying the helper into each package.
 - Provide a standard `Commands` dependency and starter command centre in the template.
 - Provide a standard localisation setup: per-target string catalogs, generated symbols, and a validation script that catches raw UI string drift where practical.
