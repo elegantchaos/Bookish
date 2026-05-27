@@ -4,7 +4,7 @@
 
 Bookish is a personal book cataloguing app for maintaining a durable, searchable record of books, people, publishers, series, lists, and reading-related metadata.
 
-The new iteration should preserve the project's flexible record model while modernising the app around Swift 6, SwiftUI, SwiftData, and a cleaner separation between domain logic, persistence, import/export, and user interface code.
+Bookish preserves a flexible record model while keeping clear boundaries between domain logic, storage, import/export, and user interface code.
 
 ## Product Goals
 
@@ -12,7 +12,7 @@ The new iteration should preserve the project's flexible record model while mode
 - Let users organise books into lists, series, roles, and custom relationships without forcing a rigid schema.
 - Support rich metadata for books, people, organisations, series, and user-defined fields.
 - Keep the catalogue portable through explicit import/export formats.
-- Provide a native SwiftUI experience that works well across Apple platforms, with iOS and macOS as the primary targets.
+- Provide a native Apple-platform experience, with iOS and macOS as the primary targets.
 - Keep the data model robust enough for future sync without coupling core logic to a particular sync provider.
 
 ## Core Concepts
@@ -65,49 +65,77 @@ The model should allow the same book to appear in multiple lists or multiple tim
 
 Importers should transform external data into the interchange record format before touching app storage. Export should use the same interchange model so catalogue data remains portable and testable outside the UI.
 
-Initial import/export support should prioritise existing Bookish interchange files and legacy Delicious Library-style data, then leave space for additional formats.
+Import/export support should prioritise Bookish interchange files and Delicious Library-style data, while leaving space for additional formats.
 
-## Data Model Direction
+## Data Persistence Model
 
-The modern app should move from the legacy Core Data-backed `CDRecord`/`CDProperty` implementation to SwiftData models that retain the same conceptual shape:
+The app data model is based around untyped records, which support a key/value abstraction.
 
-- stable IDs;
-- typed record kinds;
-- flexible properties;
-- first-class links;
-- list order and relationship metadata;
-- import/export through simple interchange records.
+Key properties of the abstraction:
+- Records have stable ids.
+- Record properties are accessed using dot-separated string keys. 
+- Values can be primitive types, codable types, or references to other records.
+- Nested properties are supported.
+- The implementation of nested values is hidden:
+  - could be resolved via references to subrecords
+  - could be directly stored using fully qualified keys
+  - could be an encoded contained in a top-level value
+- Relationships between records are modelled as records themselves
+- Relationships therefore have associated key/value metadata
+- Relationships can be ordered, and one-to-one or one-to-many
+  
+### Persistence
 
-The low-level interchange model should remain storage-independent. Importers, lookup services, cleanup tools, and tests should depend on the interchange/domain layer rather than SwiftData.
+Persistence and synchronisation is assumed to be transparently handled by the data provider. The app is notified when data is changed externally. The app requests changes to data explicitly.
+
+Records are never deleted, only marked as deleted, and can therefore be restored.
+
+### Interchange
+
+The database can essentially be viewed as a graph of key/value records.
+
+An individual record, a collection of records, or the entire database should be representable as JSON. 
+
+The interchange model should remain storage-independent. 
+
+Importers, lookup services, cleanup tools, and tests should depend either on the persistence abstraction, or on the JSON interchange format.
+
+## Data Views And Types
+
+Although data records are untyped value/value stores, they are treated as typed by convention within the application, so that it can collect them into indexes (books, authors, and so on), and manage the connections between them.
+
+Types are indicated by the value of one or more predefined key/value pairs on a record (eg a `_type` property).
+
+The application should support a flexible display and editing user interface, based on description records.
+
+A description is a record which indicates how to display other records:
+- which properties to display
+- the order to display them in
+- the expected data type of each property
+- the ui component to use to display each property
+- whether properties are optional
+- whether to show placeholders or empty ui components for missing properties
+- how to manage links to other records
+
+Because types are not strict, it is possible for an individual record to be view as more than one type, or for its type to be changed at runtime. This isn't necessarily a facility that the application requires, but it should be possible.  
 
 ## Architecture
 
 Bookish should be organised into focused modules:
 
 - **Core**: storage-independent domain types, record keys, interchange records, validation, cleanup, and pure transformations.
-- **Persistence**: SwiftData models, migrations, fetch/query helpers, and persistence-specific mapping.
+- **Persistence**: storage models, migrations, fetch/query helpers, and persistence-specific mapping.
 - **Importer**: import sessions, format-specific importers, and conversion into interchange records.
 - **Lookup**: external lookup services and candidate matching.
-- **App/UI**: SwiftUI views, navigation, editing flows, scanning, preferences, and platform integration.
+- **App/UI**: views, navigation, editing flows, scanning, preferences, and platform integration.
 
 Domain logic should be testable without launching the app or touching persistent stores. UI code should consume small view models or query wrappers rather than embedding persistence details deeply in views.
 
-Bookish should adopt the project layout described in `Project Layout.md`: a thin root app target over reusable Swift packages under `Dependencies/`, with documentation, scripts, legacy material, and planning notes kept under `Extras/`.
+Bookish should adopt the project layout described in `Project Layout.md`: a thin root app target over reusable Swift packages under `Dependencies/`, with documentation, scripts, reference material, and planning notes kept under `Extras/`.
 
-## Layout Adoption Notes
+## Non-Goals
 
-- Keep the root app target thin and move reusable app behavior into package targets.
-- Adopt ActionStatus' command-driven approach for actions, using the external `Commands` and `CommandsUI` packages.
-- Model each user action as a command with explicit availability and execution, then render controls through command UI helpers.
-- Introduce a Bookish command centre that satisfies provider protocols by forwarding to focused services.
-- Prefer Stack's localisation model: each module owns its own string catalog, and code uses generated string catalog symbols whenever tooling allows.
-- Avoid ActionStatus' centralised localisation model for new Bookish code unless a host-level app string genuinely belongs only to the root app.
-- Add owned package dependencies as Git submodules where local co-development is expected, following the ActionStatus pattern.
-- Keep third-party dependencies as normal SwiftPM URL dependencies unless they are owned or regularly edited alongside the app.
-
-## Non-Goals for the First Modernisation Pass
-
-- Do not attempt to support every historic legacy feature before the new model is stable.
+- Do not attempt to support every specialised catalogue feature before the core model is stable.
 - Do not tie sync design to a specific provider until the local data model and migrations are proven.
 - Do not require users to understand the low-level graph/link model for common workflows.
 - Do not make importers responsible for app-specific persistence decisions.
@@ -115,17 +143,15 @@ Bookish should adopt the project layout described in `Project Layout.md`: a thin
 ## Quality Bar
 
 - Core transformations and import/export behavior must have focused tests.
-- SwiftUI views should have previews for representative empty, populated, and error states.
-- Migration work must include repeatable fixtures for legacy data.
+- Views should have previews for representative empty, populated, and error states.
+- Migration work must include repeatable fixtures for imported catalogue data.
 - The app should make destructive catalogue operations explicit and reversible where practical.
 - Documentation should stay aligned with the implemented model, especially `Database.md` and this specification.
 
 ## Open Questions
 
 - Which Apple platforms are primary for the next release: iOS, macOS, or both equally?
-- Should SwiftData sync target CloudKit, local-only storage first, or a provider-neutral abstraction?
-- Which legacy import formats are required for the first usable version?
+- Should sync target CloudKit, local-only storage, or a provider-neutral abstraction?
+- Which import formats are required for the first usable version?
 - What metadata fields are first-class versus custom properties?
-- How much of the current flexible graph model should be exposed directly in the UI?
-- How granular should the Bookish package split be: a small set of packages or Stack-style feature service targets?
-- Should localisation symbol generation rely on Xcode alone, or should command-line builds use an explicit plugin?
+- How much of the flexible graph model should be exposed directly in the UI?

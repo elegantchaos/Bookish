@@ -13,6 +13,7 @@ Started the modernisation planning work by drafting a compact high-level specifi
 ## Output
 
 - Added `Extras/Documentation/Specification.md`.
+- Revised `Extras/Documentation/Specification.md` to remove migration-oriented wording and storage-framework details, keeping the document focused on product behavior, domain shape, and architectural boundaries.
 
 ## Open Questions
 
