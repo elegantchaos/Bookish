@@ -2,12 +2,13 @@
 
 This document describes a reusable project layout for Swift application projects.
 
-The style is similar in spirit to extreme packaging: most reusable application code lives in Swift packages, while the Xcode app target stays thin and focuses on product assembly, platform entry points, entitlements, and bundled app resources.
+Most code lives in Swift packages, while the Xcode app target stays as thin as possible, and focuses on product assembly, platform entry points, entitlements, and bundled app resources.
 
 ## Goals
 
 - Keep domain logic testable without launching the app.
 - Keep app and extension targets thin.
+- Keep SwiftUI views in packages for better preview performance.
 - Make package boundaries explicit and durable.
 - Keep feature work local to the package or service that owns it.
 - Allow owned dependencies to be edited locally while retaining normal package identity.
@@ -25,9 +26,9 @@ Use this shape as the starting template:
 ProjectName/
   ProjectName.xcodeproj
   ProjectName.xcworkspace
-  Package.swift
   README.md
   AGENTS.md
+  Settings.xcconfig
   Sources/
     ProjectName/
       ProjectNameApp.swift
@@ -35,15 +36,14 @@ ProjectName/
   Tests/
   Dependencies/
     ProjectCore/
-      Package.swift
-      Sources/
-      Tests/
+    ...
+    Application/
     Commands/
-      Package.swift
-      Sources/
-      Tests/
-    OwnedDependency/
-      Package.swift
+    Icons/
+    ...
+    OwnedDependencyA/
+    OwnedDependencyB/
+    ...
   Extras/
     Documentation/
     Journal/
@@ -59,13 +59,13 @@ Not every project needs every folder. Smaller projects may have one package unde
 
 The root Xcode project owns the final application product. Its source should be deliberately small:
 
-- app entry points;
-- platform-specific application delegates or scene setup;
+- app entry points & scenes;
+- platform-specific application delegates, scene setup, menubar/menuextra/etc;
 - entitlements and host-level property lists;
 - app icons and resources that truly belong to the shipping app bundle;
-- composition of package-provided views, services, command centres, and model containers.
+- app specific settings in an xcconfig file
 
-Avoid placing domain logic, service implementations, persistence models, or reusable UI components directly in the app target. Those should live in packages under `Dependencies/`.
+Avoid placing domain logic, service implementations, persistence models, or reusable UI components directly in the app target. Those should live in packages under `Dependencies/`. 
 
 ## Root Package
 
@@ -86,7 +86,7 @@ For owned external packages, prefer adding them as Git submodules. This keeps de
 
 When a package should work both inside and outside the parent app checkout, prefer a local-or-remote dependency helper in `Package.swift`: use the local sibling package when it exists, otherwise fall back to the released Git URL.
 
-## Package Layering
+## Layering
 
 Use directional package dependencies. Lower layers should not import higher layers.
 
@@ -100,6 +100,12 @@ Recommended layers:
 
 For a small app, these may be targets within one package. For a larger app, prefer service-based packages or service-based targets under `Dependencies/` so feature ownership stays explicit.
 
+## Core Package
+
+A single core package should house all application-specific code.
+
+It should be factored into multiple targets/library products, to promite layering.
+
 ## Service Packages
 
 Service packages own feature-specific state and operations. They are the preferred structure for larger apps. Typical service targets include model, persistence, sheets, appearance, hot keys, search, suggestions, accounts, settings, and reusable UI helpers.
@@ -110,6 +116,7 @@ Use service packages when a feature has:
 - its own commands;
 - testable behavior independent of the app host;
 - platform integration that should be isolated behind a small API.
+- might be applicable to multiple applications and thus a target for extraction to a public repo. 
 
 Do not create a service package just to move one or two files. A package boundary should reduce coupling or improve testability enough to justify the extra manifest and dependency management.
 
@@ -117,7 +124,7 @@ Do not create a service package just to move one or two files. A package boundar
 
 Adopt a command-driven approach for user actions.
 
-Use the standard `Commands` and `CommandsUI` packages:
+Use the standard `Commands` package:
 
 - define each action as a command;
 - keep availability and execution on the command;
@@ -139,7 +146,9 @@ Use a command centre as the runtime integration object. It should:
 - track running command state when needed;
 - offer convenience helpers for command-backed controls.
 
-Avoid making the command centre a general-purpose global object. If it grows too broad, split provider protocols and services so each command only sees the capabilities it needs.
+Avoid making the command centre a general-purpose global object. 
+
+Instead, use composition. Split provider protocols and services so each command only sees the capabilities it needs, and have the command centre provide the services and manage their lifecycle.
 
 ## Localisation
 
