@@ -145,6 +145,15 @@
       }
     },
     {
+      "identity" : "navigationpathextensions",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/elegantchaos/NavigationPathExtensions.git",
+      "state" : {
+        "revision" : "061f7ef10fb598948acc05ecd81e1bcc29f6f4c2",
+        "version" : "1.1.0"
+      }
+    },
+    {
       "identity" : "runner",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/elegantchaos/Runner",

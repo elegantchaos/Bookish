@@ -1,0 +1,44 @@
+{
+  "configurations": [
+    {
+      "type": "swift",
+      "request": "launch",
+      "args": [],
+      "cwd": "${workspaceFolder:Bookish}/Extras/Legacy/BookishScanner/Dependencies/ReleaseTools",
+      "name": "Debug rt (Extras/Legacy/BookishScanner/Dependencies/ReleaseTools)",
+      "target": "rt",
+      "configuration": "debug",
+      "preLaunchTask": "swift: Build Debug rt (Extras/Legacy/BookishScanner/Dependencies/ReleaseTools)"
+    },
+    {
+      "type": "swift",
+      "request": "launch",
+      "args": [],
+      "cwd": "${workspaceFolder:Bookish}/Extras/Legacy/BookishScanner/Dependencies/ReleaseTools",
+      "name": "Release rt (Extras/Legacy/BookishScanner/Dependencies/ReleaseTools)",
+      "target": "rt",
+      "configuration": "release",
+      "preLaunchTask": "swift: Build Release rt (Extras/Legacy/BookishScanner/Dependencies/ReleaseTools)"
+    },
+    {
+      "type": "swift",
+      "request": "launch",
+      "args": [],
+      "cwd": "${workspaceFolder:Bookish}/Extras/Legacy/BookishScanner/Dependencies/ReleaseTools",
+      "name": "Debug Configure (Extras/Legacy/BookishScanner/Dependencies/ReleaseTools)",
+      "target": "Configure",
+      "configuration": "debug",
+      "preLaunchTask": "swift: Build Debug Configure (Extras/Legacy/BookishScanner/Dependencies/ReleaseTools)"
+    },
+    {
+      "type": "swift",
+      "request": "launch",
+      "args": [],
+      "cwd": "${workspaceFolder:Bookish}/Extras/Legacy/BookishScanner/Dependencies/ReleaseTools",
+      "name": "Release Configure (Extras/Legacy/BookishScanner/Dependencies/ReleaseTools)",
+      "target": "Configure",
+      "configuration": "release",
+      "preLaunchTask": "swift: Build Release Configure (Extras/Legacy/BookishScanner/Dependencies/ReleaseTools)"
+    }
+  ]
+}

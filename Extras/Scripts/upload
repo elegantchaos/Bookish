@@ -1,20 +1,43 @@
 #!/bin/bash
+# Purpose: Submit both iOS and macOS builds using ReleaseTools and push tags.
+# Usage: Extras/Scripts/upload
 
 # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 #  Created by Sam Deane on 25/03/2020.
 #  All code (c) 2020 - present day, Elegant Chaos Limited.
 # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
-source "bootstrap-tools"
+set -euo pipefail  # (add an x to flags to enable debugging)
 
 echo " "
-echo "*************"
-echo "Uploading iOS  "
-echo "*************"
+echo "**********"
+echo "Submitting"
+echo "**********"
 
-$RT set scheme --platform=iOS Bookish
-$RT archive --platform=iOS 2> /dev/null | xcpretty
-$RT export --platform=iOS
-$RT upload --platform=iOS
+rt tag
 
-#open "https://appstoreconnect.apple.com/apps/1519213388/testflight/ios/"
+echo "--------------"
+echo "Submitting iOS"
+echo "--------------"
+
+rt submit --platform=iOS
+
+
+echo " "
+echo "----------------"
+echo "Submitting macOS"
+echo "----------------"
+
+rt submit --platform=macOS
+
+echo "------------"
+echo "Pushing Tags"
+echo "------------"
+
+git push --tags --force
+
+echo "-----------------"
+echo "Opening App Store"
+echo "-----------------"
+
+open "https://appstoreconnect.apple.com/teams/69a6de8a-ccc2-47e3-e053-5b8c7c11a4d1/apps/1519213388/testflight/ios"
