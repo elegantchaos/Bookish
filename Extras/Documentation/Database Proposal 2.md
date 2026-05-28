@@ -98,13 +98,26 @@ List-entry mutations parent the relevant entry or ordering heads rather than the
 
 Property values can be:
 - primitives (string, int, uint, double, date, bool)
-- versioned structured values
+- small structured values encoded in a storage-neutral format
 - record links
+- blob references
 - ordered lists of property values
 - deletion markers
 - conflict markers
 
-Structured values should be explicit and versioned rather than arbitrary opaque application objects.
+Structured values are distinct from plain strings, but do not need explicit application-level type tags. The application layer is expected to know what kind of value it expects for a property, and decode or coerce the stored value into that type. This operation can fail if the value does not match the expected type.
+
+Small structured values can be encoded from Codable values, using a compact JSON representation. These values are intended for small property payloads rather than large binary data.
+
+## Large Blob Data
+
+Large binary payloads should be stored out-of-line and treated as immutable. Property values should refer to these payloads using blob references rather than storing the data directly.
+
+A blob reference should identify the blob and include lightweight metadata such as checksum, byte count, media type, or original filename when useful.
+
+CloudKit can store and synchronise blob payloads using CloudKit assets. A mutation record can then set a property to a blob reference, while the referenced blob payload is stored separately from the mutation record itself.
+
+Replacing blob data means creating a new blob payload and updating the property to point at the new blob reference. Existing blob payloads should not be modified in place.
 
 ## Record Links
 
