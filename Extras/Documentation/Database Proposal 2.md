@@ -1,6 +1,6 @@
 # Bookish Persistence Model Plan
 
-The persistent database is a low level key/value store, consisting of records with named properties, containing primitive values.
+The persistent database is a low level key/value store, consisting of records with named properties, containing storage-neutral property values.
 
 A fast snapshot is kept locally. Cloud syncing is done via mutation records.
 
@@ -14,10 +14,17 @@ Semantic meaning is assigned to the database records by higher-level layers. The
 The cloud component only stores a list of mutation records.
 
 Mutation types consist of:
-- set property P of record X to V
-- remove property P of record X
+- setting a property of a record to a value;
+- removing a property by assigning it a deletion value;
+- inserting an entry into an ordered list property;
+- removing an entry from an ordered list property;
+- moving an entry within an ordered list property.
+
+Whole-list replacement is acceptable for import, export, or bootstrapping. Normal user edits should use list-entry mutations so independent list changes do not unnecessarily conflict with each other.
 
 New records are created automatically the first time a property is assigned a value.
+
+Records are tombstoned rather than deleted. Record deletion is represented by a reserved boolean property. Property deletion is represented by a reserved deletion value in the mutation stream; the local cache can materialise that as the property being absent.
 
 Mutation records consist of:
 - identifier
@@ -37,7 +44,9 @@ The unique identifier for a specific device may change over time - for example i
  
 ## Device
 
-On device, a fast record cache is maintained (probably using SwiftData).
+On device, a fast record cache is maintained.
+
+The on device cache should be fast enough to be able to efficiently supply an observable record, with all properties materialised, including links to other records, for use by the user interface.
 
 The user interface reads from this cache. When the user initiates changes to the database, they are converted into mutations. These mutations are applied directly to the local cache, and also pushed to the cloud.
 
@@ -45,7 +54,6 @@ A service on the local device scans for incoming mutations from the cloud. Mutat
 
 Given the full history of mutation records, the local cache can be reconstructed at any time.
 
-The on device cache should be fast enough to be able to efficiently supply a record, with all properties, for use by the user interface.
 
 ## Conflicts
 
@@ -65,26 +73,48 @@ Otherwise, the new mutation record stores a special conflict value containing bo
 
 Property values can be:
 - primitives (string, int, double, date, bool)
-- codable types
-- record references
-- ordered lists of the above
+- versioned structured values
+- record links
+- ordered lists of property values
+- deletion markers
 - conflict markers
 
-## References
+Structured values should be explicit and versioned rather than arbitrary opaque application objects.
 
-The record database can form a graph, using a record property which contains a record reference, or a list of record references.
+## Record Links
 
+The record database can form a graph, using record properties which contains record links, or ordered lists of record links.
+
+Some links between records may require metadata describing the nature of the relationship between the two linked records. 
+
+Rich links can be represented as records themselves. For example, instead of linking two records A and B directly, they will both be linked to a third relationship record L, which will describe how A and B are connected. 
+
+High level clients have flexibility in exactly how they represent the graph, using combinations of:
+- simple record links
+- ordered lists of links
+- links or lists of links to individual relationship records
+- composite relationship records containing common metadata and ordered lists of members
+- combinations of the above
 
 ## Open Questions
 
+- Do we need any primitive support for relationship records? 
 - Does this design have enough history information for clear conflict resolution?
-- Is this basically CRDT? If not, what are the differences?
 - Can we safely support aggregate mutation records for efficiency (eg a single mutation record could actually include a list of mutations)
 - Can we use CloudKit for transferring mutation records. What is the simplest implementation we can get away with? It would be good to avoid redundant information in the mutation records - eg a CK-managed identifier and our own. Can we leverage anything from CK?
 - Should we use SwiftData for the local record cache? Might a simple directory/file structure be more efficient, with in-memory copies of records? Since records are schema-less, SwiftData may not be the best fit. Are there any other third party options? 
 
-Possible references:
+## CRDT Notes
+
+This plan is not a full CRDT design. It is an append-only mutation log with causal parent links, plus deterministic conflict detection and resolution.
+
+Scalar conflicts are preserved as conflict values for user or application resolution rather than automatically merged. Ordered list and link operations may borrow CRDT-style ideas where they improve practical conflict behaviour, but only for specific property kinds.
+
+Full CRDT adoption is not justified for the initial design because expected use is light, mostly single-user, and conflicts should be rare. The model should remain compatible with adding CRDT-style value semantics later if particular property types need them.
+
+## External References
+
 - https://github.com/pointfreeco/sqlite-data
 - https://github.com/groue/GRDB.swift
-- https://github.com/appdecentral/replicatingtypes
-- https://github.com/heckj/crdt
+- Background CRDT reading: https://github.com/appdecentral/replicatingtypes
+- Background CRDT reading: https://github.com/heckj/crdt
