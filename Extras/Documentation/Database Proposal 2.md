@@ -121,17 +121,27 @@ High level clients have flexibility in exactly how they represent the graph, usi
 ## Open Questions
 
 - Do we need any primitive support for relationship records? 
-- Should we use SwiftData for the record store? Might a simple directory/file structure be more efficient, with in-memory copies of records? Since records are schema-less, SwiftData may not be the best fit. Are there any other third party options?
 
-## Snapshot And Compaction (Not MVP)
+## Appendix A: Storage Options Considered
 
-Snapshots and compaction are not required for normal startup in the initial design, because the record store is the working projection.
+The initial implementation should use SQLite directly for the mutation store and record store. The model needs simple append-only writes, durable outbox state, indexed dependency lookups, and materialised record tables. Raw SQLite keeps dependencies low and avoids adding a model framework around what is essentially a small set of purpose-built tables.
 
-A later snapshot mechanism can provide faster rebuild and recovery by recording a materialised database state at a known mutation frontier. Compaction can then prune or archive old mutations after a safe snapshot boundary.
+SQLiteData is a modern SwiftData-like layer over SQLite, with query observation and CloudKit support. It is built on GRDB, so it does not avoid that dependency. It may be worth revisiting for the record store if SwiftUI query observation becomes a major source of boilerplate, but its CloudKit support should not be used for the mutation store because Bookish owns the sync protocol.
 
-The initial design should keep mutation store and record store metadata structured enough that snapshots can be added without changing the app-facing model.
+GRDB is a mature Swift SQLite toolkit. It remains a good fallback if direct SQLite access becomes too verbose or error-prone, but it is not required for the initial design.
 
-## CRDT Notes
+FMDB is an older Objective-C SQLite wrapper. Its useful ideas are serialized database access, transaction helpers, parameter binding, and optional SQLCipher support. It is useful background, but it is not the preferred dependency for new Swift code.
+
+PARStore is useful prior art for a key/value store with device-specific logs, a materialised in-memory view, and one-way data flow between log storage and the current key/value state. Bookish borrows the architectural idea, but not the implementation.
+
+Storage references:
+- https://www.sqlite.org/docs.html
+- https://github.com/pointfreeco/sqlite-data
+- https://github.com/groue/GRDB.swift
+- https://github.com/ccgus/fmdb
+- https://github.com/cparnot/PARStore
+
+## Appendix B: CRDT Notes
 
 This plan is not a full CRDT design. It uses write-once mutation records with causal parent links, plus deterministic conflict detection and resolution.
 
@@ -139,10 +149,17 @@ Scalar conflicts are preserved as conflict values for user or application resolu
 
 Full CRDT adoption is not justified for the initial design because expected use is light, mostly single-user, and conflicts should be rare. The model should remain compatible with adding CRDT-style value semantics later if particular property types need them.
 
-## External References
+CRDT references:
+- https://github.com/appdecentral/replicatingtypes
+- https://github.com/heckj/crdt
 
-- https://github.com/pointfreeco/sqlite-data
-- https://github.com/groue/GRDB.swift
-- https://github.com/cparnot/PARStore
-- Background CRDT reading: https://github.com/appdecentral/replicatingtypes
-- Background CRDT reading: https://github.com/heckj/crdt
+## Appendix C: Snapshot And Compaction
+
+Snapshots and compaction are not required for normal startup in the initial design, because the record store is the working projection.
+
+A later snapshot mechanism can provide faster rebuild and recovery by recording a materialised database state at a known mutation frontier. 
+
+Compaction can then prune or archive old mutations after a safe snapshot boundary, reducing the danger of database bloat.
+
+The initial design should keep mutation store and record store metadata structured enough that snapshots and compaction can be added without changing the app-facing model.
+
