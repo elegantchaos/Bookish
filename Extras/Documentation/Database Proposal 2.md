@@ -81,4 +81,10 @@ The record database can form a graph, using a record property which contains a r
 - Is this basically CRDT? If not, what are the differences?
 - Can we safely support aggregate mutation records for efficiency (eg a single mutation record could actually include a list of mutations)
 - Can we use CloudKit for transferring mutation records. What is the simplest implementation we can get away with? It would be good to avoid redundant information in the mutation records - eg a CK-managed identifier and our own. Can we leverage anything from CK?
-- Should we use SwiftData for the local record cache? Might a simple directory/file structure be more efficient, with in-memory copies of records? Since records are schema-less, SwiftData may not be the best fit. Are there any other third party options? https://github.com/pointfreeco/sqlite-data? https://github.com/groue/GRDB.swift?
+- Should we use SwiftData for the local record cache? Might a simple directory/file structure be more efficient, with in-memory copies of records? Since records are schema-less, SwiftData may not be the best fit. Are there any other third party options? 
+
+Possible references:
+- https://github.com/pointfreeco/sqlite-data
+- https://github.com/groue/GRDB.swift
+- https://github.com/appdecentral/replicatingtypes
+- https://github.com/heckj/crdt
