@@ -2,18 +2,26 @@
 
 The persistent database is a low level key/value store, consisting of records with named properties, containing storage-neutral property values.
 
-A fast local projection is kept on device. Cloud syncing is handled by CloudKit, with Bookish storing and exchanging write-once mutation records through CloudKit.
+A fast record store is kept on device. Cloud syncing is handled by CloudKit, with Bookish storing and exchanging write-once mutation records through CloudKit.
 
 Records are untyped, and can be linked unidirectionally to form a graph.
 
 Semantic meaning is assigned to the database records by higher-level layers. These layers use conventions to ascribe types to records, to manage bi-directional and many-to-many links, to manage record lifecycles, etc. 
 
+## Terminology
+
+- A **mutation record** is an individual atomic, write-once mutation.
+- The **mutation store** is the on-device durable store of known mutation records, including local outbox state, applied mutations, pending dependencies, and indexes needed for processing.
+- The **mutation service** maintains the mutation store, interacts with CKSyncEngine, applies incoming mutations, detects conflicts, and updates the record store.
+- A **record** is a single on-device key/value record.
+- The **record store** is the projected cache of materialised records used by the application and user interface.
+- A **CloudKit record** refers specifically to a CloudKit `CKRecord`.
 
 ## CloudKit Sync
 
 CloudKit is the proposed sync mechanism for the initial design. Bookish relies on CloudKit and CKSyncEngine for remote change delivery, scheduling, account handling, retry behaviour, and sync state.
 
-The Bookish data synced through CloudKit is a list of mutation records. CloudKit manages transport and storage mechanics; Bookish defines the meaning of each mutation, its identity, its parent relationships, and how it is applied to the local cache.
+The Bookish data synced through CloudKit is a list of mutation records. CloudKit manages transport and storage mechanics; Bookish defines the meaning of each mutation, its identity, its parent relationships, and how it is applied to the record store.
 
 Mutation types consist of:
 - setting a property of a record to a value;
@@ -26,7 +34,7 @@ Whole-list replacement is acceptable for import, export, or bootstrapping. Norma
 
 New records are created automatically the first time a property is assigned a value.
 
-Records are tombstoned rather than deleted. Record deletion is represented by a reserved boolean property. Property deletion is represented by a reserved deletion value in the mutation stream; the local cache can materialise that as the property being absent.
+Records are tombstoned rather than deleted. Record deletion is represented by a reserved boolean property. Property deletion is represented by a reserved deletion value in the mutation stream; the record store can materialise that as the property being absent.
 
 Mutation records consist of:
 - identifier
@@ -42,7 +50,7 @@ Each device participating in sync is assigned a UUID, which it persists locally.
 
 Each mutation record is assigned an identifier, composed of the device identifier followed by an integer mutation index. This index is unique to the device.
 
-Bookish mutation identifiers are kept even though CloudKit also identifies stored records, because the Bookish identifiers are used for parent links, idempotency, and conflict resolution.
+Bookish mutation identifiers are kept even though CloudKit also identifies CloudKit records, because the Bookish identifiers are used for parent links, idempotency, and conflict resolution.
 
 The parent identifiers of a mutation record are the identifiers of the mutation records that set the previous value for the affected property or list entry. Normally there is only one parent, but in the case of a conflict there may be more.
  
@@ -54,26 +62,26 @@ Aggregate mutation records may be used as envelopes for transport or storage eff
  
 ## Device
 
-On device, a fast record cache is maintained.
+On device, a fast record store is maintained.
 
-The on device cache should be fast enough to be able to efficiently supply an observable record, with all properties materialised, including links to other records, for use by the user interface.
+The record store should be fast enough to efficiently supply an observable record, with all properties materialised, including links to other records, for use by the user interface.
 
-The user interface reads from this cache. When the user initiates changes to the database, they are converted into mutations. These mutations are durably stored in a local outbox before being applied optimistically to the local cache and sent through CloudKit.
+The user interface reads from the record store. When the user initiates changes to the database, they are converted into mutation records. These mutation records are durably stored in the mutation store's local outbox before being applied optimistically to the record store and sent through CloudKit.
 
-Unsent mutations remain in the outbox until CloudKit confirms them. Sending is idempotent because mutation identifiers are stable. Failed or delayed sends are retried without rolling back the local cache unless the mutation itself is rejected as invalid.
+Unsent mutations remain in the outbox until CloudKit confirms them. Sending is idempotent because mutation identifiers are stable. Failed or delayed sends are retried without rolling back the record store unless the mutation itself is rejected as invalid.
 
-Incoming mutations may arrive in any order and from any device. The local store tracks applied mutation identifiers and holds mutations with missing parents as pending dependencies. A mutation is applied once its required parents are present, or deliberately treated as absent during recovery or import. Per-device sequence numbers are useful for identity and diagnostics, but are not the primary replay mechanism.
+Incoming mutation records may arrive in any order and from any device. The mutation store tracks applied mutation identifiers and holds mutation records with missing parents as pending dependencies. A mutation record is applied once its required parents are present, or deliberately treated as absent during recovery or import. Per-device sequence numbers are useful for identity and diagnostics, but are not the primary replay mechanism.
 
-Given the full history of mutation records, the local cache can be reconstructed at any time.
+Given the full history of mutation records, the record store can be reconstructed at any time.
 
 
 ## Conflicts
 
-Each record property in the local cache records the current value, and the mutation head or heads that determine the value.
+Each record property in the record store records the current value, and the mutation head or heads that determine the value.
 
 When a local mutation occurs, the current mutation heads for the affected value are used as the parents of the mutation record.
 
-When a remote mutation is received, if its parent identifiers do not match the local cache's recorded heads for the affected value, a conflict has occurred.
+When a remote mutation record is received, if its parent identifiers do not match the record store's recorded heads for the affected value, a conflict has occurred.
 
 In this situation a new mutation is created which resolves the conflict. Both of the conflicting mutation records are used as parent identifiers for the new one. 
 
@@ -113,19 +121,19 @@ High level clients have flexibility in exactly how they represent the graph, usi
 ## Open Questions
 
 - Do we need any primitive support for relationship records? 
-- Should we use SwiftData for the local record cache? Might a simple directory/file structure be more efficient, with in-memory copies of records? Since records are schema-less, SwiftData may not be the best fit. Are there any other third party options? 
+- Should we use SwiftData for the record store? Might a simple directory/file structure be more efficient, with in-memory copies of records? Since records are schema-less, SwiftData may not be the best fit. Are there any other third party options?
 
 ## Snapshot And Compaction (Not MVP)
 
-Snapshots and compaction are not required for normal startup in the initial design, because the local cache is the working projection.
+Snapshots and compaction are not required for normal startup in the initial design, because the record store is the working projection.
 
 A later snapshot mechanism can provide faster rebuild and recovery by recording a materialised database state at a known mutation frontier. Compaction can then prune or archive old mutations after a safe snapshot boundary.
 
-The initial design should keep mutation and cache metadata structured enough that snapshots can be added without changing the app-facing model.
+The initial design should keep mutation store and record store metadata structured enough that snapshots can be added without changing the app-facing model.
 
 ## CRDT Notes
 
-This plan is not a full CRDT design. It is an append-only mutation log with causal parent links, plus deterministic conflict detection and resolution.
+This plan is not a full CRDT design. It uses write-once mutation records with causal parent links, plus deterministic conflict detection and resolution.
 
 Scalar conflicts are preserved as conflict values for user or application resolution rather than automatically merged. Ordered list and link operations may borrow CRDT-style ideas where they improve practical conflict behaviour, but only for specific property kinds.
 
