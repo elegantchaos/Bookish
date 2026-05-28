@@ -19,9 +19,14 @@ Define a small read/write split:
 
 The app may compose both behind a convenience facade, but UI code should read through the record service and application actions should write through the mutation service.
 
+Application writes should be requested through the command pattern defined by `elegantchaos/Commands`. Commands should express user intent, availability, validation, and execution, then call the mutation service to create mutation records. UI controls, menus, keyboard shortcuts, import flows, and automation should invoke these commands rather than writing directly to the record store or mutation store.
+
 The earlier Proposal 1 API sketch is worth retaining as inspiration for a small facade: record lookup, query, observe, transact, import, and export.
 
 The older ElegantChaos Datastore API is worth retaining as prior art for async-only access, bulk operations, lightweight references, on-demand creation, and partial result objects. These ideas should be adapted to the mutation service and record service split rather than copied directly.
+
+API references:
+- https://github.com/elegantchaos/Commands
 
 ## Mutation Store Work
 

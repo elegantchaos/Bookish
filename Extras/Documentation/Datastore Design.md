@@ -12,7 +12,7 @@ Semantic meaning is assigned to the database records by higher-level layers. The
 
 - A **mutation record** is an individual atomic, write-once mutation.
 - The **mutation store** is the on-device durable store of known mutation records, including local outbox state, applied mutations, pending dependencies, and indexes needed for processing.
-- The **mutation service** provides the write API used by application actions, maintains the mutation store, interacts with CKSyncEngine, applies incoming mutations, detects conflicts, and updates the record store.
+- The **mutation service** provides the write API used by command-driven application actions, maintains the mutation store, interacts with CKSyncEngine, applies incoming mutations, detects conflicts, and updates the record store.
 - A **record** is a single on-device key/value record.
 - The **record store** is the projected cache of materialised records used by the application and user interface.
 - The **record service** provides the read/query/observation API used by the user interface, backed by the record store.
