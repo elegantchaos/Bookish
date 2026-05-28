@@ -119,6 +119,12 @@ CloudKit can store and synchronise blob payloads using CloudKit assets. A mutati
 
 Replacing blob data means creating a new blob payload and updating the property to point at the new blob reference. Existing blob payloads should not be modified in place.
 
+For the initial design, blob payloads are not automatically removed. A blob should be considered live if it is referenced by any current record property, conflict value, pending mutation, unapplied mutation, or local outbox item.
+
+If a blob upload fails, the local blob payload should be retained because it may be the only remaining copy of the data. Blob upload state should be tracked as service metadata rather than embedded in the user-facing blob reference value, and exposed through service APIs so the user interface can alert the user.
+
+Blob cleanup can be introduced later through an explicit database compaction or unused-blob cleanup command. Full snapshot and compaction support can also remove blobs that are provably unreferenced after old mutation history has been pruned or archived.
+
 ## Record Links
 
 The record database can form a graph, using record properties which contains record links, or ordered lists of record links.
@@ -181,6 +187,8 @@ Snapshots and compaction are not required for normal startup in the initial desi
 A later snapshot mechanism can provide faster rebuild and recovery by recording a materialised database state at a known mutation frontier. 
 
 Compaction can then prune or archive old mutations after a safe snapshot boundary, reducing the danger of database bloat.
+
+Compaction can also remove blob payloads that are provably unreferenced by the current record store, retained conflicts, pending mutations, unapplied mutations, or local outbox items.
 
 The initial design should keep mutation store and record store metadata structured enough that snapshots and compaction can be added without changing the app-facing model.
 
