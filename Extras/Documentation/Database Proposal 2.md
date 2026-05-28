@@ -12,9 +12,10 @@ Semantic meaning is assigned to the database records by higher-level layers. The
 
 - A **mutation record** is an individual atomic, write-once mutation.
 - The **mutation store** is the on-device durable store of known mutation records, including local outbox state, applied mutations, pending dependencies, and indexes needed for processing.
-- The **mutation service** maintains the mutation store, interacts with CKSyncEngine, applies incoming mutations, detects conflicts, and updates the record store.
+- The **mutation service** provides the write API used by application actions, maintains the mutation store, interacts with CKSyncEngine, applies incoming mutations, detects conflicts, and updates the record store.
 - A **record** is a single on-device key/value record.
 - The **record store** is the projected cache of materialised records used by the application and user interface.
+- The **record service** provides the read/query/observation API used by the user interface, backed by the record store.
 - A **CloudKit record** refers specifically to a CloudKit `CKRecord`.
 
 ## CloudKit Sync
@@ -68,6 +69,8 @@ The record store should be fast enough to efficiently supply an observable recor
 
 The user interface reads from the record store. When the user initiates changes to the database, they are converted into mutation records. These mutation records are durably stored in the mutation store's local outbox before being applied optimistically to the record store and sent through CloudKit.
 
+The record service exposes record store reads and observations to the user interface. The mutation service is the only service that performs durable semantic writes, including local user edits and remote sync changes.
+
 Unsent mutations remain in the outbox until CloudKit confirms them. Sending is idempotent because mutation identifiers are stable. Failed or delayed sends are retried without rolling back the record store unless the mutation itself is rejected as invalid.
 
 Incoming mutation records may arrive in any order and from any device. The mutation store tracks applied mutation identifiers and holds mutation records with missing parents as pending dependencies. A mutation record is applied once its required parents are present, or deliberately treated as absent during recovery or import. Per-device sequence numbers are useful for identity and diagnostics, but are not the primary replay mechanism.
@@ -120,7 +123,12 @@ High level clients have flexibility in exactly how they represent the graph, usi
 
 ## Open Questions
 
-- Do we need any primitive support for relationship records? 
+- Do we need any primitive support in the mutation record for atomically creating relationship records?
+- How will SwiftUI views interact with the record service?
+- Do we need a SwiftData-style observation mechanism and/or macros to:
+  - detect record/property changes
+  - detect relationship changes
+  - support dynamic list updates
 
 ## Appendix A: Storage Options Considered
 
@@ -163,3 +171,12 @@ Compaction can then prune or archive old mutations after a safe snapshot boundar
 
 The initial design should keep mutation store and record store metadata structured enough that snapshots and compaction can be added without changing the app-facing model.
 
+## Appendix D: Service Boundaries
+
+The record service and mutation service deliberately split reads from writes. The record service is a read facade over the record store. It supports queries, record lookup, relationship traversal, list materialisation, and observation for the user interface.
+
+The mutation service owns durable semantic writes. Local app actions call the mutation service to create mutation records. CloudKit delivers remote mutation records to the mutation service. The mutation service validates dependencies, records outbox or applied state in the mutation store, resolves or records conflicts, and updates the record store.
+
+The record service should not write to the mutation store or initiate sync. The user interface should not write directly to the record store. The record store can have internal write APIs, but those should be used by the mutation service or by rebuild/import tooling that applies mutation records in the same way.
+
+The mutation service does not need to own the record service. Both services can share lower-level storage components, or be composed behind a single app-level facade. The important dependency direction is that mutations update the record store, and record service observations publish the resulting materialised state.
