@@ -154,12 +154,15 @@ FMDB is an older Objective-C SQLite wrapper. Its useful ideas are serialized dat
 
 PARStore is useful prior art for a key/value store with device-specific logs, a materialised in-memory view, and one-way data flow between log storage and the current key/value state. Bookish borrows the architectural idea, but not the implementation.
 
+The older ElegantChaos Datastore package is also useful prior art for an asynchronous schema-less object store with property-level history. Its Core Data-backed implementation and entity/property model are not the adopted design, but several ideas are worth retaining: async-only access, bulk operations, lightweight references, on-demand reference resolution and creation, partial result objects, and JSON-legal interchange.
+
 Storage references:
 - https://www.sqlite.org/docs.html
 - https://github.com/pointfreeco/sqlite-data
 - https://github.com/groue/GRDB.swift
 - https://github.com/ccgus/fmdb
 - https://github.com/cparnot/PARStore
+- https://github.com/elegantchaos/Datastore
 
 ## Appendix B: CRDT Notes
 

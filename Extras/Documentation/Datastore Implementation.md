@@ -21,6 +21,8 @@ The app may compose both behind a convenience facade, but UI code should read th
 
 The earlier Proposal 1 API sketch is worth retaining as inspiration for a small facade: record lookup, query, observe, transact, import, and export.
 
+The older ElegantChaos Datastore API is worth retaining as prior art for async-only access, bulk operations, lightweight references, on-demand creation, and partial result objects. These ideas should be adapted to the mutation service and record service split rather than copied directly.
+
 ## Mutation Store Work
 
 Decide the concrete SQLite schema for:
@@ -103,6 +105,8 @@ Decide whether export uses:
 - or a combined diagnostic/archive format.
 
 For user-facing import/export, prefer storage-neutral materialised records. For diagnostics and recovery, mutation history may also be useful.
+
+The older ElegantChaos Datastore README mentions compact interchange output that drops older values. In the new design this maps to exporting materialised records, while mutation history remains available for diagnostics, recovery, or archive formats.
 
 ## Test Plan
 
