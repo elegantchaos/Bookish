@@ -1,4 +1,4 @@
-# Bookish Persistence Model Plan
+# Datastore Design
 
 The persistent database is a low level key/value store, consisting of records with named properties, containing storage-neutral property values.
 
@@ -140,14 +140,7 @@ High level clients have flexibility in exactly how they represent the graph, usi
 - composite relationship records containing common metadata and ordered lists of members
 - combinations of the above
 
-## Open Questions
-
-- Do we need any primitive support in the mutation record for atomically creating relationship records?
-- How will SwiftUI views interact with the record service?
-- Do we need a SwiftData-style observation mechanism and/or macros to:
-  - detect record/property changes
-  - detect relationship changes
-  - support dynamic list updates
+Implementation choices and follow-up design work are tracked in `Datastore Implementation.md`.
 
 ## Appendix A: Storage Options Considered
 

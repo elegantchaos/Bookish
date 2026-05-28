@@ -146,7 +146,7 @@ Bookish should adopt the project layout described in `Project Layout.md`: a thin
 - Views should have previews for representative empty, populated, and error states.
 - Migration work must include repeatable fixtures for imported catalogue data.
 - The app should make destructive catalogue operations explicit and reversible where practical.
-- Documentation should stay aligned with the implemented model, especially `Database.md` and this specification.
+- Documentation should stay aligned with the implemented model, especially `Catalogue Model.md`, `Datastore Design.md`, `Data View Design.md`, and this specification.
 
 ## Open Questions
 
