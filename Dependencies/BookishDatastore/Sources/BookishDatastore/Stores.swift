@@ -1,0 +1,31 @@
+import Foundation
+
+/// Stores materialised records.
+public protocol RecordStore: Sendable {
+  /// Returns a single record by identifier.
+  func record(id: RecordID) async throws -> StoredRecord?
+
+  /// Returns all records in stable identifier order.
+  func records() async throws -> [StoredRecord]
+
+  /// Writes a materialised record.
+  func upsert(_ record: StoredRecord) async throws
+
+  /// Deletes a materialised record.
+  func delete(id: RecordID) async throws
+}
+
+/// Stores durable mutation records and applied state.
+public protocol MutationStore: Sendable {
+  /// Appends a new mutation if it has not already been stored.
+  func append(_ mutation: MutationRecord) async throws
+
+  /// Returns all stored mutations in creation order.
+  func mutations() async throws -> [MutationRecord]
+
+  /// Marks a mutation as applied to the projection.
+  func markApplied(_ id: MutationID) async throws
+
+  /// Returns whether a mutation has already been applied.
+  func isApplied(_ id: MutationID) async throws -> Bool
+}

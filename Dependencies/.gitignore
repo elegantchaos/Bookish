@@ -26,6 +26,7 @@ VersionX-revision.h
 # Swift Package Manager
 Packages/
 .build
+.swiftpm
 
 # build products
 build/

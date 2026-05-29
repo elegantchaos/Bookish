@@ -1,88 +1,230 @@
 {
-  "object": {
-    "pins": [
-      {
-        "package": "BookishImporter",
-        "repositoryURL": "https://github.com/elegantchaos/BookishImporter.git",
-        "state": {
-          "branch": null,
-          "revision": "b82fac066d6fb3db8af47ded11fee6d3efc91034",
-          "version": "1.0.0"
-        }
-      },
-      {
-        "package": "CaptureView",
-        "repositoryURL": "https://github.com/elegantchaos/CaptureView.git",
-        "state": {
-          "branch": null,
-          "revision": "f0130131bbcd18b91380bbef706931163a3fc8a6",
-          "version": "1.0.1"
-        }
-      },
-      {
-        "package": "Files",
-        "repositoryURL": "https://github.com/elegantchaos/Files.git",
-        "state": {
-          "branch": null,
-          "revision": "a86af44d44917e05facab8abb15a482383bd8f12",
-          "version": "1.2.0"
-        }
-      },
-      {
-        "package": "KeyValueStore",
-        "repositoryURL": "https://github.com/elegantchaos/KeyValueStore.git",
-        "state": {
-          "branch": null,
-          "revision": "78c90cebc4875082f1f6deeaeb33a1dbd0c49d8c",
-          "version": "1.2.0"
-        }
-      },
-      {
-        "package": "Localization",
-        "repositoryURL": "https://github.com/elegantchaos/Localization.git",
-        "state": {
-          "branch": null,
-          "revision": "c7e9058785748455314cd3b5bedc300d17bc287f",
-          "version": "1.0.3"
-        }
-      },
-      {
-        "package": "Logger",
-        "repositoryURL": "https://github.com/elegantchaos/Logger.git",
-        "state": {
-          "branch": null,
-          "revision": "8ceabf0985b5255f7be42e023a3f63a7779a9145",
-          "version": "1.6.0"
-        }
-      },
-      {
-        "package": "SwiftUIExtensions",
-        "repositoryURL": "https://github.com/elegantchaos/SwiftUIExtensions.git",
-        "state": {
-          "branch": null,
-          "revision": "40277dd004b7f44a4b865ff3e682c3d949d0c127",
-          "version": "1.2.0"
-        }
-      },
-      {
-        "package": "ThreadExtensions",
-        "repositoryURL": "https://github.com/elegantchaos/ThreadExtensions.git",
-        "state": {
-          "branch": null,
-          "revision": "53e17a23bae8af73bd03be966e39b3b3ffa78421",
-          "version": "1.0.0"
-        }
-      },
-      {
-        "package": "XCTestExtensions",
-        "repositoryURL": "https://github.com/elegantchaos/XCTestExtensions.git",
-        "state": {
-          "branch": null,
-          "revision": "5430aa6447e2b3702fc5b4b3bdbd53bf45a16f86",
-          "version": "1.3.1"
-        }
+  "pins" : [
+    {
+      "identity" : "actionbuildercore",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/elegantchaos/ActionBuilderCore.git",
+      "state" : {
+        "revision" : "e0099e46bb9de130cf75a4c94cd0c285615cd36b",
+        "version" : "1.5.0"
       }
-    ]
-  },
-  "version": 1
+    },
+    {
+      "identity" : "actionbuilderplugin",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/elegantchaos/ActionBuilderPlugin.git",
+      "state" : {
+        "revision" : "e3629a11bfeb7a2921ec2d2f5c52c8c35d589698",
+        "version" : "1.0.8"
+      }
+    },
+    {
+      "identity" : "bundles",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/elegantchaos/Bundles.git",
+      "state" : {
+        "revision" : "f310de200a3fb08e23fb1fc21ed7984972a6b2b4",
+        "version" : "1.0.10"
+      }
+    },
+    {
+      "identity" : "captureview",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/elegantchaos/CaptureView.git",
+      "state" : {
+        "revision" : "48d7d6c4eafa9b5e074007a56270f2bebbf74b0b",
+        "version" : "1.0.3"
+      }
+    },
+    {
+      "identity" : "coercion",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/elegantchaos/Coercion.git",
+      "state" : {
+        "revision" : "df699ebd4707bcfd99fcad4b9f6c09ddc1208af9",
+        "version" : "1.1.3"
+      }
+    },
+    {
+      "identity" : "elegantstrings",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/elegantchaos/ElegantStrings.git",
+      "state" : {
+        "revision" : "eb90abda935b43cc5dca75d35af8efda0d38cfea",
+        "version" : "1.1.1"
+      }
+    },
+    {
+      "identity" : "expressions",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/elegantchaos/Expressions.git",
+      "state" : {
+        "revision" : "3f1a4caccb9e33d95d0650e9b78350acd3576300",
+        "version" : "1.1.1"
+      }
+    },
+    {
+      "identity" : "files",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/elegantchaos/Files.git",
+      "state" : {
+        "revision" : "ccb417b5b4f2d473964594a7c906a50a62c8530c",
+        "version" : "1.2.2"
+      }
+    },
+    {
+      "identity" : "images",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/elegantchaos/Images.git",
+      "state" : {
+        "revision" : "df3d65b075f30f48deafce8a81eb9ea8a3190505",
+        "version" : "1.1.6"
+      }
+    },
+    {
+      "identity" : "isbn",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/elegantchaos/ISBN",
+      "state" : {
+        "revision" : "d7ca6431b321a932ce509b214173e166e3378430",
+        "version" : "1.0.2"
+      }
+    },
+    {
+      "identity" : "jsonrepresentable",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/elegantchaos/JSONRepresentable.git",
+      "state" : {
+        "revision" : "d9a53b2ad2ad134232f50d2633c0f267ec326b40",
+        "version" : "1.0.1"
+      }
+    },
+    {
+      "identity" : "keyvaluestore",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/elegantchaos/KeyValueStore.git",
+      "state" : {
+        "revision" : "78c90cebc4875082f1f6deeaeb33a1dbd0c49d8c",
+        "version" : "1.2.0"
+      }
+    },
+    {
+      "identity" : "labelled",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/elegantchaos/Labelled.git",
+      "state" : {
+        "revision" : "9177120bfc53b55572b044c80e91b035d24db12b",
+        "version" : "1.0.8"
+      }
+    },
+    {
+      "identity" : "localization",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/elegantchaos/Localization.git",
+      "state" : {
+        "revision" : "c7e9058785748455314cd3b5bedc300d17bc287f",
+        "version" : "1.0.3"
+      }
+    },
+    {
+      "identity" : "logger",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/elegantchaos/Logger.git",
+      "state" : {
+        "revision" : "c6d619809e9a658331a70514340f4246f5f05134",
+        "version" : "1.8.2"
+      }
+    },
+    {
+      "identity" : "matchable",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/elegantchaos/Matchable.git",
+      "state" : {
+        "revision" : "d53e807009960aafbd54f6229c2542f906628b38",
+        "version" : "1.0.7"
+      }
+    },
+    {
+      "identity" : "navigationpathextensions",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/elegantchaos/NavigationPathExtensions.git",
+      "state" : {
+        "revision" : "061f7ef10fb598948acc05ecd81e1bcc29f6f4c2",
+        "version" : "1.1.0"
+      }
+    },
+    {
+      "identity" : "runner",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/elegantchaos/Runner",
+      "state" : {
+        "revision" : "e23479ac9d314541e69268baa43caf05b8949a14",
+        "version" : "1.3.3"
+      }
+    },
+    {
+      "identity" : "semanticversion",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/elegantchaos/SemanticVersion.git",
+      "state" : {
+        "revision" : "2637309c72c1415cc3d1ea27ae6ddb2a2b66ecf0",
+        "version" : "1.1.2"
+      }
+    },
+    {
+      "identity" : "sheetcontroller",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/elegantchaos/SheetController.git",
+      "state" : {
+        "revision" : "5c3154f9eb0144750feda8300fce2ec78596aaef",
+        "version" : "1.0.3"
+      }
+    },
+    {
+      "identity" : "swiftformat",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/nicklockwood/SwiftFormat",
+      "state" : {
+        "revision" : "a5fa7a6a57abeb834df1b3fa43ea9133137d5ade",
+        "version" : "0.61.1"
+      }
+    },
+    {
+      "identity" : "swiftformatterplugin",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/elegantchaos/SwiftFormatterPlugin.git",
+      "state" : {
+        "revision" : "53d24a9c47d53f9c67c630e7e23fb50b8b442dd2",
+        "version" : "1.0.3"
+      }
+    },
+    {
+      "identity" : "swiftuiextensions",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/elegantchaos/SwiftUIExtensions.git",
+      "state" : {
+        "revision" : "59682545f838d18d8cc1218d4e401b4d728ac545",
+        "version" : "1.3.8"
+      }
+    },
+    {
+      "identity" : "threadextensions",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/elegantchaos/ThreadExtensions.git",
+      "state" : {
+        "revision" : "53e17a23bae8af73bd03be966e39b3b3ffa78421",
+        "version" : "1.0.0"
+      }
+    },
+    {
+      "identity" : "xctestextensions",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/elegantchaos/XCTestExtensions.git",
+      "state" : {
+        "revision" : "40da6a09823c8a9bfa68b6487e92d86b8e8a821e",
+        "version" : "1.5.1"
+      }
+    }
+  ],
+  "version" : 2
 }

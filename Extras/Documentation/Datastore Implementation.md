@@ -2,6 +2,35 @@
 
 This document tracks implementation choices for the datastore design in `Datastore Design.md`. These are build-time decisions rather than unresolved product direction.
 
+## Proof Of Concept
+
+We will start by building out a proof-of-concept prototype, as a macOS SwiftUI application, and some SwiftPM packages, added to the Bookish project. 
+
+We will need the following targets:
+- DatastorePrototypeApp: added to the Bookish xcode project as a SwiftUI app target
+- BookishDatastore: added as a SwiftPM package alongside BookishCore
+- BookishRecordView: added as a SwiftPM package alongside BookishCore
+
+The prototype should implement the following minimal functionality:
+
+- enough of the record store to define and store records locally
+- enough of the mutation store to define and store mutations locally
+- enough of the mutation service to apply mutations to the record store
+- enough of the record service api to fetch one or more records and supply them to a record view
+- a prototype RecordView which is supplied with a record to display and a record representing the layout to display it with
+- a simple app harness which initialises the services, creates test records, views them with a RecordView, and allows us to manipulate the data by creating and processing mutations
+- unit tests for each individual package 
+ 
+The initial prototype need not:
+ - implement real syncing via CKSyncEngine (we can have a temporary api to simulate arrival of remote mutations)
+ - implement database storage with SQLite (we can use simple json encoding and file-based storage for easy debugging)
+ 
+The code may end up being a disposable prototype, but it should be written following all of our guidelines. It may not be
+dispoable, and should be treated as potentially the first evolution of the eventual codebase. 
+
+Protocols or stubs for missing functionality should be created in a way that allows them to be replaced with the real implementations later. Initial test implementations should use the same protocols (or base classes), so that they can continue to work alongside the final implementation (for example, for integration tests). 
+
+
 ## Implementation Defaults
 
 - Use CKSyncEngine directly for CloudKit sync.

@@ -1,0 +1,36 @@
+import Foundation
+
+/// Describes a supported prototype mutation operation.
+public enum MutationOperation: Codable, Equatable, Sendable {
+  /// Creates or replaces a complete record projection.
+  case upsertRecord(StoredRecord)
+
+  /// Sets one materialised property on an existing or newly-created record.
+  case setProperty(recordID: RecordID, kind: String, key: String, value: RecordPropertyValue)
+
+  /// Removes one materialised property from a record.
+  case deleteProperty(recordID: RecordID, key: String)
+
+  /// Removes a materialised record.
+  case deleteRecord(RecordID)
+}
+
+/// A durable user or sync mutation.
+public struct MutationRecord: Codable, Equatable, Identifiable, Sendable {
+  /// The mutation's stable identity.
+  public var id: MutationID
+
+  /// The operation to apply.
+  public var operation: MutationOperation
+
+  /// The time the mutation was created.
+  public var createdAt: Date
+
+  /// Creates a mutation record.
+  public init(id: MutationID = MutationID(), operation: MutationOperation, createdAt: Date = Date())
+  {
+    self.id = id
+    self.operation = operation
+    self.createdAt = createdAt
+  }
+}
