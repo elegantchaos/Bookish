@@ -80,7 +80,7 @@ public struct PrototypeRecordField: Equatable, Identifiable, Sendable {
 
 extension RecordPropertyValue {
   /// Formats a prototype property value for display.
-  fileprivate var displayString: String {
+  var displayString: String {
     switch self {
     case .string(let value):
       value

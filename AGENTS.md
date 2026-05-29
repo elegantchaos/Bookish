@@ -4,6 +4,7 @@
 - It is written using Swift 6 and SwiftUI.
 - Legacy CoreData code exists, but will be updated to SwiftData. 
 - Keep a development journal in `Extras/Journal/`.
+- Testing & validation may incidentally update package lockfiles. This is acceptible and does not need to be reversed.
 
 # Standard Rules
 

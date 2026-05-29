@@ -10,7 +10,8 @@ The app currently includes:
   Application Support.
 - Seed data for prototype book, author, and layout records.
 - A record index fetched from the record service.
-- Selection-driven record detail display.
+- A mutation index fetched from the mutation store.
+- Selection-driven record and mutation detail display.
 - A layout picker that changes how the selected record and index rows are
   rendered.
 - Toolbar actions that create local status mutations.

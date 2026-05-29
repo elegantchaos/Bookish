@@ -16,9 +16,9 @@ struct DatastorePrototypeApplication: App {
 private final class DatastorePrototypeHarness {
   private(set) var records: [StoredRecord] = []
   private(set) var layouts: [StoredRecord] = []
-  private(set) var mutationCount = 0
+  private(set) var mutations: [MutationRecord] = []
   private(set) var status = "Loading"
-  var selectedRecordID: RecordID?
+  var selection: PrototypeBrowserSelection?
   var selectedLayoutID: RecordID?
 
   private let bookID = RecordID("prototype-book")
@@ -28,7 +28,19 @@ private final class DatastorePrototypeHarness {
   private var prototype: DatastorePrototype?
 
   var selectedRecord: StoredRecord? {
-    record(id: selectedRecordID) ?? records.first
+    guard case .record(let id) = selection else {
+      return nil
+    }
+
+    return record(id: id)
+  }
+
+  var selectedMutation: MutationRecord? {
+    guard case .mutation(let id) = selection else {
+      return nil
+    }
+
+    return mutation(id: id)
   }
 
   var selectedLayout: StoredRecord? {
@@ -103,7 +115,7 @@ private final class DatastorePrototypeHarness {
 
     records = try await prototype.recordService.records()
     layouts = records.filter { $0.kind == "layout" }
-    mutationCount = try await prototype.mutationStore.mutations().count
+    mutations = try await prototype.mutationStore.mutations()
     updateSelection()
   }
 
@@ -197,9 +209,24 @@ private final class DatastorePrototypeHarness {
     return records.first { $0.id == id }
   }
 
+  private func mutation(id: MutationID?) -> MutationRecord? {
+    guard let id else {
+      return nil
+    }
+
+    return mutations.first { $0.id == id }
+  }
+
   private func updateSelection() {
-    if record(id: selectedRecordID) == nil {
-      selectedRecordID = records.first?.id
+    switch selection {
+    case .record(let id) where record(id: id) != nil:
+      break
+
+    case .mutation(let id) where mutation(id: id) != nil:
+      break
+
+    default:
+      selection = records.first.map { .record($0.id) } ?? mutations.first.map { .mutation($0.id) }
     }
 
     if selectedLayoutID == nil, record(id: layoutID) != nil {
@@ -210,6 +237,11 @@ private final class DatastorePrototypeHarness {
       selectedLayoutID = layouts.first?.id
     }
   }
+}
+
+private enum PrototypeBrowserSelection: Hashable {
+  case record(RecordID)
+  case mutation(MutationID)
 }
 
 private struct DatastorePrototypeHarnessView: View {
@@ -237,13 +269,22 @@ private struct RecordIndexView: View {
   @Bindable var harness: DatastorePrototypeHarness
 
   var body: some View {
-    List(selection: $harness.selectedRecordID) {
-      ForEach(harness.records) { record in
-        PrototypeRecordCell(record: record, layout: harness.selectedLayout)
-          .tag(record.id)
+    List(selection: $harness.selection) {
+      Section("Records") {
+        ForEach(harness.records) { record in
+          PrototypeRecordCell(record: record, layout: harness.selectedLayout)
+            .tag(PrototypeBrowserSelection.record(record.id))
+        }
+      }
+
+      Section("Mutations") {
+        ForEach(harness.mutations) { mutation in
+          PrototypeMutationCell(mutation: mutation)
+            .tag(PrototypeBrowserSelection.mutation(mutation.id))
+        }
       }
     }
-    .navigationTitle("Records")
+    .navigationTitle("Datastore")
   }
 }
 
@@ -254,9 +295,11 @@ private struct RecordDetailView: View {
     Group {
       if let record = harness.selectedRecord {
         PrototypeRecordView(record: record, layout: harness.selectedLayout)
+      } else if let mutation = harness.selectedMutation {
+        PrototypeMutationView(mutation: mutation)
       } else {
         ContentUnavailableView(
-          "No Record", systemImage: "book", description: Text(harness.status))
+          "No Selection", systemImage: "list.bullet.rectangle", description: Text(harness.status))
       }
     }
   }
@@ -281,14 +324,17 @@ private struct PrototypeToolbar: ToolbarContent {
       Button(action: markReading) {
         Label("Reading", systemImage: "book")
       }
+      .disabled(harness.selectedRecord == nil)
 
       Button(action: markFinished) {
         Label("Finished", systemImage: "checkmark.circle")
       }
+      .disabled(harness.selectedRecord == nil)
 
       Button(action: simulateRemoteUpdate) {
         Label("Remote", systemImage: "icloud.and.arrow.down")
       }
+      .disabled(harness.selectedRecord == nil)
     }
   }
 
@@ -313,7 +359,7 @@ private struct PrototypeStatusBar: View {
       Text(harness.status)
       Spacer()
       Text("\(harness.records.count) records")
-      Text("\(harness.mutationCount) mutations")
+      Text("\(harness.mutations.count) mutations")
     }
     .font(.caption)
     .foregroundStyle(.secondary)

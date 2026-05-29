@@ -8,12 +8,17 @@ The package currently includes:
 
 - `PrototypeRecordPresentation`, a shared layout adapter used by both row and
   detail views.
+- `PrototypeMutationPresentation`, a shared adapter for displaying mutation log
+  entries.
 - `PrototypeRecordView`, a simple form-based record renderer.
 - `PrototypeRecordCell`, a compact row renderer for record indexes.
+- `PrototypeMutationView` and `PrototypeMutationCell` for browsing mutation
+  details and rows.
 - Layout-driven field selection through a layout record's `fields` property.
 - Basic display formatting for the prototype datastore value types.
 - SwiftUI previews with sample book records and layout records.
-- Focused tests for layout interpretation and view construction.
+- Focused tests for layout interpretation, mutation formatting, and view
+  construction.
 
 This package is deliberately small. Its role is to prove the boundary between
 generic datastore records and a SwiftUI record presentation layer before the

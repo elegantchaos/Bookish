@@ -46,6 +46,33 @@ final class BookishRecordViewTests: XCTestCase {
     XCTAssertEqual(presentation.fields.map(\.key), ["author", "status"])
   }
 
+  func testMutationPresentationDescribesSetPropertyMutation() {
+    let mutation = MutationRecord(
+      id: MutationID("mutation-1"),
+      operation: .setProperty(
+        recordID: RecordID("book-1"),
+        kind: "book",
+        key: "reading_status",
+        value: .string("Reading")
+      )
+    )
+
+    let presentation = PrototypeMutationPresentation(mutation: mutation)
+
+    XCTAssertEqual(presentation.title, "Set Reading Status")
+    XCTAssertEqual(presentation.subtitle, "book · book-1")
+    XCTAssertEqual(
+      presentation.fields.map(\.key),
+      [
+        "operation", "recordID", "kind", "property", "value",
+      ])
+    XCTAssertEqual(
+      presentation.fields.map(\.value),
+      [
+        "Set Property", "book-1", "book", "reading_status", "Reading",
+      ])
+  }
+
   @MainActor
   func testRecordViewCanBeConstructedWithRecordAndLayout() {
     let view = PrototypeRecordView(
@@ -64,5 +91,18 @@ final class BookishRecordViewTests: XCTestCase {
     )
 
     XCTAssertNotNil(view.body)
+  }
+
+  @MainActor
+  func testMutationViewsCanBeConstructedWithMutation() {
+    let mutation = MutationRecord(
+      operation: .deleteRecord(RecordID("book-1"))
+    )
+
+    let cell = PrototypeMutationCell(mutation: mutation)
+    let detail = PrototypeMutationView(mutation: mutation)
+
+    XCTAssertNotNil(cell.body)
+    XCTAssertNotNil(detail.body)
   }
 }

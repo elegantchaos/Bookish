@@ -15,3 +15,4 @@ Follow-up documentation:
 Prototype browsing update:
 - Added a shared record presentation adapter and `PrototypeRecordCell` so record rows and detail views both use layout records without duplicating formatting logic.
 - Updated `DatastorePrototypeApp` to browse all records from the record service, select records in a split view, and switch the active layout from the toolbar.
+- Added mutation browsing with shared mutation presentation helpers, a mutation row view, a mutation detail view, and a Mutations section in the prototype sidebar.
