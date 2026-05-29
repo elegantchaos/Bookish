@@ -1,25 +1,28 @@
 import BookishDatastore
-import BookishRecordView
-import SwiftUI
+import Foundation
+import Observation
 
-@main
-struct DatastorePrototypeApplication: App {
-  var body: some Scene {
-    WindowGroup {
-      DatastorePrototypeHarnessView()
-    }
-  }
-}
-
+/// Coordinates prototype datastore loading, seeding, selection, and actions for the UI.
 @MainActor
 @Observable
-private final class DatastorePrototypeHarness {
-  private(set) var records: [StoredRecord] = []
-  private(set) var layouts: [StoredRecord] = []
-  private(set) var mutations: [MutationRecord] = []
-  private(set) var status = "Loading"
-  var selection: PrototypeBrowserSelection?
-  var selectedLayoutID: RecordID?
+public final class DatastorePrototypeHarness {
+  /// The records currently loaded from the record service.
+  public private(set) var records: [StoredRecord] = []
+
+  /// The layout records currently loaded from the record service.
+  public private(set) var layouts: [StoredRecord] = []
+
+  /// The durable mutations currently loaded from the mutation store.
+  public private(set) var mutations: [MutationRecord] = []
+
+  /// The current user-facing status message.
+  public private(set) var status = "Loading"
+
+  /// The selected browser item.
+  public var selection: PrototypeBrowserSelection?
+
+  /// The selected layout record identifier.
+  public var selectedLayoutID: RecordID?
 
   private let bookID = RecordID("prototype-book")
   private let layoutID = RecordID("prototype-book-layout")
@@ -27,7 +30,11 @@ private final class DatastorePrototypeHarness {
   private let authorID = RecordID("prototype-author")
   private var prototype: DatastorePrototype?
 
-  var selectedRecord: StoredRecord? {
+  /// Creates an empty harness ready to load the prototype datastore.
+  public init() {}
+
+  /// The selected record, if the current selection is a record.
+  public var selectedRecord: StoredRecord? {
     guard case .record(let id) = selection else {
       return nil
     }
@@ -35,7 +42,8 @@ private final class DatastorePrototypeHarness {
     return record(id: id)
   }
 
-  var selectedMutation: MutationRecord? {
+  /// The selected mutation, if the current selection is a mutation.
+  public var selectedMutation: MutationRecord? {
     guard case .mutation(let id) = selection else {
       return nil
     }
@@ -43,11 +51,13 @@ private final class DatastorePrototypeHarness {
     return mutation(id: id)
   }
 
-  var selectedLayout: StoredRecord? {
+  /// The active layout record used by row and detail views.
+  public var selectedLayout: StoredRecord? {
     record(id: selectedLayoutID)
   }
 
-  func load() async {
+  /// Loads, seeds, and refreshes the prototype datastore.
+  public func load() async {
     do {
       let directory = try datastoreDirectory()
       let prototype = try await DatastorePrototype(directoryURL: directory)
@@ -61,15 +71,18 @@ private final class DatastorePrototypeHarness {
     }
   }
 
-  func markReading() async {
+  /// Applies a local mutation that marks the selected record as currently being read.
+  public func markReading() async {
     await setStatus("Reading")
   }
 
-  func markFinished() async {
+  /// Applies a local mutation that marks the selected record as finished.
+  public func markFinished() async {
     await setStatus("Finished")
   }
 
-  func simulateRemoteUpdate() async {
+  /// Simulates a remotely-arrived mutation for the selected record.
+  public func simulateRemoteUpdate() async {
     guard let prototype, let recordID = selectedRecord?.id else {
       return
     }
@@ -239,135 +252,11 @@ private final class DatastorePrototypeHarness {
   }
 }
 
-private enum PrototypeBrowserSelection: Hashable {
+/// Identifies the selected item in the prototype datastore browser.
+public enum PrototypeBrowserSelection: Hashable, Sendable {
+  /// A materialised record selection.
   case record(RecordID)
+
+  /// A mutation log entry selection.
   case mutation(MutationID)
-}
-
-private struct DatastorePrototypeHarnessView: View {
-  @State private var harness = DatastorePrototypeHarness()
-
-  var body: some View {
-    NavigationSplitView {
-      RecordIndexView(harness: harness)
-    } detail: {
-      RecordDetailView(harness: harness)
-    }
-    .toolbar {
-      PrototypeToolbar(harness: harness)
-    }
-    .safeAreaInset(edge: .bottom) {
-      PrototypeStatusBar(harness: harness)
-    }
-    .task {
-      await harness.load()
-    }
-  }
-}
-
-private struct RecordIndexView: View {
-  @Bindable var harness: DatastorePrototypeHarness
-
-  var body: some View {
-    List(selection: $harness.selection) {
-      Section("Records") {
-        ForEach(harness.records) { record in
-          PrototypeRecordCell(record: record, layout: harness.selectedLayout)
-            .tag(PrototypeBrowserSelection.record(record.id))
-        }
-      }
-
-      Section("Mutations") {
-        ForEach(harness.mutations) { mutation in
-          PrototypeMutationCell(mutation: mutation)
-            .tag(PrototypeBrowserSelection.mutation(mutation.id))
-        }
-      }
-    }
-    .navigationTitle("Datastore")
-  }
-}
-
-private struct RecordDetailView: View {
-  @Bindable var harness: DatastorePrototypeHarness
-
-  var body: some View {
-    Group {
-      if let record = harness.selectedRecord {
-        PrototypeRecordView(record: record, layout: harness.selectedLayout)
-      } else if let mutation = harness.selectedMutation {
-        PrototypeMutationView(mutation: mutation)
-      } else {
-        ContentUnavailableView(
-          "No Selection", systemImage: "list.bullet.rectangle", description: Text(harness.status))
-      }
-    }
-  }
-}
-
-private struct PrototypeToolbar: ToolbarContent {
-  @Bindable var harness: DatastorePrototypeHarness
-
-  var body: some ToolbarContent {
-    ToolbarItem {
-      Picker("Layout", selection: $harness.selectedLayoutID) {
-        Text("Default").tag(Optional<RecordID>.none)
-        ForEach(harness.layouts) { layout in
-          Text(layout.string("title") ?? layout.id.rawValue)
-            .tag(Optional(layout.id))
-        }
-      }
-      .pickerStyle(.menu)
-    }
-
-    ToolbarItemGroup {
-      Button(action: markReading) {
-        Label("Reading", systemImage: "book")
-      }
-      .disabled(harness.selectedRecord == nil)
-
-      Button(action: markFinished) {
-        Label("Finished", systemImage: "checkmark.circle")
-      }
-      .disabled(harness.selectedRecord == nil)
-
-      Button(action: simulateRemoteUpdate) {
-        Label("Remote", systemImage: "icloud.and.arrow.down")
-      }
-      .disabled(harness.selectedRecord == nil)
-    }
-  }
-
-  private func markReading() {
-    Task { await harness.markReading() }
-  }
-
-  private func markFinished() {
-    Task { await harness.markFinished() }
-  }
-
-  private func simulateRemoteUpdate() {
-    Task { await harness.simulateRemoteUpdate() }
-  }
-}
-
-private struct PrototypeStatusBar: View {
-  let harness: DatastorePrototypeHarness
-
-  var body: some View {
-    HStack {
-      Text(harness.status)
-      Spacer()
-      Text("\(harness.records.count) records")
-      Text("\(harness.mutations.count) mutations")
-    }
-    .font(.caption)
-    .foregroundStyle(.secondary)
-    .padding()
-    .background(.bar)
-  }
-}
-
-#Preview {
-  DatastorePrototypeHarnessView()
 }

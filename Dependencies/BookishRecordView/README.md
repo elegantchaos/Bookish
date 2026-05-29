@@ -4,6 +4,8 @@
 datastore records. It depends on `BookishDatastore` and displays a data record
 using a separate layout record.
 
+The package requires Swift 6.3 and macOS 26.
+
 The package currently includes:
 
 - `PrototypeRecordPresentation`, a shared layout adapter used by both row and

@@ -4,6 +4,8 @@
 record and mutation model used by the prototype app, plus small services for
 reading records and applying local or remote mutations.
 
+The package requires Swift 6.3 and macOS 26.
+
 The package currently includes:
 
 - `StoredRecord`, `RecordID`, and `RecordPropertyValue` for representing generic

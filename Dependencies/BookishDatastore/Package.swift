@@ -1,11 +1,11 @@
-// swift-tools-version:6.0
+// swift-tools-version:6.3
 
 import PackageDescription
 
 let package = Package(
   name: "BookishDatastore",
   platforms: [
-    .macOS(.v14)
+    .macOS(.v26)
   ],
   products: [
     .library(
