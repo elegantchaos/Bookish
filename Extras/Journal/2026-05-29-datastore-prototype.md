@@ -8,3 +8,10 @@ Initial implementation scope:
 - `Sources/DatastorePrototypeApp` contains a small macOS SwiftUI harness that seeds records, shows them through the record view, and creates local or simulated remote mutations.
 
 The prototype intentionally uses file-based JSON persistence so the projection and mutation log are easy to inspect while the SQLite and CloudKit decisions remain open.
+
+Follow-up documentation:
+- Added README files for `Dependencies/BookishDatastore`, `Dependencies/BookishRecordView`, and `Sources/DatastorePrototypeApp` summarizing each prototype component.
+
+Prototype browsing update:
+- Added a shared record presentation adapter and `PrototypeRecordCell` so record rows and detail views both use layout records without duplicating formatting logic.
+- Updated `DatastorePrototypeApp` to browse all records from the record service, select records in a split view, and switch the active layout from the toolbar.

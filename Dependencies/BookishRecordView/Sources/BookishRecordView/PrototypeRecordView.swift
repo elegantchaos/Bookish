@@ -3,72 +3,34 @@ import SwiftUI
 
 /// Displays a record using a simple layout record.
 public struct PrototypeRecordView: View {
-  private let record: StoredRecord
-  private let layout: StoredRecord
+  private let presentation: PrototypeRecordPresentation
 
   /// Creates a record view from a data record and a layout record.
   public init(record: StoredRecord, layout: StoredRecord) {
-    self.record = record
-    self.layout = layout
+    self.init(record: record, layout: Optional(layout))
   }
 
+  /// Creates a record view from a data record and an optional layout record.
+  public init(record: StoredRecord, layout: StoredRecord?) {
+    self.presentation = PrototypeRecordPresentation(record: record, layout: layout)
+  }
+
+  /// The SwiftUI content for the record detail view.
   public var body: some View {
     Form {
       Section {
-        ForEach(fieldKeys, id: \.self) { key in
-          LabeledContent(label(for: key)) {
-            Text(displayValue(for: key))
+        ForEach(presentation.fields) { field in
+          LabeledContent(field.label) {
+            Text(field.value)
               .textSelection(.enabled)
           }
         }
       } header: {
-        Text(title)
+        Text(presentation.layoutTitle)
       }
     }
     .formStyle(.grouped)
-    .navigationTitle(title)
-  }
-
-  private var title: String {
-    layout.string("title") ?? record.string("title") ?? record.kind
-  }
-
-  private var fieldKeys: [String] {
-    layout.properties["fields"]?.listValue?.compactMap(\.stringValue)
-      ?? record.properties.keys.sorted()
-  }
-
-  private func label(for key: String) -> String {
-    key
-      .replacingOccurrences(of: "_", with: " ")
-      .capitalized
-  }
-
-  private func displayValue(for key: String) -> String {
-    guard let value = record.properties[key] else {
-      return ""
-    }
-
-    return value.displayString
-  }
-}
-
-extension RecordPropertyValue {
-  fileprivate var displayString: String {
-    switch self {
-    case .string(let value):
-      value
-    case .integer(let value):
-      value.formatted()
-    case .double(let value):
-      value.formatted()
-    case .bool(let value):
-      value ? "Yes" : "No"
-    case .record(let id):
-      id.rawValue
-    case .list(let values):
-      values.map(\.displayString).joined(separator: ", ")
-    }
+    .navigationTitle(presentation.title)
   }
 }
 

@@ -14,14 +14,26 @@ struct DatastorePrototypeApplication: App {
 @MainActor
 @Observable
 private final class DatastorePrototypeHarness {
-  private(set) var record: StoredRecord?
-  private(set) var layout: StoredRecord?
+  private(set) var records: [StoredRecord] = []
+  private(set) var layouts: [StoredRecord] = []
   private(set) var mutationCount = 0
   private(set) var status = "Loading"
+  var selectedRecordID: RecordID?
+  var selectedLayoutID: RecordID?
 
   private let bookID = RecordID("prototype-book")
   private let layoutID = RecordID("prototype-book-layout")
+  private let compactLayoutID = RecordID("prototype-book-compact-layout")
+  private let authorID = RecordID("prototype-author")
   private var prototype: DatastorePrototype?
+
+  var selectedRecord: StoredRecord? {
+    record(id: selectedRecordID) ?? records.first
+  }
+
+  var selectedLayout: StoredRecord? {
+    record(id: selectedLayoutID)
+  }
 
   func load() async {
     do {
@@ -46,15 +58,15 @@ private final class DatastorePrototypeHarness {
   }
 
   func simulateRemoteUpdate() async {
-    guard let prototype else {
+    guard let prototype, let recordID = selectedRecord?.id else {
       return
     }
 
     do {
       let mutation = MutationRecord(
         operation: .setProperty(
-          recordID: bookID,
-          kind: "book",
+          recordID: recordID,
+          kind: selectedRecord?.kind ?? "record",
           key: "note",
           value: .string(
             "Remote mutation arrived at \(Date().formatted(date: .omitted, time: .shortened))")
@@ -69,13 +81,13 @@ private final class DatastorePrototypeHarness {
   }
 
   private func setStatus(_ value: String) async {
-    guard let prototype else {
+    guard let prototype, let record = selectedRecord else {
       return
     }
 
     do {
       try await prototype.mutationService.perform(
-        .setProperty(recordID: bookID, kind: "book", key: "status", value: .string(value))
+        .setProperty(recordID: record.id, kind: record.kind, key: "status", value: .string(value))
       )
       try await refresh()
       status = "Set status to \(value)"
@@ -89,9 +101,10 @@ private final class DatastorePrototypeHarness {
       return
     }
 
-    record = try await prototype.recordService.record(id: bookID)
-    layout = try await prototype.recordService.record(id: layoutID)
+    records = try await prototype.recordService.records()
+    layouts = records.filter { $0.kind == "layout" }
     mutationCount = try await prototype.mutationStore.mutations().count
+    updateSelection()
   }
 
   private func seedIfNeeded(using prototype: DatastorePrototype) async throws {
@@ -105,7 +118,24 @@ private final class DatastorePrototypeHarness {
               "title": .string("The Left Hand of Darkness"),
               "author": .string("Ursula K. Le Guin"),
               "status": .string("To Read"),
+              "format": .string("Paperback"),
               "note": .string("Seeded by the prototype harness"),
+            ]
+          )
+        )
+      )
+    }
+
+    if try await prototype.recordService.record(id: authorID) == nil {
+      try await prototype.mutationService.perform(
+        .upsertRecord(
+          StoredRecord(
+            id: authorID,
+            kind: "author",
+            properties: [
+              "name": .string("Ursula K. Le Guin"),
+              "status": .string("Reference"),
+              "note": .string("Author record included to make the index browseable."),
             ]
           )
         )
@@ -121,8 +151,24 @@ private final class DatastorePrototypeHarness {
             properties: [
               "title": .string("Prototype Book"),
               "fields": .list([
-                .string("title"), .string("author"), .string("status"), .string("note"),
+                .string("title"), .string("author"), .string("status"), .string("format"),
+                .string("note"),
               ]),
+            ]
+          )
+        )
+      )
+    }
+
+    if try await prototype.recordService.record(id: compactLayoutID) == nil {
+      try await prototype.mutationService.perform(
+        .upsertRecord(
+          StoredRecord(
+            id: compactLayoutID,
+            kind: "layout",
+            properties: [
+              "title": .string("Compact Summary"),
+              "fields": .list([.string("title"), .string("name"), .string("status")]),
             ]
           )
         )
@@ -142,57 +188,137 @@ private final class DatastorePrototypeHarness {
     try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
     return directory
   }
+
+  private func record(id: RecordID?) -> StoredRecord? {
+    guard let id else {
+      return nil
+    }
+
+    return records.first { $0.id == id }
+  }
+
+  private func updateSelection() {
+    if record(id: selectedRecordID) == nil {
+      selectedRecordID = records.first?.id
+    }
+
+    if selectedLayoutID == nil, record(id: layoutID) != nil {
+      selectedLayoutID = layoutID
+    }
+
+    if record(id: selectedLayoutID) == nil {
+      selectedLayoutID = layouts.first?.id
+    }
+  }
 }
 
 private struct DatastorePrototypeHarnessView: View {
   @State private var harness = DatastorePrototypeHarness()
 
   var body: some View {
-    NavigationStack {
-      Group {
-        if let record = harness.record, let layout = harness.layout {
-          PrototypeRecordView(record: record, layout: layout)
-        } else {
-          ContentUnavailableView(
-            "No Record", systemImage: "book", description: Text(harness.status))
-        }
-      }
-      .toolbar {
-        ToolbarItemGroup {
-          Button {
-            Task { await harness.markReading() }
-          } label: {
-            Label("Reading", systemImage: "book")
-          }
-
-          Button {
-            Task { await harness.markFinished() }
-          } label: {
-            Label("Finished", systemImage: "checkmark.circle")
-          }
-
-          Button {
-            Task { await harness.simulateRemoteUpdate() }
-          } label: {
-            Label("Remote", systemImage: "icloud.and.arrow.down")
-          }
-        }
-      }
-      .safeAreaInset(edge: .bottom) {
-        HStack {
-          Text(harness.status)
-          Spacer()
-          Text("\(harness.mutationCount) mutations")
-        }
-        .font(.caption)
-        .foregroundStyle(.secondary)
-        .padding()
-        .background(.bar)
-      }
+    NavigationSplitView {
+      RecordIndexView(harness: harness)
+    } detail: {
+      RecordDetailView(harness: harness)
+    }
+    .toolbar {
+      PrototypeToolbar(harness: harness)
+    }
+    .safeAreaInset(edge: .bottom) {
+      PrototypeStatusBar(harness: harness)
     }
     .task {
       await harness.load()
     }
+  }
+}
+
+private struct RecordIndexView: View {
+  @Bindable var harness: DatastorePrototypeHarness
+
+  var body: some View {
+    List(selection: $harness.selectedRecordID) {
+      ForEach(harness.records) { record in
+        PrototypeRecordCell(record: record, layout: harness.selectedLayout)
+          .tag(record.id)
+      }
+    }
+    .navigationTitle("Records")
+  }
+}
+
+private struct RecordDetailView: View {
+  @Bindable var harness: DatastorePrototypeHarness
+
+  var body: some View {
+    Group {
+      if let record = harness.selectedRecord {
+        PrototypeRecordView(record: record, layout: harness.selectedLayout)
+      } else {
+        ContentUnavailableView(
+          "No Record", systemImage: "book", description: Text(harness.status))
+      }
+    }
+  }
+}
+
+private struct PrototypeToolbar: ToolbarContent {
+  @Bindable var harness: DatastorePrototypeHarness
+
+  var body: some ToolbarContent {
+    ToolbarItem {
+      Picker("Layout", selection: $harness.selectedLayoutID) {
+        Text("Default").tag(Optional<RecordID>.none)
+        ForEach(harness.layouts) { layout in
+          Text(layout.string("title") ?? layout.id.rawValue)
+            .tag(Optional(layout.id))
+        }
+      }
+      .pickerStyle(.menu)
+    }
+
+    ToolbarItemGroup {
+      Button(action: markReading) {
+        Label("Reading", systemImage: "book")
+      }
+
+      Button(action: markFinished) {
+        Label("Finished", systemImage: "checkmark.circle")
+      }
+
+      Button(action: simulateRemoteUpdate) {
+        Label("Remote", systemImage: "icloud.and.arrow.down")
+      }
+    }
+  }
+
+  private func markReading() {
+    Task { await harness.markReading() }
+  }
+
+  private func markFinished() {
+    Task { await harness.markFinished() }
+  }
+
+  private func simulateRemoteUpdate() {
+    Task { await harness.simulateRemoteUpdate() }
+  }
+}
+
+private struct PrototypeStatusBar: View {
+  let harness: DatastorePrototypeHarness
+
+  var body: some View {
+    HStack {
+      Text(harness.status)
+      Spacer()
+      Text("\(harness.records.count) records")
+      Text("\(harness.mutationCount) mutations")
+    }
+    .font(.caption)
+    .foregroundStyle(.secondary)
+    .padding()
+    .background(.bar)
   }
 }
 
