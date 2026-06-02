@@ -75,6 +75,37 @@ final class BookishCodingTests: XCTestCase {
     XCTAssertEqual(records.first?["author"] as? String, "@person-1")
   }
 
+  func testEncodedValueUsesRemainingKeysAsPayload() throws {
+    let file = BookishInterchangeFile(
+      records: [
+        BookishRecord(
+          id: BookishRecordID("book-1"),
+          kind: "book",
+          properties: [
+            "dimensions": .encoded([
+              "height": .integer(20),
+              "tags": .list([.string("hardback"), .string("shelf")]),
+              "width": .integer(12),
+            ])
+          ]
+        )
+      ]
+    )
+
+    let data = try BookishInterchangeCodec().encode(file)
+    let object = try JSONSerialization.jsonObject(with: data) as? [String: Any]
+    let records = try XCTUnwrap(object?["records"] as? [[String: Any]])
+    let dimensions = try XCTUnwrap(records.first?["dimensions"] as? [String: Any])
+
+    XCTAssertEqual(dimensions["_rvtype"] as? String, "encoded")
+    XCTAssertEqual(dimensions["width"] as? Int, 12)
+    XCTAssertEqual(dimensions["height"] as? Int, 20)
+
+    let decoded = try BookishInterchangeCodec().decode(data)
+
+    XCTAssertEqual(decoded, file)
+  }
+
   func testSchemaOverridesReservedKeys() throws {
     let json = """
       {
@@ -145,6 +176,24 @@ final class BookishCodingTests: XCTestCase {
 
     XCTAssertThrowsError(try BookishInterchangeCodec().decode(Data(json.utf8))) { error in
       XCTAssertEqual(error as? BookishCodingError, .missingRecordReferenceID)
+    }
+  }
+
+  func testRejectsUntaggedObjectPropertyValues() throws {
+    let json = """
+      {
+        "records": [
+          {
+            "id": "book-1",
+            "kind": "book",
+            "dimensions": { "width": 12, "height": 20 }
+          }
+        ]
+      }
+      """
+
+    XCTAssertThrowsError(try BookishInterchangeCodec().decode(Data(json.utf8))) { error in
+      XCTAssertEqual(error as? BookishCodingError, .untaggedObjectValue)
     }
   }
 

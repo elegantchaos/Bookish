@@ -31,8 +31,8 @@ public indirect enum BookishRecordValue: Codable, Equatable, Sendable {
   /// An ordered list of values.
   case list([BookishRecordValue])
 
-  /// A structured object value.
-  case object([String: BookishRecordValue])
+  /// An opaque JSON payload encoded from a small Codable value.
+  case encoded([String: BookishEncodedValue])
 
   /// A record tombstone marker.
   case tombstone

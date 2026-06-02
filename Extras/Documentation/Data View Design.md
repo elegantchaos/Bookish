@@ -51,7 +51,7 @@ Common components include:
 - image or file controls for blob references;
 - pickers or navigation links for record links;
 - repeatable rows for ordered lists;
-- custom editors for structured values when the application knows the expected type.
+- custom editors for encoded payload values when the application knows the expected type.
 
 If the stored value cannot be decoded or coerced into the expected value kind, the view should fail gracefully and offer a raw-value or repair path where practical.
 

@@ -25,27 +25,33 @@ final class BookishRecordTests: XCTestCase {
     XCTAssertEqual(record.list("authors"), [.record(authorID)])
   }
 
-  func testRecordValueSupportsNestedListsAndObjects() {
-    let value = BookishRecordValue.object([
-      "contributors": .list([
-        .object([
-          "role": .string("author"),
-          "record": .record(BookishRecordID("person-1")),
-        ])
-      ])
+  func testRecordValueSupportsNestedListsAndEncodedValues() {
+    let value = BookishRecordValue.list([
+      .record(BookishRecordID("person-1")),
+      .encoded([
+        "height": .double(20.5),
+        "width": .integer(12),
+      ]),
     ])
 
     XCTAssertEqual(
       value,
-      .object([
-        "contributors": .list([
-          .object([
-            "role": .string("author"),
-            "record": .record(BookishRecordID("person-1")),
-          ])
-        ])
+      .list([
+        .record(BookishRecordID("person-1")),
+        .encoded([
+          "height": .double(20.5),
+          "width": .integer(12),
+        ]),
       ])
     )
+  }
+
+  func testEncodedValueCanRoundTripCodablePayload() throws {
+    let dimensions = Dimensions(width: 12, height: 20)
+    let encoded = try BookishEncodedValue(encoding: dimensions)
+    let decoded = try encoded.decode(Dimensions.self)
+
+    XCTAssertEqual(decoded, dimensions)
   }
 
   func testRecordCodableRoundTrip() throws {
@@ -63,4 +69,9 @@ final class BookishRecordTests: XCTestCase {
 
     XCTAssertEqual(decoded, record)
   }
+}
+
+private struct Dimensions: Codable, Equatable {
+  var width: Int
+  var height: Int
 }

@@ -70,3 +70,13 @@ Validation update:
 - `rt validate` passes changed-file formatting and linting, then fails the root
   iOS workspace build because the `Images` target supports iOS 12 while the
   `Logger` package product requires iOS 13.
+
+Encoded value update:
+
+- Replaced the record-value `object` case with `encoded` to avoid duplicating
+  the role of `BookishRecord` as a key/value record representation.
+- Added `BookishEncodedValue` for opaque JSON payloads that can be encoded from
+  and decoded back to small Codable values.
+- Updated interchange coding so `{ "_rvtype": "encoded", ... }` treats every
+  non-`rvKey` key as payload, and plain untagged JSON object property values are
+  rejected.

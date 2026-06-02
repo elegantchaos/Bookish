@@ -11,6 +11,8 @@ The package includes:
 - `BookishRecord`, a schema-less materialised record with `id`, `kind`, and
   properties.
 - `BookishRecordValue`, the storage-neutral property value enum.
+- `BookishEncodedValue`, an opaque JSON payload value for small Codable
+  property payloads.
 - `BookishBlobReference`, a lightweight reference to immutable out-of-line blob
   data.
 

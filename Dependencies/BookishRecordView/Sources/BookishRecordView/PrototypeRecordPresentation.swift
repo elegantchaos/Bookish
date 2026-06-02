@@ -98,7 +98,7 @@ extension BookishRecordValue {
       reference.filename ?? reference.id
     case .list(let values):
       values.map(\.displayString).joined(separator: ", ")
-    case .object(let values):
+    case .encoded(let values):
       values.keys.sorted().joined(separator: ", ")
     case .tombstone:
       "Tombstone"

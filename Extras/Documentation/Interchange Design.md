@@ -33,7 +33,7 @@ A **record snapshot** is a materialised record at a point in time. It has:
 - a dictionary of named properties.
 
 A **record value** is any value that can appear in a record property. Record
-values include primitives, structured objects, record links, blob references,
+values include primitives, encoded payloads, record links, blob references,
 lists, tombstones, deletion markers, and conflict markers.
 
 The JSON representation may be compact, but the decoded application model should
@@ -152,11 +152,14 @@ Primitive JSON values decode directly where their meaning is unambiguous:
 
 These values decode as strings, integers, doubles, booleans, and lists.
 
-Plain JSON objects without `rvKey` decode as structured object values:
+Plain JSON objects without `rvKey` are not valid property values. A structured
+payload encoded from a small Codable value must use the explicit `encoded`
+record value form:
 
 ```json
 {
   "dimensions": {
+    "_rvtype": "encoded",
     "width": 5.5,
     "height": 8.25,
     "unit": "in"
@@ -164,12 +167,18 @@ Plain JSON objects without `rvKey` decode as structured object values:
 }
 ```
 
+For `encoded` values, every key other than the schema's `rvKey` is part of the
+opaque JSON payload. The interchange file does not provide a Swift type name;
+application code is expected to know the Codable type it wants to decode for a
+given property.
+
 Objects that contain `rvKey` decode as explicitly typed record values. The
 following reserved value kinds are defined:
 
 - `record`: a link to another record;
 - `blob`: a reference to out-of-line blob data;
 - `date`: a date encoded as a string value;
+- `encoded`: an opaque JSON payload encoded from a small Codable value;
 - `tombstone`: a tombstoned record marker;
 - `deletion`: a deleted property marker;
 - `conflict`: a conflict marker containing alternative values.
@@ -331,8 +340,9 @@ Decoders should:
 
 - apply default schema values when `schema` or schema fields are missing;
 - treat unknown explicit `rvKey` values as errors in strict mode;
-- preserve unknown explicit `rvKey` values as structured objects in permissive
-  import mode only when the caller requests that behaviour;
+- preserve unknown explicit `rvKey` values only through a future explicit
+  extension point when the caller requests that behaviour;
+- reject plain JSON object property values that do not contain `rvKey`;
 - reject malformed record identifiers in strict mode;
 - treat non-matching shorthand-like strings as plain strings.
 

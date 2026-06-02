@@ -98,16 +98,16 @@ List-entry mutations parent the relevant entry or ordering heads rather than the
 
 Property values can be:
 - primitives (string, int, uint, double, date, bool)
-- small structured values encoded in a storage-neutral format
+- small Codable values encoded as opaque JSON payloads
 - record links
 - blob references
 - ordered lists of property values
 - deletion markers
 - conflict markers
 
-Structured values are distinct from plain strings, but do not need explicit application-level type tags. The application layer is expected to know what kind of value it expects for a property, and decode or coerce the stored value into that type. This operation can fail if the value does not match the expected type.
+Encoded values are distinct from plain strings, but do not need explicit application-level type tags. The application layer is expected to know what kind of value it expects for a property, and decode or coerce the stored value into that type. This operation can fail if the value does not match the expected type.
 
-Small structured values can be encoded from Codable values, using a compact JSON representation. These values are intended for small property payloads rather than large binary data.
+Small Codable values can be encoded using a compact JSON representation. These values are intended for small opaque property payloads rather than large binary data or anonymous record-like objects.
 
 ## Large Blob Data
 

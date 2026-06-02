@@ -37,6 +37,9 @@ public enum BookishCodingError: Error, Equatable {
   /// An explicit record value kind is unknown.
   case unknownRecordValueKind(String)
 
+  /// A JSON object property value does not contain the record value marker.
+  case untaggedObjectValue
+
   /// The root value is malformed.
   case invalidRoot
 
@@ -52,6 +55,7 @@ public enum BookishCodingError: Error, Equatable {
       (.missingBlobID, .missingBlobID),
       (.invalidDate, .invalidDate),
       (.invalidConflict, .invalidConflict),
+      (.untaggedObjectValue, .untaggedObjectValue),
       (.invalidRoot, .invalidRoot):
       return true
 
