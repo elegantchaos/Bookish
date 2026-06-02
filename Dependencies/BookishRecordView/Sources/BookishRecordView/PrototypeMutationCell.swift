@@ -1,4 +1,5 @@
 import BookishDatastore
+import BookishRecord
 import SwiftUI
 
 /// A compact row view for displaying a mutation in the prototype browser.
@@ -37,7 +38,7 @@ public struct PrototypeMutationCell: View {
     PrototypeMutationCell(
       mutation: MutationRecord(
         operation: .setProperty(
-          recordID: RecordID("book-preview"),
+          recordID: BookishRecordID("book-preview"),
           kind: "book",
           key: "status",
           value: .string("Reading")

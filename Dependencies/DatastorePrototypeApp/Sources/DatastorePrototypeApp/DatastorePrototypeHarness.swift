@@ -1,4 +1,5 @@
 import BookishDatastore
+import BookishRecord
 import Foundation
 import Observation
 
@@ -7,10 +8,10 @@ import Observation
 @Observable
 public final class DatastorePrototypeHarness {
   /// The records currently loaded from the record service.
-  public private(set) var records: [StoredRecord] = []
+  public private(set) var records: [BookishRecord] = []
 
   /// The layout records currently loaded from the record service.
-  public private(set) var layouts: [StoredRecord] = []
+  public private(set) var layouts: [BookishRecord] = []
 
   /// The durable mutations currently loaded from the mutation store.
   public private(set) var mutations: [MutationRecord] = []
@@ -22,19 +23,19 @@ public final class DatastorePrototypeHarness {
   public var selection: PrototypeBrowserSelection?
 
   /// The selected layout record identifier.
-  public var selectedLayoutID: RecordID?
+  public var selectedLayoutID: BookishRecordID?
 
-  private let bookID = RecordID("prototype-book")
-  private let layoutID = RecordID("prototype-book-layout")
-  private let compactLayoutID = RecordID("prototype-book-compact-layout")
-  private let authorID = RecordID("prototype-author")
+  private let bookID = BookishRecordID("prototype-book")
+  private let layoutID = BookishRecordID("prototype-book-layout")
+  private let compactLayoutID = BookishRecordID("prototype-book-compact-layout")
+  private let authorID = BookishRecordID("prototype-author")
   private var prototype: DatastorePrototype?
 
   /// Creates an empty harness ready to load the prototype datastore.
   public init() {}
 
   /// The selected record, if the current selection is a record.
-  public var selectedRecord: StoredRecord? {
+  public var selectedRecord: BookishRecord? {
     guard case .record(let id) = selection else {
       return nil
     }
@@ -52,7 +53,7 @@ public final class DatastorePrototypeHarness {
   }
 
   /// The active layout record used by row and detail views.
-  public var selectedLayout: StoredRecord? {
+  public var selectedLayout: BookishRecord? {
     record(id: selectedLayoutID)
   }
 
@@ -136,7 +137,7 @@ public final class DatastorePrototypeHarness {
     if try await prototype.recordService.record(id: bookID) == nil {
       try await prototype.mutationService.perform(
         .upsertRecord(
-          StoredRecord(
+          BookishRecord(
             id: bookID,
             kind: "book",
             properties: [
@@ -154,7 +155,7 @@ public final class DatastorePrototypeHarness {
     if try await prototype.recordService.record(id: authorID) == nil {
       try await prototype.mutationService.perform(
         .upsertRecord(
-          StoredRecord(
+          BookishRecord(
             id: authorID,
             kind: "author",
             properties: [
@@ -170,7 +171,7 @@ public final class DatastorePrototypeHarness {
     if try await prototype.recordService.record(id: layoutID) == nil {
       try await prototype.mutationService.perform(
         .upsertRecord(
-          StoredRecord(
+          BookishRecord(
             id: layoutID,
             kind: "layout",
             properties: [
@@ -188,7 +189,7 @@ public final class DatastorePrototypeHarness {
     if try await prototype.recordService.record(id: compactLayoutID) == nil {
       try await prototype.mutationService.perform(
         .upsertRecord(
-          StoredRecord(
+          BookishRecord(
             id: compactLayoutID,
             kind: "layout",
             properties: [
@@ -214,7 +215,7 @@ public final class DatastorePrototypeHarness {
     return directory
   }
 
-  private func record(id: RecordID?) -> StoredRecord? {
+  private func record(id: BookishRecordID?) -> BookishRecord? {
     guard let id else {
       return nil
     }
@@ -255,7 +256,7 @@ public final class DatastorePrototypeHarness {
 /// Identifies the selected item in the prototype datastore browser.
 public enum PrototypeBrowserSelection: Hashable, Sendable {
   /// A materialised record selection.
-  case record(RecordID)
+  case record(BookishRecordID)
 
   /// A mutation log entry selection.
   case mutation(MutationID)

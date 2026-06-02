@@ -1,4 +1,4 @@
-import BookishDatastore
+import BookishRecord
 import SwiftUI
 
 /// A compact row view for displaying a datastore record in an index.
@@ -6,7 +6,7 @@ public struct PrototypeRecordCell: View {
   private let presentation: PrototypeRecordPresentation
 
   /// Creates a row view from a data record and an optional layout record.
-  public init(record: StoredRecord, layout: StoredRecord?) {
+  public init(record: BookishRecord, layout: BookishRecord?) {
     self.presentation = PrototypeRecordPresentation(record: record, layout: layout)
   }
 
@@ -43,8 +43,8 @@ public struct PrototypeRecordCell: View {
 #Preview {
   List {
     PrototypeRecordCell(
-      record: StoredRecord(
-        id: RecordID("book-preview"),
+      record: BookishRecord(
+        id: BookishRecordID("book-preview"),
         kind: "book",
         properties: [
           "title": .string("The Left Hand of Darkness"),
@@ -52,8 +52,8 @@ public struct PrototypeRecordCell: View {
           "status": .string("To Read"),
         ]
       ),
-      layout: StoredRecord(
-        id: RecordID("layout-preview"),
+      layout: BookishRecord(
+        id: BookishRecordID("layout-preview"),
         kind: "layout",
         properties: [
           "title": .string("Book Row"),

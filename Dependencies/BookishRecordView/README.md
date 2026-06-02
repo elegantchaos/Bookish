@@ -1,8 +1,9 @@
 # BookishRecordView
 
 `BookishRecordView` is the SwiftUI proof-of-concept package for rendering
-datastore records. It depends on `BookishDatastore` and displays a data record
-using a separate layout record.
+Bookish records. It displays a `BookishRecord` data record using a separate
+layout record, and depends on `BookishDatastore` only for mutation presentation
+types.
 
 The package requires Swift 6.3 and macOS 26.
 
@@ -17,7 +18,7 @@ The package currently includes:
 - `PrototypeMutationView` and `PrototypeMutationCell` for browsing mutation
   details and rows.
 - Layout-driven field selection through a layout record's `fields` property.
-- Basic display formatting for the prototype datastore value types.
+- Basic display formatting for `BookishRecordValue`.
 - SwiftUI previews with sample book records and layout records.
 - Focused tests for layout interpretation, mutation formatting, and view
   construction.

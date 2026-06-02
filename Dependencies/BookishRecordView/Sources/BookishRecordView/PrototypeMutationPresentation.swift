@@ -1,4 +1,5 @@
 import BookishDatastore
+import BookishRecord
 import Foundation
 
 /// A display-ready representation of a datastore mutation for prototype views.

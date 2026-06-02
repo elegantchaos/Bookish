@@ -1,4 +1,5 @@
 import BookishDatastore
+import BookishRecord
 import BookishRecordView
 import SwiftUI
 
@@ -74,7 +75,7 @@ private struct PrototypeToolbar: ToolbarContent {
   var body: some ToolbarContent {
     ToolbarItem {
       Picker("Layout", selection: $harness.selectedLayoutID) {
-        Text("Default").tag(Optional<RecordID>.none)
+        Text("Default").tag(Optional<BookishRecordID>.none)
         ForEach(harness.layouts) { layout in
           Text(layout.string("title") ?? layout.id.rawValue)
             .tag(Optional(layout.id))

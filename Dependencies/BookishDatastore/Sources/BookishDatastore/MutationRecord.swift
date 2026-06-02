@@ -1,18 +1,19 @@
+import BookishRecord
 import Foundation
 
 /// Describes a supported prototype mutation operation.
 public enum MutationOperation: Codable, Equatable, Sendable {
   /// Creates or replaces a complete record projection.
-  case upsertRecord(StoredRecord)
+  case upsertRecord(BookishRecord)
 
   /// Sets one materialised property on an existing or newly-created record.
-  case setProperty(recordID: RecordID, kind: String, key: String, value: RecordPropertyValue)
+  case setProperty(recordID: BookishRecordID, kind: String, key: String, value: BookishRecordValue)
 
   /// Removes one materialised property from a record.
-  case deleteProperty(recordID: RecordID, key: String)
+  case deleteProperty(recordID: BookishRecordID, key: String)
 
   /// Removes a materialised record.
-  case deleteRecord(RecordID)
+  case deleteRecord(BookishRecordID)
 }
 
 /// A durable user or sync mutation.

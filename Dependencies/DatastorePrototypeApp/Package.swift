@@ -14,6 +14,7 @@ let package = Package(
     )
   ],
   dependencies: [
+    .package(path: "../BookishRecord"),
     .package(path: "../BookishDatastore"),
     .package(path: "../BookishRecordView"),
   ],
@@ -21,6 +22,7 @@ let package = Package(
     .target(
       name: "DatastorePrototypeApp",
       dependencies: [
+        .product(name: "BookishRecord", package: "BookishRecord"),
         .product(name: "BookishDatastore", package: "BookishDatastore"),
         .product(name: "BookishRecordView", package: "BookishRecordView"),
       ]

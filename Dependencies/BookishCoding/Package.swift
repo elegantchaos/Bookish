@@ -3,14 +3,14 @@
 import PackageDescription
 
 let package = Package(
-  name: "BookishDatastore",
+  name: "BookishCoding",
   platforms: [
     .macOS(.v26)
   ],
   products: [
     .library(
-      name: "BookishDatastore",
-      targets: ["BookishDatastore"]
+      name: "BookishCoding",
+      targets: ["BookishCoding"]
     )
   ],
   dependencies: [
@@ -18,17 +18,14 @@ let package = Package(
   ],
   targets: [
     .target(
-      name: "BookishDatastore",
+      name: "BookishCoding",
       dependencies: [
         .product(name: "BookishRecord", package: "BookishRecord")
       ]
     ),
     .testTarget(
-      name: "BookishDatastoreTests",
-      dependencies: [
-        "BookishDatastore",
-        .product(name: "BookishRecord", package: "BookishRecord"),
-      ]
+      name: "BookishCodingTests",
+      dependencies: ["BookishCoding"]
     ),
   ]
 )

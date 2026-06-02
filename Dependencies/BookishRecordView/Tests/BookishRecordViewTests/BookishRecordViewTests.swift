@@ -1,4 +1,5 @@
 import BookishDatastore
+import BookishRecord
 import SwiftUI
 import XCTest
 
@@ -7,7 +8,7 @@ import XCTest
 final class BookishRecordViewTests: XCTestCase {
   func testPresentationUsesLayoutFields() {
     let presentation = PrototypeRecordPresentation(
-      record: StoredRecord(
+      record: BookishRecord(
         kind: "book",
         properties: [
           "title": .string("Prototype"),
@@ -15,7 +16,7 @@ final class BookishRecordViewTests: XCTestCase {
           "status": .string("Reading"),
         ]
       ),
-      layout: StoredRecord(
+      layout: BookishRecord(
         kind: "layout",
         properties: [
           "title": .string("Book Summary"),
@@ -32,7 +33,7 @@ final class BookishRecordViewTests: XCTestCase {
 
   func testPresentationFallsBackToSortedRecordFieldsWithoutLayout() {
     let presentation = PrototypeRecordPresentation(
-      record: StoredRecord(
+      record: BookishRecord(
         kind: "book",
         properties: [
           "status": .string("Reading"),
@@ -50,7 +51,7 @@ final class BookishRecordViewTests: XCTestCase {
     let mutation = MutationRecord(
       id: MutationID("mutation-1"),
       operation: .setProperty(
-        recordID: RecordID("book-1"),
+        recordID: BookishRecordID("book-1"),
         kind: "book",
         key: "reading_status",
         value: .string("Reading")
@@ -76,8 +77,8 @@ final class BookishRecordViewTests: XCTestCase {
   @MainActor
   func testRecordViewCanBeConstructedWithRecordAndLayout() {
     let view = PrototypeRecordView(
-      record: StoredRecord(kind: "book", properties: ["title": .string("Prototype")]),
-      layout: StoredRecord(kind: "layout", properties: ["fields": .list([.string("title")])])
+      record: BookishRecord(kind: "book", properties: ["title": .string("Prototype")]),
+      layout: BookishRecord(kind: "layout", properties: ["fields": .list([.string("title")])])
     )
 
     XCTAssertNotNil(view.body)
@@ -86,8 +87,8 @@ final class BookishRecordViewTests: XCTestCase {
   @MainActor
   func testRecordCellCanBeConstructedWithRecordAndLayout() {
     let view = PrototypeRecordCell(
-      record: StoredRecord(kind: "book", properties: ["title": .string("Prototype")]),
-      layout: StoredRecord(kind: "layout", properties: ["fields": .list([.string("title")])])
+      record: BookishRecord(kind: "book", properties: ["title": .string("Prototype")]),
+      layout: BookishRecord(kind: "layout", properties: ["fields": .list([.string("title")])])
     )
 
     XCTAssertNotNil(view.body)
@@ -96,7 +97,7 @@ final class BookishRecordViewTests: XCTestCase {
   @MainActor
   func testMutationViewsCanBeConstructedWithMutation() {
     let mutation = MutationRecord(
-      operation: .deleteRecord(RecordID("book-1"))
+      operation: .deleteRecord(BookishRecordID("book-1"))
     )
 
     let cell = PrototypeMutationCell(mutation: mutation)

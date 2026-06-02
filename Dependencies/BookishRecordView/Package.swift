@@ -14,18 +14,24 @@ let package = Package(
     )
   ],
   dependencies: [
-    .package(path: "../BookishDatastore")
+    .package(path: "../BookishRecord"),
+    .package(path: "../BookishDatastore"),
   ],
   targets: [
     .target(
       name: "BookishRecordView",
       dependencies: [
-        .product(name: "BookishDatastore", package: "BookishDatastore")
+        .product(name: "BookishRecord", package: "BookishRecord"),
+        .product(name: "BookishDatastore", package: "BookishDatastore"),
       ]
     ),
     .testTarget(
       name: "BookishRecordViewTests",
-      dependencies: ["BookishRecordView"]
+      dependencies: [
+        "BookishRecordView",
+        .product(name: "BookishDatastore", package: "BookishDatastore"),
+        .product(name: "BookishRecord", package: "BookishRecord"),
+      ]
     ),
   ]
 )

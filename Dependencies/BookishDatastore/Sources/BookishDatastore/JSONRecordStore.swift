@@ -1,8 +1,9 @@
+import BookishRecord
 import Foundation
 
 /// A JSON-file backed prototype record store for easy inspection while the design evolves.
 public actor JSONRecordStore: RecordStore {
-  private var recordsByID: [RecordID: StoredRecord]
+  private var recordsByID: [BookishRecordID: BookishRecord]
   private let fileURL: URL
   private let encoder: JSONEncoder
   private let decoder: JSONDecoder
@@ -17,23 +18,23 @@ public actor JSONRecordStore: RecordStore {
   }
 
   /// Returns a single record by identifier.
-  public func record(id: RecordID) async throws -> StoredRecord? {
+  public func record(id: BookishRecordID) async throws -> BookishRecord? {
     recordsByID[id]
   }
 
   /// Returns all records in stable identifier order.
-  public func records() async throws -> [StoredRecord] {
+  public func records() async throws -> [BookishRecord] {
     recordsByID.values.sorted { $0.id.rawValue < $1.id.rawValue }
   }
 
   /// Writes a materialised record.
-  public func upsert(_ record: StoredRecord) async throws {
+  public func upsert(_ record: BookishRecord) async throws {
     recordsByID[record.id] = record
     try save()
   }
 
   /// Deletes a materialised record.
-  public func delete(id: RecordID) async throws {
+  public func delete(id: BookishRecordID) async throws {
     recordsByID[id] = nil
     try save()
   }
@@ -44,7 +45,7 @@ public actor JSONRecordStore: RecordStore {
     }
 
     let data = try Data(contentsOf: fileURL)
-    let storedRecords = try decoder.decode([StoredRecord].self, from: data)
+    let storedRecords = try decoder.decode([BookishRecord].self, from: data)
     recordsByID = Dictionary(uniqueKeysWithValues: storedRecords.map { ($0.id, $0) })
   }
 

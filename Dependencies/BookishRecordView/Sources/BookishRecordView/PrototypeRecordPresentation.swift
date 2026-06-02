@@ -1,16 +1,16 @@
-import BookishDatastore
+import BookishRecord
 import Foundation
 
 /// A display-ready representation of a datastore record for prototype views.
 public struct PrototypeRecordPresentation: Equatable, Sendable {
   /// The original datastore record being presented.
-  public let record: StoredRecord
+  public let record: BookishRecord
 
   /// The layout record used to choose labels and visible fields.
-  public let layout: StoredRecord?
+  public let layout: BookishRecord?
 
   /// Creates a presentation from a record and an optional layout record.
-  public init(record: StoredRecord, layout: StoredRecord?) {
+  public init(record: BookishRecord, layout: BookishRecord?) {
     self.record = record
     self.layout = layout
   }
@@ -78,7 +78,7 @@ public struct PrototypeRecordField: Equatable, Identifiable, Sendable {
   }
 }
 
-extension RecordPropertyValue {
+extension BookishRecordValue {
   /// Formats a prototype property value for display.
   var displayString: String {
     switch self {
@@ -90,10 +90,22 @@ extension RecordPropertyValue {
       value.formatted()
     case .bool(let value):
       value ? "Yes" : "No"
+    case .date(let value):
+      value.formatted(date: .abbreviated, time: .omitted)
     case .record(let id):
       id.rawValue
+    case .blob(let reference):
+      reference.filename ?? reference.id
     case .list(let values):
       values.map(\.displayString).joined(separator: ", ")
+    case .object(let values):
+      values.keys.sorted().joined(separator: ", ")
+    case .tombstone:
+      "Tombstone"
+    case .deletion:
+      "Deleted"
+    case .conflict(let values):
+      values.map(\.displayString).joined(separator: " / ")
     }
   }
 }

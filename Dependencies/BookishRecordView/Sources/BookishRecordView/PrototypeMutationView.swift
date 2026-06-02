@@ -1,4 +1,5 @@
 import BookishDatastore
+import BookishRecord
 import SwiftUI
 
 /// Displays a prototype mutation record.
@@ -47,7 +48,7 @@ public struct PrototypeMutationView: View {
   PrototypeMutationView(
     mutation: MutationRecord(
       operation: .setProperty(
-        recordID: RecordID("book-preview"),
+        recordID: BookishRecordID("book-preview"),
         kind: "book",
         key: "status",
         value: .string("Reading")

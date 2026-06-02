@@ -1,4 +1,4 @@
-import BookishDatastore
+import BookishRecord
 import SwiftUI
 
 /// Displays a record using a simple layout record.
@@ -6,12 +6,12 @@ public struct PrototypeRecordView: View {
   private let presentation: PrototypeRecordPresentation
 
   /// Creates a record view from a data record and a layout record.
-  public init(record: StoredRecord, layout: StoredRecord) {
+  public init(record: BookishRecord, layout: BookishRecord) {
     self.init(record: record, layout: Optional(layout))
   }
 
   /// Creates a record view from a data record and an optional layout record.
-  public init(record: StoredRecord, layout: StoredRecord?) {
+  public init(record: BookishRecord, layout: BookishRecord?) {
     self.presentation = PrototypeRecordPresentation(record: record, layout: layout)
   }
 
@@ -37,8 +37,8 @@ public struct PrototypeRecordView: View {
 #Preview {
   NavigationStack {
     PrototypeRecordView(
-      record: StoredRecord(
-        id: RecordID("book-preview"),
+      record: BookishRecord(
+        id: BookishRecordID("book-preview"),
         kind: "book",
         properties: [
           "title": .string("The Left Hand of Darkness"),
@@ -46,8 +46,8 @@ public struct PrototypeRecordView: View {
           "status": .string("To Read"),
         ]
       ),
-      layout: StoredRecord(
-        id: RecordID("layout-preview"),
+      layout: BookishRecord(
+        id: BookishRecordID("layout-preview"),
         kind: "layout",
         properties: [
           "title": .string("Book"),

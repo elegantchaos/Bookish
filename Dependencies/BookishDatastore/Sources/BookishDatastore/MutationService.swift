@@ -1,3 +1,4 @@
+import BookishRecord
 import Foundation
 
 /// Applies durable mutations to the materialised record projection.
@@ -62,7 +63,7 @@ public struct DefaultMutationService<Records: RecordStore, Mutations: MutationSt
 
     case .setProperty(let recordID, let kind, let key, let value):
       var record =
-        try await recordStore.record(id: recordID) ?? StoredRecord(id: recordID, kind: kind)
+        try await recordStore.record(id: recordID) ?? BookishRecord(id: recordID, kind: kind)
       record.properties[key] = value
       try await recordStore.upsert(record)
 

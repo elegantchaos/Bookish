@@ -1,15 +1,15 @@
 # BookishDatastore
 
 `BookishDatastore` is the datastore proof-of-concept package. It contains the
-record and mutation model used by the prototype app, plus small services for
-reading records and applying local or remote mutations.
+mutation model used by the prototype app, plus small services for reading
+`BookishRecord` values and applying local or remote mutations.
 
 The package requires Swift 6.3 and macOS 26.
 
 The package currently includes:
 
-- `StoredRecord`, `RecordID`, and `RecordPropertyValue` for representing generic
-  datastore records and property values.
+- `BookishRecord`, `BookishRecordID`, and `BookishRecordValue` from the
+  `BookishRecord` package for materialised records and property values.
 - `MutationRecord`, `MutationOperation`, and `MutationID` for recording changes
   as an append-only mutation log.
 - `RecordStore` and `MutationStore` protocols that keep persistence details out

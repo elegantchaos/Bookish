@@ -1,3 +1,4 @@
+import BookishRecord
 import Foundation
 import XCTest
 
@@ -6,7 +7,7 @@ import XCTest
 final class DatastorePrototypeTests: XCTestCase {
   func testMutationServiceAppliesPropertyMutationToRecordStore() async throws {
     let prototype = try await makePrototype()
-    let bookID = RecordID("book-1")
+    let bookID = BookishRecordID("book-1")
 
     try await prototype.mutationService.perform(
       .setProperty(
@@ -20,7 +21,7 @@ final class DatastorePrototypeTests: XCTestCase {
 
   func testMutationServiceDoesNotApplySameRemoteMutationTwice() async throws {
     let prototype = try await makePrototype()
-    let bookID = RecordID("book-1")
+    let bookID = BookishRecordID("book-1")
     let mutation = MutationRecord(
       id: MutationID("remote-1"),
       operation: .setProperty(
@@ -39,7 +40,7 @@ final class DatastorePrototypeTests: XCTestCase {
   func testJSONStoresReloadPersistedData() async throws {
     let directory = try temporaryDirectory()
     let prototype = try await DatastorePrototype(directoryURL: directory)
-    let bookID = RecordID("book-1")
+    let bookID = BookishRecordID("book-1")
 
     try await prototype.mutationService.perform(
       .setProperty(recordID: bookID, kind: "book", key: "title", value: .string("Persisted"))

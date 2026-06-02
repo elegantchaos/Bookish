@@ -1,18 +1,19 @@
+import BookishRecord
 import Foundation
 
 /// Stores materialised records.
 public protocol RecordStore: Sendable {
   /// Returns a single record by identifier.
-  func record(id: RecordID) async throws -> StoredRecord?
+  func record(id: BookishRecordID) async throws -> BookishRecord?
 
   /// Returns all records in stable identifier order.
-  func records() async throws -> [StoredRecord]
+  func records() async throws -> [BookishRecord]
 
   /// Writes a materialised record.
-  func upsert(_ record: StoredRecord) async throws
+  func upsert(_ record: BookishRecord) async throws
 
   /// Deletes a materialised record.
-  func delete(id: RecordID) async throws
+  func delete(id: BookishRecordID) async throws
 }
 
 /// Stores durable mutation records and applied state.

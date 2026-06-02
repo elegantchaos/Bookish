@@ -45,3 +45,28 @@ Interchange design update:
 - Kept the canonical record link representation as
   `{ "_rvtype": "record", "id": "record-id" }`, with shorthand treated only as a
   codec-level convenience.
+
+Implementation update:
+
+- Added `Dependencies/BookishRecord` with `BookishRecordID`, `BookishRecord`,
+  `BookishRecordValue`, and `BookishBlobReference`.
+- Added `Dependencies/BookishCoding` with schema-aware JSON interchange coding,
+  canonical record links, and optional compact `@record-id` link encoding.
+- Added `Dependencies/BookishImporterNu` with a Delicious Library importer that
+  emits normalised graph records.
+- Migrated `Dependencies/BookishDatastore`, `Dependencies/BookishRecordView`,
+  and `Dependencies/DatastorePrototypeApp` to use `BookishRecord` at record API
+  boundaries.
+- Left `BookishCore`, the legacy `BookishImporter`, and the main `BookishApp`
+  import path untouched.
+
+Validation update:
+
+- `swift test` passes for `BookishRecord`, `BookishCoding`,
+  `BookishImporterNu`, `BookishDatastore`, `BookishRecordView`, and
+  `DatastorePrototypeApp`.
+- `BookishCoding` now includes explicit coverage for schema-overridden root
+  links, strict shorthand link handling, and malformed canonical record links.
+- `rt validate` passes changed-file formatting and linting, then fails the root
+  iOS workspace build because the `Images` target supports iOS 12 while the
+  `Logger` package product requires iOS 13.
