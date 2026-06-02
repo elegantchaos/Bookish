@@ -6,10 +6,14 @@ mutation model used by the prototype app, plus small services for reading
 
 The package requires Swift 6.3 and macOS 26.
 
-The package currently includes:
+The package depends on `BookishRecord` for the shared materialised record model:
 
-- `BookishRecord`, `BookishRecordID`, and `BookishRecordValue` from the
-  `BookishRecord` package for materialised records and property values.
+- `BookishRecord` for materialised records.
+- `BookishRecordID` for record identity.
+- `BookishRecordValue` for record property values.
+
+The package defines datastore-specific infrastructure:
+
 - `MutationRecord`, `MutationOperation`, and `MutationID` for recording changes
   as an append-only mutation log.
 - `RecordStore` and `MutationStore` protocols that keep persistence details out
