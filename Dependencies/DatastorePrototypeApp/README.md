@@ -13,7 +13,8 @@ The package currently includes:
 - `PrototypeBrowserSelection`, the selection model for records and mutations.
 - `DatastorePrototypeHarnessView`, the root SwiftUI split-view interface.
 - Sidebar rows for records and mutations, record and mutation detail display,
-  layout switching, mutation simulation, and the prototype status bar.
+  layout switching, mutation simulation, interchange import/export, Delicious
+  Library import, and the prototype status bar.
 
 Run the package tests from this directory with:
 

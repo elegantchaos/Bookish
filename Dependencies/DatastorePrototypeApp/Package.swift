@@ -15,6 +15,8 @@ let package = Package(
   ],
   dependencies: [
     .package(path: "../BookishRecord"),
+    .package(path: "../BookishCoding"),
+    .package(path: "../BookishImporterNu"),
     .package(path: "../BookishDatastore"),
     .package(path: "../BookishRecordView"),
   ],
@@ -23,13 +25,19 @@ let package = Package(
       name: "DatastorePrototypeApp",
       dependencies: [
         .product(name: "BookishRecord", package: "BookishRecord"),
+        .product(name: "BookishCoding", package: "BookishCoding"),
+        .product(name: "BookishImporterNu", package: "BookishImporterNu"),
         .product(name: "BookishDatastore", package: "BookishDatastore"),
         .product(name: "BookishRecordView", package: "BookishRecordView"),
       ]
     ),
     .testTarget(
       name: "DatastorePrototypeAppTests",
-      dependencies: ["DatastorePrototypeApp"]
+      dependencies: [
+        "DatastorePrototypeApp",
+        .product(name: "BookishCoding", package: "BookishCoding"),
+        .product(name: "BookishRecord", package: "BookishRecord"),
+      ]
     ),
   ]
 )

@@ -81,3 +81,11 @@ Encoded value update:
 - Updated interchange coding so `{ "®": "encoded", ... }` treats every
   non-`rvKey` key as payload, and plain untagged JSON object property values are
   rejected.
+
+Prototype import/export update:
+
+- Added prototype app actions for importing Bookish interchange JSON files,
+  importing Delicious Library XML files, and exporting the current materialised
+  records as an interchange JSON file.
+- The prototype harness applies imported records through the mutation service so
+  the mutation log and materialised projection stay in sync.

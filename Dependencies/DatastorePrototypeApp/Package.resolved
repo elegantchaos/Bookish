@@ -1,0 +1,33 @@
+{
+  "originHash" : "140f42dfd1ae06fe2079c05fb6c3e3c4caa60df7f55ada35defb8247db6120ef",
+  "pins" : [
+    {
+      "identity" : "elegantstrings",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/elegantchaos/ElegantStrings.git",
+      "state" : {
+        "revision" : "eb90abda935b43cc5dca75d35af8efda0d38cfea",
+        "version" : "1.1.1"
+      }
+    },
+    {
+      "identity" : "expressions",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/elegantchaos/Expressions.git",
+      "state" : {
+        "revision" : "3f1a4caccb9e33d95d0650e9b78350acd3576300",
+        "version" : "1.1.1"
+      }
+    },
+    {
+      "identity" : "logger",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/elegantchaos/Logger.git",
+      "state" : {
+        "revision" : "c6d619809e9a658331a70514340f4246f5f05134",
+        "version" : "1.8.2"
+      }
+    }
+  ],
+  "version" : 3
+}

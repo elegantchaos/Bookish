@@ -1,4 +1,6 @@
+import BookishCoding
 import BookishDatastore
+import BookishImporterNu
 import BookishRecord
 import Foundation
 import Observation
@@ -106,6 +108,58 @@ public final class DatastorePrototypeHarness {
     }
   }
 
+  /// Imports records from a Bookish interchange JSON file.
+  public func importInterchange(from url: URL) async {
+    await importFile(from: url) { data in
+      try BookishInterchangeCodec().decode(data).records
+    }
+  }
+
+  /// Imports records from Bookish interchange JSON data.
+  public func importInterchange(data: Data) async {
+    await importRecords {
+      try BookishInterchangeCodec().decode(data).records
+    } statusName: {
+      "interchange"
+    }
+  }
+
+  /// Imports records from a Delicious Library XML property-list file.
+  public func importDeliciousLibrary(from url: URL) async {
+    await importFile(from: url) { data in
+      try DeliciousLibraryImporter().importRecords(from: data).records
+    }
+  }
+
+  /// Imports records from Delicious Library XML property-list data.
+  public func importDeliciousLibrary(data: Data) async {
+    await importRecords {
+      try DeliciousLibraryImporter().importRecords(from: data).records
+    } statusName: {
+      "Delicious Library"
+    }
+  }
+
+  /// Exports the current materialised records as Bookish interchange JSON data.
+  public func exportInterchangeData() throws -> Data {
+    guard prototype != nil else {
+      throw DatastorePrototypeHarnessError.notLoaded
+    }
+
+    let file = BookishInterchangeFile(root: selectedRecord?.id, records: records)
+    return try BookishInterchangeCodec().encode(file)
+  }
+
+  /// Reports an arbitrary user-facing message.
+  public func report(message: String) {
+    status = message
+  }
+
+  /// Reports an arbitrary user-facing error.
+  public func report(error: Error) {
+    status = error.localizedDescription
+  }
+
   private func setStatus(_ value: String) async {
     guard let prototype, let record = selectedRecord else {
       return
@@ -117,6 +171,54 @@ public final class DatastorePrototypeHarness {
       )
       try await refresh()
       status = "Set status to \(value)"
+    } catch {
+      status = error.localizedDescription
+    }
+  }
+
+  private func importFile(
+    from url: URL,
+    parse: (Data) throws -> [BookishRecord]
+  ) async {
+    do {
+      let canAccess = url.startAccessingSecurityScopedResource()
+      defer {
+        if canAccess {
+          url.stopAccessingSecurityScopedResource()
+        }
+      }
+
+      let data = try Data(contentsOf: url)
+      let fileName = url.deletingPathExtension().lastPathComponent
+      await importRecords {
+        try parse(data)
+      } statusName: {
+        fileName.isEmpty ? "file" : fileName
+      }
+    } catch {
+      status = error.localizedDescription
+    }
+  }
+
+  private func importRecords(
+    parse: () throws -> [BookishRecord],
+    statusName: () -> String
+  ) async {
+    guard let prototype else {
+      status = DatastorePrototypeHarnessError.notLoaded.localizedDescription
+      return
+    }
+
+    do {
+      let records = try parse()
+      for record in records {
+        try await prototype.mutationService.perform(.upsertRecord(record))
+      }
+
+      try await refresh()
+      selection = records.first.map { .record($0.id) } ?? selection
+      status =
+        "Imported \(records.count) \(statusName()) \(records.count == 1 ? "record" : "records")"
     } catch {
       status = error.localizedDescription
     }
@@ -260,4 +362,15 @@ public enum PrototypeBrowserSelection: Hashable, Sendable {
 
   /// A mutation log entry selection.
   case mutation(MutationID)
+}
+
+private enum DatastorePrototypeHarnessError: LocalizedError {
+  case notLoaded
+
+  var errorDescription: String? {
+    switch self {
+    case .notLoaded:
+      "The prototype datastore is not loaded."
+    }
+  }
 }
