@@ -14,6 +14,9 @@ public protocol RecordStore: Sendable {
 
   /// Deletes a materialised record.
   func delete(id: BookishRecordID) async throws
+
+  /// Removes every materialised record.
+  func removeAll() async throws
 }
 
 /// Stores durable mutation records and applied state.
@@ -29,4 +32,7 @@ public protocol MutationStore: Sendable {
 
   /// Returns whether a mutation has already been applied.
   func isApplied(_ id: MutationID) async throws -> Bool
+
+  /// Removes every stored mutation and applied marker.
+  func removeAll() async throws
 }

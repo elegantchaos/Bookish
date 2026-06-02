@@ -89,3 +89,7 @@ Prototype import/export update:
   records as an interchange JSON file.
 - The prototype harness applies imported records through the mutation service so
   the mutation log and materialised projection stay in sync.
+- Moved the prototype import/export actions into the macOS File menu and moved
+  mutation debugging actions into a Prototype menu.
+- Added a File menu reset command that clears both mutation records and
+  materialised datastore records without reseeding sample data.

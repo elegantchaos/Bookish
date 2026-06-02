@@ -6,14 +6,12 @@ import UniformTypeIdentifiers
 
 /// The root view for the datastore prototype app.
 public struct DatastorePrototypeHarnessView: View {
-  @State private var harness = DatastorePrototypeHarness()
-  @State private var isImportingInterchange = false
-  @State private var isImportingDeliciousLibrary = false
-  @State private var isExportingInterchange = false
-  @State private var interchangeExportDocument = PrototypeInterchangeDocument()
+  @Bindable private var harness: DatastorePrototypeHarness
 
   /// Creates the prototype harness view.
-  public init() {}
+  public init(harness: DatastorePrototypeHarness = DatastorePrototypeHarness()) {
+    self.harness = harness
+  }
 
   /// The SwiftUI content for the prototype app.
   public var body: some View {
@@ -23,29 +21,24 @@ public struct DatastorePrototypeHarnessView: View {
       RecordDetailView(harness: harness)
     }
     .toolbar {
-      PrototypeToolbar(
-        harness: harness,
-        importInterchange: { isImportingInterchange = true },
-        importDeliciousLibrary: { isImportingDeliciousLibrary = true },
-        exportInterchange: prepareInterchangeExport
-      )
+      PrototypeToolbar(harness: harness)
     }
     .safeAreaInset(edge: .bottom) {
       PrototypeStatusBar(harness: harness)
     }
     .fileImporter(
-      isPresented: $isImportingInterchange,
+      isPresented: $harness.isImportingInterchange,
       allowedContentTypes: [.json],
       onCompletion: handleInterchangeImport
     )
     .fileImporter(
-      isPresented: $isImportingDeliciousLibrary,
+      isPresented: $harness.isImportingDeliciousLibrary,
       allowedContentTypes: [.xml],
       onCompletion: handleDeliciousLibraryImport
     )
     .fileExporter(
-      isPresented: $isExportingInterchange,
-      document: interchangeExportDocument,
+      isPresented: $harness.isExportingInterchange,
+      document: harness.interchangeExportDocument,
       contentType: .json,
       defaultFilename: "Bookish Interchange",
       onCompletion: handleInterchangeExport
@@ -75,29 +68,13 @@ public struct DatastorePrototypeHarnessView: View {
     }
   }
 
-  private func prepareInterchangeExport() {
-    do {
-      interchangeExportDocument = PrototypeInterchangeDocument(
-        data: try harness.exportInterchangeData())
-      isExportingInterchange = true
-    } catch {
-      Task { @MainActor in
-        harness.report(error: error)
-      }
-    }
-  }
-
   private func handleInterchangeExport(_ result: Result<URL, Error>) {
     switch result {
     case .success:
-      Task { @MainActor in
-        harness.report(message: "Exported interchange file")
-      }
+      harness.didExportInterchange()
 
     case .failure(let error):
-      Task { @MainActor in
-        harness.report(error: error)
-      }
+      harness.report(error: error)
     }
   }
 }
@@ -144,9 +121,6 @@ private struct RecordDetailView: View {
 
 private struct PrototypeToolbar: ToolbarContent {
   @Bindable var harness: DatastorePrototypeHarness
-  var importInterchange: () -> Void
-  var importDeliciousLibrary: () -> Void
-  var exportInterchange: () -> Void
 
   var body: some ToolbarContent {
     ToolbarItem {
@@ -159,82 +133,6 @@ private struct PrototypeToolbar: ToolbarContent {
       }
       .pickerStyle(.menu)
     }
-
-    ToolbarItemGroup {
-      Menu {
-        Button(action: importInterchange) {
-          Label("Interchange File", systemImage: "doc.text")
-        }
-
-        Button(action: importDeliciousLibrary) {
-          Label("Delicious Library File", systemImage: "books.vertical")
-        }
-      } label: {
-        Label("Import", systemImage: "square.and.arrow.down")
-      }
-
-      Menu {
-        Button(action: exportInterchange) {
-          Label("Interchange File", systemImage: "doc.text")
-        }
-        .disabled(harness.records.isEmpty)
-      } label: {
-        Label("Export", systemImage: "square.and.arrow.up")
-      }
-    }
-
-    ToolbarItemGroup {
-      Button(action: markReading) {
-        Label("Reading", systemImage: "book")
-      }
-      .disabled(harness.selectedRecord == nil)
-
-      Button(action: markFinished) {
-        Label("Finished", systemImage: "checkmark.circle")
-      }
-      .disabled(harness.selectedRecord == nil)
-
-      Button(action: simulateRemoteUpdate) {
-        Label("Remote", systemImage: "icloud.and.arrow.down")
-      }
-      .disabled(harness.selectedRecord == nil)
-    }
-  }
-
-  private func markReading() {
-    Task { await harness.markReading() }
-  }
-
-  private func markFinished() {
-    Task { await harness.markFinished() }
-  }
-
-  private func simulateRemoteUpdate() {
-    Task { await harness.simulateRemoteUpdate() }
-  }
-}
-
-private struct PrototypeInterchangeDocument: FileDocument {
-  static var readableContentTypes: [UTType] {
-    [.json]
-  }
-
-  static var writableContentTypes: [UTType] {
-    [.json]
-  }
-
-  var data: Data
-
-  init(data: Data = Data()) {
-    self.data = data
-  }
-
-  init(configuration: ReadConfiguration) throws {
-    self.data = configuration.file.regularFileContents ?? Data()
-  }
-
-  func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
-    FileWrapper(regularFileWithContents: data)
   }
 }
 

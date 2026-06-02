@@ -39,6 +39,12 @@ public actor JSONRecordStore: RecordStore {
     try save()
   }
 
+  /// Removes every materialised record.
+  public func removeAll() async throws {
+    recordsByID = [:]
+    try save()
+  }
+
   private func load() async throws {
     guard FileManager.default.fileExists(atPath: fileURL.path) else {
       return

@@ -53,6 +53,12 @@ public actor JSONMutationStore: MutationStore {
     state.applied.contains(id)
   }
 
+  /// Removes every stored mutation and applied marker.
+  public func removeAll() async throws {
+    state = State(mutations: [], applied: [])
+    try save()
+  }
+
   private func load() async throws {
     guard FileManager.default.fileExists(atPath: fileURL.path) else {
       return

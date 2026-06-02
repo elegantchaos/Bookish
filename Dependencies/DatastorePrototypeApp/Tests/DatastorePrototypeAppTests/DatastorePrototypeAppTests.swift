@@ -16,7 +16,7 @@ final class DatastorePrototypeAppTests: XCTestCase {
 
   @MainActor
   func testHarnessImportsInterchangeData() async throws {
-    let harness = DatastorePrototypeHarness()
+    let harness = try makeHarness()
     await harness.load()
 
     let json = """
@@ -39,7 +39,7 @@ final class DatastorePrototypeAppTests: XCTestCase {
 
   @MainActor
   func testHarnessImportsDeliciousLibraryData() async throws {
-    let harness = DatastorePrototypeHarness()
+    let harness = try makeHarness()
     await harness.load()
 
     let data = try Data(contentsOf: deliciousSampleURL())
@@ -54,7 +54,7 @@ final class DatastorePrototypeAppTests: XCTestCase {
 
   @MainActor
   func testHarnessExportsInterchangeData() async throws {
-    let harness = DatastorePrototypeHarness()
+    let harness = try makeHarness()
     await harness.load()
 
     let data = try harness.exportInterchangeData()
@@ -62,6 +62,50 @@ final class DatastorePrototypeAppTests: XCTestCase {
 
     XCTAssertFalse(file.records.isEmpty)
     XCTAssertEqual(file.root, harness.selectedRecord?.id)
+  }
+
+  @MainActor
+  func testHarnessResetRemovesImportedRecordsAndMutationHistory() async throws {
+    let harness = try makeHarness()
+    await harness.load()
+
+    let json = """
+      {
+        "records": [
+          {
+            "id": "test-reset-book",
+            "kind": "book",
+            "title": "Reset Book"
+          }
+        ]
+      }
+      """
+
+    await harness.importInterchange(data: Data(json.utf8))
+
+    XCTAssertTrue(harness.records.contains { $0.id == BookishRecordID("test-reset-book") })
+    XCTAssertFalse(harness.mutations.isEmpty)
+
+    await harness.reset()
+
+    XCTAssertTrue(harness.records.isEmpty)
+    XCTAssertFalse(harness.records.contains { $0.id == BookishRecordID("test-reset-book") })
+    XCTAssertTrue(harness.mutations.isEmpty)
+    XCTAssertEqual(harness.status, "Reset prototype datastore")
+  }
+
+  @MainActor
+  private func makeHarness() throws -> DatastorePrototypeHarness {
+    DatastorePrototypeHarness(directoryURL: try temporaryDirectory())
+  }
+
+  private func temporaryDirectory() throws -> URL {
+    let directory = URL.temporaryDirectory.appending(
+      path: "DatastorePrototypeAppTests-\(UUID().uuidString)",
+      directoryHint: .isDirectory
+    )
+    try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
+    return directory
   }
 
   private func deliciousSampleURL() -> URL {

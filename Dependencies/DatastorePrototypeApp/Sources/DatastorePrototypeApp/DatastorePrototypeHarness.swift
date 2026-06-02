@@ -27,14 +27,29 @@ public final class DatastorePrototypeHarness {
   /// The selected layout record identifier.
   public var selectedLayoutID: BookishRecordID?
 
+  /// Whether the interchange import file picker is visible.
+  public var isImportingInterchange = false
+
+  /// Whether the Delicious Library import file picker is visible.
+  public var isImportingDeliciousLibrary = false
+
+  /// Whether the interchange export file picker is visible.
+  public var isExportingInterchange = false
+
+  /// The document currently being exported.
+  public var interchangeExportDocument = PrototypeInterchangeDocument()
+
   private let bookID = BookishRecordID("prototype-book")
   private let layoutID = BookishRecordID("prototype-book-layout")
   private let compactLayoutID = BookishRecordID("prototype-book-compact-layout")
   private let authorID = BookishRecordID("prototype-author")
+  private let directoryURL: URL?
   private var prototype: DatastorePrototype?
 
   /// Creates an empty harness ready to load the prototype datastore.
-  public init() {}
+  public init(directoryURL: URL? = nil) {
+    self.directoryURL = directoryURL
+  }
 
   /// The selected record, if the current selection is a record.
   public var selectedRecord: BookishRecord? {
@@ -112,6 +127,50 @@ public final class DatastorePrototypeHarness {
   public func importInterchange(from url: URL) async {
     await importFile(from: url) { data in
       try BookishInterchangeCodec().decode(data).records
+    }
+  }
+
+  /// Requests an interchange file import.
+  public func requestInterchangeImport() {
+    isImportingInterchange = true
+  }
+
+  /// Requests a Delicious Library file import.
+  public func requestDeliciousLibraryImport() {
+    isImportingDeliciousLibrary = true
+  }
+
+  /// Requests an interchange file export.
+  public func requestInterchangeExport() {
+    do {
+      interchangeExportDocument = PrototypeInterchangeDocument(data: try exportInterchangeData())
+      isExportingInterchange = true
+    } catch {
+      report(error: error)
+    }
+  }
+
+  /// Handles successful completion of the interchange export panel.
+  public func didExportInterchange() {
+    report(message: "Exported interchange file")
+  }
+
+  /// Resets the prototype by removing every stored record and mutation.
+  public func reset() async {
+    guard let prototype else {
+      status = DatastorePrototypeHarnessError.notLoaded.localizedDescription
+      return
+    }
+
+    do {
+      try await prototype.mutationStore.removeAll()
+      try await prototype.recordStore.removeAll()
+      selection = nil
+      selectedLayoutID = nil
+      try await refresh()
+      status = "Reset prototype datastore"
+    } catch {
+      status = error.localizedDescription
     }
   }
 
@@ -305,6 +364,11 @@ public final class DatastorePrototypeHarness {
   }
 
   private func datastoreDirectory() throws -> URL {
+    if let directoryURL {
+      try FileManager.default.createDirectory(at: directoryURL, withIntermediateDirectories: true)
+      return directoryURL
+    }
+
     let applicationSupport = try FileManager.default.url(
       for: .applicationSupportDirectory,
       in: .userDomainMask,
