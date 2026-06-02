@@ -27,7 +27,7 @@ public struct BookishInterchangeSchema: Codable, Equatable, Sendable {
     idKey: String = "id",
     kindKey: String = "kind",
     defaultKind: String = "record",
-    rvKey: String = "_rvtype"
+    rvKey: String = "®"
   ) {
     self.idKey = idKey
     self.kindKey = kindKey
@@ -41,6 +41,6 @@ public struct BookishInterchangeSchema: Codable, Equatable, Sendable {
     self.idKey = try container.decodeIfPresent(String.self, forKey: .idKey) ?? "id"
     self.kindKey = try container.decodeIfPresent(String.self, forKey: .kindKey) ?? "kind"
     self.defaultKind = try container.decodeIfPresent(String.self, forKey: .defaultKind) ?? "record"
-    self.rvKey = try container.decodeIfPresent(String.self, forKey: .rvKey) ?? "_rvtype"
+    self.rvKey = try container.decodeIfPresent(String.self, forKey: .rvKey) ?? "®"
   }
 }

@@ -338,6 +338,9 @@
 			);
 			mainGroup = 226F15CE251A28EA00D6B12E;
 			packageReferences = (
+				4E1A7A922FCF0C5A00100001 /* XCLocalSwiftPackageReference "Dependencies/BookishRecord" */,
+				4E1A7A932FCF0C5A00100002 /* XCLocalSwiftPackageReference "Dependencies/BookishCoding" */,
+				4E1A7A942FCF0C5A00100003 /* XCLocalSwiftPackageReference "Dependencies/BookishImporterNu" */,
 				88EDD2347B1344B188980B6D /* XCLocalSwiftPackageReference "Dependencies/BookishDatastore" */,
 				2DCD9BCE906A48F28FFE34BA /* XCLocalSwiftPackageReference "Dependencies/BookishRecordView" */,
 				22FFE1EF2FC9D3C800020BA3 /* XCLocalSwiftPackageReference "Dependencies/BookishApp" */,
@@ -749,6 +752,18 @@
 		2DCD9BCE906A48F28FFE34BA /* XCLocalSwiftPackageReference "Dependencies/BookishRecordView" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = Dependencies/BookishRecordView;
+		};
+		4E1A7A922FCF0C5A00100001 /* XCLocalSwiftPackageReference "Dependencies/BookishRecord" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Dependencies/BookishRecord;
+		};
+		4E1A7A932FCF0C5A00100002 /* XCLocalSwiftPackageReference "Dependencies/BookishCoding" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Dependencies/BookishCoding;
+		};
+		4E1A7A942FCF0C5A00100003 /* XCLocalSwiftPackageReference "Dependencies/BookishImporterNu" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Dependencies/BookishImporterNu;
 		};
 		88EDD2347B1344B188980B6D /* XCLocalSwiftPackageReference "Dependencies/BookishDatastore" */ = {
 			isa = XCLocalSwiftPackageReference;

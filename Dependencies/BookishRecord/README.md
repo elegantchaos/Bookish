@@ -16,6 +16,18 @@ The package includes:
 - `BookishBlobReference`, a lightweight reference to immutable out-of-line blob
   data.
 
+Encoded payload properties can be read with an inferred result type:
+
+```swift
+let dimensions: Dimensions? = record.encoded("dimensions")
+```
+
+or with an explicit type when inference is not available:
+
+```swift
+let dimensions = record.encoded("dimensions", as: Dimensions.self)
+```
+
 Run the package tests from this directory with:
 
 ```sh

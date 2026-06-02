@@ -43,7 +43,7 @@ Interchange design update:
 - Documented compact `RecordValue` decoding, explicit typed value objects, and
   optional JSON-only record link shorthand such as `@person-neal-stephenson`.
 - Kept the canonical record link representation as
-  `{ "_rvtype": "record", "id": "record-id" }`, with shorthand treated only as a
+  `{ "®": "record", "id": "record-id" }`, with shorthand treated only as a
   codec-level convenience.
 
 Implementation update:
@@ -75,8 +75,9 @@ Encoded value update:
 
 - Replaced the record-value `object` case with `encoded` to avoid duplicating
   the role of `BookishRecord` as a key/value record representation.
-- Added `BookishEncodedValue` for opaque JSON payloads that can be encoded from
-  and decoded back to small Codable values.
-- Updated interchange coding so `{ "_rvtype": "encoded", ... }` treats every
+- Added `BookishEncodedValue` for opaque JSON object payloads that can be
+  encoded from and decoded back to small Codable values, without exposing a
+  public record-value object case.
+- Updated interchange coding so `{ "®": "encoded", ... }` treats every
   non-`rvKey` key as payload, and plain untagged JSON object property values are
   rejected.

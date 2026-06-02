@@ -5,6 +5,10 @@ import XCTest
 @testable import BookishCoding
 
 final class BookishCodingTests: XCTestCase {
+  func testDefaultSchemaUsesRegisteredSignRecordValueKey() {
+    XCTAssertEqual(BookishInterchangeSchema.default.rvKey, "®")
+  }
+
   func testCanonicalRoundTrip() throws {
     let file = BookishInterchangeFile(
       root: BookishRecordID("book-1"),
@@ -76,17 +80,16 @@ final class BookishCodingTests: XCTestCase {
   }
 
   func testEncodedValueUsesRemainingKeysAsPayload() throws {
+    let dimensionsPayload = try BookishEncodedValue(
+      encoding: Dimensions(width: 12, height: 20, tags: ["hardback", "shelf"])
+    )
     let file = BookishInterchangeFile(
       records: [
         BookishRecord(
           id: BookishRecordID("book-1"),
           kind: "book",
           properties: [
-            "dimensions": .encoded([
-              "height": .integer(20),
-              "tags": .list([.string("hardback"), .string("shelf")]),
-              "width": .integer(12),
-            ])
+            "dimensions": .encoded(dimensionsPayload)
           ]
         )
       ]
@@ -97,7 +100,7 @@ final class BookishCodingTests: XCTestCase {
     let records = try XCTUnwrap(object?["records"] as? [[String: Any]])
     let dimensions = try XCTUnwrap(records.first?["dimensions"] as? [String: Any])
 
-    XCTAssertEqual(dimensions["_rvtype"] as? String, "encoded")
+    XCTAssertEqual(dimensions["®"] as? String, "encoded")
     XCTAssertEqual(dimensions["width"] as? Int, 12)
     XCTAssertEqual(dimensions["height"] as? Int, 20)
 
@@ -168,7 +171,7 @@ final class BookishCodingTests: XCTestCase {
           {
             "id": "book-1",
             "kind": "book",
-            "author": { "_rvtype": "record" }
+            "author": { "®": "record" }
           }
         ]
       }
@@ -214,4 +217,10 @@ final class BookishCodingTests: XCTestCase {
       XCTAssertEqual(error as? BookishCodingError, .invalidRecordID("not valid"))
     }
   }
+}
+
+private struct Dimensions: Codable, Equatable {
+  var width: Int
+  var height: Int
+  var tags: [String]
 }

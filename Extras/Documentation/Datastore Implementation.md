@@ -157,9 +157,9 @@ The default interchange schema uses:
 - `idKey = "id"`
 - `kindKey = "kind"`
 - `defaultKind = "record"`
-- `rvKey = "_rvtype"`
+- `rvKey = "®"`
 
-Record decoding reads `id` and `kind`, then treats every remaining key as a property. Canonical record links encode as `{ "_rvtype": "record", "id": "record-id" }`. Compact JSON decoding accepts primitive JSON values where unambiguous and strict `@record-id` shorthand for links. Compact link encoding is opt-in and remains a JSON-only codec convenience.
+Record decoding reads `id` and `kind`, then treats every remaining key as a property. Canonical record links encode as `{ "®": "record", "id": "record-id" }`. Compact JSON decoding accepts primitive JSON values where unambiguous and strict `@record-id` shorthand for links. Compact link encoding is opt-in and remains a JSON-only codec convenience.
 
 `BookishImporterNu` imports Delicious Library XML into a normalised graph rather than a flat book-only output. It emits book, person, organisation, series, relationship, and root list records with deterministic IDs.
 

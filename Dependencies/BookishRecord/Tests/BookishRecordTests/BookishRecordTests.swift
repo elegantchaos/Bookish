@@ -25,25 +25,39 @@ final class BookishRecordTests: XCTestCase {
     XCTAssertEqual(record.list("authors"), [.record(authorID)])
   }
 
-  func testRecordValueSupportsNestedListsAndEncodedValues() {
+  func testRecordValueSupportsNestedListsAndEncodedValues() throws {
+    let dimensions = try BookishEncodedValue(encoding: Dimensions(width: 12, height: 20))
     let value = BookishRecordValue.list([
       .record(BookishRecordID("person-1")),
-      .encoded([
-        "height": .double(20.5),
-        "width": .integer(12),
-      ]),
+      .encoded(dimensions),
     ])
 
     XCTAssertEqual(
       value,
       .list([
         .record(BookishRecordID("person-1")),
-        .encoded([
-          "height": .double(20.5),
-          "width": .integer(12),
-        ]),
+        .encoded(dimensions),
       ])
     )
+  }
+
+  func testRecordCanReadEncodedPayloads() throws {
+    let dimensions = Dimensions(width: 12, height: 20)
+    let record = BookishRecord(
+      id: BookishRecordID("book-1"),
+      kind: "book",
+      properties: [
+        "dimensions": .encoded(try BookishEncodedValue(encoding: dimensions)),
+        "title": .string("Prototype"),
+      ]
+    )
+
+    let inferred: Dimensions? = record.encoded("dimensions")
+
+    XCTAssertEqual(inferred, dimensions)
+    XCTAssertEqual(record.encoded("dimensions", as: Dimensions.self), dimensions)
+    XCTAssertNil(record.encoded("missing", as: Dimensions.self))
+    XCTAssertNil(record.encoded("title", as: Dimensions.self))
   }
 
   func testEncodedValueCanRoundTripCodablePayload() throws {
@@ -52,6 +66,20 @@ final class BookishRecordTests: XCTestCase {
     let decoded = try encoded.decode(Dimensions.self)
 
     XCTAssertEqual(decoded, dimensions)
+  }
+
+  func testEncodedValueCodableUsesPayloadObject() throws {
+    let encoded = try BookishEncodedValue(encoding: Dimensions(width: 12, height: 20))
+    let data = try JSONEncoder().encode(encoded)
+    let object = try XCTUnwrap(JSONSerialization.jsonObject(with: data) as? [String: Any])
+
+    XCTAssertEqual(object["width"] as? Int, 12)
+    XCTAssertEqual(object["height"] as? Int, 20)
+    XCTAssertNil(object["payload"])
+
+    let decoded = try JSONDecoder().decode(BookishEncodedValue.self, from: data)
+
+    XCTAssertEqual(decoded, encoded)
   }
 
   func testRecordCodableRoundTrip() throws {

@@ -162,12 +162,12 @@ public struct BookishInterchangeCodec: Sendable {
     case .list(let values):
       return try values.map { try encodeValue($0, schema: schema) }
 
-    case .encoded(let values):
+    case .encoded(let value):
       var dictionary: [String: Any] = [
         schema.rvKey: "encoded"
       ]
-      for (key, value) in values {
-        dictionary[key] = try value.jsonObject()
+      for (key, value) in try value.jsonObject() {
+        dictionary[key] = value
       }
       return dictionary
 
@@ -308,7 +308,7 @@ public struct BookishInterchangeCodec: Sendable {
     case "encoded":
       var values = dictionary
       values.removeValue(forKey: schema.rvKey)
-      return .encoded(try values.mapValues { try BookishEncodedValue(json: $0) })
+      return .encoded(try BookishEncodedValue(jsonObject: values))
 
     default:
       throw BookishCodingError.unknownRecordValueKind(kind)

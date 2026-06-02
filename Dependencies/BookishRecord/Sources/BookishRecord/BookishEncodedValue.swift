@@ -5,51 +5,137 @@
 
 import Foundation
 
-/// A JSON value embedded as an opaque property payload.
-public indirect enum BookishEncodedValue: Codable, Equatable, Sendable {
-  /// A null value.
-  case null
+/// An opaque JSON object payload encoded from a small Codable value.
+public struct BookishEncodedValue: Codable, Equatable, Sendable {
+  private var payload: [String: JSONPayloadValue]
 
-  /// A string value.
-  case string(String)
+  /// Decodes an opaque JSON object payload.
+  public init(from decoder: Decoder) throws {
+    let container = try decoder.container(keyedBy: JSONPayloadCodingKey.self)
+    var payload: [String: JSONPayloadValue] = [:]
+    for key in container.allKeys {
+      payload[key.stringValue] = try container.decode(JSONPayloadValue.self, forKey: key)
+    }
 
-  /// A whole-number value.
-  case integer(Int)
+    self.payload = payload
+  }
 
-  /// A floating-point value.
-  case double(Double)
+  /// Encodes this value as its opaque JSON object payload.
+  public func encode(to encoder: Encoder) throws {
+    var container = encoder.container(keyedBy: JSONPayloadCodingKey.self)
+    for (key, value) in payload {
+      try container.encode(value, forKey: JSONPayloadCodingKey(stringValue: key))
+    }
+  }
 
-  /// A boolean value.
-  case bool(Bool)
-
-  /// An ordered JSON array.
-  case list([BookishEncodedValue])
-
-  /// A JSON object.
-  case object([String: BookishEncodedValue])
-}
-
-extension BookishEncodedValue {
-  /// Encodes a Codable value into a JSON payload.
+  /// Encodes a Codable value into an opaque JSON object payload.
   public init<Value: Encodable>(encoding value: Value, encoder: JSONEncoder = JSONEncoder()) throws
   {
     let data = try encoder.encode(value)
-    let json = try JSONSerialization.jsonObject(with: data, options: [.fragmentsAllowed])
-    self = try Self(json: json)
+    let json = try JSONSerialization.jsonObject(with: data)
+    guard let payload = json as? [String: Any] else {
+      throw BookishEncodedValueError.unsupportedTopLevelValue
+    }
+
+    self.payload = try payload.mapValues { try JSONPayloadValue(json: $0) }
   }
 
-  /// Decodes this JSON payload into a Codable value.
+  /// Creates an opaque payload from a JSON object.
+  public init(jsonObject: [String: Any]) throws {
+    self.payload = try jsonObject.mapValues { try JSONPayloadValue(json: $0) }
+  }
+
+  /// Decodes this opaque JSON object payload into a Codable value.
   public func decode<Value: Decodable>(
     _ type: Value.Type,
     decoder: JSONDecoder = JSONDecoder()
   ) throws -> Value {
-    let json = try jsonObject()
-    let data = try JSONSerialization.data(withJSONObject: json, options: [.fragmentsAllowed])
+    let data = try JSONSerialization.data(withJSONObject: jsonObject())
     return try decoder.decode(type, from: data)
   }
 
-  /// Creates a payload from a JSONSerialization-compatible value.
-  public init(json: Any) throws {
+  /// Returns this value as a JSONSerialization-compatible object.
+  public func jsonObject() throws -> [String: Any] {
+    try payload.mapValues { try $0.jsonObject() }
+  }
+
+  /// Returns the top-level payload keys.
+  public var keys: [String] {
+    Array(payload.keys)
+  }
+}
+
+/// Errors raised while converting encoded JSON payloads.
+public enum BookishEncodedValueError: Error, Equatable {
+  /// Encoded payloads must be top-level JSON objects.
+  case unsupportedTopLevelValue
+
+  /// A value cannot be represented as JSON.
+  case unsupportedValue(String)
+}
+
+private indirect enum JSONPayloadValue: Codable, Equatable, Sendable {
+  case null
+  case string(String)
+  case integer(Int)
+  case double(Double)
+  case bool(Bool)
+  case list([JSONPayloadValue])
+  case object([String: JSONPayloadValue])
+
+  init(from decoder: Decoder) throws {
+    let container = try decoder.singleValueContainer()
+
+    if container.decodeNil() {
+      self = .null
+    } else if let value = try? container.decode(Bool.self) {
+      self = .bool(value)
+    } else if let value = try? container.decode(Int.self) {
+      self = .integer(value)
+    } else if let value = try? container.decode(Double.self) {
+      self = .double(value)
+    } else if let value = try? container.decode(String.self) {
+      self = .string(value)
+    } else if let value = try? container.decode([JSONPayloadValue].self) {
+      self = .list(value)
+    } else if let value = try? container.decode([String: JSONPayloadValue].self) {
+      self = .object(value)
+    } else {
+      throw DecodingError.dataCorruptedError(
+        in: container,
+        debugDescription: "Unsupported JSON payload value."
+      )
+    }
+  }
+
+  func encode(to encoder: Encoder) throws {
+    var container = encoder.singleValueContainer()
+
+    switch self {
+    case .null:
+      try container.encodeNil()
+
+    case .string(let value):
+      try container.encode(value)
+
+    case .integer(let value):
+      try container.encode(value)
+
+    case .double(let value):
+      try container.encode(value)
+
+    case .bool(let value):
+      try container.encode(value)
+
+    case .list(let values):
+      try container.encode(values)
+
+    case .object(let values):
+      try container.encode(values)
+    }
+  }
+
+  init(json: Any) throws {
     switch json {
     case is NSNull:
       self = .null
@@ -83,8 +169,7 @@ extension BookishEncodedValue {
     }
   }
 
-  /// Returns a JSONSerialization-compatible value.
-  public func jsonObject() throws -> Any {
+  func jsonObject() throws -> Any {
     switch self {
     case .null:
       return NSNull()
@@ -110,8 +195,18 @@ extension BookishEncodedValue {
   }
 }
 
-/// Errors raised while converting encoded JSON payloads.
-public enum BookishEncodedValueError: Error, Equatable {
-  /// A value cannot be represented as JSON.
-  case unsupportedValue(String)
+private struct JSONPayloadCodingKey: CodingKey {
+  var stringValue: String
+
+  var intValue: Int? {
+    nil
+  }
+
+  init(stringValue: String) {
+    self.stringValue = stringValue
+  }
+
+  init?(intValue: Int) {
+    nil
+  }
 }

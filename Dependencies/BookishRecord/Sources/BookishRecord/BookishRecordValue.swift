@@ -32,7 +32,7 @@ public indirect enum BookishRecordValue: Codable, Equatable, Sendable {
   case list([BookishRecordValue])
 
   /// An opaque JSON payload encoded from a small Codable value.
-  case encoded([String: BookishEncodedValue])
+  case encoded(BookishEncodedValue)
 
   /// A record tombstone marker.
   case tombstone
@@ -102,6 +102,15 @@ extension BookishRecordValue {
   /// Returns the contained list when this value is `.list`.
   public var listValue: [BookishRecordValue]? {
     guard case .list(let value) = self else {
+      return nil
+    }
+
+    return value
+  }
+
+  /// Returns the contained encoded value when this value is `.encoded`.
+  public var encodedValue: BookishEncodedValue? {
+    guard case .encoded(let value) = self else {
       return nil
     }
 

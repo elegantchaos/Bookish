@@ -46,4 +46,9 @@ public struct BookishRecord: Codable, Equatable, Identifiable, Sendable {
   public func record(_ key: String) -> BookishRecordID? {
     properties[key]?.recordValue
   }
+
+  /// Reads an encoded Codable payload property by key.
+  public func encoded<Value: Decodable>(_ key: String, as type: Value.Type = Value.self) -> Value? {
+    try? properties[key]?.encodedValue?.decode(type)
+  }
 }

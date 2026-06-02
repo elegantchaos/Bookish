@@ -56,7 +56,7 @@ optional root record, and a list of records.
     "idKey": "id",
     "kindKey": "kind",
     "defaultKind": "record",
-    "rvKey": "_rvtype"
+    "rvKey": "®"
   },
   "root": "@book-1",
   "records": [
@@ -66,7 +66,7 @@ optional root record, and a list of records.
       "title": "Snow Crash",
       "isbn": "9780553380958",
       "authors": ["@person-neal-stephenson"],
-      "publisher": { "_rvtype": "record", "id": "org-bantam" }
+      "publisher": { "®": "record", "id": "org-bantam" }
     },
     {
       "id": "person-neal-stephenson",
@@ -100,7 +100,7 @@ Default schema:
   "idKey": "id",
   "kindKey": "kind",
   "defaultKind": "record",
-  "rvKey": "_rvtype"
+  "rvKey": "®"
 }
 ```
 
@@ -159,7 +159,7 @@ record value form:
 ```json
 {
   "dimensions": {
-    "_rvtype": "encoded",
+    "®": "encoded",
     "width": 5.5,
     "height": 8.25,
     "unit": "in"
@@ -189,7 +189,7 @@ Record links use the canonical explicit form:
 
 ```json
 {
-  "_rvtype": "record",
+  "®": "record",
   "id": "person-neal-stephenson"
 }
 ```
@@ -198,7 +198,7 @@ Blob references identify immutable out-of-line data:
 
 ```json
 {
-  "_rvtype": "blob",
+  "®": "blob",
   "id": "cover-snow-crash",
   "mediaType": "image/jpeg",
   "byteCount": 123456,
@@ -211,7 +211,7 @@ plain string:
 
 ```json
 {
-  "_rvtype": "date",
+  "®": "date",
   "value": "2026-06-02T10:00:00Z"
 }
 ```
@@ -220,13 +220,13 @@ Tombstones and deletion markers are explicit sentinel values:
 
 ```json
 {
-  "_rvtype": "tombstone"
+  "®": "tombstone"
 }
 ```
 
 ```json
 {
-  "_rvtype": "deletion"
+  "®": "deletion"
 }
 ```
 
@@ -234,7 +234,7 @@ Conflict values preserve alternatives until the application can resolve them:
 
 ```json
 {
-  "_rvtype": "conflict",
+  "®": "conflict",
   "values": ["Original Title", "Edited Title"]
 }
 ```
@@ -257,7 +257,7 @@ as the explicit object form:
 
 ```json
 {
-  "_rvtype": "record",
+  "®": "record",
   "id": "person-neal-stephenson"
 }
 ```
