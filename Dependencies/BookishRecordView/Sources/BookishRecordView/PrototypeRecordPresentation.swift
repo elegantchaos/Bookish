@@ -23,7 +23,12 @@ public struct PrototypeRecordPresentation: Equatable, Sendable {
   /// The fields visible under the active layout.
   public var fields: [PrototypeRecordField] {
     fieldKeys.map { key in
-      PrototypeRecordField(key: key, label: label(for: key), value: displayValue(for: key))
+      PrototypeRecordField(
+        key: key,
+        label: label(for: key),
+        value: displayValue(for: key),
+        rawValue: record.properties[key]
+      )
     }
   }
 
@@ -71,6 +76,22 @@ public struct PrototypeRecordField: Equatable, Identifiable, Sendable {
 
   /// The formatted property value.
   public let value: String
+
+  /// The source record value, if the field exists on the record.
+  public let rawValue: BookishRecordValue?
+
+  /// Creates a display field.
+  public init(
+    key: String,
+    label: String,
+    value: String,
+    rawValue: BookishRecordValue? = nil
+  ) {
+    self.key = key
+    self.label = label
+    self.value = value
+    self.rawValue = rawValue
+  }
 
   /// The stable identity for SwiftUI lists.
   public var id: String {

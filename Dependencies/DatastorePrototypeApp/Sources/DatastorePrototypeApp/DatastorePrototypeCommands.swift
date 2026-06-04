@@ -1,3 +1,4 @@
+import BookishRecord
 import Commands
 import CommandsUI
 import Icons
@@ -11,10 +12,16 @@ import UniformTypeIdentifiers
 /// macOS menu commands for the datastore prototype.
 public struct DatastorePrototypeCommands: Commands {
   private let harness: DatastorePrototypeHarness
+  private let navigation: DatastorePrototypeNavigationService
+
+  #if DEBUG
+    @Environment(\.openWindow) private var openWindow
+  #endif
 
   /// Creates commands bound to a prototype harness.
-  public init(harness: DatastorePrototypeHarness) {
+  public init(harness: DatastorePrototypeHarness, navigation: DatastorePrototypeNavigationService) {
     self.harness = harness
+    self.navigation = navigation
   }
 
   public var body: some Commands {
@@ -39,8 +46,29 @@ public struct DatastorePrototypeCommands: Commands {
       Divider()
 
       harness.button(SimulateRemoteMutationCommand())
+
+      Divider()
+
+      navigation.button(SelectPreviousRecordKindCommand())
+      navigation.button(SelectNextRecordKindCommand())
+      navigation.button(SelectPreviousRecordCommand())
+      navigation.button(SelectNextRecordCommand())
+
+      #if DEBUG
+        Divider()
+
+        Button("Show Mutation Debug Window") {
+          openWindow(id: DatastorePrototypeWindow.mutationDebug.rawValue)
+        }
+      #endif
     }
   }
+}
+
+/// Window identifiers used by the prototype app scenes.
+public enum DatastorePrototypeWindow: String, Sendable {
+  /// Debug-only mutation history browser.
+  case mutationDebug = "datastore-prototype-mutation-debug"
 }
 
 /// Reveals the prototype datastore folder in Finder.
@@ -184,7 +212,7 @@ public struct ExportInterchangeCommand: CommandWithUI {
   }
 
   public func availability(centre: DatastorePrototypeHarness) -> CommandAvailability {
-    centre.recordIDs.isEmpty ? .disabled : .enabled
+    centre.navigation.recordIDs.isEmpty ? .disabled : .enabled
   }
 
   public func name(centre: DatastorePrototypeHarness) -> String {
@@ -252,7 +280,7 @@ public struct MarkReadingCommand: CommandWithUI {
   }
 
   public func availability(centre: DatastorePrototypeHarness) -> CommandAvailability {
-    centre.selectedRecordID == nil ? .disabled : .enabled
+    centre.navigation.selectedRecordID == nil ? .disabled : .enabled
   }
 
   public func name(centre: DatastorePrototypeHarness) -> String {
@@ -284,7 +312,7 @@ public struct MarkFinishedCommand: CommandWithUI {
   }
 
   public func availability(centre: DatastorePrototypeHarness) -> CommandAvailability {
-    centre.selectedRecordID == nil ? .disabled : .enabled
+    centre.navigation.selectedRecordID == nil ? .disabled : .enabled
   }
 
   public func name(centre: DatastorePrototypeHarness) -> String {
@@ -315,7 +343,7 @@ public struct SimulateRemoteMutationCommand: CommandWithUI {
   }
 
   public func availability(centre: DatastorePrototypeHarness) -> CommandAvailability {
-    centre.selectedRecordID == nil ? .disabled : .enabled
+    centre.navigation.selectedRecordID == nil ? .disabled : .enabled
   }
 
   public func name(centre: DatastorePrototypeHarness) -> String {
@@ -332,5 +360,168 @@ public struct SimulateRemoteMutationCommand: CommandWithUI {
 
   public func perform(centre: DatastorePrototypeHarness) async throws {
     await centre.simulateRemoteUpdate()
+  }
+}
+
+/// Selects the next record kind in the prototype browser.
+public struct SelectNextRecordKindCommand: CommandWithUI {
+  public typealias Centre = DatastorePrototypeNavigationService
+  public typealias ResultType = Void
+
+  public let id = "datastore.navigation.next-kind"
+  public var shortcut: CommandShortcut? { .init(.rightArrow, modifiers: [.command, .option]) }
+
+  public init() {
+  }
+
+  public func availability(centre: DatastorePrototypeNavigationService) -> CommandAvailability {
+    centre.recordKinds.count > 1 ? .enabled : .disabled
+  }
+
+  public func name(centre: DatastorePrototypeNavigationService) -> String {
+    "Next Record Type"
+  }
+
+  public func icon(centre: DatastorePrototypeNavigationService) -> Icon {
+    Icon("sidebar.right")
+  }
+
+  public func help(centre: DatastorePrototypeNavigationService) -> String? {
+    "Select the next record type in the prototype browser."
+  }
+
+  public func perform(centre: DatastorePrototypeNavigationService) async throws {
+    centre.selectNextKind()
+  }
+}
+
+/// Selects the previous record kind in the prototype browser.
+public struct SelectPreviousRecordKindCommand: CommandWithUI {
+  public typealias Centre = DatastorePrototypeNavigationService
+  public typealias ResultType = Void
+
+  public let id = "datastore.navigation.previous-kind"
+  public var shortcut: CommandShortcut? { .init(.leftArrow, modifiers: [.command, .option]) }
+
+  public init() {
+  }
+
+  public func availability(centre: DatastorePrototypeNavigationService) -> CommandAvailability {
+    centre.recordKinds.count > 1 ? .enabled : .disabled
+  }
+
+  public func name(centre: DatastorePrototypeNavigationService) -> String {
+    "Previous Record Type"
+  }
+
+  public func icon(centre: DatastorePrototypeNavigationService) -> Icon {
+    Icon("sidebar.left")
+  }
+
+  public func help(centre: DatastorePrototypeNavigationService) -> String? {
+    "Select the previous record type in the prototype browser."
+  }
+
+  public func perform(centre: DatastorePrototypeNavigationService) async throws {
+    centre.selectPreviousKind()
+  }
+}
+
+/// Selects the next record in the active prototype browser index.
+public struct SelectNextRecordCommand: CommandWithUI {
+  public typealias Centre = DatastorePrototypeNavigationService
+  public typealias ResultType = Void
+
+  public let id = "datastore.navigation.next-record"
+  public var shortcut: CommandShortcut? { .init(.downArrow, modifiers: [.command, .option]) }
+
+  public init() {
+  }
+
+  public func availability(centre: DatastorePrototypeNavigationService) -> CommandAvailability {
+    centre.selectedRecordIDs.count > 1 ? .enabled : .disabled
+  }
+
+  public func name(centre: DatastorePrototypeNavigationService) -> String {
+    "Next Record"
+  }
+
+  public func icon(centre: DatastorePrototypeNavigationService) -> Icon {
+    Icon("arrow.down")
+  }
+
+  public func help(centre: DatastorePrototypeNavigationService) -> String? {
+    "Select the next record in the active prototype browser index."
+  }
+
+  public func perform(centre: DatastorePrototypeNavigationService) async throws {
+    centre.selectNextRecord()
+  }
+}
+
+/// Selects the previous record in the active prototype browser index.
+public struct SelectPreviousRecordCommand: CommandWithUI {
+  public typealias Centre = DatastorePrototypeNavigationService
+  public typealias ResultType = Void
+
+  public let id = "datastore.navigation.previous-record"
+  public var shortcut: CommandShortcut? { .init(.upArrow, modifiers: [.command, .option]) }
+
+  public init() {
+  }
+
+  public func availability(centre: DatastorePrototypeNavigationService) -> CommandAvailability {
+    centre.selectedRecordIDs.count > 1 ? .enabled : .disabled
+  }
+
+  public func name(centre: DatastorePrototypeNavigationService) -> String {
+    "Previous Record"
+  }
+
+  public func icon(centre: DatastorePrototypeNavigationService) -> Icon {
+    Icon("arrow.up")
+  }
+
+  public func help(centre: DatastorePrototypeNavigationService) -> String? {
+    "Select the previous record in the active prototype browser index."
+  }
+
+  public func perform(centre: DatastorePrototypeNavigationService) async throws {
+    centre.selectPreviousRecord()
+  }
+}
+
+/// Navigates directly to a materialised record in the prototype browser.
+public struct NavigateToRecordCommand: CommandWithUI {
+  public typealias Centre = DatastorePrototypeNavigationService
+  public typealias ResultType = Void
+
+  public let id: String
+  private let recordID: BookishRecordID
+
+  /// Creates a record navigation command for a specific target.
+  public init(recordID: BookishRecordID) {
+    self.id = "datastore.navigation.record.\(recordID.rawValue)"
+    self.recordID = recordID
+  }
+
+  public func availability(centre: DatastorePrototypeNavigationService) -> CommandAvailability {
+    centre.contains(recordID: recordID) ? .enabled : .disabled
+  }
+
+  public func name(centre: DatastorePrototypeNavigationService) -> String {
+    "Go to Record"
+  }
+
+  public func icon(centre: DatastorePrototypeNavigationService) -> Icon {
+    Icon("arrow.right.circle")
+  }
+
+  public func help(centre: DatastorePrototypeNavigationService) -> String? {
+    "Navigate to the linked record."
+  }
+
+  public func perform(centre: DatastorePrototypeNavigationService) async throws {
+    centre.select(recordID: recordID)
   }
 }

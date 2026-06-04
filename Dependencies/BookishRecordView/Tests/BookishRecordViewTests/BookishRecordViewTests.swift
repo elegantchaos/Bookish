@@ -29,6 +29,7 @@ final class BookishRecordViewTests: XCTestCase {
     XCTAssertEqual(presentation.layoutTitle, "Book Summary")
     XCTAssertEqual(presentation.fields.map(\.key), ["author", "status"])
     XCTAssertEqual(presentation.fields.map(\.value), ["Author", "Reading"])
+    XCTAssertEqual(presentation.fields.map(\.rawValue), [.string("Author"), .string("Reading")])
   }
 
   func testPresentationFallsBackToSortedRecordFieldsWithoutLayout() {
@@ -77,8 +78,23 @@ final class BookishRecordViewTests: XCTestCase {
   @MainActor
   func testRecordViewCanBeConstructedWithRecordAndLayout() {
     let view = PrototypeRecordView(
-      record: BookishRecord(kind: "book", properties: ["title": .string("Prototype")]),
-      layout: BookishRecord(kind: "layout", properties: ["fields": .list([.string("title")])])
+      record: BookishRecord(
+        kind: "book",
+        properties: [
+          "title": .string("Prototype"),
+          "author": .record(BookishRecordID("author-1")),
+        ]),
+      layout: BookishRecord(
+        kind: "layout",
+        properties: ["fields": .list([.string("title"), .string("author")])]
+      ),
+      customValueView: { field in
+        guard let id = field.rawValue?.recordValue else {
+          return nil
+        }
+
+        return AnyView(Button(id.rawValue) {})
+      }
     )
 
     XCTAssertNotNil(view.body)

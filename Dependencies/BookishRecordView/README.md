@@ -18,6 +18,9 @@ The package currently includes:
 - `PrototypeMutationView` and `PrototypeMutationCell` for browsing mutation
   details and rows.
 - Layout-driven field selection through a layout record's `fields` property.
+- Custom record-field value rendering through `PrototypeRecordView`, allowing
+  callers to supply active controls for values such as record links without
+  coupling this package to app-specific navigation services.
 - Basic display formatting for `BookishRecordValue`.
 - SwiftUI previews with sample book records and layout records.
 - Focused tests for layout interpretation, mutation formatting, and view

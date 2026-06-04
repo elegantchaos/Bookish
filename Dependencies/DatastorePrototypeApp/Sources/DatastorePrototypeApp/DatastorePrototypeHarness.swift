@@ -9,23 +9,17 @@ import Observation
 @MainActor
 @Observable
 public final class DatastorePrototypeHarness {
-  /// The identifiers of records currently available from the record service.
-  public private(set) var recordIDs: [BookishRecordID] = []
+  /// The navigation and routing service used by the prototype browser.
+  @ObservationIgnored public let navigation: DatastorePrototypeNavigationService
 
   /// The identifiers of layout records currently available from the record service.
   public private(set) var layoutIDs: [BookishRecordID] = []
 
-  /// The durable mutations currently loaded from the mutation store.
-  public private(set) var mutations: [MutationRecord] = []
-
-  /// Increments whenever the record or mutation projection is refreshed.
+  /// Increments whenever the record projection is refreshed.
   public private(set) var revision = 0
 
   /// The current user-facing status message.
   public private(set) var status = "Loading"
-
-  /// The selected browser item.
-  public var selection: PrototypeBrowserSelection?
 
   /// The selected layout record identifier.
   public var selectedLayoutID: BookishRecordID?
@@ -50,26 +44,12 @@ public final class DatastorePrototypeHarness {
   private var prototype: DatastorePrototype?
 
   /// Creates an empty harness ready to load the prototype datastore.
-  public init(directoryURL: URL? = nil) {
+  public init(
+    directoryURL: URL? = nil,
+    navigation: DatastorePrototypeNavigationService = DatastorePrototypeNavigationService()
+  ) {
     self.directoryURL = directoryURL
-  }
-
-  /// The selected record identifier, if the current selection is a record.
-  public var selectedRecordID: BookishRecordID? {
-    guard case .record(let id) = selection else {
-      return nil
-    }
-
-    return id
-  }
-
-  /// The selected mutation, if the current selection is a mutation.
-  public var selectedMutation: MutationRecord? {
-    guard case .mutation(let id) = selection else {
-      return nil
-    }
-
-    return mutation(id: id)
+    self.navigation = navigation
   }
 
   /// Loads, seeds, and refreshes the prototype datastore.
@@ -99,7 +79,7 @@ public final class DatastorePrototypeHarness {
 
   /// Simulates a remotely-arrived mutation for the selected record.
   public func simulateRemoteUpdate() async {
-    guard let prototype, let recordID = selectedRecordID else {
+    guard let prototype, let recordID = navigation.selectedRecordID else {
       return
     }
 
@@ -165,7 +145,7 @@ public final class DatastorePrototypeHarness {
     do {
       try await prototype.mutationStore.removeAll()
       try await prototype.recordStore.removeAll()
-      selection = nil
+      navigation.reset()
       selectedLayoutID = nil
       try await refresh()
       status = "Reset prototype datastore"
@@ -206,13 +186,13 @@ public final class DatastorePrototypeHarness {
     }
 
     var records: [BookishRecord] = []
-    for id in recordIDs {
+    for id in navigation.recordIDs {
       guard let record = try await prototype.recordService.record(id: id) else {
         throw DatastorePrototypeHarnessError.notLoaded
       }
       records.append(record)
     }
-    let file = BookishInterchangeFile(root: selectedRecordID, records: records)
+    let file = BookishInterchangeFile(root: navigation.selectedRecordID, records: records)
     return try BookishInterchangeCodec().encode(file)
   }
 
@@ -223,11 +203,20 @@ public final class DatastorePrototypeHarness {
 
   /// Returns the selected record by resolving it from the record service.
   public func selectedRecord() async throws -> BookishRecord? {
-    guard let selectedRecordID else {
+    guard let selectedRecordID = navigation.selectedRecordID else {
       return nil
     }
 
     return try await record(id: selectedRecordID)
+  }
+
+  /// Returns all stored mutations for the debug mutation window.
+  public func mutations() async throws -> [MutationRecord] {
+    guard let prototype else {
+      throw DatastorePrototypeHarnessError.notLoaded
+    }
+
+    return try await prototype.mutationStore.mutations()
   }
 
   /// Returns the selected layout by resolving it from the record service.
@@ -255,7 +244,7 @@ public final class DatastorePrototypeHarness {
   }
 
   private func setStatus(_ value: String) async {
-    guard let prototype, let recordID = selectedRecordID else {
+    guard let prototype, let recordID = navigation.selectedRecordID else {
       return
     }
 
@@ -312,7 +301,10 @@ public final class DatastorePrototypeHarness {
       }
 
       try await refresh()
-      selection = records.first.map { .record($0.id) } ?? selection
+      if let firstRecord = records.first {
+        navigation.select(kind: firstRecord.kind)
+        navigation.select(recordID: firstRecord.id)
+      }
       status =
         "Imported \(records.count) \(statusName()) \(records.count == 1 ? "record" : "records")"
     } catch {
@@ -325,11 +317,11 @@ public final class DatastorePrototypeHarness {
       return
     }
 
-    recordIDs = try await prototype.recordService.recordIDs()
+    let records = try await prototype.recordService.records()
+    navigation.update(records: records)
     layoutIDs = try await prototype.recordService.recordIDs(matching: .kind("layout"))
-    mutations = try await prototype.mutationStore.mutations()
     revision += 1
-    try await updateSelection(using: prototype)
+    try await updateLayoutSelection(using: prototype)
   }
 
   private func seedIfNeeded(using prototype: DatastorePrototype) async throws {
@@ -419,26 +411,7 @@ public final class DatastorePrototypeHarness {
     return directory
   }
 
-  private func mutation(id: MutationID?) -> MutationRecord? {
-    guard let id else {
-      return nil
-    }
-
-    return mutations.first { $0.id == id }
-  }
-
-  private func updateSelection(using prototype: DatastorePrototype) async throws {
-    switch selection {
-    case .record(let id) where try await prototype.recordService.record(id: id) != nil:
-      break
-
-    case .mutation(let id) where mutation(id: id) != nil:
-      break
-
-    default:
-      selection = recordIDs.first.map { .record($0) } ?? mutations.first.map { .mutation($0.id) }
-    }
-
+  private func updateLayoutSelection(using prototype: DatastorePrototype) async throws {
     if selectedLayoutID == nil, try await prototype.recordService.record(id: layoutID) != nil {
       selectedLayoutID = layoutID
     }
@@ -449,15 +422,6 @@ public final class DatastorePrototypeHarness {
 
     selectedLayoutID = layoutIDs.first
   }
-}
-
-/// Identifies the selected item in the prototype datastore browser.
-public enum PrototypeBrowserSelection: Hashable, Sendable {
-  /// A materialised record selection.
-  case record(BookishRecordID)
-
-  /// A mutation log entry selection.
-  case mutation(MutationID)
 }
 
 private enum DatastorePrototypeHarnessError: LocalizedError {

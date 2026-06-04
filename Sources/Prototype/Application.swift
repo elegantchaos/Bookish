@@ -16,7 +16,13 @@ struct DatastorePrototypeApplication: App {
       engine.rootContent()
     }
     .commands {
-      DatastorePrototypeCommands(harness: engine.harness)
+      DatastorePrototypeCommands(harness: engine.harness, navigation: engine.navigation)
     }
+
+    #if DEBUG
+      WindowGroup("Mutation Debug", id: DatastorePrototypeWindow.mutationDebug.rawValue) {
+        DatastorePrototypeMutationDebugView(harness: engine.harness)
+      }
+    #endif
   }
 }

@@ -4,15 +4,25 @@ import SwiftUI
 /// Displays a record using a simple layout record.
 public struct PrototypeRecordView: View {
   private let presentation: PrototypeRecordPresentation
+  private let customValueView: @MainActor (PrototypeRecordField) -> AnyView?
 
   /// Creates a record view from a data record and a layout record.
-  public init(record: BookishRecord, layout: BookishRecord) {
-    self.init(record: record, layout: Optional(layout))
+  public init(
+    record: BookishRecord,
+    layout: BookishRecord,
+    customValueView: @escaping @MainActor (PrototypeRecordField) -> AnyView? = { _ in nil }
+  ) {
+    self.init(record: record, layout: Optional(layout), customValueView: customValueView)
   }
 
   /// Creates a record view from a data record and an optional layout record.
-  public init(record: BookishRecord, layout: BookishRecord?) {
+  public init(
+    record: BookishRecord,
+    layout: BookishRecord?,
+    customValueView: @escaping @MainActor (PrototypeRecordField) -> AnyView? = { _ in nil }
+  ) {
     self.presentation = PrototypeRecordPresentation(record: record, layout: layout)
+    self.customValueView = customValueView
   }
 
   /// The SwiftUI content for the record detail view.
@@ -21,8 +31,12 @@ public struct PrototypeRecordView: View {
       Section {
         ForEach(presentation.fields) { field in
           LabeledContent(field.label) {
-            Text(field.value)
-              .textSelection(.enabled)
+            if let customView = customValueView(field) {
+              customView
+            } else {
+              Text(field.value)
+                .textSelection(.enabled)
+            }
           }
         }
       } header: {

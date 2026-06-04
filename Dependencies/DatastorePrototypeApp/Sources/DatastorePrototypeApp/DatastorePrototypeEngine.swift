@@ -23,10 +23,24 @@ public final class DatastorePrototypeEngine {
   /// Datastore coordinator used by the prototype UI and commands.
   @ObservationIgnored public let harness: DatastorePrototypeHarness
 
-  /// Creates an engine around the supplied harness.
-  public init(harness: DatastorePrototypeHarness = DatastorePrototypeHarness()) {
+  /// Navigation and routing service for the prototype record browser.
+  @ObservationIgnored public let navigation: DatastorePrototypeNavigationService
+
+  /// Creates an engine with a new harness using the supplied navigation service.
+  public init(
+    navigation: DatastorePrototypeNavigationService = DatastorePrototypeNavigationService()
+  ) {
     state = .uninitialised
     startupTask = nil
+    self.navigation = navigation
+    self.harness = DatastorePrototypeHarness(navigation: navigation)
+  }
+
+  /// Creates an engine around an existing harness and its injected navigation service.
+  public init(harness: DatastorePrototypeHarness) {
+    state = .uninitialised
+    startupTask = nil
+    self.navigation = harness.navigation
     self.harness = harness
   }
 
@@ -65,21 +79,25 @@ extension DatastorePrototypeEngine: AppEngine {
     false
   }
 
-  /// No environment injection is needed before startup completes.
+  /// Injects services that are available before startup completes.
   public var startupInjector: some ViewModifier {
-    DatastorePrototypeEnvironmentInjector()
+    DatastorePrototypeEnvironmentInjector(navigation: navigation)
   }
 
-  /// No environment injection is needed after startup completes.
+  /// Injects running services into prototype content.
   public var runningInjector: some ViewModifier {
-    DatastorePrototypeEnvironmentInjector()
+    DatastorePrototypeEnvironmentInjector(navigation: navigation)
   }
 }
 
 /// Identity environment injector used to satisfy `AppEngine`'s shell contract.
 private struct DatastorePrototypeEnvironmentInjector: ViewModifier {
-  /// Leaves prototype content unchanged.
+  /// Navigation service to expose to prototype SwiftUI content.
+  let navigation: DatastorePrototypeNavigationService
+
+  /// Injects prototype services into SwiftUI content.
   func body(content: Content) -> some View {
     content
+      .environment(navigation)
   }
 }

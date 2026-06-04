@@ -8,6 +8,7 @@ import UniformTypeIdentifiers
 /// The root view for the datastore prototype app.
 public struct DatastorePrototypeHarnessView: View {
   @Bindable private var harness: DatastorePrototypeHarness
+  @Environment(DatastorePrototypeNavigationService.self) private var navigation
   private let loadsOnAppear: Bool
 
   /// Creates the prototype harness view.
@@ -21,9 +22,11 @@ public struct DatastorePrototypeHarnessView: View {
   /// The SwiftUI content for the prototype app.
   public var body: some View {
     NavigationSplitView {
-      RecordIndexView(harness: harness)
+      RecordKindListView(navigation: navigation)
+    } content: {
+      RecordIndexView(harness: harness, navigation: navigation)
     } detail: {
-      RecordDetailView(harness: harness)
+      RecordDetailView(harness: harness, navigation: navigation)
     }
     .toolbar {
       PrototypeToolbar(harness: harness)
@@ -87,38 +90,59 @@ public struct DatastorePrototypeHarnessView: View {
   }
 }
 
-private struct RecordIndexView: View {
-  @Bindable var harness: DatastorePrototypeHarness
+private struct RecordKindListView: View {
+  let navigation: DatastorePrototypeNavigationService
 
   var body: some View {
-    List(selection: $harness.selection) {
-      Section("Records") {
-        ForEach(harness.recordIDs, id: \.self) { id in
-          PrototypeRecordIDCell(recordID: id, harness: harness)
-            .tag(PrototypeBrowserSelection.record(id))
-        }
-      }
-
-      Section("Mutations") {
-        ForEach(harness.mutations) { mutation in
-          PrototypeMutationCell(mutation: mutation)
-            .tag(PrototypeBrowserSelection.mutation(mutation.id))
-        }
+    List(selection: selectedKind) {
+      ForEach(navigation.recordKinds, id: \.self) { kind in
+        Text(kind.capitalized)
+          .tag(Optional(kind))
       }
     }
-    .navigationTitle("Datastore")
+    .navigationTitle("Records")
+  }
+
+  private var selectedKind: Binding<String?> {
+    Binding {
+      navigation.selectedRecordKind
+    } set: { kind in
+      navigation.select(kind: kind)
+    }
+  }
+}
+
+private struct RecordIndexView: View {
+  let harness: DatastorePrototypeHarness
+  let navigation: DatastorePrototypeNavigationService
+
+  var body: some View {
+    List(selection: selectedRecordID) {
+      ForEach(navigation.selectedRecordIDs, id: \.self) { id in
+        PrototypeRecordIDCell(recordID: id, harness: harness)
+          .tag(Optional(id))
+      }
+    }
+    .navigationTitle(navigation.selectedRecordKind?.capitalized ?? "Index")
+  }
+
+  private var selectedRecordID: Binding<BookishRecordID?> {
+    Binding {
+      navigation.selectedRecordID
+    } set: { recordID in
+      navigation.select(recordID: recordID)
+    }
   }
 }
 
 private struct RecordDetailView: View {
-  @Bindable var harness: DatastorePrototypeHarness
+  let harness: DatastorePrototypeHarness
+  let navigation: DatastorePrototypeNavigationService
 
   var body: some View {
     Group {
-      if let recordID = harness.selectedRecordID {
-        PrototypeRecordIDDetail(recordID: recordID, harness: harness)
-      } else if let mutation = harness.selectedMutation {
-        PrototypeMutationView(mutation: mutation)
+      if let recordID = navigation.selectedRecordID {
+        PrototypeRecordIDDetail(recordID: recordID, harness: harness, navigation: navigation)
       } else {
         ContentUnavailableView(
           "No Selection", systemImage: "list.bullet.rectangle", description: Text(harness.status))
@@ -164,6 +188,7 @@ private struct PrototypeRecordIDCell: View {
 private struct PrototypeRecordIDDetail: View {
   let recordID: BookishRecordID
   let harness: DatastorePrototypeHarness
+  let navigation: DatastorePrototypeNavigationService
 
   @State private var record: BookishRecord?
   @State private var layout: BookishRecord?
@@ -171,7 +196,13 @@ private struct PrototypeRecordIDDetail: View {
   var body: some View {
     Group {
       if let record {
-        PrototypeRecordView(record: record, layout: layout)
+        PrototypeRecordView(record: record, layout: layout) { field in
+          guard let recordID = field.rawValue?.recordValue else {
+            return nil
+          }
+
+          return AnyView(RecordLinkButton(recordID: recordID, navigation: navigation))
+        }
       } else {
         ContentUnavailableView("Loading", systemImage: "book", description: Text(recordID.rawValue))
       }
@@ -260,8 +291,7 @@ private struct PrototypeStatusBar: View {
     HStack {
       Text(harness.status)
       Spacer()
-      Text("\(harness.recordIDs.count) records")
-      Text("\(harness.mutations.count) mutations")
+      Text("\(harness.navigation.recordIDs.count) records")
     }
     .font(.caption)
     .foregroundStyle(.secondary)
@@ -270,6 +300,76 @@ private struct PrototypeStatusBar: View {
   }
 }
 
+private struct RecordLinkButton: View {
+  let recordID: BookishRecordID
+  let navigation: DatastorePrototypeNavigationService
+
+  var body: some View {
+    Button(recordID.rawValue) {
+      navigation.performWithoutWaiting(NavigateToRecordCommand(recordID: recordID))
+    }
+    .buttonStyle(.link)
+  }
+}
+
+#if DEBUG
+  /// Debug-only mutation history browser kept outside the main record UI.
+  public struct DatastorePrototypeMutationDebugView: View {
+    private let harness: DatastorePrototypeHarness
+    @State private var mutations: [MutationRecord] = []
+    @State private var selectedMutationID: MutationID?
+
+    /// Creates the mutation debug window content.
+    public init(harness: DatastorePrototypeHarness) {
+      self.harness = harness
+    }
+
+    /// The SwiftUI content for the mutation debug window.
+    public var body: some View {
+      NavigationSplitView {
+        List(selection: $selectedMutationID) {
+          ForEach(mutations) { mutation in
+            PrototypeMutationCell(mutation: mutation)
+              .tag(Optional(mutation.id))
+          }
+        }
+        .navigationTitle("Mutations")
+      } detail: {
+        if let mutation = selectedMutation {
+          PrototypeMutationView(mutation: mutation)
+        } else {
+          ContentUnavailableView(
+            "No Mutation", systemImage: "list.bullet.rectangle", description: Text(harness.status))
+        }
+      }
+      .task(id: harness.revision) {
+        await load()
+      }
+    }
+
+    private var selectedMutation: MutationRecord? {
+      guard let selectedMutationID else {
+        return nil
+      }
+
+      return mutations.first { $0.id == selectedMutationID }
+    }
+
+    private func load() async {
+      do {
+        mutations = try await harness.mutations()
+        if selectedMutation == nil {
+          selectedMutationID = mutations.first?.id
+        }
+      } catch {
+        harness.report(error: error)
+      }
+    }
+  }
+#endif
+
 #Preview {
-  DatastorePrototypeHarnessView()
+  let navigation = DatastorePrototypeNavigationService()
+  DatastorePrototypeHarnessView(harness: DatastorePrototypeHarness(navigation: navigation))
+    .environment(navigation)
 }

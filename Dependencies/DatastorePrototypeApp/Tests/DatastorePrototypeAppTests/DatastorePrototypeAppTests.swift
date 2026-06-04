@@ -11,8 +11,7 @@ final class DatastorePrototypeAppTests: XCTestCase {
     let harness = DatastorePrototypeHarness()
 
     XCTAssertEqual(harness.status, "Loading")
-    XCTAssertTrue(harness.recordIDs.isEmpty)
-    XCTAssertTrue(harness.mutations.isEmpty)
+    XCTAssertTrue(harness.navigation.recordIDs.isEmpty)
   }
 
   @MainActor
@@ -22,6 +21,77 @@ final class DatastorePrototypeAppTests: XCTestCase {
     XCTAssertEqual(harness.availability(MarkReadingCommand()), .disabled)
     XCTAssertEqual(harness.availability(MarkFinishedCommand()), .disabled)
     XCTAssertEqual(harness.availability(SimulateRemoteMutationCommand()), .disabled)
+  }
+
+  @MainActor
+  func testNavigationCommandsAreDisabledWithoutRecords() {
+    let navigation = DatastorePrototypeNavigationService()
+
+    XCTAssertEqual(navigation.availability(SelectNextRecordKindCommand()), .disabled)
+    XCTAssertEqual(navigation.availability(SelectPreviousRecordKindCommand()), .disabled)
+    XCTAssertEqual(navigation.availability(SelectNextRecordCommand()), .disabled)
+    XCTAssertEqual(navigation.availability(SelectPreviousRecordCommand()), .disabled)
+  }
+
+  @MainActor
+  func testNavigationServiceDefaultsToFirstKindAndRecord() {
+    let navigation = DatastorePrototypeNavigationService()
+
+    navigation.update(
+      records: [
+        BookishRecord(id: BookishRecordID("book-1"), kind: "book"),
+        BookishRecord(id: BookishRecordID("author-1"), kind: "author"),
+        BookishRecord(id: BookishRecordID("book-2"), kind: "book"),
+      ])
+
+    XCTAssertEqual(navigation.recordKinds, ["author", "book"])
+    XCTAssertEqual(navigation.selectedRecordKind, "author")
+    XCTAssertEqual(navigation.selectedRecordID, BookishRecordID("author-1"))
+    XCTAssertEqual(navigation.selectedRecordIDs, [BookishRecordID("author-1")])
+  }
+
+  @MainActor
+  func testNavigationCommandsMoveBetweenKindsAndRecords() async throws {
+    let navigation = DatastorePrototypeNavigationService()
+    navigation.update(
+      records: [
+        BookishRecord(id: BookishRecordID("author-1"), kind: "author"),
+        BookishRecord(id: BookishRecordID("book-1"), kind: "book"),
+        BookishRecord(id: BookishRecordID("book-2"), kind: "book"),
+      ])
+
+    try await navigation.perform(SelectNextRecordKindCommand())
+
+    XCTAssertEqual(navigation.selectedRecordKind, "book")
+    XCTAssertEqual(navigation.selectedRecordID, BookishRecordID("book-1"))
+
+    try await navigation.perform(SelectNextRecordCommand())
+
+    XCTAssertEqual(navigation.selectedRecordID, BookishRecordID("book-2"))
+
+    try await navigation.perform(SelectPreviousRecordCommand())
+
+    XCTAssertEqual(navigation.selectedRecordID, BookishRecordID("book-1"))
+
+    try await navigation.perform(SelectPreviousRecordKindCommand())
+
+    XCTAssertEqual(navigation.selectedRecordKind, "author")
+    XCTAssertEqual(navigation.selectedRecordID, BookishRecordID("author-1"))
+  }
+
+  @MainActor
+  func testNavigateToRecordCommandSelectsTargetKindAndRecord() async throws {
+    let navigation = DatastorePrototypeNavigationService()
+    navigation.update(
+      records: [
+        BookishRecord(id: BookishRecordID("book-1"), kind: "book"),
+        BookishRecord(id: BookishRecordID("author-1"), kind: "author"),
+      ])
+
+    try await navigation.perform(NavigateToRecordCommand(recordID: BookishRecordID("book-1")))
+
+    XCTAssertEqual(navigation.selectedRecordKind, "book")
+    XCTAssertEqual(navigation.selectedRecordID, BookishRecordID("book-1"))
   }
 
   @MainActor
@@ -66,6 +136,16 @@ final class DatastorePrototypeAppTests: XCTestCase {
   }
 
   @MainActor
+  func testEngineInjectsHarnessNavigationService() {
+    let navigation = DatastorePrototypeNavigationService()
+    let harness = DatastorePrototypeHarness(navigation: navigation)
+    let engine = DatastorePrototypeEngine(harness: harness)
+
+    XCTAssertTrue(engine.navigation === navigation)
+    XCTAssertTrue(engine.harness.navigation === navigation)
+  }
+
+  @MainActor
   func testHarnessImportsInterchangeData() async throws {
     let harness = try makeHarness()
     await harness.load()
@@ -87,7 +167,7 @@ final class DatastorePrototypeAppTests: XCTestCase {
     let importedID = BookishRecordID("test-import-book")
     let importedTitle = try await harness.record(id: importedID)?.string("title")
 
-    XCTAssertTrue(harness.recordIDs.contains(importedID))
+    XCTAssertTrue(harness.navigation.recordIDs.contains(importedID))
     XCTAssertEqual(importedTitle, "Imported Book")
     XCTAssertEqual(harness.status, "Imported 1 interchange record")
   }
@@ -118,7 +198,7 @@ final class DatastorePrototypeAppTests: XCTestCase {
     let file = try BookishInterchangeCodec().decode(data)
 
     XCTAssertFalse(file.records.isEmpty)
-    XCTAssertEqual(file.root, harness.selectedRecordID)
+    XCTAssertEqual(file.root, harness.navigation.selectedRecordID)
   }
 
   @MainActor
@@ -140,14 +220,16 @@ final class DatastorePrototypeAppTests: XCTestCase {
 
     await harness.importInterchange(data: Data(json.utf8))
 
-    XCTAssertTrue(harness.recordIDs.contains(BookishRecordID("test-reset-book")))
-    XCTAssertFalse(harness.mutations.isEmpty)
+    XCTAssertTrue(harness.navigation.recordIDs.contains(BookishRecordID("test-reset-book")))
+    let mutationsBeforeReset = try await harness.mutations()
+    XCTAssertFalse(mutationsBeforeReset.isEmpty)
 
     await harness.reset()
 
-    XCTAssertTrue(harness.recordIDs.isEmpty)
-    XCTAssertFalse(harness.recordIDs.contains(BookishRecordID("test-reset-book")))
-    XCTAssertTrue(harness.mutations.isEmpty)
+    XCTAssertTrue(harness.navigation.recordIDs.isEmpty)
+    XCTAssertFalse(harness.navigation.recordIDs.contains(BookishRecordID("test-reset-book")))
+    let mutationsAfterReset = try await harness.mutations()
+    XCTAssertTrue(mutationsAfterReset.isEmpty)
     XCTAssertEqual(harness.status, "Reset prototype datastore")
   }
 
@@ -170,12 +252,13 @@ final class DatastorePrototypeAppTests: XCTestCase {
 
     await harness.importInterchange(data: Data(json.utf8))
 
-    XCTAssertFalse(harness.recordIDs.isEmpty)
+    XCTAssertFalse(harness.navigation.recordIDs.isEmpty)
 
     try await harness.perform(ResetPrototypeCommand())
 
-    XCTAssertTrue(harness.recordIDs.isEmpty)
-    XCTAssertTrue(harness.mutations.isEmpty)
+    XCTAssertTrue(harness.navigation.recordIDs.isEmpty)
+    let mutations = try await harness.mutations()
+    XCTAssertTrue(mutations.isEmpty)
     XCTAssertEqual(harness.status, "Reset prototype datastore")
   }
 
@@ -187,7 +270,7 @@ final class DatastorePrototypeAppTests: XCTestCase {
   @MainActor
   private func records(for harness: DatastorePrototypeHarness) async throws -> [BookishRecord] {
     var records: [BookishRecord] = []
-    for id in harness.recordIDs {
+    for id in harness.navigation.recordIDs {
       if let record = try await harness.record(id: id) {
         records.append(record)
       }
