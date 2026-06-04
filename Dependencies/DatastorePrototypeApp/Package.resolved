@@ -18,6 +18,24 @@
         "revision" : "3f1a4caccb9e33d95d0650e9b78350acd3576300",
         "version" : "1.1.1"
       }
+    },
+    {
+      "identity" : "icons",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/elegantchaos/Icons.git",
+      "state" : {
+        "revision" : "068efb572003fca636c99fcb9c8e2dd3bf813272",
+        "version" : "1.0.1"
+      }
+    },
+    {
+      "identity" : "logger",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/elegantchaos/Logger.git",
+      "state" : {
+        "revision" : "c1d6df4eaf73f88e18ee23da02224069b17ab313",
+        "version" : "2.0.4"
+      }
     }
   ],
   "version" : 3
