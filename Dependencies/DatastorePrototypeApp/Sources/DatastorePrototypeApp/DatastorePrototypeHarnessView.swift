@@ -93,9 +93,9 @@ private struct RecordIndexView: View {
   var body: some View {
     List(selection: $harness.selection) {
       Section("Records") {
-        ForEach(harness.records) { record in
-          PrototypeRecordCell(record: record, layout: harness.selectedLayout)
-            .tag(PrototypeBrowserSelection.record(record.id))
+        ForEach(harness.recordIDs, id: \.self) { id in
+          PrototypeRecordIDCell(recordID: id, harness: harness)
+            .tag(PrototypeBrowserSelection.record(id))
         }
       }
 
@@ -115,14 +115,82 @@ private struct RecordDetailView: View {
 
   var body: some View {
     Group {
-      if let record = harness.selectedRecord {
-        PrototypeRecordView(record: record, layout: harness.selectedLayout)
+      if let recordID = harness.selectedRecordID {
+        PrototypeRecordIDDetail(recordID: recordID, harness: harness)
       } else if let mutation = harness.selectedMutation {
         PrototypeMutationView(mutation: mutation)
       } else {
         ContentUnavailableView(
           "No Selection", systemImage: "list.bullet.rectangle", description: Text(harness.status))
       }
+    }
+  }
+}
+
+private struct PrototypeRecordIDCell: View {
+  let recordID: BookishRecordID
+  let harness: DatastorePrototypeHarness
+
+  @State private var record: BookishRecord?
+  @State private var layout: BookishRecord?
+
+  var body: some View {
+    Group {
+      if let record {
+        PrototypeRecordCell(record: record, layout: layout)
+      } else {
+        Text(recordID.rawValue)
+      }
+    }
+    .task(id: taskID) {
+      await load()
+    }
+  }
+
+  private var taskID: String {
+    "\(recordID.rawValue)-\(harness.selectedLayoutID?.rawValue ?? "")-\(harness.revision)"
+  }
+
+  private func load() async {
+    do {
+      record = try await harness.record(id: recordID)
+      layout = try await harness.selectedLayout()
+    } catch {
+      harness.report(error: error)
+    }
+  }
+}
+
+private struct PrototypeRecordIDDetail: View {
+  let recordID: BookishRecordID
+  let harness: DatastorePrototypeHarness
+
+  @State private var record: BookishRecord?
+  @State private var layout: BookishRecord?
+
+  var body: some View {
+    Group {
+      if let record {
+        PrototypeRecordView(record: record, layout: layout)
+      } else {
+        ContentUnavailableView("Loading", systemImage: "book", description: Text(recordID.rawValue))
+      }
+    }
+    .task(id: taskID) {
+      await load()
+    }
+  }
+
+  private var taskID: String {
+    "\(recordID.rawValue)-\(harness.selectedLayoutID?.rawValue ?? "")-\(harness.revision)"
+  }
+
+  private func load() async {
+    do {
+      record = try await harness.record(id: recordID)
+      layout = try await harness.selectedLayout()
+    } catch {
+      harness.report(error: error)
     }
   }
 }
@@ -149,12 +217,38 @@ private struct PrototypeToolbar: ToolbarContent {
       @Bindable var harness = harness
       Picker("Layout", selection: $harness.selectedLayoutID) {
         Text("Default").tag(Optional<BookishRecordID>.none)
-        ForEach(harness.layouts) { layout in
-          Text(layout.string("title") ?? layout.id.rawValue)
-            .tag(Optional(layout.id))
+        ForEach(harness.layoutIDs, id: \.self) { id in
+          PrototypeLayoutPickerItem(layoutID: id, harness: harness)
         }
       }
       .pickerStyle(.menu)
+    }
+  }
+}
+
+private struct PrototypeLayoutPickerItem: View {
+  let layoutID: BookishRecordID
+  let harness: DatastorePrototypeHarness
+
+  @State private var title: String?
+
+  var body: some View {
+    Text(title ?? layoutID.rawValue)
+      .tag(Optional(layoutID))
+      .task(id: taskID) {
+        await load()
+      }
+  }
+
+  private var taskID: String {
+    "\(layoutID.rawValue)-\(harness.revision)"
+  }
+
+  private func load() async {
+    do {
+      title = try await harness.record(id: layoutID)?.string("title")
+    } catch {
+      harness.report(error: error)
     }
   }
 }
@@ -166,7 +260,7 @@ private struct PrototypeStatusBar: View {
     HStack {
       Text(harness.status)
       Spacer()
-      Text("\(harness.records.count) records")
+      Text("\(harness.recordIDs.count) records")
       Text("\(harness.mutations.count) mutations")
     }
     .font(.caption)

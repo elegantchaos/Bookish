@@ -9,6 +9,9 @@ public protocol RecordStore: Sendable {
   /// Returns all records in stable identifier order.
   func records() async throws -> [BookishRecord]
 
+  /// Returns identifiers for records matching a predicate in stable identifier order.
+  func recordIDs(matching predicate: RecordPredicate) async throws -> [BookishRecordID]
+
   /// Writes a materialised record.
   func upsert(_ record: BookishRecord) async throws
 

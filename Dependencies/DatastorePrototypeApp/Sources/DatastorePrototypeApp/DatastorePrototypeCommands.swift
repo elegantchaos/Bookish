@@ -4,6 +4,10 @@ import Icons
 import SwiftUI
 import UniformTypeIdentifiers
 
+#if canImport(AppKit)
+  import AppKit
+#endif
+
 /// macOS menu commands for the datastore prototype.
 public struct DatastorePrototypeCommands: Commands {
   private let harness: DatastorePrototypeHarness
@@ -21,10 +25,11 @@ public struct DatastorePrototypeCommands: Commands {
       Divider()
 
       harness.button(ExportInterchangeCommand())
+      harness.button(RevealDatastoreFolderCommand())
 
       Divider()
 
-      harness.confirmableButton(ResetPrototypeCommand(), role: .destructive)
+      harness.button(ResetPrototypeCommand(), role: .destructive)
     }
 
     CommandMenu("Prototype") {
@@ -35,6 +40,47 @@ public struct DatastorePrototypeCommands: Commands {
 
       harness.button(SimulateRemoteMutationCommand())
     }
+  }
+}
+
+/// Reveals the prototype datastore folder in Finder.
+public struct RevealDatastoreFolderCommand: CommandWithUI {
+  public typealias Centre = DatastorePrototypeHarness
+  public typealias ResultType = Void
+
+  public let id = "datastore.reveal-folder"
+
+  public init() {
+  }
+
+  public func availability(centre: DatastorePrototypeHarness) -> CommandAvailability {
+    #if canImport(AppKit)
+      .enabled
+    #else
+      .disabled
+    #endif
+  }
+
+  public func name(centre: DatastorePrototypeHarness) -> String {
+    "Reveal Datastore Folder"
+  }
+
+  public func icon(centre: DatastorePrototypeHarness) -> Icon {
+    Icon("folder")
+  }
+
+  public func help(centre: DatastorePrototypeHarness) -> String? {
+    "Reveal the local prototype datastore folder in Finder."
+  }
+
+  public func perform(centre: DatastorePrototypeHarness) async throws {
+    #if canImport(AppKit)
+      let url = try centre.localDatastoreDirectory()
+      NSWorkspace.shared.activateFileViewerSelecting([url])
+      centre.report(message: "Revealed datastore folder")
+    #else
+      centre.report(message: "Reveal datastore folder is unavailable on this platform")
+    #endif
   }
 }
 
@@ -138,7 +184,7 @@ public struct ExportInterchangeCommand: CommandWithUI {
   }
 
   public func availability(centre: DatastorePrototypeHarness) -> CommandAvailability {
-    centre.records.isEmpty ? .disabled : .enabled
+    centre.recordIDs.isEmpty ? .disabled : .enabled
   }
 
   public func name(centre: DatastorePrototypeHarness) -> String {
@@ -154,7 +200,7 @@ public struct ExportInterchangeCommand: CommandWithUI {
   }
 
   public func perform(centre: DatastorePrototypeHarness) async throws {
-    centre.requestInterchangeExport()
+    await centre.requestInterchangeExport()
   }
 }
 
@@ -206,7 +252,7 @@ public struct MarkReadingCommand: CommandWithUI {
   }
 
   public func availability(centre: DatastorePrototypeHarness) -> CommandAvailability {
-    centre.selectedRecord == nil ? .disabled : .enabled
+    centre.selectedRecordID == nil ? .disabled : .enabled
   }
 
   public func name(centre: DatastorePrototypeHarness) -> String {
@@ -238,7 +284,7 @@ public struct MarkFinishedCommand: CommandWithUI {
   }
 
   public func availability(centre: DatastorePrototypeHarness) -> CommandAvailability {
-    centre.selectedRecord == nil ? .disabled : .enabled
+    centre.selectedRecordID == nil ? .disabled : .enabled
   }
 
   public func name(centre: DatastorePrototypeHarness) -> String {
@@ -269,7 +315,7 @@ public struct SimulateRemoteMutationCommand: CommandWithUI {
   }
 
   public func availability(centre: DatastorePrototypeHarness) -> CommandAvailability {
-    centre.selectedRecord == nil ? .disabled : .enabled
+    centre.selectedRecordID == nil ? .disabled : .enabled
   }
 
   public func name(centre: DatastorePrototypeHarness) -> String {

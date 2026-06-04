@@ -27,6 +27,16 @@ public actor JSONRecordStore: RecordStore {
     recordsByID.values.sorted { $0.id.rawValue < $1.id.rawValue }
   }
 
+  /// Returns identifiers for records matching a predicate in stable identifier order.
+  public func recordIDs(matching predicate: RecordPredicate = .all) async throws
+    -> [BookishRecordID]
+  {
+    recordsByID.values
+      .filter { predicate.matches($0) }
+      .map(\.id)
+      .sorted { $0.rawValue < $1.rawValue }
+  }
+
   /// Writes a materialised record.
   public func upsert(_ record: BookishRecord) async throws {
     recordsByID[record.id] = record

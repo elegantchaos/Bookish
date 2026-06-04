@@ -69,6 +69,36 @@ final class DatastorePrototypeTests: XCTestCase {
     XCTAssertTrue(records.isEmpty)
   }
 
+  func testRecordServiceReturnsRecordIDsInStableOrder() async throws {
+    let prototype = try await makePrototype()
+    let secondID = BookishRecordID("book-2")
+    let firstID = BookishRecordID("book-1")
+
+    try await prototype.recordStore.upsert(BookishRecord(id: secondID, kind: "book"))
+    try await prototype.recordStore.upsert(BookishRecord(id: firstID, kind: "book"))
+
+    let ids = try await prototype.recordService.recordIDs()
+
+    XCTAssertEqual(ids, [firstID, secondID])
+  }
+
+  func testRecordServiceFiltersRecordIDsWithPredicate() async throws {
+    let prototype = try await makePrototype()
+    let bookID = BookishRecordID("book-1")
+    let authorID = BookishRecordID("author-1")
+
+    try await prototype.recordStore.upsert(BookishRecord(id: authorID, kind: "author"))
+    try await prototype.recordStore.upsert(
+      BookishRecord(id: bookID, kind: "book", properties: ["status": .string("Reading")])
+    )
+
+    let ids = try await prototype.recordService.recordIDs(
+      matching: .and([.kind("book"), .property("status", equals: .string("Reading"))])
+    )
+
+    XCTAssertEqual(ids, [bookID])
+  }
+
   func testMutationStoreRemoveAllClearsPersistedMutations() async throws {
     let directory = try temporaryDirectory()
     let prototype = try await DatastorePrototype(directoryURL: directory)

@@ -5,9 +5,6 @@
       location = "container:/Users/sam/Developer/Projects/Bookish/Bookish.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:BookishLegacy.xcodeproj">
-   </FileRef>
-   <FileRef
       location = "group:Dependencies/Commands">
    </FileRef>
    <FileRef

@@ -11,7 +11,7 @@ final class DatastorePrototypeAppTests: XCTestCase {
     let harness = DatastorePrototypeHarness()
 
     XCTAssertEqual(harness.status, "Loading")
-    XCTAssertTrue(harness.records.isEmpty)
+    XCTAssertTrue(harness.recordIDs.isEmpty)
     XCTAssertTrue(harness.mutations.isEmpty)
   }
 
@@ -29,6 +29,22 @@ final class DatastorePrototypeAppTests: XCTestCase {
     let harness = DatastorePrototypeHarness()
 
     XCTAssertEqual(harness.availability(ExportInterchangeCommand()), .disabled)
+  }
+
+  @MainActor
+  func testLocalDatastoreDirectoryUsesInjectedDirectory() throws {
+    let directory = try temporaryDirectory()
+    let harness = DatastorePrototypeHarness(directoryURL: directory)
+
+    XCTAssertEqual(try harness.localDatastoreDirectory(), directory)
+    XCTAssertTrue(FileManager.default.fileExists(atPath: directory.path()))
+  }
+
+  @MainActor
+  func testRevealDatastoreFolderCommandIsAvailableOnMac() {
+    let harness = DatastorePrototypeHarness()
+
+    XCTAssertEqual(harness.availability(RevealDatastoreFolderCommand()), .enabled)
   }
 
   @MainActor
@@ -68,7 +84,11 @@ final class DatastorePrototypeAppTests: XCTestCase {
 
     await harness.importInterchange(data: Data(json.utf8))
 
-    XCTAssertTrue(harness.records.contains { $0.id == BookishRecordID("test-import-book") })
+    let importedID = BookishRecordID("test-import-book")
+    let importedTitle = try await harness.record(id: importedID)?.string("title")
+
+    XCTAssertTrue(harness.recordIDs.contains(importedID))
+    XCTAssertEqual(importedTitle, "Imported Book")
     XCTAssertEqual(harness.status, "Imported 1 interchange record")
   }
 
@@ -81,8 +101,10 @@ final class DatastorePrototypeAppTests: XCTestCase {
 
     await harness.importDeliciousLibrary(data: data)
 
-    XCTAssertTrue(
-      harness.records.contains { $0.kind == "book" && $0.string("title") == "Snow Crash" })
+    let importedBooks = try await records(for: harness).filter {
+      $0.kind == "book" && $0.string("title") == "Snow Crash"
+    }
+    XCTAssertFalse(importedBooks.isEmpty)
     XCTAssertTrue(harness.status.hasPrefix("Imported "))
     XCTAssertTrue(harness.status.contains("Delicious Library"))
   }
@@ -92,11 +114,11 @@ final class DatastorePrototypeAppTests: XCTestCase {
     let harness = try makeHarness()
     await harness.load()
 
-    let data = try harness.exportInterchangeData()
+    let data = try await harness.exportInterchangeData()
     let file = try BookishInterchangeCodec().decode(data)
 
     XCTAssertFalse(file.records.isEmpty)
-    XCTAssertEqual(file.root, harness.selectedRecord?.id)
+    XCTAssertEqual(file.root, harness.selectedRecordID)
   }
 
   @MainActor
@@ -118,13 +140,41 @@ final class DatastorePrototypeAppTests: XCTestCase {
 
     await harness.importInterchange(data: Data(json.utf8))
 
-    XCTAssertTrue(harness.records.contains { $0.id == BookishRecordID("test-reset-book") })
+    XCTAssertTrue(harness.recordIDs.contains(BookishRecordID("test-reset-book")))
     XCTAssertFalse(harness.mutations.isEmpty)
 
     await harness.reset()
 
-    XCTAssertTrue(harness.records.isEmpty)
-    XCTAssertFalse(harness.records.contains { $0.id == BookishRecordID("test-reset-book") })
+    XCTAssertTrue(harness.recordIDs.isEmpty)
+    XCTAssertFalse(harness.recordIDs.contains(BookishRecordID("test-reset-book")))
+    XCTAssertTrue(harness.mutations.isEmpty)
+    XCTAssertEqual(harness.status, "Reset prototype datastore")
+  }
+
+  @MainActor
+  func testResetCommandResetsPrototypeDatastore() async throws {
+    let harness = try makeHarness()
+    await harness.load()
+
+    let json = """
+      {
+        "records": [
+          {
+            "id": "test-command-reset-book",
+            "kind": "book",
+            "title": "Command Reset Book"
+          }
+        ]
+      }
+      """
+
+    await harness.importInterchange(data: Data(json.utf8))
+
+    XCTAssertFalse(harness.recordIDs.isEmpty)
+
+    try await harness.perform(ResetPrototypeCommand())
+
+    XCTAssertTrue(harness.recordIDs.isEmpty)
     XCTAssertTrue(harness.mutations.isEmpty)
     XCTAssertEqual(harness.status, "Reset prototype datastore")
   }
@@ -132,6 +182,17 @@ final class DatastorePrototypeAppTests: XCTestCase {
   @MainActor
   private func makeHarness() throws -> DatastorePrototypeHarness {
     DatastorePrototypeHarness(directoryURL: try temporaryDirectory())
+  }
+
+  @MainActor
+  private func records(for harness: DatastorePrototypeHarness) async throws -> [BookishRecord] {
+    var records: [BookishRecord] = []
+    for id in harness.recordIDs {
+      if let record = try await harness.record(id: id) {
+        records.append(record)
+      }
+    }
+    return records
   }
 
   private func temporaryDirectory() throws -> URL {
