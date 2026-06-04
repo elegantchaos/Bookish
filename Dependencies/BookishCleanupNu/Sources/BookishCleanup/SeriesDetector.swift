@@ -7,7 +7,7 @@ import Expressions
 import Foundation
 import Logger
 
-let seriesDetectorChannel = Logger("com.elegantchaos.bookish.model.SeriesDetector")
+let seriesDetectorChannel = Channel("com.elegantchaos.bookish.model.SeriesDetector")
 
 class SeriesDetector {
   static let bookPattern = "(Number |Book |Bk\\. |Bk\\.|Bk |No\\. |No\\.|No |)"

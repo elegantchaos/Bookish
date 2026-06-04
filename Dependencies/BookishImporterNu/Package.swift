@@ -16,14 +16,14 @@ let package = Package(
   dependencies: [
     .package(path: "../BookishRecord"),
     .package(path: "../BookishCoding"),
-    .package(path: "../BookishCleanup"),
+    .package(path: "../BookishCleanupNu"),
   ],
   targets: [
     .target(
       name: "BookishImporterNu",
       dependencies: [
         .product(name: "BookishRecord", package: "BookishRecord"),
-        .product(name: "BookishCleanup", package: "BookishCleanup"),
+        .product(name: "BookishCleanup", package: "BookishCleanupNu"),
       ]
     ),
     .testTarget(

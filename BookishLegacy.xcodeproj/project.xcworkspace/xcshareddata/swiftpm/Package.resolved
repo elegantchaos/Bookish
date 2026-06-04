@@ -1,5 +1,5 @@
 {
-  "originHash" : "bcc621e4979823287915172df4ac7a53751f79121d1997fd435be1cf64c96295",
+  "originHash" : "28b05711dba6562cc86e1dbbbd639c7d581797e099cc3ddc6bb0026abf961176",
   "pins" : [
     {
       "identity" : "bundles",
@@ -107,6 +107,15 @@
       "state" : {
         "revision" : "c7e9058785748455314cd3b5bedc300d17bc287f",
         "version" : "1.0.3"
+      }
+    },
+    {
+      "identity" : "logger",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/elegantchaos/Logger.git",
+      "state" : {
+        "revision" : "c6d619809e9a658331a70514340f4246f5f05134",
+        "version" : "1.8.2"
       }
     },
     {

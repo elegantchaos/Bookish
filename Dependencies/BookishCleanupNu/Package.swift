@@ -17,7 +17,7 @@ let package = Package(
   dependencies: [
     .package(url: "https://github.com/elegantchaos/ElegantStrings.git", from: "1.0.2"),
     .package(url: "https://github.com/elegantchaos/Expressions.git", from: "1.1.1"),
-    .package(url: "https://github.com/elegantchaos/Logger.git", from: "1.7.3"),
+    .package(url: "https://github.com/elegantchaos/Logger.git", from: "2.0.0"),
   ],
 
   targets: [

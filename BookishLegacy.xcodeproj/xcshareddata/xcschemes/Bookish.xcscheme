@@ -7,20 +7,6 @@
       buildImplicitDependencies = "YES">
       <BuildActionEntries>
          <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "226F15D6251A28EA00D6B12E"
-               BuildableName = "Bookish.app"
-               BlueprintName = "Bookish"
-               ReferencedContainer = "container:Bookish.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
             buildForTesting = "NO"
             buildForRunning = "NO"
             buildForProfiling = "NO"
@@ -29,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "226F15F2251A28F600D6B12E"
-               BuildableName = "BookishUITests.xctest"
-               BlueprintName = "BookishUITests"
+               BuildableName = "UITests.xctest"
+               BlueprintName = "UITests"
                ReferencedContainer = "container:Bookish.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -47,8 +33,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "226F15E7251A28F600D6B12E"
-               BuildableName = "BookishTests.xctest"
-               BlueprintName = "BookishTests"
+               BuildableName = "Tests.xctest"
+               BlueprintName = "Tests"
                ReferencedContainer = "container:Bookish.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -73,7 +59,7 @@
             BlueprintIdentifier = "226F15D6251A28EA00D6B12E"
             BuildableName = "Bookish.app"
             BlueprintName = "Bookish"
-            ReferencedContainer = "container:Bookish.xcodeproj">
+            ReferencedContainer = "container:BookishLegacy.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <CommandLineArguments>
@@ -109,16 +95,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "226F15D6251A28EA00D6B12E"
             BuildableName = "Bookish.app"
             BlueprintName = "Bookish"
-            ReferencedContainer = "container:Bookish.xcodeproj">
+            ReferencedContainer = "container:BookishLegacy.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

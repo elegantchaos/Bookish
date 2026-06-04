@@ -1,13 +1,12 @@
 {
-  "originHash" : "e8dccecc8df9372f79be487da8c45b101b0e8c36d06d2c6ba2b4173a3c940d83",
   "pins" : [
     {
       "identity" : "elegantstrings",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/elegantchaos/ElegantStrings.git",
       "state" : {
-        "revision" : "eb90abda935b43cc5dca75d35af8efda0d38cfea",
-        "version" : "1.1.1"
+        "revision" : "ba06b17894fc4acef01b0a22ab17122b2397e1e6",
+        "version" : "1.0.2"
       }
     },
     {
@@ -20,23 +19,14 @@
       }
     },
     {
-      "identity" : "icons",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/elegantchaos/Icons.git",
-      "state" : {
-        "revision" : "068efb572003fca636c99fcb9c8e2dd3bf813272",
-        "version" : "1.0.1"
-      }
-    },
-    {
       "identity" : "logger",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/elegantchaos/Logger",
+      "location" : "https://github.com/elegantchaos/Logger.git",
       "state" : {
         "revision" : "c1d6df4eaf73f88e18ee23da02224069b17ab313",
         "version" : "2.0.4"
       }
     }
   ],
-  "version" : 3
+  "version" : 2
 }
