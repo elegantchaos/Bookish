@@ -1,5 +1,6 @@
 import BookishCoding
 import BookishRecord
+import Commands
 import XCTest
 
 @testable import DatastorePrototypeApp
@@ -12,6 +13,40 @@ final class DatastorePrototypeAppTests: XCTestCase {
     XCTAssertEqual(harness.status, "Loading")
     XCTAssertTrue(harness.records.isEmpty)
     XCTAssertTrue(harness.mutations.isEmpty)
+  }
+
+  @MainActor
+  func testSelectionCommandsAreDisabledWithoutSelection() {
+    let harness = DatastorePrototypeHarness()
+
+    XCTAssertEqual(harness.availability(MarkReadingCommand()), .disabled)
+    XCTAssertEqual(harness.availability(MarkFinishedCommand()), .disabled)
+    XCTAssertEqual(harness.availability(SimulateRemoteMutationCommand()), .disabled)
+  }
+
+  @MainActor
+  func testExportCommandIsDisabledWithoutRecords() {
+    let harness = DatastorePrototypeHarness()
+
+    XCTAssertEqual(harness.availability(ExportInterchangeCommand()), .disabled)
+  }
+
+  @MainActor
+  func testEngineUsesApplicationStartupLoop() {
+    let engine = DatastorePrototypeEngine()
+
+    guard case .uninitialised = engine.state else {
+      XCTFail("Expected engine to start uninitialised.")
+      return
+    }
+
+    engine.start()
+
+    guard case .starting = engine.state else {
+      XCTFail("Expected engine to enter startup.")
+      return
+    }
+    XCTAssertNotNil(engine.startupTask)
   }
 
   @MainActor

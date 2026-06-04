@@ -1,16 +1,21 @@
 import BookishDatastore
 import BookishRecord
 import BookishRecordView
+import CommandsUI
 import SwiftUI
 import UniformTypeIdentifiers
 
 /// The root view for the datastore prototype app.
 public struct DatastorePrototypeHarnessView: View {
   @Bindable private var harness: DatastorePrototypeHarness
+  private let loadsOnAppear: Bool
 
   /// Creates the prototype harness view.
-  public init(harness: DatastorePrototypeHarness = DatastorePrototypeHarness()) {
+  public init(
+    harness: DatastorePrototypeHarness = DatastorePrototypeHarness(), loadsOnAppear: Bool = true
+  ) {
     self.harness = harness
+    self.loadsOnAppear = loadsOnAppear
   }
 
   /// The SwiftUI content for the prototype app.
@@ -44,6 +49,9 @@ public struct DatastorePrototypeHarnessView: View {
       onCompletion: handleInterchangeExport
     )
     .task {
+      guard loadsOnAppear else {
+        return
+      }
       await harness.load()
     }
   }
@@ -120,10 +128,25 @@ private struct RecordDetailView: View {
 }
 
 private struct PrototypeToolbar: ToolbarContent {
-  @Bindable var harness: DatastorePrototypeHarness
+  var harness: DatastorePrototypeHarness
 
   var body: some ToolbarContent {
     ToolbarItem {
+      harness.importer(ImportInterchangeCommand())
+        .labelStyle(.iconOnly)
+    }
+
+    ToolbarItem {
+      harness.button(ExportInterchangeCommand())
+        .labelStyle(.iconOnly)
+    }
+
+    harness.toolbarItem(MarkReadingCommand())
+    harness.toolbarItem(MarkFinishedCommand())
+    harness.toolbarItem(SimulateRemoteMutationCommand())
+
+    ToolbarItem {
+      @Bindable var harness = harness
       Picker("Layout", selection: $harness.selectedLayoutID) {
         Text("Default").tag(Optional<BookishRecordID>.none)
         ForEach(harness.layouts) { layout in

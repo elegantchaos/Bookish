@@ -1,0 +1,24 @@
+# Datastore Prototype Command Shell
+
+## Context
+
+The datastore prototype now uses the local `elegantchaos/Commands` package for menu and toolbar actions and the local `elegantchaos/Application` package for the app shell.
+
+## Implementation Notes
+
+- Added `DatastorePrototypeEngine` as the `Application.AppEngine` bridge for startup state and datastore loading.
+- Moved prototype menu actions into `Commands.CommandWithUI` and `CommandsUI.ImporterCommand` models.
+- Updated the prototype toolbar to render command-backed import, export, mark, and remote-mutation controls.
+- Kept `DatastorePrototypeHarnessView` usable in previews by retaining opt-in direct loading while the app shell disables duplicate loading.
+- Pointed local package manifests at local `Application`, `Commands`, `Icons`, and `Logger` dependencies so the workspace resolves a single package graph.
+
+## Validation
+
+- `swift test` in `Dependencies/DatastorePrototypeApp`.
+- `xcodebuild -workspace Bookish.xcworkspace -scheme DatastorePrototype -destination 'platform=macOS' build`.
+- `rt validate --target DatastorePrototype`.
+- `rt validate` reached the broad iOS `Bookish` build and failed because the main app graph still mixes local Logger 2 with packages that declare older iOS deployment floors, including an external `Images` target.
+
+## Follow-Up
+
+- Consider modernizing older local Bookish package manifests to Swift 6.3 and macOS/iOS 26.0 together, rather than package-by-package during feature work.

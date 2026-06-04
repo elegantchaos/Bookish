@@ -19,16 +19,21 @@ let package = Package(
     .package(path: "../BookishImporterNu"),
     .package(path: "../BookishDatastore"),
     .package(path: "../BookishRecordView"),
+    .package(path: "../Application"),
+    .package(path: "../Commands"),
   ],
   targets: [
     .target(
       name: "DatastorePrototypeApp",
       dependencies: [
+        .product(name: "Application", package: "Application"),
         .product(name: "BookishRecord", package: "BookishRecord"),
         .product(name: "BookishCoding", package: "BookishCoding"),
         .product(name: "BookishImporterNu", package: "BookishImporterNu"),
         .product(name: "BookishDatastore", package: "BookishDatastore"),
         .product(name: "BookishRecordView", package: "BookishRecordView"),
+        .product(name: "Commands", package: "Commands"),
+        .product(name: "CommandsUI", package: "Commands"),
       ]
     ),
     .testTarget(

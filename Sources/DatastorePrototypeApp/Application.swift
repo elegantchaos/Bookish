@@ -3,14 +3,20 @@ import SwiftUI
 
 @main
 struct DatastorePrototypeApplication: App {
-  @State private var harness = DatastorePrototypeHarness()
+  @State private var engine: DatastorePrototypeEngine
+
+  init() {
+    let engine = DatastorePrototypeEngine()
+    engine.start()
+    self.engine = engine
+  }
 
   var body: some Scene {
     WindowGroup {
-      DatastorePrototypeHarnessView(harness: harness)
+      engine.rootContent()
     }
     .commands {
-      DatastorePrototypeCommands(harness: harness)
+      DatastorePrototypeCommands(harness: engine.harness)
     }
   }
 }
