@@ -118,6 +118,24 @@ Decide how SwiftUI views interact with the record service:
 
 This work should align with `Data View Design.md`.
 
+## Testing And Mocking
+
+Design the datastore services so that each component can be tested in isolation. The application should be able to run with alternate implementations of the record service, mutation service, mutation store, record store, blob store, and sync transport.
+
+Useful runtime modes:
+- production local stores with CloudKit sync enabled;
+- production local stores with sync disabled;
+- production local stores with a mocked sync transport;
+- temporary local stores for integration tests;
+- in-memory or fixture-backed stores for focused unit tests;
+- fixture-backed services for SwiftUI previews.
+
+Follow the existing project-family convention of using launch environment variables with a `TEST_` prefix to select alternate data sources and service modes. Candidate switches include selecting a datastore fixture, disabling sync, using a mocked sync transport, choosing temporary local stores, or forcing specific error states. Parse these values in one place at application startup, then inject the selected services rather than reading environment variables throughout the datastore code.
+
+The mutation service should be testable with deterministic identifiers, device identity, clocks, and sync responses. The record service should be testable against fixture records and deterministic observation updates. Commands should be tested against fake mutation services so validation and availability can be checked without writing to the real stores.
+
+SwiftUI previews should use fixture-backed record services with example records, relationships, ordered lists, data view layouts, placeholder blobs, conflict values, and failed-upload states. Preview fixtures should be small, readable, and reusable by tests where practical.
+
 ## CloudKit Work
 
 Decide:
@@ -179,5 +197,9 @@ Retain these Proposal 1 test ideas:
 - conflict detection and resolution;
 - outbox retry and idempotent resend;
 - record store rebuild from mutation history;
+- isolated tests with fake mutation stores, record stores, blob stores, and sync transports;
+- application modes with sync disabled or mocked;
+- command tests using fake mutation services;
+- SwiftUI preview fixtures using fake or fixture-backed record services;
 - CloudKit adapter mapping with local fake records before using a real container;
 - import/export round trips from fixtures.
