@@ -49,8 +49,8 @@ public struct BookishMutationView: View {
     mutation: MutationRecord(
       operation: .setProperty(
         recordID: BookishRecordID("book-preview"),
-        kind: "book",
-        key: "status",
+        kind: BookishRecordKind.book,
+        key: BookishRecordKey.status,
         value: .string("Reading")
       )
     )

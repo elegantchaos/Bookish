@@ -53,19 +53,22 @@ public struct BookishRecordView: View {
     BookishRecordView(
       record: BookishRecord(
         id: BookishRecordID("book-preview"),
-        kind: "book",
+        kind: BookishRecordKind.book,
         properties: [
-          "title": .string("The Left Hand of Darkness"),
-          "author": .string("Ursula K. Le Guin"),
-          "status": .string("To Read"),
+          BookishRecordKey.title: .string("The Left Hand of Darkness"),
+          BookishRecordKey.authors: .list([.record(BookishRecordID("person-ursula-k-le-guin"))]),
+          BookishRecordKey.status: .string("To Read"),
         ]
       ),
       layout: BookishRecord(
         id: BookishRecordID("layout-preview"),
-        kind: "layout",
+        kind: BookishRecordKind.layout,
         properties: [
-          "title": .string("Book"),
-          "fields": .list([.string("title"), .string("author"), .string("status")]),
+          BookishRecordKey.title: .string("Book"),
+          BookishRecordKey.fields: .list([
+            .string(BookishRecordKey.title), .string(BookishRecordKey.authors),
+            .string(BookishRecordKey.status),
+          ]),
         ]
       )
     )

@@ -34,15 +34,10 @@ final class DeliciousLibraryImporterTests: XCTestCase {
     XCTAssertEqual(publisher.kind, "organisation")
     XCTAssertEqual(publisher.string("name"), "RoC")
 
-    XCTAssertTrue(
-      result.records.contains {
-        $0.kind == "relationship" && $0.string("role") == "author"
-          && $0.record("from") == snowCrash.id && $0.record("to") == authorID
-      }
-    )
+    XCTAssertFalse(result.records.contains { $0.kind == "relationship" })
   }
 
-  func testImportsSeriesRecordsAndRelationships() throws {
+  func testImportsSeriesRecordsAndDirectReference() throws {
     let result = try DeliciousLibraryImporter().importRecords(from: deliciousSampleURL())
     let gameOfThrones = try XCTUnwrap(
       result.records.first { $0.string("title") == "A Game of Thrones" && $0.kind == "book" }
@@ -53,13 +48,7 @@ final class DeliciousLibraryImporterTests: XCTestCase {
 
     XCTAssertEqual(series.kind, "series")
     XCTAssertEqual(series.string("name"), "A Song of Ice and Fire")
-    XCTAssertTrue(
-      result.records.contains {
-        $0.kind == "relationship" && $0.string("role") == "series"
-          && $0.record("from") == gameOfThrones.id && $0.record("to") == seriesID
-          && $0.integer("position") == 1
-      }
-    )
+    XCTAssertEqual(gameOfThrones.integer("seriesPosition"), 1)
   }
 
   func testImportIsDeterministic() throws {

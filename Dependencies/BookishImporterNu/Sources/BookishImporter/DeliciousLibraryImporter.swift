@@ -214,27 +214,29 @@ private struct DeliciousBook {
     self.seriesPosition = raw.nonZeroInt("numberInSeries")
 
     var properties: [String: BookishRecordValue] = [
-      "title": .string(title),
-      "importedID": .string(id),
-      "source": .string(sourceID),
+      BookishRecordKey.title: .string(title),
+      BookishRecordKey.importedID: .string(id),
+      BookishRecordKey.source: .string(sourceID),
     ]
 
-    properties.addString(raw.string("formatSingularString"), forKey: "format")
-    properties.addString(raw.string("subtitle"), forKey: "subtitle")
-    properties.addString(raw.string("asin"), forKey: "asin")
-    properties.addString(raw.string("deweyDecimal"), forKey: "dewey")
-    properties.addString(raw.string("isbn"), forKey: "isbn")
-    properties.addInteger(raw.nonZeroInt("pages"), forKey: "pages")
-    properties.addInteger(raw.nonZeroInt("numberInSeries"), forKey: "seriesPosition")
-    properties.addDouble(raw.nonZeroDouble("boxHeightInInches"), forKey: "height")
-    properties.addDouble(raw.nonZeroDouble("boxWidthInInches"), forKey: "width")
-    properties.addDouble(raw.nonZeroDouble("boxLengthInInches"), forKey: "length")
-    properties.addDate(raw.date("creationDate"), forKey: "addedDate")
-    properties.addDate(raw.date("lastModificationDate"), forKey: "modifiedDate")
-    properties.addDate(raw.date("publishDate"), forKey: "publishedDate")
-    properties.addStringList(raw.stringList("editionsCompositeString"), forKey: "editions")
-    properties.addStringList(raw.stringList("genresCompositeString"), forKey: "genres")
-    properties.addStringList(raw.imageURLs, forKey: "imageURLs")
+    properties.addString(raw.string("formatSingularString"), forKey: BookishRecordKey.format)
+    properties.addString(raw.string("subtitle"), forKey: BookishRecordKey.subtitle)
+    properties.addString(raw.string("asin"), forKey: BookishRecordKey.asin)
+    properties.addString(raw.string("deweyDecimal"), forKey: BookishRecordKey.dewey)
+    properties.addString(raw.string("isbn"), forKey: BookishRecordKey.isbn)
+    properties.addInteger(raw.nonZeroInt("pages"), forKey: BookishRecordKey.pages)
+    properties.addInteger(raw.nonZeroInt("numberInSeries"), forKey: BookishRecordKey.seriesPosition)
+    properties.addDouble(raw.nonZeroDouble("boxHeightInInches"), forKey: BookishRecordKey.height)
+    properties.addDouble(raw.nonZeroDouble("boxWidthInInches"), forKey: BookishRecordKey.width)
+    properties.addDouble(raw.nonZeroDouble("boxLengthInInches"), forKey: BookishRecordKey.length)
+    properties.addDate(raw.date("creationDate"), forKey: BookishRecordKey.addedDate)
+    properties.addDate(raw.date("lastModificationDate"), forKey: BookishRecordKey.modifiedDate)
+    properties.addDate(raw.date("publishDate"), forKey: BookishRecordKey.publishedDate)
+    properties.addStringList(
+      raw.stringList("editionsCompositeString"), forKey: BookishRecordKey.editions)
+    properties.addStringList(
+      raw.stringList("genresCompositeString"), forKey: BookishRecordKey.genres)
+    properties.addStringList(raw.imageURLs, forKey: BookishRecordKey.imageURLs)
 
     self.properties = properties
   }
@@ -249,7 +251,7 @@ private struct DeliciousBook {
     if self.title != title {
       properties["original.title"] = .string(self.title)
       self.title = title
-      properties["title"] = .string(title)
+      properties[BookishRecordKey.title] = .string(title)
     }
 
     if self.subtitle != subtitle {
@@ -279,7 +281,7 @@ private struct DeliciousBook {
         properties["original.seriesPosition"] = .integer(existing)
       }
       self.seriesPosition = seriesPosition
-      properties["seriesPosition"] = .integer(seriesPosition)
+      properties[BookishRecordKey.seriesPosition] = .integer(seriesPosition)
     }
   }
 
@@ -303,31 +305,25 @@ private struct DeliciousRecordGraphBuilder {
     let bookID = BookishRecordID("delicious-book-\(book.id.normalizedIDComponent)")
     var properties = book.properties
 
-    let authorIDs = book.authors.enumerated().map { index, name in
-      addRelatedRecord(name: name, kind: "person")
-        .also { addRelationship(role: "author", from: bookID, to: $0, position: index + 1) }
-    }
-    properties.addRecordList(authorIDs, forKey: "authors")
+    let authorIDs = book.authors.map { addRelatedRecord(name: $0, kind: BookishRecordKind.person) }
+    properties.addRecordList(authorIDs, forKey: BookishRecordKey.authors)
 
-    let illustratorIDs = book.illustrators.enumerated().map { index, name in
-      addRelatedRecord(name: name, kind: "person")
-        .also { addRelationship(role: "illustrator", from: bookID, to: $0, position: index + 1) }
+    let illustratorIDs = book.illustrators.map {
+      addRelatedRecord(name: $0, kind: BookishRecordKind.person)
     }
-    properties.addRecordList(illustratorIDs, forKey: "illustrators")
+    properties.addRecordList(illustratorIDs, forKey: BookishRecordKey.illustrators)
 
-    let publisherIDs = book.publishers.enumerated().map { index, name in
-      addRelatedRecord(name: name, kind: "organisation")
-        .also { addRelationship(role: "publisher", from: bookID, to: $0, position: index + 1) }
+    let publisherIDs = book.publishers.map {
+      addRelatedRecord(name: $0, kind: BookishRecordKind.organisation)
     }
-    properties.addRecordList(publisherIDs, forKey: "publishers")
+    properties.addRecordList(publisherIDs, forKey: BookishRecordKey.publishers)
 
     if !book.series.isEmpty {
-      let seriesID = addRelatedRecord(name: book.series, kind: "series")
-      properties["series"] = .record(seriesID)
-      addRelationship(role: "series", from: bookID, to: seriesID, position: book.seriesPosition)
+      let seriesID = addRelatedRecord(name: book.series, kind: BookishRecordKind.series)
+      properties[BookishRecordKey.series] = .record(seriesID)
     }
 
-    store(BookishRecord(id: bookID, kind: "book", properties: properties))
+    store(BookishRecord(id: bookID, kind: BookishRecordKind.book, properties: properties))
     return bookID
   }
 
@@ -335,11 +331,11 @@ private struct DeliciousRecordGraphBuilder {
     store(
       BookishRecord(
         id: id,
-        kind: "list",
+        kind: BookishRecordKind.list,
         properties: [
-          "name": .string("Delicious Library Import"),
-          "source": .string(sourceID),
-          "items": .list(bookIDs.map { .record($0) }),
+          BookishRecordKey.name: .string("Delicious Library Import"),
+          BookishRecordKey.source: .string(sourceID),
+          BookishRecordKey.items: .list(bookIDs.map { .record($0) }),
         ]))
   }
 
@@ -368,27 +364,10 @@ private struct DeliciousRecordGraphBuilder {
         id: id,
         kind: kind,
         properties: [
-          "name": .string(name),
-          "source": .string(sourceID),
+          BookishRecordKey.name: .string(name),
+          BookishRecordKey.source: .string(sourceID),
         ]))
     return id
-  }
-
-  private mutating func addRelationship(
-    role: String,
-    from source: BookishRecordID,
-    to target: BookishRecordID,
-    position: Int?
-  ) {
-    let id = BookishRecordID("relationship-\(role)-\(source.rawValue)-\(target.rawValue)")
-    var properties: [String: BookishRecordValue] = [
-      "role": .string(role),
-      "from": .record(source),
-      "to": .record(target),
-      "source": .string(sourceID),
-    ]
-    properties.addInteger(position, forKey: "position")
-    store(BookishRecord(id: id, kind: "relationship", properties: properties))
   }
 
   private mutating func store(_ record: BookishRecord) {

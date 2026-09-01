@@ -179,7 +179,7 @@ The default interchange schema uses:
 
 Record decoding reads `id` and `kind`, then treats every remaining key as a property. Canonical record links encode as `{ "®": "record", "id": "record-id" }`. Compact JSON decoding accepts primitive JSON values where unambiguous and strict `@record-id` shorthand for links. Compact link encoding is opt-in and remains a JSON-only codec convenience.
 
-`BookishImporterNu` imports Delicious Library XML into a normalised graph rather than a flat book-only output. It emits book, person, organisation, series, relationship, and root list records with deterministic IDs.
+`BookishImporterNu` imports Delicious Library XML into a normalised graph rather than a flat book-only output. It emits book, person, organisation, series, and root list records with deterministic IDs. Books link directly to their contributors, publishers, and series.
 
 For diagnostics and recovery, mutation history may also be useful, but that should be a separate diagnostic/archive format rather than the default user-facing interchange format.
 

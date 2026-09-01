@@ -304,23 +304,28 @@ record links:
 }
 ```
 
-Relationships that require metadata should be represented as records. A
-relationship record can connect records and carry role, ordering, dates, notes,
-source, status, and relationship-specific fields.
+Common catalogue connections use direct record links. For example, a book's
+ordered `authors` list directly identifies its authors, and its `series` property
+directly identifies its series. The list order establishes contributor sequence.
+
+Connections that need metadata can use a relationship record. For example, a
+contributor relationship can preserve the contributor's role, credited-as name,
+and source-specific notes:
 
 ```json
 {
-  "id": "relationship-book-1-author-1",
+  "id": "relationship-book-1-contributor-1",
   "kind": "relationship",
-  "role": "author",
   "from": "@book-1",
-  "to": "@person-neal-stephenson",
-  "position": 1
+  "to": "@person-anthea-bell",
+  "role": "translator",
+  "creditedAs": "Anthea Bell",
+  "sourceNote": "Title-page credit"
 }
 ```
 
-This keeps simple links compact while preserving a lossless path for richer
-catalogue relationships.
+This keeps simple links compact while preserving a representation for catalogue
+connections with their own metadata.
 
 ## Encoding Rules
 

@@ -4,6 +4,16 @@ import XCTest
 @testable import BookishRecord
 
 final class BookishRecordTests: XCTestCase {
+  func testStandardKindsAndKeysHaveStableValues() {
+    XCTAssertEqual(BookishRecordKind.book, "book")
+    XCTAssertEqual(BookishRecordKind.person, "person")
+    XCTAssertEqual(BookishRecordKind.organisation, "organisation")
+    XCTAssertEqual(BookishRecordKey.authors, "authors")
+    XCTAssertEqual(BookishRecordKey.series, "series")
+    XCTAssertEqual(BookishRecordKey.seriesPosition, "seriesPosition")
+    XCTAssertEqual(BookishRecordKey.isbn, "isbn")
+  }
+
   func testRecordConstructionAndConvenienceReaders() {
     let authorID = BookishRecordID("person-1")
     let record = BookishRecord(

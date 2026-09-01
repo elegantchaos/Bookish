@@ -17,7 +17,7 @@ public struct BookishRecordPresentation: Equatable, Sendable {
 
   /// The title used for navigation, forms, and list rows.
   public var title: String {
-    firstDisplayValue(for: ["title", "name"]) ?? record.kind
+    firstDisplayValue(for: [BookishRecordKey.title, BookishRecordKey.name]) ?? record.kind
   }
 
   /// The fields visible under the active layout.
@@ -34,11 +34,13 @@ public struct BookishRecordPresentation: Equatable, Sendable {
 
   /// The user-facing name of the active layout.
   public var layoutTitle: String {
-    layout?.string("title") ?? "Default"
+    layout?.string(BookishRecordKey.title) ?? "Default"
   }
 
   private var fieldKeys: [String] {
-    guard let layoutFields = layout?.properties["fields"]?.listValue?.compactMap(\.stringValue),
+    guard
+      let layoutFields = layout?.properties[BookishRecordKey.fields]?.listValue?.compactMap(
+        \.stringValue),
       !layoutFields.isEmpty
     else {
       return record.properties.keys.sorted()

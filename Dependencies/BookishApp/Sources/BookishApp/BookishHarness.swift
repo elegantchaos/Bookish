@@ -44,6 +44,7 @@ public final class BookishHarness {
   private let layoutID = BookishRecordID("datastore-book-layout")
   private let compactLayoutID = BookishRecordID("datastore-book-compact-layout")
   private let authorID = BookishRecordID("datastore-author")
+  private let seedSourceID = "com.elegantchaos.bookish.seed"
   private let directoryURL: URL?
   private var datastore: BookishDatastore?
 
@@ -92,8 +93,8 @@ public final class BookishHarness {
       let mutation = MutationRecord(
         operation: .setProperty(
           recordID: recordID,
-          kind: record?.kind ?? "record",
-          key: "note",
+          kind: record?.kind ?? BookishRecordKind.record,
+          key: BookishRecordKey.note,
           value: .string(
             "Remote mutation arrived at \(Date().formatted(date: .omitted, time: .shortened))")
         )
@@ -217,7 +218,9 @@ public final class BookishHarness {
             try await datastore.mutationService.perform(.upsertRecord(record))
           }
           importedRecordCount += records.count
-          firstRecord = firstRecord ?? records.first(where: { $0.kind == "book" }) ?? records.first
+          firstRecord =
+            firstRecord ?? records.first(where: { $0.kind == BookishRecordKind.book })
+            ?? records.first
           if lastProjectionRefresh.duration(to: clock.now) >= .seconds(1) {
             try await refresh()
             lastProjectionRefresh = clock.now
@@ -320,7 +323,8 @@ public final class BookishHarness {
       let record = try await datastore.recordService.record(id: recordID)
       try await datastore.mutationService.perform(
         .setProperty(
-          recordID: recordID, kind: record?.kind ?? "record", key: "status", value: .string(value))
+          recordID: recordID, kind: record?.kind ?? BookishRecordKind.record,
+          key: BookishRecordKey.status, value: .string(value))
       )
       try await refresh()
       status = "Set status to \(value)"
@@ -355,40 +359,44 @@ public final class BookishHarness {
 
     let records = try await datastore.recordService.records()
     navigation.update(records: records)
-    layoutIDs = try await datastore.recordService.recordIDs(matching: .kind("layout"))
+    layoutIDs = try await datastore.recordService.recordIDs(
+      matching: .kind(BookishRecordKind.layout))
     revision += 1
     try await updateLayoutSelection(using: datastore)
   }
 
   private func seedIfNeeded(using datastore: BookishDatastore) async throws {
-    if try await datastore.recordService.record(id: bookID) == nil {
+    if try await datastore.recordService.record(id: authorID) == nil {
       try await datastore.mutationService.perform(
         .upsertRecord(
           BookishRecord(
-            id: bookID,
-            kind: "book",
+            id: authorID,
+            kind: BookishRecordKind.person,
             properties: [
-              "title": .string("The Left Hand of Darkness"),
-              "author": .string("Ursula K. Le Guin"),
-              "status": .string("To Read"),
-              "format": .string("Paperback"),
-              "note": .string("Seeded by the datastore harness"),
+              BookishRecordKey.name: .string("Ursula K. Le Guin"),
+              BookishRecordKey.source: .string(seedSourceID),
+              BookishRecordKey.status: .string("Reference"),
+              BookishRecordKey.note: .string(
+                "Person record included to make the index browseable."),
             ]
           )
         )
       )
     }
 
-    if try await datastore.recordService.record(id: authorID) == nil {
+    if try await datastore.recordService.record(id: bookID) == nil {
       try await datastore.mutationService.perform(
         .upsertRecord(
           BookishRecord(
-            id: authorID,
-            kind: "author",
+            id: bookID,
+            kind: BookishRecordKind.book,
             properties: [
-              "name": .string("Ursula K. Le Guin"),
-              "status": .string("Reference"),
-              "note": .string("Author record included to make the index browseable."),
+              BookishRecordKey.title: .string("The Left Hand of Darkness"),
+              BookishRecordKey.authors: .list([.record(authorID)]),
+              BookishRecordKey.source: .string(seedSourceID),
+              BookishRecordKey.status: .string("To Read"),
+              BookishRecordKey.format: .string("Paperback"),
+              BookishRecordKey.note: .string("Seeded by the datastore harness"),
             ]
           )
         )
@@ -400,12 +408,13 @@ public final class BookishHarness {
         .upsertRecord(
           BookishRecord(
             id: layoutID,
-            kind: "layout",
+            kind: BookishRecordKind.layout,
             properties: [
-              "title": .string("Bookish Book"),
-              "fields": .list([
-                .string("title"), .string("author"), .string("status"), .string("format"),
-                .string("note"),
+              BookishRecordKey.title: .string("Bookish Book"),
+              BookishRecordKey.fields: .list([
+                .string(BookishRecordKey.title), .string(BookishRecordKey.authors),
+                .string(BookishRecordKey.status), .string(BookishRecordKey.format),
+                .string(BookishRecordKey.note),
               ]),
             ]
           )
@@ -418,10 +427,13 @@ public final class BookishHarness {
         .upsertRecord(
           BookishRecord(
             id: compactLayoutID,
-            kind: "layout",
+            kind: BookishRecordKind.layout,
             properties: [
-              "title": .string("Compact Summary"),
-              "fields": .list([.string("title"), .string("name"), .string("status")]),
+              BookishRecordKey.title: .string("Compact Summary"),
+              BookishRecordKey.fields: .list([
+                .string(BookishRecordKey.title), .string(BookishRecordKey.name),
+                .string(BookishRecordKey.status),
+              ]),
             ]
           )
         )

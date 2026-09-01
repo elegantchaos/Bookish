@@ -37,20 +37,18 @@ These categories are application conventions. A record may be interpreted throug
 
 Records can link to other records to form a graph. Simple properties can contain direct record links or ordered lists of record links.
 
-Relationships that need metadata should be represented as records themselves. A relationship record can connect two or more records and carry properties such as:
-- role;
-- ordering;
-- dates;
-- notes;
-- source;
-- status;
-- relationship-specific user fields.
+Common catalogue connections use direct record links. A book's ordered `authors`, `illustrators`, and `publishers` properties link directly to the relevant person or organisation records, while its `series` property links directly to its series record.
 
-This allows common cases, such as book-to-author links, to stay simple while supporting richer cases such as reading history entries, loans, ownership details, and repeated appearances in a list.
+When a connection needs metadata, it can be represented by a relationship record. For example, a contributor relationship can carry the contributor's specific role, the name used in the credit, and source-specific notes. This keeps common links compact while preserving a richer representation where it is genuinely needed.
+
+When a collection needs a sequence, the containing record should use an ordered
+list of direct record links or relationship records. A scalar ordering value on
+individual relationship records cannot establish a reliable order because it does
+not prevent duplicates.
 
 ## Lists
 
-Lists are ordered or unordered collections of records. A list can contain direct record links for simple cases, or relationship records when entries need their own metadata.
+Lists are ordered or unordered collections of records. A list can contain direct record links, or relationship records when entries need their own metadata.
 
 The same target record may appear in multiple lists or multiple times within the same list. If a workflow requires uniqueness, that rule should be enforced by the application layer rather than by the low-level datastore.
 

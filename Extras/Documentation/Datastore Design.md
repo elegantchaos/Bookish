@@ -129,16 +129,15 @@ Blob cleanup can be introduced later through an explicit database compaction or 
 
 The record database can form a graph, using record properties which contains record links, or ordered lists of record links.
 
-Some links between records may require metadata describing the nature of the relationship between the two linked records. 
+Some links between records require metadata describing the connection between the linked records.
 
-Rich links can be represented as records themselves. For example, instead of linking two records A and B directly, they will both be linked to a third relationship record L, which will describe how A and B are connected. 
+Rich links can be represented as relationship records. For example, a contributor relationship can carry the contributor's role, credited-as name, and source-specific notes alongside references to the book and person.
 
-High level clients have flexibility in exactly how they represent the graph, using combinations of:
-- simple record links
-- ordered lists of links
-- links or lists of links to individual relationship records
-- composite relationship records containing common metadata and ordered lists of members
-- combinations of the above
+High-level clients can use combinations of:
+- simple record links;
+- ordered lists of links;
+- links or lists of links to relationship records; and
+- composite relationship records containing common metadata and ordered lists of members.
 
 Implementation choices and follow-up design work are tracked in `Datastore Implementation.md`.
 

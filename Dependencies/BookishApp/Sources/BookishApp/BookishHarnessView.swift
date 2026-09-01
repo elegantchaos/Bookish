@@ -281,7 +281,7 @@ private struct BookishLayoutPickerItem: View {
 
   private func load() async {
     do {
-      title = try await harness.record(id: layoutID)?.string("title")
+      title = try await harness.record(id: layoutID)?.string(BookishRecordKey.title)
     } catch {
       harness.report(error: error)
     }

@@ -24,7 +24,7 @@ Bookish preserves a flexible record model while keeping clear boundaries between
 - **Series**: an ordered or semi-ordered group of books.
 - **List**: a user-managed collection such as wishlist, owned, loaned, favourites, imports, or reading history.
 - **Role**: the semantic meaning of a relationship, such as author, illustrator, publisher, owner, read, or wishlist item.
-- **Link**: a first-class relationship between records, optionally carrying a role, order, dates, notes, or other properties.
+- **Link**: a first-class relationship between records, optionally carrying a role, dates, notes, or other properties.
 
 ## Main Workflows
 
@@ -80,9 +80,9 @@ Key properties of the abstraction:
   - could be resolved via references to subrecords
   - could be directly stored using fully qualified keys
   - could be an encoded contained in a top-level value
-- Relationships between records are modelled as records themselves
-- Relationships therefore have associated key/value metadata
-- Relationships can be ordered, and one-to-one or one-to-many
+- Relationships between records can use direct record references, ordered lists of record references, or relationship records when metadata is needed.
+- Relationship records can carry key/value metadata such as a contributor role, credited-as name, or source-specific notes.
+- Relationships can be one-to-one or one-to-many.
   
 ### Persistence
 

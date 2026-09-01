@@ -16,6 +16,24 @@ final class BookishAppTests: XCTestCase {
   }
 
   @MainActor
+  func testHarnessSeedsImporterCompatibleBookAndPersonRecords() async throws {
+    let harness = try makeHarness()
+    await harness.load()
+
+    let authorID = BookishRecordID("datastore-author")
+    let seededBook = try await harness.record(id: BookishRecordID("datastore-book"))
+    let seededAuthor = try await harness.record(id: authorID)
+    let book = try XCTUnwrap(seededBook)
+    let author = try XCTUnwrap(seededAuthor)
+
+    XCTAssertEqual(book.kind, BookishRecordKind.book)
+    XCTAssertEqual(book.list(BookishRecordKey.authors), [.record(authorID)])
+    XCTAssertEqual(author.kind, BookishRecordKind.person)
+    XCTAssertEqual(author.string(BookishRecordKey.name), "Ursula K. Le Guin")
+    XCTAssertEqual(book.string(BookishRecordKey.source), author.string(BookishRecordKey.source))
+  }
+
+  @MainActor
   func testSelectionCommandsAreDisabledWithoutSelection() {
     let harness = BookishHarness()
 

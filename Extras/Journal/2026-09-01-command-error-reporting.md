@@ -57,5 +57,20 @@ Fire-and-forget commands were only logged when they threw, leaving the datastore
 ## Bookish App Rename
 
 - Renamed the active datastore app package, product, target, tests, Xcode target, and app bundle to `BookishApp` and `Bookish`.
-- Renamed the app-layer APIs to `BookishApp…`, the datastore service bundle to `BookishDatastore`, and reusable record and mutation views to `Bookish…` names.
+- Renamed the app-layer APIs to `Bookish…`, the datastore service bundle to `BookishDatastore`, and reusable record and mutation views to `Bookish…` names.
 - Moved the older, unused `Dependencies/BookishApp` package intact to `Extras/Legacy/BookishApp` before assigning its canonical path to the active app package.
+
+## Ordered Catalogue Links
+
+- Documented ordered lists of record references as the sole source of sequence in catalogue data.
+- Removed scalar ordering from link metadata because duplicated values cannot define a reliable order.
+
+## Direct Delicious Catalogue Links
+
+- Simplified Delicious Library imports to link books directly to ordered author, illustrator, publisher, and series records.
+- Removed the duplicate generic relationship records and their generated positions; the catalogue model still permits relationship records when a connection needs metadata.
+
+## Shared Catalogue Vocabulary
+
+- Added `BookishRecordKind` and `BookishRecordKey` to the `BookishRecord` package as the shared vocabulary for standard record kinds and properties.
+- Aligned the datastore seed graph with Delicious imports: books use ordered `authors` links to `person` records, and both records carry a source identifier.
