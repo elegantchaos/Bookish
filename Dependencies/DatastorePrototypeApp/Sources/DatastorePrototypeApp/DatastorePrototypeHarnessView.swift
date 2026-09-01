@@ -60,22 +60,26 @@ public struct DatastorePrototypeHarnessView: View {
   }
 
   private func handleInterchangeImport(_ result: Result<URL, Error>) {
-    guard case .success(let url) = result else {
-      return
-    }
+    switch result {
+    case .success(let url):
+      Task {
+        await harness.importInterchange(from: url)
+      }
 
-    Task {
-      await harness.importInterchange(from: url)
+    case .failure(let error):
+      harness.report(error: error)
     }
   }
 
   private func handleDeliciousLibraryImport(_ result: Result<URL, Error>) {
-    guard case .success(let url) = result else {
-      return
-    }
+    switch result {
+    case .success(let url):
+      Task {
+        await harness.importDeliciousLibrary(from: url)
+      }
 
-    Task {
-      await harness.importDeliciousLibrary(from: url)
+    case .failure(let error):
+      harness.report(error: error)
     }
   }
 
@@ -231,7 +235,7 @@ private struct PrototypeToolbar: ToolbarContent {
 
   var body: some ToolbarContent {
     ToolbarItem {
-      harness.importer(ImportInterchangeCommand())
+      harness.button(ImportInterchangeCommand())
         .labelStyle(.iconOnly)
     }
 
@@ -289,7 +293,7 @@ private struct PrototypeStatusBar: View {
 
   var body: some View {
     HStack {
-      Text(harness.status)
+      status
       Spacer()
       Text("\(harness.navigation.recordIDs.count) records")
     }
@@ -297,6 +301,23 @@ private struct PrototypeStatusBar: View {
     .foregroundStyle(.secondary)
     .padding()
     .background(.bar)
+  }
+
+  @ViewBuilder
+  private var status: some View {
+    if let progress = harness.importProgress {
+      if let total = progress.total {
+        ProgressView(
+          progress.message,
+          value: Double(progress.completed),
+          total: Double(total)
+        )
+      } else {
+        ProgressView(progress.message)
+      }
+    } else {
+      Text(harness.status)
+    }
   }
 }
 

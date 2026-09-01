@@ -21,6 +21,9 @@ public final class DatastorePrototypeHarness {
   /// The current user-facing status message.
   public private(set) var status = "Loading"
 
+  /// The current import progress, when an import is active.
+  public private(set) var importProgress: BookishImportProgress?
+
   /// The selected layout record identifier.
   public var selectedLayoutID: BookishRecordID?
 
@@ -104,9 +107,7 @@ public final class DatastorePrototypeHarness {
 
   /// Imports records from a Bookish interchange JSON file.
   public func importInterchange(from url: URL) async {
-    await importFile(from: url) { data in
-      try BookishInterchangeCodec().decode(data).records
-    }
+    await importFile(from: url, using: BookishInterchangeImporter())
   }
 
   /// Requests an interchange file import.
@@ -156,27 +157,83 @@ public final class DatastorePrototypeHarness {
 
   /// Imports records from Bookish interchange JSON data.
   public func importInterchange(data: Data) async {
-    await importRecords {
-      try BookishInterchangeCodec().decode(data).records
-    } statusName: {
-      "interchange"
-    }
+    await importRecords(from: data, using: BookishInterchangeImporter())
   }
 
   /// Imports records from a Delicious Library XML property-list file.
   public func importDeliciousLibrary(from url: URL) async {
-    await importFile(from: url) { data in
-      try DeliciousLibraryImporter().importRecords(from: data).records
-    }
+    await importFile(from: url, using: DeliciousLibraryImporter())
   }
 
   /// Imports records from Delicious Library XML property-list data.
   public func importDeliciousLibrary(data: Data) async {
-    await importRecords {
-      try DeliciousLibraryImporter().importRecords(from: data).records
-    } statusName: {
-      "Delicious Library"
+    await importRecords(from: data, using: DeliciousLibraryImporter())
+  }
+
+  /// Consumes the event stream from any Bookish importer and applies its record upserts.
+  public func importRecords<Importer: BookishImporter>(
+    from input: Importer.Input,
+    using importer: Importer
+  ) async {
+    guard let prototype else {
+      status = DatastorePrototypeHarnessError.notLoaded.localizedDescription
+      return
     }
+
+    var importedRecordCount = 0
+    var firstRecord: BookishRecord?
+    var displayName = importer.descriptor.displayName
+    let clock = ContinuousClock()
+    var lastProjectionRefresh = clock.now
+
+    do {
+      for try await event in importer.importEvents(from: input) {
+        try Task.checkCancellation()
+
+        switch event {
+        case .started(let start):
+          displayName = start.importer.displayName
+          importProgress = BookishImportProgress(
+            message: "Reading \(displayName)", completed: 0, total: start.total)
+          status = "Reading \(displayName)"
+
+        case .progress(let progress):
+          importProgress = progress
+          status = progress.message
+
+        case .records(let records):
+          for record in records {
+            try await prototype.mutationService.perform(.upsertRecord(record))
+          }
+          importedRecordCount += records.count
+          firstRecord = firstRecord ?? records.first(where: { $0.kind == "book" }) ?? records.first
+          if lastProjectionRefresh.duration(to: clock.now) >= .seconds(1) {
+            try await refresh()
+            lastProjectionRefresh = clock.now
+          }
+
+        case .diagnostic(let diagnostic):
+          status = diagnostic
+
+        case .finished:
+          break
+        }
+      }
+
+      try await refresh()
+      if let firstRecord {
+        navigation.select(kind: firstRecord.kind)
+        navigation.select(recordID: firstRecord.id)
+      }
+      status =
+        "Imported \(importedRecordCount) \(displayName) \(importedRecordCount == 1 ? "record" : "records")"
+    } catch is CancellationError {
+      status = "Import cancelled"
+    } catch {
+      status = error.localizedDescription
+    }
+
+    importProgress = nil
   }
 
   /// Exports the current materialised records as Bookish interchange JSON data.
@@ -261,10 +318,10 @@ public final class DatastorePrototypeHarness {
     }
   }
 
-  private func importFile(
+  private func importFile<Importer: BookishImporter>(
     from url: URL,
-    parse: (Data) throws -> [BookishRecord]
-  ) async {
+    using importer: Importer
+  ) async where Importer.Input == Data {
     do {
       let canAccess = url.startAccessingSecurityScopedResource()
       defer {
@@ -274,39 +331,7 @@ public final class DatastorePrototypeHarness {
       }
 
       let data = try Data(contentsOf: url)
-      let fileName = url.deletingPathExtension().lastPathComponent
-      await importRecords {
-        try parse(data)
-      } statusName: {
-        fileName.isEmpty ? "file" : fileName
-      }
-    } catch {
-      status = error.localizedDescription
-    }
-  }
-
-  private func importRecords(
-    parse: () throws -> [BookishRecord],
-    statusName: () -> String
-  ) async {
-    guard let prototype else {
-      status = DatastorePrototypeHarnessError.notLoaded.localizedDescription
-      return
-    }
-
-    do {
-      let records = try parse()
-      for record in records {
-        try await prototype.mutationService.perform(.upsertRecord(record))
-      }
-
-      try await refresh()
-      if let firstRecord = records.first {
-        navigation.select(kind: firstRecord.kind)
-        navigation.select(recordID: firstRecord.id)
-      }
-      status =
-        "Imported \(records.count) \(statusName()) \(records.count == 1 ? "record" : "records")"
+      await importRecords(from: data, using: importer)
     } catch {
       status = error.localizedDescription
     }

@@ -1,9 +1,9 @@
 import BookishRecord
 import Commands
 import CommandsUI
+import Foundation
 import Icons
 import SwiftUI
-import UniformTypeIdentifiers
 
 #if canImport(AppKit)
   import AppKit
@@ -26,8 +26,8 @@ public struct DatastorePrototypeCommands: Commands {
 
   public var body: some Commands {
     CommandGroup(after: .newItem) {
-      harness.importer(ImportInterchangeCommand())
-      harness.importer(ImportDeliciousLibraryCommand())
+      harness.button(ImportInterchangeCommand())
+      harness.button(ImportDeliciousLibraryCommand())
 
       Divider()
 
@@ -57,6 +57,8 @@ public struct DatastorePrototypeCommands: Commands {
       #if DEBUG
         Divider()
 
+        harness.button(ThrowTestErrorCommand())
+
         Button("Show Mutation Debug Window") {
           openWindow(id: DatastorePrototypeWindow.mutationDebug.rawValue)
         }
@@ -70,6 +72,47 @@ public enum DatastorePrototypeWindow: String, Sendable {
   /// Debug-only mutation history browser.
   case mutationDebug = "datastore-prototype-mutation-debug"
 }
+
+#if DEBUG
+  /// Error emitted by the prototype command used to exercise user-facing error reporting.
+  private enum PrototypeTestCommandError: LocalizedError {
+    /// The deliberate failure case.
+    case intentional
+
+    /// Explains that the error was triggered by the diagnostic command.
+    var errorDescription: String? {
+      "This is a test command error."
+    }
+  }
+
+  /// Deliberately fails so the prototype can verify command error presentation.
+  public struct ThrowTestErrorCommand: CommandWithUI {
+    public typealias Centre = DatastorePrototypeHarness
+    public typealias ResultType = Void
+
+    public let id = "datastore.throw-test-error"
+
+    /// Creates the diagnostic command.
+    public init() {
+    }
+
+    public func name(centre: DatastorePrototypeHarness) -> String {
+      "Throw Test Error"
+    }
+
+    public func icon(centre: DatastorePrototypeHarness) -> Icon {
+      Icon("exclamationmark.triangle")
+    }
+
+    public func help(centre: DatastorePrototypeHarness) -> String? {
+      "Tests whether a command failure appears in the status bar."
+    }
+
+    public func perform(centre: DatastorePrototypeHarness) async throws {
+      throw PrototypeTestCommandError.intentional
+    }
+  }
+#endif
 
 /// Reveals the prototype datastore folder in Finder.
 public struct RevealDatastoreFolderCommand: CommandWithUI {
@@ -113,18 +156,20 @@ public struct RevealDatastoreFolderCommand: CommandWithUI {
 }
 
 extension DatastorePrototypeHarness: CommandCentre {
+  /// Displays fire-and-forget command failures in the prototype status bar.
+  public func recordCommandFailure<C: Command>(_ command: C, error: any Error)
+  where C.Centre == DatastorePrototypeHarness {
+    report(error: error)
+  }
 }
 
-/// Imports records from a Bookish interchange JSON file.
-public struct ImportInterchangeCommand: ImporterCommand {
+/// Requests an interchange JSON import through the view-owned file picker.
+public struct ImportInterchangeCommand: CommandWithUI {
   public typealias Centre = DatastorePrototypeHarness
   public typealias ResultType = Void
 
   public let id = "datastore.import.interchange"
   public var shortcut: CommandShortcut? { .init("i", modifiers: [.command, .shift]) }
-  public var types: [UTType] { [.json] }
-  public var allowsMultipleSelection: Bool { false }
-  public var state: ImporterCommandURLState = .unknown
 
   public init() {
   }
@@ -142,31 +187,16 @@ public struct ImportInterchangeCommand: ImporterCommand {
   }
 
   public func perform(centre: DatastorePrototypeHarness) async throws {
-    switch state {
-    case .chosen(let urls):
-      guard let url = urls.first else {
-        return
-      }
-      await centre.importInterchange(from: url)
-
-    case .error(let error):
-      centre.report(error: error)
-
-    case .unknown:
-      break
-    }
+    centre.requestInterchangeImport()
   }
 }
 
-/// Imports records from a Delicious Library XML property-list file.
-public struct ImportDeliciousLibraryCommand: ImporterCommand {
+/// Requests a Delicious Library import through the view-owned file picker.
+public struct ImportDeliciousLibraryCommand: CommandWithUI {
   public typealias Centre = DatastorePrototypeHarness
   public typealias ResultType = Void
 
   public let id = "datastore.import.delicious-library"
-  public var types: [UTType] { [.xml] }
-  public var allowsMultipleSelection: Bool { false }
-  public var state: ImporterCommandURLState = .unknown
 
   public init() {
   }
@@ -184,19 +214,7 @@ public struct ImportDeliciousLibraryCommand: ImporterCommand {
   }
 
   public func perform(centre: DatastorePrototypeHarness) async throws {
-    switch state {
-    case .chosen(let urls):
-      guard let url = urls.first else {
-        return
-      }
-      await centre.importDeliciousLibrary(from: url)
-
-    case .error(let error):
-      centre.report(error: error)
-
-    case .unknown:
-      break
-    }
+    centre.requestDeliciousLibraryImport()
   }
 }
 

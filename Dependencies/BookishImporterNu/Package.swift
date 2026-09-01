@@ -23,6 +23,7 @@ let package = Package(
       name: "BookishImporterNu",
       dependencies: [
         .product(name: "BookishRecord", package: "BookishRecord"),
+        .product(name: "BookishCoding", package: "BookishCoding"),
         .product(name: "BookishCleanup", package: "BookishCleanupNu"),
       ]
     ),

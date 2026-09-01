@@ -118,6 +118,24 @@ final class DatastorePrototypeAppTests: XCTestCase {
   }
 
   @MainActor
+  func testDeliciousLibraryImportCommandRequestsViewOwnedFilePicker() async throws {
+    let harness = DatastorePrototypeHarness()
+
+    try await harness.perform(ImportDeliciousLibraryCommand())
+
+    XCTAssertTrue(harness.isImportingDeliciousLibrary)
+  }
+
+  @MainActor
+  func testTestErrorCommandIsShownInStatusBar() async {
+    let harness = DatastorePrototypeHarness()
+
+    await harness.performWithoutWaiting(ThrowTestErrorCommand()).value
+
+    XCTAssertEqual(harness.status, "This is a test command error.")
+  }
+
+  @MainActor
   func testEngineUsesApplicationStartupLoop() {
     let engine = DatastorePrototypeEngine()
 
@@ -169,7 +187,7 @@ final class DatastorePrototypeAppTests: XCTestCase {
 
     XCTAssertTrue(harness.navigation.recordIDs.contains(importedID))
     XCTAssertEqual(importedTitle, "Imported Book")
-    XCTAssertEqual(harness.status, "Imported 1 interchange record")
+    XCTAssertEqual(harness.status, "Imported 1 Bookish interchange record")
   }
 
   @MainActor
@@ -187,6 +205,16 @@ final class DatastorePrototypeAppTests: XCTestCase {
     XCTAssertFalse(importedBooks.isEmpty)
     XCTAssertTrue(harness.status.hasPrefix("Imported "))
     XCTAssertTrue(harness.status.contains("Delicious Library"))
+  }
+
+  @MainActor
+  func testInvalidDeliciousLibraryDataIsShownInStatusBar() async throws {
+    let harness = try makeHarness()
+    await harness.load()
+
+    await harness.importDeliciousLibrary(data: Data("not a property list".utf8))
+
+    XCTAssertNotEqual(harness.status, "Ready")
   }
 
   @MainActor

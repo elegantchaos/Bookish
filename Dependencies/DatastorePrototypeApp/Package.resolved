@@ -24,8 +24,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/elegantchaos/Icons.git",
       "state" : {
-        "revision" : "068efb572003fca636c99fcb9c8e2dd3bf813272",
-        "version" : "1.0.1"
+        "revision" : "033e9582671a14f1224e915d89866e8b2e1014ff",
+        "version" : "1.0.2"
       }
     },
     {

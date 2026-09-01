@@ -1,5 +1,5 @@
 {
-  "originHash" : "3038789ad0755d0d286c1b20a006ffd49c7913fe18efcb0745cadbdbe2add2a0",
+  "originHash" : "b6f3045774149d6036631a802617e5b63038b1f5849e6a764722c31c0fb14b65",
   "pins" : [
     {
       "identity" : "actionbuildercore",
@@ -51,8 +51,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/elegantchaos/Icons.git",
       "state" : {
-        "revision" : "068efb572003fca636c99fcb9c8e2dd3bf813272",
-        "version" : "1.0.1"
+        "revision" : "033e9582671a14f1224e915d89866e8b2e1014ff",
+        "version" : "1.0.2"
       }
     },
     {

@@ -8,12 +8,83 @@ import BookishRecord
 import Foundation
 
 /// Imports Delicious Library XML property-list exports into normalised Bookish records.
-public struct DeliciousLibraryImporter: Sendable {
+public struct DeliciousLibraryImporter: BookishImporter {
   /// The stable importer identifier.
   public static let sourceID = "com.elegantchaos.bookish.importer.delicious-library"
 
   /// Creates a Delicious Library importer.
   public init() {
+  }
+
+  /// Metadata used by import coordinators and user interfaces.
+  public var descriptor: BookishImporterDescriptor {
+    BookishImporterDescriptor(sourceID: Self.sourceID, displayName: "Delicious Library")
+  }
+
+  /// Imports Delicious Library data while emitting normalised record batches and progress updates.
+  public func importEvents(from data: Data) -> AsyncThrowingStream<BookishImportEvent, Error> {
+    let (stream, continuation) = AsyncThrowingStream.makeStream(
+      of: BookishImportEvent.self,
+      throwing: Error.self
+    )
+    let importer = self
+
+    let task = Task {
+      do {
+        continuation.yield(.started(BookishImportStart(importer: importer.descriptor)))
+        let list = try importer.decodeSource(data)
+        let total = list.count
+        continuation.yield(
+          .progress(
+            BookishImportProgress(
+              message: "Importing Delicious Library", completed: 0, total: total)))
+
+        var builder = DeliciousRecordGraphBuilder(sourceID: Self.sourceID)
+        let root = BookishRecordID("delicious-import")
+        var bookIDs: [BookishRecordID] = []
+        var recordCount = 0
+
+        for (offset, rawRecord) in list.enumerated() {
+          try Task.checkCancellation()
+
+          if let book = DeliciousBook(rawRecord, sourceID: Self.sourceID) {
+            let bookID = builder.addBook(importer.clean(book))
+            bookIDs.append(bookID)
+          }
+
+          let records = builder.drainChangedRecords()
+          if !records.isEmpty {
+            recordCount += records.count
+            continuation.yield(.records(records))
+          }
+          continuation.yield(
+            .progress(
+              BookishImportProgress(
+                message: "Importing Delicious Library", completed: offset + 1, total: total)))
+          await Task.yield()
+        }
+
+        builder.addRootList(id: root, bookIDs: bookIDs)
+        let rootRecords = builder.drainChangedRecords()
+        recordCount += rootRecords.count
+        continuation.yield(.records(rootRecords))
+        continuation.yield(
+          .finished(
+            BookishImportSummary(
+              sourceID: Self.sourceID, root: root, recordCount: recordCount,
+              diagnostics: builder.diagnostics)))
+        continuation.finish()
+      } catch is CancellationError {
+        continuation.finish()
+      } catch {
+        continuation.finish(throwing: error)
+      }
+    }
+
+    continuation.onTermination = { _ in
+      task.cancel()
+    }
+    return stream
   }
 
   /// Imports records from a Delicious Library XML property-list URL.
@@ -24,6 +95,10 @@ public struct DeliciousLibraryImporter: Sendable {
 
   /// Imports records from Delicious Library XML property-list data.
   public func importRecords(from data: Data) throws -> BookishImportResult {
+    try buildResult(from: decodeSource(data))
+  }
+
+  private func decodeSource(_ data: Data) throws -> [[String: Any]] {
     guard
       let list = try PropertyListSerialization.propertyList(from: data, options: [], format: nil)
         as? [[String: Any]]
@@ -35,7 +110,7 @@ public struct DeliciousLibraryImporter: Sendable {
       throw BookishImportError.unsupportedSource
     }
 
-    return buildResult(from: list)
+    return list
   }
 
   private func buildResult(from list: [[String: Any]]) -> BookishImportResult {
@@ -218,6 +293,11 @@ private struct DeliciousRecordGraphBuilder {
   let sourceID: String
   var recordsByID: [BookishRecordID: BookishRecord] = [:]
   var diagnostics: [String] = []
+  private var changedRecordIDs: Set<BookishRecordID> = []
+
+  init(sourceID: String) {
+    self.sourceID = sourceID
+  }
 
   mutating func addBook(_ book: DeliciousBook) -> BookishRecordID {
     let bookID = BookishRecordID("delicious-book-\(book.id.normalizedIDComponent)")
@@ -247,24 +327,33 @@ private struct DeliciousRecordGraphBuilder {
       addRelationship(role: "series", from: bookID, to: seriesID, position: book.seriesPosition)
     }
 
-    recordsByID[bookID] = BookishRecord(id: bookID, kind: "book", properties: properties)
+    store(BookishRecord(id: bookID, kind: "book", properties: properties))
     return bookID
   }
 
   mutating func addRootList(id: BookishRecordID, bookIDs: [BookishRecordID]) {
-    recordsByID[id] = BookishRecord(
-      id: id,
-      kind: "list",
-      properties: [
-        "name": .string("Delicious Library Import"),
-        "source": .string(sourceID),
-        "items": .list(bookIDs.map { .record($0) }),
-      ]
-    )
+    store(
+      BookishRecord(
+        id: id,
+        kind: "list",
+        properties: [
+          "name": .string("Delicious Library Import"),
+          "source": .string(sourceID),
+          "items": .list(bookIDs.map { .record($0) }),
+        ]))
   }
 
   func sortedRecords() -> [BookishRecord] {
     recordsByID.values.sorted { $0.id.rawValue < $1.id.rawValue }
+  }
+
+  mutating func drainChangedRecords() -> [BookishRecord] {
+    defer {
+      changedRecordIDs.removeAll()
+    }
+    return changedRecordIDs.compactMap { recordsByID[$0] }.sorted {
+      $0.id.rawValue < $1.id.rawValue
+    }
   }
 
   @discardableResult
@@ -274,14 +363,14 @@ private struct DeliciousRecordGraphBuilder {
       return id
     }
 
-    recordsByID[id] = BookishRecord(
-      id: id,
-      kind: kind,
-      properties: [
-        "name": .string(name),
-        "source": .string(sourceID),
-      ]
-    )
+    store(
+      BookishRecord(
+        id: id,
+        kind: kind,
+        properties: [
+          "name": .string(name),
+          "source": .string(sourceID),
+        ]))
     return id
   }
 
@@ -299,7 +388,12 @@ private struct DeliciousRecordGraphBuilder {
       "source": .string(sourceID),
     ]
     properties.addInteger(position, forKey: "position")
-    recordsByID[id] = BookishRecord(id: id, kind: "relationship", properties: properties)
+    store(BookishRecord(id: id, kind: "relationship", properties: properties))
+  }
+
+  private mutating func store(_ record: BookishRecord) {
+    recordsByID[record.id] = record
+    changedRecordIDs.insert(record.id)
   }
 }
 
