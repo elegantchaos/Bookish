@@ -1,7 +1,7 @@
 # BookishRecord
 
 `BookishRecord` owns the canonical materialised record model used by the new
-Bookish datastore prototype, importers, coding layer, and record views.
+Bookish datastore, importers, coding layer, and record views.
 
 The package requires Swift 6.3 and macOS 26.
 

@@ -1,6 +1,6 @@
 import Foundation
 
-/// A JSON-directory backed prototype mutation store.
+/// A JSON-directory backed local mutation store.
 public actor JSONMutationStore: MutationStore {
   private struct LegacyState: Codable, Equatable {
     var mutations: [MutationRecord]

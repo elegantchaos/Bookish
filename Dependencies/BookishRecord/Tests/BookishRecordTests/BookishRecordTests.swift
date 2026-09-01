@@ -10,7 +10,7 @@ final class BookishRecordTests: XCTestCase {
       id: BookishRecordID("book-1"),
       kind: "book",
       properties: [
-        "title": .string("Prototype"),
+        "title": .string("Bookish"),
         "pages": .integer(320),
         "authors": .list([.record(authorID)]),
         "primaryAuthor": .record(authorID),
@@ -19,7 +19,7 @@ final class BookishRecordTests: XCTestCase {
 
     XCTAssertEqual(record.id.rawValue, "book-1")
     XCTAssertEqual(record.kind, "book")
-    XCTAssertEqual(record.string("title"), "Prototype")
+    XCTAssertEqual(record.string("title"), "Bookish")
     XCTAssertEqual(record.integer("pages"), 320)
     XCTAssertEqual(record.record("primaryAuthor"), authorID)
     XCTAssertEqual(record.list("authors"), [.record(authorID)])
@@ -48,7 +48,7 @@ final class BookishRecordTests: XCTestCase {
       kind: "book",
       properties: [
         "dimensions": .encoded(try BookishEncodedValue(encoding: dimensions)),
-        "title": .string("Prototype"),
+        "title": .string("Bookish"),
       ]
     )
 
@@ -87,7 +87,7 @@ final class BookishRecordTests: XCTestCase {
       id: BookishRecordID("book-1"),
       kind: "book",
       properties: [
-        "title": .string("Prototype"),
+        "title": .string("Bookish"),
         "deleted": .tombstone,
       ]
     )

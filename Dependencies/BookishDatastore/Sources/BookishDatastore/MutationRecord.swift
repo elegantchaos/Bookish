@@ -1,7 +1,7 @@
 import BookishRecord
 import Foundation
 
-/// Describes a supported prototype mutation operation.
+/// Describes a supported local mutation operation.
 public enum MutationOperation: Codable, Equatable, Sendable {
   /// Creates or replaces a complete record projection.
   case upsertRecord(BookishRecord)

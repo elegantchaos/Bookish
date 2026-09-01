@@ -1,7 +1,7 @@
 import Foundation
 
 extension JSONEncoder {
-  /// Creates the stable encoder used by the JSON prototype stores.
+  /// Creates the stable encoder used by the JSON local stores.
   static func bookishDatastoreEncoder() -> JSONEncoder {
     let encoder = JSONEncoder()
     encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
@@ -11,7 +11,7 @@ extension JSONEncoder {
 }
 
 extension JSONDecoder {
-  /// Creates the decoder used by the JSON prototype stores.
+  /// Creates the decoder used by the JSON local stores.
   static func bookishDatastoreDecoder() -> JSONDecoder {
     let decoder = JSONDecoder()
     decoder.dateDecodingStrategy = .iso8601

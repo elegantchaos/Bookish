@@ -1,6 +1,6 @@
 # BookishImporterNu
 
-`BookishImporterNu` is the new importer prototype built on `BookishRecord`.
+`BookishImporterNu` is the new importer built on `BookishRecord`.
 
 The package requires Swift 6.3 and macOS 26.
 

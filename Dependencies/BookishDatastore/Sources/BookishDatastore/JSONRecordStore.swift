@@ -1,7 +1,7 @@
 import BookishRecord
 import Foundation
 
-/// A JSON-directory backed prototype record store for easy inspection while the design evolves.
+/// A JSON-directory backed local record store for easy inspection while the design evolves.
 public actor JSONRecordStore: RecordStore {
   private var recordsByID: [BookishRecordID: BookishRecord]
   private let directoryURL: URL

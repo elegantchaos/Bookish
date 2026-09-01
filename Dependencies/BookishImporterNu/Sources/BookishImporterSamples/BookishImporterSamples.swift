@@ -5,7 +5,7 @@
 
 import Foundation
 
-/// A Delicious Library sample bundled with Bookish for prototype testing.
+/// A Delicious Library sample bundled with Bookish for sample-data testing.
 public enum DeliciousLibrarySample: String, Sendable {
   /// The compact Delicious Library sample.
   case small

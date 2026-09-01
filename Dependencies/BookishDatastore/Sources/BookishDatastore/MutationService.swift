@@ -13,7 +13,7 @@ public protocol MutationService: Sendable {
   func processPendingMutations() async throws
 }
 
-/// Default prototype mutation service.
+/// Default local mutation service.
 public struct DefaultMutationService<Records: RecordStore, Mutations: MutationStore>:
   MutationService
 {

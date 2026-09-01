@@ -9,16 +9,16 @@ The package requires Swift 6.3 and macOS 26.
 
 The package currently includes:
 
-- `PrototypeRecordPresentation`, a shared layout adapter used by both row and
+- `BookishRecordPresentation`, a shared layout adapter used by both row and
   detail views.
-- `PrototypeMutationPresentation`, a shared adapter for displaying mutation log
+- `BookishMutationPresentation`, a shared adapter for displaying mutation log
   entries.
-- `PrototypeRecordView`, a simple form-based record renderer.
-- `PrototypeRecordCell`, a compact row renderer for record indexes.
-- `PrototypeMutationView` and `PrototypeMutationCell` for browsing mutation
+- `BookishRecordView`, a simple form-based record renderer.
+- `BookishRecordCell`, a compact row renderer for record indexes.
+- `BookishMutationView` and `BookishMutationCell` for browsing mutation
   details and rows.
 - Layout-driven field selection through a layout record's `fields` property.
-- Custom record-field value rendering through `PrototypeRecordView`, allowing
+- Custom record-field value rendering through `BookishRecordView`, allowing
   callers to supply active controls for values such as record links without
   coupling this package to app-specific navigation services.
 - Basic display formatting for `BookishRecordValue`.

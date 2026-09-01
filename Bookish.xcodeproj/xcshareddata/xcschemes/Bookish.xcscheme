@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "2650"
+   LastUpgradeVersion = "2700"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -16,8 +16,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "16409F5AAA5C472291A81AD1"
-               BuildableName = "Prototype.app"
-               BlueprintName = "Prototype"
+               BuildableName = "Bookish.app"
+               BlueprintName = "Bookish"
                ReferencedContainer = "container:Bookish.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -46,8 +46,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "16409F5AAA5C472291A81AD1"
-            BuildableName = "Prototype.app"
-            BlueprintName = "Prototype"
+            BuildableName = "Bookish.app"
+            BlueprintName = "Bookish"
             ReferencedContainer = "container:Bookish.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -63,8 +63,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "16409F5AAA5C472291A81AD1"
-            BuildableName = "Prototype.app"
-            BlueprintName = "Prototype"
+            BuildableName = "Bookish.app"
+            BlueprintName = "Bookish"
             ReferencedContainer = "container:Bookish.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

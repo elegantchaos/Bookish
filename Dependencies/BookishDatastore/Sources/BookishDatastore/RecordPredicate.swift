@@ -4,7 +4,7 @@ import Foundation
 /// Storage-neutral predicate for selecting records.
 ///
 /// The shape intentionally mirrors SwiftData's predicate composition at a
-/// domain level while remaining directly evaluable by the prototype JSON store.
+/// domain level while remaining directly evaluable by the local JSON store.
 public indirect enum RecordPredicate: Equatable, Sendable {
   /// Matches every record.
   case all

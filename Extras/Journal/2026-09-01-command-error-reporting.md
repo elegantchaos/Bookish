@@ -52,4 +52,10 @@ Fire-and-forget commands were only logged when they threw, leaving the datastore
 
 - Kept the `BookishImporterNu` package name while renaming its importing target, module, and primary library product to `BookishImporter`.
 - Moved the XML resources and their lookup API into a separate `BookishImporterSamples` target and library product.
-- The prototype links both products for its sample commands; shipping applications can link only the `BookishImporter` product when they do not need bundled fixtures.
+- `BookishApp` links both products for its sample commands; shipping applications can link only the `BookishImporter` product when they do not need bundled fixtures.
+
+## Bookish App Rename
+
+- Renamed the active datastore app package, product, target, tests, Xcode target, and app bundle to `BookishApp` and `Bookish`.
+- Renamed the app-layer APIs to `BookishApp…`, the datastore service bundle to `BookishDatastore`, and reusable record and mutation views to `Bookish…` names.
+- Moved the older, unused `Dependencies/BookishApp` package intact to `Extras/Legacy/BookishApp` before assigning its canonical path to the active app package.

@@ -7,11 +7,11 @@ import XCTest
 
 final class BookishRecordViewTests: XCTestCase {
   func testPresentationUsesLayoutFields() {
-    let presentation = PrototypeRecordPresentation(
+    let presentation = BookishRecordPresentation(
       record: BookishRecord(
         kind: "book",
         properties: [
-          "title": .string("Prototype"),
+          "title": .string("Bookish"),
           "author": .string("Author"),
           "status": .string("Reading"),
         ]
@@ -25,7 +25,7 @@ final class BookishRecordViewTests: XCTestCase {
       )
     )
 
-    XCTAssertEqual(presentation.title, "Prototype")
+    XCTAssertEqual(presentation.title, "Bookish")
     XCTAssertEqual(presentation.layoutTitle, "Book Summary")
     XCTAssertEqual(presentation.fields.map(\.key), ["author", "status"])
     XCTAssertEqual(presentation.fields.map(\.value), ["Author", "Reading"])
@@ -33,7 +33,7 @@ final class BookishRecordViewTests: XCTestCase {
   }
 
   func testPresentationFallsBackToSortedRecordFieldsWithoutLayout() {
-    let presentation = PrototypeRecordPresentation(
+    let presentation = BookishRecordPresentation(
       record: BookishRecord(
         kind: "book",
         properties: [
@@ -59,7 +59,7 @@ final class BookishRecordViewTests: XCTestCase {
       )
     )
 
-    let presentation = PrototypeMutationPresentation(mutation: mutation)
+    let presentation = BookishMutationPresentation(mutation: mutation)
 
     XCTAssertEqual(presentation.title, "Set Reading Status")
     XCTAssertEqual(presentation.subtitle, "book · book-1")
@@ -77,11 +77,11 @@ final class BookishRecordViewTests: XCTestCase {
 
   @MainActor
   func testRecordViewCanBeConstructedWithRecordAndLayout() {
-    let view = PrototypeRecordView(
+    let view = BookishRecordView(
       record: BookishRecord(
         kind: "book",
         properties: [
-          "title": .string("Prototype"),
+          "title": .string("Bookish"),
           "author": .record(BookishRecordID("author-1")),
         ]),
       layout: BookishRecord(
@@ -102,8 +102,8 @@ final class BookishRecordViewTests: XCTestCase {
 
   @MainActor
   func testRecordCellCanBeConstructedWithRecordAndLayout() {
-    let view = PrototypeRecordCell(
-      record: BookishRecord(kind: "book", properties: ["title": .string("Prototype")]),
+    let view = BookishRecordCell(
+      record: BookishRecord(kind: "book", properties: ["title": .string("Bookish")]),
       layout: BookishRecord(kind: "layout", properties: ["fields": .list([.string("title")])])
     )
 
@@ -116,8 +116,8 @@ final class BookishRecordViewTests: XCTestCase {
       operation: .deleteRecord(BookishRecordID("book-1"))
     )
 
-    let cell = PrototypeMutationCell(mutation: mutation)
-    let detail = PrototypeMutationView(mutation: mutation)
+    let cell = BookishMutationCell(mutation: mutation)
+    let detail = BookishMutationView(mutation: mutation)
 
     XCTAssertNotNil(cell.body)
     XCTAssertNotNil(detail.body)

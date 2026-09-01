@@ -1,12 +1,12 @@
-import DatastorePrototypeApp
+import BookishApp
 import SwiftUI
 
 @main
-struct DatastorePrototypeApplication: App {
-  @State private var engine: DatastorePrototypeEngine
+struct BookishApplication: App {
+  @State private var engine: BookishEngine
 
   init() {
-    let engine = DatastorePrototypeEngine()
+    let engine = BookishEngine()
     engine.start()
     self.engine = engine
   }
@@ -16,12 +16,12 @@ struct DatastorePrototypeApplication: App {
       engine.rootContent()
     }
     .commands {
-      DatastorePrototypeCommands(harness: engine.harness, navigation: engine.navigation)
+      BookishCommands(harness: engine.harness, navigation: engine.navigation)
     }
 
     #if DEBUG
-      WindowGroup("Mutation Debug", id: DatastorePrototypeWindow.mutationDebug.rawValue) {
-        DatastorePrototypeMutationDebugView(harness: engine.harness)
+      WindowGroup("Mutation Debug", id: BookishWindow.mutationDebug.rawValue) {
+        BookishMutationDebugView(harness: engine.harness)
       }
     #endif
   }

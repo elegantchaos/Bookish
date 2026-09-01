@@ -3,20 +3,27 @@
 //  All code (c) 2021 - present day, Sam Deane.
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
-#include ".rt/RTCatalyst.xcconfig"
+BOOKISH_NAME = Bookish
+BOOKISH_IDENTIFIER = com.elegantchaos.bookish.lists
+BOOKISH_COPYRIGHT = Copyright © 2026 Elegant Chaos Limited. All rights reserved.
+MARKETING_VERSION = 1.0
 
-RT_VERSION = 1.0.0
-RT_PRODUCT_NAME = Bookish
-RT_SHORT_NAME = Bookish
-RT_BUNDLE_IDENTIFIER = com.elegantchaos.bookish.lists
-RT_TEAM = 2H48644JM2
-RT_APP_ICON = AppIcon
+DEVELOPMENT_TEAM = 2H48644JM2
+RT_VERSION = $(MARKETING_VERSION)
+RT_BUILD = 0 // this will be injected by the build system
+CURRENT_PROJECT_VERSION = $(RT_BUILD)
 
-IPHONEOS_DEPLOYMENT_TARGET = 16.0
+IPHONEOS_DEPLOYMENT_TARGET = 26.5
+MACOSX_DEPLOYMENT_TARGET = 26.5
+XROS_DEPLOYMENT_TARGET = 26.5
+WATCHOS_DEPLOYMENT_TARGET = 26.5
 
-SWIFT_OBJC_BRIDGING_HEADER =
+SWIFT_VERSION = 6.0
+SWIFT_APPROACHABLE_CONCURRENCY = YES
+SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor
+OTHER_SWIFT_FLAGS = $(inherited) -enable-experimental-feature SendableProhibitsMainActorInference
 
-TARGETED_DEVICE_FAMILY = 1,2
-ENABLE_PREVIEWS = YES
-
-INFOPLIST_PREFIX_HEADER = Sources/Bookish/Resources/Info.h
+INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO
+INFOPLIST_KEY_CFBundleDisplayName = $(BOOKISH_NAME)
+INFOPLIST_KEY_NSHumanReadableCopyright = $(BOOKISH_COPYRIGHT)
+INFOPLIST_KEY_LSApplicationCategoryType = public.app-category.productivity

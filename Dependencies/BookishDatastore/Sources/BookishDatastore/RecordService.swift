@@ -19,7 +19,7 @@ public protocol RecordService: Sendable {
   func records(kind: String) async throws -> [BookishRecord]
 }
 
-/// Default prototype record service backed by a record store.
+/// Default local record service backed by a record store.
 public struct DefaultRecordService<Store: RecordStore>: RecordService {
   private let store: Store
 
