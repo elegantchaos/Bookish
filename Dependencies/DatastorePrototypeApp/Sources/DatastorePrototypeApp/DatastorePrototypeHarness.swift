@@ -1,6 +1,7 @@
 import BookishCoding
 import BookishDatastore
-import BookishImporterNu
+import BookishImporter
+import BookishImporterSamples
 import BookishRecord
 import Foundation
 import Observation
@@ -168,6 +169,16 @@ public final class DatastorePrototypeHarness {
   /// Imports records from Delicious Library XML property-list data.
   public func importDeliciousLibrary(data: Data) async {
     await importRecords(from: data, using: DeliciousLibraryImporter())
+  }
+
+  /// Imports one of the Delicious Library sample files bundled with Bookish.
+  public func importDeliciousLibrary(sample: DeliciousLibrarySample) async {
+    do {
+      await importDeliciousLibrary(
+        from: try BookishImporterSamples.deliciousLibraryURL(for: sample))
+    } catch {
+      report(error: error)
+    }
   }
 
   /// Consumes the event stream from any Bookish importer and applies its record upserts.

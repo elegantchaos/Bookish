@@ -41,3 +41,15 @@ Fire-and-forget commands were only logged when they threw, leaving the datastore
 - Replaced the prototype mutation log with immutable JSON files in `mutations/records/` and local applied-checkpoint markers in `mutations/applied/`.
 - Preserved the append, replay, and applied-checkpoint contract of `MutationStore`, keeping the persistence boundary suitable for a future cloud-backed mutation implementation while records stay local-only.
 - Added a non-destructive migration from the legacy `mutations.json` log; the legacy source file remains after migration.
+
+## Bundled Delicious Import Commands
+
+- Replaced the single Delicious Library import menu command with an `Import Delicious Library` submenu containing `Small Sample`, `Full Sample`, and `Other…`.
+- Moved the Delicious XML sample resources into `BookishImporterNu`, so the modern importer is self-contained and the prototype no longer needs the legacy importer package.
+- The two sample commands import their bundled files directly; `Other…` retains the view-owned file picker for a user-selected XML export.
+
+## Importer and Sample Product Boundary
+
+- Kept the `BookishImporterNu` package name while renaming its importing target, module, and primary library product to `BookishImporter`.
+- Moved the XML resources and their lookup API into a separate `BookishImporterSamples` target and library product.
+- The prototype links both products for its sample commands; shipping applications can link only the `BookishImporter` product when they do not need bundled fixtures.

@@ -1,4 +1,5 @@
 import BookishCoding
+import BookishImporterSamples
 import BookishRecord
 import Commands
 import XCTest
@@ -118,12 +119,35 @@ final class DatastorePrototypeAppTests: XCTestCase {
   }
 
   @MainActor
-  func testDeliciousLibraryImportCommandRequestsViewOwnedFilePicker() async throws {
+  func testOtherDeliciousLibraryImportCommandRequestsViewOwnedFilePicker() async throws {
     let harness = DatastorePrototypeHarness()
 
-    try await harness.perform(ImportDeliciousLibraryCommand())
+    try await harness.perform(ImportOtherDeliciousLibraryCommand())
 
     XCTAssertTrue(harness.isImportingDeliciousLibrary)
+  }
+
+  @MainActor
+  func testDeliciousLibrarySmallSampleCommandImportsBundledSample() async throws {
+    let harness = try makeHarness()
+    await harness.load()
+
+    try await harness.perform(ImportDeliciousLibrarySampleCommand(sample: .small))
+
+    let importedBooks = try await records(for: harness).filter {
+      $0.kind == "book" && $0.string("title") == "Snow Crash"
+    }
+    XCTAssertFalse(importedBooks.isEmpty)
+  }
+
+  @MainActor
+  func testDeliciousLibrarySampleCommandUsesMenuLabels() {
+    let harness = DatastorePrototypeHarness()
+
+    XCTAssertEqual(
+      ImportDeliciousLibrarySampleCommand(sample: .small).name(centre: harness), "Small Sample")
+    XCTAssertEqual(
+      ImportDeliciousLibrarySampleCommand(sample: .full).name(centre: harness), "Full Sample")
   }
 
   @MainActor
@@ -315,21 +339,7 @@ final class DatastorePrototypeAppTests: XCTestCase {
     return directory
   }
 
-  private func deliciousSampleURL() -> URL {
-    let testFile = URL(fileURLWithPath: #filePath)
-    let packageRoot =
-      testFile
-      .deletingLastPathComponent()
-      .deletingLastPathComponent()
-      .deletingLastPathComponent()
-
-    return
-      packageRoot
-      .deletingLastPathComponent()
-      .appending(path: "BookishImporter")
-      .appending(path: "Sources")
-      .appending(path: "BookishImporterSamples")
-      .appending(path: "Resources")
-      .appending(path: "DeliciousSmall.xml")
+  private func deliciousSampleURL() throws -> URL {
+    try BookishImporterSamples.deliciousLibraryURL(for: .small)
   }
 }

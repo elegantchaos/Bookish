@@ -29,7 +29,8 @@ let package = Package(
         .product(name: "Application", package: "Application"),
         .product(name: "BookishRecord", package: "BookishRecord"),
         .product(name: "BookishCoding", package: "BookishCoding"),
-        .product(name: "BookishImporterNu", package: "BookishImporterNu"),
+        .product(name: "BookishImporter", package: "BookishImporterNu"),
+        .product(name: "BookishImporterSamples", package: "BookishImporterNu"),
         .product(name: "BookishDatastore", package: "BookishDatastore"),
         .product(name: "BookishRecordView", package: "BookishRecordView"),
         .product(name: "Commands", package: "Commands"),
@@ -42,6 +43,7 @@ let package = Package(
         "DatastorePrototypeApp",
         .product(name: "BookishCoding", package: "BookishCoding"),
         .product(name: "BookishRecord", package: "BookishRecord"),
+        .product(name: "BookishImporterSamples", package: "BookishImporterNu"),
       ]
     ),
   ]

@@ -1,9 +1,10 @@
 import BookishCoding
+import BookishImporterSamples
 import BookishRecord
 import Foundation
 import XCTest
 
-@testable import BookishImporterNu
+@testable import BookishImporter
 
 final class DeliciousLibraryImporterTests: XCTestCase {
   func testImportsDeliciousSmallAsNormalisedGraph() throws {
@@ -80,20 +81,6 @@ final class DeliciousLibraryImporterTests: XCTestCase {
   }
 
   private func deliciousSampleURL() throws -> URL {
-    let testFile = URL(fileURLWithPath: #filePath)
-    let packageRoot =
-      testFile
-      .deletingLastPathComponent()
-      .deletingLastPathComponent()
-      .deletingLastPathComponent()
-
-    return
-      packageRoot
-      .deletingLastPathComponent()
-      .appending(path: "BookishImporter")
-      .appending(path: "Sources")
-      .appending(path: "BookishImporterSamples")
-      .appending(path: "Resources")
-      .appending(path: "DeliciousSmall.xml")
+    try BookishImporterSamples.deliciousLibraryURL(for: .small)
   }
 }

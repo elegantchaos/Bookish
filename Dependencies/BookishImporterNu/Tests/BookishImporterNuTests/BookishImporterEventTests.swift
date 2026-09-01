@@ -1,14 +1,15 @@
 import BookishCoding
+import BookishImporterSamples
 import BookishRecord
 import Foundation
 import Testing
 
-@testable import BookishImporterNu
+@testable import BookishImporter
 
 struct BookishImporterEventTests {
   @Test
   func deliciousLibraryStreamsNormalisedRecordsWithProgress() async throws {
-    let data = try Data(contentsOf: deliciousSampleURL())
+    let data = try Data(contentsOf: BookishImporterSamples.deliciousLibraryURL(for: .small))
     let events = try await collect(DeliciousLibraryImporter().importEvents(from: data))
 
     let start = try #require(events.first)
@@ -46,6 +47,16 @@ struct BookishImporterEventTests {
     }
     #expect(summary.root == expected.root)
     #expect(summary.recordCount == streamedRecords.count)
+  }
+
+  @Test
+  func deliciousLibrarySampleFilesAreBundled() throws {
+    #expect(
+      try BookishImporterSamples.deliciousLibraryURL(for: .small).lastPathComponent
+        == "DeliciousSmall.xml")
+    #expect(
+      try BookishImporterSamples.deliciousLibraryURL(for: .full).lastPathComponent
+        == "DeliciousFull.xml")
   }
 
   @Test
@@ -90,21 +101,4 @@ struct BookishImporterEventTests {
     return events
   }
 
-  private func deliciousSampleURL() -> URL {
-    let testFile = URL(fileURLWithPath: #filePath)
-    let packageRoot =
-      testFile
-      .deletingLastPathComponent()
-      .deletingLastPathComponent()
-      .deletingLastPathComponent()
-
-    return
-      packageRoot
-      .deletingLastPathComponent()
-      .appending(path: "BookishImporter")
-      .appending(path: "Sources")
-      .appending(path: "BookishImporterSamples")
-      .appending(path: "Resources")
-      .appending(path: "DeliciousSmall.xml")
-  }
 }

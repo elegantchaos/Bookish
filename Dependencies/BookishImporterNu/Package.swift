@@ -9,9 +9,13 @@ let package = Package(
   ],
   products: [
     .library(
-      name: "BookishImporterNu",
-      targets: ["BookishImporterNu"]
-    )
+      name: "BookishImporter",
+      targets: ["BookishImporter"]
+    ),
+    .library(
+      name: "BookishImporterSamples",
+      targets: ["BookishImporterSamples"]
+    ),
   ],
   dependencies: [
     .package(path: "../BookishRecord"),
@@ -20,17 +24,22 @@ let package = Package(
   ],
   targets: [
     .target(
-      name: "BookishImporterNu",
+      name: "BookishImporter",
       dependencies: [
         .product(name: "BookishRecord", package: "BookishRecord"),
         .product(name: "BookishCoding", package: "BookishCoding"),
         .product(name: "BookishCleanup", package: "BookishCleanupNu"),
       ]
     ),
+    .target(
+      name: "BookishImporterSamples",
+      resources: [.process("Resources")]
+    ),
     .testTarget(
       name: "BookishImporterNuTests",
       dependencies: [
-        "BookishImporterNu",
+        "BookishImporter",
+        "BookishImporterSamples",
         .product(name: "BookishCoding", package: "BookishCoding"),
       ]
     ),

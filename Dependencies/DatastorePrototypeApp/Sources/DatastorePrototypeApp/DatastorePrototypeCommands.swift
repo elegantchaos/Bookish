@@ -1,3 +1,5 @@
+import BookishImporter
+import BookishImporterSamples
 import BookishRecord
 import Commands
 import CommandsUI
@@ -27,7 +29,14 @@ public struct DatastorePrototypeCommands: Commands {
   public var body: some Commands {
     CommandGroup(after: .newItem) {
       harness.button(ImportInterchangeCommand())
-      harness.button(ImportDeliciousLibraryCommand())
+      Menu("Import Delicious Library") {
+        harness.button(ImportDeliciousLibrarySampleCommand(sample: .small))
+        harness.button(ImportDeliciousLibrarySampleCommand(sample: .full))
+
+        Divider()
+
+        harness.button(ImportOtherDeliciousLibraryCommand())
+      }
 
       Divider()
 
@@ -191,18 +200,30 @@ public struct ImportInterchangeCommand: CommandWithUI {
   }
 }
 
-/// Requests a Delicious Library import through the view-owned file picker.
-public struct ImportDeliciousLibraryCommand: CommandWithUI {
+/// Imports one of Bookish's bundled Delicious Library samples.
+public struct ImportDeliciousLibrarySampleCommand: CommandWithUI {
   public typealias Centre = DatastorePrototypeHarness
   public typealias ResultType = Void
 
-  public let id = "datastore.import.delicious-library"
+  /// The bundled sample to import.
+  public let sample: DeliciousLibrarySample
 
-  public init() {
+  /// Creates a command for a bundled Delicious Library sample.
+  public init(sample: DeliciousLibrarySample) {
+    self.sample = sample
+  }
+
+  public var id: String {
+    "datastore.import.delicious-library.\(sample.rawValue)"
   }
 
   public func name(centre: DatastorePrototypeHarness) -> String {
-    "Import Delicious Library File..."
+    switch sample {
+    case .small:
+      "Small Sample"
+    case .full:
+      "Full Sample"
+    }
   }
 
   public func icon(centre: DatastorePrototypeHarness) -> Icon {
@@ -210,7 +231,34 @@ public struct ImportDeliciousLibraryCommand: CommandWithUI {
   }
 
   public func help(centre: DatastorePrototypeHarness) -> String? {
-    "Import records from a Delicious Library XML export."
+    "Import the bundled \(name(centre: centre)) Delicious Library XML export."
+  }
+
+  public func perform(centre: DatastorePrototypeHarness) async throws {
+    await centre.importDeliciousLibrary(sample: sample)
+  }
+}
+
+/// Requests a Delicious Library import through the view-owned file picker.
+public struct ImportOtherDeliciousLibraryCommand: CommandWithUI {
+  public typealias Centre = DatastorePrototypeHarness
+  public typealias ResultType = Void
+
+  public let id = "datastore.import.delicious-library.other"
+
+  public init() {
+  }
+
+  public func name(centre: DatastorePrototypeHarness) -> String {
+    "Other…"
+  }
+
+  public func icon(centre: DatastorePrototypeHarness) -> Icon {
+    Icon("books.vertical")
+  }
+
+  public func help(centre: DatastorePrototypeHarness) -> String? {
+    "Import records from another Delicious Library XML export."
   }
 
   public func perform(centre: DatastorePrototypeHarness) async throws {
