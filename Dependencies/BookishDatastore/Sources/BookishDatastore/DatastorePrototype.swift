@@ -14,12 +14,12 @@ public struct DatastorePrototype: Sendable {
   /// The write/sync service.
   public let mutationService: DefaultMutationService<JSONRecordStore, JSONMutationStore>
 
-  /// Creates a prototype datastore using `records.json` and `mutations.json` below a directory.
+  /// Creates a prototype datastore using dedicated record and mutation directories below a directory.
   public init(directoryURL: URL) async throws {
     self.recordStore = try await JSONRecordStore(
-      fileURL: directoryURL.appending(path: "records.json"))
+      directoryURL: directoryURL.appending(path: "records", directoryHint: .isDirectory))
     self.mutationStore = try await JSONMutationStore(
-      fileURL: directoryURL.appending(path: "mutations.json"))
+      directoryURL: directoryURL.appending(path: "mutations", directoryHint: .isDirectory))
     self.recordService = DefaultRecordService(store: recordStore)
     self.mutationService = DefaultMutationService(
       recordStore: recordStore, mutationStore: mutationStore)

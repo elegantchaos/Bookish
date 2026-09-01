@@ -1,16 +1,16 @@
 import BookishRecord
 import Foundation
 
-/// A JSON-file backed prototype record store for easy inspection while the design evolves.
+/// A JSON-directory backed prototype record store for easy inspection while the design evolves.
 public actor JSONRecordStore: RecordStore {
   private var recordsByID: [BookishRecordID: BookishRecord]
-  private let fileURL: URL
+  private let directoryURL: URL
   private let encoder: JSONEncoder
   private let decoder: JSONDecoder
 
-  /// Creates a JSON record store rooted at a single file URL.
-  public init(fileURL: URL) async throws {
-    self.fileURL = fileURL
+  /// Creates a JSON record store rooted at a directory containing one file per record.
+  public init(directoryURL: URL) async throws {
+    self.directoryURL = directoryURL
     self.encoder = JSONEncoder.bookishDatastoreEncoder()
     self.decoder = JSONDecoder.bookishDatastoreDecoder()
     self.recordsByID = [:]
@@ -39,36 +39,95 @@ public actor JSONRecordStore: RecordStore {
 
   /// Writes a materialised record.
   public func upsert(_ record: BookishRecord) async throws {
+    guard recordsByID[record.id] != record else {
+      return
+    }
+
     recordsByID[record.id] = record
-    try save()
+    try save(record)
   }
 
   /// Deletes a materialised record.
   public func delete(id: BookishRecordID) async throws {
-    recordsByID[id] = nil
-    try save()
+    guard recordsByID.removeValue(forKey: id) != nil else {
+      return
+    }
+
+    let fileURL = recordFileURL(for: id)
+    guard FileManager.default.fileExists(atPath: fileURL.path) else {
+      return
+    }
+    try FileManager.default.removeItem(at: fileURL)
   }
 
   /// Removes every materialised record.
   public func removeAll() async throws {
-    recordsByID = [:]
-    try save()
-  }
-
-  private func load() async throws {
-    guard FileManager.default.fileExists(atPath: fileURL.path) else {
+    guard !recordsByID.isEmpty else {
       return
     }
 
-    let data = try Data(contentsOf: fileURL)
-    let storedRecords = try decoder.decode([BookishRecord].self, from: data)
+    recordsByID = [:]
+    guard FileManager.default.fileExists(atPath: directoryURL.path) else {
+      return
+    }
+    try FileManager.default.removeItem(at: directoryURL)
+  }
+
+  private func load() async throws {
+    guard FileManager.default.fileExists(atPath: directoryURL.path) else {
+      try migrateLegacyProjectionIfNeeded()
+      return
+    }
+
+    let fileURLs = try FileManager.default.contentsOfDirectory(
+      at: directoryURL,
+      includingPropertiesForKeys: nil,
+      options: [.skipsHiddenFiles]
+    )
+    let storedRecords =
+      try fileURLs
+      .filter { $0.pathExtension == "json" }
+      .map { try decoder.decode(BookishRecord.self, from: Data(contentsOf: $0)) }
     recordsByID = Dictionary(uniqueKeysWithValues: storedRecords.map { ($0.id, $0) })
   }
 
-  private func save() throws {
+  private func migrateLegacyProjectionIfNeeded() throws {
+    let legacyFileURL =
+      directoryURL
+      .deletingLastPathComponent()
+      .appending(path: "records.json")
+    guard FileManager.default.fileExists(atPath: legacyFileURL.path) else {
+      return
+    }
+
+    let storedRecords = try decoder.decode(
+      [BookishRecord].self, from: Data(contentsOf: legacyFileURL))
+    recordsByID = Dictionary(uniqueKeysWithValues: storedRecords.map { ($0.id, $0) })
+
+    do {
+      for record in storedRecords {
+        try save(record)
+      }
+    } catch {
+      try? FileManager.default.removeItem(at: directoryURL)
+      recordsByID = [:]
+      throw error
+    }
+  }
+
+  private func save(_ record: BookishRecord) throws {
     try FileManager.default.createDirectory(
-      at: fileURL.deletingLastPathComponent(), withIntermediateDirectories: true)
-    let data = try encoder.encode(recordsByID.values.sorted { $0.id.rawValue < $1.id.rawValue })
-    try data.write(to: fileURL, options: [.atomic])
+      at: directoryURL, withIntermediateDirectories: true)
+    let data = try encoder.encode(record)
+    try data.write(to: recordFileURL(for: record.id), options: [.atomic])
+  }
+
+  private func recordFileURL(for id: BookishRecordID) -> URL {
+    let encodedID = Data(id.rawValue.utf8)
+      .base64EncodedString()
+      .replacing("+", with: "-")
+      .replacing("/", with: "_")
+      .trimmingCharacters(in: CharacterSet(charactersIn: "="))
+    return directoryURL.appending(path: "record-\(encodedID).json")
   }
 }

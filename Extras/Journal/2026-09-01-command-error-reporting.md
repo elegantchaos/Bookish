@@ -28,3 +28,16 @@ Fire-and-forget commands were only logged when they threw, leaving the datastore
 - Added `BookishInterchangeImporter`, which adapts the existing synchronous `BookishInterchangeCodec` into the same stream. The codec remains the single decoder for interchange JSON.
 - Added a deliberately unavailable `KindleLibraryImporter` stub and source type, reserving the shared API without guessing Kindle’s eventual extraction mechanism.
 - Refactored the prototype harness to consume any importer event stream, apply emitted records as upserts, and drive an indeterminate or determinate `ProgressView` in the status bar.
+
+## Per-Record JSON Projection
+
+- Replaced the prototype record projection's monolithic `records.json` file with a `records/` directory containing one safely encoded JSON filename per record.
+- Upserting an unchanged record now performs no file write; modifying one record leaves the other record files untouched.
+- Added a one-time, non-destructive migration from the legacy `records.json` projection. The legacy file is retained after successful migration.
+- The mutation log is still a single `mutations.json` file and remains the next material persistence bottleneck for large imports.
+
+## Per-Mutation JSON Log
+
+- Replaced the prototype mutation log with immutable JSON files in `mutations/records/` and local applied-checkpoint markers in `mutations/applied/`.
+- Preserved the append, replay, and applied-checkpoint contract of `MutationStore`, keeping the persistence boundary suitable for a future cloud-backed mutation implementation while records stay local-only.
+- Added a non-destructive migration from the legacy `mutations.json` log; the legacy source file remains after migration.
