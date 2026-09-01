@@ -329,7 +329,9 @@ private struct RecordLinkButton: View {
     Button(recordID.rawValue) {
       navigation.performWithoutWaiting(NavigateToRecordCommand(recordID: recordID))
     }
+    #if os(macOS)
     .buttonStyle(.link)
+    #endif
   }
 }
 

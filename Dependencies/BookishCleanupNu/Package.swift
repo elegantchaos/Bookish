@@ -1,12 +1,11 @@
-// swift-tools-version:5.7
+// swift-tools-version:6.3
 
 import PackageDescription
 
 let package = Package(
   name: "BookishCleanup",
   platforms: [
-    .macOS("15.0"),
-    .iOS(.v16), .macCatalyst(.v16),
+    .macOS(.v26), .iOS(.v26)
   ],
   products: [
     .library(
