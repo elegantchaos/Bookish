@@ -9,8 +9,13 @@
   "records": [
     {
       "id": "datastore-index-all-records",
-      "kind": "recordIndex",
+      "kind": "index",
       "label": "All Records",
+      "debugOnly": true,
+      "layout": {
+        "_rv": "record",
+        "id": "datastore-all-fields-layout"
+      },
       "position": 0,
       "query": {
         "_rv": "encoded",
@@ -43,46 +48,15 @@
       "source": "com.elegantchaos.bookish.seed"
     },
     {
-      "id": "datastore-index-records",
-      "kind": "recordIndex",
-      "label": "Records",
-      "position": 1,
-      "query": {
-        "_rv": "encoded",
-        "predicate": {
-          "kind": "record",
-          "type": "kind"
-        },
-        "sort": [
-          {
-            "direction": "ascending",
-            "key": {
-              "key": "title",
-              "type": "property"
-            }
-          },
-          {
-            "direction": "ascending",
-            "key": {
-              "key": "name",
-              "type": "property"
-            }
-          },
-          {
-            "direction": "ascending",
-            "key": {
-              "type": "id"
-            }
-          }
-        ]
-      },
-      "source": "com.elegantchaos.bookish.seed"
-    },
-    {
       "id": "datastore-index-books",
-      "kind": "recordIndex",
+      "kind": "index",
       "label": "Books",
-      "position": 2,
+      "debugOnly": false,
+      "layout": {
+        "_rv": "record",
+        "id": "datastore-book-layout"
+      },
+      "position": 1,
       "query": {
         "_rv": "encoded",
         "predicate": {
@@ -116,9 +90,14 @@
     },
     {
       "id": "datastore-index-people",
-      "kind": "recordIndex",
+      "kind": "index",
       "label": "People",
-      "position": 3,
+      "debugOnly": false,
+      "layout": {
+        "_rv": "record",
+        "id": "datastore-person-layout"
+      },
+      "position": 2,
       "query": {
         "_rv": "encoded",
         "predicate": {
@@ -152,9 +131,14 @@
     },
     {
       "id": "datastore-index-organisations",
-      "kind": "recordIndex",
+      "kind": "index",
       "label": "Organisations",
-      "position": 4,
+      "debugOnly": false,
+      "layout": {
+        "_rv": "record",
+        "id": "datastore-organisation-layout"
+      },
+      "position": 3,
       "query": {
         "_rv": "encoded",
         "predicate": {
@@ -188,9 +172,14 @@
     },
     {
       "id": "datastore-index-series",
-      "kind": "recordIndex",
+      "kind": "index",
       "label": "Series",
-      "position": 5,
+      "debugOnly": false,
+      "layout": {
+        "_rv": "record",
+        "id": "datastore-series-layout"
+      },
+      "position": 4,
       "query": {
         "_rv": "encoded",
         "predicate": {
@@ -224,9 +213,14 @@
     },
     {
       "id": "datastore-index-lists",
-      "kind": "recordIndex",
+      "kind": "index",
       "label": "Lists",
-      "position": 6,
+      "debugOnly": false,
+      "layout": {
+        "_rv": "record",
+        "id": "datastore-list-layout"
+      },
+      "position": 5,
       "query": {
         "_rv": "encoded",
         "predicate": {
@@ -260,9 +254,14 @@
     },
     {
       "id": "datastore-index-relationships",
-      "kind": "recordIndex",
+      "kind": "index",
       "label": "Relationships",
-      "position": 7,
+      "debugOnly": false,
+      "layout": {
+        "_rv": "record",
+        "id": "datastore-relationship-layout"
+      },
+      "position": 6,
       "query": {
         "_rv": "encoded",
         "predicate": {
@@ -296,9 +295,14 @@
     },
     {
       "id": "datastore-index-layouts",
-      "kind": "recordIndex",
+      "kind": "index",
       "label": "Layouts",
-      "position": 8,
+      "debugOnly": true,
+      "layout": {
+        "_rv": "record",
+        "id": "datastore-layout-layout"
+      },
+      "position": 7,
       "query": {
         "_rv": "encoded",
         "predicate": {
@@ -331,14 +335,19 @@
       "source": "com.elegantchaos.bookish.seed"
     },
     {
-      "id": "datastore-index-record-indexes",
-      "kind": "recordIndex",
-      "label": "Record Indexes",
-      "position": 9,
+      "id": "datastore-index-indexes",
+      "kind": "index",
+      "label": "Indexes",
+      "debugOnly": true,
+      "layout": {
+        "_rv": "record",
+        "id": "datastore-index-layout"
+      },
+      "position": 8,
       "query": {
         "_rv": "encoded",
         "predicate": {
-          "kind": "recordIndex",
+          "kind": "index",
           "type": "kind"
         },
         "sort": [
@@ -367,26 +376,150 @@
       "source": "com.elegantchaos.bookish.seed"
     },
     {
-      "id": "datastore-book-layout",
+      "id": "datastore-all-fields-layout",
       "kind": "layout",
       "fields": [
-        "title",
-        "authors",
-        "status",
-        "format",
-        "note"
+        "*"
       ],
-      "title": "Bookish Book"
+      "title": "All Fields",
+      "source": "com.elegantchaos.bookish.seed"
     },
     {
-      "id": "datastore-book-compact-layout",
+      "id": "datastore-record-layout",
       "kind": "layout",
       "fields": [
         "title",
         "name",
-        "status"
+        "note",
+        "source",
+        "importedID",
+        "*"
       ],
-      "title": "Compact Summary"
+      "title": "Record",
+      "source": "com.elegantchaos.bookish.seed"
+    },
+    {
+      "id": "datastore-book-layout",
+      "kind": "layout",
+      "fields": [
+        "title",
+        "subtitle",
+        "authors",
+        "illustrators",
+        "series",
+        "seriesPosition",
+        "publishers",
+        "publishedDate",
+        "format",
+        "pages",
+        "isbn",
+        "asin",
+        "dewey",
+        "genres",
+        "editions",
+        "status",
+        "note",
+        "source",
+        "importedID",
+        "*"
+      ],
+      "title": "Book",
+      "source": "com.elegantchaos.bookish.seed"
+    },
+    {
+      "id": "datastore-person-layout",
+      "kind": "layout",
+      "fields": [
+        "name",
+        "source",
+        "*"
+      ],
+      "title": "Person",
+      "source": "com.elegantchaos.bookish.seed"
+    },
+    {
+      "id": "datastore-organisation-layout",
+      "kind": "layout",
+      "fields": [
+        "name",
+        "source",
+        "*"
+      ],
+      "title": "Organisation",
+      "source": "com.elegantchaos.bookish.seed"
+    },
+    {
+      "id": "datastore-series-layout",
+      "kind": "layout",
+      "fields": [
+        "name",
+        "source",
+        "*"
+      ],
+      "title": "Series",
+      "source": "com.elegantchaos.bookish.seed"
+    },
+    {
+      "id": "datastore-list-layout",
+      "kind": "layout",
+      "fields": [
+        "name",
+        "items",
+        "source",
+        "*"
+      ],
+      "title": "List",
+      "source": "com.elegantchaos.bookish.seed"
+    },
+    {
+      "id": "datastore-relationship-layout",
+      "kind": "layout",
+      "fields": [
+        "title",
+        "name",
+        "source",
+        "*"
+      ],
+      "title": "Relationship",
+      "source": "com.elegantchaos.bookish.seed"
+    },
+    {
+      "id": "datastore-layout-layout",
+      "kind": "layout",
+      "fields": [
+        "title",
+        "fields",
+        "source",
+        "*"
+      ],
+      "title": "Layout",
+      "source": "com.elegantchaos.bookish.seed"
+    },
+    {
+      "id": "datastore-index-layout",
+      "kind": "layout",
+      "fields": [
+        "label",
+        "position",
+        "debugOnly",
+        "layout",
+        "query",
+        "source",
+        "*"
+      ],
+      "title": "Index",
+      "source": "com.elegantchaos.bookish.seed"
+    },
+    {
+      "id": "datastore-seed-marker-layout",
+      "kind": "layout",
+      "fields": [
+        "label",
+        "source",
+        "*"
+      ],
+      "title": "Seed Marker",
+      "source": "com.elegantchaos.bookish.seed"
     }
   ]
 }

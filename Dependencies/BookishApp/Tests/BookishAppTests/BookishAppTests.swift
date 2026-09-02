@@ -42,15 +42,113 @@ final class BookishAppTests: XCTestCase {
     let labels = harness.navigation.recordIndexes.map(\.label)
     let allRecordsIndex = try XCTUnwrap(harness.navigation.recordIndexes.first)
     let storedAllRecordsIndex = try await harness.record(id: allRecordsIndex.id)
+    let storedIndexesIndex = try await harness.record(
+      id: BookishRecordID("datastore-index-indexes"))
+    let storedBooksIndex = try await harness.record(id: BookishRecordID("datastore-index-books"))
     let seedMarker = try await harness.record(id: BookishRecordID("datastore-seed-marker"))
 
-    XCTAssertEqual(labels.first, "All Records")
-    XCTAssertTrue(labels.contains("Books"))
-    XCTAssertTrue(labels.contains("People"))
-    XCTAssertEqual(storedAllRecordsIndex?.kind, BookishRecordKind.recordIndex)
+    XCTAssertEqual(
+      labels,
+      [
+        "All Records",
+        "Books",
+        "People",
+        "Organisations",
+        "Series",
+        "Lists",
+        "Relationships",
+        "Layouts",
+        "Indexes",
+      ]
+    )
+    XCTAssertEqual(storedAllRecordsIndex?.kind, BookishRecordKind.index)
+    XCTAssertEqual(storedAllRecordsIndex?.bool(BookishRecordKey.debugOnly), true)
+    XCTAssertEqual(
+      storedAllRecordsIndex?.record(BookishRecordKey.layout),
+      BookishRecordID("datastore-all-fields-layout")
+    )
+    XCTAssertEqual(storedIndexesIndex?.kind, BookishRecordKind.index)
+    XCTAssertEqual(storedIndexesIndex?.string(BookishRecordKey.label), "Indexes")
+    XCTAssertEqual(storedIndexesIndex?.bool(BookishRecordKey.debugOnly), true)
+    XCTAssertEqual(storedBooksIndex?.bool(BookishRecordKey.debugOnly), false)
     XCTAssertEqual(seedMarker?.kind, BookishRecordKind.seedMarker)
+    XCTAssertTrue(harness.defaultShowsDebugIndexes)
     XCTAssertEqual(harness.navigation.selectedRecordIndexLabel, "All Records")
     XCTAssertFalse(harness.navigation.selectedRecordIDs.isEmpty)
+  }
+
+  @MainActor
+  func testHarnessHidesDebugIndexesWhenDebugIndexesAreDisabled() async throws {
+    let harness = try makeHarness(defaultShowsDebugIndexes: false)
+    await harness.load()
+
+    XCTAssertEqual(
+      harness.navigation.recordIndexes.map(\.label),
+      [
+        "Books",
+        "People",
+        "Organisations",
+        "Series",
+        "Lists",
+        "Relationships",
+      ]
+    )
+    XCTAssertFalse(harness.defaultShowsDebugIndexes)
+    XCTAssertEqual(harness.navigation.selectedRecordIndexLabel, "Books")
+  }
+
+  @MainActor
+  func testHarnessSeedsStandardLayouts() async throws {
+    let harness = try makeHarness()
+    await harness.load()
+
+    let layoutIDs = Set(harness.layoutIDs)
+    let allFields = try await harness.record(id: BookishRecordID("datastore-all-fields-layout"))
+    let book = try await harness.record(id: BookishRecordID("datastore-book-layout"))
+    let index = try await harness.record(id: BookishRecordID("datastore-index-layout"))
+
+    XCTAssertTrue(layoutIDs.contains(BookishRecordID("datastore-record-layout")))
+    XCTAssertTrue(layoutIDs.contains(BookishRecordID("datastore-book-layout")))
+    XCTAssertTrue(layoutIDs.contains(BookishRecordID("datastore-person-layout")))
+    XCTAssertTrue(layoutIDs.contains(BookishRecordID("datastore-organisation-layout")))
+    XCTAssertTrue(layoutIDs.contains(BookishRecordID("datastore-series-layout")))
+    XCTAssertTrue(layoutIDs.contains(BookishRecordID("datastore-list-layout")))
+    XCTAssertTrue(layoutIDs.contains(BookishRecordID("datastore-relationship-layout")))
+    XCTAssertTrue(layoutIDs.contains(BookishRecordID("datastore-layout-layout")))
+    XCTAssertTrue(layoutIDs.contains(BookishRecordID("datastore-index-layout")))
+    XCTAssertTrue(layoutIDs.contains(BookishRecordID("datastore-seed-marker-layout")))
+    XCTAssertEqual(
+      allFields?.list(BookishRecordKey.fields), [.string(BookishRecordKey.allOtherFields)])
+    XCTAssertEqual(book?.string(BookishRecordKey.title), "Book")
+    XCTAssertTrue(
+      book?.list(BookishRecordKey.fields)?.contains(.string(BookishRecordKey.isbn)) == true)
+    XCTAssertTrue(
+      index?.list(BookishRecordKey.fields)?.contains(.string(BookishRecordKey.debugOnly)) == true)
+  }
+
+  @MainActor
+  func testHarnessSeedsDebugBrowserIndexRecords() async throws {
+    let harness = try makeHarness()
+    await harness.load()
+
+    let storedBookIndex = try await harness.record(id: BookishRecordID("datastore-index-books"))
+
+    if let encodedQuery = storedBookIndex?.properties[BookishRecordKey.query]?.encodedValue {
+      do {
+        let query = try encodedQuery.decode(RecordQuery.self)
+        XCTAssertEqual(query.predicate, RecordPredicate.kind(BookishRecordKind.book))
+      } catch {
+        XCTFail("Failed to decode stored book index query: \(error)")
+      }
+    } else {
+      XCTFail("Stored book index query is missing.")
+    }
+    XCTAssertEqual(storedBookIndex?.kind, BookishRecordKind.index)
+    XCTAssertEqual(storedBookIndex?.bool(BookishRecordKey.debugOnly), false)
+    XCTAssertEqual(
+      storedBookIndex?.record(BookishRecordKey.layout), BookishRecordID("datastore-book-layout"))
+    XCTAssertTrue(
+      harness.navigation.recordIndexIDs.contains(BookishRecordID("datastore-index-books")))
   }
 
   @MainActor
@@ -70,9 +168,59 @@ final class BookishAppTests: XCTestCase {
     let bookLayout = try await harness.record(id: BookishRecordID("datastore-book-layout"))
     let sampleBook = try await harness.record(id: BookishRecordID("datastore-book"))
 
-    XCTAssertEqual(allRecordsIndex?.kind, BookishRecordKind.recordIndex)
+    XCTAssertEqual(allRecordsIndex?.kind, BookishRecordKind.index)
     XCTAssertEqual(bookLayout?.kind, BookishRecordKind.layout)
     XCTAssertNil(sampleBook)
+  }
+
+  @MainActor
+  func testHarnessPrunesStaleSeededBrowserIndexRecords() async throws {
+    let directory = try temporaryDirectory()
+    let datastore = try await BookishDatastore(directoryURL: directory)
+    try await datastore.recordStore.upsert(
+      BookishRecord(
+        id: BookishRecordID("datastore-seed-marker"), kind: BookishRecordKind.seedMarker)
+    )
+    try await datastore.recordStore.upsert(
+      try BookishRecordIndex.record(
+        id: BookishRecordID("datastore-index-records"),
+        label: "Records",
+        position: 1,
+        query: RecordQuery(predicate: .kind(BookishRecordKind.record)),
+        sourceID: "com.elegantchaos.bookish.seed"
+      ))
+    try await datastore.recordStore.upsert(
+      BookishRecord(
+        id: BookishRecordID("datastore-index-record-indexes"),
+        kind: "recordIndex",
+        properties: [
+          BookishRecordKey.label: .string("Record Indexes"),
+          BookishRecordKey.source: .string("com.elegantchaos.bookish.seed"),
+        ]
+      ))
+    try await datastore.recordStore.upsert(
+      BookishRecord(
+        id: BookishRecordID("datastore-book-compact-layout"),
+        kind: BookishRecordKind.layout,
+        properties: [
+          BookishRecordKey.title: .string("Compact Summary"),
+          BookishRecordKey.source: .string("com.elegantchaos.bookish.seed"),
+        ]
+      ))
+    let harness = BookishHarness(directoryURL: directory)
+
+    await harness.load()
+
+    let labels = harness.navigation.recordIndexes.map(\.label)
+    let staleRecordIndex = try await harness.record(id: BookishRecordID("datastore-index-records"))
+    let staleRecordIndexKind = try await harness.record(
+      id: BookishRecordID("datastore-index-record-indexes"))
+    let staleLayout = try await harness.record(id: BookishRecordID("datastore-book-compact-layout"))
+
+    XCTAssertFalse(labels.contains("Records"))
+    XCTAssertNil(staleRecordIndex)
+    XCTAssertNil(staleRecordIndexKind)
+    XCTAssertNil(staleLayout)
   }
 
   @MainActor
@@ -122,15 +270,15 @@ final class BookishAppTests: XCTestCase {
   func testNavigationCommandsMoveBetweenIndexesAndRecords() async throws {
     let harness = try makeHarness()
     await harness.load()
-    await harness.select(recordIndexID: BookishRecordID("datastore-index-books"))
+    await harness.select(recordIndexID: BookishRecordID("datastore-index-layouts"))
 
     try await harness.perform(SelectNextRecordIndexCommand())
 
-    XCTAssertEqual(harness.navigation.selectedRecordIndexLabel, "People")
+    XCTAssertEqual(harness.navigation.selectedRecordIndexLabel, "Indexes")
 
     try await harness.perform(SelectPreviousRecordIndexCommand())
 
-    XCTAssertEqual(harness.navigation.selectedRecordIndexLabel, "Books")
+    XCTAssertEqual(harness.navigation.selectedRecordIndexLabel, "Layouts")
 
     let navigation = BookishNavigationService()
     let selectedRecordResult = RecordQueryResult(query: RecordQuery())
@@ -148,6 +296,18 @@ final class BookishAppTests: XCTestCase {
     try await navigation.perform(SelectPreviousRecordCommand())
 
     XCTAssertEqual(navigation.selectedRecordID, BookishRecordID("book-1"))
+  }
+
+  @MainActor
+  func testSelectedIndexProvidesDefaultLayout() async throws {
+    let harness = try makeHarness()
+    await harness.load()
+
+    await harness.select(recordIndexID: BookishRecordID("datastore-index-layouts"))
+
+    let layout = try await harness.selectedLayout()
+
+    XCTAssertEqual(layout?.id, BookishRecordID("datastore-layout-layout"))
   }
 
   @MainActor
@@ -360,7 +520,7 @@ final class BookishAppTests: XCTestCase {
     XCTAssertNil(sampleBook)
     XCTAssertNil(sampleAuthor)
     XCTAssertEqual(seedMarker?.kind, BookishRecordKind.seedMarker)
-    XCTAssertEqual(allRecordsIndex?.kind, BookishRecordKind.recordIndex)
+    XCTAssertEqual(allRecordsIndex?.kind, BookishRecordKind.index)
     XCTAssertEqual(bookLayout?.kind, BookishRecordKind.layout)
     let mutationsAfterReset = try await harness.mutations()
     XCTAssertTrue(mutationsAfterReset.isEmpty)
@@ -402,14 +562,28 @@ final class BookishAppTests: XCTestCase {
   }
 
   @MainActor
-  private func makeHarness() throws -> BookishHarness {
-    BookishHarness(directoryURL: try temporaryDirectory())
+  private func makeHarness(defaultShowsDebugIndexes: Bool = true) throws -> BookishHarness {
+    BookishHarness(
+      directoryURL: try temporaryDirectory(),
+      defaultShowsDebugIndexes: defaultShowsDebugIndexes
+    )
   }
 
   @MainActor
   private func records(for harness: BookishHarness) async throws -> [BookishRecord] {
     var records: [BookishRecord] = []
     for id in harness.navigation.recordIDs {
+      if let record = try await harness.record(id: id) {
+        records.append(record)
+      }
+    }
+    return records
+  }
+
+  @MainActor
+  private func selectedRecords(for harness: BookishHarness) async throws -> [BookishRecord] {
+    var records: [BookishRecord] = []
+    for id in harness.navigation.selectedRecordIDs {
       if let record = try await harness.record(id: id) {
         records.append(record)
       }

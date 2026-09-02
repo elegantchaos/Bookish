@@ -37,6 +37,11 @@ public struct BookishRecord: Codable, Equatable, Identifiable, Sendable {
     properties[key]?.integerValue
   }
 
+  /// Reads a boolean property by key.
+  public func bool(_ key: String) -> Bool? {
+    properties[key]?.boolValue
+  }
+
   /// Reads a list property by key.
   public func list(_ key: String) -> [BookishRecordValue]? {
     properties[key]?.listValue

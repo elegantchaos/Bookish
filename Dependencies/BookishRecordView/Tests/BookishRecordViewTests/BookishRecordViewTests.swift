@@ -48,6 +48,50 @@ final class BookishRecordViewTests: XCTestCase {
     XCTAssertEqual(presentation.fields.map(\.key), ["author", "status"])
   }
 
+  func testPresentationExpandsAllOtherFieldsInLayoutOrder() {
+    let presentation = BookishRecordPresentation(
+      record: BookishRecord(
+        kind: "book",
+        properties: [
+          "author": .string("Author"),
+          "isbn": .string("9780000000000"),
+          "status": .string("Reading"),
+          "title": .string("Bookish"),
+        ]
+      ),
+      layout: BookishRecord(
+        kind: "layout",
+        properties: [
+          "fields": .list([
+            .string("title"),
+            .string(BookishRecordKey.allOtherFields),
+            .string("status"),
+          ])
+        ]
+      )
+    )
+
+    XCTAssertEqual(presentation.fields.map(\.key), ["title", "author", "isbn", "status"])
+  }
+
+  func testPresentationAllFieldsLayoutShowsEveryRecordProperty() {
+    let presentation = BookishRecordPresentation(
+      record: BookishRecord(
+        kind: "book",
+        properties: [
+          "status": .string("Reading"),
+          "author": .string("Author"),
+        ]
+      ),
+      layout: BookishRecord(
+        kind: "layout",
+        properties: ["fields": .list([.string(BookishRecordKey.allOtherFields)])]
+      )
+    )
+
+    XCTAssertEqual(presentation.fields.map(\.key), ["author", "status"])
+  }
+
   func testMutationPresentationDescribesSetPropertyMutation() {
     let mutation = MutationRecord(
       id: MutationID("mutation-1"),

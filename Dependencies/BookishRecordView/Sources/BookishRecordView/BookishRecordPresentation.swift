@@ -46,7 +46,27 @@ public struct BookishRecordPresentation: Equatable, Sendable {
       return record.properties.keys.sorted()
     }
 
-    return layoutFields
+    return expandedFieldKeys(layoutFields)
+  }
+
+  private func expandedFieldKeys(_ layoutFields: [String]) -> [String] {
+    var included = Set<String>()
+    var keys: [String] = []
+
+    for key in layoutFields {
+      if key == BookishRecordKey.allOtherFields {
+        let remainingKeys = record.properties.keys
+          .filter { !included.contains($0) }
+          .sorted()
+        keys.append(contentsOf: remainingKeys)
+        included.formUnion(remainingKeys)
+      } else if !included.contains(key) {
+        keys.append(key)
+        included.insert(key)
+      }
+    }
+
+    return keys
   }
 
   private func label(for key: String) -> String {

@@ -15,6 +15,41 @@ public enum RecordSortDirection: Codable, Equatable, Sendable {
   case descending
 }
 
+extension RecordSortDirection {
+  /// Creates a sort direction from its stable stored representation.
+  public init(from decoder: Decoder) throws {
+    let container = try decoder.singleValueContainer()
+    let value = try container.decode(String.self)
+
+    switch value {
+    case "ascending":
+      self = .ascending
+
+    case "descending":
+      self = .descending
+
+    default:
+      throw DecodingError.dataCorruptedError(
+        in: container,
+        debugDescription: "Unknown record sort direction '\(value)'."
+      )
+    }
+  }
+
+  /// Encodes this sort direction into its stable stored representation.
+  public func encode(to encoder: Encoder) throws {
+    var container = encoder.singleValueContainer()
+
+    switch self {
+    case .ascending:
+      try container.encode("ascending")
+
+    case .descending:
+      try container.encode("descending")
+    }
+  }
+}
+
 /// A storage-neutral sort descriptor for materialised records.
 public struct RecordSortDescriptor: Codable, Equatable, Sendable {
   /// Sorts by stable record identifier.

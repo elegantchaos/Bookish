@@ -30,7 +30,7 @@ public enum BookishRecordKind {
   public static let layout = "layout"
 
   /// A record that defines a browser index.
-  public static let recordIndex = "recordIndex"
+  public static let index = "index"
 
   /// A marker record indicating that initial application seeding has run.
   public static let seedMarker = "seedMarker"
@@ -46,6 +46,9 @@ public enum BookishRecordKey {
 
   /// A short label for display in index and navigation surfaces.
   public static let label = "label"
+
+  /// Whether a metadata record is intended only for debug browsing.
+  public static let debugOnly = "debugOnly"
 
   /// An integer position used for stable user-facing ordering.
   public static let position = "position"
@@ -127,6 +130,12 @@ public enum BookishRecordKey {
 
   /// An ordered list of keys displayed by a layout record.
   public static let fields = "fields"
+
+  /// A layout field token that expands to every property not already listed.
+  public static let allOtherFields = "*"
+
+  /// A link to the layout used when records are viewed through an index.
+  public static let layout = "layout"
 
   /// A stored query description.
   public static let query = "query"

@@ -40,7 +40,10 @@ public final class BookishHarness {
   /// The document currently being exported.
   public var interchangeExportDocument = BookishInterchangeDocument()
 
-  private let layoutID = BookishRecordID("datastore-book-layout")
+  /// Whether debug-only indexes are included in the browser.
+  public let defaultShowsDebugIndexes: Bool
+
+  private let fallbackLayoutID = BookishRecordID("datastore-all-fields-layout")
   private let seedMarkerID = BookishRecordID("datastore-seed-marker")
   private let seedSourceID = "com.elegantchaos.bookish.seed"
   private let directoryURL: URL?
@@ -49,10 +52,18 @@ public final class BookishHarness {
   /// Creates an empty harness ready to load the datastore.
   public init(
     directoryURL: URL? = nil,
-    navigation: BookishNavigationService = BookishNavigationService()
+    navigation: BookishNavigationService = BookishNavigationService(),
+    defaultShowsDebugIndexes: Bool = {
+      #if DEBUG
+        true
+      #else
+        false
+      #endif
+    }()
   ) {
     self.directoryURL = directoryURL
     self.navigation = navigation
+    self.defaultShowsDebugIndexes = defaultShowsDebugIndexes
   }
 
   /// Loads, seeds, and refreshes the datastore.
@@ -146,7 +157,7 @@ public final class BookishHarness {
     do {
       try await datastore.mutationStore.removeAll()
       try await datastore.recordStore.removeAll()
-      try await importSeedResource("MetadataSeed", into: datastore)
+      _ = try await importSeedResource("MetadataSeed", into: datastore)
       try await writeSeedMarker(to: datastore)
       navigation.reset()
       selectedLayoutID = nil
@@ -311,11 +322,8 @@ public final class BookishHarness {
 
   /// Returns the selected layout by resolving it from the record service.
   public func selectedLayout() async throws -> BookishRecord? {
-    guard let selectedLayoutID else {
-      return nil
-    }
-
-    return try await record(id: selectedLayoutID)
+    let layoutID = selectedLayoutID ?? navigation.selectedRecordIndex?.layoutID ?? fallbackLayoutID
+    return try await record(id: layoutID)
   }
 
   /// Returns the local directory used for datastore files.
@@ -391,9 +399,10 @@ public final class BookishHarness {
       matching: .kind(BookishRecordKind.seedMarker))
     let isFirstRun = seedMarkers.isEmpty
 
-    try await importSeedResource("MetadataSeed", into: datastore)
+    let metadata = try await importSeedResource("MetadataSeed", into: datastore)
+    try await pruneStaleSeedMetadataRecords(metadata: metadata, in: datastore)
     if isFirstRun {
-      try await importSeedResource("SampleSeed", into: datastore)
+      _ = try await importSeedResource("SampleSeed", into: datastore)
       try await writeSeedMarker(to: datastore)
     }
   }
@@ -417,20 +426,28 @@ public final class BookishHarness {
   }
 
   private func updateLayoutSelection(using datastore: BookishDatastore) async throws {
-    if selectedLayoutID == nil, try await datastore.recordService.record(id: layoutID) != nil {
-      selectedLayoutID = layoutID
-    }
-
-    if let selectedLayoutID, try await datastore.recordService.record(id: selectedLayoutID) != nil {
+    guard let selectedLayoutID else {
       return
     }
 
-    selectedLayoutID = layoutIDs.first
+    if try await datastore.recordService.record(id: selectedLayoutID) == nil {
+      self.selectedLayoutID = nil
+    }
   }
 
   private var recordIndexQuery: RecordQuery {
-    RecordQuery(
-      predicate: .kind(BookishRecordKind.recordIndex),
+    let predicate: RecordPredicate
+    if defaultShowsDebugIndexes {
+      predicate = .kind(BookishRecordKind.index)
+    } else {
+      predicate = .and([
+        .kind(BookishRecordKind.index),
+        .not(.property(BookishRecordKey.debugOnly, equals: .bool(true))),
+      ])
+    }
+
+    return RecordQuery(
+      predicate: predicate,
       sort: [.property(BookishRecordKey.position), .property(BookishRecordKey.label), .id]
     )
   }
@@ -441,7 +458,12 @@ public final class BookishHarness {
       return
     }
 
-    let result = try await datastore.recordQueryService.result(matching: selectedRecordIndex.query)
+    guard let query = selectedRecordIndex.query else {
+      navigation.update(selectedRecordResult: nil)
+      return
+    }
+
+    let result = try await datastore.recordQueryService.result(matching: query)
     navigation.update(selectedRecordResult: result)
   }
 
@@ -463,7 +485,9 @@ public final class BookishHarness {
     }
   }
 
-  private func importSeedResource(_ name: String, into datastore: BookishDatastore) async throws {
+  private func importSeedResource(_ name: String, into datastore: BookishDatastore) async throws
+    -> BookishInterchangeFile
+  {
     guard let url = Bundle.module.url(forResource: "\(name).bookish", withExtension: "json") else {
       throw BookishHarnessError.missingSeedResource(name)
     }
@@ -472,6 +496,31 @@ public final class BookishHarness {
     for record in file.records {
       try await datastore.recordStore.upsert(record)
     }
+    return file
+  }
+
+  private func pruneStaleSeedMetadataRecords(
+    metadata: BookishInterchangeFile,
+    in datastore: BookishDatastore
+  ) async throws {
+    let currentSeedMetadataIDs = Set(
+      metadata.records
+        .filter { isSeedMetadataKind($0.kind) }
+        .map(\.id)
+    )
+    let storedRecords = try await datastore.recordStore.records()
+
+    for record in storedRecords
+    where record.string(BookishRecordKey.source) == seedSourceID
+      && isSeedMetadataKind(record.kind)
+      && !currentSeedMetadataIDs.contains(record.id)
+    {
+      try await datastore.recordStore.delete(id: record.id)
+    }
+  }
+
+  private func isSeedMetadataKind(_ kind: String) -> Bool {
+    kind == BookishRecordKind.index || kind == BookishRecordKind.layout || kind == "recordIndex"
   }
 
   private func writeSeedMarker(to datastore: BookishDatastore) async throws {

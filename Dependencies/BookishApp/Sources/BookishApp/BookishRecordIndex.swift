@@ -23,9 +23,19 @@ public struct BookishRecordIndex: Equatable, Identifiable, Sendable {
       ?? record.id.rawValue
   }
 
-  /// The query used to populate the browser content column.
-  public var query: RecordQuery {
-    record.encoded(BookishRecordKey.query) ?? RecordQuery()
+  /// The query used to populate the browser content column, when the stored payload is valid.
+  public var query: RecordQuery? {
+    record.encoded(BookishRecordKey.query)
+  }
+
+  /// Whether this index is intended only for debug or metadata browsing.
+  public var isDebugOnly: Bool {
+    record.bool(BookishRecordKey.debugOnly) ?? false
+  }
+
+  /// The layout to use when presenting records through this index.
+  public var layoutID: BookishRecordID? {
+    record.record(BookishRecordKey.layout)
   }
 
   /// Creates an index wrapper for a stored record.
@@ -39,17 +49,25 @@ public struct BookishRecordIndex: Equatable, Identifiable, Sendable {
     label: String,
     position: Int,
     query: RecordQuery,
+    debugOnly: Bool = false,
+    layoutID: BookishRecordID? = nil,
     sourceID: String
   ) throws -> BookishRecord {
-    BookishRecord(
+    var properties: [String: BookishRecordValue] = [
+      BookishRecordKey.label: .string(label),
+      BookishRecordKey.debugOnly: .bool(debugOnly),
+      BookishRecordKey.position: .integer(position),
+      BookishRecordKey.query: .encoded(try BookishEncodedValue(encoding: query)),
+      BookishRecordKey.source: .string(sourceID),
+    ]
+    if let layoutID {
+      properties[BookishRecordKey.layout] = .record(layoutID)
+    }
+
+    return BookishRecord(
       id: id,
-      kind: BookishRecordKind.recordIndex,
-      properties: [
-        BookishRecordKey.label: .string(label),
-        BookishRecordKey.position: .integer(position),
-        BookishRecordKey.query: .encoded(try BookishEncodedValue(encoding: query)),
-        BookishRecordKey.source: .string(sourceID),
-      ]
+      kind: BookishRecordKind.index,
+      properties: properties
     )
   }
 }

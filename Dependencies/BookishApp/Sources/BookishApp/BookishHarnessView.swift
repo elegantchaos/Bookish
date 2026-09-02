@@ -123,14 +123,19 @@ private struct RecordIndexView: View {
   let harness: BookishHarness
   let navigation: BookishNavigationService
 
+  @State private var layout: BookishRecord?
+
   var body: some View {
     List(selection: selectedRecordID) {
       ForEach(navigation.selectedRecordResult?.records ?? []) { record in
-        BookishRecordCell(record: record, layout: nil)
+        BookishRecordCell(record: record, layout: layout)
           .tag(Optional(record.id))
       }
     }
     .navigationTitle(navigation.selectedRecordIndexLabel ?? "Index")
+    .task(id: taskID) {
+      await loadLayout()
+    }
   }
 
   private var selectedRecordID: Binding<BookishRecordID?> {
@@ -138,6 +143,18 @@ private struct RecordIndexView: View {
       navigation.selectedRecordID
     } set: { recordID in
       navigation.select(recordID: recordID)
+    }
+  }
+
+  private var taskID: String {
+    "\(navigation.selectedRecordIndexID?.rawValue ?? "")-\(harness.selectedLayoutID?.rawValue ?? "")-\(harness.revision)"
+  }
+
+  private func loadLayout() async {
+    do {
+      layout = try await harness.selectedLayout()
+    } catch {
+      harness.report(error: error)
     }
   }
 }
@@ -220,7 +237,7 @@ private struct BookishRecordIDDetail: View {
   }
 
   private var taskID: String {
-    "\(recordID.rawValue)-\(harness.selectedLayoutID?.rawValue ?? "")-\(harness.revision)"
+    "\(recordID.rawValue)-\(navigation.selectedRecordIndexID?.rawValue ?? "")-\(harness.selectedLayoutID?.rawValue ?? "")-\(harness.revision)"
   }
 
   private func load() async {
