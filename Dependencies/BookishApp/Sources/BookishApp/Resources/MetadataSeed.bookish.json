@@ -1,0 +1,392 @@
+{
+  "format": {
+    "id": "com.elegantchaos.bookish.records",
+    "version": 1
+  },
+  "schema": {
+    "rvKey": "_rv"
+  },
+  "records": [
+    {
+      "id": "datastore-index-all-records",
+      "kind": "recordIndex",
+      "label": "All Records",
+      "position": 0,
+      "query": {
+        "_rv": "encoded",
+        "predicate": {
+          "type": "all"
+        },
+        "sort": [
+          {
+            "direction": "ascending",
+            "key": {
+              "key": "title",
+              "type": "property"
+            }
+          },
+          {
+            "direction": "ascending",
+            "key": {
+              "key": "name",
+              "type": "property"
+            }
+          },
+          {
+            "direction": "ascending",
+            "key": {
+              "type": "id"
+            }
+          }
+        ]
+      },
+      "source": "com.elegantchaos.bookish.seed"
+    },
+    {
+      "id": "datastore-index-records",
+      "kind": "recordIndex",
+      "label": "Records",
+      "position": 1,
+      "query": {
+        "_rv": "encoded",
+        "predicate": {
+          "kind": "record",
+          "type": "kind"
+        },
+        "sort": [
+          {
+            "direction": "ascending",
+            "key": {
+              "key": "title",
+              "type": "property"
+            }
+          },
+          {
+            "direction": "ascending",
+            "key": {
+              "key": "name",
+              "type": "property"
+            }
+          },
+          {
+            "direction": "ascending",
+            "key": {
+              "type": "id"
+            }
+          }
+        ]
+      },
+      "source": "com.elegantchaos.bookish.seed"
+    },
+    {
+      "id": "datastore-index-books",
+      "kind": "recordIndex",
+      "label": "Books",
+      "position": 2,
+      "query": {
+        "_rv": "encoded",
+        "predicate": {
+          "kind": "book",
+          "type": "kind"
+        },
+        "sort": [
+          {
+            "direction": "ascending",
+            "key": {
+              "key": "title",
+              "type": "property"
+            }
+          },
+          {
+            "direction": "ascending",
+            "key": {
+              "key": "name",
+              "type": "property"
+            }
+          },
+          {
+            "direction": "ascending",
+            "key": {
+              "type": "id"
+            }
+          }
+        ]
+      },
+      "source": "com.elegantchaos.bookish.seed"
+    },
+    {
+      "id": "datastore-index-people",
+      "kind": "recordIndex",
+      "label": "People",
+      "position": 3,
+      "query": {
+        "_rv": "encoded",
+        "predicate": {
+          "kind": "person",
+          "type": "kind"
+        },
+        "sort": [
+          {
+            "direction": "ascending",
+            "key": {
+              "key": "title",
+              "type": "property"
+            }
+          },
+          {
+            "direction": "ascending",
+            "key": {
+              "key": "name",
+              "type": "property"
+            }
+          },
+          {
+            "direction": "ascending",
+            "key": {
+              "type": "id"
+            }
+          }
+        ]
+      },
+      "source": "com.elegantchaos.bookish.seed"
+    },
+    {
+      "id": "datastore-index-organisations",
+      "kind": "recordIndex",
+      "label": "Organisations",
+      "position": 4,
+      "query": {
+        "_rv": "encoded",
+        "predicate": {
+          "kind": "organisation",
+          "type": "kind"
+        },
+        "sort": [
+          {
+            "direction": "ascending",
+            "key": {
+              "key": "title",
+              "type": "property"
+            }
+          },
+          {
+            "direction": "ascending",
+            "key": {
+              "key": "name",
+              "type": "property"
+            }
+          },
+          {
+            "direction": "ascending",
+            "key": {
+              "type": "id"
+            }
+          }
+        ]
+      },
+      "source": "com.elegantchaos.bookish.seed"
+    },
+    {
+      "id": "datastore-index-series",
+      "kind": "recordIndex",
+      "label": "Series",
+      "position": 5,
+      "query": {
+        "_rv": "encoded",
+        "predicate": {
+          "kind": "series",
+          "type": "kind"
+        },
+        "sort": [
+          {
+            "direction": "ascending",
+            "key": {
+              "key": "title",
+              "type": "property"
+            }
+          },
+          {
+            "direction": "ascending",
+            "key": {
+              "key": "name",
+              "type": "property"
+            }
+          },
+          {
+            "direction": "ascending",
+            "key": {
+              "type": "id"
+            }
+          }
+        ]
+      },
+      "source": "com.elegantchaos.bookish.seed"
+    },
+    {
+      "id": "datastore-index-lists",
+      "kind": "recordIndex",
+      "label": "Lists",
+      "position": 6,
+      "query": {
+        "_rv": "encoded",
+        "predicate": {
+          "kind": "list",
+          "type": "kind"
+        },
+        "sort": [
+          {
+            "direction": "ascending",
+            "key": {
+              "key": "title",
+              "type": "property"
+            }
+          },
+          {
+            "direction": "ascending",
+            "key": {
+              "key": "name",
+              "type": "property"
+            }
+          },
+          {
+            "direction": "ascending",
+            "key": {
+              "type": "id"
+            }
+          }
+        ]
+      },
+      "source": "com.elegantchaos.bookish.seed"
+    },
+    {
+      "id": "datastore-index-relationships",
+      "kind": "recordIndex",
+      "label": "Relationships",
+      "position": 7,
+      "query": {
+        "_rv": "encoded",
+        "predicate": {
+          "kind": "relationship",
+          "type": "kind"
+        },
+        "sort": [
+          {
+            "direction": "ascending",
+            "key": {
+              "key": "title",
+              "type": "property"
+            }
+          },
+          {
+            "direction": "ascending",
+            "key": {
+              "key": "name",
+              "type": "property"
+            }
+          },
+          {
+            "direction": "ascending",
+            "key": {
+              "type": "id"
+            }
+          }
+        ]
+      },
+      "source": "com.elegantchaos.bookish.seed"
+    },
+    {
+      "id": "datastore-index-layouts",
+      "kind": "recordIndex",
+      "label": "Layouts",
+      "position": 8,
+      "query": {
+        "_rv": "encoded",
+        "predicate": {
+          "kind": "layout",
+          "type": "kind"
+        },
+        "sort": [
+          {
+            "direction": "ascending",
+            "key": {
+              "key": "title",
+              "type": "property"
+            }
+          },
+          {
+            "direction": "ascending",
+            "key": {
+              "key": "name",
+              "type": "property"
+            }
+          },
+          {
+            "direction": "ascending",
+            "key": {
+              "type": "id"
+            }
+          }
+        ]
+      },
+      "source": "com.elegantchaos.bookish.seed"
+    },
+    {
+      "id": "datastore-index-record-indexes",
+      "kind": "recordIndex",
+      "label": "Record Indexes",
+      "position": 9,
+      "query": {
+        "_rv": "encoded",
+        "predicate": {
+          "kind": "recordIndex",
+          "type": "kind"
+        },
+        "sort": [
+          {
+            "direction": "ascending",
+            "key": {
+              "key": "title",
+              "type": "property"
+            }
+          },
+          {
+            "direction": "ascending",
+            "key": {
+              "key": "name",
+              "type": "property"
+            }
+          },
+          {
+            "direction": "ascending",
+            "key": {
+              "type": "id"
+            }
+          }
+        ]
+      },
+      "source": "com.elegantchaos.bookish.seed"
+    },
+    {
+      "id": "datastore-book-layout",
+      "kind": "layout",
+      "fields": [
+        "title",
+        "authors",
+        "status",
+        "format",
+        "note"
+      ],
+      "title": "Bookish Book"
+    },
+    {
+      "id": "datastore-book-compact-layout",
+      "kind": "layout",
+      "fields": [
+        "title",
+        "name",
+        "status"
+      ],
+      "title": "Compact Summary"
+    }
+  ]
+}

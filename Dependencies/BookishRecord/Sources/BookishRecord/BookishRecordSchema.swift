@@ -31,6 +31,9 @@ public enum BookishRecordKind {
 
   /// A record that defines a browser index.
   public static let recordIndex = "recordIndex"
+
+  /// A marker record indicating that initial application seeding has run.
+  public static let seedMarker = "seedMarker"
 }
 
 /// Standard property keys used by Bookish catalogue records.

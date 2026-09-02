@@ -40,10 +40,8 @@ public final class BookishHarness {
   /// The document currently being exported.
   public var interchangeExportDocument = BookishInterchangeDocument()
 
-  private let bookID = BookishRecordID("datastore-book")
   private let layoutID = BookishRecordID("datastore-book-layout")
-  private let compactLayoutID = BookishRecordID("datastore-book-compact-layout")
-  private let authorID = BookishRecordID("datastore-author")
+  private let seedMarkerID = BookishRecordID("datastore-seed-marker")
   private let seedSourceID = "com.elegantchaos.bookish.seed"
   private let directoryURL: URL?
   private var datastore: BookishDatastore?
@@ -64,7 +62,7 @@ public final class BookishHarness {
       let datastore = try await BookishDatastore(directoryURL: directory)
       self.datastore = datastore
 
-      try await seedIfNeeded(using: datastore)
+      try await seed(using: datastore)
       try await refresh()
       status = "Ready"
     } catch {
@@ -148,6 +146,8 @@ public final class BookishHarness {
     do {
       try await datastore.mutationStore.removeAll()
       try await datastore.recordStore.removeAll()
+      try await importSeedResource("MetadataSeed", into: datastore)
+      try await writeSeedMarker(to: datastore)
       navigation.reset()
       selectedLayoutID = nil
       try await refresh()
@@ -386,85 +386,15 @@ public final class BookishHarness {
     try await updateLayoutSelection(using: datastore)
   }
 
-  private func seedIfNeeded(using datastore: BookishDatastore) async throws {
-    for indexRecord in try seedRecordIndexes() {
-      if try await datastore.recordService.record(id: indexRecord.id) == nil {
-        try await datastore.mutationService.perform(.upsertRecord(indexRecord))
-      }
-    }
+  private func seed(using datastore: BookishDatastore) async throws {
+    let seedMarkers = try await datastore.recordService.recordIDs(
+      matching: .kind(BookishRecordKind.seedMarker))
+    let isFirstRun = seedMarkers.isEmpty
 
-    if try await datastore.recordService.record(id: authorID) == nil {
-      try await datastore.mutationService.perform(
-        .upsertRecord(
-          BookishRecord(
-            id: authorID,
-            kind: BookishRecordKind.person,
-            properties: [
-              BookishRecordKey.name: .string("Ursula K. Le Guin"),
-              BookishRecordKey.source: .string(seedSourceID),
-              BookishRecordKey.status: .string("Reference"),
-              BookishRecordKey.note: .string(
-                "Person record included to make the index browseable."),
-            ]
-          )
-        )
-      )
-    }
-
-    if try await datastore.recordService.record(id: bookID) == nil {
-      try await datastore.mutationService.perform(
-        .upsertRecord(
-          BookishRecord(
-            id: bookID,
-            kind: BookishRecordKind.book,
-            properties: [
-              BookishRecordKey.title: .string("The Left Hand of Darkness"),
-              BookishRecordKey.authors: .list([.record(authorID)]),
-              BookishRecordKey.source: .string(seedSourceID),
-              BookishRecordKey.status: .string("To Read"),
-              BookishRecordKey.format: .string("Paperback"),
-              BookishRecordKey.note: .string("Seeded by the datastore harness"),
-            ]
-          )
-        )
-      )
-    }
-
-    if try await datastore.recordService.record(id: layoutID) == nil {
-      try await datastore.mutationService.perform(
-        .upsertRecord(
-          BookishRecord(
-            id: layoutID,
-            kind: BookishRecordKind.layout,
-            properties: [
-              BookishRecordKey.title: .string("Bookish Book"),
-              BookishRecordKey.fields: .list([
-                .string(BookishRecordKey.title), .string(BookishRecordKey.authors),
-                .string(BookishRecordKey.status), .string(BookishRecordKey.format),
-                .string(BookishRecordKey.note),
-              ]),
-            ]
-          )
-        )
-      )
-    }
-
-    if try await datastore.recordService.record(id: compactLayoutID) == nil {
-      try await datastore.mutationService.perform(
-        .upsertRecord(
-          BookishRecord(
-            id: compactLayoutID,
-            kind: BookishRecordKind.layout,
-            properties: [
-              BookishRecordKey.title: .string("Compact Summary"),
-              BookishRecordKey.fields: .list([
-                .string(BookishRecordKey.title), .string(BookishRecordKey.name),
-                .string(BookishRecordKey.status),
-              ]),
-            ]
-          )
-        )
-      )
+    try await importSeedResource("MetadataSeed", into: datastore)
+    if isFirstRun {
+      try await importSeedResource("SampleSeed", into: datastore)
+      try await writeSeedMarker(to: datastore)
     }
   }
 
@@ -533,42 +463,42 @@ public final class BookishHarness {
     }
   }
 
-  private func seedRecordIndexes() throws -> [BookishRecord] {
-    let entries: [(id: String, label: String, predicate: RecordPredicate)] = [
-      ("all-records", "All Records", .all),
-      ("records", "Records", .kind(BookishRecordKind.record)),
-      ("books", "Books", .kind(BookishRecordKind.book)),
-      ("people", "People", .kind(BookishRecordKind.person)),
-      ("organisations", "Organisations", .kind(BookishRecordKind.organisation)),
-      ("series", "Series", .kind(BookishRecordKind.series)),
-      ("lists", "Lists", .kind(BookishRecordKind.list)),
-      ("relationships", "Relationships", .kind(BookishRecordKind.relationship)),
-      ("layouts", "Layouts", .kind(BookishRecordKind.layout)),
-      ("record-indexes", "Record Indexes", .kind(BookishRecordKind.recordIndex)),
-    ]
-
-    return try entries.enumerated().map { position, entry in
-      try BookishRecordIndex.record(
-        id: BookishRecordID("datastore-index-\(entry.id)"),
-        label: entry.label,
-        position: position,
-        query: RecordQuery(
-          predicate: entry.predicate,
-          sort: [.property(BookishRecordKey.title), .property(BookishRecordKey.name), .id]
-        ),
-        sourceID: seedSourceID
-      )
+  private func importSeedResource(_ name: String, into datastore: BookishDatastore) async throws {
+    guard let url = Bundle.module.url(forResource: "\(name).bookish", withExtension: "json") else {
+      throw BookishHarnessError.missingSeedResource(name)
     }
+
+    let file = try BookishInterchangeCodec().decode(Data(contentsOf: url))
+    for record in file.records {
+      try await datastore.recordStore.upsert(record)
+    }
+  }
+
+  private func writeSeedMarker(to datastore: BookishDatastore) async throws {
+    try await datastore.recordStore.upsert(
+      BookishRecord(
+        id: seedMarkerID,
+        kind: BookishRecordKind.seedMarker,
+        properties: [
+          BookishRecordKey.label: .string("Seed Marker"),
+          BookishRecordKey.source: .string(seedSourceID),
+        ]
+      )
+    )
   }
 }
 
 private enum BookishHarnessError: LocalizedError {
   case notLoaded
+  case missingSeedResource(String)
 
   var errorDescription: String? {
     switch self {
     case .notLoaded:
       "The datastore is not loaded."
+
+    case .missingSeedResource(let name):
+      "The bundled seed resource '\(name).bookish.json' is missing."
     }
   }
 }

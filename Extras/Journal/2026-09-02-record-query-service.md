@@ -21,8 +21,16 @@ Added the first datastore-level record query service.
 
 - The top-level browser is backed by stored records of kind `recordIndex`.
 - Each `recordIndex` record stores a `label`, `position`, and encoded `RecordQuery`.
-- The harness seeds `All Records`, standard kind indexes, and a `Record Indexes` entry.
+- The harness seeds `All Records`, standard kind indexes, and a `Record Indexes` entry from bundled interchange resources.
 - The split-view top-level list and content list now read from observable query results.
+
+## Seed Resources
+
+- The harness checks for records of kind `seedMarker` to determine whether first-run seeding has happened.
+- `MetadataSeed.bookish.json` contains metadata records such as browser indexes and layouts.
+- `SampleSeed.bookish.json` contains first-run sample data.
+- Application loading imports metadata every time; first-run seeding additionally imports sample resources, then writes the seed marker.
+- Reset clears records and mutations, imports only metadata, then writes a fresh seed marker.
 
 ## Limits
 

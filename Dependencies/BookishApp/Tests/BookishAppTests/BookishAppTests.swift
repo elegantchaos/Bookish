@@ -42,13 +42,37 @@ final class BookishAppTests: XCTestCase {
     let labels = harness.navigation.recordIndexes.map(\.label)
     let allRecordsIndex = try XCTUnwrap(harness.navigation.recordIndexes.first)
     let storedAllRecordsIndex = try await harness.record(id: allRecordsIndex.id)
+    let seedMarker = try await harness.record(id: BookishRecordID("datastore-seed-marker"))
 
     XCTAssertEqual(labels.first, "All Records")
     XCTAssertTrue(labels.contains("Books"))
     XCTAssertTrue(labels.contains("People"))
     XCTAssertEqual(storedAllRecordsIndex?.kind, BookishRecordKind.recordIndex)
+    XCTAssertEqual(seedMarker?.kind, BookishRecordKind.seedMarker)
     XCTAssertEqual(harness.navigation.selectedRecordIndexLabel, "All Records")
     XCTAssertFalse(harness.navigation.selectedRecordIDs.isEmpty)
+  }
+
+  @MainActor
+  func testHarnessReimportsMetadataWithoutSampleDataAfterFirstRun() async throws {
+    let directory = try temporaryDirectory()
+    let datastore = try await BookishDatastore(directoryURL: directory)
+    try await datastore.recordStore.upsert(
+      BookishRecord(
+        id: BookishRecordID("datastore-seed-marker"), kind: BookishRecordKind.seedMarker)
+    )
+    let harness = BookishHarness(directoryURL: directory)
+
+    await harness.load()
+
+    let allRecordsIndex = try await harness.record(
+      id: BookishRecordID("datastore-index-all-records"))
+    let bookLayout = try await harness.record(id: BookishRecordID("datastore-book-layout"))
+    let sampleBook = try await harness.record(id: BookishRecordID("datastore-book"))
+
+    XCTAssertEqual(allRecordsIndex?.kind, BookishRecordKind.recordIndex)
+    XCTAssertEqual(bookLayout?.kind, BookishRecordKind.layout)
+    XCTAssertNil(sampleBook)
   }
 
   @MainActor
@@ -324,8 +348,20 @@ final class BookishAppTests: XCTestCase {
 
     await harness.reset()
 
-    XCTAssertTrue(harness.navigation.recordIDs.isEmpty)
+    let sampleBook = try await harness.record(id: BookishRecordID("datastore-book"))
+    let sampleAuthor = try await harness.record(id: BookishRecordID("datastore-author"))
+    let seedMarker = try await harness.record(id: BookishRecordID("datastore-seed-marker"))
+    let allRecordsIndex = try await harness.record(
+      id: BookishRecordID("datastore-index-all-records"))
+    let bookLayout = try await harness.record(id: BookishRecordID("datastore-book-layout"))
+
+    XCTAssertFalse(harness.navigation.recordIDs.isEmpty)
     XCTAssertFalse(harness.navigation.recordIDs.contains(BookishRecordID("test-reset-book")))
+    XCTAssertNil(sampleBook)
+    XCTAssertNil(sampleAuthor)
+    XCTAssertEqual(seedMarker?.kind, BookishRecordKind.seedMarker)
+    XCTAssertEqual(allRecordsIndex?.kind, BookishRecordKind.recordIndex)
+    XCTAssertEqual(bookLayout?.kind, BookishRecordKind.layout)
     let mutationsAfterReset = try await harness.mutations()
     XCTAssertTrue(mutationsAfterReset.isEmpty)
     XCTAssertEqual(harness.status, "Reset datastore")
@@ -354,7 +390,12 @@ final class BookishAppTests: XCTestCase {
 
     try await harness.perform(ResetDatastoreCommand())
 
-    XCTAssertTrue(harness.navigation.recordIDs.isEmpty)
+    let sampleBook = try await harness.record(id: BookishRecordID("datastore-book"))
+    let seedMarker = try await harness.record(id: BookishRecordID("datastore-seed-marker"))
+
+    XCTAssertFalse(harness.navigation.recordIDs.isEmpty)
+    XCTAssertNil(sampleBook)
+    XCTAssertEqual(seedMarker?.kind, BookishRecordKind.seedMarker)
     let mutations = try await harness.mutations()
     XCTAssertTrue(mutations.isEmpty)
     XCTAssertEqual(harness.status, "Reset datastore")

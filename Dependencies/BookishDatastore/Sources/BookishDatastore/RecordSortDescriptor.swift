@@ -146,6 +146,53 @@ public enum RecordSortKey: Codable, Equatable, Sendable {
   case property(String)
 }
 
+extension RecordSortKey {
+  private enum CodingKeys: String, CodingKey {
+    case key
+    case type
+  }
+
+  private enum Kind: String, Codable {
+    case id
+    case kind
+    case property
+  }
+
+  /// Creates a sort key from its stable stored representation.
+  public init(from decoder: Decoder) throws {
+    let container = try decoder.container(keyedBy: CodingKeys.self)
+    let type = try container.decode(Kind.self, forKey: .type)
+
+    switch type {
+    case .id:
+      self = .id
+
+    case .kind:
+      self = .kind
+
+    case .property:
+      self = .property(try container.decode(String.self, forKey: .key))
+    }
+  }
+
+  /// Encodes this sort key into its stable stored representation.
+  public func encode(to encoder: Encoder) throws {
+    var container = encoder.container(keyedBy: CodingKeys.self)
+
+    switch self {
+    case .id:
+      try container.encode(Kind.id, forKey: .type)
+
+    case .kind:
+      try container.encode(Kind.kind, forKey: .type)
+
+    case .property(let key):
+      try container.encode(Kind.property, forKey: .type)
+      try container.encode(key, forKey: .key)
+    }
+  }
+}
+
 extension Comparable {
   /// Returns a Foundation comparison result for two comparable values.
   fileprivate func comparisonResult(with other: Self) -> ComparisonResult {

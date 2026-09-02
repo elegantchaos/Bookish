@@ -5,7 +5,7 @@ import PackageDescription
 let package = Package(
   name: "BookishApp",
   platforms: [
-    .macOS(.v26), .iOS(.v26)
+    .macOS(.v26), .iOS(.v26),
   ],
   products: [
     .library(
@@ -35,6 +35,9 @@ let package = Package(
         .product(name: "BookishRecordView", package: "BookishRecordView"),
         .product(name: "Commands", package: "Commands"),
         .product(name: "CommandsUI", package: "Commands"),
+      ],
+      resources: [
+        .process("Resources")
       ]
     ),
     .testTarget(
