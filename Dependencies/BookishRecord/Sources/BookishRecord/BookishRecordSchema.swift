@@ -28,6 +28,9 @@ public enum BookishRecordKind {
 
   /// A record that defines a presentation layout.
   public static let layout = "layout"
+
+  /// A record that defines a browser index.
+  public static let recordIndex = "recordIndex"
 }
 
 /// Standard property keys used by Bookish catalogue records.
@@ -37,6 +40,12 @@ public enum BookishRecordKey {
 
   /// A record's display name.
   public static let name = "name"
+
+  /// A short label for display in index and navigation surfaces.
+  public static let label = "label"
+
+  /// An integer position used for stable user-facing ordering.
+  public static let position = "position"
 
   /// The identifier of the system that supplied the record.
   public static let source = "source"
@@ -115,4 +124,7 @@ public enum BookishRecordKey {
 
   /// An ordered list of keys displayed by a layout record.
   public static let fields = "fields"
+
+  /// A stored query description.
+  public static let query = "query"
 }

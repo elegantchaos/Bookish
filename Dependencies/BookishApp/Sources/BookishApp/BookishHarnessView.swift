@@ -22,7 +22,7 @@ public struct BookishHarnessView: View {
   /// The SwiftUI content for the datastore app.
   public var body: some View {
     NavigationSplitView {
-      RecordKindListView(navigation: navigation)
+      BrowserIndexListView(harness: harness, navigation: navigation)
     } content: {
       RecordIndexView(harness: harness, navigation: navigation)
     } detail: {
@@ -94,24 +94,27 @@ public struct BookishHarnessView: View {
   }
 }
 
-private struct RecordKindListView: View {
+private struct BrowserIndexListView: View {
+  let harness: BookishHarness
   let navigation: BookishNavigationService
 
   var body: some View {
-    List(selection: selectedKind) {
-      ForEach(navigation.recordKinds, id: \.self) { kind in
-        Text(kind.capitalized)
-          .tag(Optional(kind))
+    List(selection: selectedRecordIndexID) {
+      ForEach(navigation.recordIndexes) { recordIndex in
+        Text(recordIndex.label)
+          .tag(Optional(recordIndex.id))
       }
     }
     .navigationTitle("Records")
   }
 
-  private var selectedKind: Binding<String?> {
+  private var selectedRecordIndexID: Binding<BookishRecordID?> {
     Binding {
-      navigation.selectedRecordKind
-    } set: { kind in
-      navigation.select(kind: kind)
+      navigation.selectedRecordIndexID
+    } set: { recordIndexID in
+      Task {
+        await harness.select(recordIndexID: recordIndexID)
+      }
     }
   }
 }
@@ -122,12 +125,12 @@ private struct RecordIndexView: View {
 
   var body: some View {
     List(selection: selectedRecordID) {
-      ForEach(navigation.selectedRecordIDs, id: \.self) { id in
-        BookishRecordIDCell(recordID: id, harness: harness)
-          .tag(Optional(id))
+      ForEach(navigation.selectedRecordResult?.records ?? []) { record in
+        BookishRecordCell(record: record, layout: nil)
+          .tag(Optional(record.id))
       }
     }
-    .navigationTitle(navigation.selectedRecordKind?.capitalized ?? "Index")
+    .navigationTitle(navigation.selectedRecordIndexLabel ?? "Index")
   }
 
   private var selectedRecordID: Binding<BookishRecordID?> {
@@ -330,7 +333,7 @@ private struct RecordLinkButton: View {
       navigation.performWithoutWaiting(NavigateToRecordCommand(recordID: recordID))
     }
     #if os(macOS)
-    .buttonStyle(.link)
+      .buttonStyle(.link)
     #endif
   }
 }

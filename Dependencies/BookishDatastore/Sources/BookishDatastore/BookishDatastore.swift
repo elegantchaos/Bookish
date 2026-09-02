@@ -11,6 +11,9 @@ public struct BookishDatastore: Sendable {
   /// The read service.
   public let recordService: DefaultRecordService<JSONRecordStore>
 
+  /// The observable query service.
+  public let recordQueryService: DefaultRecordQueryService<JSONRecordStore>
+
   /// The write/sync service.
   public let mutationService: DefaultMutationService<JSONRecordStore, JSONMutationStore>
 
@@ -21,7 +24,14 @@ public struct BookishDatastore: Sendable {
     self.mutationStore = try await JSONMutationStore(
       directoryURL: directoryURL.appending(path: "mutations", directoryHint: .isDirectory))
     self.recordService = DefaultRecordService(store: recordStore)
+    let recordQueryService = DefaultRecordQueryService(store: recordStore)
+    self.recordQueryService = recordQueryService
     self.mutationService = DefaultMutationService(
-      recordStore: recordStore, mutationStore: mutationStore)
+      recordStore: recordStore,
+      mutationStore: mutationStore,
+      projectionDidChange: {
+        await recordQueryService.refreshResults()
+      }
+    )
   }
 }

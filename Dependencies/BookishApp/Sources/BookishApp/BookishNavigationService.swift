@@ -3,82 +3,112 @@
 //  Copyright © 2026 Elegant Chaos Limited. All rights reserved.
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
+import BookishDatastore
 import BookishRecord
 import Commands
 import Observation
 
 /// Maintains the datastore browser route independently from datastore services.
 ///
-/// The service stores the active record kind and record identifier, plus the
-/// lightweight index needed by navigation commands. Record contents remain in
-/// the record service; mutation history is intentionally not part of this route.
+/// The service stores the active browser index and record identifier. The
+/// browser indexes are materialised records, while the selected content is
+/// backed by an observable query result supplied by the datastore.
 @MainActor
 @Observable
 public final class BookishNavigationService {
-  /// The available record kinds in display order.
-  public private(set) var recordKinds: [String] = []
+  /// The observable records defining the available browser indexes.
+  public private(set) var recordIndexResult: RecordQueryResult?
 
-  /// The selected record kind shown in the first split-view column.
-  public private(set) var selectedRecordKind: String?
+  /// The selected browser index shown in the first split-view column.
+  public private(set) var selectedRecordIndexID: BookishRecordID?
 
   /// The selected materialised record shown in the detail column.
   public private(set) var selectedRecordID: BookishRecordID?
 
-  private var recordIDsByKind: [String: [BookishRecordID]] = [:]
+  /// The records matching the selected browser index.
+  public private(set) var selectedRecordResult: RecordQueryResult?
 
   /// Creates an empty navigation service.
   public init() {
   }
 
-  /// All visible record identifiers across every kind.
+  /// The available browser index identifiers.
+  public var recordIndexIDs: [BookishRecordID] {
+    recordIndexes.map(\.id)
+  }
+
+  /// The available browser indexes in display order.
+  public var recordIndexes: [BookishRecordIndex] {
+    recordIndexResult?.records.map(BookishRecordIndex.init(record:)) ?? []
+  }
+
+  /// The selected browser index record.
+  public var selectedRecordIndex: BookishRecordIndex? {
+    guard let selectedRecordIndexID else {
+      return nil
+    }
+
+    return recordIndexes.first { $0.id == selectedRecordIndexID }
+  }
+
+  /// The label for the selected browser index.
+  public var selectedRecordIndexLabel: String? {
+    selectedRecordIndex?.label
+  }
+
+  /// All record identifiers visible in the selected browser index.
   public var recordIDs: [BookishRecordID] {
-    recordKinds.flatMap { recordIDsByKind[$0] ?? [] }
+    selectedRecordIDs
   }
 
-  /// The record identifiers for the currently selected kind.
+  /// The record identifiers for the currently selected browser index.
   public var selectedRecordIDs: [BookishRecordID] {
-    guard let selectedRecordKind else {
-      return []
-    }
-
-    return recordIDsByKind[selectedRecordKind] ?? []
+    selectedRecordResult?.ids ?? []
   }
 
-  /// Updates the navigation index from materialised records and preserves valid selection.
-  public func update(records: [BookishRecord]) {
-    let groupedRecords = Dictionary(grouping: records.sorted(by: sortRecords), by: \.kind)
-    recordKinds = groupedRecords.keys.sorted()
-    recordIDsByKind = groupedRecords.mapValues { records in records.map(\.id) }
-
-    if let selectedRecordKind, recordKinds.contains(selectedRecordKind) {
-      selectValidRecord()
-    } else {
-      selectedRecordKind = recordKinds.first
-      selectedRecordID = selectedRecordIDs.first
+  /// Updates the available browser index result and preserves a valid selection.
+  public func update(recordIndexResult: RecordQueryResult?) {
+    self.recordIndexResult = recordIndexResult
+    if !isSelectedRecordIndexValid {
+      selectedRecordIndexID = recordIndexes.first?.id
+      selectedRecordResult = nil
+      selectedRecordID = nil
     }
   }
 
-  /// Clears the route and index.
-  public func reset() {
-    recordKinds = []
-    recordIDsByKind = [:]
-    selectedRecordKind = nil
-    selectedRecordID = nil
-  }
-
-  /// Selects a record kind and defaults the record selection within it.
-  public func select(kind: String?) {
-    guard let kind, recordKinds.contains(kind) else {
-      selectedRecordKind = recordKinds.first
-      selectedRecordID = selectedRecordIDs.first
-      return
-    }
-
-    selectedRecordKind = kind
+  /// Updates the selected browser content result.
+  public func update(selectedRecordResult: RecordQueryResult?) {
+    self.selectedRecordResult = selectedRecordResult
     selectValidRecord()
   }
 
-  /// Selects a record identifier within the active record kind.
+  /// Clears the route.
+  public func reset() {
+    recordIndexResult = nil
+    selectedRecordIndexID = nil
+    selectedRecordResult = nil
+    selectedRecordID = nil
+  }
+
+  /// Selects a browser index and clears stale record content.
+  public func select(recordIndexID: BookishRecordID?) {
+    guard let recordIndexID, recordIndexIDs.contains(recordIndexID) else {
+      selectedRecordIndexID = recordIndexes.first?.id
+      selectedRecordResult = nil
+      selectedRecordID = nil
+      return
+    }
+
+    guard selectedRecordIndexID != recordIndexID else {
+      return
+    }
+
+    selectedRecordIndexID = recordIndexID
+    selectedRecordResult = nil
+    selectedRecordID = nil
+  }
+
+  /// Selects a record identifier within the active browser index.
   public func select(recordID: BookishRecordID?) {
     guard let recordID else {
       selectedRecordID = selectedRecordIDs.first
@@ -90,29 +120,22 @@ public final class BookishNavigationService {
       return
     }
 
-    guard let kind = recordKinds.first(where: { recordIDsByKind[$0]?.contains(recordID) == true })
-    else {
-      selectedRecordID = selectedRecordIDs.first
-      return
-    }
-
-    selectedRecordKind = kind
-    selectedRecordID = recordID
+    selectedRecordID = selectedRecordIDs.first
   }
 
-  /// Returns whether a record identifier exists in the current navigation index.
+  /// Returns whether a record identifier exists in the selected browser index.
   public func contains(recordID: BookishRecordID) -> Bool {
-    recordIDsByKind.values.contains { $0.contains(recordID) }
+    selectedRecordIDs.contains(recordID)
   }
 
-  /// Moves to the next available record kind.
-  public func selectNextKind() {
-    selectKind(offset: 1)
+  /// Moves to the next available browser index.
+  public func selectNextRecordIndex() {
+    selectRecordIndex(offset: 1)
   }
 
-  /// Moves to the previous available record kind.
-  public func selectPreviousKind() {
-    selectKind(offset: -1)
+  /// Moves to the previous available browser index.
+  public func selectPreviousRecordIndex() {
+    selectRecordIndex(offset: -1)
   }
 
   /// Moves to the next available record in the selected kind.
@@ -133,17 +156,25 @@ public final class BookishNavigationService {
     selectedRecordID = selectedRecordIDs.first
   }
 
-  private func selectKind(offset: Int) {
-    guard let current = selectedRecordKind,
-      let currentIndex = recordKinds.firstIndex(of: current),
-      !recordKinds.isEmpty
+  private var isSelectedRecordIndexValid: Bool {
+    guard let selectedRecordIndexID else {
+      return false
+    }
+
+    return recordIndexIDs.contains(selectedRecordIndexID)
+  }
+
+  private func selectRecordIndex(offset: Int) {
+    guard let current = selectedRecordIndexID,
+      let currentIndex = recordIndexIDs.firstIndex(of: current),
+      !recordIndexIDs.isEmpty
     else {
-      select(kind: recordKinds.first)
+      select(recordIndexID: recordIndexIDs.first)
       return
     }
 
-    let nextIndex = wrappingIndex(currentIndex + offset, count: recordKinds.count)
-    select(kind: recordKinds[nextIndex])
+    let nextIndex = wrappingIndex(currentIndex + offset, count: recordIndexIDs.count)
+    select(recordIndexID: recordIndexIDs[nextIndex])
   }
 
   private func selectRecord(offset: Int) {
@@ -164,13 +195,6 @@ public final class BookishNavigationService {
     ((index % count) + count) % count
   }
 
-  private func sortRecords(_ lhs: BookishRecord, _ rhs: BookishRecord) -> Bool {
-    if lhs.kind == rhs.kind {
-      lhs.id.rawValue < rhs.id.rawValue
-    } else {
-      lhs.kind < rhs.kind
-    }
-  }
 }
 
 extension BookishNavigationService: CommandCentre {

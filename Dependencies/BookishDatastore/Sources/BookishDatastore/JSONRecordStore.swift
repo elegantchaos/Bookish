@@ -27,6 +27,11 @@ public actor JSONRecordStore: RecordStore {
     recordsByID.values.sorted { $0.id.rawValue < $1.id.rawValue }
   }
 
+  /// Returns records matching a query in query sort order.
+  public func records(matching query: RecordQuery) async throws -> [BookishRecord] {
+    query.apply(to: Array(recordsByID.values))
+  }
+
   /// Returns identifiers for records matching a predicate in stable identifier order.
   public func recordIDs(matching predicate: RecordPredicate = .all) async throws
     -> [BookishRecordID]

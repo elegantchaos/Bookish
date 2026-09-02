@@ -19,11 +19,17 @@ public struct DefaultMutationService<Records: RecordStore, Mutations: MutationSt
 {
   private let recordStore: Records
   private let mutationStore: Mutations
+  private let projectionDidChange: (@Sendable () async -> Void)?
 
   /// Creates a mutation service.
-  public init(recordStore: Records, mutationStore: Mutations) {
+  public init(
+    recordStore: Records,
+    mutationStore: Mutations,
+    projectionDidChange: (@Sendable () async -> Void)? = nil
+  ) {
     self.recordStore = recordStore
     self.mutationStore = mutationStore
+    self.projectionDidChange = projectionDidChange
   }
 
   /// Stores and applies a local mutation.
@@ -37,23 +43,32 @@ public struct DefaultMutationService<Records: RecordStore, Mutations: MutationSt
   /// Stores and applies a remotely-arrived mutation.
   public func receiveRemoteMutation(_ mutation: MutationRecord) async throws {
     try await mutationStore.append(mutation)
-    try await applyIfNeeded(mutation)
+    let didApply = try await applyIfNeeded(mutation)
+    if didApply {
+      await projectionDidChange?()
+    }
   }
 
   /// Replays unapplied stored mutations into the record store.
   public func processPendingMutations() async throws {
+    var didApply = false
     for mutation in try await mutationStore.mutations() {
-      try await applyIfNeeded(mutation)
+      didApply = try await applyIfNeeded(mutation) || didApply
+    }
+
+    if didApply {
+      await projectionDidChange?()
     }
   }
 
-  private func applyIfNeeded(_ mutation: MutationRecord) async throws {
+  private func applyIfNeeded(_ mutation: MutationRecord) async throws -> Bool {
     guard try await !mutationStore.isApplied(mutation.id) else {
-      return
+      return false
     }
 
     try await apply(mutation.operation)
     try await mutationStore.markApplied(mutation.id)
+    return true
   }
 
   private func apply(_ operation: MutationOperation) async throws {

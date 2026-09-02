@@ -58,8 +58,8 @@ public struct BookishCommands: Commands {
 
       Divider()
 
-      navigation.button(SelectPreviousRecordKindCommand())
-      navigation.button(SelectNextRecordKindCommand())
+      harness.button(SelectPreviousRecordIndexCommand())
+      harness.button(SelectNextRecordIndexCommand())
       navigation.button(SelectPreviousRecordCommand())
       navigation.button(SelectNextRecordCommand())
 
@@ -429,67 +429,67 @@ public struct SimulateRemoteMutationCommand: CommandWithUI {
   }
 }
 
-/// Selects the next record kind in the datastore browser.
-public struct SelectNextRecordKindCommand: CommandWithUI {
-  public typealias Centre = BookishNavigationService
+/// Selects the next record index in the datastore browser.
+public struct SelectNextRecordIndexCommand: CommandWithUI {
+  public typealias Centre = BookishHarness
   public typealias ResultType = Void
 
-  public let id = "datastore.navigation.next-kind"
+  public let id = "datastore.navigation.next-index"
   public var shortcut: CommandShortcut? { .init(.rightArrow, modifiers: [.command, .option]) }
 
   public init() {
   }
 
-  public func availability(centre: BookishNavigationService) -> CommandAvailability {
-    centre.recordKinds.count > 1 ? .enabled : .disabled
+  public func availability(centre: BookishHarness) -> CommandAvailability {
+    centre.navigation.recordIndexIDs.count > 1 ? .enabled : .disabled
   }
 
-  public func name(centre: BookishNavigationService) -> String {
-    "Next Record Type"
+  public func name(centre: BookishHarness) -> String {
+    "Next Record Index"
   }
 
-  public func icon(centre: BookishNavigationService) -> Icon {
+  public func icon(centre: BookishHarness) -> Icon {
     Icon("sidebar.right")
   }
 
-  public func help(centre: BookishNavigationService) -> String? {
-    "Select the next record type in the datastore browser."
+  public func help(centre: BookishHarness) -> String? {
+    "Select the next record index in the datastore browser."
   }
 
-  public func perform(centre: BookishNavigationService) async throws {
-    centre.selectNextKind()
+  public func perform(centre: BookishHarness) async throws {
+    await centre.selectNextRecordIndex()
   }
 }
 
-/// Selects the previous record kind in the datastore browser.
-public struct SelectPreviousRecordKindCommand: CommandWithUI {
-  public typealias Centre = BookishNavigationService
+/// Selects the previous record index in the datastore browser.
+public struct SelectPreviousRecordIndexCommand: CommandWithUI {
+  public typealias Centre = BookishHarness
   public typealias ResultType = Void
 
-  public let id = "datastore.navigation.previous-kind"
+  public let id = "datastore.navigation.previous-index"
   public var shortcut: CommandShortcut? { .init(.leftArrow, modifiers: [.command, .option]) }
 
   public init() {
   }
 
-  public func availability(centre: BookishNavigationService) -> CommandAvailability {
-    centre.recordKinds.count > 1 ? .enabled : .disabled
+  public func availability(centre: BookishHarness) -> CommandAvailability {
+    centre.navigation.recordIndexIDs.count > 1 ? .enabled : .disabled
   }
 
-  public func name(centre: BookishNavigationService) -> String {
-    "Previous Record Type"
+  public func name(centre: BookishHarness) -> String {
+    "Previous Record Index"
   }
 
-  public func icon(centre: BookishNavigationService) -> Icon {
+  public func icon(centre: BookishHarness) -> Icon {
     Icon("sidebar.left")
   }
 
-  public func help(centre: BookishNavigationService) -> String? {
-    "Select the previous record type in the datastore browser."
+  public func help(centre: BookishHarness) -> String? {
+    "Select the previous record index in the datastore browser."
   }
 
-  public func perform(centre: BookishNavigationService) async throws {
-    centre.selectPreviousKind()
+  public func perform(centre: BookishHarness) async throws {
+    await centre.selectPreviousRecordIndex()
   }
 }
 

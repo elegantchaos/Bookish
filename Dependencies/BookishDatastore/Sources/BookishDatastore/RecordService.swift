@@ -15,6 +15,9 @@ public protocol RecordService: Sendable {
   /// Returns identifiers for materialised records matching a predicate.
   func recordIDs(matching predicate: RecordPredicate) async throws -> [BookishRecordID]
 
+  /// Returns materialised records matching a query.
+  func records(matching query: RecordQuery) async throws -> [BookishRecord]
+
   /// Returns all materialised records matching a kind.
   func records(kind: String) async throws -> [BookishRecord]
 }
@@ -46,6 +49,11 @@ public struct DefaultRecordService<Store: RecordStore>: RecordService {
   /// Returns identifiers for materialised records matching a predicate.
   public func recordIDs(matching predicate: RecordPredicate) async throws -> [BookishRecordID] {
     try await store.recordIDs(matching: predicate)
+  }
+
+  /// Returns materialised records matching a query.
+  public func records(matching query: RecordQuery) async throws -> [BookishRecord] {
+    try await store.records(matching: query)
   }
 
   /// Returns all materialised records matching a kind.

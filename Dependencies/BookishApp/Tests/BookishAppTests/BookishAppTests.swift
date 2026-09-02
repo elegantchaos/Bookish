@@ -1,4 +1,5 @@
 import BookishCoding
+import BookishDatastore
 import BookishImporterSamples
 import BookishRecord
 import Commands
@@ -34,6 +35,23 @@ final class BookishAppTests: XCTestCase {
   }
 
   @MainActor
+  func testHarnessSeedsBrowserIndexRecords() async throws {
+    let harness = try makeHarness()
+    await harness.load()
+
+    let labels = harness.navigation.recordIndexes.map(\.label)
+    let allRecordsIndex = try XCTUnwrap(harness.navigation.recordIndexes.first)
+    let storedAllRecordsIndex = try await harness.record(id: allRecordsIndex.id)
+
+    XCTAssertEqual(labels.first, "All Records")
+    XCTAssertTrue(labels.contains("Books"))
+    XCTAssertTrue(labels.contains("People"))
+    XCTAssertEqual(storedAllRecordsIndex?.kind, BookishRecordKind.recordIndex)
+    XCTAssertEqual(harness.navigation.selectedRecordIndexLabel, "All Records")
+    XCTAssertFalse(harness.navigation.selectedRecordIDs.isEmpty)
+  }
+
+  @MainActor
   func testSelectionCommandsAreDisabledWithoutSelection() {
     let harness = BookishHarness()
 
@@ -44,45 +62,60 @@ final class BookishAppTests: XCTestCase {
 
   @MainActor
   func testNavigationCommandsAreDisabledWithoutRecords() {
+    let harness = BookishHarness()
     let navigation = BookishNavigationService()
 
-    XCTAssertEqual(navigation.availability(SelectNextRecordKindCommand()), .disabled)
-    XCTAssertEqual(navigation.availability(SelectPreviousRecordKindCommand()), .disabled)
+    XCTAssertEqual(harness.availability(SelectNextRecordIndexCommand()), .disabled)
+    XCTAssertEqual(harness.availability(SelectPreviousRecordIndexCommand()), .disabled)
     XCTAssertEqual(navigation.availability(SelectNextRecordCommand()), .disabled)
     XCTAssertEqual(navigation.availability(SelectPreviousRecordCommand()), .disabled)
   }
 
   @MainActor
-  func testNavigationServiceDefaultsToFirstKindAndRecord() {
+  func testNavigationServiceDefaultsToFirstIndexAndRecord() throws {
     let navigation = BookishNavigationService()
-
-    navigation.update(
+    let recordIndexResult = RecordQueryResult(query: RecordQuery())
+    recordIndexResult.update(
       records: [
-        BookishRecord(id: BookishRecordID("book-1"), kind: "book"),
-        BookishRecord(id: BookishRecordID("author-1"), kind: "author"),
-        BookishRecord(id: BookishRecordID("book-2"), kind: "book"),
+        try browserIndexRecord(id: "authors", label: "Authors", predicate: .kind("author")),
+        try browserIndexRecord(id: "books", label: "Books", predicate: .kind("book")),
       ])
+    let selectedRecordResult = RecordQueryResult(query: RecordQuery(predicate: .kind("author")))
+    selectedRecordResult.update(records: [
+      BookishRecord(id: BookishRecordID("author-1"), kind: "author")
+    ])
 
-    XCTAssertEqual(navigation.recordKinds, ["author", "book"])
-    XCTAssertEqual(navigation.selectedRecordKind, "author")
+    navigation.update(recordIndexResult: recordIndexResult)
+    navigation.update(selectedRecordResult: selectedRecordResult)
+
+    XCTAssertEqual(navigation.recordIndexes.map(\.label), ["Authors", "Books"])
+    XCTAssertEqual(navigation.selectedRecordIndexLabel, "Authors")
     XCTAssertEqual(navigation.selectedRecordID, BookishRecordID("author-1"))
     XCTAssertEqual(navigation.selectedRecordIDs, [BookishRecordID("author-1")])
   }
 
   @MainActor
-  func testNavigationCommandsMoveBetweenKindsAndRecords() async throws {
+  func testNavigationCommandsMoveBetweenIndexesAndRecords() async throws {
+    let harness = try makeHarness()
+    await harness.load()
+    await harness.select(recordIndexID: BookishRecordID("datastore-index-books"))
+
+    try await harness.perform(SelectNextRecordIndexCommand())
+
+    XCTAssertEqual(harness.navigation.selectedRecordIndexLabel, "People")
+
+    try await harness.perform(SelectPreviousRecordIndexCommand())
+
+    XCTAssertEqual(harness.navigation.selectedRecordIndexLabel, "Books")
+
     let navigation = BookishNavigationService()
-    navigation.update(
-      records: [
-        BookishRecord(id: BookishRecordID("author-1"), kind: "author"),
-        BookishRecord(id: BookishRecordID("book-1"), kind: "book"),
-        BookishRecord(id: BookishRecordID("book-2"), kind: "book"),
-      ])
-
-    try await navigation.perform(SelectNextRecordKindCommand())
-
-    XCTAssertEqual(navigation.selectedRecordKind, "book")
-    XCTAssertEqual(navigation.selectedRecordID, BookishRecordID("book-1"))
+    let selectedRecordResult = RecordQueryResult(query: RecordQuery())
+    selectedRecordResult.update(records: [
+      BookishRecord(id: BookishRecordID("book-1"), kind: "book"),
+      BookishRecord(id: BookishRecordID("book-2"), kind: "book"),
+    ])
+    navigation.update(selectedRecordResult: selectedRecordResult)
+    navigation.select(recordID: BookishRecordID("book-1"))
 
     try await navigation.perform(SelectNextRecordCommand())
 
@@ -91,25 +124,20 @@ final class BookishAppTests: XCTestCase {
     try await navigation.perform(SelectPreviousRecordCommand())
 
     XCTAssertEqual(navigation.selectedRecordID, BookishRecordID("book-1"))
-
-    try await navigation.perform(SelectPreviousRecordKindCommand())
-
-    XCTAssertEqual(navigation.selectedRecordKind, "author")
-    XCTAssertEqual(navigation.selectedRecordID, BookishRecordID("author-1"))
   }
 
   @MainActor
   func testNavigateToRecordCommandSelectsTargetKindAndRecord() async throws {
     let navigation = BookishNavigationService()
-    navigation.update(
-      records: [
-        BookishRecord(id: BookishRecordID("book-1"), kind: "book"),
-        BookishRecord(id: BookishRecordID("author-1"), kind: "author"),
-      ])
+    let selectedRecordResult = RecordQueryResult(query: RecordQuery())
+    selectedRecordResult.update(records: [
+      BookishRecord(id: BookishRecordID("author-1"), kind: "author"),
+      BookishRecord(id: BookishRecordID("book-1"), kind: "book"),
+    ])
+    navigation.update(selectedRecordResult: selectedRecordResult)
 
     try await navigation.perform(NavigateToRecordCommand(recordID: BookishRecordID("book-1")))
 
-    XCTAssertEqual(navigation.selectedRecordKind, "book")
     XCTAssertEqual(navigation.selectedRecordID, BookishRecordID("book-1"))
   }
 
@@ -359,5 +387,19 @@ final class BookishAppTests: XCTestCase {
 
   private func deliciousSampleURL() throws -> URL {
     try BookishImporterSamples.deliciousLibraryURL(for: .small)
+  }
+
+  private func browserIndexRecord(
+    id: String,
+    label: String,
+    predicate: RecordPredicate
+  ) throws -> BookishRecord {
+    try BookishRecordIndex.record(
+      id: BookishRecordID(id),
+      label: label,
+      position: 0,
+      query: RecordQuery(predicate: predicate),
+      sourceID: "test"
+    )
   }
 }

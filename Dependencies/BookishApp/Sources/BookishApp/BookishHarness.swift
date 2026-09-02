@@ -236,7 +236,6 @@ public final class BookishHarness {
 
       try await refresh()
       if let firstRecord {
-        navigation.select(kind: firstRecord.kind)
         navigation.select(recordID: firstRecord.id)
       }
       status =
@@ -256,13 +255,8 @@ public final class BookishHarness {
       throw BookishHarnessError.notLoaded
     }
 
-    var records: [BookishRecord] = []
-    for id in navigation.recordIDs {
-      guard let record = try await datastore.recordService.record(id: id) else {
-        throw BookishHarnessError.notLoaded
-      }
-      records.append(record)
-    }
+    let records = try await datastore.recordService.records(
+      matching: RecordQuery(sort: [.kind, .id]))
     let file = BookishInterchangeFile(root: navigation.selectedRecordID, records: records)
     return try BookishInterchangeCodec().encode(file)
   }
@@ -279,6 +273,31 @@ public final class BookishHarness {
     }
 
     return try await record(id: selectedRecordID)
+  }
+
+  /// Selects a top-level browser index and refreshes its content query result.
+  public func select(recordIndexID: BookishRecordID?) async {
+    guard let datastore else {
+      status = BookishHarnessError.notLoaded.localizedDescription
+      return
+    }
+
+    do {
+      navigation.select(recordIndexID: recordIndexID)
+      try await refreshSelectedRecordIndex(using: datastore)
+    } catch {
+      report(error: error)
+    }
+  }
+
+  /// Selects the next top-level browser index.
+  public func selectNextRecordIndex() async {
+    await selectRecordIndex(offset: 1)
+  }
+
+  /// Selects the previous top-level browser index.
+  public func selectPreviousRecordIndex() async {
+    await selectRecordIndex(offset: -1)
   }
 
   /// Returns all stored mutations for the debug mutation window.
@@ -357,8 +376,10 @@ public final class BookishHarness {
       return
     }
 
-    let records = try await datastore.recordService.records()
-    navigation.update(records: records)
+    let recordIndexResult = try await datastore.recordQueryService.result(
+      matching: recordIndexQuery)
+    navigation.update(recordIndexResult: recordIndexResult)
+    try await refreshSelectedRecordIndex(using: datastore)
     layoutIDs = try await datastore.recordService.recordIDs(
       matching: .kind(BookishRecordKind.layout))
     revision += 1
@@ -366,6 +387,12 @@ public final class BookishHarness {
   }
 
   private func seedIfNeeded(using datastore: BookishDatastore) async throws {
+    for indexRecord in try seedRecordIndexes() {
+      if try await datastore.recordService.record(id: indexRecord.id) == nil {
+        try await datastore.mutationService.perform(.upsertRecord(indexRecord))
+      }
+    }
+
     if try await datastore.recordService.record(id: authorID) == nil {
       try await datastore.mutationService.perform(
         .upsertRecord(
@@ -469,6 +496,69 @@ public final class BookishHarness {
     }
 
     selectedLayoutID = layoutIDs.first
+  }
+
+  private var recordIndexQuery: RecordQuery {
+    RecordQuery(
+      predicate: .kind(BookishRecordKind.recordIndex),
+      sort: [.property(BookishRecordKey.position), .property(BookishRecordKey.label), .id]
+    )
+  }
+
+  private func refreshSelectedRecordIndex(using datastore: BookishDatastore) async throws {
+    guard let selectedRecordIndex = navigation.selectedRecordIndex else {
+      navigation.update(selectedRecordResult: nil)
+      return
+    }
+
+    let result = try await datastore.recordQueryService.result(matching: selectedRecordIndex.query)
+    navigation.update(selectedRecordResult: result)
+  }
+
+  private func selectRecordIndex(offset: Int) async {
+    guard let datastore else {
+      status = BookishHarnessError.notLoaded.localizedDescription
+      return
+    }
+
+    do {
+      if offset > 0 {
+        navigation.selectNextRecordIndex()
+      } else {
+        navigation.selectPreviousRecordIndex()
+      }
+      try await refreshSelectedRecordIndex(using: datastore)
+    } catch {
+      report(error: error)
+    }
+  }
+
+  private func seedRecordIndexes() throws -> [BookishRecord] {
+    let entries: [(id: String, label: String, predicate: RecordPredicate)] = [
+      ("all-records", "All Records", .all),
+      ("records", "Records", .kind(BookishRecordKind.record)),
+      ("books", "Books", .kind(BookishRecordKind.book)),
+      ("people", "People", .kind(BookishRecordKind.person)),
+      ("organisations", "Organisations", .kind(BookishRecordKind.organisation)),
+      ("series", "Series", .kind(BookishRecordKind.series)),
+      ("lists", "Lists", .kind(BookishRecordKind.list)),
+      ("relationships", "Relationships", .kind(BookishRecordKind.relationship)),
+      ("layouts", "Layouts", .kind(BookishRecordKind.layout)),
+      ("record-indexes", "Record Indexes", .kind(BookishRecordKind.recordIndex)),
+    ]
+
+    return try entries.enumerated().map { position, entry in
+      try BookishRecordIndex.record(
+        id: BookishRecordID("datastore-index-\(entry.id)"),
+        label: entry.label,
+        position: position,
+        query: RecordQuery(
+          predicate: entry.predicate,
+          sort: [.property(BookishRecordKey.title), .property(BookishRecordKey.name), .id]
+        ),
+        sourceID: seedSourceID
+      )
+    }
   }
 }
 

@@ -5,7 +5,7 @@ import Foundation
 ///
 /// The shape intentionally mirrors SwiftData's predicate composition at a
 /// domain level while remaining directly evaluable by the local JSON store.
-public indirect enum RecordPredicate: Equatable, Sendable {
+public indirect enum RecordPredicate: Codable, Equatable, Sendable {
   /// Matches every record.
   case all
 
@@ -17,6 +17,9 @@ public indirect enum RecordPredicate: Equatable, Sendable {
 
   /// Matches records whose materialised property exactly equals a value.
   case property(String, equals: BookishRecordValue)
+
+  /// Matches records whose materialised property is, or contains, a value.
+  case propertyContains(String, BookishRecordValue)
 
   /// Matches records that satisfy every child predicate.
   case and([RecordPredicate])
@@ -41,6 +44,18 @@ public indirect enum RecordPredicate: Equatable, Sendable {
 
     case .property(let key, equals: let value):
       record.properties[key] == value
+
+    case .propertyContains(let key, let value):
+      switch record.properties[key] {
+      case .list(let values):
+        values.contains(value)
+
+      case .some(let candidate):
+        candidate == value
+
+      case .none:
+        false
+      }
 
     case .and(let predicates):
       predicates.allSatisfy { $0.matches(record) }

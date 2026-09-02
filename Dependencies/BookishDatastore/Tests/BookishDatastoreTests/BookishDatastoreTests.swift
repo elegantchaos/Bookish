@@ -143,6 +143,93 @@ final class BookishDatastoreTests: XCTestCase {
     XCTAssertEqual(ids, [bookID])
   }
 
+  func testRecordQueryFiltersAndSortsRecords() async throws {
+    let datastore = try await makeDatastore()
+    let first = BookishRecord(
+      id: BookishRecordID("book-1"),
+      kind: "book",
+      properties: ["title": .string("Zen and the Art of Motorcycle Maintenance")]
+    )
+    let second = BookishRecord(
+      id: BookishRecordID("book-2"),
+      kind: "book",
+      properties: ["title": .string("A Wizard of Earthsea")]
+    )
+    let author = BookishRecord(id: BookishRecordID("author-1"), kind: "person")
+
+    try await datastore.recordStore.upsert(first)
+    try await datastore.recordStore.upsert(second)
+    try await datastore.recordStore.upsert(author)
+
+    let records = try await datastore.recordService.records(
+      matching: RecordQuery(
+        predicate: .kind("book"),
+        sort: [.property(BookishRecordKey.title), .id]
+      ))
+
+    XCTAssertEqual(records.map(\.id), [second.id, first.id])
+  }
+
+  func testRecordQueryCanMatchRecordReferencesInListProperties() async throws {
+    let datastore = try await makeDatastore()
+    let authorID = BookishRecordID("author-1")
+    let matching = BookishRecord(
+      id: BookishRecordID("book-1"),
+      kind: "book",
+      properties: [BookishRecordKey.authors: .list([.record(authorID)])]
+    )
+    let other = BookishRecord(
+      id: BookishRecordID("book-2"),
+      kind: "book",
+      properties: [BookishRecordKey.authors: .list([.record(BookishRecordID("author-2"))])]
+    )
+
+    try await datastore.recordStore.upsert(other)
+    try await datastore.recordStore.upsert(matching)
+
+    let records = try await datastore.recordService.records(
+      matching: RecordQuery(
+        predicate: .and([
+          .kind("book"),
+          .propertyContains(BookishRecordKey.authors, .record(authorID)),
+        ])
+      ))
+
+    XCTAssertEqual(records.map(\.id), [matching.id])
+  }
+
+  func testRecordQueryResultRefreshesAfterMutation() async throws {
+    let datastore = try await makeDatastore()
+    let result = try await datastore.recordQueryService.result(
+      matching: RecordQuery(
+        predicate: .kind("book"),
+        sort: [.property(BookishRecordKey.title), .id]
+      ))
+
+    let initialRecords = await MainActor.run { result.records }
+    XCTAssertTrue(initialRecords.isEmpty)
+
+    let book = BookishRecord(
+      id: BookishRecordID("book-1"),
+      kind: "book",
+      properties: [BookishRecordKey.title: .string("A Wizard of Earthsea")]
+    )
+    try await datastore.mutationService.perform(.upsertRecord(book))
+
+    let updatedRecords = await MainActor.run { result.records }
+    XCTAssertEqual(updatedRecords, [book])
+  }
+
+  func testRecordQueryServiceReusesEquivalentResults() async throws {
+    let datastore = try await makeDatastore()
+    let query = RecordQuery(predicate: .kind("book"), sort: [.id])
+
+    let first = try await datastore.recordQueryService.result(matching: query)
+    let second = try await datastore.recordQueryService.result(matching: query)
+
+    XCTAssertTrue(first === second)
+  }
+
   func testMutationStoreRemoveAllClearsPersistedMutations() async throws {
     let directory = try temporaryDirectory()
     let datastore = try await BookishDatastore(directoryURL: directory)
