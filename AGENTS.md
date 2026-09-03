@@ -2,9 +2,9 @@
 
 - This repository is a Swift book cataloguing app.
 - It is written using Swift 6 and SwiftUI.
-- Legacy CoreData code exists, but will be updated to SwiftData. 
+- Legacy CoreData code exists, but will be updated to SwiftData.
 - Keep a development journal in `Extras/Journal/`.
-- Testing & validation may incidentally update package lockfiles. This is acceptible and does not need to be reversed.
+- Testing & validation may incidentally update package lockfiles. This is acceptable and does not need to be reversed.
 
 # Standard Rules
 
@@ -18,6 +18,7 @@
 - Report validation performed, skipped validation with reasons, residual risks, and any follow-up work that remains.
 - Prefer trusted primary sources for technical decisions, especially official platform, language, package, API, and dependency documentation.
 - Use portable path references in documentation: repository-relative paths for files in this repository and home-relative paths for shared resources outside it.
+- When a required Mint-installed command is unavailable on `PATH`, use `~/.mint/bin/<command>` as a fallback before treating the tool as missing.
 - Never expose or commit credentials or secrets.
 - Never perform irreversible destructive actions without explicit approval.
 - Reversible source-control changes, including deletion of tracked files, are allowed when they are part of the requested work.
@@ -30,7 +31,9 @@
 - Follow the `coding-standards` skill for all coding work.
 - Use the `swift` skill for Swift language and package work.
 - Use the `swiftui` skill for SwiftUI view work.
-- Use the `validation-flow` skill after code changes.
+- Use the `swift-testing-pro` skill for Swift Testing work.
+- Use the `swiftdata-pro` skill when replacing CoreData with SwiftData.
+- Use the `swift-validation` skill after code changes.
 - Use the `codex-git` skill for git operations.
 
 To refresh this file, use the `refresh` skill.
