@@ -24,6 +24,12 @@ Started the metadata record implementation by seeding the universal fallback rec
 - Layouts, indexes, metadata, seed markers, sample books, query sorts, and their internal presentation APIs use `name`.
 - Delicious Library remains an external `title`-based source format. Its importer reads that source field and maps it to Bookish `name` at the import boundary.
 
+## Compact Seed Encoding
+
+- Rewrote the bundled seed interchange resources using the existing compact JSON syntax.
+- Metadata records use `layout` as their schema `defaultKind`; the sample data uses `book`.
+- Record links use `@record-id` shorthand. Typed query and presentation values remain explicit tagged objects.
+
 ## Notes
 
 The planned fallback ID `metadata.type.*` conflicted with the interchange ID grammar, so the codec now permits `*` after the leading identifier character. This keeps `record` available as a real record kind rather than overloading it as a fallback sentinel.

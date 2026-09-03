@@ -4,6 +4,7 @@
     "version": 1
   },
   "schema": {
+    "defaultKind": "layout",
     "rvKey": "_rv"
   },
   "records": [
@@ -11,10 +12,7 @@
       "id": "datastore-index-all-records",
       "kind": "index",
       "debugOnly": true,
-      "layout": {
-        "_rv": "record",
-        "id": "datastore-all-fields-layout"
-      },
+      "layout": "@datastore-all-fields-layout",
       "types": [
         "*"
       ],
@@ -47,10 +45,7 @@
       "id": "datastore-index-books",
       "kind": "index",
       "debugOnly": false,
-      "layout": {
-        "_rv": "record",
-        "id": "datastore-book-layout"
-      },
+      "layout": "@datastore-book-layout",
       "types": [
         "book"
       ],
@@ -84,10 +79,7 @@
       "id": "datastore-index-people",
       "kind": "index",
       "debugOnly": false,
-      "layout": {
-        "_rv": "record",
-        "id": "datastore-person-layout"
-      },
+      "layout": "@datastore-person-layout",
       "types": [
         "person"
       ],
@@ -121,10 +113,7 @@
       "id": "datastore-index-organisations",
       "kind": "index",
       "debugOnly": false,
-      "layout": {
-        "_rv": "record",
-        "id": "datastore-organisation-layout"
-      },
+      "layout": "@datastore-organisation-layout",
       "types": [
         "organisation"
       ],
@@ -158,10 +147,7 @@
       "id": "datastore-index-series",
       "kind": "index",
       "debugOnly": false,
-      "layout": {
-        "_rv": "record",
-        "id": "datastore-series-layout"
-      },
+      "layout": "@datastore-series-layout",
       "types": [
         "series"
       ],
@@ -195,10 +181,7 @@
       "id": "datastore-index-lists",
       "kind": "index",
       "debugOnly": false,
-      "layout": {
-        "_rv": "record",
-        "id": "datastore-list-layout"
-      },
+      "layout": "@datastore-list-layout",
       "types": [
         "list"
       ],
@@ -232,10 +215,7 @@
       "id": "datastore-index-relationships",
       "kind": "index",
       "debugOnly": false,
-      "layout": {
-        "_rv": "record",
-        "id": "datastore-relationship-layout"
-      },
+      "layout": "@datastore-relationship-layout",
       "types": [
         "relationship"
       ],
@@ -269,10 +249,7 @@
       "id": "datastore-index-layouts",
       "kind": "index",
       "debugOnly": true,
-      "layout": {
-        "_rv": "record",
-        "id": "datastore-layout-layout"
-      },
+      "layout": "@datastore-layout-layout",
       "types": [
         "layout"
       ],
@@ -306,10 +283,7 @@
       "id": "datastore-index-indexes",
       "kind": "index",
       "debugOnly": true,
-      "layout": {
-        "_rv": "record",
-        "id": "datastore-index-layout"
-      },
+      "layout": "@datastore-index-layout",
       "types": [
         "index"
       ],
@@ -341,7 +315,6 @@
     },
     {
       "id": "datastore-all-fields-layout",
-      "kind": "layout",
       "fields": [
         "*"
       ],
@@ -353,7 +326,6 @@
     },
     {
       "id": "datastore-record-layout",
-      "kind": "layout",
       "fields": [
         "name",
         "note",
@@ -369,7 +341,6 @@
     },
     {
       "id": "datastore-book-layout",
-      "kind": "layout",
       "fields": [
         "name",
         "subtitle",
@@ -400,7 +371,6 @@
     },
     {
       "id": "datastore-person-layout",
-      "kind": "layout",
       "fields": [
         "name",
         "source",
@@ -414,7 +384,6 @@
     },
     {
       "id": "datastore-organisation-layout",
-      "kind": "layout",
       "fields": [
         "name",
         "source",
@@ -428,7 +397,6 @@
     },
     {
       "id": "datastore-series-layout",
-      "kind": "layout",
       "fields": [
         "name",
         "source",
@@ -442,7 +410,6 @@
     },
     {
       "id": "datastore-list-layout",
-      "kind": "layout",
       "fields": [
         "name",
         "items",
@@ -457,7 +424,6 @@
     },
     {
       "id": "datastore-relationship-layout",
-      "kind": "layout",
       "fields": [
         "name",
         "source",
@@ -471,7 +437,6 @@
     },
     {
       "id": "datastore-layout-layout",
-      "kind": "layout",
       "fields": [
         "name",
         "types",
@@ -487,7 +452,6 @@
     },
     {
       "id": "datastore-index-layout",
-      "kind": "layout",
       "fields": [
         "name",
         "position",
@@ -506,7 +470,6 @@
     },
     {
       "id": "datastore-seed-marker-layout",
-      "kind": "layout",
       "fields": [
         "name",
         "source",

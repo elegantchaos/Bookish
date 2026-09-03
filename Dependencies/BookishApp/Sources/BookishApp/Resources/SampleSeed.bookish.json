@@ -4,6 +4,7 @@
     "version": 1
   },
   "schema": {
+    "defaultKind": "book",
     "rvKey": "_rv"
   },
   "records": [
@@ -17,12 +18,8 @@
     },
     {
       "id": "datastore-book",
-      "kind": "book",
       "authors": [
-        {
-          "_rv": "record",
-          "id": "datastore-author"
-        }
+        "@datastore-author"
       ],
       "format": "Paperback",
       "note": "Seeded by the datastore harness",
