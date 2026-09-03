@@ -5,16 +5,21 @@ import SwiftUI
 public struct BookishRecordCell: View {
   private let presentation: BookishRecordPresentation
 
-  /// Creates a row view from a data record and an optional layout record.
-  public init(record: BookishRecord, layout: BookishRecord?) {
-    self.presentation = BookishRecordPresentation(record: record, layout: layout)
+  /// Creates a row view from a data record, an optional layout, and optional property metadata.
+  public init(
+    record: BookishRecord,
+    layout: BookishRecord?,
+    metadata: BookishRecord? = nil
+  ) {
+    self.presentation = BookishRecordPresentation(
+      record: record, layout: layout, metadata: metadata)
   }
 
   /// The SwiftUI content for the row.
   public var body: some View {
     VStack(alignment: .leading, spacing: 4) {
       HStack(alignment: .firstTextBaseline) {
-        Text(presentation.title)
+        Text(presentation.name)
           .font(.headline)
         Spacer()
         Text(presentation.record.kind)
@@ -47,7 +52,7 @@ public struct BookishRecordCell: View {
         id: BookishRecordID("book-preview"),
         kind: BookishRecordKind.book,
         properties: [
-          BookishRecordKey.title: .string("The Left Hand of Darkness"),
+          BookishRecordKey.name: .string("The Left Hand of Darkness"),
           BookishRecordKey.authors: .list([.record(BookishRecordID("person-ursula-k-le-guin"))]),
           BookishRecordKey.status: .string("To Read"),
         ]
@@ -56,7 +61,7 @@ public struct BookishRecordCell: View {
         id: BookishRecordID("layout-preview"),
         kind: BookishRecordKind.layout,
         properties: [
-          BookishRecordKey.title: .string("Book Row"),
+          BookishRecordKey.name: .string("Book Row"),
           BookishRecordKey.fields: .list([
             .string(BookishRecordKey.authors), .string(BookishRecordKey.status),
           ]),

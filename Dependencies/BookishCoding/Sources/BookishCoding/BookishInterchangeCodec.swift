@@ -171,6 +171,12 @@ public struct BookishInterchangeCodec: Sendable {
       }
       return dictionary
 
+    case .presentation(let value):
+      return [
+        schema.rvKey: "presentation",
+        "properties": try encodeCodable(value),
+      ]
+
     case .tombstone:
       return [schema.rvKey: "tombstone"]
 
@@ -310,6 +316,13 @@ public struct BookishInterchangeCodec: Sendable {
       values.removeValue(forKey: schema.rvKey)
       return .encoded(try BookishEncodedValue(jsonObject: values))
 
+    case "presentation":
+      guard let properties = dictionary["properties"] as? [String: Any] else {
+        throw BookishCodingError.invalidPresentation
+      }
+      return .presentation(
+        try decodeCodable([String: BookishPropertyPresentation].self, from: properties))
+
     default:
       throw BookishCodingError.unknownRecordValueKind(kind)
     }
@@ -369,7 +382,7 @@ public struct BookishInterchangeCodec: Sendable {
 
     return id.allSatisfy { character in
       character.isLetter || character.isNumber || character == "." || character == "_"
-        || character == ":" || character == "-"
+        || character == ":" || character == "-" || character == "*"
     }
   }
 

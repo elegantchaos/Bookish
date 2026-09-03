@@ -20,7 +20,7 @@ struct BookishCodingTests {
           id: BookishRecordID("book-1"),
           kind: "book",
           properties: [
-            "title": .string("Snow Crash"),
+            "name": .string("Snow Crash"),
             "pages": .integer(470),
             "author": .record(BookishRecordID("person-1")),
             "deleted": .tombstone,
@@ -46,7 +46,7 @@ struct BookishCodingTests {
           {
             "id": "book-1",
             "kind": "book",
-            "title": "Snow Crash",
+            "name": "Snow Crash",
             "pages": 470,
             "owned": true,
             "rating": 4.5,
@@ -59,7 +59,7 @@ struct BookishCodingTests {
     let decoded = try BookishInterchangeCodec().decode(Data(json.utf8))
     let record = try #require(decoded.records.first)
 
-    #expect(record.string("title") == "Snow Crash")
+    #expect(record.string("name") == "Snow Crash")
     #expect(record.integer("pages") == 470)
     #expect(record.properties["owned"] == .bool(true))
     #expect(record.properties["rating"] == .double(4.5))
@@ -119,6 +119,36 @@ struct BookishCodingTests {
   }
 
   @Test
+  func presentationValuesRoundTripAsTaggedProperties() throws {
+    let file = BookishInterchangeFile(
+      records: [
+        BookishRecord(
+          id: BookishRecordID("metadata.type.*"),
+          kind: BookishRecordKind.metadata,
+          properties: [
+            BookishRecordKey.presentation: .presentation([
+              BookishRecordKey.name: BookishPropertyPresentation(
+                icon: "textformat",
+                label: "Title",
+                viewer: "text"
+              )
+            ])
+          ]
+        )
+      ]
+    )
+
+    let data = try BookishInterchangeCodec().encode(file)
+    let object = try JSONSerialization.jsonObject(with: data) as? [String: Any]
+    let records = try #require(object?["records"] as? [[String: Any]])
+    let presentation = try #require(records.first?[BookishRecordKey.presentation] as? [String: Any])
+
+    #expect(presentation["®"] as? String == "presentation")
+    #expect((presentation["properties"] as? [String: Any])?[BookishRecordKey.name] != nil)
+    #expect(try BookishInterchangeCodec().decode(data) == file)
+  }
+
+  @Test
 
   func schemaOverridesReservedKeys() throws {
     let json = """
@@ -133,7 +163,7 @@ struct BookishCodingTests {
         "records": [
           {
             "_id": "book-1",
-            "title": "Snow Crash",
+            "name": "Snow Crash",
             "author": { "_value": "record", "id": "person-1" }
           }
         ]

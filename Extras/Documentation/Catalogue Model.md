@@ -24,7 +24,7 @@ Records are tombstoned rather than deleted so that destructive operations can be
 
 Bookish has a small set of user-facing record categories:
 
-- **Book**: the central catalogue item, with title, identifiers, authors, publisher, publication details, cover artwork, and user fields.
+- **Book**: the central catalogue item, with a name, identifiers, authors, publisher, publication details, cover artwork, and user fields.
 - **Person**: an author, illustrator, editor, narrator, contributor, owner, or other individual connected to books.
 - **Organisation**: a publisher, imprint, retailer, library, or other institution.
 - **Series**: an ordered or semi-ordered group of books.

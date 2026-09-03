@@ -32,20 +32,17 @@ public enum BookishRecordKind {
   /// A record that defines a browser index.
   public static let index = "index"
 
+  /// A record that defines presentation metadata for a record kind.
+  public static let metadata = "metadata"
+
   /// A marker record indicating that initial application seeding has run.
   public static let seedMarker = "seedMarker"
 }
 
 /// Standard property keys used by Bookish catalogue records.
 public enum BookishRecordKey {
-  /// A record's display title.
-  public static let title = "title"
-
   /// A record's display name.
   public static let name = "name"
-
-  /// A short label for display in index and navigation surfaces.
-  public static let label = "label"
 
   /// Whether a metadata record is intended only for debug browsing.
   public static let debugOnly = "debugOnly"
@@ -145,4 +142,7 @@ public enum BookishRecordKey {
 
   /// A stored query description.
   public static let query = "query"
+
+  /// Stored presentation metadata.
+  public static let presentation = "presentation"
 }

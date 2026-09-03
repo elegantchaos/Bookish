@@ -101,7 +101,7 @@ private struct BrowserIndexListView: View {
   var body: some View {
     List(selection: selectedRecordIndexID) {
       ForEach(navigation.recordIndexes) { recordIndex in
-        Text(recordIndex.label)
+        Text(recordIndex.name)
           .tag(Optional(recordIndex.id))
       }
     }
@@ -124,17 +124,18 @@ private struct RecordIndexView: View {
   let navigation: BookishNavigationService
 
   @State private var layout: BookishRecord?
+  @State private var metadataByKind: [String: BookishRecord] = [:]
 
   var body: some View {
     List(selection: selectedRecordID) {
       ForEach(navigation.selectedRecordResult?.records ?? []) { record in
-        BookishRecordCell(record: record, layout: layout)
+        BookishRecordCell(record: record, layout: layout, metadata: metadataByKind[record.kind])
           .tag(Optional(record.id))
       }
     }
-    .navigationTitle(navigation.selectedRecordIndexLabel ?? "Index")
+    .navigationTitle(navigation.selectedRecordIndexName ?? "Index")
     .task(id: taskID) {
-      await loadLayout()
+      await loadPresentation()
     }
   }
 
@@ -150,9 +151,16 @@ private struct RecordIndexView: View {
     "\(navigation.selectedRecordIndexID?.rawValue ?? "")-\(harness.selectedLayoutID?.rawValue ?? "")-\(harness.revision)"
   }
 
-  private func loadLayout() async {
+  private func loadPresentation() async {
     do {
       layout = try await harness.selectedLayout()
+      var metadataByKind: [String: BookishRecord] = [:]
+      for kind in Set(navigation.selectedRecordResult?.records.map(\.kind) ?? []) {
+        if let metadata = try await harness.metadata(for: kind) {
+          metadataByKind[kind] = metadata
+        }
+      }
+      self.metadataByKind = metadataByKind
     } catch {
       harness.report(error: error)
     }
@@ -181,11 +189,12 @@ private struct BookishRecordIDCell: View {
 
   @State private var record: BookishRecord?
   @State private var layout: BookishRecord?
+  @State private var metadata: BookishRecord?
 
   var body: some View {
     Group {
       if let record {
-        BookishRecordCell(record: record, layout: layout)
+        BookishRecordCell(record: record, layout: layout, metadata: metadata)
       } else {
         Text(recordID.rawValue)
       }
@@ -203,6 +212,9 @@ private struct BookishRecordIDCell: View {
     do {
       record = try await harness.record(id: recordID)
       layout = try await harness.selectedLayout()
+      if let record {
+        metadata = try await harness.metadata(for: record.kind)
+      }
     } catch {
       harness.report(error: error)
     }
@@ -216,11 +228,12 @@ private struct BookishRecordIDDetail: View {
 
   @State private var record: BookishRecord?
   @State private var layout: BookishRecord?
+  @State private var metadata: BookishRecord?
 
   var body: some View {
     Group {
       if let record {
-        BookishRecordView(record: record, layout: layout) { field in
+        BookishRecordView(record: record, layout: layout, metadata: metadata) { field in
           guard let recordID = field.rawValue?.recordValue else {
             return nil
           }
@@ -244,6 +257,9 @@ private struct BookishRecordIDDetail: View {
     do {
       record = try await harness.record(id: recordID)
       layout = try await harness.selectedLayout()
+      if let record {
+        metadata = try await harness.metadata(for: record.kind)
+      }
     } catch {
       harness.report(error: error)
     }
@@ -285,10 +301,10 @@ private struct BookishLayoutPickerItem: View {
   let layoutID: BookishRecordID
   let harness: BookishHarness
 
-  @State private var title: String?
+  @State private var name: String?
 
   var body: some View {
-    Text(title ?? layoutID.rawValue)
+    Text(name ?? layoutID.rawValue)
       .tag(Optional(layoutID))
       .task(id: taskID) {
         await load()
@@ -301,7 +317,7 @@ private struct BookishLayoutPickerItem: View {
 
   private func load() async {
     do {
-      title = try await harness.record(id: layoutID)?.string(BookishRecordKey.title)
+      name = try await harness.record(id: layoutID)?.string(BookishRecordKey.name)
     } catch {
       harness.report(error: error)
     }

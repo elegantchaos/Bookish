@@ -214,7 +214,7 @@ private struct DeliciousBook {
     self.seriesPosition = raw.nonZeroInt("numberInSeries")
 
     var properties: [String: BookishRecordValue] = [
-      BookishRecordKey.title: .string(title),
+      BookishRecordKey.name: .string(title),
       BookishRecordKey.importedID: .string(id),
       BookishRecordKey.source: .string(sourceID),
     ]
@@ -249,9 +249,9 @@ private struct DeliciousBook {
     seriesPosition: Int? = nil
   ) {
     if self.title != title {
-      properties["original.title"] = .string(self.title)
+      properties["original.name"] = .string(self.title)
       self.title = title
-      properties[BookishRecordKey.title] = .string(title)
+      properties[BookishRecordKey.name] = .string(title)
     }
 
     if self.subtitle != subtitle {

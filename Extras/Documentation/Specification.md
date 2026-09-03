@@ -18,7 +18,7 @@ Bookish preserves a flexible record model while keeping clear boundaries between
 ## Core Concepts
 
 - **Record**: the base unit of catalogue data. Records have stable identifiers, names, kinds, optional images, and flexible properties.
-- **Book**: the central record type, with standard metadata such as title, identifiers, authors, publisher, publication details, cover artwork, and user fields.
+- **Book**: the central record type, with standard metadata such as a name, identifiers, authors, publisher, publication details, cover artwork, and user fields.
 - **Person**: an author, illustrator, editor, narrator, contributor, or other individual connected to books.
 - **Organisation**: a publisher, imprint, retailer, library, or other institution.
 - **Series**: an ordered or semi-ordered group of books.
@@ -42,7 +42,7 @@ The app should show candidate matches before insertion, allow users to choose th
 
 ### Browse and Search
 
-Users can browse by book, person, organisation, series, list, role, and custom index. Search should cover titles, names, identifiers, and important metadata. Navigation should make relationships visible in both directions, such as from a book to its authors and from an author to their books.
+Users can browse by book, person, organisation, series, list, role, and custom index. Search should cover names, identifiers, and important metadata. Navigation should make relationships visible in both directions, such as from a book to its authors and from an author to their books.
 
 ### Edit Metadata
 

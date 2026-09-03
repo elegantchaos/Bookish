@@ -10,7 +10,6 @@
     {
       "id": "datastore-index-all-records",
       "kind": "index",
-      "label": "All Records",
       "debugOnly": true,
       "layout": {
         "_rv": "record",
@@ -29,13 +28,6 @@
           {
             "direction": "ascending",
             "key": {
-              "key": "title",
-              "type": "property"
-            }
-          },
-          {
-            "direction": "ascending",
-            "key": {
               "key": "name",
               "type": "property"
             }
@@ -48,12 +40,12 @@
           }
         ]
       },
-      "source": "com.elegantchaos.bookish.seed"
+      "source": "com.elegantchaos.bookish.seed",
+      "name": "All Records"
     },
     {
       "id": "datastore-index-books",
       "kind": "index",
-      "label": "Books",
       "debugOnly": false,
       "layout": {
         "_rv": "record",
@@ -73,13 +65,6 @@
           {
             "direction": "ascending",
             "key": {
-              "key": "title",
-              "type": "property"
-            }
-          },
-          {
-            "direction": "ascending",
-            "key": {
               "key": "name",
               "type": "property"
             }
@@ -92,12 +77,12 @@
           }
         ]
       },
-      "source": "com.elegantchaos.bookish.seed"
+      "source": "com.elegantchaos.bookish.seed",
+      "name": "Books"
     },
     {
       "id": "datastore-index-people",
       "kind": "index",
-      "label": "People",
       "debugOnly": false,
       "layout": {
         "_rv": "record",
@@ -117,13 +102,6 @@
           {
             "direction": "ascending",
             "key": {
-              "key": "title",
-              "type": "property"
-            }
-          },
-          {
-            "direction": "ascending",
-            "key": {
               "key": "name",
               "type": "property"
             }
@@ -136,12 +114,12 @@
           }
         ]
       },
-      "source": "com.elegantchaos.bookish.seed"
+      "source": "com.elegantchaos.bookish.seed",
+      "name": "People"
     },
     {
       "id": "datastore-index-organisations",
       "kind": "index",
-      "label": "Organisations",
       "debugOnly": false,
       "layout": {
         "_rv": "record",
@@ -161,13 +139,6 @@
           {
             "direction": "ascending",
             "key": {
-              "key": "title",
-              "type": "property"
-            }
-          },
-          {
-            "direction": "ascending",
-            "key": {
               "key": "name",
               "type": "property"
             }
@@ -180,12 +151,12 @@
           }
         ]
       },
-      "source": "com.elegantchaos.bookish.seed"
+      "source": "com.elegantchaos.bookish.seed",
+      "name": "Organisations"
     },
     {
       "id": "datastore-index-series",
       "kind": "index",
-      "label": "Series",
       "debugOnly": false,
       "layout": {
         "_rv": "record",
@@ -205,13 +176,6 @@
           {
             "direction": "ascending",
             "key": {
-              "key": "title",
-              "type": "property"
-            }
-          },
-          {
-            "direction": "ascending",
-            "key": {
               "key": "name",
               "type": "property"
             }
@@ -224,12 +188,12 @@
           }
         ]
       },
-      "source": "com.elegantchaos.bookish.seed"
+      "source": "com.elegantchaos.bookish.seed",
+      "name": "Series"
     },
     {
       "id": "datastore-index-lists",
       "kind": "index",
-      "label": "Lists",
       "debugOnly": false,
       "layout": {
         "_rv": "record",
@@ -249,13 +213,6 @@
           {
             "direction": "ascending",
             "key": {
-              "key": "title",
-              "type": "property"
-            }
-          },
-          {
-            "direction": "ascending",
-            "key": {
               "key": "name",
               "type": "property"
             }
@@ -268,12 +225,12 @@
           }
         ]
       },
-      "source": "com.elegantchaos.bookish.seed"
+      "source": "com.elegantchaos.bookish.seed",
+      "name": "Lists"
     },
     {
       "id": "datastore-index-relationships",
       "kind": "index",
-      "label": "Relationships",
       "debugOnly": false,
       "layout": {
         "_rv": "record",
@@ -293,13 +250,6 @@
           {
             "direction": "ascending",
             "key": {
-              "key": "title",
-              "type": "property"
-            }
-          },
-          {
-            "direction": "ascending",
-            "key": {
               "key": "name",
               "type": "property"
             }
@@ -312,12 +262,12 @@
           }
         ]
       },
-      "source": "com.elegantchaos.bookish.seed"
+      "source": "com.elegantchaos.bookish.seed",
+      "name": "Relationships"
     },
     {
       "id": "datastore-index-layouts",
       "kind": "index",
-      "label": "Layouts",
       "debugOnly": true,
       "layout": {
         "_rv": "record",
@@ -337,13 +287,6 @@
           {
             "direction": "ascending",
             "key": {
-              "key": "title",
-              "type": "property"
-            }
-          },
-          {
-            "direction": "ascending",
-            "key": {
               "key": "name",
               "type": "property"
             }
@@ -356,12 +299,12 @@
           }
         ]
       },
-      "source": "com.elegantchaos.bookish.seed"
+      "source": "com.elegantchaos.bookish.seed",
+      "name": "Layouts"
     },
     {
       "id": "datastore-index-indexes",
       "kind": "index",
-      "label": "Indexes",
       "debugOnly": true,
       "layout": {
         "_rv": "record",
@@ -381,13 +324,6 @@
           {
             "direction": "ascending",
             "key": {
-              "key": "title",
-              "type": "property"
-            }
-          },
-          {
-            "direction": "ascending",
-            "key": {
               "key": "name",
               "type": "property"
             }
@@ -400,7 +336,8 @@
           }
         ]
       },
-      "source": "com.elegantchaos.bookish.seed"
+      "source": "com.elegantchaos.bookish.seed",
+      "name": "Indexes"
     },
     {
       "id": "datastore-all-fields-layout",
@@ -408,34 +345,33 @@
       "fields": [
         "*"
       ],
-      "title": "All Fields",
       "types": [
         "*"
       ],
-      "source": "com.elegantchaos.bookish.seed"
+      "source": "com.elegantchaos.bookish.seed",
+      "name": "All Fields"
     },
     {
       "id": "datastore-record-layout",
       "kind": "layout",
       "fields": [
-        "title",
         "name",
         "note",
         "source",
         "importedID",
         "*"
       ],
-      "title": "Record",
       "types": [
         "record"
       ],
-      "source": "com.elegantchaos.bookish.seed"
+      "source": "com.elegantchaos.bookish.seed",
+      "name": "Record"
     },
     {
       "id": "datastore-book-layout",
       "kind": "layout",
       "fields": [
-        "title",
+        "name",
         "subtitle",
         "authors",
         "illustrators",
@@ -456,11 +392,11 @@
         "importedID",
         "*"
       ],
-      "title": "Book",
       "types": [
         "book"
       ],
-      "source": "com.elegantchaos.bookish.seed"
+      "source": "com.elegantchaos.bookish.seed",
+      "name": "Book"
     },
     {
       "id": "datastore-person-layout",
@@ -470,11 +406,11 @@
         "source",
         "*"
       ],
-      "title": "Person",
       "types": [
         "person"
       ],
-      "source": "com.elegantchaos.bookish.seed"
+      "source": "com.elegantchaos.bookish.seed",
+      "name": "Person"
     },
     {
       "id": "datastore-organisation-layout",
@@ -484,11 +420,11 @@
         "source",
         "*"
       ],
-      "title": "Organisation",
       "types": [
         "organisation"
       ],
-      "source": "com.elegantchaos.bookish.seed"
+      "source": "com.elegantchaos.bookish.seed",
+      "name": "Organisation"
     },
     {
       "id": "datastore-series-layout",
@@ -498,11 +434,11 @@
         "source",
         "*"
       ],
-      "title": "Series",
       "types": [
         "series"
       ],
-      "source": "com.elegantchaos.bookish.seed"
+      "source": "com.elegantchaos.bookish.seed",
+      "name": "Series"
     },
     {
       "id": "datastore-list-layout",
@@ -513,48 +449,47 @@
         "source",
         "*"
       ],
-      "title": "List",
       "types": [
         "list"
       ],
-      "source": "com.elegantchaos.bookish.seed"
+      "source": "com.elegantchaos.bookish.seed",
+      "name": "List"
     },
     {
       "id": "datastore-relationship-layout",
       "kind": "layout",
       "fields": [
-        "title",
         "name",
         "source",
         "*"
       ],
-      "title": "Relationship",
       "types": [
         "relationship"
       ],
-      "source": "com.elegantchaos.bookish.seed"
+      "source": "com.elegantchaos.bookish.seed",
+      "name": "Relationship"
     },
     {
       "id": "datastore-layout-layout",
       "kind": "layout",
       "fields": [
-        "title",
+        "name",
         "types",
         "fields",
         "source",
         "*"
       ],
-      "title": "Layout",
       "types": [
         "layout"
       ],
-      "source": "com.elegantchaos.bookish.seed"
+      "source": "com.elegantchaos.bookish.seed",
+      "name": "Layout"
     },
     {
       "id": "datastore-index-layout",
       "kind": "layout",
       "fields": [
-        "label",
+        "name",
         "position",
         "debugOnly",
         "layout",
@@ -563,25 +498,59 @@
         "source",
         "*"
       ],
-      "title": "Index",
       "types": [
         "index"
       ],
-      "source": "com.elegantchaos.bookish.seed"
+      "source": "com.elegantchaos.bookish.seed",
+      "name": "Index"
     },
     {
       "id": "datastore-seed-marker-layout",
       "kind": "layout",
       "fields": [
-        "label",
+        "name",
         "source",
         "*"
       ],
-      "title": "Seed Marker",
       "types": [
         "seedMarker"
       ],
-      "source": "com.elegantchaos.bookish.seed"
+      "source": "com.elegantchaos.bookish.seed",
+      "name": "Seed Marker"
+    },
+    {
+      "id": "metadata.type.*",
+      "kind": "metadata",
+      "types": [
+        "*"
+      ],
+      "presentation": {
+        "_rv": "presentation",
+        "properties": {
+          "source": {
+            "icon": "tray",
+            "label": "Source",
+            "viewer": "text"
+          },
+          "importedID": {
+            "icon": "number",
+            "label": "Imported ID",
+            "viewer": "text"
+          },
+          "note": {
+            "icon": "note.text",
+            "label": "Note",
+            "viewer": "text"
+          },
+          "name": {
+            "icon": "textformat",
+            "label": "Name",
+            "viewer": "text"
+          }
+        }
+      },
+      "source": "com.elegantchaos.bookish.seed",
+      "name": "Fallback Metadata"
     }
   ]
 }

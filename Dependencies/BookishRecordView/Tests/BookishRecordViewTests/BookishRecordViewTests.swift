@@ -12,7 +12,7 @@ struct BookishRecordViewTests {
       record: BookishRecord(
         kind: "book",
         properties: [
-          "title": .string("Bookish"),
+          "name": .string("Bookish"),
           "author": .string("Author"),
           "status": .string("Reading"),
         ]
@@ -20,17 +20,48 @@ struct BookishRecordViewTests {
       layout: BookishRecord(
         kind: "layout",
         properties: [
-          "title": .string("Book Summary"),
+          "name": .string("Book Summary"),
           "fields": .list([.string("author"), .string("status")]),
         ]
       )
     )
 
-    #expect(presentation.title == "Bookish")
-    #expect(presentation.layoutTitle == "Book Summary")
+    #expect(presentation.name == "Bookish")
+    #expect(presentation.layoutName == "Book Summary")
     #expect(presentation.fields.map(\.key) == ["author", "status"])
     #expect(presentation.fields.map(\.value) == ["Author", "Reading"])
     #expect(presentation.fields.map(\.rawValue) == [.string("Author"), .string("Reading")])
+  }
+
+  @Test
+  func presentationUsesMetadataLabelsAndIcons() {
+    let presentation = BookishRecordPresentation(
+      record: BookishRecord(
+        kind: BookishRecordKind.book,
+        properties: [
+          "author": .string("Author"),
+          "status": .string("Reading"),
+        ]
+      ),
+      layout: BookishRecord(
+        kind: BookishRecordKind.layout,
+        properties: [
+          BookishRecordKey.fields: .list([.string("author"), .string("status")])
+        ]
+      ),
+      metadata: BookishRecord(
+        kind: BookishRecordKind.metadata,
+        properties: [
+          BookishRecordKey.presentation: .presentation([
+            "author": BookishPropertyPresentation(icon: "person", label: "Author"),
+            "status": BookishPropertyPresentation(icon: "bookmark", label: "Reading Status"),
+          ])
+        ]
+      )
+    )
+
+    #expect(presentation.fields.map(\.label) == ["Author", "Reading Status"])
+    #expect(presentation.fields.map(\.icon) == ["person", "bookmark"])
   }
 
   @Test
@@ -47,7 +78,7 @@ struct BookishRecordViewTests {
       layout: nil
     )
 
-    #expect(presentation.layoutTitle == "Default")
+    #expect(presentation.layoutName == "Default")
     #expect(presentation.fields.map(\.key) == ["author", "status"])
   }
 
@@ -61,14 +92,14 @@ struct BookishRecordViewTests {
           "author": .string("Author"),
           "isbn": .string("9780000000000"),
           "status": .string("Reading"),
-          "title": .string("Bookish"),
+          "name": .string("Bookish"),
         ]
       ),
       layout: BookishRecord(
         kind: "layout",
         properties: [
           "fields": .list([
-            .string("title"),
+            .string("name"),
             .string(BookishRecordKey.allOtherFields),
             .string("status"),
           ])
@@ -76,7 +107,7 @@ struct BookishRecordViewTests {
       )
     )
 
-    #expect(presentation.fields.map(\.key) == ["title", "author", "isbn", "status"])
+    #expect(presentation.fields.map(\.key) == ["name", "author", "isbn", "status"])
   }
 
   @Test
@@ -114,7 +145,7 @@ struct BookishRecordViewTests {
 
     let presentation = BookishMutationPresentation(mutation: mutation)
 
-    #expect(presentation.title == "Set Reading Status")
+    #expect(presentation.name == "Set Reading Status")
     #expect(presentation.subtitle == "book · book-1")
     #expect(
       presentation.fields.map(\.key) == [
@@ -134,12 +165,12 @@ struct BookishRecordViewTests {
       record: BookishRecord(
         kind: "book",
         properties: [
-          "title": .string("Bookish"),
+          "name": .string("Bookish"),
           "author": .record(BookishRecordID("author-1")),
         ]),
       layout: BookishRecord(
         kind: "layout",
-        properties: ["fields": .list([.string("title"), .string("author")])]
+        properties: ["fields": .list([.string("name"), .string("author")])]
       ),
       customValueView: { field in
         guard let id = field.rawValue?.recordValue else {
@@ -158,8 +189,8 @@ struct BookishRecordViewTests {
 
   func recordCellCanBeConstructedWithRecordAndLayout() {
     let view = BookishRecordCell(
-      record: BookishRecord(kind: "book", properties: ["title": .string("Bookish")]),
-      layout: BookishRecord(kind: "layout", properties: ["fields": .list([.string("title")])])
+      record: BookishRecord(kind: "book", properties: ["name": .string("Bookish")]),
+      layout: BookishRecord(kind: "layout", properties: ["fields": .list([.string("name")])])
     )
 
     _ = view.body

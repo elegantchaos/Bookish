@@ -51,9 +51,9 @@ public final class BookishNavigationService {
     return recordIndexes.first { $0.id == selectedRecordIndexID }
   }
 
-  /// The label for the selected browser index.
-  public var selectedRecordIndexLabel: String? {
-    selectedRecordIndex?.label
+  /// The name of the selected browser index.
+  public var selectedRecordIndexName: String? {
+    selectedRecordIndex?.name
   }
 
   /// All record identifiers visible in the selected browser index.

@@ -32,10 +32,25 @@ struct BookishAppTests {
     let author = try #require(seededAuthor)
 
     #expect(book.kind == BookishRecordKind.book)
+    #expect(book.string(BookishRecordKey.name) == "The Left Hand of Darkness")
     #expect(book.list(BookishRecordKey.authors) == [.record(authorID)])
     #expect(author.kind == BookishRecordKind.person)
     #expect(author.string(BookishRecordKey.name) == "Ursula K. Le Guin")
     #expect(book.string(BookishRecordKey.source) == author.string(BookishRecordKey.source))
+  }
+
+  @MainActor
+  @Test
+  func harnessUsesFallbackMetadataWhenNoKindSpecificMetadataExists() async throws {
+    let harness = try makeHarness()
+    await harness.load()
+
+    let metadata = try await harness.metadata(for: BookishRecordKind.book)
+
+    #expect(metadata?.id == BookishRecordID("metadata.type.*"))
+    #expect(
+      metadata?.presentation(BookishRecordKey.presentation)?[BookishRecordKey.name]?.icon
+        == "textformat")
   }
 
   @MainActor
@@ -45,7 +60,7 @@ struct BookishAppTests {
     let harness = try makeHarness()
     await harness.load()
 
-    let labels = harness.navigation.recordIndexes.map { $0.label }
+    let names = harness.navigation.recordIndexes.map { $0.name }
     let allRecordsIndex = try #require(harness.navigation.recordIndexes.first)
     let storedAllRecordsIndex = try await harness.record(id: allRecordsIndex.id)
     let storedIndexesIndex = try await harness.record(
@@ -54,7 +69,7 @@ struct BookishAppTests {
     let seedMarker = try await harness.record(id: BookishRecordID("datastore-seed-marker"))
 
     #expect(
-      labels == [
+      names == [
         "All Records",
         "Books",
         "People",
@@ -72,14 +87,14 @@ struct BookishAppTests {
         == BookishRecordID("datastore-all-fields-layout"))
     #expect(storedAllRecordsIndex?.strings(BookishRecordKey.types) == [BookishRecordKey.allTypes])
     #expect(storedIndexesIndex?.kind == BookishRecordKind.index)
-    #expect(storedIndexesIndex?.string(BookishRecordKey.label) == "Indexes")
+    #expect(storedIndexesIndex?.string(BookishRecordKey.name) == "Indexes")
     #expect(storedIndexesIndex?.strings(BookishRecordKey.types) == [BookishRecordKind.index])
     #expect(storedIndexesIndex?.bool(BookishRecordKey.debugOnly) == true)
     #expect(storedBooksIndex?.bool(BookishRecordKey.debugOnly) == false)
     #expect(storedBooksIndex?.strings(BookishRecordKey.types) == [BookishRecordKind.book])
     #expect(seedMarker?.kind == BookishRecordKind.seedMarker)
     #expect(harness.defaultShowsDebugIndexes)
-    #expect(harness.navigation.selectedRecordIndexLabel == "All Records")
+    #expect(harness.navigation.selectedRecordIndexName == "All Records")
     #expect(harness.navigation.selectedRecordIDs.isEmpty == false)
   }
 
@@ -91,7 +106,7 @@ struct BookishAppTests {
     await harness.load()
 
     #expect(
-      harness.navigation.recordIndexes.map(\.label) == [
+      harness.navigation.recordIndexes.map(\.name) == [
         "Books",
         "People",
         "Organisations",
@@ -100,7 +115,7 @@ struct BookishAppTests {
         "Relationships",
       ])
     #expect(harness.defaultShowsDebugIndexes == false)
-    #expect(harness.navigation.selectedRecordIndexLabel == "Books")
+    #expect(harness.navigation.selectedRecordIndexName == "Books")
   }
 
   @MainActor
@@ -127,7 +142,7 @@ struct BookishAppTests {
     #expect(layoutIDs.contains(BookishRecordID("datastore-seed-marker-layout")))
     #expect(allFields?.list(BookishRecordKey.fields) == [.string(BookishRecordKey.allOtherFields)])
     #expect(allFields?.strings(BookishRecordKey.types) == [BookishRecordKey.allTypes])
-    #expect(book?.string(BookishRecordKey.title) == "Book")
+    #expect(book?.string(BookishRecordKey.name) == "Book")
     #expect(book?.strings(BookishRecordKey.types) == [BookishRecordKind.book])
     #expect(book?.list(BookishRecordKey.fields)?.contains(.string(BookishRecordKey.isbn)) == true)
     #expect(index?.strings(BookishRecordKey.types) == [BookishRecordKind.index])
@@ -225,7 +240,7 @@ struct BookishAppTests {
     try await datastore.recordStore.upsert(
       try BookishRecordIndex.record(
         id: BookishRecordID("datastore-index-records"),
-        label: "Records",
+        name: "Records",
         position: 1,
         query: RecordQuery(predicate: .kind(BookishRecordKind.record)),
         sourceID: "com.elegantchaos.bookish.seed"
@@ -235,7 +250,7 @@ struct BookishAppTests {
         id: BookishRecordID("datastore-index-record-indexes"),
         kind: "recordIndex",
         properties: [
-          BookishRecordKey.label: .string("Record Indexes"),
+          BookishRecordKey.name: .string("Record Indexes"),
           BookishRecordKey.source: .string("com.elegantchaos.bookish.seed"),
         ]
       ))
@@ -244,7 +259,7 @@ struct BookishAppTests {
         id: BookishRecordID("datastore-book-compact-layout"),
         kind: BookishRecordKind.layout,
         properties: [
-          BookishRecordKey.title: .string("Compact Summary"),
+          BookishRecordKey.name: .string("Compact Summary"),
           BookishRecordKey.source: .string("com.elegantchaos.bookish.seed"),
         ]
       ))
@@ -252,13 +267,13 @@ struct BookishAppTests {
 
     await harness.load()
 
-    let labels = harness.navigation.recordIndexes.map(\.label)
+    let names = harness.navigation.recordIndexes.map(\.name)
     let staleRecordIndex = try await harness.record(id: BookishRecordID("datastore-index-records"))
     let staleRecordIndexKind = try await harness.record(
       id: BookishRecordID("datastore-index-record-indexes"))
     let staleLayout = try await harness.record(id: BookishRecordID("datastore-book-compact-layout"))
 
-    #expect(labels.contains("Records") == false)
+    #expect(names.contains("Records") == false)
     #expect(staleRecordIndex == nil)
     #expect(staleRecordIndexKind == nil)
     #expect(staleLayout == nil)
@@ -296,8 +311,8 @@ struct BookishAppTests {
     let recordIndexResult = RecordQueryResult(query: RecordQuery())
     recordIndexResult.update(
       records: [
-        try browserIndexRecord(id: "authors", label: "Authors", predicate: .kind("author")),
-        try browserIndexRecord(id: "books", label: "Books", predicate: .kind("book")),
+        try browserIndexRecord(id: "authors", name: "Authors", predicate: .kind("author")),
+        try browserIndexRecord(id: "books", name: "Books", predicate: .kind("book")),
       ])
     let selectedRecordResult = RecordQueryResult(query: RecordQuery(predicate: .kind("author")))
     selectedRecordResult.update(records: [
@@ -307,8 +322,8 @@ struct BookishAppTests {
     navigation.update(recordIndexResult: recordIndexResult)
     navigation.update(selectedRecordResult: selectedRecordResult)
 
-    #expect(navigation.recordIndexes.map(\.label) == ["Authors", "Books"])
-    #expect(navigation.selectedRecordIndexLabel == "Authors")
+    #expect(navigation.recordIndexes.map(\.name) == ["Authors", "Books"])
+    #expect(navigation.selectedRecordIndexName == "Authors")
     #expect(navigation.selectedRecordID == BookishRecordID("author-1"))
     #expect(navigation.selectedRecordIDs == [BookishRecordID("author-1")])
   }
@@ -323,11 +338,11 @@ struct BookishAppTests {
 
     try await harness.perform(SelectNextRecordIndexCommand())
 
-    #expect(harness.navigation.selectedRecordIndexLabel == "Indexes")
+    #expect(harness.navigation.selectedRecordIndexName == "Indexes")
 
     try await harness.perform(SelectPreviousRecordIndexCommand())
 
-    #expect(harness.navigation.selectedRecordIndexLabel == "Layouts")
+    #expect(harness.navigation.selectedRecordIndexName == "Layouts")
 
     let navigation = BookishNavigationService()
     let selectedRecordResult = RecordQueryResult(query: RecordQuery())
@@ -428,7 +443,7 @@ struct BookishAppTests {
     try await harness.perform(ImportDeliciousLibrarySampleCommand(sample: .small))
 
     let importedBooks = try await records(for: harness).filter {
-      $0.kind == "book" && $0.string("title") == "Snow Crash"
+      $0.kind == "book" && $0.string(BookishRecordKey.name) == "Snow Crash"
     }
     #expect(importedBooks.isEmpty == false)
   }
@@ -501,7 +516,7 @@ struct BookishAppTests {
           {
             "id": "test-import-book",
             "kind": "book",
-            "title": "Imported Book"
+            "name": "Imported Book"
           }
         ]
       }
@@ -510,10 +525,10 @@ struct BookishAppTests {
     await harness.importInterchange(data: Data(json.utf8))
 
     let importedID = BookishRecordID("test-import-book")
-    let importedTitle = try await harness.record(id: importedID)?.string("title")
+    let importedName = try await harness.record(id: importedID)?.string("name")
 
     #expect(harness.navigation.recordIDs.contains(importedID))
-    #expect(importedTitle == "Imported Book")
+    #expect(importedName == "Imported Book")
     #expect(harness.status == "Imported 1 Bookish interchange record")
   }
 
@@ -529,7 +544,7 @@ struct BookishAppTests {
     await harness.importDeliciousLibrary(data: data)
 
     let importedBooks = try await records(for: harness).filter {
-      $0.kind == "book" && $0.string("title") == "Snow Crash"
+      $0.kind == "book" && $0.string(BookishRecordKey.name) == "Snow Crash"
     }
     #expect(importedBooks.isEmpty == false)
     #expect(harness.status.hasPrefix("Imported "))
@@ -575,7 +590,7 @@ struct BookishAppTests {
           {
             "id": "test-reset-book",
             "kind": "book",
-            "title": "Reset Book"
+            "name": "Reset Book"
           }
         ]
       }
@@ -621,7 +636,7 @@ struct BookishAppTests {
           {
             "id": "test-command-reset-book",
             "kind": "book",
-            "title": "Command Reset Book"
+            "name": "Command Reset Book"
           }
         ]
       }
@@ -689,12 +704,12 @@ struct BookishAppTests {
 
   private func browserIndexRecord(
     id: String,
-    label: String,
+    name: String,
     predicate: RecordPredicate
   ) throws -> BookishRecord {
     try BookishRecordIndex.record(
       id: BookishRecordID(id),
-      label: label,
+      name: name,
       position: 0,
       query: RecordQuery(predicate: predicate),
       sourceID: "test"

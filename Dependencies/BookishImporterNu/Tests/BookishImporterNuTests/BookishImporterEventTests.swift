@@ -66,7 +66,7 @@ struct BookishImporterEventTests {
       BookishRecord(
         id: BookishRecordID("book-\(index)"),
         kind: "book",
-        properties: ["title": .string("Book \(index)")]
+        properties: ["name": .string("Book \(index)")]
       )
     }
     let data = try BookishInterchangeCodec().encode(

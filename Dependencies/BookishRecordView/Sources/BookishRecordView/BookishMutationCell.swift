@@ -15,7 +15,7 @@ public struct BookishMutationCell: View {
   public var body: some View {
     VStack(alignment: .leading, spacing: 4) {
       HStack(alignment: .firstTextBaseline) {
-        Text(presentation.title)
+        Text(presentation.name)
           .font(.headline)
         Spacer()
         Text(presentation.createdAtText)

@@ -17,7 +17,8 @@ struct DeliciousLibraryImporterTests {
 
     let recordsByID = Dictionary(uniqueKeysWithValues: result.records.map { ($0.id, $0) })
     let snowCrash = try #require(
-      result.records.first { $0.string("title") == "Snow Crash" && $0.kind == "book" })
+      result.records.first { $0.string(BookishRecordKey.name) == "Snow Crash" && $0.kind == "book" }
+    )
 
     #expect(snowCrash.string("isbn") == "0140232923")
     #expect(snowCrash.integer("pages") == 448)
@@ -42,7 +43,9 @@ struct DeliciousLibraryImporterTests {
   func importsSeriesRecordsAndDirectReference() throws {
     let result = try DeliciousLibraryImporter().importRecords(from: deliciousSampleURL())
     let gameOfThrones = try #require(
-      result.records.first { $0.string("title") == "A Game of Thrones" && $0.kind == "book" })
+      result.records.first {
+        $0.string(BookishRecordKey.name) == "A Game of Thrones" && $0.kind == "book"
+      })
 
     let seriesID = try #require(gameOfThrones.record("series"))
     let series = try #require(result.records.first { $0.id == seriesID })

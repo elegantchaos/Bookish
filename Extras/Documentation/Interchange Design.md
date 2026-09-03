@@ -63,7 +63,7 @@ optional root record, and a list of records.
     {
       "id": "book-1",
       "kind": "book",
-      "title": "Snow Crash",
+      "name": "Snow Crash",
       "isbn": "9780553380958",
       "authors": ["@person-neal-stephenson"],
       "publisher": { "®": "record", "id": "org-bantam" }
@@ -130,7 +130,7 @@ importer deliberately remaps them through a non-default schema.
 Record identifiers must be stable strings. The default accepted lexical form is:
 
 ```text
-^[A-Za-z0-9][A-Za-z0-9._:-]*$
+^[A-Za-z0-9][A-Za-z0-9._:*-]*$
 ```
 
 This keeps identifiers readable, URL-friendly, and unambiguous when used with
@@ -142,7 +142,7 @@ Primitive JSON values decode directly where their meaning is unambiguous:
 
 ```json
 {
-  "title": "Snow Crash",
+  "name": "Snow Crash",
   "pages": 470,
   "rating": 4.5,
   "owned": true,
@@ -272,7 +272,7 @@ To qualify as shorthand, a string must:
 Default shorthand pattern:
 
 ```text
-^@[A-Za-z0-9][A-Za-z0-9._:-]*$
+^@[A-Za-z0-9][A-Za-z0-9._:*-]*$
 ```
 
 Strings that do not match the shorthand pattern decode as ordinary strings.
@@ -280,12 +280,12 @@ Strings that do not match the shorthand pattern decode as ordinary strings.
 ```json
 {
   "author": "@person-neal-stephenson",
-  "title": "@ Home",
+  "name": "@ Home",
   "note": "email me @ example"
 }
 ```
 
-Only `author` is a record link. `title` and `note` are plain strings.
+Only `author` is a record link. `name` and `note` are plain strings.
 
 Writers should use the explicit record object form by default. Shorthand output
 may be enabled for compact or human-authored interchange variants.

@@ -49,6 +49,7 @@ public final class BookishHarness {
   public let defaultShowsDebugIndexes: Bool
 
   private let fallbackLayoutID = BookishRecordID("datastore-all-fields-layout")
+  private let fallbackMetadataID = BookishRecordID("metadata.type.*")
   private let seedMarkerID = BookishRecordID("datastore-seed-marker")
   private let seedSourceID = "com.elegantchaos.bookish.seed"
   private let directoryURL: URL?
@@ -283,6 +284,16 @@ public final class BookishHarness {
     try await datastore?.recordService.record(id: id)
   }
 
+  /// Returns the metadata record for a record kind, falling back to the generic metadata record.
+  public func metadata(for kind: String) async throws -> BookishRecord? {
+    let kindMetadataID = BookishRecordID("metadata.type.\(kind)")
+    if let metadata = try await record(id: kindMetadataID) {
+      return metadata
+    }
+
+    return try await record(id: fallbackMetadataID)
+  }
+
   /// Returns the selected record by resolving it from the record service.
   public func selectedRecord() async throws -> BookishRecord? {
     guard let selectedRecordID = navigation.selectedRecordID else {
@@ -398,7 +409,7 @@ public final class BookishHarness {
     layouts = try await datastore.recordService.records(
       matching: RecordQuery(
         predicate: .kind(BookishRecordKind.layout),
-        sort: [.property(BookishRecordKey.title), .id]
+        sort: [.property(BookishRecordKey.name), .id]
       ))
     layoutIDs = layouts.map(\.id)
     revision += 1
@@ -474,7 +485,7 @@ public final class BookishHarness {
 
     return RecordQuery(
       predicate: predicate,
-      sort: [.property(BookishRecordKey.position), .property(BookishRecordKey.label), .id]
+      sort: [.property(BookishRecordKey.position), .property(BookishRecordKey.name), .id]
     )
   }
 
@@ -547,7 +558,8 @@ public final class BookishHarness {
   }
 
   private func isSeedMetadataKind(_ kind: String) -> Bool {
-    kind == BookishRecordKind.index || kind == BookishRecordKind.layout || kind == "recordIndex"
+    kind == BookishRecordKind.index || kind == BookishRecordKind.layout
+      || kind == BookishRecordKind.metadata || kind == "recordIndex"
   }
 
   private func writeSeedMarker(to datastore: BookishDatastore) async throws {
@@ -556,7 +568,7 @@ public final class BookishHarness {
         id: seedMarkerID,
         kind: BookishRecordKind.seedMarker,
         properties: [
-          BookishRecordKey.label: .string("Seed Marker"),
+          BookishRecordKey.name: .string("Seed Marker"),
           BookishRecordKey.source: .string(seedSourceID),
         ]
       )

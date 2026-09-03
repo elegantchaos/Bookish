@@ -40,7 +40,7 @@ public struct BookishMutationView: View {
       }
     }
     .formStyle(.grouped)
-    .navigationTitle(presentation.title)
+    .navigationTitle(presentation.name)
   }
 }
 

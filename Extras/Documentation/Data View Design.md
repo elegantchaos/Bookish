@@ -64,7 +64,7 @@ Seeded layouts include an all-fields layout for `*` and type-specific layouts fo
 
 The first column of the browser is driven by records of kind `index`. An index record stores:
 
-- `label`: the name displayed in the index list;
+- `name`: the name displayed in the index list;
 - `position`: its stable display order;
 - `debugOnly`: whether it is normally hidden from non-debug browsing;
 - `query`: an encoded `RecordQuery` containing a predicate and ordered sort descriptors;

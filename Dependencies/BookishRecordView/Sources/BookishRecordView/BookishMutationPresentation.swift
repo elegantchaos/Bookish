@@ -12,8 +12,8 @@ public struct BookishMutationPresentation: Equatable, Sendable {
     self.mutation = mutation
   }
 
-  /// A compact operation title for rows and navigation.
-  public var title: String {
+  /// A compact operation name for rows and navigation.
+  public var name: String {
     switch mutation.operation {
     case .upsertRecord(let record):
       "Upsert \(record.kind)"

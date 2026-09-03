@@ -16,11 +16,9 @@ public struct BookishRecordIndex: Equatable, Identifiable, Sendable {
     record.id
   }
 
-  /// The label shown in the top-level browser list.
-  public var label: String {
-    record.string(BookishRecordKey.label)
-      ?? record.string(BookishRecordKey.title)
-      ?? record.id.rawValue
+  /// The name shown in the top-level browser list.
+  public var name: String {
+    record.string(BookishRecordKey.name) ?? record.id.rawValue
   }
 
   /// The query used to populate the browser content column, when the stored payload is valid.
@@ -51,7 +49,7 @@ public struct BookishRecordIndex: Equatable, Identifiable, Sendable {
   /// Creates a stored index record.
   public static func record(
     id: BookishRecordID,
-    label: String,
+    name: String,
     position: Int,
     query: RecordQuery,
     types: [String] = [],
@@ -60,7 +58,7 @@ public struct BookishRecordIndex: Equatable, Identifiable, Sendable {
     sourceID: String
   ) throws -> BookishRecord {
     var properties: [String: BookishRecordValue] = [
-      BookishRecordKey.label: .string(label),
+      BookishRecordKey.name: .string(name),
       BookishRecordKey.debugOnly: .bool(debugOnly),
       BookishRecordKey.position: .integer(position),
       BookishRecordKey.query: .encoded(try BookishEncodedValue(encoding: query)),

@@ -9,6 +9,7 @@ struct BookishRecordTests {
     #expect(BookishRecordKind.book == "book")
     #expect(BookishRecordKind.person == "person")
     #expect(BookishRecordKind.organisation == "organisation")
+    #expect(BookishRecordKey.name == "name")
     #expect(BookishRecordKey.authors == "authors")
     #expect(BookishRecordKey.series == "series")
     #expect(BookishRecordKey.seriesPosition == "seriesPosition")
@@ -25,7 +26,7 @@ struct BookishRecordTests {
       id: BookishRecordID("book-1"),
       kind: "book",
       properties: [
-        "title": .string("Bookish"),
+        "name": .string("Bookish"),
         "pages": .integer(320),
         "authors": .list([.record(authorID)]),
         "types": .list([.string("book")]),
@@ -35,7 +36,7 @@ struct BookishRecordTests {
 
     #expect(record.id.rawValue == "book-1")
     #expect(record.kind == "book")
-    #expect(record.string("title") == "Bookish")
+    #expect(record.string("name") == "Bookish")
     #expect(record.integer("pages") == 320)
     #expect(record.record("primaryAuthor") == authorID)
     #expect(record.list("authors") == [.record(authorID)])
@@ -68,7 +69,7 @@ struct BookishRecordTests {
       kind: "book",
       properties: [
         "dimensions": .encoded(try BookishEncodedValue(encoding: dimensions)),
-        "title": .string("Bookish"),
+        "name": .string("Bookish"),
       ]
     )
 
@@ -77,7 +78,23 @@ struct BookishRecordTests {
     #expect(inferred == dimensions)
     #expect(record.encoded("dimensions", as: Dimensions.self) == dimensions)
     #expect(record.encoded("missing", as: Dimensions.self) == nil)
-    #expect(record.encoded("title", as: Dimensions.self) == nil)
+    #expect(record.encoded("name", as: Dimensions.self) == nil)
+  }
+
+  @Test
+  func recordReadsPropertyPresentationMetadata() {
+    let titlePresentation = BookishPropertyPresentation(icon: "textformat", label: "Title")
+    let record = BookishRecord(
+      kind: BookishRecordKind.metadata,
+      properties: [
+        BookishRecordKey.presentation: .presentation([BookishRecordKey.name: titlePresentation])
+      ]
+    )
+
+    #expect(
+      record.presentation(BookishRecordKey.presentation)?[BookishRecordKey.name]
+        == titlePresentation)
+    #expect(record.presentation(BookishRecordKey.name) == nil)
   }
 
   @Test
@@ -113,7 +130,7 @@ struct BookishRecordTests {
       id: BookishRecordID("book-1"),
       kind: "book",
       properties: [
-        "title": .string("Bookish"),
+        "name": .string("Bookish"),
         "deleted": .tombstone,
       ]
     )

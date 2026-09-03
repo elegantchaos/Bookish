@@ -9,15 +9,23 @@ public struct BookishRecordPresentation: Equatable, Sendable {
   /// The layout record used to choose labels and visible fields.
   public let layout: BookishRecord?
 
-  /// Creates a presentation from a record and an optional layout record.
-  public init(record: BookishRecord, layout: BookishRecord?) {
+  /// The metadata record used to present individual record properties.
+  public let metadata: BookishRecord?
+
+  /// Creates a presentation from a record, an optional layout, and optional property metadata.
+  public init(
+    record: BookishRecord,
+    layout: BookishRecord?,
+    metadata: BookishRecord? = nil
+  ) {
     self.record = record
     self.layout = layout
+    self.metadata = metadata
   }
 
-  /// The title used for navigation, forms, and list rows.
-  public var title: String {
-    firstDisplayValue(for: [BookishRecordKey.title, BookishRecordKey.name]) ?? record.kind
+  /// The name used for navigation, forms, and list rows.
+  public var name: String {
+    firstDisplayValue(for: [BookishRecordKey.name]) ?? record.kind
   }
 
   /// The fields visible under the active layout.
@@ -26,6 +34,7 @@ public struct BookishRecordPresentation: Equatable, Sendable {
       BookishRecordField(
         key: key,
         label: label(for: key),
+        icon: propertyPresentation(for: key)?.icon,
         value: displayValue(for: key),
         rawValue: record.properties[key]
       )
@@ -33,8 +42,8 @@ public struct BookishRecordPresentation: Equatable, Sendable {
   }
 
   /// The user-facing name of the active layout.
-  public var layoutTitle: String {
-    layout?.string(BookishRecordKey.title) ?? "Default"
+  public var layoutName: String {
+    layout?.string(BookishRecordKey.name) ?? "Default"
   }
 
   private var fieldKeys: [String] {
@@ -70,9 +79,18 @@ public struct BookishRecordPresentation: Equatable, Sendable {
   }
 
   private func label(for key: String) -> String {
-    key
+    if let label = propertyPresentation(for: key)?.label {
+      return label
+    }
+
+    return
+      key
       .replacingOccurrences(of: "_", with: " ")
       .capitalized
+  }
+
+  private func propertyPresentation(for key: String) -> BookishPropertyPresentation? {
+    metadata?.presentation(BookishRecordKey.presentation)?[key]
   }
 
   private func displayValue(for key: String) -> String {
@@ -96,6 +114,9 @@ public struct BookishRecordField: Equatable, Identifiable, Sendable {
   /// The display label derived from the property key.
   public let label: String
 
+  /// The SF Symbol used to represent the property, when available.
+  public let icon: String?
+
   /// The formatted property value.
   public let value: String
 
@@ -106,11 +127,13 @@ public struct BookishRecordField: Equatable, Identifiable, Sendable {
   public init(
     key: String,
     label: String,
+    icon: String? = nil,
     value: String,
     rawValue: BookishRecordValue? = nil
   ) {
     self.key = key
     self.label = label
+    self.icon = icon
     self.value = value
     self.rawValue = rawValue
   }
@@ -142,6 +165,8 @@ extension BookishRecordValue {
     case .list(let values):
       values.map(\.displayString).joined(separator: ", ")
     case .encoded(let value):
+      value.keys.sorted().joined(separator: ", ")
+    case .presentation(let value):
       value.keys.sorted().joined(separator: ", ")
     case .tombstone:
       "Tombstone"

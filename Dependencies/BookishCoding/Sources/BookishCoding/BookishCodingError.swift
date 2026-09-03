@@ -34,6 +34,9 @@ public enum BookishCodingError: Error, Equatable {
   /// A conflict value object is malformed.
   case invalidConflict
 
+  /// A presentation value object is malformed.
+  case invalidPresentation
+
   /// An explicit record value kind is unknown.
   case unknownRecordValueKind(String)
 
@@ -55,6 +58,7 @@ public enum BookishCodingError: Error, Equatable {
       (.missingBlobID, .missingBlobID),
       (.invalidDate, .invalidDate),
       (.invalidConflict, .invalidConflict),
+      (.invalidPresentation, .invalidPresentation),
       (.untaggedObjectValue, .untaggedObjectValue),
       (.invalidRoot, .invalidRoot):
       return true
