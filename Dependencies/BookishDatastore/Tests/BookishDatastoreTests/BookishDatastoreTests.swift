@@ -1,16 +1,18 @@
 import BookishRecord
 import Foundation
-import XCTest
+import Testing
 
 @testable import BookishDatastore
 
-final class BookishDatastoreTests: XCTestCase {
+struct BookishDatastoreTests {
   private struct LegacyMutationState: Codable {
     var mutations: [MutationRecord]
     var applied: Set<MutationID>
   }
 
-  func testMutationServiceAppliesPropertyMutationToRecordStore() async throws {
+  @Test
+
+  func mutationServiceAppliesPropertyMutationToRecordStore() async throws {
     let datastore = try await makeDatastore()
     let bookID = BookishRecordID("book-1")
 
@@ -20,11 +22,13 @@ final class BookishDatastoreTests: XCTestCase {
     )
 
     let record = try await datastore.recordService.record(id: bookID)
-    XCTAssertEqual(record?.kind, "book")
-    XCTAssertEqual(record?.string("title"), "The Left Hand of Darkness")
+    #expect(record?.kind == "book")
+    #expect(record?.string("title") == "The Left Hand of Darkness")
   }
 
-  func testMutationServiceDoesNotApplySameRemoteMutationTwice() async throws {
+  @Test
+
+  func mutationServiceDoesNotApplySameRemoteMutationTwice() async throws {
     let datastore = try await makeDatastore()
     let bookID = BookishRecordID("book-1")
     let mutation = MutationRecord(
@@ -38,11 +42,13 @@ final class BookishDatastoreTests: XCTestCase {
 
     let mutations = try await datastore.mutationStore.mutations()
     let record = try await datastore.recordService.record(id: bookID)
-    XCTAssertEqual(mutations, [mutation])
-    XCTAssertEqual(record?.string("title"), "Original")
+    #expect(mutations == [mutation])
+    #expect(record?.string("title") == "Original")
   }
 
-  func testJSONStoresReloadPersistedData() async throws {
+  @Test
+
+  func jSONStoresReloadPersistedData() async throws {
     let directory = try temporaryDirectory()
     let datastore = try await BookishDatastore(directoryURL: directory)
     let bookID = BookishRecordID("book-1")
@@ -55,10 +61,12 @@ final class BookishDatastoreTests: XCTestCase {
     try await reloaded.mutationService.processPendingMutations()
 
     let record = try await reloaded.recordService.record(id: bookID)
-    XCTAssertEqual(record?.string("title"), "Persisted")
+    #expect(record?.string("title") == "Persisted")
   }
 
-  func testRecordStoreRemoveAllClearsPersistedRecords() async throws {
+  @Test
+
+  func recordStoreRemoveAllClearsPersistedRecords() async throws {
     let directory = try temporaryDirectory()
     let datastore = try await BookishDatastore(directoryURL: directory)
     let bookID = BookishRecordID("book-1")
@@ -71,10 +79,12 @@ final class BookishDatastoreTests: XCTestCase {
 
     let reloaded = try await BookishDatastore(directoryURL: directory)
     let records = try await reloaded.recordService.records()
-    XCTAssertTrue(records.isEmpty)
+    #expect(records.isEmpty)
   }
 
-  func testRecordStoreOnlyRewritesTheChangedRecordFile() async throws {
+  @Test
+
+  func recordStoreOnlyRewritesTheChangedRecordFile() async throws {
     let directory = try temporaryDirectory().appending(path: "records", directoryHint: .isDirectory)
     let store = try await JSONRecordStore(directoryURL: directory)
     let first = BookishRecord(
@@ -91,13 +101,15 @@ final class BookishDatastoreTests: XCTestCase {
       BookishRecord(
         id: first.id, kind: first.kind, properties: ["title": .string("Updated")]))
 
-    XCTAssertEqual(try Data(contentsOf: secondFile), unchangedData)
-    XCTAssertEqual(try recordFiles(in: directory).count, 2)
+    #expect(try Data(contentsOf: secondFile) == unchangedData)
+    #expect(try recordFiles(in: directory).count == 2)
     let updated = try await store.record(id: first.id)
-    XCTAssertEqual(updated?.string("title"), "Updated")
+    #expect(updated?.string("title") == "Updated")
   }
 
-  func testRecordStoreMigratesLegacySingleFileProjection() async throws {
+  @Test
+
+  func recordStoreMigratesLegacySingleFileProjection() async throws {
     let parentDirectory = try temporaryDirectory()
     let legacyFile = parentDirectory.appending(path: "records.json")
     let legacyRecord = BookishRecord(
@@ -108,12 +120,14 @@ final class BookishDatastoreTests: XCTestCase {
     let store = try await JSONRecordStore(directoryURL: recordsDirectory)
 
     let migratedRecord = try await store.record(id: legacyRecord.id)
-    XCTAssertEqual(migratedRecord, legacyRecord)
-    XCTAssertEqual(try recordFiles(in: recordsDirectory).count, 1)
-    XCTAssertTrue(FileManager.default.fileExists(atPath: legacyFile.path))
+    #expect(migratedRecord == legacyRecord)
+    #expect(try recordFiles(in: recordsDirectory).count == 1)
+    #expect(FileManager.default.fileExists(atPath: legacyFile.path))
   }
 
-  func testRecordServiceReturnsRecordIDsInStableOrder() async throws {
+  @Test
+
+  func recordServiceReturnsRecordIDsInStableOrder() async throws {
     let datastore = try await makeDatastore()
     let secondID = BookishRecordID("book-2")
     let firstID = BookishRecordID("book-1")
@@ -123,10 +137,12 @@ final class BookishDatastoreTests: XCTestCase {
 
     let ids = try await datastore.recordService.recordIDs()
 
-    XCTAssertEqual(ids, [firstID, secondID])
+    #expect(ids == [firstID, secondID])
   }
 
-  func testRecordServiceFiltersRecordIDsWithPredicate() async throws {
+  @Test
+
+  func recordServiceFiltersRecordIDsWithPredicate() async throws {
     let datastore = try await makeDatastore()
     let bookID = BookishRecordID("book-1")
     let authorID = BookishRecordID("author-1")
@@ -140,10 +156,12 @@ final class BookishDatastoreTests: XCTestCase {
       matching: .and([.kind("book"), .property("status", equals: .string("Reading"))])
     )
 
-    XCTAssertEqual(ids, [bookID])
+    #expect(ids == [bookID])
   }
 
-  func testRecordQueryFiltersAndSortsRecords() async throws {
+  @Test
+
+  func recordQueryFiltersAndSortsRecords() async throws {
     let datastore = try await makeDatastore()
     let first = BookishRecord(
       id: BookishRecordID("book-1"),
@@ -167,10 +185,12 @@ final class BookishDatastoreTests: XCTestCase {
         sort: [.property(BookishRecordKey.title), .id]
       ))
 
-    XCTAssertEqual(records.map(\.id), [second.id, first.id])
+    #expect(records.map(\.id) == [second.id, first.id])
   }
 
-  func testRecordQueryCanMatchRecordReferencesInListProperties() async throws {
+  @Test
+
+  func recordQueryCanMatchRecordReferencesInListProperties() async throws {
     let datastore = try await makeDatastore()
     let authorID = BookishRecordID("author-1")
     let matching = BookishRecord(
@@ -195,10 +215,12 @@ final class BookishDatastoreTests: XCTestCase {
         ])
       ))
 
-    XCTAssertEqual(records.map(\.id), [matching.id])
+    #expect(records.map(\.id) == [matching.id])
   }
 
-  func testRecordQueryResultRefreshesAfterMutation() async throws {
+  @Test
+
+  func recordQueryResultRefreshesAfterMutation() async throws {
     let datastore = try await makeDatastore()
     let result = try await datastore.recordQueryService.result(
       matching: RecordQuery(
@@ -207,7 +229,7 @@ final class BookishDatastoreTests: XCTestCase {
       ))
 
     let initialRecords = await MainActor.run { result.records }
-    XCTAssertTrue(initialRecords.isEmpty)
+    #expect(initialRecords.isEmpty)
 
     let book = BookishRecord(
       id: BookishRecordID("book-1"),
@@ -217,20 +239,24 @@ final class BookishDatastoreTests: XCTestCase {
     try await datastore.mutationService.perform(.upsertRecord(book))
 
     let updatedRecords = await MainActor.run { result.records }
-    XCTAssertEqual(updatedRecords, [book])
+    #expect(updatedRecords == [book])
   }
 
-  func testRecordQueryServiceReusesEquivalentResults() async throws {
+  @Test
+
+  func recordQueryServiceReusesEquivalentResults() async throws {
     let datastore = try await makeDatastore()
     let query = RecordQuery(predicate: .kind("book"), sort: [.id])
 
     let first = try await datastore.recordQueryService.result(matching: query)
     let second = try await datastore.recordQueryService.result(matching: query)
 
-    XCTAssertTrue(first === second)
+    #expect(first === second)
   }
 
-  func testMutationStoreRemoveAllClearsPersistedMutations() async throws {
+  @Test
+
+  func mutationStoreRemoveAllClearsPersistedMutations() async throws {
     let directory = try temporaryDirectory()
     let datastore = try await BookishDatastore(directoryURL: directory)
     let bookID = BookishRecordID("book-1")
@@ -243,10 +269,12 @@ final class BookishDatastoreTests: XCTestCase {
 
     let reloaded = try await BookishDatastore(directoryURL: directory)
     let mutations = try await reloaded.mutationStore.mutations()
-    XCTAssertTrue(mutations.isEmpty)
+    #expect(mutations.isEmpty)
   }
 
-  func testMutationStoreOnlyWritesNewMutationFiles() async throws {
+  @Test
+
+  func mutationStoreOnlyWritesNewMutationFiles() async throws {
     let directory = try temporaryDirectory().appending(
       path: "mutations", directoryHint: .isDirectory)
     let store = try await JSONMutationStore(directoryURL: directory)
@@ -262,12 +290,14 @@ final class BookishDatastoreTests: XCTestCase {
     try await store.append(second)
     try await store.markApplied(first.id)
 
-    XCTAssertEqual(try Data(contentsOf: firstFile), unchangedData)
-    XCTAssertEqual(try mutationFiles(in: directory.appending(path: "records")).count, 2)
-    XCTAssertEqual(try markerFiles(in: directory.appending(path: "applied")).count, 1)
+    #expect(try Data(contentsOf: firstFile) == unchangedData)
+    #expect(try mutationFiles(in: directory.appending(path: "records")).count == 2)
+    #expect(try markerFiles(in: directory.appending(path: "applied")).count == 1)
   }
 
-  func testMutationStoreMigratesLegacySingleFileLog() async throws {
+  @Test
+
+  func mutationStoreMigratesLegacySingleFileLog() async throws {
     let parentDirectory = try temporaryDirectory()
     let legacyFile = parentDirectory.appending(path: "mutations.json")
     let mutation = MutationRecord(
@@ -282,11 +312,11 @@ final class BookishDatastoreTests: XCTestCase {
 
     let migratedMutations = try await store.mutations()
     let isApplied = try await store.isApplied(mutation.id)
-    XCTAssertEqual(migratedMutations, [mutation])
-    XCTAssertTrue(isApplied)
-    XCTAssertEqual(try mutationFiles(in: directory.appending(path: "records")).count, 1)
-    XCTAssertEqual(try markerFiles(in: directory.appending(path: "applied")).count, 1)
-    XCTAssertTrue(FileManager.default.fileExists(atPath: legacyFile.path))
+    #expect(migratedMutations == [mutation])
+    #expect(isApplied)
+    #expect(try mutationFiles(in: directory.appending(path: "records")).count == 1)
+    #expect(try markerFiles(in: directory.appending(path: "applied")).count == 1)
+    #expect(FileManager.default.fileExists(atPath: legacyFile.path))
   }
 
   private func makeDatastore() async throws -> BookishDatastore {
@@ -306,7 +336,7 @@ final class BookishDatastoreTests: XCTestCase {
 
   private func file(containing record: BookishRecord, in directory: URL) throws -> URL {
     let files = try recordFiles(in: directory)
-    return try XCTUnwrap(
+    return try #require(
       files.first { file in
         guard
           let data = try? Data(contentsOf: file),
@@ -330,7 +360,7 @@ final class BookishDatastoreTests: XCTestCase {
 
   private func file(containing mutation: MutationRecord, in directory: URL) throws -> URL {
     let files = try mutationFiles(in: directory)
-    return try XCTUnwrap(
+    return try #require(
       files.first { file in
         guard
           let data = try? Data(contentsOf: file),

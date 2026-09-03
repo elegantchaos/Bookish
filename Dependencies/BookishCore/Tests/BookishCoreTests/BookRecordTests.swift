@@ -3,12 +3,9 @@
 //  All code (c) 2018 - present day, Elegant Chaos Limited.
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
-
-import XCTest
+import Testing
 
 @testable import BookishCore
 
-class BookRecordTests: XCTestCase {
+struct BookRecordTests {
 }
-
-

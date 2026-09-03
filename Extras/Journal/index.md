@@ -1,5 +1,6 @@
 # Journal Index
 
+- [2026-09-03 Swift Testing Migration](2026-09-03-swift-testing-migration.md)
 - [2026-09-03 Agent Refresh](2026-09-03-agent-refresh.md)
 - [2026-09-03 Dynamic Data Views](2026-09-03-dynamic-data-views.md)
 - [2026-09-02 Record Query Service](2026-09-02-record-query-service.md)

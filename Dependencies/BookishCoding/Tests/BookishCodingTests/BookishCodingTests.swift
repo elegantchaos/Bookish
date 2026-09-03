@@ -1,15 +1,18 @@
 import BookishRecord
 import Foundation
-import XCTest
+import Testing
 
 @testable import BookishCoding
 
-final class BookishCodingTests: XCTestCase {
-  func testDefaultSchemaUsesRegisteredSignRecordValueKey() {
-    XCTAssertEqual(BookishInterchangeSchema.default.rvKey, "®")
+struct BookishCodingTests {
+  @Test
+  func defaultSchemaUsesRegisteredSignRecordValueKey() {
+    #expect(BookishInterchangeSchema.default.rvKey == "®")
   }
 
-  func testCanonicalRoundTrip() throws {
+  @Test
+
+  func canonicalRoundTrip() throws {
     let file = BookishInterchangeFile(
       root: BookishRecordID("book-1"),
       records: [
@@ -30,10 +33,12 @@ final class BookishCodingTests: XCTestCase {
     let data = try codec.encode(file)
     let decoded = try codec.decode(data)
 
-    XCTAssertEqual(decoded, file)
+    #expect(decoded == file)
   }
 
-  func testCompactDecodeSupportsPrimitiveValuesAndRecordLinks() throws {
+  @Test
+
+  func compactDecodeSupportsPrimitiveValuesAndRecordLinks() throws {
     let json = """
       {
         "format": { "id": "com.elegantchaos.bookish.records", "version": 1 },
@@ -52,16 +57,18 @@ final class BookishCodingTests: XCTestCase {
       """
 
     let decoded = try BookishInterchangeCodec().decode(Data(json.utf8))
-    let record = try XCTUnwrap(decoded.records.first)
+    let record = try #require(decoded.records.first)
 
-    XCTAssertEqual(record.string("title"), "Snow Crash")
-    XCTAssertEqual(record.integer("pages"), 470)
-    XCTAssertEqual(record.properties["owned"], .bool(true))
-    XCTAssertEqual(record.properties["rating"], .double(4.5))
-    XCTAssertEqual(record.record("author"), BookishRecordID("person-1"))
+    #expect(record.string("title") == "Snow Crash")
+    #expect(record.integer("pages") == 470)
+    #expect(record.properties["owned"] == .bool(true))
+    #expect(record.properties["rating"] == .double(4.5))
+    #expect(record.record("author") == BookishRecordID("person-1"))
   }
 
-  func testCompactEncodeCanEmitRecordLinkShorthand() throws {
+  @Test
+
+  func compactEncodeCanEmitRecordLinkShorthand() throws {
     let file = BookishInterchangeFile(
       records: [
         BookishRecord(
@@ -74,12 +81,14 @@ final class BookishCodingTests: XCTestCase {
 
     let data = try BookishInterchangeCodec(recordLinkEncoding: .shorthand).encode(file)
     let object = try JSONSerialization.jsonObject(with: data) as? [String: Any]
-    let records = try XCTUnwrap(object?["records"] as? [[String: Any]])
+    let records = try #require(object?["records"] as? [[String: Any]])
 
-    XCTAssertEqual(records.first?["author"] as? String, "@person-1")
+    #expect(records.first?["author"] as? String == "@person-1")
   }
 
-  func testEncodedValueUsesRemainingKeysAsPayload() throws {
+  @Test
+
+  func encodedValueUsesRemainingKeysAsPayload() throws {
     let dimensionsPayload = try BookishEncodedValue(
       encoding: Dimensions(width: 12, height: 20, tags: ["hardback", "shelf"])
     )
@@ -97,19 +106,21 @@ final class BookishCodingTests: XCTestCase {
 
     let data = try BookishInterchangeCodec().encode(file)
     let object = try JSONSerialization.jsonObject(with: data) as? [String: Any]
-    let records = try XCTUnwrap(object?["records"] as? [[String: Any]])
-    let dimensions = try XCTUnwrap(records.first?["dimensions"] as? [String: Any])
+    let records = try #require(object?["records"] as? [[String: Any]])
+    let dimensions = try #require(records.first?["dimensions"] as? [String: Any])
 
-    XCTAssertEqual(dimensions["®"] as? String, "encoded")
-    XCTAssertEqual(dimensions["width"] as? Int, 12)
-    XCTAssertEqual(dimensions["height"] as? Int, 20)
+    #expect(dimensions["®"] as? String == "encoded")
+    #expect(dimensions["width"] as? Int == 12)
+    #expect(dimensions["height"] as? Int == 20)
 
     let decoded = try BookishInterchangeCodec().decode(data)
 
-    XCTAssertEqual(decoded, file)
+    #expect(decoded == file)
   }
 
-  func testSchemaOverridesReservedKeys() throws {
+  @Test
+
+  func schemaOverridesReservedKeys() throws {
     let json = """
       {
         "schema": {
@@ -130,21 +141,23 @@ final class BookishCodingTests: XCTestCase {
       """
 
     let decoded = try BookishInterchangeCodec().decode(Data(json.utf8))
-    let record = try XCTUnwrap(decoded.records.first)
+    let record = try #require(decoded.records.first)
 
-    XCTAssertEqual(decoded.schema.idKey, "_id")
-    XCTAssertEqual(decoded.root, BookishRecordID("book-1"))
-    XCTAssertEqual(record.kind, "book")
-    XCTAssertEqual(record.record("author"), BookishRecordID("person-1"))
+    #expect(decoded.schema.idKey == "_id")
+    #expect(decoded.root == BookishRecordID("book-1"))
+    #expect(record.kind == "book")
+    #expect(record.record("author") == BookishRecordID("person-1"))
 
     let encoded = try BookishInterchangeCodec().encode(decoded)
     let object = try JSONSerialization.jsonObject(with: encoded) as? [String: Any]
-    let root = try XCTUnwrap(object?["root"] as? [String: Any])
+    let root = try #require(object?["root"] as? [String: Any])
 
-    XCTAssertEqual(root["_value"] as? String, "record")
+    #expect(root["_value"] as? String == "record")
   }
 
-  func testStrictModeRejectsInvalidShorthand() throws {
+  @Test
+
+  func strictModeRejectsInvalidShorthand() throws {
     let json = """
       {
         "records": [
@@ -159,12 +172,14 @@ final class BookishCodingTests: XCTestCase {
 
     let codec = BookishInterchangeCodec(invalidShorthandHandling: .error)
 
-    XCTAssertThrowsError(try codec.decode(Data(json.utf8))) { error in
-      XCTAssertEqual(error as? BookishCodingError, .invalidRecordReference("@not valid"))
+    #expect(throws: BookishCodingError.invalidRecordReference("@not valid")) {
+      try codec.decode(Data(json.utf8))
     }
   }
 
-  func testRejectsMalformedExplicitRecordReference() throws {
+  @Test
+
+  func rejectsMalformedExplicitRecordReference() throws {
     let json = """
       {
         "records": [
@@ -177,12 +192,14 @@ final class BookishCodingTests: XCTestCase {
       }
       """
 
-    XCTAssertThrowsError(try BookishInterchangeCodec().decode(Data(json.utf8))) { error in
-      XCTAssertEqual(error as? BookishCodingError, .missingRecordReferenceID)
+    #expect(throws: BookishCodingError.missingRecordReferenceID) {
+      try BookishInterchangeCodec().decode(Data(json.utf8))
     }
   }
 
-  func testRejectsUntaggedObjectPropertyValues() throws {
+  @Test
+
+  func rejectsUntaggedObjectPropertyValues() throws {
     let json = """
       {
         "records": [
@@ -195,12 +212,14 @@ final class BookishCodingTests: XCTestCase {
       }
       """
 
-    XCTAssertThrowsError(try BookishInterchangeCodec().decode(Data(json.utf8))) { error in
-      XCTAssertEqual(error as? BookishCodingError, .untaggedObjectValue)
+    #expect(throws: BookishCodingError.untaggedObjectValue) {
+      try BookishInterchangeCodec().decode(Data(json.utf8))
     }
   }
 
-  func testShorthandEncodeRejectsInvalidRecordID() throws {
+  @Test
+
+  func shorthandEncodeRejectsInvalidRecordID() throws {
     let file = BookishInterchangeFile(
       records: [
         BookishRecord(
@@ -213,8 +232,8 @@ final class BookishCodingTests: XCTestCase {
 
     let codec = BookishInterchangeCodec(recordLinkEncoding: .shorthand)
 
-    XCTAssertThrowsError(try codec.encode(file)) { error in
-      XCTAssertEqual(error as? BookishCodingError, .invalidRecordID("not valid"))
+    #expect(throws: BookishCodingError.invalidRecordID("not valid")) {
+      try codec.encode(file)
     }
   }
 }

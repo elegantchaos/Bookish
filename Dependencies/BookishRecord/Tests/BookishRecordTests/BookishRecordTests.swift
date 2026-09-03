@@ -1,22 +1,25 @@
 import Foundation
-import XCTest
+import Testing
 
 @testable import BookishRecord
 
-final class BookishRecordTests: XCTestCase {
-  func testStandardKindsAndKeysHaveStableValues() {
-    XCTAssertEqual(BookishRecordKind.book, "book")
-    XCTAssertEqual(BookishRecordKind.person, "person")
-    XCTAssertEqual(BookishRecordKind.organisation, "organisation")
-    XCTAssertEqual(BookishRecordKey.authors, "authors")
-    XCTAssertEqual(BookishRecordKey.series, "series")
-    XCTAssertEqual(BookishRecordKey.seriesPosition, "seriesPosition")
-    XCTAssertEqual(BookishRecordKey.isbn, "isbn")
-    XCTAssertEqual(BookishRecordKey.types, "types")
-    XCTAssertEqual(BookishRecordKey.allTypes, "*")
+struct BookishRecordTests {
+  @Test
+  func standardKindsAndKeysHaveStableValues() {
+    #expect(BookishRecordKind.book == "book")
+    #expect(BookishRecordKind.person == "person")
+    #expect(BookishRecordKind.organisation == "organisation")
+    #expect(BookishRecordKey.authors == "authors")
+    #expect(BookishRecordKey.series == "series")
+    #expect(BookishRecordKey.seriesPosition == "seriesPosition")
+    #expect(BookishRecordKey.isbn == "isbn")
+    #expect(BookishRecordKey.types == "types")
+    #expect(BookishRecordKey.allTypes == "*")
   }
 
-  func testRecordConstructionAndConvenienceReaders() {
+  @Test
+
+  func recordConstructionAndConvenienceReaders() {
     let authorID = BookishRecordID("person-1")
     let record = BookishRecord(
       id: BookishRecordID("book-1"),
@@ -30,32 +33,35 @@ final class BookishRecordTests: XCTestCase {
       ]
     )
 
-    XCTAssertEqual(record.id.rawValue, "book-1")
-    XCTAssertEqual(record.kind, "book")
-    XCTAssertEqual(record.string("title"), "Bookish")
-    XCTAssertEqual(record.integer("pages"), 320)
-    XCTAssertEqual(record.record("primaryAuthor"), authorID)
-    XCTAssertEqual(record.list("authors"), [.record(authorID)])
-    XCTAssertEqual(record.strings("types"), ["book"])
+    #expect(record.id.rawValue == "book-1")
+    #expect(record.kind == "book")
+    #expect(record.string("title") == "Bookish")
+    #expect(record.integer("pages") == 320)
+    #expect(record.record("primaryAuthor") == authorID)
+    #expect(record.list("authors") == [.record(authorID)])
+    #expect(record.strings("types") == ["book"])
   }
 
-  func testRecordValueSupportsNestedListsAndEncodedValues() throws {
+  @Test
+
+  func recordValueSupportsNestedListsAndEncodedValues() throws {
     let dimensions = try BookishEncodedValue(encoding: Dimensions(width: 12, height: 20))
     let value = BookishRecordValue.list([
       .record(BookishRecordID("person-1")),
       .encoded(dimensions),
     ])
 
-    XCTAssertEqual(
-      value,
-      .list([
-        .record(BookishRecordID("person-1")),
-        .encoded(dimensions),
-      ])
-    )
+    #expect(
+      value
+        == .list([
+          .record(BookishRecordID("person-1")),
+          .encoded(dimensions),
+        ]))
   }
 
-  func testRecordCanReadEncodedPayloads() throws {
+  @Test
+
+  func recordCanReadEncodedPayloads() throws {
     let dimensions = Dimensions(width: 12, height: 20)
     let record = BookishRecord(
       id: BookishRecordID("book-1"),
@@ -68,35 +74,41 @@ final class BookishRecordTests: XCTestCase {
 
     let inferred: Dimensions? = record.encoded("dimensions")
 
-    XCTAssertEqual(inferred, dimensions)
-    XCTAssertEqual(record.encoded("dimensions", as: Dimensions.self), dimensions)
-    XCTAssertNil(record.encoded("missing", as: Dimensions.self))
-    XCTAssertNil(record.encoded("title", as: Dimensions.self))
+    #expect(inferred == dimensions)
+    #expect(record.encoded("dimensions", as: Dimensions.self) == dimensions)
+    #expect(record.encoded("missing", as: Dimensions.self) == nil)
+    #expect(record.encoded("title", as: Dimensions.self) == nil)
   }
 
-  func testEncodedValueCanRoundTripCodablePayload() throws {
+  @Test
+
+  func encodedValueCanRoundTripCodablePayload() throws {
     let dimensions = Dimensions(width: 12, height: 20)
     let encoded = try BookishEncodedValue(encoding: dimensions)
     let decoded = try encoded.decode(Dimensions.self)
 
-    XCTAssertEqual(decoded, dimensions)
+    #expect(decoded == dimensions)
   }
 
-  func testEncodedValueCodableUsesPayloadObject() throws {
+  @Test
+
+  func encodedValueCodableUsesPayloadObject() throws {
     let encoded = try BookishEncodedValue(encoding: Dimensions(width: 12, height: 20))
     let data = try JSONEncoder().encode(encoded)
-    let object = try XCTUnwrap(JSONSerialization.jsonObject(with: data) as? [String: Any])
+    let object = try #require(JSONSerialization.jsonObject(with: data) as? [String: Any])
 
-    XCTAssertEqual(object["width"] as? Int, 12)
-    XCTAssertEqual(object["height"] as? Int, 20)
-    XCTAssertNil(object["payload"])
+    #expect(object["width"] as? Int == 12)
+    #expect(object["height"] as? Int == 20)
+    #expect(object["payload"] == nil)
 
     let decoded = try JSONDecoder().decode(BookishEncodedValue.self, from: data)
 
-    XCTAssertEqual(decoded, encoded)
+    #expect(decoded == encoded)
   }
 
-  func testRecordCodableRoundTrip() throws {
+  @Test
+
+  func recordCodableRoundTrip() throws {
     let record = BookishRecord(
       id: BookishRecordID("book-1"),
       kind: "book",
@@ -109,7 +121,7 @@ final class BookishRecordTests: XCTestCase {
     let data = try JSONEncoder().encode(record)
     let decoded = try JSONDecoder().decode(BookishRecord.self, from: data)
 
-    XCTAssertEqual(decoded, record)
+    #expect(decoded == record)
   }
 }
 

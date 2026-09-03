@@ -1,12 +1,13 @@
 import BookishDatastore
 import BookishRecord
 import SwiftUI
-import XCTest
+import Testing
 
 @testable import BookishRecordView
 
-final class BookishRecordViewTests: XCTestCase {
-  func testPresentationUsesLayoutFields() {
+struct BookishRecordViewTests {
+  @Test
+  func presentationUsesLayoutFields() {
     let presentation = BookishRecordPresentation(
       record: BookishRecord(
         kind: "book",
@@ -25,14 +26,16 @@ final class BookishRecordViewTests: XCTestCase {
       )
     )
 
-    XCTAssertEqual(presentation.title, "Bookish")
-    XCTAssertEqual(presentation.layoutTitle, "Book Summary")
-    XCTAssertEqual(presentation.fields.map(\.key), ["author", "status"])
-    XCTAssertEqual(presentation.fields.map(\.value), ["Author", "Reading"])
-    XCTAssertEqual(presentation.fields.map(\.rawValue), [.string("Author"), .string("Reading")])
+    #expect(presentation.title == "Bookish")
+    #expect(presentation.layoutTitle == "Book Summary")
+    #expect(presentation.fields.map(\.key) == ["author", "status"])
+    #expect(presentation.fields.map(\.value) == ["Author", "Reading"])
+    #expect(presentation.fields.map(\.rawValue) == [.string("Author"), .string("Reading")])
   }
 
-  func testPresentationFallsBackToSortedRecordFieldsWithoutLayout() {
+  @Test
+
+  func presentationFallsBackToSortedRecordFieldsWithoutLayout() {
     let presentation = BookishRecordPresentation(
       record: BookishRecord(
         kind: "book",
@@ -44,11 +47,13 @@ final class BookishRecordViewTests: XCTestCase {
       layout: nil
     )
 
-    XCTAssertEqual(presentation.layoutTitle, "Default")
-    XCTAssertEqual(presentation.fields.map(\.key), ["author", "status"])
+    #expect(presentation.layoutTitle == "Default")
+    #expect(presentation.fields.map(\.key) == ["author", "status"])
   }
 
-  func testPresentationExpandsAllOtherFieldsInLayoutOrder() {
+  @Test
+
+  func presentationExpandsAllOtherFieldsInLayoutOrder() {
     let presentation = BookishRecordPresentation(
       record: BookishRecord(
         kind: "book",
@@ -71,10 +76,12 @@ final class BookishRecordViewTests: XCTestCase {
       )
     )
 
-    XCTAssertEqual(presentation.fields.map(\.key), ["title", "author", "isbn", "status"])
+    #expect(presentation.fields.map(\.key) == ["title", "author", "isbn", "status"])
   }
 
-  func testPresentationAllFieldsLayoutShowsEveryRecordProperty() {
+  @Test
+
+  func presentationAllFieldsLayoutShowsEveryRecordProperty() {
     let presentation = BookishRecordPresentation(
       record: BookishRecord(
         kind: "book",
@@ -89,10 +96,12 @@ final class BookishRecordViewTests: XCTestCase {
       )
     )
 
-    XCTAssertEqual(presentation.fields.map(\.key), ["author", "status"])
+    #expect(presentation.fields.map(\.key) == ["author", "status"])
   }
 
-  func testMutationPresentationDescribesSetPropertyMutation() {
+  @Test
+
+  func mutationPresentationDescribesSetPropertyMutation() {
     let mutation = MutationRecord(
       id: MutationID("mutation-1"),
       operation: .setProperty(
@@ -105,22 +114,22 @@ final class BookishRecordViewTests: XCTestCase {
 
     let presentation = BookishMutationPresentation(mutation: mutation)
 
-    XCTAssertEqual(presentation.title, "Set Reading Status")
-    XCTAssertEqual(presentation.subtitle, "book · book-1")
-    XCTAssertEqual(
-      presentation.fields.map(\.key),
-      [
+    #expect(presentation.title == "Set Reading Status")
+    #expect(presentation.subtitle == "book · book-1")
+    #expect(
+      presentation.fields.map(\.key) == [
         "operation", "recordID", "kind", "property", "value",
       ])
-    XCTAssertEqual(
-      presentation.fields.map(\.value),
-      [
+    #expect(
+      presentation.fields.map(\.value) == [
         "Set Property", "book-1", "book", "reading_status", "Reading",
       ])
   }
 
   @MainActor
-  func testRecordViewCanBeConstructedWithRecordAndLayout() {
+  @Test
+
+  func recordViewCanBeConstructedWithRecordAndLayout() {
     let view = BookishRecordView(
       record: BookishRecord(
         kind: "book",
@@ -141,21 +150,25 @@ final class BookishRecordViewTests: XCTestCase {
       }
     )
 
-    XCTAssertNotNil(view.body)
+    _ = view.body
   }
 
   @MainActor
-  func testRecordCellCanBeConstructedWithRecordAndLayout() {
+  @Test
+
+  func recordCellCanBeConstructedWithRecordAndLayout() {
     let view = BookishRecordCell(
       record: BookishRecord(kind: "book", properties: ["title": .string("Bookish")]),
       layout: BookishRecord(kind: "layout", properties: ["fields": .list([.string("title")])])
     )
 
-    XCTAssertNotNil(view.body)
+    _ = view.body
   }
 
   @MainActor
-  func testMutationViewsCanBeConstructedWithMutation() {
+  @Test
+
+  func mutationViewsCanBeConstructedWithMutation() {
     let mutation = MutationRecord(
       operation: .deleteRecord(BookishRecordID("book-1"))
     )
@@ -163,7 +176,7 @@ final class BookishRecordViewTests: XCTestCase {
     let cell = BookishMutationCell(mutation: mutation)
     let detail = BookishMutationView(mutation: mutation)
 
-    XCTAssertNotNil(cell.body)
-    XCTAssertNotNil(detail.body)
+    _ = cell.body
+    _ = detail.body
   }
 }

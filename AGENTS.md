@@ -2,9 +2,12 @@
 
 - This repository is a Swift book cataloguing app.
 - It is written using Swift 6 and SwiftUI.
-- Legacy CoreData code exists, but will be updated to SwiftData.
+- All new unit and integration tests must use Swift Testing. Never write new XCTest tests under any circumstances; existing XCTest tests in external dependencies may remain unchanged.
+- The project uses its own DataStore/BookishRecord abstraction for most data storage.
+- SwiftData may be used only as possible implementation for the mutation layer of the datastore.
+- CoreData should not be used anywhere.
 - Keep a development journal in `Extras/Journal/`.
-- Testing & validation may incidentally update package lockfiles. This is acceptable and does not need to be reversed.
+- Testing & validation may incidentally update xcode / swiftpm package lockfiles. This is acceptable and does not need to be reversed.
 
 # Standard Rules
 
