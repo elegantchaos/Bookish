@@ -1,5 +1,6 @@
 # Journal Index
 
+- [2026-09-03 Dynamic Data Views](2026-09-03-dynamic-data-views.md)
 - [2026-09-02 Record Query Service](2026-09-02-record-query-service.md)
 - [2026-09-02 Legacy Feature Inventory](2026-09-02-legacy-feature-inventory.md)
 - [2026-09-01 Command Error Reporting](2026-09-01-command-error-reporting.md)
