@@ -67,10 +67,14 @@ final class BookishAppTests: XCTestCase {
       storedAllRecordsIndex?.record(BookishRecordKey.layout),
       BookishRecordID("datastore-all-fields-layout")
     )
+    XCTAssertEqual(
+      storedAllRecordsIndex?.strings(BookishRecordKey.types), [BookishRecordKey.allTypes])
     XCTAssertEqual(storedIndexesIndex?.kind, BookishRecordKind.index)
     XCTAssertEqual(storedIndexesIndex?.string(BookishRecordKey.label), "Indexes")
+    XCTAssertEqual(storedIndexesIndex?.strings(BookishRecordKey.types), [BookishRecordKind.index])
     XCTAssertEqual(storedIndexesIndex?.bool(BookishRecordKey.debugOnly), true)
     XCTAssertEqual(storedBooksIndex?.bool(BookishRecordKey.debugOnly), false)
+    XCTAssertEqual(storedBooksIndex?.strings(BookishRecordKey.types), [BookishRecordKind.book])
     XCTAssertEqual(seedMarker?.kind, BookishRecordKind.seedMarker)
     XCTAssertTrue(harness.defaultShowsDebugIndexes)
     XCTAssertEqual(harness.navigation.selectedRecordIndexLabel, "All Records")
@@ -119,11 +123,42 @@ final class BookishAppTests: XCTestCase {
     XCTAssertTrue(layoutIDs.contains(BookishRecordID("datastore-seed-marker-layout")))
     XCTAssertEqual(
       allFields?.list(BookishRecordKey.fields), [.string(BookishRecordKey.allOtherFields)])
+    XCTAssertEqual(allFields?.strings(BookishRecordKey.types), [BookishRecordKey.allTypes])
     XCTAssertEqual(book?.string(BookishRecordKey.title), "Book")
+    XCTAssertEqual(book?.strings(BookishRecordKey.types), [BookishRecordKind.book])
     XCTAssertTrue(
       book?.list(BookishRecordKey.fields)?.contains(.string(BookishRecordKey.isbn)) == true)
+    XCTAssertEqual(index?.strings(BookishRecordKey.types), [BookishRecordKind.index])
     XCTAssertTrue(
       index?.list(BookishRecordKey.fields)?.contains(.string(BookishRecordKey.debugOnly)) == true)
+  }
+
+  @MainActor
+  func testLayoutChoicesMatchSelectedIndexTypes() async throws {
+    let harness = try makeHarness()
+    await harness.load()
+
+    await harness.select(recordIndexID: BookishRecordID("datastore-index-books"))
+
+    XCTAssertEqual(
+      Set(harness.compatibleLayoutIDs),
+      [
+        BookishRecordID("datastore-all-fields-layout"),
+        BookishRecordID("datastore-book-layout"),
+      ]
+    )
+
+    harness.selectedLayoutID = BookishRecordID("datastore-book-layout")
+    await harness.select(recordIndexID: BookishRecordID("datastore-index-people"))
+
+    XCTAssertNil(harness.selectedLayoutID)
+    XCTAssertEqual(
+      Set(harness.compatibleLayoutIDs),
+      [
+        BookishRecordID("datastore-all-fields-layout"),
+        BookishRecordID("datastore-person-layout"),
+      ]
+    )
   }
 
   @MainActor
@@ -147,6 +182,7 @@ final class BookishAppTests: XCTestCase {
     XCTAssertEqual(storedBookIndex?.bool(BookishRecordKey.debugOnly), false)
     XCTAssertEqual(
       storedBookIndex?.record(BookishRecordKey.layout), BookishRecordID("datastore-book-layout"))
+    XCTAssertEqual(storedBookIndex?.strings(BookishRecordKey.types), [BookishRecordKind.book])
     XCTAssertTrue(
       harness.navigation.recordIndexIDs.contains(BookishRecordID("datastore-index-books")))
   }

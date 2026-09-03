@@ -47,6 +47,11 @@ public struct BookishRecord: Codable, Equatable, Identifiable, Sendable {
     properties[key]?.listValue
   }
 
+  /// Reads a string-list property by key.
+  public func strings(_ key: String) -> [String]? {
+    properties[key]?.listValue?.compactMap(\.stringValue)
+  }
+
   /// Reads a record link property by key.
   public func record(_ key: String) -> BookishRecordID? {
     properties[key]?.recordValue

@@ -12,6 +12,8 @@ final class BookishRecordTests: XCTestCase {
     XCTAssertEqual(BookishRecordKey.series, "series")
     XCTAssertEqual(BookishRecordKey.seriesPosition, "seriesPosition")
     XCTAssertEqual(BookishRecordKey.isbn, "isbn")
+    XCTAssertEqual(BookishRecordKey.types, "types")
+    XCTAssertEqual(BookishRecordKey.allTypes, "*")
   }
 
   func testRecordConstructionAndConvenienceReaders() {
@@ -23,6 +25,7 @@ final class BookishRecordTests: XCTestCase {
         "title": .string("Bookish"),
         "pages": .integer(320),
         "authors": .list([.record(authorID)]),
+        "types": .list([.string("book")]),
         "primaryAuthor": .record(authorID),
       ]
     )
@@ -33,6 +36,7 @@ final class BookishRecordTests: XCTestCase {
     XCTAssertEqual(record.integer("pages"), 320)
     XCTAssertEqual(record.record("primaryAuthor"), authorID)
     XCTAssertEqual(record.list("authors"), [.record(authorID)])
+    XCTAssertEqual(record.strings("types"), ["book"])
   }
 
   func testRecordValueSupportsNestedListsAndEncodedValues() throws {

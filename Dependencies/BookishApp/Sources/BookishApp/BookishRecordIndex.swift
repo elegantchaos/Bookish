@@ -38,6 +38,11 @@ public struct BookishRecordIndex: Equatable, Identifiable, Sendable {
     record.record(BookishRecordKey.layout)
   }
 
+  /// The advisory record kinds that this index can surface.
+  public var types: [String] {
+    record.strings(BookishRecordKey.types) ?? []
+  }
+
   /// Creates an index wrapper for a stored record.
   public init(record: BookishRecord) {
     self.record = record
@@ -49,6 +54,7 @@ public struct BookishRecordIndex: Equatable, Identifiable, Sendable {
     label: String,
     position: Int,
     query: RecordQuery,
+    types: [String] = [],
     debugOnly: Bool = false,
     layoutID: BookishRecordID? = nil,
     sourceID: String
@@ -60,6 +66,9 @@ public struct BookishRecordIndex: Equatable, Identifiable, Sendable {
       BookishRecordKey.query: .encoded(try BookishEncodedValue(encoding: query)),
       BookishRecordKey.source: .string(sourceID),
     ]
+    if !types.isEmpty {
+      properties[BookishRecordKey.types] = .list(types.map(BookishRecordValue.string))
+    }
     if let layoutID {
       properties[BookishRecordKey.layout] = .record(layoutID)
     }

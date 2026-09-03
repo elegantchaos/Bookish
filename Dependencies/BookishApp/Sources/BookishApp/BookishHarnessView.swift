@@ -272,7 +272,7 @@ private struct BookishToolbar: ToolbarContent {
       @Bindable var harness = harness
       Picker("Layout", selection: $harness.selectedLayoutID) {
         Text("Default").tag(Optional<BookishRecordID>.none)
-        ForEach(harness.layoutIDs, id: \.self) { id in
+        ForEach(harness.compatibleLayoutIDs, id: \.self) { id in
           BookishLayoutPickerItem(layoutID: id, harness: harness)
         }
       }

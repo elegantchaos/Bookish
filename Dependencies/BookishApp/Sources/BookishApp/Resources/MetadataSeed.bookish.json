@@ -16,6 +16,9 @@
         "_rv": "record",
         "id": "datastore-all-fields-layout"
       },
+      "types": [
+        "*"
+      ],
       "position": 0,
       "query": {
         "_rv": "encoded",
@@ -56,6 +59,9 @@
         "_rv": "record",
         "id": "datastore-book-layout"
       },
+      "types": [
+        "book"
+      ],
       "position": 1,
       "query": {
         "_rv": "encoded",
@@ -97,6 +103,9 @@
         "_rv": "record",
         "id": "datastore-person-layout"
       },
+      "types": [
+        "person"
+      ],
       "position": 2,
       "query": {
         "_rv": "encoded",
@@ -138,6 +147,9 @@
         "_rv": "record",
         "id": "datastore-organisation-layout"
       },
+      "types": [
+        "organisation"
+      ],
       "position": 3,
       "query": {
         "_rv": "encoded",
@@ -179,6 +191,9 @@
         "_rv": "record",
         "id": "datastore-series-layout"
       },
+      "types": [
+        "series"
+      ],
       "position": 4,
       "query": {
         "_rv": "encoded",
@@ -220,6 +235,9 @@
         "_rv": "record",
         "id": "datastore-list-layout"
       },
+      "types": [
+        "list"
+      ],
       "position": 5,
       "query": {
         "_rv": "encoded",
@@ -261,6 +279,9 @@
         "_rv": "record",
         "id": "datastore-relationship-layout"
       },
+      "types": [
+        "relationship"
+      ],
       "position": 6,
       "query": {
         "_rv": "encoded",
@@ -302,6 +323,9 @@
         "_rv": "record",
         "id": "datastore-layout-layout"
       },
+      "types": [
+        "layout"
+      ],
       "position": 7,
       "query": {
         "_rv": "encoded",
@@ -343,6 +367,9 @@
         "_rv": "record",
         "id": "datastore-index-layout"
       },
+      "types": [
+        "index"
+      ],
       "position": 8,
       "query": {
         "_rv": "encoded",
@@ -382,6 +409,9 @@
         "*"
       ],
       "title": "All Fields",
+      "types": [
+        "*"
+      ],
       "source": "com.elegantchaos.bookish.seed"
     },
     {
@@ -396,6 +426,9 @@
         "*"
       ],
       "title": "Record",
+      "types": [
+        "record"
+      ],
       "source": "com.elegantchaos.bookish.seed"
     },
     {
@@ -424,6 +457,9 @@
         "*"
       ],
       "title": "Book",
+      "types": [
+        "book"
+      ],
       "source": "com.elegantchaos.bookish.seed"
     },
     {
@@ -435,6 +471,9 @@
         "*"
       ],
       "title": "Person",
+      "types": [
+        "person"
+      ],
       "source": "com.elegantchaos.bookish.seed"
     },
     {
@@ -446,6 +485,9 @@
         "*"
       ],
       "title": "Organisation",
+      "types": [
+        "organisation"
+      ],
       "source": "com.elegantchaos.bookish.seed"
     },
     {
@@ -457,6 +499,9 @@
         "*"
       ],
       "title": "Series",
+      "types": [
+        "series"
+      ],
       "source": "com.elegantchaos.bookish.seed"
     },
     {
@@ -469,6 +514,9 @@
         "*"
       ],
       "title": "List",
+      "types": [
+        "list"
+      ],
       "source": "com.elegantchaos.bookish.seed"
     },
     {
@@ -481,6 +529,9 @@
         "*"
       ],
       "title": "Relationship",
+      "types": [
+        "relationship"
+      ],
       "source": "com.elegantchaos.bookish.seed"
     },
     {
@@ -488,11 +539,15 @@
       "kind": "layout",
       "fields": [
         "title",
+        "types",
         "fields",
         "source",
         "*"
       ],
       "title": "Layout",
+      "types": [
+        "layout"
+      ],
       "source": "com.elegantchaos.bookish.seed"
     },
     {
@@ -503,11 +558,15 @@
         "position",
         "debugOnly",
         "layout",
+        "types",
         "query",
         "source",
         "*"
       ],
       "title": "Index",
+      "types": [
+        "index"
+      ],
       "source": "com.elegantchaos.bookish.seed"
     },
     {
@@ -519,6 +578,9 @@
         "*"
       ],
       "title": "Seed Marker",
+      "types": [
+        "seedMarker"
+      ],
       "source": "com.elegantchaos.bookish.seed"
     }
   ]

@@ -134,6 +134,12 @@ public enum BookishRecordKey {
   /// A layout field token that expands to every property not already listed.
   public static let allOtherFields = "*"
 
+  /// An advisory list of record kinds a metadata record is designed to surface or present.
+  public static let types = "types"
+
+  /// A type-list token that matches any record kind.
+  public static let allTypes = "*"
+
   /// A link to the layout used when records are viewed through an index.
   public static let layout = "layout"
 

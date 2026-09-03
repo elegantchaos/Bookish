@@ -16,6 +16,11 @@ public final class BookishHarness {
   /// The identifiers of layout records currently available from the record service.
   public private(set) var layoutIDs: [BookishRecordID] = []
 
+  /// The identifiers of layout records compatible with the selected browser index.
+  public var compatibleLayoutIDs: [BookishRecordID] {
+    compatibleLayouts.map(\.id)
+  }
+
   /// Increments whenever the record projection is refreshed.
   public private(set) var revision = 0
 
@@ -48,6 +53,7 @@ public final class BookishHarness {
   private let seedSourceID = "com.elegantchaos.bookish.seed"
   private let directoryURL: URL?
   private var datastore: BookishDatastore?
+  private var layouts: [BookishRecord] = []
 
   /// Creates an empty harness ready to load the datastore.
   public init(
@@ -296,6 +302,7 @@ public final class BookishHarness {
     do {
       navigation.select(recordIndexID: recordIndexID)
       try await refreshSelectedRecordIndex(using: datastore)
+      try await updateLayoutSelection(using: datastore)
     } catch {
       report(error: error)
     }
@@ -388,8 +395,12 @@ public final class BookishHarness {
       matching: recordIndexQuery)
     navigation.update(recordIndexResult: recordIndexResult)
     try await refreshSelectedRecordIndex(using: datastore)
-    layoutIDs = try await datastore.recordService.recordIDs(
-      matching: .kind(BookishRecordKind.layout))
+    layouts = try await datastore.recordService.records(
+      matching: RecordQuery(
+        predicate: .kind(BookishRecordKind.layout),
+        sort: [.property(BookishRecordKey.title), .id]
+      ))
+    layoutIDs = layouts.map(\.id)
     revision += 1
     try await updateLayoutSelection(using: datastore)
   }
@@ -432,6 +443,21 @@ public final class BookishHarness {
 
     if try await datastore.recordService.record(id: selectedLayoutID) == nil {
       self.selectedLayoutID = nil
+      return
+    }
+
+    if !compatibleLayoutIDs.contains(selectedLayoutID) {
+      self.selectedLayoutID = nil
+    }
+  }
+
+  private var compatibleLayouts: [BookishRecord] {
+    guard let selectedRecordIndex = navigation.selectedRecordIndex else {
+      return layouts
+    }
+
+    return layouts.filter { layout in
+      layout.matchesAnyType(in: selectedRecordIndex.types)
     }
   }
 
@@ -480,6 +506,7 @@ public final class BookishHarness {
         navigation.selectPreviousRecordIndex()
       }
       try await refreshSelectedRecordIndex(using: datastore)
+      try await updateLayoutSelection(using: datastore)
     } catch {
       report(error: error)
     }
@@ -549,5 +576,19 @@ private enum BookishHarnessError: LocalizedError {
     case .missingSeedResource(let name):
       "The bundled seed resource '\(name).bookish.json' is missing."
     }
+  }
+}
+
+extension BookishRecord {
+  /// Returns whether this metadata record is compatible with any requested kind.
+  fileprivate func matchesAnyType(in requestedTypes: [String]) -> Bool {
+    let supportedTypes = strings(BookishRecordKey.types) ?? []
+    guard !supportedTypes.isEmpty, !requestedTypes.isEmpty else {
+      return true
+    }
+
+    return supportedTypes.contains(BookishRecordKey.allTypes)
+      || requestedTypes.contains(BookishRecordKey.allTypes)
+      || !Set(supportedTypes).isDisjoint(with: requestedTypes)
   }
 }
