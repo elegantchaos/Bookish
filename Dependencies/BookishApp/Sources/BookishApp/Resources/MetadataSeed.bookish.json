@@ -4,8 +4,7 @@
     "version": 1
   },
   "schema": {
-    "defaultKind": "layout",
-    "rvKey": "_rv"
+    "defaultKind": "layout"
   },
   "records": [
     {
@@ -18,7 +17,7 @@
       ],
       "position": 0,
       "query": {
-        "_rv": "encoded",
+        "®": "encoded",
         "predicate": {
           "type": "all"
         },
@@ -51,7 +50,7 @@
       ],
       "position": 1,
       "query": {
-        "_rv": "encoded",
+        "®": "encoded",
         "predicate": {
           "kind": "book",
           "type": "kind"
@@ -85,7 +84,7 @@
       ],
       "position": 2,
       "query": {
-        "_rv": "encoded",
+        "®": "encoded",
         "predicate": {
           "kind": "person",
           "type": "kind"
@@ -119,7 +118,7 @@
       ],
       "position": 3,
       "query": {
-        "_rv": "encoded",
+        "®": "encoded",
         "predicate": {
           "kind": "organisation",
           "type": "kind"
@@ -153,7 +152,7 @@
       ],
       "position": 4,
       "query": {
-        "_rv": "encoded",
+        "®": "encoded",
         "predicate": {
           "kind": "series",
           "type": "kind"
@@ -187,7 +186,7 @@
       ],
       "position": 5,
       "query": {
-        "_rv": "encoded",
+        "®": "encoded",
         "predicate": {
           "kind": "list",
           "type": "kind"
@@ -221,7 +220,7 @@
       ],
       "position": 6,
       "query": {
-        "_rv": "encoded",
+        "®": "encoded",
         "predicate": {
           "kind": "relationship",
           "type": "kind"
@@ -255,7 +254,7 @@
       ],
       "position": 7,
       "query": {
-        "_rv": "encoded",
+        "®": "encoded",
         "predicate": {
           "kind": "layout",
           "type": "kind"
@@ -289,7 +288,7 @@
       ],
       "position": 8,
       "query": {
-        "_rv": "encoded",
+        "®": "encoded",
         "predicate": {
           "kind": "index",
           "type": "kind"
@@ -488,7 +487,7 @@
         "*"
       ],
       "presentation": {
-        "_rv": "presentation",
+        "®": "presentation",
         "properties": {
           "source": {
             "icon": "tray",
