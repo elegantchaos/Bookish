@@ -147,7 +147,11 @@ public struct BookishRecordField: Equatable, Identifiable, Sendable {
 extension BookishRecordValue {
   /// Formats a Bookish property value for display.
   var displayString: String {
-    switch self {
+    if let date = dateValue {
+      return date.formatted(date: .abbreviated, time: .omitted)
+    }
+
+    return switch self {
     case .string(let value):
       value
     case .integer(let value):
@@ -156,8 +160,6 @@ extension BookishRecordValue {
       value.formatted()
     case .bool(let value):
       value ? "Yes" : "No"
-    case .date(let value):
-      value.formatted(date: .abbreviated, time: .omitted)
     case .record(let id):
       id.rawValue
     case .blob(let reference):

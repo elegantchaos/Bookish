@@ -45,6 +45,7 @@ public struct BookishCommands: Commands {
 
       Divider()
 
+      harness.button(RebuildRecordStoreCommand())
       harness.button(ResetDatastoreCommand(), role: .destructive)
     }
 
@@ -298,7 +299,7 @@ public struct ExportInterchangeCommand: CommandWithUI {
   }
 }
 
-/// Clears all datastore records and mutations.
+/// Removes all records and mutations from the local datastore.
 public struct ResetDatastoreCommand: CommandWithUI {
   public typealias Centre = BookishHarness
   public typealias ResultType = Void
@@ -331,6 +332,43 @@ public struct ResetDatastoreCommand: CommandWithUI {
 
   public func perform(centre: BookishHarness) async throws {
     await centre.reset()
+  }
+}
+
+/// Rebuilds the materialised record projection from stored mutations.
+public struct RebuildRecordStoreCommand: CommandWithUI {
+  public typealias Centre = BookishHarness
+  public typealias ResultType = Void
+
+  public let id = "datastore.rebuild-record-store"
+
+  /// Creates the record-store rebuild command.
+  public init() {
+  }
+
+  public func name(centre: BookishHarness) -> String {
+    "Rebuild Record Store"
+  }
+
+  public func icon(centre: BookishHarness) -> Icon {
+    Icon("arrow.clockwise")
+  }
+
+  public func help(centre: BookishHarness) -> String? {
+    "Discard the materialised record store and rebuild it from stored mutations."
+  }
+
+  public func confirmation(centre: BookishHarness) -> CommandConfirmation? {
+    CommandConfirmation(
+      title: "Rebuild Record Store?",
+      cancel: "Cancel",
+      message: "This discards the materialised record store and rebuilds it from stored mutations.",
+      confirm: "Rebuild"
+    )
+  }
+
+  public func perform(centre: BookishHarness) async throws {
+    await centre.rebuildRecordProjection()
   }
 }
 

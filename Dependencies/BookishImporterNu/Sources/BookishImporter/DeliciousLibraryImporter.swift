@@ -47,7 +47,7 @@ public struct DeliciousLibraryImporter: BookishImporter {
         for (offset, rawRecord) in list.enumerated() {
           try Task.checkCancellation()
 
-          if let book = DeliciousBook(rawRecord, sourceID: Self.sourceID) {
+          if let book = try DeliciousBook(rawRecord, sourceID: Self.sourceID) {
             let bookID = builder.addBook(importer.clean(book))
             bookIDs.append(bookID)
           }
@@ -113,13 +113,13 @@ public struct DeliciousLibraryImporter: BookishImporter {
     return list
   }
 
-  private func buildResult(from list: [[String: Any]]) -> BookishImportResult {
+  private func buildResult(from list: [[String: Any]]) throws -> BookishImportResult {
     var builder = DeliciousRecordGraphBuilder(sourceID: Self.sourceID)
     let root = BookishRecordID("delicious-import")
     var bookIDs: [BookishRecordID] = []
 
     for rawRecord in list {
-      guard let book = DeliciousBook(rawRecord, sourceID: Self.sourceID) else {
+      guard let book = try DeliciousBook(rawRecord, sourceID: Self.sourceID) else {
         continue
       }
 
@@ -187,7 +187,7 @@ private struct DeliciousBook {
   var series: String
   var seriesPosition: Int?
 
-  init?(_ raw: [String: Any], sourceID: String) {
+  init?(_ raw: [String: Any], sourceID: String) throws {
     guard let title = raw.string("title"), !title.isEmpty else {
       return nil
     }
@@ -229,9 +229,9 @@ private struct DeliciousBook {
     properties.addDouble(raw.nonZeroDouble("boxHeightInInches"), forKey: BookishRecordKey.height)
     properties.addDouble(raw.nonZeroDouble("boxWidthInInches"), forKey: BookishRecordKey.width)
     properties.addDouble(raw.nonZeroDouble("boxLengthInInches"), forKey: BookishRecordKey.length)
-    properties.addDate(raw.date("creationDate"), forKey: BookishRecordKey.addedDate)
-    properties.addDate(raw.date("lastModificationDate"), forKey: BookishRecordKey.modifiedDate)
-    properties.addDate(raw.date("publishDate"), forKey: BookishRecordKey.publishedDate)
+    try properties.addDate(raw.date("creationDate"), forKey: BookishRecordKey.addedDate)
+    try properties.addDate(raw.date("lastModificationDate"), forKey: BookishRecordKey.modifiedDate)
+    try properties.addDate(raw.date("publishDate"), forKey: BookishRecordKey.publishedDate)
     properties.addStringList(
       raw.stringList("editionsCompositeString"), forKey: BookishRecordKey.editions)
     properties.addStringList(
@@ -462,12 +462,12 @@ extension Dictionary where Key == String, Value == BookishRecordValue {
     self[key] = .double(value)
   }
 
-  fileprivate mutating func addDate(_ value: Date?, forKey key: String) {
+  fileprivate mutating func addDate(_ value: Date?, forKey key: String) throws {
     guard let value else {
       return
     }
 
-    self[key] = .date(value)
+    self[key] = try BookishRecordValue(date: value)
   }
 
   fileprivate mutating func addStringList(_ values: [String], forKey key: String) {

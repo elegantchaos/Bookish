@@ -19,9 +19,6 @@ public indirect enum BookishRecordValue: Codable, Equatable, Sendable {
   /// A boolean value.
   case bool(Bool)
 
-  /// A date value.
-  case date(Date)
-
   /// A link to another record.
   case record(BookishRecordID)
 
@@ -81,13 +78,13 @@ extension BookishRecordValue {
     return value
   }
 
-  /// Returns the contained date when this value is `.date`.
+  /// Returns the contained date when this value is an encoded date payload.
   public var dateValue: Date? {
-    guard case .date(let value) = self else {
+    guard case .encoded(let value, kind: BookishRecordDate.kind) = self else {
       return nil
     }
 
-    return value
+    return try? value.decode(BookishRecordDate.self).date
   }
 
   /// Returns the contained record identifier when this value is `.record`.
@@ -124,5 +121,13 @@ extension BookishRecordValue {
     }
 
     return kind
+  }
+
+  /// Creates an encoded date value.
+  public init(date: Date) throws {
+    self = .encoded(
+      try BookishEncodedValue(encoding: BookishRecordDate(date: date)),
+      kind: BookishRecordDate.kind
+    )
   }
 }

@@ -139,12 +139,6 @@ public struct BookishInterchangeCodec: Sendable {
     case .bool(let value):
       return value
 
-    case .date(let value):
-      return [
-        schema.rvKey: "date",
-        "value": Self.encodeDate(value),
-      ]
-
     case .record(let value):
       return try encodeRecordReference(value, schema: schema)
 
@@ -289,15 +283,6 @@ public struct BookishInterchangeCodec: Sendable {
         )
       )
 
-    case "date":
-      guard
-        let string = dictionary["value"] as? String,
-        let date = Self.decodeDate(string)
-      else {
-        throw BookishCodingError.invalidDate
-      }
-      return .date(date)
-
     case "tombstone":
       return .tombstone
 
@@ -353,7 +338,7 @@ public struct BookishInterchangeCodec: Sendable {
   }
 
   private func encodeCodable<Value: Encodable>(_ value: Value) throws -> Any {
-    let data = try JSONEncoder().encode(value)
+    let data = try BookishRecordCoding.makeEncoder().encode(value)
     return try JSONSerialization.jsonObject(with: data)
   }
 
@@ -361,7 +346,7 @@ public struct BookishInterchangeCodec: Sendable {
     throws -> Value
   {
     let data = try JSONSerialization.data(withJSONObject: dictionary)
-    return try JSONDecoder().decode(type, from: data)
+    return try BookishRecordCoding.makeDecoder().decode(type, from: data)
   }
 
   private static func isValidRecordID(_ id: String) -> Bool {
@@ -373,19 +358,5 @@ public struct BookishInterchangeCodec: Sendable {
       character.isLetter || character.isNumber || character == "." || character == "_"
         || character == ":" || character == "-" || character == "*"
     }
-  }
-
-  private static func encodeDate(_ date: Date) -> String {
-    dateFormatter().string(from: date)
-  }
-
-  private static func decodeDate(_ string: String) -> Date? {
-    dateFormatter().date(from: string)
-  }
-
-  private static func dateFormatter() -> ISO8601DateFormatter {
-    let formatter = ISO8601DateFormatter()
-    formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-    return formatter
   }
 }

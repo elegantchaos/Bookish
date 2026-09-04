@@ -5,6 +5,32 @@ import Testing
 
 struct BookishRecordTests {
   @Test
+  func datePropertiesUseEncodedDateValues() throws {
+    let date = Date(timeIntervalSince1970: 1_704_067_200)
+    var record = BookishRecord(kind: "book")
+
+    try record.setDate(date, for: BookishRecordKey.publishedDate)
+
+    #expect(record.date(BookishRecordKey.publishedDate) == date)
+    #expect(
+      record.properties[BookishRecordKey.publishedDate]?.encodedKind == BookishRecordDate.kind)
+    #expect(
+      try record.properties[BookishRecordKey.publishedDate]?.encodedValue?.decode(
+        BookishRecordDate.self
+      ).date
+        == date)
+  }
+
+  @Test
+  func encodedValuesUseTheBookishDateCodingStrategy() throws {
+    let value = DatedPayload(date: Date(timeIntervalSince1970: 0))
+    let encoded = try BookishEncodedValue(encoding: value)
+
+    #expect(try encoded.jsonObject()["date"] as? String == "1970-01-01T00:00:00Z")
+    #expect(try encoded.decode(DatedPayload.self) == value)
+  }
+
+  @Test
   func standardKindsAndKeysHaveStableValues() {
     #expect(BookishRecordKind.book == "book")
     #expect(BookishRecordKind.person == "person")
@@ -139,6 +165,10 @@ struct BookishRecordTests {
 
     #expect(decoded == record)
   }
+}
+
+private struct DatedPayload: Codable, Equatable {
+  var date: Date
 }
 
 private struct Dimensions: Codable, Equatable {

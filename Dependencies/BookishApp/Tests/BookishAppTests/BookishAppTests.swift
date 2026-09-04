@@ -11,6 +11,26 @@ import Testing
 struct BookishAppTests {
   @MainActor
   @Test
+  func startupRebuildsAnUnreadableRecordStoreFromMutations() async throws {
+    let directory = try temporaryDirectory()
+    let datastore = try await BookishDatastore(directoryURL: directory)
+    let bookID = BookishRecordID("recovered-book")
+    try await datastore.mutationService.perform(
+      .setProperty(recordID: bookID, kind: "book", key: "name", value: .string("Recovered")))
+    let recordsDirectory = directory.appending(path: "records", directoryHint: .isDirectory)
+    try Data("not valid record JSON".utf8).write(
+      to: recordsDirectory.appending(path: "record-old.json"))
+    let harness = BookishHarness(directoryURL: directory)
+
+    await harness.load()
+
+    #expect(harness.status == "Ready")
+    #expect(
+      try await harness.record(id: bookID)?.string("name") == "Recovered")
+  }
+
+  @MainActor
+  @Test
   func harnessStartsInLoadingState() {
     let harness = BookishHarness()
 
@@ -580,7 +600,7 @@ struct BookishAppTests {
   @MainActor
   @Test
 
-  func harnessResetRemovesImportedRecordsAndMutationHistory() async throws {
+  func rebuildCommandRebuildsRecordStoreFromMutationHistory() async throws {
     let harness = try makeHarness()
     await harness.load()
 
@@ -602,7 +622,7 @@ struct BookishAppTests {
     let mutationsBeforeReset = try await harness.mutations()
     #expect(mutationsBeforeReset.isEmpty == false)
 
-    await harness.reset()
+    try await harness.perform(RebuildRecordStoreCommand())
 
     let sampleBook = try await harness.record(id: BookishRecordID("datastore-book"))
     let sampleAuthor = try await harness.record(id: BookishRecordID("datastore-author"))
@@ -612,15 +632,16 @@ struct BookishAppTests {
     let bookLayout = try await harness.record(id: BookishRecordID("datastore-book-layout"))
 
     #expect(harness.navigation.recordIDs.isEmpty == false)
-    #expect(harness.navigation.recordIDs.contains(BookishRecordID("test-reset-book")) == false)
-    #expect(sampleBook == nil)
-    #expect(sampleAuthor == nil)
+    #expect(harness.navigation.recordIDs.contains(BookishRecordID("test-reset-book")))
+    #expect(sampleBook?.kind == BookishRecordKind.book)
+    #expect(sampleAuthor?.kind == BookishRecordKind.person)
     #expect(seedMarker?.kind == BookishRecordKind.seedMarker)
     #expect(allRecordsIndex?.kind == BookishRecordKind.index)
     #expect(bookLayout?.kind == BookishRecordKind.layout)
     let mutationsAfterReset = try await harness.mutations()
-    #expect(mutationsAfterReset.isEmpty)
-    #expect(harness.status == "Reset datastore")
+    #expect(mutationsAfterReset.map(\.id) == mutationsBeforeReset.map(\.id))
+    #expect(mutationsAfterReset.map(\.operation) == mutationsBeforeReset.map(\.operation))
+    #expect(harness.status == "Rebuilt record store")
   }
 
   @MainActor

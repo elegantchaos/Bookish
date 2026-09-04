@@ -6,6 +6,23 @@ import Testing
 
 struct BookishCodingTests {
   @Test
+  func dateValuesRoundTripAsTaggedEncodedValues() throws {
+    let date = Date(timeIntervalSince1970: 1_704_067_200)
+    var book = BookishRecord(id: BookishRecordID("book-1"), kind: "book")
+    try book.setDate(date, for: BookishRecordKey.publishedDate)
+    let file = BookishInterchangeFile(records: [book])
+
+    let data = try BookishInterchangeCodec().encode(file)
+    let object = try JSONSerialization.jsonObject(with: data) as? [String: Any]
+    let records = try #require(object?["records"] as? [[String: Any]])
+    let encodedDate = try #require(records.first?[BookishRecordKey.publishedDate] as? [String: Any])
+
+    #expect(encodedDate["®"] as? String == BookishRecordDate.kind)
+    #expect(encodedDate["date"] is String)
+    #expect(try BookishInterchangeCodec().decode(data) == file)
+  }
+
+  @Test
   func defaultSchemaUsesRegisteredSignRecordValueKey() {
     #expect(BookishInterchangeSchema.default.rvKey == "®")
     #expect(BookishInterchangeSchema.default.idKey == "ℹ")

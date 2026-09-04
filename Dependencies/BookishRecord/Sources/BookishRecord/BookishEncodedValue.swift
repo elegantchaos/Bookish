@@ -29,8 +29,10 @@ public struct BookishEncodedValue: Codable, Equatable, Sendable {
   }
 
   /// Encodes a Codable value into an opaque JSON object payload.
-  public init<Value: Encodable>(encoding value: Value, encoder: JSONEncoder = JSONEncoder()) throws
-  {
+  public init<Value: Encodable>(
+    encoding value: Value,
+    encoder: JSONEncoder = BookishRecordCoding.makeEncoder()
+  ) throws {
     let data = try encoder.encode(value)
     let json = try JSONSerialization.jsonObject(with: data)
     guard let payload = json as? [String: Any] else {
@@ -48,7 +50,7 @@ public struct BookishEncodedValue: Codable, Equatable, Sendable {
   /// Decodes this opaque JSON object payload into a Codable value.
   public func decode<Value: Decodable>(
     _ type: Value.Type,
-    decoder: JSONDecoder = JSONDecoder()
+    decoder: JSONDecoder = BookishRecordCoding.makeDecoder()
   ) throws -> Value {
     let data = try JSONSerialization.data(withJSONObject: jsonObject())
     return try decoder.decode(type, from: data)

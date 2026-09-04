@@ -42,6 +42,11 @@ public struct BookishRecord: Codable, Equatable, Identifiable, Sendable {
     properties[key]?.boolValue
   }
 
+  /// Reads an encoded date property by key.
+  public func date(_ key: String) -> Date? {
+    properties[key]?.dateValue
+  }
+
   /// Reads a list property by key.
   public func list(_ key: String) -> [BookishRecordValue]? {
     properties[key]?.listValue
@@ -55,6 +60,16 @@ public struct BookishRecord: Codable, Equatable, Identifiable, Sendable {
   /// Reads a record link property by key.
   public func record(_ key: String) -> BookishRecordID? {
     properties[key]?.recordValue
+  }
+
+  /// Sets or removes an encoded date property by key.
+  public mutating func setDate(_ value: Date?, for key: String) throws {
+    guard let value else {
+      properties.removeValue(forKey: key)
+      return
+    }
+
+    properties[key] = try BookishRecordValue(date: value)
   }
 
   /// Reads an encoded Codable payload property by key.

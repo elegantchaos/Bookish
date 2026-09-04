@@ -63,6 +63,16 @@ public actor JSONMutationStore: MutationStore {
     appliedMutationIDs.contains(id)
   }
 
+  /// Removes all applied markers while retaining the stored mutation history.
+  public func removeAppliedMarkers() async throws {
+    appliedMutationIDs = []
+    guard FileManager.default.fileExists(atPath: appliedDirectoryURL.path) else {
+      return
+    }
+
+    try FileManager.default.removeItem(at: appliedDirectoryURL)
+  }
+
   /// Removes every stored mutation and applied marker.
   public func removeAll() async throws {
     guard !mutationsByID.isEmpty || !appliedMutationIDs.isEmpty else {

@@ -29,8 +29,8 @@ should represent structured encoded payloads directly rather than adding wrapper
 dictionaries solely to identify them.
 
 Explicit forms remain available where JSON is ambiguous: tagged value objects
-identify core values such as record links and dates, while an unknown tag can
-act as a stable kind hint for an encoded payload. These escape hatches preserve
+identify core plumbing values such as record links, while an unknown tag can act
+as a stable kind hint for an encoded payload. These escape hatches preserve
 extensibility without making the common representation verbose.
 
 ## Core Model
@@ -186,7 +186,6 @@ following reserved value kinds are defined:
 
 - `record`: a link to another record;
 - `blob`: a reference to out-of-line blob data;
-- `date`: a date encoded as a string value;
 - `tombstone`: a tombstoned record marker;
 - `deletion`: a deleted property marker;
 - `conflict`: a conflict marker containing alternative values.
@@ -214,15 +213,18 @@ Blob references identify immutable out-of-line data:
 }
 ```
 
-Dates are encoded explicitly when the value must remain a date rather than a
-plain string:
+Dates are encoded payloads with the `date` kind hint:
 
 ```json
 {
   "®": "date",
-  "value": "2026-06-02T10:00:00Z"
+  "date": "2026-06-02T10:00:00Z"
 }
 ```
+
+All Codable values within an interchange document use ISO-8601 JSON date
+encoding. This applies equally to a date payload and to a date nested inside a
+larger encoded value such as a query or sort descriptor.
 
 Tombstones and deletion markers are explicit sentinel values:
 

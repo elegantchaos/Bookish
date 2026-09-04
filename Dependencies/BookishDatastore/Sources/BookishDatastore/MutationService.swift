@@ -11,6 +11,9 @@ public protocol MutationService: Sendable {
 
   /// Replays unapplied stored mutations into the record store.
   func processPendingMutations() async throws
+
+  /// Rebuilds the record projection from the complete stored mutation history.
+  func rebuildRecordProjection() async throws
 }
 
 /// Default local mutation service.
@@ -59,6 +62,13 @@ public struct DefaultMutationService<Records: RecordStore, Mutations: MutationSt
     if didApply {
       await projectionDidChange?()
     }
+  }
+
+  /// Rebuilds the record projection from the complete stored mutation history.
+  public func rebuildRecordProjection() async throws {
+    try await recordStore.removeAll()
+    try await mutationStore.removeAppliedMarkers()
+    try await processPendingMutations()
   }
 
   private func applyIfNeeded(_ mutation: MutationRecord) async throws -> Bool {

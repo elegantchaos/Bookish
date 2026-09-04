@@ -77,11 +77,13 @@ public final class BookishHarness {
   public func load() async {
     do {
       let directory = try datastoreDirectory()
-      let datastore = try await BookishDatastore(directoryURL: directory)
-      self.datastore = datastore
-
-      try await seed(using: datastore)
-      try await refresh()
+      let datastore: BookishDatastore
+      do {
+        datastore = try await BookishDatastore(directoryURL: directory)
+      } catch {
+        datastore = try await BookishDatastore.rebuildRecordProjection(directoryURL: directory)
+      }
+      try await configure(datastore)
       status = "Ready"
     } catch {
       status = error.localizedDescription
@@ -154,22 +156,31 @@ public final class BookishHarness {
     report(message: "Exported interchange file")
   }
 
-  /// Resets the datastore by removing every stored record and mutation.
+  /// Removes every stored record and mutation, then restores the seed records.
   public func reset() async {
-    guard let datastore else {
-      status = BookishHarnessError.notLoaded.localizedDescription
-      return
-    }
-
     do {
-      try await datastore.mutationStore.removeAll()
-      try await datastore.recordStore.removeAll()
+      let directory = try datastoreDirectory()
+      try BookishDatastore.reset(directoryURL: directory)
+      resetProjectionState()
+      let datastore = try await BookishDatastore(directoryURL: directory)
+      self.datastore = datastore
       _ = try await importSeedResource("PresentationSeed", into: datastore)
       try await writeSeedMarker(to: datastore)
-      navigation.reset()
-      selectedLayoutID = nil
       try await refresh()
       status = "Reset datastore"
+    } catch {
+      status = error.localizedDescription
+    }
+  }
+
+  /// Rebuilds the materialised record projection from durable mutations.
+  public func rebuildRecordProjection() async {
+    do {
+      let directory = try datastoreDirectory()
+      resetProjectionState()
+      let datastore = try await BookishDatastore.rebuildRecordProjection(directoryURL: directory)
+      try await configure(datastore)
+      status = "Rebuilt record store"
     } catch {
       status = error.localizedDescription
     }
@@ -414,6 +425,22 @@ public final class BookishHarness {
     layoutIDs = layouts.map(\.id)
     revision += 1
     try await updateLayoutSelection(using: datastore)
+  }
+
+  /// Installs, seeds, and refreshes a newly loaded datastore.
+  private func configure(_ datastore: BookishDatastore) async throws {
+    self.datastore = datastore
+    try await seed(using: datastore)
+    try await refresh()
+  }
+
+  /// Clears UI state tied to the current materialised projection.
+  private func resetProjectionState() {
+    navigation.reset()
+    selectedLayoutID = nil
+    layouts = []
+    layoutIDs = []
+    datastore = nil
   }
 
   private func seed(using datastore: BookishDatastore) async throws {

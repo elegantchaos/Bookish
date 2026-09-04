@@ -5,6 +5,37 @@ import Testing
 @testable import BookishDatastore
 
 struct BookishDatastoreTests {
+  @Test
+  func rebuildingTheRecordProjectionReplaysAppliedMutations() async throws {
+    let directory = try temporaryDirectory()
+    let datastore = try await BookishDatastore(directoryURL: directory)
+    let bookID = BookishRecordID("book-1")
+
+    try await datastore.mutationService.perform(
+      .setProperty(recordID: bookID, kind: "book", key: "name", value: .string("Rebuilt")))
+    try await datastore.recordStore.removeAll()
+
+    let rebuilt = try await BookishDatastore.rebuildRecordProjection(directoryURL: directory)
+
+    #expect(try await rebuilt.recordService.record(id: bookID)?.string("name") == "Rebuilt")
+    #expect(try await rebuilt.mutationStore.mutations().isEmpty == false)
+  }
+
+  @Test
+  func recordQueriesSortEncodedDatePropertiesChronologically() throws {
+    var older = BookishRecord(id: BookishRecordID("older"), kind: "book")
+    var newer = BookishRecord(id: BookishRecordID("newer"), kind: "book")
+    try older.setDate(
+      Date(timeIntervalSince1970: 1_704_067_200), for: BookishRecordKey.publishedDate)
+    try newer.setDate(
+      Date(timeIntervalSince1970: 1_735_603_200), for: BookishRecordKey.publishedDate)
+
+    let records = RecordQuery(sort: [.property(BookishRecordKey.publishedDate)]).apply(
+      to: [newer, older])
+
+    #expect(records.map(\.id) == [older.id, newer.id])
+  }
+
   private struct LegacyMutationState: Codable {
     var mutations: [MutationRecord]
     var applied: Set<MutationID>

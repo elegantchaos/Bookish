@@ -77,6 +77,11 @@ Incoming mutation records may arrive in any order and from any device. The mutat
 
 Given the full history of mutation records, the record store can be reconstructed at any time.
 
+The app may discard an unreadable record projection during startup and rebuild it
+from the mutation store. The development menu also provides the same rebuild
+operation. A separate destructive reset removes both the projection and mutation
+history.
+
 
 ## Conflicts
 
@@ -97,7 +102,7 @@ List-entry mutations parent the relevant entry or ordering heads rather than the
 ## Values
 
 Property values can be:
-- primitives (string, int, uint, double, date, bool)
+- primitives (string, int, uint, double, bool)
 - small Codable values encoded as opaque JSON payloads
 - record links
 - blob references

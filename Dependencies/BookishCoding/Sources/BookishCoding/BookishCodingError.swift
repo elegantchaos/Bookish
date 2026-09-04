@@ -28,9 +28,6 @@ public enum BookishCodingError: Error, Equatable {
   /// A blob value object is missing its blob identifier.
   case missingBlobID
 
-  /// A date value object is malformed.
-  case invalidDate
-
   /// A conflict value object is malformed.
   case invalidConflict
 
@@ -53,7 +50,6 @@ public enum BookishCodingError: Error, Equatable {
       (.missingRecordID, .missingRecordID),
       (.missingRecordReferenceID, .missingRecordReferenceID),
       (.missingBlobID, .missingBlobID),
-      (.invalidDate, .invalidDate),
       (.invalidConflict, .invalidConflict),
       (.invalidRecordValueKind, .invalidRecordValueKind),
       (.invalidRoot, .invalidRoot):

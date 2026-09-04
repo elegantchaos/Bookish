@@ -127,6 +127,10 @@ public struct RecordSortDescriptor: Codable, Equatable, Sendable {
     _ lhs: BookishRecordValue,
     _ rhs: BookishRecordValue
   ) -> ComparisonResult {
+    if let lhsDate = lhs.dateValue, let rhsDate = rhs.dateValue {
+      return lhsDate.comparisonResult(with: rhsDate)
+    }
+
     switch (lhs, rhs) {
     case (.string(let lhs), .string(let rhs)):
       return lhs.localizedStandardCompare(rhs)
@@ -139,9 +143,6 @@ public struct RecordSortDescriptor: Codable, Equatable, Sendable {
 
     case (.bool(let lhs), .bool(let rhs)):
       return lhs == rhs ? .orderedSame : (lhs ? .orderedDescending : .orderedAscending)
-
-    case (.date(let lhs), .date(let rhs)):
-      return lhs.comparisonResult(with: rhs)
 
     case (.record(let lhs), .record(let rhs)):
       return lhs.rawValue.localizedStandardCompare(rhs.rawValue)

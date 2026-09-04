@@ -34,4 +34,30 @@ public struct BookishDatastore: Sendable {
       }
     )
   }
+
+  /// Discards the materialised record projection and recreates it from stored mutations.
+  public static func rebuildRecordProjection(directoryURL: URL) async throws -> BookishDatastore {
+    let recordsDirectory = directoryURL.appending(path: "records", directoryHint: .isDirectory)
+    let legacyRecordsFile = directoryURL.appending(path: "records.json")
+
+    if FileManager.default.fileExists(atPath: recordsDirectory.path) {
+      try FileManager.default.removeItem(at: recordsDirectory)
+    }
+    if FileManager.default.fileExists(atPath: legacyRecordsFile.path) {
+      try FileManager.default.removeItem(at: legacyRecordsFile)
+    }
+
+    let datastore = try await BookishDatastore(directoryURL: directoryURL)
+    try await datastore.mutationService.rebuildRecordProjection()
+    return datastore
+  }
+
+  /// Removes every persisted record and mutation from a datastore directory.
+  public static func reset(directoryURL: URL) throws {
+    guard FileManager.default.fileExists(atPath: directoryURL.path) else {
+      return
+    }
+
+    try FileManager.default.removeItem(at: directoryURL)
+  }
 }
