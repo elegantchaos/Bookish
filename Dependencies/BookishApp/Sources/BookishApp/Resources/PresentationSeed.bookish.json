@@ -3,11 +3,7 @@
     "id": "com.elegantchaos.bookish.records",
     "version": 1
   },
-  "schema": {
-    "idKey": "ℹ",
-    "kindKey": "©",
-    "defaultKind": "layout"
-  },
+  "schema": { "defaultKind": "layout" },
   "records": [
     {
       "ℹ": "datastore-index-all-records",

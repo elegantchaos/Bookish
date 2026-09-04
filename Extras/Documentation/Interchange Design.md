@@ -21,6 +21,18 @@ the materialised record and mutation model described in `Datastore Design.md`.
   and other values that are ambiguous in plain JSON.
 - Allow compatible external JSON by making reserved record keys configurable.
 
+## Compactness
+
+The interchange format is designed to remain concise when written as JSON.
+Writers should omit every value that the active schema can supply by default and
+should represent structured encoded payloads directly rather than adding wrapper
+dictionaries solely to identify them.
+
+Explicit forms remain available where JSON is ambiguous: tagged value objects
+identify core values such as record links and dates, while an unknown tag can
+act as a stable kind hint for an encoded payload. These escape hatches preserve
+extensibility without making the common representation verbose.
+
 ## Core Model
 
 The interchange format is built around records and values.
@@ -52,12 +64,6 @@ optional root record, and a list of records.
     "id": "com.elegantchaos.bookish.records",
     "version": 1
   },
-  "schema": {
-    "idKey": "ℹ",
-    "kindKey": "©",
-    "defaultKind": "record",
-    "rvKey": "®"
-  },
   "root": "@book-1",
   "records": [
     {
@@ -80,7 +86,8 @@ optional root record, and a list of records.
 `format` identifies the interchange family and version.
 
 `schema` is optional. Missing schema fields use the default values described in
-the next section.
+the next section. Writers should include only fields that override those
+defaults.
 
 `root` is optional. When present, it identifies the record that should be treated
 as the root of the imported or exported selection. It may use the same record
@@ -92,6 +99,10 @@ schema.
 ## Schema
 
 The schema defines reserved JSON keys and default record behaviour.
+
+Schema fields are optional and are emitted only when they differ from the
+format defaults. For example, a file containing mostly layout records may set
+only `defaultKind` to `layout`.
 
 Default schema:
 

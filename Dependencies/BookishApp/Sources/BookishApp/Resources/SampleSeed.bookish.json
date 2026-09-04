@@ -3,11 +3,6 @@
     "id": "com.elegantchaos.bookish.records",
     "version": 1
   },
-  "schema": {
-    "idKey": "ℹ",
-    "kindKey": "©",
-    "defaultKind": "book"
-  },
   "records": [
     {
       "ℹ": "datastore-author",
@@ -19,6 +14,7 @@
     },
     {
       "ℹ": "datastore-book",
+      "©": "book",
       "authors": [
         "@datastore-author"
       ],
