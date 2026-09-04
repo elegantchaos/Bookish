@@ -5,14 +5,14 @@ import SwiftUI
 public struct BookishRecordCell: View {
   private let presentation: BookishRecordPresentation
 
-  /// Creates a row view from a data record, an optional layout, and optional property metadata.
+  /// Creates a row view from a data record, an optional layout, and a presentation record.
   public init(
     record: BookishRecord,
     layout: BookishRecord?,
-    metadata: BookishRecord? = nil
+    presentationRecord: BookishRecord? = nil
   ) {
     self.presentation = BookishRecordPresentation(
-      record: record, layout: layout, metadata: metadata)
+      record: record, layout: layout, presentationRecord: presentationRecord)
   }
 
   /// The SwiftUI content for the row.

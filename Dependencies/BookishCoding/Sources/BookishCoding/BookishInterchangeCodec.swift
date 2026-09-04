@@ -162,20 +162,15 @@ public struct BookishInterchangeCodec: Sendable {
     case .list(let values):
       return try values.map { try encodeValue($0, schema: schema) }
 
-    case .encoded(let value):
-      var dictionary: [String: Any] = [
-        schema.rvKey: "encoded"
-      ]
-      for (key, value) in try value.jsonObject() {
-        dictionary[key] = value
+    case .encoded(let value, let kind):
+      var dictionary = try value.jsonObject()
+      guard dictionary[schema.rvKey] == nil else {
+        throw BookishCodingError.reservedRecordValueKey(schema.rvKey)
+      }
+      if let kind {
+        dictionary[schema.rvKey] = kind
       }
       return dictionary
-
-    case .presentation(let value):
-      return [
-        schema.rvKey: "presentation",
-        "properties": try encodeCodable(value),
-      ]
 
     case .tombstone:
       return [schema.rvKey: "tombstone"]
@@ -264,8 +259,12 @@ public struct BookishInterchangeCodec: Sendable {
   private func decodeObject(_ dictionary: [String: Any], schema: BookishInterchangeSchema) throws
     -> BookishRecordValue
   {
-    guard let kind = dictionary[schema.rvKey] as? String else {
-      throw BookishCodingError.untaggedObjectValue
+    guard let rawKind = dictionary[schema.rvKey] else {
+      return .encoded(try BookishEncodedValue(jsonObject: dictionary))
+    }
+
+    guard let kind = rawKind as? String else {
+      throw BookishCodingError.invalidRecordValueKind
     }
 
     switch kind {
@@ -311,20 +310,10 @@ public struct BookishInterchangeCodec: Sendable {
       }
       return .conflict(try rawValues.map { try decodeValue($0, schema: schema) })
 
-    case "encoded":
+    default:
       var values = dictionary
       values.removeValue(forKey: schema.rvKey)
-      return .encoded(try BookishEncodedValue(jsonObject: values))
-
-    case "presentation":
-      guard let properties = dictionary["properties"] as? [String: Any] else {
-        throw BookishCodingError.invalidPresentation
-      }
-      return .presentation(
-        try decodeCodable([String: BookishPropertyPresentation].self, from: properties))
-
-    default:
-      throw BookishCodingError.unknownRecordValueKind(kind)
+      return .encoded(try BookishEncodedValue(jsonObject: values), kind: kind)
     }
   }
 

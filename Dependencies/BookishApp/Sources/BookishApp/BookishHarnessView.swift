@@ -124,13 +124,15 @@ private struct RecordIndexView: View {
   let navigation: BookishNavigationService
 
   @State private var layout: BookishRecord?
-  @State private var metadataByKind: [String: BookishRecord] = [:]
+  @State private var presentationByKind: [String: BookishRecord] = [:]
 
   var body: some View {
     List(selection: selectedRecordID) {
       ForEach(navigation.selectedRecordResult?.records ?? []) { record in
-        BookishRecordCell(record: record, layout: layout, metadata: metadataByKind[record.kind])
-          .tag(Optional(record.id))
+        BookishRecordCell(
+          record: record, layout: layout, presentationRecord: presentationByKind[record.kind]
+        )
+        .tag(Optional(record.id))
       }
     }
     .navigationTitle(navigation.selectedRecordIndexName ?? "Index")
@@ -154,13 +156,13 @@ private struct RecordIndexView: View {
   private func loadPresentation() async {
     do {
       layout = try await harness.selectedLayout()
-      var metadataByKind: [String: BookishRecord] = [:]
+      var presentationByKind: [String: BookishRecord] = [:]
       for kind in Set(navigation.selectedRecordResult?.records.map(\.kind) ?? []) {
-        if let metadata = try await harness.metadata(for: kind) {
-          metadataByKind[kind] = metadata
+        if let presentationRecord = try await harness.presentation(for: kind) {
+          presentationByKind[kind] = presentationRecord
         }
       }
-      self.metadataByKind = metadataByKind
+      self.presentationByKind = presentationByKind
     } catch {
       harness.report(error: error)
     }
@@ -189,12 +191,12 @@ private struct BookishRecordIDCell: View {
 
   @State private var record: BookishRecord?
   @State private var layout: BookishRecord?
-  @State private var metadata: BookishRecord?
+  @State private var presentationRecord: BookishRecord?
 
   var body: some View {
     Group {
       if let record {
-        BookishRecordCell(record: record, layout: layout, metadata: metadata)
+        BookishRecordCell(record: record, layout: layout, presentationRecord: presentationRecord)
       } else {
         Text(recordID.rawValue)
       }
@@ -213,7 +215,7 @@ private struct BookishRecordIDCell: View {
       record = try await harness.record(id: recordID)
       layout = try await harness.selectedLayout()
       if let record {
-        metadata = try await harness.metadata(for: record.kind)
+        presentationRecord = try await harness.presentation(for: record.kind)
       }
     } catch {
       harness.report(error: error)
@@ -228,12 +230,13 @@ private struct BookishRecordIDDetail: View {
 
   @State private var record: BookishRecord?
   @State private var layout: BookishRecord?
-  @State private var metadata: BookishRecord?
+  @State private var presentationRecord: BookishRecord?
 
   var body: some View {
     Group {
       if let record {
-        BookishRecordView(record: record, layout: layout, metadata: metadata) { field in
+        BookishRecordView(record: record, layout: layout, presentationRecord: presentationRecord) {
+          field in
           guard let recordID = field.rawValue?.recordValue else {
             return nil
           }
@@ -258,7 +261,7 @@ private struct BookishRecordIDDetail: View {
       record = try await harness.record(id: recordID)
       layout = try await harness.selectedLayout()
       if let record {
-        metadata = try await harness.metadata(for: record.kind)
+        presentationRecord = try await harness.presentation(for: record.kind)
       }
     } catch {
       harness.report(error: error)

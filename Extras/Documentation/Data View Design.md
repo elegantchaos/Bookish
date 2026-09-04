@@ -6,14 +6,14 @@ The datastore remains deliberately permissive. Metadata affects how a value is d
 
 ## Dynamic User Interface
 
-The UI reads materialised records through the record service and writes through the mutation service. It also reads metadata records through the same services. A presentation resolver combines a data record, its type metadata, and an optional layout into a display-ready description before SwiftUI renders it.
+The UI reads materialised records through the record service and writes through the mutation service. It also reads presentation records through the same services. A presentation resolver combines a data record, its type presentation, and an optional layout into a display-ready description before SwiftUI renders it.
 
 Views must not query the record store while constructing `body`. The application or a presentation service resolves and observes the relevant metadata, then supplies stable presentation values to the views.
 
 The resolver uses this order of precedence:
 
-1. Generic metadata for every record type.
-2. Metadata for the data record's type.
+1. Generic presentation for every record type.
+2. Presentation for the data record's type.
 3. Metadata supplied by the active layout.
 
 Metadata is merged property by property. Within a property description, each supplied member overrides the corresponding lower-precedence member. For example, a layout can change the label for `authors` while retaining the generic icon and type-specific viewer.
@@ -38,17 +38,15 @@ struct PropertyPresentation: Codable, Equatable, Sendable {
 
 The record value remains authoritative. A viewer does not validate or constrain the `BookishRecordValue` stored for a property. It chooses the most suitable interface when the value is compatible and otherwise uses a generic value viewer or repair path.
 
-## Metadata Records
+## Presentation Records
 
-Metadata records describe a record type rather than a particular data record. The planned metadata record identity is derived from the target type:
+Presentation records describe a record type rather than a particular data record:
 
-- `metadata.type.*` supplies the generic fallback.
-- `metadata.type.book` supplies book-specific presentation metadata.
-- `metadata.type.person` supplies person-specific presentation metadata.
+- `presentation.type.*` supplies the generic fallback.
+- `presentation.type.book` supplies book-specific property presentations.
+- `presentation.type.person` supplies person-specific property presentations.
 
-The `*` record is the universal fallback. `record` must not be used as that fallback because it is itself a valid record type.
-
-The precise stored key for the encoded property-presentation map is an implementation detail, but it belongs on these metadata records. Layout records contain the same kind of map for their local overrides. This keeps related property descriptions together, avoids a large number of auxiliary records and lookups, and permits future descriptor fields without adding association-property naming conventions.
+Each property in a presentation record is an encoded `PropertyPresentation` value. The property name is the target record-property identifier. The `*` record is the universal fallback; `record` must not be used as that fallback because it is itself a valid record type.
 
 ## Layout Records
 
@@ -58,7 +56,7 @@ Layouts also have an advisory `types` list describing the record types they are 
 
 The browser uses the selected index's types to offer compatible layouts. A layout-specific presentation override is only relevant when the layout matches the record being shown.
 
-Seeded layouts include an all-fields layout for `*` and type-specific layouts for standard catalogue and metadata record types. Users will be able to duplicate, edit, and create layouts without changing the stored records they present.
+Seeded layouts include an all-fields layout for `*` and type-specific layouts for standard catalogue and presentation record types. Users will be able to duplicate, edit, and create layouts without changing the stored records they present.
 
 ## Index User Interface
 
@@ -93,7 +91,7 @@ The editor should expose only the query operations the record service can execut
 
 ## Editing Flow
 
-Views do not write directly to the record store. Editing a data record, layout, index, or metadata record produces normal application-level mutations. The mutation service applies the mutation, the record service updates its materialised projection, and observed query and presentation state refreshes the interface.
+Views do not write directly to the record store. Editing a data record, layout, index, or presentation record produces normal application-level mutations. The mutation service applies the mutation, the record service updates its materialised projection, and observed query and presentation state refreshes the interface.
 
 User customisation should not require knowledge of mutations, encoded payloads, or the datastore's internal representation.
 
@@ -110,8 +108,8 @@ Implemented now:
 
 Planned next:
 
-- metadata records for generic and type-specific property presentation;
+- generic and type-specific presentation records;
 - layout-level property-presentation overrides;
 - a resolver that creates effective `PropertyPresentation` values;
 - viewer registration and generic fallback viewers;
-- index, layout, and metadata editing interfaces.
+- index, layout, and presentation editing interfaces.

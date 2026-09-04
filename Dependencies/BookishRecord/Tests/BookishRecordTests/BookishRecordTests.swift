@@ -82,19 +82,18 @@ struct BookishRecordTests {
   }
 
   @Test
-  func recordReadsPropertyPresentationMetadata() {
+  func recordDecodesPropertyPresentation() throws {
     let titlePresentation = BookishPropertyPresentation(icon: "textformat", label: "Title")
     let record = BookishRecord(
-      kind: BookishRecordKind.metadata,
+      kind: BookishRecordKind.presentation,
       properties: [
-        BookishRecordKey.presentation: .presentation([BookishRecordKey.name: titlePresentation])
+        BookishRecordKey.name: .encoded(try BookishEncodedValue(encoding: titlePresentation))
       ]
     )
 
     #expect(
-      record.presentation(BookishRecordKey.presentation)?[BookishRecordKey.name]
+      record.encoded(BookishRecordKey.name, as: BookishPropertyPresentation.self)
         == titlePresentation)
-    #expect(record.presentation(BookishRecordKey.name) == nil)
   }
 
   @Test

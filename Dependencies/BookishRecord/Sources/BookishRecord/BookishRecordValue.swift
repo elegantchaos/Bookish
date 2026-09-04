@@ -31,11 +31,8 @@ public indirect enum BookishRecordValue: Codable, Equatable, Sendable {
   /// An ordered list of values.
   case list([BookishRecordValue])
 
-  /// An opaque JSON payload encoded from a small Codable value.
-  case encoded(BookishEncodedValue)
-
-  /// Presentation metadata keyed by record property identifier.
-  case presentation([String: BookishPropertyPresentation])
+  /// An opaque JSON payload with an optional interchange kind hint.
+  case encoded(BookishEncodedValue, kind: String? = nil)
 
   /// A record tombstone marker.
   case tombstone
@@ -113,19 +110,19 @@ extension BookishRecordValue {
 
   /// Returns the contained encoded value when this value is `.encoded`.
   public var encodedValue: BookishEncodedValue? {
-    guard case .encoded(let value) = self else {
+    guard case .encoded(let value, _) = self else {
       return nil
     }
 
     return value
   }
 
-  /// Returns the contained presentation metadata when this value is `.presentation`.
-  public var presentationValue: [String: BookishPropertyPresentation]? {
-    guard case .presentation(let value) = self else {
+  /// Returns the optional interchange kind hint when this value is `.encoded`.
+  public var encodedKind: String? {
+    guard case .encoded(_, let kind) = self else {
       return nil
     }
 
-    return value
+    return kind
   }
 }

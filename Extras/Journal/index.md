@@ -1,5 +1,6 @@
 # Journal Index
 
+- [2026-09-04 Compact Presentation Records](2026-09-04-compact-presentation-records.md)
 - [2026-09-04 Seed Default Record-Value Key](2026-09-04-seed-default-rv-key.md)
 - [2026-09-03 Swift Testing Migration](2026-09-03-swift-testing-migration.md)
 - [2026-09-03 Metadata Fallback Record](2026-09-03-metadata-fallback-record.md)

@@ -9,18 +9,18 @@ public struct BookishRecordPresentation: Equatable, Sendable {
   /// The layout record used to choose labels and visible fields.
   public let layout: BookishRecord?
 
-  /// The metadata record used to present individual record properties.
-  public let metadata: BookishRecord?
+  /// The presentation record used to present individual record properties.
+  public let presentationRecord: BookishRecord?
 
   /// Creates a presentation from a record, an optional layout, and optional property metadata.
   public init(
     record: BookishRecord,
     layout: BookishRecord?,
-    metadata: BookishRecord? = nil
+    presentationRecord: BookishRecord? = nil
   ) {
     self.record = record
     self.layout = layout
-    self.metadata = metadata
+    self.presentationRecord = presentationRecord
   }
 
   /// The name used for navigation, forms, and list rows.
@@ -90,7 +90,7 @@ public struct BookishRecordPresentation: Equatable, Sendable {
   }
 
   private func propertyPresentation(for key: String) -> BookishPropertyPresentation? {
-    metadata?.presentation(BookishRecordKey.presentation)?[key]
+    presentationRecord?.encoded(key, as: BookishPropertyPresentation.self)
   }
 
   private func displayValue(for key: String) -> String {
@@ -164,9 +164,7 @@ extension BookishRecordValue {
       reference.filename ?? reference.id
     case .list(let values):
       values.map(\.displayString).joined(separator: ", ")
-    case .encoded(let value):
-      value.keys.sorted().joined(separator: ", ")
-    case .presentation(let value):
+    case .encoded(let value, _):
       value.keys.sorted().joined(separator: ", ")
     case .tombstone:
       "Tombstone"

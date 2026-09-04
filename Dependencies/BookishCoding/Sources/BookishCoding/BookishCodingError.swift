@@ -34,14 +34,11 @@ public enum BookishCodingError: Error, Equatable {
   /// A conflict value object is malformed.
   case invalidConflict
 
-  /// A presentation value object is malformed.
-  case invalidPresentation
+  /// A record value marker is not a string.
+  case invalidRecordValueKind
 
-  /// An explicit record value kind is unknown.
-  case unknownRecordValueKind(String)
-
-  /// A JSON object property value does not contain the record value marker.
-  case untaggedObjectValue
+  /// An encoded payload uses the active record value marker as a payload key.
+  case reservedRecordValueKey(String)
 
   /// The root value is malformed.
   case invalidRoot
@@ -58,14 +55,13 @@ public enum BookishCodingError: Error, Equatable {
       (.missingBlobID, .missingBlobID),
       (.invalidDate, .invalidDate),
       (.invalidConflict, .invalidConflict),
-      (.invalidPresentation, .invalidPresentation),
-      (.untaggedObjectValue, .untaggedObjectValue),
+      (.invalidRecordValueKind, .invalidRecordValueKind),
       (.invalidRoot, .invalidRoot):
       return true
 
     case (.invalidRecordID(let lhs), .invalidRecordID(let rhs)),
       (.invalidRecordReference(let lhs), .invalidRecordReference(let rhs)),
-      (.unknownRecordValueKind(let lhs), .unknownRecordValueKind(let rhs)):
+      (.reservedRecordValueKey(let lhs), .reservedRecordValueKey(let rhs)):
       return lhs == rhs
 
     case (.unsupportedValue(let lhs), .unsupportedValue(let rhs)):

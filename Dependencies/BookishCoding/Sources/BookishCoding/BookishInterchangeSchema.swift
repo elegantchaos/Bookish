@@ -24,8 +24,8 @@ public struct BookishInterchangeSchema: Codable, Equatable, Sendable {
 
   /// Creates an interchange schema.
   public init(
-    idKey: String = "id",
-    kindKey: String = "kind",
+    idKey: String = "ℹ",
+    kindKey: String = "©",
     defaultKind: String = "record",
     rvKey: String = "®"
   ) {
@@ -38,8 +38,8 @@ public struct BookishInterchangeSchema: Codable, Equatable, Sendable {
   /// Decodes a schema, using default values for missing fields.
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
-    self.idKey = try container.decodeIfPresent(String.self, forKey: .idKey) ?? "id"
-    self.kindKey = try container.decodeIfPresent(String.self, forKey: .kindKey) ?? "kind"
+    self.idKey = try container.decodeIfPresent(String.self, forKey: .idKey) ?? "ℹ"
+    self.kindKey = try container.decodeIfPresent(String.self, forKey: .kindKey) ?? "©"
     self.defaultKind = try container.decodeIfPresent(String.self, forKey: .defaultKind) ?? "record"
     self.rvKey = try container.decodeIfPresent(String.self, forKey: .rvKey) ?? "®"
   }

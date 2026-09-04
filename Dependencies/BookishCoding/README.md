@@ -11,10 +11,10 @@ The package includes:
 - `BookishInterchangeSchema`, reserved JSON key configuration.
 - `BookishInterchangeCodec`, the custom JSON encoder and decoder.
 
-The codec supports canonical typed record values, opaque encoded payloads such
-as `{ "®": "encoded", "width": 12 }`, and optional compact record link
-shorthand such as `@record-id`. Plain JSON objects without the schema's record
-value marker are rejected as property values.
+The codec supports canonical typed record values, untagged encoded payloads
+such as `{ "width": 12 }`, optional encoded-payload kind hints, and compact
+record link shorthand such as `@record-id`. The schema's record-value marker is
+reserved within encoded payloads.
 
 Run the package tests from this directory with:
 

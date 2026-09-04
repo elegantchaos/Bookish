@@ -34,7 +34,7 @@ struct BookishRecordViewTests {
   }
 
   @Test
-  func presentationUsesMetadataLabelsAndIcons() {
+  func presentationUsesPresentationRecordLabelsAndIcons() throws {
     let presentation = BookishRecordPresentation(
       record: BookishRecord(
         kind: BookishRecordKind.book,
@@ -49,13 +49,15 @@ struct BookishRecordViewTests {
           BookishRecordKey.fields: .list([.string("author"), .string("status")])
         ]
       ),
-      metadata: BookishRecord(
-        kind: BookishRecordKind.metadata,
+      presentationRecord: BookishRecord(
+        kind: BookishRecordKind.presentation,
         properties: [
-          BookishRecordKey.presentation: .presentation([
-            "author": BookishPropertyPresentation(icon: "person", label: "Author"),
-            "status": BookishPropertyPresentation(icon: "bookmark", label: "Reading Status"),
-          ])
+          "author": .encoded(
+            try BookishEncodedValue(
+              encoding: BookishPropertyPresentation(icon: "person", label: "Author"))),
+          "status": .encoded(
+            try BookishEncodedValue(
+              encoding: BookishPropertyPresentation(icon: "bookmark", label: "Reading Status"))),
         ]
       )
     )

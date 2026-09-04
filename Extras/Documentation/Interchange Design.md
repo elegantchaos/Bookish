@@ -53,24 +53,24 @@ optional root record, and a list of records.
     "version": 1
   },
   "schema": {
-    "idKey": "id",
-    "kindKey": "kind",
+    "idKey": "ℹ",
+    "kindKey": "©",
     "defaultKind": "record",
     "rvKey": "®"
   },
   "root": "@book-1",
   "records": [
     {
-      "id": "book-1",
-      "kind": "book",
+      "ℹ": "book-1",
+      "©": "book",
       "name": "Snow Crash",
       "isbn": "9780553380958",
       "authors": ["@person-neal-stephenson"],
       "publisher": { "®": "record", "id": "org-bantam" }
     },
     {
-      "id": "person-neal-stephenson",
-      "kind": "person",
+      "ℹ": "person-neal-stephenson",
+      "©": "person",
       "name": "Neal Stephenson"
     }
   ]
@@ -97,8 +97,8 @@ Default schema:
 
 ```json
 {
-  "idKey": "id",
-  "kindKey": "kind",
+  "idKey": "ℹ",
+  "kindKey": "©",
   "defaultKind": "record",
   "rvKey": "®"
 }
@@ -152,14 +152,12 @@ Primitive JSON values decode directly where their meaning is unambiguous:
 
 These values decode as strings, integers, doubles, booleans, and lists.
 
-Plain JSON objects without `rvKey` are not valid property values. A structured
-payload encoded from a small Codable value must use the explicit `encoded`
-record value form:
+Plain JSON objects without the active `rvKey` decode as opaque encoded payloads.
+They can contain structured data from a small Codable value:
 
 ```json
 {
   "dimensions": {
-    "®": "encoded",
     "width": 5.5,
     "height": 8.25,
     "unit": "in"
@@ -167,10 +165,10 @@ record value form:
 }
 ```
 
-For `encoded` values, every key other than the schema's `rvKey` is part of the
-opaque JSON payload. The interchange file does not provide a Swift type name;
-application code is expected to know the Codable type it wants to decode for a
-given property.
+The active `rvKey` is reserved within encoded payloads. A payload may carry an
+optional kind hint by storing an otherwise unknown string under that key. The
+interchange file does not provide a Swift type name; application code may later
+map stable kind identifiers to Codable types.
 
 Objects that contain `rvKey` decode as explicitly typed record values. The
 following reserved value kinds are defined:
@@ -178,7 +176,6 @@ following reserved value kinds are defined:
 - `record`: a link to another record;
 - `blob`: a reference to out-of-line blob data;
 - `date`: a date encoded as a string value;
-- `encoded`: an opaque JSON payload encoded from a small Codable value;
 - `tombstone`: a tombstoned record marker;
 - `deletion`: a deleted property marker;
 - `conflict`: a conflict marker containing alternative values.
@@ -297,8 +294,8 @@ record links:
 
 ```json
 {
-  "kind": "list",
-  "id": "list-favourites",
+  "©": "list",
+  "ℹ": "list-favourites",
   "name": "Favourites",
   "items": ["@book-1", "@book-2"]
 }
@@ -314,8 +311,8 @@ and source-specific notes:
 
 ```json
 {
-  "id": "relationship-book-1-contributor-1",
-  "kind": "relationship",
+  "ℹ": "relationship-book-1-contributor-1",
+  "©": "relationship",
   "from": "@book-1",
   "to": "@person-anthea-bell",
   "role": "translator",
@@ -334,8 +331,7 @@ Encoders should:
 - emit `format`;
 - emit `schema` only when non-default values are used, or when clarity is more
   important than compactness;
-- emit record `idKey` and `kindKey` fields for every record unless an explicit
-  compact mode omits `kindKey` for records using `defaultKind`;
+- emit record `idKey` and `kindKey` fields for every record;
 - encode primitive record values as primitive JSON values;
 - encode ambiguous values as explicit `RecordValue` objects;
 - use explicit record link objects by default;
@@ -344,11 +340,9 @@ Encoders should:
 Decoders should:
 
 - apply default schema values when `schema` or schema fields are missing;
-- treat unknown explicit `rvKey` values as errors in strict mode;
-- preserve unknown explicit `rvKey` values only through a future explicit
-  extension point when the caller requests that behaviour;
-- reject plain JSON object property values that do not contain `rvKey`;
-- reject malformed record identifiers in strict mode;
+- preserve unknown string `rvKey` values as encoded payload kind hints;
+- decode plain JSON object property values without `rvKey` as encoded payloads;
+- reject malformed record identifiers;
 - treat non-matching shorthand-like strings as plain strings.
 
 ## Import And Export Semantics

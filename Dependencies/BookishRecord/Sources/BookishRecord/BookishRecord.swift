@@ -62,8 +62,4 @@ public struct BookishRecord: Codable, Equatable, Identifiable, Sendable {
     try? properties[key]?.encodedValue?.decode(type)
   }
 
-  /// Reads presentation metadata by key.
-  public func presentation(_ key: String) -> [String: BookishPropertyPresentation]? {
-    properties[key]?.presentationValue
-  }
 }

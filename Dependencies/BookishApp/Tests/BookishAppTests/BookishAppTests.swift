@@ -41,15 +41,15 @@ struct BookishAppTests {
 
   @MainActor
   @Test
-  func harnessUsesFallbackMetadataWhenNoKindSpecificMetadataExists() async throws {
+  func harnessUsesFallbackPresentationWhenNoKindSpecificPresentationExists() async throws {
     let harness = try makeHarness()
     await harness.load()
 
-    let metadata = try await harness.metadata(for: BookishRecordKind.book)
+    let presentation = try await harness.presentation(for: BookishRecordKind.book)
 
-    #expect(metadata?.id == BookishRecordID("metadata.type.*"))
+    #expect(presentation?.id == BookishRecordID("presentation.type.*"))
     #expect(
-      metadata?.presentation(BookishRecordKey.presentation)?[BookishRecordKey.name]?.icon
+      presentation?.encoded(BookishRecordKey.name, as: BookishPropertyPresentation.self)?.icon
         == "textformat")
   }
 
@@ -206,7 +206,7 @@ struct BookishAppTests {
   @MainActor
   @Test
 
-  func harnessReimportsMetadataWithoutSampleDataAfterFirstRun() async throws {
+  func harnessReimportsPresentationWithoutSampleDataAfterFirstRun() async throws {
     let directory = try temporaryDirectory()
     let datastore = try await BookishDatastore(directoryURL: directory)
     try await datastore.recordStore.upsert(
@@ -514,8 +514,8 @@ struct BookishAppTests {
       {
         "records": [
           {
-            "id": "test-import-book",
-            "kind": "book",
+            "ℹ": "test-import-book",
+            "©": "book",
             "name": "Imported Book"
           }
         ]
@@ -588,8 +588,8 @@ struct BookishAppTests {
       {
         "records": [
           {
-            "id": "test-reset-book",
-            "kind": "book",
+            "ℹ": "test-reset-book",
+            "©": "book",
             "name": "Reset Book"
           }
         ]
@@ -634,8 +634,8 @@ struct BookishAppTests {
       {
         "records": [
           {
-            "id": "test-command-reset-book",
-            "kind": "book",
+            "ℹ": "test-command-reset-book",
+            "©": "book",
             "name": "Command Reset Book"
           }
         ]

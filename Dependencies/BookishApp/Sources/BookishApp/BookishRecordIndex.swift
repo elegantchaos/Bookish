@@ -26,7 +26,7 @@ public struct BookishRecordIndex: Equatable, Identifiable, Sendable {
     record.encoded(BookishRecordKey.query)
   }
 
-  /// Whether this index is intended only for debug or metadata browsing.
+  /// Whether this index is intended only for debug or configuration browsing.
   public var isDebugOnly: Bool {
     record.bool(BookishRecordKey.debugOnly) ?? false
   }

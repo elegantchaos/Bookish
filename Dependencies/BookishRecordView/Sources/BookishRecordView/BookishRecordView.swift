@@ -10,13 +10,13 @@ public struct BookishRecordView: View {
   public init(
     record: BookishRecord,
     layout: BookishRecord,
-    metadata: BookishRecord? = nil,
+    presentationRecord: BookishRecord? = nil,
     customValueView: @escaping @MainActor (BookishRecordField) -> AnyView? = { _ in nil }
   ) {
     self.init(
       record: record,
       layout: Optional(layout),
-      metadata: metadata,
+      presentationRecord: presentationRecord,
       customValueView: customValueView
     )
   }
@@ -25,11 +25,11 @@ public struct BookishRecordView: View {
   public init(
     record: BookishRecord,
     layout: BookishRecord?,
-    metadata: BookishRecord? = nil,
+    presentationRecord: BookishRecord? = nil,
     customValueView: @escaping @MainActor (BookishRecordField) -> AnyView? = { _ in nil }
   ) {
     self.presentation = BookishRecordPresentation(
-      record: record, layout: layout, metadata: metadata)
+      record: record, layout: layout, presentationRecord: presentationRecord)
     self.customValueView = customValueView
   }
 

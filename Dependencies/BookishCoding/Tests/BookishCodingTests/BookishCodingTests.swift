@@ -8,6 +8,8 @@ struct BookishCodingTests {
   @Test
   func defaultSchemaUsesRegisteredSignRecordValueKey() {
     #expect(BookishInterchangeSchema.default.rvKey == "®")
+    #expect(BookishInterchangeSchema.default.idKey == "ℹ")
+    #expect(BookishInterchangeSchema.default.kindKey == "©")
   }
 
   @Test
@@ -44,8 +46,8 @@ struct BookishCodingTests {
         "format": { "id": "com.elegantchaos.bookish.records", "version": 1 },
         "records": [
           {
-            "id": "book-1",
-            "kind": "book",
+            "ℹ": "book-1",
+            "©": "book",
             "name": "Snow Crash",
             "pages": 470,
             "owned": true,
@@ -109,7 +111,7 @@ struct BookishCodingTests {
     let records = try #require(object?["records"] as? [[String: Any]])
     let dimensions = try #require(records.first?["dimensions"] as? [String: Any])
 
-    #expect(dimensions["®"] as? String == "encoded")
+    #expect(dimensions["®"] == nil)
     #expect(dimensions["width"] as? Int == 12)
     #expect(dimensions["height"] as? Int == 20)
 
@@ -119,20 +121,19 @@ struct BookishCodingTests {
   }
 
   @Test
-  func presentationValuesRoundTripAsTaggedProperties() throws {
+  func encodedPresentationValuesRoundTripAsUntaggedProperties() throws {
+    let propertyPresentation = BookishPropertyPresentation(
+      icon: "textformat",
+      label: "Name",
+      viewer: "text"
+    )
     let file = BookishInterchangeFile(
       records: [
         BookishRecord(
-          id: BookishRecordID("metadata.type.*"),
-          kind: BookishRecordKind.metadata,
+          id: BookishRecordID("presentation.type.*"),
+          kind: BookishRecordKind.presentation,
           properties: [
-            BookishRecordKey.presentation: .presentation([
-              BookishRecordKey.name: BookishPropertyPresentation(
-                icon: "textformat",
-                label: "Title",
-                viewer: "text"
-              )
-            ])
+            BookishRecordKey.name: .encoded(try BookishEncodedValue(encoding: propertyPresentation))
           ]
         )
       ]
@@ -141,11 +142,43 @@ struct BookishCodingTests {
     let data = try BookishInterchangeCodec().encode(file)
     let object = try JSONSerialization.jsonObject(with: data) as? [String: Any]
     let records = try #require(object?["records"] as? [[String: Any]])
-    let presentation = try #require(records.first?[BookishRecordKey.presentation] as? [String: Any])
+    let presentation = try #require(records.first?[BookishRecordKey.name] as? [String: Any])
 
-    #expect(presentation["®"] as? String == "presentation")
-    #expect((presentation["properties"] as? [String: Any])?[BookishRecordKey.name] != nil)
+    #expect(presentation["®"] == nil)
+    #expect(presentation["icon"] as? String == "textformat")
     #expect(try BookishInterchangeCodec().decode(data) == file)
+  }
+
+  @Test
+  func unknownValueKindsRoundTripAsTaggedEncodedValues() throws {
+    let json = """
+      { "records": [{ "ℹ": "presentation.type.*", "©": "presentation", "name": {
+        "®": "com.elegantchaos.bookish.property-presentation", "icon": "textformat"
+      }}] }
+      """
+
+    let decoded = try BookishInterchangeCodec().decode(Data(json.utf8))
+    let value = try #require(decoded.records.first?.properties["name"])
+
+    #expect(value.encodedKind == "com.elegantchaos.bookish.property-presentation")
+    #expect(try BookishInterchangeCodec().encode(decoded).isEmpty == false)
+  }
+
+  @Test
+  func encodedValuesRejectTheActiveRecordValueKeyAsPayload() throws {
+    let file = BookishInterchangeFile(
+      records: [
+        BookishRecord(
+          id: BookishRecordID("book-1"),
+          kind: "book",
+          properties: ["value": .encoded(try BookishEncodedValue(jsonObject: ["®": "value"]))]
+        )
+      ]
+    )
+
+    #expect(throws: BookishCodingError.reservedRecordValueKey("®")) {
+      try BookishInterchangeCodec().encode(file)
+    }
   }
 
   @Test
@@ -192,8 +225,8 @@ struct BookishCodingTests {
       {
         "records": [
           {
-            "id": "book-1",
-            "kind": "book",
+            "ℹ": "book-1",
+            "©": "book",
             "author": "@not valid"
           }
         ]
@@ -214,8 +247,8 @@ struct BookishCodingTests {
       {
         "records": [
           {
-            "id": "book-1",
-            "kind": "book",
+            "ℹ": "book-1",
+            "©": "book",
             "author": { "®": "record" }
           }
         ]
@@ -229,22 +262,24 @@ struct BookishCodingTests {
 
   @Test
 
-  func rejectsUntaggedObjectPropertyValues() throws {
+  func untaggedObjectPropertyValuesDecodeAsEncodedValues() throws {
     let json = """
       {
         "records": [
           {
-            "id": "book-1",
-            "kind": "book",
+            "ℹ": "book-1",
+            "©": "book",
             "dimensions": { "width": 12, "height": 20 }
           }
         ]
       }
       """
 
-    #expect(throws: BookishCodingError.untaggedObjectValue) {
-      try BookishInterchangeCodec().decode(Data(json.utf8))
-    }
+    let file = try BookishInterchangeCodec().decode(Data(json.utf8))
+    #expect(
+      file.records.first?.properties["dimensions"]?.encodedValue?.keys.sorted() == [
+        "height", "width",
+      ])
   }
 
   @Test
