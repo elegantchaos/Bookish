@@ -21,6 +21,11 @@ public struct BookishRecordIndex: Equatable, Identifiable, Sendable {
     record.string(BookishRecordKey.name) ?? record.id.rawValue
   }
 
+  /// The SF Symbol identifier shown beside the index name, when configured.
+  public var icon: String? {
+    record.string(BookishRecordKey.icon)
+  }
+
   /// The query used to populate the browser content column, when the stored payload is valid.
   public var query: RecordQuery? {
     record.encoded(BookishRecordKey.query)
@@ -52,6 +57,7 @@ public struct BookishRecordIndex: Equatable, Identifiable, Sendable {
     name: String,
     position: Int,
     query: RecordQuery,
+    icon: String? = nil,
     types: [String] = [],
     debugOnly: Bool = false,
     layoutID: BookishRecordID? = nil
@@ -64,6 +70,9 @@ public struct BookishRecordIndex: Equatable, Identifiable, Sendable {
     ]
     if !types.isEmpty {
       properties[BookishRecordKey.types] = .list(types.map(BookishRecordValue.string))
+    }
+    if let icon {
+      properties[BookishRecordKey.icon] = .string(icon)
     }
     if let layoutID {
       properties[BookishRecordKey.layout] = .record(layoutID)

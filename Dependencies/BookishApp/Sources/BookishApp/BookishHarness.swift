@@ -459,13 +459,13 @@ public final class BookishHarness {
   private func seed(using datastore: BookishDatastore) async throws {
     let seedMarkers = try await datastore.recordService.recordIDs(
       matching: .kind(BookishRecordKind.seedMarker))
-    let isFirstRun = seedMarkers.isEmpty
+    guard seedMarkers.isEmpty else {
+      return
+    }
 
     let seed = try await importConfigurationSeeds(into: datastore)
     try await pruneStaleSeedConfigurationRecords(seed: seed, in: datastore)
-    if isFirstRun {
-      _ = try await importSeedResource("SampleSeed", into: datastore)
-    }
+    _ = try await importSeedResource("SampleSeed", into: datastore)
     try await writeSeedMarker(to: datastore)
   }
 

@@ -41,6 +41,10 @@ public struct BookishValueViewerRegistry {
       if let recordID = field.rawValue?.recordValue, let recordLinkView {
         return recordLinkView(recordID)
       }
+    case "url":
+      if let url = field.rawValue?.urlValue {
+        return AnyView(Link(field.value, destination: url))
+      }
     default:
       break
     }
@@ -54,6 +58,8 @@ public struct BookishValueViewerRegistry {
       "list"
     case .record:
       "record.link"
+    case .encoded where value?.urlValue != nil:
+      "url"
     case .encoded(let encoded, _):
       (try? encoded.decode(BookishPropertyPresentation.self)) == nil ? "text" : "presentation"
     default:

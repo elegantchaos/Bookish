@@ -8,6 +8,9 @@ public enum BookishRecordKey {
   /// A record's display name.
   public static let name = "name"
 
+  /// An SF Symbol identifier used to represent a record in the interface.
+  public static let icon = "icon"
+
   /// Whether a configuration record is intended only for debug browsing.
   public static let debugOnly = "debugOnly"
 

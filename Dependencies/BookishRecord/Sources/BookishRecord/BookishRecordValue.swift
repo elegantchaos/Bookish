@@ -87,6 +87,15 @@ extension BookishRecordValue {
     return try? value.decode(BookishRecordDate.self).date
   }
 
+  /// Returns the contained URL when this value is an encoded URL payload.
+  public var urlValue: URL? {
+    guard case .encoded(let value, kind: BookishRecordURL.kind) = self else {
+      return nil
+    }
+
+    return try? value.decode(BookishRecordURL.self).url
+  }
+
   /// Returns the contained record identifier when this value is `.record`.
   public var recordValue: BookishRecordID? {
     guard case .record(let value) = self else {
@@ -128,6 +137,14 @@ extension BookishRecordValue {
     self = .encoded(
       try BookishEncodedValue(encoding: BookishRecordDate(date: date)),
       kind: BookishRecordDate.kind
+    )
+  }
+
+  /// Creates an encoded URL value.
+  public init(url: URL) throws {
+    self = .encoded(
+      try BookishEncodedValue(encoding: BookishRecordURL(url: url)),
+      kind: BookishRecordURL.kind
     )
   }
 }

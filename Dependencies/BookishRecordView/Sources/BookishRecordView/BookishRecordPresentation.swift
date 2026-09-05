@@ -40,7 +40,7 @@ public struct BookishRecordPresentation: Sendable {
     return BookishRecordHeader(
       title: record.string(titleProperty),
       subtitle: record.string(subtitleProperty),
-      thumbnailURL: record.string(thumbnailProperty).flatMap(URL.init(string:))
+      thumbnailURL: record.url(thumbnailProperty)
     )
   }
 
@@ -205,6 +205,10 @@ extension BookishRecordValue {
   var displayString: String {
     if let date = dateValue {
       return date.formatted(date: .abbreviated, time: .omitted)
+    }
+
+    if let url = urlValue {
+      return url.absoluteString
     }
 
     return switch self {

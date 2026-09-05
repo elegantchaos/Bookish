@@ -6,6 +6,23 @@ import Testing
 
 struct BookishCodingTests {
   @Test
+  func URLValuesRoundTripAsTaggedEncodedValues() throws {
+    let url = try #require(URL(string: "https://example.com/bookish.jpg"))
+    var book = BookishRecord(id: BookishRecordID("book-1"), kind: "book")
+    try book.setURL(url, for: BookishRecordKey.image)
+    let file = BookishInterchangeFile(records: [book])
+
+    let data = try BookishInterchangeCodec().encode(file)
+    let object = try JSONSerialization.jsonObject(with: data) as? [String: Any]
+    let records = try #require(object?["records"] as? [[String: Any]])
+    let encodedURL = try #require(records.first?[BookishRecordKey.image] as? [String: Any])
+
+    #expect(encodedURL["®"] as? String == BookishRecordURL.kind)
+    #expect(encodedURL["url"] as? String == url.absoluteString)
+    #expect(try BookishInterchangeCodec().decode(data) == file)
+  }
+
+  @Test
   func dateValuesRoundTripAsTaggedEncodedValues() throws {
     let date = Date(timeIntervalSince1970: 1_704_067_200)
     var book = BookishRecord(id: BookishRecordID("book-1"), kind: "book")

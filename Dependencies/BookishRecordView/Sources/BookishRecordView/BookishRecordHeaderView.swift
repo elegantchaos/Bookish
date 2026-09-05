@@ -1,3 +1,9 @@
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+//  Created by Sam Deane on 05/09/2026.
+//  Copyright © 2026 Elegant Chaos Limited. All rights reserved.
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+import Foundation
 import SwiftUI
 
 /// Displays the identity fields that introduce a record before its properties.
@@ -45,4 +51,15 @@ public struct BookishRecordHeaderView: View {
       }
     }
   }
+}
+
+#Preview {
+  BookishRecordHeaderView(
+    header: BookishRecordHeader(
+      title: "The Left Hand of Darkness",
+      subtitle: "A novel",
+      thumbnailURL: URL(string: "https://example.com/cover.jpg")
+    )
+  )
+  .padding()
 }

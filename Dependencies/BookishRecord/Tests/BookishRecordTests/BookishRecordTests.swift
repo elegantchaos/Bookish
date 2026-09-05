@@ -5,6 +5,20 @@ import Testing
 
 struct BookishRecordTests {
   @Test
+  func URLPropertiesUseEncodedURLValues() throws {
+    let url = try #require(URL(string: "https://example.com/bookish.jpg"))
+    var record = BookishRecord(kind: "book")
+
+    try record.setURL(url, for: BookishRecordKey.image)
+
+    #expect(record.url(BookishRecordKey.image) == url)
+    #expect(record.properties[BookishRecordKey.image]?.encodedKind == BookishRecordURL.kind)
+    #expect(
+      try record.properties[BookishRecordKey.image]?.encodedValue?.decode(BookishRecordURL.self).url
+        == url)
+  }
+
+  @Test
   func datePropertiesUseEncodedDateValues() throws {
     let date = Date(timeIntervalSince1970: 1_704_067_200)
     var record = BookishRecord(kind: "book")
@@ -36,6 +50,11 @@ struct BookishRecordTests {
     #expect(BookishRecordKind.person == "person")
     #expect(BookishRecordKind.organisation == "organisation")
     #expect(BookishRecordKey.name == "name")
+    #expect(BookishRecordKey.icon == "icon")
+    #expect(BookishRecordKey.image == "image")
+    #expect(BookishRecordKey.titleProperty == "titleProperty")
+    #expect(BookishRecordKey.subtitleProperty == "subtitleProperty")
+    #expect(BookishRecordKey.thumbnailProperty == "thumbnailProperty")
     #expect(BookishRecordKey.authors == "authors")
     #expect(BookishRecordKey.series == "series")
     #expect(BookishRecordKey.seriesPosition == "seriesPosition")

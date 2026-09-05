@@ -9,13 +9,14 @@ struct BookishRecordViewTests {
   @Test
   func presentationUsesDefaultHeaderProperties() throws {
     let imageURL = try #require(URL(string: "https://example.com/bookish.jpg"))
+    let image = try BookishRecordValue(url: imageURL)
     let presentation = BookishRecordPresentation(
       record: BookishRecord(
         kind: BookishRecordKind.book,
         properties: [
           BookishRecordKey.name: .string("Bookish"),
           BookishRecordKey.subtitle: .string("A catalogue"),
-          BookishRecordKey.image: .string("https://example.com/bookish.jpg"),
+          BookishRecordKey.image: image,
         ]
       ),
       layout: nil
@@ -29,13 +30,14 @@ struct BookishRecordViewTests {
   @Test
   func presentationUsesLayoutHeaderPropertyOverrides() throws {
     let imageURL = try #require(URL(string: "https://example.com/bookish.jpg"))
+    let image = try BookishRecordValue(url: imageURL)
     let presentation = BookishRecordPresentation(
       record: BookishRecord(
         kind: BookishRecordKind.book,
         properties: [
           "displayTitle": .string("Bookish"),
           "tagline": .string("A catalogue"),
-          "cover": .string("https://example.com/bookish.jpg"),
+          "cover": image,
         ]
       ),
       layout: BookishRecord(
@@ -224,16 +226,24 @@ struct BookishRecordViewTests {
 
   func viewerRegistryUsesMetadataBeforeNativeDefaults() throws {
     let registry = BookishValueViewerRegistry()
+    let url = try #require(URL(string: "https://example.com/bookish.jpg"))
     let list = BookishRecordField(
       key: "authors", label: "Authors", viewer: "record.linkList", value: "Author",
       rawValue: .list([.record(BookishRecordID("author-1"))]))
     let presentation = BookishRecordField(
       key: "author", label: "Author", value: "person, Author",
       rawValue: .encoded(try BookishEncodedValue(encoding: BookishPropertyPresentation())))
+    let image = BookishRecordField(
+      key: BookishRecordKey.image,
+      label: "Image",
+      value: url.absoluteString,
+      rawValue: try BookishRecordValue(url: url)
+    )
 
     #expect(registry.identifier(for: list, mode: .viewing) == "record.linkList")
     #expect(registry.identifier(for: list, mode: .editing) == "list")
     #expect(registry.identifier(for: presentation, mode: .viewing) == "presentation")
+    #expect(registry.identifier(for: image, mode: .viewing) == "url")
   }
 
   @Test

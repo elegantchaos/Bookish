@@ -47,6 +47,11 @@ public struct BookishRecord: Codable, Equatable, Identifiable, Sendable {
     properties[key]?.dateValue
   }
 
+  /// Reads an encoded URL property by key.
+  public func url(_ key: String) -> URL? {
+    properties[key]?.urlValue
+  }
+
   /// Reads a list property by key.
   public func list(_ key: String) -> [BookishRecordValue]? {
     properties[key]?.listValue
@@ -70,6 +75,16 @@ public struct BookishRecord: Codable, Equatable, Identifiable, Sendable {
     }
 
     properties[key] = try BookishRecordValue(date: value)
+  }
+
+  /// Sets or removes an encoded URL property by key.
+  public mutating func setURL(_ value: URL?, for key: String) throws {
+    guard let value else {
+      properties.removeValue(forKey: key)
+      return
+    }
+
+    properties[key] = try BookishRecordValue(url: value)
   }
 
   /// Reads an encoded Codable payload property by key.

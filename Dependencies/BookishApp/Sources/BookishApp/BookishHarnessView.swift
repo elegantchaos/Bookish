@@ -102,7 +102,7 @@ private struct BrowserIndexListView: View {
   var body: some View {
     List(selection: selectedRecordIndexID) {
       ForEach(navigation.recordIndexes) { recordIndex in
-        Text(recordIndex.name)
+        Label(recordIndex.name, systemImage: recordIndex.icon ?? "list.bullet")
           .tag(Optional(recordIndex.id))
       }
     }
