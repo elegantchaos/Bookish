@@ -1,6 +1,6 @@
-# BookishImporterNu
+# BookishImporter
 
-`BookishImporterNu` is the new importer built on `BookishRecord`.
+`BookishImporter` imports external library data into `BookishRecord` graphs.
 
 The package requires Swift 6.3 and macOS 26.
 

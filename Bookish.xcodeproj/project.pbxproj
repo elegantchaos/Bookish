@@ -305,7 +305,7 @@
 			packageReferences = (
 				4E1A7A922FCF0C5A00100001 /* XCLocalSwiftPackageReference "Dependencies/BookishRecord" */,
 				4E1A7A932FCF0C5A00100002 /* XCLocalSwiftPackageReference "Dependencies/BookishCoding" */,
-				4E1A7A942FCF0C5A00100003 /* XCLocalSwiftPackageReference "Dependencies/BookishImporterNu" */,
+				4E1A7A942FCF0C5A00100003 /* XCLocalSwiftPackageReference "Dependencies/BookishImporter" */,
 				88EDD2347B1344B188980B6D /* XCLocalSwiftPackageReference "Dependencies/BookishDatastore" */,
 				2DCD9BCE906A48F28FFE34BA /* XCLocalSwiftPackageReference "Dependencies/BookishRecordView" */,
 				22018FC12FC9ED4700923AA3 /* XCLocalSwiftPackageReference "Dependencies/BookishApp" */,
@@ -694,9 +694,9 @@
 			isa = XCLocalSwiftPackageReference;
 			relativePath = Dependencies/BookishCoding;
 		};
-		4E1A7A942FCF0C5A00100003 /* XCLocalSwiftPackageReference "Dependencies/BookishImporterNu" */ = {
+		4E1A7A942FCF0C5A00100003 /* XCLocalSwiftPackageReference "Dependencies/BookishImporter" */ = {
 			isa = XCLocalSwiftPackageReference;
-			relativePath = Dependencies/BookishImporterNu;
+			relativePath = Dependencies/BookishImporter;
 		};
 		88EDD2347B1344B188980B6D /* XCLocalSwiftPackageReference "Dependencies/BookishDatastore" */ = {
 			isa = XCLocalSwiftPackageReference;
@@ -745,12 +745,12 @@
 		};
 		22BAA65730471E9B00030C8D /* BookishImporter */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 4E1A7A942FCF0C5A00100003 /* XCLocalSwiftPackageReference "Dependencies/BookishImporterNu" */;
+			package = 4E1A7A942FCF0C5A00100003 /* XCLocalSwiftPackageReference "Dependencies/BookishImporter" */;
 			productName = BookishImporter;
 		};
 		22BAA65930471E9B00030C8D /* BookishImporterSamples */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 4E1A7A942FCF0C5A00100003 /* XCLocalSwiftPackageReference "Dependencies/BookishImporterNu" */;
+			package = 4E1A7A942FCF0C5A00100003 /* XCLocalSwiftPackageReference "Dependencies/BookishImporter" */;
 			productName = BookishImporterSamples;
 		};
 		22BAA65B30471E9B00030C8D /* BookishDatastore */ = {

@@ -12,7 +12,7 @@ We will need the following targets:
 - BookishDatastore: the datastore proof-of-concept package
 - BookishRecordView: the SwiftUI record presentation proof-of-concept package
 - BookishCoding: JSON interchange coding for `BookishRecord`
-- BookishImporterNu: the new importer prototype that emits normalised `BookishRecord` graphs
+- BookishImporter: the importer package that emits normalised `BookishRecord` graphs
 
 The prototype should implement the following minimal functionality:
 
@@ -42,7 +42,7 @@ The prototype now uses `BookishRecord` as the shared materialised record type ac
 - `BookishRecordView` imports `BookishRecord` directly for record presentation, and imports `BookishDatastore` only for mutation presentation.
 - `DatastorePrototypeApp` uses `BookishRecord` values in its observable harness and selection model.
 - `BookishCoding` provides the storage-neutral JSON interchange codec for `BookishRecord` graphs.
-- `BookishImporterNu` returns provider-neutral import results containing `BookishRecord` graphs.
+- `BookishImporter` returns provider-neutral import results containing `BookishRecord` graphs.
 
 The legacy `BookishCore`, legacy `BookishImporter`, and main `BookishApp` import path remain unchanged during this migration.
 
@@ -179,7 +179,7 @@ The default interchange schema uses:
 
 Record decoding reads `id` and `kind`, then treats every remaining key as a property. Canonical record links encode as `{ "®": "record", "id": "record-id" }`. Compact JSON decoding accepts primitive JSON values where unambiguous and strict `@record-id` shorthand for links. Compact link encoding is opt-in and remains a JSON-only codec convenience.
 
-`BookishImporterNu` imports Delicious Library XML into a normalised graph rather than a flat book-only output. It emits book, person, organisation, series, and root list records with deterministic IDs. Books link directly to their contributors, publishers, and series.
+`BookishImporter` imports Delicious Library XML into a normalised graph rather than a flat book-only output. It emits book, person, organisation, series, and root list records with deterministic IDs. Books link directly to their contributors, publishers, and series.
 
 For diagnostics and recovery, mutation history may also be useful, but that should be a separate diagnostic/archive format rather than the default user-facing interchange format.
 
@@ -191,7 +191,7 @@ Retain these Proposal 1 test ideas:
 - property value encoding and decoding;
 - primitive, structured, blob reference, link, list, deletion, and conflict values;
 - JSON interchange canonical and compact encoding/decoding through `BookishCoding`;
-- Delicious import graph normalisation and interchange round trips through `BookishImporterNu`;
+- Delicious import graph normalisation and interchange round trips through `BookishImporter`;
 - mutation operations for set, delete, insert, remove, move, tombstone, and restore;
 - dependency processing with out-of-order remote mutations;
 - conflict detection and resolution;

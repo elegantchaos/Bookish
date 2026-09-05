@@ -3,9 +3,9 @@
 import PackageDescription
 
 let package = Package(
-  name: "BookishImporterNu",
+  name: "BookishImporter",
   platforms: [
-    .macOS(.v26), .iOS(.v26)
+    .macOS(.v26), .iOS(.v26),
   ],
   products: [
     .library(
@@ -20,7 +20,7 @@ let package = Package(
   dependencies: [
     .package(path: "../BookishRecord"),
     .package(path: "../BookishCoding"),
-    .package(path: "../BookishCleanupNu"),
+    .package(path: "../BookishCleanup"),
   ],
   targets: [
     .target(
@@ -28,7 +28,7 @@ let package = Package(
       dependencies: [
         .product(name: "BookishRecord", package: "BookishRecord"),
         .product(name: "BookishCoding", package: "BookishCoding"),
-        .product(name: "BookishCleanup", package: "BookishCleanupNu"),
+        .product(name: "BookishCleanup", package: "BookishCleanup"),
       ]
     ),
     .target(
@@ -36,7 +36,7 @@ let package = Package(
       resources: [.process("Resources")]
     ),
     .testTarget(
-      name: "BookishImporterNuTests",
+      name: "BookishImporterTests",
       dependencies: [
         "BookishImporter",
         "BookishImporterSamples",
