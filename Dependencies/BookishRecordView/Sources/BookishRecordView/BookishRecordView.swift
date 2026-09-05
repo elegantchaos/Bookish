@@ -41,6 +41,12 @@ public struct BookishRecordView: View {
   /// The SwiftUI content for the record detail view.
   public var body: some View {
     Form {
+      if !presentation.header.isEmpty {
+        Section {
+          BookishRecordHeaderView(header: presentation.header)
+        }
+      }
+
       Section {
         ForEach(presentation.fields(for: mode)) { field in
           LabeledContent {
@@ -53,12 +59,10 @@ public struct BookishRecordView: View {
             }
           }
         }
-      } header: {
-        Text(presentation.layoutName)
       }
     }
     .formStyle(.grouped)
-    .navigationTitle(presentation.name)
+    .navigationTitle(presentation.header.title ?? "")
   }
 }
 

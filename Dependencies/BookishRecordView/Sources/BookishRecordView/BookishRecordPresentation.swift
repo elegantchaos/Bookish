@@ -28,6 +28,22 @@ public struct BookishRecordPresentation: Sendable {
     firstDisplayValue(for: [BookishRecordKey.name]) ?? record.kind
   }
 
+  /// The title, subtitle, and thumbnail configured by the active layout.
+  public var header: BookishRecordHeader {
+    let titleProperty = headerProperty(
+      BookishRecordKey.titleProperty, default: BookishRecordKey.name)
+    let subtitleProperty = headerProperty(
+      BookishRecordKey.subtitleProperty, default: BookishRecordKey.subtitle)
+    let thumbnailProperty = headerProperty(
+      BookishRecordKey.thumbnailProperty, default: BookishRecordKey.image)
+
+    return BookishRecordHeader(
+      title: record.string(titleProperty),
+      subtitle: record.string(subtitleProperty),
+      thumbnailURL: record.string(thumbnailProperty).flatMap(URL.init(string:))
+    )
+  }
+
   /// The fields visible under the active layout while viewing a record.
   public var fields: [BookishRecordField] {
     fields(for: .viewing)
@@ -108,6 +124,10 @@ public struct BookishRecordPresentation: Sendable {
 
   private func propertyPresentation(for key: String) -> BookishPropertyPresentation? {
     presentationResolver.presentation(for: key)
+  }
+
+  private func headerProperty(_ overrideKey: String, default defaultKey: String) -> String {
+    layout?.string(overrideKey) ?? defaultKey
   }
 
   private func displayValue(for key: String) -> String {

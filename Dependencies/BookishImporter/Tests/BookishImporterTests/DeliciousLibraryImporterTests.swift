@@ -24,6 +24,7 @@ struct DeliciousLibraryImporterTests {
     #expect(snowCrash.integer("pages") == 448)
     #expect(snowCrash.string("source") == DeliciousLibraryImporter.sourceID)
     #expect(snowCrash.list("imageURLs")?.count == 3)
+    #expect(snowCrash.string(BookishRecordKey.image) == snowCrash.strings(BookishRecordKey.imageURLs)?.first)
 
     let originalData = try #require(snowCrash.string(BookishRecordKey.originalData))
     let originalRecord = try #require(

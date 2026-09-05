@@ -41,6 +41,9 @@ public enum BookishRecordKey {
   /// A book's subtitle.
   public static let subtitle = "subtitle"
 
+  /// A URL for the primary image representing a record.
+  public static let image = "image"
+
   /// An Amazon Standard Identification Number.
   public static let asin = "asin"
 
@@ -94,6 +97,15 @@ public enum BookishRecordKey {
 
   /// An ordered list of keys displayed by a layout record.
   public static let fields = "fields"
+
+  /// An optional layout override for the property used as a record header title.
+  public static let titleProperty = "titleProperty"
+
+  /// An optional layout override for the property used as a record header subtitle.
+  public static let subtitleProperty = "subtitleProperty"
+
+  /// An optional layout override for the property used as a record header thumbnail URL.
+  public static let thumbnailProperty = "thumbnailProperty"
 
   /// A list of fields suppressed by a layout, including fields expanded by `allOtherFields`.
   public static let excludedFields = "excludedFields"

@@ -7,6 +7,65 @@ import Testing
 
 struct BookishRecordViewTests {
   @Test
+  func presentationUsesDefaultHeaderProperties() throws {
+    let imageURL = try #require(URL(string: "https://example.com/bookish.jpg"))
+    let presentation = BookishRecordPresentation(
+      record: BookishRecord(
+        kind: BookishRecordKind.book,
+        properties: [
+          BookishRecordKey.name: .string("Bookish"),
+          BookishRecordKey.subtitle: .string("A catalogue"),
+          BookishRecordKey.image: .string("https://example.com/bookish.jpg"),
+        ]
+      ),
+      layout: nil
+    )
+
+    #expect(presentation.header.title == "Bookish")
+    #expect(presentation.header.subtitle == "A catalogue")
+    #expect(presentation.header.thumbnailURL == imageURL)
+  }
+
+  @Test
+  func presentationUsesLayoutHeaderPropertyOverrides() throws {
+    let imageURL = try #require(URL(string: "https://example.com/bookish.jpg"))
+    let presentation = BookishRecordPresentation(
+      record: BookishRecord(
+        kind: BookishRecordKind.book,
+        properties: [
+          "displayTitle": .string("Bookish"),
+          "tagline": .string("A catalogue"),
+          "cover": .string("https://example.com/bookish.jpg"),
+        ]
+      ),
+      layout: BookishRecord(
+        kind: BookishRecordKind.layout,
+        properties: [
+          BookishRecordKey.titleProperty: .string("displayTitle"),
+          BookishRecordKey.subtitleProperty: .string("tagline"),
+          BookishRecordKey.thumbnailProperty: .string("cover"),
+        ]
+      )
+    )
+
+    #expect(presentation.header.title == "Bookish")
+    #expect(presentation.header.subtitle == "A catalogue")
+    #expect(presentation.header.thumbnailURL == imageURL)
+  }
+
+  @Test
+  func presentationHeaderDoesNotFallBackToTheRecordKind() {
+    let presentation = BookishRecordPresentation(
+      record: BookishRecord(kind: BookishRecordKind.book),
+      layout: nil
+    )
+
+    #expect(presentation.header.title == nil)
+    #expect(presentation.header.subtitle == nil)
+    #expect(presentation.header.thumbnailURL == nil)
+  }
+
+  @Test
   func presentationUsesLayoutFields() {
     let presentation = BookishRecordPresentation(
       record: BookishRecord(

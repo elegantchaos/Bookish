@@ -237,7 +237,9 @@ private struct DeliciousBook {
       raw.stringList("editionsCompositeString"), forKey: BookishRecordKey.editions)
     properties.addStringList(
       raw.stringList("genresCompositeString"), forKey: BookishRecordKey.genres)
-    properties.addStringList(raw.imageURLs, forKey: BookishRecordKey.imageURLs)
+    let imageURLs = raw.imageURLs
+    properties.addString(imageURLs.first, forKey: BookishRecordKey.image)
+    properties.addStringList(imageURLs, forKey: BookishRecordKey.imageURLs)
 
     self.properties = properties
   }
