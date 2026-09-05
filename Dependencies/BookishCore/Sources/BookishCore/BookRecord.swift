@@ -9,7 +9,7 @@ import Foundation
 /// A dictionary-based book record.
 /// The record is guaranteed to have three properties:
 /// - id: a unique identifier
-/// - name: the display name of the book
+/// - title: the title of the book
 /// - source: the origin of the record; this might be an importer, a lookup service, or a manual input by a user
 ///
 /// All other properties are manual and stored in a dictionary.
@@ -20,13 +20,13 @@ public struct BookRecord: Identifiable {
     public var source: String
     public var properties: [String:Any]
     
-    /// To be a valid record, the dictionary must at a minimum contain the id and name fields.
+    /// To be a valid record, the dictionary must at a minimum contain the id and title fields.
     /// If an explicit source is supplied, it takes precendence, otherwise if the record contains one we use that,
     /// otherwise we fall back on the default source.
     ///
     public init?(_ dictionary: [String:Any], id explicitID: String? = nil, source: String? = nil) {
         var properties = dictionary
-        guard let id = explicitID ?? properties.extractString(forKey: .id), let title = properties.extractString(forKey: .name) else { return nil }
+        guard let id = explicitID ?? properties.extractString(forKey: .id), let title = properties.extractString(forKey: .title) else { return nil }
         self.id = id
         self.title = title
         self.source = source ?? properties.extractString(forKey: .source) ?? Self.defaultSource

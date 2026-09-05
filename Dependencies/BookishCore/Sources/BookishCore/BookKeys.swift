@@ -24,7 +24,6 @@ public enum BookKey: String, CaseIterable {
     case linkRoles
     case length
     case modifiedDate
-    case name
     case notes
     case pages
     case publishedDate
@@ -34,5 +33,6 @@ public enum BookKey: String, CaseIterable {
     case source
     case sourceRaw
     case subtitle
+    case title
     case width
 }
