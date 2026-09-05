@@ -107,6 +107,9 @@ struct BookishAppTests {
         presentation.encoded(key, as: BookishPropertyPresentation.self)?.label == label)
       #expect(presentation.encoded(key, as: BookishPropertyPresentation.self)?.icon != nil)
     }
+    #expect(
+      presentation.encoded(BookishRecordKey.length, as: BookishPropertyPresentation.self)?.icon
+        == "ruler")
   }
 
   @MainActor
