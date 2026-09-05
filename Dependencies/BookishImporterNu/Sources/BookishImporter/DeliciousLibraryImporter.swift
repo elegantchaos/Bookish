@@ -217,6 +217,7 @@ private struct DeliciousBook {
       BookishRecordKey.name: .string(title),
       BookishRecordKey.importedID: .string(id),
       BookishRecordKey.source: .string(sourceID),
+      BookishRecordKey.originalData: .string(try raw.jsonString()),
     ]
 
     properties.addString(raw.string("formatSingularString"), forKey: BookishRecordKey.format)
@@ -249,37 +250,24 @@ private struct DeliciousBook {
     seriesPosition: Int? = nil
   ) {
     if self.title != title {
-      properties["original.name"] = .string(self.title)
       self.title = title
       properties[BookishRecordKey.name] = .string(title)
     }
 
     if self.subtitle != subtitle {
-      if !self.subtitle.isEmpty {
-        properties["original.subtitle"] = .string(self.subtitle)
-      }
       self.subtitle = subtitle
-      properties.addString(subtitle, forKey: "subtitle")
+      properties.addString(subtitle, forKey: BookishRecordKey.subtitle)
     }
 
     if let publishers, self.publishers != publishers {
-      if !self.publishers.isEmpty {
-        properties["original.publishers"] = .list(self.publishers.map { .string($0) })
-      }
       self.publishers = publishers
     }
 
     if let series, self.series != series {
-      if !self.series.isEmpty {
-        properties["original.series"] = .string(self.series)
-      }
       self.series = series
     }
 
     if let seriesPosition, self.seriesPosition != seriesPosition {
-      if let existing = self.seriesPosition {
-        properties["original.seriesPosition"] = .integer(existing)
-      }
       self.seriesPosition = seriesPosition
       properties[BookishRecordKey.seriesPosition] = .integer(seriesPosition)
     }
@@ -432,7 +420,50 @@ extension Dictionary where Key == String, Value == Any {
   }
 
   fileprivate func date(_ key: String) -> Date? {
-    self[key] as? Date
+    switch self[key] {
+    case let date as Date:
+      date
+    case let string as String:
+      try? Date(string, strategy: .iso8601)
+    default:
+      nil
+    }
+  }
+
+  /// Returns a deterministic JSON representation that preserves the source dictionary's values.
+  fileprivate func jsonString() throws -> String {
+    let data = try JSONSerialization.data(withJSONObject: jsonValue, options: [.sortedKeys])
+    return String(decoding: data, as: UTF8.self)
+  }
+
+  /// Converts property-list dates into their JSON-compatible ISO 8601 representation.
+  private var jsonValue: [String: Any] {
+    mapValues { value in
+      switch value {
+      case let date as Date:
+        date.ISO8601Format()
+      case let values as [Any]:
+        values.map(Self.jsonValue)
+      case let values as [String: Any]:
+        values.mapValues(Self.jsonValue)
+      default:
+        value
+      }
+    }
+  }
+
+  /// Converts property-list values recursively into JSON-compatible values.
+  private static func jsonValue(_ value: Any) -> Any {
+    switch value {
+    case let date as Date:
+      date.ISO8601Format()
+    case let values as [Any]:
+      values.map(jsonValue)
+    case let values as [String: Any]:
+      values.mapValues(jsonValue)
+    default:
+      value
+    }
   }
 }
 

@@ -8,4 +8,19 @@ import Testing
 @testable import BookishCore
 
 struct BookRecordTests {
+  @Test
+  func readsNameAsTheBookTitle() throws {
+    let record = try #require(
+      BookRecord(
+        [
+          "id": "book-1",
+          "name": "Snow Crash",
+        ]
+      )
+    )
+
+    #expect(record.title == "Snow Crash")
+    #expect(BookKey.name.rawValue == "name")
+    #expect(BookKey.allCases.map(\.rawValue).contains("title") == false)
+  }
 }

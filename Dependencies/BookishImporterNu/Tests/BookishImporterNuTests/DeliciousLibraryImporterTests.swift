@@ -25,6 +25,18 @@ struct DeliciousLibraryImporterTests {
     #expect(snowCrash.string("source") == DeliciousLibraryImporter.sourceID)
     #expect(snowCrash.list("imageURLs")?.count == 3)
 
+    let originalData = try #require(snowCrash.string(BookishRecordKey.originalData))
+    let originalRecord = try #require(
+      JSONSerialization.jsonObject(with: Data(originalData.utf8)) as? [String: Any]
+    )
+    #expect(originalRecord["title"] as? String == "Snow Crash")
+    #expect(originalRecord["creationDate"] as? String == "2004-11-29T13:09:36Z")
+    #expect(snowCrash.properties.keys.contains("original.name") == false)
+    #expect(snowCrash.properties.keys.contains("original.subtitle") == false)
+    #expect(snowCrash.properties.keys.contains("original.publishers") == false)
+    #expect(snowCrash.properties.keys.contains("original.series") == false)
+    #expect(snowCrash.properties.keys.contains("original.seriesPosition") == false)
+
     let authorID = try #require(snowCrash.list("authors")?.first?.recordValue)
     let author = try #require(recordsByID[authorID])
     #expect(author.kind == "person")

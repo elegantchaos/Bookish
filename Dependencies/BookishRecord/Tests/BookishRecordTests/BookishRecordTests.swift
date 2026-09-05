@@ -40,6 +40,10 @@ struct BookishRecordTests {
     #expect(BookishRecordKey.series == "series")
     #expect(BookishRecordKey.seriesPosition == "seriesPosition")
     #expect(BookishRecordKey.isbn == "isbn")
+    #expect(BookishRecordKey.addedDate == "added")
+    #expect(BookishRecordKey.modifiedDate == "modified")
+    #expect(BookishRecordKey.publishedDate == "published")
+    #expect(BookishRecordKey.originalData == "originalData")
     #expect(BookishRecordKey.types == "types")
     #expect(BookishRecordKey.allTypes == "*")
   }

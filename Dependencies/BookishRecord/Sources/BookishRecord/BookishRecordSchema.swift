@@ -99,13 +99,16 @@ public enum BookishRecordKey {
   public static let length = "length"
 
   /// The date on which a record was added to its source catalogue.
-  public static let addedDate = "addedDate"
+  public static let addedDate = "added"
 
   /// The date on which a record was last changed in its source catalogue.
-  public static let modifiedDate = "modifiedDate"
+  public static let modifiedDate = "modified"
 
   /// A book's publication date.
-  public static let publishedDate = "publishedDate"
+  public static let publishedDate = "published"
+
+  /// The JSON representation of the unmodified source record used to create this record.
+  public static let originalData = "originalData"
 
   /// A list of edition descriptions.
   public static let editions = "editions"
