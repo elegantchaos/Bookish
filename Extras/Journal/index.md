@@ -1,5 +1,6 @@
 # Journal Index
 
+- [2026-09-05 Record Detail and Window Layout](2026-09-05-record-detail-status-bar-layout.md)
 - [2026-09-05 Layout Field Visibility](2026-09-05-layout-field-visibility.md)
 - [2026-09-05 Importer Package Rename](2026-09-05-importer-package-rename.md)
 - [2026-09-05 Value Viewer Registry](2026-09-05-value-viewer-registry.md)

@@ -12,9 +12,10 @@ struct BookishApplication: App {
   }
 
   var body: some Scene {
-    WindowGroup {
+    WindowGroup(id: BookishWindow.main.rawValue) {
       engine.rootContent()
     }
+    .restorationBehavior(.automatic)
     .commands {
       BookishCommands(harness: engine.harness, navigation: engine.navigation)
     }

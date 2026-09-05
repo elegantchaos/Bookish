@@ -21,17 +21,18 @@ public struct BookishHarnessView: View {
 
   /// The SwiftUI content for the datastore app.
   public var body: some View {
-    NavigationSplitView {
-      BrowserIndexListView(harness: harness, navigation: navigation)
-    } content: {
-      RecordIndexView(harness: harness, navigation: navigation)
-    } detail: {
-      RecordDetailView(harness: harness, navigation: navigation)
-    }
-    .toolbar {
-      BookishToolbar(harness: harness)
-    }
-    .safeAreaInset(edge: .bottom) {
+    VStack(spacing: 0) {
+      NavigationSplitView {
+        BrowserIndexListView(harness: harness, navigation: navigation)
+      } content: {
+        RecordIndexView(harness: harness, navigation: navigation)
+      } detail: {
+        RecordDetailView(harness: harness, navigation: navigation)
+      }
+      .toolbar {
+        BookishToolbar(harness: harness)
+      }
+
       BookishStatusBar(harness: harness)
     }
     .fileImporter(
@@ -347,6 +348,7 @@ private struct BookishStatusBar: View {
     .font(.caption)
     .foregroundStyle(.secondary)
     .padding()
+    .frame(maxWidth: .infinity)
     .background(.bar)
   }
 
