@@ -1,5 +1,6 @@
 # Journal Index
 
+- [2026-09-05 BookishCore Legacy Relocation](2026-09-05-bookish-core-legacy-relocation.md)
 - [2026-09-05 Delicious Original Data Preservation](2026-09-05-delicious-original-data.md)
 - [2026-09-04 Configuration Record Provenance](2026-09-04-configuration-record-provenance.md)
 - [2026-09-04 Record Store Recovery](2026-09-04-record-store-recovery.md)

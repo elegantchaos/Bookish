@@ -16,8 +16,10 @@ recommend copying the older implementation technologies.
   project. This should stay separate from the legacy archive.
 - `Extras/Legacy/BookishTemp/`: an older model package with books, people,
   roles, publishers, series, and detail-field specifications.
-- `Extras/Legacy/BookishCore/` and `Extras/Legacy/BookishCoreClient/`: early
-  SwiftPM scaffolds with little product-specific behavior.
+- `Extras/Legacy/BookishCore/`: an unused legacy interchange package, retained
+  for reference only and not part of the current app.
+- `Extras/Legacy/BookishCoreClient/`: an early SwiftPM scaffold with little
+  product-specific behavior.
 
 ## Features To Adopt
 
