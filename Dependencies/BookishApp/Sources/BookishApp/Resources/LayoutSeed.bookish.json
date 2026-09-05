@@ -3,7 +3,7 @@
   "schema": { "defaultKind": "layout" },
   "records": [
     { "ℹ": "datastore-all-fields-layout", "name": "All Fields", "types": ["*"], "fields": ["*"] },
-    { "ℹ": "datastore-book-layout", "name": "Book", "types": ["book"], "fields": ["name", "subtitle", "authors", "illustrators", "series", "seriesPosition", "publishers", "published", "format", "pages", "isbn", "asin", "dewey", "genres", "editions", "status", "note", "source", "importedID", "*"], "excludedFields": ["originalData"] },
+    { "ℹ": "datastore-book-layout", "name": "Book", "types": ["book"], "fields": ["name", "subtitle", "authors", "illustrators", "series", "seriesPosition", "publishers", "published", "format", "pages", "isbn", "asin", "dewey", "genres", "editions", "status", "note", "source", "*"], "excludedFields": ["importedID", "originalData"] },
     { "ℹ": "datastore-person-layout", "name": "Person", "types": ["person"], "fields": ["name", "source", "*"] },
     { "ℹ": "datastore-organisation-layout", "name": "Organisation", "types": ["organisation"], "fields": ["name", "source", "*"] },
     { "ℹ": "datastore-series-layout", "name": "Series", "types": ["series"], "fields": ["name", "source", "*"] },
