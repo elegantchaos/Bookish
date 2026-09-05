@@ -148,7 +148,9 @@ struct BookishAppTests {
     let layoutIDs = Set(harness.layoutIDs)
     let allFields = try await harness.record(id: BookishRecordID("datastore-all-fields-layout"))
     let book = try await harness.record(id: BookishRecordID("datastore-book-layout"))
+    let layout = try await harness.record(id: BookishRecordID("datastore-layout-layout"))
     let index = try await harness.record(id: BookishRecordID("datastore-index-layout"))
+    let seedMarker = try await harness.record(id: BookishRecordID("datastore-seed-marker"))
 
     #expect(layoutIDs.contains(BookishRecordID("datastore-record-layout")))
     #expect(layoutIDs.contains(BookishRecordID("datastore-book-layout")))
@@ -165,9 +167,14 @@ struct BookishAppTests {
     #expect(book?.string(BookishRecordKey.name) == "Book")
     #expect(book?.strings(BookishRecordKey.types) == [BookishRecordKind.book])
     #expect(book?.list(BookishRecordKey.fields)?.contains(.string(BookishRecordKey.isbn)) == true)
+    #expect(
+      layout?.list(BookishRecordKey.fields)?.contains(.string(BookishRecordKey.source)) == false)
     #expect(index?.strings(BookishRecordKey.types) == [BookishRecordKind.index])
     #expect(
       index?.list(BookishRecordKey.fields)?.contains(.string(BookishRecordKey.debugOnly)) == true)
+    #expect(
+      index?.list(BookishRecordKey.fields)?.contains(.string(BookishRecordKey.source)) == false)
+    #expect(seedMarker?.string(BookishRecordKey.source) == nil)
   }
 
   @MainActor
@@ -231,7 +238,10 @@ struct BookishAppTests {
     let datastore = try await BookishDatastore(directoryURL: directory)
     try await datastore.recordStore.upsert(
       BookishRecord(
-        id: BookishRecordID("datastore-seed-marker"), kind: BookishRecordKind.seedMarker)
+        id: BookishRecordID("datastore-seed-marker"),
+        kind: BookishRecordKind.seedMarker,
+        properties: [BookishRecordKey.source: .string("com.elegantchaos.bookish.seed")]
+      )
     )
     let harness = BookishHarness(directoryURL: directory)
 
@@ -241,10 +251,12 @@ struct BookishAppTests {
       id: BookishRecordID("datastore-index-all-records"))
     let bookLayout = try await harness.record(id: BookishRecordID("datastore-book-layout"))
     let sampleBook = try await harness.record(id: BookishRecordID("datastore-book"))
+    let seedMarker = try await harness.record(id: BookishRecordID("datastore-seed-marker"))
 
     #expect(allRecordsIndex?.kind == BookishRecordKind.index)
     #expect(bookLayout?.kind == BookishRecordKind.layout)
     #expect(sampleBook == nil)
+    #expect(seedMarker?.string(BookishRecordKey.source) == nil)
   }
 
   @MainActor
@@ -262,8 +274,7 @@ struct BookishAppTests {
         id: BookishRecordID("datastore-index-records"),
         name: "Records",
         position: 1,
-        query: RecordQuery(predicate: .kind(BookishRecordKind.record)),
-        sourceID: "com.elegantchaos.bookish.seed"
+        query: RecordQuery(predicate: .kind(BookishRecordKind.record))
       ))
     try await datastore.recordStore.upsert(
       BookishRecord(
@@ -732,8 +743,7 @@ struct BookishAppTests {
       id: BookishRecordID(id),
       name: name,
       position: 0,
-      query: RecordQuery(predicate: predicate),
-      sourceID: "test"
+      query: RecordQuery(predicate: predicate)
     )
   }
 }

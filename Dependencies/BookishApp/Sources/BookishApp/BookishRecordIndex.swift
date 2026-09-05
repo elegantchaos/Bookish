@@ -54,15 +54,13 @@ public struct BookishRecordIndex: Equatable, Identifiable, Sendable {
     query: RecordQuery,
     types: [String] = [],
     debugOnly: Bool = false,
-    layoutID: BookishRecordID? = nil,
-    sourceID: String
+    layoutID: BookishRecordID? = nil
   ) throws -> BookishRecord {
     var properties: [String: BookishRecordValue] = [
       BookishRecordKey.name: .string(name),
       BookishRecordKey.debugOnly: .bool(debugOnly),
       BookishRecordKey.position: .integer(position),
       BookishRecordKey.query: .encoded(try BookishEncodedValue(encoding: query)),
-      BookishRecordKey.source: .string(sourceID),
     ]
     if !types.isEmpty {
       properties[BookishRecordKey.types] = .list(types.map(BookishRecordValue.string))

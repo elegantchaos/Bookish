@@ -51,7 +51,6 @@ public final class BookishHarness {
   private let fallbackLayoutID = BookishRecordID("datastore-all-fields-layout")
   private let fallbackPresentationID = BookishRecordID("presentation.type.*")
   private let seedMarkerID = BookishRecordID("datastore-seed-marker")
-  private let seedSourceID = "com.elegantchaos.bookish.seed"
   private let directoryURL: URL?
   private var datastore: BookishDatastore?
   private var layouts: [BookishRecord] = []
@@ -452,8 +451,8 @@ public final class BookishHarness {
     try await pruneStaleSeedConfigurationRecords(seed: seed, in: datastore)
     if isFirstRun {
       _ = try await importSeedResource("SampleSeed", into: datastore)
-      try await writeSeedMarker(to: datastore)
     }
+    try await writeSeedMarker(to: datastore)
   }
 
   private func datastoreDirectory() throws -> URL {
@@ -600,8 +599,7 @@ public final class BookishHarness {
         id: seedMarkerID,
         kind: BookishRecordKind.seedMarker,
         properties: [
-          BookishRecordKey.name: .string("Seed Marker"),
-          BookishRecordKey.source: .string(seedSourceID),
+          BookishRecordKey.name: .string("Seed Marker")
         ]
       )
     )

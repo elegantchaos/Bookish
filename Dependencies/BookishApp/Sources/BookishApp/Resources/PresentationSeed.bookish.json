@@ -412,7 +412,6 @@
         "name",
         "types",
         "fields",
-        "source",
         "*"
       ],
       "types": [
@@ -429,7 +428,6 @@
         "layout",
         "types",
         "query",
-        "source",
         "*"
       ],
       "types": [
@@ -441,7 +439,6 @@
       "ℹ": "datastore-seed-marker-layout",
       "fields": [
         "name",
-        "source",
         "*"
       ],
       "types": [
