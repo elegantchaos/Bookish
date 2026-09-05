@@ -28,10 +28,28 @@ public struct CascadingPresentationResolver: PresentationResolver, Equatable {
     }
   }
 
-  /// Returns the first presentation metadata matching a property key.
+  /// Returns metadata merged from generic through the most-specific matching presentation.
   public func presentation(for key: String) -> BookishPropertyPresentation? {
-    presentationRecords.lazy.compactMap {
+    let presentations = presentationRecords.compactMap {
       $0.encoded(key, as: BookishPropertyPresentation.self)
-    }.first
+    }
+    guard presentations.isEmpty == false else {
+      return nil
+    }
+
+    return presentations.reversed().reduce(into: BookishPropertyPresentation()) { result, next in
+      if let icon = next.icon {
+        result.icon = icon
+      }
+      if let label = next.label {
+        result.label = label
+      }
+      if let viewer = next.viewer {
+        result.viewer = viewer
+      }
+      if let editor = next.editor {
+        result.editor = editor
+      }
+    }
   }
 }

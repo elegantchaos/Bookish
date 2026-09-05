@@ -31,10 +31,13 @@ public struct BookishRecordPresentation: Sendable {
   /// The fields visible under the active layout.
   public var fields: [BookishRecordField] {
     fieldKeys.map { key in
-      BookishRecordField(
+      let propertyPresentation = propertyPresentation(for: key)
+      return BookishRecordField(
         key: key,
         label: label(for: key),
-        icon: propertyPresentation(for: key)?.icon,
+        icon: propertyPresentation?.icon,
+        viewer: propertyPresentation?.viewer,
+        editor: propertyPresentation?.editor,
         value: displayValue(for: key),
         rawValue: record.properties[key]
       )
@@ -120,6 +123,12 @@ public struct BookishRecordField: Equatable, Identifiable, Sendable {
   /// The SF Symbol used to represent the property, when available.
   public let icon: String?
 
+  /// The stable identifier of the preferred value viewer, when configured.
+  public let viewer: String?
+
+  /// The stable identifier of the preferred value editor, when configured.
+  public let editor: String?
+
   /// The formatted property value.
   public let value: String
 
@@ -131,12 +140,16 @@ public struct BookishRecordField: Equatable, Identifiable, Sendable {
     key: String,
     label: String,
     icon: String? = nil,
+    viewer: String? = nil,
+    editor: String? = nil,
     value: String,
     rawValue: BookishRecordValue? = nil
   ) {
     self.key = key
     self.label = label
     self.icon = icon
+    self.viewer = viewer
+    self.editor = editor
     self.value = value
     self.rawValue = rawValue
   }

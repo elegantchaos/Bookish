@@ -66,10 +66,13 @@ struct BookishRecordViewTests {
             properties: [
               "author": .encoded(
                 try BookishEncodedValue(
-                  encoding: BookishPropertyPresentation(icon: "person", label: "Author"))),
+                  encoding: BookishPropertyPresentation(
+                    icon: "person", label: "Author", viewer: "record.link"))),
               "status": .encoded(
                 try BookishEncodedValue(
-                  encoding: BookishPropertyPresentation(icon: "bookmark", label: "Kind Status"))),
+                  encoding: BookishPropertyPresentation(
+                    icon: "bookmark", label: "Kind Status", viewer: "status",
+                    editor: "status.picker"))),
             ]
           ),
           BookishRecord(
@@ -79,7 +82,7 @@ struct BookishRecordViewTests {
               "author": .encoded(
                 try BookishEncodedValue(
                   encoding: BookishPropertyPresentation(
-                    icon: "person.fill", label: "Generic Author"))
+                    icon: "person.fill", label: "Generic Author", editor: "text"))
               ),
               "status": .encoded(
                 try BookishEncodedValue(
@@ -93,7 +96,7 @@ struct BookishRecordViewTests {
             properties: [
               "status": .encoded(
                 try BookishEncodedValue(
-                  encoding: BookishPropertyPresentation(icon: "rectangle", label: "Layout Status")))
+                  encoding: BookishPropertyPresentation(label: "Layout Status")))
             ]
           ),
         ],
@@ -102,6 +105,24 @@ struct BookishRecordViewTests {
 
     #expect(presentation.fields.map(\.label) == ["Author", "Layout Status"])
     #expect(presentation.fields.map(\.icon) == ["person", "rectangle"])
+    #expect(presentation.fields.map(\.viewer) == ["record.link", "status"])
+    #expect(presentation.fields.map(\.editor) == ["text", "status.picker"])
+  }
+
+  @Test
+
+  func viewerRegistryUsesMetadataBeforeNativeDefaults() throws {
+    let registry = BookishValueViewerRegistry()
+    let list = BookishRecordField(
+      key: "authors", label: "Authors", viewer: "record.linkList", value: "Author",
+      rawValue: .list([.record(BookishRecordID("author-1"))]))
+    let presentation = BookishRecordField(
+      key: "author", label: "Author", value: "person, Author",
+      rawValue: .encoded(try BookishEncodedValue(encoding: BookishPropertyPresentation())))
+
+    #expect(registry.identifier(for: list, mode: .viewing) == "record.linkList")
+    #expect(registry.identifier(for: list, mode: .editing) == "list")
+    #expect(registry.identifier(for: presentation, mode: .viewing) == "presentation")
   }
 
   @Test
@@ -234,12 +255,8 @@ struct BookishRecordViewTests {
         kind: "layout",
         properties: ["fields": .list([.string("name"), .string("author")])]
       ),
-      customValueView: { field in
-        guard let id = field.rawValue?.recordValue else {
-          return nil
-        }
-
-        return AnyView(Button(id.rawValue) {})
+      viewerRegistry: BookishValueViewerRegistry { recordID in
+        AnyView(Button(recordID.rawValue) {})
       }
     )
 

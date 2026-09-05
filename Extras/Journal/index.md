@@ -1,5 +1,6 @@
 # Journal Index
 
+- [2026-09-05 Value Viewer Registry](2026-09-05-value-viewer-registry.md)
 - [2026-09-05 Configuration Seed Split](2026-09-05-configuration-seed-split.md)
 - [2026-09-05 Presentation Metadata Cascade](2026-09-05-presentation-metadata-cascade.md)
 - [2026-09-05 Record Schema File Split](2026-09-05-record-schema-file-split.md)

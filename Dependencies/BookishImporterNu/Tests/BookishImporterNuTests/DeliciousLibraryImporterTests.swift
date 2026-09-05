@@ -47,6 +47,29 @@ struct DeliciousLibraryImporterTests {
     #expect(publisher.kind == "organisation")
     #expect(publisher.string("name") == "RoC")
 
+    let illustratedBook = try #require(
+      result.records.first {
+        $0.kind == "book" && $0.list(BookishRecordKey.illustrators)?.isEmpty == false
+      }
+    )
+    let illustratorID = try #require(
+      illustratedBook.list(BookishRecordKey.illustrators)?.first?.recordValue
+    )
+    #expect(recordsByID[illustratorID]?.kind == "person")
+
+    for key in [
+      BookishRecordKey.authors,
+      BookishRecordKey.illustrators,
+      BookishRecordKey.publishers,
+    ] {
+      let relationshipValues = result.records
+        .filter { $0.kind == "book" }
+        .compactMap { $0.list(key) }
+        .flatMap { $0 }
+
+      #expect(relationshipValues.allSatisfy { $0.recordValue != nil })
+    }
+
     #expect(result.records.contains { $0.kind == "relationship" } == false)
   }
 

@@ -29,12 +29,14 @@ struct PropertyPresentation: Codable, Equatable, Sendable {
   var icon: String?
   var label: String?
   var viewer: String?
+  var editor: String?
 }
 ```
 
 - `icon` is an SF Symbol name.
 - `label` is a user-facing string. Seeded values use domain-style dotted localisation keys, such as `property.book.authors`. The UI attempts localisation and displays the string itself when no translation exists, which also supports user-entered labels.
-- `viewer` selects the SwiftUI presentation and editing component. It is an advisory, stable identifier such as `text`, `date`, `record.link`, `record.linkList`, `image.url`, or `identifier.isbn`.
+- `viewer` selects the SwiftUI viewing component. It is an advisory, stable identifier such as `text`, `date`, `record.link`, `record.linkList`, `image.url`, or `identifier.isbn`.
+- `editor` selects the SwiftUI editing component. It is independent of `viewer`, allowing an integer to use a formatted value view and a stepper editor, for example.
 
 The record value remains authoritative. A viewer does not validate or constrain the `BookishRecordValue` stored for a property. It chooses the most suitable interface when the value is compatible and otherwise uses a generic value viewer or repair path.
 
@@ -104,12 +106,10 @@ Implemented now:
 - layout field ordering and `*` expansion;
 - encoded index queries, observable query results, and stable sorting;
 - advisory index and layout `types` lists, including `*` matching;
-- compatible-layout filtering in the browser.
+- compatible-layout filtering in the browser;
+- viewer registration with generic, list, property-presentation, and record-link fallback viewers.
 
 Planned next:
 
-- generic and type-specific presentation records;
-- layout-level property-presentation overrides;
-- a resolver that creates effective `PropertyPresentation` values;
-- viewer registration and generic fallback viewers;
+- editor components and their mutation-request interface;
 - index, layout, and presentation editing interfaces.

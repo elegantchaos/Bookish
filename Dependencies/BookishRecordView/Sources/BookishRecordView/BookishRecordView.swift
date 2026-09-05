@@ -4,20 +4,20 @@ import SwiftUI
 /// Displays a record using a simple layout record.
 public struct BookishRecordView: View {
   private let presentation: BookishRecordPresentation
-  private let customValueView: @MainActor (BookishRecordField) -> AnyView?
+  private let viewerRegistry: BookishValueViewerRegistry
 
   /// Creates a record view from a data record and a layout record.
   public init(
     record: BookishRecord,
     layout: BookishRecord,
     presentationResolver: any PresentationResolver = CascadingPresentationResolver(),
-    customValueView: @escaping @MainActor (BookishRecordField) -> AnyView? = { _ in nil }
+    viewerRegistry: BookishValueViewerRegistry = .init()
   ) {
     self.init(
       record: record,
       layout: Optional(layout),
       presentationResolver: presentationResolver,
-      customValueView: customValueView
+      viewerRegistry: viewerRegistry
     )
   }
 
@@ -26,11 +26,11 @@ public struct BookishRecordView: View {
     record: BookishRecord,
     layout: BookishRecord?,
     presentationResolver: any PresentationResolver = CascadingPresentationResolver(),
-    customValueView: @escaping @MainActor (BookishRecordField) -> AnyView? = { _ in nil }
+    viewerRegistry: BookishValueViewerRegistry = .init()
   ) {
     self.presentation = BookishRecordPresentation(
       record: record, layout: layout, presentationResolver: presentationResolver)
-    self.customValueView = customValueView
+    self.viewerRegistry = viewerRegistry
   }
 
   /// The SwiftUI content for the record detail view.
@@ -39,12 +39,7 @@ public struct BookishRecordView: View {
       Section {
         ForEach(presentation.fields) { field in
           LabeledContent {
-            if let customView = customValueView(field) {
-              customView
-            } else {
-              Text(field.value)
-                .textSelection(.enabled)
-            }
+            viewerRegistry.view(for: field, mode: .viewing)
           } label: {
             if let icon = field.icon {
               Label(field.label, systemImage: icon)

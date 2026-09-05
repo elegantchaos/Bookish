@@ -14,10 +14,19 @@ public struct BookishPropertyPresentation: Codable, Equatable, Sendable {
   /// The stable identifier of the preferred value viewer.
   public var viewer: String?
 
+  /// The stable identifier of the preferred value editor.
+  public var editor: String?
+
   /// Creates property presentation metadata.
-  public init(icon: String? = nil, label: String? = nil, viewer: String? = nil) {
+  public init(
+    icon: String? = nil,
+    label: String? = nil,
+    viewer: String? = nil,
+    editor: String? = nil
+  ) {
     self.icon = icon
     self.label = label
     self.viewer = viewer
+    self.editor = editor
   }
 }

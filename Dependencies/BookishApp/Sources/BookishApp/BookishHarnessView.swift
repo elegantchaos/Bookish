@@ -247,15 +247,10 @@ private struct BookishRecordIDDetail: View {
           layout: layout,
           presentationResolver: CascadingPresentationResolver(
             layout: layout,
-            presentationRecords: presentationRecords)
-        ) {
-          field in
-          guard let recordID = field.rawValue?.recordValue else {
-            return nil
-          }
-
-          return AnyView(RecordLinkButton(recordID: recordID, navigation: navigation))
-        }
+            presentationRecords: presentationRecords),
+          viewerRegistry: BookishValueViewerRegistry { recordID in
+            AnyView(RecordLinkButton(recordID: recordID, navigation: navigation))
+          })
       } else {
         ContentUnavailableView("Loading", systemImage: "book", description: Text(recordID.rawValue))
       }
