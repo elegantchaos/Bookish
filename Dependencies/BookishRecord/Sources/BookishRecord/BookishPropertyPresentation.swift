@@ -17,16 +17,21 @@ public struct BookishPropertyPresentation: Codable, Equatable, Sendable {
   /// The stable identifier of the preferred value editor.
   public var editor: String?
 
+  /// Whether the viewer remains visible when the record has no value for the property.
+  public var alwaysShowViewer: Bool?
+
   /// Creates property presentation metadata.
   public init(
     icon: String? = nil,
     label: String? = nil,
     viewer: String? = nil,
-    editor: String? = nil
+    editor: String? = nil,
+    alwaysShowViewer: Bool? = nil
   ) {
     self.icon = icon
     self.label = label
     self.viewer = viewer
     self.editor = editor
+    self.alwaysShowViewer = alwaysShowViewer
   }
 }

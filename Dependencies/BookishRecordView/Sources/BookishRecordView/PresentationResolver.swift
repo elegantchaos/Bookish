@@ -50,6 +50,9 @@ public struct CascadingPresentationResolver: PresentationResolver, Equatable {
       if let editor = next.editor {
         result.editor = editor
       }
+      if let alwaysShowViewer = next.alwaysShowViewer {
+        result.alwaysShowViewer = alwaysShowViewer
+      }
     }
   }
 }

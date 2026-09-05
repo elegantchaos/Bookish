@@ -30,6 +30,7 @@ struct PropertyPresentation: Codable, Equatable, Sendable {
   var label: String?
   var viewer: String?
   var editor: String?
+  var alwaysShowViewer: Bool?
 }
 ```
 
@@ -37,6 +38,7 @@ struct PropertyPresentation: Codable, Equatable, Sendable {
 - `label` is a user-facing string. Seeded values use domain-style dotted localisation keys, such as `property.book.authors`. The UI attempts localisation and displays the string itself when no translation exists, which also supports user-entered labels.
 - `viewer` selects the SwiftUI viewing component. It is an advisory, stable identifier such as `text`, `date`, `record.link`, `record.linkList`, `image.url`, or `identifier.isbn`.
 - `editor` selects the SwiftUI editing component. It is independent of `viewer`, allowing an integer to use a formatted value view and a stepper editor, for example.
+- `alwaysShowViewer` retains a viewer for an absent property. Layout fields are otherwise hidden while viewing and remain available while editing.
 
 The record value remains authoritative. A viewer does not validate or constrain the `BookishRecordValue` stored for a property. It chooses the most suitable interface when the value is compatible and otherwise uses a generic value viewer or repair path.
 

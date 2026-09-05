@@ -34,6 +34,57 @@ struct BookishRecordViewTests {
   }
 
   @Test
+
+  func viewingHidesMissingLayoutFieldsWhileEditingKeepsThemAvailable() {
+    let presentation = BookishRecordPresentation(
+      record: BookishRecord(
+        kind: "book",
+        properties: [
+          "name": .string("Bookish"),
+          "status": .string("Reading"),
+        ]
+      ),
+      layout: BookishRecord(
+        kind: "layout",
+        properties: [
+          "fields": .list([.string("name"), .string("subtitle"), .string("status")])
+        ]
+      )
+    )
+
+    #expect(presentation.fields.map(\.key) == ["name", "status"])
+    #expect(presentation.fields(for: .editing).map(\.key) == ["name", "subtitle", "status"])
+    #expect(presentation.fields(for: .editing)[1].rawValue == nil)
+  }
+
+  @Test
+
+  func alwaysShowViewerKeepsAMissingLayoutFieldVisibleWhileViewing() throws {
+    let presentation = BookishRecordPresentation(
+      record: BookishRecord(kind: "book", properties: ["name": .string("Bookish")]),
+      layout: BookishRecord(
+        kind: "layout",
+        properties: ["fields": .list([.string("name"), .string("subtitle")])]
+      ),
+      presentationResolver: CascadingPresentationResolver(
+        presentationRecords: [
+          BookishRecord(
+            kind: BookishRecordKind.presentation,
+            properties: [
+              "subtitle": .encoded(
+                try BookishEncodedValue(
+                  encoding: BookishPropertyPresentation(alwaysShowViewer: true)))
+            ]
+          )
+        ]
+      )
+    )
+
+    #expect(presentation.fields.map(\.key) == ["name", "subtitle"])
+    #expect(presentation.fields.last?.rawValue == nil)
+  }
+
+  @Test
   func presentationCascadesLayoutKindAndGenericPropertyMetadata() throws {
     let presentation = BookishRecordPresentation(
       record: BookishRecord(
@@ -104,12 +155,13 @@ struct BookishRecordViewTests {
     )
 
     #expect(presentation.fields.map(\.label) == ["Author", "Layout Status"])
-    #expect(presentation.fields.map(\.icon) == ["person", "rectangle"])
+    #expect(presentation.fields.map(\.icon) == ["person", "bookmark"])
     #expect(presentation.fields.map(\.viewer) == ["record.link", "status"])
     #expect(presentation.fields.map(\.editor) == ["text", "status.picker"])
   }
 
   @Test
+  @MainActor
 
   func viewerRegistryUsesMetadataBeforeNativeDefaults() throws {
     let registry = BookishValueViewerRegistry()

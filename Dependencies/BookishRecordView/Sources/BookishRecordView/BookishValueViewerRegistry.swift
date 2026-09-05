@@ -1,15 +1,6 @@
 import BookishRecord
 import SwiftUI
 
-/// The interaction mode used to select a value presentation component.
-public enum BookishValuePresentationMode: Sendable {
-  /// Displays a value without modifying it.
-  case viewing
-
-  /// Edits a value through an application-provided mutation path.
-  case editing
-}
-
 /// Chooses and builds views for record field values.
 @MainActor
 public struct BookishValueViewerRegistry {

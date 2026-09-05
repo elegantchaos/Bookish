@@ -28,10 +28,21 @@ public struct BookishRecordPresentation: Sendable {
     firstDisplayValue(for: [BookishRecordKey.name]) ?? record.kind
   }
 
-  /// The fields visible under the active layout.
+  /// The fields visible under the active layout while viewing a record.
   public var fields: [BookishRecordField] {
-    fieldKeys.map { key in
+    fields(for: .viewing)
+  }
+
+  /// Returns the fields visible under the active layout for an interaction mode.
+  public func fields(for mode: BookishValuePresentationMode) -> [BookishRecordField] {
+    fieldKeys.compactMap { key in
+      let rawValue = record.properties[key]
       let propertyPresentation = propertyPresentation(for: key)
+      guard mode == .editing || rawValue != nil || propertyPresentation?.alwaysShowViewer == true
+      else {
+        return nil
+      }
+
       return BookishRecordField(
         key: key,
         label: label(for: key),
@@ -39,7 +50,7 @@ public struct BookishRecordPresentation: Sendable {
         viewer: propertyPresentation?.viewer,
         editor: propertyPresentation?.editor,
         value: displayValue(for: key),
-        rawValue: record.properties[key]
+        rawValue: rawValue
       )
     }
   }
@@ -110,6 +121,15 @@ public struct BookishRecordPresentation: Sendable {
     }
     .first
   }
+}
+
+/// The interaction mode used to select value components and visible fields.
+public enum BookishValuePresentationMode: Sendable {
+  /// Displays only values present on the record.
+  case viewing
+
+  /// Displays every field supplied by the active layout so values can be added.
+  case editing
 }
 
 /// A single display-ready record field.
