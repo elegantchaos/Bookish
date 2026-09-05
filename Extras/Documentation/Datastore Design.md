@@ -100,26 +100,36 @@ Otherwise, the new mutation record stores a special conflict value containing bo
 List-entry mutations parent the relevant entry or ordering heads rather than the whole list value. This allows independent list edits to merge without forcing a conflict across the entire list.
 
 ## Values
-
-Property values can be:
+Property values are represented by an enumeration with the current set of cases:
 - primitives (string, int, uint, double, bool)
-- small Codable values encoded as opaque JSON payloads
-- record links
-- blob references
+- encoded values: small Codable values encoded as opaque JSON payloads
+- a reference to another record
+- a reference to a blob file
 - ordered lists of property values
 - deletion markers
 - conflict markers
 
-Encoded values are distinct from plain strings, but do not need explicit application-level type tags. The application layer is expected to know what kind of value it expects for a property, and decode or coerce the stored value into that type. This operation can fail if the value does not match the expected type.
+The following rule of thumb was used to determine these cases, and should be used in the future when adding new value cases:
+- Add a case for types representable as a primitive JSON value, such as an integer, string, number, boolean, lists.
+- Add a case for datastore plumbing such as record and blob references, tombstones, deletion markers, conflicts, etc.
+- Use the encoded case for small Codable value for other self-contained values with domain-specific semantics, such as dates or URLs.
 
-Small Codable values can be encoded using a compact JSON representation. These values are intended for small opaque property payloads rather than large binary data or anonymous record-like objects.
+### Compound Values
+Compound values (eg structs or classes) can be represented in two ways:
+- an encoded struct
+- a reference to another record containing the properties of the compound
+
+The rule of thumb when deciding which approach to use is similar to the one for cases. 
+If the struct is small, and the value is used for internal plumbing, or not likely to be surfaced as individual fields in the user interface, it can be stored as an encoded value.
+If the value is large, is likely to be used to build a data-driven user interface where individual properties of the value are extracted or displayed individually, it is better to store it as a reference to another record.
+If the value represents a dictionary, it should also be represented as a link to a record (with that record in turn linking to other records if the dictionary is multi-level).
+Small encoded values are useful but they do not fully participate in all of the datastore mechanisms. An edit to a single field in one of these values changes the whole value, so the probability of conflicts is higher. There is also more potential for their representation to end up opaque in an interchange file - depending on how they are encoded. For discoverability and integration with tools, it's generally preferable to be able to represent values in a way that translates to/from JSON dictionaries naturally.
+Encoded values do not need explicit application-level type tags - eg when represented as JSON. The application layer is expected to know what kind of value it expects for a property, and decode or coerce the stored value into that type. This operation can fail if the value does not match the expected type. Having said that, an encoded value can include a type hint. This can be used by a decoder to determine the type to create.
 
 ## Large Blob Data
 
 Large binary payloads should be stored out-of-line and treated as immutable. Property values should refer to these payloads using blob references rather than storing the data directly.
-
 A blob reference should identify the blob and include lightweight metadata such as checksum, byte count, media type, or original filename when useful.
-
 CloudKit can store and synchronise blob payloads using CloudKit assets. A mutation record can then set a property to a blob reference, while the referenced blob payload is stored separately from the mutation record itself.
 
 Replacing blob data means creating a new blob payload and updating the property to point at the new blob reference. Existing blob payloads should not be modified in place.
