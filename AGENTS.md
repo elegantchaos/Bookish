@@ -8,6 +8,7 @@
 - CoreData should not be used anywhere.
 - Keep a development journal in `Extras/Journal/`.
 - Testing & validation may incidentally update xcode / swiftpm package lockfiles. This is acceptable and does not need to be reversed.
+- Use `rt validate` as the canonical Swift validation command. `rt validate --target <name>` builds the target and runs its matching SwiftPM test target when present; if `rt` cannot cover the required check, tell the user and offer to run direct `swift test` or `swift format` commands
 
 # Standard Rules
 
@@ -17,7 +18,7 @@
 - Inspect relevant code and documentation before editing, then keep the change scope aligned with the request.
 - Use red/green TDD for non-UI code: write or update a failing test that captures the intended behavior, implement the change, then verify the test passes.
 - Create UI previews for UI code whenever the tooling supports it.
-- Add or update tests for behavior changes and run the narrowest validation that proves the change before broadening to relevant project checks.
+- Add or update tests for behavior changes and use `rt` to run the narrowest validation that proves the change before broadening to relevant project checks.
 - Report validation performed, skipped validation with reasons, residual risks, and any follow-up work that remains.
 - Prefer trusted primary sources for technical decisions, especially official platform, language, package, API, and dependency documentation.
 - Use portable path references in documentation: repository-relative paths for files in this repository and home-relative paths for shared resources outside it.
