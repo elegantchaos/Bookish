@@ -478,7 +478,41 @@
         "icon": "textformat",
         "label": "Name",
         "viewer": "text"
-      }
+      },
+      "debugOnly": { "icon": "ladybug", "label": "Debug Only", "viewer": "text" },
+      "position": { "icon": "list.number", "label": "Position", "viewer": "text" },
+      "layout": { "icon": "rectangle.3.group", "label": "Layout", "viewer": "text" },
+      "types": { "icon": "square.3.layers.3d", "label": "Record Types", "viewer": "text" },
+      "query": { "icon": "line.3.horizontal.decrease.circle", "label": "Query", "viewer": "text" },
+      "fields": { "icon": "list.bullet.rectangle", "label": "Fields", "viewer": "text" },
+      "status": { "icon": "checkmark.circle", "label": "Status", "viewer": "text" },
+      "items": { "icon": "list.bullet", "label": "Items", "viewer": "text" }
+    },
+    {
+      "ℹ": "presentation.type.book",
+      "©": "presentation",
+      "name": { "icon": "textformat", "label": "Title", "viewer": "text" },
+      "subtitle": { "icon": "textformat.abc", "label": "Subtitle", "viewer": "text" },
+      "authors": { "icon": "person.2", "label": "Authors", "viewer": "text" },
+      "illustrators": { "icon": "paintbrush", "label": "Illustrators", "viewer": "text" },
+      "series": { "icon": "books.vertical", "label": "Series", "viewer": "text" },
+      "seriesPosition": { "icon": "number.circle", "label": "Series Number", "viewer": "text" },
+      "publishers": { "icon": "building.2", "label": "Publishers", "viewer": "text" },
+      "published": { "icon": "calendar", "label": "Published", "viewer": "text" },
+      "format": { "icon": "book.closed", "label": "Format", "viewer": "text" },
+      "pages": { "icon": "text.page", "label": "Pages", "viewer": "text" },
+      "isbn": { "icon": "barcode", "label": "ISBN", "viewer": "text" },
+      "asin": { "icon": "cart", "label": "ASIN", "viewer": "text" },
+      "dewey": { "icon": "number", "label": "Dewey Decimal", "viewer": "text" },
+      "genres": { "icon": "theatermasks", "label": "Genres", "viewer": "text" },
+      "editions": { "icon": "books.vertical.fill", "label": "Editions", "viewer": "text" },
+      "height": { "icon": "arrow.up.and.down", "label": "Height", "viewer": "text" },
+      "width": { "icon": "arrow.left.and.right", "label": "Width", "viewer": "text" },
+      "length": { "icon": "arrow.forward.and.backward", "label": "Length", "viewer": "text" },
+      "added": { "icon": "calendar.badge.plus", "label": "Date Added", "viewer": "text" },
+      "modified": { "icon": "calendar.badge.clock", "label": "Date Modified", "viewer": "text" },
+      "imageURLs": { "icon": "photo.on.rectangle", "label": "Cover Images", "viewer": "text" },
+      "originalData": { "icon": "doc.text.magnifyingglass", "label": "Original Data", "viewer": "text" }
     }
   ]
 }

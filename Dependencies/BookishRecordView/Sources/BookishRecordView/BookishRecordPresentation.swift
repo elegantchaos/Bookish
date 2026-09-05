@@ -2,25 +2,25 @@ import BookishRecord
 import Foundation
 
 /// A display-ready representation of a datastore record for Bookish views.
-public struct BookishRecordPresentation: Equatable, Sendable {
+public struct BookishRecordPresentation: Sendable {
   /// The original datastore record being presented.
   public let record: BookishRecord
 
   /// The layout record used to choose labels and visible fields.
   public let layout: BookishRecord?
 
-  /// The presentation record used to present individual record properties.
-  public let presentationRecord: BookishRecord?
+  /// The resolver used to find property presentation metadata.
+  public let presentationResolver: any PresentationResolver
 
-  /// Creates a presentation from a record, an optional layout, and optional property metadata.
+  /// Creates a presentation from a record, an optional layout, and a property metadata resolver.
   public init(
     record: BookishRecord,
     layout: BookishRecord?,
-    presentationRecord: BookishRecord? = nil
+    presentationResolver: any PresentationResolver = CascadingPresentationResolver()
   ) {
     self.record = record
     self.layout = layout
-    self.presentationRecord = presentationRecord
+    self.presentationResolver = presentationResolver
   }
 
   /// The name used for navigation, forms, and list rows.
@@ -90,7 +90,7 @@ public struct BookishRecordPresentation: Equatable, Sendable {
   }
 
   private func propertyPresentation(for key: String) -> BookishPropertyPresentation? {
-    presentationRecord?.encoded(key, as: BookishPropertyPresentation.self)
+    presentationResolver.presentation(for: key)
   }
 
   private func displayValue(for key: String) -> String {

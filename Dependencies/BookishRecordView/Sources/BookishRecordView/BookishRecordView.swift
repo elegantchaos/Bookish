@@ -10,13 +10,13 @@ public struct BookishRecordView: View {
   public init(
     record: BookishRecord,
     layout: BookishRecord,
-    presentationRecord: BookishRecord? = nil,
+    presentationResolver: any PresentationResolver = CascadingPresentationResolver(),
     customValueView: @escaping @MainActor (BookishRecordField) -> AnyView? = { _ in nil }
   ) {
     self.init(
       record: record,
       layout: Optional(layout),
-      presentationRecord: presentationRecord,
+      presentationResolver: presentationResolver,
       customValueView: customValueView
     )
   }
@@ -25,11 +25,11 @@ public struct BookishRecordView: View {
   public init(
     record: BookishRecord,
     layout: BookishRecord?,
-    presentationRecord: BookishRecord? = nil,
+    presentationResolver: any PresentationResolver = CascadingPresentationResolver(),
     customValueView: @escaping @MainActor (BookishRecordField) -> AnyView? = { _ in nil }
   ) {
     self.presentation = BookishRecordPresentation(
-      record: record, layout: layout, presentationRecord: presentationRecord)
+      record: record, layout: layout, presentationResolver: presentationResolver)
     self.customValueView = customValueView
   }
 

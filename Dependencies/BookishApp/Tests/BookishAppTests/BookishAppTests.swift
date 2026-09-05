@@ -61,16 +61,79 @@ struct BookishAppTests {
 
   @MainActor
   @Test
-  func harnessUsesFallbackPresentationWhenNoKindSpecificPresentationExists() async throws {
+  func harnessUsesSpecificBookPresentationForBookFields() async throws {
     let harness = try makeHarness()
     await harness.load()
 
-    let presentation = try await harness.presentation(for: BookishRecordKind.book)
+    let presentations = try await harness.presentations(for: BookishRecordKind.book)
+    let presentation = try #require(presentations.first)
 
-    #expect(presentation?.id == BookishRecordID("presentation.type.*"))
+    #expect(presentation.id == BookishRecordID("presentation.type.book"))
     #expect(
-      presentation?.encoded(BookishRecordKey.name, as: BookishPropertyPresentation.self)?.icon
+      presentation.encoded(BookishRecordKey.name, as: BookishPropertyPresentation.self)?.icon
         == "textformat")
+    #expect(
+      presentation.encoded(BookishRecordKey.name, as: BookishPropertyPresentation.self)?.label
+        == "Title")
+    #expect(
+      presentation.encoded(BookishRecordKey.originalData, as: BookishPropertyPresentation.self)?
+        .label == "Original Data")
+    #expect(presentations.last?.id == BookishRecordID("presentation.type.*"))
+
+    for (key, label) in [
+      (BookishRecordKey.subtitle, "Subtitle"),
+      (BookishRecordKey.authors, "Authors"),
+      (BookishRecordKey.illustrators, "Illustrators"),
+      (BookishRecordKey.series, "Series"),
+      (BookishRecordKey.seriesPosition, "Series Number"),
+      (BookishRecordKey.publishers, "Publishers"),
+      (BookishRecordKey.publishedDate, "Published"),
+      (BookishRecordKey.format, "Format"),
+      (BookishRecordKey.pages, "Pages"),
+      (BookishRecordKey.isbn, "ISBN"),
+      (BookishRecordKey.asin, "ASIN"),
+      (BookishRecordKey.dewey, "Dewey Decimal"),
+      (BookishRecordKey.genres, "Genres"),
+      (BookishRecordKey.editions, "Editions"),
+      (BookishRecordKey.height, "Height"),
+      (BookishRecordKey.width, "Width"),
+      (BookishRecordKey.length, "Length"),
+      (BookishRecordKey.addedDate, "Date Added"),
+      (BookishRecordKey.modifiedDate, "Date Modified"),
+      (BookishRecordKey.imageURLs, "Cover Images"),
+      (BookishRecordKey.originalData, "Original Data"),
+    ] {
+      #expect(
+        presentation.encoded(key, as: BookishPropertyPresentation.self)?.label == label)
+      #expect(presentation.encoded(key, as: BookishPropertyPresentation.self)?.icon != nil)
+    }
+  }
+
+  @MainActor
+  @Test
+  func fallbackPresentationCoversSharedSeedProperties() async throws {
+    let harness = try makeHarness()
+    await harness.load()
+
+    let presentations = try await harness.presentations(for: BookishRecordKind.person)
+    let presentation = try #require(presentations.first)
+
+    for key in [
+      BookishRecordKey.name,
+      BookishRecordKey.source,
+      BookishRecordKey.importedID,
+      BookishRecordKey.note,
+      BookishRecordKey.status,
+      BookishRecordKey.items,
+      BookishRecordKey.debugOnly,
+      BookishRecordKey.position,
+      BookishRecordKey.layout,
+      BookishRecordKey.types,
+      BookishRecordKey.query,
+      BookishRecordKey.fields,
+    ] {
+      #expect(presentation.encoded(key, as: BookishPropertyPresentation.self)?.label != nil)
+    }
   }
 
   @MainActor

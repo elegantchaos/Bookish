@@ -124,13 +124,16 @@ private struct RecordIndexView: View {
   let navigation: BookishNavigationService
 
   @State private var layout: BookishRecord?
-  @State private var presentationByKind: [String: BookishRecord] = [:]
+  @State private var presentationsByKind: [String: [BookishRecord]] = [:]
 
   var body: some View {
     List(selection: selectedRecordID) {
       ForEach(navigation.selectedRecordResult?.records ?? []) { record in
         BookishRecordCell(
-          record: record, layout: layout, presentationRecord: presentationByKind[record.kind]
+          record: record,
+          layout: layout,
+          presentationResolver: CascadingPresentationResolver(
+            presentationRecords: presentationsByKind[record.kind] ?? [])
         )
         .tag(Optional(record.id))
       }
@@ -156,13 +159,11 @@ private struct RecordIndexView: View {
   private func loadPresentation() async {
     do {
       layout = try await harness.selectedLayout()
-      var presentationByKind: [String: BookishRecord] = [:]
+      var presentationsByKind: [String: [BookishRecord]] = [:]
       for kind in Set(navigation.selectedRecordResult?.records.map(\.kind) ?? []) {
-        if let presentationRecord = try await harness.presentation(for: kind) {
-          presentationByKind[kind] = presentationRecord
-        }
+        presentationsByKind[kind] = try await harness.presentations(for: kind, layout: layout)
       }
-      self.presentationByKind = presentationByKind
+      self.presentationsByKind = presentationsByKind
     } catch {
       harness.report(error: error)
     }
@@ -191,12 +192,16 @@ private struct BookishRecordIDCell: View {
 
   @State private var record: BookishRecord?
   @State private var layout: BookishRecord?
-  @State private var presentationRecord: BookishRecord?
+  @State private var presentationRecords: [BookishRecord] = []
 
   var body: some View {
     Group {
       if let record {
-        BookishRecordCell(record: record, layout: layout, presentationRecord: presentationRecord)
+        BookishRecordCell(
+          record: record,
+          layout: layout,
+          presentationResolver: CascadingPresentationResolver(
+            presentationRecords: presentationRecords))
       } else {
         Text(recordID.rawValue)
       }
@@ -215,7 +220,7 @@ private struct BookishRecordIDCell: View {
       record = try await harness.record(id: recordID)
       layout = try await harness.selectedLayout()
       if let record {
-        presentationRecord = try await harness.presentation(for: record.kind)
+        presentationRecords = try await harness.presentations(for: record.kind, layout: layout)
       }
     } catch {
       harness.report(error: error)
@@ -230,12 +235,17 @@ private struct BookishRecordIDDetail: View {
 
   @State private var record: BookishRecord?
   @State private var layout: BookishRecord?
-  @State private var presentationRecord: BookishRecord?
+  @State private var presentationRecords: [BookishRecord] = []
 
   var body: some View {
     Group {
       if let record {
-        BookishRecordView(record: record, layout: layout, presentationRecord: presentationRecord) {
+        BookishRecordView(
+          record: record,
+          layout: layout,
+          presentationResolver: CascadingPresentationResolver(
+            presentationRecords: presentationRecords)
+        ) {
           field in
           guard let recordID = field.rawValue?.recordValue else {
             return nil
@@ -261,7 +271,7 @@ private struct BookishRecordIDDetail: View {
       record = try await harness.record(id: recordID)
       layout = try await harness.selectedLayout()
       if let record {
-        presentationRecord = try await harness.presentation(for: record.kind)
+        presentationRecords = try await harness.presentations(for: record.kind, layout: layout)
       }
     } catch {
       harness.report(error: error)

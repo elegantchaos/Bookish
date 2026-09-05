@@ -1,5 +1,6 @@
 # Journal Index
 
+- [2026-09-05 Presentation Metadata Cascade](2026-09-05-presentation-metadata-cascade.md)
 - [2026-09-05 Record Schema File Split](2026-09-05-record-schema-file-split.md)
 - [2026-09-05 BookishCore Legacy Relocation](2026-09-05-bookish-core-legacy-relocation.md)
 - [2026-09-05 Delicious Original Data Preservation](2026-09-05-delicious-original-data.md)

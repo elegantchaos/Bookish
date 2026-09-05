@@ -294,14 +294,29 @@ public final class BookishHarness {
     try await datastore?.recordService.record(id: id)
   }
 
-  /// Returns the presentation record for a record kind, falling back to the generic presentation.
-  public func presentation(for kind: String) async throws -> BookishRecord? {
-    let kindPresentationID = BookishRecordID("presentation.type.\(kind)")
-    if let presentation = try await record(id: kindPresentationID) {
-      return presentation
+  /// Returns presentation records ordered from layout-specific to generic metadata.
+  public func presentations(for kind: String, layout: BookishRecord? = nil) async throws
+    -> [BookishRecord]
+  {
+    var presentations: [BookishRecord] = []
+
+    if let layout {
+      let layoutPresentationID = BookishRecordID("presentation.layout.\(layout.id.rawValue)")
+      if let presentation = try await record(id: layoutPresentationID) {
+        presentations.append(presentation)
+      }
     }
 
-    return try await record(id: fallbackPresentationID)
+    let kindPresentationID = BookishRecordID("presentation.type.\(kind)")
+    if let presentation = try await record(id: kindPresentationID) {
+      presentations.append(presentation)
+    }
+
+    if let presentation = try await record(id: fallbackPresentationID) {
+      presentations.append(presentation)
+    }
+
+    return presentations
   }
 
   /// Returns the selected record by resolving it from the record service.

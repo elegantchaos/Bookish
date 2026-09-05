@@ -34,7 +34,7 @@ struct BookishRecordViewTests {
   }
 
   @Test
-  func presentationUsesPresentationRecordLabelsAndIcons() throws {
+  func presentationCascadesLayoutKindAndGenericPropertyMetadata() throws {
     let presentation = BookishRecordPresentation(
       record: BookishRecord(
         kind: BookishRecordKind.book,
@@ -49,21 +49,43 @@ struct BookishRecordViewTests {
           BookishRecordKey.fields: .list([.string("author"), .string("status")])
         ]
       ),
-      presentationRecord: BookishRecord(
-        kind: BookishRecordKind.presentation,
-        properties: [
-          "author": .encoded(
-            try BookishEncodedValue(
-              encoding: BookishPropertyPresentation(icon: "person", label: "Author"))),
-          "status": .encoded(
-            try BookishEncodedValue(
-              encoding: BookishPropertyPresentation(icon: "bookmark", label: "Reading Status"))),
-        ]
-      )
+      presentationResolver: CascadingPresentationResolver(presentationRecords: [
+        BookishRecord(
+          kind: BookishRecordKind.presentation,
+          properties: [
+            "status": .encoded(
+              try BookishEncodedValue(
+                encoding: BookishPropertyPresentation(icon: "rectangle", label: "Layout Status")))
+          ]
+        ),
+        BookishRecord(
+          kind: BookishRecordKind.presentation,
+          properties: [
+            "author": .encoded(
+              try BookishEncodedValue(
+                encoding: BookishPropertyPresentation(icon: "person", label: "Author"))),
+            "status": .encoded(
+              try BookishEncodedValue(
+                encoding: BookishPropertyPresentation(icon: "bookmark", label: "Kind Status"))),
+          ]
+        ),
+        BookishRecord(
+          kind: BookishRecordKind.presentation,
+          properties: [
+            "author": .encoded(
+              try BookishEncodedValue(
+                encoding: BookishPropertyPresentation(icon: "person.fill", label: "Generic Author"))
+            ),
+            "status": .encoded(
+              try BookishEncodedValue(
+                encoding: BookishPropertyPresentation(icon: "checkmark", label: "Generic Status"))),
+          ]
+        ),
+      ])
     )
 
-    #expect(presentation.fields.map(\.label) == ["Author", "Reading Status"])
-    #expect(presentation.fields.map(\.icon) == ["person", "bookmark"])
+    #expect(presentation.fields.map(\.label) == ["Author", "Layout Status"])
+    #expect(presentation.fields.map(\.icon) == ["person", "rectangle"])
   }
 
   @Test
