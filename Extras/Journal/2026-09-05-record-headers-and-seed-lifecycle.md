@@ -8,4 +8,6 @@ Configuration seed resources are imported and pruned only when the datastore lac
 
 Index records now have an optional `icon` property containing an SF Symbol name. The browser sidebar uses that icon beside the index title, with `list.bullet` as a fallback for existing or custom indexes that do not configure one. The bundled indexes provide appropriate symbols when a datastore is first seeded or explicitly reset.
 
+The browser's middle column displays each record as its layout-resolved thumbnail and name. When no thumbnail is available, it uses the active index's configured SF Symbol as the placeholder.
+
 `Datastore Design.md` records the property-representation decision rule: use native JSON and datastore-plumbing cases directly, use tagged encoded values for other small domain values, and use linked records for large objects with their own identity or lifecycle.

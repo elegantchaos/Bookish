@@ -130,9 +130,10 @@ private struct RecordIndexView: View {
   var body: some View {
     List(selection: selectedRecordID) {
       ForEach(navigation.selectedRecordResult?.records ?? []) { record in
-        BookishRecordCell(
+        BookishRecordIndexCell(
           record: record,
           layout: layout,
+          placeholderSystemImage: navigation.selectedRecordIndex?.icon ?? "doc",
           presentationResolver: CascadingPresentationResolver(
             layout: layout,
             presentationRecords: presentationsByKind[record.kind] ?? [])
