@@ -95,6 +95,12 @@ public enum BookishRecordKey {
   /// An ordered list of keys displayed by a layout record.
   public static let fields = "fields"
 
+  /// A list of fields suppressed by a layout, including fields expanded by `allOtherFields`.
+  public static let excludedFields = "excludedFields"
+
+  /// A link to property presentation metadata that overrides a layout's default cascade.
+  public static let presentation = "presentation"
+
   /// A layout field token that expands to every property not already listed.
   public static let allOtherFields = "*"
 

@@ -44,44 +44,60 @@ struct BookishRecordViewTests {
         ]
       ),
       layout: BookishRecord(
+        id: BookishRecordID("layout"),
         kind: BookishRecordKind.layout,
         properties: [
-          BookishRecordKey.fields: .list([.string("author"), .string("status")])
+          BookishRecordKey.fields: .list([.string("author"), .string("status")]),
+          BookishRecordKey.presentation: .record(BookishRecordID("layout-presentation")),
         ]
       ),
-      presentationResolver: CascadingPresentationResolver(presentationRecords: [
-        BookishRecord(
-          kind: BookishRecordKind.presentation,
+      presentationResolver: CascadingPresentationResolver(
+        layout: BookishRecord(
+          id: BookishRecordID("layout"),
+          kind: BookishRecordKind.layout,
           properties: [
-            "status": .encoded(
-              try BookishEncodedValue(
-                encoding: BookishPropertyPresentation(icon: "rectangle", label: "Layout Status")))
+            BookishRecordKey.presentation: .record(BookishRecordID("layout-presentation"))
           ]
         ),
-        BookishRecord(
-          kind: BookishRecordKind.presentation,
-          properties: [
-            "author": .encoded(
-              try BookishEncodedValue(
-                encoding: BookishPropertyPresentation(icon: "person", label: "Author"))),
-            "status": .encoded(
-              try BookishEncodedValue(
-                encoding: BookishPropertyPresentation(icon: "bookmark", label: "Kind Status"))),
-          ]
-        ),
-        BookishRecord(
-          kind: BookishRecordKind.presentation,
-          properties: [
-            "author": .encoded(
-              try BookishEncodedValue(
-                encoding: BookishPropertyPresentation(icon: "person.fill", label: "Generic Author"))
-            ),
-            "status": .encoded(
-              try BookishEncodedValue(
-                encoding: BookishPropertyPresentation(icon: "checkmark", label: "Generic Status"))),
-          ]
-        ),
-      ])
+        presentationRecords: [
+          BookishRecord(
+            id: BookishRecordID("kind-presentation"),
+            kind: BookishRecordKind.presentation,
+            properties: [
+              "author": .encoded(
+                try BookishEncodedValue(
+                  encoding: BookishPropertyPresentation(icon: "person", label: "Author"))),
+              "status": .encoded(
+                try BookishEncodedValue(
+                  encoding: BookishPropertyPresentation(icon: "bookmark", label: "Kind Status"))),
+            ]
+          ),
+          BookishRecord(
+            id: BookishRecordID("generic-presentation"),
+            kind: BookishRecordKind.presentation,
+            properties: [
+              "author": .encoded(
+                try BookishEncodedValue(
+                  encoding: BookishPropertyPresentation(
+                    icon: "person.fill", label: "Generic Author"))
+              ),
+              "status": .encoded(
+                try BookishEncodedValue(
+                  encoding: BookishPropertyPresentation(icon: "checkmark", label: "Generic Status"))
+              ),
+            ]
+          ),
+          BookishRecord(
+            id: BookishRecordID("layout-presentation"),
+            kind: BookishRecordKind.presentation,
+            properties: [
+              "status": .encoded(
+                try BookishEncodedValue(
+                  encoding: BookishPropertyPresentation(icon: "rectangle", label: "Layout Status")))
+            ]
+          ),
+        ],
+      )
     )
 
     #expect(presentation.fields.map(\.label) == ["Author", "Layout Status"])
@@ -152,6 +168,28 @@ struct BookishRecordViewTests {
     )
 
     #expect(presentation.fields.map(\.key) == ["author", "status"])
+  }
+
+  @Test
+  func presentationExcludesFieldsFromAnAllFieldsLayout() {
+    let presentation = BookishRecordPresentation(
+      record: BookishRecord(
+        kind: "book",
+        properties: [
+          "name": .string("Bookish"),
+          BookishRecordKey.originalData: .string("{\"title\":\"Bookish\"}"),
+        ]
+      ),
+      layout: BookishRecord(
+        kind: "layout",
+        properties: [
+          BookishRecordKey.fields: .list([.string(BookishRecordKey.allOtherFields)]),
+          BookishRecordKey.excludedFields: .list([.string(BookishRecordKey.originalData)]),
+        ]
+      )
+    )
+
+    #expect(presentation.fields.map(\.key) == ["name"])
   }
 
   @Test

@@ -133,6 +133,7 @@ private struct RecordIndexView: View {
           record: record,
           layout: layout,
           presentationResolver: CascadingPresentationResolver(
+            layout: layout,
             presentationRecords: presentationsByKind[record.kind] ?? [])
         )
         .tag(Optional(record.id))
@@ -201,6 +202,7 @@ private struct BookishRecordIDCell: View {
           record: record,
           layout: layout,
           presentationResolver: CascadingPresentationResolver(
+            layout: layout,
             presentationRecords: presentationRecords))
       } else {
         Text(recordID.rawValue)
@@ -244,6 +246,7 @@ private struct BookishRecordIDDetail: View {
           record: record,
           layout: layout,
           presentationResolver: CascadingPresentationResolver(
+            layout: layout,
             presentationRecords: presentationRecords)
         ) {
           field in

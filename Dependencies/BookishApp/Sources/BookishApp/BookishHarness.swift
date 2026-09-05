@@ -163,7 +163,7 @@ public final class BookishHarness {
       resetProjectionState()
       let datastore = try await BookishDatastore(directoryURL: directory)
       self.datastore = datastore
-      _ = try await importSeedResource("PresentationSeed", into: datastore)
+      _ = try await importConfigurationSeeds(into: datastore)
       try await writeSeedMarker(to: datastore)
       try await refresh()
       status = "Reset datastore"
@@ -300,9 +300,8 @@ public final class BookishHarness {
   {
     var presentations: [BookishRecord] = []
 
-    if let layout {
-      let layoutPresentationID = BookishRecordID("presentation.layout.\(layout.id.rawValue)")
-      if let presentation = try await record(id: layoutPresentationID) {
+    if let presentationID = layout?.record(BookishRecordKey.presentation) {
+      if let presentation = try await record(id: presentationID) {
         presentations.append(presentation)
       }
     }
@@ -462,7 +461,7 @@ public final class BookishHarness {
       matching: .kind(BookishRecordKind.seedMarker))
     let isFirstRun = seedMarkers.isEmpty
 
-    let seed = try await importSeedResource("PresentationSeed", into: datastore)
+    let seed = try await importConfigurationSeeds(into: datastore)
     try await pruneStaleSeedConfigurationRecords(seed: seed, in: datastore)
     if isFirstRun {
       _ = try await importSeedResource("SampleSeed", into: datastore)
@@ -578,6 +577,25 @@ public final class BookishHarness {
     return file
   }
 
+  private func importSeedResources(_ names: [String], into datastore: BookishDatastore) async throws
+    -> BookishInterchangeFile
+  {
+    var records: [BookishRecord] = []
+
+    for name in names {
+      let file = try await importSeedResource(name, into: datastore)
+      records.append(contentsOf: file.records)
+    }
+
+    return BookishInterchangeFile(records: records)
+  }
+
+  private func importConfigurationSeeds(into datastore: BookishDatastore) async throws
+    -> BookishInterchangeFile
+  {
+    try await importSeedResources(["IndexSeed", "LayoutSeed", "PresentationSeed"], into: datastore)
+  }
+
   private func pruneStaleSeedConfigurationRecords(
     seed: BookishInterchangeFile,
     in datastore: BookishDatastore
@@ -605,7 +623,8 @@ public final class BookishHarness {
   private func isSeedConfigurationRecord(_ record: BookishRecord) -> Bool {
     isSeedConfigurationKind(record.kind)
       && (record.id.rawValue.hasPrefix("datastore-")
-        || record.id.rawValue.hasPrefix("presentation.type."))
+        || record.id.rawValue.hasPrefix("presentation.type.")
+        || record.id.rawValue.hasPrefix("presentation.layout."))
   }
 
   private func writeSeedMarker(to datastore: BookishDatastore) async throws {

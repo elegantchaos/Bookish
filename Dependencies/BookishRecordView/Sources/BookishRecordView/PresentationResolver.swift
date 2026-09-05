@@ -16,9 +16,16 @@ public struct CascadingPresentationResolver: PresentationResolver, Equatable {
   /// Presentation records ordered from most to least specific.
   public let presentationRecords: [BookishRecord]
 
-  /// Creates a resolver from presentation records ordered by specificity.
-  public init(presentationRecords: [BookishRecord] = []) {
-    self.presentationRecords = presentationRecords
+  /// Creates a resolver from a layout and presentation records ordered from kind-specific to generic.
+  public init(layout: BookishRecord? = nil, presentationRecords: [BookishRecord] = []) {
+    if let presentationID = layout?.record(BookishRecordKey.presentation),
+      let presentation = presentationRecords.first(where: { $0.id == presentationID })
+    {
+      self.presentationRecords =
+        [presentation] + presentationRecords.filter { $0.id != presentationID }
+    } else {
+      self.presentationRecords = presentationRecords
+    }
   }
 
   /// Returns the first presentation metadata matching a property key.

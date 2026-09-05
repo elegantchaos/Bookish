@@ -5,7 +5,7 @@
   },
   "records": [
     {
-      "ℹ": "datastore-author",
+      "ℹ": "seed-author",
       "©": "person",
       "name": "Ursula K. Le Guin",
       "note": "Person record included to make the index browseable.",
@@ -13,10 +13,10 @@
       "status": "Reference"
     },
     {
-      "ℹ": "datastore-book",
+      "ℹ": "seed-book",
       "©": "book",
       "authors": [
-        "@datastore-author"
+        "@seed-author"
       ],
       "format": "Paperback",
       "note": "Seeded by the datastore harness",

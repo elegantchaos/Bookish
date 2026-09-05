@@ -55,7 +55,10 @@ public struct BookishRecordPresentation: Sendable {
       return record.properties.keys.sorted()
     }
 
-    return expandedFieldKeys(layoutFields)
+    let excludedKeys = Set(
+      layout?.properties[BookishRecordKey.excludedFields]?.listValue?.compactMap(\.stringValue)
+        ?? [])
+    return expandedFieldKeys(layoutFields).filter { excludedKeys.contains($0) == false }
   }
 
   private func expandedFieldKeys(_ layoutFields: [String]) -> [String] {
