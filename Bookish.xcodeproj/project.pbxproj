@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		22018FC32FC9ED4700923AA3 /* BookishApp in Frameworks */ = {isa = PBXBuildFile; productRef = 22018FC22FC9ED4700923AA3 /* BookishApp */; };
-		226F15ED251A28F600D6B12E /* BookishListsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226F15EC251A28F600D6B12E /* BookishListsTests.swift */; };
-		226F15F8251A28F600D6B12E /* BookishListsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226F15F7251A28F600D6B12E /* BookishListsUITests.swift */; };
 		22BAA4DD3047159400030C8D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22BAA4CE3047159400030C8D /* Preview Assets.xcassets */; };
 		22BAA4DE3047159400030C8D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22BAA4D03047159400030C8D /* Assets.xcassets */; };
 		22BAA4DF3047159400030C8D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 22BAA4D93047159400030C8D /* Localizable.strings */; };
@@ -30,28 +28,13 @@
 		22BAA65A30471E9B00030C8D /* BookishImporterSamples in Frameworks */ = {isa = PBXBuildFile; productRef = 22BAA65930471E9B00030C8D /* BookishImporterSamples */; };
 		22BAA65C30471E9B00030C8D /* BookishDatastore in Frameworks */ = {isa = PBXBuildFile; productRef = 22BAA65B30471E9B00030C8D /* BookishDatastore */; };
 		22BAA65E30471E9B00030C8D /* BookishRecordView in Frameworks */ = {isa = PBXBuildFile; productRef = 22BAA65D30471E9B00030C8D /* BookishRecordView */; };
+		22C9FA13304C9C090007FA38 /* BookishCleanup in Frameworks */ = {isa = PBXBuildFile; productRef = 22C9FA12304C9C090007FA38 /* BookishCleanup */; };
 		2867CD2ACE904B3DA2CD27AE /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0441C26FDA24F2FB7EFF80E /* Application.swift */; };
 		4E4F581ED25C472D9CB06BD5 /* BookishApp in Frameworks */ = {isa = PBXBuildFile; productRef = 2679F0DBDE1642FF8B904902 /* BookishApp */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		225162682FD18F130070A8E7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 226F15CF251A28EA00D6B12E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 16409F5AAA5C472291A81AD1;
-			remoteInfo = Bookish;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
 		2252C1CF2FC6FC5000515137 /* AGENTS.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = AGENTS.md; sourceTree = "<group>"; };
-		226F15E8251A28F600D6B12E /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		226F15EC251A28F600D6B12E /* BookishListsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookishListsTests.swift; sourceTree = "<group>"; };
-		226F15EE251A28F600D6B12E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		226F15F3251A28F600D6B12E /* UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		226F15F7251A28F600D6B12E /* BookishListsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookishListsUITests.swift; sourceTree = "<group>"; };
-		226F15F9251A28F600D6B12E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		22BAA4CE3047159400030C8D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		22BAA4D03047159400030C8D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		22BAA4D13047159400030C8D /* Bookish.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Bookish.entitlements; sourceTree = "<group>"; };
@@ -71,16 +54,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		226F15E5251A28F600D6B12E /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			files = (
-			);
-		};
-		226F15F0251A28F600D6B12E /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			files = (
-			);
-		};
 		8F276F950A854CA2B4AA20FB /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			files = (
@@ -92,6 +65,7 @@
 				22BAA64A30471E9B00030C8D /* Commands in Frameworks */,
 				22BAA65430471E9B00030C8D /* BookishRecord in Frameworks */,
 				22BAA64E30471E9B00030C8D /* Icons in Frameworks */,
+				22C9FA13304C9C090007FA38 /* BookishCleanup in Frameworks */,
 				22BAA65C30471E9B00030C8D /* BookishDatastore in Frameworks */,
 				22BAA64C30471E9B00030C8D /* CommandsUI in Frameworks */,
 				22BAA65A30471E9B00030C8D /* BookishImporterSamples in Frameworks */,
@@ -109,7 +83,6 @@
 				2252C1CF2FC6FC5000515137 /* AGENTS.md */,
 				8B602EEA274BD58500DE50A5 /* README.md */,
 				226F15D9251A28EA00D6B12E /* Sources */,
-				8B57F07A25F7B869007DB517 /* Tests */,
 				22F685A5251B8BBA00E867CE /* Frameworks */,
 				8B92A3CB2796CB46003CA08E /* Extras */,
 				226F15D8251A28EA00D6B12E /* Products */,
@@ -120,8 +93,6 @@
 			isa = PBXGroup;
 			children = (
 				6838A6DA00CF4274AE80D93F /* Bookish.app */,
-				226F15E8251A28F600D6B12E /* Tests.xctest */,
-				226F15F3251A28F600D6B12E /* UITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -132,24 +103,6 @@
 				2760150E1A2249B4B1BBD90F /* Bookish */,
 			);
 			path = Sources;
-			sourceTree = "<group>";
-		};
-		226F15EB251A28F600D6B12E /* BookishListsTests */ = {
-			isa = PBXGroup;
-			children = (
-				226F15EC251A28F600D6B12E /* BookishListsTests.swift */,
-				226F15EE251A28F600D6B12E /* Info.plist */,
-			);
-			path = BookishListsTests;
-			sourceTree = "<group>";
-		};
-		226F15F6251A28F600D6B12E /* BookishListsUITests */ = {
-			isa = PBXGroup;
-			children = (
-				226F15F7251A28F600D6B12E /* BookishListsUITests.swift */,
-				226F15F9251A28F600D6B12E /* Info.plist */,
-			);
-			path = BookishListsUITests;
 			sourceTree = "<group>";
 		};
 		22BAA4CF3047159400030C8D /* PreviewContent */ = {
@@ -195,15 +148,6 @@
 			path = Bookish;
 			sourceTree = "<group>";
 		};
-		8B57F07A25F7B869007DB517 /* Tests */ = {
-			isa = PBXGroup;
-			children = (
-				226F15F6251A28F600D6B12E /* BookishListsUITests */,
-				226F15EB251A28F600D6B12E /* BookishListsTests */,
-			);
-			name = Tests;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -233,43 +177,11 @@
 				22BAA65930471E9B00030C8D /* BookishImporterSamples */,
 				22BAA65B30471E9B00030C8D /* BookishDatastore */,
 				22BAA65D30471E9B00030C8D /* BookishRecordView */,
+				22C9FA12304C9C090007FA38 /* BookishCleanup */,
 			);
 			productName = Bookish;
 			productReference = 6838A6DA00CF4274AE80D93F /* Bookish.app */;
 			productType = "com.apple.product-type.application";
-		};
-		226F15E7251A28F600D6B12E /* Tests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 226F15FF251A28F600D6B12E /* Build configuration list for PBXNativeTarget "Tests" */;
-			buildPhases = (
-				226F15E4251A28F600D6B12E /* Sources */,
-				226F15E5251A28F600D6B12E /* Frameworks */,
-				226F15E6251A28F600D6B12E /* Resources */,
-			);
-			buildRules = (
-			);
-			name = Tests;
-			productName = "Samedi's CraftingTests";
-			productReference = 226F15E8251A28F600D6B12E /* Tests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		226F15F2251A28F600D6B12E /* UITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 226F1602251A28F600D6B12E /* Build configuration list for PBXNativeTarget "UITests" */;
-			buildPhases = (
-				226F15EF251A28F600D6B12E /* Sources */,
-				226F15F0251A28F600D6B12E /* Frameworks */,
-				226F15F1251A28F600D6B12E /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				225162692FD18F130070A8E7 /* PBXTargetDependency */,
-			);
-			name = UITests;
-			productName = "Samedi's CraftingUITests";
-			productReference = 226F15F3251A28F600D6B12E /* UITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
@@ -283,14 +195,6 @@
 				TargetAttributes = {
 					16409F5AAA5C472291A81AD1 = {
 						CreatedOnToolsVersion = 26.0;
-					};
-					226F15E7251A28F600D6B12E = {
-						CreatedOnToolsVersion = 12.0;
-						TestTargetID = 226F15D6251A28EA00D6B12E;
-					};
-					226F15F2251A28F600D6B12E = {
-						CreatedOnToolsVersion = 12.0;
-						TestTargetID = 16409F5AAA5C472291A81AD1;
 					};
 				};
 			};
@@ -309,6 +213,7 @@
 				88EDD2347B1344B188980B6D /* XCLocalSwiftPackageReference "Dependencies/BookishDatastore" */,
 				2DCD9BCE906A48F28FFE34BA /* XCLocalSwiftPackageReference "Dependencies/BookishRecordView" */,
 				22018FC12FC9ED4700923AA3 /* XCLocalSwiftPackageReference "Dependencies/BookishApp" */,
+				22C9FA11304C9C090007FA38 /* XCLocalSwiftPackageReference "Dependencies/BookishCleanup" */,
 			);
 			preferredProjectObjectVersion = 100;
 			productRefGroup = 226F15D8251A28EA00D6B12E /* Products */;
@@ -316,23 +221,11 @@
 			projectRoot = "";
 			targets = (
 				16409F5AAA5C472291A81AD1 /* Bookish */,
-				226F15E7251A28F600D6B12E /* Tests */,
-				226F15F2251A28F600D6B12E /* UITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		226F15E6251A28F600D6B12E /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			files = (
-			);
-		};
-		226F15F1251A28F600D6B12E /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			files = (
-			);
-		};
 		B64AE8FCC76D4AAC9BC55E8D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			files = (
@@ -349,18 +242,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		226F15E4251A28F600D6B12E /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			files = (
-				226F15ED251A28F600D6B12E /* BookishListsTests.swift in Sources */,
-			);
-		};
-		226F15EF251A28F600D6B12E /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			files = (
-				226F15F8251A28F600D6B12E /* BookishListsUITests.swift in Sources */,
-			);
-		};
 		FC43FA300E784F0C941CFBC6 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			files = (
@@ -368,14 +249,6 @@
 			);
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		225162692FD18F130070A8E7 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 16409F5AAA5C472291A81AD1 /* Bookish */;
-			targetProxy = 225162682FD18F130070A8E7 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		226F15FA251A28F600D6B12E /* Debug configuration for PBXProject "Bookish" */ = {
@@ -504,88 +377,6 @@
 			};
 			name = Release;
 		};
-		226F1600251A28F600D6B12E /* Debug configuration for PBXNativeTarget "Tests" */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = "Samedi's CraftingTests/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = "$(RECOMMENDED_IPHONEOS_DEPLOYMENT_TARGET)";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.elegantchaos.Samedi-s-CraftingTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Bookish.app/Bookish";
-			};
-			name = Debug;
-		};
-		226F1601251A28F600D6B12E /* Release configuration for PBXNativeTarget "Tests" */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = "Samedi's CraftingTests/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = "$(RECOMMENDED_IPHONEOS_DEPLOYMENT_TARGET)";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.elegantchaos.Samedi-s-CraftingTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Bookish.app/Bookish";
-			};
-			name = Release;
-		};
-		226F1603251A28F600D6B12E /* Debug configuration for PBXNativeTarget "UITests" */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = "Samedi's CraftingUITests/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = "$(RECOMMENDED_IPHONEOS_DEPLOYMENT_TARGET)";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.elegantchaos.Samedi-s-CraftingUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Bookish;
-			};
-			name = Debug;
-		};
-		226F1604251A28F600D6B12E /* Release configuration for PBXNativeTarget "UITests" */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = "Samedi's CraftingUITests/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = "$(RECOMMENDED_IPHONEOS_DEPLOYMENT_TARGET)";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.elegantchaos.Samedi-s-CraftingUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Bookish;
-			};
-			name = Release;
-		};
 		AE1F6A2F2EF54B12A9E1B798 /* Release configuration for PBXNativeTarget "Bookish" */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 22BAA4E53047159A00030C8D /* Settings.xcconfig */;
@@ -651,22 +442,6 @@
 			);
 			defaultConfigurationName = Release;
 		};
-		226F15FF251A28F600D6B12E /* Build configuration list for PBXNativeTarget "Tests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				226F1600251A28F600D6B12E /* Debug configuration for PBXNativeTarget "Tests" */,
-				226F1601251A28F600D6B12E /* Release configuration for PBXNativeTarget "Tests" */,
-			);
-			defaultConfigurationName = Release;
-		};
-		226F1602251A28F600D6B12E /* Build configuration list for PBXNativeTarget "UITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				226F1603251A28F600D6B12E /* Debug configuration for PBXNativeTarget "UITests" */,
-				226F1604251A28F600D6B12E /* Release configuration for PBXNativeTarget "UITests" */,
-			);
-			defaultConfigurationName = Release;
-		};
 		D122ED61177643778940F710 /* Build configuration list for PBXNativeTarget "Bookish" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -681,6 +456,10 @@
 		22018FC12FC9ED4700923AA3 /* XCLocalSwiftPackageReference "Dependencies/BookishApp" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = Dependencies/BookishApp;
+		};
+		22C9FA11304C9C090007FA38 /* XCLocalSwiftPackageReference "Dependencies/BookishCleanup" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Dependencies/BookishCleanup;
 		};
 		2DCD9BCE906A48F28FFE34BA /* XCLocalSwiftPackageReference "Dependencies/BookishRecordView" */ = {
 			isa = XCLocalSwiftPackageReference;
@@ -762,6 +541,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 2DCD9BCE906A48F28FFE34BA /* XCLocalSwiftPackageReference "Dependencies/BookishRecordView" */;
 			productName = BookishRecordView;
+		};
+		22C9FA12304C9C090007FA38 /* BookishCleanup */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = BookishCleanup;
 		};
 		2679F0DBDE1642FF8B904902 /* BookishApp */ = {
 			isa = XCSwiftPackageProductDependency;

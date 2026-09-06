@@ -29,6 +29,51 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "ApplicationTests"
+               BuildableName = "ApplicationTests"
+               ReferencedContainer = "container:Dependencies/Application">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "CommandsTests"
+               BuildableName = "CommandsTests"
+               ReferencedContainer = "container:Dependencies/Commands">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "CommandsUITests"
+               BuildableName = "CommandsUITests"
+               ReferencedContainer = "container:Dependencies/Commands">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "IconsTests"
+               BuildableName = "IconsTests"
+               ReferencedContainer = "container:Dependencies/Icons">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "LoggerTests"
+               BuildableName = "LoggerTests"
+               ReferencedContainer = "container:Dependencies/Logger">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
