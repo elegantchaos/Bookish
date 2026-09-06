@@ -17,12 +17,37 @@ struct BrowserIndexListView: View {
   /// The list of selectable browser indexes.
   var body: some View {
     List(selection: selectedRecordIndexID) {
-      ForEach(navigation.recordIndexes) { recordIndex in
-        Label(recordIndex.name, systemImage: recordIndex.icon ?? "list.bullet")
-          .tag(Optional(recordIndex.id))
+      Section {
+        Label("Coming Soon", systemImage: "sparkles")
+          .foregroundStyle(.secondary)
+          .accessibilityHint("Top-level browser areas will appear here.")
+      }
+
+      Section("Library") {
+        ForEach(libraryIndexes) { recordIndex in
+          BrowserIndexRow(recordIndex: recordIndex)
+        }
+      }
+
+      if !debugIndexes.isEmpty {
+        Section("Debug") {
+          ForEach(debugIndexes) { recordIndex in
+            BrowserIndexRow(recordIndex: recordIndex)
+          }
+        }
       }
     }
     .navigationTitle("Records")
+  }
+
+  /// The non-debug indexes presented as the user-facing library.
+  private var libraryIndexes: [BookishRecordIndex] {
+    navigation.recordIndexes.filter { !$0.isDebugOnly }
+  }
+
+  /// The debug and configuration indexes shown only when they are available.
+  private var debugIndexes: [BookishRecordIndex] {
+    navigation.recordIndexes.filter(\.isDebugOnly)
   }
 
   /// Binds list selection to the navigation route.

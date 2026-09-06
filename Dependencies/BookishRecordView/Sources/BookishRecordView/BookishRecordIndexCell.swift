@@ -44,60 +44,6 @@ public struct BookishRecordIndexCell: View {
   }
 }
 
-/// Displays an image thumbnail or a configured SF Symbol fallback.
-public struct BookishRecordThumbnail: View {
-  private let url: URL?
-  private let placeholderSystemImage: String
-
-  @ScaledMetric(relativeTo: .headline) private var size = 40.0
-
-  /// Creates a thumbnail from an optional remote image URL.
-  public init(url: URL?, placeholderSystemImage: String) {
-    self.url = url
-    self.placeholderSystemImage = placeholderSystemImage
-  }
-
-  /// The image or fallback symbol constrained to a square thumbnail.
-  public var body: some View {
-    Group {
-      if let url {
-        AsyncImage(url: url) { phase in
-          if let image = phase.image {
-            image
-              .resizable()
-              .scaledToFill()
-          } else {
-            BookishRecordIndexPlaceholder(systemImage: placeholderSystemImage)
-          }
-        }
-      } else {
-        BookishRecordIndexPlaceholder(systemImage: placeholderSystemImage)
-      }
-    }
-    .frame(width: size, height: size)
-    .background(.quaternary, in: .rect(cornerRadius: 6))
-    .clipShape(.rect(cornerRadius: 6))
-    .accessibilityHidden(true)
-  }
-}
-
-/// Displays the decorative SF Symbol used when a record has no thumbnail.
-private struct BookishRecordIndexPlaceholder: View {
-  private let systemImage: String
-
-  /// Creates a fallback thumbnail icon.
-  init(systemImage: String) {
-    self.systemImage = systemImage
-  }
-
-  /// The decorative fallback icon.
-  var body: some View {
-    Image(systemName: systemImage)
-      .imageScale(.large)
-      .foregroundStyle(.secondary)
-  }
-}
-
 #Preview {
   List {
     BookishRecordIndexCell(

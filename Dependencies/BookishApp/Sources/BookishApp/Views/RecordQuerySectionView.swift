@@ -26,6 +26,9 @@ struct RecordQuerySectionView: View {
   /// The observable result of resolving the section query against the host.
   @State private var result: RecordQueryResult?
 
+  /// Metadata records keyed by result record kind for thumbnail placeholders.
+  @State private var metadataByKind: [String: BookishRecord] = [:]
+
   /// The decoded template, retained for DEBUG-only diagnostics.
   @State private var template: RecordQueryTemplate?
 
@@ -51,7 +54,11 @@ struct RecordQuerySectionView: View {
           } else {
             ForEach(result.records) { record in
               NavigationLink(value: record.id) {
-                BookishRecordCell(record: record, layout: nil)
+                BookishRecordIndexCell(
+                  record: record,
+                  layout: nil,
+                  placeholderSystemImage: metadataByKind[record.kind]?.string(BookishRecordKey.icon)
+                    ?? "doc")
               }
             }
           }
@@ -95,7 +102,9 @@ struct RecordQuerySectionView: View {
 
       self.section = section
       self.template = template
-      result = try await harness.recordQueryResult(for: template, host: host)
+      let result = try await harness.recordQueryResult(for: template, host: host)
+      self.result = result
+      await loadMetadata(for: result.records)
     } catch {
       result = nil
       errorDescription = error.localizedDescription
@@ -103,10 +112,28 @@ struct RecordQuerySectionView: View {
     }
   }
 
+  /// Resolves the record-kind metadata used for query-result thumbnail placeholders.
+  private func loadMetadata(for records: [BookishRecord]) async {
+    do {
+      var metadataByKind: [String: BookishRecord] = [:]
+
+      for kind in Set(records.map(\.kind)) {
+        if let metadata = try await harness.recordKindMetadata(for: kind) {
+          metadataByKind[kind] = metadata
+        }
+      }
+
+      self.metadataByKind = metadataByKind
+    } catch {
+      errorDescription = error.localizedDescription
+      harness.report(error: error)
+    }
+  }
+
   #if DEBUG
-  /// Shows the section state and resolved query only in development builds.
-  @ViewBuilder
-  private var queryDiagnostics: some View {
+    /// Shows the section state and resolved query only in development builds.
+    @ViewBuilder
+    private var queryDiagnostics: some View {
       VStack(alignment: .leading, spacing: 4) {
         Text("DEBUG · Query section")
           .font(.caption.weight(.semibold))
@@ -126,21 +153,21 @@ struct RecordQuerySectionView: View {
       .foregroundStyle(.secondary)
       .padding(8)
       .background(.quaternary, in: .rect(cornerRadius: 6))
-  }
-
-  /// Describes whether the linked configuration record could be resolved.
-  private var configurationStatus: String {
-    section == nil ? "Configuration: unavailable" : "Configuration: loaded"
-  }
-
-  /// Describes whether the host-bound observable result could be resolved.
-  private var resultStatus: String {
-    guard let result else {
-      return "Result: unavailable"
     }
 
-    return "Result: \(result.records.count) record(s)"
-  }
+    /// Describes whether the linked configuration record could be resolved.
+    private var configurationStatus: String {
+      section == nil ? "Configuration: unavailable" : "Configuration: loaded"
+    }
+
+    /// Describes whether the host-bound observable result could be resolved.
+    private var resultStatus: String {
+      guard let result else {
+        return "Result: unavailable"
+      }
+
+      return "Result: \(result.records.count) record(s)"
+    }
 
     /// Encodes the host-bound query for diagnostics without exposing it in release builds.
     private var resolvedQueryDescription: String {
