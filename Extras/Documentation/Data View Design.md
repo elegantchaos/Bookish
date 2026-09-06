@@ -54,9 +54,11 @@ Each property in a presentation record is an encoded `PropertyPresentation` valu
 
 ## Layout Records
 
-Records of kind `layout` determine which properties are shown and in what order. Their `fields` property is an ordered list of property identifiers. The `*` token expands to every property not already listed, in stable key order.
+Records of kind `layout` determine which properties are shown and in what order. Their `fields` property is an ordered list of property identifiers or configuration-record links. The `*` token expands to every property not already listed, in stable key order.
 
 A `fields` entry may also be a record link to a `querySection` record. This places the section at that exact point in the layout without embedding section configuration in the layout itself. Query-section records contain a `name`, an encoded `RecordQueryTemplate`, and an optional `emptyMessage`. An absent `emptyMessage` hides an empty section.
+
+A linked `layout` record creates a titled, static field section. Its `name` supplies the section heading and its own ordered `fields` list supplies the contents. Section layouts set `isSection` to `true`; they are excluded from top-level layout selection and the compatible-layout picker. Nested layout links are allowed, but a recursive link is diagnosed and not rendered.
 
 `RecordQueryTemplate` contains an ordinary base `RecordQuery` plus typed host-record relationship bindings. Before execution, it resolves those bindings against the record being displayed, producing a concrete `RecordQuery` for the datastore query service. The initial bindings match a scalar property equal to the host record or a scalar/list property containing the host record. This supports sections such as books by a person, in a series, or from a publisher without string substitution or view-local filtering.
 
@@ -64,7 +66,7 @@ Layouts also have an advisory `types` list describing the record types they are 
 
 The browser uses the selected index's types to offer compatible layouts. A layout-specific presentation override is only relevant when the layout matches the record being shown.
 
-Seeded layouts include an all-fields layout for `*` and type-specific layouts for standard catalogue and presentation record types. Users will be able to duplicate, edit, and create layouts without changing the stored records they present.
+Seeded layouts include an all-fields layout for `*` and type-specific layouts for standard catalogue and presentation record types. The Book layout links sections for contributors and relationships, publication and classification, identifiers, physical details, library details, and media. Users will be able to duplicate, edit, and create layouts without changing the stored records they present.
 
 ## Index User Interface
 

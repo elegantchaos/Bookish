@@ -9,3 +9,5 @@ Layouts can now contain record links in their ordered `fields` list. A link to a
 Query-result rows reuse `BookishRecordIndexCell`, so they present the record name with either its image thumbnail or the icon declared in its kind metadata.
 
 The browser sidebar now reserves a top-level placeholder area, groups non-debug indexes under Library, and shows available debug indexes under Debug. `BookishRecordThumbnail` supplies circular image and SF Symbol styling shared by index rows, query results, and record links.
+
+Layout records can now be linked from another layout's `fields` list to create titled static sections. Section layouts set `isSection`, which excludes them from top-level layout selection. The seeded Book layout groups its relationship, publication, identifier, physical, library, and media properties into these sections.

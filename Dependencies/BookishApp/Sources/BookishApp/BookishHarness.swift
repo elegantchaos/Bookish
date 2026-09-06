@@ -417,7 +417,8 @@ public final class BookishHarness {
     }
 
     if let typeSpecificLayout = layouts.first(where: { layout in
-      layout.strings(BookishRecordKey.types)?.contains(record.kind) == true
+      layout.bool(BookishRecordKey.isSection) != true
+        && layout.strings(BookishRecordKey.types)?.contains(record.kind) == true
     }) {
       return typeSpecificLayout
     }
@@ -495,7 +496,7 @@ public final class BookishHarness {
         predicate: .kind(BookishRecordKind.layout),
         sort: [.property(BookishRecordKey.name), .id]
       ))
-    layoutIDs = layouts.map(\.id)
+    layoutIDs = layouts.filter { $0.bool(BookishRecordKey.isSection) != true }.map(\.id)
     revision += 1
     try await updateLayoutSelection(using: datastore)
   }
@@ -573,7 +574,8 @@ public final class BookishHarness {
     }
 
     return layouts.filter { layout in
-      layout.matchesAnyType(in: selectedRecordIndex.types)
+      layout.bool(BookishRecordKey.isSection) != true
+        && layout.matchesAnyType(in: selectedRecordIndex.types)
     }
   }
 

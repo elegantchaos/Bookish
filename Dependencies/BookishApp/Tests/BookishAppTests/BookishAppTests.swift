@@ -254,6 +254,10 @@ struct BookishAppTests {
     let layoutIDs = Set(harness.layoutIDs)
     let allFields = try await harness.record(id: BookishRecordID("datastore-all-fields-layout"))
     let book = try await harness.record(id: BookishRecordID("datastore-book-layout"))
+    let bookRelationships = try await harness.record(
+      id: BookishRecordID("datastore-book-relationships-layout"))
+    let seedBook = try #require(try await harness.record(id: BookishRecordID("seed-book")))
+    let presentedBookLayout = try await harness.layout(for: seedBook)
     let layout = try await harness.record(id: BookishRecordID("datastore-layout-layout"))
     let index = try await harness.record(id: BookishRecordID("datastore-index-layout"))
     let seedMarker = try await harness.record(id: BookishRecordID("datastore-seed-marker"))
@@ -269,18 +273,20 @@ struct BookishAppTests {
     #expect(allFields?.strings(BookishRecordKey.types) == [BookishRecordKey.allTypes])
     #expect(book?.string(BookishRecordKey.name) == "Book")
     #expect(book?.strings(BookishRecordKey.types) == [BookishRecordKind.book])
-    #expect(book?.list(BookishRecordKey.fields)?.contains(.string(BookishRecordKey.isbn)) == true)
     #expect(
-      book?.list(BookishRecordKey.fields)?.contains(.string(BookishRecordKey.allOtherFields))
+      book?.list(BookishRecordKey.fields)?.contains(
+        .record(BookishRecordID("datastore-book-identifiers-layout")))
         == true)
+    #expect(bookRelationships?.bool(BookishRecordKey.isSection) == true)
+    #expect(bookRelationships?.strings(BookishRecordKey.types) == [BookishRecordKind.book])
     #expect(
-      book?.list(BookishRecordKey.excludedFields)
-        == [
-          .string(BookishRecordKey.image), .string(BookishRecordKey.importedID),
-          .string(BookishRecordKey.name), .string(BookishRecordKey.subtitle),
-          .string(BookishRecordKey.source),
-          .string(BookishRecordKey.originalData),
-        ])
+      bookRelationships?.list(BookishRecordKey.fields) == [
+        .string(BookishRecordKey.authors), .string(BookishRecordKey.illustrators),
+        .string(BookishRecordKey.series), .string(BookishRecordKey.seriesPosition),
+        .string(BookishRecordKey.publishers),
+      ])
+    #expect(layoutIDs.contains(BookishRecordID("datastore-book-relationships-layout")) == false)
+    #expect(presentedBookLayout?.id == BookishRecordID("datastore-book-layout"))
     #expect(
       layout?.list(BookishRecordKey.fields)?.contains(.string(BookishRecordKey.source)) == false)
     #expect(index?.strings(BookishRecordKey.types) == [BookishRecordKind.index])

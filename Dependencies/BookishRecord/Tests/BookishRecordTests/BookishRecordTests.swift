@@ -67,6 +67,7 @@ struct BookishRecordTests {
     #expect(BookishRecordKey.types == "types")
     #expect(BookishRecordKey.allTypes == "*")
     #expect(BookishRecordKey.emptyMessage == "emptyMessage")
+    #expect(BookishRecordKey.isSection == "isSection")
   }
 
   @Test

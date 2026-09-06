@@ -47,11 +47,12 @@ struct BookishRecordIDDetail: View {
               )
             )
           },
-          sectionView: { sectionID in
-            RecordQuerySectionView(
-              sectionID: sectionID,
+          sectionView: { linkedLayoutID in
+            RecordLayoutItemView(
+              linkedLayoutID: linkedLayoutID,
               host: record,
-              harness: harness
+              harness: harness,
+              navigation: navigation
             )
           }
         )

@@ -101,6 +101,9 @@ public enum BookishRecordKey {
   /// An ordered list of keys displayed by a layout record.
   public static let fields = "fields"
 
+  /// Whether a layout record is embedded as a section instead of selectable on its own.
+  public static let isSection = "isSection"
+
   /// An optional layout override for the property used as a record header title.
   public static let titleProperty = "titleProperty"
 

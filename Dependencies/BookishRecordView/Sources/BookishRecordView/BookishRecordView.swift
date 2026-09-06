@@ -33,23 +33,11 @@ public struct BookishRecordView<SectionContent: View>: View {
         }
       }
 
-      ForEach(presentation.layoutItems(for: mode)) { item in
-        if case .field(let field) = item {
-          LabeledContent {
-            viewerRegistry.view(for: field, mode: mode)
-          } label: {
-            if let icon = field.icon {
-              Label(field.label, systemImage: icon)
-            } else {
-              Text(field.label)
-            }
-          }
-        }
-
-        if case .section(let sectionID) = item {
-          sectionView(sectionID)
-        }
-      }
+      BookishRecordFieldsView(
+        presentation: presentation,
+        viewerRegistry: viewerRegistry,
+        mode: mode,
+        sectionView: sectionView)
     }
     .formStyle(.grouped)
     .navigationTitle(presentation.header.title ?? "")
