@@ -14,6 +14,7 @@
     { "ℹ": "metadata.type.index", "name": "Index", "icon": "list.bullet.rectangle", "types": ["index"], "presentation": "@presentation.type.*" },
     { "ℹ": "metadata.type.presentation", "name": "Presentation", "icon": "paintpalette", "types": ["presentation"], "presentation": "@presentation.type.*" },
     { "ℹ": "metadata.type.metadata", "name": "Metadata", "icon": "tag", "types": ["metadata"], "presentation": "@presentation.type.*" },
+    { "ℹ": "metadata.type.querySection", "name": "Query Section", "icon": "text.append", "types": ["querySection"], "presentation": "@presentation.type.*" },
     { "ℹ": "metadata.type.seedMarker", "name": "Seed Marker", "icon": "checkmark.seal", "types": ["seedMarker"], "presentation": "@presentation.type.*" }
   ]
 }

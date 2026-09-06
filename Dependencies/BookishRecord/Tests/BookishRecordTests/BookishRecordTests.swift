@@ -49,6 +49,7 @@ struct BookishRecordTests {
     #expect(BookishRecordKind.book == "book")
     #expect(BookishRecordKind.person == "person")
     #expect(BookishRecordKind.organisation == "organisation")
+    #expect(BookishRecordKind.querySection == "querySection")
     #expect(BookishRecordKey.name == "name")
     #expect(BookishRecordKey.icon == "icon")
     #expect(BookishRecordKey.image == "image")
@@ -65,6 +66,7 @@ struct BookishRecordTests {
     #expect(BookishRecordKey.originalData == "originalData")
     #expect(BookishRecordKey.types == "types")
     #expect(BookishRecordKey.allTypes == "*")
+    #expect(BookishRecordKey.emptyMessage == "emptyMessage")
   }
 
   @Test

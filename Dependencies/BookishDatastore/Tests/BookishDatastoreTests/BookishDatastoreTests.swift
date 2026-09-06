@@ -250,6 +250,25 @@ struct BookishDatastoreTests {
   }
 
   @Test
+  func recordQueryTemplateResolvesHostRecordBindings() {
+    let host = BookishRecord(id: BookishRecordID("person-1"), kind: BookishRecordKind.person)
+    let template = RecordQueryTemplate(
+      query: RecordQuery(predicate: .kind(BookishRecordKind.book), sort: [.id]),
+      bindings: [.propertyContainsHostRecord(BookishRecordKey.authors)]
+    )
+
+    #expect(
+      template.resolve(for: host)
+        == RecordQuery(
+          predicate: .and([
+            .kind(BookishRecordKind.book),
+            .propertyContains(BookishRecordKey.authors, .record(host.id)),
+          ]),
+          sort: [.id]
+        ))
+  }
+
+  @Test
 
   func recordQueryResultRefreshesAfterMutation() async throws {
     let datastore = try await makeDatastore()

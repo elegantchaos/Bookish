@@ -56,6 +56,10 @@ Each property in a presentation record is an encoded `PropertyPresentation` valu
 
 Records of kind `layout` determine which properties are shown and in what order. Their `fields` property is an ordered list of property identifiers. The `*` token expands to every property not already listed, in stable key order.
 
+A `fields` entry may also be a record link to a `querySection` record. This places the section at that exact point in the layout without embedding section configuration in the layout itself. Query-section records contain a `name`, an encoded `RecordQueryTemplate`, and an optional `emptyMessage`. An absent `emptyMessage` hides an empty section.
+
+`RecordQueryTemplate` contains an ordinary base `RecordQuery` plus typed host-record relationship bindings. Before execution, it resolves those bindings against the record being displayed, producing a concrete `RecordQuery` for the datastore query service. The initial bindings match a scalar property equal to the host record or a scalar/list property containing the host record. This supports sections such as books by a person, in a series, or from a publisher without string substitution or view-local filtering.
+
 Layouts also have an advisory `types` list describing the record types they are designed to present. A `*` entry matches every type. Missing or empty type lists are treated permissively so old and custom layouts remain usable.
 
 The browser uses the selected index's types to offer compatible layouts. A layout-specific presentation override is only relevant when the layout matches the record being shown.
@@ -106,6 +110,7 @@ Implemented now:
 - flexible `BookishRecord` properties and storage-neutral values;
 - stored `layout` and `index` records seeded from interchange data;
 - layout field ordering and `*` expansion;
+- query-section layout entries and host-bound relationship query templates;
 - encoded index queries, observable query results, and stable sorting;
 - advisory index and layout `types` lists, including `*` matching;
 - compatible-layout filtering in the browser;
@@ -114,4 +119,4 @@ Implemented now:
 Planned next:
 
 - editor components and their mutation-request interface;
-- index, layout, and presentation editing interfaces.
+- index, layout, presentation, and query-section editing interfaces.

@@ -49,26 +49,54 @@ public struct BookishRecordPresentation: Sendable {
     fields(for: .viewing)
   }
 
+  /// The ordered fields and query-section links visible under the active layout.
+  public var layoutItems: [BookishRecordLayoutItem] {
+    layoutItems(for: .viewing)
+  }
+
   /// Returns the fields visible under the active layout for an interaction mode.
   public func fields(for mode: BookishValuePresentationMode) -> [BookishRecordField] {
-    fieldKeys.compactMap { key in
-      let rawValue = record.properties[key]
-      let propertyPresentation = propertyPresentation(for: key)
-      guard mode == .editing || rawValue != nil || propertyPresentation?.alwaysShowViewer == true
-      else {
+    layoutItems(for: mode).compactMap { item in
+      guard case .field(let field) = item else {
         return nil
       }
 
-      return BookishRecordField(
-        key: key,
-        label: label(for: key),
-        icon: propertyPresentation?.icon,
-        viewer: propertyPresentation?.viewer,
-        editor: propertyPresentation?.editor,
-        value: displayValue(for: key),
-        rawValue: rawValue
-      )
+      return field
     }
+  }
+
+  /// Returns the ordered fields and query-section links for an interaction mode.
+  public func layoutItems(for mode: BookishValuePresentationMode) -> [BookishRecordLayoutItem] {
+    var includedFields = Set<String>()
+    var items: [BookishRecordLayoutItem] = []
+
+    for value in layoutValues {
+      switch value {
+      case .string(BookishRecordKey.allOtherFields):
+        let remainingKeys = record.properties.keys
+          .filter { !includedFields.contains($0) && !excludedFields.contains($0) }
+          .sorted()
+        items.append(contentsOf: remainingKeys.compactMap { field(for: $0, mode: mode) })
+        includedFields.formUnion(remainingKeys)
+
+      case .string(let key):
+        guard !includedFields.contains(key), !excludedFields.contains(key) else {
+          continue
+        }
+        includedFields.insert(key)
+        if let field = field(for: key, mode: mode) {
+          items.append(field)
+        }
+
+      case .record(let id):
+        items.append(.section(id))
+
+      default:
+        continue
+      }
+    }
+
+    return items
   }
 
   /// The user-facing name of the active layout.
@@ -76,39 +104,41 @@ public struct BookishRecordPresentation: Sendable {
     layout?.string(BookishRecordKey.name) ?? "Default"
   }
 
-  private var fieldKeys: [String] {
-    guard
-      let layoutFields = layout?.properties[BookishRecordKey.fields]?.listValue?.compactMap(
-        \.stringValue),
-      !layoutFields.isEmpty
-    else {
-      return record.properties.keys.sorted()
+  /// The ordered values declared in the active layout, or every record property by key.
+  private var layoutValues: [BookishRecordValue] {
+    guard let values = layout?.list(BookishRecordKey.fields), !values.isEmpty else {
+      return record.properties.keys.sorted().map(BookishRecordValue.string)
     }
 
-    let excludedKeys = Set(
-      layout?.properties[BookishRecordKey.excludedFields]?.listValue?.compactMap(\.stringValue)
-        ?? [])
-    return expandedFieldKeys(layoutFields).filter { excludedKeys.contains($0) == false }
+    return values
   }
 
-  private func expandedFieldKeys(_ layoutFields: [String]) -> [String] {
-    var included = Set<String>()
-    var keys: [String] = []
+  /// The property keys omitted from the active layout.
+  private var excludedFields: Set<String> {
+    Set(layout?.strings(BookishRecordKey.excludedFields) ?? [])
+  }
 
-    for key in layoutFields {
-      if key == BookishRecordKey.allOtherFields {
-        let remainingKeys = record.properties.keys
-          .filter { !included.contains($0) }
-          .sorted()
-        keys.append(contentsOf: remainingKeys)
-        included.formUnion(remainingKeys)
-      } else if !included.contains(key) {
-        keys.append(key)
-        included.insert(key)
-      }
+  /// Builds a display field when the mode and presentation metadata permit it.
+  private func field(for key: String, mode: BookishValuePresentationMode)
+    -> BookishRecordLayoutItem?
+  {
+    let rawValue = record.properties[key]
+    let propertyPresentation = propertyPresentation(for: key)
+    guard mode == .editing || rawValue != nil || propertyPresentation?.alwaysShowViewer == true
+    else {
+      return nil
     }
 
-    return keys
+    return .field(
+      BookishRecordField(
+        key: key,
+        label: label(for: key),
+        icon: propertyPresentation?.icon,
+        viewer: propertyPresentation?.viewer,
+        editor: propertyPresentation?.editor,
+        value: displayValue(for: key),
+        rawValue: rawValue
+      ))
   }
 
   private func label(for key: String) -> String {
@@ -140,6 +170,26 @@ public struct BookishRecordPresentation: Sendable {
       return value.isEmpty ? nil : value
     }
     .first
+  }
+}
+
+/// An ordered item declared by a record layout.
+public enum BookishRecordLayoutItem: Equatable, Identifiable, Sendable {
+  /// A materialised record property.
+  case field(BookishRecordField)
+
+  /// A link to a query-section configuration record.
+  case section(BookishRecordID)
+
+  /// The stable identity used when rendering layout items in SwiftUI.
+  public var id: String {
+    switch self {
+    case .field(let field):
+      "field.\(field.key)"
+
+    case .section(let sectionID):
+      "section.\(sectionID.rawValue)"
+    }
   }
 }
 

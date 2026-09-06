@@ -320,6 +320,18 @@ public final class BookishHarness {
     return try await record(id: BookishRecordID("metadata.type.*"))
   }
 
+  /// Returns the observable result of resolving a query template against a host record.
+  public func recordQueryResult(
+    for template: RecordQueryTemplate,
+    host: BookishRecord
+  ) async throws -> RecordQueryResult {
+    guard let datastore else {
+      throw BookishHarnessError.notLoaded
+    }
+
+    return try await datastore.recordQueryService.result(matching: template.resolve(for: host))
+  }
+
   /// Returns presentation records ordered from layout-specific to generic metadata.
   public func presentations(for kind: String, layout: BookishRecord? = nil) async throws
     -> [BookishRecord]
@@ -396,6 +408,21 @@ public final class BookishHarness {
   public func selectedLayout() async throws -> BookishRecord? {
     let layoutID = selectedLayoutID ?? navigation.selectedRecordIndex?.layoutID ?? fallbackLayoutID
     return try await record(id: layoutID)
+  }
+
+  /// Returns the explicit layout selection or the type-specific layout for a displayed record.
+  public func layout(for record: BookishRecord) async throws -> BookishRecord? {
+    if selectedLayoutID != nil {
+      return try await selectedLayout()
+    }
+
+    if let typeSpecificLayout = layouts.first(where: { layout in
+      layout.strings(BookishRecordKey.types)?.contains(record.kind) == true
+    }) {
+      return typeSpecificLayout
+    }
+
+    return try await selectedLayout()
   }
 
   /// Returns the local directory used for datastore files.
@@ -494,7 +521,7 @@ public final class BookishHarness {
     let seedMarkers = try await datastore.recordService.recordIDs(
       matching: .kind(BookishRecordKind.seedMarker))
     guard seedMarkers.isEmpty else {
-      _ = try await importSeedResource("MetadataSeed", into: datastore)
+      _ = try await importSeedResources(["MetadataSeed", "QuerySectionSeed"], into: datastore)
       return
     }
 
@@ -638,7 +665,8 @@ public final class BookishHarness {
     -> BookishInterchangeFile
   {
     try await importSeedResources(
-      ["IndexSeed", "LayoutSeed", "PresentationSeed", "MetadataSeed"], into: datastore)
+      ["IndexSeed", "LayoutSeed", "PresentationSeed", "MetadataSeed", "QuerySectionSeed"],
+      into: datastore)
   }
 
   /// Removes seeded configuration records no longer present in the current seed resources.
@@ -665,6 +693,7 @@ public final class BookishHarness {
   private func isSeedConfigurationKind(_ kind: String) -> Bool {
     kind == BookishRecordKind.index || kind == BookishRecordKind.layout
       || kind == BookishRecordKind.presentation || kind == BookishRecordKind.metadata
+      || kind == BookishRecordKind.querySection
       || kind == "recordIndex"
   }
 
@@ -674,7 +703,8 @@ public final class BookishHarness {
       && (record.id.rawValue.hasPrefix("datastore-")
         || record.id.rawValue.hasPrefix("presentation.type.")
         || record.id.rawValue.hasPrefix("presentation.layout.")
-        || record.id.rawValue.hasPrefix("metadata.type."))
+        || record.id.rawValue.hasPrefix("metadata.type.")
+        || record.id.rawValue.hasPrefix("query-section-"))
   }
 
   /// Writes the marker that distinguishes an initial seed import from subsequent loads.

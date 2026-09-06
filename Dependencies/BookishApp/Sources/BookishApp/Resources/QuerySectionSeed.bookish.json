@@ -1,0 +1,9 @@
+{
+  "format": { "id": "com.elegantchaos.bookish.records", "version": 1 },
+  "schema": { "defaultKind": "querySection" },
+  "records": [
+    { "ℹ": "query-section-person-books", "name": "Books", "emptyMessage": "No linked books.", "query": { "query": { "predicate": { "kind": "book", "type": "kind" }, "sort": [{ "direction": "ascending", "key": { "key": "name", "type": "property" } }, { "direction": "ascending", "key": { "type": "id" } }] }, "bindings": [{ "type": "propertyContainsHostRecord", "key": "authors" }] } },
+    { "ℹ": "query-section-series-books", "name": "Books", "emptyMessage": "No linked books.", "query": { "query": { "predicate": { "kind": "book", "type": "kind" }, "sort": [{ "direction": "ascending", "key": { "key": "seriesPosition", "type": "property" } }, { "direction": "ascending", "key": { "key": "name", "type": "property" } }, { "direction": "ascending", "key": { "type": "id" } }] }, "bindings": [{ "type": "propertyEqualsHostRecord", "key": "series" }] } },
+    { "ℹ": "query-section-publisher-books", "name": "Books", "emptyMessage": "No linked books.", "query": { "query": { "predicate": { "kind": "book", "type": "kind" }, "sort": [{ "direction": "ascending", "key": { "key": "name", "type": "property" } }, { "direction": "ascending", "key": { "type": "id" } }] }, "bindings": [{ "type": "propertyContainsHostRecord", "key": "publishers" }] } }
+  ]
+}

@@ -293,6 +293,42 @@ struct BookishAppTests {
 
   @MainActor
   @Test
+  func harnessSeedsHostBoundQuerySections() async throws {
+    let harness = try makeHarness()
+    await harness.load()
+
+    let personLayout = try #require(
+      try await harness.record(id: BookishRecordID("datastore-person-layout")))
+    let section = try #require(
+      try await harness.record(id: BookishRecordID("query-section-person-books")))
+    let host = try #require(try await harness.record(id: BookishRecordID("seed-author")))
+    let template = try #require(
+      section.encoded(BookishRecordKey.query, as: RecordQueryTemplate.self))
+    let result = try await harness.recordQueryResult(for: template, host: host)
+
+    #expect(personLayout.kind == BookishRecordKind.layout)
+    #expect(
+      personLayout.list(BookishRecordKey.fields)?.contains(
+        .record(BookishRecordID("query-section-person-books"))) == true)
+    #expect(section.kind == BookishRecordKind.querySection)
+    #expect(section.string(BookishRecordKey.emptyMessage) == "No linked books.")
+    #expect(result.records.map(\.id) == [BookishRecordID("seed-book")])
+  }
+
+  @MainActor
+  @Test
+  func harnessUsesTheRecordKindLayoutForLinkedRecords() async throws {
+    let harness = try makeHarness()
+    await harness.load()
+
+    let person = try #require(try await harness.record(id: BookishRecordID("seed-author")))
+    let layout = try await harness.layout(for: person)
+
+    #expect(layout?.id == BookishRecordID("datastore-person-layout"))
+  }
+
+  @MainActor
+  @Test
 
   func layoutChoicesMatchSelectedIndexTypes() async throws {
     let harness = try makeHarness()

@@ -46,6 +46,13 @@ struct BookishRecordIDDetail: View {
                 navigation: navigation
               )
             )
+          },
+          sectionView: { sectionID in
+            RecordQuerySectionView(
+              sectionID: sectionID,
+              host: record,
+              harness: harness
+            )
           }
         )
       } else {
@@ -70,8 +77,8 @@ struct BookishRecordIDDetail: View {
   private func load() async {
     do {
       record = try await harness.record(id: recordID)
-      layout = try await harness.selectedLayout()
       if let record {
+        layout = try await harness.layout(for: record)
         presentationRecords = try await harness.presentations(
           for: record.kind,
           layout: layout

@@ -95,6 +95,49 @@ struct BookishRecordViewTests {
   }
 
   @Test
+  func presentationKeepsQuerySectionsAtTheirDeclaredLayoutPosition() {
+    let sectionID = BookishRecordID("person-books")
+    let presentation = BookishRecordPresentation(
+      record: BookishRecord(
+        kind: BookishRecordKind.person,
+        properties: [
+          BookishRecordKey.name: .string("Ursula K. Le Guin"),
+          BookishRecordKey.note: .string("Writer"),
+        ]
+      ),
+      layout: BookishRecord(
+        kind: BookishRecordKind.layout,
+        properties: [
+          BookishRecordKey.fields: .list([
+            .string(BookishRecordKey.name),
+            .record(sectionID),
+            .string(BookishRecordKey.allOtherFields),
+          ])
+        ]
+      )
+    )
+
+    #expect(
+      presentation.layoutItems == [
+        .field(
+          BookishRecordField(
+            key: BookishRecordKey.name,
+            label: "Name",
+            value: "Ursula K. Le Guin",
+            rawValue: .string("Ursula K. Le Guin")
+          )),
+        .section(sectionID),
+        .field(
+          BookishRecordField(
+            key: BookishRecordKey.note,
+            label: "Note",
+            value: "Writer",
+            rawValue: .string("Writer")
+          )),
+      ])
+  }
+
+  @Test
 
   func viewingHidesMissingLayoutFieldsWhileEditingKeepsThemAvailable() {
     let presentation = BookishRecordPresentation(

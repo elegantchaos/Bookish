@@ -4,9 +4,9 @@
   "records": [
     { "ℹ": "datastore-all-fields-layout", "name": "All Fields", "types": ["*"], "fields": ["*"] },
     { "ℹ": "datastore-book-layout", "name": "Book", "types": ["book"], "fields": ["authors", "illustrators", "series", "seriesPosition", "publishers", "published", "format", "pages", "isbn", "asin", "dewey", "genres", "editions", "status", "note", "*"], "excludedFields": ["image", "importedID", "name", "subtitle", "source", "originalData"] },
-    { "ℹ": "datastore-person-layout", "name": "Person", "types": ["person"], "fields": ["name", "source", "*"] },
-    { "ℹ": "datastore-organisation-layout", "name": "Organisation", "types": ["organisation"], "fields": ["name", "source", "*"] },
-    { "ℹ": "datastore-series-layout", "name": "Series", "types": ["series"], "fields": ["name", "source", "*"] },
+    { "ℹ": "datastore-person-layout", "name": "Person", "types": ["person"], "fields": ["name", "@query-section-person-books", "source", "*"] },
+    { "ℹ": "datastore-organisation-layout", "name": "Organisation", "types": ["organisation"], "fields": ["name", "@query-section-publisher-books", "source", "*"] },
+    { "ℹ": "datastore-series-layout", "name": "Series", "types": ["series"], "fields": ["name", "@query-section-series-books", "source", "*"] },
     { "ℹ": "datastore-list-layout", "name": "List", "types": ["list"], "fields": ["name", "items", "source", "*"] },
     { "ℹ": "datastore-layout-layout", "name": "Layout", "types": ["layout"], "fields": ["name", "types", "fields", "excludedFields", "presentation", "*"] },
     { "ℹ": "datastore-index-layout", "name": "Index", "types": ["index"], "fields": ["name", "position", "debugOnly", "layout", "types", "query", "*"] }

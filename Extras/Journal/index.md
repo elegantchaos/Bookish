@@ -1,5 +1,6 @@
 # Journal Index
 
+- [2026-09-06 Query Sections](2026-09-06-query-sections.md)
 - [2026-09-06 BookishApp Source Layout](2026-09-06-bookish-app-source-layout.md)
 - [2026-09-06 Record Kind Metadata](2026-09-06-record-kind-metadata.md)
 - [2026-09-06 Per-Kind Index Thumbnails](2026-09-06-per-kind-index-thumbnails.md)

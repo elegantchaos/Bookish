@@ -130,4 +130,7 @@ public enum BookishRecordKey {
 
   /// A stored query description.
   public static let query = "query"
+
+  /// A message displayed when a query section has no matching records.
+  public static let emptyMessage = "emptyMessage"
 }

@@ -38,6 +38,9 @@ public enum BookishRecordKind {
   /// A record that describes a catalogue record kind.
   public static let metadata = "metadata"
 
+  /// A record that defines a query-backed section in a presentation layout.
+  public static let querySection = "querySection"
+
   /// A marker record indicating that initial application seeding has run.
   public static let seedMarker = "seedMarker"
 }
