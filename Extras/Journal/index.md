@@ -1,5 +1,8 @@
 # Journal Index
 
+- [2026-09-06 Record Kind Metadata](2026-09-06-record-kind-metadata.md)
+- [2026-09-06 Per-Kind Index Thumbnails](2026-09-06-per-kind-index-thumbnails.md)
+- [2026-09-06 Linked Record Presentation](2026-09-06-linked-record-presentation.md)
 - [2026-09-06 Linked Record Navigation](2026-09-06-linked-record-navigation.md)
 - [2026-09-05 Record Headers and Seed Lifecycle](2026-09-05-record-headers-and-seed-lifecycle.md)
 - [2026-09-05 Record Detail and Window Layout](2026-09-05-record-detail-status-bar-layout.md)

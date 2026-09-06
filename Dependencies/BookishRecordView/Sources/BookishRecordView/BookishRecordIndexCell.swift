@@ -4,6 +4,7 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 import BookishRecord
+import Foundation
 import SwiftUI
 
 /// Displays a record as a thumbnail and name in a browser index.
@@ -26,7 +27,7 @@ public struct BookishRecordIndexCell: View {
   /// The visual representation of the indexed record.
   public var body: some View {
     HStack(spacing: 10) {
-      BookishRecordIndexThumbnail(
+      BookishRecordThumbnail(
         url: presentation.header.thumbnailURL,
         placeholderSystemImage: placeholderSystemImage)
 
@@ -43,21 +44,21 @@ public struct BookishRecordIndexCell: View {
   }
 }
 
-/// Displays an image thumbnail or a configured SF Symbol fallback for an index row.
-private struct BookishRecordIndexThumbnail: View {
+/// Displays an image thumbnail or a configured SF Symbol fallback.
+public struct BookishRecordThumbnail: View {
   private let url: URL?
   private let placeholderSystemImage: String
 
   @ScaledMetric(relativeTo: .headline) private var size = 40.0
 
   /// Creates a thumbnail from an optional remote image URL.
-  init(url: URL?, placeholderSystemImage: String) {
+  public init(url: URL?, placeholderSystemImage: String) {
     self.url = url
     self.placeholderSystemImage = placeholderSystemImage
   }
 
   /// The image or fallback symbol constrained to a square thumbnail.
-  var body: some View {
+  public var body: some View {
     Group {
       if let url {
         AsyncImage(url: url) { phase in

@@ -294,6 +294,16 @@ public final class BookishHarness {
     try await datastore?.recordService.record(id: id)
   }
 
+  /// Returns the metadata record describing a catalogue kind, or the universal fallback.
+  public func recordKindMetadata(for kind: String) async throws -> BookishRecord? {
+    let metadataID = BookishRecordID("metadata.type.\(kind)")
+    if let metadata = try await record(id: metadataID) {
+      return metadata
+    }
+
+    return try await record(id: BookishRecordID("metadata.type.*"))
+  }
+
   /// Returns presentation records ordered from layout-specific to generic metadata.
   public func presentations(for kind: String, layout: BookishRecord? = nil) async throws
     -> [BookishRecord]
@@ -306,12 +316,16 @@ public final class BookishHarness {
       }
     }
 
-    let kindPresentationID = BookishRecordID("presentation.type.\(kind)")
-    if let presentation = try await record(id: kindPresentationID) {
+    if let metadata = try await recordKindMetadata(for: kind),
+      let presentationID = metadata.record(BookishRecordKey.presentation),
+      let presentation = try await record(id: presentationID)
+    {
       presentations.append(presentation)
     }
 
-    if let presentation = try await record(id: fallbackPresentationID) {
+    if presentations.contains(where: { $0.id == fallbackPresentationID }) == false,
+      let presentation = try await record(id: fallbackPresentationID)
+    {
       presentations.append(presentation)
     }
 
@@ -460,6 +474,7 @@ public final class BookishHarness {
     let seedMarkers = try await datastore.recordService.recordIDs(
       matching: .kind(BookishRecordKind.seedMarker))
     guard seedMarkers.isEmpty else {
+      _ = try await importSeedResource("MetadataSeed", into: datastore)
       return
     }
 
@@ -593,7 +608,8 @@ public final class BookishHarness {
   private func importConfigurationSeeds(into datastore: BookishDatastore) async throws
     -> BookishInterchangeFile
   {
-    try await importSeedResources(["IndexSeed", "LayoutSeed", "PresentationSeed"], into: datastore)
+    try await importSeedResources(
+      ["IndexSeed", "LayoutSeed", "PresentationSeed", "MetadataSeed"], into: datastore)
   }
 
   private func pruneStaleSeedConfigurationRecords(
@@ -617,14 +633,16 @@ public final class BookishHarness {
 
   private func isSeedConfigurationKind(_ kind: String) -> Bool {
     kind == BookishRecordKind.index || kind == BookishRecordKind.layout
-      || kind == BookishRecordKind.presentation || kind == "recordIndex"
+      || kind == BookishRecordKind.presentation || kind == BookishRecordKind.metadata
+      || kind == "recordIndex"
   }
 
   private func isSeedConfigurationRecord(_ record: BookishRecord) -> Bool {
     isSeedConfigurationKind(record.kind)
       && (record.id.rawValue.hasPrefix("datastore-")
         || record.id.rawValue.hasPrefix("presentation.type.")
-        || record.id.rawValue.hasPrefix("presentation.layout."))
+        || record.id.rawValue.hasPrefix("presentation.layout.")
+        || record.id.rawValue.hasPrefix("metadata.type."))
   }
 
   private func writeSeedMarker(to datastore: BookishDatastore) async throws {

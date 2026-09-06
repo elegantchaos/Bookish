@@ -35,6 +35,9 @@ public enum BookishRecordKind {
   /// A record that defines property presentations for a record kind.
   public static let presentation = "presentation"
 
+  /// A record that describes a catalogue record kind.
+  public static let metadata = "metadata"
+
   /// A marker record indicating that initial application seeding has run.
   public static let seedMarker = "seedMarker"
 }

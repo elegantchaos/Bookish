@@ -143,6 +143,27 @@ struct BookishAppTests {
 
   @MainActor
   @Test
+  func harnessSeedsRecordKindMetadata() async throws {
+    let harness = try makeHarness()
+    await harness.load()
+
+    let bookMetadata = try #require(
+      try await harness.recordKindMetadata(for: BookishRecordKind.book))
+    let unknownMetadata = try #require(
+      try await harness.recordKindMetadata(for: "customKind"))
+
+    #expect(bookMetadata.kind == BookishRecordKind.metadata)
+    #expect(bookMetadata.string(BookishRecordKey.name) == "Book")
+    #expect(bookMetadata.string(BookishRecordKey.icon) == "books.vertical")
+    #expect(bookMetadata.strings(BookishRecordKey.types) == [BookishRecordKind.book])
+    #expect(
+      bookMetadata.record(BookishRecordKey.presentation)
+        == BookishRecordID("presentation.type.book"))
+    #expect(unknownMetadata.id == BookishRecordID("metadata.type.*"))
+  }
+
+  @MainActor
+  @Test
 
   func harnessSeedsBrowserIndexRecords() async throws {
     let harness = try makeHarness()
@@ -155,6 +176,10 @@ struct BookishAppTests {
       id: BookishRecordID("datastore-index-indexes"))
     let storedBooksIndex = try await harness.record(id: BookishRecordID("datastore-index-books"))
     let storedSeriesIndex = try await harness.record(id: BookishRecordID("datastore-index-series"))
+    let storedMetadataIndex = try await harness.record(
+      id: BookishRecordID("datastore-index-metadata"))
+    let storedPresentationsIndex = try await harness.record(
+      id: BookishRecordID("datastore-index-presentations"))
     let seedMarker = try await harness.record(id: BookishRecordID("datastore-seed-marker"))
 
     #expect(
@@ -167,6 +192,8 @@ struct BookishAppTests {
         "Lists",
         "Layouts",
         "Indexes",
+        "Metadata",
+        "Presentations",
       ])
     #expect(storedAllRecordsIndex?.kind == BookishRecordKind.index)
     #expect(storedAllRecordsIndex?.bool(BookishRecordKey.debugOnly) == true)
@@ -182,6 +209,14 @@ struct BookishAppTests {
       BookishRecordIndex(record: try #require(storedIndexesIndex)).icon == "list.bullet.rectangle")
     #expect(storedIndexesIndex?.strings(BookishRecordKey.types) == [BookishRecordKind.index])
     #expect(storedIndexesIndex?.bool(BookishRecordKey.debugOnly) == true)
+    #expect(storedMetadataIndex?.strings(BookishRecordKey.types) == [BookishRecordKind.metadata])
+    #expect(storedMetadataIndex?.bool(BookishRecordKey.debugOnly) == true)
+    #expect(
+      storedMetadataIndex?.record(BookishRecordKey.layout)
+        == BookishRecordID("datastore-all-fields-layout"))
+    #expect(
+      storedPresentationsIndex?.strings(BookishRecordKey.types) == [BookishRecordKind.presentation])
+    #expect(storedPresentationsIndex?.bool(BookishRecordKey.debugOnly) == true)
     #expect(storedBooksIndex?.bool(BookishRecordKey.debugOnly) == false)
     #expect(storedBooksIndex?.strings(BookishRecordKey.types) == [BookishRecordKind.book])
     #expect(seedMarker?.kind == BookishRecordKind.seedMarker)
@@ -242,6 +277,8 @@ struct BookishAppTests {
       book?.list(BookishRecordKey.excludedFields)
         == [
           .string(BookishRecordKey.image), .string(BookishRecordKey.importedID),
+          .string(BookishRecordKey.name), .string(BookishRecordKey.subtitle),
+          .string(BookishRecordKey.source),
           .string(BookishRecordKey.originalData),
         ])
     #expect(
@@ -540,6 +577,26 @@ struct BookishAppTests {
   @MainActor
   @Test
 
+  func recordLinkPresentationUsesTheTargetNameImageAndKindIcon() throws {
+    let imageURL = try #require(URL(string: "https://example.com/cover.jpg"))
+    let target = BookishRecord(
+      id: BookishRecordID("book-1"),
+      kind: BookishRecordKind.book,
+      properties: [
+        BookishRecordKey.name: .string("The Left Hand of Darkness"),
+        BookishRecordKey.image: try BookishRecordValue(url: imageURL),
+      ])
+
+    let presentation = BookishRecordLinkPresentation(
+      record: target, placeholderSystemImage: "books.vertical")
+
+    #expect(presentation.name == "The Left Hand of Darkness")
+    #expect(presentation.imageURL == imageURL)
+    #expect(presentation.placeholderSystemImage == "books.vertical")
+  }
+
+  @MainActor
+  @Test
   func exportCommandIsDisabledWithoutRecords() {
     let harness = BookishHarness()
 

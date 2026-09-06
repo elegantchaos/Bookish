@@ -1,0 +1,19 @@
+{
+  "format": { "id": "com.elegantchaos.bookish.records", "version": 1 },
+  "schema": { "defaultKind": "metadata" },
+  "records": [
+    { "ℹ": "metadata.type.*", "name": "Record", "icon": "doc", "types": ["*"], "presentation": "@presentation.type.*" },
+    { "ℹ": "metadata.type.record", "name": "Record", "icon": "doc", "types": ["record"], "presentation": "@presentation.type.*" },
+    { "ℹ": "metadata.type.book", "name": "Book", "icon": "books.vertical", "types": ["book"], "presentation": "@presentation.type.book" },
+    { "ℹ": "metadata.type.person", "name": "Person", "icon": "person", "types": ["person"], "presentation": "@presentation.type.*" },
+    { "ℹ": "metadata.type.organisation", "name": "Organisation", "icon": "building.2", "types": ["organisation"], "presentation": "@presentation.type.*" },
+    { "ℹ": "metadata.type.series", "name": "Series", "icon": "square.stack.3d.up", "types": ["series"], "presentation": "@presentation.type.*" },
+    { "ℹ": "metadata.type.list", "name": "List", "icon": "list.bullet", "types": ["list"], "presentation": "@presentation.type.*" },
+    { "ℹ": "metadata.type.relationship", "name": "Relationship", "icon": "arrow.triangle.branch", "types": ["relationship"], "presentation": "@presentation.type.*" },
+    { "ℹ": "metadata.type.layout", "name": "Layout", "icon": "rectangle.3.group", "types": ["layout"], "presentation": "@presentation.type.*" },
+    { "ℹ": "metadata.type.index", "name": "Index", "icon": "list.bullet.rectangle", "types": ["index"], "presentation": "@presentation.type.*" },
+    { "ℹ": "metadata.type.presentation", "name": "Presentation", "icon": "paintpalette", "types": ["presentation"], "presentation": "@presentation.type.*" },
+    { "ℹ": "metadata.type.metadata", "name": "Metadata", "icon": "tag", "types": ["metadata"], "presentation": "@presentation.type.*" },
+    { "ℹ": "metadata.type.seedMarker", "name": "Seed Marker", "icon": "checkmark.seal", "types": ["seedMarker"], "presentation": "@presentation.type.*" }
+  ]
+}

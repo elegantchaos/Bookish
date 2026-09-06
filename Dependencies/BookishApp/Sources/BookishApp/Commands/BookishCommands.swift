@@ -1,3 +1,8 @@
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+//  Created by Sam Deane on 01/09/2026.
+//  Copyright © 2026 Elegant Chaos Limited. All rights reserved.
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
 import BookishImporter
 import BookishImporterSamples
 import BookishRecord
@@ -85,12 +90,3 @@ public enum BookishWindow: String, Sendable {
   /// Debug-only mutation history browser.
   case mutationDebug = "bookish-mutation-debug"
 }
-
-extension BookishHarness: CommandCentre {
-  /// Displays fire-and-forget command failures in the datastore status bar.
-  public func recordCommandFailure<C: Command>(_ command: C, error: any Error)
-  where C.Centre == BookishHarness {
-    report(error: error)
-  }
-}
-
