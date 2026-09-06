@@ -1,10 +1,20 @@
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+//  Created by Sam Deane on 06/09/2026.
+//  Copyright © 2026 Elegant Chaos Limited. All rights reserved.
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
 import SwiftUI
 import UniformTypeIdentifiers
 
 /// The root view for the datastore app.
 public struct BookishHarnessView: View {
+  /// The datastore coordinator that owns the browser state.
   @Bindable private var harness: BookishHarness
+
+  /// The shared navigation route for the browser columns.
   @Environment(BookishNavigationService.self) private var navigation
+
+  /// Whether the view initiates the initial datastore load.
   private let loadsOnAppear: Bool
 
   /// Creates the datastore harness view.
@@ -49,13 +59,20 @@ public struct BookishHarnessView: View {
       onCompletion: handleInterchangeExport
     )
     .task {
-      guard loadsOnAppear else {
-        return
-      }
-      await harness.load()
+      await loadIfNeeded()
     }
   }
 
+  /// Starts the initial datastore load when this view owns startup.
+  private func loadIfNeeded() async {
+    guard loadsOnAppear else {
+      return
+    }
+
+    await harness.load()
+  }
+
+  /// Imports a selected interchange file or reports a picker failure.
   private func handleInterchangeImport(_ result: Result<URL, Error>) {
     switch result {
     case .success(let url):
@@ -68,6 +85,7 @@ public struct BookishHarnessView: View {
     }
   }
 
+  /// Imports a selected Delicious Library file or reports a picker failure.
   private func handleDeliciousLibraryImport(_ result: Result<URL, Error>) {
     switch result {
     case .success(let url):
@@ -80,6 +98,7 @@ public struct BookishHarnessView: View {
     }
   }
 
+  /// Reports completion or failure from the interchange export panel.
   private func handleInterchangeExport(_ result: Result<URL, Error>) {
     switch result {
     case .success:
@@ -90,7 +109,6 @@ public struct BookishHarnessView: View {
     }
   }
 }
-
 
 #Preview {
   let navigation = BookishNavigationService()

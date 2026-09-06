@@ -3,13 +3,16 @@
 //  Copyright © 2026 Elegant Chaos Limited. All rights reserved.
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
-import CommandsUI
 import BookishRecord
+import CommandsUI
 import SwiftUI
 
+/// Provides the browser actions and layout picker in the main toolbar.
 struct BookishToolbar: ToolbarContent {
-  var harness: BookishHarness
+  /// The datastore coordinator backing toolbar actions and selection.
+  let harness: BookishHarness
 
+  /// The toolbar items for import, export, record actions, and layouts.
   var body: some ToolbarContent {
     ToolbarItem {
       harness.button(ImportInterchangeCommand())

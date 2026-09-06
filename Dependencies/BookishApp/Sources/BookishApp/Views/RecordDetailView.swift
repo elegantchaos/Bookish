@@ -7,10 +7,15 @@ import BookishRecord
 import BookishRecordView
 import SwiftUI
 
+/// Displays the selected record and linked-record navigation stack.
 struct RecordDetailView: View {
+  /// The datastore coordinator used by record detail views.
   let harness: BookishHarness
+
+  /// The route containing the selected record and detail path.
   let navigation: BookishNavigationService
 
+  /// The detail navigation stack for the selected record.
   var body: some View {
     NavigationStack(path: recordNavigationPath) {
       Group {
@@ -27,6 +32,7 @@ struct RecordDetailView: View {
     }
   }
 
+  /// Binds user-driven stack changes back to the navigation service.
   private var recordNavigationPath: Binding<[BookishRecordID]> {
     Binding {
       navigation.recordNavigationPath

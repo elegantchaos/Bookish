@@ -215,6 +215,3 @@ public final class BookishNavigationService {
   }
 
 }
-
-extension BookishNavigationService: CommandCentre {
-}

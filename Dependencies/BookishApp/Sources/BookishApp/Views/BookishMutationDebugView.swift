@@ -10,8 +10,13 @@ import SwiftUI
 #if DEBUG
   /// Debug-only mutation history browser kept outside the main record UI.
   public struct BookishMutationDebugView: View {
+    /// The datastore coordinator used to load mutations.
     private let harness: BookishHarness
+
+    /// The mutations currently displayed in the browser.
     @State private var mutations: [MutationRecord] = []
+
+    /// The selected mutation identifier.
     @State private var selectedMutationID: MutationID?
 
     /// Creates the mutation debug window content.
@@ -42,6 +47,7 @@ import SwiftUI
       }
     }
 
+    /// The mutation selected in the list, when one exists.
     private var selectedMutation: MutationRecord? {
       guard let selectedMutationID else {
         return nil
@@ -50,6 +56,7 @@ import SwiftUI
       return mutations.first { $0.id == selectedMutationID }
     }
 
+    /// Loads mutations and selects the first available entry.
     private func load() async {
       do {
         mutations = try await harness.mutations()

@@ -1,13 +1,20 @@
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+//  Created by Sam Deane on 07/10/2022.
+//  Copyright © 2026 Elegant Chaos Limited. All rights reserved.
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
 import Foundation
 import SwiftUI
 import UniformTypeIdentifiers
 
 /// A JSON file document used to export datastore interchange data.
 public struct BookishInterchangeDocument: FileDocument {
+  /// The file types this document can import.
   public static var readableContentTypes: [UTType] {
     [.json]
   }
 
+  /// The file types this document can export.
   public static var writableContentTypes: [UTType] {
     [.json]
   }

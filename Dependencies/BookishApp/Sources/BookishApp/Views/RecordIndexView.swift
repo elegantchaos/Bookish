@@ -3,18 +3,28 @@
 //  Copyright © 2026 Elegant Chaos Limited. All rights reserved.
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
-import SwiftUI
 import BookishRecord
 import BookishRecordView
+import SwiftUI
 
+/// Displays records returned by the currently selected browser index.
 struct RecordIndexView: View {
+  /// The datastore coordinator that resolves layouts and metadata.
   let harness: BookishHarness
+
+  /// The route containing the active index and record selection.
   let navigation: BookishNavigationService
 
+  /// The layout currently used to render index rows.
   @State private var layout: BookishRecord?
+
+  /// Resolved presentation records keyed by catalogue kind.
   @State private var presentationsByKind: [String: [BookishRecord]] = [:]
+
+  /// Metadata records keyed by catalogue kind.
   @State private var metadataByKind: [String: BookishRecord] = [:]
 
+  /// The list of records selected by the active index.
   var body: some View {
     List(selection: selectedRecordID) {
       ForEach(navigation.selectedRecordResult?.records ?? []) { record in
@@ -36,6 +46,7 @@ struct RecordIndexView: View {
     }
   }
 
+  /// Binds list selection to the selected record identifier.
   private var selectedRecordID: Binding<BookishRecordID?> {
     Binding {
       navigation.selectedRecordID
@@ -44,10 +55,12 @@ struct RecordIndexView: View {
     }
   }
 
+  /// Identifies data changes that require row presentations to be resolved again.
   private var taskID: String {
     "\(navigation.selectedRecordIndexID?.rawValue ?? "")-\(harness.selectedLayoutID?.rawValue ?? "")-\(harness.revision)"
   }
 
+  /// Resolves the active layout and the metadata needed by visible record kinds.
   private func loadPresentation() async {
     do {
       layout = try await harness.selectedLayout()

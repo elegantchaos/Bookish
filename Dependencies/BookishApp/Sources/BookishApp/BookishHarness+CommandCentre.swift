@@ -3,9 +3,9 @@
 //  Copyright © 2026 Elegant Chaos Limited. All rights reserved.
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
-import Foundation
 import Commands
 
+/// Enables datastore commands to report failures through the harness status.
 extension BookishHarness: CommandCentre {
   /// Displays fire-and-forget command failures in the datastore status bar.
   public func recordCommandFailure<C: Command>(_ command: C, error: any Error)
@@ -13,4 +13,3 @@ extension BookishHarness: CommandCentre {
     report(error: error)
   }
 }
-

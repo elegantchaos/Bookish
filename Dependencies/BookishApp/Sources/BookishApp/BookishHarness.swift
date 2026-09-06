@@ -1,3 +1,8 @@
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+//  Created by Sam Deane on 01/09/2026.
+//  Copyright © 2026 Elegant Chaos Limited. All rights reserved.
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
 import BookishCoding
 import BookishDatastore
 import BookishImporter
@@ -48,11 +53,22 @@ public final class BookishHarness {
   /// Whether debug-only indexes are included in the browser.
   public let defaultShowsDebugIndexes: Bool
 
+  /// The universal layout used when no explicit layout is selected.
   private let fallbackLayoutID = BookishRecordID("datastore-all-fields-layout")
+
+  /// The universal property presentation used after more-specific presentations.
   private let fallbackPresentationID = BookishRecordID("presentation.type.*")
+
+  /// The record that marks initial configuration seed import.
   private let seedMarkerID = BookishRecordID("datastore-seed-marker")
+
+  /// An injected datastore directory for tests or a custom local store.
   private let directoryURL: URL?
+
+  /// The loaded datastore backing all harness operations.
   private var datastore: BookishDatastore?
+
+  /// The loaded layout records used to derive compatible layout choices.
   private var layouts: [BookishRecord] = []
 
   /// Creates an empty harness ready to load the datastore.
@@ -397,6 +413,7 @@ public final class BookishHarness {
     status = error.localizedDescription
   }
 
+  /// Updates the selected record's status property.
   private func setStatus(_ value: String) async {
     guard let datastore, let recordID = navigation.selectedRecordID else {
       return
@@ -416,6 +433,7 @@ public final class BookishHarness {
     }
   }
 
+  /// Reads a security-scoped file and imports its data with the supplied importer.
   private func importFile<Importer: BookishImporter>(
     from url: URL,
     using importer: Importer
@@ -435,6 +453,7 @@ public final class BookishHarness {
     }
   }
 
+  /// Refreshes browser indexes, selected records, layouts, and compatible selection state.
   private func refresh() async throws {
     guard let datastore else {
       return
@@ -470,6 +489,7 @@ public final class BookishHarness {
     datastore = nil
   }
 
+  /// Seeds a new datastore, or refreshes metadata required by existing datastores.
   private func seed(using datastore: BookishDatastore) async throws {
     let seedMarkers = try await datastore.recordService.recordIDs(
       matching: .kind(BookishRecordKind.seedMarker))
@@ -484,6 +504,7 @@ public final class BookishHarness {
     try await writeSeedMarker(to: datastore)
   }
 
+  /// Returns the injected or application-support directory for local datastore files.
   private func datastoreDirectory() throws -> URL {
     if let directoryURL {
       try FileManager.default.createDirectory(at: directoryURL, withIntermediateDirectories: true)
@@ -502,6 +523,7 @@ public final class BookishHarness {
     return directory
   }
 
+  /// Clears a selected layout that is missing or incompatible with the active index.
   private func updateLayoutSelection(using datastore: BookishDatastore) async throws {
     guard let selectedLayoutID else {
       return
@@ -517,6 +539,7 @@ public final class BookishHarness {
     }
   }
 
+  /// The layouts compatible with the active browser index's advisory kinds.
   private var compatibleLayouts: [BookishRecord] {
     guard let selectedRecordIndex = navigation.selectedRecordIndex else {
       return layouts
@@ -527,6 +550,7 @@ public final class BookishHarness {
     }
   }
 
+  /// The query that loads visible browser index records.
   private var recordIndexQuery: RecordQuery {
     let predicate: RecordPredicate
     if defaultShowsDebugIndexes {
@@ -544,6 +568,7 @@ public final class BookishHarness {
     )
   }
 
+  /// Refreshes the query result for the currently selected browser index.
   private func refreshSelectedRecordIndex(using datastore: BookishDatastore) async throws {
     guard let selectedRecordIndex = navigation.selectedRecordIndex else {
       navigation.update(selectedRecordResult: nil)
@@ -559,6 +584,7 @@ public final class BookishHarness {
     navigation.update(selectedRecordResult: result)
   }
 
+  /// Moves the selected browser index by a wrapping offset and refreshes its records.
   private func selectRecordIndex(offset: Int) async {
     guard let datastore else {
       status = BookishHarnessError.notLoaded.localizedDescription
@@ -578,6 +604,7 @@ public final class BookishHarness {
     }
   }
 
+  /// Decodes and upserts one bundled interchange seed resource.
   private func importSeedResource(_ name: String, into datastore: BookishDatastore) async throws
     -> BookishInterchangeFile
   {
@@ -592,6 +619,7 @@ public final class BookishHarness {
     return file
   }
 
+  /// Imports multiple bundled seed resources as one aggregate interchange file.
   private func importSeedResources(_ names: [String], into datastore: BookishDatastore) async throws
     -> BookishInterchangeFile
   {
@@ -605,6 +633,7 @@ public final class BookishHarness {
     return BookishInterchangeFile(records: records)
   }
 
+  /// Imports all configuration seed resources used by indexes, layouts, and presentation.
   private func importConfigurationSeeds(into datastore: BookishDatastore) async throws
     -> BookishInterchangeFile
   {
@@ -612,6 +641,7 @@ public final class BookishHarness {
       ["IndexSeed", "LayoutSeed", "PresentationSeed", "MetadataSeed"], into: datastore)
   }
 
+  /// Removes seeded configuration records no longer present in the current seed resources.
   private func pruneStaleSeedConfigurationRecords(
     seed: BookishInterchangeFile,
     in datastore: BookishDatastore
@@ -631,12 +661,14 @@ public final class BookishHarness {
     }
   }
 
+  /// Returns whether a record kind belongs to the seeded configuration projection.
   private func isSeedConfigurationKind(_ kind: String) -> Bool {
     kind == BookishRecordKind.index || kind == BookishRecordKind.layout
       || kind == BookishRecordKind.presentation || kind == BookishRecordKind.metadata
       || kind == "recordIndex"
   }
 
+  /// Returns whether a record is a configuration record owned by the bundled seeds.
   private func isSeedConfigurationRecord(_ record: BookishRecord) -> Bool {
     isSeedConfigurationKind(record.kind)
       && (record.id.rawValue.hasPrefix("datastore-")
@@ -645,6 +677,7 @@ public final class BookishHarness {
         || record.id.rawValue.hasPrefix("metadata.type."))
   }
 
+  /// Writes the marker that distinguishes an initial seed import from subsequent loads.
   private func writeSeedMarker(to datastore: BookishDatastore) async throws {
     try await datastore.recordStore.upsert(
       BookishRecord(
@@ -655,34 +688,5 @@ public final class BookishHarness {
         ]
       )
     )
-  }
-}
-
-private enum BookishHarnessError: LocalizedError {
-  case notLoaded
-  case missingSeedResource(String)
-
-  var errorDescription: String? {
-    switch self {
-    case .notLoaded:
-      "The datastore is not loaded."
-
-    case .missingSeedResource(let name):
-      "The bundled seed resource '\(name).bookish.json' is missing."
-    }
-  }
-}
-
-extension BookishRecord {
-  /// Returns whether this configuration record is compatible with any requested kind.
-  fileprivate func matchesAnyType(in requestedTypes: [String]) -> Bool {
-    let supportedTypes = strings(BookishRecordKey.types) ?? []
-    guard !supportedTypes.isEmpty, !requestedTypes.isEmpty else {
-      return true
-    }
-
-    return supportedTypes.contains(BookishRecordKey.allTypes)
-      || requestedTypes.contains(BookishRecordKey.allTypes)
-      || !Set(supportedTypes).isDisjoint(with: requestedTypes)
   }
 }

@@ -81,12 +81,3 @@ public struct BookishCommands: Commands {
     }
   }
 }
-
-/// Window identifiers used by the datastore app scenes.
-public enum BookishWindow: String, Sendable {
-  /// The primary Bookish browser window.
-  case main = "bookish-main"
-
-  /// Debug-only mutation history browser.
-  case mutationDebug = "bookish-mutation-debug"
-}

@@ -7,14 +7,24 @@ import BookishRecord
 import BookishRecordView
 import SwiftUI
 
+/// Resolves and renders one record as a reusable browser cell.
 struct BookishRecordIDCell: View {
+  /// The identifier of the record to render.
   let recordID: BookishRecordID
+
+  /// The datastore coordinator used to resolve the record.
   let harness: BookishHarness
 
+  /// The resolved record, when available.
   @State private var record: BookishRecord?
+
+  /// The layout used to render the cell.
   @State private var layout: BookishRecord?
+
+  /// The cascading property presentations for the record's kind.
   @State private var presentationRecords: [BookishRecord] = []
 
+  /// The resolved record cell or its identifier fallback.
   var body: some View {
     Group {
       if let record {
@@ -33,10 +43,12 @@ struct BookishRecordIDCell: View {
     }
   }
 
+  /// Identifies inputs that require the cell to resolve its record again.
   private var taskID: String {
     "\(recordID.rawValue)-\(harness.selectedLayoutID?.rawValue ?? "")-\(harness.revision)"
   }
 
+  /// Resolves the record, selected layout, and cascading presentations.
   private func load() async {
     do {
       record = try await harness.record(id: recordID)

@@ -77,16 +77,3 @@ public struct NavigateToRecordCommand: CommandWithUI {
     }
   }
 }
-
-/// Errors reported when a record navigation route has not yet been implemented.
-public enum NavigateToRecordCommandError: LocalizedError {
-  /// The browser cannot yet resolve the most suitable index for a linked record.
-  case bestIndexSelectionUnavailable
-
-  public var errorDescription: String? {
-    switch self {
-    case .bestIndexSelectionUnavailable:
-      "Selecting the best index for a linked record is not available yet."
-    }
-  }
-}
