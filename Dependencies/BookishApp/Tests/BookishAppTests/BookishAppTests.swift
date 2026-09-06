@@ -504,7 +504,24 @@ struct BookishAppTests {
   @MainActor
   @Test
 
-  func navigateToRecordCommandSelectsTargetKindAndRecord() async throws {
+  func navigateToRecordCommandPushesTargetOutsideCurrentIndex() async throws {
+    let navigation = BookishNavigationService()
+    let selectedRecordResult = RecordQueryResult(query: RecordQuery())
+    selectedRecordResult.update(records: [
+      BookishRecord(id: BookishRecordID("author-1"), kind: "author")
+    ])
+    navigation.update(selectedRecordResult: selectedRecordResult)
+
+    try await navigation.perform(NavigateToRecordCommand(recordID: BookishRecordID("book-1")))
+
+    #expect(navigation.selectedRecordID == BookishRecordID("author-1"))
+    #expect(navigation.recordNavigationPath == [BookishRecordID("book-1")])
+  }
+
+  @MainActor
+  @Test
+
+  func navigateToRecordCommandCanSelectTargetInCurrentIndex() async throws {
     let navigation = BookishNavigationService()
     let selectedRecordResult = RecordQueryResult(query: RecordQuery())
     selectedRecordResult.update(records: [
@@ -513,9 +530,11 @@ struct BookishAppTests {
     ])
     navigation.update(selectedRecordResult: selectedRecordResult)
 
-    try await navigation.perform(NavigateToRecordCommand(recordID: BookishRecordID("book-1")))
+    try await navigation.perform(
+      NavigateToRecordCommand(recordID: BookishRecordID("book-1"), mode: .currentIndex))
 
     #expect(navigation.selectedRecordID == BookishRecordID("book-1"))
+    #expect(navigation.recordNavigationPath.isEmpty)
   }
 
   @MainActor

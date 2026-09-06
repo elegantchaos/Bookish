@@ -178,13 +178,26 @@ private struct RecordDetailView: View {
   let navigation: BookishNavigationService
 
   var body: some View {
-    Group {
-      if let recordID = navigation.selectedRecordID {
-        BookishRecordIDDetail(recordID: recordID, harness: harness, navigation: navigation)
-      } else {
-        ContentUnavailableView(
-          "No Selection", systemImage: "list.bullet.rectangle", description: Text(harness.status))
+    NavigationStack(path: recordNavigationPath) {
+      Group {
+        if let recordID = navigation.selectedRecordID {
+          BookishRecordIDDetail(recordID: recordID, harness: harness, navigation: navigation)
+        } else {
+          ContentUnavailableView(
+            "No Selection", systemImage: "list.bullet.rectangle", description: Text(harness.status))
+        }
       }
+      .navigationDestination(for: BookishRecordID.self) { recordID in
+        BookishRecordIDDetail(recordID: recordID, harness: harness, navigation: navigation)
+      }
+    }
+  }
+
+  private var recordNavigationPath: Binding<[BookishRecordID]> {
+    Binding {
+      navigation.recordNavigationPath
+    } set: { path in
+      navigation.setRecordNavigationPath(path)
     }
   }
 }

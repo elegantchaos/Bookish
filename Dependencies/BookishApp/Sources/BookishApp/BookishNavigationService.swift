@@ -25,6 +25,9 @@ public final class BookishNavigationService {
   /// The selected materialised record shown in the detail column.
   public private(set) var selectedRecordID: BookishRecordID?
 
+  /// The linked records pushed from the selected record in the detail column.
+  public private(set) var recordNavigationPath: [BookishRecordID] = []
+
   /// The records matching the selected browser index.
   public private(set) var selectedRecordResult: RecordQueryResult?
 
@@ -73,6 +76,7 @@ public final class BookishNavigationService {
       selectedRecordIndexID = recordIndexes.first?.id
       selectedRecordResult = nil
       selectedRecordID = nil
+      recordNavigationPath = []
     }
   }
 
@@ -88,6 +92,7 @@ public final class BookishNavigationService {
     selectedRecordIndexID = nil
     selectedRecordResult = nil
     selectedRecordID = nil
+    recordNavigationPath = []
   }
 
   /// Selects a browser index and clears stale record content.
@@ -96,6 +101,7 @@ public final class BookishNavigationService {
       selectedRecordIndexID = recordIndexes.first?.id
       selectedRecordResult = nil
       selectedRecordID = nil
+      recordNavigationPath = []
       return
     }
 
@@ -106,10 +112,13 @@ public final class BookishNavigationService {
     selectedRecordIndexID = recordIndexID
     selectedRecordResult = nil
     selectedRecordID = nil
+    recordNavigationPath = []
   }
 
   /// Selects a record identifier within the active browser index.
   public func select(recordID: BookishRecordID?) {
+    recordNavigationPath = []
+
     guard let recordID else {
       selectedRecordID = selectedRecordIDs.first
       return
@@ -126,6 +135,16 @@ public final class BookishNavigationService {
   /// Returns whether a record identifier exists in the selected browser index.
   public func contains(recordID: BookishRecordID) -> Bool {
     selectedRecordIDs.contains(recordID)
+  }
+
+  /// Appends a linked record to the detail navigation path.
+  public func push(recordID: BookishRecordID) {
+    recordNavigationPath.append(recordID)
+  }
+
+  /// Replaces the detail navigation path after user-driven back navigation.
+  public func setRecordNavigationPath(_ path: [BookishRecordID]) {
+    recordNavigationPath = path
   }
 
   /// Moves to the next available browser index.

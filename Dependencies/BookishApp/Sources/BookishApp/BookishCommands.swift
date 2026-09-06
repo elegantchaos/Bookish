@@ -598,22 +598,45 @@ public struct SelectPreviousRecordCommand: CommandWithUI {
   }
 }
 
-/// Navigates directly to a materialised record in the datastore browser.
+/// Navigates to a materialised record using the requested browser route.
 public struct NavigateToRecordCommand: CommandWithUI {
+  /// Controls how navigation reaches a linked record.
+  public enum Mode: Sendable {
+    /// Pushes the linked record onto the detail navigation stack.
+    case push
+
+    /// Selects the linked record when it belongs to the active browser index.
+    case currentIndex
+
+    /// Selects the most suitable browser index before showing the linked record.
+    case bestIndex
+  }
+
   public typealias Centre = BookishNavigationService
   public typealias ResultType = Void
 
   public let id: String
   private let recordID: BookishRecordID
+  private let mode: Mode
 
   /// Creates a record navigation command for a specific target.
-  public init(recordID: BookishRecordID) {
+  public init(recordID: BookishRecordID, mode: Mode = .push) {
     self.id = "datastore.navigation.record.\(recordID.rawValue)"
     self.recordID = recordID
+    self.mode = mode
   }
 
   public func availability(centre: BookishNavigationService) -> CommandAvailability {
-    centre.contains(recordID: recordID) ? .enabled : .disabled
+    switch mode {
+    case .push:
+      .enabled
+
+    case .currentIndex:
+      centre.contains(recordID: recordID) ? .enabled : .disabled
+
+    case .bestIndex:
+      .disabled
+    }
   }
 
   public func name(centre: BookishNavigationService) -> String {
@@ -629,6 +652,28 @@ public struct NavigateToRecordCommand: CommandWithUI {
   }
 
   public func perform(centre: BookishNavigationService) async throws {
-    centre.select(recordID: recordID)
+    switch mode {
+    case .push:
+      centre.push(recordID: recordID)
+
+    case .currentIndex:
+      centre.select(recordID: recordID)
+
+    case .bestIndex:
+      throw NavigateToRecordCommandError.bestIndexSelectionUnavailable
+    }
+  }
+}
+
+/// Errors reported when a record navigation route has not yet been implemented.
+public enum NavigateToRecordCommandError: LocalizedError {
+  /// The browser cannot yet resolve the most suitable index for a linked record.
+  case bestIndexSelectionUnavailable
+
+  public var errorDescription: String? {
+    switch self {
+    case .bestIndexSelectionUnavailable:
+      "Selecting the best index for a linked record is not available yet."
+    }
   }
 }

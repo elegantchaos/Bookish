@@ -1,5 +1,6 @@
 # Journal Index
 
+- [2026-09-06 Linked Record Navigation](2026-09-06-linked-record-navigation.md)
 - [2026-09-05 Record Headers and Seed Lifecycle](2026-09-05-record-headers-and-seed-lifecycle.md)
 - [2026-09-05 Record Detail and Window Layout](2026-09-05-record-detail-status-bar-layout.md)
 - [2026-09-05 Layout Field Visibility](2026-09-05-layout-field-visibility.md)
