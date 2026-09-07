@@ -22,13 +22,6 @@ public protocol BookishNavigationServiceProvider: CommandCentre {
 extension BookishCommandCentre: BookishHarnessProvider, BookishNavigationServiceProvider {
 }
 
-extension BookishNavigationService: BookishNavigationServiceProvider {
-  /// Vends itself during the command-migration transition.
-  public var navigationService: BookishNavigationService {
-    self
-  }
-}
-
 extension BookishHarness: BookishHarnessProvider {
   public var harness: BookishHarness { self }
 }

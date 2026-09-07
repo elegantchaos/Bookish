@@ -18,6 +18,9 @@ struct BookishRecordIDDetail: View {
   /// The current browser navigation route.
   let navigation: BookishNavigationService
 
+  /// The application-owned command boundary for linked record navigation.
+  let commander: BookishCommandCentre
+
   /// The resolved record, when it is available.
   @State private var record: BookishRecord?
 
@@ -43,7 +46,7 @@ struct BookishRecordIDDetail: View {
               RecordLinkButton(
                 recordID: recordID,
                 harness: harness,
-                navigation: navigation
+                commander: commander
               )
             )
           },
@@ -52,7 +55,8 @@ struct BookishRecordIDDetail: View {
               linkedLayoutID: linkedLayoutID,
               host: record,
               harness: harness,
-              navigation: navigation
+              navigation: navigation,
+              commander: commander
             )
           }
         )

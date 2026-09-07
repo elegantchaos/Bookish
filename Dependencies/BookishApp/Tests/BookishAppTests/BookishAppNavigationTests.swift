@@ -10,21 +10,23 @@ import Testing
   @Test
   func selectionCommandsAreDisabledWithoutSelection() {
     let harness = BookishHarness()
+    let commander = BookishCommandCentre(harness: harness)
 
-    #expect(harness.availability(MarkReadingCommand()) == .disabled)
-    #expect(harness.availability(MarkFinishedCommand()) == .disabled)
-    #expect(harness.availability(SimulateRemoteMutationCommand()) == .disabled)
+    #expect(commander.availability(MarkReadingCommand()) == .disabled)
+    #expect(commander.availability(MarkFinishedCommand()) == .disabled)
+    #expect(commander.availability(SimulateRemoteMutationCommand()) == .disabled)
   }
 
   @Test
   func navigationCommandsAreDisabledWithoutRecords() {
-    let harness = BookishHarness()
     let navigation = BookishNavigationService()
+    let harness = BookishHarness(navigation: navigation)
+    let commander = BookishCommandCentre(harness: harness)
 
-    #expect(harness.availability(SelectNextRecordIndexCommand()) == .disabled)
-    #expect(harness.availability(SelectPreviousRecordIndexCommand()) == .disabled)
-    #expect(navigation.availability(SelectNextRecordCommand()) == .disabled)
-    #expect(navigation.availability(SelectPreviousRecordCommand()) == .disabled)
+    #expect(commander.availability(SelectNextRecordIndexCommand()) == .disabled)
+    #expect(commander.availability(SelectPreviousRecordIndexCommand()) == .disabled)
+    #expect(commander.availability(SelectNextRecordCommand()) == .disabled)
+    #expect(commander.availability(SelectPreviousRecordCommand()) == .disabled)
   }
 
   @Test
@@ -66,6 +68,8 @@ import Testing
     #expect(harness.navigation.selectedRecordIndexName == "Layouts")
 
     let navigation = BookishNavigationService()
+    let navigationCommander = BookishCommandCentre(
+      harness: BookishHarness(navigation: navigation))
     let selectedRecordResult = RecordQueryResult(query: RecordQuery())
     selectedRecordResult.update(records: [
       BookishRecord(id: BookishRecordID("book-1"), kind: "book"),
@@ -74,11 +78,11 @@ import Testing
     navigation.update(selectedRecordResult: selectedRecordResult)
     navigation.select(recordID: BookishRecordID("book-1"))
 
-    try await navigation.perform(SelectNextRecordCommand())
+    try await navigationCommander.perform(SelectNextRecordCommand())
 
     #expect(navigation.selectedRecordID == BookishRecordID("book-2"))
 
-    try await navigation.perform(SelectPreviousRecordCommand())
+    try await navigationCommander.perform(SelectPreviousRecordCommand())
 
     #expect(navigation.selectedRecordID == BookishRecordID("book-1"))
   }
@@ -98,13 +102,14 @@ import Testing
   @Test
   func navigateToRecordCommandPushesTargetOutsideCurrentIndex() async throws {
     let navigation = BookishNavigationService()
+    let commander = BookishCommandCentre(harness: BookishHarness(navigation: navigation))
     let selectedRecordResult = RecordQueryResult(query: RecordQuery())
     selectedRecordResult.update(records: [
       BookishRecord(id: BookishRecordID("author-1"), kind: "author")
     ])
     navigation.update(selectedRecordResult: selectedRecordResult)
 
-    try await navigation.perform(NavigateToRecordCommand(recordID: BookishRecordID("book-1")))
+    try await commander.perform(NavigateToRecordCommand(recordID: BookishRecordID("book-1")))
 
     #expect(navigation.selectedRecordID == BookishRecordID("author-1"))
     #expect(navigation.recordNavigationPath == [BookishRecordID("book-1")])
@@ -113,6 +118,7 @@ import Testing
   @Test
   func navigateToRecordCommandCanSelectTargetInCurrentIndex() async throws {
     let navigation = BookishNavigationService()
+    let commander = BookishCommandCentre(harness: BookishHarness(navigation: navigation))
     let selectedRecordResult = RecordQueryResult(query: RecordQuery())
     selectedRecordResult.update(records: [
       BookishRecord(id: BookishRecordID("author-1"), kind: "author"),
@@ -120,7 +126,7 @@ import Testing
     ])
     navigation.update(selectedRecordResult: selectedRecordResult)
 
-    try await navigation.perform(
+    try await commander.perform(
       NavigateToRecordCommand(recordID: BookishRecordID("book-1"), mode: .currentIndex))
 
     #expect(navigation.selectedRecordID == BookishRecordID("book-1"))

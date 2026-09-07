@@ -15,19 +15,32 @@ struct RecordDetailView: View {
   /// The route containing the selected record and detail path.
   let navigation: BookishNavigationService
 
+  /// The application-owned command boundary for linked record navigation.
+  let commander: BookishCommandCentre
+
   /// The detail navigation stack for the selected record.
   var body: some View {
     NavigationStack(path: recordNavigationPath) {
       Group {
         if let recordID = navigation.selectedRecordID {
-          BookishRecordIDDetail(recordID: recordID, harness: harness, navigation: navigation)
+          BookishRecordIDDetail(
+            recordID: recordID,
+            harness: harness,
+            navigation: navigation,
+            commander: commander
+          )
         } else {
           ContentUnavailableView(
             "No Selection", systemImage: "list.bullet.rectangle", description: Text(harness.status))
         }
       }
       .navigationDestination(for: BookishRecordID.self) { recordID in
-        BookishRecordIDDetail(recordID: recordID, harness: harness, navigation: navigation)
+        BookishRecordIDDetail(
+          recordID: recordID,
+          harness: harness,
+          navigation: navigation,
+          commander: commander
+        )
       }
     }
   }

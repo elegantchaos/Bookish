@@ -15,8 +15,8 @@ struct RecordLinkButton: View {
   /// The datastore coordinator used to resolve the linked record.
   let harness: BookishHarness
 
-  /// The navigation service used to push the linked record.
-  let navigation: BookishNavigationService
+  /// The application-owned command boundary used to push the linked record.
+  let commander: BookishCommandCentre
 
   /// The resolved visual metadata for the link.
   @State private var presentation: BookishRecordLinkPresentation?
@@ -41,7 +41,7 @@ struct RecordLinkButton: View {
 
   /// Pushes the linked record onto the detail navigation stack.
   private func navigate() {
-    navigation.performWithoutWaiting(NavigateToRecordCommand(recordID: recordID))
+    commander.performWithoutWaiting(NavigateToRecordCommand(recordID: recordID))
   }
 
   /// Identifies changes that require link metadata to be resolved again.
