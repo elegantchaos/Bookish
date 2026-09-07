@@ -1,0 +1,213 @@
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+//  Created by Sam Deane on 07/09/2026.
+//  Copyright © 2026 Elegant Chaos Limited. All rights reserved.
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+import BookishImporterSamples
+import BookishDatastore
+import BookishRecord
+import Commands
+import Foundation
+import Testing
+
+@testable import BookishApp
+
+@MainActor
+struct CommandProviderTests {
+  @Test
+  func importCommandsUseTheVendedImportService() async throws {
+    let importService = TestImportService()
+    let centre = TestCommandCentre(importService: importService)
+
+    try await centre.perform(ImportInterchangeCommand())
+    try await centre.perform(ImportOtherDeliciousLibraryCommand())
+    try await centre.perform(ImportDeliciousLibrarySampleCommand(sample: .small))
+
+    #expect(importService.requestedInterchangeImport)
+    #expect(importService.requestedDeliciousLibraryImport)
+    #expect(importService.importedSample == .small)
+  }
+
+  @Test
+  func maintenanceCommandsUseTheVendedMaintenanceService() async throws {
+    let maintenanceService = TestDatastoreMaintenanceService(hasExportableRecords: true)
+    let centre = TestCommandCentre(datastoreMaintenanceService: maintenanceService)
+
+    try await centre.perform(ExportInterchangeCommand())
+    try await centre.perform(RebuildRecordStoreCommand())
+    try await centre.perform(ResetDatastoreCommand())
+
+    #expect(maintenanceService.requestedInterchangeExport)
+    #expect(maintenanceService.rebuiltRecordProjection)
+    #expect(maintenanceService.resetDatastore)
+  }
+
+  @Test
+  func recordActionCommandsUseTheVendedRecordActionService() async throws {
+    let recordActionService = TestRecordActionService(hasSelectedRecord: true)
+    let centre = TestCommandCentre(recordActionService: recordActionService)
+
+    try await centre.perform(MarkReadingCommand())
+    try await centre.perform(MarkFinishedCommand())
+    try await centre.perform(SimulateRemoteMutationCommand())
+
+    #expect(recordActionService.markedReading)
+    #expect(recordActionService.markedFinished)
+    #expect(recordActionService.simulatedRemoteUpdate)
+  }
+
+  @Test
+  func browserIndexCommandsUseTheVendedIndexSelectionService() async throws {
+    let selectionService = TestBrowserIndexSelectionService(canSelectAnotherRecordIndex: true)
+    let centre = TestCommandCentre(browserIndexSelectionService: selectionService)
+
+    try await centre.perform(SelectNextRecordIndexCommand())
+    try await centre.perform(SelectPreviousRecordIndexCommand())
+
+    #expect(selectionService.selectedNextRecordIndex)
+    #expect(selectionService.selectedPreviousRecordIndex)
+  }
+
+  @Test
+  func navigationCommandsUseTheVendedNavigationService() async throws {
+    let navigationService = BookishNavigationService()
+    let records = RecordQueryResult(query: RecordQuery())
+    records.update(records: [
+      BookishRecord(id: BookishRecordID("book-1"), kind: BookishRecordKind.book),
+      BookishRecord(id: BookishRecordID("book-2"), kind: BookishRecordKind.book),
+    ])
+    navigationService.update(selectedRecordResult: records)
+    navigationService.select(recordID: BookishRecordID("book-1"))
+    let centre = TestCommandCentre(navigationService: navigationService)
+
+    try await centre.perform(SelectNextRecordCommand())
+    try await centre.perform(SelectPreviousRecordCommand())
+    try await centre.perform(NavigateToRecordCommand(recordID: BookishRecordID("linked-book")))
+
+    #expect(navigationService.selectedRecordID == BookishRecordID("book-1"))
+    #expect(navigationService.recordNavigationPath == [BookishRecordID("linked-book")])
+  }
+}
+
+@MainActor
+private final class TestCommandCentre:
+  CommandCentre,
+  BookishImportServiceProvider,
+  BookishDatastoreMaintenanceServiceProvider,
+  BookishRecordActionServiceProvider,
+  BookishBrowserIndexSelectionServiceProvider,
+  BookishNavigationServiceProvider
+{
+  let importService: any BookishImportService
+  let datastoreMaintenanceService: any BookishDatastoreMaintenanceService
+  let recordActionService: any BookishRecordActionService
+  let browserIndexSelectionService: any BookishBrowserIndexSelectionService
+  let navigationService: BookishNavigationService
+
+  init(
+    importService: any BookishImportService = TestImportService(),
+    datastoreMaintenanceService: any BookishDatastoreMaintenanceService = TestDatastoreMaintenanceService(),
+    recordActionService: any BookishRecordActionService = TestRecordActionService(),
+    browserIndexSelectionService: any BookishBrowserIndexSelectionService = TestBrowserIndexSelectionService(),
+    navigationService: BookishNavigationService = BookishNavigationService()
+  ) {
+    self.importService = importService
+    self.datastoreMaintenanceService = datastoreMaintenanceService
+    self.recordActionService = recordActionService
+    self.browserIndexSelectionService = browserIndexSelectionService
+    self.navigationService = navigationService
+  }
+}
+
+@MainActor
+private final class TestImportService: BookishImportService {
+  private(set) var requestedInterchangeImport = false
+  private(set) var requestedDeliciousLibraryImport = false
+  private(set) var importedSample: DeliciousLibrarySample?
+
+  func requestInterchangeImport() {
+    requestedInterchangeImport = true
+  }
+
+  func requestDeliciousLibraryImport() {
+    requestedDeliciousLibraryImport = true
+  }
+
+  func importDeliciousLibrary(sample: DeliciousLibrarySample) async {
+    importedSample = sample
+  }
+}
+
+@MainActor
+private final class TestDatastoreMaintenanceService: BookishDatastoreMaintenanceService {
+  let hasExportableRecords: Bool
+  private(set) var requestedInterchangeExport = false
+  private(set) var rebuiltRecordProjection = false
+  private(set) var resetDatastore = false
+
+  init(hasExportableRecords: Bool = false) {
+    self.hasExportableRecords = hasExportableRecords
+  }
+
+  func requestInterchangeExport() async {
+    requestedInterchangeExport = true
+  }
+
+  func localDatastoreDirectory() throws -> URL {
+    URL.temporaryDirectory
+  }
+
+  func report(message _: String) {
+  }
+
+  func rebuildRecordProjection() async {
+    rebuiltRecordProjection = true
+  }
+
+  func reset() async {
+    resetDatastore = true
+  }
+}
+
+@MainActor
+private final class TestRecordActionService: BookishRecordActionService {
+  let hasSelectedRecord: Bool
+  private(set) var markedReading = false
+  private(set) var markedFinished = false
+  private(set) var simulatedRemoteUpdate = false
+
+  init(hasSelectedRecord: Bool = false) {
+    self.hasSelectedRecord = hasSelectedRecord
+  }
+
+  func markReading() async {
+    markedReading = true
+  }
+
+  func markFinished() async {
+    markedFinished = true
+  }
+
+  func simulateRemoteUpdate() async {
+    simulatedRemoteUpdate = true
+  }
+}
+
+@MainActor
+private final class TestBrowserIndexSelectionService: BookishBrowserIndexSelectionService {
+  let canSelectAnotherRecordIndex: Bool
+  private(set) var selectedNextRecordIndex = false
+  private(set) var selectedPreviousRecordIndex = false
+
+  init(canSelectAnotherRecordIndex: Bool = false) {
+    self.canSelectAnotherRecordIndex = canSelectAnotherRecordIndex
+  }
+
+  func selectNextRecordIndex() async {
+    selectedNextRecordIndex = true
+  }
+
+  func selectPreviousRecordIndex() async {
+    selectedPreviousRecordIndex = true
+  }
+}
