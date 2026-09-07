@@ -95,22 +95,16 @@ struct CommandProviderTests {
 
   @Test
   func navigationCommandsUseTheVendedNavigationService() async throws {
-    let navigationService = BookishNavigationService()
-    let records = RecordQueryResult(query: RecordQuery())
-    records.update(records: [
-      BookishRecord(id: BookishRecordID("book-1"), kind: BookishRecordKind.book),
-      BookishRecord(id: BookishRecordID("book-2"), kind: BookishRecordKind.book),
-    ])
-    navigationService.update(selectedRecordResult: records)
-    navigationService.select(recordID: BookishRecordID("book-1"))
+    let navigationService = TestRecordNavigationService(canSelectAnotherRecord: true)
     let centre = TestCommandCentre(navigationService: navigationService)
 
     try await centre.perform(SelectNextRecordCommand())
     try await centre.perform(SelectPreviousRecordCommand())
     try await centre.perform(NavigateToRecordCommand(recordID: BookishRecordID("linked-book")))
 
-    #expect(navigationService.selectedRecordID == BookishRecordID("book-1"))
-    #expect(navigationService.recordNavigationPath == [BookishRecordID("linked-book")])
+    #expect(navigationService.selectedNextRecord)
+    #expect(navigationService.selectedPreviousRecord)
+    #expect(navigationService.pushedRecordIDs == [BookishRecordID("linked-book")])
   }
 }
 
@@ -127,14 +121,14 @@ private final class TestCommandCentre:
   let datastoreMaintenanceService: any BookishDatastoreMaintenanceService
   let recordActionService: any BookishRecordActionService
   let browserIndexSelectionService: any BookishBrowserIndexSelectionService
-  let navigationService: BookishNavigationService
+  let navigationService: any BookishRecordNavigationService
 
   init(
     importService: any BookishImportService = TestImportService(),
     datastoreMaintenanceService: any BookishDatastoreMaintenanceService = TestDatastoreMaintenanceService(),
     recordActionService: any BookishRecordActionService = TestRecordActionService(),
     browserIndexSelectionService: any BookishBrowserIndexSelectionService = TestBrowserIndexSelectionService(),
-    navigationService: BookishNavigationService = BookishNavigationService()
+    navigationService: any BookishRecordNavigationService = TestRecordNavigationService()
   ) {
     self.importService = importService
     self.datastoreMaintenanceService = datastoreMaintenanceService
@@ -234,6 +228,39 @@ private final class TestBrowserIndexSelectionService: BookishBrowserIndexSelecti
 
   func selectPreviousRecordIndex() async {
     selectedPreviousRecordIndex = true
+  }
+}
+
+@MainActor
+private final class TestRecordNavigationService: BookishRecordNavigationService {
+  let canSelectAnotherRecord: Bool
+  private(set) var pushedRecordIDs: [BookishRecordID] = []
+  private(set) var selectedRecordID: BookishRecordID?
+  private(set) var selectedNextRecord = false
+  private(set) var selectedPreviousRecord = false
+
+  init(canSelectAnotherRecord: Bool = false) {
+    self.canSelectAnotherRecord = canSelectAnotherRecord
+  }
+
+  func contains(recordID _: BookishRecordID) -> Bool {
+    false
+  }
+
+  func push(recordID: BookishRecordID) {
+    pushedRecordIDs.append(recordID)
+  }
+
+  func select(recordID: BookishRecordID?) {
+    selectedRecordID = recordID
+  }
+
+  func selectNextRecord() {
+    selectedNextRecord = true
+  }
+
+  func selectPreviousRecord() {
+    selectedPreviousRecord = true
   }
 }
 

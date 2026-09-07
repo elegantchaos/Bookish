@@ -597,7 +597,7 @@ struct BookishAppTests {
     #expect(commander.datastoreMaintenanceService.hasExportableRecords == false)
     #expect(commander.recordActionService.hasSelectedRecord == false)
     #expect(commander.browserIndexSelectionService.canSelectAnotherRecordIndex == false)
-    #expect(commander.navigationService === navigation)
+    #expect(commander.navigationService.canSelectAnotherRecord == false)
   }
 
   @MainActor

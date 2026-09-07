@@ -25,8 +25,8 @@ public final class BookishCommandCentre: CommandCentre {
   /// The browser-index selection capability exposed to commands.
   @ObservationIgnored public let browserIndexSelectionService: any BookishBrowserIndexSelectionService
 
-  /// The browser-routing service used by navigation commands.
-  @ObservationIgnored public let navigationService: BookishNavigationService
+  /// The browser record-navigation capability exposed to commands.
+  @ObservationIgnored public let navigationService: any BookishRecordNavigationService
 
   /// Creates a command centre over the supplied Bookish services.
   public init(harness: BookishHarness) {

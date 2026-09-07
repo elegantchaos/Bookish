@@ -69,6 +69,11 @@ public final class BookishNavigationService {
     selectedRecordResult?.ids ?? []
   }
 
+  /// Whether another record is available in the selected browser index.
+  public var canSelectAnotherRecord: Bool {
+    selectedRecordIDs.count > 1
+  }
+
   /// Updates the available browser index result and preserves a valid selection.
   public func update(recordIndexResult: RecordQueryResult?) {
     self.recordIndexResult = recordIndexResult
@@ -214,4 +219,7 @@ public final class BookishNavigationService {
     ((index % count) + count) % count
   }
 
+}
+
+extension BookishNavigationService: BookishRecordNavigationService {
 }

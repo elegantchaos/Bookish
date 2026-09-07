@@ -5,6 +5,7 @@
 
 import Commands
 import BookishImporterSamples
+import BookishRecord
 import Foundation
 
 /// Performs import actions requested by commands.
@@ -87,11 +88,33 @@ public protocol BookishBrowserIndexSelectionServiceProvider: CommandCentre {
   var browserIndexSelectionService: any BookishBrowserIndexSelectionService { get }
 }
 
-/// Vends browser routing to navigation commands.
+/// Performs browser record navigation requested by commands.
+@MainActor
+public protocol BookishRecordNavigationService {
+  /// Whether another record is available in the selected browser index.
+  var canSelectAnotherRecord: Bool { get }
+
+  /// Returns whether the selected browser index contains a record.
+  func contains(recordID: BookishRecordID) -> Bool
+
+  /// Pushes a record onto the detail navigation path.
+  func push(recordID: BookishRecordID)
+
+  /// Selects a record in the selected browser index.
+  func select(recordID: BookishRecordID?)
+
+  /// Selects the next record in the selected browser index.
+  func selectNextRecord()
+
+  /// Selects the previous record in the selected browser index.
+  func selectPreviousRecord()
+}
+
+/// Vends browser record navigation to navigation commands.
 @MainActor
 public protocol BookishNavigationServiceProvider: CommandCentre {
-  /// The browser-routing service.
-  var navigationService: BookishNavigationService { get }
+  /// The browser record-navigation service.
+  var navigationService: any BookishRecordNavigationService { get }
 }
 
 extension BookishCommandCentre:

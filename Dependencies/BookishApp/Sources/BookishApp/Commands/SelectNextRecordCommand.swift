@@ -19,7 +19,7 @@ public struct SelectNextRecordCommand<Centre: BookishNavigationServiceProvider>:
   }
 
   public func availability(centre: Centre) -> CommandAvailability {
-    centre.navigationService.selectedRecordIDs.count > 1 ? .enabled : .disabled
+    centre.navigationService.canSelectAnotherRecord ? .enabled : .disabled
   }
 
   public func name(centre: Centre) -> String {
