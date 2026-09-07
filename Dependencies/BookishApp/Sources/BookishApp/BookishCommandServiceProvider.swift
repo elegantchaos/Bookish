@@ -28,3 +28,7 @@ extension BookishNavigationService: BookishNavigationServiceProvider {
     self
   }
 }
+
+extension BookishHarness: BookishHarnessProvider {
+  public var harness: BookishHarness { self }
+}

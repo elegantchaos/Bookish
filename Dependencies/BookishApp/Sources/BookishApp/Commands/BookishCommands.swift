@@ -81,13 +81,13 @@ public struct BookishCommands: Commands {
 
       Divider()
 
-      harness.button(MarkReadingCommand())
-      harness.button(MarkFinishedCommand())
+      commander.button(MarkReadingCommand())
+      commander.button(MarkFinishedCommand())
 
       if isDeveloperMode {
         Divider()
 
-        harness.button(SimulateRemoteMutationCommand())
+        commander.button(SimulateRemoteMutationCommand())
       }
 
       Divider()
