@@ -62,9 +62,6 @@ public final class BookishHarness {
   /// The universal layout used when no explicit layout is selected.
   private let fallbackLayoutID = BookishRecordID("datastore-all-fields-layout")
 
-  /// The universal property presentation used after more-specific presentations.
-  private let fallbackPresentationID = BookishRecordID("presentation.type.*")
-
   /// The datastore service shared with navigation and other Bookish services.
   @ObservationIgnored let storageService: BookishStorageService
 
@@ -276,12 +273,7 @@ public final class BookishHarness {
 
   /// Returns the metadata record describing a catalogue kind, or the universal fallback.
   public func recordKindMetadata(for kind: String) async throws -> BookishRecord? {
-    let metadataID = BookishRecordID("metadata.type.\(kind)")
-    if let metadata = try await record(id: metadataID) {
-      return metadata
-    }
-
-    return try await record(id: BookishRecordID("metadata.type.*"))
+    try await storageService.recordKindMetadata(for: kind)
   }
 
   /// Returns the observable result of resolving a query template against a host record.
@@ -296,28 +288,7 @@ public final class BookishHarness {
   public func presentations(for kind: String, layout: BookishRecord? = nil) async throws
     -> [BookishRecord]
   {
-    var presentations: [BookishRecord] = []
-
-    if let presentationID = layout?.record(BookishRecordKey.presentation) {
-      if let presentation = try await record(id: presentationID) {
-        presentations.append(presentation)
-      }
-    }
-
-    if let metadata = try await recordKindMetadata(for: kind),
-      let presentationID = metadata.record(BookishRecordKey.presentation),
-      let presentation = try await record(id: presentationID)
-    {
-      presentations.append(presentation)
-    }
-
-    if presentations.contains(where: { $0.id == fallbackPresentationID }) == false,
-      let presentation = try await record(id: fallbackPresentationID)
-    {
-      presentations.append(presentation)
-    }
-
-    return presentations
+    try await storageService.presentations(for: kind, layout: layout)
   }
 
   /// Returns the selected record by resolving it from the record service.

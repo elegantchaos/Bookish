@@ -61,11 +61,11 @@ struct BookishAppTests {
 
   @MainActor
   @Test
-  func harnessUsesSpecificBookPresentationForBookFields() async throws {
-    let harness = try makeHarness()
-    await harness.load()
+  func storageUsesSpecificBookPresentationForBookFields() async throws {
+    let storage = BookishStorageService(directoryURL: try temporaryDirectory())
+    try await storage.load()
 
-    let presentations = try await harness.presentations(for: BookishRecordKind.book)
+    let presentations = try await storage.presentations(for: BookishRecordKind.book)
     let presentation = try #require(presentations.first)
 
     #expect(presentation.id == BookishRecordID("presentation.type.book"))
