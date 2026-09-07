@@ -525,8 +525,9 @@ struct BookishAppTests {
 
   func revealDatastoreFolderCommandIsAvailableOnMac() {
     let harness = BookishHarness()
+    let commander = BookishCommandCentre(harness: harness)
 
-    #expect(harness.availability(RevealDatastoreFolderCommand()) == .enabled)
+    #expect(commander.availability(RevealDatastoreFolderCommand()) == .enabled)
   }
 
   @MainActor
@@ -534,8 +535,9 @@ struct BookishAppTests {
 
   func otherDeliciousLibraryImportCommandRequestsViewOwnedFilePicker() async throws {
     let harness = BookishHarness()
+    let commander = BookishCommandCentre(harness: harness)
 
-    try await harness.perform(ImportOtherDeliciousLibraryCommand())
+    try await commander.perform(ImportOtherDeliciousLibraryCommand())
 
     #expect(harness.isImportingDeliciousLibrary)
   }
@@ -545,9 +547,10 @@ struct BookishAppTests {
 
   func deliciousLibrarySmallSampleCommandImportsBundledSample() async throws {
     let harness = try makeHarness()
+    let commander = BookishCommandCentre(harness: harness)
     await harness.load()
 
-    try await harness.perform(ImportDeliciousLibrarySampleCommand(sample: .small))
+    try await commander.perform(ImportDeliciousLibrarySampleCommand(sample: .small))
 
     let importedBooks = try await records(for: harness).filter {
       $0.kind == "book" && $0.string(BookishRecordKey.name) == "Snow Crash"
@@ -560,11 +563,12 @@ struct BookishAppTests {
 
   func deliciousLibrarySampleCommandUsesMenuLabels() {
     let harness = BookishHarness()
+    let commander = BookishCommandCentre(harness: harness)
 
     #expect(
-      ImportDeliciousLibrarySampleCommand(sample: .small).name(centre: harness) == "Small Sample")
+      ImportDeliciousLibrarySampleCommand(sample: .small).name(centre: commander) == "Small Sample")
     #expect(
-      ImportDeliciousLibrarySampleCommand(sample: .full).name(centre: harness) == "Full Sample")
+      ImportDeliciousLibrarySampleCommand(sample: .full).name(centre: commander) == "Full Sample")
   }
 
   @MainActor

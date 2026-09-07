@@ -8,8 +8,7 @@ import CommandsUI
 import Icons
 
 /// Rebuilds the materialised record projection from stored mutations.
-public struct RebuildRecordStoreCommand: CommandWithUI {
-  public typealias Centre = BookishHarness
+public struct RebuildRecordStoreCommand<Centre: BookishHarnessProvider>: CommandWithUI {
   public typealias ResultType = Void
 
   public let id = "datastore.rebuild-record-store"
@@ -18,19 +17,19 @@ public struct RebuildRecordStoreCommand: CommandWithUI {
   public init() {
   }
 
-  public func name(centre: BookishHarness) -> String {
+  public func name(centre: Centre) -> String {
     "Rebuild Record Store"
   }
 
-  public func icon(centre: BookishHarness) -> Icon {
+  public func icon(centre: Centre) -> Icon {
     Icon("arrow.clockwise")
   }
 
-  public func help(centre: BookishHarness) -> String? {
+  public func help(centre: Centre) -> String? {
     "Discard the materialised record store and rebuild it from stored mutations."
   }
 
-  public func confirmation(centre: BookishHarness) -> CommandConfirmation? {
+  public func confirmation(centre: Centre) -> CommandConfirmation? {
     CommandConfirmation(
       title: "Rebuild Record Store?",
       cancel: "Cancel",
@@ -39,7 +38,7 @@ public struct RebuildRecordStoreCommand: CommandWithUI {
     )
   }
 
-  public func perform(centre: BookishHarness) async throws {
-    await centre.rebuildRecordProjection()
+  public func perform(centre: Centre) async throws {
+    await centre.harness.rebuildRecordProjection()
   }
 }

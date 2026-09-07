@@ -13,8 +13,7 @@ import Icons
 #endif
 
 /// Reveals the datastore folder in Finder.
-public struct RevealDatastoreFolderCommand: CommandWithUI {
-  public typealias Centre = BookishHarness
+public struct RevealDatastoreFolderCommand<Centre: BookishHarnessProvider>: CommandWithUI {
   public typealias ResultType = Void
 
   public let id = "datastore.reveal-folder"
@@ -22,7 +21,7 @@ public struct RevealDatastoreFolderCommand: CommandWithUI {
   public init() {
   }
 
-  public func availability(centre: BookishHarness) -> CommandAvailability {
+  public func availability(centre: Centre) -> CommandAvailability {
     #if canImport(AppKit)
       .enabled
     #else
@@ -30,25 +29,25 @@ public struct RevealDatastoreFolderCommand: CommandWithUI {
     #endif
   }
 
-  public func name(centre: BookishHarness) -> String {
+  public func name(centre: Centre) -> String {
     "Reveal Datastore Folder"
   }
 
-  public func icon(centre: BookishHarness) -> Icon {
+  public func icon(centre: Centre) -> Icon {
     Icon("folder")
   }
 
-  public func help(centre: BookishHarness) -> String? {
+  public func help(centre: Centre) -> String? {
     "Reveal the local datastore folder in Finder."
   }
 
-  public func perform(centre: BookishHarness) async throws {
+  public func perform(centre: Centre) async throws {
     #if canImport(AppKit)
-      let url = try centre.localDatastoreDirectory()
+      let url = try centre.harness.localDatastoreDirectory()
       NSWorkspace.shared.activateFileViewerSelecting([url])
-      centre.report(message: "Revealed datastore folder")
+      centre.harness.report(message: "Revealed datastore folder")
     #else
-      centre.report(
+      centre.harness.report(
         message: "Reveal datastore folder is unavailable on this platform"
       )
     #endif

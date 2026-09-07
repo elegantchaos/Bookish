@@ -48,6 +48,7 @@ import Testing
 
   @Test func rebuildCommandRebuildsRecordStoreFromMutationHistory() async throws {
     let harness = try makeHarness()
+    let commander = BookishCommandCentre(harness: harness)
     await harness.load()
     let json = """
       { "records": [{ "ℹ": "test-reset-book", "©": "book", "name": "Reset Book" }] }
@@ -56,7 +57,7 @@ import Testing
     #expect(harness.navigation.recordIDs.contains(BookishRecordID("test-reset-book")))
     let mutationsBeforeReset = try await harness.mutations()
     #expect(mutationsBeforeReset.isEmpty == false)
-    try await harness.perform(RebuildRecordStoreCommand())
+    try await commander.perform(RebuildRecordStoreCommand())
     #expect(harness.navigation.recordIDs.contains(BookishRecordID("test-reset-book")))
     #expect(
       try await harness.record(id: BookishRecordID("seed-book"))?.kind == BookishRecordKind.book)
@@ -80,13 +81,14 @@ import Testing
 
   @Test func resetCommandResetsDatastore() async throws {
     let harness = try makeHarness()
+    let commander = BookishCommandCentre(harness: harness)
     await harness.load()
     let json = """
       { "records": [{ "ℹ": "test-command-reset-book", "©": "book", "name": "Command Reset Book" }] }
       """
     await harness.importInterchange(data: Data(json.utf8))
     #expect(harness.navigation.recordIDs.isEmpty == false)
-    try await harness.perform(ResetDatastoreCommand())
+    try await commander.perform(ResetDatastoreCommand())
     #expect(harness.navigation.recordIDs.isEmpty == false)
     #expect(try await harness.record(id: BookishRecordID("seed-book")) == nil)
     #expect(

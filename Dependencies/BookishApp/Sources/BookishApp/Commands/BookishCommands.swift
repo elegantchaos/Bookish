@@ -60,17 +60,17 @@ public struct BookishCommands: Commands {
 
       Divider()
 
-      harness.button(ExportInterchangeCommand())
+      commander.button(ExportInterchangeCommand())
 
       if isAdvancedMode {
-        harness.button(RevealDatastoreFolderCommand())
+        commander.button(RevealDatastoreFolderCommand())
       }
 
       if isDeveloperMode {
         Divider()
 
-        harness.button(RebuildRecordStoreCommand())
-        harness.button(ResetDatastoreCommand(), role: .destructive)
+        commander.button(RebuildRecordStoreCommand())
+        commander.button(ResetDatastoreCommand(), role: .destructive)
       }
     }
 
