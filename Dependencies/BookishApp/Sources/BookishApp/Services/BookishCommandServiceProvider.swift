@@ -18,6 +18,13 @@ public protocol BookishStatusReporting {
   func report(error: Error)
 }
 
+/// Vends user-facing status reporting to commands that report successful work.
+@MainActor
+public protocol BookishStatusReportingProvider: CommandCentre {
+  /// The status reporting service used by the command.
+  var statusReporter: any BookishStatusReporting { get }
+}
+
 /// Performs import actions requested by commands.
 @MainActor
 public protocol BookishImporting {
@@ -43,14 +50,8 @@ public protocol BookishDatastoreMaintenance {
   var hasExportableRecords: Bool { get }
   /// Requests interchange export.
   func requestInterchangeExport() async
-  /// Returns the datastore directory.
-  func localDatastoreDirectory() throws -> URL
   /// Reports a user-facing message.
   func report(message: String)
-  /// Rebuilds the record projection.
-  func rebuildRecordProjection() async
-  /// Resets the datastore.
-  func reset() async
 }
 
 /// Vends datastore maintenance actions to maintenance commands.
@@ -58,6 +59,26 @@ public protocol BookishDatastoreMaintenance {
 public protocol BookishDatastoreMaintenanceProvider: CommandCentre {
   /// The datastore maintenance service used by the command.
   var datastoreMaintenanceService: any BookishDatastoreMaintenance { get }
+}
+
+/// Performs datastore lifecycle and storage operations requested by commands.
+@MainActor
+public protocol BookishStorage {
+  /// Returns the datastore directory.
+  func localDatastoreDirectory() throws -> URL
+
+  /// Rebuilds the materialised record projection.
+  func rebuildRecordProjection() async throws
+
+  /// Resets the datastore and opens an empty replacement store.
+  func reset() async throws
+}
+
+/// Vends datastore operations to datastore commands.
+@MainActor
+public protocol BookishStorageProvider: CommandCentre {
+  /// The datastore service used by the command.
+  var storageService: any BookishStorage { get }
 }
 
 /// Performs selected-record actions requested by commands.
@@ -122,8 +143,10 @@ public protocol BookishNavigationProvider: CommandCentre {
 }
 
 extension BookishCommandCentre:
+  BookishStatusReportingProvider,
   BookishImportingProvider,
   BookishDatastoreMaintenanceProvider,
+  BookishStorageProvider,
   BookishRecordActionsProvider,
   BookishNavigationProvider
 {

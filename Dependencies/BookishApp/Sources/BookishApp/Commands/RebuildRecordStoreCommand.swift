@@ -8,7 +8,7 @@ import CommandsUI
 import Icons
 
 /// Rebuilds the materialised record projection from stored mutations.
-public struct RebuildRecordStoreCommand<Centre: BookishDatastoreMaintenanceProvider>: CommandWithUI {
+public struct RebuildRecordStoreCommand<Centre: BookishStorageProvider & BookishStatusReportingProvider>: CommandWithUI {
   public typealias ResultType = Void
 
   public let id = "datastore.rebuild-record-store"
@@ -39,6 +39,7 @@ public struct RebuildRecordStoreCommand<Centre: BookishDatastoreMaintenanceProvi
   }
 
   public func perform(centre: Centre) async throws {
-    await centre.datastoreMaintenanceService.rebuildRecordProjection()
+    try await centre.storageService.rebuildRecordProjection()
+    centre.statusReporter.report(message: "Rebuilt record store")
   }
 }

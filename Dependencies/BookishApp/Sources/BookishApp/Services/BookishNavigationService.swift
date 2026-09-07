@@ -20,7 +20,7 @@ public final class BookishNavigationService {
   public private(set) var recordIndexResult: RecordQueryResult?
 
   /// The datastore service used to materialise selected browser-index queries.
-  @ObservationIgnored let datastoreService: BookishDatastoreService
+  @ObservationIgnored let storageService: BookishStorageService
 
   /// Reconciles presentation state after a browser-index change.
   @ObservationIgnored private var recordIndexSelectionHandler: (@MainActor () async throws -> Void)?
@@ -38,8 +38,8 @@ public final class BookishNavigationService {
   public private(set) var selectedRecordResult: RecordQueryResult?
 
   /// Creates an empty navigation service.
-  public init(datastoreService: BookishDatastoreService = BookishDatastoreService()) {
-    self.datastoreService = datastoreService
+  public init(storageService: BookishStorageService = BookishStorageService()) {
+    self.storageService = storageService
   }
 
   /// The available browser index identifiers.
@@ -230,7 +230,7 @@ public final class BookishNavigationService {
       return
     }
 
-    let result = try await datastoreService.recordQueryResult(matching: query)
+    let result = try await storageService.recordQueryResult(matching: query)
     update(selectedRecordResult: result)
   }
 

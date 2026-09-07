@@ -19,6 +19,9 @@ public final class BookishCommandCentre: CommandCentre {
   /// The datastore maintenance capability exposed to commands.
   @ObservationIgnored public let datastoreMaintenanceService: any BookishDatastoreMaintenance
 
+  /// The datastore capability exposed to commands.
+  @ObservationIgnored public let storageService: any BookishStorage
+
   /// The record-action capability exposed to commands.
   @ObservationIgnored public let recordActionService: any BookishRecordActions
 
@@ -30,6 +33,7 @@ public final class BookishCommandCentre: CommandCentre {
     statusReporter = harness
     importService = harness
     datastoreMaintenanceService = harness
+    storageService = harness.storageService
     recordActionService = BookishRecordActionsService(store: harness)
     navigationService = harness.navigation
   }

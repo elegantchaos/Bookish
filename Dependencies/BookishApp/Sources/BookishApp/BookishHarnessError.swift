@@ -10,17 +10,12 @@ enum BookishHarnessError: LocalizedError {
   /// The datastore has not completed loading.
   case notLoaded
 
-  /// A required bundled seed resource is unavailable.
-  case missingSeedResource(String)
-
   /// A user-facing explanation of the harness error.
   var errorDescription: String? {
     switch self {
     case .notLoaded:
       "The datastore is not loaded."
 
-    case .missingSeedResource(let name):
-      "The bundled seed resource '\(name).bookish.json' is missing."
     }
   }
 }

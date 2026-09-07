@@ -31,15 +31,19 @@ struct CommandProviderTests {
   @Test
   func maintenanceCommandsUseTheVendedMaintenanceService() async throws {
     let maintenanceService = TestDatastoreMaintenanceService(hasExportableRecords: true)
-    let centre = TestCommandCentre(datastoreMaintenanceService: maintenanceService)
+    let storageService = TestStorageService()
+    let centre = TestCommandCentre(
+      datastoreMaintenanceService: maintenanceService,
+      storageService: storageService
+    )
 
     try await centre.perform(ExportInterchangeCommand())
     try await centre.perform(RebuildRecordStoreCommand())
     try await centre.perform(ResetDatastoreCommand())
 
     #expect(maintenanceService.requestedInterchangeExport)
-    #expect(maintenanceService.rebuiltRecordProjection)
-    #expect(maintenanceService.resetDatastore)
+    #expect(storageService.rebuiltRecordProjection)
+    #expect(storageService.resetDatastore)
   }
 
   @Test
@@ -113,22 +117,30 @@ private final class TestCommandCentre:
   CommandCentre,
   BookishImportingProvider,
   BookishDatastoreMaintenanceProvider,
+  BookishStorageProvider,
+  BookishStatusReportingProvider,
   BookishRecordActionsProvider,
   BookishNavigationProvider
 {
   let importService: any BookishImporting
   let datastoreMaintenanceService: any BookishDatastoreMaintenance
+  let storageService: any BookishStorage
+  let statusReporter: any BookishStatusReporting
   let recordActionService: any BookishRecordActions
   let navigationService: any BookishNavigation
 
   init(
     importService: any BookishImporting = TestImportService(),
     datastoreMaintenanceService: any BookishDatastoreMaintenance = TestDatastoreMaintenanceService(),
+    storageService: any BookishStorage = TestStorageService(),
+    statusReporter: any BookishStatusReporting = TestStatusReporter(),
     recordActionService: any BookishRecordActions = TestRecordActionService(),
     navigationService: any BookishNavigation = TestNavigationService()
   ) {
     self.importService = importService
     self.datastoreMaintenanceService = datastoreMaintenanceService
+    self.storageService = storageService
+    self.statusReporter = statusReporter
     self.recordActionService = recordActionService
     self.navigationService = navigationService
   }
@@ -181,6 +193,32 @@ private final class TestDatastoreMaintenanceService: BookishDatastoreMaintenance
 
   func reset() async {
     resetDatastore = true
+  }
+}
+
+@MainActor
+private final class TestStorageService: BookishStorage {
+  private(set) var rebuiltRecordProjection = false
+  private(set) var resetDatastore = false
+  func localDatastoreDirectory() throws -> URL {
+    URL.temporaryDirectory
+  }
+
+  func rebuildRecordProjection() async throws {
+    rebuiltRecordProjection = true
+  }
+
+  func reset() async throws {
+    resetDatastore = true
+  }
+}
+
+@MainActor
+private final class TestStatusReporter: BookishStatusReporting {
+  func report(message _: String) {
+  }
+
+  func report(error _: Error) {
   }
 }
 
