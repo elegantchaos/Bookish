@@ -13,7 +13,7 @@ private struct BookishCommandCentreKey: EnvironmentKey {
 
 extension EnvironmentValues {
   /// The command boundary shared by Bookish SwiftUI content.
-  var bookishCommandCentre: BookishCommandCentre? {
+  public var bookishCommandCentre: BookishCommandCentre? {
     get { self[BookishCommandCentreKey.self] }
     set { self[BookishCommandCentreKey.self] = newValue }
   }

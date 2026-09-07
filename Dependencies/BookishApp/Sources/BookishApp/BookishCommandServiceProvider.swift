@@ -3,10 +3,20 @@
 //  Copyright © 2026 Elegant Chaos Limited. All rights reserved.
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
-import Commands
 import BookishImporterSamples
 import BookishRecord
+import Commands
 import Foundation
+
+/// Reports user-facing Bookish status messages and errors.
+@MainActor
+public protocol BookishStatusReporting {
+  /// Reports a user-facing message.
+  func report(message: String)
+
+  /// Reports a user-facing error.
+  func report(error: Error)
+}
 
 /// Performs import actions requested by commands.
 @MainActor

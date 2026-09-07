@@ -14,6 +14,9 @@ import SwiftUI
     /// The datastore coordinator used to load mutations.
     private let harness: BookishHarness
 
+    /// The command boundary used to report mutation-loading failures.
+    @Environment(\.bookishCommandCentre) private var commander
+
     /// Whether mutation diagnostics are available.
     @AppStorage(.isDeveloperMode) private var isDeveloperMode
 
@@ -79,7 +82,7 @@ import SwiftUI
           selectedMutationID = mutations.first?.id
         }
       } catch {
-        harness.report(error: error)
+        commander?.statusReporter.report(error: error)
       }
     }
   }

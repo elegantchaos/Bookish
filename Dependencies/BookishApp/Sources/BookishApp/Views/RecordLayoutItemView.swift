@@ -17,6 +17,9 @@ struct RecordLayoutItemView: View {
   /// The datastore coordinator used to resolve the linked configuration.
   let harness: BookishHarness
 
+  /// The command boundary used to report configuration failures.
+  @Environment(\.bookishCommandCentre) private var commander
+
   /// The navigation service used by record links in nested layouts.
   let navigation: BookishNavigationService
 
@@ -142,7 +145,7 @@ struct RecordLayoutItemView: View {
     } catch {
       configuration = nil
       errorDescription = error.localizedDescription
-      harness.report(error: error)
+      commander?.statusReporter.report(error: error)
     }
   }
 

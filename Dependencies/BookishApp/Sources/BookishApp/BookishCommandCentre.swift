@@ -10,8 +10,8 @@ import Observation
 @MainActor
 @Observable
 public final class BookishCommandCentre: CommandCentre {
-  /// The datastore coordinator used for command-failure reporting.
-  @ObservationIgnored private let harness: BookishHarness
+  /// The user-facing status capability used for command-failure reporting.
+  @ObservationIgnored public let statusReporter: any BookishStatusReporting
 
   /// The import capability exposed to commands.
   @ObservationIgnored public let importService: any BookishImportService
@@ -23,14 +23,15 @@ public final class BookishCommandCentre: CommandCentre {
   @ObservationIgnored public let recordActionService: any BookishRecordActionService
 
   /// The browser-index selection capability exposed to commands.
-  @ObservationIgnored public let browserIndexSelectionService: any BookishBrowserIndexSelectionService
+  @ObservationIgnored public let browserIndexSelectionService:
+    any BookishBrowserIndexSelectionService
 
   /// The browser record-navigation capability exposed to commands.
   @ObservationIgnored public let navigationService: any BookishRecordNavigationService
 
   /// Creates a command centre over the supplied Bookish services.
   public init(harness: BookishHarness) {
-    self.harness = harness
+    statusReporter = harness
     importService = harness
     datastoreMaintenanceService = harness
     recordActionService = BookishRecordActions(store: harness)
@@ -41,6 +42,6 @@ public final class BookishCommandCentre: CommandCentre {
   /// Presents command failures through Bookish's user-facing status surface.
   public func recordCommandFailure<C: Command>(_ command: C, error: any Error)
   where C.Centre == BookishCommandCentre {
-    harness.report(error: error)
+    statusReporter.report(error: error)
   }
 }

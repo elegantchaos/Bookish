@@ -592,8 +592,10 @@ struct BookishAppTests {
     let commander = BookishCommandCentre(harness: harness)
 
     commander.importService.requestInterchangeImport()
+    commander.statusReporter.report(message: "Reported through status capability")
 
     #expect(harness.isImportingInterchange)
+    #expect(harness.status == "Reported through status capability")
     #expect(commander.datastoreMaintenanceService.hasExportableRecords == false)
     #expect(commander.recordActionService.hasSelectedRecord == false)
     #expect(commander.browserIndexSelectionService.canSelectAnotherRecordIndex == false)

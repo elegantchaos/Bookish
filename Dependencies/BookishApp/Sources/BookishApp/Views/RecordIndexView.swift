@@ -12,6 +12,9 @@ struct RecordIndexView: View {
   /// The datastore coordinator that resolves layouts and metadata.
   let harness: BookishHarness
 
+  /// The command boundary used to report record-index failures.
+  @Environment(\.bookishCommandCentre) private var commander
+
   /// The route containing the active index and record selection.
   let navigation: BookishNavigationService
 
@@ -73,7 +76,7 @@ struct RecordIndexView: View {
       }
       self.presentationsByKind = presentationsByKind
     } catch {
-      harness.report(error: error)
+      commander?.statusReporter.report(error: error)
     }
   }
 }

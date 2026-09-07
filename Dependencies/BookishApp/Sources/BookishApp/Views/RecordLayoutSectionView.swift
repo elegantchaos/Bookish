@@ -18,6 +18,9 @@ struct RecordLayoutSectionView: View {
   /// The datastore coordinator used to resolve cascading presentations.
   let harness: BookishHarness
 
+  /// The command boundary used to report presentation-resolution failures.
+  @Environment(\.bookishCommandCentre) private var commander
+
   /// The navigation service used by linked record values.
   let navigation: BookishNavigationService
 
@@ -75,7 +78,7 @@ struct RecordLayoutSectionView: View {
     do {
       presentationRecords = try await harness.presentations(for: host.kind, layout: layout)
     } catch {
-      harness.report(error: error)
+      commander?.statusReporter.report(error: error)
     }
   }
 }

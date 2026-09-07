@@ -15,6 +15,9 @@ public struct BookishHarnessView: View {
   /// The shared navigation route for the browser columns.
   @Environment(BookishNavigationService.self) private var navigation
 
+  /// The command boundary used to report file-panel failures.
+  @Environment(\.bookishCommandCentre) private var commander
+
   /// Whether debug-only browser indexes should be available.
   @AppStorage(.isDeveloperMode) private var isDeveloperMode
 
@@ -87,7 +90,7 @@ public struct BookishHarnessView: View {
       }
 
     case .failure(let error):
-      harness.report(error: error)
+      commander?.statusReporter.report(error: error)
     }
   }
 
@@ -100,7 +103,7 @@ public struct BookishHarnessView: View {
       }
 
     case .failure(let error):
-      harness.report(error: error)
+      commander?.statusReporter.report(error: error)
     }
   }
 
@@ -111,7 +114,7 @@ public struct BookishHarnessView: View {
       harness.didExportInterchange()
 
     case .failure(let error):
-      harness.report(error: error)
+      commander?.statusReporter.report(error: error)
     }
   }
 }

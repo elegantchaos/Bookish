@@ -15,6 +15,9 @@ struct BookishRecordIDCell: View {
   /// The datastore coordinator used to resolve the record.
   let harness: BookishHarness
 
+  /// The command boundary used to report record-resolution failures.
+  @Environment(\.bookishCommandCentre) private var commander
+
   /// The resolved record, when available.
   @State private var record: BookishRecord?
 
@@ -57,7 +60,7 @@ struct BookishRecordIDCell: View {
         presentationRecords = try await harness.presentations(for: record.kind, layout: layout)
       }
     } catch {
-      harness.report(error: error)
+      commander?.statusReporter.report(error: error)
     }
   }
 }

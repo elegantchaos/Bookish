@@ -27,6 +27,7 @@ struct BookishApplication: App {
     #if DEBUG
       WindowGroup("Mutation Debug", id: BookishWindow.mutationDebug.rawValue) {
         BookishMutationDebugView(harness: engine.harness)
+          .environment(\.bookishCommandCentre, engine.commander)
       }
     #endif
 
