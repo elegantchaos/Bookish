@@ -10,8 +10,20 @@ import Observation
 @MainActor
 @Observable
 public final class BookishCommandCentre: CommandCentre {
-  /// The datastore-facing service used by record, import, and maintenance commands.
-  @ObservationIgnored public let harness: BookishHarness
+  /// The datastore coordinator used for command-failure reporting.
+  @ObservationIgnored private let harness: BookishHarness
+
+  /// The import capability exposed to commands.
+  @ObservationIgnored public let importService: any BookishImportService
+
+  /// The datastore maintenance capability exposed to commands.
+  @ObservationIgnored public let datastoreMaintenanceService: any BookishDatastoreMaintenanceService
+
+  /// The record-action capability exposed to commands.
+  @ObservationIgnored public let recordActionService: any BookishRecordActionService
+
+  /// The browser-index selection capability exposed to commands.
+  @ObservationIgnored public let browserIndexSelectionService: any BookishBrowserIndexSelectionService
 
   /// The browser-routing service used by navigation commands.
   @ObservationIgnored public let navigationService: BookishNavigationService
@@ -19,6 +31,10 @@ public final class BookishCommandCentre: CommandCentre {
   /// Creates a command centre over the supplied Bookish services.
   public init(harness: BookishHarness) {
     self.harness = harness
+    importService = harness
+    datastoreMaintenanceService = harness
+    recordActionService = harness
+    browserIndexSelectionService = harness
     navigationService = harness.navigation
   }
 

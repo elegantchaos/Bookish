@@ -101,12 +101,4 @@ extension BookishCommandCentre:
   BookishBrowserIndexSelectionServiceProvider,
   BookishNavigationServiceProvider
 {
-  /// The import capability exposed to commands.
-  public var importService: any BookishImportService { harness }
-  /// The datastore maintenance capability exposed to commands.
-  public var datastoreMaintenanceService: any BookishDatastoreMaintenanceService { harness }
-  /// The record action capability exposed to commands.
-  public var recordActionService: any BookishRecordActionService { harness }
-  /// The browser-index selection capability exposed to commands.
-  public var browserIndexSelectionService: any BookishBrowserIndexSelectionService { harness }
 }
