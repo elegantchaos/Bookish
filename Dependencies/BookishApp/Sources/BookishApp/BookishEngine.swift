@@ -23,6 +23,9 @@ public final class BookishEngine {
   /// Datastore coordinator used by the datastore UI and commands.
   @ObservationIgnored public let harness: BookishHarness
 
+  /// Application-owned command boundary for Bookish services.
+  @ObservationIgnored public let commander: BookishCommandCentre
+
   /// Navigation and routing service for the datastore record browser.
   @ObservationIgnored public let navigation: BookishNavigationService
 
@@ -30,10 +33,12 @@ public final class BookishEngine {
   public init(
     navigation: BookishNavigationService = BookishNavigationService()
   ) {
+    let harness = BookishHarness(navigation: navigation)
     state = .uninitialised
     startupTask = nil
     self.navigation = navigation
-    self.harness = BookishHarness(navigation: navigation)
+    self.harness = harness
+    commander = BookishCommandCentre(harness: harness)
   }
 
   /// Creates an engine around an existing harness and its injected navigation service.
@@ -42,6 +47,7 @@ public final class BookishEngine {
     startupTask = nil
     self.navigation = harness.navigation
     self.harness = harness
+    commander = BookishCommandCentre(harness: harness)
   }
 
   /// Starts the standard shared application loop.

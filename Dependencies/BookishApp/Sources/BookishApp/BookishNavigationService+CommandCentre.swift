@@ -5,6 +5,6 @@
 
 import Commands
 
-/// Enables navigation commands to use the navigation service as their command centre.
+/// Transitional direct command centre conformance until navigation commands use a vending protocol.
 extension BookishNavigationService: CommandCentre {
 }
