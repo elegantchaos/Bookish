@@ -53,14 +53,15 @@ import Testing
   @Test
   func navigationCommandsMoveBetweenIndexesAndRecords() async throws {
     let harness = try makeHarness()
+    let commander = BookishCommandCentre(harness: harness)
     await harness.load()
     await harness.select(recordIndexID: BookishRecordID("datastore-index-layouts"))
 
-    try await harness.perform(SelectNextRecordIndexCommand())
+    try await commander.perform(SelectNextRecordIndexCommand())
 
     #expect(harness.navigation.selectedRecordIndexName == "Indexes")
 
-    try await harness.perform(SelectPreviousRecordIndexCommand())
+    try await commander.perform(SelectPreviousRecordIndexCommand())
 
     #expect(harness.navigation.selectedRecordIndexName == "Layouts")
 

@@ -92,8 +92,8 @@ public struct BookishCommands: Commands {
 
       Divider()
 
-      harness.button(SelectPreviousRecordIndexCommand())
-      harness.button(SelectNextRecordIndexCommand())
+      commander.button(SelectPreviousRecordIndexCommand())
+      commander.button(SelectNextRecordIndexCommand())
       commander.button(SelectPreviousRecordCommand())
       commander.button(SelectNextRecordCommand())
 
