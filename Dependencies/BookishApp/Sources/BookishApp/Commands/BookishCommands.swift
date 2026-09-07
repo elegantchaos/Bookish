@@ -46,16 +46,16 @@ public struct BookishCommands: Commands {
 
   public var body: some Commands {
     CommandGroup(after: .newItem) {
-      harness.button(ImportInterchangeCommand())
+      commander.button(ImportInterchangeCommand())
       Menu("Import Delicious Library") {
         if isAdvancedMode {
-          harness.button(ImportDeliciousLibrarySampleCommand(sample: .small))
-          harness.button(ImportDeliciousLibrarySampleCommand(sample: .full))
+          commander.button(ImportDeliciousLibrarySampleCommand(sample: .small))
+          commander.button(ImportDeliciousLibrarySampleCommand(sample: .full))
 
           Divider()
         }
 
-        harness.button(ImportOtherDeliciousLibraryCommand())
+        commander.button(ImportOtherDeliciousLibraryCommand())
       }
 
       Divider()
