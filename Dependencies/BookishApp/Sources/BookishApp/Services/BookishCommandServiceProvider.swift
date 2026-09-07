@@ -61,18 +61,6 @@ public protocol BookishDatastoreMaintenanceProvider: CommandCentre {
   var datastoreMaintenanceService: any BookishDatastoreMaintenance { get }
 }
 
-/// Performs datastore lifecycle and storage operations requested by commands.
-@MainActor
-public protocol BookishStorage {
-  /// Returns the datastore directory.
-  func localDatastoreDirectory() throws -> URL
-
-  /// Rebuilds the materialised record projection.
-  func rebuildRecordProjection() async throws
-
-  /// Resets the datastore and opens an empty replacement store.
-  func reset() async throws
-}
 
 /// Vends datastore operations to datastore commands.
 @MainActor

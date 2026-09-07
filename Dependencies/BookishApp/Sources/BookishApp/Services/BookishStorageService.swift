@@ -9,6 +9,22 @@ import BookishRecord
 import Foundation
 import Observation
 
+
+/// Performs datastore lifecycle and storage operations requested by commands.
+@MainActor
+public protocol BookishStorage {
+  /// Returns the datastore directory.
+  func localDatastoreDirectory() throws -> URL
+
+  /// Rebuilds the materialised record projection.
+  func rebuildRecordProjection() async throws
+
+  /// Resets the datastore and opens an empty replacement store.
+  func reset() async throws
+  
+}
+
+
 /// Owns Bookish's loaded datastore and vends operations over its materialised records.
 ///
 /// Services that need datastore behaviour depend on this service rather than retaining
