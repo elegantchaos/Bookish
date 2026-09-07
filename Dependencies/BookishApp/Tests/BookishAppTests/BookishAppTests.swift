@@ -503,160 +503,6 @@ struct BookishAppTests {
 
   @MainActor
   @Test
-
-  func selectionCommandsAreDisabledWithoutSelection() {
-    let harness = BookishHarness()
-
-    #expect(harness.availability(MarkReadingCommand()) == .disabled)
-    #expect(harness.availability(MarkFinishedCommand()) == .disabled)
-    #expect(harness.availability(SimulateRemoteMutationCommand()) == .disabled)
-  }
-
-  @MainActor
-  @Test
-
-  func navigationCommandsAreDisabledWithoutRecords() {
-    let harness = BookishHarness()
-    let navigation = BookishNavigationService()
-
-    #expect(harness.availability(SelectNextRecordIndexCommand()) == .disabled)
-    #expect(harness.availability(SelectPreviousRecordIndexCommand()) == .disabled)
-    #expect(navigation.availability(SelectNextRecordCommand()) == .disabled)
-    #expect(navigation.availability(SelectPreviousRecordCommand()) == .disabled)
-  }
-
-  @MainActor
-  @Test
-
-  func navigationServiceDefaultsToFirstIndexAndRecord() throws {
-    let navigation = BookishNavigationService()
-    let recordIndexResult = RecordQueryResult(query: RecordQuery())
-    recordIndexResult.update(
-      records: [
-        try browserIndexRecord(id: "authors", name: "Authors", predicate: .kind("author")),
-        try browserIndexRecord(id: "books", name: "Books", predicate: .kind("book")),
-      ])
-    let selectedRecordResult = RecordQueryResult(query: RecordQuery(predicate: .kind("author")))
-    selectedRecordResult.update(records: [
-      BookishRecord(id: BookishRecordID("author-1"), kind: "author")
-    ])
-
-    navigation.update(recordIndexResult: recordIndexResult)
-    navigation.update(selectedRecordResult: selectedRecordResult)
-
-    #expect(navigation.recordIndexes.map(\.name) == ["Authors", "Books"])
-    #expect(navigation.selectedRecordIndexName == "Authors")
-    #expect(navigation.selectedRecordID == BookishRecordID("author-1"))
-    #expect(navigation.selectedRecordIDs == [BookishRecordID("author-1")])
-  }
-
-  @MainActor
-  @Test
-
-  func navigationCommandsMoveBetweenIndexesAndRecords() async throws {
-    let harness = try makeHarness()
-    await harness.load()
-    await harness.select(recordIndexID: BookishRecordID("datastore-index-layouts"))
-
-    try await harness.perform(SelectNextRecordIndexCommand())
-
-    #expect(harness.navigation.selectedRecordIndexName == "Indexes")
-
-    try await harness.perform(SelectPreviousRecordIndexCommand())
-
-    #expect(harness.navigation.selectedRecordIndexName == "Layouts")
-
-    let navigation = BookishNavigationService()
-    let selectedRecordResult = RecordQueryResult(query: RecordQuery())
-    selectedRecordResult.update(records: [
-      BookishRecord(id: BookishRecordID("book-1"), kind: "book"),
-      BookishRecord(id: BookishRecordID("book-2"), kind: "book"),
-    ])
-    navigation.update(selectedRecordResult: selectedRecordResult)
-    navigation.select(recordID: BookishRecordID("book-1"))
-
-    try await navigation.perform(SelectNextRecordCommand())
-
-    #expect(navigation.selectedRecordID == BookishRecordID("book-2"))
-
-    try await navigation.perform(SelectPreviousRecordCommand())
-
-    #expect(navigation.selectedRecordID == BookishRecordID("book-1"))
-  }
-
-  @MainActor
-  @Test
-
-  func selectedIndexProvidesDefaultLayout() async throws {
-    let harness = try makeHarness()
-    await harness.load()
-
-    await harness.select(recordIndexID: BookishRecordID("datastore-index-layouts"))
-
-    let layout = try await harness.selectedLayout()
-
-    #expect(layout?.id == BookishRecordID("datastore-layout-layout"))
-  }
-
-  @MainActor
-  @Test
-
-  func navigateToRecordCommandPushesTargetOutsideCurrentIndex() async throws {
-    let navigation = BookishNavigationService()
-    let selectedRecordResult = RecordQueryResult(query: RecordQuery())
-    selectedRecordResult.update(records: [
-      BookishRecord(id: BookishRecordID("author-1"), kind: "author")
-    ])
-    navigation.update(selectedRecordResult: selectedRecordResult)
-
-    try await navigation.perform(NavigateToRecordCommand(recordID: BookishRecordID("book-1")))
-
-    #expect(navigation.selectedRecordID == BookishRecordID("author-1"))
-    #expect(navigation.recordNavigationPath == [BookishRecordID("book-1")])
-  }
-
-  @MainActor
-  @Test
-
-  func navigateToRecordCommandCanSelectTargetInCurrentIndex() async throws {
-    let navigation = BookishNavigationService()
-    let selectedRecordResult = RecordQueryResult(query: RecordQuery())
-    selectedRecordResult.update(records: [
-      BookishRecord(id: BookishRecordID("author-1"), kind: "author"),
-      BookishRecord(id: BookishRecordID("book-1"), kind: "book"),
-    ])
-    navigation.update(selectedRecordResult: selectedRecordResult)
-
-    try await navigation.perform(
-      NavigateToRecordCommand(recordID: BookishRecordID("book-1"), mode: .currentIndex))
-
-    #expect(navigation.selectedRecordID == BookishRecordID("book-1"))
-    #expect(navigation.recordNavigationPath.isEmpty)
-  }
-
-  @MainActor
-  @Test
-
-  func recordLinkPresentationUsesTheTargetNameImageAndKindIcon() throws {
-    let imageURL = try #require(URL(string: "https://example.com/cover.jpg"))
-    let target = BookishRecord(
-      id: BookishRecordID("book-1"),
-      kind: BookishRecordKind.book,
-      properties: [
-        BookishRecordKey.name: .string("The Left Hand of Darkness"),
-        BookishRecordKey.image: try BookishRecordValue(url: imageURL),
-      ])
-
-    let presentation = BookishRecordLinkPresentation(
-      record: target, placeholderSystemImage: "books.vertical")
-
-    #expect(presentation.name == "The Left Hand of Darkness")
-    #expect(presentation.imageURL == imageURL)
-    #expect(presentation.placeholderSystemImage == "books.vertical")
-  }
-
-  @MainActor
-  @Test
   func exportCommandIsDisabledWithoutRecords() {
     let harness = BookishHarness()
 
@@ -765,164 +611,7 @@ struct BookishAppTests {
   }
 
   @MainActor
-  @Test
-
-  func harnessImportsInterchangeData() async throws {
-    let harness = try makeHarness()
-    await harness.load()
-
-    let json = """
-      {
-        "records": [
-          {
-            "ℹ": "test-import-book",
-            "©": "book",
-            "name": "Imported Book"
-          }
-        ]
-      }
-      """
-
-    await harness.importInterchange(data: Data(json.utf8))
-
-    let importedID = BookishRecordID("test-import-book")
-    let importedName = try await harness.record(id: importedID)?.string("name")
-
-    #expect(harness.navigation.recordIDs.contains(importedID))
-    #expect(importedName == "Imported Book")
-    #expect(harness.status == "Imported 1 Bookish interchange record")
-  }
-
-  @MainActor
-  @Test
-
-  func harnessImportsDeliciousLibraryData() async throws {
-    let harness = try makeHarness()
-    await harness.load()
-
-    let data = try Data(contentsOf: deliciousSampleURL())
-
-    await harness.importDeliciousLibrary(data: data)
-
-    let importedBooks = try await records(for: harness).filter {
-      $0.kind == "book" && $0.string(BookishRecordKey.name) == "Snow Crash"
-    }
-    #expect(importedBooks.isEmpty == false)
-    #expect(harness.status.hasPrefix("Imported "))
-    #expect(harness.status.contains("Delicious Library"))
-  }
-
-  @MainActor
-  @Test
-
-  func invalidDeliciousLibraryDataIsShownInStatusBar() async throws {
-    let harness = try makeHarness()
-    await harness.load()
-
-    await harness.importDeliciousLibrary(data: Data("not a property list".utf8))
-
-    #expect(harness.status != "Ready")
-  }
-
-  @MainActor
-  @Test
-
-  func harnessExportsInterchangeData() async throws {
-    let harness = try makeHarness()
-    await harness.load()
-
-    let data = try await harness.exportInterchangeData()
-    let file = try BookishInterchangeCodec().decode(data)
-
-    #expect(file.records.isEmpty == false)
-    #expect(file.root == harness.navigation.selectedRecordID)
-  }
-
-  @MainActor
-  @Test
-
-  func rebuildCommandRebuildsRecordStoreFromMutationHistory() async throws {
-    let harness = try makeHarness()
-    await harness.load()
-
-    let json = """
-      {
-        "records": [
-          {
-            "ℹ": "test-reset-book",
-            "©": "book",
-            "name": "Reset Book"
-          }
-        ]
-      }
-      """
-
-    await harness.importInterchange(data: Data(json.utf8))
-
-    #expect(harness.navigation.recordIDs.contains(BookishRecordID("test-reset-book")))
-    let mutationsBeforeReset = try await harness.mutations()
-    #expect(mutationsBeforeReset.isEmpty == false)
-
-    try await harness.perform(RebuildRecordStoreCommand())
-
-    let sampleBook = try await harness.record(id: BookishRecordID("seed-book"))
-    let sampleAuthor = try await harness.record(id: BookishRecordID("seed-author"))
-    let seedMarker = try await harness.record(id: BookishRecordID("datastore-seed-marker"))
-    let allRecordsIndex = try await harness.record(
-      id: BookishRecordID("datastore-index-all-records"))
-    let bookLayout = try await harness.record(id: BookishRecordID("datastore-book-layout"))
-
-    #expect(harness.navigation.recordIDs.isEmpty == false)
-    #expect(harness.navigation.recordIDs.contains(BookishRecordID("test-reset-book")))
-    #expect(sampleBook?.kind == BookishRecordKind.book)
-    #expect(sampleAuthor?.kind == BookishRecordKind.person)
-    #expect(seedMarker?.kind == BookishRecordKind.seedMarker)
-    #expect(allRecordsIndex?.kind == BookishRecordKind.index)
-    #expect(bookLayout?.kind == BookishRecordKind.layout)
-    let mutationsAfterReset = try await harness.mutations()
-    #expect(mutationsAfterReset.map(\.id) == mutationsBeforeReset.map(\.id))
-    #expect(mutationsAfterReset.map(\.operation) == mutationsBeforeReset.map(\.operation))
-    #expect(harness.status == "Rebuilt record store")
-  }
-
-  @MainActor
-  @Test
-
-  func resetCommandResetsDatastore() async throws {
-    let harness = try makeHarness()
-    await harness.load()
-
-    let json = """
-      {
-        "records": [
-          {
-            "ℹ": "test-command-reset-book",
-            "©": "book",
-            "name": "Command Reset Book"
-          }
-        ]
-      }
-      """
-
-    await harness.importInterchange(data: Data(json.utf8))
-
-    #expect(harness.navigation.recordIDs.isEmpty == false)
-
-    try await harness.perform(ResetDatastoreCommand())
-
-    let sampleBook = try await harness.record(id: BookishRecordID("seed-book"))
-    let seedMarker = try await harness.record(id: BookishRecordID("datastore-seed-marker"))
-
-    #expect(harness.navigation.recordIDs.isEmpty == false)
-    #expect(sampleBook == nil)
-    #expect(seedMarker?.kind == BookishRecordKind.seedMarker)
-    let mutations = try await harness.mutations()
-    #expect(mutations.isEmpty)
-    #expect(harness.status == "Reset datastore")
-  }
-
-  @MainActor
-  private func makeHarness(defaultShowsDebugIndexes: Bool = true) throws -> BookishHarness {
+  func makeHarness(defaultShowsDebugIndexes: Bool = true) throws -> BookishHarness {
     BookishHarness(
       directoryURL: try temporaryDirectory(),
       defaultShowsDebugIndexes: defaultShowsDebugIndexes
@@ -930,7 +619,7 @@ struct BookishAppTests {
   }
 
   @MainActor
-  private func records(for harness: BookishHarness) async throws -> [BookishRecord] {
+  func records(for harness: BookishHarness) async throws -> [BookishRecord] {
     var records: [BookishRecord] = []
     for id in harness.navigation.recordIDs {
       if let record = try await harness.record(id: id) {
@@ -941,7 +630,7 @@ struct BookishAppTests {
   }
 
   @MainActor
-  private func selectedRecords(for harness: BookishHarness) async throws -> [BookishRecord] {
+  func selectedRecords(for harness: BookishHarness) async throws -> [BookishRecord] {
     var records: [BookishRecord] = []
     for id in harness.navigation.selectedRecordIDs {
       if let record = try await harness.record(id: id) {
@@ -951,7 +640,7 @@ struct BookishAppTests {
     return records
   }
 
-  private func temporaryDirectory() throws -> URL {
+  func temporaryDirectory() throws -> URL {
     let directory = URL.temporaryDirectory.appending(
       path: "BookishAppTests-\(UUID().uuidString)",
       directoryHint: .isDirectory
@@ -960,11 +649,11 @@ struct BookishAppTests {
     return directory
   }
 
-  private func deliciousSampleURL() throws -> URL {
+  func deliciousSampleURL() throws -> URL {
     try BookishImporterSamples.deliciousLibraryURL(for: .small)
   }
 
-  private func browserIndexRecord(
+  func browserIndexRecord(
     id: String,
     name: String,
     predicate: RecordPredicate
