@@ -14,7 +14,7 @@ struct BookishToolbar: ToolbarContent {
   let harness: BookishHarness
 
   /// The application-owned command boundary for toolbar actions.
-  let commander: BookishCommandCentre
+  @Environment(\.bookishCommandCentre) private var commander
 
   /// Whether developer-only toolbar actions are available.
   @AppStorage(.isDeveloperMode) private var isDeveloperMode
@@ -25,19 +25,25 @@ struct BookishToolbar: ToolbarContent {
   /// The toolbar items for import, export, record actions, and layouts.
   var body: some ToolbarContent {
     ToolbarItem {
-      commander.button(ImportInterchangeCommand())
-        .labelStyle(.iconOnly)
+      if let commander {
+        commander.button(ImportInterchangeCommand())
+          .labelStyle(.iconOnly)
+      }
     }
 
     ToolbarItem {
-      commander.button(ExportInterchangeCommand())
-        .labelStyle(.iconOnly)
+      if let commander {
+        commander.button(ExportInterchangeCommand())
+          .labelStyle(.iconOnly)
+      }
     }
 
-    commander.toolbarItem(MarkReadingCommand())
-    commander.toolbarItem(MarkFinishedCommand())
-    if isDeveloperMode {
-      commander.toolbarItem(SimulateRemoteMutationCommand())
+    if let commander {
+      commander.toolbarItem(MarkReadingCommand())
+      commander.toolbarItem(MarkFinishedCommand())
+      if isDeveloperMode {
+        commander.toolbarItem(SimulateRemoteMutationCommand())
+      }
     }
 
     if isAdvancedMode {

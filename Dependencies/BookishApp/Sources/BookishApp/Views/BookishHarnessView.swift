@@ -15,9 +15,6 @@ public struct BookishHarnessView: View {
   /// The shared navigation route for the browser columns.
   @Environment(BookishNavigationService.self) private var navigation
 
-  /// The application-owned command boundary for detail interactions.
-  private let commander: BookishCommandCentre
-
   /// Whether debug-only browser indexes should be available.
   @AppStorage(.isDeveloperMode) private var isDeveloperMode
 
@@ -27,11 +24,9 @@ public struct BookishHarnessView: View {
   /// Creates the datastore harness view.
   public init(
     harness: BookishHarness = BookishHarness(),
-    commander: BookishCommandCentre? = nil,
     loadsOnAppear: Bool = true
   ) {
     self.harness = harness
-    self.commander = commander ?? BookishCommandCentre(harness: harness)
     self.loadsOnAppear = loadsOnAppear
   }
 
@@ -43,10 +38,10 @@ public struct BookishHarnessView: View {
       } content: {
         RecordIndexView(harness: harness, navigation: navigation)
       } detail: {
-        RecordDetailView(harness: harness, navigation: navigation, commander: commander)
+        RecordDetailView(harness: harness, navigation: navigation)
       }
       .toolbar {
-        BookishToolbar(harness: harness, commander: commander)
+        BookishToolbar(harness: harness)
       }
 
       BookishStatusBar(harness: harness)
@@ -123,6 +118,8 @@ public struct BookishHarnessView: View {
 
 #Preview {
   let navigation = BookishNavigationService()
-  BookishHarnessView(harness: BookishHarness(navigation: navigation))
+  let harness = BookishHarness(navigation: navigation)
+  BookishHarnessView(harness: harness)
     .environment(navigation)
+    .environment(\.bookishCommandCentre, BookishCommandCentre(harness: harness))
 }

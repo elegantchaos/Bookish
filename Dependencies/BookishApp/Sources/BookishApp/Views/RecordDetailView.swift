@@ -15,9 +15,6 @@ struct RecordDetailView: View {
   /// The route containing the selected record and detail path.
   let navigation: BookishNavigationService
 
-  /// The application-owned command boundary for linked record navigation.
-  let commander: BookishCommandCentre
-
   /// The detail navigation stack for the selected record.
   var body: some View {
     NavigationStack(path: recordNavigationPath) {
@@ -26,8 +23,7 @@ struct RecordDetailView: View {
           BookishRecordIDDetail(
             recordID: recordID,
             harness: harness,
-            navigation: navigation,
-            commander: commander
+            navigation: navigation
           )
         } else {
           ContentUnavailableView(
@@ -38,8 +34,7 @@ struct RecordDetailView: View {
         BookishRecordIDDetail(
           recordID: recordID,
           harness: harness,
-          navigation: navigation,
-          commander: commander
+          navigation: navigation
         )
       }
     }

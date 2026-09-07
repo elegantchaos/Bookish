@@ -21,9 +21,6 @@ struct RecordLayoutSectionView: View {
   /// The navigation service used by linked record values.
   let navigation: BookishNavigationService
 
-  /// The application-owned command boundary for linked record navigation.
-  let commander: BookishCommandCentre
-
   /// The ancestor layout identifiers used to prevent recursive sections.
   let layoutPath: Set<BookishRecordID>
 
@@ -49,7 +46,7 @@ struct RecordLayoutSectionView: View {
             presentation: presentation,
             viewerRegistry: BookishValueViewerRegistry { recordID in
               AnyView(
-                RecordLinkButton(recordID: recordID, harness: harness, commander: commander)
+                RecordLinkButton(recordID: recordID, harness: harness)
               )
             },
             sectionView: { linkedLayoutID in
@@ -58,7 +55,6 @@ struct RecordLayoutSectionView: View {
                 host: host,
                 harness: harness,
                 navigation: navigation,
-                commander: commander,
                 layoutPath: layoutPath.union([layout.id]))
             })
         }

@@ -58,7 +58,7 @@ public final class BookishEngine {
   /// Builds the root view managed by the shared application shell.
   public func rootContent() -> some View {
     rootView {
-      BookishHarnessView(harness: harness, commander: commander, loadsOnAppear: false)
+      BookishHarnessView(harness: harness, loadsOnAppear: false)
     } startup: {
       ProgressView()
     }

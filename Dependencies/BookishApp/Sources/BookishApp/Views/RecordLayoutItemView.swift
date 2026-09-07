@@ -20,9 +20,6 @@ struct RecordLayoutItemView: View {
   /// The navigation service used by record links in nested layouts.
   let navigation: BookishNavigationService
 
-  /// The application-owned command boundary for linked record navigation.
-  let commander: BookishCommandCentre
-
   /// The ancestor layout identifiers, used to prevent recursive sections.
   let layoutPath: Set<BookishRecordID>
 
@@ -42,15 +39,13 @@ struct RecordLayoutItemView: View {
     linkedLayoutID: BookishRecordID,
     host: BookishRecord,
     harness: BookishHarness,
-    navigation: BookishNavigationService,
-    commander: BookishCommandCentre
+    navigation: BookishNavigationService
   ) {
     self.init(
       linkedLayoutID: linkedLayoutID,
       host: host,
       harness: harness,
       navigation: navigation,
-      commander: commander,
       layoutPath: []
     )
   }
@@ -61,14 +56,12 @@ struct RecordLayoutItemView: View {
     host: BookishRecord,
     harness: BookishHarness,
     navigation: BookishNavigationService,
-    commander: BookishCommandCentre,
     layoutPath: Set<BookishRecordID>
   ) {
     self.linkedLayoutID = linkedLayoutID
     self.host = host
     self.harness = harness
     self.navigation = navigation
-    self.commander = commander
     self.layoutPath = layoutPath
   }
 
@@ -83,7 +76,6 @@ struct RecordLayoutItemView: View {
             host: host,
             harness: harness,
             navigation: navigation,
-            commander: commander,
             layoutPath: layoutPath
           )
         case BookishRecordKind.querySection:
