@@ -38,12 +38,15 @@ import Testing
     #expect(harness.status != "Ready")
   }
 
-  @Test func harnessExportsInterchangeData() async throws {
-    let harness = try makeHarness()
-    await harness.load()
-    let file = try BookishInterchangeCodec().decode(await harness.exportInterchangeData())
+  @Test func exporterEncodesStorageRecordsAsInterchangeData() async throws {
+    let storage = BookishStorageService(directoryURL: try temporaryDirectory())
+    try await storage.load()
+    let root = BookishRecordID("seed-book")
+    let exporter = BookishExportingService(storageService: storage)
+
+    let file = try BookishInterchangeCodec().decode(await exporter.interchangeData(root: root))
     #expect(file.records.isEmpty == false)
-    #expect(file.root == harness.navigation.selectedRecordID)
+    #expect(file.root == root)
   }
 
   @Test func rebuildCommandRebuildsRecordStoreFromMutationHistory() async throws {

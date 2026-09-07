@@ -3,7 +3,6 @@
 //  Copyright © 2026 Elegant Chaos Limited. All rights reserved.
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
-import BookishCoding
 import BookishDatastore
 import BookishImporter
 import BookishImporterSamples
@@ -65,6 +64,9 @@ public final class BookishHarness {
   /// The datastore service shared with navigation and other Bookish services.
   @ObservationIgnored let storageService: BookishStorageService
 
+  /// The model-side interchange exporter used by the export sheet.
+  @ObservationIgnored private let exportingService: BookishExportingService
+
   /// The loaded layout records used to derive compatible layout choices.
   private var layouts: [BookishRecord] = []
 
@@ -76,6 +78,7 @@ public final class BookishHarness {
   ) {
     self.navigation = navigation
     storageService = navigation.storageService
+    exportingService = BookishExportingService(storageService: navigation.storageService)
     storageService.configure(directoryURL: directoryURL)
     self.defaultShowsDebugIndexes = defaultShowsDebugIndexes
     self.showsDebugIndexes = defaultShowsDebugIndexes
@@ -260,10 +263,7 @@ public final class BookishHarness {
 
   /// Exports the current materialised records as Bookish interchange JSON data.
   public func exportInterchangeData() async throws -> Data {
-    let records = try await storageService.records(
-      matching: RecordQuery(sort: [.kind, .id]))
-    let file = BookishInterchangeFile(root: navigation.selectedRecordID, records: records)
-    return try BookishInterchangeCodec().encode(file)
+    try await exportingService.interchangeData(root: navigation.selectedRecordID)
   }
 
   /// Returns a record by resolving it from the record service.
