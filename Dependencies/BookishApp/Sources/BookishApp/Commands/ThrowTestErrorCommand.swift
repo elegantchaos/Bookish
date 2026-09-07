@@ -20,7 +20,7 @@ import Icons
   }
 
   /// Deliberately fails so the datastore can verify command error presentation.
-  public struct ThrowTestErrorCommand<Centre: BookishHarnessProvider>: CommandWithUI {
+  public struct ThrowTestErrorCommand<Centre: BookishRecordActionServiceProvider>: CommandWithUI {
     public typealias ResultType = Void
 
     public let id = "datastore.throw-test-error"

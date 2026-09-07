@@ -9,7 +9,7 @@ import CommandsUI
 import Icons
 
 /// Applies a synthetic remote mutation to the selected record.
-public struct SimulateRemoteMutationCommand<Centre: BookishHarnessProvider>: CommandWithUI {
+public struct SimulateRemoteMutationCommand<Centre: BookishRecordActionServiceProvider>: CommandWithUI {
   public typealias ResultType = Void
 
   public let id = "datastore.simulate-remote-mutation"
@@ -18,7 +18,7 @@ public struct SimulateRemoteMutationCommand<Centre: BookishHarnessProvider>: Com
   }
 
   public func availability(centre: Centre) -> CommandAvailability {
-    centre.harness.navigation.selectedRecordID == nil ? .disabled : .enabled
+    centre.recordActionService.hasSelectedRecord ? .enabled : .disabled
   }
 
   public func name(centre: Centre) -> String {
@@ -34,6 +34,6 @@ public struct SimulateRemoteMutationCommand<Centre: BookishHarnessProvider>: Com
   }
 
   public func perform(centre: Centre) async throws {
-    await centre.harness.simulateRemoteUpdate()
+    await centre.recordActionService.simulateRemoteUpdate()
   }
 }

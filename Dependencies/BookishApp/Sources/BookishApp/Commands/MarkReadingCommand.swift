@@ -9,7 +9,7 @@ import Commands
 import Icons
 
 /// Marks the selected record as currently being read.
-public struct MarkReadingCommand<Centre: BookishHarnessProvider>: CommandWithUI {
+public struct MarkReadingCommand<Centre: BookishRecordActionServiceProvider>: CommandWithUI {
   public typealias ResultType = Void
 
   public let id = "datastore.mark-reading"
@@ -19,7 +19,7 @@ public struct MarkReadingCommand<Centre: BookishHarnessProvider>: CommandWithUI 
   }
 
   public func availability(centre: Centre) -> CommandAvailability {
-    centre.harness.navigation.selectedRecordID == nil ? .disabled : .enabled
+    centre.recordActionService.hasSelectedRecord ? .enabled : .disabled
   }
 
   public func name(centre: Centre) -> String {
@@ -35,6 +35,6 @@ public struct MarkReadingCommand<Centre: BookishHarnessProvider>: CommandWithUI 
   }
 
   public func perform(centre: Centre) async throws {
-    await centre.harness.markReading()
+    await centre.recordActionService.markReading()
   }
 }

@@ -13,7 +13,7 @@ import Icons
 #endif
 
 /// Reveals the datastore folder in Finder.
-public struct RevealDatastoreFolderCommand<Centre: BookishHarnessProvider>: CommandWithUI {
+public struct RevealDatastoreFolderCommand<Centre: BookishDatastoreMaintenanceServiceProvider>: CommandWithUI {
   public typealias ResultType = Void
 
   public let id = "datastore.reveal-folder"
@@ -43,11 +43,11 @@ public struct RevealDatastoreFolderCommand<Centre: BookishHarnessProvider>: Comm
 
   public func perform(centre: Centre) async throws {
     #if canImport(AppKit)
-      let url = try centre.harness.localDatastoreDirectory()
+      let url = try centre.datastoreMaintenanceService.localDatastoreDirectory()
       NSWorkspace.shared.activateFileViewerSelecting([url])
-      centre.harness.report(message: "Revealed datastore folder")
+      centre.datastoreMaintenanceService.report(message: "Revealed datastore folder")
     #else
-      centre.harness.report(
+      centre.datastoreMaintenanceService.report(
         message: "Reveal datastore folder is unavailable on this platform"
       )
     #endif

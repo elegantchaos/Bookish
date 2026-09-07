@@ -10,7 +10,7 @@ import Foundation
 import Icons
 
 /// Imports one of Bookish's bundled Delicious Library samples.
-public struct ImportDeliciousLibrarySampleCommand<Centre: BookishHarnessProvider>: CommandWithUI {
+public struct ImportDeliciousLibrarySampleCommand<Centre: BookishImportServiceProvider>: CommandWithUI {
   public typealias ResultType = Void
 
   /// The bundled sample to import.
@@ -43,6 +43,6 @@ public struct ImportDeliciousLibrarySampleCommand<Centre: BookishHarnessProvider
   }
 
   public func perform(centre: Centre) async throws {
-    await centre.harness.importDeliciousLibrary(sample: sample)
+    await centre.importService.importDeliciousLibrary(sample: sample)
   }
 }

@@ -26,6 +26,15 @@ public final class BookishHarness {
     compatibleLayouts.map(\.id)
   }
 
+  /// Whether a record is selected for a record action.
+  public var hasSelectedRecord: Bool { navigation.selectedRecordID != nil }
+
+  /// Whether an interchange export has records to write.
+  public var hasExportableRecords: Bool { navigation.recordIDs.isEmpty == false }
+
+  /// Whether browser-index navigation can change the selection.
+  public var canSelectAnotherRecordIndex: Bool { navigation.recordIndexIDs.count > 1 }
+
   /// Increments whenever the record projection is refreshed.
   public private(set) var revision = 0
 
@@ -738,4 +747,12 @@ public final class BookishHarness {
       )
     )
   }
+}
+
+extension BookishHarness:
+  BookishImportService,
+  BookishDatastoreMaintenanceService,
+  BookishRecordActionService,
+  BookishBrowserIndexSelectionService
+{
 }

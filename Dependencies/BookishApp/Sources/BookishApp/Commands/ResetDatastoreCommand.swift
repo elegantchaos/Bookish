@@ -8,7 +8,7 @@ import CommandsUI
 import Icons
 
 /// Removes all records and mutations from the local datastore.
-public struct ResetDatastoreCommand<Centre: BookishHarnessProvider>: CommandWithUI {
+public struct ResetDatastoreCommand<Centre: BookishDatastoreMaintenanceServiceProvider>: CommandWithUI {
   public typealias ResultType = Void
 
   public let id = "datastore.reset"
@@ -38,6 +38,6 @@ public struct ResetDatastoreCommand<Centre: BookishHarnessProvider>: CommandWith
   }
 
   public func perform(centre: Centre) async throws {
-    await centre.harness.reset()
+    await centre.datastoreMaintenanceService.reset()
   }
 }

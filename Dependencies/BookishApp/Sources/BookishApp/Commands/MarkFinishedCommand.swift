@@ -9,7 +9,7 @@ import Foundation
 import Icons
 
 /// Marks the selected record as finished.
-public struct MarkFinishedCommand<Centre: BookishHarnessProvider>: CommandWithUI {
+public struct MarkFinishedCommand<Centre: BookishRecordActionServiceProvider>: CommandWithUI {
   public typealias ResultType = Void
 
   public let id = "datastore.mark-finished"
@@ -21,7 +21,7 @@ public struct MarkFinishedCommand<Centre: BookishHarnessProvider>: CommandWithUI
   }
 
   public func availability(centre: Centre) -> CommandAvailability {
-    centre.harness.navigation.selectedRecordID == nil ? .disabled : .enabled
+    centre.recordActionService.hasSelectedRecord ? .enabled : .disabled
   }
 
   public func name(centre: Centre) -> String {
@@ -37,6 +37,6 @@ public struct MarkFinishedCommand<Centre: BookishHarnessProvider>: CommandWithUI
   }
 
   public func perform(centre: Centre) async throws {
-    await centre.harness.markFinished()
+    await centre.recordActionService.markFinished()
   }
 }
