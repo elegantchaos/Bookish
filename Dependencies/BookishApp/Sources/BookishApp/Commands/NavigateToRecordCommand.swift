@@ -10,7 +10,7 @@ import Foundation
 import Icons
 
 /// Navigates to a materialised record using the requested browser route.
-public struct NavigateToRecordCommand<Centre: BookishNavigationServiceProvider>: CommandWithUI {
+public struct NavigateToRecordCommand<Centre: BookishNavigationProvider>: CommandWithUI {
   /// Controls how navigation reaches a linked record.
   public enum Mode: Sendable {
     /// Pushes the linked record onto the detail navigation stack.

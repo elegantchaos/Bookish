@@ -20,7 +20,7 @@ public protocol BookishStatusReporting {
 
 /// Performs import actions requested by commands.
 @MainActor
-public protocol BookishImportService {
+public protocol BookishImporting {
   /// Requests an interchange file import.
   func requestInterchangeImport()
   /// Requests a Delicious Library file import.
@@ -31,14 +31,14 @@ public protocol BookishImportService {
 
 /// Vends import actions to import commands.
 @MainActor
-public protocol BookishImportServiceProvider: CommandCentre {
+public protocol BookishImportingProvider: CommandCentre {
   /// The import service used by the command.
-  var importService: any BookishImportService { get }
+  var importService: any BookishImporting { get }
 }
 
 /// Performs datastore maintenance actions requested by commands.
 @MainActor
-public protocol BookishDatastoreMaintenanceService {
+public protocol BookishDatastoreMaintenance {
   /// Whether records are available for interchange export.
   var hasExportableRecords: Bool { get }
   /// Requests interchange export.
@@ -55,14 +55,14 @@ public protocol BookishDatastoreMaintenanceService {
 
 /// Vends datastore maintenance actions to maintenance commands.
 @MainActor
-public protocol BookishDatastoreMaintenanceServiceProvider: CommandCentre {
+public protocol BookishDatastoreMaintenanceProvider: CommandCentre {
   /// The datastore maintenance service used by the command.
-  var datastoreMaintenanceService: any BookishDatastoreMaintenanceService { get }
+  var datastoreMaintenanceService: any BookishDatastoreMaintenance { get }
 }
 
 /// Performs selected-record actions requested by commands.
 @MainActor
-public protocol BookishRecordActionService {
+public protocol BookishRecordActions {
   /// Whether a record is selected.
   var hasSelectedRecord: Bool { get }
   /// Marks the selected record as reading.
@@ -75,14 +75,14 @@ public protocol BookishRecordActionService {
 
 /// Vends selected-record actions to record commands.
 @MainActor
-public protocol BookishRecordActionServiceProvider: CommandCentre {
+public protocol BookishRecordActionsProvider: CommandCentre {
   /// The record-action service used by the command.
-  var recordActionService: any BookishRecordActionService { get }
+  var recordActionService: any BookishRecordActions { get }
 }
 
 /// Performs browser-index selection requested by commands.
 @MainActor
-public protocol BookishBrowserIndexSelectionService {
+public protocol BookishBrowserIndexing {
   /// Whether another index can be selected.
   var canSelectAnotherRecordIndex: Bool { get }
   /// Selects the next browser index.
@@ -93,14 +93,14 @@ public protocol BookishBrowserIndexSelectionService {
 
 /// Vends browser-index selection to index commands.
 @MainActor
-public protocol BookishBrowserIndexSelectionServiceProvider: CommandCentre {
+public protocol BookishBrowserIndexingProvider: CommandCentre {
   /// The browser-index selection service used by the command.
-  var browserIndexSelectionService: any BookishBrowserIndexSelectionService { get }
+  var browserIndexSelectionService: any BookishBrowserIndexing { get }
 }
 
 /// Performs browser record navigation requested by commands.
 @MainActor
-public protocol BookishRecordNavigationService {
+public protocol BookishRecordNavigation {
   /// Whether another record is available in the selected browser index.
   var canSelectAnotherRecord: Bool { get }
 
@@ -122,16 +122,16 @@ public protocol BookishRecordNavigationService {
 
 /// Vends browser record navigation to navigation commands.
 @MainActor
-public protocol BookishNavigationServiceProvider: CommandCentre {
+public protocol BookishNavigationProvider: CommandCentre {
   /// The browser record-navigation service.
-  var navigationService: any BookishRecordNavigationService { get }
+  var navigationService: any BookishRecordNavigation { get }
 }
 
 extension BookishCommandCentre:
-  BookishImportServiceProvider,
-  BookishDatastoreMaintenanceServiceProvider,
-  BookishRecordActionServiceProvider,
-  BookishBrowserIndexSelectionServiceProvider,
-  BookishNavigationServiceProvider
+  BookishImportingProvider,
+  BookishDatastoreMaintenanceProvider,
+  BookishRecordActionsProvider,
+  BookishBrowserIndexingProvider,
+  BookishNavigationProvider
 {
 }

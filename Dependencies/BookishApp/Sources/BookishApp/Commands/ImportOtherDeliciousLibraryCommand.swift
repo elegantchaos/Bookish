@@ -11,7 +11,7 @@ import Foundation
 import Icons
 
 /// Requests a Delicious Library import through the view-owned file picker.
-public struct ImportOtherDeliciousLibraryCommand<Centre: BookishImportServiceProvider>: CommandWithUI {
+public struct ImportOtherDeliciousLibraryCommand<Centre: BookishImportingProvider>: CommandWithUI {
   public typealias ResultType = Void
 
   public let id = "datastore.import.delicious-library.other"

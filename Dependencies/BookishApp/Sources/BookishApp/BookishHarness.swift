@@ -692,10 +692,10 @@ public final class BookishHarness {
 }
 
 extension BookishHarness:
-  BookishImportService,
-  BookishDatastoreMaintenanceService,
+  BookishImporting,
+  BookishDatastoreMaintenance,
   BookishStatusReporting,
-  BookishBrowserIndexSelectionService
+  BookishBrowserIndexing
 {
 }
 

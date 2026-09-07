@@ -8,7 +8,7 @@ import Foundation
 import Icons
 
 /// Requests an interchange JSON import through the view-owned file picker.
-public struct ImportInterchangeCommand<Centre: BookishImportServiceProvider>: CommandWithUI {
+public struct ImportInterchangeCommand<Centre: BookishImportingProvider>: CommandWithUI {
   public typealias ResultType = Void
 
   public let id = "datastore.import.interchange"

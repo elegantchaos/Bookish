@@ -9,7 +9,7 @@ import CommandsUI
 import Icons
 
 /// Selects the next record in the active datastore browser index.
-public struct SelectNextRecordCommand<Centre: BookishNavigationServiceProvider>: CommandWithUI {
+public struct SelectNextRecordCommand<Centre: BookishNavigationProvider>: CommandWithUI {
   public typealias ResultType = Void
 
   public let id = "datastore.navigation.next-record"

@@ -9,7 +9,7 @@ import CommandsUI
 import Icons
 
 /// Applies a synthetic remote mutation to the selected record.
-public struct SimulateRemoteMutationCommand<Centre: BookishRecordActionServiceProvider>: CommandWithUI {
+public struct SimulateRemoteMutationCommand<Centre: BookishRecordActionsProvider>: CommandWithUI {
   public typealias ResultType = Void
 
   public let id = "datastore.simulate-remote-mutation"

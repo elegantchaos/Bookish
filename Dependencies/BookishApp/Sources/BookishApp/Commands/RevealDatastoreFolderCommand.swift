@@ -13,7 +13,7 @@ import Icons
 #endif
 
 /// Reveals the datastore folder in Finder.
-public struct RevealDatastoreFolderCommand<Centre: BookishDatastoreMaintenanceServiceProvider>: CommandWithUI {
+public struct RevealDatastoreFolderCommand<Centre: BookishDatastoreMaintenanceProvider>: CommandWithUI {
   public typealias ResultType = Void
 
   public let id = "datastore.reveal-folder"

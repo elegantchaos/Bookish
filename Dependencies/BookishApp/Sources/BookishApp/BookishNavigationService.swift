@@ -221,5 +221,5 @@ public final class BookishNavigationService {
 
 }
 
-extension BookishNavigationService: BookishRecordNavigationService {
+extension BookishNavigationService: BookishRecordNavigation {
 }

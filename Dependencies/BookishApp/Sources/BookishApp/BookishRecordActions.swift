@@ -37,7 +37,7 @@ protocol BookishRecordActionStore: AnyObject {
 
 /// Applies mutations to the record selected in the Bookish browser.
 @MainActor
-final class BookishRecordActions: BookishRecordActionService {
+final class BookishRecordActionsService: BookishRecordActions {
   /// The harness-facing datastore operations used to execute actions.
   private unowned let store: any BookishRecordActionStore
 

@@ -9,7 +9,7 @@ import Commands
 import Icons
 
 /// Marks the selected record as currently being read.
-public struct MarkReadingCommand<Centre: BookishRecordActionServiceProvider>: CommandWithUI {
+public struct MarkReadingCommand<Centre: BookishRecordActionsProvider>: CommandWithUI {
   public typealias ResultType = Void
 
   public let id = "datastore.mark-reading"

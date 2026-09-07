@@ -8,7 +8,7 @@ import CommandsUI
 import Icons
 
 /// Removes all records and mutations from the local datastore.
-public struct ResetDatastoreCommand<Centre: BookishDatastoreMaintenanceServiceProvider>: CommandWithUI {
+public struct ResetDatastoreCommand<Centre: BookishDatastoreMaintenanceProvider>: CommandWithUI {
   public typealias ResultType = Void
 
   public let id = "datastore.reset"

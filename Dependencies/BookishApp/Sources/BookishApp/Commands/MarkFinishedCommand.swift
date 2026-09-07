@@ -9,7 +9,7 @@ import Foundation
 import Icons
 
 /// Marks the selected record as finished.
-public struct MarkFinishedCommand<Centre: BookishRecordActionServiceProvider>: CommandWithUI {
+public struct MarkFinishedCommand<Centre: BookishRecordActionsProvider>: CommandWithUI {
   public typealias ResultType = Void
 
   public let id = "datastore.mark-finished"

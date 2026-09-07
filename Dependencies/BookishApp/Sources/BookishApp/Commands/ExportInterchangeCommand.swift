@@ -9,7 +9,7 @@ import Commands
 import Icons
 
 /// Exports the materialised records as Bookish interchange JSON.
-public struct ExportInterchangeCommand<Centre: BookishDatastoreMaintenanceServiceProvider>: CommandWithUI {
+public struct ExportInterchangeCommand<Centre: BookishDatastoreMaintenanceProvider>: CommandWithUI {
   public typealias ResultType = Void
 
   public let id = "datastore.export.interchange"

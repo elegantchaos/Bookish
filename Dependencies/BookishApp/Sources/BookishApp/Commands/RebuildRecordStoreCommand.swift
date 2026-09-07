@@ -8,7 +8,7 @@ import CommandsUI
 import Icons
 
 /// Rebuilds the materialised record projection from stored mutations.
-public struct RebuildRecordStoreCommand<Centre: BookishDatastoreMaintenanceServiceProvider>: CommandWithUI {
+public struct RebuildRecordStoreCommand<Centre: BookishDatastoreMaintenanceProvider>: CommandWithUI {
   public typealias ResultType = Void
 
   public let id = "datastore.rebuild-record-store"

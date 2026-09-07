@@ -10,7 +10,7 @@ import Foundation
 import Icons
 
 /// Imports one of Bookish's bundled Delicious Library samples.
-public struct ImportDeliciousLibrarySampleCommand<Centre: BookishImportServiceProvider>: CommandWithUI {
+public struct ImportDeliciousLibrarySampleCommand<Centre: BookishImportingProvider>: CommandWithUI {
   public typealias ResultType = Void
 
   /// The bundled sample to import.
