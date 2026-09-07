@@ -63,7 +63,7 @@ struct CommandProviderTests {
       selectedRecordID: recordID,
       record: BookishRecord(id: recordID, kind: BookishRecordKind.book)
     )
-    let actions = BookishRecordActions(store: store)
+    let actions = BookishRecordActionsService(store: store)
 
     await actions.markReading()
 
@@ -82,20 +82,20 @@ struct CommandProviderTests {
   }
 
   @Test
-  func browserIndexCommandsUseTheVendedIndexSelectionService() async throws {
-    let selectionService = TestBrowserIndexSelectionService(canSelectAnotherRecordIndex: true)
-    let centre = TestCommandCentre(browserIndexSelectionService: selectionService)
+  func indexCommandsUseTheVendedNavigationService() async throws {
+    let navigationService = TestNavigationService(canSelectAnotherRecordIndex: true)
+    let centre = TestCommandCentre(navigationService: navigationService)
 
     try await centre.perform(SelectNextRecordIndexCommand())
     try await centre.perform(SelectPreviousRecordIndexCommand())
 
-    #expect(selectionService.selectedNextRecordIndex)
-    #expect(selectionService.selectedPreviousRecordIndex)
+    #expect(navigationService.selectedNextRecordIndex)
+    #expect(navigationService.selectedPreviousRecordIndex)
   }
 
   @Test
   func navigationCommandsUseTheVendedNavigationService() async throws {
-    let navigationService = TestRecordNavigationService(canSelectAnotherRecord: true)
+    let navigationService = TestNavigationService(canSelectAnotherRecord: true)
     let centre = TestCommandCentre(navigationService: navigationService)
 
     try await centre.perform(SelectNextRecordCommand())
@@ -111,35 +111,31 @@ struct CommandProviderTests {
 @MainActor
 private final class TestCommandCentre:
   CommandCentre,
-  BookishImportServiceProvider,
-  BookishDatastoreMaintenanceServiceProvider,
-  BookishRecordActionServiceProvider,
-  BookishBrowserIndexSelectionServiceProvider,
-  BookishNavigationServiceProvider
+  BookishImportingProvider,
+  BookishDatastoreMaintenanceProvider,
+  BookishRecordActionsProvider,
+  BookishNavigationProvider
 {
-  let importService: any BookishImportService
-  let datastoreMaintenanceService: any BookishDatastoreMaintenanceService
-  let recordActionService: any BookishRecordActionService
-  let browserIndexSelectionService: any BookishBrowserIndexSelectionService
-  let navigationService: any BookishRecordNavigationService
+  let importService: any BookishImporting
+  let datastoreMaintenanceService: any BookishDatastoreMaintenance
+  let recordActionService: any BookishRecordActions
+  let navigationService: any BookishNavigation
 
   init(
-    importService: any BookishImportService = TestImportService(),
-    datastoreMaintenanceService: any BookishDatastoreMaintenanceService = TestDatastoreMaintenanceService(),
-    recordActionService: any BookishRecordActionService = TestRecordActionService(),
-    browserIndexSelectionService: any BookishBrowserIndexSelectionService = TestBrowserIndexSelectionService(),
-    navigationService: any BookishRecordNavigationService = TestRecordNavigationService()
+    importService: any BookishImporting = TestImportService(),
+    datastoreMaintenanceService: any BookishDatastoreMaintenance = TestDatastoreMaintenanceService(),
+    recordActionService: any BookishRecordActions = TestRecordActionService(),
+    navigationService: any BookishNavigation = TestNavigationService()
   ) {
     self.importService = importService
     self.datastoreMaintenanceService = datastoreMaintenanceService
     self.recordActionService = recordActionService
-    self.browserIndexSelectionService = browserIndexSelectionService
     self.navigationService = navigationService
   }
 }
 
 @MainActor
-private final class TestImportService: BookishImportService {
+private final class TestImportService: BookishImporting {
   private(set) var requestedInterchangeImport = false
   private(set) var requestedDeliciousLibraryImport = false
   private(set) var importedSample: DeliciousLibrarySample?
@@ -158,7 +154,7 @@ private final class TestImportService: BookishImportService {
 }
 
 @MainActor
-private final class TestDatastoreMaintenanceService: BookishDatastoreMaintenanceService {
+private final class TestDatastoreMaintenanceService: BookishDatastoreMaintenance {
   let hasExportableRecords: Bool
   private(set) var requestedInterchangeExport = false
   private(set) var rebuiltRecordProjection = false
@@ -189,7 +185,7 @@ private final class TestDatastoreMaintenanceService: BookishDatastoreMaintenance
 }
 
 @MainActor
-private final class TestRecordActionService: BookishRecordActionService {
+private final class TestRecordActionService: BookishRecordActions {
   let hasSelectedRecord: Bool
   private(set) var markedReading = false
   private(set) var markedFinished = false
@@ -213,34 +209,30 @@ private final class TestRecordActionService: BookishRecordActionService {
 }
 
 @MainActor
-private final class TestBrowserIndexSelectionService: BookishBrowserIndexSelectionService {
+private final class TestNavigationService: BookishNavigation {
   let canSelectAnotherRecordIndex: Bool
+  let canSelectAnotherRecord: Bool
   private(set) var selectedNextRecordIndex = false
   private(set) var selectedPreviousRecordIndex = false
-
-  init(canSelectAnotherRecordIndex: Bool = false) {
-    self.canSelectAnotherRecordIndex = canSelectAnotherRecordIndex
-  }
-
-  func selectNextRecordIndex() async {
-    selectedNextRecordIndex = true
-  }
-
-  func selectPreviousRecordIndex() async {
-    selectedPreviousRecordIndex = true
-  }
-}
-
-@MainActor
-private final class TestRecordNavigationService: BookishRecordNavigationService {
-  let canSelectAnotherRecord: Bool
   private(set) var pushedRecordIDs: [BookishRecordID] = []
   private(set) var selectedRecordID: BookishRecordID?
   private(set) var selectedNextRecord = false
   private(set) var selectedPreviousRecord = false
 
-  init(canSelectAnotherRecord: Bool = false) {
+  init(canSelectAnotherRecordIndex: Bool = false, canSelectAnotherRecord: Bool = false) {
+    self.canSelectAnotherRecordIndex = canSelectAnotherRecordIndex
     self.canSelectAnotherRecord = canSelectAnotherRecord
+  }
+
+  func select(recordIndexID _: BookishRecordID?) async throws {
+  }
+
+  func selectNextRecordIndex() async throws {
+    selectedNextRecordIndex = true
+  }
+
+  func selectPreviousRecordIndex() async throws {
+    selectedPreviousRecordIndex = true
   }
 
   func contains(recordID _: BookishRecordID) -> Bool {

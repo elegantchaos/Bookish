@@ -80,29 +80,23 @@ public protocol BookishRecordActionsProvider: CommandCentre {
   var recordActionService: any BookishRecordActions { get }
 }
 
-/// Performs browser-index selection requested by commands.
+/// Performs browser index and record navigation requested by commands.
 @MainActor
-public protocol BookishBrowserIndexing {
-  /// Whether another index can be selected.
+public protocol BookishNavigation {
+  /// Whether another browser index is available.
   var canSelectAnotherRecordIndex: Bool { get }
-  /// Selects the next browser index.
-  func selectNextRecordIndex() async
-  /// Selects the previous browser index.
-  func selectPreviousRecordIndex() async
-}
 
-/// Vends browser-index selection to index commands.
-@MainActor
-public protocol BookishBrowserIndexingProvider: CommandCentre {
-  /// The browser-index selection service used by the command.
-  var browserIndexSelectionService: any BookishBrowserIndexing { get }
-}
-
-/// Performs browser record navigation requested by commands.
-@MainActor
-public protocol BookishRecordNavigation {
   /// Whether another record is available in the selected browser index.
   var canSelectAnotherRecord: Bool { get }
+
+  /// Selects a browser index and refreshes its displayed records.
+  func select(recordIndexID: BookishRecordID?) async throws
+
+  /// Selects the next browser index.
+  func selectNextRecordIndex() async throws
+
+  /// Selects the previous browser index.
+  func selectPreviousRecordIndex() async throws
 
   /// Returns whether the selected browser index contains a record.
   func contains(recordID: BookishRecordID) -> Bool
@@ -120,18 +114,17 @@ public protocol BookishRecordNavigation {
   func selectPreviousRecord()
 }
 
-/// Vends browser record navigation to navigation commands.
+/// Vends browser navigation to navigation commands.
 @MainActor
 public protocol BookishNavigationProvider: CommandCentre {
-  /// The browser record-navigation service.
-  var navigationService: any BookishRecordNavigation { get }
+  /// The browser navigation service.
+  var navigationService: any BookishNavigation { get }
 }
 
 extension BookishCommandCentre:
   BookishImportingProvider,
   BookishDatastoreMaintenanceProvider,
   BookishRecordActionsProvider,
-  BookishBrowserIndexingProvider,
   BookishNavigationProvider
 {
 }

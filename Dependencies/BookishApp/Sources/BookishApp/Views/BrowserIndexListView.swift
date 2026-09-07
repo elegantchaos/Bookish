@@ -8,11 +8,11 @@ import SwiftUI
 
 /// Displays the available record indexes and changes the active browser index.
 struct BrowserIndexListView: View {
-  /// The datastore coordinator used to select indexes.
-  let harness: BookishHarness
-
   /// The route containing the current index selection.
   let navigation: BookishNavigationService
+
+  /// The command boundary used to report navigation failures.
+  @Environment(\.bookishCommandCentre) private var commander
 
   /// The list of selectable browser indexes.
   var body: some View {
@@ -62,7 +62,11 @@ struct BrowserIndexListView: View {
   /// Selects an index without blocking SwiftUI's selection update.
   private func select(recordIndexID: BookishRecordID?) {
     Task {
-      await harness.select(recordIndexID: recordIndexID)
+      do {
+        try await navigation.select(recordIndexID: recordIndexID)
+      } catch {
+        commander?.statusReporter.report(error: error)
+      }
     }
   }
 }

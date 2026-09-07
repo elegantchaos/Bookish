@@ -29,9 +29,6 @@ public final class BookishHarness {
   /// Whether an interchange export has records to write.
   public var hasExportableRecords: Bool { navigation.recordIDs.isEmpty == false }
 
-  /// Whether browser-index navigation can change the selection.
-  public var canSelectAnotherRecordIndex: Bool { navigation.recordIndexIDs.count > 1 }
-
   /// Increments whenever the record projection is refreshed.
   public private(set) var revision = 0
 
@@ -74,8 +71,13 @@ public final class BookishHarness {
   /// An injected datastore directory for tests or a custom local store.
   private let directoryURL: URL?
 
-  /// The loaded datastore backing all harness operations.
-  private var datastore: BookishDatastore?
+  /// The datastore service shared with navigation and other Bookish services.
+  @ObservationIgnored private let datastoreService: BookishDatastoreService
+
+  /// The loaded datastore used by harness responsibilities that have not yet moved into services.
+  private var datastore: BookishDatastore? {
+    datastoreService.datastore
+  }
 
   /// The loaded layout records used to derive compatible layout choices.
   private var layouts: [BookishRecord] = []
@@ -88,8 +90,12 @@ public final class BookishHarness {
   ) {
     self.directoryURL = directoryURL
     self.navigation = navigation
+    datastoreService = navigation.datastoreService
     self.defaultShowsDebugIndexes = defaultShowsDebugIndexes
     self.showsDebugIndexes = defaultShowsDebugIndexes
+    navigation.setRecordIndexSelectionHandler { [weak self] in
+      try await self?.updateLayoutSelection()
+    }
   }
 
   /// Loads, seeds, and refreshes the datastore.
@@ -166,7 +172,7 @@ public final class BookishHarness {
       try BookishDatastore.reset(directoryURL: directory)
       resetProjectionState()
       let datastore = try await BookishDatastore(directoryURL: directory)
-      self.datastore = datastore
+      datastoreService.update(datastore: datastore)
       _ = try await importConfigurationSeeds(into: datastore)
       try await writeSeedMarker(to: datastore)
       try await refresh()
@@ -357,32 +363,6 @@ public final class BookishHarness {
     return try await record(id: selectedRecordID)
   }
 
-  /// Selects a top-level browser index and refreshes its content query result.
-  public func select(recordIndexID: BookishRecordID?) async {
-    guard let datastore else {
-      status = BookishHarnessError.notLoaded.localizedDescription
-      return
-    }
-
-    do {
-      navigation.select(recordIndexID: recordIndexID)
-      try await refreshSelectedRecordIndex(using: datastore)
-      try await updateLayoutSelection(using: datastore)
-    } catch {
-      report(error: error)
-    }
-  }
-
-  /// Selects the next top-level browser index.
-  public func selectNextRecordIndex() async {
-    await selectRecordIndex(offset: 1)
-  }
-
-  /// Selects the previous top-level browser index.
-  public func selectPreviousRecordIndex() async {
-    await selectRecordIndex(offset: -1)
-  }
-
   /// Returns all stored mutations for the debug mutation window.
   public func mutations() async throws -> [MutationRecord] {
     guard let datastore else {
@@ -458,7 +438,7 @@ public final class BookishHarness {
     let recordIndexResult = try await datastore.recordQueryService.result(
       matching: recordIndexQuery)
     navigation.update(recordIndexResult: recordIndexResult)
-    try await refreshSelectedRecordIndex(using: datastore)
+    try await navigation.refreshSelectedRecordIndex()
     layouts = try await datastore.recordService.records(
       matching: RecordQuery(
         predicate: .kind(BookishRecordKind.layout),
@@ -466,12 +446,12 @@ public final class BookishHarness {
       ))
     layoutIDs = layouts.filter { $0.bool(BookishRecordKey.isSection) != true }.map(\.id)
     revision += 1
-    try await updateLayoutSelection(using: datastore)
+    try await updateLayoutSelection()
   }
 
   /// Installs, seeds, and refreshes a newly loaded datastore.
   private func configure(_ datastore: BookishDatastore) async throws {
-    self.datastore = datastore
+    datastoreService.update(datastore: datastore)
     try await seed(using: datastore)
     try await refresh()
   }
@@ -479,10 +459,10 @@ public final class BookishHarness {
   /// Clears UI state tied to the current materialised projection.
   private func resetProjectionState() {
     navigation.reset()
+    datastoreService.update(datastore: nil)
     selectedLayoutID = nil
     layouts = []
     layoutIDs = []
-    datastore = nil
   }
 
   /// Seeds a new datastore, or refreshes metadata required by existing datastores.
@@ -520,8 +500,12 @@ public final class BookishHarness {
   }
 
   /// Clears a selected layout that is missing or incompatible with the active index.
-  private func updateLayoutSelection(using datastore: BookishDatastore) async throws {
+  private func updateLayoutSelection() async throws {
     guard let selectedLayoutID else {
+      return
+    }
+
+    guard let datastore else {
       return
     }
 
@@ -563,42 +547,6 @@ public final class BookishHarness {
       predicate: predicate,
       sort: [.property(BookishRecordKey.position), .property(BookishRecordKey.name), .id]
     )
-  }
-
-  /// Refreshes the query result for the currently selected browser index.
-  private func refreshSelectedRecordIndex(using datastore: BookishDatastore) async throws {
-    guard let selectedRecordIndex = navigation.selectedRecordIndex else {
-      navigation.update(selectedRecordResult: nil)
-      return
-    }
-
-    guard let query = selectedRecordIndex.query else {
-      navigation.update(selectedRecordResult: nil)
-      return
-    }
-
-    let result = try await datastore.recordQueryService.result(matching: query)
-    navigation.update(selectedRecordResult: result)
-  }
-
-  /// Moves the selected browser index by a wrapping offset and refreshes its records.
-  private func selectRecordIndex(offset: Int) async {
-    guard let datastore else {
-      status = BookishHarnessError.notLoaded.localizedDescription
-      return
-    }
-
-    do {
-      if offset > 0 {
-        navigation.selectNextRecordIndex()
-      } else {
-        navigation.selectPreviousRecordIndex()
-      }
-      try await refreshSelectedRecordIndex(using: datastore)
-      try await updateLayoutSelection(using: datastore)
-    } catch {
-      report(error: error)
-    }
   }
 
   /// Decodes and upserts one bundled interchange seed resource.
@@ -694,8 +642,7 @@ public final class BookishHarness {
 extension BookishHarness:
   BookishImporting,
   BookishDatastoreMaintenance,
-  BookishStatusReporting,
-  BookishBrowserIndexing
+  BookishStatusReporting
 {
 }
 

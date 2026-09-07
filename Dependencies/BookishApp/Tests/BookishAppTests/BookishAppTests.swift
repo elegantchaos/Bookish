@@ -358,7 +358,7 @@ struct BookishAppTests {
     let harness = try makeHarness()
     await harness.load()
 
-    await harness.select(recordIndexID: BookishRecordID("datastore-index-books"))
+    try await harness.navigation.select(recordIndexID: BookishRecordID("datastore-index-books"))
 
     #expect(
       Set(harness.compatibleLayoutIDs) == [
@@ -367,7 +367,7 @@ struct BookishAppTests {
       ])
 
     harness.selectedLayoutID = BookishRecordID("datastore-book-layout")
-    await harness.select(recordIndexID: BookishRecordID("datastore-index-people"))
+    try await harness.navigation.select(recordIndexID: BookishRecordID("datastore-index-people"))
 
     #expect(harness.selectedLayoutID == nil)
     #expect(
@@ -598,7 +598,7 @@ struct BookishAppTests {
     #expect(harness.status == "Reported through status capability")
     #expect(commander.datastoreMaintenanceService.hasExportableRecords == false)
     #expect(commander.recordActionService.hasSelectedRecord == false)
-    #expect(commander.browserIndexSelectionService.canSelectAnotherRecordIndex == false)
+    #expect(commander.navigationService.canSelectAnotherRecordIndex == false)
     #expect(commander.navigationService.canSelectAnotherRecord == false)
   }
 

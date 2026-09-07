@@ -22,12 +22,8 @@ public final class BookishCommandCentre: CommandCentre {
   /// The record-action capability exposed to commands.
   @ObservationIgnored public let recordActionService: any BookishRecordActions
 
-  /// The browser-index selection capability exposed to commands.
-  @ObservationIgnored public let browserIndexSelectionService:
-    any BookishBrowserIndexing
-
-  /// The browser record-navigation capability exposed to commands.
-  @ObservationIgnored public let navigationService: any BookishRecordNavigation
+  /// The browser navigation capability exposed to commands.
+  @ObservationIgnored public let navigationService: any BookishNavigation
 
   /// Creates a command centre over the supplied Bookish services.
   public init(harness: BookishHarness) {
@@ -35,7 +31,6 @@ public final class BookishCommandCentre: CommandCentre {
     importService = harness
     datastoreMaintenanceService = harness
     recordActionService = BookishRecordActionsService(store: harness)
-    browserIndexSelectionService = harness
     navigationService = harness.navigation
   }
 

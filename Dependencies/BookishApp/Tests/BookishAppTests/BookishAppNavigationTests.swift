@@ -57,7 +57,7 @@ import Testing
     let harness = try makeHarness()
     let commander = BookishCommandCentre(harness: harness)
     await harness.load()
-    await harness.select(recordIndexID: BookishRecordID("datastore-index-layouts"))
+    try await harness.navigation.select(recordIndexID: BookishRecordID("datastore-index-layouts"))
 
     try await commander.perform(SelectNextRecordIndexCommand())
 
@@ -92,7 +92,7 @@ import Testing
     let harness = try makeHarness()
     await harness.load()
 
-    await harness.select(recordIndexID: BookishRecordID("datastore-index-layouts"))
+    try await harness.navigation.select(recordIndexID: BookishRecordID("datastore-index-layouts"))
 
     let layout = try await harness.selectedLayout()
 

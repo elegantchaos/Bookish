@@ -9,7 +9,7 @@ import CommandsUI
 import Icons
 
 /// Selects the previous record index in the datastore browser.
-public struct SelectPreviousRecordIndexCommand<Centre: BookishBrowserIndexingProvider>: CommandWithUI {
+public struct SelectPreviousRecordIndexCommand<Centre: BookishNavigationProvider>: CommandWithUI {
   public typealias ResultType = Void
 
   public let id = "datastore.navigation.previous-index"
@@ -19,7 +19,7 @@ public struct SelectPreviousRecordIndexCommand<Centre: BookishBrowserIndexingPro
   }
 
   public func availability(centre: Centre) -> CommandAvailability {
-    centre.browserIndexSelectionService.canSelectAnotherRecordIndex ? .enabled : .disabled
+    centre.navigationService.canSelectAnotherRecordIndex ? .enabled : .disabled
   }
 
   public func name(centre: Centre) -> String {
@@ -35,6 +35,6 @@ public struct SelectPreviousRecordIndexCommand<Centre: BookishBrowserIndexingPro
   }
 
   public func perform(centre: Centre) async throws {
-    await centre.browserIndexSelectionService.selectPreviousRecordIndex()
+    try await centre.navigationService.selectPreviousRecordIndex()
   }
 }

@@ -37,7 +37,7 @@ public struct BookishHarnessView: View {
   public var body: some View {
     VStack(spacing: 0) {
       NavigationSplitView {
-        BrowserIndexListView(harness: harness, navigation: navigation)
+        BrowserIndexListView(navigation: navigation)
       } content: {
         RecordIndexView(harness: harness, navigation: navigation)
       } detail: {

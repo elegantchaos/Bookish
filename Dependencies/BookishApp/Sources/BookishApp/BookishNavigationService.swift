@@ -19,6 +19,12 @@ public final class BookishNavigationService {
   /// The observable records defining the available browser indexes.
   public private(set) var recordIndexResult: RecordQueryResult?
 
+  /// The datastore service used to materialise selected browser-index queries.
+  @ObservationIgnored let datastoreService: BookishDatastoreService
+
+  /// Reconciles presentation state after a browser-index change.
+  @ObservationIgnored private var recordIndexSelectionHandler: (@MainActor () async throws -> Void)?
+
   /// The selected browser index shown in the first split-view column.
   public private(set) var selectedRecordIndexID: BookishRecordID?
 
@@ -32,7 +38,8 @@ public final class BookishNavigationService {
   public private(set) var selectedRecordResult: RecordQueryResult?
 
   /// Creates an empty navigation service.
-  public init() {
+  public init(datastoreService: BookishDatastoreService = BookishDatastoreService()) {
+    self.datastoreService = datastoreService
   }
 
   /// The available browser index identifiers.
@@ -74,6 +81,18 @@ public final class BookishNavigationService {
     selectedRecordIDs.count > 1
   }
 
+  /// Whether another browser index is available.
+  public var canSelectAnotherRecordIndex: Bool {
+    recordIndexIDs.count > 1
+  }
+
+  /// Sets the presentation reconciliation performed after an index selection.
+  public func setRecordIndexSelectionHandler(
+    _ handler: @escaping @MainActor () async throws -> Void
+  ) {
+    recordIndexSelectionHandler = handler
+  }
+
   /// Updates the available browser index result and preserves a valid selection.
   public func update(recordIndexResult: RecordQueryResult?) {
     self.recordIndexResult = recordIndexResult
@@ -100,8 +119,15 @@ public final class BookishNavigationService {
     recordNavigationPath = []
   }
 
+  /// Selects a browser index, refreshes its displayed records, and reconciles presentation state.
+  public func select(recordIndexID: BookishRecordID?) async throws {
+    selectRecordIndex(recordIndexID: recordIndexID)
+    try await refreshSelectedRecordIndex()
+    try await recordIndexSelectionHandler?()
+  }
+
   /// Selects a browser index and clears stale record content.
-  public func select(recordIndexID: BookishRecordID?) {
+  private func selectRecordIndex(recordIndexID: BookishRecordID?) {
     guard let recordIndexID, recordIndexIDs.contains(recordIndexID) else {
       selectedRecordIndexID = recordIndexes.first?.id
       selectedRecordResult = nil
@@ -152,14 +178,18 @@ public final class BookishNavigationService {
     recordNavigationPath = path
   }
 
-  /// Moves to the next available browser index.
-  public func selectNextRecordIndex() {
+  /// Moves to the next available browser index and refreshes its displayed records.
+  public func selectNextRecordIndex() async throws {
     selectRecordIndex(offset: 1)
+    try await refreshSelectedRecordIndex()
+    try await recordIndexSelectionHandler?()
   }
 
-  /// Moves to the previous available browser index.
-  public func selectPreviousRecordIndex() {
+  /// Moves to the previous available browser index and refreshes its displayed records.
+  public func selectPreviousRecordIndex() async throws {
     selectRecordIndex(offset: -1)
+    try await refreshSelectedRecordIndex()
+    try await recordIndexSelectionHandler?()
   }
 
   /// Moves to the next available record in the selected kind.
@@ -188,17 +218,34 @@ public final class BookishNavigationService {
     return recordIndexIDs.contains(selectedRecordIndexID)
   }
 
+  /// Materialises the query result for the selected browser index.
+  public func refreshSelectedRecordIndex() async throws {
+    guard let selectedRecordIndex else {
+      update(selectedRecordResult: nil)
+      return
+    }
+
+    guard let query = selectedRecordIndex.query else {
+      update(selectedRecordResult: nil)
+      return
+    }
+
+    let result = try await datastoreService.recordQueryResult(matching: query)
+    update(selectedRecordResult: result)
+  }
+
+  /// Moves the selected browser index by a wrapping offset.
   private func selectRecordIndex(offset: Int) {
     guard let current = selectedRecordIndexID,
       let currentIndex = recordIndexIDs.firstIndex(of: current),
       !recordIndexIDs.isEmpty
     else {
-      select(recordIndexID: recordIndexIDs.first)
+      selectRecordIndex(recordIndexID: recordIndexIDs.first)
       return
     }
 
     let nextIndex = wrappingIndex(currentIndex + offset, count: recordIndexIDs.count)
-    select(recordIndexID: recordIndexIDs[nextIndex])
+    selectRecordIndex(recordIndexID: recordIndexIDs[nextIndex])
   }
 
   private func selectRecord(offset: Int) {
@@ -221,5 +268,5 @@ public final class BookishNavigationService {
 
 }
 
-extension BookishNavigationService: BookishRecordNavigation {
+extension BookishNavigationService: BookishNavigation {
 }
