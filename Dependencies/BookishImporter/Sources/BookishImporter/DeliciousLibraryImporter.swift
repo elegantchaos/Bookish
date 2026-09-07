@@ -29,7 +29,7 @@ public struct DeliciousLibraryImporter: BookishImporter {
     )
     let importer = self
 
-    let task = Task {
+    let task = Task.detached {
       do {
         continuation.yield(.started(BookishImportStart(importer: importer.descriptor)))
         let list = try importer.decodeSource(data)

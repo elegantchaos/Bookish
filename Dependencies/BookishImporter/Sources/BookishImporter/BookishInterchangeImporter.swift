@@ -1,3 +1,8 @@
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+//  Created by Sam Deane on 07/09/2026.
+//  Copyright © 2026 Elegant Chaos Limited. All rights reserved.
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
 import BookishCoding
 import Foundation
 
@@ -26,7 +31,7 @@ public struct BookishInterchangeImporter: BookishImporter {
     )
     let importer = self
 
-    let task = Task {
+    let task = Task.detached {
       do {
         continuation.yield(.started(BookishImportStart(importer: importer.descriptor)))
         let file = try BookishInterchangeCodec().decode(data)

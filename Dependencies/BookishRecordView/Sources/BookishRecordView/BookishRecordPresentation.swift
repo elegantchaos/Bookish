@@ -1,3 +1,8 @@
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+//  Created by Sam Deane on 07/09/2026.
+//  Copyright © 2026 Elegant Chaos Limited. All rights reserved.
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
 import BookishRecord
 import Foundation
 
@@ -170,120 +175,5 @@ public struct BookishRecordPresentation: Sendable {
       return value.isEmpty ? nil : value
     }
     .first
-  }
-}
-
-/// An ordered item declared by a record layout.
-public enum BookishRecordLayoutItem: Equatable, Identifiable, Sendable {
-  /// A materialised record property.
-  case field(BookishRecordField)
-
-  /// A link to a query-section configuration record.
-  case section(BookishRecordID)
-
-  /// The stable identity used when rendering layout items in SwiftUI.
-  public var id: String {
-    switch self {
-    case .field(let field):
-      "field.\(field.key)"
-
-    case .section(let sectionID):
-      "section.\(sectionID.rawValue)"
-    }
-  }
-}
-
-/// The interaction mode used to select value components and visible fields.
-public enum BookishValuePresentationMode: Sendable {
-  /// Displays only values present on the record.
-  case viewing
-
-  /// Displays every field supplied by the active layout so values can be added.
-  case editing
-}
-
-/// A single display-ready record field.
-public struct BookishRecordField: Equatable, Identifiable, Sendable {
-  /// The datastore property key.
-  public let key: String
-
-  /// The display label derived from the property key.
-  public let label: String
-
-  /// The SF Symbol used to represent the property, when available.
-  public let icon: String?
-
-  /// The stable identifier of the preferred value viewer, when configured.
-  public let viewer: String?
-
-  /// The stable identifier of the preferred value editor, when configured.
-  public let editor: String?
-
-  /// The formatted property value.
-  public let value: String
-
-  /// The source record value, if the field exists on the record.
-  public let rawValue: BookishRecordValue?
-
-  /// Creates a display field.
-  public init(
-    key: String,
-    label: String,
-    icon: String? = nil,
-    viewer: String? = nil,
-    editor: String? = nil,
-    value: String,
-    rawValue: BookishRecordValue? = nil
-  ) {
-    self.key = key
-    self.label = label
-    self.icon = icon
-    self.viewer = viewer
-    self.editor = editor
-    self.value = value
-    self.rawValue = rawValue
-  }
-
-  /// The stable identity for SwiftUI lists.
-  public var id: String {
-    key
-  }
-}
-
-extension BookishRecordValue {
-  /// Formats a Bookish property value for display.
-  var displayString: String {
-    if let date = dateValue {
-      return date.formatted(date: .abbreviated, time: .omitted)
-    }
-
-    if let url = urlValue {
-      return url.absoluteString
-    }
-
-    return switch self {
-    case .string(let value):
-      value
-    case .integer(let value):
-      value.formatted()
-    case .double(let value):
-      value.formatted()
-    case .bool(let value):
-      value ? "Yes" : "No"
-    case .record(let id):
-      id.rawValue
-    case .blob(let reference):
-      reference.filename ?? reference.id
-    case .list(let values):
-      values.map(\.displayString).joined(separator: ", ")
-    case .encoded(let value, _):
-      value.keys.sorted().joined(separator: ", ")
-    case .tombstone:
-      "Tombstone"
-    case .deletion:
-      "Deleted"
-    case .conflict(let values):
-      values.map(\.displayString).joined(separator: " / ")
-    }
   }
 }

@@ -6,10 +6,15 @@
 import Settings
 import SwiftUI
 
+/// Controls visibility of optional and diagnostic app features.
 struct GeneralSettingsView: View {
-  @AppStorage(.isAdvancedMode) var isAdvancedMode
-  @AppStorage(.isDeveloperMode) var isDeveloperMode
+  /// Whether advanced controls are visible.
+  @AppStorage(.isAdvancedMode) private var isAdvancedMode
 
+  /// Whether developer diagnostics are visible.
+  @AppStorage(.isDeveloperMode) private var isDeveloperMode
+
+  /// The settings form.
   var body: some View {
     Form {
       Toggle("Advanced Mode", isOn: $isAdvancedMode)

@@ -1,5 +1,6 @@
 # Journal Index
 
+- [2026-09-07 Dependencies Review](2026-09-07-dependencies-review.md)
 - [2026-09-07 Mode-Gated Controls](2026-09-07-mode-gated-controls.md)
 - [2026-09-06 Query Sections](2026-09-06-query-sections.md)
 - [2026-09-06 BookishApp Source Layout](2026-09-06-bookish-app-source-layout.md)

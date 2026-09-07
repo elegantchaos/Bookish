@@ -5,17 +5,17 @@
 
 import SwiftUI
 
+/// The Bookish settings scene content.
 public struct BookishSettingsView: View {
+  /// Creates the settings content.
   public init() {
   }
 
+  /// The settings tabs.
   public var body: some View {
     TabView {
       Tab("General", systemImage: "gear") {
         GeneralSettingsView()
-      }
-      Tab("Advanced", systemImage: "star") {
-        //                AdvancedSettingsView()
       }
     }
     .scenePadding()

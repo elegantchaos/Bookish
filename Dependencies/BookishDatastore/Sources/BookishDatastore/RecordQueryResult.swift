@@ -9,7 +9,7 @@ import Observation
 /// Observable materialised records returned by a `RecordQueryService`.
 @MainActor
 @Observable
-public final class RecordQueryResult: @unchecked Sendable {
+public final class RecordQueryResult {
   /// The query that defines this result.
   public private(set) var query: RecordQuery
 
