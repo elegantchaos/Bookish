@@ -505,8 +505,9 @@ struct BookishAppTests {
   @Test
   func exportCommandIsDisabledWithoutRecords() {
     let harness = BookishHarness()
+    let commander = BookishCommandCentre(harness: harness)
 
-    #expect(harness.availability(ExportInterchangeCommand()) == .disabled)
+    #expect(commander.availability(ExportInterchangeCommand()) == .disabled)
   }
 
   @MainActor
@@ -576,8 +577,9 @@ struct BookishAppTests {
 
   func testErrorCommandIsShownInStatusBar() async {
     let harness = BookishHarness()
+    let commander = BookishCommandCentre(harness: harness)
 
-    await harness.performWithoutWaiting(ThrowTestErrorCommand()).value
+    await commander.performWithoutWaiting(ThrowTestErrorCommand()).value
 
     #expect(harness.status == "This is a test command error.")
   }

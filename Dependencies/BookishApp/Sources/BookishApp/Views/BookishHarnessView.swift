@@ -46,7 +46,7 @@ public struct BookishHarnessView: View {
         RecordDetailView(harness: harness, navigation: navigation, commander: commander)
       }
       .toolbar {
-        BookishToolbar(harness: harness)
+        BookishToolbar(harness: harness, commander: commander)
       }
 
       BookishStatusBar(harness: harness)

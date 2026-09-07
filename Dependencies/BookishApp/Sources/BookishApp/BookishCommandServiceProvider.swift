@@ -21,7 +21,3 @@ public protocol BookishNavigationServiceProvider: CommandCentre {
 
 extension BookishCommandCentre: BookishHarnessProvider, BookishNavigationServiceProvider {
 }
-
-extension BookishHarness: BookishHarnessProvider {
-  public var harness: BookishHarness { self }
-}
