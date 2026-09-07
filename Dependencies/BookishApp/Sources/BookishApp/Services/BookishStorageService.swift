@@ -26,6 +26,9 @@ public final class BookishStorageService {
   /// The loaded datastore, when Bookish has completed startup.
   @ObservationIgnored private(set) var datastore: BookishDatastore?
 
+  /// Whether Bookish has loaded a datastore that can fulfil model operations.
+  var isLoaded: Bool { datastore != nil }
+
   /// Creates an empty datastore service ready to receive a loaded datastore.
   public init(directoryURL: URL? = nil) {
     self.directoryURL = directoryURL
@@ -97,6 +100,43 @@ public final class BookishStorageService {
     }
 
     return try await datastore.recordQueryService.result(matching: query)
+  }
+
+  /// Returns the materialised records matching a query.
+  func records(matching query: RecordQuery) async throws -> [BookishRecord] {
+    guard let datastore else { throw BookishStorageError.notLoaded }
+    return try await datastore.recordService.records(matching: query)
+  }
+
+  /// Returns a materialised record, if it exists.
+  func record(id: BookishRecordID) async throws -> BookishRecord? {
+    try await datastore?.recordService.record(id: id)
+  }
+
+  /// Resolves a host-specific query template against the materialised store.
+  func recordQueryResult(
+    for template: RecordQueryTemplate,
+    host: BookishRecord
+  ) async throws -> RecordQueryResult {
+    try await recordQueryResult(matching: template.resolve(for: host))
+  }
+
+  /// Returns all durable mutations for diagnostic presentation.
+  func mutations() async throws -> [MutationRecord] {
+    guard let datastore else { throw BookishStorageError.notLoaded }
+    return try await datastore.mutationStore.mutations()
+  }
+
+  /// Applies a durable local mutation.
+  func perform(_ mutation: MutationRecord) async throws {
+    guard let datastore else { throw BookishStorageError.notLoaded }
+    try await datastore.mutationService.perform(mutation.operation)
+  }
+
+  /// Applies a mutation received from another source.
+  func receiveRemoteMutation(_ mutation: MutationRecord) async throws {
+    guard let datastore else { throw BookishStorageError.notLoaded }
+    try await datastore.mutationService.receiveRemoteMutation(mutation)
   }
 
   /// Applies configuration seeds to the loaded datastore.

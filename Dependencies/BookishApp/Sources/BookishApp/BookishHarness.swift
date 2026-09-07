@@ -68,11 +68,6 @@ public final class BookishHarness {
   /// The datastore service shared with navigation and other Bookish services.
   @ObservationIgnored let storageService: BookishStorageService
 
-  /// The loaded datastore used by harness responsibilities that have not yet moved into services.
-  private var datastore: BookishDatastore? {
-    storageService.datastore
-  }
-
   /// The loaded layout records used to derive compatible layout choices.
   private var layouts: [BookishRecord] = []
 
@@ -111,7 +106,7 @@ public final class BookishHarness {
 
     self.showsDebugIndexes = showsDebugIndexes
 
-    guard datastore != nil else {
+    guard storageService.isLoaded else {
       return
     }
 
@@ -206,7 +201,7 @@ public final class BookishHarness {
     from input: Importer.Input,
     using importer: Importer
   ) async {
-    guard datastore != nil else {
+    guard storageService.isLoaded else {
       status = BookishHarnessError.notLoaded.localizedDescription
       return
     }
@@ -268,11 +263,7 @@ public final class BookishHarness {
 
   /// Exports the current materialised records as Bookish interchange JSON data.
   public func exportInterchangeData() async throws -> Data {
-    guard let datastore else {
-      throw BookishHarnessError.notLoaded
-    }
-
-    let records = try await datastore.recordService.records(
+    let records = try await storageService.records(
       matching: RecordQuery(sort: [.kind, .id]))
     let file = BookishInterchangeFile(root: navigation.selectedRecordID, records: records)
     return try BookishInterchangeCodec().encode(file)
@@ -280,7 +271,7 @@ public final class BookishHarness {
 
   /// Returns a record by resolving it from the record service.
   public func record(id: BookishRecordID) async throws -> BookishRecord? {
-    try await datastore?.recordService.record(id: id)
+    try await storageService.record(id: id)
   }
 
   /// Returns the metadata record describing a catalogue kind, or the universal fallback.
@@ -298,11 +289,7 @@ public final class BookishHarness {
     for template: RecordQueryTemplate,
     host: BookishRecord
   ) async throws -> RecordQueryResult {
-    guard let datastore else {
-      throw BookishHarnessError.notLoaded
-    }
-
-    return try await datastore.recordQueryService.result(matching: template.resolve(for: host))
+    try await storageService.recordQueryResult(for: template, host: host)
   }
 
   /// Returns presentation records ordered from layout-specific to generic metadata.
@@ -344,11 +331,7 @@ public final class BookishHarness {
 
   /// Returns all stored mutations for the debug mutation window.
   public func mutations() async throws -> [MutationRecord] {
-    guard let datastore else {
-      throw BookishHarnessError.notLoaded
-    }
-
-    return try await datastore.mutationStore.mutations()
+    try await storageService.mutations()
   }
 
   /// Returns the selected layout by resolving it from the record service.
@@ -410,15 +393,14 @@ public final class BookishHarness {
 
   /// Refreshes browser indexes, selected records, layouts, and compatible selection state.
   private func refresh() async throws {
-    guard let datastore else {
+    guard storageService.isLoaded else {
       return
     }
 
-    let recordIndexResult = try await datastore.recordQueryService.result(
-      matching: recordIndexQuery)
+    let recordIndexResult = try await storageService.recordQueryResult(matching: recordIndexQuery)
     navigation.update(recordIndexResult: recordIndexResult)
     try await navigation.refreshSelectedRecordIndex()
-    layouts = try await datastore.recordService.records(
+    layouts = try await storageService.records(
       matching: RecordQuery(
         predicate: .kind(BookishRecordKind.layout),
         sort: [.property(BookishRecordKey.name), .id]
@@ -442,11 +424,11 @@ public final class BookishHarness {
       return
     }
 
-    guard let datastore else {
+    guard storageService.isLoaded else {
       return
     }
 
-    if try await datastore.recordService.record(id: selectedLayoutID) == nil {
+    if try await storageService.record(id: selectedLayoutID) == nil {
       self.selectedLayoutID = nil
       return
     }
@@ -497,27 +479,19 @@ extension BookishHarness:
 
 extension BookishHarness: BookishRecordActionStore {
   /// Whether the datastore is available for record actions.
-  var hasLoadedRecordStore: Bool { datastore != nil }
+  var hasLoadedRecordStore: Bool { storageService.isLoaded }
 
   /// The record selected for an action.
   var selectedRecordID: BookishRecordID? { navigation.selectedRecordID }
 
   /// Applies one durable mutation to the datastore.
   func performRecordActionMutation(_ mutation: MutationRecord) async throws {
-    guard let datastore else {
-      throw BookishHarnessError.notLoaded
-    }
-
-    try await datastore.mutationService.perform(mutation.operation)
+    try await storageService.perform(mutation)
   }
 
   /// Applies one remotely-originated mutation to the datastore.
   func receiveRemoteRecordActionMutation(_ mutation: MutationRecord) async throws {
-    guard let datastore else {
-      throw BookishHarnessError.notLoaded
-    }
-
-    try await datastore.mutationService.receiveRemoteMutation(mutation)
+    try await storageService.receiveRemoteMutation(mutation)
   }
 
   /// Refreshes observable browser state after an action.
