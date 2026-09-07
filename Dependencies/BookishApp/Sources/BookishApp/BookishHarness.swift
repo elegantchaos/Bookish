@@ -26,9 +26,6 @@ public final class BookishHarness {
     compatibleLayouts.map(\.id)
   }
 
-  /// Whether a record is selected for a record action.
-  public var hasSelectedRecord: Bool { navigation.selectedRecordID != nil }
-
   /// Whether an interchange export has records to write.
   public var hasExportableRecords: Bool { navigation.recordIDs.isEmpty == false }
 
@@ -128,41 +125,6 @@ public final class BookishHarness {
       try await refresh()
     } catch {
       report(error: error)
-    }
-  }
-
-  /// Applies a local mutation that marks the selected record as currently being read.
-  public func markReading() async {
-    await setStatus("Reading")
-  }
-
-  /// Applies a local mutation that marks the selected record as finished.
-  public func markFinished() async {
-    await setStatus("Finished")
-  }
-
-  /// Simulates a remotely-arrived mutation for the selected record.
-  public func simulateRemoteUpdate() async {
-    guard let datastore, let recordID = navigation.selectedRecordID else {
-      return
-    }
-
-    do {
-      let record = try await datastore.recordService.record(id: recordID)
-      let mutation = MutationRecord(
-        operation: .setProperty(
-          recordID: recordID,
-          kind: record?.kind ?? BookishRecordKind.record,
-          key: BookishRecordKey.note,
-          value: .string(
-            "Remote mutation arrived at \(Date().formatted(date: .omitted, time: .shortened))")
-        )
-      )
-      try await datastore.mutationService.receiveRemoteMutation(mutation)
-      try await refresh()
-      status = "Applied remote mutation"
-    } catch {
-      status = error.localizedDescription
     }
   }
 
@@ -467,26 +429,6 @@ public final class BookishHarness {
     status = error.localizedDescription
   }
 
-  /// Updates the selected record's status property.
-  private func setStatus(_ value: String) async {
-    guard let datastore, let recordID = navigation.selectedRecordID else {
-      return
-    }
-
-    do {
-      let record = try await datastore.recordService.record(id: recordID)
-      try await datastore.mutationService.perform(
-        .setProperty(
-          recordID: recordID, kind: record?.kind ?? BookishRecordKind.record,
-          key: BookishRecordKey.status, value: .string(value))
-      )
-      try await refresh()
-      status = "Set status to \(value)"
-    } catch {
-      status = error.localizedDescription
-    }
-  }
-
   /// Reads a security-scoped file and imports its data with the supplied importer.
   private func importFile<Importer: BookishImporter>(
     from url: URL,
@@ -752,7 +694,37 @@ public final class BookishHarness {
 extension BookishHarness:
   BookishImportService,
   BookishDatastoreMaintenanceService,
-  BookishRecordActionService,
   BookishBrowserIndexSelectionService
 {
+}
+
+extension BookishHarness: BookishRecordActionStore {
+  /// Whether the datastore is available for record actions.
+  var hasLoadedRecordStore: Bool { datastore != nil }
+
+  /// The record selected for an action.
+  var selectedRecordID: BookishRecordID? { navigation.selectedRecordID }
+
+  /// Applies one durable mutation to the datastore.
+  func performRecordActionMutation(_ mutation: MutationRecord) async throws {
+    guard let datastore else {
+      throw BookishHarnessError.notLoaded
+    }
+
+    try await datastore.mutationService.perform(mutation.operation)
+  }
+
+  /// Applies one remotely-originated mutation to the datastore.
+  func receiveRemoteRecordActionMutation(_ mutation: MutationRecord) async throws {
+    guard let datastore else {
+      throw BookishHarnessError.notLoaded
+    }
+
+    try await datastore.mutationService.receiveRemoteMutation(mutation)
+  }
+
+  /// Refreshes observable browser state after an action.
+  func refreshRecordActionState() async throws {
+    try await refresh()
+  }
 }
