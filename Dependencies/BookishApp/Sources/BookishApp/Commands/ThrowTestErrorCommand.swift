@@ -20,8 +20,7 @@ import Icons
   }
 
   /// Deliberately fails so the datastore can verify command error presentation.
-  public struct ThrowTestErrorCommand: CommandWithUI {
-    public typealias Centre = BookishHarness
+  public struct ThrowTestErrorCommand<Centre: BookishHarnessProvider>: CommandWithUI {
     public typealias ResultType = Void
 
     public let id = "datastore.throw-test-error"
@@ -30,19 +29,19 @@ import Icons
     public init() {
     }
 
-    public func name(centre: BookishHarness) -> String {
+    public func name(centre: Centre) -> String {
       "Throw Test Error"
     }
 
-    public func icon(centre: BookishHarness) -> Icon {
+    public func icon(centre: Centre) -> Icon {
       Icon("exclamationmark.triangle")
     }
 
-    public func help(centre: BookishHarness) -> String? {
+    public func help(centre: Centre) -> String? {
       "Tests whether a command failure appears in the status bar."
     }
 
-    public func perform(centre: BookishHarness) async throws {
+    public func perform(centre: Centre) async throws {
       throw BookishTestCommandError.intentional
     }
   }

@@ -101,7 +101,7 @@ public struct BookishCommands: Commands {
         if isDeveloperMode {
           Divider()
 
-          harness.button(ThrowTestErrorCommand())
+          commander.button(ThrowTestErrorCommand())
 
           Button("Show Mutation Debug Window") {
             openWindow(id: BookishWindow.mutationDebug.rawValue)
