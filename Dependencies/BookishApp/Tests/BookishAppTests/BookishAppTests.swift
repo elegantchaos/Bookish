@@ -246,6 +246,24 @@ struct BookishAppTests {
 
   @MainActor
   @Test
+  func harnessUpdatesVisibleIndexesWhenDeveloperModeChanges() async throws {
+    let harness = try makeHarness(defaultShowsDebugIndexes: false)
+    await harness.load()
+
+    await harness.setShowsDebugIndexes(true)
+
+    #expect(harness.showsDebugIndexes)
+    #expect(harness.navigation.recordIndexes.map(\.name).contains("All Records"))
+
+    await harness.setShowsDebugIndexes(false)
+
+    #expect(harness.showsDebugIndexes == false)
+    #expect(harness.navigation.recordIndexes.map(\.name).contains("All Records") == false)
+    #expect(harness.navigation.selectedRecordIndexName == "Books")
+  }
+
+  @MainActor
+  @Test
 
   func harnessSeedsStandardLayouts() async throws {
     let harness = try makeHarness()

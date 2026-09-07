@@ -5,6 +5,7 @@
 
 import BookishDatastore
 import BookishRecordView
+import Settings
 import SwiftUI
 
 #if DEBUG
@@ -12,6 +13,9 @@ import SwiftUI
   public struct BookishMutationDebugView: View {
     /// The datastore coordinator used to load mutations.
     private let harness: BookishHarness
+
+    /// Whether mutation diagnostics are available.
+    @AppStorage(.isDeveloperMode) private var isDeveloperMode
 
     /// The mutations currently displayed in the browser.
     @State private var mutations: [MutationRecord] = []
@@ -26,6 +30,17 @@ import SwiftUI
 
     /// The SwiftUI content for the mutation debug window.
     public var body: some View {
+      if isDeveloperMode {
+        mutationBrowser
+      } else {
+        ContentUnavailableView(
+          "Developer Mode Required", systemImage: "hammer",
+          description: Text("Enable Developer Mode to inspect mutations."))
+      }
+    }
+
+    /// The mutation history browser presented in developer mode.
+    private var mutationBrowser: some View {
       NavigationSplitView {
         List(selection: $selectedMutationID) {
           ForEach(mutations) { mutation in

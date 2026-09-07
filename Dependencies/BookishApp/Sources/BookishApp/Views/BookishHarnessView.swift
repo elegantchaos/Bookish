@@ -3,6 +3,7 @@
 //  Copyright © 2026 Elegant Chaos Limited. All rights reserved.
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
+import Settings
 import SwiftUI
 import UniformTypeIdentifiers
 
@@ -13,6 +14,9 @@ public struct BookishHarnessView: View {
 
   /// The shared navigation route for the browser columns.
   @Environment(BookishNavigationService.self) private var navigation
+
+  /// Whether debug-only browser indexes should be available.
+  @AppStorage(.isDeveloperMode) private var isDeveloperMode
 
   /// Whether the view initiates the initial datastore load.
   private let loadsOnAppear: Bool
@@ -58,7 +62,8 @@ public struct BookishHarnessView: View {
       defaultFilename: "Bookish Interchange",
       onCompletion: handleInterchangeExport
     )
-    .task {
+    .task(id: isDeveloperMode) {
+      await harness.setShowsDebugIndexes(isDeveloperMode)
       await loadIfNeeded()
     }
   }

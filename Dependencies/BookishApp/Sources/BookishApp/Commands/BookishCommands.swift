@@ -10,6 +10,7 @@ import Commands
 import CommandsUI
 import Foundation
 import Icons
+import Settings
 import SwiftUI
 
 #if canImport(AppKit)
@@ -20,6 +21,12 @@ import SwiftUI
 public struct BookishCommands: Commands {
   private let harness: BookishHarness
   private let navigation: BookishNavigationService
+
+  /// Whether advanced commands are available.
+  @AppStorage(.isAdvancedMode) private var isAdvancedMode
+
+  /// Whether developer commands are available.
+  @AppStorage(.isDeveloperMode) private var isDeveloperMode
 
   #if DEBUG
     @Environment(\.openWindow) private var openWindow
@@ -35,10 +42,12 @@ public struct BookishCommands: Commands {
     CommandGroup(after: .newItem) {
       harness.button(ImportInterchangeCommand())
       Menu("Import Delicious Library") {
-        harness.button(ImportDeliciousLibrarySampleCommand(sample: .small))
-        harness.button(ImportDeliciousLibrarySampleCommand(sample: .full))
+        if isAdvancedMode {
+          harness.button(ImportDeliciousLibrarySampleCommand(sample: .small))
+          harness.button(ImportDeliciousLibrarySampleCommand(sample: .full))
 
-        Divider()
+          Divider()
+        }
 
         harness.button(ImportOtherDeliciousLibraryCommand())
       }
@@ -46,21 +55,34 @@ public struct BookishCommands: Commands {
       Divider()
 
       harness.button(ExportInterchangeCommand())
-      harness.button(RevealDatastoreFolderCommand())
 
-      Divider()
+      if isAdvancedMode {
+        harness.button(RevealDatastoreFolderCommand())
+      }
 
-      harness.button(RebuildRecordStoreCommand())
-      harness.button(ResetDatastoreCommand(), role: .destructive)
+      if isDeveloperMode {
+        Divider()
+
+        harness.button(RebuildRecordStoreCommand())
+        harness.button(ResetDatastoreCommand(), role: .destructive)
+      }
     }
 
     CommandMenu("Bookish") {
-      harness.button(MarkReadingCommand())
-      harness.button(MarkFinishedCommand())
+      Toggle("Advanced Mode", isOn: $isAdvancedMode)
+      Toggle("Developer Mode", isOn: $isDeveloperMode)
+        .disabled(isAdvancedMode == false)
 
       Divider()
 
-      harness.button(SimulateRemoteMutationCommand())
+      harness.button(MarkReadingCommand())
+      harness.button(MarkFinishedCommand())
+
+      if isDeveloperMode {
+        Divider()
+
+        harness.button(SimulateRemoteMutationCommand())
+      }
 
       Divider()
 
@@ -70,12 +92,14 @@ public struct BookishCommands: Commands {
       navigation.button(SelectNextRecordCommand())
 
       #if DEBUG
-        Divider()
+        if isDeveloperMode {
+          Divider()
 
-        harness.button(ThrowTestErrorCommand())
+          harness.button(ThrowTestErrorCommand())
 
-        Button("Show Mutation Debug Window") {
-          openWindow(id: BookishWindow.mutationDebug.rawValue)
+          Button("Show Mutation Debug Window") {
+            openWindow(id: BookishWindow.mutationDebug.rawValue)
+          }
         }
       #endif
     }

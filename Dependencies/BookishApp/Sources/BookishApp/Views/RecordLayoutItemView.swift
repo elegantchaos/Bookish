@@ -32,6 +32,8 @@ struct RecordLayoutItemView: View {
   /// Whether the linked configuration is still being resolved.
   @State private var isLoading = true
 
+  @AppStorage(.isDeveloperMode) var isDeveloperMode
+
   /// Creates a linked layout item outside any nested layout section.
   init(
     linkedLayoutID: BookishRecordID,
@@ -44,7 +46,8 @@ struct RecordLayoutItemView: View {
       host: host,
       harness: harness,
       navigation: navigation,
-      layoutPath: [])
+      layoutPath: []
+    )
   }
 
   /// Creates a linked layout item with the current nested-layout ancestry.
@@ -73,9 +76,14 @@ struct RecordLayoutItemView: View {
             host: host,
             harness: harness,
             navigation: navigation,
-            layoutPath: layoutPath)
+            layoutPath: layoutPath
+          )
         case BookishRecordKind.querySection:
-          RecordQuerySectionView(sectionID: linkedLayoutID, host: host, harness: harness)
+          RecordQuerySectionView(
+            sectionID: linkedLayoutID,
+            host: host,
+            harness: harness
+          )
         default:
           EmptyView()
         }
@@ -84,7 +92,9 @@ struct RecordLayoutItemView: View {
           .controlSize(.small)
       }
 
-      diagnostics
+      if isDeveloperMode {
+        diagnostics
+      }
     }
     .task(id: taskID) {
       await load()
@@ -103,7 +113,8 @@ struct RecordLayoutItemView: View {
     defer { isLoading = false }
 
     do {
-      guard let configuration = try await harness.record(id: linkedLayoutID) else {
+      guard let configuration = try await harness.record(id: linkedLayoutID)
+      else {
         self.configuration = nil
         errorDescription = "The linked layout item is missing."
         return
@@ -118,7 +129,9 @@ struct RecordLayoutItemView: View {
         return
       }
 
-      guard configuration.kind != BookishRecordKind.layout || !layoutPath.contains(configuration.id)
+      guard
+        configuration.kind != BookishRecordKind.layout
+          || !layoutPath.contains(configuration.id)
       else {
         self.configuration = nil
         errorDescription = "The linked layout would create a recursive section."

@@ -25,5 +25,11 @@ struct BookishApplication: App {
         BookishMutationDebugView(harness: engine.harness)
       }
     #endif
+
+    #if os(macOS)
+      Settings {
+        BookishSettingsView()
+      }
+    #endif
   }
 }

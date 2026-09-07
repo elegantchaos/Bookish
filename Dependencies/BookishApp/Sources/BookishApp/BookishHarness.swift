@@ -53,6 +53,9 @@ public final class BookishHarness {
   /// Whether debug-only indexes are included in the browser.
   public let defaultShowsDebugIndexes: Bool
 
+  /// Whether debug-only indexes are currently included in the browser.
+  public private(set) var showsDebugIndexes: Bool
+
   /// The universal layout used when no explicit layout is selected.
   private let fallbackLayoutID = BookishRecordID("datastore-all-fields-layout")
 
@@ -75,17 +78,12 @@ public final class BookishHarness {
   public init(
     directoryURL: URL? = nil,
     navigation: BookishNavigationService = BookishNavigationService(),
-    defaultShowsDebugIndexes: Bool = {
-      #if DEBUG
-        true
-      #else
-        false
-      #endif
-    }()
+    defaultShowsDebugIndexes: Bool = false
   ) {
     self.directoryURL = directoryURL
     self.navigation = navigation
     self.defaultShowsDebugIndexes = defaultShowsDebugIndexes
+    self.showsDebugIndexes = defaultShowsDebugIndexes
   }
 
   /// Loads, seeds, and refreshes the datastore.
@@ -102,6 +100,25 @@ public final class BookishHarness {
       status = "Ready"
     } catch {
       status = error.localizedDescription
+    }
+  }
+
+  /// Updates whether debug-only indexes are available in the browser.
+  public func setShowsDebugIndexes(_ showsDebugIndexes: Bool) async {
+    guard self.showsDebugIndexes != showsDebugIndexes else {
+      return
+    }
+
+    self.showsDebugIndexes = showsDebugIndexes
+
+    guard datastore != nil else {
+      return
+    }
+
+    do {
+      try await refresh()
+    } catch {
+      report(error: error)
     }
   }
 
@@ -582,7 +599,7 @@ public final class BookishHarness {
   /// The query that loads visible browser index records.
   private var recordIndexQuery: RecordQuery {
     let predicate: RecordPredicate
-    if defaultShowsDebugIndexes {
+    if showsDebugIndexes {
       predicate = .kind(BookishRecordKind.index)
     } else {
       predicate = .and([
