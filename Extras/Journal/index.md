@@ -1,5 +1,6 @@
 # Journal Index
 
+- [2026-09-07 Navigation, Environment, and Status Capabilities](2026-09-07-navigation-environment-status-capabilities.md)
 - [2026-09-07 Command Provider Service Extraction](2026-09-07-command-provider-service-extraction.md)
 - [2026-09-07 Command Centre Provider Refactor](2026-09-07-command-centre-provider-refactor.md)
 - [2026-09-07 BookishApp Test Layout](2026-09-07-bookish-app-test-layout.md)
