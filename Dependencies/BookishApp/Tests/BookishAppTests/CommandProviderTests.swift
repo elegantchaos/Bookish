@@ -15,17 +15,17 @@ import Testing
 @MainActor
 struct CommandProviderTests {
   @Test
-  func importCommandsUseTheVendedImportService() async throws {
-    let importService = TestImportService()
-    let centre = TestCommandCentre(importService: importService)
+  func importCommandsUseTheVendedImportPresentation() async throws {
+    let importPresentation = TestImportPresentation()
+    let centre = TestCommandCentre(importPresentation: importPresentation)
 
     try await centre.perform(ImportInterchangeCommand())
     try await centre.perform(ImportOtherDeliciousLibraryCommand())
     try await centre.perform(ImportDeliciousLibrarySampleCommand(sample: .small))
 
-    #expect(importService.requestedInterchangeImport)
-    #expect(importService.requestedDeliciousLibraryImport)
-    #expect(importService.importedSample == .small)
+    #expect(importPresentation.requestedInterchangeImport)
+    #expect(importPresentation.requestedDeliciousLibraryImport)
+    #expect(importPresentation.importedSample == .small)
   }
 
   @Test
@@ -115,14 +115,14 @@ struct CommandProviderTests {
 @MainActor
 private final class TestCommandCentre:
   CommandCentre,
-  BookishImportingProvider,
+  BookishImportPresentationProvider,
   BookishDatastoreMaintenanceProvider,
   BookishStorageProvider,
   BookishStatusReportingProvider,
   BookishRecordActionsProvider,
   BookishNavigationProvider
 {
-  let importService: any BookishImporting
+  let importPresentation: any BookishImportPresentation
   let datastoreMaintenanceService: any BookishDatastoreMaintenance
   let storageService: any BookishStorage
   let statusReporter: any BookishStatusReporting
@@ -130,14 +130,14 @@ private final class TestCommandCentre:
   let navigationService: any BookishNavigation
 
   init(
-    importService: any BookishImporting = TestImportService(),
+    importPresentation: any BookishImportPresentation = TestImportPresentation(),
     datastoreMaintenanceService: any BookishDatastoreMaintenance = TestDatastoreMaintenanceService(),
     storageService: any BookishStorage = TestStorageService(),
     statusReporter: any BookishStatusReporting = TestStatusReporter(),
     recordActionService: any BookishRecordActions = TestRecordActionService(),
     navigationService: any BookishNavigation = TestNavigationService()
   ) {
-    self.importService = importService
+    self.importPresentation = importPresentation
     self.datastoreMaintenanceService = datastoreMaintenanceService
     self.storageService = storageService
     self.statusReporter = statusReporter
@@ -147,7 +147,7 @@ private final class TestCommandCentre:
 }
 
 @MainActor
-private final class TestImportService: BookishImporting {
+private final class TestImportPresentation: BookishImportPresentation {
   private(set) var requestedInterchangeImport = false
   private(set) var requestedDeliciousLibraryImport = false
   private(set) var importedSample: DeliciousLibrarySample?

@@ -591,7 +591,7 @@ struct BookishAppTests {
     let harness = BookishHarness(navigation: navigation)
     let commander = BookishCommandCentre(harness: harness)
 
-    commander.importService.requestInterchangeImport()
+    commander.importPresentation.requestInterchangeImport()
     commander.statusReporter.report(message: "Reported through status capability")
 
     #expect(harness.isImportingInterchange)

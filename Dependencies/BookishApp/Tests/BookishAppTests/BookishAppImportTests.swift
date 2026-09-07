@@ -1,4 +1,5 @@
 import BookishCoding
+import BookishImporter
 import BookishRecord
 import Foundation
 import Testing
@@ -6,6 +7,28 @@ import Testing
 @testable import BookishApp
 
 @MainActor extension BookishAppTests {
+  @Test func importerPersistsRecordsBeforeReportingTheirEvent() async throws {
+    let storage = BookishStorageService(directoryURL: try temporaryDirectory())
+    try await storage.load()
+    let importer = BookishImportingService(storageService: storage)
+    let importedID = BookishRecordID("test-import-service-book")
+    var recordWasPersistedWhenReported = false
+
+    let summary = try await importer.importRecords(
+      from: Data("""
+        { "records": [{ "ℹ": "test-import-service-book", "©": "book", "name": "Imported Book" }] }
+        """.utf8),
+      using: BookishInterchangeImporter()
+    ) { event in
+      if case .records = event {
+        recordWasPersistedWhenReported = try await storage.record(id: importedID) != nil
+      }
+    }
+
+    #expect(summary.recordCount == 1)
+    #expect(recordWasPersistedWhenReported)
+  }
+
   @Test func harnessImportsInterchangeData() async throws {
     let harness = try makeHarness()
     await harness.load()

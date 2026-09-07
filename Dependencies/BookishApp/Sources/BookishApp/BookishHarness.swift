@@ -67,6 +67,9 @@ public final class BookishHarness {
   /// The model-side interchange exporter used by the export sheet.
   @ObservationIgnored private let exportingService: BookishExportingService
 
+  /// The model-side importer used by the import sheets and sample commands.
+  @ObservationIgnored private let importingService: BookishImportingService
+
   /// The loaded layout records used to derive compatible layout choices.
   private var layouts: [BookishRecord] = []
 
@@ -79,6 +82,7 @@ public final class BookishHarness {
     self.navigation = navigation
     storageService = navigation.storageService
     exportingService = BookishExportingService(storageService: navigation.storageService)
+    importingService = BookishImportingService(storageService: navigation.storageService)
     storageService.configure(directoryURL: directoryURL)
     self.defaultShowsDebugIndexes = defaultShowsDebugIndexes
     self.showsDebugIndexes = defaultShowsDebugIndexes
@@ -196,50 +200,40 @@ public final class BookishHarness {
     }
   }
 
-  /// Consumes the event stream from any Bookish importer and applies its record upserts.
+  /// Coordinates UI state while the import service persists records from an importer.
   public func importRecords<Importer: BookishImporter>(
     from input: Importer.Input,
     using importer: Importer
   ) async {
-    guard storageService.isLoaded else {
-      status = BookishHarnessError.notLoaded.localizedDescription
-      return
-    }
-
-    var importedRecordCount = 0
     var firstRecord: BookishRecord?
     var displayName = importer.descriptor.displayName
     let clock = ContinuousClock()
     var lastProjectionRefresh = clock.now
 
     do {
-      for try await event in importer.importEvents(from: input) {
-        try Task.checkCancellation()
-
+      let summary = try await importingService.importRecords(from: input, using: importer) { [self] event in
         switch event {
         case .started(let start):
           displayName = start.importer.displayName
-          importProgress = BookishImportProgress(
+          self.importProgress = BookishImportProgress(
             message: "Reading \(displayName)", completed: 0, total: start.total)
-          status = "Reading \(displayName)"
+          self.status = "Reading \(displayName)"
 
         case .progress(let progress):
-          importProgress = progress
-          status = progress.message
+          self.importProgress = progress
+          self.status = progress.message
 
         case .records(let records):
-          try await storageService.upsert(records: records)
-          importedRecordCount += records.count
           firstRecord =
             firstRecord ?? records.first(where: { $0.kind == BookishRecordKind.book })
             ?? records.first
           if lastProjectionRefresh.duration(to: clock.now) >= .seconds(1) {
-            try await refresh()
+            try await self.refresh()
             lastProjectionRefresh = clock.now
           }
 
         case .diagnostic(let diagnostic):
-          status = diagnostic
+          self.status = diagnostic
 
         case .finished:
           break
@@ -251,7 +245,7 @@ public final class BookishHarness {
         navigation.select(recordID: firstRecord.id)
       }
       status =
-        "Imported \(importedRecordCount) \(displayName) \(importedRecordCount == 1 ? "record" : "records")"
+        "Imported \(summary.recordCount) \(displayName) \(summary.recordCount == 1 ? "record" : "records")"
     } catch is CancellationError {
       status = "Import cancelled"
     } catch {
@@ -442,7 +436,7 @@ public final class BookishHarness {
 }
 
 extension BookishHarness:
-  BookishImporting,
+  BookishImportPresentation,
   BookishDatastoreMaintenance,
   BookishStatusReporting
 {

@@ -25,9 +25,9 @@ public protocol BookishStatusReportingProvider: CommandCentre {
   var statusReporter: any BookishStatusReporting { get }
 }
 
-/// Performs import actions requested by commands.
+/// Presents import controls requested by commands.
 @MainActor
-public protocol BookishImporting {
+public protocol BookishImportPresentation {
   /// Requests an interchange file import.
   func requestInterchangeImport()
   /// Requests a Delicious Library file import.
@@ -36,11 +36,11 @@ public protocol BookishImporting {
   func importDeliciousLibrary(sample: DeliciousLibrarySample) async
 }
 
-/// Vends import actions to import commands.
+/// Vends import presentation controls to import commands.
 @MainActor
-public protocol BookishImportingProvider: CommandCentre {
-  /// The import service used by the command.
-  var importService: any BookishImporting { get }
+public protocol BookishImportPresentationProvider: CommandCentre {
+  /// The import presentation used by the command.
+  var importPresentation: any BookishImportPresentation { get }
 }
 
 /// Performs datastore maintenance actions requested by commands.
@@ -132,7 +132,7 @@ public protocol BookishNavigationProvider: CommandCentre {
 
 extension BookishCommandCentre:
   BookishStatusReportingProvider,
-  BookishImportingProvider,
+  BookishImportPresentationProvider,
   BookishDatastoreMaintenanceProvider,
   BookishStorageProvider,
   BookishRecordActionsProvider,

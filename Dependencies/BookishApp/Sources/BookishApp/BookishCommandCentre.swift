@@ -13,8 +13,8 @@ public final class BookishCommandCentre: CommandCentre {
   /// The user-facing status capability used for command-failure reporting.
   @ObservationIgnored public let statusReporter: any BookishStatusReporting
 
-  /// The import capability exposed to commands.
-  @ObservationIgnored public let importService: any BookishImporting
+  /// The import-presentation capability exposed to commands.
+  @ObservationIgnored public let importPresentation: any BookishImportPresentation
 
   /// The datastore maintenance capability exposed to commands.
   @ObservationIgnored public let datastoreMaintenanceService: any BookishDatastoreMaintenance
@@ -31,7 +31,7 @@ public final class BookishCommandCentre: CommandCentre {
   /// Creates a command centre over the supplied Bookish services.
   public init(harness: BookishHarness) {
     statusReporter = harness
-    importService = harness
+    importPresentation = harness
     datastoreMaintenanceService = harness
     storageService = harness.storageService
     recordActionService = BookishRecordActionsService(store: harness)
