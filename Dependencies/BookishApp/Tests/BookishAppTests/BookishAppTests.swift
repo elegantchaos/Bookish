@@ -586,6 +586,22 @@ struct BookishAppTests {
 
   @MainActor
   @Test
+  func commandCentreVendsTheHarnessCapabilitiesAndNavigationService() {
+    let navigation = BookishNavigationService()
+    let harness = BookishHarness(navigation: navigation)
+    let commander = BookishCommandCentre(harness: harness)
+
+    commander.importService.requestInterchangeImport()
+
+    #expect(harness.isImportingInterchange)
+    #expect(commander.datastoreMaintenanceService.hasExportableRecords == false)
+    #expect(commander.recordActionService.hasSelectedRecord == false)
+    #expect(commander.browserIndexSelectionService.canSelectAnotherRecordIndex == false)
+    #expect(commander.navigationService === navigation)
+  }
+
+  @MainActor
+  @Test
 
   func engineUsesApplicationStartupLoop() {
     let engine = BookishEngine()
