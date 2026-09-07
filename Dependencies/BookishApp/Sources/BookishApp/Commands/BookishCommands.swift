@@ -21,6 +21,7 @@ import SwiftUI
 public struct BookishCommands: Commands {
   private let harness: BookishHarness
   private let navigation: BookishNavigationService
+  private let commander: BookishCommandCentre
 
   /// Whether advanced commands are available.
   @AppStorage(.isAdvancedMode) private var isAdvancedMode
@@ -33,9 +34,14 @@ public struct BookishCommands: Commands {
   #endif
 
   /// Creates commands bound to a datastore harness.
-  public init(harness: BookishHarness, navigation: BookishNavigationService) {
+  public init(
+    harness: BookishHarness,
+    navigation: BookishNavigationService,
+    commander: BookishCommandCentre
+  ) {
     self.harness = harness
     self.navigation = navigation
+    self.commander = commander
   }
 
   public var body: some Commands {
@@ -88,8 +94,8 @@ public struct BookishCommands: Commands {
 
       harness.button(SelectPreviousRecordIndexCommand())
       harness.button(SelectNextRecordIndexCommand())
-      navigation.button(SelectPreviousRecordCommand())
-      navigation.button(SelectNextRecordCommand())
+      commander.button(SelectPreviousRecordCommand())
+      commander.button(SelectNextRecordCommand())
 
       #if DEBUG
         if isDeveloperMode {

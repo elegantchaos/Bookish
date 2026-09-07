@@ -10,7 +10,7 @@ import Foundation
 import Icons
 
 /// Navigates to a materialised record using the requested browser route.
-public struct NavigateToRecordCommand: CommandWithUI {
+public struct NavigateToRecordCommand<Centre: BookishNavigationServiceProvider>: CommandWithUI {
   /// Controls how navigation reaches a linked record.
   public enum Mode: Sendable {
     /// Pushes the linked record onto the detail navigation stack.
@@ -23,7 +23,6 @@ public struct NavigateToRecordCommand: CommandWithUI {
     case bestIndex
   }
 
-  public typealias Centre = BookishNavigationService
   public typealias ResultType = Void
 
   public let id: String
@@ -37,7 +36,7 @@ public struct NavigateToRecordCommand: CommandWithUI {
     self.mode = mode
   }
 
-  public func availability(centre: BookishNavigationService)
+  public func availability(centre: Centre)
     -> CommandAvailability
   {
     switch mode {
@@ -45,32 +44,32 @@ public struct NavigateToRecordCommand: CommandWithUI {
       .enabled
 
     case .currentIndex:
-      centre.contains(recordID: recordID) ? .enabled : .disabled
+      centre.navigationService.contains(recordID: recordID) ? .enabled : .disabled
 
     case .bestIndex:
       .disabled
     }
   }
 
-  public func name(centre: BookishNavigationService) -> String {
+  public func name(centre: Centre) -> String {
     "Go to Record"
   }
 
-  public func icon(centre: BookishNavigationService) -> Icon {
+  public func icon(centre: Centre) -> Icon {
     Icon("arrow.right.circle")
   }
 
-  public func help(centre: BookishNavigationService) -> String? {
+  public func help(centre: Centre) -> String? {
     "Navigate to the linked record."
   }
 
-  public func perform(centre: BookishNavigationService) async throws {
+  public func perform(centre: Centre) async throws {
     switch mode {
     case .push:
-      centre.push(recordID: recordID)
+      centre.navigationService.push(recordID: recordID)
 
     case .currentIndex:
-      centre.select(recordID: recordID)
+      centre.navigationService.select(recordID: recordID)
 
     case .bestIndex:
       throw NavigateToRecordCommandError.bestIndexSelectionUnavailable

@@ -17,7 +17,11 @@ struct BookishApplication: App {
     }
     .restorationBehavior(.automatic)
     .commands {
-      BookishCommands(harness: engine.harness, navigation: engine.navigation)
+      BookishCommands(
+        harness: engine.harness,
+        navigation: engine.navigation,
+        commander: engine.commander
+      )
     }
 
     #if DEBUG
