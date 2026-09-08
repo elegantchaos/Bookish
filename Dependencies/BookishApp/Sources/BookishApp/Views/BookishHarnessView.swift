@@ -47,7 +47,7 @@ public struct BookishHarnessView: View {
         BookishToolbar(harness: harness)
       }
 
-      BookishStatusBar(harness: harness)
+      BookishStatusBar(statusService: harness.statusService, navigation: navigation)
     }
     .fileImporter(
       isPresented: $harness.isImportingInterchange,
@@ -90,7 +90,7 @@ public struct BookishHarnessView: View {
       }
 
     case .failure(let error):
-      commander?.statusReporter.report(error: error)
+      commander?.statusService.report(error: error)
     }
   }
 
@@ -103,7 +103,7 @@ public struct BookishHarnessView: View {
       }
 
     case .failure(let error):
-      commander?.statusReporter.report(error: error)
+      commander?.statusService.report(error: error)
     }
   }
 
@@ -114,7 +114,7 @@ public struct BookishHarnessView: View {
       harness.didExportInterchange()
 
     case .failure(let error):
-      commander?.statusReporter.report(error: error)
+      commander?.statusService.report(error: error)
     }
   }
 }

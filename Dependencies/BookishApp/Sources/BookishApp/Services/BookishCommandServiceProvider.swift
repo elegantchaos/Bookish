@@ -8,21 +8,11 @@ import BookishRecord
 import Commands
 import Foundation
 
-/// Reports user-facing Bookish status messages and errors.
-@MainActor
-public protocol BookishStatusReporting {
-  /// Reports a user-facing message.
-  func report(message: String)
-
-  /// Reports a user-facing error.
-  func report(error: Error)
-}
-
 /// Vends user-facing status reporting to commands that report successful work.
 @MainActor
-public protocol BookishStatusReportingProvider: CommandCentre {
-  /// The status reporting service used by the command.
-  var statusReporter: any BookishStatusReporting { get }
+public protocol BookishStatusProvider: CommandCentre {
+  /// The status service used by the command.
+  var statusService: any BookishStatus { get }
 }
 
 /// Presents import controls requested by commands.
@@ -50,8 +40,6 @@ public protocol BookishDatastoreMaintenance {
   var hasExportableRecords: Bool { get }
   /// Requests interchange export.
   func requestInterchangeExport() async
-  /// Reports a user-facing message.
-  func report(message: String)
 }
 
 /// Vends datastore maintenance actions to maintenance commands.
@@ -60,7 +48,6 @@ public protocol BookishDatastoreMaintenanceProvider: CommandCentre {
   /// The datastore maintenance service used by the command.
   var datastoreMaintenanceService: any BookishDatastoreMaintenance { get }
 }
-
 
 /// Vends datastore operations to datastore commands.
 @MainActor
@@ -131,7 +118,7 @@ public protocol BookishNavigationProvider: CommandCentre {
 }
 
 extension BookishCommandCentre:
-  BookishStatusReportingProvider,
+  BookishStatusProvider,
   BookishImportPresentationProvider,
   BookishDatastoreMaintenanceProvider,
   BookishStorageProvider,

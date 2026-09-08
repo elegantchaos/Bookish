@@ -10,8 +10,8 @@ import Observation
 @MainActor
 @Observable
 public final class BookishCommandCentre: CommandCentre {
-  /// The user-facing status capability used for command-failure reporting.
-  @ObservationIgnored public let statusReporter: any BookishStatusReporting
+  /// The user-facing status service used for command-failure reporting.
+  @ObservationIgnored public let statusService: any BookishStatus
 
   /// The import-presentation capability exposed to commands.
   @ObservationIgnored public let importPresentation: any BookishImportPresentation
@@ -30,17 +30,21 @@ public final class BookishCommandCentre: CommandCentre {
 
   /// Creates a command centre over the supplied Bookish services.
   public init(harness: BookishHarness) {
-    statusReporter = harness
+    statusService = harness.statusService
     importPresentation = harness
     datastoreMaintenanceService = harness
     storageService = harness.storageService
-    recordActionService = BookishRecordActionsService(storage: harness.storageService, state: harness)
+    recordActionService = BookishRecordActionsService(
+      storage: harness.storageService,
+      state: harness,
+      statusService: harness.statusService
+    )
     navigationService = harness.navigation
   }
 
   /// Presents command failures through Bookish's user-facing status surface.
   public func recordCommandFailure<C: Command>(_ command: C, error: any Error)
   where C.Centre == BookishCommandCentre {
-    statusReporter.report(error: error)
+    statusService.report(error: error)
   }
 }

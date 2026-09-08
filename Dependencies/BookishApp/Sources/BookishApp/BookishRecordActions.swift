@@ -26,18 +26,11 @@ protocol BookishRecordActionStorage: AnyObject {
 /// The UI state operations required to apply a selected-record action.
 @MainActor
 protocol BookishRecordActionState: AnyObject {
-
   /// The record selected for an action.
   var selectedRecordID: BookishRecordID? { get }
 
   /// Refreshes observable browser state after an action.
   func refreshRecordActionState() async throws
-
-  /// Reports a user-facing message.
-  func report(message: String)
-
-  /// Reports an action failure.
-  func report(error: Error)
 }
 
 /// Applies mutations to the record selected in the Bookish browser.
@@ -46,13 +39,21 @@ final class BookishRecordActionsService: BookishRecordActions {
   /// The storage service used to read and mutate records.
   private unowned let storage: any BookishRecordActionStorage
 
-  /// The UI state used to select records and report results.
+  /// The UI state used to select records and refresh browser content.
   private unowned let state: any BookishRecordActionState
 
-  /// Creates record actions backed by the supplied storage and UI state.
-  init(storage: any BookishRecordActionStorage, state: any BookishRecordActionState) {
+  /// The status service used to report action outcomes.
+  private let statusService: any BookishStatus
+
+  /// Creates record actions backed by the supplied storage, UI state, and status service.
+  init(
+    storage: any BookishRecordActionStorage,
+    state: any BookishRecordActionState,
+    statusService: any BookishStatus
+  ) {
     self.storage = storage
     self.state = state
+    self.statusService = statusService
   }
 
   /// Whether an action has a selected record and loaded datastore to operate on.
@@ -89,9 +90,9 @@ final class BookishRecordActionsService: BookishRecordActions {
       )
       try await storage.receiveRemoteMutation(mutation)
       try await state.refreshRecordActionState()
-      state.report(message: "Applied remote mutation")
+      statusService.report(message: "Applied remote mutation")
     } catch {
-      state.report(error: error)
+      statusService.report(error: error)
     }
   }
 
@@ -114,9 +115,9 @@ final class BookishRecordActionsService: BookishRecordActions {
         )
       )
       try await state.refreshRecordActionState()
-      state.report(message: "Set status to \(value)")
+      statusService.report(message: "Set status to \(value)")
     } catch {
-      state.report(error: error)
+      statusService.report(error: error)
     }
   }
 }

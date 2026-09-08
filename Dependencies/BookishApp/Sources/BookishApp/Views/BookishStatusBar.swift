@@ -5,15 +5,18 @@
 
 import SwiftUI
 
-/// Displays the current datastore status and import progress.
+/// Displays the current Bookish status and import progress.
 struct BookishStatusBar: View {
-  /// The datastore coordinator that supplies the displayed status.
-  let harness: BookishHarness
+  /// The status service that supplies the displayed message and progress.
+  let statusService: BookishStatusService
+
+  /// The navigation service that supplies the displayed record count.
+  let navigation: BookishNavigationService
 
   /// The status bar content.
   var body: some View {
     HStack {
-      if let progress = harness.importProgress {
+      if let progress = statusService.importProgress {
         if let total = progress.total {
           ProgressView(
             progress.message,
@@ -24,10 +27,10 @@ struct BookishStatusBar: View {
           ProgressView(progress.message)
         }
       } else {
-        Text(harness.status)
+        Text(statusService.message)
       }
       Spacer()
-      Text("\(harness.navigation.recordIDs.count) records")
+      Text("\(navigation.recordIDs.count) records")
     }
     .font(.caption)
     .foregroundStyle(.secondary)

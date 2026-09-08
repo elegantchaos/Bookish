@@ -65,7 +65,7 @@ struct BrowserIndexListView: View {
       do {
         try await navigation.select(recordIndexID: recordIndexID)
       } catch {
-        commander?.statusReporter.report(error: error)
+        commander?.statusService.report(error: error)
       }
     }
   }

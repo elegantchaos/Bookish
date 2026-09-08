@@ -3,8 +3,9 @@
 //  Copyright © 2026 Elegant Chaos Limited. All rights reserved.
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
-import BookishImporterSamples
 import BookishDatastore
+import BookishImporter
+import BookishImporterSamples
 import BookishRecord
 import Commands
 import Foundation
@@ -67,7 +68,12 @@ struct CommandProviderTests {
       record: BookishRecord(id: recordID, kind: BookishRecordKind.book)
     )
     let state = TestRecordActionState(selectedRecordID: recordID)
-    let actions = BookishRecordActionsService(storage: storage, state: state)
+    let statusService = TestStatusService()
+    let actions = BookishRecordActionsService(
+      storage: storage,
+      state: state,
+      statusService: statusService
+    )
 
     await actions.markReading()
 
@@ -82,7 +88,7 @@ struct CommandProviderTests {
       ]
     )
     #expect(state.refreshCount == 1)
-    #expect(state.messages == ["Set status to Reading"])
+    #expect(statusService.messages == ["Set status to Reading"])
   }
 
   @Test
@@ -118,29 +124,30 @@ private final class TestCommandCentre:
   BookishImportPresentationProvider,
   BookishDatastoreMaintenanceProvider,
   BookishStorageProvider,
-  BookishStatusReportingProvider,
+  BookishStatusProvider,
   BookishRecordActionsProvider,
   BookishNavigationProvider
 {
   let importPresentation: any BookishImportPresentation
   let datastoreMaintenanceService: any BookishDatastoreMaintenance
   let storageService: any BookishStorage
-  let statusReporter: any BookishStatusReporting
+  let statusService: any BookishStatus
   let recordActionService: any BookishRecordActions
   let navigationService: any BookishNavigation
 
   init(
     importPresentation: any BookishImportPresentation = TestImportPresentation(),
-    datastoreMaintenanceService: any BookishDatastoreMaintenance = TestDatastoreMaintenanceService(),
+    datastoreMaintenanceService: any BookishDatastoreMaintenance =
+      TestDatastoreMaintenanceService(),
     storageService: any BookishStorage = TestStorageService(),
-    statusReporter: any BookishStatusReporting = TestStatusReporter(),
+    statusService: any BookishStatus = TestStatusService(),
     recordActionService: any BookishRecordActions = TestRecordActionService(),
     navigationService: any BookishNavigation = TestNavigationService()
   ) {
     self.importPresentation = importPresentation
     self.datastoreMaintenanceService = datastoreMaintenanceService
     self.storageService = storageService
-    self.statusReporter = statusReporter
+    self.statusService = statusService
     self.recordActionService = recordActionService
     self.navigationService = navigationService
   }
@@ -184,9 +191,6 @@ private final class TestDatastoreMaintenanceService: BookishDatastoreMaintenance
     URL.temporaryDirectory
   }
 
-  func report(message _: String) {
-  }
-
   func rebuildRecordProjection() async {
     rebuiltRecordProjection = true
   }
@@ -214,11 +218,20 @@ private final class TestStorageService: BookishStorage {
 }
 
 @MainActor
-private final class TestStatusReporter: BookishStatusReporting {
-  func report(message _: String) {
+private final class TestStatusService: BookishStatus {
+  private(set) var message = ""
+  let importProgress: BookishImportProgress? = nil
+  private(set) var messages: [String] = []
+  private(set) var errors: [any Error] = []
+
+  func report(message: String) {
+    self.message = message
+    messages.append(message)
   }
 
-  func report(error _: Error) {
+  func report(error: Error) {
+    message = error.localizedDescription
+    errors.append(error)
   }
 }
 
@@ -322,8 +335,6 @@ private final class TestRecordActionStorage: BookishRecordActionStorage {
 private final class TestRecordActionState: BookishRecordActionState {
   let selectedRecordID: BookishRecordID?
   private(set) var refreshCount = 0
-  private(set) var messages: [String] = []
-  private(set) var errors: [any Error] = []
 
   init(selectedRecordID: BookishRecordID?) {
     self.selectedRecordID = selectedRecordID
@@ -331,13 +342,5 @@ private final class TestRecordActionState: BookishRecordActionState {
 
   func refreshRecordActionState() async throws {
     refreshCount += 1
-  }
-
-  func report(message: String) {
-    messages.append(message)
-  }
-
-  func report(error: Error) {
-    errors.append(error)
   }
 }

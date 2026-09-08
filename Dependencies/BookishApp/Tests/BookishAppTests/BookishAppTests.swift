@@ -1,5 +1,6 @@
 import BookishCoding
 import BookishDatastore
+import BookishImporter
 import BookishImporterSamples
 import BookishRecord
 import Commands
@@ -24,18 +25,36 @@ struct BookishAppTests {
 
     await harness.load()
 
-    #expect(harness.status == "Ready")
+    #expect(harness.statusService.message == "Ready")
     #expect(
       try await harness.storageService.record(id: bookID)?.string("name") == "Recovered")
   }
 
   @MainActor
   @Test
-  func harnessStartsInLoadingState() {
+  func statusServiceStartsInLoadingState() {
     let harness = BookishHarness()
 
-    #expect(harness.status == "Loading")
+    #expect(harness.statusService.message == "Loading")
     #expect(harness.navigation.recordIDs.isEmpty)
+  }
+
+  @MainActor
+  @Test
+  func statusServiceReportsProgressAndErrors() {
+    let statusService = BookishStatusService()
+    let progress = BookishImportProgress(message: "Importing", completed: 2, total: 4)
+
+    statusService.report(progress: progress)
+
+    #expect(statusService.message == "Importing")
+    #expect(statusService.importProgress == progress)
+
+    statusService.clearImportProgress()
+    statusService.report(error: BookishStorageError.notLoaded)
+
+    #expect(statusService.importProgress == nil)
+    #expect(statusService.message == BookishStorageError.notLoaded.localizedDescription)
   }
 
   @MainActor
@@ -602,7 +621,7 @@ struct BookishAppTests {
 
     await commander.performWithoutWaiting(ThrowTestErrorCommand()).value
 
-    #expect(harness.status == "This is a test command error.")
+    #expect(harness.statusService.message == "This is a test command error.")
   }
 
   @MainActor
@@ -613,10 +632,10 @@ struct BookishAppTests {
     let commander = BookishCommandCentre(harness: harness)
 
     commander.importPresentation.requestInterchangeImport()
-    commander.statusReporter.report(message: "Reported through status capability")
+    commander.statusService.report(message: "Reported through status capability")
 
     #expect(harness.isImportingInterchange)
-    #expect(harness.status == "Reported through status capability")
+    #expect(harness.statusService.message == "Reported through status capability")
     #expect(commander.datastoreMaintenanceService.hasExportableRecords == false)
     #expect(commander.recordActionService.hasSelectedRecord == false)
     #expect(commander.navigationService.canSelectAnotherRecordIndex == false)

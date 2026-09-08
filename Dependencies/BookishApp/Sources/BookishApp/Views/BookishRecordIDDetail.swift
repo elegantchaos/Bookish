@@ -89,7 +89,7 @@ struct BookishRecordIDDetail: View {
         )
       }
     } catch {
-      commander?.statusReporter.report(error: error)
+      commander?.statusService.report(error: error)
     }
   }
 }

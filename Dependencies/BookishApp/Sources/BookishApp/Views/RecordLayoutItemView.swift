@@ -145,7 +145,7 @@ struct RecordLayoutItemView: View {
     } catch {
       configuration = nil
       errorDescription = error.localizedDescription
-      commander?.statusReporter.report(error: error)
+      commander?.statusService.report(error: error)
     }
   }
 

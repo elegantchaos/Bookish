@@ -79,7 +79,7 @@ struct RecordLayoutSectionView: View {
       presentationRecords = try await harness.presentation.presentations(
         for: host.kind, layout: layout)
     } catch {
-      commander?.statusReporter.report(error: error)
+      commander?.statusService.report(error: error)
     }
   }
 }

@@ -20,17 +20,14 @@ public final class BookishHarness {
   /// The layout and property-presentation service used by the browser UI.
   @ObservationIgnored public let presentation: BookishPresentationService
 
+  /// The status service used to present progress, messages, and errors.
+  @ObservationIgnored public let statusService: BookishStatusService
+
   /// Whether an interchange export has records to write.
   public var hasExportableRecords: Bool { navigation.recordIDs.isEmpty == false }
 
   /// Increments whenever the record projection is refreshed.
   public private(set) var revision = 0
-
-  /// The current user-facing status message.
-  public private(set) var status = "Loading"
-
-  /// The current import progress, when an import is active.
-  public private(set) var importProgress: BookishImportProgress?
 
   /// Whether the interchange import file picker is visible.
   public var isImportingInterchange = false
@@ -63,9 +60,11 @@ public final class BookishHarness {
   public init(
     directoryURL: URL? = nil,
     navigation: BookishNavigationService = BookishNavigationService(),
+    statusService: BookishStatusService = BookishStatusService(),
     defaultShowsDebugIndexes: Bool = false
   ) {
     self.navigation = navigation
+    self.statusService = statusService
     storageService = navigation.storageService
     presentation = BookishPresentationService(storageService: navigation.storageService)
     exportingService = BookishExportingService(storageService: navigation.storageService)
@@ -83,9 +82,9 @@ public final class BookishHarness {
     do {
       try await storageService.load()
       try await refresh()
-      status = "Ready"
+      statusService.report(message: "Ready")
     } catch {
-      status = error.localizedDescription
+      statusService.report(error: error)
     }
   }
 
@@ -104,7 +103,7 @@ public final class BookishHarness {
     do {
       try await refresh()
     } catch {
-      report(error: error)
+      statusService.report(error: error)
     }
   }
 
@@ -133,13 +132,13 @@ public final class BookishHarness {
         data: try await exportInterchangeData())
       isExportingInterchange = true
     } catch {
-      report(error: error)
+      statusService.report(error: error)
     }
   }
 
   /// Handles successful completion of the interchange export panel.
   public func didExportInterchange() {
-    report(message: "Exported interchange file")
+    statusService.report(message: "Exported interchange file")
   }
 
   /// Removes every stored record and mutation, then restores the seed records.
@@ -148,9 +147,9 @@ public final class BookishHarness {
       resetProjectionState()
       try await storageService.reset()
       try await refresh()
-      status = "Reset datastore"
+      statusService.report(message: "Reset datastore")
     } catch {
-      status = error.localizedDescription
+      statusService.report(error: error)
     }
   }
 
@@ -159,9 +158,9 @@ public final class BookishHarness {
     do {
       resetProjectionState()
       try await storageService.rebuildRecordProjection()
-      status = "Rebuilt record store"
+      statusService.report(message: "Rebuilt record store")
     } catch {
-      status = error.localizedDescription
+      statusService.report(error: error)
     }
   }
 
@@ -201,7 +200,7 @@ public final class BookishHarness {
       await importDeliciousLibrary(
         from: try BookishImporterSamples.deliciousLibraryURL(for: sample))
     } catch {
-      report(error: error)
+      statusService.report(error: error)
     }
   }
 
@@ -220,13 +219,12 @@ public final class BookishHarness {
         switch event {
         case .started(let start):
           displayName = start.importer.displayName
-          self.importProgress = BookishImportProgress(
-            message: "Reading \(displayName)", completed: 0, total: start.total)
-          self.status = "Reading \(displayName)"
+          self.statusService.report(
+            progress: BookishImportProgress(
+              message: "Reading \(displayName)", completed: 0, total: start.total))
 
         case .progress(let progress):
-          self.importProgress = progress
-          self.status = progress.message
+          self.statusService.report(progress: progress)
 
         case .records(let records):
           firstRecord =
@@ -238,7 +236,7 @@ public final class BookishHarness {
           }
 
         case .diagnostic(let diagnostic):
-          self.status = diagnostic
+          self.statusService.report(message: diagnostic)
 
         case .finished:
           break
@@ -249,30 +247,22 @@ public final class BookishHarness {
       if let firstRecord {
         navigation.select(recordID: firstRecord.id)
       }
-      status =
-        "Imported \(summary.recordCount) \(displayName) \(summary.recordCount == 1 ? "record" : "records")"
+      statusService.report(
+        message:
+          "Imported \(summary.recordCount) \(displayName) \(summary.recordCount == 1 ? "record" : "records")"
+      )
     } catch is CancellationError {
-      status = "Import cancelled"
+      statusService.report(message: "Import cancelled")
     } catch {
-      status = error.localizedDescription
+      statusService.report(error: error)
     }
 
-    importProgress = nil
+    statusService.clearImportProgress()
   }
 
   /// Exports the current materialised records as Bookish interchange JSON data.
   public func exportInterchangeData() async throws -> Data {
     try await exportingService.interchangeData(root: navigation.selectedRecordID)
-  }
-
-  /// Reports an arbitrary user-facing message.
-  public func report(message: String) {
-    status = message
-  }
-
-  /// Reports an arbitrary user-facing error.
-  public func report(error: Error) {
-    status = error.localizedDescription
   }
 
   /// Refreshes browser indexes, selected records, layouts, and compatible selection state.
@@ -316,8 +306,7 @@ public final class BookishHarness {
 
 extension BookishHarness:
   BookishImportPresentation,
-  BookishDatastoreMaintenance,
-  BookishStatusReporting
+  BookishDatastoreMaintenance
 {
 }
 

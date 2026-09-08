@@ -3,12 +3,14 @@
 //  Copyright © 2026 Elegant Chaos Limited. All rights reserved.
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
-import Foundation
 import CommandsUI
+import Foundation
 import Icons
 
 /// Rebuilds the materialised record projection from stored mutations.
-public struct RebuildRecordStoreCommand<Centre: BookishStorageProvider & BookishStatusReportingProvider>: CommandWithUI {
+public struct RebuildRecordStoreCommand<Centre: BookishStorageProvider & BookishStatusProvider>:
+  CommandWithUI
+{
   public typealias ResultType = Void
 
   public let id = "datastore.rebuild-record-store"
@@ -40,6 +42,6 @@ public struct RebuildRecordStoreCommand<Centre: BookishStorageProvider & Bookish
 
   public func perform(centre: Centre) async throws {
     try await centre.storageService.rebuildRecordProjection()
-    centre.statusReporter.report(message: "Rebuilt record store")
+    centre.statusService.report(message: "Rebuilt record store")
   }
 }

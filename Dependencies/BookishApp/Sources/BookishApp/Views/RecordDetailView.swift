@@ -27,7 +27,8 @@ struct RecordDetailView: View {
           )
         } else {
           ContentUnavailableView(
-            "No Selection", systemImage: "list.bullet.rectangle", description: Text(harness.status))
+            "No Selection", systemImage: "list.bullet.rectangle",
+            description: Text(harness.statusService.message))
         }
       }
       .navigationDestination(for: BookishRecordID.self) { recordID in

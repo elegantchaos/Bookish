@@ -77,7 +77,7 @@ struct RecordIndexView: View {
       }
       self.presentationsByKind = presentationsByKind
     } catch {
-      commander?.statusReporter.report(error: error)
+      commander?.statusService.report(error: error)
     }
   }
 }

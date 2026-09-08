@@ -115,7 +115,7 @@ struct RecordQuerySectionView: View {
     } catch {
       result = nil
       errorDescription = error.localizedDescription
-      commander?.statusReporter.report(error: error)
+      commander?.statusService.report(error: error)
     }
   }
 
@@ -133,7 +133,7 @@ struct RecordQuerySectionView: View {
       self.metadataByKind = metadataByKind
     } catch {
       errorDescription = error.localizedDescription
-      commander?.statusReporter.report(error: error)
+      commander?.statusService.report(error: error)
     }
   }
 

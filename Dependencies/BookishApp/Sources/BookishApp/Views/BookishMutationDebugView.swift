@@ -57,7 +57,8 @@ import SwiftUI
           BookishMutationView(mutation: mutation)
         } else {
           ContentUnavailableView(
-            "No Mutation", systemImage: "list.bullet.rectangle", description: Text(harness.status))
+            "No Mutation", systemImage: "list.bullet.rectangle",
+            description: Text(harness.statusService.message))
         }
       }
       .task(id: harness.revision) {
@@ -82,7 +83,7 @@ import SwiftUI
           selectedMutationID = mutations.first?.id
         }
       } catch {
-        commander?.statusReporter.report(error: error)
+        commander?.statusService.report(error: error)
       }
     }
   }

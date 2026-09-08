@@ -3,12 +3,14 @@
 //  Copyright © 2026 Elegant Chaos Limited. All rights reserved.
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
-import Foundation
 import CommandsUI
+import Foundation
 import Icons
 
 /// Removes all records and mutations from the local datastore.
-public struct ResetDatastoreCommand<Centre: BookishStorageProvider & BookishStatusReportingProvider>: CommandWithUI {
+public struct ResetDatastoreCommand<Centre: BookishStorageProvider & BookishStatusProvider>:
+  CommandWithUI
+{
   public typealias ResultType = Void
 
   public let id = "datastore.reset"
@@ -39,6 +41,6 @@ public struct ResetDatastoreCommand<Centre: BookishStorageProvider & BookishStat
 
   public func perform(centre: Centre) async throws {
     try await centre.storageService.reset()
-    centre.statusReporter.report(message: "Reset datastore")
+    centre.statusService.report(message: "Reset datastore")
   }
 }

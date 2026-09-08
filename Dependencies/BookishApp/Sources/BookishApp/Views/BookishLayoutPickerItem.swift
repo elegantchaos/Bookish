@@ -39,7 +39,7 @@ struct BookishLayoutPickerItem: View {
     do {
       name = try await harness.storageService.record(id: layoutID)?.string(BookishRecordKey.name)
     } catch {
-      commander?.statusReporter.report(error: error)
+      commander?.statusService.report(error: error)
     }
   }
 }
