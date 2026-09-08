@@ -276,49 +276,10 @@ public final class BookishHarness {
     try await exportingService.interchangeData(root: navigation.selectedRecordID)
   }
 
-  /// Returns a record by resolving it from the record service.
-  public func record(id: BookishRecordID) async throws -> BookishRecord? {
-    try await storageService.record(id: id)
-  }
-
-  /// Returns the metadata record describing a catalogue kind, or the universal fallback.
-  public func recordKindMetadata(for kind: String) async throws -> BookishRecord? {
-    try await storageService.recordKindMetadata(for: kind)
-  }
-
-  /// Returns the observable result of resolving a query template against a host record.
-  public func recordQueryResult(
-    for template: RecordQueryTemplate,
-    host: BookishRecord
-  ) async throws -> RecordQueryResult {
-    try await storageService.recordQueryResult(for: template, host: host)
-  }
-
-  /// Returns presentation records ordered from layout-specific to generic metadata.
-  public func presentations(for kind: String, layout: BookishRecord? = nil) async throws
-    -> [BookishRecord]
-  {
-    try await storageService.presentations(for: kind, layout: layout)
-  }
-
-  /// Returns the selected record by resolving it from the record service.
-  public func selectedRecord() async throws -> BookishRecord? {
-    guard let selectedRecordID = navigation.selectedRecordID else {
-      return nil
-    }
-
-    return try await record(id: selectedRecordID)
-  }
-
-  /// Returns all stored mutations for the debug mutation window.
-  public func mutations() async throws -> [MutationRecord] {
-    try await storageService.mutations()
-  }
-
   /// Returns the selected layout by resolving it from the record service.
   public func selectedLayout() async throws -> BookishRecord? {
     let layoutID = selectedLayoutID ?? navigation.selectedRecordIndex?.layoutID ?? fallbackLayoutID
-    return try await record(id: layoutID)
+    return try await storageService.record(id: layoutID)
   }
 
   /// Returns the explicit layout selection or the type-specific layout for a displayed record.
@@ -335,11 +296,6 @@ public final class BookishHarness {
     }
 
     return try await selectedLayout()
-  }
-
-  /// Returns the local directory used for datastore files.
-  public func localDatastoreDirectory() throws -> URL {
-    try storageService.localDatastoreDirectory()
   }
 
   /// Reports an arbitrary user-facing message.
@@ -438,22 +394,9 @@ extension BookishHarness:
 {
 }
 
-extension BookishHarness: BookishRecordActionStore {
-  /// Whether the datastore is available for record actions.
-  var hasLoadedRecordStore: Bool { storageService.isLoaded }
-
+extension BookishHarness: BookishRecordActionState {
   /// The record selected for an action.
   var selectedRecordID: BookishRecordID? { navigation.selectedRecordID }
-
-  /// Applies one durable mutation to the datastore.
-  func performRecordActionMutation(_ mutation: MutationRecord) async throws {
-    try await storageService.perform(mutation)
-  }
-
-  /// Applies one remotely-originated mutation to the datastore.
-  func receiveRemoteRecordActionMutation(_ mutation: MutationRecord) async throws {
-    try await storageService.receiveRemoteMutation(mutation)
-  }
 
   /// Refreshes observable browser state after an action.
   func refreshRecordActionState() async throws {

@@ -330,6 +330,9 @@ extension BookishStorageService: BookishStorage {
 
 }
 
+extension BookishStorageService: BookishRecordActionStorage {
+}
+
 /// Errors reported when a datastore operation requires an unavailable store.
 enum BookishStorageError: LocalizedError {
   /// The datastore has not completed loading.

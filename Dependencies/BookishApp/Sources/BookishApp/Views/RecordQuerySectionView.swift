@@ -96,7 +96,7 @@ struct RecordQuerySectionView: View {
 
     do {
       guard
-        let section = try await harness.record(id: sectionID),
+        let section = try await harness.storageService.record(id: sectionID),
         section.kind == BookishRecordKind.querySection,
         let template = section.encoded(BookishRecordKey.query, as: RecordQueryTemplate.self)
       else {
@@ -109,7 +109,7 @@ struct RecordQuerySectionView: View {
 
       self.section = section
       self.template = template
-      let result = try await harness.recordQueryResult(for: template, host: host)
+      let result = try await harness.storageService.recordQueryResult(for: template, host: host)
       self.result = result
       await loadMetadata(for: result.records)
     } catch {
@@ -125,7 +125,7 @@ struct RecordQuerySectionView: View {
       var metadataByKind: [String: BookishRecord] = [:]
 
       for kind in Set(records.map(\.kind)) {
-        if let metadata = try await harness.recordKindMetadata(for: kind) {
+        if let metadata = try await harness.storageService.recordKindMetadata(for: kind) {
           metadataByKind[kind] = metadata
         }
       }

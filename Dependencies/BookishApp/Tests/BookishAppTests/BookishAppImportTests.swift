@@ -54,7 +54,7 @@ import Testing
     await harness.importInterchange(data: Data(json.utf8))
     let importedID = BookishRecordID("test-import-book")
     #expect(harness.navigation.recordIDs.contains(importedID))
-    #expect(try await harness.record(id: importedID)?.string("name") == "Imported Book")
+    #expect(try await harness.storageService.record(id: importedID)?.string("name") == "Imported Book")
     #expect(harness.status == "Imported 1 Bookish interchange record")
   }
 
@@ -97,25 +97,25 @@ import Testing
       """
     await harness.importInterchange(data: Data(json.utf8))
     #expect(harness.navigation.recordIDs.contains(BookishRecordID("test-reset-book")))
-    let mutationsBeforeReset = try await harness.mutations()
+    let mutationsBeforeReset = try await harness.storageService.mutations()
     #expect(mutationsBeforeReset.isEmpty == false)
     try await commander.perform(RebuildRecordStoreCommand())
     #expect(harness.navigation.recordIDs.contains(BookishRecordID("test-reset-book")))
     #expect(
-      try await harness.record(id: BookishRecordID("seed-book"))?.kind == BookishRecordKind.book)
+      try await harness.storageService.record(id: BookishRecordID("seed-book"))?.kind == BookishRecordKind.book)
     #expect(
-      try await harness.record(id: BookishRecordID("seed-author"))?.kind == BookishRecordKind.person
+      try await harness.storageService.record(id: BookishRecordID("seed-author"))?.kind == BookishRecordKind.person
     )
     #expect(
-      try await harness.record(id: BookishRecordID("datastore-seed-marker"))?.kind
+      try await harness.storageService.record(id: BookishRecordID("datastore-seed-marker"))?.kind
         == BookishRecordKind.seedMarker)
     #expect(
-      try await harness.record(id: BookishRecordID("datastore-index-all-records"))?.kind
+      try await harness.storageService.record(id: BookishRecordID("datastore-index-all-records"))?.kind
         == BookishRecordKind.index)
     #expect(
-      try await harness.record(id: BookishRecordID("datastore-book-layout"))?.kind
+      try await harness.storageService.record(id: BookishRecordID("datastore-book-layout"))?.kind
         == BookishRecordKind.layout)
-    let mutationsAfterReset = try await harness.mutations()
+    let mutationsAfterReset = try await harness.storageService.mutations()
     #expect(mutationsAfterReset.map(\.id) == mutationsBeforeReset.map(\.id))
     #expect(mutationsAfterReset.map(\.operation) == mutationsBeforeReset.map(\.operation))
     #expect(harness.status == "Rebuilt record store")
@@ -132,11 +132,11 @@ import Testing
     #expect(harness.navigation.recordIDs.isEmpty == false)
     try await commander.perform(ResetDatastoreCommand())
     #expect(harness.navigation.recordIDs.isEmpty == false)
-    #expect(try await harness.record(id: BookishRecordID("seed-book")) == nil)
+    #expect(try await harness.storageService.record(id: BookishRecordID("seed-book")) == nil)
     #expect(
-      try await harness.record(id: BookishRecordID("datastore-seed-marker"))?.kind
+      try await harness.storageService.record(id: BookishRecordID("datastore-seed-marker"))?.kind
         == BookishRecordKind.seedMarker)
-    #expect((try await harness.mutations()).isEmpty)
+    #expect((try await harness.storageService.mutations()).isEmpty)
     #expect(harness.status == "Reset datastore")
   }
 }

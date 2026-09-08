@@ -34,7 +34,7 @@ public final class BookishCommandCentre: CommandCentre {
     importPresentation = harness
     datastoreMaintenanceService = harness
     storageService = harness.storageService
-    recordActionService = BookishRecordActionsService(store: harness)
+    recordActionService = BookishRecordActionsService(storage: harness.storageService, state: harness)
     navigationService = harness.navigation
   }
 

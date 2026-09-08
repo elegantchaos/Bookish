@@ -77,7 +77,7 @@ import SwiftUI
     /// Loads mutations and selects the first available entry.
     private func load() async {
       do {
-        mutations = try await harness.mutations()
+        mutations = try await harness.storageService.mutations()
         if selectedMutation == nil {
           selectedMutationID = mutations.first?.id
         }

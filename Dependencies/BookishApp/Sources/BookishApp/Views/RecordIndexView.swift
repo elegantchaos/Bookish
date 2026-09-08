@@ -69,8 +69,8 @@ struct RecordIndexView: View {
       layout = try await harness.selectedLayout()
       var presentationsByKind: [String: [BookishRecord]] = [:]
       for kind in Set(navigation.selectedRecordResult?.records.map(\.kind) ?? []) {
-        presentationsByKind[kind] = try await harness.presentations(for: kind, layout: layout)
-        if let metadata = try await harness.recordKindMetadata(for: kind) {
+        presentationsByKind[kind] = try await harness.storageService.presentations(for: kind, layout: layout)
+        if let metadata = try await harness.storageService.recordKindMetadata(for: kind) {
           metadataByKind[kind] = metadata
         }
       }

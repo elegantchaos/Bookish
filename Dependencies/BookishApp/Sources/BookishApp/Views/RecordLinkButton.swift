@@ -53,14 +53,14 @@ struct RecordLinkButton: View {
   /// Resolves the link name, thumbnail image, and kind icon.
   private func loadPresentation() async {
     do {
-      guard let record = try await harness.record(id: recordID) else {
+      guard let record = try await harness.storageService.record(id: recordID) else {
         presentation = nil
         return
       }
 
       presentation = BookishRecordLinkPresentation(
         record: record,
-        placeholderSystemImage: try await harness.recordKindMetadata(for: record.kind)?
+        placeholderSystemImage: try await harness.storageService.recordKindMetadata(for: record.kind)?
           .string(BookishRecordKey.icon) ?? "doc")
     } catch {
       commander?.statusReporter.report(error: error)

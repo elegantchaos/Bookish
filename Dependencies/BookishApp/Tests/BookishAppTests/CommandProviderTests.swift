@@ -63,16 +63,16 @@ struct CommandProviderTests {
   @Test
   func recordActionsApplyAndRefreshASelectedRecordStatus() async {
     let recordID = BookishRecordID("book-1")
-    let store = TestRecordActionStore(
-      selectedRecordID: recordID,
+    let storage = TestRecordActionStorage(
       record: BookishRecord(id: recordID, kind: BookishRecordKind.book)
     )
-    let actions = BookishRecordActionsService(store: store)
+    let state = TestRecordActionState(selectedRecordID: recordID)
+    let actions = BookishRecordActionsService(storage: storage, state: state)
 
     await actions.markReading()
 
     #expect(
-      store.localMutations == [
+      storage.localMutations == [
         .setProperty(
           recordID: recordID,
           kind: BookishRecordKind.book,
@@ -81,8 +81,8 @@ struct CommandProviderTests {
         )
       ]
     )
-    #expect(store.refreshCount == 1)
-    #expect(store.messages == ["Set status to Reading"])
+    #expect(state.refreshCount == 1)
+    #expect(state.messages == ["Set status to Reading"])
   }
 
   @Test
@@ -295,18 +295,13 @@ private final class TestNavigationService: BookishNavigation {
 }
 
 @MainActor
-private final class TestRecordActionStore: BookishRecordActionStore {
-  let hasLoadedRecordStore = true
-  let selectedRecordID: BookishRecordID?
+private final class TestRecordActionStorage: BookishRecordActionStorage {
+  let isLoaded = true
   private let storedRecord: BookishRecord?
   private(set) var localMutations: [MutationOperation] = []
   private(set) var remoteMutations: [MutationRecord] = []
-  private(set) var refreshCount = 0
-  private(set) var messages: [String] = []
-  private(set) var errors: [any Error] = []
 
-  init(selectedRecordID: BookishRecordID?, record: BookishRecord?) {
-    self.selectedRecordID = selectedRecordID
+  init(record: BookishRecord?) {
     storedRecord = record
   }
 
@@ -314,12 +309,24 @@ private final class TestRecordActionStore: BookishRecordActionStore {
     storedRecord?.id == id ? storedRecord : nil
   }
 
-  func performRecordActionMutation(_ mutation: MutationRecord) async throws {
+  func perform(_ mutation: MutationRecord) async throws {
     localMutations.append(mutation.operation)
   }
 
-  func receiveRemoteRecordActionMutation(_ mutation: MutationRecord) async throws {
+  func receiveRemoteMutation(_ mutation: MutationRecord) async throws {
     remoteMutations.append(mutation)
+  }
+}
+
+@MainActor
+private final class TestRecordActionState: BookishRecordActionState {
+  let selectedRecordID: BookishRecordID?
+  private(set) var refreshCount = 0
+  private(set) var messages: [String] = []
+  private(set) var errors: [any Error] = []
+
+  init(selectedRecordID: BookishRecordID?) {
+    self.selectedRecordID = selectedRecordID
   }
 
   func refreshRecordActionState() async throws {

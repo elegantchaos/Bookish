@@ -7,23 +7,28 @@ import BookishDatastore
 import BookishRecord
 import Foundation
 
-/// The datastore operations required to apply a selected-record action.
+/// The storage operations required to apply a selected-record action.
 @MainActor
-protocol BookishRecordActionStore: AnyObject {
-  /// Whether a datastore is available for record actions.
-  var hasLoadedRecordStore: Bool { get }
+protocol BookishRecordActionStorage: AnyObject {
+  /// Whether storage is available for record actions.
+  var isLoaded: Bool { get }
+
+  /// Resolves a record from storage.
+  func record(id: BookishRecordID) async throws -> BookishRecord?
+
+  /// Applies one durable mutation to storage.
+  func perform(_ mutation: MutationRecord) async throws
+
+  /// Applies one remotely-originated mutation to storage.
+  func receiveRemoteMutation(_ mutation: MutationRecord) async throws
+}
+
+/// The UI state operations required to apply a selected-record action.
+@MainActor
+protocol BookishRecordActionState: AnyObject {
 
   /// The record selected for an action.
   var selectedRecordID: BookishRecordID? { get }
-
-  /// Resolves a record from the datastore.
-  func record(id: BookishRecordID) async throws -> BookishRecord?
-
-  /// Applies one durable mutation to the datastore.
-  func performRecordActionMutation(_ mutation: MutationRecord) async throws
-
-  /// Applies one remotely-originated mutation to the datastore.
-  func receiveRemoteRecordActionMutation(_ mutation: MutationRecord) async throws
 
   /// Refreshes observable browser state after an action.
   func refreshRecordActionState() async throws
@@ -38,17 +43,21 @@ protocol BookishRecordActionStore: AnyObject {
 /// Applies mutations to the record selected in the Bookish browser.
 @MainActor
 final class BookishRecordActionsService: BookishRecordActions {
-  /// The harness-facing datastore operations used to execute actions.
-  private unowned let store: any BookishRecordActionStore
+  /// The storage service used to read and mutate records.
+  private unowned let storage: any BookishRecordActionStorage
 
-  /// Creates record actions backed by the supplied datastore operations.
-  init(store: any BookishRecordActionStore) {
-    self.store = store
+  /// The UI state used to select records and report results.
+  private unowned let state: any BookishRecordActionState
+
+  /// Creates record actions backed by the supplied storage and UI state.
+  init(storage: any BookishRecordActionStorage, state: any BookishRecordActionState) {
+    self.storage = storage
+    self.state = state
   }
 
   /// Whether an action has a selected record and loaded datastore to operate on.
   var hasSelectedRecord: Bool {
-    store.hasLoadedRecordStore && store.selectedRecordID != nil
+    storage.isLoaded && state.selectedRecordID != nil
   }
 
   /// Marks the selected record as currently being read.
@@ -63,12 +72,12 @@ final class BookishRecordActionsService: BookishRecordActions {
 
   /// Simulates a remotely-arrived mutation for the selected record.
   func simulateRemoteUpdate() async {
-    guard store.hasLoadedRecordStore, let recordID = store.selectedRecordID else {
+    guard storage.isLoaded, let recordID = state.selectedRecordID else {
       return
     }
 
     do {
-      let record = try await store.record(id: recordID)
+      let record = try await storage.record(id: recordID)
       let mutation = MutationRecord(
         operation: .setProperty(
           recordID: recordID,
@@ -78,23 +87,23 @@ final class BookishRecordActionsService: BookishRecordActions {
             "Remote mutation arrived at \(Date().formatted(date: .omitted, time: .shortened))")
         )
       )
-      try await store.receiveRemoteRecordActionMutation(mutation)
-      try await store.refreshRecordActionState()
-      store.report(message: "Applied remote mutation")
+      try await storage.receiveRemoteMutation(mutation)
+      try await state.refreshRecordActionState()
+      state.report(message: "Applied remote mutation")
     } catch {
-      store.report(error: error)
+      state.report(error: error)
     }
   }
 
   /// Updates the selected record's status property.
   private func setStatus(_ value: String) async {
-    guard store.hasLoadedRecordStore, let recordID = store.selectedRecordID else {
+    guard storage.isLoaded, let recordID = state.selectedRecordID else {
       return
     }
 
     do {
-      let record = try await store.record(id: recordID)
-      try await store.performRecordActionMutation(
+      let record = try await storage.record(id: recordID)
+      try await storage.perform(
         MutationRecord(
           operation: .setProperty(
             recordID: recordID,
@@ -104,10 +113,10 @@ final class BookishRecordActionsService: BookishRecordActions {
           )
         )
       )
-      try await store.refreshRecordActionState()
-      store.report(message: "Set status to \(value)")
+      try await state.refreshRecordActionState()
+      state.report(message: "Set status to \(value)")
     } catch {
-      store.report(error: error)
+      state.report(error: error)
     }
   }
 }

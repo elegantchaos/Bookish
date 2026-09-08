@@ -116,7 +116,7 @@ struct RecordLayoutItemView: View {
     defer { isLoading = false }
 
     do {
-      guard let configuration = try await harness.record(id: linkedLayoutID)
+      guard let configuration = try await harness.storageService.record(id: linkedLayoutID)
       else {
         self.configuration = nil
         errorDescription = "The linked layout item is missing."

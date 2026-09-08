@@ -76,7 +76,7 @@ struct RecordLayoutSectionView: View {
   /// Resolves cascading field presentations for the host record in this section.
   private func loadPresentations() async {
     do {
-      presentationRecords = try await harness.presentations(for: host.kind, layout: layout)
+      presentationRecords = try await harness.storageService.presentations(for: host.kind, layout: layout)
     } catch {
       commander?.statusReporter.report(error: error)
     }
