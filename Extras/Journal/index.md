@@ -1,5 +1,6 @@
 # Journal Index
 
+- [2026-09-08 Presentation Service Extraction](2026-09-08-presentation-service-extraction.md)
 - [2026-09-07 Navigation and Datastore Service Boundaries](2026-09-07-navigation-datastore-service-boundaries.md)
 - [2026-09-07 Navigation, Environment, and Status Capabilities](2026-09-07-navigation-environment-status-capabilities.md)
 - [2026-09-07 Command Provider Service Extraction](2026-09-07-command-provider-service-extraction.md)
