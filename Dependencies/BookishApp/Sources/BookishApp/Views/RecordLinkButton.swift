@@ -60,7 +60,7 @@ struct RecordLinkButton: View {
 
       presentation = BookishRecordLinkPresentation(
         record: record,
-        placeholderSystemImage: try await harness.storageService.recordKindMetadata(for: record.kind)?
+        placeholderSystemImage: try await harness.presentation.recordKindMetadata(for: record.kind)?
           .string(BookishRecordKey.icon) ?? "doc")
     } catch {
       commander?.statusReporter.report(error: error)

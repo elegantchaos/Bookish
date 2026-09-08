@@ -60,17 +60,18 @@ struct RecordIndexView: View {
 
   /// Identifies data changes that require row presentations to be resolved again.
   private var taskID: String {
-    "\(navigation.selectedRecordIndexID?.rawValue ?? "")-\(harness.selectedLayoutID?.rawValue ?? "")-\(harness.revision)"
+    "\(navigation.selectedRecordIndexID?.rawValue ?? "")-\(harness.presentation.selectedLayoutID?.rawValue ?? "")-\(harness.revision)"
   }
 
   /// Resolves the active layout and the metadata needed by visible record kinds.
   private func loadPresentation() async {
     do {
-      layout = try await harness.selectedLayout()
+      layout = try await harness.presentation.selectedLayout(for: navigation.selectedRecordIndex)
       var presentationsByKind: [String: [BookishRecord]] = [:]
       for kind in Set(navigation.selectedRecordResult?.records.map(\.kind) ?? []) {
-        presentationsByKind[kind] = try await harness.storageService.presentations(for: kind, layout: layout)
-        if let metadata = try await harness.storageService.recordKindMetadata(for: kind) {
+        presentationsByKind[kind] = try await harness.presentation.presentations(
+          for: kind, layout: layout)
+        if let metadata = try await harness.presentation.recordKindMetadata(for: kind) {
           metadataByKind[kind] = metadata
         }
       }

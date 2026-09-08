@@ -17,13 +17,8 @@ public final class BookishHarness {
   /// The navigation and routing service used by the datastore browser.
   @ObservationIgnored public let navigation: BookishNavigationService
 
-  /// The identifiers of layout records currently available from the record service.
-  public private(set) var layoutIDs: [BookishRecordID] = []
-
-  /// The identifiers of layout records compatible with the selected browser index.
-  public var compatibleLayoutIDs: [BookishRecordID] {
-    compatibleLayouts.map(\.id)
-  }
+  /// The layout and property-presentation service used by the browser UI.
+  @ObservationIgnored public let presentation: BookishPresentationService
 
   /// Whether an interchange export has records to write.
   public var hasExportableRecords: Bool { navigation.recordIDs.isEmpty == false }
@@ -36,9 +31,6 @@ public final class BookishHarness {
 
   /// The current import progress, when an import is active.
   public private(set) var importProgress: BookishImportProgress?
-
-  /// The selected layout record identifier.
-  public var selectedLayoutID: BookishRecordID?
 
   /// Whether the interchange import file picker is visible.
   public var isImportingInterchange = false
@@ -58,9 +50,6 @@ public final class BookishHarness {
   /// Whether debug-only indexes are currently included in the browser.
   public private(set) var showsDebugIndexes: Bool
 
-  /// The universal layout used when no explicit layout is selected.
-  private let fallbackLayoutID = BookishRecordID("datastore-all-fields-layout")
-
   /// The datastore service shared with navigation and other Bookish services.
   @ObservationIgnored let storageService: BookishStorageService
 
@@ -70,9 +59,6 @@ public final class BookishHarness {
   /// The model-side importer used by the import sheets and sample commands.
   @ObservationIgnored private let importingService: BookishImportingService
 
-  /// The loaded layout records used to derive compatible layout choices.
-  private var layouts: [BookishRecord] = []
-
   /// Creates an empty harness ready to load the datastore.
   public init(
     directoryURL: URL? = nil,
@@ -81,13 +67,14 @@ public final class BookishHarness {
   ) {
     self.navigation = navigation
     storageService = navigation.storageService
+    presentation = BookishPresentationService(storageService: navigation.storageService)
     exportingService = BookishExportingService(storageService: navigation.storageService)
     importingService = BookishImportingService(storageService: navigation.storageService)
     storageService.configure(directoryURL: directoryURL)
     self.defaultShowsDebugIndexes = defaultShowsDebugIndexes
     self.showsDebugIndexes = defaultShowsDebugIndexes
-    navigation.setRecordIndexSelectionHandler { [weak self] in
-      try await self?.updateLayoutSelection()
+    navigation.setRecordIndexSelectionHandler { [weak presentation, weak navigation] in
+      try await presentation?.refresh(for: navigation?.selectedRecordIndex)
     }
   }
 
@@ -123,7 +110,8 @@ public final class BookishHarness {
 
   /// Imports records from a Bookish interchange JSON file.
   public func importInterchange(from url: URL) async {
-    await coordinateImport(fallbackDisplayName: BookishInterchangeImporter().descriptor.displayName) {
+    await coordinateImport(fallbackDisplayName: BookishInterchangeImporter().descriptor.displayName)
+    {
       try await self.importingService.importInterchange(from: url, reporting: $0)
     }
   }
@@ -179,7 +167,8 @@ public final class BookishHarness {
 
   /// Imports records from Bookish interchange JSON data.
   public func importInterchange(data: Data) async {
-    await coordinateImport(fallbackDisplayName: BookishInterchangeImporter().descriptor.displayName) {
+    await coordinateImport(fallbackDisplayName: BookishInterchangeImporter().descriptor.displayName)
+    {
       try await self.importingService.importRecords(
         from: data,
         using: BookishInterchangeImporter(),
@@ -276,28 +265,6 @@ public final class BookishHarness {
     try await exportingService.interchangeData(root: navigation.selectedRecordID)
   }
 
-  /// Returns the selected layout by resolving it from the record service.
-  public func selectedLayout() async throws -> BookishRecord? {
-    let layoutID = selectedLayoutID ?? navigation.selectedRecordIndex?.layoutID ?? fallbackLayoutID
-    return try await storageService.record(id: layoutID)
-  }
-
-  /// Returns the explicit layout selection or the type-specific layout for a displayed record.
-  public func layout(for record: BookishRecord) async throws -> BookishRecord? {
-    if selectedLayoutID != nil {
-      return try await selectedLayout()
-    }
-
-    if let typeSpecificLayout = layouts.first(where: { layout in
-      layout.bool(BookishRecordKey.isSection) != true
-        && layout.strings(BookishRecordKey.types)?.contains(record.kind) == true
-    }) {
-      return typeSpecificLayout
-    }
-
-    return try await selectedLayout()
-  }
-
   /// Reports an arbitrary user-facing message.
   public func report(message: String) {
     status = message
@@ -317,54 +284,14 @@ public final class BookishHarness {
     let recordIndexResult = try await storageService.recordQueryResult(matching: recordIndexQuery)
     navigation.update(recordIndexResult: recordIndexResult)
     try await navigation.refreshSelectedRecordIndex()
-    layouts = try await storageService.records(
-      matching: RecordQuery(
-        predicate: .kind(BookishRecordKind.layout),
-        sort: [.property(BookishRecordKey.name), .id]
-      ))
-    layoutIDs = layouts.filter { $0.bool(BookishRecordKey.isSection) != true }.map(\.id)
+    try await presentation.refresh(for: navigation.selectedRecordIndex)
     revision += 1
-    try await updateLayoutSelection()
   }
 
   /// Clears UI state tied to the current materialised projection.
   private func resetProjectionState() {
     navigation.reset()
-    selectedLayoutID = nil
-    layouts = []
-    layoutIDs = []
-  }
-
-  /// Clears a selected layout that is missing or incompatible with the active index.
-  private func updateLayoutSelection() async throws {
-    guard let selectedLayoutID else {
-      return
-    }
-
-    guard storageService.isLoaded else {
-      return
-    }
-
-    if try await storageService.record(id: selectedLayoutID) == nil {
-      self.selectedLayoutID = nil
-      return
-    }
-
-    if !compatibleLayoutIDs.contains(selectedLayoutID) {
-      self.selectedLayoutID = nil
-    }
-  }
-
-  /// The layouts compatible with the active browser index's advisory kinds.
-  private var compatibleLayouts: [BookishRecord] {
-    guard let selectedRecordIndex = navigation.selectedRecordIndex else {
-      return layouts
-    }
-
-    return layouts.filter { layout in
-      layout.bool(BookishRecordKey.isSection) != true
-        && layout.matchesAnyType(in: selectedRecordIndex.types)
-    }
+    presentation.reset()
   }
 
   /// The query that loads visible browser index records.

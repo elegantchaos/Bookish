@@ -48,10 +48,10 @@ struct BookishToolbar: ToolbarContent {
 
     if isAdvancedMode {
       ToolbarItem {
-        @Bindable var harness = harness
-        Picker("Layout", selection: $harness.selectedLayoutID) {
+        @Bindable var presentation = harness.presentation
+        Picker("Layout", selection: $presentation.selectedLayoutID) {
           Text("Default").tag(Optional<BookishRecordID>.none)
-          ForEach(harness.compatibleLayoutIDs, id: \.self) { id in
+          ForEach(presentation.compatibleLayoutIDs, id: \.self) { id in
             BookishLayoutPickerItem(layoutID: id, harness: harness)
           }
         }

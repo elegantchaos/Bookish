@@ -48,16 +48,18 @@ struct BookishRecordIDCell: View {
 
   /// Identifies inputs that require the cell to resolve its record again.
   private var taskID: String {
-    "\(recordID.rawValue)-\(harness.selectedLayoutID?.rawValue ?? "")-\(harness.revision)"
+    "\(recordID.rawValue)-\(harness.presentation.selectedLayoutID?.rawValue ?? "")-\(harness.revision)"
   }
 
   /// Resolves the record, selected layout, and cascading presentations.
   private func load() async {
     do {
       record = try await harness.storageService.record(id: recordID)
-      layout = try await harness.selectedLayout()
+      layout = try await harness.presentation.selectedLayout(
+        for: harness.navigation.selectedRecordIndex)
       if let record {
-        presentationRecords = try await harness.storageService.presentations(for: record.kind, layout: layout)
+        presentationRecords = try await harness.presentation.presentations(
+          for: record.kind, layout: layout)
       }
     } catch {
       commander?.statusReporter.report(error: error)

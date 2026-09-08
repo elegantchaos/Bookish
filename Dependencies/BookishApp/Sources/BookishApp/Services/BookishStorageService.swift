@@ -34,9 +34,6 @@ public final class BookishStorageService {
   /// The record that marks initial configuration seed import.
   private let seedMarkerID = BookishRecordID("datastore-seed-marker")
 
-  /// The universal property presentation used after more-specific presentations.
-  private let fallbackPresentationID = BookishRecordID("presentation.type.*")
-
   /// An injected datastore directory for tests or a custom local store.
   private var directoryURL: URL?
 
@@ -99,52 +96,12 @@ public final class BookishStorageService {
     try await datastore?.recordService.record(id: id)
   }
 
-  /// Returns the metadata record describing a catalogue kind, or the universal fallback.
-  func recordKindMetadata(for kind: String) async throws -> BookishRecord? {
-    let metadataID = BookishRecordID("metadata.type.\(kind)")
-    if let metadata = try await record(id: metadataID) {
-      return metadata
-    }
-
-    return try await record(id: BookishRecordID("metadata.type.*"))
-  }
-
   /// Resolves a host-specific query template against the materialised store.
   func recordQueryResult(
     for template: RecordQueryTemplate,
     host: BookishRecord
   ) async throws -> RecordQueryResult {
     try await recordQueryResult(matching: template.resolve(for: host))
-  }
-
-  /// Returns presentation records ordered from layout-specific to generic metadata.
-  func presentations(for kind: String, layout: BookishRecord? = nil)
-    async throws
-    -> [BookishRecord]
-  {
-    var presentations: [BookishRecord] = []
-
-    if let presentationID = layout?.record(BookishRecordKey.presentation),
-      let presentation = try await record(id: presentationID)
-    {
-      presentations.append(presentation)
-    }
-
-    if let metadata = try await recordKindMetadata(for: kind),
-      let presentationID = metadata.record(BookishRecordKey.presentation),
-      let presentation = try await record(id: presentationID)
-    {
-      presentations.append(presentation)
-    }
-
-    if presentations.contains(where: { $0.id == fallbackPresentationID })
-      == false,
-      let presentation = try await record(id: fallbackPresentationID)
-    {
-      presentations.append(presentation)
-    }
-
-    return presentations
   }
 
   /// Returns all durable mutations for diagnostic presentation.
@@ -183,8 +140,7 @@ public final class BookishStorageService {
   }
 
   /// Imports every configuration resource used by the browser and presentation layer.
-  private func importConfigurationSeeds() async throws -> BookishInterchangeFile
-  {
+  private func importConfigurationSeeds() async throws -> BookishInterchangeFile {
     try await importSeedResources([
       "IndexSeed",
       "LayoutSeed",

@@ -13,7 +13,9 @@ import Icons
 #endif
 
 /// Reveals the datastore folder in Finder.
-public struct RevealDatastoreFolderCommand<Centre: BookishStorageProvider>: CommandWithUI {
+public struct RevealDatastoreFolderCommand<
+  Centre: BookishStorageProvider & BookishStatusReportingProvider
+>: CommandWithUI {
   public typealias ResultType = Void
 
   public let id = "datastore.reveal-folder"
@@ -46,7 +48,7 @@ public struct RevealDatastoreFolderCommand<Centre: BookishStorageProvider>: Comm
       let url = try centre.storageService.localDatastoreDirectory()
       NSWorkspace.shared.activateFileViewerSelecting([url])
     #else
-      centre.datastoreMaintenanceService.report(
+      centre.statusReporter.report(
         message: "Reveal datastore folder is unavailable on this platform"
       )
     #endif

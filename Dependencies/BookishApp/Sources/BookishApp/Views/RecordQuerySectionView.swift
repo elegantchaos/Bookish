@@ -125,7 +125,7 @@ struct RecordQuerySectionView: View {
       var metadataByKind: [String: BookishRecord] = [:]
 
       for kind in Set(records.map(\.kind)) {
-        if let metadata = try await harness.storageService.recordKindMetadata(for: kind) {
+        if let metadata = try await harness.presentation.recordKindMetadata(for: kind) {
           metadataByKind[kind] = metadata
         }
       }

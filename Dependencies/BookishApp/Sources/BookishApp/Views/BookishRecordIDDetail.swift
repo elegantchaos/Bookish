@@ -73,7 +73,7 @@ struct BookishRecordIDDetail: View {
 
   /// Identifies presentation inputs that require the record to be resolved again.
   private var taskID: String {
-    "\(recordID.rawValue)-\(navigation.selectedRecordIndexID?.rawValue ?? "")-\(harness.selectedLayoutID?.rawValue ?? "")-\(harness.revision)"
+    "\(recordID.rawValue)-\(navigation.selectedRecordIndexID?.rawValue ?? "")-\(harness.presentation.selectedLayoutID?.rawValue ?? "")-\(harness.revision)"
   }
 
   /// Resolves the record, selected layout, and cascading presentations.
@@ -81,8 +81,9 @@ struct BookishRecordIDDetail: View {
     do {
       record = try await harness.storageService.record(id: recordID)
       if let record {
-        layout = try await harness.layout(for: record)
-        presentationRecords = try await harness.storageService.presentations(
+        layout = try await harness.presentation.layout(
+          for: record, recordIndex: navigation.selectedRecordIndex)
+        presentationRecords = try await harness.presentation.presentations(
           for: record.kind,
           layout: layout
         )
