@@ -18,7 +18,7 @@ struct RecordQuerySectionView: View {
   let host: BookishRecord
 
   /// The datastore coordinator used to resolve configuration and results.
-  let harness: BookishHarness
+  let harness: BookishUIStateService
 
   /// The command boundary used to report query-section failures.
   @Environment(\.bookishCommandCentre) private var commander

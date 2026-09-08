@@ -19,8 +19,6 @@ import SwiftUI
 
 /// macOS menu commands for the datastore.
 public struct BookishCommands: Commands {
-  private let harness: BookishHarness
-  private let navigation: BookishNavigationService
   private let commander: BookishCommandCentre
 
   /// Whether advanced commands are available.
@@ -33,14 +31,8 @@ public struct BookishCommands: Commands {
     @Environment(\.openWindow) private var openWindow
   #endif
 
-  /// Creates commands bound to a datastore harness.
-  public init(
-    harness: BookishHarness,
-    navigation: BookishNavigationService,
-    commander: BookishCommandCentre
-  ) {
-    self.harness = harness
-    self.navigation = navigation
+  /// Creates commands bound to the supplied command centre.
+  public init(commander: BookishCommandCentre) {
     self.commander = commander
   }
 

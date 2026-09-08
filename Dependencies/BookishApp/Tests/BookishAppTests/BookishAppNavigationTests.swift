@@ -9,8 +9,8 @@ import Testing
 @MainActor extension BookishAppTests {
   @Test
   func selectionCommandsAreDisabledWithoutSelection() {
-    let harness = BookishHarness()
-    let commander = BookishCommandCentre(harness: harness)
+    let harness = makeUIState()
+    let commander = makeCommandCentre(for: harness)
 
     #expect(commander.availability(MarkReadingCommand()) == .disabled)
     #expect(commander.availability(MarkFinishedCommand()) == .disabled)
@@ -20,8 +20,8 @@ import Testing
   @Test
   func navigationCommandsAreDisabledWithoutRecords() {
     let navigation = BookishNavigationService()
-    let harness = BookishHarness(navigation: navigation)
-    let commander = BookishCommandCentre(harness: harness)
+    let harness = makeUIState(navigation: navigation)
+    let commander = makeCommandCentre(for: harness)
 
     #expect(commander.availability(SelectNextRecordIndexCommand()) == .disabled)
     #expect(commander.availability(SelectPreviousRecordIndexCommand()) == .disabled)
@@ -55,7 +55,7 @@ import Testing
   @Test
   func navigationCommandsMoveBetweenIndexesAndRecords() async throws {
     let harness = try makeHarness()
-    let commander = BookishCommandCentre(harness: harness)
+    let commander = makeCommandCentre(for: harness)
     await harness.load()
     try await harness.navigation.select(recordIndexID: BookishRecordID("datastore-index-layouts"))
 
@@ -68,8 +68,7 @@ import Testing
     #expect(harness.navigation.selectedRecordIndexName == "Layouts")
 
     let navigation = BookishNavigationService()
-    let navigationCommander = BookishCommandCentre(
-      harness: BookishHarness(navigation: navigation))
+    let navigationCommander = makeCommandCentre(for: makeUIState(navigation: navigation))
     let selectedRecordResult = RecordQueryResult(query: RecordQuery())
     selectedRecordResult.update(records: [
       BookishRecord(id: BookishRecordID("book-1"), kind: "book"),
@@ -103,7 +102,7 @@ import Testing
   @Test
   func navigateToRecordCommandPushesTargetOutsideCurrentIndex() async throws {
     let navigation = BookishNavigationService()
-    let commander = BookishCommandCentre(harness: BookishHarness(navigation: navigation))
+    let commander = makeCommandCentre(for: makeUIState(navigation: navigation))
     let selectedRecordResult = RecordQueryResult(query: RecordQuery())
     selectedRecordResult.update(records: [
       BookishRecord(id: BookishRecordID("author-1"), kind: "author")
@@ -119,7 +118,7 @@ import Testing
   @Test
   func navigateToRecordCommandCanSelectTargetInCurrentIndex() async throws {
     let navigation = BookishNavigationService()
-    let commander = BookishCommandCentre(harness: BookishHarness(navigation: navigation))
+    let commander = makeCommandCentre(for: makeUIState(navigation: navigation))
     let selectedRecordResult = RecordQueryResult(query: RecordQuery())
     selectedRecordResult.update(records: [
       BookishRecord(id: BookishRecordID("author-1"), kind: "author"),

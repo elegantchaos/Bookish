@@ -12,7 +12,7 @@ import SwiftUI
   /// Debug-only mutation history browser kept outside the main record UI.
   public struct BookishMutationDebugView: View {
     /// The datastore coordinator used to load mutations.
-    private let harness: BookishHarness
+    private let harness: BookishUIStateService
 
     /// The command boundary used to report mutation-loading failures.
     @Environment(\.bookishCommandCentre) private var commander
@@ -27,7 +27,7 @@ import SwiftUI
     @State private var selectedMutationID: MutationID?
 
     /// Creates the mutation debug window content.
-    public init(harness: BookishHarness) {
+    public init(harness: BookishUIStateService) {
       self.harness = harness
     }
 

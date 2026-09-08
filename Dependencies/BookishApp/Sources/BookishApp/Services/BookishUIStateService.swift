@@ -10,10 +10,10 @@ import BookishRecord
 import Foundation
 import Observation
 
-/// Coordinates datastore loading, seeding, selection, and actions for the UI.
+/// Owns global Bookish UI state and coordinates UI-triggered work across services.
 @MainActor
 @Observable
-public final class BookishHarness {
+public final class BookishUIStateService {
   /// The navigation and routing service used by the datastore browser.
   @ObservationIgnored public let navigation: BookishNavigationService
 
@@ -56,20 +56,21 @@ public final class BookishHarness {
   /// The model-side importer used by the import sheets and sample commands.
   @ObservationIgnored private let importingService: BookishImportingService
 
-  /// Creates an empty harness ready to load the datastore.
+  /// Creates UI state backed by the supplied Bookish services.
   public init(
-    directoryURL: URL? = nil,
-    navigation: BookishNavigationService = BookishNavigationService(),
-    statusService: BookishStatusService = BookishStatusService(),
+    navigation: BookishNavigationService,
+    presentation: BookishPresentationService,
+    statusService: BookishStatusService,
+    importingService: BookishImportingService,
+    exportingService: BookishExportingService,
     defaultShowsDebugIndexes: Bool = false
   ) {
     self.navigation = navigation
     self.statusService = statusService
     storageService = navigation.storageService
-    presentation = BookishPresentationService(storageService: navigation.storageService)
-    exportingService = BookishExportingService(storageService: navigation.storageService)
-    importingService = BookishImportingService(storageService: navigation.storageService)
-    storageService.configure(directoryURL: directoryURL)
+    self.presentation = presentation
+    self.exportingService = exportingService
+    self.importingService = importingService
     self.defaultShowsDebugIndexes = defaultShowsDebugIndexes
     self.showsDebugIndexes = defaultShowsDebugIndexes
     navigation.setRecordIndexSelectionHandler { [weak presentation, weak navigation] in
@@ -304,13 +305,13 @@ public final class BookishHarness {
 
 }
 
-extension BookishHarness:
+extension BookishUIStateService:
   BookishImportPresentation,
   BookishDatastoreMaintenance
 {
 }
 
-extension BookishHarness: BookishRecordActionState {
+extension BookishUIStateService: BookishRecordActionState {
   /// The record selected for an action.
   var selectedRecordID: BookishRecordID? { navigation.selectedRecordID }
 

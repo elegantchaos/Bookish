@@ -17,16 +17,12 @@ struct BookishApplication: App {
     }
     .restorationBehavior(.automatic)
     .commands {
-      BookishCommands(
-        harness: engine.harness,
-        navigation: engine.navigation,
-        commander: engine.commander
-      )
+      BookishCommands(commander: engine.commander)
     }
 
     #if DEBUG
       WindowGroup("Mutation Debug", id: BookishWindow.mutationDebug.rawValue) {
-        BookishMutationDebugView(harness: engine.harness)
+        BookishMutationDebugView(harness: engine.uiState)
           .environment(\.bookishCommandCentre, engine.commander)
       }
     #endif

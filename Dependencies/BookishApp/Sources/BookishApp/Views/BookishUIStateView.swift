@@ -7,10 +7,10 @@ import Settings
 import SwiftUI
 import UniformTypeIdentifiers
 
-/// The root view for the datastore app.
-public struct BookishHarnessView: View {
-  /// The datastore coordinator that owns the browser state.
-  @Bindable private var harness: BookishHarness
+/// The root view for the Bookish app.
+public struct BookishUIStateView: View {
+  /// The global UI state that owns browser presentation and sheet state.
+  @Bindable private var uiState: BookishUIStateService
 
   /// The shared navigation route for the browser columns.
   @Environment(BookishNavigationService.self) private var navigation
@@ -24,12 +24,12 @@ public struct BookishHarnessView: View {
   /// Whether the view initiates the initial datastore load.
   private let loadsOnAppear: Bool
 
-  /// Creates the datastore harness view.
+  /// Creates the root view over the supplied global UI state.
   public init(
-    harness: BookishHarness = BookishHarness(),
+    uiState: BookishUIStateService,
     loadsOnAppear: Bool = true
   ) {
-    self.harness = harness
+    self.uiState = uiState
     self.loadsOnAppear = loadsOnAppear
   }
 
@@ -39,35 +39,35 @@ public struct BookishHarnessView: View {
       NavigationSplitView {
         BrowserIndexListView(navigation: navigation)
       } content: {
-        RecordIndexView(harness: harness, navigation: navigation)
+        RecordIndexView(harness: uiState, navigation: navigation)
       } detail: {
-        RecordDetailView(harness: harness, navigation: navigation)
+        RecordDetailView(harness: uiState, navigation: navigation)
       }
       .toolbar {
-        BookishToolbar(harness: harness)
+        BookishToolbar(harness: uiState)
       }
 
-      BookishStatusBar(statusService: harness.statusService, navigation: navigation)
+      BookishStatusBar(statusService: uiState.statusService, navigation: navigation)
     }
     .fileImporter(
-      isPresented: $harness.isImportingInterchange,
+      isPresented: $uiState.isImportingInterchange,
       allowedContentTypes: [.json],
       onCompletion: handleInterchangeImport
     )
     .fileImporter(
-      isPresented: $harness.isImportingDeliciousLibrary,
+      isPresented: $uiState.isImportingDeliciousLibrary,
       allowedContentTypes: [.xml],
       onCompletion: handleDeliciousLibraryImport
     )
     .fileExporter(
-      isPresented: $harness.isExportingInterchange,
-      document: harness.interchangeExportDocument,
+      isPresented: $uiState.isExportingInterchange,
+      document: uiState.interchangeExportDocument,
       contentType: .json,
       defaultFilename: "Bookish Interchange",
       onCompletion: handleInterchangeExport
     )
     .task(id: isDeveloperMode) {
-      await harness.setShowsDebugIndexes(isDeveloperMode)
+      await uiState.setShowsDebugIndexes(isDeveloperMode)
       await loadIfNeeded()
     }
   }
@@ -78,7 +78,7 @@ public struct BookishHarnessView: View {
       return
     }
 
-    await harness.load()
+    await uiState.load()
   }
 
   /// Imports a selected interchange file or reports a picker failure.
@@ -86,7 +86,7 @@ public struct BookishHarnessView: View {
     switch result {
     case .success(let url):
       Task {
-        await harness.importInterchange(from: url)
+        await uiState.importInterchange(from: url)
       }
 
     case .failure(let error):
@@ -99,7 +99,7 @@ public struct BookishHarnessView: View {
     switch result {
     case .success(let url):
       Task {
-        await harness.importDeliciousLibrary(from: url)
+        await uiState.importDeliciousLibrary(from: url)
       }
 
     case .failure(let error):
@@ -111,7 +111,7 @@ public struct BookishHarnessView: View {
   private func handleInterchangeExport(_ result: Result<URL, Error>) {
     switch result {
     case .success:
-      harness.didExportInterchange()
+      uiState.didExportInterchange()
 
     case .failure(let error):
       commander?.statusService.report(error: error)
@@ -120,9 +120,8 @@ public struct BookishHarnessView: View {
 }
 
 #Preview {
-  let navigation = BookishNavigationService()
-  let harness = BookishHarness(navigation: navigation)
-  BookishHarnessView(harness: harness)
-    .environment(navigation)
-    .environment(\.bookishCommandCentre, BookishCommandCentre(harness: harness))
+  let engine = BookishEngine()
+  BookishUIStateView(uiState: engine.uiState)
+    .environment(engine.navigation)
+    .environment(\.bookishCommandCentre, engine.commander)
 }

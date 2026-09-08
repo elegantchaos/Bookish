@@ -12,7 +12,7 @@ struct BookishLayoutPickerItem: View {
   let layoutID: BookishRecordID
 
   /// The datastore coordinator used to resolve the layout.
-  let harness: BookishHarness
+  let harness: BookishUIStateService
 
   /// The command boundary used to report layout-resolution failures.
   @Environment(\.bookishCommandCentre) private var commander

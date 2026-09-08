@@ -16,7 +16,7 @@ struct RecordLayoutSectionView: View {
   let host: BookishRecord
 
   /// The datastore coordinator used to resolve cascading presentations.
-  let harness: BookishHarness
+  let harness: BookishUIStateService
 
   /// The command boundary used to report presentation-resolution failures.
   @Environment(\.bookishCommandCentre) private var commander

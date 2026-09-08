@@ -15,7 +15,7 @@ struct RecordLayoutItemView: View {
   let host: BookishRecord
 
   /// The datastore coordinator used to resolve the linked configuration.
-  let harness: BookishHarness
+  let harness: BookishUIStateService
 
   /// The command boundary used to report configuration failures.
   @Environment(\.bookishCommandCentre) private var commander
@@ -41,7 +41,7 @@ struct RecordLayoutItemView: View {
   init(
     linkedLayoutID: BookishRecordID,
     host: BookishRecord,
-    harness: BookishHarness,
+    harness: BookishUIStateService,
     navigation: BookishNavigationService
   ) {
     self.init(
@@ -57,7 +57,7 @@ struct RecordLayoutItemView: View {
   init(
     linkedLayoutID: BookishRecordID,
     host: BookishRecord,
-    harness: BookishHarness,
+    harness: BookishUIStateService,
     navigation: BookishNavigationService,
     layoutPath: Set<BookishRecordID>
   ) {

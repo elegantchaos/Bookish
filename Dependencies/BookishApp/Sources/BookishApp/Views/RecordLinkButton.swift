@@ -13,7 +13,7 @@ struct RecordLinkButton: View {
   let recordID: BookishRecordID
 
   /// The datastore coordinator used to resolve the linked record.
-  let harness: BookishHarness
+  let harness: BookishUIStateService
 
   /// The application-owned command boundary used to push the linked record.
   @Environment(\.bookishCommandCentre) private var commander

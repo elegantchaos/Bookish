@@ -11,7 +11,7 @@ import SwiftUI
 /// Provides the browser actions and layout picker in the main toolbar.
 struct BookishToolbar: ToolbarContent {
   /// The datastore coordinator backing toolbar actions and selection.
-  let harness: BookishHarness
+  let harness: BookishUIStateService
 
   /// The application-owned command boundary for toolbar actions.
   @Environment(\.bookishCommandCentre) private var commander

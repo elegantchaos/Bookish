@@ -27,7 +27,7 @@ public protocol BookishStorage {
 ///
 /// Services that need datastore behaviour depend on this service rather than retaining
 /// a `BookishDatastore` directly. Its API can be narrowed further as responsibilities
-/// move out of `BookishHarness`.
+/// move out of `BookishUIStateService`.
 @MainActor
 @Observable
 public final class BookishStorageService {

@@ -10,7 +10,7 @@ import SwiftUI
 /// Displays the selected record and linked-record navigation stack.
 struct RecordDetailView: View {
   /// The datastore coordinator used by record detail views.
-  let harness: BookishHarness
+  let harness: BookishUIStateService
 
   /// The route containing the selected record and detail path.
   let navigation: BookishNavigationService

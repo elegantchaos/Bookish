@@ -94,7 +94,7 @@ import Testing
 
   @Test func rebuildCommandRebuildsRecordStoreFromMutationHistory() async throws {
     let harness = try makeHarness()
-    let commander = BookishCommandCentre(harness: harness)
+    let commander = makeCommandCentre(for: harness)
     await harness.load()
     let json = """
       { "records": [{ "ℹ": "test-reset-book", "©": "book", "name": "Reset Book" }] }
@@ -130,7 +130,7 @@ import Testing
 
   @Test func resetCommandResetsDatastore() async throws {
     let harness = try makeHarness()
-    let commander = BookishCommandCentre(harness: harness)
+    let commander = makeCommandCentre(for: harness)
     await harness.load()
     let json = """
       { "records": [{ "ℹ": "test-command-reset-book", "©": "book", "name": "Command Reset Book" }] }

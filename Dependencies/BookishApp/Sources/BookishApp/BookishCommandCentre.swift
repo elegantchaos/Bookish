@@ -28,18 +28,21 @@ public final class BookishCommandCentre: CommandCentre {
   /// The browser navigation capability exposed to commands.
   @ObservationIgnored public let navigationService: any BookishNavigation
 
-  /// Creates a command centre over the supplied Bookish services.
-  public init(harness: BookishHarness) {
-    statusService = harness.statusService
-    importPresentation = harness
-    datastoreMaintenanceService = harness
-    storageService = harness.storageService
-    recordActionService = BookishRecordActionsService(
-      storage: harness.storageService,
-      state: harness,
-      statusService: harness.statusService
-    )
-    navigationService = harness.navigation
+  /// Creates a command centre that vends the supplied Bookish service capabilities.
+  public init(
+    statusService: any BookishStatus,
+    importPresentation: any BookishImportPresentation,
+    datastoreMaintenanceService: any BookishDatastoreMaintenance,
+    storageService: any BookishStorage,
+    recordActionService: any BookishRecordActions,
+    navigationService: any BookishNavigation
+  ) {
+    self.statusService = statusService
+    self.importPresentation = importPresentation
+    self.datastoreMaintenanceService = datastoreMaintenanceService
+    self.storageService = storageService
+    self.recordActionService = recordActionService
+    self.navigationService = navigationService
   }
 
   /// Presents command failures through Bookish's user-facing status surface.

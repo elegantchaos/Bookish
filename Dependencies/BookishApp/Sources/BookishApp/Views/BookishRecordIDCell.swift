@@ -13,7 +13,7 @@ struct BookishRecordIDCell: View {
   let recordID: BookishRecordID
 
   /// The datastore coordinator used to resolve the record.
-  let harness: BookishHarness
+  let harness: BookishUIStateService
 
   /// The command boundary used to report record-resolution failures.
   @Environment(\.bookishCommandCentre) private var commander
