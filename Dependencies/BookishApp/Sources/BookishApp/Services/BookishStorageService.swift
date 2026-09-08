@@ -3,12 +3,11 @@
 //  Copyright © 2026 Elegant Chaos Limited. All rights reserved.
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
-import BookishDatastore
 import BookishCoding
+import BookishDatastore
 import BookishRecord
 import Foundation
 import Observation
-
 
 /// Performs datastore lifecycle and storage operations requested by commands.
 @MainActor
@@ -21,9 +20,8 @@ public protocol BookishStorage {
 
   /// Resets the datastore and opens an empty replacement store.
   func reset() async throws
-  
-}
 
+}
 
 /// Owns Bookish's loaded datastore and vends operations over its materialised records.
 ///
@@ -64,44 +62,11 @@ public final class BookishStorageService {
     do {
       datastore = try await BookishDatastore(directoryURL: directory)
     } catch {
-      datastore = try await BookishDatastore.rebuildRecordProjection(directoryURL: directory)
+      datastore = try await BookishDatastore.rebuildRecordProjection(
+        directoryURL: directory
+      )
     }
     try await seed()
-  }
-
-  /// Rebuilds the materialised record projection and reapplies configuration seeds.
-  public func rebuildRecordProjection() async throws {
-    let directory = try localDatastoreDirectory()
-    datastore = nil
-    datastore = try await BookishDatastore.rebuildRecordProjection(directoryURL: directory)
-    try await seed()
-  }
-
-  /// Resets the datastore, opens an empty replacement, and reapplies configuration seeds.
-  public func reset() async throws {
-    let directory = try localDatastoreDirectory()
-    try BookishDatastore.reset(directoryURL: directory)
-    datastore = try await BookishDatastore(directoryURL: directory)
-    _ = try await importConfigurationSeeds()
-    try await writeSeedMarker()
-  }
-
-  /// Returns the local directory used for datastore files.
-  public func localDatastoreDirectory() throws -> URL {
-    if let directoryURL {
-      try FileManager.default.createDirectory(at: directoryURL, withIntermediateDirectories: true)
-      return directoryURL
-    }
-
-    let applicationSupport = try FileManager.default.url(
-      for: .applicationSupportDirectory,
-      in: .userDomainMask,
-      appropriateFor: nil,
-      create: true
-    )
-    let directory = applicationSupport.appending(path: "BookishDatastore", directoryHint: .isDirectory)
-    try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
-    return directory
   }
 
   /// Applies imported records as durable local mutations.
@@ -113,7 +78,9 @@ public final class BookishStorageService {
   }
 
   /// Returns the materialised result for a record query.
-  func recordQueryResult(matching query: RecordQuery) async throws -> RecordQueryResult {
+  func recordQueryResult(matching query: RecordQuery) async throws
+    -> RecordQueryResult
+  {
     guard let datastore else {
       throw BookishStorageError.notLoaded
     }
@@ -151,7 +118,8 @@ public final class BookishStorageService {
   }
 
   /// Returns presentation records ordered from layout-specific to generic metadata.
-  func presentations(for kind: String, layout: BookishRecord? = nil) async throws
+  func presentations(for kind: String, layout: BookishRecord? = nil)
+    async throws
     -> [BookishRecord]
   {
     var presentations: [BookishRecord] = []
@@ -169,7 +137,8 @@ public final class BookishStorageService {
       presentations.append(presentation)
     }
 
-    if presentations.contains(where: { $0.id == fallbackPresentationID }) == false,
+    if presentations.contains(where: { $0.id == fallbackPresentationID })
+      == false,
       let presentation = try await record(id: fallbackPresentationID)
     {
       presentations.append(presentation)
@@ -199,7 +168,9 @@ public final class BookishStorageService {
   /// Applies configuration seeds to the loaded datastore.
   private func seed() async throws {
     guard let datastore else { throw BookishStorageError.notLoaded }
-    let markers = try await datastore.recordService.recordIDs(matching: .kind(BookishRecordKind.seedMarker))
+    let markers = try await datastore.recordService.recordIDs(
+      matching: .kind(BookishRecordKind.seedMarker)
+    )
     if markers.isEmpty {
       let seed = try await importConfigurationSeeds()
       try await pruneStaleSeedConfigurationRecords(seed: seed)
@@ -212,7 +183,8 @@ public final class BookishStorageService {
   }
 
   /// Imports every configuration resource used by the browser and presentation layer.
-  private func importConfigurationSeeds() async throws -> BookishInterchangeFile {
+  private func importConfigurationSeeds() async throws -> BookishInterchangeFile
+  {
     try await importSeedResources([
       "IndexSeed",
       "LayoutSeed",
@@ -223,7 +195,9 @@ public final class BookishStorageService {
   }
 
   /// Imports multiple bundled interchange resources as one aggregate interchange file.
-  private func importSeedResources(_ names: [String]) async throws -> BookishInterchangeFile {
+  private func importSeedResources(_ names: [String]) async throws
+    -> BookishInterchangeFile
+  {
     var records: [BookishRecord] = []
 
     for name in names {
@@ -235,18 +209,29 @@ public final class BookishStorageService {
   }
 
   /// Decodes and applies one bundled interchange resource.
-  private func importSeedResource(_ name: String) async throws -> BookishInterchangeFile {
+  private func importSeedResource(_ name: String) async throws
+    -> BookishInterchangeFile
+  {
     guard let datastore else { throw BookishStorageError.notLoaded }
-    guard let url = Bundle.module.url(forResource: "\(name).bookish", withExtension: "json") else {
+    guard
+      let url = Bundle.module.url(
+        forResource: "\(name).bookish",
+        withExtension: "json"
+      )
+    else {
       throw BookishStorageError.missingSeedResource(name)
     }
     let file = try BookishInterchangeCodec().decode(Data(contentsOf: url))
-    for record in file.records { try await datastore.recordStore.upsert(record) }
+    for record in file.records {
+      try await datastore.recordStore.upsert(record)
+    }
     return file
   }
 
   /// Removes bundled configuration records that are absent from the current seed resources.
-  private func pruneStaleSeedConfigurationRecords(seed: BookishInterchangeFile) async throws {
+  private func pruneStaleSeedConfigurationRecords(seed: BookishInterchangeFile)
+    async throws
+  {
     guard let datastore else { throw BookishStorageError.notLoaded }
     let currentSeedConfigurationIDs = Set(
       seed.records
@@ -266,7 +251,8 @@ public final class BookishStorageService {
   /// Returns whether a record kind belongs to the bundled configuration projection.
   private func isSeedConfigurationKind(_ kind: String) -> Bool {
     kind == BookishRecordKind.index || kind == BookishRecordKind.layout
-      || kind == BookishRecordKind.presentation || kind == BookishRecordKind.metadata
+      || kind == BookishRecordKind.presentation
+      || kind == BookishRecordKind.metadata
       || kind == BookishRecordKind.querySection
       || kind == "recordIndex"
   }
@@ -284,15 +270,64 @@ public final class BookishStorageService {
   /// Writes the marker that distinguishes initial seed import from later opens.
   private func writeSeedMarker() async throws {
     guard let datastore else { throw BookishStorageError.notLoaded }
-    try await datastore.recordStore.upsert(BookishRecord(
-      id: seedMarkerID,
-      kind: BookishRecordKind.seedMarker,
-      properties: [BookishRecordKey.name: .string("Seed Marker")]
-    ))
+    try await datastore.recordStore.upsert(
+      BookishRecord(
+        id: seedMarkerID,
+        kind: BookishRecordKind.seedMarker,
+        properties: [BookishRecordKey.name: .string("Seed Marker")]
+      )
+    )
   }
 }
 
 extension BookishStorageService: BookishStorage {
+
+  /// Rebuilds the materialised record projection and reapplies configuration seeds.
+  public func rebuildRecordProjection() async throws {
+    let directory = try localDatastoreDirectory()
+    datastore = nil
+    datastore = try await BookishDatastore.rebuildRecordProjection(
+      directoryURL: directory
+    )
+    try await seed()
+  }
+
+  /// Returns the local directory used for datastore files.
+  public func localDatastoreDirectory() throws -> URL {
+    if let directoryURL {
+      try FileManager.default.createDirectory(
+        at: directoryURL,
+        withIntermediateDirectories: true
+      )
+      return directoryURL
+    }
+
+    let applicationSupport = try FileManager.default.url(
+      for: .applicationSupportDirectory,
+      in: .userDomainMask,
+      appropriateFor: nil,
+      create: true
+    )
+    let directory = applicationSupport.appending(
+      path: "BookishDatastore",
+      directoryHint: .isDirectory
+    )
+    try FileManager.default.createDirectory(
+      at: directory,
+      withIntermediateDirectories: true
+    )
+    return directory
+  }
+
+  /// Resets the datastore, opens an empty replacement, and reapplies configuration seeds.
+  public func reset() async throws {
+    let directory = try localDatastoreDirectory()
+    try BookishDatastore.reset(directoryURL: directory)
+    datastore = try await BookishDatastore(directoryURL: directory)
+    _ = try await importConfigurationSeeds()
+    try await writeSeedMarker()
+  }
+
 }
 
 /// Errors reported when a datastore operation requires an unavailable store.
@@ -306,7 +341,8 @@ enum BookishStorageError: LocalizedError {
   var errorDescription: String? {
     switch self {
     case .notLoaded: "The datastore has not been loaded."
-    case .missingSeedResource(let name): "The bundled \(name) seed resource is missing."
+    case .missingSeedResource(let name):
+      "The bundled \(name) seed resource is missing."
     }
   }
 }

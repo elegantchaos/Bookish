@@ -29,6 +29,10 @@ public final class BookishImportingService {
     self.storageService = storageService
   }
 
+
+}
+
+extension BookishImportingService: BookishImporting {
   /// Imports events from an importer, reporting each event after its records have been persisted.
   public func importRecords<Importer: BookishImporter>(
     from input: Importer.Input,
@@ -55,9 +59,6 @@ public final class BookishImportingService {
 
     throw BookishImportingError.missingCompletion
   }
-}
-
-extension BookishImportingService: BookishImporting {
 }
 
 /// Errors reported when an importer finishes without a completion event.
