@@ -29,6 +29,22 @@ import Testing
     #expect(recordWasPersistedWhenReported)
   }
 
+  @Test func importerReadsInterchangeFiles() async throws {
+    let storage = BookishStorageService(directoryURL: try temporaryDirectory())
+    try await storage.load()
+    let importer = BookishImportingService(storageService: storage)
+    let importedID = BookishRecordID("test-import-file-book")
+    let fileURL = try temporaryDirectory().appending(path: "import.bookish.json")
+    try Data("""
+      { "records": [{ "ℹ": "test-import-file-book", "©": "book", "name": "Imported File" }] }
+      """.utf8).write(to: fileURL)
+
+    let summary = try await importer.importInterchange(from: fileURL) { _ in }
+
+    #expect(summary.recordCount == 1)
+    #expect(try await storage.record(id: importedID)?.string("name") == "Imported File")
+  }
+
   @Test func harnessImportsInterchangeData() async throws {
     let harness = try makeHarness()
     await harness.load()

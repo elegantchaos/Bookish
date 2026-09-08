@@ -123,7 +123,9 @@ public final class BookishHarness {
 
   /// Imports records from a Bookish interchange JSON file.
   public func importInterchange(from url: URL) async {
-    await importFile(from: url, using: BookishInterchangeImporter())
+    await coordinateImport(fallbackDisplayName: BookishInterchangeImporter().descriptor.displayName) {
+      try await self.importingService.importInterchange(from: url, reporting: $0)
+    }
   }
 
   /// Requests an interchange file import.
@@ -177,17 +179,31 @@ public final class BookishHarness {
 
   /// Imports records from Bookish interchange JSON data.
   public func importInterchange(data: Data) async {
-    await importRecords(from: data, using: BookishInterchangeImporter())
+    await coordinateImport(fallbackDisplayName: BookishInterchangeImporter().descriptor.displayName) {
+      try await self.importingService.importRecords(
+        from: data,
+        using: BookishInterchangeImporter(),
+        reporting: $0
+      )
+    }
   }
 
   /// Imports records from a Delicious Library XML property-list file.
   public func importDeliciousLibrary(from url: URL) async {
-    await importFile(from: url, using: DeliciousLibraryImporter())
+    await coordinateImport(fallbackDisplayName: DeliciousLibraryImporter().descriptor.displayName) {
+      try await self.importingService.importDeliciousLibrary(from: url, reporting: $0)
+    }
   }
 
   /// Imports records from Delicious Library XML property-list data.
   public func importDeliciousLibrary(data: Data) async {
-    await importRecords(from: data, using: DeliciousLibraryImporter())
+    await coordinateImport(fallbackDisplayName: DeliciousLibraryImporter().descriptor.displayName) {
+      try await self.importingService.importRecords(
+        from: data,
+        using: DeliciousLibraryImporter(),
+        reporting: $0
+      )
+    }
   }
 
   /// Imports one of the Delicious Library sample files bundled with Bookish.
@@ -200,18 +216,18 @@ public final class BookishHarness {
     }
   }
 
-  /// Coordinates UI state while the import service persists records from an importer.
-  public func importRecords<Importer: BookishImporter>(
-    from input: Importer.Input,
-    using importer: Importer
+  /// Coordinates UI state while an import operation persists records.
+  private func coordinateImport(
+    fallbackDisplayName: String,
+    perform import: (@escaping BookishImportEventReporter) async throws -> BookishImportSummary
   ) async {
     var firstRecord: BookishRecord?
-    var displayName = importer.descriptor.displayName
+    var displayName = fallbackDisplayName
     let clock = ContinuousClock()
     var lastProjectionRefresh = clock.now
 
     do {
-      let summary = try await importingService.importRecords(from: input, using: importer) { [self] event in
+      let summary = try await `import` { [self] event in
         switch event {
         case .started(let start):
           displayName = start.importer.displayName
@@ -334,26 +350,6 @@ public final class BookishHarness {
   /// Reports an arbitrary user-facing error.
   public func report(error: Error) {
     status = error.localizedDescription
-  }
-
-  /// Reads a security-scoped file and imports its data with the supplied importer.
-  private func importFile<Importer: BookishImporter>(
-    from url: URL,
-    using importer: Importer
-  ) async where Importer.Input == Data {
-    do {
-      let canAccess = url.startAccessingSecurityScopedResource()
-      defer {
-        if canAccess {
-          url.stopAccessingSecurityScopedResource()
-        }
-      }
-
-      let data = try Data(contentsOf: url)
-      await importRecords(from: data, using: importer)
-    } catch {
-      status = error.localizedDescription
-    }
   }
 
   /// Refreshes browser indexes, selected records, layouts, and compatible selection state.

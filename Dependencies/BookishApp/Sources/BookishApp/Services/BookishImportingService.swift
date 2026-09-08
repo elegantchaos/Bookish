@@ -7,14 +7,29 @@ import BookishImporter
 import BookishRecord
 import Foundation
 
+/// Receives importer lifecycle events after their model changes have been applied.
+public typealias BookishImportEventReporter = @MainActor (BookishImportEvent) async throws -> Void
+
 /// Imports normalised records into Bookish storage.
 @MainActor
 public protocol BookishImporting {
+  /// Imports records from a Bookish interchange file.
+  func importInterchange(
+    from url: URL,
+    reporting event: @escaping BookishImportEventReporter
+  ) async throws -> BookishImportSummary
+
+  /// Imports records from a Delicious Library XML file.
+  func importDeliciousLibrary(
+    from url: URL,
+    reporting event: @escaping BookishImportEventReporter
+  ) async throws -> BookishImportSummary
+
   /// Imports events from an importer, reporting each event after its records have been persisted.
   func importRecords<Importer: BookishImporter>(
     from input: Importer.Input,
     using importer: Importer,
-    reporting event: @escaping @MainActor (BookishImportEvent) async throws -> Void
+    reporting event: @escaping BookishImportEventReporter
   ) async throws -> BookishImportSummary
 }
 
@@ -33,6 +48,30 @@ public final class BookishImportingService {
 }
 
 extension BookishImportingService: BookishImporting {
+  /// Imports records from a Bookish interchange file.
+  public func importInterchange(
+    from url: URL,
+    reporting event: @escaping BookishImportEventReporter
+  ) async throws -> BookishImportSummary {
+    try await importFile(
+      from: url,
+      using: BookishInterchangeImporter(),
+      reporting: event
+    )
+  }
+
+  /// Imports records from a Delicious Library XML file.
+  public func importDeliciousLibrary(
+    from url: URL,
+    reporting event: @escaping BookishImportEventReporter
+  ) async throws -> BookishImportSummary {
+    try await importFile(
+      from: url,
+      using: DeliciousLibraryImporter(),
+      reporting: event
+    )
+  }
+
   /// Imports events from an importer, reporting each event after its records have been persisted.
   public func importRecords<Importer: BookishImporter>(
     from input: Importer.Input,
@@ -58,6 +97,28 @@ extension BookishImportingService: BookishImporting {
     }
 
     throw BookishImportingError.missingCompletion
+  }
+}
+
+private extension BookishImportingService {
+  /// Reads a security-scoped file before importing its data with the supplied importer.
+  func importFile<Importer: BookishImporter>(
+    from url: URL,
+    using importer: Importer,
+    reporting event: @escaping BookishImportEventReporter
+  ) async throws -> BookishImportSummary where Importer.Input == Data {
+    let canAccess = url.startAccessingSecurityScopedResource()
+    defer {
+      if canAccess {
+        url.stopAccessingSecurityScopedResource()
+      }
+    }
+
+    return try await importRecords(
+      from: Data(contentsOf: url),
+      using: importer,
+      reporting: event
+    )
   }
 }
 
