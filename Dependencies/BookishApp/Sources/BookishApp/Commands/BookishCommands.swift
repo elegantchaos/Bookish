@@ -19,7 +19,7 @@ import SwiftUI
 
 /// macOS menu commands for the datastore.
 public struct BookishCommands: Commands {
-  private let commander: BookishEngine
+  private let engine: BookishEngine
 
   /// Whether advanced commands are available.
   @AppStorage(.isAdvancedMode) private var isAdvancedMode
@@ -32,37 +32,37 @@ public struct BookishCommands: Commands {
   #endif
 
   /// Creates commands bound to the supplied command centre.
-  public init(commander: BookishEngine) {
-    self.commander = commander
+  public init(engine: BookishEngine) {
+    self.engine = engine
   }
 
   public var body: some Commands {
     CommandGroup(after: .newItem) {
-      commander.button(ImportInterchangeCommand())
+      engine.button(ImportInterchangeCommand())
       Menu("Import Delicious Library") {
         if isAdvancedMode {
-          commander.button(ImportDeliciousLibrarySampleCommand(sample: .small))
-          commander.button(ImportDeliciousLibrarySampleCommand(sample: .full))
+          engine.button(ImportDeliciousLibrarySampleCommand(sample: .small))
+          engine.button(ImportDeliciousLibrarySampleCommand(sample: .full))
 
           Divider()
         }
 
-        commander.button(ImportOtherDeliciousLibraryCommand())
+        engine.button(ImportOtherDeliciousLibraryCommand())
       }
 
       Divider()
 
-      commander.button(ExportInterchangeCommand())
+      engine.button(ExportInterchangeCommand())
 
       if isAdvancedMode {
-        commander.button(RevealDatastoreFolderCommand())
+        engine.button(RevealDatastoreFolderCommand())
       }
 
       if isDeveloperMode {
         Divider()
 
-        commander.button(RebuildRecordStoreCommand())
-        commander.button(ResetDatastoreCommand(), role: .destructive)
+        engine.button(RebuildRecordStoreCommand())
+        engine.button(ResetDatastoreCommand(), role: .destructive)
       }
     }
 
@@ -73,27 +73,27 @@ public struct BookishCommands: Commands {
 
       Divider()
 
-      commander.button(MarkReadingCommand())
-      commander.button(MarkFinishedCommand())
+      engine.button(MarkReadingCommand())
+      engine.button(MarkFinishedCommand())
 
       if isDeveloperMode {
         Divider()
 
-        commander.button(SimulateRemoteMutationCommand())
+        engine.button(SimulateRemoteMutationCommand())
       }
 
       Divider()
 
-      commander.button(SelectPreviousRecordIndexCommand())
-      commander.button(SelectNextRecordIndexCommand())
-      commander.button(SelectPreviousRecordCommand())
-      commander.button(SelectNextRecordCommand())
+      engine.button(SelectPreviousRecordIndexCommand())
+      engine.button(SelectNextRecordIndexCommand())
+      engine.button(SelectPreviousRecordCommand())
+      engine.button(SelectNextRecordCommand())
 
       #if DEBUG
         if isDeveloperMode {
           Divider()
 
-          commander.button(ThrowTestErrorCommand())
+          engine.button(ThrowTestErrorCommand())
 
           Button("Show Mutation Debug Window") {
             openWindow(id: BookishWindow.mutationDebug.rawValue)

@@ -17,7 +17,7 @@ struct BookishApplication: App {
     }
     .restorationBehavior(.automatic)
     .commands {
-      BookishCommands(commander: engine)
+      BookishCommands(engine: engine)
     }
 
     #if DEBUG
