@@ -117,7 +117,7 @@ public protocol BookishNavigationProvider: CommandCentre {
   var navigationService: any BookishNavigation { get }
 }
 
-extension BookishCommandCentre:
+extension BookishEngine:
   BookishStatusProvider,
   BookishImportPresentationProvider,
   BookishDatastoreMaintenanceProvider,

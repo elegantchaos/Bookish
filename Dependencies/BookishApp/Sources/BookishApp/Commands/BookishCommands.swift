@@ -19,7 +19,7 @@ import SwiftUI
 
 /// macOS menu commands for the datastore.
 public struct BookishCommands: Commands {
-  private let commander: BookishCommandCentre
+  private let commander: BookishEngine
 
   /// Whether advanced commands are available.
   @AppStorage(.isAdvancedMode) private var isAdvancedMode
@@ -32,7 +32,7 @@ public struct BookishCommands: Commands {
   #endif
 
   /// Creates commands bound to the supplied command centre.
-  public init(commander: BookishCommandCentre) {
+  public init(commander: BookishEngine) {
     self.commander = commander
   }
 

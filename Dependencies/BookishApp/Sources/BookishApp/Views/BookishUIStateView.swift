@@ -106,5 +106,5 @@ public struct BookishUIStateView: View {
   let engine = BookishEngine()
   BookishUIStateView(uiState: engine.uiState)
     .environment(engine.navigation)
-    .environment(\.bookishCommandCentre, engine.commander)
+    .environment(\.bookishCommandCentre, engine)
 }

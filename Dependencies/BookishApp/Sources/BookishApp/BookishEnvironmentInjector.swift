@@ -11,7 +11,7 @@ struct BookishEnvironmentInjector: ViewModifier {
   let navigation: BookishNavigationService
 
   /// Command boundary exposed to datastore SwiftUI content.
-  let commander: BookishCommandCentre
+  let commander: BookishEngine
 
   /// Adds the navigation service to the SwiftUI environment.
   func body(content: Content) -> some View {

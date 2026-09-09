@@ -4,6 +4,7 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 import Application
+import Commands
 import Observation
 import SwiftUI
 
@@ -23,26 +24,26 @@ public final class BookishEngine {
   /// Global UI state used by the Bookish UI and commands.
   @ObservationIgnored public let uiState: BookishUIStateService
 
-  /// Application-owned command boundary for Bookish services.
-  @ObservationIgnored public let commander: BookishCommandCentre
-
   /// Navigation and routing service for the datastore record browser.
   @ObservationIgnored public let navigation: BookishNavigationService
 
   /// Storage service that owns the loaded datastore.
-  @ObservationIgnored public let storageService: BookishStorageService
+  @ObservationIgnored public let storage: BookishStorageService
 
   /// Presentation service that owns layout and display configuration state.
   @ObservationIgnored public let presentationService: BookishPresentationService
 
   /// Status service that owns user-visible progress, messages, and errors.
-  @ObservationIgnored public let statusService: BookishStatusService
+  @ObservationIgnored public let status: BookishStatusService
 
   /// Import service that persists imported model records.
   @ObservationIgnored public let importingService: BookishImportingService
 
   /// Export service that encodes model records for export.
   @ObservationIgnored public let exportingService: BookishExportingService
+
+  /// Record-action service used by selected-record commands.
+  @ObservationIgnored private let recordActions: BookishRecordActionsService
 
   /// Creates an engine with services backed by the supplied local datastore directory.
   public init(
@@ -63,7 +64,7 @@ public final class BookishEngine {
       exportingService: exportingService,
       defaultShowsDebugIndexes: defaultShowsDebugIndexes
     )
-    let recordActionService = BookishRecordActionsService(
+    let recordActions = BookishRecordActionsService(
       storage: storageService,
       state: uiState,
       statusService: statusService
@@ -71,20 +72,13 @@ public final class BookishEngine {
     state = .uninitialised
     startupTask = nil
     self.navigation = navigation
-    self.storageService = storageService
+    self.storage = storageService
     self.presentationService = presentationService
-    self.statusService = statusService
+    self.status = statusService
     self.importingService = importingService
     self.exportingService = exportingService
     self.uiState = uiState
-    commander = BookishCommandCentre(
-      statusService: statusService,
-      importPresentation: uiState,
-      datastoreMaintenanceService: uiState,
-      storageService: storageService,
-      recordActionService: recordActionService,
-      navigationService: navigation
-    )
+    self.recordActions = recordActions
   }
 
   /// Starts the standard shared application loop.
@@ -95,11 +89,11 @@ public final class BookishEngine {
   /// Loads storage and refreshes the browser state for the application lifecycle.
   public func load() async {
     do {
-      try await storageService.load()
+      try await storage.load()
       try await uiState.refreshBrowser()
-      statusService.report(message: "Ready")
+      status.report(message: "Ready")
     } catch {
-      statusService.report(error: error)
+      status.report(error: error)
     }
   }
 
@@ -110,5 +104,43 @@ public final class BookishEngine {
     } startup: {
       ProgressView()
     }
+  }
+}
+
+extension BookishEngine: CommandCentre {
+  /// Vends user-facing status reporting to commands.
+  public var statusService: any BookishStatus {
+    status
+  }
+
+  /// Vends datastore operations to commands.
+  public var storageService: any BookishStorage {
+    storage
+  }
+
+  /// Vends browser navigation to commands.
+  public var navigationService: any BookishNavigation {
+    navigation
+  }
+
+  /// Vends import presentation controls to commands.
+  public var importPresentation: any BookishImportPresentation {
+    uiState
+  }
+
+  /// Vends datastore-maintenance presentation controls to commands.
+  public var datastoreMaintenanceService: any BookishDatastoreMaintenance {
+    uiState
+  }
+
+  /// Vends selected-record actions to commands.
+  public var recordActionService: any BookishRecordActions {
+    recordActions
+  }
+
+  /// Presents command failures through Bookish's user-facing status surface.
+  public func recordCommandFailure<C: Command>(_ command: C, error: any Error)
+  where C.Centre == BookishEngine {
+    status.report(error: error)
   }
 }

@@ -669,7 +669,7 @@ struct BookishAppTests {
 
     await engine.load()
 
-    #expect(engine.statusService.message == "Ready")
+    #expect(engine.status.message == "Ready")
     #expect(engine.navigation.recordIndexIDs.isEmpty == false)
     #expect(engine.uiState.revision == 1)
   }
@@ -682,8 +682,20 @@ struct BookishAppTests {
 
     #expect(engine.uiState.navigation === engine.navigation)
     #expect(engine.uiState.presentation === engine.presentationService)
-    #expect(engine.uiState.statusService === engine.statusService)
-    #expect(engine.storageService === engine.navigation.storageService)
+    #expect(engine.uiState.statusService === engine.status)
+    #expect(engine.storage === engine.navigation.storageService)
+  }
+
+  @MainActor
+  @Test
+  func engineVendsServicesDirectlyToCommands() async {
+    let engine = BookishEngine()
+
+    await engine.performWithoutWaiting(ImportInterchangeCommand()).value
+    await engine.performWithoutWaiting(ThrowTestErrorCommand()).value
+
+    #expect(engine.uiState.isImportingInterchange)
+    #expect(engine.status.message == "This is a test command error.")
   }
 
   @MainActor
@@ -719,19 +731,8 @@ struct BookishAppTests {
   }
 
   @MainActor
-  func makeCommandCentre(for uiState: BookishUIStateService) -> BookishCommandCentre {
-    BookishCommandCentre(
-      statusService: uiState.statusService,
-      importPresentation: uiState,
-      datastoreMaintenanceService: uiState,
-      storageService: uiState.storageService,
-      recordActionService: BookishRecordActionsService(
-        storage: uiState.storageService,
-        state: uiState,
-        statusService: uiState.statusService
-      ),
-      navigationService: uiState.navigation
-    )
+  func makeCommandCentre(for uiState: BookishUIStateService) -> UIStateCommandCentre {
+    UIStateCommandCentre(uiState: uiState)
   }
 
   @MainActor
@@ -799,5 +800,41 @@ extension BookishUIStateService {
     } catch {
       statusService.report(error: error)
     }
+  }
+}
+
+@MainActor
+final class UIStateCommandCentre:
+  CommandCentre,
+  BookishStatusProvider,
+  BookishImportPresentationProvider,
+  BookishDatastoreMaintenanceProvider,
+  BookishStorageProvider,
+  BookishRecordActionsProvider,
+  BookishNavigationProvider
+{
+  let statusService: any BookishStatus
+  let importPresentation: any BookishImportPresentation
+  let datastoreMaintenanceService: any BookishDatastoreMaintenance
+  let storageService: any BookishStorage
+  let recordActionService: any BookishRecordActions
+  let navigationService: any BookishNavigation
+
+  init(uiState: BookishUIStateService) {
+    statusService = uiState.statusService
+    importPresentation = uiState
+    datastoreMaintenanceService = uiState
+    storageService = uiState.storageService
+    recordActionService = BookishRecordActionsService(
+      storage: uiState.storageService,
+      state: uiState,
+      statusService: uiState.statusService
+    )
+    navigationService = uiState.navigation
+  }
+
+  func recordCommandFailure<C: Command>(_ command: C, error: any Error)
+  where C.Centre == UIStateCommandCentre {
+    statusService.report(error: error)
   }
 }
