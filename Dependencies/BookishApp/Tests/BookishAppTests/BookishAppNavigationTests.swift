@@ -53,6 +53,24 @@ import Testing
   }
 
   @Test
+  func selectingMainSectionPreservesTheBrowserIndexAndClearsLinkedNavigation() throws {
+    let navigation = BookishNavigationService()
+    let recordIndexResult = RecordQueryResult(query: RecordQuery())
+    recordIndexResult.update(
+      records: [
+        try browserIndexRecord(id: "books", name: "Books", predicate: .kind("book"))
+      ])
+    navigation.update(recordIndexResult: recordIndexResult)
+    navigation.push(recordID: BookishRecordID("book-1"))
+
+    navigation.select(mainSection: .scanning)
+
+    #expect(navigation.selectedMainSection == .scanning)
+    #expect(navigation.selectedRecordIndexName == "Books")
+    #expect(navigation.recordNavigationPath.isEmpty)
+  }
+
+  @Test
   func navigationCommandsMoveBetweenIndexesAndRecords() async throws {
     let harness = try makeHarness()
     let commander = makeCommandCentre(for: harness)

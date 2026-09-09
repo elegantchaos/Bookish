@@ -32,9 +32,9 @@ public struct BookishUIStateView: View {
       NavigationSplitView {
         BrowserIndexListView(navigation: navigation)
       } content: {
-        RecordIndexView(harness: uiState, navigation: navigation)
+        browserContent
       } detail: {
-        RecordDetailView(harness: uiState, navigation: navigation)
+        browserDetail
       }
       .toolbar {
         BookishToolbar(harness: uiState)
@@ -61,6 +61,24 @@ public struct BookishUIStateView: View {
     )
     .task(id: isDeveloperMode) {
       await uiState.setShowsDebugIndexes(isDeveloperMode)
+    }
+  }
+
+  /// The view displayed in the content column for the selected sidebar item.
+  @ViewBuilder private var browserContent: some View {
+    if let section = navigation.selectedMainSection {
+      BookishMainSectionView(section: section)
+    } else {
+      RecordIndexView(harness: uiState, navigation: navigation)
+    }
+  }
+
+  /// The view displayed in the detail column for the selected sidebar item.
+  @ViewBuilder private var browserDetail: some View {
+    if navigation.selectedMainSection == nil {
+      RecordDetailView(harness: uiState, navigation: navigation)
+    } else {
+      ContentUnavailableView("No Selection", systemImage: "list.bullet.rectangle")
     }
   }
 

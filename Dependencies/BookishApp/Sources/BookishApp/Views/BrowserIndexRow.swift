@@ -14,6 +14,6 @@ struct BrowserIndexRow: View {
   /// The labelled and tagged sidebar row.
   var body: some View {
     Label(recordIndex.name, systemImage: recordIndex.icon ?? "list.bullet")
-      .tag(Optional(recordIndex.id))
+      .tag(BrowserIndexListView.BrowserDestination.recordIndex(recordIndex.id))
   }
 }

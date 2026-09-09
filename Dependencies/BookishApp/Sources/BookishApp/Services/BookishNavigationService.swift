@@ -28,6 +28,9 @@ public final class BookishNavigationService {
   /// The selected browser index shown in the first split-view column.
   public private(set) var selectedRecordIndexID: BookishRecordID?
 
+  /// The selected top-level workflow, when the record browser is not displayed.
+  public private(set) var selectedMainSection: BookishMainSection?
+
   /// The selected materialised record shown in the detail column.
   public private(set) var selectedRecordID: BookishRecordID?
 
@@ -126,8 +129,16 @@ public final class BookishNavigationService {
     try await recordIndexSelectionHandler?()
   }
 
+  /// Selects a top-level workflow and clears linked-record navigation.
+  public func select(mainSection: BookishMainSection?) {
+    selectedMainSection = mainSection
+    recordNavigationPath = []
+  }
+
   /// Selects a browser index and clears stale record content.
   private func selectRecordIndex(recordIndexID: BookishRecordID?) {
+    selectedMainSection = nil
+
     guard let recordIndexID, recordIndexIDs.contains(recordIndexID) else {
       selectedRecordIndexID = recordIndexes.first?.id
       selectedRecordResult = nil

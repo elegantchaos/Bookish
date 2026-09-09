@@ -16,11 +16,12 @@ struct BrowserIndexListView: View {
 
   /// The list of selectable browser indexes.
   var body: some View {
-    List(selection: selectedRecordIndexID) {
-      Section {
-        Label("Coming Soon", systemImage: "sparkles")
-          .foregroundStyle(.secondary)
-          .accessibilityHint("Top-level browser areas will appear here.")
+    List(selection: selectedDestination) {
+      Section("Workflows") {
+        ForEach(BookishMainSection.allCases, id: \.self) { section in
+          Label(section.title, systemImage: section.systemImage)
+            .tag(BrowserDestination.mainSection(section))
+        }
       }
 
       Section("Library") {
@@ -40,6 +41,15 @@ struct BrowserIndexListView: View {
     .navigationTitle("Records")
   }
 
+  /// Identifies a selectable row in the browser sidebar.
+  enum BrowserDestination: Hashable {
+    /// A top-level workflow.
+    case mainSection(BookishMainSection)
+
+    /// A record browser index.
+    case recordIndex(BookishRecordID)
+  }
+
   /// The non-debug indexes presented as the user-facing library.
   private var libraryIndexes: [BookishRecordIndex] {
     navigation.recordIndexes.filter { !$0.isDebugOnly }
@@ -50,17 +60,36 @@ struct BrowserIndexListView: View {
     navigation.recordIndexes.filter(\.isDebugOnly)
   }
 
-  /// Binds list selection to the navigation route.
-  private var selectedRecordIndexID: Binding<BookishRecordID?> {
+  /// Binds list selection to the active sidebar route.
+  private var selectedDestination: Binding<BrowserDestination?> {
     Binding {
-      navigation.selectedRecordIndexID
-    } set: { recordIndexID in
+      if let section = navigation.selectedMainSection {
+        return .mainSection(section)
+      }
+
+      return navigation.selectedRecordIndexID.map(BrowserDestination.recordIndex)
+    } set: { destination in
+      select(destination: destination)
+    }
+  }
+
+  /// Updates the visible area without blocking SwiftUI's selection update.
+  private func select(destination: BrowserDestination?) {
+    guard let destination else {
+      return
+    }
+
+    switch destination {
+    case .mainSection(let section):
+      navigation.select(mainSection: section)
+
+    case .recordIndex(let recordIndexID):
       select(recordIndexID: recordIndexID)
     }
   }
 
-  /// Selects an index without blocking SwiftUI's selection update.
-  private func select(recordIndexID: BookishRecordID?) {
+  /// Selects an index asynchronously.
+  private func select(recordIndexID: BookishRecordID) {
     Task {
       do {
         try await navigation.select(recordIndexID: recordIndexID)
