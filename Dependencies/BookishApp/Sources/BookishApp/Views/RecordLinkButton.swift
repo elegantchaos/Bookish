@@ -53,7 +53,7 @@ struct RecordLinkButton: View {
   /// Resolves the link name, thumbnail image, and kind icon.
   private func loadPresentation() async {
     do {
-      guard let record = try await harness.storageService.record(id: recordID) else {
+      guard let record = try await harness.navigation.storageService.record(id: recordID) else {
         presentation = nil
         return
       }

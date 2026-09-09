@@ -178,6 +178,14 @@ public final class BookishNavigationService {
     recordNavigationPath = path
   }
 
+  /// Loads browser indexes, preserves a valid index, and refreshes its displayed records.
+  public func refreshRecordIndexes(showsDebugIndexes: Bool) async throws {
+    let result = try await storageService.recordQueryResult(
+      matching: recordIndexQuery(showsDebugIndexes: showsDebugIndexes))
+    update(recordIndexResult: result)
+    try await refreshSelectedRecordIndex()
+  }
+
   /// Moves to the next available browser index and refreshes its displayed records.
   public func selectNextRecordIndex() async throws {
     selectRecordIndex(offset: 1)
@@ -264,6 +272,24 @@ public final class BookishNavigationService {
 
   private func wrappingIndex(_ index: Int, count: Int) -> Int {
     ((index % count) + count) % count
+  }
+
+  /// The browser-index query for the current developer-mode visibility setting.
+  private func recordIndexQuery(showsDebugIndexes: Bool) -> RecordQuery {
+    let predicate: RecordPredicate
+    if showsDebugIndexes {
+      predicate = .kind(BookishRecordKind.index)
+    } else {
+      predicate = .and([
+        .kind(BookishRecordKind.index),
+        .not(.property(BookishRecordKey.debugOnly, equals: .bool(true))),
+      ])
+    }
+
+    return RecordQuery(
+      predicate: predicate,
+      sort: [.property(BookishRecordKey.position), .property(BookishRecordKey.name), .id]
+    )
   }
 
 }

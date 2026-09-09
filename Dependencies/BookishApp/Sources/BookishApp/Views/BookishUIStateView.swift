@@ -21,16 +21,9 @@ public struct BookishUIStateView: View {
   /// Whether debug-only browser indexes should be available.
   @AppStorage(.isDeveloperMode) private var isDeveloperMode
 
-  /// Whether the view initiates the initial datastore load.
-  private let loadsOnAppear: Bool
-
   /// Creates the root view over the supplied global UI state.
-  public init(
-    uiState: BookishUIStateService,
-    loadsOnAppear: Bool = true
-  ) {
+  public init(uiState: BookishUIStateService) {
     self.uiState = uiState
-    self.loadsOnAppear = loadsOnAppear
   }
 
   /// The SwiftUI content for the datastore app.
@@ -68,17 +61,7 @@ public struct BookishUIStateView: View {
     )
     .task(id: isDeveloperMode) {
       await uiState.setShowsDebugIndexes(isDeveloperMode)
-      await loadIfNeeded()
     }
-  }
-
-  /// Starts the initial datastore load when this view owns startup.
-  private func loadIfNeeded() async {
-    guard loadsOnAppear else {
-      return
-    }
-
-    await uiState.load()
   }
 
   /// Imports a selected interchange file or reports a picker failure.

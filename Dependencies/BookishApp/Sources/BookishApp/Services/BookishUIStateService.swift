@@ -3,7 +3,6 @@
 //  Copyright © 2026 Elegant Chaos Limited. All rights reserved.
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
-import BookishDatastore
 import BookishImporter
 import BookishImporterSamples
 import BookishRecord
@@ -47,27 +46,23 @@ public final class BookishUIStateService {
   /// Whether debug-only indexes are currently included in the browser.
   public private(set) var showsDebugIndexes: Bool
 
-  /// The datastore service shared with navigation and other Bookish services.
-  @ObservationIgnored let storageService: BookishStorageService
-
   /// The model-side interchange exporter used by the export sheet.
-  @ObservationIgnored private let exportingService: BookishExportingService
+  @ObservationIgnored private let exportingService: any BookishExporting
 
   /// The model-side importer used by the import sheets and sample commands.
-  @ObservationIgnored private let importingService: BookishImportingService
+  @ObservationIgnored private let importingService: any BookishImporting
 
   /// Creates UI state backed by the supplied Bookish services.
   public init(
     navigation: BookishNavigationService,
     presentation: BookishPresentationService,
     statusService: BookishStatusService,
-    importingService: BookishImportingService,
-    exportingService: BookishExportingService,
+    importingService: any BookishImporting,
+    exportingService: any BookishExporting,
     defaultShowsDebugIndexes: Bool = false
   ) {
     self.navigation = navigation
     self.statusService = statusService
-    storageService = navigation.storageService
     self.presentation = presentation
     self.exportingService = exportingService
     self.importingService = importingService
@@ -75,17 +70,6 @@ public final class BookishUIStateService {
     self.showsDebugIndexes = defaultShowsDebugIndexes
     navigation.setRecordIndexSelectionHandler { [weak presentation, weak navigation] in
       try await presentation?.refresh(for: navigation?.selectedRecordIndex)
-    }
-  }
-
-  /// Loads, seeds, and refreshes the datastore.
-  public func load() async {
-    do {
-      try await storageService.load()
-      try await refresh()
-      statusService.report(message: "Ready")
-    } catch {
-      statusService.report(error: error)
     }
   }
 
@@ -97,12 +81,8 @@ public final class BookishUIStateService {
 
     self.showsDebugIndexes = showsDebugIndexes
 
-    guard storageService.isLoaded else {
-      return
-    }
-
     do {
-      try await refresh()
+      try await refreshBrowser()
     } catch {
       statusService.report(error: error)
     }
@@ -140,29 +120,6 @@ public final class BookishUIStateService {
   /// Handles successful completion of the interchange export panel.
   public func didExportInterchange() {
     statusService.report(message: "Exported interchange file")
-  }
-
-  /// Removes every stored record and mutation, then restores the seed records.
-  public func reset() async {
-    do {
-      resetProjectionState()
-      try await storageService.reset()
-      try await refresh()
-      statusService.report(message: "Reset datastore")
-    } catch {
-      statusService.report(error: error)
-    }
-  }
-
-  /// Rebuilds the materialised record projection from durable mutations.
-  public func rebuildRecordProjection() async {
-    do {
-      resetProjectionState()
-      try await storageService.rebuildRecordProjection()
-      statusService.report(message: "Rebuilt record store")
-    } catch {
-      statusService.report(error: error)
-    }
   }
 
   /// Imports records from Bookish interchange JSON data.
@@ -232,7 +189,7 @@ public final class BookishUIStateService {
             firstRecord ?? records.first(where: { $0.kind == BookishRecordKind.book })
             ?? records.first
           if lastProjectionRefresh.duration(to: clock.now) >= .seconds(1) {
-            try await self.refresh()
+            try await self.refreshBrowser()
             lastProjectionRefresh = clock.now
           }
 
@@ -244,7 +201,7 @@ public final class BookishUIStateService {
         }
       }
 
-      try await refresh()
+      try await refreshBrowser()
       if let firstRecord {
         navigation.select(recordID: firstRecord.id)
       }
@@ -267,42 +224,11 @@ public final class BookishUIStateService {
   }
 
   /// Refreshes browser indexes, selected records, layouts, and compatible selection state.
-  private func refresh() async throws {
-    guard storageService.isLoaded else {
-      return
-    }
-
-    let recordIndexResult = try await storageService.recordQueryResult(matching: recordIndexQuery)
-    navigation.update(recordIndexResult: recordIndexResult)
-    try await navigation.refreshSelectedRecordIndex()
+  public func refreshBrowser() async throws {
+    try await navigation.refreshRecordIndexes(showsDebugIndexes: showsDebugIndexes)
     try await presentation.refresh(for: navigation.selectedRecordIndex)
     revision += 1
   }
-
-  /// Clears UI state tied to the current materialised projection.
-  private func resetProjectionState() {
-    navigation.reset()
-    presentation.reset()
-  }
-
-  /// The query that loads visible browser index records.
-  private var recordIndexQuery: RecordQuery {
-    let predicate: RecordPredicate
-    if showsDebugIndexes {
-      predicate = .kind(BookishRecordKind.index)
-    } else {
-      predicate = .and([
-        .kind(BookishRecordKind.index),
-        .not(.property(BookishRecordKey.debugOnly, equals: .bool(true))),
-      ])
-    }
-
-    return RecordQuery(
-      predicate: predicate,
-      sort: [.property(BookishRecordKey.position), .property(BookishRecordKey.name), .id]
-    )
-  }
-
 }
 
 extension BookishUIStateService:
@@ -317,6 +243,6 @@ extension BookishUIStateService: BookishRecordActionState {
 
   /// Refreshes observable browser state after an action.
   func refreshRecordActionState() async throws {
-    try await refresh()
+    try await refreshBrowser()
   }
 }

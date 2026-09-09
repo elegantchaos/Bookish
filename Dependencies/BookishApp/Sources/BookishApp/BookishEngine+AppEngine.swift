@@ -14,12 +14,12 @@ extension BookishEngine: AppEngine {
 
   /// Loads and seeds the datastore while the shell presents startup UI.
   public func startup() async throws {
-    await uiState.load()
+    await load()
   }
 
   /// Retries startup after an error state.
   public func retry() async throws {
-    await uiState.load()
+    await load()
   }
 
   /// Surfaces all shell errors to the default error UI.

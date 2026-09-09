@@ -92,10 +92,21 @@ public final class BookishEngine {
     standardLoop()
   }
 
+  /// Loads storage and refreshes the browser state for the application lifecycle.
+  public func load() async {
+    do {
+      try await storageService.load()
+      try await uiState.refreshBrowser()
+      statusService.report(message: "Ready")
+    } catch {
+      statusService.report(error: error)
+    }
+  }
+
   /// Builds the root view managed by the shared application shell.
   public func rootContent() -> some View {
     rootView {
-      BookishUIStateView(uiState: uiState, loadsOnAppear: false)
+      BookishUIStateView(uiState: uiState)
     } startup: {
       ProgressView()
     }

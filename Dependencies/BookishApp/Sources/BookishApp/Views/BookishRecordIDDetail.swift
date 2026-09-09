@@ -79,7 +79,7 @@ struct BookishRecordIDDetail: View {
   /// Resolves the record, selected layout, and cascading presentations.
   private func load() async {
     do {
-      record = try await harness.storageService.record(id: recordID)
+      record = try await harness.navigation.storageService.record(id: recordID)
       if let record {
         layout = try await harness.presentation.layout(
           for: record, recordIndex: navigation.selectedRecordIndex)

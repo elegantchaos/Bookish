@@ -664,6 +664,18 @@ struct BookishAppTests {
 
   @MainActor
   @Test
+  func engineLoadsStorageAndRefreshesUIState() async throws {
+    let engine = BookishEngine(directoryURL: try temporaryDirectory())
+
+    await engine.load()
+
+    #expect(engine.statusService.message == "Ready")
+    #expect(engine.navigation.recordIndexIDs.isEmpty == false)
+    #expect(engine.uiState.revision == 1)
+  }
+
+  @MainActor
+  @Test
 
   func engineOwnsAndInjectsBookishServices() {
     let engine = BookishEngine()
@@ -768,5 +780,24 @@ struct BookishAppTests {
       position: 0,
       query: RecordQuery(predicate: predicate)
     )
+  }
+}
+
+@MainActor
+extension BookishUIStateService {
+  /// The storage service used to set up and inspect UI-state integration tests.
+  var storageService: BookishStorageService {
+    navigation.storageService
+  }
+
+  /// Loads test storage and synchronises its browser-facing UI state.
+  func load() async {
+    do {
+      try await storageService.load()
+      try await refreshBrowser()
+      statusService.report(message: "Ready")
+    } catch {
+      statusService.report(error: error)
+    }
   }
 }

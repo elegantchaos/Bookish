@@ -37,7 +37,8 @@ struct BookishLayoutPickerItem: View {
   /// Resolves the layout name for the picker label.
   private func load() async {
     do {
-      name = try await harness.storageService.record(id: layoutID)?.string(BookishRecordKey.name)
+      name = try await harness.navigation.storageService.record(id: layoutID)?.string(
+        BookishRecordKey.name)
     } catch {
       commander?.statusService.report(error: error)
     }
