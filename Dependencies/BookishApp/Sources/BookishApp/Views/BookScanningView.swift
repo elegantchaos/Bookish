@@ -26,6 +26,11 @@ struct BookScanningView: View {
         }
         .disabled(recognition.isRecognizing)
 
+        Button("Use Example Image", systemImage: "photo") {
+          recognition.selectCaptureGoodExample()
+        }
+        .disabled(recognition.isRecognizing)
+
         if let imageData = recognition.imageData {
           LabeledContent("Selected Image") {
             Text(Int64(imageData.count), format: .byteCount(style: .file))

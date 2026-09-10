@@ -13,3 +13,6 @@
 [submodule "Dependencies/Settings"]
 	path = Dependencies/Settings
 	url = https://github.com/elegantchaos/Settings.git
+[submodule "Dependencies/Keychain"]
+	path = Dependencies/Keychain
+	url = https://github.com/elegantchaos/Keychain.git

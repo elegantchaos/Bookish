@@ -72,7 +72,7 @@ public protocol BookRecognitionServiceFactory: Sendable {
 
 /// Creates Bookish's currently supported AI recognition services.
 public struct DefaultBookRecognitionServiceFactory: BookRecognitionServiceFactory {
-  /// Creates a factory that obtains the OpenAI key from the launch environment.
+  /// Creates a factory that obtains the OpenAI key from Keychain.
   public init() {
   }
 
@@ -118,10 +118,13 @@ public enum BookRecognitionError: LocalizedError {
   /// The installed Foundation Models SDK does not provide Private Cloud Compute yet.
   case privateCloudComputeUnavailable
 
+  /// The bundled recognition example image could not be read.
+  case captureGoodExampleUnavailable
+
   public var errorDescription: String? {
     switch self {
     case .missingAPIKey:
-      "Set OPENAI_API_KEY in the app launch environment before identifying books."
+      "Store an OpenAI API key in Keychain for account openai-api-key on api.openai.com."
     case .serverError(_, let message):
       message
     case .invalidResponse:
@@ -132,6 +135,8 @@ public enum BookRecognitionError: LocalizedError {
       "Apple Intelligence is unavailable or still preparing on this device."
     case .privateCloudComputeUnavailable:
       "Private Cloud Compute requires a newer Foundation Models SDK and its Apple entitlement."
+    case .captureGoodExampleUnavailable:
+      "The bundled CaptureGoodExample image could not be loaded."
     }
   }
 }
@@ -141,24 +146,27 @@ public struct OpenAIResponsesBookRecognizer: BookRecognitionService {
   /// Identifies this service in the provider picker.
   public let provider = BookRecognitionProvider.openAI
 
-  private let apiKey: String
+  private let credentials: any BookRecognitionCredentials
   private let model: String
   private let transport: any BookRecognitionTransport
 
-  /// Creates a recognizer using the launch environment's API key.
+  /// Creates a recognizer using a Keychain-backed credential provider by default.
   public init(
-    apiKey: String = ProcessInfo.processInfo.environment["OPENAI_API_KEY"] ?? "",
+    credentials: any BookRecognitionCredentials = KeychainBookRecognitionCredentials(),
     model: String = "gpt-4.1-mini",
     transport: any BookRecognitionTransport = URLSession.shared
   ) {
-    self.apiKey = apiKey
+    self.credentials = credentials
     self.model = model
     self.transport = transport
   }
 
   /// Identifies clearly visible books without using external catalogue services.
   public func identifyBooks(in imageData: Data) async throws -> [BookRecognitionCandidate] {
-    guard apiKey.isEmpty == false else {
+    guard
+      let apiKey = try credentials.openAIAPIKey()?.trimmingCharacters(in: .whitespacesAndNewlines),
+      apiKey.isEmpty == false
+    else {
       throw BookRecognitionError.missingAPIKey
     }
 
@@ -290,6 +298,16 @@ public final class BookRecognitionViewModel {
     error = nil
   }
 
+  /// Selects the app's bundled image for trying book recognition.
+  public func selectCaptureGoodExample() {
+    do {
+      selectImage(data: try CaptureGoodExample.load())
+    } catch {
+      selectImage(data: nil)
+      self.error = error
+    }
+  }
+
   /// Requests identifications for the selected image.
   public func identifyBooks() async {
     guard let imageData else { return }
@@ -346,5 +364,22 @@ private struct OpenAIErrorResponse: Decodable {
 
   struct ErrorDetail: Decodable {
     let message: String
+  }
+}
+
+/// Loads the shelf image bundled with Bookish for recognition demonstrations.
+private enum CaptureGoodExample {
+  /// Loads the bundled image data.
+  static func load() throws -> Data {
+    guard let url = Bundle.module.url(forResource: "CaptureGoodExample", withExtension: "JPG")
+    else {
+      throw BookRecognitionError.captureGoodExampleUnavailable
+    }
+
+    do {
+      return try Data(contentsOf: url)
+    } catch {
+      throw BookRecognitionError.captureGoodExampleUnavailable
+    }
   }
 }

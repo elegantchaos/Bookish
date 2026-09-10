@@ -21,6 +21,7 @@ let package = Package(
     .package(path: "../BookishRecordView"),
     .package(path: "../Application"),
     .package(path: "../Commands"),
+    .package(path: "../Keychain"),
     .package(path: "../Settings"),
   ],
   targets: [
@@ -36,6 +37,7 @@ let package = Package(
         .product(name: "BookishRecordView", package: "BookishRecordView"),
         .product(name: "Commands", package: "Commands"),
         .product(name: "CommandsUI", package: "Commands"),
+        .product(name: "Keychain", package: "Keychain"),
         .product(name: "Settings", package: "Settings"),
       ],
       resources: [

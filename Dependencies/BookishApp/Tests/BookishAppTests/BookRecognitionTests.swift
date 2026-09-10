@@ -28,7 +28,7 @@ struct BookRecognitionTests {
       """.utf8)
     let transport = RecordingBookRecognitionTransport(responseData: responseData)
     let recognizer = OpenAIResponsesBookRecognizer(
-      apiKey: "test-key",
+      credentials: StaticBookRecognitionCredentials(apiKey: "test-key"),
       transport: transport
     )
 
@@ -54,6 +54,39 @@ struct BookRecognitionTests {
     let content = try #require(input.first?["content"] as? [[String: Any]])
     let image = try #require(content.first(where: { $0["type"] as? String == "input_image" }))
     #expect(image["image_url"] as? String == "data:image/jpeg;base64,/9j/")
+  }
+
+  @Test
+  func recognizerReportsAMissingKeychainCredentialBeforeMakingARequest() async {
+    let transport = RecordingBookRecognitionTransport(responseData: Data())
+    let recognizer = OpenAIResponsesBookRecognizer(
+      credentials: StaticBookRecognitionCredentials(apiKey: nil),
+      transport: transport
+    )
+
+    await #expect(throws: BookRecognitionError.self) {
+      try await recognizer.identifyBooks(in: Data([0xFF, 0xD8, 0xFF]))
+    }
+    #expect(await transport.request == nil)
+  }
+
+  @Test
+  @MainActor
+  func viewModelSelectsTheBundledCaptureGoodExampleImage() {
+    let recognition = BookRecognitionViewModel()
+
+    recognition.selectCaptureGoodExample()
+
+    #expect(recognition.imageData?.isEmpty == false)
+    #expect(recognition.error == nil)
+  }
+}
+
+private struct StaticBookRecognitionCredentials: BookRecognitionCredentials {
+  let apiKey: String?
+
+  func openAIAPIKey() throws -> String? {
+    apiKey
   }
 }
 
