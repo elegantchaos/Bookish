@@ -12,12 +12,17 @@ struct BookishMainSectionView: View {
 
   /// The placeholder presentation for the selected workflow.
   var body: some View {
-    ContentUnavailableView(
-      section.title,
-      systemImage: section.systemImage,
-      description: Text(section.placeholderDescription)
-    )
-    .navigationTitle(section.title)
+    switch section {
+    case .scanning:
+      BookScanningView()
+    case .importing, .cleanup:
+      ContentUnavailableView(
+        section.title,
+        systemImage: section.systemImage,
+        description: Text(section.placeholderDescription)
+      )
+      .navigationTitle(section.title)
+    }
   }
 }
 

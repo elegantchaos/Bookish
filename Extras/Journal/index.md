@@ -1,5 +1,6 @@
 # Journal Index
 
+- [2026-09-09 Book Recognition Prototype](2026-09-09-book-recognition-prototype.md)
 - [2026-09-09 Main Workflow Placeholders](2026-09-09-main-workflow-placeholders.md)
 - [2026-09-08 Data Cleanup Review](2026-09-08-data-cleanup-review.md)
 - [2026-09-08 Presentation Service Extraction](2026-09-08-presentation-service-extraction.md)
