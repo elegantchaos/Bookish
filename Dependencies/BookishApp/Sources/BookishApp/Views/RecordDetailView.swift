@@ -9,13 +9,11 @@ import SwiftUI
 
 /// Displays the selected record and linked-record navigation stack.
 struct RecordDetailView: View {
-  @Environment(BookishEngine.self) var commander
-  
   /// The datastore coordinator used by record detail views.
-  var harness: BookishUIStateService { commander.uiState }
+  @Environment(BookishUIStateService.self) private var harness
 
   /// The route containing the selected record and detail path.
-  var navigation: BookishNavigationService { commander.navigation }
+  @Environment(BookishNavigationService.self) private var navigation
 
   /// The detail navigation stack for the selected record.
   var body: some View {

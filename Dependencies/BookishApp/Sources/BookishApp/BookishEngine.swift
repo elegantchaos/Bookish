@@ -139,6 +139,11 @@ extension BookishEngine: CommandCentre {
     uiState
   }
 
+  /// Vends browser settings to commands.
+  public var browserSettingsService: any BookishBrowserSettings {
+    uiState
+  }
+
   /// Vends datastore-maintenance presentation controls to commands.
   public var datastoreMaintenanceService: any BookishDatastoreMaintenance {
     uiState

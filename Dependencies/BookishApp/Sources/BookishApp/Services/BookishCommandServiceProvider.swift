@@ -24,6 +24,10 @@ public protocol BookishImportPresentation {
   func requestDeliciousLibraryImport()
   /// Imports a bundled Delicious Library sample.
   func importDeliciousLibrary(sample: DeliciousLibrarySample) async
+  /// Imports a selected interchange file.
+  func importInterchange(from url: URL) async
+  /// Imports a selected Delicious Library export.
+  func importDeliciousLibrary(from url: URL) async
 }
 
 /// Vends import presentation controls to import commands.
@@ -31,6 +35,20 @@ public protocol BookishImportPresentation {
 public protocol BookishImportPresentationProvider: CommandCentre {
   /// The import presentation used by the command.
   var importPresentation: any BookishImportPresentation { get }
+}
+
+/// Updates browser settings that affect visible record indexes.
+@MainActor
+public protocol BookishBrowserSettings: AnyObject {
+  /// Updates whether debug-only indexes are visible.
+  func setShowsDebugIndexes(_ isVisible: Bool) async
+}
+
+/// Vends browser settings to browser-setting commands.
+@MainActor
+public protocol BookishBrowserSettingsProvider: CommandCentre {
+  /// The browser settings service used by the command.
+  var browserSettingsService: any BookishBrowserSettings { get }
 }
 
 /// Performs datastore maintenance actions requested by commands.
@@ -93,6 +111,7 @@ public protocol BookishNavigationProvider: CommandCentre {
 extension BookishEngine:
   BookishStatusProvider,
   BookishImportPresentationProvider,
+  BookishBrowserSettingsProvider,
   BookishDatastoreMaintenanceProvider,
   BookishStorageProvider,
   BookishRecordActionsProvider,

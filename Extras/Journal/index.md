@@ -1,5 +1,7 @@
 # Journal Index
 
+- [2026-09-11 Command and Environment Design](2026-09-11-command-and-environment-design.md)
+- [2026-09-11 Import and Browser-Setting Commands](2026-09-11-import-and-browser-setting-commands.md)
 - [2026-09-11 Navigation Selection Commands](2026-09-11-navigation-selection-commands.md)
 - [2026-09-11 Record Index Name Filter](2026-09-11-record-index-name-filter.md)
 - [2026-09-11 Scanning Candidate Addition](2026-09-11-scanning-candidate-addition.md)

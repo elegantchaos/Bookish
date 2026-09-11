@@ -233,7 +233,8 @@ public final class BookishUIStateService {
 
 extension BookishUIStateService:
   BookishImportPresentation,
-  BookishDatastoreMaintenance
+  BookishDatastoreMaintenance,
+  BookishBrowserSettings
 {
 }
 

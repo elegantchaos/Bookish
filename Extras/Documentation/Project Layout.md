@@ -150,6 +150,9 @@ Avoid making the command centre a general-purpose global object.
 
 Instead, use composition. Split provider protocols and services so each command only sees the capabilities it needs, and have the command centre provide the services and manage their lifecycle.
 
+For the Bookish-specific command, provider, environment, and binding policy,
+see [Command and Environment Design](Command%20and%20Environment%20Design.md).
+
 ## Localisation
 
 Use module-owned localisation by default.

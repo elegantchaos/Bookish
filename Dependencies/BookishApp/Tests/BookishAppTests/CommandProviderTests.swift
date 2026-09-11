@@ -19,14 +19,30 @@ struct CommandProviderTests {
   func importCommandsUseTheVendedImportPresentation() async throws {
     let importPresentation = TestImportPresentation()
     let centre = TestCommandCentre(importPresentation: importPresentation)
+    let interchangeURL = URL(filePath: "/tmp/library.bookish.json")
+    let deliciousLibraryURL = URL(filePath: "/tmp/library.xml")
 
     try await centre.perform(ImportInterchangeCommand())
     try await centre.perform(ImportOtherDeliciousLibraryCommand())
     try await centre.perform(ImportDeliciousLibrarySampleCommand(sample: .small))
+    try await centre.perform(ImportSelectedInterchangeCommand(url: interchangeURL))
+    try await centre.perform(ImportSelectedDeliciousLibraryCommand(url: deliciousLibraryURL))
 
     #expect(importPresentation.requestedInterchangeImport)
     #expect(importPresentation.requestedDeliciousLibraryImport)
     #expect(importPresentation.importedSample == .small)
+    #expect(importPresentation.importedInterchangeURL == interchangeURL)
+    #expect(importPresentation.importedDeliciousLibraryURL == deliciousLibraryURL)
+  }
+
+  @Test
+  func browserSettingsCommandsUseTheVendedBrowserSettingsService() async throws {
+    let browserSettings = TestBrowserSettings()
+    let centre = TestCommandCentre(browserSettingsService: browserSettings)
+
+    try await centre.perform(SetDebugIndexVisibilityCommand(isVisible: true))
+
+    #expect(browserSettings.showsDebugIndexes)
   }
 
   @Test
@@ -193,7 +209,8 @@ private final class TestCommandCentre:
   BookishStatusProvider,
   BookishRecordActionsProvider,
   BookishRecognitionProvider,
-  BookishNavigationProvider
+  BookishNavigationProvider,
+  BookishBrowserSettingsProvider
 {
   let importPresentation: any BookishImportPresentation
   let datastoreMaintenanceService: any BookishDatastoreMaintenance
@@ -202,6 +219,7 @@ private final class TestCommandCentre:
   let recordActionService: any BookishRecordActions
   let recognitionService: any BookishRecognitionWorkflow
   let navigationService: any BookishNavigation
+  let browserSettingsService: any BookishBrowserSettings
 
   init(
     importPresentation: any BookishImportPresentation = TestImportPresentation(),
@@ -211,7 +229,8 @@ private final class TestCommandCentre:
     statusService: any BookishStatus = TestStatusService(),
     recordActionService: any BookishRecordActions = TestRecordActionService(),
     recognitionService: any BookishRecognitionWorkflow = TestBookRecognitionWorkflow(),
-    navigationService: any BookishNavigation = TestNavigationService()
+    navigationService: any BookishNavigation = TestNavigationService(),
+    browserSettingsService: any BookishBrowserSettings = TestBrowserSettings()
   ) {
     self.importPresentation = importPresentation
     self.datastoreMaintenanceService = datastoreMaintenanceService
@@ -220,6 +239,7 @@ private final class TestCommandCentre:
     self.recordActionService = recordActionService
     self.recognitionService = recognitionService
     self.navigationService = navigationService
+    self.browserSettingsService = browserSettingsService
   }
 }
 
@@ -279,6 +299,8 @@ private final class TestImportPresentation: BookishImportPresentation {
   private(set) var requestedInterchangeImport = false
   private(set) var requestedDeliciousLibraryImport = false
   private(set) var importedSample: DeliciousLibrarySample?
+  private(set) var importedInterchangeURL: URL?
+  private(set) var importedDeliciousLibraryURL: URL?
 
   func requestInterchangeImport() {
     requestedInterchangeImport = true
@@ -290,6 +312,23 @@ private final class TestImportPresentation: BookishImportPresentation {
 
   func importDeliciousLibrary(sample: DeliciousLibrarySample) async {
     importedSample = sample
+  }
+
+  func importInterchange(from url: URL) async {
+    importedInterchangeURL = url
+  }
+
+  func importDeliciousLibrary(from url: URL) async {
+    importedDeliciousLibraryURL = url
+  }
+}
+
+@MainActor
+private final class TestBrowserSettings: BookishBrowserSettings {
+  private(set) var showsDebugIndexes = false
+
+  func setShowsDebugIndexes(_ isVisible: Bool) async {
+    showsDebugIndexes = isVisible
   }
 }
 

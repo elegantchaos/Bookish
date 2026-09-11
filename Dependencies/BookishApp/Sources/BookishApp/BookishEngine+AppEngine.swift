@@ -29,11 +29,11 @@ extension BookishEngine: AppEngine {
 
   /// Injects services that are available before startup completes.
   public var startupInjector: some ViewModifier {
-    BookishEnvironmentInjector(navigation: navigation, engine: self)
+    BookishEnvironmentInjector(engine: self)
   }
 
   /// Injects running services into datastore content.
   public var runningInjector: some ViewModifier {
-    BookishEnvironmentInjector(navigation: navigation, engine: self)
+    BookishEnvironmentInjector(engine: self)
   }
 }

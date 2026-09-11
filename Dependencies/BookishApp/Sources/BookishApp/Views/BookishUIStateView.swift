@@ -52,7 +52,7 @@ public struct BookishUIStateView: View {
       onCompletion: handleInterchangeExport
     )
     .task(id: isDeveloperMode) {
-      await uiState.setShowsDebugIndexes(isDeveloperMode)
+      commander.performWithoutWaiting(SetDebugIndexVisibilityCommand(isVisible: isDeveloperMode))
     }
   }
 
@@ -61,7 +61,7 @@ public struct BookishUIStateView: View {
 /// Displays the library browser with independent sidebar, index, and detail columns.
 private struct BrowserNavigationSplitView: View {
   @Environment(BookishEngine.self) var commander
-  
+
   /// The global UI state that owns browser presentation and sheet state.
   var uiState: BookishUIStateService { commander.uiState }
 
@@ -109,9 +109,7 @@ extension BookishUIStateView {
   private func handleInterchangeImport(_ result: Result<URL, Error>) {
     switch result {
     case .success(let url):
-      Task {
-        await uiState.importInterchange(from: url)
-      }
+      commander.performWithoutWaiting(ImportSelectedInterchangeCommand(url: url))
 
     case .failure(let error):
       commander.statusService.report(error: error)
@@ -122,9 +120,7 @@ extension BookishUIStateView {
   private func handleDeliciousLibraryImport(_ result: Result<URL, Error>) {
     switch result {
     case .success(let url):
-      Task {
-        await uiState.importDeliciousLibrary(from: url)
-      }
+      commander.performWithoutWaiting(ImportSelectedDeliciousLibraryCommand(url: url))
 
     case .failure(let error):
       commander.statusService.report(error: error)
