@@ -1,5 +1,6 @@
 # Journal Index
 
+- [2026-09-11 Workflow Two-Column Layout](2026-09-11-workflow-two-column-layout.md)
 - [2026-09-09 Book Recognition Prototype](2026-09-09-book-recognition-prototype.md)
 - [2026-09-09 Main Workflow Placeholders](2026-09-09-main-workflow-placeholders.md)
 - [2026-09-08 Data Cleanup Review](2026-09-08-data-cleanup-review.md)

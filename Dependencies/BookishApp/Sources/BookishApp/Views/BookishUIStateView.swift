@@ -29,15 +29,13 @@ public struct BookishUIStateView: View {
   /// The SwiftUI content for the datastore app.
   public var body: some View {
     VStack(spacing: 0) {
-      NavigationSplitView {
-        BrowserIndexListView(navigation: navigation)
-      } content: {
-        browserContent
-      } detail: {
-        browserDetail
-      }
-      .toolbar {
-        BookishToolbar(harness: uiState)
+      if let section = navigation.selectedMainSection {
+        WorkflowNavigationSplitView(
+          section: section,
+          uiState: uiState,
+          navigation: navigation)
+      } else {
+        BrowserNavigationSplitView(uiState: uiState, navigation: navigation)
       }
 
       BookishStatusBar(statusService: uiState.statusService, navigation: navigation)
@@ -64,24 +62,56 @@ public struct BookishUIStateView: View {
     }
   }
 
-  /// The view displayed in the content column for the selected sidebar item.
-  @ViewBuilder private var browserContent: some View {
-    if let section = navigation.selectedMainSection {
-      BookishMainSectionView(section: section)
-    } else {
+}
+
+/// Displays the library browser with independent sidebar, index, and detail columns.
+private struct BrowserNavigationSplitView: View {
+  /// The global UI state that owns browser presentation and sheet state.
+  let uiState: BookishUIStateService
+
+  /// The shared navigation route for the browser columns.
+  let navigation: BookishNavigationService
+
+  /// The library browser columns.
+  var body: some View {
+    NavigationSplitView {
+      BrowserIndexListView(navigation: navigation)
+    } content: {
       RecordIndexView(harness: uiState, navigation: navigation)
-    }
-  }
-
-  /// The view displayed in the detail column for the selected sidebar item.
-  @ViewBuilder private var browserDetail: some View {
-    if navigation.selectedMainSection == nil {
+    } detail: {
       RecordDetailView(harness: uiState, navigation: navigation)
-    } else {
-      ContentUnavailableView("No Selection", systemImage: "list.bullet.rectangle")
+    }
+    .toolbar {
+      BookishToolbar(harness: uiState)
     }
   }
+}
 
+/// Displays a workflow alongside the shared sidebar.
+private struct WorkflowNavigationSplitView: View {
+  /// The selected workflow displayed in the detail area.
+  let section: BookishMainSection
+
+  /// The global UI state that owns browser presentation and sheet state.
+  let uiState: BookishUIStateService
+
+  /// The shared navigation route for the browser sidebar.
+  let navigation: BookishNavigationService
+
+  /// The sidebar and full-width workflow content.
+  var body: some View {
+    NavigationSplitView {
+      BrowserIndexListView(navigation: navigation)
+    } detail: {
+      BookishMainSectionView(section: section)
+    }
+    .toolbar {
+      BookishToolbar(harness: uiState)
+    }
+  }
+}
+
+extension BookishUIStateView {
   /// Imports a selected interchange file or reports a picker failure.
   private func handleInterchangeImport(_ result: Result<URL, Error>) {
     switch result {
