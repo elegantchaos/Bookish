@@ -16,7 +16,7 @@ public struct BookishUIStateView: View {
   @Environment(BookishNavigationService.self) private var navigation
 
   /// The command boundary used to report file-panel failures.
-  @Environment(\.bookishCommandCentre) private var commander
+  @Environment(BookishEngine.self) private var commander
 
   /// Whether debug-only browser indexes should be available.
   @AppStorage(.isDeveloperMode) private var isDeveloperMode
@@ -121,7 +121,7 @@ extension BookishUIStateView {
       }
 
     case .failure(let error):
-      commander?.statusService.report(error: error)
+      commander.statusService.report(error: error)
     }
   }
 
@@ -134,7 +134,7 @@ extension BookishUIStateView {
       }
 
     case .failure(let error):
-      commander?.statusService.report(error: error)
+      commander.statusService.report(error: error)
     }
   }
 
@@ -145,7 +145,7 @@ extension BookishUIStateView {
       uiState.didExportInterchange()
 
     case .failure(let error):
-      commander?.statusService.report(error: error)
+      commander.statusService.report(error: error)
     }
   }
 }
@@ -154,5 +154,5 @@ extension BookishUIStateView {
   let engine = BookishEngine()
   BookishUIStateView(uiState: engine.uiState)
     .environment(engine.navigation)
-    .environment(\.bookishCommandCentre, engine)
+    .environment(engine)
 }

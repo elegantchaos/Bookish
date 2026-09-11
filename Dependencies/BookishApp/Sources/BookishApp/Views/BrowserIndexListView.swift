@@ -12,7 +12,7 @@ struct BrowserIndexListView: View {
   let navigation: BookishNavigationService
 
   /// The command boundary used to report navigation failures.
-  @Environment(\.bookishCommandCentre) private var commander
+  @Environment(BookishEngine.self) private var commander
 
   /// The list of selectable browser indexes.
   var body: some View {
@@ -94,7 +94,7 @@ struct BrowserIndexListView: View {
       do {
         try await navigation.select(recordIndexID: recordIndexID)
       } catch {
-        commander?.statusService.report(error: error)
+        commander.statusService.report(error: error)
       }
     }
   }

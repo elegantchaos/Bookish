@@ -19,7 +19,7 @@ struct RecordLayoutSectionView: View {
   let harness: BookishUIStateService
 
   /// The command boundary used to report presentation-resolution failures.
-  @Environment(\.bookishCommandCentre) private var commander
+  @Environment(BookishEngine.self) private var commander
 
   /// The navigation service used by linked record values.
   let navigation: BookishNavigationService
@@ -79,7 +79,7 @@ struct RecordLayoutSectionView: View {
       presentationRecords = try await harness.presentation.presentations(
         for: host.kind, layout: layout)
     } catch {
-      commander?.statusService.report(error: error)
+      commander.statusService.report(error: error)
     }
   }
 }

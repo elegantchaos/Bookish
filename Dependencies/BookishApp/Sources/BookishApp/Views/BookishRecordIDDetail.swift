@@ -16,7 +16,7 @@ struct BookishRecordIDDetail: View {
   let harness: BookishUIStateService
 
   /// The command boundary used to report record-detail failures.
-  @Environment(\.bookishCommandCentre) private var commander
+  @Environment(BookishEngine.self) private var commander
 
   /// The current browser navigation route.
   let navigation: BookishNavigationService
@@ -89,7 +89,7 @@ struct BookishRecordIDDetail: View {
         )
       }
     } catch {
-      commander?.statusService.report(error: error)
+      commander.statusService.report(error: error)
     }
   }
 }

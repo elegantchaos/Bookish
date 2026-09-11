@@ -13,7 +13,7 @@ struct RecordIndexView: View {
   let harness: BookishUIStateService
 
   /// The command boundary used to report record-index failures.
-  @Environment(\.bookishCommandCentre) private var commander
+  @Environment(BookishEngine.self) private var commander
 
   /// The route containing the active index and record selection.
   let navigation: BookishNavigationService
@@ -89,7 +89,7 @@ struct RecordIndexView: View {
       }
       self.presentationsByKind = presentationsByKind
     } catch {
-      commander?.statusService.report(error: error)
+      commander.statusService.report(error: error)
     }
   }
 
@@ -98,7 +98,7 @@ struct RecordIndexView: View {
     do {
       try await navigation.setRecordNameFilter(filter)
     } catch {
-      commander?.statusService.report(error: error)
+      commander.statusService.report(error: error)
     }
   }
 }

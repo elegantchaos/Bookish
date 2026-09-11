@@ -17,6 +17,6 @@ struct BookishEnvironmentInjector: ViewModifier {
   func body(content: Content) -> some View {
     content
       .environment(navigation)
-      .environment(\.bookishCommandCentre, engine)
+      .environment(engine)
   }
 }

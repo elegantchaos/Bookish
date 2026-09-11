@@ -16,7 +16,7 @@ struct BookishRecordIDCell: View {
   let harness: BookishUIStateService
 
   /// The command boundary used to report record-resolution failures.
-  @Environment(\.bookishCommandCentre) private var commander
+  @Environment(BookishEngine.self) private var commander
 
   /// The resolved record, when available.
   @State private var record: BookishRecord?
@@ -62,7 +62,7 @@ struct BookishRecordIDCell: View {
           for: record.kind, layout: layout)
       }
     } catch {
-      commander?.statusService.report(error: error)
+      commander.statusService.report(error: error)
     }
   }
 }

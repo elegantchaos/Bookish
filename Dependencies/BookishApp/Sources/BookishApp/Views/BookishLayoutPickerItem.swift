@@ -15,7 +15,7 @@ struct BookishLayoutPickerItem: View {
   let harness: BookishUIStateService
 
   /// The command boundary used to report layout-resolution failures.
-  @Environment(\.bookishCommandCentre) private var commander
+  @Environment(BookishEngine.self) private var commander
 
   /// The resolved layout name, when available.
   @State private var name: String?
@@ -40,7 +40,7 @@ struct BookishLayoutPickerItem: View {
       name = try await harness.navigation.storageService.record(id: layoutID)?.string(
         BookishRecordKey.name)
     } catch {
-      commander?.statusService.report(error: error)
+      commander.statusService.report(error: error)
     }
   }
 }

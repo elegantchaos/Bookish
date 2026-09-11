@@ -15,7 +15,7 @@ import SwiftUI
     private let harness: BookishUIStateService
 
     /// The command boundary used to report mutation-loading failures.
-    @Environment(\.bookishCommandCentre) private var commander
+    @Environment(BookishEngine.self) private var commander
 
     /// Whether mutation diagnostics are available.
     @AppStorage(.isDeveloperMode) private var isDeveloperMode
@@ -83,7 +83,7 @@ import SwiftUI
           selectedMutationID = mutations.first?.id
         }
       } catch {
-        commander?.statusService.report(error: error)
+        commander.statusService.report(error: error)
       }
     }
   }

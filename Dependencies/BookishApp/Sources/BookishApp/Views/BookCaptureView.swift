@@ -9,10 +9,9 @@ import SwiftUI
 /// Lets the user choose a book-shelf image and review recognizer candidates.
 struct BookCaptureView: View {
   @State private var selectedPhoto: PhotosPickerItem?
-  @Environment(\.bookishCommandCentre) private var commander
+  @Environment(BookishEngine.self) private var commander
 
   var body: some View {
-    if let commander {
       @Bindable var recognition = commander.recognition
       List {
         Section {
@@ -124,10 +123,6 @@ struct BookCaptureView: View {
           SelectBookRecognitionImageCommand(imageData: imageData)
         )
       }
-    } else {
-      ProgressView()
-        .navigationTitle("Capture")
-    }
   }
 
   /// Binds one candidate's visible toggle to the workflow's selected identifiers.
@@ -185,5 +180,5 @@ struct BookCaptureView: View {
   NavigationStack {
     BookCaptureView()
   }
-  .environment(\.bookishCommandCentre, BookishEngine())
+  .environment(BookishEngine())
 }

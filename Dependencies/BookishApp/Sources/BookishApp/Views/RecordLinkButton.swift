@@ -16,7 +16,7 @@ struct RecordLinkButton: View {
   let harness: BookishUIStateService
 
   /// The application-owned command boundary used to push the linked record.
-  @Environment(\.bookishCommandCentre) private var commander
+  @Environment(BookishEngine.self) private var commander
 
   /// The resolved visual metadata for the link.
   @State private var presentation: BookishRecordLinkPresentation?
@@ -31,7 +31,6 @@ struct RecordLinkButton: View {
         Text(presentation?.name ?? recordID.rawValue)
       }
     }
-    .disabled(commander == nil)
     .task(id: taskID) {
       await loadPresentation()
     }
@@ -42,7 +41,7 @@ struct RecordLinkButton: View {
 
   /// Pushes the linked record onto the detail navigation stack.
   private func navigate() {
-    commander?.performWithoutWaiting(NavigateToRecordCommand(recordID: recordID))
+    commander.performWithoutWaiting(NavigateToRecordCommand(recordID: recordID))
   }
 
   /// Identifies changes that require link metadata to be resolved again.
@@ -63,7 +62,7 @@ struct RecordLinkButton: View {
         placeholderSystemImage: try await harness.presentation.recordKindMetadata(for: record.kind)?
           .string(BookishRecordKey.icon) ?? "doc")
     } catch {
-      commander?.statusService.report(error: error)
+      commander.statusService.report(error: error)
     }
   }
 }
