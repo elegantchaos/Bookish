@@ -8,6 +8,8 @@ struct BookRecognitionTests {
   func defaultFactoryCreatesTheRequestedRecognitionService() {
     let factory = DefaultBookRecognitionServiceFactory()
 
+    #expect(BookRecognitionProvider.allCases == [.ocr, .openAI, .appleOnDevice, .applePrivateCloudCompute])
+    #expect(factory.service(for: .ocr).provider == .ocr)
     #expect(factory.service(for: .openAI).provider == .openAI)
     #expect(factory.service(for: .appleOnDevice).provider == .appleOnDevice)
     #expect(factory.service(for: .applePrivateCloudCompute).provider == .applePrivateCloudCompute)
