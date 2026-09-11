@@ -7,7 +7,7 @@ import PhotosUI
 import SwiftUI
 
 /// Lets the user choose a book-shelf image and review recognizer candidates.
-struct BookScanningView: View {
+struct BookCaptureView: View {
   @State private var selectedPhoto: PhotosPickerItem?
   @Environment(\.bookishCommandCentre) private var commander
 
@@ -114,7 +114,7 @@ struct BookScanningView: View {
           }
         }
       }
-      .navigationTitle("Scanning")
+      .navigationTitle("Capture")
       .task(id: selectedPhoto) {
         guard let selectedPhoto else { return }
         let imageData = try? await selectedPhoto.loadTransferable(
@@ -126,7 +126,7 @@ struct BookScanningView: View {
       }
     } else {
       ProgressView()
-        .navigationTitle("Scanning")
+        .navigationTitle("Capture")
     }
   }
 
@@ -183,7 +183,7 @@ struct BookScanningView: View {
 
 #Preview {
   NavigationStack {
-    BookScanningView()
+    BookCaptureView()
   }
   .environment(\.bookishCommandCentre, BookishEngine())
 }

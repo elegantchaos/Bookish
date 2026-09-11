@@ -13,8 +13,8 @@ struct BookishMainSectionView: View {
   /// The placeholder presentation for the selected workflow.
   var body: some View {
     switch section {
-    case .scanning:
-      BookScanningView()
+    case .capture:
+      BookCaptureView()
     case .importing, .cleanup:
       ContentUnavailableView(
         section.title,
@@ -27,5 +27,5 @@ struct BookishMainSectionView: View {
 }
 
 #Preview {
-  BookishMainSectionView(section: .scanning)
+  BookishMainSectionView(section: .capture)
 }

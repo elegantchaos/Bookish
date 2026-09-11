@@ -5,8 +5,10 @@
 
 /// Identifies a top-level Bookish workflow outside the record browser.
 public enum BookishMainSection: String, CaseIterable, Hashable, Sendable {
-  /// The workflow for scanning physical books into the catalogue.
-  case scanning
+  /// The workflow for scanning physical books into the catalogue using the camera.
+  /// We either scan a barcode, or we attempt to recognise books from the scene, using
+  /// image recognition and other AI techniques.
+  case capture
 
   /// The workflow for importing catalogue data.
   case importing
@@ -19,8 +21,8 @@ extension BookishMainSection {
   /// The user-facing name for the workflow.
   var title: String {
     switch self {
-    case .scanning:
-      "Scanning"
+    case .capture:
+      "Capture"
     case .importing:
       "Import"
     case .cleanup:
@@ -31,7 +33,7 @@ extension BookishMainSection {
   /// The SF Symbol that represents the workflow.
   var systemImage: String {
     switch self {
-    case .scanning:
+    case .capture:
       "viewfinder"
     case .importing:
       "square.and.arrow.down"
@@ -43,7 +45,7 @@ extension BookishMainSection {
   /// The explanatory copy for a workflow that is not implemented yet.
   var placeholderDescription: String {
     switch self {
-    case .scanning:
+    case .capture:
       "Scanning tools will appear here."
     case .importing:
       "Import tools will appear here."
