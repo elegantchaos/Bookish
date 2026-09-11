@@ -9,14 +9,14 @@ import SwiftUI
 
 /// Displays records returned by the currently selected browser index.
 struct RecordIndexView: View {
-  /// The datastore coordinator that resolves layouts and metadata.
-  let harness: BookishUIStateService
-
   /// The command boundary used to report record-index failures.
   @Environment(BookishEngine.self) private var commander
 
+  /// The datastore coordinator that resolves layouts and metadata.
+  var harness: BookishUIStateService { commander.uiState }
+
   /// The route containing the active index and record selection.
-  let navigation: BookishNavigationService
+  var navigation: BookishNavigationService { commander.navigation }
 
   /// The layout currently used to render index rows.
   @State private var layout: BookishRecord?

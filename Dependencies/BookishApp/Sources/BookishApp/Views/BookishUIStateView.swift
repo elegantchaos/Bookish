@@ -12,9 +12,6 @@ public struct BookishUIStateView: View {
   /// The global UI state that owns browser presentation and sheet state.
   @Bindable private var uiState: BookishUIStateService
 
-  /// The shared navigation route for the browser columns.
-  @Environment(BookishNavigationService.self) private var navigation
-
   /// The command boundary used to report file-panel failures.
   @Environment(BookishEngine.self) private var commander
 
@@ -29,16 +26,13 @@ public struct BookishUIStateView: View {
   /// The SwiftUI content for the datastore app.
   public var body: some View {
     VStack(spacing: 0) {
-      if let section = navigation.selectedMainSection {
-        WorkflowNavigationSplitView(
-          section: section,
-          uiState: uiState,
-          navigation: navigation)
+      if let section = commander.navigationService.selectedMainSection {
+        WorkflowNavigationSplitView(section: section, uiState: uiState)
       } else {
-        BrowserNavigationSplitView(uiState: uiState, navigation: navigation)
+        BrowserNavigationSplitView()
       }
 
-      BookishStatusBar(statusService: uiState.statusService, navigation: navigation)
+      BookishStatusBar()
     }
     .fileImporter(
       isPresented: $uiState.isImportingInterchange,
@@ -66,20 +60,22 @@ public struct BookishUIStateView: View {
 
 /// Displays the library browser with independent sidebar, index, and detail columns.
 private struct BrowserNavigationSplitView: View {
+  @Environment(BookishEngine.self) var commander
+  
   /// The global UI state that owns browser presentation and sheet state.
-  let uiState: BookishUIStateService
+  var uiState: BookishUIStateService { commander.uiState }
 
   /// The shared navigation route for the browser columns.
-  let navigation: BookishNavigationService
+  var navigation: BookishNavigationService { commander.navigation }
 
   /// The library browser columns.
   var body: some View {
     NavigationSplitView {
-      BrowserIndexListView(navigation: navigation)
+      BrowserIndexListView()
     } content: {
-      RecordIndexView(harness: uiState, navigation: navigation)
+      RecordIndexView()
     } detail: {
-      RecordDetailView(harness: uiState, navigation: navigation)
+      RecordDetailView()
     }
     .toolbar {
       BookishToolbar(harness: uiState)
@@ -95,13 +91,10 @@ private struct WorkflowNavigationSplitView: View {
   /// The global UI state that owns browser presentation and sheet state.
   let uiState: BookishUIStateService
 
-  /// The shared navigation route for the browser sidebar.
-  let navigation: BookishNavigationService
-
   /// The sidebar and full-width workflow content.
   var body: some View {
     NavigationSplitView {
-      BrowserIndexListView(navigation: navigation)
+      BrowserIndexListView()
     } detail: {
       BookishMainSectionView(section: section)
     }

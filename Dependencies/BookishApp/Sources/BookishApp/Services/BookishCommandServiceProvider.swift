@@ -83,40 +83,6 @@ public protocol BookishRecognitionProvider: CommandCentre {
   var recognitionService: any BookishRecognitionWorkflow { get }
 }
 
-/// Performs browser index and record navigation requested by commands.
-@MainActor
-public protocol BookishNavigation {
-  /// Whether another browser index is available.
-  var canSelectAnotherRecordIndex: Bool { get }
-
-  /// Whether another record is available in the selected browser index.
-  var canSelectAnotherRecord: Bool { get }
-
-  /// Selects a browser index and refreshes its displayed records.
-  func select(recordIndexID: BookishRecordID?) async throws
-
-  /// Selects the next browser index.
-  func selectNextRecordIndex() async throws
-
-  /// Selects the previous browser index.
-  func selectPreviousRecordIndex() async throws
-
-  /// Returns whether the selected browser index contains a record.
-  func contains(recordID: BookishRecordID) -> Bool
-
-  /// Pushes a record onto the detail navigation path.
-  func push(recordID: BookishRecordID)
-
-  /// Selects a record in the selected browser index.
-  func select(recordID: BookishRecordID?)
-
-  /// Selects the next record in the selected browser index.
-  func selectNextRecord()
-
-  /// Selects the previous record in the selected browser index.
-  func selectPreviousRecord()
-}
-
 /// Vends browser navigation to navigation commands.
 @MainActor
 public protocol BookishNavigationProvider: CommandCentre {

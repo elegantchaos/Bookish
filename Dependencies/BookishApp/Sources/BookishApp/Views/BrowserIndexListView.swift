@@ -8,12 +8,12 @@ import SwiftUI
 
 /// Displays the available record indexes and changes the active browser index.
 struct BrowserIndexListView: View {
-  /// The route containing the current index selection.
-  let navigation: BookishNavigationService
 
   /// The command boundary used to report navigation failures.
   @Environment(BookishEngine.self) private var commander
 
+  var navigation: any BookishNavigation { commander.navigationService }
+  
   /// The list of selectable browser indexes.
   var body: some View {
     List(selection: selectedDestination) {
@@ -25,14 +25,14 @@ struct BrowserIndexListView: View {
       }
 
       Section("Library") {
-        ForEach(libraryIndexes) { recordIndex in
+        ForEach(navigation.libraryIndexes) { recordIndex in
           BrowserIndexRow(recordIndex: recordIndex)
         }
       }
 
-      if !debugIndexes.isEmpty {
+      if !navigation.debugIndexes.isEmpty {
         Section("Debug") {
-          ForEach(debugIndexes) { recordIndex in
+          ForEach(navigation.debugIndexes) { recordIndex in
             BrowserIndexRow(recordIndex: recordIndex)
           }
         }
@@ -48,16 +48,6 @@ struct BrowserIndexListView: View {
 
     /// A record browser index.
     case recordIndex(BookishRecordID)
-  }
-
-  /// The non-debug indexes presented as the user-facing library.
-  private var libraryIndexes: [BookishRecordIndex] {
-    navigation.recordIndexes.filter { !$0.isDebugOnly }
-  }
-
-  /// The debug and configuration indexes shown only when they are available.
-  private var debugIndexes: [BookishRecordIndex] {
-    navigation.recordIndexes.filter(\.isDebugOnly)
   }
 
   /// Binds list selection to the active sidebar route.
@@ -81,7 +71,7 @@ struct BrowserIndexListView: View {
 
     switch destination {
     case .mainSection(let section):
-      navigation.select(mainSection: section)
+        navigation.select(mainSection: section)
 
     case .recordIndex(let recordIndexID):
       select(recordIndexID: recordIndexID)

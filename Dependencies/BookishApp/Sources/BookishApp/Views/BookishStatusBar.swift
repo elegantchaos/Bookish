@@ -7,11 +7,13 @@ import SwiftUI
 
 /// Displays the current Bookish status and import progress.
 struct BookishStatusBar: View {
+  @Environment(BookishEngine.self) var commander
+  
   /// The status service that supplies the displayed message and progress.
-  let statusService: BookishStatusService
+  var statusService: BookishStatusService { commander.status }
 
   /// The navigation service that supplies the displayed record count.
-  let navigation: BookishNavigationService
+  var navigation: BookishNavigationService { commander.navigation }
 
   /// The status bar content.
   var body: some View {

@@ -8,6 +8,55 @@ import BookishRecord
 import Commands
 import Observation
 
+
+/// Performs browser index and record navigation requested by commands.
+@MainActor
+public protocol BookishNavigation {
+  /// Whether another browser index is available.
+  var canSelectAnotherRecordIndex: Bool { get }
+
+  /// Whether another record is available in the selected browser index.
+  var canSelectAnotherRecord: Bool { get }
+
+  var selectedMainSection: BookishMainSection? { get }
+  
+  var libraryIndexes: [BookishRecordIndex] { get }
+  
+  var debugIndexes: [BookishRecordIndex] { get }
+  
+  /// Selects a browser index and refreshes its displayed records.
+  func select(recordIndexID: BookishRecordID?) async throws
+
+  /// Selects a top-level workflow and clears linked-record navigation.
+  func select(mainSection: BookishMainSection?)
+
+  /// Selects the next browser index.
+  func selectNextRecordIndex() async throws
+
+  /// Selects the previous browser index.
+  func selectPreviousRecordIndex() async throws
+
+  /// Returns whether the selected browser index contains a record.
+  func contains(recordID: BookishRecordID) -> Bool
+
+  /// Pushes a record onto the detail navigation path.
+  func push(recordID: BookishRecordID)
+
+  /// Selects a record in the selected browser index.
+  func select(recordID: BookishRecordID?)
+
+  /// Selects the next record in the selected browser index.
+  func selectNextRecord()
+
+  /// Selects the previous record in the selected browser index.
+  func selectPreviousRecord()
+  
+  /// The selected browser index shown in the first split-view column.
+  var selectedRecordIndexID: BookishRecordID? { get }
+
+}
+
+
 /// Maintains the datastore browser route independently from datastore services.
 ///
 /// The service stores the active browser index and record identifier. The
@@ -92,6 +141,16 @@ public final class BookishNavigationService {
     recordIndexIDs.count > 1
   }
 
+  /// The non-debug indexes presented as the user-facing library.
+  public var libraryIndexes: [BookishRecordIndex] {
+    recordIndexes.filter { !$0.isDebugOnly }
+  }
+  
+  /// The debug and configuration indexes shown only when they are available.
+  public var debugIndexes: [BookishRecordIndex] {
+    recordIndexes.filter(\.isDebugOnly)
+  }
+  
   /// Sets the presentation reconciliation performed after an index selection.
   public func setRecordIndexSelectionHandler(
     _ handler: @escaping @MainActor () async throws -> Void
