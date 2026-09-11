@@ -76,6 +76,13 @@ public protocol BookishRecordActionsProvider: CommandCentre {
   var recordActionService: any BookishRecordActions { get }
 }
 
+/// Vends the scanning workflow used by recognition commands.
+@MainActor
+public protocol BookishRecognitionProvider: CommandCentre {
+  /// The recognition workflow used by the command.
+  var recognitionService: any BookishRecognitionWorkflow { get }
+}
+
 /// Performs browser index and record navigation requested by commands.
 @MainActor
 public protocol BookishNavigation {
@@ -123,6 +130,7 @@ extension BookishEngine:
   BookishDatastoreMaintenanceProvider,
   BookishStorageProvider,
   BookishRecordActionsProvider,
+  BookishRecognitionProvider,
   BookishNavigationProvider
 {
 }

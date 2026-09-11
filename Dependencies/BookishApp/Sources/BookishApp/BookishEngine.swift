@@ -45,6 +45,9 @@ public final class BookishEngine {
   /// Record-action service used by selected-record commands.
   @ObservationIgnored private let recordActions: BookishRecordActionsService
 
+  /// Recognition workflow used by scanning controls and commands.
+  @ObservationIgnored public let recognition: BookRecognitionViewModel
+
   /// Creates an engine with services backed by the supplied local datastore directory.
   public init(
     directoryURL: URL? = nil,
@@ -69,6 +72,13 @@ public final class BookishEngine {
       state: uiState,
       statusService: statusService
     )
+    let recognition = BookRecognitionViewModel(
+      recordAdder: BookRecognitionRecordAddingService(
+        storage: storageService,
+        state: uiState,
+        statusService: statusService
+      )
+    )
     state = .uninitialised
     startupTask = nil
     self.navigation = navigation
@@ -79,6 +89,7 @@ public final class BookishEngine {
     self.exportingService = exportingService
     self.uiState = uiState
     self.recordActions = recordActions
+    self.recognition = recognition
   }
 
   /// Starts the standard shared application loop.
@@ -136,6 +147,11 @@ extension BookishEngine: CommandCentre {
   /// Vends selected-record actions to commands.
   public var recordActionService: any BookishRecordActions {
     recordActions
+  }
+
+  /// Vends the scanning workflow to recognition commands.
+  public var recognitionService: any BookishRecognitionWorkflow {
+    recognition
   }
 
   /// Presents command failures through Bookish's user-facing status surface.

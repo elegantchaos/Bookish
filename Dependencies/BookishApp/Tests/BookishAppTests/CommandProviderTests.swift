@@ -62,6 +62,62 @@ struct CommandProviderTests {
   }
 
   @Test
+  func recognitionCommandsUseTheVendedRecognitionService() async throws {
+    let recognitionService = TestBookRecognitionWorkflow(
+      candidates: [
+        BookRecognitionCandidate(
+          title: "Refactoring", authors: ["Martin Fowler"], confidence: 0.98),
+        BookRecognitionCandidate(
+          title: "Domain-Driven Design", authors: ["Eric Evans"], confidence: 0.95),
+      ],
+      selectedCandidateIDs: ["Refactoring|Martin Fowler"]
+    )
+    let centre = TestCommandCentre(recognitionService: recognitionService)
+
+    let command = AddSelectedRecognizedBooksCommand<TestCommandCentre>()
+
+    #expect(command.name(centre: centre) == "Add Selected")
+    try await centre.perform(command)
+
+    #expect(recognitionService.addedSelectedBooks)
+
+    recognitionService.selectAllCandidates()
+
+    #expect(command.name(centre: centre) == "Add All")
+  }
+
+  @Test
+  func recognitionSelectionCommandsUseTheVendedRecognitionService() async throws {
+    let candidates = [
+      BookRecognitionCandidate(title: "Refactoring", authors: [], confidence: 0.98),
+      BookRecognitionCandidate(title: "Domain-Driven Design", authors: [], confidence: 0.95),
+    ]
+    let recognitionService = TestBookRecognitionWorkflow(candidates: candidates)
+    let centre = TestCommandCentre(recognitionService: recognitionService)
+
+    try await centre.perform(SelectAllRecognizedBooksCommand())
+
+    #expect(recognitionService.selectedCandidateIDs == Set(candidates.map(\.id)))
+
+    try await centre.perform(DeselectAllRecognizedBooksCommand())
+
+    #expect(recognitionService.selectedCandidateIDs.isEmpty)
+  }
+
+  @Test
+  func automaticRecognitionCommandsUseTheVendedRecognitionService() async throws {
+    let recognitionService = TestBookRecognitionWorkflow()
+    let centre = TestCommandCentre(recognitionService: recognitionService)
+
+    try await centre.perform(SelectBookRecognitionImageCommand(imageData: Data([0xFF])))
+    try await centre.perform(SelectBookRecognitionProviderCommand(provider: .fake))
+
+    #expect(recognitionService.imageData == Data([0xFF]))
+    #expect(recognitionService.provider == .fake)
+    #expect(recognitionService.identificationCount == 2)
+  }
+
+  @Test
   func recordActionsApplyAndRefreshASelectedRecordStatus() async {
     let recordID = BookishRecordID("book-1")
     let storage = TestRecordActionStorage(
@@ -126,6 +182,7 @@ private final class TestCommandCentre:
   BookishStorageProvider,
   BookishStatusProvider,
   BookishRecordActionsProvider,
+  BookishRecognitionProvider,
   BookishNavigationProvider
 {
   let importPresentation: any BookishImportPresentation
@@ -133,6 +190,7 @@ private final class TestCommandCentre:
   let storageService: any BookishStorage
   let statusService: any BookishStatus
   let recordActionService: any BookishRecordActions
+  let recognitionService: any BookishRecognitionWorkflow
   let navigationService: any BookishNavigation
 
   init(
@@ -142,6 +200,7 @@ private final class TestCommandCentre:
     storageService: any BookishStorage = TestStorageService(),
     statusService: any BookishStatus = TestStatusService(),
     recordActionService: any BookishRecordActions = TestRecordActionService(),
+    recognitionService: any BookishRecognitionWorkflow = TestBookRecognitionWorkflow(),
     navigationService: any BookishNavigation = TestNavigationService()
   ) {
     self.importPresentation = importPresentation
@@ -149,7 +208,59 @@ private final class TestCommandCentre:
     self.storageService = storageService
     self.statusService = statusService
     self.recordActionService = recordActionService
+    self.recognitionService = recognitionService
     self.navigationService = navigationService
+  }
+}
+
+@MainActor
+private final class TestBookRecognitionWorkflow: BookishRecognitionWorkflow {
+  var provider: BookRecognitionProvider = .openAI
+  private(set) var imageData: Data?
+  let candidates: [BookRecognitionCandidate]
+  var selectedCandidateIDs: Set<String>
+  let isRecognizing = false
+  let canAddBooks = true
+  private(set) var identificationCount = 0
+  private(set) var addedSelectedBooks = false
+
+  init(
+    candidates: [BookRecognitionCandidate] = [],
+    selectedCandidateIDs: Set<String> = []
+  ) {
+    self.candidates = candidates
+    self.selectedCandidateIDs = selectedCandidateIDs
+    imageData = nil
+  }
+
+  func selectImage(data: Data?) {
+    imageData = data
+  }
+
+  func select(provider: BookRecognitionProvider) async {
+    self.provider = provider
+    if imageData != nil {
+      await identifyBooks()
+    }
+  }
+
+  func selectCaptureGoodExample() {
+  }
+
+  func identifyBooks() async {
+    identificationCount += 1
+  }
+
+  func addSelectedBooks() async throws {
+    addedSelectedBooks = true
+  }
+
+  func selectAllCandidates() {
+    selectedCandidateIDs = Set(candidates.map(\.id))
+  }
+
+  func deselectAllCandidates() {
+    selectedCandidateIDs = []
   }
 }
 

@@ -17,8 +17,8 @@ public struct FoundationModelsBookRecognizer: BookRecognitionService {
   /// Identifies this service in the provider picker.
   public let provider: BookRecognitionProvider
 
-  /// Creates an on-device Foundation Models recognizer.
-  public init(provider: BookRecognitionProvider = .appleOnDevice) {
+  /// Creates an OCR-backed Foundation Models recognizer.
+  public init(provider: BookRecognitionProvider = .ocr) {
     self.provider = provider
   }
 
@@ -53,6 +53,24 @@ public struct FoundationModelsBookRecognizer: BookRecognitionService {
         confidence: $0.confidence
       )
     }
+  }
+}
+
+/// Reports that this build cannot yet send an image directly to Apple's Foundation Model.
+///
+/// Direct image input is intentionally separate from OCR so selecting On Device never silently
+/// changes the image-processing path. The installed SDK lacks the required image attachment API.
+public struct UnavailableDirectImageBookRecognizer: BookRecognitionService {
+  /// Identifies this service in the provider picker.
+  public let provider = BookRecognitionProvider.appleOnDevice
+
+  /// Creates the explicit unavailable service.
+  public init() {
+  }
+
+  /// Explains why this build cannot make the requested direct-image call.
+  public func identifyBooks(in _: Data) async throws -> [BookRecognitionCandidate] {
+    throw BookRecognitionError.directImageRecognitionUnavailable
   }
 }
 

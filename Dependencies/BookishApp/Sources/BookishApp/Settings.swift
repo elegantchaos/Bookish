@@ -6,11 +6,18 @@
 import Foundation
 import Settings
 
-/// Boolean setting keys.
 @MainActor extension AppSettingKey where Value == Bool {
   /// Whether advanced controls, layouts, and indexes are visible.
   public static let isAdvancedMode = AppSettingKey("AdvancedMode", defaultValue: false)
 
   /// Whether developer diagnostics and commands are visible.
   public static let isDeveloperMode = AppSettingKey("DeveloperMode", defaultValue: false)
+}
+
+@MainActor extension AppSettingKey where Value == BookRecognitionProvider {
+  /// The default recognition service to use.
+  public static let bookRecognitionProvider = AppSettingKey(
+    "BookRecognitionProvider",
+    defaultValue: .fake
+  )
 }

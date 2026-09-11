@@ -37,8 +37,67 @@ public protocol BookRecognitionService: Sendable {
   func identifyBooks(in imageData: Data) async throws -> [BookRecognitionCandidate]
 }
 
+/// Stores the user-visible state and actions of the scanning workflow.
+@MainActor
+public protocol BookishRecognitionWorkflow: AnyObject {
+  /// The provider used by the next recognition request.
+  var provider: BookRecognitionProvider { get set }
+
+  /// The data selected by the user for recognition.
+  var imageData: Data? { get }
+
+  /// Candidate books returned by the recognizer.
+  var candidates: [BookRecognitionCandidate] { get }
+
+  /// The identifiers of candidates selected for addition.
+  var selectedCandidateIDs: Set<String> { get set }
+
+  /// Whether recognition is currently underway.
+  var isRecognizing: Bool { get }
+
+  /// Whether recognised books can be added to the catalogue.
+  var canAddBooks: Bool { get }
+
+  /// Replaces the selected image and clears the preceding result.
+  func selectImage(data: Data?)
+
+  /// Selects a recognizer and identifies the selected image when one is available.
+  func select(provider: BookRecognitionProvider) async
+
+  /// Selects the app's bundled image for trying book recognition.
+  func selectCaptureGoodExample()
+
+  /// Requests identifications for the selected image.
+  func identifyBooks() async
+
+  /// Adds the selected candidates to the catalogue.
+  func addSelectedBooks() async throws
+
+  /// Selects every candidate currently shown in the scanning list.
+  func selectAllCandidates()
+
+  /// Clears the selection in the scanning list.
+  func deselectAllCandidates()
+}
+
+/// Adds recognised books to durable catalogue storage.
+@MainActor
+public protocol BookRecognitionRecordAdding: AnyObject {
+  /// Whether the datastore is ready to receive book records.
+  var canAddBooks: Bool { get }
+
+  /// Adds a batch of recognised book candidates.
+  func addBooks(from candidates: [BookRecognitionCandidate]) async throws
+}
+
 /// The AI provider used to identify books in a selected image.
 public enum BookRecognitionProvider: String, CaseIterable, Identifiable, Sendable {
+  /// Returns deterministic sample candidates without inspecting the image.
+  case fake
+
+  /// Uses Vision OCR and Apple's on-device Foundation Model.
+  case ocr
+
   /// Sends the image to the OpenAI Responses API.
   case openAI
 
@@ -54,6 +113,10 @@ public enum BookRecognitionProvider: String, CaseIterable, Identifiable, Sendabl
   /// The user-facing provider name.
   public var title: String {
     switch self {
+    case .fake:
+      "Fake"
+    case .ocr:
+      "OCR"
     case .openAI:
       "OpenAI"
     case .appleOnDevice:
@@ -79,14 +142,52 @@ public struct DefaultBookRecognitionServiceFactory: BookRecognitionServiceFactor
   /// Creates the service for a user-selected provider.
   public func service(for provider: BookRecognitionProvider) -> any BookRecognitionService {
     switch provider {
+    case .fake:
+      FakeBookRecognizer()
+    case .ocr:
+      FoundationModelsBookRecognizer(provider: provider)
     case .openAI:
       OpenAIResponsesBookRecognizer()
     case .appleOnDevice:
-      FoundationModelsBookRecognizer(provider: provider)
+      UnavailableDirectImageBookRecognizer()
     case .applePrivateCloudCompute:
       UnavailablePrivateCloudComputeBookRecognizer()
     }
   }
+}
+
+/// Returns deterministic candidates for exercising the scanning workflow without a live provider.
+public struct FakeBookRecognizer: BookRecognitionService {
+  /// Identifies this service in the provider picker.
+  public let provider = BookRecognitionProvider.fake
+
+  /// Creates the fake recognizer.
+  public init() {
+  }
+
+  /// Returns sample candidates without reading the supplied image data.
+  public func identifyBooks(in _: Data) async throws -> [BookRecognitionCandidate] {
+    Self.sampleCandidates
+  }
+
+  /// The candidates returned on every request.
+  public static let sampleCandidates = [
+    BookRecognitionCandidate(
+      title: "The Left Hand of Darkness",
+      authors: ["Ursula K. Le Guin"],
+      confidence: 0.99
+    ),
+    BookRecognitionCandidate(
+      title: "A Fire Upon the Deep",
+      authors: ["Vernor Vinge"],
+      confidence: 0.97
+    ),
+    BookRecognitionCandidate(
+      title: "The Fifth Season",
+      authors: ["N. K. Jemisin"],
+      confidence: 0.96
+    ),
+  ]
 }
 
 /// Performs the HTTP request required by a book recognizer.
@@ -115,6 +216,9 @@ public enum BookRecognitionError: LocalizedError {
   /// Apple Intelligence is not ready on the current device.
   case foundationModelsUnavailable
 
+  /// The installed Foundation Models SDK cannot pass images directly to the model.
+  case directImageRecognitionUnavailable
+
   /// The installed Foundation Models SDK does not provide Private Cloud Compute yet.
   case privateCloudComputeUnavailable
 
@@ -133,6 +237,8 @@ public enum BookRecognitionError: LocalizedError {
       "No readable book text was found in the selected image."
     case .foundationModelsUnavailable:
       "Apple Intelligence is unavailable or still preparing on this device."
+    case .directImageRecognitionUnavailable:
+      "Direct image recognition requires a newer Foundation Models SDK. Use OCR in this build."
     case .privateCloudComputeUnavailable:
       "Private Cloud Compute requires a newer Foundation Models SDK and its Apple entitlement."
     case .captureGoodExampleUnavailable:
@@ -270,6 +376,9 @@ public final class BookRecognitionViewModel {
   /// Candidate books returned by the recognizer.
   public private(set) var candidates: [BookRecognitionCandidate]
 
+  /// The candidate identifiers selected for addition.
+  public var selectedCandidateIDs: Set<String>
+
   /// A recognition error suitable for display.
   public private(set) var error: (any Error)?
 
@@ -278,15 +387,32 @@ public final class BookRecognitionViewModel {
 
   @ObservationIgnored private let serviceFactory: any BookRecognitionServiceFactory
 
-  /// Creates state backed by a recognition-service factory.
-  public init(
-    provider: BookRecognitionProvider = .openAI,
+  @ObservationIgnored private let recordAdder: any BookRecognitionRecordAdding
+
+  /// Creates state backed by a recognition-service factory before the datastore is loaded.
+  public convenience init(
+    provider: BookRecognitionProvider? = nil,
     serviceFactory: any BookRecognitionServiceFactory = DefaultBookRecognitionServiceFactory()
   ) {
-    self.provider = provider
+    self.init(
+      provider: provider,
+      serviceFactory: serviceFactory,
+      recordAdder: UnavailableBookRecognitionRecordAdder()
+    )
+  }
+
+  /// Creates state backed by recognition and catalogue-addition services.
+  init(
+    provider: BookRecognitionProvider? = nil,
+    serviceFactory: any BookRecognitionServiceFactory = DefaultBookRecognitionServiceFactory(),
+    recordAdder: any BookRecognitionRecordAdding
+  ) {
+    self.provider = provider ?? UserDefaults.standard.value(forKey: .bookRecognitionProvider)
     self.serviceFactory = serviceFactory
+    self.recordAdder = recordAdder
     imageData = nil
     candidates = []
+    selectedCandidateIDs = []
     error = nil
     isRecognizing = false
   }
@@ -295,7 +421,15 @@ public final class BookRecognitionViewModel {
   public func selectImage(data: Data?) {
     imageData = data
     candidates = []
+    selectedCandidateIDs = []
     error = nil
+  }
+
+  /// Selects a recognizer and identifies the current image when the provider changes.
+  public func select(provider: BookRecognitionProvider) async {
+    guard self.provider != provider else { return }
+    self.provider = provider
+    await identifyBooks()
   }
 
   /// Selects the app's bundled image for trying book recognition.
@@ -317,9 +451,55 @@ public final class BookRecognitionViewModel {
 
     do {
       candidates = try await serviceFactory.service(for: provider).identifyBooks(in: imageData)
+      selectedCandidateIDs = []
     } catch {
       self.error = error
     }
+  }
+
+  /// Whether the loaded datastore can receive recognised book records.
+  public var canAddBooks: Bool {
+    recordAdder.canAddBooks
+  }
+
+  /// Adds the candidates selected in the scanning list.
+  public func addSelectedBooks() async throws {
+    let selectedCandidates = candidates.filter { selectedCandidateIDs.contains($0.id) }
+    try await addBooks(selectedCandidates)
+  }
+
+  /// Selects every candidate currently shown in the scanning list.
+  public func selectAllCandidates() {
+    selectedCandidateIDs = Set(candidates.map(\.id))
+  }
+
+  /// Clears the selection in the scanning list.
+  public func deselectAllCandidates() {
+    selectedCandidateIDs = []
+  }
+
+  /// Adds candidates and removes only those successfully persisted from the workflow.
+  private func addBooks(_ candidates: [BookRecognitionCandidate]) async throws {
+    guard candidates.isEmpty == false else { return }
+    try await recordAdder.addBooks(from: candidates)
+    let addedIDs = Set(candidates.map(\.id))
+    self.candidates.removeAll { addedIDs.contains($0.id) }
+    selectedCandidateIDs.subtract(addedIDs)
+  }
+}
+
+extension BookRecognitionViewModel: BookishRecognitionWorkflow {
+}
+
+/// Reports that book addition is unavailable before the application datastore has loaded.
+@MainActor
+private final class UnavailableBookRecognitionRecordAdder: BookRecognitionRecordAdding {
+  /// Addition is unavailable without a loaded datastore.
+  let canAddBooks = false
+
+  /// Rejects addition before an application-owned storage service is supplied.
+  func addBooks(from _: [BookRecognitionCandidate]) async throws {
+    throw BookishStorageError.notLoaded
   }
 }
 
