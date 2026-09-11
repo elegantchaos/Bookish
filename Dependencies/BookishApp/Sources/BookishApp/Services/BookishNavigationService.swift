@@ -8,7 +8,6 @@ import BookishRecord
 import Commands
 import Observation
 
-
 /// Performs browser index and record navigation requested by commands.
 @MainActor
 public protocol BookishNavigation {
@@ -19,11 +18,11 @@ public protocol BookishNavigation {
   var canSelectAnotherRecord: Bool { get }
 
   var selectedMainSection: BookishMainSection? { get }
-  
+
   var libraryIndexes: [BookishRecordIndex] { get }
-  
+
   var debugIndexes: [BookishRecordIndex] { get }
-  
+
   /// Selects a browser index and refreshes its displayed records.
   func select(recordIndexID: BookishRecordID?) async throws
 
@@ -45,17 +44,19 @@ public protocol BookishNavigation {
   /// Selects a record in the selected browser index.
   func select(recordID: BookishRecordID?)
 
+  /// Updates the name filter applied to the selected browser index.
+  func setRecordNameFilter(_ filter: String) async throws
+
   /// Selects the next record in the selected browser index.
   func selectNextRecord()
 
   /// Selects the previous record in the selected browser index.
   func selectPreviousRecord()
-  
+
   /// The selected browser index shown in the first split-view column.
   var selectedRecordIndexID: BookishRecordID? { get }
 
 }
-
 
 /// Maintains the datastore browser route independently from datastore services.
 ///
@@ -145,12 +146,12 @@ public final class BookishNavigationService {
   public var libraryIndexes: [BookishRecordIndex] {
     recordIndexes.filter { !$0.isDebugOnly }
   }
-  
+
   /// The debug and configuration indexes shown only when they are available.
   public var debugIndexes: [BookishRecordIndex] {
     recordIndexes.filter(\.isDebugOnly)
   }
-  
+
   /// Sets the presentation reconciliation performed after an index selection.
   public func setRecordIndexSelectionHandler(
     _ handler: @escaping @MainActor () async throws -> Void

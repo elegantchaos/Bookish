@@ -55,7 +55,7 @@ struct RecordIndexView: View {
     Binding {
       navigation.selectedRecordID
     } set: { recordID in
-      navigation.select(recordID: recordID)
+      commander.performWithoutWaiting(SelectRecordCommand(recordID: recordID))
     }
   }
 
@@ -64,9 +64,7 @@ struct RecordIndexView: View {
     Binding {
       navigation.recordNameFilter
     } set: { filter in
-      Task {
-        await updateRecordNameFilter(filter)
-      }
+      commander.performWithoutWaiting(SetRecordNameFilterCommand(filter: filter))
     }
   }
 
@@ -93,12 +91,4 @@ struct RecordIndexView: View {
     }
   }
 
-  /// Updates the selected index query after the user changes the name filter.
-  private func updateRecordNameFilter(_ filter: String) async {
-    do {
-      try await navigation.setRecordNameFilter(filter)
-    } catch {
-      commander.statusService.report(error: error)
-    }
-  }
 }

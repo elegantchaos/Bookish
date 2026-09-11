@@ -63,9 +63,9 @@ import Testing
     navigation.update(recordIndexResult: recordIndexResult)
     navigation.push(recordID: BookishRecordID("book-1"))
 
-    navigation.select(mainSection: .scanning)
+    navigation.select(mainSection: .capture)
 
-    #expect(navigation.selectedMainSection == .scanning)
+    #expect(navigation.selectedMainSection == .capture)
     #expect(navigation.selectedRecordIndexName == "Books")
     #expect(navigation.recordNavigationPath.isEmpty)
   }

@@ -163,14 +163,24 @@ struct CommandProviderTests {
   func navigationCommandsUseTheVendedNavigationService() async throws {
     let navigationService = TestNavigationService(canSelectAnotherRecord: true)
     let centre = TestCommandCentre(navigationService: navigationService)
+    let recordIndexID = BookishRecordID("books")
+    let recordID = BookishRecordID("book-1")
 
     try await centre.perform(SelectNextRecordCommand())
     try await centre.perform(SelectPreviousRecordCommand())
     try await centre.perform(NavigateToRecordCommand(recordID: BookishRecordID("linked-book")))
+    try await centre.perform(SelectMainSectionCommand(section: .capture))
+    try await centre.perform(SelectRecordIndexCommand(recordIndexID: recordIndexID))
+    try await centre.perform(SelectRecordCommand(recordID: recordID))
+    try await centre.perform(SetRecordNameFilterCommand(filter: "left hand"))
 
     #expect(navigationService.selectedNextRecord)
     #expect(navigationService.selectedPreviousRecord)
     #expect(navigationService.pushedRecordIDs == [BookishRecordID("linked-book")])
+    #expect(navigationService.selectedMainSection == .capture)
+    #expect(navigationService.selectedRecordIndexID == recordIndexID)
+    #expect(navigationService.selectedRecordID == recordID)
+    #expect(navigationService.recordNameFilter == "left hand")
   }
 }
 
@@ -374,10 +384,15 @@ private final class TestRecordActionService: BookishRecordActions {
 private final class TestNavigationService: BookishNavigation {
   let canSelectAnotherRecordIndex: Bool
   let canSelectAnotherRecord: Bool
+  let libraryIndexes: [BookishRecordIndex] = []
+  let debugIndexes: [BookishRecordIndex] = []
   private(set) var selectedNextRecordIndex = false
   private(set) var selectedPreviousRecordIndex = false
   private(set) var pushedRecordIDs: [BookishRecordID] = []
   private(set) var selectedRecordID: BookishRecordID?
+  private(set) var selectedRecordIndexID: BookishRecordID?
+  private(set) var selectedMainSection: BookishMainSection?
+  private(set) var recordNameFilter = ""
   private(set) var selectedNextRecord = false
   private(set) var selectedPreviousRecord = false
 
@@ -386,7 +401,12 @@ private final class TestNavigationService: BookishNavigation {
     self.canSelectAnotherRecord = canSelectAnotherRecord
   }
 
-  func select(recordIndexID _: BookishRecordID?) async throws {
+  func select(recordIndexID: BookishRecordID?) async throws {
+    selectedRecordIndexID = recordIndexID
+  }
+
+  func select(mainSection: BookishMainSection?) {
+    selectedMainSection = mainSection
   }
 
   func selectNextRecordIndex() async throws {
@@ -398,7 +418,7 @@ private final class TestNavigationService: BookishNavigation {
   }
 
   func contains(recordID _: BookishRecordID) -> Bool {
-    false
+    true
   }
 
   func push(recordID: BookishRecordID) {
@@ -407,6 +427,10 @@ private final class TestNavigationService: BookishNavigation {
 
   func select(recordID: BookishRecordID?) {
     selectedRecordID = recordID
+  }
+
+  func setRecordNameFilter(_ filter: String) async throws {
+    recordNameFilter = filter
   }
 
   func selectNextRecord() {

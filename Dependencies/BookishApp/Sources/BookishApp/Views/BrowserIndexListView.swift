@@ -13,7 +13,7 @@ struct BrowserIndexListView: View {
   @Environment(BookishEngine.self) private var commander
 
   var navigation: any BookishNavigation { commander.navigationService }
-  
+
   /// The list of selectable browser indexes.
   var body: some View {
     List(selection: selectedDestination) {
@@ -71,21 +71,10 @@ struct BrowserIndexListView: View {
 
     switch destination {
     case .mainSection(let section):
-        navigation.select(mainSection: section)
+      commander.performWithoutWaiting(SelectMainSectionCommand(section: section))
 
     case .recordIndex(let recordIndexID):
-      select(recordIndexID: recordIndexID)
-    }
-  }
-
-  /// Selects an index asynchronously.
-  private func select(recordIndexID: BookishRecordID) {
-    Task {
-      do {
-        try await navigation.select(recordIndexID: recordIndexID)
-      } catch {
-        commander.statusService.report(error: error)
-      }
+      commander.performWithoutWaiting(SelectRecordIndexCommand(recordIndexID: recordIndexID))
     }
   }
 }
