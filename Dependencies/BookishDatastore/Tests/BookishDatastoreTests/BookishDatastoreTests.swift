@@ -250,6 +250,42 @@ struct BookishDatastoreTests {
   }
 
   @Test
+  func recordQueryMatchesPartialNamesUsingLocalizedStandardComparison() {
+    let matching = BookishRecord(
+      id: BookishRecordID("book-1"),
+      kind: "book",
+      properties: [BookishRecordKey.name: .string("The Left Hand of Darkness")]
+    )
+    let nonMatching = BookishRecord(
+      id: BookishRecordID("book-2"),
+      kind: "book",
+      properties: [BookishRecordKey.name: .string("A Wizard of Earthsea")]
+    )
+
+    let records = RecordQuery(
+      predicate: .kind("book")
+    )
+    .filteringNames(containing: "left hand")
+    .apply(to: [matching, nonMatching])
+
+    #expect(
+      RecordQuery(predicate: .kind("book")).filteringNames(containing: "")
+        == RecordQuery(predicate: .kind("book")))
+    #expect(records.map(\.id) == [matching.id])
+  }
+
+  @Test
+  func recordQueryEncodesNameTextPredicates() throws {
+    let predicate = RecordPredicate.propertyStringContains(BookishRecordKey.name, "Earthsea")
+    let decoded = try JSONDecoder().decode(
+      RecordPredicate.self,
+      from: JSONEncoder().encode(predicate)
+    )
+
+    #expect(decoded == predicate)
+  }
+
+  @Test
   func recordQueryTemplateResolvesHostRecordBindings() {
     let host = BookishRecord(id: BookishRecordID("person-1"), kind: BookishRecordKind.person)
     let template = RecordQueryTemplate(

@@ -44,6 +44,7 @@ struct RecordIndexView: View {
       }
     }
     .navigationTitle(navigation.selectedRecordIndexName ?? "Index")
+    .searchable(text: recordNameFilter, prompt: "Filter by name")
     .task(id: taskID) {
       await loadPresentation()
     }
@@ -55,6 +56,17 @@ struct RecordIndexView: View {
       navigation.selectedRecordID
     } set: { recordID in
       navigation.select(recordID: recordID)
+    }
+  }
+
+  /// Binds the index search field to the query-backed navigation filter.
+  private var recordNameFilter: Binding<String> {
+    Binding {
+      navigation.recordNameFilter
+    } set: { filter in
+      Task {
+        await updateRecordNameFilter(filter)
+      }
     }
   }
 
@@ -76,6 +88,15 @@ struct RecordIndexView: View {
         }
       }
       self.presentationsByKind = presentationsByKind
+    } catch {
+      commander?.statusService.report(error: error)
+    }
+  }
+
+  /// Updates the selected index query after the user changes the name filter.
+  private func updateRecordNameFilter(_ filter: String) async {
+    do {
+      try await navigation.setRecordNameFilter(filter)
     } catch {
       commander?.statusService.report(error: error)
     }

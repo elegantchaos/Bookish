@@ -21,6 +21,9 @@ public indirect enum RecordPredicate: Codable, Equatable, Sendable {
   /// Matches records whose materialised property is, or contains, a value.
   case propertyContains(String, BookishRecordValue)
 
+  /// Matches records whose string property contains text using localized comparison.
+  case propertyStringContains(String, String)
+
   /// Matches records that satisfy every child predicate.
   case and([RecordPredicate])
 
@@ -57,6 +60,9 @@ public indirect enum RecordPredicate: Codable, Equatable, Sendable {
         false
       }
 
+    case .propertyStringContains(let key, let text):
+      record.properties[key]?.stringValue?.localizedStandardContains(text) ?? false
+
     case .and(let predicates):
       predicates.allSatisfy { $0.matches(record) }
 
@@ -85,6 +91,7 @@ extension RecordPredicate {
     case kind
     case property
     case propertyContains
+    case propertyStringContains
     case and
     case or
     case not
@@ -115,6 +122,12 @@ extension RecordPredicate {
       self = .propertyContains(
         try container.decode(String.self, forKey: .key),
         try container.decode(BookishRecordValue.self, forKey: .value)
+      )
+
+    case .propertyStringContains:
+      self = .propertyStringContains(
+        try container.decode(String.self, forKey: .key),
+        try container.decode(String.self, forKey: .value)
       )
 
     case .and:
@@ -151,6 +164,11 @@ extension RecordPredicate {
 
     case .propertyContains(let key, let value):
       try container.encode(Kind.propertyContains, forKey: .type)
+      try container.encode(key, forKey: .key)
+      try container.encode(value, forKey: .value)
+
+    case .propertyStringContains(let key, let value):
+      try container.encode(Kind.propertyStringContains, forKey: .type)
       try container.encode(key, forKey: .key)
       try container.encode(value, forKey: .value)
 

@@ -105,6 +105,27 @@ import Testing
   }
 
   @Test
+  func nameFilterComposesWithTheSelectedIndexQuery() async throws {
+    let harness = try makeHarness()
+    await harness.load()
+
+    try await harness.navigation.select(recordIndexID: BookishRecordID("datastore-index-books"))
+    try await harness.navigation.setRecordNameFilter("left hand")
+
+    #expect(harness.navigation.recordNameFilter == "left hand")
+    #expect(
+      harness.navigation.selectedRecordResult?.query
+        == RecordQuery(
+          predicate: .and([
+            .kind(BookishRecordKind.book),
+            .propertyStringContains(BookishRecordKey.name, "left hand"),
+          ]),
+          sort: [.property(BookishRecordKey.name), .id]
+        ))
+    #expect(harness.navigation.selectedRecordIDs == [BookishRecordID("seed-book")])
+  }
+
+  @Test
   func selectedIndexProvidesDefaultLayout() async throws {
     let harness = try makeHarness()
     await harness.load()

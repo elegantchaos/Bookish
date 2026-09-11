@@ -40,6 +40,9 @@ public final class BookishNavigationService {
   /// The records matching the selected browser index.
   public private(set) var selectedRecordResult: RecordQueryResult?
 
+  /// The text used to limit the selected index to partially matching record names.
+  public private(set) var recordNameFilter = ""
+
   /// Creates an empty navigation service.
   public init(storageService: BookishStorageService = BookishStorageService()) {
     self.storageService = storageService
@@ -118,6 +121,7 @@ public final class BookishNavigationService {
     recordIndexResult = nil
     selectedRecordIndexID = nil
     selectedRecordResult = nil
+    recordNameFilter = ""
     selectedRecordID = nil
     recordNavigationPath = []
   }
@@ -172,6 +176,16 @@ public final class BookishNavigationService {
     }
 
     selectedRecordID = selectedRecordIDs.first
+  }
+
+  /// Updates the name filter and refreshes the selected browser index.
+  public func setRecordNameFilter(_ filter: String) async throws {
+    guard recordNameFilter != filter else {
+      return
+    }
+
+    recordNameFilter = filter
+    try await refreshSelectedRecordIndex()
   }
 
   /// Returns whether a record identifier exists in the selected browser index.
@@ -249,7 +263,15 @@ public final class BookishNavigationService {
       return
     }
 
-    let result = try await storageService.recordQueryResult(matching: query)
+    let selectedRecordIndexID = selectedRecordIndex.id
+    let filter = recordNameFilter
+    let result = try await storageService.recordQueryResult(
+      matching: query.filteringNames(containing: filter))
+
+    guard self.selectedRecordIndexID == selectedRecordIndexID, recordNameFilter == filter else {
+      return
+    }
+
     update(selectedRecordResult: result)
   }
 

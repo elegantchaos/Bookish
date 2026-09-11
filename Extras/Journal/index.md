@@ -1,5 +1,6 @@
 # Journal Index
 
+- [2026-09-11 Record Index Name Filter](2026-09-11-record-index-name-filter.md)
 - [2026-09-11 Scanning Candidate Addition](2026-09-11-scanning-candidate-addition.md)
 - [2026-09-11 Workflow Two-Column Layout](2026-09-11-workflow-two-column-layout.md)
 - [2026-09-09 Book Recognition Prototype](2026-09-09-book-recognition-prototype.md)

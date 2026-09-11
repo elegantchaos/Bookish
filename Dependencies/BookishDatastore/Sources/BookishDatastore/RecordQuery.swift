@@ -39,4 +39,18 @@ public struct RecordQuery: Codable, Equatable, Sendable {
       return lhs.id.rawValue < rhs.id.rawValue
     }
   }
+
+  /// Returns this query constrained to record names that contain the supplied text.
+  public func filteringNames(containing text: String) -> Self {
+    guard text.isEmpty == false else {
+      return self
+    }
+
+    var query = self
+    query.predicate = .and([
+      predicate,
+      .propertyStringContains(BookishRecordKey.name, text),
+    ])
+    return query
+  }
 }
