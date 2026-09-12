@@ -9,6 +9,38 @@ import BookishRecord
 import Foundation
 import Observation
 
+
+/// Updates browser settings that affect visible record indexes.
+@MainActor
+public protocol BookishBrowserSettings: AnyObject {
+  /// Updates whether debug-only indexes are visible.
+  func setShowsDebugIndexes(_ isVisible: Bool) async
+}
+
+/// Performs datastore maintenance actions requested by commands.
+@MainActor
+public protocol BookishDatastoreMaintenance {
+  /// Whether records are available for interchange export.
+  var hasExportableRecords: Bool { get }
+  /// Requests interchange export.
+  func requestInterchangeExport() async
+}
+
+/// Presents import controls requested by commands.
+@MainActor
+public protocol BookishImportPresentation {
+  /// Requests an interchange file import.
+  func requestInterchangeImport()
+  /// Requests a Delicious Library file import.
+  func requestDeliciousLibraryImport()
+  /// Imports a bundled Delicious Library sample.
+  func importDeliciousLibrary(sample: DeliciousLibrarySample) async
+  /// Imports a selected interchange file.
+  func importInterchange(from url: URL) async
+  /// Imports a selected Delicious Library export.
+  func importDeliciousLibrary(from url: URL) async
+}
+
 /// Owns global Bookish UI state and coordinates UI-triggered work across services.
 @MainActor
 @Observable

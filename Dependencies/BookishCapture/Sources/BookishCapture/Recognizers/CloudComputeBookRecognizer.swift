@@ -15,6 +15,8 @@ public struct CloudComputeBookRecognizer: BookRecognizer {
   
   public let label = "Cloud Compute"
   
+  public let description: String = "Private Cloud Compute is unavailable in this build until its newer Foundation Models SDK and entitlement are available."
+  
   /// Creates the explicit unavailable service.
   public init() {
   }

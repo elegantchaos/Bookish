@@ -15,6 +15,7 @@ let package = Package(
   ],
   dependencies: [
     .package(path: "../BookishRecord"),
+    .package(path: "../BookishCapture"),
     .package(path: "../BookishCoding"),
     .package(path: "../BookishImporter"),
     .package(path: "../BookishDatastore"),
@@ -30,6 +31,7 @@ let package = Package(
       dependencies: [
         .product(name: "Application", package: "Application"),
         .product(name: "BookishRecord", package: "BookishRecord"),
+        .product(name: "BookishCapture", package: "BookishCapture"),
         .product(name: "BookishCoding", package: "BookishCoding"),
         .product(name: "BookishImporter", package: "BookishImporter"),
         .product(name: "BookishImporterSamples", package: "BookishImporter"),
@@ -48,6 +50,7 @@ let package = Package(
       name: "BookishAppTests",
       dependencies: [
         "BookishApp",
+        .product(name: "BookishCapture", package: "BookishCapture"),
         .product(name: "BookishCoding", package: "BookishCoding"),
         .product(name: "BookishRecord", package: "BookishRecord"),
         .product(name: "BookishImporterSamples", package: "BookishImporter"),

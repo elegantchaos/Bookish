@@ -49,7 +49,7 @@ public final class BookishEngine {
   @ObservationIgnored private let recordActions: BookishRecordActionsService
 
   /// Recognition workflow used by scanning controls and commands.
-  @ObservationIgnored public let recognition: BookRecognitionViewModel
+  @ObservationIgnored public let recognition: BookishRecognitionService
 
   /// Creates an engine with services backed by the supplied local datastore directory.
   public init(
@@ -75,13 +75,12 @@ public final class BookishEngine {
       state: uiState,
       statusService: statusService
     )
-    let recognition = BookRecognitionViewModel(
-      recordAdder: BookRecognitionRecordAddingService(
-        storage: storageService,
-        state: uiState,
-        statusService: statusService
-      )
+    let recognition = BookishRecognitionService(
+      storage: storageService,
+      state: uiState,
+      statusService: statusService
     )
+    
     let commander = BookishCommander()
     state = .uninitialised
     startupTask = nil
@@ -95,6 +94,7 @@ public final class BookishEngine {
     self.commander = commander
     self.recordActions = recordActions
     self.recognition = recognition
+
     commander.attach(to: self)
   }
 
@@ -161,7 +161,7 @@ extension BookishEngine: CommandCentre {
   }
 
   /// Vends the scanning workflow to recognition commands.
-  public var recognitionService: any BookishRecognitionWorkflow {
+  public var recognitionService: any BookishRecognition {
     recognition
   }
 

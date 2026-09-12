@@ -7,17 +7,19 @@ import Foundation
 
 /// Returns deterministic candidates for exercising the scanning workflow without a live provider.
 public struct FakeBookRecognizer: BookRecognizer {
-
   public let id = "com.elegantchaos.bookish.recognizer.fake"
-  
   public let label = "Fake"
-  
+  public let description =
+    "Returns a fixed sample of books without processing the selected image."
+
   /// Creates the fake recognizer.
   public init() {
   }
 
   /// Returns sample candidates without reading the supplied image data.
-  public func identifyBooks(in _: Data) async throws -> [BookRecognitionCandidate] {
+  public func identifyBooks(in _: Data) async throws
+    -> [BookRecognitionCandidate]
+  {
     Self.sampleCandidates
   }
 

@@ -14,6 +14,8 @@ public struct OnDeviceBookRecognizer: BookRecognizer {
   
   public let label = "On Device"
   
+  public let description: String = "Direct on-device image recognition is unavailable in this build because it requires a newer Foundation Models SDK."
+  
   /// Creates the explicit unavailable service.
   public init() {
   }

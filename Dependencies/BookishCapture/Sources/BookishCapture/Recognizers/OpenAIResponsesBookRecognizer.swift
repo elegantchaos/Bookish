@@ -9,6 +9,7 @@ import Foundation
 public struct OpenAIResponsesBookRecognizer: BookRecognizer {
   public let id = "com.bookish.elegantchao.recognizer.openai"
   public let label = "OpenAI"
+  public let description: String = "The selected image is sent to OpenAI only when you choose Identify Books."
   
   private let credentials: any BookRecognitionCredentials
   private let model: String

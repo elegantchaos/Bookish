@@ -41,3 +41,4 @@ public struct SelectAllRecognizedBooksCommand<Centre: BookishRecognitionProvider
     centre.recognitionService.selectAllCandidates()
   }
 }
+

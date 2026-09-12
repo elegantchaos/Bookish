@@ -16,7 +16,8 @@ import Vision
 public struct OCRBookRecognizer: BookRecognizer {
   public let id = "com.elegantchaos.bookish.recognizer.ocr"
   public let label = "OCR"
-
+  public let description = "Vision reads text from the selected image before Apple Intelligence identifies books."
+  
   /// Creates an OCR-backed Foundation Models recognizer.
   public init() {
   }

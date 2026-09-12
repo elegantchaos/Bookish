@@ -5,6 +5,7 @@
 
 import PhotosUI
 import SwiftUI
+import BookishCapture
 
 /// Lets the user choose a book-shelf image and review recognizer candidates.
 struct BookCaptureView: View {
@@ -12,24 +13,21 @@ struct BookCaptureView: View {
   @Environment(BookishCommander.self) private var commander
 
   /// The observable recognition workflow displayed by this view.
-  @Environment(BookRecognitionViewModel.self) private var recognition
+  @Environment(BookishRecognitionService.self) private var recognition
 
   var body: some View {
-      @Bindable var recognition = recognition
-      List {
+    @Bindable var recognition = recognition
+    return List {
         Section {
           HStack(alignment: .top) {
             VStack(alignment: .leading) {
               HStack {
                 Picker(
                   "Recognition Provider",
-                  selection: providerSelection(
-                    for: recognition,
-                    commander: commander
-                  )
+                  selection: $recognition.recognizerID
                 ) {
-                  ForEach(BookRecognitionProvider.allCases) { provider in
-                    Text(provider.title).tag(provider)
+                  ForEach(recognition.recognizers, id: \.id) { provider in
+                    Text(provider.label).tag(provider.id)
                   }
                 }
                 .disabled(recognition.isRecognizing)
@@ -52,7 +50,7 @@ struct BookCaptureView: View {
         } header: {
           Text("Image")
         } footer: {
-          Text(providerDescription(for: recognition.provider))
+          Text(recognition.recognizer.description)
         }
 
         if recognition.isRecognizing {
@@ -131,7 +129,7 @@ struct BookCaptureView: View {
   /// Binds one candidate's visible toggle to the workflow's selected identifiers.
   private func candidateSelection(
     for candidate: BookRecognitionCandidate,
-    recognition: BookRecognitionViewModel
+    recognition: BookishRecognitionService
   ) -> Binding<Bool> {
     Binding(
       get: { recognition.selectedCandidateIDs.contains(candidate.id) },
@@ -145,38 +143,7 @@ struct BookCaptureView: View {
     )
   }
 
-  /// Binds the provider picker to the command-backed recognition workflow.
-  private func providerSelection(
-    for recognition: BookRecognitionViewModel,
-    commander: BookishCommander
-  ) -> Binding<BookRecognitionProvider> {
-    Binding(
-      get: { recognition.provider },
-      set: { provider in
-        commander.performWithoutWaiting(
-          SelectBookRecognitionProviderCommand(provider: provider)
-        )
-      }
-    )
-  }
 
-  /// Describes where the selected image is processed for the active provider.
-  private func providerDescription(for provider: BookRecognitionProvider)
-    -> String
-  {
-    switch provider {
-    case .fake:
-      "Returns a fixed sample of books without processing the selected image."
-    case .ocr:
-      "Vision reads text from the selected image before Apple Intelligence identifies books."
-    case .openAI:
-      "The selected image is sent to OpenAI only when you choose Identify Books."
-    case .appleOnDevice:
-      "Direct on-device image recognition is unavailable in this build because it requires a newer Foundation Models SDK."
-    case .applePrivateCloudCompute:
-      "Private Cloud Compute is unavailable in this build until its newer Foundation Models SDK and entitlement are available."
-    }
-  }
 }
 
 #Preview {

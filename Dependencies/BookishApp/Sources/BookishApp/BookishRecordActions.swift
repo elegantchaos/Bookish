@@ -7,6 +7,20 @@ import BookishDatastore
 import BookishRecord
 import Foundation
 
+
+/// Performs selected-record actions requested by commands.
+@MainActor
+public protocol BookishRecordActions {
+  /// Whether a record is selected.
+  var hasSelectedRecord: Bool { get }
+  /// Marks the selected record as reading.
+  func markReading() async
+  /// Marks the selected record as finished.
+  func markFinished() async
+  /// Simulates a remote update.
+  func simulateRemoteUpdate() async
+}
+
 /// The storage operations required to apply a selected-record action.
 @MainActor
 protocol BookishRecordActionStorage: AnyObject {
