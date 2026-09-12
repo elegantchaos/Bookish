@@ -9,14 +9,20 @@ import SwiftUI
 
 /// Displays records returned by the currently selected browser index.
 struct RecordIndexView: View {
-  /// The command boundary used to report record-index failures.
-  @Environment(BookishEngine.self) private var commander
+  /// The command boundary used to update record selection and filtering.
+  @Environment(BookishCommander.self) private var commander
 
-  /// The datastore coordinator that resolves layouts and metadata.
-  var harness: BookishUIStateService { commander.uiState }
+  /// The UI state that identifies configuration revisions.
+  @Environment(BookishUIStateService.self) private var uiState
+
+  /// The presentation service that resolves layouts and metadata.
+  @Environment(BookishPresentationService.self) private var presentation
 
   /// The route containing the active index and record selection.
-  var navigation: BookishNavigationService { commander.navigation }
+  @Environment(BookishNavigationService.self) private var navigation
+
+  /// The service used to report presentation-resolution failures.
+  @Environment(BookishStatusService.self) private var statusService
 
   /// The layout currently used to render index rows.
   @State private var layout: BookishRecord?
@@ -70,24 +76,24 @@ struct RecordIndexView: View {
 
   /// Identifies data changes that require row presentations to be resolved again.
   private var taskID: String {
-    "\(navigation.selectedRecordIndexID?.rawValue ?? "")-\(harness.presentation.selectedLayoutID?.rawValue ?? "")-\(harness.revision)"
+    "\(navigation.selectedRecordIndexID?.rawValue ?? "")-\(presentation.selectedLayoutID?.rawValue ?? "")-\(uiState.revision)"
   }
 
   /// Resolves the active layout and the metadata needed by visible record kinds.
   private func loadPresentation() async {
     do {
-      layout = try await harness.presentation.selectedLayout(for: navigation.selectedRecordIndex)
+      layout = try await presentation.selectedLayout(for: navigation.selectedRecordIndex)
       var presentationsByKind: [String: [BookishRecord]] = [:]
       for kind in Set(navigation.selectedRecordResult?.records.map(\.kind) ?? []) {
-        presentationsByKind[kind] = try await harness.presentation.presentations(
+        presentationsByKind[kind] = try await presentation.presentations(
           for: kind, layout: layout)
-        if let metadata = try await harness.presentation.recordKindMetadata(for: kind) {
+        if let metadata = try await presentation.recordKindMetadata(for: kind) {
           metadataByKind[kind] = metadata
         }
       }
       self.presentationsByKind = presentationsByKind
     } catch {
-      commander.statusService.report(error: error)
+      statusService.report(error: error)
     }
   }
 

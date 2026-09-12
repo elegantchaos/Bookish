@@ -9,10 +9,13 @@ import SwiftUI
 /// Lets the user choose a book-shelf image and review recognizer candidates.
 struct BookCaptureView: View {
   @State private var selectedPhoto: PhotosPickerItem?
-  @Environment(BookishEngine.self) private var commander
+  @Environment(BookishCommander.self) private var commander
+
+  /// The observable recognition workflow displayed by this view.
+  @Environment(BookRecognitionViewModel.self) private var recognition
 
   var body: some View {
-      @Bindable var recognition = commander.recognition
+      @Bindable var recognition = recognition
       List {
         Section {
           HStack(alignment: .top) {
@@ -145,7 +148,7 @@ struct BookCaptureView: View {
   /// Binds the provider picker to the command-backed recognition workflow.
   private func providerSelection(
     for recognition: BookRecognitionViewModel,
-    commander: BookishEngine
+    commander: BookishCommander
   ) -> Binding<BookRecognitionProvider> {
     Binding(
       get: { recognition.provider },
@@ -177,8 +180,9 @@ struct BookCaptureView: View {
 }
 
 #Preview {
+  let engine = BookishEngine()
   NavigationStack {
     BookCaptureView()
   }
-  .environment(BookishEngine())
+  .modifier(BookishEnvironmentInjector(engine: engine))
 }

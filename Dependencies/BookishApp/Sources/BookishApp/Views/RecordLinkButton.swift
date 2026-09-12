@@ -16,7 +16,10 @@ struct RecordLinkButton: View {
   let harness: BookishUIStateService
 
   /// The application-owned command boundary used to push the linked record.
-  @Environment(BookishEngine.self) private var commander
+  @Environment(BookishCommander.self) private var commander
+
+  /// The service used to report link-resolution failures.
+  @Environment(BookishStatusService.self) private var statusService
 
   /// The resolved visual metadata for the link.
   @State private var presentation: BookishRecordLinkPresentation?
@@ -62,7 +65,7 @@ struct RecordLinkButton: View {
         placeholderSystemImage: try await harness.presentation.recordKindMetadata(for: record.kind)?
           .string(BookishRecordKey.icon) ?? "doc")
     } catch {
-      commander.statusService.report(error: error)
+      statusService.report(error: error)
     }
   }
 }

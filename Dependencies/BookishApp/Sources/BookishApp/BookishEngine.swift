@@ -24,6 +24,9 @@ public final class BookishEngine {
   /// Global UI state used by the Bookish UI and commands.
   @ObservationIgnored public let uiState: BookishUIStateService
 
+  /// Command façade exposed to SwiftUI views.
+  @ObservationIgnored let commander: BookishCommander
+
   /// Navigation and routing service for the datastore record browser.
   @ObservationIgnored public let navigation: BookishNavigationService
 
@@ -79,6 +82,7 @@ public final class BookishEngine {
         statusService: statusService
       )
     )
+    let commander = BookishCommander()
     state = .uninitialised
     startupTask = nil
     self.navigation = navigation
@@ -88,8 +92,10 @@ public final class BookishEngine {
     self.importingService = importingService
     self.exportingService = exportingService
     self.uiState = uiState
+    self.commander = commander
     self.recordActions = recordActions
     self.recognition = recognition
+    commander.attach(to: self)
   }
 
   /// Starts the standard shared application loop.
@@ -111,7 +117,7 @@ public final class BookishEngine {
   /// Builds the root view managed by the shared application shell.
   public func rootContent() -> some View {
     rootView {
-      BookishUIStateView(uiState: uiState)
+      BookishUIStateView()
     } startup: {
       ProgressView()
     }

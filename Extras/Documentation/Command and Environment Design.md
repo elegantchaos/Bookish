@@ -1,31 +1,35 @@
 # Command and Environment Design
 
 Bookish uses `BookishEngine` as the application composition root and command
-centre. It owns service lifecycles, injects the command centre into SwiftUI, and
-is the only object that commands use as their concrete centre.
+centre. It owns service lifecycles and is the only object that commands use as
+their concrete centre. SwiftUI receives a narrow `BookishCommander` façade
+instead of the engine itself.
 
 ## Responsibilities
 
-The engine has two distinct roles in a view:
+The engine has two distinct roles in the application:
 
-- It is the **commander** that executes commands.
-- It is not the preferred source of mutable service APIs for a view.
+- It executes commands as their concrete command centre.
+- It owns the services that the application injects into SwiftUI.
 
-Views currently receive the engine through the SwiftUI environment so they can
+Views receive `BookishCommander` through the SwiftUI environment so they can
 use command helpers such as `button`, `toolbarItem`, and
-`performWithoutWaiting`. This is intentional. It does not mean that a view
-should directly call a service mutation method reachable through the engine.
+`performWithoutWaiting`. The façade holds the engine privately and does not
+expose command-provider APIs. Views therefore cannot reach services through
+their command dependency.
 
 ```text
 SwiftUI view
     │
     ├── reads observable state
     │
-    └── dispatches command through BookishEngine
+    └── dispatches command through BookishCommander
             │
-            └── narrow provider protocol
+            └── BookishEngine
                     │
-                    └── mutation-capable service
+                    └── narrow provider protocol
+                            │
+                            └── mutation-capable service
 ```
 
 ## Commands and providers
@@ -50,7 +54,7 @@ New commands should follow this sequence:
 2. Add the smallest mutation method to the action's service protocol.
 3. Add a narrow provider protocol that vends that service.
 4. Implement the command against that provider.
-5. Dispatch the command from the view through the environment-injected engine.
+5. Dispatch the command from the view through the environment-injected commander.
 6. Test the command with a fake provider and fake service.
 
 Command failures dispatched with `performWithoutWaiting` are reported through
@@ -74,11 +78,15 @@ also an allowed UI reporting effect, rather than a domain command.
 
 ## Read services in the environment
 
-The current environment injects the engine so views can issue commands. Future
-work may also inject individual read-only observable state or service objects.
-Those read surfaces should expose properties and queries needed for rendering,
-but not mutation methods. The engine remains in the environment as commander;
-read-service injection complements it rather than replacing it.
+The environment injects the command façade and individual observable services.
+Views read navigation, UI state, presentation, storage, status, and recognition
+state from their concrete service dependencies. The engine is not injected into
+SwiftUI view content.
+
+The façade intentionally exposes only command dispatch and command UI helpers.
+Views should report allowed view-owned loading and picker failures through the
+environment-injected status service. All domain mutations continue to use
+commands, except for the documented direct-binding exception below.
 
 If compile-time prevention of direct mutation becomes necessary, keep mutable
 services out of the UI module and inject only read-only state across the module

@@ -10,24 +10,26 @@ import UniformTypeIdentifiers
 /// The root view for the Bookish app.
 public struct BookishUIStateView: View {
   /// The global UI state that owns browser presentation and sheet state.
-  @Bindable private var uiState: BookishUIStateService
+  @Environment(BookishUIStateService.self) private var uiState
 
   /// The command boundary used to report file-panel failures.
-  @Environment(BookishEngine.self) private var commander
+  @Environment(BookishCommander.self) private var commander
+
+  /// The navigation state that selects the visible workflow or browser.
+  @Environment(BookishNavigationService.self) private var navigation
+
+  /// The service used to report picker failures.
+  @Environment(BookishStatusService.self) private var statusService
 
   /// Whether debug-only browser indexes should be available.
   @AppStorage(.isDeveloperMode) private var isDeveloperMode
 
-  /// Creates the root view over the supplied global UI state.
-  public init(uiState: BookishUIStateService) {
-    self.uiState = uiState
-  }
-
   /// The SwiftUI content for the datastore app.
   public var body: some View {
+    @Bindable var uiState = uiState
     VStack(spacing: 0) {
-      if let section = commander.navigationService.selectedMainSection {
-        WorkflowNavigationSplitView(section: section, uiState: uiState)
+      if let section = navigation.selectedMainSection {
+        WorkflowNavigationSplitView(section: section)
       } else {
         BrowserNavigationSplitView()
       }
@@ -60,13 +62,8 @@ public struct BookishUIStateView: View {
 
 /// Displays the library browser with independent sidebar, index, and detail columns.
 private struct BrowserNavigationSplitView: View {
-  @Environment(BookishEngine.self) var commander
-
   /// The global UI state that owns browser presentation and sheet state.
-  var uiState: BookishUIStateService { commander.uiState }
-
-  /// The shared navigation route for the browser columns.
-  var navigation: BookishNavigationService { commander.navigation }
+  @Environment(BookishUIStateService.self) private var uiState
 
   /// The library browser columns.
   var body: some View {
@@ -89,7 +86,7 @@ private struct WorkflowNavigationSplitView: View {
   let section: BookishMainSection
 
   /// The global UI state that owns browser presentation and sheet state.
-  let uiState: BookishUIStateService
+  @Environment(BookishUIStateService.self) private var uiState
 
   /// The sidebar and full-width workflow content.
   var body: some View {
@@ -112,7 +109,7 @@ extension BookishUIStateView {
       commander.performWithoutWaiting(ImportSelectedInterchangeCommand(url: url))
 
     case .failure(let error):
-      commander.statusService.report(error: error)
+      statusService.report(error: error)
     }
   }
 
@@ -123,7 +120,7 @@ extension BookishUIStateView {
       commander.performWithoutWaiting(ImportSelectedDeliciousLibraryCommand(url: url))
 
     case .failure(let error):
-      commander.statusService.report(error: error)
+      statusService.report(error: error)
     }
   }
 
@@ -134,14 +131,13 @@ extension BookishUIStateView {
       uiState.didExportInterchange()
 
     case .failure(let error):
-      commander.statusService.report(error: error)
+      statusService.report(error: error)
     }
   }
 }
 
 #Preview {
   let engine = BookishEngine()
-  BookishUIStateView(uiState: engine.uiState)
-    .environment(engine.navigation)
-    .environment(engine)
+  BookishUIStateView()
+    .modifier(BookishEnvironmentInjector(engine: engine))
 }

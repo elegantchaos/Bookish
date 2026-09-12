@@ -20,8 +20,8 @@ struct RecordQuerySectionView: View {
   /// The datastore coordinator used to resolve configuration and results.
   let harness: BookishUIStateService
 
-  /// The command boundary used to report query-section failures.
-  @Environment(BookishEngine.self) private var commander
+  /// The service used to report query-section failures.
+  @Environment(BookishStatusService.self) private var statusService
 
   /// The resolved section configuration record.
   @State private var section: BookishRecord?
@@ -116,7 +116,7 @@ struct RecordQuerySectionView: View {
     } catch {
       result = nil
       errorDescription = error.localizedDescription
-      commander.statusService.report(error: error)
+      statusService.report(error: error)
     }
   }
 
@@ -134,7 +134,7 @@ struct RecordQuerySectionView: View {
       self.metadataByKind = metadataByKind
     } catch {
       errorDescription = error.localizedDescription
-      commander.statusService.report(error: error)
+      statusService.report(error: error)
     }
   }
 

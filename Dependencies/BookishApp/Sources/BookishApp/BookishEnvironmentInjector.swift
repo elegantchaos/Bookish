@@ -7,7 +7,7 @@ import SwiftUI
 
 /// Injects Bookish services into content managed by the application shell.
 struct BookishEnvironmentInjector: ViewModifier {
-  /// Command boundary exposed to datastore SwiftUI content.
+  /// Application engine that owns the injected services.
   let engine: BookishEngine
 
   /// Adds the command boundary and observable read services to the SwiftUI environment.
@@ -19,6 +19,6 @@ struct BookishEnvironmentInjector: ViewModifier {
       .environment(engine.presentationService)
       .environment(engine.status)
       .environment(engine.recognition)
-      .environment(engine)
+      .environment(engine.commander)
   }
 }

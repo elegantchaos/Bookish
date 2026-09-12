@@ -9,7 +9,7 @@ import SwiftUI
 /// Displays the available record indexes and changes the active browser index.
 struct BrowserIndexListView: View {
   /// The command boundary used to report navigation failures.
-  @Environment(BookishEngine.self) private var commander
+  @Environment(BookishCommander.self) private var commander
 
   /// The navigation state displayed by the sidebar.
   @Environment(BookishNavigationService.self) private var navigation

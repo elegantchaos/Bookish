@@ -14,7 +14,7 @@ struct BookishToolbar: ToolbarContent {
   let harness: BookishUIStateService
 
   /// The application-owned command boundary for toolbar actions.
-  @Environment(BookishEngine.self) private var commander
+  @Environment(BookishCommander.self) private var commander
 
   /// Whether developer-only toolbar actions are available.
   @AppStorage(.isDeveloperMode) private var isDeveloperMode
