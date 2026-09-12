@@ -5,20 +5,22 @@
 
 import Foundation
 
-/// Reports that this build cannot yet send an image directly to Apple's Foundation Model.
+/// Reports the current unavailability of direct-image Foundation Models recognition.
 ///
-/// Direct image input is intentionally separate from OCR so selecting On Device never silently
-/// changes the image-processing path. The installed SDK lacks the required image attachment API.
+/// Direct image input remains separate from OCR so selecting On Device never changes the
+/// image-processing path implicitly.
 public struct OnDeviceBookRecognizer: BookRecognizer {
+  /// The stable identifier for the direct-image recognizer.
   public let id = "com.elegantchaos.bookish.recognizer.direct"
-  
+
+  /// The user-facing recognizer name.
   public let label = "On Device"
-  
-  public let description: String = "Direct on-device image recognition is unavailable in this build because it requires a newer Foundation Models SDK."
-  
-  /// Creates the explicit unavailable service.
-  public init() {
-  }
+
+  /// Explains why the recognizer is unavailable.
+  public let description = "Direct on-device image recognition is unavailable in this build."
+
+  /// Creates the unavailable recognizer.
+  public init() {}
 
   /// Explains why this build cannot make the requested direct-image call.
   public func identifyBooks(in _: Data) async throws -> [BookRecognitionCandidate] {

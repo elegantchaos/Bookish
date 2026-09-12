@@ -1,5 +1,6 @@
 # Journal Index
 
+- [2026-09-12 BookishCapture Cleanup](2026-09-12-bookish-capture-cleanup.md)
 - [2026-09-11 Command Façade Environment](2026-09-11-command-façade-environment.md)
 - [2026-09-11 Command and Environment Design](2026-09-11-command-and-environment-design.md)
 - [2026-09-11 Import and Browser-Setting Commands](2026-09-11-import-and-browser-setting-commands.md)

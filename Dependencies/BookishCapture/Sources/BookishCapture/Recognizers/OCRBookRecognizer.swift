@@ -5,19 +5,22 @@
 
 import Foundation
 import FoundationModels
-import ImageIO
-import Vision
 
 /// Identifies books using Vision OCR followed by Apple's on-device Foundation Model.
 ///
-/// The installed Foundation Models framework accepts text prompts, so Vision extracts the
-/// visible spine and cover text before the model produces structured candidates. This keeps
-/// the recognition service's image-data contract consistent with the OpenAI implementation.
+/// Vision extracts visible spine and cover text before the language model produces structured
+/// candidates. This keeps the recognizer's image-data contract consistent across providers.
 public struct OCRBookRecognizer: BookRecognizer {
+  /// The stable identifier for the OCR recognizer.
   public let id = "com.elegantchaos.bookish.recognizer.ocr"
+
+  /// The user-facing recognizer name.
   public let label = "OCR"
-  public let description = "Vision reads text from the selected image before Apple Intelligence identifies books."
-  
+
+  /// Explains the recognizer's two-step process.
+  public let description =
+    "Vision reads text from the selected image before Apple Intelligence identifies books."
+
   /// Creates an OCR-backed Foundation Models recognizer.
   public init() {
   }
@@ -46,12 +49,6 @@ public struct OCRBookRecognizer: BookRecognizer {
         """,
       generating: BookRecognitionResult.self
     )
-    return response.content.candidates.map {
-      BookRecognitionCandidate(
-        title: $0.title,
-        authors: $0.authors,
-        confidence: $0.confidence
-      )
-    }
+    return response.content.candidates
   }
 }

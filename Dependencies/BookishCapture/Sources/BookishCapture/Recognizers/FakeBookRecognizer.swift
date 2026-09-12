@@ -7,8 +7,13 @@ import Foundation
 
 /// Returns deterministic candidates for exercising the scanning workflow without a live provider.
 public struct FakeBookRecognizer: BookRecognizer {
+  /// The stable identifier for the fake recognizer.
   public let id = "com.elegantchaos.bookish.recognizer.fake"
+
+  /// The user-facing recognizer name.
   public let label = "Fake"
+
+  /// Explains that the recognizer does not use the image data.
   public let description =
     "Returns a fixed sample of books without processing the selected image."
 

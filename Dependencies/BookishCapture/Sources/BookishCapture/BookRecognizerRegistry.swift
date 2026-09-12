@@ -5,35 +5,41 @@
 
 import Foundation
 
-/// Creates Bookish's currently supported AI recognition services.
-public class BookRecognizerRegistry {
-  var recognisers: [String:any BookRecognizer] = [:]
+/// Stores the recognition providers available to the application.
+public final class BookRecognizerRegistry {
+  /// Recognizers indexed by their stable identifiers.
+  private var recognizersByID: [String: any BookRecognizer] = [:]
 
-  /// Creates a factory that obtains the OpenAI key from Keychain.
-  public init() {
-  }
+  /// Creates an empty recognizer registry.
+  public init() {}
 
-  public func registerStandardRecognizers() {
+  /// Registers the recognizers bundled with Bookish.
+  public func registerDefaultRecognizers() {
     register(FakeBookRecognizer())
     register(OnDeviceBookRecognizer())
     register(CloudComputeBookRecognizer())
-    
-  }
-  
-  public func register(_ recognizer: any BookRecognizer) {
-    recognisers[recognizer.id] = recognizer
-  }
-  
-  public func recognizer(forID id: String) -> BookRecognizer {
-    recognisers[id]!
-  }
-  
-  public var recognizerIDs: [String] {
-    recognisers.keys.sorted()
-  }
-  
-  public var recognizers: [any BookRecognizer] {
-    Array(recognisers.values)
   }
 
+  /// Adds or replaces a recognizer with the same identifier.
+  public func register(_ recognizer: any BookRecognizer) {
+    recognizersByID[recognizer.id] = recognizer
+  }
+
+  /// Returns the recognizer registered for an identifier.
+  public func recognizer(for identifier: String) -> any BookRecognizer {
+    guard let recognizer = recognizersByID[identifier] else {
+      fatalError("No book recognizer is registered for identifier: \(identifier)")
+    }
+    return recognizer
+  }
+
+  /// The registered recognizer identifiers in ascending order.
+  public var recognizerIDs: [String] {
+    recognizersByID.keys.sorted()
+  }
+
+  /// The registered recognizers in unspecified order.
+  public var recognizers: [any BookRecognizer] {
+    Array(recognizersByID.values)
+  }
 }

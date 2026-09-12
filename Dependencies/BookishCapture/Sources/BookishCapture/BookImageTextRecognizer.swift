@@ -7,9 +7,9 @@ import Foundation
 import ImageIO
 import Vision
 
-/// Extracts the visible text that the on-device language model uses as input.
+/// Extracts visible text for an OCR-backed book-recognition request.
 struct BookImageTextRecognizer {
-  /// Performs accurate, uncorrected text recognition on an image's first frame.
+  /// Performs accurate, uncorrected text recognition on the image's first frame.
   func recognizeText(in imageData: Data) throws -> String {
     guard let source = CGImageSourceCreateWithData(imageData as CFData, nil),
       let image = CGImageSourceCreateImageAtIndex(source, 0, nil)

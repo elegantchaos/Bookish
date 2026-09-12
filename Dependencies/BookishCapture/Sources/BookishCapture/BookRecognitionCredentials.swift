@@ -3,7 +3,6 @@
 //  Copyright © 2026 Elegant Chaos Limited. All rights reserved.
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
-
 import Keychain
 
 /// Provides credentials required by book-recognition services.
@@ -21,8 +20,7 @@ public struct KeychainBookRecognitionCredentials: BookRecognitionCredentials {
   public static let openAIServer = "api.openai.com"
 
   /// Creates a Keychain-backed credential provider.
-  public init() {
-  }
+  public init() {}
 
   /// Reads the API key from the dedicated OpenAI internet-password item.
   public func openAIAPIKey() throws -> String? {

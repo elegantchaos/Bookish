@@ -5,21 +5,22 @@
 
 import Foundation
 
-/// Reports that this build cannot yet create Apple's Private Cloud Compute model.
+/// Reports the current unavailability of Apple's Private Cloud Compute model.
 ///
-/// Private Cloud Compute is a newer beta API than the Foundation Models SDK used by this
-/// project. Keeping this explicit provider prevents a silent fallback to either on-device
-/// Apple Intelligence or OpenAI.
+/// This explicit provider prevents a selected cloud-compute workflow from silently falling
+/// back to on-device Apple Intelligence or OpenAI.
 public struct CloudComputeBookRecognizer: BookRecognizer {
+  /// The stable identifier for the Cloud Compute recognizer.
   public let id = "com.elegantchaos.bookish.recognizer.cloud"
-  
+
+  /// The user-facing recognizer name.
   public let label = "Cloud Compute"
-  
-  public let description: String = "Private Cloud Compute is unavailable in this build until its newer Foundation Models SDK and entitlement are available."
-  
-  /// Creates the explicit unavailable service.
-  public init() {
-  }
+
+  /// Explains why the recognizer is unavailable.
+  public let description = "Private Cloud Compute is unavailable in this build."
+
+  /// Creates the unavailable recognizer.
+  public init() {}
 
   /// Explains why this build cannot make the requested Private Cloud Compute call.
   public func identifyBooks(in imageData: Data) async throws -> [BookRecognitionCandidate] {

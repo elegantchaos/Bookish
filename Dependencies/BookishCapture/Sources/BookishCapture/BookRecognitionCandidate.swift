@@ -6,7 +6,7 @@
 import Foundation
 import FoundationModels
 
-/// A possible identification of a book visible in an image.
+/// Represents one book identified from an image.
 @Generable(description: "One book that can be identified from supplied OCR text.")
 public struct BookRecognitionCandidate: Codable, Equatable, Identifiable, Sendable {
   /// A stable identifier for display while the recognition result is in memory.
@@ -31,6 +31,11 @@ public struct BookRecognitionCandidate: Codable, Equatable, Identifiable, Sendab
 
 @Generable(description: "Book identification candidates that are supported by supplied OCR text.")
 public struct BookRecognitionResult: Codable {
-  /// Candidate books visible in the source text.
+  /// The identified book candidates.
   public var candidates: [BookRecognitionCandidate]
+
+  /// Creates a recognition result from identified candidates.
+  public init(candidates: [BookRecognitionCandidate]) {
+    self.candidates = candidates
+  }
 }

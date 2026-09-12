@@ -38,15 +38,15 @@ public final class BookishRecognitionService: BookishRecognition {
   private let statusService: any BookishStatus
 
   private let serviceFactory: BookRecognizerRegistry
-  
+
   public var recognizerID: String {
     didSet {
-      recognizer = serviceFactory.recognizer(forID: recognizerID)
+      recognizer = serviceFactory.recognizer(for: recognizerID)
     }
   }
-  
+
   public var recognizer: any BookRecognizer
-  
+
   /// The data selected by the user for recognition.
   public private(set) var imageData: Data?
 
@@ -69,31 +69,31 @@ public final class BookishRecognitionService: BookishRecognition {
     statusService: any BookishStatus
   ) {
     let factory = BookRecognizerRegistry()
-    factory.registerStandardRecognizers()
+    factory.registerDefaultRecognizers()
     let defaultID = factory.recognizerIDs.first!
 
     self.storage = storage
     self.state = state
     self.statusService = statusService
     self.serviceFactory = factory
-    
+
     imageData = nil
     candidates = []
     selectedCandidateIDs = []
     error = nil
     isRecognizing = false
     recognizerID = defaultID
-    recognizer = serviceFactory.recognizer(forID: defaultID)
+    recognizer = serviceFactory.recognizer(for: defaultID)
   }
 
   public var recognizerIDs: [String] {
     serviceFactory.recognizerIDs
   }
-  
+
   public var recognizers: [any BookRecognizer] {
     serviceFactory.recognizers
   }
-  
+
   /// Whether the datastore has completed loading.
   public var canAddBooks: Bool {
     storage.isLoaded
@@ -109,7 +109,7 @@ public final class BookishRecognitionService: BookishRecognition {
 
   /// Selects a recognizer and identifies the current image when the provider changes.
   public func selectRecognizer(_ id: String) async {
-    self.recognizer = serviceFactory.recognizer(forID: id)
+    self.recognizer = serviceFactory.recognizer(for: id)
     await identifyBooks()
   }
 

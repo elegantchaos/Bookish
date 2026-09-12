@@ -5,7 +5,7 @@
 
 import Foundation
 
-/// Errors surfaced by the Responses API recognizer.
+/// Errors surfaced by Bookish's recognition providers.
 public enum BookRecognitionError: LocalizedError {
   /// The app was launched without an API key.
   case missingAPIKey
@@ -31,6 +31,7 @@ public enum BookRecognitionError: LocalizedError {
   /// The bundled recognition example image could not be read.
   case captureGoodExampleUnavailable
 
+  /// A localized explanation suitable for display in the recognition workflow.
   public var errorDescription: String? {
     switch self {
     case .missingAPIKey:

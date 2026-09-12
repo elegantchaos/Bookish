@@ -7,20 +7,34 @@ import Foundation
 
 /// Sends images to the OpenAI Responses API and decodes book-identification candidates.
 public struct OpenAIResponsesBookRecognizer: BookRecognizer {
+  /// The stable identifier for the OpenAI recognizer.
   public let id = "com.bookish.elegantchao.recognizer.openai"
+
+  /// The user-facing recognizer name.
   public let label = "OpenAI"
-  public let description: String = "The selected image is sent to OpenAI only when you choose Identify Books."
-  
+
+  /// Explains when image data is sent to OpenAI.
+  public let description =
+    "The selected image is sent to OpenAI only when you choose Identify Books."
+
+  /// Retrieves the OpenAI API credential.
   private let credentials: any BookRecognitionCredentials
+
+  /// Selects the Responses API model.
   private let model: String
+
+  /// Sends requests to the Responses API.
+  private let transport: any BookRecognitionTransport
 
   /// Creates a recognizer using a Keychain-backed credential provider by default.
   public init(
     credentials: any BookRecognitionCredentials = KeychainBookRecognitionCredentials(),
     model: String = "gpt-4.1-mini",
+    transport: any BookRecognitionTransport = URLSession.shared,
   ) {
     self.credentials = credentials
     self.model = model
+    self.transport = transport
   }
 
   /// Identifies clearly visible books without using external catalogue services.
@@ -37,18 +51,18 @@ public struct OpenAIResponsesBookRecognizer: BookRecognizer {
     request.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
     request.setValue("application/json", forHTTPHeaderField: "Content-Type")
     request.httpBody = try JSONSerialization.data(
-      withJSONObject: requestBody(for: imageData),
+      withJSONObject: makeRequestBody(for: imageData),
       options: []
     )
 
-    let (data, response) = try await URLSession.shared.data(for: request)
+    let (data, response) = try await transport.data(for: request)
     guard let httpResponse = response as? HTTPURLResponse else {
       throw BookRecognitionError.invalidResponse
     }
     guard (200...299).contains(httpResponse.statusCode) else {
       throw BookRecognitionError.serverError(
         statusCode: httpResponse.statusCode,
-        message: apiErrorMessage(from: data)
+        message: errorMessage(from: data)
           ?? "OpenAI request failed (HTTP \(httpResponse.statusCode))."
       )
     }
@@ -62,7 +76,8 @@ public struct OpenAIResponsesBookRecognizer: BookRecognizer {
     return try JSONDecoder().decode(BookRecognitionResult.self, from: resultData).candidates
   }
 
-  private func requestBody(for imageData: Data) -> [String: Any] {
+  /// Builds the JSON payload for an image-recognition request.
+  private func makeRequestBody(for imageData: Data) -> [String: Any] {
     let encodedImage = imageData.base64EncodedString()
     return [
       "model": model,
@@ -114,15 +129,20 @@ public struct OpenAIResponsesBookRecognizer: BookRecognizer {
     ]
   }
 
-  private func apiErrorMessage(from data: Data) -> String? {
+  /// Extracts the user-facing message from an OpenAI error response.
+  private func errorMessage(from data: Data) -> String? {
     try? JSONDecoder().decode(OpenAIErrorResponse.self, from: data).error.message
   }
 }
 
+/// Decodes the message in an OpenAI error response.
 private struct OpenAIErrorResponse: Decodable {
+  /// The API error details.
   let error: ErrorDetail
 
+  /// Contains the API's error message.
   struct ErrorDetail: Decodable {
+    /// The user-facing error message.
     let message: String
   }
 }

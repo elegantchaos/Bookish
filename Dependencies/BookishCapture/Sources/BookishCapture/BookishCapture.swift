@@ -1,10 +1,10 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-//  Created by Sam Deane on 25/11/21.
-//  All code (c) 2021 - present day, Elegant Chaos Limited.
+//  Created by Sam Deane on 12/09/2026.
+//  Copyright © 2026 Elegant Chaos Limited. All rights reserved.
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
-
-public class BookishCapture {
-  public init() {
-  }
+/// Provides a stable namespace for Bookish's capture package.
+public final class BookishCapture {
+  /// Creates a capture-package namespace instance.
+  public init() {}
 }
