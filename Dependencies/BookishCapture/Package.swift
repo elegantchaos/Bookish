@@ -1,4 +1,4 @@
-// swift-tools-version:6.3
+// swift-tools-version:6.4
 
 import PackageDescription
 
@@ -16,7 +16,7 @@ let package = Package(
 
   dependencies: [
     .package(path: "../Keychain"),
-    .package(url: "https://github.com/elegantchaos/Logger.git", from: "2.0.0")
+    .package(url: "https://github.com/elegantchaos/Logger.git", from: "2.0.0"),
   ],
 
   targets: [

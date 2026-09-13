@@ -4,11 +4,11 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 import Foundation
+import FoundationModels
 
-/// Reports the current unavailability of Apple's Private Cloud Compute model.
+/// Identifies books by passing an image to Apple's Private Cloud Compute model.
 ///
-/// This explicit provider prevents a selected cloud-compute workflow from silently falling
-/// back to on-device Apple Intelligence or OpenAI.
+/// This explicit provider never falls back to on-device Apple Intelligence or OpenAI.
 public struct CloudComputeBookRecognizer: BookRecognizer {
   /// The stable identifier for the Cloud Compute recognizer.
   public let id = "com.elegantchaos.bookish.recognizer.cloud"
@@ -16,14 +16,23 @@ public struct CloudComputeBookRecognizer: BookRecognizer {
   /// The user-facing recognizer name.
   public let label = "Cloud Compute"
 
-  /// Explains why the recognizer is unavailable.
-  public let description = "Private Cloud Compute is unavailable in this build."
+  /// Explains the recognizer's cloud-compute processing path.
+  public let description =
+    "Private Cloud Compute identifies books directly from the selected image."
 
-  /// Creates the unavailable recognizer.
+  /// Creates the cloud-compute recognizer.
   public init() {}
 
-  /// Explains why this build cannot make the requested Private Cloud Compute call.
+  /// Identifies books directly from the supplied image on macOS and iOS 27 or later.
   public func identifyBooks(in imageData: Data) async throws -> [BookRecognitionCandidate] {
-    throw BookRecognitionError.privateCloudComputeUnavailable
+    guard #available(iOS 27.0, macOS 27.0, *) else {
+      throw BookRecognitionError.privateCloudComputeUnavailable
+    }
+
+    let model = PrivateCloudComputeLanguageModel()
+    guard model.isAvailable else {
+      throw BookRecognitionError.privateCloudComputeUnavailable
+    }
+    return try await DirectImageBookRecognizer().identifyBooks(in: imageData, using: model)
   }
 }

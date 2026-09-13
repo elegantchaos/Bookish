@@ -1,5 +1,7 @@
 # Journal Index
 
+- [2026-09-13 Recognition Session Tests](2026-09-13-recognition-session-tests.md)
+- [2026-09-13 On Device Model Selection](2026-09-13-on-device-model-selection.md)
 - [2026-09-12 BookishCapture Cleanup](2026-09-12-bookish-capture-cleanup.md)
 - [2026-09-11 Command Façade Environment](2026-09-11-command-façade-environment.md)
 - [2026-09-11 Command and Environment Design](2026-09-11-command-and-environment-design.md)

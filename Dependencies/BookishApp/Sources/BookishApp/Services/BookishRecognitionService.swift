@@ -181,15 +181,6 @@ extension BookRecognitionCandidate {
   }
 }
 
-/// Performs the HTTP request required by a book recognizer.
-public protocol BookRecognitionTransport: Sendable {
-  /// Loads the data for a URL request.
-  func data(for request: URLRequest) async throws -> (Data, URLResponse)
-}
-
-extension URLSession: BookRecognitionTransport {
-}
-
 /// Loads the shelf image bundled with Bookish for recognition demonstrations.
 private enum CaptureGoodExample {
   /// Loads the bundled image data.

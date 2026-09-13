@@ -44,10 +44,11 @@ struct BookRecognizerRegistryTests {
         }]
       }
       """.utf8)
-    let transport = RecordingBookRecognitionTransport(responseData: responseData)
+    let fixture = RecordingRecognitionSession(responseData: responseData)
+    defer { fixture.close() }
     let recognizer = OpenAIResponsesBookRecognizer(
       credentials: StaticBookRecognitionCredentials(apiKey: "test-key"),
-      transport: transport
+      session: fixture.session
     )
 
     let candidates = try await recognizer.identifyBooks(in: Data([0xFF, 0xD8, 0xFF]))
@@ -60,7 +61,8 @@ struct BookRecognizerRegistryTests {
           confidence: 0.98
         )
       ])
-    let request = try #require(await transport.request)
+    let request = try #require(fixture.request)
+    #expect(request.httpMethod == "POST")
     #expect(request.url == URL(string: "https://api.openai.com/v1/responses"))
     #expect(request.value(forHTTPHeaderField: "Authorization") == "Bearer test-key")
     #expect(request.value(forHTTPHeaderField: "Content-Type") == "application/json")
@@ -76,16 +78,29 @@ struct BookRecognizerRegistryTests {
 
   @Test
   func openAIRecognizerDoesNotSendARequestWithoutCredentials() async {
-    let transport = RecordingBookRecognitionTransport(responseData: Data())
+    let fixture = RecordingRecognitionSession(responseData: Data())
+    defer { fixture.close() }
     let recognizer = OpenAIResponsesBookRecognizer(
       credentials: StaticBookRecognitionCredentials(apiKey: nil),
-      transport: transport
+      session: fixture.session
     )
 
     await #expect(throws: BookRecognitionError.self) {
       try await recognizer.identifyBooks(in: Data([0xFF, 0xD8, 0xFF]))
     }
-    #expect(await transport.request == nil)
+    #expect(fixture.request == nil)
+  }
+
+  @Test
+  func directImageRecognizersReportTheirAvailabilityRequirementBeforeMacOS27() async {
+    guard #unavailable(macOS 27.0) else { return }
+
+    await #expect(throws: BookRecognitionError.self) {
+      try await OnDeviceBookRecognizer().identifyBooks(in: Data())
+    }
+    await #expect(throws: BookRecognitionError.self) {
+      try await CloudComputeBookRecognizer().identifyBooks(in: Data())
+    }
   }
 }
 
@@ -97,29 +112,5 @@ private struct StaticBookRecognitionCredentials: BookRecognitionCredentials {
   /// Returns the fixed API key.
   func openAIAPIKey() throws -> String? {
     apiKey
-  }
-}
-
-/// Records the request sent by a recognizer and returns fixed response data.
-private actor RecordingBookRecognitionTransport: BookRecognitionTransport {
-  /// The response returned for every request.
-  let responseData: Data
-
-  /// The most recent request received by the transport.
-  private(set) var request: URLRequest?
-
-  /// Creates a transport that returns fixed response data.
-  init(responseData: Data) {
-    self.responseData = responseData
-  }
-
-  /// Records a request and returns its fixed successful response.
-  func data(for request: URLRequest) async throws -> (Data, URLResponse) {
-    self.request = request
-    let url = try #require(request.url)
-    let response = try #require(
-      HTTPURLResponse(url: url, statusCode: 200, httpVersion: nil, headerFields: nil)
-    )
-    return (responseData, response)
   }
 }

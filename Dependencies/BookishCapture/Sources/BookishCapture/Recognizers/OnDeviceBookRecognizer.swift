@@ -4,8 +4,9 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 import Foundation
+import FoundationModels
 
-/// Reports the current unavailability of direct-image Foundation Models recognition.
+/// Identifies books by passing an image directly to the on-device Foundation Model.
 ///
 /// Direct image input remains separate from OCR so selecting On Device never changes the
 /// image-processing path implicitly.
@@ -16,14 +17,24 @@ public struct OnDeviceBookRecognizer: BookRecognizer {
   /// The user-facing recognizer name.
   public let label = "On Device"
 
-  /// Explains why the recognizer is unavailable.
-  public let description = "Direct on-device image recognition is unavailable in this build."
+  /// Explains the recognizer's direct-image processing path.
+  public let description = "Apple Intelligence identifies books directly from the selected image."
 
-  /// Creates the unavailable recognizer.
+  /// Creates the direct-image recognizer.
   public init() {}
 
-  /// Explains why this build cannot make the requested direct-image call.
-  public func identifyBooks(in _: Data) async throws -> [BookRecognitionCandidate] {
-    throw BookRecognitionError.directImageRecognitionUnavailable
+  /// Identifies books directly from the supplied image on macOS and iOS 27 or later.
+  public func identifyBooks(in imageData: Data) async throws -> [BookRecognitionCandidate] {
+    guard #available(iOS 27.0, macOS 27.0, *) else {
+      throw BookRecognitionError.directImageRecognitionUnavailable
+    }
+    let model = SystemLanguageModel.default
+    guard model.isAvailable else {
+      throw BookRecognitionError.foundationModelsUnavailable
+    }
+    return try await DirectImageBookRecognizer().identifyBooks(
+      in: imageData,
+      using: model
+    )
   }
 }
