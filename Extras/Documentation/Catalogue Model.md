@@ -18,7 +18,10 @@ Typical record properties include:
 - references to related records;
 - blob references for cover artwork or other large payloads.
 
-Records are tombstoned rather than deleted so that destructive operations can be reversed where practical and synchronisation can remain deterministic.
+Records are tombstoned rather than deleted so that destructive operations can be
+reversed where practical and synchronisation can remain deterministic. A record
+absorbed by a merge is tombstoned with a `mergedInto` identifier for its canonical
+replacement; an ordinary deletion tombstone has no such redirect.
 
 ## Core Entities
 

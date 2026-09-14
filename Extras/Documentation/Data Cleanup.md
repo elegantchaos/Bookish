@@ -88,8 +88,8 @@ the feature must:
    contract requires uniqueness.
 4. Resolve compatible scalar properties deliberately, preserve conflicts for
    review, and retain source/original-data provenance.
-5. Delete or tombstone the absorbed records only after all inbound links are
-   rewritten, using the datastore's final deletion semantics.
+5. Tombstone the absorbed records only after all inbound links are rewritten,
+   recording each canonical record as `mergedInto` for diagnostics and recovery.
 
 The current `MutationOperation` supports property changes and record deletion,
 but lacks an atomic graph-rewrite/merge operation and tombstone application.
@@ -135,8 +135,9 @@ The local FoundationModels SDK exposes `SystemLanguageModel` and
 availability inspection, typed guided output through `@Generable`, and async or
 streamed responses. The system model can be unavailable because the device is
 ineligible, Apple Intelligence is disabled, or its model is not ready. Bookish
-already targets macOS and iOS 26, so this can be an optional on-device reviewer,
-not a requirement for cleanup.
+currently targets macOS and iOS 26, and expects to raise both minimum deployment
+targets to 27 before its first release. Foundation Models therefore remains an
+optional reviewer with an explicit unavailable state, not a cleanup requirement.
 
 Use the model after deterministic candidate generation, never as the initial
 catalogue-wide matcher and never as a direct mutation authority. Give it a small
@@ -177,7 +178,6 @@ but do not persist conversational text or send catalogue data to a remote model.
 
 - What canonical-name policy should apply to people: display order, initials,
   diacritics, honorifics, and suffixes?
-- Should merge preserve absorbed records as tombstones, redirects, or both?
 - Which list properties promise uniqueness, if any?
 - What audit/undo retention is needed before destructive merge support?
 - Which locales and language scripts must the first punctuation and spelling

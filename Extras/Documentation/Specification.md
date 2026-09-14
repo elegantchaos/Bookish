@@ -4,16 +4,38 @@
 
 Bookish is a personal book cataloguing app for maintaining a durable, searchable record of books, people, publishers, series, lists, and reading-related metadata.
 
-Bookish preserves a flexible record model while keeping clear boundaries between domain logic, storage, import/export, and user interface code.
+Bookish preserves a flexible record model while keeping clear boundaries between
+domain logic, import/export, user interface code, and its application-neutral
+Datastore dependency.
 
 ## Product Goals
 
 - Make it fast to add books by search, ISBN/barcode scan, import, or manual entry.
 - Let users organise books into lists, series, roles, and custom relationships without forcing a rigid schema.
 - Support rich metadata for books, people, organisations, series, and user-defined fields.
+- Let users customise both data and visual layouts through free-form record
+  properties, user-authored layouts, lists, and queries.
 - Keep the catalogue portable through explicit import/export formats.
-- Provide a native Apple-platform experience, with iOS and macOS as the primary targets.
-- Keep the data model robust enough for future sync without coupling core logic to a particular sync provider.
+- Import and preserve data from competing catalogue and ebook-library
+  applications, including Kindle and Apple Books where their data can be
+  accessed through supported import mechanisms.
+- Discover and add books from camera images, live scenes, and video using AI
+  recognition as well as barcode scanning.
+- Discover and enrich book metadata from multiple sources, including Amazon,
+  Open Library, and other free or commercial providers.
+- Provide a native Apple-platform experience on macOS and iOS, including iPhone
+  and iPad.
+- Keep the catalogue durable and ready for synchronisation without coupling
+  Bookish workflows to a storage implementation.
+
+## Platform Baseline
+
+Bookish currently supports macOS 26.0 and iOS 26.0 or later. Before the first
+release, the minimum deployment target is expected to move to macOS 27.0 and
+iOS 27.0 so Cloud Foundation Models APIs are part of the platform baseline.
+
+Foundation Models features must still handle runtime unavailability caused by
+device eligibility, account state, system settings, or model readiness.
 
 ## Core Concepts
 
@@ -26,6 +48,17 @@ Bookish preserves a flexible record model while keeping clear boundaries between
 - **Role**: the semantic meaning of a relationship, such as author, illustrator, publisher, owner, read, or wishlist item.
 - **Link**: a first-class relationship between records, optionally carrying a role, dates, notes, or other properties.
 
+## Application Data Model
+
+At its lowest level, Bookish uses a directed graph of records supplied by
+Datastore. Records have stable identities, named properties, and directed links
+to other records or ordered lists of links.
+
+Datastore does not assign catalogue meaning to that graph. Bookish overlays its
+own high-level interpretation to determine how records are used, related,
+interpreted, and displayed. Record kinds, properties, links, layouts, indexes,
+and presentation metadata are all part of that application-level interpretation.
+
 ## Main Workflows
 
 ### Add Books
@@ -34,6 +67,7 @@ Users can add one or more books by:
 
 - searching external lookup services;
 - scanning an ISBN/barcode;
+- recognising books from camera images, scenes, or video;
 - importing supported file formats;
 - duplicating or editing an existing record;
 - entering details manually.
@@ -61,50 +95,54 @@ Users can create and maintain:
 
 The model should allow the same book to appear in multiple lists or multiple times in a list when the use case requires it.
 
+### Customise Data and Visual Layout
+
+Users can add record properties free-form, without requiring a predefined field
+for every value. They can also define layouts that choose record properties,
+their order, labels, viewers, and other presentation details.
+
+Users can define lists of books or other record kinds and select the layout used
+to display them. A query may apply to a list's contents or to all records and
+produce a derived list or sub-list for display with a chosen layout. Derived
+results do not duplicate their source records.
+
 ### Import and Export
 
 Importers should transform external data into the interchange record format before touching app storage. Export should use the same interchange model so catalogue data remains portable and testable outside the UI.
 
-Import/export support should prioritise Bookish interchange files and Delicious Library-style data, while leaving space for additional formats.
+Import/export support should prioritise Bookish interchange files and Delicious
+Library-style data, while supporting migration from additional catalogue and
+ebook-library applications where their data can be accessed through supported
+mechanisms. Metadata lookup and enrichment should use multiple providers rather
+than depending on one vendor.
 
-## Data Persistence Model
+## Datastore Dependency
 
-The app data model is based around untyped records, which support a key/value abstraction.
+Bookish builds on Datastore as an application-neutral dependency. Datastore owns
+the storage and synchronisation mechanics that Bookish does not specify. Bookish
+supplies catalogue conventions, user workflows, import interpretation,
+presentation, and commands.
 
-Key properties of the abstraction:
-- Records have stable ids.
-- Record properties are accessed using dot-separated string keys. 
-- Values can be primitive types, codable types, or references to other records.
-- Nested properties are supported.
-- The implementation of nested values is hidden:
-  - could be resolved via references to subrecords
-  - could be directly stored using fully qualified keys
-  - could be an encoded contained in a top-level value
-- Relationships between records can use direct record references, ordered lists of record references, or relationship records when metadata is needed.
-- Relationship records can carry key/value metadata such as a contributor role, credited-as name, or source-specific notes.
-- Relationships can be one-to-one or one-to-many.
-  
-### Persistence
+Bookish accesses and changes catalogue data through Datastore's public interface.
+It does not depend directly on a storage engine or synchronisation transport.
 
-Persistence and synchronisation is assumed to be transparently handled by the data provider. The app is notified when data is changed externally. The app requests changes to data explicitly.
-
-Records are never deleted, only marked as deleted, and can therefore be restored.
+The detailed contracts are documented in [Datastore Design](Datastore%20Design.md)
+and [Datastore Implementation](Datastore%20Implementation.md). The application
+record model is documented in [Catalogue Model](Catalogue%20Model.md).
 
 ### Interchange
 
-The database can essentially be viewed as a graph of key/value records.
-
-An individual record, a collection of records, or the entire database should be representable as JSON. 
-
-The interchange model should remain storage-independent. 
-
-Importers, lookup services, cleanup tools, and tests should depend either on the persistence abstraction, or on the JSON interchange format.
+Bookish uses storage-neutral JSON record documents for import, export, tooling,
+and fixtures. Importers transform external data into the interchange model before
+requesting durable persistence. The file-format contract is documented in
+[Interchange Design](Interchange%20Design.md).
 
 ## Data Views And Types
 
 Although data records are untyped value/value stores, they are treated as typed by convention within the application, so that it can collect them into indexes (books, authors, and so on), and manage the connections between them.
 
-Types are indicated by the value of one or more predefined key/value pairs on a record (eg a `_type` property).
+Kinds are indicated by the record's `kind` value. A kind is an application-level
+catalogue convention, not a language-level type or a fixed persistence schema.
 
 The application should support a flexible display and editing user interface, based on description records.
 
@@ -124,7 +162,8 @@ Because types are not strict, it is possible for an individual record to be view
 Bookish should be organised into focused modules:
 
 - **Core**: storage-independent domain types, record keys, interchange records, validation, cleanup, and pure transformations.
-- **Persistence**: storage models, migrations, fetch/query helpers, and persistence-specific mapping.
+- **Datastore**: an application-neutral dependency used by Bookish for catalogue
+  storage and synchronisation.
 - **Importer**: import sessions, format-specific importers, and conversion into interchange records.
 - **Lookup**: external lookup services and candidate matching.
 - **App/UI**: views, navigation, editing flows, scanning, preferences, and platform integration.
@@ -136,7 +175,8 @@ Bookish should adopt the project layout described in `Project Layout.md`: a thin
 ## Non-Goals
 
 - Do not attempt to support every specialised catalogue feature before the core model is stable.
-- Do not tie sync design to a specific provider until the local data model and migrations are proven.
+- Do not couple Bookish application features directly to a storage engine or
+  synchronisation transport.
 - Do not require users to understand the low-level graph/link model for common workflows.
 - Do not make importers responsible for app-specific persistence decisions.
 
@@ -150,8 +190,6 @@ Bookish should adopt the project layout described in `Project Layout.md`: a thin
 
 ## Open Questions
 
-- Which Apple platforms are primary for the next release: iOS, macOS, or both equally?
-- Should sync target CloudKit, local-only storage, or a provider-neutral abstraction?
 - Which import formats are required for the first usable version?
 - What metadata fields are first-class versus custom properties?
 - How much of the flexible graph model should be exposed directly in the UI?

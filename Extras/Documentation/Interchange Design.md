@@ -89,6 +89,11 @@ optional root record, and a list of records.
 the next section. Writers should include only fields that override those
 defaults.
 
+Throughout this document, **id**, **kind**, and **tagged value** name record and
+value concepts. `ℹ`, `©`, and `®` are the canonical default JSON field names
+that encode those concepts; they are not the concepts' names and may be
+overridden by a document schema.
+
 `root` is optional. When present, it identifies the record that should be treated
 as the root of the imported or exported selection. It may use the same record
 link shorthand as property values.
@@ -233,6 +238,18 @@ Tombstones and deletion markers are explicit sentinel values:
   "®": "tombstone"
 }
 ```
+
+A tombstone created by a record merge also carries the identifier of its
+canonical replacement:
+
+```json
+{
+  "®": "tombstone",
+  "mergedInto": "canonical-record-id"
+}
+```
+
+The `mergedInto` member is absent for an ordinary deletion tombstone.
 
 ```json
 {

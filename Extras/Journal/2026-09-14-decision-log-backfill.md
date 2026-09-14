@@ -45,3 +45,51 @@ validation history.
 Each decision record now includes an alternatives section. It distinguishes
 rejected approaches from options deliberately retained for future evaluation,
 so later work can revisit a choice with its original rationale.
+
+Decision 0006 now records the canonical interchange markers: `ℹ` for record
+identifiers, `©` for kinds, and `®` for explicitly tagged values. Compatible
+documents may override these through their schema.
+
+Future terminology cleanup may remove redundant `Bookish` prefixes from types
+where their module or context already prevents ambiguity. Naming differences
+such as `RecordValue` and `BookishRecordValue` are therefore not architectural
+discrepancies and do not require decision records.
+
+Documentation now consistently uses id, kind, and tagged value as the semantic
+terms. The interchange format's `ℹ`, `©`, and `®` remain its canonical default
+JSON field names and may be overridden by a document schema.
+
+The specification and cleanup design now reflect the supported macOS and iOS
+platforms, including iPhone and iPad, with a current 26.0 minimum and an
+expected 27.0 minimum before first release. Foundation Models remains subject
+to runtime availability.
+
+The Bookish specification now treats Datastore as an application-neutral
+dependency and delegates datastore mechanics to the dedicated datastore design
+and implementation guides.
+
+The specification now explicitly distinguishes Datastore's directed record graph
+from Bookish's high-level interpretation of record kinds, relationships,
+layouts, indexes, and presentation metadata.
+
+The specification now omits Datastore implementation and transport details;
+those remain exclusively in the dedicated Datastore documentation.
+
+The Bookish specification now explicitly includes migration from competing
+catalogue and ebook-library applications, camera and AI recognition of books in
+images, scenes, and video, and metadata enrichment from multiple providers.
+
+The specification also now makes user-authored data and visual layouts a product
+goal: free-form record properties, layouts, lists, and derived query results can
+be combined without duplicating source records.
+
+Decision 0015 records the policy for choosing primitive, plumbing, encoded, and
+linked-record value representations according to a value's semantic scope.
+
+Decision 0016 records record tombstones, immutable out-of-line blobs, and merge
+redirects. A merged record is tombstoned with a `mergedInto` identifier after its
+inbound links have been rewritten to the canonical record.
+
+The cleanup design no longer lists merge tombstones versus redirects as an open
+question; decision 0016 resolves this through a merge tombstone carrying
+`mergedInto`.

@@ -15,6 +15,11 @@ Bookish interchange files are versioned JSON documents containing materialised
 `BookishRecord` snapshots, optional schema customisation, and an optional root
 record.
 
+The canonical default schema uses `ℹ` for record identifiers, `©` for record
+kinds, and `®` for explicitly tagged record values. A document may override
+these reserved keys, and its default record kind, through its schema when
+interoperating with a compatible external format.
+
 The format uses concise JSON forms where meaning is unambiguous and explicit
 tagged values where it is not—for example, for record links, blobs, deletions,
 tombstones, conflicts, and encoded values. The codec converts between the

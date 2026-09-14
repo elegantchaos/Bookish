@@ -35,7 +35,12 @@ Whole-list replacement is acceptable for import, export, or bootstrapping. Norma
 
 New records are created automatically the first time a property is assigned a value.
 
-Records are tombstoned rather than deleted. Record deletion is represented by a reserved boolean property. Property deletion is represented by a reserved deletion value in the mutation stream; the record store can materialise that as the property being absent.
+Records are tombstoned rather than deleted. Record deletion is represented by a
+reserved boolean property. A tombstone created by a merge also records the
+canonical `mergedInto` record identifier after the mutation service has rewritten
+inbound links. Property deletion is represented by a reserved deletion value in
+the mutation stream; the record store can materialise that as the property being
+absent.
 
 Mutation records consist of:
 - identifier

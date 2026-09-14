@@ -170,14 +170,21 @@ Define:
 
 User-facing import/export uses storage-neutral materialised records encoded by `BookishCoding`. The current interchange file contains a format marker, schema configuration, optional root record identifier, and an array of `BookishRecord` snapshots.
 
-The default interchange schema uses:
+The canonical default interchange schema uses these JSON field names:
 
-- `idKey = "id"`
-- `kindKey = "kind"`
+- `idKey = "ℹ"`
+- `kindKey = "©"`
 - `defaultKind = "record"`
 - `rvKey = "®"`
 
-Record decoding reads `id` and `kind`, then treats every remaining key as a property. Canonical record links encode as `{ "®": "record", "id": "record-id" }`. Compact JSON decoding accepts primitive JSON values where unambiguous and strict `@record-id` shorthand for links. Compact link encoding is opt-in and remains a JSON-only codec convenience.
+Record decoding reads its id and kind through the active schema fields, then
+treats every remaining key as a property. Canonical record links encode as
+`{ "®": "record", "id": "record-id" }`. The link object's `id` member names
+the linked-record identifier; it is distinct from the schema-controlled record
+id field. Compatible documents may override the schema field names. Compact JSON
+decoding accepts primitive JSON values where unambiguous and strict
+`@record-id` shorthand for links. Compact link encoding is opt-in and remains a
+JSON-only codec convenience.
 
 `BookishImporter` imports Delicious Library XML into a normalised graph rather than a flat book-only output. It emits book, person, organisation, series, and root list records with deterministic IDs. Books link directly to their contributors, publishers, and series.
 
