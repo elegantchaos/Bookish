@@ -13,8 +13,27 @@ struct StarWarsCrawlScene: View {
   /// The normalized crawl position.
   let progress: CGFloat
 
+  /// The typography used for the crawl text.
+  let layout: StarWarsCrawlLayout
+
+  /// The camera projection used to present the text plane.
+  let camera: StarWarsCrawlCamera
+
   /// The untransformed height of the crawl text.
   @State private var contentHeight: CGFloat = 0
+
+  /// Creates a crawl scene with the supplied text, phase, layout, and camera.
+  init(
+    text: String,
+    progress: CGFloat,
+    layout: StarWarsCrawlLayout,
+    camera: StarWarsCrawlCamera = .standard
+  ) {
+    self.text = text
+    self.progress = progress
+    self.layout = layout
+    self.camera = camera
+  }
 
   /// Measures the text and maps its current phase to the viewport.
   var body: some View {
@@ -26,24 +45,29 @@ struct StarWarsCrawlScene: View {
         contentHeight: contentHeight
       )
 
-      StarWarsCrawlText(text: text, maximumWidth: textWidth(for: proxy.size.width))
-        .onGeometryChange(for: CGFloat.self, of: { $0.size.height }) { height in
-          contentHeight = height
-        }
-        .scaleEffect(motion.scale, anchor: .top)
-        .rotation3DEffect(
-          .degrees(55),
-          axis: (x: 1, y: 0, z: 0),
-          anchor: .top,
-          perspective: 0.8
-        )
-        .offset(y: motion.verticalOffset)
+      StarWarsCrawlText(
+        text: text,
+        maximumWidth: textWidth(for: proxy.size.width),
+        layout: layout
+      )
+      .onGeometryChange(for: CGFloat.self, of: { $0.size.height }) { height in
+        contentHeight = height
+      }
+      .frame(maxWidth: .infinity, alignment: .top)
+      .offset(y: motion.verticalOffset)
+      .opacity(motion.progress == 0 ? 0 : 1)
+      .rotation3DEffect(
+        .degrees(camera.tiltDegrees),
+        axis: (x: 1, y: 0, z: 0),
+        anchor: .top,
+        perspective: camera.perspective
+      )
     }
     .clipped()
   }
 
   /// Limits the crawl column while retaining usable margins on compact screens.
   private func textWidth(for viewportWidth: CGFloat) -> CGFloat {
-    min(max(viewportWidth - 48, 160), 460)
+    min(max(viewportWidth - 48, 160), camera.maximumTextWidth)
   }
 }

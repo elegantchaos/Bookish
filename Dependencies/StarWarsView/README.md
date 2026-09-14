@@ -4,13 +4,18 @@
 It has no package dependencies beyond the system SwiftUI framework.
 
 ```swift
-StarWarsView(text: introduction, duration: 40)
+StarWarsView(text: introduction, duration: 40, layout: .loose)
 ```
 
 The view performs one crawl each time it appears. It derives the crawl position
 from elapsed time, measures its text so that it can leave the viewport
-regardless of length, and combines an upward translation, perspective tilt, and
-shrinking scale to create the receding effect.
+regardless of length, and moves the tilted text plane away from the camera. The
+perspective projection, rather than a uniform scale effect, creates the
+receding effect.
+
+`layout: .loose` is the default spacious, centered treatment. Use
+`layout: .denseJustified` to experiment with the compact fully justified
+paragraphs of the original crawl.
 
 When Reduce Motion is enabled, it replaces the animation with an ordinary,
 scrollable reading layout.

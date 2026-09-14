@@ -13,6 +13,9 @@ struct StarWarsAnimatedCrawl: View {
   /// The duration of a single crawl.
   let duration: TimeInterval
 
+  /// The typography used for the crawl text.
+  let layout: StarWarsCrawlLayout
+
   /// The time at which the current crawl began.
   @State private var startDate: Date?
 
@@ -28,7 +31,7 @@ struct StarWarsAnimatedCrawl: View {
         TimelineView(.animation(minimumInterval: 1.0 / 30.0)) { timeline in
           let progress = progress(at: timeline.date)
 
-          StarWarsCrawlScene(text: text, progress: progress)
+          StarWarsCrawlScene(text: text, progress: progress, layout: layout)
             .onChange(of: progress == 1) { _, isComplete in
               if isComplete {
                 hasFinished = true

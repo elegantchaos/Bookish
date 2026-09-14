@@ -17,9 +17,6 @@ struct CrawlMotion {
   /// The vertical displacement of the text from its untransformed position.
   let verticalOffset: CGFloat
 
-  /// The scale that makes the text appear to recede into the distance.
-  let scale: CGFloat
-
   /// Whether the crawl has reached its final visual state.
   let isComplete: Bool
 
@@ -33,13 +30,13 @@ struct CrawlMotion {
     precondition(duration > 0, "The crawl duration must be greater than zero.")
 
     let clampedProgress = Self.progress(elapsed: elapsed, duration: duration)
-    let startingOffset = max(viewportHeight, 0) * 0.75
-    let finalScale = 0.18
-    let endingOffset = -(max(contentHeight, 0) * finalScale + max(viewportHeight, 0) * 0.25)
+    let viewportHeight = max(viewportHeight, 0)
+    let contentHeight = max(contentHeight, 0)
+    let startingOffset = viewportHeight + contentHeight
+    let endingOffset = -(contentHeight + viewportHeight * 0.25)
 
     progress = clampedProgress
     verticalOffset = startingOffset + (endingOffset - startingOffset) * clampedProgress
-    scale = 1 + (finalScale - 1) * clampedProgress
     isComplete = clampedProgress == 1
   }
 

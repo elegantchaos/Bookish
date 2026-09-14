@@ -10,10 +10,13 @@ struct StarWarsStaticCrawl: View {
   /// The text to display.
   let text: String
 
+  /// The typography used for the crawl text.
+  let layout: StarWarsCrawlLayout
+
   /// Renders the complete text in an ordinary, scrollable reading layout.
   var body: some View {
     ScrollView {
-      StarWarsCrawlText(text: text, maximumWidth: 460)
+      StarWarsCrawlText(text: text, maximumWidth: 460, layout: layout)
         .frame(maxWidth: .infinity)
         .padding(.vertical, 32)
     }
