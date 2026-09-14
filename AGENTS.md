@@ -1,14 +1,16 @@
+Apply the rules below when working on this project.
+
 # Project Specific Rules
 
-- This repository is a Swift book cataloguing app.
-- It is written using Swift 6 and SwiftUI.
-- All new unit and integration tests must use Swift Testing. Never write new XCTest tests under any circumstances; existing XCTest tests in external dependencies may remain unchanged.
+- This repository is a Swift book cataloguing app for macOS and iOS, written using Swift 6 and SwiftUI.
+- We use Swift Testing for tests (XCTest is only be tolerate in external dependencies).
 - The project uses its own DataStore/BookishRecord abstraction for most data storage.
-- SwiftData may be used only as possible implementation for the mutation layer of the datastore.
-- CoreData should not be used anywhere.
+- SwiftData can be used for implementation within the datastore. CoreData should not be used anywhere.
 - Keep a development journal in `Extras/Journal/`.
 - Testing & validation may incidentally update xcode / swiftpm package lockfiles. This is acceptable and does not need to be reversed.
-- Use `rt validate` as the canonical Swift validation command. `rt validate --target <name>` builds the target and runs its matching SwiftPM test target when present; if `rt` cannot cover the required check, tell the user and offer to run direct `swift test` or `swift format` commands
+- Use `rt validate` to validate all Swift code changes, following the rules in the `swift-validation` skill.
+- Before every Swift code change, review your proposed design and implementation to ensure that they are aligned with the rules laid out by `coding-standards` and  `swift` , and any other relevent skills. Revise the plan if not.
+- After every Swift code change, review all affected code areas to ensure that they are still aligned with our standards. Consider the effect that your changes had on the coherence of the overall codebase, and not just the changes themselves. Call out any mis-alignment and propose corrections.
 
 # Standard Rules
 
@@ -26,9 +28,10 @@
 - Never expose or commit credentials or secrets.
 - Never perform irreversible destructive actions without explicit approval.
 - Reversible source-control changes, including deletion of tracked files, are allowed when they are part of the requested work.
-- Avoid unrelated refactors during focused tasks; suggest them as follow-up work when they are needed.
+- If the solution to a task would be improved by refactoring existing code, do so, but ask permission first. Aim to complete and test the refactor of the existing code before implementing the new task.
 - If unexpected workspace changes appear, pause and confirm direction before continuing.
 - Keep `Extras/Journal/` as dated Markdown entries with an updated `Extras/Journal/index.md` when a work session produces useful context, research, prototype notes, findings, open questions, or implementation plans.
+- Keep `Extras/Decisions/` as an explicit log of important decisions. Check it if necessary before implementing new code, to ensure that it is aligned.
 
 # Skills
 
