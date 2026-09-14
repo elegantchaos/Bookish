@@ -15,7 +15,6 @@
 		22BAA4E23047159400030C8D /* Document320.png in Resources */ = {isa = PBXBuildFile; fileRef = 22BAA4D63047159400030C8D /* Document320.png */; };
 		22BAA4E33047159400030C8D /* Document22.png in Resources */ = {isa = PBXBuildFile; fileRef = 22BAA4D33047159400030C8D /* Document22.png */; };
 		22BAA4E43047159400030C8D /* Document44.png in Resources */ = {isa = PBXBuildFile; fileRef = 22BAA4D43047159400030C8D /* Document44.png */; };
-		22BAA4E63047159A00030C8D /* Settings.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 22BAA4E53047159A00030C8D /* Settings.xcconfig */; };
 		22BAA64830471E9B00030C8D /* Application in Frameworks */ = {isa = PBXBuildFile; productRef = 22BAA64730471E9B00030C8D /* Application */; };
 		22BAA64A30471E9B00030C8D /* Commands in Frameworks */ = {isa = PBXBuildFile; productRef = 22BAA64930471E9B00030C8D /* Commands */; };
 		22BAA64C30471E9B00030C8D /* CommandsUI in Frameworks */ = {isa = PBXBuildFile; productRef = 22BAA64B30471E9B00030C8D /* CommandsUI */; };
@@ -231,7 +230,6 @@
 			files = (
 				22BAA4DD3047159400030C8D /* Preview Assets.xcassets in Resources */,
 				22BAA4DE3047159400030C8D /* Assets.xcassets in Resources */,
-				22BAA4E63047159A00030C8D /* Settings.xcconfig in Resources */,
 				22BAA4DF3047159400030C8D /* Localizable.strings in Resources */,
 				22BAA4E13047159400030C8D /* Document64.png in Resources */,
 				22BAA4E23047159400030C8D /* Document320.png in Resources */,
