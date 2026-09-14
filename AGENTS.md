@@ -31,7 +31,7 @@ Apply the rules below when working on this project.
 - If the solution to a task would be improved by refactoring existing code, do so, but ask permission first. Aim to complete and test the refactor of the existing code before implementing the new task.
 - If unexpected workspace changes appear, pause and confirm direction before continuing.
 - Keep `Extras/Journal/` as dated Markdown entries with an updated `Extras/Journal/index.md` when a work session produces useful context, research, prototype notes, findings, open questions, or implementation plans.
-- Keep `Extras/Decisions/` as an explicit log of important decisions. Check it if necessary before implementing new code, to ensure that it is aligned.
+- Keep `Extras/Decisions/` as an explicit log of important decisions - one markdown file per decision. Check it if necessary before implementing new code, to ensure that it is aligned.
 
 # Skills
 
