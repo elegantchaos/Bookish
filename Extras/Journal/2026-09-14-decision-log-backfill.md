@@ -25,6 +25,11 @@ decision. `Commands` is the common abstraction for user and business actions,
 their UI and automation projections, undo/redo, and future metering and
 analytics adapters.
 
+The command-provider and service pattern is recorded as a companion to the
+engine command-boundary decision. Views observe service state but dispatch
+actions through commands; a future read-only view interface and command-facing
+service interface will enforce that separation across module boundaries.
+
 The Datastore sync transport is explicitly provisional: CloudKit and
 `CKSyncEngine` are the current proposed choice, while Datastore retains its own
 application-neutral mutation and projection contracts.
