@@ -9,6 +9,17 @@ interchange documents, retained import source snapshots, review-first cleanup,
 record identity and representation, and the application-neutral Datastore
 boundary.
 
+Also recorded the modern Apple-platform technology baseline: Swift 6.4 or
+later, SwiftUI, modern Swift concurrency, Swift Testing, and macOS/iOS support
+including iPhone and iPad. The current 26.0 deployment target is expected to
+move to 27.0 before release, while Foundation Models remains runtime-optional.
+
+The package-first architecture is also recorded: Bookish has a thin Xcode host,
+local SwiftPM packages, and selectively co-developed Elegant Chaos submodules.
+The local workspace override of released package requirements is deliberate but
+temporary; each shared package must later be integrated, released, and restored
+to an independently buildable version requirement.
+
 The Datastore sync transport is explicitly provisional: CloudKit and
 `CKSyncEngine` are the current proposed choice, while Datastore retains its own
 application-neutral mutation and projection contracts.
