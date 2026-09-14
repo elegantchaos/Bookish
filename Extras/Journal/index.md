@@ -1,5 +1,6 @@
 # Journal Index
 
+- [2026-09-14 Star Wars Crawl](2026-09-14-star-wars-crawl.md)
 - [2026-09-14 Decision Log Backfill](2026-09-14-decision-log-backfill.md)
 - [2026-09-13 Recognition Session Tests](2026-09-13-recognition-session-tests.md)
 - [2026-09-13 On Device Model Selection](2026-09-13-on-device-model-selection.md)
