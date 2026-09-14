@@ -20,6 +20,11 @@ The local workspace override of released package requirements is deliberate but
 temporary; each shared package must later be integrated, released, and restored
 to an independently buildable version requirement.
 
+The application action model is recorded separately from the command-boundary
+decision. `Commands` is the common abstraction for user and business actions,
+their UI and automation projections, undo/redo, and future metering and
+analytics adapters.
+
 The Datastore sync transport is explicitly provisional: CloudKit and
 `CKSyncEngine` are the current proposed choice, while Datastore retains its own
 application-neutral mutation and projection contracts.
