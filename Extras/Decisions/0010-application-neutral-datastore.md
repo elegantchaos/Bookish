@@ -29,6 +29,14 @@ The transport choice is intentionally replaceable. A later evaluation may retain
 the Datastore model and service boundaries while replacing or supplementing the
 CloudKit adapter.
 
+## Alternatives considered
+
+Making CloudKit records the catalogue model was rejected because it would couple
+Datastore’s mutation and projection semantics to one transport. CloudKit with
+`CKSyncEngine` is the current proposed adapter, not an irreversible commitment;
+other transports may be evaluated while preserving Datastore’s application-neutral
+contracts.
+
 ## Consequences
 
 - Datastore can evolve toward a standalone package without inheriting Bookish

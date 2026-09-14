@@ -13,3 +13,8 @@ command dispatch and command UI helpers.
   dependency.
 - Observable UI services are injected separately for rendering and permitted
   view-owned error reporting.
+
+## Related Decisions
+
+- [0001: Use BookishEngine as the command boundary](../Decisions/0001-engine-command-boundary.md)
+- [0014: Structure command capabilities around narrow service providers](../Decisions/0014-narrow-command-providers-and-services.md)

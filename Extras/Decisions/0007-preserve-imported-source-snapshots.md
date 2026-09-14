@@ -24,6 +24,13 @@ The snapshot records what the importer accepted from the source; it does not
 replace the interpreted Bookish properties as the application’s current
 catalogue model.
 
+## Alternatives considered
+
+Discarding accepted source data after interpretation was rejected because later
+importer improvements would require the original export again. Parallel
+`original.*` properties were also rejected because they duplicate preservation
+mechanisms and make provenance harder to discover.
+
 ## Consequences
 
 - Later importer revisions can mine preserved source data without requiring the

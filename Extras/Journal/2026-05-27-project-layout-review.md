@@ -23,3 +23,8 @@ Reviewed Bookish against the newer Stack, ActionStatus, and ClockSync projects t
 - Root `Package.swift` support should be tooling-managed if needed, probably through `rt`.
 - Decide how much of Stack's service-target granularity to adopt.
 - Decide whether localisation symbol generation should use an explicit command-line plugin.
+
+## Related Decisions
+
+- [0012: Use a thin app host and package-first architecture](../Decisions/0012-thin-host-and-package-first-architecture.md)
+- [0013: Use Commands as the application action abstraction](../Decisions/0013-commands-as-application-action-abstraction.md)

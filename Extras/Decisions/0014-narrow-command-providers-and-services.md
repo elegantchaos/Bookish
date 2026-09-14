@@ -40,6 +40,15 @@ may move together into a domain-specific package. For example, `BookishCapture`
 may own capture services, capture commands, and capture implementation while
 depending only on lower-level packages.
 
+## Alternatives considered
+
+Giving commands the whole command centre, broad application coordinator, or
+unrelated services was rejected because it hides dependencies and enlarges test
+fixtures. Letting views call services directly is also rejected, although the
+current same-module implementation cannot completely prevent it. The planned
+read-only view and command-facing service interfaces are retained as the route
+to enforce the rule at module boundaries.
+
 ## Consequences
 
 - Commands have focused, testable dependencies and use small fake providers.

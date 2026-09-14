@@ -23,6 +23,13 @@ handling, and projection updates.
 The user interface reads through the record service and never writes directly
 to either the record store or mutation store.
 
+## Alternatives considered
+
+Treating the materialised record store as the sole durable state was rejected
+because it cannot provide reliable replay, recovery, or synchronisation
+semantics. A full CRDT model, snapshots, and compaction remain possible future
+optimisations, but are not required for the initial mutation-log model.
+
 ## Consequences
 
 - The record projection can be rebuilt from mutation history.

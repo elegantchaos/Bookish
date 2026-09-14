@@ -33,3 +33,8 @@ Started the metadata record implementation by seeding the universal fallback rec
 ## Notes
 
 The planned fallback ID `metadata.type.*` conflicted with the interchange ID grammar, so the codec now permits `*` after the leading identifier character. This keeps `record` available as a real record kind rather than overloading it as a fallback sentinel.
+
+## Related Decisions
+
+- [0004: Configure data views with metadata records](../Decisions/0004-metadata-driven-data-views.md)
+- [0009: Define stable record identity and default representation](../Decisions/0009-record-identity-and-default-representation.md)

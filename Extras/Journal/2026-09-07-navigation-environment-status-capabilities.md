@@ -9,3 +9,8 @@ Navigation commands now depend on `BookishRecordNavigationService`, which expose
 ## Validation
 
 Each focused change passed `rt validate --target BookishApp` before its commit. The status-reporting change also passed comprehensive `rt validate`, including formatting, linting, and iOS and macOS workspace builds.
+
+## Related Decisions
+
+- [0001: Use BookishEngine as the command boundary](../Decisions/0001-engine-command-boundary.md)
+- [0014: Structure command capabilities around narrow service providers](../Decisions/0014-narrow-command-providers-and-services.md)

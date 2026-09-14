@@ -44,6 +44,16 @@ its manifest requirements to those releases, restoring independent package
 builds outside Xcode. This local-development pattern should be revisited if a
 better mechanism emerges.
 
+## Alternatives considered
+
+A feature-heavy Xcode host was rejected because it weakens package boundaries,
+testing, previews, and reuse. A hand-maintained root package is not the default;
+tooling may create an aggregate package when required. Treating every package as
+either permanently internal or immediately external was rejected in favour of
+extracting packages only after they establish a reusable boundary. Workspace
+submodule overrides are retained as a temporary co-development compromise, not
+as a replacement for released versioned dependencies.
+
 ## Consequences
 
 - Most Bookish behavior can be built and tested outside the Xcode app host.

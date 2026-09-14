@@ -13,3 +13,7 @@ analysis rules returning reviewable plans, a separate durable merge operation,
 a top-level Data Cleanup route replacing the browser's Coming Soon placeholder,
 and optional on-device Foundation Models assistance after deterministic candidate
 generation. No production behavior changed in this review.
+
+## Related Decisions
+
+- [0008: Make data cleanup review-first](../Decisions/0008-review-first-data-cleanup.md)

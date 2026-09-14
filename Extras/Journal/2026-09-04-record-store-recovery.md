@@ -22,3 +22,7 @@ then restores configuration seed records.
 Focused Swift Testing suites passed for BookishDatastore and BookishApp. The
 tests cover replaying applied mutations, startup recovery from invalid record
 JSON, the rebuild command, and destructive reset behavior.
+
+## Related Decisions
+
+- [0002: Use a mutation log and materialised record projection](../Decisions/0002-mutation-log-and-record-projection.md)

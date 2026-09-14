@@ -11,3 +11,8 @@ Index records now have an optional `icon` property containing an SF Symbol name.
 The browser's middle column displays each record as its layout-resolved thumbnail and name. When no thumbnail is available, it uses the active index's configured SF Symbol as the placeholder.
 
 `Datastore Design.md` records the property-representation decision rule: use native JSON and datastore-plumbing cases directly, use tagged encoded values for other small domain values, and use linked records for large objects with their own identity or lifecycle.
+
+## Related Decisions
+
+- [0004: Configure data views with metadata records](../Decisions/0004-metadata-driven-data-views.md)
+- [0009: Define stable record identity and default representation](../Decisions/0009-record-identity-and-default-representation.md)

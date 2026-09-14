@@ -25,6 +25,14 @@ Direct native bindings for controls such as `Picker`, `Toggle`, and
 `NavigationStack(path:)` remain permitted until a shared command-intercepting
 binding abstraction exists.
 
+## Alternatives considered
+
+Injecting `BookishEngine` directly into SwiftUI was rejected because it exposes
+unrelated services and broad command capabilities to views. A separate concrete
+command centre was superseded when the engine became the lifecycle and command
+composition root. Direct bindings remain a temporary, explicit exception rather
+than a replacement for command dispatch.
+
 ## Consequences
 
 - Command behavior is testable with focused fake providers and services.

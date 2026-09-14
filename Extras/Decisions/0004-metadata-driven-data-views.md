@@ -23,6 +23,13 @@ Viewer and editor identifiers are advisory. If metadata is absent, unknown, or
 incompatible with a value, the UI uses a generated label and a safe generic
 fallback.
 
+## Alternatives considered
+
+Hard-coded screens, browser tabs, and per-kind field schemas were rejected
+because they couple ordinary catalogue evolution to SwiftUI changes. Strict
+metadata validation was also rejected: metadata improves presentation but must
+not make an otherwise valid custom or imported record unreadable.
+
 ## Consequences
 
 - Standard layouts and indexes can be seeded while remaining inspectable and

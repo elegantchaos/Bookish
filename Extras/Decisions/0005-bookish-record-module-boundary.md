@@ -18,6 +18,14 @@ Importers produce `BookishRecord` graphs. Datastore services expose materialised
 use the same model rather than module-private persistence or source-format
 types.
 
+## Alternatives considered
+
+Exposing datastore-private records across modules was rejected because it would
+couple importers, presentation, cleanup, and tests to one persistence provider.
+Passing source-format-specific types between modules was rejected because it
+would leak external schemas beyond importer boundaries. File interchange remains
+a separate concern, recorded in 0006.
+
 ## Consequences
 
 - Modules share one explicit catalogue-data contract.

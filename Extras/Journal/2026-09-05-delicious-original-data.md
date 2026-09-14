@@ -7,3 +7,8 @@ The Delicious Library importer now stores each accepted source property-list dic
 The Bookish record date keys are now `added`, `modified`, and `published`. Their Swift constant names remain `addedDate`, `modifiedDate`, and `publishedDate` to make their value type explicit.
 
 The legacy `BookKey` adapter also uses the canonical `name` key; it has no `title` key case.
+
+## Related Decisions
+
+- [0007: Preserve imported source snapshots in originalData](../Decisions/0007-preserve-imported-source-snapshots.md)
+- [0009: Define stable record identity and default representation](../Decisions/0009-record-identity-and-default-representation.md)

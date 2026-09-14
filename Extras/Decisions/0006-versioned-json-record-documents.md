@@ -24,6 +24,14 @@ does not escape into application APIs.
 Ordinary interchange represents current record snapshots, not mutation history.
 Mutation history may use a separate diagnostic, recovery, or archive format.
 
+## Alternatives considered
+
+Using mutation history as the ordinary import and export format was rejected
+because it exposes synchronisation mechanics rather than portable catalogue
+content. Source-format-specific exports were rejected as the common contract;
+they remain importer concerns. Compact JSON is retained only where unambiguous,
+with explicit tagged forms for infrastructure values.
+
 ## Consequences
 
 - Users and tools can exchange portable collections of records.

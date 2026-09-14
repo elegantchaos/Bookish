@@ -9,3 +9,8 @@ Record-action orchestration moved to `BookishRecordActions`. The service applies
 ## Validation
 
 `rt validate --target BookishApp` passed after each commit. A final comprehensive validation follows this journal update.
+
+## Related Decisions
+
+- [0001: Use BookishEngine as the command boundary](../Decisions/0001-engine-command-boundary.md)
+- [0014: Structure command capabilities around narrow service providers](../Decisions/0014-narrow-command-providers-and-services.md)

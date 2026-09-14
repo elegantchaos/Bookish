@@ -24,3 +24,9 @@ Promoted the second database proposal into the canonical datastore direction for
 - Decide the record service observation model for SwiftUI.
 - Define the concrete mutation and record store SQLite schemas.
 - Define list ordering, CloudKit mapping, conflict UI, blob upload state, and interchange/export shape.
+
+## Related Decisions
+
+- [0002: Use a mutation log and materialised record projection](../Decisions/0002-mutation-log-and-record-projection.md)
+- [0003: Model the catalogue as a schema-less record graph](../Decisions/0003-schema-less-record-graph.md)
+- [0010: Keep Datastore application-neutral](../Decisions/0010-application-neutral-datastore.md)

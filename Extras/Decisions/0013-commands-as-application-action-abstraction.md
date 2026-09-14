@@ -48,6 +48,14 @@ or undo/redo behaviour. It translates its input into a command invocation and
 presents the command’s availability, progress, and outcome in a form suitable
 for that surface.
 
+## Alternatives considered
+
+Implementing the same action independently in each user interface, automation,
+or integration surface was rejected because validation, side effects, and
+undo/redo would drift. Separate history, billing, or analytics mechanisms per
+surface were likewise rejected; those concerns attach to command execution as
+adapters and do not become command business logic.
+
 ## Consequences
 
 - One action has consistent validation, execution, and undo/redo behaviour

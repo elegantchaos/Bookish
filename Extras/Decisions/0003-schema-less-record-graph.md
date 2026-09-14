@@ -25,6 +25,14 @@ Storage remains independent from catalogue semantics. Metadata-driven layouts
 and presentations decide how records are displayed, rather than changing the
 underlying record model.
 
+## Alternatives considered
+
+Fixed persistence tables for every catalogue kind were rejected because they
+would require storage migrations for ordinary catalogue evolution. Representing
+every connection as a relationship record was also rejected: direct links and
+ordered link lists keep common relationships compact, while relationship records
+remain available when the connection has its own metadata.
+
 ## Consequences
 
 - New catalogue fields and kinds can be introduced without datastore migrations.

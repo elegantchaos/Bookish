@@ -37,3 +37,11 @@ application-neutral mutation and projection contracts.
 Deferred candidates include configuration seed lifecycle, recognition-provider
 semantics, and the local storage implementation choice. They are not recorded
 as decisions because they remain emergent or require further confirmation.
+
+Historical journal entries that establish or apply these decisions link back to
+their relevant decision records while retaining their implementation and
+validation history.
+
+Each decision record now includes an alternatives section. It distinguishes
+rejected approaches from options deliberately retained for future evaluation,
+so later work can revisit a choice with its original rationale.

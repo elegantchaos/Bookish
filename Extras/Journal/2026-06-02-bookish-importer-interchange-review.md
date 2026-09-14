@@ -93,3 +93,8 @@ Prototype import/export update:
   mutation debugging actions into a Prototype menu.
 - Added a File menu reset command that clears both mutation records and
   materialised datastore records without reseeding sample data.
+
+## Related Decisions
+
+- [0005: Use BookishRecord as the shared record-boundary model](../Decisions/0005-bookish-record-module-boundary.md)
+- [0006: Use versioned JSON record documents for interchange](../Decisions/0006-versioned-json-record-documents.md)

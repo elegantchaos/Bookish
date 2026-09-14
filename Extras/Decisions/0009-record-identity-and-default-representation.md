@@ -29,6 +29,14 @@ Records also have a `kind` property that identifies their application-level
 category. Metadata records describe kinds, including their default icon and
 presentation information.
 
+## Alternatives considered
+
+Using a mutable display property as record identity was rejected because links,
+mutations, and interchange require a stable reference. Retaining `title` as a
+second Bookish display identity was rejected; source-specific titles are mapped
+at the import boundary. Requiring every record to carry its own image was also
+rejected in favour of kind and layout fallbacks.
+
 ## Consequences
 
 - Links and mutations retain stable identity when a user changes a name.

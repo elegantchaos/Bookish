@@ -24,6 +24,15 @@ Foundation Models capability may still be unavailable at runtime because of
 device eligibility, account state, system settings, or model readiness. Bookish
 must continue to present an explicit unavailable state where appropriate.
 
+## Alternatives considered
+
+UIKit-first UI, callback-based asynchronous code, and XCTest for Bookish-owned
+tests were not adopted because they do not match the chosen modern Swift
+baseline. Supporting operating systems earlier than 26.0 is outside the planned
+release scope. Keeping 26.0 permanently remains possible, but the expected move
+to 27.0 before release makes Cloud Foundation Models APIs part of the platform
+baseline while retaining runtime availability checks.
+
 ## Consequences
 
 - New code may use the selected modern Swift and SwiftUI baselines directly.

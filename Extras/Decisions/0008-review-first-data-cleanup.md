@@ -23,6 +23,13 @@ Deterministic rules produce initial candidates. Foundation Models may assist wit
 bounded, ambiguous review tasks only; their output is validated and presented as
 a confirmation-only suggestion, never as a mutation authority.
 
+## Alternatives considered
+
+Unattended cleanup and model-authorised mutations were rejected because they can
+lose user intent, provenance, or relationship data. Making Foundation Models a
+required first-pass matcher was rejected in favour of deterministic candidate
+generation with optional, bounded assistance for ambiguous cases.
+
 ## Consequences
 
 - Cleanup remains explainable, inspectable, and safe to revisit.
