@@ -126,6 +126,7 @@ private struct BookCaptureTopPane: View {
         #endif
       }
     }
+    .frame(maxWidth: .infinity, alignment: .trailing)
     .padding()
   }
 }

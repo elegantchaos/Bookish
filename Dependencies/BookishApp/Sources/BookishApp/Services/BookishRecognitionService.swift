@@ -42,13 +42,18 @@ public final class BookishRecognitionService: BookishRecognition {
 
   private let serviceFactory: BookRecognizerRegistry
 
-  public var recognizerID: String {
+  /// The app preference that remembers the selected recognizer.
+  private let methodPreference: BookRecognitionMethodPreference
+
+  /// The identifier of the recognizer selected for the current and future captures.
+  public private(set) var recognizerID: String {
     didSet {
       recognizer = serviceFactory.recognizer(for: recognizerID)
     }
   }
 
-  public var recognizer: any BookRecognizer
+  /// The recognizer selected for the current and future captures.
+  public private(set) var recognizer: any BookRecognizer
 
   /// The data selected by the user for recognition.
   public private(set) var imageData: Data?
@@ -69,24 +74,26 @@ public final class BookishRecognitionService: BookishRecognition {
   init(
     storage: BookishStorageService,
     state: BookishUIStateService,
-    statusService: any BookishStatus
+    statusService: any BookishStatus,
+    methodPreference: BookRecognitionMethodPreference = .init()
   ) {
     let factory = BookRecognizerRegistry()
     factory.registerDefaultRecognizers()
-    let defaultID = factory.recognizerIDs.first!
+    let recognizerID = methodPreference.recognizerID(in: factory)
 
     self.storage = storage
     self.state = state
     self.statusService = statusService
     self.serviceFactory = factory
+    self.methodPreference = methodPreference
 
     imageData = nil
     candidates = []
     selectedCandidateIDs = []
     error = nil
     isRecognizing = false
-    recognizerID = defaultID
-    recognizer = serviceFactory.recognizer(for: defaultID)
+    self.recognizerID = recognizerID
+    recognizer = serviceFactory.recognizer(for: recognizerID)
   }
 
   public var recognizerIDs: [String] {
@@ -130,6 +137,7 @@ public final class BookishRecognitionService: BookishRecognition {
   public func selectRecognizer(_ id: String) async {
     guard isRecognizerSupported(id) else { return }
     recognizerID = id
+    methodPreference.save(recognizerID: id)
   }
 
   /// Selects the app's bundled image for trying book recognition.

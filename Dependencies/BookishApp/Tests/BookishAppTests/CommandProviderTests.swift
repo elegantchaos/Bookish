@@ -3,6 +3,7 @@
 //  Copyright © 2026 Elegant Chaos Limited. All rights reserved.
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
+import BookishCapture
 import BookishDatastore
 import BookishImporter
 import BookishImporterSamples
@@ -121,16 +122,17 @@ struct CommandProviderTests {
   }
 
   @Test
-  func automaticRecognitionCommandsUseTheVendedRecognitionService() async throws {
+  func recognitionCommandsSelectAMethodAndCaptureTheImage() async throws {
     let recognitionService = TestBookRecognitionWorkflow()
     let centre = TestCommandCentre(recognitionService: recognitionService)
 
     try await centre.perform(SelectBookRecognitionImageCommand(imageData: Data([0xFF])))
-    try await centre.perform(SelectBookRecognitionProviderCommand(provider: .fake))
+    try await centre.perform(SelectRecognizerCommand(provider: "saved-recognizer"))
+    try await centre.perform(CaptureBooksCommand())
 
     #expect(recognitionService.imageData == Data([0xFF]))
-    #expect(recognitionService.provider == .fake)
-    #expect(recognitionService.identificationCount == 2)
+    #expect(recognitionService.recognizerID == "saved-recognizer")
+    #expect(recognitionService.identificationCount == 1)
   }
 
   @Test
@@ -217,7 +219,7 @@ private final class TestCommandCentre:
   let storageService: any BookishStorage
   let statusService: any BookishStatus
   let recordActionService: any BookishRecordActions
-  let recognitionService: any BookishRecognitionWorkflow
+  let recognitionService: any BookishRecognition
   let navigationService: any BookishNavigation
   let browserSettingsService: any BookishBrowserSettings
 
@@ -228,7 +230,7 @@ private final class TestCommandCentre:
     storageService: any BookishStorage = TestStorageService(),
     statusService: any BookishStatus = TestStatusService(),
     recordActionService: any BookishRecordActions = TestRecordActionService(),
-    recognitionService: any BookishRecognitionWorkflow = TestBookRecognitionWorkflow(),
+    recognitionService: any BookishRecognition = TestBookRecognitionWorkflow(),
     navigationService: any BookishNavigation = TestNavigationService(),
     browserSettingsService: any BookishBrowserSettings = TestBrowserSettings()
   ) {
@@ -244,8 +246,8 @@ private final class TestCommandCentre:
 }
 
 @MainActor
-private final class TestBookRecognitionWorkflow: BookishRecognitionWorkflow {
-  var provider: BookRecognitionProvider = .openAI
+private final class TestBookRecognitionWorkflow: BookishRecognition {
+  private(set) var recognizerID = "default-recognizer"
   private(set) var imageData: Data?
   let candidates: [BookRecognitionCandidate]
   var selectedCandidateIDs: Set<String>
@@ -253,6 +255,14 @@ private final class TestBookRecognitionWorkflow: BookishRecognitionWorkflow {
   let canAddBooks = true
   private(set) var identificationCount = 0
   private(set) var addedSelectedBooks = false
+
+  var hasImage: Bool {
+    imageData != nil
+  }
+
+  var isCurrentRecognizerSupported: Bool {
+    isRecognizerSupported(recognizerID)
+  }
 
   init(
     candidates: [BookRecognitionCandidate] = [],
@@ -267,11 +277,13 @@ private final class TestBookRecognitionWorkflow: BookishRecognitionWorkflow {
     imageData = data
   }
 
-  func select(provider: BookRecognitionProvider) async {
-    self.provider = provider
-    if imageData != nil {
-      await identifyBooks()
-    }
+  func selectRecognizer(_ id: String) async {
+    guard isRecognizerSupported(id) else { return }
+    recognizerID = id
+  }
+
+  func isRecognizerSupported(_: String) -> Bool {
+    true
   }
 
   func selectCaptureGoodExample() {
