@@ -18,6 +18,8 @@ public final class BookRecognizerRegistry {
     register(FakeBookRecognizer())
     register(OnDeviceBookRecognizer())
     register(CloudComputeBookRecognizer())
+    register(OCRBookRecognizer())
+    register(OpenAIResponsesBookRecognizer())
   }
 
   /// Adds or replaces a recognizer with the same identifier.

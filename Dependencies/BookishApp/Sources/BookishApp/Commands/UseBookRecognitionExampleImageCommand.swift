@@ -32,9 +32,8 @@ public struct UseBookRecognitionExampleImageCommand<Centre: BookishRecognitionPr
   /// Explains the command's result.
   public func help(centre _: Centre) -> String? { "Select the bundled image for book recognition." }
 
-  /// Selects the bundled image and immediately identifies its books.
+  /// Selects the bundled image without starting recognition.
   public func perform(centre: Centre) async throws {
     centre.recognitionService.selectCaptureGoodExample()
-    await centre.recognitionService.identifyBooks()
   }
 }

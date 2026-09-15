@@ -95,6 +95,9 @@ struct BookRecognizerRegistryTests {
   func directImageRecognizersReportTheirAvailabilityRequirementBeforeMacOS27() async {
     guard #unavailable(macOS 27.0) else { return }
 
+    #expect(OnDeviceBookRecognizer().isSupported == false)
+    #expect(CloudComputeBookRecognizer().isSupported == false)
+
     await #expect(throws: BookRecognitionError.self) {
       try await OnDeviceBookRecognizer().identifyBooks(in: Data())
     }

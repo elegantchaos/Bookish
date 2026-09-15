@@ -20,6 +20,15 @@ public struct CloudComputeBookRecognizer: BookRecognizer {
   public let description =
     "Private Cloud Compute identifies books directly from the selected image."
 
+  /// Indicates whether this direct-image recognizer is available on the current platform.
+  public var isSupported: Bool {
+    if #available(iOS 27.0, macOS 27.0, *) {
+      true
+    } else {
+      false
+    }
+  }
+
   /// Creates the cloud-compute recognizer.
   public init() {}
 

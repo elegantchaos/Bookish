@@ -25,9 +25,8 @@ public struct SelectBookRecognitionImageCommand<Centre: BookishRecognitionProvid
     centre.recognitionService.isRecognizing ? .disabled : .enabled
   }
 
-  /// Replaces the recognition image and immediately identifies its books.
+  /// Replaces the recognition image without starting recognition.
   public func perform(centre: Centre) async throws {
     centre.recognitionService.selectImage(data: imageData)
-    await centre.recognitionService.identifyBooks()
   }
 }

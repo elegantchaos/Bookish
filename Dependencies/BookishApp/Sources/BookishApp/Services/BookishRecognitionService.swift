@@ -14,8 +14,11 @@ public protocol BookishRecognition {
   var selectedCandidateIDs: Set<String> { get }
   var canAddBooks: Bool { get }
   var isRecognizing: Bool { get }
+  var hasImage: Bool { get }
+  var isCurrentRecognizerSupported: Bool { get }
 
   func selectRecognizer(_ id: String) async
+  func isRecognizerSupported(_ id: String) -> Bool
   func selectImage(data: Data?)
   func selectAllCandidates()
   func identifyBooks() async
@@ -94,6 +97,22 @@ public final class BookishRecognitionService: BookishRecognition {
     serviceFactory.recognizers
   }
 
+  /// Whether the supplied recognizer can run on this device.
+  public func isRecognizerSupported(_ id: String) -> Bool {
+    serviceFactory.recognizerIDs.contains(id)
+      && serviceFactory.recognizer(for: id).isSupported
+  }
+
+  /// Whether an image has been selected for recognition.
+  public var hasImage: Bool {
+    imageData != nil
+  }
+
+  /// Whether the selected recognizer can run on this device.
+  public var isCurrentRecognizerSupported: Bool {
+    recognizer.isSupported
+  }
+
   /// Whether the datastore has completed loading.
   public var canAddBooks: Bool {
     storage.isLoaded
@@ -107,10 +126,10 @@ public final class BookishRecognitionService: BookishRecognition {
     error = nil
   }
 
-  /// Selects a recognizer and identifies the current image when the provider changes.
+  /// Selects a supported recognizer without starting recognition.
   public func selectRecognizer(_ id: String) async {
-    self.recognizer = serviceFactory.recognizer(for: id)
-    await identifyBooks()
+    guard isRecognizerSupported(id) else { return }
+    recognizerID = id
   }
 
   /// Selects the app's bundled image for trying book recognition.

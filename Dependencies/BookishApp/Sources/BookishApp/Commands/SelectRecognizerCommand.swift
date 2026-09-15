@@ -4,9 +4,11 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 import Commands
+import CommandsUI
+import Icons
 
-/// Selects a recognition provider and reruns recognition when an image is selected.
-public struct SelectRecognizerCommand<Centre: BookishRecognitionProvider>: Command {
+/// Selects the recognizer used by the next capture.
+public struct SelectRecognizerCommand<Centre: BookishRecognitionProvider>: CommandWithUI {
   /// The command does not return a value after selecting a provider.
   public typealias ResultType = Void
 
@@ -21,12 +23,25 @@ public struct SelectRecognizerCommand<Centre: BookishRecognitionProvider>: Comma
     self.recognizer = provider
   }
 
-  /// Disables provider changes while recognition is underway.
+  /// Enables selection only for a recognizer that can run on this device.
   public func availability(centre: Centre) -> CommandAvailability {
-    centre.recognitionService.isRecognizing ? .disabled : .enabled
+    centre.recognitionService.isRecognizing == false
+      && centre.recognitionService.isRecognizerSupported(recognizer)
+      ? .enabled : .disabled
   }
 
-  /// Selects the provider through the recognition workflow.
+  /// Returns the user-facing command name.
+  public func name(centre _: Centre) -> String { "Select Recognizer" }
+
+  /// Returns the standard recognizer-selection icon.
+  public func icon(centre _: Centre) -> Icon { Icon("brain") }
+
+  /// Explains that the recognizer will be selected without starting recognition.
+  public func help(centre _: Centre) -> String? {
+    "Use this recognizer when you capture books."
+  }
+
+  /// Selects the provider through the recognition workflow without starting recognition.
   public func perform(centre: Centre) async throws {
     await centre.recognitionService.selectRecognizer(recognizer)
   }

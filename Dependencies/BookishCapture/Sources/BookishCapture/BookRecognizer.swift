@@ -16,6 +16,14 @@ public protocol BookRecognizer: Sendable, Identifiable {
   /// A user-facing explanation of the recognizer's behavior.
   var description: String { get }
 
+  /// Whether the recognizer can run on the current device.
+  var isSupported: Bool { get }
+
   /// Identifies the books shown in an image.
   func identifyBooks(in imageData: Data) async throws -> [BookRecognitionCandidate]
+}
+
+extension BookRecognizer {
+  /// Indicates that recognizers without platform requirements are supported.
+  public var isSupported: Bool { true }
 }

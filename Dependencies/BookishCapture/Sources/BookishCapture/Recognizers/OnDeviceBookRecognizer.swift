@@ -20,6 +20,15 @@ public struct OnDeviceBookRecognizer: BookRecognizer {
   /// Explains the recognizer's direct-image processing path.
   public let description = "Apple Intelligence identifies books directly from the selected image."
 
+  /// Indicates whether this direct-image recognizer is available on the current platform.
+  public var isSupported: Bool {
+    if #available(iOS 27.0, macOS 27.0, *) {
+      true
+    } else {
+      false
+    }
+  }
+
   /// Creates the direct-image recognizer.
   public init() {}
 
