@@ -1,6 +1,8 @@
 # Journal Index
 
+- [2026-09-15 Capture Workflow Source Organisation](2026-09-15-capture-workflow-source-organisation.md)
 - [2026-09-15 Recognition Method Persistence](2026-09-15-recognition-method-persistence.md)
+- [2026-09-15 Cross-Platform Image Preview](2026-09-15-cross-platform-image-preview.md)
 - [2026-09-15 Capture Availability and Image Selection](2026-09-15-capture-availability-and-image-selection.md)
 - [2026-09-14 Star Wars Crawl](2026-09-14-star-wars-crawl.md)
 - [2026-09-14 Decision Log Backfill](2026-09-14-decision-log-backfill.md)

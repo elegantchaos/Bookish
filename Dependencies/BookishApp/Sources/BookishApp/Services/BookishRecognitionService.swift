@@ -4,28 +4,9 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 import BookishCapture
-import BookishRecord
 import Foundation
 import Observation
-
-@MainActor
-public protocol BookishRecognition {
-  var candidates: [BookRecognitionCandidate] { get }
-  var selectedCandidateIDs: Set<String> { get }
-  var canAddBooks: Bool { get }
-  var isRecognizing: Bool { get }
-  var hasImage: Bool { get }
-  var isCurrentRecognizerSupported: Bool { get }
-
-  func selectRecognizer(_ id: String) async
-  func isRecognizerSupported(_ id: String) -> Bool
-  func selectImage(data: Data?)
-  func selectAllCandidates()
-  func identifyBooks() async
-  func addSelectedBooks() async throws
-  func deselectAllCandidates()
-  func selectCaptureGoodExample()
-}
+import Settings
 
 /// Persists recognised candidates as new book records and refreshes the browser projection.
 @MainActor
@@ -40,10 +21,11 @@ public final class BookishRecognitionService: BookishRecognition {
   /// The status service used to report successful additions.
   private let statusService: any BookishStatus
 
+  /// The registry that owns the recognizers available to the application.
   private let serviceFactory: BookRecognizerRegistry
 
-  /// The app preference that remembers the selected recognizer.
-  private let methodPreference: BookRecognitionMethodPreference
+  /// The application settings store that remembers the selected recognizer.
+  private let settings: UserDefaults
 
   /// The identifier of the recognizer selected for the current and future captures.
   public private(set) var recognizerID: String {
@@ -75,17 +57,17 @@ public final class BookishRecognitionService: BookishRecognition {
     storage: BookishStorageService,
     state: BookishUIStateService,
     statusService: any BookishStatus,
-    methodPreference: BookRecognitionMethodPreference = .init()
+    settings: UserDefaults = .standard
   ) {
     let factory = BookRecognizerRegistry()
     factory.registerDefaultRecognizers()
-    let recognizerID = methodPreference.recognizerID(in: factory)
+    let recognizerID = Self.selectedRecognizerID(in: factory, settings: settings)
 
     self.storage = storage
     self.state = state
     self.statusService = statusService
     self.serviceFactory = factory
-    self.methodPreference = methodPreference
+    self.settings = settings
 
     imageData = nil
     candidates = []
@@ -96,10 +78,12 @@ public final class BookishRecognitionService: BookishRecognition {
     recognizer = serviceFactory.recognizer(for: recognizerID)
   }
 
+  /// The identifiers of recognizers registered with the application.
   public var recognizerIDs: [String] {
     serviceFactory.recognizerIDs
   }
 
+  /// The recognizers registered with the application.
   public var recognizers: [any BookRecognizer] {
     serviceFactory.recognizers
   }
@@ -137,7 +121,7 @@ public final class BookishRecognitionService: BookishRecognition {
   public func selectRecognizer(_ id: String) async {
     guard isRecognizerSupported(id) else { return }
     recognizerID = id
-    methodPreference.save(recognizerID: id)
+    settings.set(id, forKey: .bookRecognitionProvider)
   }
 
   /// Selects the app's bundled image for trying book recognition.
@@ -183,6 +167,26 @@ public final class BookishRecognitionService: BookishRecognition {
     selectedCandidateIDs = []
   }
 
+  /// Returns the saved recognizer when available, otherwise the first available recognizer.
+  static func selectedRecognizerID(
+    in registry: BookRecognizerRegistry,
+    settings: UserDefaults
+  ) -> String {
+    let storedID = settings.value(forKey: .bookRecognitionProvider)
+    if registry.recognizerIDs.contains(storedID), registry.recognizer(for: storedID).isSupported {
+      return storedID
+    }
+
+    guard
+      let fallbackID = registry.recognizerIDs.first(where: {
+        registry.recognizer(for: $0).isSupported
+      })
+    else {
+      fatalError("Book recognition requires at least one available method.")
+    }
+    return fallbackID
+  }
+
   /// Adds candidates and removes only those successfully persisted from the workflow.
   private func addBooks(_ candidates: [BookRecognitionCandidate]) async throws {
     guard candidates.isEmpty == false else { return }
@@ -196,35 +200,5 @@ public final class BookishRecognitionService: BookishRecognition {
     let addedIDs = Set(candidates.map(\.id))
     self.candidates.removeAll { addedIDs.contains($0.id) }
     selectedCandidateIDs.subtract(addedIDs)
-  }
-}
-extension BookRecognitionCandidate {
-  /// Builds the initial catalogue record for a recognised book.
-  var bookRecord: BookishRecord {
-    BookishRecord(
-      kind: BookishRecordKind.book,
-      properties: [BookishRecordKey.name: .string(title)]
-    )
-  }
-}
-
-/// Loads the shelf image bundled with Bookish for recognition demonstrations.
-private enum CaptureGoodExample {
-  /// Loads the bundled image data.
-  static func load() throws -> Data {
-    guard
-      let url = Bundle.module.url(
-        forResource: "CaptureGoodExample",
-        withExtension: "JPG"
-      )
-    else {
-      throw BookRecognitionError.captureGoodExampleUnavailable
-    }
-
-    do {
-      return try Data(contentsOf: url)
-    } catch {
-      throw BookRecognitionError.captureGoodExampleUnavailable
-    }
   }
 }

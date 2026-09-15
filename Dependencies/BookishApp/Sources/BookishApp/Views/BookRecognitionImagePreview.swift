@@ -6,32 +6,73 @@
 import Foundation
 import SwiftUI
 
-#if os(macOS)
-  import AppKit
-#else
-  import UIKit
-#endif
-
-/// Displays a compact preview of the image used by the scanning workflow.
+/// Displays the image selected for the recognition workflow using a specified layout policy.
 struct BookRecognitionImagePreview: View {
   /// The selected image data to display.
   let imageData: Data
 
+  /// The preview's layout policy.
+  let sizing: BookRecognitionImagePreviewSizing
+
+  /// The image decoded from `imageData` for SwiftUI presentation.
+  @State private var previewImage = Image(systemName: "photo")
+
   var body: some View {
-    previewImage
-      .resizable()
-      .scaledToFill()
-      .frame(width: 256, height: 256)
-      .clipShape(.rect(cornerRadius: 6))
-      .accessibilityLabel("Selected image preview")
+    Group {
+      switch sizing {
+      case .compact:
+        previewImage
+          .resizable()
+          .scaledToFill()
+          .frame(width: 128, height: 128)
+
+      case .flexible:
+        previewImage
+          .resizable()
+          .scaledToFit()
+          .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .trailing)
+          .frame(minHeight: 64, idealHeight: 128)
+      }
+    }
+    .clipShape(.rect(cornerRadius: 6))
+    .accessibilityLabel("Selected image preview")
+    .task(id: imageData) {
+      await loadPreviewImage()
+    }
   }
 
-  /// Converts the supplied data into a platform-native SwiftUI image.
-  private var previewImage: Image {
-    #if os(macOS)
-      Image(nsImage: NSImage(data: imageData) ?? .init())
-    #else
-      Image(uiImage: UIImage(data: imageData) ?? .init())
-    #endif
+  /// Decodes the selected image away from SwiftUI's body evaluation path.
+  private func loadPreviewImage() async {
+    let image = await Task.detached(priority: .userInitiated) {
+      BookRecognitionPreviewImageLoader.image(from: imageData)
+    }
+    .value
+    guard Task.isCancelled == false else { return }
+    previewImage = image
   }
+}
+
+#Preview("Compact") {
+  BookRecognitionImagePreview(
+    imageData: BookRecognitionImagePreview.exampleImageData,
+    sizing: .compact
+  )
+}
+
+#Preview("Flexible") {
+  BookRecognitionImagePreview(
+    imageData: BookRecognitionImagePreview.exampleImageData,
+    sizing: .flexible
+  )
+  .frame(width: 320, height: 180)
+}
+
+extension BookRecognitionImagePreview {
+  /// The bundled example image used by the preview configurations.
+  fileprivate static let exampleImageData =
+    Bundle.module.url(
+      forResource: "CaptureGoodExample",
+      withExtension: "JPG"
+    )
+    .flatMap { try? Data(contentsOf: $0) } ?? .init()
 }
