@@ -12,14 +12,14 @@ import FoundationModels
 /// candidates. This keeps the recognizer's image-data contract consistent across providers.
 public struct OCRBookRecognizer: BookRecognizer {
   /// The stable identifier for the OCR recognizer.
-  public let id = "com.elegantchaos.bookish.recognizer.ocr"
+  public let id = BookRecognizerID.ocrOnly
 
   /// The user-facing recognizer name.
   public let label = "OCR"
 
   /// Explains the recognizer's two-step process.
   public let description =
-    "Vision reads text from the selected image before Apple Intelligence identifies books."
+    "Books are identified using a combination of Apple Vision & Apple Intelligence."
 
   /// Creates an OCR-backed Foundation Models recognizer.
   public init() {

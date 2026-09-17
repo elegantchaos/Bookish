@@ -1,0 +1,53 @@
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+//  Created by Sam Deane on 17/09/2026.
+//  Copyright © 2026 Elegant Chaos Limited. All rights reserved.
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+import Foundation
+
+import Settings
+import SwiftUI
+
+/// Controls visibility of optional and diagnostic app features.
+struct CaptureSettingsView: View {
+  @Environment(BookishCommander.self) var commander
+  @Environment(BookishRecognitionService.self) var recognition
+  
+  /// Whether to scan for barcodes when using the camera in the capture mode.
+  @AppStorage(.scanForBarcodes) private var scanForBarcodes
+  
+  /// The settings form.
+  var body: some View {
+    let currentRecognizer = recognition.selectedRecognizerID
+
+    return Form {
+      LabeledContent("Barcodes") {
+        Toggle("Scan For Barcodes", isOn: $scanForBarcodes)
+      }
+      
+      LabeledContent("Capture Method") {
+        VStack(alignment: .leading) {
+          Menu {
+            ForEach(recognition.recognizers, id: \.id) { recognizer in
+              commander.button(SelectRecognizerCommand(recognizer.id)) {
+                HStack {
+                  Image(systemName: "checkmark")
+                    .opacity(recognizer.id == currentRecognizer ? 1 : 0)
+                  Text(recognizer.label)
+                }
+              }
+              .disabled(recognizer.isSupported == false)
+            }
+          } label: {
+            Text(recognition.recognizer.label)
+          }
+          
+          Text(recognition.recognizer.description)
+            .font(.footnote)
+            .fixedSize(horizontal: false, vertical: true)
+        }
+      }
+      .disabled(recognition.isRecognizing)
+    }
+  }
+}

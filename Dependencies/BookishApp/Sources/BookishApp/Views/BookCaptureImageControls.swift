@@ -22,24 +22,6 @@ struct BookCaptureImageControls: View {
 
   var body: some View {
     VStack(alignment: .leading) {
-      LabeledContent("Method") {
-        Menu {
-          ForEach(recognition.recognizers, id: \.id) { recognizer in
-            commander.button(SelectRecognizerCommand(provider: recognizer.id)) {
-              HStack {
-                Image(systemName: "checkmark")
-                  .opacity(recognizer.id == recognition.recognizerID ? 1 : 0)
-                Text(recognizer.label)
-              }
-            }
-            .disabled(recognizer.isSupported == false)
-          }
-        } label: {
-          Text(recognition.recognizer.label)
-        }
-      }
-      .disabled(recognition.isRecognizing)
-
       Menu {
         PhotosPicker(selection: $selectedPhoto, matching: .images) {
           Text("From Photos…")

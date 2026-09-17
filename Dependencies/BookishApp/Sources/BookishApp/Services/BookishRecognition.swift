@@ -27,11 +27,13 @@ public protocol BookishRecognition {
   /// Whether the selected recognizer can run on this device.
   var isCurrentRecognizerSupported: Bool { get }
 
-  /// Selects a recognizer by its identifier.
-  func selectRecognizer(_ id: String) async
+  var selectedRecognizerID: BookRecognizerID { get }
 
+  /// Selects a recognizer by its identifier.
+  func selectRecognizer(_ recognizerID: BookRecognizerID)
+  
   /// Returns whether the recognizer identified by `id` can run on this device.
-  func isRecognizerSupported(_ id: String) -> Bool
+  func isRecognizerSupported(_ id: BookRecognizerID) -> Bool
 
   /// Replaces the image to recognise.
   func selectImage(data: Data?)

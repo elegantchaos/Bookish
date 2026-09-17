@@ -8,14 +8,14 @@ import Foundation
 /// Sends images to the OpenAI Responses API and decodes book-identification candidates.
 public struct OpenAIResponsesBookRecognizer: BookRecognizer {
   /// The stable identifier for the OpenAI recognizer.
-  public let id = "com.bookish.elegantchao.recognizer.openai"
+  public let id = BookRecognizerID.openAI
 
   /// The user-facing recognizer name.
   public let label = "OpenAI"
 
   /// Explains when image data is sent to OpenAI.
   public let description =
-    "The selected image is sent to OpenAI only when you choose Identify Books."
+    "Books are identified using OpenAI."
 
   /// Retrieves the OpenAI API credential.
   private let credentials: any BookRecognitionCredentials

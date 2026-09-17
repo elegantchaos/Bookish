@@ -56,6 +56,8 @@ public final class BookishEngine {
     directoryURL: URL? = nil,
     defaultShowsDebugIndexes: Bool = false
   ) {
+    let defaults = UserDefaults.standard
+    
     let storageService = BookishStorageService(directoryURL: directoryURL)
     let navigation = BookishNavigationService(storageService: storageService)
     let presentationService = BookishPresentationService(storageService: storageService)
@@ -78,7 +80,8 @@ public final class BookishEngine {
     let recognition = BookishRecognitionService(
       storage: storageService,
       state: uiState,
-      statusService: statusService
+      statusService: statusService,
+      initialRecognizer: defaults.value(forKey: .bookRecognizer)
     )
     
     let commander = BookishCommander()

@@ -8,7 +8,7 @@ import Foundation
 /// Stores the recognition providers available to the application.
 public final class BookRecognizerRegistry {
   /// Recognizers indexed by their stable identifiers.
-  private var recognizersByID: [String: any BookRecognizer] = [:]
+  private var recognizersByID: [BookRecognizerID: any BookRecognizer] = [:]
 
   /// Creates an empty recognizer registry.
   public init() {}
@@ -28,7 +28,7 @@ public final class BookRecognizerRegistry {
   }
 
   /// Returns the recognizer registered for an identifier.
-  public func recognizer(for identifier: String) -> any BookRecognizer {
+  public func recognizer(for identifier: BookRecognizerID) -> any BookRecognizer {
     guard let recognizer = recognizersByID[identifier] else {
       fatalError("No book recognizer is registered for identifier: \(identifier)")
     }
@@ -36,8 +36,10 @@ public final class BookRecognizerRegistry {
   }
 
   /// The registered recognizer identifiers in ascending order.
-  public var recognizerIDs: [String] {
-    recognizersByID.keys.sorted()
+  public var recognizerIDs: [BookRecognizerID] {
+    BookRecognizerID
+      .allCases
+      .filter { recognizersByID[$0] != nil }
   }
 
   /// The registered recognizers in unspecified order.

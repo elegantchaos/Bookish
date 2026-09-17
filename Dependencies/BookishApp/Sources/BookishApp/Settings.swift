@@ -13,12 +13,14 @@ import BookishCapture
 
   /// Whether developer diagnostics and commands are visible.
   public static let isDeveloperMode = AppSettingKey("DeveloperMode", defaultValue: false)
+  
+  /// Whether to scan for barcodes when using the camera in the capture mode.
+  public static let scanForBarcodes = AppSettingKey("BarcodeScanning", defaultValue: true)
 }
 
-@MainActor extension AppSettingKey where Value == String {
+@MainActor extension AppSettingKey where Value == BookRecognizerID {
   /// The default recognition service to use.
-  public static let bookRecognitionProvider = AppSettingKey(
-    "BookRecognitionProvider",
-    defaultValue: "com.elegantchaos.bookish.recognizer.fake"
+  public static let bookRecognizer = AppSettingKey(
+    "BookRecognizer", defaultValue: .foundationInCloud
   )
 }

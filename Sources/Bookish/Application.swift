@@ -30,6 +30,7 @@ struct BookishApplication: App {
     #if os(macOS)
       Settings {
         BookishSettingsView()
+          .modifier(engine.runningInjector)
       }
     #endif
   }

@@ -8,7 +8,7 @@ import Foundation
 /// Describes a service that identifies books from image data.
 public protocol BookRecognizer: Sendable, Identifiable {
   /// The stable identifier used to select the recognizer.
-  var id: String { get }
+  var id: BookRecognizerID { get }
 
   /// The user-facing name of the recognizer.
   var label: String { get }

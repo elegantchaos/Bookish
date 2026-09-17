@@ -12,13 +12,13 @@ import FoundationModels
 /// image-processing path implicitly.
 public struct OnDeviceBookRecognizer: BookRecognizer {
   /// The stable identifier for the direct-image recognizer.
-  public let id = "com.elegantchaos.bookish.recognizer.direct"
+  public let id = BookRecognizerID.foundationOnDevice
 
   /// The user-facing recognizer name.
   public let label = "On Device"
 
   /// Explains the recognizer's direct-image processing path.
-  public let description = "Apple Intelligence identifies books directly from the selected image."
+  public let description = "Books are identified on this device, using Apple Intelligence."
 
   /// Indicates whether this direct-image recognizer is available on the current platform.
   public var isSupported: Bool {

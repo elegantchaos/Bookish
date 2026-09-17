@@ -3,6 +3,7 @@
 //  Copyright © 2026 Elegant Chaos Limited. All rights reserved.
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
+import BookishCapture
 import Commands
 import CommandsUI
 import Icons
@@ -13,19 +14,19 @@ public struct SelectRecognizerCommand<Centre: BookishRecognitionProvider>: Comma
   public typealias ResultType = Void
 
   /// The provider selected by the user.
-  public let recognizer: String
+  public let recognizer: BookRecognizerID
 
   /// The stable command identifier.
   public let id = "recognition.select-provider"
 
   /// Creates a command for the selected provider.
-  public init(provider: String) {
-    self.recognizer = provider
+  public init(_ recognizer: BookRecognizerID) {
+    self.recognizer = recognizer
   }
 
   /// Enables selection only for a recognizer that can run on this device.
   public func availability(centre: Centre) -> CommandAvailability {
-    centre.recognitionService.isRecognizing == false
+    !centre.recognitionService.isRecognizing
       && centre.recognitionService.isRecognizerSupported(recognizer)
       ? .enabled : .disabled
   }

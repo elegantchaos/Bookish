@@ -17,6 +17,10 @@ public struct BookishSettingsView: View {
       Tab("General", systemImage: "gear") {
         GeneralSettingsView()
       }
+
+      Tab("Capture", systemImage: "camera") {
+        CaptureSettingsView()
+      }
     }
     .scenePadding()
     .frame(maxWidth: 350, minHeight: 100)
