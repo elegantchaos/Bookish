@@ -44,7 +44,7 @@ struct RecordLinkButton: View {
 
   /// Pushes the linked record onto the detail navigation stack.
   private func navigate() {
-    commander.performWithoutWaiting(NavigateToRecordCommand(recordID: recordID))
+    commander.perform(NavigateToRecordCommand(recordID: recordID))
   }
 
   /// Identifies changes that require link metadata to be resolved again.

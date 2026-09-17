@@ -54,7 +54,7 @@ public struct BookishUIStateView: View {
       onCompletion: handleInterchangeExport
     )
     .task(id: isDeveloperMode) {
-      commander.performWithoutWaiting(SetDebugIndexVisibilityCommand(isVisible: isDeveloperMode))
+      commander.perform(SetDebugIndexVisibilityCommand(isVisible: isDeveloperMode))
     }
   }
 
@@ -106,7 +106,7 @@ extension BookishUIStateView {
   private func handleInterchangeImport(_ result: Result<URL, Error>) {
     switch result {
     case .success(let url):
-      commander.performWithoutWaiting(ImportSelectedInterchangeCommand(url: url))
+      commander.perform(ImportSelectedInterchangeCommand(url: url))
 
     case .failure(let error):
       statusService.report(error: error)
@@ -117,7 +117,7 @@ extension BookishUIStateView {
   private func handleDeliciousLibraryImport(_ result: Result<URL, Error>) {
     switch result {
     case .success(let url):
-      commander.performWithoutWaiting(ImportSelectedDeliciousLibraryCommand(url: url))
+      commander.perform(ImportSelectedDeliciousLibraryCommand(url: url))
 
     case .failure(let error):
       statusService.report(error: error)

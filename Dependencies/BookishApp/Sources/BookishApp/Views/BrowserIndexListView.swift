@@ -71,10 +71,10 @@ struct BrowserIndexListView: View {
 
     switch destination {
     case .mainSection(let section):
-      commander.performWithoutWaiting(SelectMainSectionCommand(section: section))
+      commander.perform(SelectMainSectionCommand(section: section))
 
     case .recordIndex(let recordIndexID):
-      commander.performWithoutWaiting(SelectRecordIndexCommand(recordIndexID: recordIndexID))
+      commander.perform(SelectRecordIndexCommand(recordIndexID: recordIndexID))
     }
   }
 }

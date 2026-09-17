@@ -31,7 +31,7 @@ final class BookishCommander {
 
   /// Performs a command asynchronously and reports failures through the engine.
   @discardableResult
-  func performWithoutWaiting<C: Command>(_ command: C) -> Task<Void, Never>
+  func perform<C: Command>(_ command: C) -> Task<Void, Never>
   where C.Centre == BookishEngine {
     engine.performWithoutWaiting(command)
   }

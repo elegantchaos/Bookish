@@ -37,7 +37,7 @@ struct BookCaptureView: View {
       let imageData = try? await selectedPhoto.loadTransferable(
         type: Data.self
       )
-      commander.performWithoutWaiting(
+      commander.perform(
         SelectBookRecognitionImageCommand(imageData: imageData)
       )
     }
@@ -56,7 +56,7 @@ struct BookCaptureView: View {
 
       do {
         let imageData = try Data(contentsOf: url)
-        commander.performWithoutWaiting(
+        commander.perform(
           SelectBookRecognitionImageCommand(imageData: imageData)
         )
       } catch {

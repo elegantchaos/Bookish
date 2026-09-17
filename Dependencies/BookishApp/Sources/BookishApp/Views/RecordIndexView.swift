@@ -61,7 +61,7 @@ struct RecordIndexView: View {
     Binding {
       navigation.selectedRecordID
     } set: { recordID in
-      commander.performWithoutWaiting(SelectRecordCommand(recordID: recordID))
+      commander.perform(SelectRecordCommand(recordID: recordID))
     }
   }
 
@@ -70,7 +70,7 @@ struct RecordIndexView: View {
     Binding {
       navigation.recordNameFilter
     } set: { filter in
-      commander.performWithoutWaiting(SetRecordNameFilterCommand(filter: filter))
+      commander.perform(SetRecordNameFilterCommand(filter: filter))
     }
   }
 
