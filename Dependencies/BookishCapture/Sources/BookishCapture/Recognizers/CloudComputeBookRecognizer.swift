@@ -30,6 +30,7 @@ public struct CloudComputeBookRecognizer: BookRecognizer {
   }
 
   /// Model we will use.
+  /// Type erased so that we can build on macOS/iOS 26.0
   private var model: Sendable? = nil
   
   /// Creates the cloud-compute recognizer.
@@ -49,6 +50,6 @@ public struct CloudComputeBookRecognizer: BookRecognizer {
       throw BookRecognitionError.privateCloudComputeUnavailable
     }
     
-    return try await DirectImageBookRecognizer().identifyBooks(in: imageData, using: model)
+    return try await DirectImageBookRecognizer.identifyBooks(in: imageData, using: model)
   }
 }

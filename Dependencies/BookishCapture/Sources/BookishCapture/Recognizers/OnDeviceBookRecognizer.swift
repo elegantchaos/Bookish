@@ -21,27 +21,28 @@ public struct OnDeviceBookRecognizer: BookRecognizer {
   public let description = "Books are identified on this device, using Apple Intelligence."
 
   /// Indicates whether this direct-image recognizer is available on the current platform.
-  public var isSupported: Bool {
+  public var isSupported: Bool { model?.isAvailable ?? false }
+  
+  /// Model we will use.
+  private var model: SystemLanguageModel? = nil
+  
+  /// Creates the cloud-compute recognizer.
+  public init() {
     if #available(iOS 27.0, macOS 27.0, *) {
-      true
-    } else {
-      false
+      model = SystemLanguageModel.default
     }
   }
-
-  /// Creates the direct-image recognizer.
-  public init() {}
-
+  
   /// Identifies books directly from the supplied image on macOS and iOS 27 or later.
   public func identifyBooks(in imageData: Data) async throws -> [BookRecognitionCandidate] {
     guard #available(iOS 27.0, macOS 27.0, *) else {
       throw BookRecognitionError.directImageRecognitionUnavailable
     }
-    let model = SystemLanguageModel.default
-    guard model.isAvailable else {
+
+    guard let model, model.isAvailable else {
       throw BookRecognitionError.foundationModelsUnavailable
     }
-    return try await DirectImageBookRecognizer().identifyBooks(
+    return try await DirectImageBookRecognizer.identifyBooks(
       in: imageData,
       using: model
     )
