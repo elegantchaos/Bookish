@@ -24,6 +24,9 @@ public final class BookishRecognitionService: BookishRecognition {
   /// The registry that owns the recognizers available to the application.
   private let registry: BookRecognizerRegistry
 
+  /// The application settings used to restore and persist the selected recognizer.
+  private let settings: UserDefaults
+
   /// The data selected by the user for recognition.
   public private(set) var imageData: Data?
 
@@ -47,20 +50,23 @@ public final class BookishRecognitionService: BookishRecognition {
     storage: BookishStorageService,
     state: BookishUIStateService,
     statusService: any BookishStatus,
-    initialRecognizer: BookRecognizerID
+    recognizers: [any BookRecognizer],
+    settings: UserDefaults
   ) {
-    let factory = BookRecognizerRegistry()
-    factory.registerDefaultRecognizers()
+    let factory = BookRecognizerRegistry(recognizers: recognizers)
     self.storage = storage
     self.state = state
     self.statusService = statusService
     self.registry = factory
+    self.settings = settings
     imageData = nil
     candidates = []
     selectedCandidateIDs = []
     error = nil
     isRecognizing = false
-    recognizer = registry.recognizer(for: initialRecognizer)
+    recognizer = registry.recognizer(
+      for: Self.selectedRecognizerID(in: registry, settings: settings)
+    )
   }
 
   /// The identifier of the recognizer selected for the current and future captures.
@@ -72,9 +78,18 @@ public final class BookishRecognitionService: BookishRecognition {
   public func selectRecognizer(_ recognizerID: BookRecognizerID) {
     if isRecognizerSupported(recognizerID) {
       recognizer = registry.recognizer(for: recognizerID)
+      settings.set(recognizerID, forKey: .bookRecognizer)
     }
   }
-  
+
+  /// Replaces application-configured recognizers and preserves the current choice when possible.
+  public func configureRecognizers(_ recognizers: [any BookRecognizer]) {
+    let currentIdentifier = recognizer.id
+    registry.replaceRecognizers(with: recognizers)
+    recognizer = Self.resolvedRecognizer(in: registry, preferred: currentIdentifier)
+    settings.set(recognizer.id, forKey: .bookRecognizer)
+  }
+
   /// The identifiers of recognizers registered with the application.
   public var recognizerIDs: [BookRecognizerID] {
     registry.recognizerIDs
@@ -168,5 +183,32 @@ public final class BookishRecognitionService: BookishRecognition {
     let addedIDs = Set(candidates.map(\.id))
     self.candidates.removeAll { addedIDs.contains($0.id) }
     selectedCandidateIDs.subtract(addedIDs)
+  }
+
+  /// Selects a supported preferred recognizer or the first supported fallback.
+  private static func resolvedRecognizer(
+    in registry: BookRecognizerRegistry,
+    preferred: BookRecognizerID
+  ) -> any BookRecognizer {
+    if registry.recognizerIDs.contains(preferred), registry.recognizer(for: preferred).isSupported {
+      return registry.recognizer(for: preferred)
+    }
+    guard
+      let fallback = registry.recognizerIDs.first(where: {
+        registry.recognizer(for: $0).isSupported
+      })
+    else {
+      fatalError("Bookish requires at least one supported book recognizer.")
+    }
+    return registry.recognizer(for: fallback)
+  }
+
+  /// Returns the saved recognizer when it is registered and supported, or a fallback.
+  static func selectedRecognizerID(
+    in registry: BookRecognizerRegistry,
+    settings: UserDefaults
+  ) -> BookRecognizerID {
+    let preferred = settings.value(forKey: .bookRecognizer)
+    return resolvedRecognizer(in: registry, preferred: preferred).id
   }
 }

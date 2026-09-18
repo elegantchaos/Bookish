@@ -7,9 +7,6 @@ import Foundation
 
 /// Errors surfaced by Bookish's recognition providers.
 public enum BookRecognitionError: LocalizedError {
-  /// The app was launched without an API key.
-  case missingAPIKey
-
   /// The API returned a non-successful HTTP status.
   case serverError(statusCode: Int, message: String)
 
@@ -34,8 +31,6 @@ public enum BookRecognitionError: LocalizedError {
   /// A localized explanation suitable for display in the recognition workflow.
   public var errorDescription: String? {
     switch self {
-    case .missingAPIKey:
-      "Store an OpenAI API key in Keychain for account openai-api-key on api.openai.com."
     case .serverError(_, let message):
       message
     case .invalidResponse:

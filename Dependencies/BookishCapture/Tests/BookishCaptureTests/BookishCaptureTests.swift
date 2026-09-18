@@ -18,6 +18,20 @@ struct BookRecognizerRegistryTests {
     for identifier in registry.recognizerIDs {
       #expect(registry.recognizer(for: identifier).id == identifier)
     }
+    #expect(registry.recognizerIDs.contains(.openAI) == false)
+  }
+
+  /// Allows the client to add, replace, and remove configured recognizers at runtime.
+  @Test
+  func registryReconfiguresRecognizersByIdentifier() {
+    let registry = BookRecognizerRegistry()
+    registry.register(FakeBookRecognizer())
+    registry.register(OpenAIResponsesBookRecognizer(apiKey: "first"))
+    registry.register(OpenAIResponsesBookRecognizer(apiKey: "replacement"))
+
+    registry.unregister(.openAI)
+
+    #expect(registry.recognizerIDs == [.fake])
   }
 
   @Test
@@ -47,7 +61,7 @@ struct BookRecognizerRegistryTests {
     let fixture = RecordingRecognitionSession(responseData: responseData)
     defer { fixture.close() }
     let recognizer = OpenAIResponsesBookRecognizer(
-      credentials: StaticBookRecognitionCredentials(apiKey: "test-key"),
+      apiKey: "test-key",
       session: fixture.session
     )
 
@@ -77,21 +91,6 @@ struct BookRecognizerRegistryTests {
   }
 
   @Test
-  func openAIRecognizerDoesNotSendARequestWithoutCredentials() async {
-    let fixture = RecordingRecognitionSession(responseData: Data())
-    defer { fixture.close() }
-    let recognizer = OpenAIResponsesBookRecognizer(
-      credentials: StaticBookRecognitionCredentials(apiKey: nil),
-      session: fixture.session
-    )
-
-    await #expect(throws: BookRecognitionError.self) {
-      try await recognizer.identifyBooks(in: Data([0xFF, 0xD8, 0xFF]))
-    }
-    #expect(fixture.request == nil)
-  }
-
-  @Test
   func directImageRecognizersReportTheirAvailabilityRequirementBeforeMacOS27() async {
     guard #unavailable(macOS 27.0) else { return }
 
@@ -104,16 +103,5 @@ struct BookRecognizerRegistryTests {
     await #expect(throws: BookRecognitionError.self) {
       try await CloudComputeBookRecognizer().identifyBooks(in: Data())
     }
-  }
-}
-
-/// Provides a fixed API key for recognizer tests.
-private struct StaticBookRecognitionCredentials: BookRecognitionCredentials {
-  /// The key returned to the recognizer.
-  let apiKey: String?
-
-  /// Returns the fixed API key.
-  func openAIAPIKey() throws -> String? {
-    apiKey
   }
 }

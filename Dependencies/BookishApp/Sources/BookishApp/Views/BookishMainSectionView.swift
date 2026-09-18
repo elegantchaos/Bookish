@@ -15,6 +15,8 @@ struct BookishMainSectionView: View {
     switch section {
     case .capture:
       BookCaptureView()
+    case .lookup:
+      BookLookupView()
     case .importing, .cleanup:
       ContentUnavailableView(
         section.title,

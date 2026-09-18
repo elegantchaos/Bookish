@@ -10,6 +10,9 @@ public enum BookishMainSection: String, CaseIterable, Hashable, Sendable {
   /// image recognition and other AI techniques.
   case capture
 
+  /// The workflow for querying external and local book metadata providers.
+  case lookup
+
   /// The workflow for importing catalogue data.
   case importing
 
@@ -23,6 +26,8 @@ extension BookishMainSection {
     switch self {
     case .capture:
       "Capture"
+    case .lookup:
+      "Lookup"
     case .importing:
       "Import"
     case .cleanup:
@@ -35,6 +40,8 @@ extension BookishMainSection {
     switch self {
     case .capture:
       "viewfinder"
+    case .lookup:
+      "magnifyingglass"
     case .importing:
       "square.and.arrow.down"
     case .cleanup:
@@ -47,6 +54,8 @@ extension BookishMainSection {
     switch self {
     case .capture:
       "Scanning tools will appear here."
+    case .lookup:
+      "Book metadata lookup tools will appear here."
     case .importing:
       "Import tools will appear here."
     case .cleanup:

@@ -13,13 +13,13 @@ struct BookRecognitionTests {
     let defaults = try #require(UserDefaults(suiteName: suiteName))
     defer { defaults.removePersistentDomain(forName: suiteName) }
     let registry = BookRecognizerRegistry()
-    registry.register(TestBookRecognizer(id: "example"))
-    registry.register(TestBookRecognizer(id: "saved"))
+    registry.register(TestBookRecognizer(id: .fake))
+    registry.register(TestBookRecognizer(id: .ocrOnly))
 
-    defaults.set("saved", forKey: .bookRecognitionProvider)
+    defaults.set(.ocrOnly, forKey: .bookRecognizer)
 
     #expect(
-      BookishRecognitionService.selectedRecognizerID(in: registry, settings: defaults) == "saved")
+      BookishRecognitionService.selectedRecognizerID(in: registry, settings: defaults) == .ocrOnly)
   }
 
   @Test
@@ -28,12 +28,12 @@ struct BookRecognitionTests {
     let defaults = try #require(UserDefaults(suiteName: suiteName))
     defer { defaults.removePersistentDomain(forName: suiteName) }
     let registry = BookRecognizerRegistry()
-    registry.register(TestBookRecognizer(id: "fallback"))
+    registry.register(TestBookRecognizer(id: .fake))
 
-    defaults.set("unregistered", forKey: .bookRecognitionProvider)
+    defaults.set(.openAI, forKey: .bookRecognizer)
 
     #expect(
-      BookishRecognitionService.selectedRecognizerID(in: registry, settings: defaults) == "fallback"
+      BookishRecognitionService.selectedRecognizerID(in: registry, settings: defaults) == .fake
     )
   }
 
@@ -43,13 +43,13 @@ struct BookRecognitionTests {
     let defaults = try #require(UserDefaults(suiteName: suiteName))
     defer { defaults.removePersistentDomain(forName: suiteName) }
     let registry = BookRecognizerRegistry()
-    registry.register(TestBookRecognizer(id: "fallback"))
-    registry.register(TestBookRecognizer(id: "unavailable", isSupported: false))
+    registry.register(TestBookRecognizer(id: .fake))
+    registry.register(TestBookRecognizer(id: .openAI, isSupported: false))
 
-    defaults.set("unavailable", forKey: .bookRecognitionProvider)
+    defaults.set(.openAI, forKey: .bookRecognizer)
 
     #expect(
-      BookishRecognitionService.selectedRecognizerID(in: registry, settings: defaults) == "fallback"
+      BookishRecognitionService.selectedRecognizerID(in: registry, settings: defaults) == .fake
     )
   }
 }

@@ -44,6 +44,6 @@ public struct SelectRecognizerCommand<Centre: BookishRecognitionProvider>: Comma
 
   /// Selects the provider through the recognition workflow without starting recognition.
   public func perform(centre: Centre) async throws {
-    await centre.recognitionService.selectRecognizer(recognizer)
+    centre.recognitionService.selectRecognizer(recognizer)
   }
 }

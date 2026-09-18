@@ -16,6 +16,7 @@ let package = Package(
   dependencies: [
     .package(path: "../BookishRecord"),
     .package(path: "../BookishCapture"),
+    .package(path: "../BookishLookup"),
     .package(path: "../BookishCoding"),
     .package(path: "../BookishImporter"),
     .package(path: "../BookishDatastore"),
@@ -32,6 +33,7 @@ let package = Package(
         .product(name: "Application", package: "Application"),
         .product(name: "BookishRecord", package: "BookishRecord"),
         .product(name: "BookishCapture", package: "BookishCapture"),
+        .product(name: "BookishLookup", package: "BookishLookup"),
         .product(name: "BookishCoding", package: "BookishCoding"),
         .product(name: "BookishImporter", package: "BookishImporter"),
         .product(name: "BookishImporterSamples", package: "BookishImporter"),

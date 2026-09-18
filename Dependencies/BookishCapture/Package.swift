@@ -15,16 +15,14 @@ let package = Package(
   ],
 
   dependencies: [
-    .package(path: "../Keychain"),
-    .package(url: "https://github.com/elegantchaos/Logger.git", from: "2.0.0"),
+    .package(url: "https://github.com/elegantchaos/Logger.git", from: "2.0.0")
   ],
 
   targets: [
     .target(
       name: "BookishCapture",
       dependencies: [
-        .product(name: "Logger", package: "Logger"),
-        .product(name: "Keychain", package: "Keychain"),
+        .product(name: "Logger", package: "Logger")
       ]
     ),
 

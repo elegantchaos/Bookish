@@ -10,8 +10,12 @@ public final class BookRecognizerRegistry {
   /// Recognizers indexed by their stable identifiers.
   private var recognizersByID: [BookRecognizerID: any BookRecognizer] = [:]
 
-  /// Creates an empty recognizer registry.
-  public init() {}
+  /// Creates a registry with the supplied initial recognizers.
+  public init(recognizers: [any BookRecognizer] = []) {
+    for recognizer in recognizers {
+      register(recognizer)
+    }
+  }
 
   /// Registers the recognizers bundled with Bookish.
   public func registerDefaultRecognizers() {
@@ -19,12 +23,24 @@ public final class BookRecognizerRegistry {
     register(OnDeviceBookRecognizer())
     register(CloudComputeBookRecognizer())
     register(OCRBookRecognizer())
-    register(OpenAIResponsesBookRecognizer())
   }
 
   /// Adds or replaces a recognizer with the same identifier.
   public func register(_ recognizer: any BookRecognizer) {
     recognizersByID[recognizer.id] = recognizer
+  }
+
+  /// Removes the recognizer with the supplied identifier, if it is registered.
+  public func unregister(_ identifier: BookRecognizerID) {
+    recognizersByID[identifier] = nil
+  }
+
+  /// Replaces the complete set of configured recognizers.
+  public func replaceRecognizers(with recognizers: [any BookRecognizer]) {
+    recognizersByID = [:]
+    for recognizer in recognizers {
+      register(recognizer)
+    }
   }
 
   /// Returns the recognizer registered for an identifier.

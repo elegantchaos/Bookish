@@ -127,11 +127,11 @@ struct CommandProviderTests {
     let centre = TestCommandCentre(recognitionService: recognitionService)
 
     try await centre.perform(SelectBookRecognitionImageCommand(imageData: Data([0xFF])))
-    try await centre.perform(SelectRecognizerCommand(provider: "saved-recognizer"))
+    try await centre.perform(SelectRecognizerCommand(.ocrOnly))
     try await centre.perform(CaptureBooksCommand())
 
     #expect(recognitionService.imageData == Data([0xFF]))
-    #expect(recognitionService.recognizerID == "saved-recognizer")
+    #expect(recognitionService.recognizerID == .ocrOnly)
     #expect(recognitionService.identificationCount == 1)
   }
 
@@ -247,7 +247,7 @@ private final class TestCommandCentre:
 
 @MainActor
 private final class TestBookRecognitionWorkflow: BookishRecognition {
-  private(set) var recognizerID = "default-recognizer"
+  private(set) var recognizerID: BookRecognizerID = .fake
   private(set) var imageData: Data?
   let candidates: [BookRecognitionCandidate]
   var selectedCandidateIDs: Set<String>
@@ -264,6 +264,10 @@ private final class TestBookRecognitionWorkflow: BookishRecognition {
     isRecognizerSupported(recognizerID)
   }
 
+  var selectedRecognizerID: BookRecognizerID {
+    recognizerID
+  }
+
   init(
     candidates: [BookRecognitionCandidate] = [],
     selectedCandidateIDs: Set<String> = []
@@ -277,12 +281,12 @@ private final class TestBookRecognitionWorkflow: BookishRecognition {
     imageData = data
   }
 
-  func selectRecognizer(_ id: String) async {
+  func selectRecognizer(_ id: BookRecognizerID) {
     guard isRecognizerSupported(id) else { return }
     recognizerID = id
   }
 
-  func isRecognizerSupported(_: String) -> Bool {
+  func isRecognizerSupported(_: BookRecognizerID) -> Bool {
     true
   }
 

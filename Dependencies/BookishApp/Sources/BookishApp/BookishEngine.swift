@@ -51,13 +51,16 @@ public final class BookishEngine {
   /// Recognition workflow used by scanning controls and commands.
   @ObservationIgnored public let recognition: BookishRecognitionService
 
+  /// Temporary metadata-lookup workflow exposed by the Lookup section.
+  @ObservationIgnored public let lookup: BookishLookupWorkflowService
+
   /// Creates an engine with services backed by the supplied local datastore directory.
   public init(
     directoryURL: URL? = nil,
     defaultShowsDebugIndexes: Bool = false
   ) {
     let defaults = UserDefaults.standard
-    
+
     let storageService = BookishStorageService(directoryURL: directoryURL)
     let navigation = BookishNavigationService(storageService: storageService)
     let presentationService = BookishPresentationService(storageService: storageService)
@@ -77,13 +80,22 @@ public final class BookishEngine {
       state: uiState,
       statusService: statusService
     )
+    let serviceConfiguration: BookishServiceConfiguration
+    do {
+      serviceConfiguration = try BookishServiceConfiguration.load()
+    } catch {
+      serviceConfiguration = BookishServiceConfiguration()
+      statusService.report(error: error)
+    }
     let recognition = BookishRecognitionService(
       storage: storageService,
       state: uiState,
       statusService: statusService,
-      initialRecognizer: defaults.value(forKey: .bookRecognizer)
+      recognizers: serviceConfiguration.recognizers,
+      settings: defaults
     )
-    
+    let lookup = BookishLookupWorkflowService(providers: serviceConfiguration.lookupProviders)
+
     let commander = BookishCommander()
     state = .uninitialised
     startupTask = nil
@@ -97,8 +109,15 @@ public final class BookishEngine {
     self.commander = commander
     self.recordActions = recordActions
     self.recognition = recognition
+    self.lookup = lookup
 
     commander.attach(to: self)
+  }
+
+  /// Applies application-owned service configuration without restarting the app.
+  public func configureServices(_ configuration: BookishServiceConfiguration) async {
+    recognition.configureRecognizers(configuration.recognizers)
+    await lookup.configureProviders(configuration.lookupProviders)
   }
 
   /// Starts the standard shared application loop.

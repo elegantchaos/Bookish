@@ -17,8 +17,8 @@ public struct OpenAIResponsesBookRecognizer: BookRecognizer {
   public let description =
     "Books are identified using OpenAI."
 
-  /// Retrieves the OpenAI API credential.
-  private let credentials: any BookRecognitionCredentials
+  /// The API key supplied by the application when it constructs this recognizer.
+  private let apiKey: String
 
   /// Selects the Responses API model.
   private let model: String
@@ -26,14 +26,13 @@ public struct OpenAIResponsesBookRecognizer: BookRecognizer {
   /// Uses URLSession directly; tests inject a session with URLProtocol interception to avoid networking.
   private let session: URLSession
 
-  /// Creates a recognizer using a Keychain-backed credential provider by default.
+  /// Creates a recognizer using an API key supplied by the application.
   public init(
-    credentials: any BookRecognitionCredentials =
-      KeychainBookRecognitionCredentials(),
+    apiKey: String,
     model: String = "gpt-4.1-mini",
     session: URLSession = .shared
   ) {
-    self.credentials = credentials
+    self.apiKey = apiKey
     self.model = model
     self.session = session
   }
@@ -42,15 +41,6 @@ public struct OpenAIResponsesBookRecognizer: BookRecognizer {
   public func identifyBooks(in imageData: Data) async throws
     -> [BookRecognitionCandidate]
   {
-    guard
-      let apiKey = try credentials.openAIAPIKey()?.trimmingCharacters(
-        in: .whitespacesAndNewlines
-      ),
-      apiKey.isEmpty == false
-    else {
-      throw BookRecognitionError.missingAPIKey
-    }
-
     var request = URLRequest(
       url: URL(string: "https://api.openai.com/v1/responses")!
     )

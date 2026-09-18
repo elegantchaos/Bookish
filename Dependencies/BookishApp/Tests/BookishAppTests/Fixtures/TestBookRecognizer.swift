@@ -9,7 +9,7 @@ import Foundation
 /// A deterministic recognizer used by recognition-service tests.
 struct TestBookRecognizer: BookRecognizer {
   /// The recognizer's stable identifier.
-  let id: String
+  let id: BookRecognizerID
 
   /// The human-readable recognizer name.
   let label: String
@@ -21,10 +21,10 @@ struct TestBookRecognizer: BookRecognizer {
   let isSupported: Bool
 
   /// Creates a recognizer with the supplied availability.
-  init(id: String, isSupported: Bool = true) {
+  init(id: BookRecognizerID, isSupported: Bool = true) {
     self.id = id
-    label = id
-    description = id
+    label = id.rawValue
+    description = id.rawValue
     self.isSupported = isSupported
   }
 
