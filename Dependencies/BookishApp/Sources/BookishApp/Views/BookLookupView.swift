@@ -15,49 +15,63 @@ struct BookLookupView: View {
   /// The temporary query interface.
   var body: some View {
     @Bindable var lookup = lookup
-    Form {
-      Section("Query") {
-        TextField("ISBN, title, or author", text: $lookup.query)
-          .textFieldStyle(.roundedBorder)
 
-        Button("Look Up", systemImage: "magnifyingglass", action: lookupBooks)
+    VStack {
+      HStack(alignment: .firstTextBaseline) {
+        VStack(alignment: .leading) {
+          TextField("", text: $lookup.query)
+            .textFieldStyle(.roundedBorder)
+            .onSubmit(lookupBooks)
+            .disableAutocorrection(true)
+
+          Text("Search for books by ISBN, title, or author")
+            .font(.footnote)
+            .padding(.horizontal)
+        }
+
+        Button("Search", systemImage: "magnifyingglass", action: lookupBooks)
           .disabled(
             lookup.query.isEmpty || lookup.isLookingUp
               || !lookup.isSelectedProviderSupported
           )
       }
+      .padding()
 
-      if lookup.isLookingUp {
-        Section {
-          ProgressView("Looking up books")
+      Form {
+        if lookup.isLookingUp {
+          Section {
+            ProgressView("Looking up books")
+          }
         }
-      }
 
-      if !lookup.candidates.isEmpty {
-        Section("Candidates") {
-          ForEach(lookup.candidates) { candidate in
-            VStack(alignment: .leading) {
-              Text(candidate.record.string(BookishRecordKey.name) ?? candidate.title)
-                .font(.headline)
-              if !candidate.authors.isEmpty {
-                Text(candidate.authors.formatted(.list(type: .and)))
+        if !lookup.candidates.isEmpty {
+          Section("Candidates") {
+            ForEach(lookup.candidates) { candidate in
+              VStack(alignment: .leading) {
+                Text(candidate.record.string(BookishRecordKey.name) ?? candidate.title)
+                  .font(.headline)
+                if !candidate.authors.isEmpty {
+                  Text(candidate.authors.formatted(.list(type: .and)))
+                    .foregroundStyle(.secondary)
+                }
+                Text(candidate.providerID.rawValue)
+                  .font(.caption)
                   .foregroundStyle(.secondary)
               }
-              Text(candidate.providerID.rawValue)
-                .font(.caption)
-                .foregroundStyle(.secondary)
+            }
+          }
+        }
+
+        if !lookup.failures.isEmpty {
+          Section("Provider Failures") {
+            ForEach(lookup.failures, id: \.providerID) { failure in
+              Text("\(failure.providerID.rawValue): \(failure.error.localizedDescription)")
             }
           }
         }
       }
 
-      if !lookup.failures.isEmpty {
-        Section("Provider Failures") {
-          ForEach(lookup.failures, id: \.providerID) { failure in
-            Text("\(failure.providerID.rawValue): \(failure.error.localizedDescription)")
-          }
-        }
-      }
+      Spacer()
     }
     .navigationTitle("Lookup")
   }

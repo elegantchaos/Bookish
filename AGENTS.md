@@ -11,6 +11,7 @@ Apply the rules below when working on this project.
 - Use `rt validate` to validate all Swift code changes, following the rules in the `swift-validation` skill.
 - Before every Swift code change, review your proposed design and implementation to ensure that they are aligned with the rules laid out by `coding-standards` and  `swift` , and any other relevent skills. Revise the plan if not.
 - After every Swift code change, review all affected code areas to ensure that they are still aligned with our standards. Consider the effect that your changes had on the coherence of the overall codebase, and not just the changes themselves. Call out any mis-alignment and propose corrections.
+- When making temporary files, create them in `.build/tmp` in the project root, rather than using `/private/tmp`.
 
 # Standard Rules
 
