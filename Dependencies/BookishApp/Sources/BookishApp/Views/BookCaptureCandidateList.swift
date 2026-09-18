@@ -27,7 +27,7 @@ struct BookCaptureCandidateList: View {
         }
       }
 
-      if recognition.candidates.isEmpty == false {
+      if !recognition.candidates.isEmpty {
         Section("Candidates") {
           HStack {
             Spacer()
@@ -46,7 +46,7 @@ struct BookCaptureCandidateList: View {
               VStack(alignment: .leading, spacing: 4) {
                 Text(candidate.title)
                   .font(.headline)
-                if candidate.authors.isEmpty == false {
+                if !candidate.authors.isEmpty {
                   Text(candidate.authors.formatted(.list(type: .and)))
                     .foregroundStyle(.secondary)
                 }

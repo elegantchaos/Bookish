@@ -146,7 +146,7 @@ extension BookishPresentationService: BookishPresentation {
       result.append(record)
     }
 
-    if result.contains(where: { $0.id == fallbackPresentationID }) == false,
+    if !result.contains(where: { $0.id == fallbackPresentationID }),
       let record = try await storageService.record(id: fallbackPresentationID)
     {
       result.append(record)

@@ -85,7 +85,7 @@ public struct OpenLibraryLookupProvider: BookLookupProvider {
       throw BookLookupError.invalidResponse
     }
     var request = URLRequest(url: url)
-    if let userAgent, userAgent.isEmpty == false {
+    if let userAgent, !userAgent.isEmpty {
       request.setValue(userAgent, forHTTPHeaderField: "User-Agent")
     }
     return request

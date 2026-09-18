@@ -33,7 +33,7 @@ public struct CascadingPresentationResolver: PresentationResolver, Equatable {
     let presentations = presentationRecords.compactMap {
       $0.encoded(key, as: BookishPropertyPresentation.self)
     }
-    guard presentations.isEmpty == false else {
+    guard !presentations.isEmpty else {
       return nil
     }
 

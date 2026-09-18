@@ -73,7 +73,7 @@ public final class BookishLookupWorkflowService: BookishLookupWorkflow {
 
   /// Executes the selected provider for the current query.
   public func lookupBooks() async {
-    guard query.isEmpty == false else { return }
+    guard !query.isEmpty else { return }
     isLookingUp = true
     defer { isLookingUp = false }
     let result = await lookup.lookupBooks(

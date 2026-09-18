@@ -31,7 +31,7 @@ struct LookupSettingsView: View {
                     Text(provider.label)
                   }
                 }
-                .disabled(provider.isSupported == false)
+                .disabled(!provider.isSupported)
               }
             } label: {
               Text(selectedProvider?.label ?? "Unavailable")

@@ -42,7 +42,7 @@ public struct RecordQuery: Codable, Equatable, Sendable {
 
   /// Returns this query constrained to record names that contain the supplied text.
   public func filteringNames(containing text: String) -> Self {
-    guard text.isEmpty == false else {
+    guard !text.isEmpty else {
       return self
     }
 

@@ -47,7 +47,7 @@ struct BookRecognitionImagePreview: View {
       BookRecognitionPreviewImageLoader.image(from: imageData)
     }
     .value
-    guard Task.isCancelled == false else { return }
+    guard !Task.isCancelled else { return }
     previewImage = image
   }
 }

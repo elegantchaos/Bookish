@@ -34,11 +34,11 @@ struct DeliciousLibraryImporterTests {
     )
     #expect(originalRecord["title"] as? String == "Snow Crash")
     #expect(originalRecord["creationDate"] as? String == "2004-11-29T13:09:36Z")
-    #expect(snowCrash.properties.keys.contains("original.name") == false)
-    #expect(snowCrash.properties.keys.contains("original.subtitle") == false)
-    #expect(snowCrash.properties.keys.contains("original.publishers") == false)
-    #expect(snowCrash.properties.keys.contains("original.series") == false)
-    #expect(snowCrash.properties.keys.contains("original.seriesPosition") == false)
+    #expect(!snowCrash.properties.keys.contains("original.name"))
+    #expect(!snowCrash.properties.keys.contains("original.subtitle"))
+    #expect(!snowCrash.properties.keys.contains("original.publishers"))
+    #expect(!snowCrash.properties.keys.contains("original.series"))
+    #expect(!snowCrash.properties.keys.contains("original.seriesPosition"))
 
     let authorID = try #require(snowCrash.list("authors")?.first?.recordValue)
     let author = try #require(recordsByID[authorID])
@@ -73,7 +73,7 @@ struct DeliciousLibraryImporterTests {
       #expect(relationshipValues.allSatisfy { $0.recordValue != nil })
     }
 
-    #expect(result.records.contains { $0.kind == "relationship" } == false)
+    #expect(!result.records.contains { $0.kind == "relationship" })
   }
 
   @Test

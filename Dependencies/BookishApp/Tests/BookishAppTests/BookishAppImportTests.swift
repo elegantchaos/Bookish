@@ -69,7 +69,7 @@ import Testing
     let importedBooks = try await records(for: harness).filter {
       $0.kind == "book" && $0.string(BookishRecordKey.name) == "Snow Crash"
     }
-    #expect(importedBooks.isEmpty == false)
+    #expect(!importedBooks.isEmpty)
     #expect(harness.statusService.message.hasPrefix("Imported "))
     #expect(harness.statusService.message.contains("Delicious Library"))
   }
@@ -88,7 +88,7 @@ import Testing
     let exporter = BookishExportingService(storageService: storage)
 
     let file = try BookishInterchangeCodec().decode(await exporter.interchangeData(root: root))
-    #expect(file.records.isEmpty == false)
+    #expect(!file.records.isEmpty)
     #expect(file.root == root)
   }
 
@@ -102,7 +102,7 @@ import Testing
     await harness.importInterchange(data: Data(json.utf8))
     #expect(harness.navigation.recordIDs.contains(BookishRecordID("test-reset-book")))
     let mutationsBeforeReset = try await harness.storageService.mutations()
-    #expect(mutationsBeforeReset.isEmpty == false)
+    #expect(!mutationsBeforeReset.isEmpty)
     try await commander.perform(RebuildRecordStoreCommand())
     #expect(harness.navigation.recordIDs.contains(BookishRecordID("test-reset-book")))
     #expect(
@@ -136,9 +136,9 @@ import Testing
       { "records": [{ "ℹ": "test-command-reset-book", "©": "book", "name": "Command Reset Book" }] }
       """
     await harness.importInterchange(data: Data(json.utf8))
-    #expect(harness.navigation.recordIDs.isEmpty == false)
+    #expect(!harness.navigation.recordIDs.isEmpty)
     try await commander.perform(ResetDatastoreCommand())
-    #expect(harness.navigation.recordIDs.isEmpty == false)
+    #expect(!harness.navigation.recordIDs.isEmpty)
     #expect(try await harness.storageService.record(id: BookishRecordID("seed-book")) == nil)
     #expect(
       try await harness.storageService.record(id: BookishRecordID("datastore-seed-marker"))?.kind

@@ -9,7 +9,6 @@ import BookishRecord
 import Foundation
 import Observation
 
-
 /// Updates browser settings that affect visible record indexes.
 @MainActor
 public protocol BookishBrowserSettings: AnyObject {
@@ -55,7 +54,7 @@ public final class BookishUIStateService {
   @ObservationIgnored public let statusService: BookishStatusService
 
   /// Whether an interchange export has records to write.
-  public var hasExportableRecords: Bool { navigation.recordIDs.isEmpty == false }
+  public var hasExportableRecords: Bool { !navigation.recordIDs.isEmpty }
 
   /// Increments whenever the record projection is refreshed.
   public private(set) var revision = 0

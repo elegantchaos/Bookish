@@ -23,7 +23,7 @@ public struct CaptureBooksCommand<Centre: BookishRecognitionProvider>: CommandWi
   public func availability(centre: Centre) -> CommandAvailability {
     let recognition = centre.recognitionService
     return recognition.hasImage && recognition.isCurrentRecognitionProviderSupported
-      && recognition.isRecognizing == false
+      && !recognition.isRecognizing
       ? .enabled : .disabled
   }
 

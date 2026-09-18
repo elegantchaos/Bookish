@@ -30,8 +30,8 @@ struct BookishServiceConfigurationTests {
     let configuration = BookishServiceConfiguration()
 
     let googleBooks = try #require(configuration.lookupProviders.first { $0.id == .googleBooks })
-    #expect(googleBooks.isSupported == false)
-    #expect(configuration.recognitionProviders.map(\.id).contains(.openAI) == false)
+    #expect(!googleBooks.isSupported)
+    #expect(!configuration.recognitionProviders.map(\.id).contains(.openAI))
   }
 
   /// Replaces optional services when the application's credential state changes.
@@ -51,7 +51,7 @@ struct BookishServiceConfigurationTests {
     await engine.configureServices(BookishServiceConfiguration())
     let unconfiguredGoogleBooks = try #require(
       engine.lookup.providers.first { $0.id == .googleBooks })
-    #expect(unconfiguredGoogleBooks.isSupported == false)
-    #expect(engine.recognition.recognitionProviderIDs.contains(.openAI) == false)
+    #expect(!unconfiguredGoogleBooks.isSupported)
+    #expect(!engine.recognition.recognitionProviderIDs.contains(.openAI))
   }
 }

@@ -32,7 +32,7 @@ public struct OCRBookRecognitionProvider: BookRecognitionProvider {
     }
 
     let recognizedText = try BookImageTextExtractor().recognizeText(in: imageData)
-    guard recognizedText.isEmpty == false else {
+    guard !recognizedText.isEmpty else {
       throw BookRecognitionError.noReadableBookText
     }
 

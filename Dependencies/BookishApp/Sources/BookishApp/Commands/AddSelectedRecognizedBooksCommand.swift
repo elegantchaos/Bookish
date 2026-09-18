@@ -22,7 +22,7 @@ public struct AddSelectedRecognizedBooksCommand<Centre: BookishRecognitionProvid
   /// Enables the command only when selected candidates can be persisted.
   public func availability(centre: Centre) -> CommandAvailability {
     centre.recognitionService.canAddBooks
-      && centre.recognitionService.selectedCandidateIDs.isEmpty == false ? .enabled : .disabled
+      && !centre.recognitionService.selectedCandidateIDs.isEmpty ? .enabled : .disabled
   }
 
   /// Returns the user-facing command name for the current selection.
@@ -50,7 +50,7 @@ public struct AddSelectedRecognizedBooksCommand<Centre: BookishRecognitionProvid
   /// Returns whether the current selection includes every visible candidate.
   private func addsAllCandidates(centre: Centre) -> Bool {
     let recognition = centre.recognitionService
-    return recognition.candidates.isEmpty == false
+    return !recognition.candidates.isEmpty
       && recognition.selectedCandidateIDs == Set(recognition.candidates.map(\.id))
   }
 }

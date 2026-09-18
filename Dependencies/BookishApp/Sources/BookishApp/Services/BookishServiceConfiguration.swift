@@ -71,7 +71,7 @@ public struct BookishServiceConfiguration {
 
   /// Converts blank configuration values into an absent credential.
   private static func normalized(_ value: String?) -> String? {
-    guard let value = value?.trimmingCharacters(in: .whitespacesAndNewlines), value.isEmpty == false
+    guard let value = value?.trimmingCharacters(in: .whitespacesAndNewlines), !value.isEmpty
     else { return nil }
     return value
   }

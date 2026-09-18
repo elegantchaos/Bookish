@@ -46,7 +46,7 @@ struct BookishLookupWorkflowTests {
     )
 
     #expect(workflow.providers.map(\.id).contains(.googleBooks))
-    #expect(workflow.isProviderSupported(.googleBooks) == false)
+    #expect(!workflow.isProviderSupported(.googleBooks))
     #expect(workflow.selectedProviderID == .fake)
   }
 }

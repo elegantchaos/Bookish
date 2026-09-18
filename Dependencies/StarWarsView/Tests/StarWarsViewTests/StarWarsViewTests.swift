@@ -21,7 +21,7 @@ struct StarWarsViewTests {
 
     #expect(motion.progress == 0)
     #expect(motion.verticalOffset == 2_000)
-    #expect(motion.isComplete == false)
+    #expect(!motion.isComplete)
   }
 
   @Test

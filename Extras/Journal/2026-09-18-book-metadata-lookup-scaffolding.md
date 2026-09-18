@@ -128,3 +128,10 @@ datastore, but does depend on `BookishRecord` for canonical candidate snapshots.
   with a divider and an informational section header.
 - Styled availability as secondary metadata to distinguish static provider
   information from the interactive lookup-service popup.
+
+## Boolean predicate cleanup
+
+- Replaced direct Boolean literal comparisons with predicates and negations
+  throughout application code and tests.
+- Retained literal comparisons only where optional Boolean values make `nil`
+  semantically distinct from `true` or `false`.

@@ -245,7 +245,7 @@ struct BookishAppTests {
     #expect(seedMarker?.kind == BookishRecordKind.seedMarker)
     #expect(harness.defaultShowsDebugIndexes)
     #expect(harness.navigation.selectedRecordIndexName == "All Records")
-    #expect(harness.navigation.selectedRecordIDs.isEmpty == false)
+    #expect(!harness.navigation.selectedRecordIDs.isEmpty)
   }
 
   @MainActor
@@ -263,7 +263,7 @@ struct BookishAppTests {
         "Series",
         "Lists",
       ])
-    #expect(harness.defaultShowsDebugIndexes == false)
+    #expect(!harness.defaultShowsDebugIndexes)
     #expect(harness.navigation.selectedRecordIndexName == "Books")
   }
 
@@ -280,8 +280,8 @@ struct BookishAppTests {
 
     await harness.setShowsDebugIndexes(false)
 
-    #expect(harness.showsDebugIndexes == false)
-    #expect(harness.navigation.recordIndexes.map(\.name).contains("All Records") == false)
+    #expect(!harness.showsDebugIndexes)
+    #expect(!harness.navigation.recordIndexes.map(\.name).contains("All Records"))
     #expect(harness.navigation.selectedRecordIndexName == "Books")
   }
 
@@ -334,7 +334,7 @@ struct BookishAppTests {
         .string(BookishRecordKey.series), .string(BookishRecordKey.seriesPosition),
         .string(BookishRecordKey.publishers),
       ])
-    #expect(layoutIDs.contains(BookishRecordID("datastore-book-relationships-layout")) == false)
+    #expect(!layoutIDs.contains(BookishRecordID("datastore-book-relationships-layout")))
     #expect(presentedBookLayout?.id == BookishRecordID("datastore-book-layout"))
     #expect(
       layout?.list(BookishRecordKey.fields)?.contains(.string(BookishRecordKey.source)) == false)
@@ -596,7 +596,7 @@ struct BookishAppTests {
     let importedBooks = try await records(for: harness).filter {
       $0.kind == "book" && $0.string(BookishRecordKey.name) == "Snow Crash"
     }
-    #expect(importedBooks.isEmpty == false)
+    #expect(!importedBooks.isEmpty)
   }
 
   @MainActor
@@ -636,10 +636,10 @@ struct BookishAppTests {
 
     #expect(harness.isImportingInterchange)
     #expect(harness.statusService.message == "Reported through status capability")
-    #expect(commander.datastoreMaintenanceService.hasExportableRecords == false)
-    #expect(commander.recordActionService.hasSelectedRecord == false)
-    #expect(commander.navigationService.canSelectAnotherRecordIndex == false)
-    #expect(commander.navigationService.canSelectAnotherRecord == false)
+    #expect(!commander.datastoreMaintenanceService.hasExportableRecords)
+    #expect(!commander.recordActionService.hasSelectedRecord)
+    #expect(!commander.navigationService.canSelectAnotherRecordIndex)
+    #expect(!commander.navigationService.canSelectAnotherRecord)
   }
 
   @MainActor
@@ -670,7 +670,7 @@ struct BookishAppTests {
     await engine.load()
 
     #expect(engine.status.message == "Ready")
-    #expect(engine.navigation.recordIndexIDs.isEmpty == false)
+    #expect(!engine.navigation.recordIndexIDs.isEmpty)
     #expect(engine.uiState.revision == 1)
   }
 

@@ -22,7 +22,7 @@ public struct SelectAllRecognizedBooksCommand<Centre: BookishRecognitionProvider
   /// Enables the command when at least one candidate is not selected.
   public func availability(centre: Centre) -> CommandAvailability {
     let recognition = centre.recognitionService
-    return recognition.candidates.isEmpty == false
+    return !recognition.candidates.isEmpty
       && recognition.selectedCandidateIDs.count < recognition.candidates.count
       ? .enabled : .disabled
   }
@@ -41,4 +41,3 @@ public struct SelectAllRecognizedBooksCommand<Centre: BookishRecognitionProvider
     centre.recognitionService.selectAllCandidates()
   }
 }
-

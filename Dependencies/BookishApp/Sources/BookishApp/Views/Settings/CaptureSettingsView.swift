@@ -36,7 +36,7 @@ struct CaptureSettingsView: View {
                     Text(recognitionProvider.label)
                   }
                 }
-                .disabled(recognitionProvider.isSupported == false)
+                .disabled(!recognitionProvider.isSupported)
               }
             } label: {
               Text(recognition.recognitionProvider.label)

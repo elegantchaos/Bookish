@@ -69,7 +69,7 @@ public struct BookishCommands: Commands {
     CommandMenu("Bookish") {
       Toggle("Advanced Mode", isOn: $isAdvancedMode)
       Toggle("Developer Mode", isOn: $isDeveloperMode)
-        .disabled(isAdvancedMode == false)
+        .disabled(!isAdvancedMode)
 
       Divider()
 

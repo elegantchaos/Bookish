@@ -173,7 +173,7 @@ public final class BookishRecognitionService: BookishRecognition {
 
   /// Adds candidates and removes only those successfully persisted from the workflow.
   private func addBooks(_ candidates: [BookRecognitionCandidate]) async throws {
-    guard candidates.isEmpty == false else { return }
+    guard !candidates.isEmpty else { return }
     try await storage.upsert(records: candidates.map(\.bookRecord))
     try await state.refreshBrowser()
     statusService.report(

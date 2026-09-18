@@ -23,7 +23,7 @@ struct BookLookupView: View {
         Button("Look Up", systemImage: "magnifyingglass", action: lookupBooks)
           .disabled(
             lookup.query.isEmpty || lookup.isLookingUp
-              || lookup.isSelectedProviderSupported == false
+              || !lookup.isSelectedProviderSupported
           )
       }
 
@@ -33,13 +33,13 @@ struct BookLookupView: View {
         }
       }
 
-      if lookup.candidates.isEmpty == false {
+      if !lookup.candidates.isEmpty {
         Section("Candidates") {
           ForEach(lookup.candidates) { candidate in
             VStack(alignment: .leading) {
               Text(candidate.record.string(BookishRecordKey.name) ?? candidate.title)
                 .font(.headline)
-              if candidate.authors.isEmpty == false {
+              if !candidate.authors.isEmpty {
                 Text(candidate.authors.formatted(.list(type: .and)))
                   .foregroundStyle(.secondary)
               }
@@ -51,7 +51,7 @@ struct BookLookupView: View {
         }
       }
 
-      if lookup.failures.isEmpty == false {
+      if !lookup.failures.isEmpty {
         Section("Provider Failures") {
           ForEach(lookup.failures, id: \.providerID) { failure in
             Text("\(failure.providerID.rawValue): \(failure.error.localizedDescription)")

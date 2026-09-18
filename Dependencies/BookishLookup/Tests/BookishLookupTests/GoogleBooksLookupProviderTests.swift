@@ -14,7 +14,7 @@ struct GoogleBooksLookupProviderTests {
   func googleProviderRequiresAnAPIKey() async {
     let provider = GoogleBooksLookupProvider(apiKey: nil)
 
-    #expect(provider.isSupported == false)
+    #expect(!provider.isSupported)
 
     do {
       _ = try await provider.lookupBooks(matching: BookLookupQuery("9780441478125"))

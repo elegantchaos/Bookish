@@ -18,7 +18,7 @@ struct BookRecognitionProviderRegistryTests {
     for identifier in registry.recognitionProviderIDs {
       #expect(registry.recognitionProvider(for: identifier).id == identifier)
     }
-    #expect(registry.recognitionProviderIDs.contains(.openAI) == false)
+    #expect(!registry.recognitionProviderIDs.contains(.openAI))
   }
 
   /// Allows the client to add, replace, and remove configured recognition providers at runtime.
@@ -95,8 +95,8 @@ struct BookRecognitionProviderRegistryTests {
   func directImageRecognitionProvidersReportTheirAvailabilityRequirementBeforeMacOS27() async {
     guard #unavailable(macOS 27.0) else { return }
 
-    #expect(OnDeviceBookRecognitionProvider().isSupported == false)
-    #expect(CloudComputeBookRecognitionProvider().isSupported == false)
+    #expect(!OnDeviceBookRecognitionProvider().isSupported)
+    #expect(!CloudComputeBookRecognitionProvider().isSupported)
 
     await #expect(throws: BookRecognitionError.self) {
       try await OnDeviceBookRecognitionProvider().identifyBooks(in: Data())

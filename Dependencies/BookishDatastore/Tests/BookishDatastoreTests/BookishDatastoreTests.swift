@@ -18,7 +18,7 @@ struct BookishDatastoreTests {
     let rebuilt = try await BookishDatastore.rebuildRecordProjection(directoryURL: directory)
 
     #expect(try await rebuilt.recordService.record(id: bookID)?.string("name") == "Rebuilt")
-    #expect(try await rebuilt.mutationStore.mutations().isEmpty == false)
+    #expect(!(try await rebuilt.mutationStore.mutations().isEmpty))
   }
 
   @Test

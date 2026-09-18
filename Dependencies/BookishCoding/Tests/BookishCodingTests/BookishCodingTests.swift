@@ -195,7 +195,7 @@ struct BookishCodingTests {
     let value = try #require(decoded.records.first?.properties["name"])
 
     #expect(value.encodedKind == "com.elegantchaos.bookish.property-presentation")
-    #expect(try BookishInterchangeCodec().encode(decoded).isEmpty == false)
+    #expect(!(try BookishInterchangeCodec().encode(decoded).isEmpty))
   }
 
   @Test
