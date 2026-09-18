@@ -20,40 +20,49 @@ struct LookupSettingsView: View {
 
     Form {
       Section {
-        HStack {
-          Text("Lookup Service")
-          Spacer()
-          Menu {
-            ForEach(lookup.providers, id: \.id) { provider in
-              commander.button(SelectLookupProviderCommand(provider.id)) {
-                HStack {
-                  Image(systemName: "checkmark")
-                    .opacity(provider.id == lookup.selectedProviderID ? 1 : 0)
-                  Text(provider.label)
+        LabeledContent("Lookup Service") {
+          VStack(alignment: .leading) {
+            Menu {
+              ForEach(lookup.providers, id: \.id) { provider in
+                commander.button(SelectLookupProviderCommand(provider.id)) {
+                  HStack {
+                    Image(systemName: "checkmark")
+                      .opacity(provider.id == lookup.selectedProviderID ? 1 : 0)
+                    Text(provider.label)
+                  }
                 }
+                .disabled(provider.isSupported == false)
               }
-              .disabled(provider.isSupported == false)
+            } label: {
+              Text(selectedProvider?.label ?? "Unavailable")
             }
-          } label: {
-            Text(selectedProvider?.label ?? "Unavailable")
-          }
-        }
 
-        if let selectedProvider {
-          Text(selectedProvider.description)
-            .font(.footnote)
-            .foregroundStyle(.secondary)
-            .fixedSize(horizontal: false, vertical: true)
+            if let selectedProvider {
+              Text(selectedProvider.description)
+                .font(.footnote)
+                .foregroundStyle(.secondary)
+                .fixedSize(horizontal: false, vertical: true)
+            }
+          }
         }
       }
       .disabled(lookup.isLookingUp)
 
-      Section("Providers") {
+      Divider()
+        .padding(.vertical)
+
+      Section {
         ForEach(lookup.providers, id: \.id) { provider in
           LookupProviderSettingsRow(provider: provider)
         }
+      } header: {
+        Label("Provider Information", systemImage: "info.circle")
       }
     }
+    .formStyle(.columns)
+    .fixedSize(horizontal: false, vertical: true)
+    .padding()
+    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
   }
 }
 

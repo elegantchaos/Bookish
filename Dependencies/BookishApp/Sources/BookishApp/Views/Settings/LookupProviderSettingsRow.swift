@@ -18,7 +18,7 @@ struct LookupProviderSettingsRow: View {
         Text(provider.label)
         Spacer()
         Text(provider.isSupported ? "Available" : "API Key Required")
-          .foregroundStyle(provider.isSupported ? .primary : .secondary)
+          .foregroundStyle(.secondary)
       }
 
       Text(provider.description)

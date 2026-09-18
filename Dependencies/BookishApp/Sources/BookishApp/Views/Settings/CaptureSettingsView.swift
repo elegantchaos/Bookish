@@ -20,33 +20,46 @@ struct CaptureSettingsView: View {
     let currentRecognitionProvider = recognition.selectedRecognitionProviderID
 
     return Form {
-      LabeledContent("Barcodes") {
-        Toggle("Scan For Barcodes", isOn: $scanForBarcodes)
-      }
+      Section {
+        LabeledContent("Barcodes") {
+          Toggle("Scan For Barcodes", isOn: $scanForBarcodes)
+        }
 
-      LabeledContent("Capture Method") {
-        VStack(alignment: .leading) {
-          Menu {
-            ForEach(recognition.recognitionProviders, id: \.id) { recognitionProvider in
-              commander.button(SelectRecognitionProviderCommand(recognitionProvider.id)) {
-                HStack {
-                  Image(systemName: "checkmark")
-                    .opacity(recognitionProvider.id == currentRecognitionProvider ? 1 : 0)
-                  Text(recognitionProvider.label)
+        LabeledContent("Capture Method") {
+          VStack(alignment: .leading) {
+            Menu {
+              ForEach(recognition.recognitionProviders, id: \.id) { recognitionProvider in
+                commander.button(SelectRecognitionProviderCommand(recognitionProvider.id)) {
+                  HStack {
+                    Image(systemName: "checkmark")
+                      .opacity(recognitionProvider.id == currentRecognitionProvider ? 1 : 0)
+                    Text(recognitionProvider.label)
+                  }
                 }
+                .disabled(recognitionProvider.isSupported == false)
               }
-              .disabled(recognitionProvider.isSupported == false)
+            } label: {
+              Text(recognition.recognitionProvider.label)
             }
-          } label: {
-            Text(recognition.recognitionProvider.label)
-          }
 
-          Text(recognition.recognitionProvider.description)
-            .font(.footnote)
-            .fixedSize(horizontal: false, vertical: true)
+            Text(recognition.recognitionProvider.description)
+              .font(.footnote)
+              .foregroundStyle(.secondary)
+              .fixedSize(horizontal: false, vertical: true)
+          }
         }
       }
       .disabled(recognition.isRecognizing)
     }
+    .formStyle(.columns)
+    .fixedSize(horizontal: false, vertical: true)
+    .padding()
+    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
   }
+}
+
+#Preview {
+  let engine = BookishEngine()
+  CaptureSettingsView()
+    .modifier(BookishEnvironmentInjector(engine: engine))
 }

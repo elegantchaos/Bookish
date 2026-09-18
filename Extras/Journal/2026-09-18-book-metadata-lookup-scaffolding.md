@@ -82,3 +82,49 @@ datastore, but does depend on `BookishRecord` for canonical candidate snapshots.
   `Form` label-column layout interactions with multiline descriptions.
 - Gave the preferences view a stable minimum size sized for the Lookup panel,
   so switching tabs does not resize the window.
+
+## Preferences window layout correction
+
+- Removed scene-level padding and fixed minimum height, which made short
+  settings panes float in a large empty window.
+- Made the settings scene content-sized and gave its tab content a compact,
+  consistent width.
+- Used column forms and `LabeledContent` for all setting labels and controls,
+  so values and their supporting descriptions share a stable alignment column.
+
+## Preferences window sizing follow-up
+
+- Restored a 520 × 400 minimum and normal window resizing after content-sized
+  settings panes proved too small for the Capture and Lookup descriptions.
+- Added standard padding around each form, retaining deliberate whitespace
+  without returning to the oversized scene-level padding.
+
+## Preferences pane alignment follow-up
+
+- Kept each form at its intrinsic vertical size and top-aligned it in the
+  available pane, matching the top-aligned macOS preference-pane layout.
+
+## Preferences width follow-up
+
+- Constrained the manually resizable settings window to a 520–800 point width
+  range, keeping label and metadata columns visually related at large sizes.
+
+## Preferences resizability follow-up
+
+- Applied the settings scene's content-size resizing policy with a 640-point
+  ideal width, allowing corner resizing within the 520–800 point content range.
+
+## Preferences default sizing follow-up
+
+- Returned the settings scene to SwiftUI's default macOS sizing behavior;
+  retained the 520-point width and 400-point height minimums for readable
+  content and useful whitespace.
+- Retained an 800-point maximum content width so metadata and controls remain
+  visually related.
+
+## Lookup provider information follow-up
+
+- Separated the provider availability list from the active-provider chooser
+  with a divider and an informational section header.
+- Styled availability as secondary metadata to distinguish static provider
+  information from the interactive lookup-service popup.

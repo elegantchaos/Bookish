@@ -17,9 +17,19 @@ struct GeneralSettingsView: View {
   /// The settings form.
   var body: some View {
     Form {
-      Toggle("Advanced Mode", isOn: $isAdvancedMode)
-      Toggle("Developer Mode", isOn: $isDeveloperMode)
-        .disabled(!isAdvancedMode)
+      Section {
+        Toggle("Advanced Mode", isOn: $isAdvancedMode)
+        Toggle("Developer Mode", isOn: $isDeveloperMode)
+          .disabled(!isAdvancedMode)
+      }
     }
+    .formStyle(.columns)
+    .fixedSize(horizontal: false, vertical: true)
+    .padding()
+    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
   }
+}
+
+#Preview {
+  GeneralSettingsView()
 }

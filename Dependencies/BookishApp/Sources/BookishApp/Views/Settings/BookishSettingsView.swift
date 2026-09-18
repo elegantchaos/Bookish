@@ -26,7 +26,6 @@ public struct BookishSettingsView: View {
         LookupSettingsView()
       }
     }
-    .scenePadding()
-    .frame(minWidth: 480, minHeight: 400)
+    .frame(minWidth: 520, maxWidth: 800, minHeight: 400)
   }
 }
