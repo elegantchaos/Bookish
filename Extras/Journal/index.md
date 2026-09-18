@@ -1,5 +1,6 @@
 # Journal Index
 
+- [2026-09-18 Navigation Route Persistence](2026-09-18-navigation-route-persistence.md)
 - [2026-09-18 Book Metadata Lookup Scaffolding](2026-09-18-book-metadata-lookup-scaffolding.md)
 - [2026-09-15 Capture Workflow Source Organisation](2026-09-15-capture-workflow-source-organisation.md)
 - [2026-09-15 Recognition Method Persistence](2026-09-15-recognition-method-persistence.md)

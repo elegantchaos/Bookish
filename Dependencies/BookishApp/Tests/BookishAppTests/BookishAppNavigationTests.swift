@@ -71,6 +71,55 @@ import Testing
   }
 
   @Test
+  func navigationRestoresPersistedWorkflowSelection() throws {
+    let suiteName = "BookishAppNavigationTests-\(UUID().uuidString)"
+    let settings = try #require(UserDefaults(suiteName: suiteName))
+    defer { settings.removePersistentDomain(forName: suiteName) }
+    settings.set(.mainSection(.lookup), forKey: .lastNavigationSelection)
+
+    let navigation = BookishNavigationService(settings: settings)
+
+    #expect(navigation.selectedMainSection == .lookup)
+  }
+
+  @Test
+  func navigationRestoresPersistedRecordIndexWhenAvailable() throws {
+    let suiteName = "BookishAppNavigationTests-\(UUID().uuidString)"
+    let settings = try #require(UserDefaults(suiteName: suiteName))
+    defer { settings.removePersistentDomain(forName: suiteName) }
+    settings.set(.recordIndex(BookishRecordID("books")), forKey: .lastNavigationSelection)
+    let navigation = BookishNavigationService(settings: settings)
+    let recordIndexResult = RecordQueryResult(query: RecordQuery())
+    recordIndexResult.update(
+      records: [
+        try browserIndexRecord(id: "authors", name: "Authors", predicate: .kind("author")),
+        try browserIndexRecord(id: "books", name: "Books", predicate: .kind("book")),
+      ])
+
+    navigation.update(recordIndexResult: recordIndexResult)
+
+    #expect(navigation.selectedRecordIndexID == BookishRecordID("books"))
+  }
+
+  @Test
+  func navigationPersistsResolvedRecordIndexSelection() throws {
+    let suiteName = "BookishAppNavigationTests-\(UUID().uuidString)"
+    let settings = try #require(UserDefaults(suiteName: suiteName))
+    defer { settings.removePersistentDomain(forName: suiteName) }
+    let navigation = BookishNavigationService(settings: settings)
+    let recordIndexResult = RecordQueryResult(query: RecordQuery())
+    recordIndexResult.update(
+      records: [
+        try browserIndexRecord(id: "books", name: "Books", predicate: .kind("book"))
+      ])
+
+    navigation.update(recordIndexResult: recordIndexResult)
+
+    #expect(
+      settings.value(forKey: .lastNavigationSelection) == .recordIndex(BookishRecordID("books")))
+  }
+
+  @Test
   func navigationCommandsMoveBetweenIndexesAndRecords() async throws {
     let harness = try makeHarness()
     let commander = makeCommandCentre(for: harness)

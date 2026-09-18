@@ -6,6 +6,7 @@
 import BookishDatastore
 import BookishRecord
 import Commands
+import Foundation
 import Observation
 
 /// Performs browser index and record navigation requested by commands.
@@ -72,6 +73,9 @@ public final class BookishNavigationService {
   /// The datastore service used to materialise selected browser-index queries.
   @ObservationIgnored let storageService: BookishStorageService
 
+  /// The application settings used to restore and persist the selected sidebar route.
+  @ObservationIgnored private let settings: UserDefaults
+
   /// Reconciles presentation state after a browser-index change.
   @ObservationIgnored private var recordIndexSelectionHandler: (@MainActor () async throws -> Void)?
 
@@ -94,8 +98,21 @@ public final class BookishNavigationService {
   public private(set) var recordNameFilter = ""
 
   /// Creates an empty navigation service.
-  public init(storageService: BookishStorageService = BookishStorageService()) {
+  public init(
+    storageService: BookishStorageService = BookishStorageService(),
+    settings: UserDefaults = .standard
+  ) {
     self.storageService = storageService
+    self.settings = settings
+
+    switch settings.value(forKey: .lastNavigationSelection) {
+    case .automatic:
+      break
+    case .mainSection(let section):
+      selectedMainSection = section
+    case .recordIndex(let recordIndexID):
+      selectedRecordIndexID = recordIndexID
+    }
   }
 
   /// The available browser index identifiers.
@@ -167,6 +184,7 @@ public final class BookishNavigationService {
       selectedRecordResult = nil
       selectedRecordID = nil
       recordNavigationPath = []
+      persistNavigationSelection()
     }
   }
 
@@ -197,6 +215,7 @@ public final class BookishNavigationService {
   public func select(mainSection: BookishMainSection?) {
     selectedMainSection = mainSection
     recordNavigationPath = []
+    persistNavigationSelection()
   }
 
   /// Selects a browser index and clears stale record content.
@@ -208,10 +227,12 @@ public final class BookishNavigationService {
       selectedRecordResult = nil
       selectedRecordID = nil
       recordNavigationPath = []
+      persistNavigationSelection()
       return
     }
 
     guard selectedRecordIndexID != recordIndexID else {
+      persistNavigationSelection()
       return
     }
 
@@ -219,6 +240,7 @@ public final class BookishNavigationService {
     selectedRecordResult = nil
     selectedRecordID = nil
     recordNavigationPath = []
+    persistNavigationSelection()
   }
 
   /// Selects a record identifier within the active browser index.
@@ -309,6 +331,17 @@ public final class BookishNavigationService {
     }
 
     return recordIndexIDs.contains(selectedRecordIndexID)
+  }
+
+  /// Stores the selected workflow or browser index for the next application launch.
+  private func persistNavigationSelection() {
+    if let selectedMainSection {
+      settings.set(.mainSection(selectedMainSection), forKey: .lastNavigationSelection)
+    } else if let selectedRecordIndexID {
+      settings.set(.recordIndex(selectedRecordIndexID), forKey: .lastNavigationSelection)
+    } else {
+      settings.set(.automatic, forKey: .lastNavigationSelection)
+    }
   }
 
   /// Materialises the query result for the selected browser index.

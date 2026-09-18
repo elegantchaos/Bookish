@@ -5,6 +5,7 @@
 
 import BookishLookup
 import BookishRecognition
+import BookishRecord
 import Foundation
 import Settings
 
@@ -30,5 +31,12 @@ import Settings
   /// The default lookup provider to use.
   public static let bookLookupProvider = AppSettingKey(
     "BookLookupProvider", defaultValue: .openLibrary
+  )
+}
+
+@MainActor extension AppSettingKey where Value == BookishNavigationSelection {
+  /// The sidebar route to restore after the application launches.
+  public static let lastNavigationSelection = AppSettingKey(
+    "LastNavigationSelection", defaultValue: .automatic
   )
 }
