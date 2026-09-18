@@ -8,7 +8,7 @@ import BookishLookup
 /// Provides deterministic success and failure responses for service tests.
 struct StubBookLookupProvider: BookLookupProvider {
   /// Identifies the provider in test results.
-  let id: String
+  let id: BookLookupProviderID
 
   /// Supplies the result returned for each query.
   let result: Result<[BookLookupCandidate], StubError>

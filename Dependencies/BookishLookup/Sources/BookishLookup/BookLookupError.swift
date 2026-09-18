@@ -7,6 +7,9 @@ import Foundation
 
 /// Errors whose meaning is shared by lookup providers.
 public enum BookLookupError: LocalizedError, Sendable {
+  /// The provider requires configuration that the application did not supply.
+  case missingConfiguration
+
   /// A provider returned a response that cannot be interpreted as book metadata.
   case invalidResponse
 
@@ -16,6 +19,8 @@ public enum BookLookupError: LocalizedError, Sendable {
   /// A user-facing explanation suitable for a lookup workflow.
   public var errorDescription: String? {
     switch self {
+    case .missingConfiguration:
+      "This book metadata service has not been configured."
     case .invalidResponse:
       "The book metadata service returned an unreadable response."
     case .serverError(_, let message):

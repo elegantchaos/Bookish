@@ -91,10 +91,13 @@ public final class BookishEngine {
       storage: storageService,
       state: uiState,
       statusService: statusService,
-      recognizers: serviceConfiguration.recognizers,
+      recognitionProviders: serviceConfiguration.recognitionProviders,
       settings: defaults
     )
-    let lookup = BookishLookupWorkflowService(providers: serviceConfiguration.lookupProviders)
+    let lookup = BookishLookupWorkflowService(
+      providers: serviceConfiguration.lookupProviders,
+      settings: defaults
+    )
 
     let commander = BookishCommander()
     state = .uninitialised
@@ -116,7 +119,7 @@ public final class BookishEngine {
 
   /// Applies application-owned service configuration without restarting the app.
   public func configureServices(_ configuration: BookishServiceConfiguration) async {
-    recognition.configureRecognizers(configuration.recognizers)
+    recognition.configureRecognitionProviders(configuration.recognitionProviders)
     await lookup.configureProviders(configuration.lookupProviders)
   }
 
@@ -185,6 +188,11 @@ extension BookishEngine: CommandCentre {
   /// Vends the scanning workflow to recognition commands.
   public var recognitionService: any BookishRecognition {
     recognition
+  }
+
+  /// Vends the lookup workflow to lookup-provider commands.
+  public var lookupWorkflow: any BookishLookupWorkflow {
+    lookup
   }
 
   /// Presents command failures through Bookish's user-facing status surface.

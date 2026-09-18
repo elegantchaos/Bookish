@@ -6,18 +6,18 @@
 import Foundation
 
 /// Returns deterministic candidates for exercising the scanning workflow without a live provider.
-public struct FakeBookRecognizer: BookRecognizer {
-  /// The stable identifier for the fake recognizer.
-  public let id = BookRecognizerID.fake
+public struct FakeBookRecognitionProvider: BookRecognitionProvider {
+  /// The stable identifier for the fake recognition provider.
+  public let id = BookRecognitionProviderID.fake
 
-  /// The user-facing recognizer name.
+  /// The user-facing recognition provider name.
   public let label = "Fake"
 
-  /// Explains that the recognizer does not use the image data.
+  /// Explains that the recognition provider does not use the image data.
   public let description =
     "Returns a fixed sample of books without processing the selected image."
 
-  /// Creates the fake recognizer.
+  /// Creates the fake recognition provider.
   public init() {
   }
 

@@ -24,7 +24,7 @@ struct OpenLibraryLookupProviderTests {
 
     #expect(candidates.count == 1)
     let candidate = try #require(candidates.first)
-    #expect(candidate.providerID == "open-library")
+    #expect(candidate.providerID == .openLibrary)
     #expect(candidate.sourceID == "/works/OL262758W")
     #expect(candidate.title == "The Left Hand of Darkness")
     #expect(candidate.authors == ["Ursula K. Le Guin"])

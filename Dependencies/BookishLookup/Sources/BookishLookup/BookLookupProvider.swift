@@ -6,9 +6,9 @@
 import Foundation
 
 /// Defines an adapter that retrieves book metadata from one source.
-public protocol BookLookupProvider: Sendable, Identifiable where ID == String {
+public protocol BookLookupProvider: Sendable, Identifiable where ID == BookLookupProviderID {
   /// The stable identifier used for provenance and provider selection.
-  var id: String { get }
+  var id: BookLookupProviderID { get }
 
   /// The user-facing provider name.
   var label: String { get }

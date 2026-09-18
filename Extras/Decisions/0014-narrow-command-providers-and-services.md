@@ -36,8 +36,8 @@ boundaries should then make direct view mutation impossible by construction.
 
 Most services currently live in `BookishApp`. When a feature has a coherent
 domain boundary, its service, related commands, and underlying implementation
-may move together into a domain-specific package. For example, `BookishCapture`
-may own capture services, capture commands, and capture implementation while
+may move together into a domain-specific package. For example, `BookishRecognition`
+may own recognition services, recognition commands, and recognition implementation while
 depending only on lower-level packages.
 
 ## Alternatives considered

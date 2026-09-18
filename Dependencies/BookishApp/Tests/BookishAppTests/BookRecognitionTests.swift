@@ -1,4 +1,4 @@
-import BookishCapture
+import BookishRecognition
 import Foundation
 import Settings
 import Testing
@@ -8,48 +8,51 @@ import Testing
 @MainActor
 struct BookRecognitionTests {
   @Test
-  func selectedRecognizerRestoresFromSettings() throws {
+  func selectedRecognitionProviderRestoresFromSettings() throws {
     let suiteName = "BookRecognitionTests-\(UUID().uuidString)"
     let defaults = try #require(UserDefaults(suiteName: suiteName))
     defer { defaults.removePersistentDomain(forName: suiteName) }
-    let registry = BookRecognizerRegistry()
-    registry.register(TestBookRecognizer(id: .fake))
-    registry.register(TestBookRecognizer(id: .ocrOnly))
+    let registry = BookRecognitionProviderRegistry()
+    registry.register(TestBookRecognitionProvider(id: .fake))
+    registry.register(TestBookRecognitionProvider(id: .ocrOnly))
 
-    defaults.set(.ocrOnly, forKey: .bookRecognizer)
+    defaults.set(.ocrOnly, forKey: .bookRecognitionProvider)
 
     #expect(
-      BookishRecognitionService.selectedRecognizerID(in: registry, settings: defaults) == .ocrOnly)
+      BookishRecognitionService.selectedRecognitionProviderID(in: registry, settings: defaults)
+        == .ocrOnly)
   }
 
   @Test
-  func selectedRecognizerFallsBackWhenTheSettingsValueIsNotRegistered() throws {
+  func selectedRecognitionProviderFallsBackWhenTheSettingsValueIsNotRegistered() throws {
     let suiteName = "BookRecognitionTests-\(UUID().uuidString)"
     let defaults = try #require(UserDefaults(suiteName: suiteName))
     defer { defaults.removePersistentDomain(forName: suiteName) }
-    let registry = BookRecognizerRegistry()
-    registry.register(TestBookRecognizer(id: .fake))
+    let registry = BookRecognitionProviderRegistry()
+    registry.register(TestBookRecognitionProvider(id: .fake))
 
-    defaults.set(.openAI, forKey: .bookRecognizer)
+    defaults.set(.openAI, forKey: .bookRecognitionProvider)
 
     #expect(
-      BookishRecognitionService.selectedRecognizerID(in: registry, settings: defaults) == .fake
+      BookishRecognitionService.selectedRecognitionProviderID(in: registry, settings: defaults)
+        == .fake
     )
   }
 
   @Test
-  func selectedRecognizerFallsBackWhenTheSettingsValueIsUnavailable() throws {
+  func selectedRecognitionProviderFallsBackWhenTheSettingsValueIsUnavailable() throws {
     let suiteName = "BookRecognitionTests-\(UUID().uuidString)"
     let defaults = try #require(UserDefaults(suiteName: suiteName))
     defer { defaults.removePersistentDomain(forName: suiteName) }
-    let registry = BookRecognizerRegistry()
-    registry.register(TestBookRecognizer(id: .fake))
-    registry.register(TestBookRecognizer(id: .openAI, isSupported: false))
+    let registry = BookRecognitionProviderRegistry()
+    registry.register(TestBookRecognitionProvider(id: .fake))
+    registry.register(TestBookRecognitionProvider(id: .openAI, isSupported: false))
 
-    defaults.set(.openAI, forKey: .bookRecognizer)
+    defaults.set(.openAI, forKey: .bookRecognitionProvider)
 
     #expect(
-      BookishRecognitionService.selectedRecognizerID(in: registry, settings: defaults) == .fake
+      BookishRecognitionService.selectedRecognitionProviderID(in: registry, settings: defaults)
+        == .fake
     )
   }
 }

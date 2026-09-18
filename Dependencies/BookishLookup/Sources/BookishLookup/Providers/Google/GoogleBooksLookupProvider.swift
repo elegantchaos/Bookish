@@ -8,23 +8,32 @@ import Foundation
 /// Retrieves book metadata from the Google Books volumes API.
 public struct GoogleBooksLookupProvider: BookLookupProvider {
   /// The stable identifier for Google Books provenance.
-  public let id = "google-books"
+  public let id: BookLookupProviderID = .googleBooks
 
   /// The user-facing provider name.
   public let label = "Google Books"
 
-  /// Explains that results are retrieved from Google's public books catalogue.
-  public let description = "Searches the Google Books catalogue by ISBN or text."
+  /// Explains the provider's catalogue coverage or required configuration.
+  public var description: String {
+    apiKey == nil
+      ? "Requires a Google Books API key."
+      : "Searches the Google Books catalogue by ISBN or text."
+  }
+
+  /// Indicates that the provider can run only after the application supplies an API key.
+  public var isSupported: Bool {
+    apiKey != nil
+  }
 
   /// Performs requests to the Google Books API.
   private let session: URLSession
 
   /// The API key supplied by the application when it constructs this provider.
-  private let apiKey: String
+  private let apiKey: String?
 
-  /// Creates a provider using an API key supplied by the application.
+  /// Creates a provider using an optional API key supplied by the application.
   public init(
-    apiKey: String,
+    apiKey: String?,
     session: URLSession = .shared
   ) {
     self.apiKey = apiKey
@@ -33,6 +42,7 @@ public struct GoogleBooksLookupProvider: BookLookupProvider {
 
   /// Returns Google Books candidates matching a query.
   public func lookupBooks(matching query: BookLookupQuery) async throws -> [BookLookupCandidate] {
+    guard let apiKey else { throw BookLookupError.missingConfiguration }
     let request = try makeRequest(for: query, apiKey: apiKey)
     let (data, response) = try await session.data(for: request)
     guard let response = response as? HTTPURLResponse else {

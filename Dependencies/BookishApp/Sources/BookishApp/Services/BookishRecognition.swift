@@ -3,13 +3,13 @@
 //  Copyright © 2026 Elegant Chaos Limited. All rights reserved.
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
-import BookishCapture
+import BookishRecognition
 import Foundation
 
 /// Defines the book-recognition state and actions used by the application's UI.
 @MainActor
 public protocol BookishRecognition {
-  /// The candidate books returned by the selected recognizer.
+  /// The candidate books returned by the selected recognition provider.
   var candidates: [BookRecognitionCandidate] { get }
 
   /// The identifiers of candidates selected for addition.
@@ -24,16 +24,17 @@ public protocol BookishRecognition {
   /// Whether the workflow has an image to recognise.
   var hasImage: Bool { get }
 
-  /// Whether the selected recognizer can run on this device.
-  var isCurrentRecognizerSupported: Bool { get }
+  /// Whether the selected recognition provider can run on this device.
+  var isCurrentRecognitionProviderSupported: Bool { get }
 
-  var selectedRecognizerID: BookRecognizerID { get }
+  /// The stable identifier of the recognition provider selected for new requests.
+  var selectedRecognitionProviderID: BookRecognitionProviderID { get }
 
-  /// Selects a recognizer by its identifier.
-  func selectRecognizer(_ recognizerID: BookRecognizerID)
-  
-  /// Returns whether the recognizer identified by `id` can run on this device.
-  func isRecognizerSupported(_ id: BookRecognizerID) -> Bool
+  /// Selects a recognition provider by its identifier.
+  func selectRecognitionProvider(_ recognitionProviderID: BookRecognitionProviderID)
+
+  /// Returns whether the recognition provider identified by `id` can run on this device.
+  func isRecognitionProviderSupported(_ id: BookRecognitionProviderID) -> Bool
 
   /// Replaces the image to recognise.
   func selectImage(data: Data?)

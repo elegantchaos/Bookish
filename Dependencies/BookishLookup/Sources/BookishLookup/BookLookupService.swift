@@ -11,7 +11,7 @@ import Foundation
 /// while candidates from the other adapters remain available for review.
 public actor BookLookupService {
   /// Stores providers keyed by their stable identifiers.
-  private var providersByID: [String: any BookLookupProvider]
+  private var providersByID: [BookLookupProviderID: any BookLookupProvider]
 
   /// Creates a service with the supplied initial providers.
   public init(providers: [any BookLookupProvider] = []) {
@@ -33,7 +33,7 @@ public actor BookLookupService {
   }
 
   /// Removes the provider with the supplied identifier, if it is registered.
-  public func unregister(_ providerID: String) {
+  public func unregister(_ providerID: BookLookupProviderID) {
     providersByID[providerID] = nil
   }
 
@@ -47,13 +47,13 @@ public actor BookLookupService {
 
   /// Returns registered providers in ascending identifier order.
   public var providers: [any BookLookupProvider] {
-    providersByID.values.sorted { $0.id < $1.id }
+    providersByID.values.sorted { $0.id.rawValue < $1.id.rawValue }
   }
 
   /// Looks up a query through every supported provider.
   public func lookupBooks(
     matching query: BookLookupQuery,
-    using providerIDs: Set<String>? = nil
+    using providerIDs: Set<BookLookupProviderID>? = nil
   ) async -> BookLookupResult {
     let providers = providersByID.values.filter {
       $0.isSupported && (providerIDs?.contains($0.id) ?? true)

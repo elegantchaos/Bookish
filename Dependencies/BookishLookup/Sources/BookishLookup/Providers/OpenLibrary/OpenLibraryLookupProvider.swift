@@ -12,7 +12,7 @@ import Foundation
 /// than treating an ISBN match as authoritative edition metadata.
 public struct OpenLibraryLookupProvider: BookLookupProvider {
   /// The stable identifier for Open Library provenance.
-  public let id = "open-library"
+  public let id: BookLookupProviderID = .openLibrary
 
   /// The user-facing provider name.
   public let label = "Open Library"

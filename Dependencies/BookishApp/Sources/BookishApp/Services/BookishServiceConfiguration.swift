@@ -3,8 +3,8 @@
 //  Copyright © 2026 Elegant Chaos Limited. All rights reserved.
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
-import BookishCapture
 import BookishLookup
+import BookishRecognition
 import Keychain
 
 /// Holds application-owned configuration for optional external book services.
@@ -47,28 +47,26 @@ public struct BookishServiceConfiguration {
 
   /// Returns the lookup providers enabled by this application configuration.
   var lookupProviders: [any BookLookupProvider] {
-    var providers: [any BookLookupProvider] = [
-      FakeBookLookupProvider(),
+    let providers: [any BookLookupProvider] = [
       OpenLibraryLookupProvider(),
+      FakeBookLookupProvider(),
+      GoogleBooksLookupProvider(apiKey: googleBooksAPIKey),
     ]
-    if let googleBooksAPIKey {
-      providers.append(GoogleBooksLookupProvider(apiKey: googleBooksAPIKey))
-    }
     return providers
   }
 
-  /// Returns the recognizers enabled by this application configuration.
-  var recognizers: [any BookRecognizer] {
-    var recognizers: [any BookRecognizer] = [
-      FakeBookRecognizer(),
-      OnDeviceBookRecognizer(),
-      CloudComputeBookRecognizer(),
-      OCRBookRecognizer(),
+  /// Returns the recognition providers enabled by this application configuration.
+  var recognitionProviders: [any BookRecognitionProvider] {
+    var recognitionProviders: [any BookRecognitionProvider] = [
+      FakeBookRecognitionProvider(),
+      OnDeviceBookRecognitionProvider(),
+      CloudComputeBookRecognitionProvider(),
+      OCRBookRecognitionProvider(),
     ]
     if let openAIAPIKey {
-      recognizers.append(OpenAIResponsesBookRecognizer(apiKey: openAIAPIKey))
+      recognitionProviders.append(OpenAIResponsesBookRecognitionProvider(apiKey: openAIAPIKey))
     }
-    return recognizers
+    return recognitionProviders
   }
 
   /// Converts blank configuration values into an absent credential.

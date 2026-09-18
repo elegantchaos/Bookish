@@ -10,29 +10,29 @@ import FoundationModels
 ///
 /// Direct image input remains separate from OCR so selecting On Device never changes the
 /// image-processing path implicitly.
-public struct OnDeviceBookRecognizer: BookRecognizer {
-  /// The stable identifier for the direct-image recognizer.
-  public let id = BookRecognizerID.foundationOnDevice
+public struct OnDeviceBookRecognitionProvider: BookRecognitionProvider {
+  /// The stable identifier for the direct-image recognition provider.
+  public let id = BookRecognitionProviderID.foundationOnDevice
 
-  /// The user-facing recognizer name.
+  /// The user-facing recognition provider name.
   public let label = "On Device"
 
-  /// Explains the recognizer's direct-image processing path.
+  /// Explains the recognition provider's direct-image processing path.
   public let description = "Books are identified on this device, using Apple Intelligence."
 
-  /// Indicates whether this direct-image recognizer is available on the current platform.
+  /// Indicates whether this direct-image recognition provider is available on the current platform.
   public var isSupported: Bool { model?.isAvailable ?? false }
-  
+
   /// Model we will use.
   private var model: SystemLanguageModel? = nil
-  
-  /// Creates the cloud-compute recognizer.
+
+  /// Creates the cloud-compute recognition provider.
   public init() {
     if #available(iOS 27.0, macOS 27.0, *) {
       model = SystemLanguageModel.default
     }
   }
-  
+
   /// Identifies books directly from the supplied image on macOS and iOS 27 or later.
   public func identifyBooks(in imageData: Data) async throws -> [BookRecognitionCandidate] {
     guard #available(iOS 27.0, macOS 27.0, *) else {
@@ -42,7 +42,7 @@ public struct OnDeviceBookRecognizer: BookRecognizer {
     guard let model, model.isAvailable else {
       throw BookRecognitionError.foundationModelsUnavailable
     }
-    return try await DirectImageBookRecognizer.identifyBooks(
+    return try await DirectImageBookRecognition.identifyBooks(
       in: imageData,
       using: model
     )

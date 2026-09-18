@@ -3,8 +3,8 @@
 //  Copyright © 2026 Elegant Chaos Limited. All rights reserved.
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
-import BookishCapture
 import BookishLookup
+import BookishRecognition
 import Testing
 
 @testable import BookishApp
@@ -13,39 +13,45 @@ import Testing
 struct BookishServiceConfigurationTests {
   /// Adds optional providers only when the application has supplied their credentials.
   @Test
-  func configuredCredentialsEnableTheirProviders() {
+  func configuredCredentialsEnableTheirProviders() throws {
     let configuration = BookishServiceConfiguration(
       googleBooksAPIKey: "google-key",
       openAIAPIKey: "openai-key"
     )
 
-    #expect(configuration.lookupProviders.map(\.id).contains("google-books"))
-    #expect(configuration.recognizers.map(\.id).contains(.openAI))
+    let googleBooks = try #require(configuration.lookupProviders.first { $0.id == .googleBooks })
+    #expect(googleBooks.isSupported)
+    #expect(configuration.recognitionProviders.map(\.id).contains(.openAI))
   }
 
-  /// Omits optional providers when the application has no credentials to supply.
+  /// Includes credential-backed providers as unavailable when the application has no credentials.
   @Test
-  func emptyCredentialsOmitTheirProviders() {
+  func emptyCredentialsDisableTheirProviders() throws {
     let configuration = BookishServiceConfiguration()
 
-    #expect(configuration.lookupProviders.map(\.id).contains("google-books") == false)
-    #expect(configuration.recognizers.map(\.id).contains(.openAI) == false)
+    let googleBooks = try #require(configuration.lookupProviders.first { $0.id == .googleBooks })
+    #expect(googleBooks.isSupported == false)
+    #expect(configuration.recognitionProviders.map(\.id).contains(.openAI) == false)
   }
 
   /// Replaces optional services when the application's credential state changes.
   @Test
   @MainActor
-  func engineReconfiguresOptionalServices() async {
+  func engineReconfiguresOptionalServices() async throws {
     let engine = BookishEngine()
 
     await engine.configureServices(
       BookishServiceConfiguration(googleBooksAPIKey: "google-key", openAIAPIKey: "openai-key")
     )
-    #expect(engine.lookup.providers.map(\.id).contains("google-books"))
-    #expect(engine.recognition.recognizerIDs.contains(.openAI))
+    let configuredGoogleBooks = try #require(
+      engine.lookup.providers.first { $0.id == .googleBooks })
+    #expect(configuredGoogleBooks.isSupported)
+    #expect(engine.recognition.recognitionProviderIDs.contains(.openAI))
 
     await engine.configureServices(BookishServiceConfiguration())
-    #expect(engine.lookup.providers.map(\.id).contains("google-books") == false)
-    #expect(engine.recognition.recognizerIDs.contains(.openAI) == false)
+    let unconfiguredGoogleBooks = try #require(
+      engine.lookup.providers.first { $0.id == .googleBooks })
+    #expect(unconfiguredGoogleBooks.isSupported == false)
+    #expect(engine.recognition.recognitionProviderIDs.contains(.openAI) == false)
   }
 }

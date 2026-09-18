@@ -47,3 +47,38 @@ datastore, but does depend on `BookishRecord` for canonical candidate snapshots.
   application configuration and runtime credential add/remove coverage.
 - Comprehensive `rt validate` passed format and lint checks plus iOS and macOS
   builds after the application-owned configuration refactor.
+
+## Later terminology update
+
+- Renamed `BookishCapture` to `BookishRecognition`.
+- Renamed recognition adapters, identifiers, registries, commands, and test
+  fixtures from recognizer terminology to provider terminology.
+- Added closed, string-backed provider-ID enums to lookup and recognition.
+- `swift test` passed in `Dependencies/BookishRecognition`,
+  `Dependencies/BookishLookup`, and `Dependencies/BookishApp`.
+- `rt validate` passed formatting, linting, and iOS and macOS application builds.
+
+## Documentation maintenance decision
+
+- Recorded [decision 0019](../Decisions/0019-documentation-history-and-maintenance.md):
+  journals preserve historical records, while core documentation describes the
+  current system.
+
+## Lookup settings update
+
+- Moved lookup-provider selection from the temporary Lookup workflow to a new
+  Lookup settings panel, alongside Capture settings.
+- Google Books is always registered and displayed. It is disabled until the
+  application supplies an API key, while lookup falls back to an available
+  provider.
+- Moved credential-storage helper scripts to `Extras/Scripts/`.
+- `swift test` passed in `Dependencies/BookishLookup` and
+  `Dependencies/BookishApp`; `rt validate` passed formatting, linting, and iOS
+  and macOS application builds.
+
+## Lookup settings layout correction
+
+- Rendered provider availability as dedicated full-width settings rows, avoiding
+  `Form` label-column layout interactions with multiline descriptions.
+- Gave the preferences view a stable minimum size sized for the Lookup panel,
+  so switching tabs does not resize the window.

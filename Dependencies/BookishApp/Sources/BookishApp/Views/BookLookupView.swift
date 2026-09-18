@@ -7,12 +7,12 @@ import BookishLookup
 import BookishRecord
 import SwiftUI
 
-/// Provides a temporary interface for exercising Bookish metadata providers.
+/// Provides a temporary interface for querying the selected metadata provider.
 struct BookLookupView: View {
   /// The workflow state for lookup controls and results.
   @Environment(BookishLookupWorkflowService.self) private var lookup
 
-  /// The temporary provider-selection and query interface.
+  /// The temporary query interface.
   var body: some View {
     @Bindable var lookup = lookup
     Form {
@@ -20,14 +20,11 @@ struct BookLookupView: View {
         TextField("ISBN, title, or author", text: $lookup.query)
           .textFieldStyle(.roundedBorder)
 
-        Picker("Service", selection: $lookup.selectedProviderID) {
-          ForEach(lookup.providers, id: \.id) { provider in
-            Text(provider.label).tag(provider.id)
-          }
-        }
-
         Button("Look Up", systemImage: "magnifyingglass", action: lookupBooks)
-          .disabled(lookup.query.isEmpty || lookup.isLookingUp)
+          .disabled(
+            lookup.query.isEmpty || lookup.isLookingUp
+              || lookup.isSelectedProviderSupported == false
+          )
       }
 
       if lookup.isLookingUp {
@@ -46,7 +43,7 @@ struct BookLookupView: View {
                 Text(candidate.authors.formatted(.list(type: .and)))
                   .foregroundStyle(.secondary)
               }
-              Text(candidate.providerID)
+              Text(candidate.providerID.rawValue)
                 .font(.caption)
                 .foregroundStyle(.secondary)
             }
@@ -57,7 +54,7 @@ struct BookLookupView: View {
       if lookup.failures.isEmpty == false {
         Section("Provider Failures") {
           ForEach(lookup.failures, id: \.providerID) { failure in
-            Text("\(failure.providerID): \(failure.error.localizedDescription)")
+            Text("\(failure.providerID.rawValue): \(failure.error.localizedDescription)")
           }
         }
       }

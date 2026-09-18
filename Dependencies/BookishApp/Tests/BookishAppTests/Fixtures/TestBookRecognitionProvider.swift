@@ -3,25 +3,25 @@
 //  Copyright © 2026 Elegant Chaos Limited. All rights reserved.
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
-import BookishCapture
+import BookishRecognition
 import Foundation
 
-/// A deterministic recognizer used by recognition-service tests.
-struct TestBookRecognizer: BookRecognizer {
-  /// The recognizer's stable identifier.
-  let id: BookRecognizerID
+/// A deterministic recognition provider used by recognition-service tests.
+struct TestBookRecognitionProvider: BookRecognitionProvider {
+  /// The recognition provider's stable identifier.
+  let id: BookRecognitionProviderID
 
-  /// The human-readable recognizer name.
+  /// The human-readable recognition provider name.
   let label: String
 
-  /// A short description of the recognizer.
+  /// A short description of the recognition provider.
   let description: String
 
-  /// Whether this recognizer can run in the test scenario.
+  /// Whether this recognition provider can run in the test scenario.
   let isSupported: Bool
 
-  /// Creates a recognizer with the supplied availability.
-  init(id: BookRecognizerID, isSupported: Bool = true) {
+  /// Creates a recognition provider with the supplied availability.
+  init(id: BookRecognitionProviderID, isSupported: Bool = true) {
     self.id = id
     label = id.rawValue
     description = id.rawValue

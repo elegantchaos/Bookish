@@ -7,7 +7,7 @@ import PhotosUI
 import SwiftUI
 import UniformTypeIdentifiers
 
-/// Lets the user choose a book-shelf image and review recognizer candidates.
+/// Lets the user choose a book-shelf image and review recognition provider candidates.
 struct BookCaptureView: View {
   /// The Photos picker item selected by the user.
   @State private var selectedPhoto: PhotosPickerItem?

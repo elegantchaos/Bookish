@@ -3,7 +3,7 @@
 //  Copyright © 2026 Elegant Chaos Limited. All rights reserved.
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
-import BookishCapture
+import BookishRecognition
 import SwiftUI
 
 /// Lists the recognition result in the lower, independently scrolling capture pane.

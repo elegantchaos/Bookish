@@ -9,19 +9,19 @@ import FoundationModels
 /// Identifies books using Vision OCR followed by Apple's on-device Foundation Model.
 ///
 /// Vision extracts visible spine and cover text before the language model produces structured
-/// candidates. This keeps the recognizer's image-data contract consistent across providers.
-public struct OCRBookRecognizer: BookRecognizer {
-  /// The stable identifier for the OCR recognizer.
-  public let id = BookRecognizerID.ocrOnly
+/// candidates. This keeps the recognition provider's image-data contract consistent across providers.
+public struct OCRBookRecognitionProvider: BookRecognitionProvider {
+  /// The stable identifier for the OCR recognition provider.
+  public let id = BookRecognitionProviderID.ocrOnly
 
-  /// The user-facing recognizer name.
+  /// The user-facing recognition provider name.
   public let label = "OCR"
 
-  /// Explains the recognizer's two-step process.
+  /// Explains the recognition provider's two-step process.
   public let description =
     "Books are identified using a combination of Apple Vision & Apple Intelligence."
 
-  /// Creates an OCR-backed Foundation Models recognizer.
+  /// Creates an OCR-backed Foundation Models recognition provider.
   public init() {
   }
 
@@ -31,7 +31,7 @@ public struct OCRBookRecognizer: BookRecognizer {
       throw BookRecognitionError.foundationModelsUnavailable
     }
 
-    let recognizedText = try BookImageTextRecognizer().recognizeText(in: imageData)
+    let recognizedText = try BookImageTextExtractor().recognizeText(in: imageData)
     guard recognizedText.isEmpty == false else {
       throw BookRecognitionError.noReadableBookText
     }

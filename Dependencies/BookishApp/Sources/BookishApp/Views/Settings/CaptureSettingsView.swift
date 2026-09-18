@@ -4,7 +4,6 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 import Foundation
-
 import Settings
 import SwiftUI
 
@@ -12,37 +11,37 @@ import SwiftUI
 struct CaptureSettingsView: View {
   @Environment(BookishCommander.self) var commander
   @Environment(BookishRecognitionService.self) var recognition
-  
+
   /// Whether to scan for barcodes when using the camera in the capture mode.
   @AppStorage(.scanForBarcodes) private var scanForBarcodes
-  
+
   /// The settings form.
   var body: some View {
-    let currentRecognizer = recognition.selectedRecognizerID
+    let currentRecognitionProvider = recognition.selectedRecognitionProviderID
 
     return Form {
       LabeledContent("Barcodes") {
         Toggle("Scan For Barcodes", isOn: $scanForBarcodes)
       }
-      
+
       LabeledContent("Capture Method") {
         VStack(alignment: .leading) {
           Menu {
-            ForEach(recognition.recognizers, id: \.id) { recognizer in
-              commander.button(SelectRecognizerCommand(recognizer.id)) {
+            ForEach(recognition.recognitionProviders, id: \.id) { recognitionProvider in
+              commander.button(SelectRecognitionProviderCommand(recognitionProvider.id)) {
                 HStack {
                   Image(systemName: "checkmark")
-                    .opacity(recognizer.id == currentRecognizer ? 1 : 0)
-                  Text(recognizer.label)
+                    .opacity(recognitionProvider.id == currentRecognitionProvider ? 1 : 0)
+                  Text(recognitionProvider.label)
                 }
               }
-              .disabled(recognizer.isSupported == false)
+              .disabled(recognitionProvider.isSupported == false)
             }
           } label: {
-            Text(recognition.recognizer.label)
+            Text(recognition.recognitionProvider.label)
           }
-          
-          Text(recognition.recognizer.description)
+
+          Text(recognition.recognitionProvider.description)
             .font(.footnote)
             .fixedSize(horizontal: false, vertical: true)
         }

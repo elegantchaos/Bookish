@@ -12,7 +12,7 @@ import Foundation
 /// Application code can review it, preserve its provenance, then map it to records.
 public struct BookLookupCandidate: Codable, Equatable, Identifiable, Sendable {
   /// The provider that returned this candidate.
-  public let providerID: String
+  public let providerID: BookLookupProviderID
 
   /// The provider's stable identifier for this candidate, when it supplied one.
   public let sourceID: String?
@@ -52,13 +52,13 @@ public struct BookLookupCandidate: Codable, Equatable, Identifiable, Sendable {
 
   /// A stable identifier for the candidate while it remains in a lookup result.
   public var id: String {
-    [providerID, sourceID ?? title, authors.joined(separator: ",")]
+    [providerID.rawValue, sourceID ?? title, authors.joined(separator: ",")]
       .joined(separator: "|")
   }
 
   /// Creates a candidate from provider metadata.
   public init(
-    providerID: String,
+    providerID: BookLookupProviderID,
     sourceID: String? = nil,
     title: String,
     subtitle: String? = nil,
@@ -96,7 +96,7 @@ public struct BookLookupCandidate: Codable, Equatable, Identifiable, Sendable {
 
   /// Converts metadata that Bookish currently models directly into a book record.
   private static func makeRecord(
-    providerID: String,
+    providerID: BookLookupProviderID,
     sourceID: String?,
     title: String,
     subtitle: String?,
@@ -106,7 +106,7 @@ public struct BookLookupCandidate: Codable, Equatable, Identifiable, Sendable {
   ) -> BookishRecord {
     var properties: [String: BookishRecordValue] = [
       BookishRecordKey.name: .string(title),
-      BookishRecordKey.source: .string(providerID),
+      BookishRecordKey.source: .string(providerID.rawValue),
     ]
     if let sourceID { properties[BookishRecordKey.importedID] = .string(sourceID) }
     if let subtitle { properties[BookishRecordKey.subtitle] = .string(subtitle) }
@@ -117,7 +117,7 @@ public struct BookLookupCandidate: Codable, Equatable, Identifiable, Sendable {
       character.isLetter || character.isNumber ? String(character) : "-"
     }.joined()
     return BookishRecord(
-      id: BookishRecordID("lookup.\(providerID).\(identity)"),
+      id: BookishRecordID("lookup.\(providerID.rawValue).\(identity)"),
       kind: BookishRecordKind.book,
       properties: properties
     )

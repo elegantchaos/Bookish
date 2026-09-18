@@ -6,18 +6,18 @@
 import Foundation
 
 /// Sends images to the OpenAI Responses API and decodes book-identification candidates.
-public struct OpenAIResponsesBookRecognizer: BookRecognizer {
-  /// The stable identifier for the OpenAI recognizer.
-  public let id = BookRecognizerID.openAI
+public struct OpenAIResponsesBookRecognitionProvider: BookRecognitionProvider {
+  /// The stable identifier for the OpenAI recognition provider.
+  public let id = BookRecognitionProviderID.openAI
 
-  /// The user-facing recognizer name.
+  /// The user-facing recognition provider name.
   public let label = "OpenAI"
 
   /// Explains when image data is sent to OpenAI.
   public let description =
     "Books are identified using OpenAI."
 
-  /// The API key supplied by the application when it constructs this recognizer.
+  /// The API key supplied by the application when it constructs this recognition provider.
   private let apiKey: String
 
   /// Selects the Responses API model.
@@ -26,7 +26,7 @@ public struct OpenAIResponsesBookRecognizer: BookRecognizer {
   /// Uses URLSession directly; tests inject a session with URLProtocol interception to avoid networking.
   private let session: URLSession
 
-  /// Creates a recognizer using an API key supplied by the application.
+  /// Creates a recognition provider using an API key supplied by the application.
   public init(
     apiKey: String,
     model: String = "gpt-4.1-mini",

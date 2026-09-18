@@ -7,7 +7,7 @@ import Foundation
 import Vision
 
 /// Extracts visible text for an OCR-backed book-recognition request.
-struct BookImageTextRecognizer {
+struct BookImageTextExtractor {
   /// Performs accurate, uncorrected text recognition on the image's first frame.
   func recognizeText(in imageData: Data) throws -> String {
     let request = VNRecognizeTextRequest()

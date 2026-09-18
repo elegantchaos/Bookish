@@ -4,8 +4,8 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 import BookishImporterSamples
+import BookishRecognition
 import BookishRecord
-import BookishCapture
 import Commands
 import Foundation
 
@@ -30,7 +30,6 @@ public protocol BookishBrowserSettingsProvider: CommandCentre {
   var browserSettingsService: any BookishBrowserSettings { get }
 }
 
-
 /// Vends datastore maintenance actions to maintenance commands.
 @MainActor
 public protocol BookishDatastoreMaintenanceProvider: CommandCentre {
@@ -45,7 +44,6 @@ public protocol BookishStorageProvider: CommandCentre {
   var storageService: any BookishStorage { get }
 }
 
-
 /// Vends selected-record actions to record commands.
 @MainActor
 public protocol BookishRecordActionsProvider: CommandCentre {
@@ -58,6 +56,13 @@ public protocol BookishRecordActionsProvider: CommandCentre {
 public protocol BookishRecognitionProvider: CommandCentre {
   /// The recognition workflow used by the command.
   var recognitionService: any BookishRecognition { get }
+}
+
+/// Vends the metadata-lookup workflow used by lookup-provider commands.
+@MainActor
+public protocol BookishLookupWorkflowProvider: CommandCentre {
+  /// The lookup workflow used by the command.
+  var lookupWorkflow: any BookishLookupWorkflow { get }
 }
 
 /// Vends browser navigation to navigation commands.
@@ -75,6 +80,7 @@ extension BookishEngine:
   BookishStorageProvider,
   BookishRecordActionsProvider,
   BookishRecognitionProvider,
+  BookishLookupWorkflowProvider,
   BookishNavigationProvider
 {
 }

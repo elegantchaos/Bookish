@@ -6,24 +6,24 @@
 import Foundation
 
 /// Describes a service that identifies books from image data.
-public protocol BookRecognizer: Sendable, Identifiable {
-  /// The stable identifier used to select the recognizer.
-  var id: BookRecognizerID { get }
+public protocol BookRecognitionProvider: Sendable, Identifiable {
+  /// The stable identifier used to select the recognition provider.
+  var id: BookRecognitionProviderID { get }
 
-  /// The user-facing name of the recognizer.
+  /// The user-facing name of the recognition provider.
   var label: String { get }
 
-  /// A user-facing explanation of the recognizer's behavior.
+  /// A user-facing explanation of the recognition provider's behavior.
   var description: String { get }
 
-  /// Whether the recognizer can run on the current device.
+  /// Whether the recognition provider can run on the current device.
   var isSupported: Bool { get }
 
   /// Identifies the books shown in an image.
   func identifyBooks(in imageData: Data) async throws -> [BookRecognitionCandidate]
 }
 
-extension BookRecognizer {
-  /// Indicates that recognizers without platform requirements are supported.
+extension BookRecognitionProvider {
+  /// Indicates that recognition providers without platform requirements are supported.
   public var isSupported: Bool { true }
 }

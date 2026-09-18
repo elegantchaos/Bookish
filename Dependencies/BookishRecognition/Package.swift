@@ -3,14 +3,14 @@
 import PackageDescription
 
 let package = Package(
-  name: "BookishCapture",
+  name: "BookishRecognition",
   platforms: [
     .macOS(.v26), .iOS(.v26),
   ],
   products: [
     .library(
-      name: "BookishCapture",
-      targets: ["BookishCapture"]
+      name: "BookishRecognition",
+      targets: ["BookishRecognition"]
     )
   ],
 
@@ -20,15 +20,15 @@ let package = Package(
 
   targets: [
     .target(
-      name: "BookishCapture",
+      name: "BookishRecognition",
       dependencies: [
         .product(name: "Logger", package: "Logger")
       ]
     ),
 
     .testTarget(
-      name: "BookishCaptureTests",
-      dependencies: ["BookishCapture"]
+      name: "BookishRecognitionTests",
+      dependencies: ["BookishRecognition"]
     ),
   ]
 )

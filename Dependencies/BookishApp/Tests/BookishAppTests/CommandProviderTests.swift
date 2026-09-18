@@ -3,10 +3,11 @@
 //  Copyright © 2026 Elegant Chaos Limited. All rights reserved.
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
-import BookishCapture
 import BookishDatastore
 import BookishImporter
 import BookishImporterSamples
+import BookishLookup
+import BookishRecognition
 import BookishRecord
 import Commands
 import Foundation
@@ -127,12 +128,22 @@ struct CommandProviderTests {
     let centre = TestCommandCentre(recognitionService: recognitionService)
 
     try await centre.perform(SelectBookRecognitionImageCommand(imageData: Data([0xFF])))
-    try await centre.perform(SelectRecognizerCommand(.ocrOnly))
+    try await centre.perform(SelectRecognitionProviderCommand(.ocrOnly))
     try await centre.perform(CaptureBooksCommand())
 
     #expect(recognitionService.imageData == Data([0xFF]))
-    #expect(recognitionService.recognizerID == .ocrOnly)
+    #expect(recognitionService.recognitionProviderID == .ocrOnly)
     #expect(recognitionService.identificationCount == 1)
+  }
+
+  @Test
+  func lookupCommandsSelectTheVendedLookupProvider() async throws {
+    let lookupWorkflow = TestBookLookupWorkflow()
+    let centre = TestCommandCentre(lookupWorkflow: lookupWorkflow)
+
+    try await centre.perform(SelectLookupProviderCommand(.openLibrary))
+
+    #expect(lookupWorkflow.selectedProviderID == .openLibrary)
   }
 
   @Test
@@ -211,6 +222,7 @@ private final class TestCommandCentre:
   BookishStatusProvider,
   BookishRecordActionsProvider,
   BookishRecognitionProvider,
+  BookishLookupWorkflowProvider,
   BookishNavigationProvider,
   BookishBrowserSettingsProvider
 {
@@ -220,6 +232,7 @@ private final class TestCommandCentre:
   let statusService: any BookishStatus
   let recordActionService: any BookishRecordActions
   let recognitionService: any BookishRecognition
+  let lookupWorkflow: any BookishLookupWorkflow
   let navigationService: any BookishNavigation
   let browserSettingsService: any BookishBrowserSettings
 
@@ -231,6 +244,7 @@ private final class TestCommandCentre:
     statusService: any BookishStatus = TestStatusService(),
     recordActionService: any BookishRecordActions = TestRecordActionService(),
     recognitionService: any BookishRecognition = TestBookRecognitionWorkflow(),
+    lookupWorkflow: any BookishLookupWorkflow = TestBookLookupWorkflow(),
     navigationService: any BookishNavigation = TestNavigationService(),
     browserSettingsService: any BookishBrowserSettings = TestBrowserSettings()
   ) {
@@ -240,14 +254,29 @@ private final class TestCommandCentre:
     self.statusService = statusService
     self.recordActionService = recordActionService
     self.recognitionService = recognitionService
+    self.lookupWorkflow = lookupWorkflow
     self.navigationService = navigationService
     self.browserSettingsService = browserSettingsService
   }
 }
 
 @MainActor
+private final class TestBookLookupWorkflow: BookishLookupWorkflow {
+  private(set) var selectedProviderID: BookLookupProviderID = .fake
+  let isLookingUp = false
+
+  func selectProvider(_ providerID: BookLookupProviderID) {
+    selectedProviderID = providerID
+  }
+
+  func isProviderSupported(_: BookLookupProviderID) -> Bool {
+    true
+  }
+}
+
+@MainActor
 private final class TestBookRecognitionWorkflow: BookishRecognition {
-  private(set) var recognizerID: BookRecognizerID = .fake
+  private(set) var recognitionProviderID: BookRecognitionProviderID = .fake
   private(set) var imageData: Data?
   let candidates: [BookRecognitionCandidate]
   var selectedCandidateIDs: Set<String>
@@ -260,12 +289,12 @@ private final class TestBookRecognitionWorkflow: BookishRecognition {
     imageData != nil
   }
 
-  var isCurrentRecognizerSupported: Bool {
-    isRecognizerSupported(recognizerID)
+  var isCurrentRecognitionProviderSupported: Bool {
+    isRecognitionProviderSupported(recognitionProviderID)
   }
 
-  var selectedRecognizerID: BookRecognizerID {
-    recognizerID
+  var selectedRecognitionProviderID: BookRecognitionProviderID {
+    recognitionProviderID
   }
 
   init(
@@ -281,12 +310,12 @@ private final class TestBookRecognitionWorkflow: BookishRecognition {
     imageData = data
   }
 
-  func selectRecognizer(_ id: BookRecognizerID) {
-    guard isRecognizerSupported(id) else { return }
-    recognizerID = id
+  func selectRecognitionProvider(_ id: BookRecognitionProviderID) {
+    guard isRecognitionProviderSupported(id) else { return }
+    recognitionProviderID = id
   }
 
-  func isRecognizerSupported(_: BookRecognizerID) -> Bool {
+  func isRecognitionProviderSupported(_: BookRecognitionProviderID) -> Bool {
     true
   }
 

@@ -21,8 +21,12 @@ public struct BookishSettingsView: View {
       Tab("Capture", systemImage: "camera") {
         CaptureSettingsView()
       }
+
+      Tab("Lookup", systemImage: "magnifyingglass") {
+        LookupSettingsView()
+      }
     }
     .scenePadding()
-    .frame(maxWidth: 350, minHeight: 100)
+    .frame(minWidth: 480, minHeight: 400)
   }
 }

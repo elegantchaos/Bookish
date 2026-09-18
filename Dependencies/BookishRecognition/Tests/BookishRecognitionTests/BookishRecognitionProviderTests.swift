@@ -6,47 +6,48 @@
 import Foundation
 import Testing
 
-@testable import BookishCapture
+@testable import BookishRecognition
 
 /// Verifies the package's public recognition-provider registry.
-struct BookRecognizerRegistryTests {
+struct BookRecognitionProviderRegistryTests {
   @Test
-  func defaultRecognizersCanBeLookedUpByIdentifier() {
-    let registry = BookRecognizerRegistry()
-    registry.registerDefaultRecognizers()
+  func defaultRecognitionProvidersCanBeLookedUpByIdentifier() {
+    let registry = BookRecognitionProviderRegistry()
+    registry.registerDefaultRecognitionProviders()
 
-    for identifier in registry.recognizerIDs {
-      #expect(registry.recognizer(for: identifier).id == identifier)
+    for identifier in registry.recognitionProviderIDs {
+      #expect(registry.recognitionProvider(for: identifier).id == identifier)
     }
-    #expect(registry.recognizerIDs.contains(.openAI) == false)
+    #expect(registry.recognitionProviderIDs.contains(.openAI) == false)
   }
 
-  /// Allows the client to add, replace, and remove configured recognizers at runtime.
+  /// Allows the client to add, replace, and remove configured recognition providers at runtime.
   @Test
-  func registryReconfiguresRecognizersByIdentifier() {
-    let registry = BookRecognizerRegistry()
-    registry.register(FakeBookRecognizer())
-    registry.register(OpenAIResponsesBookRecognizer(apiKey: "first"))
-    registry.register(OpenAIResponsesBookRecognizer(apiKey: "replacement"))
+  func registryReconfiguresRecognitionProvidersByIdentifier() {
+    let registry = BookRecognitionProviderRegistry()
+    registry.register(FakeBookRecognitionProvider())
+    registry.register(OpenAIResponsesBookRecognitionProvider(apiKey: "first"))
+    registry.register(OpenAIResponsesBookRecognitionProvider(apiKey: "replacement"))
 
     registry.unregister(.openAI)
 
-    #expect(registry.recognizerIDs == [.fake])
+    #expect(registry.recognitionProviderIDs == [.fake])
   }
 
   @Test
-  func fakeRecognizerReturnsTheSameSampleCandidatesForEveryImage() async throws {
-    let recognizer = FakeBookRecognizer()
+  func fakeRecognitionProviderReturnsTheSameSampleCandidatesForEveryImage() async throws {
+    let recognitionProvider = FakeBookRecognitionProvider()
 
-    let emptyImageCandidates = try await recognizer.identifyBooks(in: Data())
-    let arbitraryImageCandidates = try await recognizer.identifyBooks(in: Data([0xFF, 0xD8, 0xFF]))
+    let emptyImageCandidates = try await recognitionProvider.identifyBooks(in: Data())
+    let arbitraryImageCandidates = try await recognitionProvider.identifyBooks(
+      in: Data([0xFF, 0xD8, 0xFF]))
 
-    #expect(emptyImageCandidates == FakeBookRecognizer.sampleCandidates)
-    #expect(arbitraryImageCandidates == FakeBookRecognizer.sampleCandidates)
+    #expect(emptyImageCandidates == FakeBookRecognitionProvider.sampleCandidates)
+    #expect(arbitraryImageCandidates == FakeBookRecognitionProvider.sampleCandidates)
   }
 
   @Test
-  func openAIRecognizerSendsAnImageRequestAndDecodesCandidates() async throws {
+  func openAIRecognitionProviderSendsAnImageRequestAndDecodesCandidates() async throws {
     let responseData = Data(
       """
       {
@@ -60,12 +61,12 @@ struct BookRecognizerRegistryTests {
       """.utf8)
     let fixture = RecordingRecognitionSession(responseData: responseData)
     defer { fixture.close() }
-    let recognizer = OpenAIResponsesBookRecognizer(
+    let recognitionProvider = OpenAIResponsesBookRecognitionProvider(
       apiKey: "test-key",
       session: fixture.session
     )
 
-    let candidates = try await recognizer.identifyBooks(in: Data([0xFF, 0xD8, 0xFF]))
+    let candidates = try await recognitionProvider.identifyBooks(in: Data([0xFF, 0xD8, 0xFF]))
 
     #expect(
       candidates == [
@@ -91,17 +92,17 @@ struct BookRecognizerRegistryTests {
   }
 
   @Test
-  func directImageRecognizersReportTheirAvailabilityRequirementBeforeMacOS27() async {
+  func directImageRecognitionProvidersReportTheirAvailabilityRequirementBeforeMacOS27() async {
     guard #unavailable(macOS 27.0) else { return }
 
-    #expect(OnDeviceBookRecognizer().isSupported == false)
-    #expect(CloudComputeBookRecognizer().isSupported == false)
+    #expect(OnDeviceBookRecognitionProvider().isSupported == false)
+    #expect(CloudComputeBookRecognitionProvider().isSupported == false)
 
     await #expect(throws: BookRecognitionError.self) {
-      try await OnDeviceBookRecognizer().identifyBooks(in: Data())
+      try await OnDeviceBookRecognitionProvider().identifyBooks(in: Data())
     }
     await #expect(throws: BookRecognitionError.self) {
-      try await CloudComputeBookRecognizer().identifyBooks(in: Data())
+      try await CloudComputeBookRecognitionProvider().identifyBooks(in: Data())
     }
   }
 }

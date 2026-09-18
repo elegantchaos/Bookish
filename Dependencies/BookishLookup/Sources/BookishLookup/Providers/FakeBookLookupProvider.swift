@@ -8,7 +8,7 @@ import Foundation
 /// Returns deterministic metadata candidates for previews, demos, and tests.
 public struct FakeBookLookupProvider: BookLookupProvider {
   /// The stable identifier for the fake provider.
-  public let id = "fake"
+  public let id: BookLookupProviderID = .fake
 
   /// The user-facing provider name.
   public let label = "Fake"
@@ -27,7 +27,7 @@ public struct FakeBookLookupProvider: BookLookupProvider {
   /// The candidates returned by the provider.
   public static let sampleCandidates = [
     BookLookupCandidate(
-      providerID: "fake",
+      providerID: .fake,
       sourceID: "left-hand-of-darkness",
       title: "The Left Hand of Darkness",
       authors: ["Ursula K. Le Guin"],
@@ -36,7 +36,7 @@ public struct FakeBookLookupProvider: BookLookupProvider {
       isbn13: "9780441478125"
     ),
     BookLookupCandidate(
-      providerID: "fake",
+      providerID: .fake,
       sourceID: "fifth-season",
       title: "The Fifth Season",
       authors: ["N. K. Jemisin"],

@@ -4,12 +4,14 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 import BookishLookup
+import Foundation
 import Observation
+import Settings
 
 /// Owns temporary UI state for querying Bookish metadata providers.
 @MainActor
 @Observable
-public final class BookishLookupWorkflowService {
+public final class BookishLookupWorkflowService: BookishLookupWorkflow {
   /// The provider coordinator that executes lookup work.
   @ObservationIgnored private let lookup: BookLookupService
 
@@ -17,7 +19,10 @@ public final class BookishLookupWorkflowService {
   @ObservationIgnored public private(set) var providers: [any BookLookupProvider]
 
   /// The provider selected by the user.
-  public var selectedProviderID: String
+  public var selectedProviderID: BookLookupProviderID
+
+  /// The application settings used to restore and persist the selected provider.
+  private let settings: UserDefaults
 
   /// The current lookup query.
   public var query = ""
@@ -32,27 +37,38 @@ public final class BookishLookupWorkflowService {
   public private(set) var isLookingUp = false
 
   /// Creates a workflow backed by application-configured lookup providers.
-  public init(providers: [any BookLookupProvider]) {
-    guard let selectedProvider = providers.first else {
-      fatalError("Bookish requires at least one configured lookup provider.")
-    }
+  public init(providers: [any BookLookupProvider], settings: UserDefaults) {
     self.providers = providers
     lookup = BookLookupService(providers: providers)
-    selectedProviderID = selectedProvider.id
+    self.settings = settings
+    selectedProviderID = Self.selectedProviderID(in: providers, settings: settings)
   }
 
   /// Replaces application-configured providers and preserves selection when possible.
   public func configureProviders(_ providers: [any BookLookupProvider]) async {
-    guard let fallbackProvider = providers.first else {
-      fatalError("Bookish requires at least one configured lookup provider.")
-    }
     self.providers = providers
     await lookup.replaceProviders(with: providers)
-    if providers.contains(where: { $0.id == selectedProviderID }) == false {
-      selectedProviderID = fallbackProvider.id
-    }
+    selectedProviderID = Self.resolvedProviderID(in: providers, preferred: selectedProviderID)
+    settings.set(selectedProviderID, forKey: .bookLookupProvider)
     candidates = []
     failures = []
+  }
+
+  /// Selects a supported provider and persists the selection in application settings.
+  public func selectProvider(_ providerID: BookLookupProviderID) {
+    guard isProviderSupported(providerID) else { return }
+    selectedProviderID = providerID
+    settings.set(providerID, forKey: .bookLookupProvider)
+  }
+
+  /// Returns whether the identified provider can execute requests.
+  public func isProviderSupported(_ providerID: BookLookupProviderID) -> Bool {
+    providers.first(where: { $0.id == providerID })?.isSupported == true
+  }
+
+  /// Whether the provider selected for the workflow can execute requests.
+  public var isSelectedProviderSupported: Bool {
+    isProviderSupported(selectedProviderID)
   }
 
   /// Executes the selected provider for the current query.
@@ -66,5 +82,27 @@ public final class BookishLookupWorkflowService {
     )
     candidates = result.candidates
     failures = result.failures
+  }
+
+  /// Resolves the persisted provider preference when it remains available.
+  static func selectedProviderID(
+    in providers: [any BookLookupProvider],
+    settings: UserDefaults
+  ) -> BookLookupProviderID {
+    resolvedProviderID(in: providers, preferred: settings.value(forKey: .bookLookupProvider))
+  }
+
+  /// Selects a supported preferred provider or the first supported fallback.
+  private static func resolvedProviderID(
+    in providers: [any BookLookupProvider],
+    preferred: BookLookupProviderID
+  ) -> BookLookupProviderID {
+    if providers.contains(where: { $0.id == preferred && $0.isSupported }) {
+      return preferred
+    }
+    guard let fallback = providers.first(where: \.isSupported) else {
+      fatalError("Bookish requires at least one supported lookup provider.")
+    }
+    return fallback.id
   }
 }

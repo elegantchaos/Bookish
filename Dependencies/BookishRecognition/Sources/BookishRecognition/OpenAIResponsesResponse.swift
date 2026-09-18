@@ -5,7 +5,7 @@
 
 import Foundation
 
-/// Decodes the subset of a Responses API response used by the recognizer.
+/// Decodes the subset of a Responses API response used by the recognition provider.
 struct OpenAIResponsesResponse: Decodable {
   /// The structured output items returned by the API.
   let output: [OutputItem]

@@ -11,6 +11,21 @@ import Testing
 /// Verifies Google Books request construction and metadata mapping.
 struct GoogleBooksLookupProviderTests {
   @Test
+  func googleProviderRequiresAnAPIKey() async {
+    let provider = GoogleBooksLookupProvider(apiKey: nil)
+
+    #expect(provider.isSupported == false)
+
+    do {
+      _ = try await provider.lookupBooks(matching: BookLookupQuery("9780441478125"))
+      Issue.record("Expected an unconfigured Google provider to reject lookups.")
+    } catch BookLookupError.missingConfiguration {
+    } catch {
+      Issue.record("Expected missing configuration, received \(error).")
+    }
+  }
+
+  @Test
   func googleProviderMapsGoogleBooksMetadata() async throws {
     let fixture = RecordingLookupSession(responseData: Self.responseData)
     defer { fixture.close() }
@@ -23,7 +38,7 @@ struct GoogleBooksLookupProviderTests {
 
     #expect(candidates.count == 1)
     let candidate = try #require(candidates.first)
-    #expect(candidate.providerID == "google-books")
+    #expect(candidate.providerID == .googleBooks)
     #expect(candidate.sourceID == "volume-id")
     #expect(candidate.title == "The Left Hand of Darkness")
     #expect(candidate.subtitle == "A Novel")

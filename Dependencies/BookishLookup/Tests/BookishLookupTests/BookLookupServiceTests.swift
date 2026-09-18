@@ -21,37 +21,37 @@ struct BookLookupServiceTests {
   @Test
   func serviceCollectsCandidatesAndProviderFailures() async {
     let success = StubBookLookupProvider(
-      id: "success",
-      result: .success([BookLookupCandidate(providerID: "success", title: "Dune")])
+      id: .fake,
+      result: .success([BookLookupCandidate(providerID: .fake, title: "Dune")])
     )
     let failure = StubBookLookupProvider(
-      id: "failure",
+      id: .openLibrary,
       result: .failure(StubError.expected)
     )
     let service = BookLookupService(providers: [success, failure])
 
     let result = await service.lookupBooks(matching: BookLookupQuery("Dune"))
 
-    #expect(result.candidates == [BookLookupCandidate(providerID: "success", title: "Dune")])
-    #expect(result.failures.map(\.providerID) == ["failure"])
+    #expect(result.candidates == [BookLookupCandidate(providerID: .fake, title: "Dune")])
+    #expect(result.failures.map(\.providerID) == [.openLibrary])
   }
 
   /// Replaces and removes providers without affecting other registered providers.
   @Test
   func serviceReconfiguresProvidersByIdentifier() async {
-    let original = StubBookLookupProvider(id: "provider", result: .success([]))
+    let original = StubBookLookupProvider(id: .googleBooks, result: .success([]))
     let replacement = StubBookLookupProvider(
-      id: "provider",
+      id: .googleBooks,
       result: .success(FakeBookLookupProvider.sampleCandidates)
     )
-    let preserved = StubBookLookupProvider(id: "preserved", result: .success([]))
+    let preserved = StubBookLookupProvider(id: .openLibrary, result: .success([]))
     let service = BookLookupService(providers: [original, preserved])
 
     await service.register(replacement)
-    await service.unregister("preserved")
+    await service.unregister(.openLibrary)
 
     let providers = await service.providers
-    #expect(providers.map(\.id) == ["provider"])
+    #expect(providers.map(\.id) == [.googleBooks])
     let result = await service.lookupBooks(matching: BookLookupQuery("test"))
     #expect(result.candidates == FakeBookLookupProvider.sampleCandidates)
   }

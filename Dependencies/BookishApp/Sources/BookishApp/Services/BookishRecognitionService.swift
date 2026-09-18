@@ -3,7 +3,7 @@
 //  Copyright © 2026 Elegant Chaos Limited. All rights reserved.
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
-import BookishCapture
+import BookishRecognition
 import Foundation
 import Observation
 import Settings
@@ -21,16 +21,16 @@ public final class BookishRecognitionService: BookishRecognition {
   /// The status service used to report successful additions.
   private let statusService: any BookishStatus
 
-  /// The registry that owns the recognizers available to the application.
-  private let registry: BookRecognizerRegistry
+  /// The registry that owns the recognition providers available to the application.
+  private let registry: BookRecognitionProviderRegistry
 
-  /// The application settings used to restore and persist the selected recognizer.
+  /// The application settings used to restore and persist the selected recognition provider.
   private let settings: UserDefaults
 
   /// The data selected by the user for recognition.
   public private(set) var imageData: Data?
 
-  /// Candidate books returned by the recognizer.
+  /// Candidate books returned by the recognition provider.
   public private(set) var candidates: [BookRecognitionCandidate]
 
   /// The candidate identifiers selected for addition.
@@ -42,18 +42,18 @@ public final class BookishRecognitionService: BookishRecognition {
   /// Whether a request is currently underway.
   public private(set) var isRecognizing: Bool
 
-  /// The recognizer selected for the current and future captures.
-  public private(set) var recognizer: any BookRecognizer
+  /// The recognition provider selected for the current and future captures.
+  public private(set) var recognitionProvider: any BookRecognitionProvider
 
   /// Creates a record-adder with application-owned services.
   init(
     storage: BookishStorageService,
     state: BookishUIStateService,
     statusService: any BookishStatus,
-    recognizers: [any BookRecognizer],
+    recognitionProviders: [any BookRecognitionProvider],
     settings: UserDefaults
   ) {
-    let factory = BookRecognizerRegistry(recognizers: recognizers)
+    let factory = BookRecognitionProviderRegistry(recognitionProviders: recognitionProviders)
     self.storage = storage
     self.state = state
     self.statusService = statusService
@@ -64,44 +64,45 @@ public final class BookishRecognitionService: BookishRecognition {
     selectedCandidateIDs = []
     error = nil
     isRecognizing = false
-    recognizer = registry.recognizer(
-      for: Self.selectedRecognizerID(in: registry, settings: settings)
+    recognitionProvider = registry.recognitionProvider(
+      for: Self.selectedRecognitionProviderID(in: registry, settings: settings)
     )
   }
 
-  /// The identifier of the recognizer selected for the current and future captures.
-  public var selectedRecognizerID: BookRecognizerID {
-    recognizer.id
+  /// The identifier of the recognition provider selected for the current and future captures.
+  public var selectedRecognitionProviderID: BookRecognitionProviderID {
+    recognitionProvider.id
   }
 
-  /// Selects a recognizer by its identifier.
-  public func selectRecognizer(_ recognizerID: BookRecognizerID) {
-    if isRecognizerSupported(recognizerID) {
-      recognizer = registry.recognizer(for: recognizerID)
-      settings.set(recognizerID, forKey: .bookRecognizer)
+  /// Selects a recognition provider by its identifier.
+  public func selectRecognitionProvider(_ recognitionProviderID: BookRecognitionProviderID) {
+    if isRecognitionProviderSupported(recognitionProviderID) {
+      recognitionProvider = registry.recognitionProvider(for: recognitionProviderID)
+      settings.set(recognitionProviderID, forKey: .bookRecognitionProvider)
     }
   }
 
-  /// Replaces application-configured recognizers and preserves the current choice when possible.
-  public func configureRecognizers(_ recognizers: [any BookRecognizer]) {
-    let currentIdentifier = recognizer.id
-    registry.replaceRecognizers(with: recognizers)
-    recognizer = Self.resolvedRecognizer(in: registry, preferred: currentIdentifier)
-    settings.set(recognizer.id, forKey: .bookRecognizer)
+  /// Replaces application-configured recognition providers and preserves the current choice when possible.
+  public func configureRecognitionProviders(_ recognitionProviders: [any BookRecognitionProvider]) {
+    let currentIdentifier = recognitionProvider.id
+    registry.replaceRecognitionProviders(with: recognitionProviders)
+    recognitionProvider = Self.resolvedRecognitionProvider(
+      in: registry, preferred: currentIdentifier)
+    settings.set(recognitionProvider.id, forKey: .bookRecognitionProvider)
   }
 
-  /// The identifiers of recognizers registered with the application.
-  public var recognizerIDs: [BookRecognizerID] {
-    registry.recognizerIDs
+  /// The identifiers of recognition providers registered with the application.
+  public var recognitionProviderIDs: [BookRecognitionProviderID] {
+    registry.recognitionProviderIDs
   }
 
-  /// The recognizers registered with the application.
-  public var recognizers: [any BookRecognizer] { registry.recognizers }
+  /// The recognition providers registered with the application.
+  public var recognitionProviders: [any BookRecognitionProvider] { registry.recognitionProviders }
 
-  /// Whether the supplied recognizer can run on this device.
-  public func isRecognizerSupported(_ id: BookRecognizerID) -> Bool {
-    registry.recognizerIDs.contains(id)
-      && registry.recognizer(for: id).isSupported
+  /// Whether the supplied recognition provider can run on this device.
+  public func isRecognitionProviderSupported(_ id: BookRecognitionProviderID) -> Bool {
+    registry.recognitionProviderIDs.contains(id)
+      && registry.recognitionProvider(for: id).isSupported
   }
 
   /// Whether an image has been selected for recognition.
@@ -109,9 +110,9 @@ public final class BookishRecognitionService: BookishRecognition {
     imageData != nil
   }
 
-  /// Whether the selected recognizer can run on this device.
-  public var isCurrentRecognizerSupported: Bool {
-    recognizer.isSupported
+  /// Whether the selected recognition provider can run on this device.
+  public var isCurrentRecognitionProviderSupported: Bool {
+    recognitionProvider.isSupported
   }
 
   /// Whether the datastore has completed loading.
@@ -145,7 +146,7 @@ public final class BookishRecognitionService: BookishRecognition {
     defer { isRecognizing = false }
 
     do {
-      candidates = try await recognizer.identifyBooks(in: imageData)
+      candidates = try await recognitionProvider.identifyBooks(in: imageData)
       selectedCandidateIDs = []
     } catch {
       self.error = error
@@ -185,30 +186,32 @@ public final class BookishRecognitionService: BookishRecognition {
     selectedCandidateIDs.subtract(addedIDs)
   }
 
-  /// Selects a supported preferred recognizer or the first supported fallback.
-  private static func resolvedRecognizer(
-    in registry: BookRecognizerRegistry,
-    preferred: BookRecognizerID
-  ) -> any BookRecognizer {
-    if registry.recognizerIDs.contains(preferred), registry.recognizer(for: preferred).isSupported {
-      return registry.recognizer(for: preferred)
+  /// Selects a supported preferred recognition provider or the first supported fallback.
+  private static func resolvedRecognitionProvider(
+    in registry: BookRecognitionProviderRegistry,
+    preferred: BookRecognitionProviderID
+  ) -> any BookRecognitionProvider {
+    if registry.recognitionProviderIDs.contains(preferred),
+      registry.recognitionProvider(for: preferred).isSupported
+    {
+      return registry.recognitionProvider(for: preferred)
     }
     guard
-      let fallback = registry.recognizerIDs.first(where: {
-        registry.recognizer(for: $0).isSupported
+      let fallback = registry.recognitionProviderIDs.first(where: {
+        registry.recognitionProvider(for: $0).isSupported
       })
     else {
-      fatalError("Bookish requires at least one supported book recognizer.")
+      fatalError("Bookish requires at least one supported book recognition provider.")
     }
-    return registry.recognizer(for: fallback)
+    return registry.recognitionProvider(for: fallback)
   }
 
-  /// Returns the saved recognizer when it is registered and supported, or a fallback.
-  static func selectedRecognizerID(
-    in registry: BookRecognizerRegistry,
+  /// Returns the saved recognition provider when it is registered and supported, or a fallback.
+  static func selectedRecognitionProviderID(
+    in registry: BookRecognitionProviderRegistry,
     settings: UserDefaults
-  ) -> BookRecognizerID {
-    let preferred = settings.value(forKey: .bookRecognizer)
-    return resolvedRecognizer(in: registry, preferred: preferred).id
+  ) -> BookRecognitionProviderID {
+    let preferred = settings.value(forKey: .bookRecognitionProvider)
+    return resolvedRecognitionProvider(in: registry, preferred: preferred).id
   }
 }

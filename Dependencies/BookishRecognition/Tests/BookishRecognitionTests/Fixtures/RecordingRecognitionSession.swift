@@ -3,7 +3,7 @@ import Synchronization
 
 /// Gives each test an isolated URLSession that records requests without contacting a server.
 final class RecordingRecognitionSession: Sendable {
-  /// The concrete session injected into the recognizer.
+  /// The concrete session injected into the recognition provider.
   let session: URLSession
 
   /// Routes URLProtocol callbacks to this fixture while tests run in parallel.
@@ -37,7 +37,7 @@ final class RecordingRecognitionSession: Sendable {
 
 /// Implements Foundation's request interception hook for the fixture sessions only.
 private final class RecognitionURLProtocol: URLProtocol {
-  /// Identifies each fixture without changing the recognizer's API request construction.
+  /// Identifies each fixture without changing the recognition provider's API request construction.
   static let fixtureHeader = "X-Bookish-Test-Fixture"
 
   /// URLProtocol creates its own instances, so callbacks find their fixture through this locked map.
@@ -46,7 +46,7 @@ private final class RecognitionURLProtocol: URLProtocol {
   /// Intercepts every request, including unexpected ones, to prevent live networking.
   override class func canInit(with request: URLRequest) -> Bool { true }
 
-  /// Preserves the request for the recognizer's request-format assertions.
+  /// Preserves the request for the recognition provider's request-format assertions.
   override class func canonicalRequest(for request: URLRequest) -> URLRequest { request }
 
   /// Records the request and completes it synchronously with a canned HTTP response.

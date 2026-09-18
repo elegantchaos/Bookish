@@ -8,13 +8,13 @@ import Foundation
 /// Records one provider failure without discarding results from other providers.
 public struct BookLookupFailure: Sendable {
   /// The provider that could not complete the lookup.
-  public let providerID: String
+  public let providerID: BookLookupProviderID
 
   /// The underlying provider error.
   public let error: any Error
 
   /// Creates a provider-specific failure.
-  public init(providerID: String, error: any Error) {
+  public init(providerID: BookLookupProviderID, error: any Error) {
     self.providerID = providerID
     self.error = error
   }
