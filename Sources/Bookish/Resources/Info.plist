@@ -30,7 +30,7 @@
 	<key>CFBundlePackageType</key>
 	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
 	<key>CFBundleShortVersionString</key>
-	<string>$(RT_VERSION)</string>
+	<string>RT_VERSION</string>
 	<key>CFBundleVersion</key>
 	<string>BUILD</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
