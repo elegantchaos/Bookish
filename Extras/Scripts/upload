@@ -16,13 +16,6 @@ echo "**********"
 
 rt tag
 
-echo "--------------"
-echo "Submitting iOS"
-echo "--------------"
-
-rt submit --platform=iOS
-
-
 echo " "
 echo "----------------"
 echo "Submitting macOS"
@@ -30,14 +23,23 @@ echo "----------------"
 
 rt submit --platform=macOS
 
+#echo " "
+#echo "--------------"
+#echo "Submitting iOS"
+#echo "--------------"
+#
+#rt submit --platform=iOS
+#
+
+
 echo "------------"
 echo "Pushing Tags"
 echo "------------"
 
 git push --tags --force
 
-echo "-----------------"
-echo "Opening App Store"
-echo "-----------------"
-
-open "https://appstoreconnect.apple.com/teams/69a6de8a-ccc2-47e3-e053-5b8c7c11a4d1/apps/1519213388/testflight/ios"
+#echo "-----------------"
+#echo "Opening App Store"
+#echo "-----------------"
+#
+#open "https://appstoreconnect.apple.com/teams/69a6de8a-ccc2-47e3-e053-5b8c7c11a4d1/apps/1519213388/testflight/ios"

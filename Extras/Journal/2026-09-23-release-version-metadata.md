@@ -3,14 +3,15 @@
 ## Change
 
 - Updated `Sources/Bookish/Resources/Info.plist` so
-  `CFBundleShortVersionString` uses the `RT_VERSION` token injected by
-  ReleaseTools during archive creation.
+  `CFBundleShortVersionString` and `CFBundleVersion` use the `RT_VERSION` and
+  `RT_BUILD` tokens injected by ReleaseTools during archive creation.
 
 ## Rationale
 
 ReleaseTools enables Info.plist preprocessing and replaces literal
-`RT_VERSION` occurrences when archiving. Using the raw token keeps the archive
-metadata's marketing-version value available to `rt submit`.
+`RT_VERSION` and `RT_BUILD` occurrences when archiving. Using the raw tokens
+keeps the archive metadata's marketing-version and build-number values
+available to `rt submit`.
 
 ## Validation
 
