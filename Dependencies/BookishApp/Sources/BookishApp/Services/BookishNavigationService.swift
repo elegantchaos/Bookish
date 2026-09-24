@@ -42,7 +42,7 @@ public protocol BookishNavigation {
   /// Pushes a record onto the detail navigation path.
   func push(recordID: BookishRecordID)
 
-  /// Selects a record in the selected browser index.
+  /// Selects a record in the selected browser index, or clears the selection.
   func select(recordID: BookishRecordID?)
 
   /// Updates the name filter applied to the selected browser index.
@@ -90,6 +90,9 @@ public final class BookishNavigationService {
 
   /// The linked records pushed from the selected record in the detail column.
   public private(set) var recordNavigationPath: [BookishRecordID] = []
+
+  /// Keeps an explicit Back navigation from being replaced by the first record on query refresh.
+  @ObservationIgnored private var isRecordSelectionCleared = false
 
   /// The records matching the selected browser index.
   public private(set) var selectedRecordResult: RecordQueryResult?
@@ -184,6 +187,7 @@ public final class BookishNavigationService {
       selectedRecordResult = nil
       selectedRecordID = nil
       recordNavigationPath = []
+      isRecordSelectionCleared = false
       persistNavigationSelection()
     }
   }
@@ -202,6 +206,7 @@ public final class BookishNavigationService {
     recordNameFilter = ""
     selectedRecordID = nil
     recordNavigationPath = []
+    isRecordSelectionCleared = false
   }
 
   /// Selects a browser index, refreshes its displayed records, and reconciles presentation state.
@@ -227,6 +232,7 @@ public final class BookishNavigationService {
       selectedRecordResult = nil
       selectedRecordID = nil
       recordNavigationPath = []
+      isRecordSelectionCleared = false
       persistNavigationSelection()
       return
     }
@@ -240,6 +246,7 @@ public final class BookishNavigationService {
     selectedRecordResult = nil
     selectedRecordID = nil
     recordNavigationPath = []
+    isRecordSelectionCleared = false
     persistNavigationSelection()
   }
 
@@ -248,10 +255,12 @@ public final class BookishNavigationService {
     recordNavigationPath = []
 
     guard let recordID else {
-      selectedRecordID = selectedRecordIDs.first
+      isRecordSelectionCleared = true
+      selectedRecordID = nil
       return
     }
 
+    isRecordSelectionCleared = false
     if selectedRecordIDs.contains(recordID) {
       selectedRecordID = recordID
       return
@@ -318,6 +327,10 @@ public final class BookishNavigationService {
   }
 
   private func selectValidRecord() {
+    if isRecordSelectionCleared {
+      return
+    }
+
     if let selectedRecordID, selectedRecordIDs.contains(selectedRecordID) {
       return
     }

@@ -186,7 +186,14 @@ struct BookishAppTests {
   @Test
 
   func harnessSeedsBrowserIndexRecords() async throws {
-    let harness = try makeHarness()
+    let settingsName = "BookishAppBrowserIndexTests-\(UUID().uuidString)"
+    let settings = try #require(UserDefaults(suiteName: settingsName))
+    defer { settings.removePersistentDomain(forName: settingsName) }
+    let directoryURL = try temporaryDirectory()
+    let storageService = BookishStorageService(directoryURL: directoryURL)
+    let navigation = BookishNavigationService(storageService: storageService, settings: settings)
+    let harness = makeUIState(
+      directoryURL: directoryURL, navigation: navigation, defaultShowsDebugIndexes: true)
     await harness.load()
 
     let names = harness.navigation.recordIndexes.map { $0.name }

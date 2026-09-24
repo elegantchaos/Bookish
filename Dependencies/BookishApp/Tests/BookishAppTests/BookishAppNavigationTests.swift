@@ -53,6 +53,28 @@ import Testing
   }
 
   @Test
+  func clearingRecordSelectionKeepsTheBrowserOnItsIndex() {
+    let navigation = BookishNavigationService()
+    let selectedRecordResult = RecordQueryResult(query: RecordQuery())
+    selectedRecordResult.update(records: [
+      BookishRecord(id: BookishRecordID("book-1"), kind: "book"),
+      BookishRecord(id: BookishRecordID("book-2"), kind: "book"),
+    ])
+    navigation.update(selectedRecordResult: selectedRecordResult)
+    navigation.select(recordID: BookishRecordID("book-2"))
+    navigation.push(recordID: BookishRecordID("linked-book"))
+
+    navigation.select(recordID: nil)
+
+    #expect(navigation.selectedRecordID == nil)
+    #expect(navigation.recordNavigationPath.isEmpty)
+
+    navigation.update(selectedRecordResult: selectedRecordResult)
+
+    #expect(navigation.selectedRecordID == nil)
+  }
+
+  @Test
   func selectingMainSectionPreservesTheBrowserIndexAndClearsLinkedNavigation() throws {
     let navigation = BookishNavigationService()
     let recordIndexResult = RecordQueryResult(query: RecordQuery())

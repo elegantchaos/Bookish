@@ -15,7 +15,7 @@ public struct SelectRecordCommand<Centre: BookishNavigationProvider>: CommandWit
   public let id: String
   private let recordID: BookishRecordID?
 
-  /// Creates a command that selects a record or restores the index default selection.
+  /// Creates a command that selects a record or clears the current selection.
   public init(recordID: BookishRecordID?) {
     self.id = "datastore.navigation.select-record.\(recordID?.rawValue ?? "default")"
     self.recordID = recordID
