@@ -73,6 +73,14 @@ public final class BookishUIStateService {
   /// Whether the Delicious Library import file picker is visible.
   public var isImportingDeliciousLibrary = false
 
+  /// The imported records awaiting user review.
+  public private(set) var pendingImportPlan: BookishImportPlan?
+
+  @ObservationIgnored private var pendingImportDisplayName = "Import"
+
+  /// Whether the import review sheet is visible.
+  public var isReviewingImport = false
+
   /// Whether the interchange export file picker is visible.
   public var isExportingInterchange = false
 
@@ -227,18 +235,15 @@ public final class BookishUIStateService {
     }
   }
 
-  /// Coordinates UI state while an import operation persists records.
+  /// Collects an import proposal and presents it for review.
   private func coordinateImport(
     fallbackDisplayName: String,
-    perform import: (@escaping BookishImportEventReporter) async throws -> BookishImportSummary
+    perform import: (@escaping BookishImportEventReporter) async throws -> BookishImportPlan
   ) async {
-    var firstRecord: BookishRecord?
     var displayName = fallbackDisplayName
-    let clock = ContinuousClock()
-    var lastProjectionRefresh = clock.now
 
     do {
-      let summary = try await `import` { [self] event in
+      let plan = try await `import` { [self] event in
         switch event {
         case .started(let start):
           displayName = start.importer.displayName
@@ -249,14 +254,8 @@ public final class BookishUIStateService {
         case .progress(let progress):
           self.statusService.report(progress: progress)
 
-        case .records(let records):
-          firstRecord =
-            firstRecord ?? records.first(where: { $0.kind == BookishRecordKind.book })
-            ?? records.first
-          if lastProjectionRefresh.duration(to: clock.now) >= .seconds(1) {
-            try await self.refreshBrowser()
-            lastProjectionRefresh = clock.now
-          }
+        case .records:
+          break
 
         case .diagnostic(let diagnostic):
           self.statusService.report(message: diagnostic)
@@ -266,13 +265,12 @@ public final class BookishUIStateService {
         }
       }
 
-      try await refreshBrowser()
-      if let firstRecord {
-        navigation.select(recordID: firstRecord.id)
-      }
+      pendingImportPlan = plan
+      pendingImportDisplayName = displayName
+      isReviewingImport = true
       statusService.report(
         message:
-          "Imported \(summary.recordCount) \(displayName) \(summary.recordCount == 1 ? "record" : "records")"
+          "Review \(plan.entries.count) \(displayName) \(plan.entries.count == 1 ? "record" : "records")"
       )
     } catch is CancellationError {
       statusService.report(message: "Import cancelled")
@@ -281,6 +279,36 @@ public final class BookishUIStateService {
     }
 
     statusService.clearImportProgress()
+  }
+
+  /// Applies the reviewed proposal and refreshes the visible catalogue.
+  public func applyPendingImport(choices: [BookishRecordID: BookishImportChoice]) async {
+    guard let plan = pendingImportPlan else { return }
+    do {
+      let resolution = try await importingService.apply(plan, choices: choices)
+      pendingImportPlan = nil
+      isReviewingImport = false
+      try await refreshBrowser()
+      if let firstBook = resolution.records.first(where: { $0.kind == BookishRecordKind.book })
+        ?? resolution.records.first
+      {
+        navigation.select(recordID: firstBook.id)
+      }
+      let count = resolution.records.count
+      statusService.report(
+        message:
+          "Imported \(count) \(pendingImportDisplayName) \(count == 1 ? "record" : "records")")
+    } catch {
+      statusService.report(error: error)
+    }
+  }
+
+  /// Discards an import proposal without changing the catalogue.
+  public func cancelPendingImport() {
+    guard pendingImportPlan != nil else { return }
+    pendingImportPlan = nil
+    isReviewingImport = false
+    statusService.report(message: "Import cancelled")
   }
 
   /// Exports the current materialised records as Bookish interchange JSON data.

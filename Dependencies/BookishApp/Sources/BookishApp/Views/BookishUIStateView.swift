@@ -53,6 +53,11 @@ public struct BookishUIStateView: View {
       defaultFilename: "Bookish Interchange",
       onCompletion: handleInterchangeExport
     )
+    .sheet(isPresented: $uiState.isReviewingImport, onDismiss: uiState.cancelPendingImport) {
+      if let plan = uiState.pendingImportPlan {
+        BookishImportReviewView(plan: plan)
+      }
+    }
     .task(id: isDeveloperMode) {
       commander.perform(SetDebugIndexVisibilityCommand(isVisible: isDeveloperMode))
     }

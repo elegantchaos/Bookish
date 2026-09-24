@@ -3,20 +3,15 @@ import CryptoKit
 import Foundation
 import SQLite3
 
-// TODO: de-dupe and cleanup like Delicious importer?
-// TODO: author names in correct order
 // TODO: series detection?
-// TODO: use ASIN to detect the same book already imported via Delicious?
 // TODO: can we differentiate between my books and books via family sharing?
 
-/// A Kindle database or its containing directory, with record IDs already imported.
+/// A Kindle database or its containing directory.
 public struct KindleLibrarySource: Equatable, Sendable {
   public var url: URL
-  public var existingRecordIDs: Set<BookishRecordID>
 
-  public init(url: URL, existingRecordIDs: Set<BookishRecordID> = []) {
+  public init(url: URL) {
     self.url = url
-    self.existingRecordIDs = existingRecordIDs
   }
 }
 
@@ -45,7 +40,6 @@ public struct KindleLibraryImporter: BookishImporter {
         let database = try KindleDatabase(url: url)
         let books = try database.books()
         let total = books.count
-        var seen = source.existingRecordIDs
         var recordCount = 0
         var diagnostics: [String] = []
         continuation.yield(
@@ -56,19 +50,8 @@ public struct KindleLibraryImporter: BookishImporter {
         for (offset, book) in books.enumerated() {
           try Task.checkCancellation()
           if let records = try book.records() {
-            guard let bookRecord = records.last else { continue }
-            if seen.contains(bookRecord.id) {
-              continuation.yield(
-                .progress(
-                  BookishImportProgress(
-                    message: "Importing Kindle library", completed: offset + 1, total: total)))
-              continue
-            }
-            let newRecords = records.filter { seen.insert($0.id).inserted }
-            if !newRecords.isEmpty {
-              recordCount += newRecords.count
-              continuation.yield(.records(newRecords))
-            }
+            recordCount += records.count
+            continuation.yield(.records(records))
           } else {
             diagnostics.append("Skipped a Kindle book without a usable ASIN or title.")
           }
@@ -107,7 +90,7 @@ private final class KindleDatabase {
 
   func books() throws -> [KindleBook] {
     let sql = """
-      SELECT ZDISPLAYTITLE, ZRAWPUBLISHER, ZRAWPUBLICATIONDATE, ZLANGUAGE,
+      SELECT ZBOOKID, ZDISPLAYTITLE, ZRAWPUBLISHER, ZRAWPUBLICATIONDATE, ZLANGUAGE,
              ZSYNCMETADATAATTRIBUTES
       FROM ZBOOK WHERE ZRAWBOOKTYPE = 10 ORDER BY ZBOOKID
       """
@@ -119,22 +102,24 @@ private final class KindleDatabase {
     var books: [KindleBook] = []
     var status = sqlite3_step(statement)
     while status == SQLITE_ROW {
-      let title = sqlite3_column_text(statement, 0).map { String(cString: $0) }
-      let publisher = sqlite3_column_text(statement, 1).map { String(cString: $0) }
+      let sourceBookID = sqlite3_column_text(statement, 0).map { String(cString: $0) }
+      let title = sqlite3_column_text(statement, 1).map { String(cString: $0) }
+      let publisher = sqlite3_column_text(statement, 2).map { String(cString: $0) }
       let published =
-        sqlite3_column_type(statement, 2) == SQLITE_NULL
-        ? nil : Date(timeIntervalSince1970: sqlite3_column_double(statement, 2))
-      let language = sqlite3_column_text(statement, 3).map { String(cString: $0) }
+        sqlite3_column_type(statement, 3) == SQLITE_NULL
+        ? nil : Date(timeIntervalSince1970: sqlite3_column_double(statement, 3))
+      let language = sqlite3_column_text(statement, 4).map { String(cString: $0) }
       let metadata: [String: Any]
-      if let bytes = sqlite3_column_blob(statement, 4) {
-        let data = Data(bytes: bytes, count: Int(sqlite3_column_bytes(statement, 4)))
+      if let bytes = sqlite3_column_blob(statement, 5) {
+        let data = Data(bytes: bytes, count: Int(sqlite3_column_bytes(statement, 5)))
         metadata = KindleMetadata.decode(data)
       } else {
         metadata = [:]
       }
       books.append(
         KindleBook(
-          title: title, publisher: publisher, published: published, language: language,
+          sourceBookID: sourceBookID, title: title, publisher: publisher, published: published,
+          language: language,
           metadata: metadata))
       status = sqlite3_step(statement)
     }
@@ -167,6 +152,7 @@ private final class KindleMetadata: NSObject, NSCoding {
 }
 
 private struct KindleBook {
+  let sourceBookID: String?
   let title: String?
   let publisher: String?
   let published: Date?
@@ -185,11 +171,16 @@ private struct KindleBook {
       BookishRecordKey.source: .string(KindleLibraryImporter.sourceID),
       BookishRecordKey.format: .string("Kindle"),
     ]
-    var snapshot: [String: Any] = ["ASIN": asin, "title": title]
+    var snapshot: [String: Any] = [
+      "displayTitle": title,
+      "syncMetadataAttributes": metadata,
+    ]
+    if let sourceBookID { snapshot["bookID"] = sourceBookID }
+    if let publisher { snapshot["rawPublisher"] = publisher }
     if let language, !language.isEmpty { snapshot["language"] = language }
     if let published {
       properties[BookishRecordKey.publishedDate] = try BookishRecordValue(date: published)
-      snapshot["publishedDate"] = published.ISO8601Format()
+      snapshot["rawPublicationDate"] = published.timeIntervalSince1970
     }
     if let purchaseDate = metadata["purchase_date"] as? String {
       let formatter = DateFormatter()
@@ -197,47 +188,68 @@ private struct KindleBook {
       formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
       if let date = formatter.date(from: purchaseDate) {
         properties[BookishRecordKey.addedDate] = try BookishRecordValue(date: date)
-        snapshot["purchaseDate"] = purchaseDate
       }
     }
     var related: [BookishRecord] = []
-    if let author = (metadata["authors"] as? [String: Any])?["author"] as? String,
-      !author.isEmpty
-    {
+    let rawAuthors = (metadata["authors"] as? [String: Any])?["author"]
+    let authors: [String]
+    switch rawAuthors {
+    case let author as String: authors = [author]
+    case let values as [String]: authors = values
+    default: authors = []
+    }
+    var authorIDs: [BookishRecordID] = []
+    for author in authors where !author.isEmpty {
       let id = BookishRecordID("kindle-person-\(author.kindleIDComponent)")
+      authorIDs.append(id)
+      let originalData = try Self.originalData(["author": author])
       related.append(
         BookishRecord(
           id: id, kind: BookishRecordKind.person,
           properties: [
-            BookishRecordKey.name: .string(author),
+            BookishRecordKey.name: .string(author.kindleDisplayName),
             BookishRecordKey.source: .string(KindleLibraryImporter.sourceID),
+            BookishRecordKey.importedID: .string(author),
+            BookishRecordKey.originalData: .string(originalData),
           ]))
-      properties[BookishRecordKey.authors] = .list([.record(id)])
-      snapshot["author"] = author
+    }
+    if !authorIDs.isEmpty {
+      properties[BookishRecordKey.authors] = .list(authorIDs.map { .record($0) })
     }
     if let publisher, !publisher.isEmpty {
       let id = BookishRecordID("kindle-organisation-\(publisher.kindleIDComponent)")
+      let originalData = try Self.originalData(["publisher": publisher])
       related.append(
         BookishRecord(
           id: id, kind: BookishRecordKind.organisation,
           properties: [
             BookishRecordKey.name: .string(publisher),
             BookishRecordKey.source: .string(KindleLibraryImporter.sourceID),
+            BookishRecordKey.importedID: .string(publisher),
+            BookishRecordKey.originalData: .string(originalData),
           ]))
       properties[BookishRecordKey.publishers] = .list([.record(id)])
-      snapshot["publisher"] = publisher
     }
-    if let origins = metadata["origins"] as? [String: Any] { snapshot["origins"] = origins }
-    let snapshotData = try JSONSerialization.data(withJSONObject: snapshot, options: [.sortedKeys])
-    properties[BookishRecordKey.originalData] = .string(
-      String(decoding: snapshotData, as: UTF8.self))
+    properties[BookishRecordKey.originalData] = .string(try Self.originalData(snapshot))
     return related + [
       BookishRecord(id: bookID, kind: BookishRecordKind.book, properties: properties)
     ]
   }
+
+  private static func originalData(_ snapshot: [String: Any]) throws -> String {
+    let data = try JSONSerialization.data(withJSONObject: snapshot, options: [.sortedKeys])
+    return String(decoding: data, as: UTF8.self)
+  }
 }
 
 extension String {
+  fileprivate var kindleDisplayName: String {
+    let parts = split(separator: ",", omittingEmptySubsequences: false)
+      .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+    guard parts.count == 2, parts.allSatisfy({ !$0.isEmpty }) else { return self }
+    return "\(parts[1]) \(parts[0])"
+  }
+
   fileprivate var kindleIDComponent: String {
     SHA256.hash(data: Data(utf8)).map { String(format: "%02x", $0) }.joined()
   }

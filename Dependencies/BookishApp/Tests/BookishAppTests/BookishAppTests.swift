@@ -599,6 +599,12 @@ struct BookishAppTests {
     await harness.load()
 
     try await commander.perform(ImportDeliciousLibrarySampleCommand(sample: .small))
+    let plan = try #require(harness.pendingImportPlan)
+    let choices = Dictionary(
+      uniqueKeysWithValues: plan.reviewEntries.map { entry in
+        (entry.id, BookishImportChoice.create)
+      })
+    await harness.applyPendingImport(choices: choices)
 
     let importedBooks = try await records(for: harness).filter {
       $0.kind == "book" && $0.string(BookishRecordKey.name) == "Snow Crash"
