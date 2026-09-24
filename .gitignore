@@ -56,3 +56,4 @@ Backup[ ]of[ ]*.numbers/
 *.pyc
 test-build
 Extras/Legacy
+Extras/Amazon
