@@ -9,6 +9,10 @@ import BookishRecord
 import Foundation
 import Observation
 
+#if os(macOS)
+  import AppKit
+#endif
+
 /// Updates browser settings that affect visible record indexes.
 @MainActor
 public protocol BookishBrowserSettings: AnyObject {
@@ -32,12 +36,16 @@ public protocol BookishImportPresentation {
   func requestInterchangeImport()
   /// Requests a Delicious Library file import.
   func requestDeliciousLibraryImport()
+  /// Requests access to the Kindle library database folder.
+  func requestKindleLibraryImport()
   /// Imports a bundled Delicious Library sample.
   func importDeliciousLibrary(sample: DeliciousLibrarySample) async
   /// Imports a selected interchange file.
   func importInterchange(from url: URL) async
   /// Imports a selected Delicious Library export.
   func importDeliciousLibrary(from url: URL) async
+  /// Imports a selected Kindle library database folder.
+  func importKindleLibrary(from url: URL) async
 }
 
 /// Owns global Bookish UI state and coordinates UI-triggered work across services.
@@ -137,6 +145,25 @@ public final class BookishUIStateService {
     isImportingDeliciousLibrary = true
   }
 
+  /// Opens the system permission picker at Kindle's database directory.
+  public func requestKindleLibraryImport() {
+    #if os(macOS)
+      let panel = NSOpenPanel()
+      panel.canChooseDirectories = true
+      panel.canChooseFiles = false
+      panel.canCreateDirectories = false
+      panel.allowsMultipleSelection = false
+      panel.prompt = "Grant Access"
+      panel.message = "Select the Protected folder containing BookData.sqlite."
+      panel.directoryURL = FileManager.default.homeDirectoryForCurrentUser
+        .appending(path: "Library/Containers/com.amazon.Lassen/Data/Library/Protected")
+      panel.begin { [weak self] response in
+        guard response == .OK, let url = panel.url else { return }
+        Task { @MainActor [weak self] in await self?.importKindleLibrary(from: url) }
+      }
+    #endif
+  }
+
   /// Requests an interchange file export.
   public func requestInterchangeExport() async {
     do {
@@ -169,6 +196,13 @@ public final class BookishUIStateService {
   public func importDeliciousLibrary(from url: URL) async {
     await coordinateImport(fallbackDisplayName: DeliciousLibraryImporter().descriptor.displayName) {
       try await self.importingService.importDeliciousLibrary(from: url, reporting: $0)
+    }
+  }
+
+  /// Imports new Kindle books from a user-selected folder.
+  public func importKindleLibrary(from url: URL) async {
+    await coordinateImport(fallbackDisplayName: KindleLibraryImporter().descriptor.displayName) {
+      try await self.importingService.importKindleLibrary(from: url, reporting: $0)
     }
   }
 

@@ -1,0 +1,123 @@
+import BookishRecord
+import Foundation
+import Testing
+
+@testable import BookishImporter
+
+struct KindleLibraryImporterTests {
+  @Test
+  func importsBooksFromSyntheticDatabase() async throws {
+    let events = try await collect(
+      KindleLibraryImporter().importEvents(from: KindleLibrarySource(url: fixtureURL())))
+    let records = events.flatMap { event -> [BookishRecord] in
+      guard case .records(let batch) = event else { return [] }
+      return batch
+    }
+    let byID = Dictionary(uniqueKeysWithValues: records.map { ($0.id, $0) })
+
+    let first = try #require(byID[BookishRecordID("kindle-book-B000000001")])
+    #expect(first.kind == BookishRecordKind.book)
+    #expect(first.string(BookishRecordKey.name) == "The Glass Orbit")
+    #expect(first.string(BookishRecordKey.asin) == "B000000001")
+    #expect(first.string(BookishRecordKey.source) == KindleLibraryImporter.sourceID)
+    #expect(first.list(BookishRecordKey.authors)?.count == 1)
+    #expect(first.list(BookishRecordKey.publishers)?.count == 1)
+    #expect(first.properties[BookishRecordKey.publishedDate]?.dateValue != nil)
+    #expect(first.properties[BookishRecordKey.addedDate]?.dateValue != nil)
+    #expect(first.string(BookishRecordKey.originalData)?.contains("Purchase") == true)
+
+    let second = try #require(byID[BookishRecordID("kindle-book-B000000002")])
+    #expect(second.string(BookishRecordKey.name) == "Tidal Atlas")
+    #expect(second.list(BookishRecordKey.authors) == nil)
+    #expect(second.string(BookishRecordKey.originalData)?.contains("Sharing") == true)
+    #expect(byID.values.filter { $0.kind == BookishRecordKind.book }.count == 2)
+    #expect(byID.values.contains { $0.string(BookishRecordKey.name) == "Ada Sol" })
+
+    let finish = try #require(events.last)
+    guard case .finished(let summary) = finish else {
+      Issue.record("Expected Kindle import to finish.")
+      return
+    }
+    #expect(summary.recordCount == records.count)
+  }
+
+  @Test
+  func repeatedImportEmitsOnlyMissingRecords() async throws {
+    let importer = KindleLibraryImporter()
+    let first = try await collect(
+      importer.importEvents(from: KindleLibrarySource(url: fixtureURL())))
+    let existing = Set(
+      first.flatMap { event -> [BookishRecordID] in
+        guard case .records(let records) = event else { return [] }
+        return records.map(\.id)
+      })
+    let second = try await collect(
+      importer.importEvents(
+        from: KindleLibrarySource(url: fixtureURL(), existingRecordIDs: existing)))
+
+    #expect(
+      second.contains { event in
+        if case .records = event { return true }
+        return false
+      } == false)
+    guard case .finished(let summary) = try #require(second.last) else {
+      Issue.record("Expected repeated Kindle import to finish.")
+      return
+    }
+    #expect(summary.recordCount == 0)
+  }
+
+  @Test
+  func existingBookDoesNotEmitOrphanedRelatedRecords() async throws {
+    let source = KindleLibrarySource(
+      url: fixtureURL(),
+      existingRecordIDs: [
+        BookishRecordID("kindle-book-B000000001"),
+        BookishRecordID("kindle-book-B000000002"),
+      ])
+    let events = try await collect(KindleLibraryImporter().importEvents(from: source))
+    #expect(
+      !events.contains { event in
+        if case .records = event { return true }
+        return false
+      })
+  }
+
+  @Test
+  func acceptsContainingFolderAsSource() async throws {
+    let source = KindleLibrarySource(url: fixtureURL().deletingLastPathComponent())
+    let events = try await collect(KindleLibraryImporter().importEvents(from: source))
+    #expect(
+      events.contains { event in
+        if case .records = event { return true }
+        return false
+      })
+  }
+
+  @Test
+  func canReadAnOptionalLocalKindleDatabase() async throws {
+    guard let path = ProcessInfo.processInfo.environment["BOOKISH_KINDLE_TEST_DATABASE"] else {
+      return
+    }
+    let events = try await collect(
+      KindleLibraryImporter().importEvents(
+        from: KindleLibrarySource(url: URL(fileURLWithPath: path))))
+    let books = events.flatMap { event -> [BookishRecord] in
+      guard case .records(let records) = event else { return [] }
+      return records.filter { $0.kind == BookishRecordKind.book }
+    }
+    #expect(!books.isEmpty)
+  }
+
+  private func fixtureURL() -> URL {
+    Bundle.module.url(forResource: "BookData", withExtension: "sqlite")!
+  }
+
+  private func collect(
+    _ stream: AsyncThrowingStream<BookishImportEvent, Error>
+  ) async throws -> [BookishImportEvent] {
+    var events: [BookishImportEvent] = []
+    for try await event in stream { events.append(event) }
+    return events
+  }
+}

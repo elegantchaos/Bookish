@@ -26,12 +26,14 @@ struct CommandProviderTests {
 
     try await centre.perform(ImportInterchangeCommand())
     try await centre.perform(ImportOtherDeliciousLibraryCommand())
+    try await centre.perform(ImportKindleLibraryCommand())
     try await centre.perform(ImportDeliciousLibrarySampleCommand(sample: .small))
     try await centre.perform(ImportSelectedInterchangeCommand(url: interchangeURL))
     try await centre.perform(ImportSelectedDeliciousLibraryCommand(url: deliciousLibraryURL))
 
     #expect(importPresentation.requestedInterchangeImport)
     #expect(importPresentation.requestedDeliciousLibraryImport)
+    #expect(importPresentation.requestedKindleLibraryImport)
     #expect(importPresentation.importedSample == .small)
     #expect(importPresentation.importedInterchangeURL == interchangeURL)
     #expect(importPresentation.importedDeliciousLibraryURL == deliciousLibraryURL)
@@ -343,9 +345,11 @@ private final class TestBookRecognitionWorkflow: BookishRecognition {
 private final class TestImportPresentation: BookishImportPresentation {
   private(set) var requestedInterchangeImport = false
   private(set) var requestedDeliciousLibraryImport = false
+  private(set) var requestedKindleLibraryImport = false
   private(set) var importedSample: DeliciousLibrarySample?
   private(set) var importedInterchangeURL: URL?
   private(set) var importedDeliciousLibraryURL: URL?
+  private(set) var importedKindleLibraryURL: URL?
 
   func requestInterchangeImport() {
     requestedInterchangeImport = true
@@ -353,6 +357,10 @@ private final class TestImportPresentation: BookishImportPresentation {
 
   func requestDeliciousLibraryImport() {
     requestedDeliciousLibraryImport = true
+  }
+
+  func requestKindleLibraryImport() {
+    requestedKindleLibraryImport = true
   }
 
   func importDeliciousLibrary(sample: DeliciousLibrarySample) async {
@@ -365,6 +373,10 @@ private final class TestImportPresentation: BookishImportPresentation {
 
   func importDeliciousLibrary(from url: URL) async {
     importedDeliciousLibraryURL = url
+  }
+
+  func importKindleLibrary(from url: URL) async {
+    importedKindleLibraryURL = url
   }
 }
 

@@ -1,5 +1,6 @@
 # Journal Index
 
+- [2026-09-24 Kindle Local Database Importer](2026-09-24-kindle-local-importer.md)
 - [2026-09-24 iPhone Back Navigation](2026-09-24-iphone-back-navigation.md)
 - [2026-09-23 Release Version Metadata](2026-09-23-release-version-metadata.md)
 - [2026-09-18 Navigation Route Persistence](2026-09-18-navigation-route-persistence.md)

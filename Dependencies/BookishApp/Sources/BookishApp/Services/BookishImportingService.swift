@@ -3,6 +3,7 @@
 //  Copyright © 2026 Elegant Chaos Limited. All rights reserved.
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
+import BookishDatastore
 import BookishImporter
 import BookishRecord
 import Foundation
@@ -25,6 +26,12 @@ public protocol BookishImporting {
     reporting event: @escaping BookishImportEventReporter
   ) async throws -> BookishImportSummary
 
+  /// Imports new records from a user-selected Kindle database directory.
+  func importKindleLibrary(
+    from url: URL,
+    reporting event: @escaping BookishImportEventReporter
+  ) async throws -> BookishImportSummary
+
   /// Imports events from an importer, reporting each event after its records have been persisted.
   func importRecords<Importer: BookishImporter>(
     from input: Importer.Input,
@@ -43,7 +50,6 @@ public final class BookishImportingService {
   public init(storageService: BookishStorageService) {
     self.storageService = storageService
   }
-
 
 }
 
@@ -70,6 +76,22 @@ extension BookishImportingService: BookishImporting {
       using: DeliciousLibraryImporter(),
       reporting: event
     )
+  }
+
+  public func importKindleLibrary(
+    from url: URL,
+    reporting event: @escaping BookishImportEventReporter
+  ) async throws -> BookishImportSummary {
+    let canAccess = url.startAccessingSecurityScopedResource()
+    defer { if canAccess { url.stopAccessingSecurityScopedResource() } }
+    guard storageService.isLoaded else { throw BookishStorageError.notLoaded }
+    let existing = try await storageService.records(
+      matching: RecordQuery(
+        predicate: .property(
+          BookishRecordKey.source, equals: .string(KindleLibraryImporter.sourceID))))
+    return try await importRecords(
+      from: KindleLibrarySource(url: url, existingRecordIDs: Set(existing.map(\.id))),
+      using: KindleLibraryImporter(), reporting: event)
   }
 
   /// Imports events from an importer, reporting each event after its records have been persisted.
@@ -100,9 +122,9 @@ extension BookishImportingService: BookishImporting {
   }
 }
 
-private extension BookishImportingService {
+extension BookishImportingService {
   /// Reads a security-scoped file before importing its data with the supplied importer.
-  func importFile<Importer: BookishImporter>(
+  fileprivate func importFile<Importer: BookishImporter>(
     from url: URL,
     using importer: Importer,
     reporting event: @escaping BookishImportEventReporter

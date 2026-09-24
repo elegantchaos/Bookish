@@ -39,6 +39,7 @@ public struct BookishCommands: Commands {
   public var body: some Commands {
     CommandGroup(after: .newItem) {
       engine.button(ImportInterchangeCommand())
+      engine.button(ImportKindleLibraryCommand())
       Menu("Import Delicious Library") {
         if isAdvancedMode {
           engine.button(ImportDeliciousLibrarySampleCommand(sample: .small))

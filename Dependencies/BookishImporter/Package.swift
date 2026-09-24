@@ -29,7 +29,8 @@ let package = Package(
         .product(name: "BookishRecord", package: "BookishRecord"),
         .product(name: "BookishCoding", package: "BookishCoding"),
         .product(name: "BookishCleanup", package: "BookishCleanup"),
-      ]
+      ],
+      linkerSettings: [.linkedLibrary("sqlite3")]
     ),
     .target(
       name: "BookishImporterSamples",
@@ -41,7 +42,8 @@ let package = Package(
         "BookishImporter",
         "BookishImporterSamples",
         .product(name: "BookishCoding", package: "BookishCoding"),
-      ]
+      ],
+      resources: [.copy("Fixtures/BookData.sqlite")]
     ),
   ]
 )
