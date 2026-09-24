@@ -6,6 +6,7 @@ public struct BookishRecordView<SectionContent: View>: View {
   private let presentation: BookishRecordPresentation
   private let viewerRegistry: BookishValueViewerRegistry
   private let mode: BookishValuePresentationMode
+  private let showsNavigationTitle: Bool
   private let sectionView: (BookishRecordID) -> SectionContent
 
   /// Creates a record view from a data record, optional layout, and section content.
@@ -15,12 +16,14 @@ public struct BookishRecordView<SectionContent: View>: View {
     presentationResolver: any PresentationResolver = CascadingPresentationResolver(),
     viewerRegistry: BookishValueViewerRegistry = .init(),
     mode: BookishValuePresentationMode = .viewing,
+    showsNavigationTitle: Bool = true,
     @ViewBuilder sectionView: @escaping (BookishRecordID) -> SectionContent
   ) {
     self.presentation = BookishRecordPresentation(
       record: record, layout: layout, presentationResolver: presentationResolver)
     self.viewerRegistry = viewerRegistry
     self.mode = mode
+    self.showsNavigationTitle = showsNavigationTitle
     self.sectionView = sectionView
   }
 
@@ -40,7 +43,10 @@ public struct BookishRecordView<SectionContent: View>: View {
         sectionView: sectionView)
     }
     .formStyle(.grouped)
-    .navigationTitle(presentation.header.title ?? "")
+    .navigationTitle(showsNavigationTitle ? presentation.header.title ?? "" : "")
+    #if os(iOS)
+      .navigationBarTitleDisplayMode(showsNavigationTitle ? .automatic : .inline)
+    #endif
   }
 }
 
@@ -51,14 +57,16 @@ extension BookishRecordView where SectionContent == EmptyView {
     layout: BookishRecord,
     presentationResolver: any PresentationResolver = CascadingPresentationResolver(),
     viewerRegistry: BookishValueViewerRegistry = .init(),
-    mode: BookishValuePresentationMode = .viewing
+    mode: BookishValuePresentationMode = .viewing,
+    showsNavigationTitle: Bool = true
   ) {
     self.init(
       record: record,
       layout: Optional(layout),
       presentationResolver: presentationResolver,
       viewerRegistry: viewerRegistry,
-      mode: mode
+      mode: mode,
+      showsNavigationTitle: showsNavigationTitle
     ) { _ in
       EmptyView()
     }
@@ -70,14 +78,16 @@ extension BookishRecordView where SectionContent == EmptyView {
     layout: BookishRecord?,
     presentationResolver: any PresentationResolver = CascadingPresentationResolver(),
     viewerRegistry: BookishValueViewerRegistry = .init(),
-    mode: BookishValuePresentationMode = .viewing
+    mode: BookishValuePresentationMode = .viewing,
+    showsNavigationTitle: Bool = true
   ) {
     self.init(
       record: record,
       layout: layout,
       presentationResolver: presentationResolver,
       viewerRegistry: viewerRegistry,
-      mode: mode
+      mode: mode,
+      showsNavigationTitle: showsNavigationTitle
     ) { _ in
       EmptyView()
     }

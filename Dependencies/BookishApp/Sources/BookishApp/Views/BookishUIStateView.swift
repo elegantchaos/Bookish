@@ -69,10 +69,25 @@ private struct BrowserNavigationSplitView: View {
   var body: some View {
     NavigationSplitView {
       BrowserIndexListView()
+        .toolbar {
+          #if os(iOS)
+            BookishGlobalCommandsToolbar()
+          #endif
+        }
     } content: {
       RecordIndexView()
+        .toolbar {
+          #if os(iOS)
+            BookishGlobalCommandsToolbar()
+          #endif
+        }
     } detail: {
       RecordDetailView()
+        .toolbar {
+          #if os(iOS)
+            BookishGlobalCommandsToolbar()
+          #endif
+        }
     }
     .toolbar {
       BookishToolbar(harness: uiState)
@@ -92,8 +107,18 @@ private struct WorkflowNavigationSplitView: View {
   var body: some View {
     NavigationSplitView {
       BrowserIndexListView()
+        .toolbar {
+          #if os(iOS)
+            BookishGlobalCommandsToolbar()
+          #endif
+        }
     } detail: {
       BookishMainSectionView(section: section)
+        .toolbar {
+          #if os(iOS)
+            BookishGlobalCommandsToolbar()
+          #endif
+        }
     }
     .toolbar {
       BookishToolbar(harness: uiState)

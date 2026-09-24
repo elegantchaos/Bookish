@@ -18,6 +18,11 @@ struct BookishRecordIDDetail: View {
   /// The service used to report record-detail failures.
   @Environment(BookishStatusService.self) private var statusService
 
+  #if os(iOS)
+    /// The current width class used to avoid a duplicate record title on compact screens.
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+  #endif
+
   /// The current browser navigation route.
   let navigation: BookishNavigationService
 
@@ -49,6 +54,7 @@ struct BookishRecordIDDetail: View {
               )
             )
           },
+          showsNavigationTitle: showsNavigationTitle,
           sectionView: { linkedLayoutID in
             RecordLayoutItemView(
               linkedLayoutID: linkedLayoutID,
@@ -69,6 +75,15 @@ struct BookishRecordIDDetail: View {
     .task(id: taskID) {
       await load()
     }
+  }
+
+  /// Keeps the platform navigation title where it has room to add context.
+  private var showsNavigationTitle: Bool {
+    #if os(iOS)
+      horizontalSizeClass != .compact
+    #else
+      true
+    #endif
   }
 
   /// Identifies presentation inputs that require the record to be resolved again.
