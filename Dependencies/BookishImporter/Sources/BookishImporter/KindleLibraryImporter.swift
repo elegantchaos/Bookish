@@ -3,6 +3,12 @@ import CryptoKit
 import Foundation
 import SQLite3
 
+// TODO: de-dupe and cleanup like Delicious importer?
+// TODO: author names in correct order
+// TODO: series detection?
+// TODO: use ASIN to detect the same book already imported via Delicious?
+// TODO: can we differentiate between my books and books via family sharing?
+
 /// A Kindle database or its containing directory, with record IDs already imported.
 public struct KindleLibrarySource: Equatable, Sendable {
   public var url: URL

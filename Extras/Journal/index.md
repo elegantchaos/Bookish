@@ -1,7 +1,12 @@
 # Journal Index
 
 - [2026-09-24 Kindle Local Database Importer](2026-09-24-kindle-local-importer.md)
+- [2026-09-24 Kindle Library Manifest Research](2026-09-24-kindle-library-manifest-research.md)
 - [2026-09-24 iPhone Back Navigation](2026-09-24-iphone-back-navigation.md)
+- [2026-09-24 Compact Record Title](2026-09-24-compact-record-title.md)
+- [2026-09-24 iPhone Global Command Menu](2026-09-24-iphone-global-command-menu.md)
+- [2026-09-24 Direct Image Recognition Tool](2026-09-24-direct-image-recognition-tool.md)
+- [2026-09-24 Agent Refresh](2026-09-24-agent-refresh.md)
 - [2026-09-23 Release Version Metadata](2026-09-23-release-version-metadata.md)
 - [2026-09-18 Navigation Route Persistence](2026-09-18-navigation-route-persistence.md)
 - [2026-09-18 Book Metadata Lookup Scaffolding](2026-09-18-book-metadata-lookup-scaffolding.md)

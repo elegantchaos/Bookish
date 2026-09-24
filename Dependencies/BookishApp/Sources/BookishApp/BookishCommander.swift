@@ -54,6 +54,15 @@ final class BookishCommander {
     engine.button(command, role: role, content: content)
   }
 
+  /// Returns the confirmation supplied by a command for a persistent presentation host.
+  func confirmation<C: CommandWithUI>(for command: C) -> CommandConfirmation
+  where C.Centre == BookishEngine {
+    guard let confirmation = command.confirmation(centre: engine) else {
+      preconditionFailure("A confirmation was expected for command: \(command.id)")
+    }
+    return confirmation
+  }
+
   /// Returns a toolbar item for a command.
   @ToolbarContentBuilder
   func toolbarItem<C: CommandWithUI>(
