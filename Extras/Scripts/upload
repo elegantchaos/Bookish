@@ -23,13 +23,13 @@ echo "----------------"
 
 rt submit --platform=macOS
 
-#echo " "
-#echo "--------------"
-#echo "Submitting iOS"
-#echo "--------------"
-#
-#rt submit --platform=iOS
-#
+echo " "
+echo "--------------"
+echo "Submitting iOS"
+echo "--------------"
+
+rt submit --platform=iOS
+
 
 
 echo "------------"
