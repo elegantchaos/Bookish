@@ -14,3 +14,7 @@
 - Cleanup should find and review possible duplicates for books and other record kinds. The existing review-first cleanup decision applies; bulk automatic merging would risk losing identity and relationships.
 - `BookishLookup` can enrich sparse metadata before comparison, but provider results need provenance and should not overwrite user edits silently. No shared matching API or policy was introduced in this importer.
 - Kindle's schema and cache coverage remain undocumented. Compare imported titles against the account library, and add diagnostics/tests for schema changes as they appear.
+
+## Follow-up: copied database coverage
+
+The optional local-database test now accepts an expected book count. Against the copied `BookData.sqlite`, it emitted all 280 book rows. This verifies extraction coverage for that cache snapshot; it does not establish that the cache contains every title in the Amazon account. The sandboxed app's folder-picker grant still needs an interactive runtime check.

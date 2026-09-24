@@ -107,6 +107,11 @@ struct KindleLibraryImporterTests {
       return records.filter { $0.kind == BookishRecordKind.book }
     }
     #expect(!books.isEmpty)
+    if let expected = ProcessInfo.processInfo.environment["BOOKISH_KINDLE_EXPECTED_BOOK_COUNT"]
+      .flatMap(Int.init)
+    {
+      #expect(books.count == expected)
+    }
   }
 
   private func fixtureURL() -> URL {
