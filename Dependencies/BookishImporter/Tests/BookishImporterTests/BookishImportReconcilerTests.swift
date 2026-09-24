@@ -104,6 +104,7 @@ struct BookishImportReconcilerTests {
 
     let plan = try BookishImportReconciler().plan(imported: imported, existing: [existing])
     #expect(plan.reviewEntries.count == 1)
+    #expect(plan.defaultChoices == [proposed.id: .useExisting(existing.id)])
     #expect(throws: BookishImportPlanError.self) { try plan.resolve(choices: [:]) }
     #expect(try plan.resolve(choices: [proposed.id: .create]).records.map(\.id) == [proposed.id])
     #expect(try plan.resolve(choices: [proposed.id: .useExisting(existing.id)]).records.isEmpty)
@@ -118,8 +119,45 @@ struct BookishImportReconcilerTests {
 
     let plan = try BookishImportReconciler().plan(imported: imported, existing: [existing])
     #expect(plan.reviewEntries.count == 1)
+    #expect(plan.defaultChoices == [proposed.id: .keepExisting])
     #expect(try plan.resolve(choices: [proposed.id: .keepExisting]).records.isEmpty)
     #expect(try plan.resolve(choices: [proposed.id: .replaceExisting]).records == [proposed])
+  }
+
+  @Test
+  func bulkChoicesApplyToSelectedMatchesOnly() throws {
+    let first = record("proposed-a", kind: BookishRecordKind.person, name: "Ada Sol")
+    let second = record("proposed-b", kind: BookishRecordKind.person, name: "Mina Reed")
+    let existingFirst = record("manual-a", kind: BookishRecordKind.person, name: "Ada Sol")
+    let existingSecond = record("manual-b", kind: BookishRecordKind.person, name: "Mina Reed")
+    let plan = try BookishImportReconciler().plan(
+      imported: BookishImportResult(
+        sourceID: BookishInterchangeImporter.sourceID, records: [first, second]),
+      existing: [existingFirst, existingSecond])
+
+    #expect(
+      plan.defaultChoices == [
+        first.id: .useExisting(existingFirst.id),
+        second.id: .useExisting(existingSecond.id),
+      ])
+    #expect(plan.choices(for: [first.id], preferring: .imported) == [first.id: .create])
+    #expect(
+      plan.choices(for: [first.id], preferring: .existing) == [
+        first.id: .useExisting(existingFirst.id)
+      ])
+  }
+
+  @Test
+  func defaultExistingChoiceIsStableWithMultipleCandidates() throws {
+    let proposed = record("proposed", kind: BookishRecordKind.person, name: "Ada Sol")
+    let later = record("manual-z", kind: BookishRecordKind.person, name: "Ada Sol")
+    let earlier = record("manual-a", kind: BookishRecordKind.person, name: "Ada Sol")
+    let plan = try BookishImportReconciler().plan(
+      imported: BookishImportResult(
+        sourceID: BookishInterchangeImporter.sourceID, records: [proposed]),
+      existing: [later, earlier])
+
+    #expect(plan.defaultChoices[proposed.id] == .useExisting(earlier.id))
   }
 
   private func record(

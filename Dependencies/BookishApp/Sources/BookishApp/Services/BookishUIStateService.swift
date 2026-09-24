@@ -32,6 +32,8 @@ public protocol BookishDatastoreMaintenance {
 /// Presents import controls requested by commands.
 @MainActor
 public protocol BookishImportPresentation {
+  /// Whether a prepared import can be applied.
+  var canApplyPendingImport: Bool { get }
   /// Requests an interchange file import.
   func requestInterchangeImport()
   /// Requests a Delicious Library file import.
@@ -46,6 +48,10 @@ public protocol BookishImportPresentation {
   func importDeliciousLibrary(from url: URL) async
   /// Imports a selected Kindle library database folder.
   func importKindleLibrary(from url: URL) async
+  /// Applies the current review choices.
+  func applyPendingImport() async
+  /// Discards the current proposal.
+  func cancelPendingImport()
 }
 
 /// Owns global Bookish UI state and coordinates UI-triggered work across services.
@@ -76,10 +82,28 @@ public final class BookishUIStateService {
   /// The imported records awaiting user review.
   public private(set) var pendingImportPlan: BookishImportPlan?
 
-  @ObservationIgnored private var pendingImportDisplayName = "Import"
+  /// Choices for the pending proposal, initially favouring existing records.
+  public private(set) var importChoices: [BookishRecordID: BookishImportChoice] = [:]
 
-  /// Whether the import review sheet is visible.
-  public var isReviewingImport = false
+  /// The last applied import, shown in the Import workflow.
+  public private(set) var lastImportResult: BookishImportWorkflowResult?
+
+  /// Whether an importer is still reading its source.
+  public private(set) var isPreparingImport = false
+
+  /// Whether a reviewed proposal is being written to storage.
+  public private(set) var isApplyingImport = false
+
+  /// A source-reading or apply error shown in the Import workflow.
+  public private(set) var importErrorMessage: String?
+
+  /// Whether all review choices are ready to apply.
+  public var canApplyPendingImport: Bool {
+    guard let pendingImportPlan, !isApplyingImport else { return false }
+    return pendingImportPlan.reviewEntries.allSatisfy { importChoices[$0.id] != nil }
+  }
+
+  @ObservationIgnored private var pendingImportDisplayName = "Import"
 
   /// Whether the interchange export file picker is visible.
   public var isExportingInterchange = false
@@ -145,16 +169,19 @@ public final class BookishUIStateService {
 
   /// Requests an interchange file import.
   public func requestInterchangeImport() {
+    guard showImportWorkflowIfReady() else { return }
     isImportingInterchange = true
   }
 
   /// Requests a Delicious Library file import.
   public func requestDeliciousLibraryImport() {
+    guard showImportWorkflowIfReady() else { return }
     isImportingDeliciousLibrary = true
   }
 
   /// Opens the system permission picker at Kindle's database directory.
   public func requestKindleLibraryImport() {
+    guard showImportWorkflowIfReady() else { return }
     #if os(macOS)
       let panel = NSOpenPanel()
       panel.canChooseDirectories = true
@@ -170,6 +197,16 @@ public final class BookishUIStateService {
         Task { @MainActor [weak self] in await self?.importKindleLibrary(from: url) }
       }
     #endif
+  }
+
+  /// Selects Import and preserves an existing proposal until it is applied or cancelled.
+  private func showImportWorkflowIfReady() -> Bool {
+    navigation.select(mainSection: .importing)
+    guard pendingImportPlan == nil, !isPreparingImport, !isApplyingImport else {
+      statusService.report(message: "Finish or cancel the current import first")
+      return false
+    }
+    return true
   }
 
   /// Requests an interchange file export.
@@ -227,10 +264,12 @@ public final class BookishUIStateService {
 
   /// Imports one of the Delicious Library sample files bundled with Bookish.
   public func importDeliciousLibrary(sample: DeliciousLibrarySample) async {
+    guard showImportWorkflowIfReady() else { return }
     do {
       await importDeliciousLibrary(
         from: try BookishImporterSamples.deliciousLibraryURL(for: sample))
     } catch {
+      importErrorMessage = error.localizedDescription
       statusService.report(error: error)
     }
   }
@@ -241,6 +280,13 @@ public final class BookishUIStateService {
     perform import: (@escaping BookishImportEventReporter) async throws -> BookishImportPlan
   ) async {
     var displayName = fallbackDisplayName
+    guard showImportWorkflowIfReady() else { return }
+    pendingImportPlan = nil
+    importChoices = [:]
+    lastImportResult = nil
+    importErrorMessage = nil
+    isPreparingImport = true
+    defer { isPreparingImport = false }
 
     do {
       let plan = try await `import` { [self] event in
@@ -266,8 +312,8 @@ public final class BookishUIStateService {
       }
 
       pendingImportPlan = plan
+      importChoices = plan.defaultChoices
       pendingImportDisplayName = displayName
-      isReviewingImport = true
       statusService.report(
         message:
           "Review \(plan.entries.count) \(displayName) \(plan.entries.count == 1 ? "record" : "records")"
@@ -275,6 +321,7 @@ public final class BookishUIStateService {
     } catch is CancellationError {
       statusService.report(message: "Import cancelled")
     } catch {
+      importErrorMessage = error.localizedDescription
       statusService.report(error: error)
     }
 
@@ -283,23 +330,52 @@ public final class BookishUIStateService {
 
   /// Applies the reviewed proposal and refreshes the visible catalogue.
   public func applyPendingImport(choices: [BookishRecordID: BookishImportChoice]) async {
-    guard let plan = pendingImportPlan else { return }
+    guard let plan = pendingImportPlan, !isApplyingImport else { return }
+    isApplyingImport = true
+    defer { isApplyingImport = false }
     do {
       let resolution = try await importingService.apply(plan, choices: choices)
       pendingImportPlan = nil
-      isReviewingImport = false
+      importChoices = [:]
+      importErrorMessage = nil
+      lastImportResult = BookishImportWorkflowResult(
+        sourceName: pendingImportDisplayName, importedRecords: resolution.records,
+        skippedCount: plan.skippedCount,
+        reusedCount: choices.values.filter {
+          switch $0 {
+          case .keepExisting, .useExisting: true
+          case .create, .replaceExisting: false
+          }
+        }.count)
       try await refreshBrowser()
-      if let firstBook = resolution.records.first(where: { $0.kind == BookishRecordKind.book })
-        ?? resolution.records.first
-      {
-        navigation.select(recordID: firstBook.id)
-      }
       let count = resolution.records.count
       statusService.report(
         message:
           "Imported \(count) \(pendingImportDisplayName) \(count == 1 ? "record" : "records")")
     } catch {
+      importErrorMessage = error.localizedDescription
       statusService.report(error: error)
+    }
+  }
+
+  /// Applies the choices currently shown in the Import workflow.
+  public func applyPendingImport() async {
+    await applyPendingImport(choices: importChoices)
+  }
+
+  /// Sets one review choice.
+  public func setImportChoice(_ choice: BookishImportChoice, for id: BookishRecordID) {
+    guard pendingImportPlan?.reviewEntries.contains(where: { $0.id == id }) == true else { return }
+    importChoices[id] = choice
+  }
+
+  /// Sets the preference for selected review entries in one operation.
+  public func setImportChoices(
+    for ids: Set<BookishRecordID>, preferring preference: BookishImportPreference
+  ) {
+    guard let pendingImportPlan else { return }
+    importChoices.merge(pendingImportPlan.choices(for: ids, preferring: preference)) { _, new in
+      new
     }
   }
 
@@ -307,7 +383,7 @@ public final class BookishUIStateService {
   public func cancelPendingImport() {
     guard pendingImportPlan != nil else { return }
     pendingImportPlan = nil
-    isReviewingImport = false
+    importChoices = [:]
     statusService.report(message: "Import cancelled")
   }
 

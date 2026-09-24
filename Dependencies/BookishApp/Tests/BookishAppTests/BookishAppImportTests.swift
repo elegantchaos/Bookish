@@ -107,12 +107,45 @@ import Testing
       """
     await harness.importInterchange(data: Data(json.utf8))
     #expect(harness.pendingImportPlan != nil)
+    #expect(harness.navigation.selectedMainSection == .importing)
     await harness.applyPendingImport(choices: [:])
     let importedID = BookishRecordID("test-import-book")
     #expect(harness.navigation.recordIDs.contains(importedID))
     #expect(
       try await harness.storageService.record(id: importedID)?.string("name") == "Imported Book")
     #expect(harness.statusService.message == "Imported 1 Bookish interchange record")
+    #expect(harness.navigation.selectedMainSection == .importing)
+    #expect(harness.lastImportResult?.importedRecords.map(\.id) == [importedID])
+  }
+
+  @Test func reviewDefaultsToExistingAndBulkChoiceChangesOnlySelectedRows() async throws {
+    let harness = try makeHarness()
+    await harness.load()
+    let existingID = BookishRecordID("existing-asin-book")
+    try await harness.storageService.upsert(records: [
+      BookishRecord(
+        id: existingID, kind: BookishRecordKind.book,
+        properties: [
+          BookishRecordKey.name: .string("Existing Book"),
+          BookishRecordKey.asin: .string("B000000001"),
+        ])
+    ])
+    let proposedID = BookishRecordID("proposed-asin-book")
+    await harness.importInterchange(
+      data: Data(
+        """
+        { "records": [{ "ℹ": "proposed-asin-book", "©": "book", "name": "Proposed Book", "asin": "B000000001" }] }
+        """.utf8))
+
+    #expect(harness.importChoices[proposedID] == .useExisting(existingID))
+    #expect(harness.canApplyPendingImport)
+    harness.setImportChoices(for: [proposedID], preferring: .imported)
+    #expect(harness.importChoices[proposedID] == .create)
+    harness.setImportChoices(for: [proposedID], preferring: .existing)
+    await harness.applyPendingImport()
+    #expect(try await harness.storageService.record(id: proposedID) == nil)
+    #expect(harness.lastImportResult?.reusedCount == 1)
+    #expect(harness.lastImportResult?.importedRecords.isEmpty == true)
   }
 
   @Test func harnessImportsDeliciousLibraryData() async throws {

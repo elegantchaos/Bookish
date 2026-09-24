@@ -17,7 +17,9 @@ struct BookishMainSectionView: View {
       BookCaptureView()
     case .lookup:
       BookLookupView()
-    case .importing, .cleanup:
+    case .importing:
+      BookishImportWorkflowView()
+    case .cleanup:
       ContentUnavailableView(
         section.title,
         systemImage: section.systemImage,

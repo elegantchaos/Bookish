@@ -588,6 +588,7 @@ struct BookishAppTests {
     try await commander.perform(ImportOtherDeliciousLibraryCommand())
 
     #expect(harness.isImportingDeliciousLibrary)
+    #expect(harness.navigation.selectedMainSection == .importing)
   }
 
   @MainActor
@@ -600,6 +601,7 @@ struct BookishAppTests {
 
     try await commander.perform(ImportDeliciousLibrarySampleCommand(sample: .small))
     let plan = try #require(harness.pendingImportPlan)
+    #expect(harness.navigation.selectedMainSection == .importing)
     let choices = Dictionary(
       uniqueKeysWithValues: plan.reviewEntries.map { entry in
         (entry.id, BookishImportChoice.create)

@@ -73,6 +73,37 @@ public struct BookishImportPlan: Equatable, Sendable {
   public var newCount: Int { entries.filter { $0.match == .create }.count }
   public var skippedCount: Int { entries.filter { $0.match == .skip }.count }
 
+  /// Conservative initial choices for every record requiring review.
+  public var defaultChoices: [BookishRecordID: BookishImportChoice] {
+    choices(for: Set(reviewEntries.map(\.id)), preferring: .existing)
+  }
+
+  /// Choices for selected review records, suitable for a bulk action.
+  public func choices(
+    for selectedIDs: Set<BookishRecordID>, preferring preference: BookishImportPreference
+  ) -> [BookishRecordID: BookishImportChoice] {
+    Dictionary(
+      uniqueKeysWithValues: reviewEntries.compactMap { entry in
+        guard selectedIDs.contains(entry.id),
+          case .review(let candidates, let sameID) = entry.match
+        else { return nil }
+        let choice: BookishImportChoice
+        switch preference {
+        case .existing:
+          if sameID {
+            choice = .keepExisting
+          } else if let first = candidates.min(by: { $0.rawValue < $1.rawValue }) {
+            choice = .useExisting(first)
+          } else {
+            return nil
+          }
+        case .imported:
+          choice = sameID ? .replaceExisting : .create
+        }
+        return (entry.id, choice)
+      })
+  }
+
   public init(
     sourceID: String, root: BookishRecordID?, entries: [BookishImportPlanEntry],
     existingSnapshot: [BookishRecord], diagnostics: [String] = []

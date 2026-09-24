@@ -30,6 +30,8 @@ struct CommandProviderTests {
     try await centre.perform(ImportDeliciousLibrarySampleCommand(sample: .small))
     try await centre.perform(ImportSelectedInterchangeCommand(url: interchangeURL))
     try await centre.perform(ImportSelectedDeliciousLibraryCommand(url: deliciousLibraryURL))
+    try await centre.perform(ApplyPendingImportCommand())
+    try await centre.perform(CancelPendingImportCommand())
 
     #expect(importPresentation.requestedInterchangeImport)
     #expect(importPresentation.requestedDeliciousLibraryImport)
@@ -37,6 +39,8 @@ struct CommandProviderTests {
     #expect(importPresentation.importedSample == .small)
     #expect(importPresentation.importedInterchangeURL == interchangeURL)
     #expect(importPresentation.importedDeliciousLibraryURL == deliciousLibraryURL)
+    #expect(importPresentation.appliedPendingImport)
+    #expect(importPresentation.cancelledPendingImport)
   }
 
   @Test
@@ -343,6 +347,9 @@ private final class TestBookRecognitionWorkflow: BookishRecognition {
 
 @MainActor
 private final class TestImportPresentation: BookishImportPresentation {
+  var canApplyPendingImport = true
+  private(set) var appliedPendingImport = false
+  private(set) var cancelledPendingImport = false
   private(set) var requestedInterchangeImport = false
   private(set) var requestedDeliciousLibraryImport = false
   private(set) var requestedKindleLibraryImport = false
@@ -377,6 +384,14 @@ private final class TestImportPresentation: BookishImportPresentation {
 
   func importKindleLibrary(from url: URL) async {
     importedKindleLibraryURL = url
+  }
+
+  func applyPendingImport() async {
+    appliedPendingImport = true
+  }
+
+  func cancelPendingImport() {
+    cancelledPendingImport = true
   }
 }
 
