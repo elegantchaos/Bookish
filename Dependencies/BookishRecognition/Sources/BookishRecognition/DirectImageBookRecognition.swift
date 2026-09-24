@@ -15,11 +15,15 @@ struct DirectImageBookRecognition {
     in imageData: Data,
     using model: some LanguageModel
   ) async throws -> [BookRecognitionCandidate] {
+    #if targetEnvironment(simulator)
+      let tools: [any Tool] = []
+    #else
+      let tools: [any Tool] = [OCRTool()]
+    #endif
+
     let session = LanguageModelSession(
       model: model,
-      tools: [
-        OCRTool()
-      ],
+      tools: tools,
       instructions:
         "You identify books from supplied images. Return only books supported by visible evidence. Do not invent titles, authors, editions, or ISBNs."
     )
