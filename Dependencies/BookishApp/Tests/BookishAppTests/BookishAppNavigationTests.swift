@@ -75,6 +75,59 @@ import Testing
   }
 
   @Test
+  func liveQueryRemovalClearsSelectedDetailWithoutSelectingAnotherRecord() {
+    let navigation = BookishNavigationService()
+    let result = RecordQueryResult(query: RecordQuery(predicate: .kind("book")))
+    let first = BookishRecord(id: BookishRecordID("book-1"), kind: "book")
+    let second = BookishRecord(id: BookishRecordID("book-2"), kind: "book")
+    result.update(records: [first, second])
+    navigation.update(selectedRecordResult: result)
+    navigation.select(recordID: second.id)
+    navigation.push(recordID: BookishRecordID("linked-record"))
+
+    result.update(records: [first])
+
+    #expect(navigation.selectedRecordID == nil)
+    #expect(navigation.recordNavigationPath.isEmpty)
+    #expect(navigation.selectedRecordIDs == [first.id])
+
+    result.update(records: [first, second])
+    #expect(navigation.selectedRecordID == nil)
+  }
+
+  @Test
+  func liveQueryChangePreservesSelectionWhileItsRecordRemains() {
+    let navigation = BookishNavigationService()
+    let result = RecordQueryResult(query: RecordQuery(predicate: .kind("book")))
+    let first = BookishRecord(id: BookishRecordID("book-1"), kind: "book")
+    let second = BookishRecord(id: BookishRecordID("book-2"), kind: "book")
+    result.update(records: [first, second])
+    navigation.update(selectedRecordResult: result)
+    navigation.select(recordID: second.id)
+
+    result.update(records: [second])
+
+    #expect(navigation.selectedRecordID == second.id)
+  }
+
+  @Test
+  func navigationStopsObservingThePreviousQueryResult() {
+    let navigation = BookishNavigationService()
+    let previous = RecordQueryResult(query: RecordQuery(predicate: .kind("book")))
+    let active = RecordQueryResult(query: RecordQuery(predicate: .kind("author")))
+    let book = BookishRecord(id: BookishRecordID("book-1"), kind: "book")
+    let author = BookishRecord(id: BookishRecordID("author-1"), kind: "author")
+    previous.update(records: [book])
+    active.update(records: [author])
+    navigation.update(selectedRecordResult: previous)
+    navigation.update(selectedRecordResult: active)
+
+    previous.update(records: [])
+
+    #expect(navigation.selectedRecordID == author.id)
+  }
+
+  @Test
   func selectingMainSectionPreservesTheBrowserIndexAndClearsLinkedNavigation() throws {
     let navigation = BookishNavigationService()
     let recordIndexResult = RecordQueryResult(query: RecordQuery())

@@ -1,4 +1,5 @@
 import BookishCoding
+import BookishDatastore
 import BookishImporter
 import BookishRecord
 import Foundation
@@ -231,13 +232,53 @@ import Testing
     await harness.importInterchange(data: Data(json.utf8))
     await harness.applyPendingImport(choices: [:])
     #expect(!harness.navigation.recordIDs.isEmpty)
+    harness.navigation.select(recordID: BookishRecordID("test-command-reset-book"))
+    #expect(harness.navigation.selectedRecordID == BookishRecordID("test-command-reset-book"))
     try await commander.perform(ResetDatastoreCommand())
-    #expect(!harness.navigation.recordIDs.isEmpty)
+    #expect(!harness.navigation.recordIDs.contains(BookishRecordID("test-command-reset-book")))
+    #expect(harness.navigation.selectedRecordID == nil)
     #expect(try await harness.storageService.record(id: BookishRecordID("seed-book")) == nil)
     #expect(
       try await harness.storageService.record(id: BookishRecordID("datastore-seed-marker"))?.kind
         == BookishRecordKind.seedMarker)
     #expect((try await harness.storageService.mutations()).isEmpty)
     #expect(harness.statusService.message == "Reset datastore")
+  }
+
+  @Test func recordQueryResultFollowsResetAndLaterMutations() async throws {
+    let storage = BookishStorageService(directoryURL: try temporaryDirectory())
+    try await storage.load()
+    let query = RecordQuery(predicate: .kind(BookishRecordKind.book), sort: [.id])
+    let result = try await storage.recordQueryResult(matching: query)
+    let book = BookishRecord(id: BookishRecordID("after-reset"), kind: BookishRecordKind.book)
+
+    try await storage.upsert(records: [book])
+    #expect(result.records.contains(book))
+
+    try await storage.reset()
+    #expect(result.records.isEmpty)
+    #expect(try await storage.recordQueryResult(matching: query) === result)
+
+    try await storage.upsert(records: [book])
+    #expect(result.records == [book])
+  }
+
+  @Test func recordQueryResultFollowsProjectionRebuild() async throws {
+    let storage = BookishStorageService(directoryURL: try temporaryDirectory())
+    try await storage.load()
+    let query = RecordQuery(predicate: .kind(BookishRecordKind.book), sort: [.id])
+    let result = try await storage.recordQueryResult(matching: query)
+    let book = BookishRecord(id: BookishRecordID("rebuilt-book"), kind: BookishRecordKind.book)
+    try await storage.upsert(records: [book])
+
+    try await storage.rebuildRecordProjection()
+
+    #expect(result.records.contains(book))
+    #expect(try await storage.recordQueryResult(matching: query) === result)
+    let revision = result.revision
+    try await storage.upsert(records: [
+      BookishRecord(id: BookishRecordID("unrelated-person"), kind: BookishRecordKind.person)
+    ])
+    #expect(result.revision == revision)
   }
 }

@@ -56,14 +56,19 @@ public final class BookishStorageService {
   /// Opens, seeds, and retains the datastore.
   func load() async throws {
     let directory = try localDatastoreDirectory()
+    let queryService = datastore?.recordQueryService
     do {
-      datastore = try await BookishDatastore(directoryURL: directory)
+      datastore = try await BookishDatastore(
+        directoryURL: directory, recordQueryService: queryService)
     } catch {
       datastore = try await BookishDatastore.rebuildRecordProjection(
-        directoryURL: directory
+        directoryURL: directory, recordQueryService: queryService
       )
     }
     try await seed()
+    if let queryService, let datastore {
+      await queryService.replaceStore(with: datastore.recordStore)
+    }
   }
 
   /// Applies imported records as durable local mutations.
@@ -241,11 +246,15 @@ extension BookishStorageService: BookishStorage {
   /// Rebuilds the materialised record projection and reapplies configuration seeds.
   public func rebuildRecordProjection() async throws {
     let directory = try localDatastoreDirectory()
-    datastore = nil
+    let queryService = datastore?.recordQueryService
     datastore = try await BookishDatastore.rebuildRecordProjection(
-      directoryURL: directory
+      directoryURL: directory,
+      recordQueryService: queryService
     )
     try await seed()
+    if let queryService, let datastore {
+      await queryService.replaceStore(with: datastore.recordStore)
+    }
   }
 
   /// Returns the local directory used for datastore files.
@@ -278,10 +287,15 @@ extension BookishStorageService: BookishStorage {
   /// Resets the datastore, opens an empty replacement, and reapplies configuration seeds.
   public func reset() async throws {
     let directory = try localDatastoreDirectory()
+    let queryService = datastore?.recordQueryService
     try BookishDatastore.reset(directoryURL: directory)
-    datastore = try await BookishDatastore(directoryURL: directory)
+    datastore = try await BookishDatastore(
+      directoryURL: directory, recordQueryService: queryService)
     _ = try await importConfigurationSeeds()
     try await writeSeedMarker()
+    if let queryService, let datastore {
+      await queryService.replaceStore(with: datastore.recordStore)
+    }
   }
 
 }

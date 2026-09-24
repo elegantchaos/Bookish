@@ -730,7 +730,14 @@ struct BookishAppTests {
     let storageService =
       navigation?.storageService ?? BookishStorageService(directoryURL: directoryURL)
     storageService.configure(directoryURL: directoryURL)
-    let navigation = navigation ?? BookishNavigationService(storageService: storageService)
+    let suiteName = "BookishAppTests-\(UUID().uuidString)"
+    guard let settings = UserDefaults(suiteName: suiteName) else {
+      preconditionFailure("Could not create test settings suite")
+    }
+    let navigation =
+      navigation
+      ?? BookishNavigationService(
+        storageService: storageService, settings: settings)
     let presentationService = BookishPresentationService(storageService: storageService)
     let statusService = BookishStatusService()
     let importingService = BookishImportingService(storageService: storageService)

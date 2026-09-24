@@ -14,8 +14,9 @@ public protocol RecordQueryService: Sendable {
 
 /// Default query service backed by a materialised record store.
 public actor DefaultRecordQueryService<Store: RecordStore>: RecordQueryService {
-  private let store: Store
+  private var store: Store
   private var results: [RecordQueryResult]
+  private var refreshVersion = 0
 
   /// Creates a query service.
   public init(store: Store) {
@@ -27,31 +28,55 @@ public actor DefaultRecordQueryService<Store: RecordStore>: RecordQueryService {
   public func result(matching query: RecordQuery) async throws -> RecordQueryResult {
     for result in results {
       if await result.matches(query) {
-        try await refresh(result)
+        let version = nextRefreshVersion()
+        try await refresh(result, from: store, version: version)
         return result
       }
     }
 
     let result = await RecordQueryResult(query: query)
     results.append(result)
-    try await refresh(result)
+    let version = nextRefreshVersion()
+    try await refresh(result, from: store, version: version)
     return result
   }
 
   /// Refreshes all live results known to this service.
   public func refreshResults() async {
+    let version = nextRefreshVersion()
+    let store = self.store
     for result in results {
       do {
-        try await refresh(result)
+        try await refresh(result, from: store, version: version)
       } catch {
-        await result.fail(error: error)
+        await result.fail(error: error, version: version)
       }
     }
   }
 
-  private func refresh(_ result: RecordQueryResult) async throws {
+  /// Retargets existing observable results when a datastore replaces its record store.
+  public func replaceStore(with store: Store) async {
+    self.store = store
+    await refreshResults()
+  }
+
+  private func nextRefreshVersion() -> Int {
+    refreshVersion += 1
+    return refreshVersion
+  }
+
+  private func refresh(_ result: RecordQueryResult, from store: Store, version: Int) async throws {
     let query = await result.query
     let records = try await store.records(matching: query)
-    await result.update(records: records)
+    while true {
+      let snapshot = await result.snapshot()
+      let unchanged = snapshot.records == records
+      if await result.update(
+        records: records, version: version, comparedRevision: snapshot.revision,
+        unchanged: unchanged)
+      {
+        return
+      }
+    }
   }
 }

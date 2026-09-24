@@ -105,6 +105,14 @@ Views do not write directly to the record store. Editing a data record, layout, 
 
 User customisation should not require knowledge of mutations, encoded payloads, or the datastore's internal representation.
 
+## Query Refresh and Scaling
+
+The query service retains observable results across projection rebuilds and datastore resets. Mutations refresh cached results; replacing the store refreshes the same result objects after the replacement is ready. A result publishes only when its ordered records or error state changes. Query filtering and sorting run in the record-store actor, and the query service compares the result with the previous snapshot outside the main actor. Publication of the final result crosses to the main actor.
+
+Navigation observes the active query result. When its selected record leaves that result, navigation clears the selected detail and linked-record path. Other result changes preserve the selection, and a removed selection does not automatically move to another record.
+
+The current JSON store scans and sorts the full in-memory projection for every cached query after each mutation. This is correct for mutation-driven changes, but its cost grows with both the catalogue and the number of cached queries. A later implementation should send the query service the changed record's before/after values and affected property keys. For each cached query, it can test whether either value matches, whether the change affects ordering or returned record data, and skip queries with no possible result change. Query dependencies can be extracted from predicates and sort descriptors. An index-backed store can then maintain matching IDs and ordering incrementally, or push filtering and sorting into its storage engine. Keep query work outside the main actor and publish an immutable ordered result only when it differs. Measure mutation-to-result latency before considering partial result delivery; partial updates would add UI churn and complicate stable ordering.
+
 ## Implementation Status
 
 Implemented now:

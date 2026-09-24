@@ -341,6 +341,26 @@ struct BookishDatastoreTests {
   }
 
   @Test
+  @MainActor
+  func recordQueryResultIgnoresStaleRefreshes() {
+    let result = RecordQueryResult(query: RecordQuery(predicate: .kind("book")))
+    let current = BookishRecord(id: BookishRecordID("current"), kind: "book")
+    let stale = BookishRecord(id: BookishRecordID("stale"), kind: "book")
+
+    result.update(records: [current], version: 2, comparedRevision: 0, unchanged: false)
+    let revision = result.revision
+    result.update(records: [stale], version: 1, comparedRevision: revision, unchanged: false)
+
+    #expect(result.records == [current])
+    #expect(result.revision == revision)
+    #expect(!result.update(records: [current], version: 3, comparedRevision: 0, unchanged: true))
+    #expect(
+      result.update(
+        records: [current], version: 3, comparedRevision: revision, unchanged: true))
+    #expect(result.revision == revision)
+  }
+
+  @Test
 
   func mutationStoreRemoveAllClearsPersistedMutations() async throws {
     let directory = try temporaryDirectory()

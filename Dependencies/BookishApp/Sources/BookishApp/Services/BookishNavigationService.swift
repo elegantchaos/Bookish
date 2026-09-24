@@ -97,6 +97,10 @@ public final class BookishNavigationService {
   /// The records matching the selected browser index.
   public private(set) var selectedRecordResult: RecordQueryResult?
 
+  /// The membership callback registered on the selected query result.
+  @ObservationIgnored private var selectedResultObservation:
+    (result: RecordQueryResult, token: UUID)?
+
   /// The text used to limit the selected index to partially matching record names.
   public private(set) var recordNameFilter = ""
 
@@ -184,7 +188,7 @@ public final class BookishNavigationService {
     self.recordIndexResult = recordIndexResult
     if !isSelectedRecordIndexValid {
       selectedRecordIndexID = recordIndexes.first?.id
-      selectedRecordResult = nil
+      setSelectedRecordResult(nil)
       selectedRecordID = nil
       recordNavigationPath = []
       isRecordSelectionCleared = false
@@ -194,15 +198,38 @@ public final class BookishNavigationService {
 
   /// Updates the selected browser content result.
   public func update(selectedRecordResult: RecordQueryResult?) {
-    self.selectedRecordResult = selectedRecordResult
+    setSelectedRecordResult(selectedRecordResult)
     selectValidRecord()
+  }
+
+  /// Replaces the observed result when the browser changes indexes or queries.
+  private func setSelectedRecordResult(_ result: RecordQueryResult?) {
+    if let selectedResultObservation {
+      selectedResultObservation.result.removeRecordsObserver(selectedResultObservation.token)
+    }
+    selectedRecordResult = result
+    selectedResultObservation = nil
+    if let result {
+      let token = result.observeRecords { [weak self] in
+        self?.clearSelectionIfRecordDisappeared()
+      }
+      selectedResultObservation = (result, token)
+    }
+  }
+
+  /// Clears detail navigation when the selected record leaves the active result.
+  private func clearSelectionIfRecordDisappeared() {
+    guard let selectedRecordID, !selectedRecordIDs.contains(selectedRecordID) else { return }
+    self.selectedRecordID = nil
+    recordNavigationPath = []
+    isRecordSelectionCleared = true
   }
 
   /// Clears the route.
   public func reset() {
     recordIndexResult = nil
     selectedRecordIndexID = nil
-    selectedRecordResult = nil
+    setSelectedRecordResult(nil)
     recordNameFilter = ""
     selectedRecordID = nil
     recordNavigationPath = []
@@ -229,7 +256,7 @@ public final class BookishNavigationService {
 
     guard let recordIndexID, recordIndexIDs.contains(recordIndexID) else {
       selectedRecordIndexID = recordIndexes.first?.id
-      selectedRecordResult = nil
+      setSelectedRecordResult(nil)
       selectedRecordID = nil
       recordNavigationPath = []
       isRecordSelectionCleared = false
@@ -243,7 +270,7 @@ public final class BookishNavigationService {
     }
 
     selectedRecordIndexID = recordIndexID
-    selectedRecordResult = nil
+    setSelectedRecordResult(nil)
     selectedRecordID = nil
     recordNavigationPath = []
     isRecordSelectionCleared = false

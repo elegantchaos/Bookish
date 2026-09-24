@@ -18,13 +18,16 @@ public struct BookishDatastore: Sendable {
   public let mutationService: DefaultMutationService<JSONRecordStore, JSONMutationStore>
 
   /// Creates a datastore datastore using dedicated record and mutation directories below a directory.
-  public init(directoryURL: URL) async throws {
+  public init(
+    directoryURL: URL,
+    recordQueryService existingQueryService: DefaultRecordQueryService<JSONRecordStore>? = nil
+  ) async throws {
     self.recordStore = try await JSONRecordStore(
       directoryURL: directoryURL.appending(path: "records", directoryHint: .isDirectory))
     self.mutationStore = try await JSONMutationStore(
       directoryURL: directoryURL.appending(path: "mutations", directoryHint: .isDirectory))
     self.recordService = DefaultRecordService(store: recordStore)
-    let recordQueryService = DefaultRecordQueryService(store: recordStore)
+    let recordQueryService = existingQueryService ?? DefaultRecordQueryService(store: recordStore)
     self.recordQueryService = recordQueryService
     self.mutationService = DefaultMutationService(
       recordStore: recordStore,
@@ -36,7 +39,10 @@ public struct BookishDatastore: Sendable {
   }
 
   /// Discards the materialised record projection and recreates it from stored mutations.
-  public static func rebuildRecordProjection(directoryURL: URL) async throws -> BookishDatastore {
+  public static func rebuildRecordProjection(
+    directoryURL: URL,
+    recordQueryService: DefaultRecordQueryService<JSONRecordStore>? = nil
+  ) async throws -> BookishDatastore {
     let recordsDirectory = directoryURL.appending(path: "records", directoryHint: .isDirectory)
     let legacyRecordsFile = directoryURL.appending(path: "records.json")
 
@@ -47,7 +53,8 @@ public struct BookishDatastore: Sendable {
       try FileManager.default.removeItem(at: legacyRecordsFile)
     }
 
-    let datastore = try await BookishDatastore(directoryURL: directoryURL)
+    let datastore = try await BookishDatastore(
+      directoryURL: directoryURL, recordQueryService: recordQueryService)
     try await datastore.mutationService.rebuildRecordProjection()
     return datastore
   }
