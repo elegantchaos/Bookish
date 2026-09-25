@@ -52,6 +52,29 @@ import Testing
   }
 
   @Test
+  func selectingIndexShowsItsRecordsWithoutSelectingOne() async throws {
+    let harness = try makeHarness()
+    await harness.load()
+    let navigation = harness.navigation
+    let booksIndexID = BookishRecordID("datastore-index-books")
+
+    try await navigation.select(recordIndexID: booksIndexID)
+
+    #expect(navigation.selectedRecordIndexID == booksIndexID)
+    #expect(navigation.selectedRecordIDs.contains(BookishRecordID("seed-book")))
+    #expect(navigation.selectedRecordID == nil)
+
+    navigation.select(recordID: BookishRecordID("seed-book"))
+    #expect(navigation.selectedRecordID == BookishRecordID("seed-book"))
+
+    try await navigation.select(recordIndexID: booksIndexID)
+    #expect(navigation.selectedRecordID == nil)
+
+    try await navigation.refreshSelectedRecordIndex()
+    #expect(navigation.selectedRecordID == nil)
+  }
+
+  @Test
   func clearingRecordSelectionKeepsTheBrowserOnItsIndex() {
     let navigation = BookishNavigationService()
     let selectedRecordResult = RecordQueryResult(query: RecordQuery())
@@ -203,10 +226,12 @@ import Testing
     try await commander.perform(SelectNextRecordIndexCommand())
 
     #expect(harness.navigation.selectedRecordIndexName == "Indexes")
+    #expect(harness.navigation.selectedRecordID == nil)
 
     try await commander.perform(SelectPreviousRecordIndexCommand())
 
     #expect(harness.navigation.selectedRecordIndexName == "Layouts")
+    #expect(harness.navigation.selectedRecordID == nil)
 
     let navigationCommander = makeEngine()
     let navigation = navigationCommander.navigation
