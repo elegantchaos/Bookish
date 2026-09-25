@@ -1,11 +1,13 @@
 # 2026-09-25 Service Design Diagrams
 
-The command and environment design document was brought up to date with the
-finished service design and illustrated with three Excalidraw diagrams: the
-service shape, the service dependency map, and the service surfaces with the
-views that observe each `State`. The service shape diagram replaces the
-document's earlier text diagram. The document also gained a service table and
-the rule that command availability reads only observable state.
+The service documentation was brought up to date and split in two. The command
+and environment design document now describes only the design: the engine and
+commander, commands and `Access` protocols, the service shape, and the view and
+environment rules. Its earlier text diagram was replaced by an Excalidraw
+service-shape diagram. The new application services document lists each
+service's purpose, `State`, `API`, and collaborators, with diagrams of the
+service dependencies and of the views that observe each `State`, the temporary
+browser refresh, and the source layout.
 
 The drawings live in a Bookish collection in Excalidraw+, created through the
 Excalidraw MCP. The repository holds each scene's `.excalidraw` source and a

@@ -13,9 +13,8 @@ The package currently includes:
 - `BookishCommander`, the command façade injected into SwiftUI.
 - Application services in `Services/`, each with the nested
   `State`/`API`/`Access` shape described in
-  `Extras/Documentation/Command and Environment Design.md`: storage, navigation,
-  presentation, browser refresh, status, importing, exporting, record creation,
-  record actions, recognition, lookup, and settings presentation.
+  `Extras/Documentation/Command and Environment Design.md`. Each service's
+  purpose is listed in `Extras/Documentation/Application Services.md`.
 - Commands in `Commands/`, each generic over the smallest service `Access` protocol.
 - `BookishRootView`, the root SwiftUI interface with the sidebar, record index,
   record detail, and workflow views.
