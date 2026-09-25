@@ -6,6 +6,7 @@
 - Use SwiftData only within the datastore implementation; do not use Core Data.
 - Keep a development journal in `Extras/Journal/`.
 - Keep a decision log in `Extras/Decisions/`.
+- Ask before adding migrations, shims or indirection layers for compatibility; I am the only developer and currently the only user.
 
 # Standard Rules
 
