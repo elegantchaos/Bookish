@@ -17,7 +17,7 @@ struct BookishEnvironmentInjector: ViewModifier {
       .environment(engine.navigation)
       .environment(engine.storage)
       .environment(engine.presentationService)
-      .environment(engine.status)
+      .environment(engine.status.state)
       .environment(engine.recognition)
       .environment(engine.lookup)
       .environment(engine.commander)

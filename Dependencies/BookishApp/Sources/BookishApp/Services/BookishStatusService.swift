@@ -4,57 +4,80 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 import BookishImporter
+import Commands
 import Observation
 
-/// Reports user-facing messages and progress for Bookish operations.
+/// Owns status reporting and the state displayed by Bookish views.
 @MainActor
-public protocol BookishStatus {
-  /// The current user-facing status message.
-  var message: String { get }
-
-  /// The import progress currently shown by the user interface.
-  var importProgress: BookishImportProgress? { get }
-
-  /// Reports a user-facing message.
-  func report(message: String)
-
-  /// Reports an error using its localized description.
-  func report(error: Error)
-}
-
-/// Owns the observable status message and import progress presented by Bookish UI.
-@MainActor
-@Observable
 public final class BookishStatusService {
-  /// The current user-facing status message.
-  public private(set) var message: String
+  /// The status operations available to commands and collaborating services.
+  @MainActor
+  public protocol API {
+    /// Reports a user-facing message.
+    func report(message: String)
 
-  /// The import progress currently shown by the user interface.
-  public private(set) var importProgress: BookishImportProgress?
+    /// Reports an error using its localized description.
+    func report(error: Error)
+  }
+
+  /// Vends status reporting to commands.
+  @MainActor
+  public protocol Provider: CommandCentre {
+    /// The status API used by the command.
+    var statusService: any API { get }
+  }
+
+  /// The stable, observable status read by views.
+  @MainActor
+  @Observable
+  public final class State {
+    /// The current user-facing status message.
+    public fileprivate(set) var message: String
+
+    /// The import progress currently shown by the user interface.
+    public fileprivate(set) var importProgress: BookishImportProgress?
+
+    /// Creates the initial status projection.
+    fileprivate init(message: String) {
+      self.message = message
+      importProgress = nil
+    }
+
+    /// Shows a failure encountered while loading or presenting view content.
+    public func report(error: Error) {
+      message = error.localizedDescription
+    }
+  }
+
+  /// The view-facing status projection.
+  public let state: State
 
   /// Creates a status service with its initial user-facing message.
   public init(message: String = "Loading") {
-    self.message = message
+    state = State(message: message)
   }
 
   /// Updates the displayed import progress and its accompanying message.
   public func report(progress: BookishImportProgress) {
-    importProgress = progress
-    message = progress.message
+    state.importProgress = progress
+    state.message = progress.message
   }
 
   /// Stops displaying import progress while retaining the latest message.
   public func clearImportProgress() {
-    importProgress = nil
+    state.importProgress = nil
   }
 }
 
-extension BookishStatusService: BookishStatus {
+extension BookishStatusService: BookishStatusService.API {
   public func report(message: String) {
-    self.message = message
+    state.message = message
   }
 
   public func report(error: Error) {
-    message = error.localizedDescription
+    state.report(error: error)
   }
+}
+
+extension BookishEngine: BookishStatusService.Provider {
 }

@@ -14,7 +14,7 @@ import Icons
 
 /// Reveals the datastore folder in Finder.
 public struct RevealDatastoreFolderCommand<
-  Centre: BookishStorageProvider & BookishStatusProvider
+  Centre: BookishStorageProvider & BookishStatusService.Provider
 >: CommandWithUI {
   public typealias ResultType = Void
 

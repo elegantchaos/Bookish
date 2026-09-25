@@ -18,7 +18,7 @@ struct RecordLayoutItemView: View {
   let harness: BookishUIStateService
 
   /// The service used to report configuration failures.
-  @Environment(BookishStatusService.self) private var statusService
+  @Environment(BookishStatusService.State.self) private var status
 
   /// The navigation service used by record links in nested layouts.
   let navigation: BookishNavigationService
@@ -146,7 +146,7 @@ struct RecordLayoutItemView: View {
     } catch {
       configuration = nil
       errorDescription = error.localizedDescription
-      statusService.report(error: error)
+      status.report(error: error)
     }
   }
 

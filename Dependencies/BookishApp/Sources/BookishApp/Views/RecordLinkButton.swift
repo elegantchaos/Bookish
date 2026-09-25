@@ -18,8 +18,8 @@ struct RecordLinkButton: View {
   /// The application-owned command boundary used to push the linked record.
   @Environment(BookishCommander.self) private var commander
 
-  /// The service used to report link-resolution failures.
-  @Environment(BookishStatusService.self) private var statusService
+  /// Reports linked-record loading failures.
+  @Environment(BookishStatusService.State.self) private var status
 
   /// The resolved visual metadata for the link.
   @State private var presentation: BookishRecordLinkPresentation?
@@ -65,7 +65,7 @@ struct RecordLinkButton: View {
         placeholderSystemImage: try await harness.presentation.recordKindMetadata(for: record.kind)?
           .string(BookishRecordKey.icon) ?? "doc")
     } catch {
-      statusService.report(error: error)
+      status.report(error: error)
     }
   }
 }

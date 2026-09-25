@@ -25,7 +25,7 @@ struct BookishAppTests {
 
     await harness.load()
 
-    #expect(harness.statusService.message == "Ready")
+    #expect(harness.statusService.state.message == "Ready")
     #expect(
       try await harness.storageService.record(id: bookID)?.string("name") == "Recovered")
   }
@@ -35,7 +35,7 @@ struct BookishAppTests {
   func statusServiceStartsInLoadingState() {
     let harness = makeUIState()
 
-    #expect(harness.statusService.message == "Loading")
+    #expect(harness.statusService.state.message == "Loading")
     #expect(harness.navigation.recordIDs.isEmpty)
   }
 
@@ -43,18 +43,23 @@ struct BookishAppTests {
   @Test
   func statusServiceReportsProgressAndErrors() {
     let statusService = BookishStatusService()
+    let state = statusService.state
     let progress = BookishImportProgress(message: "Importing", completed: 2, total: 4)
 
     statusService.report(progress: progress)
 
-    #expect(statusService.message == "Importing")
-    #expect(statusService.importProgress == progress)
+    #expect(statusService.state === state)
+    #expect(state.message == "Importing")
+    #expect(state.importProgress == progress)
 
     statusService.clearImportProgress()
-    statusService.report(error: BookishStorageError.notLoaded)
+    state.report(error: BookishStorageError.notLoaded)
 
-    #expect(statusService.importProgress == nil)
-    #expect(statusService.message == BookishStorageError.notLoaded.localizedDescription)
+    #expect(state.importProgress == nil)
+    #expect(state.message == BookishStorageError.notLoaded.localizedDescription)
+
+    statusService.report(message: "Ready")
+    #expect(state.message == "Ready")
   }
 
   @MainActor
@@ -709,7 +714,7 @@ struct BookishAppTests {
 
     await commander.performWithoutWaiting(ThrowTestErrorCommand()).value
 
-    #expect(harness.statusService.message == "This is a test command error.")
+    #expect(harness.statusService.state.message == "This is a test command error.")
   }
 
   @MainActor
@@ -723,7 +728,7 @@ struct BookishAppTests {
     commander.statusService.report(message: "Reported through status capability")
 
     #expect(harness.isImportingInterchange)
-    #expect(harness.statusService.message == "Reported through status capability")
+    #expect(harness.statusService.state.message == "Reported through status capability")
     #expect(!commander.datastoreMaintenanceService.hasExportableRecords)
     #expect(!commander.recordActionService.hasSelectedRecord)
     #expect(!commander.navigationService.canSelectAnotherRecordIndex)
@@ -757,7 +762,7 @@ struct BookishAppTests {
 
     await engine.load()
 
-    #expect(engine.status.message == "Ready")
+    #expect(engine.status.state.message == "Ready")
     #expect(!engine.navigation.recordIndexIDs.isEmpty)
     #expect(engine.uiState.revision == 1)
   }
@@ -783,7 +788,7 @@ struct BookishAppTests {
     await engine.performWithoutWaiting(ThrowTestErrorCommand()).value
 
     #expect(engine.uiState.isImportingInterchange)
-    #expect(engine.status.message == "This is a test command error.")
+    #expect(engine.status.state.message == "This is a test command error.")
   }
 
   @MainActor
@@ -901,14 +906,14 @@ extension BookishUIStateService {
 @MainActor
 final class UIStateCommandCentre:
   CommandCentre,
-  BookishStatusProvider,
+  BookishStatusService.Provider,
   BookishImportPresentationProvider,
   BookishDatastoreMaintenanceProvider,
   BookishStorageProvider,
   BookishRecordActionsProvider,
   BookishNavigationProvider
 {
-  let statusService: any BookishStatus
+  let statusService: any BookishStatusService.API
   let importPresentation: any BookishImportPresentation
   let datastoreMaintenanceService: any BookishDatastoreMaintenance
   let storageService: any BookishStorage

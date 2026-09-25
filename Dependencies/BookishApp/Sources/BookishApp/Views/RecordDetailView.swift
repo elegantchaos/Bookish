@@ -12,6 +12,9 @@ struct RecordDetailView: View {
   /// The datastore coordinator used by record detail views.
   @Environment(BookishUIStateService.self) private var harness
 
+  /// The status shown when no record is selected.
+  @Environment(BookishStatusService.State.self) private var status
+
   /// The route containing the selected record and detail path.
   @Environment(BookishNavigationService.self) private var navigation
 
@@ -28,7 +31,7 @@ struct RecordDetailView: View {
         } else {
           ContentUnavailableView(
             "No Selection", systemImage: "list.bullet.rectangle",
-            description: Text(harness.statusService.message))
+            description: Text(status.message))
         }
       }
       .navigationDestination(for: BookishRecordID.self) { recordID in

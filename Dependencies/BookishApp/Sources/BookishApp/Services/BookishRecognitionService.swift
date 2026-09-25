@@ -19,7 +19,7 @@ public final class BookishRecognitionService: BookishRecognition {
   private unowned let state: BookishUIStateService
 
   /// The status service used to report successful additions.
-  private let statusService: any BookishStatus
+  private let statusService: any BookishStatusService.API
 
   /// The registry that owns the recognition providers available to the application.
   private let registry: BookRecognitionProviderRegistry
@@ -49,7 +49,7 @@ public final class BookishRecognitionService: BookishRecognition {
   init(
     storage: BookishStorageService,
     state: BookishUIStateService,
-    statusService: any BookishStatus,
+    statusService: any BookishStatusService.API,
     recognitionProviders: [any BookRecognitionProvider],
     settings: UserDefaults
   ) {

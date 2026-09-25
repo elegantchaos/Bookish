@@ -16,7 +16,7 @@ struct BookishRecordIDCell: View {
   let harness: BookishUIStateService
 
   /// The service used to report record-resolution failures.
-  @Environment(BookishStatusService.self) private var statusService
+  @Environment(BookishStatusService.State.self) private var status
 
   /// The resolved record, when available.
   @State private var record: BookishRecord?
@@ -62,7 +62,7 @@ struct BookishRecordIDCell: View {
           for: record.kind, layout: layout)
       }
     } catch {
-      statusService.report(error: error)
+      status.report(error: error)
     }
   }
 }

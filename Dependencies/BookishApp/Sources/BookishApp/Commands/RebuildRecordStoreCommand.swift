@@ -8,7 +8,9 @@ import Foundation
 import Icons
 
 /// Rebuilds the materialised record projection from stored mutations.
-public struct RebuildRecordStoreCommand<Centre: BookishStorageProvider & BookishStatusProvider>:
+public struct RebuildRecordStoreCommand<
+  Centre: BookishStorageProvider & BookishStatusService.Provider
+>:
   CommandWithUI
 {
   public typealias ResultType = Void

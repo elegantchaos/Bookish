@@ -15,11 +15,11 @@ struct BookishRecordIDDetail: View {
   /// The datastore coordinator used to resolve record presentation.
   let harness: BookishUIStateService
 
-  /// The service used to report record-detail failures.
-  @Environment(BookishStatusService.self) private var statusService
-
   /// The command boundary for actions on this visible record.
   @Environment(BookishCommander.self) private var commander
+
+  /// Reports record and presentation loading failures.
+  @Environment(BookishStatusService.State.self) private var status
 
   #if os(iOS)
     /// The current width class used to avoid a duplicate record title on compact screens.
@@ -113,7 +113,7 @@ struct BookishRecordIDDetail: View {
         )
       }
     } catch {
-      statusService.report(error: error)
+      status.report(error: error)
     }
   }
 }

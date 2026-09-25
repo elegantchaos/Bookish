@@ -14,8 +14,8 @@ import SwiftUI
     /// The datastore coordinator used to load mutations.
     private let harness: BookishUIStateService
 
-    /// The service used to report mutation-loading failures.
-    @Environment(BookishStatusService.self) private var statusService
+    /// Reports mutation-loading failures and supplies the empty-state message.
+    @Environment(BookishStatusService.State.self) private var status
 
     /// Whether mutation diagnostics are available.
     @AppStorage(.isDeveloperMode) private var isDeveloperMode
@@ -58,7 +58,7 @@ import SwiftUI
         } else {
           ContentUnavailableView(
             "No Mutation", systemImage: "list.bullet.rectangle",
-            description: Text(harness.statusService.message))
+            description: Text(status.message))
         }
       }
       .task(id: harness.revision) {
@@ -83,7 +83,7 @@ import SwiftUI
           selectedMutationID = mutations.first?.id
         }
       } catch {
-        statusService.report(error: error)
+        status.report(error: error)
       }
     }
   }

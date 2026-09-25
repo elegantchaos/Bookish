@@ -151,7 +151,7 @@ public final class BookishEngine {
 
 extension BookishEngine: CommandCentre {
   /// Vends user-facing status reporting to commands.
-  public var statusService: any BookishStatus {
+  public var statusService: any BookishStatusService.API {
     status
   }
 

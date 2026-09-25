@@ -80,19 +80,24 @@ bound value directly for now. A future command-intercepting binding wrapper may
 wrap these bindings to record or dispatch their changes consistently. Until that
 exists, do not replace a native binding with an ad-hoc command-backed binding.
 
-Reporting a view-owned loading or picker error through the status service is
-also an allowed UI reporting effect, rather than a domain command.
+Reporting a view-owned loading or picker error through
+`BookishStatusService.State.report(error:)` is also an allowed UI reporting
+effect. The state projection may expose methods for view-owned presentation
+work; it does not expose the command-facing `API`.
 
 ## Read services in the environment
 
-The environment injects the command façade and individual observable services.
-Views read navigation, UI state, presentation, storage, status, and recognition
-state from their concrete service dependencies. The engine is not injected into
-SwiftUI view content.
+The environment injects the command façade and view-facing observable state.
+`BookishStatusService` owns a stable nested `State` object, which the environment
+injects as `BookishStatusService.State`. Views read its message and import
+progress and may report view-owned errors through its method. The service's
+command-facing `API` and command-centre `Provider` protocols live in the same
+source file as the service. Other services still inject their concrete instances
+until their own migrations. The engine is not injected into SwiftUI view content.
 
 The façade intentionally exposes only command dispatch and command UI helpers.
 Views should report allowed view-owned loading and picker failures through the
-environment-injected status service. All domain mutations continue to use
+environment-injected status state. All domain mutations continue to use
 commands, except for the documented direct-binding exception below.
 
 If compile-time prevention of direct mutation becomes necessary, keep mutable

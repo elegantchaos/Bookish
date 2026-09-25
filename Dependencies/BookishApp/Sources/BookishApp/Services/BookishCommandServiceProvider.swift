@@ -9,13 +9,6 @@ import BookishRecord
 import Commands
 import Foundation
 
-/// Vends user-facing status reporting to commands that report successful work.
-@MainActor
-public protocol BookishStatusProvider: CommandCentre {
-  /// The status service used by the command.
-  var statusService: any BookishStatus { get }
-}
-
 /// Vends import presentation controls to import commands.
 @MainActor
 public protocol BookishImportPresentationProvider: CommandCentre {
@@ -87,7 +80,6 @@ public protocol BookishNavigationProvider: CommandCentre {
 }
 
 extension BookishEngine:
-  BookishStatusProvider,
   BookishImportPresentationProvider,
   BookishBrowserSettingsProvider,
   BookishSettingsPresentationProvider,

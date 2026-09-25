@@ -58,13 +58,13 @@ final class BookishRecordActionsService: BookishRecordActions {
   private unowned let state: any BookishRecordActionState
 
   /// The status service used to report action outcomes.
-  private let statusService: any BookishStatus
+  private let statusService: any BookishStatusService.API
 
   /// Creates record actions backed by the supplied storage, UI state, and status service.
   init(
     storage: any BookishRecordActionStorage,
     state: any BookishRecordActionState,
-    statusService: any BookishStatus
+    statusService: any BookishStatusService.API
   ) {
     self.storage = storage
     self.state = state

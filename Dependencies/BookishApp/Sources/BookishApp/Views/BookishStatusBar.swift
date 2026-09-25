@@ -7,8 +7,8 @@ import SwiftUI
 
 /// Displays the current Bookish status and import progress.
 struct BookishStatusBar: View {
-  /// The status service that supplies the displayed message and progress.
-  @Environment(BookishStatusService.self) private var statusService
+  /// The status projection that supplies the displayed message and progress.
+  @Environment(BookishStatusService.State.self) private var status
 
   /// The navigation service that supplies the displayed record count.
   @Environment(BookishNavigationService.self) private var navigation
@@ -16,7 +16,7 @@ struct BookishStatusBar: View {
   /// The status bar content.
   var body: some View {
     HStack {
-      if let progress = statusService.importProgress {
+      if let progress = status.importProgress {
         if let total = progress.total {
           ProgressView(
             progress.message,
@@ -27,7 +27,7 @@ struct BookishStatusBar: View {
           ProgressView(progress.message)
         }
       } else {
-        Text(statusService.message)
+        Text(status.message)
       }
       Spacer()
       Text("\(navigation.recordIDs.count) records")

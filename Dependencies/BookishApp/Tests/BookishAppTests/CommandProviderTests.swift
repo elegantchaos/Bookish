@@ -285,7 +285,7 @@ private final class TestCommandCentre:
   BookishImportPresentationProvider,
   BookishDatastoreMaintenanceProvider,
   BookishStorageProvider,
-  BookishStatusProvider,
+  BookishStatusService.Provider,
   BookishRecordActionsProvider,
   BookishRecognitionProvider,
   BookishLookupWorkflowProvider,
@@ -297,7 +297,7 @@ private final class TestCommandCentre:
   let importPresentation: any BookishImportPresentation
   let datastoreMaintenanceService: any BookishDatastoreMaintenance
   let storageService: any BookishStorage
-  let statusService: any BookishStatus
+  let statusService: any BookishStatusService.API
   let recordActionService: any BookishRecordActions
   let recognitionService: any BookishRecognition
   let lookupWorkflow: any BookishLookupWorkflow
@@ -311,7 +311,7 @@ private final class TestCommandCentre:
     datastoreMaintenanceService: any BookishDatastoreMaintenance =
       TestDatastoreMaintenanceService(),
     storageService: any BookishStorage = TestStorageService(),
-    statusService: any BookishStatus = TestStatusService(),
+    statusService: any BookishStatusService.API = TestStatusService(),
     recordActionService: any BookishRecordActions = TestRecordActionService(),
     recognitionService: any BookishRecognition = TestBookRecognitionWorkflow(),
     lookupWorkflow: any BookishLookupWorkflow = TestBookLookupWorkflow(),
@@ -548,7 +548,7 @@ private final class TestStorageService: BookishStorage {
 }
 
 @MainActor
-private final class TestStatusService: BookishStatus {
+private final class TestStatusService: BookishStatusService.API {
   private(set) var message = ""
   let importProgress: BookishImportProgress? = nil
   private(set) var messages: [String] = []

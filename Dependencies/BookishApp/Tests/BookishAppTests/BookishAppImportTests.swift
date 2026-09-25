@@ -114,7 +114,7 @@ import Testing
     #expect(harness.navigation.recordIDs.contains(importedID))
     #expect(
       try await harness.storageService.record(id: importedID)?.string("name") == "Imported Book")
-    #expect(harness.statusService.message == "Imported 1 Bookish interchange record")
+    #expect(harness.statusService.state.message == "Imported 1 Bookish interchange record")
     #expect(harness.navigation.selectedMainSection == .importing)
     #expect(harness.lastImportResult?.importedRecords.map(\.id) == [importedID])
   }
@@ -163,15 +163,15 @@ import Testing
       $0.kind == "book" && $0.string(BookishRecordKey.name) == "Snow Crash"
     }
     #expect(!importedBooks.isEmpty)
-    #expect(harness.statusService.message.hasPrefix("Imported "))
-    #expect(harness.statusService.message.contains("Delicious Library"))
+    #expect(harness.statusService.state.message.hasPrefix("Imported "))
+    #expect(harness.statusService.state.message.contains("Delicious Library"))
   }
 
   @Test func invalidDeliciousLibraryDataIsShownInStatusBar() async throws {
     let harness = try makeHarness()
     await harness.load()
     await harness.importDeliciousLibrary(data: Data("not a property list".utf8))
-    #expect(harness.statusService.message != "Ready")
+    #expect(harness.statusService.state.message != "Ready")
   }
 
   @Test func exporterEncodesStorageRecordsAsInterchangeData() async throws {
@@ -219,7 +219,7 @@ import Testing
     let mutationsAfterReset = try await harness.storageService.mutations()
     #expect(mutationsAfterReset.map(\.id) == mutationsBeforeReset.map(\.id))
     #expect(mutationsAfterReset.map(\.operation) == mutationsBeforeReset.map(\.operation))
-    #expect(harness.statusService.message == "Rebuilt record store")
+    #expect(harness.statusService.state.message == "Rebuilt record store")
   }
 
   @Test func resetCommandResetsDatastore() async throws {
@@ -242,7 +242,7 @@ import Testing
       try await harness.storageService.record(id: BookishRecordID("datastore-seed-marker"))?.kind
         == BookishRecordKind.seedMarker)
     #expect((try await harness.storageService.mutations()).isEmpty)
-    #expect(harness.statusService.message == "Reset datastore")
+    #expect(harness.statusService.state.message == "Reset datastore")
   }
 
   @Test func recordQueryResultFollowsResetAndLaterMutations() async throws {

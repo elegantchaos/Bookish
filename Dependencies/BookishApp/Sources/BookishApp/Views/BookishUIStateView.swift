@@ -15,11 +15,11 @@ public struct BookishUIStateView: View {
   /// The command boundary used to report file-panel failures.
   @Environment(BookishCommander.self) private var commander
 
+  /// Reports file-picker failures from the root view.
+  @Environment(BookishStatusService.State.self) private var status
+
   /// The navigation state that selects the visible workflow or browser.
   @Environment(BookishNavigationService.self) private var navigation
-
-  /// The service used to report picker failures.
-  @Environment(BookishStatusService.self) private var statusService
 
   /// Whether debug-only browser indexes should be available.
   @AppStorage(.isDeveloperMode) private var isDeveloperMode
@@ -132,7 +132,7 @@ extension BookishUIStateView {
       commander.perform(ImportSelectedInterchangeCommand(url: url))
 
     case .failure(let error):
-      statusService.report(error: error)
+      status.report(error: error)
     }
   }
 
@@ -143,7 +143,7 @@ extension BookishUIStateView {
       commander.perform(ImportSelectedDeliciousLibraryCommand(url: url))
 
     case .failure(let error):
-      statusService.report(error: error)
+      status.report(error: error)
     }
   }
 
@@ -154,7 +154,7 @@ extension BookishUIStateView {
       uiState.didExportInterchange()
 
     case .failure(let error):
-      statusService.report(error: error)
+      status.report(error: error)
     }
   }
 }

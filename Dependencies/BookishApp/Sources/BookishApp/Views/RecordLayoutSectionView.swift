@@ -19,7 +19,7 @@ struct RecordLayoutSectionView: View {
   let harness: BookishUIStateService
 
   /// The service used to report presentation-resolution failures.
-  @Environment(BookishStatusService.self) private var statusService
+  @Environment(BookishStatusService.State.self) private var status
 
   /// The navigation service used by linked record values.
   let navigation: BookishNavigationService
@@ -79,7 +79,7 @@ struct RecordLayoutSectionView: View {
       presentationRecords = try await harness.presentation.presentations(
         for: host.kind, layout: layout)
     } catch {
-      statusService.report(error: error)
+      status.report(error: error)
     }
   }
 }

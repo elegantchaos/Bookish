@@ -12,6 +12,9 @@ struct RecordIndexView: View {
   /// The command boundary used to update record selection and filtering.
   @Environment(BookishCommander.self) private var commander
 
+  /// Reports presentation-resolution failures.
+  @Environment(BookishStatusService.State.self) private var status
+
   /// The UI state that identifies configuration revisions.
   @Environment(BookishUIStateService.self) private var uiState
 
@@ -20,9 +23,6 @@ struct RecordIndexView: View {
 
   /// The route containing the active index and record selection.
   @Environment(BookishNavigationService.self) private var navigation
-
-  /// The service used to report presentation-resolution failures.
-  @Environment(BookishStatusService.self) private var statusService
 
   /// The layout currently used to render index rows.
   @State private var layout: BookishRecord?
@@ -114,7 +114,7 @@ struct RecordIndexView: View {
       }
       self.presentationsByKind = presentationsByKind
     } catch {
-      statusService.report(error: error)
+      status.report(error: error)
     }
   }
 

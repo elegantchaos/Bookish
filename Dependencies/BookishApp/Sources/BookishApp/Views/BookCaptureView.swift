@@ -18,8 +18,8 @@ struct BookCaptureView: View {
   /// The command boundary used to update the recognition workflow.
   @Environment(BookishCommander.self) private var commander
 
-  /// The service used to report image-file loading failures.
-  @Environment(BookishStatusService.self) private var statusService
+  /// Reports image-picker and capture presentation failures.
+  @Environment(BookishStatusService.State.self) private var status
 
   var body: some View {
     BookCaptureLayout(
@@ -63,11 +63,11 @@ struct BookCaptureView: View {
           SelectBookRecognitionImageCommand(imageData: imageData)
         )
       } catch {
-        statusService.report(error: error)
+        status.report(error: error)
       }
 
     case .failure(let error):
-      statusService.report(error: error)
+      status.report(error: error)
     }
   }
 
