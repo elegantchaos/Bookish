@@ -3,9 +3,9 @@
 //  Copyright © 2026 Elegant Chaos Limited. All rights reserved.
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
-import Foundation
 import Commands
 import CommandsUI
+import Foundation
 import Icons
 
 /// Applies a synthetic remote mutation to the selected record.

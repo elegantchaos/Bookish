@@ -3,9 +3,9 @@
 //  Copyright © 2026 Elegant Chaos Limited. All rights reserved.
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
-import Foundation
-import CommandsUI
 import Commands
+import CommandsUI
+import Foundation
 import Icons
 
 /// Exports the materialised records as Bookish interchange JSON.

@@ -31,6 +31,7 @@ extension BookishExportingService: BookishExporting {
   /// Encodes every materialised record and associates the supplied record as the interchange root.
   public func interchangeData(root: BookishRecordID?) async throws -> Data {
     let records = try await storageService.records(matching: RecordQuery(sort: [.kind, .id]))
-    return try BookishInterchangeCodec().encode(BookishInterchangeFile(root: root, records: records))
+    return try BookishInterchangeCodec().encode(
+      BookishInterchangeFile(root: root, records: records))
   }
 }

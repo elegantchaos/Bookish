@@ -5,7 +5,7 @@ import PackageDescription
 let package = Package(
   name: "StarWarsView",
   platforms: [
-    .macOS(.v26), .iOS(.v26)
+    .macOS(.v26), .iOS(.v26),
   ],
   products: [
     .library(
@@ -13,13 +13,11 @@ let package = Package(
       targets: ["StarWarsView"]
     )
   ],
-  dependencies: [
-  ],
+  dependencies: [],
   targets: [
     .target(
       name: "StarWarsView",
-      dependencies: [
-      ]
+      dependencies: []
     ),
     .testTarget(
       name: "StarWarsViewTests",

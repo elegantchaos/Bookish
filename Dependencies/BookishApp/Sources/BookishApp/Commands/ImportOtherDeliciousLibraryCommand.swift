@@ -3,7 +3,6 @@
 //  Copyright © 2026 Elegant Chaos Limited. All rights reserved.
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
-
 import BookishImporter
 import BookishImporterSamples
 import CommandsUI
@@ -11,7 +10,9 @@ import Foundation
 import Icons
 
 /// Requests a Delicious Library import through the view-owned file picker.
-public struct ImportOtherDeliciousLibraryCommand<Centre: BookishImportPresentationProvider>: CommandWithUI {
+public struct ImportOtherDeliciousLibraryCommand<Centre: BookishImportPresentationProvider>:
+  CommandWithUI
+{
   public typealias ResultType = Void
 
   public let id = "datastore.import.delicious-library.other"
