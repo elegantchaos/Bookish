@@ -3,7 +3,7 @@ import CommandsUI
 import Icons
 
 /// Discards the proposal shown in the Import workflow.
-public struct CancelPendingImportCommand<Centre: BookishImportPresentationProvider>: CommandWithUI {
+public struct CancelPendingImportCommand<Centre: BookishImportingService.Provider>: CommandWithUI {
   public typealias ResultType = Void
 
   public let id = "datastore.import.cancel-pending"
@@ -17,6 +17,6 @@ public struct CancelPendingImportCommand<Centre: BookishImportPresentationProvid
   public func help(centre _: Centre) -> String? { "Discard the current import proposal." }
 
   public func perform(centre: Centre) async throws {
-    centre.importPresentation.cancelPendingImport()
+    centre.importingService.cancelPendingImport()
   }
 }

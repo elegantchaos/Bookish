@@ -1,5 +1,6 @@
 # Journal Index
 
+- [2026-09-25 UI State Service Split](2026-09-25-ui-state-service-split.md)
 - [2026-09-25 Fine-Grained Record Observation (Deferred)](2026-09-25-fine-grained-record-observation.md)
 - [2026-09-25 Record Views Without UI State](2026-09-25-record-views-without-ui-state.md)
 - [2026-09-25 Status Service Projection](2026-09-25-status-service-projection.md)

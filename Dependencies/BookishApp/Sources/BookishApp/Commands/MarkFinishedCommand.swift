@@ -10,7 +10,7 @@ import Foundation
 import Icons
 
 /// Marks the selected record as finished.
-public struct MarkFinishedCommand<Centre: BookishRecordActionsProvider>: CommandWithUI {
+public struct MarkFinishedCommand<Centre: BookishRecordActionsService.Provider>: CommandWithUI {
   public typealias ResultType = Void
 
   public let recordID: BookishRecordID?
@@ -25,7 +25,7 @@ public struct MarkFinishedCommand<Centre: BookishRecordActionsProvider>: Command
   }
 
   public func availability(centre: Centre) -> CommandAvailability {
-    centre.recordActionService.canAct(on: recordID) ? .enabled : .disabled
+    centre.recordActionsService.canAct(on: recordID) ? .enabled : .disabled
   }
 
   public func name(centre: Centre) -> String {
@@ -41,6 +41,6 @@ public struct MarkFinishedCommand<Centre: BookishRecordActionsProvider>: Command
   }
 
   public func perform(centre: Centre) async throws {
-    await centre.recordActionService.markFinished(recordID: recordID)
+    await centre.recordActionsService.markFinished(recordID: recordID)
   }
 }

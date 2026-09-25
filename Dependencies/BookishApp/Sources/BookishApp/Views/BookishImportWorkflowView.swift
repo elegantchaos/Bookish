@@ -3,7 +3,7 @@ import SwiftUI
 /// Hosts source selection, proposal review, and completed results in the Import workflow.
 struct BookishImportWorkflowView: View {
   @Environment(BookishCommander.self) private var commander
-  @Environment(BookishUIStateService.self) private var uiState
+  @Environment(BookishImportingService.State.self) private var importing
 
   var body: some View {
     VStack(alignment: .leading) {
@@ -21,24 +21,25 @@ struct BookishImportWorkflowView: View {
         #endif
       }
       .disabled(
-        uiState.pendingImportPlan != nil || uiState.isPreparingImport || uiState.isApplyingImport
+        importing.pendingImportPlan != nil || importing.isPreparingImport
+          || importing.isApplyingImport
       )
       .padding()
 
-      if let error = uiState.importErrorMessage, uiState.pendingImportPlan != nil {
+      if let error = importing.importErrorMessage, importing.pendingImportPlan != nil {
         Label(error, systemImage: "exclamationmark.triangle")
           .foregroundStyle(.red)
           .padding(.horizontal)
       }
 
-      if uiState.isPreparingImport || uiState.isApplyingImport {
-        ProgressView(uiState.isPreparingImport ? "Reading import source" : "Applying import")
+      if importing.isPreparingImport || importing.isApplyingImport {
+        ProgressView(importing.isPreparingImport ? "Reading import source" : "Applying import")
           .frame(maxWidth: .infinity, maxHeight: .infinity)
-      } else if let plan = uiState.pendingImportPlan {
+      } else if let plan = importing.pendingImportPlan {
         BookishImportReviewView(plan: plan)
-      } else if let result = uiState.lastImportResult {
+      } else if let result = importing.lastImportResult {
         BookishImportResultView(result: result)
-      } else if let error = uiState.importErrorMessage {
+      } else if let error = importing.importErrorMessage {
         ContentUnavailableView(
           "Import Failed", systemImage: "exclamationmark.triangle", description: Text(error))
       } else {
@@ -49,7 +50,7 @@ struct BookishImportWorkflowView: View {
     }
     .navigationTitle("Import")
     .toolbar {
-      if uiState.pendingImportPlan == nil {
+      if importing.pendingImportPlan == nil {
         commander.toolbarItem(ImportInterchangeCommand())
         commander.toolbarItem(ImportOtherDeliciousLibraryCommand())
       } else {

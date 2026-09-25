@@ -60,6 +60,11 @@ public final class BookishNavigationService {
     /// The selected browser index shown in the first split-view column.
     var selectedRecordIndexID: BookishRecordID? { get }
 
+    /// The selected record in the selected browser index.
+    var selectedRecordID: BookishRecordID? { get }
+
+    /// The records in the selected browser index.
+    var recordIDs: [BookishRecordID] { get }
   }
 
   @MainActor

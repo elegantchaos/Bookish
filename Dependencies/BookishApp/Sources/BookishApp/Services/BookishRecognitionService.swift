@@ -65,8 +65,8 @@ public final class BookishRecognitionService {
   /// The storage service used to persist new records.
   private unowned let storage: BookishStorageService
 
-  /// The UI state refreshed after records are added.
-  private unowned let uiState: BookishUIStateService
+  /// The browser service used to refresh indexes after books are added.
+  private let browser: any BookishBrowserService.API
 
   /// The status service used to report successful additions.
   private let statusService: any BookishStatusService.API
@@ -90,14 +90,14 @@ public final class BookishRecognitionService {
   /// Creates a record-adder with application-owned services.
   init(
     storage: BookishStorageService,
-    state: BookishUIStateService,
+    browser: any BookishBrowserService.API,
     statusService: any BookishStatusService.API,
     recognitionProviders: [any BookRecognitionProvider],
     settings: UserDefaults
   ) {
     let factory = BookRecognitionProviderRegistry(recognitionProviders: recognitionProviders)
     self.storage = storage
-    uiState = state
+    self.browser = browser
     self.statusService = statusService
     self.registry = factory
     self.settings = settings
@@ -215,7 +215,9 @@ public final class BookishRecognitionService {
   private func addBooks(_ candidates: [BookRecognitionCandidate]) async throws {
     guard !candidates.isEmpty else { return }
     try await storage.upsert(records: candidates.map(\.bookRecord))
-    try await uiState.refreshBrowser()
+    // TEMPORARY: refreshes the browser so added books appear; remove when views
+    // observe their records and queries.
+    try await browser.refresh()
     statusService.report(
       message:
         "Added \(candidates.count) \(candidates.count == 1 ? "book" : "books")"

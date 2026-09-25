@@ -3,7 +3,9 @@ import CommandsUI
 import Icons
 
 /// Closes the application settings sheet on iOS.
-public struct CloseSettingsCommand<Centre: BookishSettingsPresentationProvider>: CommandWithUI {
+public struct CloseSettingsCommand<Centre: BookishSettingsPresentationService.Provider>:
+  CommandWithUI
+{
   public typealias ResultType = Void
 
   public let id = "bookish.settings.close"
@@ -15,6 +17,6 @@ public struct CloseSettingsCommand<Centre: BookishSettingsPresentationProvider>:
   public func icon(centre _: Centre) -> Icon { Icon("checkmark") }
 
   public func perform(centre: Centre) async throws {
-    centre.settingsPresentation.closeSettings()
+    centre.settingsPresentationService.closeSettings()
   }
 }

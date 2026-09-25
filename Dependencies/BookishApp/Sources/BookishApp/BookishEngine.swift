@@ -21,9 +21,6 @@ public final class BookishEngine {
   /// Startup task owned by the shared application loop.
   @ObservationIgnored public var startupTask: Task<Void, Never>?
 
-  /// Global UI state used by the Bookish UI and commands.
-  @ObservationIgnored public let uiState: BookishUIStateService
-
   /// Command façade exposed to SwiftUI views.
   @ObservationIgnored let commander: BookishCommander
 
@@ -39,14 +36,23 @@ public final class BookishEngine {
   /// Status service that owns user-visible progress, messages, and errors.
   @ObservationIgnored public let status: BookishStatusService
 
-  /// Import service that persists imported model records.
-  @ObservationIgnored public let importingService: BookishImportingService
+  /// Browser service that owns index visibility and browser refresh.
+  @ObservationIgnored public let browser: BookishBrowserService
 
-  /// Export service that encodes model records for export.
-  @ObservationIgnored public let exportingService: BookishExportingService
+  /// Import workflow that reads, reviews, and applies imported records.
+  @ObservationIgnored public let importing: BookishImportingService
+
+  /// Export service that encodes records and presents the export sheet.
+  @ObservationIgnored public let exporting: BookishExportingService
+
+  /// Settings sheet presentation used by the iOS toolbar.
+  @ObservationIgnored public let settingsPresentation: BookishSettingsPresentationService
+
+  /// Record creation used by New commands.
+  @ObservationIgnored let recordCreation: BookishRecordCreationService
 
   /// Record-action service used by selected-record commands.
-  @ObservationIgnored private let recordActions: BookishRecordActionsService
+  @ObservationIgnored let recordActions: BookishRecordActionsService
 
   /// Recognition workflow used by scanning controls and commands.
   @ObservationIgnored public let recognition: BookishRecognitionService
@@ -55,29 +61,54 @@ public final class BookishEngine {
   @ObservationIgnored public let lookup: BookishLookupWorkflowService
 
   /// Creates an engine with services backed by the supplied local datastore directory.
-  public init(
+  public convenience init(
     directoryURL: URL? = nil,
     defaultShowsDebugIndexes: Bool = false
   ) {
-    let defaults = UserDefaults.standard
+    self.init(
+      directoryURL: directoryURL,
+      defaultShowsDebugIndexes: defaultShowsDebugIndexes,
+      settings: .standard
+    )
+  }
 
+  /// Creates an engine whose services persist their settings in the supplied defaults.
+  init(
+    directoryURL: URL?,
+    defaultShowsDebugIndexes: Bool,
+    settings defaults: UserDefaults
+  ) {
     let storageService = BookishStorageService(directoryURL: directoryURL)
-    let navigation = BookishNavigationService(storageService: storageService)
+    let navigation = BookishNavigationService(storageService: storageService, settings: defaults)
     let presentationService = BookishPresentationService(storageService: storageService)
     let statusService = BookishStatusService()
-    let importingService = BookishImportingService(storageService: storageService)
-    let exportingService = BookishExportingService(storageService: storageService)
-    let uiState = BookishUIStateService(
+    let browser = BookishBrowserService(
       navigation: navigation,
       presentation: presentationService,
+      storage: storageService,
       statusService: statusService,
-      importingService: importingService,
-      exportingService: exportingService,
       defaultShowsDebugIndexes: defaultShowsDebugIndexes
+    )
+    let importing = BookishImportingService(
+      storageService: storageService,
+      navigation: navigation,
+      browser: browser,
+      statusService: statusService
+    )
+    let exporting = BookishExportingService(
+      storageService: storageService,
+      navigation: navigation,
+      statusService: statusService
+    )
+    let recordCreation = BookishRecordCreationService(
+      storage: storageService,
+      navigation: navigation,
+      browser: browser
     )
     let recordActions = BookishRecordActionsService(
       storage: storageService,
-      state: uiState,
+      navigation: navigation,
+      browser: browser,
       statusService: statusService
     )
     let serviceConfiguration: BookishServiceConfiguration
@@ -89,7 +120,7 @@ public final class BookishEngine {
     }
     let recognition = BookishRecognitionService(
       storage: storageService,
-      state: uiState,
+      browser: browser,
       statusService: statusService,
       recognitionProviders: serviceConfiguration.recognitionProviders,
       settings: defaults
@@ -106,9 +137,11 @@ public final class BookishEngine {
     self.storage = storageService
     self.presentationService = presentationService
     self.status = statusService
-    self.importingService = importingService
-    self.exportingService = exportingService
-    self.uiState = uiState
+    self.browser = browser
+    self.importing = importing
+    self.exporting = exporting
+    self.settingsPresentation = BookishSettingsPresentationService()
+    self.recordCreation = recordCreation
     self.commander = commander
     self.recordActions = recordActions
     self.recognition = recognition
@@ -132,7 +165,7 @@ public final class BookishEngine {
   public func load() async {
     do {
       try await storage.load()
-      try await uiState.refreshBrowser()
+      try await browser.refresh()
       status.report(message: "Ready")
     } catch {
       status.report(error: error)
@@ -165,33 +198,33 @@ extension BookishEngine: CommandCentre {
     navigation
   }
 
-  /// Vends import presentation controls to commands.
-  public var importPresentation: any BookishImportPresentation {
-    uiState
+  /// Vends browser settings to commands.
+  public var browserService: any BookishBrowserService.API {
+    browser
   }
 
-  /// Vends browser settings to commands.
-  public var browserSettingsService: any BookishBrowserSettings {
-    uiState
+  /// Vends the import workflow to commands.
+  public var importingService: any BookishImportingService.API {
+    importing
+  }
+
+  /// Vends interchange export to commands.
+  public var exportingService: any BookishExportingService.API {
+    exporting
   }
 
   /// Vends settings sheet presentation to commands.
-  public var settingsPresentation: any BookishSettingsPresentation {
-    uiState
+  public var settingsPresentationService: any BookishSettingsPresentationService.API {
+    settingsPresentation
   }
 
   /// Vends record creation to New commands.
-  public var recordCreation: any BookishRecordCreation {
-    uiState
-  }
-
-  /// Vends datastore-maintenance presentation controls to commands.
-  public var datastoreMaintenanceService: any BookishDatastoreMaintenance {
-    uiState
+  public var recordCreationService: any BookishRecordCreationService.API {
+    recordCreation
   }
 
   /// Vends selected-record actions to commands.
-  public var recordActionService: any BookishRecordActions {
+  public var recordActionsService: any BookishRecordActionsService.API {
     recordActions
   }
 

@@ -5,7 +5,7 @@ import SwiftUI
 /// Reviews possible matches inside the Import workflow.
 struct BookishImportReviewView: View {
   @Environment(BookishCommander.self) private var commander
-  @Environment(BookishUIStateService.self) private var uiState
+  @Environment(BookishImportingService.State.self) private var importing
 
   #if os(macOS)
     @State private var selectedIDs: Set<BookishRecordID> = []
@@ -73,7 +73,7 @@ struct BookishImportReviewView: View {
 
   #if os(macOS)
     private func setSelectedChoices(_ preference: BookishImportPreference) {
-      uiState.setImportChoices(for: selectedIDs, preferring: preference)
+      importing.setImportChoices(for: selectedIDs, preferring: preference)
     }
   #endif
 }

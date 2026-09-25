@@ -4,7 +4,7 @@ import SwiftUI
 
 /// A proposed record with a compact menu for its match decision.
 struct BookishImportReviewRow: View {
-  @Environment(BookishUIStateService.self) private var uiState
+  @Environment(BookishImportingService.State.self) private var importing
 
   let entry: BookishImportPlanEntry
   let existingByID: [BookishRecordID: BookishRecord]
@@ -43,7 +43,7 @@ struct BookishImportReviewRow: View {
   }
 
   private var selectedChoiceLabel: String {
-    switch uiState.importChoices[entry.id] {
+    switch importing.importChoices[entry.id] {
     case .keepExisting: "Use Existing"
     case .useExisting(let id): "Use Existing: \(name(for: id))"
     case .replaceExisting: "Use Imported"
@@ -57,6 +57,6 @@ struct BookishImportReviewRow: View {
   }
 
   private func choose(_ choice: BookishImportChoice) {
-    uiState.setImportChoice(choice, for: entry.id)
+    importing.setImportChoice(choice, for: entry.id)
   }
 }

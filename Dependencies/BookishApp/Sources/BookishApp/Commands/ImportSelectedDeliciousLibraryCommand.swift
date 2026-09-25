@@ -9,7 +9,7 @@ import Foundation
 import Icons
 
 /// Imports records from a Delicious Library export selected in the system picker.
-public struct ImportSelectedDeliciousLibraryCommand<Centre: BookishImportPresentationProvider>:
+public struct ImportSelectedDeliciousLibraryCommand<Centre: BookishImportingService.Provider>:
   CommandWithUI
 {
   public typealias ResultType = Void
@@ -35,6 +35,6 @@ public struct ImportSelectedDeliciousLibraryCommand<Centre: BookishImportPresent
   }
 
   public func perform(centre: Centre) async throws {
-    await centre.importPresentation.importDeliciousLibrary(from: url)
+    await centre.importingService.importDeliciousLibrary(from: url)
   }
 }

@@ -13,13 +13,15 @@ struct BookishEnvironmentInjector: ViewModifier {
   /// Adds the command boundary and observable read services to the SwiftUI environment.
   func body(content: Content) -> some View {
     content
-      .environment(engine.uiState)
       .environment(engine.storage.state)
       .environment(engine.navigation.state)
       .environment(engine.presentationService.state)
       .environment(engine.status.state)
       .environment(engine.recognition.state)
       .environment(engine.lookup.state)
+      .environment(engine.importing.state)
+      .environment(engine.exporting.state)
+      .environment(engine.settingsPresentation.state)
       .environment(engine.commander)
   }
 }

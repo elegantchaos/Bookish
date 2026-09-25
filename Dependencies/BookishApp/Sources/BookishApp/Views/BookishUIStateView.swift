@@ -9,8 +9,14 @@ import UniformTypeIdentifiers
 
 /// The root view for the Bookish app.
 public struct BookishUIStateView: View {
-  /// The global UI state that owns browser presentation and sheet state.
-  @Environment(BookishUIStateService.self) private var uiState
+  /// The import workflow state that presents source file pickers.
+  @Environment(BookishImportingService.State.self) private var importing
+
+  /// The export state that presents the interchange export panel.
+  @Environment(BookishExportingService.State.self) private var exporting
+
+  /// The settings presentation state that shows the iOS settings sheet.
+  @Environment(BookishSettingsPresentationService.State.self) private var settingsPresentation
 
   /// The command boundary used to report file-panel failures.
   @Environment(BookishCommander.self) private var commander
@@ -26,7 +32,11 @@ public struct BookishUIStateView: View {
 
   /// The SwiftUI content for the datastore app.
   public var body: some View {
-    @Bindable var uiState = uiState
+    @Bindable var importing = importing
+    @Bindable var exporting = exporting
+    #if os(iOS)
+      @Bindable var settingsPresentation = settingsPresentation
+    #endif
     VStack(spacing: 0) {
       if let section = navigation.selectedMainSection {
         WorkflowNavigationSplitView(section: section)
@@ -37,18 +47,18 @@ public struct BookishUIStateView: View {
       BookishStatusBar()
     }
     .fileImporter(
-      isPresented: $uiState.isImportingInterchange,
+      isPresented: $importing.isImportingInterchange,
       allowedContentTypes: [.json],
       onCompletion: handleInterchangeImport
     )
     .fileImporter(
-      isPresented: $uiState.isImportingDeliciousLibrary,
+      isPresented: $importing.isImportingDeliciousLibrary,
       allowedContentTypes: [.xml],
       onCompletion: handleDeliciousLibraryImport
     )
     .fileExporter(
-      isPresented: $uiState.isExportingInterchange,
-      document: uiState.interchangeExportDocument,
+      isPresented: $exporting.isExportingInterchange,
+      document: exporting.interchangeExportDocument,
       contentType: .json,
       defaultFilename: "Bookish Interchange",
       onCompletion: handleInterchangeExport
@@ -57,7 +67,7 @@ public struct BookishUIStateView: View {
       commander.perform(SetDebugIndexVisibilityCommand(isVisible: isDeveloperMode))
     }
     #if os(iOS)
-      .sheet(isPresented: $uiState.isShowingSettings) {
+      .sheet(isPresented: $settingsPresentation.isShowingSettings) {
         NavigationStack {
           BookishSettingsView()
           .toolbar {
@@ -151,7 +161,7 @@ extension BookishUIStateView {
   private func handleInterchangeExport(_ result: Result<URL, Error>) {
     switch result {
     case .success:
-      uiState.didExportInterchange()
+      exporting.didExportInterchange()
 
     case .failure(let error):
       status.report(error: error)

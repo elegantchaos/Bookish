@@ -9,9 +9,10 @@ import Testing
 
 @MainActor extension BookishAppTests {
   @Test func importerPreparesRecordsBeforeApplyingThem() async throws {
-    let storage = BookishStorageService(directoryURL: try temporaryDirectory())
+    let engine = makeEngine(directoryURL: try temporaryDirectory())
+    let storage = engine.storage
     try await storage.load()
-    let importer = BookishImportingService(storageService: storage)
+    let importer = engine.importing
     let importedID = BookishRecordID("test-import-service-book")
     var recordWasPersistedWhenReported = false
 
@@ -36,9 +37,10 @@ import Testing
   }
 
   @Test func importerReadsInterchangeFiles() async throws {
-    let storage = BookishStorageService(directoryURL: try temporaryDirectory())
+    let engine = makeEngine(directoryURL: try temporaryDirectory())
+    let storage = engine.storage
     try await storage.load()
-    let importer = BookishImportingService(storageService: storage)
+    let importer = engine.importing
     let importedID = BookishRecordID("test-import-file-book")
     let fileURL = try temporaryDirectory().appending(path: "import.bookish.json")
     try Data(
@@ -56,9 +58,10 @@ import Testing
   }
 
   @Test func repeatedInterchangeImportAddsNoMutations() async throws {
-    let storage = BookishStorageService(directoryURL: try temporaryDirectory())
+    let engine = makeEngine(directoryURL: try temporaryDirectory())
+    let storage = engine.storage
     try await storage.load()
-    let importer = BookishImportingService(storageService: storage)
+    let importer = engine.importing
     let data = Data(
       """
       { "records": [{ "ℹ": "repeat-book", "©": "book", "name": "Repeated Book" }] }
@@ -78,9 +81,10 @@ import Testing
   }
 
   @Test func changedCatalogueRejectsStaleImportPlan() async throws {
-    let storage = BookishStorageService(directoryURL: try temporaryDirectory())
+    let engine = makeEngine(directoryURL: try temporaryDirectory())
+    let storage = engine.storage
     try await storage.load()
-    let importer = BookishImportingService(storageService: storage)
+    let importer = engine.importing
     let data = Data(
       """
       { "records": [{ "ℹ": "stale-book", "©": "book", "name": "Stale Book" }] }
@@ -106,24 +110,24 @@ import Testing
     let json = """
       { "records": [{ "ℹ": "test-import-book", "©": "book", "name": "Imported Book" }] }
       """
-    await harness.importInterchange(data: Data(json.utf8))
-    #expect(harness.pendingImportPlan != nil)
+    await harness.importing.importInterchange(data: Data(json.utf8))
+    #expect(harness.importing.state.pendingImportPlan != nil)
     #expect(harness.navigation.selectedMainSection == .importing)
-    await harness.applyPendingImport(choices: [:])
+    await harness.importing.applyPendingImport(choices: [:])
     let importedID = BookishRecordID("test-import-book")
     #expect(harness.navigation.recordIDs.contains(importedID))
     #expect(
-      try await harness.storageService.record(id: importedID)?.string("name") == "Imported Book")
-    #expect(harness.statusService.state.message == "Imported 1 Bookish interchange record")
+      try await harness.storage.record(id: importedID)?.string("name") == "Imported Book")
+    #expect(harness.status.state.message == "Imported 1 Bookish interchange record")
     #expect(harness.navigation.selectedMainSection == .importing)
-    #expect(harness.lastImportResult?.importedRecords.map(\.id) == [importedID])
+    #expect(harness.importing.state.lastImportResult?.importedRecords.map(\.id) == [importedID])
   }
 
   @Test func reviewDefaultsToExistingAndBulkChoiceChangesOnlySelectedRows() async throws {
     let harness = try makeHarness()
     await harness.load()
     let existingID = BookishRecordID("existing-asin-book")
-    try await harness.storageService.upsert(records: [
+    try await harness.storage.upsert(records: [
       BookishRecord(
         id: existingID, kind: BookishRecordKind.book,
         properties: [
@@ -132,53 +136,54 @@ import Testing
         ])
     ])
     let proposedID = BookishRecordID("proposed-asin-book")
-    await harness.importInterchange(
+    await harness.importing.importInterchange(
       data: Data(
         """
         { "records": [{ "ℹ": "proposed-asin-book", "©": "book", "name": "Proposed Book", "asin": "B000000001" }] }
         """.utf8))
 
-    #expect(harness.importChoices[proposedID] == .useExisting(existingID))
-    #expect(harness.canApplyPendingImport)
-    harness.setImportChoices(for: [proposedID], preferring: .imported)
-    #expect(harness.importChoices[proposedID] == .create)
-    harness.setImportChoices(for: [proposedID], preferring: .existing)
-    await harness.applyPendingImport()
-    #expect(try await harness.storageService.record(id: proposedID) == nil)
-    #expect(harness.lastImportResult?.reusedCount == 1)
-    #expect(harness.lastImportResult?.importedRecords.isEmpty == true)
+    #expect(harness.importing.state.importChoices[proposedID] == .useExisting(existingID))
+    #expect(harness.importing.canApplyPendingImport)
+    harness.importing.state.setImportChoices(for: [proposedID], preferring: .imported)
+    #expect(harness.importing.state.importChoices[proposedID] == .create)
+    harness.importing.state.setImportChoices(for: [proposedID], preferring: .existing)
+    await harness.importing.applyPendingImport()
+    #expect(try await harness.storage.record(id: proposedID) == nil)
+    #expect(harness.importing.state.lastImportResult?.reusedCount == 1)
+    #expect(harness.importing.state.lastImportResult?.importedRecords.isEmpty == true)
   }
 
   @Test func harnessImportsDeliciousLibraryData() async throws {
     let harness = try makeHarness()
     await harness.load()
-    await harness.importDeliciousLibrary(data: try Data(contentsOf: deliciousSampleURL()))
-    let plan = try #require(harness.pendingImportPlan)
+    await harness.importing.importDeliciousLibrary(data: try Data(contentsOf: deliciousSampleURL()))
+    let plan = try #require(harness.importing.state.pendingImportPlan)
     let choices = Dictionary(
       uniqueKeysWithValues: plan.reviewEntries.map { entry in
         (entry.id, BookishImportChoice.create)
       })
-    await harness.applyPendingImport(choices: choices)
+    await harness.importing.applyPendingImport(choices: choices)
     let importedBooks = try await records(for: harness).filter {
       $0.kind == "book" && $0.string(BookishRecordKey.name) == "Snow Crash"
     }
     #expect(!importedBooks.isEmpty)
-    #expect(harness.statusService.state.message.hasPrefix("Imported "))
-    #expect(harness.statusService.state.message.contains("Delicious Library"))
+    #expect(harness.status.state.message.hasPrefix("Imported "))
+    #expect(harness.status.state.message.contains("Delicious Library"))
   }
 
   @Test func invalidDeliciousLibraryDataIsShownInStatusBar() async throws {
     let harness = try makeHarness()
     await harness.load()
-    await harness.importDeliciousLibrary(data: Data("not a property list".utf8))
-    #expect(harness.statusService.state.message != "Ready")
+    await harness.importing.importDeliciousLibrary(data: Data("not a property list".utf8))
+    #expect(harness.status.state.message != "Ready")
   }
 
   @Test func exporterEncodesStorageRecordsAsInterchangeData() async throws {
-    let storage = BookishStorageService(directoryURL: try temporaryDirectory())
+    let engine = makeEngine(directoryURL: try temporaryDirectory())
+    let storage = engine.storage
     try await storage.load()
     let root = BookishRecordID("seed-book")
-    let exporter = BookishExportingService(storageService: storage)
+    let exporter = engine.exporting
 
     let file = try BookishInterchangeCodec().decode(await exporter.interchangeData(root: root))
     #expect(!file.records.isEmpty)
@@ -187,62 +192,62 @@ import Testing
 
   @Test func rebuildCommandRebuildsRecordStoreFromMutationHistory() async throws {
     let harness = try makeHarness()
-    let commander = makeCommandCentre(for: harness)
+    let commander = harness
     await harness.load()
     let json = """
       { "records": [{ "ℹ": "test-reset-book", "©": "book", "name": "Reset Book" }] }
       """
-    await harness.importInterchange(data: Data(json.utf8))
-    await harness.applyPendingImport(choices: [:])
+    await harness.importing.importInterchange(data: Data(json.utf8))
+    await harness.importing.applyPendingImport(choices: [:])
     #expect(harness.navigation.recordIDs.contains(BookishRecordID("test-reset-book")))
-    let mutationsBeforeReset = try await harness.storageService.mutations()
+    let mutationsBeforeReset = try await harness.storage.mutations()
     #expect(!mutationsBeforeReset.isEmpty)
     try await commander.perform(RebuildRecordStoreCommand())
     #expect(harness.navigation.recordIDs.contains(BookishRecordID("test-reset-book")))
     #expect(
-      try await harness.storageService.record(id: BookishRecordID("seed-book"))?.kind
+      try await harness.storage.record(id: BookishRecordID("seed-book"))?.kind
         == BookishRecordKind.book)
     #expect(
-      try await harness.storageService.record(id: BookishRecordID("seed-author"))?.kind
+      try await harness.storage.record(id: BookishRecordID("seed-author"))?.kind
         == BookishRecordKind.person
     )
     #expect(
-      try await harness.storageService.record(id: BookishRecordID("datastore-seed-marker"))?.kind
+      try await harness.storage.record(id: BookishRecordID("datastore-seed-marker"))?.kind
         == BookishRecordKind.seedMarker)
     #expect(
-      try await harness.storageService.record(id: BookishRecordID("datastore-index-all-records"))?
+      try await harness.storage.record(id: BookishRecordID("datastore-index-all-records"))?
         .kind
         == BookishRecordKind.index)
     #expect(
-      try await harness.storageService.record(id: BookishRecordID("datastore-book-layout"))?.kind
+      try await harness.storage.record(id: BookishRecordID("datastore-book-layout"))?.kind
         == BookishRecordKind.layout)
-    let mutationsAfterReset = try await harness.storageService.mutations()
+    let mutationsAfterReset = try await harness.storage.mutations()
     #expect(mutationsAfterReset.map(\.id) == mutationsBeforeReset.map(\.id))
     #expect(mutationsAfterReset.map(\.operation) == mutationsBeforeReset.map(\.operation))
-    #expect(harness.statusService.state.message == "Rebuilt record store")
+    #expect(harness.status.state.message == "Rebuilt record store")
   }
 
   @Test func resetCommandResetsDatastore() async throws {
     let harness = try makeHarness()
-    let commander = makeCommandCentre(for: harness)
+    let commander = harness
     await harness.load()
     let json = """
       { "records": [{ "ℹ": "test-command-reset-book", "©": "book", "name": "Command Reset Book" }] }
       """
-    await harness.importInterchange(data: Data(json.utf8))
-    await harness.applyPendingImport(choices: [:])
+    await harness.importing.importInterchange(data: Data(json.utf8))
+    await harness.importing.applyPendingImport(choices: [:])
     #expect(!harness.navigation.recordIDs.isEmpty)
     harness.navigation.select(recordID: BookishRecordID("test-command-reset-book"))
     #expect(harness.navigation.selectedRecordID == BookishRecordID("test-command-reset-book"))
     try await commander.perform(ResetDatastoreCommand())
     #expect(!harness.navigation.recordIDs.contains(BookishRecordID("test-command-reset-book")))
     #expect(harness.navigation.selectedRecordID == nil)
-    #expect(try await harness.storageService.record(id: BookishRecordID("seed-book")) == nil)
+    #expect(try await harness.storage.record(id: BookishRecordID("seed-book")) == nil)
     #expect(
-      try await harness.storageService.record(id: BookishRecordID("datastore-seed-marker"))?.kind
+      try await harness.storage.record(id: BookishRecordID("datastore-seed-marker"))?.kind
         == BookishRecordKind.seedMarker)
-    #expect((try await harness.storageService.mutations()).isEmpty)
-    #expect(harness.statusService.state.message == "Reset datastore")
+    #expect((try await harness.storage.mutations()).isEmpty)
+    #expect(harness.status.state.message == "Reset datastore")
   }
 
   @Test func recordQueryResultFollowsResetAndLaterMutations() async throws {

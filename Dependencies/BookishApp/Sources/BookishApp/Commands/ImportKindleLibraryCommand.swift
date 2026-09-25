@@ -3,7 +3,7 @@ import CommandsUI
 import Icons
 
 /// Requests access to Kindle's local library database.
-public struct ImportKindleLibraryCommand<Centre: BookishImportPresentationProvider>: CommandWithUI {
+public struct ImportKindleLibraryCommand<Centre: BookishImportingService.Provider>: CommandWithUI {
   public typealias ResultType = Void
 
   public let id = "datastore.import.kindle-library"
@@ -19,6 +19,6 @@ public struct ImportKindleLibraryCommand<Centre: BookishImportPresentationProvid
   }
 
   public func perform(centre: Centre) async throws {
-    centre.importPresentation.requestKindleLibraryImport()
+    centre.importingService.requestKindleLibraryImport()
   }
 }

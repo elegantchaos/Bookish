@@ -13,8 +13,7 @@ import Observation
 /// Owns Bookish's loaded datastore and vends operations over its materialised records.
 ///
 /// Services that need datastore behaviour depend on this service rather than retaining
-/// a `BookishDatastore` directly. Its API can be narrowed further as responsibilities
-/// move out of `BookishUIStateService`.
+/// a `BookishDatastore` directly.
 @MainActor
 public final class BookishStorageService {
   /// Performs datastore lifecycle and storage operations requested by commands.
@@ -37,6 +36,10 @@ public final class BookishStorageService {
     @ObservationIgnored private unowned let service: BookishStorageService
 
     /// Increments whenever views should resolve stored records again.
+    ///
+    /// TEMPORARY: a coarse signal that makes every visible record view reload. Remove
+    /// when views observe their own records and queries; see
+    /// `Extras/Journal/2026-09-25-fine-grained-record-observation.md`.
     public fileprivate(set) var revision = 0
 
     fileprivate init(service: BookishStorageService) {
@@ -105,6 +108,8 @@ public final class BookishStorageService {
   }
 
   /// Signals views that stored records should be resolved again.
+  ///
+  /// TEMPORARY: remove with `State.revision`.
   func didRefreshRecords() {
     state.revision += 1
   }
@@ -365,9 +370,6 @@ extension BookishStorageService: BookishStorageService.API {
 }
 
 extension BookishEngine: BookishStorageService.Provider {}
-
-extension BookishStorageService: BookishRecordActionStorage {
-}
 
 /// Errors reported when a datastore operation requires an unavailable store.
 enum BookishStorageError: LocalizedError {

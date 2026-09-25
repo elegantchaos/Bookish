@@ -9,8 +9,8 @@ import Testing
 @MainActor extension BookishAppTests {
   @Test
   func selectionCommandsAreDisabledWithoutSelection() {
-    let harness = makeUIState()
-    let commander = makeCommandCentre(for: harness)
+    let harness = makeEngine()
+    let commander = harness
 
     #expect(commander.availability(MarkReadingCommand()) == .disabled)
     #expect(commander.availability(MarkFinishedCommand()) == .disabled)
@@ -19,9 +19,9 @@ import Testing
 
   @Test
   func navigationCommandsAreDisabledWithoutRecords() {
-    let navigation = BookishNavigationService()
-    let harness = makeUIState(navigation: navigation)
-    let commander = makeCommandCentre(for: harness)
+    let harness = makeEngine()
+    let navigation = harness.navigation
+    let commander = harness
 
     #expect(commander.availability(SelectNextRecordIndexCommand()) == .disabled)
     #expect(commander.availability(SelectPreviousRecordIndexCommand()) == .disabled)
@@ -197,7 +197,7 @@ import Testing
   @Test
   func navigationCommandsMoveBetweenIndexesAndRecords() async throws {
     let harness = try makeHarness()
-    let commander = makeCommandCentre(for: harness)
+    let commander = harness
     await harness.load()
     try await harness.navigation.select(recordIndexID: BookishRecordID("datastore-index-layouts"))
 
@@ -209,8 +209,8 @@ import Testing
 
     #expect(harness.navigation.selectedRecordIndexName == "Layouts")
 
-    let navigation = BookishNavigationService()
-    let navigationCommander = makeCommandCentre(for: makeUIState(navigation: navigation))
+    let navigationCommander = makeEngine()
+    let navigation = navigationCommander.navigation
     let selectedRecordResult = RecordQueryResult(query: RecordQuery())
     selectedRecordResult.update(records: [
       BookishRecord(id: BookishRecordID("book-1"), kind: "book"),
@@ -256,7 +256,7 @@ import Testing
 
     try await harness.navigation.select(recordIndexID: BookishRecordID("datastore-index-layouts"))
 
-    let layout = try await harness.presentation.selectedLayout(
+    let layout = try await harness.presentationService.selectedLayout(
       for: harness.navigation.selectedRecordIndex)
 
     #expect(layout?.id == BookishRecordID("datastore-layout-layout"))
@@ -264,8 +264,8 @@ import Testing
 
   @Test
   func navigateToRecordCommandPushesTargetOutsideCurrentIndex() async throws {
-    let navigation = BookishNavigationService()
-    let commander = makeCommandCentre(for: makeUIState(navigation: navigation))
+    let commander = makeEngine()
+    let navigation = commander.navigation
     let selectedRecordResult = RecordQueryResult(query: RecordQuery())
     selectedRecordResult.update(records: [
       BookishRecord(id: BookishRecordID("author-1"), kind: "author")
@@ -280,8 +280,8 @@ import Testing
 
   @Test
   func navigateToRecordCommandCanSelectTargetInCurrentIndex() async throws {
-    let navigation = BookishNavigationService()
-    let commander = makeCommandCentre(for: makeUIState(navigation: navigation))
+    let commander = makeEngine()
+    let navigation = commander.navigation
     let selectedRecordResult = RecordQueryResult(query: RecordQuery())
     selectedRecordResult.update(records: [
       BookishRecord(id: BookishRecordID("author-1"), kind: "author"),

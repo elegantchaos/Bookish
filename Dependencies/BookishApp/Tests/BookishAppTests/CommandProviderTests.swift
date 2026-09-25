@@ -19,8 +19,8 @@ import Testing
 struct CommandProviderTests {
   @Test
   func importCommandsUseTheVendedImportPresentation() async throws {
-    let importPresentation = TestImportPresentation()
-    let centre = TestCommandCentre(importPresentation: importPresentation)
+    let importingService = TestImportPresentation()
+    let centre = TestCommandCentre(importingService: importingService)
     let interchangeURL = URL(filePath: "/tmp/library.bookish.json")
     let deliciousLibraryURL = URL(filePath: "/tmp/library.xml")
 
@@ -33,20 +33,20 @@ struct CommandProviderTests {
     try await centre.perform(ApplyPendingImportCommand())
     try await centre.perform(CancelPendingImportCommand())
 
-    #expect(importPresentation.requestedInterchangeImport)
-    #expect(importPresentation.requestedDeliciousLibraryImport)
-    #expect(importPresentation.requestedKindleLibraryImport)
-    #expect(importPresentation.importedSample == .small)
-    #expect(importPresentation.importedInterchangeURL == interchangeURL)
-    #expect(importPresentation.importedDeliciousLibraryURL == deliciousLibraryURL)
-    #expect(importPresentation.appliedPendingImport)
-    #expect(importPresentation.cancelledPendingImport)
+    #expect(importingService.requestedInterchangeImport)
+    #expect(importingService.requestedDeliciousLibraryImport)
+    #expect(importingService.requestedKindleLibraryImport)
+    #expect(importingService.importedSample == .small)
+    #expect(importingService.importedInterchangeURL == interchangeURL)
+    #expect(importingService.importedDeliciousLibraryURL == deliciousLibraryURL)
+    #expect(importingService.appliedPendingImport)
+    #expect(importingService.cancelledPendingImport)
   }
 
   @Test
   func browserSettingsCommandsUseTheVendedBrowserSettingsService() async throws {
     let browserSettings = TestBrowserSettings()
-    let centre = TestCommandCentre(browserSettingsService: browserSettings)
+    let centre = TestCommandCentre(browserService: browserSettings)
 
     try await centre.perform(SetDebugIndexVisibilityCommand(isVisible: true))
 
@@ -56,7 +56,7 @@ struct CommandProviderTests {
   @Test
   func settingsCommandsUseTheVendedPresentation() async throws {
     let settings = TestSettingsPresentation()
-    let centre = TestCommandCentre(settingsPresentation: settings)
+    let centre = TestCommandCentre(settingsPresentationService: settings)
 
     try await centre.perform(OpenSettingsCommand())
     #expect(settings.isOpen)
@@ -67,7 +67,7 @@ struct CommandProviderTests {
   @Test
   func newCommandsUseTheVendedRecordCreation() async throws {
     let creation = TestRecordCreation()
-    let centre = TestCommandCentre(recordCreation: creation)
+    let centre = TestCommandCentre(recordCreationService: creation)
 
     try await centre.perform(NewRecordCommand(type: .book))
 
@@ -76,10 +76,10 @@ struct CommandProviderTests {
 
   @Test
   func maintenanceCommandsUseTheVendedMaintenanceService() async throws {
-    let maintenanceService = TestDatastoreMaintenanceService(hasExportableRecords: true)
+    let exporting = TestExportingService(hasExportableRecords: true)
     let storageService = TestStorageService()
     let centre = TestCommandCentre(
-      datastoreMaintenanceService: maintenanceService,
+      exportingService: exporting,
       storageService: storageService
     )
 
@@ -87,29 +87,29 @@ struct CommandProviderTests {
     try await centre.perform(RebuildRecordStoreCommand())
     try await centre.perform(ResetDatastoreCommand())
 
-    #expect(maintenanceService.requestedInterchangeExport)
+    #expect(exporting.requestedInterchangeExport)
     #expect(storageService.rebuiltRecordProjection)
     #expect(storageService.resetDatastore)
   }
 
   @Test
   func recordActionCommandsUseTheVendedRecordActionService() async throws {
-    let recordActionService = TestRecordActionService(hasSelectedRecord: true)
-    let centre = TestCommandCentre(recordActionService: recordActionService)
+    let recordActionsService = TestRecordActionService(hasSelectedRecord: true)
+    let centre = TestCommandCentre(recordActionsService: recordActionsService)
 
     try await centre.perform(MarkReadingCommand())
     try await centre.perform(MarkFinishedCommand())
     try await centre.perform(SimulateRemoteMutationCommand())
 
-    #expect(recordActionService.markedReading)
-    #expect(recordActionService.markedFinished)
-    #expect(recordActionService.simulatedRemoteUpdate)
+    #expect(recordActionsService.markedReading)
+    #expect(recordActionsService.markedFinished)
+    #expect(recordActionsService.simulatedRemoteUpdate)
   }
 
   @Test
   func recordActionCommandsPassTheVisibleRecordID() async throws {
     let actions = TestRecordActionService(hasSelectedRecord: true)
-    let centre = TestCommandCentre(recordActionService: actions)
+    let centre = TestCommandCentre(recordActionsService: actions)
     let visibleID = BookishRecordID("linked-book")
 
     try await centre.perform(MarkReadingCommand(recordID: visibleID))
@@ -186,60 +186,60 @@ struct CommandProviderTests {
   }
 
   @Test
-  func recordActionsApplyAndRefreshASelectedRecordStatus() async {
+  func recordActionsApplyAndRefreshASelectedRecordStatus() async throws {
     let recordID = BookishRecordID("book-1")
-    let storage = TestRecordActionStorage(
-      record: BookishRecord(id: recordID, kind: BookishRecordKind.book)
-    )
-    let state = TestRecordActionState(selectedRecordID: recordID)
+    let storage = try await loadedStorage(with: [
+      BookishRecord(id: recordID, kind: BookishRecordKind.book)
+    ])
+    let navigation = TestNavigationService()
+    navigation.select(recordID: recordID)
+    let browser = TestBrowserSettings()
     let statusService = TestStatusService()
     let actions = BookishRecordActionsService(
       storage: storage,
-      state: state,
+      navigation: navigation,
+      browser: browser,
       statusService: statusService
     )
 
     await actions.markReading()
 
-    #expect(
-      storage.localMutations == [
-        .setProperty(
-          recordID: recordID,
-          kind: BookishRecordKind.book,
-          key: BookishRecordKey.status,
-          value: .string("Reading")
-        )
-      ]
-    )
-    #expect(state.refreshCount == 1)
+    #expect(try await storage.record(id: recordID)?.string(BookishRecordKey.status) == "Reading")
+    #expect(browser.refreshCount == 1)
     #expect(statusService.messages == ["Set status to Reading"])
   }
 
   @Test
-  func recordActionsTargetTheVisibleLinkedRecord() async {
+  func recordActionsTargetTheVisibleLinkedRecord() async throws {
     let selectedID = BookishRecordID("book-1")
     let visibleID = BookishRecordID("book-2")
-    let storage = TestRecordActionStorage(
-      record: BookishRecord(id: visibleID, kind: BookishRecordKind.book)
-    )
-    let state = TestRecordActionState(selectedRecordID: selectedID)
+    let storage = try await loadedStorage(with: [
+      BookishRecord(id: selectedID, kind: BookishRecordKind.book),
+      BookishRecord(id: visibleID, kind: BookishRecordKind.book),
+    ])
+    let navigation = TestNavigationService()
+    navigation.select(recordID: selectedID)
     let actions = BookishRecordActionsService(
       storage: storage,
-      state: state,
+      navigation: navigation,
+      browser: TestBrowserSettings(),
       statusService: TestStatusService()
     )
 
     await actions.markFinished(recordID: visibleID)
 
-    #expect(
-      storage.localMutations == [
-        .setProperty(
-          recordID: visibleID,
-          kind: BookishRecordKind.book,
-          key: BookishRecordKey.status,
-          value: .string("Finished")
-        )
-      ])
+    #expect(try await storage.record(id: visibleID)?.string(BookishRecordKey.status) == "Finished")
+    #expect(try await storage.record(id: selectedID)?.string(BookishRecordKey.status) == nil)
+  }
+
+  /// Loads storage in a temporary directory containing the supplied records.
+  private func loadedStorage(with records: [BookishRecord]) async throws -> BookishStorageService {
+    let directory = URL.temporaryDirectory.appending(
+      path: "CommandProviderTests-\(UUID().uuidString)", directoryHint: .isDirectory)
+    let storage = BookishStorageService(directoryURL: directory)
+    try await storage.load()
+    try await storage.upsert(records: records)
+    return storage
   }
 
   @Test
@@ -282,55 +282,56 @@ struct CommandProviderTests {
 @MainActor
 private final class TestCommandCentre:
   CommandCentre,
-  BookishImportPresentationProvider,
-  BookishDatastoreMaintenanceProvider,
+  BookishImportingService.Provider,
+  BookishExportingService.Provider,
   BookishStorageService.Provider,
   BookishStatusService.Provider,
-  BookishRecordActionsProvider,
+  BookishRecordActionsService.Provider,
   BookishRecognitionService.Provider,
   BookishLookupWorkflowService.Provider,
   BookishNavigationService.Provider,
-  BookishBrowserSettingsProvider,
-  BookishSettingsPresentationProvider,
-  BookishRecordCreationProvider
+  BookishBrowserService.Provider,
+  BookishSettingsPresentationService.Provider,
+  BookishRecordCreationService.Provider
 {
-  let importPresentation: any BookishImportPresentation
-  let datastoreMaintenanceService: any BookishDatastoreMaintenance
+  let importingService: any BookishImportingService.API
+  let exportingService: any BookishExportingService.API
   let storageService: any BookishStorageService.API
   let statusService: any BookishStatusService.API
-  let recordActionService: any BookishRecordActions
+  let recordActionsService: any BookishRecordActionsService.API
   let recognitionService: any BookishRecognitionService.API
   let lookupWorkflow: any BookishLookupWorkflowService.API
   let navigationService: any BookishNavigationService.API
-  let browserSettingsService: any BookishBrowserSettings
-  let settingsPresentation: any BookishSettingsPresentation
-  let recordCreation: any BookishRecordCreation
+  let browserService: any BookishBrowserService.API
+  let settingsPresentationService: any BookishSettingsPresentationService.API
+  let recordCreationService: any BookishRecordCreationService.API
 
   init(
-    importPresentation: any BookishImportPresentation = TestImportPresentation(),
-    datastoreMaintenanceService: any BookishDatastoreMaintenance =
-      TestDatastoreMaintenanceService(),
+    importingService: any BookishImportingService.API = TestImportPresentation(),
+    exportingService: any BookishExportingService.API =
+      TestExportingService(),
     storageService: any BookishStorageService.API = TestStorageService(),
     statusService: any BookishStatusService.API = TestStatusService(),
-    recordActionService: any BookishRecordActions = TestRecordActionService(),
+    recordActionsService: any BookishRecordActionsService.API = TestRecordActionService(),
     recognitionService: any BookishRecognitionService.API = TestBookRecognitionWorkflow(),
     lookupWorkflow: any BookishLookupWorkflowService.API = TestBookLookupWorkflow(),
     navigationService: any BookishNavigationService.API = TestNavigationService(),
-    browserSettingsService: any BookishBrowserSettings = TestBrowserSettings(),
-    settingsPresentation: any BookishSettingsPresentation = TestSettingsPresentation(),
-    recordCreation: any BookishRecordCreation = TestRecordCreation()
+    browserService: any BookishBrowserService.API = TestBrowserSettings(),
+    settingsPresentationService: any BookishSettingsPresentationService.API =
+      TestSettingsPresentation(),
+    recordCreationService: any BookishRecordCreationService.API = TestRecordCreation()
   ) {
-    self.importPresentation = importPresentation
-    self.datastoreMaintenanceService = datastoreMaintenanceService
+    self.importingService = importingService
+    self.exportingService = exportingService
     self.storageService = storageService
     self.statusService = statusService
-    self.recordActionService = recordActionService
+    self.recordActionsService = recordActionsService
     self.recognitionService = recognitionService
     self.lookupWorkflow = lookupWorkflow
     self.navigationService = navigationService
-    self.browserSettingsService = browserSettingsService
-    self.settingsPresentation = settingsPresentation
-    self.recordCreation = recordCreation
+    self.browserService = browserService
+    self.settingsPresentationService = settingsPresentationService
+    self.recordCreationService = recordCreationService
   }
 }
 
@@ -355,7 +356,7 @@ private final class TestBookLookupWorkflow: BookishLookupWorkflowService.API {
 }
 
 @MainActor
-private final class TestSettingsPresentation: BookishSettingsPresentation {
+private final class TestSettingsPresentation: BookishSettingsPresentationService.API {
   private(set) var isOpen = false
 
   func openSettings() {
@@ -368,7 +369,7 @@ private final class TestSettingsPresentation: BookishSettingsPresentation {
 }
 
 @MainActor
-private final class TestRecordCreation: BookishRecordCreation {
+private final class TestRecordCreation: BookishRecordCreationService.API {
   private(set) var createdTypes: [BookishNewRecordType] = []
 
   func canCreate(_: BookishNewRecordType) -> Bool { true }
@@ -444,7 +445,7 @@ private final class TestBookRecognitionWorkflow: BookishRecognitionService.API {
 }
 
 @MainActor
-private final class TestImportPresentation: BookishImportPresentation {
+private final class TestImportPresentation: BookishImportingService.API {
   var canApplyPendingImport = true
   private(set) var appliedPendingImport = false
   private(set) var cancelledPendingImport = false
@@ -494,20 +495,24 @@ private final class TestImportPresentation: BookishImportPresentation {
 }
 
 @MainActor
-private final class TestBrowserSettings: BookishBrowserSettings {
+private final class TestBrowserSettings: BookishBrowserService.API {
   private(set) var showsDebugIndexes = false
+
+  private(set) var refreshCount = 0
 
   func setShowsDebugIndexes(_ isVisible: Bool) async {
     showsDebugIndexes = isVisible
   }
+
+  func refresh() async throws {
+    refreshCount += 1
+  }
 }
 
 @MainActor
-private final class TestDatastoreMaintenanceService: BookishDatastoreMaintenance {
+private final class TestExportingService: BookishExportingService.API {
   let hasExportableRecords: Bool
   private(set) var requestedInterchangeExport = false
-  private(set) var rebuiltRecordProjection = false
-  private(set) var resetDatastore = false
 
   init(hasExportableRecords: Bool = false) {
     self.hasExportableRecords = hasExportableRecords
@@ -515,18 +520,6 @@ private final class TestDatastoreMaintenanceService: BookishDatastoreMaintenance
 
   func requestInterchangeExport() async {
     requestedInterchangeExport = true
-  }
-
-  func localDatastoreDirectory() throws -> URL {
-    URL.temporaryDirectory
-  }
-
-  func rebuildRecordProjection() async {
-    rebuiltRecordProjection = true
-  }
-
-  func reset() async {
-    resetDatastore = true
   }
 }
 
@@ -566,7 +559,7 @@ private final class TestStatusService: BookishStatusService.API {
 }
 
 @MainActor
-private final class TestRecordActionService: BookishRecordActions {
+private final class TestRecordActionService: BookishRecordActionsService.API {
   let hasSelectedRecord: Bool
   private(set) var markedReading = false
   private(set) var markedFinished = false
@@ -611,6 +604,7 @@ private final class TestNavigationService: BookishNavigationService.API {
   private(set) var recordNameFilter = ""
   private(set) var selectedNextRecord = false
   private(set) var selectedPreviousRecord = false
+  let recordIDs: [BookishRecordID] = []
 
   init(canSelectAnotherRecordIndex: Bool = false, canSelectAnotherRecord: Bool = false) {
     self.canSelectAnotherRecordIndex = canSelectAnotherRecordIndex
@@ -655,43 +649,5 @@ private final class TestNavigationService: BookishNavigationService.API {
 
   func selectPreviousRecord() {
     selectedPreviousRecord = true
-  }
-}
-
-@MainActor
-private final class TestRecordActionStorage: BookishRecordActionStorage {
-  let isLoaded = true
-  private let storedRecord: BookishRecord?
-  private(set) var localMutations: [MutationOperation] = []
-  private(set) var remoteMutations: [MutationRecord] = []
-
-  init(record: BookishRecord?) {
-    storedRecord = record
-  }
-
-  func record(id: BookishRecordID) async throws -> BookishRecord? {
-    storedRecord?.id == id ? storedRecord : nil
-  }
-
-  func perform(_ mutation: MutationRecord) async throws {
-    localMutations.append(mutation.operation)
-  }
-
-  func receiveRemoteMutation(_ mutation: MutationRecord) async throws {
-    remoteMutations.append(mutation)
-  }
-}
-
-@MainActor
-private final class TestRecordActionState: BookishRecordActionState {
-  let selectedRecordID: BookishRecordID?
-  private(set) var refreshCount = 0
-
-  init(selectedRecordID: BookishRecordID?) {
-    self.selectedRecordID = selectedRecordID
-  }
-
-  func refreshRecordActionState() async throws {
-    refreshCount += 1
   }
 }

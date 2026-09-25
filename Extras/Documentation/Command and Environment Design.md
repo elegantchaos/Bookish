@@ -36,7 +36,7 @@ SwiftUI view
 
 Each command represents a user or application action. It owns its availability,
 validation, and execution. A command is generic over the smallest
-`XXXProvider` protocol that supplies the required capability.
+`BookishXXXService.Provider` protocol that supplies the required capability.
 
 The engine conforms to these provider protocols by vending existential service
 capabilities while retaining concrete service ownership. A command must not
@@ -44,15 +44,15 @@ depend on the whole engine, a broad UI-state coordinator, or an unrelated
 service merely because the engine happens to own it.
 
 For example, a command that updates debug-index visibility depends on
-`BookishBrowserSettingsProvider`, which vends `BookishBrowserSettings`. It does
+`BookishBrowserService.Provider`, which vends `BookishBrowserService.API`. It does
 not depend on import, storage, record-action, recognition, or navigation
 capabilities.
 
 New commands should follow this sequence:
 
 1. Identify the action in user terms.
-2. Add the smallest mutation method to the action's service protocol.
-3. Add a narrow provider protocol that vends that service.
+2. Add the smallest mutation method to the owning service's nested `API`.
+3. If the service is new, add its nested `Provider` and conform the engine to it.
 4. Implement the command against that provider.
 5. Dispatch the command from the view through the environment-injected commander.
 6. Test the command with a fake provider and fake service.
@@ -92,13 +92,19 @@ The environment injects the command façade and view-facing observable state.
 injects as `BookishStatusService.State`. Views read its message and import
 progress and may report view-owned errors through its method. The service's
 command-facing `API` and command-centre `Provider` protocols live in the same
-source file as the service. Storage, navigation, presentation, recognition, and
-lookup follow the same shape. Record views resolve stored records through
+source file as the service. Every other application service follows the same
+shape. Record views resolve stored records through
 `BookishStorageService.State`, which exposes read-only queries and the record
 revision that keys their reload tasks, and resolve layouts and presentations
-through `BookishPresentationService.State`. `BookishUIStateService` is still
-injected for import review, export, and Settings presentation until it is split.
-The engine is not injected into SwiftUI view content.
+through `BookishPresentationService.State`. Import review, export, and Settings
+presentation have their own `State` projections on `BookishImportingService`,
+`BookishExportingService`, and `BookishSettingsPresentationService`. The engine
+is not injected into SwiftUI view content.
+
+Services that write records call `BookishBrowserService.API.refresh()` afterwards,
+which advances the storage revision so record views reload. This is a temporary
+workaround until views observe their own records and queries; see
+[Fine-Grained Record Observation](../Journal/2026-09-25-fine-grained-record-observation.md).
 
 The façade intentionally exposes only command dispatch and command UI helpers.
 Views should report allowed view-owned loading and picker failures through the

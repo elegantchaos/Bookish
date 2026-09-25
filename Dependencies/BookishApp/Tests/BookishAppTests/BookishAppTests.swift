@@ -21,21 +21,21 @@ struct BookishAppTests {
     let recordsDirectory = directory.appending(path: "records", directoryHint: .isDirectory)
     try Data("not valid record JSON".utf8).write(
       to: recordsDirectory.appending(path: "record-old.json"))
-    let harness = makeUIState(directoryURL: directory)
+    let harness = makeEngine(directoryURL: directory)
 
     await harness.load()
 
-    #expect(harness.statusService.state.message == "Ready")
+    #expect(harness.status.state.message == "Ready")
     #expect(
-      try await harness.storageService.record(id: bookID)?.string("name") == "Recovered")
+      try await harness.storage.record(id: bookID)?.string("name") == "Recovered")
   }
 
   @MainActor
   @Test
   func statusServiceStartsInLoadingState() {
-    let harness = makeUIState()
+    let harness = makeEngine()
 
-    #expect(harness.statusService.state.message == "Loading")
+    #expect(harness.status.state.message == "Loading")
     #expect(harness.navigation.recordIDs.isEmpty)
   }
 
@@ -70,8 +70,8 @@ struct BookishAppTests {
     await harness.load()
 
     let authorID = BookishRecordID("seed-author")
-    let seededBook = try await harness.storageService.record(id: BookishRecordID("seed-book"))
-    let seededAuthor = try await harness.storageService.record(id: authorID)
+    let seededBook = try await harness.storage.record(id: BookishRecordID("seed-book"))
+    let seededAuthor = try await harness.storage.record(id: authorID)
     let book = try #require(seededBook)
     let author = try #require(seededAuthor)
 
@@ -143,7 +143,8 @@ struct BookishAppTests {
     let harness = try makeHarness()
     await harness.load()
 
-    let presentations = try await harness.presentation.presentations(for: BookishRecordKind.person)
+    let presentations = try await harness.presentationService.presentations(
+      for: BookishRecordKind.person)
     let presentation = try #require(presentations.first)
 
     for key in [
@@ -173,9 +174,9 @@ struct BookishAppTests {
     await harness.load()
 
     let bookMetadata = try #require(
-      try await harness.presentation.recordKindMetadata(for: BookishRecordKind.book))
+      try await harness.presentationService.recordKindMetadata(for: BookishRecordKind.book))
     let unknownMetadata = try #require(
-      try await harness.presentation.recordKindMetadata(for: "customKind"))
+      try await harness.presentationService.recordKindMetadata(for: "customKind"))
 
     #expect(bookMetadata.kind == BookishRecordKind.metadata)
     #expect(bookMetadata.string(BookishRecordKey.name) == "Book")
@@ -195,26 +196,24 @@ struct BookishAppTests {
     let settings = try #require(UserDefaults(suiteName: settingsName))
     defer { settings.removePersistentDomain(forName: settingsName) }
     let directoryURL = try temporaryDirectory()
-    let storageService = BookishStorageService(directoryURL: directoryURL)
-    let navigation = BookishNavigationService(storageService: storageService, settings: settings)
-    let harness = makeUIState(
-      directoryURL: directoryURL, navigation: navigation, defaultShowsDebugIndexes: true)
+    let harness = makeEngine(
+      directoryURL: directoryURL, settings: settings, defaultShowsDebugIndexes: true)
     await harness.load()
 
     let names = harness.navigation.recordIndexes.map { $0.name }
     let allRecordsIndex = try #require(harness.navigation.recordIndexes.first)
-    let storedAllRecordsIndex = try await harness.storageService.record(id: allRecordsIndex.id)
-    let storedIndexesIndex = try await harness.storageService.record(
+    let storedAllRecordsIndex = try await harness.storage.record(id: allRecordsIndex.id)
+    let storedIndexesIndex = try await harness.storage.record(
       id: BookishRecordID("datastore-index-indexes"))
-    let storedBooksIndex = try await harness.storageService.record(
+    let storedBooksIndex = try await harness.storage.record(
       id: BookishRecordID("datastore-index-books"))
-    let storedSeriesIndex = try await harness.storageService.record(
+    let storedSeriesIndex = try await harness.storage.record(
       id: BookishRecordID("datastore-index-series"))
-    let storedMetadataIndex = try await harness.storageService.record(
+    let storedMetadataIndex = try await harness.storage.record(
       id: BookishRecordID("datastore-index-metadata"))
-    let storedPresentationsIndex = try await harness.storageService.record(
+    let storedPresentationsIndex = try await harness.storage.record(
       id: BookishRecordID("datastore-index-presentations"))
-    let seedMarker = try await harness.storageService.record(
+    let seedMarker = try await harness.storage.record(
       id: BookishRecordID("datastore-seed-marker"))
 
     #expect(
@@ -255,7 +254,7 @@ struct BookishAppTests {
     #expect(storedBooksIndex?.bool(BookishRecordKey.debugOnly) == false)
     #expect(storedBooksIndex?.strings(BookishRecordKey.types) == [BookishRecordKind.book])
     #expect(seedMarker?.kind == BookishRecordKind.seedMarker)
-    #expect(harness.defaultShowsDebugIndexes)
+    #expect(harness.browser.defaultShowsDebugIndexes)
     #expect(harness.navigation.selectedRecordIndexName == "All Records")
     #expect(!harness.navigation.selectedRecordIDs.isEmpty)
   }
@@ -268,13 +267,13 @@ struct BookishAppTests {
     try await harness.navigation.select(recordIndexID: BookishRecordID("datastore-index-people"))
     try await harness.navigation.setRecordNameFilter("hidden")
 
-    try await harness.create(.book)
+    try await harness.recordCreation.create(.book)
 
     #expect(harness.navigation.selectedRecordIndexID == BookishRecordID("datastore-index-books"))
     #expect(harness.navigation.recordNameFilter.isEmpty)
     let selectedID = try #require(harness.navigation.selectedRecordID)
     #expect(harness.navigation.selectedRecordIDs.contains(selectedID))
-    let record = try #require(try await harness.storageService.record(id: selectedID))
+    let record = try #require(try await harness.storage.record(id: selectedID))
     #expect(record.kind == BookishRecordKind.book)
     #expect(record.string(BookishRecordKey.name) == "New Book")
   }
@@ -296,11 +295,11 @@ struct BookishAppTests {
         ])),
       newRecordTypes: [.book]
     )
-    try await harness.storageService.upsert(records: [readingIndex])
-    try await harness.refreshBrowser()
+    try await harness.storage.upsert(records: [readingIndex])
+    try await harness.browser.refresh()
     try await harness.navigation.select(recordIndexID: readingIndexID)
 
-    try await harness.create(.book)
+    try await harness.recordCreation.create(.book)
 
     #expect(harness.navigation.selectedRecordIndexID == BookishRecordID("datastore-index-books"))
     #expect(harness.navigation.selectedRecordID != nil)
@@ -310,24 +309,24 @@ struct BookishAppTests {
   @Test
   func existingLibraryIndexesGainCreationMetadataWithoutReplacingTheIndex() async throws {
     let directory = try temporaryDirectory()
-    let first = makeUIState(directoryURL: directory)
+    let first = makeEngine(directoryURL: directory)
     await first.load()
     let indexID = BookishRecordID("datastore-index-books")
-    try await first.storageService.perform(
+    try await first.storage.perform(
       MutationRecord(
         operation: .deleteProperty(
           recordID: indexID, key: BookishRecordKey.newRecordTypes))
     )
-    try await first.storageService.perform(
+    try await first.storage.perform(
       MutationRecord(
         operation: .setProperty(
           recordID: indexID, kind: BookishRecordKind.index,
           key: BookishRecordKey.name, value: .string("My Books")))
     )
 
-    let reopened = makeUIState(directoryURL: directory)
+    let reopened = makeEngine(directoryURL: directory)
     await reopened.load()
-    let stored = try #require(try await reopened.storageService.record(id: indexID))
+    let stored = try #require(try await reopened.storage.record(id: indexID))
 
     #expect(stored.string(BookishRecordKey.name) == "My Books")
     #expect(stored.strings(BookishRecordKey.newRecordTypes) == [BookishRecordKind.book])
@@ -348,7 +347,7 @@ struct BookishAppTests {
         "Series",
         "Lists",
       ])
-    #expect(!harness.defaultShowsDebugIndexes)
+    #expect(!harness.browser.defaultShowsDebugIndexes)
     #expect(harness.navigation.selectedRecordIndexName == "Books")
   }
 
@@ -358,14 +357,14 @@ struct BookishAppTests {
     let harness = try makeHarness(defaultShowsDebugIndexes: false)
     await harness.load()
 
-    await harness.setShowsDebugIndexes(true)
+    await harness.browser.setShowsDebugIndexes(true)
 
-    #expect(harness.showsDebugIndexes)
+    #expect(harness.browser.showsDebugIndexes)
     #expect(harness.navigation.recordIndexes.map(\.name).contains("All Records"))
 
-    await harness.setShowsDebugIndexes(false)
+    await harness.browser.setShowsDebugIndexes(false)
 
-    #expect(!harness.showsDebugIndexes)
+    #expect(!harness.browser.showsDebugIndexes)
     #expect(!harness.navigation.recordIndexes.map(\.name).contains("All Records"))
     #expect(harness.navigation.selectedRecordIndexName == "Books")
   }
@@ -377,23 +376,23 @@ struct BookishAppTests {
     let harness = try makeHarness()
     await harness.load()
 
-    let layoutIDs = Set(harness.presentation.layoutIDs)
-    let allFields = try await harness.storageService.record(
+    let layoutIDs = Set(harness.presentationService.layoutIDs)
+    let allFields = try await harness.storage.record(
       id: BookishRecordID("datastore-all-fields-layout"))
-    let book = try await harness.storageService.record(id: BookishRecordID("datastore-book-layout"))
-    let bookRelationships = try await harness.storageService.record(
+    let book = try await harness.storage.record(id: BookishRecordID("datastore-book-layout"))
+    let bookRelationships = try await harness.storage.record(
       id: BookishRecordID("datastore-book-relationships-layout"))
     let seedBook = try #require(
-      try await harness.storageService.record(id: BookishRecordID("seed-book")))
-    let presentedBookLayout = try await harness.presentation.layout(
+      try await harness.storage.record(id: BookishRecordID("seed-book")))
+    let presentedBookLayout = try await harness.presentationService.layout(
       for: seedBook,
       recordIndex: harness.navigation.selectedRecordIndex
     )
-    let layout = try await harness.storageService.record(
+    let layout = try await harness.storage.record(
       id: BookishRecordID("datastore-layout-layout"))
-    let index = try await harness.storageService.record(
+    let index = try await harness.storage.record(
       id: BookishRecordID("datastore-index-layout"))
-    let seedMarker = try await harness.storageService.record(
+    let seedMarker = try await harness.storage.record(
       id: BookishRecordID("datastore-seed-marker"))
 
     #expect(layoutIDs.contains(BookishRecordID("datastore-book-layout")))
@@ -438,14 +437,14 @@ struct BookishAppTests {
     await harness.load()
 
     let personLayout = try #require(
-      try await harness.storageService.record(id: BookishRecordID("datastore-person-layout")))
+      try await harness.storage.record(id: BookishRecordID("datastore-person-layout")))
     let section = try #require(
-      try await harness.storageService.record(id: BookishRecordID("query-section-person-books")))
+      try await harness.storage.record(id: BookishRecordID("query-section-person-books")))
     let host = try #require(
-      try await harness.storageService.record(id: BookishRecordID("seed-author")))
+      try await harness.storage.record(id: BookishRecordID("seed-author")))
     let template = try #require(
       section.encoded(BookishRecordKey.query, as: RecordQueryTemplate.self))
-    let result = try await harness.storageService.recordQueryResult(for: template, host: host)
+    let result = try await harness.storage.recordQueryResult(for: template, host: host)
 
     #expect(personLayout.kind == BookishRecordKind.layout)
     #expect(
@@ -463,8 +462,8 @@ struct BookishAppTests {
     await harness.load()
 
     let person = try #require(
-      try await harness.storageService.record(id: BookishRecordID("seed-author")))
-    let layout = try await harness.presentation.layout(
+      try await harness.storage.record(id: BookishRecordID("seed-author")))
+    let layout = try await harness.presentationService.layout(
       for: person,
       recordIndex: harness.navigation.selectedRecordIndex
     )
@@ -482,17 +481,17 @@ struct BookishAppTests {
     try await harness.navigation.select(recordIndexID: BookishRecordID("datastore-index-books"))
 
     #expect(
-      Set(harness.presentation.compatibleLayoutIDs) == [
+      Set(harness.presentationService.compatibleLayoutIDs) == [
         BookishRecordID("datastore-all-fields-layout"),
         BookishRecordID("datastore-book-layout"),
       ])
 
-    harness.presentation.selectedLayoutID = BookishRecordID("datastore-book-layout")
+    harness.presentationService.selectedLayoutID = BookishRecordID("datastore-book-layout")
     try await harness.navigation.select(recordIndexID: BookishRecordID("datastore-index-people"))
 
-    #expect(harness.presentation.selectedLayoutID == nil)
+    #expect(harness.presentationService.selectedLayoutID == nil)
     #expect(
-      Set(harness.presentation.compatibleLayoutIDs) == [
+      Set(harness.presentationService.compatibleLayoutIDs) == [
         BookishRecordID("datastore-all-fields-layout"),
         BookishRecordID("datastore-person-layout"),
       ])
@@ -505,7 +504,7 @@ struct BookishAppTests {
     let harness = try makeHarness()
     await harness.load()
 
-    let storedBookIndex = try await harness.storageService.record(
+    let storedBookIndex = try await harness.storage.record(
       id: BookishRecordID("datastore-index-books"))
 
     if let encodedQuery = storedBookIndex?.properties[BookishRecordKey.query]?.encodedValue {
@@ -531,7 +530,7 @@ struct BookishAppTests {
 
   func harnessPreservesConfigurationEditsAfterFirstRun() async throws {
     let directory = try temporaryDirectory()
-    let initialHarness = makeUIState(directoryURL: directory)
+    let initialHarness = makeEngine(directoryURL: directory)
     await initialHarness.load()
 
     let datastore = try await BookishDatastore(directoryURL: directory)
@@ -540,14 +539,14 @@ struct BookishAppTests {
     bookLayout.properties[BookishRecordKey.name] = .string("My Book Layout")
     try await datastore.recordStore.upsert(bookLayout)
 
-    let subsequentHarness = makeUIState(directoryURL: directory)
+    let subsequentHarness = makeEngine(directoryURL: directory)
     await subsequentHarness.load()
 
-    let storedBookLayout = try await subsequentHarness.storageService.record(
+    let storedBookLayout = try await subsequentHarness.storage.record(
       id: BookishRecordID("datastore-book-layout"))
-    let sampleBook = try await subsequentHarness.storageService.record(
+    let sampleBook = try await subsequentHarness.storage.record(
       id: BookishRecordID("seed-book"))
-    let seedMarker = try await subsequentHarness.storageService.record(
+    let seedMarker = try await subsequentHarness.storage.record(
       id: BookishRecordID("datastore-seed-marker"))
 
     #expect(storedBookLayout?.string(BookishRecordKey.name) == "My Book Layout")
@@ -602,20 +601,20 @@ struct BookishAppTests {
         kind: BookishRecordKind.index,
         properties: [BookishRecordKey.name: .string("Relationships")]
       ))
-    let harness = makeUIState(directoryURL: directory)
+    let harness = makeEngine(directoryURL: directory)
 
     await harness.load()
 
     let names = harness.navigation.recordIndexes.map(\.name)
-    let staleRecordIndex = try await harness.storageService.record(
+    let staleRecordIndex = try await harness.storage.record(
       id: BookishRecordID("datastore-index-records"))
-    let staleRecordIndexKind = try await harness.storageService.record(
+    let staleRecordIndexKind = try await harness.storage.record(
       id: BookishRecordID("datastore-index-record-indexes"))
-    let staleLayout = try await harness.storageService.record(
+    let staleLayout = try await harness.storage.record(
       id: BookishRecordID("datastore-book-compact-layout"))
-    let relationshipLayout = try await harness.storageService.record(
+    let relationshipLayout = try await harness.storage.record(
       id: BookishRecordID("datastore-relationship-layout"))
-    let relationshipsIndex = try await harness.storageService.record(
+    let relationshipsIndex = try await harness.storage.record(
       id: BookishRecordID("datastore-index-relationships"))
 
     #expect(names.contains("Records"))
@@ -629,8 +628,8 @@ struct BookishAppTests {
   @MainActor
   @Test
   func exportCommandIsDisabledWithoutRecords() {
-    let harness = makeUIState()
-    let commander = makeCommandCentre(for: harness)
+    let harness = makeEngine()
+    let commander = harness
 
     #expect(commander.availability(ExportInterchangeCommand()) == .disabled)
   }
@@ -640,9 +639,9 @@ struct BookishAppTests {
 
   func localDatastoreDirectoryUsesInjectedDirectory() throws {
     let directory = try temporaryDirectory()
-    let harness = makeUIState(directoryURL: directory)
+    let harness = makeEngine(directoryURL: directory)
 
-    #expect(try harness.storageService.localDatastoreDirectory() == directory)
+    #expect(try harness.storage.localDatastoreDirectory() == directory)
     #expect(FileManager.default.fileExists(atPath: directory.path()))
   }
 
@@ -650,8 +649,8 @@ struct BookishAppTests {
   @Test
 
   func revealDatastoreFolderCommandIsAvailableOnMac() {
-    let harness = makeUIState()
-    let commander = makeCommandCentre(for: harness)
+    let harness = makeEngine()
+    let commander = harness
 
     #expect(commander.availability(RevealDatastoreFolderCommand()) == .enabled)
   }
@@ -660,12 +659,12 @@ struct BookishAppTests {
   @Test
 
   func otherDeliciousLibraryImportCommandRequestsViewOwnedFilePicker() async throws {
-    let harness = makeUIState()
-    let commander = makeCommandCentre(for: harness)
+    let harness = makeEngine()
+    let commander = harness
 
     try await commander.perform(ImportOtherDeliciousLibraryCommand())
 
-    #expect(harness.isImportingDeliciousLibrary)
+    #expect(harness.importing.state.isImportingDeliciousLibrary)
     #expect(harness.navigation.selectedMainSection == .importing)
   }
 
@@ -674,17 +673,17 @@ struct BookishAppTests {
 
   func deliciousLibrarySmallSampleCommandImportsBundledSample() async throws {
     let harness = try makeHarness()
-    let commander = makeCommandCentre(for: harness)
+    let commander = harness
     await harness.load()
 
     try await commander.perform(ImportDeliciousLibrarySampleCommand(sample: .small))
-    let plan = try #require(harness.pendingImportPlan)
+    let plan = try #require(harness.importing.state.pendingImportPlan)
     #expect(harness.navigation.selectedMainSection == .importing)
     let choices = Dictionary(
       uniqueKeysWithValues: plan.reviewEntries.map { entry in
         (entry.id, BookishImportChoice.create)
       })
-    await harness.applyPendingImport(choices: choices)
+    await harness.importing.applyPendingImport(choices: choices)
 
     let importedBooks = try await records(for: harness).filter {
       $0.kind == "book" && $0.string(BookishRecordKey.name) == "Snow Crash"
@@ -696,8 +695,8 @@ struct BookishAppTests {
   @Test
 
   func deliciousLibrarySampleCommandUsesMenuLabels() {
-    let harness = makeUIState()
-    let commander = makeCommandCentre(for: harness)
+    let harness = makeEngine()
+    let commander = harness
 
     #expect(
       ImportDeliciousLibrarySampleCommand(sample: .small).name(centre: commander) == "Small Sample")
@@ -709,28 +708,27 @@ struct BookishAppTests {
   @Test
 
   func testErrorCommandIsShownInStatusBar() async {
-    let harness = makeUIState()
-    let commander = makeCommandCentre(for: harness)
+    let harness = makeEngine()
+    let commander = harness
 
     await commander.performWithoutWaiting(ThrowTestErrorCommand()).value
 
-    #expect(harness.statusService.state.message == "This is a test command error.")
+    #expect(harness.status.state.message == "This is a test command error.")
   }
 
   @MainActor
   @Test
   func commandCentreVendsTheHarnessCapabilitiesAndNavigationService() {
-    let navigation = BookishNavigationService()
-    let harness = makeUIState(navigation: navigation)
-    let commander = makeCommandCentre(for: harness)
+    let harness = makeEngine()
+    let commander = harness
 
-    commander.importPresentation.requestInterchangeImport()
+    commander.importingService.requestInterchangeImport()
     commander.statusService.report(message: "Reported through status capability")
 
-    #expect(harness.isImportingInterchange)
-    #expect(harness.statusService.state.message == "Reported through status capability")
-    #expect(!commander.datastoreMaintenanceService.hasExportableRecords)
-    #expect(!commander.recordActionService.hasSelectedRecord)
+    #expect(harness.importing.state.isImportingInterchange)
+    #expect(harness.status.state.message == "Reported through status capability")
+    #expect(!commander.exportingService.hasExportableRecords)
+    #expect(!commander.recordActionsService.hasSelectedRecord)
     #expect(!commander.navigationService.canSelectAnotherRecordIndex)
     #expect(!commander.navigationService.canSelectAnotherRecord)
   }
@@ -757,7 +755,7 @@ struct BookishAppTests {
 
   @MainActor
   @Test
-  func engineLoadsStorageAndRefreshesUIState() async throws {
+  func engineLoadsStorageAndRefreshesBrowser() async throws {
     let engine = BookishEngine(directoryURL: try temporaryDirectory())
 
     await engine.load()
@@ -776,10 +774,13 @@ struct BookishAppTests {
   func engineOwnsAndInjectsBookishServices() {
     let engine = BookishEngine()
 
-    #expect(engine.uiState.navigation === engine.navigation)
-    #expect(engine.uiState.presentation === engine.presentationService)
-    #expect(engine.uiState.statusService === engine.status)
     #expect(engine.storage === engine.navigation.storageService)
+    #expect(engine.browserService === engine.browser)
+    #expect(engine.importingService === engine.importing)
+    #expect(engine.exportingService === engine.exporting)
+    #expect(engine.settingsPresentationService === engine.settingsPresentation)
+    #expect(engine.recordCreationService === engine.recordCreation)
+    #expect(engine.recordActionsService === engine.recordActions)
   }
 
   @MainActor
@@ -790,59 +791,41 @@ struct BookishAppTests {
     await engine.performWithoutWaiting(ImportInterchangeCommand()).value
     await engine.performWithoutWaiting(ThrowTestErrorCommand()).value
 
-    #expect(engine.uiState.isImportingInterchange)
+    #expect(engine.importing.state.isImportingInterchange)
     #expect(engine.status.state.message == "This is a test command error.")
   }
 
   @MainActor
-  func makeHarness(defaultShowsDebugIndexes: Bool = true) throws -> BookishUIStateService {
-    makeUIState(
+  func makeHarness(defaultShowsDebugIndexes: Bool = true) throws -> BookishEngine {
+    makeEngine(
       directoryURL: try temporaryDirectory(),
       defaultShowsDebugIndexes: defaultShowsDebugIndexes
     )
   }
 
+  /// Creates an engine whose settings are isolated from other tests.
   @MainActor
-  func makeUIState(
+  func makeEngine(
     directoryURL: URL? = nil,
-    navigation: BookishNavigationService? = nil,
+    settings: UserDefaults? = nil,
     defaultShowsDebugIndexes: Bool = false
-  ) -> BookishUIStateService {
-    let storageService =
-      navigation?.storageService ?? BookishStorageService(directoryURL: directoryURL)
-    storageService.configure(directoryURL: directoryURL)
+  ) -> BookishEngine {
     let suiteName = "BookishAppTests-\(UUID().uuidString)"
-    guard let settings = UserDefaults(suiteName: suiteName) else {
+    guard let settings = settings ?? UserDefaults(suiteName: suiteName) else {
       preconditionFailure("Could not create test settings suite")
     }
-    let navigation =
-      navigation
-      ?? BookishNavigationService(
-        storageService: storageService, settings: settings)
-    let presentationService = BookishPresentationService(storageService: storageService)
-    let statusService = BookishStatusService()
-    let importingService = BookishImportingService(storageService: storageService)
-    let exportingService = BookishExportingService(storageService: storageService)
-    return BookishUIStateService(
-      navigation: navigation,
-      presentation: presentationService,
-      statusService: statusService,
-      importingService: importingService,
-      exportingService: exportingService,
-      defaultShowsDebugIndexes: defaultShowsDebugIndexes
+    return BookishEngine(
+      directoryURL: directoryURL,
+      defaultShowsDebugIndexes: defaultShowsDebugIndexes,
+      settings: settings
     )
   }
 
   @MainActor
-  func makeCommandCentre(for uiState: BookishUIStateService) -> UIStateCommandCentre {
-    UIStateCommandCentre(uiState: uiState)
-  }
-
-  @MainActor
-  func records(for harness: BookishUIStateService) async throws -> [BookishRecord] {
+  func records(for harness: BookishEngine) async throws -> [BookishRecord] {
     var records: [BookishRecord] = []
     for id in harness.navigation.recordIDs {
-      if let record = try await harness.storageService.record(id: id) {
+      if let record = try await harness.storage.record(id: id) {
         records.append(record)
       }
     }
@@ -850,10 +833,10 @@ struct BookishAppTests {
   }
 
   @MainActor
-  func selectedRecords(for harness: BookishUIStateService) async throws -> [BookishRecord] {
+  func selectedRecords(for harness: BookishEngine) async throws -> [BookishRecord] {
     var records: [BookishRecord] = []
     for id in harness.navigation.selectedRecordIDs {
-      if let record = try await harness.storageService.record(id: id) {
+      if let record = try await harness.storage.record(id: id) {
         records.append(record)
       }
     }
@@ -884,60 +867,5 @@ struct BookishAppTests {
       position: 0,
       query: RecordQuery(predicate: predicate)
     )
-  }
-}
-
-@MainActor
-extension BookishUIStateService {
-  /// The storage service used to set up and inspect UI-state integration tests.
-  var storageService: BookishStorageService {
-    navigation.storageService
-  }
-
-  /// Loads test storage and synchronises its browser-facing UI state.
-  func load() async {
-    do {
-      try await storageService.load()
-      try await refreshBrowser()
-      statusService.report(message: "Ready")
-    } catch {
-      statusService.report(error: error)
-    }
-  }
-}
-
-@MainActor
-final class UIStateCommandCentre:
-  CommandCentre,
-  BookishStatusService.Provider,
-  BookishImportPresentationProvider,
-  BookishDatastoreMaintenanceProvider,
-  BookishStorageService.Provider,
-  BookishRecordActionsProvider,
-  BookishNavigationService.Provider
-{
-  let statusService: any BookishStatusService.API
-  let importPresentation: any BookishImportPresentation
-  let datastoreMaintenanceService: any BookishDatastoreMaintenance
-  let storageService: any BookishStorageService.API
-  let recordActionService: any BookishRecordActions
-  let navigationService: any BookishNavigationService.API
-
-  init(uiState: BookishUIStateService) {
-    statusService = uiState.statusService
-    importPresentation = uiState
-    datastoreMaintenanceService = uiState
-    storageService = uiState.storageService
-    recordActionService = BookishRecordActionsService(
-      storage: uiState.storageService,
-      state: uiState,
-      statusService: uiState.statusService
-    )
-    navigationService = uiState.navigation
-  }
-
-  func recordCommandFailure<C: Command>(_ command: C, error: any Error)
-  where C.Centre == UIStateCommandCentre {
-    statusService.report(error: error)
   }
 }
