@@ -57,12 +57,8 @@ public final class BookishImportingService {
       state.lastImportResult = BookishImportWorkflowResult(
         sourceName: pendingImportDisplayName, importedRecords: resolution.records,
         skippedCount: plan.skippedCount,
-        reusedCount: choices.values.filter {
-          switch $0 {
-          case .keepExisting, .useExisting: true
-          case .create, .replaceExisting: false
-          }
-        }.count)
+        reusedCount: (resolution.treatments[.kept]?.count ?? 0)
+          + (resolution.treatments[.matched]?.count ?? 0))
       // TEMPORARY: refreshes the browser so imported records appear; remove when
       // views observe their records and queries.
       try await browser.refresh()
@@ -148,7 +144,7 @@ extension BookishImportingService {
     /// The imported records awaiting user review.
     public fileprivate(set) var pendingImportPlan: BookishImportPlan?
 
-    /// Choices for the pending proposal, initially favouring existing records.
+    /// Choices for the pending proposal, initially adding new records and favouring existing ones.
     public fileprivate(set) var importChoices: [BookishRecordID: BookishImportChoice] = [:]
 
     /// The last applied import, shown in the Import workflow.
@@ -171,12 +167,10 @@ extension BookishImportingService {
       return pendingImportPlan.reviewEntries.allSatisfy { importChoices[$0.id] != nil }
     }
 
-    /// Sets one review choice.
-    public func setImportChoice(_ choice: BookishImportChoice, for id: BookishRecordID) {
-      guard pendingImportPlan?.reviewEntries.contains(where: { $0.id == id }) == true else {
-        return
-      }
-      importChoices[id] = choice
+    /// Sets one choice for every listed record that allows it; other records are unchanged.
+    public func setImportChoice(_ choice: BookishImportChoice, for ids: Set<BookishRecordID>) {
+      guard let pendingImportPlan else { return }
+      importChoices.merge(pendingImportPlan.choices(for: ids, setting: choice)) { _, new in new }
     }
 
     /// Sets the preference for selected review entries in one operation.
@@ -404,16 +398,22 @@ extension BookishImportingService {
       existing: existing)
   }
 
-  func apply(_ plan: BookishImportPlan, choices: [BookishRecordID: BookishImportChoice])
-    async throws -> BookishImportResolution
-  {
+  /// Writes the resolved records, plus an audit list of how each record was treated.
+  func apply(
+    _ plan: BookishImportPlan, choices: [BookishRecordID: BookishImportChoice], date: Date = .now
+  ) async throws -> BookishImportResolution {
     let current = try await storageService.records(matching: RecordQuery())
     guard
       Dictionary(uniqueKeysWithValues: current.map { ($0.id, $0) })
         == Dictionary(uniqueKeysWithValues: plan.existingSnapshot.map { ($0.id, $0) })
     else { throw BookishImportingError.catalogueChanged }
     let resolved = try plan.resolve(choices: choices)
-    try await storageService.upsert(records: resolved.records)
+    let auditList = try resolved.auditList(
+      id: BookishRecordID("import-\(UUID().uuidString)"),
+      name:
+        "\(pendingImportDisplayName) Import, \(date.formatted(date: .abbreviated, time: .shortened))",
+      sourceID: plan.sourceID, date: date)
+    try await storageService.upsert(records: resolved.records + [auditList].compactMap { $0 })
     return resolved
   }
 }

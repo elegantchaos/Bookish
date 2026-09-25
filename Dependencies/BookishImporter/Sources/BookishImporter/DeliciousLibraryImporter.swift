@@ -40,16 +40,13 @@ public struct DeliciousLibraryImporter: BookishImporter {
               message: "Importing Delicious Library", completed: 0, total: total)))
 
         var builder = DeliciousRecordGraphBuilder(sourceID: Self.sourceID)
-        let root = BookishRecordID("delicious-import")
-        var bookIDs: [BookishRecordID] = []
         var recordCount = 0
 
         for (offset, rawRecord) in list.enumerated() {
           try Task.checkCancellation()
 
           if let book = try DeliciousBook(rawRecord, sourceID: Self.sourceID) {
-            let bookID = builder.addBook(importer.clean(book))
-            bookIDs.append(bookID)
+            builder.addBook(importer.clean(book))
           }
 
           let records = builder.drainChangedRecords()
@@ -64,14 +61,10 @@ public struct DeliciousLibraryImporter: BookishImporter {
           await Task.yield()
         }
 
-        builder.addRootList(id: root, bookIDs: bookIDs)
-        let rootRecords = builder.drainChangedRecords()
-        recordCount += rootRecords.count
-        continuation.yield(.records(rootRecords))
         continuation.yield(
           .finished(
             BookishImportSummary(
-              sourceID: Self.sourceID, root: root, recordCount: recordCount,
+              sourceID: Self.sourceID, recordCount: recordCount,
               diagnostics: builder.diagnostics)))
         continuation.finish()
       } catch is CancellationError {
@@ -115,23 +108,17 @@ public struct DeliciousLibraryImporter: BookishImporter {
 
   private func buildResult(from list: [[String: Any]]) throws -> BookishImportResult {
     var builder = DeliciousRecordGraphBuilder(sourceID: Self.sourceID)
-    let root = BookishRecordID("delicious-import")
-    var bookIDs: [BookishRecordID] = []
 
     for rawRecord in list {
       guard let book = try DeliciousBook(rawRecord, sourceID: Self.sourceID) else {
         continue
       }
 
-      let cleaned = clean(book)
-      let bookID = builder.addBook(cleaned)
-      bookIDs.append(bookID)
+      builder.addBook(clean(book))
     }
 
-    builder.addRootList(id: root, bookIDs: bookIDs)
     return BookishImportResult(
       sourceID: Self.sourceID,
-      root: root,
       records: builder.sortedRecords(),
       diagnostics: builder.diagnostics
     )
@@ -296,7 +283,7 @@ private struct DeliciousRecordGraphBuilder {
     self.sourceID = sourceID
   }
 
-  mutating func addBook(_ book: DeliciousBook) -> BookishRecordID {
+  mutating func addBook(_ book: DeliciousBook) {
     let bookID = BookishRecordID("delicious-book-\(book.id.normalizedIDComponent)")
     var properties = book.properties
 
@@ -319,19 +306,6 @@ private struct DeliciousRecordGraphBuilder {
     }
 
     store(BookishRecord(id: bookID, kind: BookishRecordKind.book, properties: properties))
-    return bookID
-  }
-
-  mutating func addRootList(id: BookishRecordID, bookIDs: [BookishRecordID]) {
-    store(
-      BookishRecord(
-        id: id,
-        kind: BookishRecordKind.list,
-        properties: [
-          BookishRecordKey.name: .string("Delicious Library Import"),
-          BookishRecordKey.source: .string(sourceID),
-          BookishRecordKey.items: .list(bookIDs.map { .record($0) }),
-        ]))
   }
 
   func sortedRecords() -> [BookishRecord] {

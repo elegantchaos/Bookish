@@ -17,7 +17,9 @@ struct BookishImportResultView: View {
       if result.importedRecords.isEmpty {
         ContentUnavailableView(
           "No New Records", systemImage: "checkmark.circle",
-          description: Text("The selected records were already in your catalogue."))
+          description: Text("The selected records were already in your catalogue.")
+        )
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
       } else {
         List(result.importedRecords) { record in
           VStack(alignment: .leading) {
@@ -28,5 +30,6 @@ struct BookishImportResultView: View {
       }
     }
     .padding()
+    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
   }
 }

@@ -12,7 +12,8 @@ struct DeliciousLibraryImporterTests {
     let result = try DeliciousLibraryImporter().importRecords(from: deliciousSampleURL())
 
     #expect(result.sourceID == DeliciousLibraryImporter.sourceID)
-    #expect(result.root == BookishRecordID("delicious-import"))
+    #expect(result.root == nil)
+    #expect(!result.records.contains { $0.kind == BookishRecordKind.list })
     #expect(result.diagnostics.isEmpty)
 
     let recordsByID = Dictionary(uniqueKeysWithValues: result.records.map { ($0.id, $0) })

@@ -8,6 +8,8 @@ public struct CancelPendingImportCommand<Centre: BookishImportingService.Access>
 
   public let id = "datastore.import.cancel-pending"
 
+  public var shortcut: CommandShortcut? { .cancelAction }
+
   public init() {}
 
   public func name(centre _: Centre) -> String { "Cancel" }

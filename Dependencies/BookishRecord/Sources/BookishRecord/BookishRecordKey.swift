@@ -98,6 +98,22 @@ public enum BookishRecordKey {
   /// An ordered list of record links contained by a list record.
   public static let items = "items"
 
+  /// When an import audit list's import was applied.
+  public static let importDate = "importDate"
+
+  /// Records an import added, listed on its audit list.
+  public static let importAdded = "importAdded"
+
+  /// Existing records an import replaced, listed on its audit list.
+  public static let importReplaced = "importReplaced"
+
+  /// Existing records an import kept instead of the imported version, listed on its audit list.
+  public static let importKept = "importKept"
+
+  /// Existing records an import linked in place of matching imported records, listed on its
+  /// audit list.
+  public static let importMatched = "importMatched"
+
   /// An ordered list of keys displayed by a layout record.
   public static let fields = "fields"
 

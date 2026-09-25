@@ -1,4 +1,5 @@
 import BookishRecord
+import Foundation
 import Testing
 
 @testable import BookishImporter
@@ -158,6 +159,111 @@ struct BookishImportReconcilerTests {
       existing: [later, earlier])
 
     #expect(plan.defaultChoices[proposed.id] == .useExisting(earlier.id))
+  }
+
+  @Test
+  func skippedNewRecordsAreOmittedAndUnlinked() throws {
+    let author = record("author", kind: BookishRecordKind.person, name: "Ada Sol")
+    let editor = record("editor", kind: BookishRecordKind.person, name: "Bea Lune")
+    let book = BookishRecord(
+      id: BookishRecordID("book"), kind: BookishRecordKind.book,
+      properties: [
+        BookishRecordKey.name: .string("The Glass Orbit"),
+        BookishRecordKey.authors: .list([.record(author.id), .record(editor.id)]),
+        "editor": .record(editor.id),
+      ])
+    let plan = try BookishImportReconciler().plan(
+      imported: BookishImportResult(
+        sourceID: BookishInterchangeImporter.sourceID, root: editor.id,
+        records: [author, editor, book]),
+      existing: [])
+
+    #expect(plan.newEntries.map(\.id) == [author.id, editor.id, book.id])
+    let resolved = try plan.resolve(choices: [editor.id: .skip])
+
+    #expect(resolved.records.map(\.id) == [author.id, book.id])
+    let written = try #require(resolved.records.last)
+    #expect(written.list(BookishRecordKey.authors) == [.record(author.id)])
+    #expect(written.properties["editor"] == nil)
+    #expect(resolved.root == nil)
+    #expect(throws: BookishImportPlanError.invalidChoice(book.id)) {
+      try plan.resolve(choices: [book.id: .keepExisting])
+    }
+  }
+
+  @Test
+  func resolutionAuditsEachTreatmentAndOmitsSkippedAndPrunedRecords() throws {
+    let sourceID = KindleLibraryImporter.sourceID
+    let matchedAuthor = record("kindle-author", kind: BookishRecordKind.person, name: "Ada Sol")
+    let existingAuthor = record("manual-author", kind: BookishRecordKind.person, name: "Ada Sol")
+    let skippedBooksAuthor = record(
+      "kindle-other-author", kind: BookishRecordKind.person, name: "Bea Lune", source: sourceID)
+    let added = book("kindle-added", authors: [matchedAuthor.id])
+    let skipped = book("kindle-skipped", authors: [skippedBooksAuthor.id])
+    let kept = book("kindle-kept", authors: [])
+    let replaced = book("kindle-replaced", authors: [])
+    let existingKept = BookishRecord(
+      id: kept.id, kind: BookishRecordKind.book,
+      properties: [BookishRecordKey.name: .string("Old title")])
+    let existingReplaced = BookishRecord(
+      id: replaced.id, kind: BookishRecordKind.book,
+      properties: [BookishRecordKey.name: .string("Old title")])
+    let plan = try BookishImportReconciler().plan(
+      imported: BookishImportResult(
+        sourceID: sourceID,
+        records: [matchedAuthor, skippedBooksAuthor, added, skipped, kept, replaced]),
+      existing: [existingAuthor, existingKept, existingReplaced])
+
+    let resolved = try plan.resolve(choices: [
+      matchedAuthor.id: .useExisting(existingAuthor.id),
+      skipped.id: .skip,
+      kept.id: .keepExisting,
+      replaced.id: .replaceExisting,
+    ])
+
+    #expect(
+      resolved.treatments == [
+        .added: [added.id], .replaced: [replaced.id], .kept: [kept.id],
+        .matched: [existingAuthor.id],
+      ])
+    let date = Date(timeIntervalSince1970: 1_000_000)
+    let list = try #require(
+      try resolved.auditList(
+        id: BookishRecordID("import-audit"), name: "Kindle Import", sourceID: sourceID,
+        date: date))
+    #expect(list.kind == BookishRecordKind.list)
+    #expect(list.string(BookishRecordKey.name) == "Kindle Import")
+    #expect(list.date(BookishRecordKey.importDate) == date)
+    #expect(list.list(BookishRecordKey.importAdded) == [.record(added.id)])
+    #expect(list.list(BookishRecordKey.importReplaced) == [.record(replaced.id)])
+    #expect(list.list(BookishRecordKey.importKept) == [.record(kept.id)])
+    #expect(list.list(BookishRecordKey.importMatched) == [.record(existingAuthor.id)])
+  }
+
+  @Test
+  func resolutionWithEveryRecordSkippedHasNoAuditList() throws {
+    let proposed = book("book", authors: [])
+    let plan = try BookishImportReconciler().plan(
+      imported: BookishImportResult(
+        sourceID: BookishInterchangeImporter.sourceID, records: [proposed]),
+      existing: [])
+
+    let resolved = try plan.resolve(choices: [proposed.id: .skip])
+
+    #expect(resolved.treatments.isEmpty)
+    #expect(
+      try resolved.auditList(
+        id: BookishRecordID("import-audit"), name: "Import", sourceID: plan.sourceID,
+        date: .now) == nil)
+  }
+
+  private func book(_ id: String, authors: [BookishRecordID]) -> BookishRecord {
+    BookishRecord(
+      id: BookishRecordID(id), kind: BookishRecordKind.book,
+      properties: [
+        BookishRecordKey.name: .string(id),
+        BookishRecordKey.authors: .list(authors.map { .record($0) }),
+      ])
   }
 
   private func record(

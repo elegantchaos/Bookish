@@ -24,19 +24,22 @@ struct BookishImportWorkflowView: View {
         BookishImportResultView(result: result)
       } else if let error = importing.importErrorMessage {
         ContentUnavailableView(
-          "Import Failed", systemImage: "exclamationmark.triangle", description: Text(error))
+          "Import Failed", systemImage: "exclamationmark.triangle", description: Text(error)
+        )
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
       } else {
         ContentUnavailableView(
           "No Import Selected", systemImage: "square.and.arrow.down",
-          description: emptyImportDescription)
+          description: emptyImportDescription
+        )
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
       }
     }
     .navigationTitle("Import")
     .toolbar {
-      if importing.pendingImportPlan != nil {
-        commander.toolbarItem(CancelPendingImportCommand())
-        commander.toolbarItem(ApplyPendingImportCommand())
-      } else if !importing.isPreparingImport && !importing.isApplyingImport {
+      if importing.pendingImportPlan == nil && !importing.isPreparingImport
+        && !importing.isApplyingImport
+      {
         commander.toolbarItem(ImportInterchangeCommand())
         ToolbarItem {
           Menu {

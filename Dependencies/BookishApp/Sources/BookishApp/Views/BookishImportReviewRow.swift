@@ -2,7 +2,7 @@ import BookishImporter
 import BookishRecord
 import SwiftUI
 
-/// A proposed record with a compact menu for its match decision.
+/// A proposed record with a popup for how the import should handle it.
 struct BookishImportReviewRow: View {
   @Environment(BookishImportingService.State.self) private var importing
 
@@ -12,51 +12,42 @@ struct BookishImportReviewRow: View {
   var body: some View {
     HStack {
       VStack(alignment: .leading) {
-        Text(entry.record.string(BookishRecordKey.name) ?? entry.id.rawValue)
+        Text(entry.displayName)
           .font(.headline)
         Text(entry.record.kind).foregroundStyle(.secondary)
       }
       Spacer()
-      if case .review(let candidates, let sameID) = entry.match {
-        Menu {
-          if sameID {
-            Button("Use Existing") { choose(.keepExisting) }
-            Button("Use Imported") { choose(.replaceExisting) }
-          } else {
-            ForEach(candidates, id: \.self) { candidate in
-              Button("Use Existing: \(name(for: candidate))") {
-                choose(.useExisting(candidate))
-              }
-            }
-            Divider()
-            Button("Add as New") { choose(.create) }
-          }
-        } label: {
-          Label(selectedChoiceLabel, systemImage: "chevron.up.chevron.down")
-            .lineLimit(1)
+      Picker("Import Choice", selection: choice) {
+        ForEach(entry.availableChoices, id: \.self) { choice in
+          Text(label(for: choice)).tag(Optional(choice))
         }
-        .controlSize(.small)
-        .accessibilityLabel(
-          "Import choice for \(entry.record.string(BookishRecordKey.name) ?? entry.id.rawValue)")
       }
+      .pickerStyle(.menu)
+      .labelsHidden()
+      .fixedSize()
+      .accessibilityLabel("Import choice for \(entry.displayName)")
     }
   }
 
-  private var selectedChoiceLabel: String {
-    switch importing.importChoices[entry.id] {
-    case .keepExisting: "Use Existing"
+  private var choice: Binding<BookishImportChoice?> {
+    Binding(
+      get: { importing.importChoices[entry.id] },
+      set: { choice in
+        if let choice { importing.setImportChoice(choice, for: [entry.id]) }
+      })
+  }
+
+  private func label(for choice: BookishImportChoice) -> String {
+    switch choice {
+    case .create: entry.match == .create ? "Add" : "Add as New"
+    case .skip: "Skip"
+    case .keepExisting: "Keep Existing"
+    case .replaceExisting: "Replace Existing"
     case .useExisting(let id): "Use Existing: \(name(for: id))"
-    case .replaceExisting: "Use Imported"
-    case .create: "Add as New"
-    case nil: "Choose"
     }
   }
 
   private func name(for id: BookishRecordID) -> String {
     existingByID[id]?.string(BookishRecordKey.name) ?? id.rawValue
-  }
-
-  private func choose(_ choice: BookishImportChoice) {
-    importing.setImportChoice(choice, for: entry.id)
   }
 }

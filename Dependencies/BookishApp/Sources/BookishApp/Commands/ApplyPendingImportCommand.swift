@@ -8,6 +8,8 @@ public struct ApplyPendingImportCommand<Centre: BookishImportingService.Access>:
 
   public let id = "datastore.import.apply-pending"
 
+  public var shortcut: CommandShortcut? { .init(.return, modifiers: .command) }
+
   public init() {}
 
   public func availability(centre: Centre) -> CommandAvailability {
