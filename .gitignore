@@ -31,6 +31,9 @@ VersionX-revision.h
 Packages/
 .build
 
+# AgentTools per-machine configuration
+.agt/local/
+
 # build products
 build/
 *.o
