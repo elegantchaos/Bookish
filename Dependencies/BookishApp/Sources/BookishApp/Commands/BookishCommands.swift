@@ -21,11 +21,8 @@ import SwiftUI
 public struct BookishCommands: Commands {
   private let engine: BookishEngine
 
-  /// Whether advanced commands are available.
-  @AppStorage(.isAdvancedMode) private var isAdvancedMode
-
-  /// Whether developer commands are available.
-  @AppStorage(.isDeveloperMode) private var isDeveloperMode
+  /// How much optional and diagnostic functionality is available.
+  @AppStorage(.featureMode) private var featureMode
 
   #if DEBUG
     @Environment(\.openWindow) private var openWindow
@@ -45,47 +42,38 @@ public struct BookishCommands: Commands {
       }
     }
 
-    CommandGroup(after: .newItem) {
-      engine.button(ImportInterchangeCommand())
-      engine.button(ImportKindleLibraryCommand())
-      Menu("Import Delicious Library") {
-        if isAdvancedMode {
-          engine.button(ImportDeliciousLibrarySampleCommand(sample: .small))
-          engine.button(ImportDeliciousLibrarySampleCommand(sample: .full))
+    CommandGroup(replacing: .importExport) {
+      Divider()
 
-          Divider()
+      Menu("Import") {
+        engine.button(ImportInterchangeCommand()) { Text("Interchange File…") }
+        engine.button(ImportKindleLibraryCommand()) { Text("Kindle Library…") }
+        Menu("Delicious Library") {
+          if featureMode.showsAdvanced {
+            engine.button(ImportDeliciousLibrarySampleCommand(sample: .small))
+            engine.button(ImportDeliciousLibrarySampleCommand(sample: .full))
+
+            Divider()
+          }
+
+          engine.button(ImportOtherDeliciousLibraryCommand())
         }
-
-        engine.button(ImportOtherDeliciousLibraryCommand())
       }
 
       Divider()
 
       engine.button(ExportInterchangeCommand())
-
-      if isAdvancedMode {
-        engine.button(RevealDatastoreFolderCommand())
-      }
-
-      if isDeveloperMode {
-        Divider()
-
-        engine.button(RebuildRecordStoreCommand())
-        engine.button(ResetDatastoreCommand(), role: .destructive)
-      }
     }
 
     CommandMenu("Bookish") {
-      Toggle("Advanced Mode", isOn: $isAdvancedMode)
-      Toggle("Developer Mode", isOn: $isDeveloperMode)
-        .disabled(!isAdvancedMode)
+      BookishFeatureModePicker(selection: $featureMode)
 
       Divider()
 
       engine.button(MarkReadingCommand())
       engine.button(MarkFinishedCommand())
 
-      if isDeveloperMode {
+      if featureMode.showsDevelopment {
         Divider()
 
         engine.button(SimulateRemoteMutationCommand())
@@ -99,7 +87,7 @@ public struct BookishCommands: Commands {
       engine.button(SelectNextRecordCommand())
 
       #if DEBUG
-        if isDeveloperMode {
+        if featureMode.showsDevelopment {
           Divider()
 
           engine.button(ThrowTestErrorCommand())
@@ -109,6 +97,19 @@ public struct BookishCommands: Commands {
           }
         }
       #endif
+    }
+
+    if featureMode.showsAdvanced {
+      CommandMenu("Debug") {
+        engine.button(RevealDatastoreFolderCommand())
+
+        if featureMode.showsDevelopment {
+          Divider()
+
+          engine.button(RebuildRecordStoreCommand())
+          engine.button(ResetDatastoreCommand(), role: .destructive)
+        }
+      }
     }
   }
 }

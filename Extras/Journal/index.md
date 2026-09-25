@@ -1,5 +1,6 @@
 # Journal Index
 
+- [2026-09-25 Menu Layout and Feature Mode](2026-09-25-menu-layout-and-feature-mode.md)
 - [2026-09-25 Browser and Presentation Terminology](2026-09-25-browser-and-presentation-terminology.md)
 - [2026-09-25 Service Design Diagrams](2026-09-25-service-design-diagrams.md)
 - [2026-09-25 New Menu Availability](2026-09-25-new-menu-availability.md)

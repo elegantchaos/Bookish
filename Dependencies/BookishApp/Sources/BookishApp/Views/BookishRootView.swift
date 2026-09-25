@@ -28,7 +28,7 @@ public struct BookishRootView: View {
   @Environment(BookishNavigationService.State.self) private var navigation
 
   /// Whether debug-only browser indexes should be available.
-  @AppStorage(.isDeveloperMode) private var isDeveloperMode
+  @AppStorage(.featureMode) private var featureMode
 
   /// The SwiftUI content for the datastore app.
   public var body: some View {
@@ -63,8 +63,8 @@ public struct BookishRootView: View {
       defaultFilename: "Bookish Interchange",
       onCompletion: handleInterchangeExport
     )
-    .task(id: isDeveloperMode) {
-      commander.perform(SetDebugIndexVisibilityCommand(isVisible: isDeveloperMode))
+    .task(id: featureMode.showsDevelopment) {
+      commander.perform(SetDebugIndexVisibilityCommand(isVisible: featureMode.showsDevelopment))
     }
     #if os(iOS)
       .sheet(isPresented: $settingsPresentation.isShowingSettings) {

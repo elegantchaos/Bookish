@@ -18,7 +18,7 @@ import SwiftUI
     @Environment(BookishStatusService.State.self) private var status
 
     /// Whether mutation diagnostics are available.
-    @AppStorage(.isDeveloperMode) private var isDeveloperMode
+    @AppStorage(.featureMode) private var featureMode
 
     /// The mutations currently displayed in the browser.
     @State private var mutations: [MutationRecord] = []
@@ -31,7 +31,7 @@ import SwiftUI
 
     /// The SwiftUI content for the mutation debug window.
     public var body: some View {
-      if isDeveloperMode {
+      if featureMode.showsDevelopment {
         mutationBrowser
       } else {
         ContentUnavailableView(

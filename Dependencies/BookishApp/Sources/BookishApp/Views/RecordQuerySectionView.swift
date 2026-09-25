@@ -44,7 +44,7 @@ struct RecordQuerySectionView: View {
   /// Whether the section configuration or result is still being resolved.
   @State private var isLoading = true
 
-  @AppStorage(.isDeveloperMode) var isDeveloperMode
+  @AppStorage(.featureMode) var featureMode
 
   /// The section content, an optional empty message, or no content when unavailable.
   var body: some View {
@@ -76,7 +76,7 @@ struct RecordQuerySectionView: View {
           .controlSize(.small)
       }
 
-      if isDeveloperMode {
+      if featureMode.showsDevelopment {
         queryDiagnostics
       }
     }

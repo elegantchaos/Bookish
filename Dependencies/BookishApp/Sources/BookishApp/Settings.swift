@@ -10,14 +10,13 @@ import Foundation
 import Settings
 
 @MainActor extension AppSettingKey where Value == Bool {
-  /// Whether advanced controls, layouts, and indexes are visible.
-  public static let isAdvancedMode = AppSettingKey("AdvancedMode", defaultValue: false)
-
-  /// Whether developer diagnostics and commands are visible.
-  public static let isDeveloperMode = AppSettingKey("DeveloperMode", defaultValue: false)
-
   /// Whether to scan for barcodes when using the camera in the capture mode.
   public static let scanForBarcodes = AppSettingKey("BarcodeScanning", defaultValue: true)
+}
+
+@MainActor extension AppSettingKey where Value == BookishFeatureMode {
+  /// How much optional and diagnostic functionality is visible.
+  public static let featureMode = AppSettingKey("FeatureMode", defaultValue: .normal)
 }
 
 @MainActor extension AppSettingKey where Value == BookRecognitionProviderID {

@@ -35,7 +35,7 @@ struct RecordLayoutItemView: View {
   /// Whether the linked configuration is still being resolved.
   @State private var isLoading = true
 
-  @AppStorage(.isDeveloperMode) var isDeveloperMode
+  @AppStorage(.featureMode) var featureMode
 
   /// Creates a linked layout item outside any nested layout section.
   init(
@@ -89,7 +89,7 @@ struct RecordLayoutItemView: View {
           .controlSize(.small)
       }
 
-      if isDeveloperMode {
+      if featureMode.showsDevelopment {
         diagnostics
       }
     }
