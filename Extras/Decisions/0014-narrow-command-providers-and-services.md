@@ -1,6 +1,6 @@
 # 0014: Structure command capabilities around narrow service providers
 
-- Status: Accepted, read/write interface split planned
+- Status: Accepted, partially superseded by [Decision 0022](0022-service-state-api-and-provider-shape.md)
 - Date: 2026-09-14
 
 ## Context

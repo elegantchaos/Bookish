@@ -1,5 +1,6 @@
 # Journal Index
 
+- [2026-09-25 Service Decision Confirmation and Index](2026-09-25-service-decision-confirmation-and-index.md)
 - [2026-09-25 Menu Layout and Feature Mode](2026-09-25-menu-layout-and-feature-mode.md)
 - [2026-09-25 Browser and Presentation Terminology](2026-09-25-browser-and-presentation-terminology.md)
 - [2026-09-25 Service Design Diagrams](2026-09-25-service-design-diagrams.md)

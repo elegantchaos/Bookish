@@ -36,5 +36,5 @@ Bookish is a book cataloguing app aimed at macOS and iOS.
 ### Background and records
 
 - [Legacy Findings](Extras/Documentation/Legacy%20Findings.md): ideas worth keeping from earlier Bookish projects.
-- [Decision log](Extras/Decisions/): decisions that later work must follow.
+- [Decision log](Extras/Decisions/index.md): decisions that later work must follow.
 - [Development journal](Extras/Journal/index.md): work as it happened.

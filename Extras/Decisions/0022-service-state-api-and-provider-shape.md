@@ -1,7 +1,9 @@
 # 0022: Separate service state, API, and access surfaces
 
-- Status: Proposed
+- Status: Accepted
 - Date: 2026-09-25
+- Refines: [Decision 0001](0001-engine-command-boundary.md) on view injection and command access
+- Supersedes in part: [Decision 0014](0014-narrow-command-providers-and-services.md) on service vending and the view interface
 
 ## Context
 
@@ -16,8 +18,9 @@ command centre, the commander as the view's command boundary, and a temporary
 direct-binding exception. [Decision 0013](0013-commands-as-application-action-abstraction.md)
 established commands as the boundary for application actions and undo history.
 [Decision 0014](0014-narrow-command-providers-and-services.md) established narrow
-service providers and anticipated a separate view surface. This decision
-specifies that separation.
+command dependencies and anticipated a separate view surface. This decision
+keeps those boundaries, specifies the separate surfaces, and replaces 0014's
+descriptions of vending a service and making the view interface read-only.
 
 ## Decision
 
@@ -94,5 +97,7 @@ deferred until repeated concrete machinery makes its value clear.
   command API or creating artificial commands.
 - Service migrations update environment injection and narrow `Access`
   protocols together; existing services can be migrated one at a time.
-- This proposal does not yet change the status or wording of earlier decisions.
-  Their relationship can be settled after the service migration is reviewed.
+- Decision 0014 remains applicable to focused command dependencies and domain
+  actions through commands. Its service-vending and read-only view-interface
+  descriptions are superseded. Decision 0001 retains its engine and commander
+  boundary; its view-injection wording is refined here.
