@@ -1,5 +1,6 @@
 # Journal Index
 
+- [2026-09-25 Compact Index Navigation](2026-09-25-compact-index-navigation.md)
 - [2026-09-25 Full Code Review](2026-09-25-full-code-review.md)
 - [2026-09-25 Service Decision Confirmation and Index](2026-09-25-service-decision-confirmation-and-index.md)
 - [2026-09-25 Menu Layout and Feature Mode](2026-09-25-menu-layout-and-feature-mode.md)

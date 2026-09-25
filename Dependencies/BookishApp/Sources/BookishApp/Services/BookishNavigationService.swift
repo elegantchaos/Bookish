@@ -208,13 +208,11 @@ public final class BookishNavigationService {
   /// Selects a browser index and clears stale record content.
   private func selectRecordIndex(recordIndexID: BookishRecordID?) {
     selectedMainSection = nil
+    select(recordID: nil)
 
     guard let recordIndexID, recordIndexIDs.contains(recordIndexID) else {
       selectedRecordIndexID = recordIndexes.first?.id
       setSelectedRecordResult(nil)
-      selectedRecordID = nil
-      recordNavigationPath = []
-      isRecordSelectionCleared = false
       persistNavigationSelection()
       return
     }
@@ -226,9 +224,6 @@ public final class BookishNavigationService {
 
     selectedRecordIndexID = recordIndexID
     setSelectedRecordResult(nil)
-    selectedRecordID = nil
-    recordNavigationPath = []
-    isRecordSelectionCleared = false
     persistNavigationSelection()
   }
 

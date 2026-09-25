@@ -136,7 +136,7 @@ The editor should expose only the query operations the record service can execut
 
 The query service retains observable results across projection rebuilds and datastore resets. Mutations refresh cached results; replacing the store refreshes the same result objects after the replacement is ready. A result publishes only when its ordered records or error state changes. Query filtering and sorting run in the record-store actor, and the query service compares the result with the previous snapshot outside the main actor. Publication of the final result crosses to the main actor.
 
-Navigation observes the active query result. When its selected record leaves that result, navigation clears the selected detail and linked-record path. Other result changes preserve the selection, and a removed selection does not automatically move to another record.
+Navigation observes the active query result. Selecting an index clears the selected record and linked-record path, so compact navigation stops at the record list. Choosing a record selects its detail. When a selected record leaves the active result, navigation clears the detail and linked-record path. Other result changes preserve the selection, and a removed selection does not automatically move to another record.
 
 The sidebar and record list reveal their selected rows when navigation changes programmatically. Record creation switches to a library index whose query includes the new record, clears the name filter, and selects that record in the browser.
 
