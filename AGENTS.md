@@ -7,6 +7,7 @@
 - Keep a development journal in `Extras/Journal/`.
 - Keep a decision log in `Extras/Decisions/`.
 - Ask before adding migrations, shims or indirection layers for compatibility; I am the only developer and currently the only user.
+- Use `feature/` branches for new work. Avoid interleaving unrelated changes in the same feature branch.
 
 # Standard Rules
 
