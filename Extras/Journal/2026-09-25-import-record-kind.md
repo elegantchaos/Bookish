@@ -30,3 +30,22 @@ opened. The index, layout, and presentation reach new or reset stores only, so
 an existing catalogue needs either a reset or a migration to show the Imports
 index. Import records written as `list` records during earlier testing, and
 the old `delicious-import` list, remain as lists.
+
+## Follow-up — reset display bugs (deferred)
+
+After resetting a store in the app, two display problems appeared:
+
+- The record list for the previously selected index (Lists) kept showing its
+  old records after the reset.
+- Clicking a sidebar index moved the selection highlight at once, but the bold
+  selected-row styling stayed on the previous row for a while.
+
+`resetEmptiesSelectedNonBookIndex` shows the navigation service's selected
+result does empty after a reset, so the first problem is in when views update,
+not in the services. The sidebar's selection binding only changes once
+`SelectRecordIndexCommand` runs, so the second suggests commands waiting behind
+slow work. Both may come from query refresh re-running every cached query after
+each change. Fixing them is deferred.
+
+An empty catalogue after a reset is expected: reset loads configuration seeds
+only, without the sample library.

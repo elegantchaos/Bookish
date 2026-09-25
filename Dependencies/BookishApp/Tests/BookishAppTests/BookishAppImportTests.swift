@@ -311,6 +311,24 @@ import Testing
     #expect(harness.status.state.message == "Reset datastore")
   }
 
+  @Test func resetEmptiesSelectedNonBookIndex() async throws {
+    let harness = try makeHarness()
+    await harness.load()
+    await harness.importing.importInterchange(
+      data: Data(
+        """
+        { "records": [{ "ℹ": "reset-list", "©": "list", "name": "Reset List" }] }
+        """.utf8))
+    await harness.importing.applyPendingImport(choices: [:])
+    try await harness.navigation.select(recordIndexID: BookishRecordID("datastore-index-lists"))
+    #expect(harness.navigation.recordIDs.contains(BookishRecordID("reset-list")))
+
+    try await harness.perform(ResetDatastoreCommand())
+
+    #expect(harness.navigation.selectedRecordIndexID == BookishRecordID("datastore-index-lists"))
+    #expect(harness.navigation.recordIDs.isEmpty)
+  }
+
   @Test func recordQueryResultFollowsResetAndLaterMutations() async throws {
     let storage = BookishStorageService(directoryURL: try temporaryDirectory())
     try await storage.load()
