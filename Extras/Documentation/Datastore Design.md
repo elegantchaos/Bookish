@@ -50,7 +50,15 @@ Mutation records consist of:
 - list entry identity and ordering information, where relevant
 - value, where relevant
 - parent identifiers
-- creation metadata
+- creation time
+
+The creation time is part of the mutation's immutable, synced data and is kept at
+full precision wherever mutations are stored or transported. Each device issues
+strictly increasing creation times for its local mutations, later than every
+mutation it has already stored, including remote ones, even if the wall clock
+steps backwards. Creation time, then identifier, gives a deterministic total
+order over any set of mutations
+([Decision 0023](../Decisions/0023-mutation-creation-time-ordering.md)).
 
 Each device participating in sync is assigned a UUID, which it persists locally. 
 
@@ -78,9 +86,11 @@ The record service exposes record store reads and observations to the user inter
 
 Unsent mutations remain in the outbox until CloudKit confirms them. Sending is idempotent because mutation identifiers are stable. Failed or delayed sends are retried without rolling back the record store unless the mutation itself is rejected as invalid.
 
-Incoming mutation records may arrive in any order and from any device. The mutation store tracks applied mutation identifiers and holds mutation records with missing parents as pending dependencies. A mutation record is applied once its required parents are present, or deliberately treated as absent during recovery or import. Per-device sequence numbers are useful for identity and diagnostics, but are not the primary replay mechanism.
+Incoming mutation records may arrive in any order and from any device. The mutation store tracks applied mutation identifiers and holds mutation records with missing parents as pending dependencies. A mutation record is applied once its required parents are present, or deliberately treated as absent during recovery or import. Where parents do not decide the order, mutations are applied in creation-time order, then identifier order. Local state such as arrival order or per-device counters never decides the projection.
 
-Given the full history of mutation records, the record store can be reconstructed at any time.
+Given the full history of mutation records, the record store can be reconstructed at any time. Any device holding the same history reconstructs the same projection.
+
+The current implementation does not yet record parents, so replay uses creation time and identifier alone. The JSON mutation store encodes creation times as raw reference-date intervals so that they round-trip exactly.
 
 The app may discard an unreadable record projection during startup and rebuild it
 from the mutation store. The development menu also provides the same rebuild

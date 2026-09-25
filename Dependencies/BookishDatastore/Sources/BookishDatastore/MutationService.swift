@@ -38,7 +38,8 @@ public struct DefaultMutationService<Records: RecordStore, Mutations: MutationSt
   /// Stores and applies a local mutation.
   @discardableResult
   public func perform(_ operation: MutationOperation) async throws -> MutationRecord {
-    let mutation = MutationRecord(operation: operation)
+    let mutation = MutationRecord(
+      operation: operation, createdAt: try await mutationStore.nextCreationDate())
     try await receiveRemoteMutation(mutation)
     return mutation
   }
