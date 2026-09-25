@@ -16,29 +16,37 @@ struct BrowserIndexListView: View {
 
   /// The list of selectable browser indexes.
   var body: some View {
-    List(selection: selectedDestination) {
-      Section("Workflows") {
-        ForEach(BookishMainSection.allCases, id: \.self) { section in
-          Label(section.title, systemImage: section.systemImage)
-            .tag(BrowserDestination.mainSection(section))
+    ScrollViewReader { scrollProxy in
+      List(selection: selectedDestination) {
+        Section("Workflows") {
+          ForEach(BookishMainSection.allCases, id: \.self) { section in
+            Label(section.title, systemImage: section.systemImage)
+              .tag(BrowserDestination.mainSection(section))
+          }
         }
-      }
 
-      Section("Library") {
-        ForEach(navigation.libraryIndexes) { recordIndex in
-          BrowserIndexRow(recordIndex: recordIndex)
-        }
-      }
-
-      if !navigation.debugIndexes.isEmpty {
-        Section("Debug") {
-          ForEach(navigation.debugIndexes) { recordIndex in
+        Section("Library") {
+          ForEach(navigation.libraryIndexes) { recordIndex in
             BrowserIndexRow(recordIndex: recordIndex)
+              .id(BrowserDestination.recordIndex(recordIndex.id))
+          }
+        }
+
+        if !navigation.debugIndexes.isEmpty {
+          Section("Debug") {
+            ForEach(navigation.debugIndexes) { recordIndex in
+              BrowserIndexRow(recordIndex: recordIndex)
+                .id(BrowserDestination.recordIndex(recordIndex.id))
+            }
           }
         }
       }
+      .navigationTitle("Records")
+      .onChange(of: selectedIndexDestination, initial: true) { _, destination in
+        guard let destination else { return }
+        scrollProxy.scrollTo(destination)
+      }
     }
-    .navigationTitle("Records")
   }
 
   /// Identifies a selectable row in the browser sidebar.
@@ -48,6 +56,16 @@ struct BrowserIndexListView: View {
 
     /// A record browser index.
     case recordIndex(BookishRecordID)
+  }
+
+  /// The selected index row once it is available in the sidebar.
+  private var selectedIndexDestination: BrowserDestination? {
+    guard navigation.selectedMainSection == nil,
+      let id = navigation.selectedRecordIndexID,
+      navigation.recordIndexIDs.contains(id)
+    else { return nil }
+
+    return .recordIndex(id)
   }
 
   /// Binds list selection to the active sidebar route.

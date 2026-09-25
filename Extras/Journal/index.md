@@ -1,5 +1,6 @@
 # Journal Index
 
+- [2026-09-25 Reveal Selected Browser Rows](2026-09-25-reveal-selected-browser-rows.md)
 - [2026-09-25 Contextual Toolbar and New Records](2026-09-25-contextual-toolbar-and-new-records.md)
 - [2026-09-24 Query Result Lifecycle](2026-09-24-query-result-lifecycle.md)
 - [2026-09-24 Import Workflow Review](2026-09-24-import-workflow-review.md)

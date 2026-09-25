@@ -268,6 +268,7 @@ struct BookishAppTests {
     #expect(harness.navigation.selectedRecordIndexID == BookishRecordID("datastore-index-books"))
     #expect(harness.navigation.recordNameFilter.isEmpty)
     let selectedID = try #require(harness.navigation.selectedRecordID)
+    #expect(harness.navigation.selectedRecordIDs.contains(selectedID))
     let record = try #require(try await harness.storageService.record(id: selectedID))
     #expect(record.kind == BookishRecordKind.book)
     #expect(record.string(BookishRecordKey.name) == "New Book")

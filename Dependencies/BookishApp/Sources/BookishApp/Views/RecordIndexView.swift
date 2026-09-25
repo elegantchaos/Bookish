@@ -35,30 +35,46 @@ struct RecordIndexView: View {
 
   /// The list of records selected by the active index.
   var body: some View {
-    List(selection: selectedRecordID) {
-      ForEach(navigation.selectedRecordResult?.records ?? []) { record in
-        BookishRecordIndexCell(
-          record: record,
-          layout: layout,
-          placeholderSystemImage: metadataByKind[record.kind]?.string(BookishRecordKey.icon)
-            ?? "doc",
-          presentationResolver: CascadingPresentationResolver(
+    ScrollViewReader { scrollProxy in
+      List(selection: selectedRecordID) {
+        ForEach(navigation.selectedRecordResult?.records ?? []) { record in
+          BookishRecordIndexCell(
+            record: record,
             layout: layout,
-            presentationRecords: presentationsByKind[record.kind] ?? [])
-        )
-        .tag(Optional(record.id))
+            placeholderSystemImage: metadataByKind[record.kind]?.string(BookishRecordKey.icon)
+              ?? "doc",
+            presentationResolver: CascadingPresentationResolver(
+              layout: layout,
+              presentationRecords: presentationsByKind[record.kind] ?? [])
+          )
+          .tag(Optional(record.id))
+          .id(record.id)
+        }
+      }
+      .navigationTitle(navigation.selectedRecordIndexName ?? "Index")
+      .searchable(text: recordNameFilter, prompt: "Filter by name")
+      .task(id: taskID) {
+        await loadPresentation()
+      }
+      .onChange(of: selectedVisibleRecordID, initial: true) { _, recordID in
+        guard let recordID else { return }
+        scrollProxy.scrollTo(recordID)
+      }
+      .toolbar {
+        NewRecordToolbar(types: navigation.selectedRecordIndex?.newRecordTypes ?? [])
+        commander.toolbarItem(SelectPreviousRecordCommand())
+        commander.toolbarItem(SelectNextRecordCommand())
       }
     }
-    .navigationTitle(navigation.selectedRecordIndexName ?? "Index")
-    .searchable(text: recordNameFilter, prompt: "Filter by name")
-    .task(id: taskID) {
-      await loadPresentation()
-    }
-    .toolbar {
-      NewRecordToolbar(types: navigation.selectedRecordIndex?.newRecordTypes ?? [])
-      commander.toolbarItem(SelectPreviousRecordCommand())
-      commander.toolbarItem(SelectNextRecordCommand())
-    }
+  }
+
+  /// The selected record row once it is in the active query result.
+  private var selectedVisibleRecordID: BookishRecordID? {
+    guard let id = navigation.selectedRecordID,
+      navigation.selectedRecordIDs.contains(id)
+    else { return nil }
+
+    return id
   }
 
   /// Binds list selection to the selected record identifier.

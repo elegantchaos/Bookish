@@ -111,6 +111,8 @@ The query service retains observable results across projection rebuilds and data
 
 Navigation observes the active query result. When its selected record leaves that result, navigation clears the selected detail and linked-record path. Other result changes preserve the selection, and a removed selection does not automatically move to another record.
 
+The sidebar and record list reveal their selected rows when navigation changes programmatically. Record creation switches to a library index whose query includes the new record, clears the name filter, and selects that record in the browser.
+
 The current JSON store scans and sorts the full in-memory projection for every cached query after each mutation. This is correct for mutation-driven changes, but its cost grows with both the catalogue and the number of cached queries. A later implementation should send the query service the changed record's before/after values and affected property keys. For each cached query, it can test whether either value matches, whether the change affects ordering or returned record data, and skip queries with no possible result change. Query dependencies can be extracted from predicates and sort descriptors. An index-backed store can then maintain matching IDs and ordering incrementally, or push filtering and sorting into its storage engine. Keep query work outside the main actor and publish an immutable ordered result only when it differs. Measure mutation-to-result latency before considering partial result delivery; partial updates would add UI churn and complicate stable ordering.
 
 ## Implementation Status
