@@ -1,7 +1,16 @@
 
 # Bookish
 
-Bookish is a book cataloguing app.
+Bookish is a book cataloguing app aimed at macOS and iOS.
+
+## Key Features
+
+- Flexible schema-less records with user-customisable fields
+- Intelligent barcode and bookshelf scanning
+- Metadata lookup and cleaning
+- macOS and iOS clients with automatic data synchronisation
+- clean and modern SwiftUI-based user interface
+- user defined book lists (reading/loans/library/to-read/etc)
 
 ## Data Model
 

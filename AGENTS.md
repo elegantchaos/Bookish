@@ -1,20 +1,11 @@
 # Project Specific Rules
 
-- This repository is a Swift book-cataloguing app for macOS and iOS. Key features:
-  - Flexible schema-less records with user-customisable fields
-  - Intelligent barcode and bookshelf scanning
-  - Metadata lookup and cleaning
-  - macOS and iOS clients with automatic data synchronisation
-  - clean and modern SwiftUI-based user interface
-  - user defined book lists (reading/loans/library/to-read/etc)
-- Use Swift Testing for tests; XCTest is tolerated only in external dependencies.
+- Before changing app behavior or user-facing workflows, read `README.md`.
+- Use Swift Testing when writing tests.
 - Keep most storage behind the DataStore and BookishRecord abstractions.
-- Use SwiftData only within the datastore; do not use Core Data.
+- Use SwiftData only within the datastore implementation; do not use Core Data.
 - Keep a development journal in `Extras/Journal/`.
 - Keep a decision log in `Extras/Decisions/`.
-- Testing and validation may update Xcode and SwiftPM package lockfiles; keep those updates.
-- Validate every Swift code change with `rt validate`.
-- Create temporary files in `.build/tmp` at the repository root.
 
 # Standard Rules
 
