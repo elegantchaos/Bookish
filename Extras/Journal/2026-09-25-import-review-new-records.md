@@ -50,7 +50,8 @@ same-ID possible match. It also listed every candidate, not what the user chose.
 
 Now no importer creates a list. After the user confirms, the importing service
 writes an audit list for any source, including interchange and future
-importers:
+importers. This applies
+[Decision 0024](../Decisions/0024-import-sessions-produce-audit-records.md):
 
 - `resolve(choices:)` records a `BookishImportTreatment` (added, replaced, kept,
   matched) for each record it touched, in plan order. Skipped records and
