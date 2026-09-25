@@ -24,7 +24,7 @@ Bookish is a book cataloguing app aimed at macOS and iOS.
 - [Datastore Design](Extras/Documentation/Datastore%20Design.md): the record store, mutations, and sync design.
 - [Datastore Implementation](Extras/Documentation/Datastore%20Implementation.md): build-time choices and work plan for the datastore.
 - [Interchange Design](Extras/Documentation/Interchange%20Design.md): the JSON interchange format for import and export.
-- [Data View Design](Extras/Documentation/Data%20View%20Design.md): how configuration records drive the user interface.
+- [Browser and Presentation Design](Extras/Documentation/Browser%20and%20Presentation%20Design.md): how configuration records drive the browser and record presentation.
 - [Data Cleanup](Extras/Documentation/Data%20Cleanup.md): reviewing and repairing inconsistent catalogue metadata.
 
 ### Application

@@ -38,6 +38,9 @@ view-owned loading errors through its `State`.
 
 ### Browsing
 
+These services implement the browser and presentation described in
+[Browser and Presentation Design](Browser%20and%20Presentation%20Design.md).
+
 **`BookishNavigationService`** owns the browser route: the available indexes,
 the selected index, main section, and record, the name filter, and the linked
 record path. It persists the last selection. Its `State` is what the sidebar,

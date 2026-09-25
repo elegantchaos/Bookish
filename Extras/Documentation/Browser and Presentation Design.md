@@ -1,26 +1,53 @@
-# Data View Design
+# Browser and Presentation Design
+
+Bookish's user interface has two halves, both configured by records in the
+datastore:
+
+- **Presentation** decides how a record looks: which properties appear, in what
+  order, with which labels, icons, and viewers.
+- **The browser** decides how records are found and reached: the indexes in the
+  sidebar, the records each index lists, and the selected record and linked-record
+  path in the detail column.
 
 Bookish stores flexible, schema-less records. The user interface is configured by records in the same datastore rather than by a fixed application schema. This allows the application to provide useful seeded defaults while letting users add record types, fields, layouts, indexes, labels, and specialised viewers without changing persistence code.
 
 The datastore remains deliberately permissive. Metadata affects how a value is discovered, displayed, and edited; it does not make a value invalid or prevent a record from having an otherwise unknown property.
 
-## Dynamic User Interface
+## Configuration Records
 
-The UI reads materialised records through the record service and writes through the mutation service. It also reads presentation records through the same services. A presentation resolver combines a data record, its type presentation, and an optional layout into a display-ready description before SwiftUI renders it.
+The records that configure the interface are called configuration records:
+
+- `index` records define the browser's indexes;
+- `layout` records define which properties a record shows and in what order;
+- `presentation` records describe how properties of a record type are presented;
+- `metadata` records describe record kinds, such as their icon;
+- `querySection` records define query-backed sections embedded in layouts.
+
+The application seeds a standard set of configuration records. They are
+ordinary, inspectable, syncable records, and users will be able to edit them.
+
+## Presentation
+
+`BookishPresentationService` resolves layouts, presentations, and kind metadata
+for the views; `BookishRecordView` and its viewers render the result.
+
+### Resolving Presentation
+
+The UI reads materialised records through the record service and writes through the mutation service. It also reads presentation records through the same services. A presentation resolver combines a record, its type presentation, and an optional layout into a display-ready description before SwiftUI renders it.
 
 Views must not query the record store while constructing `body`. The application or a presentation service resolves and observes the relevant metadata, then supplies stable presentation values to the views.
 
 The resolver uses this order of precedence:
 
 1. Generic presentation for every record type.
-2. Presentation for the data record's type.
+2. Presentation for the record's type.
 3. Metadata supplied by the active layout.
 
 Metadata is merged property by property. Within a property description, each supplied member overrides the corresponding lower-precedence member. For example, a layout can change the label for `authors` while retaining the generic icon and type-specific viewer.
 
 When no metadata applies, the UI presents a property with a generated label and a generic value viewer. An absent or unknown viewer identifier must always fall back safely rather than making a record unusable.
 
-## Property Presentation Metadata
+### Property Presentation Metadata
 
 Property presentation metadata is planned as a small encoded map stored in metadata and layout records. Each entry is keyed by the datastore property identifier and has this conceptual shape:
 
@@ -42,7 +69,7 @@ struct PropertyPresentation: Codable, Equatable, Sendable {
 
 The record value remains authoritative. A viewer does not validate or constrain the `BookishRecordValue` stored for a property. It chooses the most suitable interface when the value is compatible and otherwise uses a generic value viewer or repair path.
 
-## Presentation Records
+### Presentation Records
 
 Presentation records describe a record type rather than a particular data record:
 
@@ -52,7 +79,7 @@ Presentation records describe a record type rather than a particular data record
 
 Each property in a presentation record is an encoded `PropertyPresentation` value. The property name is the target record-property identifier. The `*` record is the universal fallback; `record` must not be used as that fallback because it is itself a valid record type.
 
-## Layout Records
+### Layout Records
 
 Records of kind `layout` determine which properties are shown and in what order. Their `fields` property is an ordered list of property identifiers or configuration-record links. The `*` token expands to every property not already listed, in stable key order.
 
@@ -68,7 +95,13 @@ The browser uses the selected index's types to offer compatible layouts. A layou
 
 Seeded layouts include an all-fields layout for `*` and type-specific layouts for standard catalogue and presentation record types. The Book layout links sections for contributors and relationships, publication and classification, identifiers, physical details, library details, and media. Users will be able to duplicate, edit, and create layouts without changing the stored records they present.
 
-## Index User Interface
+## Browser
+
+`BookishNavigationService` owns the browser's route: its indexes, the selected
+index and record, the name filter, and the linked-record path.
+`BookishBrowserService` controls whether debug-only indexes are shown.
+
+### Indexes
 
 The first column of the browser is driven by records of kind `index`. An index record stores:
 
@@ -85,7 +118,7 @@ The application seeds standard indexes for books, people, organisations, series,
 
 An index type list does not validate its query or the records returned by it. It guides choices such as the layouts offered for that index. `*` describes an index that may return mixed record types.
 
-## Planned Index Authoring
+### Planned Index Authoring
 
 Index records are designed to be user-authored. The index editor will allow users to:
 
@@ -99,13 +132,7 @@ Index records are designed to be user-authored. The index editor will allow user
 
 The editor should expose only the query operations the record service can execute. It should preserve an index's stored query when a newer UI does not understand part of it, and report invalid query data clearly rather than silently broadening the result set.
 
-## Editing Flow
-
-Views do not write directly to the record store. Editing a data record, layout, index, or presentation record produces normal application-level mutations. The mutation service applies the mutation, the record service updates its materialised projection, and observed query and presentation state refreshes the interface.
-
-User customisation should not require knowledge of mutations, encoded payloads, or the datastore's internal representation.
-
-## Query Refresh and Scaling
+### Query Refresh and Scaling
 
 The query service retains observable results across projection rebuilds and datastore resets. Mutations refresh cached results; replacing the store refreshes the same result objects after the replacement is ready. A result publishes only when its ordered records or error state changes. Query filtering and sorting run in the record-store actor, and the query service compares the result with the previous snapshot outside the main actor. Publication of the final result crosses to the main actor.
 
@@ -114,6 +141,12 @@ Navigation observes the active query result. When its selected record leaves tha
 The sidebar and record list reveal their selected rows when navigation changes programmatically. Record creation switches to a library index whose query includes the new record, clears the name filter, and selects that record in the browser.
 
 The current JSON store scans and sorts the full in-memory projection for every cached query after each mutation. This is correct for mutation-driven changes, but its cost grows with both the catalogue and the number of cached queries. A later implementation should send the query service the changed record's before/after values and affected property keys. For each cached query, it can test whether either value matches, whether the change affects ordering or returned record data, and skip queries with no possible result change. Query dependencies can be extracted from predicates and sort descriptors. An index-backed store can then maintain matching IDs and ordering incrementally, or push filtering and sorting into its storage engine. Keep query work outside the main actor and publish an immutable ordered result only when it differs. Measure mutation-to-result latency before considering partial result delivery; partial updates would add UI churn and complicate stable ordering.
+
+## Editing Flow
+
+Views do not write directly to the record store. Editing a record or a configuration record produces normal application-level mutations. The mutation service applies the mutation, the record service updates its materialised projection, and observed query and presentation state refreshes the interface.
+
+User customisation should not require knowledge of mutations, encoded payloads, or the datastore's internal representation.
 
 ## Implementation Status
 

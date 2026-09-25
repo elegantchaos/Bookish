@@ -116,7 +116,7 @@ Decide how SwiftUI views interact with the record service:
 - relationship and ordered-list updates;
 - whether macros or generated helpers are useful.
 
-This work should align with `Data View Design.md`.
+This work should align with `Browser and Presentation Design.md`.
 
 ## Testing And Mocking
 
@@ -134,7 +134,7 @@ Follow the existing project-family convention of using launch environment variab
 
 The mutation service should be testable with deterministic identifiers, device identity, clocks, and sync responses. The record service should be testable against fixture records and deterministic observation updates. Commands should be tested against fake mutation services so validation and availability can be checked without writing to the real stores.
 
-SwiftUI previews should use fixture-backed record services with example records, relationships, ordered lists, data view layouts, placeholder blobs, conflict values, and failed-upload states. Preview fixtures should be small, readable, and reusable by tests where practical.
+SwiftUI previews should use fixture-backed record services with example records, relationships, ordered lists, layout and presentation records, placeholder blobs, conflict values, and failed-upload states. Preview fixtures should be small, readable, and reusable by tests where practical.
 
 ## CloudKit Work
 

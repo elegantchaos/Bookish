@@ -129,7 +129,7 @@ Relevant legacy references:
 - `Extras/Legacy/BookishLists/Sources/BookishLists/Views/FieldEditorView.swift`
 - `Extras/Legacy/BookishLists/Sources/BookishLists/FieldList.swift`
 - `Extras/Legacy/BookishLists/Sources/BookishLists/Field.swift`
-- `Extras/Documentation/Data View Design.md`
+- `Extras/Documentation/Browser and Presentation Design.md`
 
 ### Book Detail Surface
 
@@ -203,7 +203,7 @@ Useful live references:
    identifiers, and raw payloads.
 3. Introduce user-facing lists, including `All Books`, user lists, and import
    review lists.
-4. Promote current layout records into editable data views, borrowing the
+4. Make current layout records user-editable, borrowing the
    per-list field editor behavior from `BookishLists`.
 5. Expand the domain vocabulary using `BookishTemp` as a reference for record
    kinds, relationship roles, and standard book fields.

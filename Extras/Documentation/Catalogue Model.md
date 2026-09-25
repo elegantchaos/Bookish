@@ -63,8 +63,8 @@ Importers should transform external data into storage-neutral records before tou
 
 Bookish interchange files and Delicious Library-style data remain important import/export inputs, but the catalogue model should not depend on any one external format.
 
-## Data Views
+## Browser and Presentation
 
-The flexible catalogue model requires flexible display and editing. User-facing layouts, field choices, labels, and controls are described in `Data View Design.md`.
+The flexible catalogue model requires flexible display and editing. Configuration records describe the browser's indexes and how records are presented: layouts, field choices, labels, and controls. They are described in `Browser and Presentation Design.md`.
 
-Data views sit above the catalogue model: they decide how records are presented, not how records are persisted.
+The browser and presentation sit above the catalogue model: they decide how records are found and presented, not how records are persisted.

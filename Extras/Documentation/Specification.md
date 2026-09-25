@@ -137,16 +137,16 @@ and fixtures. Importers transform external data into the interchange model befor
 requesting durable persistence. The file-format contract is documented in
 [Interchange Design](Interchange%20Design.md).
 
-## Data Views And Types
+## Kinds and Presentation
 
 Although data records are untyped value/value stores, they are treated as typed by convention within the application, so that it can collect them into indexes (books, authors, and so on), and manage the connections between them.
 
 Kinds are indicated by the record's `kind` value. A kind is an application-level
 catalogue convention, not a language-level type or a fixed persistence schema.
 
-The application should support a flexible display and editing user interface, based on description records.
+The application should support a flexible display and editing user interface, based on configuration records. See `Browser and Presentation Design.md`.
 
-A description is a record which indicates how to display other records:
+Layout and presentation records indicate how to display other records:
 - which properties to display
 - the order to display them in
 - the expected data type of each property
@@ -186,7 +186,7 @@ Bookish should adopt the project layout described in `Project Layout.md`: a thin
 - Views should have previews for representative empty, populated, and error states.
 - Migration work must include repeatable fixtures for imported catalogue data.
 - The app should make destructive catalogue operations explicit and reversible where practical.
-- Documentation should stay aligned with the implemented model, especially `Catalogue Model.md`, `Datastore Design.md`, `Data View Design.md`, and this specification.
+- Documentation should stay aligned with the implemented model, especially `Catalogue Model.md`, `Datastore Design.md`, `Browser and Presentation Design.md`, and this specification.
 
 ## Open Questions
 

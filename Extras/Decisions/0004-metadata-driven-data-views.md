@@ -1,4 +1,4 @@
-# 0004: Configure data views with metadata records
+# 0004: Configure the browser and presentation with configuration records
 
 - Status: Accepted
 - Date: 2026-09-03
