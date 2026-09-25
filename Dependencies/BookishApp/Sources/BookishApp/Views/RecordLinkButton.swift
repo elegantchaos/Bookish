@@ -12,8 +12,11 @@ struct RecordLinkButton: View {
   /// The identifier of the linked record.
   let recordID: BookishRecordID
 
-  /// The datastore coordinator used to resolve the linked record.
-  let harness: BookishUIStateService
+  /// Resolves stored records and signals when they should be reloaded.
+  @Environment(BookishStorageService.State.self) private var storage
+
+  /// Resolves record-kind metadata for the link icon.
+  @Environment(BookishPresentationService.State.self) private var presentationState
 
   /// The application-owned command boundary used to push the linked record.
   @Environment(BookishCommander.self) private var commander
@@ -49,20 +52,20 @@ struct RecordLinkButton: View {
 
   /// Identifies changes that require link metadata to be resolved again.
   private var taskID: String {
-    "\(recordID.rawValue)-\(harness.revision)"
+    "\(recordID.rawValue)-\(storage.revision)"
   }
 
   /// Resolves the link name, thumbnail image, and kind icon.
   private func loadPresentation() async {
     do {
-      guard let record = try await harness.navigation.storageService.record(id: recordID) else {
+      guard let record = try await storage.record(id: recordID) else {
         presentation = nil
         return
       }
 
       presentation = BookishRecordLinkPresentation(
         record: record,
-        placeholderSystemImage: try await harness.presentation.recordKindMetadata(for: record.kind)?
+        placeholderSystemImage: try await presentationState.recordKindMetadata(for: record.kind)?
           .string(BookishRecordKey.icon) ?? "doc")
     } catch {
       status.report(error: error)

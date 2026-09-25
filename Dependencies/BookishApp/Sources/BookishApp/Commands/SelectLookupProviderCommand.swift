@@ -9,7 +9,9 @@ import CommandsUI
 import Icons
 
 /// Selects the provider used by subsequent metadata lookups.
-public struct SelectLookupProviderCommand<Centre: BookishLookupWorkflowService.Provider>: CommandWithUI {
+public struct SelectLookupProviderCommand<Centre: BookishLookupWorkflowService.Provider>:
+  CommandWithUI
+{
   /// The command does not return a value after selecting a provider.
   public typealias ResultType = Void
 

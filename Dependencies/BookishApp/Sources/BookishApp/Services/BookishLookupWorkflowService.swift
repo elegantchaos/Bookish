@@ -36,7 +36,8 @@ public final class BookishLookupWorkflowService {
     public fileprivate(set) var failures: [BookLookupFailure] = []
     public fileprivate(set) var isLookingUp = false
 
-    fileprivate init(providers: [any BookLookupProvider], selectedProviderID: BookLookupProviderID) {
+    fileprivate init(providers: [any BookLookupProvider], selectedProviderID: BookLookupProviderID)
+    {
       self.providers = providers
       self.selectedProviderID = selectedProviderID
     }

@@ -17,8 +17,11 @@ struct RecordQuerySectionView: View {
   /// The record supplying host values for the query template.
   let host: BookishRecord
 
-  /// The datastore coordinator used to resolve configuration and results.
-  let harness: BookishUIStateService
+  /// Resolves stored records and signals when they should be reloaded.
+  @Environment(BookishStorageService.State.self) private var storage
+
+  /// Resolves layouts, presentations, and record-kind metadata.
+  @Environment(BookishPresentationService.State.self) private var presentation
 
   /// The service used to report query-section failures.
   @Environment(BookishStatusService.State.self) private var status
@@ -85,7 +88,7 @@ struct RecordQuerySectionView: View {
 
   /// Identifies changes that require the section query to be resolved again.
   private var taskID: String {
-    "\(sectionID.rawValue)-\(host.id.rawValue)-\(harness.revision)"
+    "\(sectionID.rawValue)-\(host.id.rawValue)-\(storage.revision)"
   }
 
   /// Resolves the section configuration and its observable host-bound query result.
@@ -96,7 +99,7 @@ struct RecordQuerySectionView: View {
 
     do {
       guard
-        let section = try await harness.navigation.storageService.record(id: sectionID),
+        let section = try await storage.record(id: sectionID),
         section.kind == BookishRecordKind.querySection,
         let template = section.encoded(BookishRecordKey.query, as: RecordQueryTemplate.self)
       else {
@@ -109,7 +112,7 @@ struct RecordQuerySectionView: View {
 
       self.section = section
       self.template = template
-      let result = try await harness.navigation.storageService.recordQueryResult(
+      let result = try await storage.recordQueryResult(
         for: template, host: host)
       self.result = result
       await loadMetadata(for: result.records)
@@ -126,7 +129,7 @@ struct RecordQuerySectionView: View {
       var metadataByKind: [String: BookishRecord] = [:]
 
       for kind in Set(records.map(\.kind)) {
-        if let metadata = try await harness.presentation.recordKindMetadata(for: kind) {
+        if let metadata = try await presentation.recordKindMetadata(for: kind) {
           metadataByKind[kind] = metadata
         }
       }

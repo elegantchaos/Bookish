@@ -8,7 +8,9 @@ import Foundation
 import Icons
 
 /// Removes all records and mutations from the local datastore.
-public struct ResetDatastoreCommand<Centre: BookishStorageService.Provider & BookishStatusService.Provider>:
+public struct ResetDatastoreCommand<
+  Centre: BookishStorageService.Provider & BookishStatusService.Provider
+>:
   CommandWithUI
 {
   public typealias ResultType = Void

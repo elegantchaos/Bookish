@@ -15,8 +15,11 @@ struct RecordLayoutSectionView: View {
   /// The record whose fields are rendered by the section.
   let host: BookishRecord
 
-  /// The datastore coordinator used to resolve cascading presentations.
-  let harness: BookishUIStateService
+  /// Resolves stored records and signals when they should be reloaded.
+  @Environment(BookishStorageService.State.self) private var storage
+
+  /// Resolves cascading presentations for the host record.
+  @Environment(BookishPresentationService.State.self) private var presentationState
 
   /// The service used to report presentation-resolution failures.
   @Environment(BookishStatusService.State.self) private var status
@@ -49,14 +52,13 @@ struct RecordLayoutSectionView: View {
             presentation: presentation,
             viewerRegistry: BookishValueViewerRegistry { recordID in
               AnyView(
-                RecordLinkButton(recordID: recordID, harness: harness)
+                RecordLinkButton(recordID: recordID)
               )
             },
             sectionView: { linkedLayoutID in
               RecordLayoutItemView(
                 linkedLayoutID: linkedLayoutID,
                 host: host,
-                harness: harness,
                 navigation: navigation,
                 layoutPath: layoutPath.union([layout.id]))
             })
@@ -70,13 +72,13 @@ struct RecordLayoutSectionView: View {
 
   /// Identifies presentation inputs that require the section fields to be refreshed.
   private var taskID: String {
-    "\(layout.id.rawValue)-\(host.kind)-\(harness.revision)"
+    "\(layout.id.rawValue)-\(host.kind)-\(storage.revision)"
   }
 
   /// Resolves cascading field presentations for the host record in this section.
   private func loadPresentations() async {
     do {
-      presentationRecords = try await harness.presentation.presentations(
+      presentationRecords = try await presentationState.presentations(
         for: host.kind, layout: layout)
     } catch {
       status.report(error: error)

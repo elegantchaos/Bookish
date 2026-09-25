@@ -8,6 +8,7 @@ import BookishDatastore
 import BookishRecord
 import Commands
 import Foundation
+import Observation
 
 /// Owns Bookish's loaded datastore and vends operations over its materialised records.
 ///
@@ -28,6 +29,40 @@ public final class BookishStorageService {
   public protocol Provider: CommandCentre {
     var storageService: any API { get }
   }
+
+  /// Exposes the record-projection revision and read-only record queries to views.
+  @MainActor
+  @Observable
+  public final class State {
+    @ObservationIgnored private unowned let service: BookishStorageService
+
+    /// Increments whenever views should resolve stored records again.
+    public fileprivate(set) var revision = 0
+
+    fileprivate init(service: BookishStorageService) {
+      self.service = service
+    }
+
+    /// Returns a materialised record, if it exists.
+    public func record(id: BookishRecordID) async throws -> BookishRecord? {
+      try await service.record(id: id)
+    }
+
+    /// Resolves a host-specific query template against the materialised store.
+    public func recordQueryResult(
+      for template: RecordQueryTemplate,
+      host: BookishRecord
+    ) async throws -> RecordQueryResult {
+      try await service.recordQueryResult(for: template, host: host)
+    }
+
+    /// Returns all durable mutations for diagnostic presentation.
+    public func mutations() async throws -> [MutationRecord] {
+      try await service.mutations()
+    }
+  }
+
+  public private(set) lazy var state = State(service: self)
 
   /// The record that marks initial configuration seed import.
   private let seedMarkerID = BookishRecordID("datastore-seed-marker")
@@ -67,6 +102,11 @@ public final class BookishStorageService {
     if let queryService, let datastore {
       await queryService.replaceStore(with: datastore.recordStore)
     }
+  }
+
+  /// Signals views that stored records should be resolved again.
+  func didRefreshRecords() {
+    state.revision += 1
   }
 
   /// Applies imported records as durable local mutations.

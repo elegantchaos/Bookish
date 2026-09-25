@@ -9,9 +9,6 @@ import SwiftUI
 
 /// Displays the selected record and linked-record navigation stack.
 struct RecordDetailView: View {
-  /// The datastore coordinator used by record detail views.
-  @Environment(BookishUIStateService.self) private var harness
-
   /// The status shown when no record is selected.
   @Environment(BookishStatusService.State.self) private var status
 
@@ -25,7 +22,6 @@ struct RecordDetailView: View {
         if let recordID = navigation.selectedRecordID {
           BookishRecordIDDetail(
             recordID: recordID,
-            harness: harness,
             navigation: navigation
           )
         } else {
@@ -37,7 +33,6 @@ struct RecordDetailView: View {
       .navigationDestination(for: BookishRecordID.self) { recordID in
         BookishRecordIDDetail(
           recordID: recordID,
-          harness: harness,
           navigation: navigation
         )
       }

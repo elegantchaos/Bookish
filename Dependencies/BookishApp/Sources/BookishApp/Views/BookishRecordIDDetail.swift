@@ -12,8 +12,11 @@ struct BookishRecordIDDetail: View {
   /// The identifier of the record to display.
   let recordID: BookishRecordID
 
-  /// The datastore coordinator used to resolve record presentation.
-  let harness: BookishUIStateService
+  /// Resolves stored records and signals when they should be reloaded.
+  @Environment(BookishStorageService.State.self) private var storage
+
+  /// Resolves layouts, presentations, and record-kind metadata.
+  @Environment(BookishPresentationService.State.self) private var presentation
 
   /// The command boundary for actions on this visible record.
   @Environment(BookishCommander.self) private var commander
@@ -51,10 +54,7 @@ struct BookishRecordIDDetail: View {
           ),
           viewerRegistry: BookishValueViewerRegistry { recordID in
             AnyView(
-              RecordLinkButton(
-                recordID: recordID,
-                harness: harness
-              )
+              RecordLinkButton(recordID: recordID)
             )
           },
           showsNavigationTitle: showsNavigationTitle,
@@ -62,7 +62,6 @@ struct BookishRecordIDDetail: View {
             RecordLayoutItemView(
               linkedLayoutID: linkedLayoutID,
               host: record,
-              harness: harness,
               navigation: navigation
             )
           }
@@ -97,17 +96,17 @@ struct BookishRecordIDDetail: View {
 
   /// Identifies presentation inputs that require the record to be resolved again.
   private var taskID: String {
-    "\(recordID.rawValue)-\(navigation.selectedRecordIndexID?.rawValue ?? "")-\(harness.presentation.selectedLayoutID?.rawValue ?? "")-\(harness.revision)"
+    "\(recordID.rawValue)-\(navigation.selectedRecordIndexID?.rawValue ?? "")-\(presentation.selectedLayoutID?.rawValue ?? "")-\(storage.revision)"
   }
 
   /// Resolves the record, selected layout, and cascading presentations.
   private func load() async {
     do {
-      record = try await harness.navigation.storageService.record(id: recordID)
+      record = try await storage.record(id: recordID)
       if let record {
-        layout = try await harness.presentation.layout(
+        layout = try await presentation.layout(
           for: record, recordIndex: navigation.selectedRecordIndex)
-        presentationRecords = try await harness.presentation.presentations(
+        presentationRecords = try await presentation.presentations(
           for: record.kind,
           layout: layout
         )

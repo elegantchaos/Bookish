@@ -15,50 +15,50 @@ public final class BookishNavigationService {
   /// Performs browser index and record navigation requested by commands.
   @MainActor
   public protocol API {
-  /// Whether another browser index is available.
-  var canSelectAnotherRecordIndex: Bool { get }
+    /// Whether another browser index is available.
+    var canSelectAnotherRecordIndex: Bool { get }
 
-  /// Whether another record is available in the selected browser index.
-  var canSelectAnotherRecord: Bool { get }
+    /// Whether another record is available in the selected browser index.
+    var canSelectAnotherRecord: Bool { get }
 
-  var selectedMainSection: BookishMainSection? { get }
+    var selectedMainSection: BookishMainSection? { get }
 
-  var libraryIndexes: [BookishRecordIndex] { get }
+    var libraryIndexes: [BookishRecordIndex] { get }
 
-  var debugIndexes: [BookishRecordIndex] { get }
+    var debugIndexes: [BookishRecordIndex] { get }
 
-  /// Selects a browser index and refreshes its displayed records.
-  func select(recordIndexID: BookishRecordID?) async throws
+    /// Selects a browser index and refreshes its displayed records.
+    func select(recordIndexID: BookishRecordID?) async throws
 
-  /// Selects a top-level workflow and clears linked-record navigation.
-  func select(mainSection: BookishMainSection?)
+    /// Selects a top-level workflow and clears linked-record navigation.
+    func select(mainSection: BookishMainSection?)
 
-  /// Selects the next browser index.
-  func selectNextRecordIndex() async throws
+    /// Selects the next browser index.
+    func selectNextRecordIndex() async throws
 
-  /// Selects the previous browser index.
-  func selectPreviousRecordIndex() async throws
+    /// Selects the previous browser index.
+    func selectPreviousRecordIndex() async throws
 
-  /// Returns whether the selected browser index contains a record.
-  func contains(recordID: BookishRecordID) -> Bool
+    /// Returns whether the selected browser index contains a record.
+    func contains(recordID: BookishRecordID) -> Bool
 
-  /// Pushes a record onto the detail navigation path.
-  func push(recordID: BookishRecordID)
+    /// Pushes a record onto the detail navigation path.
+    func push(recordID: BookishRecordID)
 
-  /// Selects a record in the selected browser index, or clears the selection.
-  func select(recordID: BookishRecordID?)
+    /// Selects a record in the selected browser index, or clears the selection.
+    func select(recordID: BookishRecordID?)
 
-  /// Updates the name filter applied to the selected browser index.
-  func setRecordNameFilter(_ filter: String) async throws
+    /// Updates the name filter applied to the selected browser index.
+    func setRecordNameFilter(_ filter: String) async throws
 
-  /// Selects the next record in the selected browser index.
-  func selectNextRecord()
+    /// Selects the next record in the selected browser index.
+    func selectNextRecord()
 
-  /// Selects the previous record in the selected browser index.
-  func selectPreviousRecord()
+    /// Selects the previous record in the selected browser index.
+    func selectPreviousRecord()
 
-  /// The selected browser index shown in the first split-view column.
-  var selectedRecordIndexID: BookishRecordID? { get }
+    /// The selected browser index shown in the first split-view column.
+    var selectedRecordIndexID: BookishRecordID? { get }
 
   }
 
@@ -151,8 +151,7 @@ public final class BookishNavigationService {
   private var isRecordSelectionCleared = false
 
   /// The membership callback registered on the selected query result.
-  private var selectedResultObservation:
-    (result: RecordQueryResult, token: UUID)?
+  private var selectedResultObservation: (result: RecordQueryResult, token: UUID)?
 
   /// Creates an empty navigation service.
   public init(

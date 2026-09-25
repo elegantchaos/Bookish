@@ -9,7 +9,8 @@ import Foundation
 import Icons
 
 /// Selects the next record index in the datastore browser.
-public struct SelectNextRecordIndexCommand<Centre: BookishNavigationService.Provider>: CommandWithUI {
+public struct SelectNextRecordIndexCommand<Centre: BookishNavigationService.Provider>: CommandWithUI
+{
   public typealias ResultType = Void
 
   public let id = "datastore.navigation.next-index"

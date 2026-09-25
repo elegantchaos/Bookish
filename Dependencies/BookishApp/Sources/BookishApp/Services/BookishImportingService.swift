@@ -17,35 +17,35 @@ public final class BookishImportingService {
   /// Prepares imports and applies reviewed proposals to Bookish storage.
   @MainActor
   public protocol API {
-  /// Imports records from a Bookish interchange file.
-  func importInterchange(
-    from url: URL,
-    reporting event: @escaping BookishImportEventReporter
-  ) async throws -> BookishImportPlan
+    /// Imports records from a Bookish interchange file.
+    func importInterchange(
+      from url: URL,
+      reporting event: @escaping BookishImportEventReporter
+    ) async throws -> BookishImportPlan
 
-  /// Imports records from a Delicious Library XML file.
-  func importDeliciousLibrary(
-    from url: URL,
-    reporting event: @escaping BookishImportEventReporter
-  ) async throws -> BookishImportPlan
+    /// Imports records from a Delicious Library XML file.
+    func importDeliciousLibrary(
+      from url: URL,
+      reporting event: @escaping BookishImportEventReporter
+    ) async throws -> BookishImportPlan
 
-  /// Imports new records from a user-selected Kindle database directory.
-  func importKindleLibrary(
-    from url: URL,
-    reporting event: @escaping BookishImportEventReporter
-  ) async throws -> BookishImportPlan
+    /// Imports new records from a user-selected Kindle database directory.
+    func importKindleLibrary(
+      from url: URL,
+      reporting event: @escaping BookishImportEventReporter
+    ) async throws -> BookishImportPlan
 
-  /// Reads importer events into a storage-neutral proposal.
-  func importRecords<Importer: BookishImporter>(
-    from input: Importer.Input,
-    using importer: Importer,
-    reporting event: @escaping BookishImportEventReporter
-  ) async throws -> BookishImportPlan
+    /// Reads importer events into a storage-neutral proposal.
+    func importRecords<Importer: BookishImporter>(
+      from input: Importer.Input,
+      using importer: Importer,
+      reporting event: @escaping BookishImportEventReporter
+    ) async throws -> BookishImportPlan
 
-  /// Applies an explicitly reviewed proposal if the catalogue has not changed.
-  func apply(_ plan: BookishImportPlan, choices: [BookishRecordID: BookishImportChoice])
-    async throws
-    -> BookishImportResolution
+    /// Applies an explicitly reviewed proposal if the catalogue has not changed.
+    func apply(_ plan: BookishImportPlan, choices: [BookishRecordID: BookishImportChoice])
+      async throws
+      -> BookishImportResolution
   }
 
   /// The storage service that owns durable import mutations.

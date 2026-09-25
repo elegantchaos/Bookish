@@ -14,6 +14,7 @@ struct BookishEnvironmentInjector: ViewModifier {
   func body(content: Content) -> some View {
     content
       .environment(engine.uiState)
+      .environment(engine.storage.state)
       .environment(engine.navigation.state)
       .environment(engine.presentationService.state)
       .environment(engine.status.state)

@@ -764,7 +764,10 @@ struct BookishAppTests {
 
     #expect(engine.status.state.message == "Ready")
     #expect(!engine.navigation.recordIndexIDs.isEmpty)
-    #expect(engine.uiState.revision == 1)
+    #expect(engine.storage.state.revision == 1)
+    #expect(
+      try await engine.storage.state.record(id: BookishRecordID("seed-book"))?.kind
+        == BookishRecordKind.book)
   }
 
   @MainActor

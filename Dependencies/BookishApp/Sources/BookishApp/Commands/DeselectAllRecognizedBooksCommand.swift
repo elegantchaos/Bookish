@@ -8,7 +8,9 @@ import CommandsUI
 import Icons
 
 /// Clears the selection in the scanning candidate list.
-public struct DeselectAllRecognizedBooksCommand<Centre: BookishRecognitionService.Provider>: CommandWithUI {
+public struct DeselectAllRecognizedBooksCommand<Centre: BookishRecognitionService.Provider>:
+  CommandWithUI
+{
   /// The command does not return a value after changing the selection.
   public typealias ResultType = Void
 

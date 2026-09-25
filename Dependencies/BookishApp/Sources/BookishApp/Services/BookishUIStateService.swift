@@ -88,9 +88,6 @@ public final class BookishUIStateService {
   /// Whether an interchange export has records to write.
   public var hasExportableRecords: Bool { !navigation.recordIDs.isEmpty }
 
-  /// Increments whenever the record projection is refreshed.
-  public private(set) var revision = 0
-
   /// Whether the interchange import file picker is visible.
   public var isImportingInterchange = false
 
@@ -471,7 +468,7 @@ public final class BookishUIStateService {
   public func refreshBrowser() async throws {
     try await navigation.refreshRecordIndexes(showsDebugIndexes: showsDebugIndexes)
     try await presentation.refresh(for: navigation.selectedRecordIndex)
-    revision += 1
+    navigation.storageService.didRefreshRecords()
   }
 }
 

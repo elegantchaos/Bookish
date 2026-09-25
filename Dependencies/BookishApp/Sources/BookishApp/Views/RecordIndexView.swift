@@ -15,8 +15,8 @@ struct RecordIndexView: View {
   /// Reports presentation-resolution failures.
   @Environment(BookishStatusService.State.self) private var status
 
-  /// The UI state that identifies configuration revisions.
-  @Environment(BookishUIStateService.self) private var uiState
+  /// The storage state that identifies record revisions.
+  @Environment(BookishStorageService.State.self) private var storage
 
   /// The presentation service that resolves layouts and metadata.
   @Environment(BookishPresentationService.State.self) private var presentation
@@ -97,7 +97,7 @@ struct RecordIndexView: View {
 
   /// Identifies data changes that require row presentations to be resolved again.
   private var taskID: String {
-    "\(navigation.selectedRecordIndexID?.rawValue ?? "")-\(presentation.selectedLayoutID?.rawValue ?? "")-\(uiState.revision)"
+    "\(navigation.selectedRecordIndexID?.rawValue ?? "")-\(presentation.selectedLayoutID?.rawValue ?? "")-\(storage.revision)"
   }
 
   /// Resolves the active layout and the metadata needed by visible record kinds.

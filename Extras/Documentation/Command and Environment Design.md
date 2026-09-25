@@ -92,8 +92,13 @@ The environment injects the command façade and view-facing observable state.
 injects as `BookishStatusService.State`. Views read its message and import
 progress and may report view-owned errors through its method. The service's
 command-facing `API` and command-centre `Provider` protocols live in the same
-source file as the service. Other services still inject their concrete instances
-until their own migrations. The engine is not injected into SwiftUI view content.
+source file as the service. Storage, navigation, presentation, recognition, and
+lookup follow the same shape. Record views resolve stored records through
+`BookishStorageService.State`, which exposes read-only queries and the record
+revision that keys their reload tasks, and resolve layouts and presentations
+through `BookishPresentationService.State`. `BookishUIStateService` is still
+injected for import review, export, and Settings presentation until it is split.
+The engine is not injected into SwiftUI view content.
 
 The façade intentionally exposes only command dispatch and command UI helpers.
 Views should report allowed view-owned loading and picker failures through the

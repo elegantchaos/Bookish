@@ -11,8 +11,8 @@ import SwiftUI
 #if DEBUG
   /// Debug-only mutation history browser kept outside the main record UI.
   public struct BookishMutationDebugView: View {
-    /// The datastore coordinator used to load mutations.
-    private let harness: BookishUIStateService
+    /// Loads mutations and signals when they should be reloaded.
+    @Environment(BookishStorageService.State.self) private var storage
 
     /// Reports mutation-loading failures and supplies the empty-state message.
     @Environment(BookishStatusService.State.self) private var status
@@ -27,9 +27,7 @@ import SwiftUI
     @State private var selectedMutationID: MutationID?
 
     /// Creates the mutation debug window content.
-    public init(harness: BookishUIStateService) {
-      self.harness = harness
-    }
+    public init() {}
 
     /// The SwiftUI content for the mutation debug window.
     public var body: some View {
@@ -61,7 +59,7 @@ import SwiftUI
             description: Text(status.message))
         }
       }
-      .task(id: harness.revision) {
+      .task(id: storage.revision) {
         await load()
       }
     }
@@ -78,7 +76,7 @@ import SwiftUI
     /// Loads mutations and selects the first available entry.
     private func load() async {
       do {
-        mutations = try await harness.navigation.storageService.mutations()
+        mutations = try await storage.mutations()
         if selectedMutation == nil {
           selectedMutationID = mutations.first?.id
         }

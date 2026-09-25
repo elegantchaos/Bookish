@@ -9,7 +9,9 @@ import CommandsUI
 import Icons
 
 /// Selects the recognition provider used by the next capture.
-public struct SelectRecognitionProviderCommand<Centre: BookishRecognitionService.Provider>: CommandWithUI {
+public struct SelectRecognitionProviderCommand<Centre: BookishRecognitionService.Provider>:
+  CommandWithUI
+{
   /// The command does not return a value after selecting a provider.
   public typealias ResultType = Void
 

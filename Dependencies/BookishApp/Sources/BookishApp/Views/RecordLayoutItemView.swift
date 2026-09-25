@@ -14,8 +14,8 @@ struct RecordLayoutItemView: View {
   /// The record whose fields or relationships are being displayed.
   let host: BookishRecord
 
-  /// The datastore coordinator used to resolve the linked configuration.
-  let harness: BookishUIStateService
+  /// Resolves stored records and signals when they should be reloaded.
+  @Environment(BookishStorageService.State.self) private var storage
 
   /// The service used to report configuration failures.
   @Environment(BookishStatusService.State.self) private var status
@@ -41,13 +41,11 @@ struct RecordLayoutItemView: View {
   init(
     linkedLayoutID: BookishRecordID,
     host: BookishRecord,
-    harness: BookishUIStateService,
     navigation: BookishNavigationService.State
   ) {
     self.init(
       linkedLayoutID: linkedLayoutID,
       host: host,
-      harness: harness,
       navigation: navigation,
       layoutPath: []
     )
@@ -57,13 +55,11 @@ struct RecordLayoutItemView: View {
   init(
     linkedLayoutID: BookishRecordID,
     host: BookishRecord,
-    harness: BookishUIStateService,
     navigation: BookishNavigationService.State,
     layoutPath: Set<BookishRecordID>
   ) {
     self.linkedLayoutID = linkedLayoutID
     self.host = host
-    self.harness = harness
     self.navigation = navigation
     self.layoutPath = layoutPath
   }
@@ -77,15 +73,13 @@ struct RecordLayoutItemView: View {
           RecordLayoutSectionView(
             layout: configuration,
             host: host,
-            harness: harness,
             navigation: navigation,
             layoutPath: layoutPath
           )
         case BookishRecordKind.querySection:
           RecordQuerySectionView(
             sectionID: linkedLayoutID,
-            host: host,
-            harness: harness
+            host: host
           )
         default:
           EmptyView()
@@ -106,7 +100,7 @@ struct RecordLayoutItemView: View {
 
   /// Identifies a linked configuration lookup for a particular host and datastore revision.
   private var taskID: String {
-    "\(linkedLayoutID.rawValue)-\(host.id.rawValue)-\(harness.revision)"
+    "\(linkedLayoutID.rawValue)-\(host.id.rawValue)-\(storage.revision)"
   }
 
   /// Resolves and validates the linked configuration record.
@@ -117,7 +111,7 @@ struct RecordLayoutItemView: View {
 
     do {
       guard
-        let configuration = try await harness.navigation.storageService.record(id: linkedLayoutID)
+        let configuration = try await storage.record(id: linkedLayoutID)
       else {
         self.configuration = nil
         errorDescription = "The linked layout item is missing."
