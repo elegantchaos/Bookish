@@ -398,7 +398,7 @@ extension BookishImportingService {
       existing: existing)
   }
 
-  /// Writes the resolved records, plus an audit list of how each record was treated.
+  /// Writes the resolved records, plus an import record of how each record was treated.
   func apply(
     _ plan: BookishImportPlan, choices: [BookishRecordID: BookishImportChoice], date: Date = .now
   ) async throws -> BookishImportResolution {
@@ -408,12 +408,12 @@ extension BookishImportingService {
         == Dictionary(uniqueKeysWithValues: plan.existingSnapshot.map { ($0.id, $0) })
     else { throw BookishImportingError.catalogueChanged }
     let resolved = try plan.resolve(choices: choices)
-    let auditList = try resolved.auditList(
+    let auditRecord = try resolved.auditRecord(
       id: BookishRecordID("import-\(UUID().uuidString)"),
       name:
         "\(pendingImportDisplayName) Import, \(date.formatted(date: .abbreviated, time: .shortened))",
       sourceID: plan.sourceID, date: date)
-    try await storageService.upsert(records: resolved.records + [auditList].compactMap { $0 })
+    try await storageService.upsert(records: resolved.records + [auditRecord].compactMap { $0 })
     return resolved
   }
 }

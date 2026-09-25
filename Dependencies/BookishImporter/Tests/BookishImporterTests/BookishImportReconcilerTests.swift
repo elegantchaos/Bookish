@@ -227,21 +227,21 @@ struct BookishImportReconcilerTests {
         .matched: [existingAuthor.id],
       ])
     let date = Date(timeIntervalSince1970: 1_000_000)
-    let list = try #require(
-      try resolved.auditList(
+    let importRecord = try #require(
+      try resolved.auditRecord(
         id: BookishRecordID("import-audit"), name: "Kindle Import", sourceID: sourceID,
         date: date))
-    #expect(list.kind == BookishRecordKind.list)
-    #expect(list.string(BookishRecordKey.name) == "Kindle Import")
-    #expect(list.date(BookishRecordKey.importDate) == date)
-    #expect(list.list(BookishRecordKey.importAdded) == [.record(added.id)])
-    #expect(list.list(BookishRecordKey.importReplaced) == [.record(replaced.id)])
-    #expect(list.list(BookishRecordKey.importKept) == [.record(kept.id)])
-    #expect(list.list(BookishRecordKey.importMatched) == [.record(existingAuthor.id)])
+    #expect(importRecord.kind == BookishRecordKind.importRecord)
+    #expect(importRecord.string(BookishRecordKey.name) == "Kindle Import")
+    #expect(importRecord.date(BookishRecordKey.importDate) == date)
+    #expect(importRecord.list(BookishRecordKey.importAdded) == [.record(added.id)])
+    #expect(importRecord.list(BookishRecordKey.importReplaced) == [.record(replaced.id)])
+    #expect(importRecord.list(BookishRecordKey.importKept) == [.record(kept.id)])
+    #expect(importRecord.list(BookishRecordKey.importMatched) == [.record(existingAuthor.id)])
   }
 
   @Test
-  func resolutionWithEveryRecordSkippedHasNoAuditList() throws {
+  func resolutionWithEveryRecordSkippedHasNoImportRecord() throws {
     let proposed = book("book", authors: [])
     let plan = try BookishImportReconciler().plan(
       imported: BookishImportResult(
@@ -252,7 +252,7 @@ struct BookishImportReconcilerTests {
 
     #expect(resolved.treatments.isEmpty)
     #expect(
-      try resolved.auditList(
+      try resolved.auditRecord(
         id: BookishRecordID("import-audit"), name: "Import", sourceID: plan.sourceID,
         date: .now) == nil)
   }

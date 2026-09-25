@@ -57,7 +57,7 @@ public enum BookishImportTreatment: CaseIterable, Sendable {
   /// An existing record was linked in place of a matching imported record.
   case matched
 
-  /// The audit-list property that links the records given this treatment.
+  /// The import-record property that links the records given this treatment.
   public var auditKey: String {
     switch self {
     case .added: BookishRecordKey.importAdded
@@ -86,8 +86,8 @@ public struct BookishImportResolution: Equatable, Sendable {
     self.treatments = treatments
   }
 
-  /// A list recording how the import treated each record, or nil when it touched none.
-  public func auditList(id: BookishRecordID, name: String, sourceID: String, date: Date) throws
+  /// An import record describing how the import treated each record, or nil when it touched none.
+  public func auditRecord(id: BookishRecordID, name: String, sourceID: String, date: Date) throws
     -> BookishRecord?
   {
     guard treatments.values.contains(where: { !$0.isEmpty }) else { return nil }
@@ -99,7 +99,7 @@ public struct BookishImportResolution: Equatable, Sendable {
     for (treatment, ids) in treatments where !ids.isEmpty {
       properties[treatment.auditKey] = .list(ids.map { .record($0) })
     }
-    return BookishRecord(id: id, kind: BookishRecordKind.list, properties: properties)
+    return BookishRecord(id: id, kind: BookishRecordKind.importRecord, properties: properties)
   }
 }
 

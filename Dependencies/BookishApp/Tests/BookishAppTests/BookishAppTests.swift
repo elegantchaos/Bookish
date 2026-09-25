@@ -224,6 +224,7 @@ struct BookishAppTests {
         "Organisations",
         "Series",
         "Lists",
+        "Imports",
         "Layouts",
         "Indexes",
         "Metadata",
@@ -346,6 +347,7 @@ struct BookishAppTests {
         "Organisations",
         "Series",
         "Lists",
+        "Imports",
       ])
     #expect(!harness.browser.defaultShowsDebugIndexes)
     #expect(harness.navigation.selectedRecordIndexName == "Books")

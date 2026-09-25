@@ -182,15 +182,16 @@ import Testing
     #expect(harness.importing.state.lastImportResult?.importedRecords.map(\.id) == [kept])
     #expect(harness.importing.state.importChoices.isEmpty)
 
-    let auditLists = try await records(for: harness).filter {
-      $0.kind == BookishRecordKind.list && $0.date(BookishRecordKey.importDate) != nil
+    let importRecords = try await records(for: harness).filter {
+      $0.kind == BookishRecordKind.importRecord
     }
-    #expect(auditLists.count == 1)
-    #expect(auditLists.first?.list(BookishRecordKey.importAdded) == [.record(kept)])
-    #expect(auditLists.first?.list(BookishRecordKey.importMatched) == nil)
+    #expect(importRecords.count == 1)
+    #expect(importRecords.first?.date(BookishRecordKey.importDate) != nil)
+    #expect(importRecords.first?.list(BookishRecordKey.importAdded) == [.record(kept)])
+    #expect(importRecords.first?.list(BookishRecordKey.importMatched) == nil)
   }
 
-  @Test func importWithEveryRecordSkippedWritesNoAuditList() async throws {
+  @Test func importWithEveryRecordSkippedWritesNoImportRecord() async throws {
     let harness = try makeHarness()
     await harness.load()
     let before = try await records(for: harness).count
@@ -275,7 +276,7 @@ import Testing
         == BookishRecordKind.layout)
     let mutationsAfterReset = try await harness.storage.mutations()
     #expect(Set(mutationsAfterReset.map(\.id)) == Set(mutationsBeforeReset.map(\.id)))
-    // The book and its import audit list are written in the same second, and mutation dates are
+    // The book and its import record are written in the same second, and mutation dates are
     // stored without fractional seconds, so a reload can return them in either order.
     // Remove this once the datastore preserves creation order.
     withKnownIssue(

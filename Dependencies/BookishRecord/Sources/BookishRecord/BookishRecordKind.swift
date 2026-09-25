@@ -23,6 +23,9 @@ public enum BookishRecordKind {
   /// An ordered or unordered collection of records.
   public static let list = "list"
 
+  /// A record describing what one import session changed in the catalogue.
+  public static let importRecord = "import"
+
   /// A relationship record that carries metadata about a connection.
   public static let relationship = "relationship"
 

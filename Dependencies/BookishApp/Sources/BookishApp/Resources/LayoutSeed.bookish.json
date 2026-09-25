@@ -14,6 +14,7 @@
     { "ℹ": "datastore-organisation-layout", "name": "Organisation", "types": ["organisation"], "fields": ["name", "@query-section-publisher-books", "source", "*"] },
     { "ℹ": "datastore-series-layout", "name": "Series", "types": ["series"], "fields": ["name", "@query-section-series-books", "source", "*"] },
     { "ℹ": "datastore-list-layout", "name": "List", "types": ["list"], "fields": ["name", "items", "source", "*"] },
+    { "ℹ": "datastore-import-layout", "name": "Import", "types": ["import"], "fields": ["name", "source", "importDate", "importAdded", "importReplaced", "importKept", "importMatched"] },
     { "ℹ": "datastore-layout-layout", "name": "Layout", "types": ["layout"], "fields": ["name", "types", "fields", "excludedFields", "presentation", "*"] },
     { "ℹ": "datastore-index-layout", "name": "Index", "types": ["index"], "fields": ["name", "position", "debugOnly", "layout", "types", "query", "*"] }
   ]
