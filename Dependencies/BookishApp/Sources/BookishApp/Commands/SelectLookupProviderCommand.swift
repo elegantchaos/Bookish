@@ -28,7 +28,8 @@ public struct SelectLookupProviderCommand<Centre: BookishLookupWorkflowService.P
 
   /// Enables selection only for a provider that can execute requests.
   public func availability(centre: Centre) -> CommandAvailability {
-    !centre.lookupWorkflow.isLookingUp && centre.lookupWorkflow.isProviderSupported(providerID)
+    !centre.lookupWorkflowService.isLookingUp
+      && centre.lookupWorkflowService.isProviderSupported(providerID)
       ? .enabled : .disabled
   }
 
@@ -45,6 +46,6 @@ public struct SelectLookupProviderCommand<Centre: BookishLookupWorkflowService.P
 
   /// Selects the provider through the lookup workflow.
   public func perform(centre: Centre) async throws {
-    centre.lookupWorkflow.selectProvider(providerID)
+    centre.lookupWorkflowService.selectProvider(providerID)
   }
 }

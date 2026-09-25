@@ -143,7 +143,7 @@ struct BookishAppTests {
     let harness = try makeHarness()
     await harness.load()
 
-    let presentations = try await harness.presentationService.presentations(
+    let presentations = try await harness.presentation.presentations(
       for: BookishRecordKind.person)
     let presentation = try #require(presentations.first)
 
@@ -174,9 +174,9 @@ struct BookishAppTests {
     await harness.load()
 
     let bookMetadata = try #require(
-      try await harness.presentationService.recordKindMetadata(for: BookishRecordKind.book))
+      try await harness.presentation.recordKindMetadata(for: BookishRecordKind.book))
     let unknownMetadata = try #require(
-      try await harness.presentationService.recordKindMetadata(for: "customKind"))
+      try await harness.presentation.recordKindMetadata(for: "customKind"))
 
     #expect(bookMetadata.kind == BookishRecordKind.metadata)
     #expect(bookMetadata.string(BookishRecordKey.name) == "Book")
@@ -376,7 +376,7 @@ struct BookishAppTests {
     let harness = try makeHarness()
     await harness.load()
 
-    let layoutIDs = Set(harness.presentationService.layoutIDs)
+    let layoutIDs = Set(harness.presentation.layoutIDs)
     let allFields = try await harness.storage.record(
       id: BookishRecordID("datastore-all-fields-layout"))
     let book = try await harness.storage.record(id: BookishRecordID("datastore-book-layout"))
@@ -384,7 +384,7 @@ struct BookishAppTests {
       id: BookishRecordID("datastore-book-relationships-layout"))
     let seedBook = try #require(
       try await harness.storage.record(id: BookishRecordID("seed-book")))
-    let presentedBookLayout = try await harness.presentationService.layout(
+    let presentedBookLayout = try await harness.presentation.layout(
       for: seedBook,
       recordIndex: harness.navigation.selectedRecordIndex
     )
@@ -463,7 +463,7 @@ struct BookishAppTests {
 
     let person = try #require(
       try await harness.storage.record(id: BookishRecordID("seed-author")))
-    let layout = try await harness.presentationService.layout(
+    let layout = try await harness.presentation.layout(
       for: person,
       recordIndex: harness.navigation.selectedRecordIndex
     )
@@ -481,17 +481,17 @@ struct BookishAppTests {
     try await harness.navigation.select(recordIndexID: BookishRecordID("datastore-index-books"))
 
     #expect(
-      Set(harness.presentationService.compatibleLayoutIDs) == [
+      Set(harness.presentation.compatibleLayoutIDs) == [
         BookishRecordID("datastore-all-fields-layout"),
         BookishRecordID("datastore-book-layout"),
       ])
 
-    harness.presentationService.selectedLayoutID = BookishRecordID("datastore-book-layout")
+    harness.presentation.selectedLayoutID = BookishRecordID("datastore-book-layout")
     try await harness.navigation.select(recordIndexID: BookishRecordID("datastore-index-people"))
 
-    #expect(harness.presentationService.selectedLayoutID == nil)
+    #expect(harness.presentation.selectedLayoutID == nil)
     #expect(
-      Set(harness.presentationService.compatibleLayoutIDs) == [
+      Set(harness.presentation.compatibleLayoutIDs) == [
         BookishRecordID("datastore-all-fields-layout"),
         BookishRecordID("datastore-person-layout"),
       ])

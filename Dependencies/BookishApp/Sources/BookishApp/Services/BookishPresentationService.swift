@@ -11,37 +11,6 @@ import Observation
 @MainActor
 public final class BookishPresentationService {
   @MainActor
-  public protocol API {
-    /// The explicitly selected layout, when the user has overridden the default.
-    var selectedLayoutID: BookishRecordID? { get set }
-
-    /// The identifiers of all top-level layout records.
-    var layoutIDs: [BookishRecordID] { get }
-
-    /// The identifiers of layouts compatible with the active browser index.
-    var compatibleLayoutIDs: [BookishRecordID] { get }
-
-    /// Loads layouts and reconciles selection for the supplied browser index.
-    func refresh(for recordIndex: BookishRecordIndex?) async throws
-
-    /// Clears all derived presentation state.
-    func reset()
-
-    /// Returns the selected or index-default layout.
-    func selectedLayout(for recordIndex: BookishRecordIndex?) async throws -> BookishRecord?
-
-    /// Returns the explicit, type-specific, or index-default layout for a record.
-    func layout(for record: BookishRecord, recordIndex: BookishRecordIndex?) async throws
-      -> BookishRecord?
-
-    /// Returns display presentations from most specific to least specific.
-    func presentations(for kind: String, layout: BookishRecord?) async throws -> [BookishRecord]
-
-    /// Returns metadata for a record kind or the universal fallback.
-    func recordKindMetadata(for kind: String) async throws -> BookishRecord?
-  }
-
-  @MainActor
   @Observable
   public final class State {
     @ObservationIgnored private unowned let service: BookishPresentationService
@@ -113,7 +82,7 @@ public final class BookishPresentationService {
   }
 }
 
-extension BookishPresentationService: BookishPresentationService.API {
+extension BookishPresentationService {
   public func refresh(for recordIndex: BookishRecordIndex?) async throws {
     activeRecordIndex = recordIndex
     guard storageService.isLoaded else {

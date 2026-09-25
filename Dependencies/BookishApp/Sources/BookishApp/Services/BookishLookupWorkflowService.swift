@@ -23,7 +23,7 @@ public final class BookishLookupWorkflowService {
 
   @MainActor
   public protocol Provider: CommandCentre {
-    var lookupWorkflow: any API { get }
+    var lookupWorkflowService: any API { get }
   }
 
   @MainActor

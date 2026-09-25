@@ -8,7 +8,7 @@ import SwiftUI
 import UniformTypeIdentifiers
 
 /// The root view for the Bookish app.
-public struct BookishUIStateView: View {
+public struct BookishRootView: View {
   /// The import workflow state that presents source file pickers.
   @Environment(BookishImportingService.State.self) private var importing
 
@@ -134,7 +134,7 @@ private struct WorkflowNavigationSplitView: View {
   }
 }
 
-extension BookishUIStateView {
+extension BookishRootView {
   /// Imports a selected interchange file or reports a picker failure.
   private func handleInterchangeImport(_ result: Result<URL, Error>) {
     switch result {
@@ -171,6 +171,6 @@ extension BookishUIStateView {
 
 #Preview {
   let engine = BookishEngine()
-  BookishUIStateView()
+  BookishRootView()
     .modifier(BookishEnvironmentInjector(engine: engine))
 }

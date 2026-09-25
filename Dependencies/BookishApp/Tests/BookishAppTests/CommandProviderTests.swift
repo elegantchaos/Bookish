@@ -177,12 +177,12 @@ struct CommandProviderTests {
 
   @Test
   func lookupCommandsSelectTheVendedLookupProvider() async throws {
-    let lookupWorkflow = TestBookLookupWorkflow()
-    let centre = TestCommandCentre(lookupWorkflow: lookupWorkflow)
+    let lookupWorkflowService = TestBookLookupWorkflow()
+    let centre = TestCommandCentre(lookupWorkflowService: lookupWorkflowService)
 
     try await centre.perform(SelectLookupProviderCommand(.openLibrary))
 
-    #expect(lookupWorkflow.selectedProviderID == .openLibrary)
+    #expect(lookupWorkflowService.selectedProviderID == .openLibrary)
   }
 
   @Test
@@ -300,7 +300,7 @@ private final class TestCommandCentre:
   let statusService: any BookishStatusService.API
   let recordActionsService: any BookishRecordActionsService.API
   let recognitionService: any BookishRecognitionService.API
-  let lookupWorkflow: any BookishLookupWorkflowService.API
+  let lookupWorkflowService: any BookishLookupWorkflowService.API
   let navigationService: any BookishNavigationService.API
   let browserService: any BookishBrowserService.API
   let settingsPresentationService: any BookishSettingsPresentationService.API
@@ -314,7 +314,7 @@ private final class TestCommandCentre:
     statusService: any BookishStatusService.API = TestStatusService(),
     recordActionsService: any BookishRecordActionsService.API = TestRecordActionService(),
     recognitionService: any BookishRecognitionService.API = TestBookRecognitionWorkflow(),
-    lookupWorkflow: any BookishLookupWorkflowService.API = TestBookLookupWorkflow(),
+    lookupWorkflowService: any BookishLookupWorkflowService.API = TestBookLookupWorkflow(),
     navigationService: any BookishNavigationService.API = TestNavigationService(),
     browserService: any BookishBrowserService.API = TestBrowserSettings(),
     settingsPresentationService: any BookishSettingsPresentationService.API =
@@ -327,7 +327,7 @@ private final class TestCommandCentre:
     self.statusService = statusService
     self.recordActionsService = recordActionsService
     self.recognitionService = recognitionService
-    self.lookupWorkflow = lookupWorkflow
+    self.lookupWorkflowService = lookupWorkflowService
     self.navigationService = navigationService
     self.browserService = browserService
     self.settingsPresentationService = settingsPresentationService

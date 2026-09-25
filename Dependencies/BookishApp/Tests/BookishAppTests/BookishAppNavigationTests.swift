@@ -256,7 +256,7 @@ import Testing
 
     try await harness.navigation.select(recordIndexID: BookishRecordID("datastore-index-layouts"))
 
-    let layout = try await harness.presentationService.selectedLayout(
+    let layout = try await harness.presentation.selectedLayout(
       for: harness.navigation.selectedRecordIndex)
 
     #expect(layout?.id == BookishRecordID("datastore-layout-layout"))

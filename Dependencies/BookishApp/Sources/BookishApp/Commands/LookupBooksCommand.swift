@@ -11,7 +11,7 @@ public struct LookupBooksCommand<Centre: BookishLookupWorkflowService.Provider>:
   public init() {}
 
   public func availability(centre: Centre) -> CommandAvailability {
-    centre.lookupWorkflow.canLookupBooks ? .enabled : .disabled
+    centre.lookupWorkflowService.canLookupBooks ? .enabled : .disabled
   }
 
   public func name(centre _: Centre) -> String { "Search" }
@@ -21,6 +21,6 @@ public struct LookupBooksCommand<Centre: BookishLookupWorkflowService.Provider>:
   public func help(centre _: Centre) -> String? { "Search for matching books." }
 
   public func perform(centre: Centre) async throws {
-    await centre.lookupWorkflow.lookupBooks()
+    await centre.lookupWorkflowService.lookupBooks()
   }
 }

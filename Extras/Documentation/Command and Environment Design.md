@@ -85,21 +85,36 @@ Reporting a view-owned loading or picker error through
 effect. The state projection may expose methods for view-owned presentation
 work; it does not expose the command-facing `API`.
 
+## Service shape
+
+Each application service is a `BookishXXXService` class in `Services/`, following
+[Decision 0022](../Decisions/0022-service-state-api-and-provider-shape.md). Its
+source file declares up to three nested types:
+
+- `State`, the observable projection that views read. It exposes properties,
+  bindings, and view-owned wiring such as `BookishStatusService.State.report(error:)`,
+  never domain actions.
+- `API`, the operations commands and collaborating services need.
+- `Provider`, the command-centre protocol that vends `any API`.
+
+A service without view-facing state has no `State`; a service without command
+operations has no `API` or `Provider`. `BookishPresentationService` is
+view-facing only, and `BookishBrowserService`, `BookishRecordCreationService`, and
+`BookishRecordActionsService` are command-facing only. `Services/` contains only
+service files. Configuration, results, examples, and the import event reporter
+live in the package root; errors live in `Errors/` and extensions in
+`Extensions/`.
+
 ## Read services in the environment
 
-The environment injects the command façade and view-facing observable state.
-`BookishStatusService` owns a stable nested `State` object, which the environment
-injects as `BookishStatusService.State`. Views read its message and import
-progress and may report view-owned errors through its method. The service's
-command-facing `API` and command-centre `Provider` protocols live in the same
-source file as the service. Every other application service follows the same
-shape. Record views resolve stored records through
+The environment injects the command façade and each service's `State`, using
+its exact type. Views never receive a concrete service, its `API`, or the
+engine. Record views resolve stored records through
 `BookishStorageService.State`, which exposes read-only queries and the record
 revision that keys their reload tasks, and resolve layouts and presentations
 through `BookishPresentationService.State`. Import review, export, and Settings
-presentation have their own `State` projections on `BookishImportingService`,
-`BookishExportingService`, and `BookishSettingsPresentationService`. The engine
-is not injected into SwiftUI view content.
+presentation read the `State` projections of `BookishImportingService`,
+`BookishExportingService`, and `BookishSettingsPresentationService`.
 
 Services that write records call `BookishBrowserService.API.refresh()` afterwards,
 which advances the storage revision so record views reload. This is a temporary

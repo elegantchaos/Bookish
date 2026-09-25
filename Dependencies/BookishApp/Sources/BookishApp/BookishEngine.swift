@@ -31,7 +31,7 @@ public final class BookishEngine {
   @ObservationIgnored public let storage: BookishStorageService
 
   /// Presentation service that owns layout and display configuration state.
-  @ObservationIgnored public let presentationService: BookishPresentationService
+  @ObservationIgnored public let presentation: BookishPresentationService
 
   /// Status service that owns user-visible progress, messages, and errors.
   @ObservationIgnored public let status: BookishStatusService
@@ -135,7 +135,7 @@ public final class BookishEngine {
     startupTask = nil
     self.navigation = navigation
     self.storage = storageService
-    self.presentationService = presentationService
+    self.presentation = presentationService
     self.status = statusService
     self.browser = browser
     self.importing = importing
@@ -175,7 +175,7 @@ public final class BookishEngine {
   /// Builds the root view managed by the shared application shell.
   public func rootContent() -> some View {
     rootView {
-      BookishUIStateView()
+      BookishRootView()
     } startup: {
       ProgressView()
     }
@@ -234,7 +234,7 @@ extension BookishEngine: CommandCentre {
   }
 
   /// Vends the lookup workflow to lookup-provider commands.
-  public var lookupWorkflow: any BookishLookupWorkflowService.API {
+  public var lookupWorkflowService: any BookishLookupWorkflowService.API {
     lookup
   }
 

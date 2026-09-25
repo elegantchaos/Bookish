@@ -15,9 +15,6 @@ import Observation
   import AppKit
 #endif
 
-/// Receives importer lifecycle events while building a proposal.
-public typealias BookishImportEventReporter = @MainActor (BookishImportEvent) async throws -> Void
-
 /// Owns the Import workflow: reading a source, reviewing its proposal, and applying it to storage.
 @MainActor
 public final class BookishImportingService {
@@ -444,20 +441,3 @@ extension BookishImportingService {
 }
 
 extension BookishEngine: BookishImportingService.Provider {}
-
-/// Errors reported when an importer finishes without a completion event.
-enum BookishImportingError: LocalizedError {
-  /// The importer stream ended before reporting a summary.
-  case missingCompletion
-  case catalogueChanged
-
-  /// Describes the malformed importer stream for user-facing status reporting.
-  var errorDescription: String? {
-    switch self {
-    case .missingCompletion:
-      "The import ended before reporting completion."
-    case .catalogueChanged:
-      "The catalogue changed during review. Read the import again before applying it."
-    }
-  }
-}
