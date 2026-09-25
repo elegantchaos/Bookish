@@ -156,12 +156,12 @@ extension BookishEngine: CommandCentre {
   }
 
   /// Vends datastore operations to commands.
-  public var storageService: any BookishStorage {
+  public var storageService: any BookishStorageService.API {
     storage
   }
 
   /// Vends browser navigation to commands.
-  public var navigationService: any BookishNavigation {
+  public var navigationService: any BookishNavigationService.API {
     navigation
   }
 
@@ -196,12 +196,12 @@ extension BookishEngine: CommandCentre {
   }
 
   /// Vends the scanning workflow to recognition commands.
-  public var recognitionService: any BookishRecognition {
+  public var recognitionService: any BookishRecognitionService.API {
     recognition
   }
 
   /// Vends the lookup workflow to lookup-provider commands.
-  public var lookupWorkflow: any BookishLookupWorkflow {
+  public var lookupWorkflow: any BookishLookupWorkflowService.API {
     lookup
   }
 

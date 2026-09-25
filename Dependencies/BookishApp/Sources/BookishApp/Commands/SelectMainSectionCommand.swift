@@ -8,7 +8,7 @@ import CommandsUI
 import Icons
 
 /// Selects a top-level Bookish workflow.
-public struct SelectMainSectionCommand<Centre: BookishNavigationProvider>: CommandWithUI {
+public struct SelectMainSectionCommand<Centre: BookishNavigationService.Provider>: CommandWithUI {
   public typealias ResultType = Void
 
   public let id: String

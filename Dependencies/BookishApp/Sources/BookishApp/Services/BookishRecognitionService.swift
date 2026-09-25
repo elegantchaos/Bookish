@@ -4,19 +4,69 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 import BookishRecognition
+import Commands
 import Foundation
 import Observation
 import Settings
 
 /// Persists recognised candidates as new book records and refreshes the browser projection.
 @MainActor
-@Observable
-public final class BookishRecognitionService: BookishRecognition {
+public final class BookishRecognitionService {
+  @MainActor
+  public protocol API {
+    var candidates: [BookRecognitionCandidate] { get }
+    var selectedCandidateIDs: Set<String> { get }
+    var canAddBooks: Bool { get }
+    var isRecognizing: Bool { get }
+    var hasImage: Bool { get }
+    var isCurrentRecognitionProviderSupported: Bool { get }
+    var selectedRecognitionProviderID: BookRecognitionProviderID { get }
+    func selectRecognitionProvider(_ recognitionProviderID: BookRecognitionProviderID)
+    func isRecognitionProviderSupported(_ id: BookRecognitionProviderID) -> Bool
+    func selectImage(data: Data?)
+    func selectAllCandidates()
+    func identifyBooks() async
+    func addSelectedBooks() async throws
+    func deselectAllCandidates()
+    func selectCaptureGoodExample()
+  }
+
+  @MainActor
+  public protocol Provider: CommandCentre {
+    var recognitionService: any API { get }
+  }
+
+  @MainActor
+  @Observable
+  public final class State {
+    public fileprivate(set) var imageData: Data?
+    public fileprivate(set) var candidates: [BookRecognitionCandidate] = []
+    public var selectedCandidateIDs: Set<String> = []
+    public fileprivate(set) var error: (any Error)?
+    public fileprivate(set) var isRecognizing = false
+    public fileprivate(set) var recognitionProvider: any BookRecognitionProvider
+    public fileprivate(set) var recognitionProviders: [any BookRecognitionProvider]
+
+    fileprivate init(
+      recognitionProvider: any BookRecognitionProvider,
+      recognitionProviders: [any BookRecognitionProvider]
+    ) {
+      self.recognitionProvider = recognitionProvider
+      self.recognitionProviders = recognitionProviders
+    }
+
+    public var selectedRecognitionProviderID: BookRecognitionProviderID {
+      recognitionProvider.id
+    }
+  }
+
+  public let state: State
+
   /// The storage service used to persist new records.
   private unowned let storage: BookishStorageService
 
   /// The UI state refreshed after records are added.
-  private unowned let state: BookishUIStateService
+  private unowned let uiState: BookishUIStateService
 
   /// The status service used to report successful additions.
   private let statusService: any BookishStatusService.API
@@ -27,23 +77,15 @@ public final class BookishRecognitionService: BookishRecognition {
   /// The application settings used to restore and persist the selected recognition provider.
   private let settings: UserDefaults
 
-  /// The data selected by the user for recognition.
-  public private(set) var imageData: Data?
-
-  /// Candidate books returned by the recognition provider.
-  public private(set) var candidates: [BookRecognitionCandidate]
-
-  /// The candidate identifiers selected for addition.
-  public var selectedCandidateIDs: Set<String>
-
-  /// A recognition error suitable for display.
-  public private(set) var error: (any Error)?
-
-  /// Whether a request is currently underway.
-  public private(set) var isRecognizing: Bool
-
-  /// The recognition provider selected for the current and future captures.
-  public private(set) var recognitionProvider: any BookRecognitionProvider
+  public var imageData: Data? { state.imageData }
+  public var candidates: [BookRecognitionCandidate] { state.candidates }
+  public var selectedCandidateIDs: Set<String> {
+    get { state.selectedCandidateIDs }
+    set { state.selectedCandidateIDs = newValue }
+  }
+  public var error: (any Error)? { state.error }
+  public var isRecognizing: Bool { state.isRecognizing }
+  public var recognitionProvider: any BookRecognitionProvider { state.recognitionProvider }
 
   /// Creates a record-adder with application-owned services.
   init(
@@ -55,17 +97,14 @@ public final class BookishRecognitionService: BookishRecognition {
   ) {
     let factory = BookRecognitionProviderRegistry(recognitionProviders: recognitionProviders)
     self.storage = storage
-    self.state = state
+    uiState = state
     self.statusService = statusService
     self.registry = factory
     self.settings = settings
-    imageData = nil
-    candidates = []
-    selectedCandidateIDs = []
-    error = nil
-    isRecognizing = false
-    recognitionProvider = registry.recognitionProvider(
-      for: Self.selectedRecognitionProviderID(in: registry, settings: settings)
+    self.state = State(
+      recognitionProvider: registry.recognitionProvider(
+        for: Self.selectedRecognitionProviderID(in: registry, settings: settings)),
+      recognitionProviders: registry.recognitionProviders
     )
   }
 
@@ -77,7 +116,7 @@ public final class BookishRecognitionService: BookishRecognition {
   /// Selects a recognition provider by its identifier.
   public func selectRecognitionProvider(_ recognitionProviderID: BookRecognitionProviderID) {
     if isRecognitionProviderSupported(recognitionProviderID) {
-      recognitionProvider = registry.recognitionProvider(for: recognitionProviderID)
+      state.recognitionProvider = registry.recognitionProvider(for: recognitionProviderID)
       settings.set(recognitionProviderID, forKey: .bookRecognitionProvider)
     }
   }
@@ -86,8 +125,9 @@ public final class BookishRecognitionService: BookishRecognition {
   public func configureRecognitionProviders(_ recognitionProviders: [any BookRecognitionProvider]) {
     let currentIdentifier = recognitionProvider.id
     registry.replaceRecognitionProviders(with: recognitionProviders)
-    recognitionProvider = Self.resolvedRecognitionProvider(
+    state.recognitionProvider = Self.resolvedRecognitionProvider(
       in: registry, preferred: currentIdentifier)
+    state.recognitionProviders = registry.recognitionProviders
     settings.set(recognitionProvider.id, forKey: .bookRecognitionProvider)
   }
 
@@ -97,7 +137,7 @@ public final class BookishRecognitionService: BookishRecognition {
   }
 
   /// The recognition providers registered with the application.
-  public var recognitionProviders: [any BookRecognitionProvider] { registry.recognitionProviders }
+  public var recognitionProviders: [any BookRecognitionProvider] { state.recognitionProviders }
 
   /// Whether the supplied recognition provider can run on this device.
   public func isRecognitionProviderSupported(_ id: BookRecognitionProviderID) -> Bool {
@@ -122,10 +162,10 @@ public final class BookishRecognitionService: BookishRecognition {
 
   /// Replaces the selected image and clears the preceding result.
   public func selectImage(data: Data?) {
-    imageData = data
-    candidates = []
-    selectedCandidateIDs = []
-    error = nil
+    state.imageData = data
+    state.candidates = []
+    state.selectedCandidateIDs = []
+    state.error = nil
   }
 
   /// Selects the app's bundled image for trying book recognition.
@@ -134,22 +174,22 @@ public final class BookishRecognitionService: BookishRecognition {
       selectImage(data: try CaptureGoodExample.load())
     } catch {
       selectImage(data: nil)
-      self.error = error
+      state.error = error
     }
   }
 
   /// Requests identifications for the selected image.
   public func identifyBooks() async {
     guard let imageData else { return }
-    isRecognizing = true
-    error = nil
-    defer { isRecognizing = false }
+    state.isRecognizing = true
+    state.error = nil
+    defer { state.isRecognizing = false }
 
     do {
-      candidates = try await recognitionProvider.identifyBooks(in: imageData)
-      selectedCandidateIDs = []
+      state.candidates = try await recognitionProvider.identifyBooks(in: imageData)
+      state.selectedCandidateIDs = []
     } catch {
-      self.error = error
+      state.error = error
     }
   }
 
@@ -175,15 +215,15 @@ public final class BookishRecognitionService: BookishRecognition {
   private func addBooks(_ candidates: [BookRecognitionCandidate]) async throws {
     guard !candidates.isEmpty else { return }
     try await storage.upsert(records: candidates.map(\.bookRecord))
-    try await state.refreshBrowser()
+    try await uiState.refreshBrowser()
     statusService.report(
       message:
         "Added \(candidates.count) \(candidates.count == 1 ? "book" : "books")"
     )
 
     let addedIDs = Set(candidates.map(\.id))
-    self.candidates.removeAll { addedIDs.contains($0.id) }
-    selectedCandidateIDs.subtract(addedIDs)
+    state.candidates.removeAll { addedIDs.contains($0.id) }
+    state.selectedCandidateIDs.subtract(addedIDs)
   }
 
   /// Selects a supported preferred recognition provider or the first supported fallback.
@@ -215,3 +255,7 @@ public final class BookishRecognitionService: BookishRecognition {
     return resolvedRecognitionProvider(in: registry, preferred: preferred).id
   }
 }
+
+extension BookishRecognitionService: BookishRecognitionService.API {}
+
+extension BookishEngine: BookishRecognitionService.Provider {}

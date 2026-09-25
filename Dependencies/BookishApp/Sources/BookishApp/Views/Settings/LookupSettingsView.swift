@@ -12,7 +12,7 @@ struct LookupSettingsView: View {
   @Environment(BookishCommander.self) private var commander
 
   /// The lookup workflow that supplies provider state.
-  @Environment(BookishLookupWorkflowService.self) private var lookup
+  @Environment(BookishLookupWorkflowService.State.self) private var lookup
 
   /// The settings form.
   var body: some View {

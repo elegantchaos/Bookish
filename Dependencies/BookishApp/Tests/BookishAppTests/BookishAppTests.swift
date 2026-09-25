@@ -909,16 +909,16 @@ final class UIStateCommandCentre:
   BookishStatusService.Provider,
   BookishImportPresentationProvider,
   BookishDatastoreMaintenanceProvider,
-  BookishStorageProvider,
+  BookishStorageService.Provider,
   BookishRecordActionsProvider,
-  BookishNavigationProvider
+  BookishNavigationService.Provider
 {
   let statusService: any BookishStatusService.API
   let importPresentation: any BookishImportPresentation
   let datastoreMaintenanceService: any BookishDatastoreMaintenance
-  let storageService: any BookishStorage
+  let storageService: any BookishStorageService.API
   let recordActionService: any BookishRecordActions
-  let navigationService: any BookishNavigation
+  let navigationService: any BookishNavigationService.API
 
   init(uiState: BookishUIStateService) {
     statusService = uiState.statusService

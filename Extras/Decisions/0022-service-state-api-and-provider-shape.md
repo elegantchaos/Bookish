@@ -48,10 +48,11 @@ final class BookishXXXService {
 
 This is a shape, not a requirement for empty types. A service without
 view-facing state needs no `State`. A service without command operations needs
-no empty `API` or `Provider`. Related types live in the service's source file
-as an intentional exception to the one-type-per-file convention. The
-`Services/` folder contains service source files; standalone helper types move
-to folders that describe their own role.
+no empty `API` or `Provider`. These three types are nested inside the service
+and therefore defined in its source file. Other types follow the normal
+one-type-per-file convention and live outside `Services/`; their folder
+organisation is outside this decision's scope. The `Services/` folder contains
+only service source files.
 
 The service owns its stable state projection and implements its own `API`.
 Service classes do not implement several unrelated capability protocols. The
@@ -75,7 +76,7 @@ the environment.
 Injecting the whole service into SwiftUI retains a route to its command API.
 Putting every user-interface effect behind a command would create commands
 for presentation-only work that has no meaningful undo or action history.
-Keeping API and provider protocols in separate files makes a service's public
+Keeping API and provider protocols outside their service types makes a service's
 boundary harder to inspect. A shared generic service base or protocol is
 deferred until repeated concrete machinery makes its value clear.
 

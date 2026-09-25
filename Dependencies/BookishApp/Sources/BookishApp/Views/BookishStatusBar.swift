@@ -11,7 +11,7 @@ struct BookishStatusBar: View {
   @Environment(BookishStatusService.State.self) private var status
 
   /// The navigation service that supplies the displayed record count.
-  @Environment(BookishNavigationService.self) private var navigation
+  @Environment(BookishNavigationService.State.self) private var navigation
 
   /// The status bar content.
   var body: some View {

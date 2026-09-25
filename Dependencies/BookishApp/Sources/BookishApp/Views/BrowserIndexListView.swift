@@ -12,7 +12,7 @@ struct BrowserIndexListView: View {
   @Environment(BookishCommander.self) private var commander
 
   /// The navigation state displayed by the sidebar.
-  @Environment(BookishNavigationService.self) private var navigation
+  @Environment(BookishNavigationService.State.self) private var navigation
 
   /// The list of selectable browser indexes.
   var body: some View {

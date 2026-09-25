@@ -6,22 +6,8 @@
 import BookishCoding
 import BookishDatastore
 import BookishRecord
+import Commands
 import Foundation
-import Observation
-
-/// Performs datastore lifecycle and storage operations requested by commands.
-@MainActor
-public protocol BookishStorage {
-  /// Returns the datastore directory.
-  func localDatastoreDirectory() throws -> URL
-
-  /// Rebuilds the materialised record projection.
-  func rebuildRecordProjection() async throws
-
-  /// Resets the datastore and opens an empty replacement store.
-  func reset() async throws
-
-}
 
 /// Owns Bookish's loaded datastore and vends operations over its materialised records.
 ///
@@ -29,8 +15,20 @@ public protocol BookishStorage {
 /// a `BookishDatastore` directly. Its API can be narrowed further as responsibilities
 /// move out of `BookishUIStateService`.
 @MainActor
-@Observable
 public final class BookishStorageService {
+  /// Performs datastore lifecycle and storage operations requested by commands.
+  @MainActor
+  public protocol API {
+    func localDatastoreDirectory() throws -> URL
+    func rebuildRecordProjection() async throws
+    func reset() async throws
+  }
+
+  @MainActor
+  public protocol Provider: CommandCentre {
+    var storageService: any API { get }
+  }
+
   /// The record that marks initial configuration seed import.
   private let seedMarkerID = BookishRecordID("datastore-seed-marker")
 
@@ -38,7 +36,7 @@ public final class BookishStorageService {
   private var directoryURL: URL?
 
   /// The loaded datastore, when Bookish has completed startup.
-  @ObservationIgnored private(set) var datastore: BookishDatastore?
+  private(set) var datastore: BookishDatastore?
 
   /// Whether Bookish has loaded a datastore that can fulfil model operations.
   var isLoaded: Bool { datastore != nil }
@@ -267,7 +265,7 @@ public final class BookishStorageService {
   }
 }
 
-extension BookishStorageService: BookishStorage {
+extension BookishStorageService: BookishStorageService.API {
 
   /// Rebuilds the materialised record projection and reapplies configuration seeds.
   public func rebuildRecordProjection() async throws {
@@ -325,6 +323,8 @@ extension BookishStorageService: BookishStorage {
   }
 
 }
+
+extension BookishEngine: BookishStorageService.Provider {}
 
 extension BookishStorageService: BookishRecordActionStorage {
 }

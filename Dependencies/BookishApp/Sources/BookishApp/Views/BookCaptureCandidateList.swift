@@ -12,7 +12,7 @@ struct BookCaptureCandidateList: View {
   @Environment(BookishCommander.self) private var commander
 
   /// The observable recognition workflow displayed by this view.
-  @Environment(BookishRecognitionService.self) private var recognition
+  @Environment(BookishRecognitionService.State.self) private var recognition
 
   var body: some View {
     List {

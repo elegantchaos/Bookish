@@ -4,65 +4,95 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 import BookishLookup
+import Commands
 import Foundation
 import Observation
 import Settings
 
 /// Owns temporary UI state for querying Bookish metadata providers.
 @MainActor
-@Observable
-public final class BookishLookupWorkflowService: BookishLookupWorkflow {
+public final class BookishLookupWorkflowService {
+  @MainActor
+  public protocol API: AnyObject {
+    var canLookupBooks: Bool { get }
+    func lookupBooks() async
+    var isLookingUp: Bool { get }
+    func selectProvider(_ providerID: BookLookupProviderID)
+    func isProviderSupported(_ providerID: BookLookupProviderID) -> Bool
+  }
+
+  @MainActor
+  public protocol Provider: CommandCentre {
+    var lookupWorkflow: any API { get }
+  }
+
+  @MainActor
+  @Observable
+  public final class State {
+    public fileprivate(set) var providers: [any BookLookupProvider]
+    public fileprivate(set) var selectedProviderID: BookLookupProviderID
+    public var query = ""
+    public fileprivate(set) var candidates: [BookLookupCandidate] = []
+    public fileprivate(set) var failures: [BookLookupFailure] = []
+    public fileprivate(set) var isLookingUp = false
+
+    fileprivate init(providers: [any BookLookupProvider], selectedProviderID: BookLookupProviderID) {
+      self.providers = providers
+      self.selectedProviderID = selectedProviderID
+    }
+
+    public var isSelectedProviderSupported: Bool {
+      providers.first(where: { $0.id == selectedProviderID })?.isSupported == true
+    }
+
+    public var canLookupBooks: Bool {
+      !query.isEmpty && !isLookingUp && isSelectedProviderSupported
+    }
+  }
+
   /// The provider coordinator that executes lookup work.
-  @ObservationIgnored private let lookup: BookLookupService
+  private let lookup: BookLookupService
 
-  /// The providers offered by the temporary lookup workflow.
-  @ObservationIgnored public private(set) var providers: [any BookLookupProvider]
+  public let state: State
 
-  /// The provider selected by the user.
-  public var selectedProviderID: BookLookupProviderID
+  public var providers: [any BookLookupProvider] { state.providers }
+  public var selectedProviderID: BookLookupProviderID { state.selectedProviderID }
+  public var query: String {
+    get { state.query }
+    set { state.query = newValue }
+  }
+  public var candidates: [BookLookupCandidate] { state.candidates }
+  public var failures: [BookLookupFailure] { state.failures }
+  public var isLookingUp: Bool { state.isLookingUp }
+  public var canLookupBooks: Bool { state.canLookupBooks }
+  public var isSelectedProviderSupported: Bool { state.isSelectedProviderSupported }
 
   /// The application settings used to restore and persist the selected provider.
   private let settings: UserDefaults
 
-  /// The current lookup query.
-  public var query = ""
-
-  /// Whether the current query can be submitted.
-  public var canLookupBooks: Bool {
-    !query.isEmpty && !isLookingUp && isSelectedProviderSupported
-  }
-
-  /// The candidates returned by the selected provider.
-  public private(set) var candidates: [BookLookupCandidate] = []
-
-  /// The failures returned by the selected provider.
-  public private(set) var failures: [BookLookupFailure] = []
-
-  /// Whether a query is in progress.
-  public private(set) var isLookingUp = false
-
   /// Creates a workflow backed by application-configured lookup providers.
   public init(providers: [any BookLookupProvider], settings: UserDefaults) {
-    self.providers = providers
+    state = State(
+      providers: providers,
+      selectedProviderID: Self.selectedProviderID(in: providers, settings: settings))
     lookup = BookLookupService(providers: providers)
     self.settings = settings
-    selectedProviderID = Self.selectedProviderID(in: providers, settings: settings)
   }
 
   /// Replaces application-configured providers and preserves selection when possible.
   public func configureProviders(_ providers: [any BookLookupProvider]) async {
-    self.providers = providers
+    state.providers = providers
     await lookup.replaceProviders(with: providers)
-    selectedProviderID = Self.resolvedProviderID(in: providers, preferred: selectedProviderID)
+    state.selectedProviderID = Self.resolvedProviderID(in: providers, preferred: selectedProviderID)
     settings.set(selectedProviderID, forKey: .bookLookupProvider)
-    candidates = []
-    failures = []
+    state.candidates = []
+    state.failures = []
   }
 
   /// Selects a supported provider and persists the selection in application settings.
   public func selectProvider(_ providerID: BookLookupProviderID) {
     guard isProviderSupported(providerID) else { return }
-    selectedProviderID = providerID
+    state.selectedProviderID = providerID
     settings.set(providerID, forKey: .bookLookupProvider)
   }
 
@@ -71,22 +101,17 @@ public final class BookishLookupWorkflowService: BookishLookupWorkflow {
     providers.first(where: { $0.id == providerID })?.isSupported == true
   }
 
-  /// Whether the provider selected for the workflow can execute requests.
-  public var isSelectedProviderSupported: Bool {
-    isProviderSupported(selectedProviderID)
-  }
-
   /// Executes the selected provider for the current query.
   public func lookupBooks() async {
     guard !query.isEmpty else { return }
-    isLookingUp = true
-    defer { isLookingUp = false }
+    state.isLookingUp = true
+    defer { state.isLookingUp = false }
     let result = await lookup.lookupBooks(
       matching: BookLookupQuery(query),
       using: [selectedProviderID]
     )
-    candidates = result.candidates
-    failures = result.failures
+    state.candidates = result.candidates
+    state.failures = result.failures
   }
 
   /// Resolves the persisted provider preference when it remains available.
@@ -111,3 +136,7 @@ public final class BookishLookupWorkflowService: BookishLookupWorkflow {
     return fallback.id
   }
 }
+
+extension BookishLookupWorkflowService: BookishLookupWorkflowService.API {}
+
+extension BookishEngine: BookishLookupWorkflowService.Provider {}

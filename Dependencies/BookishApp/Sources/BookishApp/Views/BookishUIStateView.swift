@@ -19,7 +19,7 @@ public struct BookishUIStateView: View {
   @Environment(BookishStatusService.State.self) private var status
 
   /// The navigation state that selects the visible workflow or browser.
-  @Environment(BookishNavigationService.self) private var navigation
+  @Environment(BookishNavigationService.State.self) private var navigation
 
   /// Whether debug-only browser indexes should be available.
   @AppStorage(.isDeveloperMode) private var isDeveloperMode

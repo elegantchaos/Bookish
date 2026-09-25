@@ -3,7 +3,7 @@ import CommandsUI
 import Icons
 
 /// Searches the selected metadata provider for the current query.
-public struct LookupBooksCommand<Centre: BookishLookupWorkflowProvider>: CommandWithUI {
+public struct LookupBooksCommand<Centre: BookishLookupWorkflowService.Provider>: CommandWithUI {
   public typealias ResultType = Void
 
   public let id = "bookish.lookup.books"

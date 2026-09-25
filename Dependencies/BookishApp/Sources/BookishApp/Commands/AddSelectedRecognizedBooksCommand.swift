@@ -8,7 +8,7 @@ import CommandsUI
 import Icons
 
 /// Adds the selected recognition candidates to the catalogue.
-public struct AddSelectedRecognizedBooksCommand<Centre: BookishRecognitionProvider>: CommandWithUI {
+public struct AddSelectedRecognizedBooksCommand<Centre: BookishRecognitionService.Provider>: CommandWithUI {
   /// The command does not return a value after adding candidates.
   public typealias ResultType = Void
 

@@ -9,9 +9,12 @@ import Commands
 import Foundation
 import Observation
 
-/// Performs browser index and record navigation requested by commands.
+/// Maintains the datastore browser route independently from datastore services.
 @MainActor
-public protocol BookishNavigation {
+public final class BookishNavigationService {
+  /// Performs browser index and record navigation requested by commands.
+  @MainActor
+  public protocol API {
   /// Whether another browser index is available.
   var canSelectAnotherRecordIndex: Bool { get }
 
@@ -57,52 +60,99 @@ public protocol BookishNavigation {
   /// The selected browser index shown in the first split-view column.
   var selectedRecordIndexID: BookishRecordID? { get }
 
-}
+  }
 
-/// Maintains the datastore browser route independently from datastore services.
-///
-/// The service stores the active browser index and record identifier. The
-/// browser indexes are materialised records, while the selected content is
-/// backed by an observable query result supplied by the datastore.
-@MainActor
-@Observable
-public final class BookishNavigationService {
+  @MainActor
+  public protocol Provider: CommandCentre {
+    var navigationService: any API { get }
+  }
+
+  @MainActor
+  @Observable
+  public final class State {
+    public fileprivate(set) var recordIndexResult: RecordQueryResult?
+    public fileprivate(set) var selectedRecordIndexID: BookishRecordID?
+    public fileprivate(set) var selectedMainSection: BookishMainSection?
+    public fileprivate(set) var selectedRecordID: BookishRecordID?
+    public fileprivate(set) var recordNavigationPath: [BookishRecordID] = []
+    public fileprivate(set) var selectedRecordResult: RecordQueryResult?
+    public fileprivate(set) var recordNameFilter = ""
+
+    fileprivate init(
+      selectedRecordIndexID: BookishRecordID? = nil,
+      selectedMainSection: BookishMainSection? = nil
+    ) {
+      self.selectedRecordIndexID = selectedRecordIndexID
+      self.selectedMainSection = selectedMainSection
+    }
+
+    public var recordIndexes: [BookishRecordIndex] {
+      recordIndexResult?.records.map(BookishRecordIndex.init(record:)) ?? []
+    }
+
+    public var recordIndexIDs: [BookishRecordID] { recordIndexes.map(\.id) }
+    public var libraryIndexes: [BookishRecordIndex] { recordIndexes.filter { !$0.isDebugOnly } }
+    public var debugIndexes: [BookishRecordIndex] { recordIndexes.filter(\.isDebugOnly) }
+    public var selectedRecordIndex: BookishRecordIndex? {
+      recordIndexes.first { $0.id == selectedRecordIndexID }
+    }
+    public var selectedRecordIndexName: String? { selectedRecordIndex?.name }
+    public var selectedRecordIDs: [BookishRecordID] { selectedRecordResult?.ids ?? [] }
+    public var recordIDs: [BookishRecordID] { selectedRecordIDs }
+
+    /// Applies a native detail-path binding change.
+    public func setRecordNavigationPath(_ path: [BookishRecordID]) {
+      recordNavigationPath = path
+    }
+  }
+
+  public let state: State
+
+  public var recordIndexResult: RecordQueryResult? {
+    get { state.recordIndexResult }
+    set { state.recordIndexResult = newValue }
+  }
+  public var selectedRecordIndexID: BookishRecordID? {
+    get { state.selectedRecordIndexID }
+    set { state.selectedRecordIndexID = newValue }
+  }
+  public var selectedMainSection: BookishMainSection? {
+    get { state.selectedMainSection }
+    set { state.selectedMainSection = newValue }
+  }
+  public var selectedRecordID: BookishRecordID? {
+    get { state.selectedRecordID }
+    set { state.selectedRecordID = newValue }
+  }
+  public var recordNavigationPath: [BookishRecordID] {
+    get { state.recordNavigationPath }
+    set { state.recordNavigationPath = newValue }
+  }
+  public var selectedRecordResult: RecordQueryResult? {
+    get { state.selectedRecordResult }
+    set { state.selectedRecordResult = newValue }
+  }
+  public var recordNameFilter: String {
+    get { state.recordNameFilter }
+    set { state.recordNameFilter = newValue }
+  }
+
   /// The observable records defining the available browser indexes.
-  public private(set) var recordIndexResult: RecordQueryResult?
-
   /// The datastore service used to materialise selected browser-index queries.
-  @ObservationIgnored let storageService: BookishStorageService
+  let storageService: BookishStorageService
 
   /// The application settings used to restore and persist the selected sidebar route.
-  @ObservationIgnored private let settings: UserDefaults
+  private let settings: UserDefaults
 
   /// Reconciles presentation state after a browser-index change.
-  @ObservationIgnored private var recordIndexSelectionHandler: (@MainActor () async throws -> Void)?
-
-  /// The selected browser index shown in the first split-view column.
-  public private(set) var selectedRecordIndexID: BookishRecordID?
-
-  /// The selected top-level workflow, when the record browser is not displayed.
-  public private(set) var selectedMainSection: BookishMainSection?
-
-  /// The selected materialised record shown in the detail column.
-  public private(set) var selectedRecordID: BookishRecordID?
-
-  /// The linked records pushed from the selected record in the detail column.
-  public private(set) var recordNavigationPath: [BookishRecordID] = []
+  private var recordIndexSelectionHandler: (@MainActor () async throws -> Void)?
 
   /// Keeps an explicit Back navigation from being replaced by the first record on query refresh.
-  @ObservationIgnored private var isRecordSelectionCleared = false
-
-  /// The records matching the selected browser index.
-  public private(set) var selectedRecordResult: RecordQueryResult?
+  private var isRecordSelectionCleared = false
 
   /// The membership callback registered on the selected query result.
-  @ObservationIgnored private var selectedResultObservation:
+  private var selectedResultObservation:
     (result: RecordQueryResult, token: UUID)?
-
-  /// The text used to limit the selected index to partially matching record names.
-  public private(set) var recordNameFilter = ""
 
   /// Creates an empty navigation service.
   public init(
@@ -114,11 +164,11 @@ public final class BookishNavigationService {
 
     switch settings.value(forKey: .lastNavigationSelection) {
     case .automatic:
-      break
+      state = State()
     case .mainSection(let section):
-      selectedMainSection = section
+      state = State(selectedMainSection: section)
     case .recordIndex(let recordIndexID):
-      selectedRecordIndexID = recordIndexID
+      state = State(selectedRecordIndexID: recordIndexID)
     }
   }
 
@@ -460,5 +510,6 @@ public final class BookishNavigationService {
 
 }
 
-extension BookishNavigationService: BookishNavigation {
-}
+extension BookishNavigationService: BookishNavigationService.API {}
+
+extension BookishEngine: BookishNavigationService.Provider {}

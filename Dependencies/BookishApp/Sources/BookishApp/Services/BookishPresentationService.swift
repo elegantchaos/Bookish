@@ -7,9 +7,11 @@ import BookishDatastore
 import BookishRecord
 import Observation
 
-/// Manages Bookish layout selection and property-presentation resolution.
+/// Owns observable layout state and display configuration derived from storage records.
 @MainActor
-public protocol BookishPresentation {
+public final class BookishPresentationService {
+  @MainActor
+  public protocol API {
   /// The explicitly selected layout, when the user has overridden the default.
   var selectedLayoutID: BookishRecordID? { get set }
 
@@ -37,12 +39,40 @@ public protocol BookishPresentation {
 
   /// Returns metadata for a record kind or the universal fallback.
   func recordKindMetadata(for kind: String) async throws -> BookishRecord?
-}
+  }
 
-/// Owns observable layout state and display configuration derived from storage records.
-@MainActor
-@Observable
-public final class BookishPresentationService {
+  @MainActor
+  @Observable
+  public final class State {
+    @ObservationIgnored private unowned let service: BookishPresentationService
+    public var selectedLayoutID: BookishRecordID?
+    public fileprivate(set) var layoutIDs: [BookishRecordID] = []
+
+    fileprivate init(service: BookishPresentationService) {
+      self.service = service
+    }
+
+    public var compatibleLayoutIDs: [BookishRecordID] {
+      service.compatibleLayouts.map(\.id)
+    }
+
+    public func selectedLayout(for recordIndex: BookishRecordIndex?) async throws -> BookishRecord? {
+      try await service.selectedLayout(for: recordIndex)
+    }
+
+    public func presentations(for kind: String, layout: BookishRecord?) async throws
+      -> [BookishRecord]
+    {
+      try await service.presentations(for: kind, layout: layout)
+    }
+
+    public func recordKindMetadata(for kind: String) async throws -> BookishRecord? {
+      try await service.recordKindMetadata(for: kind)
+    }
+  }
+
+  public private(set) lazy var state = State(service: self)
+
   /// The default layout used when neither the user nor index selects one.
   private let fallbackLayoutID = BookishRecordID("datastore-all-fields-layout")
 
@@ -50,7 +80,7 @@ public final class BookishPresentationService {
   private let fallbackPresentationID = BookishRecordID("presentation.type.*")
 
   /// The store providing presentation configuration records.
-  @ObservationIgnored private let storageService: BookishStorageService
+  private let storageService: BookishStorageService
 
   /// The loaded layouts used for resolution and compatibility checks.
   private var layouts: [BookishRecord] = []
@@ -59,10 +89,13 @@ public final class BookishPresentationService {
   private var activeRecordIndex: BookishRecordIndex?
 
   /// The explicitly selected layout, when the user has overridden the default.
-  public var selectedLayoutID: BookishRecordID?
+  public var selectedLayoutID: BookishRecordID? {
+    get { state.selectedLayoutID }
+    set { state.selectedLayoutID = newValue }
+  }
 
   /// The identifiers of all top-level layout records.
-  public private(set) var layoutIDs: [BookishRecordID] = []
+  public var layoutIDs: [BookishRecordID] { state.layoutIDs }
 
   /// The identifiers of layouts compatible with the active browser index.
   public var compatibleLayoutIDs: [BookishRecordID] { compatibleLayouts.map(\.id) }
@@ -73,7 +106,7 @@ public final class BookishPresentationService {
   }
 }
 
-extension BookishPresentationService: BookishPresentation {
+extension BookishPresentationService: BookishPresentationService.API {
   public func refresh(for recordIndex: BookishRecordIndex?) async throws {
     activeRecordIndex = recordIndex
     guard storageService.isLoaded else {
@@ -85,14 +118,14 @@ extension BookishPresentationService: BookishPresentation {
         predicate: .kind(BookishRecordKind.layout),
         sort: [.property(BookishRecordKey.name), .id]
       ))
-    layoutIDs = layouts.filter { $0.bool(BookishRecordKey.isSection) != true }.map(\.id)
+    state.layoutIDs = layouts.filter { $0.bool(BookishRecordKey.isSection) != true }.map(\.id)
     try await reconcileSelection()
   }
 
   public func reset() {
     selectedLayoutID = nil
     layouts = []
-    layoutIDs = []
+    state.layoutIDs = []
     activeRecordIndex = nil
   }
 

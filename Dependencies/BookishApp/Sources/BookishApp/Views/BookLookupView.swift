@@ -10,7 +10,7 @@ import SwiftUI
 /// Provides a temporary interface for querying the selected metadata provider.
 struct BookLookupView: View {
   /// The workflow state for lookup controls and results.
-  @Environment(BookishLookupWorkflowService.self) private var lookup
+  @Environment(BookishLookupWorkflowService.State.self) private var lookup
 
   /// The command boundary for submitting the current query.
   @Environment(BookishCommander.self) private var commander

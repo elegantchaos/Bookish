@@ -9,7 +9,7 @@ import CommandsUI
 import Icons
 
 /// Selects a record within the active browser index.
-public struct SelectRecordCommand<Centre: BookishNavigationProvider>: CommandWithUI {
+public struct SelectRecordCommand<Centre: BookishNavigationService.Provider>: CommandWithUI {
   public typealias ResultType = Void
 
   public let id: String

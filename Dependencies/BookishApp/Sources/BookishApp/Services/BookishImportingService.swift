@@ -11,9 +11,12 @@ import Foundation
 /// Receives importer lifecycle events while building a proposal.
 public typealias BookishImportEventReporter = @MainActor (BookishImportEvent) async throws -> Void
 
-/// Prepares imports and applies reviewed proposals to Bookish storage.
+/// Bridges import proposals and durable storage mutations.
 @MainActor
-public protocol BookishImporting {
+public final class BookishImportingService {
+  /// Prepares imports and applies reviewed proposals to Bookish storage.
+  @MainActor
+  public protocol API {
   /// Imports records from a Bookish interchange file.
   func importInterchange(
     from url: URL,
@@ -43,11 +46,8 @@ public protocol BookishImporting {
   func apply(_ plan: BookishImportPlan, choices: [BookishRecordID: BookishImportChoice])
     async throws
     -> BookishImportResolution
-}
+  }
 
-/// Bridges import proposals and durable storage mutations.
-@MainActor
-public final class BookishImportingService {
   /// The storage service that owns durable import mutations.
   private let storageService: BookishStorageService
 
@@ -58,7 +58,7 @@ public final class BookishImportingService {
 
 }
 
-extension BookishImportingService: BookishImporting {
+extension BookishImportingService: BookishImportingService.API {
   /// Imports records from a Bookish interchange file.
   public func importInterchange(
     from url: URL,

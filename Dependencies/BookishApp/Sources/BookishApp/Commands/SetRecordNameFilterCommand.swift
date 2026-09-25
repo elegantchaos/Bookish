@@ -8,7 +8,7 @@ import CommandsUI
 import Icons
 
 /// Updates the name filter applied to the active browser index.
-public struct SetRecordNameFilterCommand<Centre: BookishNavigationProvider>: CommandWithUI {
+public struct SetRecordNameFilterCommand<Centre: BookishNavigationService.Provider>: CommandWithUI {
   public typealias ResultType = Void
 
   public let id = "datastore.navigation.record-name-filter"

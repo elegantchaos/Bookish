@@ -8,7 +8,7 @@ import CommandsUI
 import Icons
 
 /// Identifies books in the selected image using the selected recognition provider.
-public struct CaptureBooksCommand<Centre: BookishRecognitionProvider>: CommandWithUI {
+public struct CaptureBooksCommand<Centre: BookishRecognitionService.Provider>: CommandWithUI {
   /// The command does not return a value after starting recognition.
   public typealias ResultType = Void
 

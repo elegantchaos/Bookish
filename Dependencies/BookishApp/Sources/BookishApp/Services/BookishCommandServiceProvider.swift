@@ -44,39 +44,11 @@ public protocol BookishDatastoreMaintenanceProvider: CommandCentre {
   var datastoreMaintenanceService: any BookishDatastoreMaintenance { get }
 }
 
-/// Vends datastore operations to datastore commands.
-@MainActor
-public protocol BookishStorageProvider: CommandCentre {
-  /// The datastore service used by the command.
-  var storageService: any BookishStorage { get }
-}
-
 /// Vends selected-record actions to record commands.
 @MainActor
 public protocol BookishRecordActionsProvider: CommandCentre {
   /// The record-action service used by the command.
   var recordActionService: any BookishRecordActions { get }
-}
-
-/// Vends the scanning workflow used by recognition commands.
-@MainActor
-public protocol BookishRecognitionProvider: CommandCentre {
-  /// The recognition workflow used by the command.
-  var recognitionService: any BookishRecognition { get }
-}
-
-/// Vends the metadata-lookup workflow used by lookup-provider commands.
-@MainActor
-public protocol BookishLookupWorkflowProvider: CommandCentre {
-  /// The lookup workflow used by the command.
-  var lookupWorkflow: any BookishLookupWorkflow { get }
-}
-
-/// Vends browser navigation to navigation commands.
-@MainActor
-public protocol BookishNavigationProvider: CommandCentre {
-  /// The browser navigation service.
-  var navigationService: any BookishNavigation { get }
 }
 
 extension BookishEngine:
@@ -85,10 +57,6 @@ extension BookishEngine:
   BookishSettingsPresentationProvider,
   BookishRecordCreationProvider,
   BookishDatastoreMaintenanceProvider,
-  BookishStorageProvider,
-  BookishRecordActionsProvider,
-  BookishRecognitionProvider,
-  BookishLookupWorkflowProvider,
-  BookishNavigationProvider
+  BookishRecordActionsProvider
 {
 }

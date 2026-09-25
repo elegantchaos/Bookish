@@ -19,10 +19,10 @@ struct RecordIndexView: View {
   @Environment(BookishUIStateService.self) private var uiState
 
   /// The presentation service that resolves layouts and metadata.
-  @Environment(BookishPresentationService.self) private var presentation
+  @Environment(BookishPresentationService.State.self) private var presentation
 
   /// The route containing the active index and record selection.
-  @Environment(BookishNavigationService.self) private var navigation
+  @Environment(BookishNavigationService.State.self) private var navigation
 
   /// The layout currently used to render index rows.
   @State private var layout: BookishRecord?

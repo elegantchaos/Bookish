@@ -284,24 +284,24 @@ private final class TestCommandCentre:
   CommandCentre,
   BookishImportPresentationProvider,
   BookishDatastoreMaintenanceProvider,
-  BookishStorageProvider,
+  BookishStorageService.Provider,
   BookishStatusService.Provider,
   BookishRecordActionsProvider,
-  BookishRecognitionProvider,
-  BookishLookupWorkflowProvider,
-  BookishNavigationProvider,
+  BookishRecognitionService.Provider,
+  BookishLookupWorkflowService.Provider,
+  BookishNavigationService.Provider,
   BookishBrowserSettingsProvider,
   BookishSettingsPresentationProvider,
   BookishRecordCreationProvider
 {
   let importPresentation: any BookishImportPresentation
   let datastoreMaintenanceService: any BookishDatastoreMaintenance
-  let storageService: any BookishStorage
+  let storageService: any BookishStorageService.API
   let statusService: any BookishStatusService.API
   let recordActionService: any BookishRecordActions
-  let recognitionService: any BookishRecognition
-  let lookupWorkflow: any BookishLookupWorkflow
-  let navigationService: any BookishNavigation
+  let recognitionService: any BookishRecognitionService.API
+  let lookupWorkflow: any BookishLookupWorkflowService.API
+  let navigationService: any BookishNavigationService.API
   let browserSettingsService: any BookishBrowserSettings
   let settingsPresentation: any BookishSettingsPresentation
   let recordCreation: any BookishRecordCreation
@@ -310,12 +310,12 @@ private final class TestCommandCentre:
     importPresentation: any BookishImportPresentation = TestImportPresentation(),
     datastoreMaintenanceService: any BookishDatastoreMaintenance =
       TestDatastoreMaintenanceService(),
-    storageService: any BookishStorage = TestStorageService(),
+    storageService: any BookishStorageService.API = TestStorageService(),
     statusService: any BookishStatusService.API = TestStatusService(),
     recordActionService: any BookishRecordActions = TestRecordActionService(),
-    recognitionService: any BookishRecognition = TestBookRecognitionWorkflow(),
-    lookupWorkflow: any BookishLookupWorkflow = TestBookLookupWorkflow(),
-    navigationService: any BookishNavigation = TestNavigationService(),
+    recognitionService: any BookishRecognitionService.API = TestBookRecognitionWorkflow(),
+    lookupWorkflow: any BookishLookupWorkflowService.API = TestBookLookupWorkflow(),
+    navigationService: any BookishNavigationService.API = TestNavigationService(),
     browserSettingsService: any BookishBrowserSettings = TestBrowserSettings(),
     settingsPresentation: any BookishSettingsPresentation = TestSettingsPresentation(),
     recordCreation: any BookishRecordCreation = TestRecordCreation()
@@ -335,7 +335,7 @@ private final class TestCommandCentre:
 }
 
 @MainActor
-private final class TestBookLookupWorkflow: BookishLookupWorkflow {
+private final class TestBookLookupWorkflow: BookishLookupWorkflowService.API {
   private(set) var selectedProviderID: BookLookupProviderID = .fake
   let isLookingUp = false
   let canLookupBooks = true
@@ -379,7 +379,7 @@ private final class TestRecordCreation: BookishRecordCreation {
 }
 
 @MainActor
-private final class TestBookRecognitionWorkflow: BookishRecognition {
+private final class TestBookRecognitionWorkflow: BookishRecognitionService.API {
   private(set) var recognitionProviderID: BookRecognitionProviderID = .fake
   private(set) var imageData: Data?
   let candidates: [BookRecognitionCandidate]
@@ -531,7 +531,7 @@ private final class TestDatastoreMaintenanceService: BookishDatastoreMaintenance
 }
 
 @MainActor
-private final class TestStorageService: BookishStorage {
+private final class TestStorageService: BookishStorageService.API {
   private(set) var rebuiltRecordProjection = false
   private(set) var resetDatastore = false
   func localDatastoreDirectory() throws -> URL {
@@ -597,7 +597,7 @@ private final class TestRecordActionService: BookishRecordActions {
 }
 
 @MainActor
-private final class TestNavigationService: BookishNavigation {
+private final class TestNavigationService: BookishNavigationService.API {
   let canSelectAnotherRecordIndex: Bool
   let canSelectAnotherRecord: Bool
   let libraryIndexes: [BookishRecordIndex] = []

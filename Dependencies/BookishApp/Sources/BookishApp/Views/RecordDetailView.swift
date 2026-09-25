@@ -16,7 +16,7 @@ struct RecordDetailView: View {
   @Environment(BookishStatusService.State.self) private var status
 
   /// The route containing the selected record and detail path.
-  @Environment(BookishNavigationService.self) private var navigation
+  @Environment(BookishNavigationService.State.self) private var navigation
 
   /// The detail navigation stack for the selected record.
   var body: some View {

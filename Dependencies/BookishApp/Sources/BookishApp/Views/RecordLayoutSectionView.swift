@@ -22,7 +22,7 @@ struct RecordLayoutSectionView: View {
   @Environment(BookishStatusService.State.self) private var status
 
   /// The navigation service used by linked record values.
-  let navigation: BookishNavigationService
+  let navigation: BookishNavigationService.State
 
   /// The ancestor layout identifiers used to prevent recursive sections.
   let layoutPath: Set<BookishRecordID>

@@ -27,7 +27,7 @@ struct BookishRecordIDDetail: View {
   #endif
 
   /// The current browser navigation route.
-  let navigation: BookishNavigationService
+  let navigation: BookishNavigationService.State
 
   /// The resolved record, when it is available.
   @State private var record: BookishRecord?

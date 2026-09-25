@@ -7,7 +7,7 @@ import Commands
 import Foundation
 
 /// Replaces the image used by the scanning workflow.
-public struct SelectBookRecognitionImageCommand<Centre: BookishRecognitionProvider>: Command {
+public struct SelectBookRecognitionImageCommand<Centre: BookishRecognitionService.Provider>: Command {
   /// The command does not return a value after replacing the image.
   public typealias ResultType = Void
   /// The image data selected by the user.

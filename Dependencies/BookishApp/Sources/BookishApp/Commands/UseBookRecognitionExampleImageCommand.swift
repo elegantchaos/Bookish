@@ -8,7 +8,7 @@ import CommandsUI
 import Icons
 
 /// Selects Bookish's bundled recognition image.
-public struct UseBookRecognitionExampleImageCommand<Centre: BookishRecognitionProvider>:
+public struct UseBookRecognitionExampleImageCommand<Centre: BookishRecognitionService.Provider>:
   CommandWithUI
 {
   /// The command does not return a value after selecting the image.

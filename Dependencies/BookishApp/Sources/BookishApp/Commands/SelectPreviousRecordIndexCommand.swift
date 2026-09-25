@@ -9,7 +9,7 @@ import Foundation
 import Icons
 
 /// Selects the previous record index in the datastore browser.
-public struct SelectPreviousRecordIndexCommand<Centre: BookishNavigationProvider>: CommandWithUI {
+public struct SelectPreviousRecordIndexCommand<Centre: BookishNavigationService.Provider>: CommandWithUI {
   public typealias ResultType = Void
 
   public let id = "datastore.navigation.previous-index"

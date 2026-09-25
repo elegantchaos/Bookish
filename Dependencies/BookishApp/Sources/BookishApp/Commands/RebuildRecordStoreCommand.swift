@@ -9,7 +9,7 @@ import Icons
 
 /// Rebuilds the materialised record projection from stored mutations.
 public struct RebuildRecordStoreCommand<
-  Centre: BookishStorageProvider & BookishStatusService.Provider
+  Centre: BookishStorageService.Provider & BookishStatusService.Provider
 >:
   CommandWithUI
 {

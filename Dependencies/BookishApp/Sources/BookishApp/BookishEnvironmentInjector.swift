@@ -14,12 +14,11 @@ struct BookishEnvironmentInjector: ViewModifier {
   func body(content: Content) -> some View {
     content
       .environment(engine.uiState)
-      .environment(engine.navigation)
-      .environment(engine.storage)
-      .environment(engine.presentationService)
+      .environment(engine.navigation.state)
+      .environment(engine.presentationService.state)
       .environment(engine.status.state)
-      .environment(engine.recognition)
-      .environment(engine.lookup)
+      .environment(engine.recognition.state)
+      .environment(engine.lookup.state)
       .environment(engine.commander)
   }
 }

@@ -139,18 +139,18 @@ public final class BookishUIStateService {
   public private(set) var showsDebugIndexes: Bool
 
   /// The model-side interchange exporter used by the export sheet.
-  @ObservationIgnored private let exportingService: any BookishExporting
+  @ObservationIgnored private let exportingService: any BookishExportingService.API
 
   /// The model-side importer used by the import sheets and sample commands.
-  @ObservationIgnored private let importingService: any BookishImporting
+  @ObservationIgnored private let importingService: any BookishImportingService.API
 
   /// Creates UI state backed by the supplied Bookish services.
   public init(
     navigation: BookishNavigationService,
     presentation: BookishPresentationService,
     statusService: BookishStatusService,
-    importingService: any BookishImporting,
-    exportingService: any BookishExporting,
+    importingService: any BookishImportingService.API,
+    exportingService: any BookishExportingService.API,
     defaultShowsDebugIndexes: Bool = false
   ) {
     self.navigation = navigation

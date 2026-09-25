@@ -15,7 +15,7 @@ struct BookCaptureTopPane: View {
   @Binding var isImportingImage: Bool
 
   /// The observable recognition workflow displayed by this view.
-  @Environment(BookishRecognitionService.self) private var recognition
+  @Environment(BookishRecognitionService.State.self) private var recognition
 
   /// The current horizontal size class used to choose the preview layout policy.
   @Environment(\.horizontalSizeClass) private var horizontalSizeClass

@@ -8,7 +8,7 @@ import CommandsUI
 import Icons
 
 /// Selects every candidate currently shown in the scanning list.
-public struct SelectAllRecognizedBooksCommand<Centre: BookishRecognitionProvider>: CommandWithUI {
+public struct SelectAllRecognizedBooksCommand<Centre: BookishRecognitionService.Provider>: CommandWithUI {
   /// The command does not return a value after changing the selection.
   public typealias ResultType = Void
 

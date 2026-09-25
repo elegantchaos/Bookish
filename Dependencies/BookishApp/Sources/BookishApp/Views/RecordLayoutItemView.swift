@@ -21,7 +21,7 @@ struct RecordLayoutItemView: View {
   @Environment(BookishStatusService.State.self) private var status
 
   /// The navigation service used by record links in nested layouts.
-  let navigation: BookishNavigationService
+  let navigation: BookishNavigationService.State
 
   /// The ancestor layout identifiers, used to prevent recursive sections.
   let layoutPath: Set<BookishRecordID>
@@ -42,7 +42,7 @@ struct RecordLayoutItemView: View {
     linkedLayoutID: BookishRecordID,
     host: BookishRecord,
     harness: BookishUIStateService,
-    navigation: BookishNavigationService
+    navigation: BookishNavigationService.State
   ) {
     self.init(
       linkedLayoutID: linkedLayoutID,
@@ -58,7 +58,7 @@ struct RecordLayoutItemView: View {
     linkedLayoutID: BookishRecordID,
     host: BookishRecord,
     harness: BookishUIStateService,
-    navigation: BookishNavigationService,
+    navigation: BookishNavigationService.State,
     layoutPath: Set<BookishRecordID>
   ) {
     self.linkedLayoutID = linkedLayoutID

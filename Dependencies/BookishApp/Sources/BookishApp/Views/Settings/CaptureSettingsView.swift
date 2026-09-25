@@ -10,7 +10,7 @@ import SwiftUI
 /// Controls visibility of optional and diagnostic app features.
 struct CaptureSettingsView: View {
   @Environment(BookishCommander.self) var commander
-  @Environment(BookishRecognitionService.self) var recognition
+  @Environment(BookishRecognitionService.State.self) var recognition
 
   /// Whether to scan for barcodes when using the camera in the capture mode.
   @AppStorage(.scanForBarcodes) private var scanForBarcodes
