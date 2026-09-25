@@ -25,10 +25,12 @@ public final class BookishStorageService {
   private var directoryURL: URL?
 
   /// The loaded datastore, when Bookish has completed startup.
-  private(set) var datastore: BookishDatastore?
+  private(set) var datastore: BookishDatastore? {
+    didSet { state.isLoaded = datastore != nil }
+  }
 
   /// Whether Bookish has loaded a datastore that can fulfil model operations.
-  var isLoaded: Bool { datastore != nil }
+  var isLoaded: Bool { state.isLoaded }
 
   /// Creates an empty datastore service ready to receive a loaded datastore.
   public init(directoryURL: URL? = nil) {
@@ -287,6 +289,9 @@ extension BookishStorageService {
     /// when views observe their own records and queries; see
     /// `Extras/Journal/2026-09-25-fine-grained-record-observation.md`.
     public fileprivate(set) var revision = 0
+
+    /// Whether a datastore has loaded and can fulfil record operations.
+    public fileprivate(set) var isLoaded = false
 
     fileprivate init(service: BookishStorageService) {
       self.service = service

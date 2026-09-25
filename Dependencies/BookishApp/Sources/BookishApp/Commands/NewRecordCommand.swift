@@ -17,7 +17,7 @@ public struct NewRecordCommand<Centre: BookishRecordCreationService.Access>: Com
     self.type = type
   }
 
-  /// Disables creation when no suitable index is available.
+  /// Enables creation once storage has loaded and an index can show the new record.
   public func availability(centre: Centre) -> CommandAvailability {
     centre.recordCreationAPI.canCreate(type) ? .enabled : .disabled
   }

@@ -5,6 +5,7 @@ import BookishImporterSamples
 import BookishRecord
 import Commands
 import Foundation
+import Observation
 import Testing
 
 @testable import BookishApp
@@ -788,6 +789,27 @@ struct BookishAppTests {
 
   @MainActor
   @Test
+  func newRecordCommandsBecomeEnabledWhenTheEngineLoads() async throws {
+    let engine = makeEngine(directoryURL: try temporaryDirectory())
+    let changes = ObservedChanges()
+
+    let availability = withObservationTracking {
+      engine.availability(NewRecordCommand(type: .book))
+    } onChange: {
+      changes.record()
+    }
+    #expect(availability == .disabled)
+
+    await engine.load()
+
+    #expect(changes.count > 0)
+    for type in BookishNewRecordType.allCases {
+      #expect(engine.availability(NewRecordCommand(type: type)) == .enabled)
+    }
+  }
+
+  @MainActor
+  @Test
   func engineVendsServicesDirectlyToCommands() async {
     let engine = BookishEngine()
 
@@ -870,5 +892,16 @@ struct BookishAppTests {
       position: 0,
       query: RecordQuery(predicate: predicate)
     )
+  }
+}
+
+/// Counts observation change notifications delivered to a test.
+final class ObservedChanges: @unchecked Sendable {
+  /// The number of notifications received.
+  private(set) var count = 0
+
+  /// Records one notification.
+  func record() {
+    count += 1
   }
 }

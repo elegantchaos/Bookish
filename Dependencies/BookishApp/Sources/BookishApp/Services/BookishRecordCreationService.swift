@@ -35,7 +35,9 @@ extension BookishRecordCreationService {
   /// Creates records requested by New commands.
   @MainActor
   public protocol API: AnyObject {
-    /// Whether a visible index can show a new record of this type.
+    /// Whether storage has loaded and a visible index can show a new record of this type.
+    ///
+    /// Reads only observable state, so menus and controls that call it update.
     func canCreate(_ type: BookishNewRecordType) -> Bool
     /// Creates and selects a record of the requested type.
     func create(_ type: BookishNewRecordType) async throws
@@ -48,7 +50,7 @@ extension BookishRecordCreationService {
 }
 
 extension BookishRecordCreationService: BookishRecordCreationService.API {
-  /// Returns whether a standard library index accepts the requested type.
+  /// Returns whether storage has loaded and a standard library index accepts the type.
   public func canCreate(_ type: BookishNewRecordType) -> Bool {
     storage.isLoaded && creationIndex(for: newRecord(of: type)) != nil
   }

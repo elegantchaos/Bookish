@@ -1,5 +1,6 @@
 # Journal Index
 
+- [2026-09-25 New Menu Availability](2026-09-25-new-menu-availability.md)
 - [2026-09-25 Service Access Naming and Layout](2026-09-25-service-access-naming.md)
 - [2026-09-25 Service Contract Audit](2026-09-25-service-contract-audit.md)
 - [2026-09-25 UI State Service Split](2026-09-25-ui-state-service-split.md)

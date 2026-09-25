@@ -370,9 +370,8 @@ private final class TestSettingsPresentation: BookishSettingsPresentationService
 
 @MainActor
 private final class TestRecordCreation: BookishRecordCreationService.API {
-  private(set) var createdTypes: [BookishNewRecordType] = []
-
   func canCreate(_: BookishNewRecordType) -> Bool { true }
+  private(set) var createdTypes: [BookishNewRecordType] = []
 
   func create(_ type: BookishNewRecordType) async throws {
     createdTypes.append(type)
