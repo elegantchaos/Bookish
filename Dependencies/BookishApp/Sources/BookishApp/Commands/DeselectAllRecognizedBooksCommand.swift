@@ -8,7 +8,7 @@ import CommandsUI
 import Icons
 
 /// Clears the selection in the scanning candidate list.
-public struct DeselectAllRecognizedBooksCommand<Centre: BookishRecognitionService.Provider>:
+public struct DeselectAllRecognizedBooksCommand<Centre: BookishRecognitionService.Access>:
   CommandWithUI
 {
   /// The command does not return a value after changing the selection.
@@ -23,7 +23,7 @@ public struct DeselectAllRecognizedBooksCommand<Centre: BookishRecognitionServic
 
   /// Enables the command when at least one candidate is selected.
   public func availability(centre: Centre) -> CommandAvailability {
-    centre.recognitionService.selectedCandidateIDs.isEmpty ? .disabled : .enabled
+    centre.recognitionAPI.selectedCandidateIDs.isEmpty ? .disabled : .enabled
   }
 
   /// Returns the user-facing command name.
@@ -37,6 +37,6 @@ public struct DeselectAllRecognizedBooksCommand<Centre: BookishRecognitionServic
 
   /// Clears the selection through the recognition workflow.
   public func perform(centre: Centre) async throws {
-    centre.recognitionService.deselectAllCandidates()
+    centre.recognitionAPI.deselectAllCandidates()
   }
 }

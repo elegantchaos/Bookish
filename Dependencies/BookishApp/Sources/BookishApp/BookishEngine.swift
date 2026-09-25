@@ -184,57 +184,57 @@ public final class BookishEngine {
 
 extension BookishEngine: CommandCentre {
   /// Vends user-facing status reporting to commands.
-  public var statusService: any BookishStatusService.API {
+  public var statusAPI: any BookishStatusService.API {
     status
   }
 
   /// Vends datastore operations to commands.
-  public var storageService: any BookishStorageService.API {
+  public var storageAPI: any BookishStorageService.API {
     storage
   }
 
   /// Vends browser navigation to commands.
-  public var navigationService: any BookishNavigationService.API {
+  public var navigationAPI: any BookishNavigationService.API {
     navigation
   }
 
   /// Vends browser settings to commands.
-  public var browserService: any BookishBrowserService.API {
+  public var browserAPI: any BookishBrowserService.API {
     browser
   }
 
   /// Vends the import workflow to commands.
-  public var importingService: any BookishImportingService.API {
+  public var importingAPI: any BookishImportingService.API {
     importing
   }
 
   /// Vends interchange export to commands.
-  public var exportingService: any BookishExportingService.API {
+  public var exportingAPI: any BookishExportingService.API {
     exporting
   }
 
   /// Vends settings sheet presentation to commands.
-  public var settingsPresentationService: any BookishSettingsPresentationService.API {
+  public var settingsPresentationAPI: any BookishSettingsPresentationService.API {
     settingsPresentation
   }
 
   /// Vends record creation to New commands.
-  public var recordCreationService: any BookishRecordCreationService.API {
+  public var recordCreationAPI: any BookishRecordCreationService.API {
     recordCreation
   }
 
   /// Vends selected-record actions to commands.
-  public var recordActionsService: any BookishRecordActionsService.API {
+  public var recordActionsAPI: any BookishRecordActionsService.API {
     recordActions
   }
 
   /// Vends the scanning workflow to recognition commands.
-  public var recognitionService: any BookishRecognitionService.API {
+  public var recognitionAPI: any BookishRecognitionService.API {
     recognition
   }
 
   /// Vends the lookup workflow to lookup-provider commands.
-  public var lookupWorkflowService: any BookishLookupWorkflowService.API {
+  public var lookupWorkflowAPI: any BookishLookupWorkflowService.API {
     lookup
   }
 

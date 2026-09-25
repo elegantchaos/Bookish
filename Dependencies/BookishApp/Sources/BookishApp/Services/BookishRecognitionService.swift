@@ -12,54 +12,6 @@ import Settings
 /// Persists recognised candidates as new book records and refreshes the browser projection.
 @MainActor
 public final class BookishRecognitionService {
-  @MainActor
-  public protocol API {
-    var candidates: [BookRecognitionCandidate] { get }
-    var selectedCandidateIDs: Set<String> { get }
-    var canAddBooks: Bool { get }
-    var isRecognizing: Bool { get }
-    var hasImage: Bool { get }
-    var isCurrentRecognitionProviderSupported: Bool { get }
-    var selectedRecognitionProviderID: BookRecognitionProviderID { get }
-    func selectRecognitionProvider(_ recognitionProviderID: BookRecognitionProviderID)
-    func isRecognitionProviderSupported(_ id: BookRecognitionProviderID) -> Bool
-    func selectImage(data: Data?)
-    func selectAllCandidates()
-    func identifyBooks() async
-    func addSelectedBooks() async throws
-    func deselectAllCandidates()
-    func selectCaptureGoodExample()
-  }
-
-  @MainActor
-  public protocol Provider: CommandCentre {
-    var recognitionService: any API { get }
-  }
-
-  @MainActor
-  @Observable
-  public final class State {
-    public fileprivate(set) var imageData: Data?
-    public fileprivate(set) var candidates: [BookRecognitionCandidate] = []
-    public var selectedCandidateIDs: Set<String> = []
-    public fileprivate(set) var error: (any Error)?
-    public fileprivate(set) var isRecognizing = false
-    public fileprivate(set) var recognitionProvider: any BookRecognitionProvider
-    public fileprivate(set) var recognitionProviders: [any BookRecognitionProvider]
-
-    fileprivate init(
-      recognitionProvider: any BookRecognitionProvider,
-      recognitionProviders: [any BookRecognitionProvider]
-    ) {
-      self.recognitionProvider = recognitionProvider
-      self.recognitionProviders = recognitionProviders
-    }
-
-    public var selectedRecognitionProviderID: BookRecognitionProviderID {
-      recognitionProvider.id
-    }
-  }
-
   public let state: State
 
   /// The storage service used to persist new records.
@@ -258,6 +210,56 @@ public final class BookishRecognitionService {
   }
 }
 
+extension BookishRecognitionService {
+  @MainActor
+  public protocol API {
+    var candidates: [BookRecognitionCandidate] { get }
+    var selectedCandidateIDs: Set<String> { get }
+    var canAddBooks: Bool { get }
+    var isRecognizing: Bool { get }
+    var hasImage: Bool { get }
+    var isCurrentRecognitionProviderSupported: Bool { get }
+    var selectedRecognitionProviderID: BookRecognitionProviderID { get }
+    func selectRecognitionProvider(_ recognitionProviderID: BookRecognitionProviderID)
+    func isRecognitionProviderSupported(_ id: BookRecognitionProviderID) -> Bool
+    func selectImage(data: Data?)
+    func selectAllCandidates()
+    func identifyBooks() async
+    func addSelectedBooks() async throws
+    func deselectAllCandidates()
+    func selectCaptureGoodExample()
+  }
+
+  @MainActor
+  public protocol Access: CommandCentre {
+    var recognitionAPI: any API { get }
+  }
+
+  @MainActor
+  @Observable
+  public final class State {
+    public fileprivate(set) var imageData: Data?
+    public fileprivate(set) var candidates: [BookRecognitionCandidate] = []
+    public var selectedCandidateIDs: Set<String> = []
+    public fileprivate(set) var error: (any Error)?
+    public fileprivate(set) var isRecognizing = false
+    public fileprivate(set) var recognitionProvider: any BookRecognitionProvider
+    public fileprivate(set) var recognitionProviders: [any BookRecognitionProvider]
+
+    fileprivate init(
+      recognitionProvider: any BookRecognitionProvider,
+      recognitionProviders: [any BookRecognitionProvider]
+    ) {
+      self.recognitionProvider = recognitionProvider
+      self.recognitionProviders = recognitionProviders
+    }
+
+    public var selectedRecognitionProviderID: BookRecognitionProviderID {
+      recognitionProvider.id
+    }
+  }
+}
+
 extension BookishRecognitionService: BookishRecognitionService.API {}
 
-extension BookishEngine: BookishRecognitionService.Provider {}
+extension BookishEngine: BookishRecognitionService.Access {}

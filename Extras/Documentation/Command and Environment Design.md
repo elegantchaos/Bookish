@@ -15,7 +15,7 @@ The engine has two distinct roles in the application:
 Views receive `BookishCommander` through the SwiftUI environment so they can
 use command helpers such as `button`, `toolbarItem`, and
 `performWithoutWaiting`. The façade holds the engine privately and does not
-expose command-provider APIs. Views therefore cannot reach services through
+expose service APIs. Views therefore cannot reach services through
 their command dependency.
 
 ```text
@@ -27,35 +27,35 @@ SwiftUI view
             │
             └── BookishEngine
                     │
-                    └── narrow provider protocol
+                    └── narrow Access protocol
                             │
                             └── mutation-capable service
 ```
 
-## Commands and providers
+## Commands and access protocols
 
 Each command represents a user or application action. It owns its availability,
 validation, and execution. A command is generic over the smallest
-`BookishXXXService.Provider` protocol that supplies the required capability.
+`BookishXXXService.Access` protocol that supplies the required capability.
 
-The engine conforms to these provider protocols by vending existential service
-capabilities while retaining concrete service ownership. A command must not
+The engine conforms to these access protocols by vending each service's `API`
+as `xxxAPI`, while retaining concrete service ownership. A command must not
 depend on the whole engine, a broad UI-state coordinator, or an unrelated
 service merely because the engine happens to own it.
 
 For example, a command that updates debug-index visibility depends on
-`BookishBrowserService.Provider`, which vends `BookishBrowserService.API`. It does
-not depend on import, storage, record-action, recognition, or navigation
-capabilities.
+`BookishBrowserService.Access`, which vends `BookishBrowserService.API` as
+`browserAPI`. It does not depend on import, storage, record-action,
+recognition, or navigation capabilities.
 
 New commands should follow this sequence:
 
 1. Identify the action in user terms.
 2. Add the smallest mutation method to the owning service's nested `API`.
-3. If the service is new, add its nested `Provider` and conform the engine to it.
-4. Implement the command against that provider.
+3. If the service is new, add its nested `Access` and conform the engine to it.
+4. Implement the command against that `Access` protocol.
 5. Dispatch the command from the view through the environment-injected commander.
-6. Test the command with a fake provider and fake service.
+6. Test the command with a fake command centre and fake service `API`.
 
 Command failures dispatched with `performWithoutWaiting` are reported through
 the engine's command-failure handling and user-visible status service.
@@ -89,16 +89,17 @@ work; it does not expose the command-facing `API`.
 
 Each application service is a `BookishXXXService` class in `Services/`, following
 [Decision 0022](../Decisions/0022-service-state-api-and-provider-shape.md). Its
-source file declares up to three nested types:
+source file declares up to three nested types, in a same-file extension after
+the service's primary definition:
 
 - `State`, the observable projection that views read. It exposes properties,
   bindings, and view-owned wiring such as `BookishStatusService.State.report(error:)`,
   never domain actions.
 - `API`, the operations commands and collaborating services need.
-- `Provider`, the command-centre protocol that vends `any API`.
+- `Access`, the command-centre protocol that vends `any API` as `xxxAPI`.
 
 A service without view-facing state has no `State`; a service without command
-operations has no `API` or `Provider`. `BookishPresentationService` is
+operations has no `API` or `Access`. `BookishPresentationService` is
 view-facing only, and `BookishBrowserService`, `BookishRecordCreationService`, and
 `BookishRecordActionsService` are command-facing only. `Services/` contains only
 service files. Configuration, results, examples, and the import event reporter

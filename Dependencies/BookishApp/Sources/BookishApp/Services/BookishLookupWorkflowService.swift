@@ -12,45 +12,6 @@ import Settings
 /// Owns temporary UI state for querying Bookish metadata providers.
 @MainActor
 public final class BookishLookupWorkflowService {
-  @MainActor
-  public protocol API: AnyObject {
-    var canLookupBooks: Bool { get }
-    func lookupBooks() async
-    var isLookingUp: Bool { get }
-    func selectProvider(_ providerID: BookLookupProviderID)
-    func isProviderSupported(_ providerID: BookLookupProviderID) -> Bool
-  }
-
-  @MainActor
-  public protocol Provider: CommandCentre {
-    var lookupWorkflowService: any API { get }
-  }
-
-  @MainActor
-  @Observable
-  public final class State {
-    public fileprivate(set) var providers: [any BookLookupProvider]
-    public fileprivate(set) var selectedProviderID: BookLookupProviderID
-    public var query = ""
-    public fileprivate(set) var candidates: [BookLookupCandidate] = []
-    public fileprivate(set) var failures: [BookLookupFailure] = []
-    public fileprivate(set) var isLookingUp = false
-
-    fileprivate init(providers: [any BookLookupProvider], selectedProviderID: BookLookupProviderID)
-    {
-      self.providers = providers
-      self.selectedProviderID = selectedProviderID
-    }
-
-    public var isSelectedProviderSupported: Bool {
-      providers.first(where: { $0.id == selectedProviderID })?.isSupported == true
-    }
-
-    public var canLookupBooks: Bool {
-      !query.isEmpty && !isLookingUp && isSelectedProviderSupported
-    }
-  }
-
   /// The provider coordinator that executes lookup work.
   private let lookup: BookLookupService
 
@@ -138,6 +99,47 @@ public final class BookishLookupWorkflowService {
   }
 }
 
+extension BookishLookupWorkflowService {
+  @MainActor
+  public protocol API: AnyObject {
+    var canLookupBooks: Bool { get }
+    func lookupBooks() async
+    var isLookingUp: Bool { get }
+    func selectProvider(_ providerID: BookLookupProviderID)
+    func isProviderSupported(_ providerID: BookLookupProviderID) -> Bool
+  }
+
+  @MainActor
+  public protocol Access: CommandCentre {
+    var lookupWorkflowAPI: any API { get }
+  }
+
+  @MainActor
+  @Observable
+  public final class State {
+    public fileprivate(set) var providers: [any BookLookupProvider]
+    public fileprivate(set) var selectedProviderID: BookLookupProviderID
+    public var query = ""
+    public fileprivate(set) var candidates: [BookLookupCandidate] = []
+    public fileprivate(set) var failures: [BookLookupFailure] = []
+    public fileprivate(set) var isLookingUp = false
+
+    fileprivate init(providers: [any BookLookupProvider], selectedProviderID: BookLookupProviderID)
+    {
+      self.providers = providers
+      self.selectedProviderID = selectedProviderID
+    }
+
+    public var isSelectedProviderSupported: Bool {
+      providers.first(where: { $0.id == selectedProviderID })?.isSupported == true
+    }
+
+    public var canLookupBooks: Bool {
+      !query.isEmpty && !isLookingUp && isSelectedProviderSupported
+    }
+  }
+}
+
 extension BookishLookupWorkflowService: BookishLookupWorkflowService.API {}
 
-extension BookishEngine: BookishLookupWorkflowService.Provider {}
+extension BookishEngine: BookishLookupWorkflowService.Access {}

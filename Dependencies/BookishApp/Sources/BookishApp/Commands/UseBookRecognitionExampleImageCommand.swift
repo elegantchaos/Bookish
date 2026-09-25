@@ -8,7 +8,7 @@ import CommandsUI
 import Icons
 
 /// Selects Bookish's bundled recognition image.
-public struct UseBookRecognitionExampleImageCommand<Centre: BookishRecognitionService.Provider>:
+public struct UseBookRecognitionExampleImageCommand<Centre: BookishRecognitionService.Access>:
   CommandWithUI
 {
   /// The command does not return a value after selecting the image.
@@ -22,7 +22,7 @@ public struct UseBookRecognitionExampleImageCommand<Centre: BookishRecognitionSe
 
   /// Disables selection while recognition is underway.
   public func availability(centre: Centre) -> CommandAvailability {
-    centre.recognitionService.isRecognizing ? .disabled : .enabled
+    centre.recognitionAPI.isRecognizing ? .disabled : .enabled
   }
 
   /// Returns the user-facing command name.
@@ -34,6 +34,6 @@ public struct UseBookRecognitionExampleImageCommand<Centre: BookishRecognitionSe
 
   /// Selects the bundled image without starting recognition.
   public func perform(centre: Centre) async throws {
-    centre.recognitionService.selectCaptureGoodExample()
+    centre.recognitionAPI.selectCaptureGoodExample()
   }
 }

@@ -9,7 +9,7 @@ import Foundation
 import Icons
 
 /// Imports records from an interchange file selected in the system picker.
-public struct ImportSelectedInterchangeCommand<Centre: BookishImportingService.Provider>:
+public struct ImportSelectedInterchangeCommand<Centre: BookishImportingService.Access>:
   CommandWithUI
 {
   public typealias ResultType = Void
@@ -35,6 +35,6 @@ public struct ImportSelectedInterchangeCommand<Centre: BookishImportingService.P
   }
 
   public func perform(centre: Centre) async throws {
-    await centre.importingService.importInterchange(from: url)
+    await centre.importingAPI.importInterchange(from: url)
   }
 }

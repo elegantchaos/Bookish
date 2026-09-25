@@ -8,7 +8,7 @@ import CommandsUI
 import Icons
 
 /// Identifies books in the selected image using the selected recognition provider.
-public struct CaptureBooksCommand<Centre: BookishRecognitionService.Provider>: CommandWithUI {
+public struct CaptureBooksCommand<Centre: BookishRecognitionService.Access>: CommandWithUI {
   /// The command does not return a value after starting recognition.
   public typealias ResultType = Void
 
@@ -21,7 +21,7 @@ public struct CaptureBooksCommand<Centre: BookishRecognitionService.Provider>: C
 
   /// Enables capture only when a selected image can be processed.
   public func availability(centre: Centre) -> CommandAvailability {
-    let recognition = centre.recognitionService
+    let recognition = centre.recognitionAPI
     return recognition.hasImage && recognition.isCurrentRecognitionProviderSupported
       && !recognition.isRecognizing
       ? .enabled : .disabled
@@ -40,6 +40,6 @@ public struct CaptureBooksCommand<Centre: BookishRecognitionService.Provider>: C
 
   /// Identifies books in the selected image.
   public func perform(centre: Centre) async throws {
-    await centre.recognitionService.identifyBooks()
+    await centre.recognitionAPI.identifyBooks()
   }
 }

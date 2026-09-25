@@ -9,7 +9,7 @@ import Icons
 
 /// Removes all records and mutations from the local datastore.
 public struct ResetDatastoreCommand<
-  Centre: BookishStorageService.Provider & BookishStatusService.Provider
+  Centre: BookishStorageService.Access & BookishStatusService.Access
 >:
   CommandWithUI
 {
@@ -42,7 +42,7 @@ public struct ResetDatastoreCommand<
   }
 
   public func perform(centre: Centre) async throws {
-    try await centre.storageService.reset()
-    centre.statusService.report(message: "Reset datastore")
+    try await centre.storageAPI.reset()
+    centre.statusAPI.report(message: "Reset datastore")
   }
 }

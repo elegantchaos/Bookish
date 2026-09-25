@@ -9,7 +9,7 @@ import Foundation
 import Icons
 
 /// Selects the next record in the active datastore browser index.
-public struct SelectNextRecordCommand<Centre: BookishNavigationService.Provider>: CommandWithUI {
+public struct SelectNextRecordCommand<Centre: BookishNavigationService.Access>: CommandWithUI {
   public typealias ResultType = Void
 
   public let id = "datastore.navigation.next-record"
@@ -19,7 +19,7 @@ public struct SelectNextRecordCommand<Centre: BookishNavigationService.Provider>
   }
 
   public func availability(centre: Centre) -> CommandAvailability {
-    centre.navigationService.canSelectAnotherRecord ? .enabled : .disabled
+    centre.navigationAPI.canSelectAnotherRecord ? .enabled : .disabled
   }
 
   public func name(centre: Centre) -> String {
@@ -35,6 +35,6 @@ public struct SelectNextRecordCommand<Centre: BookishNavigationService.Provider>
   }
 
   public func perform(centre: Centre) async throws {
-    centre.navigationService.selectNextRecord()
+    centre.navigationAPI.selectNextRecord()
   }
 }

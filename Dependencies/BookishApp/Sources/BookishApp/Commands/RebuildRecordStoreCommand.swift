@@ -9,7 +9,7 @@ import Icons
 
 /// Rebuilds the materialised record projection from stored mutations.
 public struct RebuildRecordStoreCommand<
-  Centre: BookishStorageService.Provider & BookishStatusService.Provider
+  Centre: BookishStorageService.Access & BookishStatusService.Access
 >:
   CommandWithUI
 {
@@ -43,7 +43,7 @@ public struct RebuildRecordStoreCommand<
   }
 
   public func perform(centre: Centre) async throws {
-    try await centre.storageService.rebuildRecordProjection()
-    centre.statusService.report(message: "Rebuilt record store")
+    try await centre.storageAPI.rebuildRecordProjection()
+    centre.statusAPI.report(message: "Rebuilt record store")
   }
 }

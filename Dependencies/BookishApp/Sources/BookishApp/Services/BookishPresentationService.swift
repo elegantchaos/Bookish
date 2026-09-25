@@ -10,6 +10,42 @@ import Observation
 /// Owns observable layout state and display configuration derived from storage records.
 @MainActor
 public final class BookishPresentationService {
+  public private(set) lazy var state = State(service: self)
+
+  /// The default layout used when neither the user nor index selects one.
+  private let fallbackLayoutID = BookishRecordID("datastore-all-fields-layout")
+
+  /// The universal presentation applied after more-specific configuration.
+  private let fallbackPresentationID = BookishRecordID("presentation.type.*")
+
+  /// The store providing presentation configuration records.
+  private let storageService: BookishStorageService
+
+  /// The loaded layouts used for resolution and compatibility checks.
+  private var layouts: [BookishRecord] = []
+
+  /// The browser index currently used to filter compatible layouts.
+  private var activeRecordIndex: BookishRecordIndex?
+
+  /// The explicitly selected layout, when the user has overridden the default.
+  public var selectedLayoutID: BookishRecordID? {
+    get { state.selectedLayoutID }
+    set { state.selectedLayoutID = newValue }
+  }
+
+  /// The identifiers of all top-level layout records.
+  public var layoutIDs: [BookishRecordID] { state.layoutIDs }
+
+  /// The identifiers of layouts compatible with the active browser index.
+  public var compatibleLayoutIDs: [BookishRecordID] { compatibleLayouts.map(\.id) }
+
+  /// Creates a presentation service backed by the supplied storage service.
+  public init(storageService: BookishStorageService) {
+    self.storageService = storageService
+  }
+}
+
+extension BookishPresentationService {
   @MainActor
   @Observable
   public final class State {
@@ -45,40 +81,6 @@ public final class BookishPresentationService {
     public func recordKindMetadata(for kind: String) async throws -> BookishRecord? {
       try await service.recordKindMetadata(for: kind)
     }
-  }
-
-  public private(set) lazy var state = State(service: self)
-
-  /// The default layout used when neither the user nor index selects one.
-  private let fallbackLayoutID = BookishRecordID("datastore-all-fields-layout")
-
-  /// The universal presentation applied after more-specific configuration.
-  private let fallbackPresentationID = BookishRecordID("presentation.type.*")
-
-  /// The store providing presentation configuration records.
-  private let storageService: BookishStorageService
-
-  /// The loaded layouts used for resolution and compatibility checks.
-  private var layouts: [BookishRecord] = []
-
-  /// The browser index currently used to filter compatible layouts.
-  private var activeRecordIndex: BookishRecordIndex?
-
-  /// The explicitly selected layout, when the user has overridden the default.
-  public var selectedLayoutID: BookishRecordID? {
-    get { state.selectedLayoutID }
-    set { state.selectedLayoutID = newValue }
-  }
-
-  /// The identifiers of all top-level layout records.
-  public var layoutIDs: [BookishRecordID] { state.layoutIDs }
-
-  /// The identifiers of layouts compatible with the active browser index.
-  public var compatibleLayoutIDs: [BookishRecordID] { compatibleLayouts.map(\.id) }
-
-  /// Creates a presentation service backed by the supplied storage service.
-  public init(storageService: BookishStorageService) {
-    self.storageService = storageService
   }
 }
 

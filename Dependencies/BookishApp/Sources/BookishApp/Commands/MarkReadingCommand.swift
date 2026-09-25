@@ -10,7 +10,7 @@ import Foundation
 import Icons
 
 /// Marks the selected record as currently being read.
-public struct MarkReadingCommand<Centre: BookishRecordActionsService.Provider>: CommandWithUI {
+public struct MarkReadingCommand<Centre: BookishRecordActionsService.Access>: CommandWithUI {
   public typealias ResultType = Void
 
   public let recordID: BookishRecordID?
@@ -23,7 +23,7 @@ public struct MarkReadingCommand<Centre: BookishRecordActionsService.Provider>: 
   }
 
   public func availability(centre: Centre) -> CommandAvailability {
-    centre.recordActionsService.canAct(on: recordID) ? .enabled : .disabled
+    centre.recordActionsAPI.canAct(on: recordID) ? .enabled : .disabled
   }
 
   public func name(centre: Centre) -> String {
@@ -39,6 +39,6 @@ public struct MarkReadingCommand<Centre: BookishRecordActionsService.Provider>: 
   }
 
   public func perform(centre: Centre) async throws {
-    await centre.recordActionsService.markReading(recordID: recordID)
+    await centre.recordActionsAPI.markReading(recordID: recordID)
   }
 }

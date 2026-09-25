@@ -9,7 +9,7 @@ import Foundation
 import Icons
 
 /// Exports the materialised records as Bookish interchange JSON.
-public struct ExportInterchangeCommand<Centre: BookishExportingService.Provider>: CommandWithUI {
+public struct ExportInterchangeCommand<Centre: BookishExportingService.Access>: CommandWithUI {
   public typealias ResultType = Void
 
   public let id = "datastore.export.interchange"
@@ -19,7 +19,7 @@ public struct ExportInterchangeCommand<Centre: BookishExportingService.Provider>
   }
 
   public func availability(centre: Centre) -> CommandAvailability {
-    centre.exportingService.hasExportableRecords ? .enabled : .disabled
+    centre.exportingAPI.hasExportableRecords ? .enabled : .disabled
   }
 
   public func name(centre: Centre) -> String {
@@ -35,6 +35,6 @@ public struct ExportInterchangeCommand<Centre: BookishExportingService.Provider>
   }
 
   public func perform(centre: Centre) async throws {
-    await centre.exportingService.requestInterchangeExport()
+    await centre.exportingAPI.requestInterchangeExport()
   }
 }

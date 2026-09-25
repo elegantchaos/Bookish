@@ -11,26 +11,6 @@ import Foundation
 /// Applies mutations to the record selected in the Bookish browser.
 @MainActor
 public final class BookishRecordActionsService {
-  /// Performs selected-record actions requested by commands.
-  @MainActor
-  public protocol API: AnyObject {
-    /// Whether a record is selected.
-    var hasSelectedRecord: Bool { get }
-    /// Whether the requested record can receive an action.
-    func canAct(on recordID: BookishRecordID?) -> Bool
-    /// Marks the selected record as reading.
-    func markReading(recordID: BookishRecordID?) async
-    /// Marks the selected record as finished.
-    func markFinished(recordID: BookishRecordID?) async
-    /// Simulates a remote update.
-    func simulateRemoteUpdate() async
-  }
-
-  @MainActor
-  public protocol Provider: CommandCentre {
-    var recordActionsService: any API { get }
-  }
-
   /// The storage service used to read and mutate records.
   private let storage: BookishStorageService
 
@@ -54,6 +34,28 @@ public final class BookishRecordActionsService {
     self.navigation = navigation
     self.browser = browser
     self.statusService = statusService
+  }
+}
+
+extension BookishRecordActionsService {
+  /// Performs selected-record actions requested by commands.
+  @MainActor
+  public protocol API: AnyObject {
+    /// Whether a record is selected.
+    var hasSelectedRecord: Bool { get }
+    /// Whether the requested record can receive an action.
+    func canAct(on recordID: BookishRecordID?) -> Bool
+    /// Marks the selected record as reading.
+    func markReading(recordID: BookishRecordID?) async
+    /// Marks the selected record as finished.
+    func markFinished(recordID: BookishRecordID?) async
+    /// Simulates a remote update.
+    func simulateRemoteUpdate() async
+  }
+
+  @MainActor
+  public protocol Access: CommandCentre {
+    var recordActionsAPI: any API { get }
   }
 }
 
@@ -130,4 +132,4 @@ extension BookishRecordActionsService: BookishRecordActionsService.API {
   }
 }
 
-extension BookishEngine: BookishRecordActionsService.Provider {}
+extension BookishEngine: BookishRecordActionsService.Access {}

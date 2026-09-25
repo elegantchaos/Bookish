@@ -9,7 +9,7 @@ import CommandsUI
 import Icons
 
 /// Selects a browser index by its stable record identifier.
-public struct SelectRecordIndexCommand<Centre: BookishNavigationService.Provider>: CommandWithUI {
+public struct SelectRecordIndexCommand<Centre: BookishNavigationService.Access>: CommandWithUI {
   public typealias ResultType = Void
 
   public let id: String
@@ -38,6 +38,6 @@ public struct SelectRecordIndexCommand<Centre: BookishNavigationService.Provider
   }
 
   public func perform(centre: Centre) async throws {
-    try await centre.navigationService.select(recordIndexID: recordIndexID)
+    try await centre.navigationAPI.select(recordIndexID: recordIndexID)
   }
 }

@@ -10,7 +10,7 @@ import Foundation
 import Icons
 
 /// Navigates to a materialised record using the requested browser route.
-public struct NavigateToRecordCommand<Centre: BookishNavigationService.Provider>: CommandWithUI {
+public struct NavigateToRecordCommand<Centre: BookishNavigationService.Access>: CommandWithUI {
   /// Controls how navigation reaches a linked record.
   public enum Mode: Sendable {
     /// Pushes the linked record onto the detail navigation stack.
@@ -44,7 +44,7 @@ public struct NavigateToRecordCommand<Centre: BookishNavigationService.Provider>
       .enabled
 
     case .currentIndex:
-      centre.navigationService.contains(recordID: recordID) ? .enabled : .disabled
+      centre.navigationAPI.contains(recordID: recordID) ? .enabled : .disabled
 
     case .bestIndex:
       .disabled
@@ -66,10 +66,10 @@ public struct NavigateToRecordCommand<Centre: BookishNavigationService.Provider>
   public func perform(centre: Centre) async throws {
     switch mode {
     case .push:
-      centre.navigationService.push(recordID: recordID)
+      centre.navigationAPI.push(recordID: recordID)
 
     case .currentIndex:
-      centre.navigationService.select(recordID: recordID)
+      centre.navigationAPI.select(recordID: recordID)
 
     case .bestIndex:
       throw NavigateToRecordCommandError.bestIndexSelectionUnavailable

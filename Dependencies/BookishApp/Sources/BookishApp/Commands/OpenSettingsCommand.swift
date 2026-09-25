@@ -3,7 +3,7 @@ import CommandsUI
 import Icons
 
 /// Opens the application settings sheet on iOS.
-public struct OpenSettingsCommand<Centre: BookishSettingsPresentationService.Provider>:
+public struct OpenSettingsCommand<Centre: BookishSettingsPresentationService.Access>:
   CommandWithUI
 {
   public typealias ResultType = Void
@@ -19,6 +19,6 @@ public struct OpenSettingsCommand<Centre: BookishSettingsPresentationService.Pro
   public func help(centre _: Centre) -> String? { "Open Bookish settings." }
 
   public func perform(centre: Centre) async throws {
-    centre.settingsPresentationService.openSettings()
+    centre.settingsPresentationAPI.openSettings()
   }
 }

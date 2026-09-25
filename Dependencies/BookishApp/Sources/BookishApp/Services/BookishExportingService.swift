@@ -13,41 +13,6 @@ import Observation
 /// Produces interchange files from stored records and presents the export sheet.
 @MainActor
 public final class BookishExportingService {
-  /// Requests interchange export from commands.
-  @MainActor
-  public protocol API: AnyObject {
-    /// Whether records are available for interchange export.
-    var hasExportableRecords: Bool { get }
-    /// Encodes the records and presents the export sheet.
-    func requestInterchangeExport() async
-  }
-
-  @MainActor
-  public protocol Provider: CommandCentre {
-    var exportingService: any API { get }
-  }
-
-  @MainActor
-  @Observable
-  public final class State {
-    @ObservationIgnored private unowned let service: BookishExportingService
-
-    /// Whether the interchange export file picker is visible.
-    public var isExportingInterchange = false
-
-    /// The document currently being exported.
-    public fileprivate(set) var interchangeExportDocument = BookishInterchangeDocument()
-
-    fileprivate init(service: BookishExportingService) {
-      self.service = service
-    }
-
-    /// Reports successful completion of the interchange export panel.
-    public func didExportInterchange() {
-      service.statusService.report(message: "Exported interchange file")
-    }
-  }
-
   public private(set) lazy var state = State(service: self)
 
   /// The storage service supplying materialised records for export.
@@ -78,6 +43,43 @@ public final class BookishExportingService {
   }
 }
 
+extension BookishExportingService {
+  /// Requests interchange export from commands.
+  @MainActor
+  public protocol API: AnyObject {
+    /// Whether records are available for interchange export.
+    var hasExportableRecords: Bool { get }
+    /// Encodes the records and presents the export sheet.
+    func requestInterchangeExport() async
+  }
+
+  @MainActor
+  public protocol Access: CommandCentre {
+    var exportingAPI: any API { get }
+  }
+
+  @MainActor
+  @Observable
+  public final class State {
+    @ObservationIgnored private unowned let service: BookishExportingService
+
+    /// Whether the interchange export file picker is visible.
+    public var isExportingInterchange = false
+
+    /// The document currently being exported.
+    public fileprivate(set) var interchangeExportDocument = BookishInterchangeDocument()
+
+    fileprivate init(service: BookishExportingService) {
+      self.service = service
+    }
+
+    /// Reports successful completion of the interchange export panel.
+    public func didExportInterchange() {
+      service.statusService.report(message: "Exported interchange file")
+    }
+  }
+}
+
 extension BookishExportingService: BookishExportingService.API {
   public var hasExportableRecords: Bool { !navigation.recordIDs.isEmpty }
 
@@ -92,4 +94,4 @@ extension BookishExportingService: BookishExportingService.API {
   }
 }
 
-extension BookishEngine: BookishExportingService.Provider {}
+extension BookishEngine: BookishExportingService.Access {}

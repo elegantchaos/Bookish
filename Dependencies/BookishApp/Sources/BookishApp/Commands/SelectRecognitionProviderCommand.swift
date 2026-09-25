@@ -9,7 +9,7 @@ import CommandsUI
 import Icons
 
 /// Selects the recognition provider used by the next capture.
-public struct SelectRecognitionProviderCommand<Centre: BookishRecognitionService.Provider>:
+public struct SelectRecognitionProviderCommand<Centre: BookishRecognitionService.Access>:
   CommandWithUI
 {
   /// The command does not return a value after selecting a provider.
@@ -28,8 +28,8 @@ public struct SelectRecognitionProviderCommand<Centre: BookishRecognitionService
 
   /// Enables selection only for a recognition provider that can run on this device.
   public func availability(centre: Centre) -> CommandAvailability {
-    !centre.recognitionService.isRecognizing
-      && centre.recognitionService.isRecognitionProviderSupported(recognitionProvider)
+    !centre.recognitionAPI.isRecognizing
+      && centre.recognitionAPI.isRecognitionProviderSupported(recognitionProvider)
       ? .enabled : .disabled
   }
 
@@ -46,6 +46,6 @@ public struct SelectRecognitionProviderCommand<Centre: BookishRecognitionService
 
   /// Selects the provider through the recognition workflow without starting recognition.
   public func perform(centre: Centre) async throws {
-    centre.recognitionService.selectRecognitionProvider(recognitionProvider)
+    centre.recognitionAPI.selectRecognitionProvider(recognitionProvider)
   }
 }

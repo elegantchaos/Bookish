@@ -8,26 +8,6 @@ import Commands
 /// Owns browser index visibility and refreshes browser-facing state after records change.
 @MainActor
 public final class BookishBrowserService {
-  /// Changes browser settings and refreshes browser state.
-  @MainActor
-  public protocol API: AnyObject {
-    /// Updates whether debug-only indexes are visible.
-    func setShowsDebugIndexes(_ isVisible: Bool) async
-
-    /// Refreshes browser indexes, layouts, and views that display stored records.
-    ///
-    /// TEMPORARY: services call this after writing records because views do not yet
-    /// observe the records and queries they display. Remove these calls when record
-    /// observation is refactored; see
-    /// `Extras/Journal/2026-09-25-fine-grained-record-observation.md`.
-    func refresh() async throws
-  }
-
-  @MainActor
-  public protocol Provider: CommandCentre {
-    var browserService: any API { get }
-  }
-
   /// Whether debug-only indexes are included when the app starts.
   public let defaultShowsDebugIndexes: Bool
 
@@ -66,6 +46,28 @@ public final class BookishBrowserService {
   }
 }
 
+extension BookishBrowserService {
+  /// Changes browser settings and refreshes browser state.
+  @MainActor
+  public protocol API: AnyObject {
+    /// Updates whether debug-only indexes are visible.
+    func setShowsDebugIndexes(_ isVisible: Bool) async
+
+    /// Refreshes browser indexes, layouts, and views that display stored records.
+    ///
+    /// TEMPORARY: services call this after writing records because views do not yet
+    /// observe the records and queries they display. Remove these calls when record
+    /// observation is refactored; see
+    /// `Extras/Journal/2026-09-25-fine-grained-record-observation.md`.
+    func refresh() async throws
+  }
+
+  @MainActor
+  public protocol Access: CommandCentre {
+    var browserAPI: any API { get }
+  }
+}
+
 extension BookishBrowserService: BookishBrowserService.API {
   public func setShowsDebugIndexes(_ showsDebugIndexes: Bool) async {
     guard self.showsDebugIndexes != showsDebugIndexes else {
@@ -90,4 +92,4 @@ extension BookishBrowserService: BookishBrowserService.API {
   }
 }
 
-extension BookishEngine: BookishBrowserService.Provider {}
+extension BookishEngine: BookishBrowserService.Access {}

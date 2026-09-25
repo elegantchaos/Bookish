@@ -16,55 +16,6 @@ import Observation
 /// a `BookishDatastore` directly.
 @MainActor
 public final class BookishStorageService {
-  /// Performs datastore lifecycle and storage operations requested by commands.
-  @MainActor
-  public protocol API {
-    func localDatastoreDirectory() throws -> URL
-    func rebuildRecordProjection() async throws
-    func reset() async throws
-  }
-
-  @MainActor
-  public protocol Provider: CommandCentre {
-    var storageService: any API { get }
-  }
-
-  /// Exposes the record-projection revision and read-only record queries to views.
-  @MainActor
-  @Observable
-  public final class State {
-    @ObservationIgnored private unowned let service: BookishStorageService
-
-    /// Increments whenever views should resolve stored records again.
-    ///
-    /// TEMPORARY: a coarse signal that makes every visible record view reload. Remove
-    /// when views observe their own records and queries; see
-    /// `Extras/Journal/2026-09-25-fine-grained-record-observation.md`.
-    public fileprivate(set) var revision = 0
-
-    fileprivate init(service: BookishStorageService) {
-      self.service = service
-    }
-
-    /// Returns a materialised record, if it exists.
-    public func record(id: BookishRecordID) async throws -> BookishRecord? {
-      try await service.record(id: id)
-    }
-
-    /// Resolves a host-specific query template against the materialised store.
-    public func recordQueryResult(
-      for template: RecordQueryTemplate,
-      host: BookishRecord
-    ) async throws -> RecordQueryResult {
-      try await service.recordQueryResult(for: template, host: host)
-    }
-
-    /// Returns all durable mutations for diagnostic presentation.
-    public func mutations() async throws -> [MutationRecord] {
-      try await service.mutations()
-    }
-  }
-
   public private(set) lazy var state = State(service: self)
 
   /// The record that marks initial configuration seed import.
@@ -310,6 +261,57 @@ public final class BookishStorageService {
   }
 }
 
+extension BookishStorageService {
+  /// Performs datastore lifecycle and storage operations requested by commands.
+  @MainActor
+  public protocol API {
+    func localDatastoreDirectory() throws -> URL
+    func rebuildRecordProjection() async throws
+    func reset() async throws
+  }
+
+  @MainActor
+  public protocol Access: CommandCentre {
+    var storageAPI: any API { get }
+  }
+
+  /// Exposes the record-projection revision and read-only record queries to views.
+  @MainActor
+  @Observable
+  public final class State {
+    @ObservationIgnored private unowned let service: BookishStorageService
+
+    /// Increments whenever views should resolve stored records again.
+    ///
+    /// TEMPORARY: a coarse signal that makes every visible record view reload. Remove
+    /// when views observe their own records and queries; see
+    /// `Extras/Journal/2026-09-25-fine-grained-record-observation.md`.
+    public fileprivate(set) var revision = 0
+
+    fileprivate init(service: BookishStorageService) {
+      self.service = service
+    }
+
+    /// Returns a materialised record, if it exists.
+    public func record(id: BookishRecordID) async throws -> BookishRecord? {
+      try await service.record(id: id)
+    }
+
+    /// Resolves a host-specific query template against the materialised store.
+    public func recordQueryResult(
+      for template: RecordQueryTemplate,
+      host: BookishRecord
+    ) async throws -> RecordQueryResult {
+      try await service.recordQueryResult(for: template, host: host)
+    }
+
+    /// Returns all durable mutations for diagnostic presentation.
+    public func mutations() async throws -> [MutationRecord] {
+      try await service.mutations()
+    }
+  }
+}
+
 extension BookishStorageService: BookishStorageService.API {
 
   /// Rebuilds the materialised record projection and reapplies configuration seeds.
@@ -369,4 +371,4 @@ extension BookishStorageService: BookishStorageService.API {
 
 }
 
-extension BookishEngine: BookishStorageService.Provider {}
+extension BookishEngine: BookishStorageService.Access {}

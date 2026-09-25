@@ -12,105 +12,6 @@ import Observation
 /// Maintains the datastore browser route independently from datastore services.
 @MainActor
 public final class BookishNavigationService {
-  /// Performs browser index and record navigation requested by commands.
-  @MainActor
-  public protocol API {
-    /// Whether another browser index is available.
-    var canSelectAnotherRecordIndex: Bool { get }
-
-    /// Whether another record is available in the selected browser index.
-    var canSelectAnotherRecord: Bool { get }
-
-    var selectedMainSection: BookishMainSection? { get }
-
-    var libraryIndexes: [BookishRecordIndex] { get }
-
-    var debugIndexes: [BookishRecordIndex] { get }
-
-    /// Selects a browser index and refreshes its displayed records.
-    func select(recordIndexID: BookishRecordID?) async throws
-
-    /// Selects a top-level workflow and clears linked-record navigation.
-    func select(mainSection: BookishMainSection?)
-
-    /// Selects the next browser index.
-    func selectNextRecordIndex() async throws
-
-    /// Selects the previous browser index.
-    func selectPreviousRecordIndex() async throws
-
-    /// Returns whether the selected browser index contains a record.
-    func contains(recordID: BookishRecordID) -> Bool
-
-    /// Pushes a record onto the detail navigation path.
-    func push(recordID: BookishRecordID)
-
-    /// Selects a record in the selected browser index, or clears the selection.
-    func select(recordID: BookishRecordID?)
-
-    /// Updates the name filter applied to the selected browser index.
-    func setRecordNameFilter(_ filter: String) async throws
-
-    /// Selects the next record in the selected browser index.
-    func selectNextRecord()
-
-    /// Selects the previous record in the selected browser index.
-    func selectPreviousRecord()
-
-    /// The selected browser index shown in the first split-view column.
-    var selectedRecordIndexID: BookishRecordID? { get }
-
-    /// The selected record in the selected browser index.
-    var selectedRecordID: BookishRecordID? { get }
-
-    /// The records in the selected browser index.
-    var recordIDs: [BookishRecordID] { get }
-  }
-
-  @MainActor
-  public protocol Provider: CommandCentre {
-    var navigationService: any API { get }
-  }
-
-  @MainActor
-  @Observable
-  public final class State {
-    public fileprivate(set) var recordIndexResult: RecordQueryResult?
-    public fileprivate(set) var selectedRecordIndexID: BookishRecordID?
-    public fileprivate(set) var selectedMainSection: BookishMainSection?
-    public fileprivate(set) var selectedRecordID: BookishRecordID?
-    public fileprivate(set) var recordNavigationPath: [BookishRecordID] = []
-    public fileprivate(set) var selectedRecordResult: RecordQueryResult?
-    public fileprivate(set) var recordNameFilter = ""
-
-    fileprivate init(
-      selectedRecordIndexID: BookishRecordID? = nil,
-      selectedMainSection: BookishMainSection? = nil
-    ) {
-      self.selectedRecordIndexID = selectedRecordIndexID
-      self.selectedMainSection = selectedMainSection
-    }
-
-    public var recordIndexes: [BookishRecordIndex] {
-      recordIndexResult?.records.map(BookishRecordIndex.init(record:)) ?? []
-    }
-
-    public var recordIndexIDs: [BookishRecordID] { recordIndexes.map(\.id) }
-    public var libraryIndexes: [BookishRecordIndex] { recordIndexes.filter { !$0.isDebugOnly } }
-    public var debugIndexes: [BookishRecordIndex] { recordIndexes.filter(\.isDebugOnly) }
-    public var selectedRecordIndex: BookishRecordIndex? {
-      recordIndexes.first { $0.id == selectedRecordIndexID }
-    }
-    public var selectedRecordIndexName: String? { selectedRecordIndex?.name }
-    public var selectedRecordIDs: [BookishRecordID] { selectedRecordResult?.ids ?? [] }
-    public var recordIDs: [BookishRecordID] { selectedRecordIDs }
-
-    /// Applies a native detail-path binding change.
-    public func setRecordNavigationPath(_ path: [BookishRecordID]) {
-      recordNavigationPath = path
-    }
-  }
-
   public let state: State
 
   public var recordIndexResult: RecordQueryResult? {
@@ -511,9 +412,109 @@ public final class BookishNavigationService {
       sort: [.property(BookishRecordKey.position), .property(BookishRecordKey.name), .id]
     )
   }
+}
 
+extension BookishNavigationService {
+  /// Performs browser index and record navigation requested by commands.
+  @MainActor
+  public protocol API {
+    /// Whether another browser index is available.
+    var canSelectAnotherRecordIndex: Bool { get }
+
+    /// Whether another record is available in the selected browser index.
+    var canSelectAnotherRecord: Bool { get }
+
+    var selectedMainSection: BookishMainSection? { get }
+
+    var libraryIndexes: [BookishRecordIndex] { get }
+
+    var debugIndexes: [BookishRecordIndex] { get }
+
+    /// Selects a browser index and refreshes its displayed records.
+    func select(recordIndexID: BookishRecordID?) async throws
+
+    /// Selects a top-level workflow and clears linked-record navigation.
+    func select(mainSection: BookishMainSection?)
+
+    /// Selects the next browser index.
+    func selectNextRecordIndex() async throws
+
+    /// Selects the previous browser index.
+    func selectPreviousRecordIndex() async throws
+
+    /// Returns whether the selected browser index contains a record.
+    func contains(recordID: BookishRecordID) -> Bool
+
+    /// Pushes a record onto the detail navigation path.
+    func push(recordID: BookishRecordID)
+
+    /// Selects a record in the selected browser index, or clears the selection.
+    func select(recordID: BookishRecordID?)
+
+    /// Updates the name filter applied to the selected browser index.
+    func setRecordNameFilter(_ filter: String) async throws
+
+    /// Selects the next record in the selected browser index.
+    func selectNextRecord()
+
+    /// Selects the previous record in the selected browser index.
+    func selectPreviousRecord()
+
+    /// The selected browser index shown in the first split-view column.
+    var selectedRecordIndexID: BookishRecordID? { get }
+
+    /// The selected record in the selected browser index.
+    var selectedRecordID: BookishRecordID? { get }
+
+    /// The records in the selected browser index.
+    var recordIDs: [BookishRecordID] { get }
+  }
+
+  @MainActor
+  public protocol Access: CommandCentre {
+    var navigationAPI: any API { get }
+  }
+
+  @MainActor
+  @Observable
+  public final class State {
+    public fileprivate(set) var recordIndexResult: RecordQueryResult?
+    public fileprivate(set) var selectedRecordIndexID: BookishRecordID?
+    public fileprivate(set) var selectedMainSection: BookishMainSection?
+    public fileprivate(set) var selectedRecordID: BookishRecordID?
+    public fileprivate(set) var recordNavigationPath: [BookishRecordID] = []
+    public fileprivate(set) var selectedRecordResult: RecordQueryResult?
+    public fileprivate(set) var recordNameFilter = ""
+
+    fileprivate init(
+      selectedRecordIndexID: BookishRecordID? = nil,
+      selectedMainSection: BookishMainSection? = nil
+    ) {
+      self.selectedRecordIndexID = selectedRecordIndexID
+      self.selectedMainSection = selectedMainSection
+    }
+
+    public var recordIndexes: [BookishRecordIndex] {
+      recordIndexResult?.records.map(BookishRecordIndex.init(record:)) ?? []
+    }
+
+    public var recordIndexIDs: [BookishRecordID] { recordIndexes.map(\.id) }
+    public var libraryIndexes: [BookishRecordIndex] { recordIndexes.filter { !$0.isDebugOnly } }
+    public var debugIndexes: [BookishRecordIndex] { recordIndexes.filter(\.isDebugOnly) }
+    public var selectedRecordIndex: BookishRecordIndex? {
+      recordIndexes.first { $0.id == selectedRecordIndexID }
+    }
+    public var selectedRecordIndexName: String? { selectedRecordIndex?.name }
+    public var selectedRecordIDs: [BookishRecordID] { selectedRecordResult?.ids ?? [] }
+    public var recordIDs: [BookishRecordID] { selectedRecordIDs }
+
+    /// Applies a native detail-path binding change.
+    public func setRecordNavigationPath(_ path: [BookishRecordID]) {
+      recordNavigationPath = path
+    }
+  }
 }
 
 extension BookishNavigationService: BookishNavigationService.API {}
 
-extension BookishEngine: BookishNavigationService.Provider {}
+extension BookishEngine: BookishNavigationService.Access {}

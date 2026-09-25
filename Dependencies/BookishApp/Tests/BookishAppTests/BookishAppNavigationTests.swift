@@ -20,7 +20,6 @@ import Testing
   @Test
   func navigationCommandsAreDisabledWithoutRecords() {
     let harness = makeEngine()
-    let navigation = harness.navigation
     let commander = harness
 
     #expect(commander.availability(SelectNextRecordIndexCommand()) == .disabled)

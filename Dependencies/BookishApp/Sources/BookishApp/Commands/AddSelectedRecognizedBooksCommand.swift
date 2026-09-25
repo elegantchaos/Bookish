@@ -8,7 +8,7 @@ import CommandsUI
 import Icons
 
 /// Adds the selected recognition candidates to the catalogue.
-public struct AddSelectedRecognizedBooksCommand<Centre: BookishRecognitionService.Provider>:
+public struct AddSelectedRecognizedBooksCommand<Centre: BookishRecognitionService.Access>:
   CommandWithUI
 {
   /// The command does not return a value after adding candidates.
@@ -23,8 +23,8 @@ public struct AddSelectedRecognizedBooksCommand<Centre: BookishRecognitionServic
 
   /// Enables the command only when selected candidates can be persisted.
   public func availability(centre: Centre) -> CommandAvailability {
-    centre.recognitionService.canAddBooks
-      && !centre.recognitionService.selectedCandidateIDs.isEmpty ? .enabled : .disabled
+    centre.recognitionAPI.canAddBooks
+      && !centre.recognitionAPI.selectedCandidateIDs.isEmpty ? .enabled : .disabled
   }
 
   /// Returns the user-facing command name for the current selection.
@@ -46,12 +46,12 @@ public struct AddSelectedRecognizedBooksCommand<Centre: BookishRecognitionServic
 
   /// Adds selected candidates through the recognition workflow.
   public func perform(centre: Centre) async throws {
-    try await centre.recognitionService.addSelectedBooks()
+    try await centre.recognitionAPI.addSelectedBooks()
   }
 
   /// Returns whether the current selection includes every visible candidate.
   private func addsAllCandidates(centre: Centre) -> Bool {
-    let recognition = centre.recognitionService
+    let recognition = centre.recognitionAPI
     return !recognition.candidates.isEmpty
       && recognition.selectedCandidateIDs == Set(recognition.candidates.map(\.id))
   }

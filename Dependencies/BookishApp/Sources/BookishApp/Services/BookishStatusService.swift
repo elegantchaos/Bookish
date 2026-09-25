@@ -10,6 +10,27 @@ import Observation
 /// Owns status reporting and the state displayed by Bookish views.
 @MainActor
 public final class BookishStatusService {
+  /// The view-facing status projection.
+  public let state: State
+
+  /// Creates a status service with its initial user-facing message.
+  public init(message: String = "Loading") {
+    state = State(message: message)
+  }
+
+  /// Updates the displayed import progress and its accompanying message.
+  public func report(progress: BookishImportProgress) {
+    state.importProgress = progress
+    state.message = progress.message
+  }
+
+  /// Stops displaying import progress while retaining the latest message.
+  public func clearImportProgress() {
+    state.importProgress = nil
+  }
+}
+
+extension BookishStatusService {
   /// The status operations available to commands and collaborating services.
   @MainActor
   public protocol API {
@@ -22,9 +43,9 @@ public final class BookishStatusService {
 
   /// Vends status reporting to commands.
   @MainActor
-  public protocol Provider: CommandCentre {
+  public protocol Access: CommandCentre {
     /// The status API used by the command.
-    var statusService: any API { get }
+    var statusAPI: any API { get }
   }
 
   /// The stable, observable status read by views.
@@ -48,25 +69,6 @@ public final class BookishStatusService {
       message = error.localizedDescription
     }
   }
-
-  /// The view-facing status projection.
-  public let state: State
-
-  /// Creates a status service with its initial user-facing message.
-  public init(message: String = "Loading") {
-    state = State(message: message)
-  }
-
-  /// Updates the displayed import progress and its accompanying message.
-  public func report(progress: BookishImportProgress) {
-    state.importProgress = progress
-    state.message = progress.message
-  }
-
-  /// Stops displaying import progress while retaining the latest message.
-  public func clearImportProgress() {
-    state.importProgress = nil
-  }
 }
 
 extension BookishStatusService: BookishStatusService.API {
@@ -79,5 +81,5 @@ extension BookishStatusService: BookishStatusService.API {
   }
 }
 
-extension BookishEngine: BookishStatusService.Provider {
+extension BookishEngine: BookishStatusService.Access {
 }

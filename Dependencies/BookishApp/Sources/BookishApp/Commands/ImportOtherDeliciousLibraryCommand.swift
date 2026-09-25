@@ -10,7 +10,7 @@ import Foundation
 import Icons
 
 /// Requests a Delicious Library import through the view-owned file picker.
-public struct ImportOtherDeliciousLibraryCommand<Centre: BookishImportingService.Provider>:
+public struct ImportOtherDeliciousLibraryCommand<Centre: BookishImportingService.Access>:
   CommandWithUI
 {
   public typealias ResultType = Void
@@ -33,6 +33,6 @@ public struct ImportOtherDeliciousLibraryCommand<Centre: BookishImportingService
   }
 
   public func perform(centre: Centre) async throws {
-    centre.importingService.requestDeliciousLibraryImport()
+    centre.importingAPI.requestDeliciousLibraryImport()
   }
 }

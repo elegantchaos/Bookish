@@ -33,10 +33,9 @@ struct BookishAppTests {
   @MainActor
   @Test
   func statusServiceStartsInLoadingState() {
-    let harness = makeEngine()
+    let statusService = BookishStatusService()
 
-    #expect(harness.status.state.message == "Loading")
-    #expect(harness.navigation.recordIDs.isEmpty)
+    #expect(statusService.state.message == "Loading")
   }
 
   @MainActor
@@ -648,11 +647,15 @@ struct BookishAppTests {
   @MainActor
   @Test
 
-  func revealDatastoreFolderCommandIsAvailableOnMac() {
+  func revealDatastoreFolderCommandIsAvailableOnlyWithAppKit() {
     let harness = makeEngine()
     let commander = harness
 
-    #expect(commander.availability(RevealDatastoreFolderCommand()) == .enabled)
+    #if canImport(AppKit)
+      #expect(commander.availability(RevealDatastoreFolderCommand()) == .enabled)
+    #else
+      #expect(commander.availability(RevealDatastoreFolderCommand()) == .disabled)
+    #endif
   }
 
   @MainActor
@@ -722,15 +725,15 @@ struct BookishAppTests {
     let harness = makeEngine()
     let commander = harness
 
-    commander.importingService.requestInterchangeImport()
-    commander.statusService.report(message: "Reported through status capability")
+    commander.importingAPI.requestInterchangeImport()
+    commander.statusAPI.report(message: "Reported through status capability")
 
     #expect(harness.importing.state.isImportingInterchange)
     #expect(harness.status.state.message == "Reported through status capability")
-    #expect(!commander.exportingService.hasExportableRecords)
-    #expect(!commander.recordActionsService.hasSelectedRecord)
-    #expect(!commander.navigationService.canSelectAnotherRecordIndex)
-    #expect(!commander.navigationService.canSelectAnotherRecord)
+    #expect(!commander.exportingAPI.hasExportableRecords)
+    #expect(!commander.recordActionsAPI.hasSelectedRecord)
+    #expect(!commander.navigationAPI.canSelectAnotherRecordIndex)
+    #expect(!commander.navigationAPI.canSelectAnotherRecord)
   }
 
   @MainActor
@@ -775,12 +778,12 @@ struct BookishAppTests {
     let engine = BookishEngine()
 
     #expect(engine.storage === engine.navigation.storageService)
-    #expect(engine.browserService === engine.browser)
-    #expect(engine.importingService === engine.importing)
-    #expect(engine.exportingService === engine.exporting)
-    #expect(engine.settingsPresentationService === engine.settingsPresentation)
-    #expect(engine.recordCreationService === engine.recordCreation)
-    #expect(engine.recordActionsService === engine.recordActions)
+    #expect(engine.browserAPI === engine.browser)
+    #expect(engine.importingAPI === engine.importing)
+    #expect(engine.exportingAPI === engine.exporting)
+    #expect(engine.settingsPresentationAPI === engine.settingsPresentation)
+    #expect(engine.recordCreationAPI === engine.recordCreation)
+    #expect(engine.recordActionsAPI === engine.recordActions)
   }
 
   @MainActor

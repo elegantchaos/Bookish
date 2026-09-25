@@ -9,7 +9,7 @@ import CommandsUI
 import Icons
 
 /// Selects a record within the active browser index.
-public struct SelectRecordCommand<Centre: BookishNavigationService.Provider>: CommandWithUI {
+public struct SelectRecordCommand<Centre: BookishNavigationService.Access>: CommandWithUI {
   public typealias ResultType = Void
 
   public let id: String
@@ -26,7 +26,7 @@ public struct SelectRecordCommand<Centre: BookishNavigationService.Provider>: Co
       return .enabled
     }
 
-    return centre.navigationService.contains(recordID: recordID) ? .enabled : .disabled
+    return centre.navigationAPI.contains(recordID: recordID) ? .enabled : .disabled
   }
 
   public func name(centre _: Centre) -> String {
@@ -42,6 +42,6 @@ public struct SelectRecordCommand<Centre: BookishNavigationService.Provider>: Co
   }
 
   public func perform(centre: Centre) async throws {
-    centre.navigationService.select(recordID: recordID)
+    centre.navigationAPI.select(recordID: recordID)
   }
 }

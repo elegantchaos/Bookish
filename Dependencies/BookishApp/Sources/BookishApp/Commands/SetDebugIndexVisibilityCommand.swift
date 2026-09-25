@@ -8,8 +8,7 @@ import CommandsUI
 import Icons
 
 /// Updates whether debug-only browser indexes are visible.
-public struct SetDebugIndexVisibilityCommand<Centre: BookishBrowserService.Provider>: CommandWithUI
-{
+public struct SetDebugIndexVisibilityCommand<Centre: BookishBrowserService.Access>: CommandWithUI {
   public typealias ResultType = Void
 
   public let id = "datastore.browser.debug-index-visibility"
@@ -33,6 +32,6 @@ public struct SetDebugIndexVisibilityCommand<Centre: BookishBrowserService.Provi
   }
 
   public func perform(centre: Centre) async throws {
-    await centre.browserService.setShowsDebugIndexes(isVisible)
+    await centre.browserAPI.setShowsDebugIndexes(isVisible)
   }
 }

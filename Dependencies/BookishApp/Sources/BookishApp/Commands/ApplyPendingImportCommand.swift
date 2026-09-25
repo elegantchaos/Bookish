@@ -3,7 +3,7 @@ import CommandsUI
 import Icons
 
 /// Applies the choices made in the Import workflow.
-public struct ApplyPendingImportCommand<Centre: BookishImportingService.Provider>: CommandWithUI {
+public struct ApplyPendingImportCommand<Centre: BookishImportingService.Access>: CommandWithUI {
   public typealias ResultType = Void
 
   public let id = "datastore.import.apply-pending"
@@ -11,7 +11,7 @@ public struct ApplyPendingImportCommand<Centre: BookishImportingService.Provider
   public init() {}
 
   public func availability(centre: Centre) -> CommandAvailability {
-    centre.importingService.canApplyPendingImport ? .enabled : .disabled
+    centre.importingAPI.canApplyPendingImport ? .enabled : .disabled
   }
 
   public func name(centre _: Centre) -> String { "Import" }
@@ -21,6 +21,6 @@ public struct ApplyPendingImportCommand<Centre: BookishImportingService.Provider
   public func help(centre _: Centre) -> String? { "Apply the reviewed import choices." }
 
   public func perform(centre: Centre) async throws {
-    await centre.importingService.applyPendingImport()
+    await centre.importingAPI.applyPendingImport()
   }
 }

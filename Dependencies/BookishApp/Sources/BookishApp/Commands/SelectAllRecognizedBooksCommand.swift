@@ -8,7 +8,7 @@ import CommandsUI
 import Icons
 
 /// Selects every candidate currently shown in the scanning list.
-public struct SelectAllRecognizedBooksCommand<Centre: BookishRecognitionService.Provider>:
+public struct SelectAllRecognizedBooksCommand<Centre: BookishRecognitionService.Access>:
   CommandWithUI
 {
   /// The command does not return a value after changing the selection.
@@ -23,7 +23,7 @@ public struct SelectAllRecognizedBooksCommand<Centre: BookishRecognitionService.
 
   /// Enables the command when at least one candidate is not selected.
   public func availability(centre: Centre) -> CommandAvailability {
-    let recognition = centre.recognitionService
+    let recognition = centre.recognitionAPI
     return !recognition.candidates.isEmpty
       && recognition.selectedCandidateIDs.count < recognition.candidates.count
       ? .enabled : .disabled
@@ -40,6 +40,6 @@ public struct SelectAllRecognizedBooksCommand<Centre: BookishRecognitionService.
 
   /// Selects all candidates through the recognition workflow.
   public func perform(centre: Centre) async throws {
-    centre.recognitionService.selectAllCandidates()
+    centre.recognitionAPI.selectAllCandidates()
   }
 }

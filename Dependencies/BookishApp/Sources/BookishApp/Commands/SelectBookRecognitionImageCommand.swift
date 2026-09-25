@@ -7,8 +7,7 @@ import Commands
 import Foundation
 
 /// Replaces the image used by the scanning workflow.
-public struct SelectBookRecognitionImageCommand<Centre: BookishRecognitionService.Provider>: Command
-{
+public struct SelectBookRecognitionImageCommand<Centre: BookishRecognitionService.Access>: Command {
   /// The command does not return a value after replacing the image.
   public typealias ResultType = Void
   /// The image data selected by the user.
@@ -23,11 +22,11 @@ public struct SelectBookRecognitionImageCommand<Centre: BookishRecognitionServic
 
   /// Disables image replacement while recognition is underway.
   public func availability(centre: Centre) -> CommandAvailability {
-    centre.recognitionService.isRecognizing ? .disabled : .enabled
+    centre.recognitionAPI.isRecognizing ? .disabled : .enabled
   }
 
   /// Replaces the recognition image without starting recognition.
   public func perform(centre: Centre) async throws {
-    centre.recognitionService.selectImage(data: imageData)
+    centre.recognitionAPI.selectImage(data: imageData)
   }
 }

@@ -12,11 +12,11 @@ The package currently includes:
   services and vends each service's command `API` to commands.
 - `BookishCommander`, the command façade injected into SwiftUI.
 - Application services in `Services/`, each with the nested
-  `State`/`API`/`Provider` shape described in
+  `State`/`API`/`Access` shape described in
   `Extras/Documentation/Command and Environment Design.md`: storage, navigation,
   presentation, browser refresh, status, importing, exporting, record creation,
   record actions, recognition, lookup, and settings presentation.
-- Commands in `Commands/`, each generic over the smallest service `Provider`.
+- Commands in `Commands/`, each generic over the smallest service `Access` protocol.
 - `BookishRootView`, the root SwiftUI interface with the sidebar, record index,
   record detail, and workflow views.
 - `BookishMutationDebugView`, a debug-only mutation browser designed

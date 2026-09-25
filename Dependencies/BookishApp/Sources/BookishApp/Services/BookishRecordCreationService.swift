@@ -10,20 +10,6 @@ import Foundation
 /// Creates user records and reveals them in a suitable browser index.
 @MainActor
 public final class BookishRecordCreationService {
-  /// Creates records requested by New commands.
-  @MainActor
-  public protocol API: AnyObject {
-    /// Whether a visible index can show a new record of this type.
-    func canCreate(_ type: BookishNewRecordType) -> Bool
-    /// Creates and selects a record of the requested type.
-    func create(_ type: BookishNewRecordType) async throws
-  }
-
-  @MainActor
-  public protocol Provider: CommandCentre {
-    var recordCreationService: any API { get }
-  }
-
   /// The storage service that persists new records.
   private let storage: BookishStorageService
 
@@ -42,6 +28,22 @@ public final class BookishRecordCreationService {
     self.storage = storage
     self.navigation = navigation
     self.browser = browser
+  }
+}
+
+extension BookishRecordCreationService {
+  /// Creates records requested by New commands.
+  @MainActor
+  public protocol API: AnyObject {
+    /// Whether a visible index can show a new record of this type.
+    func canCreate(_ type: BookishNewRecordType) -> Bool
+    /// Creates and selects a record of the requested type.
+    func create(_ type: BookishNewRecordType) async throws
+  }
+
+  @MainActor
+  public protocol Access: CommandCentre {
+    var recordCreationAPI: any API { get }
   }
 }
 
@@ -94,4 +96,4 @@ extension BookishRecordCreationService {
   }
 }
 
-extension BookishEngine: BookishRecordCreationService.Provider {}
+extension BookishEngine: BookishRecordCreationService.Access {}

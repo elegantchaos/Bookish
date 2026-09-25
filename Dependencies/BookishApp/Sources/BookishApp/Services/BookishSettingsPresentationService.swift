@@ -9,6 +9,13 @@ import Observation
 /// Owns presentation of the iOS settings sheet.
 @MainActor
 public final class BookishSettingsPresentationService {
+  public let state = State()
+
+  /// Creates a settings presentation service with the sheet hidden.
+  public init() {}
+}
+
+extension BookishSettingsPresentationService {
   /// Presents the settings sheet through commands.
   @MainActor
   public protocol API: AnyObject {
@@ -19,8 +26,8 @@ public final class BookishSettingsPresentationService {
   }
 
   @MainActor
-  public protocol Provider: CommandCentre {
-    var settingsPresentationService: any API { get }
+  public protocol Access: CommandCentre {
+    var settingsPresentationAPI: any API { get }
   }
 
   @MainActor
@@ -31,11 +38,6 @@ public final class BookishSettingsPresentationService {
 
     fileprivate init() {}
   }
-
-  public let state = State()
-
-  /// Creates a settings presentation service with the sheet hidden.
-  public init() {}
 }
 
 extension BookishSettingsPresentationService: BookishSettingsPresentationService.API {
@@ -48,4 +50,4 @@ extension BookishSettingsPresentationService: BookishSettingsPresentationService
   }
 }
 
-extension BookishEngine: BookishSettingsPresentationService.Provider {}
+extension BookishEngine: BookishSettingsPresentationService.Access {}

@@ -9,7 +9,7 @@ import CommandsUI
 import Icons
 
 /// Selects the provider used by subsequent metadata lookups.
-public struct SelectLookupProviderCommand<Centre: BookishLookupWorkflowService.Provider>:
+public struct SelectLookupProviderCommand<Centre: BookishLookupWorkflowService.Access>:
   CommandWithUI
 {
   /// The command does not return a value after selecting a provider.
@@ -28,8 +28,8 @@ public struct SelectLookupProviderCommand<Centre: BookishLookupWorkflowService.P
 
   /// Enables selection only for a provider that can execute requests.
   public func availability(centre: Centre) -> CommandAvailability {
-    !centre.lookupWorkflowService.isLookingUp
-      && centre.lookupWorkflowService.isProviderSupported(providerID)
+    !centre.lookupWorkflowAPI.isLookingUp
+      && centre.lookupWorkflowAPI.isProviderSupported(providerID)
       ? .enabled : .disabled
   }
 
@@ -46,6 +46,6 @@ public struct SelectLookupProviderCommand<Centre: BookishLookupWorkflowService.P
 
   /// Selects the provider through the lookup workflow.
   public func perform(centre: Centre) async throws {
-    centre.lookupWorkflowService.selectProvider(providerID)
+    centre.lookupWorkflowAPI.selectProvider(providerID)
   }
 }

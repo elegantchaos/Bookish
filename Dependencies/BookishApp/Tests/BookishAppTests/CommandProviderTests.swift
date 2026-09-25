@@ -20,7 +20,7 @@ struct CommandProviderTests {
   @Test
   func importCommandsUseTheVendedImportPresentation() async throws {
     let importingService = TestImportPresentation()
-    let centre = TestCommandCentre(importingService: importingService)
+    let centre = TestCommandCentre(importingAPI: importingService)
     let interchangeURL = URL(filePath: "/tmp/library.bookish.json")
     let deliciousLibraryURL = URL(filePath: "/tmp/library.xml")
 
@@ -46,7 +46,7 @@ struct CommandProviderTests {
   @Test
   func browserSettingsCommandsUseTheVendedBrowserSettingsService() async throws {
     let browserSettings = TestBrowserSettings()
-    let centre = TestCommandCentre(browserService: browserSettings)
+    let centre = TestCommandCentre(browserAPI: browserSettings)
 
     try await centre.perform(SetDebugIndexVisibilityCommand(isVisible: true))
 
@@ -56,7 +56,7 @@ struct CommandProviderTests {
   @Test
   func settingsCommandsUseTheVendedPresentation() async throws {
     let settings = TestSettingsPresentation()
-    let centre = TestCommandCentre(settingsPresentationService: settings)
+    let centre = TestCommandCentre(settingsPresentationAPI: settings)
 
     try await centre.perform(OpenSettingsCommand())
     #expect(settings.isOpen)
@@ -67,7 +67,7 @@ struct CommandProviderTests {
   @Test
   func newCommandsUseTheVendedRecordCreation() async throws {
     let creation = TestRecordCreation()
-    let centre = TestCommandCentre(recordCreationService: creation)
+    let centre = TestCommandCentre(recordCreationAPI: creation)
 
     try await centre.perform(NewRecordCommand(type: .book))
 
@@ -79,8 +79,8 @@ struct CommandProviderTests {
     let exporting = TestExportingService(hasExportableRecords: true)
     let storageService = TestStorageService()
     let centre = TestCommandCentre(
-      exportingService: exporting,
-      storageService: storageService
+      exportingAPI: exporting,
+      storageAPI: storageService
     )
 
     try await centre.perform(ExportInterchangeCommand())
@@ -95,7 +95,7 @@ struct CommandProviderTests {
   @Test
   func recordActionCommandsUseTheVendedRecordActionService() async throws {
     let recordActionsService = TestRecordActionService(hasSelectedRecord: true)
-    let centre = TestCommandCentre(recordActionsService: recordActionsService)
+    let centre = TestCommandCentre(recordActionsAPI: recordActionsService)
 
     try await centre.perform(MarkReadingCommand())
     try await centre.perform(MarkFinishedCommand())
@@ -109,7 +109,7 @@ struct CommandProviderTests {
   @Test
   func recordActionCommandsPassTheVisibleRecordID() async throws {
     let actions = TestRecordActionService(hasSelectedRecord: true)
-    let centre = TestCommandCentre(recordActionsService: actions)
+    let centre = TestCommandCentre(recordActionsAPI: actions)
     let visibleID = BookishRecordID("linked-book")
 
     try await centre.perform(MarkReadingCommand(recordID: visibleID))
@@ -129,7 +129,7 @@ struct CommandProviderTests {
       ],
       selectedCandidateIDs: ["Refactoring|Martin Fowler"]
     )
-    let centre = TestCommandCentre(recognitionService: recognitionService)
+    let centre = TestCommandCentre(recognitionAPI: recognitionService)
 
     let command = AddSelectedRecognizedBooksCommand<TestCommandCentre>()
 
@@ -150,7 +150,7 @@ struct CommandProviderTests {
       BookRecognitionCandidate(title: "Domain-Driven Design", authors: [], confidence: 0.95),
     ]
     let recognitionService = TestBookRecognitionWorkflow(candidates: candidates)
-    let centre = TestCommandCentre(recognitionService: recognitionService)
+    let centre = TestCommandCentre(recognitionAPI: recognitionService)
 
     try await centre.perform(SelectAllRecognizedBooksCommand())
 
@@ -164,7 +164,7 @@ struct CommandProviderTests {
   @Test
   func recognitionCommandsSelectAMethodAndCaptureTheImage() async throws {
     let recognitionService = TestBookRecognitionWorkflow()
-    let centre = TestCommandCentre(recognitionService: recognitionService)
+    let centre = TestCommandCentre(recognitionAPI: recognitionService)
 
     try await centre.perform(SelectBookRecognitionImageCommand(imageData: Data([0xFF])))
     try await centre.perform(SelectRecognitionProviderCommand(.ocrOnly))
@@ -178,7 +178,7 @@ struct CommandProviderTests {
   @Test
   func lookupCommandsSelectTheVendedLookupProvider() async throws {
     let lookupWorkflowService = TestBookLookupWorkflow()
-    let centre = TestCommandCentre(lookupWorkflowService: lookupWorkflowService)
+    let centre = TestCommandCentre(lookupWorkflowAPI: lookupWorkflowService)
 
     try await centre.perform(SelectLookupProviderCommand(.openLibrary))
 
@@ -245,7 +245,7 @@ struct CommandProviderTests {
   @Test
   func indexCommandsUseTheVendedNavigationService() async throws {
     let navigationService = TestNavigationService(canSelectAnotherRecordIndex: true)
-    let centre = TestCommandCentre(navigationService: navigationService)
+    let centre = TestCommandCentre(navigationAPI: navigationService)
 
     try await centre.perform(SelectNextRecordIndexCommand())
     try await centre.perform(SelectPreviousRecordIndexCommand())
@@ -257,7 +257,7 @@ struct CommandProviderTests {
   @Test
   func navigationCommandsUseTheVendedNavigationService() async throws {
     let navigationService = TestNavigationService(canSelectAnotherRecord: true)
-    let centre = TestCommandCentre(navigationService: navigationService)
+    let centre = TestCommandCentre(navigationAPI: navigationService)
     let recordIndexID = BookishRecordID("books")
     let recordID = BookishRecordID("book-1")
 
@@ -282,56 +282,56 @@ struct CommandProviderTests {
 @MainActor
 private final class TestCommandCentre:
   CommandCentre,
-  BookishImportingService.Provider,
-  BookishExportingService.Provider,
-  BookishStorageService.Provider,
-  BookishStatusService.Provider,
-  BookishRecordActionsService.Provider,
-  BookishRecognitionService.Provider,
-  BookishLookupWorkflowService.Provider,
-  BookishNavigationService.Provider,
-  BookishBrowserService.Provider,
-  BookishSettingsPresentationService.Provider,
-  BookishRecordCreationService.Provider
+  BookishImportingService.Access,
+  BookishExportingService.Access,
+  BookishStorageService.Access,
+  BookishStatusService.Access,
+  BookishRecordActionsService.Access,
+  BookishRecognitionService.Access,
+  BookishLookupWorkflowService.Access,
+  BookishNavigationService.Access,
+  BookishBrowserService.Access,
+  BookishSettingsPresentationService.Access,
+  BookishRecordCreationService.Access
 {
-  let importingService: any BookishImportingService.API
-  let exportingService: any BookishExportingService.API
-  let storageService: any BookishStorageService.API
-  let statusService: any BookishStatusService.API
-  let recordActionsService: any BookishRecordActionsService.API
-  let recognitionService: any BookishRecognitionService.API
-  let lookupWorkflowService: any BookishLookupWorkflowService.API
-  let navigationService: any BookishNavigationService.API
-  let browserService: any BookishBrowserService.API
-  let settingsPresentationService: any BookishSettingsPresentationService.API
-  let recordCreationService: any BookishRecordCreationService.API
+  let importingAPI: any BookishImportingService.API
+  let exportingAPI: any BookishExportingService.API
+  let storageAPI: any BookishStorageService.API
+  let statusAPI: any BookishStatusService.API
+  let recordActionsAPI: any BookishRecordActionsService.API
+  let recognitionAPI: any BookishRecognitionService.API
+  let lookupWorkflowAPI: any BookishLookupWorkflowService.API
+  let navigationAPI: any BookishNavigationService.API
+  let browserAPI: any BookishBrowserService.API
+  let settingsPresentationAPI: any BookishSettingsPresentationService.API
+  let recordCreationAPI: any BookishRecordCreationService.API
 
   init(
-    importingService: any BookishImportingService.API = TestImportPresentation(),
-    exportingService: any BookishExportingService.API =
+    importingAPI: any BookishImportingService.API = TestImportPresentation(),
+    exportingAPI: any BookishExportingService.API =
       TestExportingService(),
-    storageService: any BookishStorageService.API = TestStorageService(),
-    statusService: any BookishStatusService.API = TestStatusService(),
-    recordActionsService: any BookishRecordActionsService.API = TestRecordActionService(),
-    recognitionService: any BookishRecognitionService.API = TestBookRecognitionWorkflow(),
-    lookupWorkflowService: any BookishLookupWorkflowService.API = TestBookLookupWorkflow(),
-    navigationService: any BookishNavigationService.API = TestNavigationService(),
-    browserService: any BookishBrowserService.API = TestBrowserSettings(),
-    settingsPresentationService: any BookishSettingsPresentationService.API =
+    storageAPI: any BookishStorageService.API = TestStorageService(),
+    statusAPI: any BookishStatusService.API = TestStatusService(),
+    recordActionsAPI: any BookishRecordActionsService.API = TestRecordActionService(),
+    recognitionAPI: any BookishRecognitionService.API = TestBookRecognitionWorkflow(),
+    lookupWorkflowAPI: any BookishLookupWorkflowService.API = TestBookLookupWorkflow(),
+    navigationAPI: any BookishNavigationService.API = TestNavigationService(),
+    browserAPI: any BookishBrowserService.API = TestBrowserSettings(),
+    settingsPresentationAPI: any BookishSettingsPresentationService.API =
       TestSettingsPresentation(),
-    recordCreationService: any BookishRecordCreationService.API = TestRecordCreation()
+    recordCreationAPI: any BookishRecordCreationService.API = TestRecordCreation()
   ) {
-    self.importingService = importingService
-    self.exportingService = exportingService
-    self.storageService = storageService
-    self.statusService = statusService
-    self.recordActionsService = recordActionsService
-    self.recognitionService = recognitionService
-    self.lookupWorkflowService = lookupWorkflowService
-    self.navigationService = navigationService
-    self.browserService = browserService
-    self.settingsPresentationService = settingsPresentationService
-    self.recordCreationService = recordCreationService
+    self.importingAPI = importingAPI
+    self.exportingAPI = exportingAPI
+    self.storageAPI = storageAPI
+    self.statusAPI = statusAPI
+    self.recordActionsAPI = recordActionsAPI
+    self.recognitionAPI = recognitionAPI
+    self.lookupWorkflowAPI = lookupWorkflowAPI
+    self.navigationAPI = navigationAPI
+    self.browserAPI = browserAPI
+    self.settingsPresentationAPI = settingsPresentationAPI
+    self.recordCreationAPI = recordCreationAPI
   }
 }
 

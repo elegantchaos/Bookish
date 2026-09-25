@@ -18,90 +18,6 @@ import Observation
 /// Owns the Import workflow: reading a source, reviewing its proposal, and applying it to storage.
 @MainActor
 public final class BookishImportingService {
-  /// Starts, applies, and cancels imports requested by commands.
-  @MainActor
-  public protocol API: AnyObject {
-    /// Whether a prepared import can be applied.
-    var canApplyPendingImport: Bool { get }
-    /// Requests an interchange file import.
-    func requestInterchangeImport()
-    /// Requests a Delicious Library file import.
-    func requestDeliciousLibraryImport()
-    /// Requests access to the Kindle library database folder.
-    func requestKindleLibraryImport()
-    /// Imports a bundled Delicious Library sample.
-    func importDeliciousLibrary(sample: DeliciousLibrarySample) async
-    /// Imports a selected interchange file.
-    func importInterchange(from url: URL) async
-    /// Imports a selected Delicious Library export.
-    func importDeliciousLibrary(from url: URL) async
-    /// Imports a selected Kindle library database folder.
-    func importKindleLibrary(from url: URL) async
-    /// Applies the current review choices.
-    func applyPendingImport() async
-    /// Discards the current proposal.
-    func cancelPendingImport()
-  }
-
-  @MainActor
-  public protocol Provider: CommandCentre {
-    var importingService: any API { get }
-  }
-
-  @MainActor
-  @Observable
-  public final class State {
-    /// Whether the interchange import file picker is visible.
-    public var isImportingInterchange = false
-
-    /// Whether the Delicious Library import file picker is visible.
-    public var isImportingDeliciousLibrary = false
-
-    /// The imported records awaiting user review.
-    public fileprivate(set) var pendingImportPlan: BookishImportPlan?
-
-    /// Choices for the pending proposal, initially favouring existing records.
-    public fileprivate(set) var importChoices: [BookishRecordID: BookishImportChoice] = [:]
-
-    /// The last applied import, shown in the Import workflow.
-    public fileprivate(set) var lastImportResult: BookishImportWorkflowResult?
-
-    /// Whether an importer is still reading its source.
-    public fileprivate(set) var isPreparingImport = false
-
-    /// Whether a reviewed proposal is being written to storage.
-    public fileprivate(set) var isApplyingImport = false
-
-    /// A source-reading or apply error shown in the Import workflow.
-    public fileprivate(set) var importErrorMessage: String?
-
-    fileprivate init() {}
-
-    /// Whether all review choices are ready to apply.
-    public var canApplyPendingImport: Bool {
-      guard let pendingImportPlan, !isApplyingImport else { return false }
-      return pendingImportPlan.reviewEntries.allSatisfy { importChoices[$0.id] != nil }
-    }
-
-    /// Sets one review choice.
-    public func setImportChoice(_ choice: BookishImportChoice, for id: BookishRecordID) {
-      guard pendingImportPlan?.reviewEntries.contains(where: { $0.id == id }) == true else {
-        return
-      }
-      importChoices[id] = choice
-    }
-
-    /// Sets the preference for selected review entries in one operation.
-    public func setImportChoices(
-      for ids: Set<BookishRecordID>, preferring preference: BookishImportPreference
-    ) {
-      guard let pendingImportPlan else { return }
-      importChoices.merge(pendingImportPlan.choices(for: ids, preferring: preference)) { _, new in
-        new
-      }
-    }
-  }
-
   public let state = State()
 
   /// The display name of the source that produced the pending proposal.
@@ -184,6 +100,92 @@ public final class BookishImportingService {
         using: DeliciousLibraryImporter(),
         reporting: $0
       )
+    }
+  }
+}
+
+extension BookishImportingService {
+  /// Starts, applies, and cancels imports requested by commands.
+  @MainActor
+  public protocol API: AnyObject {
+    /// Whether a prepared import can be applied.
+    var canApplyPendingImport: Bool { get }
+    /// Requests an interchange file import.
+    func requestInterchangeImport()
+    /// Requests a Delicious Library file import.
+    func requestDeliciousLibraryImport()
+    /// Requests access to the Kindle library database folder.
+    func requestKindleLibraryImport()
+    /// Imports a bundled Delicious Library sample.
+    func importDeliciousLibrary(sample: DeliciousLibrarySample) async
+    /// Imports a selected interchange file.
+    func importInterchange(from url: URL) async
+    /// Imports a selected Delicious Library export.
+    func importDeliciousLibrary(from url: URL) async
+    /// Imports a selected Kindle library database folder.
+    func importKindleLibrary(from url: URL) async
+    /// Applies the current review choices.
+    func applyPendingImport() async
+    /// Discards the current proposal.
+    func cancelPendingImport()
+  }
+
+  @MainActor
+  public protocol Access: CommandCentre {
+    var importingAPI: any API { get }
+  }
+
+  @MainActor
+  @Observable
+  public final class State {
+    /// Whether the interchange import file picker is visible.
+    public var isImportingInterchange = false
+
+    /// Whether the Delicious Library import file picker is visible.
+    public var isImportingDeliciousLibrary = false
+
+    /// The imported records awaiting user review.
+    public fileprivate(set) var pendingImportPlan: BookishImportPlan?
+
+    /// Choices for the pending proposal, initially favouring existing records.
+    public fileprivate(set) var importChoices: [BookishRecordID: BookishImportChoice] = [:]
+
+    /// The last applied import, shown in the Import workflow.
+    public fileprivate(set) var lastImportResult: BookishImportWorkflowResult?
+
+    /// Whether an importer is still reading its source.
+    public fileprivate(set) var isPreparingImport = false
+
+    /// Whether a reviewed proposal is being written to storage.
+    public fileprivate(set) var isApplyingImport = false
+
+    /// A source-reading or apply error shown in the Import workflow.
+    public fileprivate(set) var importErrorMessage: String?
+
+    fileprivate init() {}
+
+    /// Whether all review choices are ready to apply.
+    public var canApplyPendingImport: Bool {
+      guard let pendingImportPlan, !isApplyingImport else { return false }
+      return pendingImportPlan.reviewEntries.allSatisfy { importChoices[$0.id] != nil }
+    }
+
+    /// Sets one review choice.
+    public func setImportChoice(_ choice: BookishImportChoice, for id: BookishRecordID) {
+      guard pendingImportPlan?.reviewEntries.contains(where: { $0.id == id }) == true else {
+        return
+      }
+      importChoices[id] = choice
+    }
+
+    /// Sets the preference for selected review entries in one operation.
+    public func setImportChoices(
+      for ids: Set<BookishRecordID>, preferring preference: BookishImportPreference
+    ) {
+      guard let pendingImportPlan else { return }
+      importChoices.merge(pendingImportPlan.choices(for: ids, preferring: preference)) { _, new in
+        new
+      }
     }
   }
 }
@@ -440,4 +442,4 @@ extension BookishImportingService {
   }
 }
 
-extension BookishEngine: BookishImportingService.Provider {}
+extension BookishEngine: BookishImportingService.Access {}
