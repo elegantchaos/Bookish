@@ -403,6 +403,80 @@ struct BookishDatastoreTests {
 
   @Test
 
+  func mutationStorePreservesSubMillisecondCreationOrderAcrossReload() async throws {
+    let directory = try temporaryDirectory().appending(
+      path: "mutations", directoryHint: .isDirectory)
+    let store = try await JSONMutationStore(directoryURL: directory)
+    let bookID = BookishRecordID("book-1")
+    let start = Date(timeIntervalSinceReferenceDate: 1_000.123_456)
+    let created = ["mutation-d", "mutation-c", "mutation-b", "mutation-a"].enumerated().map {
+      index, id in
+      MutationRecord(
+        id: MutationID(id),
+        operation: .setProperty(
+          recordID: bookID, kind: "book", key: "name", value: .string("Name \(index)")),
+        createdAt: start.addingTimeInterval(Double(index) * 0.000_1))
+    }
+
+    for mutation in created {
+      try await store.append(mutation)
+    }
+
+    let reloaded = try await JSONMutationStore(directoryURL: directory)
+    let reloadedMutations = try await reloaded.mutations()
+    #expect(reloadedMutations == created)
+  }
+
+  @Test
+
+  func mutationStoreCreationDatesStrictlyIncrease() async throws {
+    let directory = try temporaryDirectory().appending(
+      path: "mutations", directoryHint: .isDirectory)
+    let store = try await JSONMutationStore(directoryURL: directory)
+    let first = try await store.nextCreationDate()
+    let second = try await store.nextCreationDate()
+    #expect(first < second)
+  }
+
+  @Test
+
+  func mutationStoreCreationDatesFollowLatestStoredMutation() async throws {
+    let directory = try temporaryDirectory().appending(
+      path: "mutations", directoryHint: .isDirectory)
+    let store = try await JSONMutationStore(directoryURL: directory)
+    let future = Date().addingTimeInterval(3_600)
+    try await store.append(
+      MutationRecord(
+        id: MutationID("future"), operation: .deleteRecord(BookishRecordID("book-1")),
+        createdAt: future))
+
+    let next = try await store.nextCreationDate()
+    let reloaded = try await JSONMutationStore(directoryURL: directory)
+    let nextAfterReload = try await reloaded.nextCreationDate()
+    #expect(next > future)
+    #expect(nextAfterReload > future)
+  }
+
+  @Test
+
+  func performedMutationsKeepCreationOrderAfterRebuild() async throws {
+    let directory = try temporaryDirectory()
+    let datastore = try await BookishDatastore(directoryURL: directory)
+    let bookID = BookishRecordID("book-1")
+    for index in 0..<20 {
+      try await datastore.mutationService.perform(
+        .setProperty(recordID: bookID, kind: "book", key: "name", value: .string("Name \(index)"))
+      )
+    }
+
+    let reloaded = try await BookishDatastore(directoryURL: directory)
+    try await reloaded.mutationService.rebuildRecordProjection()
+    let record = try await reloaded.recordStore.record(id: bookID)
+    #expect(record?.properties["name"] == .string("Name 19"))
+  }
+
+  @Test
+
   func mutationStoreMigratesLegacySingleFileLog() async throws {
     let parentDirectory = try temporaryDirectory()
     let legacyFile = parentDirectory.appending(path: "mutations.json")

@@ -9,6 +9,7 @@ public actor JSONMutationStore: MutationStore {
 
   private var mutationsByID: [MutationID: MutationRecord]
   private var appliedMutationIDs: Set<MutationID>
+  private var latestCreationDate: Date?
   private let directoryURL: URL
   private let encoder: JSONEncoder
   private let decoder: JSONDecoder
@@ -31,6 +32,7 @@ public actor JSONMutationStore: MutationStore {
 
     try save(mutation)
     mutationsByID[mutation.id] = mutation
+    noteCreationDate(mutation.createdAt)
   }
 
   /// Returns all stored mutations in creation order.
@@ -42,6 +44,20 @@ public actor JSONMutationStore: MutationStore {
         lhs.createdAt < rhs.createdAt
       }
     }
+  }
+
+  /// Returns a creation date later than any this store has issued or stored.
+  public func nextCreationDate() async throws -> Date {
+    let now = Date()
+    let next =
+      if let latestCreationDate, latestCreationDate >= now {
+        Date(
+          timeIntervalSinceReferenceDate: latestCreationDate.timeIntervalSinceReferenceDate.nextUp)
+      } else {
+        now
+      }
+    latestCreationDate = next
+    return next
   }
 
   /// Marks a mutation as applied to the projection.
@@ -97,6 +113,7 @@ public actor JSONMutationStore: MutationStore {
       try decoder.decode(MutationRecord.self, from: Data(contentsOf: $0))
     }
     mutationsByID = Dictionary(uniqueKeysWithValues: storedMutations.map { ($0.id, $0) })
+    latestCreationDate = storedMutations.map(\.createdAt).max()
     appliedMutationIDs = Set(
       storedMutations.lazy.map(\.id).filter {
         FileManager.default.fileExists(atPath: self.appliedMarkerURL(for: $0).path)
@@ -114,6 +131,7 @@ public actor JSONMutationStore: MutationStore {
 
     let legacyState = try decoder.decode(LegacyState.self, from: Data(contentsOf: legacyFileURL))
     mutationsByID = Dictionary(uniqueKeysWithValues: legacyState.mutations.map { ($0.id, $0) })
+    latestCreationDate = legacyState.mutations.map(\.createdAt).max()
     appliedMutationIDs = legacyState.applied
 
     do {
@@ -129,6 +147,13 @@ public actor JSONMutationStore: MutationStore {
       appliedMutationIDs = []
       throw error
     }
+  }
+
+  private func noteCreationDate(_ date: Date) {
+    if let latestCreationDate, latestCreationDate >= date {
+      return
+    }
+    latestCreationDate = date
   }
 
   private func save(_ mutation: MutationRecord) throws {

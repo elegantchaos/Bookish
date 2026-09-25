@@ -9,6 +9,13 @@ public protocol MutationStore: Sendable {
   /// Returns all stored mutations in creation order.
   func mutations() async throws -> [MutationRecord]
 
+  /// Returns a creation date for a new local mutation.
+  ///
+  /// Each date is later than every previously issued date and every stored mutation's
+  /// creation date, so local mutations sort after everything this store has seen, even if
+  /// the wall clock steps backwards.
+  func nextCreationDate() async throws -> Date
+
   /// Marks a mutation as applied to the projection.
   func markApplied(_ id: MutationID) async throws
 
