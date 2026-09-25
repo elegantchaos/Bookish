@@ -275,16 +275,8 @@ import Testing
       try await harness.storage.record(id: BookishRecordID("datastore-book-layout"))?.kind
         == BookishRecordKind.layout)
     let mutationsAfterReset = try await harness.storage.mutations()
-    #expect(Set(mutationsAfterReset.map(\.id)) == Set(mutationsBeforeReset.map(\.id)))
-    // The book and its import record are written in the same second, and mutation dates are
-    // stored without fractional seconds, so a reload can return them in either order.
-    // Remove this once the datastore preserves creation order.
-    withKnownIssue(
-      "Mutation order within one second is not preserved across a reload", isIntermittent: true
-    ) {
-      #expect(mutationsAfterReset.map(\.id) == mutationsBeforeReset.map(\.id))
-      #expect(mutationsAfterReset.map(\.operation) == mutationsBeforeReset.map(\.operation))
-    }
+    #expect(mutationsAfterReset.map(\.id) == mutationsBeforeReset.map(\.id))
+    #expect(mutationsAfterReset.map(\.operation) == mutationsBeforeReset.map(\.operation))
     #expect(harness.status.state.message == "Rebuilt record store")
   }
 

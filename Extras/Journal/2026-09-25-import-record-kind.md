@@ -49,3 +49,13 @@ each change. Fixing them is deferred.
 
 An empty catalogue after a reset is expected: reset loads configuration seeds
 only, without the sample library.
+
+## Follow-up — mutation order fixed on main
+
+After rebasing onto main with
+[Decision 0023](../Decisions/0023-mutation-creation-time-ordering.md), which
+gives mutations a precise, strictly increasing creation time, the rebuild test's
+known-issue marker was removed and its order checks are strict again. The import
+audit decision was renumbered to
+[Decision 0024](../Decisions/0024-import-sessions-produce-audit-records.md)
+because main had already taken 0023.
