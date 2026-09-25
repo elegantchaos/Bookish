@@ -674,6 +674,17 @@ struct BookishAppTests {
 
   @MainActor
   @Test
+  func kindleLibraryImportCommandRequestsViewOwnedFilePicker() async throws {
+    let harness = makeEngine()
+
+    try await harness.perform(ImportKindleLibraryCommand())
+
+    #expect(harness.importing.state.isImportingKindleLibrary)
+    #expect(harness.navigation.selectedMainSection == .importing)
+  }
+
+  @MainActor
+  @Test
 
   func deliciousLibrarySmallSampleCommandImportsBundledSample() async throws {
     let harness = try makeHarness()
@@ -693,6 +704,23 @@ struct BookishAppTests {
       $0.kind == "book" && $0.string(BookishRecordKey.name) == "Snow Crash"
     }
     #expect(!importedBooks.isEmpty)
+  }
+
+  @MainActor
+  @Test
+  func kindleFixtureCommandImportsBundledDatabase() async throws {
+    let harness = try makeHarness()
+    await harness.load()
+
+    try await harness.perform(ImportKindleLibrarySampleCommand())
+
+    let plan = try #require(harness.importing.state.pendingImportPlan)
+    #expect(harness.navigation.selectedMainSection == .importing)
+    #expect(
+      plan.entries.contains { entry in
+        entry.record.kind == BookishRecordKind.book
+          && entry.record.string(BookishRecordKey.name) == "The Glass Orbit"
+      })
   }
 
   @MainActor

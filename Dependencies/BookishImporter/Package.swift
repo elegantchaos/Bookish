@@ -42,8 +42,7 @@ let package = Package(
         "BookishImporter",
         "BookishImporterSamples",
         .product(name: "BookishCoding", package: "BookishCoding"),
-      ],
-      resources: [.copy("Fixtures/BookData.sqlite")]
+      ]
     ),
   ]
 )

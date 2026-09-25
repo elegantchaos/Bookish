@@ -56,6 +56,11 @@ public struct BookishRootView: View {
       allowedContentTypes: [.xml],
       onCompletion: handleDeliciousLibraryImport
     )
+    .fileImporter(
+      isPresented: $importing.isImportingKindleLibrary,
+      allowedContentTypes: [.item],
+      onCompletion: handleKindleLibraryImport
+    )
     .fileExporter(
       isPresented: $exporting.isExportingInterchange,
       document: exporting.interchangeExportDocument,
@@ -151,6 +156,17 @@ extension BookishRootView {
     switch result {
     case .success(let url):
       commander.perform(ImportSelectedDeliciousLibraryCommand(url: url))
+
+    case .failure(let error):
+      status.report(error: error)
+    }
+  }
+
+  /// Imports a selected Kindle database or reports a picker failure.
+  private func handleKindleLibraryImport(_ result: Result<URL, Error>) {
+    switch result {
+    case .success(let url):
+      commander.perform(ImportSelectedKindleLibraryCommand(url: url))
 
     case .failure(let error):
       status.report(error: error)

@@ -47,7 +47,10 @@ public struct BookishCommands: Commands {
 
       Menu("Import") {
         engine.button(ImportInterchangeCommand()) { Text("Interchange File…") }
-        engine.button(ImportKindleLibraryCommand()) { Text("Kindle Library…") }
+        Menu("Kindle Library") {
+          engine.button(ImportKindleLibrarySampleCommand())
+          engine.button(ImportKindleLibraryCommand())
+        }
         Menu("Delicious Library") {
           if featureMode.showsAdvanced {
             engine.button(ImportDeliciousLibrarySampleCommand(sample: .small))

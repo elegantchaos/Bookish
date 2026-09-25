@@ -46,4 +46,12 @@ public enum BookishImporterSamples {
     }
     return url
   }
+
+  /// Returns the bundled synthetic Kindle database.
+  public static func kindleLibraryURL() throws -> URL {
+    guard let url = Bundle.module.url(forResource: "BookData", withExtension: "sqlite") else {
+      throw BookishImporterSampleError.missingBundledSample("BookData.sqlite")
+    }
+    return url
+  }
 }

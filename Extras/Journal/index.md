@@ -1,5 +1,6 @@
 # Journal Index
 
+- [2026-09-25 Import Toolbar Choices](2026-09-25-import-toolbar-choices.md)
 - [2026-09-25 Stable Mutation Order](2026-09-25-stable-mutation-order.md)
 - [2026-09-25 Compact Index Navigation](2026-09-25-compact-index-navigation.md)
 - [2026-09-25 Full Code Review](2026-09-25-full-code-review.md)

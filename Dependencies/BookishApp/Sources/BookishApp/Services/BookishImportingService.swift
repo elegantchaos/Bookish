@@ -11,10 +11,6 @@ import Commands
 import Foundation
 import Observation
 
-#if os(macOS)
-  import AppKit
-#endif
-
 /// Owns the Import workflow: reading a source, reviewing its proposal, and applying it to storage.
 @MainActor
 public final class BookishImportingService {
@@ -114,10 +110,12 @@ extension BookishImportingService {
     func requestInterchangeImport()
     /// Requests a Delicious Library file import.
     func requestDeliciousLibraryImport()
-    /// Requests access to the Kindle library database folder.
+    /// Requests a Kindle database file.
     func requestKindleLibraryImport()
     /// Imports a bundled Delicious Library sample.
     func importDeliciousLibrary(sample: DeliciousLibrarySample) async
+    /// Imports the bundled synthetic Kindle database.
+    func importKindleLibrarySample() async
     /// Imports a selected interchange file.
     func importInterchange(from url: URL) async
     /// Imports a selected Delicious Library export.
@@ -143,6 +141,9 @@ extension BookishImportingService {
 
     /// Whether the Delicious Library import file picker is visible.
     public var isImportingDeliciousLibrary = false
+
+    /// Whether the Kindle database file picker is visible.
+    public var isImportingKindleLibrary = false
 
     /// The imported records awaiting user review.
     public fileprivate(set) var pendingImportPlan: BookishImportPlan?
@@ -203,24 +204,10 @@ extension BookishImportingService: BookishImportingService.API {
     state.isImportingDeliciousLibrary = true
   }
 
-  /// Opens the system permission picker at Kindle's database directory.
+  /// Requests a Kindle database file through the view-owned picker.
   public func requestKindleLibraryImport() {
     guard showImportWorkflowIfReady() else { return }
-    #if os(macOS)
-      let panel = NSOpenPanel()
-      panel.canChooseDirectories = true
-      panel.canChooseFiles = false
-      panel.canCreateDirectories = false
-      panel.allowsMultipleSelection = false
-      panel.prompt = "Grant Access"
-      panel.message = "Select the Protected folder containing BookData.sqlite."
-      panel.directoryURL = FileManager.default.homeDirectoryForCurrentUser
-        .appending(path: "Library/Containers/com.amazon.Lassen/Data/Library/Protected")
-      panel.begin { [weak self] response in
-        guard response == .OK, let url = panel.url else { return }
-        Task { @MainActor [weak self] in await self?.importKindleLibrary(from: url) }
-      }
-    #endif
+    state.isImportingKindleLibrary = true
   }
 
   /// Imports one of the Delicious Library sample files bundled with Bookish.
@@ -229,6 +216,17 @@ extension BookishImportingService: BookishImportingService.API {
     do {
       await importDeliciousLibrary(
         from: try BookishImporterSamples.deliciousLibraryURL(for: sample))
+    } catch {
+      state.importErrorMessage = error.localizedDescription
+      statusService.report(error: error)
+    }
+  }
+
+  /// Imports the bundled synthetic Kindle database.
+  public func importKindleLibrarySample() async {
+    guard showImportWorkflowIfReady() else { return }
+    do {
+      await importKindleLibrary(from: try BookishImporterSamples.kindleLibraryURL())
     } catch {
       state.importErrorMessage = error.localizedDescription
       statusService.report(error: error)

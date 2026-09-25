@@ -23,22 +23,27 @@ struct CommandProviderTests {
     let centre = TestCommandCentre(importingAPI: importingService)
     let interchangeURL = URL(filePath: "/tmp/library.bookish.json")
     let deliciousLibraryURL = URL(filePath: "/tmp/library.xml")
+    let kindleLibraryURL = URL(filePath: "/tmp/BookData.sqlite")
 
     try await centre.perform(ImportInterchangeCommand())
     try await centre.perform(ImportOtherDeliciousLibraryCommand())
     try await centre.perform(ImportKindleLibraryCommand())
+    try await centre.perform(ImportKindleLibrarySampleCommand())
     try await centre.perform(ImportDeliciousLibrarySampleCommand(sample: .small))
     try await centre.perform(ImportSelectedInterchangeCommand(url: interchangeURL))
     try await centre.perform(ImportSelectedDeliciousLibraryCommand(url: deliciousLibraryURL))
+    try await centre.perform(ImportSelectedKindleLibraryCommand(url: kindleLibraryURL))
     try await centre.perform(ApplyPendingImportCommand())
     try await centre.perform(CancelPendingImportCommand())
 
     #expect(importingService.requestedInterchangeImport)
     #expect(importingService.requestedDeliciousLibraryImport)
     #expect(importingService.requestedKindleLibraryImport)
+    #expect(importingService.importedKindleSample)
     #expect(importingService.importedSample == .small)
     #expect(importingService.importedInterchangeURL == interchangeURL)
     #expect(importingService.importedDeliciousLibraryURL == deliciousLibraryURL)
+    #expect(importingService.importedKindleLibraryURL == kindleLibraryURL)
     #expect(importingService.appliedPendingImport)
     #expect(importingService.cancelledPendingImport)
   }
@@ -451,6 +456,7 @@ private final class TestImportPresentation: BookishImportingService.API {
   private(set) var requestedInterchangeImport = false
   private(set) var requestedDeliciousLibraryImport = false
   private(set) var requestedKindleLibraryImport = false
+  private(set) var importedKindleSample = false
   private(set) var importedSample: DeliciousLibrarySample?
   private(set) var importedInterchangeURL: URL?
   private(set) var importedDeliciousLibraryURL: URL?
@@ -466,6 +472,10 @@ private final class TestImportPresentation: BookishImportingService.API {
 
   func requestKindleLibraryImport() {
     requestedKindleLibraryImport = true
+  }
+
+  func importKindleLibrarySample() async {
+    importedKindleSample = true
   }
 
   func importDeliciousLibrary(sample: DeliciousLibrarySample) async {

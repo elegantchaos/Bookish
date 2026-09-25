@@ -1,3 +1,4 @@
+import BookishImporterSamples
 import BookishRecord
 import Foundation
 import Testing
@@ -8,7 +9,7 @@ struct KindleLibraryImporterTests {
   @Test
   func importsBooksFromSyntheticDatabase() async throws {
     let events = try await collect(
-      KindleLibraryImporter().importEvents(from: KindleLibrarySource(url: fixtureURL())))
+      KindleLibraryImporter().importEvents(from: KindleLibrarySource(url: try fixtureURL())))
     let records = events.flatMap { event -> [BookishRecord] in
       guard case .records(let batch) = event else { return [] }
       return batch
@@ -55,16 +56,16 @@ struct KindleLibraryImporterTests {
   func repeatedExtractionProducesTheSameProposals() async throws {
     let importer = KindleLibraryImporter()
     let first = try await collect(
-      importer.importEvents(from: KindleLibrarySource(url: fixtureURL())))
+      importer.importEvents(from: KindleLibrarySource(url: try fixtureURL())))
     let second = try await collect(
-      importer.importEvents(from: KindleLibrarySource(url: fixtureURL())))
+      importer.importEvents(from: KindleLibrarySource(url: try fixtureURL())))
 
     #expect(first == second)
   }
 
   @Test
   func acceptsContainingFolderAsSource() async throws {
-    let source = KindleLibrarySource(url: fixtureURL().deletingLastPathComponent())
+    let source = KindleLibrarySource(url: try fixtureURL().deletingLastPathComponent())
     let events = try await collect(KindleLibraryImporter().importEvents(from: source))
     #expect(
       events.contains { event in
@@ -93,8 +94,8 @@ struct KindleLibraryImporterTests {
     }
   }
 
-  private func fixtureURL() -> URL {
-    Bundle.module.url(forResource: "BookData", withExtension: "sqlite")!
+  private func fixtureURL() throws -> URL {
+    try BookishImporterSamples.kindleLibraryURL()
   }
 
   private func collect(

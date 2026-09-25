@@ -2,7 +2,7 @@ import Commands
 import CommandsUI
 import Icons
 
-/// Requests access to Kindle's local library database.
+/// Opens the picker for a Kindle library database file.
 public struct ImportKindleLibraryCommand<Centre: BookishImportingService.Access>: CommandWithUI {
   public typealias ResultType = Void
 
@@ -10,12 +10,12 @@ public struct ImportKindleLibraryCommand<Centre: BookishImportingService.Access>
 
   public init() {}
 
-  public func name(centre _: Centre) -> String { "Import Kindle Library…" }
+  public func name(centre _: Centre) -> String { "Choose File…" }
 
   public func icon(centre _: Centre) -> Icon { Icon("books.vertical") }
 
   public func help(centre _: Centre) -> String? {
-    "Import new Kindle titles from the local Kindle for Mac database."
+    "Choose a Kindle BookData.sqlite database to import."
   }
 
   public func perform(centre: Centre) async throws {
