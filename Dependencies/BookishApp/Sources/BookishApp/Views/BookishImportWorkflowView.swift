@@ -48,5 +48,14 @@ struct BookishImportWorkflowView: View {
       }
     }
     .navigationTitle("Import")
+    .toolbar {
+      if uiState.pendingImportPlan == nil {
+        commander.toolbarItem(ImportInterchangeCommand())
+        commander.toolbarItem(ImportOtherDeliciousLibraryCommand())
+      } else {
+        commander.toolbarItem(CancelPendingImportCommand())
+        commander.toolbarItem(ApplyPendingImportCommand())
+      }
+    }
   }
 }

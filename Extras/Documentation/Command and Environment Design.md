@@ -67,6 +67,13 @@ include selecting navigation destinations, importing a file selected by a system
 picker, changing browser debug visibility, marking a record, and adding
 recognition candidates.
 
+Toolbar content belongs to the view that owns its context. Workflows offer
+their own commands, the active index offers navigation and its configured New
+action, and each visible book detail offers commands targeting that book's ID.
+The iOS Settings toolbar action opens the app's settings sheet through a
+command. Index records declare their creatable kinds in `newRecordTypes`,
+separately from the advisory `types` used for presentation.
+
 Direct bindings are a deliberate exception. SwiftUI controls such as `Picker`,
 `Toggle`, and `NavigationStack(path:)` need stable bindings and may write their
 bound value directly for now. A future command-intercepting binding wrapper may

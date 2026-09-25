@@ -41,6 +41,9 @@ struct BookCaptureView: View {
         SelectBookRecognitionImageCommand(imageData: imageData)
       )
     }
+    .toolbar {
+      commander.toolbarItem(CaptureBooksCommand())
+    }
   }
 
   /// Loads a selected image file into the recognition workflow.

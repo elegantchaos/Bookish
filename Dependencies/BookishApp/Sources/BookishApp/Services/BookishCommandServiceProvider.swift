@@ -30,6 +30,20 @@ public protocol BookishBrowserSettingsProvider: CommandCentre {
   var browserSettingsService: any BookishBrowserSettings { get }
 }
 
+/// Vends settings presentation to settings commands.
+@MainActor
+public protocol BookishSettingsPresentationProvider: CommandCentre {
+  /// The settings presentation owned by the app shell.
+  var settingsPresentation: any BookishSettingsPresentation { get }
+}
+
+/// Vends record creation to New commands.
+@MainActor
+public protocol BookishRecordCreationProvider: CommandCentre {
+  /// The creation service owned by the app shell.
+  var recordCreation: any BookishRecordCreation { get }
+}
+
 /// Vends datastore maintenance actions to maintenance commands.
 @MainActor
 public protocol BookishDatastoreMaintenanceProvider: CommandCentre {
@@ -76,6 +90,8 @@ extension BookishEngine:
   BookishStatusProvider,
   BookishImportPresentationProvider,
   BookishBrowserSettingsProvider,
+  BookishSettingsPresentationProvider,
+  BookishRecordCreationProvider,
   BookishDatastoreMaintenanceProvider,
   BookishStorageProvider,
   BookishRecordActionsProvider,

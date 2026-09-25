@@ -7,16 +7,17 @@ import BookishDatastore
 import BookishRecord
 import Foundation
 
-
 /// Performs selected-record actions requested by commands.
 @MainActor
 public protocol BookishRecordActions {
   /// Whether a record is selected.
   var hasSelectedRecord: Bool { get }
+  /// Whether the requested record can receive an action.
+  func canAct(on recordID: BookishRecordID?) -> Bool
   /// Marks the selected record as reading.
-  func markReading() async
+  func markReading(recordID: BookishRecordID?) async
   /// Marks the selected record as finished.
-  func markFinished() async
+  func markFinished(recordID: BookishRecordID?) async
   /// Simulates a remote update.
   func simulateRemoteUpdate() async
 }
@@ -75,14 +76,18 @@ final class BookishRecordActionsService: BookishRecordActions {
     storage.isLoaded && state.selectedRecordID != nil
   }
 
+  func canAct(on recordID: BookishRecordID?) -> Bool {
+    storage.isLoaded && (recordID ?? state.selectedRecordID) != nil
+  }
+
   /// Marks the selected record as currently being read.
-  func markReading() async {
-    await setStatus("Reading")
+  func markReading(recordID: BookishRecordID? = nil) async {
+    await setStatus("Reading", recordID: recordID)
   }
 
   /// Marks the selected record as finished.
-  func markFinished() async {
-    await setStatus("Finished")
+  func markFinished(recordID: BookishRecordID? = nil) async {
+    await setStatus("Finished", recordID: recordID)
   }
 
   /// Simulates a remotely-arrived mutation for the selected record.
@@ -111,8 +116,8 @@ final class BookishRecordActionsService: BookishRecordActions {
   }
 
   /// Updates the selected record's status property.
-  private func setStatus(_ value: String) async {
-    guard storage.isLoaded, let recordID = state.selectedRecordID else {
+  private func setStatus(_ value: String, recordID requestedID: BookishRecordID?) async {
+    guard storage.isLoaded, let recordID = requestedID ?? state.selectedRecordID else {
       return
     }
 

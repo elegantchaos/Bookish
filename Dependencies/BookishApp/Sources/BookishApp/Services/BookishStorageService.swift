@@ -141,6 +141,32 @@ public final class BookishStorageService {
     } else {
       _ = try await importSeedResource("MetadataSeed")
       _ = try await importSeedResource("QuerySectionSeed")
+      try await addMissingSeedIndexCreationTypes()
+    }
+  }
+
+  /// Adds creation metadata to existing seed indexes without replacing user changes.
+  private func addMissingSeedIndexCreationTypes() async throws {
+    guard let datastore,
+      let url = Bundle.module.url(
+        forResource: "IndexSeed.bookish", withExtension: "json")
+    else { throw BookishStorageError.missingSeedResource("IndexSeed") }
+
+    let seed = try BookishInterchangeCodec().decode(Data(contentsOf: url))
+    for index in seed.records {
+      guard let types = index.list(BookishRecordKey.newRecordTypes),
+        let stored = try await datastore.recordStore.record(id: index.id),
+        stored.list(BookishRecordKey.newRecordTypes) == nil
+      else { continue }
+
+      try await datastore.mutationService.perform(
+        .setProperty(
+          recordID: index.id,
+          kind: BookishRecordKind.index,
+          key: BookishRecordKey.newRecordTypes,
+          value: .list(types)
+        )
+      )
     }
   }
 

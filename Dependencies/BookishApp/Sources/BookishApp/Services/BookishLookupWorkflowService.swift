@@ -27,6 +27,11 @@ public final class BookishLookupWorkflowService: BookishLookupWorkflow {
   /// The current lookup query.
   public var query = ""
 
+  /// Whether the current query can be submitted.
+  public var canLookupBooks: Bool {
+    !query.isEmpty && !isLookingUp && isSelectedProviderSupported
+  }
+
   /// The candidates returned by the selected provider.
   public private(set) var candidates: [BookLookupCandidate] = []
 

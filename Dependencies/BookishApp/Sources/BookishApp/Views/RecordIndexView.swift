@@ -54,6 +54,11 @@ struct RecordIndexView: View {
     .task(id: taskID) {
       await loadPresentation()
     }
+    .toolbar {
+      NewRecordToolbar(types: navigation.selectedRecordIndex?.newRecordTypes ?? [])
+      commander.toolbarItem(SelectPreviousRecordCommand())
+      commander.toolbarItem(SelectNextRecordCommand())
+    }
   }
 
   /// Binds list selection to the selected record identifier.

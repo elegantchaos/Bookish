@@ -3,6 +3,7 @@
 //  Copyright © 2026 Elegant Chaos Limited. All rights reserved.
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
+import BookishRecord
 import Commands
 import CommandsUI
 import Foundation
@@ -12,16 +13,19 @@ import Icons
 public struct MarkFinishedCommand<Centre: BookishRecordActionsProvider>: CommandWithUI {
   public typealias ResultType = Void
 
+  public let recordID: BookishRecordID?
+
   public let id = "datastore.mark-finished"
   public var shortcut: CommandShortcut? {
     .init("f", modifiers: [.command, .shift])
   }
 
-  public init() {
+  public init(recordID: BookishRecordID? = nil) {
+    self.recordID = recordID
   }
 
   public func availability(centre: Centre) -> CommandAvailability {
-    centre.recordActionService.hasSelectedRecord ? .enabled : .disabled
+    centre.recordActionService.canAct(on: recordID) ? .enabled : .disabled
   }
 
   public func name(centre: Centre) -> String {
@@ -37,6 +41,6 @@ public struct MarkFinishedCommand<Centre: BookishRecordActionsProvider>: Command
   }
 
   public func perform(centre: Centre) async throws {
-    await centre.recordActionService.markFinished()
+    await centre.recordActionService.markFinished(recordID: recordID)
   }
 }

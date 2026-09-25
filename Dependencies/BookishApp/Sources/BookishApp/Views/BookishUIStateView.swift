@@ -56,41 +56,45 @@ public struct BookishUIStateView: View {
     .task(id: isDeveloperMode) {
       commander.perform(SetDebugIndexVisibilityCommand(isVisible: isDeveloperMode))
     }
+    #if os(iOS)
+      .sheet(isPresented: $uiState.isShowingSettings) {
+        NavigationStack {
+          BookishSettingsView()
+          .toolbar {
+            commander.toolbarItem(CloseSettingsCommand(), placement: .topBarTrailing)
+          }
+        }
+      }
+    #endif
   }
 
 }
 
 /// Displays the library browser with independent sidebar, index, and detail columns.
 private struct BrowserNavigationSplitView: View {
-  /// The global UI state that owns browser presentation and sheet state.
-  @Environment(BookishUIStateService.self) private var uiState
-
   /// The library browser columns.
   var body: some View {
     NavigationSplitView {
       BrowserIndexListView()
         .toolbar {
           #if os(iOS)
-            BookishGlobalCommandsToolbar()
+            BookishSettingsToolbar(isSidebar: true)
           #endif
         }
     } content: {
       RecordIndexView()
         .toolbar {
           #if os(iOS)
-            BookishGlobalCommandsToolbar()
+            BookishSettingsToolbar()
           #endif
         }
     } detail: {
       RecordDetailView()
         .toolbar {
           #if os(iOS)
-            BookishGlobalCommandsToolbar()
+            BookishSettingsToolbar()
           #endif
         }
-    }
-    .toolbar {
-      BookishToolbar(harness: uiState)
     }
   }
 }
@@ -100,28 +104,22 @@ private struct WorkflowNavigationSplitView: View {
   /// The selected workflow displayed in the detail area.
   let section: BookishMainSection
 
-  /// The global UI state that owns browser presentation and sheet state.
-  @Environment(BookishUIStateService.self) private var uiState
-
   /// The sidebar and full-width workflow content.
   var body: some View {
     NavigationSplitView {
       BrowserIndexListView()
         .toolbar {
           #if os(iOS)
-            BookishGlobalCommandsToolbar()
+            BookishSettingsToolbar(isSidebar: true)
           #endif
         }
     } detail: {
       BookishMainSectionView(section: section)
         .toolbar {
           #if os(iOS)
-            BookishGlobalCommandsToolbar()
+            BookishSettingsToolbar()
           #endif
         }
-    }
-    .toolbar {
-      BookishToolbar(harness: uiState)
     }
   }
 }

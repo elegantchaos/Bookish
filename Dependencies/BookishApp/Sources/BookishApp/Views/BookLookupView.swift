@@ -12,6 +12,9 @@ struct BookLookupView: View {
   /// The workflow state for lookup controls and results.
   @Environment(BookishLookupWorkflowService.self) private var lookup
 
+  /// The command boundary for submitting the current query.
+  @Environment(BookishCommander.self) private var commander
+
   /// The temporary query interface.
   var body: some View {
     @Bindable var lookup = lookup
@@ -29,11 +32,7 @@ struct BookLookupView: View {
             .padding(.horizontal)
         }
 
-        Button("Search", systemImage: "magnifyingglass", action: lookupBooks)
-          .disabled(
-            lookup.query.isEmpty || lookup.isLookingUp
-              || !lookup.isSelectedProviderSupported
-          )
+        commander.button(LookupBooksCommand())
       }
       .padding()
 
@@ -74,11 +73,14 @@ struct BookLookupView: View {
       Spacer()
     }
     .navigationTitle("Lookup")
+    .toolbar {
+      commander.toolbarItem(LookupBooksCommand())
+    }
   }
 
   /// Starts one lookup task for the current form state.
   private func lookupBooks() {
-    Task { await lookup.lookupBooks() }
+    commander.perform(LookupBooksCommand())
   }
 }
 

@@ -20,6 +20,24 @@ public protocol BookishBrowserSettings: AnyObject {
   func setShowsDebugIndexes(_ isVisible: Bool) async
 }
 
+/// Presents the iOS settings sheet through a command.
+@MainActor
+public protocol BookishSettingsPresentation: AnyObject {
+  /// Opens the settings sheet.
+  func openSettings()
+  /// Closes the settings sheet.
+  func closeSettings()
+}
+
+/// Creates user records and reveals them in a suitable browser index.
+@MainActor
+public protocol BookishRecordCreation: AnyObject {
+  /// Whether a visible index can show a new record of this type.
+  func canCreate(_ type: BookishNewRecordType) -> Bool
+  /// Creates and selects a record of the requested type.
+  func create(_ type: BookishNewRecordType) async throws
+}
+
 /// Performs datastore maintenance actions requested by commands.
 @MainActor
 public protocol BookishDatastoreMaintenance {
@@ -75,6 +93,9 @@ public final class BookishUIStateService {
 
   /// Whether the interchange import file picker is visible.
   public var isImportingInterchange = false
+
+  /// Whether the iOS settings sheet is visible.
+  public var isShowingSettings = false
 
   /// Whether the Delicious Library import file picker is visible.
   public var isImportingDeliciousLibrary = false
@@ -171,6 +192,60 @@ public final class BookishUIStateService {
   public func requestInterchangeImport() {
     guard showImportWorkflowIfReady() else { return }
     isImportingInterchange = true
+  }
+
+  /// Opens settings from the iOS toolbar.
+  public func openSettings() {
+    isShowingSettings = true
+  }
+
+  /// Closes the iOS settings sheet.
+  public func closeSettings() {
+    isShowingSettings = false
+  }
+
+  /// Returns whether a standard library index accepts the requested type.
+  public func canCreate(_ type: BookishNewRecordType) -> Bool {
+    navigation.storageService.isLoaded && creationIndex(for: newRecord(of: type)) != nil
+  }
+
+  /// Persists a new record, switches to its index, and selects it.
+  public func create(_ type: BookishNewRecordType) async throws {
+    let record = newRecord(of: type)
+    guard let targetIndex = creationIndex(for: record) else {
+      throw BookishRecordCreationError.noIndex(type)
+    }
+
+    try await navigation.storageService.upsert(records: [record])
+    try await navigation.select(recordIndexID: targetIndex.id)
+    try await navigation.setRecordNameFilter("")
+    try await refreshBrowser()
+    navigation.select(recordID: record.id)
+  }
+
+  /// Builds the initial record before checking index query compatibility.
+  private func newRecord(of type: BookishNewRecordType) -> BookishRecord {
+    BookishRecord(
+      id: BookishRecordID(UUID().uuidString),
+      kind: type.rawValue,
+      properties: [BookishRecordKey.name: .string(type.initialName)]
+    )
+  }
+
+  /// Finds a configured index whose query will include the new record.
+  private func creationIndex(for record: BookishRecord) -> BookishRecordIndex? {
+    guard let type = BookishNewRecordType(rawValue: record.kind) else { return nil }
+    let indexes = navigation.libraryIndexes
+    if let selectedIndex = navigation.selectedRecordIndex,
+      !selectedIndex.isDebugOnly,
+      selectedIndex.newRecordTypes.contains(type),
+      selectedIndex.query?.predicate.matches(record) == true
+    {
+      return selectedIndex
+    }
+    return indexes.first {
+      $0.newRecordTypes.contains(type) && $0.query?.predicate.matches(record) == true
+    }
   }
 
   /// Requests a Delicious Library file import.
@@ -403,8 +478,23 @@ public final class BookishUIStateService {
 extension BookishUIStateService:
   BookishImportPresentation,
   BookishDatastoreMaintenance,
-  BookishBrowserSettings
+  BookishBrowserSettings,
+  BookishSettingsPresentation,
+  BookishRecordCreation
 {
+}
+
+/// Explains why a New command cannot find a browser destination.
+enum BookishRecordCreationError: LocalizedError {
+  /// No library index is configured to show the requested type.
+  case noIndex(BookishNewRecordType)
+
+  /// The error shown by the app's command failure reporter.
+  var errorDescription: String? {
+    switch self {
+    case .noIndex(let type): "No index can show a new \(type.menuName.lowercased())."
+    }
+  }
 }
 
 extension BookishUIStateService: BookishRecordActionState {

@@ -46,6 +46,12 @@ public struct BookishRecordIndex: Equatable, Identifiable, Sendable {
     record.strings(BookishRecordKey.types) ?? []
   }
 
+  /// The standard record kinds offered by this index's New action.
+  public var newRecordTypes: [BookishNewRecordType] {
+    (record.strings(BookishRecordKey.newRecordTypes) ?? []).compactMap(
+      BookishNewRecordType.init(rawValue:))
+  }
+
   /// Creates an index wrapper for a stored record.
   public init(record: BookishRecord) {
     self.record = record
@@ -59,6 +65,7 @@ public struct BookishRecordIndex: Equatable, Identifiable, Sendable {
     query: RecordQuery,
     icon: String? = nil,
     types: [String] = [],
+    newRecordTypes: [BookishNewRecordType] = [],
     debugOnly: Bool = false,
     layoutID: BookishRecordID? = nil
   ) throws -> BookishRecord {
@@ -70,6 +77,10 @@ public struct BookishRecordIndex: Equatable, Identifiable, Sendable {
     ]
     if !types.isEmpty {
       properties[BookishRecordKey.types] = .list(types.map(BookishRecordValue.string))
+    }
+    if !newRecordTypes.isEmpty {
+      properties[BookishRecordKey.newRecordTypes] = .list(
+        newRecordTypes.map { .string($0.rawValue) })
     }
     if let icon {
       properties[BookishRecordKey.icon] = .string(icon)

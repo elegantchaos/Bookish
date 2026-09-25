@@ -257,6 +257,78 @@ struct BookishAppTests {
 
   @MainActor
   @Test
+  func newRecordUsesConfiguredIndexAndSelectsCreatedRecord() async throws {
+    let harness = try makeHarness(defaultShowsDebugIndexes: false)
+    await harness.load()
+    try await harness.navigation.select(recordIndexID: BookishRecordID("datastore-index-people"))
+    try await harness.navigation.setRecordNameFilter("hidden")
+
+    try await harness.create(.book)
+
+    #expect(harness.navigation.selectedRecordIndexID == BookishRecordID("datastore-index-books"))
+    #expect(harness.navigation.recordNameFilter.isEmpty)
+    let selectedID = try #require(harness.navigation.selectedRecordID)
+    let record = try #require(try await harness.storageService.record(id: selectedID))
+    #expect(record.kind == BookishRecordKind.book)
+    #expect(record.string(BookishRecordKey.name) == "New Book")
+  }
+
+  @MainActor
+  @Test
+  func newRecordSkipsAnIndexWhoseQueryWouldHideIt() async throws {
+    let harness = try makeHarness(defaultShowsDebugIndexes: false)
+    await harness.load()
+    let readingIndexID = BookishRecordID("reading-books")
+    let readingIndex = try BookishRecordIndex.record(
+      id: readingIndexID,
+      name: "Reading",
+      position: 0,
+      query: RecordQuery(
+        predicate: .and([
+          .kind(BookishRecordKind.book),
+          .property(BookishRecordKey.status, equals: .string("Reading")),
+        ])),
+      newRecordTypes: [.book]
+    )
+    try await harness.storageService.upsert(records: [readingIndex])
+    try await harness.refreshBrowser()
+    try await harness.navigation.select(recordIndexID: readingIndexID)
+
+    try await harness.create(.book)
+
+    #expect(harness.navigation.selectedRecordIndexID == BookishRecordID("datastore-index-books"))
+    #expect(harness.navigation.selectedRecordID != nil)
+  }
+
+  @MainActor
+  @Test
+  func existingLibraryIndexesGainCreationMetadataWithoutReplacingTheIndex() async throws {
+    let directory = try temporaryDirectory()
+    let first = makeUIState(directoryURL: directory)
+    await first.load()
+    let indexID = BookishRecordID("datastore-index-books")
+    try await first.storageService.perform(
+      MutationRecord(
+        operation: .deleteProperty(
+          recordID: indexID, key: BookishRecordKey.newRecordTypes))
+    )
+    try await first.storageService.perform(
+      MutationRecord(
+        operation: .setProperty(
+          recordID: indexID, kind: BookishRecordKind.index,
+          key: BookishRecordKey.name, value: .string("My Books")))
+    )
+
+    let reopened = makeUIState(directoryURL: directory)
+    await reopened.load()
+    let stored = try #require(try await reopened.storageService.record(id: indexID))
+
+    #expect(stored.string(BookishRecordKey.name) == "My Books")
+    #expect(stored.strings(BookishRecordKey.newRecordTypes) == [BookishRecordKind.book])
+  }
+
+  @MainActor
+  @Test
 
   func harnessHidesDebugIndexesWhenDebugIndexesAreDisabled() async throws {
     let harness = try makeHarness(defaultShowsDebugIndexes: false)

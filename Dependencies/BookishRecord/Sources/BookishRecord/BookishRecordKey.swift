@@ -125,6 +125,9 @@ public enum BookishRecordKey {
   /// An advisory list of record kinds an index or layout is designed to surface.
   public static let types = "types"
 
+  /// The record kinds that the index permits users to create.
+  public static let newRecordTypes = "newRecordTypes"
+
   /// A type-list token that matches any record kind.
   public static let allTypes = "*"
 

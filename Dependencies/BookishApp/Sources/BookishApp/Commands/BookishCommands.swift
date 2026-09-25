@@ -37,6 +37,14 @@ public struct BookishCommands: Commands {
   }
 
   public var body: some Commands {
+    CommandGroup(replacing: .newItem) {
+      Menu("New") {
+        ForEach(BookishNewRecordType.allCases, id: \.self) { type in
+          engine.button(NewRecordCommand(type: type))
+        }
+      }
+    }
+
     CommandGroup(after: .newItem) {
       engine.button(ImportInterchangeCommand())
       engine.button(ImportKindleLibraryCommand())

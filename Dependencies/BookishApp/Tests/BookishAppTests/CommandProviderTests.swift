@@ -54,6 +54,27 @@ struct CommandProviderTests {
   }
 
   @Test
+  func settingsCommandsUseTheVendedPresentation() async throws {
+    let settings = TestSettingsPresentation()
+    let centre = TestCommandCentre(settingsPresentation: settings)
+
+    try await centre.perform(OpenSettingsCommand())
+    #expect(settings.isOpen)
+    try await centre.perform(CloseSettingsCommand())
+    #expect(!settings.isOpen)
+  }
+
+  @Test
+  func newCommandsUseTheVendedRecordCreation() async throws {
+    let creation = TestRecordCreation()
+    let centre = TestCommandCentre(recordCreation: creation)
+
+    try await centre.perform(NewRecordCommand(type: .book))
+
+    #expect(creation.createdTypes == [.book])
+  }
+
+  @Test
   func maintenanceCommandsUseTheVendedMaintenanceService() async throws {
     let maintenanceService = TestDatastoreMaintenanceService(hasExportableRecords: true)
     let storageService = TestStorageService()
@@ -83,6 +104,18 @@ struct CommandProviderTests {
     #expect(recordActionService.markedReading)
     #expect(recordActionService.markedFinished)
     #expect(recordActionService.simulatedRemoteUpdate)
+  }
+
+  @Test
+  func recordActionCommandsPassTheVisibleRecordID() async throws {
+    let actions = TestRecordActionService(hasSelectedRecord: true)
+    let centre = TestCommandCentre(recordActionService: actions)
+    let visibleID = BookishRecordID("linked-book")
+
+    try await centre.perform(MarkReadingCommand(recordID: visibleID))
+    try await centre.perform(MarkFinishedCommand(recordID: visibleID))
+
+    #expect(actions.lastRecordID == visibleID)
   }
 
   @Test
@@ -183,6 +216,33 @@ struct CommandProviderTests {
   }
 
   @Test
+  func recordActionsTargetTheVisibleLinkedRecord() async {
+    let selectedID = BookishRecordID("book-1")
+    let visibleID = BookishRecordID("book-2")
+    let storage = TestRecordActionStorage(
+      record: BookishRecord(id: visibleID, kind: BookishRecordKind.book)
+    )
+    let state = TestRecordActionState(selectedRecordID: selectedID)
+    let actions = BookishRecordActionsService(
+      storage: storage,
+      state: state,
+      statusService: TestStatusService()
+    )
+
+    await actions.markFinished(recordID: visibleID)
+
+    #expect(
+      storage.localMutations == [
+        .setProperty(
+          recordID: visibleID,
+          kind: BookishRecordKind.book,
+          key: BookishRecordKey.status,
+          value: .string("Finished")
+        )
+      ])
+  }
+
+  @Test
   func indexCommandsUseTheVendedNavigationService() async throws {
     let navigationService = TestNavigationService(canSelectAnotherRecordIndex: true)
     let centre = TestCommandCentre(navigationService: navigationService)
@@ -230,7 +290,9 @@ private final class TestCommandCentre:
   BookishRecognitionProvider,
   BookishLookupWorkflowProvider,
   BookishNavigationProvider,
-  BookishBrowserSettingsProvider
+  BookishBrowserSettingsProvider,
+  BookishSettingsPresentationProvider,
+  BookishRecordCreationProvider
 {
   let importPresentation: any BookishImportPresentation
   let datastoreMaintenanceService: any BookishDatastoreMaintenance
@@ -241,6 +303,8 @@ private final class TestCommandCentre:
   let lookupWorkflow: any BookishLookupWorkflow
   let navigationService: any BookishNavigation
   let browserSettingsService: any BookishBrowserSettings
+  let settingsPresentation: any BookishSettingsPresentation
+  let recordCreation: any BookishRecordCreation
 
   init(
     importPresentation: any BookishImportPresentation = TestImportPresentation(),
@@ -252,7 +316,9 @@ private final class TestCommandCentre:
     recognitionService: any BookishRecognition = TestBookRecognitionWorkflow(),
     lookupWorkflow: any BookishLookupWorkflow = TestBookLookupWorkflow(),
     navigationService: any BookishNavigation = TestNavigationService(),
-    browserSettingsService: any BookishBrowserSettings = TestBrowserSettings()
+    browserSettingsService: any BookishBrowserSettings = TestBrowserSettings(),
+    settingsPresentation: any BookishSettingsPresentation = TestSettingsPresentation(),
+    recordCreation: any BookishRecordCreation = TestRecordCreation()
   ) {
     self.importPresentation = importPresentation
     self.datastoreMaintenanceService = datastoreMaintenanceService
@@ -263,6 +329,8 @@ private final class TestCommandCentre:
     self.lookupWorkflow = lookupWorkflow
     self.navigationService = navigationService
     self.browserSettingsService = browserSettingsService
+    self.settingsPresentation = settingsPresentation
+    self.recordCreation = recordCreation
   }
 }
 
@@ -270,6 +338,12 @@ private final class TestCommandCentre:
 private final class TestBookLookupWorkflow: BookishLookupWorkflow {
   private(set) var selectedProviderID: BookLookupProviderID = .fake
   let isLookingUp = false
+  let canLookupBooks = true
+  private(set) var didLookupBooks = false
+
+  func lookupBooks() async {
+    didLookupBooks = true
+  }
 
   func selectProvider(_ providerID: BookLookupProviderID) {
     selectedProviderID = providerID
@@ -277,6 +351,30 @@ private final class TestBookLookupWorkflow: BookishLookupWorkflow {
 
   func isProviderSupported(_: BookLookupProviderID) -> Bool {
     true
+  }
+}
+
+@MainActor
+private final class TestSettingsPresentation: BookishSettingsPresentation {
+  private(set) var isOpen = false
+
+  func openSettings() {
+    isOpen = true
+  }
+
+  func closeSettings() {
+    isOpen = false
+  }
+}
+
+@MainActor
+private final class TestRecordCreation: BookishRecordCreation {
+  private(set) var createdTypes: [BookishNewRecordType] = []
+
+  func canCreate(_: BookishNewRecordType) -> Bool { true }
+
+  func create(_ type: BookishNewRecordType) async throws {
+    createdTypes.append(type)
   }
 }
 
@@ -473,16 +571,23 @@ private final class TestRecordActionService: BookishRecordActions {
   private(set) var markedReading = false
   private(set) var markedFinished = false
   private(set) var simulatedRemoteUpdate = false
+  private(set) var lastRecordID: BookishRecordID?
 
   init(hasSelectedRecord: Bool = false) {
     self.hasSelectedRecord = hasSelectedRecord
   }
 
-  func markReading() async {
+  func canAct(on recordID: BookishRecordID?) -> Bool {
+    hasSelectedRecord || recordID != nil
+  }
+
+  func markReading(recordID: BookishRecordID?) async {
+    lastRecordID = recordID
     markedReading = true
   }
 
-  func markFinished() async {
+  func markFinished(recordID: BookishRecordID?) async {
+    lastRecordID = recordID
     markedFinished = true
   }
 

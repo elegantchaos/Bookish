@@ -8,6 +8,12 @@ import BookishLookup
 /// Defines the lookup-provider selection actions exposed to commands.
 @MainActor
 public protocol BookishLookupWorkflow: AnyObject {
+  /// Whether the current query can be submitted.
+  var canLookupBooks: Bool { get }
+
+  /// Submits the current query to the selected provider.
+  func lookupBooks() async
+
   /// Whether a lookup request is currently underway.
   var isLookingUp: Bool { get }
 

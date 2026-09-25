@@ -26,6 +26,8 @@ public struct BookishSettingsView: View {
         LookupSettingsView()
       }
     }
-    .frame(minWidth: 520, maxWidth: 800, minHeight: 400)
+    #if os(macOS)
+      .frame(minWidth: 520, maxWidth: 800, minHeight: 400)
+    #endif
   }
 }

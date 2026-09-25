@@ -18,6 +18,9 @@ struct BookishRecordIDDetail: View {
   /// The service used to report record-detail failures.
   @Environment(BookishStatusService.self) private var statusService
 
+  /// The command boundary for actions on this visible record.
+  @Environment(BookishCommander.self) private var commander
+
   #if os(iOS)
     /// The current width class used to avoid a duplicate record title on compact screens.
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
@@ -74,6 +77,12 @@ struct BookishRecordIDDetail: View {
     }
     .task(id: taskID) {
       await load()
+    }
+    .toolbar {
+      if record?.kind == BookishRecordKind.book {
+        commander.toolbarItem(MarkReadingCommand(recordID: recordID))
+        commander.toolbarItem(MarkFinishedCommand(recordID: recordID))
+      }
     }
   }
 

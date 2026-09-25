@@ -175,6 +175,16 @@ extension BookishEngine: CommandCentre {
     uiState
   }
 
+  /// Vends settings sheet presentation to commands.
+  public var settingsPresentation: any BookishSettingsPresentation {
+    uiState
+  }
+
+  /// Vends record creation to New commands.
+  public var recordCreation: any BookishRecordCreation {
+    uiState
+  }
+
   /// Vends datastore-maintenance presentation controls to commands.
   public var datastoreMaintenanceService: any BookishDatastoreMaintenance {
     uiState
