@@ -6,7 +6,7 @@ import Testing
 
 struct BookishCodingTests {
   @Test
-  func URLValuesRoundTripAsTaggedEncodedValues() throws {
+  func urlValuesRoundTripAsTaggedEncodedValues() throws {
     let url = try #require(URL(string: "https://example.com/bookish.jpg"))
     var book = BookishRecord(id: BookishRecordID("book-1"), kind: "book")
     try book.setURL(url, for: BookishRecordKey.image)

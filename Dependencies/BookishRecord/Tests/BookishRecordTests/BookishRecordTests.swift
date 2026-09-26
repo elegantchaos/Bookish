@@ -5,7 +5,7 @@ import Testing
 
 struct BookishRecordTests {
   @Test
-  func URLPropertiesUseEncodedURLValues() throws {
+  func urlPropertiesUseEncodedURLValues() throws {
     let url = try #require(URL(string: "https://example.com/bookish.jpg"))
     var record = BookishRecord(kind: "book")
 
