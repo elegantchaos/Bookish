@@ -401,6 +401,43 @@ struct BookishDatastoreTests {
   }
 
   @Test
+  func refinedResultsAndLaterRefinementsShowChangesToExistingRecords() async throws {
+    let datastore = try await makeDatastore()
+    let service = datastore.recordQueryService
+    let aID = BookishRecordID("a")
+    let bID = BookishRecordID("b")
+    try await datastore.mutationService.perform(
+      .upsertRecord(
+        BookishRecord(
+          id: aID, kind: "book", properties: ["name": .string("The Left Hand of Darkness")])))
+    try await datastore.mutationService.perform(
+      .upsertRecord(
+        BookishRecord(id: bID, kind: "book", properties: ["name": .string("Earthsea")])))
+    let result = try await service.result(
+      matching: RecordQuery(predicate: .kind("book")),
+      refinement: .propertyStringContains("name", "left hand"))
+
+    try await datastore.mutationService.perform(
+      .setProperty(recordID: aID, kind: "book", key: "note", value: .string("Revised")))
+    #expect(await MainActor.run { result.records.map(\.id) } == [aID])
+    #expect(await MainActor.run { result.records.first?.string("note") } == "Revised")
+
+    try await datastore.mutationService.perform(
+      .setProperty(recordID: bID, kind: "book", key: "name", value: .string("Left Hand Notes")))
+    try await datastore.mutationService.perform(
+      .setProperty(recordID: aID, kind: "book", key: "name", value: .string("Darkness")))
+    #expect(await MainActor.run { result.records.map(\.id) } == [bID])
+
+    try await service.refine(result, with: nil)
+    let records = await MainActor.run { result.records }
+    let expected = try await datastore.recordService.records(
+      matching: RecordQuery(predicate: .kind("book")))
+    #expect(records == expected)
+    #expect(records.map { $0.string("name") } == ["Darkness", "Left Hand Notes"])
+    #expect(records.first?.string("note") == "Revised")
+  }
+
+  @Test
   func resultsAreSharedOnlyWithTheSameRefinement() async throws {
     let datastore = try await makeDatastore()
     let service = datastore.recordQueryService
