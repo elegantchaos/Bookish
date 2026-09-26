@@ -263,14 +263,13 @@ struct BookishDatastoreTests {
     )
 
     let records = RecordQuery(
-      predicate: .kind("book")
+      predicate: .and([
+        .kind("book"),
+        .propertyStringContains(BookishRecordKey.name, "left hand"),
+      ])
     )
-    .filteringNames(containing: "left hand")
     .apply(to: [matching, nonMatching])
 
-    #expect(
-      RecordQuery(predicate: .kind("book")).filteringNames(containing: "")
-        == RecordQuery(predicate: .kind("book")))
     #expect(records.map(\.id) == [matching.id])
   }
 
@@ -338,6 +337,137 @@ struct BookishDatastoreTests {
     let second = try await datastore.recordQueryService.result(matching: query)
 
     #expect(first === second)
+  }
+
+  @Test
+  func recordQueryServiceReleasesResultsNothingHolds() async throws {
+    let datastore = try await makeDatastore()
+    let service = datastore.recordQueryService
+    weak var released: RecordQueryResult?
+
+    do {
+      let result = try await service.result(matching: RecordQuery(predicate: .kind("book")))
+      released = result
+      #expect(await service.cachedResultCount == 1)
+    }
+
+    #expect(released == nil)
+    try await datastore.mutationService.perform(
+      .upsertRecord(BookishRecord(id: BookishRecordID("book-1"), kind: "book")))
+    #expect(await service.cachedResultCount == 0)
+  }
+
+  @Test
+  func refiningAResultNarrowsItInPlace() async throws {
+    let datastore = try await makeDatastore()
+    let service = datastore.recordQueryService
+    let alpha = BookishRecord(
+      id: BookishRecordID("a"), kind: "book", properties: ["name": .string("Alpha")])
+    let beta = BookishRecord(
+      id: BookishRecordID("b"), kind: "book", properties: ["name": .string("Beta")])
+    try await datastore.mutationService.perform(.upsertRecord(alpha))
+    try await datastore.mutationService.perform(.upsertRecord(beta))
+    let result = try await service.result(matching: RecordQuery(predicate: .kind("book")))
+    let refinement = RecordPredicate.propertyStringContains("name", "bet")
+
+    try await service.refine(result, with: refinement)
+
+    #expect(await MainActor.run { result.records } == [beta])
+    #expect(await MainActor.run { result.refinement } == refinement)
+    #expect(await MainActor.run { result.query } == RecordQuery(predicate: .kind("book")))
+
+    try await service.refine(result, with: nil)
+
+    #expect(await MainActor.run { result.records } == [alpha, beta])
+  }
+
+  @Test
+  func refinementAppliesToLaterMutations() async throws {
+    let datastore = try await makeDatastore()
+    let service = datastore.recordQueryService
+    let result = try await service.result(
+      matching: RecordQuery(predicate: .kind("book")),
+      refinement: .propertyStringContains("name", "left hand"))
+    let matching = BookishRecord(
+      id: BookishRecordID("a"), kind: "book",
+      properties: ["name": .string("The Left Hand of Darkness")])
+    let other = BookishRecord(
+      id: BookishRecordID("b"), kind: "book", properties: ["name": .string("Earthsea")])
+
+    try await datastore.mutationService.perform(.upsertRecord(matching))
+    try await datastore.mutationService.perform(.upsertRecord(other))
+
+    #expect(await MainActor.run { result.records } == [matching])
+  }
+
+  @Test
+  func refinedResultsAndLaterRefinementsShowChangesToExistingRecords() async throws {
+    let datastore = try await makeDatastore()
+    let service = datastore.recordQueryService
+    let aID = BookishRecordID("a")
+    let bID = BookishRecordID("b")
+    try await datastore.mutationService.perform(
+      .upsertRecord(
+        BookishRecord(
+          id: aID, kind: "book", properties: ["name": .string("The Left Hand of Darkness")])))
+    try await datastore.mutationService.perform(
+      .upsertRecord(
+        BookishRecord(id: bID, kind: "book", properties: ["name": .string("Earthsea")])))
+    let result = try await service.result(
+      matching: RecordQuery(predicate: .kind("book")),
+      refinement: .propertyStringContains("name", "left hand"))
+
+    try await datastore.mutationService.perform(
+      .setProperty(recordID: aID, kind: "book", key: "note", value: .string("Revised")))
+    #expect(await MainActor.run { result.records.map(\.id) } == [aID])
+    #expect(await MainActor.run { result.records.first?.string("note") } == "Revised")
+
+    try await datastore.mutationService.perform(
+      .setProperty(recordID: bID, kind: "book", key: "name", value: .string("Left Hand Notes")))
+    try await datastore.mutationService.perform(
+      .setProperty(recordID: aID, kind: "book", key: "name", value: .string("Darkness")))
+    #expect(await MainActor.run { result.records.map(\.id) } == [bID])
+
+    try await service.refine(result, with: nil)
+    let records = await MainActor.run { result.records }
+    let expected = try await datastore.recordService.records(
+      matching: RecordQuery(predicate: .kind("book")))
+    #expect(records == expected)
+    #expect(records.map { $0.string("name") } == ["Darkness", "Left Hand Notes"])
+    #expect(records.first?.string("note") == "Revised")
+  }
+
+  @Test
+  func resultsAreSharedOnlyWithTheSameRefinement() async throws {
+    let datastore = try await makeDatastore()
+    let service = datastore.recordQueryService
+    let query = RecordQuery(predicate: .kind("book"))
+    let refinement = RecordPredicate.propertyStringContains("name", "left")
+
+    let unrefined = try await service.result(matching: query)
+    let refined = try await service.result(matching: query, refinement: refinement)
+    #expect(unrefined !== refined)
+
+    try await service.refine(unrefined, with: .propertyStringContains("name", "wizard"))
+    #expect(try await service.result(matching: query) !== unrefined)
+    #expect(try await service.result(matching: query, refinement: refinement) === refined)
+  }
+
+  @Test
+  func recordQueryServiceKeepsResultsThatAreStillHeld() async throws {
+    let datastore = try await makeDatastore()
+    let service = datastore.recordQueryService
+    let held = try await service.result(matching: RecordQuery(predicate: .kind("book")))
+    do {
+      _ = try await service.result(matching: RecordQuery(predicate: .kind("author")))
+    }
+
+    let book = BookishRecord(id: BookishRecordID("book-1"), kind: "book")
+    try await datastore.mutationService.perform(.upsertRecord(book))
+
+    #expect(await service.cachedResultCount == 1)
+    #expect(await MainActor.run { held.records } == [book])
+    #expect(try await service.result(matching: RecordQuery(predicate: .kind("book"))) === held)
   }
 
   @Test

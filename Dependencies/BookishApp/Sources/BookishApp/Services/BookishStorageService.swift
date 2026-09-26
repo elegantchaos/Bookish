@@ -75,15 +75,25 @@ public final class BookishStorageService {
     }
   }
 
-  /// Returns the materialised result for a record query.
-  func recordQueryResult(matching query: RecordQuery) async throws
-    -> RecordQueryResult
-  {
+  /// Returns the materialised result for a record query, narrowed by an optional refinement.
+  func recordQueryResult(
+    matching query: RecordQuery, refinement: RecordPredicate? = nil
+  ) async throws -> RecordQueryResult {
     guard let datastore else {
       throw BookishStorageError.notLoaded
     }
 
-    return try await datastore.recordQueryService.result(matching: query)
+    return try await datastore.recordQueryService.result(
+      matching: query, refinement: refinement)
+  }
+
+  /// Replaces a result's refinement in place.
+  func refine(_ result: RecordQueryResult, with refinement: RecordPredicate?) async throws {
+    guard let datastore else {
+      throw BookishStorageError.notLoaded
+    }
+
+    try await datastore.recordQueryService.refine(result, with: refinement)
   }
 
   /// Returns the materialised records matching a query.

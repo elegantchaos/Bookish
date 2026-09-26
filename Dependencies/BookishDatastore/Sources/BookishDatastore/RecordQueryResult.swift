@@ -14,7 +14,10 @@ public final class RecordQueryResult {
   /// The query that defines this result.
   public private(set) var query: RecordQuery
 
-  /// The ordered records currently matching the query.
+  /// An extra predicate narrowing the query's records, such as a name filter.
+  public private(set) var refinement: RecordPredicate?
+
+  /// The ordered records currently matching the query and refinement.
   public private(set) var records: [BookishRecord]
 
   /// Increments when the records or error state changes.
@@ -29,22 +32,18 @@ public final class RecordQueryResult {
   /// Callbacks for clients that need to reconcile state after record changes.
   @ObservationIgnored private var recordsObservers: [UUID: @MainActor () -> Void] = [:]
 
-  /// The ordered identifiers currently matching the query.
+  /// The ordered identifiers currently matching the query and refinement.
   public var ids: [BookishRecordID] {
     records.map(\.id)
   }
 
-  /// Creates an empty observable result for a query.
-  public init(query: RecordQuery) {
+  /// Creates an empty observable result for a query and optional refinement.
+  public init(query: RecordQuery, refinement: RecordPredicate? = nil) {
     self.query = query
+    self.refinement = refinement
     self.records = []
     self.revision = 0
     self.errorDescription = nil
-  }
-
-  /// Returns whether this result represents a query.
-  public func matches(_ query: RecordQuery) -> Bool {
-    self.query == query
   }
 
   /// Registers a callback for changes to the ordered records.
@@ -67,6 +66,11 @@ public final class RecordQueryResult {
     }
 
     publish(records: records)
+  }
+
+  /// Records the refinement that the query service now applies to this result.
+  func setRefinement(_ refinement: RecordPredicate?) {
+    self.refinement = refinement
   }
 
   func snapshot() -> (records: [BookishRecord], revision: Int) {

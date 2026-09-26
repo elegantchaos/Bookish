@@ -1,5 +1,6 @@
 # Journal Index
 
+- [2026-09-26 Query Result Lifetime and Filter Refinement](2026-09-26-query-result-lifetime-and-filter-refinement.md)
 - [2026-09-25 Import Record Kind](2026-09-25-import-record-kind.md)
 - [2026-09-25 Import Review Lists New Records](2026-09-25-import-review-new-records.md)
 - [2026-09-25 Import Toolbar Choices](2026-09-25-import-toolbar-choices.md)

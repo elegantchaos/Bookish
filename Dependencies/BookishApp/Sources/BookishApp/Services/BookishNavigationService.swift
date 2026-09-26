@@ -106,7 +106,7 @@ public final class BookishNavigationService {
     selectedRecordIDs
   }
 
-  /// The record identifiers for the currently selected browser index.
+  /// The identifiers of the records in the selected browser index that match the name filter.
   public var selectedRecordIDs: [BookishRecordID] {
     selectedRecordResult?.ids ?? []
   }
@@ -246,14 +246,30 @@ public final class BookishNavigationService {
     selectedRecordID = selectedRecordIDs.first
   }
 
-  /// Updates the name filter and refreshes the selected browser index.
+  /// Updates the name filter, refining the selected browser index's result in place.
+  ///
+  /// The filter narrows the index's own result rather than creating a query of its own,
+  /// so typing a filter creates no query results and never re-reads the store.
   public func setRecordNameFilter(_ filter: String) async throws {
     guard recordNameFilter != filter else {
       return
     }
 
     recordNameFilter = filter
-    try await refreshSelectedRecordIndex()
+    guard let selectedRecordResult else { return }
+
+    // A filter that hides the selected record moves the selection on, rather than
+    // clearing it as a deletion would.
+    let wasSelectionCleared = isRecordSelectionCleared
+    try await storageService.refine(selectedRecordResult, with: nameRefinement)
+    isRecordSelectionCleared = wasSelectionCleared
+    selectValidRecord()
+  }
+
+  /// The refinement that applies the name filter to an index result.
+  private var nameRefinement: RecordPredicate? {
+    recordNameFilter.isEmpty
+      ? nil : .propertyStringContains(BookishRecordKey.name, recordNameFilter)
   }
 
   /// Returns whether a record identifier exists in the selected browser index.
@@ -347,11 +363,15 @@ public final class BookishNavigationService {
     }
 
     let selectedRecordIndexID = selectedRecordIndex.id
-    let filter = recordNameFilter
     let result = try await storageService.recordQueryResult(
-      matching: query.filteringNames(containing: filter))
+      matching: query, refinement: nameRefinement)
 
-    guard self.selectedRecordIndexID == selectedRecordIndexID, recordNameFilter == filter else {
+    // The filter may have changed while the result was fetched.
+    if result.refinement != nameRefinement {
+      try await storageService.refine(result, with: nameRefinement)
+    }
+
+    guard self.selectedRecordIndexID == selectedRecordIndexID else {
       return
     }
 

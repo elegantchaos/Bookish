@@ -33,6 +33,12 @@ struct RecordIndexView: View {
   /// Metadata records keyed by catalogue kind.
   @State private var metadataByKind: [String: BookishRecord] = [:]
 
+  /// The text in the search field, which leads the navigation filter while typing.
+  @State private var filterText = ""
+
+  /// The last filter this view sent, so its own change isn't copied back into the field.
+  @State private var sentFilter: String?
+
   /// The list of records selected by the active index.
   var body: some View {
     ScrollViewReader { scrollProxy in
@@ -52,7 +58,14 @@ struct RecordIndexView: View {
         }
       }
       .navigationTitle(navigation.selectedRecordIndexName ?? "Index")
-      .searchable(text: recordNameFilter, prompt: "Filter by name")
+      .searchable(text: $filterText, prompt: "Filter by name")
+      .task(id: filterText) {
+        await applyFilter(filterText)
+      }
+      .onChange(of: navigation.recordNameFilter, initial: true) { _, filter in
+        guard filter != sentFilter else { return }
+        filterText = filter
+      }
       .task(id: taskID) {
         await loadPresentation()
       }
@@ -86,13 +99,19 @@ struct RecordIndexView: View {
     }
   }
 
-  /// Binds the index search field to the query-backed navigation filter.
-  private var recordNameFilter: Binding<String> {
-    Binding {
-      navigation.recordNameFilter
-    } set: { filter in
-      commander.perform(SetRecordNameFilterCommand(filter: filter))
+  /// Sends the search text to navigation once typing pauses; clearing it applies at once.
+  private func applyFilter(_ text: String) async {
+    guard text != navigation.recordNameFilter else { return }
+    if !text.isEmpty {
+      do {
+        try await Task.sleep(for: .milliseconds(250))
+      } catch {
+        return
+      }
     }
+
+    sentFilter = text
+    commander.perform(SetRecordNameFilterCommand(filter: text))
   }
 
   /// Identifies data changes that require row presentations to be resolved again.
