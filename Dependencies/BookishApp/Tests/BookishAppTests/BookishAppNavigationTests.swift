@@ -253,24 +253,84 @@ import Testing
   }
 
   @Test
-  func nameFilterComposesWithTheSelectedIndexQuery() async throws {
+  func nameFilterRefinesTheSelectedIndexResultInPlace() async throws {
     let harness = try makeHarness()
     await harness.load()
 
     try await harness.navigation.select(recordIndexID: BookishRecordID("datastore-index-books"))
+    let indexResult = try #require(harness.navigation.selectedRecordResult)
+    try await harness.navigation.setRecordNameFilter("left")
     try await harness.navigation.setRecordNameFilter("left hand")
 
     #expect(harness.navigation.recordNameFilter == "left hand")
+    #expect(harness.navigation.selectedRecordResult === indexResult)
     #expect(
-      harness.navigation.selectedRecordResult?.query
+      indexResult.query
         == RecordQuery(
-          predicate: .and([
-            .kind(BookishRecordKind.book),
-            .propertyStringContains(BookishRecordKey.name, "left hand"),
-          ]),
+          predicate: .kind(BookishRecordKind.book),
           sort: [.property(BookishRecordKey.name), .id]
         ))
+    #expect(indexResult.refinement == .propertyStringContains(BookishRecordKey.name, "left hand"))
     #expect(harness.navigation.selectedRecordIDs == [BookishRecordID("seed-book")])
+  }
+
+  @Test
+  func nameFilterAppliesToLaterChangesInTheIndex() async throws {
+    let harness = try makeHarness()
+    await harness.load()
+    try await harness.navigation.select(recordIndexID: BookishRecordID("datastore-index-books"))
+    try await harness.navigation.setRecordNameFilter("left hand")
+
+    let sequel = BookishRecord(
+      id: BookishRecordID("book-sequel"),
+      kind: BookishRecordKind.book,
+      properties: [BookishRecordKey.name: .string("The Left Hand Returns")])
+    let other = BookishRecord(
+      id: BookishRecordID("book-other"),
+      kind: BookishRecordKind.book,
+      properties: [BookishRecordKey.name: .string("Something Else")])
+    try await harness.storage.upsert(records: [sequel, other])
+
+    #expect(
+      Set(harness.navigation.selectedRecordIDs)
+        == [BookishRecordID("seed-book"), BookishRecordID("book-sequel")])
+  }
+
+  @Test
+  func nameFilterMovesSelectionToAVisibleRecordAndClearingRestoresTheIndex() async throws {
+    let harness = try makeHarness()
+    await harness.load()
+    let navigation = harness.navigation
+    let hidden = BookishRecordID("book-other")
+    try await harness.storage.upsert(records: [
+      BookishRecord(
+        id: hidden, kind: BookishRecordKind.book,
+        properties: [BookishRecordKey.name: .string("Something Else")])
+    ])
+    try await navigation.select(recordIndexID: BookishRecordID("datastore-index-books"))
+    let allIDs = navigation.selectedRecordIDs
+    navigation.select(recordID: hidden)
+
+    try await navigation.setRecordNameFilter("left hand")
+    #expect(navigation.selectedRecordID == BookishRecordID("seed-book"))
+
+    try await navigation.setRecordNameFilter("")
+    #expect(navigation.selectedRecordIDs == allIDs)
+    #expect(navigation.selectedRecordResult?.refinement == nil)
+  }
+
+  @Test
+  func switchingIndexesKeepsTheNameFilter() async throws {
+    let harness = try makeHarness()
+    await harness.load()
+    try await harness.navigation.select(recordIndexID: BookishRecordID("datastore-index-books"))
+    try await harness.navigation.setRecordNameFilter("left hand")
+
+    try await harness.navigation.select(recordIndexID: BookishRecordID("datastore-index-people"))
+
+    #expect(
+      harness.navigation.selectedRecordResult?.refinement
+        == .propertyStringContains(BookishRecordKey.name, "left hand"))
   }
 
   @Test
